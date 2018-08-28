@@ -5,7 +5,9 @@
 // Named Colors
 @agate-black: #000;
 @agate-white: #fff;
+@agate-accent: #cae78c;
 @agate-foreground: fade(@agate-white, 75%);
+@agate-gradient: linear-gradient(to bottom, #989E3B, #90BD5D);
 
 
 // Component color assignments
@@ -13,7 +15,14 @@
 @agate-text-color: @agate-foreground;
 @agate-title-text-color: @agate-white;
 
+// Button
+// ---------------------------------------
+@agate-button-color:          @agate-accent;
+@agate-button-bg-image:       linear-gradient(to bottom left, transparent, #333);
+@agate-button-focus-color:    @agate-black;
+@agate-button-focus-bg-image: @agate-gradient;
+
 // Icon
 // ---------------------------------------
-@agate-icon-color:                     @agate-text-color;
+@agate-icon-color:      @agate-text-color;
 
