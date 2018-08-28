@@ -16,7 +16,6 @@ import SpotlightRootDecorator from '@enact/spotlight/SpotlightRootDecorator';
 
 import Skinnable from '../Skinnable';
 
-import I18nFontDecorator from './I18nFontDecorator';
 import screenTypes from './screenTypes.json';
 import css from './AgateDecorator.less';
 
@@ -64,12 +63,8 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	let App = Wrapped;
 	if (float) App = FloatingLayerDecorator({wrappedClassName: bgClassName}, App);
 	if (i18n) {
-		// Apply the @enact/i18n decorator around the font decorator so the latter will update the
-		// font stylesheet when the locale changes
 		App = I18nDecorator(
-			I18nFontDecorator(
-				App
-			)
+			App
 		);
 	}
 	if (ri) App = ResolutionDecorator(ri, App);
