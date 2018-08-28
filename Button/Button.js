@@ -19,7 +19,7 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
 import {IconBase} from '../Icon';
-import {MarqueeDecorator} from '../Marquee';
+// import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Button.less';
@@ -44,30 +44,6 @@ const ButtonBase = kind({
 
 	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
 		/**
-		 * The background opacity of this button.
-		 *
-		 * Valid values are:
-		 * * `'translucent'`,
-		 * * `'lightTranslucent'`, and
-		 * * `'transparent'`.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		backgroundOpacity: PropTypes.oneOf(['translucent', 'lightTranslucent', 'transparent']),
-
-		/**
-		 * The color of the underline beneath button's content.
-		 *
-		 * Accepts one of the following color names, which correspond with the colored buttons on a
-		 * standard remote control: `'red'`, `'green'`, `'yellow'`, `'blue'`.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		color: PropTypes.oneOf(['red', 'green', 'yellow', 'blue']),
-
-		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
 		 *
@@ -81,7 +57,9 @@ const ButtonBase = kind({
 		 * @type {Object}
 		 * @public
 		 */
-		css: PropTypes.object
+		css: PropTypes.object,
+
+		type: PropTypes.oneOf(['stardard', 'grid'])
 	},
 
 	styles: {
@@ -90,15 +68,13 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({backgroundOpacity, color, styler}) => styler.append(
-			backgroundOpacity,
-			color
+		className: ({type, styler}) => styler.append(
+			type
 		)
 	},
 
 	render: ({css, ...rest}) => {
-		delete rest.backgroundOpacity;
-		delete rest.color;
+		delete rest.type;
 
 		return UiButtonBase.inline({
 			'data-webos-voice-intent': 'Select',
@@ -138,7 +114,7 @@ const ButtonBase = kind({
 const ButtonDecorator = compose(
 	Pure,
 	Uppercase,
-	MarqueeDecorator({className: componentCss.marquee}),
+	// MarqueeDecorator({className: componentCss.marquee}),
 	UiButtonDecorator,
 	Spottable,
 	Skinnable
