@@ -1,0 +1,11 @@
+// skin.less
+//
+
+.applySkins(@componentRules) when (isruleset(@componentRules)) {
+	&:global(.agate) {
+		// Load the main/default agate rules into this scope
+		@import "./colors.less";
+
+		@componentRules();
+	}
+}
