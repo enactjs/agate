@@ -6,8 +6,10 @@
 
 .button {
 	height: @agate-button-height;
+	min-width: @agate-button-height;
 	padding: 0 @agate-button-h-padding;
 	margin: 0 @agate-component-spacing;
+	box-sizing: border-box;
 
 	.bg {
 		background-color: inherit;
@@ -66,6 +68,14 @@
 			color: @agate-button-color;
 		}
 
+		&.highlighted {
+			.bg {
+				background-color: @agate-button-color;
+				background-image: @agate-gradient;
+				opacity: 0.4;
+			}
+		}
+
 		.focus({
 			.bg {
 				background-color: @agate-button-color;
@@ -74,6 +84,12 @@
 
 			.client {
 				color: @agate-button-focus-color;
+			}
+
+			&.highlighted {
+				.bg {
+					opacity: 1;
+				}
 			}
 		});
 	});

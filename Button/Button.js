@@ -59,6 +59,8 @@ const ButtonBase = kind({
 		 */
 		css: PropTypes.object,
 
+		highlighted: PropTypes.bool,
+
 		type: PropTypes.oneOf(['stardard', 'grid'])
 	},
 
@@ -68,12 +70,14 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({type, styler}) => styler.append(
-			type
+		className: ({highlighted, type, styler}) => styler.append(
+			type,
+			{highlighted}
 		)
 	},
 
 	render: ({css, ...rest}) => {
+		delete rest.highlighted;
 		delete rest.type;
 
 		return UiButtonBase.inline({
