@@ -1,0 +1,30 @@
+// Agate Base App styles
+//
+
+// Core Rules
+@import "~@enact/ui/styles/core.less";
+
+// agate Rules
+@import "../styles/rules.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
+
+.root {
+	font-family: @agate-base-font-family;
+	font-size: @agate-base-font-size;
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing: normal;
+	padding-top: 20px;
+
+	&:global(.enact-locale-right-to-left) {
+		direction: rtl;
+	}
+
+	// Skin colors
+	.applySkins({
+		// Theme skin colors go here
+		color: @agate-text-color;
+		background-color: @agate-bg-color;
+	});
+}
