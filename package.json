@@ -1,0 +1,36 @@
+{
+  "name": "@enact/agate-ez",
+  "version": "2.0.0-alpha.8",
+  "description": "A theme library for Enact, containing a variety of UI components.",
+  "repository": "https://github.com/enyojs/enact-theme-agate-ez",
+  "main": "index.js",
+  "scripts": {
+    "clean": "enact clean",
+    "lint": "enact lint --framework",
+    "test": "enact test start --single-run --browsers PhantomJS",
+    "test-json": "enact test start --single-run --browsers PhantomJS --reporters json",
+    "test-watch": "enact test start --browsers PhantomJS",
+    "transpile": "enact transpile"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "framework",
+    "toolkit",
+    "components",
+    "mobile",
+    "webOS"
+  ],
+  "enact": {
+    "ri": {
+      "baseSize": 24
+    }
+  },
+  "eslintConfig": {
+    "extends": "enact/strict"
+  },
+  "dependencies": {
+    "@enact/core": "^2.0.0-alpha.8",
+    "@enact/agate": "^2.0.0-alpha.8",
+    "@enact/ui": "^2.0.0-alpha.8"
+  }
+}

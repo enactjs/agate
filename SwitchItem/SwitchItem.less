@@ -1,0 +1,28 @@
+// RadioItem.less
+//
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "~@enact/agate/styles/mixins.less";
+@import "~@enact/agate/styles/skin.less";
+
+// Public
+.switchItem {
+	.moon-ez-item-sizing();
+
+	.label {
+		.margin-start-end(0, @moon-ez-common-spacing);
+
+		font-weight: 500;
+		vertical-align: middle;
+	}
+
+	.applySkins({
+		.label {
+			color: @moon-ez-switchitem-label-text-color;
+
+			.disabled({
+				color: inherit;
+			});
+		}
+	});
+}
