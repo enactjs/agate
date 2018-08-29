@@ -11,7 +11,6 @@
  */
 
 import kind from '@enact/core/kind';
-import Uppercase from '@enact/i18n/Uppercase';
 import Spottable from '@enact/spotlight/Spottable';
 import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
 import Pure from '@enact/ui/internal/Pure';
@@ -61,7 +60,11 @@ const ButtonBase = kind({
 
 		highlighted: PropTypes.bool,
 
-		type: PropTypes.oneOf(['stardard', 'grid'])
+		type: PropTypes.oneOf(['standard', 'grid'])
+	},
+
+	defaultProps: {
+		type: 'standard'
 	},
 
 	styles: {
@@ -118,7 +121,6 @@ const ButtonBase = kind({
  */
 const ButtonDecorator = compose(
 	Pure,
-	Uppercase,
 	// MarqueeDecorator({className: componentCss.marquee}),
 	UiButtonDecorator,
 	Spottable,

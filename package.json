@@ -29,7 +29,9 @@
     "extends": "enact/strict"
   },
   "dependencies": {
-    "@enact/core": "^2.1.1",
-    "@enact/ui": "^2.1.1"
+    "@enact/core": "next",
+    "@enact/i18n": "next",
+    "@enact/spotlight": "next",
+    "@enact/ui": "next"
   }
 }
