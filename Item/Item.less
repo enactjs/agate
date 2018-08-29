@@ -1,7 +1,16 @@
 // Item.less
 //
 @import "../styles/mixins.less";
+@import "../styles/colors.less";
 
 .item {
 	.agate-item-sizing();
+
+	line-height: @agate-item-line-height;
+	position: relative;
+	color:@agate-item-color;
+
+	&.inline {
+		max-width: 240px;
+	}
 }

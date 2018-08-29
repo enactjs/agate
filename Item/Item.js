@@ -9,7 +9,7 @@
  * @exports ItemBase
  */
 
-import {ItemBase as AgateItemBase, ItemDecorator} from '@enact/agate/Item';
+import {ItemBase as AgateItemBase, ItemDecorator} from '@enact/ui/Item';
 import React from 'react';
 
 
