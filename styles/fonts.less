@@ -1,6 +1,9 @@
 // ----- SYSTEM FONT NAMES ------
-@font-system-src-primary-light:  local("LG Display-Light");
+@font-system-src-moonstone-icons:  local("Moonstone"), url("../fonts/Moonstone.ttf") format("truetype");
+// @import (css) url(https://fonts.googleapis.com/css?family=Orbitron);
+@import (css) url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,700');
 
+@font-system-src-primary-light:  local("LG Display-Light");
 
 /* ----- LG Display ------ */
 
@@ -37,5 +40,14 @@
 	font-family: "Agate Primary";
 	src: @font-system-src-primary-light;
 	font-weight: 300;
+	font-style: normal;
+}
+
+/* ----- Moonstone (Icons) ------ */
+
+@font-face {
+	font-family: "Moonstone Icons";
+	src: @font-system-src-moonstone-icons;
+	font-weight: normal;
 	font-style: normal;
 }

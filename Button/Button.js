@@ -73,7 +73,8 @@ const ButtonBase = kind({
 		className: ({highlighted, type, styler}) => styler.append(
 			type,
 			{highlighted}
-		)
+		),
+		minWidth: ({children}) => (!children)
 	},
 
 	render: ({css, ...rest}) => {
