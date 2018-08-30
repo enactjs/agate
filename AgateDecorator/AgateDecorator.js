@@ -56,7 +56,7 @@ const defaultConfig = {
 const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {float, noAutoFocus, ri, skin, spotlight} = config;
 
-	const bgClassName = 'agate-fit';
+	const bgClassName = 'enact-fit';
 
 	let App = Wrapped;
 	if (float) App = FloatingLayerDecorator({wrappedClassName: bgClassName}, App);
@@ -77,7 +77,7 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		render () {
 			const className = classnames(
 				this.props.className,
-				'agate-unselectable',
+				'enact-unselectable',
 				bgClassName,
 				css.root
 			);
