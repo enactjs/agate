@@ -33,6 +33,8 @@
     "@enact/i18n": "next",
     "@enact/moonstone": "next",
     "@enact/spotlight": "next",
-    "@enact/ui": "next"
+    "@enact/ui": "next",
+    "prop-types": "^15.6.2",
+    "ramda": "^0.25.0"
   }
 }
