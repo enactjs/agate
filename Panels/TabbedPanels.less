@@ -8,7 +8,11 @@
 		border: 1px solid #d3d3d3;
 	}
 
-	.tabs {
-		/* flex magic will go here */
+	&.reverse {
+		flex-direction: row-reverse;
+
+		&.column {
+			flex-direction: column-reverse;
+		}
 	}
 }

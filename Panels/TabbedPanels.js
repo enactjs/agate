@@ -70,10 +70,12 @@ const TabbedPanelsBase = kind({
 	name: 'TabbedPanels',
 	propTypes: {
 		index: PropTypes.number,
+		tabPosition: PropTypes.string
 		// tabs: PropTypes.oneOfType([TabGroup])
 	},
 	defaultProps: {
-		index: 0
+		index: 0,
+		tabPosition: 'before'
 	},
 	styles: {
 		css: componentCss,
@@ -93,6 +95,7 @@ const TabbedPanelsBase = kind({
 				});
 			}
 		},
+		className: ({css, orientation, styler, tabPosition}) => styler.append(tabPosition == 'after' ? css.reverse : '', orientation == 'vertical' ? css.column : ''),
 		tabOrientation: ({orientation}) => orientation === 'vertical' ? 'horizontal' : 'vertical',
 		tabs: ({tabs}) => tabs.map((tab) => {
 			return tab.title;
