@@ -3,7 +3,7 @@ import {mount} from 'enzyme';
 import Divider from '../Divider';
 import css from '../Divider.less';
 
-describe.only('Divider Specs', () => {
+describe('Divider Specs', () => {
 	it('should render a Divider with content', function () {
 		const content = 'Hello Divider!';
 
