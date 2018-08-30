@@ -1,6 +1,7 @@
 import {Cell, Layout} from '@enact/ui/Layout';
 import Group from '@enact/ui/Group';
 import kind from '@enact/core/kind';
+import LabeledIconButton from '@enact/agate/LabeledIconButton';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Slottable from '@enact/ui/Slottable';
@@ -11,9 +12,14 @@ import componentCss from './TabbedPanels.less';
 
 const Tab = kind({
 	name: 'Tab',
-	render: ({onClick, title}) => {
+	render: ({labelPosition, onClick, title}) => {
 		return (
-			<Cell onClick={onClick}>
+			<Cell
+				component={LabeledIconButton}
+				icon="star"
+				labelPosition={labelPosition}
+				onClick={onClick}
+			>
 				{title}
 			</Cell>
 		);
@@ -22,13 +28,34 @@ const Tab = kind({
 
 const TabGroup = kind({
 	name: 'TabGroup',
-	render: ({...rest}) => {
+	computed: {
+		labelPosition: ({orientation, tabPosition}) => {
+			//TODO: this keeps the label always between the icon and the panels, is it necessary?
+			if (orientation === 'vertical') {
+				if (tabPosition === 'before') {
+					return 'after';
+				} else {
+					return 'before';
+				}
+			} else {
+				if (tabPosition === 'before') {
+					return 'below';
+				} else {
+					return 'above';
+				}
+			}
+		}
+	},
+	render: ({labelPosition, ...rest}) => {
 		return(
 			<Layout
 				{...rest}
 				childComponent={Tab}
 				childSelect='onClick'
 				component={Group}
+				itemProps={{
+					labelPosition
+				}}
 				select="radio"
 			/>
 		);
@@ -63,9 +90,10 @@ const TabbedPanelsBase = kind({
 					return <View key={index} {...viewProps} />;
 				});
 			}
-		}
+		},
+		tabOrientation: ({orientation}) => orientation === 'vertical' ? 'horizontal' : 'vertical'
 	},
-	render: ({children, css, index, onSelect, tabOrientation, tabs, ...rest}) => {
+	render: ({children, css, index, onSelect, tabOrientation, tabPosition, tabs, ...rest}) => {
 		return (
 			<Layout {...rest}>
 				<Cell
@@ -73,6 +101,7 @@ const TabbedPanelsBase = kind({
 					component={TabGroup}
 					onSelect={onSelect}
 					orientation={tabOrientation}
+					tabPosition={tabPosition}
 					selected={index}
 					shrink
 				>
