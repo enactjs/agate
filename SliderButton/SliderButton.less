@@ -1,0 +1,56 @@
+// Button.less
+//
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
+
+.sliderButton {
+	--sliderbutton-item-count: 0;
+	--sliderbutton-item-size: ~"calc(100% / var(--sliderbutton-item-count))";
+
+	height: @agate-button-height;
+	border-radius: 999px;
+	// shrink the slider's available space by the width of one item, distributed to both ends (padding);
+	padding: 0 ~"calc(var(--sliderbutton-item-size) / 2)";
+
+	.knob {
+		position: absolute;
+		top: 0;
+		height: 100%;
+		width: var(--sliderbutton-item-size);
+		left: ~"calc(var(--knob-value) * var(--sliderbutton-item-size))";
+		will-change: left;
+		transition: left 200ms ease-in-out;
+		border-radius: 999px;
+	}
+
+	.track {
+		// calculate what one fewer items width would be, so we can extend and offset the track by that amount below
+		--adjusted-item-count-width: ~"calc(100% / (var(--sliderbutton-item-count) - 1))";
+		// extend the track to be wider than 100% by the width of one item, and use that value
+		width: ~"calc(var(--adjusted-item-count-width) * var(--sliderbutton-item-count))";
+		// cut that value from above in half and left-offset the track by that amount.
+		left: ~"calc(var(--adjusted-item-count-width) / -2)";
+
+		height: 100%;
+		position: relative;
+		text-align: center;
+
+	}
+
+	.applySkins({
+		background-color: @agate-sliderbutton-bg-color;
+
+		.knob {
+			background-color: @agate-sliderbutton-knob-bg-color;
+			background-image: @agate-sliderbutton-knob-bg-image;
+			opacity: 0.7;
+		}
+
+		.focus({
+			.knob {
+				opacity: 1;
+			}
+		});
+	});
+}
