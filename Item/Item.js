@@ -9,11 +9,15 @@
  * @exports ItemBase
  */
 
-import {ItemBase as AgateItemBase, ItemDecorator} from '@enact/ui/Item';
+import Spottable from '@enact/spotlight/Spottable';
+import {ItemBase as AgateItemBase, ItemDecorator as UiItemDecorator} from '@enact/ui/Item';
+import {MarqueeDecorator} from '@enact/moonstone/Marquee';
+import Pure from '@enact/ui/internal/Pure';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
-
 import componentCss from './Item.less';
+import Skinnable from '../Skinnable';
 
 /**
  * A agate-ez-styled item.
@@ -28,6 +32,26 @@ const ItemBase = (props) => (
 		{...props}
 		css={componentCss}
 	/>
+);
+
+/**
+ * Agate specific item behaviors to apply to `Item`.
+ *
+ * @class ItemDecorator
+ * @hoc
+ * @memberof agate/Item
+ * @mixes spotlight.Spottable
+ * @mixes moonstone/Marquee.MarqueeDecorator
+ * @mixes agate/Skinnable
+ * @ui
+ * @public
+ */
+const ItemDecorator = compose(
+	Pure,
+	UiItemDecorator,
+	Spottable,
+	MarqueeDecorator({invalidateProps: ['inline', 'autoHide']}),
+	Skinnable
 );
 
 const Item = ItemDecorator(ItemBase);
