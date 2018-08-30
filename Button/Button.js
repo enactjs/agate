@@ -11,7 +11,6 @@
  */
 
 import kind from '@enact/core/kind';
-import Spottable from '@enact/spotlight/Spottable';
 import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
@@ -115,7 +114,6 @@ const ButtonBase = kind({
  * @mixes i18n/Uppercase.Uppercase
  * @mixes agate/Marquee.MarqueeDecorator
  * @mixes ui/Button.ButtonDecorator
- * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
@@ -123,7 +121,6 @@ const ButtonDecorator = compose(
 	Pure,
 	// MarqueeDecorator({className: componentCss.marquee}),
 	UiButtonDecorator,
-	Spottable,
 	Skinnable
 );
 

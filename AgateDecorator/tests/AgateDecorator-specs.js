@@ -21,7 +21,7 @@ describe('AgateDecorator', () => {
 		const appRoot = subject.find('app');
 
 		const expected = true;
-		const actual = appRoot.hasClass('agate') && appRoot.hasClass(css.bg);
+		const actual = appRoot.hasClass('agate');
 
 		expect(actual).to.equal(expected);
 	});

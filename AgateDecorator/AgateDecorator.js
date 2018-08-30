@@ -8,7 +8,6 @@ import {addAll} from '@enact/core/keymap';
 import classnames from 'classnames';
 import hoc from '@enact/core/hoc';
 import React from 'react';
-import I18nDecorator from '@enact/i18n/I18nDecorator';
 import {ResolutionDecorator} from '@enact/ui/resolution';
 import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 import SpotlightRootDecorator from '@enact/spotlight/SpotlightRootDecorator';
@@ -27,7 +26,6 @@ import css from './AgateDecorator.less';
  */
 const defaultConfig = {
 	float: true,
-	i18n: true,
 	noAutoFocus: false,
 	ri: {
 		screenTypes
@@ -56,17 +54,12 @@ const defaultConfig = {
  * @public
  */
 const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
-	const {float, i18n, noAutoFocus, ri, skin, spotlight} = config;
+	const {float, noAutoFocus, ri, skin, spotlight} = config;
 
-	const bgClassName = 'enact-fit';
+	const bgClassName = 'agate-fit';
 
 	let App = Wrapped;
 	if (float) App = FloatingLayerDecorator({wrappedClassName: bgClassName}, App);
-	if (i18n) {
-		App = I18nDecorator(
-			App
-		);
-	}
 	if (ri) App = ResolutionDecorator(ri, App);
 	if (spotlight) App = SpotlightRootDecorator({noAutoFocus}, App);
 	if (skin) App = Skinnable({defaultSkin: 'main'}, App);
@@ -84,7 +77,7 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		render () {
 			const className = classnames(
 				this.props.className,
-				'enact-unselectable',
+				'agate-unselectable',
 				bgClassName,
 				css.root
 			);

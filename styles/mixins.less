@@ -13,3 +13,9 @@
 	padding-left: @agate-item-side-outset;
 	padding-right: @agate-item-side-outset;
 }
+
+.focus(@rules) when (isruleset(@rules)) {
+	&:focus {
+		@rules();
+	}
+}
