@@ -4,7 +4,7 @@
  * @example
  * <Item>Hello Enact!</Item>
  *
- * @module agate-ez/Item
+ * @module agate/Item
  * @exports Item
  * @exports ItemBase
  */

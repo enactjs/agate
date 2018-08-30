@@ -1,0 +1,43 @@
+// LabeledItem.less
+//
+@import '../styles/mixins.less';
+//@import '../styles/text.less';
+@import '../styles/variables.less';
+@import '../styles/colors.less';
+// @import '../styles/skin.less';
+
+.labeledItem {
+	//// Locally scoped LESS variables ////
+	// Vertically shift the text element to position it closer to the header than the line-height naturally allows
+	@text-vertical-offset: 6px;
+
+	flex-wrap: wrap;	// Allow the label to fall on the next line
+
+	// Header
+	.text {
+		display: flex;
+		width: 100%;
+		align-items: center;
+
+		.title {
+			overflow: hidden;
+		}
+		.icon {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
+
+	// Text
+	.label {
+		color: @agate-text-color;
+		line-height: @agate-item-height/3;
+		font-size: @agate-item-label-font-size;
+	}
+
+	&.with-label {
+		.label {
+			padding-bottom: 3px;
+		}
+	}
+}
