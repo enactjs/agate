@@ -12,7 +12,7 @@ import componentCss from './TabbedPanels.less';
 
 const Tab = kind({
 	name: 'Tab',
-	render: ({labelPosition, onClick, title}) => {
+	render: ({children, labelPosition, onClick}) => {
 		return (
 			<Cell
 				component={LabeledIconButton}
@@ -20,7 +20,7 @@ const Tab = kind({
 				labelPosition={labelPosition}
 				onClick={onClick}
 			>
-				{title}
+				{children}
 			</Cell>
 		);
 	}
@@ -47,6 +47,8 @@ const TabGroup = kind({
 		}
 	},
 	render: ({labelPosition, ...rest}) => {
+		delete rest.tabPosition;
+
 		return(
 			<Layout
 				{...rest}
@@ -91,7 +93,10 @@ const TabbedPanelsBase = kind({
 				});
 			}
 		},
-		tabOrientation: ({orientation}) => orientation === 'vertical' ? 'horizontal' : 'vertical'
+		tabOrientation: ({orientation}) => orientation === 'vertical' ? 'horizontal' : 'vertical',
+		tabs: ({tabs}) => tabs.map((tab) => {
+			return tab.title;
+		})
 	},
 	render: ({children, css, index, onSelect, tabOrientation, tabPosition, tabs, ...rest}) => {
 		return (
