@@ -1,0 +1,40 @@
+// Popup.less
+//
+@import '../styles/colors.less';
+@import '../styles/mixins.less';
+@import '../styles/skin.less';
+@import '~@enact/ui/styles/text.less';
+@import '../styles/variables.less';
+
+.popup {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	box-sizing: border-box;
+
+	.body {
+		height: 100%;
+		.locale-japanese-line-break();
+	}
+
+	:global(.enact-locale-right-to-left) & {
+		.closeButton {
+			right: auto;
+			left: @agate-spotlight-outset;
+		}
+	}
+
+	// Skin colors
+	.applySkins({
+		background-color: fade(@agate-popup-bg-color, @agate-popup-bg-opacity);
+	});
+}
+
+.popupTransitionContainer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
