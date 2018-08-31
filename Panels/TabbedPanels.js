@@ -1,21 +1,31 @@
 import {Cell, Layout} from '@enact/ui/Layout';
 import Group from '@enact/ui/Group';
 import kind from '@enact/core/kind';
-import LabeledIconButton from '@enact/agate/LabeledIconButton';
+import LabeledIcon from '@enact/agate/LabeledIcon';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Slottable from '@enact/ui/Slottable';
+import Spottable from '@enact/Spotlight/Spottable';
+
+import Skinnable from '../Skinnable';
 
 import Panels from './Panels';
 
 import componentCss from './TabbedPanels.less';
 
-const Tab = kind({
+const SpottableLabeledIcon = Spottable(LabeledIcon);
+
+const TabBase = kind({
 	name: 'Tab',
-	render: ({children, labelPosition, onClick}) => {
+	styles: {
+		css: componentCss,
+		className: 'tab'
+	},
+	render: ({children, labelPosition, onClick, ...rest}) => {
 		return (
 			<Cell
-				component={LabeledIconButton}
+				{...rest}
+				component={SpottableLabeledIcon}
 				icon="star"
 				labelPosition={labelPosition}
 				onClick={onClick}
@@ -25,35 +35,34 @@ const Tab = kind({
 		);
 	}
 });
+const Tab = Skinnable(TabBase);
 
 const TabGroup = kind({
 	name: 'TabGroup',
 	computed: {
 		labelPosition: ({orientation, tabPosition}) => {
-			//TODO: this keeps the label always between the icon and the panels, is it necessary?
+			// TODO: this keeps the label always between the icon and the panels, is it necessary?
 			if (orientation === 'vertical') {
 				if (tabPosition === 'before') {
 					return 'after';
 				} else {
 					return 'before';
 				}
+			} else if (tabPosition === 'before') {
+				return 'below';
 			} else {
-				if (tabPosition === 'before') {
-					return 'below';
-				} else {
-					return 'above';
-				}
+				return 'above';
 			}
 		}
 	},
 	render: ({labelPosition, ...rest}) => {
 		delete rest.tabPosition;
 
-		return(
+		return (
 			<Layout
 				{...rest}
 				childComponent={Tab}
-				childSelect='onClick'
+				childSelect="onClick"
 				component={Group}
 				itemProps={{
 					labelPosition

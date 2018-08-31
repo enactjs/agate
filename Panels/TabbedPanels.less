@@ -1,11 +1,14 @@
 /* Styles for agate/TabbedPanels */
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
 
 .tabbed-panels {
 	/* I got cat class and I got cat style */
 
 	.panels {
 		/* overrides for the base Panels */
-		border: 1px solid #d3d3d3;
+		// border: 1px solid #d3d3d3;
 	}
 
 	&.reverse {
@@ -15,4 +18,26 @@
 			flex-direction: column-reverse;
 		}
 	}
+}
+
+.tab {
+	margin: 0;
+
+	.applySkins({
+		// These two will need to change based on the skin
+		padding-top: @agate-panels-tab-v-padding;
+		padding-bottom: @agate-panels-tab-v-padding;
+
+		background-image: @agate-panels-tab-bg-image;
+
+		border-left: @agate-panels-tab-separator-border-width solid @agate-panels-tab-separator-border-color;
+		&:first-child {
+			border-left-width: 0;
+		}
+
+		.focus({
+			background-color: @agate-panels-tab-focus-bg-color;
+			background-image: @agate-panels-tab-focus-bg-image;
+		});
+	});
 }
