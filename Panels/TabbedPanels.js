@@ -37,8 +37,12 @@ const TabBase = kind({
 });
 const Tab = Skinnable(TabBase);
 
-const TabGroup = kind({
+const TabGroupBase = kind({
 	name: 'TabGroup',
+	styles: {
+		css: componentCss,
+		className: 'tabBar'
+	},
 	computed: {
 		labelPosition: ({orientation, tabPosition}) => {
 			// TODO: this keeps the label always between the icon and the panels, is it necessary?
@@ -55,25 +59,41 @@ const TabGroup = kind({
 			}
 		}
 	},
-	render: ({labelPosition, ...rest}) => {
+	render: ({afterTabs, beforeTabs, children, className, labelPosition, style, ...rest}) => {
 		delete rest.tabPosition;
 
 		return (
-			<Layout
-				{...rest}
-				childComponent={Tab}
-				childSelect="onClick"
-				component={Group}
-				itemProps={{
-					labelPosition
-				}}
-				select="radio"
-			/>
+
+			<Layout orientation={rest.orientation} className={className} align="center" style={style}>
+				{beforeTabs ? <Cell shrink>
+					{beforeTabs}
+				</Cell> : null}
+				<Cell>
+					<Layout
+						{...rest}
+						childComponent={Tab}
+						childSelect="onClick"
+						component={Group}
+						itemProps={{
+							labelPosition
+						}}
+						select="radio"
+					>
+						{children}
+					</Layout>
+				</Cell>
+				{afterTabs ? <Cell shrink>
+					{afterTabs}
+				</Cell> : null}
+			</Layout>
 		);
 	}
 });
 
-TabGroup.defaultSlot = 'tabs';
+TabGroupBase.defaultSlot = 'tabs';
+
+const TabGroup = Skinnable(TabGroupBase);
+
 
 const TabbedPanelsBase = kind({
 	name: 'TabbedPanels',
@@ -110,10 +130,12 @@ const TabbedPanelsBase = kind({
 			return tab.title;
 		})
 	},
-	render: ({children, css, index, onSelect, tabOrientation, tabPosition, tabs, ...rest}) => {
+	render: ({afterTabs, beforeTabs, children, css, index, onSelect, tabOrientation, tabPosition, tabs, ...rest}) => {
 		return (
 			<Layout {...rest}>
 				<Cell
+					afterTabs={afterTabs}
+					beforeTabs={beforeTabs}
 					className={css.tabs}
 					component={TabGroup}
 					onSelect={onSelect}
@@ -127,6 +149,7 @@ const TabbedPanelsBase = kind({
 				<Cell
 					className={css.panels}
 					component={Panels}
+					orientation={tabOrientation}
 					index={index}
 				>
 					{children}
@@ -136,7 +159,7 @@ const TabbedPanelsBase = kind({
 	}
 });
 
-const TabbedPanels = Slottable({slots: ['tabs']}, TabbedPanelsBase);
+const TabbedPanels = Slottable({slots: ['tabs', 'afterTabs', 'beforeTabs']}, TabbedPanelsBase);
 
 export default TabbedPanels;
 export {TabbedPanels, TabbedPanelsBase};

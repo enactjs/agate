@@ -20,6 +20,15 @@
 	}
 }
 
+.tabBar {
+	margin: 0;
+
+	.applySkins({
+		background-color: @agate-panels-tab-bg-color;
+		background-image: @agate-panels-tab-bg-image;
+	});
+}
+
 .tab {
 	margin: 0;
 
@@ -28,8 +37,8 @@
 		padding-top: @agate-panels-tab-v-padding;
 		padding-bottom: @agate-panels-tab-v-padding;
 
-		background-color: @agate-panels-tab-bg-color;
-		background-image: @agate-panels-tab-bg-image;
+		// background-color: @agate-panels-tab-bg-color;
+		// background-image: @agate-panels-tab-bg-image;
 
 		&[data-selected=true] {
 			background-color: @agate-panels-tab-selected-bg-color;
