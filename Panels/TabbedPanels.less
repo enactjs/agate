@@ -28,7 +28,13 @@
 		padding-top: @agate-panels-tab-v-padding;
 		padding-bottom: @agate-panels-tab-v-padding;
 
+		background-color: @agate-panels-tab-bg-color;
 		background-image: @agate-panels-tab-bg-image;
+
+		&[data-selected=true] {
+			background-color: @agate-panels-tab-selected-bg-color;
+			background-image: @agate-panels-tab-selected-bg-image;
+		}
 
 		border-left: @agate-panels-tab-separator-border-width solid @agate-panels-tab-separator-border-color;
 		&:first-child {
