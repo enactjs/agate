@@ -14,6 +14,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
 import Touchable from '@enact/ui/Touchable';
+import Spottable from '@enact/spotlight/Spottable';
 
 import Icon from '../Icon';
 import {ItemBase} from '../Item';
@@ -22,7 +23,9 @@ import {Marquee, MarqueeController} from '@enact/moonstone/Marquee';
 const Controller = MarqueeController(
 	{marqueeOnFocus: true},
 	Touchable(
-		ItemBase
+		Spottable(
+			ItemBase
+		)
 	)
 );
 
