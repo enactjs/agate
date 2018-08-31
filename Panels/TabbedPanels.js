@@ -5,7 +5,7 @@ import LabeledIcon from '@enact/agate/LabeledIcon';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Slottable from '@enact/ui/Slottable';
-import Spottable from '@enact/Spotlight/Spottable';
+import Spottable from '@enact/spotlight/Spottable';
 
 import Skinnable from '../Skinnable';
 
