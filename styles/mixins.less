@@ -3,6 +3,7 @@
 // defining a collection of styles once, and reusing them in multiple places.
 //
 
+@import "~@enact/spotlight/styles/mixins.less";
 @import "~@enact/ui/styles/mixins.less";
 @import "../styles/variables.less";
 
@@ -12,36 +13,4 @@
 	line-height: @agate-item-height;
 	padding-left: @agate-item-side-outset;
 	padding-right: @agate-item-side-outset;
-}
-
-//
-// Spotlight Mixins
-//
-
-// Spottable elements
-.spottable(@rules; @target) when (isruleset(@rules)) and (@target = parent) {
-	:global(.spottable) {
-		@rules();
-	}
-}
-.spottable(@rules) when (isruleset(@rules)) {
-	&:global(.spottable) {
-		@rules();
-	}
-}
-
-// Focused Spottable elements
-.focus(@rules; @target) when (isruleset(@rules)) and (@target = parent) {
-	.spottable({
-		&:focus {
-			@rules();
-		}
-	}, @target);
-}
-.focus(@rules) when (isruleset(@rules)) {
-	.spottable({
-		&:focus {
-			@rules();
-		}
-	});
 }
