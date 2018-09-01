@@ -24,9 +24,9 @@ const TabBase = kind({
 	render: ({children, labelPosition, onClick, ...rest}) => {
 		return (
 			<Cell
+				icon="star"
 				{...rest}
 				component={SpottableLabeledIcon}
-				icon="star"
 				labelPosition={labelPosition}
 				onClick={onClick}
 			>
@@ -59,7 +59,7 @@ const TabGroupBase = kind({
 			}
 		}
 	},
-	render: ({afterTabs, beforeTabs, children, className, labelPosition, style, ...rest}) => {
+	render: ({afterTabs, beforeTabs, className, labelPosition, style, ...rest}) => {
 		delete rest.tabPosition;
 
 		return (
@@ -71,16 +71,16 @@ const TabGroupBase = kind({
 				<Cell>
 					<Layout
 						{...rest}
+						align="center center"
 						childComponent={Tab}
 						childSelect="onClick"
 						component={Group}
 						itemProps={{
-							labelPosition
+							labelPosition,
+							shrink: (rest.orientation === 'vertical')
 						}}
 						select="radio"
-					>
-						{children}
-					</Layout>
+					/>
 				</Cell>
 				{afterTabs ? <Cell shrink>
 					{afterTabs}
@@ -126,8 +126,8 @@ const TabbedPanelsBase = kind({
 		},
 		className: ({css, orientation, styler, tabPosition}) => styler.append(tabPosition == 'after' ? css.reverse : '', orientation == 'vertical' ? css.column : ''),
 		tabOrientation: ({orientation}) => orientation === 'vertical' ? 'horizontal' : 'vertical',
-		tabs: ({tabs}) => tabs.map((tab) => {
-			return tab.title;
+		tabs: ({tabs}) => tabs.map((tab, i) => {
+			return {key: 'tab' + i, children: tab.title, icon: tab.icon};
 		})
 	},
 	render: ({afterTabs, beforeTabs, children, css, index, onSelect, tabOrientation, tabPosition, tabs, ...rest}) => {
