@@ -7,15 +7,16 @@
 
 import React from 'react';
 
-import AgateSwitchItem from '@enact/agate/SwitchItem';
-import AgateSwitch from '@enact/agate/Switch';
+import Item from '../Item';
+// import AgateSwitch from '@enact/agate/Switch';
 
 import componentCss from './SwitchItem.less';
 
 const Switch = ({label, ...rest}) => (
 	<div>
 		<span className={componentCss.label}>{label}</span>
-		<AgateSwitch {...rest} />
+		{/* <AgateSwitch {...rest} />*/}
+		<span {...rest} />
 	</div>
 );
 
@@ -29,10 +30,10 @@ const Switch = ({label, ...rest}) => (
  * @public
  */
 const SwitchItem = ({label, ...rest}) => (
-	<AgateSwitchItem
+	<Item
 		{...rest}
 		css={componentCss}
-		iconComponent={<Switch label={label} />}
+		// iconComponent={<Switch label={label} />}
 	/>
 );
 

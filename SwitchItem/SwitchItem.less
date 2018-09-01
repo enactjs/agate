@@ -7,18 +7,18 @@
 
 // Public
 .switchItem {
-	.agate-item-sizing();
-
 	.label {
-		.margin-start-end(0, @agate-component-spacing);
-
-		font-weight: 500;
 		vertical-align: middle;
 	}
 
 	.applySkins({
+		.agate-item-sizing();
+
 		.label {
-			color: @agate-switchitem-label-text-color;
+			.margin-start-end(0, @agate-component-spacing);
+			font-weight: 500;	// Covert to var
+
+			color: @agate-switchitem-color;
 
 			.disabled({
 				color: inherit;

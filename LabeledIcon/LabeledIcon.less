@@ -1,66 +1,67 @@
 // LabeledIcon.less
 //
-@import "../styles/variables.less";
+@import "../styles/skin.less";
 
 .labeledIcon {
-	min-width: 96px;
-	max-width: 300px;
-	margin: @agate-component-spacing;
-	padding: 0 @agate-component-spacing;
+	.applySkins({
+		min-width: 96px;
+		max-width: 300px;
+		margin: @agate-component-spacing;
+		padding: 0 @agate-component-spacing;
 
-	// The following rules adjust the margin of icon so it behaves in a predictable way for users of
-	// this component, when applying their own styling/layout rules.
-	&.below .icon {
-		margin-top: 0;
-		margin-bottom: @agate-component-spacing;
-	}
-	&.above .icon {
-		margin-top: @agate-component-spacing;
-		margin-bottom: 0;
-	}
-	&.after,
-	&.before,
-	&.left,
-	&.right {
-		.icon {
+		// The following rules adjust the margin of icon so it behaves in a predictable way for users of
+		// this component, when applying their own styling/layout rules.
+		&.below .icon {
 			margin-top: 0;
+			margin-bottom: @agate-component-spacing;
+		}
+		&.above .icon {
+			margin-top: @agate-component-spacing;
 			margin-bottom: 0;
 		}
-	}
-
-	.label {
-		// text-overflow: ellipsis;
-		// overflow: hidden;
-		width: 100%;
-		// white-space: nowrap;
-		font-weight: 300;
-	}
-
-	&.above,
-	&.below {
-		text-align: center;
-	}
-
-	// Allow the lable to collapse to smaller than its content
-	&.after,
-	&.before,
-	&.left,
-	&.right {
-		.label {
-			flex-shrink: 1;
+		&.after,
+		&.before,
+		&.left,
+		&.right {
+			.icon {
+				margin-top: 0;
+				margin-bottom: 0;
+			}
 		}
-	}
 
-	// Text alignment
-	&.before {
-		text-align: end;
-	}
+		.label {
+			// text-overflow: ellipsis;
+			// overflow: hidden;
+			width: 100%;
+			// white-space: nowrap;
+		}
 
-	&.left {
-		text-align: right;
-	}
+		&.above,
+		&.below {
+			text-align: center;
+		}
 
-	&.right {
-		text-align: left;
-	}
+		// Allow the lable to collapse to smaller than its content
+		&.after,
+		&.before,
+		&.left,
+		&.right {
+			.label {
+				flex-shrink: 1;
+			}
+		}
+
+		// Text alignment
+		&.before {
+			text-align: end;
+		}
+
+		&.left {
+			text-align: right;
+		}
+
+		&.right {
+			text-align: left;
+		}
+	});
 }

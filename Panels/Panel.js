@@ -6,6 +6,8 @@ import Slottable from '@enact/ui/Slottable';
 import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator, {spotlightDefaultClass} from '@enact/spotlight/SpotlightContainerDecorator';
 
+import Skinnable from '../Skinnable';
+
 import css from './Panel.less';
 
 let panelId = 0;
@@ -146,7 +148,7 @@ const PanelBase = kind({
 
 		return (
 			<article role="region" {...rest} aria-labelledby={headerId} ref={spotOnRender}>
-				<div className={css.header} id={headerId}>{header}</div>
+				{header ? <div className={css.header} id={headerId}>{header}</div> : null}
 				<section className={bodyClassName}>{children}</section>
 			</article>
 		);
@@ -163,7 +165,9 @@ const Panel = SpotlightContainerDecorator(
 	},
 	Slottable(
 		{slots: ['header']},
-		PanelBase
+		Skinnable(
+			PanelBase
+		)
 	)
 );
 

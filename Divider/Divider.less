@@ -1,37 +1,32 @@
 // Divider.less
 //;
 @import "../styles/skin.less";
-@import "../styles/colors.less";
-@import "../styles/variables.less";
 
 .divider {
-	border-bottom: @agate-divider-border-width solid transparent;
-	margin: 0 @agate-divider-spacing (1.5 * @agate-divider-spacing) @agate-divider-spacing;
-	min-height: (1.5 * @agate-divider-spacing);
-	line-height: @agate-divider-height;
-	font-weight: @agate-divider-font-weight;
-	font-size: @agate-divider-font-size;
-
-	&.none {
-		margin-bottom: 0;
-		min-height: 0;
-	}
-	&.small {
-		margin-bottom: @agate-divider-spacing;
-		min-height: @agate-divider-spacing;
-	}
-	&.medium {
-		margin-bottom: (@agate-divider-spacing * 2);
-		min-height: (@agate-divider-spacing * 2);
-	}
-	&.large {
-		margin-bottom: (@agate-divider-spacing * 3);
-		min-height: (@agate-divider-spacing * 3);
-	}
-
-	// Skin colors
 	.applySkins({
-		color: @agate-text-color;
-		border-bottom-color: @agate-text-color;
+		border-bottom: @agate-divider-border-width solid @agate-divider-border-color;
+		color: @agate-divider-color;
+		margin: 0 @agate-divider-spacing (1.5 * @agate-divider-spacing) @agate-divider-spacing;
+		min-height: (1.5 * @agate-divider-spacing);
+		line-height: @agate-divider-height;
+		font-weight: @agate-divider-font-weight;
+		font-size: @agate-divider-font-size;
+
+		&.none {
+			margin-bottom: 0;
+			min-height: 0;
+		}
+		&.small {
+			margin-bottom: @agate-divider-spacing;
+			min-height: @agate-divider-spacing;
+		}
+		&.medium {
+			margin-bottom: (@agate-divider-spacing * 2);
+			min-height: (@agate-divider-spacing * 2);
+		}
+		&.large {
+			margin-bottom: (@agate-divider-spacing * 3);
+			min-height: (@agate-divider-spacing * 3);
+		}
 	});
 }

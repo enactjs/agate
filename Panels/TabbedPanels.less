@@ -30,17 +30,19 @@
 }
 
 .tab {
-	margin: 0;
-
 	.applySkins({
+		margin: @agate-panels-tab-v-margin 0;
+
 		// These two will need to change based on the skin
 		padding-top: @agate-panels-tab-v-padding;
 		padding-bottom: @agate-panels-tab-v-padding;
 
+		color: @agate-panels-tab-color;
 		// background-color: @agate-panels-tab-bg-color;
 		// background-image: @agate-panels-tab-bg-image;
 
 		&[data-selected=true] {
+			color: @agate-panels-tab-selected-color;
 			background-color: @agate-panels-tab-selected-bg-color;
 			background-image: @agate-panels-tab-selected-bg-image;
 		}
@@ -51,8 +53,14 @@
 		}
 
 		.focus({
+			color: @agate-panels-tab-focus-color;
 			background-color: @agate-panels-tab-focus-bg-color;
 			background-image: @agate-panels-tab-focus-bg-image;
+
+			&[data-selected=true] {
+				color: @agate-panels-tab-selected-color;
+				background-color: @agate-panels-tab-selected-bg-color;
+			}
 		});
 	});
 }
