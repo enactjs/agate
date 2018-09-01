@@ -1,0 +1,88 @@
+// Skin colors definitions
+//
+
+
+// Named Colors
+@agate-accent: fade(black, 10%);
+@agate-highlight: #2a48ca;
+@agate-background: fade(black, 30%);
+@agate-foreground: lighten(black, 30%);
+@agate-background-active: fade(black, 15%);
+@agate-foreground-active: lighten(black, 15%);
+@agate-background-focus: @agate-highlight;
+@agate-foreground-focus: white;
+@agate-gradient: linear-gradient(to bottom, #989E3B, #90BD5D);
+
+// Component color assignments
+@agate-bg-color: #ddd;
+@agate-text-color: @agate-foreground;
+@agate-title-text-color: white;
+
+// Disabled Opacity
+// ---------------------------------------
+@agate-disabled-opacity: 0.6;
+@agate-disabled-translucent-opacity: 0.4;
+
+// Spotlight and State
+// ---------------------------------------
+@agate-spotlight-color:                @agate-foreground-focus;
+@agate-spotlight-bg-color:             @agate-background-focus;
+@agate-spotlight-border-color:         transparent;
+@agate-spotlight-disabled-text-color:  fade(@agate-spotlight-color, 40%);
+
+// Button
+// ---------------------------------------
+@agate-button-color:          @agate-foreground;
+@agate-button-bg-color:       @agate-background;
+@agate-button-bg-image:       none;
+@agate-button-border-color:   @agate-accent;
+@agate-button-shadow:         0 1px 3px @agate-accent;
+@agate-button-focus-color:    @agate-foreground-focus;
+@agate-button-focus-bg-color: @agate-background-focus;
+@agate-button-focus-bg-image: none;
+
+// Divider
+// ---------------------------------------
+@agate-divider-color:        @agate-text-color;
+@agate-divider-border-color: @agate-divider-color;
+
+// Icon
+// ---------------------------------------
+@agate-icon-color:       @agate-text-color;
+
+// Item
+// ---------------------------------------
+@agate-item-color:       inherit;
+
+// LabeledItem
+// ---------------------------------------
+@agate-labeleditem-label-color: @agate-highlight;
+
+// SwitchItem
+// ---------------------------------------
+@agate-switchitem-color: inherit;
+
+// Panels
+// ---------------------------------------
+@agate-panels-tab-separator-border-color: transparent;
+@agate-panels-tab-color:              fade(black, 50%);
+@agate-panels-tab-bg-color:           lighten(@agate-bg-color, 5%);
+@agate-panels-tab-bg-image:           none;
+@agate-panels-tab-selected-color:     @agate-foreground-active;
+@agate-panels-tab-selected-bg-color:  @agate-bg-color;
+@agate-panels-tab-selected-bg-image:  @agate-panels-tab-bg-image;
+@agate-panels-tab-focus-color:        @agate-text-color;
+@agate-panels-tab-focus-bg-color:     transparent;
+@agate-panels-tab-focus-bg-image:     @agate-panels-tab-bg-image;
+
+// SliderButton
+// ---------------------------------------
+@agate-sliderbutton-color:          @agate-text-color;
+@agate-sliderbutton-bg-color:       @agate-accent;
+@agate-sliderbutton-bg-image:       linear-gradient(to top, transparent, fade(black, 3%));
+@agate-sliderbutton-focus-color:    @agate-text-color;
+@agate-sliderbutton-focus-bg-color: @agate-sliderbutton-bg-color;
+@agate-sliderbutton-focus-bg-image: @agate-sliderbutton-bg-image;
+@agate-sliderbutton-knob-bg-color:  lighten(@agate-bg-color, 10%);
+@agate-sliderbutton-knob-bg-image:  linear-gradient(to bottom, transparent, fade(black, 10%));
+@agate-sliderbutton-knob-shadow:    0 3px 9px 3px fade(black, 30%);

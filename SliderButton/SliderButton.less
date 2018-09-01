@@ -8,8 +8,6 @@
 	--sliderbutton-item-count: 0;
 	--sliderbutton-item-size: ~"calc(100% / var(--sliderbutton-item-count))";
 
-	height: @agate-button-height;
-	border-radius: 999px;
 	// shrink the slider's available space by the width of one item, distributed to both ends (padding);
 	padding: 0 ~"calc(var(--sliderbutton-item-size) / 2)";
 
@@ -39,15 +37,24 @@
 	}
 
 	.applySkins({
+		height: @agate-button-height;
+		border-radius: 999px;
+		color: @agate-sliderbutton-color;
 		background-color: @agate-sliderbutton-bg-color;
+		background-image: @agate-sliderbutton-bg-image;
 
 		.knob {
 			background-color: @agate-sliderbutton-knob-bg-color;
 			background-image: @agate-sliderbutton-knob-bg-image;
-			opacity: 0.7;
+			opacity: 0.9;
+			box-shadow: @agate-sliderbutton-knob-shadow;
 		}
 
 		.focus({
+			color: @agate-sliderbutton-focus-color;
+			background-color: @agate-sliderbutton-focus-bg-color;
+			background-image: @agate-sliderbutton-focus-bg-image;
+
 			.knob {
 				opacity: 1;
 			}

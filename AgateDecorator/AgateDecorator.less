@@ -10,9 +10,6 @@
 @import "../styles/skin.less";
 
 .root {
-	font-family: @agate-base-font-family;
-	font-size: @agate-base-font-size;
-	font-weight: normal;
 	font-style: normal;
 	letter-spacing: normal;
 	padding-top: 20px;
@@ -22,9 +19,11 @@
 		direction: rtl;
 	}
 
-	// Skin colors
+	// Skin settings
 	.applySkins({
-		// Theme skin colors go here
+		font-family: @agate-base-font-family;
+		font-weight: @agate-base-font-weight;
+		font-size: @agate-base-font-size;
 		color: @agate-text-color;
 		background-color: @agate-bg-color;
 	});

@@ -71,7 +71,7 @@ const TabGroupBase = kind({
 				<Cell>
 					<Layout
 						{...rest}
-						align="center center"
+						align="stretch center"
 						childComponent={Tab}
 						childSelect="onClick"
 						component={Group}
