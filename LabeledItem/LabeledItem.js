@@ -12,13 +12,16 @@
 import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import Pure from '@enact/ui/internal/Pure';
 import Touchable from '@enact/ui/Touchable';
+import ComponentOverride from '@enact/ui/ComponentOverride';
 import Spottable from '@enact/spotlight/Spottable';
+import {Marquee, MarqueeController} from '@enact/moonstone/Marquee';
 
 import Icon from '../Icon';
 import {ItemBase} from '../Item';
-import {Marquee, MarqueeController} from '@enact/moonstone/Marquee';
+import Skinnable from '../Skinnable';
 
 const Controller = MarqueeController(
 	{marqueeOnFocus: true},
@@ -56,6 +59,15 @@ const LabeledItemBase = kind({
 		 * @public
 		 */
 		children: PropTypes.node.isRequired,
+
+		/**
+		 * The node to be displayed on the left side of LabeledItem.
+		 *
+		 * @type {Node}
+		 * @required
+		 * @public
+		 */
+		componentBefore: PropTypes.node,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -103,16 +115,24 @@ const LabeledItemBase = kind({
 		publicClassNames: ['labeledItem', 'icon', 'label']
 	},
 
-	render: ({children, css, disabled, label, titleIcon, ...rest}) => (
+	render: ({children, componentBefore, css, disabled, label, titleIcon, ...rest}) => (
 		<Controller disabled={disabled} {...rest} css={css}>
-			<div className={css.text}>
-				<Marquee disabled={disabled} className={css.title}>{children}</Marquee>
-				{(titleIcon != null) ? <Icon small className={css.icon}>{titleIcon}</Icon> : null}
+			{componentBefore ? <ComponentOverride className={css.componentBefore} component={componentBefore} /> : null}
+			<div>
+				<div className={css.text}>
+					<Marquee disabled={disabled} className={css.title}>{children}</Marquee>
+					{(titleIcon != null) ? <Icon small className={css.icon}>{titleIcon}</Icon> : null}
+				</div>
+				{(label != null) ? <Marquee disabled={disabled} className={css.label}>{label}</Marquee> : null}
 			</div>
-			{(label != null) ? <Marquee disabled={disabled} className={css.label}>{label}</Marquee> : null}
 		</Controller>
 	)
 });
+
+const LabeledItemDecorator = compose(
+	Pure,
+	Skinnable
+);
 
 /**
  * A Agate styled labeled item with built-in support for marqueed text.
@@ -123,9 +143,7 @@ const LabeledItemBase = kind({
  * @ui
  * @public
  */
-const LabeledItem = Pure(
-	LabeledItemBase
-);
+const LabeledItem = LabeledItemDecorator(LabeledItemBase);
 
 export default LabeledItem;
 export {LabeledItem, LabeledItemBase};
