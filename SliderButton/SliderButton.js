@@ -86,6 +86,7 @@ const SliderButtonBase = kind({
 		return (
 			<UiSlider
 				{...rest}
+				css={css}
 				knobComponent={
 					<SliderKnob css={css} />
 				}

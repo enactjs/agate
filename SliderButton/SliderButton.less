@@ -11,6 +11,18 @@
 	// shrink the slider's available space by the width of one item, distributed to both ends (padding);
 	padding: 0 ~"calc(var(--sliderbutton-item-size) / 2)";
 
+	&::before {
+		content: "";
+		position: fixed;
+		.position(0);
+		z-index: 1;
+		display: none;
+	}
+
+	&.pressed::before {
+		display: block;
+	}
+
 	.knob {
 		position: absolute;
 		top: 0;
@@ -33,7 +45,6 @@
 		height: 100%;
 		position: relative;
 		text-align: center;
-
 	}
 
 	.applySkins({
