@@ -1,19 +1,62 @@
 // Popup.less
 //
+@import '../styles/mixins.less';
 @import '../styles/skin.less';
 
 .popup {
 	.applySkins({
-		background-color: fade(@agate-popup-bg-color, @agate-popup-bg-opacity);
 		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		min-width: @agate-popup-min-width;
+		max-width: @agate-popup-max-width;
+		box-shadow: @agate-popup-shadow;
+		// .position(0);
 		box-sizing: border-box;
+		background-color: @agate-popup-bg-color;
+		border-radius: @agate-popup-border-radius;
+		padding: @agate-popup-padding;
 
-		.body {
-			height: 100%;
+		&:not(.withTitle) {
+			border: @agate-popup-body-border-width solid transparent;
+			border-color: @agate-popup-body-border-color;
+
+			.body {
+				color: @agate-popup-plain-body-color;
+			}
+		}
+
+		&.withTitle {
+			.body {
+				padding: @agate-popup-body-padding;
+				margin: @agate-popup-body-margin;
+				border: @agate-popup-body-border-width solid transparent;
+				border-color: @agate-popup-body-border-color;
+				background-color: @agate-popup-body-bg-color;
+				border-radius: @agate-popup-body-border-radius;
+			}
+		}
+
+		&.withCloseButton {
+			.title {
+				padding: @agate-popup-title-padding;
+			}
+		}
+
+
+		.buttons {
+			padding: @agate-popup-buttons-padding;
+		}
+
+		.closeButton {
+			position: absolute;
+			top: 0;
+			left: @agate-popup-closebutton-position-left;
+			right: @agate-popup-closebutton-position-right;
+			// top: @agate-popup-padding;
+			// left: @agate-popup-padding;
+			margin: @agate-component-spacing;
 		}
 
 		:global(.enact-locale-right-to-left) & {
