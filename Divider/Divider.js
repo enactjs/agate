@@ -20,9 +20,10 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
+import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
-import css from './Divider.less';
+import componentCss from './Divider.less';
 
 /**
  * A labeled divider component.
@@ -51,6 +52,14 @@ const DividerBase = kind({
 		children: PropTypes.node,
 
 		/**
+		 * Add an optional icon to the divider. This accepts any value that [Icon]{@agate/Icon}
+		 * supports.
+		 *
+		 * @type {String}
+		 */
+		icon: PropTypes.string,
+
+		/**
 		 * The size of the spacing around the divider.
 		 *
 		 * Allowed values include:
@@ -68,7 +77,15 @@ const DividerBase = kind({
 		 * @default 'normal'
 		 * @public
 		 */
-		spacing: PropTypes.oneOf(['normal', 'small', 'medium', 'large', 'none'])
+		spacing: PropTypes.oneOf(['normal', 'small', 'medium', 'large', 'none']),
+
+		/**
+		 * Metadata indicating whether this divider is the start of a new "section" on the screen or
+		 * just a heading/label of a sub-section.
+		 *
+		 * @type {Boolean}
+		 */
+		startSection: PropTypes.bool
 	},
 
 	defaultProps: {
@@ -76,19 +93,25 @@ const DividerBase = kind({
 	},
 
 	styles: {
-		css,
-		className: 'divider'
+		css: componentCss,
+		className: 'divider',
+		publicClassNames: ['divider', 'icon', 'startSection']
 	},
 
 	computed: {
-		className: ({spacing, styler}) => styler.append(spacing)
+		className: ({spacing, startSection, styler}) => styler.append(spacing, {startSection}),
+		icon: ({css, icon}) => (icon ? <Icon small className={css.icon}>{icon}</Icon> : null)
 	},
 
-	render: (props) => {
-		delete props.spacing;
+	render: ({children, css, icon, ...rest}) => {
+		delete rest.spacing;
+		delete rest.startSection;
 
 		return (
-			<h3 {...props} />
+			<h3 {...rest} css={css}>
+				{icon}
+				{children}
+			</h3>
 		);
 	}
 });
