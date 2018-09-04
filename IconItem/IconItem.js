@@ -13,6 +13,8 @@ import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
+import SlotItem from '@enact/ui/SlotItem';
+import Item from '@enact/ui/Item';
 
 import Icon from '../Icon';
 import {LabeledItem} from '../LabeledItem';
@@ -100,16 +102,21 @@ const IconItemBase = kind({
 	},
 
 	render: ({children, css, disabled, icon, label, titleIcon, ...rest}) => (
-		<div disabled={disabled} {...rest}>
+		<SlotItem
+			component={Item}
+			disabled={disabled}
+			slotBefore={<Icon className={css.icon}>{icon}</Icon>}
+			{...rest}
+		>
 			<LabeledItem
 				css={css}
-				componentBefore={<Icon className={css.icon}>{icon}</Icon>}
+
 				label={label}
 				titleIcon={titleIcon}
 			>
 				{children}
 			</LabeledItem>
-		</div>
+		</SlotItem>
 	)
 });
 

@@ -15,7 +15,6 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import Pure from '@enact/ui/internal/Pure';
 import Touchable from '@enact/ui/Touchable';
-import ComponentOverride from '@enact/ui/ComponentOverride';
 import Spottable from '@enact/spotlight/Spottable';
 import {Marquee, MarqueeController} from '@enact/moonstone/Marquee';
 
@@ -59,15 +58,6 @@ const LabeledItemBase = kind({
 		 * @public
 		 */
 		children: PropTypes.node.isRequired,
-
-		/**
-		 * The node to be displayed on the left side of LabeledItem.
-		 *
-		 * @type {Node}
-		 * @required
-		 * @public
-		 */
-		componentBefore: PropTypes.node,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -115,16 +105,13 @@ const LabeledItemBase = kind({
 		publicClassNames: ['labeledItem', 'icon', 'label']
 	},
 
-	render: ({children, componentBefore, css, disabled, label, titleIcon, ...rest}) => (
+	render: ({children, css, disabled, label, titleIcon, ...rest}) => (
 		<Controller disabled={disabled} {...rest} css={css}>
-			{componentBefore ? <ComponentOverride className={css.componentBefore} component={componentBefore} /> : null}
-			<div>
-				<div className={css.text}>
-					<Marquee disabled={disabled} className={css.title}>{children}</Marquee>
-					{(titleIcon != null) ? <Icon small className={css.icon}>{titleIcon}</Icon> : null}
-				</div>
-				{(label != null) ? <Marquee disabled={disabled} className={css.label}>{label}</Marquee> : null}
+			<div className={css.text}>
+				<Marquee disabled={disabled} className={css.title}>{children}</Marquee>
+				{(titleIcon != null) ? <Icon small className={css.icon}>{titleIcon}</Icon> : null}
 			</div>
+			{(label != null) ? <Marquee disabled={disabled} className={css.label}>{label}</Marquee> : null}
 		</Controller>
 	)
 });
