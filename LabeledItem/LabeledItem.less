@@ -27,7 +27,6 @@
 	}
 
 	.applySkins({
-		padding-bottom: @agate-item-side-outset;
 		//// Locally scoped LESS variables ////
 		// Vertically shift the text element to position it closer to the header than the line-height naturally allows
 		@text-vertical-offset: 6px;
@@ -35,6 +34,7 @@
 
 		// Text
 		.label {
+			padding-bottom: @agate-item-side-outset;
 			color: @agate-labeleditem-label-color;
 			line-height: (@agate-item-height / 3);
 			font-size: @agate-item-label-font-size;
