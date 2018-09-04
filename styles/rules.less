@@ -13,7 +13,7 @@
 .applySkins({
 
 	::selection {
-		color: @agate-spotlight-text-color;
+		color: @agate-spotlight-color;
 		background-color: lighten(@agate-spotlight-bg-color, 18%);
 	}
 
@@ -25,15 +25,13 @@
 	// argument to the focus mixin. This allows that set of rules to prevail over this generic set.
 	//// Inherited Spottable rules (for components that aren't directly skinned)
 	.focus({
-		background-color: @agate-button-color;
-		background-image: @agate-gradient;
-		color: @agate-spotlight-text-color;
+		color: @agate-spotlight-color;
+		background-color: @agate-spotlight-bg-color;
 	}, parent);
 	//// Primary spottable rules (for any component with a skin applied to itself)
 	.focus({
-		background-color: @agate-button-color;
-		background-image: @agate-gradient;
-		color: @agate-spotlight-text-color;
+		color: @agate-spotlight-color;
+		background-color: @agate-spotlight-bg-color;
 	});
 
 	// Disabled Components

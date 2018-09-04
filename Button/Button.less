@@ -5,101 +5,100 @@
 @import "../styles/skin.less";
 
 .button {
-	height: @agate-button-height;
-	min-width: @agate-button-height;
-	padding: 0 @agate-button-h-padding;
-	margin: 0 @agate-component-spacing;
-	box-sizing: border-box;
-	font-size: @agate-button-font-size;
-
-	&.minWidth {
-		padding: 0;
-
-		.client .icon {
-			margin: 0;
-		}
-	}
-
-	.bg {
-		background-color: inherit;
-		border-width: @agate-button-border-width;
-		border-style: solid;
-		border-radius: @agate-button-border-radius;
-	}
-
-	.client {
-		padding: @agate-button-border-width;	// We match the amount removed by the line-height above, so the text doesn't overlap the border
-
-		.icon {
-			-webkit-margin-start: 0;
-			// height: 0;
-			// line-height: 0;
-			// margin-top: 0;
-			// margin-bottom: 0;
-		}
-	}
-
-	&.small {
-		height: @agate-button-small-height;
-		min-width: @agate-button-small-height;
-		font-size: @agate-button-small-font-size;
-		line-height: (@agate-button-small-height - (2 * @agate-button-border-width));
-		padding: 0 @agate-button-small-h-padding;
-
-		.client::before {
-			bottom: 12px;
-			left: 18px;
-			right: 18px;
-		}
-	}
-
-	&.grid {
-		.bg {
-			border-radius: 0;
-		}
-	}
-
-	// Button-non-disabled rules
-	&:not([disabled]) {
-		.focus({
-			&.pressed,
-			&:active {
-				.bg {
-					// -webkit-animation-name: expand;
-					// animation-name: expand;
-				}
-			}
-		});
-	}
-
 	.applySkins({
-		.bg {
-			color: @agate-button-color;
-			border-color: @agate-button-color;
-			background-image: @agate-button-bg-image;
+		height: @agate-button-height;
+		min-width: @agate-button-height;
+		padding: 0 @agate-button-h-padding;
+		margin: 0 @agate-component-spacing;
+		box-sizing: border-box;
+		font-size: @agate-button-font-size;
+
+		&.minWidth {
+			padding: 0;
+
+			.client .icon {
+				margin: 0;
+			}
 		}
-		.client {
+
+		.bg {
+			background-color: inherit;
+			border: @agate-button-border-width solid @agate-button-border-color;
+			border-radius: @agate-button-border-radius;
 			color: @agate-button-color;
+			background-image: @agate-button-bg-image;
+			box-shadow: @agate-button-shadow;
+		}
+
+		.client {
+			padding: @agate-button-border-width;	// We match the amount removed by the line-height above, so the text doesn't overlap the border
+			color: @agate-button-color;
+
+			.icon {
+				-webkit-margin-start: 0;
+				// height: 0;
+				// line-height: 0;
+				// margin-top: 0;
+				// margin-bottom: 0;
+			}
+		}
+
+		&.small {
+			height: @agate-button-small-height;
+			min-width: @agate-button-small-height;
+			font-size: @agate-button-small-font-size;
+			line-height: (@agate-button-small-height - (2 * @agate-button-border-width));
+			padding: 0 @agate-button-small-h-padding;
+
+			.client::before {
+				bottom: 12px;
+				left: 18px;
+				right: 18px;
+			}
+		}
+
+		&.grid {
+			.bg {
+				border-radius: 0;
+			}
+		}
+
+		// Button-non-disabled rules
+		&:not([disabled]) {
+			.focus({
+				&.pressed,
+				&:active {
+					.bg {
+						// -webkit-animation-name: expand;
+						// animation-name: expand;
+					}
+				}
+			});
 		}
 
 		&.highlighted {
 			.bg {
-				background-color: @agate-button-color;
-				background-image: @agate-gradient;
+				background-color: @agate-button-focus-bg-color;
+				background-image: @agate-button-focus-bg-image;
 				opacity: 0.4;
+			}
+
+			&,
+			.client {
+				color: @agate-button-focus-color;
 			}
 		}
 
 		.focus({
-			color: @agate-spotlight-text-color;
 			background-color: transparent;
 			background-image: none;
 
 			.bg {
-				background-color: @agate-button-color;
-				background-image: @agate-gradient;
+				background-color: @agate-button-focus-bg-color;
+				background-image: @agate-button-focus-bg-image;
 			}
 
+			&,
 			.client {
 				color: @agate-button-focus-color;
 			}

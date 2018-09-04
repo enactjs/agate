@@ -1,3 +1,4 @@
+import compose from 'ramda/src/compose';
 import FloatingLayer from '@enact/ui/FloatingLayer';
 import {forward} from '@enact/core/handle';
 import kind from '@enact/core/kind';
@@ -5,7 +6,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Transition from '@enact/ui/Transition';
 
+import Skinnable from '../Skinnable';
+
 import componentCss from './Popup.less';
+import {DividerBase, DividerDecorator} from "../Divider";
 
 const forwardHide = forward('onHide');
 
@@ -48,7 +52,20 @@ const PopupBase = kind({
 	}
 });
 
-class Popup extends React.Component {
+/**
+ * Applies Agate specific behaviors to [DividerBase]{@link agate/Divider.DividerBase}.
+ *
+ * @hoc
+ * @memberof agate/Divider
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
+
+const PopupDecorator = compose(
+	Skinnable
+);
+
+class PopupState extends React.Component {
 	static propTypes = {
 		noAnimation: PropTypes.bool,
 		noAutoDismiss: PropTypes.bool,
@@ -125,6 +142,8 @@ class Popup extends React.Component {
 		);
 	}
 }
+
+const Popup = PopupDecorator(PopupState);
 
 export default Popup;
 export {Popup, PopupBase};

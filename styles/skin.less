@@ -2,9 +2,18 @@
 //
 
 .applySkins(@componentRules) when (isruleset(@componentRules)) {
-	&:global(.agate) {
+	&:global(.carbon) {
 		// Load the main/default agate rules into this scope
-		@import "./colors.less";
+		@import "./colors-carbon.less";
+		@import "./variables-carbon.less";
+
+		@componentRules();
+	}
+
+	&:global(.titanium) {
+		// Load the main/default agate rules into this scope
+		@import "./colors-titanium.less";
+		@import "./variables-titanium.less";
 
 		@componentRules();
 	}
