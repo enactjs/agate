@@ -1,13 +1,12 @@
 /**
- * Agate styled button components and behaviors.
+ * Moonstone styled input components.
  *
  * @example
- * <Input small>Hello Enact!</Input>
+ * <Input placeholder="Enter text here" />
  *
- * @module agate/Input
+ * @module moonstone/Input
  * @exports Input
  * @exports InputBase
- * @exports InputDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -18,47 +17,194 @@ import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-// import $L from '@enact/internal/$L';
+// import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
-// import Tooltip from '@enact/TooltipDecorator/Tooltip';
 
 import componentCss from './Input.less';
-// import InputDecoratorIcon from '@enact/moonstone/InputDecoratorIcon';
-// import InputSpotlightDecorator from '@enact/moonstone/InputSpotlightDecorator';
-import {extractAriaProps, extractInputProps} from '@enact/core/util';
+import InputDecoratorIcon from './InputDecoratorIcon';
+import InputSpotlightDecorator from './InputSpotlightDecorator';
+import {extractInputProps} from './util';
 
-/**
- * A button component.
- *
- * This component is most often not used directly but may be composed within another component as it
- * is within [Input]{@link agate/Input.Input}.
- *
- * @class InputBase
- * @memberof agate/Input
- * @extends ui/Input.InputBase
- * @ui
- * @public
- */
 const InputBase = kind({
 	name: 'Input',
 
-	propTypes: {
+	propTypes: /** @lends moonstone/Input.InputBase.prototype */ {
+
+		// TODO: Document voice control props and make public
+		'data-webos-voice-group-label': PropTypes.string,
+		'data-webos-voice-intent': PropTypes.string,
+		'data-webos-voice-label': PropTypes.string,
+
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal Elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `decorator` - The root class name
+		 * * `input` - The <input> class name
+		 *
+		 * @type {Object}
+		 * @private
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * Disables Input and becomes non-interactive.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		disabled: PropTypes.bool,
+
+		/**
+		 * Blurs the input when the "enter" key is pressed.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		dismissOnEnter: PropTypes.bool,
+
+		/**
+		 * Adds a `focused` class to the input decorator.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		focused: PropTypes.bool,
+
+		/**
+		 * The icon to be placed at the end of the input.
+		 *
+		 * @see {@link moonstone/Icon.Icon}
+		 * @type {String}
+		 * @public
+		 */
 		iconAfter: PropTypes.string,
+
+		/**
+		 * The icon to be placed at the beginning of the input.
+		 *
+		 * @see {@link moonstone/Icon.Icon}
+		 * @type {String}
+		 * @public
+		 */
 		iconBefore: PropTypes.string,
+
+		/**
+		 * Indicates [value]{@link moonstone/Input.InputBase.value} is invalid and shows
+		 * [invalidMessage]{@link moonstone/Input.InputBase.invalidMessage}, if set.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		invalid: PropTypes.bool,
+
+		/**
+		 * The tooltip text to be displayed when the input is
+		 * [invalid]{@link moonstone/Input.InputBase.invalid}.
+		 *
+		 * If this value is *falsy*, the tooltip will not be shown.
+		 *
+		 * @type {String}
+		 * @default ''
+		 * @public
+		 */
 		invalidMessage: PropTypes.string,
+
+		/**
+		 * Called when blurred.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
 		onBlur: PropTypes.func,
+
+		/**
+		 * Called when the input value is changed.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
 		onChange: PropTypes.func,
+
+		/**
+		 * Called when clicked.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
 		onClick: PropTypes.func,
+
+		/**
+		 * Called when focused.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
 		onFocus: PropTypes.func,
+
+		/**
+		 * Called when a key is pressed down.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
 		onKeyDown: PropTypes.func,
+
+		/**
+		 * Text to display when [value]{@link moonstone/Input.InputBase.value} is not set.
+		 *
+		 * @type {String}
+		 * @default ''
+		 * @public
+		 */
 		placeholder: PropTypes.string,
+
+		/**
+		 * Indicates the content's text direction is right-to-left.
+		 *
+		 * @type {Boolean}
+		 * @private
+		 */
 		rtl: PropTypes.bool,
+
+		/**
+		 * Applies the `small` CSS class.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		small: PropTypes.bool,
+
+		/**
+		 * The type of input.
+		 *
+		 * Accepted values correspond to the standard HTML5 input types.
+		 *
+		 * @type {String}
+		 * @see [MDN input types doc]{@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types}
+		 * @default 'text'
+		 * @public
+		 */
 		type: PropTypes.string,
+
+		/**
+		 * The value of the input.
+		 *
+		 * @type {String|Number}
+		 * @public
+		 */
 		value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 	},
 
@@ -85,39 +231,27 @@ const InputBase = kind({
 	},
 
 	computed: {
-		'aria-label': ({placeholder, type, value}) => {
-			const title = (value == null || value === '') ? placeholder : '';
-			return extractAriaProps(title, type, value);
-		},
-		className: ({focused, invalid, small, styler}) => styler.append({focused, invalid, small}),
-		dir: ({value, placeholder}) => isRtlText(value || placeholder) ? 'rtl' : 'ltr',
-		// invalidTooltip: ({css, invalid, invalidMessage = $L('Please enter a valid value.'), rtl}) => {
-		// 	if (invalid && invalidMessage) {
-		// 		const direction = rtl ? 'left' : 'right';
-		// 		return (
-		// 			<Tooltip arrowAnchor="top" className={css.invalidTooltip} direction={direction}>
-		// 				{invalidMessage}
-		// 			</Tooltip>
-		// 		);
-		// 	}
+		// 'aria-label': ({placeholder, type, value}) => {
+		// 	const title = (value == null || value === '') ? placeholder : '';
+		// 	return calcAriaLabel(title, type, value);
 		// },
+		className: ({focused, invalid, small, styler}) => styler.append({focused, invalid, small}),
 		// ensure we have a value so the internal <input> is always controlled
 		value: ({value}) => typeof value === 'number' ? value : (value || '')
 	},
 
-
-	render: ({css, dir, disabled, iconAfter, iconBefore, onChange, placeholder, small, type, value, 'data-webos-voice-group-label': voiceGroupLabel, 'data-webos-voice-intent' : voiceIntent, 'data-webos-voice-label': voiceLabel, ...rest}) => {
-		// const inputProps = extractInputProps(rest);
+	render: ({css, dir, disabled, onChange, placeholder, small, type, value, 'data-webos-voice-group-label': voiceGroupLabel, 'data-webos-voice-intent' : voiceIntent, 'data-webos-voice-label': voiceLabel, ...rest}) => {
+		const inputProps = extractInputProps(rest);
 		delete rest.dismissOnEnter;
 		delete rest.focused;
 		delete rest.invalid;
 		delete rest.invalidMessage;
 		delete rest.rtl;
-
+		console.log(css);
 		return (
 			<div {...rest} disabled={disabled}>
 				<input
-					// {...inputProps}
+					{...inputProps}
 					aria-disabled={disabled}
 					className={css.input}
 					data-webos-voice-group-label={voiceGroupLabel}
@@ -131,25 +265,126 @@ const InputBase = kind({
 					type={type}
 					value={value}
 				/>
+				<InputDecoratorIcon position="after" small>closex</InputDecoratorIcon>
 			</div>
 		);
 	}
 });
 
+/**
+ * A Spottable, Moonstone styled input component with embedded icon support.
+ *
+ * By default, `Input` maintains the state of its `value` property. Supply the `defaultValue`
+ * property to control its initial value. If you wish to directly control updates to the component,
+ * supply a value to `value` at creation time and update it in response to `onChange` events.
+ *
+ * @class Input
+ * @memberof moonstone/Input
+ * @extends moonstone/Input.InputBase
+ * @mixes ui/Changeable.Changeable
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes moonstone/Skinnable.Skinnable
+ * @ui
+ * @public
+ */
 const Input = Pure(
 	I18nContextDecorator(
 		{rtlProp: 'rtl'},
 		Changeable(
-			Skinnable(
-				InputBase
+			InputSpotlightDecorator(
+				Skinnable(
+					InputBase
+				)
 			)
 		)
 	)
 );
 
+/**
+ * Focuses the internal input when the component gains 5-way focus.
+ *
+ * By default, the internal input is not editable when the component is focused via 5-way and must
+ * be selected to become interactive. In pointer mode, the input will be editable when clicked.
+ *
+ * @name autoFocus
+ * @memberof moonstone/Input.Input.prototype
+ * @type {Boolean}
+ * @default false
+ * @public
+ */
+
+/**
+ * Applies a disabled style and prevents interacting with the component.
+ *
+ * @name disabled
+ * @memberof moonstone/Input.Input.prototype
+ * @type {Boolean}
+ * @default false
+ * @public
+ */
+
+/**
+ * Sets the initial value.
+ *
+ * @name defaultValue
+ * @memberof moonstone/Input.Input.prototype
+ * @type {String}
+ * @public
+ */
+
+/**
+ * Blurs the input when the "enter" key is pressed.
+ *
+ * @name dismissOnEnter
+ * @memberof moonstone/Input.Input.prototype
+ * @type {Boolean}
+ * @default false
+ * @public
+ */
+
+/**
+ * Called when the internal input is focused.
+ *
+ * @name onActivate
+ * @memberof moonstone/Input.Input.prototype
+ * @type {Function}
+ * @param {Object} event
+ * @public
+ */
+
+/**
+ * Called when the internal input loses focus.
+ *
+ * @name onDeactivate
+ * @memberof moonstone/Input.Input.prototype
+ * @type {Function}
+ * @param {Object} event
+ * @public
+ */
+
+/**
+ * Called when the component is removed when it had focus.
+ *
+ * @name onSpotlightDisappear
+ * @memberof moonstone/Input.Input.prototype
+ * @type {Function}
+ * @param {Object} event
+ * @public
+ */
+
+/**
+ * Disables spotlight navigation into the component.
+ *
+ * @name spotlightDisabled
+ * @memberof moonstone/Input.Input.prototype
+ * @type {Boolean}
+ * @default false
+ * @public
+ */
+
 export default Input;
 export {
-	extractAriaProps,
+	// calcAriaLabel,
 	extractInputProps,
 	Input,
 	InputBase

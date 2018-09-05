@@ -1,175 +1,159 @@
 // Input.less
 //
-@import "../styles/mixins.less";
-@import "../styles/variables.less";
 @import "../styles/skin.less";
-@import "../styles/fonts.less";
-
-.input {
-	padding: 0;
-	border: 0;
-	cursor: pointer;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	flex-grow: 1;
-	text-indent: 0.2em;
-
-	&[type=number] {
-		-moz-appearance: textfield;
-
-		&::-webkit-inner-spin-button,
-		&::-webkit-outer-spin-button {
-			-webkit-appearance: none;
-		}
-
-		&:hover {
-			-moz-appearance: none;
-		}
-	}
-
-	&[placeholder] {
-		text-overflow: ellipsis;
-	}
-
-	.input-placeholder({
-		.vendor-opacity(1);
-	});
-
-	.focus ({
-		cursor: text;
-	});
-
-	.disabled({
-		cursor: default;
-	});
-
-	:global(.enact-locale-right-to-left) & {
-		text-align: right;
-	}
-}
 
 .decorator {
-	display: inline-flex;
-	position: relative;
-	// padding: @moon-input-padding (@moon-input-height / 2);
-	border-radius: 1008px;
-	// margin: 0 (@moon-spotlight-outset / 2);
-	// border: @moon-input-border-width solid transparent;
-	box-sizing: border-box;
-	vertical-align: middle;
-
-	.input,
-	.iconBefore,
-	.iconAfter {
-		// line-height: @moon-input-height;
-		// height: @moon-input-height;
-		vertical-align: middle;
-	}
-
-	&.small {
-		// padding: 0 (@moon-input-small-height / 2);
-
-		.iconBefore,
-		.iconAfter {
-			// line-height: @moon-input-small-height;
-			// height: @moon-input-small-height;
-		}
-
-		.input {
-			// font-size: @moon-input-small-font-size;
-			// height: @moon-input-small-height;
-		}
-	}
-
-	.iconBefore,
-	.iconAfter {
-		flex: 0 0;
-	}
-
-	.iconAfter {
-		// .padding-start-end(@moon-input-icon-spacing, 0);
-	}
-
-	.iconBefore {
-		// .padding-start-end(0, @moon-input-icon-spacing);
-	}
-
-	// RIGBY NOTE: multiline is a NOT YET IMPLEMENTED feature that combines <input> and <textarea>
-	// into one control, to simplify input handling.
-	&.multiline {
-		display: block;
-		padding: 12px 18px;
-		border-radius: 12px;
-	}
-
-	// an Input that isn't spottable is behaviorly disabled but not visually
-	&:not(:global(.spottable)) .input {
-		pointer-events: none;
-	}
-
-	.decoratorIcon,
-	&:global(.spottable):focus .decoratorIcon {
-		width: auto;
-		margin: 0;
-	}
-
-	// Skin colors
 	.applySkins({
+		display: inline-flex;
+		position: relative;
+		margin: 0 (@agate-spotlight-outset / 2);
+		border: @agate-input-border-width solid transparent;
+		box-sizing: border-box;
+		vertical-align: middle;
 
 		.input {
+			padding: @agate-input-padding;
+			cursor: pointer;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			flex-grow: 1;
+			text-indent: 0.2em;
+			font-size: @agate-input-font-size;
+			font-weight: @agate-input-font-weight;
+
+			border: unset;
+	    border-bottom: 0.08333rem solid gray;
+			// color: inherit;
 			background: transparent;
-			// color: @moon-input-text-color;
+			color: @agate-text-color;
 
 			&::selection {
-				// color: @moon-spotlight-text-color;
-				// background-color: @moon-spotlight-bg-color;
+				color: @agate-spotlight-color;
+				background-color: @agate-spotlight-bg-color;
 			}
 
-			.input-placeholder({
-				// color: @moon-input-placeholder-color;
-			});
+			// .input-placeholder({
+			// 	color: @agate-input-placeholder-color;
+			// });
 
-			.focus({
-				// color: @moon-input-text-color;
-				background-color: inherit;
-			});
+			// .focus({
+			// 	color: @agate-text-color;
+			// 	background-color: inherit;
+			// });
+			&[type=number] {
+				-moz-appearance: textfield;
+
+				&::-webkit-inner-spin-button,
+				&::-webkit-outer-spin-button {
+					-webkit-appearance: none;
+				}
+
+				&:hover {
+					-moz-appearance: none;
+				}
+			}
+
+			&[placeholder] {
+				text-overflow: ellipsis;
+			}
+			//
+			// .input-placeholder({
+			// 	.vendor-opacity(1);
+			// });
+			//
+			// .focus ({
+			// 	cursor: text;
+			// });
+			//
+			// .disabled({
+			// 	cursor: default;
+			// });
+
+			:global(.enact-locale-right-to-left) & {
+				text-align: right;
+			}
 		}
 
-		&.invalid input {
-			// color: @moon-red;
+		.input,
+		.icon {
+			line-height: @agate-input-height;
+			height: @agate-input-height;
+			vertical-align: middle;
+			margin: 0;
 		}
 
-		&:global(.spottable):focus {
-			// color: @moon-input-text-color;
-			// border-color: @moon-spotlight-border-color;
-			// background-color: @moon-input-decorator-bg-color;
+		// &.small {
+		// 	padding: 0 (@agate-input-small-height / 2);
+		//
+		// 	.icon {
+		// 		line-height: @agate-input-small-height;
+		// 		height: @agate-input-small-height;
+		// 	}
+		//
+		// 	.input {
+		// 		font-size: @agate-item-font-size;
+		// 		height: @agate-item-small-height;
+		// 	}
+		// }
+
+		.icon {
+			flex: 0 0;
+			// .padding-start-end(@agate-input-icon-spacing, 0);
 		}
 
-		&.focused {
-			// border-color: @moon-active-border-color;
+		// RIGBY NOTE: multiline is a NOT YET IMPLEMENTED feature that combines <input> and <textarea>
+		// into one control, to simplify input handling.
+		&.multiline {
+			display: block;
+			padding: 12px 18px;
+		}
+
+		// an Input that isn't spottable is behaviorly disabled but not visually
+		&:not(:global(.spottable)) .input {
+			pointer-events: none;
 		}
 
 		.decoratorIcon,
 		&:global(.spottable):focus .decoratorIcon {
-			// color: @moon-input-text-color;
+			width: auto;
+			margin: 0;
+		}
+
+		&.invalid input {
+			// color: @agate-red;
+		}
+
+		&:global(.spottable):focus {
+			color: @agate-text-color;
+			border-color: @agate-spotlight-border-color;
+			// background-color: @agate-input-decorator-bg-color;
+		}
+
+		&.focused {
+			border-color: @agate-background-focus;
+		}
+
+		.decoratorIcon,
+		&:global(.spottable):focus .decoratorIcon {
+			color: @agate-text-color;
 		}
 	});
 }
+	// .invalidTooltip {
+	// 	top: 50%;
+	// 	left: auto;
+	// 	right: 0;
+	// 	pointer-events: none;
+	// 	transform: translate(100%, -100%) translateX(@agate-input-tooltip-offset);
+	//
+	// 	:global(.enact-locale-right-to-left) & {
+	// 		left: 0;
+	// 		right: auto;
+	// 		transform: translate(-100%, -100%) translateX(-@agate-input-tooltip-offset);
+	// 	}
+	// }
 
-.invalidTooltip {
-	top: 50%;
-	left: auto;
-	right: 0;
-	pointer-events: none;
-	// transform: translate(100%, -100%) translateX(@moon-input-tooltip-offset);
-
-	:global(.enact-locale-right-to-left) & {
-		left: 0;
-		right: auto;
-		// transform: translate(-100%, -100%) translateX(-@moon-input-tooltip-offset);
-	}
-}
 //
 // .muted({
 // 	.decorator {
@@ -183,7 +167,7 @@
 // 			}
 //
 // 			.focus({
-				// background-color: @moon-input-decorator-bg-color;
+				// background-color: @agate-input-decorator-bg-color;
 // 				border-color: transparent;
 // 			});
 // 		});
