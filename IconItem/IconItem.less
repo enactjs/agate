@@ -6,24 +6,14 @@
 // @import '../styles/colors.less';
 @import '../styles/skin.less';
 
-.labeledItem {
+.iconItem {
 	display: flex;
+	width: 100%;
+	align-items: center;
 
-	flex-wrap: wrap;	// Allow the label to fall on the next line
-
-	// Header
-	.text {
-		display: flex;
-		width: 100%;
-		align-items: center;
-
-		.title {
-			overflow: hidden;
-		}
-		.icon {
-			margin-top: 0;
-			margin-bottom: 0;
-		}
+	.icon {
+		margin-top: 0;
+		margin-bottom: 0;
 	}
 
 	.applySkins({
@@ -32,10 +22,14 @@
 		@text-vertical-offset: 6px;
 		padding-right: @agate-item-side-outset;
 
+		.icon {
+			font-size: @agate-icon-font-size * 5;
+		}
+
 		// Text
 		.label {
 			padding-bottom: @agate-item-side-outset;
-			color: @agate-labeleditem-label-color;
+			color: @agate-text-color;
 			line-height: (@agate-item-height / 3);
 			font-size: @agate-item-label-font-size;
 		}
@@ -45,5 +39,11 @@
 				padding-bottom: 3px;
 			}
 		}
+
+		.focus({
+			.icon {
+				color: white;
+			}
+		});
 	});
 }

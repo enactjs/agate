@@ -1,44 +1,32 @@
 /**
- * Agate styled item with a label below.
+ * Agate styled item with an icon and a label below.
  *
  * @example
- * <LabeledItem label="Label">Hello LabeledItem</LabeledItem>
+ * <IconItem icon="plus" label="Label">Hello IconItem</IconItem>
  *
- * @module agate/LabeledItem
- * @exports LabeledItem
- * @exports LabeledItemBase
+ * @module agate/IconItem
+ * @exports IconItem
+ * @exports IconItemBase
  */
 
 import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
-import compose from 'ramda/src/compose';
 import Pure from '@enact/ui/internal/Pure';
-import Touchable from '@enact/ui/Touchable';
-import Spottable from '@enact/spotlight/Spottable';
-import {Marquee, MarqueeController} from '@enact/moonstone/Marquee';
+import SlotItem from '@enact/ui/SlotItem';
+import Item from '@enact/ui/Item';
 
 import Icon from '../Icon';
-import {ItemBase} from '../Item';
-import Skinnable from '../Skinnable';
+import {LabeledItem} from '../LabeledItem';
 
-const Controller = MarqueeController(
-	{marqueeOnFocus: true},
-	Touchable(
-		Spottable(
-			ItemBase
-		)
-	)
-);
-
-import componentCss from './LabeledItem.less';
+import componentCss from './IconItem.less';
 
 /**
  * A focusable component that combines marquee-able text content with a synchronized
  * marquee-able text label.
  *
- * @class LabeledItemBase
- * @memberof agate/LabeledItem
+ * @class IconItemBase
+ * @memberof agate/IconItem
  * @extends agate/Item.ItemBase
  * @mixes spotlight/Spottable.Spottable
  * @mixes ui/Touchable.Touchable
@@ -46,10 +34,10 @@ import componentCss from './LabeledItem.less';
  * @ui
  * @public
  */
-const LabeledItemBase = kind({
-	name: 'LabeledItem',
+const IconItemBase = kind({
+	name: 'IconItem',
 
-	propTypes: /** @lends agate/LabeledItem.LabeledItemBase.prototype */ {
+	propTypes: /** @lends agate/IconItem.IconItemBase.prototype */ {
 		/**
 		 * The node to be displayed as the main content of the item.
 		 *
@@ -58,6 +46,14 @@ const LabeledItemBase = kind({
 		 * @public
 		 */
 		children: PropTypes.node.isRequired,
+
+		/**
+		 * The icon to be displayed on the left.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		icon: PropTypes.string.isRequired,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -102,35 +98,40 @@ const LabeledItemBase = kind({
 	styles: {
 		css: componentCss,
 		className: 'labeledItem',
-		publicClassNames: ['labeledItem', 'icon', 'label']
+		publicClassNames: ['iconItem', 'icon', 'label']
 	},
 
-	render: ({children, css, disabled, label, titleIcon, ...rest}) => (
-		<Controller disabled={disabled} {...rest} css={css}>
-			<div className={css.text}>
-				<Marquee disabled={disabled} className={css.title}>{children}</Marquee>
-				{(titleIcon != null) ? <Icon small className={css.icon}>{titleIcon}</Icon> : null}
-			</div>
-			{(label != null) ? <Marquee disabled={disabled} className={css.label}>{label}</Marquee> : null}
-		</Controller>
+	render: ({children, css, disabled, icon, label, titleIcon, ...rest}) => (
+		<SlotItem
+			component={Item}
+			disabled={disabled}
+			slotBefore={<Icon className={css.icon}>{icon}</Icon>}
+			{...rest}
+		>
+			<LabeledItem
+				css={css}
+
+				label={label}
+				titleIcon={titleIcon}
+			>
+				{children}
+			</LabeledItem>
+		</SlotItem>
 	)
 });
-
-const LabeledItemDecorator = compose(
-	Pure,
-	Skinnable
-);
 
 /**
  * A Agate styled labeled item with built-in support for marqueed text.
  *
- * @class LabeledItem
- * @memberof agate/LabeledItem
- * @extends agate/LabeledItem.LabeledItemBase
+ * @class IconItem
+ * @memberof agate/IconItem
+ * @extends agate/IconItem.IconItemBase
  * @ui
  * @public
  */
-const LabeledItem = LabeledItemDecorator(LabeledItemBase);
+const IconItem = Pure(
+	IconItemBase
+);
 
-export default LabeledItem;
-export {LabeledItem, LabeledItemBase};
+export default IconItem;
+export {IconItem, IconItemBase};
