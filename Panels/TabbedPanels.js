@@ -64,7 +64,7 @@ const TabGroupBase = kind({
 
 		return (
 
-			<Layout orientation={rest.orientation} className={className} align="center" style={style}>
+			<Layout orientation={rest.orientation} className={className} align="stretch" style={style}>
 				{beforeTabs ? <Cell shrink>
 					{beforeTabs}
 				</Cell> : null}
@@ -133,18 +133,18 @@ const TabbedPanelsBase = kind({
 	render: ({afterTabs, beforeTabs, children, css, index, onSelect, tabOrientation, tabPosition, tabs, ...rest}) => {
 		return (
 			<Layout {...rest}>
-				<Cell
-					afterTabs={afterTabs}
-					beforeTabs={beforeTabs}
-					className={css.tabs}
-					component={TabGroup}
-					onSelect={onSelect}
-					orientation={tabOrientation}
-					tabPosition={tabPosition}
-					selected={index}
-					shrink
-				>
-					{tabs}
+				<Cell shrink>
+					<TabGroup
+						afterTabs={afterTabs}
+						beforeTabs={beforeTabs}
+						className={css.tabs}
+						onSelect={onSelect}
+						orientation={tabOrientation}
+						tabPosition={tabPosition}
+						selected={index}
+					>
+						{tabs}
+					</TabGroup>
 				</Cell>
 				<Cell
 					className={css.panels}

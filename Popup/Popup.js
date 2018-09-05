@@ -38,7 +38,7 @@ const PopupBase = kind({
 		className: 'popup'
 	},
 	computed: {
-		className: ({closeButton, styler}) => styler.append({withCloseButton: closeButton})
+		className: ({closeButton, title, styler}) => styler.append({withCloseButton: closeButton, withTitle: title})
 	},
 	render: ({buttons, children, closeButton, css, noAnimation, onCloseButtonClick, onHide, open, title, ...rest}) => {
 		// delete rest.onCloseButtonClick;
@@ -72,7 +72,7 @@ const PopupBase = kind({
 								/> : null}
 								{title ? <Divider className={css.title}>{title}</Divider> : null}
 								<Layout orientation={wideLayout ? 'horizontal' : 'vertical'} className={css.body}>
-									<Cell shrink={!wideLayout} className={css.content + (title ? '' + css.withTitle : '')}>
+									<Cell shrink={!wideLayout} className={css.content}>
 										{children}
 									</Cell>
 									{buttons ? <Cell shrink className={css.buttons}>
