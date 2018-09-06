@@ -58,16 +58,36 @@ const SwitchItemBase = kind({
 		icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 
 		/**
+		 * Customize the text displayed with the switch is "off".
+		 *
+		 * @type {String}
+		 * @default 'off'
+		 * @public
+		 */
+		offText: PropTypes.string,
+
+		/**
+		 * Customize the text displayed with the switch is "on".
+		 *
+		 * @type {String}
+		 * @default 'on'
+		 * @public
+		 */
+		onText: PropTypes.string,
+
+		/**
 		 * If true the switch will be selected.
 		 *
 		 * @type {Boolean}
-		 * @default false {@link agate/Switch.Switch}
+		 * @default false
 		 * @public
 		 */
 		selected: PropTypes.bool
 	},
 
 	defaultProps: {
+		offText: 'off',
+		onText: 'on',
 		selected: false
 	},
 
@@ -80,7 +100,7 @@ const SwitchItemBase = kind({
 		icon: ({css, icon}) => (icon ? <Icon small className={css.icon}>{icon}</Icon> : null)
 	},
 
-	render: ({children, css, icon, selected, ...rest}) => {
+	render: ({children, css, icon, offText, onText, selected, ...rest}) => {
 
 		return (
 			<div {...rest} css={css}>
@@ -91,7 +111,7 @@ const SwitchItemBase = kind({
 					{children}
 				</div>
 				<div>
-					{selected ? 'on' : 'off'}
+					{selected ? onText : offText}
 				</div>
 				<AgateSwitch selected={selected} className={css.switchIcon} />
 			</div>
