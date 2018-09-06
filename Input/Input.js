@@ -247,7 +247,7 @@ const InputBase = kind({
 		delete rest.invalid;
 		delete rest.invalidMessage;
 		delete rest.rtl;
-		console.log(css);
+
 		return (
 			<div {...rest} disabled={disabled}>
 				<input
@@ -265,7 +265,7 @@ const InputBase = kind({
 					type={type}
 					value={value}
 				/>
-				<InputDecoratorIcon position="after" small>closex</InputDecoratorIcon>
+				<InputDecoratorIcon className={css.icon} position="after" small>\u232B</InputDecoratorIcon>
 			</div>
 		);
 	}
