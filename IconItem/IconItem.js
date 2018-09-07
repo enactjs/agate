@@ -97,7 +97,7 @@ const IconItemBase = kind({
 
 	styles: {
 		css: componentCss,
-		className: 'labeledItem',
+		className: 'iconItem',
 		publicClassNames: ['iconItem', 'icon', 'label']
 	},
 
@@ -109,6 +109,7 @@ const IconItemBase = kind({
 			{...rest}
 		>
 			<LabeledItem
+				className={css.label}
 				css={css}
 
 				label={label}
