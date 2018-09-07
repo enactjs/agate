@@ -222,7 +222,7 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 
 		onFocus = (ev) => {
 			forwardFocus(ev, this.props);
-			console.log('focused');
+
 			// when in autoFocus mode, focusing the decorator directly will cause it to
 			// forward the focus onto the <input>
 			if (!isBubbling(ev) && (this.props.autoFocus && this.state.focused === null && !Spotlight.getPointerMode())) {

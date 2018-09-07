@@ -39,7 +39,7 @@ const InputDecoratorIconBase = kind({
 
 	styles: {
 		css,
-		className: 'decoratorIcon'
+		className: 'icon'
 	},
 
 	computed: {

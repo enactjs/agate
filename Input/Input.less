@@ -7,7 +7,7 @@
 		display: inline-flex;
 		position: relative;
 		margin: 0 (@agate-spotlight-outset / 2);
-		border: @agate-input-border-width solid transparent;
+		border-bottom: @agate-input-border-width solid @agate-input-decorator-border-color;
 		box-sizing: border-box;
 		vertical-align: middle;
 
@@ -23,8 +23,6 @@
 			font-weight: @agate-input-font-weight;
 
 			border: unset;
-	    border-bottom: 0.08333rem solid gray;
-			// color: inherit;
 			background: transparent;
 			color: @agate-text-color;
 
@@ -33,14 +31,6 @@
 				background-color: @agate-spotlight-bg-color;
 			}
 
-			// .input-placeholder({
-			// 	color: @agate-input-placeholder-color;
-			// });
-
-			// .focus({
-			// 	color: @agate-text-color;
-			// 	background-color: inherit;
-			// });
 			&[type=number] {
 				-moz-appearance: textfield;
 
@@ -57,18 +47,6 @@
 			&[placeholder] {
 				text-overflow: ellipsis;
 			}
-			//
-			// .input-placeholder({
-			// 	.vendor-opacity(1);
-			// });
-			//
-			// .focus ({
-			// 	cursor: text;
-			// });
-			//
-			// .disabled({
-			// 	cursor: default;
-			// });
 
 			:global(.enact-locale-right-to-left) & {
 				text-align: right;
@@ -83,93 +61,47 @@
 			margin: 0;
 		}
 
-		// &.small {
-		// 	padding: 0 (@agate-input-small-height / 2);
-		//
-		// 	.icon {
-		// 		line-height: @agate-input-small-height;
-		// 		height: @agate-input-small-height;
-		// 	}
-		//
-		// 	.input {
-		// 		font-size: @agate-item-font-size;
-		// 		height: @agate-item-small-height;
-		// 	}
-		// }
-
 		.icon {
 			flex: 0 0;
-			// .padding-start-end(@agate-input-icon-spacing, 0);
+			width: auto;
+			margin: 0;
+
+			&.iconBefore {
+				margin-left: (@agate-spotlight-outset / 2);
+			}
+
+			&.iconAfter {
+				margin-right: (@agate-spotlight-outset / 2);
+			}
 		}
 
-		// RIGBY NOTE: multiline is a NOT YET IMPLEMENTED feature that combines <input> and <textarea>
-		// into one control, to simplify input handling.
-		&.multiline {
-			display: block;
-			padding: 12px 18px;
-		}
+		// Spotlight Colors
 
 		// an Input that isn't spottable is behaviorly disabled but not visually
 		&:not(:global(.spottable)) .input {
 			pointer-events: none;
 		}
 
-		.decoratorIcon,
-		&:global(.spottable):focus .decoratorIcon {
-			width: auto;
-			margin: 0;
-		}
-
-		&.invalid input {
-			// color: @agate-red;
-		}
-
+		&.focused,
 		&:global(.spottable):focus {
-			color: @agate-text-color;
-			border-color: @agate-spotlight-border-color;
-			// background-color: @agate-input-decorator-bg-color;
+			background-color: inherit;
+			border-bottom-color: @agate-input-decorator-focused-border-color;
+			border-radius: 3px;
+
+			.icon,
+			.input {
+				color: @agate-input-focused-text-color;
+			}
 		}
 
 		&.focused {
-			border-color: @agate-background-focus;
-		}
+			background-color: @agate-input-active-background-color;
+			border-radius: 3px;
 
-		.decoratorIcon,
-		&:global(.spottable):focus .decoratorIcon {
-			color: @agate-text-color;
+			.icon,
+			.input {
+				color: @agate-input-active-text-color;
+			}
 		}
 	});
 }
-	// .invalidTooltip {
-	// 	top: 50%;
-	// 	left: auto;
-	// 	right: 0;
-	// 	pointer-events: none;
-	// 	transform: translate(100%, -100%) translateX(@agate-input-tooltip-offset);
-	//
-	// 	:global(.enact-locale-right-to-left) & {
-	// 		left: 0;
-	// 		right: auto;
-	// 		transform: translate(-100%, -100%) translateX(-@agate-input-tooltip-offset);
-	// 	}
-	// }
-
-//
-// .muted({
-// 	.decorator {
-// 		.applySkins({
-// 			&:global(.spottable):focus {
-// 				border-color: transparent;
-// 			}
-//
-// 			&.focused {
-// 				border-color: transparent;
-// 			}
-//
-// 			.focus({
-				// background-color: @agate-input-decorator-bg-color;
-// 				border-color: transparent;
-// 			});
-// 		});
-// 	}
-// });
