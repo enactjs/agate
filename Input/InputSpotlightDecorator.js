@@ -29,10 +29,10 @@ const handleKeyDown = handle(
 
 /**
  * A higher-order component that manages the
- * spotlight behavior for an {@link moonstone/Input.Input}
+ * spotlight behavior for an {@link agate/Input.Input}
  *
  * @class InputSpotlightDecorator
- * @memberof moonstone/Input/InputSpotlightDecorator
+ * @memberof agate/Input/InputSpotlightDecorator
  * @hoc
  * @private
  */
@@ -46,7 +46,7 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 	return class extends React.Component {
 		static displayName = 'InputSpotlightDecorator';
 
-		static propTypes = /** @lends moonstone/Input/InputSpotlightDecorator.InputSpotlightDecorator.prototype */ {
+		static propTypes = /** @lends agate/Input/InputSpotlightDecorator.InputSpotlightDecorator.prototype */ {
 			/**
 			 * Focuses the <input> when the decorator is focused via 5-way.
 			 *

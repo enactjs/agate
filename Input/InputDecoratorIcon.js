@@ -9,17 +9,17 @@ import Icon from '../Icon';
 import css from './Input.less';
 
 /**
- * The stateless functional base component for {@link moonstone/Input.InputDecoratorIcon}.
+ * The stateless functional base component for {@link agate/Input.InputDecoratorIcon}.
  *
  * @class InputDecoratorIconBase
- * @memberof moonstone/Input
+ * @memberof agate/Input
  * @ui
  * @private
  */
 const InputDecoratorIconBase = kind({
 	name: 'InputDecoratorIcon',
 
-	propTypes: /** @lends moonstone/Input.InputDecoratorIconBase.prototype */ {
+	propTypes: /** @lends agate/Input.InputDecoratorIconBase.prototype */ {
 		/**
 		 * The position of the icon. Either `before` or `after`.
 		 *
@@ -31,7 +31,7 @@ const InputDecoratorIconBase = kind({
 		/**
 		 * The icon to be displayed.
 		 *
-		 * @see {@link moonstone/Icon.Icon#children}
+		 * @see {@link agate/Icon.Icon#children}
 		 * @type {String|Object}
 		 */
 		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
@@ -58,10 +58,10 @@ const InputDecoratorIconBase = kind({
 });
 
 /**
- * An icon displayed either before or after the input field of an {@link moonstone/Input.Input}.
+ * An icon displayed either before or after the input field of an {@link agate/Input.Input}.
  *
  * @class InputDecoratorIcon
- * @memberof moonstone/Input
+ * @memberof agate/Input
  * @ui
  * @private
  */
