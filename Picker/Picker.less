@@ -11,21 +11,25 @@
 	justify-content: center;
 	width: 70px;
 	font-weight: 500;
-	font-size: 30px;
+	font-size: 24px;
 
-	.item{
+	.item {
 		color: inherit;
 		width: 100%;
 		line-height: 40px;
 		height: 40px;
 		text-align: center;
+		&.currentIndex{
+			height: 60px;
+			line-height: 60px;
+			font-size: 36px;
+		}
 	}
 
 	.applySkins({
 		.item {
 			&.currentIndex{
-				background-color: rgba(209, 208, 208, 0.2);
-				// background-color: @agate-sliderbutton-bg-color;
+				background-color: @agate-sliderbutton-bg-color;
 			}
 		}
 	}); 

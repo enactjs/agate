@@ -55,10 +55,10 @@ class PickerBase extends Component {
 	}
 
 	render () {
-		const values = this.props.children;
+		const {children: values, className, ...rest} = this.props;
 
 		return (
-			<TouchableDiv className={css.picker} onFlick={this.handleFlick}>
+			<TouchableDiv {...rest} className={`${className} ${css.picker}`} onFlick={this.handleFlick}>
 				<SpottableDiv className={css.item} onClick={this.handleDecrement}>{this.state.index > 0 ? values[this.state.index - 1] : ''}</SpottableDiv>
 				<div className={`${css.item} ${css.currentIndex}`}>{values[this.state.index]}</div>
 				<SpottableDiv className={css.item} onClick={this.handleIncrement}>{this.state.index < values.length - 1 ? values[this.state.index + 1] : ''}</SpottableDiv>
