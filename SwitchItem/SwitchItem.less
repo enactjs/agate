@@ -2,27 +2,48 @@
 //
 @import "../styles/mixins.less";
 @import "../styles/variables.less";
-@import "~@enact/agate/styles/mixins.less";
-@import "~@enact/agate/styles/skin.less";
+@import "../styles/skin.less";
 
 // Public
 .switchItem {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
 	.label {
 		vertical-align: middle;
 	}
 
+
+	.switchIcon {
+		margin-left: 10px;
+	}
+
 	.applySkins({
+		border-bottom: @agate-divider-border-width solid @agate-divider-border-color;
 		.agate-item-sizing();
+
+		.text {
+			color: @agate-item-color;
+			flex: 1;
+		}
 
 		.label {
 			.margin-start-end(0, @agate-component-spacing);
 			font-weight: 500;	// Covert to var
 
-			color: @agate-switchitem-color;
+			color: @agate-sliderbutton-focus-color;
 
 			.disabled({
 				color: inherit;
 			});
+
 		}
+		.focus({
+			color: @agate-sliderbutton-focus-color;
+			.text {
+				color: @agate-sliderbutton-focus-color;
+			}
+		})
 	});
 }

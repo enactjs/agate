@@ -76,5 +76,14 @@ export default {
 	repeatdownload    : 0x0F00A8,  // repeat_download
 	view360           : 0x0F00A9,  // view_360
 	view360off        : 0x0F00AA,  // view_360_off
-	info              : 0x0F00AB  // info
+	info              : 0x0F00AB,  // info
+	airdown           : 0x0F00B5,  // air_down
+	airright          : 0x0F00B6,  // air_right
+	airup             : 0x0F00B7,  // air_up
+	heatseatleft      : 0x0F00B8,  // seat_heat_left
+	heatseatright     : 0x0F00B9,  // seat_heat_right
+	aircirculation    : 0x0F00BA,  // air_circulation
+	fan               : 0x0F00BB,  // fan
+	defrosterfront    : 0x0F00BC,  // defroster_front
+	defrosterback     : 0x0F00BD   // defroster_back
 };
