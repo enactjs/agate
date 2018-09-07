@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Button from '../Button';
 import Skinnable from '../Skinnable';
 
 import css from './Picker.less';
