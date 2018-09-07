@@ -1,0 +1,84 @@
+// ToggleButton.less
+//
+@import "../styles/mixins.less";
+@import "../styles/fonts.less";
+@import "../styles/skin.less";
+
+.toggleButton {
+	.applySkins({
+		// .padding-start-end(@agate-button-h-padding, @agate-toggle-button-text-switch-gutter + @agate-button-h-padding + @agate-toggle-button-switch-width + @agate-toggle-button-switch-border-width);
+		text-align: center;
+		position: relative;
+
+		.bg {
+			border-color: @agate-toggle-border-color;
+
+			.selected& {
+				background-color: @agate-toggle-button-switch-on-bg-color;
+				border-color: @agate-toggle-button-switch-on-bg-color;
+			}
+
+			.toggleIndicator& {
+				background-color: transparent;
+				border-color: transparent;
+			}
+		}
+
+		.client {
+			.selected& {
+				color: @agate-toggle-focus-text-color;
+				.toggleIndicator& {
+					color: inherit;
+				}
+			}
+		}
+
+		&::after, &::before {
+			.toggleIndicator& {
+				position: absolute;
+				content: "";
+				bottom: @agate-toggle-button-bottom;
+				height: @agate-toggle-button-switch-height;
+				border-width: @agate-toggle-button-switch-border-width;
+				border-style: solid;
+				border-radius: @agate-button-border-radius;
+			}
+		}
+
+		&::after {
+			.position-start-end(@agate-toggle-button-indicator-padding, @agate-toggle-button-indicator-spacing);
+		}
+
+		&::before {
+			.position-start-end(@agate-toggle-button-indicator-spacing, @agate-toggle-button-indicator-padding);
+		}
+
+		&::after, &::before {
+			background-color: @agate-toggle-button-switch-off-bg-color;
+			border-color: @agate-toggle-indicator-border-color;
+		}
+
+		&.selected {
+			&::after, &::before {
+				background-color: @agate-toggle-button-switch-on-bg-color;
+				border-color: @agate-toggle-button-switch-on-border-color;
+			}
+		}
+
+		.focus({
+			&.selected {
+				&::after, &::before {
+					background-color: @agate-toggle-button-switch-on-focus-bg-color;
+					border-color: @agate-toggle-button-switch-on-focus-border-color;
+				}
+			}
+		});
+
+		.disabled({
+			&::after, &::before {
+				background-color: @agate-toggle-button-switch-disabled-bg-color;
+				border-color: @agate-toggle-button-switch-disabled-border-color;
+			}
+		});
+	});
+}

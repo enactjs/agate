@@ -9,7 +9,7 @@ describe('AgateDecorator', () => {
 
 	const AppRoot = (props) => <app {...props} />;
 
-	it('should add base agate classes to wrapped component', function () {
+	it('should add base carbon classes to wrapped component', function () {
 		const config = {ri: false, i18n: false, spotlight: false, float: false, overlay: false};
 		const App = AgateDecorator(config, AppRoot);
 		const subject = mount(
@@ -21,7 +21,7 @@ describe('AgateDecorator', () => {
 		const appRoot = subject.find('app');
 
 		const expected = true;
-		const actual = appRoot.hasClass('agate');
+		const actual = appRoot.hasClass('carbon');
 
 		expect(actual).to.equal(expected);
 	});
