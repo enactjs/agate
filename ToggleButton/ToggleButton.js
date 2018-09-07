@@ -1,13 +1,12 @@
 /**
- * Agate styled button components and behaviors.
+ * Agate styled ToggleButton components and behaviors.
  *
  * @example
- * <Button small>Hello Enact!</Button>
+ * <ToggleButton toggleIndicator>Hello Enact!</ToggleButton>
  *
- * @module agate/Button
- * @exports Button
- * @exports ButtonBase
- * @exports ButtonDecorator
+ * @module agate/ToggleButton
+ * @exports ToggleButton
+ * @exports ToggleButtonBase
  */
 
 import kind from '@enact/core/kind';
@@ -17,7 +16,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from '../Button';
-// import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
 import css from './ToggleButton.less';
@@ -38,16 +36,6 @@ const ToggleButtonBase = kind({
 
 	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
 		/**
-		 * The background-color opacity of this button.
-		 *
-		 * * Values: `'translucent'`, `'lightTranslucent'`, `'transparent'`
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		backgroundOpacity: PropTypes.oneOf(['translucent', 'lightTranslucent', 'transparent']),
-
-		/**
 		 * The string to be displayed as the main content of the toggle button.
 		 *
 		 * If `toggleOffLabel` and/or `toggleOnLabel` are provided, they will be used for the
@@ -66,27 +54,6 @@ const ToggleButtonBase = kind({
 		 * @public
 		 */
 		disabled: PropTypes.bool,
-
-		/**
-		 * Enforces a minimum width on the Button.
-		 *
-		 * *NOTE*: This property's default is `true` and must be explicitly set to `false` to allow
-		 * the button to shrink to fit its contents.
-		 *
-		 * @type {Boolean}
-		 * @default true
-		 * @public
-		 */
-		minWidth: PropTypes.bool,
-
-		/**
-		 * Indicates the button is 'on'.
-		 *
-		 * @type {Boolean}
-		 * @default false
-		 * @public
-		 */
-		selected: PropTypes.bool,
 
 		/**
 		 * Reduces the size of the button.
@@ -158,7 +125,7 @@ const ToggleButtonBase = kind({
 	},
 
 	computed: {
-		className: ({toggleIndicator, selected, small, styler}) => styler.append({toggleIndicator, selected, small}),
+		className: ({selected, small, styler, toggleIndicator}) => styler.append({selected, small, toggleIndicator}),
 		children: ({children, selected, toggleOnLabel, toggleOffLabel}) => {
 			let c = children;
 			if (selected && toggleOnLabel) {
