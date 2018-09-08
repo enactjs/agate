@@ -85,5 +85,6 @@ export default {
 	aircirculation    : 0x0F00BA,  // air_circulation
 	fan               : 0x0F00BB,  // fan
 	defrosterfront    : 0x0F00BC,  // defroster_front
-	defrosterback     : 0x0F00BD   // defroster_back
+	defrosterback     : 0x0F00BD,  // defroster_back
+	usericon          : 0x0F00BE   // user_icon
 };
