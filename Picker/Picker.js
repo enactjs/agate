@@ -4,9 +4,11 @@ import Skinnable from '../Skinnable';
 import css from './Picker.less';
 import Touchable from '@enact/ui/Touchable';
 import Spottable from '@enact/spotlight/Spottable';
-import compose from 'ramda/src/compose';
+import Spotlight from '@enact/spotlight';
 
+import compose from 'ramda/src/compose';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 const TouchableDiv = Touchable('div');
 const SpottableDiv = Spottable('div');
@@ -21,6 +23,17 @@ class PickerBase extends Component {
 		this.state = {
 			index: 0
 		};
+	}
+
+	componentDidUpdate () {
+		const isFirst = this.state.index <= 0;
+		const isLast = this.state.index >= this.props.children.length - 1;
+
+		if (isFirst) {
+			this.handleSpotlightFocus(this.incrementRef);
+		} else if (isLast) {
+			this.handleSpotlightFocus(this.decrementRef);
+		}
 	}
 
 	handleIncrement = () => {
@@ -57,14 +70,28 @@ class PickerBase extends Component {
 		}
 	}
 
+	handleSpotlightFocus = (node) => {
+		Spotlight.focus(node);
+	}
+
+	getDecrementRef = ({node}) => {
+		this.decrementRef = node;
+	}
+
+	getIncrementRef = ({node}) => {
+		this.incrementRef = node;
+	}
+
 	render () {
 		const {children: values, className, ...rest} = this.props;
+		const isFirst = this.state.index <= 0;
+		const isLast = this.state.index >= values.length - 1;
 
 		return (
-			<TouchableDiv {...rest} className={`${className} ${css.picker}`} onFlick={this.handleFlick}>
-				<SpottableDiv className={css.item} onClick={this.handleDecrement}>{this.state.index > 0 ? values[this.state.index - 1] : ''}</SpottableDiv>
+			<TouchableDiv {...rest} className={classNames(className, css.picker)} onFlick={this.handleFlick}>
+				<SpottableDiv className={css.item} ref={this.getDecrementRef} onClick={this.handleDecrement} disabled={isFirst}>{isFirst ? '' : values[this.state.index - 1]}</SpottableDiv>
 				<div className={`${css.item} ${css.currentIndex}`}>{values[this.state.index]}</div>
-				<SpottableDiv className={css.item} onClick={this.handleIncrement}>{this.state.index < values.length - 1 ? values[this.state.index + 1] : ''}</SpottableDiv>
+				<SpottableDiv className={css.item} ref={this.getIncrementRef} onClick={this.handleIncrement} disabled={isLast}>{isLast ? '' : values[this.state.index + 1]}</SpottableDiv>
 			</TouchableDiv>
 		);
 	}
