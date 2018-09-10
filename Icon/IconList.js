@@ -86,5 +86,8 @@ export default {
 	fan               : 0x0F00BB,  // fan
 	defrosterfront    : 0x0F00BC,  // defroster_front
 	defrosterback     : 0x0F00BD,  // defroster_back
-	usericon          : 0x0F00BE   // user_icon
+	user              : 0x0F00BE,   // user_icon
+	home              : 0x0F00BF,  // home
+	temperature       : 0x0F00C0,  // temperature
+	compass           : 0x0F00C1   // compass
 };
