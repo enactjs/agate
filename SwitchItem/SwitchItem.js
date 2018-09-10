@@ -41,6 +41,8 @@ const SwitchItemBase = kind({
 		 *
 		 * The following classes are supported:
 		 *
+		 * * `label` - Class name for the toggle icon label
+		 * * `switchIcon` - Class name for the toggle icon
 		 * * `switchItem` - The root class name
 		 *
 		 * @type {Object}
@@ -51,14 +53,14 @@ const SwitchItemBase = kind({
 		/**
 		 * Customize the component used as the switch.
 		 *
-		 * @type {Element|Function}
+		 * @type {Element|Function|String}
 		 * @default {@link agate/Switch.Switch}
 		 * @public
 		 */
-		icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+		icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]),
 
 		/**
-		 * Customize the text displayed with the switch is "off".
+		 * Customize the text displayed when the switch is "off".
 		 *
 		 * @type {String}
 		 * @default 'off'
@@ -67,7 +69,7 @@ const SwitchItemBase = kind({
 		offText: PropTypes.string,
 
 		/**
-		 * Customize the text displayed with the switch is "on".
+		 * Customize the text displayed when the switch is "on".
 		 *
 		 * @type {String}
 		 * @default 'on'
@@ -93,7 +95,8 @@ const SwitchItemBase = kind({
 
 	styles: {
 		css: componentCss,
-		className: 'switchItem'
+		className: 'switchItem',
+		publicClassNames: true
 	},
 
 	computed: {
@@ -110,7 +113,7 @@ const SwitchItemBase = kind({
 				>
 					{children}
 				</div>
-				<div>
+				<div className={css.label}>
 					{selected ? onText : offText}
 				</div>
 				<AgateSwitch selected={selected} className={css.switchIcon} />

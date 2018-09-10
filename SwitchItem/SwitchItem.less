@@ -32,7 +32,7 @@
 			.margin-start-end(0, @agate-component-spacing);
 			font-weight: 500;	// Covert to var
 
-			color: @agate-sliderbutton-focus-color;
+			color: @agate-switch-label-color;
 
 			.disabled({
 				color: inherit;
@@ -40,9 +40,13 @@
 
 		}
 		.focus({
-			color: @agate-sliderbutton-focus-color;
+			color: @agate-switch-focus-color;
 			.text {
-				color: @agate-sliderbutton-focus-color;
+				color: @agate-switch-focus-color;
+			}
+
+			.label {
+				color: @agate-switch-focus-color;
 			}
 		})
 	});
