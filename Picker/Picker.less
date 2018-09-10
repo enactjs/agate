@@ -1,0 +1,36 @@
+// Picker.less
+//
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
+
+.picker {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 70px;
+	font-weight: 500;
+	font-size: 24px;
+
+	.item {
+		color: inherit;
+		width: 100%;
+		text-align: center;
+
+		&.currentIndex {
+			font-size: 36px;
+		}
+	}
+
+	.applySkins({
+		.item {
+			height: @agate-button-height;
+			line-height: @agate-button-height;
+
+			&.currentIndex {
+				background-color: @agate-sliderbutton-bg-color;
+			}
+		}
+	});
+}
