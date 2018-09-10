@@ -74,12 +74,16 @@ class PickerBase extends Component {
 		Spotlight.focus(node);
 	}
 
-	getDecrementRef = ({node}) => {
-		this.decrementRef = node;
+	getDecrementRef = (ref) => {
+		if (ref && ref.node) {
+			this.decrementRef = ref.node;
+		}
 	}
 
-	getIncrementRef = ({node}) => {
-		this.incrementRef = node;
+	getIncrementRef = (ref) => {
+		if (ref && ref.node) {
+			this.incrementRef = ref.node;
+		}
 	}
 
 	render () {
