@@ -7,8 +7,7 @@
 @import '../styles/skin.less';
 
 .labeledItem {
-	display: flex;
-
+	padding: 12px;
 	flex-wrap: wrap;	// Allow the label to fall on the next line
 
 	// Header
@@ -19,10 +18,6 @@
 
 		.title {
 			overflow: hidden;
-		}
-		.icon {
-			margin-top: 0;
-			margin-bottom: 0;
 		}
 	}
 
@@ -45,5 +40,11 @@
 				padding-bottom: 3px;
 			}
 		}
+
+		.focus({
+			.label {
+				color: @agate-spotlight-color;
+			}
+		});
 	});
 }

@@ -16,7 +16,7 @@ import compose from 'ramda/src/compose';
 import Pure from '@enact/ui/internal/Pure';
 import Touchable from '@enact/ui/Touchable';
 import Spottable from '@enact/spotlight/Spottable';
-import {Marquee, MarqueeController} from '@enact/moonstone/Marquee';
+import {MarqueeBase as Marquee, MarqueeController} from '@enact/ui/Marquee';
 
 import Icon from '../Icon';
 import {ItemBase} from '../Item';
@@ -24,10 +24,8 @@ import Skinnable from '../Skinnable';
 
 const Controller = MarqueeController(
 	{marqueeOnFocus: true},
-	Touchable(
-		Spottable(
-			ItemBase
-		)
+	Skinnable(
+		ItemBase
 	)
 );
 
@@ -102,11 +100,11 @@ const LabeledItemBase = kind({
 	styles: {
 		css: componentCss,
 		className: 'labeledItem',
-		publicClassNames: ['labeledItem', 'icon', 'label']
+		publicClassNames: ['labeledItem', 'icon', 'label', 'text', 'title']
 	},
 
 	render: ({children, css, disabled, label, titleIcon, ...rest}) => (
-		<Controller disabled={disabled} {...rest} css={css}>
+		<Controller disabled={disabled} {...rest} css={{item: 'labeledItem', ...css}}>
 			<div className={css.text}>
 				<Marquee disabled={disabled} className={css.title}>{children}</Marquee>
 				{(titleIcon != null) ? <Icon small className={css.icon}>{titleIcon}</Icon> : null}
@@ -117,8 +115,9 @@ const LabeledItemBase = kind({
 });
 
 const LabeledItemDecorator = compose(
+	Spottable,
 	Pure,
-	Skinnable
+	Touchable
 );
 
 /**
