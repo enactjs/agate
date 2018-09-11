@@ -11,7 +11,7 @@
 
 import Spottable from '@enact/spotlight/Spottable';
 import {ItemBase as AgateItemBase, ItemDecorator as UiItemDecorator} from '@enact/ui/Item';
-import {MarqueeDecorator} from '@enact/moonstone/Marquee';
+import {MarqueeDecorator} from '@enact/ui/Marquee';
 import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -41,7 +41,7 @@ const ItemBase = (props) => (
  * @hoc
  * @memberof agate/Item
  * @mixes spotlight.Spottable
- * @mixes moonstone/Marquee.MarqueeDecorator
+ * @mixes ui/Marquee.MarqueeDecorator
  * @mixes agate/Skinnable
  * @ui
  * @public
