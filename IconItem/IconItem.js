@@ -9,15 +9,19 @@
  * @exports IconItemBase
  */
 
+import compose from 'ramda/src/compose';
+import Item from '@enact/ui/Item';
 import kind from '@enact/core/kind';
-import React from 'react';
 import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
+import React from 'react';
 import SlotItem from '@enact/ui/SlotItem';
-import Item from '@enact/ui/Item';
+import Spottable from '@enact/spotlight/Spottable';
+import Touchable from '@enact/ui/Touchable';
 
 import Icon from '../Icon';
-import {LabeledItem} from '../LabeledItem';
+import {LabeledItemBase} from '../LabeledItem';
+import Skinnable from '../Skinnable';
 
 import componentCss from './IconItem.less';
 
@@ -108,18 +112,23 @@ const IconItemBase = kind({
 			slotBefore={<Icon className={css.icon}>{icon}</Icon>}
 			{...rest}
 		>
-			<LabeledItem
-				className={css.label}
+			<LabeledItemBase
 				css={css}
-
 				label={label}
 				titleIcon={titleIcon}
 			>
 				{children}
-			</LabeledItem>
+			</LabeledItemBase>
 		</SlotItem>
 	)
 });
+
+const IconItemDecorator = compose(
+	Spottable,
+	Pure,
+	Touchable,
+	Skinnable
+);
 
 /**
  * A Agate styled labeled item with built-in support for marqueed text.
@@ -130,9 +139,7 @@ const IconItemBase = kind({
  * @ui
  * @public
  */
-const IconItem = Pure(
-	IconItemBase
-);
+const IconItem = IconItemDecorator(IconItemBase);
 
 export default IconItem;
 export {IconItem, IconItemBase};

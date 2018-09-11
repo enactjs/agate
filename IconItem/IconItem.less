@@ -1,48 +1,13 @@
 // LabeledItem.less
 //
 @import '../styles/mixins.less';
-//@import '../styles/text.less';
-// @import '../styles/variables.less';
-// @import '../styles/colors.less';
 @import '../styles/skin.less';
 
 .iconItem {
-	display: flex;
-	width: 100%;
-	align-items: center;
-
-	.icon {
-		margin-top: 0;
-		margin-bottom: 0;
-	}
-
 	.applySkins({
-		//// Locally scoped LESS variables ////
-		// Vertically shift the text element to position it closer to the header than the line-height naturally allows
-		@text-vertical-offset: 6px;
-		padding-right: @agate-item-side-outset;
-
-		.icon {
-			font-size: @agate-icon-font-size * 5;
-		}
-
-		// Text
-		.label {
-			padding-bottom: @agate-item-side-outset;
-			color: @agate-text-color;
-			line-height: (@agate-item-height / 3);
-			font-size: @agate-item-label-font-size;
-		}
-
-		&.with-label {
-			.label {
-				padding-bottom: 3px;
-			}
-		}
-
 		.focus({
-			.icon {
-				color: white;
+			.text, .label {
+				color: @agate-spotlight-color;
 			}
 		});
 	});
