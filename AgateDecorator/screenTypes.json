@@ -1,4 +1,5 @@
 [
+	{"name": "hd", "pxPerRem": 30, "width": 1920, "height": 1080,  "aspectRatioName": "hdtv"},
 	{"name": "head", "pxPerRem": 24, "width": 1280, "height": 800,  "aspectRatioName": "wxga"},
 	{"name": "body", "pxPerRem": 24, "width": 1440, "height": 3440, "aspectRatioName": "uwqhd", "base": true}
 ]
