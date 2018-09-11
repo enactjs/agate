@@ -21,6 +21,7 @@ import Spottable from '@enact/spotlight/Spottable';
 
 import Icon from '../Icon';
 import {LabeledItemBase} from '../LabeledItem';
+import Skinnable from '../Skinnable';
 
 import componentCss from './IconItem.less';
 
@@ -125,7 +126,8 @@ const IconItemBase = kind({
 const IconItemDecorator = compose(
 	Spottable,
 	Pure,
-	Touchable
+	Touchable,
+	Skinnable
 );
 
 /**
