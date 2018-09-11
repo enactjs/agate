@@ -41,7 +41,7 @@ class PickerBase extends Component {
 			const nextIndex = index + 1;
 			if (nextIndex < this.props.children.length) {
 				if (this.props.onChange) {
-					this.props.onChange({index: index, value: this.props.children[index]});
+					this.props.onChange({index: nextIndex, value: this.props.children[nextIndex]});
 				}
 				return {index: nextIndex};
 			}
@@ -53,7 +53,7 @@ class PickerBase extends Component {
 			const nextIndex = index - 1;
 			if (nextIndex >= 0) {
 				if (this.props.onChange) {
-					this.props.onChange({index: index, value: this.props.children[index]});
+					this.props.onChange({index: nextIndex, value: this.props.children[nextIndex]});
 				}
 				return {index: nextIndex};
 			}
