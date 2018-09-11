@@ -34,6 +34,7 @@
     "@enact/spotlight": "next",
     "@enact/ui": "next",
     "classnames": "^2.2.6",
+    "eases": "^1.0.8",
     "prop-types": "^15.6.2",
     "ramda": "^0.25.0"
   }
