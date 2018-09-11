@@ -4,7 +4,7 @@
  * Determines the `aria-label` for an Input
  *
  * @method
- * @memberof moonstone/Input
+ * @memberof agate/Input
  * @param   {String}  prefix   Text to precede the value in the aria-label
  * @param   {String}  type     `type` of the Input
  * @param   {String}  [value]  Current value of the input
@@ -29,7 +29,7 @@
  * element.
  *
  * @method
- * @memberof moonstone/Input
+ * @memberof agate/Input
  * @param   {Object} props  Props object
  * @returns {Object}        input related props
  * @private

@@ -12,7 +12,7 @@ import componentCss from './LabeledIcon.less';
 const LabeledIconBase = kind({
 	name: 'LabeledIcon',
 
-	propTypes: /** @lends moonstone/Icon.Icon.prototype */ {
+	propTypes: /** @lends agate/Icon.Icon.prototype */ {
 		/**
 		 * The icon content.
 		 *
