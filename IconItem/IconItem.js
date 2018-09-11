@@ -9,15 +9,15 @@
  * @exports IconItemBase
  */
 
-import kind from '@enact/core/kind';
-import React from 'react';
-import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import Pure from '@enact/ui/internal/Pure';
-import Touchable from '@enact/ui/Touchable';
-import SlotItem from '@enact/ui/SlotItem';
 import Item from '@enact/ui/Item';
+import kind from '@enact/core/kind';
+import PropTypes from 'prop-types';
+import Pure from '@enact/ui/internal/Pure';
+import React from 'react';
+import SlotItem from '@enact/ui/SlotItem';
 import Spottable from '@enact/spotlight/Spottable';
+import Touchable from '@enact/ui/Touchable';
 
 import Icon from '../Icon';
 import {LabeledItemBase} from '../LabeledItem';
