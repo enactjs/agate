@@ -1,10 +1,10 @@
 /**
- * Provides Moonstone styled icon components and behaviors.
+ * Provides Agate styled icon components and behaviors.
  *
  * @example
  * <Icon>flag</Icon>
  *
- * @module moonstone/Icon
+ * @module agate/Icon
  * @exports Icon
  * @exports IconBase
  * @exports IconDecorator
@@ -24,10 +24,10 @@ import iconList from './IconList.js';
 import componentCss from './Icon.less';
 
 /**
- * Renders a moonstone-styled icon without any behavior.
+ * Renders a agate-styled icon without any behavior.
  *
  * @class IconBase
- * @memberof moonstone/Icon
+ * @memberof agate/Icon
  * @extends ui/Icon.Icon
  * @ui
  * @public
@@ -35,7 +35,7 @@ import componentCss from './Icon.less';
 const IconBase = kind({
 	name: 'Icon',
 
-	propTypes: /** @lends moonstone/Icon.Icon.prototype */ {
+	propTypes: /** @lends agate/Icon.Icon.prototype */ {
 		/**
 		 * The icon content.
 		 *
@@ -62,7 +62,7 @@ const IconBase = kind({
 // Let's find a way to import this list directly, and bonus feature, render our icons in the docs
 // next to their names.
 /**
- * An object whose keys can be used as the child of an [Icon]{@link moonstone/Icon.Icon} component.
+ * An object whose keys can be used as the child of an [Icon]{@link agate/Icon.Icon} component.
  *
  * List of Icons:
  * ```
@@ -144,18 +144,18 @@ const IconBase = kind({
  * ```
  *
  * @name iconList
- * @memberof moonstone/Icon
+ * @memberof agate/Icon
  * @constant
  * @type {Object}
  * @public
  */
 
 /**
- * Moonstone-specific behaviors to apply to [IconBase]{@link moonstone/Icon.IconBase}.
+ * Agate-specific behaviors to apply to [IconBase]{@link agate/Icon.IconBase}.
  *
  * @hoc
- * @memberof moonstone/Icon
- * @mixes moonstone/Skinnable.Skinnable
+ * @memberof agate/Icon
+ * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const IconDecorator = compose(
@@ -164,12 +164,12 @@ const IconDecorator = compose(
 );
 
 /**
- * A Moonstone-styled icon.
+ * A Agate-styled icon.
  *
  * @class Icon
- * @memberof moonstone/Icon
- * @extends moonstone/Icon.IconBase
- * @mixes moonstone/Icon.IconDecorator
+ * @memberof agate/Icon
+ * @extends agate/Icon.IconBase
+ * @mixes agate/Icon.IconDecorator
  * @ui
  * @public
  */

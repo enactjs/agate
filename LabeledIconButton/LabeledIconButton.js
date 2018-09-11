@@ -22,7 +22,7 @@ const Button = compose(
  * An icon button component with a label.
  *
  * @class LabeledIconButtonBase
- * @memberof moonstone/LabeledIconButton
+ * @memberof agate/LabeledIconButton
  * @extends ui/LabeledIcon.LabeledIcon
  * @ui
  * @public
@@ -30,7 +30,7 @@ const Button = compose(
 const LabeledIconButtonBase = kind({
 	name: 'LabeledIconButton',
 
-	propTypes: /** @lends moonstone/LabeledIconButton.LabeledIconButtonBase.prototype */ {
+	propTypes: /** @lends agate/LabeledIconButton.LabeledIconButtonBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
@@ -61,7 +61,7 @@ const LabeledIconButtonBase = kind({
 		 *
 		 * Setting `selected` may be useful when the component represents a toggleable option. The
 		 * visual effect may be customized using the
-		 * [css]{@link moonstone/LabeledIconButton.LabeledIconButtonBase.css} prop.
+		 * [css]{@link agate/LabeledIconButton.LabeledIconButtonBase.css} prop.
 		 */
 		selected: PropTypes.bool
 	},
@@ -84,11 +84,11 @@ const LabeledIconButtonBase = kind({
 });
 
 /**
- * Adds Moonstone specific behaviors to [LabeledIconButtonBase]{@link moonstone/LabeledIconButton.LabeledIconButtonBase}.
+ * Adds Agate specific behaviors to [LabeledIconButtonBase]{@link agate/LabeledIconButton.LabeledIconButtonBase}.
  *
  * @hoc
- * @memberof moonstone/LabeledIconButton
- * @mixes moonstone/Skinnable.Skinnable
+ * @memberof agate/LabeledIconButton
+ * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const LabeledIconButtonDecorator = compose(
@@ -97,7 +97,7 @@ const LabeledIconButtonDecorator = compose(
 );
 
 /**
- * A Moonstone-styled icon button component with a label.
+ * A Agate-styled icon button component with a label.
  *
  * Usage:
  * ```
@@ -107,9 +107,9 @@ const LabeledIconButtonDecorator = compose(
  * ```
  *
  * @class LabeledIconButton
- * @memberof moonstone/LabeledIconButton
- * @extends moonstone/LabeledIconButton.LabeledIconButtonBase
- * @mixes moonstone/LabeledIconButton.LabeledIconButtonDecorator
+ * @memberof agate/LabeledIconButton
+ * @extends agate/LabeledIconButton.LabeledIconButtonBase
+ * @mixes agate/LabeledIconButton.LabeledIconButtonDecorator
  * @ui
  * @public
  */

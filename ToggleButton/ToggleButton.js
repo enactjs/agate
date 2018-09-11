@@ -157,8 +157,8 @@ const ToggleButtonBase = kind({
  * and update it in response to `onToggle` events.
  *
  * @class ToggleButton
- * @memberof moonstone/ToggleButton
- * @extends moonstone/ToggleButton.ToggleButtonBase
+ * @memberof agate/ToggleButton
+ * @extends agate/ToggleButton.ToggleButtonBase
  * @ui
  * @mixes ui/Toggleable
  * @public
