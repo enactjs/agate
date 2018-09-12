@@ -6,7 +6,7 @@
  */
 
 import hoc from '@enact/core/hoc';
-import SkinnableBase, {SkinContext} from '@enact/ui/Skinnable';
+import UiSkinnable from '@enact/ui/Skinnable';
 
 const defaultConfig = {
 	skins: {
@@ -26,7 +26,7 @@ const defaultConfig = {
  * @hoc
  * @public
  */
-const Skinnable = hoc(defaultConfig, SkinnableBase);
+const Skinnable = hoc(defaultConfig, UiSkinnable);
 
 /**
  * Select a skin by name by specifying this property. This may be changed at runtime. All components
@@ -48,6 +48,5 @@ const Skinnable = hoc(defaultConfig, SkinnableBase);
 
 export default Skinnable;
 export {
-	Skinnable,
-	SkinContext
+	Skinnable
 };
