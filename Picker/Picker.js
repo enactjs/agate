@@ -21,8 +21,16 @@ class PickerBase extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-			index: 0
+			index: this.props.index || 0
 		};
+	}
+
+	// NOTE: Need to find a better solution. Probably split in to picker base and stateful picker.
+	static getDerivedStateFromProps (props) {
+		if (props.index) {
+			return {index: props.index};
+		}
+		return {index: null};
 	}
 
 	componentDidUpdate () {
@@ -35,6 +43,7 @@ class PickerBase extends Component {
 			this.handleSpotlightFocus(this.decrementRef);
 		}
 	}
+
 
 	handleIncrement = () => {
 		this.setState(({index}) => {
