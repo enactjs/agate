@@ -26,11 +26,11 @@ class PickerBase extends Component {
 	}
 
 	// NOTE: Need to find a better solution. Probably split in to picker base and stateful picker.
-	static getDerivedStateFromProps (props) {
+	static getDerivedStateFromProps (props, state) {
 		if (props.index) {
 			return {index: props.index};
 		}
-		return {index: null};
+		return {index: state.index};
 	}
 
 	componentDidUpdate () {
