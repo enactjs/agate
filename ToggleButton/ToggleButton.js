@@ -2,7 +2,7 @@
  * Agate styled ToggleButton components and behaviors.
  *
  * @example
- * <ToggleButton toggleIndicator>Hello Enact!</ToggleButton>
+ * <ToggleButton underline>Hello Enact!</ToggleButton>
  *
  * @module agate/ToggleButton
  * @exports ToggleButton
@@ -68,15 +68,6 @@ const ToggleButtonBase = kind({
 		small: PropTypes.bool,
 
 		/**
-		 * Shows toggle indicator.
-		 *
-		 * @type {Boolean}
-		 * @default false
-		 * @public
-		 */
-		toggleIndicator: PropTypes.bool,
-
-		/**
 		 * Button text displayed in the 'off' state.
 		 *
 		 * If not specified, `children` will be used for 'off' button text.
@@ -106,11 +97,20 @@ const ToggleButtonBase = kind({
 		 * @type {String}
 		 * @public
 		 */
-		type: PropTypes.oneOf(['standard', 'grid'])
+		type: PropTypes.oneOf(['standard', 'grid']),
+
+		/**
+		 * Shows toggle indicator.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		underline: PropTypes.bool
 	},
 
 	defaultProps: {
-		toggleIndicator: false,
+		underline: false,
 		disabled: false,
 		minWidth: true,
 		selected: false,
@@ -125,7 +125,7 @@ const ToggleButtonBase = kind({
 	},
 
 	computed: {
-		className: ({selected, small, styler, toggleIndicator}) => styler.append({selected, small, toggleIndicator}),
+		className: ({selected, small, styler, underline}) => styler.append({selected, small, underline}),
 		children: ({children, selected, toggleOnLabel, toggleOffLabel}) => {
 			let c = children;
 			if (selected && toggleOnLabel) {
@@ -138,7 +138,7 @@ const ToggleButtonBase = kind({
 	},
 
 	render: ({selected, ...rest}) => {
-		delete rest.toggleIndicator;
+		delete rest.underline;
 		delete rest.toggleOffLabel;
 		delete rest.toggleOnLabel;
 
