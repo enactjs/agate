@@ -1,4 +1,5 @@
 import {Cell, Layout} from '@enact/ui/Layout';
+import {forward, handle} from '@enact/core/handle';
 import Group from '@enact/ui/Group';
 import kind from '@enact/core/kind';
 import LabeledIcon from '@enact/agate/LabeledIcon';
@@ -159,7 +160,31 @@ const TabbedPanelsBase = kind({
 	}
 });
 
-const TabbedPanels = Slottable({slots: ['tabs', 'afterTabs', 'beforeTabs']}, TabbedPanelsBase);
+class TabbedPanelsState extends React.Component {
+	constructor (props) {
+		super(props);
+		this.state = {
+			index: this.props.index
+		};
+	}
+
+	onSelect = handle(
+		forward('onSelect'),
+		({selected}) => this.setState(state => state.index === selected ? null : {index: selected})
+	).bind(this);
+
+	render () {
+		const props = Object.assign({}, this.props);
+		props.index = this.state.index;
+		props.onSelect = this.onSelect;
+
+		return (
+			<TabbedPanelsBase {...props} />
+		);
+	}
+}
+
+const TabbedPanels = Slottable({slots: ['tabs', 'afterTabs', 'beforeTabs']}, TabbedPanelsState);
 
 export default TabbedPanels;
 export {TabbedPanels, TabbedPanelsBase};
