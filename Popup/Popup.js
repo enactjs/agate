@@ -8,14 +8,13 @@ import Layout, {Cell} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 import Transition from '@enact/ui/Transition';
 
-import Skinnable, {SkinContext} from '../Skinnable';
+import Skinnable from '../Skinnable';
 import Divider from '../Divider';
 import Button from '../Button';
 
 import componentCss from './Popup.less';
 
 const forwardHide = forward('onHide');
-// const SkinContext = React.createContext(null);
 
 const PopupBase = kind({
 	name: 'Popup',
@@ -40,51 +39,39 @@ const PopupBase = kind({
 	computed: {
 		className: ({closeButton, title, styler}) => styler.append({withCloseButton: closeButton, withTitle: title})
 	},
-	render: ({buttons, children, closeButton, css, noAnimation, onCloseButtonClick, onHide, open, title, ...rest}) => {
-		// delete rest.onCloseButtonClick;
+	render: ({buttons, children, closeButton, css, noAnimation, onCloseButtonClick, onHide, open, skin, title, ...rest}) => {
+		const wideLayout = (skin === 'carbon');
+
 		return (
-			<SkinContext.Consumer>
-				{(skin) => {
-					// const effectiveSkin = determineSkin(skin, parentSkin);
-					// console.log('popup context:', skin);
-
-					const wideLayout = (skin === 'carbon');
-
-					// <SkinContext.Provider value={skin}>
-					return (
-						<Transition
-							noAnimation={noAnimation}
-							visible={open}
-							direction="down"
-							duration="short"
-							type="fade"
-							className={css.popupTransitionContainer}
-							onHide={onHide}
-						>
-							<div
-								{...rest}
-							>
-								{closeButton ? <Button
-									icon="closex"
-									small
-									onTap={onCloseButtonClick}
-									className={componentCss.closeButton}
-								/> : null}
-								{title ? <Divider className={css.title}>{title}</Divider> : null}
-								<Layout orientation={wideLayout ? 'horizontal' : 'vertical'} className={css.body}>
-									<Cell shrink={!wideLayout} className={css.content}>
-										{children}
-									</Cell>
-									{buttons ? <Cell shrink className={css.buttons}>
-										{buttons}
-									</Cell> : null}
-								</Layout>
-							</div>
-						</Transition>
-					);
-					// </SkinContext.Provider>
-				}}
-			</SkinContext.Consumer>
+			<Transition
+				noAnimation={noAnimation}
+				visible={open}
+				direction="down"
+				duration="short"
+				type="fade"
+				className={css.popupTransitionContainer}
+				onHide={onHide}
+			>
+				<div
+					{...rest}
+				>
+					{closeButton ? <Button
+						icon="closex"
+						small
+						onTap={onCloseButtonClick}
+						className={componentCss.closeButton}
+					/> : null}
+					{title ? <Divider className={css.title}>{title}</Divider> : null}
+					<Layout orientation={wideLayout ? 'horizontal' : 'vertical'} className={css.body}>
+						<Cell shrink={!wideLayout} className={css.content}>
+							{children}
+						</Cell>
+						{buttons ? <Cell shrink className={css.buttons}>
+							{buttons}
+						</Cell> : null}
+					</Layout>
+				</div>
+			</Transition>
 		);
 	}
 });
@@ -100,7 +87,7 @@ const PopupBase = kind({
 
 const PopupDecorator = compose(
 	Slottable({slots: ['closeButton', 'title', 'buttons']}),
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 class PopupState extends React.Component {
