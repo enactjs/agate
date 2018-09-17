@@ -14,7 +14,6 @@ import componentCss from './LabeledIconButton.less';
 
 const Button = compose(
 	UiButtonDecorator,
-	Spottable,
 	Skinnable
 )(ButtonBase);
 
@@ -93,6 +92,7 @@ const LabeledIconButtonBase = kind({
  */
 const LabeledIconButtonDecorator = compose(
 	Pure,
+	Spottable,
 	Skinnable
 );
 
