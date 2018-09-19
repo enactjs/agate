@@ -89,6 +89,14 @@ const LabeledItemBase = kind({
 		label: PropTypes.node,
 
 		/**
+		 * The position of label
+		 *
+		 * @type {Node}
+		 * @public
+		 */
+		labelPosition: PropTypes.oneOf(['before', 'after']),
+
+		/**
 		 * Icon to be displayed next to the title text.
 		 *
 		 * @type {String|Object}
@@ -97,19 +105,24 @@ const LabeledItemBase = kind({
 		titleIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 	},
 
+	defaultProps: {
+		labelPosition: 'after'
+	},
+
 	styles: {
 		css: componentCss,
 		className: 'labeledItem',
-		publicClassNames: ['labeledItem', 'icon', 'label', 'text', 'title']
+		publicClassNames: ['labeledItem', 'icon', 'text', 'title']
 	},
 
-	render: ({children, css, disabled, label, titleIcon, ...rest}) => (
+	render: ({children, css, disabled, label, labelPosition, titleIcon, ...rest}) => (
 		<Controller disabled={disabled} {...rest} css={css}>
+			{(label != null && labelPosition === 'before') ? <Marquee disabled={disabled} className={css.labelBefore}>{label}</Marquee> : null}
 			<div className={css.text}>
 				<Marquee disabled={disabled} className={css.title}>{children}</Marquee>
 				{(titleIcon != null) ? <Icon small className={css.icon}>{titleIcon}</Icon> : null}
 			</div>
-			{(label != null) ? <Marquee disabled={disabled} className={css.label}>{label}</Marquee> : null}
+			{(label != null && labelPosition === 'after') ? <Marquee disabled={disabled} className={css.labelAfter}>{label}</Marquee> : null}
 		</Controller>
 	)
 });
