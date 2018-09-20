@@ -18,7 +18,7 @@
 		width: 100%;
 		text-align: center;
 
-		&.currentIndex {
+		&.active {
 			font-size: 36px;
 		}
 	}
@@ -28,8 +28,12 @@
 			height: @agate-button-height;
 			line-height: @agate-button-height;
 
-			&.currentIndex {
+			&.active {
 				background-color: @agate-sliderbutton-bg-color;
+			}
+
+			&[disabled] {
+				.vendor-opacity(0.6);
 			}
 		}
 	});
