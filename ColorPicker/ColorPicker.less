@@ -1,0 +1,31 @@
+// Divider.less
+//;
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+
+.colorPicker {
+	.applySkins({
+		&,
+		&.small {
+			padding: 0;
+		}
+
+		.colorDisplay,
+		.colorInput {
+			position: absolute;
+			.position(0);
+			border-radius: 130px;
+		}
+
+		.colorDisplay {
+			margin: 6px;
+		}
+
+		.colorInput {
+			padding: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+		}
+	});
+}
