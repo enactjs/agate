@@ -3,6 +3,8 @@ import Picker from '../Picker';
 import Button from '../Button';
 import {Cell, Column, Row} from '@enact/ui/Layout';
 
+import css from './DateTimePicker.less';
+
 class DateTimePicker extends React.Component {
 	constructor (props) {
 		super(props);
@@ -39,11 +41,11 @@ class DateTimePicker extends React.Component {
 
 	render () {
 		return (
-			<Row>
+			<Row className={css.dateTimePicker}>
 				<Cell size="70%">
 					<Row>
-						<Cell size="30%">
-							<Row align=" space-evenly">
+						<Cell size="50%">
+							<Row align=" center">
 								<Column align="center">
 									<Picker onChange={this.handleTimeChange('month')}>
 										{['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']}
@@ -64,8 +66,8 @@ class DateTimePicker extends React.Component {
 								</Column>
 							</Row>
 						</Cell>
-						<Cell size="30%">
-							<Row align=" space-evenly">
+						<Cell size="50%">
+							<Row align=" center">
 								<Column align="center">
 									<Picker onChange={this.handleTimeChange('hour')}>
 										{['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']}
@@ -89,8 +91,8 @@ class DateTimePicker extends React.Component {
 					</Row>
 				</Cell>
 				<Cell size="30%">
-					<Column>
-						<Button onClick={this.onSave}>Set Date & Time</Button>
+					<Column align="end">
+						<Button onClick={this.onSave}>Save</Button>
 					</Column>
 				</Cell>
 			</Row>
