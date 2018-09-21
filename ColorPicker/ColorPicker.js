@@ -1,5 +1,5 @@
 /**
- * Agate styled labeled divider components and behaviors
+ * Agate component to allow the user to choose a color.
  *
  * @example
  * <ColorPicker
@@ -21,19 +21,14 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
-import Button from '../Button';
-import Icon from '../Icon';
+import {ButtonBase, ButtonDecorator} from '../Button';
 import Skinnable from '../Skinnable';
 
 import componentCss from './ColorPicker.less';
-import buttonCss from '../Button/Button.less';
 
-const onColorChange = (ev) => {
-	console.log({value: ev.target.value});
-};
 
 /**
- * A labeled divider component.
+ * The color picker base component which sets-up the component's structure.
  *
  * This component is most often not used directly but may be composed within another component as it
  * is within [ColorPicker]{@link agate/ColorPicker.ColorPicker}.
@@ -47,80 +42,35 @@ const ColorPickerBase = kind({
 	name: 'ColorPicker',
 
 	propTypes: /** @lends agate/ColorPicker.ColorPickerBase.prototype */ {
-		/**
-		 * The text for the label of the divider.
-		 *
-		 * A divider with no children (text content) will render simply as a horizontal line, with
-		 * even spacing above and below.
-		 *
-		 * @type {Node}
-		 * @public
-		 */
-		children: PropTypes.node,
-
-		/**
-		 * Add an optional icon to the divider. This accepts any value that [Icon]{@agate/Icon}
-		 * supports.
-		 *
-		 * @type {String}
-		 */
-		icon: PropTypes.string,
-
-		/**
-		 * The size of the spacing around the divider.
-		 *
-		 * Allowed values include:
-		 * * `'normal'` (default) - slightly larger than the standard component spacing.
-		 * * `'small'` - same size as component spacing.
-		 * * `'medium'` - 2x component.
-		 * * `'large'` - 3x component.
-		 * * `'none'` - no spacing at all. Neighboring elements will directly touch the divider.
-		 *
-		 * _Note:_ Spacing is separate from margin with regard to `margin-top`. It ensures a
-		 * consistent distance from the bottom horizontal line. It's safe to use `margin-top` to add
-		 * additional spacing above the divider.
-		 *
-		 * @type {String}
-		 * @default 'normal'
-		 * @public
-		 */
-		spacing: PropTypes.oneOf(['normal', 'small', 'medium', 'large', 'none']),
-
-		/**
-		 * Metadata indicating whether this divider is the start of a new "section" on the screen or
-		 * just a heading/label of a sub-section.
-		 *
-		 * @type {Boolean}
-		 */
-		startSection: PropTypes.bool
+		css: PropTypes.object,
+		onChange: PropTypes.func,
+		value: PropTypes.string
 	},
 
-	// defaultProps: {
-	// 	spacing: 'normal'
-	// },
-
 	styles: {
-		css: {...buttonCss, ...componentCss},
+		css: componentCss,
 		className: 'colorPicker',
-		publicClassNames: ['colorPicker', 'icon', 'startSection']
+		publicClassNames: ['colorPicker', 'colorSwatch']
+	},
+
+	handlers: {
+		onChange: (ev, {onChange}) => {
+			if (onChange) {
+				onChange({value: ev.target.value});
+			}
+		}
 	},
 
 	computed: {
-		className: ({spacing, startSection, styler}) => styler.append(spacing, {startSection}),
-		colorDisplayStyle: ({value}) => ({color: 'green', backgroundColor: value}),
-		icon: ({css, icon}) => (icon ? <Icon small className={css.icon}>{icon}</Icon> : null)
+		colorSwatchStyle: ({value}) => ({backgroundColor: value})
 	},
 
-	render: ({children, colorDisplayStyle, css, onChange, icon, value, ...rest}) => {
-		delete rest.spacing;
-		delete rest.startSection;
-		console.log({value, colorDisplayStyle});
-
+	render: ({colorSwatchStyle, css, onChange, value, ...rest}) => {
 		return (
-			<Button {...rest} css={css} minWidth={false}>
-				<div className={css.colorDisplay} style={colorDisplayStyle} />
+			<ButtonBase {...rest} css={css} minWidth={false}>
+				<div className={css.colorSwatch} style={colorSwatchStyle} />
 				<input type="color" defaultValue={value} onChange={onChange} className={css.colorInput} />
-			</Button>
+			</ButtonBase>
 		);
 	}
 });
@@ -135,28 +85,20 @@ const ColorPickerBase = kind({
  */
 
 const ColorPickerDecorator = compose(
+	ButtonDecorator,
 	Changeable,
 	Skinnable
 );
 
 /**
- * A labeled divider component, ready to use in Agate applications.
- *
- * `ColorPicker` may be used as a header to group related components.
- *
- * Usage:
- * ```
- * <ColorPicker
- *   spacing="medium"
- * >
- *   Related Settings
- * </ColorPicker>
- * ```
+ * A color picker component, ready to use in Agate applications.
  *
  * @class ColorPicker
  * @memberof agate/ColorPicker
  * @extends agate/ColorPicker.ColorPickerBase
- * @mixes agate/ColorPicker.ColorPickerDecorator
+ * @mixes agate/Button.ButtonDecorator
+ * @mixes ui/Changeable.Changeable
+ * @mixes agate/Skinnable.Skinnable
  * @ui
  * @public
  */
