@@ -1,6 +1,5 @@
 [
-	{"name": "iphone", "pxPerRem": 12, "width": 812, "height": 375,  "aspectRatioName": "iphone"},
-	{"name": "head", "pxPerRem": 24, "width": 1280, "height": 800,  "aspectRatioName": "wxga"},
-	{"name": "hd", "pxPerRem": 36, "width": 1920, "height": 1080,  "aspectRatioName": "hdtv"},
-	{"name": "body", "pxPerRem": 36, "width": 3440, "height": 1440, "aspectRatioName": "uwqhd", "base": true}
+	{"name": "iphone", "pxPerRem": 8, "width": 812, "height": 375,  "aspectRatioName": "iphone"},
+	{"name": "hd", "pxPerRem": 16, "width": 1280, "height": 720,  "aspectRatioName": "hdtv"},
+	{"name": "fhd", "pxPerRem": 24, "width": 1920, "height": 1080,  "aspectRatioName": "hdtv", "base": true}
 ]

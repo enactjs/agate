@@ -27,11 +27,18 @@
 		padding-right: @agate-item-side-outset;
 
 		// Text
-		.label {
-			padding-bottom: @agate-item-side-outset;
+		.labelAfter, .labelBefore {
 			color: @agate-labeleditem-label-color;
-			line-height: (@agate-item-height / 3);
+			line-height: (@agate-item-height / 2);
 			font-size: @agate-item-label-font-size;
+		}
+
+		.labelBefore {
+			padding-top: @agate-item-side-outset;
+		}
+
+		.labelAfter {
+			padding-bottom: @agate-item-side-outset;
 		}
 
 		&.with-label {

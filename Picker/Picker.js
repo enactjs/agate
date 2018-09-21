@@ -1,116 +1,95 @@
-import React, {Component} from 'react';
+import {adaptEvent, forEventProp, forward, handle, oneOf} from '@enact/core/handle';
+import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
+import Changeable from '@enact/ui/Changeable';
+import Touchable from '@enact/ui/Touchable';
+import PropTypes from 'prop-types';
+import clamp from 'ramda/src/clamp';
+import compose from 'ramda/src/compose';
+import React from 'react';
+
 import Skinnable from '../Skinnable';
 
 import css from './Picker.less';
-import Touchable from '@enact/ui/Touchable';
-import Spottable from '@enact/spotlight/Spottable';
-import Spotlight from '@enact/spotlight';
 
-import compose from 'ramda/src/compose';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+const PickerRoot = Touchable('div');
+const PickerButtonItem = Spottable('div');
 
-const TouchableDiv = Touchable('div');
-const SpottableDiv = Spottable('div');
+const handleChange = direction => handle(
+	adaptEvent(
+		(ev, {value, children}) => ({
+			value: clamp(0, React.Children.count(children) - 1, value + direction)
+		}),
+		forward('onChange')
+	)
+);
+const increment = handleChange(1);
+const decrement = handleChange(-1);
 
-class PickerBase extends Component {
-	static propTypes = {
-		onChange: PropTypes.func
-	}
+const PickerBase = kind({
+	name: 'Picker',
 
-	constructor (props) {
-		super(props);
-		this.state = {
-			index: this.props.index || 0
-		};
-	}
+	propTypes: {
+		value: PropTypes.number
+	},
 
-	// NOTE: Need to find a better solution. Probably split in to picker base and stateful picker.
-	static getDerivedStateFromProps (props, state) {
-		if (props.index) {
-			return {index: props.index};
-		}
-		return {index: state.index};
-	}
+	defaultProps: {
+		value: 0
+	},
 
-	componentDidUpdate () {
-		const isFirst = this.state.index <= 0;
-		const isLast = this.state.index >= this.props.children.length - 1;
+	styles: {
+		css,
+		className: 'picker'
+	},
 
-		if (isFirst) {
-			this.handleSpotlightFocus(this.incrementRef);
-		} else if (isLast) {
-			this.handleSpotlightFocus(this.decrementRef);
-		}
-	}
+	handlers: {
+		handleDecrement: decrement,
+		handleFlick: handle(
+			forEventProp('direction', 'vertical'),
+			// ignore "slow" flicks by filtering out velocity below a threshold
+			oneOf(
+				[({velocityY}) => velocityY < 0, increment],
+				[({velocityY}) => velocityY > 0, decrement]
+			)
+		),
+		handleIncrement: increment
+	},
 
+	computed: {
+		activeClassName: ({styler}) => styler.join('active', 'item')
+	},
 
-	handleIncrement = () => {
-		this.setState(({index}) => {
-			const nextIndex = index + 1;
-			if (nextIndex < this.props.children.length) {
-				if (this.props.onChange) {
-					this.props.onChange({index: nextIndex, value: this.props.children[nextIndex]});
-				}
-				return {index: nextIndex};
-			}
-		});
-	}
-
-	handleDecrement = () => {
-		this.setState(({index}) => {
-			const nextIndex = index - 1;
-			if (nextIndex >= 0) {
-				if (this.props.onChange) {
-					this.props.onChange({index: nextIndex, value: this.props.children[nextIndex]});
-				}
-				return {index: nextIndex};
-			}
-		});
-	}
-
-	handleFlick = (ev) => {
-		if (ev.direction === 'vertical') {
-			if (ev.velocityX > ev.velocityY) {
-				this.handleIncrement();
-			} else if (ev.velocityX < ev.velocityY) {
-				this.handleDecrement();
-			}
-		}
-	}
-
-	handleSpotlightFocus = (node) => {
-		Spotlight.focus(node);
-	}
-
-	getDecrementRef = (ref) => {
-		if (ref && ref.node) {
-			this.decrementRef = ref.node;
-		}
-	}
-
-	getIncrementRef = (ref) => {
-		if (ref && ref.node) {
-			this.incrementRef = ref.node;
-		}
-	}
-
-	render () {
-		const {children: values, className, ...rest} = this.props;
-		const isFirst = this.state.index <= 0;
-		const isLast = this.state.index >= values.length - 1;
+	render: (props) => {
+		const {activeClassName, children: values, handleDecrement, handleFlick, handleIncrement, value, ...rest} = props;
+		const isFirst = value <= 0;
+		const isLast = value >= React.Children.count(values) - 1;
 
 		return (
-			<TouchableDiv {...rest} className={classNames(className, css.picker)} onFlick={this.handleFlick}>
-				<SpottableDiv className={css.item} ref={this.getDecrementRef} onClick={this.handleDecrement} disabled={isFirst}>{isFirst ? '' : values[this.state.index - 1]}</SpottableDiv>
-				<div className={`${css.item} ${css.currentIndex}`}>{values[this.state.index]}</div>
-				<SpottableDiv className={css.item} ref={this.getIncrementRef} onClick={this.handleIncrement} disabled={isLast}>{isLast ? '' : values[this.state.index + 1]}</SpottableDiv>
-			</TouchableDiv>
+			<PickerRoot {...rest} onFlick={handleFlick}>
+				<PickerButtonItem
+					className={css.item}
+					onClick={handleDecrement}
+					disabled={isFirst}
+				>
+					{isFirst ? '' : values[value - 1]}
+				</PickerButtonItem>
+				<div className={activeClassName}>
+					{values[value]}
+				</div>
+				<PickerButtonItem
+					className={css.item}
+					onClick={handleIncrement}
+					disabled={isLast}
+				>
+					{isLast ? '' : values[value + 1]}
+				</PickerButtonItem>
+			</PickerRoot>
 		);
 	}
-}
+});
 
 const PickerDecorator = compose(
+	Changeable,
 	Skinnable
 );
 
