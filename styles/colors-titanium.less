@@ -3,8 +3,8 @@
 
 
 // Named Colors
-@agate-accent: fade(black, 10%);
-@agate-highlight: #2a48ca;
+@agate-accent: var(--agate-accent-color, fade(black, 10%));
+@agate-highlight: var(--agate-highlight-color, #2a48ca);
 @agate-background: fade(black, 30%);
 @agate-foreground: lighten(black, 30%);
 @agate-background-active: fade(black, 15%);
@@ -33,7 +33,7 @@
 @agate-spotlight-color:                @agate-foreground-focus;
 @agate-spotlight-bg-color:             @agate-background-focus;
 @agate-spotlight-border-color:         transparent;
-@agate-spotlight-disabled-text-color:  fade(@agate-spotlight-color, 40%);
+@agate-spotlight-disabled-text-color:  fade(@agate-spotlight-color, 40%); // ~"rgba(var(--agate-accent-r, 0), var(--agate-accent-g, 0), var(--agate-accent-b, 0), 0.2)"; // @agate-spotlight-color; // fade(@agate-spotlight-color, 40%);
 @agate-spotlight-focus-bg-image: none;
 
 // Button

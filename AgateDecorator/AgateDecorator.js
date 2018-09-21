@@ -18,6 +18,18 @@ import Skinnable from '../Skinnable';
 import screenTypes from './screenTypes.json';
 import css from './AgateDecorator.less';
 
+// hex to RGB conversion
+// from Tim Down
+// at https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+function hexToRgb (hex) {
+	let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	return result ? {
+		r: parseInt(result[1], 16),
+		g: parseInt(result[2], 16),
+		b: parseInt(result[3], 16)
+	} : null;
+}
+
 /**
  * Default config for {@link agate/AgateDecorator.AgateDecorator}.
  *
@@ -74,6 +86,10 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const Decorator = class extends React.Component {
 		static displayName = 'AgateDecorator';
 
+		static defaultProps = {
+			accent: '#000000'
+		};
+
 		render () {
 			const className = classnames(
 				this.props.className,
@@ -82,8 +98,18 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 				css.root
 			);
 
+			const style = this.props.style || {};
+
+			const accentObj = hexToRgb(this.props.accent);
+
+			style['--agate-accent-color'] = this.props.accent;
+			style['--agate-accent-r'] = accentObj.r;
+			style['--agate-accent-g'] = accentObj.g;
+			style['--agate-accent-b'] = accentObj.b;
+			style['--agate-highlight-color'] = this.props.highlight;
+
 			return (
-				<App {...this.props} className={className} />
+				<App {...this.props} style={style} className={className} />
 			);
 		}
 	};
