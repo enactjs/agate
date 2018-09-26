@@ -5,10 +5,28 @@
 @import '../LabeledIcon/LabeledIcon.less';
 
 .labeledIconButton {
-    &.icon,
-    &.label,
-    &.selected,
-    &.small {
-        /* Public Class Names */
-    }
+  &.icon,
+  &.label,
+  &.selected,
+  &.small {
+      /* Public Class Names */
+  }
+  .applySkins({
+      &:focus {
+        background: transparent;
+
+        .label {
+            color: @agate-text-color;
+        }
+
+        .button, .client {
+          color: @agate-button-focus-color;
+        }
+
+        .bg {
+          background-color: @agate-button-focus-bg-color;
+          background-image: @agate-button-focus-bg-image;
+        }
+      }
+  });
 }

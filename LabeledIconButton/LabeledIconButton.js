@@ -14,7 +14,6 @@ import componentCss from './LabeledIconButton.less';
 
 const Button = compose(
 	UiButtonDecorator,
-	Spottable,
 	Skinnable
 )(ButtonBase);
 
@@ -76,7 +75,7 @@ const LabeledIconButtonBase = kind({
 		return UiLabeledIcon.inline({
 			...rest,
 			icon: (
-				<Button selected={selected} icon={icon} />
+				<Button selected={selected} icon={icon} css={css} />
 			),
 			css
 		});
@@ -93,6 +92,7 @@ const LabeledIconButtonBase = kind({
  */
 const LabeledIconButtonDecorator = compose(
 	Pure,
+	Spottable,
 	Skinnable
 );
 
