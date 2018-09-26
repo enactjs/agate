@@ -1,4 +1,6 @@
+import {adaptEvent, forward, handle} from '@enact/core/handle';
 import {Cell, Layout} from '@enact/ui/Layout';
+import {Changeable} from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
 import kind from '@enact/core/kind';
 import LabeledIcon from '@enact/agate/LabeledIcon';
@@ -110,6 +112,11 @@ const TabbedPanelsBase = kind({
 		css: componentCss,
 		className: 'tabbed-panels enact-fit'
 	},
+	handlers: {
+		onSelect: handle(
+			adaptEvent(({selected}) => ({index: selected}), forward('onSelect'))
+		)
+	},
 	computed: {
 		children: ({children, tabs}) => {
 			// if there are children use them
@@ -159,7 +166,13 @@ const TabbedPanelsBase = kind({
 	}
 });
 
-const TabbedPanels = Slottable({slots: ['tabs', 'afterTabs', 'beforeTabs']}, TabbedPanelsBase);
+const TabbedPanels = Slottable(
+	{slots: ['tabs', 'afterTabs', 'beforeTabs']},
+	Changeable(
+		{prop: 'index', change: 'onSelect'},
+		TabbedPanelsBase
+	)
+);
 
 export default TabbedPanels;
 export {TabbedPanels, TabbedPanelsBase};
