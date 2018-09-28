@@ -1,22 +1,14 @@
 import kind from '@enact/core/kind';
-import Spottable from '@enact/spotlight/Spottable';
-import {ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
 import UiLabeledIcon from '@enact/ui/LabeledIcon';
-import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
-import compose from 'ramda/src/compose';
 import React from 'react';
 
-import {ButtonBase} from '../Button';
+import {ButtonBase, ButtonDecorator} from '../Button';
 import Skinnable from '../Skinnable';
 
 import componentCss from './LabeledIconButton.less';
 
-const Button = compose(
-	UiButtonDecorator,
-	Spottable,
-	Skinnable
-)(ButtonBase);
+const Button = Skinnable(ButtonBase);
 
 /**
  * An icon button component with a label.
@@ -76,7 +68,7 @@ const LabeledIconButtonBase = kind({
 		return UiLabeledIcon.inline({
 			...rest,
 			icon: (
-				<Button selected={selected} icon={icon} />
+				<Button selected={selected} icon={icon} className={css.button} />
 			),
 			css
 		});
@@ -91,10 +83,7 @@ const LabeledIconButtonBase = kind({
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
-const LabeledIconButtonDecorator = compose(
-	Pure,
-	Skinnable
-);
+const LabeledIconButtonDecorator = ButtonDecorator;
 
 /**
  * A Agate-styled icon button component with a label.
