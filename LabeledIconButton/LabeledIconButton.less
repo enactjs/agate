@@ -1,6 +1,9 @@
 // LabeledIconButton.less
 //
 
+@import "../styles/mixins.less";
+@import '../styles/skin.less';
+
 // This refers to the LabeledIcon styling, since they're the same.
 @import '../LabeledIcon/LabeledIcon.less';
 
@@ -11,4 +14,14 @@
     &.small {
         /* Public Class Names */
     }
+
+    .applySkins({
+        .focus({
+            background: transparent;
+
+            .label {
+                color: @agate-accent;
+            }
+        });
+    });
 }
