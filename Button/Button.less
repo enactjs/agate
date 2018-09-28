@@ -92,8 +92,12 @@
 				color: @agate-button-focus-color;
 			}
 		}
+	});
 
-		.focus({
+	// .focus({}), and .focus({}, parent) ...
+	&:global(.spottable):focus,
+	:global(.spottable):focus & {
+		.applySkins({
 			background-color: transparent;
 			background-image: none;
 
@@ -113,5 +117,5 @@
 				}
 			}
 		});
-	});
+	}
 }
