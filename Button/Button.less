@@ -94,7 +94,8 @@
 		}
 	});
 
-	// .focus({}), and .focus({}, parent) ...
+	// TODO: Replace with an updated .focus() mixin that can apply rules both when focused and
+	// within a focused node
 	&:global(.spottable):focus,
 	:global(.spottable):focus & {
 		.applySkins({

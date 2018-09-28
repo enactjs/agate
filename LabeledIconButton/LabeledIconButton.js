@@ -68,7 +68,7 @@ const LabeledIconButtonBase = kind({
 		return UiLabeledIcon.inline({
 			...rest,
 			icon: (
-				<Button selected={selected} icon={icon} className={css.button} />
+				<Button selected={selected} icon={icon} />
 			),
 			css
 		});
