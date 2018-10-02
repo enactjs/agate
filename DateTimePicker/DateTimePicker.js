@@ -1,9 +1,38 @@
 import React from 'react';
-import Picker from '../Picker';
-import Button from '../Button';
+import classnames from 'classnames';
+import kind from '@enact/core/kind';
 import {Cell, Column, Row} from '@enact/ui/Layout';
 
-class DateTimePicker extends React.Component {
+import Button from '../Button';
+import Picker from '../Picker';
+import Skinnable from '../Skinnable';
+
+import css from './DateTimePicker.less';
+
+const ranges = {
+	years: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027'],
+	months: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+	days: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+	hours: ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
+	minutes: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'],
+	meridiem: ['AM', 'PM']
+};
+
+const PickerCell = kind({
+	name: 'PickerCell',
+	render: ({children, range, ...rest}) => (
+		<Cell shrink>
+			<Column align="center" className={css.pickerCol}>
+				<Cell shrink {...rest} component={Picker}>
+					{range}
+				</Cell>
+				<Cell shrink>{children}</Cell>
+			</Column>
+		</Cell>
+	)
+});
+
+class DateTimePickerBase extends React.Component {
 	constructor (props) {
 		super(props);
 		this.state = {
@@ -32,73 +61,56 @@ class DateTimePicker extends React.Component {
 		}
 	}
 
-
 	handleTimeChange = (type) => ({value}) => {
 		this.setState({[type]: value});
 	}
 
 	render () {
+		const {className, ...rest} = this.props;
+		delete rest.onChange;
+		delete rest.onClose;
+		delete rest.onSave;
+
 		return (
-			<Row>
-				<Cell size="70%">
-					<Row>
-						<Cell size="30%">
-							<Row align=" space-evenly">
-								<Column align="center">
-									<Picker onChange={this.handleTimeChange('month')}>
-										{['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']}
-									</Picker>
-									<p>Month</p>
-								</Column>
-								<Column align="center">
-									<Picker onChange={this.handleTimeChange('day')}>
-										{['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']}
-									</Picker>
-									<p>Day</p>
-								</Column>
-								<Column align="center">
-									<Picker onChange={this.handleTimeChange('year')}>
-										{['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027']}
-									</Picker>
-									<p>Year</p>
-								</Column>
-							</Row>
-						</Cell>
-						<Cell size="30%">
-							<Row align=" space-evenly">
-								<Column align="center">
-									<Picker onChange={this.handleTimeChange('hour')}>
-										{['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']}
-									</Picker>
-									<p>Hour</p>
-								</Column>
-								<Column align="center">
-									<Picker onChange={this.handleTimeChange('minute')}>
-										{['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59']}
-									</Picker>
-									<p>Minute</p>
-								</Column>
-								<Column align="center">
-									<Picker onChange={this.handleTimeChange('meridiem')}>
-										{['AM', 'PM']}
-									</Picker>
-									<p>{'AM/PM'}</p>
-								</Column>
-							</Row>
-						</Cell>
+			<Row {...rest} className={classnames(className, css.dateTimePicker)} align="center center">
+				<Cell size="35%">
+					<Row align="center center">
+						<PickerCell onChange={this.handleTimeChange('month')} range={ranges.months}>
+							Month
+						</PickerCell>
+						<PickerCell onChange={this.handleTimeChange('day')} range={ranges.days}>
+							Day
+						</PickerCell>
+						<PickerCell onChange={this.handleTimeChange('year')} range={ranges.years}>
+							Year
+						</PickerCell>
 					</Row>
 				</Cell>
-				<Cell size="30%">
-					<Column>
-						<Button onClick={this.onSave}>Set Date & Time</Button>
-					</Column>
+				<Cell size="35%">
+					<Row align="center center">
+						<PickerCell onChange={this.handleTimeChange('hour')} range={ranges.hours}>
+							Hour
+						</PickerCell>
+						<PickerCell onChange={this.handleTimeChange('minute')} range={ranges.minutes}>
+							Minute
+						</PickerCell>
+						<PickerCell onChange={this.handleTimeChange('meridiem')} range={ranges.meridiem}>
+							AM/PM
+						</PickerCell>
+					</Row>
+				</Cell>
+				<Cell size="30%" shrink>
+					<Button onClick={this.onSave}>Save</Button>
 				</Cell>
 			</Row>
 		);
 	}
 }
 
+const DateTimePicker = Skinnable(DateTimePickerBase);
+
 export default DateTimePicker;
 export {
-	DateTimePicker
+	DateTimePicker,
+	DateTimePickerBase
 };
