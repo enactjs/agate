@@ -4,8 +4,6 @@ import Pause from '@enact/spotlight/Pause';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import $L from '../internal/$L';
-
 import {forwardSpotlightEvents} from './utils';
 
 const useHintOnActive = ({active}) => {
@@ -95,8 +93,8 @@ const SliderBehaviorDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			const {'aria-valuetext': ariaValueText, min, orientation, value = min} = this.props;
 			const {useHintText} = this.state;
 
-			const verticalHint = $L('change a value with up down button');
-			const horizontalHint = $L('change a value with left right button');
+			const verticalHint = 'change a value with up down button';
+			const horizontalHint = 'change a value with left right button';
 
 			if (useHintText) {
 				return orientation === 'horizontal' ? horizontalHint : verticalHint;
