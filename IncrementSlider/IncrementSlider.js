@@ -434,11 +434,7 @@ const IncrementSliderBase = kind({
 	},
 
 	computed: {
-		className: ({orientation, styler}) => styler.append(orientation),
-		decrementDisabled: ({disabled, min, value = min}) => disabled || value <= min,
-		incrementDisabled: ({disabled, max, min, value = min}) => disabled || value >= max,
-		decrementIcon: ({decrementIcon, orientation}) => (decrementIcon || ((orientation === 'vertical') ? 'arrowlargedown' : 'arrowlargeleft')),
-		incrementIcon: ({incrementIcon, orientation}) => (incrementIcon || ((orientation === 'vertical') ? 'arrowlargeup' : 'arrowlargeright'))
+		className: ({orientation, styler}) => styler.append(orientation)
 		// decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel, disabled, min, value = min}) => {
 		// 	if (decrementAriaLabel == null) {
 		// 		decrementAriaLabel = $L('press ok button to decrease the value');
@@ -503,6 +499,7 @@ const IncrementSliderBase = kind({
 		return (
 			<div {...rest}>
 				<IncrementSliderButton
+					icon="minus"
 					aria-controls={!incrementDisabled ? id : null}
 					aria-hidden={ariaHidden}
 					aria-label={decrementAriaLabel}
@@ -540,6 +537,7 @@ const IncrementSliderBase = kind({
 					value={value}
 				/>
 				<IncrementSliderButton
+					icon="plus"
 					aria-controls={!decrementDisabled ? id : null}
 					aria-hidden={ariaHidden}
 					aria-label={incrementAriaLabel}

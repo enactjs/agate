@@ -1,11 +1,11 @@
 import kind from '@enact/core/kind';
-import IconButton from '../IconButton';
+import Button from '../Button';
 import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
 import React from 'react';
 import PropTypes from 'prop-types';
 
 /**
- * An [IconButton]{@link moonstone/IconButton.IconButton} customized for
+ * An [Button]{@link moonstone/Button.Button} customized for
  * [IncrementSlider]{@link moonstone/IncrementSlider.IncrementSlider}. It is optimized to only
  * update when `disabled` is changed to minimize unnecessary render cycles.
  *
@@ -24,7 +24,7 @@ const IncrementSliderButtonBase = kind({
 
 	render: ({onTap, ...rest}) => {
 		return (
-			<IconButton
+			<Button
 				{...rest}
 				backgroundOpacity="transparent"
 				onTap={onTap}
