@@ -4,38 +4,37 @@
 @import "../styles/variables.less";
 @import "../styles/skin.less";
 
+
 .picker {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	min-width: 70px;
-	font-weight: 500;
-	font-size: 24px;
-
-	.item {
-		margin: 0 10px;
-		color: inherit;
-		width: 100%;
-		text-align: center;
-
-		&.active {
-			font-size: 36px;
-		}
-	}
 
 	.applySkins({
+		align-items: center;
+		justify-content: center;
+		min-width: 72px;
+		font-weight: 500;	// Convert to LESS variable
+		font-size: 24px;	// Convert to LESS variable
+
 		.item {
+			margin: 0 @agate-component-spacing;
+			color: inherit;
+			width: 100%;
+			text-align: center;
 			height: @agate-button-height;
 			line-height: @agate-button-height;
 
 			&.active {
 				background-color: @agate-sliderbutton-bg-color;
+				font-size: 36px;	// Convert to LESS variable
+			}
+			&[disabled] {
+				.vendor-opacity(@agate-disabled-opacity);
 			}
 
-			&[disabled] {
-				.vendor-opacity(0.6);
-			}
+			.focus({
+				color: @agate-spotlight-color;
+			});
 		}
 	});
 }

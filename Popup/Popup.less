@@ -1,7 +1,7 @@
 // Popup.less
 //
-@import '../styles/mixins.less';
-@import '../styles/skin.less';
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
 
 .popup {
 	.applySkins({
@@ -71,5 +71,15 @@
 .popupTransitionContainer {
 	position: absolute;
 	bottom: 0;
+	height: 100%;
 	width: 100%;
+	pointer-events: none;
+
+	.inner {
+		height: 100%;
+
+		> * {
+			pointer-events: auto;
+		}
+	}
 }
