@@ -1,0 +1,152 @@
+// Slider.less
+//
+@import '../styles/mixins.less';
+@import '../styles/skin.less';
+
+.slider {
+	position: relative;
+	margin: 0 12px;
+	// Set both the V and H sizes here, so they can be easily overridden, both internally below and by component consumers.
+	height: 6px;
+	width: 6px;
+	box-sizing: content-box;
+	direction: ltr;
+
+	.progressBar {
+		position: relative;
+		height: 100%;
+		width: 100%;
+	}
+
+	.knob {
+		position: absolute;
+		will-change: left, bottom;
+
+		&::before {
+			content: "";
+			position: absolute;
+			height: 60px;
+			width: 60px;
+			// Vertically and horizontally center this knob.
+			// Using this method rather than -top -left so the knob is more intuitively customizable.
+			transform: translate3d(-50%, -50%, 0) scale(0.8);
+			border-radius: 30px;
+			border: 30px solid transparent;
+			box-sizing: border-box;
+			will-change: transform;
+			transition: transform ease-out 100ms;
+
+		}
+	}
+
+	&:global(.spottable):focus,
+	:global(.spottable):focus & {
+		background-image: none;
+	}
+
+	&.horizontal {
+		@h-gap: 30px;
+		@v-gap: 27px;
+		width: auto;
+		padding: @v-gap @h-gap;
+
+		.fill,
+		.load {
+			height: 100%;
+		}
+
+		.knob {
+			left: ~"calc(var(--ui-slider-proportion-end-knob) * 100%)";
+		}
+	}
+
+	&.vertical {
+		@h-gap: (27px);
+		@v-gap: 30px;
+		padding: @v-gap @h-gap;
+		min-height: 120px;
+		display: inline-block;
+		vertical-align: top;
+
+		.fill,
+		.load {
+			width: 100%;
+		}
+
+		.knob {
+			bottom: ~"calc(var(--ui-slider-proportion-end-knob) * 100%)";
+			top: auto;
+		}
+	}
+
+	.spottable({
+		&.pressed,
+		&:focus {
+			.tooltip {
+				display: block;
+			}
+		}
+
+		&.pressed,
+		&:focus.activateOnFocus,
+		&:focus.active {
+			.knob::before {
+				transform: translate3d(-50%, -50%, 0) scale(1);
+			}
+		}
+	});
+
+	.applySkins({
+		.progressBar {
+			background-color: @agate-slider-bg-color;
+		}
+
+		.fill {
+			background-color: @agate-slider-bg-image;
+		}
+
+		.knob::before {
+			background-color: @agate-slider-knob-bg-color;
+		}
+
+		.spottable({
+			&:focus.activateOnFocus,
+			&.active,
+			&.pressed {
+				.fill {
+					background-color: @agate-spotlight-bg-color;
+				}
+			}
+
+			.focus({
+				background-color: transparent;
+
+				.knob::before {
+					background-color: @agate-spotlight-focus-bg-image;
+				}
+
+				&.active {
+					.knob::before {
+						background-color: @agate-slider-knob-bg-color;
+						border-color: @agate-spotlight-focus-bg-image;
+					}
+				}
+			});
+		});
+
+		&.noFill {
+			.fill {
+				background-color: transparent;
+			}
+
+			.spottable({
+				&.active,
+				&.pressed {
+					.fill {
+						background-color: transparent;
+					}
+				}
+			});
+		}
+	});
+}
