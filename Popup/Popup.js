@@ -51,6 +51,7 @@ const PopupBase = kind({
 				type="fade"
 				className={css.popupTransitionContainer}
 				onHide={onHide}
+				css={css}
 			>
 				<div
 					{...rest}

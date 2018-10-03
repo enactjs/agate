@@ -1,10 +1,7 @@
 // LabeledItem.less
 //
-@import '../styles/mixins.less';
-//@import '../styles/text.less';
-// @import '../styles/variables.less';
-// @import '../styles/colors.less';
-@import '../styles/skin.less';
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
 
 .labeledItem {
 	flex-wrap: wrap;	// Allow the label to fall on the next line
@@ -21,13 +18,11 @@
 	}
 
 	.applySkins({
-		//// Locally scoped LESS variables ////
-		// Vertically shift the text element to position it closer to the header than the line-height naturally allows
-		@text-vertical-offset: 6px;
 		padding-right: @agate-item-side-outset;
 
 		// Text
-		.labelAfter, .labelBefore {
+		.labelAfter,
+		.labelBefore {
 			color: @agate-labeleditem-label-color;
 			line-height: (@agate-item-height / 2);
 			font-size: @agate-item-label-font-size;
@@ -41,14 +36,9 @@
 			padding-bottom: @agate-item-side-outset;
 		}
 
-		&.with-label {
-			.label {
-				padding-bottom: 3px;
-			}
-		}
-
 		.focus({
-			.label {
+			.labelBefore,
+			.labelAfter {
 				color: @agate-spotlight-color;
 			}
 		});

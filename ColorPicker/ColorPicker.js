@@ -2,11 +2,7 @@
  * Agate component to allow the user to choose a color.
  *
  * @example
- * <ColorPicker
- *   spacing="medium"
- * >
- *   A group of related components
- * </ColorPicker>
+ * <ColorPicker defaultValue="#ffcc00" onChange={handleChange} />
  *
  * @module agate/ColorPicker
  * @exports ColorPicker
@@ -42,8 +38,39 @@ const ColorPickerBase = kind({
 	name: 'ColorPicker',
 
 	propTypes: /** @lends agate/ColorPicker.ColorPickerBase.prototype */ {
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal Elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `colorPicker` - The root class name
+		 * * `colorSwatch` - The node that displays the chosen color. The current value is applied
+		 * 		as a background-color to this element.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * Callback method with a payload containing the `value` that was just selected.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
 		onChange: PropTypes.func,
+
+		/**
+		 * The value of this input field. Setting this directly will not allow interaction with the
+		 * component. Use `defaultValue` to enable interactive use.
+		 *
+		 * The value should take the format of a HEX color. Ex: `#ffcc00` or `#3467af`
+		 *
+		 * @type {String}
+		 * @see {@link ui/Changeable.Changeable}
+		 * @public
+		 */
 		value: PropTypes.string
 	},
 
