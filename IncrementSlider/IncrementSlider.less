@@ -1,0 +1,48 @@
+// IncrementSlider.less
+//
+@import "../styles/skin.less";
+
+.incrementSlider {
+	.applySkins({
+		direction: ltr;	// Always arrange this according to LTR rules
+
+		&.horizontal {
+			display: flex;
+
+			.input,
+			.slider {
+				padding-left: ((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale);
+				padding-right: ((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale);
+			}
+
+			.slider {
+				flex-grow: 1;
+				margin-left: 0;
+				margin-right: 0;
+			}
+		}
+
+		&.vertical {
+			display: inline-flex;
+			flex-direction: column;
+
+			.decrementButton,
+			.incrementButton {
+				display: block;
+			}
+
+			.decrementButton {
+				order: 3;
+			}
+
+			.slider {
+				flex-grow: 1;
+				order: 2;
+			}
+
+			.incrementButton {
+				order: 1;
+			}
+		}
+	});
+}
