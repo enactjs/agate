@@ -27,7 +27,7 @@ function hexToRgb (hex) {
 		r: parseInt(result[1], 16),
 		g: parseInt(result[2], 16),
 		b: parseInt(result[3], 16)
-	} : null;
+	} : {};
 }
 
 /**
@@ -86,10 +86,6 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const Decorator = class extends React.Component {
 		static displayName = 'AgateDecorator';
 
-		static defaultProps = {
-			accent: '#000000'
-		};
-
 		render () {
 			const className = classnames(
 				this.props.className,
@@ -101,12 +97,16 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			const style = this.props.style || {};
 
 			const accentObj = hexToRgb(this.props.accent);
+			const highlightObj = hexToRgb(this.props.highlight);
 
 			style['--agate-accent-color'] = this.props.accent;
 			style['--agate-accent-r'] = accentObj.r;
 			style['--agate-accent-g'] = accentObj.g;
 			style['--agate-accent-b'] = accentObj.b;
 			style['--agate-highlight-color'] = this.props.highlight;
+			style['--agate-highlight-r'] = highlightObj.r;
+			style['--agate-highlight-g'] = highlightObj.g;
+			style['--agate-highlight-b'] = highlightObj.b;
 
 			return (
 				<App {...this.props} style={style} className={className} />
