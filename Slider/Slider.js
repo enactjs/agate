@@ -7,21 +7,17 @@
  *   max={100}
  *   min={-100}
  *   step={10}
- *   tooltip
  * />
  *
  * @module moonstone/Slider
  * @exports Slider
  * @exports SliderBase
  * @exports SliderDecorator
- * @exports SliderTooltip
  */
 
 import {forKey, forProp, forward, forwardWithPrevent, handle} from '@enact/core/handle';
 import kind from '@enact/core/kind';
-import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
-import ComponentOverride from '@enact/ui/ComponentOverride';
 import ProgressBar from '@enact/ui/ProgressBar';
 import Pure from '@enact/ui/internal/Pure';
 import Slottable from '@enact/ui/Slottable';
@@ -31,7 +27,6 @@ import anyPass from 'ramda/src/anyPass';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
-// import {ProgressBarTooltip} from '../ProgressBar';
 import Skinnable from '../Skinnable';
 
 import SliderBehaviorDecorator from './SliderBehaviorDecorator';
@@ -86,8 +81,7 @@ const SliderBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Indicates that the slider has gained focus and if the tooltip is present, it will be
-		 * shown.
+		 * Indicates that the slider has gained focus.
 		 *
 		 * @type {Boolean}
 		 * @public
@@ -164,42 +158,6 @@ const SliderBase = kind({
 		 * @public
 		 */
 		step: PropTypes.number,
-
-		/**
-		 * Enables the built-in tooltip
-		 *
-		 * To customize the tooltip, pass either a custom tooltip component or an instance of
-		 * [SliderTooltip]{@link moonstone/Slider.SliderTooltip} with additional props configured.
-		 *
-		 * ```
-		 * <Slider
-		 *   tooltip={
-		 *     <SliderTooltip percent side="after" />
-		 *   }
-		 * />
-		 * ```
-		 *
-		 * The tooltip may also be passed as a child via the `"tooltip"` slot. See
-		 * [Slottable]{@link ui/Slottable} for more information on how slots can be used.
-		 *
-		 * ```
-		 * <Slider>
-		 *   <SliderTooltip percent side="after" />
-		 * </Slider>
-		 * ```
-		 *
-		 * If a custom tooltip is provided, it will receive the following props:
-		 *
-		 * * `children` - The `value` prop from the slider
-		 * * `visible` - `true` if the tooltip should be displayed
-		 * * `orientation` - The value of the `orientation` prop from the slider
-		 * * `proportion` - A number between 0 and 1 representing the proportion of the `value` in
-		 *   terms of `min` and `max`
-		 *
-		 * @type {Boolean|Element|Function}
-		 * @public
-		 */
-		tooltip: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
 
 		/**
 		 * The value of the slider.
@@ -289,7 +247,7 @@ const SliderDecorator = compose(
 	Pure,
 	Changeable,
 	SliderBehaviorDecorator,
-	Slottable({slots: ['knob', 'tooltip']}),
+	Slottable({slots: ['knob']}),
 	Skinnable
 );
 

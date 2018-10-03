@@ -16,7 +16,6 @@
  * @exports IncrementSlider
  * @exports IncrementSliderBase
  * @exports IncrementSliderDecorator
- * @exports IncrementSliderTooltip
  */
 
 import {forward} from '@enact/core/handle';
@@ -148,7 +147,7 @@ const IncrementSliderBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
-		 * Shows the tooltip, when present.
+		 * Indicates focused state.
 		 * @type {Boolean}
 		 * @public
 		 */
@@ -348,35 +347,6 @@ const IncrementSliderBase = kind({
 		step: PropTypes.number,
 
 		/**
-		 * Enables the built-in tooltip
-		 *
-		 * To customize the tooltip, pass either a custom Tooltip component or an instance of
-		 * [IncrementSliderTooltip]{@link moonstone/IncrementSlider.IncrementSliderTooltip} with
-		 * additional props configured.
-		 *
-		 * ```
-		 * <IncrementSlider
-		 *   tooltip={
-		 *     <IncrementSliderTooltip percent side="after" />
-		 *   }
-		 * />
-		 * ```
-		 *
-		 * The tooltip may also be passed as a child via the `"tooltip"` slot. See
-		 * [Slottable]{@link ui/Slottable} for more information on how slots can be used.
-		 *
-		 * ```
-		 * <IncrementSlider>
-		 *   <IncrementSliderTooltip percent side="after" />
-		 * </IncrementSlider>
-		 * ```
-		 *
-		 * @type {Boolean|Element|Function}
-		 * @public
-		 */
-		tooltip: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
-
-		/**
 		 * The value of the increment slider.
 		 *
 		 * Defaults to the value of `min`.
@@ -394,8 +364,7 @@ const IncrementSliderBase = kind({
 		noFill: false,
 		orientation: 'horizontal',
 		spotlightDisabled: false,
-		step: 1,
-		tooltip: false
+		step: 1
 	},
 
 	handlers: {
@@ -435,24 +404,6 @@ const IncrementSliderBase = kind({
 
 	computed: {
 		className: ({orientation, styler}) => styler.append(orientation)
-		// decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel, disabled, min, value = min}) => {
-		// 	if (decrementAriaLabel == null) {
-		// 		decrementAriaLabel = $L('press ok button to decrease the value');
-		// 	}
-		//
-		// 	return !(disabled || value <= min) ?
-		// 		`${valueText != null ? valueText : value} ${decrementAriaLabel}` :
-		// 		null;
-		// },
-		// incrementAriaLabel: ({'aria-valuetext': valueText, incrementAriaLabel, disabled, min, max, value = min}) => {
-		// 	if (incrementAriaLabel == null) {
-		// 		incrementAriaLabel = $L('press ok button to increase the value');
-		// 	}
-		//
-		// 	return !(disabled || value >= max) ?
-		// 		`${valueText != null ? valueText : value} ${incrementAriaLabel}` :
-		// 		null;
-		// }
 	},
 
 	render: ({active,
@@ -460,15 +411,9 @@ const IncrementSliderBase = kind({
 		'data-webos-voice-group-label': voiceGroupLabel,
 		backgroundProgress,
 		css,
-		decrementAriaLabel,
-		decrementDisabled,
-		decrementIcon,
 		disabled,
 		focused,
 		id,
-		incrementAriaLabel,
-		incrementDisabled,
-		incrementIcon,
 		knobStep,
 		max,
 		min,
@@ -485,7 +430,6 @@ const IncrementSliderBase = kind({
 		orientation,
 		spotlightDisabled,
 		step,
-		tooltip,
 		value,
 		...rest
 	}) => {
@@ -500,18 +444,13 @@ const IncrementSliderBase = kind({
 			<div {...rest}>
 				<IncrementSliderButton
 					icon="minus"
-					aria-controls={!incrementDisabled ? id : null}
 					aria-hidden={ariaHidden}
-					aria-label={decrementAriaLabel}
 					className={css.decrementButton}
 					data-webos-voice-group-label={voiceGroupLabel}
-					disabled={decrementDisabled}
 					onTap={onDecrement}
 					onSpotlightDisappear={onDecrementSpotlightDisappear}
 					spotlightDisabled={spotlightDisabled}
-				>
-					{decrementIcon}
-				</IncrementSliderButton>
+				/>
 				<Slider
 					{...ariaProps}
 					active={active}
@@ -533,23 +472,17 @@ const IncrementSliderBase = kind({
 					orientation={orientation}
 					spotlightDisabled={spotlightDisabled}
 					step={step}
-					tooltip={tooltip}
 					value={value}
 				/>
 				<IncrementSliderButton
 					icon="plus"
-					aria-controls={!decrementDisabled ? id : null}
 					aria-hidden={ariaHidden}
-					aria-label={incrementAriaLabel}
 					className={css.incrementButton}
 					data-webos-voice-group-label={voiceGroupLabel}
-					disabled={incrementDisabled}
 					onTap={onIncrement}
 					onSpotlightDisappear={onIncrementSpotlightDisappear}
 					spotlightDisabled={spotlightDisabled}
-				>
-					{incrementIcon}
-				</IncrementSliderButton>
+				/>
 			</div>
 		);
 	}
@@ -560,7 +493,7 @@ const IncrementSliderDecorator = compose(
 	Changeable,
 	SliderBehaviorDecorator({emitSpotlightEvents: 'onSpotlightDirection'}),
 	Skinnable,
-	Slottable({slots: ['knob', 'tooltip']})
+	Slottable({slots: ['knob']})
 );
 
 /**
@@ -579,20 +512,6 @@ const IncrementSliderDecorator = compose(
  * @public
  */
 const IncrementSlider = IncrementSliderDecorator(IncrementSliderBase);
-
-/**
- * A [Tooltip]{@link moonstone/TooltipDecorator.Tooltip} specifically adapted for use with
- * [IncrementSlider]{@link moonstone/IncrementSlider.IncrementSlider},
- * [ProgressBar]{@link moonstone/ProgressBar.ProgressBar}, or
- * [Slider]{@link moonstone/Slider.Slider}.
- *
- * See {@link moonstone/ProgressBar.ProgressBarTooltip}
- *
- * @class IncrementSliderTooltip
- * @memberof moonstone/IncrementSlider
- * @ui
- * @public
- */
 
 export default IncrementSlider;
 export {

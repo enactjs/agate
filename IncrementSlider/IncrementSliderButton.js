@@ -26,7 +26,6 @@ const IncrementSliderButtonBase = kind({
 		return (
 			<Button
 				{...rest}
-				backgroundOpacity="transparent"
 				onTap={onTap}
 				onHold={onTap}
 				onHoldPulse={onTap}
