@@ -14,7 +14,7 @@
 
 			.selected& {
 				background-color: @agate-toggle-button-switch-on-bg-color;
-				border-color: @agate-toggle-button-switch-on-bg-color;
+				border-color: @agate-toggle-button-switch-on-border-color;
 			}
 
 			.underline& {
@@ -25,9 +25,10 @@
 
 		.client {
 			.selected& {
-				color: @agate-toggle-focus-text-color;
+				color: inherit;
+
 				.underline& {
-					color: inherit;
+					color: @agate-toggle-focus-text-color;
 				}
 			}
 		}
@@ -59,6 +60,17 @@
 				&::after {
 					background-color: @agate-toggle-button-switch-on-focus-bg-color;
 					border-color: @agate-toggle-button-switch-on-focus-border-color;
+				}
+			}
+
+
+			.client {
+				.selected& {
+					color: @agate-toggle-focus-text-color;
+
+					.underline& {
+						color: @agate-toggle-focus-text-color;
+					}
 				}
 			}
 		});

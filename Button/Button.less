@@ -28,6 +28,7 @@
 			color: @agate-button-color;
 			background-image: @agate-button-bg-image;
 			box-shadow: @agate-button-shadow;
+			transform: skewX(@agate-button-skew);
 		}
 
 		.client {
@@ -102,9 +103,9 @@
 
 		&.highlighted {
 			.bg {
-				background-color: @agate-button-focus-bg-color;
-				background-image: @agate-button-focus-bg-image;
-				opacity: 0.4;
+				background-color: @agate-button-highlighted-bg-color;
+				background-image: @agate-button-highlighted-bg-image;
+				opacity: @agate-button-highlighted-opacity;
 			}
 
 			&,

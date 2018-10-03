@@ -22,13 +22,20 @@
 			font-size: @agate-input-font-size;
 			font-weight: @agate-input-font-weight;
 
-			border: unset;
+			border-top: @agate-input-border-top;
+			border-right: @agate-input-border-right;
+			border-bottom: @agate-input-border-bottom;
+			border-left: @agate-input-border-left;
 			background: transparent;
 			color: @agate-text-color;
 
 			&::selection {
 				color: @agate-spotlight-color;
 				background-color: @agate-spotlight-bg-color;
+			}
+
+			&::placeholder {
+				color: @agate-input-placeholder-color;
 			}
 
 			&[type=number] {
@@ -82,25 +89,14 @@
 			pointer-events: none;
 		}
 
-		&.focused,
-		&:global(.spottable):focus {
-			background-color: inherit;
-			border-bottom-color: @agate-input-decorator-focused-border-color;
+		&.focused {
+			background-color: @agate-input-focused-background-color;
+			background-image: @agate-input-focused-background-image;
 			border-radius: 3px;
 
 			.icon,
 			.input {
 				color: @agate-input-focused-text-color;
-			}
-		}
-
-		&.focused {
-			background-color: @agate-input-active-background-color;
-			border-radius: 3px;
-
-			.icon,
-			.input {
-				color: @agate-input-active-text-color;
 			}
 		}
 	});

@@ -80,6 +80,15 @@ const ButtonBase = kind({
 		joinedPosition: PropTypes.oneOf(['left', 'center', 'right']),
 
 		/**
+		 * Provides a way to call special interface attention to this button. It will be "featured"
+		 * in some way by the theme's visual rules.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		selected: PropTypes.bool,
+
+		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
 		 * other related buttons.
 		 *
@@ -99,10 +108,10 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({highlighted, joinedPosition, type, styler}) => styler.append(
+		className: ({highlighted, joinedPosition, selected, type, styler}) => styler.append(
 			type,
 			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
-			{highlighted}
+			{highlighted, selected}
 		),
 		minWidth: ({children}) => (!children)
 	},
@@ -110,6 +119,7 @@ const ButtonBase = kind({
 	render: ({css, ...rest}) => {
 		delete rest.highlighted;
 		delete rest.joinedPosition;
+		delete rest.selected;
 		delete rest.type;
 
 		return UiButtonBase.inline({
