@@ -48,6 +48,9 @@ const LabeledIconButtonBase = kind({
 		 */
 		icon: PropTypes.string,
 
+		// forwarded from Spottable
+		pressed: PropTypes.bool,
+
 		/**
 		 * Selects the component.
 		 *
@@ -64,11 +67,11 @@ const LabeledIconButtonBase = kind({
 		publicClassNames: ['labeledIconButton', 'icon', 'label', 'selected', 'small']
 	},
 
-	render: ({css, icon, selected, ...rest}) => {
+	render: ({css, icon, pressed, selected, ...rest}) => {
 		return UiLabeledIcon.inline({
 			...rest,
 			icon: (
-				<Button selected={selected} icon={icon} />
+				<Button pressed={pressed} selected={selected} icon={icon} />
 			),
 			css
 		});
