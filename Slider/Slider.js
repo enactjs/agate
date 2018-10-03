@@ -1,5 +1,5 @@
 /**
- * Provides Moonstone-themed slider components and behaviors.
+ * Provides Agate-themed slider components and behaviors.
  *
  * @example
  * <Slider
@@ -9,7 +9,7 @@
  *   step={10}
  * />
  *
- * @module moonstone/Slider
+ * @module agate/Slider
  * @exports Slider
  * @exports SliderBase
  * @exports SliderDecorator
@@ -42,14 +42,14 @@ import componentCss from './Slider.less';
  *
  * @class SliderBase
  * @extends ui/Slider.SliderBase
- * @memberof moonstone/Slider
+ * @memberof agate/Slider
  * @ui
  * @public
  */
 const SliderBase = kind({
 	name: 'Slider',
 
-	propTypes: /** @lends moonstone/Slider.SliderBase.prototype */ {
+	propTypes: /** @lends agate/Slider.SliderBase.prototype */ {
 		/**
 		 * Activates the component when focused so that it may be manipulated via the directional
 		 * input keys.
@@ -232,13 +232,13 @@ const SliderBase = kind({
 });
 
 /**
- * Moonstone-specific slider behaviors to apply to [SliderBase]{@link moonstone/Slider.SliderBase}.
+ * Agate-specific slider behaviors to apply to [SliderBase]{@link agate/Slider.SliderBase}.
  *
  * @hoc
- * @memberof moonstone/Slider
+ * @memberof agate/Slider
  * @mixes ui/Changeable.Changeable
  * @mixes spotlight/Spottable.Spottable
- * @mixes moonstone/Skinnable.Skinnable
+ * @mixes agate/Skinnable.Skinnable
  * @mixes ui/Slottable.Slottable
  * @mixes ui/Slider.SliderDecorator
  * @public
@@ -252,8 +252,8 @@ const SliderDecorator = compose(
 );
 
 /**
- * Slider input with Moonstone styling, [`Spottable`]{@link spotlight/Spottable.Spottable},
- * [Touchable]{@link ui/Touchable} and [`SliderDecorator`]{@link moonstone/Slider.SliderDecorator}
+ * Slider input with Agate styling, [`Spottable`]{@link spotlight/Spottable.Spottable},
+ * [Touchable]{@link ui/Touchable} and [`SliderDecorator`]{@link agate/Slider.SliderDecorator}
  * applied.
  *
  * By default, `Slider` maintains the state of its `value` property. Supply the `defaultValue`
@@ -262,8 +262,8 @@ const SliderDecorator = compose(
  * events.
  *
  * @class Slider
- * @memberof moonstone/Slider
- * @mixes moonstone/Slider.SliderDecorator
+ * @memberof agate/Slider
+ * @mixes agate/Slider.SliderDecorator
  * @ui
  * @public
  */
@@ -275,7 +275,7 @@ const SliderDecorator = compose(
  * the parent controls the value of the slider directly through the props.
  *
  * @name aria-valuetext
- * @memberof moonstone/Slider.Slider.prototype
+ * @memberof agate/Slider.Slider.prototype
  * @type {String|Number}
  * @public
  */
