@@ -43,6 +43,26 @@
 			}
 		}
 
+		&.joinedLeft,
+		&.joinedCenter {
+			margin-right: 0;
+
+			.bg {
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+			}
+		}
+
+		&.joinedRight,
+		&.joinedCenter {
+			margin-left: 0;
+
+			.bg {
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+			}
+		}
+
 		&.small {
 			height: @agate-button-small-height;
 			min-width: @agate-button-small-height;
