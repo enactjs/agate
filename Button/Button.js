@@ -11,6 +11,7 @@
  */
 
 import kind from '@enact/core/kind';
+import {cap} from '@enact/core/util';
 import Spottable from '@enact/spotlight/Spottable';
 import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
 import Pure from '@enact/ui/internal/Pure';
@@ -58,14 +59,39 @@ const ButtonBase = kind({
 		 */
 		css: PropTypes.object,
 
+		/**
+		 * Provides a way to call special interface attention to this button. It will be "featured"
+		 * in some way by the theme's visual rules.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
 		highlighted: PropTypes.bool,
 
-		type: PropTypes.oneOf(['standard', 'grid'])
+		/**
+		 * To create a collection of buttons that appear as one entity: buttons that butt up against
+		 * each other. Specify where the button is in the arrangement: 'left', 'center', or 'right'.
+		 * This prop is not recommended for use on a lonely button with no other buttons nearby.
+		 * Not specifying this optional prop leaves the button behaving normally.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		joinedPosition: PropTypes.oneOf(['left', 'center', 'right']),
+
+		/**
+		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
+		 * other related buttons.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		type: PropTypes.oneOf(['grid'])
 	},
 
-	defaultProps: {
-		type: 'standard'
-	},
+	// defaultProps: {
+	// 	type: 'standard'
+	// },
 
 	styles: {
 		css: componentCss,
@@ -73,8 +99,9 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({highlighted, type, styler}) => styler.append(
+		className: ({highlighted, joinedPosition, type, styler}) => styler.append(
 			type,
+			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
 			{highlighted}
 		),
 		minWidth: ({children}) => (!children)
@@ -82,6 +109,7 @@ const ButtonBase = kind({
 
 	render: ({css, ...rest}) => {
 		delete rest.highlighted;
+		delete rest.joinedPosition;
 		delete rest.type;
 
 		return UiButtonBase.inline({
