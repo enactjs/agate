@@ -17,6 +17,7 @@
 
 import {forKey, forProp, forward, forwardWithPrevent, handle} from '@enact/core/handle';
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import ProgressBar from '@enact/ui/ProgressBar';
 import Pure from '@enact/ui/internal/Pure';
@@ -245,10 +246,11 @@ const SliderBase = kind({
  */
 const SliderDecorator = compose(
 	Pure,
+	Spottable,
 	Changeable,
-	SliderBehaviorDecorator,
-	Slottable({slots: ['knob']}),
-	Skinnable
+	SliderBehaviorDecorator({emitSpotlightEvents: 'onSpotlightDirection'}),
+	Skinnable,
+	Slottable({slots: ['knob']})
 );
 
 /**
