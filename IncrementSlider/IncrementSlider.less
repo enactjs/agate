@@ -9,6 +9,11 @@
 		&.horizontal {
 			display: flex;
 
+			.decrementButton,
+			.incrementButton {
+				margin: 0 @agate-slider-button-margin;
+			}
+
 			.input,
 			.slider {
 				padding-left: ((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale);
@@ -29,6 +34,7 @@
 			.decrementButton,
 			.incrementButton {
 				display: block;
+				margin: @agate-slider-button-margin 0;
 			}
 
 			.decrementButton {
