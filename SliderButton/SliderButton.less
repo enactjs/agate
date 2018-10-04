@@ -31,7 +31,6 @@
 		left: ~"calc(var(--knob-value) * var(--sliderbutton-item-size))";
 		will-change: left;
 		transition: left 200ms ease-in-out;
-		border-radius: 999px;
 	}
 
 	.track {
@@ -49,16 +48,23 @@
 
 	.applySkins({
 		height: @agate-button-height;
-		border-radius: 999px;
-		color: @agate-sliderbutton-color;
+		border-radius: @agate-slider-button-border-radius;
 		background-color: @agate-sliderbutton-bg-color;
 		background-image: @agate-sliderbutton-bg-image;
+		cursor: pointer;
+		transform: skewX(@agate-slider-button-skew);
+
+		.client {
+			transform: skewX(@agate-slider-button-client-skew);
+			color: @agate-sliderbutton-color;
+		}
 
 		.knob {
 			background-color: @agate-sliderbutton-knob-bg-color;
 			background-image: @agate-sliderbutton-knob-bg-image;
 			opacity: 0.9;
 			box-shadow: @agate-sliderbutton-knob-shadow;
+			border-radius: @agate-slider-button-border-radius;
 		}
 
 		.focus({

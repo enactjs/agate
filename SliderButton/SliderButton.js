@@ -45,7 +45,7 @@ const SliderProgress = kind({
 		css: componentCss,
 		className: 'track'
 	},
-	render: ({children, values, ...rest}) => {
+	render: ({children, css, values, ...rest}) => {
 		delete rest.backgroundProgress;
 		delete rest.orientation;
 		delete rest.progress;
@@ -55,7 +55,7 @@ const SliderProgress = kind({
 			<Row {...rest} align="center">
 				{children}
 				{values ? values.map(child => (
-					<Cell key={child}>
+					<Cell className={css.client} key={child}>
 						{child}
 					</Cell>
 				)) : null}
