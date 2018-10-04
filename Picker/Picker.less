@@ -8,6 +8,7 @@
 .picker {
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
 
 	.applySkins({
 		align-items: center;
@@ -15,8 +16,15 @@
 		min-width: 72px;
 		font-weight: 500;	// Convert to LESS variable
 		font-size: 24px;	// Convert to LESS variable
+		border-radius: @agate-picker-border-radius;
+		transform: skewX(@agate-picker-skew);
+		overflow: hidden;
 
-		.item {
+		.label {
+			transform: skewX(@agate-picker-label-skew);
+		}
+
+		.item, .itemTop, .itemBottom {
 			margin: 0 @agate-component-spacing;
 			color: inherit;
 			width: 100%;
@@ -25,7 +33,8 @@
 			line-height: @agate-button-height;
 
 			&.active {
-				background-color: @agate-sliderbutton-bg-color;
+				background-color: @agate-picker-active-bg-color;
+				background-image: @agate-picker-active-bg-image;
 				font-size: 36px;	// Convert to LESS variable
 			}
 			&[disabled] {
@@ -33,8 +42,20 @@
 			}
 
 			.focus({
-				color: @agate-spotlight-color;
+				color: @agate-picker-item-focus-color;
+				background-color: @agate-picker-item-focus-bg-color;
+				background-image: @agate-picker-item-focus-bg-image;
 			});
+		}
+
+		.itemTop {
+			background-color: @agate-picker-item-top-bg-color;
+			background-image: @agate-picker-item-top-bg-image;
+		}
+
+		.itemBottom {
+			background-color: @agate-picker-item-bottom-bg-color;
+			background-image: @agate-picker-item-bottom-bg-image;
 		}
 	});
 }

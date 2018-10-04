@@ -4,10 +4,30 @@
 
 .dateTimePicker {
 	.applySkins({
-	    font-size: 21px;	// Convert to LESS variable
+			font-size: 21px;	// Convert to LESS variable
 
-	    .pickerCol {
-		    margin: 6px 3px;	// Convert to LESS variable
-		}
+			.pickerCol {
+				margin: @agate-datetimepicker-margin;
+				transform: skewX(@agate-datetimepicker-skew);
+			}
+
+			.pickerCell, .pickerLeft, .pickerRight {
+				border-radius: 0;
+				transform: skewX(0);
+			}
+
+			.label {
+				transform: skewX(@agate-datetimepicker-label-skew);
+			}
+
+			.pickerLeft {
+				border-top-left-radius: @agate-datetimepicker-border-radius;
+				border-bottom-left-radius: @agate-datetimepicker-border-radius;
+			}
+
+			.pickerRight {
+				border-top-right-radius: @agate-datetimepicker-border-radius;
+				border-bottom-right-radius: @agate-datetimepicker-border-radius;
+			}
 	});
 }

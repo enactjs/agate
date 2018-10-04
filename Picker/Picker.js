@@ -67,21 +67,27 @@ const PickerBase = kind({
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
 				<PickerButtonItem
-					className={css.item}
+					className={css.itemTop}
 					onClick={handleDecrement}
 					disabled={isFirst}
 				>
-					{isFirst ? '' : values[value - 1]}
+					<div className={css.label}>
+						{isFirst ? '' : values[value - 1]}
+					</div>
 				</PickerButtonItem>
 				<div className={activeClassName}>
-					{values[value]}
+					<div className={css.label}>
+						{values[value]}
+					</div>
 				</div>
 				<PickerButtonItem
-					className={css.item}
+					className={css.itemBottom}
 					onClick={handleIncrement}
 					disabled={isLast}
 				>
-					{isLast ? '' : values[value + 1]}
+					<div className={css.label}>
+						{isLast ? '' : values[value + 1]}
+					</div>
 				</PickerButtonItem>
 			</PickerRoot>
 		);

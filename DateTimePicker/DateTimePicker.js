@@ -75,27 +75,39 @@ class DateTimePickerBase extends React.Component {
 			<Row {...rest} className={classnames(className, css.dateTimePicker)} align="center center">
 				<Cell size="35%">
 					<Row align="center center">
-						<PickerCell onChange={this.handleTimeChange('month')} range={ranges.months}>
-							Month
+						<PickerCell className={css.pickerLeft} onChange={this.handleTimeChange('month')} range={ranges.months}>
+							<div className={css.label}>
+								Month
+							</div>
 						</PickerCell>
-						<PickerCell onChange={this.handleTimeChange('day')} range={ranges.days}>
-							Day
+						<PickerCell className={css.pickerCell} onChange={this.handleTimeChange('day')} range={ranges.days}>
+							<div className={css.label}>
+								Day
+							</div>
 						</PickerCell>
-						<PickerCell onChange={this.handleTimeChange('year')} range={ranges.years}>
-							Year
+						<PickerCell className={css.pickerRight} onChange={this.handleTimeChange('year')} range={ranges.years}>
+							<div className={css.label}>
+								Year
+							</div>
 						</PickerCell>
 					</Row>
 				</Cell>
 				<Cell size="35%">
 					<Row align="center center">
-						<PickerCell onChange={this.handleTimeChange('hour')} range={ranges.hours}>
-							Hour
+						<PickerCell className={css.pickerLeft} onChange={this.handleTimeChange('hour')} range={ranges.hours}>
+							<div className={css.label}>
+								Hour
+							</div>
 						</PickerCell>
-						<PickerCell onChange={this.handleTimeChange('minute')} range={ranges.minutes}>
-							Minute
+						<PickerCell className={css.pickerCell} onChange={this.handleTimeChange('minute')} range={ranges.minutes}>
+							<div className={css.label}>
+								Minute
+							</div>
 						</PickerCell>
-						<PickerCell onChange={this.handleTimeChange('meridiem')} range={ranges.meridiem}>
-							AM/PM
+						<PickerCell className={css.pickerRight} onChange={this.handleTimeChange('meridiem')} range={ranges.meridiem}>
+							<div className={css.label}>
+								AM/PM
+							</div>
 						</PickerCell>
 					</Row>
 				</Cell>
