@@ -8,6 +8,7 @@ import {addAll} from '@enact/core/keymap';
 import classnames from 'classnames';
 import hoc from '@enact/core/hoc';
 import React from 'react';
+import PropTypes from 'prop-types';
 import {ResolutionDecorator} from '@enact/ui/resolution';
 import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 import SpotlightRootDecorator from '@enact/spotlight/SpotlightRootDecorator';
@@ -43,6 +44,7 @@ const defaultConfig = {
 		screenTypes
 	},
 	spotlight: true,
+	customSkin: true,
 	skin: true
 };
 
@@ -66,7 +68,7 @@ const defaultConfig = {
  * @public
  */
 const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
-	const {float, noAutoFocus, ri, skin, spotlight} = config;
+	const {float, noAutoFocus, ri, customSkin, skin, spotlight} = config;
 
 	const bgClassName = 'enact-fit';
 
@@ -86,6 +88,11 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const Decorator = class extends React.Component {
 		static displayName = 'AgateDecorator';
 
+		static propTypes = {
+			accent: PropTypes.string,
+			highlight: PropTypes.string
+		}
+
 		render () {
 			const className = classnames(
 				this.props.className,
@@ -96,17 +103,19 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 			const style = this.props.style || {};
 
-			const accentObj = hexToRgb(this.props.accent);
-			const highlightObj = hexToRgb(this.props.highlight);
+			if (customSkin) {
+				const accentObj = hexToRgb(this.props.accent);
+				const highlightObj = hexToRgb(this.props.highlight);
 
-			style['--agate-accent-color'] = this.props.accent;
-			style['--agate-accent-r'] = accentObj.r;
-			style['--agate-accent-g'] = accentObj.g;
-			style['--agate-accent-b'] = accentObj.b;
-			style['--agate-highlight-color'] = this.props.highlight;
-			style['--agate-highlight-r'] = highlightObj.r;
-			style['--agate-highlight-g'] = highlightObj.g;
-			style['--agate-highlight-b'] = highlightObj.b;
+				style['--agate-accent-color'] = this.props.accent;
+				style['--agate-accent-r'] = accentObj.r;
+				style['--agate-accent-g'] = accentObj.g;
+				style['--agate-accent-b'] = accentObj.b;
+				style['--agate-highlight-color'] = this.props.highlight;
+				style['--agate-highlight-r'] = highlightObj.r;
+				style['--agate-highlight-g'] = highlightObj.g;
+				style['--agate-highlight-b'] = highlightObj.b;
+			}
 
 			return (
 				<App {...this.props} style={style} className={className} />
