@@ -12,6 +12,11 @@
 @agate-icon-font-family: "Moonstone Icons";
 @agate-component-spacing: 12px;
 
+// local Electro Variables
+@electro-border-radius: 18px;
+@electro-skew: -20deg;
+@electro-negate-skew: 20deg;
+
 // Button
 // ---------------------------------------
 @agate-button-height: 84px;
@@ -19,14 +24,14 @@
 @agate-button-font-size: 36px;
 @agate-button-small-font-size: 24px;
 @agate-button-border-width: 1px;
-@agate-button-border-radius: 18px;
+@agate-button-border-radius: @electro-border-radius;
 @agate-button-text-size: 30px;
 @agate-button-small-text-size: 24px;
 @agate-button-h-padding: 27px;
 @agate-button-small-h-padding: 18px;
 @agate-button-highlighted-opacity: 1;
-@agate-button-skew: -20deg;
-@agate-button-grid-border-radius: @agate-button-border-radius;
+@agate-button-skew: @electro-skew;
+@agate-button-grid-border-radius: @electro-border-radius;
 
 // ColorPicker
 // ---------------------------------------
@@ -36,9 +41,9 @@
 // DateTimePicker
 // ---------------------------------------
 @agate-datetimepicker-margin: 6px 0px;
-@agate-datetimepicker-border-radius: @agate-button-border-radius;
-@agate-datetimepicker-skew: -20deg;
-@agate-datetimepicker-label-skew: 20deg;
+@agate-datetimepicker-border-radius: @electro-border-radius;
+@agate-datetimepicker-skew: @electro-skew;
+@agate-datetimepicker-label-skew: @electro-negate-skew;
 
 // Divider
 // ---------------------------------------
@@ -100,10 +105,10 @@
 @agate-panels-tab-v-padding: 18px;
 @agate-panels-tab-v-margin: 0;
 @agate-panels-tab-group-margin: 0 20px 0 0;
-@agate-panels-tab-group-radius: @agate-button-border-radius;
-@agate-panels-tab-group-skew: -20deg;
+@agate-panels-tab-group-radius: @electro-border-radius;
+@agate-panels-tab-group-skew: @electro-skew;
 @agate-panels-tab-bar-margin: 0;
-@agate-panels-tab-label-skew: 20deg;
+@agate-panels-tab-label-skew: @electro-negate-skew;
 @agate-panels-tab-horizontal-width: 110%;
 @agate-panels-tab-horizontal-before-right: 15%;
 @agate-panels-tab-horizontal-after-padding-right: 10%;
@@ -111,22 +116,22 @@
 
 // Picker
 // ---------------------------------------
-@agate-picker-border-radius: @agate-button-border-radius;
-@agate-picker-skew: -20deg;
-@agate-picker-label-skew: 20deg;
+@agate-picker-border-radius: @electro-border-radius;
+@agate-picker-skew: @electro-skew;
+@agate-picker-label-skew: @electro-negate-skew;
 
 // Popup
 // ---------------------------------------
 @agate-popup-min-width: 510px;
 @agate-popup-max-width: 70%;
 @agate-popup-border-width: 1px;
-@agate-popup-border-radius: @agate-button-border-radius;
+@agate-popup-border-radius: @electro-border-radius;
 @agate-popup-padding: (@agate-component-spacing * 2);
 @agate-popup-title-padding: 0;
 @agate-popup-body-padding: (@agate-component-spacing * 1.5);
 @agate-popup-body-margin: 0;
 @agate-popup-body-border-width: 1px;
-@agate-popup-body-border-radius: @agate-button-border-radius;
+@agate-popup-body-border-radius: @electro-border-radius;
 @agate-popup-buttons-padding: @agate-component-spacing 0 0 0;
 @agate-popup-closebutton-position-left: auto;
 @agate-popup-closebutton-position-right: 18px;
@@ -141,16 +146,16 @@
 @agate-slider-knob-width: 30px;
 @agate-slider-bar-height: 6px;
 @agate-slider-knob-resting-state-scale: 0.8;
-@agate-slider-knob-border-radius: @agate-button-border-radius;
+@agate-slider-knob-border-radius: @electro-border-radius;
 @agate-slider-knob-skew: @agate-button-skew;
 @agate-translate-center: translate3d(-50%, -50%, 0);
 @agate-slider-button-margin: 24px;
 
 // SliderButton
 // ---------------------------------------
-@agate-slider-button-border-radius: @agate-button-border-radius;
+@agate-slider-button-border-radius: @electro-border-radius;
 @agate-slider-button-skew: @agate-button-skew;
-@agate-slider-button-client-skew: 20deg;
+@agate-slider-button-client-skew: @electro-negate-skew;
 
 // ToggleButton
 // ---------------------------------------
