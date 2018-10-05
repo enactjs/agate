@@ -21,46 +21,101 @@
 }
 
 .tabBar {
-	margin: 0;
-
 	.applySkins({
+		margin: @agate-panels-tab-bar-margin;
 		background-color: @agate-panels-tab-bg-color;
 		background-image: @agate-panels-tab-bg-image;
-	});
-}
 
-.tab {
-	.applySkins({
-		margin: @agate-panels-tab-v-margin 0;
+		.tabGroup {
+			margin: @agate-panels-tab-group-margin;
+			border-radius: @agate-panels-tab-group-radius;
+			overflow: hidden;
+			transform: skewX(@agate-panels-tab-group-skew);
 
-		// These two will need to change based on the skin
-		padding-top: @agate-panels-tab-v-padding;
-		padding-bottom: @agate-panels-tab-v-padding;
+			.tab {
+				margin: @agate-panels-tab-v-margin 0;
 
-		color: @agate-panels-tab-color;
-		// background-color: @agate-panels-tab-bg-color;
-		// background-image: @agate-panels-tab-bg-image;
+				// These two will need to change based on the skin
+				// padding-top: @agate-panels-tab-v-padding;
+				padding-bottom: @agate-panels-tab-v-padding;
 
-		&[data-selected=true] {
-			color: @agate-panels-tab-selected-color;
-			background-color: @agate-panels-tab-selected-bg-color;
-			background-image: @agate-panels-tab-selected-bg-image;
-		}
+				color: @agate-panels-tab-color;
+				// background-color: @agate-panels-tab-bg-color;
+				// background-image: @agate-panels-tab-bg-image;
 
-		border-left: @agate-panels-tab-separator-border-width solid @agate-panels-tab-separator-border-color;
-		&:first-child {
-			border-left-width: 0;
-		}
+				.label {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					transform: skewX(@agate-panels-tab-label-skew);
+				}
 
-		.focus({
-			color: @agate-panels-tab-focus-color;
-			background-color: @agate-panels-tab-focus-bg-color;
-			background-image: @agate-panels-tab-focus-bg-image;
+				&[data-selected=true] {
+					color: @agate-panels-tab-selected-color;
+					background-color: @agate-panels-tab-selected-bg-color;
+					background-image: @agate-panels-tab-selected-bg-image;
+				}
 
-			&[data-selected=true] {
-				color: @agate-panels-tab-selected-color;
-				background-color: @agate-panels-tab-selected-bg-color;
+				border-left: @agate-panels-tab-separator-border-width solid @agate-panels-tab-separator-border-color;
+				&:first-child {
+					border-left-width: 0;
+				}
+
+				.focus({
+					color: @agate-panels-tab-focus-color;
+					background-color: @agate-panels-tab-focus-bg-color;
+					background-image: @agate-panels-tab-focus-bg-image;
+
+					&[data-selected=true] {
+						color: @agate-panels-tab-selected-color;
+						background-color: @agate-panels-tab-selected-bg-color;
+					}
+				});
 			}
-		});
+		}
+
+		&.positionAfter {
+			.tabGroup {
+				margin: @agate-panels-tab-group-position-after-margin;
+			}
+
+			.tabEnds {
+				display: flex;
+				align-items: flex-end;
+			}
+		}
+
+		&.horizontal {
+			.tabGroup {
+				margin: 0;
+				border-radius: 0;
+				transform: skewX(0);
+				overflow: visible;
+				// background-color: red;
+
+				.tab {
+					width: @agate-panels-tab-horizontal-width;
+					right: @agate-panels-tab-horizontal-before-right;
+					border-radius: @agate-panels-tab-group-radius;
+					transform: skewX(@agate-panels-tab-group-skew);
+
+					.label {
+						transform: skewX(@agate-panels-tab-label-skew);
+					}
+				}
+			}
+
+			&.positionAfter {
+				.tabEnds {
+					display: flex;
+					justify-content: flex-end;
+				}
+
+				.tab {
+					right: 0;
+					padding-right: @agate-panels-tab-horizontal-after-padding-right;
+				}
+			}
+		}
 	});
 }

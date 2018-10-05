@@ -15,7 +15,7 @@ import Panels from './Panels';
 
 import componentCss from './TabbedPanels.less';
 
-const SpottableLabeledIcon = Spottable(LabeledIcon);
+const SpottableTab = Spottable('div');
 
 const TabBase = kind({
 	name: 'Tab',
@@ -23,16 +23,21 @@ const TabBase = kind({
 		css: componentCss,
 		className: 'tab'
 	},
-	render: ({children, labelPosition, onClick, ...rest}) => {
+	render: ({children, icon, labelPosition, onClick, ...rest}) => {
 		return (
 			<Cell
-				icon="star"
 				{...rest}
-				component={SpottableLabeledIcon}
-				labelPosition={labelPosition}
+				component={SpottableTab}
 				onClick={onClick}
 			>
-				{children}
+				<div className={componentCss.label}>
+					<LabeledIcon
+						labelPosition={labelPosition}
+						icon={icon}
+					>
+						{children}
+					</LabeledIcon>
+				</div>
 			</Cell>
 		);
 	}
@@ -41,11 +46,17 @@ const Tab = Skinnable(TabBase);
 
 const TabGroupBase = kind({
 	name: 'TabGroup',
+
 	styles: {
 		css: componentCss,
 		className: 'tabBar'
 	},
+
 	computed: {
+		className: ({orientation, tabPosition, styler}) => styler.append({
+			horizontal: orientation === 'vertical',
+			positionAfter: tabPosition === 'after'
+		}),
 		labelPosition: ({orientation, tabPosition}) => {
 			// TODO: this keeps the label always between the icon and the panels, is it necessary?
 			if (orientation === 'vertical') {
@@ -61,18 +72,19 @@ const TabGroupBase = kind({
 			}
 		}
 	},
-	render: ({afterTabs, beforeTabs, className, labelPosition, style, ...rest}) => {
+
+	render: ({afterTabs, beforeTabs, className, labelPosition, style, tabEndStyle, tabGroupStyle, ...rest}) => {
 		delete rest.tabPosition;
 
 		return (
-
 			<Layout orientation={rest.orientation} className={className} align="stretch" style={style}>
-				{beforeTabs ? <Cell shrink>
+				{beforeTabs ? <Cell className={componentCss.tabEnds} shrink>
 					{beforeTabs}
 				</Cell> : null}
 				<Cell>
 					<Layout
 						{...rest}
+						className={componentCss.tabGroup}
 						align="stretch center"
 						childComponent={Tab}
 						childSelect="onClick"
@@ -84,7 +96,7 @@ const TabGroupBase = kind({
 						select="radio"
 					/>
 				</Cell>
-				{afterTabs ? <Cell shrink>
+				{afterTabs ? <Cell className={componentCss.tabEnds} shrink>
 					{afterTabs}
 				</Cell> : null}
 			</Layout>

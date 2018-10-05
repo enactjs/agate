@@ -219,6 +219,7 @@ const SliderBase = kind({
 		delete rest.active;
 		delete rest.knobStep;
 		delete rest.onActivate;
+		delete rest.onSpotlightDirection;
 
 		return (
 			<UiSlider
