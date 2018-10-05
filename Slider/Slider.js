@@ -219,7 +219,6 @@ const SliderBase = kind({
 		delete rest.active;
 		delete rest.knobStep;
 		delete rest.onActivate;
-		delete rest.onSpotlightDirection;
 
 		return (
 			<UiSlider
@@ -249,7 +248,7 @@ const SliderDecorator = compose(
 	Pure,
 	Spottable,
 	Changeable,
-	SliderBehaviorDecorator({emitSpotlightEvents: 'onSpotlightDirection'}),
+	SliderBehaviorDecorator,
 	Skinnable,
 	Slottable({slots: ['knob']})
 );
