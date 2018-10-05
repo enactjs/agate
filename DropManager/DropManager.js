@@ -1,7 +1,7 @@
 import hoc from '@enact/core/hoc';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import {compose, setDisplayName} from 'recompose';
+import {setDisplayName} from 'recompose';
 import React from 'react';
 import Changeable from '@enact/ui/Changeable';
 
@@ -20,12 +20,15 @@ const defaultConfig = {
 	arrangingProp: null,
 
 	// The prop name for the object sent to the Wrapped component containing the arrangement object.
+	// This also applies to the incoming arrangement prop name.
 	// This will typically directly feed into Rearrangeable.
 	arrangementProp: 'arrangement'
 };
 
-const DropManagerBase = hoc(defaultConfig, (configHoc, Wrapped) => {
-	return class extends React.Component {
+const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
+	const ArrangementState = Changeable({prop: configHoc.arrangementProp});
+
+	const DropManagerBase = class extends React.Component {
 		static displayName = 'DropManager';
 
 		static propTypes = {
@@ -161,12 +164,9 @@ const DropManagerBase = hoc(defaultConfig, (configHoc, Wrapped) => {
 			);
 		}
 	};
-});
 
-const DropManager = compose(
-	Changeable({prop: 'arrangement'}),
-	DropManagerBase
-);
+	return ArrangementState(DropManagerBase);
+});
 
 const Draggable = (Wrapped) => setDisplayName('Draggable')(
 	// ({arrangement, name, ...rest}) => <Wrapped {...rest} data-slot={arrangement && arrangement[name] || name} draggable="true" />
