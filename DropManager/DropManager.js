@@ -12,7 +12,19 @@ import css from './DropManager.less';
 const getKeyByValue = (obj, value) =>
 	Object.keys(obj).find(key => obj[key] === value);
 
-const DropManagerBase = hoc((configHoc, Wrapped) => {
+
+const defaultConfig = {
+	// The prop name for the boolean send to the Wrapped component that indicates whether we are
+	// currently arranging things. Useful in case we need to show some boxes on the screen or
+	// something. The default/common value for this is "arranging".
+	arrangingProp: null,
+
+	// The prop name for the object sent to the Wrapped component containing the arrangement object.
+	// This will typically directly feed into Rearrangeable.
+	arrangementProp: 'arrangement'
+};
+
+const DropManagerBase = hoc(defaultConfig, (configHoc, Wrapped) => {
 	return class extends React.Component {
 		static displayName = 'DropManager';
 
@@ -129,14 +141,15 @@ const DropManagerBase = hoc((configHoc, Wrapped) => {
 		render () {
 			const {className, ...rest} = {...this.props};
 			delete rest.onArrange;
+
+			if (configHoc.arrangingProp) rest[configHoc.arrangingProp] = this.state.dragging;
+			if (configHoc.arrangementProp) rest[configHoc.arrangementProp] = this.state.arrangement;
 			// console.log('slots:', rest);
 
 			return (
 				<Wrapped
 					{...rest}
 					className={classnames(className, css.dropManager, {dragging: this.state.dragging})}
-					arrangement={this.state.arrangement}
-					arranging={this.state.dragging}
 					// draggable="true"
 					onDragStart={this.handleDragStart}
 					onDragEnter={this.handleDragEnter}
