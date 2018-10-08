@@ -3,15 +3,15 @@
 
 
 // Named Colors
-@agate-accent: #cae78c;
-@agate-highlight: #cae78c;
+@agate-accent: var(--agate-accent-color, #8fd43a);
+@agate-highlight: var(--agate-highlight-color, #6abe0b);
 @agate-background: transparent;
 @agate-foreground: fade(white, 75%);
-@agate-background-active: #90BD5D;
+@agate-background-active: @agate-highlight;
 @agate-foreground-active: lighten(black, 15%);
 @agate-background-focus: @agate-highlight;
 @agate-foreground-focus: black;
-@agate-gradient: linear-gradient(to bottom, #989E3B, #90BD5D);
+@agate-gradient: linear-gradient(to bottom, ~"rgba(var(--agate-accent-r, 0), var(--agate-accent-g, 0), var(--agate-accent-b, 0), 0.5)", @agate-accent);
 @agate-darker-gray: #262626;
 @agate-dark-gray:   #4d4d4d;
 @agate-gray:        #a6a6a6;
@@ -94,10 +94,10 @@
 @agate-panels-tab-bg-image:           linear-gradient(to bottom, transparent, fade(#333, 50%));
 @agate-panels-tab-selected-color:     fade(white, 90%);
 @agate-panels-tab-selected-bg-color:  transparent;
-@agate-panels-tab-selected-bg-image:  linear-gradient(to bottom, fade(#909135, 10%), #909135 75%, #90BE5D 98%, #A7E974);
+@agate-panels-tab-selected-bg-image:  linear-gradient(to bottom, ~"rgba(var(--agate-highlight-r, 0), var(--agate-highlight-g, 0), var(--agate-highlight-b, 0), 0.1)", @agate-highlight 98%, @agate-accent);
 @agate-panels-tab-focus-color:        white;
-@agate-panels-tab-focus-bg-color:     fade(@agate-accent, 20%);
-@agate-panels-tab-focus-bg-image:     linear-gradient(to bottom, fade(#909135, 10%), #909135 75%, #90BE5D 98%, #A7E974);
+@agate-panels-tab-focus-bg-color:     ~"rgba(var(--agate-accent-r, 0), var(--agate-accent-g, 0), var(--agate-accent-b, 0), 0.2)"; // @agate-accent; // fade(@agate-accent, 20%);
+@agate-panels-tab-focus-bg-image:     linear-gradient(to bottom, ~"rgba(var(--agate-accent-r, 0), var(--agate-accent-g, 0), var(--agate-accent-b, 0), 0.1)", @agate-accent 98%, @agate-accent);
 
 // Picker
 // ---------------------------------------
