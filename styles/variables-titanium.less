@@ -27,18 +27,21 @@
 @agate-button-highlighted-opacity: 1;
 @agate-button-skew: 0;
 @agate-button-grid-border-radius: 0;
+@agate-button-bg-transform: none;
 
 // ColorPicker
 // ---------------------------------------
 @agate-colorpicker-swatch-border-radius: 999px;
 @agate-colorpicker-swatch-spacing: 6px;
+@agate-colorpicker-bg-transform: none;
 
 // DateTimePicker
 // ---------------------------------------
 @agate-datetimepicker-margin: 6px 0px;
 @agate-datetimepicker-border-radius: 0;
-@agate-datetimepicker-skew: 0;
-@agate-datetimepicker-label-skew: 0;
+@agate-datetimepicker-transform: none;
+@agate-datetimepicker-label-transform: none;
+@agate-datetimepicker-cell-transform: none;
 
 // Divider
 // ---------------------------------------
@@ -103,19 +106,21 @@
 @agate-panels-tab-v-margin: 6px;
 @agate-panels-tab-group-margin: 0;
 @agate-panels-tab-group-radius: 0;
-@agate-panels-tab-group-skew: 0;
+@agate-panels-tab-group-transform: none;
+@agate-panels-tab-group-horizontal-transform: none;
 @agate-panels-tab-bar-margin: 0;
-@agate-panels-tab-label-skew: 0;
+@agate-panels-tab-label-transform: none;
 @agate-panels-tab-horizontal-width: inherit;
 @agate-panels-tab-horizontal-before-right: 0;
 @agate-panels-tab-horizontal-after-padding-right: 0;
 @agate-panels-tab-group-position-after-margin: 0;
 
+
 // Picker
 // ---------------------------------------
 @agate-picker-border-radius: 0;
-@agate-picker-skew: 0;
-@agate-picker-label-skew: 0;
+@agate-picker-transform: none;
+@agate-picker-label-transform: none;
 
 // Popup
 // ---------------------------------------
@@ -140,15 +145,16 @@
 @agate-slider-bar-height: 6px;
 @agate-slider-knob-resting-state-scale: 0.8;
 @agate-slider-knob-border-radius: 30px;
-@agate-slider-knob-skew: 0;
 @agate-translate-center: translate3d(-50%, -50%, 0);
+@agate-slider-knob-transform: @agate-translate-center scale(0.8);
+@agate-slider-knob-active-transform: @agate-translate-center scale(1);
 @agate-slider-button-margin: 24px;
 
 // SliderButton
 // ---------------------------------------
 @agate-slider-button-border-radius: 999px;
-@agate-slider-button-skew: 0;
-@agate-slider-button-client-skew: 0;
+@agate-slider-button-bg-transform: none;
+@agate-slider-button-client-transform: none;
 
 // Spotlight
 // ---------------------------------------

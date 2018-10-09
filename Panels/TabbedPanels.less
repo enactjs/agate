@@ -30,7 +30,7 @@
 			margin: @agate-panels-tab-group-margin;
 			border-radius: @agate-panels-tab-group-radius;
 			overflow: hidden;
-			transform: skewX(@agate-panels-tab-group-skew);
+			transform: @agate-panels-tab-group-transform;
 
 			.tab {
 				margin: @agate-panels-tab-v-margin 0;
@@ -47,7 +47,7 @@
 					display: flex;
 					flex-direction: column;
 					align-items: center;
-					transform: skewX(@agate-panels-tab-label-skew);
+					transform: @agate-panels-tab-label-transform;
 				}
 
 				&[data-selected=true] {
@@ -89,17 +89,17 @@
 			.tabGroup {
 				margin: 0;
 				border-radius: 0;
-				transform: skewX(0);
+				transform: @agate-panels-tab-group-horizontal-transform;
 				overflow: visible;
 
 				.tab {
 					width: @agate-panels-tab-horizontal-width;
 					right: @agate-panels-tab-horizontal-before-right;
 					border-radius: @agate-panels-tab-group-radius;
-					transform: skewX(@agate-panels-tab-group-skew);
+					transform: @agate-panels-tab-group-transform;
 
 					.label {
-						transform: skewX(@agate-panels-tab-label-skew);
+						transform: @agate-panels-tab-label-transform;
 					}
 				}
 			}

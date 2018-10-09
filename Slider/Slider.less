@@ -97,7 +97,7 @@
 		.knob::before {
 			// Vertically and horizontally center this knob.
 			// Using this method rather than -top -left so the knob is more intuitively customizable.
-			transform: translate3d(-50%, -50%, 0) scale(0.8) skewX(@agate-slider-knob-skew);
+			transform: @agate-slider-knob-transform;
 			border-radius: @agate-slider-knob-border-radius;
 			background-color: @agate-slider-knob-bg-color;
 			background-image: @agate-gradient;
@@ -131,7 +131,7 @@
 			&:focus.activateOnFocus,
 			&:focus.active {
 				.knob::before {
-					transform: translate3d(-50%, -50%, 0) scale(1) skewX(@agate-slider-knob-skew);
+					transform: @agate-slider-knob-active-transform;
 				}
 			}
 		});

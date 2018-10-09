@@ -17,14 +17,14 @@
 		font-weight: 500;	// Convert to LESS variable
 		font-size: 24px;	// Convert to LESS variable
 		border-radius: @agate-picker-border-radius;
-		transform: skewX(@agate-picker-skew);
+		transform: @agate-picker-transform;
 
 		.label {
-			transform: skewX(@agate-picker-label-skew);
+			transform: @agate-picker-label-transform;
 		}
 
 		.item, .itemTop, .itemBottom {
-			margin: 0 @agate-component-spacing;
+			margin: 0;
 			color: inherit;
 			width: 100%;
 			text-align: center;
