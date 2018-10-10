@@ -1,3 +1,4 @@
+// import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -119,12 +120,14 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			this.dragOriginNode.dataset.slot = dragDestination;
 			dragDropNode.dataset.slot = dragOrigin;
 
-			// console.log('from:', dragOrigin, 'to:', dragDestination);
+			console.log('from:', dragOrigin, 'to:', dragDestination);
+			// console.log('a1', this.state.arrangement);
 
 			// We successfully completed the drag, blank-out the node.
 			this.dragOriginNode = null;
 
 			this.setState(({arrangement}) => {
+				// console.log('a2', arrangement);
 				const oldD = getKeyByValue(arrangement, dragDestination);
 				const oldO = getKeyByValue(arrangement, dragOrigin);
 
@@ -135,6 +138,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 					this.props.onArrange({arrangement});
 				}
 
+				// console.log('a3', arrangement);
 				return {dragging: false, arrangement};
 			});
 		};
@@ -172,21 +176,51 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 	return ArrangementState(DropManagerBase);
 });
 
+const DraggableContainerContext = React.createContext(null);
+
 const Draggable = (Wrapped) => setDisplayName('Draggable')(
 	// ({arrangement, name, ...rest}) => <Wrapped {...rest} data-slot={arrangement && arrangement[name] || name} draggable="true" />
 	// If something is marked explicitly as *not* draggable (everything using this is normally)
 	// don't assign it a data-slot, so it can't be dragged(A) or dropped on(B).
-	({arrangement, draggable = true, name, slot, ...rest}) =>
-		<Wrapped
-			{...rest}
-			draggable={draggable}
-			data-slot={draggable ? (arrangement && (arrangement[name] || arrangement[slot]) || (name || slot)) : null}
-			data-slot-name={slot}
-		/>
+	({arrangement, containerShape, draggable = true, name, slot, ...rest}) =>
+		<DraggableContainerContext.Provider value={{containerShape}}>
+			<Wrapped
+				{...rest}
+				draggable={draggable}
+				data-slot={draggable ? (arrangement && (arrangement[name] || arrangement[slot]) || (name || slot)) : null}
+				data-slot-name={slot}
+			/>
+		</DraggableContainerContext.Provider>
 );
+
+const ResponsiveBox = (Wrapped) => setDisplayName('ResponsiveBox')(
+	(props) => {
+		console.log('props:', props);
+		return (
+			<DraggableContainerContext.Consumer>
+				{({containerShape}) => {
+					console.log('containerShape:', containerShape);
+					return (<Wrapped containerShape={containerShape} {...props} />);
+				}}
+			</DraggableContainerContext.Consumer>
+		);
+	}
+);
+
+// const ResponsiveBox = kind({
+// 	name: 'ResponsiveBox',
+// 	render: ({component: Component, ...rest}) => (
+// 		<DraggableContainerContext.Consumer>
+// 			{(containerShape) => (
+// 				<Component containerShape={containerShape} {...rest} />
+// 			)}
+// 		</DraggableContainerContext.Consumer>
+// 	)
+// });
 
 export default DropManager;
 export {
 	DropManager,
-	Draggable
+	Draggable,
+	ResponsiveBox
 };
