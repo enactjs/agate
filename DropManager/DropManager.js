@@ -51,7 +51,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 
 
 		handleDragStart = (ev) => {
-			// ev.dataTransfer.setData('text/plain', ev.target.dataset.slot);
+			ev.dataTransfer.setData('text/plain', ev.target.dataset.slot);
 			ev.dataTransfer.effectAllowed = 'move';
 			this.dragOriginNode = ev.target;
 			this.setState({dragging: true});
@@ -131,15 +131,19 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 				arrangement[oldD || dragDestination] = dragOrigin;
 				arrangement[oldO || dragOrigin] = dragDestination;
 
+				if (this.props.onArrange) {
+					this.props.onArrange({arrangement});
+				}
+
 				return {dragging: false, arrangement};
 			});
 		};
 
-		handleDragEnd = () => {
-			if (this.props.onArrange) {
-				this.props.onArrange({arrangement: this.state.arrangement});
-			}
-		};
+		// handleDragEnd = () => {
+		// 	if (this.props.onArrange) {
+		// 		this.props.onArrange({arrangement: this.state.arrangement});
+		// 	}
+		// };
 
 		render () {
 			const {className, ...rest} = {...this.props};
@@ -159,7 +163,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 					onDragLeave={this.handleDragLeave}
 					onDragOver={this.handleDragOver}
 					onDrop={this.handleDrop}
-					onDragEnd={this.handleDragEnd}
+					// onDragEnd={this.handleDragEnd}
 				/>
 			);
 		}
