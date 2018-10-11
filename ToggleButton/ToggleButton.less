@@ -10,15 +10,14 @@
 		position: relative;
 
 		&::after {
-			background-color: @agate-toggle-button-switch-off-bg-color;
+			background-color: @agate-togglebutton-switch-off-bg-color;
 			border-color: @agate-toggle-indicator-border-color;
 		}
 
 		&.selected {
 			.bg {
-				background-color: @agate-toggle-button-switch-on-bg-color;
-				// background-image: @agate-toggle-button-switch-on-focus-bg-image;
-				border-color: @agate-toggle-button-switch-on-border-color;
+				background-color: @agate-togglebutton-switch-on-bg-color;
+				border-color: @agate-togglebutton-switch-on-border-color;
 			}
 
 			.client {
@@ -26,13 +25,13 @@
 			}
 
 			&::after {
-				background-color: @agate-toggle-button-switch-on-bg-color;
-				border-color: @agate-toggle-button-switch-on-border-color;
+				background-color: @agate-togglebutton-switch-on-bg-color;
+				border-color: @agate-togglebutton-switch-on-border-color;
 			}
 
 			&.underline {
 				.bg {
-					background-color: @agate-toggle-button-switch-on-underline-bg-color;
+					background-color: @agate-togglebutton-switch-on-underline-bg-color;
 				}
 				.client {
 					color: inherit;
@@ -46,12 +45,12 @@
 			}
 
 			&::after {
-				.position-start-end(@agate-toggle-button-indicator-padding, @agate-toggle-button-indicator-padding);
+				.position-start-end(@agate-togglebutton-indicator-padding, @agate-togglebutton-indicator-padding);
 				position: absolute;
 				content: "";
-				bottom: @agate-toggle-button-bottom;
-				height: @agate-toggle-button-switch-height;
-				border-width: @agate-toggle-button-switch-border-width;
+				bottom: @agate-togglebutton-bottom;
+				height: @agate-togglebutton-switch-height;
+				border-width: @agate-togglebutton-switch-border-width;
 				border-style: solid;
 				border-radius: @agate-button-border-radius;
 			}
@@ -60,27 +59,27 @@
 		.focus({
 			&.selected {
 				&::after {
-					border-color:  @agate-toggle-button-switch-on-focus-border-color;
+					border-color:  @agate-togglebutton-switch-on-focus-border-color;
 				}
 
 				&.underline {
 					.bg {
-						background-color: @agate-toggle-button-switch-on-underline-focus-bg-color;
+						background-color: @agate-togglebutton-switch-on-underline-focus-bg-color;
 					}
 				}
 			}
 
 			&.underline {
 				.bg {
-					border-color: @agate-toggle-button-switch-on-underline-focus-bg-color;
+					border-color: @agate-togglebutton-switch-on-underline-focus-bg-color;
 				}
 			}
 		});
 
 		.disabled({
 			&::after, &::before {
-				background-color: @agate-toggle-button-switch-disabled-bg-color;
-				border-color: @agate-toggle-button-switch-disabled-border-color;
+				background-color: @agate-togglebutton-switch-disabled-bg-color;
+				border-color: @agate-togglebutton-switch-disabled-border-color;
 			}
 		});
 	});
