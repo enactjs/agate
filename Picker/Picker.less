@@ -23,7 +23,9 @@
 			transform: @agate-picker-label-transform;
 		}
 
-		.item, .itemTop, .itemBottom {
+		.item,
+		.itemTop,
+		.itemBottom {
 			margin: 0;
 			color: inherit;
 			width: 100%;
@@ -36,6 +38,7 @@
 				background-image: @agate-picker-active-bg-image;
 				font-size: 36px;	// Convert to LESS variable
 			}
+
 			&[disabled] {
 				.vendor-opacity(@agate-disabled-opacity);
 			}

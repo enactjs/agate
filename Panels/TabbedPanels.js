@@ -1,4 +1,5 @@
 import {adaptEvent, forward, handle} from '@enact/core/handle';
+import {cap} from '@enact/core/util';
 import {Cell, Layout} from '@enact/ui/Layout';
 import {Changeable} from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
@@ -53,10 +54,7 @@ const TabGroupBase = kind({
 	},
 
 	computed: {
-		className: ({orientation, tabPosition, styler}) => styler.append({
-			horizontal: orientation === 'vertical',
-			positionAfter: tabPosition === 'after'
-		}),
+		className: ({orientation, tabPosition, styler}) => styler.append(orientation, ['position' + cap(tabPosition)]),
 		labelPosition: ({orientation, tabPosition}) => {
 			// TODO: this keeps the label always between the icon and the panels, is it necessary?
 			if (orientation === 'vertical') {
