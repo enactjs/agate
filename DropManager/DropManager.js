@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {setDisplayName} from 'recompose';
 import React from 'react';
+import {mergeDeepRight} from 'ramda';
 import Changeable from '@enact/ui/Changeable';
 
 import css from './DropManager.less';
@@ -13,6 +14,24 @@ import css from './DropManager.less';
 const getKeyByValue = (obj, value) =>
 	Object.keys(obj).find(key => obj[key] === value);
 
+// Establish the base container shape, to be shared with all components as a consistent starting point.
+const defaultContainerShape = {
+	edge: false,
+	edges: {
+		top: false,
+		right: false,
+		bottom: false,
+		left: false
+	},
+	horizontalEdge: false,
+	verticalEdge: false,
+	orientation: null,
+	size: {
+		relative: null  // Relative size: small, medium, large, full
+		// height?
+		// width?
+	}
+};
 
 const defaultConfig = {
 	// The prop name for the boolean send to the Wrapped component that indicates whether we are
@@ -49,7 +68,6 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 		removeDropTarget = (target) => {
 			target.classList.remove('dropTarget');
 		};
-
 
 		handleDragStart = (ev) => {
 			ev.dataTransfer.setData('text/plain', ev.target.dataset.slot);
@@ -182,20 +200,33 @@ const Draggable = (Wrapped) => setDisplayName('Draggable')(
 	// ({arrangement, name, ...rest}) => <Wrapped {...rest} data-slot={arrangement && arrangement[name] || name} draggable="true" />
 	// If something is marked explicitly as *not* draggable (everything using this is normally)
 	// don't assign it a data-slot, so it can't be dragged(A) or dropped on(B).
-	({arrangement, containerShape, draggable = true, name, slot, ...rest}) =>
-		<DraggableContainerContext.Provider value={{containerShape}}>
-			<Wrapped
-				{...rest}
-				draggable={draggable}
-				data-slot={draggable ? (arrangement && (arrangement[name] || arrangement[slot]) || (name || slot)) : null}
-				data-slot-name={slot}
-			/>
-		</DraggableContainerContext.Provider>
+	({arrangement, containerShape, draggable = true, name, slot, ...rest}) => {
+		// Apply a consistent (predictable) set of object keys for consumers
+		containerShape = mergeDeepRight(defaultContainerShape, containerShape || {});
+
+		if (containerShape.edges.left || containerShape.edges.right) {
+			containerShape.horizontalEdge = true;
+			containerShape.edge = true;
+		}
+		if (containerShape.edges.top || containerShape.edges.bottom) {
+			containerShape.verticalEdge = true;
+			containerShape.edge = true;
+		}
+		return (
+			<DraggableContainerContext.Provider value={{containerShape}}>
+				<Wrapped
+					{...rest}
+					draggable={draggable}
+					data-slot={draggable ? (arrangement && (arrangement[name] || arrangement[slot]) || (name || slot)) : null}
+					data-slot-name={slot}
+				/>
+			</DraggableContainerContext.Provider>
+		);
+	}
 );
 
 const ResponsiveBox = (Wrapped) => setDisplayName('ResponsiveBox')(
 	(props) => {
-		console.log('props:', props);
 		return (
 			<DraggableContainerContext.Consumer>
 				{({containerShape}) => {
