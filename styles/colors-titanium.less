@@ -39,7 +39,7 @@
 // Button
 // ---------------------------------------
 @agate-button-color:          @agate-foreground;
-@agate-button-bg-color:       @agate-background;
+@agate-button-bg-color:       transparent;
 @agate-button-bg-image:       none;
 @agate-button-border-color:   @agate-accent;
 @agate-button-shadow:         0 1px 3px @agate-accent;
@@ -115,10 +115,8 @@
 @agate-popup-plain-body-color: @agate-text-color;
 @agate-popup-bg-color: @agate-bg-color;
 @agate-popup-bg-image: none;
-@agate-popup-border: 0 solid transparent;
 @agate-popup-border-color: @agate-accent;
 @agate-popup-shadow: 0 3px 9px fade(black, 30%);
-@agate-popup-border: 1px solid transparent;
 @agate-popup-body-border-color: @agate-accent;
 @agate-popup-body-bg-color: fade(black, 5%);
 @agate-popup-body-bg-image: none;
@@ -164,9 +162,13 @@
 // ---------------------------------------
 @agate-toggle-border-color: @agate-gray;
 @agate-toggle-indicator-border-color: transparent;
-@agate-toggle-focus-text-color: @agate-button-color;
+@agate-toggle-focus-text-color: @agate-white;
 @agate-toggle-button-switch-on-bg-color: @agate-highlight;
 @agate-toggle-button-switch-on-border-color: @agate-highlight;
+@agate-toggle-button-switch-on-underline-bg-color: transparent;
+@agate-toggle-button-switch-on-underline-focus-bg-color: @agate-spotlight-bg-color;
+@agate-toggle-button-switch-on-underline-focus-border-color: none;
+@agate-toggle-button-switch-on-focus-bg-image: inherit;
 @agate-toggle-button-switch-on-focus-bg-color: @agate-white;
 @agate-toggle-button-switch-on-focus-border-color: @agate-white;
 @agate-toggle-button-switch-off-bg-color: @agate-gray;

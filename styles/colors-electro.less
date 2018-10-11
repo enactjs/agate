@@ -23,6 +23,9 @@
 @agate-text-color: white;
 @agate-title-text-color: white;
 
+// Local Electro variables
+@electro-highlight-gradient: linear-gradient(to bottom right, #fea800, @agate-highlight);
+
 // Disabled Opacity
 // ---------------------------------------
 @agate-disabled-opacity: 0.6;
@@ -40,15 +43,15 @@
 // Button
 // ---------------------------------------
 @agate-button-color:          white;
-@agate-button-bg-color:       @agate-background;
-@agate-button-bg-image:       linear-gradient(to bottom right, @agate-foreground, @agate-accent);
+@agate-button-bg-color:       @agate-accent;
+@agate-button-bg-image:       linear-gradient(to top left, transparent, fade(white, 50%)); // linear-gradient(to bottom right, @agate-foreground, @agate-accent);
 @agate-button-border-color:   none;
 @agate-button-shadow:         none;
 @agate-button-focus-color:    @agate-spotlight-color;
 @agate-button-focus-bg-color: @agate-foreground;
-@agate-button-focus-bg-image: linear-gradient(to bottom right, @agate-background-active, @agate-foreground);
+@agate-button-focus-bg-image: linear-gradient(to top left, transparent, fade(white, 50%)); // linear-gradient(to bottom right, @agate-background-active, @agate-foreground);
 @agate-button-highlighted-bg-color: @agate-highlight;
-@agate-button-highlighted-bg-image: linear-gradient(to bottom right, #fea800, @agate-highlight);
+@agate-button-highlighted-bg-image: @electro-highlight-gradient;
 
 // Divider
 // ---------------------------------------
@@ -116,7 +119,6 @@
 @agate-popup-plain-body-color: @agate-text-color;
 @agate-popup-bg-color: fade(white, 20%);
 @agate-popup-bg-image: @agate-gradient;
-@agate-popup-border: none;
 @agate-popup-border-color: none;
 @agate-popup-shadow: 0 3px 9px fade(black, 30%);
 @agate-popup-body-border: none;
@@ -167,7 +169,11 @@
 @agate-toggle-focus-text-color: inherit;
 @agate-toggle-button-switch-on-bg-color: @agate-highlight;
 @agate-toggle-button-switch-on-border-color: transparent;
+@agate-toggle-button-switch-on-underline-bg-color: @agate-accent;
+@agate-toggle-button-switch-on-underline-focus-bg-color: @agate-foreground;
+@agate-toggle-button-switch-on-underline-focus-border-color: none;
 @agate-toggle-button-switch-on-focus-bg-color: @agate-highlight;
+@agate-toggle-button-switch-on-focus-bg-image: @electro-highlight-gradient;
 @agate-toggle-button-switch-on-focus-border-color: @agate-white;
 @agate-toggle-button-switch-off-bg-color: black;
 @agate-toggle-button-switch-disabled-bg-color: @agate-darker-gray;
