@@ -3,15 +3,15 @@
 
 
 // Named Colors
-@agate-accent: #0359f0;
-@agate-highlight: #ff8100; //#46d4fb;
+@agate-accent: var(--agate-accent-color, #0093f5);
+@agate-highlight: var(--agate-accent-color, #ff8100);
 @agate-background: transparent;
-@agate-foreground: #0093f5;
-@agate-background-active: #00c1f5;
+@agate-foreground: ~"rgba(var(--agate-accent-r, 0), var(--agate-accent-g, 0), var(--agate-accent-b, 0), 0.8)";
+@agate-background-active: ~"rgba(var(--agate-accent-r, 0), var(--agate-accent-g, 0), var(--agate-accent-b, 0), 0.5)";
 @agate-foreground-active: @agate-foreground;
 @agate-background-focus: @agate-background-active;
 @agate-foreground-focus: @agate-foreground;
-@agate-gradient: linear-gradient(to bottom right, #46d4fb, @agate-accent);
+@agate-gradient: linear-gradient(to bottom right, white, @agate-accent);
 @agate-darker-gray: #262626;
 @agate-dark-gray:   #4d4d4d;
 @agate-gray:        #a6a6a6;
@@ -24,7 +24,7 @@
 @agate-title-text-color: white;
 
 // Local Electro variables
-@electro-highlight-gradient: linear-gradient(to bottom right, #fea800, @agate-highlight);
+@electro-highlight-gradient: linear-gradient(to bottom right, @agate-highlight, ~"rgba(var(--agate-highlight-r, 0), var(--agate-highlight-g, 0), var(--agate-highlight-b, 0), 0.5)");
 @electro-overlay-light-gradient: linear-gradient(to top left, transparent, fade(white, 50%));
 @electro-overlay-dark-gradient: linear-gradient(to bottom, transparent, fade(black, 20%));
 
@@ -101,7 +101,7 @@
 @agate-panels-tab-selected-bg-color:  transparent;
 @agate-panels-tab-selected-bg-image:  @agate-gradient;
 @agate-panels-tab-focus-color:        white;
-@agate-panels-tab-focus-bg-color:     fade(@agate-accent, 20%);
+@agate-panels-tab-focus-bg-color:     ~"rgba(var(--agate-accent-r, 0), var(--agate-accent-g, 0), var(--agate-accent-b, 0), 0.2)";
 @agate-panels-tab-focus-bg-image:     @agate-gradient;
 
 // Picker
@@ -179,4 +179,4 @@
 @agate-togglebutton-switch-on-focus-border-color: @agate-white;
 @agate-togglebutton-switch-off-bg-color: black;
 @agate-togglebutton-switch-disabled-bg-color: @agate-darker-gray;
-@agate-togglebutton-switch-disabled-border-color: #6c6c6c;
+@agate-togglebutton-switch-disabled-border-color: @agate-dark-gray;
