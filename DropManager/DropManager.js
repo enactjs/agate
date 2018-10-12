@@ -1,10 +1,11 @@
-// import kind from '@enact/core/kind';
+import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {setDisplayName} from 'recompose';
 import React from 'react';
 import {mergeDeepRight} from 'ramda';
+import produce from 'immer';
 import Changeable from '@enact/ui/Changeable';
 
 import css from './DropManager.less';
@@ -15,6 +16,24 @@ const getKeyByValue = (obj, value) =>
 	Object.keys(obj).find(key => obj[key] === value);
 
 // Establish the base container shape, to be shared with all components as a consistent starting point.
+const containerShapePropTypes = PropTypes.shape({
+	edge: PropTypes.bool,
+	edges: PropTypes.shape({
+		top: PropTypes.bool,
+		right: PropTypes.bool,
+		bottom: PropTypes.bool,
+		left: PropTypes.bool
+	}),
+	horizontalEdge: PropTypes.bool,
+	verticalEdge: PropTypes.bool,
+	orientation: PropTypes.string,
+	size: PropTypes.shape({
+		relative: PropTypes.string  // Relative size: small, medium, large, full
+		// proposed - height: PropTypes.number,
+		// proposed - width: PropTypes.number
+	})
+});
+
 const defaultContainerShape = {
 	edge: false,
 	edges: {
@@ -28,8 +47,8 @@ const defaultContainerShape = {
 	orientation: null,
 	size: {
 		relative: null  // Relative size: small, medium, large, full
-		// height?
-		// width?
+		// proposed - height: 0,
+		// proposed - width: 0
 	}
 };
 
@@ -196,22 +215,62 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 
 const DraggableContainerContext = React.createContext(null);
 
-const Draggable = (Wrapped) => setDisplayName('Draggable')(
+// Draw conclusions from supplied shape information and auto-set some values based on logical
+// conclusions to save time and improve consistency for consumers.
+const logicallyPopulateContainerShape = (cs) => {
+	if (cs.edges.left || cs.edges.right) {
+		cs.horizontalEdge = true;
+		cs.edge = true;
+	}
+	if (cs.edges.top || cs.edges.bottom) {
+		cs.verticalEdge = true;
+		cs.edge = true;
+	}
+	// return cs;
+};
+
+// const Draggable = (Wrapped) => setDisplayName('Draggable')(kind({
+const Draggable = (Wrapped) => kind({
+	name: 'Draggable',
+
+	propTypes: {
+		arrangement: PropTypes.object,
+		containerShape: containerShapePropTypes,
+		draggable: PropTypes.bool,
+		name: PropTypes.string,
+		slot: PropTypes.string
+	},
+
+	// defaultProps: {
+	// 	containerShape: defaultContainerShape
+	// },
+
 	// ({arrangement, name, ...rest}) => <Wrapped {...rest} data-slot={arrangement && arrangement[name] || name} draggable="true" />
 	// If something is marked explicitly as *not* draggable (everything using this is normally)
 	// don't assign it a data-slot, so it can't be dragged(A) or dropped on(B).
-	({arrangement, containerShape, draggable = true, name, slot, ...rest}) => {
+	render: ({arrangement, containerShape = {}, draggable = true, name, slot, ...rest}) => {
 		// Apply a consistent (predictable) set of object keys for consumers
-		containerShape = mergeDeepRight(defaultContainerShape, containerShape || {});
+		// defaultProps is a shallow merge only, so we aren't using it :(
+		containerShape = mergeDeepRight(defaultContainerShape, containerShape);
 
-		if (containerShape.edges.left || containerShape.edges.right) {
-			containerShape.horizontalEdge = true;
-			containerShape.edge = true;
-		}
-		if (containerShape.edges.top || containerShape.edges.bottom) {
-			containerShape.verticalEdge = true;
-			containerShape.edge = true;
-		}
+		// Draw conclusions from supplied shape information and auto-set some values.
+		logicallyPopulateContainerShape(containerShape);
+
+		Object.freeze(containerShape);
+
+		// containerShape = produce(defaultContainerShape, draft => {
+		// 	draft = mergeDeepRight(draft, containerShape);
+		// 	// draft = {...draft, ...containerShape};
+		// 	// if (containerShape && containerShape.edges) draft.edges.top = containerShape.edges.top;
+
+		// 	// Draw conclusions from supplied shape information and auto-set some values.
+		// 	logicallyPopulateContainerShape(draft);
+
+		// 	// console.log('produce:', {...draft});
+		// 	return draft;
+		// });
+		// console.log('containerShape:', containerShape);
+
 		return (
 			<DraggableContainerContext.Provider value={{containerShape}}>
 				<Wrapped
@@ -223,7 +282,7 @@ const Draggable = (Wrapped) => setDisplayName('Draggable')(
 			</DraggableContainerContext.Provider>
 		);
 	}
-);
+});
 
 const ResponsiveBox = (Wrapped) => setDisplayName('ResponsiveBox')(
 	(props) => {
