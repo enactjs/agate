@@ -3,15 +3,18 @@
 
 
 // Named Colors
-@agate-accent: var(--agate-accent-color, #0093f5);
-@agate-highlight: var(--agate-accent-color, #ff8100);
+@agate-accent: var(--agate-accent-color, #0359f0); // #0359f0 hsl(218, 98%, 48%), #0093f5 hsl(204, 100%, 48%)
+@agate-accent-h: var(--agate-accent-h, 218);
+@agate-accent-s: var(--agate-accent-s, 98%);
+@agate-accent-l: var(--agate-accent-l, 48%);
+@agate-highlight: var(--agate-highlight-color, #ff8100);
 @agate-background: transparent;
-@agate-foreground: ~"rgba(var(--agate-accent-r, 0), var(--agate-accent-g, 0), var(--agate-accent-b, 0), 0.8)";
-@agate-background-active: ~"rgba(var(--agate-accent-r, 0), var(--agate-accent-g, 0), var(--agate-accent-b, 0), 0.5)";
+@agate-foreground: ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.8)";
+@agate-background-active: ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.5)";
 @agate-foreground-active: @agate-foreground;
 @agate-background-focus: @agate-background-active;
 @agate-foreground-focus: @agate-foreground;
-@agate-gradient: linear-gradient(to bottom right, white, @agate-accent);
+@agate-gradient: linear-gradient(to bottom right, ~"hsl(" @electro-accent2-h, @electro-accent2-s, @electro-accent2-l ~")", transparent);
 @agate-darker-gray: #262626;
 @agate-dark-gray:   #4d4d4d;
 @agate-gray:        #a6a6a6;
@@ -24,7 +27,9 @@
 @agate-title-text-color: white;
 
 // Local Electro variables
-@electro-highlight-gradient: linear-gradient(to bottom right, @agate-highlight, ~"rgba(var(--agate-highlight-r, 0), var(--agate-highlight-g, 0), var(--agate-highlight-b, 0), 0.5)");
+@electro-accent2-h: ~"calc(" @agate-accent-h ~" - 27)"; //, hsl(191, 97%, 65%)
+@electro-accent2-s: ~"calc(" @agate-accent-s ~" - 1%)";
+@electro-accent2-l: ~"calc(" @agate-accent-l ~" + 17%)";
 @electro-overlay-light-gradient: linear-gradient(to top left, transparent, fade(white, 50%));
 @electro-overlay-dark-gradient: linear-gradient(to bottom, transparent, fade(black, 20%));
 
@@ -47,7 +52,7 @@
 @agate-button-color:          white;
 @agate-button-bg-color:       @agate-accent;
 @agate-button-bg-image:       @electro-overlay-light-gradient;
-@agate-button-border-color:   none;
+@agate-button-border-color:   transparent;
 @agate-button-shadow:         none;
 @agate-button-focus-color:    @agate-spotlight-color;
 @agate-button-focus-bg-color: @agate-foreground;
@@ -68,9 +73,9 @@
 // ---------------------------------------
 @agate-input-decorator-border-color:          @agate-background-active;
 @agate-input-decorator-focused-border-color:  transparent;
-@agate-input-focused-background-color:         transparent;
-@agate-input-focused-background-image:         @agate-gradient;
-@agate-input-focused-text-color:               @agate-text-color;
+@agate-input-focused-background-color:        transparent;
+@agate-input-focused-background-image:        @agate-gradient;
+@agate-input-focused-text-color:              @agate-text-color;
 @agate-input-placeholder-color:               fade(@agate-text-color, 50%);
 @agate-input-text-color:                      @agate-text-color;
 @agate-input-background-image:                @agate-gradient;
@@ -101,7 +106,7 @@
 @agate-panels-tab-selected-bg-color:  transparent;
 @agate-panels-tab-selected-bg-image:  @agate-gradient;
 @agate-panels-tab-focus-color:        white;
-@agate-panels-tab-focus-bg-color:     ~"rgba(var(--agate-accent-r, 0), var(--agate-accent-g, 0), var(--agate-accent-b, 0), 0.2)";
+@agate-panels-tab-focus-bg-color:     ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.2)";
 @agate-panels-tab-focus-bg-image:     @agate-gradient;
 
 // Picker
