@@ -31,14 +31,13 @@ const TabBase = kind({
 				component={SpottableTab}
 				onClick={onClick}
 			>
-				<div className={componentCss.label}>
-					<LabeledIcon
-						labelPosition={labelPosition}
-						icon={icon}
-					>
-						{children}
-					</LabeledIcon>
-				</div>
+				<LabeledIcon
+					className={componentCss.label}
+					labelPosition={labelPosition}
+					icon={icon}
+				>
+					{children}
+				</LabeledIcon>
 			</Cell>
 		);
 	}
