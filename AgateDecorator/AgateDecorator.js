@@ -97,12 +97,12 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 				style['--agate-accent-color'] = this.props.accent;
 				style['--agate-accent-h'] = accentObj[0];
-				style['--agate-accent-s'] = accentObj[1];
-				style['--agate-accent-l'] = accentObj[2];
+				style['--agate-accent-s'] = accentObj[1] + '%';
+				style['--agate-accent-l'] = accentObj[2] + '%';
 				style['--agate-highlight-color'] = this.props.highlight;
 				style['--agate-highlight-h'] = highlightObj[0];
-				style['--agate-highlight-s'] = highlightObj[1];
-				style['--agate-highlight-l'] = highlightObj[2];
+				style['--agate-highlight-s'] = highlightObj[1] + '%';
+				style['--agate-highlight-l'] = highlightObj[2] + '%';
 			}
 
 			return (
