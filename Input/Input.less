@@ -7,7 +7,10 @@
 		display: inline-flex;
 		position: relative;
 		margin: 0 (@agate-spotlight-outset / 2);
-		border-bottom: @agate-input-border-width solid @agate-input-decorator-border-color;
+
+		border-color: @agate-input-decorator-border-color;
+		border-style: @agate-input-decorator-border-style;
+		border-width: @agate-input-decorator-border-width;
 		box-sizing: border-box;
 		vertical-align: middle;
 
@@ -22,10 +25,7 @@
 			font-size: @agate-input-font-size;
 			font-weight: @agate-input-font-weight;
 
-			border-top: @agate-input-border-top;
-			border-right: @agate-input-border-right;
-			border-bottom: @agate-input-border-bottom;
-			border-left: @agate-input-border-left;
+			border: none;
 			background: transparent;
 			color: @agate-text-color;
 
