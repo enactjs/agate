@@ -14,8 +14,8 @@
 		align-items: center;
 		justify-content: center;
 		min-width: 72px;
-		font-weight: 500;	// Convert to LESS variable
-		font-size: 24px;	// Convert to LESS variable
+		font-weight: @agate-picker-font-weight;
+		font-size: @agate-picker-font-size;
 		border-radius: @agate-picker-border-radius;
 		transform: @agate-picker-transform;
 
@@ -36,7 +36,7 @@
 			&.active {
 				background-color: @agate-picker-active-bg-color;
 				background-image: @agate-picker-active-bg-image;
-				font-size: 36px;	// Convert to LESS variable
+				font-size: @agate-picker-active-font-size;
 			}
 
 			&[disabled] {

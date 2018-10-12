@@ -25,6 +25,8 @@
 
 // Local Electro variables
 @electro-highlight-gradient: linear-gradient(to bottom right, #fea800, @agate-highlight);
+@electro-overlay-light-gradient: linear-gradient(to top left, transparent, fade(white, 50%));
+@electro-overlay-dark-gradient: linear-gradient(to bottom, transparent, fade(black, 20%));
 
 // Disabled Opacity
 // ---------------------------------------
@@ -44,12 +46,12 @@
 // ---------------------------------------
 @agate-button-color:          white;
 @agate-button-bg-color:       @agate-accent;
-@agate-button-bg-image:       linear-gradient(to top left, transparent, fade(white, 50%)); // linear-gradient(to bottom right, @agate-foreground, @agate-accent);
+@agate-button-bg-image:       @electro-overlay-light-gradient;
 @agate-button-border-color:   none;
 @agate-button-shadow:         none;
 @agate-button-focus-color:    @agate-spotlight-color;
 @agate-button-focus-bg-color: @agate-foreground;
-@agate-button-focus-bg-image: linear-gradient(to top left, transparent, fade(white, 50%)); // linear-gradient(to bottom right, @agate-background-active, @agate-foreground);
+@agate-button-focus-bg-image: @electro-overlay-light-gradient;
 @agate-button-highlighted-bg-color: @agate-highlight;
 @agate-button-highlighted-bg-image: @electro-highlight-gradient;
 
@@ -96,7 +98,7 @@
 @agate-panels-tab-bg-color:           transparent;
 @agate-panels-tab-bg-image:           none;
 @agate-panels-tab-selected-color:     fade(white, 90%);
-@agate-panels-tab-selected-bg-color:  red;
+@agate-panels-tab-selected-bg-color:  transparent;
 @agate-panels-tab-selected-bg-image:  @agate-gradient;
 @agate-panels-tab-focus-color:        white;
 @agate-panels-tab-focus-bg-color:     fade(@agate-accent, 20%);
@@ -107,7 +109,7 @@
 @agate-picker-active-bg-color: @agate-accent;
 @agate-picker-active-bg-image: @agate-gradient;
 @agate-picker-item-top-bg-color: @agate-foreground;
-@agate-picker-item-top-bg-image: linear-gradient(to bottom, transparent, fade(black, 20%));;
+@agate-picker-item-top-bg-image: @electro-overlay-dark-gradient;
 @agate-picker-item-bottom-bg-color: @agate-foreground;
 @agate-picker-item-bottom-bg-image: linear-gradient(to top, transparent, fade(black, 20%));
 @agate-picker-item-focus-color: @agate-spotlight-color;
@@ -135,7 +137,7 @@
 @agate-slider-focus-bg-color: @agate-slider-bg-color;
 @agate-slider-focus-bg-image: @agate-gradient;
 @agate-slider-knob-bg-color:  @agate-text-color;
-@agate-slider-knob-bg-image:  linear-gradient(to bottom, transparent, fade(#333, 50%));
+@agate-slider-knob-bg-image:  @electro-overlay-dark-gradient;
 @agate-slider-knob-focus-bg-color: @agate-highlight;
 @agate-slider-knob-shadow:    0 3px 9px 3px fade(black, 30%);
 

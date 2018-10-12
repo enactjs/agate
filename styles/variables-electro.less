@@ -76,8 +76,8 @@
 @agate-item-font-weight: 300;
 @agate-item-label-font-size: @agate-base-font-size;
 @agate-item-height: 24px;
-@agate-item-side-outset: 12px;
-@agate-item-side-outset: 12px;
+@agate-item-side-outset: @agate-component-spacing;
+@agate-item-side-outset: @agate-component-spacing;
 @agate-item-height: 60px;
 @agate-item-height-large: 72px;
 @agate-item-vertical-padding: 3px;
@@ -103,7 +103,7 @@
 
 // Panels
 // ---------------------------------------
-@agate-panels-panel-padding: 12px;
+@agate-panels-panel-padding: @agate-component-spacing;
 @agate-panels-tab-separator-border-width: 1px;
 @agate-panels-tab-v-padding: 18px;
 @agate-panels-tab-v-margin: 0;
@@ -123,6 +123,9 @@
 @agate-picker-border-radius: @electro-border-radius;
 @agate-picker-transform: skewX(@electro-skew);
 @agate-picker-label-transform: skewX(@electro-negate-skew);
+@agate-picker-font-weight: 500;
+@agate-picker-font-size: 21px;
+@agate-picker-active-font-size: 27px;
 
 // Popup
 // ---------------------------------------
@@ -144,7 +147,7 @@
 
 // Spotlight
 // ---------------------------------------
-@agate-spotlight-outset: 12px;
+@agate-spotlight-outset: @agate-component-spacing;
 
 // Slider
 // ---------------------------------------
@@ -171,4 +174,4 @@
 @agate-togglebutton-switch-border-width: 1px;
 @agate-togglebutton-switch-height: 4px;
 @agate-togglebutton-text-switch-gutter: 18px;
-@agate-togglebutton-small-text-switch-gutter: 12px;
+@agate-togglebutton-small-text-switch-gutter: @agate-component-spacing;
