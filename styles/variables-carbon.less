@@ -65,6 +65,19 @@
 @agate-icon-sprite-small-size: (@agate-icon-button-small-size - (@agate-button-border-width * 2));
 @agate-icon-margin: @agate-component-spacing;
 
+// Input
+// ---------------------------------------
+@agate-input-font-size: 30px;
+@agate-input-font-weight: 300;
+@agate-input-small-font-size: 24px;
+@agate-input-border-width: 1px;
+@agate-input-decorator-border-style: solid;
+@agate-input-decorator-border-width: 0 0 1px 0;
+@agate-input-padding: 3px;
+@agate-input-icon-spacing: 18px;
+@agate-input-height: (@agate-icon-size - ((@agate-input-border-width * 2) + (@agate-input-padding * 2)));
+@agate-input-small-height: (@agate-button-small-height - (@agate-input-border-width * 2));
+
 // Item
 // ---------------------------------------
 @agate-item-font-size: 30px;
@@ -80,35 +93,28 @@
 @agate-item-line-height-large: @agate-item-height-large - (@agate-item-vertical-padding * 2);
 @agate-item-indent: 36px;
 
-// Input
-// ---------------------------------------
-@agate-input-font-size: 30px;
-@agate-input-font-weight: 300;
-@agate-input-small-font-size: 24px;
-@agate-input-border-width: 1px;
-@agate-input-decorator-border-style: solid;
-@agate-input-decorator-border-width: 0 0 1px 0;
-@agate-input-padding: 3px;
-@agate-input-icon-spacing: 18px;
-@agate-input-height: (@agate-icon-size - ((@agate-input-border-width * 2) + (@agate-input-padding * 2)));
-@agate-input-small-height: (@agate-button-small-height - (@agate-input-border-width * 2));
-
 // Panels
 // ---------------------------------------
 @agate-panels-panel-padding: 12px;
 @agate-panels-tab-separator-border-width: 1px;
-@agate-panels-tab-v-padding: 18px;
-@agate-panels-tab-v-margin: 0;
+@agate-panels-tab-padding: 18px 0;
+@agate-panels-tab-margin: 0;
+@agate-panels-tab-bg-position: 0;
+@agate-panels-tab-bg-transform: none;
+@agate-panels-tab-border-radius: 0;
+@agate-panels-tab-group-border-radius: 0;
 @agate-panels-tab-group-margin: 0;
-@agate-panels-tab-group-radius: 0;
+@agate-panels-tab-group-padding: 0;
 @agate-panels-tab-group-transform: none;
 @agate-panels-tab-group-horizontal-transform: none;
 @agate-panels-tab-bar-margin: 0;
-@agate-panels-tab-label-transform: none;
 @agate-panels-tab-vertical-width: inherit;
 @agate-panels-tab-vertical-before-right: 0;
 @agate-panels-tab-vertical-after-padding-right: 0;
+@agate-panels-tab-bg-vertical-position: 0;
 @agate-panels-tab-group-position-after-margin: 0;
+@agate-panels-tab-group-vertical-margin: 0;
+@agate-panels-tab-group-vertical-padding: 0;
 
 // Picker
 // ---------------------------------------
@@ -154,6 +160,7 @@
 @agate-sliderbutton-border-radius: 999px;
 @agate-sliderbutton-bg-transform: none;
 @agate-sliderbutton-client-transform: none;
+@agate-sliderbutton-margin: 0 @agate-component-spacing;
 
 // Spotlight
 // ---------------------------------------

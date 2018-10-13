@@ -16,7 +16,7 @@ import Panels from './Panels';
 
 import componentCss from './TabbedPanels.less';
 
-const SpottableTab = Spottable('div');
+const SpottableLabeledIcon = Spottable(LabeledIcon);
 
 const TabBase = kind({
 	name: 'Tab',
@@ -24,20 +24,16 @@ const TabBase = kind({
 		css: componentCss,
 		className: 'tab'
 	},
-	render: ({children, icon, labelPosition, onClick, ...rest}) => {
+	render: ({children, icon = 'star', labelPosition, onClick, ...rest}) => {
 		return (
 			<Cell
 				{...rest}
-				component={SpottableTab}
+				icon={icon}
+				component={SpottableLabeledIcon}
+				labelPosition={labelPosition}
 				onClick={onClick}
 			>
-				<LabeledIcon
-					className={componentCss.label}
-					labelPosition={labelPosition}
-					icon={icon}
-				>
-					{children}
-				</LabeledIcon>
+				{children}
 			</Cell>
 		);
 	}
@@ -70,30 +66,31 @@ const TabGroupBase = kind({
 		}
 	},
 
-	render: ({afterTabs, beforeTabs, className, labelPosition, style, tabEndStyle, tabGroupStyle, ...rest}) => {
+	render: ({afterTabs, beforeTabs, className, css, labelPosition, orientation, style, tabEndStyle, tabGroupStyle, ...rest}) => {
 		delete rest.tabPosition;
 
 		return (
-			<Layout orientation={rest.orientation} className={className} align="stretch" style={style}>
-				{beforeTabs ? <Cell className={componentCss.tabEnds} shrink>
+			<Layout orientation={orientation} className={className} align="stretch" style={style}>
+				{beforeTabs ? <Cell className={css.tabEnds} shrink>
 					{beforeTabs}
 				</Cell> : null}
 				<Cell>
 					<Layout
 						{...rest}
-						className={componentCss.tabGroup}
+						className={css.tabGroup}
 						align="stretch center"
 						childComponent={Tab}
 						childSelect="onClick"
 						component={Group}
 						itemProps={{
 							labelPosition,
-							shrink: (rest.orientation === 'vertical')
+							shrink: (orientation === 'vertical')
 						}}
+						orientation={orientation}
 						select="radio"
 					/>
 				</Cell>
-				{afterTabs ? <Cell className={componentCss.tabEnds} shrink>
+				{afterTabs ? <Cell className={css.tabEnds} shrink>
 					{afterTabs}
 				</Cell> : null}
 			</Layout>

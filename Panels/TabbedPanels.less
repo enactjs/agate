@@ -28,47 +28,59 @@
 
 		.tabGroup {
 			margin: @agate-panels-tab-group-margin;
-			border-radius: @agate-panels-tab-group-radius;
+			padding: @agate-panels-tab-group-padding;
+			border-radius: @agate-panels-tab-group-border-radius;
 			overflow: hidden;
 			transform: @agate-panels-tab-group-transform;
 
 			.tab {
-				margin: @agate-panels-tab-v-margin 0;
-
-				// These two will need to change based on the skin
-				// padding-top: @agate-panels-tab-v-padding;
-				padding-bottom: @agate-panels-tab-v-padding;
+				margin: @agate-panels-tab-margin;
+				padding: @agate-panels-tab-padding;
 
 				color: @agate-panels-tab-color;
 				// background-color: @agate-panels-tab-bg-color;
 				// background-image: @agate-panels-tab-bg-image;
+				border-left: @agate-panels-tab-separator-border-width solid @agate-panels-tab-separator-border-color;
 
-				.label {
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					transform: @agate-panels-tab-label-transform;
+				&::before {
+					.position(@agate-panels-tab-bg-position);
+					position: absolute;
+					content: "";
+					display: block;
+					border-radius: @agate-panels-tab-border-radius;
+					transform: @agate-panels-tab-bg-transform;
 				}
 
 				&[data-selected=true] {
 					color: @agate-panels-tab-selected-color;
-					background-color: @agate-panels-tab-selected-bg-color;
-					background-image: @agate-panels-tab-selected-bg-image;
+
+					&::before {
+						background-color: @agate-panels-tab-selected-bg-color;
+						background-image: @agate-panels-tab-selected-bg-image;
+					}
 				}
 
-				border-left: @agate-panels-tab-separator-border-width solid @agate-panels-tab-separator-border-color;
 				&:first-child {
 					border-left-width: 0;
 				}
 
 				.focus({
 					color: @agate-panels-tab-focus-color;
-					background-color: @agate-panels-tab-focus-bg-color;
-					background-image: @agate-panels-tab-focus-bg-image;
+					background-color: transparent;
+					background-image: none;
+
+					&::before {
+						background-color: @agate-panels-tab-focus-bg-color;
+						background-image: @agate-panels-tab-focus-bg-image;
+					}
 
 					&[data-selected=true] {
 						color: @agate-panels-tab-selected-color;
-						background-color: @agate-panels-tab-selected-bg-color;
+
+						&::before {
+							background-color: @agate-panels-tab-selected-bg-color;
+							background-image: @agate-panels-tab-selected-bg-image;
+						}
 					}
 				});
 			}
@@ -79,36 +91,38 @@
 				margin: @agate-panels-tab-group-position-after-margin;
 			}
 
-			.tabEnds {
-				display: flex;
-				align-items: flex-end;
-			}
+			// .tabEnds {
+			// 	display: flex;
+			// 	align-items: flex-end;
+			// }
 		}
 
 		&.vertical {
 			.tabGroup {
-				margin: 0;
-				border-radius: 0;
+				margin: @agate-panels-tab-group-vertical-margin;
+				padding: @agate-panels-tab-group-vertical-padding;
 				transform: @agate-panels-tab-group-horizontal-transform;
-				overflow: visible;
 
 				.tab {
-					width: @agate-panels-tab-vertical-width;
-					right: @agate-panels-tab-vertical-before-right;
-					border-radius: @agate-panels-tab-group-radius;
-					transform: @agate-panels-tab-group-transform;
-
-					.label {
-						transform: @agate-panels-tab-label-transform;
+					&::before {
+						.position(@agate-panels-tab-bg-vertical-position);
 					}
+					// width: @agate-panels-tab-vertical-width;
+					// right: @agate-panels-tab-vertical-before-right;
+					// border-radius: @agate-panels-tab-border-radius;
+					// transform: @agate-panels-tab-group-transform;
+
+					// .label {
+					// 	transform: @agate-panels-tab-label-transform;
+					// }
 				}
 			}
 
 			&.positionAfter {
-				.tabEnds {
-					display: flex;
-					justify-content: flex-end;
-				}
+				// .tabEnds {
+				// 	display: flex;
+				// 	justify-content: flex-end;
+				// }
 
 				.tab {
 					right: 0;

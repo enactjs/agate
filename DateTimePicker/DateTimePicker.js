@@ -76,26 +76,26 @@ class DateTimePickerBase extends React.Component {
 				<Cell size="35%">
 					<Row align="center center">
 						<PickerCell className={css.pickerLeft} onChange={this.handleTimeChange('month')} range={ranges.months}>
-								Month
+							Month
 						</PickerCell>
 						<PickerCell className={css.pickerCell} onChange={this.handleTimeChange('day')} range={ranges.days}>
-								Day
+							Day
 						</PickerCell>
 						<PickerCell className={css.pickerRight} onChange={this.handleTimeChange('year')} range={ranges.years}>
-								Year
+							Year
 						</PickerCell>
 					</Row>
 				</Cell>
 				<Cell size="35%">
 					<Row align="center center">
 						<PickerCell className={css.pickerLeft} onChange={this.handleTimeChange('hour')} range={ranges.hours}>
-								Hour
+							Hour
 						</PickerCell>
 						<PickerCell className={css.pickerCell} onChange={this.handleTimeChange('minute')} range={ranges.minutes}>
-								Minute
+							Minute
 						</PickerCell>
 						<PickerCell className={css.pickerRight} onChange={this.handleTimeChange('meridiem')} range={ranges.meridiem}>
-								AM/PM
+							AM/PM
 						</PickerCell>
 					</Row>
 				</Cell>

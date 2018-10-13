@@ -35,18 +35,20 @@
 
 	.track {
 		// calculate what one fewer items width would be, so we can extend and offset the track by that amount below
-		--adjusted-item-count-width: ~"calc(100% / (var(--sliderbutton-item-count) - 1))";
+		// --adjusted-item-count-width: ~"calc(100% / (var(--sliderbutton-item-count) - 1))";
 		// extend the track to be wider than 100% by the width of one item, and use that value
-		width: ~"calc(var(--adjusted-item-count-width) * var(--sliderbutton-item-count))";
+		// width: ~"calc(var(--adjusted-item-count-width) * var(--sliderbutton-item-count))";
 		// cut that value from above in half and left-offset the track by that amount.
-		left: ~"calc(var(--adjusted-item-count-width) / -2)";
+		// left: ~"calc(var(--adjusted-item-count-width) / -2)";
+		// height: 100%;
 
-		height: 100%;
-		position: relative;
+		position: absolute;
+		.position(0);
 		text-align: center;
 	}
 
 	.applySkins({
+		margin: @agate-sliderbutton-margin;
 		height: @agate-button-height;
 		border-radius: @agate-sliderbutton-border-radius;
 		background-color: @agate-sliderbutton-bg-color;
