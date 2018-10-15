@@ -12,7 +12,7 @@
 @agate-foreground: ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.8)";
 @agate-background-active: ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.5)";
 @agate-foreground-active: @agate-foreground;
-@agate-background-focus: @agate-background-active;
+@agate-background-focus: ~"hsl(" @electro-accent2-h, @electro-accent2-s, @electro-accent2-l ~", 0.7)";
 @agate-foreground-focus: @agate-foreground;
 @agate-gradient: linear-gradient(to bottom right, ~"hsl(" @electro-accent2-h, @electro-accent2-s, @electro-accent2-l ~")", transparent);
 @agate-darker-gray: #262626;
@@ -56,7 +56,7 @@
 @agate-button-border-color:   transparent;
 @agate-button-shadow:         none;
 @agate-button-focus-color:    @agate-spotlight-color;
-@agate-button-focus-bg-color: @agate-foreground;
+@agate-button-focus-bg-color: @agate-spotlight-bg-color;
 @agate-button-focus-bg-image: @electro-overlay-light-gradient;
 @agate-button-highlighted-bg-color: @agate-highlight;
 @agate-button-highlighted-bg-image: @electro-highlight-gradient;
