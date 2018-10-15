@@ -91,6 +91,10 @@
 				margin: @agate-panels-tab-group-position-after-margin;
 			}
 
+			// The below code is to handle the vertical (perpendicular) alignment of the components
+			// on the ends of the tab row, commented out here to remind us to come back later and
+			// populate these with theme-settable variable values when the time comes. We'll need to
+			// support positionBefore and positionAfter as well.
 			// .tabEnds {
 			// 	display: flex;
 			// 	align-items: flex-end;
@@ -109,14 +113,6 @@
 					&::before {
 						.position(@agate-panels-vertical-tab-bg-position);
 					}
-					// width: @agate-panels-vertical-tab-width;
-					// right: @agate-panels-vertical-tab-before-right;
-					// border-radius: @agate-panels-tab-border-radius;
-					// transform: @agate-panels-tab-group-transform;
-
-					// .label {
-					// 	transform: @agate-panels-tab-label-transform;
-					// }
 				}
 			}
 

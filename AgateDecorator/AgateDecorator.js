@@ -81,6 +81,11 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			highlight: PropTypes.string
 		}
 
+		static defaultProps = {
+			accent: '#1a1a1a',
+			highlight: '#2a48ca'
+		}
+
 		render () {
 			const className = classnames(
 				this.props.className,
