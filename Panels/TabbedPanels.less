@@ -99,16 +99,18 @@
 
 		&.vertical {
 			.tabGroup {
-				margin: @agate-panels-tab-group-vertical-margin;
-				padding: @agate-panels-tab-group-vertical-padding;
+				margin: @agate-panels-vertical-tab-group-margin;
+				padding: @agate-panels-vertical-tab-group-padding;
 				transform: @agate-panels-tab-group-horizontal-transform;
 
 				.tab {
+					margin: @agate-panels-vertical-tab-margin;
+
 					&::before {
-						.position(@agate-panels-tab-bg-vertical-position);
+						.position(@agate-panels-vertical-tab-bg-position);
 					}
-					// width: @agate-panels-tab-vertical-width;
-					// right: @agate-panels-tab-vertical-before-right;
+					// width: @agate-panels-vertical-tab-width;
+					// right: @agate-panels-vertical-tab-before-right;
 					// border-radius: @agate-panels-tab-border-radius;
 					// transform: @agate-panels-tab-group-transform;
 
@@ -126,7 +128,7 @@
 
 				.tab {
 					right: 0;
-					padding-right: @agate-panels-tab-vertical-after-padding-right;
+					padding-right: @agate-panels-vertical-tab-after-padding-right;
 				}
 			}
 		}
