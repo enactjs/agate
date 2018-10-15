@@ -47,6 +47,8 @@
 @agate-button-focus-color:    @agate-spotlight-color;
 @agate-button-focus-bg-color: @agate-background-focus;
 @agate-button-focus-bg-image: @agate-gradient;
+@agate-button-highlighted-bg-color: @agate-background-focus;
+@agate-button-highlighted-bg-image: @agate-gradient;
 
 // Divider
 // ---------------------------------------
@@ -61,8 +63,9 @@
 // ---------------------------------------
 @agate-input-decorator-border-color:          @agate-background-active;
 @agate-input-decorator-focused-border-color:  @agate-accent;
-@agate-input-active-background-color:         @agate-accent;
-@agate-input-active-text-color:               @agate-foreground-active;
+@agate-input-focused-background-color:        @agate-accent;
+@agate-input-focused-background-image:        none;
+@agate-input-focused-text-color:              @agate-foreground-active;
 @agate-input-focused-text-color:              @agate-accent;
 @agate-input-placeholder-color:               fade(@agate-foreground, 80%);
 @agate-input-text-color:                      @agate-foreground;
@@ -70,6 +73,10 @@
 // Item
 // ---------------------------------------
 @agate-item-color:       @agate-accent;
+
+// LabeledItem
+// ---------------------------------------
+@agate-labelediconbutton-color: @agate-accent;
 
 // LabeledItem
 // ---------------------------------------
@@ -92,20 +99,36 @@
 @agate-panels-tab-focus-bg-color:     ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.2)"; // @agate-accent; // fade(@agate-accent, 20%);
 @agate-panels-tab-focus-bg-image:     linear-gradient(to bottom, ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.1)", @agate-accent 98%, @agate-accent);
 
+// Picker
+// ---------------------------------------
+@agate-picker-active-bg-color: @agate-accent;
+@agate-picker-active-bg-image: @agate-gradient;
+@agate-picker-item-top-bg-color: none;
+@agate-picker-item-top-bg-image: none;
+@agate-picker-item-bottom-bg-color: none;
+@agate-picker-item-bottom-bg-image: none;
+@agate-picker-item-focus-color: @agate-spotlight-color;
+@agate-picker-item-focus-bg-color: @agate-accent;
+@agate-picker-item-focus-bg-image: inherit;
+
 // Popup
 // ---------------------------------------
 @agate-popup-plain-body-color: @agate-accent;
 @agate-popup-bg-color: fade(black, 85%);
+@agate-popup-bg-image: none;
 @agate-popup-border-color: @agate-accent;
 @agate-popup-shadow: none;
+@agate-popup-body-border: none;
 @agate-popup-body-border-color: @agate-highlight transparent;
 @agate-popup-body-bg-color: @agate-background-active;
+@agate-popup-body-bg-image: none;
 
 // Slider
 // ---------------------------------------
 @agate-slider-color:          @agate-accent;
 @agate-slider-bg-color:       fade(#666, 50%);
 @agate-slider-bg-image:       linear-gradient(to top, transparent, fade(black, 3%));
+@agate-slider-fill-bg-color:  @agate-background-active;
 @agate-slider-focus-color:    black;
 @agate-slider-focus-bg-color: @agate-slider-bg-color;
 @agate-slider-focus-bg-image: @agate-gradient;
@@ -123,14 +146,17 @@
 @agate-sliderbutton-focus-bg-image: @agate-gradient;
 @agate-sliderbutton-knob-bg-color:  @agate-accent;
 @agate-sliderbutton-knob-bg-image:  linear-gradient(to bottom, transparent, fade(#333, 50%));
+@agate-slider-knob-focus-bg-color: @agate-foreground;
 @agate-sliderbutton-knob-shadow:    0 3px 9px 3px fade(black, 30%);
 
 // Switch
 // ---------------------------------------
 @agate-switch-bg-color: @agate-foreground;
 @agate-switch-selected-bg-color: @agate-accent;
+@agate-switch-selected-focus-bg-color: @agate-switch-selected-bg-color;
 @agate-switch-color: @agate-title-text-color;
 @agate-switch-selected-color: @agate-title-text-color;
+@agate-switch-focus-bg-color: @agate-text-color;
 @agate-switch-focus-color: black;
 @agate-switch-label-color: @agate-accent;
 
@@ -139,10 +165,14 @@
 @agate-toggle-border-color: @agate-dark-gray;
 @agate-toggle-indicator-border-color: @agate-toggle-border-color;
 @agate-toggle-focus-text-color: @agate-text-color;
-@agate-toggle-button-switch-on-bg-color: @agate-accent;
-@agate-toggle-button-switch-on-border-color: @agate-white;
-@agate-toggle-button-switch-on-focus-bg-color: @agate-accent;
-@agate-toggle-button-switch-on-focus-border-color: @agate-white;
-@agate-toggle-button-switch-off-bg-color: black;
-@agate-toggle-button-switch-disabled-bg-color: @agate-darker-gray;
-@agate-toggle-button-switch-disabled-border-color: #6c6c6c;
+@agate-togglebutton-switch-on-bg-color: @agate-accent;
+@agate-togglebutton-switch-on-border-color: @agate-accent;
+@agate-togglebutton-switch-on-underline-bg-color: transparent;
+@agate-togglebutton-switch-on-underline-focus-bg-color: @agate-accent;
+@agate-togglebutton-switch-on-underline-focus-border-color: none;
+@agate-togglebutton-switch-on-focus-bg-color: @agate-accent;
+@agate-togglebutton-switch-on-focus-bg-image: inherit;
+@agate-togglebutton-switch-on-focus-border-color: @agate-white;
+@agate-togglebutton-switch-off-bg-color: black;
+@agate-togglebutton-switch-disabled-bg-color: @agate-darker-gray;
+@agate-togglebutton-switch-disabled-border-color: #6c6c6c;

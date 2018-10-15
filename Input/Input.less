@@ -7,7 +7,9 @@
 		display: inline-flex;
 		position: relative;
 		margin: 0 (@agate-spotlight-outset / 2);
-		border-bottom: @agate-input-border-width solid @agate-input-decorator-border-color;
+		border-color: @agate-input-decorator-border-color;
+		border-style: @agate-input-decorator-border-style;
+		border-width: @agate-input-decorator-border-width;
 		box-sizing: border-box;
 		vertical-align: middle;
 
@@ -22,13 +24,17 @@
 			font-size: @agate-input-font-size;
 			font-weight: @agate-input-font-weight;
 
-			border: unset;
+			border: none;
 			background: transparent;
 			color: @agate-text-color;
 
 			&::selection {
 				color: @agate-spotlight-color;
 				background-color: @agate-spotlight-bg-color;
+			}
+
+			&::placeholder {
+				color: @agate-input-placeholder-color;
 			}
 
 			&[type=number] {
@@ -82,25 +88,14 @@
 			pointer-events: none;
 		}
 
-		&.focused,
-		&:global(.spottable):focus {
-			background-color: inherit;
-			border-bottom-color: @agate-input-decorator-focused-border-color;
+		&.focused {
+			background-color: @agate-input-focused-background-color;
+			background-image: @agate-input-focused-background-image;
 			border-radius: 3px;
 
 			.icon,
 			.input {
 				color: @agate-input-focused-text-color;
-			}
-		}
-
-		&.focused {
-			background-color: @agate-input-active-background-color;
-			border-radius: 3px;
-
-			.icon,
-			.input {
-				color: @agate-input-active-text-color;
 			}
 		}
 	});

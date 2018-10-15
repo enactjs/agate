@@ -64,7 +64,7 @@
 				}
 			}
 			:global(.spottable):focus & {
-				background-color: @agate-text-color;
+				background-color: @agate-switch-selected-focus-bg-color;
 			}
 		}
 
@@ -80,7 +80,7 @@
 			.toggleIcon {
 				// Skin colors
 				background-color: @agate-foreground;
-				
+
 
 				.icon {
 					color: @agate-sliderbutton-focus-color;
@@ -88,11 +88,10 @@
 				&.selected .icon {
 					color: @agate-sliderbutton-focus-color;
 				}
-			
+
 			}
 		})
 	});
 }
 
 // Keep the switch handle (the icon) a constant color regardless of focus state.
-

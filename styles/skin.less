@@ -10,6 +10,14 @@
 		@componentRules();
 	}
 
+	&:global(.electro) {
+		// Load the Titanium agate rules into this scope
+		@import "./colors-electro.less";
+		@import "./variables-electro.less";
+
+		@componentRules();
+	}
+
 	&:global(.titanium) {
 		// Load the Titanium agate rules into this scope
 		@import "./colors-titanium.less";

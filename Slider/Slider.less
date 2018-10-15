@@ -27,15 +27,10 @@
 			position: absolute;
 			height: 60px;
 			width: 60px;
-			// Vertically and horizontally center this knob.
-			// Using this method rather than -top -left so the knob is more intuitively customizable.
-			transform: translate3d(-50%, -50%, 0) scale(0.8);
-			border-radius: 30px;
 			border: 30px solid transparent;
 			box-sizing: border-box;
 			will-change: transform;
 			transition: transform ease-out 100ms;
-
 		}
 	}
 
@@ -64,6 +59,7 @@
 		@h-gap: (27px);
 		@v-gap: 30px;
 		padding: @v-gap @h-gap;
+		margin: 0;
 		min-height: 120px;
 		display: inline-block;
 		vertical-align: top;
@@ -86,27 +82,25 @@
 				display: block;
 			}
 		}
-
-		&.pressed,
-		&:focus.activateOnFocus,
-		&:focus.active {
-			.knob::before {
-				transform: translate3d(-50%, -50%, 0) scale(1);
-			}
-		}
 	});
 
 	.applySkins({
 		.progressBar {
 			background-color: @agate-slider-bg-color;
+			background-image: @agate-slider-bg-image;
 		}
 
 		.fill {
-			background-color: @agate-slider-bg-image;
+			background-color: @agate-slider-fill-bg-color;
 		}
 
 		.knob::before {
+			// Vertically and horizontally center this knob.
+			// Using this method rather than -top -left so the knob is more intuitively customizable.
+			transform: @agate-slider-knob-transform;
+			border-radius: @agate-slider-knob-border-radius;
 			background-color: @agate-slider-knob-bg-color;
+			background-image: @agate-gradient;
 		}
 
 		.spottable({
@@ -114,7 +108,7 @@
 			&.active,
 			&.pressed {
 				.fill {
-					background-color: @agate-spotlight-bg-color;
+					background-color: @agate-slider-fill-bg-color;
 				}
 			}
 
@@ -122,16 +116,24 @@
 				background-color: transparent;
 
 				.knob::before {
-					background-color: @agate-spotlight-focus-bg-image;
+					background-color: @agate-slider-knob-focus-bg-color;
 				}
 
 				&.active {
 					.knob::before {
-						background-color: @agate-slider-knob-bg-color;
+						background-color: @agate-slider-knob-focus-bg-color;
 						border-color: @agate-spotlight-focus-bg-image;
 					}
 				}
 			});
+
+			&.pressed,
+			&:focus.activateOnFocus,
+			&:focus.active {
+				.knob::before {
+					transform: @agate-slider-knob-active-transform;
+				}
+			}
 		});
 
 		&.noFill {

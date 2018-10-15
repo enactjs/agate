@@ -31,34 +31,42 @@
 		left: ~"calc(var(--knob-value) * var(--sliderbutton-item-size))";
 		will-change: left;
 		transition: left 200ms ease-in-out;
-		border-radius: 999px;
 	}
 
 	.track {
 		// calculate what one fewer items width would be, so we can extend and offset the track by that amount below
-		--adjusted-item-count-width: ~"calc(100% / (var(--sliderbutton-item-count) - 1))";
+		// --adjusted-item-count-width: ~"calc(100% / (var(--sliderbutton-item-count) - 1))";
 		// extend the track to be wider than 100% by the width of one item, and use that value
-		width: ~"calc(var(--adjusted-item-count-width) * var(--sliderbutton-item-count))";
+		// width: ~"calc(var(--adjusted-item-count-width) * var(--sliderbutton-item-count))";
 		// cut that value from above in half and left-offset the track by that amount.
-		left: ~"calc(var(--adjusted-item-count-width) / -2)";
+		// left: ~"calc(var(--adjusted-item-count-width) / -2)";
+		// height: 100%;
 
-		height: 100%;
-		position: relative;
+		position: absolute;
+		.position(0);
 		text-align: center;
 	}
 
 	.applySkins({
+		margin: @agate-sliderbutton-margin;
 		height: @agate-button-height;
-		border-radius: 999px;
-		color: @agate-sliderbutton-color;
+		border-radius: @agate-sliderbutton-border-radius;
 		background-color: @agate-sliderbutton-bg-color;
 		background-image: @agate-sliderbutton-bg-image;
+		cursor: pointer;
+		transform: @agate-sliderbutton-bg-transform;
+
+		.client {
+			transform: @agate-sliderbutton-client-transform;
+			color: @agate-sliderbutton-color;
+		}
 
 		.knob {
 			background-color: @agate-sliderbutton-knob-bg-color;
 			background-image: @agate-sliderbutton-knob-bg-image;
 			opacity: 0.9;
 			box-shadow: @agate-sliderbutton-knob-shadow;
+			border-radius: @agate-sliderbutton-border-radius;
 		}
 
 		.focus({

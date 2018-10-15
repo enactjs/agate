@@ -22,12 +22,13 @@
 		}
 
 		.bg {
-			background-color: inherit;
+			background-color: @agate-button-bg-color;
 			border: @agate-button-border-width solid @agate-button-border-color;
 			border-radius: @agate-button-border-radius;
 			color: @agate-button-color;
 			background-image: @agate-button-bg-image;
 			box-shadow: @agate-button-shadow;
+			transform: @agate-button-bg-transform;
 		}
 
 		.client {
@@ -83,7 +84,7 @@
 
 		&.grid {
 			.bg {
-				border-radius: 0;
+				border-radius: @agate-button-grid-border-radius;
 			}
 		}
 
@@ -102,9 +103,9 @@
 
 		&.highlighted {
 			.bg {
-				background-color: @agate-button-focus-bg-color;
-				background-image: @agate-button-focus-bg-image;
-				opacity: 0.4;
+				background-color: @agate-button-highlighted-bg-color;
+				background-image: @agate-button-highlighted-bg-image;
+				opacity: @agate-button-highlighted-opacity;
 			}
 
 			&,

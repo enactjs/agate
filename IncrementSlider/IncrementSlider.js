@@ -411,9 +411,11 @@ const IncrementSliderBase = kind({
 		'data-webos-voice-group-label': voiceGroupLabel,
 		backgroundProgress,
 		css,
+		decrementIcon,
 		disabled,
 		focused,
 		id,
+		incrementIcon,
 		knobStep,
 		max,
 		min,
@@ -443,10 +445,11 @@ const IncrementSliderBase = kind({
 		return (
 			<div {...rest}>
 				<IncrementSliderButton
-					icon="minus"
+					icon={decrementIcon}
 					aria-hidden={ariaHidden}
 					className={css.decrementButton}
 					data-webos-voice-group-label={voiceGroupLabel}
+					disabled={disabled}
 					onTap={onDecrement}
 					onSpotlightDisappear={onDecrementSpotlightDisappear}
 					spotlightDisabled={spotlightDisabled}
@@ -475,10 +478,11 @@ const IncrementSliderBase = kind({
 					value={value}
 				/>
 				<IncrementSliderButton
-					icon="plus"
+					icon={incrementIcon}
 					aria-hidden={ariaHidden}
 					className={css.incrementButton}
 					data-webos-voice-group-label={voiceGroupLabel}
+					disabled={disabled}
 					onTap={onIncrement}
 					onSpotlightDisappear={onIncrementSpotlightDisappear}
 					spotlightDisabled={spotlightDisabled}
