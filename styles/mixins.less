@@ -7,6 +7,13 @@
 @import "~@enact/ui/styles/mixins.less";
 @import "../styles/variables.less";
 
+.position (@trbl) when (length(@trbl) = 4) {
+	top: extract(@trbl, 1);
+	right: extract(@trbl, 2);
+	bottom: extract(@trbl, 3);
+	left: extract(@trbl, 4);
+}
+
 .agate-item-sizing() {
 	font-size: @agate-item-font-size;
 	font-weight: @agate-item-font-weight;

@@ -21,46 +21,112 @@
 }
 
 .tabBar {
-	margin: 0;
-
 	.applySkins({
+		margin: @agate-panels-tab-bar-margin;
 		background-color: @agate-panels-tab-bg-color;
 		background-image: @agate-panels-tab-bg-image;
-	});
-}
 
-.tab {
-	.applySkins({
-		margin: @agate-panels-tab-v-margin 0;
+		.tabGroup {
+			margin: @agate-panels-tab-group-margin;
+			padding: @agate-panels-tab-group-padding;
+			border-radius: @agate-panels-tab-group-border-radius;
+			overflow: hidden;
+			transform: @agate-panels-tab-group-transform;
 
-		// These two will need to change based on the skin
-		padding-top: @agate-panels-tab-v-padding;
-		padding-bottom: @agate-panels-tab-v-padding;
+			.tab {
+				margin: @agate-panels-tab-margin;
+				padding: @agate-panels-tab-padding;
 
-		color: @agate-panels-tab-color;
-		// background-color: @agate-panels-tab-bg-color;
-		// background-image: @agate-panels-tab-bg-image;
+				color: @agate-panels-tab-color;
+				// background-color: @agate-panels-tab-bg-color;
+				// background-image: @agate-panels-tab-bg-image;
+				border-left: @agate-panels-tab-separator-border-width solid @agate-panels-tab-separator-border-color;
 
-		&[data-selected=true] {
-			color: @agate-panels-tab-selected-color;
-			background-color: @agate-panels-tab-selected-bg-color;
-			background-image: @agate-panels-tab-selected-bg-image;
-		}
+				&::before {
+					.position(@agate-panels-tab-bg-position);
+					position: absolute;
+					content: "";
+					display: block;
+					border-radius: @agate-panels-tab-border-radius;
+					transform: @agate-panels-tab-bg-transform;
+				}
 
-		border-left: @agate-panels-tab-separator-border-width solid @agate-panels-tab-separator-border-color;
-		&:first-child {
-			border-left-width: 0;
-		}
+				&[data-selected=true] {
+					color: @agate-panels-tab-selected-color;
 
-		.focus({
-			color: @agate-panels-tab-focus-color;
-			background-color: @agate-panels-tab-focus-bg-color;
-			background-image: @agate-panels-tab-focus-bg-image;
+					&::before {
+						background-color: @agate-panels-tab-selected-bg-color;
+						background-image: @agate-panels-tab-selected-bg-image;
+					}
+				}
 
-			&[data-selected=true] {
-				color: @agate-panels-tab-selected-color;
-				background-color: @agate-panels-tab-selected-bg-color;
+				&:first-child {
+					border-left-width: 0;
+				}
+
+				.focus({
+					color: @agate-panels-tab-focus-color;
+					background-color: transparent;
+					background-image: none;
+
+					&::before {
+						background-color: @agate-panels-tab-focus-bg-color;
+						background-image: @agate-panels-tab-focus-bg-image;
+					}
+
+					&[data-selected=true] {
+						color: @agate-panels-tab-selected-color;
+
+						&::before {
+							background-color: @agate-panels-tab-selected-bg-color;
+							background-image: @agate-panels-tab-selected-bg-image;
+						}
+					}
+				});
 			}
-		});
+		}
+
+		&.positionAfter {
+			.tabGroup {
+				margin: @agate-panels-tab-group-position-after-margin;
+			}
+
+			// The below code is to handle the vertical (perpendicular) alignment of the components
+			// on the ends of the tab row, commented out here to remind us to come back later and
+			// populate these with theme-settable variable values when the time comes. We'll need to
+			// support positionBefore and positionAfter as well.
+			// .tabEnds {
+			// 	display: flex;
+			// 	align-items: flex-end;
+			// }
+		}
+
+		&.vertical {
+			.tabGroup {
+				margin: @agate-panels-vertical-tab-group-margin;
+				padding: @agate-panels-vertical-tab-group-padding;
+				transform: @agate-panels-tab-group-horizontal-transform;
+
+				.tab {
+					margin: @agate-panels-vertical-tab-margin;
+
+					&::before {
+						.position(@agate-panels-vertical-tab-bg-position);
+					}
+				}
+			}
+
+			&.positionAfter {
+				// .tabEnds {
+				// 	display: flex;
+				// 	justify-content: flex-end;
+				// }
+
+				.tab {
+					right: 0;
+					padding-right: @agate-panels-vertical-tab-after-padding-right;
+				}
+			}
+		}
 	});
 }

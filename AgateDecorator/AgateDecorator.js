@@ -12,24 +12,12 @@ import PropTypes from 'prop-types';
 import {ResolutionDecorator} from '@enact/ui/resolution';
 import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 import SpotlightRootDecorator from '@enact/spotlight/SpotlightRootDecorator';
-
+import convert from 'color-convert';
 
 import Skinnable from '../Skinnable';
 
 import screenTypes from './screenTypes.json';
 import css from './AgateDecorator.less';
-
-// hex to RGB conversion
-// from Tim Down
-// at https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-function hexToRgb (hex) {
-	let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-	return result ? {
-		r: parseInt(result[1], 16),
-		g: parseInt(result[2], 16),
-		b: parseInt(result[3], 16)
-	} : {};
-}
 
 /**
  * Default config for {@link agate/AgateDecorator.AgateDecorator}.
@@ -93,6 +81,11 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			highlight: PropTypes.string
 		}
 
+		static defaultProps = {
+			accent: '#1a1a1a',
+			highlight: '#2a48ca'
+		}
+
 		render () {
 			const className = classnames(
 				this.props.className,
@@ -104,17 +97,17 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			const style = this.props.style || {};
 
 			if (customSkin) {
-				const accentObj = hexToRgb(this.props.accent);
-				const highlightObj = hexToRgb(this.props.highlight);
+				const accentObj = convert.hex.hsl(this.props.accent);
+				const highlightObj = convert.hex.hsl(this.props.highlight);
 
 				style['--agate-accent-color'] = this.props.accent;
-				style['--agate-accent-r'] = accentObj.r;
-				style['--agate-accent-g'] = accentObj.g;
-				style['--agate-accent-b'] = accentObj.b;
+				style['--agate-accent-h'] = accentObj[0];
+				style['--agate-accent-s'] = accentObj[1] + '%';
+				style['--agate-accent-l'] = accentObj[2] + '%';
 				style['--agate-highlight-color'] = this.props.highlight;
-				style['--agate-highlight-r'] = highlightObj.r;
-				style['--agate-highlight-g'] = highlightObj.g;
-				style['--agate-highlight-b'] = highlightObj.b;
+				style['--agate-highlight-h'] = highlightObj[0];
+				style['--agate-highlight-s'] = highlightObj[1] + '%';
+				style['--agate-highlight-l'] = highlightObj[2] + '%';
 			}
 
 			return (

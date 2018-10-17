@@ -1,4 +1,5 @@
 import {adaptEvent, forward, handle} from '@enact/core/handle';
+import {cap} from '@enact/core/util';
 import {Cell, Layout} from '@enact/ui/Layout';
 import {Changeable} from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
@@ -23,11 +24,11 @@ const TabBase = kind({
 		css: componentCss,
 		className: 'tab'
 	},
-	render: ({children, labelPosition, onClick, ...rest}) => {
+	render: ({children, icon = 'star', labelPosition, onClick, ...rest}) => {
 		return (
 			<Cell
-				icon="star"
 				{...rest}
+				icon={icon}
 				component={SpottableLabeledIcon}
 				labelPosition={labelPosition}
 				onClick={onClick}
@@ -41,11 +42,14 @@ const Tab = Skinnable(TabBase);
 
 const TabGroupBase = kind({
 	name: 'TabGroup',
+
 	styles: {
 		css: componentCss,
 		className: 'tabBar'
 	},
+
 	computed: {
+		className: ({orientation, tabPosition, styler}) => styler.append(orientation, ['position' + cap(tabPosition)]),
 		labelPosition: ({orientation, tabPosition}) => {
 			// TODO: this keeps the label always between the icon and the panels, is it necessary?
 			if (orientation === 'vertical') {
@@ -61,30 +65,32 @@ const TabGroupBase = kind({
 			}
 		}
 	},
-	render: ({afterTabs, beforeTabs, className, labelPosition, style, ...rest}) => {
+
+	render: ({afterTabs, beforeTabs, className, css, labelPosition, orientation, style, tabEndStyle, tabGroupStyle, ...rest}) => {
 		delete rest.tabPosition;
 
 		return (
-
-			<Layout orientation={rest.orientation} className={className} align="stretch" style={style}>
-				{beforeTabs ? <Cell shrink>
+			<Layout orientation={orientation} className={className} align="stretch" style={style}>
+				{beforeTabs ? <Cell className={css.tabEnds} shrink>
 					{beforeTabs}
 				</Cell> : null}
 				<Cell>
 					<Layout
 						{...rest}
+						className={css.tabGroup}
 						align="stretch center"
 						childComponent={Tab}
 						childSelect="onClick"
 						component={Group}
 						itemProps={{
 							labelPosition,
-							shrink: (rest.orientation === 'vertical')
+							shrink: (orientation === 'vertical')
 						}}
+						orientation={orientation}
 						select="radio"
 					/>
 				</Cell>
-				{afterTabs ? <Cell shrink>
+				{afterTabs ? <Cell className={css.tabEnds} shrink>
 					{afterTabs}
 				</Cell> : null}
 			</Layout>

@@ -26,7 +26,7 @@ const PickerCell = kind({
 				<Cell shrink {...rest} component={Picker}>
 					{range}
 				</Cell>
-				<Cell shrink>{children}</Cell>
+				<Cell className={css.label} shrink>{children}</Cell>
 			</Column>
 		</Cell>
 	)
@@ -75,26 +75,26 @@ class DateTimePickerBase extends React.Component {
 			<Row {...rest} className={classnames(className, css.dateTimePicker)} align="center center">
 				<Cell size="35%">
 					<Row align="center center">
-						<PickerCell onChange={this.handleTimeChange('month')} range={ranges.months}>
+						<PickerCell className={css.pickerLeft} onChange={this.handleTimeChange('month')} range={ranges.months}>
 							Month
 						</PickerCell>
-						<PickerCell onChange={this.handleTimeChange('day')} range={ranges.days}>
+						<PickerCell className={css.pickerCell} onChange={this.handleTimeChange('day')} range={ranges.days}>
 							Day
 						</PickerCell>
-						<PickerCell onChange={this.handleTimeChange('year')} range={ranges.years}>
+						<PickerCell className={css.pickerRight} onChange={this.handleTimeChange('year')} range={ranges.years}>
 							Year
 						</PickerCell>
 					</Row>
 				</Cell>
 				<Cell size="35%">
 					<Row align="center center">
-						<PickerCell onChange={this.handleTimeChange('hour')} range={ranges.hours}>
+						<PickerCell className={css.pickerLeft} onChange={this.handleTimeChange('hour')} range={ranges.hours}>
 							Hour
 						</PickerCell>
-						<PickerCell onChange={this.handleTimeChange('minute')} range={ranges.minutes}>
+						<PickerCell className={css.pickerCell} onChange={this.handleTimeChange('minute')} range={ranges.minutes}>
 							Minute
 						</PickerCell>
-						<PickerCell onChange={this.handleTimeChange('meridiem')} range={ranges.meridiem}>
+						<PickerCell className={css.pickerRight} onChange={this.handleTimeChange('meridiem')} range={ranges.meridiem}>
 							AM/PM
 						</PickerCell>
 					</Row>

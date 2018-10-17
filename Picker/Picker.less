@@ -8,16 +8,25 @@
 .picker {
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
 
 	.applySkins({
 		align-items: center;
 		justify-content: center;
 		min-width: 72px;
-		font-weight: 500;	// Convert to LESS variable
-		font-size: 24px;	// Convert to LESS variable
+		font-weight: @agate-picker-font-weight;
+		font-size: @agate-picker-font-size;
+		border-radius: @agate-picker-border-radius;
+		transform: @agate-picker-transform;
 
-		.item {
-			margin: 0 @agate-component-spacing;
+		.label {
+			transform: @agate-picker-label-transform;
+		}
+
+		.item,
+		.itemTop,
+		.itemBottom {
+			margin: 0;
 			color: inherit;
 			width: 100%;
 			text-align: center;
@@ -25,16 +34,30 @@
 			line-height: @agate-button-height;
 
 			&.active {
-				background-color: @agate-sliderbutton-bg-color;
-				font-size: 36px;	// Convert to LESS variable
+				background-color: @agate-picker-active-bg-color;
+				background-image: @agate-picker-active-bg-image;
+				font-size: @agate-picker-active-font-size;
 			}
+
 			&[disabled] {
 				.vendor-opacity(@agate-disabled-opacity);
 			}
 
 			.focus({
-				color: @agate-spotlight-color;
+				color: @agate-picker-item-focus-color;
+				background-color: @agate-picker-item-focus-bg-color;
+				background-image: @agate-picker-item-focus-bg-image;
 			});
+		}
+
+		.itemTop {
+			background-color: @agate-picker-item-top-bg-color;
+			background-image: @agate-picker-item-top-bg-image;
+		}
+
+		.itemBottom {
+			background-color: @agate-picker-item-bottom-bg-color;
+			background-image: @agate-picker-item-bottom-bg-image;
 		}
 	});
 }
