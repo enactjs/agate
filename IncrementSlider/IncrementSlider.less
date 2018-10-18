@@ -11,7 +11,7 @@
 
 			.decrementButton,
 			.incrementButton {
-				margin: 0 @agate-slider-button-margin;
+				margin: @agate-incrementslider-horizontal-button-margin;
 			}
 
 			.input,
@@ -24,6 +24,7 @@
 				flex-grow: 1;
 				margin-left: 0;
 				margin-right: 0;
+				border-radius: @agate-incrementslider-border-radius;
 			}
 		}
 
@@ -34,7 +35,7 @@
 			.decrementButton,
 			.incrementButton {
 				display: block;
-				margin: @agate-slider-button-margin 0;
+				margin: @agate-incrementslider-vertical-button-margin;
 			}
 
 			.decrementButton {
@@ -44,6 +45,7 @@
 			.slider {
 				flex-grow: 1;
 				order: 2;
+				border-radius: @agate-incrementslider-border-radius;
 			}
 
 			.incrementButton {

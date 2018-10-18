@@ -359,6 +359,8 @@ const IncrementSliderBase = kind({
 
 	defaultProps: {
 		backgroundProgress: 0,
+		decrementIcon: 'minus',
+		incrementIcon: 'plus',
 		max: 100,
 		min: 0,
 		noFill: false,
@@ -452,6 +454,8 @@ const IncrementSliderBase = kind({
 					disabled={disabled}
 					onTap={onDecrement}
 					onSpotlightDisappear={onDecrementSpotlightDisappear}
+					orientation={orientation}
+					role="decrement"
 					spotlightDisabled={spotlightDisabled}
 				/>
 				<Slider
@@ -485,6 +489,8 @@ const IncrementSliderBase = kind({
 					disabled={disabled}
 					onTap={onIncrement}
 					onSpotlightDisappear={onIncrementSpotlightDisappear}
+					orientation={orientation}
+					role="increment"
 					spotlightDisabled={spotlightDisabled}
 				/>
 			</div>

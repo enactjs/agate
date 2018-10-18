@@ -146,15 +146,37 @@
 
 // Slider
 // ---------------------------------------
-@agate-slider-knob-height: 30px;
-@agate-slider-knob-width: 30px;
-@agate-slider-bar-height: 6px;
-@agate-slider-knob-resting-state-scale: 0.8;
-@agate-slider-knob-border-radius: 30px;
-@agate-translate-center: translate3d(-50%, -50%, 0);
-@agate-slider-knob-transform: @agate-translate-center scale(0.8);
 @agate-slider-knob-active-transform: @agate-translate-center scale(1);
-@agate-slider-button-margin: 24px;
+@agate-slider-knob-border-radius: (@agate-slider-knob-height / 2);
+@agate-slider-knob-border-width: 0;
+@agate-slider-knob-resting-state-scale: 0.8;
+@agate-slider-knob-transform: @agate-translate-center scale(0.8);
+@agate-slider-knob-height: @agate-button-height;
+@agate-slider-knob-width: @agate-slider-knob-height;
+@agate-slider-border-radius: 0;
+@agate-slider-horizontal-margin: 0 @agate-component-spacing;
+@agate-slider-horizontal-padding: ((@agate-slider-knob-height - @agate-slider-track-height) / 2) (@agate-slider-knob-height / 2);
+@agate-slider-vertical-margin: 0;
+@agate-slider-vertical-padding: (@agate-slider-knob-height / 2) ((@agate-slider-knob-height - @agate-slider-track-height) / 2);
+@agate-slider-height: @agate-button-height;
+@agate-slider-width: @agate-slider-height;
+@agate-slider-track-height: 6px;
+@agate-slider-track-width: @agate-slider-track-height;
+@agate-translate-center: translate3d(-50%, -50%, 0);
+
+// IncrementSlider
+// ---------------------------------------
+@agate-incrementslider-border-radius: 0;
+@agate-incrementslider-horizontal-button-margin: 0 (@agate-component-spacing * 2);
+@agate-incrementslider-horizontal-button-decrement-border-radius: @agate-button-border-radius;
+@agate-incrementslider-horizontal-button-decrement-border-width: @agate-button-border-width;
+@agate-incrementslider-horizontal-button-increment-border-radius: @agate-incrementslider-horizontal-button-decrement-border-radius;
+@agate-incrementslider-horizontal-button-increment-border-width: @agate-incrementslider-horizontal-button-decrement-border-width;
+@agate-incrementslider-vertical-button-margin: (@agate-component-spacing * 2) 0;
+@agate-incrementslider-vertical-button-decrement-border-radius: @agate-incrementslider-horizontal-button-decrement-border-radius;
+@agate-incrementslider-vertical-button-decrement-border-width: @agate-incrementslider-horizontal-button-decrement-border-width;
+@agate-incrementslider-vertical-button-increment-border-radius: @agate-incrementslider-horizontal-button-decrement-border-radius;
+@agate-incrementslider-vertical-button-increment-border-width: @agate-incrementslider-horizontal-button-decrement-border-width;
 
 // SliderButton
 // ---------------------------------------
