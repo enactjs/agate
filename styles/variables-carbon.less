@@ -163,15 +163,23 @@
 @agate-slider-track-height: 6px;
 @agate-slider-track-width: @agate-slider-track-height;
 @agate-translate-center: translate3d(-50%, -50%, 0);
+@agate-slider-bg-transform: none;
+@agate-slider-track-transform: none;
 
 // IncrementSlider
 // ---------------------------------------
 @agate-incrementslider-border-radius: 0;
+@agate-incrementslider-horizontal-margin: @agate-slider-horizontal-margin;
+@agate-incrementslider-horizontal-slider-margin: 0;
+@agate-incrementslider-horizontal-slider-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) ((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale);
 @agate-incrementslider-horizontal-button-margin: 0 (@agate-component-spacing * 2);
 @agate-incrementslider-horizontal-button-decrement-border-radius: @agate-button-border-radius;
 @agate-incrementslider-horizontal-button-decrement-border-width: @agate-button-border-width;
 @agate-incrementslider-horizontal-button-increment-border-radius: @agate-incrementslider-horizontal-button-decrement-border-radius;
 @agate-incrementslider-horizontal-button-increment-border-width: @agate-incrementslider-horizontal-button-decrement-border-width;
+@agate-incrementslider-vertical-margin: @agate-slider-vertical-margin;
+@agate-incrementslider-vertical-slider-margin: 0;
+@agate-incrementslider-vertical-slider-padding: 0;
 @agate-incrementslider-vertical-button-margin: (@agate-component-spacing * 2) 0;
 @agate-incrementslider-vertical-button-decrement-border-radius: @agate-incrementslider-horizontal-button-decrement-border-radius;
 @agate-incrementslider-vertical-button-decrement-border-width: @agate-incrementslider-horizontal-button-decrement-border-width;
@@ -181,8 +189,8 @@
 // SliderButton
 // ---------------------------------------
 @agate-sliderbutton-border-radius: 999px;
-@agate-sliderbutton-bg-transform: none;
-@agate-sliderbutton-client-transform: none;
+@agate-sliderbutton-bg-transform: @agate-slider-bg-transform;
+@agate-sliderbutton-client-transform: @agate-slider-track-transform;
 @agate-sliderbutton-margin: 0 @agate-component-spacing;
 
 // Spotlight

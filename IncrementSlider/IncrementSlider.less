@@ -3,32 +3,35 @@
 @import "../styles/skin.less";
 
 .incrementSlider {
+	position: relative;
+
 	.applySkins({
 		direction: ltr;	// Always arrange this according to LTR rules
 
 		&.horizontal {
+			margin: @agate-incrementslider-horizontal-margin;
 			display: flex;
 
 			.decrementButton,
 			.incrementButton {
 				margin: @agate-incrementslider-horizontal-button-margin;
+				z-index: 1;
 			}
 
 			.input,
 			.slider {
-				padding-left: ((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale);
-				padding-right: ((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale);
+				padding: @agate-incrementslider-horizontal-slider-padding;
 			}
 
 			.slider {
 				flex-grow: 1;
-				margin-left: 0;
-				margin-right: 0;
+				margin: @agate-incrementslider-horizontal-slider-margin;
 				border-radius: @agate-incrementslider-border-radius;
 			}
 		}
 
 		&.vertical {
+			margin: @agate-incrementslider-vertical-margin;
 			display: inline-flex;
 			flex-direction: column;
 
@@ -45,6 +48,8 @@
 			.slider {
 				flex-grow: 1;
 				order: 2;
+				margin: @agate-incrementslider-vertical-slider-margin;
+				padding: @agate-incrementslider-vertical-slider-padding;
 				border-radius: @agate-incrementslider-border-radius;
 			}
 

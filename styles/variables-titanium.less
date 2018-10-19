@@ -164,15 +164,23 @@
 @agate-slider-track-height: 12px;
 @agate-slider-track-width: @agate-slider-track-height;
 @agate-translate-center: translate3d(-50%, -50%, 0);
+@agate-slider-bg-transform: none;
+@agate-slider-track-transform: none;
 
-// SliderButton
+// IncrementSlider
 // ---------------------------------------
 @agate-incrementslider-border-radius: 0;
+@agate-incrementslider-horizontal-margin: @agate-slider-horizontal-margin;
+@agate-incrementslider-horizontal-slider-margin: 0 -1px;
+@agate-incrementslider-horizontal-slider-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale) + 3px);
 @agate-incrementslider-horizontal-button-margin: 0;
 @agate-incrementslider-horizontal-button-decrement-border-radius: @agate-slider-height 0 0 @agate-slider-height;
 @agate-incrementslider-horizontal-button-decrement-border-width: 0;
 @agate-incrementslider-horizontal-button-increment-border-radius: 0 @agate-slider-height @agate-slider-height 0;
 @agate-incrementslider-horizontal-button-increment-border-width: 0;
+@agate-incrementslider-vertical-margin: @agate-slider-vertical-margin;
+@agate-incrementslider-vertical-slider-margin: 0;
+@agate-incrementslider-vertical-slider-padding: 0;
 @agate-incrementslider-vertical-button-margin: 0;
 @agate-incrementslider-vertical-button-decrement-border-radius: 0;
 @agate-incrementslider-vertical-button-decrement-border-width: 0;
@@ -182,8 +190,8 @@
 // SliderButton
 // ---------------------------------------
 @agate-sliderbutton-border-radius: 999px;
-@agate-sliderbutton-bg-transform: none;
-@agate-sliderbutton-client-transform: none;
+@agate-sliderbutton-bg-transform: @agate-slider-bg-transform;
+@agate-sliderbutton-client-transform: @agate-slider-track-transform;
 @agate-sliderbutton-margin: 3px 24px;
 
 // Spotlight
