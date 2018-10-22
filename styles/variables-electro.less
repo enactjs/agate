@@ -155,22 +155,53 @@
 
 // Slider
 // ---------------------------------------
-@agate-slider-knob-height: 30px;
-@agate-slider-knob-width: 30px;
-@agate-slider-bar-height: 6px;
-@agate-slider-knob-resting-state-scale: 0.8;
-@agate-slider-knob-border-radius: @electro-border-radius;
-@agate-translate-center: translate3d(-50%, -50%, 0);
-@agate-slider-knob-transform: @agate-translate-center scale(0.8) skewX(@electro-skew);
 @agate-slider-knob-active-transform: @agate-translate-center scale(1), skewX(@electro-skew);
-@agate-slider-button-margin: 24px;
+@agate-slider-knob-border-radius: @electro-border-radius;
+@agate-slider-knob-border-width: 0;
+@agate-slider-knob-resting-state-scale: 0.8;
+@agate-slider-knob-transform: @agate-translate-center scale(0.8) skewX(@electro-skew);
+@agate-slider-knob-height: @agate-slider-height;
+@agate-slider-knob-width: 30px;
+@agate-slider-border-radius: @electro-border-radius;
+@agate-slider-horizontal-margin: 3px 24px;
+@agate-slider-horizontal-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) ((@agate-slider-knob-width / 2) + 9);
+@agate-slider-vertical-margin: 24px 3px;
+@agate-slider-vertical-padding: (@agate-slider-height / 2) ((@agate-slider-height - @agate-slider-track-height) / 2);
+@agate-slider-height: @agate-button-height;
+@agate-slider-width: @agate-slider-height;
+@agate-slider-track-height: 12px;
+@agate-slider-track-width: @agate-slider-track-height;
+@agate-translate-center: translate3d(-50%, -50%, 0);
+@agate-slider-bg-transform: skewX(@electro-skew);
+@agate-slider-track-transform: skewX(@electro-negate-skew);
+
+// IncrementSlider
+// ---------------------------------------
+@electro-incrementslider-horizontal-slider-undertuck: 15px; // the amount the slider tucks underneath the side buttons
+@agate-incrementslider-border-radius: 0;
+@agate-incrementslider-horizontal-margin: 3px (@agate-component-spacing * 2);
+@agate-incrementslider-horizontal-slider-margin: 0 -@electro-incrementslider-horizontal-slider-undertuck;
+@agate-incrementslider-horizontal-slider-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale) + @electro-incrementslider-horizontal-slider-undertuck + 9px);
+@agate-incrementslider-horizontal-button-margin: 0;
+@agate-incrementslider-horizontal-button-decrement-border-radius: @agate-button-border-radius;
+@agate-incrementslider-horizontal-button-decrement-border-width: @agate-button-border-width;
+@agate-incrementslider-horizontal-button-increment-border-radius: @agate-incrementslider-horizontal-button-decrement-border-radius;
+@agate-incrementslider-horizontal-button-increment-border-width: @agate-incrementslider-horizontal-button-decrement-border-width;
+@agate-incrementslider-vertical-margin: (@agate-component-spacing * 2) 3px;
+@agate-incrementslider-vertical-slider-margin: 0;
+@agate-incrementslider-vertical-slider-padding: 0;
+@agate-incrementslider-vertical-button-margin: 0;
+@agate-incrementslider-vertical-button-decrement-border-radius: @agate-incrementslider-horizontal-button-decrement-border-radius;
+@agate-incrementslider-vertical-button-decrement-border-width: @agate-incrementslider-horizontal-button-decrement-border-width;
+@agate-incrementslider-vertical-button-increment-border-radius: @agate-incrementslider-horizontal-button-decrement-border-radius;
+@agate-incrementslider-vertical-button-increment-border-width: @agate-incrementslider-horizontal-button-decrement-border-width;
 
 // SliderButton
 // ---------------------------------------
-@agate-sliderbutton-border-radius: @electro-border-radius;
-@agate-sliderbutton-bg-transform: skewX(@electro-skew);
-@agate-sliderbutton-client-transform: skewX(@electro-negate-skew);
-@agate-sliderbutton-margin: 3px 24px;
+@agate-sliderbutton-border-radius: @agate-slider-border-radius;
+@agate-sliderbutton-bg-transform: @agate-slider-bg-transform;
+@agate-sliderbutton-client-transform: @agate-slider-track-transform;
+@agate-sliderbutton-margin: @agate-slider-horizontal-margin;
 
 // ToggleButton
 // ---------------------------------------

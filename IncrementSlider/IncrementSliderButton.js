@@ -4,6 +4,8 @@ import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import componentCss from './IncrementSliderButton.less';
+
 /**
  * An [Button]{@link moonstone/Button.Button} customized for
  * [IncrementSlider]{@link moonstone/IncrementSlider.IncrementSlider}. It is optimized to only
@@ -22,20 +24,31 @@ const IncrementSliderButtonBase = kind({
 		onTap: PropTypes.func
 	},
 
-	render: ({onTap, ...rest}) => {
+	styles: {
+		css: componentCss,
+		className: 'incrementSliderButton'
+	},
+
+	computed: {
+		className: ({orientation, role, styler}) => styler.append(orientation, role)
+	},
+
+	render: ({css, onTap, ...rest}) => {
+		delete rest.orientation;
+		delete rest.role;
 		return (
 			<Button
 				{...rest}
+				css={css}
 				onTap={onTap}
 				onHold={onTap}
 				onHoldPulse={onTap}
-				small
 			/>
 		);
 	}
 });
 
-const OnlyUpdate = onlyUpdateForKeys(['children', 'disabled', 'spotlightDisabled', 'aria-label']);
+const OnlyUpdate = onlyUpdateForKeys(['children', 'disabled', 'icon', 'spotlightDisabled', 'aria-label']);
 const IncrementSliderButton = OnlyUpdate(IncrementSliderButtonBase);
 
 export default IncrementSliderButton;
