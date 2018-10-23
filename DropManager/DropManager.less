@@ -10,21 +10,31 @@
 
 	*[data-slot] {
 
+		&::before,
 		&::after {
 			content: "";
 			display: none;
 			position: absolute;
+		}
+		&::before {
+			.position(0);
+			z-index: 9;
+		}
+		&::after {
 			.position(6px);
+			z-index: 10;
 			border: 1px dashed fade(gray, 50%);
 			border-radius: 12px;
 			background-color: fade(white, 10%);
 		}
 	}
 
+	&.arrangeable *[data-slot],
 	&:global(.dragging) *[data-slot] {
 		min-height: 30px;
 		min-width: 30px;
 
+		&::before,
 		&::after {
 			display: block;
 		}
@@ -36,7 +46,6 @@
 			}
 		}
 	}
-
 
 	&:global(.debug.drag) {
 		*[data-slot]::before {
