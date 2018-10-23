@@ -56,6 +56,14 @@ const ToggleButtonBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
+		 * Determines whether the button is currently in an "on" or "off" state.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		selected: PropTypes.bool,
+
+		/**
 		 * Reduces the size of the button.
 		 *
 		 * The button will have a larger tap target than its apparent size to allow it to be clicked
