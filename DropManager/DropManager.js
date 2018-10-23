@@ -1,12 +1,14 @@
 import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
+import Slottable from '@enact/ui/Slottable';
+import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import {setDisplayName} from 'recompose';
 import React from 'react';
 import {mergeDeepRight} from 'ramda';
-import produce from 'immer';
-import Changeable from '@enact/ui/Changeable';
+
+import Rearrangeable from '../Rearrangeable';
 
 import css from './DropManager.less';
 
@@ -61,18 +63,56 @@ const defaultConfig = {
 	// The prop name for the object sent to the Wrapped component containing the arrangement object.
 	// This also applies to the incoming arrangement prop name.
 	// This will typically directly feed into Rearrangeable.
-	arrangementProp: 'arrangement'
+	// The default/common value for this is "arrangement".
+	arrangementProp: null
 };
 
+// The arrangementProp above is allowed to be empty. When it's empty, though, and the user doesn't
+// want the prop delivered to their Wrapped component, we still need to have some prop name to
+// communicate to Rearrangeable. That's where this comes in; it's used if the user didn't specify a
+// prop, so we can send an arrangement to Rearrangeable, exclucively.
+const fallbackArrangementProp = 'arrangement';
+
+
+const DropManagerContext = React.createContext(null);
+
 const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
-	const ArrangementState = Changeable({prop: configHoc.arrangementProp});
+	const ArrangementState = Changeable({prop: configHoc.arrangementProp || fallbackArrangementProp});
 
 	const DropManagerBase = class extends React.Component {
 		static displayName = 'DropManager';
 
 		static propTypes = {
+			/**
+			 * The ready-state to indicate that the contents are allowed to be rearranged
+			 *
+			 * @type {Boolean}
+			 * @public
+			 */
+			arrangeable: PropTypes.bool,
+
+			/**
+			 * The arrangement object, consumable by `Rearrangeable`. This represents the initial
+			 * arrangement and will be forwarded to `Rearrangeable` as well as the `Draggable`
+			 * children. This is ingested using `Changeable`.
+			 *
+			 * @type {Object}
+			 * @public
+			 */
 			arrangement: PropTypes.object,
+
+			/**
+			 * Executed when an arranging (dragging) action has completed. Included in the payload
+			 * is a new arrangement object, which can be saved for later arrangement recall.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
 			onArrange: PropTypes.func
+		};
+
+		static defaultProps = {
+			arrangeable: false
 		};
 
 		state = {
@@ -111,6 +151,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 
 		handleDrop = (ev) => {
 			ev.preventDefault();
+			ev.dataTransfer.clearData();
 
 			// Bail early if the drag started from some unknown location.
 			if (!this.dragOriginNode) {
@@ -152,19 +193,15 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 				return;
 			}
 
-			// ev.dataTransfer.clearData();
-
 			this.dragOriginNode.dataset.slot = dragDestination;
 			dragDropNode.dataset.slot = dragOrigin;
 
-			console.log('from:', dragOrigin, 'to:', dragDestination);
-			// console.log('a1', this.state.arrangement);
+			// console.log('from:', dragOrigin, 'to:', dragDestination);
 
 			// We successfully completed the drag, blank-out the node.
 			this.dragOriginNode = null;
 
 			this.setState(({arrangement}) => {
-				// console.log('a2', arrangement);
 				const oldD = getKeyByValue(arrangement, dragDestination);
 				const oldO = getKeyByValue(arrangement, dragOrigin);
 
@@ -175,7 +212,6 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 					this.props.onArrange({arrangement});
 				}
 
-				// console.log('a3', arrangement);
 				return {dragging: false, arrangement};
 			});
 		};
@@ -187,25 +223,37 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 		// };
 
 		render () {
-			const {className, ...rest} = {...this.props};
+			const {arrangeable, className, ...rest} = {...this.props};
 			delete rest.onArrange;
 
 			if (configHoc.arrangingProp) rest[configHoc.arrangingProp] = this.state.dragging;
-			if (configHoc.arrangementProp) rest[configHoc.arrangementProp] = this.state.arrangement;
-			// console.log('slots:', rest);
+			// Always apply arrangement, so Rearrangeable can receive it.
+			rest[configHoc.arrangementProp || fallbackArrangementProp] = this.state.arrangement;
+
+			if (arrangeable) {
+				// Add all of the necessary events, but only if we're in edit mode
+				rest.onDragStart = this.handleDragStart;
+				rest.onDragEnter = this.handleDragEnter;
+				rest.onDragLeave = this.handleDragLeave;
+				rest.onDragOver = this.handleDragOver;
+				rest.onDrop = this.handleDrop;
+				// rest.onDragEnd = this.handleDragEnd;
+			}
 
 			return (
-				<Wrapped
-					{...rest}
-					className={classnames(className, css.dropManager, {dragging: this.state.dragging})}
-					// draggable="true"
-					onDragStart={this.handleDragStart}
-					onDragEnter={this.handleDragEnter}
-					onDragLeave={this.handleDragLeave}
-					onDragOver={this.handleDragOver}
-					onDrop={this.handleDrop}
-					// onDragEnd={this.handleDragEnd}
-				/>
+				<DropManagerContext.Provider
+					value={{
+						arrangement: this.state.arrangement,
+						arranging: this.state.dragging,
+						arrangeable
+					}}
+				>
+					<Wrapped
+						{...rest}
+						className={classnames(className, css.dropManager, {dragging: this.state.dragging})}
+						// draggable="true"
+					/>
+				</DropManagerContext.Provider>
 			);
 		}
 	};
@@ -213,7 +261,6 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 	return ArrangementState(DropManagerBase);
 });
 
-const DraggableContainerContext = React.createContext(null);
 
 // Draw conclusions from supplied shape information and auto-set some values based on logical
 // conclusions to save time and improve consistency for consumers.
@@ -229,26 +276,22 @@ const logicallyPopulateContainerShape = (cs) => {
 	// return cs;
 };
 
-// const Draggable = (Wrapped) => setDisplayName('Draggable')(kind({
+
+const DraggableContainerContext = React.createContext(null);
+
 const Draggable = (Wrapped) => kind({
 	name: 'Draggable',
 
 	propTypes: {
-		arrangement: PropTypes.object,
 		containerShape: containerShapePropTypes,
 		draggable: PropTypes.bool,
 		name: PropTypes.string,
 		slot: PropTypes.string
 	},
 
-	// defaultProps: {
-	// 	containerShape: defaultContainerShape
-	// },
-
-	// ({arrangement, name, ...rest}) => <Wrapped {...rest} data-slot={arrangement && arrangement[name] || name} draggable="true" />
 	// If something is marked explicitly as *not* draggable (everything using this is normally)
 	// don't assign it a data-slot, so it can't be dragged(A) or dropped on(B).
-	render: ({arrangement, containerShape = {}, draggable = true, name, slot, ...rest}) => {
+	render: ({containerShape = {}, draggable = true, name, slot, ...rest}) => {
 		// Apply a consistent (predictable) set of object keys for consumers
 		// defaultProps is a shallow merge only, so we aren't using it :(
 		containerShape = mergeDeepRight(defaultContainerShape, containerShape);
@@ -258,28 +301,21 @@ const Draggable = (Wrapped) => kind({
 
 		Object.freeze(containerShape);
 
-		// containerShape = produce(defaultContainerShape, draft => {
-		// 	draft = mergeDeepRight(draft, containerShape);
-		// 	// draft = {...draft, ...containerShape};
-		// 	// if (containerShape && containerShape.edges) draft.edges.top = containerShape.edges.top;
-
-		// 	// Draw conclusions from supplied shape information and auto-set some values.
-		// 	logicallyPopulateContainerShape(draft);
-
-		// 	// console.log('produce:', {...draft});
-		// 	return draft;
-		// });
-		// console.log('containerShape:', containerShape);
-
 		return (
-			<DraggableContainerContext.Provider value={{containerShape}}>
-				<Wrapped
-					{...rest}
-					draggable={draggable}
-					data-slot={draggable ? (arrangement && (arrangement[name] || arrangement[slot]) || (name || slot)) : null}
-					data-slot-name={slot}
-				/>
-			</DraggableContainerContext.Provider>
+			<DropManagerContext.Consumer>
+				{({arrangement, arrangeable}) => {
+					return (
+						<DraggableContainerContext.Provider value={{containerShape}}>
+							<Wrapped
+								{...rest}
+								draggable={arrangeable && draggable}
+								data-slot={draggable ? (arrangement && (arrangement[name] || arrangement[slot]) || (name || slot)) : null}
+								data-slot-name={slot}
+							/>
+						</DraggableContainerContext.Provider>
+					);
+				}}
+			</DropManagerContext.Consumer>
 		);
 	}
 });
@@ -289,7 +325,6 @@ const ResponsiveBox = (Wrapped) => setDisplayName('ResponsiveBox')(
 		return (
 			<DraggableContainerContext.Consumer>
 				{({containerShape}) => {
-					console.log('containerShape:', containerShape);
 					return (<Wrapped containerShape={containerShape} {...props} />);
 				}}
 			</DraggableContainerContext.Consumer>
@@ -297,19 +332,34 @@ const ResponsiveBox = (Wrapped) => setDisplayName('ResponsiveBox')(
 	}
 );
 
-// const ResponsiveBox = kind({
-// 	name: 'ResponsiveBox',
-// 	render: ({component: Component, ...rest}) => (
-// 		<DraggableContainerContext.Consumer>
-// 			{(containerShape) => (
-// 				<Component containerShape={containerShape} {...rest} />
-// 			)}
-// 		</DraggableContainerContext.Consumer>
-// 	)
-// });
 
-export default DropManager;
+//
+//
+// DEV TO-DO LATER:
+//
+// Simplify draggable usage, maybe include a "hide with no content" prop
+//
+// Relocate data-slot junk to context child->parent relay of child identification information
+//
+//
+
+
+// Consolidate usage pattern into a simple reusable piece
+const Droppable = hoc((configHoc, Wrapped) => {
+	const {arrangementProp, slots, ...rest} = configHoc;
+	return DropManager({arrangementProp, ...rest},
+		Slottable({slots},
+			Rearrangeable({arrangementProp, slots},
+				Wrapped
+			)
+		)
+	);
+});
+
+
+export default Droppable;
 export {
+	Droppable,
 	DropManager,
 	Draggable,
 	ResponsiveBox

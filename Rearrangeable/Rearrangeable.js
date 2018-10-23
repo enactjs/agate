@@ -2,18 +2,25 @@ import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
 import React from 'react';
 
-const propRemapper = (slotNames, props) => {
-	if (!props.arrangement) return props;
+const propRemapper = (arrangementProp, slotNames, props) => {
+	if (!props[arrangementProp]) return props;
 
 	const origRest = {...props};
 
 	slotNames.forEach(prop => {
-		if (props.arrangement[prop] && props.arrangement[prop] !== prop) {
+		if (props[arrangementProp][prop] && props[arrangementProp][prop] !== prop) {
 			// If there is a new destination for a prop, assign it there... sourceProp -> destinationProp
-			props[prop] = origRest[props.arrangement[prop]];
+			props[prop] = origRest[props[arrangementProp][prop]];
 		}
 	});
 	return props;
+};
+
+const defaultConfig = {
+	// The prop name for the object sent to the Wrapped component containing the arrangement object.
+	// This DOES NOT apply to the incoming arrangement prop name.
+	// The default/common value for this is "arrangement".
+	arrangementProp: 'arrangement'
 };
 
 /**
@@ -51,11 +58,10 @@ const propRemapper = (slotNames, props) => {
  *
  * @return {Component}
  */
-const Rearrangeable = hoc((config, Wrapped) => kind({
+const Rearrangeable = hoc(defaultConfig, (config, Wrapped) => kind({
 	name: 'Rearrangeable',
 	render: (props) => {
-		props = propRemapper(config.slots, props);
-		// delete rest.arrangement;
+		props = propRemapper(config.arrangementProp, config.slots, props);
 		return (
 			<Wrapped {...props} />
 		);
