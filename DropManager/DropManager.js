@@ -250,7 +250,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 				>
 					<Wrapped
 						{...rest}
-						className={classnames(className, css.dropManager, {dragging: this.state.dragging})}
+						className={classnames(className, css.dropManager, (arrangeable ? css.arrangeable : ''), {dragging: this.state.dragging})}
 						// draggable="true"
 					/>
 				</DropManagerContext.Provider>
