@@ -12,9 +12,9 @@
 @agate-foreground: ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.8)";
 @agate-background-active: ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.5)";
 @agate-foreground-active: @agate-foreground;
-@agate-background-focus: ~"hsl(" @electro-accent2-h, @electro-accent2-s, @electro-accent2-l ~", 0.7)";
+@agate-background-focus: ~"hsla(" @electro-accent2-h, @electro-accent2-s, @electro-accent2-l ~", 0.7)";
 @agate-foreground-focus: @agate-foreground;
-@agate-gradient: linear-gradient(to bottom right, ~"hsl(" @electro-accent2-h, @electro-accent2-s, @electro-accent2-l ~")", transparent);
+@agate-gradient: linear-gradient(to bottom right, @electro-accent2-color, transparent);
 @agate-darker-gray: #262626;
 @agate-dark-gray:   #4d4d4d;
 @agate-gray:        #a6a6a6;
@@ -30,6 +30,7 @@
 @electro-accent2-h: ~"calc(" @agate-accent-h ~" - 27)"; //, hsl(191, 97%, 65%)
 @electro-accent2-s: ~"calc(" @agate-accent-s ~" - 1%)";
 @electro-accent2-l: ~"calc(" @agate-accent-l ~" + 17%)";
+@electro-accent2-color: ~"hsl(" @electro-accent2-h, @electro-accent2-s, @electro-accent2-l ~")";
 @electro-highlight-gradient: linear-gradient(to bottom right, @agate-highlight, ~"hsla(var(--agate-highlight-h, 0), var(--agate-highlight-s, 0), var(--agate-highlight-l, 0), 0.5)");
 @electro-overlay-light-gradient: linear-gradient(to top left, transparent, fade(white, 50%));
 @electro-overlay-dark-gradient: linear-gradient(to bottom, transparent, fade(black, 20%));
@@ -208,17 +209,15 @@
 
 // Toggle Colors
 // ---------------------------------------
-@agate-toggle-border-color: @agate-dark-gray;
-@agate-toggle-indicator-border-color: @agate-toggle-border-color;
-@agate-toggle-focus-text-color: inherit;
-@agate-togglebutton-switch-on-bg-color: @agate-highlight;
-@agate-togglebutton-switch-on-border-color: transparent;
-@agate-togglebutton-switch-on-underline-bg-color: @agate-accent;
-@agate-togglebutton-switch-on-underline-focus-bg-color: @agate-foreground;
-@agate-togglebutton-switch-on-underline-focus-border-color: none;
-@agate-togglebutton-switch-on-focus-bg-color: @agate-highlight;
-@agate-togglebutton-switch-on-focus-bg-image: @electro-highlight-gradient;
-@agate-togglebutton-switch-on-focus-border-color: @agate-white;
-@agate-togglebutton-switch-off-bg-color: black;
-@agate-togglebutton-switch-disabled-bg-color: @agate-darker-gray;
-@agate-togglebutton-switch-disabled-border-color: @agate-dark-gray;
+@agate-togglebutton-indicator-off-bg-color: fade(black, 30%);
+@agate-togglebutton-indicator-on-bg-color: @agate-highlight;
+@agate-togglebutton-indicator-off-border-color: @agate-accent;
+@agate-togglebutton-indicator-on-border-color: @agate-togglebutton-indicator-off-border-color;
+@agate-togglebutton-indicator-off-focus-bg-color: @agate-togglebutton-indicator-off-bg-color;
+@agate-togglebutton-indicator-on-focus-bg-color: @agate-togglebutton-indicator-on-bg-color;
+@agate-togglebutton-indicator-off-focus-border-color: @electro-accent2-color;
+@agate-togglebutton-indicator-on-focus-border-color: @agate-togglebutton-indicator-off-focus-border-color;
+@agate-togglebutton-indicator-disabled-off-bg-color: @agate-darker-gray;
+@agate-togglebutton-indicator-disabled-on-bg-color: @agate-togglebutton-indicator-disabled-off-bg-color;
+@agate-togglebutton-indicator-disabled-off-border-color: @agate-dark-gray;
+@agate-togglebutton-indicator-disabled-on-border-color: @agate-togglebutton-indicator-disabled-off-border-color;
