@@ -28,7 +28,7 @@ import componentCss from './ProgressBar.less';
  * @ui
  * @public
  */
-const ProgressBar = kind({
+const ProgressBarBase = kind({
 	name: 'ProgressBar',
 
 	propTypes: /** @lends agate/ProgressBar.ProgressBarBase.prototype */ {
@@ -100,5 +100,10 @@ const ProgressBar = kind({
 	}
 });
 
+const ProgressBar = Skinnable(ProgressBarBase);
 
-export default Skinnable(ProgressBar);
+export default ProgressBar;
+export {
+	ProgressBar,
+	ProgressBarBase
+};
