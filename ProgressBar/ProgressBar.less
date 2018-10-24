@@ -1,0 +1,23 @@
+// ProgressBar.less
+//
+
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+
+.progressBar {
+	.applySkins({
+		position: relative;
+		height: @agate-progressbar-height;
+		width: 100%;
+		background-color: @agate-progressbar-track-bg-color;
+		background-image: @agate-progressbar-track-bg-image;
+		border-radius: @agate-progressbar-border-radius;
+		transform: @agate-progressbar-track-transform;
+
+		.fill {
+			background-color: @agate-progressbar-fill-bg-color;
+			background-image: @agate-progressbar-fill-bg-image;
+			border-radius: @agate-progressbar-border-radius;
+		}
+	});
+}
