@@ -14,6 +14,19 @@
 		border-radius: @agate-progressbar-border-radius;
 		transform: @agate-progressbar-track-transform;
 
+		&.small {
+			height: @agate-progressbar-small-height;
+		}
+
+		&.vertical {
+			height: 100%;
+			width: @agate-progressbar-vertical-width;
+			transform: @agate-progressbar-vertical-track-transform;
+			&.small {
+				width: @agate-progressbar-vertical-small-width;
+			}
+		}
+
 		.fill {
 			background-color: @agate-progressbar-fill-bg-color;
 			background-image: @agate-progressbar-fill-bg-image;

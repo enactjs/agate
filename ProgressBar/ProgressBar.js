@@ -14,7 +14,6 @@
 import kind from '@enact/core/kind';
 import UiProgressBar from '@enact/ui/ProgressBar';
 import PropTypes from 'prop-types';
-import compose from 'ramda/src/compose';
 import React from 'react';
 
 import Skinnable from '../Skinnable';
@@ -64,7 +63,16 @@ const ProgressBar = kind({
 		 * @default 0
 		 * @public
 		 */
-		progress: PropTypes.number
+		progress: PropTypes.number,
+
+		/**
+		 * Sets the small styling to progress bar
+		 *
+		 * @type {Number}
+		 * @default 0
+		 * @public
+		 */
+		small: PropTypes.bool
 	},
 
 	defaultProps: {
@@ -76,7 +84,13 @@ const ProgressBar = kind({
 		css: componentCss
 	},
 
+	computed: {
+		className: ({small, styler}) => styler.append({small})
+	},
+
 	render: ({css, ...rest}) => {
+		delete rest.small;
+
 		return (
 			<UiProgressBar
 				{...rest}

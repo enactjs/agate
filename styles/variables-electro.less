@@ -151,10 +151,14 @@
 
 // ProgressBar
 // ---------------------------------------
-@agate-progressbar-height: 10px;
+@agate-progressbar-height: (@agate-slider-height / 2);
+@agate-progressbar-vertical-width: @agate-progressbar-height;
+@agate-progressbar-small-height: (@agate-progressbar-height / 2);
+@agate-progressbar-vertical-small-width: @agate-progressbar-small-height;
 @agate-progressbar-border-radius: @agate-slider-border-radius;
 @agate-progressbar-track-transform: @agate-slider-bg-transform;
 @agate-progressbar-border-radius: @agate-slider-border-radius;
+@agate-progressbar-vertical-track-transform: none;
 
 // Spotlight
 // ---------------------------------------
