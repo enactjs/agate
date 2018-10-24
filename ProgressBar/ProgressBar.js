@@ -21,17 +21,17 @@ import Skinnable from '../Skinnable';
 import componentCss from './ProgressBar.less';
 
 /**
- * Renders a moonstone-styled progress bar.
+ * Renders a agate-styled progress bar.
  *
  * @class ProgressBarBase
- * @memberof moonstone/ProgressBar
+ * @memberof agate/ProgressBar
  * @ui
  * @public
  */
 const ProgressBar = kind({
 	name: 'ProgressBar',
 
-	propTypes: /** @lends moonstone/ProgressBar.ProgressBarBase.prototype */ {
+	propTypes: /** @lends agate/ProgressBar.ProgressBarBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
