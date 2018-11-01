@@ -126,6 +126,7 @@
 @agate-picker-font-weight: 500;
 @agate-picker-font-size: 24px;
 @agate-picker-active-font-size: 36px;
+@agate-picker-margin: @agate-component-spacing;
 
 // Popup
 // ---------------------------------------
@@ -166,9 +167,9 @@
 @agate-slider-knob-height: (@agate-slider-height - 6px);
 @agate-slider-knob-width: @agate-slider-knob-height;
 @agate-slider-border-radius: @agate-slider-height;
-@agate-slider-horizontal-margin: 0;
+@agate-slider-horizontal-margin: 0 @agate-component-spacing;
 @agate-slider-horizontal-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (@agate-slider-height / 2);
-@agate-slider-vertical-margin: 0;
+@agate-slider-vertical-margin: 0 @agate-component-spacing;
 @agate-slider-vertical-padding: (@agate-slider-height / 2) ((@agate-slider-height - @agate-slider-track-height) / 2);
 @agate-slider-height: @agate-button-height;
 @agate-slider-width: @agate-slider-height;
