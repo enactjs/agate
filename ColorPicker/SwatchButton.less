@@ -1,0 +1,32 @@
+// SwatchButton.less
+//;
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+
+.swatchButton {
+	.applySkins({
+		margin: 10px;
+		vertical-align: inherit;
+
+		&,
+		&.small {
+			padding: 0;
+		}
+
+		// ColorPicker's Button bg style reset
+		.bg {
+			border-radius: @agate-colorpicker-swatch-border-radius;
+			transform: @agate-colorpicker-bg-transform;
+		}
+
+		.colorSwatch {
+			position: absolute;
+			.position(0);
+			border-radius: @agate-colorpicker-swatch-border-radius;
+		}
+
+		.colorSwatch {
+			margin: @agate-colorpicker-swatch-spacing;
+		}
+	});
+}
