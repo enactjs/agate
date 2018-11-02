@@ -2,7 +2,7 @@
  * Agate component to allow the user to choose a color.
  *
  * @example
- * <ColorPicker defaultValue="#ffcc00" onChange={handleChange} />
+ * <ColorPicker defaultValue="#ffcc00" onChange={handleChange}>{[#fff, #999, #000]}</ColorPicker>
  *
  * @module agate/ColorPicker
  * @exports ColorPicker
@@ -12,13 +12,16 @@
 
 import kind from '@enact/core/kind';
 import Changeable from '@enact/ui/Changeable';
+import Group from '@enact/ui/Group';
+import Toggleable from '@enact/ui/Toggleable';
+import Transition from '@enact/ui/Transition';
 
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
-import {ButtonBase, ButtonDecorator} from '../Button';
 import Skinnable from '../Skinnable';
+import SwatchButton from './SwatchButton';
 
 import componentCss from './ColorPicker.less';
 
@@ -44,9 +47,8 @@ const ColorPickerBase = kind({
 		 *
 		 * The following classes are supported:
 		 *
-		 * * `colorPicker` - The root class name
-		 * * `colorSwatch` - The node that displays the chosen color. The current value is applied
-		 * 		as a background-color to this element.
+		 * * `expandableColorPicker` - The root class name
+		 * * `swatchDrawer` - The drawer that displays all the available options for color.
 		 *
 		 * @type {Object}
 		 * @public
@@ -54,7 +56,16 @@ const ColorPickerBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Callback method with a payload containing the `value` that was just selected.
+		 * The animation direction of the `swatchDrawer`.
+		 * // TODO: position `swatchDrawer` like `Tooltip`
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		direction: PropTypes.string,
+
+		/**
+		 * Callback method with a payload containing the `color` that was just selected.
 		 *
 		 * @type {Function}
 		 * @public
@@ -62,10 +73,18 @@ const ColorPickerBase = kind({
 		onChange: PropTypes.func,
 
 		/**
-		 * The value of this input field. Setting this directly will not allow interaction with the
+		 * Opens ColorPicker with the contents visible.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		open: PropTypes.bool,
+
+		/**
+		 * The color value. Setting this directly will not allow interaction with the
 		 * component. Use `defaultValue` to enable interactive use.
 		 *
-		 * The value should take the format of a HEX color. Ex: `#ffcc00` or `#3467af`
+		 * The color should take the format of a HEX color. Ex: `#ffcc00` or `#3467af`
 		 *
 		 * @type {String}
 		 * @see {@link ui/Changeable.Changeable}
@@ -74,30 +93,59 @@ const ColorPickerBase = kind({
 		value: PropTypes.string
 	},
 
+	defaultProps: {
+		direction: 'right',
+		open: false
+	},
+
 	styles: {
 		css: componentCss,
 		className: 'colorPicker',
-		publicClassNames: ['colorPicker', 'colorSwatch']
+		publicClassNames: ['colorPicker', 'swatchDrawer']
 	},
 
 	handlers: {
 		onChange: (ev, {onChange}) => {
 			if (onChange) {
-				onChange({value: ev.target.value});
+				onChange({value: ev.data});
 			}
 		}
 	},
 
 	computed: {
-		colorSwatchStyle: ({value}) => ({backgroundColor: value})
+		transitionContainerClassname: ({css, open}) => open ? `${css.transitionContainer} ${css.openTransitionContainer}` : css.transitionContainer,
+		transitionDirection: ({direction}) => {
+			switch (direction) {
+				case 'left':
+					return 'right';
+				case 'right':
+					return 'left';
+				case 'up':
+					return 'down';
+				case 'down':
+					return 'up';
+			}
+		}
 	},
 
-	render: ({colorSwatchStyle, css, onChange, value, ...rest}) => {
+	render: ({children, css, onChange, open, transitionContainerClassname, transitionDirection, value, ...rest}) => {
 		return (
-			<ButtonBase {...rest} css={css} minWidth={false}>
-				<div className={css.colorSwatch} style={colorSwatchStyle} />
-				<input type="color" defaultValue={value} onChange={onChange} className={css.colorInput} />
-			</ButtonBase>
+			<div {...rest}>
+				<SwatchButton>{value}</SwatchButton>
+				<Transition
+					className={transitionContainerClassname}
+					visible={open}
+					direction={transitionDirection}
+				>
+					<div className={css.swatchDrawer}>
+						<Group
+							childComponent={SwatchButton}
+							itemProps={{small: true}}
+							onSelect={onChange}
+						>{children}</Group>
+					</div>
+				</Transition>
+			</div>
 		);
 	}
 });
@@ -112,7 +160,7 @@ const ColorPickerBase = kind({
  */
 
 const ColorPickerDecorator = compose(
-	ButtonDecorator,
+	Toggleable({toggle: null, prop: 'open', toggleProp: 'onClick'}),
 	Changeable,
 	Skinnable
 );
