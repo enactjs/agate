@@ -38,6 +38,16 @@ const SwatchButtonBase = kind({
 
 	propTypes: /** @lends agate/SwatchButton.SwatchButtonBase.prototype */ {
 		/**
+		 * The color of the swatch. If the `color` prop is not set.
+		 *
+		 * The value should take the format of a HEX color. Ex: `#ffcc00` or `#3467af`
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		children: PropTypes.string,
+
+		/**
 		 * The color of the swatch.
 		 *
 		 * The value should take the format of a HEX color. Ex: `#ffcc00` or `#3467af`
@@ -80,7 +90,7 @@ const SwatchButtonBase = kind({
 	handlers: {
 		onClick: (ev, {children, color, onClick}) => {
 			if (onClick) {
-				onClick({color: color ? color : children});
+				onClick({color: color || children});
 			}
 		}
 	},
