@@ -13,33 +13,43 @@ const FullscreenPopupBase = kind({
 	name: 'FullscreenPopup',
 	propTypes: {
 		css: PropTypes.object,
+		direction: PropTypes.string,
+		duration: PropTypes.string,
 		noAnimation: PropTypes.bool,
 		onHide: PropTypes.func,
-		open: PropTypes.bool
+		open: PropTypes.bool,
+		type: PropTypes.string
 	},
+
 	defaultProps: {
+		direction: 'down',
+		duration: 'short',
 		noAnimation: false,
-		open: false
+		open: false,
+		type: 'slide'
 	},
+
 	styles: {
 		css: componentCss,
 		className: 'fullscreenPopup'
 	},
+
 	computed: {
 		className: ({styler}) => styler.append('enact-fit')
 	},
-	render: ({children, className, css, noAnimation, onHide, open, ...rest}) => {
+
+	render: ({children, className, css, direction, duration, noAnimation, onHide, open, type, ...rest}) => {
 
 		return (
 			<Transition
-				noAnimation={noAnimation}
-				visible={open}
-				direction="down"
-				duration="short"
-				type="slide"
 				className={className}
-				onHide={onHide}
 				css={css}
+				direction={direction}
+				duration={duration}
+				noAnimation={noAnimation}
+				onHide={onHide}
+				type={type}
+				visible={open}
 			>
 				<div
 					{...rest}
