@@ -50,7 +50,7 @@ const ColorPickerBase = kind({
 		 * The following classes are supported:
 		 *
 		 * * `colorPicker` - The root class name
-		 * * `swatchDrawer` - The drawer that displays all the available options for color.
+		 * * `palette` - The drawer that displays all the available options for color.
 		 *
 		 * @type {Object}
 		 * @public
@@ -58,8 +58,8 @@ const ColorPickerBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * The animation direction of the `swatchDrawer`.
-		 * // TODO: position `swatchDrawer` like `Tooltip`
+		 * The animation direction of the `palette`.
+		 * // TODO: position `palette` like `Tooltip`
 		 *
 		 * @type {Function}
 		 * @public
@@ -103,7 +103,7 @@ const ColorPickerBase = kind({
 	styles: {
 		css: componentCss,
 		className: 'colorPicker',
-		publicClassNames: ['colorPicker', 'swatchDrawer']
+		publicClassNames: ['colorPicker', 'palette']
 	},
 
 	handlers: {
@@ -139,11 +139,11 @@ const ColorPickerBase = kind({
 					visible={open}
 					direction={transitionDirection}
 				>
-					<div className={css.swatchDrawer}>
+					<div className={css.palette}>
 						<Group
 							className={css.group}
 							childComponent={SwatchButton}
-							itemProps={{small: true}}
+							itemProps={{small: true, className: css.swatch}}
 							onSelect={onChange}
 						>{children || []}</Group>
 					</div>

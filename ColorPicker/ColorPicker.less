@@ -24,9 +24,13 @@
 	}
 
 	.applySkins({
-		.swatchDrawer {
+		.palette {
 			background-color: @agate-colorpicker-bg-color;
-			border-radius: @agate-colorpicker-swatchdrawer-border-radius;
+			border-radius: @agate-colorpicker-palette-border-radius;
+
+			.swatch {
+				margin: @agate-colorpicker-palette-swatch-margin;
+			}
 		}
 	});
 }
