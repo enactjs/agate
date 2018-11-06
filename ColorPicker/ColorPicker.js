@@ -41,13 +41,15 @@ const ColorPickerBase = kind({
 	name: 'ColorPicker',
 
 	propTypes: /** @lends agate/ColorPicker.ColorPickerBase.prototype */ {
+		children: PropTypes.array,
+
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *
-		 * * `expandableColorPicker` - The root class name
+		 * * `colorPicker` - The root class name
 		 * * `swatchDrawer` - The drawer that displays all the available options for color.
 		 *
 		 * @type {Object}
@@ -113,7 +115,7 @@ const ColorPickerBase = kind({
 	},
 
 	computed: {
-		transitionContainerClassname: ({css, open}) => open ? `${css.transitionContainer} ${css.openTransitionContainer}` : css.transitionContainer,
+		transitionContainerClassname: ({css, open, styler}) => styler.join(css.transitionContainer, (open ? css.openTransitionContainer : null)),
 		transitionDirection: ({direction}) => {
 			switch (direction) {
 				case 'left':
@@ -139,10 +141,11 @@ const ColorPickerBase = kind({
 				>
 					<div className={css.swatchDrawer}>
 						<Group
+							className={css.group}
 							childComponent={SwatchButton}
 							itemProps={{small: true}}
 							onSelect={onChange}
-						>{children}</Group>
+						>{children || []}</Group>
 					</div>
 				</Transition>
 			</div>
