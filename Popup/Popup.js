@@ -1,6 +1,4 @@
 import compose from 'ramda/src/compose';
-import FloatingLayer from '@enact/ui/FloatingLayer';
-import {forward} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -12,9 +10,9 @@ import Skinnable from '../Skinnable';
 import Divider from '../Divider';
 import Button from '../Button';
 
-import componentCss from './Popup.less';
+import PopupState from './PopupState';
 
-const forwardHide = forward('onHide');
+import componentCss from './Popup.less';
 
 const PopupBase = kind({
 	name: 'Popup',
@@ -39,7 +37,7 @@ const PopupBase = kind({
 	computed: {
 		className: ({closeButton, title, styler}) => styler.append({withCloseButton: closeButton, withTitle: title})
 	},
-	render: ({buttons, children, closeButton, css, noAnimation, onCloseButtonClick, onHide, open, skin, title, ...rest}) => {
+	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, open, skin, title, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
 
 		return (
@@ -59,7 +57,7 @@ const PopupBase = kind({
 					{closeButton ? <Button
 						icon="closex"
 						small
-						onTap={onCloseButtonClick}
+						onTap={onClose}
 						className={componentCss.closeButton}
 					/> : null}
 					{title ? <Divider className={css.title}>{title}</Divider> : null}
@@ -88,89 +86,11 @@ const PopupBase = kind({
 
 const PopupDecorator = compose(
 	Slottable({slots: ['closeButton', 'title', 'buttons']}),
-	Skinnable({prop: 'skin'})
+	Skinnable({prop: 'skin'}),
+	PopupState
 );
 
-class PopupState extends React.Component {
-	static propTypes = {
-		noAnimation: PropTypes.bool,
-		noAutoDismiss: PropTypes.bool,
-		onClose: PropTypes.func,
-		open: PropTypes.bool,
-		scrimType: PropTypes.oneOf(['transparent', 'translucent', 'none'])
-	}
-
-	static defaultProps = {
-		noAnimation: false,
-		noAutoDismiss: false,
-		open: false,
-		scrimType: 'translucent'
-	}
-
-	constructor (props) {
-		super(props);
-		this.state = {
-			floatLayerOpen: this.props.open,
-			popupOpen: this.props.noAnimation
-		};
-	}
-
-	componentWillReceiveProps (nextProps) {
-		if (!this.props.open && nextProps.open) {
-			this.setState({
-				popupOpen: nextProps.noAnimation,
-				floatLayerOpen: true
-			});
-		} else if (this.props.open && !nextProps.open) {
-			this.setState({
-				popupOpen: nextProps.noAnimation,
-				floatLayerOpen: !nextProps.noAnimation
-			});
-		}
-	}
-
-	handleFloatingLayerOpen = () => {
-		if (!this.props.noAnimation) {
-			this.setState({
-				popupOpen: true
-			});
-		}
-	}
-
-
-	handlePopupHide = () => {
-		forwardHide(null, this.props);
-
-		this.setState({
-			floatLayerOpen: false,
-			activator: null
-		});
-	}
-
-	render () {
-		const {noAutoDismiss, onClose, scrimType, ...rest} = this.props;
-		delete rest.spotlightRestrict;
-
-		return (
-			<FloatingLayer
-				noAutoDismiss={noAutoDismiss}
-				open={this.state.floatLayerOpen}
-				onOpen={this.handleFloatingLayerOpen}
-				onDismiss={onClose}
-				scrimType={scrimType}
-			>
-				<PopupBase
-					{...rest}
-					onCloseButtonClick={onClose}
-					open={this.state.popupOpen}
-					onHide={this.handlePopupHide}
-				/>
-			</FloatingLayer>
-		);
-	}
-}
-
-const Popup = PopupDecorator(PopupState);
+const Popup = PopupDecorator(PopupBase);
 
 export default Popup;
 export {Popup, PopupBase};
