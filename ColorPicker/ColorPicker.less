@@ -13,6 +13,8 @@
 		display: inline-block;
 		z-index: 1;
 		pointer-events: none;
+		min-width: 312px;
+		width: 100%;
 
 		&.openTransitionContainer {
 			pointer-events: inherit;
@@ -23,13 +25,29 @@
 		display: block;
 	}
 
+	.sliders {
+		display: none;
+	}
+
+	&.extended {
+		.sliders {
+			display: block;
+		}
+	}
+
 	.applySkins({
 		.palette {
 			background-color: @agate-colorpicker-bg-color;
 			border-radius: @agate-colorpicker-palette-border-radius;
+			box-shadow: @agate-colorpicker-palette-shadow;
+			margin: @agate-colorpicker-palette-margin;
 
 			.swatch {
 				margin: @agate-colorpicker-palette-swatch-margin;
+			}
+
+			.sliders {
+				padding: @agate-colorpicker-palette-sliders-padding;
 			}
 		}
 	});

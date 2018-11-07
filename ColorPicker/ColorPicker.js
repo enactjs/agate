@@ -11,20 +11,26 @@
  */
 
 import kind from '@enact/core/kind';
-import Changeable from '@enact/ui/Changeable';
+import hoc from '@enact/core/hoc';
 import Group from '@enact/ui/Group';
 import Toggleable from '@enact/ui/Toggleable';
+import {Row, Cell} from '@enact/ui/Layout';
 import Transition from '@enact/ui/Transition';
+import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
+import convert from 'color-convert';
 
 import Skinnable from '../Skinnable';
+import Button from '../Button';
+import Slider from '../Slider';
 import SwatchButton from './SwatchButton';
 
 import componentCss from './ColorPicker.less';
 
+const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 
 /**
  * The color picker base component which sets-up the component's structure.
@@ -65,6 +71,14 @@ const ColorPickerBase = kind({
 		 * @public
 		 */
 		direction: PropTypes.string,
+
+		/**
+		 * Determines whether the extended color controls (sliders) are visible
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		extended: PropTypes.bool,
 
 		/**
 		 * Callback method with a payload containing the `color` that was just selected.
@@ -115,6 +129,10 @@ const ColorPickerBase = kind({
 	},
 
 	computed: {
+		className: ({extended, styler}) => styler.append({extended}),
+		sliderValues: ({value}) => {
+			return {hsl: convert.hex.hsl(value)};
+		},
 		transitionContainerClassname: ({css, open, styler}) => styler.join(css.transitionContainer, (open ? css.openTransitionContainer : null)),
 		transitionDirection: ({direction}) => {
 			switch (direction) {
@@ -130,27 +148,106 @@ const ColorPickerBase = kind({
 		}
 	},
 
-	render: ({children, css, onChange, open, transitionContainerClassname, transitionDirection, value, ...rest}) => {
+	render: ({children, css, onChange, onClick, onHueChanged, onSaturationChanged, onLightnessChanged, onToggleExtended, open, sliderValues, transitionContainerClassname, transitionDirection, value, ...rest}) => {
+		delete rest.extended;
 		return (
 			<div {...rest}>
-				<SwatchButton>{value}</SwatchButton>
+				<SwatchButton onClick={onClick}>{value}</SwatchButton>
 				<Transition
 					className={transitionContainerClassname}
 					visible={open}
 					direction={transitionDirection}
 				>
-					<div className={css.palette}>
+					<ContainerDiv className={css.palette} spotlightDisabled={!open} spotlightRestrict="self-only">
 						<Group
 							className={css.group}
 							childComponent={SwatchButton}
 							itemProps={{small: true, className: css.swatch}}
 							onSelect={onChange}
 						>{children || []}</Group>
-					</div>
+						<Button icon="ellipsis" small onTap={onToggleExtended} className={css.swatch} />
+						<div className={css.sliders}>
+							<Row align="center">
+								<Cell>
+									<label>Hue</label>
+									<Slider value={sliderValues.hsl[0]} min={0} max={360} onChange={onHueChanged} />
+								</Cell>
+								<Cell component="label" size="5ex">{sliderValues.hsl[0] + '˚'}</Cell>
+							</Row>
+							<Row align="center">
+								<Cell>
+									<label>Saturation</label>
+									<Slider value={sliderValues.hsl[1]} min={0} max={100} onChange={onSaturationChanged} />
+								</Cell>
+								<Cell component="label" size="5ex">{sliderValues.hsl[1] + '%'}</Cell>
+							</Row>
+							<Row align="center">
+								<Cell>
+									<label>Lightness</label>
+									<Slider value={sliderValues.hsl[2]} min={0} max={100} onChange={onLightnessChanged} />
+								</Cell>
+								<Cell component="label" size="5ex">{sliderValues.hsl[2] + '%'}</Cell>
+							</Row>
+						</div>
+					</ContainerDiv>
 				</Transition>
 			</div>
 		);
 	}
+});
+
+const ColorPickerExtended = hoc((config, Wrapped) => {
+	return class extends React.PureComponent {
+		static displayName = 'ColorPickerExtended'
+
+		static propTypes = {
+			defaultExtended: PropTypes.bool,
+			onChange: PropTypes.func,
+			value: PropTypes.string
+		}
+
+		constructor (props) {
+			super(props);
+			this.hsl = convert.hex.hsl(props.value);
+			this.state = {
+				extended: props.defaultExtended || false
+			};
+		}
+
+		buildValue = ({h = this.hsl[0], s = this.hsl[1], l = this.hsl[2]} = {}) => (
+			'#' + convert.hsl.hex(h, s, l)
+		)
+
+		handleToggleExtended = () => {
+			this.setState(({extended}) => ({extended: !extended}));
+		}
+
+		handleSlider = (type) => ({value: sliderValue}) => {
+			this.hsl[('hsl'.indexOf(type))] = sliderValue;
+			const value = this.buildValue();
+			// this.setState({value});
+
+			if (this.props.onChange) {
+				this.props.onChange({value});
+			}
+		}
+
+		render () {
+			const {...rest} = this.props;
+			delete rest.defaultExtended;
+
+			return (
+				<Wrapped
+					{...rest}
+					extended={this.state.extended}
+					onToggleExtended={this.handleToggleExtended}
+					onHueChanged={this.handleSlider('h')}
+					onSaturationChanged={this.handleSlider('s')}
+					onLightnessChanged={this.handleSlider('l')}
+				/>
+			);
+		}
+	};
 });
 
 /**
@@ -164,7 +261,7 @@ const ColorPickerBase = kind({
 
 const ColorPickerDecorator = compose(
 	Toggleable({toggle: null, prop: 'open', toggleProp: 'onClick'}),
-	Changeable,
+	ColorPickerExtended,
 	Skinnable
 );
 
