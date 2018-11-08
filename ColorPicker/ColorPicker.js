@@ -112,7 +112,7 @@ const ColorPickerBase = kind({
 	defaultProps: {
 		direction: 'right',
 		open: false,
-		value: '#fff'
+		value: '#cccccc'
 	},
 
 	styles: {
