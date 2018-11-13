@@ -1,0 +1,19 @@
+// ThumbnailItem.less
+//
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+
+.thumbnailItem {
+	.applySkins({
+		align-items: center;
+
+		.thumbnail {
+			height: auto;
+			width: auto;
+		}
+
+		.title {
+			padding: 0 @agate-component-spacing;
+		}
+	});
+}
