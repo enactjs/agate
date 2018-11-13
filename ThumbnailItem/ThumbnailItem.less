@@ -1,0 +1,26 @@
+// ThumbnailItem.less
+//
+@import "../styles/skin.less";
+
+.thumbnailItem {
+	.thumbnail {
+		height: auto;
+		width: auto;
+	}
+
+	.content {
+		overflow: hidden;
+	}
+
+	.applySkins({
+		align-items: center;
+
+		.thumbnail {
+			vertical-align: middle;
+		}
+
+		.content {
+			padding: 0 @agate-component-spacing;
+		}
+	});
+}
