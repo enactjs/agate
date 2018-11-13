@@ -50,7 +50,7 @@ const ItemDecorator = compose(
 	Pure,
 	UiItemDecorator,
 	Spottable,
-	MarqueeDecorator({invalidateProps: ['inline', 'autoHide']}),
+	MarqueeDecorator({className: componentCss.content, invalidateProps: ['inline', 'autoHide']}),
 	Skinnable
 );
 
@@ -59,5 +59,6 @@ const Item = ItemDecorator(ItemBase);
 export default Item;
 export {
 	Item,
-	ItemBase
+	ItemBase,
+	ItemDecorator
 };

@@ -1,18 +1,25 @@
 // ThumbnailItem.less
 //
-@import "../styles/mixins.less";
 @import "../styles/skin.less";
 
 .thumbnailItem {
+	.thumbnail {
+		height: auto;
+		width: auto;
+	}
+
+	.content {
+		overflow: hidden;
+	}
+
 	.applySkins({
 		align-items: center;
 
 		.thumbnail {
-			height: auto;
-			width: auto;
+			vertical-align: middle;
 		}
 
-		.title {
+		.content {
 			padding: 0 @agate-component-spacing;
 		}
 	});

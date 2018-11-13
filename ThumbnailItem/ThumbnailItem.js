@@ -1,21 +1,23 @@
-import Item from '../Item';
+import {ItemBase, ItemDecorator} from '../Item';
 import kind from '@enact/core/kind';
 import React from 'react';
 import {SlotItem} from '@enact/ui/SlotItem';
 
 import componentCss from './ThumbnailItem.less';
 
-const ThumbnailItem = kind({
+const ThumbnailItemBase = kind({
 	name: 'ThumbnailItem',
+
 	styles: {
 		css: componentCss,
 		className: 'thumbnailItem',
 		publicClassNames: true
 	},
+
 	render: ({children, css, src, ...rest}) => {
 		return (
 			<SlotItem
-				component={Item}
+				component={ItemBase}
 				{...rest}
 			>
 				<slotBefore>
@@ -24,7 +26,7 @@ const ThumbnailItem = kind({
 						src={src}
 					/>
 				</slotBefore>
-				<div className={css.title}>
+				<div className={css.content}>
 					{children}
 				</div>
 			</SlotItem>
@@ -32,5 +34,10 @@ const ThumbnailItem = kind({
 	}
 });
 
+const ThumbnailItem = ItemDecorator(ThumbnailItemBase);
+
 export default ThumbnailItem;
-export {ThumbnailItem};
+export {
+	ThumbnailItem,
+	ThumbnailItemBase
+};

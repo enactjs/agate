@@ -369,6 +369,12 @@ const IncrementSliderBase = kind({
 		step: 1
 	},
 
+	styles: {
+		css: componentCss,
+		className: 'incrementSlider',
+		publicClassNames: ['incrementSlider']
+	},
+
 	handlers: {
 		onDecrement: emitChange(-1),
 		onIncrement: emitChange(1),
@@ -396,12 +402,6 @@ const IncrementSliderBase = kind({
 				forwardWithType('onSpotlightDown', props);
 			}
 		}
-	},
-
-	styles: {
-		css: componentCss,
-		className: 'incrementSlider',
-		publicClassNames: ['incrementSlider']
 	},
 
 	computed: {
