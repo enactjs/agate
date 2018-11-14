@@ -6,6 +6,7 @@
 
 import {addAll} from '@enact/core/keymap';
 import classnames from 'classnames';
+import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -35,6 +36,50 @@ const defaultConfig = {
 	customSkin: true,
 	skin: true
 };
+
+const CustomizableSkinStyle = kind({
+	name: 'CustomizableSkinStyle',
+
+	propTypes: {
+		className: PropTypes.string.isRequired,
+		accent: PropTypes.string,
+		highlight: PropTypes.string
+	},
+
+	defaultProps: {
+		accent: '#1a1a1a',
+		highlight: '#2a48ca'
+	},
+
+	computed: {
+		cssRules: ({className, accent, highlight}) => {
+			const accentObj = convert.hex.hsl(accent);
+			const highlightObj = convert.hex.hsl(highlight);
+
+			const style = {
+				'--agate-accent-color': accent,
+				'--agate-accent-h': accentObj[0],
+				'--agate-accent-s': accentObj[1] + '%',
+				'--agate-accent-l': accentObj[2] + '%',
+				'--agate-highlight-color': highlight,
+				'--agate-highlight-h': highlightObj[0],
+				'--agate-highlight-s': highlightObj[1] + '%',
+				'--agate-highlight-l': highlightObj[2] + '%'
+			};
+
+			let styleRules = '';
+			for (const rule in style) {
+				styleRules += `\t${rule}: ${style[rule]};\n`;
+			}
+			return `.${className} {\n${styleRules}}\n`;
+		}
+	},
+
+	render: ({cssRules, ...rest}) => {
+		delete rest.className;
+		return (cssRules ? <style type="text/css" {...rest}>{cssRules}</style> : null);
+	}
+});
 
 /**
  * {@link agate/AgateDecorator.AgateDecorator} is a Higher-order Component that applies
@@ -81,37 +126,23 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			highlight: PropTypes.string
 		}
 
-		static defaultProps = {
-			accent: '#1a1a1a',
-			highlight: '#2a48ca'
-		}
-
 		render () {
-			const className = classnames(
-				this.props.className,
+			const {accent, className, highlight, ...rest} = this.props;
+			const customizableSkinClassName = 'agate-customized-skin';
+
+			const allClassNames = classnames(
+				className,
 				'enact-unselectable',
 				bgClassName,
-				css.root
+				css.root,
+				{[customizableSkinClassName]: customSkin},
 			);
 
-			const style = this.props.style || {};
-
-			if (customSkin) {
-				const accentObj = convert.hex.hsl(this.props.accent);
-				const highlightObj = convert.hex.hsl(this.props.highlight);
-
-				style['--agate-accent-color'] = this.props.accent;
-				style['--agate-accent-h'] = accentObj[0];
-				style['--agate-accent-s'] = accentObj[1] + '%';
-				style['--agate-accent-l'] = accentObj[2] + '%';
-				style['--agate-highlight-color'] = this.props.highlight;
-				style['--agate-highlight-h'] = highlightObj[0];
-				style['--agate-highlight-s'] = highlightObj[1] + '%';
-				style['--agate-highlight-l'] = highlightObj[2] + '%';
-			}
-
 			return (
-				<App {...this.props} style={style} className={className} />
+				<React.Fragment>
+					{customSkin ? <CustomizableSkinStyle className={customizableSkinClassName} accent={accent} highlight={highlight} /> : null}
+					<App {...rest} className={allClassNames} />
+				</React.Fragment>
 			);
 		}
 	};
