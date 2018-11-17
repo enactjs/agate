@@ -1,0 +1,30 @@
+@import '../styles/skin.less';
+
+.gridListImageItem {
+    .applySkins({
+        .image {
+            height: 0px;
+        }
+
+        &.fourThree .image {
+            height: 0px;
+            margin: 6.25% 0;
+        }
+
+        &.sixteenNine .image {
+            height: 0px;
+            margin: 22% 0;
+        }
+
+        .caption {
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+        }
+
+        .subCaption {
+            line-height: 48px;
+            text-align: center;
+        }
+    });
+}
