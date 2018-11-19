@@ -83,6 +83,24 @@
 			}
 		}
 
+		&.smallest {
+			height: @agate-button-smallest-height;
+			min-width: @agate-button-smallest-height;
+			font-size: @agate-button-smallest-font-size;
+			line-height: (@agate-button-smallest-height - (2 * @agate-button-border-width));
+			padding: 0 @agate-button-smallest-h-padding;
+
+			&.minWidth {
+				padding: 0;
+			}
+
+			.client::before {
+				bottom: 6px;
+				left: 9px;
+				right: 9px;
+			}
+		}
+
 		&.grid {
 			.bg {
 				border-radius: @agate-button-grid-border-radius;
