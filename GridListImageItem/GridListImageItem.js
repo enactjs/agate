@@ -4,15 +4,31 @@
  */
 
 import kind from '@enact/core/kind';
+import {memoize} from '@enact/core/util';
 import {GridListImageItem as UiGridListImageItem} from '@enact/ui/GridListImageItem';
-import {ImageBase as Image} from '@enact/ui/Image';
+import {ImageBase} from '@enact/ui/Image';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
+import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
 import componentCss from './GridListImageItem.less';
+
+const parseRatio = /^(\d+):(\d+)$/;
+const calcAspectRatio = memoize(aspectRatio => {
+	if (aspectRatio === 'square') return 1;
+	if (aspectRatio === 'widescreen') return 16 / 9;
+	if (typeof aspectRatio === 'number') return 1 / aspectRatio;
+
+	const ratio = aspectRatio.match(parseRatio);
+	if (ratio && ratio.length === 3) {
+		return parseInt(ratio[2]) / parseInt(ratio[1]);
+	}
+
+	return 1;
+});
 
 /**
  * @class GridListImageItemBase
@@ -24,8 +40,21 @@ import componentCss from './GridListImageItem.less';
 const GridListImageItemBase = kind({
 	name: 'GridListImageItem',
 
-	propTypes: /** @lends moonstone/GridListImageItem.GridListImageItemBase.prototype */ {
-		aspectRatio: PropTypes.oneOf(['1:1', '4:3', '16:9']),
+	propTypes: /** @lends agate/GridListImageItem.GridListImageItemBase.prototype */ {
+		/**
+		 * Determines the ratio of the image's width to its height.
+		 *
+		 * The value can either be specified as a number or as a string using the standard format:
+		 * 'width:height'. The predefined values of `'square'` and `'widescreen'` may also be used
+		 * for `'1:1'` or `'16:9'`, respectively.
+		 *
+		 * @type {Number|String}
+		 * @public
+		 */
+		aspectRatio: PropTypes.oneOfType(
+			PropTypes.number,
+			PropTypes.string
+		),
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -43,20 +72,20 @@ const GridListImageItemBase = kind({
 		css: PropTypes.object
 	},
 
-	defaultProps: {
-		aspectRatio: '1:1'
-	},
-
 	styles: {
 		css: componentCss,
 		publicClassNames: ['gridListImageItem', 'image', 'caption', 'subCaption']
 	},
 
 	computed: {
-		className: ({aspectRatio, styler}) => styler.append({
-			fourThree: aspectRatio === '4:3',
-			sixteenNine: aspectRatio === '16:9'
-		})
+		style: ({aspectRatio, style}) => {
+			if (!aspectRatio) return style;
+
+			return {
+				...style,
+				'--agate-aspect-ratio': calcAspectRatio(aspectRatio)
+			};
+		}
 	},
 
 	render: ({css, ...rest}) => {
@@ -66,7 +95,8 @@ const GridListImageItemBase = kind({
 			<UiGridListImageItem
 				{...rest}
 				css={css}
-				imageComponent={Image}
+				iconComponent={Icon}
+				imageComponent={ImageBase}
 			/>
 		);
 	}

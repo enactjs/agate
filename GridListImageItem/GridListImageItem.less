@@ -1,29 +1,39 @@
 @import '../styles/skin.less';
 
 .gridListImageItem {
+    --agate-aspect-ratio: 1;
+
     .applySkins({
         .image {
+            position: relative;
             height: 0px;
+
+            // with margins around image
+            // margin: calc(50% - 50% * var(--agate-aspect-ratio)) 0;
+
+            // without margins
+            padding: calc(50% * var(--agate-aspect-ratio, 1)) 0;
+            flex: 0 1 0%;
         }
 
-        &.fourThree .image {
-            height: 0px;
-            margin: 6.25% 0;
-        }
-
-        &.sixteenNine .image {
-            height: 0px;
-            margin: 22% 0;
+        .overlayContainer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: auto;
         }
 
         .caption {
-            height: 48px;
-            line-height: 48px;
+            font-weight: @agate-gridlistimageitem-caption-weight;
+            height: @agate-gridlistimageitem-caption-height;
+            line-height: @agate-gridlistimageitem-caption-height;
             text-align: center;
         }
 
         .subCaption {
-            line-height: 48px;
+            height: @agate-gridlistimageitem-subcaption-height;
+            line-height: @agate-gridlistimageitem-subcaption-height;
             text-align: center;
         }
     });
