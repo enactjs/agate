@@ -45,7 +45,7 @@ VerticalArranger.leave = arrange.ease(
 const PanelsBase = kind({
 	name: 'Panels',
 	propTypes: {
-		arranger: PropTypes.shape(shape),
+		arranger: shape,
 		duration: PropTypes.number,
 		index: PropTypes.number,
 		orientation: PropTypes.string
