@@ -6,11 +6,11 @@
 import kind from '@enact/core/kind';
 import {memoize} from '@enact/core/util';
 import {GridListImageItem as UiGridListImageItem} from '@enact/ui/GridListImageItem';
-import {ImageBase} from '@enact/ui/Image';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
+import {ImageBase} from '../Image';
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
@@ -51,10 +51,10 @@ const GridListImageItemBase = kind({
 		 * @type {Number|String}
 		 * @public
 		 */
-		aspectRatio: PropTypes.oneOfType(
+		aspectRatio: PropTypes.oneOfType([
 			PropTypes.number,
 			PropTypes.string
-		),
+		]),
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -83,7 +83,7 @@ const GridListImageItemBase = kind({
 
 			return {
 				...style,
-				'--agate-aspect-ratio': calcAspectRatio(aspectRatio)
+				'--agate-gridlistimageitem-aspect-ratio': calcAspectRatio(aspectRatio)
 			};
 		}
 	},

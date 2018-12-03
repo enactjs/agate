@@ -1,7 +1,7 @@
 @import '../styles/skin.less';
 
 .gridListImageItem {
-    --agate-aspect-ratio: 1;
+    --agate-gridlistimageitem-aspect-ratio: 1;
 
     .applySkins({
         .image {
@@ -9,10 +9,10 @@
             height: 0px;
 
             // with margins around image
-            // margin: calc(50% - 50% * var(--agate-aspect-ratio)) 0;
+            // margin: calc(50% - 50% * var(--agate-gridlistimageitem-aspect-ratio)) 0;
 
             // without margins
-            padding: calc(50% * var(--agate-aspect-ratio, 1)) 0;
+            padding: calc(50% * var(--agate-gridlistimageitem-aspect-ratio, 1)) 0;
             flex: 0 1 0%;
         }
 
