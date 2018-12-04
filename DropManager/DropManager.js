@@ -79,7 +79,7 @@ const defaultConfig = {
 const fallbackArrangementProp = 'arrangement';
 
 
-const DropManagerContext = React.createContext(null);
+const DropManagerContext = React.createContext(defaultContainerShape);
 
 const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 	const ArrangementState = Changeable({prop: configHoc.arrangementProp || fallbackArrangementProp});
@@ -330,8 +330,11 @@ const ResponsiveBox = (Wrapped) => setDisplayName('ResponsiveBox')(
 	(props) => {
 		return (
 			<DraggableContainerContext.Consumer>
-				{({containerShape}) => {
-					return (<Wrapped containerShape={containerShape} {...props} />);
+				{(ctx) => {
+					const containerShape = ctx ? ctx.containerShape : defaultContainerShape;
+					return (
+						<Wrapped containerShape={containerShape} {...props} />
+					);
 				}}
 			</DraggableContainerContext.Consumer>
 		);
