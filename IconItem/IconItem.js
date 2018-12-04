@@ -15,7 +15,7 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
 import React from 'react';
-import SlotItem from '@enact/ui/SlotItem';
+import {Row, Cell} from '@enact/ui/Layout';
 import Spottable from '@enact/spotlight/Spottable';
 import Touchable from '@enact/ui/Touchable';
 
@@ -106,20 +106,22 @@ const IconItemBase = kind({
 	},
 
 	render: ({children, css, disabled, icon, label, titleIcon, ...rest}) => (
-		<SlotItem
-			component={Item}
+		<Row
 			disabled={disabled}
-			slotBefore={<Icon className={css.icon}>{icon}</Icon>}
 			{...rest}
+			align="center"
 		>
-			<LabeledItemBase
-				css={css}
-				label={label}
-				titleIcon={titleIcon}
-			>
-				{children}
-			</LabeledItemBase>
-		</SlotItem>
+			<Cell shrink component={Icon} className={css.icon}>{icon}</Cell>
+			<Cell>
+				<LabeledItemBase
+					css={css}
+					label={label}
+					titleIcon={titleIcon}
+				>
+					{children}
+				</LabeledItemBase>
+			</Cell>
+		</Row>
 	)
 });
 

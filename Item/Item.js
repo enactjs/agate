@@ -10,7 +10,7 @@
  */
 
 import Spottable from '@enact/spotlight/Spottable';
-import {ItemBase as AgateItemBase, ItemDecorator as UiItemDecorator} from '@enact/ui/Item';
+import {ItemBase as UiItemBase, ItemDecorator as UiItemDecorator} from '@enact/ui/Item';
 import {MarqueeDecorator} from '@enact/ui/Marquee';
 import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
@@ -28,7 +28,7 @@ import Skinnable from '../Skinnable';
  * @public
  */
 const ItemBase = (props) => (
-	<AgateItemBase
+	<UiItemBase
 		{...props}
 		css={componentCss}
 	/>
