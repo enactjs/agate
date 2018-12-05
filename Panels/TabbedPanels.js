@@ -16,29 +16,27 @@ import Panels from './Panels';
 
 import componentCss from './TabbedPanels.less';
 
-const SpottableLabeledIcon = Spottable(LabeledIcon);
-
 const TabBase = kind({
 	name: 'Tab',
 	styles: {
 		css: componentCss,
 		className: 'tab'
 	},
-	render: ({children, icon = 'star', labelPosition, onClick, ...rest}) => {
+	render: ({children, css, icon = 'star', labelPosition, onClick, ...rest}) => {
 		return (
-			<Cell
-				{...rest}
-				icon={icon}
-				component={SpottableLabeledIcon}
-				labelPosition={labelPosition}
-				onClick={onClick}
-			>
-				{children}
+			<Cell {...rest} onClick={onClick}>
+				<LabeledIcon
+					className={css.labeledIcon}
+					icon={icon}
+					labelPosition={labelPosition}
+				>
+					{children}
+				</LabeledIcon>
 			</Cell>
 		);
 	}
 });
-const Tab = Skinnable(TabBase);
+const Tab = Skinnable(Spottable(TabBase));
 
 const TabGroupBase = kind({
 	name: 'TabGroup',

@@ -86,9 +86,23 @@ export default {
 	fan               : 0x0F00BB,  // fan
 	defrosterfront    : 0x0F00BC,  // defroster_front
 	defrosterback     : 0x0F00BD,  // defroster_back
-	user              : 0x0F00BE,  // user_icon
-	home              : 0x0F00BF,  // home_icon
+	user              : 0x0F00BE,  // users
+	home              : 0x0F00BF,  // home
 	temperature       : 0x0F00C0,  // temperature_icon
-	compass           : 0x0F00C1,  // compass_icon
-	phone             : 0x0F00C2   // phone_icon
+	compass           : 0x0F00C1,  // compass
+	phone             : 0x0F00C2,  // phone
+	fanoff            : 0x0F00C9,  // fan_off
+	bluetooth         : 0x0F00CA,  // bluetooth
+	datetime          : 0x0F00CB,  // date_time
+	display           : 0x0F00CC,  // display
+	seatbelt          : 0x0F00CD,  // seat_belt
+	wifi              : 0x0F00CE,  // wifi
+	apps              : 0x0F00CF,  // apps
+	climate           : 0x0F00D0,  // climate
+	dashboard         : 0x0F00D1,  // dashboard
+	edit              : 0x0F00D2,  // edit
+	expand            : 0x0F00D3,  // expand
+	radio             : 0x0F00D4,  // radio
+	rearscreen        : 0x0F00D5,  // rear_screen
+	weather           : 0x0F00D6   // weather
 };

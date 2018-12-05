@@ -34,9 +34,6 @@
 			transform: @agate-panels-tab-group-transform;
 
 			.tab {
-				margin: @agate-panels-tab-margin;
-				padding: @agate-panels-tab-padding;
-
 				color: @agate-panels-tab-color;
 				// background-color: @agate-panels-tab-bg-color;
 				// background-image: @agate-panels-tab-bg-image;
@@ -62,6 +59,11 @@
 
 				&:first-child {
 					border-left-width: 0;
+				}
+
+				.labeledIcon {
+					margin: @agate-panels-tab-margin;
+					padding: @agate-panels-tab-padding;
 				}
 
 				.focus({
