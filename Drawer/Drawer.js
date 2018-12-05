@@ -21,6 +21,11 @@ const DrawerBase = kind({
 		footer: PropTypes.node,
 		header: PropTypes.node,
 		noAnimation: PropTypes.bool,
+		// `onClose` is here for the future scenario where we'll want to have a local (to Drawer)
+		// control that closes the Drawer; similar to how the old Moonstone Drawer worked with its
+		// close-tab that was positioned on the edge of the drawer. This prop, the close icon below
+		// and the .closeButton CSS in the LESS file all relate to this functionality.
+		// onClose: PropTypes.func,
 		onHide: PropTypes.func,
 		open: PropTypes.bool
 	},
