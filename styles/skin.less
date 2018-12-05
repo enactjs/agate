@@ -10,6 +10,13 @@
 		@componentRules();
 	}
 
+	&:global(.copper) {
+		// Load the Copper agate rules into this scope
+		@import "./colors-copper.less"; // also imports variables-copper
+
+		@componentRules();
+	}
+
 	&:global(.electro) {
 		// Load the Titanium agate rules into this scope
 		@import "./colors-electro.less";
