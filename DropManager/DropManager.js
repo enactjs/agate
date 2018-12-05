@@ -56,8 +56,13 @@ const defaultContainerShape = {
 
 const defaultConfig = {
 	// The prop name for the boolean send to the Wrapped component that indicates whether we are
-	// currently arranging things. Useful in case we need to show some boxes on the screen or
-	// something. The default/common value for this is "arranging".
+	// able to arrange things. Useful in case we need to show some boxes on the screen or
+	// something. The default/common value for this is "arrangeable".
+	arrangeableProp: null,
+
+	// The prop name for the boolean send to the Wrapped component that indicates whether we are
+	// currently arranging things. Useful in case we need toadd an overlay or hide content during
+	// dragging. The default/common value for this is "arranging".
 	arrangingProp: null,
 
 	// The prop name for the object sent to the Wrapped component containing the arrangement object.
@@ -226,6 +231,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			const {arrangeable, className, ...rest} = {...this.props};
 			delete rest.onArrange;
 
+			if (configHoc.arrangeableProp) rest[configHoc.arrangeableProp] = arrangeable;
 			if (configHoc.arrangingProp) rest[configHoc.arrangingProp] = this.state.dragging;
 			// Always apply arrangement, so Rearrangeable can receive it.
 			rest[configHoc.arrangementProp || fallbackArrangementProp] = this.state.arrangement;
