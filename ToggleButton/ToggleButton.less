@@ -5,6 +5,16 @@
 
 .toggleButton {
 	.applySkins({
+		border: none;
+
+		.bg {
+			background-color: @agate-togglebutton-indicator-off-bg-color;
+		}
+
+		.client {
+			color: @agate-accent;
+		}
+
 		&::after {
 			.position(@agate-togglebutton-indicator-position);
 			position: absolute;
@@ -18,12 +28,17 @@
 		}
 
 		&.underline {
-			&::after {
-				content: "";
-			}
+			// no underline in Copper since we use a different color/background-color to denoted the selected state
 		}
 
 		&.selected {
+			.bg {
+				background-color: white;
+			}
+			.client {
+				color: black;
+			}
+
 			&::after {
 				background-color: @agate-togglebutton-indicator-on-bg-color;
 				border-color: @agate-togglebutton-indicator-on-border-color;
@@ -31,6 +46,11 @@
 		}
 
 		.focus({
+
+			.bg {
+				background-color: transparent;
+			}
+
 			&::after {
 				background-color: @agate-togglebutton-indicator-off-focus-bg-color;
 				border-color: @agate-togglebutton-indicator-off-focus-border-color;

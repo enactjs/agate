@@ -105,7 +105,7 @@ const ToggleButtonBase = kind({
 		 * @type {String}
 		 * @public
 		 */
-		type: PropTypes.oneOf(['standard', 'grid']),
+		type: PropTypes.oneOf(['grid', 'standard']),
 
 		/**
 		 * Shows toggle indicator.
