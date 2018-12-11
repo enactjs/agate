@@ -12,6 +12,7 @@
 		margin: 0 @agate-component-spacing;
 		box-sizing: border-box;
 		font-size: @agate-button-font-size;
+		text-transform: @agate-button-text-transform;
 		vertical-align: middle;
 
 		&.minWidth {
@@ -85,6 +86,7 @@
 
 		&.grid {
 			.bg {
+				border: @agate-button-border-width solid @agate-button-grid-border-color;
 				border-radius: @agate-button-grid-border-radius;
 			}
 		}
@@ -97,6 +99,9 @@
 					.bg {
 						// -webkit-animation-name: expand;
 						// animation-name: expand;
+						background-color: @agate-button-pressed-bg-color;
+						background-image: @agate-button-pressed-bg-image;
+						opacity: @agate-button-pressed-opacity;
 					}
 				}
 			});
