@@ -4,14 +4,7 @@
 @import "../styles/variables.less";
 @import "../styles/skin.less";
 
-@agate-switch-height: 20px;
-@agate-switch-width: 80px;
-// Interally theme our implementation using published classes from ToggleItem and ToggleIcon
 .toggleIcon {
-	border-radius: (@agate-switch-height / 2);
-	width: @agate-switch-width;
-	height: @agate-switch-height;
-	line-height: @agate-switch-height;
 	font-family: "Moonstone Icons";
 	position: relative;
 	display: inline-block;
@@ -21,17 +14,9 @@
 	.icon {
 		visibility: visible;
 		left: 0;
-		width: @agate-switch-height;
 		height: inherit;
-		font-size: (@agate-switch-height * 2.8);
 		line-height: inherit;
 		margin: 0;
-	}
-
-	&.selected {
-		.icon {
-			left: (@agate-switch-width - @agate-switch-height);
-		}
 	}
 
 	&.animated {
@@ -46,11 +31,16 @@
 
 	// Skin colors
 	.applySkins({
+		border-radius: (@agate-switch-height / 2);
 		background-color: @agate-switch-bg-color;
+		height: @agate-switch-height;
+		line-height: @agate-switch-height;
+		width: @agate-switch-width;
 
 		.icon {
 			background-color: transparent;
 			color: @agate-switch-color;
+			font-size: (@agate-switch-height * 2.8);
 		}
 
 		&.selected {
@@ -58,6 +48,7 @@
 
 			.icon {
 				color: @agate-switch-selected-color;
+				left: (@agate-switch-width - @agate-switch-height);
 
 				:global(.spottable):focus & {
 					color: @agate-switch-selected-color;

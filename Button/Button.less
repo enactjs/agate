@@ -36,6 +36,9 @@
 		.client {
 			padding: @agate-button-border-width;	// We match the amount removed by the line-height above, so the text doesn't overlap the border
 			color: @agate-button-color;
+			//TODO: letter-spacing causes icons/single letters to shift left and text-indent is pushing too far back to the right
+			//letter-spacing: @agate-button-letter-spacing;
+			//text-indent: @agate-button-letter-spacing;
 
 			.icon {
 				-webkit-margin-start: 0;

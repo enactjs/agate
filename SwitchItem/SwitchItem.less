@@ -14,11 +14,6 @@
 		vertical-align: middle;
 	}
 
-
-	.switchIcon {
-		margin-left: 10px;
-	}
-
 	.applySkins({
 		border-bottom: @agate-divider-border-width solid @agate-divider-border-color;
 		.agate-item-sizing();
@@ -39,6 +34,16 @@
 			});
 
 		}
+
+		.switchIcon {
+			height: @agate-switch-height;
+			margin-left: 10px;
+
+			.icon {
+				height: @agate-switch-height;
+			}
+		}
+
 		.focus({
 			color: @agate-switch-focus-color;
 			.text {
