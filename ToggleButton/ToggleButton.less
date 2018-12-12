@@ -33,10 +33,10 @@
 
 		&.selected {
 			.bg {
-				background-color: white;
+				background-color: @agate-accent;
 			}
 			.client {
-				color: black;
+				color: @agate-highlight;
 			}
 
 			&::after {
@@ -65,6 +65,14 @@
 		});
 
 		.disabled({
+			.bg {
+				background-color: @agate-accent;
+			}
+
+			.client {
+				color: @agate-highlight;
+			}
+
 			&::after {
 				background-color: @agate-togglebutton-indicator-disabled-off-bg-color;
 				border-color: @agate-togglebutton-indicator-disabled-off-border-color;

@@ -10,7 +10,7 @@
 @agate-accent-h: var(--agate-accent-h, 6);
 @agate-accent-s: var(--agate-accent-s, 25%);
 @agate-accent-l: var(--agate-accent-l, 52%);
-@agate-highlight: @agate-white;
+@agate-highlight: var(--agate-highlight-color, @agate-white);
 @agate-background: @agate-copper;
 @agate-foreground: @agate-white;
 @agate-background-active: fade(black, 15%);
@@ -19,7 +19,6 @@
 @agate-foreground-focus: black;
 @agate-gradient: none;
 @agate-copper:             #a47d66;
-@agate-darker-copper:      #8b6650;
 @agate-darker-gray:        #262626;
 @agate-dark-gray:          #424242;
 @agate-gray:               #a6a6a6;
@@ -63,7 +62,7 @@
 @agate-button-focus-bg-image:       none;
 @agate-button-highlighted-bg-color: @agate-background-focus;
 @agate-button-highlighted-bg-image: none;
-@agate-button-pressed-bg-color:     @agate-darker-copper;
+@agate-button-pressed-bg-color:     @copper-accent2-color;
 @agate-button-pressed-bg-image:     none;
 @agate-button-grid-border-color:    @agate-accent;
 
@@ -242,7 +241,7 @@
 @agate-togglebutton-indicator-off-border-color: @agate-background;
 @agate-togglebutton-indicator-on-border-color: @agate-accent;
 @agate-togglebutton-indicator-off-focus-bg-color: @agate-togglebutton-indicator-off-bg-color;
-@agate-togglebutton-indicator-on-focus-bg-color: @agate-white;
+@agate-togglebutton-indicator-on-focus-bg-color: @agate-highlight;
 @agate-togglebutton-indicator-off-focus-border-color: @agate-togglebutton-indicator-on-focus-border-color;
 @agate-togglebutton-indicator-on-focus-border-color: @agate-light-gray;
 @agate-togglebutton-indicator-disabled-off-bg-color: @agate-darker-gray;
