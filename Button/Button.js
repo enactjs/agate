@@ -89,13 +89,23 @@ const ButtonBase = kind({
 		selected: PropTypes.bool,
 
 		/**
+		 * Applies the string as a classname to allow arbitrary size
+		 * descriptions and styling.
+		 *
+		 * @type {String}
+		 * @default undefined
+		 * @public
+		 */
+		size: PropTypes.string,
+
+		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
 		 * other related buttons.
 		 *
 		 * @type {String}
 		 * @public
 		 */
-		type: PropTypes.oneOf(['grid'])
+		type: PropTypes.oneOf(['grid', 'sized'])
 	},
 
 	// defaultProps: {
@@ -108,7 +118,8 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({highlighted, joinedPosition, selected, type, styler}) => styler.append(
+		className: ({highlighted, joinedPosition, selected, size, type, styler}) => styler.append(
+			size,
 			type,
 			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
 			{highlighted, selected}

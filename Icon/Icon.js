@@ -52,6 +52,15 @@ const IconBase = kind({
 		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
 	},
 
+	styles: {
+		css: componentCss,
+		className: 'icon'
+	},
+
+	computed: {
+		className: ({size, styler}) => styler.append(size)
+	},
+
 	render: (props) => UiIcon.inline({
 		...props,
 		css: componentCss,

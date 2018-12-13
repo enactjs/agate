@@ -64,6 +64,16 @@ const ToggleButtonBase = kind({
 		selected: PropTypes.bool,
 
 		/**
+		 * Applies the string as a classname to allow arbitrary size
+		 * descriptions and styling.
+		 *
+		 * @type {String}
+		 * @default undefined
+		 * @public
+		 */
+		size: PropTypes.string,
+
+		/**
 		 * Reduces the size of the button.
 		 *
 		 * The button will have a larger tap target than its apparent size to allow it to be clicked
@@ -133,7 +143,7 @@ const ToggleButtonBase = kind({
 	},
 
 	computed: {
-		className: ({selected, small, styler, underline}) => styler.append({selected, small, underline}),
+		className: ({selected, size, small, styler, underline}) => styler.append({selected, size, small, underline}),
 		children: ({children, selected, toggleOnLabel, toggleOffLabel}) => {
 			let c = children;
 			if (selected && toggleOnLabel) {

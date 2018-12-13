@@ -28,6 +28,15 @@
 			line-height: @agate-icon-small-size;
 		}
 
+		&.tiny {
+			background-position: center -((@agate-icon-sprite-tiny-size - @agate-icon-tiny-size) / 2);
+			background-size: @agate-icon-sprite-tiny-size (@agate-icon-sprite-tiny-size * 2);
+			width: @agate-icon-tiny-size;
+			height: @agate-icon-tiny-size;
+			font-size: @agate-icon-tiny-font-size;
+			line-height: @agate-icon-tiny-size;
+		}
+
 		&.dingbat {
 			font-family: "LG Display_Dingbat";
 			font-size: @agate-icon-size;
@@ -36,6 +45,11 @@
 			&.small {
 				font-size: @agate-icon-small-size;
 				line-height: (@agate-icon-small-size - 4);  // Slight vertical shift to account for a lower baseline
+			}
+
+			&.tiny {
+				font-size: @agate-icon-tiny-size;
+				line-height: (@agate-icon-tiny-size - 4);  // Slight vertical shift to account for a lower baseline
 			}
 		}
 

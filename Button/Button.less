@@ -85,6 +85,22 @@
 				left: 18px;
 				right: 18px;
 			}
+
+			&.sized {
+				height: @agate-button-sized-small-height;
+				min-width: @agate-button-sized-small-height;
+				font-size: @agate-button-sized-small-font-size;
+				line-height: (@agate-button-sized-small-height - (2 * @agate-button-border-width));
+			}
+		}
+
+		&.tiny {
+			&.sized {
+				height: @agate-button-sized-tiny-height;
+				min-width: @agate-button-sized-tiny-height;
+				font-size: @agate-button-sized-tiny-font-size;
+				line-height: (@agate-button-sized-tiny-height - (2 * @agate-button-border-width));
+			}
 		}
 
 		&.grid {
@@ -92,6 +108,14 @@
 				border: @agate-button-border-width solid @agate-button-grid-border-color;
 				border-radius: @agate-button-grid-border-radius;
 			}
+		}
+
+		&.sized {
+			height: @agate-button-sized-height;
+			min-width: @agate-button-sized-height;
+			font-size: @agate-button-sized-font-size;
+			line-height: (@agate-button-sized-height - (2 * @agate-button-border-width));
+			padding: 0 0;
 		}
 
 		// Button-non-disabled rules
