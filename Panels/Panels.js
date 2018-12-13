@@ -42,6 +42,12 @@ VerticalArranger.leave = arrange.ease(
 	arrange.compose(slideOut, VerticalArranger.leave)
 );
 
+const mapChildren = (childs) => React.Children.map(childs, (child, index) => {
+	return child ? React.cloneElement(child, {
+		'data-index': index
+	}) : null;
+})
+
 const PanelsBase = kind({
 	name: 'Panels',
 	propTypes: {
@@ -65,13 +71,18 @@ const PanelsBase = kind({
 			if (arranger) return arranger;
 			if (orientation === 'vertical') return VerticalArranger;
 			else return HorizontalArranger;
-		}
+		},
+		enteringProp: ({noAnimation}) => noAnimation ? null : 'hideChildren'
 	},
-	render: (props) => {
+	render: ({children, ...props}) => {
+		const mappedChildren = mapChildren(children);
+
 		return (
 			<ViewManager
 				{...props}
-			/>
+			>
+				{mappedChildren}
+			</ViewManager>
 		);
 	}
 });

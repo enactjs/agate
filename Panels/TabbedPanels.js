@@ -22,12 +22,18 @@ const TabBase = kind({
 		css: componentCss,
 		className: 'tab'
 	},
-	render: ({children, css, icon = 'star', labelPosition, onClick, ...rest}) => {
+	render: ({children, css, icon = 'star', labelPosition, onClick, orientation, style = {}, ...rest}) => {
+		let inline;
+		if (orientation === 'horizontal') {
+			style.textAlign = 'center';
+			inline = true;
+		}
 		return (
-			<Cell {...rest} onClick={onClick}>
+			<Cell {...rest} style={style} onClick={onClick}>
 				<LabeledIcon
 					className={css.labeledIcon}
 					icon={icon}
+					inline={inline}
 					labelPosition={labelPosition}
 				>
 					{children}
@@ -82,6 +88,7 @@ const TabGroupBase = kind({
 						component={Group}
 						itemProps={{
 							labelPosition,
+							orientation,
 							shrink: (orientation === 'vertical')
 						}}
 						orientation={orientation}
