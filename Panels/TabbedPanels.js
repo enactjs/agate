@@ -47,6 +47,11 @@ const Tab = Skinnable(Spottable(TabBase));
 const TabGroupBase = kind({
 	name: 'TabGroup',
 
+	propTypes: {
+		tabPosition: PropTypes.string.isRequired,
+		tabs: PropTypes.array.isRequired
+	},
+
 	styles: {
 		css: componentCss,
 		className: 'tabBar'
@@ -67,11 +72,18 @@ const TabGroupBase = kind({
 			} else {
 				return 'above';
 			}
-		}
+		},
+		children: ({tabs}) => tabs.map((tab, i) => {
+			tab.key = 'tab' + i;
+			tab.children = tab.title || tab.children;
+			delete tab.title;
+			return tab;
+		})
 	},
 
 	render: ({afterTabs, beforeTabs, className, css, labelPosition, orientation, style, tabEndStyle, tabGroupStyle, ...rest}) => {
 		delete rest.tabPosition;
+		delete rest.tabs;
 
 		return (
 			<Layout orientation={orientation} className={className} align="stretch" style={style}>
@@ -84,7 +96,6 @@ const TabGroupBase = kind({
 						className={css.tabGroup}
 						align="stretch center"
 						childComponent={Tab}
-						childSelect="onClick"
 						component={Group}
 						itemProps={{
 							labelPosition,
@@ -143,10 +154,7 @@ const TabbedPanelsBase = kind({
 			}
 		},
 		className: ({css, orientation, styler, tabPosition}) => styler.append(tabPosition == 'after' ? css.reverse : '', orientation == 'vertical' ? css.column : ''),
-		tabOrientation: ({orientation}) => orientation === 'vertical' ? 'horizontal' : 'vertical',
-		tabs: ({tabs}) => tabs.map((tab, i) => {
-			return {key: 'tab' + i, children: tab.title, icon: tab.icon};
-		})
+		tabOrientation: ({orientation}) => orientation === 'vertical' ? 'horizontal' : 'vertical'
 	},
 	render: ({afterTabs, beforeTabs, children, css, index, onSelect, tabOrientation, tabPosition, tabs, ...rest}) => {
 		return (
@@ -158,11 +166,10 @@ const TabbedPanelsBase = kind({
 						className={css.tabs}
 						onSelect={onSelect}
 						orientation={tabOrientation}
+						tabs={tabs}
 						tabPosition={tabPosition}
 						selected={index}
-					>
-						{tabs}
-					</TabGroup>
+					/>
 				</Cell>
 				<Cell
 					className={css.panels}
@@ -186,4 +193,9 @@ const TabbedPanels = Slottable(
 );
 
 export default TabbedPanels;
-export {TabbedPanels, TabbedPanelsBase};
+export {
+	TabbedPanels,
+	TabbedPanelsBase,
+	TabGroup,
+	TabGroupBase
+};
