@@ -35,13 +35,13 @@ const TabBase = kind({
 	},
 
 	computed: {
-		tabLabel: ({children, css, icon, orientation, selected, ...rest}) => {
+		tabLabel: ({children, className, css, icon, orientation, selected, ...rest}) => {
 			let inline;
 			if (orientation === 'horizontal') {
 				inline = true;
 			}
 
-			if (rest.className.includes('copper')) {
+			if (className.includes('copper')) {
 				return (
 					<div className={css.labeledIcon}>
 						<Button
