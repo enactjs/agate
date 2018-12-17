@@ -1,140 +1,16 @@
 import {adaptEvent, forward, handle} from '@enact/core/handle';
-import {cap} from '@enact/core/util';
 import {Cell, Layout} from '@enact/ui/Layout';
 import {Changeable} from '@enact/ui/Changeable';
-import Group from '@enact/ui/Group';
 import kind from '@enact/core/kind';
-import Button from '@enact/agate/Button';
-import LabeledIcon from '@enact/agate/LabeledIcon';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Slottable from '@enact/ui/Slottable';
-import Spottable from '@enact/spotlight/Spottable';
 
-import Skinnable from '../Skinnable';
+import TabGroup from '../TabGroup';
 
 import Panels from './Panels';
 
 import componentCss from './TabbedPanels.less';
-
-const TabBase = kind({
-	name: 'Tab',
-	styles: {
-		css: componentCss,
-		className: 'tab'
-	},
-	computed: {
-		tabLabel: ({children, css, icon, labelPosition, orientation, selected, ...rest}) => {
-			let inline = false;
-			if (orientation === 'horizontal') {
-				inline = true;
-			}
-
-			if (rest.className.includes('copper')) {
-				return (
-					<div className={css.labeledIcon}>
-						<Button
-							icon={icon}
-							inline={inline}
-							selected={selected === rest['data-index']}
-							labelPosition={labelPosition}
-						/>
-						{children}
-					</div>
-				);
-			} else {
-				return (
-					<LabeledIcon
-						className={css.labeledIcon}
-						icon={icon}
-						inline={inline}
-						labelPosition={labelPosition}
-					>
-						{children}
-					</LabeledIcon>
-				);
-			}
-		}
-	},
-	render: ({children, css, icon = 'star', labelPosition, onClick, orientation, selected, style = {}, tabLabel, ...rest}) => {
-		if (orientation === 'horizontal') {
-			style.textAlign = 'center';
-		}
-
-		return (
-			<Cell {...rest} style={style} onClick={onClick}>
-				{tabLabel}
-			</Cell>
-		);
-	}
-});
-const Tab = Skinnable(Spottable(TabBase));
-
-const TabGroupBase = kind({
-	name: 'TabGroup',
-
-	styles: {
-		css: componentCss,
-		className: 'tabBar'
-	},
-
-	computed: {
-		className: ({orientation, tabPosition, styler}) => styler.append(orientation, ['position' + cap(tabPosition)]),
-		labelPosition: ({orientation, tabPosition}) => {
-			// TODO: this keeps the label always between the icon and the panels, is it necessary?
-			if (orientation === 'vertical') {
-				if (tabPosition === 'before') {
-					return 'after';
-				} else {
-					return 'before';
-				}
-			} else if (tabPosition === 'before') {
-				return 'below';
-			} else {
-				return 'above';
-			}
-		}
-	},
-
-	render: ({afterTabs, beforeTabs, className, css, labelPosition, orientation, selected, style, tabEndStyle, tabGroupStyle, ...rest}) => {
-		delete rest.tabPosition;
-
-		return (
-			<Layout orientation={orientation} className={className} align="stretch" style={style}>
-				{beforeTabs ? <Cell className={css.tabEnds} shrink>
-					{beforeTabs}
-				</Cell> : null}
-				<Cell>
-					<Layout
-						{...rest}
-						className={css.tabGroup}
-						align="stretch center"
-						childComponent={Tab}
-						childSelect="onClick"
-						component={Group}
-						itemProps={{
-							labelPosition,
-							orientation,
-							selected,
-							shrink: (orientation === 'vertical')
-						}}
-						orientation={orientation}
-						select="radio"
-						selected={selected}
-					/>
-				</Cell>
-				{afterTabs ? <Cell className={css.tabEnds} shrink>
-					{afterTabs}
-				</Cell> : null}
-			</Layout>
-		);
-	}
-});
-
-TabGroupBase.defaultSlot = 'tabs';
-
-const TabGroup = Skinnable(TabGroupBase);
-
 
 const TabbedPanelsBase = kind({
 	name: 'TabbedPanels',
@@ -149,7 +25,7 @@ const TabbedPanelsBase = kind({
 	},
 	styles: {
 		css: componentCss,
-		className: 'tabbed-panels enact-fit'
+		className: 'tabbedPanels enact-fit'
 	},
 	handlers: {
 		onSelect: handle(
@@ -171,10 +47,7 @@ const TabbedPanelsBase = kind({
 			}
 		},
 		className: ({css, orientation, styler, tabPosition}) => styler.append(tabPosition == 'after' ? css.reverse : '', orientation == 'vertical' ? css.column : ''),
-		tabOrientation: ({orientation}) => orientation === 'vertical' ? 'horizontal' : 'vertical',
-		tabs: ({tabs}) => tabs.map((tab, i) => {
-			return {key: 'tab' + i, children: tab.title, icon: tab.icon};
-		})
+		tabOrientation: ({orientation}) => orientation === 'vertical' ? 'horizontal' : 'vertical'
 	},
 	render: ({afterTabs, beforeTabs, children, css, index, onSelect, tabOrientation, tabPosition, tabs, ...rest}) => {
 		return (
@@ -186,11 +59,10 @@ const TabbedPanelsBase = kind({
 						className={css.tabs}
 						onSelect={onSelect}
 						orientation={tabOrientation}
+						tabs={tabs}
 						tabPosition={tabPosition}
 						selected={index}
-					>
-						{tabs}
-					</TabGroup>
+					/>
 				</Cell>
 				<Cell
 					className={css.panels}
@@ -214,4 +86,7 @@ const TabbedPanels = Slottable(
 );
 
 export default TabbedPanels;
-export {TabbedPanels, TabbedPanelsBase};
+export {
+	TabbedPanels,
+	TabbedPanelsBase
+};
