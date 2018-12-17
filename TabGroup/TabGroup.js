@@ -35,7 +35,7 @@ const TabBase = kind({
 	},
 
 	computed: {
-		tabLabel: ({children, className, css, icon, orientation, selected, ...rest}) => {
+		tabLabel: ({children, className, css, icon, labelPosition, orientation, selected, ...rest}) => {
 			let inline;
 			if (orientation === 'horizontal') {
 				inline = true;
