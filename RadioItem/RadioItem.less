@@ -1,23 +1,14 @@
-// SwitchItem.less
+// RadioItem.less
 //
 @import "../styles/mixins.less";
 @import "../styles/variables.less";
 @import "../styles/skin.less";
 
 // Public
-.switchItem {
+.radioItem {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-
-	.label {
-		vertical-align: middle;
-	}
-
-
-	.switchIcon {
-		margin-left: 10px;
-	}
 
 	.applySkins({
 		border-bottom: @agate-divider-border-width solid @agate-divider-border-color;
@@ -28,26 +19,18 @@
 			flex: 1;
 		}
 
-		.label {
-			.margin-start-end(0, @agate-component-spacing);
-			font-weight: 500;	// Covert to var
-
-			color: @agate-switch-label-color;
-
-			.disabled({
-				color: inherit;
-			});
-
-		}
 		.focus({
 			color: @agate-switch-focus-color;
 			.text {
 				color: @agate-switch-focus-color;
 			}
+		});
 
-			.label {
-				color: @agate-switch-focus-color;
+		&.selected {
+
+			.radioIcon {
+				color: @agate-accent;
 			}
-		})
+		}
 	});
 }
