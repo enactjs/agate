@@ -20,6 +20,8 @@
 
 // Component color assignments
 @agate-bg-color: @agate-darker-gray;
+@agate-bg-image: url(../assets/noise-white.png), radial-gradient(~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.2)", transparent 60%), linear-gradient(to bottom, #14191d 43%, #040213 90%);
+// @agate-bg-image: url(../assets/noise-white.png), linear-gradient(to bottom, #121b22 43%, #040213 80%);
 @agate-text-color: @agate-accent;
 @agate-title-text-color: @agate-white;
 
@@ -69,6 +71,7 @@
 // FullscreenPopup
 // ---------------------------------------
 @agate-fullscreenpopup-bg-color: @agate-popup-bg-color;
+@agate-fullscreenpopup-bg-image: @agate-bg-image;
 
 // Icon
 // ---------------------------------------
@@ -104,8 +107,8 @@
 // ---------------------------------------
 @agate-panels-tab-separator-border-color: transparent;
 @agate-panels-tab-color:              @agate-text-color;
-@agate-panels-tab-bg-color:           @agate-darker-gray;
-@agate-panels-tab-bg-image:           none;
+@agate-panels-tab-bg-color:           fade(white, 5%);
+@agate-panels-tab-bg-image:           linear-gradient(to left, ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.5)" 0px, transparent 2px);
 @agate-panels-tab-selected-color:     @agate-foreground-active;
 @agate-panels-tab-selected-bg-color:  transparent;
 @agate-panels-tab-selected-bg-image:  transparent;
