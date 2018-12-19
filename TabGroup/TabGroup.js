@@ -2,8 +2,8 @@ import {cap} from '@enact/core/util';
 import {Cell, Layout} from '@enact/ui/Layout';
 import Group from '@enact/ui/Group';
 import kind from '@enact/core/kind';
-import Button from '@enact/agate/Button';
-import LabeledIcon from '@enact/agate/LabeledIcon';
+import IconButton from '../IconButton';
+import LabeledIcon from '../LabeledIcon';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Slottable from '@enact/ui/Slottable';
@@ -44,11 +44,12 @@ const TabBase = kind({
 			if (className.includes('copper')) {
 				return (
 					<div className={css.labeledIcon}>
-						<Button
-							icon={icon}
+						<IconButton
 							inline={inline}
 							selected={selected === rest['data-index']}
-						/>
+						>
+							{icon}
+						</IconButton>
 						{children}
 					</div>
 				);

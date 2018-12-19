@@ -6,12 +6,12 @@
 
 .button {
 	.applySkins({
-		height: @agate-button-height;
-		min-width: @agate-button-height;
-		padding: 0 @agate-button-h-padding;
+		height: @agate-iconbutton-height;
+		min-width: @agate-iconbutton-height;
+		padding: 0 @agate-iconbutton-h-padding;
 		margin: 0 @agate-component-spacing;
 		box-sizing: border-box;
-		font-size: @agate-button-font-size;
+		font-size: @agate-iconbutton-font-size;
 		vertical-align: middle;
 
 		&.minWidth {
@@ -23,18 +23,18 @@
 		}
 
 		.bg {
-			background-color: @agate-button-bg-color;
-			border: @agate-button-border-width solid @agate-button-border-color;
-			border-radius: @agate-button-border-radius;
-			color: @agate-button-color;
-			background-image: @agate-button-bg-image;
-			box-shadow: @agate-button-shadow;
-			transform: @agate-button-bg-transform;
+			background-color: @agate-iconbutton-bg-color;
+			border: @agate-iconbutton-border-width solid @agate-iconbutton-border-color;
+			border-radius: @agate-iconbutton-border-radius;
+			color: @agate-iconbutton-color;
+			background-image: @agate-iconbutton-bg-image;
+			box-shadow: @agate-iconbutton-shadow;
+			transform: @agate-iconbutton-bg-transform;
 		}
 
 		.client {
-			padding: @agate-button-border-width;	// We match the amount removed by the line-height above, so the text doesn't overlap the border
-			color: @agate-button-color;
+			padding: @agate-iconbutton-border-width;	// We match the amount removed by the line-height above, so the text doesn't overlap the border
+			color: @agate-iconbutton-color;
 
 			.icon {
 				-webkit-margin-start: 0;
@@ -66,11 +66,11 @@
 		}
 
 		&.small {
-			height: @agate-button-small-height;
-			min-width: @agate-button-small-height;
-			font-size: @agate-button-small-font-size;
-			line-height: (@agate-button-small-height - (2 * @agate-button-border-width));
-			padding: 0 @agate-button-small-h-padding;
+			height: @agate-iconbutton-small-height;
+			min-width: @agate-iconbutton-small-height;
+			font-size: @agate-iconbutton-small-font-size;
+			line-height: (@agate-iconbutton-small-height - (2 * @agate-iconbutton-border-width));
+			padding: 0 @agate-iconbutton-small-h-padding;
 
 			&.minWidth {
 				padding: 0;
@@ -85,7 +85,21 @@
 
 		&.grid {
 			.bg {
-				border-radius: @agate-button-grid-border-radius;
+				border-radius: @agate-iconbutton-grid-border-radius;
+			}
+		}
+
+		&.smallest {
+			height: 45px;
+			min-width: 0;
+			width: 45px;
+
+			.icon {
+				font-size: 48px;
+				height: 24px;
+				line-height: 24px;
+				width: 24px;
+				margin: 0;
 			}
 		}
 
@@ -104,14 +118,14 @@
 
 		&.highlighted {
 			.bg {
-				background-color: @agate-button-highlighted-bg-color;
-				background-image: @agate-button-highlighted-bg-image;
-				opacity: @agate-button-highlighted-opacity;
+				background-color: @agate-iconbutton-highlighted-bg-color;
+				background-image: @agate-iconbutton-highlighted-bg-image;
+				opacity: @agate-iconbutton-highlighted-opacity;
 			}
 
 			&,
 			.client {
-				color: @agate-button-focus-color;
+				color: @agate-iconbutton-focus-color;
 			}
 		}
 
@@ -136,13 +150,13 @@
 			background-image: none;
 
 			.bg {
-				background-color: @agate-button-focus-bg-color;
-				background-image: @agate-button-focus-bg-image;
+				background-color: @agate-iconbutton-focus-bg-color;
+				background-image: @agate-iconbutton-focus-bg-image;
 			}
 
 			&,
 			.client {
-				color: @agate-button-focus-color;
+				color: @agate-iconbutton-focus-color;
 			}
 
 			&.highlighted {

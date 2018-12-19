@@ -11,21 +11,40 @@
  */
 
 import kind from '@enact/core/kind';
-import {cap} from '@enact/core/util';
 import Spottable from '@enact/spotlight/Spottable';
 import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
+import React from 'react';
 
-import {IconBase} from '../Icon';
-// import {MarqueeDecorator} from '../Marquee';
+import AgateIcon from '../Icon';
 import Skinnable from '../Skinnable';
 
 import componentCss from './IconButton.less';
 
 // Make a basic Icon in case we need it later. This cuts `Pure` out of icon for a small gain.
-const Icon = Skinnable(IconBase);
+const Icon = kind({
+	name: 'Icon',
+	propTypes: {
+		size: PropTypes.oneOf(['small', 'smallest'])
+	},
+	styles: {
+		css: componentCss,
+		className: 'icon'
+	},
+	computed: {
+		className: ({size, styler}) => styler.append(size),
+		small: ({size}) => size === 'small'
+	},
+	render: (props) => {
+		delete props.size;
+
+		return (
+			<AgateIcon {...props} />
+		);
+	}
+});
 
 /**
  * A button component.
@@ -78,6 +97,14 @@ const IconButtonBase = kind({
 		selected: PropTypes.bool,
 
 		/**
+		 * Size of the IconButon
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		size: PropTypes.oneOf(['small', 'smallest']),
+
+		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
 		 * other related buttons.
 		 *
@@ -97,16 +124,20 @@ const IconButtonBase = kind({
 	},
 
 	computed: {
-		className: ({highlighted, joinedPosition, selected, type, styler}) => styler.append(
+		className: ({highlighted, selected, size, type, styler}) => styler.append(
 			type,
+			size,
 			{highlighted, selected}
+		),
+		icon: ({children, css, size}) => (
+			<Icon size={size} className={css.icon}>{children}</Icon>
 		),
 		minWidth: ({children}) => (!children)
 	},
 
-	render: ({css, children, ...rest}) => {
+	render: ({css, ...rest}) => {
+		delete rest.children;
 		delete rest.highlighted;
-		delete rest.joinedPosition;
 		delete rest.selected;
 		delete rest.type;
 
@@ -114,7 +145,6 @@ const IconButtonBase = kind({
 			'data-webos-voice-intent': 'Select',
 			...rest,
 			css,
-			icon: children,
 			iconComponent: Icon,
 			minWidth: true
 		});
