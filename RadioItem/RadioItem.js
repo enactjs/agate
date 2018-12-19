@@ -58,15 +58,6 @@ const RadioItemBase = kind({
 		icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]),
 
 		/**
-		 * Customize the component used as the radio toggle.
-		 *
-		 * @type {Element|Function|String}
-		 * @default {@link agate/Switch.Switch}
-		 * @public
-		 */
-		radioIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]),
-
-		/**
 		 * If true the radio toggle will be selected.
 		 *
 		 * @type {Boolean}
@@ -77,7 +68,7 @@ const RadioItemBase = kind({
 	},
 
 	defaultProps: {
-		radioIcon: 'circle',
+		icon: 'circle',
 		selected: false
 	},
 
@@ -88,24 +79,20 @@ const RadioItemBase = kind({
 	},
 
 	computed: {
-		className: ({css, selected, styler}) => styler.append(selected && css.selected),
-		icon: ({css, icon}) => (icon ? <Icon small className={css.icon}>{icon}</Icon> : null)
+		className: ({css, selected, styler}) => styler.append(selected && css.selected)
 	},
 
-	render: ({children, css, icon, radioIcon, ...rest}) => {
+	render: ({children, css, icon, ...rest}) => {
 		delete rest.selected;
 
 		return (
 			<div {...rest} css={css}>
-				{icon}
+				<Icon small className={css.icon}>{icon}</Icon>
 				<div
 					className={css.text}
 				>
 					{children}
 				</div>
-				<Icon className={css.radioIcon}>
-					{radioIcon}
-				</Icon>
 			</div>
 		);
 	}

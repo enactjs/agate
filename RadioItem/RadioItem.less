@@ -1,7 +1,6 @@
 // RadioItem.less
 //
 @import "../styles/mixins.less";
-@import "../styles/variables.less";
 @import "../styles/skin.less";
 
 // Public
@@ -11,25 +10,40 @@
 	align-items: center;
 
 	.applySkins({
-		border-bottom: @agate-divider-border-width solid @agate-divider-border-color;
+		border-bottom: @agate-radioitem-separator-border-width solid @agate-radioitem-separator-border-color;
 		.agate-item-sizing();
 
+		.icon {
+			border-color: @agate-radioitem-icon-border-color;
+			border-style: solid;
+			border-width: @agate-radioitem-icon-border-width;
+			background-color: @agate-radioitem-icon-bg-color;
+			border-radius: @agate-radioitem-icon-border-radius;
+			color: transparent;
+		}
+
 		.text {
-			color: @agate-item-color;
+			color: @agate-radioitem-color;
 			flex: 1;
 		}
 
 		.focus({
-			color: @agate-switch-focus-color;
+			color: @agate-radioitem-focus-color;
+
+			.icon {
+				color: @agate-radioitem-icon-focus-color;
+				background-color: @agate-radioitem-icon-focus-bg-color;
+			}
+
 			.text {
-				color: @agate-switch-focus-color;
+				color: @agate-radioitem-focus-color;
 			}
 		});
 
 		&.selected {
-
-			.radioIcon {
-				color: @agate-radioitem-radio-icon-selected-color;
+			.icon {
+				color: @agate-radioitem-icon-selected-color;
+				background-color: @agate-radioitem-icon-selected-bg-color;
 			}
 		}
 	});
