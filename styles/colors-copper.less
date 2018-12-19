@@ -3,7 +3,10 @@
 
 
 // Named Colors
-@agate-accent: var(--agate-accent-color, #a47d66);
+@agate-accent: var(--agate-accent-color, #a47d66); // hsl(22, 25%, 52%)
+@agate-accent-h: var(--agate-accent-h, 22);
+@agate-accent-s: var(--agate-accent-s, 25%);
+@agate-accent-l: var(--agate-accent-l, 52%);
 @agate-highlight: var(--agate-highlight-color, #fff);
 @agate-background: fade(black, 30%);
 @agate-foreground: lighten(black, 30%);
@@ -26,7 +29,10 @@
 @agate-title-text-color: @agate-white;
 
 // Local copper variables
-@copper-accent-hsl: hsl(6,25%,52%);
+@copper-accent2-h: ~"calc(" @agate-accent-h ~" + 0)"; // hsl(22, 25%, 52%) -> hsl(22, 27%, 43%)
+@copper-accent2-s: ~"calc(" @agate-accent-s ~" + 2%)";
+@copper-accent2-l: ~"calc(" @agate-accent-l ~" - 9%)";
+@copper-accent2-color: ~"hsl(" @copper-accent2-h, @copper-accent2-s, @copper-accent2-l ~")";
 @copper-darker-gray: hsl(67,2%,22%);
 
 // Disabled Opacity
@@ -54,6 +60,8 @@
 @agate-button-focus-bg-image: none;
 @agate-button-highlighted-bg-color: @agate-accent;
 @agate-button-highlighted-bg-image: none;
+@agate-button-selected-bg-color: @agate-accent;
+@agate-button-selected-color: @agate-foreground-active;
 
 // ColorPicker
 // ---------------------------------------
@@ -68,9 +76,9 @@
 // Drawer
 // ---------------------------------------
 @agate-drawer-bg-color: @agate-popup-bg-color;
-@agate-drawer-bg-image: @agate-popup-bg-image;
+@agate-drawer-bg-image: url(../assets/noise-white.png), linear-gradient(to bottom, #14191d 43%, #040213 90%);
 @agate-drawer-border-color: @agate-popup-border-color;
-@agate-drawer-shadow: @agate-popup-shadow;
+@agate-drawer-shadow: 0 0 6px 9px fade(black, 50%);
 
 // FullscreenPopup
 // ---------------------------------------
@@ -86,7 +94,7 @@
 @agate-iconbutton-color:          @agate-accent;
 @agate-iconbutton-bg-color:       @agate-dark-gray;
 @agate-iconbutton-bg-image:       none;
-@agate-iconbutton-border-color:   none;
+@agate-iconbutton-border-color:   transparent;
 @agate-iconbutton-shadow:         none;
 @agate-iconbutton-focus-color:    @agate-darker-gray;
 @agate-iconbutton-focus-bg-color: @agate-background-focus;
@@ -193,7 +201,7 @@
 @agate-slider-focus-bg-image: @agate-slider-bg-image;
 @agate-slider-knob-bg-color:  @agate-accent; //lighten(@agate-bg-color, 10%);
 @agate-slider-knob-bg-image:  linear-gradient(to bottom, transparent, fade(black, 10%));
-@agate-slider-knob-focus-bg-color: lighten(@copper-accent-hsl, 2%);
+@agate-slider-knob-focus-bg-color: @copper-accent2-color;
 @agate-slider-knob-focus-bg-image: @agate-slider-knob-bg-image;
 @agate-slider-knob-shadow:    0 1px 3px 1px fade(black, 30%);
 @agate-slider-knob-focus-shadow: 0 3px 9px 3px fade(black, 30%);
