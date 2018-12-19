@@ -2,47 +2,66 @@
  * Agate styled button components and behaviors.
  *
  * @example
- * <Button small>Hello Enact!</Button>
+ * <IconButton small>home</IconButton>
  *
- * @module agate/Button
- * @exports Button
- * @exports ButtonBase
- * @exports ButtonDecorator
+ * @module agate/IconButton
+ * @exports IconButton
+ * @exports IconButtonBase
+ * @exports IconButtonDecorator
  */
 
 import kind from '@enact/core/kind';
-import {cap} from '@enact/core/util';
 import Spottable from '@enact/spotlight/Spottable';
 import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
+import React from 'react';
 
-import {IconBase} from '../Icon';
-// import {MarqueeDecorator} from '../Marquee';
+import AgateIcon from '../Icon';
 import Skinnable from '../Skinnable';
 
-import componentCss from './Button.less';
+import componentCss from './IconButton.less';
 
 // Make a basic Icon in case we need it later. This cuts `Pure` out of icon for a small gain.
-const Icon = Skinnable(IconBase);
+const Icon = kind({
+	name: 'Icon',
+	propTypes: {
+		size: PropTypes.oneOf(['small', 'smallest'])
+	},
+	styles: {
+		css: componentCss,
+		className: 'icon'
+	},
+	computed: {
+		className: ({size, styler}) => styler.append(size),
+		small: ({size}) => size === 'small'
+	},
+	render: (props) => {
+		delete props.size;
+
+		return (
+			<AgateIcon {...props} />
+		);
+	}
+});
 
 /**
  * A button component.
  *
  * This component is most often not used directly but may be composed within another component as it
- * is within [Button]{@link agate/Button.Button}.
+ * is within [IconButton]{@link agate/IconButton.IconButton}.
  *
- * @class ButtonBase
- * @memberof agate/Button
- * @extends ui/Button.ButtonBase
+ * @class IconButtonBase
+ * @memberof agate/IconButton
+ * @extends ui/IconButton.IconButtonBase
  * @ui
  * @public
  */
-const ButtonBase = kind({
-	name: 'Button',
+const IconButtonBase = kind({
+	name: 'IconButton',
 
-	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
+	propTypes: /** @lends agate/IconButton.IconButtonBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
@@ -69,17 +88,6 @@ const ButtonBase = kind({
 		highlighted: PropTypes.bool,
 
 		/**
-		 * To create a collection of buttons that appear as one entity: buttons that butt up against
-		 * each other. Specify where the button is in the arrangement: 'left', 'center', or 'right'.
-		 * This prop is not recommended for use on a lonely button with no other buttons nearby.
-		 * Not specifying this optional prop leaves the button behaving normally.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		joinedPosition: PropTypes.oneOf(['left', 'center', 'right']),
-
-		/**
 		 * Provides a way to call special interface attention to this button. It will be "featured"
 		 * in some way by the theme's visual rules.
 		 *
@@ -87,6 +95,14 @@ const ButtonBase = kind({
 		 * @public
 		 */
 		selected: PropTypes.bool,
+
+		/**
+		 * Size of the IconButon
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		size: PropTypes.oneOf(['small', 'smallest']),
 
 		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
@@ -108,17 +124,20 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({highlighted, joinedPosition, selected, type, styler}) => styler.append(
+		className: ({highlighted, selected, size, type, styler}) => styler.append(
 			type,
-			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
+			size,
 			{highlighted, selected}
+		),
+		icon: ({children, css, size}) => (
+			<Icon size={size} className={css.icon}>{children}</Icon>
 		),
 		minWidth: ({children}) => (!children)
 	},
 
 	render: ({css, ...rest}) => {
+		delete rest.children;
 		delete rest.highlighted;
-		delete rest.joinedPosition;
 		delete rest.selected;
 		delete rest.type;
 
@@ -126,19 +145,20 @@ const ButtonBase = kind({
 			'data-webos-voice-intent': 'Select',
 			...rest,
 			css,
-			iconComponent: Icon
+			iconComponent: Icon,
+			minWidth: true
 		});
 	}
 });
 
 /**
- * Enforces a minimum width on the Button.
+ * Enforces a minimum width on the IconButton.
  *
  * *NOTE*: This property's default is `true` and must be explicitly set to `false` to allow
  * the button to shrink to fit its contents.
  *
  * @name minWidth
- * @memberof agate/Button.ButtonBase.prototype
+ * @memberof agate/IconButton.IconButtonBase.prototype
  * @type {Boolean}
  * @default true
  * @public
@@ -146,20 +166,19 @@ const ButtonBase = kind({
 
 
 /**
- * Applies Agate specific behaviors to [Button]{@link agate/Button.ButtonBase} components.
+ * Applies Agate specific behaviors to [IconButton]{@link agate/IconButton.IconButtonBase} components.
  *
  * @hoc
- * @memberof agate/Button
+ * @memberof agate/IconButton
  * @mixes i18n/Uppercase.Uppercase
  * @mixes agate/Marquee.MarqueeDecorator
- * @mixes ui/Button.ButtonDecorator
+ * @mixes ui/IconButton.IconButtonDecorator
  * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
-const ButtonDecorator = compose(
+const IconButtonDecorator = compose(
 	Pure,
-	// MarqueeDecorator({className: componentCss.marquee}),
 	UiButtonDecorator,
 	Spottable,
 	Skinnable
@@ -170,26 +189,23 @@ const ButtonDecorator = compose(
  *
  * Usage:
  * ```
- * <Button
- * 	backgroundOpacity="translucent"
- * 	color="blue"
- * >
- * 	Press me!
- * </Button>
+ * <IconButton>
+ * 	plus
+ * </IconButton>
  * ```
  *
- * @class Button
- * @memberof agate/Button
- * @extends agate/Button.ButtonBase
- * @mixes agate/Button.ButtonDecorator
+ * @class IconButton
+ * @memberof agate/IconButton
+ * @extends agate/IconButton.IconButtonBase
+ * @mixes agate/IconButton.IconButtonDecorator
  * @ui
  * @public
  */
-const Button = ButtonDecorator(ButtonBase);
+const IconButton = IconButtonDecorator(IconButtonBase);
 
-export default Button;
+export default IconButton;
 export {
-	Button,
-	ButtonBase,
-	ButtonDecorator
+	IconButton,
+	IconButtonBase,
+	IconButtonDecorator
 };

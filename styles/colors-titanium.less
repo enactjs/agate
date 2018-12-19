@@ -20,6 +20,7 @@
 
 // Component color assignments
 @agate-bg-color: #ddd;
+@agate-bg-image: none;
 @agate-text-color: @agate-foreground;
 @agate-title-text-color: white;
 
@@ -48,6 +49,8 @@
 @agate-button-focus-bg-image: none;
 @agate-button-highlighted-bg-color: @agate-background-focus;
 @agate-button-highlighted-bg-image: none;
+@agate-button-selected-bg-color: @agate-accent;
+@agate-button-selected-color: @agate-foreground-active;
 
 // ColorPicker
 // ---------------------------------------
@@ -69,10 +72,24 @@
 // FullscreenPopup
 // ---------------------------------------
 @agate-fullscreenpopup-bg-color: @agate-popup-bg-color;
+@agate-fullscreenpopup-bg-image: @agate-bg-image;
 
 // Icon
 // ---------------------------------------
 @agate-icon-color:       @agate-text-color;
+
+// IconButton
+// ---------------------------------------
+@agate-iconbutton-color:          @agate-foreground;
+@agate-iconbutton-bg-color:       transparent;
+@agate-iconbutton-bg-image:       none;
+@agate-iconbutton-border-color:   @agate-accent;
+@agate-iconbutton-shadow:         0 1px 3px @agate-accent;
+@agate-iconbutton-focus-color:    @agate-foreground-focus;
+@agate-iconbutton-focus-bg-color: @agate-background-focus;
+@agate-iconbutton-focus-bg-image: none;
+@agate-iconbutton-highlighted-bg-color: @agate-background-focus;
+@agate-iconbutton-highlighted-bg-image: none;
 
 // Input
 // ---------------------------------------
@@ -116,6 +133,7 @@
 
 // Picker
 // ---------------------------------------
+@agate-picker-active-color: inherit;
 @agate-picker-active-bg-color: @agate-accent;
 @agate-picker-active-bg-image: none;
 @agate-picker-item-top-bg-color: none;
@@ -180,6 +198,7 @@
 
 // IncrementSlider
 // ---------------------------------------
+@agate-incrementslider-button-color: inherit;
 @agate-incrementslider-horizontal-button-decrement-border-color: transparent;
 @agate-incrementslider-horizontal-button-decrement-bg-color: @agate-slider-bg-color;
 @agate-incrementslider-horizontal-button-decrement-bg-image: @agate-slider-bg-image;

@@ -3,12 +3,13 @@ import UiLabeledIcon from '@enact/ui/LabeledIcon';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import {ButtonBase, ButtonDecorator} from '../Button';
+import {ButtonDecorator} from '../Button';
+import {IconButtonBase} from '../IconButton';
 import Skinnable from '../Skinnable';
 
 import componentCss from './LabeledIconButton.less';
 
-const Button = Skinnable(ButtonBase);
+const Button = Skinnable(IconButtonBase);
 
 /**
  * An icon button component with a label.
@@ -71,7 +72,7 @@ const LabeledIconButtonBase = kind({
 		return UiLabeledIcon.inline({
 			...rest,
 			icon: (
-				<Button pressed={pressed} selected={selected} icon={icon} />
+				<Button pressed={pressed} selected={selected}>{icon}</Button>
 			),
 			css
 		});

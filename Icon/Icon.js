@@ -49,7 +49,7 @@ const IconBase = kind({
 		 * @type {String|Object}
 		 * @public
 		 */
-		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
+		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 	},
 
 	render: (props) => UiIcon.inline({

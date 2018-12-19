@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from '../Button';
+import IconButton from '../IconButton';
 import Skinnable from '../Skinnable';
 
 import css from './ToggleButton.less';
@@ -54,6 +55,14 @@ const ToggleButtonBase = kind({
 		 * @public
 		 */
 		disabled: PropTypes.bool,
+
+		/**
+		 * Add an optional icon to the divider. This accepts any value that [Icon]{@agate/Icon}
+		 * supports.
+		 *
+		 * @type {String}
+		 */
+		icon: PropTypes.string,
 
 		/**
 		 * Determines whether the button is currently in an "on" or "off" state.
@@ -142,16 +151,19 @@ const ToggleButtonBase = kind({
 				c = toggleOffLabel;
 			}
 			return c;
-		}
+		},
+		iconToggleButton: ({children, toggleOnLabel, toggleOffLabel, icon}) => (!children && !toggleOnLabel && !toggleOffLabel && icon)
 	},
 
-	render: ({selected, ...rest}) => {
+	render: ({children, iconToggleButton, icon, selected, ...rest}) => {
 		delete rest.underline;
 		delete rest.toggleOffLabel;
 		delete rest.toggleOnLabel;
 
-		return (
-			<Button {...rest} css={css} aria-pressed={selected} selected={selected} />
+		return iconToggleButton ? (
+			<IconButton {...rest}  aria-pressed={selected} css={css} selected={selected}>{icon}</IconButton>
+		) : (
+			<Button {...rest} aria-pressed={selected} css={css} icon={icon} selected={selected}>{children}</Button>
 		);
 	}
 });

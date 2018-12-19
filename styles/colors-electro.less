@@ -23,6 +23,7 @@
 
 // Component color assignments
 @agate-bg-color: #1c0d3f;
+@agate-bg-image: none;
 @agate-text-color: white;
 @agate-title-text-color: white;
 
@@ -60,6 +61,8 @@
 @agate-button-focus-bg-image: @electro-overlay-light-gradient;
 @agate-button-highlighted-bg-color: @agate-highlight;
 @agate-button-highlighted-bg-image: @electro-highlight-gradient;
+@agate-button-selected-bg-color: @electro-accent2-color;
+@agate-button-selected-color: @agate-foreground-active;
 
 // ColorPicker
 // ---------------------------------------
@@ -81,10 +84,24 @@
 // FullscreenPopup
 // ---------------------------------------
 @agate-fullscreenpopup-bg-color: @agate-bg-color;
+@agate-fullscreenpopup-bg-image: @agate-bg-image;
 
 // Icon
 // ---------------------------------------
 @agate-icon-color:       @agate-text-color;
+
+// IconButton
+// ---------------------------------------
+@agate-iconbutton-color:          white;
+@agate-iconbutton-bg-color:       @agate-accent;
+@agate-iconbutton-bg-image:       @electro-overlay-light-gradient;
+@agate-iconbutton-border-color:   transparent;
+@agate-iconbutton-shadow:         none;
+@agate-iconbutton-focus-color:    @agate-spotlight-color;
+@agate-iconbutton-focus-bg-color: @agate-spotlight-bg-color;
+@agate-iconbutton-focus-bg-image: @electro-overlay-light-gradient;
+@agate-iconbutton-highlighted-bg-color: @agate-highlight;
+@agate-iconbutton-highlighted-bg-image: @electro-highlight-gradient;
 
 // Input
 // ---------------------------------------
@@ -128,6 +145,7 @@
 
 // Picker
 // ---------------------------------------
+@agate-picker-active-color: inherit;
 @agate-picker-active-bg-color: @agate-accent;
 @agate-picker-active-bg-image: @agate-gradient;
 @agate-picker-item-top-bg-color: @agate-foreground;
@@ -193,6 +211,7 @@
 
 // IncrementSlider
 // ---------------------------------------
+@agate-incrementslider-button-color: inherit;
 @agate-incrementslider-horizontal-button-decrement-border-color: @agate-button-border-color;
 @agate-incrementslider-horizontal-button-decrement-bg-color: @agate-slider-knob-bg-color;
 @agate-incrementslider-horizontal-button-decrement-bg-image: @agate-slider-knob-bg-image;
