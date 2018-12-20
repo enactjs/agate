@@ -233,10 +233,13 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 
 			if (configHoc.arrangeableProp) rest[configHoc.arrangeableProp] = arrangeable;
 			if (configHoc.arrangingProp) rest[configHoc.arrangingProp] = this.state.dragging;
-			// Always apply arrangement, so Rearrangeable can receive it.
-			rest[configHoc.arrangementProp || fallbackArrangementProp] = this.state.arrangement;
 
 			if (arrangeable) {
+				// Respect the incoming prop from the parent, unless we're in arranging mode.
+				// During arranging mode, we're handling our own arrangement, then will emit the
+				// finalized arrangement back to the parent when we're done.
+				rest[configHoc.arrangementProp || fallbackArrangementProp] = this.state.arrangement;
+
 				// Add all of the necessary events, but only if we're in edit mode
 				rest.onDragStart = this.handleDragStart;
 				rest.onDragEnter = this.handleDragEnter;
