@@ -2,7 +2,7 @@ import {cap} from '@enact/core/util';
 import {Cell, Layout} from '@enact/ui/Layout';
 import Group from '@enact/ui/Group';
 import kind from '@enact/core/kind';
-import IconButton from '../IconButton';
+import ToggleButton from '../ToggleButton';
 import LabeledIcon from '../LabeledIcon';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -44,12 +44,11 @@ const TabBase = kind({
 			if (className.includes('copper')) {
 				return (
 					<div className={css.labeledIcon}>
-						<IconButton
+						<ToggleButton
+							icon={icon}
 							inline={inline}
 							selected={selected === rest['data-index']}
-						>
-							{icon}
-						</IconButton>
+						/>
 						{children}
 					</div>
 				);

@@ -13,7 +13,7 @@
 @agate-background-active: fade(black, 15%);
 @agate-foreground-active: white;
 @agate-background-focus: @agate-highlight;
-@agate-foreground-focus: @agate-darker-gray;
+@agate-foreground-focus: @agate-accent;
 @agate-gradient: linear-gradient(to bottom, white, @agate-accent);
 @agate-darker-gray: #373739;
 @agate-dark-gray:   #424242;
@@ -25,8 +25,8 @@
 @agate-bg-color: @agate-light-gray;
 @agate-bg-image: url(../assets/noise-black.png), radial-gradient(~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.2)", transparent 60%), linear-gradient(to bottom, @agate-bg-color 43%, @agate-white 90%);
 // @agate-bg-image: url(../assets/noise-white.png), linear-gradient(to bottom, #121b22 43%, #040213 80%);
-@agate-text-color: @agate-accent;
-@agate-title-text-color: @agate-white;
+@agate-text-color: @agate-darker-gray;
+@agate-title-text-color: @agate-dark-gray;
 
 // Local copper variables
 @copper-accent2-h: ~"calc(" @agate-accent-h ~" + 0)"; // hsl(22, 25%, 52%) -> hsl(22, 27%, 43%)
@@ -45,17 +45,17 @@
 @agate-spotlight-color:                @agate-foreground-focus;
 @agate-spotlight-bg-color:             @agate-background-focus;
 @agate-spotlight-border-color:         transparent;
-@agate-spotlight-disabled-text-color:  fade(@agate-spotlight-color, 40%); // ~"hsla(var(--agate-highlight-h, 0), var(--agate-highlight-s, 0), var(--agate-highlight-l, 0), 0.2)"; // @agate-spotlight-color; // fade(@agate-spotlight-color, 40%);
+@agate-spotlight-disabled-text-color:  fade(black, 40%);
 @agate-spotlight-focus-bg-image: none;
 
 // Button
 // ---------------------------------------
-@agate-button-color:          @agate-accent;
-@agate-button-bg-color:       @agate-dark-gray;
+@agate-button-color:          @agate-white;
+@agate-button-bg-color:       @agate-accent;
 @agate-button-bg-image:       none;
 @agate-button-border-color:   none;
 @agate-button-shadow:         none;
-@agate-button-focus-color:    @agate-darker-gray;
+@agate-button-focus-color:    @agate-foreground-focus;
 @agate-button-focus-bg-color: @agate-background-focus;
 @agate-button-focus-bg-image: none;
 @agate-button-highlighted-bg-color: @agate-accent;
@@ -70,7 +70,7 @@
 
 // Divider
 // ---------------------------------------
-@agate-divider-color:        @agate-highlight;
+@agate-divider-color:        @agate-darker-gray;
 @agate-divider-border-color: @agate-accent;
 
 // Drawer
@@ -91,16 +91,18 @@
 
 // IconButton
 // ---------------------------------------
-@agate-iconbutton-color:          @agate-accent;
-@agate-iconbutton-bg-color:       @agate-dark-gray;
-@agate-iconbutton-bg-image:       none;
-@agate-iconbutton-border-color:   transparent;
-@agate-iconbutton-shadow:         none;
-@agate-iconbutton-focus-color:    @agate-darker-gray;
-@agate-iconbutton-focus-bg-color: @agate-background-focus;
-@agate-iconbutton-focus-bg-image: none;
-@agate-iconbutton-highlighted-bg-color: @agate-accent;
-@agate-iconbutton-highlighted-bg-image: none;
+@agate-iconbutton-color: @agate-button-color;
+@agate-iconbutton-bg-color: @agate-button-bg-color;
+@agate-iconbutton-bg-image: @agate-button-bg-image;
+@agate-iconbutton-border-color: @agate-button-border-color;
+@agate-iconbutton-shadow: @agate-button-shadow;
+@agate-iconbutton-focus-color: @agate-button-focus-color;
+@agate-iconbutton-focus-bg-color: @agate-button-focus-bg-color;
+@agate-iconbutton-focus-bg-image: @agate-button-focus-bg-image;
+@agate-iconbutton-highlighted-bg-color: @agate-button-highlighted-bg-color;
+@agate-iconbutton-highlighted-bg-image: @agate-button-highlighted-bg-image;
+@agate-iconbutton-selected-bg-color: @agate-button-selected-bg-color;
+@agate-iconbutton-selected-color: @agate-button-selected-color;
 
 // Input
 // ---------------------------------------
@@ -272,3 +274,7 @@
 @agate-togglebutton-indicator-disabled-on-bg-color: transparent;
 @agate-togglebutton-indicator-disabled-off-border-color: transparent;
 @agate-togglebutton-indicator-disabled-on-border-color: transparent;
+@agate-togglebutton-color: @agate-text-color;
+@agate-togglebutton-bg-color: @agate-white;
+@agate-togglebutton-selected-color: @agate-white;
+@agate-togglebutton-selected-bg-color: @agate-accent;

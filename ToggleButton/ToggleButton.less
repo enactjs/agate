@@ -59,3 +59,25 @@
 		});
 	});
 }
+
+.button {
+	.applySkins({
+		.bg {
+			background-color: @agate-togglebutton-bg-color;
+		}
+
+		.client {
+			color: @agate-togglebutton-color;
+		}
+
+		&.selected {
+			.bg {
+				background-color: @agate-togglebutton-selected-bg-color;
+			}
+
+			.client {
+				color: @agate-togglebutton-selected-color;
+			}
+		}
+	});
+}
