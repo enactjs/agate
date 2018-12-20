@@ -18,6 +18,14 @@
 		@componentRules();
 	}
 
+	&:global(.copper-light) {
+		// Load the Copper agate rules into this scope
+		@import "./colors-copper-light.less";
+		@import "./variables-copper-light.less";
+
+		@componentRules();
+	}
+
 	&:global(.electro) {
 		// Load the Titanium agate rules into this scope
 		@import "./colors-electro.less";
