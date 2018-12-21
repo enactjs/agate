@@ -12,7 +12,7 @@ const defaultConfig = {
 	skins: {
 		carbon: 'carbon',
 		copper: 'copper',
-		'copper-light': 'copper-light',
+		'copper-day': 'copper-day',
 		electro: 'electro',
 		titanium: 'titanium'
 	}
