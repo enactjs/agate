@@ -58,6 +58,7 @@
 @agate-button-focus-color:    @agate-foreground-focus;
 @agate-button-focus-bg-color: @agate-background-focus;
 @agate-button-focus-bg-image: none;
+@agate-button-highlighted-color: @agate-white;
 @agate-button-highlighted-bg-color: @agate-accent;
 @agate-button-highlighted-bg-image: none;
 @agate-button-selected-bg-color: @agate-accent;
@@ -133,13 +134,13 @@
 // Panels
 // ---------------------------------------
 @agate-panels-tab-separator-border-color: transparent;
-@agate-panels-tab-color:              @agate-text-color;
+@agate-panels-tab-color:              @agate-accent;
 @agate-panels-tab-bg-color:           fade(white, 5%);
 @agate-panels-tab-bg-image:           linear-gradient(to left, ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.5)" 0px, transparent 2px);
-@agate-panels-tab-selected-color:     @agate-foreground-active;
+@agate-panels-tab-selected-color:     @agate-text-color;
 @agate-panels-tab-selected-bg-color:  transparent;
 @agate-panels-tab-selected-bg-image:  transparent;
-@agate-panels-tab-focus-color:        @agate-text-color;
+@agate-panels-tab-focus-color:        @agate-foreground-focus;
 @agate-panels-tab-focus-bg-color:     transparent;
 @agate-panels-tab-focus-bg-image:     transparent;
 

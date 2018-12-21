@@ -32,8 +32,6 @@
 				}
 
 				&[data-selected=true] {
-					color: @agate-panels-tab-selected-color;
-
 					&::before {
 						background-color: @agate-panels-tab-selected-bg-color;
 						background-image: @agate-panels-tab-selected-bg-image;
@@ -47,6 +45,10 @@
 				.labeledIcon {
 					margin: @agate-panels-tab-margin;
 					padding: @agate-panels-tab-padding;
+				}
+
+				.selectedLabeledIcon {
+					color: @agate-panels-tab-selected-color;
 				}
 
 				.focus({
