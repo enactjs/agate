@@ -150,7 +150,7 @@ const TabGroupBase = kind({
 						}}
 						orientation={orientation}
 						select="radio"
-						// selected={selected}
+						selected={selected}
 					/>
 				</Cell>
 				{afterTabs ? <Cell className={css.tabEnds} shrink>
