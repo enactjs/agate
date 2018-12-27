@@ -16,6 +16,7 @@ const TabbedPanelsBase = kind({
 	name: 'TabbedPanels',
 	propTypes: {
 		index: PropTypes.number,
+		selectedIndex: PropTypes.number,
 		tabPosition: PropTypes.string
 		// tabs: PropTypes.oneOfType([TabGroup])
 	},
@@ -49,7 +50,7 @@ const TabbedPanelsBase = kind({
 		className: ({css, orientation, styler, tabPosition}) => styler.append(tabPosition == 'after' ? css.reverse : '', orientation == 'vertical' ? css.column : ''),
 		tabOrientation: ({orientation}) => orientation === 'vertical' ? 'horizontal' : 'vertical'
 	},
-	render: ({afterTabs, beforeTabs, children, css, index, onSelect, tabOrientation, tabPosition, tabs, ...rest}) => {
+	render: ({afterTabs, beforeTabs, children, css, index, onSelect, selectedIndex, tabOrientation, tabPosition, tabs, ...rest}) => {
 		return (
 			<Layout {...rest}>
 				<Cell shrink>
@@ -61,6 +62,7 @@ const TabbedPanelsBase = kind({
 						orientation={tabOrientation}
 						tabs={tabs}
 						tabPosition={tabPosition}
+						selectedIndex={selectedIndex}
 						index={index}
 					/>
 				</Cell>

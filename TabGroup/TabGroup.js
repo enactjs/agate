@@ -22,7 +22,8 @@ const TabBase = kind({
 		index: PropTypes.number,
 		labelPosition: PropTypes.string,
 		onClick: PropTypes.func,
-		orientation: PropTypes.string
+		orientation: PropTypes.string,
+		selectedIndex: PropTypes.number
 	},
 
 	defaultProps: {
@@ -35,13 +36,13 @@ const TabBase = kind({
 	},
 
 	computed: {
-		tabLabel: ({children, className, css, icon, labelPosition, orientation, index, ...rest}) => {
+		tabLabel: ({children, className, css, icon, labelPosition, orientation, selectedIndex, ...rest}) => {
 			let inline, selected;
 			if (orientation === 'horizontal') {
 				inline = true;
 			}
 
-			if (index === rest['data-index']) {
+			if (selectedIndex === rest['data-index']) {
 				selected = true;
 			}
 
@@ -97,6 +98,7 @@ const TabGroupBase = kind({
 		css: PropTypes.object,
 		index: PropTypes.number,
 		orientation: PropTypes.string,
+		selectedIndex: PropTypes.number,
 		tabEndStyle: PropTypes.object,
 		tabGroupStyle: PropTypes.object
 	},
@@ -130,7 +132,7 @@ const TabGroupBase = kind({
 		})
 	},
 
-	render: ({afterTabs, beforeTabs, className, css, labelPosition, orientation, index, style, ...rest}) => {
+	render: ({afterTabs, beforeTabs, className, css, index, labelPosition, orientation, selectedIndex, style, ...rest}) => {
 		delete rest.tabPosition;
 		delete rest.tabs;
 
@@ -147,9 +149,10 @@ const TabGroupBase = kind({
 						childComponent={Tab}
 						component={Group}
 						itemProps={{
+							index,
 							labelPosition,
 							orientation,
-							index,
+							selectedIndex,
 							shrink: (orientation === 'vertical')
 						}}
 						orientation={orientation}
