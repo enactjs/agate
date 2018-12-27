@@ -74,6 +74,7 @@ const TabBase = kind({
 
 	render: ({onClick, orientation, style = {}, tabLabel, ...rest}) => {
 		delete rest.labelPosition;
+		delete rest.selectedIndex;
 
 		if (orientation === 'horizontal') {
 			style.textAlign = 'center';

@@ -63,7 +63,6 @@ const TabbedPanelsBase = kind({
 						tabs={tabs}
 						tabPosition={tabPosition}
 						selectedIndex={selectedIndex}
-						index={index}
 					/>
 				</Cell>
 				<Cell
