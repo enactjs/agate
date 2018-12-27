@@ -1,22 +1,16 @@
 // SwitchItem.less
 //
 @import "../styles/mixins.less";
-@import "../styles/variables.less";
 @import "../styles/skin.less";
 
-// Public
 .switchItem {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-
 	.label {
 		vertical-align: middle;
 	}
 
-
 	.switchIcon {
 		margin-left: 10px;
+		pointer-events: none;
 	}
 
 	.applySkins({
@@ -25,13 +19,11 @@
 
 		.text {
 			color: @agate-item-color;
-			flex: 1;
 		}
 
 		.label {
 			.margin-start-end(0, @agate-component-spacing);
 			font-weight: 500;	// Covert to var
-
 			color: @agate-switch-label-color;
 
 			.disabled({
@@ -41,6 +33,7 @@
 		}
 		.focus({
 			color: @agate-switch-focus-color;
+
 			.text {
 				color: @agate-switch-focus-color;
 			}

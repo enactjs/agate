@@ -14,7 +14,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from '../Icon';
 
-import ToggleIcon from '@enact/ui/ToggleIcon';
+import Toggleable from '@enact/ui/Toggleable';
+import {ToggleIconBase} from '@enact/ui/ToggleIcon';
 import Skinnable from '../Skinnable';
 
 import compose from 'ramda/src/compose';
@@ -66,20 +67,21 @@ const SwitchBase = kind({
 		delete rest.noAnimation;
 
 		return (
-			<ToggleIcon
+			<ToggleIconBase
 				{...rest}
 				css={css}
 				iconComponent={Icon}
 			>
 				{children}
-			</ToggleIcon>
+			</ToggleIconBase>
 		);
 	}
 });
 
 const SwitchDecorator = compose(
+	Toggleable({toggleProp: 'onClick'}),
 	Skinnable
-)
+);
 
 const Switch = SwitchDecorator(SwitchBase);
 

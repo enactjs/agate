@@ -7,18 +7,20 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import kind from '@enact/core/kind';
-import AgateSwitch from '../Switch';
-import Icon from '../Icon';
-import Skinnable from '../Skinnable';
-
-import Spottable from '@enact/spotlight/Spottable';
-import Toggleable from '@enact/ui/Toggleable';
-import Touchable from '@enact/ui/Touchable';
 import compose from 'ramda/src/compose';
 
+import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
+import {Row, Cell} from '@enact/ui/Layout';
+import Toggleable from '@enact/ui/Toggleable';
+
+import Icon from '../Icon';
+import Skinnable from '../Skinnable';
+import {SwitchBase} from '../Switch';
+
 import componentCss from './SwitchItem.less';
+
+const Switch = Skinnable(SwitchBase);
 
 /**
  * Renders an `Item` with a radio-dot component. Useful to show a selected state on an Item.
@@ -29,8 +31,6 @@ import componentCss from './SwitchItem.less';
  * @ui
  * @public
  */
-
-
 const SwitchItemBase = kind({
 	name: 'SwitchItemBase',
 
@@ -100,32 +100,29 @@ const SwitchItemBase = kind({
 	},
 
 	computed: {
-		icon: ({css, icon}) => (icon ? <Icon small className={css.icon}>{icon}</Icon> : null)
+		icon: ({css, icon}) => (icon ? <Cell shrink component={Icon} small className={css.icon}>{icon}</Cell> : null)
 	},
 
 	render: ({children, css, icon, offText, onText, selected, ...rest}) => {
 
 		return (
-			<div {...rest} css={css}>
+			<Row align="center" {...rest}>
 				{icon}
-				<div
-					className={css.text}
-				>
+				<Cell className={css.text}>
 					{children}
-				</div>
-				<div className={css.label}>
+				</Cell>
+				<Cell shrink className={css.label}>
 					{selected ? onText : offText}
-				</div>
-				<AgateSwitch selected={selected} className={css.switchIcon} />
-			</div>
+				</Cell>
+				<Cell shrink component={Switch} selected={selected} className={css.switchIcon} />
+			</Row>
 		);
 	}
 });
 
-
 const SwitchItemDecorator = compose(
-	Toggleable({toggleProp: 'onTap'}),
-	Touchable,
+	Toggleable({toggleProp: 'onClick'}),
+	// Touchable,
 	Spottable,
 	Skinnable
 );
@@ -134,5 +131,7 @@ const SwitchItem = SwitchItemDecorator(SwitchItemBase);
 
 export default SwitchItem;
 export {
-	SwitchItem
+	SwitchItem,
+	SwitchItemBase,
+	SwitchItemDecorator
 };
