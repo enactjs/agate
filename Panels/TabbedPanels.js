@@ -61,7 +61,7 @@ const TabbedPanelsBase = kind({
 						orientation={tabOrientation}
 						tabs={tabs}
 						tabPosition={tabPosition}
-						selected={index}
+						selectedIndex={index}
 					/>
 				</Cell>
 				<Cell

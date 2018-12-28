@@ -31,22 +31,13 @@
 					transform: @agate-panels-tab-bg-transform;
 				}
 
-				&[data-selected=true] {
-					color: @agate-panels-tab-selected-color;
-
-					&::before {
-						background-color: @agate-panels-tab-selected-bg-color;
-						background-image: @agate-panels-tab-selected-bg-image;
-					}
+				.labeledIcon {
+					margin: @agate-panels-tab-margin;
+					padding: @agate-panels-tab-padding;
 				}
 
 				&:first-child {
 					border-left-width: 0;
-				}
-
-				.labeledIcon {
-					margin: @agate-panels-tab-margin;
-					padding: @agate-panels-tab-padding;
 				}
 
 				.focus({
@@ -58,16 +49,27 @@
 						background-color: @agate-panels-tab-focus-bg-color;
 						background-image: @agate-panels-tab-focus-bg-image;
 					}
+				});
 
-					&[data-selected=true] {
+				&.selected {
+					&::before {
+						background-color: @agate-panels-tab-selected-bg-color;
+						background-image: @agate-panels-tab-selected-bg-image;
+					}
+
+					.labeledIcon {
+						color: @agate-panels-tab-selected-color;
+					}
+
+					.focus({
 						color: @agate-panels-tab-selected-color;
 
 						&::before {
 							background-color: @agate-panels-tab-selected-bg-color;
 							background-image: @agate-panels-tab-selected-bg-image;
 						}
-					}
-				});
+					});
+				}
 			}
 		}
 

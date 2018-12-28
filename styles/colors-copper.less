@@ -58,6 +58,7 @@
 @agate-button-focus-color:    @agate-darker-gray;
 @agate-button-focus-bg-color: @agate-background-focus;
 @agate-button-focus-bg-image: none;
+@agate-button-highlighted-color: @agate-button-selected-color;
 @agate-button-highlighted-bg-color: @agate-accent;
 @agate-button-highlighted-bg-image: none;
 @agate-button-selected-bg-color: @agate-accent;
@@ -91,16 +92,18 @@
 
 // IconButton
 // ---------------------------------------
-@agate-iconbutton-color:          @agate-accent;
-@agate-iconbutton-bg-color:       @agate-dark-gray;
-@agate-iconbutton-bg-image:       none;
-@agate-iconbutton-border-color:   transparent;
-@agate-iconbutton-shadow:         none;
-@agate-iconbutton-focus-color:    @agate-darker-gray;
-@agate-iconbutton-focus-bg-color: @agate-background-focus;
-@agate-iconbutton-focus-bg-image: none;
-@agate-iconbutton-highlighted-bg-color: @agate-accent;
-@agate-iconbutton-highlighted-bg-image: none;
+@agate-iconbutton-color: @agate-button-color;
+@agate-iconbutton-bg-color: @agate-button-bg-color;
+@agate-iconbutton-bg-image: @agate-button-bg-image;
+@agate-iconbutton-border-color: @agate-button-border-color;
+@agate-iconbutton-shadow: @agate-button-shadow;
+@agate-iconbutton-focus-color: @agate-button-focus-color;
+@agate-iconbutton-focus-bg-color: @agate-button-focus-bg-color;
+@agate-iconbutton-focus-bg-image: @agate-button-focus-bg-image;
+@agate-iconbutton-highlighted-bg-color: @agate-button-highlighted-bg-color;
+@agate-iconbutton-highlighted-bg-image: @agate-button-highlighted-bg-image;
+@agate-iconbutton-selected-bg-color: @agate-button-selected-bg-color;
+@agate-iconbutton-selected-color: @agate-button-selected-color;
 
 // Input
 // ---------------------------------------
@@ -272,3 +275,7 @@
 @agate-togglebutton-indicator-disabled-on-bg-color: transparent;
 @agate-togglebutton-indicator-disabled-off-border-color: transparent;
 @agate-togglebutton-indicator-disabled-on-border-color: transparent;
+@agate-togglebutton-color: @agate-button-color;
+@agate-togglebutton-bg-color: @agate-button-bg-color;
+@agate-togglebutton-selected-color: @agate-button-selected-color;
+@agate-togglebutton-selected-bg-color:  @agate-button-selected-bg-color;

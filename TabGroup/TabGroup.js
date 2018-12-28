@@ -2,7 +2,7 @@ import {cap} from '@enact/core/util';
 import {Cell, Layout} from '@enact/ui/Layout';
 import Group from '@enact/ui/Group';
 import kind from '@enact/core/kind';
-import IconButton from '../IconButton';
+import ToggleButton from '../ToggleButton';
 import LabeledIcon from '../LabeledIcon';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -22,7 +22,7 @@ const TabBase = kind({
 		labelPosition: PropTypes.string,
 		onClick: PropTypes.func,
 		orientation: PropTypes.string,
-		selected: PropTypes.number
+		selected: PropTypes.bool
 	},
 
 	defaultProps: {
@@ -35,7 +35,8 @@ const TabBase = kind({
 	},
 
 	computed: {
-		tabLabel: ({children, className, css, icon, labelPosition, orientation, selected, ...rest}) => {
+		className: ({selected, styler}) => styler.append({selected}),
+		tabLabel: ({children, className, css, icon, labelPosition, orientation, selected}) => {
 			let inline;
 			if (orientation === 'horizontal') {
 				inline = true;
@@ -44,12 +45,11 @@ const TabBase = kind({
 			if (className.includes('copper')) {
 				return (
 					<div className={css.labeledIcon}>
-						<IconButton
+						<ToggleButton
+							icon={icon}
 							inline={inline}
-							selected={selected === rest['data-index']}
-						>
-							{icon}
-						</IconButton>
+							selected={selected}
+						/>
 						{children}
 					</div>
 				);
@@ -68,8 +68,9 @@ const TabBase = kind({
 		}
 	},
 
-	render: ({children, css, icon, onClick, orientation, style = {}, tabLabel, ...rest}) => {
+	render: ({onClick, orientation, style = {}, tabLabel, ...rest}) => {
 		delete rest.labelPosition;
+		delete rest.selected;
 
 		if (orientation === 'horizontal') {
 			style.textAlign = 'center';
@@ -93,8 +94,7 @@ const TabGroupBase = kind({
 		beforeTabs: PropTypes.node,
 		css: PropTypes.object,
 		orientation: PropTypes.string,
-		tabEndStyle: PropTypes.object,
-		tabGroupStyle: PropTypes.object
+		selectedIndex: PropTypes.number
 	},
 
 	styles: {
@@ -126,7 +126,7 @@ const TabGroupBase = kind({
 		})
 	},
 
-	render: ({afterTabs, beforeTabs, className, css, labelPosition, orientation, selected, style, tabEndStyle, tabGroupStyle, ...rest}) => {
+	render: ({afterTabs, beforeTabs, className, css, labelPosition, orientation, selectedIndex, style, ...rest}) => {
 		delete rest.tabPosition;
 		delete rest.tabs;
 
@@ -145,12 +145,12 @@ const TabGroupBase = kind({
 						itemProps={{
 							labelPosition,
 							orientation,
-							selected,
 							shrink: (orientation === 'vertical')
 						}}
 						orientation={orientation}
 						select="radio"
-						// selected={selected}
+						selected={selectedIndex}
+						selectedProp="selected"
 					/>
 				</Cell>
 				{afterTabs ? <Cell className={css.tabEnds} shrink>

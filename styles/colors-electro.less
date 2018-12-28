@@ -59,6 +59,7 @@
 @agate-button-focus-color:    @agate-spotlight-color;
 @agate-button-focus-bg-color: @agate-spotlight-bg-color;
 @agate-button-focus-bg-image: @electro-overlay-light-gradient;
+@agate-button-highlighted-color: @agate-button-selected-color;
 @agate-button-highlighted-bg-color: @agate-highlight;
 @agate-button-highlighted-bg-image: @electro-highlight-gradient;
 @agate-button-selected-bg-color: @electro-accent2-color;
@@ -92,16 +93,18 @@
 
 // IconButton
 // ---------------------------------------
-@agate-iconbutton-color:          white;
-@agate-iconbutton-bg-color:       @agate-accent;
-@agate-iconbutton-bg-image:       @electro-overlay-light-gradient;
-@agate-iconbutton-border-color:   transparent;
-@agate-iconbutton-shadow:         none;
-@agate-iconbutton-focus-color:    @agate-spotlight-color;
-@agate-iconbutton-focus-bg-color: @agate-spotlight-bg-color;
-@agate-iconbutton-focus-bg-image: @electro-overlay-light-gradient;
-@agate-iconbutton-highlighted-bg-color: @agate-highlight;
-@agate-iconbutton-highlighted-bg-image: @electro-highlight-gradient;
+@agate-iconbutton-color: @agate-button-color;
+@agate-iconbutton-bg-color: @agate-button-bg-color;
+@agate-iconbutton-bg-image: @agate-button-bg-image;
+@agate-iconbutton-border-color: @agate-button-border-color;
+@agate-iconbutton-shadow: @agate-button-shadow;
+@agate-iconbutton-focus-color: @agate-button-focus-color;
+@agate-iconbutton-focus-bg-color: @agate-button-focus-bg-color;
+@agate-iconbutton-focus-bg-image: @agate-button-focus-bg-image;
+@agate-iconbutton-highlighted-bg-color: @agate-button-highlighted-bg-color;
+@agate-iconbutton-highlighted-bg-image: @agate-button-highlighted-bg-image;
+@agate-iconbutton-selected-bg-color: @agate-button-selected-bg-color;
+@agate-iconbutton-selected-color: @agate-button-selected-color;
 
 // Input
 // ---------------------------------------
@@ -275,3 +278,7 @@
 @agate-togglebutton-indicator-disabled-on-bg-color: @agate-togglebutton-indicator-disabled-off-bg-color;
 @agate-togglebutton-indicator-disabled-off-border-color: @agate-dark-gray;
 @agate-togglebutton-indicator-disabled-on-border-color: @agate-togglebutton-indicator-disabled-off-border-color;
+@agate-togglebutton-color: @agate-button-color;
+@agate-togglebutton-bg-color: @agate-button-bg-color;
+@agate-togglebutton-selected-color: @agate-button-selected-color;
+@agate-togglebutton-selected-bg-color:  @agate-button-selected-bg-color;
