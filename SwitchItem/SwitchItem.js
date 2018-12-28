@@ -20,7 +20,7 @@ import {SwitchBase} from '../Switch';
 
 import componentCss from './SwitchItem.less';
 
-const Switch = Skinnable(SwitchBase);
+const Switch = Skinnable({prop: 'skin'}, SwitchBase);
 
 /**
  * Renders an `Item` with a radio-dot component. Useful to show a selected state on an Item.
