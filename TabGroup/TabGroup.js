@@ -19,11 +19,10 @@ const TabBase = kind({
 	propTypes: {
 		css: PropTypes.object,
 		icon: PropTypes.string,
-		index: PropTypes.number,
 		labelPosition: PropTypes.string,
 		onClick: PropTypes.func,
 		orientation: PropTypes.string,
-		selectedIndex: PropTypes.number
+		selected: PropTypes.bool
 	},
 
 	defaultProps: {
@@ -36,19 +35,16 @@ const TabBase = kind({
 	},
 
 	computed: {
-		tabLabel: ({children, className, css, icon, labelPosition, orientation, selectedIndex, ...rest}) => {
-			let inline, selected;
+		className: ({selected, styler}) => styler.append({selected}),
+		tabLabel: ({children, className, css, icon, labelPosition, orientation, selected}) => {
+			let inline;
 			if (orientation === 'horizontal') {
 				inline = true;
 			}
 
-			if (selectedIndex === rest['data-index']) {
-				selected = true;
-			}
-
 			if (className.includes('copper')) {
 				return (
-					<div className={selected ? `${css.selectedLabeledIcon} ${css.labeledIcon}` : css.labeledIcon}>
+					<div className={css.labeledIcon}>
 						<ToggleButton
 							icon={icon}
 							inline={inline}
@@ -74,7 +70,7 @@ const TabBase = kind({
 
 	render: ({onClick, orientation, style = {}, tabLabel, ...rest}) => {
 		delete rest.labelPosition;
-		delete rest.selectedIndex;
+		delete rest.selected;
 
 		if (orientation === 'horizontal') {
 			style.textAlign = 'center';
@@ -97,11 +93,8 @@ const TabGroupBase = kind({
 		afterTabs: PropTypes.node,
 		beforeTabs: PropTypes.node,
 		css: PropTypes.object,
-		index: PropTypes.number,
 		orientation: PropTypes.string,
-		selectedIndex: PropTypes.number,
-		tabEndStyle: PropTypes.object,
-		tabGroupStyle: PropTypes.object
+		selectedIndex: PropTypes.number
 	},
 
 	styles: {
@@ -133,7 +126,7 @@ const TabGroupBase = kind({
 		})
 	},
 
-	render: ({afterTabs, beforeTabs, className, css, index, labelPosition, orientation, selectedIndex, style, ...rest}) => {
+	render: ({afterTabs, beforeTabs, className, css, labelPosition, orientation, selectedIndex, style, ...rest}) => {
 		delete rest.tabPosition;
 		delete rest.tabs;
 
@@ -150,14 +143,14 @@ const TabGroupBase = kind({
 						childComponent={Tab}
 						component={Group}
 						itemProps={{
-							index,
 							labelPosition,
 							orientation,
-							selectedIndex,
 							shrink: (orientation === 'vertical')
 						}}
 						orientation={orientation}
 						select="radio"
+						selected={selectedIndex}
+						selectedProp="selected"
 					/>
 				</Cell>
 				{afterTabs ? <Cell className={css.tabEnds} shrink>
