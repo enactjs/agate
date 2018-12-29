@@ -8,7 +8,7 @@ import SpotlightContainerDecorator, {spotlightDefaultClass} from '@enact/spotlig
 
 import Skinnable from '../Skinnable';
 
-import css from './Panel.less';
+import componentCss from './Panel.less';
 
 let panelId = 0;
 
@@ -86,8 +86,9 @@ const PanelBase = kind({
 	},
 
 	styles: {
-		css,
-		className: 'panel'
+		css: componentCss,
+		className: 'panel',
+		publicClassNames: true
 	},
 
 	handlers: {
@@ -142,7 +143,7 @@ const PanelBase = kind({
 		headerId: ({'aria-label': label}) => label ? null : `panel_${++panelId}_header`
 	},
 
-	render: ({bodyClassName, children, header, headerId, spotOnRender, ...rest}) => {
+	render: ({bodyClassName, css, children, header, headerId, spotOnRender, ...rest}) => {
 		delete rest.autoFocus;
 		delete rest.hideChildren;
 
@@ -159,7 +160,7 @@ const Panel = SpotlightContainerDecorator(
 	{
 		// prefer any spottable within the panel body for first render
 		continue5WayHold: true,
-		defaultElement: [`.${spotlightDefaultClass}`, `.${css.body} *`],
+		defaultElement: [`.${spotlightDefaultClass}`, `.${componentCss.body} *`],
 		enterTo: 'last-focused',
 		preserveId: true
 	},
