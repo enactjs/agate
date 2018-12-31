@@ -1,62 +1,49 @@
 // Switch.less
 //
 @import "../styles/mixins.less";
-@import "../styles/variables.less";
 @import "../styles/skin.less";
 
-@agate-switch-height: 20px;
-@agate-switch-width: 80px;
 // Interally theme our implementation using published classes from ToggleItem and ToggleIcon
 .toggleIcon {
-	border-radius: (@agate-switch-height / 2);
-	width: @agate-switch-width;
-	height: @agate-switch-height;
-	line-height: @agate-switch-height;
-	font-family: "Moonstone Icons";
-	position: relative;
-	display: inline-block;
-	text-align: left;
-	cursor: default;
-
-	.icon {
-		visibility: visible;
-		left: 0;
-		width: @agate-switch-height;
-		height: inherit;
-		font-size: (@agate-switch-height * 2.8);
-		line-height: inherit;
-		margin: 0;
-	}
-
-	&.selected {
-		.icon {
-			left: (@agate-switch-width - @agate-switch-height);
-		}
-	}
-
-	&.animated {
-		-webkit-transition: background-color 0.2s;
-		transition: background-color 0.2s;
-
-		.icon {
-			-webkit-transition: left 0.2s, color 0.2s;
-			transition: left 0.2s, color 0.2s;
-		}
-	}
-
-	// Skin colors
 	.applySkins({
-		background-color: @agate-foreground;
+		background-color: @agate-switch-bg-color;
+		border-radius: @agate-switch-border-radius;
+		width: @agate-switch-width;
+		height: @agate-switch-height;
+		line-height: @agate-switch-height;
+		font-family: "Moonstone Icons";
+		position: relative;
+		display: inline-block;
+		text-align: left;
+		cursor: default;
 
 		.icon {
 			background-color: transparent;
 			color: @agate-switch-color;
+			visibility: visible;
+			left: 0;
+			width: @agate-switch-height;
+			height: inherit;
+			font-size: (@agate-switch-height * @agate-switch-icon-scale);
+			line-height: inherit;
+			margin: 0;
+		}
+
+		&.animated {
+			-webkit-transition: background-color 0.2s;
+			transition: background-color 0.2s;
+
+			.icon {
+				-webkit-transition: left 0.2s, color 0.2s;
+				transition: left 0.2s, color 0.2s;
+			}
 		}
 
 		&.selected {
 			background-color: @agate-switch-selected-bg-color;
 
 			.icon {
+				left: (@agate-switch-width - @agate-switch-height);
 				color: @agate-switch-selected-color;
 
 				:global(.spottable):focus & {
@@ -68,23 +55,19 @@
 			}
 		}
 
-		.disabled({
-			background-color: @agate-foreground;
+		// .disabled({
+		// 	background-color: @agate-foreground;
 
-			.icon {
-				color: @agate-switch-color;
-			}
-		});
+		// 	.icon {
+		// 		color: @agate-switch-color;
+		// 	}
+		// });
 
 		.focus({
 			.toggleIcon {
-				// Skin colors
-				background-color: @agate-foreground;
+				background-color: @agate-switch-focus-bg-color;
 
-
-				.icon {
-					color: @agate-sliderbutton-focus-color;
-				}
+				.icon,
 				&.selected .icon {
 					color: @agate-sliderbutton-focus-color;
 				}

@@ -45,7 +45,8 @@ const SwitchBase = kind({
 		 * @default false
 		 * @public
 		 */
-		noAnimation: PropTypes.bool
+		noAnimation: PropTypes.bool,
+		skin: PropTypes.string
 	},
 
 	defaultProps: {
@@ -60,7 +61,14 @@ const SwitchBase = kind({
 	computed: {
 		className: ({noAnimation, styler}) => styler.append({
 			animated: !noAnimation
-		})
+		}),
+		children: ({children, skin}) => {
+			if (children !== 'circle') return children;
+			switch (skin) {
+				case 'carbon': return 'stop';
+				default: return children;
+			}
+		}
 	},
 
 	render: ({children, css, ...rest}) => {
@@ -80,7 +88,7 @@ const SwitchBase = kind({
 
 const SwitchDecorator = compose(
 	Toggleable({toggleProp: 'onClick'}),
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 const Switch = SwitchDecorator(SwitchBase);

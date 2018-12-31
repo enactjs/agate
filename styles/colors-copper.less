@@ -8,6 +8,9 @@
 @agate-accent-s: var(--agate-accent-s, 25%);
 @agate-accent-l: var(--agate-accent-l, 52%);
 @agate-highlight: var(--agate-highlight-color, #fff);
+@agate-highlight-h: var(--agate-highlight-h, 0);
+@agate-highlight-s: var(--agate-highlight-s, 0%);
+@agate-highlight-l: var(--agate-highlight-l, 100%);
 @agate-background: fade(black, 30%);
 @agate-foreground: lighten(black, 30%);
 @agate-background-active: fade(black, 15%);
@@ -23,7 +26,7 @@
 
 // Component color assignments
 @agate-bg-color: @agate-darker-gray;
-@agate-bg-image: radial-gradient(~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.2)", transparent 60%), linear-gradient(to bottom, #14191d 43%, #040213 90%);
+@agate-bg-image: radial-gradient(~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0%), var(--agate-accent-l, 0%), 0.2)", transparent 60%), linear-gradient(to bottom, #14191d 43%, #040213 90%);
 @agate-bg-image2: url(../assets/noise-white.png);
 @agate-text-color: @agate-accent;
 @agate-title-text-color: @agate-white;
@@ -79,7 +82,7 @@
 @agate-drawer-bg-color: @agate-popup-bg-color;
 @agate-drawer-bg-image: url(../assets/noise-white.png), linear-gradient(to bottom, #14191d 43%, #040213 90%);
 @agate-drawer-border-color: @agate-popup-border-color;
-@agate-drawer-shadow: 0 0 6px 9px fade(black, 50%);
+@agate-drawer-shadow: 0 0 6px 9px fade(black, 30%), inset -6px 0 6px 0px rgba(0, 0, 0, 0.9), inset -6px 0 48px 0 @agate-accent;
 
 // FullscreenPopup
 // ---------------------------------------
@@ -117,7 +120,9 @@
 
 // Item
 // ---------------------------------------
-@agate-item-color:       inherit;
+@agate-item-color: @agate-accent;
+@agate-item-focus-bg-color: ~"hsla(var(--agate-highlight-h, 0), var(--agate-highlight-s, 0%), var(--agate-highlight-l, 0%), 0.1)";
+@agate-item-focus-color: @agate-item-color;
 
 // LabeledItem
 // ---------------------------------------
@@ -136,7 +141,7 @@
 @agate-panels-tab-separator-border-color: transparent;
 @agate-panels-tab-color:              @agate-text-color;
 @agate-panels-tab-bg-color:           fade(white, 5%);
-@agate-panels-tab-bg-image:           linear-gradient(to left, ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.5)" 0px, transparent 2px);
+@agate-panels-tab-bg-image:           linear-gradient(to left, ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0%), var(--agate-accent-l, 0%), 0.5)" 0px, transparent 2px);
 @agate-panels-tab-selected-color:     @agate-foreground-active;
 @agate-panels-tab-selected-bg-color:  transparent;
 @agate-panels-tab-selected-bg-image:  transparent;
@@ -181,7 +186,7 @@
 @agate-radioitem-color: @agate-item-color;
 @agate-radioitem-focus-color: @agate-foreground-focus;
 @agate-radioitem-separator-border-color: @agate-divider-border-color;
-@agate-radioitem-icon-border-color: @agate-button-border-color;
+@agate-radioitem-icon-border-color: @agate-foreground;
 @agate-radioitem-icon-bg-color: transparent;
 @agate-radioitem-icon-focus-bg-color: @agate-radioitem-icon-bg-color;
 @agate-radioitem-icon-focus-color: @agate-foreground-focus;
@@ -252,14 +257,14 @@
 
 // Switch
 // ---------------------------------------
-@agate-switch-bg-color: @agate-foreground;
-@agate-switch-selected-bg-color: @agate-accent;
-@agate-switch-selected-focus-bg-color: @agate-switch-selected-bg-color;
-@agate-switch-color: @agate-title-text-color;
-@agate-switch-selected-color: @agate-title-text-color;
-@agate-switch-focus-bg-color: @agate-text-color;
-@agate-switch-focus-color: @agate-darker-gray;
+@agate-switch-bg-color: @agate-darker-gray;
+@agate-switch-color: @agate-accent;
+@agate-switch-focus-bg-color: @agate-switch-bg-color;
+@agate-switch-focus-color: @agate-switch-color;
 @agate-switch-label-color: @agate-item-color;
+@agate-switch-selected-bg-color: @agate-accent;
+@agate-switch-selected-color: @agate-highlight;
+@agate-switch-selected-focus-bg-color: @agate-switch-selected-bg-color;
 
 // Toggle Colors
 // ---------------------------------------

@@ -9,7 +9,7 @@
 @agate-accent-l: var(--agate-accent-l, 52%);
 @agate-highlight: var(--agate-highlight-color, #fff);
 @agate-background: fade(black, 30%);
-@agate-foreground: lighten(black, 30%);
+@agate-foreground: @agate-accent;
 @agate-background-active: fade(black, 15%);
 @agate-foreground-active: white;
 @agate-background-focus: @agate-highlight;
@@ -53,7 +53,7 @@
 @agate-button-color:          @agate-text-color;
 @agate-button-bg-color:       @agate-highlight;
 @agate-button-bg-image:       none;
-@agate-button-border-color:   none;
+@agate-button-border-color:   transparent;
 @agate-button-shadow:         none;
 @agate-button-focus-color:    @agate-foreground-focus;
 @agate-button-focus-bg-color: @agate-background-focus;
@@ -77,9 +77,9 @@
 // Drawer
 // ---------------------------------------
 @agate-drawer-bg-color: @agate-popup-bg-color;
-@agate-drawer-bg-image: url(../assets/noise-white.png), linear-gradient(to bottom, #14191d 43%, #040213 90%);
+@agate-drawer-bg-image: url(../assets/noise-black.png), linear-gradient(to bottom, #f3f3f3 43%, #e6e6e7 90%);
 @agate-drawer-border-color: @agate-popup-border-color;
-@agate-drawer-shadow: 0 0 6px 9px fade(black, 50%);
+@agate-drawer-shadow: 0 0 6px 9px fade(black, 20%), inset -6px 0 6px 0 ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.75)";
 
 // FullscreenPopup
 // ---------------------------------------
@@ -111,13 +111,15 @@
 @agate-input-decorator-focused-border-color:  @agate-accent;
 @agate-input-focused-background-color:        @agate-highlight;
 @agate-input-focused-background-image:        none;
-@agate-input-focused-text-color:              @agate-accent;
-@agate-input-placeholder-color:               fade(@agate-foreground, 95%);
+@agate-input-focused-text-color:              @agate-foreground-focus;
+@agate-input-placeholder-color:               ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.15)";
 @agate-input-text-color:                      @agate-foreground;
 
 // Item
 // ---------------------------------------
 @agate-item-color:       inherit;
+@agate-item-focus-bg-color: ~"hsla(var(--agate-highlight-h, 0), var(--agate-highlight-s, 0%), var(--agate-highlight-l, 0%), 0.5)";
+@agate-item-focus-color: @agate-spotlight-color;
 
 // LabeledItem
 // ---------------------------------------
@@ -181,7 +183,7 @@
 @agate-radioitem-color: @agate-item-color;
 @agate-radioitem-focus-color: @agate-foreground-focus;
 @agate-radioitem-separator-border-color: @agate-divider-border-color;
-@agate-radioitem-icon-border-color: @agate-button-border-color;
+@agate-radioitem-icon-border-color: @agate-foreground;
 @agate-radioitem-icon-bg-color: transparent;
 @agate-radioitem-icon-focus-bg-color: @agate-radioitem-icon-bg-color;
 @agate-radioitem-icon-focus-color: @agate-foreground-focus;
@@ -252,14 +254,14 @@
 
 // Switch
 // ---------------------------------------
-@agate-switch-bg-color: @agate-foreground;
-@agate-switch-selected-bg-color: @agate-accent;
-@agate-switch-selected-focus-bg-color: @agate-switch-selected-bg-color;
-@agate-switch-color: @agate-title-text-color;
-@agate-switch-selected-color: @agate-title-text-color;
-@agate-switch-focus-bg-color: @agate-text-color;
-@agate-switch-focus-color: @agate-darker-gray;
+@agate-switch-bg-color: @agate-highlight;
+@agate-switch-color: @agate-accent;
+@agate-switch-focus-bg-color: @agate-switch-bg-color;
+@agate-switch-focus-color: @agate-switch-color;
 @agate-switch-label-color: @agate-item-color;
+@agate-switch-selected-bg-color: @agate-accent;
+@agate-switch-selected-color: @agate-highlight;
+@agate-switch-selected-focus-bg-color: @agate-switch-selected-bg-color;
 
 // Toggle Colors
 // ---------------------------------------

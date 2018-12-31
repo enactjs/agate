@@ -3,6 +3,9 @@
 @import "../styles/mixins.less";
 @import "../styles/skin.less";
 
+// Would be nice to be able to style this with skins
+@agate-drawer-overhang: 0 12px 0 0;
+
 .drawer {
 	.applySkins({
 		box-shadow: @agate-drawer-shadow;
@@ -13,6 +16,7 @@
 		border-width: @agate-drawer-border-width;
 		border-color: @agate-drawer-border-color;
 		border-radius: @agate-drawer-border-radius;
+		margin: @agate-drawer-overhang;
 
 		// .closeButton {
 		// 	position: absolute;
@@ -24,19 +28,15 @@
 	});
 }
 
-// Would be nice to be able to style this with skins
-@agate-drawer-overhang: 0 12px 0 0;
-
 .drawerTransitionContainer {
 	position: absolute;
 	left: 0;
 	height: 100%;
-	width: 16%;
+	width: 20.5%;
 	pointer-events: none;
 
 	.inner {
 		height: 100%;
-		padding: @agate-drawer-overhang;
 
 		> * {
 			pointer-events: auto;
