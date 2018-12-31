@@ -1,5 +1,6 @@
 // FullscreenPopup.less
 //
+@import "../styles/mixins.less";
 @import "../styles/skin.less";
 
 .fullscreenPopup {
@@ -11,5 +12,14 @@
 	.applySkins({
 		background-color: @agate-fullscreenpopup-bg-color;
 		background-image: @agate-fullscreenpopup-bg-image;
+
+		&::before {
+			content: "";
+			display: block;
+			background-image: @agate-bg-image2;
+			position: absolute;
+			.position(0);
+			opacity: 0.6;
+		}
 	});
 }
