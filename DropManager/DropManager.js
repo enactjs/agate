@@ -121,7 +121,6 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 		};
 
 		state = {
-			arrangement: this.props.arrangement || {},
 			dragging: false
 		};
 
@@ -206,19 +205,18 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			// We successfully completed the drag, blank-out the node.
 			this.dragOriginNode = null;
 
-			this.setState(({arrangement}) => {
-				const oldD = getKeyByValue(arrangement, dragDestination);
-				const oldO = getKeyByValue(arrangement, dragOrigin);
+			const {arrangement, onArrange} = this.props;
+			const oldD = getKeyByValue(arrangement, dragDestination);
+			const oldO = getKeyByValue(arrangement, dragOrigin);
 
-				arrangement[oldD || dragDestination] = dragOrigin;
-				arrangement[oldO || dragOrigin] = dragDestination;
+			arrangement[oldD || dragDestination] = dragOrigin;
+			arrangement[oldO || dragOrigin] = dragDestination;
 
-				if (this.props.onArrange) {
-					this.props.onArrange({arrangement});
-				}
+			if (onArrange) {
+				onArrange({arrangement});
+			}
 
-				return {dragging: false, arrangement};
-			});
+			this.setState({dragging: false});
 		};
 
 		// handleDragEnd = () => {
@@ -228,18 +226,14 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 		// };
 
 		render () {
-			const {arrangeable, className, ...rest} = {...this.props};
+			const {arrangement, arrangeable, className, ...rest} = {...this.props};
 			delete rest.onArrange;
 
+			rest[configHoc.arrangementProp || fallbackArrangementProp] = arrangement;
 			if (configHoc.arrangeableProp) rest[configHoc.arrangeableProp] = arrangeable;
 			if (configHoc.arrangingProp) rest[configHoc.arrangingProp] = this.state.dragging;
 
 			if (arrangeable) {
-				// Respect the incoming prop from the parent, unless we're in arranging mode.
-				// During arranging mode, we're handling our own arrangement, then will emit the
-				// finalized arrangement back to the parent when we're done.
-				rest[configHoc.arrangementProp || fallbackArrangementProp] = this.state.arrangement;
-
 				// Add all of the necessary events, but only if we're in edit mode
 				rest.onDragStart = this.handleDragStart;
 				rest.onDragEnter = this.handleDragEnter;
@@ -252,7 +246,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			return (
 				<DropManagerContext.Provider
 					value={{
-						arrangement: this.state.arrangement,
+						arrangement,
 						arranging: this.state.dragging,
 						arrangeable
 					}}
