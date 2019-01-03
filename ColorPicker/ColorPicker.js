@@ -215,6 +215,12 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 			};
 		}
 
+		componentDidUpdate (prevProps) {
+			if (prevProps.value !== this.props.value) {
+				this.hsl = convert.hex.hsl(this.props.value);
+			}
+		}
+
 		buildValue = ({h = this.hsl[0], s = this.hsl[1], l = this.hsl[2]} = {}) => (
 			'#' + convert.hsl.hex(h, s, l)
 		)
