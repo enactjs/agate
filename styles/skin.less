@@ -10,6 +10,23 @@
 		@componentRules();
 	}
 
+	&:global(.cobalt) {
+		// Load the Copper agate rules into this scope
+		@import "./colors-cobalt.less";
+		@import (multiple) "./variables-copper.less";
+
+		@componentRules();
+	}
+
+
+	&:global(.cobalt-day) {
+		// Load the Copper agate rules into this scope
+		@import "./colors-cobalt-day.less";
+		@import (multiple) "./variables-copper.less";
+
+		@componentRules();
+	}
+
 	&:global(.copper) {
 		// Load the Copper agate rules into this scope
 		@import "./colors-copper.less";

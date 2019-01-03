@@ -42,7 +42,7 @@ const TabBase = kind({
 				inline = true;
 			}
 
-			if (className.includes('copper')) {
+			if (className.includes('copper') || className.includes('cobalt')) {
 				return (
 					<div className={css.labeledIcon}>
 						<ToggleButton

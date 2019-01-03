@@ -11,6 +11,8 @@ import UiSkinnable from '@enact/ui/Skinnable';
 const defaultConfig = {
 	skins: {
 		carbon: 'carbon',
+		cobalt: 'cobalt',
+		'cobalt-day': 'cobalt-day',
 		copper: 'copper',
 		'copper-day': 'copper-day',
 		electro: 'electro',
