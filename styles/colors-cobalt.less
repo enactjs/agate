@@ -25,19 +25,21 @@
 @agate-white:       #fff;
 
 // Component color assignments
-@agate-bg-color: @agate-darker-gray;
+@agate-bg-color: @cobalt-bg-color2;
 @agate-bg-image: radial-gradient(~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0%), var(--agate-accent-l, 0%), 0.2)", transparent 60%), linear-gradient(to bottom, @cobalt-bg-color2 43%, @cobalt-bg-color2 90%);
 @agate-bg-image2: none;
-@agate-text-color: @agate-accent;
+@agate-text-color: @cobalt-accent2;
 @agate-title-text-color: @agate-white;
 
-// Local copper variables
-@copper-accent2-h: ~"calc(" @agate-accent-h ~" + 0)"; // hsl(22, 25%, 52%) -> hsl(22, 27%, 43%)
-@copper-accent2-s: ~"calc(" @agate-accent-s ~" + 2%)";
-@copper-accent2-l: ~"calc(" @agate-accent-l ~" - 9%)";
-@copper-accent2-color: ~"hsl(" @copper-accent2-h, @copper-accent2-s, @copper-accent2-l ~")";
-@copper-darker-gray: hsl(67,2%,22%);
+// Local cobalt variables
+@cobalt-accent2-h: ~"calc(" @agate-accent-h ~" + 0)"; // hsl(22, 25%, 52%) -> hsl(22, 27%, 43%)
+@cobalt-accent2-s: ~"calc(" @agate-accent-s ~" + 2%)";
+@cobalt-accent2-l: ~"calc(" @agate-accent-l ~" - 9%)";
+@cobalt-accent2-color: ~"hsl(" @cobalt-accent2-h, @cobalt-accent2-s, @cobalt-accent2-l ~")";
+@cobalt-darker-gray: hsl(67,2%,22%);
 @cobalt-bg-color2: #44559f;
+@cobalt-accent2: #7482bf;
+@cobalt-bg-color2-hsl: hsl(229, 40%, 45%);
 
 // Disabled Opacity
 // ---------------------------------------
@@ -54,19 +56,19 @@
 
 // Button
 // ---------------------------------------
-@agate-button-color:          @agate-accent;
-@agate-button-bg-color:       @agate-dark-gray;
+@agate-button-color:          @agate-title-text-color;
+@agate-button-bg-color:       @cobalt-accent2;
 @agate-button-bg-image:       none;
 @agate-button-border-color:   none;
 @agate-button-shadow:         none;
-@agate-button-focus-color:    @agate-darker-gray;
+@agate-button-focus-color:    @agate-accent;
 @agate-button-focus-bg-color: @agate-background-focus;
 @agate-button-focus-bg-image: none;
-@agate-button-highlighted-color: @agate-button-selected-color;
-@agate-button-highlighted-bg-color: @agate-accent;
+@agate-button-highlighted-color: @agate-button-focus-color;
+@agate-button-highlighted-bg-color: @agate-button-focus-bg-color;
 @agate-button-highlighted-bg-image: none;
+@agate-button-selected-color: @agate-highlight;
 @agate-button-selected-bg-color: @agate-accent;
-@agate-button-selected-color: @agate-foreground-active;
 
 // ColorPicker
 // ---------------------------------------
@@ -116,8 +118,8 @@
 @agate-input-focused-background-color:        @agate-highlight;
 @agate-input-focused-background-image:        none;
 @agate-input-focused-text-color:              @agate-accent;
-@agate-input-placeholder-color:               fade(@agate-foreground, 95%);
-@agate-input-text-color:                      @agate-foreground;
+@agate-input-placeholder-color:               @agate-text-color;
+@agate-input-text-color:                      @agate-white;
 
 // Item
 // ---------------------------------------
@@ -143,10 +145,10 @@
 @agate-panels-tab-color:              @agate-text-color;
 @agate-panels-tab-bg-color:           fade(white, 5%);
 @agate-panels-tab-bg-image:           linear-gradient(to left, ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0%), var(--agate-accent-l, 0%), 0.5)" 0px, transparent 2px);
-@agate-panels-tab-selected-color:     @agate-foreground-active;
+@agate-panels-tab-selected-color:     @agate-accent;
 @agate-panels-tab-selected-bg-color:  transparent;
 @agate-panels-tab-selected-bg-image:  transparent;
-@agate-panels-tab-focus-color:        @agate-text-color;
+@agate-panels-tab-focus-color:        @agate-accent;
 @agate-panels-tab-focus-bg-color:     transparent;
 @agate-panels-tab-focus-bg-image:     transparent;
 
@@ -187,7 +189,7 @@
 @agate-radioitem-color: @agate-item-color;
 @agate-radioitem-focus-color: @agate-foreground-focus;
 @agate-radioitem-separator-border-color: @agate-divider-border-color;
-@agate-radioitem-icon-border-color: @agate-foreground;
+@agate-radioitem-icon-border-color: @agate-item-color;
 @agate-radioitem-icon-bg-color: transparent;
 @agate-radioitem-icon-focus-bg-color: @agate-radioitem-icon-bg-color;
 @agate-radioitem-icon-focus-color: @agate-foreground-focus;
@@ -197,7 +199,7 @@
 // Slider
 // ---------------------------------------
 @agate-slider-color:          @agate-text-color;
-@agate-slider-bg-color:       lighten(@copper-darker-gray, 10%); // @agate-accent;
+@agate-slider-bg-color:       fade(black, 15%);
 @agate-slider-bg-image:       linear-gradient(to top, transparent, fade(black, 5%));
 @agate-slider-track-bg-color: transparent;
 @agate-slider-track-bg-image: none;
@@ -210,7 +212,7 @@
 @agate-slider-focus-bg-image: @agate-slider-bg-image;
 @agate-slider-knob-bg-color:  @agate-accent; //lighten(@agate-bg-color, 10%);
 @agate-slider-knob-bg-image:  linear-gradient(to bottom, transparent, fade(black, 10%));
-@agate-slider-knob-focus-bg-color: @copper-accent2-color;
+@agate-slider-knob-focus-bg-color: @cobalt-accent2-color;
 @agate-slider-knob-focus-bg-image: @agate-slider-knob-bg-image;
 @agate-slider-knob-shadow:    0 1px 3px 1px fade(black, 30%);
 @agate-slider-knob-focus-shadow: 0 3px 9px 3px fade(black, 30%);
