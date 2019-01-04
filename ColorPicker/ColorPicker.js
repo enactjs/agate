@@ -13,7 +13,7 @@
 import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
 import {on, off} from '@enact/core/dispatcher';
-import {forward} from '@enact/core/handle';
+import {forward, handle} from '@enact/core/handle';
 import Group from '@enact/ui/Group';
 import Toggleable from '@enact/ui/Toggleable';
 import {Row, Cell} from '@enact/ui/Layout';
@@ -23,6 +23,7 @@ import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDeco
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import convert from 'color-convert';
 
 import Skinnable from '../Skinnable';
@@ -218,6 +219,10 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 			};
 		}
 
+		componentDidMount () {
+			this.node = ReactDOM.findDOMNode(this);
+		}
+
 		componentDidUpdate (prevProps) {
 			const {open, value} = this.props;
 			if (prevProps.value !== value) {
@@ -239,9 +244,15 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 			'#' + convert.hsl.hex(h, s, l)
 		)
 
-		handleClick = () => {
-			forward('onClick');
-		}
+		clickedOutsidePalette = ({target}) => !this.node.contains(target)
+
+		handle = handle.bind(this);
+
+		// If a click happened outside the component area (and children of us) dismiss the palette by forwarding the onClick from Toggleable.
+		handleClick = this.handle(
+			this.clickedOutsidePalette,
+			forward('onClick')
+		)
 
 		handleToggleExtended = () => {
 			this.setState(({extended}) => ({extended: !extended}));
