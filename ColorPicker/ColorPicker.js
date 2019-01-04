@@ -12,6 +12,8 @@
 
 import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
+import {on, off} from '@enact/core/dispatcher';
+import {forward} from '@enact/core/handle';
 import Group from '@enact/ui/Group';
 import Toggleable from '@enact/ui/Toggleable';
 import {Row, Cell} from '@enact/ui/Layout';
@@ -204,6 +206,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 		static propTypes = {
 			defaultExtended: PropTypes.bool,
 			onChange: PropTypes.func,
+			open: PropTypes.bool,
 			value: PropTypes.string
 		}
 
@@ -216,14 +219,29 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 		}
 
 		componentDidUpdate (prevProps) {
-			if (prevProps.value !== this.props.value) {
-				this.hsl = convert.hex.hsl(this.props.value);
+			const {open, value} = this.props;
+			if (prevProps.value !== value) {
+				this.hsl = convert.hex.hsl(value);
 			}
+
+			if (!prevProps.open && open) {
+				on('click', this.handleClick);
+			} else if (prevProps.open && !open) {
+				off('click', this.handleClick);
+			}
+		}
+
+		componentWillUnmount () {
+			off('click', this.handleClick);
 		}
 
 		buildValue = ({h = this.hsl[0], s = this.hsl[1], l = this.hsl[2]} = {}) => (
 			'#' + convert.hsl.hex(h, s, l)
 		)
+
+		handleClick = () => {
+			forward('onClick');
+		}
 
 		handleToggleExtended = () => {
 			this.setState(({extended}) => ({extended: !extended}));
