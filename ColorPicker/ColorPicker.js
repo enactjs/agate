@@ -221,6 +221,10 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 
 		componentDidMount () {
 			this.node = ReactDOM.findDOMNode(this);
+
+			if (this.props.open) {
+				on('click', this.handleClick);
+			}
 		}
 
 		componentDidUpdate (prevProps) {
