@@ -131,7 +131,9 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 		handleDragStart = (ev) => {
 			ev.dataTransfer.setData('text/plain', ev.target.dataset.slot);
 			ev.dataTransfer.effectAllowed = 'move';
-			this.dragOriginNode = ev.target;
+			// ev.target could disappear in VirtualList while swapping items
+			// this.dragOriginNode = ev.target;
+			this.dragOriginNode = ev.target.cloneNode(true);
 			this.setState({dragging: true});
 		};
 
