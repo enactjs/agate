@@ -1,0 +1,98 @@
+// PopupNavigation.less
+//
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+
+.popupNavigation {
+	.applySkins({
+		position: relative;
+		width: 400px;
+		line-height: 400px;
+		border-radius: 50%;
+		background: yellowgreen;
+		background-image:
+			linear-gradient(to right, transparent 50%, #655 0);
+		color: transparent;
+		text-align: center;
+
+		&.menu2 {
+			.buttons {
+				padding: @agate-popup-buttons-padding;
+			}
+		}
+
+		&.menu3 {
+			height: 1000px;
+		}
+
+		&.menu4 {
+			width: 1000px;
+			.buttons {
+				:nth-child(1) {
+					background: red;
+				}
+				:nth-child(2) {
+					background: blue;
+				}
+				:nth-child(3) {
+					background: green;
+				}
+				:nth-child(4) {
+					background: black;
+				}
+			}
+		}
+
+		.closeButton {
+			position: absolute;
+			top: 0;
+			left: @agate-popup-closebutton-position-left;
+			right: @agate-popup-closebutton-position-right;
+			// top: @agate-popup-padding;
+			// left: @agate-popup-padding;
+			margin: @agate-component-spacing;
+		}
+	});
+}
+
+@keyframes spin {
+	to {tansform: rotate(.5turn);}
+}
+
+@keyframes bg {
+	50% {background: #655;}
+}
+
+.popupNavigation::befor {
+	.applySkins({
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 50%;
+		height: 100%;
+		border-radisus: 0 100% 100% 0 / 50%;
+		background-color: inherit;
+		transform-origin: left;
+		animation: spin 50s linear infinite,
+		bg 100s step-end infinite;
+		animation-paly-state: paused;
+		animation-delay: inherit;
+	});
+}
+
+.popupTransitionContainer {
+	position: absolute;
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+	pointer-events: none;
+
+	.inner {
+		height: 100%;
+
+		> * {
+			pointer-events: auto;
+		}
+	}
+}
