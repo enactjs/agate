@@ -6,93 +6,100 @@
 .popupNavigation {
 	.applySkins({
 		position: relative;
-		width: 400px;
-		line-height: 400px;
+		width: 300px;
+		height: 300px;
+		margin: 10px;
 		border-radius: 50%;
-		background: yellowgreen;
-		background-image:
-			linear-gradient(to right, transparent 50%, #655 0);
-		color: transparent;
-		text-align: center;
+		overflow: hidden;
 
-		&.menu2 {
-			.buttons {
-				padding: @agate-popup-buttons-padding;
-			}
+		.circle() {
+			width: 50%;
+			height: 50%;
+			position: absolute;
+			background-color: #E4B89E;
+			transform-origin: bottom right;
 		}
 
-		&.menu3 {
-			height: 1000px;
+		.font() {
+			width: 100%;
+			position: absolute;
+			color: #FFFFFF;
+			bottom: 0;
+			right: 0;
 		}
+
+		&.menu2 {}
+		&.menu3 {}
 
 		&.menu4 {
-			width: 1000px;
-			.buttons {
-				:nth-child(1) {
-					background: red;
-				}
-				:nth-child(2) {
-					background: blue;
-				}
-				:nth-child(3) {
-					background: green;
-				}
-				:nth-child(4) {
-					background: black;
-				}
+			.part0 {
+				.circle();
+				transform: rotateZ(45deg) translateX(100%);
+				margin: 0 0 0 10px;
+			}
+
+			.part1 {
+				.circle();
+				transform: rotateZ(225deg);
+				margin: 10px 0 0 0;
+			}
+
+			.part2 {
+				.circle();
+				transform: rotateZ(-45deg);
+				margin: 0px 0px 0px -10px;
+			}
+
+			.part3 {
+				.circle();
+				transform: rotateZ(45deg);
+				margin: -10px 0 0 0;
+			}
+
+			.menu0 {
+				.font();
+				transform: rotateZ(-45deg) translateY(50%);
+				transform-origin: bottom left;
+				text-align: right;
+			}
+
+			.menu1 {
+				.font();
+				transform: translateY(50%) rotateZ(-225deg);
+				transform-origin: top;
+				text-align: center;
+			}
+
+			.menu2 {
+				.font();
+				transform: rotateZ(45deg) translateY(50%);
+				transform-origin: bottom right;
+				text-align: left;
+
+			}
+
+			.menu3 {
+				.font();
+				transform: rotateZ(-45deg) translateY(50%);
+				transform-origin: top left;
+				text-align: center;
 			}
 		}
 
-		.closeButton {
-			position: absolute;
-			top: 0;
-			left: @agate-popup-closebutton-position-left;
-			right: @agate-popup-closebutton-position-right;
-			// top: @agate-popup-padding;
-			// left: @agate-popup-padding;
-			margin: @agate-component-spacing;
+		.innerCircle {
+			background-color: #444;
+			border-radius: 60px;
+			font-size: 60px;
+			transform: translate(114px, 118px);
 		}
 	});
-}
 
-@keyframes spin {
-	to {tansform: rotate(.5turn);}
-}
-
-@keyframes bg {
-	50% {background: #655;}
-}
-
-.popupNavigation::befor {
-	.applySkins({
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 50%;
-		height: 100%;
-		border-radisus: 0 100% 100% 0 / 50%;
-		background-color: inherit;
-		transform-origin: left;
-		animation: spin 50s linear infinite,
-		bg 100s step-end infinite;
-		animation-paly-state: paused;
-		animation-delay: inherit;
-	});
-}
-
-.popupTransitionContainer {
-	position: absolute;
-	bottom: 0;
-	height: 100%;
-	width: 100%;
-	pointer-events: none;
-
-	.inner {
-		height: 100%;
-
-		> * {
-			pointer-events: auto;
-		}
+	&:global(.spottable):focus,
+	:global(.spottable):focus & {
+		.applySkins({
+			.circle() {
+				background-color: black;
+			}
+		});
 	}
 }
