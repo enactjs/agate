@@ -8,7 +8,7 @@ import SpotlightContainerDecorator, {spotlightDefaultClass} from '@enact/spotlig
 
 import Skinnable from '../Skinnable';
 
-import componentCss from './Panel.less';
+import componentCss from './Panel.module.less';
 
 let panelId = 0;
 

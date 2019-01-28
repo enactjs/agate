@@ -3,7 +3,7 @@ import React from 'react';
 import sinon from 'sinon';
 
 import Slider from '../Slider';
-import css from '../Slider.less';
+import css from '../Slider.module.less';
 
 const getNode = (slider) => slider.find(`div.${css.slider}`);
 

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import Icon from '../Icon';
 
-import css from './Input.less';
+import css from './Input.module.less';
 
 /**
  * The stateless functional base component for {@link agate/Input.InputDecoratorIcon}.

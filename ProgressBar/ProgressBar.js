@@ -18,7 +18,7 @@ import React from 'react';
 
 import Skinnable from '../Skinnable';
 
-import componentCss from './ProgressBar.less';
+import componentCss from './ProgressBar.module.less';
 
 /**
  * Renders a agate-styled progress bar.

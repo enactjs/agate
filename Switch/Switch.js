@@ -20,7 +20,7 @@ import Skinnable from '../Skinnable';
 
 import compose from 'ramda/src/compose';
 
-import componentCss from './Switch.less';
+import componentCss from './Switch.module.less';
 
 /**
  * Renders the base level DOM structure of the component.

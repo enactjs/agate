@@ -6,7 +6,7 @@ import ViewManager, {shape, SlideArranger} from '@enact/ui/ViewManager';
 import Panel from './Panel';
 import TabbedPanels from './TabbedPanels';
 
-import componentCss from './Panels.less';
+import componentCss from './Panels.module.less';
 
 import easing from 'eases/back-out';
 import * as arrange from '@enact/ui/ViewManager/arrange';

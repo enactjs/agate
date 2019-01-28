@@ -16,7 +16,7 @@ import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
-import componentCss from './Item.less';
+import componentCss from './Item.module.less';
 import Skinnable from '../Skinnable';
 
 /**

@@ -7,7 +7,7 @@ import {ButtonDecorator} from '../Button';
 import {IconButtonBase} from '../IconButton';
 import Skinnable from '../Skinnable';
 
-import componentCss from './LabeledIconButton.less';
+import componentCss from './LabeledIconButton.module.less';
 
 const Button = Skinnable(IconButtonBase);
 

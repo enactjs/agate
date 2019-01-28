@@ -18,7 +18,7 @@ import convert from 'color-convert';
 import Skinnable from '../Skinnable';
 
 import screenTypes from './screenTypes.json';
-import css from './AgateDecorator.less';
+import css from './AgateDecorator.module.less';
 
 /**
  * Default config for {@link agate/AgateDecorator.AgateDecorator}.

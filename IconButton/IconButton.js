@@ -21,7 +21,7 @@ import React from 'react';
 import AgateIcon from '../Icon';
 import Skinnable from '../Skinnable';
 
-import componentCss from './IconButton.less';
+import componentCss from './IconButton.module.less';
 
 // Make a basic Icon in case we need it later. This cuts `Pure` out of icon for a small gain.
 const Icon = kind({

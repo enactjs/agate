@@ -10,7 +10,7 @@ import React from 'react';
 
 import Skinnable from '../Skinnable';
 
-import css from './Picker.less';
+import css from './Picker.module.less';
 
 const PickerRoot = Touchable('div');
 const PickerButtonItem = Spottable('div');

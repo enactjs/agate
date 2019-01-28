@@ -23,7 +23,7 @@ import Icon from '../Icon';
 import {LabeledItemBase} from '../LabeledItem';
 import Skinnable from '../Skinnable';
 
-import componentCss from './IconItem.less';
+import componentCss from './IconItem.module.less';
 
 /**
  * A focusable component that combines marquee-able text content with a synchronized
