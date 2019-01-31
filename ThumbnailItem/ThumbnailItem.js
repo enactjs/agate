@@ -3,7 +3,7 @@ import kind from '@enact/core/kind';
 import React from 'react';
 import {SlotItem} from '@enact/ui/SlotItem';
 
-import componentCss from './ThumbnailItem.less';
+import componentCss from './ThumbnailItem.module.less';
 
 const ThumbnailItemBase = kind({
 	name: 'ThumbnailItem',

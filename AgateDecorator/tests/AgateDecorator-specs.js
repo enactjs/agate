@@ -3,7 +3,7 @@ import {mount} from 'enzyme';
 import AgateDecorator from '../';
 import Spotlight from '@enact/spotlight';
 
-import css from '../AgateDecorator.less';
+import css from '../AgateDecorator.module.less';
 
 describe('AgateDecorator', () => {
 

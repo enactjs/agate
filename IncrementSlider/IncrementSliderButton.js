@@ -4,7 +4,7 @@ import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import componentCss from './IncrementSliderButton.less';
+import componentCss from './IncrementSliderButton.module.less';
 
 /**
  * An [Button]{@link moonstone/Button.Button} customized for

@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
-import componentCss from './LabeledIcon.less';
+import componentCss from './LabeledIcon.module.less';
 
 const LabeledIconBase = kind({
 	name: 'LabeledIcon',

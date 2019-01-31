@@ -31,7 +31,7 @@ import Button from '../Button';
 import Slider from '../Slider';
 import SwatchButton from './SwatchButton';
 
-import componentCss from './ColorPicker.less';
+import componentCss from './ColorPicker.module.less';
 
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 

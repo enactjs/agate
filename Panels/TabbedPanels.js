@@ -10,7 +10,7 @@ import TabGroup from '../TabGroup';
 
 import Panels from './Panels';
 
-import componentCss from './TabbedPanels.less';
+import componentCss from './TabbedPanels.module.less';
 
 const TabbedPanelsBase = kind({
 	name: 'TabbedPanels',

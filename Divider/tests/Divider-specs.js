@@ -1,7 +1,7 @@
 import React from 'react';
 import {mount} from 'enzyme';
 import Divider from '../Divider';
-import css from '../Divider.less';
+import css from '../Divider.module.less';
 
 describe('Divider Specs', () => {
 	it('should render a Divider with content', function () {

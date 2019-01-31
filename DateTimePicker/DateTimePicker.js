@@ -7,7 +7,7 @@ import Button from '../Button';
 import Picker from '../Picker';
 import Skinnable from '../Skinnable';
 
-import css from './DateTimePicker.less';
+import css from './DateTimePicker.module.less';
 
 const ranges = {
 	years: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027'],

@@ -11,7 +11,7 @@ import Spottable from '@enact/spotlight/Spottable';
 
 import Skinnable from '../Skinnable';
 
-import componentCss from './TabGroup.less';
+import componentCss from './TabGroup.module.less';
 
 const TabBase = kind({
 	name: 'Tab',
