@@ -3,10 +3,12 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Slottable from '@enact/ui/Slottable';
+import Spotlight from '@enact/spotlight';
+import SpotlightContainerDecorator, {spotlightDefaultClass} from '@enact/spotlight/SpotlightContainerDecorator';
 import Spottable from '@enact/spotlight/Spottable';
 import Transition from '@enact/ui/Transition';
 
-import Icon from '../Icon';
+import IconButton from '../IconButton';
 import Item from '../Item';
 import PopupState from '../Popup/PopupState';
 import Skinnable from '../Skinnable';
@@ -14,13 +16,13 @@ import Skinnable from '../Skinnable';
 import css from './PopupNavigation.less';
 
 // TODO: Apply spottable div
-// const SpottableDiv = Spottable('div');
+const SpottableDiv = Spottable('div');
 
 const PopupNavigationBase = kind({
 	name: 'PopupNavigation',
 	propTypes: {
-		menuStrings: PropTypes.array,
 		menuCallbacks: PropTypes.func,
+		menuStrings: PropTypes.array,
 		noAnimation: PropTypes.bool,
 		onClose: PropTypes.func,
 		onHide: PropTypes.func,
@@ -35,6 +37,28 @@ const PopupNavigationBase = kind({
 	handlers: {
 		onClick: (index, {menuCallbacks}) => () => {
 			menuCallbacks(index);
+		},
+		spotOnRender: (node) => {
+			console.dir(node);
+			Spotlight.focus(node.props);
+			// console.dir(this.querySelector(`.${css.innerCircle}`));
+			// if (node) {
+				// const {spotlightId} = node.dataset;
+				// const config = {
+				// 	enterTo: 'last-focused'
+				// };
+
+				// if (autoFocus !== 'last-focused') {
+				// 	config.enterTo = 'default-element';
+
+				// 	if (autoFocus !== 'default-element') {
+				// 		config.defaultElement = autoFocus;
+				// 	}
+				// }
+
+				// Spotlight.set(spotlightId, config);
+				// Spotlight.focus(spotlightId);
+			// }
 		}
 	},
 
@@ -49,7 +73,7 @@ const PopupNavigationBase = kind({
 		}
 	},
 
-	render: ({menuStrings, noAnimation, onClick, onClose, onHide, open, ...rest}) => {
+	render: ({menuStrings, noAnimation, onClick, onClose, onHide, open, spotOnRender, styler, ...rest}) => {
 		delete rest.menuCallbacks;
 
 		return (
@@ -60,28 +84,28 @@ const PopupNavigationBase = kind({
 				duration="short"
 				type="fade"
 				onHide={onHide}
-				className={css.popupTransitionContainer}
-				css={css}
 			>
 				<div {...rest}>
 					{menuStrings.map((menu, index) => {
 						return (
-							<div
-								className={css[`part${index}`]}
+							<SpottableDiv
+								className={styler.join(css.part, `part${index}`)}
+								key={index}
 								onClick={onClick(index)}
 							>
-								<Item className={css[`menu${index}`]}>
+								<div className={css.menu}>
 									{menu}
-								</Item>
-							</div>
+								</div>
+							</SpottableDiv>
 						);
 					})}
-					<Icon
+					<IconButton
 						className={css.innerCircle}
 						onClick={onClose}
+						ref={spotOnRender}
 					>
 						closex
-					</Icon>
+					</IconButton>
 				</div>
 			</Transition>
 		);

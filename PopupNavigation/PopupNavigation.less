@@ -28,61 +28,57 @@
 			right: 0;
 		}
 
-		&.menu2 {}
-		&.menu3 {}
-
 		&.menu4 {
-			.part0 {
-				.circle();
-				transform: rotateZ(45deg) translateX(100%);
-				margin: 0 0 0 10px;
-			}
-
-			.part1 {
-				.circle();
-				transform: rotateZ(225deg);
-				margin: 10px 0 0 0;
-			}
-
-			.part2 {
-				.circle();
-				transform: rotateZ(-45deg);
-				margin: 0px 0px 0px -10px;
-			}
-
-			.part3 {
-				.circle();
-				transform: rotateZ(45deg);
-				margin: -10px 0 0 0;
-			}
-
-			.menu0 {
-				.font();
-				transform: rotateZ(-45deg) translateY(50%);
-				transform-origin: bottom left;
-				text-align: right;
-			}
-
-			.menu1 {
-				.font();
-				transform: translateY(50%) rotateZ(-225deg);
-				transform-origin: top;
-				text-align: center;
-			}
-
-			.menu2 {
-				.font();
-				transform: rotateZ(45deg) translateY(50%);
+			.part {
+				width: 50%;
+				height: 50%;
+				position: absolute;
+				background-color: #e4b89e;
 				transform-origin: bottom right;
-				text-align: left;
+				margin-top: 3px;
 
-			}
+				.menu {
+					position: absolute;
+					width: 100%;
+					top: 50%;
+					left: 50%;
+					color: #fff;
+					transform+_: translate(-50%, -50%); // use LESS merging: http://lesscss.org/features/#merge-feature-space
+				}
 
-			.menu3 {
-				.font();
-				transform: rotateZ(-45deg) translateY(50%);
-				transform-origin: top left;
-				text-align: center;
+				&.part0 {
+					transform: rotateZ(-45deg);
+
+					.menu {
+						transform+_: rotateZ(45deg); // This takes the rotateZ and adds it to the translate from above.
+						// If this doesn't work, or is confusing, just do it manually:
+						// transform: translate(-50%, -50%) rotateZ(45deg);
+					}
+				}
+
+				&.part1 {
+					transform: rotateZ(45deg);
+
+					.menu {
+						transform+_: rotateZ(-45deg);
+					}
+				}
+
+				&.part2 {
+					transform: rotateZ(135deg);
+
+					.menu {
+						transform+_: rotateZ(-135deg);
+					}
+				}
+
+				&.part3 {
+					transform: rotateZ(225deg);
+
+					.menu {
+						transform+_: rotateZ(-225deg);
+					}
+				}
 			}
 		}
 
