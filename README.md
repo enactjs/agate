@@ -7,4 +7,8 @@ A theme is a collection of components all styled the same way, with the same gen
 
 ## What's in it
 
-This theme composes a few dozen components, each of which is styled to represent sever different "skins". However, the experimental part is that these "skins" are not simply color swapping, but include shapes, measurements, layouts, and arrangements, making them less like the Enact definition of a skin and more like "skin+". This approach is the middle-ground between a skin and a theme. All of the components here share a common set of behavioral and interaction features while looking completely different.
+This theme composes a few dozen components, each of which is styled to represent several different "skins". However, the experimental part is that these "skins" are not simply color swapping, but include shapes, measurements, layouts, and arrangements, making them less like the Enact definition of a skin and more like "skin+". This approach is the middle-ground between a skin and a theme. All of the components here share a common set of behavioral and interaction features while looking completely different.
+
+## Let me see it!
+
+Alright, chill. We built several apps based on Agate that you can check out at the following address: https://github.com/enactjs/agate-apps
