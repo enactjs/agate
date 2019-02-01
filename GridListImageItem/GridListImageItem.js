@@ -14,7 +14,7 @@ import {ImageBase} from '../Image';
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
-import componentCss from './GridListImageItem.less';
+import componentCss from './GridListImageItem.module.less';
 
 const parseRatio = /^(\d+):(\d+)$/;
 const calcAspectRatio = memoize(aspectRatio => {

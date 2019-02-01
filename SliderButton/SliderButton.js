@@ -9,7 +9,7 @@ import UiSlider from '@enact/ui/Slider';
 
 import Skinnable from '../Skinnable';
 
-import componentCss from './SliderButton.less';
+import componentCss from './SliderButton.module.less';
 
 const SliderKnob = kind({
 	name: 'SliderKnob',

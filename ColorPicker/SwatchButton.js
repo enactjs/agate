@@ -19,7 +19,7 @@ import React from 'react';
 import {ButtonBase, ButtonDecorator} from '../Button';
 import Skinnable from '../Skinnable';
 
-import componentCss from './SwatchButton.less';
+import componentCss from './SwatchButton.module.less';
 
 
 /**

@@ -11,7 +11,7 @@ import Skinnable from '../Skinnable';
 
 import PopupState from '../Popup/PopupState';
 
-import componentCss from './Drawer.less';
+import componentCss from './Drawer.module.less';
 
 const DrawerBase = kind({
 	name: 'Drawer',

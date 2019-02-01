@@ -1,0 +1,102 @@
+// Input.module.less
+//
+@import "../styles/skin.less";
+
+.decorator {
+	.applySkins({
+		display: inline-flex;
+		position: relative;
+		margin: 0 (@agate-spotlight-outset / 2);
+		border-color: @agate-input-decorator-border-color;
+		border-style: @agate-input-decorator-border-style;
+		border-width: @agate-input-decorator-border-width;
+		box-sizing: border-box;
+		vertical-align: middle;
+
+		.input {
+			padding: @agate-input-padding;
+			cursor: pointer;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			flex-grow: 1;
+			text-indent: 0.2em;
+			font-size: @agate-input-font-size;
+			font-weight: @agate-input-font-weight;
+
+			border: none;
+			background: transparent;
+			color: @agate-text-color;
+
+			&::selection {
+				color: @agate-spotlight-color;
+				background-color: @agate-spotlight-bg-color;
+			}
+
+			&::placeholder {
+				color: @agate-input-placeholder-color;
+			}
+
+			&[type=number] {
+				-moz-appearance: textfield;
+
+				&::-webkit-inner-spin-button,
+				&::-webkit-outer-spin-button {
+					-webkit-appearance: none;
+				}
+
+				&:hover {
+					-moz-appearance: none;
+				}
+			}
+
+			&[placeholder] {
+				text-overflow: ellipsis;
+			}
+
+			:global(.enact-locale-right-to-left) & {
+				text-align: right;
+			}
+		}
+
+		.input,
+		.icon {
+			line-height: @agate-input-height;
+			height: @agate-input-height;
+			vertical-align: middle;
+			margin: 0;
+		}
+
+		.icon {
+			flex: 0 0;
+			width: auto;
+			margin: 0;
+
+			&.iconBefore {
+				margin-left: (@agate-spotlight-outset / 2);
+			}
+
+			&.iconAfter {
+				margin-right: (@agate-spotlight-outset / 2);
+			}
+		}
+
+		// Spotlight Colors
+
+		// an Input that isn't spottable is behaviorly disabled but not visually
+		&:not(:global(.spottable)) .input {
+			pointer-events: none;
+		}
+
+		&.focused {
+			background-color: @agate-input-focused-background-color;
+			background-image: @agate-input-focused-background-image;
+			border-radius: 3px;
+
+			.icon,
+			.input {
+				color: @agate-input-focused-text-color;
+			}
+		}
+	});
+}

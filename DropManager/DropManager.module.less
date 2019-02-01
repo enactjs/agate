@@ -1,0 +1,64 @@
+// DropManager.module.less
+//
+
+@import "~@enact/agate/styles/mixins.less";
+
+.dropManager {
+	*[draggable=true] {
+		overflow: hidden;
+	}
+
+	*[data-slot] {
+
+		&::before,
+		&::after {
+			content: "";
+			display: none;
+			position: absolute;
+		}
+		&::before {
+			.position(0);
+			z-index: 9;
+		}
+		&::after {
+			.position(6px);
+			z-index: 10;
+			border: 1px dashed fade(gray, 50%);
+			border-radius: 12px;
+			background-color: fade(white, 10%);
+		}
+	}
+
+	&.arrangeable *[data-slot],
+	&:global(.dragging) *[data-slot] {
+		min-height: 30px;
+		min-width: 30px;
+
+		&::before,
+		&::after {
+			display: block;
+		}
+
+		&:global(.dropTarget) {
+			&::after {
+				display: block;
+				border-width: 6px;
+			}
+		}
+	}
+
+	&:global(.debug.drag) {
+		*[data-slot]::before {
+			content: "slot=" attr(data-slot);
+			display: block;
+			// position: absolute;
+			border: 1px solid lime;
+			color: lime;
+			padding: 0 0.3em;
+			margin: 0.3em;
+			line-height: 1.5em;
+			font-size: 60%;
+			background-color: fade(black, 30%);
+		}
+	}
+}

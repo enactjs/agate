@@ -1,0 +1,65 @@
+// Picker.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
+
+
+.picker {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+
+	.applySkins({
+		align-items: center;
+		justify-content: center;
+		min-width: 72px;
+		font-weight: @agate-picker-font-weight;
+		font-size: @agate-picker-font-size;
+		border-radius: @agate-picker-border-radius;
+		transform: @agate-picker-transform;
+		margin: @agate-picker-margin;
+
+		.label {
+			transform: @agate-picker-label-transform;
+		}
+
+		.item,
+		.itemTop,
+		.itemBottom {
+			margin: 0;
+			color: inherit;
+			width: 100%;
+			text-align: center;
+			height: @agate-button-height;
+			line-height: @agate-button-height;
+
+			&.active {
+				color: @agate-picker-active-color;
+				background-color: @agate-picker-active-bg-color;
+				background-image: @agate-picker-active-bg-image;
+				font-size: @agate-picker-active-font-size;
+			}
+
+			&[disabled] {
+				.vendor-opacity(@agate-disabled-opacity);
+			}
+
+			.focus({
+				color: @agate-picker-item-focus-color;
+				background-color: @agate-picker-item-focus-bg-color;
+				background-image: @agate-picker-item-focus-bg-image;
+			});
+		}
+
+		.itemTop {
+			background-color: @agate-picker-item-top-bg-color;
+			background-image: @agate-picker-item-top-bg-image;
+		}
+
+		.itemBottom {
+			background-color: @agate-picker-item-bottom-bg-color;
+			background-image: @agate-picker-item-bottom-bg-image;
+		}
+	});
+}

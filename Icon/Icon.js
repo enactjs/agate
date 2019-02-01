@@ -21,7 +21,7 @@ import Skinnable from '../Skinnable';
 
 import iconList from './IconList.js';
 
-import componentCss from './Icon.less';
+import componentCss from './Icon.module.less';
 
 /**
  * Renders a agate-styled icon without any behavior.

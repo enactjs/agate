@@ -21,7 +21,7 @@ import React from 'react';
 
 import Skinnable from '../Skinnable';
 
-import componentCss from './Image.less';
+import componentCss from './Image.module.less';
 
 const placeholder =
 	'data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC' +

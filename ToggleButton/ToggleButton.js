@@ -19,7 +19,7 @@ import Button from '../Button';
 import IconButton from '../IconButton';
 import Skinnable from '../Skinnable';
 
-import css from './ToggleButton.less';
+import css from './ToggleButton.module.less';
 
 
 /**

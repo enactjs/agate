@@ -1,0 +1,43 @@
+// Icon.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
+
+.icon {
+	.applySkins({
+		width: @agate-icon-size;
+		height: @agate-icon-size;
+		background-position: center -((@agate-icon-sprite-size - @agate-icon-size) / 2);
+		background-size: @agate-icon-sprite-size (@agate-icon-sprite-size * 2);
+		background-repeat: no-repeat;
+		margin: @agate-icon-margin;
+		font-family: @agate-icon-font-family;
+		font-size: @agate-icon-font-size;
+		line-height: @agate-icon-size;
+		text-align: center;
+		position: relative;
+		color: inherit;
+
+		&.small {
+			background-position: center -((@agate-icon-sprite-small-size - @agate-icon-small-size) / 2);
+			background-size: @agate-icon-sprite-small-size (@agate-icon-sprite-small-size * 2);
+			width: @agate-icon-small-size;
+			height: @agate-icon-small-size;
+			font-size: @agate-icon-small-font-size;
+			line-height: @agate-icon-small-size;
+		}
+
+		&.dingbat {
+			font-family: "LG Display_Dingbat";
+			font-size: @agate-icon-size;
+			line-height: (@agate-icon-size - 8);  // Slight vertical shift to account for a lower baseline
+
+			&.small {
+				font-size: @agate-icon-small-size;
+				line-height: (@agate-icon-small-size - 4);  // Slight vertical shift to account for a lower baseline
+			}
+		}
+
+	});
+}

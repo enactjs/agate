@@ -17,7 +17,7 @@ import Toggleable from '@enact/ui/Toggleable';
 import Touchable from '@enact/ui/Touchable';
 import compose from 'ramda/src/compose';
 
-import componentCss from './RadioItem.less';
+import componentCss from './RadioItem.module.less';
 
 /**
  * Renders an `Item` with a radio-dot component. Useful to show a selected state on an Item.

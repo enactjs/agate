@@ -12,7 +12,7 @@ import Button from '../Button';
 
 import PopupState from './PopupState';
 
-import componentCss from './Popup.less';
+import componentCss from './Popup.module.less';
 
 const PopupBase = kind({
 	name: 'Popup',

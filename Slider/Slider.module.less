@@ -1,0 +1,160 @@
+// Slider.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+
+.slider {
+	.applySkins({
+		position: relative;
+		// Set both the V and H sizes here, so they can be easily overridden, both internally below and by component consumers.
+		height: @agate-slider-height;
+		width: @agate-slider-width;
+		box-sizing: border-box;
+		direction: ltr;
+		background-color: @agate-slider-bg-color;
+		background-image: @agate-slider-bg-image;
+		border-radius: @agate-slider-border-radius;
+		transform: @agate-slider-bg-transform;
+
+		.progressBar {
+			position: relative;
+			height: 100%;
+			width: 100%;
+			background-color: @agate-slider-track-bg-color;
+			background-image: @agate-slider-track-bg-image;
+			border-radius: @agate-slider-border-radius;
+			transform: @agate-slider-track-transform;
+		}
+
+		.fill {
+			background-color: @agate-slider-fill-bg-color;
+			background-image: @agate-slider-fill-bg-image;
+			border-radius: @agate-slider-border-radius;
+		}
+
+		.knob {
+			position: absolute;
+			will-change: left, bottom;
+
+			&::before {
+				content: "";
+				position: absolute;
+				height: @agate-slider-knob-height;
+				width: @agate-slider-knob-width;
+				border: @agate-slider-knob-border-width solid transparent;
+				box-sizing: border-box;
+				will-change: transform;
+				transition: transform ease-out 100ms;
+
+				// Vertically and horizontally center this knob.
+				// Using this method rather than -top -left so the knob is more intuitively customizable.
+				transform: @agate-slider-knob-transform;
+				border-radius: @agate-slider-knob-border-radius;
+				background-color: @agate-slider-knob-bg-color;
+				background-image: @agate-slider-knob-bg-image;
+				box-shadow: @agate-slider-knob-shadow;
+			}
+		}
+
+		&.noFill {
+			.fill {
+				background-color: transparent;
+			}
+
+			.spottable({
+				&.active,
+				&.pressed {
+					.fill {
+						background-color: transparent;
+					}
+				}
+			});
+		}
+
+		&.horizontal {
+			width: auto;
+			margin: @agate-slider-horizontal-margin;
+			padding: @agate-slider-horizontal-padding;
+
+			.progressBar,
+			.fill,
+			.load {
+				height: @agate-slider-track-height;
+			}
+
+			.knob {
+				left: ~"calc(var(--ui-slider-proportion-end-knob) * 100%)";
+			}
+		}
+
+		&.vertical {
+			padding: @agate-slider-vertical-padding;
+			margin: @agate-slider-vertical-margin;
+			min-height: 120px;
+			display: inline-block;
+			vertical-align: top;
+
+			.progressBar,
+			.fill,
+			.load {
+				width: @agate-slider-track-width;
+			}
+
+			.knob {
+				bottom: ~"calc(var(--ui-slider-proportion-end-knob) * 100%)";
+				top: auto;
+			}
+		}
+
+		.spottable({
+			&.pressed,
+			&:focus {
+				.tooltip {
+					display: block;
+				}
+			}
+		});
+
+		.spottable({
+			&:focus.activateOnFocus,
+			&.active,
+			&.pressed {
+				.fill {
+					background-color: @agate-slider-fill-bg-color;
+					background-image: @agate-slider-fill-bg-image;
+				}
+			}
+
+			.focus({
+				background-color: @agate-slider-focus-bg-color;
+				background-image: @agate-slider-focus-bg-image;
+
+				.progressBar {
+					background-color: @agate-slider-track-focus-bg-color;
+					background-image: @agate-slider-track-focus-bg-image;
+				}
+
+				.knob::before {
+					background-color: @agate-slider-knob-focus-bg-color;
+					background-image: @agate-slider-knob-focus-bg-image;
+					box-shadow: @agate-slider-knob-focus-shadow;
+				}
+
+				&.active {
+					.knob::before {
+						background-color: @agate-slider-knob-focus-bg-color;
+						border-color: @agate-slider-knob-focus-bg-image;
+					}
+				}
+			});
+
+			&.pressed,
+			&:focus.activateOnFocus,
+			&:focus.active {
+				.knob::before {
+					transform: @agate-slider-knob-active-transform;
+				}
+			}
+		});
+	});
+}

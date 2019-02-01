@@ -7,7 +7,7 @@ import Transition from '@enact/ui/Transition';
 import PopupState from '../Popup/PopupState';
 import Skinnable from '../Skinnable';
 
-import componentCss from './FullscreenPopup.less';
+import componentCss from './FullscreenPopup.module.less';
 
 const FullscreenPopupBase = kind({
 	name: 'FullscreenPopup',

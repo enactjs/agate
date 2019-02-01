@@ -21,7 +21,7 @@ import InputDecoratorIcon from './InputDecoratorIcon';
 import InputSpotlightDecorator from './InputSpotlightDecorator';
 import {extractInputProps} from './util';
 
-import componentCss from './Input.less';
+import componentCss from './Input.module.less';
 
 /**
  * An input component
