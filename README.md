@@ -1,6 +1,8 @@
 # Agate Components Library
 An experimental Enact theme, implementing a new radical approach to what could be done with the existing skinning system.
 
+![Agate themes](http://enactjs.github.io/agate/images/agate-themes.jpg)
+
 ## What is a theme vs a skin
 
 A theme is a collection of components all styled the same way, with the same general appearance. A skin is simply a new set of colors applied to those general shapes and layouts. A skin could be thought of as light vs dark mode of an interface, while a theme would be the different UI elements represented in iOS vs. Android's Material design vs. Windows Phone. A theme incorporates a set of UX behaviors for its components; ex: the button has a pressed state, sliders have a circle that is centered on a thin track, a popup extends to the left and right edges of the screen, etc. These themes have one or more skins which change their coloration, but nothing else.
