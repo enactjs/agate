@@ -37,6 +37,7 @@ const LabeledIconBase = kind({
 
 	render: (props) => UiLabeledIcon.inline({
 		...props,
+		css: props.css,
 		iconComponent: Icon
 	})
 });
