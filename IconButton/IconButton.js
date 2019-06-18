@@ -27,6 +27,7 @@ import componentCss from './IconButton.module.less';
 const Icon = kind({
 	name: 'Icon',
 	propTypes: {
+		css: PropTypes.object,
 		size: PropTypes.oneOf(['small', 'smallest'])
 	},
 	styles: {
@@ -34,16 +35,11 @@ const Icon = kind({
 		className: 'icon'
 	},
 	computed: {
-		className: ({size, styler}) => styler.append(size),
-		small: ({size}) => size === 'small'
+		className: ({size, styler}) => styler.append(size)
 	},
-	render: (props) => {
-		delete props.size;
-
-		return (
-			<AgateIcon {...props} />
-		);
-	}
+	render: (props) => (
+		<AgateIcon {...props} />
+	)
 });
 
 /**

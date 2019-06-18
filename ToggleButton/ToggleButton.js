@@ -138,7 +138,8 @@ const ToggleButtonBase = kind({
 
 	styles: {
 		css,
-		className: 'toggleButton'
+		className: 'toggleButton',
+		publicClassNames: true
 	},
 
 	computed: {

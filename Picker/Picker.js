@@ -39,7 +39,8 @@ const PickerBase = kind({
 
 	styles: {
 		css,
-		className: 'picker'
+		className: 'picker',
+		publicClassNames: true
 	},
 
 	handlers: {

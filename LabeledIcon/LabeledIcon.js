@@ -29,9 +29,15 @@ const LabeledIconBase = kind({
 		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
 	},
 
+	styles: {
+		css: componentCss,
+		className: 'labeledIcon',
+		publicClassNames: true
+	},
+
 	render: (props) => UiLabeledIcon.inline({
 		...props,
-		css: componentCss,
+		css: props.css,
 		iconComponent: Icon
 	})
 });
