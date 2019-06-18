@@ -71,7 +71,8 @@ const SliderButtonBase = kind({
 	},
 	styles: {
 		css: componentCss,
-		className: 'sliderButton'
+		className: 'sliderButton',
+		publicClassNames: true
 	},
 	computed: {
 		max: ({children}) => (children && children.length ? children.length - 1 : 0),
