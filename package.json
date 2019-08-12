@@ -6,10 +6,9 @@
   "main": "index.js",
   "scripts": {
     "clean": "enact clean",
-    "lint": "enact lint --framework",
-    "test": "enact test start --single-run --browsers PhantomJS",
-    "test-json": "enact test start --single-run --browsers PhantomJS --reporters json",
-    "test-watch": "enact test start --browsers PhantomJS",
+    "lint": "enact lint --strict",
+    "test": "enact test",
+    "test-watch": "enact test --watch",
     "transpile": "enact transpile"
   },
   "license": "Apache-2.0",
@@ -21,9 +20,7 @@
     "webOS"
   ],
   "enact": {
-    "ri": {
-      "baseSize": 24
-    }
+    "template": "html-template.ejs"
   },
   "eslintConfig": {
     "extends": "enact/strict"
