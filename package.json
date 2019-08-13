@@ -6,10 +6,9 @@
   "main": "index.js",
   "scripts": {
     "clean": "enact clean",
-    "lint": "enact lint --framework",
-    "test": "enact test start --single-run --browsers PhantomJS",
-    "test-json": "enact test start --single-run --browsers PhantomJS --reporters json",
-    "test-watch": "enact test start --browsers PhantomJS",
+    "lint": "enact lint --strict",
+    "test": "enact test",
+    "test-watch": "enact test --watch",
     "transpile": "enact transpile"
   },
   "license": "Apache-2.0",
@@ -21,23 +20,28 @@
     "webOS"
   ],
   "enact": {
-    "ri": {
-      "baseSize": 24
-    }
+    "template": "html-template.ejs"
   },
   "eslintConfig": {
     "extends": "enact/strict"
   },
   "dependencies": {
-    "@enact/core": "^2.0.0",
-    "@enact/i18n": "^2.0.0",
-    "@enact/spotlight": "^2.0.0",
-    "@enact/ui": "^2.0.0",
+    "@enact/core": "^3.0.0-rc.1",
+    "@enact/i18n": "^3.0.0-rc.1",
+    "@enact/spotlight": "^3.0.0-rc.1",
+    "@enact/ui": "^3.0.0-rc.1",
     "classnames": "^2.2.6",
     "color-convert": "^1.9.3",
     "eases": "^1.0.8",
     "prop-types": "^15.6.2",
     "ramda": "^0.25.0",
-    "react": "^16.0.0"
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  },
+  "peerDependencies": {
+    "ilib": "^14.2.0 || ^14.2.0-webostv1"
+  },
+  "devDependencies": {
+    "ilib": "^14.2.0"
   }
 }
