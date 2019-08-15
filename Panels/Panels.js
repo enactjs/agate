@@ -1,12 +1,12 @@
+import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ViewManager, {shape, SlideBottomArranger as VerticalArranger, SlideRightArranger as HorizontalArranger} from '@enact/ui/ViewManager';
 
-import Panel from './Panel';
-import TabbedPanels from './TabbedPanels';
-
 import componentCss from './Panels.module.less';
+
+import CancelDecorator from './CancelDecorator';
 
 const mapChildren = (childs) => React.Children.map(childs, (child, index) => {
 	return child ? React.cloneElement(child, {
@@ -20,6 +20,7 @@ const PanelsBase = kind({
 		arranger: shape,
 		duration: PropTypes.number,
 		index: PropTypes.number,
+		onBack: PropTypes.func,
 		orientation: PropTypes.string
 	},
 	defaultProps: {
@@ -40,12 +41,14 @@ const PanelsBase = kind({
 		},
 		enteringProp: ({noAnimation}) => noAnimation ? null : 'hideChildren'
 	},
-	render: ({children, ...props}) => {
+	render: ({children, ...rest}) => {
+		delete rest.onBack;
+
 		const mappedChildren = mapChildren(children);
 
 		return (
 			<ViewManager
-				{...props}
+				{...rest}
 			>
 				{mappedChildren}
 			</ViewManager>
@@ -53,10 +56,14 @@ const PanelsBase = kind({
 	}
 });
 
-export default PanelsBase;
+const PanelsDecorator = compose(
+	CancelDecorator({cancel: 'onBack'})
+);
+
+const Panels = PanelsDecorator(PanelsBase);
+
+export default Panels;
 export {
-	Panel,
-	PanelsBase as Panels,
-	PanelsBase,
-	TabbedPanels
+	Panels,
+	PanelsBase
 };

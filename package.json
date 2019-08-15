@@ -33,10 +33,12 @@
     "classnames": "^2.2.6",
     "color-convert": "^1.9.3",
     "eases": "^1.0.8",
+    "invariant": "^2.2.4",
     "prop-types": "^15.6.2",
     "ramda": "^0.25.0",
     "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react-dom": "^16.8.0",
+    "warning": "^3.0.0"
   },
   "peerDependencies": {
     "ilib": "^14.2.0 || ^14.2.0-webostv1"
