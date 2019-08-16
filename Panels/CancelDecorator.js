@@ -22,8 +22,12 @@ const CancelDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 			if (path) {
 				// this is a RoutablePanels
-				path.pop();
 				event.path = path;
+				if (Array.isArray(event.path)) {
+					event.path.pop();
+				} else {
+					event.path = event.path.split('/').slice(0, -1).join('/');
+				}
 			} else {
 				// this is a Panels
 				event.index = index - 1;

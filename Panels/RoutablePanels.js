@@ -14,7 +14,7 @@ const decorateRoutes = (routes, routeProps) => React.Children.map(routes, (route
 
 const navigateHandler = handle(
 	adaptEvent(({path}) => {
-		return {path: [...path]};
+		return {path: Array.isArray(path) ? [...path] : path};
 	}, forward('onChange'))
 );
 
