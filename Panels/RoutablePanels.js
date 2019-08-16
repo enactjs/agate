@@ -29,7 +29,7 @@ const RoutablePanelsBase = kind({
 		onNavigate: navigateHandler
 	},
 	computed: {
-		children: ({children, onNavigate, path}) => decorateRoutes(children, {onNavigate, path})
+		children: ({children, onNavigate: updateRoute, path: currentRoute}) => decorateRoutes(children, {currentRoute, updateRoute})
 	},
 	render: (props) => {
 		delete props.onNavigate;
