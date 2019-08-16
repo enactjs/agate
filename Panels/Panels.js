@@ -1,52 +1,18 @@
+import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
-import ViewManager, {shape, SlideArranger} from '@enact/ui/ViewManager';
-
-import Panel from './Panel';
-import TabbedPanels from './TabbedPanels';
+import ViewManager, {shape, SlideBottomArranger as VerticalArranger, SlideRightArranger as HorizontalArranger} from '@enact/ui/ViewManager';
 
 import componentCss from './Panels.module.less';
 
-import easing from 'eases/back-out';
-import * as arrange from '@enact/ui/ViewManager/arrange';
-
-const slideIn = arrange.reverse(arrange.fadeIn);
-const slideOut = arrange.reverse(arrange.fadeOut);
-
-const HorizontalArranger = SlideArranger({
-	amount: 50,
-	enter: 'right',
-	leave: 'left'
-});
-HorizontalArranger.enter = arrange.ease(
-	easing,
-	arrange.compose(slideIn, HorizontalArranger.enter)
-);
-HorizontalArranger.leave = arrange.ease(
-	easing,
-	arrange.compose(slideOut, HorizontalArranger.leave)
-);
-
-const VerticalArranger = SlideArranger({
-	amount: 50,
-	enter: 'bottom',
-	leave: 'top'
-});
-VerticalArranger.enter = arrange.ease(
-	easing,
-	arrange.compose(slideIn, VerticalArranger.enter)
-);
-VerticalArranger.leave = arrange.ease(
-	easing,
-	arrange.compose(slideOut, VerticalArranger.leave)
-);
+import CancelDecorator from './CancelDecorator';
 
 const mapChildren = (childs) => React.Children.map(childs, (child, index) => {
 	return child ? React.cloneElement(child, {
 		'data-index': index
 	}) : null;
-})
+});
 
 const PanelsBase = kind({
 	name: 'Panels',
@@ -54,6 +20,7 @@ const PanelsBase = kind({
 		arranger: shape,
 		duration: PropTypes.number,
 		index: PropTypes.number,
+		onBack: PropTypes.func,
 		orientation: PropTypes.string
 	},
 	defaultProps: {
@@ -74,12 +41,14 @@ const PanelsBase = kind({
 		},
 		enteringProp: ({noAnimation}) => noAnimation ? null : 'hideChildren'
 	},
-	render: ({children, ...props}) => {
+	render: ({children, ...rest}) => {
+		delete rest.onBack;
+
 		const mappedChildren = mapChildren(children);
 
 		return (
 			<ViewManager
-				{...props}
+				{...rest}
 			>
 				{mappedChildren}
 			</ViewManager>
@@ -87,10 +56,14 @@ const PanelsBase = kind({
 	}
 });
 
-export default PanelsBase;
+const PanelsDecorator = compose(
+	CancelDecorator({cancel: 'onBack'})
+);
+
+const Panels = PanelsDecorator(PanelsBase);
+
+export default Panels;
 export {
-	Panel,
-	PanelsBase as Panels,
-	PanelsBase,
-	TabbedPanels
+	Panels,
+	PanelsBase
 };
