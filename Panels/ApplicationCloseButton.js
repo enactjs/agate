@@ -2,7 +2,6 @@ import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import $L from '../internal/$L';
 import IconButton from '../IconButton';
 
 /**
@@ -38,9 +37,9 @@ const ApplicationCloseButton = kind({
 		onApplicationClose: PropTypes.func
 	},
 
-	// computed: {
-	//	'aria-label': ({'aria-label': ariaLabel}) => ariaLabel == null ? $L('Exit app') : ariaLabel
-	// },
+	computed: {
+		'aria-label': ({'aria-label': ariaLabel}) => ariaLabel == null ? 'Exit app' : ariaLabel
+	},
 
 	render: ({onApplicationClose, ...rest}) => {
 		return (

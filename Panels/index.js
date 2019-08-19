@@ -12,7 +12,8 @@
 import ActivityPanels from './ActivityPanels';
 import Breadcrumb from './Breadcrumb';
 import Panel from './Panel';
-import Panels from './Panels';
+import {Panels, PanelsBase} from './Panels';
+import TabbedPanels from './TabbedPanels';
 
 export default Panels;
 export {
@@ -20,5 +21,6 @@ export {
 	Breadcrumb,
 	Panel,
 	Panels,
-	Panels as PanelsBase
+	PanelsBase,
+	TabbedPanels
 };

@@ -1,38 +1,20 @@
 import kind from '@enact/core/kind';
 import Measurable from '@enact/ui/Measurable';
 import Slottable from '@enact/ui/Slottable';
-import Spotlight from '@enact/spotlight';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
-import ViewManager, {shape, SlideBottomArranger as VerticalArranger, SlideRightArranger as HorizontalArranger} from '@enact/ui/ViewManager';
+import {shape, SlideBottomArranger as VerticalArranger, SlideRightArranger as HorizontalArranger} from '@enact/ui/ViewManager';
 
 import CancelDecorator from './CancelDecorator';
 import Controls from './Controls';
 import IdProvider from './IdProvider';
 import Panel from './Panel';
-import TabbedPanels from './TabbedPanels';
+import Viewport from './Viewport';
 
 import componentCss from './Panels.module.less';
 
 const getControlsId = (id) => id && `${id}-controls`;
-const mapChildren = (children, generateId) => React.Children.map(children, (child, index) => {
-	if (child) {
-		const {spotlightId = generateId(index, 'panel-container', Spotlight.remove)} = child.props;
-		const props = {
-			spotlightId,
-			'data-index': index
-		};
-
-		// if (child.props.autoFocus == null && this.state.direction === 'forward') {
-		//	props.autoFocus = 'default-element';
-		// }
-
-		return React.cloneElement(child, props);
-	} else {
-		return null;
-	}
-});
 
 const PanelsBase = kind({
 	name: 'Panels',
@@ -121,6 +103,24 @@ const PanelsBase = kind({
 		noCloseButton: PropTypes.bool,
 
 		/**
+		 * Prevents maintaining shared state for framework components within this `Panels` instance.
+		 *
+		 * When `false`, each `Panel` will track the state of some framework components in order to
+		 * restore that state when the Panel is recreated. For example, the scroll position of a
+		 * `agate/Scroller` within a `Panel` will be saved and restored when returning to that
+		 * `Panel`.
+		 *
+		 * This only applied when navigating "back" (to a lower index) to `Panel`. When navigating
+		 * "forwards" (to a higher index), the `Panel` and its contained components will use their
+		 * default state.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		noSharedState: PropTypes.bool,
+
+		/**
 		 * Called when the app close button is clicked.
 		 *
 		 * @type {Function}
@@ -128,12 +128,23 @@ const PanelsBase = kind({
 		 */
 		onApplicationClose: PropTypes.func,
 
+		/**
+		 * Called with cancel/back key events.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onBack: PropTypes.func,
+
 		orientation: PropTypes.string
 	},
 	defaultProps: {
 		// arranger: HorizontalArranger,
 		duration: 500,
-		index: 0
+		index: 0,
+		noAnimation: false,
+		noCloseButton: false,
+		noSharedState: false
 	},
 	styles: {
 		css: componentCss,
@@ -146,24 +157,40 @@ const PanelsBase = kind({
 			if (orientation === 'vertical') return VerticalArranger;
 			else return HorizontalArranger;
 		},
+		childProps: ({childProps, controls, id, noCloseButton}) => {
+			if ((noCloseButton && !controls) || !id) {
+				return childProps;
+			}
+
+			const updatedChildProps = Object.assign({}, childProps);
+			const controlsId = getControlsId(id);
+			const owns = updatedChildProps['aria-owns'];
+
+			if (owns) {
+				updatedChildProps['aria-owns'] = `${owns} ${controlsId}`;
+			} else {
+				updatedChildProps['aria-owns'] = controlsId;
+			}
+
+			return updatedChildProps;
+		},
 		className: ({controls, noCloseButton, styler}) => styler.append({
-			'agate-panels-hasControls': (!noCloseButton || !!controls), // If there is a close button or controls were specified
-			'viewport': true
+			'agate-panels-hasControls': (!noCloseButton || !!controls) // If there is a close button or controls were specified
 		}),
-		enteringProp: ({noAnimation}) => noAnimation ? null : 'hideChildren',
 		style: ({controlsMeasurements, style = {}}) => (controlsMeasurements ? {
 			...style,
 			'--agate-panels-controls-width': controlsMeasurements.width + 'px'
-		} : style)
+		} : style),
+		viewportId: ({id}) => id && `${id}-viewport`
 	},
-	render: ({children, closeButtonAriaLabel, controls, controlsRef, generateId, id, noCloseButton, onApplicationClose, ...rest}) => {
+	render: ({arranger, childProps, children, closeButtonAriaLabel, controls, controlsRef, generateId, id, index, noAnimation, noCloseButton, noSharedState, onApplicationClose, viewportId, ...rest}) => {
 		delete rest.controlsMeasurements;
+		delete rest.onBack;
 
 		const controlsId = getControlsId(id);
-		const mappedChildren = mapChildren(children, generateId);
 
 		return (
-			<>
+			<div {...rest} id={id}>
 				<Controls
 					closeButtonAriaLabel={closeButtonAriaLabel}
 					id={controlsId}
@@ -174,12 +201,18 @@ const PanelsBase = kind({
 				>
 					{controls}
 				</Controls>
-				<ViewManager
-					{...rest}
+				<Viewport
+					arranger={arranger}
+					childProps={childProps}
+					generateId={generateId}
+					id={viewportId}
+					index={index}
+					noAnimation={noAnimation}
+					noSharedState={noSharedState}
 				>
-					{mappedChildren}
-				</ViewManager>
-			</>
+					{children}
+				</Viewport>
+			</div>
 		);
 	}
 });
@@ -197,6 +230,5 @@ export default PanelsBase;
 export {
 	Panel,
 	Panels,
-	PanelsBase,
-	TabbedPanels
+	PanelsBase
 };
