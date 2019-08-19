@@ -1,5 +1,90 @@
 /* Styles for agate/Panels */
 
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
+
 .panels {
-	/* I got cat class and I got cat style */
+	.controls {
+		position: absolute;
+		top: (@agate-app-keepout + @agate-spotlight-outset);
+		.position-start-end(auto, @agate-panel-h-padding);
+		z-index: 1;
+		.padding-start-end(18px, initial);
+		.remove-margin-on-edge-children();
+	}
+
+	&.activity {
+		.breadcrumbs {
+			position: absolute;
+			.position(0, auto, auto, 0);
+			height: 100%;
+			z-index: 10;
+			overflow: hidden;
+	
+			.breadcrumb {
+				position: absolute;
+				right: 0;
+				height: 100%;
+				display: table;
+				padding-top: 3px;
+	
+				.breadcrumbContent {
+					display: table-cell;
+					vertical-align: middle;
+					text-align: center;
+				}
+			}
+		}
+
+		.viewport {
+			> [data-index="0"] {
+				padding-left: 80px;
+			}
+	
+			> :not([data-index="0"]) {
+				padding-left: 40px;
+			}
+		}
+
+		&[data-index="0"] {
+			// prevents breadcrumbs from capturing pointer events when the first panel is visible
+			// without any breadcrumbs
+			.breadcrumbs {
+				z-index: -1;
+				pointer-events: none;
+			}
+		}
+
+		//&:not([data-index="0"]) {
+		//:global(.enact-locale-right-to-left) & .controls {
+			// allocate space for breadcrumb + header margin
+			//left: @agate-panels-breadcrumb-width + @agate-spotlight-outset;
+		//}
+	//}
+	}
+
+	.applySkins({
+		&.activity {
+			.breadcrumbs {
+				width: @agate-panels-breadcrumb-width;
+				
+				.breadcrumb {
+					width: @agate-panels-breadcrumb-width;
+					font-family: @agate-base-font-family;
+				}
+			}
+
+			.viewport {
+				//&.transitioning {
+					//-webkit-clip-path: polygon(@agate-panels-breadcrumb-width 0, 100% 0, 100% 100%, @agate-panels-breadcrumb-width 100%);
+					//clip-path: polygon(@agate-panels-breadcrumb-width 0, 100% 0, 100% 100%, @agate-panels-breadcrumb-width 100%);
+				//}
+
+				> :not([data-index="0"]) {
+					width: calc(~"100% - " @agate-panels-breadcrumb-width);
+				}
+			}
+		}
+	});
 }
