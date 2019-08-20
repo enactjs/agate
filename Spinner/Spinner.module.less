@@ -40,18 +40,8 @@
 				height: @agate-spinner-size;
 				position: relative;
 
-				.fan1,
-				.fan2,
-				.fan3,
-				.fan4,
-				.fan5,
-				.fan6,
-				.fan7,
-				.fan8,
-				.fan9,
-				.fan10,
-				.fan11,
-				.fan12 {
+				span {
+					display: block;
 					transform-origin: @agate-spinner-transform-origin @agate-spinner-transform-origin;
 					will-change: opacity;
 					animation: searching-spinner 1.2s linear infinite;
@@ -78,18 +68,7 @@
 					width: @agate-spinner-small-size;
 					height: @agate-spinner-small-size;
 
-					.fan1,
-					.fan2,
-					.fan3,
-					.fan4,
-					.fan5,
-					.fan6,
-					.fan7,
-					.fan8,
-					.fan9,
-					.fan10,
-					.fan11,
-					.fan12 {
+					span {
 						transform-origin: @agate-spinner-small-transform-origin @agate-spinner-small-transform-origin;
 
 						&:after {
@@ -105,18 +84,7 @@
 		&.dark {
 			&.searching {
 				.bg {
-					.fan1,
-					.fan2,
-					.fan3,
-					.fan4,
-					.fan5,
-					.fan6,
-					.fan7,
-					.fan8,
-					.fan9,
-					.fan10,
-					.fan11,
-					.fan12 {
+					span {
 						&:after {
 							background-color: @agate-spinner-dark-color;
 						}
@@ -128,35 +96,12 @@
 		&.light {
 			&.searching {
 				.bg {
-					.fan1,
-					.fan2,
-					.fan3,
-					.fan4,
-					.fan5,
-					.fan6,
-					.fan7,
-					.fan8,
-					.fan9,
-					.fan10,
-					.fan11,
-					.fan12 {
+					span {
 						&:after {
 							background-color: @agate-spinner-light-color;
 						}
 					}
 				}
-			}
-		}
-	});
-}
-
-.spinnerContainer {
-	// Skin colors
-	.applySkins({
-		.blockClickOn {
-			// Visible scrim
-			.scrim {
-				background-color: @agate-spinner-scrim-color;
 			}
 		}
 	});
