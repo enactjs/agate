@@ -37,6 +37,14 @@ const SpinnerCore = kind({
 
 	propTypes: {
 		css: PropTypes.object,
+
+		/**
+		 * Type of spinner.
+		 *
+		 * @type {('loading'|'searching')}
+		 * @default 'searching'
+		 * @public
+		 */
 		type: PropTypes.string
 	},
 
