@@ -22,6 +22,8 @@ import Skinnable from '../Skinnable';
 
 import componentCss from './Spinner.module.less';
 
+const createSpinnerNodes = (numberOfNodes, css) => [...Array(numberOfNodes)].map((_, index) => <div className={css[`fan${index + 1}`]} />);
+
 /**
  * A component that shows spinning balls, with optional text as children.
  *
@@ -34,28 +36,27 @@ const SpinnerCore = kind({
 	name: 'SpinnerCore',
 
 	propTypes: {
-		css: PropTypes.object
+		css: PropTypes.object,
+		type: PropTypes.string
+	},
+
+	defaultProps: {
+		type: 'searching'
 	},
 
 	styles: {
 		css: componentCss
 	},
 
-	render: ({css, ...rest}) => (
-		<div aria-label="Loading" aria-live="off" role="alert" {...rest}>
+	computed: {
+		className: ({styler, type}) => styler.append(type),
+		spinnerNodes: ({css, type}) => type === 'searching' ? createSpinnerNodes(12, css) : createSpinnerNodes(4, css)
+	},
+
+	render: ({css, spinnerNodes, type, ...rest}) => (
+		<div aria-label={type} aria-live="off" role="alert" {...rest}>
 			<div className={css.bg}>
-				<div className={css.fan1} />
-				<div className={css.fan2} />
-				<div className={css.fan3} />
-				<div className={css.fan4} />
-				<div className={css.fan5} />
-				<div className={css.fan6} />
-				<div className={css.fan7} />
-				<div className={css.fan8} />
-				<div className={css.fan9} />
-				<div className={css.fan10} />
-				<div className={css.fan11} />
-				<div className={css.fan12} />
+				{spinnerNodes}
 			</div>
 		</div>
 	)
