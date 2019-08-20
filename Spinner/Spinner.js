@@ -22,7 +22,7 @@ import Skinnable from '../Skinnable';
 
 import componentCss from './Spinner.module.less';
 
-const createSpinnerNodes = (numberOfNodes, css) => [...Array(numberOfNodes)].map((_, index) => <span className={css[`fan${index + 1}`]} />);
+const createSpinnerNodes = (numberOfNodes, css) => [...Array(numberOfNodes)].map((_, index) => <span className={css[`fan${index + 1}`]} key={`fan${index + 1}`} />);
 
 /**
  * A component that shows spinning balls, with optional text as children.
