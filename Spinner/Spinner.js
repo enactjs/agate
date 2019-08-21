@@ -132,8 +132,7 @@ const SpinnerBase = kind({
 	},
 
 	styles: {
-		css: componentCss,
-		publicClassNames: 'spinner'
+		css: componentCss
 	},
 
 	computed: {
