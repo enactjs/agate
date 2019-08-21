@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import {forward, handle} from '@enact/core/handle';
 import Spotlight from '@enact/spotlight';
 import Pause from '@enact/spotlight/Pause';
-import ViewManager, {shape} from '@enact/ui/ViewManager';
+import ViewManager, {shape, SlideBottomArranger as VerticalArranger, SlideRightArranger as HorizontalArranger} from '@enact/ui/ViewManager';
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -50,6 +50,15 @@ const ViewportBase = class extends React.Component {
 		children: PropTypes.node,
 
 		/**
+		 * Duration of the animation (in ms) when transitioning between `Panel` components.
+		 *
+		 * @type {Number}
+		 * @default 500
+		 * @public
+		 */
+		duration: PropTypes.number,
+
+		/**
 		 * Index of the active panel
 		 *
 		 * @type {Number}
@@ -63,10 +72,26 @@ const ViewportBase = class extends React.Component {
 		 * @type {Boolean}
 		 * @default false
 		 */
-		noAnimation: PropTypes.bool
+		noAnimation: PropTypes.bool,
+
+		/**
+		 * Direction of the animation when transitioning between `Panel` components.
+		 *
+		 * This is only applied when no arranger has been set. When using `'horizontal'`, a `SlideRightArranger` is used.
+		 * When using `'vertical'`, a `SlideBottomArranger` is used.
+		 *
+		 * Valid values are:
+		 * * `'horizontal'`, and
+		 * * `'vertical'`.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		orientation: PropTypes.string
 	}
 
 	static defaultProps = {
+		duration: 500,
 		index: 0,
 		noAnimation: false
 	}
@@ -155,10 +180,19 @@ const ViewportBase = class extends React.Component {
 		}
 	})
 
+	getArranger = () => {
+		const {arranger, orientation} = this.props;
+
+		if (arranger) return arranger;
+		if (orientation === 'vertical') return VerticalArranger;
+		else return HorizontalArranger;
+	}
+
 	getEnteringProp = (noAnimation) => noAnimation ? null : 'hideChildren'
 
 	render () {
-		const {arranger, children, generateId, index, noAnimation, ...rest} = this.props;
+		const {children, duration, generateId, index, noAnimation, ...rest} = this.props;
+		const arranger = this.getArranger();
 		const enteringProp = this.getEnteringProp(noAnimation);
 		const mappedChildren = this.mapChildren(children, generateId);
 		const className = classnames(css.viewport, rest.className);
@@ -169,13 +203,16 @@ const ViewportBase = class extends React.Component {
 			`Panels index, ${index}, is invalid for number of children, ${count}`
 		);
 
+		delete rest.arranger;
+		delete rest.orientation;
+
 		return (
 			<ViewManager
 				{...rest}
 				arranger={arranger}
 				className={className}
 				component="main"
-				duration={250}
+				duration={duration}
 				enteringDelay={100} // TODO: Can we remove this?
 				enteringProp={enteringProp}
 				index={index}

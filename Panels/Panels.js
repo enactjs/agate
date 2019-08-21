@@ -4,12 +4,11 @@ import Slottable from '@enact/ui/Slottable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
-import {shape, SlideBottomArranger as VerticalArranger, SlideRightArranger as HorizontalArranger} from '@enact/ui/ViewManager';
+import {shape} from '@enact/ui/ViewManager';
 
 import CancelDecorator from './CancelDecorator';
 import Controls from './Controls';
 import IdProvider from './IdProvider';
-import Panel from './Panel';
 import Viewport from './Viewport';
 
 import componentCss from './Panels.module.less';
@@ -18,6 +17,7 @@ const getControlsId = (id) => id && `${id}-controls`;
 
 const PanelsBase = kind({
 	name: 'Panels',
+
 	propTypes: {
 		/**
 		 * Function that generates unique identifiers for Panel instances.
@@ -28,6 +28,14 @@ const PanelsBase = kind({
 		 */
 		generateId: PropTypes.func.isRequired,
 
+		/**
+		 * Set of functions that control how the panels are transitioned into and out of the
+		 * viewport.
+		 *
+		 * @see {@link ui/ViewManager.SlideRightArranger}
+		 * @type {ui/ViewManager.Arranger}
+		 * @public
+		 */
 		arranger: shape,
 
 		/**
@@ -67,6 +75,13 @@ const PanelsBase = kind({
 			PropTypes.shape({current: PropTypes.any})
 		]),
 
+		/**
+		 * Duration of the animation (in ms) when transitioning between `Panel` components.
+		 *
+		 * @type {Number}
+		 * @default 500
+		 * @public
+		 */
 		duration: PropTypes.number,
 
 		/**
@@ -82,6 +97,13 @@ const PanelsBase = kind({
 		 */
 		id: PropTypes.string,
 
+		/**
+		 * Index of the active panel
+		 *
+		 * @type {Number}
+		 * @default 0
+		 * @public
+		 */
 		index: PropTypes.number,
 
 		/**
@@ -136,27 +158,37 @@ const PanelsBase = kind({
 		 */
 		onBack: PropTypes.func,
 
-		orientation: PropTypes.string
+		/**
+		 * Direction of the animation when transitioning between `Panel` components.
+		 *
+		 * This is only applied when no arranger has been set. When using `'horizontal'`, a `SlideRightArranger` is used.
+		 * When using `'vertical'`, a `SlideBottomArranger` is used.
+		 *
+		 * Valid values are:
+		 * * `'horizontal'`, and
+		 * * `'vertical'`.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical'])
 	},
+
 	defaultProps: {
-		// arranger: HorizontalArranger,
 		duration: 500,
 		index: 0,
 		noAnimation: false,
 		noCloseButton: false,
 		noSharedState: false
 	},
+
 	styles: {
 		css: componentCss,
 		className: 'panels',
 		publicClassNames: 'panels enact-fit'
 	},
+
 	computed: {
-		arranger: ({arranger, orientation}) => {
-			if (arranger) return arranger;
-			if (orientation === 'vertical') return VerticalArranger;
-			else return HorizontalArranger;
-		},
 		childProps: ({childProps, controls, id, noCloseButton}) => {
 			if ((noCloseButton && !controls) || !id) {
 				return childProps;
@@ -174,16 +206,38 @@ const PanelsBase = kind({
 
 			return updatedChildProps;
 		},
+
 		className: ({controls, noCloseButton, styler}) => styler.append({
 			'agate-panels-hasControls': (!noCloseButton || !!controls) // If there is a close button or controls were specified
 		}),
+
 		style: ({controlsMeasurements, style = {}}) => (controlsMeasurements ? {
 			...style,
 			'--agate-panels-controls-width': controlsMeasurements.width + 'px'
 		} : style),
+
 		viewportId: ({id}) => id && `${id}-viewport`
 	},
-	render: ({arranger, childProps, children, closeButtonAriaLabel, controls, controlsRef, generateId, id, index, noAnimation, noCloseButton, noSharedState, onApplicationClose, viewportId, ...rest}) => {
+
+	render: ({
+		arranger,
+		childProps,
+		children,
+		closeButtonAriaLabel,
+		controls,
+		controlsRef,
+		duration,
+		generateId,
+		id,
+		index,
+		noAnimation,
+		noCloseButton,
+		noSharedState,
+		onApplicationClose,
+		orientation,
+		viewportId,
+		...rest
+	}) => {
 		delete rest.controlsMeasurements;
 		delete rest.onBack;
 
@@ -204,11 +258,13 @@ const PanelsBase = kind({
 				<Viewport
 					arranger={arranger}
 					childProps={childProps}
+					duration={duration}
 					generateId={generateId}
 					id={viewportId}
 					index={index}
 					noAnimation={noAnimation}
 					noSharedState={noSharedState}
+					orientation={orientation}
 				>
 					{children}
 				</Viewport>
@@ -226,9 +282,8 @@ const PanelsDecorator = compose(
 
 const Panels = PanelsDecorator(PanelsBase);
 
-export default PanelsBase;
+export default Panels;
 export {
-	Panel,
 	Panels,
 	PanelsBase
 };

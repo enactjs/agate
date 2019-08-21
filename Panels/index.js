@@ -7,6 +7,7 @@
  * @exports Panel
  * @exports Panels
  * @exports PanelsBase
+ * @exports TabbedPanels
  */
 
 import ActivityPanels from './ActivityPanels';
