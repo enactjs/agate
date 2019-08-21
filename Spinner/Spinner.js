@@ -4,7 +4,7 @@
  * Used for indicating to the user that something is busy and interaction is temporarily suspended.
  *
  * @example
- * <Spinner color="light" />
+ * <Spinner color="light" size="small" type="searching" />
  *
  * @module agate/Spinner
  * @exports Spinner
