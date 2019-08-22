@@ -14,7 +14,7 @@
 import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Layout, Cell} from '@enact/ui/Layout';
+import {Column, Row, Layout} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 
 import Skinnable from '../Skinnable';
@@ -33,6 +33,25 @@ const HeaderBase = kind({
 	name: 'Header',
 
 	propTypes: /** @lends agate/Header.Header.prototype */ {
+		/**
+		 * Title of the header.
+		 *
+		 * This is a [`slot`]{@link ui/Slottable.Slottable}, so it can be used as a tag-name inside
+		 * this component.
+		 *
+		 * Example:
+		 * ```
+		 *  <Header>
+		 *  	<titleAbove>Introducing...</titleAbove>
+		 *  	<title>Example Header Title</title>
+		 *  	<subtitle>The Adventure Continues</subtitle>
+		 *  </Header>
+		 * ```
+		 *
+		 * @type {String}
+		 */
+		title: PropTypes.string.isRequired,
+
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
@@ -69,24 +88,6 @@ const HeaderBase = kind({
 		subtitle: PropTypes.string,
 
 		/**
-		 * Title of the header.
-		 *
-		 * This is a [`slot`]{@link ui/Slottable.Slottable}, so it can be used as a tag-name inside
-		 * this component.
-		 *
-		 * Example:
-		 * ```
-		 *  <Header>
-		 *  	<title>Example Header Title</title>
-		 *  	<subtitle>The Adventure Continues</subtitle>
-		 *  </Header>
-		 * ```
-		 *
-		 * @type {String}
-		 */
-		title: PropTypes.string,
-
-		/**
 		 * Text displayed above the title.
 		 *
 		 * This is a [`slot`]{@link ui/Slottable.Slottable}, so it can be used as a tag-name inside
@@ -106,10 +107,10 @@ const HeaderBase = kind({
 	computed: {
 		className: ({hideLine, styler}) => styler.append({hideLine, standard: true}),
 		subtitleComponent: ({css, subtitle}) => {
-			return <h2 className={css.subtitle}>{(subtitle != null && subtitle !== '') ? subtitle : ' '}</h2>;
+			return (subtitle != null && subtitle !== '') ? <h2 className={css.subtitle}>{subtitle}</h2> : null;
 		},
 		titleAboveComponent: ({css, titleAbove}) => {
-			return <h2 className={css.titleAbove}>{(titleAbove != null && titleAbove !== '') ? titleAbove : ' '}</h2>;
+			return (titleAbove != null && titleAbove !== '') ? <h2 className={css.titleAbove}>{titleAbove}</h2> : null;
 		}
 	},
 
@@ -119,16 +120,14 @@ const HeaderBase = kind({
 		delete rest.titleAbove;
 
 		return (
-			<header aria-label={title} {...rest}>
-				<Layout>
-					<Cell className={css.titleContainer}>
-						{titleAboveComponent}
-						<h1 className={css.title}>{title}</h1>
-						{subtitleComponent}
-					</Cell>
-					{children ? <Cell shrink>{children}</Cell> : null}
-				</Layout>
-			</header>
+			<Row component="header" aria-label={title} {...rest}>
+				<Column className={css.titleContainer}>
+					{titleAboveComponent}
+					<h1 className={css.title}>{title}</h1>
+					{subtitleComponent}
+				</Column>
+				{children ? <Layout className={css.endSlot} shrink>{children}</Layout> : null}
+			</Row>
 		);
 	}
 });
