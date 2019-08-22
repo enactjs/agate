@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
 import React from 'react';
 import Spottable from '@enact/spotlight/Spottable';
+import {Row, Cell} from '@enact/ui/Layout';
 import Touchable from '@enact/ui/Touchable';
 
 import Icon from '../Icon';
@@ -118,10 +119,10 @@ const LabeledItemBase = kind({
 	render: ({children, css, disabled, label, labelPosition, titleIcon, ...rest}) => (
 		<Controller disabled={disabled} {...rest} css={css}>
 			{(label != null && labelPosition === 'before') ? <Marquee disabled={disabled} className={css.labelBefore}>{label}</Marquee> : null}
-			<div className={css.text}>
-				<Marquee disabled={disabled} className={css.title}>{children}</Marquee>
-				{(titleIcon != null) ? <Icon small className={css.icon}>{titleIcon}</Icon> : null}
-			</div>
+			<Row className={css.text}>
+				<Cell component={Marquee} disabled={disabled} className={css.title}>{children}</Cell>
+				{(titleIcon != null) ? <Cell shrink component={Icon} small className={css.icon}>{titleIcon}</Cell> : null}
+			</Row>
 			{(label != null && labelPosition === 'after') ? <Marquee disabled={disabled} className={css.labelAfter}>{label}</Marquee> : null}
 		</Controller>
 	)
