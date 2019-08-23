@@ -6,8 +6,8 @@
 	.buildSkinRules(@skin; @importRules) {
 		&:global(.@{skin}) {
 			// Establish a base set of colors and variables that other skins can optionally override.
-			@import "./colors-carbon.less";
-			@import "./variables-carbon.less";
+			@import "./colors-gallium.less";
+			@import "./variables-gallium.less";
 
 			@importRules();
 		}
@@ -46,6 +46,11 @@
 	.buildSkinRules(electro; {
 		@import (multiple) "./colors-electro.less";
 		@import (multiple) "./variables-electro.less";
+		@componentRules();
+	});
+	.buildSkinRules(gallium; {
+		@import (multiple) "./colors-gallium.less";
+		@import (multiple) "./variables-gallium.less";
 		@componentRules();
 	});
 	.buildSkinRules(titanium; {
