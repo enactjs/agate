@@ -7,19 +7,22 @@
 @searching-nodes: 12;
 @loading-nodes: 4;
 
+.fan-loop (@elements) {
+	.fan-loop(@elements; @elements);
+}
 // Loop each searching spinner's node to rotate and delay animation
-.fan-loop (@index) when (@index > 0) {
+.fan-loop (@elements; @index) when (@index > 0) {
 	// Spread @searching-nodes over 360 degrees
-	@degree-offset: (360deg - (@index * 30));
+	@degree-offset: ((-360deg / @elements) * @index);
 	// Total animation duration would add up to be 1.2sec. Offset each animation by 0.1sec
-	@delay-offset: (-0.1s - (@index * 0.1));
+	@delay-offset: -((@index * 0.1) + 0.1s);
 
 	.fan@{index} {
-		transform: rotate(@degree-offset);
+		transform: translate(-50%, -100%) rotate(@degree-offset) translateY(-100%);
 		animation-delay: @delay-offset;
 	}
 
-	.fan-loop(@index - 1);
+	.fan-loop(@elements; @index - 1);
 }
 
 @keyframes searching-spinner {
@@ -39,68 +42,46 @@
 				width: @agate-spinner-size;
 				height: @agate-spinner-size;
 				position: relative;
-
-				span {
-					display: block;
-					transform-origin: @agate-spinner-transform-origin @agate-spinner-transform-origin;
-					will-change: opacity;
-					animation: searching-spinner 1.2s linear infinite;
-
-					&:after {
-						content: " ";
-						display: block;
-						position: absolute;
-						top: 0;
-						left: @agate-spinner-searching-left;
-						width: @agate-spinner-searching-width;
-						height: @agate-spinner-searching-height;
-						border-radius: @agate-spinner-searching-border-radius;
-					}
-				}
-
-				.fan-loop(@searching-nodes);
 			}
-		}
 
-		&.small {
-			&.searching {
+			.fan {
+				position: absolute;
+				display: block;
+				will-change: opacity;
+				transform-origin: center bottom;
+				animation: searching-spinner 1.2s linear infinite;
+				top: 50%;
+				left: 50%;
+				width: @agate-spinner-searching-width;
+				height: @agate-spinner-searching-height;
+				border-radius: @agate-spinner-searching-border-radius;
+			}
+
+			.fan-loop(@searching-nodes);
+
+			&.small {
 				.bg {
 					width: @agate-spinner-small-size;
 					height: @agate-spinner-small-size;
 
-					span {
-						transform-origin: @agate-spinner-small-transform-origin @agate-spinner-small-transform-origin;
-
-						&:after {
-							left: @agate-spinner-searching-small-left;
-							width: @agate-spinner-searching-small-width;
-							height: @agate-spinner-searching-small-height;
-						}
+					.fan {
+						width: @agate-spinner-small-searching-width;
+						height: @agate-spinner-small-searching-height;
 					}
 				}
 			}
 		}
 
-		&.dark {
-			&.searching {
-				.bg {
-					span {
-						&:after {
-							background-color: @agate-spinner-dark-color;
-						}
-					}
+		&.searching {
+			&.dark {
+				.fan {
+					background-color: @agate-spinner-dark-color;
 				}
 			}
-		}
 
-		&.light {
-			&.searching {
-				.bg {
-					span {
-						&:after {
-							background-color: @agate-spinner-light-color;
-						}
-					}
+			&.light {
+				.fan {
+					background-color: @agate-spinner-light-color;
 				}
 			}
 		}
