@@ -68,7 +68,7 @@ const PanelBase = kind({
 		 * Hides the body components.
 		 *
 		 * When a Panel is used within [`Panels`]{@link agate/Panels.Panels},
-		 * [`ActivityPanels`]{@link agate/Panels.ActivityPanels}, or
+		 * [`BreadcrumbPanels`]{@link agate/Panels.BreadcrumbPanels}, or
 		 * [`AlwaysViewingPanels`]{@link agate/Panels.AlwaysViewingPanels},
 		 * this property will be set automatically to `true` on render and `false` after animating
 		 * into view.

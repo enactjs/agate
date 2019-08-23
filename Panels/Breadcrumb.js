@@ -24,7 +24,7 @@ export const breadcrumbWidth = 105;
 /**
  * Vertical, transparent bar used to navigate to a prior Panel.
  *
- * [`ActivityPanels`]{@link agate/Panels.ActivityPanels} has one breadcrumb, and
+ * [`BreadcrumbPanels`]{@link agate/Panels.BreadcrumbPanels} has one breadcrumb, and
  * [`AlwaysViewingPanels`]{@link agate/Panels.AlwaysViewingPanels} can have multiple stacked
  * horizontally.
  *

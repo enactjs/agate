@@ -10,8 +10,8 @@ import React from 'react';
 import Skinnable from '../Skinnable';
 
 import IdProvider from './IdProvider';
+import {BreadcrumbArranger} from './Arrangers';
 import Breadcrumb from './Breadcrumb';
-import BreadcrumbArranger from './BreadcrumbArranger';
 import Breadcrumbs from './Breadcrumbs';
 import CancelDecorator from './CancelDecorator';
 
@@ -266,4 +266,6 @@ const BreadcrumbDecorator = hoc(defaultConfig, (config, Wrapped) => {
 });
 
 export default BreadcrumbDecorator;
-export {BreadcrumbDecorator};
+export {
+	BreadcrumbDecorator
+};
