@@ -82,7 +82,7 @@ const enter = (config) => {
 		{transform: positionBreadcrumb(node, to)}
 	];
 
-	return arrange(config, keyframes, {easing: 'cubic-bezier(0.455, 0.030, 0.515, 0.955)'});
+	return arrange(config, keyframes, animationOptions);
 };
 
 /**
