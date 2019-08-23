@@ -22,8 +22,6 @@ import Skinnable from '../Skinnable';
 
 import componentCss from './Spinner.module.less';
 
-const createSpinnerNodes = (numberOfNodes, css) => [...Array(numberOfNodes)].map((_, index) => <span className={css.fan + ' ' + css[`fan${index + 1}`]} key={`fan${index + 1}`} />);
-
 /**
  * A component that shows spinning fan.
  *
@@ -35,11 +33,19 @@ const createSpinnerNodes = (numberOfNodes, css) => [...Array(numberOfNodes)].map
 const SpinnerCore = kind({
 	name: 'SpinnerCore',
 
-	propTypes: {
+	propTypes: /** @lends agate/Spinner.SpinnerCore.prototype */ {
+		/**
+		 * The "aria-label" for the component.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		'aria-label': PropTypes.string,
+
 		css: PropTypes.object,
 
 		/**
-		 * Type of spinner.
+		 * The type of spinner.
 		 *
 		 * @type {('loading'|'searching')}
 		 * @default 'searching'
@@ -57,17 +63,29 @@ const SpinnerCore = kind({
 	},
 
 	computed: {
+		'aria-label': ({'aria-label': label, type}) => {
+			// TODO: These static values will need to be localized
+			return label || type === 'searching' ? 'Searching' : 'Loading';
+		},
 		className: ({styler, type}) => styler.append(type),
-		spinnerNodes: ({css, type}) => type === 'searching' ? createSpinnerNodes(12, css) : createSpinnerNodes(4, css)
+		spinnerNodes: ({styler, type}) => {
+			return Array.from({length: type === 'searching' ? 12 : 4}, (_, index) => (
+				<span className={styler.join('fan', `fan${index + 1}`)} key={`fan${index}`} />
+			));
+		}
 	},
 
-	render: ({css, spinnerNodes, type, ...rest}) => (
-		<div aria-label={type} aria-live="off" role="alert" {...rest}>
-			<div className={css.bg}>
-				{spinnerNodes}
+	render: ({css, spinnerNodes, ...rest}) => {
+		delete rest.type;
+
+		return (
+			<div aria-live="off" role="alert" {...rest}>
+				<div className={css.bg}>
+					{spinnerNodes}
+				</div>
 			</div>
-		</div>
-	)
+		);
+	}
 });
 
 /**
@@ -83,7 +101,7 @@ const SpinnerBase = kind({
 
 	propTypes: /** @lends agate/Spinner.SpinnerBase.prototype */ {
 		/**
-		 * Customize the color of spinner.
+		 * The color of the component.
 		 *
 		 * @type {('dark'|'light')}
 		 * @default 'light'
@@ -97,7 +115,8 @@ const SpinnerBase = kind({
 		 *
 		 * The following classes are supported:
 		 *
-		 * * `spinner` - The root component class, unless there is a scrim. The scrim and floating layer can be a sibbling or parent to this root "spinner" element.
+		 * * `spinner` - The root component class, unless there is a scrim. The scrim and floating
+		 *   layer can be a sibbling or parent to this root "spinner" element.
 		 *
 		 * @type {Object}
 		 * @public
@@ -105,7 +124,7 @@ const SpinnerBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Customize the size of this component.
+		 * The size of the component.
 		 *
 		 * Recommended usage is "medium" (default) for standalone and popup scenarios, while "small"
 		 * is best suited for use inside other elements, like {@link agate/SlotItem.SlotItem}.
@@ -127,12 +146,14 @@ const SpinnerBase = kind({
 	},
 
 	defaultProps: {
+		color: 'light',
 		size: 'medium',
 		transparent: false
 	},
 
 	styles: {
-		css: componentCss
+		css: componentCss,
+		publicClassNames: ['spinner']
 	},
 
 	computed: {
@@ -143,7 +164,7 @@ const SpinnerBase = kind({
 		)
 	},
 
-	render: ({children, css, ...rest}) => {
+	render: ({css, ...rest}) => {
 		delete rest.transparent;
 
 		return (
@@ -151,9 +172,7 @@ const SpinnerBase = kind({
 				{...rest}
 				css={css}
 				component={SpinnerCore}
-			>
-				{children}
-			</UiSpinnerBase>
+			/>
 		);
 	}
 });
@@ -172,7 +191,7 @@ const SpinnerDecorator = compose(
 );
 
 /**
- * A Agate-styled Spinner.
+ * An Agate-styled Spinner.
  *
  * @class Spinner
  * @memberof agate/Spinner
@@ -181,7 +200,6 @@ const SpinnerDecorator = compose(
  * @public
  */
 const Spinner = SpinnerDecorator(SpinnerBase);
-
 
 export default Spinner;
 export {
