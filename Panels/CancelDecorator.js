@@ -36,4 +36,6 @@ const CancelDecorator = hoc(defaultConfig, (config, Wrapped) => {
 });
 
 export default CancelDecorator;
-export {CancelDecorator};
+export {
+	CancelDecorator
+};

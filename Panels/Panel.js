@@ -173,4 +173,7 @@ const Panel = SpotlightContainerDecorator(
 );
 
 export default Panel;
-export {Panel, PanelBase};
+export {
+	Panel,
+	PanelBase
+};

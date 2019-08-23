@@ -55,3 +55,6 @@ const ApplicationCloseButton = kind({
 });
 
 export default ApplicationCloseButton;
+export {
+	ApplicationCloseButton
+};

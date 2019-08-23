@@ -29,7 +29,7 @@ const offsetForBreadcrumbs = (node) => {
  * @type {Arranger}
  * @private
  */
-export const PanelsArranger = {
+const PanelsArranger = {
 	enter: (config) => {
 		const {node} = config;
 
@@ -91,8 +91,13 @@ const enter = (config) => {
  * @type {Arranger}
  * @private
  */
-export const BreadcrumbArranger = {
+const BreadcrumbArranger = {
 	enter: enter,
 	stay: enter,
 	leave: enter
+};
+
+export {
+	BreadcrumbArranger,
+	PanelsArranger
 };

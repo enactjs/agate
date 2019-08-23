@@ -34,4 +34,6 @@ const Breadcrumbs = (id, index, max, onSelect) => {
 };
 
 export default Breadcrumbs;
-export {Breadcrumbs};
+export {
+	Breadcrumbs
+};

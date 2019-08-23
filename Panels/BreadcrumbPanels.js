@@ -37,4 +37,6 @@ const BreadcrumbPanels = BreadcrumbPanelsDecorator(PanelsBase);
 BreadcrumbPanels.displayName = 'BreadcrumbPanels';
 
 export default BreadcrumbPanels;
-export {BreadcrumbPanels};
+export {
+	BreadcrumbPanels
+};

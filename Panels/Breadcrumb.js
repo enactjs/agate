@@ -90,4 +90,7 @@ const BreadcrumbBase = kind({
 });
 
 export default BreadcrumbBase;
-export {BreadcrumbBase as Breadcrumb, BreadcrumbBase};
+export {
+	BreadcrumbBase as Breadcrumb,
+	BreadcrumbBase
+};
