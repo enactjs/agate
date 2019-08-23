@@ -4,17 +4,22 @@
 @import "../styles/skin.less";
 
 .labeledItem {
-	flex-wrap: wrap;	// Allow the label to fall on the next line
 
 	// Header
-	.text {
-		display: flex;
+	.titleContainer {
 		width: 100%;
-		align-items: center;
+		flex-direction: column;
+		align-items: start;
 
 		.title {
+			width: 100%;
 			overflow: hidden;
 		}
+	}
+
+	.labelRight {
+		flex-direction: row;
+		align-items: center;
 	}
 
 	.applySkins({
@@ -34,6 +39,12 @@
 
 		.labelAfter {
 			padding-bottom: @agate-component-spacing;
+		}
+
+		.labelRight {
+			.labelAfter {
+				padding: 0;
+			}
 		}
 
 		.focus({

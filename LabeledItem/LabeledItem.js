@@ -16,17 +16,16 @@ import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
 import React from 'react';
 import Spottable from '@enact/spotlight/Spottable';
-import {Row, Cell} from '@enact/ui/Layout';
 import Touchable from '@enact/ui/Touchable';
 
 import Icon from '../Icon';
-import {ItemBase} from '../Item';
 import Skinnable from '../Skinnable';
+import {SlotItemBase} from '../SlotItem';
 
 const Controller = MarqueeController(
 	{marqueeOnFocus: true},
 	Skinnable(
-		ItemBase
+		SlotItemBase
 	)
 );
 
@@ -82,6 +81,14 @@ const LabeledItemBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
+		 * Icon to be displayed next to the title text.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		icon: PropTypes.oneOfType([PropTypes.string]),
+
+		/**
 		 * The label to be displayed along with the text.
 		 *
 		 * @type {Node}
@@ -92,18 +99,10 @@ const LabeledItemBase = kind({
 		/**
 		 * The position of label
 		 *
-		 * @type {Node}
+		 * @type {('before'|'after'|'below'|'right'|'above')}
 		 * @public
 		 */
-		labelPosition: PropTypes.oneOf(['before', 'after']),
-
-		/**
-		 * Icon to be displayed next to the title text.
-		 *
-		 * @type {String|Object}
-		 * @public
-		 */
-		titleIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+		labelPosition: PropTypes.oneOf(['after', 'before', 'below', 'right', 'above'])
 	},
 
 	defaultProps: {
@@ -116,16 +115,26 @@ const LabeledItemBase = kind({
 		publicClassNames: ['labeledItem', 'icon', 'labelBefore', 'labelAfter', 'text', 'title']
 	},
 
-	render: ({children, css, disabled, label, labelPosition, titleIcon, ...rest}) => (
-		<Controller disabled={disabled} {...rest} css={css}>
-			{(label != null && labelPosition === 'before') ? <Marquee disabled={disabled} className={css.labelBefore}>{label}</Marquee> : null}
-			<Row className={css.text}>
-				<Cell component={Marquee} disabled={disabled} className={css.title}>{children}</Cell>
-				{(titleIcon != null) ? <Cell shrink component={Icon} small className={css.icon}>{titleIcon}</Cell> : null}
-			</Row>
-			{(label != null && labelPosition === 'after') ? <Marquee disabled={disabled} className={css.labelAfter}>{label}</Marquee> : null}
-		</Controller>
-	)
+	computed: {
+		labelBefore: ({css, label, labelPosition}) => (label !== null && (labelPosition === 'before' || labelPosition === 'above')) ? <Marquee className={css.labelBefore}>{label}</Marquee> : null,
+		labelAfter: ({css, label, labelPosition}) => (label !== null && (labelPosition === 'after' || labelPosition === 'below' || labelPosition === 'right' )) ? <Marquee className={css.labelAfter}>{label}</Marquee> : null,
+		slotAfter: ({css, icon}) => icon ? <Icon className={css.icon} size="small">{icon}</Icon> : null,
+		titleContainerClassName: ({css, labelPosition}) => labelPosition === 'right' ? `${css.titleContainer} ${css.labelRight}` : css.titleContainer
+	},
+
+	render: ({children, css, disabled, labelBefore, labelAfter, titleContainerClassName, ...rest}) => {
+		delete rest.icon;
+		delete rest.label;
+		delete rest.labelPosition;
+
+		return (
+			<Controller {...rest} css={css} disabled={disabled}>
+				<SlotItemBase className={titleContainerClassName} disabled={disabled} slotBefore={labelBefore} slotAfter={labelAfter}>
+					<Marquee className={css.title}>{children}</Marquee>
+				</SlotItemBase>
+			</Controller>
+		);
+	}
 });
 
 const LabeledItemDecorator = compose(
