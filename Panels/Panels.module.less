@@ -5,12 +5,15 @@
 @import "../styles/skin.less";
 
 .panels {
+	&,
+	& .viewport {
+		position: absolute;
+		.position(0);
+	}
+
 	.controls {
 		position: absolute;
-		top: (@agate-app-keepout + @agate-spotlight-outset);
-		.position-start-end(auto, @agate-panel-h-padding);
 		z-index: 1;
-		.padding-start-end(18px, initial);
 		.remove-margin-on-edge-children();
 	}
 
@@ -18,32 +21,18 @@
 		.breadcrumbs {
 			position: absolute;
 			.position(0, auto, auto, 0);
-			height: 100%;
 			z-index: 10;
 			overflow: hidden;
 	
 			.breadcrumb {
 				position: absolute;
-				right: 0;
-				height: 100%;
 				display: table;
-				padding-top: 3px;
 	
 				.breadcrumbContent {
 					display: table-cell;
 					vertical-align: middle;
 					text-align: center;
 				}
-			}
-		}
-
-		.viewport {
-			> [data-index="0"] {
-				padding-left: 80px;
-			}
-	
-			> :not([data-index="0"]) {
-				padding-left: 40px;
 			}
 		}
 
@@ -56,30 +45,50 @@
 			}
 		}
 
-		//&:not([data-index="0"]) {
-		//:global(.enact-locale-right-to-left) & .controls {
-			// allocate space for breadcrumb + header margin
-			//left: @agate-panels-breadcrumb-width + @agate-spotlight-outset;
-		//}
-	//}
+		// &:not([data-index="0"]) {
+		// 	:global(.enact-locale-right-to-left) & .controls {
+		// 		allocate space for breadcrumb + header margin
+		// 		left: @agate-panels-breadcrumb-width + @agate-spotlight-outset;
+		// 	}
+		// }
 	}
 
 	.applySkins({
+		// colors
+		@agate-panels-bg-color: #1d1d1d; // @agate-background;
+		@agate-panels-breadcrumb-bg-color: #000;
+
+		// variables
+		@agate-panels-controls-top: (@agate-app-keepout + @agate-spotlight-outset);
+		@agate-panels-controls-padding-start: 18px;
+		@agate-panels-breadcrumb-height: 100%;
+
+		background-color: @agate-panels-bg-color;
+
+		.controls {
+			top: @agate-panels-controls-top;
+			.position-start-end(auto, @agate-panel-h-padding);
+			.padding-start-end(@agate-panels-controls-padding-start, initial);
+		}
+
 		&.activity {
 			.breadcrumbs {
+				background-color: @agate-panels-breadcrumb-bg-color;
+				height: @agate-panels-breadcrumb-height;
 				width: @agate-panels-breadcrumb-width;
 				
 				.breadcrumb {
+					height: @agate-panels-breadcrumb-height;
 					width: @agate-panels-breadcrumb-width;
 					font-family: @agate-base-font-family;
 				}
 			}
 
 			.viewport {
-				//&.transitioning {
-					//-webkit-clip-path: polygon(@agate-panels-breadcrumb-width 0, 100% 0, 100% 100%, @agate-panels-breadcrumb-width 100%);
-					//clip-path: polygon(@agate-panels-breadcrumb-width 0, 100% 0, 100% 100%, @agate-panels-breadcrumb-width 100%);
-				//}
+				&.transitioning {
+					-webkit-clip-path: polygon(@agate-panels-breadcrumb-width 0, 100% 0, 100% 100%, @agate-panels-breadcrumb-width 100%);
+					clip-path: polygon(@agate-panels-breadcrumb-width 0, 100% 0, 100% 100%, @agate-panels-breadcrumb-width 100%);
+				}
 
 				> :not([data-index="0"]) {
 					width: calc(~"100% - " @agate-panels-breadcrumb-width);

@@ -31,25 +31,19 @@ const offsetForBreadcrumbs = (node) => {
  */
 export const ActivityArranger = {
 	enter: (config) => {
-		const {node, reverse} = config;
+		const {node} = config;
 
 		return arrange(config, [
-			{transform: `${offsetForBreadcrumbs(node)} translateX(100%)`, offset: 0},
-			reverse ?
-				{transform: offsetForBreadcrumbs(node), offset: 0.75} :
-				{transform: `${offsetForBreadcrumbs(node)} translateX(100%)`, offset: 0.25},
-			{transform: offsetForBreadcrumbs(node), offset: 1}
+			{transform: `${offsetForBreadcrumbs(node)} translateX(100%)`},
+			{transform: offsetForBreadcrumbs(node)}
 		], animationOptions);
 	},
 	leave: (config) => {
-		const {node, reverse} = config;
+		const {node} = config;
 
 		return arrange(config, [
-			{transform: offsetForBreadcrumbs(node), offset: 0},
-			reverse ?
-				{transform: 'translateX(-100%)', offset: 0.75} :
-				{transform: offsetForBreadcrumbs(node), offset: 0.25},
-			{transform: 'translateX(-100%)', offset: 1}
+			{transform: offsetForBreadcrumbs(node)},
+			{transform: 'translateX(-100%)'}
 		], animationOptions);
 	},
 	stay: (config) => {

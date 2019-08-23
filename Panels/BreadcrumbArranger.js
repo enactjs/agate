@@ -20,15 +20,13 @@ const enter = (config) => {
 	const {node, from, to, reverse} = config;
 	const keyframes = reverse ? [
 		{transform: positionBreadcrumb(node, to)},
-		{transform: positionBreadcrumb(node, from), offset: 0.25},
 		{transform: positionBreadcrumb(node, from)}
 	] : [
 		{transform: positionBreadcrumb(node, from)},
-		{transform: positionBreadcrumb(node, from), offset: 0.75},
 		{transform: positionBreadcrumb(node, to)}
 	];
 
-	return arrange(config, keyframes);
+	return arrange(config, keyframes, {easing: 'cubic-bezier(0.455, 0.030, 0.515, 0.955)'});
 };
 
 /**
