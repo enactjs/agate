@@ -1,5 +1,5 @@
-import Slottable from '@enact/ui/Slottable';
 import Measurable from '@enact/ui/Measurable';
+import Slottable from '@enact/ui/Slottable';
 import compose from 'ramda/src/compose';
 
 import Skinnable from '../Skinnable';

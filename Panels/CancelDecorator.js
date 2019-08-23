@@ -1,6 +1,6 @@
 import hoc from '@enact/core/hoc';
-import Cancelable from '@enact/ui/Cancelable';
 import Spotlight from '@enact/spotlight';
+import Cancelable from '@enact/ui/Cancelable';
 
 import css from './Panels.module.less';
 
