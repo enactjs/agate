@@ -13,7 +13,7 @@ const BreadcrumbPanelsDecorator = compose(
 	Measurable({refProp: 'controlsRef', measurementProp: 'controlsMeasurements'}),
 	Skinnable,
 	BreadcrumbDecorator({
-		className: 'panels activity enact-fit',
+		className: 'panels breadcrumbPanels enact-fit',
 		max: 1,
 		panelArranger: PanelsArranger
 	})
