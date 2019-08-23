@@ -29,7 +29,7 @@ const offsetForBreadcrumbs = (node) => {
  * @type {Arranger}
  * @private
  */
-export const ActivityArranger = {
+export const PanelsArranger = {
 	enter: (config) => {
 		const {node} = config;
 

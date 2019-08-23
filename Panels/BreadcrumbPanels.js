@@ -4,7 +4,7 @@ import compose from 'ramda/src/compose';
 
 import Skinnable from '../Skinnable/Skinnable';
 
-import {ActivityArranger} from './Arrangers';
+import {PanelsArranger} from './Arrangers';
 import BreadcrumbDecorator from './BreadcrumbDecorator';
 import {PanelsBase} from './Panels';
 
@@ -15,7 +15,7 @@ const BreadcrumbPanelsDecorator = compose(
 	BreadcrumbDecorator({
 		className: 'panels activity enact-fit',
 		max: 1,
-		panelArranger: ActivityArranger
+		panelArranger: PanelsArranger
 	})
 );
 
