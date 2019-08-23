@@ -48,15 +48,6 @@ const RadioItemBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Customize the component used as the icon label.
-		 *
-		 * @type {Element|Function|String}
-		 * @default {@link agate/Switch.Switch}
-		 * @public
-		 */
-		icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]),
-
-		/**
 		 * Specifies on which side (`'before'` or `'after'`) of the text the icon appears.
 		 *
 		 * @type {('before'|'after')}
@@ -76,7 +67,6 @@ const RadioItemBase = kind({
 	},
 
 	defaultProps: {
-		icon: 'circle',
 		iconPosition: 'before',
 		selected: false
 	},
@@ -89,12 +79,11 @@ const RadioItemBase = kind({
 
 	computed: {
 		className: ({css, selected, styler}) => styler.append(selected && css.selected),
-		slotBefore: ({css, icon, iconPosition}) => iconPosition === 'before' ? <Icon small className={`${css.icon} ${css.iconBefore}`}>{icon}</Icon> : null,
-		slotAfter: ({css, icon, iconPosition}) => iconPosition === 'after' ? <Icon small className={`${css.icon} ${css.iconAfter}`}>{icon}</Icon> : null
+		slotBefore: ({css, iconPosition}) => iconPosition === 'before' ? <Icon size="small" className={`${css.icon} ${css.iconBefore}`}>circle</Icon> : null,
+		slotAfter: ({css, iconPosition}) => iconPosition === 'after' ? <Icon size="small" className={`${css.icon} ${css.iconAfter}`}>circle</Icon> : null
 	},
 
 	render: ({children, css, ...rest}) => {
-		delete rest.icon;
 		delete rest.iconPosition;
 		delete rest.selected;
 
