@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 import kind from '@enact/core/kind';
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
+import SlotItem from '../SlotItem';
 
 import Spottable from '@enact/spotlight/Spottable';
 import Toggleable from '@enact/ui/Toggleable';
@@ -28,8 +29,6 @@ import componentCss from './RadioItem.module.less';
  * @ui
  * @public
  */
-
-
 const RadioItemBase = kind({
 	name: 'RadioItemBase',
 
@@ -89,22 +88,24 @@ const RadioItemBase = kind({
 	},
 
 	computed: {
-		className: ({css, selected, styler}) => styler.append(selected && css.selected)
+		className: ({css, selected, styler}) => styler.append(selected && css.selected),
+		slotBefore: ({css, icon, iconPosition}) => iconPosition === 'before' ? <Icon small className={`${css.icon} ${css.iconBefore}`}>{icon}</Icon> : null,
+		slotAfter: ({css, icon, iconPosition}) => iconPosition === 'after' ? <Icon small className={`${css.icon} ${css.iconAfter}`}>{icon}</Icon> : null
 	},
 
-	render: ({children, css, icon, iconPosition, ...rest}) => {
+	render: ({children, css, ...rest}) => {
+		delete rest.icon;
+		delete rest.iconPosition;
 		delete rest.selected;
 
 		return (
-			<div {...rest} css={css}>
-				{iconPosition === 'before' ? <Icon small className={`${css.icon} ${css.iconBefore}`}>{icon}</Icon> : null}
+			<SlotItem {...rest} css={css}>
 				<div
 					className={css.text}
 				>
 					{children}
 				</div>
-				{iconPosition === 'after' ? <Icon small className={`${css.icon} ${css.iconAfter}`}>{icon}</Icon> : null}
-			</div>
+			</SlotItem>
 		);
 	}
 });

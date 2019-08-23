@@ -14,13 +14,13 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
 import React from 'react';
-import {Row, Cell} from '@enact/ui/Layout';
 import Spottable from '@enact/spotlight/Spottable';
 import Touchable from '@enact/ui/Touchable';
 
 import Icon from '../Icon';
 import {LabeledItemBase} from '../LabeledItem';
 import Skinnable from '../Skinnable';
+import SlotItem from '../SlotItem';
 
 import componentCss from './IconItem.module.less';
 
@@ -51,14 +51,6 @@ const IconItemBase = kind({
 		children: PropTypes.node.isRequired,
 
 		/**
-		 * The icon to be displayed on the left.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		icon: PropTypes.string.isRequired,
-
-		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
 		 *
@@ -74,21 +66,20 @@ const IconItemBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Applies a disabled style and the control becomes non-interactive.
+		 * The icon to be displayed on the left.
 		 *
-		 * @type {Boolean}
+		 * @type {String}
 		 * @public
 		 */
-		disabled: PropTypes.bool,
+		iconAfter: PropTypes.string,
 
 		/**
-		 * Specifies on which side (`'before'` or `'after'`) of the text the icon appears.
+		 * The icon to be displayed on the left.
 		 *
-		 * @type {('before'|'after')}
-		 * @default 'before'
+		 * @type {String}
 		 * @public
 		 */
-		iconPosition: PropTypes.oneOf(['before', 'after']),
+		iconBefore: PropTypes.string,
 
 		/**
 		 * The label to be displayed along with the text.
@@ -96,46 +87,37 @@ const IconItemBase = kind({
 		 * @type {Node}
 		 * @public
 		 */
-		label: PropTypes.node,
-
-		/**
-		 * Icon to be displayed next to the title text.
-		 *
-		 * @type {String|Object}
-		 * @public
-		 */
-		titleIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
-	},
-
-	defaultProps: {
-		iconPosition: 'before'
+		label: PropTypes.node
 	},
 
 	styles: {
 		css: componentCss,
 		className: 'iconItem',
-		publicClassNames: ['iconItem', 'icon', 'label']
+		publicClassNames: true
 	},
 
-	render: ({children, css, disabled, icon, iconPosition, label, titleIcon, ...rest}) => (
-		<Row
-			disabled={disabled}
-			{...rest}
-			align="center"
-		>
-			{iconPosition === 'before' ? <Cell shrink component={Icon} className={css.iconBefore}>{icon}</Cell> : null}
-			<Cell>
+	computed: {
+		slotBefore: ({css, iconBefore}) => iconBefore ? <Icon size="small" className={css.iconBefore}>{iconBefore}</Icon> : null,
+		slotAfter: ({css, iconAfter}) => iconAfter ? <Icon size="small" className={css.iconAfter}>{iconAfter}</Icon> : null
+	},
+
+	render: ({children, css, label, ...rest}) => {
+		delete rest.iconBefore;
+		delete rest.iconAfter;
+
+		return (
+			<SlotItem
+				{...rest}
+			>
 				<LabeledItemBase
 					css={css}
 					label={label}
-					titleIcon={titleIcon}
 				>
 					{children}
 				</LabeledItemBase>
-			</Cell>
-			{iconPosition === 'after' ? <Cell shrink component={Icon} className={css.iconAfter}>{icon}</Cell> : null}
-		</Row>
-	)
+			</SlotItem>
+		);
+	}
 });
 
 const IconItemDecorator = compose(
