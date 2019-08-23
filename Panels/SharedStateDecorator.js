@@ -20,10 +20,10 @@ const defaultConfig = {
  * between them and will allow each to read from and write over each other's data.
  *
  * For example, Panels and Panel are considered "significant container boundaries" since they are
- * key building blocks for moonstone applications. When components are rendered within a Panel, we
- * may want to store those components state on unmount so that we can restore it when returning to
- * the panel. Panel can (and does) use SharedStateDecorator to establish a shared state which can be
- * used by contained components.
+ * key building blocks for applications. When components are rendered within a Panel, we may want to
+ * store those components state on unmount so that we can restore it when returning to the panel.
+ * Panel can (and does) use SharedStateDecorator to establish a shared state which can be used by
+ * contained components.
  *
  * It's important to note that SharedStateDecorator doesn't prescribe how or what is stored nor how
  * the data is managed. That is left to the consuming component to determine. Also, unlike React
