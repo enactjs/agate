@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Icon from '../Icon';
+
 import Breadcrumb from './Breadcrumb';
 
 /**
@@ -23,7 +25,7 @@ const Breadcrumbs = (id, index, max, onSelect) => {
 				index={i}
 				key={i}
 			>
-				&lt;
+				<Icon>arrowlargeleft</Icon>
 			</Breadcrumb>
 		);
 	}
