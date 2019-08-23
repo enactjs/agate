@@ -58,6 +58,15 @@ const RadioItemBase = kind({
 		icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]),
 
 		/**
+		 * Specifies on which side (`'before'` or `'after'`) of the text the icon appears.
+		 *
+		 * @type {('before'|'after')}
+		 * @default 'before'
+		 * @public
+		 */
+		iconPosition: PropTypes.oneOf(['before', 'after']),
+
+		/**
 		 * If true the radio toggle will be selected.
 		 *
 		 * @type {Boolean}
@@ -69,6 +78,7 @@ const RadioItemBase = kind({
 
 	defaultProps: {
 		icon: 'circle',
+		iconPosition: 'before',
 		selected: false
 	},
 
@@ -82,17 +92,18 @@ const RadioItemBase = kind({
 		className: ({css, selected, styler}) => styler.append(selected && css.selected)
 	},
 
-	render: ({children, css, icon, ...rest}) => {
+	render: ({children, css, icon, iconPosition, ...rest}) => {
 		delete rest.selected;
 
 		return (
 			<div {...rest} css={css}>
-				<Icon small className={css.icon}>{icon}</Icon>
+				{iconPosition === 'before' ? <Icon small className={`${css.icon} ${css.iconBefore}`}>{icon}</Icon> : null}
 				<div
 					className={css.text}
 				>
 					{children}
 				</div>
+				{iconPosition === 'after' ? <Icon small className={`${css.icon} ${css.iconAfter}`}>{icon}</Icon> : null}
 			</div>
 		);
 	}

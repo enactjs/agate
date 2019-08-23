@@ -82,6 +82,15 @@ const IconItemBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
+		 * Specifies on which side (`'before'` or `'after'`) of the text the icon appears.
+		 *
+		 * @type {('before'|'after')}
+		 * @default 'before'
+		 * @public
+		 */
+		iconPosition: PropTypes.oneOf(['before', 'after']),
+
+		/**
 		 * The label to be displayed along with the text.
 		 *
 		 * @type {Node}
@@ -98,19 +107,23 @@ const IconItemBase = kind({
 		titleIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 	},
 
+	defaultProps: {
+		iconPosition: 'before'
+	},
+
 	styles: {
 		css: componentCss,
 		className: 'iconItem',
 		publicClassNames: ['iconItem', 'icon', 'label']
 	},
 
-	render: ({children, css, disabled, icon, label, titleIcon, ...rest}) => (
+	render: ({children, css, disabled, icon, iconPosition, label, titleIcon, ...rest}) => (
 		<Row
 			disabled={disabled}
 			{...rest}
 			align="center"
 		>
-			<Cell shrink component={Icon} className={css.icon}>{icon}</Cell>
+			{iconPosition === 'before' ? <Cell shrink component={Icon} className={css.iconBefore}>{icon}</Cell> : null}
 			<Cell>
 				<LabeledItemBase
 					css={css}
@@ -120,6 +133,7 @@ const IconItemBase = kind({
 					{children}
 				</LabeledItemBase>
 			</Cell>
+			{iconPosition === 'after' ? <Cell shrink component={Icon} className={css.iconAfter}>{icon}</Cell> : null}
 		</Row>
 	)
 });
