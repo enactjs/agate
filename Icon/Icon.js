@@ -49,7 +49,20 @@ const IconBase = kind({
 		 * @type {String|Object}
 		 * @public
 		 */
-		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+
+		/**
+		 * The size of the icon.
+		 *
+		 * @type {('large'|'small')}
+		 * @default 'large'
+		 * @public
+		 */
+		size: PropTypes.string
+	},
+
+	defaultProps: {
+		size: 'large'
 	},
 
 	render: (props) => UiIcon.inline({

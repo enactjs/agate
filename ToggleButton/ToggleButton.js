@@ -73,16 +73,13 @@ const ToggleButtonBase = kind({
 		selected: PropTypes.bool,
 
 		/**
-		 * Reduces the size of the button.
+		 * The size of the button.
 		 *
-		 * The button will have a larger tap target than its apparent size to allow it to be clicked
-		 * more easily.
-		 *
-		 * @type {Boolean}
-		 * @default false
+		 * @type {('large'|'small')}
+		 * @default 'large'
 		 * @public
 		 */
-		small: PropTypes.bool,
+		size: PropTypes.string,
 
 		/**
 		 * Button text displayed in the 'off' state.
@@ -131,7 +128,7 @@ const ToggleButtonBase = kind({
 		disabled: false,
 		minWidth: true,
 		selected: false,
-		small: false,
+		size: 'large',
 		toggleOffLabel: '',
 		toggleOnLabel: ''
 	},
@@ -143,7 +140,7 @@ const ToggleButtonBase = kind({
 	},
 
 	computed: {
-		className: ({selected, small, styler, underline}) => styler.append({selected, small, underline}),
+		className: ({selected, styler, underline}) => styler.append({selected, underline}),
 		children: ({children, selected, toggleOnLabel, toggleOffLabel}) => {
 			let c = children;
 			if (selected && toggleOnLabel) {
@@ -162,7 +159,7 @@ const ToggleButtonBase = kind({
 		delete rest.toggleOnLabel;
 
 		return iconToggleButton ? (
-			<IconButton {...rest}  aria-pressed={selected} css={css} selected={selected}>{icon}</IconButton>
+			<IconButton {...rest} aria-pressed={selected} css={css} selected={selected}>{icon}</IconButton>
 		) : (
 			<Button {...rest} aria-pressed={selected} css={css} icon={icon} selected={selected}>{children}</Button>
 		);

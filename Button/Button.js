@@ -2,7 +2,7 @@
  * Agate styled button components and behaviors.
  *
  * @example
- * <Button small>Hello Enact!</Button>
+ * <Button>Hello Enact!</Button>
  *
  * @module agate/Button
  * @exports Button
@@ -52,7 +52,7 @@ const ButtonBase = kind({
 		 * * `button` - The root class name
 		 * * `bg` - The background node of the button
 		 * * `selected` - Applied to a `selected` button
-		 * * `small` - Applied to a `small` button
+		 * * `small` - Applied to a button specifying a `size` of `'small'`
 		 *
 		 * @type {Object}
 		 * @public
@@ -89,6 +89,15 @@ const ButtonBase = kind({
 		selected: PropTypes.bool,
 
 		/**
+		 * The size of the button.
+		 *
+		 * @type {('large'|'small')}
+		 * @default 'small'
+		 * @public
+		 */
+		size: PropTypes.string,
+
+		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
 		 * other related buttons.
 		 *
@@ -99,7 +108,8 @@ const ButtonBase = kind({
 	},
 
 	defaultProps: {
-		type: 'standard'
+		type: 'standard',
+		size: 'large'
 	},
 
 	styles: {

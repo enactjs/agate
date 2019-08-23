@@ -120,7 +120,7 @@ const LabeledItemBase = kind({
 			{(label != null && labelPosition === 'before') ? <Marquee disabled={disabled} className={css.labelBefore}>{label}</Marquee> : null}
 			<div className={css.text}>
 				<Marquee disabled={disabled} className={css.title}>{children}</Marquee>
-				{(titleIcon != null) ? <Icon small className={css.icon}>{titleIcon}</Icon> : null}
+				{(titleIcon != null) ? <Icon size="small" className={css.icon}>{titleIcon}</Icon> : null}
 			</div>
 			{(label != null && labelPosition === 'after') ? <Marquee disabled={disabled} className={css.labelAfter}>{label}</Marquee> : null}
 		</Controller>
