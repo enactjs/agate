@@ -126,7 +126,7 @@ const HeaderBase = kind({
 					<h1 className={css.title}>{title}</h1>
 					{subtitleComponent}
 				</Column>
-				{children ? <Layout className={css.endSlot} shrink>{children}</Layout> : null}
+				{children ? <Layout className={css.endSlot}>{children}</Layout> : null}
 			</Row>
 		);
 	}
