@@ -47,7 +47,7 @@ const CustomizableSkinStyle = kind({
 	},
 
 	defaultProps: {
-		accent: '#1a1a1a',
+		accent: '#e7eeee',
 		highlight: '#2a48ca'
 	},
 

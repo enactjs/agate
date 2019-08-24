@@ -1,10 +1,10 @@
 import {forward, handle} from '@enact/core/handle';
 import kind from '@enact/core/kind';
-import React from 'react';
-import PropTypes from 'prop-types';
 import Slottable from '@enact/ui/Slottable';
 import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator, {spotlightDefaultClass} from '@enact/spotlight/SpotlightContainerDecorator';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import Skinnable from '../Skinnable';
 
@@ -68,7 +68,7 @@ const PanelBase = kind({
 		 * Hides the body components.
 		 *
 		 * When a Panel is used within [`Panels`]{@link agate/Panels.Panels},
-		 * [`ActivityPanels`]{@link agate/Panels.ActivityPanels}, or
+		 * [`BreadcrumbPanels`]{@link agate/Panels.BreadcrumbPanels}, or
 		 * [`AlwaysViewingPanels`]{@link agate/Panels.AlwaysViewingPanels},
 		 * this property will be set automatically to `true` on render and `false` after animating
 		 * into view.
@@ -173,4 +173,7 @@ const Panel = SpotlightContainerDecorator(
 );
 
 export default Panel;
-export {Panel, PanelBase};
+export {
+	Panel,
+	PanelBase
+};
