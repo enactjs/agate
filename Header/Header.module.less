@@ -1,0 +1,57 @@
+// Header.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
+
+.header {
+	.applySkins({
+		box-sizing: border-box;
+		position: relative;
+		border-bottom-width: @agate-header-border-bottom-width;
+		border-bottom-style: @agate-header-border-bottom-style;
+		max-width: 100%;
+		background-color: transparent;
+		background-repeat: no-repeat;
+		background-position: top left;
+
+		.titleContainer {
+			flex: 1 0;
+			justify-content: center;
+			padding-right: @agate-header-title-padding-right;
+		}
+
+		.endSlot {
+			align-items: center;
+		}
+
+		// Remove the built-in h1 and h2 margins
+		.subtitle,
+		.title,
+		.titleAbove {
+			margin: @agate-header-title-margin;
+			font-style: @agate-header-font-style;
+			line-height: @agate-header-line-height;
+		}
+
+		.subtitle,
+		.titleAbove {
+			font-size:  @agate-header-subtitle-font-size;
+			font-weight: @agate-header-subtitle-font-weight;
+			letter-spacing: @agate-header-letter-spacing;
+		}
+
+		.title {
+			font-size: @agate-header-title-font-size;
+			text-indent: @agate-header-title-text-indent;  // Fix for characters like `j` being left-truncated because of being too close to the edge
+		}
+
+		&.standard {
+			height: @agate-header-height;
+		}
+
+		&.hideLine {
+			border-bottom-color: transparent;
+		}
+	});
+}
