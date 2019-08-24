@@ -100,7 +100,7 @@ const SwitchItemBase = kind({
 	},
 
 	computed: {
-		icon: ({css, icon}) => (icon ? <Cell shrink component={Icon} small className={css.icon}>{icon}</Cell> : null)
+		icon: ({css, icon}) => (icon ? <Cell shrink component={Icon} size="small" className={css.icon}>{icon}</Cell> : null)
 	},
 
 	render: ({children, css, icon, offText, onText, selected, ...rest}) => {
@@ -111,10 +111,10 @@ const SwitchItemBase = kind({
 				<Cell className={css.text}>
 					{children}
 				</Cell>
+				<Cell shrink component={Switch} selected={selected} className={css.switchIcon} />
 				<Cell shrink className={css.label}>
 					{selected ? onText : offText}
 				</Cell>
-				<Cell shrink component={Switch} selected={selected} className={css.switchIcon} />
 			</Row>
 		);
 	}

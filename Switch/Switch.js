@@ -65,7 +65,7 @@ const SwitchBase = kind({
 		children: ({children, skin}) => {
 			if (children !== 'circle') return children;
 			switch (skin) {
-				case 'carbon': return 'stop';
+				case 'carbon': return 'circle';
 				default: return children;
 			}
 		}

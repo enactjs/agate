@@ -4,7 +4,13 @@
 @import "../styles/skin.less";
 
 .switchItem {
+	.icon {
+		margin-left: 0;
+	}
+
 	.label {
+		.margin-start-end(10px, 0);
+		width: 68px;
 		vertical-align: middle;
 	}
 
@@ -22,7 +28,6 @@
 		}
 
 		.label {
-			.margin-start-end(0, @agate-component-spacing);
 			font-weight: 500;	// Covert to var
 			color: @agate-switch-label-color;
 
