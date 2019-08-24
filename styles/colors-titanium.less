@@ -41,16 +41,16 @@
 // Button
 // ---------------------------------------
 @agate-button-color:          @agate-foreground;
-@agate-button-bg-color:       transparent;
-@agate-button-bg-image:       none;
+@agate-button-bg-color:       fade(white, 50%);
+@agate-button-bg-image:       linear-gradient(to bottom, transparent, fade(black, 15%), transparent);
 @agate-button-border-color:   @agate-accent;
 @agate-button-shadow:         0 1px 3px @agate-accent;
 @agate-button-focus-color:    @agate-foreground-focus;
 @agate-button-focus-bg-color: @agate-background-focus;
-@agate-button-focus-bg-image: none;
+@agate-button-focus-bg-image: linear-gradient(to bottom, transparent, fade(white, 15%) 14%, transparent);
 @agate-button-highlighted-color: @agate-button-selected-color;
 @agate-button-highlighted-bg-color: @agate-background-focus;
-@agate-button-highlighted-bg-image: none;
+@agate-button-highlighted-bg-image: linear-gradient(to bottom, transparent, fade(white, 15%) 14%, transparent);
 @agate-button-selected-bg-color: @agate-accent;
 @agate-button-selected-color: @agate-foreground-active;
 
@@ -242,6 +242,11 @@
 @agate-sliderbutton-knob-bg-image:  @agate-slider-knob-bg-image;
 @agate-sliderbutton-knob-shadow:    @agate-slider-knob-shadow;
 @agate-sliderbutton-knob-focus-shadow: @agate-slider-knob-focus-shadow;
+
+// Spinner
+// ---------------------------------------
+@agate-spinner-light-color: @agate-white;
+@agate-spinner-dark-color: @agate-darker-gray;
 
 // Switch
 // ---------------------------------------
