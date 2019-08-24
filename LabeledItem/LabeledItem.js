@@ -116,6 +116,7 @@ const LabeledItemBase = kind({
 	},
 
 	computed: {
+		className: ({label, styler}) => styler.append({label}),
 		labelBefore: ({css, label, labelPosition}) => (label !== null && (labelPosition === 'before' || labelPosition === 'above')) ? <Marquee className={css.labelBefore}>{label}</Marquee> : null,
 		labelAfter: ({css, label, labelPosition}) => (label !== null && (labelPosition === 'after' || labelPosition === 'below' || labelPosition === 'right' )) ? <Marquee className={css.labelAfter}>{label}</Marquee> : null,
 		slotAfter: ({css, icon}) => icon ? <Icon className={css.icon} size="small">{icon}</Icon> : null,

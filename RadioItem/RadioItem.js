@@ -54,7 +54,7 @@ const RadioItemBase = kind({
 		 * @default 'before'
 		 * @public
 		 */
-		iconPosition: PropTypes.oneOf(['before', 'after']),
+		radioPosition: PropTypes.oneOf(['before', 'after']),
 
 		/**
 		 * If true the radio toggle will be selected.
@@ -67,7 +67,7 @@ const RadioItemBase = kind({
 	},
 
 	defaultProps: {
-		iconPosition: 'before',
+		radioPosition: 'before',
 		selected: false
 	},
 
@@ -79,12 +79,12 @@ const RadioItemBase = kind({
 
 	computed: {
 		className: ({css, selected, styler}) => styler.append(selected && css.selected),
-		slotBefore: ({css, iconPosition}) => iconPosition === 'before' ? <Icon size="small" className={`${css.icon} ${css.iconBefore}`}>circle</Icon> : null,
-		slotAfter: ({css, iconPosition}) => iconPosition === 'after' ? <Icon size="small" className={`${css.icon} ${css.iconAfter}`}>circle</Icon> : null
+		slotBefore: ({css, radioPosition}) => radioPosition === 'before' ? <Icon size="small" className={`${css.icon} ${css.iconBefore}`}>circle</Icon> : null,
+		slotAfter: ({css, radioPosition}) => radioPosition === 'after' ? <Icon size="small" className={`${css.icon} ${css.iconAfter}`}>circle</Icon> : null
 	},
 
 	render: ({children, css, ...rest}) => {
-		delete rest.iconPosition;
+		delete rest.radioPosition;
 		delete rest.selected;
 
 		return (
