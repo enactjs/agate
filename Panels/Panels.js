@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
+import Skinnable from '../Skinnable';
+
 import CancelDecorator from './CancelDecorator';
 import Controls from './Controls';
 import IdProvider from './IdProvider';
@@ -277,7 +279,8 @@ const PanelsDecorator = compose(
 	Slottable({slots: ['controls']}),
 	CancelDecorator({cancel: 'onBack'}),
 	Measurable({refProp: 'controlsRef', measurementProp: 'controlsMeasurements'}),
-	IdProvider
+	IdProvider,
+	Skinnable
 );
 
 const Panels = PanelsDecorator(PanelsBase);
