@@ -1,0 +1,33 @@
+// IconItem.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+
+.iconItem {
+	.iconBefore {
+		margin-left: 0;
+	}
+
+	.iconAfter {
+		margin-right: 0;
+	}
+
+	.labeledItem {
+		padding: 0;
+	}
+
+	.applySkins({
+		padding: 0 @agate-item-side-outset;
+
+		.slider {
+			width: 100%;
+		}
+
+		.focus({
+			.text,
+			.labelAfter {
+				color: @agate-spotlight-color;
+			}
+		});
+	});
+}
