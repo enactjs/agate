@@ -12,12 +12,13 @@
 
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
-import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
+import {IconButtonBase as UiIconButtonBase, IconButtonDecorator as UiIconButtonDecorator} from '@enact/ui/IconButton';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
+import {ButtonBase} from '../Button';
 import AgateIcon from '../Icon';
 import Skinnable from '../Skinnable';
 
@@ -125,24 +126,22 @@ const IconButtonBase = kind({
 			size,
 			{highlighted, selected}
 		),
-		icon: ({children, css, size}) => (
-			<Icon size={size} className={css.icon}>{children}</Icon>
-		),
 		minWidth: ({children}) => (!children)
 	},
 
-	render: ({css, ...rest}) => {
+	render: ({children, css, ...rest}) => {
 		delete rest.children;
 		delete rest.highlighted;
 		delete rest.selected;
 		delete rest.type;
 
-		return UiButtonBase.inline({
+		return UiIconButtonBase.inline({
 			'data-webos-voice-intent': 'Select',
 			...rest,
+			buttonComponent: <ButtonBase css={css} />,
 			css,
 			iconComponent: Icon,
-			minWidth: true
+			icon: children
 		});
 	}
 });
@@ -175,7 +174,7 @@ const IconButtonBase = kind({
  */
 const IconButtonDecorator = compose(
 	Pure,
-	UiButtonDecorator,
+	UiIconButtonDecorator,
 	Spottable,
 	Skinnable
 );

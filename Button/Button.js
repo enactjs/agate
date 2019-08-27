@@ -44,6 +44,17 @@ const ButtonBase = kind({
 
 	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
 		/**
+		 * The background opacity of this button.
+		 *
+		 * Valid values are:
+		 * * `'transparent'`.
+		 *
+		 * @type {('translucent'|'lightTranslucent'|'transparent')}
+		 * @public
+		 */
+		backgroundOpacity: PropTypes.oneOf(['transparent']),
+
+		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
 		 *
@@ -108,7 +119,8 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({highlighted, joinedPosition, selected, type, styler}) => styler.append(
+		className: ({backgroundOpacity, highlighted, joinedPosition, selected, type, styler}) => styler.append(
+			backgroundOpacity,
 			type,
 			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
 			{highlighted, selected}
@@ -117,6 +129,7 @@ const ButtonBase = kind({
 	},
 
 	render: ({css, ...rest}) => {
+		delete rest.backgroundOpacity;
 		delete rest.highlighted;
 		delete rest.joinedPosition;
 		delete rest.selected;

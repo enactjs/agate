@@ -130,6 +130,18 @@
 				color: @agate-button-selected-color;
 			}
 		}
+
+		&.transparent {
+			color: @agate-text-color;
+
+			.bg {
+				background-color: transparent;
+				border: none;
+				background: none;
+				box-shadow: none;
+				backdrop-filter: none;
+			}
+		}
 	});
 
 	// TODO: Replace with an updated .focus() mixin that can apply rules both when focused and
