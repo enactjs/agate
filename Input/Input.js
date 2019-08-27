@@ -182,11 +182,11 @@ const InputBase = kind({
 		/**
 		 * The size of the input field.
 		 *
-		 * @type {('large'|'small')}
+		 * @type {('small'|'large')}
 		 * @default 'large'
 		 * @public
 		 */
-		size: PropTypes.string,
+		size: PropTypes.oneOf(['small', 'large']),
 
 		/**
 		 * The type of input.
@@ -214,7 +214,6 @@ const InputBase = kind({
 		dismissOnEnter: false,
 		invalid: false,
 		placeholder: '',
-		size: 'large',
 		type: 'text'
 	},
 

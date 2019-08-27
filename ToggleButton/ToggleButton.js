@@ -75,11 +75,11 @@ const ToggleButtonBase = kind({
 		/**
 		 * The size of the button.
 		 *
-		 * @type {('large'|'small')}
+		 * @type {('small'|'large')}
 		 * @default 'large'
 		 * @public
 		 */
-		size: PropTypes.string,
+		size: PropTypes.oneOf(['small', 'large']),
 
 		/**
 		 * Button text displayed in the 'off' state.

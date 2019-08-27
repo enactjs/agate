@@ -68,11 +68,11 @@ const ProgressBarBase = kind({
 		/**
 		 * The size of the progress bar
 		 *
-		 * @type {('large'|'small')}
+		 * @type {('small'|'large')}
 		 * @default 'large'
 		 * @public
 		 */
-		size: PropTypes.string
+		size: PropTypes.oneOf(['small', 'large']),
 	},
 
 	defaultProps: {
@@ -87,7 +87,7 @@ const ProgressBarBase = kind({
 	},
 
 	computed: {
-		className: ({size, styler}) => styler.append(size === 'small' && size)
+		className: ({size, styler}) => styler.append(size)
 	},
 
 	render: ({css, ...rest}) => {

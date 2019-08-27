@@ -91,11 +91,11 @@ const ButtonBase = kind({
 		/**
 		 * The size of the button.
 		 *
-		 * @type {('large'|'small')}
+		 * @type {('small'|'large')}
 		 * @default 'large'
 		 * @public
 		 */
-		size: PropTypes.string,
+		size: PropTypes.oneOf(['small', 'large']),
 
 		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
