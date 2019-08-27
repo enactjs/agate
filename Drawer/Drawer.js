@@ -56,7 +56,7 @@ const DrawerBase = kind({
 				<Layout
 					{...rest}
 				>
-					{/* <Icon small onClick={onClose} className={css.closeButton}>closex</Icon>*/}
+					{/* <Icon size="small" onClick={onClose} className={css.closeButton}>closex</Icon>*/}
 					{header ? <Cell shrink className={css.header}>{header}</Cell> : null}
 					<Cell className={css.content}>
 						{children}

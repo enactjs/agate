@@ -37,7 +37,7 @@ const PopupBase = kind({
 	computed: {
 		className: ({closeButton, title, styler}) => styler.append({withCloseButton: closeButton, withTitle: title})
 	},
-	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, open, skin, title, ...rest}) => {
+	render: ({buttons, children, closeButton, css, noAnimation, onCloseButtonClick, onHide, open, skin, title, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
 
 		return (
@@ -56,9 +56,9 @@ const PopupBase = kind({
 				>
 					{closeButton ? <Button
 						icon="closex"
-						small
-						onTap={onClose}
+						onTap={onCloseButtonClick}
 						className={componentCss.closeButton}
+						size="small"
 					/> : null}
 					{title ? <Divider className={css.title}>{title}</Divider> : null}
 					<Layout orientation={wideLayout ? 'horizontal' : 'vertical'} className={css.body}>
