@@ -48,31 +48,18 @@ const SliderItemBase = kind({
 
 	propTypes: /** @lends agate/SliderItem.SliderItemBase.prototype */ {
 		/**
-		 * The node to be displayed as the main content of the item.
-		 *
-		 * @type {Node}
-		 * @required
-		 * @public
-		 */
-		children: PropTypes.node.isRequired,
-
-		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
 		 *
-		 * The following classes are supported:
-		 *
-		 * * `labeledItem` - The root class name
-		 * * `icon` - Applied to the icon
-		 * * `label` - Applied to the label
-		 *
 		 * @type {Object}
-		 * @public
+		 * @private
 		 */
 		css: PropTypes.object,
 
 		/**
-		 * The icon to be displayed on the left.
+		 * Assign a custom icon for the decrementer. All strings supported by [Icon]{@link moonstone/Icon.Icon} are
+		 * supported. Without a custom icon, the default is used, and is automatically changed when
+		 * [vertical]{@link moonstone/IncrementSlider.IncrementSlider#vertical} is changed.
 		 *
 		 * @type {String}
 		 * @public
@@ -80,7 +67,24 @@ const SliderItemBase = kind({
 		decrementIcon: PropTypes.string,
 
 		/**
-		 * The icon to be displayed on the left.
+		 * Disables the slider and prevents events from firing.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
+		/**
+		 * Shows the tooltip, when present.
+		 * @type {Boolean}
+		 * @public
+		 */
+		focused: PropTypes.bool,
+
+		/**
+		 * Assign a custom icon for the incrementer. All strings supported by [Icon]{@link moonstone/Icon.Icon} are
+		 * supported. Without a custom icon, the default is used, and is automatically changed when
+		 * [vertical]{@link moonstone/IncrementSlider.IncrementSlider#vertical} is changed.
 		 *
 		 * @type {String}
 		 * @public
@@ -88,22 +92,148 @@ const SliderItemBase = kind({
 		incrementIcon: PropTypes.string,
 
 		/**
-		 * The label to be displayed along with the text.
+		 * The amount to increment or decrement the position of the knob via 5-way controls.
 		 *
-		 * @type {Node}
+		 * It must evenly divide into the range designated by `min` and `max`. If not specified,
+		 * `step` is used for the default value.
+		 *
+		 * @type {Number}
 		 * @public
 		 */
-		label: PropTypes.node
+		knobStep: PropTypes.number,
+
+		/**
+		 * The maximum value of the increment slider.
+		 *
+		 * The range between `min` and `max` should be evenly divisible by
+		 * [step]{@link moonstone/IncrementSlider.IncrementSliderBase.step}.
+		 *
+		 * @type {Number}
+		 * @default 100
+		 * @public
+		 */
+		max: PropTypes.number,
+
+		/**
+		 * The minimum value of the increment slider.
+		 *
+		 * The range between `min` and `max` should be evenly divisible by
+		 * [step]{@link moonstone/IncrementSlider.IncrementSliderBase.step}.
+		 *
+		 * @type {Number}
+		 * @default 0
+		 * @public
+		 */
+		min: PropTypes.number,
+
+		/**
+		 * Hides the slider bar fill and prevents highlight when spotted.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		noFill: PropTypes.bool,
+
+		/**
+		 * Called when the knob is activated or deactivated by selecting it via 5-way.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onActivate: PropTypes.func,
+
+		/**
+		 * Called when the value is changed.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @param {Number} event.value The current value
+		 * @public
+		 */
+		onChange: PropTypes.func,
+
+		/**
+		 * Forwarded from SliderBehaviorDecorator onto the internal slider.
+		 *
+		 * @type {Function}
+		 * @private
+		 */
+		onDragEnd: PropTypes.func,
+
+		/**
+		 * Forwarded from SliderBehaviorDecorator onto the internal slider.
+		 *
+		 * @type {Function}
+		 * @private
+		 */
+		onDragStart: PropTypes.func,
+
+		/**
+		 * Sets the orientation of the slider, whether the slider moves left and right or up and
+		 * down. Must be either `'horizontal'` or `'vertical'`.
+		 *
+		 * @type {String}
+		 * @default 'horizontal'
+		 * @public
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+
+		/**
+		 * The amount to increment or decrement the value.
+		 *
+		 * It must evenly divide into the range designated by `min` and `max`.
+		 *
+		 * @type {Number}
+		 * @default 1
+		 * @public
+		 */
+		step: PropTypes.number,
+
+		/**
+		 * Enables the built-in tooltip
+		 *
+		 * To customize the tooltip, pass either a custom Tooltip component or an instance of
+		 * [IncrementSliderTooltip]{@link moonstone/IncrementSlider.IncrementSliderTooltip} with
+		 * additional props configured.
+		 *
+		 * ```
+		 * <IncrementSlider
+		 *   tooltip={
+		 *     <IncrementSliderTooltip percent side="after" />
+		 *   }
+		 * />
+		 * ```
+		 *
+		 * The tooltip may also be passed as a child via the `"tooltip"` slot. See
+		 * [Slottable]{@link ui/Slottable} for more information on how slots can be used.
+		 *
+		 * ```
+		 * <IncrementSlider>
+		 *   <IncrementSliderTooltip percent side="after" />
+		 * </IncrementSlider>
+		 * ```
+		 *
+		 * @type {Boolean|Element|Function}
+		 * @public
+		 */
+		tooltip: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
+
+		/**
+		 * The value of the increment slider.
+		 *
+		 * Defaults to the value of `min`.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		value: PropTypes.number
 	},
 
 	defaultProps: {
-		backgroundProgress: 0,
 		max: 100,
 		min: 0,
 		noFill: false,
-		orientation: 'horizontal',
-		step: 1,
-		tooltip: false
+		step: 1
 	},
 
 	styles: {
@@ -134,34 +264,19 @@ const SliderItemBase = kind({
 		</SliderButton> : null
 	},
 
-	render: ({active,
-		'aria-hidden': ariaHidden,
+	render: ({
 		backgroundProgress,
 		css,
-		decrementAriaLabel,
-		decrementDisabled,
-		decrementIcon,
 		disabled,
 		focused,
-		id,
-		incrementAriaLabel,
-		incrementDisabled,
-		incrementIcon,
 		knobStep,
 		max,
 		min,
 		noFill,
 		onActivate,
 		onChange,
-		onDecrement,
-		onDecrementSpotlightDisappear,
 		onDragEnd,
 		onDragStart,
-		onIncrement,
-		onIncrementSpotlightDisappear,
-		onSpotlightDisappear,
-		orientation,
-		spotlightDisabled,
 		step,
 		tooltip,
 		value,
@@ -174,16 +289,13 @@ const SliderItemBase = kind({
 
 		return (
 			<SlotItemBase
+				disabled={disabled}
 				{...rest}
 			>
 				<Slider
-					active={active}
-					aria-hidden={ariaHidden}
-					backgroundProgress={backgroundProgress}
 					className={css.slider}
 					disabled={disabled}
 					focused={focused}
-					id={id}
 					knobStep={knobStep}
 					max={max}
 					min={min}
@@ -192,9 +304,7 @@ const SliderItemBase = kind({
 					onChange={onChange}
 					onDragEnd={onDragEnd}
 					onDragStart={onDragStart}
-					onSpotlightDisappear={onSpotlightDisappear}
-					orientation={orientation}
-					spotlightDisabled={spotlightDisabled}
+					orientation="horizontal"
 					step={step}
 					tooltip={tooltip}
 					value={value}
