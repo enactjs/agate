@@ -1,5 +1,90 @@
 /* Styles for agate/Panels */
 
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
+
 .panels {
-	/* I got cat class and I got cat style */
+	&,
+	& .viewport {
+		position: absolute;
+		.position(0);
+	}
+
+	.controls {
+		position: absolute;
+		z-index: 1;
+		.remove-margin-on-edge-children();
+	}
+
+	&.breadcrumbPanels {
+		.breadcrumbs {
+			position: absolute;
+			.position(0, auto, auto, 0);
+			z-index: 10;
+			overflow: hidden;
+	
+			.breadcrumb {
+				position: absolute;
+				display: table;
+	
+				.breadcrumbContent {
+					display: table-cell;
+					vertical-align: middle;
+					text-align: center;
+				}
+			}
+		}
+
+		&[data-index="0"] {
+			// prevents breadcrumbs from capturing pointer events when the first panel is visible
+			// without any breadcrumbs
+			.breadcrumbs {
+				z-index: -1;
+				pointer-events: none;
+			}
+		}
+
+		// &:not([data-index="0"]) {
+		// 	:global(.enact-locale-right-to-left) & .controls {
+		// 		allocate space for breadcrumb + header margin
+		// 		left: @agate-panels-breadcrumb-width + @agate-spotlight-outset;
+		// 	}
+		// }
+	}
+
+	.applySkins({
+		background-color: @agate-panels-bg-color;
+
+		.controls {
+			top: @agate-panels-controls-top;
+			.position-start-end(auto, @agate-panel-h-padding);
+			.padding-start-end(@agate-panels-controls-padding-start, initial);
+		}
+
+		&.breadcrumbPanels {
+			.breadcrumbs {
+				background-color: @agate-panels-breadcrumb-bg-color;
+				height: @agate-panels-breadcrumb-height;
+				width: @agate-panels-breadcrumb-width;
+				
+				.breadcrumb {
+					height: @agate-panels-breadcrumb-height;
+					width: @agate-panels-breadcrumb-width;
+					font-family: @agate-base-font-family;
+				}
+			}
+
+			.viewport {
+				&.transitioning {
+					-webkit-clip-path: polygon(@agate-panels-breadcrumb-width 0, 100% 0, 100% 100%, @agate-panels-breadcrumb-width 100%);
+					clip-path: polygon(@agate-panels-breadcrumb-width 0, 100% 0, 100% 100%, @agate-panels-breadcrumb-width 100%);
+				}
+
+				> :not([data-index="0"]) {
+					width: calc(~"100% - " @agate-panels-breadcrumb-width);
+				}
+			}
+		}
+	});
 }
