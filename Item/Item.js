@@ -9,10 +9,12 @@
  * @exports ItemBase
  */
 
+import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import {ItemBase as UiItemBase, ItemDecorator as UiItemDecorator} from '@enact/ui/Item';
 import {MarqueeDecorator} from '@enact/ui/Marquee';
 import Pure from '@enact/ui/internal/Pure';
+import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
@@ -27,12 +29,53 @@ import Skinnable from '../Skinnable';
  * @ui
  * @public
  */
-const ItemBase = (props) => (
-	<UiItemBase
-		{...props}
-		css={componentCss}
-	/>
-);
+const ItemBase = kind({
+	name: 'Item',
+
+	propTypes: /** @lends moonstone/Item.ItemBase.prototype */ {
+		/**
+		 * Enable an outline style of of focus.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
+		outlineFocus: PropTypes.bool,
+
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal Elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `item` - The root class name
+		 *
+		 * @type {Object}
+		 * @public
+		 */
+		css: PropTypes.object
+	},
+
+	styles: {
+		css: componentCss,
+		publicClassNames: 'item'
+	},
+
+	computed: {
+		className: ({outlineFocus, styler}) => styler.append({outlineFocus})
+	},
+
+	render: ({css, ...rest}) => {
+		delete rest.outlineFocus;
+
+		return (
+			<UiItemBase
+				data-webos-voice-intent="Select"
+				{...rest}
+				css={css}
+			/>
+		);
+	}
+});
 
 /**
  * Agate specific item behaviors to apply to `Item`.

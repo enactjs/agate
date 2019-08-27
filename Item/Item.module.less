@@ -24,5 +24,14 @@
 			background-color: @agate-item-focus-bg-color;
 			color: @agate-item-focus-color;
 		});
+
+		&.outlineFocus {
+			.focus({
+				background-color: unset;
+				background-image: unset;
+				color: @agate-item-color;
+				outline: @agate-item-focus-outline;
+			});
+		}
 	});
 }
