@@ -1,8 +1,16 @@
 /**
- * Agate styled item with an icon and a label below.
+ * Agate styled Slider Item with increment and decrement controls.
  *
  * @example
- * <SliderItem decrementIcon="minus" incrementIcon="plus" />
+ * <SliderItem
+ *   decrementIcon="minus"
+ *   defaultValue={-25}
+ *   incrementIcon="plus"
+ *   knobStep={25}
+ *   max={100}
+ *   min={-100}
+ *   step={5}
+ * />
  *
  * @module agate/SliderItem
  * @exports SliderItem
@@ -31,8 +39,7 @@ const Slider = Spottable(Skinnable(SliderBase));
 const sliderButtonDisabled = ({disabled, min, max, value = min}) => disabled || (max ? value >= max : value <= min);
 
 /**
- * A focusable component that combines marquee-able text content with a synchronized
- * marquee-able text label.
+ * A stateless SliderItem with IconButtons to increment and decrement the value.
  *
  * @class SliderItemBase
  * @memberof agate/SliderItem
@@ -57,9 +64,8 @@ const SliderItemBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Assign a custom icon for the decrementer. All strings supported by [Icon]{@link moonstone/Icon.Icon} are
-		 * supported. Without a custom icon, the default is used, and is automatically changed when
-		 * [vertical]{@link moonstone/IncrementSlider.IncrementSlider#vertical} is changed.
+		 * Assign a custom icon for the decrementer. All strings supported by [Icon]{@link agate/Icon.Icon} are
+		 * supported. Without a custom icon, the default is used.
 		 *
 		 * @type {String}
 		 * @public
@@ -82,9 +88,8 @@ const SliderItemBase = kind({
 		focused: PropTypes.bool,
 
 		/**
-		 * Assign a custom icon for the incrementer. All strings supported by [Icon]{@link moonstone/Icon.Icon} are
-		 * supported. Without a custom icon, the default is used, and is automatically changed when
-		 * [vertical]{@link moonstone/IncrementSlider.IncrementSlider#vertical} is changed.
+		 * Assign a custom icon for the incrementer. All strings supported by [Icon]{@link agate/Icon.Icon} are
+		 * supported. Without a custom icon, the default is used.
 		 *
 		 * @type {String}
 		 * @public
@@ -103,10 +108,10 @@ const SliderItemBase = kind({
 		knobStep: PropTypes.number,
 
 		/**
-		 * The maximum value of the increment slider.
+		 * The maximum value of the slider.
 		 *
 		 * The range between `min` and `max` should be evenly divisible by
-		 * [step]{@link moonstone/IncrementSlider.IncrementSliderBase.step}.
+		 * [step]{@link agate/SliderItem.SliderItemBase.step}.
 		 *
 		 * @type {Number}
 		 * @default 100
@@ -115,10 +120,10 @@ const SliderItemBase = kind({
 		max: PropTypes.number,
 
 		/**
-		 * The minimum value of the increment slider.
+		 * The minimum value of the slider.
 		 *
 		 * The range between `min` and `max` should be evenly divisible by
-		 * [step]{@link moonstone/IncrementSlider.IncrementSliderBase.step}.
+		 * [step]{@link agate/SliderItem.SliderItemBase.step}.
 		 *
 		 * @type {Number}
 		 * @default 0
@@ -192,14 +197,13 @@ const SliderItemBase = kind({
 		/**
 		 * Enables the built-in tooltip
 		 *
-		 * To customize the tooltip, pass either a custom Tooltip component or an instance of
-		 * [IncrementSliderTooltip]{@link moonstone/IncrementSlider.IncrementSliderTooltip} with
+		 * To customize the tooltip, pass a custom Tooltip component with
 		 * additional props configured.
 		 *
 		 * ```
-		 * <IncrementSlider
+		 * <SliderItem
 		 *   tooltip={
-		 *     <IncrementSliderTooltip percent side="after" />
+		 *     <Tooltip percent side="after" />
 		 *   }
 		 * />
 		 * ```
@@ -208,9 +212,9 @@ const SliderItemBase = kind({
 		 * [Slottable]{@link ui/Slottable} for more information on how slots can be used.
 		 *
 		 * ```
-		 * <IncrementSlider>
-		 *   <IncrementSliderTooltip percent side="after" />
-		 * </IncrementSlider>
+		 * <SliderItem>
+		 *   <Tooltip percent side="after" />
+		 * </SliderItem>
 		 * ```
 		 *
 		 * @type {Boolean|Element|Function}
@@ -219,7 +223,7 @@ const SliderItemBase = kind({
 		tooltip: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
 
 		/**
-		 * The value of the increment slider.
+		 * The value of the slider.
 		 *
 		 * Defaults to the value of `min`.
 		 *
@@ -265,7 +269,6 @@ const SliderItemBase = kind({
 	},
 
 	render: ({
-		backgroundProgress,
 		css,
 		disabled,
 		focused,
