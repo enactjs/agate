@@ -17,17 +17,11 @@ import Pure from '@enact/ui/internal/Pure';
 import React from 'react';
 import Spottable from '@enact/spotlight/Spottable';
 import Touchable from '@enact/ui/Touchable';
+import {Cell, Row} from '@enact/ui/Layout';
 
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 import {SlotItemBase} from '../SlotItem';
-
-const Controller = MarqueeController(
-	{marqueeOnFocus: true},
-	Skinnable(
-		SlotItemBase
-	)
-);
 
 import componentCss from './LabeledItem.module.less';
 
@@ -124,25 +118,39 @@ const LabeledItemBase = kind({
 	},
 
 	computed: {
-		className: ({label, styler}) => styler.append({label}),
-		labelBefore: ({css, label, labelPosition}) => (label !== null && labelPosition === 'before') ? <Marquee className={css.labelBefore}>{label}</Marquee> : null,
-		labelAfter: ({css, label, labelPosition}) => (label !== null && labelPosition === 'after') ? <Marquee className={css.labelAfter}>{label}</Marquee> : null,
-		slotAfter: ({css, icon}) => icon ? <Icon className={css.icon} size="small">{icon}</Icon> : null,
-		titleContainerClassName: ({css, labelInline}) => labelInline ? `${css.titleContainer} ${css.labelInline}` : css.titleContainer
+		className: ({labelInline, styler}) => styler.append({labelInline}),
+		slotAfter: ({css, icon, label, labelInline, labelPosition}) => {
+			return (
+				<Row align="center center">
+					{label && labelInline && labelPosition === 'after' ? (
+						<Cell component={Marquee} className={css.labelAfter} shrink>{label}</Cell>
+					) : null}
+					{icon ? <Cell component={Icon} className={css.icon} size="small" shrink>{icon}</Cell> : null}
+				</Row>
+			);
+		},
+		slotBefore: ({css, label, labelInline, labelPosition}) => {
+			return label && labelInline && labelPosition === 'before' ? (
+				<Marquee className={css.labelBefore}>{label}</Marquee>
+			) : null;
+		}
 	},
 
-	render: ({children, css, disabled, labelBefore, labelAfter, titleContainerClassName, ...rest}) => {
+	render: ({children, css, disabled, label, labelInline, ...rest}) => {
 		delete rest.icon;
 		delete rest.label;
 		delete rest.labelInline;
 		delete rest.labelPosition;
 
 		return (
-			<Controller {...rest} css={css} disabled={disabled}>
-				<SlotItemBase className={titleContainerClassName} disabled={disabled} slotBefore={labelBefore} slotAfter={labelAfter}>
+			<SlotItemBase {...rest} css={css} disabled={disabled}>
+				<div style={{flex: '1 1 auto'}}>
 					<Marquee className={css.title}>{children}</Marquee>
-				</SlotItemBase>
-			</Controller>
+					{label && !labelInline ? (
+						<Marquee className={css.label}>{label}</Marquee>
+					) : null}
+				</div>
+			</SlotItemBase>
 		);
 	}
 });
@@ -150,7 +158,9 @@ const LabeledItemBase = kind({
 const LabeledItemDecorator = compose(
 	Spottable,
 	Pure,
-	Touchable
+	Touchable,
+	MarqueeController({marqueeOnFocus: true}),
+	Skinnable
 );
 
 /**
