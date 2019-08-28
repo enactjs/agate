@@ -120,7 +120,7 @@ const LabeledItemBase = kind({
 	styles: {
 		css: componentCss,
 		className: 'labeledItem',
-		publicClassNames: ['labeledItem', 'icon', 'labelBefore', 'labelAfter', 'text', 'title']
+		publicClassNames: ['labeledItem', 'icon', 'labelBefore', 'labelAfter', 'title']
 	},
 
 	computed: {
