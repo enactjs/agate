@@ -21,7 +21,7 @@
 			flex-direction: column;
 		}
 
-		.labelRight {
+		.labelInline {
 			flex-direction: row;
 			align-items: center;
 		}
@@ -36,8 +36,8 @@
 		padding-right: @agate-item-side-outset;
 
 		// Text
-		.labelAfter,
-		.labelBefore {
+		.labelBefore,
+		.labelAfter {
 			color: @agate-labeleditem-label-color;
 			line-height: (@agate-item-height / 2);
 			font-size: @agate-item-label-font-size;
@@ -51,7 +51,8 @@
 			padding-bottom: @agate-component-spacing;
 		}
 
-		.labelRight {
+		.labelInline {
+			.labelBefore,
 			.labelAfter {
 				padding: 0;
 			}

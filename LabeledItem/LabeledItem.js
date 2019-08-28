@@ -97,12 +97,20 @@ const LabeledItemBase = kind({
 		label: PropTypes.node,
 
 		/**
-		 * The position of label
+		 * Inlines the label
 		 *
-		 * @type {('before'|'after'|'below'|'right'|'above')}
+		 * @type {Boolean}
 		 * @public
 		 */
-		labelPosition: PropTypes.oneOf(['after', 'before', 'below', 'right', 'above'])
+		labelInline: PropTypes.bool,
+
+		/**
+		 * The position of label
+		 *
+		 * @type {('before'|'after')}
+		 * @public
+		 */
+		labelPosition: PropTypes.oneOf(['after', 'before'])
 	},
 
 	defaultProps: {
@@ -117,15 +125,16 @@ const LabeledItemBase = kind({
 
 	computed: {
 		className: ({label, styler}) => styler.append({label}),
-		labelBefore: ({css, label, labelPosition}) => (label !== null && (labelPosition === 'before' || labelPosition === 'above')) ? <Marquee className={css.labelBefore}>{label}</Marquee> : null,
-		labelAfter: ({css, label, labelPosition}) => (label !== null && (labelPosition === 'after' || labelPosition === 'below' || labelPosition === 'right' )) ? <Marquee className={css.labelAfter}>{label}</Marquee> : null,
+		labelBefore: ({css, label, labelPosition}) => (label !== null && labelPosition === 'before') ? <Marquee className={css.labelBefore}>{label}</Marquee> : null,
+		labelAfter: ({css, label, labelPosition}) => (label !== null && labelPosition === 'after') ? <Marquee className={css.labelAfter}>{label}</Marquee> : null,
 		slotAfter: ({css, icon}) => icon ? <Icon className={css.icon} size="small">{icon}</Icon> : null,
-		titleContainerClassName: ({css, labelPosition}) => labelPosition === 'right' ? `${css.titleContainer} ${css.labelRight}` : css.titleContainer
+		titleContainerClassName: ({css, labelInline}) => labelInline ? `${css.titleContainer} ${css.labelInline}` : css.titleContainer
 	},
 
 	render: ({children, css, disabled, labelBefore, labelAfter, titleContainerClassName, ...rest}) => {
 		delete rest.icon;
 		delete rest.label;
+		delete rest.labelInline;
 		delete rest.labelPosition;
 
 		return (
