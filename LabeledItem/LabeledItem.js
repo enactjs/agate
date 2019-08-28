@@ -85,10 +85,10 @@ const LabeledItemBase = kind({
 		/**
 		 * The label to be displayed along with the text.
 		 *
-		 * @type {Node}
+		 * @type {String}
 		 * @public
 		 */
-		label: PropTypes.node,
+		label: PropTypes.string,
 
 		/**
 		 * Inlines the label
@@ -136,21 +136,21 @@ const LabeledItemBase = kind({
 		}
 	},
 
-	render: ({children, css, disabled, label, labelInline, ...rest}) => {
+	render: ({children, css, label, labelInline, ...rest}) => {
 		delete rest.icon;
 		delete rest.label;
 		delete rest.labelInline;
 		delete rest.labelPosition;
 
 		return (
-			<SlotItemBase {...rest} css={css} disabled={disabled}>
+			<Row {...rest} align="center center" component={SlotItemBase}>
 				<Cell>
 					<Marquee className={css.title}>{children}</Marquee>
 					{label && !labelInline ? (
 						<Marquee className={css.label}>{label}</Marquee>
 					) : null}
 				</Cell>
-			</SlotItemBase>
+			</Row>
 		);
 	}
 });
