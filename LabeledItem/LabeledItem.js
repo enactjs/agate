@@ -144,12 +144,12 @@ const LabeledItemBase = kind({
 
 		return (
 			<SlotItemBase {...rest} css={css} disabled={disabled}>
-				<div style={{flex: '1 1 auto'}}>
+				<Cell>
 					<Marquee className={css.title}>{children}</Marquee>
 					{label && !labelInline ? (
 						<Marquee className={css.label}>{label}</Marquee>
 					) : null}
-				</div>
+				</Cell>
 			</SlotItemBase>
 		);
 	}
