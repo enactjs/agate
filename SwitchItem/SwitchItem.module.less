@@ -10,6 +10,7 @@
 
 	.label {
 		.margin-start-end(10px, 0);
+		display: inline-block;
 		width: 68px;
 		vertical-align: middle;
 	}
@@ -21,11 +22,9 @@
 
 	.applySkins({
 		border-bottom: @agate-divider-border-width solid @agate-divider-border-color;
-		.agate-item-sizing();
+		color: @agate-item-color;
 
-		.text {
-			color: @agate-item-color;
-		}
+		.agate-item-sizing();
 
 		.label {
 			font-weight: 500;	// Covert to var

@@ -11,11 +11,11 @@ import compose from 'ramda/src/compose';
 
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
-import {Row, Cell} from '@enact/ui/Layout';
 import Toggleable from '@enact/ui/Toggleable';
 
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
+import SlotItem from '../SlotItem';
 import {SwitchBase} from '../Switch';
 
 import componentCss from './SwitchItem.module.less';
@@ -100,22 +100,30 @@ const SwitchItemBase = kind({
 	},
 
 	computed: {
-		icon: ({css, icon}) => (icon ? <Cell shrink component={Icon} size="small" className={css.icon}>{icon}</Cell> : null)
+		slotBefore: ({css, icon}) => (icon ? <Icon size="small" className={css.icon}>{icon}</Icon> : null),
+		slotAfter: ({css, offText, onText, selected}) => (
+			<React.Fragment>
+				<Switch
+					className={css.switchIcon}
+					selected={selected}
+				/>
+				<div className={css.label}>
+					{selected ? onText : offText}
+				</div>
+			</React.Fragment>
+		)
 	},
 
-	render: ({children, css, icon, offText, onText, selected, ...rest}) => {
+	render: ({children, ...rest}) => {
+		delete rest.icon;
+		delete rest.offText;
+		delete rest.onText;
+		delete rest.selected;
 
 		return (
-			<Row align="center" {...rest}>
-				{icon}
-				<Cell className={css.text}>
-					{children}
-				</Cell>
-				<Cell shrink component={Switch} selected={selected} className={css.switchIcon} />
-				<Cell shrink className={css.label}>
-					{selected ? onText : offText}
-				</Cell>
-			</Row>
+			<SlotItem {...rest}>
+				{children}
+			</SlotItem>
 		);
 	}
 });
