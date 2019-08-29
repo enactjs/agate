@@ -74,13 +74,13 @@ const RadioItemBase = kind({
 		delete rest.selected;
 
 		return (
-			<div {...rest}>
+			<div {...rest} css={css}>
+				<Icon className={css.icon} size="small">circle</Icon>
 				<div
 					className={css.text}
 				>
 					{children}
 				</div>
-				<Icon size="small" className={css.icon}>circle</Icon>
 			</div>
 		);
 	}

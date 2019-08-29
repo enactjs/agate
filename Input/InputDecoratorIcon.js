@@ -34,7 +34,20 @@ const InputDecoratorIconBase = kind({
 		 * @see {@link agate/Icon.Icon#children}
 		 * @type {String|Object}
 		 */
-		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+
+		/**
+		 * The size of the icon.
+		 *
+		 * @type {('small'|'large')}
+		 * @default 'large'
+		 * @public
+		 */
+		size: PropTypes.oneOf(['small', 'large']),
+	},
+
+	defaultProps: {
+		size: 'large'
 	},
 
 	styles: {
@@ -65,7 +78,7 @@ const InputDecoratorIconBase = kind({
  * @ui
  * @private
  */
-const InputDecoratorIcon = onlyUpdateForKeys(['children'])(InputDecoratorIconBase);
+const InputDecoratorIcon = onlyUpdateForKeys(['children', 'size'])(InputDecoratorIconBase);
 
 export default InputDecoratorIcon;
 export {
