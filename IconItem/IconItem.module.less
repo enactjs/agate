@@ -17,13 +17,12 @@
 	}
 
 	.applySkins({
-		padding: 0 @agate-item-side-outset;
+		padding: @agate-iconitem-padding;
 
-		.focus({
-			.text,
-			.labelAfter {
-				color: @agate-spotlight-color;
-			}
-		});
+		.label {
+			color: @agate-iconitem-color;
+			line-height: @agate-iconitem-line-height;
+			font-size: @agate-iconitem-font-size;
+		}
 	});
 }

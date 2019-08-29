@@ -12,6 +12,7 @@
 import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
+import {MarqueeController} from '@enact/ui/Marquee';
 import Pure from '@enact/ui/internal/Pure';
 import React from 'react';
 import Spottable from '@enact/spotlight/Spottable';
@@ -124,6 +125,7 @@ const IconItemDecorator = compose(
 	Spottable,
 	Pure,
 	Touchable,
+	MarqueeController({marqueeOnFocus: true}),
 	Skinnable
 );
 
