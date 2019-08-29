@@ -48,15 +48,6 @@ const RadioItemBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Specifies on which side (`'before'` or `'after'`) of the text the icon appears.
-		 *
-		 * @type {('before'|'after')}
-		 * @default 'before'
-		 * @public
-		 */
-		radioPosition: PropTypes.oneOf(['before', 'after']),
-
-		/**
 		 * If true the radio toggle will be selected.
 		 *
 		 * @type {Boolean}
@@ -67,7 +58,6 @@ const RadioItemBase = kind({
 	},
 
 	defaultProps: {
-		radioPosition: 'before',
 		selected: false
 	},
 
@@ -78,23 +68,21 @@ const RadioItemBase = kind({
 	},
 
 	computed: {
-		className: ({css, selected, styler}) => styler.append(selected && css.selected),
-		slotBefore: ({css, radioPosition}) => radioPosition === 'before' ? <Icon size="small" className={`${css.icon} ${css.iconBefore}`}>circle</Icon> : null,
-		slotAfter: ({css, radioPosition}) => radioPosition === 'after' ? <Icon size="small" className={`${css.icon} ${css.iconAfter}`}>circle</Icon> : null
+		className: ({css, selected, styler}) => styler.append(selected && css.selected)
 	},
 
 	render: ({children, css, ...rest}) => {
-		delete rest.radioPosition;
 		delete rest.selected;
 
 		return (
-			<SlotItem {...rest} css={css}>
+			<div {...rest}>
 				<div
 					className={css.text}
 				>
 					{children}
 				</div>
-			</SlotItem>
+				<Icon size="small" className={css.icon}>circle</Icon>
+			</div>
 		);
 	}
 });

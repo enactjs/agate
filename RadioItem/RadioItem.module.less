@@ -14,6 +14,8 @@
 		.agate-item-sizing();
 
 		.icon {
+			.slot-order(1, @agate-radioitem-sort-order);
+
 			border-color: @agate-radioitem-icon-border-color;
 			border-style: solid;
 			border-width: @agate-radioitem-icon-border-width;
@@ -31,6 +33,8 @@
 		}
 
 		.text {
+			.slot-order(2, @agate-radioitem-sort-order);
+
 			color: @agate-radioitem-color;
 			flex: 1;
 		}
@@ -38,9 +42,11 @@
 		.focus({
 			color: @agate-radioitem-focus-color;
 
-			.icon {
-				color: @agate-radioitem-icon-focus-color;
-				background-color: @agate-radioitem-icon-focus-bg-color;
+			&.selected {
+				.icon {
+					color: @agate-radioitem-icon-focus-color;
+					background-color: @agate-radioitem-icon-focus-bg-color;
+				}
 			}
 
 			.text {

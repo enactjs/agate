@@ -21,3 +21,7 @@
 	padding-left: @agate-item-side-outset;
 	padding-right: @agate-item-side-outset;
 }
+
+.slot-order(@order, @sort-order) {
+	order: extract(@sort-order, @order);
+}
