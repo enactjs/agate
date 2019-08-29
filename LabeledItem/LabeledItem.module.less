@@ -5,17 +5,6 @@
 
 .labeledItem {
 
-	// Header
-	.titleContainer {
-		width: 100%;
-		align-items: start;
-
-		.title {
-			width: 100%;
-			overflow: hidden;
-		}
-	}
-
 	&.labelInline {
 		align-items: center;
 	}
@@ -29,11 +18,16 @@
 		padding-right: @agate-item-side-outset;
 
 		// Text
+		.label,
 		.labelBefore,
 		.labelAfter {
 			color: @agate-labeleditem-label-color;
 			line-height: (@agate-item-height / 2);
 			font-size: @agate-item-label-font-size;
+		}
+
+		.labelBefore,
+		.labelAfter {
 			margin: 0 10px;
 		}
 

@@ -11,7 +11,7 @@
 
 import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
-import {MarqueeBase as Marquee, MarqueeController} from '@enact/ui/Marquee';
+import {Marquee, MarqueeController} from '@enact/ui/Marquee';
 import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
 import React from 'react';
@@ -114,7 +114,7 @@ const LabeledItemBase = kind({
 	styles: {
 		css: componentCss,
 		className: 'labeledItem',
-		publicClassNames: ['labeledItem', 'icon', 'labelBefore', 'labelAfter', 'title']
+		publicClassNames: ['labeledItem', 'icon', 'label', 'title']
 	},
 
 	computed: {
@@ -123,7 +123,7 @@ const LabeledItemBase = kind({
 			return (
 				<Row align="center center">
 					{label && labelInline && labelPosition === 'after' ? (
-						<Cell component={Marquee} className={css.labelAfter} shrink>{label}</Cell>
+						<Cell component={Marquee} className={`${css.labelAfter} ${css.label}`} shrink>{label}</Cell>
 					) : null}
 					{icon ? <Cell component={Icon} className={css.icon} size="small" shrink>{icon}</Cell> : null}
 				</Row>
@@ -131,22 +131,24 @@ const LabeledItemBase = kind({
 		},
 		slotBefore: ({css, label, labelInline, labelPosition}) => {
 			return label && labelInline && labelPosition === 'before' ? (
-				<Marquee className={css.labelBefore}>{label}</Marquee>
+				<Marquee className={`${css.labelBefore} ${css.label}`}>{label}</Marquee>
 			) : null;
 		}
 	},
 
-	render: ({children, css, label, labelInline, ...rest}) => {
+	render: ({children, css, label, labelInline, labelPosition, ...rest}) => {
 		delete rest.icon;
 		delete rest.label;
 		delete rest.labelInline;
-		delete rest.labelPosition;
 
 		return (
 			<Row {...rest} align="center center" component={SlotItemBase}>
 				<Cell>
+					{label && !labelInline && labelPosition === 'before' ? (
+						<Marquee className={css.label}>{label}</Marquee>
+					) : null}
 					<Marquee className={css.title}>{children}</Marquee>
-					{label && !labelInline ? (
+					{label && !labelInline && labelPosition === 'after' ? (
 						<Marquee className={css.label}>{label}</Marquee>
 					) : null}
 				</Cell>
