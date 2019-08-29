@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import kind from '@enact/core/kind';
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
-import SlotItem from '../SlotItem';
 
 import Spottable from '@enact/spotlight/Spottable';
 import Toggleable from '@enact/ui/Toggleable';
