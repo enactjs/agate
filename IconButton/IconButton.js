@@ -2,7 +2,7 @@
  * Agate styled button components and behaviors.
  *
  * @example
- * <IconButton small>home</IconButton>
+ * <IconButton>home</IconButton>
  *
  * @module agate/IconButton
  * @exports IconButton
@@ -29,7 +29,7 @@ const Icon = kind({
 	name: 'Icon',
 	propTypes: {
 		css: PropTypes.object,
-		size: PropTypes.oneOf(['small', 'smallest'])
+		size: PropTypes.oneOf(['smallest', 'small', 'large'])
 	},
 	styles: {
 		css: componentCss,
@@ -68,7 +68,8 @@ const IconButtonBase = kind({
 		 * * `button` - The root class name
 		 * * `bg` - The background node of the button
 		 * * `selected` - Applied to a `selected` button
-		 * * `small` - Applied to a `small` button
+		 * * `small` - Applied to a button specifying a `size` of `'small'`
+		 * * `smallest` - Applied to a button specifying a `size` of `'smallest'`
 		 *
 		 * @type {Object}
 		 * @public
@@ -99,7 +100,7 @@ const IconButtonBase = kind({
 		 * @type {String}
 		 * @public
 		 */
-		size: PropTypes.oneOf(['small', 'smallest']),
+		size: PropTypes.oneOf(['smallest', 'small', 'large']),
 
 		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
@@ -112,12 +113,13 @@ const IconButtonBase = kind({
 	},
 
 	defaultProps: {
+		size: 'large',
 		type: 'standard'
 	},
 
 	styles: {
 		css: componentCss,
-		publicClassNames: ['button', 'bg', 'client', 'selected', 'small']
+		publicClassNames: ['button', 'bg', 'client', 'selected', 'small', 'smallest']
 	},
 
 	computed: {

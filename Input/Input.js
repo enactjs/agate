@@ -180,13 +180,13 @@ const InputBase = kind({
 		rtl: PropTypes.bool,
 
 		/**
-		 * Applies the `small` CSS class.
+		 * The size of the input field.
 		 *
-		 * @type {Boolean}
-		 * @default false
+		 * @type {('small'|'large')}
+		 * @default 'large'
 		 * @public
 		 */
-		small: PropTypes.bool,
+		size: PropTypes.oneOf(['small', 'large']),
 
 		/**
 		 * The type of input.
@@ -236,12 +236,12 @@ const InputBase = kind({
 		// 	const title = (value == null || value === '') ? placeholder : '';
 		// 	return calcAriaLabel(title, type, value);
 		// },
-		className: ({focused, invalid, small, styler}) => styler.append({focused, invalid, small}),
+		className: ({focused, invalid, styler}) => styler.append({focused, invalid}),
 		// ensure we have a value so the internal <input> is always controlled
 		value: ({value}) => typeof value === 'number' ? value : (value || '')
 	},
 
-	render: ({css, disabled, iconAfter, iconBefore, onChange, placeholder, small, type, value, ...rest}) => {
+	render: ({css, disabled, iconAfter, iconBefore, onChange, placeholder, size, type, value, ...rest}) => {
 		const inputProps = extractInputProps(rest);
 		delete rest.dismissOnEnter;
 		delete rest.focused;
@@ -251,7 +251,7 @@ const InputBase = kind({
 
 		return (
 			<div {...rest} disabled={disabled}>
-				<InputDecoratorIcon position="before" small={small}>
+				<InputDecoratorIcon position="before" size={size}>
 					{iconBefore}
 				</InputDecoratorIcon>
 				<input
@@ -265,7 +265,7 @@ const InputBase = kind({
 					type={type}
 					value={value}
 				/>
-				<InputDecoratorIcon position="after" small={small}>
+				<InputDecoratorIcon position="after" size={size}>
 					{iconAfter}
 				</InputDecoratorIcon>
 			</div>

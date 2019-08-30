@@ -100,7 +100,11 @@ const SwitchItemBase = kind({
 	},
 
 	computed: {
-		icon: ({css, icon}) => (icon ? <Cell shrink component={Icon} small className={css.icon}>{icon}</Cell> : null)
+		icon: ({css, icon}) => (icon ? <Cell shrink>
+			<Icon size="small" className={css.icon}>
+				{icon}
+			</Icon>
+		</Cell> : null)
 	},
 
 	render: ({children, css, icon, offText, onText, selected, ...rest}) => {
