@@ -33,6 +33,7 @@
     "classnames": "^2.2.6",
     "color-convert": "^1.9.3",
     "eases": "^1.0.8",
+    "immer": "^3.2.0",
     "prop-types": "^15.6.2",
     "ramda": "^0.25.0",
     "react": "^16.8.0",
