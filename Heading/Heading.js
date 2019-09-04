@@ -106,7 +106,6 @@ const HeadingBase = kind({
  *
  * @hoc
  * @memberof agate/Heading
- * @mixes agate/Marquee.MarqueeDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
@@ -139,21 +138,6 @@ const HeadingDecorator = compose(
  * @public
  */
 const Heading = HeadingDecorator(HeadingBase);
-
-/**
- * Marquee animation trigger.
- *
- * Allowed values include:
- * * `'hover'` - Marquee begins when the pointer enters the component
- * * `'render'` - Marquee begins when the component is rendered
- *
- * @name marqueeOn
- * @type {String}
- * @default 'render'
- * @memberof agate/Heading.Heading.prototype
- * @see {@link agate/Marquee.Marquee}
- * @public
- */
 
 export default Heading;
 export {
