@@ -166,10 +166,10 @@ const ColorPickerBase = kind({
 						<Group
 							className={css.group}
 							childComponent={SwatchButton}
-							itemProps={{small: true, className: css.swatch}}
+							itemProps={{size: 'small', className: css.swatch}}
 							onSelect={onChange}
 						>{children || []}</Group>
-						<Button icon="ellipsis" small onTap={onToggleExtended} className={css.swatch} />
+						<Button icon="ellipsis" size="small" onTap={onToggleExtended} className={css.swatch} />
 						<div className={css.sliders}>
 							<Row align="center">
 								<Cell>

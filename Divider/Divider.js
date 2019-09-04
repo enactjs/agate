@@ -100,7 +100,7 @@ const DividerBase = kind({
 
 	computed: {
 		className: ({spacing, startSection, styler}) => styler.append(spacing, {startSection}),
-		icon: ({css, icon}) => (icon ? <Icon small className={css.icon}>{icon}</Icon> : null)
+		icon: ({css, icon}) => (icon ? <Icon size="small" className={css.icon}>{icon}</Icon> : null)
 	},
 
 	render: ({children, css, icon, ...rest}) => {

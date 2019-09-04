@@ -56,9 +56,9 @@ const PopupBase = kind({
 				>
 					{closeButton ? <Button
 						icon="closex"
-						small
 						onTap={onCloseButtonClick}
 						className={componentCss.closeButton}
+						size="small"
 					/> : null}
 					{title ? <Divider className={css.title}>{title}</Divider> : null}
 					<Layout orientation={wideLayout ? 'horizontal' : 'vertical'} className={css.body}>

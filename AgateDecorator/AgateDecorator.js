@@ -47,7 +47,7 @@ const CustomizableSkinStyle = kind({
 	},
 
 	defaultProps: {
-		accent: '#1a1a1a',
+		accent: '#e7eeee',
 		highlight: '#2a48ca'
 	},
 
@@ -109,7 +109,7 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	if (float) App = FloatingLayerDecorator({wrappedClassName: bgClassName}, App);
 	if (ri) App = ResolutionDecorator(ri, App);
 	if (spotlight) App = SpotlightRootDecorator({noAutoFocus}, App);
-	if (skin) App = Skinnable({defaultSkin: 'carbon'}, App);
+	if (skin) App = Skinnable({defaultSkin: 'gallium'}, App);
 
 	// add webOS-specific key maps
 	addAll({
