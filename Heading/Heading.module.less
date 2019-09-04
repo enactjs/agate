@@ -1,0 +1,86 @@
+// Heading.module.less
+//
+@import "../styles/variables.less";
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+
+.heading {
+	.applySkins({
+		border-bottom: @agate-heading-border-width solid transparent;
+		margin: 0 @agate-spotlight-outset (1.5 * @agate-spotlight-outset) @agate-spotlight-outset;
+		padding: @agate-heading-padding;
+		min-height: (1.5 * @agate-spotlight-outset);
+		letter-spacing: @agate-heading-letter-spacing;
+		line-height: @agate-heading-line-height;
+		color: @agate-heading-text-color;
+
+		&.showLine {
+			border-bottom-color: @agate-heading-border-color;
+			padding: @agate-heading-showline-padding;
+		}
+
+		&.title {
+			font-family: @agate-heading-title-font-family;
+			font-weight: @agate-heading-title-font-weight;
+			font-style: @agate-heading-title-font-style;
+			font-size: @agate-heading-title-font-size;
+			position: relative;
+			padding: @agate-heading-title-padding;
+
+			&::after {
+				content: "";
+				position: absolute;
+				height: @agate-heading-title-decoration-height;
+				width: @agate-heading-title-decoration-width;
+				.position(@agate-heading-title-decoration-positions);
+				background-color: var(--agate-heading-accent, @agate-heading-accent-color);
+				z-index: -1;
+				border-radius: @agate-heading-title-decoration-border-radius;
+				transform: @agate-heading-title-decoration-transform;
+				opacity: @agate-heading-title-decoration-opacity;
+			}
+		}
+		&.large {
+			font-family: @agate-heading-large-font-family;
+			font-weight: @agate-heading-large-font-weight;
+			font-style: @agate-heading-large-font-style;
+			font-size: @agate-heading-large-font-size;
+		}
+		&.medium {
+			font-family: @agate-heading-medium-font-family;
+			font-weight: @agate-heading-medium-font-weight;
+			font-style: @agate-heading-medium-font-style;
+			font-size: @agate-heading-medium-font-size;
+		}
+		&.small,
+		&.tiny {
+			font-family: @agate-heading-small-font-family;
+			font-weight: @agate-heading-small-font-weight;
+			font-style: @agate-heading-small-font-style;
+			font-size: @agate-heading-small-font-size;
+		}
+
+		// Margin-bottom is set up this way so the presence of the line does not affect the height of the Heading.
+		// We simply toggle the color from transparent to "colored" below, leaving the height untouched.
+		&.titleSpacing {
+			margin-bottom: (@agate-heading-spacing-title - @agate-heading-border-width);
+			min-height: (@agate-heading-spacing-title - @agate-heading-border-width);
+		}
+		&.largeSpacing {
+			margin-bottom: (@agate-heading-spacing-large - @agate-heading-border-width);
+			min-height: (@agate-heading-spacing-large - @agate-heading-border-width);
+		}
+		&.mediumSpacing {
+			margin-bottom: (@agate-heading-spacing-medium - @agate-heading-border-width);
+			min-height: (@agate-heading-spacing-medium - @agate-heading-border-width);
+		}
+		&.smallSpacing {
+			margin-bottom: (@agate-heading-spacing-small - @agate-heading-border-width);
+			min-height: (@agate-heading-spacing-small - @agate-heading-border-width);
+		}
+		&.noneSpacing {
+			margin-bottom: 0;
+			min-height: 0;
+		}
+	});
+}
