@@ -36,6 +36,14 @@
 			transform: @agate-button-bg-transform;
 			backdrop-filter: blur(3px);
 		}
+		&.lightOpaque {
+			.bg {
+				background-color: white; // temporary, convert to variable!
+			}
+			.client {
+				color: black; // temporary, convert to variable!
+			}
+		}
 
 		.client {
 			padding: @agate-button-border-width;	// We match the amount removed by the line-height above, so the text doesn't overlap the border

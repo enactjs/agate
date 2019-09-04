@@ -54,20 +54,30 @@ const IconBase = kind({
 		/**
 		 * The size of the icon.
 		 *
-		 * @type {('small'|'large')}
+		 * @type {('small'|'large'|'huge')}
 		 * @default 'large'
 		 * @public
 		 */
-		size: PropTypes.oneOf(['small', 'large']),
+		size: PropTypes.oneOf(['small', 'large', 'huge'])
 	},
 
 	defaultProps: {
 		size: 'large'
 	},
 
+	styles: {
+		css: componentCss
+	},
+
+	computed: {
+		className: ({size, styler}) => styler.append(
+			size
+		)
+	},
+
 	render: (props) => UiIcon.inline({
 		...props,
-		css: componentCss,
+		css: props.css,
 		iconList
 	})
 });

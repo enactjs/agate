@@ -19,6 +19,15 @@
 		position: relative;
 		color: inherit;
 
+		&.huge {
+			background-position: center -((@agate-icon-sprite-huge-size - @agate-icon-huge-size) / 2);
+			background-size: @agate-icon-sprite-huge-size (@agate-icon-sprite-huge-size * 2);
+			width: @agate-icon-huge-size;
+			height: @agate-icon-huge-size;
+			font-size: @agate-icon-huge-font-size;
+			line-height: @agate-icon-huge-size;
+		}
+
 		&.small {
 			background-position: center -((@agate-icon-sprite-small-size - @agate-icon-small-size) / 2);
 			background-size: @agate-icon-sprite-small-size (@agate-icon-sprite-small-size * 2);
