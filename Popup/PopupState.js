@@ -4,6 +4,12 @@ import hoc from '@enact/core/hoc';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+const OpenState = {
+	CLOSED: 0,
+	OPENING: 1,
+	OPEN: 2
+};
+
 const forwardHide = forward('onHide');
 
 const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-vars
@@ -29,28 +35,34 @@ const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-v
 			super(props);
 			this.state = {
 				floatLayerOpen: this.props.open,
-				popupOpen: this.props.noAnimation
+				popupOpen: this.props.open ? OpenState.OPEN : OpenState.CLOSED,
+				prevOpen: this.props.open
 			};
 		}
 
-		componentWillReceiveProps (nextProps) {
-			if (!this.props.open && nextProps.open) {
-				this.setState({
-					popupOpen: nextProps.noAnimation,
-					floatLayerOpen: true
-				});
-			} else if (this.props.open && !nextProps.open) {
-				this.setState({
-					popupOpen: nextProps.noAnimation,
-					floatLayerOpen: !nextProps.noAnimation
-				});
+		static getDerivedStateFromProps (props, state) {
+			if (props.open !== state.prevOpen) {
+				if (props.open) {
+					return {
+						popupOpen: props.noAnimation || state.floatLayerOpen ? OpenState.OPEN : OpenState.CLOSED,
+						floatLayerOpen: true,
+						prevOpen: props.open
+					};
+				} else {
+					return {
+						popupOpen: OpenState.CLOSED,
+						floatLayerOpen: state.popupOpen !== OpenState.CLOSED ? !props.noAnimation : false,
+						prevOpen: props.open
+					};
+				}
 			}
+			return null;
 		}
 
 		handleFloatingLayerOpen = () => {
-			if (!this.props.noAnimation) {
+			if (!this.props.noAnimation && this.state.popupOpen !== OpenState.OPEN) {
 				this.setState({
-					popupOpen: true
+					popupOpen: OpenState.OPENING
 				});
 			}
 		}
@@ -78,7 +90,7 @@ const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-v
 				>
 					<Wrapped
 						{...rest}
-						open={this.state.popupOpen}
+						open={this.state.popupOpen >= OpenState.OPENING}
 						onClose={onClose}
 						onHide={this.handlePopupHide}
 					/>

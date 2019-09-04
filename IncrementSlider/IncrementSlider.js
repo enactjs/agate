@@ -379,18 +379,18 @@ const IncrementSliderBase = kind({
 		onDecrement: emitChange(-1),
 		onIncrement: emitChange(1),
 		onKeyDown: (ev, props) => {
-			const {css, orientation} = props;
+			const {orientation} = props;
 
 			forward('onKeyDown', ev, props);
 
 			// if the source of the event is the slider, forward it along
-			if (ev.target.classList.contains(css.slider)) {
+			if (ev.target.classList.contains(componentCss.slider)) {
 				forward('onSpotlightDirection', ev, props);
 				return;
 			}
 
-			const isIncrement = ev.target.classList.contains(css.incrementButton);
-			const isDecrement = ev.target.classList.contains(css.decrementButton);
+			const isIncrement = ev.target.classList.contains(componentCss.incrementButton);
+			const isDecrement = ev.target.classList.contains(componentCss.decrementButton);
 
 			if (isRight(ev.keyCode) && (isIncrement || orientation === 'vertical')) {
 				forwardWithType('onSpotlightRight', props);
