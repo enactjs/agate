@@ -12,24 +12,25 @@ const defaultConfig = {
 
 	// Each function receives the current state and props and returns a value to
 	// be passed to the wrapped component in the given prop.
+	// Altneratively accepts a function which receives the current state and props and
+	// returns a props object to merge with the current props.
 	mapStateToProps: null
 };
 
 const ConsumerDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {handlers, mapStateToProps, mount} = config;
 
-	const mapper = (state, props) => {
-		if (!mapStateToProps) return null;
+	let mapper = () => null;
 
-		return Object.keys(mapStateToProps).reduce((updated, prop) => {
-			const fn = mapStateToProps[prop];
-			if (typeof fn === 'function') {
-				updated[prop] = fn(state, props);
-			}
-
+	if (typeof mapStateToProps === 'function') {
+		mapper = mapStateToProps;
+	} else if (mapStateToProps) {
+		const keys = Object.keys(mapStateToProps).filter(key => typeof mapStateToProps[key] === 'function');
+		mapper = (state, props) => keys.reduce((updated, prop) => {
+			updated[prop] = mapStateToProps[prop](state, props);
 			return updated;
 		}, {});
-	};
+	}
 
 	return class extends Component {
 		static displayName = 'ConsumerDecorator';
