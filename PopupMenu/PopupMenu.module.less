@@ -1,0 +1,33 @@
+// PopupMenu.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+
+.popupMenu {
+	.applySkins({
+		position: fixed;
+		.position(0);
+		background-color: @agate-popupmenu-bg-color;
+		background-image: @agate-popupmenu-bg-image;
+
+		.title {
+			margin-bottom: @agate-popupmenu-title-margin-bottom;
+		}
+	});
+}
+
+.popupTransitionContainer {
+	position: absolute;
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+	pointer-events: none;
+
+	.inner {
+		height: 100%;
+
+		> * {
+			pointer-events: auto;
+		}
+	}
+}
