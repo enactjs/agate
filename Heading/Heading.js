@@ -87,7 +87,7 @@ const HeadingBase = kind({
 	},
 
 	computed: {
-		className: ({showLine, styler}) => styler.append({showLine}),
+		className: ({showLine, spacing, styler}) => styler.append({showLine}, spacing),
 		style: ({color, style}) => ({
 			...style,
 			'--agate-heading-accent': color
