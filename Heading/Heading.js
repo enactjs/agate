@@ -40,8 +40,6 @@ const HeadingBase = kind({
 	name: 'Heading',
 
 	propTypes: /** @lends agate/Heading.HeadingBase.prototype */ {
-		css: PropTypes.object,
-
 		/**
 		 * Set a custom color to be used by the Heading. Defaults to the current accent color if
 		 * none is specified.
@@ -50,7 +48,9 @@ const HeadingBase = kind({
 		 * @default null
 		 * @public
 		 */
-		customColor: PropTypes.string,
+		color: PropTypes.string,
+
+		css: PropTypes.object,
 
 		/**
 		 * Adds a horizontal-rule (line) under the component
@@ -71,14 +71,14 @@ const HeadingBase = kind({
 		 * * `'none'` - No spacing at all. Neighboring elements will directly touch the Heading.
 		 *
 		 * @type {('auto'|'title'|'large'|'medium'|'small'|'none')}
-		 * @default 'small'
+		 * @default 'auto'
 		 * @public
 		 */
 		spacing: PropTypes.oneOf(['auto', 'title', 'large', 'medium', 'small', 'none'])
 	},
 
 	defaultProps: {
-		spacing: 'small'
+		spacing: 'auto'
 	},
 
 	styles: {
@@ -88,14 +88,14 @@ const HeadingBase = kind({
 
 	computed: {
 		className: ({showLine, styler}) => styler.append({showLine}),
-		style: ({customColor, style}) => ({
+		style: ({color, style}) => ({
 			...style,
-			'--agate-heading-accent': customColor
+			'--agate-heading-accent': color
 		})
 	},
 
 	render: ({css, ...rest}) => {
-		delete rest.customColor;
+		delete rest.color;
 		delete rest.showLine;
 		return UiHeading.inline({css, ...rest});
 	}
@@ -106,7 +106,6 @@ const HeadingBase = kind({
  *
  * @hoc
  * @memberof agate/Heading
- * @mixes agate/Marquee.MarqueeDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
@@ -139,21 +138,6 @@ const HeadingDecorator = compose(
  * @public
  */
 const Heading = HeadingDecorator(HeadingBase);
-
-/**
- * Marquee animation trigger.
- *
- * Allowed values include:
- * * `'hover'` - Marquee begins when the pointer enters the component
- * * `'render'` - Marquee begins when the component is rendered
- *
- * @name marqueeOn
- * @type {String}
- * @default 'render'
- * @memberof agate/Heading.Heading.prototype
- * @see {@link agate/Marquee.Marquee}
- * @public
- */
 
 export default Heading;
 export {

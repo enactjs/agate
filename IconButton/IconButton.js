@@ -23,8 +23,6 @@ import Skinnable from '../Skinnable';
 
 import componentCss from './IconButton.module.less';
 
-// Make a basic Icon in case we need it later. This cuts `Pure` out of icon for a small gain.
-
 /**
  * A button component.
  *
