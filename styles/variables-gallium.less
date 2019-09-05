@@ -22,8 +22,8 @@
 @agate-button-small-height: 60px;
 @agate-button-font-size: 36px;
 @agate-button-small-font-size: 24px;
-@agate-button-border-width: 1px;
-@agate-button-border-radius: 9999px;
+@agate-button-border-width: 0;
+@agate-button-border-radius: 6px;
 @agate-button-h-padding: 27px;
 @agate-button-small-h-padding: 18px;
 @agate-button-highlighted-opacity: 1;
@@ -131,10 +131,13 @@
 @agate-icon-small-size: 36px;
 @agate-icon-font-size: (@agate-icon-size * 2);
 @agate-icon-small-font-size: (@agate-icon-small-size * 2);
+@agate-icon-huge-font-size: 400px;
+@agate-icon-huge-size: 210px;
 @agate-icon-button-size: @agate-button-height;
 @agate-icon-button-small-size: @agate-button-small-height;
 @agate-icon-sprite-size: (@agate-icon-button-size - (@agate-button-border-width * 2));
 @agate-icon-sprite-small-size: (@agate-icon-button-small-size - (@agate-button-border-width * 2));
+@agate-icon-sprite-huge-size: 250px;
 @agate-icon-margin: @agate-component-spacing;
 
 // IconButton
@@ -143,7 +146,7 @@
 @agate-iconbutton-small-height: 60px;
 @agate-iconbutton-font-size: 36px;
 @agate-iconbutton-small-font-size: 24px;
-@agate-iconbutton-border-width: 1px;
+@agate-iconbutton-border-width: 0;
 @agate-iconbutton-border-radius: 9999px;
 @agate-iconbutton-text-size: 30px;
 @agate-iconbutton-small-text-size: 24px;
@@ -153,6 +156,8 @@
 @agate-iconbutton-skew: 0;
 @agate-iconbutton-grid-border-radius: 0;
 @agate-iconbutton-bg-transform: none;
+@agate-iconbutton-huge-height: 250px;
+@agate-iconbutton-huge-margin: 0 50px;
 
 // Input
 // ---------------------------------------
@@ -239,6 +244,10 @@
 @agate-popup-buttons-padding: 0 0 0 @agate-component-spacing;
 @agate-popup-closebutton-position-left: auto;
 @agate-popup-closebutton-position-right: 0;
+
+// PopupMenu
+// ---------------------------------------
+@agate-popupmenu-title-margin-bottom: 136px;
 
 // ProgressBar
 // ---------------------------------------

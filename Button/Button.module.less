@@ -26,6 +26,11 @@
 			}
 		}
 
+		&.opaque {
+			/* Available for export */
+		}
+
+		// opaque
 		.bg {
 			background-color: @agate-button-bg-color;
 			border: @agate-button-border-width solid @agate-button-border-color;
@@ -35,6 +40,14 @@
 			box-shadow: @agate-button-shadow;
 			transform: @agate-button-bg-transform;
 			backdrop-filter: blur(3px);
+		}
+		&.lightOpaque {
+			.bg {
+				background-color: white; // temporary, convert to variable!
+			}
+			.client {
+				color: black; // temporary, convert to variable!
+			}
 		}
 
 		.client {
