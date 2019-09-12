@@ -29,6 +29,7 @@ import css from './AgateDecorator.module.less';
 const defaultConfig = {
 	float: true,
 	noAutoFocus: false,
+	overlay: false,
 	ri: {
 		screenTypes
 	},
@@ -101,9 +102,14 @@ const CustomizableSkinStyle = kind({
  * @public
  */
 const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
-	const {float, noAutoFocus, ri, customSkin, skin, spotlight} = config;
+	const {customSkin, float, noAutoFocus, overlay, ri, skin, spotlight} = config;
 
-	const bgClassName = 'enact-fit';
+	const bgClassName = classnames(
+		'enact-fit',
+		{
+			[css.bg]: !overlay
+		}
+	);
 
 	let App = Wrapped;
 	if (float) App = FloatingLayerDecorator({wrappedClassName: bgClassName}, App);
