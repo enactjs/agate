@@ -6,7 +6,7 @@
  * @private
  */
 
-import classNames from 'classnames';
+// import classNames from 'classnames';
 import handle, {forward} from '@enact/core/handle';
 import platform from '@enact/core/platform';
 import {onWindowReady} from '@enact/core/snapshot';
@@ -21,13 +21,13 @@ import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDeco
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 
-//import $L from '../internal/$L';
+// import $L from '../internal/$L';
 import {SharedState} from '../Panels/SharedStateDecorator';
 
 import Scrollbar from './Scrollbar';
 import Skinnable from '../Skinnable';
 
-//import overscrollCss from './OverscrollEffect.module.less';
+// import overscrollCss from './OverscrollEffect.module.less';
 import scrollbarCss from './Scrollbar.module.less';
 
 const
@@ -946,8 +946,8 @@ class ScrollableBase extends Component {
 				noScrollByDrag={!platform.touch}
 				{...rest}
 				addEventListeners={this.addEventListeners}
-				applyOverscrollEffect={this.applyOverscrollEffect}
-				clearOverscrollEffect={this.clearOverscrollEffect}
+				// applyOverscrollEffect={this.applyOverscrollEffect}
+				// clearOverscrollEffect={this.clearOverscrollEffect}
 				handleResizeWindow={this.handleResizeWindow}
 				onFlick={this.onFlick}
 				onKeyDown={this.onKeyDown}
@@ -976,7 +976,7 @@ class ScrollableBase extends Component {
 					verticalScrollbarProps
 				}) => (
 					<div
-						//className={classNames(className, overscrollCss.scrollable)}
+						// className={classNames(className, overscrollCss.scrollable)}
 						className={className}
 						data-spotlight-container={spotlightContainer}
 						data-spotlight-container-disabled={spotlightContainerDisabled}
@@ -985,8 +985,17 @@ class ScrollableBase extends Component {
 						ref={uiContainerRef}
 						style={style}
 					>
-						<div className={classNames(componentCss.container/*, overscrollCss.overscrollFrame, overscrollCss.vertical, isHorizontalScrollbarVisible ? overscrollCss.horizontalScrollbarVisible : null*/)} ref={this.overscrollRefs.vertical}>
-							<ChildWrapper className={classNames(contentClassName/*, overscrollCss.overscrollFrame, overscrollCss.horizontal*/)} ref={this.overscrollRefs.horizontal} {...restChildWrapperProps}>
+						<div
+							// className={classNames(componentCss.container, overscrollCss.overscrollFrame, overscrollCss.vertical, isHorizontalScrollbarVisible ? overscrollCss.horizontalScrollbarVisible : null)}
+							className={componentCss.container}
+							// ref={this.overscrollRefs.vertical}
+						>
+							<ChildWrapper
+								// className={classNames(contentClassName, overscrollCss.overscrollFrame, overscrollCss.horizontal)}
+								className={contentClassName}
+								// ref={this.overscrollRefs.horizontal}
+								{...restChildWrapperProps}
+							>
 								{childRenderer({
 									...childComponentProps,
 									cbScrollTo: scrollTo,
