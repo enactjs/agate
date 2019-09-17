@@ -16,6 +16,8 @@ const defaultConfig = {
 		copper: 'copper',
 		'copper-day': 'copper-day',
 		electro: 'electro',
+		'gallium-day': 'gallium-day',
+		'gallium-night': 'gallium-night',
 		titanium: 'titanium'
 	}
 };

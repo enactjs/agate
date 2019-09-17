@@ -2,67 +2,65 @@
 //
 
 .applySkins(@componentRules) when (isruleset(@componentRules)) {
-	// Establish a base set of colors and variables that other skins can optionally override.
-	@import "./colors-carbon.less";
-	@import "./variables-carbon.less";
 
+	.buildSkinRules(@skin; @importRules) {
+		&:global(.@{skin}) {
+			// Establish a base set of colors and variables that other skins can optionally override.
+			@import "./colors-gallium-day.less";
+			@import "./variables-gallium.less";
+
+			@importRules();
+		}
+	}
 
 	//
 	// Start assigning skin values
 	//
-	&:global(.carbon) {
-		// Load the Carbon agate rules into this scope
-		@import "./colors-carbon.less";
+	// https://github.com/less/less.js/issues/2772
+	.buildSkinRules(carbon; {
+		@import (multiple) "./colors-carbon.less";
 		@import (multiple) "./variables-carbon.less";
-
+		// Load the skin rules into this scope
 		@componentRules();
-	}
-
-	&:global(.cobalt) {
-		// Load the Copper agate rules into this scope
-		@import "./colors-cobalt.less";
+	});
+	.buildSkinRules(cobalt; {
+		@import (multiple) "./colors-cobalt.less";
 		@import (multiple) "./variables-cobalt.less";
-
 		@componentRules();
-	}
-
-	&:global(.cobalt-day) {
-		// Load the Copper agate rules into this scope
-		@import "./colors-cobalt-day.less";
+	});
+	.buildSkinRules(cobalt-day; {
+		@import (multiple) "./colors-cobalt-day.less";
 		@import (multiple) "./variables-cobalt.less";
-
 		@componentRules();
-	}
-
-	&:global(.copper) {
-		// Load the Copper agate rules into this scope
-		@import "./colors-copper.less";
+	});
+	.buildSkinRules(copper; {
+		@import (multiple) "./colors-copper.less";
 		@import (multiple) "./variables-copper.less";
-
 		@componentRules();
-	}
-
-	&:global(.copper-day) {
-		// Load the Copper agate rules into this scope
-		@import "./colors-copper-day.less";
+	});
+	.buildSkinRules(copper-day; {
+		@import (multiple) "./colors-copper-day.less";
 		@import (multiple) "./variables-copper.less";
-
 		@componentRules();
-	}
-
-	&:global(.electro) {
-		// Load the Titanium agate rules into this scope
-		@import "./colors-electro.less";
-		@import "./variables-electro.less";
-
+	});
+	.buildSkinRules(electro; {
+		@import (multiple) "./colors-electro.less";
+		@import (multiple) "./variables-electro.less";
 		@componentRules();
-	}
-
-	&:global(.titanium) {
-		// Load the Titanium agate rules into this scope
-		@import "./colors-titanium.less";
-		@import "./variables-titanium.less";
-
+	});
+	.buildSkinRules(gallium-day; {
+		@import (multiple) "./colors-gallium-day.less";
+		@import (multiple) "./variables-gallium.less";
 		@componentRules();
-	}
+	});
+	.buildSkinRules(gallium-night; {
+		@import (multiple) "./colors-gallium-night.less";
+		@import (multiple) "./variables-gallium.less";
+		@componentRules();
+	});
+	.buildSkinRules(titanium; {
+		@import (multiple) "./colors-titanium.less";
+		@import (multiple) "./variables-titanium.less";
+		@componentRules();
+	});
 }

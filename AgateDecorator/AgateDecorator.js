@@ -29,6 +29,7 @@ import css from './AgateDecorator.module.less';
 const defaultConfig = {
 	float: true,
 	noAutoFocus: false,
+	overlay: false,
 	ri: {
 		screenTypes
 	},
@@ -47,8 +48,8 @@ const CustomizableSkinStyle = kind({
 	},
 
 	defaultProps: {
-		accent: '#1a1a1a',
-		highlight: '#2a48ca'
+		accent: '#8b7efe',
+		highlight: '#c6c0fe'
 	},
 
 	computed: {
@@ -101,15 +102,20 @@ const CustomizableSkinStyle = kind({
  * @public
  */
 const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
-	const {float, noAutoFocus, ri, customSkin, skin, spotlight} = config;
+	const {customSkin, float, noAutoFocus, overlay, ri, skin, spotlight} = config;
 
-	const bgClassName = 'enact-fit';
+	const bgClassName = classnames(
+		'enact-fit',
+		{
+			[css.bg]: !overlay
+		}
+	);
 
 	let App = Wrapped;
 	if (float) App = FloatingLayerDecorator({wrappedClassName: bgClassName}, App);
 	if (ri) App = ResolutionDecorator(ri, App);
 	if (spotlight) App = SpotlightRootDecorator({noAutoFocus}, App);
-	if (skin) App = Skinnable({defaultSkin: 'carbon'}, App);
+	if (skin) App = Skinnable({defaultSkin: 'gallium-day'}, App);
 
 	// add webOS-specific key maps
 	addAll({

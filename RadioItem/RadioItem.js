@@ -87,7 +87,7 @@ const RadioItemBase = kind({
 
 		return (
 			<div {...rest} css={css}>
-				<Icon small className={css.icon}>{icon}</Icon>
+				<Icon className={css.icon} size="small">{icon}</Icon>
 				<div
 					className={css.text}
 				>

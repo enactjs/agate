@@ -66,18 +66,19 @@ const ProgressBarBase = kind({
 		progress: PropTypes.number,
 
 		/**
-		 * Sets the small styling to progress bar
+		 * The size of the progress bar
 		 *
-		 * @type {Number}
-		 * @default 0
+		 * @type {('small'|'large')}
+		 * @default 'large'
 		 * @public
 		 */
-		small: PropTypes.bool
+		size: PropTypes.oneOf(['small', 'large']),
 	},
 
 	defaultProps: {
 		orientation: 'horizontal',
-		progress: 0
+		progress: 0,
+		size: 'large'
 	},
 
 	styles: {
@@ -86,11 +87,11 @@ const ProgressBarBase = kind({
 	},
 
 	computed: {
-		className: ({small, styler}) => styler.append({small})
+		className: ({size, styler}) => styler.append(size)
 	},
 
 	render: ({css, ...rest}) => {
-		delete rest.small;
+		delete rest.size;
 
 		return (
 			<UiProgressBar

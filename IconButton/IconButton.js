@@ -2,7 +2,7 @@
  * Agate styled button components and behaviors.
  *
  * @example
- * <IconButton small>home</IconButton>
+ * <IconButton>home</IconButton>
  *
  * @module agate/IconButton
  * @exports IconButton
@@ -12,35 +12,16 @@
 
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
-import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
-import AgateIcon from '../Icon';
+import {ButtonBase, ButtonDecorator} from '../Button';
+import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
 import componentCss from './IconButton.module.less';
-
-// Make a basic Icon in case we need it later. This cuts `Pure` out of icon for a small gain.
-const Icon = kind({
-	name: 'Icon',
-	propTypes: {
-		css: PropTypes.object,
-		size: PropTypes.oneOf(['small', 'smallest'])
-	},
-	styles: {
-		css: componentCss,
-		className: 'icon'
-	},
-	computed: {
-		className: ({size, styler}) => styler.append(size)
-	},
-	render: (props) => (
-		<AgateIcon {...props} />
-	)
-});
 
 /**
  * A button component.
@@ -67,7 +48,8 @@ const IconButtonBase = kind({
 		 * * `button` - The root class name
 		 * * `bg` - The background node of the button
 		 * * `selected` - Applied to a `selected` button
-		 * * `small` - Applied to a `small` button
+		 * * `small` - Applied to a button specifying a `size` of `'small'`
+		 * * `smallest` - Applied to a button specifying a `size` of `'smallest'`
 		 *
 		 * @type {Object}
 		 * @public
@@ -98,7 +80,7 @@ const IconButtonBase = kind({
 		 * @type {String}
 		 * @public
 		 */
-		size: PropTypes.oneOf(['small', 'smallest']),
+		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
@@ -111,12 +93,13 @@ const IconButtonBase = kind({
 	},
 
 	defaultProps: {
+		size: 'large',
 		type: 'standard'
 	},
 
 	styles: {
 		css: componentCss,
-		publicClassNames: ['button', 'bg', 'client', 'selected', 'small']
+		publicClassNames: ['button', 'bg', 'client', 'selected', 'small', 'smallest']
 	},
 
 	computed: {
@@ -126,7 +109,7 @@ const IconButtonBase = kind({
 			{highlighted, selected}
 		),
 		icon: ({children, css, size}) => (
-			<Icon size={size} className={css.icon}>{children}</Icon>
+			<Icon css={css} size={size} className={css.icon}>{children}</Icon>
 		),
 		minWidth: ({children}) => (!children)
 	},
@@ -137,7 +120,7 @@ const IconButtonBase = kind({
 		delete rest.selected;
 		delete rest.type;
 
-		return UiButtonBase.inline({
+		return ButtonBase.inline({
 			'data-webos-voice-intent': 'Select',
 			...rest,
 			css,
@@ -175,7 +158,7 @@ const IconButtonBase = kind({
  */
 const IconButtonDecorator = compose(
 	Pure,
-	UiButtonDecorator,
+	ButtonDecorator,
 	Spottable,
 	Skinnable
 );

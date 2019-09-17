@@ -2,7 +2,7 @@
  * Agate styled button components and behaviors.
  *
  * @example
- * <Button small>Hello Enact!</Button>
+ * <Button>Hello Enact!</Button>
  *
  * @module agate/Button
  * @exports Button
@@ -43,6 +43,8 @@ const ButtonBase = kind({
 	name: 'Button',
 
 	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
+		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque']),
+
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
@@ -52,7 +54,7 @@ const ButtonBase = kind({
 		 * * `button` - The root class name
 		 * * `bg` - The background node of the button
 		 * * `selected` - Applied to a `selected` button
-		 * * `small` - Applied to a `small` button
+		 * * `small` - Applied to a button specifying a `size` of `'small'`
 		 *
 		 * @type {Object}
 		 * @public
@@ -89,6 +91,15 @@ const ButtonBase = kind({
 		selected: PropTypes.bool,
 
 		/**
+		 * The size of the button.
+		 *
+		 * @type {('small'|'large')}
+		 * @default 'large'
+		 * @public
+		 */
+		size: PropTypes.oneOf(['small', 'large']),
+
+		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
 		 * other related buttons.
 		 *
@@ -99,7 +110,9 @@ const ButtonBase = kind({
 	},
 
 	defaultProps: {
-		type: 'standard'
+		backgroundOpacity: 'opaque',
+		type: 'standard',
+		size: 'large'
 	},
 
 	styles: {
@@ -108,7 +121,8 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({highlighted, joinedPosition, selected, type, styler}) => styler.append(
+		className: ({backgroundOpacity, highlighted, joinedPosition, selected, type, styler}) => styler.append(
+			backgroundOpacity,
 			type,
 			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
 			{highlighted, selected}
@@ -117,6 +131,7 @@ const ButtonBase = kind({
 	},
 
 	render: ({css, ...rest}) => {
+		delete rest.backgroundOpacity;
 		delete rest.highlighted;
 		delete rest.joinedPosition;
 		delete rest.selected;
