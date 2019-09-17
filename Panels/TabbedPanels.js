@@ -49,7 +49,7 @@ const TabbedPanelsBase = kind({
 		className: ({css, orientation, styler, tabPosition}) => styler.append(tabPosition == 'after' ? css.reverse : '', orientation == 'vertical' ? css.column : ''),
 		tabOrientation: ({orientation}) => orientation === 'vertical' ? 'horizontal' : 'vertical'
 	},
-	render: ({afterTabs, beforeTabs, children, css, index, onSelect, tabOrientation, tabPosition, tabs, ...rest}) => {
+	render: ({afterTabs, beforeTabs, children, css, index, noCloseButton, onSelect, tabOrientation, tabPosition, tabs, ...rest}) => {
 		return (
 			<Layout {...rest}>
 				<Cell shrink>
@@ -67,6 +67,7 @@ const TabbedPanelsBase = kind({
 				<Cell
 					className={css.panels}
 					component={Panels}
+					noCloseButton={noCloseButton}
 					orientation={tabOrientation}
 					index={index}
 				>
