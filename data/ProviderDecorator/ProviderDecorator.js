@@ -25,7 +25,7 @@ const ProviderDecorator = hoc({state: {}}, (config, Wrapped) => {
 			if (__DEV__) {
 				return Object.freeze(
 					Object.keys(state).reduce((acc, key) => {
-						if (typeof state[key] === 'object' && !Array.isArray(state[key])) {
+						if (typeof state[key] === 'object') {
 							acc[key] = this.getState(state[key]);
 						} else {
 							acc[key] = state[key];
