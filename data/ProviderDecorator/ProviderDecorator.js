@@ -21,27 +21,9 @@ const ProviderDecorator = hoc({state: {}}, (config, Wrapped) => {
 			this.setState(produce(cb));
 		};
 
-		getState (state) {
-			if (__DEV__) {
-				return Object.freeze(
-					Object.keys(state).reduce((acc, key) => {
-						if (typeof state[key] === 'object') {
-							acc[key] = this.getState(state[key]);
-						} else {
-							acc[key] = state[key];
-						}
-
-						return acc;
-					}, {})
-				);
-			}
-
-			return state;
-		}
-
 		render () {
 			const context = {
-				state: this.getState(this.state),
+				state: this.state,
 				updateAppState: this.updateAppState
 			};
 
