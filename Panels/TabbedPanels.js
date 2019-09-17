@@ -16,11 +16,13 @@ const TabbedPanelsBase = kind({
 	name: 'TabbedPanels',
 	propTypes: {
 		index: PropTypes.number,
+		noCloseButton: PropTypes.bool,
 		tabPosition: PropTypes.string
 		// tabs: PropTypes.oneOfType([TabGroup])
 	},
 	defaultProps: {
 		index: 0,
+		noCloseButton: false,
 		tabPosition: 'before'
 	},
 	styles: {
