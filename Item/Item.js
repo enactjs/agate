@@ -14,7 +14,7 @@ import Spottable from '@enact/spotlight/Spottable';
 import ForwardRef from '@enact/ui/ForwardRef';
 import Slottable from '@enact/ui/Slottable';
 import {ItemBase as UiItemBase, ItemDecorator as UiItemDecorator} from '@enact/ui/Item';
-import {Cell, Column, Row} from '@enact/ui/Layout';
+import {Cell, Layout, Row} from '@enact/ui/Layout';
 import {Marquee, MarqueeController} from '@enact/ui/Marquee';
 import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
@@ -38,11 +38,11 @@ const ItemContent = kind({
 			labelBelow: labelPosition === 'below',
 			labelInline
 		}),
-		component: ({label, labelPosition}) => {
-			return (labelPosition === 'above' || labelPosition === 'below') ? Column : Row;
+		orientation: ({label, labelPosition}) => {
+			return (labelPosition === 'above' || labelPosition === 'below') ? 'vertical' : 'horizontal';
 		}
 	},
-	render: ({component, content, css, label, ...rest}) => {
+	render: ({orientation, content, css, label, ...rest}) => {
 		const contentElement = (
 			<Cell component={Marquee} className={css.content}>
 				{content}
@@ -52,11 +52,13 @@ const ItemContent = kind({
 		if (!label) return contentElement;
 
 		return (
-			<Cell {...rest} component={component}>
-				{contentElement}
-				<Cell component={Marquee} className={css.label} shrink>
-					{label}
-				</Cell>
+			<Cell {...rest}>
+				<Layout orientation={orientation}>
+					{contentElement}
+					<Cell component={Marquee} className={css.label} shrink>
+						{label}
+					</Cell>
+				</Layout>
 			</Cell>
 		);
 	}
@@ -83,8 +85,7 @@ const ItemBase = kind({
 						{slotBefore}
 					</Cell>
 				) : null}
-				<Cell
-					component={ItemContent}
+				<ItemContent
 					label={label}
 					labelPosition={labelPosition}
 					content={children}
