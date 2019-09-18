@@ -25,6 +25,9 @@ import Skinnable from '../Skinnable';
 
 const ItemContent = kind({
 	name: 'ItemContent',
+	defaultProps: {
+		labelPosition: 'below'
+	},
 	styles: {
 		className: 'itemContent',
 		css: componentCss
