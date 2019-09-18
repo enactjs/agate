@@ -4,10 +4,47 @@
 @import "../styles/skin.less";
 
 .item {
+	// Item's display is override Layout so forcing it back here'
+	display: flex;
 	position: relative;
 
-	.content {
-		/* Available for override customization */
+	.itemContent {
+		&.hasLabel {
+			&.labelAbove,
+			&.labelAfter {
+				.content { order: 1; }
+				.label   { order: 2; }
+			}
+
+			&.labelBefore,
+			&.labelBelow {
+				.content { order: 2; }
+				.label   { order: 1; }
+			}
+
+			&.labelBefore .label {
+				// temp static values
+				.padding-start-end(0, 8px);
+			}
+
+			&.labelAfter .label {
+				// temp static values
+				.padding-start-end(8px, 0);
+			}
+
+			.content {
+				box-sizing: border-box;
+				// when showing content and label inline, favor contentt
+				// this should be a variable
+				min-width: 60%;
+			}
+
+			.label {
+				box-sizing: border-box;
+				// this should be a variable
+				max-width: 40%;
+			}
+		}
 	}
 
 	.applySkins({
