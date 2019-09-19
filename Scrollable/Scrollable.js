@@ -383,6 +383,16 @@ class ScrollableBase extends Component {
 		);
 	}
 
+	onDragEnd = () => {
+		this.isDragging = false;
+		this.childRef.current.setContainerDisabled(false);
+	}
+
+	onDragStart = () => {
+		this.isDragging = true;
+		this.childRef.current.setContainerDisabled(true);
+	}
+
 	onFlick = ({direction}) => {
 		const bounds = this.uiRef.current.getScrollBounds();
 		const focusedItem = Spotlight.getCurrent();
@@ -697,16 +707,17 @@ class ScrollableBase extends Component {
 	}
 
 	stop = () => {
-		if (!this.props['data-spotlight-container-disabled']) {
-			this.childRef.current.setContainerDisabled(false);
-		}
-
-		this.focusOnItem();
-		this.lastScrollPositionOnFocus = null;
-		this.isWheeling = false;
-		if (this.isVoiceControl) {
-			this.isVoiceControl = false;
-			this.updateFocusAfterVoiceControl();
+		if (!this.isDragging) {
+			if (this.props['data-spotlight-container-disabled']) {
+				this.setContainerDisabled(false);
+			}
+			this.focusOnItem();
+			this.lastScrollPositionOnFocus = null;
+			this.isWheeling = false;
+			if (this.isVoiceControl) {
+				this.isVoiceControl = false;
+				this.updateFocusAfterVoiceControl();
+			}
 		}
 	}
 
@@ -949,6 +960,8 @@ class ScrollableBase extends Component {
 				// applyOverscrollEffect={this.applyOverscrollEffect}
 				// clearOverscrollEffect={this.clearOverscrollEffect}
 				handleResizeWindow={this.handleResizeWindow}
+				onDragEnd={this.onDragEnd}
+				onDragStart={this.onDragStart}
 				onFlick={this.onFlick}
 				onKeyDown={this.onKeyDown}
 				onMouseDown={this.onMouseDown}
