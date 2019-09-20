@@ -47,19 +47,57 @@
 		}
 	}
 
+	.slotAfter {
+		display: flex;
+		justify-content: center;
+	}
+
+	.slotBefore {
+		display: flex;
+		justify-content: center;
+	}
+
 	.applySkins({
 		.agate-item-sizing();
 
 		line-height: @agate-item-line-height;
 		color: @agate-item-color;
 
+		.itemContent {
+			.label   {
+				color: @agate-item-label-color;
+				font-size: @agate-item-label-font-size;
+			}
+		}
+
 		&.inline {
 			max-width: 240px;
+
+			.itemContent {
+				width: unset;
+
+				&.labelAbove,
+				&.labelBelow {
+					.label   {
+						max-width: unset;
+					}
+				}
+			}
+
+			.content {
+				width: unset;
+			}
 		}
 
 		.focus({
 			background-color: @agate-item-focus-bg-color;
 			color: @agate-item-focus-color;
+
+			.itemContent {
+				.label   {
+					color: @agate-item-focus-color;
+				}
+			}
 		});
 	});
 }

@@ -33,15 +33,14 @@ const ItemContent = kind({
 		css: componentCss
 	},
 	computed: {
-		className: ({label, labelInline, labelPosition, styler}) => styler.append({
+		className: ({label, labelPosition, styler}) => styler.append({
 			hasLabel: Boolean(label),
 			labelAbove: labelPosition === 'above',
 			labelAfter: labelPosition === 'after',
 			labelBefore: labelPosition === 'before',
-			labelBelow: labelPosition === 'below',
-			labelInline
+			labelBelow: labelPosition === 'below'
 		}),
-		orientation: ({label, labelPosition}) => {
+		orientation: ({labelPosition}) => {
 			return (labelPosition === 'above' || labelPosition === 'below') ? 'vertical' : 'horizontal';
 		}
 	},
@@ -84,7 +83,7 @@ const ItemBase = kind({
 		return (
 			<UiItemBase {...rest} css={css} align="center" component={Row} ref={componentRef}>
 				{slotBefore ? (
-					<Cell shrink>
+					<Cell className={css.slotBefore} shrink>
 						{slotBefore}
 					</Cell>
 				) : null}
@@ -94,7 +93,7 @@ const ItemBase = kind({
 					content={children}
 				/>
 				{slotAfter ? (
-					<Cell shrink>
+					<Cell className={css.slotAfter} shrink>
 						{slotAfter}
 					</Cell>
 				) : null}
