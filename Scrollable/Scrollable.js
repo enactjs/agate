@@ -340,10 +340,9 @@ class ScrollableBase extends Component {
 		this.stopOverscrollJob('vertical', 'after');
 	}
 
-	flickTarget = null
-
 	// status
 	isDragging = false
+	isFlicked = false
 	isWheeling = false
 
 	// spotlight
@@ -389,7 +388,7 @@ class ScrollableBase extends Component {
 	onDragEnd = () => {
 		this.isDragging = false;
 
-		if (!this.flickTarget) {
+		if (!this.isFlicked) {
 			this.childRef.current.setContainerDisabled(false);
 		}
 	}
@@ -399,10 +398,10 @@ class ScrollableBase extends Component {
 		this.childRef.current.setContainerDisabled(true);
 	}
 
-	onFlick = ({direction, flickTarget}) => {
+	onFlick = ({direction}) => {
 		const bounds = this.uiRef.current.getScrollBounds();
 		const focusedItem = Spotlight.getCurrent();
-		this.flickTarget = flickTarget;
+		this.isFlicked = true;
 
 		if (focusedItem) {
 			focusedItem.blur();
@@ -714,13 +713,13 @@ class ScrollableBase extends Component {
 	}
 
 	stop = () => {
-		if (!this.isDragging || this.flickTarget) {
-			if (this.props['data-spotlight-container-disabled'] || this.flickTarget) {
+		if (!this.isDragging || this.isFlicked) {
+			if (this.props['data-spotlight-container-disabled'] || this.isFlicked) {
 				this.childRef.current.setContainerDisabled(false);
 			}
 			this.focusOnItem();
 			this.lastScrollPositionOnFocus = null;
-			this.flickTarget = null;
+			this.isFlicked = false;
 			this.isWheeling = false;
 			if (this.isVoiceControl) {
 				this.isVoiceControl = false;
