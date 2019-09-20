@@ -713,18 +713,18 @@ class ScrollableBase extends Component {
 	}
 
 	stop = () => {
-		if (!this.isDragging || this.isFlicked) {
-			if (this.props['data-spotlight-container-disabled'] || this.isFlicked) {
-				this.childRef.current.setContainerDisabled(false);
-			}
-			this.focusOnItem();
-			this.lastScrollPositionOnFocus = null;
-			this.isFlicked = false;
-			this.isWheeling = false;
-			if (this.isVoiceControl) {
-				this.isVoiceControl = false;
-				this.updateFocusAfterVoiceControl();
-			}
+		if (this.isDragging && !this.isFlicked) return;
+
+		if (this.props['data-spotlight-container-disabled'] || this.isFlicked) {
+			this.childRef.current.setContainerDisabled(false);
+		}
+		this.focusOnItem();
+		this.lastScrollPositionOnFocus = null;
+		this.isFlicked = false;
+		this.isWheeling = false;
+		if (this.isVoiceControl) {
+			this.isVoiceControl = false;
+			this.updateFocusAfterVoiceControl();
 		}
 	}
 
