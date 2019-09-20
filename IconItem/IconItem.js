@@ -17,17 +17,17 @@ import Item from '../Item';
 import css from './IconItem.module.less';
 
 // eslint-disable-next-line enact/prop-types
-const IconItemBase = ({children, iconBefore, iconAfter, ...rest}) => (
+const IconItemBase = ({children, iconAfter, iconBefore, iconSize, ...rest}) => (
 	<Item {...rest}>
 		{iconBefore ? (
 			<slotBefore>
-				<Icon className={css.iconBefore} slot="slotBefore">{iconBefore}</Icon>
+				<Icon className={css.iconBefore} size={iconSize}>{iconBefore}</Icon>
 			</slotBefore>
 		) : null}
 		{children}
 		{iconAfter ? (
 			<slotAfter>
-				<Icon className={css.iconAfter}>{iconAfter}</Icon>
+				<Icon className={css.iconAfter} size={iconSize}>{iconAfter}</Icon>
 			</slotAfter>
 		) : null}
 	</Item>
