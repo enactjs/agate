@@ -63,9 +63,9 @@ const SwitchBase = kind({
 			animated: !noAnimation
 		}),
 		children: ({children, skin}) => {
-			if (children !== 'circle') return children;
+			if (children !== 'circlelarge') return children;
 			switch (skin) {
-				case 'carbon': return 'stop';
+				case 'carbon': return 'square';
 				default: return children;
 			}
 		}
