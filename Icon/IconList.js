@@ -2,6 +2,9 @@
 //
 
 export default {
+	circlelarge       : 0x0EFFB8,  // plus
+	square            : 0x0EFFB9,  // hyphen
+	triangle          : 0x0EFFBA,  // arrowup
 	plus              : 0x0002B,  // plus
 	minus             : 0x0002D,  // hyphen
 	arrowup           : 0x02191,  // arrowup

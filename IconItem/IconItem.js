@@ -10,7 +10,6 @@
  */
 
 import compose from 'ramda/src/compose';
-import Item from '@enact/ui/Item';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
