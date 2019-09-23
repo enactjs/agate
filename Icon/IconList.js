@@ -2,7 +2,7 @@
 //
 
 export default {
-	circlelarge       : 0x0EFFB8,  // circleplus
+	circlelarge       : 0x0EFFB8,  // circlelarge
 	square            : 0x0EFFB9,  // square
 	triangleup        : 0x0EFFBA,  // triangleup
 	plus              : 0x0002B,  // plus
