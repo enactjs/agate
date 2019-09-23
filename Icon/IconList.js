@@ -2,9 +2,9 @@
 //
 
 export default {
-	circlelarge       : 0x0EFFB8,  // shape: circlelarge
-	square            : 0x0EFFB9,  // shape: square
-	triangleup        : 0x0EFFBA,  // shape: triangleup
+	circlelarge       : 0x025EF,  // shape: LARGE CIRCLE
+	squarelarge       : 0x02B1B,  // shape: BLACK SQUARE LARGE
+	triangleup        : 0x025B2,  // shape: BLACK UP-POINTING TRIANGLE
 	plus              : 0x0002B,  // plus
 	minus             : 0x0002D,  // hyphen
 	arrowup           : 0x02191,  // arrowup
