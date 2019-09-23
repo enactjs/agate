@@ -79,6 +79,9 @@ const ItemBase = kind({
 	styles: {
 		css: componentCss
 	},
+	computed: {
+		className: ({active, selected, styler}) => styler.append({active, selected})
+	},
 	render: ({children, contentComponent, componentRef, css, label, labelPosition, slotAfter, slotBefore, ...rest}) => {
 		return (
 			<UiItemBase {...rest} css={css} align="center" component={Row} ref={componentRef}>
