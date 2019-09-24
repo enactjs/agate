@@ -1,10 +1,16 @@
+import deprecate from '@enact/core/internal/deprecate';
 import React from 'react';
 
 import Item from '../Item';
 
-// eslint-disable-next-line enact/prop-types
-const SlotItemBase = (props) => (
-	<Item {...props} />
+const SlotItemBase = deprecate(
+	(props) => (
+		<Item {...props} />
+	),
+	{
+		name: 'SlotItem',
+		replacedBy: 'Item'
+	}
 );
 
 export default SlotItemBase;

@@ -9,6 +9,7 @@
  * @exports IconItemBase
  */
 
+import deprecate from '@enact/core/internal/deprecate';
 import React from 'react';
 
 import Icon from '../Icon';
@@ -16,17 +17,22 @@ import Item from '../Item';
 
 import css from './IconItem.module.less';
 
-// eslint-disable-next-line enact/prop-types
-const IconItemBase = ({children, icon, iconSize, titleIcon, ...rest}) => (
-	<Item {...rest}>
-		{icon ? (
-			<Icon slot="slotBefore" className={css.iconBefore} size={iconSize}>{icon}</Icon>
-		) : null}
-		{children}
-		{titleIcon ? (
-			<Icon className={css.iconAfter} size={iconSize}>{titleIcon}</Icon>
-		) : null}
-	</Item>
+const IconItemBase = deprecate(
+	({children, icon, iconSize, titleIcon, ...rest}) => (
+		<Item {...rest}>
+			{icon ? (
+				<Icon slot="slotBefore" className={css.iconBefore} size={iconSize}>{icon}</Icon>
+			) : null}
+			{children}
+			{titleIcon ? (
+				<Icon className={css.iconAfter} size={iconSize}>{titleIcon}</Icon>
+			) : null}
+		</Item>
+	),
+	{
+		name: 'IconItem',
+		replacedBy: 'Item'
+	}
 );
 
 export default IconItemBase;

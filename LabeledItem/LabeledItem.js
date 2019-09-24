@@ -9,19 +9,25 @@
  * @exports LabeledItemBase
  */
 
+import deprecate from '@enact/core/internal/deprecate';
 import React from 'react';
 
 import Icon from '../Icon';
 import Item from '../Item';
 
-// eslint-disable-next-line enact/prop-types
-const LabeledItemBase = ({children, titleIcon, ...rest}) => (
-	<Item {...rest}>
-		{children}
-		{titleIcon ? (
-			<Icon size="small">{titleIcon}</Icon>
-		) : null}
-	</Item>
+const LabeledItemBase = deprecate(
+	({children, titleIcon, ...rest}) => (
+		<Item {...rest}>
+			{children}
+			{titleIcon ? (
+				<Icon size="small">{titleIcon}</Icon>
+			) : null}
+		</Item>
+	),
+	{
+		name: 'LabeledItem',
+		replacedBy: 'Item'
+	}
 );
 
 export default LabeledItemBase;
