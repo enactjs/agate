@@ -21,11 +21,11 @@ const IconItemBase = deprecate(
 	({children, icon, iconSize, titleIcon, ...rest}) => (
 		<Item {...rest}>
 			{icon ? (
-				<Icon slot="slotBefore" className={css.iconBefore} size={iconSize}>{icon}</Icon>
+				<Icon slot="slotBefore" className={css.icon} size={iconSize}>{icon}</Icon>
 			) : null}
 			{children}
 			{titleIcon ? (
-				<Icon className={css.iconAfter} size={iconSize}>{titleIcon}</Icon>
+				<Icon className={css.titleIcon} size={iconSize}>{titleIcon}</Icon>
 			) : null}
 		</Item>
 	),
