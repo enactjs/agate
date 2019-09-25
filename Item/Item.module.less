@@ -77,7 +77,12 @@
 		}
 
 		&.inline {
-			max-width: 240px;
+			// overriding ui/Item's inline-block
+			display: inline-flex;
+
+			.itemContent {
+				max-width: @agate-item-inline-content-max-width;
+			}
 
 			.itemContent,
 			.content {
