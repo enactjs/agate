@@ -18,6 +18,7 @@ import {Cell, Layout, Row} from '@enact/ui/Layout';
 import {Marquee, MarqueeController} from '@enact/ui/Marquee';
 import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import componentCss from './Item.module.less';
@@ -25,6 +26,12 @@ import Skinnable from '../Skinnable';
 
 const ItemContent = kind({
 	name: 'ItemContent',
+	propTypes: {
+		content: PropTypes.any,
+		css: PropTypes.object,
+		label: PropTypes.any,
+		labelPosition: PropTypes.any
+	},
 	defaultProps: {
 		labelPosition: 'below'
 	},
@@ -45,6 +52,8 @@ const ItemContent = kind({
 		}
 	},
 	render: ({orientation, content, css, label, ...rest}) => {
+		delete rest.labelPosition;
+
 		const contentElement = (
 			<Cell component={Marquee} className={css.content}>
 				{content}
@@ -76,6 +85,15 @@ const ItemContent = kind({
  */
 const ItemBase = kind({
 	name: 'Item',
+	propTypes: {
+		componentRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+		css: PropTypes.object,
+		label: PropTypes.node,
+		labelPosition: PropTypes.oneOf(['above', 'after', 'before', 'below']),
+		selected: PropTypes.bool,
+		slotAfter: PropTypes.node,
+		slotBefore: PropTypes.node
+	},
 	styles: {
 		css: componentCss,
 		publicClassNames: ['item']
@@ -83,7 +101,7 @@ const ItemBase = kind({
 	computed: {
 		className: ({selected, styler}) => styler.append({selected})
 	},
-	render: ({children, contentComponent, componentRef, css, label, labelPosition, slotAfter, slotBefore, ...rest}) => {
+	render: ({children, componentRef, css, label, labelPosition, slotAfter, slotBefore, ...rest}) => {
 		return (
 			<UiItemBase {...rest} css={css} align="center" component={Row} ref={componentRef}>
 				{slotBefore ? (
@@ -92,9 +110,9 @@ const ItemBase = kind({
 					</Cell>
 				) : null}
 				<ItemContent
+					content={children}
 					label={label}
 					labelPosition={labelPosition}
-					content={children}
 				/>
 				{slotAfter ? (
 					<Cell className={css.slotAfter} shrink>
