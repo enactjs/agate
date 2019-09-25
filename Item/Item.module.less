@@ -21,29 +21,6 @@
 				.content { order: 2; }
 				.label   { order: 1; }
 			}
-
-			&.labelBefore .label {
-				// temp static values
-				.padding-start-end(0, 8px);
-			}
-
-			&.labelAfter .label {
-				// temp static values
-				.padding-start-end(8px, 0);
-			}
-
-			.content {
-				box-sizing: border-box;
-				// when showing content and label inline, favor contentt
-				// this should be a variable
-				min-width: 60%;
-			}
-
-			.label {
-				box-sizing: border-box;
-				// this should be a variable
-				max-width: 40%;
-			}
 		}
 	}
 
@@ -68,14 +45,31 @@
 				color: @agate-item-label-color;
 				font-size: @agate-item-label-font-size;
 			}
-		}
 
-		&.active {
-			color: @agate-item-active-color;
+			&.hasLabel {
+				&.labelBefore .label {
+					.padding-start-end(0, @agate-item-label-padding);
+				}
+
+				&.labelAfter .label {
+					.padding-start-end(@agate-item-label-padding, 0);
+				}
+
+				.content {
+					box-sizing: border-box;
+					// when showing content and label inline, favor content
+					min-width: 60%;
+				}
+
+				.label {
+					box-sizing: border-box;
+					max-width: @agate-item-label-max-width;
+				}
+			}
 		}
 
 		&.selected {
-			outline: @agate-item-selected-outline;
+			color: @agate-item-selected-color;
 		}
 
 		&.inline {

@@ -80,7 +80,7 @@ const ItemBase = kind({
 		css: componentCss
 	},
 	computed: {
-		className: ({active, selected, styler}) => styler.append({active, selected})
+		className: ({selected, styler}) => styler.append({selected})
 	},
 	render: ({children, contentComponent, componentRef, css, label, labelPosition, slotAfter, slotBefore, ...rest}) => {
 		return (
