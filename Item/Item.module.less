@@ -55,15 +55,19 @@
 					.padding-start-end(@agate-item-label-padding, 0);
 				}
 
-				.content {
-					box-sizing: border-box;
-					// when showing content and label inline, favor content
-					min-width: 60%;
-				}
 
-				.label {
-					box-sizing: border-box;
-					max-width: @agate-item-label-max-width;
+				&.labelAfter,
+				&.labelBefore {
+					.content {
+						box-sizing: border-box;
+						// when showing content and label inline, favor content
+						min-width: @agate-item-content-min-width;
+					}
+
+					.label {
+						box-sizing: border-box;
+						max-width: @agate-item-label-max-width;
+					}
 				}
 			}
 		}
