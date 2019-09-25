@@ -77,7 +77,8 @@ const ItemContent = kind({
 const ItemBase = kind({
 	name: 'Item',
 	styles: {
-		css: componentCss
+		css: componentCss,
+		publicClassNames: ['item']
 	},
 	computed: {
 		className: ({selected, styler}) => styler.append({selected})

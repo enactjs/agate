@@ -19,7 +19,7 @@ import css from './IconItem.module.less';
 
 const IconItemBase = deprecate(
 	({children, icon, iconSize, titleIcon, ...rest}) => (
-		<Item {...rest}>
+		<Item {...rest} css={css}>
 			{icon ? (
 				<Icon slot="slotBefore" className={css.icon} size={iconSize}>{icon}</Icon>
 			) : null}
