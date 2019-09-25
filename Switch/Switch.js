@@ -50,7 +50,6 @@ const SwitchBase = kind({
 	},
 
 	defaultProps: {
-		children: 'circle',
 		noAnimation: false
 	},
 
@@ -63,10 +62,11 @@ const SwitchBase = kind({
 			animated: !noAnimation
 		}),
 		children: ({children, skin}) => {
-			if (children !== 'circle') return children;
+			if (children) return children;
+
 			switch (skin) {
-				case 'carbon': return 'stop';
-				default: return children;
+				case 'carbon': return 'squarelarge';
+				default: return 'circlelarge';
 			}
 		}
 	},
