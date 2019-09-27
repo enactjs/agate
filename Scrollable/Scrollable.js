@@ -715,7 +715,7 @@ class ScrollableBase extends Component {
 	stop = () => {
 		if (this.isDragging && !this.isFlicked) return;
 
-		if (this.props['data-spotlight-container-disabled'] || this.isFlicked) {
+		if (this.props['data-spotlight-container-disabled'] || this.isFlicked || this.isWheeling) {
 			this.childRef.current.setContainerDisabled(false);
 		}
 		this.focusOnItem();
