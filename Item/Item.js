@@ -58,12 +58,12 @@ const ItemContent = kind({
 		// specified, all of the cells should be set to `shrink` so their height is summed to define
 		// the height of the entire Layout. Without this, a cell will collapse, causing unwanted overlap.
 		const contentElement = (
-			<Cell component={Marquee} className={css.content} shrink={(orientation === 'vertical')}>
+			<Cell component={Marquee} className={css.content} shrink={(label != null && orientation === 'vertical')}>
 				{content}
 			</Cell>
 		);
 
-		if (!label) return contentElement;
+		if (label == null) return contentElement;
 
 		return (
 			<Cell {...rest}>
