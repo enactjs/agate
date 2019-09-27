@@ -66,7 +66,7 @@ const SwitchBase = kind({
 
 			switch (skin) {
 				case 'carbon': return 'squarelarge';
-				default: return 'circlelarge';
+				default: return 'circle';
 			}
 		}
 	},

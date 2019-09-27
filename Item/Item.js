@@ -54,8 +54,11 @@ const ItemContent = kind({
 	render: ({orientation, content, css, label, ...rest}) => {
 		delete rest.labelPosition;
 
+		// Due to flex-box sizing (used in Layout/Cell), in a vertical orientation with no height
+		// specified, all of the cells should be set to `shrink` so their height is summed to define
+		// the height of the entire Layout. Without this, a cell will collapse, causing unwanted overlap.
 		const contentElement = (
-			<Cell component={Marquee} className={css.content}>
+			<Cell component={Marquee} className={css.content} shrink={(orientation === 'vertical')}>
 				{content}
 			</Cell>
 		);
