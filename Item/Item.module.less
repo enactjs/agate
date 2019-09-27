@@ -4,10 +4,34 @@
 @import "../styles/skin.less";
 
 .item {
+	// Item's display is override Layout so forcing it back here'
+	display: flex;
 	position: relative;
 
-	.content {
-		/* Available for override customization */
+	.itemContent {
+		&.hasLabel {
+			&.labelAfter,
+			&.labelBelow {
+				.content { order: 1; }
+				.label   { order: 2; }
+			}
+
+			&.labelAbove,
+			&.labelBefore {
+				.content { order: 2; }
+				.label   { order: 1; }
+			}
+		}
+	}
+
+	.slotAfter {
+		display: flex;
+		justify-content: center;
+	}
+
+	.slotBefore {
+		display: flex;
+		justify-content: center;
 	}
 
 	.applySkins({
@@ -16,13 +40,65 @@
 		line-height: @agate-item-line-height;
 		color: @agate-item-color;
 
+		.itemContent {
+			.label   {
+				color: @agate-item-label-color;
+				font-size: @agate-item-label-font-size;
+			}
+
+			&.hasLabel {
+				&.labelBefore .label {
+					.padding-start-end(0, @agate-item-label-padding);
+				}
+
+				&.labelAfter .label {
+					.padding-start-end(@agate-item-label-padding, 0);
+				}
+
+
+				&.labelAfter,
+				&.labelBefore {
+					.content {
+						box-sizing: border-box;
+						// when showing content and label inline, favor content
+						min-width: @agate-item-content-min-width;
+					}
+
+					.label {
+						box-sizing: border-box;
+						max-width: @agate-item-label-max-width;
+					}
+				}
+			}
+		}
+
+		&.selected {
+			color: @agate-item-selected-color;
+		}
+
 		&.inline {
-			max-width: 240px;
+			// overriding ui/Item's inline-block
+			display: inline-flex;
+
+			.itemContent {
+				max-width: @agate-item-inline-content-max-width;
+			}
+
+			.itemContent,
+			.content {
+				width: unset;
+			}
 		}
 
 		.focus({
 			background-color: @agate-item-focus-bg-color;
 			color: @agate-item-focus-color;
+
+			.itemContent {
+				.label {
+					color: @agate-item-focus-color;
+				}
+			}
 		});
 	});
 }
