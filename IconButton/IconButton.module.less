@@ -69,6 +69,12 @@
 			height: @agate-iconbutton-huge-height;
 			width: @agate-iconbutton-huge-height;
 			margin: @agate-iconbutton-huge-margin;
+
+			&.selected {
+				.bg {
+					border: @agate-iconbutton-huge-selected-border;
+				}
+			}
 		}
 
 		&.small {
@@ -137,6 +143,7 @@
 		&.selected {
 			.bg {
 				background-color: @agate-iconbutton-selected-bg-color;
+				border: @agate-iconbutton-selected-border;
 			}
 
 			&,
