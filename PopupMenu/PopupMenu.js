@@ -58,7 +58,6 @@ const PopupMenuBase = kind({
 						{closeButton ? <LabeledIconButton
 							inline
 							icon="cancel"
-							backgroundOpacity="lightOpaque"
 							onClick={onCloseButtonClick}
 							className={css.closeButton}
 							size="huge"
