@@ -8,8 +8,8 @@
 	.applySkins({
 		width: @agate-icon-size;
 		height: @agate-icon-size;
-		background-position: center -((@agate-icon-sprite-size - @agate-icon-size) / 2);
-		background-size: @agate-icon-sprite-size (@agate-icon-sprite-size * 2);
+		background-position: center center;
+		background-size: @agate-icon-sprite-size @agate-icon-sprite-size;
 		background-repeat: no-repeat;
 		margin: @agate-icon-margin;
 		font-family: @agate-icon-font-family;
@@ -22,7 +22,6 @@
 		text-indent: @agate-icon-text-indent;
 
 		&.huge {
-			background-position: center -((@agate-icon-sprite-huge-size - @agate-icon-huge-size) / 2);
 			background-size: @agate-icon-sprite-huge-size (@agate-icon-sprite-huge-size * 2);
 			width: @agate-icon-huge-size;
 			height: @agate-icon-huge-size;
