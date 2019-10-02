@@ -25,6 +25,7 @@
 @agate-button-letter-spacing: normal;
 @agate-button-font-ligatures: @agate-base-font-ligatures;
 @agate-button-small-height: 60px;
+@agate-button-small-line-height: (@agate-button-small-height - (2 * @agate-button-border-width));
 @agate-button-font-size: 36px;
 @agate-button-small-font-size: 24px;
 @agate-button-border-width: 0;
@@ -332,6 +333,10 @@
 @agate-switch-width: 96px;
 @agate-switch-border-radius: (@agate-switch-height / 2);
 @agate-switch-icon-scale: 2.8;
+@agate-switch-icon-font-family: @agate-icon-font-family;
+@agate-switch-icon-font-size: (@agate-switch-height * @agate-switch-icon-scale);
+@agate-switch-icon-position-left: 0;
+@agate-switch-selected-icon-position-left: (@agate-switch-width - @agate-switch-height);
 
 // ToggleButton
 // ---------------------------------------
