@@ -122,7 +122,6 @@
 		&.searching {
 			.node {
 				position: absolute;
-				display: block;
 				will-change: opacity;
 				transform-origin: center bottom;
 				animation: searching-spinner @agate-spinner-searching-animation-time linear infinite;
@@ -148,7 +147,6 @@
 		&.loading {
 			.node {
 				position: absolute;
-				display: inline-block;
 				will-change: transform;
 				animation: loading-spinner @agate-spinner-loading-animation-time ease-in-out infinite;
 				// avoid vertical centering with transform because we are animating `translateY`.
