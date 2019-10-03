@@ -7,22 +7,24 @@
 @searching-nodes: 12;
 @loading-nodes: 4;
 
-.fan-loop (@elements) {
-	.fan-loop(@elements; @elements);
+// Searching animation
+// ---------------------------------------
+.spin-loop (@elements) {
+	.spin-loop(@elements; @elements);
 }
 // Loop each searching spinner's node to rotate and delay animation
-.fan-loop (@elements; @index) when (@index > 0) {
+.spin-loop (@elements; @index) when (@index > 0) {
 	// Spread @searching-nodes over 360 degrees
 	@degree-offset: ((-360deg / @elements) * @index);
-	// Total animation duration would add up to be 1.2sec. Offset each animation by 0.1sec
+	// Total animation duration would add up to be `@agate-spinner-searching-animation-time`. Offset each animation by 0.1sec
 	@delay-offset: -((@index * 0.1) + 0.1s);
 
-	.fan@{index} {
+	.node@{index} {
 		transform: translate(-50%, -100%) rotate(@degree-offset) translateY(-100%);
 		animation-delay: @delay-offset;
 	}
 
-	.fan-loop(@elements; @index - 1);
+	.spin-loop(@elements; @index - 1);
 }
 
 @keyframes searching-spinner {
@@ -34,9 +36,60 @@
 	}
 }
 
+// Loading animation
+// ---------------------------------------
+.bounce-loop (@elements) {
+	.bounce-loop(@elements; @elements);
+}
+
+// Loop each loading spinner's node to position and delay animation
+.bounce-loop (@elements; @index) when (@index > 0) {
+	// Position and space @loading-nodes across horizontally
+	// _______________________________
+	// |                             | <-- @spinner-size
+	// |        |            |       | <-- @inner-width
+	// |        |  |  |  |  |        | <-- @element-space
+	// | @outset|  • • • •  |@outset |
+	// |----------|                  | <-- @left-offset
+	// |-----------•-•-•-•           | <-- @left-position
+	// |_____________________________|
+	@inner-width: (@spinner-size - (@outset * 2));
+	@element-space: (@inner-width / @elements);
+	@element-centering: (@element-space / @elements);
+	@left-offset: (@outset + @element-centering);
+	@left-position: ((@element-space * (@index - 1)) + @left-offset);
+
+	// Shorter offset = resembles a bouncing line
+	// Longer offset = more chaotic looking bounce
+	@time-offset: 0.05s;
+	@delay-offset: -((@index * @time-offset) + @time-offset);
+
+	.node@{index} {
+		left: @left-position;
+		animation-delay: @delay-offset;
+	}
+
+	.bounce-loop(@elements; @index - 1);
+}
+
+@keyframes loading-spinner {
+	0% {
+		transform: translateY(0);
+	}
+	50% {
+		// To center the animation, calculate distance from the bottom of the node to the center of `.bg`.
+		// Since it is `left: 50%`, it is effectively `100%` below the center of `.bg` so we can animate `-100%` going up.
+		transform: translateY(-100%);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
 .spinner {
 	.applySkins({
-		&.searching {
+		&.searching,
+		&.loading {
 			.bg {
 				display: inline-block;
 				width: @agate-spinner-size;
@@ -44,12 +97,35 @@
 				position: relative;
 			}
 
-			.fan {
+			&.small {
+				.bg {
+					width: @agate-spinner-small-size;
+					height: @agate-spinner-small-size;
+				}
+			}
+
+			&.dark {
+				.node {
+					background-color: @agate-spinner-dark-color;
+				}
+			}
+
+			&.light {
+				.node {
+					background-color: @agate-spinner-light-color;
+				}
+			}
+		}
+
+		// Searching css
+		// ---------------------------------------
+		&.searching {
+			.node {
 				position: absolute;
 				display: block;
 				will-change: opacity;
 				transform-origin: center bottom;
-				animation: searching-spinner 1.2s linear infinite;
+				animation: searching-spinner @agate-spinner-searching-animation-time linear infinite;
 				top: 50%;
 				left: 50%;
 				width: @agate-spinner-searching-width;
@@ -57,32 +133,45 @@
 				border-radius: @agate-spinner-searching-border-radius;
 			}
 
-			.fan-loop(@searching-nodes);
+			.spin-loop(@searching-nodes);
 
 			&.small {
-				.bg {
-					width: @agate-spinner-small-size;
-					height: @agate-spinner-small-size;
-
-					.fan {
-						width: @agate-spinner-small-searching-width;
-						height: @agate-spinner-small-searching-height;
-					}
+				.node {
+					width: @agate-spinner-small-searching-width;
+					height: @agate-spinner-small-searching-height;
 				}
 			}
 		}
 
-		&.searching {
-			&.dark {
-				.fan {
-					background-color: @agate-spinner-dark-color;
-				}
+		// Loading css
+		// ---------------------------------------
+		&.loading {
+			.node {
+				position: absolute;
+				display: inline-block;
+				will-change: transform;
+				animation: loading-spinner @agate-spinner-loading-animation-time ease-in-out infinite;
+				// avoid vertical centering with transform because we are animating `translateY`.
+				// true centering without transform: calc(50% - (@agate-spinner-searching-height/2/2));
+				top: 50%;
+				width: @agate-spinner-loading-width;
+				height: @agate-spinner-loading-height;
+				border-radius: @agate-spinner-loading-border-radius;
 			}
 
-			&.light {
-				.fan {
-					background-color: @agate-spinner-light-color;
+			@outset: @agate-spinner-loading-outset;
+			@spinner-size: @agate-spinner-size;
+			.bounce-loop(@loading-nodes);
+
+			&.small {
+				.node {
+					width: @agate-spinner-small-loading-width;
+					height: @agate-spinner-small-loading-height;
 				}
+
+				@outset: @agate-spinner-small-loading-outset;
+				@spinner-size: @agate-spinner-small-size;
+				.bounce-loop(@loading-nodes);
 			}
 		}
 	});
