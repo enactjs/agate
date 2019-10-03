@@ -26,7 +26,7 @@ import componentCss from './Spinner.module.less';
 const SPINNER_TYPE = {
 	loading: 'loading',
 	searching: 'searching'
-}
+};
 
 /**
  * A component that shows spinning fan or bouncing 🏀🎾🏐⚽️.
@@ -125,7 +125,7 @@ const SpinnerBase = kind({
 		 * The following classes are supported:
 		 *
 		 * * `spinner` - The root component class, unless there is a scrim. The scrim and floating
-		 *   layer can be a sibbling or parent to this root "spinner" element.
+		 *   layer can be a sibling or parent to this root "spinner" element.
 		 *
 		 * @type {Object}
 		 * @public
