@@ -58,11 +58,23 @@ const IconBase = kind({
 		 * @default 'large'
 		 * @public
 		 */
-		size: PropTypes.oneOf(['small', 'large', 'huge'])
+		size: PropTypes.oneOf(['small', 'large', 'huge']),
+
+		/**
+		 * The amount of sprite "cells" in the src image.
+		 *
+		 * This property only affects image-based icons, not icon glyphs.
+		 *
+		 * @type {Number}
+		 * @default 0
+		 * @public
+		 */
+		spriteCount: PropTypes.number
 	},
 
 	defaultProps: {
-		size: 'large'
+		size: 'large',
+		spriteCount: 1
 	},
 
 	styles: {
@@ -72,14 +84,22 @@ const IconBase = kind({
 	computed: {
 		className: ({size, styler}) => styler.append(
 			size
-		)
+		),
+		style: ({spriteCount, style}) => ({
+			...style,
+			'--agate-icon-sprite-count': spriteCount
+		})
 	},
 
-	render: (props) => UiIcon.inline({
-		...props,
-		css: props.css,
-		iconList
-	})
+	render: (props) => {
+		delete props.spriteCount;
+
+		return UiIcon.inline({
+			...props,
+			css: props.css,
+			iconList
+		});
+	}
 });
 
 // Let's find a way to import this list directly, and bonus feature, render our icons in the docs
