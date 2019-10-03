@@ -12,6 +12,7 @@
  * @exports SpinnerDecorator
  */
 import kind from '@enact/core/kind';
+import {cap} from '@enact/core/util';
 import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
@@ -22,8 +23,13 @@ import Skinnable from '../Skinnable';
 
 import componentCss from './Spinner.module.less';
 
+const SPINNER_TYPE = {
+	loading: 'loading',
+	searching: 'searching'
+}
+
 /**
- * A component that shows spinning fan. Or bouncing 🏀🎾🏐⚽️.
+ * A component that shows spinning fan or bouncing 🏀🎾🏐⚽️.
  *
  * @class SpinnerCore
  * @memberof agate/Spinner
@@ -55,7 +61,7 @@ const SpinnerCore = kind({
 	},
 
 	defaultProps: {
-		type: 'searching'
+		type: SPINNER_TYPE.searching
 	},
 
 	styles: {
@@ -64,12 +70,15 @@ const SpinnerCore = kind({
 
 	computed: {
 		'aria-label': ({'aria-label': label, type}) => {
-			// TODO: These static values will need to be localized
-			return label || type === 'searching' ? 'Searching' : 'Loading';
+			const {loading, searching} = SPINNER_TYPE;
+
+			return label || type === searching ? cap(searching) : cap(loading);
 		},
 		className: ({styler, type}) => styler.append(type),
 		spinnerNodes: ({styler, type}) => {
-			return Array.from({length: type === 'searching' ? 12 : 4}, (_, index) => (
+			const {searching} = SPINNER_TYPE;
+
+			return Array.from({length: type === searching ? 12 : 4}, (_, index) => (
 				<span className={styler.join('node', `node${index + 1}`)} key={`node${index}`} />
 			));
 		}
