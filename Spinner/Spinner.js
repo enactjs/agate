@@ -116,7 +116,7 @@ const SpinnerBase = kind({
 		 * The following classes are supported:
 		 *
 		 * * `spinner` - The root component class, unless there is a scrim. The scrim and floating
-		 *   layer can be a sibbling or parent to this root "spinner" element.
+		 *   layer can be a sibling or parent to this root "spinner" element.
 		 *
 		 * @type {Object}
 		 * @public
