@@ -8,7 +8,7 @@ import Transition from '@enact/ui/Transition';
 
 import Skinnable from '../Skinnable';
 import Heading from '../Heading';
-import IconButton from '../IconButton';
+import LabeledIconButton from '../LabeledIconButton';
 
 import PopupState from '../Popup/PopupState';
 
@@ -20,7 +20,7 @@ const PopupMenuBase = kind({
 		closeButton: PropTypes.bool,
 		css: PropTypes.object,
 		noAnimation: PropTypes.bool,
-		onCloseButtonClick: PropTypes.func,
+		onClose: PropTypes.func,
 		onHide: PropTypes.func,
 		open: PropTypes.bool,
 		title: PropTypes.string
@@ -37,7 +37,7 @@ const PopupMenuBase = kind({
 		className: 'popupMenu'
 	},
 
-	render: ({children, closeButton, css, noAnimation, onCloseButtonClick, onHide, open, title, ...rest}) => {
+	render: ({children, closeButton, css, noAnimation, onClose, onHide, open, title, ...rest}) => {
 		return (
 			<Transition
 				noAnimation={noAnimation}
@@ -55,13 +55,13 @@ const PopupMenuBase = kind({
 					</Cell>
 					<Cell className={css.body} shrink>
 						{children}
-						{closeButton ? <IconButton
+						{closeButton ? <LabeledIconButton
+							inline
 							icon="cancel"
-							backgroundOpacity="lightOpaque"
-							onClick={onCloseButtonClick}
+							onClick={onClose}
 							className={css.closeButton}
 							size="huge"
-						>cancel</IconButton> : null}
+						>cancel</LabeledIconButton> : null}
 					</Cell>
 				</Layout>
 			</Transition>

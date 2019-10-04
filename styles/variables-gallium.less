@@ -137,9 +137,9 @@
 @agate-icon-huge-size: 210px;
 @agate-icon-button-size: @agate-button-height;
 @agate-icon-button-small-size: @agate-button-small-height;
-@agate-icon-sprite-size: (@agate-icon-button-size - (@agate-button-border-width * 2));
-@agate-icon-sprite-small-size: (@agate-icon-button-small-size - (@agate-button-border-width * 2));
-@agate-icon-sprite-huge-size: 250px;
+@agate-icon-sprite-size: @agate-icon-size;
+@agate-icon-sprite-small-size: @agate-icon-small-size;
+@agate-icon-sprite-huge-size: @agate-icon-huge-size;
 @agate-icon-margin: @agate-component-spacing;
 @agate-icon-letter-spacing: normal;
 @agate-icon-text-indent: initial;
@@ -160,6 +160,9 @@
 @agate-iconbutton-skew: 0;
 @agate-iconbutton-grid-border-radius: 0;
 @agate-iconbutton-bg-transform: none;
+@agate-iconbutton-huge-border-width: 10px;
+@agate-iconbutton-huge-height: 250px;
+@agate-iconbutton-huge-margin: 0 50px;
 @agate-iconbutton-huge-border-width: 10px;
 @agate-iconbutton-huge-height: 250px;
 @agate-iconbutton-huge-margin: 0 50px;
@@ -195,6 +198,12 @@
 @agate-item-line-height: @agate-item-height - (@agate-item-vertical-padding * 2);
 @agate-item-line-height-large: @agate-item-height-large - (@agate-item-vertical-padding * 2);
 @agate-item-indent: 36px;
+
+// LabeledIconButton
+// ---------------------------------------
+@agate-labelediconbutton-label-font-size: 38px;
+@agate-labelediconbutton-label-font-weight: 500;
+@agate-labelediconbutton-label-margin: 20px;
 
 // Panels
 // ---------------------------------------

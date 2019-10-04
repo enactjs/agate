@@ -59,7 +59,15 @@ const LabeledIconButtonBase = kind({
 		 * visual effect may be customized using the
 		 * [css]{@link agate/LabeledIconButton.LabeledIconButtonBase.css} prop.
 		 */
-		selected: PropTypes.bool
+		selected: PropTypes.bool,
+
+		/**
+		 * The amount of sprite "cells" in the src image.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		spriteCount: PropTypes.number
 	},
 
 	styles: {
@@ -68,11 +76,11 @@ const LabeledIconButtonBase = kind({
 		publicClassNames: true
 	},
 
-	render: ({css, icon, pressed, selected, ...rest}) => {
+	render: ({css, icon, pressed, selected, spriteCount, ...rest}) => {
 		return UiLabeledIcon.inline({
 			...rest,
 			icon: (
-				<Button pressed={pressed} selected={selected}>{icon}</Button>
+				<Button pressed={pressed} selected={selected} spriteCount={spriteCount}>{icon}</Button>
 			),
 			css
 		});
