@@ -10,7 +10,6 @@ const OpenState = {
 	OPEN: 2
 };
 
-const forwardClose = forward('onClose');
 const forwardHide = forward('onHide');
 
 const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-vars
@@ -69,7 +68,6 @@ const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-v
 		}
 
 		handlePopupHide = () => {
-			forwardClose(null, this.props);
 			forwardHide(null, this.props);
 
 			this.setState({
