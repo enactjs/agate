@@ -83,6 +83,14 @@ const IconButtonBase = kind({
 		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
+		 * The amount of sprite "cells" in the src image.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		spriteCount: PropTypes.number,
+
+		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
 		 * other related buttons.
 		 *
@@ -108,8 +116,8 @@ const IconButtonBase = kind({
 			size,
 			{highlighted, selected}
 		),
-		icon: ({children, css, size}) => (
-			<Icon css={css} size={size} className={css.icon}>{children}</Icon>
+		icon: ({children, css, size, spriteCount}) => (
+			<Icon css={css} size={size} className={css.icon} spriteCount={spriteCount}>{children}</Icon>
 		),
 		minWidth: ({children}) => (!children)
 	},
@@ -118,6 +126,7 @@ const IconButtonBase = kind({
 		delete rest.children;
 		delete rest.highlighted;
 		delete rest.selected;
+		delete rest.spriteCount;
 		delete rest.type;
 
 		return ButtonBase.inline({

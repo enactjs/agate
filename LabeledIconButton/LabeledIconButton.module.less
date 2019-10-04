@@ -16,11 +16,18 @@
 	}
 
 	.applySkins({
+		.label {
+			margin-top: @agate-labelediconbutton-label-margin;
+			color: @agate-labelediconbutton-label-color;
+			font-size: @agate-labelediconbutton-label-font-size;
+			font-weight: @agate-labelediconbutton-label-font-weight;
+		}
+
 		.focus({
 			background: transparent;
 
 			.label {
-				color: @agate-labelediconbutton-color;
+				color: @agate-labelediconbutton-label-focus-color;
 			}
 		});
 	});

@@ -8,7 +8,7 @@ import Transition from '@enact/ui/Transition';
 
 import Skinnable from '../Skinnable';
 import Heading from '../Heading';
-import IconButton from '../IconButton';
+import LabeledIconButton from '../LabeledIconButton';
 
 import PopupState from '../Popup/PopupState';
 
@@ -55,13 +55,13 @@ const PopupMenuBase = kind({
 					</Cell>
 					<Cell className={css.body} shrink>
 						{children}
-						{closeButton ? <IconButton
+						{closeButton ? <LabeledIconButton
+							inline
 							icon="cancel"
-							backgroundOpacity="lightOpaque"
 							onClick={onClose}
 							className={css.closeButton}
 							size="huge"
-						>cancel</IconButton> : null}
+						>cancel</LabeledIconButton> : null}
 					</Cell>
 				</Layout>
 			</Transition>
