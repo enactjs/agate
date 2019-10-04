@@ -17,12 +17,17 @@ import componentCss from './Popup.module.less';
 const PopupBase = kind({
 	name: 'Popup',
 	propTypes: {
+		buttons: PropTypes.oneOfType([
+			PropTypes.element,
+			PropTypes.arrayOf(PropTypes.element)
+		]),
 		closeButton: PropTypes.bool,
 		css: PropTypes.object,
 		noAnimation: PropTypes.bool,
 		onClose: PropTypes.func,
 		onHide: PropTypes.func,
 		open: PropTypes.bool,
+		skin: PropTypes.string,
 		title: PropTypes.string
 	},
 	defaultProps: {
