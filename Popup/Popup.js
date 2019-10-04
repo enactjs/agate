@@ -1,5 +1,4 @@
 import compose from 'ramda/src/compose';
-import {forward, handle} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -21,7 +20,7 @@ const PopupBase = kind({
 		closeButton: PropTypes.bool,
 		css: PropTypes.object,
 		noAnimation: PropTypes.bool,
-		onCloseButtonClick: PropTypes.func,
+		onClose: PropTypes.func,
 		onHide: PropTypes.func,
 		open: PropTypes.bool,
 		title: PropTypes.string
@@ -35,16 +34,10 @@ const PopupBase = kind({
 		css: componentCss,
 		className: 'popup'
 	},
-	handlers: {
-		onCloseButtonClick: handle(
-			forward('onCloseButtonClick'),
-			forward('onClose')
-		)
-	},
 	computed: {
 		className: ({closeButton, title, styler}) => styler.append({withCloseButton: closeButton, withTitle: title})
 	},
-	render: ({buttons, children, closeButton, css, noAnimation, onCloseButtonClick, onHide, open, skin, title, ...rest}) => {
+	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, open, skin, title, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
 
 		return (
@@ -63,7 +56,7 @@ const PopupBase = kind({
 				>
 					{closeButton ? <Button
 						icon="closex"
-						onTap={onCloseButtonClick}
+						onTap={onClose}
 						className={componentCss.closeButton}
 						size="small"
 					/> : null}
