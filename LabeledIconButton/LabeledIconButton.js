@@ -65,7 +65,6 @@ const LabeledIconButtonBase = kind({
 		 * The amount of sprite "cells" in the src image.
 		 *
 		 * @type {Number}
-		 * @default 0
 		 * @public
 		 */
 		spriteCount: PropTypes.number
