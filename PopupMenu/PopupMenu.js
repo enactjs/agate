@@ -20,7 +20,7 @@ const PopupMenuBase = kind({
 		closeButton: PropTypes.bool,
 		css: PropTypes.object,
 		noAnimation: PropTypes.bool,
-		onCloseButtonClick: PropTypes.func,
+		onClose: PropTypes.func,
 		onHide: PropTypes.func,
 		open: PropTypes.bool,
 		title: PropTypes.string
@@ -37,7 +37,7 @@ const PopupMenuBase = kind({
 		className: 'popupMenu'
 	},
 
-	render: ({children, closeButton, css, noAnimation, onCloseButtonClick, onHide, open, title, ...rest}) => {
+	render: ({children, closeButton, css, noAnimation, onClose, onHide, open, title, ...rest}) => {
 		return (
 			<Transition
 				noAnimation={noAnimation}
@@ -58,7 +58,7 @@ const PopupMenuBase = kind({
 						{closeButton ? <LabeledIconButton
 							inline
 							icon="cancel"
-							onClick={onCloseButtonClick}
+							onClick={onClose}
 							className={css.closeButton}
 							size="huge"
 						>cancel</LabeledIconButton> : null}

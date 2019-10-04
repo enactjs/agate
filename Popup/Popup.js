@@ -17,12 +17,17 @@ import componentCss from './Popup.module.less';
 const PopupBase = kind({
 	name: 'Popup',
 	propTypes: {
+		buttons: PropTypes.oneOfType([
+			PropTypes.element,
+			PropTypes.arrayOf(PropTypes.element)
+		]),
 		closeButton: PropTypes.bool,
 		css: PropTypes.object,
 		noAnimation: PropTypes.bool,
-		onCloseButtonClick: PropTypes.func,
+		onClose: PropTypes.func,
 		onHide: PropTypes.func,
 		open: PropTypes.bool,
+		skin: PropTypes.string,
 		title: PropTypes.string
 	},
 	defaultProps: {
@@ -37,7 +42,7 @@ const PopupBase = kind({
 	computed: {
 		className: ({closeButton, title, styler}) => styler.append({withCloseButton: closeButton, withTitle: title})
 	},
-	render: ({buttons, children, closeButton, css, noAnimation, onCloseButtonClick, onHide, open, skin, title, ...rest}) => {
+	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, open, skin, title, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
 
 		return (
@@ -56,7 +61,7 @@ const PopupBase = kind({
 				>
 					{closeButton ? <Button
 						icon="closex"
-						onTap={onCloseButtonClick}
+						onTap={onClose}
 						className={componentCss.closeButton}
 						size="small"
 					/> : null}
