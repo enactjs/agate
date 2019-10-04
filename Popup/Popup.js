@@ -1,4 +1,5 @@
 import compose from 'ramda/src/compose';
+import {forward, handle} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -33,6 +34,12 @@ const PopupBase = kind({
 	styles: {
 		css: componentCss,
 		className: 'popup'
+	},
+	handlers: {
+		onCloseButtonClick: handle(
+			forward('onCloseButtonClick'),
+			forward('onClose')
+		)
 	},
 	computed: {
 		className: ({closeButton, title, styler}) => styler.append({withCloseButton: closeButton, withTitle: title})
