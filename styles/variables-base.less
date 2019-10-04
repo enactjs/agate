@@ -1,4 +1,38 @@
-// Variables for any components
+//
+// #### Agate Base Skin Defaults ####
+//
+// A skin which establishes common, shared default values for all skins.
+//
+// ### CAUTION: ###
+// It is extremely important to be careful, thorough, and considerate when altering any value in
+// this file. It is very easy to make an innocuous change here which has deep consequences for the
+// other skins.
+//
+//
+// ## Overview
+//
+// This file establishes default values for all Agate skins. Any skin is allowed to override any of
+// these values to customize itself. Additionally, skins may choose to only override a few of these
+// variables for its own convenience.
+//
+//
+// ## Maintenance
+//
+// When adding a new property to a component, a default must be established here in this file.
+// Overrides of this value may then be added to any/all of the other skins, but that's completely
+// optional.
+//
+// New variables in this file should use the true CSS default value for the given property, with one
+// exception: sizing properties, like `height` and `width`. Is these cases, the values should be a
+// generalized "agate default" rather than a specific skin's value. The measurement added here
+// doesn't necessarily need to match the first definition of the variable in a skin. Most values in
+// this file will be set to `inherit`, and that's fine because that's the default property value for
+// most CSS properties.
+//
+
+
+//
+// Variables
 //
 
 // App
@@ -162,6 +196,7 @@
 @agate-iconbutton-huge-border-width: inherit;
 @agate-iconbutton-huge-height: inherit;
 @agate-iconbutton-huge-margin: inherit;
+@agate-iconbutton-huge-border-width: inherit;
 
 // Input
 // ---------------------------------------
