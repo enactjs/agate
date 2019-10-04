@@ -66,7 +66,7 @@ const IconBase = kind({
 		 * This property only affects image-based icons, not icon glyphs.
 		 *
 		 * @type {Number}
-		 * @default 0
+		 * @default 1
 		 * @public
 		 */
 		spriteCount: PropTypes.number
