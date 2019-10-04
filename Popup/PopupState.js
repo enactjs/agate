@@ -10,6 +10,8 @@ const OpenState = {
 	OPEN: 2
 };
 
+const forwardClose = forward('onClose');
+const forwardCloseButtonClick = forward('onCloseButtonClick');
 const forwardHide = forward('onHide');
 
 const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-vars
@@ -20,6 +22,7 @@ const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-v
 			noAnimation: PropTypes.bool,
 			noAutoDismiss: PropTypes.bool,
 			onClose: PropTypes.func,
+			onCloseButtonClick: PropTypes.func,
 			open: PropTypes.bool,
 			scrimType: PropTypes.oneOf(['transparent', 'translucent', 'none'])
 		}
@@ -67,6 +70,14 @@ const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-v
 			}
 		}
 
+		handleCloseButtonClick = () => {
+			if (!this.props.onCloseButtonClick) {
+				forwardClose(null, this.props);
+			} else {
+				forwardCloseButtonClick(null, this.props);
+			}
+		}
+
 		handlePopupHide = () => {
 			forwardHide(null, this.props);
 
@@ -78,6 +89,7 @@ const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-v
 
 		render () {
 			const {noAutoDismiss, onClose, scrimType, ...rest} = this.props;
+			delete rest.onCloseButtonClick;
 			delete rest.spotlightRestrict;
 
 			return (
@@ -92,6 +104,7 @@ const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-v
 						{...rest}
 						open={this.state.popupOpen >= OpenState.OPENING}
 						onClose={onClose}
+						onCloseButtonClick={this.handleCloseButtonClick}
 						onHide={this.handlePopupHide}
 					/>
 				</FloatingLayer>
