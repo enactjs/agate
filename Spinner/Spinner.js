@@ -61,7 +61,7 @@ const SpinnerCore = kind({
 	},
 
 	defaultProps: {
-		type: SPINNER_TYPE.searching
+		type: 'searching'
 	},
 
 	styles: {
