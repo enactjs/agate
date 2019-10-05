@@ -38,6 +38,9 @@
 		.agate-item-sizing();
 
 		line-height: @agate-item-line-height;
+		border-style: solid;
+		border-width: @agate-item-border-width;
+		border-color: @agate-item-border-color;
 		color: @agate-item-color;
 
 		.itemContent {
@@ -91,6 +94,7 @@
 		}
 
 		.focus({
+			border-color: @agate-item-focus-border-color;
 			background-color: @agate-item-focus-bg-color;
 			color: @agate-item-focus-color;
 
