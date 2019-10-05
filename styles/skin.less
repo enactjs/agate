@@ -6,8 +6,8 @@
 	.buildSkinRules(@skin; @importRules) {
 		&:global(.@{skin}) {
 			// Establish a base set of colors and variables that other skins can optionally override.
-			@import "./colors-gallium-day.less";
-			@import "./variables-gallium.less";
+			@import "./colors-base.less";
+			@import "./variables-base.less";
 
 			@importRules();
 		}

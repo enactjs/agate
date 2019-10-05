@@ -11,7 +11,7 @@
 		width: @agate-switch-width;
 		height: @agate-switch-height;
 		line-height: @agate-switch-height;
-		font-family: "Agate Icons";
+		font-family: @agate-switch-icon-font-family;
 		position: relative;
 		display: inline-block;
 		text-align: left;
@@ -21,10 +21,10 @@
 			background-color: transparent;
 			color: @agate-switch-color;
 			visibility: visible;
-			left: 0;
+			left: @agate-switch-icon-position-left;
 			width: @agate-switch-height;
 			height: inherit;
-			font-size: (@agate-switch-height * @agate-switch-icon-scale);
+			font-size: @agate-switch-icon-font-size;
 			line-height: inherit;
 			margin: 0;
 		}
@@ -43,7 +43,7 @@
 			background-color: @agate-switch-selected-bg-color;
 
 			.icon {
-				left: (@agate-switch-width - @agate-switch-height);
+				left: @agate-switch-selected-icon-position-left;
 				color: @agate-switch-selected-color;
 
 				:global(.spottable):focus & {

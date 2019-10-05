@@ -4,12 +4,25 @@
 @import "../styles/variables.less";
 @import "../styles/skin.less";
 
+/*
+ * Provide the height of the sprite and an index value of how far to vertically offset this sprite
+ * 0 for the first position (top), 1 below that, 2 below 1, etc.
+ * This way, selected/focused states can refer to other sprite indexes easily.
+ * 0 for normal/resting
+ * 1 for focused
+ */
+.icon-sprite-offset (@sprite-size; @sprite-index) {
+	background-position: center calc((var(--agate-icon-sprite-count, 1) - 1) * @sprite-size * -@sprite-index);
+}
+
 .icon {
+	--agate-icon-sprite-count: 1;
+
 	.applySkins({
 		width: @agate-icon-size;
 		height: @agate-icon-size;
-		background-position: center -((@agate-icon-sprite-size - @agate-icon-size) / 2);
-		background-size: @agate-icon-sprite-size (@agate-icon-sprite-size * 2);
+		.icon-sprite-offset(@agate-icon-sprite-size, 0);
+		background-size: @agate-icon-sprite-size calc(var(--agate-icon-sprite-count, 1) * @agate-icon-sprite-size);
 		background-repeat: no-repeat;
 		margin: @agate-icon-margin;
 		font-family: @agate-icon-font-family;
@@ -18,10 +31,12 @@
 		text-align: center;
 		position: relative;
 		color: inherit;
+		letter-spacing: @agate-icon-letter-spacing;
+		text-indent: @agate-icon-text-indent;
 
 		&.huge {
-			background-position: center -((@agate-icon-sprite-huge-size - @agate-icon-huge-size) / 2);
-			background-size: @agate-icon-sprite-huge-size (@agate-icon-sprite-huge-size * 2);
+			.icon-sprite-offset(@agate-icon-sprite-huge-size, 0);
+			background-size: @agate-icon-sprite-huge-size calc(var(--agate-icon-sprite-count, 1) * @agate-icon-sprite-huge-size);
 			width: @agate-icon-huge-size;
 			height: @agate-icon-huge-size;
 			font-size: @agate-icon-huge-font-size;
@@ -29,8 +44,8 @@
 		}
 
 		&.small {
-			background-position: center -((@agate-icon-sprite-small-size - @agate-icon-small-size) / 2);
-			background-size: @agate-icon-sprite-small-size (@agate-icon-sprite-small-size * 2);
+			.icon-sprite-offset(@agate-icon-sprite-small-size, 0);
+			background-size: @agate-icon-sprite-small-size calc(var(--agate-icon-sprite-count, 1) * @agate-icon-sprite-small-size);
 			width: @agate-icon-small-size;
 			height: @agate-icon-small-size;
 			font-size: @agate-icon-small-font-size;
@@ -48,5 +63,34 @@
 			}
 		}
 
+		// For when this icon is focused
+		.focus({
+			.icon-sprite-offset(@agate-icon-sprite-size, 1);
+
+			&.huge {
+				.icon-sprite-offset(@agate-icon-sprite-huge-size, 1);
+			}
+
+			&.small {
+				.icon-sprite-offset(@agate-icon-sprite-small-size, 1);
+			}
+		});
 	});
 }
+
+// For when this icon's *PARENT* is focused
+.focus({
+	.icon {
+		.applySkins({
+			.icon-sprite-offset(@agate-icon-sprite-size, 1);
+
+			&.huge {
+				.icon-sprite-offset(@agate-icon-sprite-huge-size, 1);
+			}
+
+			&.small {
+				.icon-sprite-offset(@agate-icon-sprite-small-size, 1);
+			}
+		});
+	}
+}, parent);

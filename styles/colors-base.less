@@ -1,58 +1,95 @@
-// Skin colors definitions
+//
+// #### Agate Base Skin Defaults ####
+//
+// A skin which establishes common, shared default values for all skins.
+//
+// ### CAUTION: ###
+// It is extremely important to be careful, thorough, and considerate when altering any value in
+// this file. It is very easy to make an innocuous change here which has deep consequences for the
+// other skins.
+//
+//
+// ## Overview
+//
+// This file establishes default values for all Agate skins. Any skin is allowed to override any of
+// these values to customize itself. Additionally, skins may choose to only override a few of these
+// variables for its own convenience.
+//
+//
+// ## Maintenance
+//
+// When adding a new property to a component, a default must be established here in this file.
+// Overrides of this value may then be added to any/all of the other skins, but that's completely
+// optional.
+//
+// New variables in this file should use the true CSS default value (`inherit`) for the given
+// property or refer to a logical relationship between variables, e.g. assigning one variable to
+// another variable.
 //
 
 
+//
+// Colors
+//
+
 // Named Colors
-@agate-accent: var(--agate-accent-color, fade(black, 10%));
-@agate-highlight: var(--agate-highlight-color, #2a48ca);
-@agate-background: fade(black, 30%);
-@agate-foreground: lighten(black, 30%);
-@agate-background-active: fade(black, 15%);
-@agate-foreground-active: lighten(black, 15%);
-@agate-background-focus: @agate-highlight;
-@agate-foreground-focus: white;
-@agate-gradient: linear-gradient(to bottom, white, @agate-accent);
-@agate-darker-gray: #262626;
-@agate-dark-gray:   #4d4d4d;
-@agate-gray:        #a6a6a6;
-@agate-light-gray:  #ededed;
+@agate-accent: var(--agate-accent-color, #fc0); // hsl(45, 100%, 50%)
+@agate-accent-h: var(--agate-accent-h, 45);
+@agate-accent-s: var(--agate-accent-s, 100%);
+@agate-accent-l: var(--agate-accent-l, 50%);
+@agate-highlight: var(--agate-highlight-color, #fff);
+@agate-highlight-h: var(--agate-highlight-h, 0);
+@agate-highlight-s: var(--agate-highlight-s, 0%);
+@agate-highlight-l: var(--agate-highlight-l, 100%);
+@agate-background: inherit;
+@agate-foreground: inherit;
+@agate-background-active: inherit;
+@agate-foreground-active: white;
+@agate-background-focus: inherit;
+@agate-foreground-focus: inherit;
+@agate-gradient: inherit;
+@agate-black:       #000;
+@agate-darker-gray: #333;
+@agate-dark-gray:   #444;
+@agate-gray:        #666;
+@agate-light-gray:  #ccc;
 @agate-white:       #fff;
 
 // Component color assignments
-@agate-bg-color: #ddd;
-@agate-bg-image: none;
-@agate-bg-image2: none;
-@agate-text-color: @agate-foreground;
-@agate-title-text-color: white;
+@agate-bg-color: inherit;
+@agate-bg-image: inherit;
+@agate-bg-image2: inherit;
+@agate-text-color: inherit;
+@agate-title-text-color: inherit;
 
 // Disabled Opacity
 // ---------------------------------------
-@agate-disabled-opacity: 0.6;
-@agate-disabled-translucent-opacity: 0.4;
+@agate-disabled-opacity: inherit;
+@agate-disabled-translucent-opacity: inherit;
 
 // Spotlight and State
 // ---------------------------------------
-@agate-spotlight-color:                @agate-foreground-focus;
-@agate-spotlight-bg-color:             @agate-background-focus;
-@agate-spotlight-border-color:         transparent;
-@agate-spotlight-disabled-text-color:  fade(@agate-spotlight-color, 40%); // ~"hsla(var(--agate-highlight-h, 0), var(--agate-highlight-s, 0), var(--agate-highlight-l, 0), 0.2)"; // @agate-spotlight-color; // fade(@agate-spotlight-color, 40%);
-@agate-spotlight-focus-bg-image: none;
+@agate-spotlight-color:                inherit;
+@agate-spotlight-bg-color:             inherit;
+@agate-spotlight-border-color:         inherit;
+@agate-spotlight-disabled-text-color:  inherit;
+@agate-spotlight-focus-bg-image:       inherit;
 
 // Button
 // ---------------------------------------
-@agate-button-color:          @agate-foreground;
-@agate-button-bg-color:       fade(white, 50%);
-@agate-button-bg-image:       linear-gradient(to bottom, transparent, fade(black, 15%), transparent);
-@agate-button-border-color:   @agate-accent;
-@agate-button-shadow:         0 1px 3px @agate-accent;
-@agate-button-focus-color:    @agate-foreground-focus;
-@agate-button-focus-bg-color: @agate-background-focus;
-@agate-button-focus-bg-image: linear-gradient(to bottom, transparent, fade(white, 15%) 14%, transparent);
+@agate-button-color:          inherit;
+@agate-button-bg-color:       inherit;
+@agate-button-bg-image:       inherit;
+@agate-button-border-color:   inherit;
+@agate-button-shadow:         inherit;
+@agate-button-focus-color:    inherit;
+@agate-button-focus-bg-color: inherit;
+@agate-button-focus-bg-image: inherit;
 @agate-button-highlighted-color: @agate-button-selected-color;
-@agate-button-highlighted-bg-color: @agate-background-focus;
-@agate-button-highlighted-bg-image: linear-gradient(to bottom, transparent, fade(white, 15%) 14%, transparent);
-@agate-button-selected-bg-color: @agate-accent;
-@agate-button-selected-color: @agate-foreground-active;
+@agate-button-highlighted-bg-color: inherit;
+@agate-button-highlighted-bg-image: inherit;
+@agate-button-selected-bg-color: inherit;
+@agate-button-selected-color: inherit;
 
 // ColorPicker
 // ---------------------------------------
@@ -61,24 +98,30 @@
 
 // Divider
 // ---------------------------------------
-@agate-divider-color:        @agate-text-color;
-@agate-divider-border-color: @agate-accent;
+@agate-divider-color:        inherit;
+@agate-divider-border-color: inherit;
 
 // Drawer
 // ---------------------------------------
 @agate-drawer-bg-color: @agate-popup-bg-color;
-@agate-drawer-bg-image: @agate-popup-bg-image;
+@agate-drawer-bg-image: inherit;
 @agate-drawer-border-color: @agate-popup-border-color;
-@agate-drawer-shadow: @agate-popup-shadow;
+@agate-drawer-shadow: inherit;
 
 // FullscreenPopup
 // ---------------------------------------
 @agate-fullscreenpopup-bg-color: @agate-popup-bg-color;
-@agate-fullscreenpopup-bg-image: @agate-bg-image;
+@agate-fullscreenpopup-bg-image: inherit;
+
+// Heading
+// ---------------------------------------
+@agate-heading-border-color: inherit;
+@agate-heading-text-color: @agate-text-color;
+@agate-heading-accent-color: inherit;
 
 // Icon
 // ---------------------------------------
-@agate-icon-color:       @agate-text-color;
+@agate-icon-color: @agate-text-color;
 
 // IconButton
 // ---------------------------------------
@@ -94,31 +137,31 @@
 @agate-iconbutton-highlighted-bg-image: @agate-button-highlighted-bg-image;
 @agate-iconbutton-selected-bg-color: @agate-button-selected-bg-color;
 @agate-iconbutton-selected-color: @agate-button-selected-color;
-@agate-iconbutton-selected-border-color: transparent;
 
 // Input
 // ---------------------------------------
-@agate-input-decorator-border-color:          @agate-background-active;
-@agate-input-decorator-focused-border-color:  @agate-accent;
-@agate-input-focused-background-color:         @agate-accent;
-@agate-input-focused-background-image:         none;
-@agate-input-focused-text-color:               @agate-foreground-active;
-@agate-input-placeholder-color:               fade(@agate-foreground, 80%);
-@agate-input-text-color:                      @agate-foreground;
+@agate-input-decorator-border-color:          inherit;
+@agate-input-decorator-focused-border-color:  inherit;
+@agate-input-focused-background-color:        inherit;
+@agate-input-focused-background-image:        inherit;
+@agate-input-focused-text-color:              inherit;
+@agate-input-placeholder-color:               inherit;
+@agate-input-text-color:                      inherit;
 
 // Item
 // ---------------------------------------
-@agate-item-color:       inherit;
-@agate-item-label-color: @agate-accent;
-@agate-item-focus-bg-color: @agate-spotlight-bg-color;
-@agate-item-focus-color: @agate-spotlight-color;
-@agate-item-selected-color: @agate-item-label-color;
-@agate-item-selected-outline: 5px solid @agate-item-focus-bg-color;
+@agate-item-color: inherit;
+@agate-item-focus-bg-color: inherit;
+@agate-item-focus-color: @agate-item-color;
 
 // LabeledIconButton
 // ---------------------------------------
-@agate-labelediconbutton-label-color: @agate-white;
-@agate-labelediconbutton-label-focus-color: @agate-text-color;
+@agate-labelediconbutton-label-color: @agate-text-color;
+@agate-labelediconbutton-label-focus-color: inherit;
+
+// LabeledItem
+// ---------------------------------------
+@agate-labeleditem-label-color: @agate-text-color;
 
 // SwitchItem
 // ---------------------------------------
@@ -126,89 +169,97 @@
 
 // Panels
 // ---------------------------------------
-@agate-panels-tab-separator-border-color: transparent;
-@agate-panels-tab-color:              fade(black, 50%);
-@agate-panels-tab-bg-color:           lighten(@agate-bg-color, 5%);
-@agate-panels-tab-bg-image:           none;
-@agate-panels-tab-selected-color:     @agate-foreground-active;
-@agate-panels-tab-selected-bg-color:  @agate-bg-color;
-@agate-panels-tab-selected-bg-image:  @agate-panels-tab-bg-image;
+@agate-panels-bg-color:               inherit;
+@agate-panels-breadcrumb-bg-color:    inherit;
+@agate-panels-tab-separator-border-color: inherit;
+@agate-panels-tab-color:              @agate-text-color;
+@agate-panels-tab-bg-color:           inherit;
+@agate-panels-tab-bg-image:           inherit;
+@agate-panels-tab-selected-color:     inherit;
+@agate-panels-tab-selected-bg-color:  inherit;
+@agate-panels-tab-selected-bg-image:  inherit;
 @agate-panels-tab-focus-color:        @agate-text-color;
-@agate-panels-tab-focus-bg-color:     transparent;
-@agate-panels-tab-focus-bg-image:     @agate-panels-tab-bg-image;
+@agate-panels-tab-focus-bg-color:     inherit;
+@agate-panels-tab-focus-bg-image:     inherit;
 
 // Picker
 // ---------------------------------------
 @agate-picker-active-color: inherit;
-@agate-picker-active-bg-color: @agate-accent;
-@agate-picker-active-bg-image: none;
-@agate-picker-item-top-bg-color: none;
-@agate-picker-item-top-bg-image: none;
-@agate-picker-item-bottom-bg-color: none;
-@agate-picker-item-bottom-bg-image: none;
-@agate-picker-item-focus-color: @agate-text-color;
-@agate-picker-item-focus-bg-color: @agate-accent;
+@agate-picker-active-bg-color: inherit;
+@agate-picker-active-bg-image: inherit;
+@agate-picker-item-top-bg-color: inherit;
+@agate-picker-item-top-bg-image: inherit;
+@agate-picker-item-bottom-bg-color: inherit;
+@agate-picker-item-bottom-bg-image: inherit;
+@agate-picker-item-focus-color: inherit;
+@agate-picker-item-focus-bg-color: inherit;
 @agate-picker-item-focus-bg-image: inherit;
 
 // Popup
 // ---------------------------------------
 @agate-popup-plain-body-color: @agate-text-color;
-@agate-popup-bg-color: @agate-bg-color;
-@agate-popup-bg-image: none;
-@agate-popup-border-color: @agate-accent;
-@agate-popup-shadow: 0 3px 9px fade(black, 30%);
-@agate-popup-body-border-color: @agate-accent;
-@agate-popup-body-bg-color: fade(black, 5%);
-@agate-popup-body-bg-image: none;
+@agate-popup-bg-color: inherit;
+@agate-popup-bg-image: inherit;
+@agate-popup-border-color: inherit;
+@agate-popup-shadow: inherit;
+@agate-popup-body-border: inherit;
+@agate-popup-body-border-color: inherit;
+@agate-popup-body-bg-color: inherit;
+@agate-popup-body-bg-image: inherit;
+
+// PopupMenu
+// ---------------------------------------
+@agate-popupmenu-bg-color: inherit;
+@agate-popupmenu-bg-image: inherit;
 
 // ProgressBar
 // ---------------------------------------
-@agate-progressbar-track-bg-color: @agate-accent;
+@agate-progressbar-track-bg-color: inherit;
 @agate-progressbar-track-bg-image: @agate-slider-track-bg-image;
-@agate-progressbar-fill-bg-color: @agate-highlight;
+@agate-progressbar-fill-bg-color: inherit;
 @agate-progressbar-fill-bg-image: @agate-slider-fill-bg-image;
 @agate-progressbar-vertical-fill-bg-image: @agate-progressbar-fill-bg-image;
 
 // RadioItem
 // ---------------------------------------
 @agate-radioitem-color: @agate-item-color;
-@agate-radioitem-focus-color: @agate-foreground-focus;
+@agate-radioitem-focus-color: inherit;
 @agate-radioitem-separator-border-color: @agate-divider-border-color;
-@agate-radioitem-icon-border-color: @agate-button-border-color;
-@agate-radioitem-icon-bg-color: transparent;
+@agate-radioitem-icon-border-color: inherit;
+@agate-radioitem-icon-bg-color: inherit;
 @agate-radioitem-icon-focus-bg-color: @agate-radioitem-icon-bg-color;
-@agate-radioitem-icon-focus-color: @agate-foreground-focus;
+@agate-radioitem-icon-focus-color: inherit;
 @agate-radioitem-icon-selected-bg-color: @agate-radioitem-icon-bg-color;
 @agate-radioitem-icon-selected-color: @agate-item-color;
 
 // Slider
 // ---------------------------------------
 @agate-slider-color:          @agate-text-color;
-@agate-slider-bg-color:       @agate-accent;
-@agate-slider-bg-image:       linear-gradient(to top, transparent, fade(black, 5%));
-@agate-slider-track-bg-color: transparent;
-@agate-slider-track-bg-image: none;
+@agate-slider-bg-color:       inherit;
+@agate-slider-bg-image:       inherit;
+@agate-slider-track-bg-color: inherit;
+@agate-slider-track-bg-image: inherit;
 @agate-slider-track-focus-bg-color: @agate-slider-track-bg-color;
 @agate-slider-track-focus-bg-image: @agate-slider-track-bg-image;
-@agate-slider-fill-bg-color:  transparent;
-@agate-slider-fill-bg-image:  none;
+@agate-slider-fill-bg-color:  inherit;
+@agate-slider-fill-bg-image:  inherit;
 @agate-slider-focus-color:    @agate-slider-color;
 @agate-slider-focus-bg-color: @agate-slider-bg-color;
 @agate-slider-focus-bg-image: @agate-slider-bg-image;
-@agate-slider-knob-bg-color:  lighten(@agate-bg-color, 10%);
-@agate-slider-knob-bg-image:  linear-gradient(to bottom, transparent, fade(black, 10%));
-@agate-slider-knob-focus-bg-color: lighten(@agate-slider-knob-bg-color, 2%);
+@agate-slider-knob-bg-color:  inherit;
+@agate-slider-knob-bg-image:  inherit;
+@agate-slider-knob-focus-bg-color: inherit;
 @agate-slider-knob-focus-bg-image: @agate-slider-knob-bg-image;
-@agate-slider-knob-shadow:    0 1px 3px 1px fade(black, 30%);
-@agate-slider-knob-focus-shadow: 0 3px 9px 3px fade(black, 30%);
+@agate-slider-knob-shadow:    inherit;
+@agate-slider-knob-focus-shadow: inherit;
 
 // IncrementSlider
 // ---------------------------------------
 @agate-incrementslider-button-color: inherit;
-@agate-incrementslider-horizontal-button-decrement-border-color: transparent;
+@agate-incrementslider-horizontal-button-decrement-border-color: inherit;
 @agate-incrementslider-horizontal-button-decrement-bg-color: @agate-slider-bg-color;
 @agate-incrementslider-horizontal-button-decrement-bg-image: @agate-slider-bg-image;
-@agate-incrementslider-horizontal-button-decrement-shadow: none;
+@agate-incrementslider-horizontal-button-decrement-shadow: inherit;
 @agate-incrementslider-horizontal-button-decrement-focus-bg-color: @agate-button-focus-bg-color;
 @agate-incrementslider-horizontal-button-decrement-focus-bg-image: @agate-button-focus-bg-image;
 @agate-incrementslider-horizontal-button-increment-border-color: @agate-incrementslider-horizontal-button-decrement-border-color;
@@ -232,7 +283,7 @@
 
 // SliderButton
 // ---------------------------------------
-@agate-sliderbutton-color:          @agate-slider-color;
+@agate-sliderbutton-color:          inherit;
 @agate-sliderbutton-bg-color:       @agate-slider-bg-color;
 @agate-sliderbutton-bg-image:       @agate-slider-bg-image;
 @agate-sliderbutton-focus-color:    @agate-slider-focus-color;
@@ -245,34 +296,34 @@
 
 // Spinner
 // ---------------------------------------
-@agate-spinner-light-color: @agate-white;
-@agate-spinner-dark-color: @agate-darker-gray;
+@agate-spinner-light-color: inherit;
+@agate-spinner-dark-color: inherit;
 
 // Switch
 // ---------------------------------------
-@agate-switch-bg-color: @agate-foreground;
-@agate-switch-selected-bg-color: @agate-accent;
-@agate-switch-selected-focus-bg-color: @agate-switch-selected-bg-color;
-@agate-switch-color: @agate-title-text-color;
-@agate-switch-selected-color: @agate-title-text-color;
-@agate-switch-focus-bg-color: @agate-text-color;
-@agate-switch-focus-color: @agate-title-text-color;
+@agate-switch-bg-color: inherit;
+@agate-switch-color: inherit;
+@agate-switch-focus-bg-color: @agate-switch-bg-color;
+@agate-switch-focus-color: @agate-switch-color;
 @agate-switch-label-color: @agate-item-color;
+@agate-switch-selected-bg-color: inherit;
+@agate-switch-selected-color: inherit;
+@agate-switch-selected-focus-bg-color: @agate-switch-selected-bg-color;
 
 // Toggle Colors
 // ---------------------------------------
-@agate-togglebutton-indicator-off-bg-color: @agate-gray;
-@agate-togglebutton-indicator-on-bg-color: @agate-highlight;
-@agate-togglebutton-indicator-off-border-color: transparent;
-@agate-togglebutton-indicator-on-border-color: @agate-highlight;
-@agate-togglebutton-indicator-off-focus-bg-color: @agate-togglebutton-indicator-off-bg-color;
-@agate-togglebutton-indicator-on-focus-bg-color: @agate-white;
-@agate-togglebutton-indicator-off-focus-border-color: @agate-togglebutton-indicator-on-focus-border-color;
-@agate-togglebutton-indicator-on-focus-border-color: @agate-light-gray;
-@agate-togglebutton-indicator-disabled-off-bg-color: @agate-darker-gray;
-@agate-togglebutton-indicator-disabled-on-bg-color: @agate-togglebutton-indicator-disabled-off-bg-color;
-@agate-togglebutton-indicator-disabled-off-border-color: #6c6c6c;
-@agate-togglebutton-indicator-disabled-on-border-color: @agate-togglebutton-indicator-disabled-off-border-color;
+@agate-togglebutton-indicator-off-bg-color: inherit;
+@agate-togglebutton-indicator-on-bg-color: inherit;
+@agate-togglebutton-indicator-off-border-color: inherit;
+@agate-togglebutton-indicator-on-border-color: inherit;
+@agate-togglebutton-indicator-off-focus-bg-color: inherit;
+@agate-togglebutton-indicator-on-focus-bg-color: inherit;
+@agate-togglebutton-indicator-off-focus-border-color: inherit;
+@agate-togglebutton-indicator-on-focus-border-color: inherit;
+@agate-togglebutton-indicator-disabled-off-bg-color: inherit;
+@agate-togglebutton-indicator-disabled-on-bg-color: inherit;
+@agate-togglebutton-indicator-disabled-off-border-color: inherit;
+@agate-togglebutton-indicator-disabled-on-border-color: inherit;
 @agate-togglebutton-color: @agate-button-color;
 @agate-togglebutton-bg-color: @agate-button-bg-color;
 @agate-togglebutton-selected-color: @agate-button-selected-color;
@@ -280,4 +331,4 @@
 
 // Scroller
 // ---------------------------------------
-@agate-scroller-scrollthumb-bg-color: #373737;
+@agate-scroller-scrollthumb-bg-color: inherit;

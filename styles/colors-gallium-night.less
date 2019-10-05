@@ -95,18 +95,19 @@
 
 // IconButton
 // ---------------------------------------
-@agate-iconbutton-color: @agate-button-color;
-@agate-iconbutton-bg-color: @agate-button-bg-color;
+@agate-iconbutton-color: @agate-black;
+@agate-iconbutton-bg-color: @agate-white;
 @agate-iconbutton-bg-image: @agate-button-bg-image;
-@agate-iconbutton-border-color: @agate-button-border-color;
+@agate-iconbutton-border-color: transparent;
 @agate-iconbutton-shadow: @agate-button-shadow;
 @agate-iconbutton-focus-color: @agate-button-focus-color;
 @agate-iconbutton-focus-bg-color: @agate-button-focus-bg-color;
 @agate-iconbutton-focus-bg-image: @agate-button-focus-bg-image;
 @agate-iconbutton-highlighted-bg-color: @agate-button-highlighted-bg-color;
 @agate-iconbutton-highlighted-bg-image: @agate-button-highlighted-bg-image;
-@agate-iconbutton-selected-bg-color: @agate-button-selected-bg-color;
+@agate-iconbutton-selected-bg-color: @agate-iconbutton-bg-color;
 @agate-iconbutton-selected-color: @agate-button-selected-color;
+@agate-iconbutton-selected-border-color: @agate-button-border-color;
 
 // Input
 // ---------------------------------------
@@ -121,16 +122,16 @@
 // Item
 // ---------------------------------------
 @agate-item-color:           @agate-text-color;
+@agate-item-label-color:     @agate-accent;
 @agate-item-focus-bg-color:  @agate-spotlight-bg-color;
 @agate-item-focus-color:     @agate-spotlight-color;
+@agate-item-selected-color: @agate-item-label-color;
+@agate-item-selected-outline: 5px solid @agate-item-focus-bg-color;
 
-// LabeledItem
+// LabeledIconButton
 // ---------------------------------------
-@agate-labelediconbutton-color: @agate-accent;
-
-// LabeledItem
-// ---------------------------------------
-@agate-labeleditem-label-color: @agate-text-color;
+@agate-labelediconbutton-label-color: @agate-white;
+@agate-labelediconbutton-label-focus-color: @agate-accent;
 
 // SwitchItem
 // ---------------------------------------

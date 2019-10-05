@@ -11,10 +11,10 @@ import compose from 'ramda/src/compose';
 
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
-import {Row, Cell} from '@enact/ui/Layout';
 import Toggleable from '@enact/ui/Toggleable';
 
 import Icon from '../Icon';
+import Item from '../Item';
 import Skinnable from '../Skinnable';
 import {SwitchBase} from '../Switch';
 
@@ -100,26 +100,22 @@ const SwitchItemBase = kind({
 	},
 
 	computed: {
-		icon: ({css, icon}) => (icon ? <Cell shrink>
-			<Icon size="small" className={css.icon}>
+		icon: ({css, icon}) => (icon ?
+			<Icon size="small" slot="slotBefore" className={css.icon}>
 				{icon}
-			</Icon>
-		</Cell> : null)
+			</Icon> :
+			null
+		)
 	},
 
 	render: ({children, css, icon, offText, onText, selected, ...rest}) => {
 
 		return (
-			<Row align="center" {...rest}>
+			<Item {...rest} css={css} label={selected ? onText : offText} labelPosition="after">
 				{icon}
-				<Cell className={css.text}>
-					{children}
-				</Cell>
-				<Cell shrink className={css.label}>
-					{selected ? onText : offText}
-				</Cell>
-				<Cell shrink component={Switch} selected={selected} className={css.switchIcon} />
-			</Row>
+				{children}
+				<Switch slot="slotAfter" selected={selected} className={css.switchIcon} />
+			</Item>
 		);
 	}
 });
