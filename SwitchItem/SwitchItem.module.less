@@ -12,36 +12,4 @@
 		margin-left: 10px;
 		pointer-events: none;
 	}
-
-	.applySkins({
-		border-bottom: @agate-divider-border-width solid @agate-divider-border-color;
-		.agate-item-sizing();
-
-		.text {
-			color: @agate-item-color;
-		}
-
-		.label {
-			.margin-start-end(0, @agate-component-spacing);
-			font-weight: 500;	// Covert to var
-			color: @agate-switch-label-color;
-
-			.disabled({
-				color: inherit;
-			});
-
-		}
-		.focus({
-			background-color: @agate-item-focus-bg-color;
-			color: @agate-switch-focus-color;
-
-			.text {
-				color: @agate-switch-focus-color;
-			}
-
-			.label {
-				color: @agate-switch-focus-color;
-			}
-		})
-	});
 }
