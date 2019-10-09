@@ -95,7 +95,7 @@
 // ---------------------------------------
 @agate-heading-border-width: 3px;
 @agate-heading-margin: 0 @agate-spotlight-outset (1.5 * @agate-spotlight-outset) @agate-spotlight-outset;
-@agate-heading-padding: 30px 0;
+@agate-heading-padding: 3px 0;
 @agate-heading-showline-padding: 12px;
 @agate-heading-letter-spacing: normal;
 @agate-heading-line-height: 1.6em;
@@ -108,7 +108,7 @@
 @agate-heading-large-font-style: normal;
 @agate-heading-large-font-weight: bold;
 @agate-heading-medium-font-family: @agate-base-font-family;
-@agate-heading-medium-font-size: 32px;
+@agate-heading-medium-font-size: 30px;
 @agate-heading-medium-font-style: normal;
 @agate-heading-medium-font-weight: bold;
 @agate-heading-small-font-family: @agate-base-font-family;
@@ -116,9 +116,9 @@
 @agate-heading-small-font-style: normal;
 @agate-heading-small-font-weight: bold;
 @agate-heading-spacing-title: 0;
-@agate-heading-spacing-large: 24px;
-@agate-heading-spacing-medium: 24px;
-@agate-heading-spacing-small: 12px;
+@agate-heading-spacing-large: 0;
+@agate-heading-spacing-medium: 0;
+@agate-heading-spacing-small: 0;
 @agate-heading-title-padding: @agate-heading-padding 50px;
 @agate-heading-title-decoration-height: 28px;
 @agate-heading-title-decoration-width: auto;
@@ -353,14 +353,14 @@
 
 // Switch
 // ---------------------------------------
-@agate-switch-height: 48px;
-@agate-switch-width: 96px;
-@agate-switch-border-radius: 6px;
-@agate-switch-icon-scale: 2;
+@agate-switch-height: 40px;
+@agate-switch-width: 68px;
+@agate-switch-border-radius: 999px;
+@agate-switch-icon-scale: 3;
 @agate-switch-icon-font-family: @agate-icon-font-family;
 @agate-switch-icon-font-size: (@agate-switch-height * @agate-switch-icon-scale);
-@agate-switch-icon-position-left: 0;
-@agate-switch-selected-icon-position-left: (@agate-switch-width - @agate-switch-height);
+@agate-switch-icon-position-left: -9px;
+@agate-switch-selected-icon-position-left: ((@agate-switch-width - @agate-switch-height) + @agate-switch-icon-position-left);
 
 // ToggleButton
 // ---------------------------------------
