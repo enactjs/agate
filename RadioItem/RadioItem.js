@@ -7,15 +7,15 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
-import Icon from '../Icon';
-import Skinnable from '../Skinnable';
-
 import Spottable from '@enact/spotlight/Spottable';
 import Toggleable from '@enact/ui/Toggleable';
 import Touchable from '@enact/ui/Touchable';
-import compose from 'ramda/src/compose';
+
+import Icon from '../Icon';
+import Item from '../Item';
+import Skinnable from '../Skinnable';
 
 import componentCss from './RadioItem.module.less';
 
@@ -86,14 +86,10 @@ const RadioItemBase = kind({
 		delete rest.selected;
 
 		return (
-			<div {...rest} css={css}>
-				<Icon className={css.icon} size="small">{icon}</Icon>
-				<div
-					className={css.text}
-				>
-					{children}
-				</div>
-			</div>
+			<Item {...rest} css={css}>
+				<Icon slot="slotBefore" className={css.icon} size="small">{icon}</Icon>
+				{children}
+			</Item>
 		);
 	}
 });
