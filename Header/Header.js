@@ -14,7 +14,7 @@
 import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Column, Row, Layout} from '@enact/ui/Layout';
+import {Column, Row, Cell} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 
 import Skinnable from '../Skinnable';
@@ -105,30 +105,47 @@ const HeaderBase = kind({
 	},
 
 	computed: {
-		className: ({hideLine, styler}) => styler.append({hideLine, standard: true}),
-		subtitleComponent: ({css, subtitle}) => {
-			return (subtitle != null && subtitle !== '') ? <h2 className={css.subtitle}>{subtitle}</h2> : null;
-		},
-		titleAboveComponent: ({css, titleAbove}) => {
-			return (titleAbove != null && titleAbove !== '') ? <h2 className={css.titleAbove}>{titleAbove}</h2> : null;
-		}
+		className: ({hideLine, styler}) => styler.append({hideLine, standard: true})
+		// subtitleComponent: ({css, subtitle}) => {
+		// 	return (subtitle != null && subtitle !== '') ? <Cell shrink component="h2" className={css.subtitle}>{subtitle}</Cell> : null;
+		// },
+		// titleAboveComponent: ({css, titleAbove}) => {
+		// 	return (titleAbove != null && titleAbove !== '') ? <Cell shrink component="h2" className={css.titleAbove}>{titleAbove}</Cell> : null;
+		// }
 	},
 
-	render: ({children, css, title, titleAboveComponent, subtitleComponent, ...rest}) => {
+	render: ({children, css, title, titleAbove, subtitle, ...rest}) => {
 		delete rest.hideLine;
-		delete rest.subtitle;
-		delete rest.titleAbove;
+		// delete rest.subtitle;
+		// delete rest.titleAbove;
 
 		return (
 			<Row component="header" aria-label={title} {...rest}>
-				<Column className={css.titleContainer}>
-					{titleAboveComponent}
-					<h1 className={css.title}>{title}</h1>
-					{subtitleComponent}
+				<Column
+					className={css.titleContainer}
+					cellProps={[
+						{component: 'h2', shrink: true, className: css.titleAbove},
+						{component: 'h1', className: css.title},
+						{component: 'h2', shrink: true,  className: css.subtitle}
+					]}
+				>
+					{titleAbove}
+					{title}
+					{subtitle}
 				</Column>
-				{children ? <Layout className={css.endSlot}>{children}</Layout> : null}
+				{children ? <Row align="center">{children}</Row> : null}
 			</Row>
 		);
+		// return (
+		// 	<Row component="header" aria-label={title} {...rest}>
+		// 		<Column className={css.titleContainer} cellProps={[{component: 'h2', shrink: true, className: css.titleAbove}, {component: 'h1'}, {component: 'h2', shrink: true}]}>
+		// 			{titleAboveComponent}
+		// 			<Cell component="h1" className={css.title}>{title}</Cell>
+		// 			{subtitleComponent}
+		// 		</Column>
+		// 		{children ? <Row align="center">{children}</Row> : null}
+		// 	</Row>
+		// );
 	}
 });
 
