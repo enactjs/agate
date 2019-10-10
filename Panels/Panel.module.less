@@ -1,7 +1,7 @@
 // Panel.module.less
 //
-@import '../styles/variables.less';
-@import '../styles/skin.less';
+@import "../styles/variables.less";
+@import "../styles/skin.less";
 
 .panel {
 	position: absolute;
@@ -38,10 +38,13 @@
 	}
 
 	.applySkins({
-		.header,
+		padding: @agate-panels-panel-padding;
+
+		.header {
+			padding: @agate-panels-panel-header-padding;
+		}
 		.body {
-			padding: @agate-panels-panel-padding;
+			padding: @agate-panels-panel-body-padding;
 		}
 	});
 }
-
