@@ -5,13 +5,8 @@
 
 // Public
 .radioItem {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-
 	.applySkins({
 		border-bottom: @agate-radioitem-separator-border-width solid @agate-radioitem-separator-border-color;
-		.agate-item-sizing();
 
 		.icon {
 			border-color: @agate-radioitem-icon-border-color;
@@ -22,21 +17,12 @@
 			color: transparent;
 		}
 
-		.text {
-			color: @agate-radioitem-color;
-			flex: 1;
-		}
-
 		.focus({
 			color: @agate-radioitem-focus-color;
 
 			.icon {
 				color: @agate-radioitem-icon-focus-color;
 				background-color: @agate-radioitem-icon-focus-bg-color;
-			}
-
-			.text {
-				color: @agate-radioitem-focus-color;
 			}
 		});
 
