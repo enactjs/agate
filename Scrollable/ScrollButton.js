@@ -107,7 +107,7 @@ const ScrollButtonBase = kind({
 				backgroundOpacity="transparent"
 				disabled={disabled}
 				ref={forwardRef}
-				size="smallest"
+				size="small"
 			>
 				{children}
 			</IconButton>
