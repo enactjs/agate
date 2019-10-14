@@ -23,7 +23,7 @@ import Skinnable from '../Skinnable';
 import componentCss from './Spinner.module.less';
 
 /**
- * A component that shows spinning fan.
+ * A component that shows spinning fan. Or bouncing 🏀🎾🏐⚽️.
  *
  * @class SpinnerCore
  * @memberof agate/Spinner
@@ -70,7 +70,7 @@ const SpinnerCore = kind({
 		className: ({styler, type}) => styler.append(type),
 		spinnerNodes: ({styler, type}) => {
 			return Array.from({length: type === 'searching' ? 12 : 4}, (_, index) => (
-				<span className={styler.join('fan', `fan${index + 1}`)} key={`fan${index}`} />
+				<span className={styler.join('node', `node${index + 1}`)} key={`node${index}`} />
 			));
 		}
 	},
@@ -116,7 +116,7 @@ const SpinnerBase = kind({
 		 * The following classes are supported:
 		 *
 		 * * `spinner` - The root component class, unless there is a scrim. The scrim and floating
-		 *   layer can be a sibbling or parent to this root "spinner" element.
+		 *   layer can be a sibling or parent to this root "spinner" element.
 		 *
 		 * @type {Object}
 		 * @public
