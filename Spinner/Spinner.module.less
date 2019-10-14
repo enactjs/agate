@@ -46,7 +46,7 @@
 	// Shorter offset = resembles a bouncing line
 	// Longer offset = more chaotic looking bounce
 	@time-offset: -50ms;
-	@delay-offset: (@index * @time-offset);
+	@delay-offset: ((@elements - @index) * @time-offset);
 
 	.node:nth-child(@{index}) {
 		animation-delay: @delay-offset;
