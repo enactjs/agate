@@ -129,11 +129,11 @@ const SpinnerBase = kind({
 		 * Recommended usage is "medium" (default) for standalone and popup scenarios, while "small"
 		 * is best suited for use inside other elements, like {@link agate/SlotItem.SlotItem}.
 		 *
-		 * @type {('medium'|'small')}
+		 * @type {('huge'|'medium'|'small'|'smallest')}
 		 * @default 'medium'
 		 * @public
 		 */
-		size: PropTypes.oneOf(['medium', 'small']),
+		size: PropTypes.oneOf(['huge', 'medium', 'small', 'smallest']),
 
 		/**
 		 * Removes the background color (making it transparent).

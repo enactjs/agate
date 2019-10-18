@@ -20,8 +20,21 @@ import React from 'react';
 import {ButtonBase, ButtonDecorator} from '../Button';
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
+import Spinner from '../Spinner';
 
 import componentCss from './IconButton.module.less';
+
+const spinnerColor = {
+	'carbon': 'light',
+	'cobalt': 'dark',
+	'cobalt-day': 'dark',
+	'copper': 'light',
+	'copper-day': 'light',
+	'electro': 'light',
+	'gallium-day': 'light',
+	'gallium-night': 'dark',
+	'titanium': 'dark'
+}
 
 /**
  * A button component.
@@ -75,12 +88,28 @@ const IconButtonBase = kind({
 		selected: PropTypes.bool,
 
 		/**
-		 * Size of the IconButon
+		 * Size of the IconButton.
+		 *
+		 * @type {('smallest'|'small'|'large'|'huge')}
+		 * @public
+		 */
+		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
+
+		/**
+		 * The currently applied skin.
 		 *
 		 * @type {String}
 		 * @public
 		 */
-		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
+		skin: PropTypes.string,
+
+		/**
+		 * Spinner that'll appear in the place of Icon.
+		 *
+		 * @type {('none'|'loading'|'searching')}
+		 * @public
+		 */
+		spinner: PropTypes.oneOf(['none', 'loading', 'searching']),
 
 		/**
 		 * The amount of sprite "cells" in the src image.
@@ -94,7 +123,7 @@ const IconButtonBase = kind({
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
 		 * other related buttons.
 		 *
-		 * @type {String}
+		 * @type {('grid'|'standard')}
 		 * @public
 		 */
 		type: PropTypes.oneOf(['grid', 'standard'])
@@ -102,6 +131,7 @@ const IconButtonBase = kind({
 
 	defaultProps: {
 		size: 'large',
+		spinner: 'none',
 		type: 'standard'
 	},
 
@@ -116,8 +146,10 @@ const IconButtonBase = kind({
 			size,
 			{highlighted, selected}
 		),
-		icon: ({children, css, size, spriteCount}) => (
+		icon: ({children, css, size, skin, spinner, spriteCount}) => spinner === 'none' || !spinner ? (
 			<Icon css={css} size={size} className={css.icon} spriteCount={spriteCount}>{children}</Icon>
+		) : (
+			<Spinner color={spinnerColor[skin]} size={size} type={spinner} />
 		),
 		minWidth: ({children}) => (!children)
 	},
@@ -126,6 +158,8 @@ const IconButtonBase = kind({
 		delete rest.children;
 		delete rest.highlighted;
 		delete rest.selected;
+		delete rest.skin;
+		delete rest.spinner;
 		delete rest.spriteCount;
 		delete rest.type;
 
@@ -169,7 +203,7 @@ const IconButtonDecorator = compose(
 	Pure,
 	ButtonDecorator,
 	Spottable,
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 /**
