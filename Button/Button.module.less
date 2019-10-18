@@ -43,10 +43,19 @@
 		}
 		&.lightOpaque {
 			.bg {
-				background-color: white; // temporary, convert to variable!
+				background-color: @agate-button-lightOpaque-bg-color;
 			}
 			.client {
-				color: black; // temporary, convert to variable!
+				color: @agate-button-lightOpaque-color;
+			}
+		}
+
+		&.transparent {
+			.bg {
+				background-color: @agate-button-transparent-bg-color;
+			}
+			.client {
+				color: @agate-button-transparent-color;
 			}
 		}
 

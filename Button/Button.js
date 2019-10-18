@@ -43,7 +43,7 @@ const ButtonBase = kind({
 	name: 'Button',
 
 	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
-		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque']),
+		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
