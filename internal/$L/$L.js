@@ -1,4 +1,4 @@
-/* global ILIB_MY_THEME_PATH */
+/* global ILIB_AGATE_PATH */
 
 import {getIStringFromBundle} from '@enact/i18n/src/resBundle';
 import ResBundle from 'ilib/lib/ResBundle';
@@ -22,18 +22,11 @@ function getResBundle () {
  *
  * @returns {Promise|ResBundle} Resolves with a new ilib.ResBundle
  */
-function createResBundle (options) {
+function createResBundle (options = {}) {
 	let opts = options;
 
 	if (typeof ILIB_AGATE_PATH !== 'undefined') {
-		opts = {
-			loadParams: {
-				// Deprecated; to be removed in future
-				root: ILIB_AGATE_PATH
-			},
-			basePath: ILIB_AGATE_PATH,
-			...options
-		};
+		opts.basePath = ILIB_AGATE_PATH;
 	}
 
 	if (!opts.onLoad) return;
