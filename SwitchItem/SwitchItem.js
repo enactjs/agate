@@ -1,7 +1,7 @@
 /**
- * Provides Agate-ez-themed Item component and interactive toggle switch icon.
+ * Provides Agate-themed Item component and interactive toggle switch icon.
  *
- * @module agate-ez/SwitchItem
+ * @module agate/SwitchItem
  * @exports SwitchItem
  */
 
@@ -9,6 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
+import handle, {forProp, forward} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Toggleable from '@enact/ui/Toggleable';
@@ -26,7 +27,7 @@ const Switch = Skinnable({prop: 'skin'}, SwitchBase);
  * Renders an `Item` with a radio-dot component. Useful to show a selected state on an Item.
  *
  * @class SwitchItem
- * @memberof agate-ez/SwitchItem
+ * @memberof agate/SwitchItem
  * @extends agate/SwitchItem.SwitchItem
  * @ui
  * @public
@@ -49,6 +50,15 @@ const SwitchItemBase = kind({
 		 * @public
 		 */
 		css: PropTypes.object,
+
+		/**
+		 * Disables component and becomes non-interactive.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		disabled: PropTypes.bool,
 
 		/**
 		 * Customize the component used as the switch.
@@ -88,6 +98,7 @@ const SwitchItemBase = kind({
 	},
 
 	defaultProps: {
+		disabled: false,
 		offText: 'off',
 		onText: 'on',
 		selected: false
@@ -97,6 +108,13 @@ const SwitchItemBase = kind({
 		css: componentCss,
 		className: 'switchItem',
 		publicClassNames: true
+	},
+
+	handlers: {
+		onClick: handle(
+			forProp('disabled', false),
+			forward('onClick')
+		)
 	},
 
 	computed: {
