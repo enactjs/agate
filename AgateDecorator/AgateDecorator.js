@@ -8,6 +8,7 @@ import {addAll} from '@enact/core/keymap';
 import classnames from 'classnames';
 import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
+import I18nDecorator from '@enact/i18n/I18nDecorator';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {ResolutionDecorator} from '@enact/ui/resolution';
@@ -28,6 +29,7 @@ import css from './AgateDecorator.module.less';
  */
 const defaultConfig = {
 	float: true,
+	i18n: true,
 	noAutoFocus: false,
 	overlay: false,
 	ri: {
@@ -102,7 +104,7 @@ const CustomizableSkinStyle = kind({
  * @public
  */
 const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
-	const {customSkin, float, noAutoFocus, overlay, ri, skin, spotlight} = config;
+	const {customSkin, float, i18n, noAutoFocus, overlay, ri, skin, spotlight} = config;
 
 	const bgClassName = classnames(
 		'enact-fit',
@@ -114,6 +116,7 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	let App = Wrapped;
 	if (float) App = FloatingLayerDecorator({wrappedClassName: bgClassName}, App);
 	if (ri) App = ResolutionDecorator(ri, App);
+	if (i18n) App = I18nDecorator(App);
 	if (spotlight) App = SpotlightRootDecorator({noAutoFocus}, App);
 	if (skin) App = Skinnable({defaultSkin: 'gallium-day'}, App);
 
