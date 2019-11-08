@@ -13,31 +13,18 @@
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Pure from '@enact/ui/internal/Pure';
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import {ButtonBase, ButtonDecorator} from '../Button';
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
-import Spinner from '../Spinner';
 
 import componentCss from './IconButton.module.less';
 
-const spinnerColor = {
-	'carbon': 'light',
-	'cobalt': 'dark',
-	'cobalt-day': 'dark',
-	'copper': 'light',
-	'copper-day': 'light',
-	'electro': 'light',
-	'gallium-day': 'light',
-	'gallium-night': 'dark',
-	'titanium': 'dark'
-}
-
 /**
- * A button component.
+ * An icon button component.
  *
  * This component is most often not used directly but may be composed within another component as it
  * is within [IconButton]{@link agate/IconButton.IconButton}.
@@ -79,6 +66,14 @@ const IconButtonBase = kind({
 		highlighted: PropTypes.bool,
 
 		/**
+		 * The component used to render the icon.
+		 *
+		 * @type {Component}
+		 * @public
+		 */
+		iconComponent: EnactPropTypes.component,
+
+		/**
 		 * Provides a way to call special interface attention to this button. It will be "featured"
 		 * in some way by the theme's visual rules.
 		 *
@@ -96,30 +91,6 @@ const IconButtonBase = kind({
 		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
-		 * The currently applied skin.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		skin: PropTypes.string,
-
-		/**
-		 * Spinner that'll appear in the place of Icon.
-		 *
-		 * @type {('none'|'loading'|'searching')}
-		 * @public
-		 */
-		spinner: PropTypes.oneOf(['none', 'loading', 'searching']),
-
-		/**
-		 * The amount of sprite "cells" in the src image.
-		 *
-		 * @type {Number}
-		 * @public
-		 */
-		spriteCount: PropTypes.number,
-
-		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
 		 * other related buttons.
 		 *
@@ -130,6 +101,7 @@ const IconButtonBase = kind({
 	},
 
 	defaultProps: {
+		iconComponent: Icon,
 		size: 'large',
 		spinner: 'none',
 		type: 'standard'
@@ -137,7 +109,7 @@ const IconButtonBase = kind({
 
 	styles: {
 		css: componentCss,
-		publicClassNames: ['button', 'bg', 'client', 'selected', 'small', 'smallest']
+		publicClassNames: ['button', 'bg', 'client', 'selected']
 	},
 
 	computed: {
@@ -146,11 +118,7 @@ const IconButtonBase = kind({
 			size,
 			{highlighted, selected}
 		),
-		icon: ({children, css, size, skin, spinner, spriteCount}) => spinner === 'none' || !spinner ? (
-			<Icon css={css} size={size} className={css.icon} spriteCount={spriteCount}>{children}</Icon>
-		) : (
-			<Spinner color={spinnerColor[skin]} size={size} type={spinner} />
-		),
+		icon: ({children}) => children,
 		minWidth: ({children}) => (!children)
 	},
 
@@ -158,16 +126,12 @@ const IconButtonBase = kind({
 		delete rest.children;
 		delete rest.highlighted;
 		delete rest.selected;
-		delete rest.skin;
-		delete rest.spinner;
-		delete rest.spriteCount;
 		delete rest.type;
 
 		return ButtonBase.inline({
 			'data-webos-voice-intent': 'Select',
 			...rest,
 			css,
-			iconComponent: Icon,
 			minWidth: true
 		});
 	}
@@ -203,7 +167,7 @@ const IconButtonDecorator = compose(
 	Pure,
 	ButtonDecorator,
 	Spottable,
-	Skinnable({prop: 'skin'})
+	Skinnable
 );
 
 /**
@@ -213,6 +177,13 @@ const IconButtonDecorator = compose(
  * ```
  * <IconButton>
  * 	plus
+ * </IconButton>
+ * ```
+ *
+ * IconButton with a spinner instead of an icon:
+ * ```
+ * <IconButton>
+ * 	<Spinner />
  * </IconButton>
  * ```
  *
