@@ -69,10 +69,10 @@ const DrawerBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [HeadingBase]{@link agate/Heading.HeadingBase}.
+ * Applies Agate specific behaviors to [DrawerBase]{@link agate/Drawer.DrawerBase}.
  *
  * @hoc
- * @memberof agate/Heading
+ * @memberof agate/Drawer
  * @mixes agate/Skinnable.Skinnable
  * @public
  */

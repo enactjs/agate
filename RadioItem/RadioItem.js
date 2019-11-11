@@ -33,7 +33,7 @@ import componentCss from './RadioItem.module.less';
 const RadioItemBase = kind({
 	name: 'RadioItemBase',
 
-	propTypes: /** @lends agate/Heading.HeadingBase.prototype */ {
+	propTypes: /** @lends agate/RadioItem.RadioItemBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
