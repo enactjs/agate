@@ -35,7 +35,7 @@ const Switch = Skinnable({prop: 'skin'}, SwitchBase);
 const SwitchItemBase = kind({
 	name: 'SwitchItemBase',
 
-	propTypes: /** @lends agate/Heading.HeadingBase.prototype */ {
+	propTypes: /** @lends agate/SwitchItem.SwitchItemBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.

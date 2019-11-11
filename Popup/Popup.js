@@ -81,10 +81,10 @@ const PopupBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [HeadingBase]{@link agate/Heading.HeadingBase}.
+ * Applies Agate specific behaviors to [PopupBase]{@link agate/Popup.PopupBase}.
  *
  * @hoc
- * @memberof agate/Heading
+ * @memberof agate/Popup
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
