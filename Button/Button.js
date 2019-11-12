@@ -17,7 +17,9 @@ import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
+import React from 'react';
 
+import Badge from '../Badge';
 import {IconBase} from '../Icon';
 // import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
@@ -45,7 +47,10 @@ const ButtonBase = kind({
 	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
 		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
 
-		badge: PropTypes.string,
+		badge: PropTypes.oneOfType([
+			PropTypes.node,
+			PropTypes.string
+		]),
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -143,7 +148,9 @@ const ButtonBase = kind({
 			'data-webos-voice-intent': 'Select',
 			...rest,
 			css,
-			decoration: badge,
+			decoration: !badge || React.isValidElement(badge) ? badge : (
+				<Badge>{badge}</Badge>
+			),
 			iconComponent: Icon
 		});
 	}
