@@ -45,6 +45,8 @@ const ButtonBase = kind({
 	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
 		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
 
+		badge: PropTypes.string,
+
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
@@ -130,7 +132,7 @@ const ButtonBase = kind({
 		minWidth: ({children}) => (!children)
 	},
 
-	render: ({css, ...rest}) => {
+	render: ({badge, css, ...rest}) => {
 		delete rest.backgroundOpacity;
 		delete rest.highlighted;
 		delete rest.joinedPosition;
@@ -141,6 +143,7 @@ const ButtonBase = kind({
 			'data-webos-voice-intent': 'Select',
 			...rest,
 			css,
+			decoration: badge,
 			iconComponent: Icon
 		});
 	}
