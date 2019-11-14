@@ -112,6 +112,7 @@ const LabeledSliderBase = kind({
 				<Slider
 					{...rest}
 					className={componentCss.slider}
+					css={componentCss}
 				/>
 				{incrementLabel}
 			</div>

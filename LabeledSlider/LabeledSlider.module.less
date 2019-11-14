@@ -21,10 +21,8 @@
 
 	.decrementText,
 	.incrementText {
-		font-size: 40px;
 		font-weight: 500;
 		text-align: center;
-		line-height: 50px;
 	}
 
 	.slider {
@@ -43,6 +41,12 @@
 		& > div:last-child {
 			width: @agate-labeledslider-label-width;
 			height: @agate-labeledslider-label-height;
+		}
+
+		.decrementText,
+		.incrementText {
+			font-size: @agate-labeledslider-text-font-size;
+			line-height: @agate-labeledslider-text-line-height;
 		}
 
 		.decrementText {
