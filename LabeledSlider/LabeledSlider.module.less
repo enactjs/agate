@@ -1,0 +1,69 @@
+// LabeledSlider.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+
+.labeledSlider {
+	position: relative;
+	display: flex;
+	box-sizing: border-box;
+	direction: ltr;	// Always arrange this according to LTR rules
+
+	& > div:first-child,
+	& > div:last-child {
+		box-sizing: border-box;
+		z-index: 1;
+
+		& > div {
+			margin: 0;
+		}
+	}
+
+	.decrementText,
+	.incrementText {
+		font-size: 40px;
+		font-weight: 500;
+		text-align: center;
+		line-height: 50px;
+	}
+
+	.slider {
+		flex-grow: 1;
+
+		.knob::before {
+			z-index: 2;
+		}
+	}
+
+	.applySkins({
+		border: solid 1px @agate-labeledslider-border-color;
+		margin: @agate-labeledslider-margin;
+
+		& > div:first-child,
+		& > div:last-child {
+			width: @agate-labeledslider-label-width;
+			height: @agate-labeledslider-label-height;
+		}
+
+		.decrementText {
+			padding: @agate-labeledslider-text-left-padding;
+		}
+
+		.incrementText {
+			padding: @agate-labeledslider-text-right-padding;
+		}
+
+		.decrementIcon {
+			padding: @agate-labeledslider-icon-left-padding;
+		}
+
+		.incrementIcon {
+			padding: @agate-labeledslider-icon-right-padding;
+		}
+
+		.slider {
+			padding-left: @agate-labeledslider-slider-padding;
+			padding-right: @agate-labeledslider-slider-padding;
+		}
+	});
+}
