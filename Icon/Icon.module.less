@@ -37,7 +37,7 @@
 		&.huge {
 			.icon-sprite-offset(@agate-icon-sprite-huge-size, 0);
 			background-size: @agate-icon-sprite-huge-size calc(var(--agate-icon-sprite-count, 1) * @agate-icon-sprite-huge-size);
-			width: @agate-icon-huge-size;
+			width: @agate-icon-huge-font-size;
 			height: @agate-icon-huge-size;
 			font-size: @agate-icon-huge-font-size;
 			line-height: @agate-icon-huge-size;
@@ -46,10 +46,19 @@
 		&.small {
 			.icon-sprite-offset(@agate-icon-sprite-small-size, 0);
 			background-size: @agate-icon-sprite-small-size calc(var(--agate-icon-sprite-count, 1) * @agate-icon-sprite-small-size);
-			width: @agate-icon-small-size;
+			width: @agate-icon-small-font-size;
 			height: @agate-icon-small-size;
 			font-size: @agate-icon-small-font-size;
 			line-height: @agate-icon-small-size;
+		}
+
+		&.smallest {
+			.icon-sprite-offset(@agate-icon-sprite-smallest-size, 0);
+			background-size: @agate-icon-sprite-smallest-size calc(var(--agate-icon-sprite-count, 1) * @agate-icon-sprite-smallest-size);
+			width: @agate-icon-smallest-size;
+			height: @agate-icon-smallest-size;
+			font-size: @agate-icon-smallest-font-size;
+			line-height: @agate-icon-smallest-size;
 		}
 
 		&.dingbat {

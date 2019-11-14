@@ -16,21 +16,28 @@
 // Button
 // ---------------------------------------
 @agate-button-height: 84px;
-@agate-button-font-weight: 400;
-@agate-button-letter-spacing: normal;
-@agate-button-font-ligatures: @agate-base-font-ligatures;
-@agate-button-small-height: 60px;
-@agate-button-small-line-height: (@agate-button-small-height - (2 * @agate-button-border-width));
-@agate-button-font-size: 36px;
-@agate-button-small-font-size: 24px;
-@agate-button-border-width: 1px;
-@agate-button-border-radius: 9999px;
 @agate-button-h-padding: 27px;
-@agate-button-small-h-padding: 18px;
 @agate-button-highlighted-opacity: 1;
 @agate-button-skew: 0;
 @agate-button-grid-border-radius: 0;
 @agate-button-bg-transform: none;
+@agate-button-border-width: 1px;
+@agate-button-border-radius: 9999px;
+@agate-button-font-size: 36px;
+@agate-button-font-weight: 400;
+@agate-button-font-ligatures: @agate-base-font-ligatures;
+@agate-button-letter-spacing: normal;
+@agate-button-icon-border-radius: 9999px;
+@agate-button-smallest-height: 48px;
+@agate-button-smallest-line-height: (@agate-button-smallest-height - (2 * @agate-button-border-width));
+@agate-button-smallest-h-padding: 16px;
+@agate-button-smallest-font-size: 16px;
+@agate-button-small-height: 64px;
+@agate-button-small-line-height: (@agate-button-small-height - (2 * @agate-button-border-width));
+@agate-button-small-font-size: 24px;
+@agate-button-small-h-padding: 18px;
+@agate-button-huge-height: 100px;
+@agate-button-huge-font-size: 46px;
 
 // ColorPicker
 // ---------------------------------------
@@ -129,15 +136,23 @@
 
 // Icon Sizes
 // ---------------------------------------
-@agate-icon-size: 48px;
-@agate-icon-small-size: 36px;
-@agate-icon-font-size: (@agate-icon-size * 2);
-@agate-icon-small-font-size: (@agate-icon-small-size * 2);
 @agate-icon-button-size: @agate-button-height;
-@agate-icon-button-small-size: @agate-button-small-height;
+@agate-icon-size: 48px;
+@agate-icon-font-size: (@agate-icon-size * 2);
 @agate-icon-sprite-size: @agate-icon-size;
-@agate-icon-sprite-small-size: @agate-icon-small-size;
 @agate-icon-margin: @agate-component-spacing;
+@agate-icon-smallest-size: 20px;
+@agate-icon-smallest-font-size: (@agate-icon-smallest-size * 2);
+@agate-icon-button-smallest-size: @agate-button-smallest-height;
+@agate-icon-sprite-smallest-size: @agate-icon-smallest-size;
+@agate-icon-small-size: 36px;
+@agate-icon-button-small-size: @agate-button-small-height;
+@agate-icon-small-font-size: (@agate-icon-small-size * 2);
+@agate-icon-sprite-small-size: @agate-icon-small-size;
+@agate-icon-button-huge-size: @agate-button-huge-height;
+@agate-icon-huge-font-size: 96px;
+@agate-icon-huge-size: (@agate-icon-huge-font-size * 2);
+@agate-icon-sprite-huge-size: @agate-icon-huge-size;
 
 // IconButton
 // ---------------------------------------

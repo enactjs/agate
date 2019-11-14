@@ -18,6 +18,26 @@
 		font-size: @agate-button-font-size;
 		vertical-align: middle;
 
+		&.hasIcon.noChildren {
+			//Style related to Button with just Icon
+
+			.bg {
+				border-radius: @agate-button-icon-border-radius;
+			}
+
+			.client {
+				color: @agate-button-color;
+
+				.icon {
+					-webkit-margin-start: 0;
+				}
+			}
+			&.huge {
+				height: @agate-button-huge-height;
+				width: @agate-button-huge-height;
+			}
+		}
+
 		&.minWidth {
 			padding: 0;
 
@@ -41,6 +61,7 @@
 			transform: @agate-button-bg-transform;
 			backdrop-filter: blur(3px);
 		}
+
 		&.lightOpaque {
 			.bg {
 				background-color: @agate-button-lightOpaque-bg-color;
@@ -65,11 +86,7 @@
 
 			.icon {
 				-webkit-margin-start: 0;
-				// height: 0;
-				// line-height: 0;
-				// margin-top: 0;
-				// margin-bottom: 0;
-			}
+				}
 		}
 
 		&.joinedLeft,
@@ -92,6 +109,20 @@
 			}
 		}
 
+		&.huge {
+			height: @agate-button-huge-height;
+			font-size: @agate-button-huge-font-size;
+		}
+
+
+		&.smallest {
+			height: @agate-button-smallest-height;
+			min-width: @agate-button-smallest-height;
+			line-height: @agate-button-smallest-line-height;
+			font-size: @agate-button-smallest-font-size;
+			padding: @agate-button-smallest-h-padding;
+		}
+
 		&.small {
 			height: @agate-button-small-height;
 			min-width: @agate-button-small-height;
@@ -109,6 +140,7 @@
 				right: 18px;
 			}
 		}
+
 
 		&.grid {
 			.bg {
