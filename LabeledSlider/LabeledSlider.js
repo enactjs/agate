@@ -4,13 +4,33 @@
  * @example
  * <LabeledSlider
  *   decrementIcon="minus"
- *   defaultValue={-25}
  *   incrementIcon="plus"
  *   knobStep={25}
+ *   min={number('min', Config)}
  *   max={100}
  *   min={-100}
  *   step={5}
  * />
+ *
+ * <LabeledSlider
+ *   decrementText="A"
+ *   incrementText="A"
+ *   knobStep={25}
+ *   min={number('min', Config)}
+ *   max={100}
+ *   min={-100}
+ *   step={5}
+ * />
+ *
+ * <LabeledSlider>
+ *   knobStep={25}
+ *   max={100}
+ *   min={-100}
+ *   step={5}
+ * >
+ *   <div slot="decrementText" style={{fontSize: '30px'}}>A</div>
+ *   <div slot="incrementText">A</div>
+ * </LabeledSlider>
  *
  * @module moonstone/LabeledSlider
  * @exports LabeledSlider
