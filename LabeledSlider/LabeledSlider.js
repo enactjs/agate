@@ -1,5 +1,5 @@
 /**
- * An interactive numeric range picker with increment decrement
+ * An interactive numeric range picker with increment decrement labels
  *
  * @example
  * <LabeledSlider
@@ -23,20 +23,42 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
+import Icon from '../Icon';
 import Skinnable from '../Skinnable';
-import Slider from '../Slider/Slider';
+import Slider from '../Slider/';
 
 import componentCss from './LabeledSlider.module.less';
 
+const Text = ({children, ...rest}) => (<div {...rest}>{children}</div>);
+
+const renderLabel = (label, className, Component) => {
+	return (
+		<div className={className}>
+			{typeof label === 'string' && <Component>{label}</Component> || label}
+		</div>
+	);
+};
+
+const getLabel = (labelIcon, labelText, className) => {
+	if (labelIcon || labelText) {
+		return labelIcon ?
+			renderLabel(labelIcon, className, Icon) :
+			renderLabel(labelText, className, Text);
+	} else {
+		return null;
+	}
+};
+
 /**
- * A stateless Slider with IconButtons to increment and decrement the value. In most circumstances,
+ * A stateless Slider with IconButtons or texts to increment and decrement the value. In most circumstances,
  * you will want to use the stateful version: {@link moonstone/LabeledSlider.LabeledSlider}.
  *
  * @class LabeledSliderBase
  * @memberof moonstone/LabeledSlider
- * @extends moonstone/Slider.SliderBase
+ * @extends moonstone/Slider.Slider
+ * @extends moonstone/Icon.Icon
  * @mixes moonstone/Skinnable.Skinnable
- * @mixes spotlight/Spottable.Spottable
+ * @mixes spotlight/Spottable.Slottable
  * @ui
  * @public
  */
@@ -46,29 +68,49 @@ const LabeledSliderBase = kind({
 	propTypes: /** @lends moonstone/LabeledSlider.LabeledSliderBase.prototype */ {
 		/**
 		 * Assign a custom icon for the decrementer. All strings supported by [Icon]{@link moonstone/Icon.Icon} are
-		 * supported. Without a custom icon, the default is used, and is automatically changed when
-		 * [vertical]{@link moonstone/LabeledSlider.LabeledSlider#vertical} is changed.
+		 * supported.
 		 *
-		 * @type {String}
+		 * @type {String|Component}
 		 * @public
 		 */
-		decrementIcon: PropTypes.node,
+		decrementIcon: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.node
+		]),
+
+		/**
+		 * Assign a custom text or a a node for the decrementer.
+		 *
+		 * @type {String|Component}
+		 * @public
+		 */
+		decrementText: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.node
+		]),
 
 		/**
 		 * Assign a custom icon for the incrementer. All strings supported by [Icon]{@link moonstone/Icon.Icon} are
-		 * supported. Without a custom icon, the default is used, and is automatically changed when
-		 * [vertical]{@link moonstone/LabeledSlider.LabeledSlider#vertical} is changed.
+		 * supported.
 		 *
-		 * @type {String}
+		 * @type {String|Component}
 		 * @public
 		 */
-		incrementIcon: PropTypes.node
-	},
+		incrementIcon: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.node
+		]),
 
-	defaultProps: {
-		decrementLabel: null,
-		incrementLabel: null,
-		orientation: 'horizontal'
+		/**
+		 * Assign a custom text or a node for the incrementer.
+		 *
+		 * @type {String|Component}
+		 * @public
+		 */
+		incrementText: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.node
+		])
 	},
 
 	styles: {
@@ -78,16 +120,12 @@ const LabeledSliderBase = kind({
 	},
 
 	computed: {
-		className: ({decrementIcon, incrementIcon, orientation, styler}) => styler.append(orientation, {icons: !!(decrementIcon && incrementIcon)}),
-		decrementLabel: ({decrementIcon, decrementText}) => ((decrementIcon || decrementText) ?
-			<div className={decrementIcon && componentCss.decrementIcon || componentCss.decrementText}>
-				{decrementIcon || decrementText}
-			</div> : null
+		className: ({decrementIcon, incrementIcon, styler}) => styler.append({icons: !!(decrementIcon && incrementIcon)}),
+		decrementLabel: ({decrementIcon, decrementText}) => (
+			getLabel(decrementIcon, decrementText, decrementIcon ? componentCss.decrementIcon : componentCss.decrementText)
 		),
-		incrementLabel: ({incrementIcon, incrementText}) => ((incrementIcon || incrementText) ?
-			<div className={incrementIcon && componentCss.incrementIcon || componentCss.incrementText}>
-				{incrementIcon || incrementText}
-			</div> : null
+		incrementLabel: ({incrementIcon, incrementText}) => (
+			getLabel(incrementIcon, incrementText, incrementIcon ? componentCss.incrementIcon : componentCss.incrementText)
 		)
 	},
 
@@ -95,12 +133,9 @@ const LabeledSliderBase = kind({
 		className,
 		decrementLabel,
 		incrementLabel,
-		orientation,
 		style,
 		...rest
 	}) => {
-		const icons = rest.decrementIcon && rest.incrementIcon && true;
-
 		delete rest.decrementIcon;
 		delete rest.decrementText;
 		delete rest.incrementIcon;
@@ -129,6 +164,6 @@ const LabeledSlider = LabeledSliderDecorator(LabeledSliderBase);
 
 export default LabeledSlider;
 export {
-	LabeledSliderBase as LabeledSlider,
+	LabeledSlider,
 	LabeledSliderBase
 };
