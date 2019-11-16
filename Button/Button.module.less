@@ -9,7 +9,7 @@
 		height: @agate-button-height;
 		font-weight: @agate-button-font-weight;
 		letter-spacing: @agate-button-letter-spacing;
-		text-indent: @agate-button-letter-spacing;  // Keep the text centered
+		text-indent: @agate-button-text-indent;  // Keep the text centered
 		font-variant-ligatures: @agate-button-font-ligatures;
 		min-width: @agate-button-height;
 		padding: 0 @agate-button-h-padding;
@@ -43,10 +43,19 @@
 		}
 		&.lightOpaque {
 			.bg {
-				background-color: white; // temporary, convert to variable!
+				background-color: @agate-button-lightOpaque-bg-color;
 			}
 			.client {
-				color: black; // temporary, convert to variable!
+				color: @agate-button-lightOpaque-color;
+			}
+		}
+
+		&.transparent {
+			.bg {
+				background-color: @agate-button-transparent-bg-color;
+			}
+			.client {
+				color: @agate-button-transparent-color;
 			}
 		}
 
