@@ -9,6 +9,7 @@ import Transition from '@enact/ui/Transition';
 import Skinnable from '../Skinnable';
 import Heading from '../Heading';
 import LabeledIconButton from '../LabeledIconButton';
+import Scroller from '../Scroller';
 
 import PopupState from '../Popup/PopupState';
 
@@ -19,6 +20,7 @@ const PopupMenuBase = kind({
 	propTypes: {
 		closeButton: PropTypes.bool,
 		css: PropTypes.object,
+		orientation: PropTypes.string,
 		noAnimation: PropTypes.bool,
 		onClose: PropTypes.func,
 		onHide: PropTypes.func,
@@ -37,7 +39,11 @@ const PopupMenuBase = kind({
 		className: 'popupMenu'
 	},
 
-	render: ({children, closeButton, css, noAnimation, onClose, onHide, open, title, ...rest}) => {
+	computed: {
+		bodyClassName: ({css, orientation}) => orientation === 'horizontal' ? css.horizontalBody : css.body
+	},
+
+	render: ({bodyClassName, children, closeButton, css, noAnimation, onClose, onHide, open, orientation, title, ...rest}) => {
 		return (
 			<Transition
 				noAnimation={noAnimation}
@@ -53,7 +59,7 @@ const PopupMenuBase = kind({
 					<Cell className={css.title} shrink>
 						<Heading size="title">{title}</Heading>
 					</Cell>
-					<Cell className={css.body} shrink>
+					<Cell className={bodyClassName} component={Scroller} direction={orientation}>
 						{children}
 						{closeButton ? <LabeledIconButton
 							inline
