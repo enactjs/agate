@@ -5,178 +5,210 @@
 @import "../styles/skin.less";
 
 .button {
-	.applySkins({
-		height: @agate-button-height;
-		font-weight: @agate-button-font-weight;
-		letter-spacing: @agate-button-letter-spacing;
-		text-indent: @agate-button-text-indent;  // Keep the text centered
-		font-variant-ligatures: @agate-button-font-ligatures;
-		min-width: @agate-button-height;
-		padding: 0 @agate-button-h-padding;
-		margin: 0 @agate-component-spacing;
-		box-sizing: border-box;
-		font-size: @agate-button-font-size;
-		vertical-align: middle;
+	.applySkins( {
+			height: @agate-button-height;
+			font-weight: @agate-button-font-weight;
+			letter-spacing: @agate-button-letter-spacing;
+			text-indent: @agate-button-text-indent; // Keep the text centered
+			font-variant-ligatures: @agate-button-font-ligatures;
+			min-width: @agate-button-height;
+			padding: 0 @agate-button-h-padding;
+			margin: 0 @agate-component-spacing;
+			box-sizing: border-box;
+			font-size: @agate-button-font-size;
+			vertical-align: middle;
 
-		&.minWidth {
-			padding: 0;
+			&.animationOnRender {
+				.bg,
+				.client {
+					animation-name: scale-bounce;
+					animation-duration: @agate-button-animation-duration;
+					animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms);
+				}
 
-			.client .icon {
-				margin: 0;
+				@keyframes scale-bounce {
+					from {
+						transform: scale(0);
+					}
+					80% {
+						transform: scale(1.25);
+					}
+					to {
+						transform: scale(1);
+					}
+
+				}
 			}
-		}
-
-		&.opaque {
-			/* Available for export */
-		}
-
-		// opaque
-		.bg {
-			background-color: @agate-button-bg-color;
-			border: @agate-button-border-width solid @agate-button-border-color;
-			border-radius: @agate-button-border-radius;
-			color: @agate-button-color;
-			background-image: @agate-button-bg-image;
-			box-shadow: @agate-button-shadow;
-			transform: @agate-button-bg-transform;
-			backdrop-filter: blur(3px);
-		}
-		&.lightOpaque {
-			.bg {
-				background-color: @agate-button-lightOpaque-bg-color;
-			}
-			.client {
-				color: @agate-button-lightOpaque-color;
-			}
-		}
-
-		&.transparent {
-			.bg {
-				background-color: @agate-button-transparent-bg-color;
-			}
-			.client {
-				color: @agate-button-transparent-color;
-			}
-		}
-
-		.client {
-			padding: @agate-button-border-width;	// We match the amount removed by the line-height above, so the text doesn't overlap the border
-			color: @agate-button-color;
-
-			.icon {
-				-webkit-margin-start: 0;
-				// height: 0;
-				// line-height: 0;
-				// margin-top: 0;
-				// margin-bottom: 0;
-			}
-		}
-
-		&.joinedLeft,
-		&.joinedCenter {
-			margin-right: 0;
-
-			.bg {
-				border-top-right-radius: 0;
-				border-bottom-right-radius: 0;
-			}
-		}
-
-		&.joinedRight,
-		&.joinedCenter {
-			margin-left: 0;
-
-			.bg {
-				border-top-left-radius: 0;
-				border-bottom-left-radius: 0;
-			}
-		}
-
-		&.small {
-			height: @agate-button-small-height;
-			min-width: @agate-button-small-height;
-			font-size: @agate-button-small-font-size;
-			line-height: @agate-button-small-line-height;
-			padding: 0 @agate-button-small-h-padding;
 
 			&.minWidth {
 				padding: 0;
-			}
 
-			.client::before {
-				bottom: 12px;
-				left: 18px;
-				right: 18px;
-			}
-		}
-
-		&.grid {
-			.bg {
-				border-radius: @agate-button-grid-border-radius;
-			}
-		}
-
-		// Button-non-disabled rules
-		&:not([disabled]) {
-			.focus({
-				&.pressed,
-				&:active {
-					.bg {
-						// -webkit-animation-name: expand;
-						// animation-name: expand;
-					}
+				.client .icon {
+					margin: 0;
 				}
-			});
-		}
+			}
 
-		&.highlighted {
+			&.opaque {
+				/* Available for export */
+			}
+
+			// opaque
 			.bg {
-				background-color: @agate-button-highlighted-bg-color;
-				background-image: @agate-button-highlighted-bg-image;
-				opacity: @agate-button-highlighted-opacity;
+				background-color: @agate-button-bg-color;
+				border: @agate-button-border-width solid @agate-button-border-color;
+				border-radius: @agate-button-border-radius;
+				color: @agate-button-color;
+				background-image: @agate-button-bg-image;
+				box-shadow: @agate-button-shadow;
+				transform: @agate-button-bg-transform;
+				backdrop-filter: blur(3px);
 			}
 
-			&,
+			&.lightOpaque {
+				.bg {
+					background-color: @agate-button-lightOpaque-bg-color;
+				}
+
+				.client {
+					color: @agate-button-lightOpaque-color;
+				}
+			}
+
+			&.transparent {
+				.bg {
+					background-color: @agate-button-transparent-bg-color;
+				}
+
+				.client {
+					color: @agate-button-transparent-color;
+				}
+			}
+
 			.client {
-				color: @agate-button-highlighted-color;
+				padding: @agate-button-border-width; // We match the amount removed by the line-height above, so the text doesn't overlap the border
+				color: @agate-button-color;
+
+				.icon {
+					-webkit-margin-start: 0;
+					// height: 0;
+					// line-height: 0;
+					// margin-top: 0;
+					// margin-bottom: 0;
+				}
+			}
+
+			&.joinedLeft,
+			&.joinedCenter {
+				margin-right: 0;
+
+				.bg {
+					border-top-right-radius: 0;
+					border-bottom-right-radius: 0;
+				}
+			}
+
+			&.joinedRight,
+			&.joinedCenter {
+				margin-left: 0;
+
+				.bg {
+					border-top-left-radius: 0;
+					border-bottom-left-radius: 0;
+				}
+			}
+
+			&.small {
+				height: @agate-button-small-height;
+				min-width: @agate-button-small-height;
+				font-size: @agate-button-small-font-size;
+				line-height: @agate-button-small-line-height;
+				padding: 0 @agate-button-small-h-padding;
+
+				&.minWidth {
+					padding: 0;
+				}
+
+				.client::before {
+					bottom: 12px;
+					left: 18px;
+					right: 18px;
+				}
+			}
+
+			&.grid {
+				.bg {
+					border-radius: @agate-button-grid-border-radius;
+				}
+			}
+
+			// Button-non-disabled rules
+			&:not([disabled]) {
+				.focus( {
+
+						&.pressed,
+						&:active {
+							.bg {
+								// -webkit-animation-name: expand;
+								// animation-name: expand;
+							}
+						}
+					}
+
+				);
+			}
+
+			&.highlighted {
+				.bg {
+					background-color: @agate-button-highlighted-bg-color;
+					background-image: @agate-button-highlighted-bg-image;
+					opacity: @agate-button-highlighted-opacity;
+				}
+
+				&,
+				.client {
+					color: @agate-button-highlighted-color;
+				}
+			}
+
+			&.selected {
+				.bg {
+					background-color: @agate-button-selected-bg-color;
+				}
+
+				&,
+				.client {
+					color: @agate-button-selected-color;
+				}
 			}
 		}
 
-		&.selected {
-			.bg {
-				background-color: @agate-button-selected-bg-color;
-			}
-
-			&,
-			.client {
-				color: @agate-button-selected-color;
-			}
-		}
-	});
+	);
 
 	// TODO: Replace with an updated .focus() mixin that can apply rules both when focused and
 	// within a focused node
 	&:global(.spottable):focus,
 	:global(.spottable):focus & {
-		.applySkins({
-			background-color: transparent;
-			background-image: none;
+		.applySkins( {
+				background-color: transparent;
+				background-image: none;
 
-			.bg {
-				background-color: @agate-button-focus-bg-color;
-				background-image: @agate-button-focus-bg-image;
-			}
-
-			&,
-			.client {
-				color: @agate-button-focus-color;
-			}
-
-			&.highlighted {
 				.bg {
-					opacity: 1;
+					background-color: @agate-button-focus-bg-color;
+					background-image: @agate-button-focus-bg-image;
+				}
+
+				&,
+				.client {
+					color: @agate-button-focus-color;
+				}
+
+				&.highlighted {
+					.bg {
+						opacity: 1;
+					}
 				}
 			}
-		});
+
+		);
 	}
 }
