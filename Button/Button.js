@@ -44,6 +44,25 @@ const ButtonBase = kind({
 	name: 'Button',
 
 	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
+		/**
+		 * Provides a way to apply animation on this button. It will be "featured"
+		 * in some way by the theme's visual rules.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		animate: PropTypes.oneOf(['onRender']),
+
+		/**
+		 * Customize the animation by specifying amount of duration to be applied during animation to this button. It will be "featured"
+		 * in some way by the theme's visual rules.
+		 *
+		 * @type {number}
+		 * @public
+		 */
+		animationDelay: PropTypes.number,
+
+
 		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
 
 		/**
@@ -123,20 +142,27 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({backgroundOpacity, highlighted, joinedPosition, selected, type, styler, size}) => styler.append(
+		className: ({animate, backgroundOpacity, highlighted, joinedPosition, selected, type, styler}) => styler.append(
 			backgroundOpacity,
-			size,
 			type,
 			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
 			{
+				animationOnRender: animate === 'onRender',
+				// animationOnFocus: animationOn === 'onFocus',
 				highlighted,
 				selected
 			}
 		),
+		style: ({animationDelay, style}) => ({
+			...style,
+			'--agate-button-animation-delay': animationDelay
+		}),
 		minWidth: ({children}) => (React.Children.count(children) === 0 || children === '')
 	},
 
 	render: ({css, ...rest}) => {
+		delete rest.animate;
+		delete rest.animationDelay;
 		delete rest.backgroundOpacity;
 		delete rest.highlighted;
 		delete rest.joinedPosition;

@@ -19,6 +19,28 @@
 		font-size: @agate-button-font-size;
 		vertical-align: middle;
 
+			&.animationOnRender {
+				.bg,
+				.client {
+					animation-name: scale-bounce;
+					animation-duration: @agate-button-animation-duration;
+					animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms);
+				}
+
+				@keyframes scale-bounce {
+					from {
+						transform: scale(0);
+					}
+					80% {
+						transform: scale(1.25);
+					}
+					to {
+						transform: scale(1);
+					}
+
+				}
+			}
+
 		&.minWidth {
 			&,
 			&.huge,
@@ -72,7 +94,6 @@
 			transform: @agate-button-bg-transform;
 			backdrop-filter: blur(3px);
 		}
-
 		&.lightOpaque {
 			.bg {
 				background-color: @agate-button-lightOpaque-bg-color;
@@ -82,43 +103,44 @@
 			}
 		}
 
-		&.transparent {
-			.bg {
-				background-color: @agate-button-transparent-bg-color;
-			}
-			.client {
-				color: @agate-button-transparent-color;
-			}
-		}
+			&.transparent {
+				.bg {
+					background-color: @agate-button-transparent-bg-color;
+				}
 
-		.client {
-			padding: @agate-button-border-width;	// We match the amount removed by the line-height above, so the text doesn't overlap the border
-			color: @agate-button-color;
+				.client {
+					color: @agate-button-transparent-color;
+				}
+			}
+
+			.client {
+				padding: @agate-button-border-width; // We match the amount removed by the line-height above, so the text doesn't overlap the border
+				color: @agate-button-color;
 
 			.icon {
 				-webkit-margin-start: 0;
 			}
 		}
 
-		&.joinedLeft,
-		&.joinedCenter {
-			margin-right: 0;
+			&.joinedLeft,
+			&.joinedCenter {
+				margin-right: 0;
 
-			.bg {
-				border-top-right-radius: 0;
-				border-bottom-right-radius: 0;
+				.bg {
+					border-top-right-radius: 0;
+					border-bottom-right-radius: 0;
+				}
 			}
-		}
 
-		&.joinedRight,
-		&.joinedCenter {
-			margin-left: 0;
+			&.joinedRight,
+			&.joinedCenter {
+				margin-left: 0;
 
-			.bg {
-				border-top-left-radius: 0;
-				border-bottom-left-radius: 0;
+				.bg {
+					border-top-left-radius: 0;
+					border-bottom-left-radius: 0;
+				}
 			}
-		}
 
 		&.huge {
 			height: @agate-button-huge-height;
@@ -175,12 +197,12 @@
 			});
 		}
 
-		&.highlighted {
-			.bg {
-				background-color: @agate-button-highlighted-bg-color;
-				background-image: @agate-button-highlighted-bg-image;
-				opacity: @agate-button-highlighted-opacity;
-			}
+			&.highlighted {
+				.bg {
+					background-color: @agate-button-highlighted-bg-color;
+					background-image: @agate-button-highlighted-bg-image;
+					opacity: @agate-button-highlighted-opacity;
+				}
 
 			&,
 			.client {
@@ -194,10 +216,10 @@
 			}
 		}
 
-		&.selected {
-			.bg {
-				background-color: @agate-button-selected-bg-color;
-			}
+			&.selected {
+				.bg {
+					background-color: @agate-button-selected-bg-color;
+				}
 
 			&,
 			.client {
@@ -216,19 +238,19 @@
 	// within a focused node
 	&:global(.spottable):focus,
 	:global(.spottable):focus & {
-		.applySkins({
-			background-color: transparent;
-			background-image: none;
+		.applySkins( {
+				background-color: transparent;
+				background-image: none;
 
-			.bg {
-				background-color: @agate-button-focus-bg-color;
-				background-image: @agate-button-focus-bg-image;
-			}
+				.bg {
+					background-color: @agate-button-focus-bg-color;
+					background-image: @agate-button-focus-bg-image;
+				}
 
-			&,
-			.client {
-				color: @agate-button-focus-color;
-			}
+				&,
+				.client {
+					color: @agate-button-focus-color;
+				}
 
 			&.highlighted {
 				.bg {
