@@ -1,68 +1,21 @@
-// ----- SYSTEM FONT NAMES ------
-@font-system-src-agate-icons:  local("Agate-icons"), url("../../fonts/Agate-icons.ttf") format("truetype");
-// @import (css) url(https://fonts.googleapis.com/css?family=Orbitron);
-@import (css) url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,700');
-@import (css) url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900');
+// All Font Definitions
+//
 
-@font-system-src-primary-light:  local("LG Display-Light");
+// These fonts must all be defined here, rather than in each related skin file due to the way that
+// skins are composed by LESS into the each component. If these were to be imported at the top of
+// "variables" files, for example, the import or @font-face rules would be written inside the
+// components' root selector (illegal location for these rules). If it's placed instead into the
+// "skin.less" file, the rules will be stamped out as many times as the skin file is imported (one
+// for each component), too many times.
+//
+// The result of placing them all in this location is both good and bad. Each file is only imported
+// once, but each file is always imported, regardless of the current skin. A JS solution that
+// dynamically imports these files (adds them to the LESS or the HEAD of the document) may be
+// necessary to truly optimize this font download/installing process. That brings its own set of
+// concerns like more JavaScript skin dependency and more places to update when changes occur, and
+// a render delay or hiccup when a switch is preformed if the font hasn't been downloaded yet.
 
-/* ----- LG Display ------ */
-
-// Normal
-@font-face {
-	font-family: "Agate Primary";
-	src: @font-system-src-primary-light;
-	font-weight: normal;
-	font-style: normal;
-}
-@font-face {
-	font-family: "Agate Primary";
-	src: @font-system-src-primary-light;
-	font-weight: 700;
-	font-style: normal;
-}
-
-// Bold
-@font-face {
-	font-family: "Agate Primary";
-	src: @font-system-src-primary-light;
-	font-weight: bold;
-	font-style: normal;
-}
-@font-face {
-	font-family: "Agate Primary";
-	src: @font-system-src-primary-light;
-	font-weight: 700;
-	font-style: normal;
-}
-
-// Bold
-@font-face {
-	font-family: "Agate Primary";
-	src: @font-system-src-primary-light;
-	font-weight: bold;
-	font-style: normal;
-}
-@font-face {
-	font-family: "Agate Primary";
-	src: @font-system-src-primary-light;
-	font-weight: 900;
-	font-style: normal;
-}
-
-// Light
-@font-face {
-	font-family: "Agate Primary";
-	src: @font-system-src-primary-light;
-	font-weight: 300;
-	font-style: normal;
-}
-
-/* ----- Agate (Icons) ------ */
-
-@font-face {
-	font-family: "Agate Icons";
-	src: @font-system-src-agate-icons;
-	font-weight: normal;
-	font-style: normal;
-}
+@import "./font-agateicons.less";
+@import "./font-museosans.less";
+@import "./font-worksans.less";
+@import "./font-sourcesanspro.less";
