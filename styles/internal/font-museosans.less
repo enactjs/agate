@@ -13,15 +13,30 @@
 @font-system-src-museosans-700-i:  local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-BoldItalic.ttf) format("truetype");
 @font-system-src-museosans-900:    local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Black.ttf) format("truetype");
 @font-system-src-museosans-900-i:  local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-BlackItalic.ttf) format("truetype");
+@font-system-src-backup: local("Noto Sans");
+
+// "MuseoSans" becomes a composite font, laying down the "Noto Sans" font as the base and layreing
+// "Museo Sans" on top of it. All Museo Sans glyphs will replace any Noto Sans equivelents and any
+// non-overridden Noto Sans glyphs will still be accessible and displayed.
 
 // Generate @font-face Rules
+.buildFontFace("MuseoSans"; @font-system-src-backup);
 .buildFontFace("MuseoSans"; @font-system-src-museosans-500);
+.buildFontFace("MuseoSans"; @font-system-src-backup;          normal; italic);
 .buildFontFace("MuseoSans"; @font-system-src-museosans-500-i; normal; italic);
+.buildFontFace("MuseoSans"; @font-system-src-backup;          100);
 .buildFontFace("MuseoSans"; @font-system-src-museosans-100;   100);
+.buildFontFace("MuseoSans"; @font-system-src-backup;          300);
 .buildFontFace("MuseoSans"; @font-system-src-museosans-300;   300);
+.buildFontFace("MuseoSans"; @font-system-src-backup;          500);
 .buildFontFace("MuseoSans"; @font-system-src-museosans-500;   500);
+.buildFontFace("MuseoSans"; @font-system-src-backup;          500; italic);
 .buildFontFace("MuseoSans"; @font-system-src-museosans-500-i; 500; italic);
+.buildFontFace("MuseoSans"; @font-system-src-backup;          700);
 .buildFontFace("MuseoSans"; @font-system-src-museosans-700;   700);
+.buildFontFace("MuseoSans"; @font-system-src-backup;          700; italic);
 .buildFontFace("MuseoSans"; @font-system-src-museosans-700-i; 700; italic);
+.buildFontFace("MuseoSans"; @font-system-src-backup;          900);
 .buildFontFace("MuseoSans"; @font-system-src-museosans-900;   900);
+.buildFontFace("MuseoSans"; @font-system-src-backup;          900; italic);
 .buildFontFace("MuseoSans"; @font-system-src-museosans-900-i; 900; italic);
