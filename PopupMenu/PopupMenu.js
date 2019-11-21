@@ -20,18 +20,19 @@ const PopupMenuBase = kind({
 	propTypes: {
 		closeButton: PropTypes.bool,
 		css: PropTypes.object,
-		orientation: PropTypes.string,
 		noAnimation: PropTypes.bool,
 		onClose: PropTypes.func,
 		onHide: PropTypes.func,
 		open: PropTypes.bool,
+		orientation: PropTypes.oneOf(['horizontal']),
 		title: PropTypes.string
 	},
 
 	defaultProps: {
-		noAnimation: false,
 		closeButton: false,
-		open: false
+		noAnimation: false,
+		open: false,
+		orientation: 'horizontal'
 	},
 
 	styles: {
@@ -40,10 +41,10 @@ const PopupMenuBase = kind({
 	},
 
 	computed: {
-		bodyClassName: ({css, orientation}) => orientation === 'horizontal' ? css.horizontalBody : css.body
+		className: ({orientation, styler}) => styler.append(orientation)
 	},
 
-	render: ({bodyClassName, children, closeButton, css, noAnimation, onClose, onHide, open, orientation, title, ...rest}) => {
+	render: ({children, closeButton, css, noAnimation, onClose, onHide, open, orientation, title, ...rest}) => {
 		return (
 			<Transition
 				noAnimation={noAnimation}
@@ -59,15 +60,17 @@ const PopupMenuBase = kind({
 					<Cell className={css.title} shrink>
 						<Heading size="title">{title}</Heading>
 					</Cell>
-					<Cell className={bodyClassName} component={Scroller} direction={orientation}>
-						{children}
-						{closeButton ? <LabeledIconButton
-							inline
-							icon="cancel"
-							onClick={onClose}
-							className={css.closeButton}
-							size="huge"
-						>cancel</LabeledIconButton> : null}
+					<Cell shrink className={css.body} align="stretch">
+						<Scroller direction={orientation} horizontalScrollbar="hide" verticalScrollbar="hide">
+							{children}
+							{closeButton ? <LabeledIconButton
+								inline
+								icon="cancel"
+								onClick={onClose}
+								className={css.closeButton}
+								size="huge"
+							>cancel</LabeledIconButton> : null}
+						</Scroller>
 					</Cell>
 				</Layout>
 			</Transition>
