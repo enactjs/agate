@@ -9,6 +9,7 @@
 		height: @agate-button-height;
 		font-weight: @agate-button-font-weight;
 		letter-spacing: @agate-button-letter-spacing;
+		line-height: @agate-button-line-height;
 		text-indent: @agate-button-text-indent;  // Keep the text centered
 		font-variant-ligatures: @agate-button-font-ligatures;
 		min-width: @agate-button-height;
@@ -19,17 +20,25 @@
 		vertical-align: middle;
 
 		&.hasIcon.noChildren {
-			//Style related to Button with just Icon
+			// A Button with just an Icon and no text
 
 			.bg {
 				border-radius: @agate-button-icon-border-radius;
 			}
 
 			.client {
-				color: @agate-button-color;
+				color: @agate-iconbutton-color;
+			}
 
-				.icon {
-					-webkit-margin-start: 0;
+			&.lightOpaque {
+				.client {
+					color: @agate-iconbutton-lightOpaque-color;
+				}
+			}
+
+			&.transparent {
+				.client {
+					color: @agate-iconbutton-transparent-color;
 				}
 			}
 		}
@@ -82,7 +91,7 @@
 
 			.icon {
 				-webkit-margin-start: 0;
-				}
+			}
 		}
 
 		&.joinedLeft,
@@ -113,15 +122,6 @@
 			padding: 0 @agate-button-huge-h-padding;
 		}
 
-
-		&.smallest {
-			height: @agate-button-smallest-height;
-			min-width: @agate-button-smallest-height;
-			line-height: @agate-button-smallest-line-height;
-			font-size: @agate-button-smallest-font-size;
-			padding: 0 @agate-button-smallest-h-padding;
-		}
-
 		&.small {
 			height: @agate-button-small-height;
 			min-width: @agate-button-small-height;
@@ -140,6 +140,17 @@
 			}
 		}
 
+		&.smallest {
+			height: @agate-button-smallest-height;
+			min-width: @agate-button-smallest-height;
+			line-height: @agate-button-smallest-line-height;
+			font-size: @agate-button-smallest-font-size;
+			padding: 0 @agate-button-smallest-h-padding;
+
+			&.minWidth {
+				padding: 0;
+			}
+		}
 
 		&.grid {
 			.bg {
@@ -157,6 +168,12 @@
 						// animation-name: expand;
 					}
 				}
+
+				&.hasIcon.noChildren {
+					.client {
+						color: @agate-iconbutton-focus-color;
+					}
+				}
 			});
 		}
 
@@ -171,6 +188,12 @@
 			.client {
 				color: @agate-button-highlighted-color;
 			}
+
+			&.hasIcon.noChildren {
+				.client {
+					color: @agate-iconbutton-highlighted-color;
+				}
+			}
 		}
 
 		&.selected {
@@ -181,6 +204,12 @@
 			&,
 			.client {
 				color: @agate-button-selected-color;
+			}
+
+			&.hasIcon.noChildren {
+				.client {
+					color: @agate-iconbutton-selected-color;
+				}
 			}
 		}
 	});
@@ -206,6 +235,12 @@
 			&.highlighted {
 				.bg {
 					opacity: 1;
+				}
+			}
+
+			&.hasIcon.noChildren {
+				.client {
+					color: @agate-iconbutton-focus-color;
 				}
 			}
 		});

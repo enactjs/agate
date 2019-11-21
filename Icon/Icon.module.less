@@ -37,7 +37,7 @@
 		&.huge {
 			.icon-sprite-offset(@agate-icon-sprite-huge-size, 0);
 			background-size: @agate-icon-sprite-huge-size calc(var(--agate-icon-sprite-count, 1) * @agate-icon-sprite-huge-size);
-			width: @agate-icon-huge-font-size;
+			width: @agate-icon-huge-size;
 			height: @agate-icon-huge-size;
 			font-size: @agate-icon-huge-font-size;
 			line-height: @agate-icon-huge-size;
@@ -46,7 +46,7 @@
 		&.small {
 			.icon-sprite-offset(@agate-icon-sprite-small-size, 0);
 			background-size: @agate-icon-sprite-small-size calc(var(--agate-icon-sprite-count, 1) * @agate-icon-sprite-small-size);
-			width: @agate-icon-small-font-size;
+			width: @agate-icon-small-size;
 			height: @agate-icon-small-size;
 			font-size: @agate-icon-small-font-size;
 			line-height: @agate-icon-small-size;
@@ -83,6 +83,10 @@
 			&.small {
 				.icon-sprite-offset(@agate-icon-sprite-small-size, 1);
 			}
+
+			&.smallest {
+				.icon-sprite-offset(@agate-icon-sprite-smallest-size, 1);
+			}
 		});
 	});
 }
@@ -99,6 +103,10 @@
 
 			&.small {
 				.icon-sprite-offset(@agate-icon-sprite-small-size, 1);
+			}
+
+			&.smallest {
+				.icon-sprite-offset(@agate-icon-sprite-smallest-size, 1);
 			}
 		});
 	}
