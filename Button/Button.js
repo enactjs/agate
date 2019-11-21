@@ -93,19 +93,11 @@ const ButtonBase = kind({
 		/**
 		 * The size of the button.
 		 *
-		 * @type {('smallest', 'small', 'large', 'huge')}
+		 * @type {('smallest'|'small'|'large'|'huge')}
 		 * @default 'large'
 		 * @public
 		 */
 		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
-
-		/**
-		 * The amount of sprite "cells" in the src image.
-		 *
-		 * @type {Number}
-		 * @public
-		 */
-		spriteCount: PropTypes.number,
 
 		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
@@ -137,11 +129,10 @@ const ButtonBase = kind({
 			{
 				highlighted,
 				selected,
-				noChildren: (Boolean(!children))
+				noChildren: (!Boolean(children))
 			}
 		),
 		minWidth: ({children}) => (!children)
-
 	},
 
 	render: ({css, ...rest}) => {
