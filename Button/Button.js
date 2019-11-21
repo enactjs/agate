@@ -19,7 +19,6 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
-import Badge from '../Badge';
 import {IconBase} from '../Icon';
 // import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
@@ -149,7 +148,7 @@ const ButtonBase = kind({
 			...rest,
 			css,
 			decoration: !badge || React.isValidElement(badge) ? badge : (
-				<Badge>{badge}</Badge>
+				<div className={css.badge}>{badge}</div>
 			),
 			iconComponent: Icon
 		});

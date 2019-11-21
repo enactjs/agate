@@ -72,6 +72,21 @@
 			}
 		}
 
+		.badge {
+			position: absolute;
+			text-align: center;
+
+			top: @agate-button-badge-top;
+			right: @agate-button-badge-right;
+			background-color: @agate-button-badge-bg-color;
+			color: @agate-button-badge-color;
+			border-radius: @agate-button-badge-border-radius;
+			padding: @agate-button-badge-padding;
+			font-size: @agate-button-badge-font-size;
+			min-width: @agate-button-badge-min-width;
+			line-height: @agate-button-badge-line-height;
+		}
+
 		&.joinedLeft,
 		&.joinedCenter {
 			margin-right: 0;
@@ -170,6 +185,11 @@
 			&,
 			.client {
 				color: @agate-button-focus-color;
+			}
+
+			.badge {
+				color: @agate-button-badge-focus-color;
+				background-color: @agate-button-badge-focus-bg-color;
 			}
 
 			&.highlighted {
