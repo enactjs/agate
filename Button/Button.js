@@ -123,7 +123,7 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({backgroundOpacity, children, highlighted, joinedPosition, selected, type, styler, size}) => styler.append(
+		className: ({backgroundOpacity, highlighted, joinedPosition, selected, type, styler, size}) => styler.append(
 			backgroundOpacity,
 			size,
 			type,
@@ -133,7 +133,7 @@ const ButtonBase = kind({
 				selected
 			}
 		),
-		minWidth: ({children}) => (React.Children.count(children) === 0)
+		minWidth: ({children}) => (React.Children.count(children) === 0 || children === '')
 	},
 
 	render: ({css, ...rest}) => {
