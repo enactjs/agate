@@ -19,30 +19,6 @@
 		font-size: @agate-button-font-size;
 		vertical-align: middle;
 
-		&.hasIcon.noChildren {
-			// A Button with just an Icon and no text
-
-			.bg {
-				border-radius: @agate-button-icon-border-radius;
-			}
-
-			.client {
-				color: @agate-iconbutton-color;
-			}
-
-			&.lightOpaque {
-				.client {
-					color: @agate-iconbutton-lightOpaque-color;
-				}
-			}
-
-			&.transparent {
-				.client {
-					color: @agate-iconbutton-transparent-color;
-				}
-			}
-		}
-
 		&.minWidth {
 			&,
 			&.huge,
@@ -52,6 +28,30 @@
 
 				.client .icon {
 					margin: 0;
+				}
+			}
+
+			&.hasIcon {
+				// A Button with just an Icon and no text
+
+				.bg {
+					border-radius: @agate-button-icon-border-radius;
+				}
+
+				.client {
+					color: @agate-iconbutton-color;
+				}
+
+				&.lightOpaque {
+					.client {
+						color: @agate-iconbutton-lightOpaque-color;
+					}
+				}
+
+				&.transparent {
+					.client {
+						color: @agate-iconbutton-transparent-color;
+					}
 				}
 			}
 		}
@@ -166,7 +166,7 @@
 					}
 				}
 
-				&.hasIcon.noChildren {
+				&.minWidth.hasIcon {
 					.client {
 						color: @agate-iconbutton-focus-color;
 					}
@@ -186,7 +186,7 @@
 				color: @agate-button-highlighted-color;
 			}
 
-			&.hasIcon.noChildren {
+			&.minWidth.hasIcon {
 				.client {
 					color: @agate-iconbutton-highlighted-color;
 				}
@@ -203,7 +203,7 @@
 				color: @agate-button-selected-color;
 			}
 
-			&.hasIcon.noChildren {
+			&.minWidth.hasIcon {
 				.client {
 					color: @agate-iconbutton-selected-color;
 				}
@@ -235,7 +235,7 @@
 				}
 			}
 
-			&.hasIcon.noChildren {
+			&.minWidth.hasIcon {
 				.client {
 					color: @agate-iconbutton-focus-color;
 				}
