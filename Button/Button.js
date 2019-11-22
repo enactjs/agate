@@ -16,6 +16,7 @@ import Spottable from '@enact/spotlight/Spottable';
 import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
+import React from 'react';
 import compose from 'ramda/src/compose';
 
 import {IconBase} from '../Icon';
@@ -128,11 +129,10 @@ const ButtonBase = kind({
 			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
 			{
 				highlighted,
-				selected,
-				noChildren: (!Boolean(children))
+				selected
 			}
 		),
-		minWidth: ({children}) => (!children)
+		minWidth: ({children}) => (React.Children.count(children) === 0)
 	},
 
 	render: ({css, ...rest}) => {
