@@ -122,7 +122,7 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({backgroundOpacity, children, highlighted, joinedPosition, selected, type, styler, size}) => styler.append(
+		className: ({backgroundOpacity, highlighted, joinedPosition, selected, type, styler, size}) => styler.append(
 			backgroundOpacity,
 			size,
 			type,
