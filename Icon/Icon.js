@@ -58,7 +58,7 @@ const IconBase = kind({
 		 * @default 'large'
 		 * @public
 		 */
-		size: PropTypes.oneOf(['small', 'large', 'huge']),
+		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
 		 * The amount of sprite "cells" in the src image.

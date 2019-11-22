@@ -9,8 +9,13 @@ export default {
 	minus             : 0x0002D,  // hyphen
 	arrowup           : 0x02191,  // arrowup
 	arrowdown         : 0x02193,  // arrowdown
+	arrowleftturn     : 0x021B6,  // arrowleftturn
+	arrowrightturn    : 0x021B7,  // arrowrightturn
+	arrowharpoonright : 0x021C0,  // arrowharpoonright
 	ellipsis          : 0x022EF,  // ellipsis
 	check             : 0x02713,  // checkmark
+	arrowstraightup   : 0x0EFFEB,  // arrowstraightup
+	arrowuturn        : 0x0EFFEC,  // arrowuturn
 	arrowlargedown    : 0x0EFFED, // caret_down_large
 	arrowlargeup      : 0x0EFFEE, // caret_up_large
 	arrowlargeleft    : 0x0EFFEF, // caret_left_large
@@ -37,6 +42,10 @@ export default {
 	music             : 0x0F001D, // music
 	video             : 0x0F001E, // video
 	circle            : 0x0F001F, // circle
+	previous          : 0x0F0020, // previous
+	pairingdisplay    : 0x0F0021, // pairingdisplay
+	box               : 0x0F0022, // box
+	play              : 0x0F0023, // playicon
 	setting           : 0x0F002B, // setting
 	accept            : 0x0F0036, // accept
 	decline           : 0x0F0037, // decline
@@ -51,7 +60,17 @@ export default {
 	netbook           : 0x0F0040, // netbook
 	pad               : 0x0F0041, // pad
 	mobile            : 0x0F0042, // mobile
+	update            : 0x0F0043, // update
+	backapp           : 0x0F0044, // backapp
+	uninstall         : 0x0F0045, // uninstall
 	rain              : 0x0F0060, // rain
+	raindrops         : 0x0F0061, // raindrops
+	raincloud         : 0x0F0062, // raincloud
+	snow              : 0x0F0063, // snow
+	cloud             : 0x0F0064, // cloud
+	ice               : 0x0F0065, // ice
+	fog               : 0x0F0066, // fog
+	sun               : 0x0F0067, // sun
 	profileA1         : 0x0F008A, // profileA1
 	profileA2         : 0x0F008B, // profileA2
 	profileA3         : 0x0F008C, // profileA3
@@ -64,6 +83,9 @@ export default {
 	profileC2         : 0x0F0093, // profileC2
 	profileC3         : 0x0F0094, // profileC3
 	profileC4         : 0x0F0095, // profileC4
+	ac                : 0x0F00B2, // ac
+	auto              : 0x0F00B3, // auto
+	airmode           : 0x0F00B4, // air_mode
 	airdown           : 0x0F00B5, // air_down
 	airright          : 0x0F00B6, // air_right
 	airup             : 0x0F00B7, // air_up
@@ -73,6 +95,7 @@ export default {
 	fan               : 0x0F00BB, // fan
 	defrosterfront    : 0x0F00BC, // defroster_front
 	defrosterback     : 0x0F00BD, // defroster_back
+	airflow           : 0x0F00BE, // airflow
 	home              : 0x0F00BF, // home
 	temperature       : 0x0F00C0, // temperature_icon
 	compass           : 0x0F00C1, // compass

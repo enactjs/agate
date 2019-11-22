@@ -1,3 +1,4 @@
+import freeze from 'deep-freeze';
 import hoc from '@enact/core/hoc';
 import {produce} from 'immer';
 import React, {Component} from 'react';
@@ -21,9 +22,17 @@ const ProviderDecorator = hoc({state: {}}, (config, Wrapped) => {
 			this.setState(produce(cb));
 		};
 
+		getState () {
+			if (__DEV__) {
+				return freeze(this.state);
+			}
+
+			return this.state;
+		}
+
 		render () {
 			const context = {
-				state: this.state,
+				state: this.getState(this.state),
 				updateAppState: this.updateAppState
 			};
 

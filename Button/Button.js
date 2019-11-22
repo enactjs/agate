@@ -93,11 +93,11 @@ const ButtonBase = kind({
 		/**
 		 * The size of the button.
 		 *
-		 * @type {('small'|'large')}
+		 * @type {('smallest'|'small'|'large'|'huge')}
 		 * @default 'large'
 		 * @public
 		 */
-		size: PropTypes.oneOf(['small', 'large']),
+		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
@@ -121,11 +121,16 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({backgroundOpacity, highlighted, joinedPosition, selected, type, styler}) => styler.append(
+		className: ({backgroundOpacity, children, highlighted, joinedPosition, selected, type, styler, size}) => styler.append(
 			backgroundOpacity,
+			size,
 			type,
 			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
-			{highlighted, selected}
+			{
+				highlighted,
+				selected,
+				noChildren: (!Boolean(children))
+			}
 		),
 		minWidth: ({children}) => (!children)
 	},
