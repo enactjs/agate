@@ -61,7 +61,7 @@ const PopupMenuBase = kind({
 						<Heading size="title">{title}</Heading>
 					</Cell>
 					<Cell shrink className={css.body} align="stretch">
-						<Scroller direction={orientation} horizontalScrollbar="hide" verticalScrollbar="hide">
+						<Scroller direction={orientation} horizontalScrollbar="hidden" verticalScrollbar="hidden">
 							{children}
 							{closeButton ? <LabeledIconButton
 								inline
