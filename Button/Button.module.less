@@ -44,10 +44,15 @@
 		}
 
 		&.minWidth {
-			padding: 0;
+			&,
+			&.huge,
+			&.small,
+			&.smallest {
+				padding: 0;
 
-			.client .icon {
-				margin: 0;
+				.client .icon {
+					margin: 0;
+				}
 			}
 		}
 
@@ -129,10 +134,6 @@
 			line-height: @agate-button-small-line-height;
 			padding: 0 @agate-button-small-h-padding;
 
-			&.minWidth {
-				padding: 0;
-			}
-
 			.client::before {
 				bottom: 12px;
 				left: 18px;
@@ -146,10 +147,6 @@
 			line-height: @agate-button-smallest-line-height;
 			font-size: @agate-button-smallest-font-size;
 			padding: 0 @agate-button-smallest-h-padding;
-
-			&.minWidth {
-				padding: 0;
-			}
 		}
 
 		&.grid {
