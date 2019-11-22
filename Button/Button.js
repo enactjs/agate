@@ -112,6 +112,7 @@ const ButtonBase = kind({
 
 	defaultProps: {
 		backgroundOpacity: 'opaque',
+		iconComponent: Icon,
 		type: 'standard',
 		size: 'large'
 	},
@@ -145,8 +146,7 @@ const ButtonBase = kind({
 		return UiButtonBase.inline({
 			'data-webos-voice-intent': 'Select',
 			...rest,
-			css,
-			iconComponent: Icon
+			css
 		});
 	}
 });
