@@ -132,7 +132,7 @@ const ButtonBase = kind({
 				selected
 			}
 		),
-		minWidth: ({children}) => (React.Children.count(children) === 0)
+		minWidth: ({children}) => (React.Children.count(children) === 0 || children === '')
 	},
 
 	render: ({css, ...rest}) => {
