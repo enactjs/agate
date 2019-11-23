@@ -9,6 +9,7 @@
 		height: @agate-button-height;
 		font-weight: @agate-button-font-weight;
 		letter-spacing: @agate-button-letter-spacing;
+		line-height: @agate-button-line-height;
 		text-indent: @agate-button-text-indent;  // Keep the text centered
 		font-variant-ligatures: @agate-button-font-ligatures;
 		min-width: @agate-button-height;
@@ -19,10 +20,40 @@
 		vertical-align: middle;
 
 		&.minWidth {
-			padding: 0;
+			&,
+			&.huge,
+			&.small,
+			&.smallest {
+				padding: 0;
 
-			.client .icon {
-				margin: 0;
+				.client .icon {
+					margin: 0;
+				}
+			}
+
+			&.hasIcon {
+				// A Button with just an Icon and no text
+				text-indent: 0;
+
+				.bg {
+					border-radius: @agate-button-icon-border-radius;
+				}
+
+				.client {
+					color: @agate-iconbutton-color;
+				}
+
+				&.lightOpaque {
+					.client {
+						color: @agate-iconbutton-lightOpaque-color;
+					}
+				}
+
+				&.transparent {
+					.client {
+						color: @agate-iconbutton-transparent-color;
+					}
+				}
 			}
 		}
 
@@ -41,6 +72,7 @@
 			transform: @agate-button-bg-transform;
 			backdrop-filter: blur(3px);
 		}
+
 		&.lightOpaque {
 			.bg {
 				background-color: @agate-button-lightOpaque-bg-color;
@@ -65,10 +97,6 @@
 
 			.icon {
 				-webkit-margin-start: 0;
-				// height: 0;
-				// line-height: 0;
-				// margin-top: 0;
-				// margin-bottom: 0;
 			}
 		}
 
@@ -92,6 +120,14 @@
 			}
 		}
 
+		&.huge {
+			height: @agate-button-huge-height;
+			min-width: @agate-button-huge-height;
+			line-height: @agate-button-huge-line-height;
+			font-size: @agate-button-huge-font-size;
+			padding: 0 @agate-button-huge-h-padding;
+		}
+
 		&.small {
 			height: @agate-button-small-height;
 			min-width: @agate-button-small-height;
@@ -99,15 +135,19 @@
 			line-height: @agate-button-small-line-height;
 			padding: 0 @agate-button-small-h-padding;
 
-			&.minWidth {
-				padding: 0;
-			}
-
 			.client::before {
 				bottom: 12px;
 				left: 18px;
 				right: 18px;
 			}
+		}
+
+		&.smallest {
+			height: @agate-button-smallest-height;
+			min-width: @agate-button-smallest-height;
+			line-height: @agate-button-smallest-line-height;
+			font-size: @agate-button-smallest-font-size;
+			padding: 0 @agate-button-smallest-h-padding;
 		}
 
 		&.grid {
@@ -126,6 +166,12 @@
 						// animation-name: expand;
 					}
 				}
+
+				&.minWidth.hasIcon {
+					.client {
+						color: @agate-iconbutton-focus-color;
+					}
+				}
 			});
 		}
 
@@ -140,6 +186,12 @@
 			.client {
 				color: @agate-button-highlighted-color;
 			}
+
+			&.minWidth.hasIcon {
+				.client {
+					color: @agate-iconbutton-highlighted-color;
+				}
+			}
 		}
 
 		&.selected {
@@ -150,6 +202,12 @@
 			&,
 			.client {
 				color: @agate-button-selected-color;
+			}
+
+			&.minWidth.hasIcon {
+				.client {
+					color: @agate-iconbutton-selected-color;
+				}
 			}
 		}
 	});
@@ -175,6 +233,12 @@
 			&.highlighted {
 				.bg {
 					opacity: 1;
+				}
+			}
+
+			&.minWidth.hasIcon {
+				.client {
+					color: @agate-iconbutton-focus-color;
 				}
 			}
 		});

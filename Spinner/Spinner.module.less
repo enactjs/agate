@@ -86,12 +86,30 @@
 			padding: @agate-spinner-bg-padding;
 		}
 
+		&.huge {
+			.bg {
+				width: @agate-spinner-huge-size;
+				height: @agate-spinner-huge-size;
+				margin: @agate-spinner-huge-bg-margin;
+				padding: @agate-spinner-huge-bg-padding;
+			}
+		}
+
 		&.small {
 			.bg {
 				width: @agate-spinner-small-size;
 				height: @agate-spinner-small-size;
 				margin: @agate-spinner-small-bg-margin;
 				padding: @agate-spinner-small-bg-padding;
+			}
+		}
+
+		&.smallest {
+			.bg {
+				width: @agate-spinner-smallest-size;
+				height: @agate-spinner-smallest-size;
+				margin: @agate-spinner-smallest-bg-margin;
+				padding: @agate-spinner-smallest-bg-padding;
 			}
 		}
 
@@ -124,10 +142,24 @@
 
 			.spin-loop(@searching-nodes);
 
+			&.huge {
+				.node {
+					width: @agate-spinner-huge-searching-width;
+					height: @agate-spinner-huge-searching-height;
+				}
+			}
+
 			&.small {
 				.node {
 					width: @agate-spinner-small-searching-width;
 					height: @agate-spinner-small-searching-height;
+				}
+			}
+
+			&.smallest {
+				.node {
+					width: @agate-spinner-smallest-searching-width;
+					height: @agate-spinner-smallest-searching-height;
 				}
 			}
 		}
@@ -171,6 +203,14 @@
 			}
 
 			.bounce-loop(@loading-nodes);
+
+			&.huge {
+				.node {
+					width: @agate-spinner-huge-loading-width;
+					height: @agate-spinner-huge-loading-height;
+					--node-width: (@agate-spinner-huge-loading-width);
+				}
+			}
 
 			&.small {
 				.node {
