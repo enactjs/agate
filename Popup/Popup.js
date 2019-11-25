@@ -7,7 +7,7 @@ import Slottable from '@enact/ui/Slottable';
 import Transition from '@enact/ui/Transition';
 
 import Skinnable from '../Skinnable';
-import Divider from '../Divider';
+import Heading from '../Heading';
 import Button from '../Button';
 
 import PopupState from './PopupState';
@@ -65,7 +65,7 @@ const PopupBase = kind({
 						className={componentCss.closeButton}
 						size="small"
 					/> : null}
-					{title ? <Divider className={css.title}>{title}</Divider> : null}
+					{title ? <Heading className={css.title}>{title}</Heading> : null}
 					<Layout orientation={wideLayout ? 'horizontal' : 'vertical'} className={css.body}>
 						<Cell shrink={!wideLayout} className={css.content}>
 							{children}
@@ -81,10 +81,10 @@ const PopupBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [DividerBase]{@link agate/Divider.DividerBase}.
+ * Applies Agate specific behaviors to [PopupBase]{@link agate/Popup.PopupBase}.
  *
  * @hoc
- * @memberof agate/Divider
+ * @memberof agate/Popup
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
