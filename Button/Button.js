@@ -45,12 +45,12 @@ const ButtonBase = kind({
 
 	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
 		/**
-		 * Provides a way to apply animation on this button once the component is rendered.
+		 * Enable an animation that plays once when this component renders.
 		 *
-		 * @type {('onRender')}
+		 * @type {Boolean}
 		 * @public
 		 */
-		animate: PropTypes.oneOf(['onRender']),
+		animateOnRender: PropTypes.bool,
 
 		/**
 		 * Customize the animation by specifying amount of delay to be applied on the animation to the set of Buttons.
@@ -151,13 +151,13 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({animate, backgroundOpacity, highlighted, joinedPosition, selected, type, size, styler}) => styler.append(
+		className: ({animateOnRender, backgroundOpacity, highlighted, joinedPosition, selected, type, size, styler}) => styler.append(
 			backgroundOpacity,
 			size,
 			type,
 			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
 			{
-				animateOnRender: (animate === 'onRender'),
+				animateOnRender,
 				highlighted,
 				selected
 			}
