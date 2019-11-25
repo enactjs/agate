@@ -4,6 +4,16 @@
 @import "../styles/variables.less";
 @import "../styles/skin.less";
 
+@keyframes scale {
+	0%   { transform: scale(0); }
+	100% { transform: scale(1); }
+}
+@keyframes scale-bounce {
+	0%   { transform: scale(0); animation-timing-function: ease-out; }
+	80%  { transform: scale(1.07); animation-timing-function: ease-in-out; }
+	100% { transform: scale(1); }
+}
+
 .button {
 	.applySkins({
 		height: @agate-button-height;
@@ -19,27 +29,7 @@
 		font-size: @agate-button-font-size;
 		vertical-align: middle;
 
-			&.animationOnRender {
-				.bg,
-				.client {
-					animation-name: scale-bounce;
-					animation-duration: @agate-button-animation-duration;
-					animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms);
-				}
 
-				@keyframes scale-bounce {
-					from {
-						transform: scale(0);
-					}
-					80% {
-						transform: scale(1.25);
-					}
-					to {
-						transform: scale(1);
-					}
-
-				}
-			}
 
 		&.minWidth {
 			&,
@@ -79,8 +69,21 @@
 			}
 		}
 
-		&.opaque {
-			/* Available for export */
+		&.animateOnRender {
+			.bg,
+			.client {
+				animation-fill-mode: backwards;
+				animation-duration: @agate-button-animation-duration;
+				animation-name: scale-bounce;
+			}
+
+			.bg {
+				animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms);
+			}
+
+			.client {
+				animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms + @agate-button-client-animation-offset);
+			}
 		}
 
 		// opaque

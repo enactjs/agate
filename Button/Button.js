@@ -45,7 +45,7 @@ const ButtonBase = kind({
 
 	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
 		/**
-		 * Provides a way to apply animation on this button once the component is rendered. 
+		 * Provides a way to apply animation on this button once the component is rendered.
 		 *
 		 * @type {String}
 		 * @public
@@ -53,7 +53,7 @@ const ButtonBase = kind({
 		animate: PropTypes.oneOf(['onRender']),
 
 		/**
-		 * Customize the animation by specifying amount of delay to be applied on the animation to the set of Buttons. 
+		 * Customize the animation by specifying amount of delay to be applied on the animation to the set of Buttons.
 		 *
 		 *
 		 * @type {number}
@@ -146,7 +146,7 @@ const ButtonBase = kind({
 			type,
 			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
 			{
-				animationOnRender: animate === 'onRender',
+				animateOnRender: (animate === 'onRender'),
 				highlighted,
 				selected
 			}
