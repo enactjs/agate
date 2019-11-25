@@ -4,6 +4,16 @@
 @import "../styles/variables.less";
 @import "../styles/skin.less";
 
+@keyframes scale {
+	0%   { transform: scale(0); }
+	100% { transform: scale(1); }
+}
+@keyframes scale-bounce {
+	0%   { transform: scale(0); animation-timing-function: ease-out; }
+	80%  { transform: scale(1.07); animation-timing-function: ease-in-out; }
+	100% { transform: scale(1); }
+}
+
 .button {
 	.applySkins( {
 			height: @agate-button-height;
@@ -18,41 +28,6 @@
 			font-size: @agate-button-font-size;
 			vertical-align: middle;
 
-			&.animationOnRender {
-				.bg,
-				.client {
-					animation-name: scale-bounce;
-					animation-duration: @agate-button-animation-duration;
-					animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms);
-				}
-
-				@keyframes scale-bounce {
-					from {
-						transform: scale(0);
-					}
-					80% {
-						transform: scale(1.25);
-					}
-					to {
-						transform: scale(1);
-					}
-
-				}
-			}
-
-			&.minWidth {
-				padding: 0;
-
-				.client .icon {
-					margin: 0;
-				}
-			}
-
-			&.opaque {
-				/* Available for export */
-			}
-
-			// opaque
 			.bg {
 				background-color: @agate-button-bg-color;
 				border: @agate-button-border-width solid @agate-button-border-color;
@@ -64,56 +39,20 @@
 				backdrop-filter: blur(3px);
 			}
 
-			&.lightOpaque {
-				.bg {
-					background-color: @agate-button-lightOpaque-bg-color;
-				}
-
-				.client {
-					color: @agate-button-lightOpaque-color;
-				}
-			}
-
-			&.transparent {
-				.bg {
-					background-color: @agate-button-transparent-bg-color;
-				}
-
-				.client {
-					color: @agate-button-transparent-color;
-				}
-			}
-
 			.client {
 				padding: @agate-button-border-width; // We match the amount removed by the line-height above, so the text doesn't overlap the border
 				color: @agate-button-color;
 
 				.icon {
 					-webkit-margin-start: 0;
-					// height: 0;
-					// line-height: 0;
-					// margin-top: 0;
-					// margin-bottom: 0;
 				}
 			}
 
-			&.joinedLeft,
-			&.joinedCenter {
-				margin-right: 0;
+			&.minWidth {
+				padding: 0;
 
-				.bg {
-					border-top-right-radius: 0;
-					border-bottom-right-radius: 0;
-				}
-			}
-
-			&.joinedRight,
-			&.joinedCenter {
-				margin-left: 0;
-
-				.bg {
-					border-top-left-radius: 0;
-					border-bottom-left-radius: 0;
+				.client .icon {
+					margin: 0;
 				}
 			}
 
@@ -141,20 +80,66 @@
 				}
 			}
 
-			// Button-non-disabled rules
-			&:not([disabled]) {
-				.focus( {
+			&.animateOnRender {
+				.bg,
+				.client {
+					animation-fill-mode: backwards;
+					animation-duration: @agate-button-animation-duration;
+					animation-name: scale-bounce;
+				}
 
-						&.pressed,
-						&:active {
-							.bg {
-								// -webkit-animation-name: expand;
-								// animation-name: expand;
-							}
-						}
-					}
+				.bg {
+					animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms);
+				}
 
-				);
+				.client {
+					animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms + @agate-button-client-animation-offset);
+				}
+			}
+
+			// opaque
+			&.opaque {
+				/* Available for export */
+			}
+
+			&.lightOpaque {
+				.bg {
+					background-color: @agate-button-lightOpaque-bg-color;
+				}
+
+				.client {
+					color: @agate-button-lightOpaque-color;
+				}
+			}
+
+			&.transparent {
+				.bg {
+					background-color: @agate-button-transparent-bg-color;
+				}
+
+				.client {
+					color: @agate-button-transparent-color;
+				}
+			}
+
+			&.joinedLeft,
+			&.joinedCenter {
+				margin-right: 0;
+
+				.bg {
+					border-top-right-radius: 0;
+					border-bottom-right-radius: 0;
+				}
+			}
+
+			&.joinedRight,
+			&.joinedCenter {
+				margin-left: 0;
+
+				.bg {
+					border-top-left-radius: 0;
+					border-bottom-left-radius: 0;
+				}
 			}
 
 			&.highlighted {
@@ -180,8 +165,23 @@
 					color: @agate-button-selected-color;
 				}
 			}
-		}
 
+			// Button-non-disabled rules
+			&:not([disabled]) {
+				.focus( {
+
+						&.pressed,
+						&:active {
+							.bg {
+								// -webkit-animation-name: expand;
+								// animation-name: expand;
+							}
+						}
+					}
+
+				);
+			}
+		}
 	);
 
 	// TODO: Replace with an updated .focus() mixin that can apply rules both when focused and
