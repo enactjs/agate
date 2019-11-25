@@ -47,7 +47,7 @@ const ButtonBase = kind({
 		/**
 		 * Provides a way to apply animation on this button once the component is rendered.
 		 *
-		 * @type {String}
+		 * @type {('onRender')}
 		 * @public
 		 */
 		animate: PropTypes.oneOf(['onRender']),
@@ -61,7 +61,17 @@ const ButtonBase = kind({
 		 */
 		animationDelay: PropTypes.number,
 
-
+		/**
+		 * The background opacity of this button.
+		 *
+		 * Valid values are:
+		 * * `'opaque'`,
+		 * * `'lightOpaque'`, and
+		 * * `'transparent'`.
+		 *
+		 * @type {('opaque'|'lightOpaque'|'transparent')}
+		 * @public
+		 */
 		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
 
 		/**
