@@ -151,8 +151,9 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({animate, backgroundOpacity, highlighted, joinedPosition, selected, type, styler}) => styler.append(
+		className: ({animate, backgroundOpacity, highlighted, joinedPosition, selected, type, size, styler}) => styler.append(
 			backgroundOpacity,
+			size,
 			type,
 			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
 			{
