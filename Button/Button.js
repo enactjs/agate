@@ -55,8 +55,7 @@ const ButtonBase = kind({
 		/**
 		 * Customize the animation by specifying amount of delay to be applied on the animation to the set of Buttons.
 		 *
-		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @public
 		 */
 		animationDelay: PropTypes.number,
