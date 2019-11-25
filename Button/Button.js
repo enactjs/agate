@@ -170,7 +170,7 @@ const ButtonBase = kind({
 	},
 
 	render: ({css, ...rest}) => {
-		delete rest.animate;
+		delete rest.animateOnRender;
 		delete rest.animationDelay;
 		delete rest.backgroundOpacity;
 		delete rest.highlighted;
