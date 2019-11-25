@@ -7,9 +7,7 @@
 		display: inline-flex;
 		position: relative;
 		margin: @agate-input-margin;
-		border-color: @agate-input-decorator-border-color;
-		border-style: @agate-input-decorator-border-style;
-		border-width: @agate-input-decorator-border-width;
+		box-shadow: 0 0 0 @agate-input-decorator-border-width @agate-input-decorator-border-color;
 		box-sizing: border-box;
 		vertical-align: middle;
 
@@ -88,15 +86,11 @@
 			pointer-events: none;
 		}
 
-		&.focused {
+		&.focused,
+		&:focus-within {
 			background-color: @agate-input-focused-background-color;
 			background-image: @agate-input-focused-background-image;
-			border-radius: 3px;
-
-			.icon,
-			.input {
-				color: @agate-input-focused-text-color;
-			}
+			box-shadow: 0 0 0 @agate-input-decorator-focus-border-width @agate-input-decorator-focused-border-color;
 		}
 	});
 }

@@ -15,40 +15,27 @@
 }
 
 .button {
-	.applySkins( {
-			height: @agate-button-height;
-			font-weight: @agate-button-font-weight;
-			letter-spacing: @agate-button-letter-spacing;
-			text-indent: @agate-button-text-indent; // Keep the text centered
-			font-variant-ligatures: @agate-button-font-ligatures;
-			min-width: @agate-button-height;
-			padding: 0 @agate-button-h-padding;
-			margin: 0 @agate-component-spacing;
-			box-sizing: border-box;
-			font-size: @agate-button-font-size;
-			vertical-align: middle;
+	.applySkins({
+		height: @agate-button-height;
+		font-weight: @agate-button-font-weight;
+		letter-spacing: @agate-button-letter-spacing;
+		line-height: @agate-button-line-height;
+		text-indent: @agate-button-text-indent;  // Keep the text centered
+		font-variant-ligatures: @agate-button-font-ligatures;
+		min-width: @agate-button-height;
+		padding: 0 @agate-button-h-padding;
+		margin: 0 @agate-component-spacing;
+		box-sizing: border-box;
+		font-size: @agate-button-font-size;
+		vertical-align: middle;
 
-			.bg {
-				background-color: @agate-button-bg-color;
-				border: @agate-button-border-width solid @agate-button-border-color;
-				border-radius: @agate-button-border-radius;
-				color: @agate-button-color;
-				background-image: @agate-button-bg-image;
-				box-shadow: @agate-button-shadow;
-				transform: @agate-button-bg-transform;
-				backdrop-filter: blur(3px);
-			}
 
-			.client {
-				padding: @agate-button-border-width; // We match the amount removed by the line-height above, so the text doesn't overlap the border
-				color: @agate-button-color;
 
-				.icon {
-					-webkit-margin-start: 0;
-				}
-			}
-
-			&.minWidth {
+		&.minWidth {
+			&,
+			&.huge,
+			&.small,
+			&.smallest {
 				padding: 0;
 
 				.client .icon {
@@ -56,61 +43,68 @@
 				}
 			}
 
-			&.small {
-				height: @agate-button-small-height;
-				min-width: @agate-button-small-height;
-				font-size: @agate-button-small-font-size;
-				line-height: @agate-button-small-line-height;
-				padding: 0 @agate-button-small-h-padding;
-
-				&.minWidth {
-					padding: 0;
-				}
-
-				.client::before {
-					bottom: 12px;
-					left: 18px;
-					right: 18px;
-				}
-			}
-
-			&.grid {
-				.bg {
-					border-radius: @agate-button-grid-border-radius;
-				}
-			}
-
-			&.animateOnRender {
-				.bg,
-				.client {
-					animation-fill-mode: backwards;
-					animation-duration: @agate-button-animation-duration;
-					animation-name: scale-bounce;
-				}
+			&.hasIcon {
+				// A Button with just an Icon and no text
+				text-indent: 0;
 
 				.bg {
-					animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms);
+					border-radius: @agate-button-icon-border-radius;
 				}
 
 				.client {
-					animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms + @agate-button-client-animation-offset);
-				}
-			}
-
-			// opaque
-			&.opaque {
-				/* Available for export */
-			}
-
-			&.lightOpaque {
-				.bg {
-					background-color: @agate-button-lightOpaque-bg-color;
+					color: @agate-iconbutton-color;
 				}
 
-				.client {
-					color: @agate-button-lightOpaque-color;
+				&.lightOpaque {
+					.client {
+						color: @agate-iconbutton-lightOpaque-color;
+					}
+				}
+
+				&.transparent {
+					.client {
+						color: @agate-iconbutton-transparent-color;
+					}
 				}
 			}
+		}
+
+		&.animateOnRender {
+			.bg,
+			.client {
+				animation-fill-mode: backwards;
+				animation-duration: @agate-button-animation-duration;
+				animation-name: scale-bounce;
+			}
+
+			.bg {
+				animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms);
+			}
+
+			.client {
+				animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms + @agate-button-client-animation-offset);
+			}
+		}
+
+		// opaque
+		.bg {
+			background-color: @agate-button-bg-color;
+			border: @agate-button-border-width solid @agate-button-border-color;
+			border-radius: @agate-button-border-radius;
+			color: @agate-button-color;
+			background-image: @agate-button-bg-image;
+			box-shadow: @agate-button-shadow;
+			transform: @agate-button-bg-transform;
+			backdrop-filter: blur(3px);
+		}
+		&.lightOpaque {
+			.bg {
+				background-color: @agate-button-lightOpaque-bg-color;
+			}
+			.client {
+				color: @agate-button-lightOpaque-color;
+			}
+		}
 
 			&.transparent {
 				.bg {
@@ -122,25 +116,89 @@
 				}
 			}
 
+			.client {
+				padding: @agate-button-border-width; // We match the amount removed by the line-height above, so the text doesn't overlap the border
+				color: @agate-button-color;
+
+			.icon {
+				-webkit-margin-start: 0;
+			}
+		}
+
 			&.joinedLeft,
 			&.joinedCenter {
 				margin-right: 0;
 
-				.bg {
-					border-top-right-radius: 0;
-					border-bottom-right-radius: 0;
-				}
+			.bg {
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
 			}
+		}
 
-			&.joinedRight,
-			&.joinedCenter {
-				margin-left: 0;
+		&.joinedRight,
+		&.joinedCenter {
+			margin-left: 0;
 
-				.bg {
-					border-top-left-radius: 0;
-					border-bottom-left-radius: 0;
-				}
+			.bg {
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
 			}
+		}
+
+		&.huge {
+			height: @agate-button-huge-height;
+			min-width: @agate-button-huge-height;
+			line-height: @agate-button-huge-line-height;
+			font-size: @agate-button-huge-font-size;
+			padding: 0 @agate-button-huge-h-padding;
+		}
+
+		&.small {
+			height: @agate-button-small-height;
+			min-width: @agate-button-small-height;
+			font-size: @agate-button-small-font-size;
+			line-height: @agate-button-small-line-height;
+			padding: 0 @agate-button-small-h-padding;
+
+			.client::before {
+				bottom: 12px;
+				left: 18px;
+				right: 18px;
+			}
+		}
+
+		&.smallest {
+			height: @agate-button-smallest-height;
+			min-width: @agate-button-smallest-height;
+			line-height: @agate-button-smallest-line-height;
+			font-size: @agate-button-smallest-font-size;
+			padding: 0 @agate-button-smallest-h-padding;
+		}
+
+		&.grid {
+			.bg {
+				border-radius: @agate-button-grid-border-radius;
+			}
+		}
+
+		// Button-non-disabled rules
+		&:not([disabled]) {
+			.focus({
+				&.pressed,
+				&:active {
+					.bg {
+						// -webkit-animation-name: expand;
+						// animation-name: expand;
+					}
+				}
+
+				&.minWidth.hasIcon {
+					.client {
+						color: @agate-iconbutton-focus-color;
+					}
+				}
+			});
+		}
 
 			&.highlighted {
 				.bg {
@@ -149,66 +207,65 @@
 					opacity: @agate-button-highlighted-opacity;
 				}
 
-				&,
+			&,
+			.client {
+				color: @agate-button-highlighted-color;
+			}
+
+			&.minWidth.hasIcon {
 				.client {
-					color: @agate-button-highlighted-color;
+					color: @agate-iconbutton-highlighted-color;
 				}
 			}
+		}
 
 			&.selected {
 				.bg {
 					background-color: @agate-button-selected-bg-color;
 				}
 
-				&,
+			&,
+			.client {
+				color: @agate-button-selected-color;
+			}
+
+			&.minWidth.hasIcon {
 				.client {
-					color: @agate-button-selected-color;
+					color: @agate-iconbutton-selected-color;
 				}
 			}
-
-			// Button-non-disabled rules
-			&:not([disabled]) {
-				.focus( {
-
-						&.pressed,
-						&:active {
-							.bg {
-								// -webkit-animation-name: expand;
-								// animation-name: expand;
-							}
-						}
-					}
-
-				);
-			}
 		}
-	);
+	});
 
 	// TODO: Replace with an updated .focus() mixin that can apply rules both when focused and
 	// within a focused node
 	&:global(.spottable):focus,
 	:global(.spottable):focus & {
-		.applySkins( {
-				background-color: transparent;
-				background-image: none;
+		.applySkins({
+			background-color: transparent;
+			background-image: none;
 
+			.bg {
+				background-color: @agate-button-focus-bg-color;
+				background-image: @agate-button-focus-bg-image;
+			}
+
+			&,
+			.client {
+				color: @agate-button-focus-color;
+			}
+
+			&.highlighted {
 				.bg {
-					background-color: @agate-button-focus-bg-color;
-					background-image: @agate-button-focus-bg-image;
-				}
-
-				&,
-				.client {
-					color: @agate-button-focus-color;
-				}
-
-				&.highlighted {
-					.bg {
-						opacity: 1;
-					}
+					opacity: 1;
 				}
 			}
 
-		);
+			&.minWidth.hasIcon {
+				.client {
+					color: @agate-iconbutton-focus-color;
+				}
+			}
+		});
 	}
 }

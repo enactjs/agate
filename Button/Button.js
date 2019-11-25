@@ -16,6 +16,7 @@ import Spottable from '@enact/spotlight/Spottable';
 import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
+import React from 'react';
 import compose from 'ramda/src/compose';
 
 import {IconBase} from '../Icon';
@@ -111,11 +112,11 @@ const ButtonBase = kind({
 		/**
 		 * The size of the button.
 		 *
-		 * @type {('small'|'large')}
+		 * @type {('smallest'|'small'|'large'|'huge')}
 		 * @default 'large'
 		 * @public
 		 */
-		size: PropTypes.oneOf(['small', 'large']),
+		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
@@ -129,6 +130,7 @@ const ButtonBase = kind({
 
 	defaultProps: {
 		backgroundOpacity: 'opaque',
+		iconComponent: Icon,
 		type: 'standard',
 		size: 'large'
 	},
@@ -153,7 +155,7 @@ const ButtonBase = kind({
 			...style,
 			'--agate-button-animation-delay': animationDelay
 		}),
-		minWidth: ({children}) => (!children)
+		minWidth: ({children}) => (React.Children.count(children) === 0 || children === '')
 	},
 
 	render: ({css, ...rest}) => {
@@ -168,8 +170,7 @@ const ButtonBase = kind({
 		return UiButtonBase.inline({
 			'data-webos-voice-intent': 'Select',
 			...rest,
-			css,
-			iconComponent: Icon
+			css
 		});
 	}
 });
