@@ -1,3 +1,4 @@
+import EnactPropTypes from "@enact/core/internal/prop-types";
 import kind from "@enact/core/kind";
 import UiLabeledIcon from "@enact/ui/LabeledIcon";
 import PropTypes from "prop-types";
@@ -23,6 +24,11 @@ const LabeledIconButtonBase = kind({
   name: "LabeledIconButton",
 
   propTypes: /** @lends agate/LabeledIconButton.LabeledIconButtonBase.prototype */ {
+    backgroundOpacity: PropTypes.oneOf([
+      "opaque",
+      "lightOpaque",
+      "transparent"
+    ]),
     /**
      * Customizes the component by mapping the supplied collection of CSS class names to the
      * corresponding internal Elements and states of this component.
@@ -41,12 +47,32 @@ const LabeledIconButtonBase = kind({
     css: PropTypes.object,
 
     /**
+     * Provides a way to call special interface attention to this button. It will be "featured"
+     * in some way by the theme's visual rules.
+     *
+     * @type {Boolean}
+     * @public
+     */
+    highlighted: PropTypes.bool,
+
+    /**
      * The icon displayed within the button.
      *
      * @type {String}
      * @public
      */
     icon: PropTypes.string,
+
+    /**
+     * The component used to render the `icon`.
+     *
+     * This will receive the `icon` prop as `children` and should handle it appropriately. This
+     * prop is ignored in the case of a component being passed into the `icon` prop. It will
+     * also receive the `flip` and `size` props as set on the component.
+     *
+     * @type {Component}
+     */
+    iconComponent: EnactPropTypes.component,
 
     // forwarded from Spottable
     pressed: PropTypes.bool,
@@ -75,14 +101,27 @@ const LabeledIconButtonBase = kind({
     publicClassNames: true
   },
 
-  render: ({ css, icon, pressed, selected, spriteCount, ...rest }) => {
+  render: ({
+    backgroundOpacity,
+    css,
+    icon,
+    iconComponent,
+    highlighted,
+    pressed,
+    selected,
+    spriteCount,
+    ...rest
+  }) => {
     return UiLabeledIcon.inline({
       ...rest,
       icon: (
         <Button
+          backgroundOpacity={backgroundOpacity}
+          icon={icon}
+          iconComponent={iconComponent}
+          highlighted={highlighted}
           pressed={pressed}
           selected={selected}
-          icon={icon}
           spriteCount={spriteCount}
         />
       ),

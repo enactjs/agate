@@ -1,5 +1,3 @@
-// Button.module.less
-//
 @import "../styles/mixins.less";
 @import "../styles/variables.less";
 @import "../styles/skin.less";
@@ -109,22 +107,6 @@
 					.bg {
 						border-radius: @agate-button-icon-border-radius;
 					}
-
-					.client {
-						color: @agate-button-color;
-					}
-
-					&.lightOpaque {
-						.client {
-							color: @agate-button-lightOpaque-color;
-						}
-					}
-
-					&.transparent {
-						.client {
-							color: @agate-button-transparent-color;
-						}
-					}
 				}
 			}
 
@@ -172,6 +154,10 @@
 				line-height: @agate-button-huge-line-height;
 				font-size: @agate-button-huge-font-size;
 				padding: 0 @agate-button-huge-h-padding;
+
+				.bg {
+					border-width: @agate-button-huge-border-width;
+				}
 			}
 
 			&.small {
@@ -208,9 +194,23 @@
 					color: @agate-button-highlighted-color;
 				}
 
-				&.minWidth.hasIcon {
+				&.lightOpaque {
+					.bg {
+						background-color: @agate-button-lightOpaque-highlighted-bg-color;
+					}
+
 					.client {
-						color: @agate-button-focus-color;
+						color: @agate-button-lightOpaque-highlighted-color;
+					}
+				}
+
+				&.transparent {
+					.bg {
+						background-color: @agate-button-transparent-bg-color;
+					}
+
+					.client {
+						color: @agate-button-transparent-highlighted-color;
 					}
 				}
 			}
@@ -218,6 +218,7 @@
 			&.selected {
 				.bg {
 					background-color: @agate-button-selected-bg-color;
+					border-color: @agate-button-selected-border-color;
 				}
 
 				&,
@@ -225,33 +226,25 @@
 					color: @agate-button-selected-color;
 				}
 
-				&.minWidth.hasIcon {
+				&.lightOpaque {
+					.bg {
+						background-color: @agate-button-lightOpaque-selected-bg-color;
+					}
+
 					.client {
-						color: @agate-button-selected-color;
+						color: @agate-button-lightOpaque-selected-color;
 					}
 				}
-			}
 
-			// Button-non-disabled rules
-			&:not([disabled]) {
-				.focus( {
-
-						&.pressed,
-						&:active {
-							.bg {
-								// -webkit-animation-name: expand;
-								// animation-name: expand;
-							}
-						}
-
-						&.minWidth.hasIcon {
-							.client {
-								color: @agate-iconbutton-focus-color;
-							}
-						}
+				&.transparent {
+					.bg {
+						background-color: @agate-button-transparent-bg-color;
 					}
 
-				);
+					.client {
+						color: @agate-button-transparent-selected-color;
+					}
+				}
 			}
 		}
 
@@ -278,12 +271,6 @@
 				&.highlighted {
 					.bg {
 						opacity: 1;
-					}
-				}
-
-				&.minWidth.hasIcon {
-					.client {
-						color: @agate-button-focus-color;
 					}
 				}
 			}
