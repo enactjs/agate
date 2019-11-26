@@ -4,6 +4,15 @@
 @import "../styles/variables.less";
 @import "../styles/skin.less";
 
+// NOTE: This animation conflicts with any skin that assigns the @agate-button-bg-transform value.
+// A more elaborate animation system will be required to support the combination of skin variables
+// and preset values into global keyframe animations.
+@keyframes scale-bounce {
+	0%   { transform: scale(0); animation-timing-function: ease-out; }
+	80%  { transform: scale(1.07); animation-timing-function: ease-in-out; }
+	100% { transform: scale(1); }
+}
+
 .button {
 	.applySkins({
 		height: @agate-button-height;
@@ -18,6 +27,56 @@
 		box-sizing: border-box;
 		font-size: @agate-button-font-size;
 		vertical-align: middle;
+
+		.bg {
+			background-color: @agate-button-bg-color;
+			border: @agate-button-border-width solid @agate-button-border-color;
+			border-radius: @agate-button-border-radius;
+			color: @agate-button-color;
+			background-image: @agate-button-bg-image;
+			box-shadow: @agate-button-shadow;
+			transform: @agate-button-bg-transform;
+			backdrop-filter: blur(3px);
+		}
+
+		.client {
+			padding: @agate-button-border-width; // We match the amount removed by the line-height above, so the text doesn't overlap the border
+			color: @agate-button-color;
+
+			.icon {
+				-webkit-margin-start: 0;
+			}
+		}
+
+		&.grid {
+			.bg {
+				border-radius: @agate-button-grid-border-radius;
+			}
+		}
+
+		// opaque
+		&.opaque {
+			/* Available for export */
+		}
+
+		&.lightOpaque {
+			.bg {
+				background-color: @agate-button-lightOpaque-bg-color;
+			}
+			.client {
+				color: @agate-button-lightOpaque-color;
+			}
+		}
+
+		&.transparent {
+			.bg {
+				background-color: @agate-button-transparent-bg-color;
+			}
+
+			.client {
+				color: @agate-button-transparent-color;
+			}
+		}
 
 		&.minWidth {
 			&,
@@ -57,46 +116,20 @@
 			}
 		}
 
-		&.opaque {
-			/* Available for export */
-		}
-
-		// opaque
-		.bg {
-			background-color: @agate-button-bg-color;
-			border: @agate-button-border-width solid @agate-button-border-color;
-			border-radius: @agate-button-border-radius;
-			color: @agate-button-color;
-			background-image: @agate-button-bg-image;
-			box-shadow: @agate-button-shadow;
-			transform: @agate-button-bg-transform;
-			backdrop-filter: blur(3px);
-		}
-
-		&.lightOpaque {
-			.bg {
-				background-color: @agate-button-lightOpaque-bg-color;
-			}
+		&.animateOnRender {
+			.bg,
 			.client {
-				color: @agate-button-lightOpaque-color;
+				animation-fill-mode: backwards;
+				animation-duration: @agate-button-animation-duration;
+				animation-name: scale-bounce;
 			}
-		}
 
-		&.transparent {
 			.bg {
-				background-color: @agate-button-transparent-bg-color;
+				animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms);
 			}
+
 			.client {
-				color: @agate-button-transparent-color;
-			}
-		}
-
-		.client {
-			padding: @agate-button-border-width;	// We match the amount removed by the line-height above, so the text doesn't overlap the border
-			color: @agate-button-color;
-
-			.icon {
-				-webkit-margin-start: 0;
+				animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms + @agate-button-client-animation-offset);
 			}
 		}
 
@@ -150,31 +183,6 @@
 			padding: 0 @agate-button-smallest-h-padding;
 		}
 
-		&.grid {
-			.bg {
-				border-radius: @agate-button-grid-border-radius;
-			}
-		}
-
-		// Button-non-disabled rules
-		&:not([disabled]) {
-			.focus({
-				&.pressed,
-				&:active {
-					.bg {
-						// -webkit-animation-name: expand;
-						// animation-name: expand;
-					}
-				}
-
-				&.minWidth.hasIcon {
-					.client {
-						color: @agate-iconbutton-focus-color;
-					}
-				}
-			});
-		}
-
 		&.highlighted {
 			.bg {
 				background-color: @agate-button-highlighted-bg-color;
@@ -209,6 +217,25 @@
 					color: @agate-iconbutton-selected-color;
 				}
 			}
+		}
+
+		// Button-non-disabled rules
+		&:not([disabled]) {
+			.focus({
+				&.pressed,
+				&:active {
+					.bg {
+						// -webkit-animation-name: expand;
+						// animation-name: expand;
+					}
+				}
+
+				&.minWidth.hasIcon {
+					.client {
+						color: @agate-iconbutton-focus-color;
+					}
+				}
+			});
 		}
 	});
 
