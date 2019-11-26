@@ -159,6 +159,10 @@
 			line-height: @agate-button-huge-line-height;
 			font-size: @agate-button-huge-font-size;
 			padding: 0 @agate-button-huge-h-padding;
+
+			.bg {
+				border-width: @agate-button-huge-border-width;
+			}
 		}
 
 		&.small {
@@ -205,6 +209,7 @@
 		&.selected {
 			.bg {
 				background-color: @agate-button-selected-bg-color;
+				border-color: @agate-button-selected-border-color;
 			}
 
 			&,
@@ -215,6 +220,18 @@
 			&.minWidth.hasIcon {
 				.client {
 					color: @agate-iconbutton-selected-color;
+				}
+			}
+
+			&.lightOpaque {
+				.bg {
+					background-color: @agate-button-lightOpaque-bg-color;
+				}
+			}
+
+			&.transparent {
+				.bg {
+					background-color: @agate-button-transparent-bg-color;
 				}
 			}
 		}
