@@ -1,15 +1,14 @@
-import kind from '@enact/core/kind';
-import UiLabeledIcon from '@enact/ui/LabeledIcon';
-import PropTypes from 'prop-types';
-import React from 'react';
+import kind from "@enact/core/kind";
+import UiLabeledIcon from "@enact/ui/LabeledIcon";
+import PropTypes from "prop-types";
+import React from "react";
 
-import {ButtonDecorator} from '../Button';
-import {IconButtonBase} from '../IconButton';
-import Skinnable from '../Skinnable';
+import { ButtonBase, ButtonDecorator } from "../Button";
+import Skinnable from "../Skinnable";
 
-import componentCss from './LabeledIconButton.module.less';
+import componentCss from "./LabeledIconButton.module.less";
 
-const Button = Skinnable(IconButtonBase);
+const Button = Skinnable(ButtonBase);
 
 /**
  * An icon button component with a label.
@@ -21,70 +20,75 @@ const Button = Skinnable(IconButtonBase);
  * @public
  */
 const LabeledIconButtonBase = kind({
-	name: 'LabeledIconButton',
+  name: "LabeledIconButton",
 
-	propTypes: /** @lends agate/LabeledIconButton.LabeledIconButtonBase.prototype */ {
-		/**
-		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
-		 *
-		 * The following classes are supported:
-		 *
-		 * * `labeledIconButton` - The root component class
-		 * * `icon` - The icon component class
-		 * * `label` - The label component class
-		 * * `selected` - Applied to a `selected` button
-		 * * `small` - Applied to a LabeledIconButton specifying a `size` of `'small'`
-		 *
-		 * @type {Object}
-		 * @public
-		 */
-		css: PropTypes.object,
+  propTypes: /** @lends agate/LabeledIconButton.LabeledIconButtonBase.prototype */ {
+    /**
+     * Customizes the component by mapping the supplied collection of CSS class names to the
+     * corresponding internal Elements and states of this component.
+     *
+     * The following classes are supported:
+     *
+     * * `labeledIconButton` - The root component class
+     * * `icon` - The icon component class
+     * * `label` - The label component class
+     * * `selected` - Applied to a `selected` button
+     * * `small` - Applied to a LabeledIconButton specifying a `size` of `'small'`
+     *
+     * @type {Object}
+     * @public
+     */
+    css: PropTypes.object,
 
-		/**
-		 * The icon displayed within the button.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		icon: PropTypes.string,
+    /**
+     * The icon displayed within the button.
+     *
+     * @type {String}
+     * @public
+     */
+    icon: PropTypes.string,
 
-		// forwarded from Spottable
-		pressed: PropTypes.bool,
+    // forwarded from Spottable
+    pressed: PropTypes.bool,
 
-		/**
-		 * Selects the component.
-		 *
-		 * Setting `selected` may be useful when the component represents a toggleable option. The
-		 * visual effect may be customized using the
-		 * [css]{@link agate/LabeledIconButton.LabeledIconButtonBase.css} prop.
-		 */
-		selected: PropTypes.bool,
+    /**
+     * Selects the component.
+     *
+     * Setting `selected` may be useful when the component represents a toggleable option. The
+     * visual effect may be customized using the
+     * [css]{@link agate/LabeledIconButton.LabeledIconButtonBase.css} prop.
+     */
+    selected: PropTypes.bool,
 
-		/**
-		 * The amount of sprite "cells" in the src image.
-		 *
-		 * @type {Number}
-		 * @public
-		 */
-		spriteCount: PropTypes.number
-	},
+    /**
+     * The amount of sprite "cells" in the src image.
+     *
+     * @type {Number}
+     * @public
+     */
+    spriteCount: PropTypes.number
+  },
 
-	styles: {
-		css: componentCss,
-		className: 'labeledIconButton',
-		publicClassNames: true
-	},
+  styles: {
+    css: componentCss,
+    className: "labeledIconButton",
+    publicClassNames: true
+  },
 
-	render: ({css, icon, pressed, selected, spriteCount, ...rest}) => {
-		return UiLabeledIcon.inline({
-			...rest,
-			icon: (
-				<Button pressed={pressed} selected={selected} spriteCount={spriteCount}>{icon}</Button>
-			),
-			css
-		});
-	}
+  render: ({ css, icon, pressed, selected, spriteCount, ...rest }) => {
+    return UiLabeledIcon.inline({
+      ...rest,
+      icon: (
+        <Button
+          pressed={pressed}
+          selected={selected}
+          icon={icon}
+          spriteCount={spriteCount}
+        />
+      ),
+      css
+    });
+  }
 });
 
 /**
@@ -117,8 +121,4 @@ const LabeledIconButtonDecorator = ButtonDecorator;
 const LabeledIconButton = LabeledIconButtonDecorator(LabeledIconButtonBase);
 
 export default LabeledIconButton;
-export {
-	LabeledIconButton,
-	LabeledIconButtonBase,
-	LabeledIconButtonDecorator
-};
+export { LabeledIconButton, LabeledIconButtonBase, LabeledIconButtonDecorator };

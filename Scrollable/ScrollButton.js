@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import IconButton from '../IconButton';
+import Button from '../Button';
 
 import css from './Scrollbar.module.less';
 
 /**
- * An [IconButton]{@link agate/IconButton.IconButton} used within
+ * An [Button]{@link agate/Button.Button} used within
  * a [Scrollbar]{@link agate/Scrollable.Scrollbar}.
  *
  * @class ScrollButton
  * @memberof agate/Scrollable
- * @extends agate/IconButton.IconButton
+ * @extends agate/Button.Button
  * @ui
  * @private
  */
@@ -78,7 +78,7 @@ const ScrollButtonBase = kind({
 
 	handlers: {
 		forwardRef: (node, {forwardRef}) => {
-			// Allowing findDOMNode in the absence of a means to retrieve a node ref through IconButton
+			// Allowing findDOMNode in the absence of a means to retrieve a node ref through Button
 			// eslint-disable-next-line react/no-find-dom-node
 			const current = ReactDOM.findDOMNode(node);
 
@@ -102,7 +102,7 @@ const ScrollButtonBase = kind({
 		delete rest.active;
 
 		return (
-			<IconButton
+			<Button
 				{...rest}
 				backgroundOpacity="transparent"
 				disabled={disabled}
@@ -110,7 +110,7 @@ const ScrollButtonBase = kind({
 				size="small"
 			>
 				{children}
-			</IconButton>
+			</Button>
 		);
 	}
 });

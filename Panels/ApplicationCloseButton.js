@@ -2,7 +2,7 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import IconButton from '../IconButton';
+import Button from '../Button';
 
 /**
  * An {@link agate/ApplicationCloseButton.ApplicationCloseButton} with `closex` icon. It is used in
@@ -43,13 +43,13 @@ const ApplicationCloseButton = kind({
 
 	render: ({onApplicationClose, ...rest}) => {
 		return (
-			<IconButton
+			<Button
 				{...rest}
 				onTap={onApplicationClose}
 				size="small"
+				icon="closex"
 			>
-				closex
-			</IconButton>
+			</Button>
 		);
 	}
 });

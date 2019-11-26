@@ -16,7 +16,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from '../Button';
-import IconButton from '../IconButton';
 import Skinnable from '../Skinnable';
 
 import css from './ToggleButton.module.less';
@@ -159,7 +158,7 @@ const ToggleButtonBase = kind({
 		delete rest.toggleOnLabel;
 
 		return iconToggleButton ? (
-			<IconButton {...rest} aria-pressed={selected} css={css} selected={selected}>{icon}</IconButton>
+			<Button {...rest} aria-pressed={selected} css={css} selected={selected}>{icon}</Button>
 		) : (
 			<Button {...rest} aria-pressed={selected} css={css} icon={icon} selected={selected}>{children}</Button>
 		);
