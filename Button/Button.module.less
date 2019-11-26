@@ -48,6 +48,18 @@
 			}
 		}
 
+		.badge {
+			position: absolute;
+			.position(@agate-button-badge-position);
+			border-radius: @agate-button-badge-border-radius;
+			padding: @agate-button-badge-padding;
+			font-size: @agate-button-badge-font-size;
+			line-height: @agate-button-badge-line-height;
+			color: @agate-button-badge-color;
+			background-color: var(--agate-button-badge-bg-color, @agate-button-badge-bg-color);
+			z-index: 1;
+		}
+
 		&.grid {
 			.bg {
 				border-radius: @agate-button-grid-border-radius;
@@ -118,7 +130,8 @@
 
 		&.animateOnRender {
 			.bg,
-			.client {
+			.client,
+			.badge {
 				animation-fill-mode: backwards;
 				animation-duration: @agate-button-animation-duration;
 				animation-name: scale-bounce;
@@ -130,6 +143,10 @@
 
 			.client {
 				animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms + @agate-button-client-animation-offset);
+			}
+
+			.badge {
+				animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms + @agate-button-badge-animation-offset);
 			}
 		}
 
