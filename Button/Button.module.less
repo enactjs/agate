@@ -204,6 +204,26 @@
 					color: @agate-iconbutton-highlighted-color;
 				}
 			}
+
+			&.lightOpaque {
+				.bg {
+					background-color: @agate-button-lightOpaque-highlighted-bg-color;
+				}
+
+				.client {
+					color: @agate-button-lightOpaque-highlighted-color;
+				}
+			}
+
+			&.transparent {
+				.bg {
+					background-color: @agate-button-transparent-bg-color;
+				}
+
+				.client {
+					color: @agate-button-transparent-highlighted-color;
+				}
+			}
 		}
 
 		&.selected {
@@ -225,13 +245,21 @@
 
 			&.lightOpaque {
 				.bg {
-					background-color: @agate-button-lightOpaque-bg-color;
+					background-color: @agate-button-lightOpaque-selected-bg-color;
+				}
+
+				.client {
+					color: @agate-button-lightOpaque-selected-color;
 				}
 			}
 
 			&.transparent {
 				.bg {
 					background-color: @agate-button-transparent-bg-color;
+				}
+
+				.client {
+					color: @agate-button-transparent-selected-color;
 				}
 			}
 		}
