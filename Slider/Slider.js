@@ -214,9 +214,10 @@ const SliderBase = kind({
 		})
 	},
 
-	render: ({css, focused, ...rest}) => {
+	render: ({css, ...rest}) => {
 		delete rest.activateOnFocus;
 		delete rest.active;
+		delete rest.focused;
 		delete rest.knobStep;
 		delete rest.onActivate;
 

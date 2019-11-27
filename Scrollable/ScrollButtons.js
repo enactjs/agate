@@ -218,6 +218,7 @@ class ScrollButtons extends Component {
 
 	onDownPrev = () => {
 		if (this.announceRef.current.announce) {
+			// eslint-disable-next-line no-unused-vars
 			const {rtl, vertical} = this.props;
 			// this.announceRef.current.announce(vertical && $L('UP') || rtl && $L('RIGHT') || $L('LEFT'));
 		}
@@ -225,6 +226,7 @@ class ScrollButtons extends Component {
 
 	onDownNext = () => {
 		if (this.announceRef.current.announce) {
+			// eslint-disable-next-line no-unused-vars
 			const {rtl, vertical} = this.props;
 			// this.announceRef.current.announce(vertical && $L('DOWN') || rtl && $L('LEFT') || $L('RIGHT'));
 		}

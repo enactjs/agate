@@ -52,6 +52,22 @@ const DividerBase = kind({
 		children: PropTypes.node,
 
 		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal Elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `divider` - The root class name
+		 * * `icon` - The icon node
+		 * * `startSection` - Applied to sections if `startSection` prop is `true`
+		 * * `none` - Applied to a `size='small'` divider
+		 * * `small` - Applied to a `size='small'` divider
+		 * * `medium` - Applied to a `size='medium'` divider
+		 * * `large` - Applied to a `size='large'` divider
+		 */
+		css: PropTypes.object,
+
+		/**
 		 * Add an optional icon to the divider. This accepts any value that [Icon]{@agate/Icon}
 		 * supports.
 		 *
