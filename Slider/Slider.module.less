@@ -24,6 +24,81 @@
 			background-image: @agate-slider-track-bg-image;
 			border-radius: @agate-slider-border-radius;
 			transform: @agate-slider-track-transform;
+
+			&::before,
+			&::after {
+				content: '';
+				position: absolute;
+				background: inherit;
+			}
+
+			.fill {
+				border-radius: @agate-slider-border-radius;
+
+				&::before {
+					content: '';
+					position: absolute;
+					background: inherit;
+				}
+			}
+
+			&.horizontal {
+				&::before {
+					right: 100%;
+					border-top-left-radius: @agate-slider-progressbar-extra-border-radius;
+					border-bottom-left-radius: @agate-slider-progressbar-extra-border-radius;
+				}
+
+				&::after {
+					left: 100%;
+					border-top-right-radius: @agate-slider-progressbar-extra-border-radius;
+					border-bottom-right-radius: @agate-slider-progressbar-extra-border-radius;
+				}
+
+				&::before,
+				&::after {
+					width: @agate-slider-progressbar-extra-width;
+					height: 100%;
+				}
+
+				.fill::before {
+					width: @agate-slider-progressbar-extra-width;
+					height: 100%;
+					right: 100%;
+					border-top-left-radius: @agate-slider-progressbar-extra-border-radius;
+					border-bottom-left-radius: @agate-slider-progressbar-extra-border-radius;
+				}
+			}
+
+			&.vertical {
+				&::before {
+					bottom: 100%;
+					border-top-left-radius: @agate-slider-progressbar-extra-border-radius;
+					border-top-right-radius: @agate-slider-progressbar-extra-border-radius;
+				}
+
+				&::after {
+					top: 100%;
+					border-bottom-left-radius: @agate-slider-progressbar-extra-border-radius;
+					border-bottom-right-radius: @agate-slider-progressbar-extra-border-radius;
+				}
+
+				&::before,
+				&::after {
+					width: 100%;
+					height: @agate-slider-progressbar-extra-width;
+				}
+
+				.fill {
+					&::before {
+						width: 100%;
+						height: @agate-slider-progressbar-extra-width;
+						top: 100%;
+						border-bottom-left-radius: @agate-slider-progressbar-extra-border-radius;
+						border-bottom-right-radius: @agate-slider-progressbar-extra-border-radius;
+					}
+				}
+			}
 		}
 
 		.fill {
@@ -35,6 +110,7 @@
 		.knob {
 			position: absolute;
 			will-change: left, bottom;
+			z-index: 1;
 
 			&::before {
 				content: "";
