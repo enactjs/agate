@@ -66,11 +66,6 @@
 @agate-colorpicker-bg-color: rgba(0, 0, 0, 0.5);
 @agate-colorpicker-palette-shadow: @agate-popup-shadow;
 
-// Divider
-// ---------------------------------------
-@agate-divider-color:        @agate-text-color;
-@agate-divider-border-color: fadeout(@agate-divider-color, 30%);
-
 // Drawer
 // ---------------------------------------
 @agate-drawer-bg-color: @agate-popup-bg-color;
@@ -85,9 +80,10 @@
 
 // Heading
 // ---------------------------------------
-@agate-heading-border-color: @agate-accent;
+@agate-heading-border-color: fadeout(@agate-heading-text-color, 30%);
 @agate-heading-text-color: @agate-text-color;
 @agate-heading-accent-color: @agate-accent;
+
 
 // Icon
 // ---------------------------------------
