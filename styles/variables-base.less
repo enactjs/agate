@@ -65,10 +65,13 @@
 @agate-button-font-size: 36px;
 @agate-button-line-height: inherit;
 @agate-button-h-padding: 27px;
-@agate-button-huge-height: 210px;
+@agate-button-animation-duration: 500ms;
+@agate-button-client-animation-offset: 0;
+@agate-button-huge-height: 250px;
 @agate-button-huge-font-size: 45px;
 @agate-button-huge-line-height: (@agate-button-huge-height - (2 * @agate-button-border-width));
 @agate-button-huge-h-padding: 36px;
+@agate-button-huge-border-width: 10px;
 @agate-button-small-height: 60px;
 @agate-button-small-font-size: 30px;
 @agate-button-small-line-height: (@agate-button-small-height - (2 * @agate-button-border-width));
@@ -96,18 +99,6 @@
 @agate-datetimepicker-transform: none;
 @agate-datetimepicker-label-transform: none;
 @agate-datetimepicker-cell-transform: none;
-
-// Divider
-// ---------------------------------------
-@agate-divider-border-width: 1px;
-@agate-divider-font-size: 36px;
-@agate-divider-font-weight: @agate-base-font-weight;
-@agate-divider-height: 36px;
-@agate-divider-spacing: @agate-component-spacing;
-@agate-divider-text-transform: inherit;
-@agate-divider-icon-alignment: inherit;
-@agate-divider-letter-spacing: inherit;
-@agate-divider-font-ligatures: @agate-base-font-ligatures;
 
 // Drawer
 // ---------------------------------------
@@ -139,12 +130,19 @@
 
 // Heading
 // ---------------------------------------
-@agate-heading-border-width: 3px;
+@agate-heading-border-width: 1px;
 @agate-heading-margin: 0 @agate-spotlight-outset (1.5 * @agate-spotlight-outset) @agate-spotlight-outset;
-@agate-heading-padding: 24px;
+@agate-heading-padding: 0;
+@agate-heading-spacing-title: 0;
+@agate-heading-spacing-medium: @agate-component-spacing;
+@agate-heading-spacing-small: inherit;
+@agate-heading-spacing-large: inherit;
+@agate-heading-text-transform: none;
 @agate-heading-showline-padding: 12px;
 @agate-heading-letter-spacing: normal;
 @agate-heading-line-height: 1.6em;
+@agate-heading-font-ligatures: @agate-base-font-ligatures;
+@agate-heading-title-padding: @agate-heading-padding 50px;
 @agate-heading-title-font-family: @agate-base-font-family;
 @agate-heading-title-font-size: 70px;
 @agate-heading-title-font-style: normal;
@@ -161,11 +159,6 @@
 @agate-heading-small-font-size: 24px;
 @agate-heading-small-font-style: normal;
 @agate-heading-small-font-weight: bold;
-@agate-heading-spacing-title: 0;
-@agate-heading-spacing-large: inherit;
-@agate-heading-spacing-medium: inherit;
-@agate-heading-spacing-small: inherit;
-@agate-heading-title-padding: @agate-heading-padding 50px;
 @agate-heading-title-decoration-height: inherit;
 @agate-heading-title-decoration-width: inherit;
 @agate-heading-title-decoration-positions: inherit;
@@ -181,8 +174,8 @@
 @agate-icon-margin: @agate-component-spacing;
 @agate-icon-letter-spacing: inherit;
 @agate-icon-text-indent: initial;
-@agate-icon-huge-size: 210px;
-@agate-icon-huge-font-size: 400px;
+@agate-icon-huge-size: 190px;
+@agate-icon-huge-font-size: 320px;
 @agate-icon-sprite-huge-size: @agate-icon-huge-size;
 @agate-icon-small-size: 36px;
 @agate-icon-small-font-size: (@agate-icon-small-size * 2);
