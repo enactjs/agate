@@ -279,7 +279,7 @@ describe('Slider', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test.skip('should not call onSpotlightLeft on horizontal slider at greater than min value', () => {
+	test('should not call onSpotlightLeft on horizontal slider at greater than min value', () => {
 		const handleSpotlight = jest.fn();
 		const subject = mount(
 			<Slider defaultValue={1} onSpotlightLeft={handleSpotlight} />
@@ -324,7 +324,7 @@ describe('Slider', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test.skip('should not call onSpotlightDown on vertical slider at greater than min value', () => {
+	test('should not call onSpotlightDown on vertical slider at greater than min value', () => {
 		const handleSpotlight = jest.fn();
 		const subject = mount(
 			<Slider defaultValue={1} orientation="vertical" onSpotlightDown={handleSpotlight} />
@@ -369,7 +369,7 @@ describe('Slider', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test.skip('should not call onSpotlightRight on horizontal slider at less than max value', () => {
+	test('should not call onSpotlightRight on horizontal slider at less than max value', () => {
 		const handleSpotlight = jest.fn();
 		const subject = mount(
 			<Slider defaultValue={99} onSpotlightRight={handleSpotlight} />
@@ -414,7 +414,7 @@ describe('Slider', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test.skip('should not call onSpotlightUp on vertical slider at less than max value', () => {
+	test('should not call onSpotlightUp on vertical slider at less than max value', () => {
 		const handleSpotlight = jest.fn();
 		const subject = mount(
 			<Slider defaultValue={99} orientation="vertical" onSpotlightUp={handleSpotlight} />
