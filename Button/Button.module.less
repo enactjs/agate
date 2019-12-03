@@ -16,10 +16,33 @@
 		animation-timing-function: ease-in-out;
 	}
 
+<<<<<<< HEAD
 	100% {
 		transform: scale(1);
 	}
 }
+=======
+		.badge {
+			position: absolute;
+			.position(@agate-button-badge-position);
+			border-radius: @agate-button-badge-border-radius;
+			padding: @agate-button-badge-padding;
+			font-size: @agate-button-badge-font-size;
+			line-height: @agate-button-badge-line-height;
+			letter-spacing: @agate-button-badge-letter-spacing;
+			text-indent: @agate-button-badge-text-indent;
+			transform: @agate-button-badge-transform;
+			color: @agate-button-badge-color;
+			background-color: var(--agate-button-badge-bg-color, @agate-button-badge-bg-color);
+			z-index: 1;
+		}
+
+		&.grid {
+			.bg {
+				border-radius: @agate-button-grid-border-radius;
+			}
+		}
+>>>>>>> develop
 
 .button {
 	.applySkins( {
@@ -82,13 +105,24 @@
 					background-color: @agate-button-transparent-bg-color;
 				}
 
+<<<<<<< HEAD
 				.client {
 					color: @agate-button-transparent-color;
 				}
+=======
+		&.animateOnRender {
+			.bg,
+			.client,
+			.badge {
+				animation-fill-mode: backwards;
+				animation-duration: @agate-button-animation-duration;
+				animation-name: scale-bounce;
+>>>>>>> develop
 			}
 
 			&.minWidth {
 
+<<<<<<< HEAD
 				&,
 				&.huge,
 				&.small,
@@ -99,6 +133,16 @@
 						margin: 0;
 					}
 				}
+=======
+			.client {
+				animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms + @agate-button-client-animation-offset);
+			}
+
+			.badge {
+				animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms + @agate-button-badge-animation-offset);
+			}
+		}
+>>>>>>> develop
 
 				&.hasIcon {
 					// A Button with just an Icon and no text
@@ -138,9 +182,36 @@
 				}
 			}
 
-			&.joinedRight,
-			&.joinedCenter {
-				margin-left: 0;
+			.badge {
+				.position(@agate-button-small-badge-position);
+				border-radius: @agate-button-small-badge-border-radius;
+				padding: @agate-button-small-badge-padding;
+				font-size: @agate-button-small-badge-font-size;
+				line-height: @agate-button-small-badge-line-height;
+				letter-spacing: @agate-button-small-badge-letter-spacing;
+				text-indent: @agate-button-small-badge-text-indent;
+				transform: @agate-button-small-badge-transform;
+			}
+		}
+
+		&.smallest {
+			height: @agate-button-smallest-height;
+			min-width: @agate-button-smallest-height;
+			line-height: @agate-button-smallest-line-height;
+			font-size: @agate-button-smallest-font-size;
+			padding: 0 @agate-button-smallest-h-padding;
+
+			.badge {
+				.position(@agate-button-smallest-badge-position);
+				border-radius: @agate-button-smallest-badge-border-radius;
+				padding: @agate-button-smallest-badge-padding;
+				font-size: @agate-button-smallest-badge-font-size;
+				line-height: @agate-button-smallest-badge-line-height;
+				letter-spacing: @agate-button-smallest-badge-letter-spacing;
+				text-indent: @agate-button-smallest-badge-text-indent;
+				transform: @agate-button-smallest-badge-transform;
+			}
+		}
 
 				.bg {
 					border-top-left-radius: 0;
