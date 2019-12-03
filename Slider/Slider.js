@@ -247,11 +247,11 @@ const SliderBase = kind({
  */
 const SliderDecorator = compose(
 	Pure,
-	Spottable,
 	Changeable,
 	SliderBehaviorDecorator,
-	Skinnable,
-	Slottable({slots: ['knob']})
+	Spottable,
+	Slottable({slots: ['knob']}),
+	Skinnable
 );
 
 /**
