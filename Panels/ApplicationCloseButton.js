@@ -48,8 +48,7 @@ const ApplicationCloseButton = kind({
 				onTap={onApplicationClose}
 				size="small"
 				icon="closex"
-			>
-			</Button>
+			/>
 		);
 	}
 });
