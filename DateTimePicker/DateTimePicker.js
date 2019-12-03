@@ -1,3 +1,14 @@
+/**
+ * An Agate-themed date/time picker component.
+ *
+ * @example
+ * <Button>Hello Enact!</Button>
+ *
+ * @module agate/DateItemPicker
+ * @exports DateTimePicker
+ * @exports DateTimePickerBase
+ */
+
 import React from 'react';
 import classnames from 'classnames';
 import kind from '@enact/core/kind';
@@ -32,6 +43,14 @@ const PickerCell = kind({
 	)
 });
 
+/**
+ * A date/time Picker component.
+ *
+ * @class DateTimePickerBase
+ * @memberof agate/DateTimePicker
+ * @ui
+ * @public
+ */
 class DateTimePickerBase extends React.Component {
 	constructor (props) {
 		super(props);
@@ -107,6 +126,16 @@ class DateTimePickerBase extends React.Component {
 	}
 }
 
+/**
+ * An Agate themed date/time Picker component.
+ *
+ * @class DateTimePicker
+ * @memberof agate/DateTimePicker
+ * @extends agate/DateTimePicker.DateTimePickerBase
+ * @mixes agate/Skinnable.Skinnable
+ * @ui
+ * @public
+ */
 const DateTimePicker = Skinnable(DateTimePickerBase);
 
 export default DateTimePicker;

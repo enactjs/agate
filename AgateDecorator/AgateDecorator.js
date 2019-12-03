@@ -1,7 +1,8 @@
 /**
- * Exports the {@link agate/AgateDecorator.AgateDecorator} HOC
+ * Applies Agate specific styling and behaviors.
  *
  * @module agate/AgateDecorator
+ * @exports AgateDecorator
  */
 
 import {addAll} from '@enact/core/keymap';
