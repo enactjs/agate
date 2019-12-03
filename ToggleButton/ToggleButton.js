@@ -9,16 +9,16 @@
  * @exports ToggleButtonBase
  */
 
-import kind from "@enact/core/kind";
-import Pure from "@enact/ui/internal/Pure";
-import Toggleable from "@enact/ui/Toggleable";
-import PropTypes from "prop-types";
-import React from "react";
+import kind from '@enact/core/kind';
+import Pure from '@enact/ui/internal/Pure';
+import Toggleable from '@enact/ui/Toggleable';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import Button from "../Button";
-import Skinnable from "../Skinnable";
+import Button from '../Button';
+import Skinnable from '../Skinnable';
 
-import css from "./ToggleButton.module.less";
+import css from './ToggleButton.module.less';
 
 /**
  * A stateless [Button]{@link agate/Button.Button} that can be toggled by changing its
@@ -31,10 +31,10 @@ import css from "./ToggleButton.module.less";
  * @public
  */
 const ToggleButtonBase = kind({
-  name: "ToggleButton",
+	name: 'ToggleButton',
 
-  propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
-    /**
+	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
+		/**
      * The string to be displayed as the main content of the toggle button.
      *
      * If `toggleOffLabel` and/or `toggleOnLabel` are provided, they will be used for the
@@ -43,43 +43,43 @@ const ToggleButtonBase = kind({
      * @type {Node}
      * @public
      */
-    children: PropTypes.node,
+		children: PropTypes.node,
 
-    /**
+		/**
      * Disables the button.
      *
      * @type {Boolean}
      * @default false
      * @public
      */
-    disabled: PropTypes.bool,
+		disabled: PropTypes.bool,
 
-    /**
+		/**
      * Add an optional icon to the divider. This accepts any value that [Icon]{@agate/Icon}
      * supports.
      *
      * @type {String}
      */
-    icon: PropTypes.string,
+		icon: PropTypes.string,
 
-    /**
+		/**
      * Determines whether the button is currently in an "on" or "off" state.
      *
      * @type {Boolean}
      * @public
      */
-    selected: PropTypes.bool,
+		selected: PropTypes.bool,
 
-    /**
+		/**
      * The size of the button.
      *
      * @type {('small'|'large')}
      * @default 'large'
      * @public
      */
-    size: PropTypes.oneOf(["small", "large"]),
+		size: PropTypes.oneOf(['small', 'large']),
 
-    /**
+		/**
      * Button text displayed in the 'off' state.
      *
      * If not specified, `children` will be used for 'off' button text.
@@ -88,9 +88,9 @@ const ToggleButtonBase = kind({
      * @default ''
      * @public
      */
-    toggleOffLabel: PropTypes.string,
+		toggleOffLabel: PropTypes.string,
 
-    /**
+		/**
      * Button text displayed in the 'on' state.
      *
      * If not specified, `children` will be used for 'on' button text.
@@ -99,9 +99,9 @@ const ToggleButtonBase = kind({
      * @default ''
      * @public
      */
-    toggleOnLabel: PropTypes.string,
+		toggleOnLabel: PropTypes.string,
 
-    /**
+		/**
      * The shape of the button where `standard` is pill-shaped and `grid` is rectangular.
      *
      * * Values: `'standard'`, `'grid'`
@@ -109,67 +109,60 @@ const ToggleButtonBase = kind({
      * @type {String}
      * @public
      */
-    type: PropTypes.oneOf(["standard", "grid"]),
+		type: PropTypes.oneOf(['standard', 'grid']),
 
-    /**
+		/**
      * Shows toggle indicator.
      *
      * @type {Boolean}
      * @default false
      * @public
      */
-    underline: PropTypes.bool
-  },
+		underline: PropTypes.bool
+	},
 
-  defaultProps: {
-    underline: false,
-    disabled: false,
-    minWidth: true,
-    selected: false,
-    size: "large",
-    toggleOffLabel: "",
-    toggleOnLabel: ""
-  },
+	defaultProps: {
+		underline: false,
+		disabled: false,
+		minWidth: true,
+		selected: false,
+		size: 'large',
+		toggleOffLabel: '',
+		toggleOnLabel: ''
+	},
 
-  styles: {
-    css,
-    className: "toggleButton",
-    publicClassNames: true
-  },
+	styles: {
+		css,
+		className: 'toggleButton',
+		publicClassNames: true
+	},
 
-  computed: {
-    className: ({ selected, styler, underline }) =>
-      styler.append({ selected, underline }),
-    children: ({ children, selected, toggleOnLabel, toggleOffLabel }) => {
-      let c = children;
-      if (selected && toggleOnLabel) {
-        c = toggleOnLabel;
-      } else if (!selected && toggleOffLabel) {
-        c = toggleOffLabel;
-      }
-      return c;
-    },
-    iconToggleButton: ({ children, toggleOnLabel, toggleOffLabel, icon }) =>
-      !children && !toggleOnLabel && !toggleOffLabel && icon
-  },
+	computed: {
+		className: ({selected, styler, underline}) => styler.append({selected, underline}),
+		children: ({children, selected, toggleOnLabel, toggleOffLabel}) => {
+			let c = children;
+			if (selected && toggleOnLabel) {
+				c = toggleOnLabel;
+			} else if (!selected && toggleOffLabel) {
+				c = toggleOffLabel;
+			}
+			return c;
+		},
+		iconToggleButton: ({children, toggleOnLabel, toggleOffLabel, icon}) =>
+			!children && !toggleOnLabel && !toggleOffLabel && icon
+	},
 
-  render: ({ children, iconToggleButton, icon, selected, ...rest }) => {
-    delete rest.underline;
-    delete rest.toggleOffLabel;
-    delete rest.toggleOnLabel;
+	render: ({children, iconToggleButton, icon, selected, ...rest}) => {
+		delete rest.underline;
+		delete rest.toggleOffLabel;
+		delete rest.toggleOnLabel;
 
-    return (
-      <Button
-        {...rest}
-        aria-pressed={selected}
-        css={css}
-        icon={icon}
-        selected={selected}
-      >
-        {children}
-      </Button>
-    );
-  }
+		return (
+			<Button {...rest} aria-pressed={selected} css={css} icon={icon} selected={selected}>
+				{children}
+			</Button>
+		);
+	}
 });
 
 /**
@@ -187,12 +180,7 @@ const ToggleButtonBase = kind({
  * @mixes ui/Toggleable
  * @public
  */
-const ToggleButton = Pure(
-  Toggleable(
-    { prop: "selected", toggleProp: "onTap" },
-    Skinnable(ToggleButtonBase)
-  )
-);
+const ToggleButton = Pure(Toggleable({prop: 'selected', toggleProp: 'onTap'}, Skinnable(ToggleButtonBase)));
 
 export default ToggleButton;
-export { ToggleButton, ToggleButtonBase };
+export {ToggleButton, ToggleButtonBase};

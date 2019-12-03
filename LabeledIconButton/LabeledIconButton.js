@@ -1,13 +1,13 @@
-import EnactPropTypes from "@enact/core/internal/prop-types";
-import kind from "@enact/core/kind";
-import UiLabeledIcon from "@enact/ui/LabeledIcon";
-import PropTypes from "prop-types";
-import React from "react";
+import EnactPropTypes from '@enact/core/internal/prop-types';
+import kind from '@enact/core/kind';
+import UiLabeledIcon from '@enact/ui/LabeledIcon';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import { ButtonBase, ButtonDecorator } from "../Button";
-import Skinnable from "../Skinnable";
+import {ButtonBase, ButtonDecorator} from '../Button';
+import Skinnable from '../Skinnable';
 
-import componentCss from "./LabeledIconButton.module.less";
+import componentCss from './LabeledIconButton.module.less';
 
 const Button = Skinnable(ButtonBase);
 
@@ -21,15 +21,11 @@ const Button = Skinnable(ButtonBase);
  * @public
  */
 const LabeledIconButtonBase = kind({
-  name: "LabeledIconButton",
+	name: 'LabeledIconButton',
 
-  propTypes: /** @lends agate/LabeledIconButton.LabeledIconButtonBase.prototype */ {
-    backgroundOpacity: PropTypes.oneOf([
-      "opaque",
-      "lightOpaque",
-      "transparent"
-    ]),
-    /**
+	propTypes: /** @lends agate/LabeledIconButton.LabeledIconButtonBase.prototype */ {
+		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
+		/**
      * Customizes the component by mapping the supplied collection of CSS class names to the
      * corresponding internal Elements and states of this component.
      *
@@ -44,26 +40,26 @@ const LabeledIconButtonBase = kind({
      * @type {Object}
      * @public
      */
-    css: PropTypes.object,
+		css: PropTypes.object,
 
-    /**
+		/**
      * Provides a way to call special interface attention to this button. It will be "featured"
      * in some way by the theme's visual rules.
      *
      * @type {Boolean}
      * @public
      */
-    highlighted: PropTypes.bool,
+		highlighted: PropTypes.bool,
 
-    /**
+		/**
      * The icon displayed within the button.
      *
      * @type {String}
      * @public
      */
-    icon: PropTypes.string,
+		icon: PropTypes.string,
 
-    /**
+		/**
      * The component used to render the `icon`.
      *
      * This will receive the `icon` prop as `children` and should handle it appropriately. This
@@ -72,62 +68,52 @@ const LabeledIconButtonBase = kind({
      *
      * @type {Component}
      */
-    iconComponent: EnactPropTypes.component,
+		iconComponent: EnactPropTypes.component,
 
-    // forwarded from Spottable
-    pressed: PropTypes.bool,
+		// forwarded from Spottable
+		pressed: PropTypes.bool,
 
-    /**
+		/**
      * Selects the component.
      *
      * Setting `selected` may be useful when the component represents a toggleable option. The
      * visual effect may be customized using the
      * [css]{@link agate/LabeledIconButton.LabeledIconButtonBase.css} prop.
      */
-    selected: PropTypes.bool,
+		selected: PropTypes.bool,
 
-    /**
+		/**
      * The amount of sprite "cells" in the src image.
      *
      * @type {Number}
      * @public
      */
-    spriteCount: PropTypes.number
-  },
+		spriteCount: PropTypes.number
+	},
 
-  styles: {
-    css: componentCss,
-    className: "labeledIconButton",
-    publicClassNames: true
-  },
+	styles: {
+		css: componentCss,
+		className: 'labeledIconButton',
+		publicClassNames: true
+	},
 
-  render: ({
-    backgroundOpacity,
-    css,
-    icon,
-    iconComponent,
-    highlighted,
-    pressed,
-    selected,
-    spriteCount,
-    ...rest
-  }) => {
-    return UiLabeledIcon.inline({
-      ...rest,
-      icon: (
-        <Button
-          backgroundOpacity={backgroundOpacity}
-          icon={icon}
-          iconComponent={iconComponent}
-          highlighted={highlighted}
-          pressed={pressed}
-          selected={selected}
-          spriteCount={spriteCount}
-        />
-      ),
-      css
-    });
-  }
+	render: ({backgroundOpacity, css, icon, iconComponent, highlighted, pressed, selected, spriteCount, ...rest}) => {
+		return UiLabeledIcon.inline({
+			...rest,
+			icon: (
+				<Button
+					backgroundOpacity={backgroundOpacity}
+					icon={icon}
+					iconComponent={iconComponent}
+					highlighted={highlighted}
+					pressed={pressed}
+					selected={selected}
+					spriteCount={spriteCount}
+				/>
+			),
+			css
+		});
+	}
 });
 
 /**
@@ -160,4 +146,4 @@ const LabeledIconButtonDecorator = ButtonDecorator;
 const LabeledIconButton = LabeledIconButtonDecorator(LabeledIconButtonBase);
 
 export default LabeledIconButton;
-export { LabeledIconButton, LabeledIconButtonBase, LabeledIconButtonDecorator };
+export {LabeledIconButton, LabeledIconButtonBase, LabeledIconButtonDecorator};
