@@ -24,7 +24,7 @@ import iconList from './IconList.js';
 import componentCss from './Icon.module.less';
 
 /**
- * Renders a agate-styled icon without any behavior.
+ * Renders an Agate-styled icon without any behavior.
  *
  * @class IconBase
  * @memberof agate/Icon
@@ -222,7 +222,7 @@ const IconDecorator = compose(
 );
 
 /**
- * A Agate-styled icon.
+ * An Agate-styled icon.
  *
  * @class Icon
  * @memberof agate/Icon

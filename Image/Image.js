@@ -30,7 +30,7 @@ const placeholder =
 	'4NCg==';
 
 /**
- * A agate-styled image component without any behavior
+ * An Agate-styled image component without any behavior
  *
  * @class ImageBase
  * @memberof agate/Image
@@ -151,7 +151,7 @@ const ImageDecorator = compose(
 );
 
 /**
- * A agate-styled image component
+ * An Agate-styled image component
  *
  * ```
  * <Image

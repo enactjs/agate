@@ -149,7 +149,7 @@ const LabeledIconButtonBase = kind({
 const LabeledIconButtonDecorator = ButtonDecorator;
 
 /**
- * A Agate-styled icon button component with a label.
+ * An Agate-styled icon button component with a label.
  *
  * Usage:
  * ```

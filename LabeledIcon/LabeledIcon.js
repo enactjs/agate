@@ -72,7 +72,7 @@ const LabeledIconDecorator = compose(
 );
 
 /**
- * A Agate-styled icon component with a label.
+ * An Agate-styled icon component with a label.
  *
  * Usage:
  * ```

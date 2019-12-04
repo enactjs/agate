@@ -80,7 +80,7 @@ const ItemContent = kind({
 });
 
 /**
- * A Agate-styled item.
+ * An Agate-styled item.
  *
  * @class ItemBase
  * @memberof Agate/Item
