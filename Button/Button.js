@@ -74,6 +74,24 @@ const ButtonBase = kind({
 		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
 
 		/**
+		 * Displays a small message overlaid onto the button.
+		 *
+		 * @type {Number|String}
+		 * @public
+		 */
+		badge: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+		/**
+		 * Set a custom color for the badge element.
+		 *
+		 * This prop is only visible if the `badge` prop is also set.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		badgeColor: PropTypes.string,
+
+		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
 		 *
@@ -161,9 +179,19 @@ const ButtonBase = kind({
 				selected
 			}
 		),
-		style: ({animationDelay, style}) => ({
+		decoration: ({badge, css, decoration}) => {
+			if (!badge) return decoration;
+			return (
+				<React.Fragment>
+					<div className={css.badge}>{badge}</div>
+					{decoration}
+				</React.Fragment>
+			);
+		},
+		style: ({animationDelay, badgeColor, style}) => ({
 			...style,
-			'--agate-button-animation-delay': animationDelay
+			'--agate-button-animation-delay': animationDelay,
+			'--agate-button-badge-bg-color': badgeColor
 		}),
 		minWidth: ({children}) => (React.Children.count(children) === 0 || children === '')
 	},
@@ -172,6 +200,7 @@ const ButtonBase = kind({
 		delete rest.animateOnRender;
 		delete rest.animationDelay;
 		delete rest.backgroundOpacity;
+		delete rest.badge;
 		delete rest.highlighted;
 		delete rest.joinedPosition;
 		delete rest.selected;
