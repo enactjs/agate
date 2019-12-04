@@ -1,5 +1,5 @@
 /**
- * Provides Agate-ez-themed item components and behaviors. Useful for content in lists.
+ * Provides Agate-themed item components and behaviors. Useful for content in lists.
  *
  * @example
  * <Item>Hello Enact!</Item>
@@ -7,6 +7,7 @@
  * @module agate/Item
  * @exports Item
  * @exports ItemBase
+ * @exports ItemDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -79,10 +80,10 @@ const ItemContent = kind({
 });
 
 /**
- * A agate-ez-styled item.
+ * A Agate-styled item.
  *
  * @class ItemBase
- * @memberof agate-ez/Item
+ * @memberof Agate/Item
  * @ui
  * @public
  */

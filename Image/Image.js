@@ -172,7 +172,6 @@ const ImageDecorator = compose(
  */
 const Image = ImageDecorator(ImageBase);
 
-
 export default Image;
 export {
 	Image,

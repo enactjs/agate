@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-prop-types */
 /**
  * An interactive numeric range picker with increment decrement
  *
@@ -13,7 +12,7 @@
  *   step={5}
  * />
  *
- * @module moonstone/IncrementSlider
+ * @module agate/IncrementSlider
  * @exports IncrementSlider
  * @exports IncrementSliderBase
  * @exports IncrementSliderDecorator
@@ -50,12 +49,12 @@ const forwardWithType = (type, props) => forward(type, {type}, props);
 
 /**
  * A stateless Slider with IconButtons to increment and decrement the value. In most circumstances,
- * you will want to use the stateful version: {@link moonstone/IncrementSlider.IncrementSlider}.
+ * you will want to use the stateful version: {@link agate/IncrementSlider.IncrementSlider}.
  *
  * @class IncrementSliderBase
- * @memberof moonstone/IncrementSlider
- * @extends moonstone/Slider.SliderBase
- * @mixes moonstone/Skinnable.Skinnable
+ * @memberof agate/IncrementSlider
+ * @extends agate/Slider.SliderBase
+ * @mixes agate/Skinnable.Skinnable
  * @mixes spotlight/Spottable.Spottable
  * @ui
  * @public
@@ -63,13 +62,21 @@ const forwardWithType = (type, props) => forward(type, {type}, props);
 const IncrementSliderBase = kind({
 	name: 'IncrementSlider',
 
-	propTypes: /** @lends moonstone/IncrementSlider.IncrementSliderBase.prototype */ {
+	propTypes: /** @lends agate/IncrementSlider.IncrementSliderBase.prototype */ {
+		/**
+		 * Sets the knob to selected state and allows it to move via 5-way controls.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		active: PropTypes.bool,
+
 		/**
 		 * Prevents read out of both the slider and the increment and decrement
 		 * buttons.
 		 *
 		 * @type {Boolean}
-		 * @memberof moonstone/IncrementSlider.IncrementSliderBase.prototype
+		 * @memberof agate/IncrementSlider.IncrementSliderBase.prototype
 		 * @public
 		 */
 		'aria-hidden': PropTypes.bool,
@@ -80,27 +87,10 @@ const IncrementSliderBase = kind({
 		 * the slider directly through the props.
 		 *
 		 * @type {String|Number}
-		 * @memberof moonstone/IncrementSlider.IncrementSliderBase.prototype
+		 * @memberof agate/IncrementSlider.IncrementSliderBase.prototype
 		 * @public
 		 */
 		'aria-valuetext': PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-		/**
-		 * The `data-webos-voice-group-label` for the IconButton of IncrementSlider.
-		 *
-		 * @type {String}
-		 * @memberof moonstone/IncrementSlider.IncrementSliderBase.prototype
-		 * @public
-		 */
-		'data-webos-voice-group-label': PropTypes.string,
-
-		/**
-		 * Sets the knob to selected state and allows it to move via 5-way controls.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		active: PropTypes.bool,
 
 		/**
 		 * Background progress, as a proportion between `0` and `1`.
@@ -121,6 +111,15 @@ const IncrementSliderBase = kind({
 		css: PropTypes.object,
 
 		/**
+		 * The `data-webos-voice-group-label` for the IconButton of IncrementSlider.
+		 *
+		 * @type {String}
+		 * @memberof agate/IncrementSlider.IncrementSliderBase.prototype
+		 * @public
+		 */
+		'data-webos-voice-group-label': PropTypes.string,
+
+		/**
 		* Sets the hint string read when focusing the decrement button.
 		*
 		* @default 'press ok button to decrease the value'
@@ -130,9 +129,9 @@ const IncrementSliderBase = kind({
 		decrementAriaLabel: PropTypes.string,
 
 		/**
-		 * Assign a custom icon for the decrementer. All strings supported by [Icon]{@link moonstone/Icon.Icon} are
+		 * Assign a custom icon for the decrementer. All strings supported by [Icon]{@link agate/Icon.Icon} are
 		 * supported. Without a custom icon, the default is used, and is automatically changed when
-		 * [vertical]{@link moonstone/IncrementSlider.IncrementSlider#vertical} is changed.
+		 * [vertical]{@link agate/IncrementSlider.IncrementSlider#vertical} is changed.
 		 *
 		 * @type {String}
 		 * @public
@@ -172,9 +171,9 @@ const IncrementSliderBase = kind({
 		incrementAriaLabel: PropTypes.string,
 
 		/**
-		 * Assign a custom icon for the incrementer. All strings supported by [Icon]{@link moonstone/Icon.Icon} are
+		 * Assign a custom icon for the incrementer. All strings supported by [Icon]{@link agate/Icon.Icon} are
 		 * supported. Without a custom icon, the default is used, and is automatically changed when
-		 * [vertical]{@link moonstone/IncrementSlider.IncrementSlider#vertical} is changed.
+		 * [vertical]{@link agate/IncrementSlider.IncrementSlider#vertical} is changed.
 		 *
 		 * @type {String}
 		 * @public
@@ -508,7 +507,7 @@ const IncrementSliderDecorator = compose(
 );
 
 /**
- * An IncrementSlider with Moonstone styling and SliderDecorator applied with IconButtons to
+ * An IncrementSlider with Agate styling and SliderDecorator applied with IconButtons to
  * increment and decrement the value.
  *
  * By default, `IncrementSlider` maintains the state of its `value` property. Supply the
@@ -517,8 +516,8 @@ const IncrementSliderDecorator = compose(
  * `onChange` events.
  *
  * @class IncrementSlider
- * @memberof moonstone/IncrementSlider
- * @extends moonstone/IncrementSlider.IncrementSliderBase
+ * @memberof agate/IncrementSlider
+ * @extends agate/IncrementSlider.IncrementSliderBase
  * @ui
  * @public
  */
