@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-prop-types */
 /**
  * An interactive numeric range picker with increment decrement
  *

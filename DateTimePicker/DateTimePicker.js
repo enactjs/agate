@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import kind from '@enact/core/kind';
 import {Cell, Column, Row} from '@enact/ui/Layout';
+import PropTypes from 'prop-types';
 
 import Button from '../Button';
 import Picker from '../Picker';
@@ -20,6 +21,9 @@ const ranges = {
 
 const PickerCell = kind({
 	name: 'PickerCell',
+	propTypes: {
+		range: PropTypes.arrayOf(PropTypes.string)
+	},
 	render: ({children, range, ...rest}) => (
 		<Cell shrink>
 			<Column align="center" className={css.pickerCol}>
@@ -33,6 +37,12 @@ const PickerCell = kind({
 });
 
 class DateTimePickerBase extends React.Component {
+	static propTypes = {
+		onChange: PropTypes.func,
+		onClose: PropTypes.func,
+		onSave: PropTypes.func
+	}
+
 	constructor (props) {
 		super(props);
 		this.state = {
