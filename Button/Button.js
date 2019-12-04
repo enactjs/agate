@@ -37,6 +37,7 @@ const Icon = Skinnable(IconBase);
  * @class ButtonBase
  * @memberof agate/Button
  * @extends ui/Button.ButtonBase
+ * @omit minWidth
  * @ui
  * @public
  */
@@ -157,7 +158,8 @@ const ButtonBase = kind({
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
 		 * other related buttons.
 		 *
-		 * @type {String}
+		 * @type {('grid'|'standard')}
+		 * @default 'standard'
 		 * @public
 		 */
 		type: PropTypes.oneOf(['grid', 'standard'])
@@ -166,8 +168,8 @@ const ButtonBase = kind({
 	defaultProps: {
 		backgroundOpacity: 'opaque',
 		iconComponent: Icon,
-		type: 'standard',
-		size: 'large'
+		size: 'large',
+		type: 'standard'
 	},
 
 	styles: {
@@ -221,20 +223,6 @@ const ButtonBase = kind({
 		});
 	}
 });
-
-/**
- * Enforces a minimum width on the Button.
- *
- * *NOTE*: This property's default is `true` and must be explicitly set to `false` to allow
- * the button to shrink to fit its contents.
- *
- * @name minWidth
- * @memberof agate/Button.ButtonBase.prototype
- * @type {Boolean}
- * @default true
- * @public
- */
-
 
 /**
  * Applies Agate specific behaviors to [Button]{@link agate/Button.ButtonBase} components.

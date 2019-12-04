@@ -35,7 +35,7 @@ import css from './ToggleButton.module.less';
 const ToggleButtonBase = kind({
 	name: 'ToggleButton',
 
-	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
+	propTypes: /** @lends agate/ToggleButton.ToggleButtonBase.prototype */ {
 		/**
 		 * The string to be displayed as the main content of the toggle button.
 		 *
@@ -68,6 +68,7 @@ const ToggleButtonBase = kind({
 		 * Determines whether the button is currently in an "on" or "off" state.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		selected: PropTypes.bool,
@@ -75,11 +76,11 @@ const ToggleButtonBase = kind({
 		/**
 		 * The size of the button.
 		 *
-		 * @type {('small'|'large')}
+		 * @type {('smallest'|'small'|'large'|'huge')}
 		 * @default 'large'
 		 * @public
 		 */
-		size: PropTypes.oneOf(['small', 'large']),
+		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
 		 * Button text displayed in the 'off' state.
@@ -106,9 +107,7 @@ const ToggleButtonBase = kind({
 		/**
 		 * The shape of the button where `standard` is pill-shaped and `grid` is rectangular.
 		 *
-		 * * Values: `'standard'`, `'grid'`
-		 *
-		 * @type {String}
+		 * @type {('standard'|'grid')}
 		 * @public
 		 */
 		type: PropTypes.oneOf(['standard', 'grid']),
@@ -124,13 +123,12 @@ const ToggleButtonBase = kind({
 	},
 
 	defaultProps: {
-		underline: false,
 		disabled: false,
-		minWidth: true,
 		selected: false,
 		size: 'large',
 		toggleOffLabel: '',
-		toggleOnLabel: ''
+		toggleOnLabel: '',
+		underline: false
 	},
 
 	styles: {
@@ -177,8 +175,9 @@ const ToggleButtonBase = kind({
  * @class ToggleButton
  * @memberof agate/ToggleButton
  * @extends agate/ToggleButton.ToggleButtonBase
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes agate/Skinnable.Skinnable
  * @ui
- * @mixes ui/Toggleable
  * @public
  */
 const ToggleButton = Pure(
