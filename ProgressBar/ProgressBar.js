@@ -22,6 +22,7 @@ import componentCss from './ProgressBar.module.less';
  *
  * @class ProgressBar
  * @memberof agate/ProgressBar
+ * @mixes agate/Skinnable.Skinnable
  * @ui
  * @public
  */

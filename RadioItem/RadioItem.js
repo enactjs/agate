@@ -24,16 +24,18 @@ import componentCss from './RadioItem.module.less';
  *
  * @class RadioItem
  * @memberof Agate/RadioItem
- * @extends agate/RadioItem.RadioItem
+ * @extends agate/Item.Item
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes ui/Touchable.Touchable
+ * @mixes agate/Skinnable.Skinnable
  * @ui
  * @public
  */
-
-
 const RadioItemBase = kind({
 	name: 'RadioItemBase',
 
-	propTypes: /** @lends agate/RadioItem.RadioItemBase.prototype */ {
+	propTypes: /** @lends agate/RadioItem.RadioItem.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
@@ -93,7 +95,6 @@ const RadioItemBase = kind({
 		);
 	}
 });
-
 
 const RadioItemDecorator = compose(
 	Toggleable({toggleProp: 'onTap'}),
