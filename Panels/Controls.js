@@ -69,14 +69,7 @@ const ControlsBase = kind({
 		className: 'controls'
 	},
 
-	render: ({
-		children,
-		closeButtonAriaLabel,
-		forwardRef,
-		noCloseButton,
-		onApplicationClose,
-		...rest
-	}) => {
+	render: ({children, closeButtonAriaLabel, forwardRef, noCloseButton, onApplicationClose, ...rest}) => {
 		if (!children && noCloseButton) return null;
 
 		return (
@@ -113,4 +106,7 @@ const ControlsBase = kind({
 const Controls = ForwardRef(SpotlightContainerDecorator(ControlsBase));
 
 export default Controls;
-export {Controls, ControlsBase};
+export {
+	Controls,
+	ControlsBase
+};

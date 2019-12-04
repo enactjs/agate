@@ -1,26 +1,16 @@
 // Button.module.less
 //
-@import '../styles/mixins.less';
-@import '../styles/variables.less';
-@import '../styles/skin.less';
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
 
 // NOTE: This animation conflicts with any skin that assigns the @agate-button-bg-transform value.
 // A more elaborate animation system will be required to support the combination of skin variables
 // and preset values into global keyframe animations.
 @keyframes scale-bounce {
-	0% {
-		transform: scale(0);
-		animation-timing-function: ease-out;
-	}
-
-	80% {
-		transform: scale(1.07);
-		animation-timing-function: ease-in-out;
-	}
-
-	100% {
-		transform: scale(1);
-	}
+	0%   { transform: scale(0); animation-timing-function: ease-out; }
+	80%  { transform: scale(1.07); animation-timing-function: ease-in-out; }
+	100% { transform: scale(1); }
 }
 
 .button {
@@ -29,7 +19,7 @@
 		font-weight: @agate-button-font-weight;
 		letter-spacing: @agate-button-letter-spacing;
 		line-height: @agate-button-line-height;
-		text-indent: @agate-button-text-indent; // Keep the text centered
+		text-indent: @agate-button-text-indent;  // Keep the text centered
 		font-variant-ligatures: @agate-button-font-ligatures;
 		min-width: @agate-button-height;
 		padding: 0 @agate-button-h-padding;
@@ -103,8 +93,8 @@
 				color: @agate-button-transparent-color;
 			}
 		}
-		&.minWidth {
 
+		&.minWidth {
 			&,
 			&.huge,
 			&.small,
@@ -289,6 +279,7 @@
 			}
 		}
 	});
+
 	// TODO: Replace with an updated .focus() mixin that can apply rules both when focused and
 	// within a focused node
 	&:global(.spottable):focus,

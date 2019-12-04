@@ -24,11 +24,7 @@ const LabeledIconButtonBase = kind({
 	name: 'LabeledIconButton',
 
 	propTypes: /** @lends agate/LabeledIconButton.LabeledIconButtonBase.prototype */ {
-		backgroundOpacity: PropTypes.oneOf([
-			'opaque',
-			'lightOpaque',
-			'transparent'
-		]),
+		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
@@ -160,4 +156,8 @@ const LabeledIconButtonDecorator = ButtonDecorator;
 const LabeledIconButton = LabeledIconButtonDecorator(LabeledIconButtonBase);
 
 export default LabeledIconButton;
-export {LabeledIconButton, LabeledIconButtonBase, LabeledIconButtonDecorator};
+export {
+	LabeledIconButton,
+	LabeledIconButtonBase,
+	LabeledIconButtonDecorator
+};

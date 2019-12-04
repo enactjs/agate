@@ -138,8 +138,7 @@ const ToggleButtonBase = kind({
 	},
 
 	computed: {
-		className: ({selected, styler, underline}) =>
-			styler.append({selected, underline}),
+		className: ({selected, styler, underline}) => styler.append({selected, underline}),
 		children: ({children, selected, toggleOnLabel, toggleOffLabel}) => {
 			let c = children;
 			if (selected && toggleOnLabel) {
@@ -188,9 +187,14 @@ const ToggleButtonBase = kind({
 const ToggleButton = Pure(
 	Toggleable(
 		{prop: 'selected', toggleProp: 'onTap'},
-		Skinnable(ToggleButtonBase)
+		Skinnable(
+			ToggleButtonBase
+		)
 	)
 );
 
 export default ToggleButton;
-export {ToggleButton, ToggleButtonBase};
+export {
+	ToggleButton,
+	ToggleButtonBase
+};

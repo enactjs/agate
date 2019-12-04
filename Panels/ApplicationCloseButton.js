@@ -38,8 +38,7 @@ const ApplicationCloseButton = kind({
 	},
 
 	computed: {
-		'aria-label': ({'aria-label': ariaLabel}) =>
-			ariaLabel == null ? 'Exit app' : ariaLabel
+		'aria-label': ({'aria-label': ariaLabel}) => ariaLabel == null ? 'Exit app' : ariaLabel
 	},
 
 	render: ({onApplicationClose, ...rest}) => {
@@ -55,4 +54,6 @@ const ApplicationCloseButton = kind({
 });
 
 export default ApplicationCloseButton;
-export {ApplicationCloseButton};
+export {
+	ApplicationCloseButton
+};

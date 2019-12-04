@@ -95,8 +95,7 @@ const ScrollButtonBase = kind({
 	},
 
 	computed: {
-		'aria-label': ({active, 'aria-label': ariaLabel}) =>
-			active ? null : ariaLabel
+		'aria-label': ({active, 'aria-label': ariaLabel}) => (active ? null : ariaLabel)
 	},
 
 	render: ({children, disabled, forwardRef, ...rest}) => {
@@ -119,4 +118,6 @@ const ScrollButtonBase = kind({
 const ScrollButton = ForwardRef(ScrollButtonBase);
 
 export default ScrollButton;
-export {ScrollButton};
+export {
+	ScrollButton
+};
