@@ -35,89 +35,89 @@ const ToggleButtonBase = kind({
 
 	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
 		/**
-     * The string to be displayed as the main content of the toggle button.
-     *
-     * If `toggleOffLabel` and/or `toggleOnLabel` are provided, they will be used for the
-     * respective states.
-     *
-     * @type {Node}
-     * @public
-     */
+		 * The string to be displayed as the main content of the toggle button.
+		 *
+		 * If `toggleOffLabel` and/or `toggleOnLabel` are provided, they will be used for the
+		 * respective states.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
 		children: PropTypes.node,
 
 		/**
-     * Disables the button.
-     *
-     * @type {Boolean}
-     * @default false
-     * @public
-     */
+		 * Disables the button.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		disabled: PropTypes.bool,
 
 		/**
-     * Add an optional icon to the divider. This accepts any value that [Icon]{@agate/Icon}
-     * supports.
-     *
-     * @type {String}
-     */
+		 * Add an optional icon to the divider. This accepts any value that [Icon]{@agate/Icon}
+		 * supports.
+		 *
+		 * @type {String}
+		 */
 		icon: PropTypes.string,
 
 		/**
-     * Determines whether the button is currently in an "on" or "off" state.
-     *
-     * @type {Boolean}
-     * @public
-     */
+		 * Determines whether the button is currently in an "on" or "off" state.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
 		selected: PropTypes.bool,
 
 		/**
-     * The size of the button.
-     *
-     * @type {('small'|'large')}
-     * @default 'large'
-     * @public
-     */
+		 * The size of the button.
+		 *
+		 * @type {('small'|'large')}
+		 * @default 'large'
+		 * @public
+		 */
 		size: PropTypes.oneOf(['small', 'large']),
 
 		/**
-     * Button text displayed in the 'off' state.
-     *
-     * If not specified, `children` will be used for 'off' button text.
-     *
-     * @type {String}
-     * @default ''
-     * @public
-     */
+		 * Button text displayed in the 'off' state.
+		 *
+		 * If not specified, `children` will be used for 'off' button text.
+		 *
+		 * @type {String}
+		 * @default ''
+		 * @public
+		 */
 		toggleOffLabel: PropTypes.string,
 
 		/**
-     * Button text displayed in the 'on' state.
-     *
-     * If not specified, `children` will be used for 'on' button text.
-     *
-     * @type {String}
-     * @default ''
-     * @public
-     */
+		 * Button text displayed in the 'on' state.
+		 *
+		 * If not specified, `children` will be used for 'on' button text.
+		 *
+		 * @type {String}
+		 * @default ''
+		 * @public
+		 */
 		toggleOnLabel: PropTypes.string,
 
 		/**
-     * The shape of the button where `standard` is pill-shaped and `grid` is rectangular.
-     *
-     * * Values: `'standard'`, `'grid'`
-     *
-     * @type {String}
-     * @public
-     */
+		 * The shape of the button where `standard` is pill-shaped and `grid` is rectangular.
+		 *
+		 * * Values: `'standard'`, `'grid'`
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		type: PropTypes.oneOf(['standard', 'grid']),
 
 		/**
-     * Shows toggle indicator.
-     *
-     * @type {Boolean}
-     * @default false
-     * @public
-     */
+		 * Shows toggle indicator.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		underline: PropTypes.bool
 	},
 
@@ -138,7 +138,8 @@ const ToggleButtonBase = kind({
 	},
 
 	computed: {
-		className: ({selected, styler, underline}) => styler.append({selected, underline}),
+		className: ({selected, styler, underline}) =>
+			styler.append({selected, underline}),
 		children: ({children, selected, toggleOnLabel, toggleOffLabel}) => {
 			let c = children;
 			if (selected && toggleOnLabel) {
@@ -147,18 +148,22 @@ const ToggleButtonBase = kind({
 				c = toggleOffLabel;
 			}
 			return c;
-		},
-		iconToggleButton: ({children, toggleOnLabel, toggleOffLabel, icon}) =>
-			!children && !toggleOnLabel && !toggleOffLabel && icon
+		}
 	},
 
-	render: ({children, iconToggleButton, icon, selected, ...rest}) => {
+	render: ({children, icon, selected, ...rest}) => {
 		delete rest.underline;
 		delete rest.toggleOffLabel;
 		delete rest.toggleOnLabel;
 
 		return (
-			<Button {...rest} aria-pressed={selected} css={css} icon={icon} selected={selected}>
+			<Button
+				{...rest}
+				aria-pressed={selected}
+				css={css}
+				icon={icon}
+				selected={selected}
+			>
 				{children}
 			</Button>
 		);
@@ -180,7 +185,12 @@ const ToggleButtonBase = kind({
  * @mixes ui/Toggleable
  * @public
  */
-const ToggleButton = Pure(Toggleable({prop: 'selected', toggleProp: 'onTap'}, Skinnable(ToggleButtonBase)));
+const ToggleButton = Pure(
+	Toggleable(
+		{prop: 'selected', toggleProp: 'onTap'},
+		Skinnable(ToggleButtonBase)
+	)
+);
 
 export default ToggleButton;
 export {ToggleButton, ToggleButtonBase};

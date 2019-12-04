@@ -24,70 +24,74 @@ const LabeledIconButtonBase = kind({
 	name: 'LabeledIconButton',
 
 	propTypes: /** @lends agate/LabeledIconButton.LabeledIconButtonBase.prototype */ {
-		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
+		backgroundOpacity: PropTypes.oneOf([
+			'opaque',
+			'lightOpaque',
+			'transparent'
+		]),
 		/**
-     * Customizes the component by mapping the supplied collection of CSS class names to the
-     * corresponding internal Elements and states of this component.
-     *
-     * The following classes are supported:
-     *
-     * * `labeledIconButton` - The root component class
-     * * `icon` - The icon component class
-     * * `label` - The label component class
-     * * `selected` - Applied to a `selected` button
-     * * `small` - Applied to a LabeledIconButton specifying a `size` of `'small'`
-     *
-     * @type {Object}
-     * @public
-     */
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal Elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `labeledIconButton` - The root component class
+		 * * `icon` - The icon component class
+		 * * `label` - The label component class
+		 * * `selected` - Applied to a `selected` button
+		 * * `small` - Applied to a LabeledIconButton specifying a `size` of `'small'`
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
 
 		/**
-     * Provides a way to call special interface attention to this button. It will be "featured"
-     * in some way by the theme's visual rules.
-     *
-     * @type {Boolean}
-     * @public
-     */
+		 * Provides a way to call special interface attention to this button. It will be "featured"
+		 * in some way by the theme's visual rules.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
 		highlighted: PropTypes.bool,
 
 		/**
-     * The icon displayed within the button.
-     *
-     * @type {String}
-     * @public
-     */
+		 * The icon displayed within the button.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		icon: PropTypes.string,
 
 		/**
-     * The component used to render the `icon`.
-     *
-     * This will receive the `icon` prop as `children` and should handle it appropriately. This
-     * prop is ignored in the case of a component being passed into the `icon` prop. It will
-     * also receive the `flip` and `size` props as set on the component.
-     *
-     * @type {Component}
-     */
+		 * The component used to render the `icon`.
+		 *
+		 * This will receive the `icon` prop as `children` and should handle it appropriately. This
+		 * prop is ignored in the case of a component being passed into the `icon` prop. It will
+		 * also receive the `flip` and `size` props as set on the component.
+		 *
+		 * @type {Component}
+		 */
 		iconComponent: EnactPropTypes.component,
 
 		// forwarded from Spottable
 		pressed: PropTypes.bool,
 
 		/**
-     * Selects the component.
-     *
-     * Setting `selected` may be useful when the component represents a toggleable option. The
-     * visual effect may be customized using the
-     * [css]{@link agate/LabeledIconButton.LabeledIconButtonBase.css} prop.
-     */
+		 * Selects the component.
+		 *
+		 * Setting `selected` may be useful when the component represents a toggleable option. The
+		 * visual effect may be customized using the
+		 * [css]{@link agate/LabeledIconButton.LabeledIconButtonBase.css} prop.
+		 */
 		selected: PropTypes.bool,
 
 		/**
-     * The amount of sprite "cells" in the src image.
-     *
-     * @type {Number}
-     * @public
-     */
+		 * The amount of sprite "cells" in the src image.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
 		spriteCount: PropTypes.number
 	},
 
@@ -97,7 +101,17 @@ const LabeledIconButtonBase = kind({
 		publicClassNames: true
 	},
 
-	render: ({backgroundOpacity, css, icon, iconComponent, highlighted, pressed, selected, spriteCount, ...rest}) => {
+	render: ({
+		backgroundOpacity,
+		css,
+		icon,
+		iconComponent,
+		highlighted,
+		pressed,
+		selected,
+		spriteCount,
+		...rest
+	}) => {
 		return UiLabeledIcon.inline({
 			...rest,
 			icon: (

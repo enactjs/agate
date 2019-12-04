@@ -20,13 +20,13 @@ const ApplicationCloseButton = kind({
 
 	propTypes: /** @lends agate/Panels.ApplicationCloseButton.prototype */ {
 		/**
-		* Sets the hint string read when focusing the application close button.
-		*
-		* @type {String}
-		* @default 'Exit app'
-		* @memberof agate/Panels.ApplicationCloseButton.prototype
-		* @public
-		*/
+		 * Sets the hint string read when focusing the application close button.
+		 *
+		 * @type {String}
+		 * @default 'Exit app'
+		 * @memberof agate/Panels.ApplicationCloseButton.prototype
+		 * @public
+		 */
 		'aria-label': PropTypes.string,
 
 		/**
@@ -38,7 +38,8 @@ const ApplicationCloseButton = kind({
 	},
 
 	computed: {
-		'aria-label': ({'aria-label': ariaLabel}) => ariaLabel == null ? 'Exit app' : ariaLabel
+		'aria-label': ({'aria-label': ariaLabel}) =>
+			ariaLabel == null ? 'Exit app' : ariaLabel
 	},
 
 	render: ({onApplicationClose, ...rest}) => {
@@ -54,6 +55,4 @@ const ApplicationCloseButton = kind({
 });
 
 export default ApplicationCloseButton;
-export {
-	ApplicationCloseButton
-};
+export {ApplicationCloseButton};

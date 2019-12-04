@@ -69,7 +69,14 @@ const ControlsBase = kind({
 		className: 'controls'
 	},
 
-	render: ({children, closeButtonAriaLabel, forwardRef, noCloseButton, onApplicationClose, ...rest}) => {
+	render: ({
+		children,
+		closeButtonAriaLabel,
+		forwardRef,
+		noCloseButton,
+		onApplicationClose,
+		...rest
+	}) => {
 		if (!children && noCloseButton) return null;
 
 		return (
@@ -93,7 +100,7 @@ const ControlsBase = kind({
  * ```
  * // remove the close button and use a star icon button
  * <Controls noCloseButton>
- *   <Button icon="star"></Button>
+ *   <Button icon="star" />
  * </Controls>
  * ```
  *
@@ -106,7 +113,4 @@ const ControlsBase = kind({
 const Controls = ForwardRef(SpotlightContainerDecorator(ControlsBase));
 
 export default Controls;
-export {
-	Controls,
-	ControlsBase
-};
+export {Controls, ControlsBase};
