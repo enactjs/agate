@@ -1,3 +1,13 @@
+/**
+ * Components to support drag and drop.
+ *
+ * @module agate/DropManager
+ * @exports Droppable
+ * @exports DropManager
+ * @exports Draggable
+ * @exports ResponsiveBox
+ */
+
 import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
 import Slottable from '@enact/ui/Slottable';
@@ -54,6 +64,12 @@ const defaultContainerShape = {
 	}
 };
 
+/**
+ * Default config for DropManager.
+ *
+ * @memberof agate/DropManager.DropManager.MoonstoneDecorator
+ * @hocconfig
+ */
 const defaultConfig = {
 	// The prop name for the boolean send to the Wrapped component that indicates whether we are
 	// able to arrange things. Useful in case we need to show some boxes on the screen or
@@ -81,13 +97,21 @@ const fallbackArrangementProp = 'arrangement';
 
 const DropManagerContext = React.createContext(defaultContainerShape);
 
+/**
+ * TBD.
+ *
+ * @class DropManager
+ * @memberof agate/DropManager
+ * @hoc
+ * @public
+ */
 const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 	const ArrangementState = Changeable({prop: configHoc.arrangementProp || fallbackArrangementProp});
 
 	const DropManagerBase = class extends React.Component {
 		static displayName = 'DropManager';
 
-		static propTypes = {
+		static propTypes = /** @lends agate/DropManager.DropManager.prototype */ {
 			/**
 			 * The ready-state to indicate that the contents are allowed to be rearranged
 			 *
@@ -282,6 +306,14 @@ const logicallyPopulateContainerShape = (cs) => {
 
 const DraggableContainerContext = React.createContext(null);
 
+/**
+ * TBD.
+ *
+ * @class Draggable
+ * @memberof agate/DropManager
+ * @ui
+ * @public
+ */
 const Draggable = (Wrapped) => kind({
 	name: 'Draggable',
 
@@ -323,6 +355,14 @@ const Draggable = (Wrapped) => kind({
 	}
 });
 
+/**
+ * TBD.
+ *
+ * @class ResponsiveBox
+ * @memberof agate/DropManager
+ * @ui
+ * @public
+ */
 const ResponsiveBox = (Wrapped) => setDisplayName('ResponsiveBox')(
 	(props) => {
 		return (
@@ -349,8 +389,15 @@ const ResponsiveBox = (Wrapped) => setDisplayName('ResponsiveBox')(
 //
 //
 
-
 // Consolidate usage pattern into a simple reusable piece
+/**
+ * TBD.
+ *
+ * @class Droppable
+ * @memberof agate/DropManager
+ * @hoc
+ * @public
+ */
 const Droppable = hoc((configHoc, Wrapped) => {
 	const {arrangementProp, slots, ...rest} = configHoc;
 	return DropManager({arrangementProp, ...rest},
@@ -361,7 +408,6 @@ const Droppable = hoc((configHoc, Wrapped) => {
 		)
 	);
 });
-
 
 export default Droppable;
 export {
