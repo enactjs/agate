@@ -1,8 +1,5 @@
 /**
- * Provides Agate-themed slider components and behaviors.
- *
- * @example/**
- * Provides Agate-themed progress bar component.
+ * Provides an Agate-themed progress bar component.
  *
  * @example
  * <ProgressBar progress={0.5} backgroundProgress={0.75} />
@@ -21,9 +18,9 @@ import Skinnable from '../Skinnable';
 import componentCss from './ProgressBar.module.less';
 
 /**
- * Renders a agate-styled progress bar.
+ * Renders an Agate-styled progress bar.
  *
- * @class ProgressBarBase
+ * @class ProgressBar
  * @memberof agate/ProgressBar
  * @ui
  * @public
@@ -31,7 +28,7 @@ import componentCss from './ProgressBar.module.less';
 const ProgressBarBase = kind({
 	name: 'ProgressBar',
 
-	propTypes: /** @lends agate/ProgressBar.ProgressBarBase.prototype */ {
+	propTypes: /** @lends agate/ProgressBar.ProgressBar.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
