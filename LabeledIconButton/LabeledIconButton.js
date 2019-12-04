@@ -57,7 +57,7 @@ const LabeledIconButtonBase = kind({
 		 * @type {String}
 		 * @public
 		 */
-		icon: PropTypes.string,
+		icon: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 
 		/**
 		 * The component used to render the `icon`.

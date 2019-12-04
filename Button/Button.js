@@ -12,8 +12,10 @@
 
 import kind from '@enact/core/kind';
 import {cap} from '@enact/core/util';
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import Spottable from '@enact/spotlight/Spottable';
 import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
+import ComponentOverride from '@enact/ui/ComponentOverride';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -125,6 +127,14 @@ const ButtonBase = kind({
 		highlighted: PropTypes.bool,
 
 		/**
+		 * The component used to render the icon.
+		 *
+		 * @type {Component}
+		 * @public
+		 */
+		iconComponent: EnactPropTypes.component,
+
+		/**
 		 * To create a collection of buttons that appear as one entity: buttons that butt up against
 		 * each other. Specify where the button is in the arrangement: 'left', 'center', or 'right'.
 		 * This prop is not recommended for use on a lonely button with no other buttons nearby.
@@ -152,6 +162,14 @@ const ButtonBase = kind({
 		 * @public
 		 */
 		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
+
+		/**
+		 * The amount of sprite "cells" in the src image of the `icon` being supplied. This prop has no effect without `icon`.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		spriteCount: PropTypes.number,
 
 		/**
 		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
@@ -196,6 +214,15 @@ const ButtonBase = kind({
 				</React.Fragment>
 			);
 		},
+		iconComponent: ({iconComponent, spriteCount}) => {
+			// Don't burden basic HTML elements with the spriteCount prop (or other Icon-specific props)
+			if (typeof iconComponent === 'string') return iconComponent;
+
+			return (<ComponentOverride
+				component={iconComponent}
+				spriteCount={spriteCount}
+			/>);
+		},
 		style: ({animationDelay, badgeColor, style}) => ({
 			...style,
 			'--agate-button-animation-delay': animationDelay,
@@ -212,6 +239,7 @@ const ButtonBase = kind({
 		delete rest.highlighted;
 		delete rest.joinedPosition;
 		delete rest.selected;
+		delete rest.spriteCount;
 		delete rest.type;
 
 		return UiButtonBase.inline({
