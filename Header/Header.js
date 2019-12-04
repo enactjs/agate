@@ -7,7 +7,6 @@
  * </Header>
  *
  * @module agate/Header
- * @exports HeaderBase
  * @exports Header
  */
 

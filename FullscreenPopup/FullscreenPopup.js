@@ -1,3 +1,11 @@
+/**
+ * A Fullscreen Popup.
+ *
+ * @module agate/FullscreenPopup
+ * @exports FullscreenPopup
+ * @exports FullscreenPopupBase
+ */
+
 import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
@@ -9,9 +17,17 @@ import Skinnable from '../Skinnable';
 
 import componentCss from './FullscreenPopup.module.less';
 
+/**
+ * TBD.
+ *
+ * @class FullscreenPopupBase
+ * @memberof agate/FullscreenPopup
+ * @ui
+ * @public
+ */
 const FullscreenPopupBase = kind({
 	name: 'FullscreenPopup',
-	propTypes: {
+	propTypes: /** @lends agate/FullscreenPopup.FullscreenPopupBase.prototype */ {
 		css: PropTypes.object,
 		direction: PropTypes.string,
 		duration: PropTypes.string,
@@ -66,6 +82,14 @@ const FullscreenPopupDecorator = compose(
 	PopupState
 );
 
+/**
+ * TBD.
+ *
+ * @class FullscreenPopup
+ * @memberof agate/FullscreenPopup
+ * @ui
+ * @public
+ */
 const FullscreenPopup = FullscreenPopupDecorator(FullscreenPopupBase);
 
 export default FullscreenPopup;

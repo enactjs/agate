@@ -233,7 +233,6 @@ const IconDecorator = compose(
  */
 const Icon = IconDecorator(IconBase);
 
-
 export default Icon;
 export {
 	Icon,

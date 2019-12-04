@@ -1,6 +1,8 @@
 /**
  * @module agate/GridListImageItem
  * @exports GridListImageItem
+ * @exports GridListImageItemBase
+ * @exports GridListImageItemDecorator
  */
 
 import kind from '@enact/core/kind';
