@@ -1,3 +1,15 @@
+/**
+ * An Agate-themed Labeled Icon component.
+ *
+ * @example
+ * <LabeledIconButton icon="star">Hello Enact!</LabeledIcon>
+ *
+ * @module agate/LabeledIconButton
+ * @exports LabeledIconButton
+ * @exports LabeledIconButtonBase
+ * @exports LabeledIconButtonDecorator
+ */
+
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import UiLabeledIcon from '@enact/ui/LabeledIcon';
