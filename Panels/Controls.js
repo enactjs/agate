@@ -93,7 +93,7 @@ const ControlsBase = kind({
  * ```
  * // remove the close button and use a star icon button
  * <Controls noCloseButton>
- *   <IconButton>star</IconButton>
+ *   <Button icon="star" />
  * </Controls>
  * ```
  *
