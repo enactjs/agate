@@ -12,9 +12,17 @@ import Panels from './Panels';
 
 import componentCss from './TabbedPanels.module.less';
 
+/**
+ * Tabbed Panels component.
+ *
+ * @class Panels
+ * @memberof agate/Panels
+ * @ui
+ * @public
+ */
 const TabbedPanelsBase = kind({
 	name: 'TabbedPanels',
-	propTypes: {
+	propTypes: /** @lends agate/Panels.TabbedPanels.prototype */ {
 		afterTabs: PropTypes.node,
 		beforeTabs: PropTypes.node,
 		css: PropTypes.object,
