@@ -31,19 +31,19 @@ const getKeyByValue = (obj, value) =>
 const containerShapePropTypes = PropTypes.shape({
 	edge: PropTypes.bool,
 	edges: PropTypes.shape({
-		top: PropTypes.bool,
-		right: PropTypes.bool,
 		bottom: PropTypes.bool,
-		left: PropTypes.bool
+		left: PropTypes.bool,
+		right: PropTypes.bool,
+		top: PropTypes.bool
 	}),
 	horizontalEdge: PropTypes.bool,
-	verticalEdge: PropTypes.bool,
 	orientation: PropTypes.string,
 	size: PropTypes.shape({
 		relative: PropTypes.string  // Relative size: small, medium, large, full
 		// proposed - height: PropTypes.number,
 		// proposed - width: PropTypes.number
-	})
+	}),
+	verticalEdge: PropTypes.bool
 });
 
 const defaultContainerShape = {
@@ -317,7 +317,7 @@ const DraggableContainerContext = React.createContext(null);
 const Draggable = (Wrapped) => kind({
 	name: 'Draggable',
 
-	propTypes: {
+	propTypes: /** @lends agate/DropManager.Draggable.prototype */ {
 		containerShape: containerShapePropTypes,
 		draggable: PropTypes.bool,
 		name: PropTypes.string,

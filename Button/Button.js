@@ -108,6 +108,14 @@ const ButtonBase = kind({
 		css: PropTypes.object,
 
 		/**
+		 * Additional DOM nodes which may be necessary for decorating the Button.
+		 *
+		 * @type {Node}
+		 * @private
+		 */
+		decoration: PropTypes.node,
+
+		/**
 		 * Provides a way to call special interface attention to this button. It will be "featured"
 		 * in some way by the theme's visual rules.
 		 *

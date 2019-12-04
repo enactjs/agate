@@ -21,7 +21,10 @@ const IncrementSliderButtonBase = kind({
 	name: 'IncrementSliderButton',
 
 	propTypes: /** @lends moonstone/IncrementSlider.IncrementSliderButton.prototype */ {
-		onTap: PropTypes.func
+		css: PropTypes.object,
+		onTap: PropTypes.func,
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+		role: PropTypes.string
 	},
 
 	styles: {
