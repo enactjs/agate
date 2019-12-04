@@ -1,5 +1,5 @@
 /**
- * Provides a Agate-themed pill-shaped toggle switch component.
+ * Provides an Agate-themed pill-shaped toggle switch component.
  *
  * @example
  * <Switch />
