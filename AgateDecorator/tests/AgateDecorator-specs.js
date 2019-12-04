@@ -7,9 +7,9 @@ import css from '../AgateDecorator.module.less';
 
 describe('AgateDecorator', () => {
 
-	const AppRoot = (props) => <app {...props} />;
+	const AppRoot = (props) => <div id="app" {...props} />;
 
-	it('should add base carbon classes to wrapped component', function () {
+	test('should add base gallium-day classes to wrapped component', function () {
 		const config = {ri: false, i18n: false, spotlight: false, float: false, overlay: false};
 		const App = AgateDecorator(config, AppRoot);
 		const subject = mount(
@@ -18,15 +18,15 @@ describe('AgateDecorator', () => {
 
 		Spotlight.terminate();
 
-		const appRoot = subject.find('app');
+		const appRoot = subject.find('#app');
 
 		const expected = true;
-		const actual = appRoot.hasClass('carbon');
+		const actual = appRoot.hasClass('gallium-day');
 
-		expect(actual).to.equal(expected);
+		expect(actual).toBe(expected);
 	});
 
-	it('should add author classes to wrapped component', function () {
+	test('should add author classes to wrapped component', function () {
 		const config = {ri: false, i18n: false, spotlight: false, float: false, overlay: false};
 		const App = AgateDecorator(config, AppRoot);
 		const subject = mount(
@@ -35,15 +35,15 @@ describe('AgateDecorator', () => {
 
 		Spotlight.terminate();
 
-		const appRoot = subject.find('app');
+		const appRoot = subject.find('#app');
 
 		const expected = true;
 		const actual = appRoot.hasClass('author-class');
 
-		expect(actual).to.equal(expected);
+		expect(actual).toBe(expected);
 	});
 
-	it('should not add .agate class to wrapped component when float is enabled', function () {
+	test('should not add .agate class to wrapped component when float is enabled', function () {
 		const config = {ri: false, i18n: false, spotlight: false, float: true, overlay: false};
 		const App = AgateDecorator(config, AppRoot);
 		const subject = mount(
@@ -52,15 +52,15 @@ describe('AgateDecorator', () => {
 
 		Spotlight.terminate();
 
-		const appRoot = subject.find('app');
+		const appRoot = subject.find('#app');
 
 		const expected = false;
 		const actual = appRoot.hasClass('agate');
 
-		expect(actual).to.equal(expected);
+		expect(actual).toBe(expected);
 	});
 
-	it('should not add .bg class to wrapped component when overlay is enabled', function () {
+	test('should not add .bg class to wrapped component when overlay is enabled', function () {
 		const config = {ri: false, i18n: false, spotlight: false, float: false, overlay: true};
 		const App = AgateDecorator(config, AppRoot);
 		const subject = mount(
@@ -69,12 +69,12 @@ describe('AgateDecorator', () => {
 
 		Spotlight.terminate();
 
-		const appRoot = subject.find('app');
+		const appRoot = subject.find('#app');
 
 		const expected = false;
 		const actual = appRoot.hasClass(css.bg);
 
-		expect(actual).to.equal(expected);
+		expect(actual).toBe(expected);
 	});
 
 });

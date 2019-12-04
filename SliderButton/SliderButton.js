@@ -13,6 +13,10 @@ import componentCss from './SliderButton.module.less';
 
 const SliderKnob = kind({
 	name: 'SliderKnob',
+	propTypes: {
+		css: PropTypes.object,
+		value: PropTypes.number
+	},
 	styles: {
 		css: componentCss,
 		className: 'knob'
@@ -27,10 +31,8 @@ const SliderKnob = kind({
 			};
 		}
 	},
-	render: ({css, factor, size, value, ...rest}) => {
-		delete rest.tooltipComponent;
-		delete rest.orientation;
-		delete rest.proportion;
+	render: ({...rest}) => {
+		delete rest.value;
 		return (
 			<div
 				{...rest}
@@ -41,15 +43,15 @@ const SliderKnob = kind({
 
 const SliderProgress = kind({
 	name: 'SliderProgress',
+	propTypes: {
+		css: PropTypes.object,
+		values: PropTypes.arrayOf(PropTypes.number)
+	},
 	styles: {
 		css: componentCss,
 		className: 'track'
 	},
 	render: ({children, css, values, ...rest}) => {
-		delete rest.backgroundProgress;
-		delete rest.orientation;
-		delete rest.progress;
-		delete rest.progressAnchor;
 
 		return (
 			<Row {...rest} align="center">
@@ -67,7 +69,8 @@ const SliderProgress = kind({
 const SliderButtonBase = kind({
 	name: 'SliderButton',
 	propTypes: {
-		children: PropTypes.array.isRequired
+		children: PropTypes.array.isRequired,
+		css: PropTypes.object
 	},
 	styles: {
 		css: componentCss,

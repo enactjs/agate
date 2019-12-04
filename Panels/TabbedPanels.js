@@ -15,10 +15,14 @@ import componentCss from './TabbedPanels.module.less';
 const TabbedPanelsBase = kind({
 	name: 'TabbedPanels',
 	propTypes: {
+		afterTabs: PropTypes.node,
+		beforeTabs: PropTypes.node,
+		css: PropTypes.object,
 		index: PropTypes.number,
 		noCloseButton: PropTypes.bool,
-		tabPosition: PropTypes.string
-		// tabs: PropTypes.oneOfType([TabGroup])
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+		tabPosition: PropTypes.string,
+		tabs: PropTypes.oneOfType([TabGroup])
 	},
 	defaultProps: {
 		index: 0,
@@ -41,14 +45,14 @@ const TabbedPanelsBase = kind({
 				return children;
 			}
 			// otherwise try to make children from the tabs' view and viewProps
-			else if (tabs) {
+			if (tabs) {
 				return tabs.map((tab, index) => {
 					const {view: View, viewProps} = tab;
 					return <View key={index} {...viewProps} />;
 				});
 			}
 		},
-		className: ({css, orientation, styler, tabPosition}) => styler.append(tabPosition == 'after' ? css.reverse : '', orientation == 'vertical' ? css.column : ''),
+		className: ({css, orientation, styler, tabPosition}) => styler.append(tabPosition === 'after' ? css.reverse : '', orientation === 'vertical' ? css.column : ''),
 		tabOrientation: ({orientation}) => orientation === 'vertical' ? 'horizontal' : 'vertical'
 	},
 	render: ({afterTabs, beforeTabs, children, css, index, noCloseButton, onSelect, tabOrientation, tabPosition, tabs, ...rest}) => {
