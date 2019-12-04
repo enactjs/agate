@@ -9,7 +9,7 @@ import Button from '../Button';
 import css from './Scrollbar.module.less';
 
 /**
- * An [Button]{@link agate/Button.Button} used within
+ * A [Button]{@link agate/Button.Button} used within
  * a [Scrollbar]{@link agate/Scrollable.Scrollbar}.
  *
  * @class ScrollButton
