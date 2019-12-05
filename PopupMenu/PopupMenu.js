@@ -69,6 +69,7 @@ const PopupMenuBase = kind({
 								onClick={onClose}
 								className={css.closeButton}
 								size="huge"
+								backgroundOpacity="lightOpaque"
 							>cancel</LabeledIconButton> : null}
 						</Scroller>
 					</Cell>

@@ -2,7 +2,7 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import IconButton from '../IconButton';
+import Button from '../Button';
 
 /**
  * An {@link agate/ApplicationCloseButton.ApplicationCloseButton} with `closex` icon. It is used in
@@ -20,13 +20,13 @@ const ApplicationCloseButton = kind({
 
 	propTypes: /** @lends agate/Panels.ApplicationCloseButton.prototype */ {
 		/**
-		* Sets the hint string read when focusing the application close button.
-		*
-		* @type {String}
-		* @default 'Exit app'
-		* @memberof agate/Panels.ApplicationCloseButton.prototype
-		* @public
-		*/
+		 * Sets the hint string read when focusing the application close button.
+		 *
+		 * @type {String}
+		 * @default 'Exit app'
+		 * @memberof agate/Panels.ApplicationCloseButton.prototype
+		 * @public
+		 */
 		'aria-label': PropTypes.string,
 
 		/**
@@ -43,13 +43,12 @@ const ApplicationCloseButton = kind({
 
 	render: ({onApplicationClose, ...rest}) => {
 		return (
-			<IconButton
+			<Button
 				{...rest}
 				onTap={onApplicationClose}
 				size="small"
-			>
-				closex
-			</IconButton>
+				icon="closex"
+			/>
 		);
 	}
 });

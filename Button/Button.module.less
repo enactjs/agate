@@ -48,6 +48,21 @@
 			}
 		}
 
+		.badge {
+			position: absolute;
+			.position(@agate-button-badge-position);
+			border-radius: @agate-button-badge-border-radius;
+			padding: @agate-button-badge-padding;
+			font-size: @agate-button-badge-font-size;
+			line-height: @agate-button-badge-line-height;
+			letter-spacing: @agate-button-badge-letter-spacing;
+			text-indent: @agate-button-badge-text-indent;
+			transform: @agate-button-badge-transform;
+			color: @agate-button-badge-color;
+			background-color: var(--agate-button-badge-bg-color, @agate-button-badge-bg-color);
+			z-index: 1;
+		}
+
 		&.grid {
 			.bg {
 				border-radius: @agate-button-grid-border-radius;
@@ -63,6 +78,7 @@
 			.bg {
 				background-color: @agate-button-lightOpaque-bg-color;
 			}
+
 			.client {
 				color: @agate-button-lightOpaque-color;
 			}
@@ -97,28 +113,13 @@
 				.bg {
 					border-radius: @agate-button-icon-border-radius;
 				}
-
-				.client {
-					color: @agate-iconbutton-color;
-				}
-
-				&.lightOpaque {
-					.client {
-						color: @agate-iconbutton-lightOpaque-color;
-					}
-				}
-
-				&.transparent {
-					.client {
-						color: @agate-iconbutton-transparent-color;
-					}
-				}
 			}
 		}
 
 		&.animateOnRender {
 			.bg,
-			.client {
+			.client,
+			.badge {
 				animation-fill-mode: backwards;
 				animation-duration: @agate-button-animation-duration;
 				animation-name: scale-bounce;
@@ -130,6 +131,10 @@
 
 			.client {
 				animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms + @agate-button-client-animation-offset);
+			}
+
+			.badge {
+				animation-delay: calc(var(--agate-button-animation-delay, 0) * 1ms + @agate-button-badge-animation-offset);
 			}
 		}
 
@@ -159,6 +164,10 @@
 			line-height: @agate-button-huge-line-height;
 			font-size: @agate-button-huge-font-size;
 			padding: 0 @agate-button-huge-h-padding;
+
+			.bg {
+				border-width: @agate-button-huge-border-width;
+			}
 		}
 
 		&.small {
@@ -173,6 +182,17 @@
 				left: 18px;
 				right: 18px;
 			}
+
+			.badge {
+				.position(@agate-button-small-badge-position);
+				border-radius: @agate-button-small-badge-border-radius;
+				padding: @agate-button-small-badge-padding;
+				font-size: @agate-button-small-badge-font-size;
+				line-height: @agate-button-small-badge-line-height;
+				letter-spacing: @agate-button-small-badge-letter-spacing;
+				text-indent: @agate-button-small-badge-text-indent;
+				transform: @agate-button-small-badge-transform;
+			}
 		}
 
 		&.smallest {
@@ -181,6 +201,17 @@
 			line-height: @agate-button-smallest-line-height;
 			font-size: @agate-button-smallest-font-size;
 			padding: 0 @agate-button-smallest-h-padding;
+
+			.badge {
+				.position(@agate-button-smallest-badge-position);
+				border-radius: @agate-button-smallest-badge-border-radius;
+				padding: @agate-button-smallest-badge-padding;
+				font-size: @agate-button-smallest-badge-font-size;
+				line-height: @agate-button-smallest-badge-line-height;
+				letter-spacing: @agate-button-smallest-badge-letter-spacing;
+				text-indent: @agate-button-smallest-badge-text-indent;
+				transform: @agate-button-smallest-badge-transform;
+			}
 		}
 
 		&.highlighted {
@@ -195,9 +226,23 @@
 				color: @agate-button-highlighted-color;
 			}
 
-			&.minWidth.hasIcon {
+			&.lightOpaque {
+				.bg {
+					background-color: @agate-button-lightOpaque-highlighted-bg-color;
+				}
+
 				.client {
-					color: @agate-iconbutton-highlighted-color;
+					color: @agate-button-lightOpaque-highlighted-color;
+				}
+			}
+
+			&.transparent {
+				.bg {
+					background-color: @agate-button-transparent-bg-color;
+				}
+
+				.client {
+					color: @agate-button-transparent-highlighted-color;
 				}
 			}
 		}
@@ -205,6 +250,7 @@
 		&.selected {
 			.bg {
 				background-color: @agate-button-selected-bg-color;
+				border-color: @agate-button-selected-border-color;
 			}
 
 			&,
@@ -212,30 +258,25 @@
 				color: @agate-button-selected-color;
 			}
 
-			&.minWidth.hasIcon {
+			&.lightOpaque {
+				.bg {
+					background-color: @agate-button-lightOpaque-selected-bg-color;
+				}
+
 				.client {
-					color: @agate-iconbutton-selected-color;
+					color: @agate-button-lightOpaque-selected-color;
 				}
 			}
-		}
 
-		// Button-non-disabled rules
-		&:not([disabled]) {
-			.focus({
-				&.pressed,
-				&:active {
-					.bg {
-						// -webkit-animation-name: expand;
-						// animation-name: expand;
-					}
+			&.transparent {
+				.bg {
+					background-color: @agate-button-transparent-bg-color;
 				}
 
-				&.minWidth.hasIcon {
-					.client {
-						color: @agate-iconbutton-focus-color;
-					}
+				.client {
+					color: @agate-button-transparent-selected-color;
 				}
-			});
+			}
 		}
 	});
 
@@ -260,12 +301,6 @@
 			&.highlighted {
 				.bg {
 					opacity: 1;
-				}
-			}
-
-			&.minWidth.hasIcon {
-				.client {
-					color: @agate-iconbutton-focus-color;
 				}
 			}
 		});

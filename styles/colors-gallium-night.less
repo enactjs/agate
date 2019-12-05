@@ -50,7 +50,7 @@
 @agate-button-color:          @agate-foreground;
 @agate-button-bg-color:       @agate-dark-gray;
 @agate-button-bg-image:       none;
-@agate-button-border-color:   @agate-accent;
+@agate-button-border-color:   transparent;
 @agate-button-shadow:         none;
 @agate-button-focus-color:    @agate-spotlight-color;
 @agate-button-focus-bg-color: @agate-background-focus;
@@ -58,8 +58,12 @@
 @agate-button-highlighted-color: @agate-white;
 @agate-button-highlighted-bg-color: @agate-highlight;
 @agate-button-highlighted-bg-image: @agate-button-bg-image;
-@agate-button-selected-bg-color: @agate-accent;
-@agate-button-selected-color: @agate-foreground-active;
+@agate-button-selected-color: @agate-button-color;
+@agate-button-selected-bg-color: @agate-button-bg-color;
+@agate-button-selected-border-color: @agate-accent;
+@agate-button-lightOpaque-color: @agate-black;
+@agate-button-lightOpaque-bg-color: @agate-light-gray;
+@agate-button-badge-bg-color: @agate-accent;
 
 // ColorPicker
 // ---------------------------------------
@@ -88,22 +92,6 @@
 // Icon
 // ---------------------------------------
 @agate-icon-color:       @agate-text-color;
-
-// IconButton
-// ---------------------------------------
-@agate-iconbutton-color: @agate-black;
-@agate-iconbutton-bg-color: @agate-white;
-@agate-iconbutton-bg-image: @agate-button-bg-image;
-@agate-iconbutton-border-color: transparent;
-@agate-iconbutton-shadow: @agate-button-shadow;
-@agate-iconbutton-focus-color: @agate-button-focus-color;
-@agate-iconbutton-focus-bg-color: @agate-button-focus-bg-color;
-@agate-iconbutton-focus-bg-image: @agate-button-focus-bg-image;
-@agate-iconbutton-highlighted-bg-color: @agate-button-highlighted-bg-color;
-@agate-iconbutton-highlighted-bg-image: @agate-button-highlighted-bg-image;
-@agate-iconbutton-selected-bg-color: @agate-iconbutton-bg-color;
-@agate-iconbutton-selected-color: @agate-button-selected-color;
-@agate-iconbutton-selected-border-color: @agate-button-border-color;
 
 // Input
 // ---------------------------------------

@@ -214,9 +214,10 @@ const SliderBase = kind({
 		})
 	},
 
-	render: ({css, focused, ...rest}) => {
+	render: ({css, ...rest}) => {
 		delete rest.activateOnFocus;
 		delete rest.active;
+		delete rest.focused;
 		delete rest.knobStep;
 		delete rest.onActivate;
 
@@ -246,11 +247,11 @@ const SliderBase = kind({
  */
 const SliderDecorator = compose(
 	Pure,
-	Spottable,
 	Changeable,
 	SliderBehaviorDecorator,
-	Skinnable,
-	Slottable({slots: ['knob']})
+	Spottable,
+	Slottable({slots: ['knob']}),
+	Skinnable
 );
 
 /**

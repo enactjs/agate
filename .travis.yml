@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+    - "lts/*"
+sudo: false
+cache:
+  directories:
+    - $(npm config get cache)
+install:
+    - npm config set prefer-offline true
+    - npm install -g enactjs/cli#develop
+    - npm install
+
+script:
+    - npm run lint -- -- --max-warnings 0 .
+    - npm run test
