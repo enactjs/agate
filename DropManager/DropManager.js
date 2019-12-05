@@ -77,7 +77,7 @@ const defaultConfig = {
 	arrangeableProp: null,
 
 	// The prop name for the boolean send to the Wrapped component that indicates whether we are
-	// currently arranging things. Useful in case we need toadd an overlay or hide content during
+	// currently arranging things. Useful in case we need to add an overlay or hide content during
 	// dragging. The default/common value for this is "arranging".
 	arrangingProp: null,
 
@@ -91,7 +91,7 @@ const defaultConfig = {
 // The arrangementProp above is allowed to be empty. When it's empty, though, and the user doesn't
 // want the prop delivered to their Wrapped component, we still need to have some prop name to
 // communicate to Rearrangeable. That's where this comes in; it's used if the user didn't specify a
-// prop, so we can send an arrangement to Rearrangeable, exclucively.
+// prop, so we can send an arrangement to Rearrangeable, exclusively.
 const fallbackArrangementProp = 'arrangement';
 
 
