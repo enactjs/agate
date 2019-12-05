@@ -372,9 +372,8 @@ class ScrollButtons extends Component {
 				onDown={this.onDownPrev}
 				onHoldPulse={this.onClickPrev}
 				ref={this.prevButtonRef}
-			>
-				{prevIcon}
-			</ScrollButton>,
+				icon={prevIcon}
+			/>,
 			thumbRenderer(),
 			<ScrollButton
 				aria-label={rtl && !vertical ? previousButtonAriaLabel : nextButtonAriaLabel}
@@ -385,9 +384,8 @@ class ScrollButtons extends Component {
 				onDown={this.onDownNext}
 				onHoldPulse={this.onClickNext}
 				ref={this.nextButtonRef}
-			>
-				{nextIcon}
-			</ScrollButton>,
+				icon={nextIcon}
+			/>,
 			<Announce
 				key="announce"
 				ref={this.announceRef}
