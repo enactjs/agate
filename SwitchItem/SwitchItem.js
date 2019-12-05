@@ -3,6 +3,8 @@
  *
  * @module agate/SwitchItem
  * @exports SwitchItem
+ * @exports SwitchItemBase
+ * @exports SwitchItemDecorator
  */
 
 import React from 'react';
@@ -26,9 +28,8 @@ const Switch = Skinnable({prop: 'skin'}, SwitchBase);
 /**
  * Renders an `Item` with a radio-dot component. Useful to show a selected state on an Item.
  *
- * @class SwitchItem
+ * @class SwitchItemBase
  * @memberof agate/SwitchItem
- * @extends agate/SwitchItem.SwitchItem
  * @ui
  * @public
  */
@@ -38,7 +39,7 @@ const SwitchItemBase = kind({
 	propTypes: /** @lends agate/SwitchItem.SwitchItemBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
+		 * corresponding internal elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *
@@ -52,7 +53,7 @@ const SwitchItemBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Disables component and becomes non-interactive.
+		 * Disables component and makes it non-interactive.
 		 *
 		 * @type {Boolean}
 		 * @default false
@@ -61,13 +62,13 @@ const SwitchItemBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
-		 * Customize the component used as the switch.
+		 * The icon to display before the text.
 		 *
-		 * @type {Element|Function|String}
-		 * @default {@link agate/Switch.Switch}
+		 * @type {String|Object}
+		 * @see agate/Icon.Icon
 		 * @public
 		 */
-		icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]),
+		icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
 		/**
 		 * Customize the text displayed when the switch is "off".
@@ -88,7 +89,7 @@ const SwitchItemBase = kind({
 		onText: PropTypes.string,
 
 		/**
-		 * If true the switch will be selected.
+		 * Sets the switch to the 'on' state.
 		 *
 		 * @type {Boolean}
 		 * @default false
@@ -138,6 +139,16 @@ const SwitchItemBase = kind({
 	}
 });
 
+/**
+ * Applies Agate specific behaviors to [SwitchItem]{@link agate/SwitchItem.SwitchItemBase} components.
+ *
+ * @hoc
+ * @memberof agate/SwitchItem
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const SwitchItemDecorator = compose(
 	Toggleable({toggleProp: 'onClick'}),
 	// Touchable,
@@ -145,6 +156,16 @@ const SwitchItemDecorator = compose(
 	Skinnable
 );
 
+/**
+ * Renders an `Item` with a radio-dot component. Useful to show a selected state on an Item.
+ *
+ * @class SwitchItem
+ * @memberof agate/SwitchItem
+ * @extends agate/SwitchItem.SwitchItem
+ * @mixes agate/SwitchItem.SwitchItemDecorator
+ * @ui
+ * @public
+ */
 const SwitchItem = SwitchItemDecorator(SwitchItemBase);
 
 export default SwitchItem;
