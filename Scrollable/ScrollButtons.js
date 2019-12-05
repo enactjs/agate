@@ -12,7 +12,7 @@ import ReactDOM from 'react-dom';
 import ScrollButton from './ScrollButton';
 
 const
-	nop = () => { },
+	nop = () => {},
 	prepareButton = (isPrev) => (isVertical) => {
 		let direction;
 
@@ -160,7 +160,7 @@ class ScrollButtons extends Component {
 	}
 
 	constructor (props) {
-		super (props);
+		super(props);
 
 		this.state = {
 			prevButtonDisabled: true,
