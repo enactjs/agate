@@ -29,7 +29,7 @@ const ScrollButtonBase = kind({
 		 * @required
 		 * @public
 		 */
-		children: PropTypes.string.isRequired,
+		icon: PropTypes.string.isRequired,
 
 		/**
 		 * Sets the `aria-label`.
