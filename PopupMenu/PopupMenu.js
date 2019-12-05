@@ -9,6 +9,7 @@ import Transition from '@enact/ui/Transition';
 import Skinnable from '../Skinnable';
 import Heading from '../Heading';
 import LabeledIconButton from '../LabeledIconButton';
+import Scroller from '../Scroller';
 
 import PopupState from '../Popup/PopupState';
 
@@ -23,13 +24,15 @@ const PopupMenuBase = kind({
 		onClose: PropTypes.func,
 		onHide: PropTypes.func,
 		open: PropTypes.bool,
+		orientation: PropTypes.oneOf(['horizontal']),
 		title: PropTypes.string
 	},
 
 	defaultProps: {
-		noAnimation: false,
 		closeButton: false,
-		open: false
+		noAnimation: false,
+		open: false,
+		orientation: 'horizontal'
 	},
 
 	styles: {
@@ -37,7 +40,11 @@ const PopupMenuBase = kind({
 		className: 'popupMenu'
 	},
 
-	render: ({children, closeButton, css, noAnimation, onClose, onHide, open, title, ...rest}) => {
+	computed: {
+		className: ({orientation, styler}) => styler.append(orientation)
+	},
+
+	render: ({children, closeButton, css, noAnimation, onClose, onHide, open, orientation, title, ...rest}) => {
 		return (
 			<Transition
 				noAnimation={noAnimation}
@@ -53,15 +60,18 @@ const PopupMenuBase = kind({
 					<Cell className={css.title} shrink>
 						<Heading size="title">{title}</Heading>
 					</Cell>
-					<Cell className={css.body} shrink>
-						{children}
-						{closeButton ? <LabeledIconButton
-							inline
-							icon="cancel"
-							onClick={onClose}
-							className={css.closeButton}
-							size="huge"
-						>cancel</LabeledIconButton> : null}
+					<Cell shrink className={css.body} align="stretch">
+						<Scroller direction={orientation} horizontalScrollbar="hidden" verticalScrollbar="hidden">
+							{children}
+							{closeButton ? <LabeledIconButton
+								inline
+								icon="cancel"
+								onClick={onClose}
+								className={css.closeButton}
+								size="huge"
+								backgroundOpacity="lightOpaque"
+							>cancel</LabeledIconButton> : null}
+						</Scroller>
 					</Cell>
 				</Layout>
 			</Transition>

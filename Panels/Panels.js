@@ -41,6 +41,11 @@ const PanelsBase = kind({
 		arranger: shape,
 
 		/**
+		 * An object whose keys will used as props for each child
+		 */
+		childProps: PropTypes.object,
+
+		/**
 		 * Sets the hint string read when focusing the application close button.
 		 *
 		 * @type {String}

@@ -88,22 +88,26 @@
 @agate-button-highlighted-color: @agate-button-selected-color;
 @agate-button-highlighted-bg-color: inherit;
 @agate-button-highlighted-bg-image: inherit;
-@agate-button-selected-bg-color: inherit;
 @agate-button-selected-color: inherit;
+@agate-button-selected-bg-color: inherit;
+@agate-button-selected-border-color: transparent;
 @agate-button-lightOpaque-color: @agate-foreground;
 @agate-button-lightOpaque-bg-color: @agate-background;
+@agate-button-lightOpaque-highlighted-color: @agate-button-lightOpaque-color;
+@agate-button-lightOpaque-highlighted-bg-color: @agate-button-lightOpaque-bg-color;
+@agate-button-lightOpaque-selected-color: @agate-button-lightOpaque-color;
+@agate-button-lightOpaque-selected-bg-color: @agate-button-lightOpaque-bg-color;
 @agate-button-transparent-color: @agate-text-color;
 @agate-button-transparent-bg-color: transparent;
+@agate-button-transparent-highlighted-color: @agate-button-transparent-color;
+@agate-button-transparent-selected-color: @agate-button-transparent-color;
+@agate-button-badge-color: @agate-foreground-active;
+@agate-button-badge-bg-color: @agate-highlight;
 
 // ColorPicker
 // ---------------------------------------
 @agate-colorpicker-bg-color: @agate-popup-bg-color;
 @agate-colorpicker-palette-shadow: @agate-popup-shadow;
-
-// Divider
-// ---------------------------------------
-@agate-divider-color:        inherit;
-@agate-divider-border-color: inherit;
 
 // Drawer
 // ---------------------------------------
@@ -127,26 +131,11 @@
 // ---------------------------------------
 @agate-icon-color: @agate-text-color;
 
-// IconButton
-// ---------------------------------------
-@agate-iconbutton-color: @agate-button-color;
-@agate-iconbutton-bg-color: @agate-button-bg-color;
-@agate-iconbutton-bg-image: @agate-button-bg-image;
-@agate-iconbutton-border-color: @agate-button-border-color;
-@agate-iconbutton-shadow: @agate-button-shadow;
-@agate-iconbutton-focus-color: @agate-button-focus-color;
-@agate-iconbutton-focus-bg-color: @agate-button-focus-bg-color;
-@agate-iconbutton-focus-bg-image: @agate-button-focus-bg-image;
-@agate-iconbutton-highlighted-bg-color: @agate-button-highlighted-bg-color;
-@agate-iconbutton-highlighted-bg-image: @agate-button-highlighted-bg-image;
-@agate-iconbutton-selected-bg-color: @agate-button-selected-bg-color;
-@agate-iconbutton-selected-color: @agate-button-selected-color;
-
 // Input
 // ---------------------------------------
 @agate-input-decorator-border-color:          inherit;
-@agate-input-decorator-focused-border-color:  inherit;
-@agate-input-focused-background-color:        inherit;
+@agate-input-decorator-focused-border-color:  @agate-accent;
+@agate-input-focused-background-color:        @agate-background;
 @agate-input-focused-background-image:        inherit;
 @agate-input-focused-text-color:              inherit;
 @agate-input-placeholder-color:               inherit;
@@ -155,10 +144,13 @@
 // Item
 // ---------------------------------------
 @agate-item-color: inherit;
+@agate-item-label-color: inherit;
 @agate-item-border-color: transparent;
 @agate-item-focus-border-color: transparent;
 @agate-item-focus-bg-color: inherit;
 @agate-item-focus-color: @agate-item-color;
+@agate-item-selected-color: inherit;
+@agate-item-selected-outline: inherit;
 
 // LabeledIconButton
 // ---------------------------------------
@@ -225,7 +217,6 @@
 // RadioItem
 // ---------------------------------------
 @agate-radioitem-focus-color: inherit;
-@agate-radioitem-separator-border-color: @agate-divider-border-color;
 @agate-radioitem-icon-border-color: inherit;
 @agate-radioitem-icon-bg-color: inherit;
 @agate-radioitem-icon-focus-bg-color: @agate-radioitem-icon-bg-color;

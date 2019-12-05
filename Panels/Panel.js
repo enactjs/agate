@@ -54,6 +54,18 @@ const PanelBase = kind({
 		autoFocus: PropTypes.string,
 
 		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal Elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `panel` - The root class name
+		 * * `body` - Applied to the <section> element that displays the `children` of the `Panel`
+		 * * `header` - Applied to the header element
+		 */
+		css: PropTypes.object,
+
+		/**
 		 * Header for the panel.
 		 *
 		 * This is usually passed by the [Slottable]{@link ui/Slottable.Slottable} API by using a

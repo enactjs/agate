@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
-//import $L from '../internal/$L';
+// import $L from '../internal/$L';
 
 import ScrollButton from './ScrollButton';
 
@@ -218,15 +218,17 @@ class ScrollButtons extends Component {
 
 	onDownPrev = () => {
 		if (this.announceRef.current.announce) {
+			// eslint-disable-next-line no-unused-vars
 			const {rtl, vertical} = this.props;
-			//this.announceRef.current.announce(vertical && $L('UP') || rtl && $L('RIGHT') || $L('LEFT'));
+			// this.announceRef.current.announce(vertical && $L('UP') || rtl && $L('RIGHT') || $L('LEFT'));
 		}
 	}
 
 	onDownNext = () => {
 		if (this.announceRef.current.announce) {
+			// eslint-disable-next-line no-unused-vars
 			const {rtl, vertical} = this.props;
-			//this.announceRef.current.announce(vertical && $L('DOWN') || rtl && $L('LEFT') || $L('RIGHT'));
+			// this.announceRef.current.announce(vertical && $L('DOWN') || rtl && $L('LEFT') || $L('RIGHT'));
 		}
 	}
 
@@ -370,9 +372,8 @@ class ScrollButtons extends Component {
 				onDown={this.onDownPrev}
 				onHoldPulse={this.onClickPrev}
 				ref={this.prevButtonRef}
-			>
-				{prevIcon}
-			</ScrollButton>,
+				icon={prevIcon}
+			/>,
 			thumbRenderer(),
 			<ScrollButton
 				aria-label={rtl && !vertical ? previousButtonAriaLabel : nextButtonAriaLabel}
@@ -383,9 +384,8 @@ class ScrollButtons extends Component {
 				onDown={this.onDownNext}
 				onHoldPulse={this.onClickNext}
 				ref={this.nextButtonRef}
-			>
-				{nextIcon}
-			</ScrollButton>,
+				icon={nextIcon}
+			/>,
 			<Announce
 				key="announce"
 				ref={this.announceRef}
