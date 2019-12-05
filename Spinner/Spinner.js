@@ -178,7 +178,7 @@ const SpinnerBase = kind({
 });
 
 /**
- * Agate-specific Spinner behaviors to apply to [Spinner]{@link agate/Spinner.Spinner}.
+ * Agate-specific Spinner behaviors to apply to [Spinner]{@link agate/Spinner.SpinnerBase}.
  *
  * @hoc
  * @memberof agate/Spinner
