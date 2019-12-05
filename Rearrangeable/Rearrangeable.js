@@ -1,3 +1,11 @@
+/**
+ * Provides behaviors for rearrangeable UIs
+ *
+ * @module agate/Rearrangeable
+ * @exports Rearrangeable
+ * @public
+ */
+
 import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
 import React from 'react';
@@ -16,11 +24,32 @@ const propRemapper = (arrangementProp, slotNames, props) => {
 	return props;
 };
 
+/**
+ * Default config for `Rearrangeable`.
+ *
+ * @memberof ui/Rearrangeable.Rearrangeable
+ * @hocconfig
+ * @public
+ */
 const defaultConfig = {
-	// The prop name for the object sent to the Wrapped component containing the arrangement object.
-	// This DOES NOT apply to the incoming arrangement prop name.
-	// The default/common value for this is "arrangement".
-	arrangementProp: 'arrangement'
+	/**
+	 * The prop name for the object sent to the Wrapped component containing the arrangement object.
+	 * This DOES NOT apply to the incoming arrangement prop name.
+	 * The default/common value for this is "arrangement".
+	 *
+	 * @type {String}
+	 * @default 'arrangement'
+	 * @memberof ui/Rearrangeable.Rearrangeable.defaultConfig
+	 */
+	arrangementProp: 'arrangement',
+
+	/**
+	 * Array of remappable slot names
+	 *
+	 * @type {String[]}
+	 * @memberof ui/Rearrangeable.Rearrangeable.defaultConfig
+	 */
+	slots: null
 };
 
 /**
@@ -47,16 +76,16 @@ const defaultConfig = {
  * // The generated output from the above would be:
  * // <Component dayOne="swimming" dayTwo="hiking" />
  *
- * // Now with an arragement prop filled-in,
+ * // Now with an arrangement prop filled-in,
  * <RearrangeableComponent dayOne="swimming" dayTwo="hiking" arrangement={{dayOne: 'dayTwo', dayTwo: 'dayOne'}} />
  *
  * // The generated output from the above would be:
  * // <Component dayOne="hiking" dayTwo="swimming" />
  * ```
  *
- * @param  {Object} (config, Wrapped)      accepts a single key (`slots`)
- *
- * @return {Component}
+ * @memberof agate/Rearrangeable
+ * @hoc
+ * @public
  */
 const Rearrangeable = hoc(defaultConfig, (config, Wrapped) => kind({
 	name: 'Rearrangeable',
