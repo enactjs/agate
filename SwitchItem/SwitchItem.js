@@ -65,7 +65,7 @@ const SwitchItemBase = kind({
 		 * The icon to display before the text.
 		 *
 		 * @type {String|Object}
-		 * @see agate/Icon.Icon
+		 * @see {@link agate/Icon.Icon}
 		 * @public
 		 */
 		icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),

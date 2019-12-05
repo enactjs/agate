@@ -67,7 +67,7 @@ const defaultContainerShape = {
 /**
  * Default config for DropManager.
  *
- * @memberof agate/DropManager.DropManager.MoonstoneDecorator
+ * @memberof agate/DropManager.DropManager
  * @hocconfig
  */
 const defaultConfig = {

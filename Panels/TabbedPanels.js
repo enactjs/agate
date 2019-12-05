@@ -15,7 +15,7 @@ import componentCss from './TabbedPanels.module.less';
 /**
  * Tabbed Panels component.
  *
- * @class Panels
+ * @class TabbedPanels
  * @memberof agate/Panels
  * @ui
  * @public
@@ -92,6 +92,7 @@ const TabbedPanelsBase = kind({
 	}
 });
 
+// Currently not documenting the base output since it's not exported from index.js
 const TabbedPanels = Slottable(
 	{slots: ['tabs', 'afterTabs', 'beforeTabs']},
 	Changeable(

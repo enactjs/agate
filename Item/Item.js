@@ -25,16 +25,6 @@ import React from 'react';
 import componentCss from './Item.module.less';
 import Skinnable from '../Skinnable';
 
-/**
- * The base item component, without behaviors
- *
- * @class Item
- * @memberof agate/Item
- * @extends agate/Item.Item
- * @mixes agate/Item.ItemDecorator
- * @ui
- * @public
- */
 const ItemContent = kind({
 	name: 'ItemContent',
 	propTypes: {
@@ -90,10 +80,10 @@ const ItemContent = kind({
 });
 
 /**
- * An Agate-styled item.
+ * Renders an Agate-styled Item without any behavior.
  *
  * @class ItemBase
- * @memberof Agate/Item
+ * @memberof agate/Item
  * @ui
  * @public
  */
@@ -164,7 +154,7 @@ const ItemDecorator = compose(
  *
  * @class Item
  * @memberof agate/Item
- * @extends agate/Item.Item
+ * @extends agate/Item.ItemBase
  * @mixes agate/Item.ItemDecorator
  * @ui
  * @public

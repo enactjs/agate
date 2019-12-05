@@ -27,7 +27,7 @@ const propRemapper = (arrangementProp, slotNames, props) => {
 /**
  * Default config for `Rearrangeable`.
  *
- * @memberof ui/Rearrangeable.Rearrangeable
+ * @memberof agate/Rearrangeable.Rearrangeable
  * @hocconfig
  * @public
  */
@@ -39,7 +39,7 @@ const defaultConfig = {
 	 *
 	 * @type {String}
 	 * @default 'arrangement'
-	 * @memberof ui/Rearrangeable.Rearrangeable.defaultConfig
+	 * @memberof agate/Rearrangeable.Rearrangeable.defaultConfig
 	 */
 	arrangementProp: 'arrangement',
 
@@ -47,7 +47,7 @@ const defaultConfig = {
 	 * Array of remappable slot names
 	 *
 	 * @type {String[]}
-	 * @memberof ui/Rearrangeable.Rearrangeable.defaultConfig
+	 * @memberof agate/Rearrangeable.Rearrangeable.defaultConfig
 	 */
 	slots: null
 };

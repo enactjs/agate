@@ -4,7 +4,7 @@
  * @example
  * <Button>Hello Enact!</Button>
  *
- * @module agate/DateItemPicker
+ * @module agate/DateTimePicker
  * @exports DateTimePicker
  * @exports DateTimePickerBase
  */
@@ -56,7 +56,7 @@ const PickerCell = kind({
  * @public
  */
 class DateTimePickerBase extends React.Component {
-	static propTypes = {
+	static propTypes = /** @lends agate/DateTimePicker.DateTimePickerBase.prototype */ {
 		onChange: PropTypes.func,
 		onClose: PropTypes.func,
 		onSave: PropTypes.func

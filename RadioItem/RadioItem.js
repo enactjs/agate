@@ -1,7 +1,7 @@
 /**
  * Provides Agate-themed Item component and interactive radio toggle icon.
  *
- * @module Agate/RadioItem
+ * @module agate/RadioItem
  * @exports RadioItem
  */
 
@@ -23,7 +23,7 @@ import componentCss from './RadioItem.module.less';
  * Renders an `Item` with a radio-dot component. Useful to show a selected state on an Item.
  *
  * @class RadioItem
- * @memberof Agate/RadioItem
+ * @memberof agate/RadioItem
  * @extends agate/Item.Item
  * @mixes spotlight/Spottable.Spottable
  * @mixes ui/Toggleable.Toggleable
