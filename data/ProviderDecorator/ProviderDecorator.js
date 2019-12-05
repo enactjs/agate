@@ -6,8 +6,13 @@ import React, {Component} from 'react';
 
 const Context = React.createContext();
 
-const ProviderDecorator = hoc({state: {}}, (config, Wrapped) => {
-	const {state: defaultState} = config;
+const defaultConfig = {
+	pauseOnBlur: false,
+	state: {}
+};
+
+const ProviderDecorator = hoc(defaultConfig, (config, Wrapped) => {
+	const {pauseOnBlur, state: defaultState} = config;
 
 	const PureWrapped = React.memo(Wrapped);
 
@@ -22,13 +27,17 @@ const ProviderDecorator = hoc({state: {}}, (config, Wrapped) => {
 		}
 
 		componentDidMount () {
-			on('blur', this.handleBlur, window);
-			on('focus', this.handleFocus, window);
+			if (pauseOnBlur) {
+				on('blur', this.handleBlur, window);
+				on('focus', this.handleFocus, window);
+			}
 		}
 
 		componentWillUnount () {
-			off('blur', this.handleBlur, window);
-			off('focus', this.handleFocus, window);
+			if (pauseOnBlur) {
+				off('blur', this.handleBlur, window);
+				off('focus', this.handleFocus, window);
+			}
 		}
 
 		handleBlur = () => {
