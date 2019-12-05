@@ -25,16 +25,16 @@ import componentCss from './Switch.module.less';
 /**
  * Renders the base level DOM structure of the component.
  *
- * @class Switch
+ * @class SwitchBase
  * @memberof agate/Switch
- * @extends agate/ToggleIcon.ToggleIcon
+ * @extends ui/ToggleIcon.ToggleIconBase
  * @ui
  * @public
  */
 const SwitchBase = kind({
 	name: 'Switch',
 
-	propTypes: /** @lends agate/Switch.Switch.prototype */ {
+	propTypes: /** @lends agate/Switch.SwitchBase.prototype */ {
 		children: PropTypes.string,
 		css: PropTypes.object,
 
@@ -86,11 +86,30 @@ const SwitchBase = kind({
 	}
 });
 
+/**
+ * Agate specific item behaviors to apply to [Switch]{@link agate/Switch.SwitchBase}.
+ *
+ * @hoc
+ * @memberof agate/Switch
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const SwitchDecorator = compose(
 	Toggleable({toggleProp: 'onClick'}),
 	Skinnable({prop: 'skin'})
 );
 
+/**
+ * A switch component with Agate behaviors.
+ *
+ * @class Switch
+ * @memberof agate/Switch
+ * @extends agate/Switch.SwitchBase
+ * @mixes agate/Switch.SwitchDecorator
+ * @ui
+ * @public
+ */
 const Switch = SwitchDecorator(SwitchBase);
 
 export default SwitchDecorator(SwitchBase);

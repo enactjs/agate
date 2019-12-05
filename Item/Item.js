@@ -139,16 +139,14 @@ const ItemBase = kind({
 });
 
 /**
- * Agate specific item behaviors to apply to `Item`.
+ * Agate specific item behaviors to apply to [Item]{@link agate/Item.ItemBase}.
  *
- * @class ItemDecorator
  * @hoc
  * @memberof agate/Item
  * @mixes ui/Item.ItemDecorator
  * @mixes spotlight/Spottable.Spottable
  * @mixes ui/Marquee.MarqueeController
  * @mixes agate/Skinnable.Skinnable
- * @ui
  * @public
  */
 const ItemDecorator = compose(
