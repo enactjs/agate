@@ -1,10 +1,10 @@
-import { forward } from '@enact/core/handle';
-import { getTargetByDirectionFromElement } from '@enact/spotlight/src/target';
-import { is } from '@enact/core/keymap';
-import { Announce } from '@enact/ui/AnnounceDecorator';
-import Spotlight, { getDirection } from '@enact/spotlight';
+import {forward} from '@enact/core/handle';
+import {getTargetByDirectionFromElement} from '@enact/spotlight/src/target';
+import {is} from '@enact/core/keymap';
+import {Announce} from '@enact/ui/AnnounceDecorator';
+import Spotlight, {getDirection} from '@enact/spotlight';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 // import $L from '../internal/$L';
@@ -159,8 +159,8 @@ class ScrollButtons extends Component {
 		onPrevScroll: nop
 	}
 
-	constructor(props) {
-		super(props);
+	constructor (props) {
+		super (props);
 
 		this.state = {
 			prevButtonDisabled: true,
@@ -172,19 +172,19 @@ class ScrollButtons extends Component {
 		this.prevButtonRef = React.createRef();
 	}
 
-	componentDidMount() {
+	componentDidMount () {
 		this.nextButtonRef.current.addEventListener('keydown', this.onKeyDownNext);
 		this.prevButtonRef.current.addEventListener('keydown', this.onKeyDownPrev);
 	}
 
-	componentWillUnmount() {
+	componentWillUnmount () {
 		this.nextButtonRef.current.removeEventListener('keydown', this.onKeyDownNext);
 		this.prevButtonRef.current.removeEventListener('keydown', this.onKeyDownPrev);
 	}
 
 	updateButtons = (bounds) => {
 		const
-			{ vertical } = this.props,
+			{vertical} = this.props,
 			currentPos = vertical ? bounds.scrollTop : bounds.scrollLeft,
 			maxPos = vertical ? bounds.maxTop : bounds.maxLeft,
 			shouldDisablePrevButton = currentPos <= 0,
@@ -199,11 +199,11 @@ class ScrollButtons extends Component {
 		if (updatePrevButton || updateNextButton) {
 			this.setState(() => {
 				if (updatePrevButton && updateNextButton) {
-					return { prevButtonDisabled: shouldDisablePrevButton, nextButtonDisabled: shouldDisableNextButton };
+					return {prevButtonDisabled: shouldDisablePrevButton, nextButtonDisabled: shouldDisableNextButton};
 				} else if (updatePrevButton) {
-					return { prevButtonDisabled: shouldDisablePrevButton };
+					return {prevButtonDisabled: shouldDisablePrevButton};
 				} else if (updateNextButton) {
-					return { nextButtonDisabled: shouldDisableNextButton };
+					return {nextButtonDisabled: shouldDisableNextButton};
 				}
 			});
 		}
@@ -219,7 +219,7 @@ class ScrollButtons extends Component {
 	onDownPrev = () => {
 		if (this.announceRef.current.announce) {
 			// eslint-disable-next-line no-unused-vars
-			const { rtl, vertical } = this.props;
+			const {rtl, vertical} = this.props;
 			// this.announceRef.current.announce(vertical && $L('UP') || rtl && $L('RIGHT') || $L('LEFT'));
 		}
 	}
@@ -227,21 +227,21 @@ class ScrollButtons extends Component {
 	onDownNext = () => {
 		if (this.announceRef.current.announce) {
 			// eslint-disable-next-line no-unused-vars
-			const { rtl, vertical } = this.props;
+			const {rtl, vertical} = this.props;
 			// this.announceRef.current.announce(vertical && $L('DOWN') || rtl && $L('LEFT') || $L('RIGHT'));
 		}
 	}
 
 	onClickPrev = (ev) => {
-		const { onPrevScroll, vertical } = this.props;
+		const {onPrevScroll, vertical} = this.props;
 
-		onPrevScroll({ ...ev, isPreviousScrollButton: true, isVerticalScrollBar: vertical });
+		onPrevScroll({...ev, isPreviousScrollButton: true, isVerticalScrollBar: vertical});
 	}
 
 	onClickNext = (ev) => {
-		const { onNextScroll, vertical } = this.props;
+		const {onNextScroll, vertical} = this.props;
 
-		onNextScroll({ ...ev, isPreviousScrollButton: false, isVerticalScrollBar: vertical });
+		onNextScroll({...ev, isPreviousScrollButton: false, isVerticalScrollBar: vertical});
 	}
 
 	focusOnButton = (isPrev) => {
@@ -258,8 +258,8 @@ class ScrollButtons extends Component {
 
 	onKeyDownButton = (ev, position) => {
 		const
-			{ focusableScrollButtons, vertical, preventBubblingOnKeyDown } = this.props,
-			{ keyCode } = ev,
+			{focusableScrollButtons, vertical, preventBubblingOnKeyDown} = this.props,
+			{keyCode} = ev,
 			direction = getDirection(ev.keyCode),
 			preventBubbling = preventBubblingOnKeyDown === 'programmatic',
 			isNextButton = position === 'next',
@@ -299,7 +299,7 @@ class ScrollButtons extends Component {
 			}
 		} else if (direction) {
 			const
-				{ rtl } = this.props,
+				{rtl} = this.props,
 				isDown = direction === 'down',
 				isLeftMovement = direction === (rtl ? 'right' : 'left'),
 				isRightMovement = direction === (rtl ? 'left' : 'right'),
@@ -355,10 +355,10 @@ class ScrollButtons extends Component {
 		this.onKeyDownButton(ev, 'next');
 	}
 
-	render() {
+	render () {
 		const
-			{ disabled, nextButtonAriaLabel, previousButtonAriaLabel, rtl, thumbRenderer, vertical } = this.props,
-			{ prevButtonDisabled, nextButtonDisabled } = this.state,
+			{disabled, nextButtonAriaLabel, previousButtonAriaLabel, rtl, thumbRenderer, vertical} = this.props,
+			{prevButtonDisabled, nextButtonDisabled} = this.state,
 			prevIcon = preparePrevButton(vertical),
 			nextIcon = prepareNextButton(vertical);
 

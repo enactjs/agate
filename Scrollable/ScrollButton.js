@@ -67,7 +67,7 @@ const ScrollButtonBase = kind({
 		 */
 		forwardRef: PropTypes.oneOfType([
 			PropTypes.func,
-			PropTypes.shape({ current: PropTypes.any })
+			PropTypes.shape({current: PropTypes.any})
 		])
 	},
 
@@ -77,7 +77,7 @@ const ScrollButtonBase = kind({
 	},
 
 	handlers: {
-		forwardRef: (node, { forwardRef }) => {
+		forwardRef: (node, {forwardRef}) => {
 			// Allowing findDOMNode in the absence of a means to retrieve a node ref through Button
 			// eslint-disable-next-line react/no-find-dom-node
 			const current = ReactDOM.findDOMNode(node);
@@ -95,10 +95,10 @@ const ScrollButtonBase = kind({
 	},
 
 	computed: {
-		'aria-label': ({ active, 'aria-label': ariaLabel }) => (active ? null : ariaLabel)
+		'aria-label': ({active, 'aria-label': ariaLabel}) => (active ? null : ariaLabel)
 	},
 
-	render: ({ children, disabled, forwardRef, ...rest }) => {
+	render: ({forwardRef, ...rest}) => {
 		delete rest.active;
 
 		return (
