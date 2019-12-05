@@ -16,11 +16,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from '../Button';
-import IconButton from '../IconButton';
 import Skinnable from '../Skinnable';
 
 import css from './ToggleButton.module.less';
-
 
 /**
  * A stateless [Button]{@link agate/Button.Button} that can be toggled by changing its
@@ -147,19 +145,24 @@ const ToggleButtonBase = kind({
 				c = toggleOffLabel;
 			}
 			return c;
-		},
-		iconToggleButton: ({children, toggleOnLabel, toggleOffLabel, icon}) => (!children && !toggleOnLabel && !toggleOffLabel && icon)
+		}
 	},
 
-	render: ({children, iconToggleButton, icon, selected, ...rest}) => {
+	render: ({children, icon, selected, ...rest}) => {
 		delete rest.underline;
 		delete rest.toggleOffLabel;
 		delete rest.toggleOnLabel;
 
-		return iconToggleButton ? (
-			<IconButton {...rest} aria-pressed={selected} css={css} selected={selected}>{icon}</IconButton>
-		) : (
-			<Button {...rest} aria-pressed={selected} css={css} icon={icon} selected={selected}>{children}</Button>
+		return (
+			<Button
+				{...rest}
+				aria-pressed={selected}
+				css={css}
+				icon={icon}
+				selected={selected}
+			>
+				{children}
+			</Button>
 		);
 	}
 });
