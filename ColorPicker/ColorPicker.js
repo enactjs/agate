@@ -337,10 +337,10 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
  *
  * @hoc
  * @memberof agate/ColorPicker
+ * @mixes ui/Toggleable.Toggleable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
-
 const ColorPickerDecorator = compose(
 	Toggleable({toggle: null, prop: 'open', toggleProp: 'onClick'}),
 	ColorPickerExtended,
@@ -353,9 +353,7 @@ const ColorPickerDecorator = compose(
  * @class ColorPicker
  * @memberof agate/ColorPicker
  * @extends agate/ColorPicker.ColorPickerBase
- * @mixes agate/Button.ButtonDecorator
- * @mixes ui/Changeable.Changeable
- * @mixes agate/Skinnable.Skinnable
+ * @mixes agate/ColorPicker.ColorPickerDecorator
  * @ui
  * @public
  */

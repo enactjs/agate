@@ -96,6 +96,7 @@ const RadioItemBase = kind({
 	}
 });
 
+// Decorator is not exported so not documented
 const RadioItemDecorator = compose(
 	Toggleable({toggleProp: 'onTap'}),
 	Touchable,

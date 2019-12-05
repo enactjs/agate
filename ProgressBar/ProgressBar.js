@@ -100,6 +100,7 @@ const ProgressBarBase = kind({
 	}
 });
 
+// Not documenting as base is not very useful to developers.
 const ProgressBar = Skinnable(ProgressBarBase);
 
 export default ProgressBar;

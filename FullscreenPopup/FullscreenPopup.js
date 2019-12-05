@@ -87,6 +87,7 @@ const FullscreenPopupDecorator = compose(
  *
  * @class FullscreenPopup
  * @memberof agate/FullscreenPopup
+ * @mixes agate/Skinnable.Skinnable
  * @ui
  * @public
  */

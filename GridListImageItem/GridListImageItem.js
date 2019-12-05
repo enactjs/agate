@@ -117,9 +117,8 @@ const GridListImageItemDecorator = compose(
 /**
  * @class GridListImageItem
  * @memberof agate/GridListImageItem
- * @extends agate/GridListIamgeItem.GridListImageItemBase
+ * @extends agate/GridListImageItem.GridListImageItemBase
  * @mixes agate/GridListImageItem.GridListImageItemDecorator
- * @see agate/GridListImageItem.GridListImageItemBase
  * @ui
  * @public
  */
