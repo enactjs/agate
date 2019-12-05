@@ -94,7 +94,7 @@ const ButtonBase = kind({
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
+		 * corresponding internal elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *
@@ -229,8 +229,6 @@ const ButtonBase = kind({
  *
  * @hoc
  * @memberof agate/Button
- * @mixes i18n/Uppercase.Uppercase
- * @mixes agate/Marquee.MarqueeDecorator
  * @mixes ui/Button.ButtonDecorator
  * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable

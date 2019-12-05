@@ -41,7 +41,7 @@ const IconButtonBase = kind({
 	propTypes: /** @lends agate/IconButton.IconButtonBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
+		 * corresponding internal elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *
@@ -156,9 +156,7 @@ const IconButtonBase = kind({
  *
  * @hoc
  * @memberof agate/IconButton
- * @mixes i18n/Uppercase.Uppercase
- * @mixes agate/Marquee.MarqueeDecorator
- * @mixes ui/IconButton.IconButtonDecorator
+ * @mixes ui/Button.ButtonDecorator
  * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
  * @public

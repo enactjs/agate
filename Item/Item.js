@@ -134,9 +134,10 @@ const ItemBase = kind({
  * @class ItemDecorator
  * @hoc
  * @memberof agate/Item
- * @mixes spotlight.Spottable
- * @mixes ui/Marquee.MarqueeDecorator
- * @mixes agate/Skinnable
+ * @mixes ui/Item.ItemDecorator
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes ui/Marquee.MarqueeController
+ * @mixes agate/Skinnable.Skinnable
  * @ui
  * @public
  */
