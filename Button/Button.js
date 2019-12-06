@@ -218,10 +218,12 @@ const ButtonBase = kind({
 			// Don't burden basic HTML elements with the spriteCount prop (or other Icon-specific props)
 			if (typeof iconComponent === 'string') return iconComponent;
 
-			return (<ComponentOverride
-				component={iconComponent}
-				spriteCount={spriteCount}
-			/>);
+			return (
+				<ComponentOverride
+					component={iconComponent}
+					spriteCount={spriteCount}
+				/>
+			);
 		},
 		style: ({animationDelay, badgeColor, style}) => ({
 			...style,
