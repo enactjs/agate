@@ -25,31 +25,125 @@ import css from './AgateDecorator.module.less';
 /**
  * Default config for {@link agate/AgateDecorator.AgateDecorator}.
  *
- * @memberof agate/AgateDecorator
+ * @memberof agate/AgateDecorator.AgateDecorator
  * @hocconfig
  */
-const defaultConfig = {
+const defaultConfig = /** @lends agate/AgateDecorator.AgateDecorator.defaultConfig */ {
+	/**
+	 * Enables customization of a skin's highlight and accent color.
+	 *
+	 * @type {Boolean}
+	 * @default true
+	 * @public
+	 */
+	customSkin: true,
+
+	/**
+	 * Enables a floating layer for popup components.
+	 *
+	 * If not applied, app will be responsible for applying the decorator.
+	 *
+	 * @type {Boolean}
+	 * @default true
+	 * @see {@link ui/FloatingLayer.FloatingLayerDecorator}
+	 * @public
+	 */
 	float: true,
+
+	/**
+	 * Applies I18nDecorator.
+	 *
+	 * If not applied, app will be responsible for applying the decorator.
+	 *
+	 * @type {Boolean}
+	 * @default true
+	 * @see {@link i18n/I18nDecorator}
+	 * @public
+	 */
 	i18n: true,
+
+	/**
+	 * Disables setting spotlight focus on first render.
+	 *
+	 * @type {Boolean}
+	 * @default false
+	 * @public
+	 */
 	noAutoFocus: false,
+
+	/**
+	 * Enables overlay mode (no background color will be applied).
+	 *
+	 * @type {Boolean}
+	 * @default false
+	 * @public
+	 */
 	overlay: false,
+
+	/**
+	 * Override the resolution independence settings.
+	 *
+	 * @type {Object}
+	 * @see {@link ui/resolution}
+	 * @public
+	 */
 	ri: {
 		screenTypes
 	},
-	spotlight: true,
-	customSkin: true,
-	skin: true
+
+	/**
+	 * Applies skinning support.
+	 *
+	 * @type {Boolean}
+	 * @default true
+	 * @see {@link agate/Skinnable}
+	 * @public
+	 */
+	skin: true,
+
+	/**
+	 * Applies spotlight decorator.
+	 *
+	 * If not applied, app will be responsible for applying the decorator.
+	 *
+	 * @type {Boolean}
+	 * @default true
+	 * @see {@link spotlight/SpotlightRootDecorator}
+	 * @public
+	 */
+	spotlight: true
 };
 
+// TODO: If this will be public it should be documented or perhaps the props
+// added to `AgateDecorator`
 const CustomizableSkinStyle = kind({
 	name: 'CustomizableSkinStyle',
 
 	propTypes: {
 		className: PropTypes.string.isRequired,
+
+		/**
+		 * A custom access color, as a hex string
+		 *
+		 * @memberof agate/AgateDecorator.AgateDecorator.prototype
+		 * @type {String}
+		 * @default '#8b7efe'
+		 * @public
+		 */
 		accent: PropTypes.string,
+
+		/**
+		 * A custom highlight color, as a hex string
+		 *
+		 * @memberof agate/AgateDecorator.AgateDecorator.prototype
+		 * @type {String}
+		 * @default '#c6c0fe'
+		 * @public
+		 */
 		highlight: PropTypes.string
 	},
 
+	// TODO: Consider allowing `null` and dropping this override completely
 	defaultProps: {
 		accent: '#8b7efe',
 		highlight: '#c6c0fe'
@@ -101,10 +195,15 @@ const CustomizableSkinStyle = kind({
  *
  * @class AgateDecorator
  * @memberof agate/AgateDecorator
+ * @mixes ui/FloatingLayer.FloatingLayerDecorator
+ * @mixes ui/resolution.ResolutionDecorator
+ * @mixes spotlight/SpotlightRootDecorator.SpotlightRootDecorator
+ * @mixes agate/Skinnable.Skinnable
  * @hoc
  * @public
  */
 const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
+	// TODO: Document props passable to hoc ()
 	const {customSkin, float, i18n, noAutoFocus, overlay, ri, skin, spotlight} = config;
 
 	const bgClassName = classnames(

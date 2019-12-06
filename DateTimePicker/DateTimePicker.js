@@ -2,7 +2,7 @@
  * An Agate-themed date/time picker component.
  *
  * @example
- * <Button>Hello Enact!</Button>
+ * <DateTimePicker />
  *
  * @module agate/DateTimePicker
  * @exports DateTimePicker

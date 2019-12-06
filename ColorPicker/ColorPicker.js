@@ -2,7 +2,7 @@
  * Agate component to allow the user to choose a color.
  *
  * @example
- * <ColorPicker defaultValue="#ffcc00" onChange={handleChange}>{[#fff, #999, #000]}</ColorPicker>
+ * <ColorPicker defaultValue="#ffcc00">{['#fff', '#999', '#000']}</ColorPicker>
  *
  * @module agate/ColorPicker
  * @exports ColorPicker
