@@ -24,7 +24,7 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 
 import Scrollable from '../Scrollable';
-//import ScrollableNative from '../Scrollable/ScrollableNative';
+// import ScrollableNative from '../Scrollable/ScrollableNative';
 
 const dataContainerDisabledAttribute = 'data-spotlight-container-disabled';
 
@@ -483,26 +483,26 @@ Scroller.defaultProps = {
  * @ui
  * @private
  */
-//const ScrollerNative = (props) => (
+// const ScrollerNative = (props) => (
 //	<ScrollableNative
 //		{...props}
 //		childRenderer={(scrollerProps) => { // eslint-disable-line react/jsx-no-bind
 //			return <ScrollerBase {...scrollerProps} />;
 //		}}
 //	/>
-//);
+// );
 
-//ScrollerNative.propTypes = /** @lends agate/Scroller.ScrollerNative.prototype */ {
+// ScrollerNative.propTypes = /** @lends agate/Scroller.ScrollerNative.prototype */ {
 //	direction: PropTypes.oneOf(['both', 'horizontal', 'vertical'])
-//};
+// };
 
-//ScrollerNative.defaultProps = {
+// ScrollerNative.defaultProps = {
 //	direction: 'both'
-//};
+// };
 
 export default Scroller;
 export {
 	Scroller,
-	ScrollerBase,
-	//ScrollerNative
+	ScrollerBase
+	// ScrollerNative
 };

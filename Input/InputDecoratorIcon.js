@@ -43,7 +43,7 @@ const InputDecoratorIconBase = kind({
 		 * @default 'large'
 		 * @public
 		 */
-		size: PropTypes.oneOf(['small', 'large']),
+		size: PropTypes.oneOf(['small', 'large'])
 	},
 
 	defaultProps: {

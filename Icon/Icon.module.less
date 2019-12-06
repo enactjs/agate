@@ -52,6 +52,15 @@
 			line-height: @agate-icon-small-size;
 		}
 
+		&.smallest {
+			.icon-sprite-offset(@agate-icon-sprite-smallest-size, 0);
+			background-size: @agate-icon-sprite-smallest-size calc(var(--agate-icon-sprite-count, 1) * @agate-icon-sprite-smallest-size);
+			width: @agate-icon-smallest-size;
+			height: @agate-icon-smallest-size;
+			font-size: @agate-icon-smallest-font-size;
+			line-height: @agate-icon-smallest-size;
+		}
+
 		&.dingbat {
 			font-family: "LG Display_Dingbat";
 			font-size: @agate-icon-size;
@@ -74,6 +83,10 @@
 			&.small {
 				.icon-sprite-offset(@agate-icon-sprite-small-size, 1);
 			}
+
+			&.smallest {
+				.icon-sprite-offset(@agate-icon-sprite-smallest-size, 1);
+			}
 		});
 	});
 }
@@ -90,6 +103,10 @@
 
 			&.small {
 				.icon-sprite-offset(@agate-icon-sprite-small-size, 1);
+			}
+
+			&.smallest {
+				.icon-sprite-offset(@agate-icon-sprite-smallest-size, 1);
 			}
 		});
 	}
