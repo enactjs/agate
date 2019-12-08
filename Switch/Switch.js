@@ -1,5 +1,5 @@
 /**
- * Provides an Agate-themed pill-shaped toggle switch component.
+ * Provides an Agate-themed toggle switch component.
  *
  * @example
  * <Switch />
@@ -71,7 +71,7 @@ const SwitchBase = kind({
 		}
 	},
 
-	render: ({children, css, ...rest}) => {
+	render: ({css, ...rest}) => {
 		delete rest.noAnimation;
 
 		return (
@@ -79,9 +79,7 @@ const SwitchBase = kind({
 				{...rest}
 				css={css}
 				iconComponent={Icon}
-			>
-				{children}
-			</ToggleIconBase>
+			/>
 		);
 	}
 });
@@ -96,6 +94,7 @@ const SwitchBase = kind({
  * @public
  */
 const SwitchDecorator = compose(
+	// TODO: Should this be spottable?  onTap?
 	Toggleable({toggleProp: 'onClick'}),
 	Skinnable({prop: 'skin'})
 );

@@ -93,6 +93,7 @@ const SpinnerCore = kind({
  *
  * @class SpinnerBase
  * @memberof agate/Spinner
+ * @extends ui/Spinner.Spinner
  * @ui
  * @public
  */
@@ -107,7 +108,7 @@ const SpinnerBase = kind({
 		 * @default 'light'
 		 * @public
 		 */
-		color: PropTypes.string,
+		color: PropTypes.oneOf(['dark', 'light']),
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -126,7 +127,7 @@ const SpinnerBase = kind({
 		/**
 		 * The size of the component.
 		 *
-		 * Recommended usage is "medium" (default) for standalone and popup scenarios, while "small"
+		 * Recommended usage is "large" (default) for standalone and popup scenarios, while "small"
 		 * is best suited for use inside other elements, like {@link agate/SlotItem.SlotItem}.
 		 *
 		 * @type {('huge'|'large'|'small'|'smallest')}
@@ -195,6 +196,7 @@ const SpinnerDecorator = compose(
  *
  * @class Spinner
  * @memberof agate/Spinner
+ * @extends agate/Spinner.SpinnerBase
  * @mixes agate/Spinner.SpinnerDecorator
  * @ui
  * @public

@@ -74,9 +74,8 @@ const LabeledIconButtonBase = kind({
 		/**
 		 * The component used to render the `icon`.
 		 *
-		 * This will receive the `icon` prop as `children` and should handle it appropriately. This
-		 * prop is ignored in the case of a component being passed into the `icon` prop. It will
-		 * also receive the `flip` and `size` props as set on the component.
+		 * This will receive the `icon` prop as `children` and should handle it appropriately.It
+		 * will also receive the `flip` and `size` props as set on the component.
 		 *
 		 * @type {Component}
 		 */
@@ -101,6 +100,7 @@ const LabeledIconButtonBase = kind({
 		 * @public
 		 */
 		spriteCount: PropTypes.number
+		// TODO: spriteCount prop bleeds!  Is this cruft?
 	},
 
 	styles: {

@@ -47,6 +47,7 @@ const HeaderBase = kind({
 		 *  </Header>
 		 * ```
 		 *
+		 * @required
 		 * @type {String}
 		 */
 		title: PropTypes.string.isRequired,

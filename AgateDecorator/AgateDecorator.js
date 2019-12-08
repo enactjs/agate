@@ -123,7 +123,7 @@ const CustomizableSkinStyle = kind({
 		className: PropTypes.string.isRequired,
 
 		/**
-		 * A custom access color, as a hex string
+		 * A custom accent color, as a hex string.
 		 *
 		 * @memberof agate/AgateDecorator.AgateDecorator.prototype
 		 * @type {String}
@@ -133,7 +133,7 @@ const CustomizableSkinStyle = kind({
 		accent: PropTypes.string,
 
 		/**
-		 * A custom highlight color, as a hex string
+		 * A custom highlight color, as a hex string.
 		 *
 		 * @memberof agate/AgateDecorator.AgateDecorator.prototype
 		 * @type {String}

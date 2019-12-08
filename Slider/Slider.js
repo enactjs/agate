@@ -15,6 +15,8 @@
  * @exports SliderDecorator
  */
 
+// TODO: Add 'activated' styling for slider (If 5-way is needed)
+
 import {forKey, forProp, forward, forwardWithPrevent, handle} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
@@ -118,7 +120,7 @@ const SliderBase = kind({
 		min: PropTypes.number,
 
 		/**
-		 * The handler when the knob is activated or deactivated by selecting it via 5-way
+		 * Called when the knob is activated or deactivated by selecting it via 5-way
 		 *
 		 * @type {Function}
 		 * @public

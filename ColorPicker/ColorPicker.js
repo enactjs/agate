@@ -66,11 +66,11 @@ const ColorPickerBase = kind({
 		 */
 		css: PropTypes.object,
 
+		// TODO: position `palette` like `Tooltip`
 		/**
 		 * The animation direction of the `palette`.
-		 * // TODO: position `palette` like `Tooltip`
 		 *
-		 * @type {Function}
+		 * @type {String}
 		 * @public
 		 */
 		direction: PropTypes.string,

@@ -41,6 +41,9 @@ const LabeledIconBase = kind({
 		 *
 		 * * `labeledIcon` - The root class name
 		 * * `label` - Applied to the label element
+		 *
+		 * @type {Object}
+		 * @public
 		 */
 		css: PropTypes.object
 	},

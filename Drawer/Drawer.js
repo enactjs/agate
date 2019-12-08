@@ -95,7 +95,6 @@ const DrawerBase = kind({
  * @memberof agate/Drawer
  * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
- * @mixes agate/Popup.PopupState
  * @public
  */
 const DrawerDecorator = compose(

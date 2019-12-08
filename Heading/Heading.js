@@ -45,7 +45,6 @@ const HeadingBase = kind({
 		 * none is specified.
 		 *
 		 * @type {String}
-		 * @default null
 		 * @public
 		 */
 		color: PropTypes.string,

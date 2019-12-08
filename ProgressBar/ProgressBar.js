@@ -22,6 +22,7 @@ import componentCss from './ProgressBar.module.less';
  *
  * @class ProgressBar
  * @memberof agate/ProgressBar
+ * @extends ui/ProgressBar.ProgressBar
  * @mixes agate/Skinnable.Skinnable
  * @ui
  * @public
@@ -44,11 +45,9 @@ const ProgressBarBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Sets the orientation of the slider.
+		 * Sets the orientation of the progress bar.
 		 *
-		 * * Values: `'horizontal'`, `'vertical'`
-		 *
-		 * @type {String}
+		 * @type {('horizontal'|'vertical')}
 		 * @default 'horizontal'
 		 * @public
 		 */
@@ -64,7 +63,7 @@ const ProgressBarBase = kind({
 		progress: PropTypes.number,
 
 		/**
-		 * The size of the progress bar
+		 * The size of the progress bar.
 		 *
 		 * @type {('small'|'large')}
 		 * @default 'large'

@@ -51,16 +51,15 @@ const RadioItemBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Customize the component used as the icon label.
+		 * The icon to display when selected.
 		 *
-		 * @type {Element|Function|String}
-		 * @default {@link agate/Switch.Switch}
-		 * @public
+		 * @type {String}
+		 * @see {@link agate/Icon.Icon}
 		 */
-		icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]),
+		icon: PropTypes.string,
 
 		/**
-		 * If true the radio toggle will be selected.
+		 * Sets the RadioItem to its 'on' state.
 		 *
 		 * @type {Boolean}
 		 * @default false

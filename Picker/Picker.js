@@ -57,11 +57,11 @@ const PickerBase = kind({
 		/**
 		 * Picker value list.
 		 *
-		 * @type {Node}
+		 * @type {Array}
 		 * @required
 		 * @public
 		 */
-		children: PropTypes.node.isRequired,
+		children: PropTypes.array.isRequired,
 
 		/**
 		 * Index of the selected child.

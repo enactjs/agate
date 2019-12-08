@@ -63,13 +63,16 @@ const IconBase = kind({
 		 * * `huge` - Applied to a `size='huge'` icon
 		 * * `small` - Applied to a `size='small'` icon
 		 * * `smallest` - Applied to a `size='smallest'` icon
+		 *
+		 * @type {Object}
+		 * @public
 		 */
 		css: PropTypes.object,
 
 		/**
 		 * The size of the icon.
 		 *
-		 * @type {('small'|'large'|'huge')}
+		 * @type {('smallest'|'small'|'large'|'huge')}
 		 * @default 'large'
 		 * @public
 		 */
@@ -124,81 +127,115 @@ const IconBase = kind({
  *
  * List of Icons:
  * ```
+ * circlelarge
+ * squarelarge
+ * triangleup
  * plus
  * minus
- * arrowhookleft
- * arrowhookright
+ * arrowup
+ * arrowdown
+ * arrowleftturn
+ * arrowrightturn
+ * arrowharpoonright
  * ellipsis
  * check
- * circle
- * stop
- * play
- * pause
- * forward
- * backward
- * skipforward
- * skipbackward
- * pauseforward
- * pausebackward
- * pausejumpforward
- * pausejumpbackward
- * jumpforward
- * jumpbackward
- * denselist
- * bulletlist
- * list
- * drawer
+ * arrowstraightup
+ * arrowuturn
  * arrowlargedown
  * arrowlargeup
  * arrowlargeleft
  * arrowlargeright
- * arrowsmallup
- * arrowsmalldown
- * arrowsmallleft
- * arrowsmallright
  * closex
  * search
- * rollforward
- * rollbackward
- * exitfullscreen
- * fullscreen
- * arrowshrinkleft
- * arrowshrinkright
- * arrowextend
- * arrowshrink
- * flag
- * funnel
- * trash
- * star
- * hollowstar
- * halfstar
- * gear
- * plug
- * lock
- * forward15
- * back15
- * continousplay
- * playlist
- * resumeplay
- * image
- * audio
+ * bright1
+ * bright2
+ * bluetooth
+ * usb
+ * volume0
+ * volume1
+ * volume2
+ * wifi
+ * happyface
+ * notification
+ * pairing
+ * user
+ * calendar
+ * edit
+ * gallery
+ * internet
+ * map
  * music
- * languages
- * cc
- * ccon
- * ccoff
- * sub
- * recordings
- * livezoom
- * liveplayback
- * liveplaybackoff
- * repeat
- * repeatoff
- * series
- * repeatdownload
- * view360
- * view360off
- * info
+ * video
+ * circle
+ * previous
+ * pairingdisplay
+ * box
+ * play
+ * setting
+ * accept
+ * decline
+ * stop
+ * cancel
+ * carspeaker
+ * speaker
+ * earphone
+ * detail
+ * install
+ * send
+ * netbook
+ * pad
+ * mobile
+ * update
+ * backapp
+ * uninstall
+ * rain
+ * raindrops
+ * raincloud
+ * snow
+ * cloud
+ * ice
+ * fog
+ * sun
+ * profileA1
+ * profileA2
+ * profileA3
+ * profileA4
+ * profileB1
+ * profileB2
+ * profileB3
+ * profileB4
+ * profileC1
+ * profileC2
+ * profileC3
+ * profileC4
+ * ac
+ * auto
+ * airmode
+ * airdown
+ * airright
+ * airup
+ * heatseatleft
+ * heatseatright
+ * aircirculation
+ * fan
+ * defrosterfront
+ * defrosterback
+ * airflow
+ * home
+ * temperature
+ * compass
+ * phone
+ * fanoff
+ * datetime
+ * display
+ * seatbelt
+ * apps
+ * climate
+ * dashboard
+ * expand
+ * radio
+ * rearscreen
+ * weather
  * ```
  *
  * @name iconList

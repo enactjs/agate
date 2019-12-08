@@ -31,23 +31,20 @@ const propRemapper = (arrangementProp, slotNames, props) => {
  * @hocconfig
  * @public
  */
-const defaultConfig = {
+const defaultConfig = /** @lends agate/Rearrangeable.Rearrangeable.defaultConfig */ {
 	/**
-	 * The prop name for the object sent to the Wrapped component containing the arrangement object.
+	 * The prop name for the object sent to the wrapped component containing the arrangement object.
 	 * This DOES NOT apply to the incoming arrangement prop name.
-	 * The default/common value for this is "arrangement".
 	 *
 	 * @type {String}
 	 * @default 'arrangement'
-	 * @memberof agate/Rearrangeable.Rearrangeable.defaultConfig
 	 */
 	arrangementProp: 'arrangement',
 
 	/**
-	 * Array of remappable slot names
+	 * Array of remappable slot names.
 	 *
 	 * @type {String[]}
-	 * @memberof agate/Rearrangeable.Rearrangeable.defaultConfig
 	 */
 	slots: null
 };
@@ -62,7 +59,7 @@ const defaultConfig = {
  * capability to be swapped or reassigned, the config and array should look like the following:
  *
  * ```
- * {slots: [`dayOne`, `dayTwo`]}
+ * {slots: ['dayOne', 'dayTwo']}
  * ```
  *
  * Now the this HOC is configured, it can act on the `arrangement` prop supplied at runtime.

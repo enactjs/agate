@@ -62,6 +62,9 @@ const PanelBase = kind({
 		 * * `panel` - The root class name
 		 * * `body` - Applied to the <section> element that displays the `children` of the `Panel`
 		 * * `header` - Applied to the header element
+		 *
+		 * @type {Object}
+		 * @public
 		 */
 		css: PropTypes.object,
 
@@ -69,9 +72,9 @@ const PanelBase = kind({
 		 * Header for the panel.
 		 *
 		 * This is usually passed by the [Slottable]{@link ui/Slottable.Slottable} API by using a
-		 * [Header]{@link agate/Panels.Header} component as a child of the Panel.
+		 * [Header]{@link agate/Header.Header} component as a child of the Panel.
 		 *
-		 * @type {Header}
+		 * @type {Node}
 		 * @public
 		 */
 		header: PropTypes.node,
@@ -81,7 +84,7 @@ const PanelBase = kind({
 		 *
 		 * When a Panel is used within [`Panels`]{@link agate/Panels.Panels},
 		 * [`BreadcrumbPanels`]{@link agate/Panels.BreadcrumbPanels}, or
-		 * [`AlwaysViewingPanels`]{@link agate/Panels.AlwaysViewingPanels},
+		 * [`TabbedPanels`]{@link agate/Panels.TabbedPanels},
 		 * this property will be set automatically to `true` on render and `false` after animating
 		 * into view.
 		 *

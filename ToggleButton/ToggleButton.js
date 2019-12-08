@@ -55,10 +55,10 @@ const ToggleButtonBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
-		 * Add an optional icon to the divider. This accepts any value that [Icon]{@agate/Icon}
-		 * supports.
+		 * The icon to display before the text.
 		 *
 		 * @type {String}
+		 * @see {@link agate/Icon.Icon}
 		 */
 		icon: PropTypes.string,
 
@@ -103,12 +103,14 @@ const ToggleButtonBase = kind({
 		toggleOnLabel: PropTypes.string,
 
 		/**
-		 * The shape of the button where `standard` is pill-shaped and `grid` is rectangular.
+		 * The button type.
 		 *
-		 * @type {('standard'|'grid')}
+		 * Grid buttons are intended to be grouped with other related buttons.
+		 *
+		 * @type {('grid'|'standard')}
 		 * @public
 		 */
-		type: PropTypes.oneOf(['standard', 'grid']),
+		type: PropTypes.oneOf(['grid', 'standard']),
 
 		/**
 		 * Shows toggle indicator.
@@ -148,21 +150,17 @@ const ToggleButtonBase = kind({
 		}
 	},
 
-	render: ({children, icon, selected, ...rest}) => {
-		delete rest.underline;
-		delete rest.toggleOffLabel;
-		delete rest.toggleOnLabel;
+	render: (props) => {
+		delete props.underline;
+		delete props.toggleOffLabel;
+		delete props.toggleOnLabel;
 
 		return (
 			<Button
-				{...rest}
-				aria-pressed={selected}
+				{...props}
+				aria-pressed={props.selected}
 				css={css}
-				icon={icon}
-				selected={selected}
-			>
-				{children}
-			</Button>
+			/>
 		);
 	}
 });
