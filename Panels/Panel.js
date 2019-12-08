@@ -28,7 +28,7 @@ const PanelBase = kind({
 
 	propTypes: /** @lends agate/Panels.Panel.prototype */ {
 		/**
-		 * By default, the panel will be labeled by its [Header]{@link agate/Panels.Header}.
+		 * By default, the panel will be labeled by its [Header]{@link agate/Header.Header}.
 		 * When `aria-label` is set, it will be used instead to provide an accessibility label for
 		 * the panel.
 		 *

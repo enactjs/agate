@@ -21,7 +21,7 @@ import componentCss from './SwatchButton.module.less';
  * A swatch component which sets-up the component's structure.
  *
  * This component is most often not used directly but may be composed within another component as it
- * is within [SwatchButton]{@link agate/SwatchButton.SwatchButton}.
+ * is within [SwatchButton]{@link agate/ColorPicker.SwatchButton}.
  *
  * @class SwatchButtonBase
  * @memberof agate/ColorPicker

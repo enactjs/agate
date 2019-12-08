@@ -92,7 +92,7 @@ const ColorPickerBase = kind({
 		onChange: PropTypes.func,
 
 		/**
-		 * Callback method passed to the [SwatchButton]{@link agate/SwatchButton.SwatchButton} component with a payload containing the `value` that was just selected.
+		 * Callback method passed to the [SwatchButton]{@link agate/ColorPicker.SwatchButton} component with a payload containing the `value` that was just selected.
 		 *
 		 * @type {Function}
 		 * @public

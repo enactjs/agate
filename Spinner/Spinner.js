@@ -128,7 +128,7 @@ const SpinnerBase = kind({
 		 * The size of the component.
 		 *
 		 * Recommended usage is "large" (default) for standalone and popup scenarios, while "small"
-		 * is best suited for use inside other elements, like {@link agate/SlotItem.SlotItem}.
+		 * is best suited for use inside other elements, like {@link agate/Item.Item}.
 		 *
 		 * @type {('huge'|'large'|'small'|'smallest')}
 		 * @default 'large'
