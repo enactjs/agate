@@ -129,7 +129,7 @@ const ItemBase = kind({
 });
 
 /**
- * Agate specific item behaviors to apply to [Item]{@link agate/Item.ItemBase}.
+ * Agate specific behaviors to apply to [Item]{@link agate/Item.ItemBase}.
  *
  * @hoc
  * @memberof agate/Item

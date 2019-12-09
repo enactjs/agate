@@ -41,7 +41,7 @@ const defaultConfig = /** @lends agate/AgateDecorator.AgateDecorator.defaultConf
 	/**
 	 * Enables a floating layer for popup components.
 	 *
-	 * If not applied, app will be responsible for applying the decorator.
+	 * If `false`, app will be responsible for applying the decorator.
 	 *
 	 * @type {Boolean}
 	 * @default true
@@ -53,7 +53,7 @@ const defaultConfig = /** @lends agate/AgateDecorator.AgateDecorator.defaultConf
 	/**
 	 * Applies I18nDecorator.
 	 *
-	 * If not applied, app will be responsible for applying the decorator.
+	 * If `false`, app will be responsible for applying the decorator.
 	 *
 	 * @type {Boolean}
 	 * @default true
@@ -104,7 +104,7 @@ const defaultConfig = /** @lends agate/AgateDecorator.AgateDecorator.defaultConf
 	/**
 	 * Applies spotlight decorator.
 	 *
-	 * If not applied, app will be responsible for applying the decorator.
+	 * If `false`, app will be responsible for applying the decorator.
 	 *
 	 * @type {Boolean}
 	 * @default true

@@ -85,7 +85,7 @@ const SwitchBase = kind({
 });
 
 /**
- * Agate specific item behaviors to apply to [Switch]{@link agate/Switch.SwitchBase}.
+ * Agate specific behaviors to apply to [Switch]{@link agate/Switch.SwitchBase}.
  *
  * @hoc
  * @memberof agate/Switch
