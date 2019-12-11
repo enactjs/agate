@@ -147,6 +147,8 @@ const IconBase = kind({
  * arrowlargeright
  * closex
  * search
+ * bluetooth2
+ * bluetoothoff
  * bright1
  * bright2
  * bluetooth
@@ -171,7 +173,14 @@ const IconBase = kind({
  * pairingdisplay
  * box
  * play
+ * previoustrack
+ * pause
+ * nexttrack
+ * repeat
+ * shuffle
+ * error
  * setting
+ * popupstop
  * accept
  * decline
  * stop
