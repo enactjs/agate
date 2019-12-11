@@ -29,7 +29,7 @@ const ScrollButtonBase = kind({
 		 * @required
 		 * @public
 		 */
-		children: PropTypes.string.isRequired,
+		icon: PropTypes.string.isRequired,
 
 		/**
 		 * Sets the `aria-label`.
@@ -98,19 +98,16 @@ const ScrollButtonBase = kind({
 		'aria-label': ({active, 'aria-label': ariaLabel}) => (active ? null : ariaLabel)
 	},
 
-	render: ({children, disabled, forwardRef, ...rest}) => {
+	render: ({forwardRef, ...rest}) => {
 		delete rest.active;
 
 		return (
 			<Button
 				{...rest}
 				backgroundOpacity="transparent"
-				disabled={disabled}
 				ref={forwardRef}
 				size="small"
-			>
-				{children}
-			</Button>
+			/>
 		);
 	}
 });
