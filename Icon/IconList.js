@@ -22,6 +22,8 @@ export default {
 	arrowlargeright   : 0x0EFFF0, // caret_right_large
 	closex            : 0x0EFFF5, // close
 	search            : 0x0EFFF6, // search
+	bluetooth2        : 0x0F000A, // bluetooth2
+	bluetoothoff      : 0x0F000B, // bluetoothoff
 	bright1           : 0x0F000C, // bright01
 	bright2           : 0x0F000D, // bright02
 	bluetooth         : 0x0F000E, // bluetooth
@@ -46,7 +48,14 @@ export default {
 	pairingdisplay    : 0x0F0021, // pairingdisplay
 	box               : 0x0F0022, // box
 	play              : 0x0F0023, // playicon
+	previoustrack     : 0x0F0024, // previoustrack
+	pause             : 0x0F0025, // pause
+	nexttrack         : 0x0F0026, // nexttrack
+	repeat            : 0x0F0027, // repeat
+	shuffle           : 0x0F0028, // shuffle
+	error             : 0x0F002A, // error
 	setting           : 0x0F002B, // setting
+	popupstop         : 0x0F0035, // popupstop
 	accept            : 0x0F0036, // accept
 	decline           : 0x0F0037, // decline
 	stop              : 0x0F0038, // stop
