@@ -45,6 +45,7 @@ const SliderKnob = kind({
 	},
 	render: ({...rest}) => {
 		delete rest.value;
+		delete rest.tooltipComponent;
 		return (
 			<div
 				{...rest}
@@ -57,14 +58,15 @@ const SliderProgress = kind({
 	name: 'SliderProgress',
 	propTypes: {
 		css: PropTypes.object,
-		values: PropTypes.arrayOf(PropTypes.number)
+		values: PropTypes.arrayOf(PropTypes.string)
 	},
 	styles: {
 		css: componentCss,
 		className: 'track'
 	},
 	render: ({children, css, values, ...rest}) => {
-
+		delete rest.progressAnchor;
+		delete rest.backgroundProgress;
 		return (
 			<Row {...rest} align="center">
 				{children}
