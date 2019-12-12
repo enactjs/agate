@@ -17,5 +17,11 @@
 
 @import "./font-agateicons.less";
 @import "./font-museosans.less";
-@import "./font-worksans.less";
-@import "./font-sourcesanspro.less";
+//
+// ----- DISABLED - PLAT-92904 -----
+// Until such time that a solution for can be found for pre-downloading or pre-fetching external
+// font resources, all external fonts must be disabled. Current webOS policy states that system
+// apps, specifically, may not use external fonts that delay or impede the initial render.
+//
+// @import "./font-worksans.less";
+// @import "./font-sourcesanspro.less";
