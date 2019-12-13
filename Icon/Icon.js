@@ -52,6 +52,21 @@ const IconBase = kind({
 		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
 		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal Elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `icon` - The root class name
+		 * * `dingbat` - Applied to dingbat icon
+		 * * `focus` - Applied when icon is focused
+		 * * `huge` - Applied to a `size='huge'` icon
+		 * * `small` - Applied to a `size='small'` icon
+		 * * `smallest` - Applied to a `size='smallest'` icon
+		 */
+		css: PropTypes.object,
+
+		/**
 		 * The size of the icon.
 		 *
 		 * @type {('small'|'large'|'huge')}

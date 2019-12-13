@@ -92,6 +92,46 @@ const ColorPickerBase = kind({
 		onChange: PropTypes.func,
 
 		/**
+		 * Callback method passed to the [SwatchButton]{@link agate/SwatchButton.SwatchButton} component with a payload containing the `value` that was just selected.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onClick: PropTypes.func,
+
+		/**
+		 * Callback method with a payload containing the hue value of the selected `color`.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onHueChanged: PropTypes.func,
+
+		/**
+		 * Callback method with a payload containing the lightness value of the selected `color`.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onLightnessChanged: PropTypes.func,
+
+		/**
+		 * Callback method with a payload containing the saturation value of the selected `color`.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onSaturationChanged: PropTypes.func,
+
+		/**
+		 * Callback method passed to the [Button]{@link agate/Button.Button} component as `onTap`. This is used to toggle the visibility of the H/S/L sliders.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onToggleExtended: PropTypes.func,
+
+		/**
 		 * Opens ColorPicker with the contents visible.
 		 *
 		 * @type {Boolean}
@@ -220,6 +260,8 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 		}
 
 		componentDidMount () {
+			// TODO: change to using ref/forwardRef/something else?
+			// eslint-disable-next-line react/no-find-dom-node
 			this.node = ReactDOM.findDOMNode(this);
 
 			if (this.props.open) {

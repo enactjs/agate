@@ -44,7 +44,52 @@ const ButtonBase = kind({
 	name: 'Button',
 
 	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
+		/**
+		 * Enable an animation that plays once when this component renders.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		animateOnRender: PropTypes.bool,
+
+		/**
+		 * Customize the animation by specifying amount of delay to be applied on the animation to the set of Buttons.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		animationDelay: PropTypes.number,
+
+		/**
+		 * The background opacity of this button.
+		 *
+		 * Valid values are:
+		 * * `'opaque'`,
+		 * * `'lightOpaque'`, and
+		 * * `'transparent'`.
+		 *
+		 * @type {('opaque'|'lightOpaque'|'transparent')}
+		 * @public
+		 */
 		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
+
+		/**
+		 * Displays a small message overlaid onto the button.
+		 *
+		 * @type {Number|String}
+		 * @public
+		 */
+		badge: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+		/**
+		 * Set a custom color for the badge element.
+		 *
+		 * This prop is only visible if the `badge` prop is also set.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		badgeColor: PropTypes.string,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -61,6 +106,14 @@ const ButtonBase = kind({
 		 * @public
 		 */
 		css: PropTypes.object,
+
+		/**
+		 * Additional DOM nodes which may be necessary for decorating the Button.
+		 *
+		 * @type {Node}
+		 * @private
+		 */
+		decoration: PropTypes.node,
 
 		/**
 		 * Provides a way to call special interface attention to this button. It will be "featured"
@@ -123,21 +176,39 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({backgroundOpacity, highlighted, joinedPosition, selected, type, styler, size}) => styler.append(
+		className: ({animateOnRender, backgroundOpacity, highlighted, joinedPosition, selected, type, size, styler}) => styler.append(
 			backgroundOpacity,
 			size,
 			type,
 			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
 			{
+				animateOnRender,
 				highlighted,
 				selected
 			}
 		),
+		decoration: ({badge, css, decoration}) => {
+			if (!badge) return decoration;
+			return (
+				<React.Fragment>
+					<div className={css.badge}>{badge}</div>
+					{decoration}
+				</React.Fragment>
+			);
+		},
+		style: ({animationDelay, badgeColor, style}) => ({
+			...style,
+			'--agate-button-animation-delay': animationDelay,
+			'--agate-button-badge-bg-color': badgeColor
+		}),
 		minWidth: ({children}) => (React.Children.count(children) === 0 || children === '')
 	},
 
 	render: ({css, ...rest}) => {
+		delete rest.animateOnRender;
+		delete rest.animationDelay;
 		delete rest.backgroundOpacity;
+		delete rest.badge;
 		delete rest.highlighted;
 		delete rest.joinedPosition;
 		delete rest.selected;

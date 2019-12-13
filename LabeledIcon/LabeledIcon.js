@@ -26,7 +26,17 @@ const LabeledIconBase = kind({
 		 * @type {String|Object}
 		 * @public
 		 */
-		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired
+		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal Elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `labeledIcon` - The root class name
+		 * * `label` - Applied to the label element
+		 */
+		css: PropTypes.object
 	},
 
 	styles: {

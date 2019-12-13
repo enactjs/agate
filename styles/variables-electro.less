@@ -1,11 +1,9 @@
 // Variables for any components
 //
 
-// App
+// Common
 // ---------------------------------------
-@agate-base-font-family: "Work Sans";
-
-// @agate-base-font-family: "Agate Primary";
+// @agate-base-font-family: "Work Sans"; // DISABLED for PLAT-92904
 
 // local Electro Variables
 @electro-border-radius: 18px;
@@ -19,6 +17,10 @@
 @agate-button-bg-transform:  skewX(@electro-skew);
 @agate-button-border-width: 0;
 @agate-button-border-radius: @electro-border-radius;
+@agate-button-icon-border-radius: @agate-button-border-radius;
+@agate-button-badge-position: auto -3px -6px auto;
+@agate-button-badge-border-radius: 3px;
+@agate-button-badge-padding: 0 6px;
 
 // ColorPicker
 // ---------------------------------------
@@ -35,11 +37,6 @@
 @agate-datetimepicker-transform: skewX(@electro-skew);
 @agate-datetimepicker-label-transform: skewX(@electro-negate-skew);
 @agate-datetimepicker-cell-transform: skewX(0);
-
-// Divider
-// ---------------------------------------
-@agate-divider-text-transform: uppercase;
-@agate-divider-icon-alignment: top;
 
 // Drawer
 // ---------------------------------------
@@ -66,22 +63,7 @@
 @agate-heading-title-decoration-border-radius: 3px;
 @agate-heading-title-decoration-opacity: 0.8;
 @agate-heading-title-decoration-transform: skew(-10deg);
-
-// IconButton
-// ---------------------------------------
-@agate-iconbutton-border-width: 0;
-@agate-iconbutton-border-radius: @electro-border-radius;
-@agate-iconbutton-text-size: 30px;
-@agate-iconbutton-small-text-size: 24px;
-@agate-iconbutton-h-padding: 27px;
-@agate-iconbutton-small-h-padding: 18px;
-@agate-iconbutton-highlighted-opacity: 1;
-@agate-iconbutton-skew: @electro-skew;
-@agate-iconbutton-grid-border-radius: @electro-border-radius;
-@agate-iconbutton-bg-transform:  skewX(@electro-skew);
-@agate-iconbutton-huge-border-width: 10px;
-@agate-iconbutton-huge-height: 250px;
-@agate-iconbutton-huge-margin: 0 50px;
+@agate-heading-text-transform: uppercase;
 
 // Panels
 // ---------------------------------------
