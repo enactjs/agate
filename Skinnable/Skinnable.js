@@ -13,14 +13,13 @@ const defaultConfig = {
 	skins: {
 		carbon: 'carbon',
 		cobalt: 'cobalt',
-		'cobalt-day': 'cobalt-day',
 		copper: 'copper',
-		'copper-day': 'copper-day',
 		electro: 'electro',
-		'gallium-day': 'gallium-day',
-		'gallium-night': 'gallium-night',
+		gallium: 'gallium',
 		titanium: 'titanium'
-	}
+	},
+	allowedVariants: ['night', 'highContrast'],
+	defaultVariants: null
 };
 
 /**

@@ -24,39 +24,48 @@
 		@componentRules();
 	});
 	.buildSkinRules(cobalt; {
-		@import (multiple) "./colors-cobalt.less";
 		@import (multiple) "./variables-cobalt.less";
-		@componentRules();
-	});
-	.buildSkinRules(cobalt-day; {
-		@import (multiple) "./colors-cobalt-day.less";
-		@import (multiple) "./variables-cobalt.less";
-		@componentRules();
+
+		// .buildSkinRules(day; {
+			@import (multiple) "./colors-cobalt-day.less";
+			@componentRules();
+		// });
+
+		.buildSkinRules(night; {
+			@import (multiple) "./colors-cobalt.less";
+			@componentRules();
+		});
 	});
 	.buildSkinRules(copper; {
-		@import (multiple) "./colors-copper.less";
 		@import (multiple) "./variables-copper.less";
-		@componentRules();
-	});
-	.buildSkinRules(copper-day; {
-		@import (multiple) "./colors-copper-day.less";
-		@import (multiple) "./variables-copper.less";
-		@componentRules();
+
+		// .buildSkinRules(day; {
+			@import (multiple) "./colors-copper-day.less";
+			@componentRules();
+		// });
+
+		.buildSkinRules(night; {
+			@import (multiple) "./colors-copper.less";
+			@componentRules();
+		});
 	});
 	.buildSkinRules(electro; {
 		@import (multiple) "./colors-electro.less";
 		@import (multiple) "./variables-electro.less";
 		@componentRules();
 	});
-	.buildSkinRules(gallium-day; {
-		@import (multiple) "./colors-gallium-day.less";
+	.buildSkinRules(gallium; {
 		@import (multiple) "./variables-gallium.less";
-		@componentRules();
-	});
-	.buildSkinRules(gallium-night; {
-		@import (multiple) "./colors-gallium-night.less";
-		@import (multiple) "./variables-gallium.less";
-		@componentRules();
+
+		// .buildSkinRules(day; {
+			@import (multiple) "./colors-gallium-day.less";
+			@componentRules();
+		// });
+
+		.buildSkinRules(night; {
+			@import (multiple) "./colors-gallium-night.less";
+			@componentRules();
+		});
 	});
 	.buildSkinRules(titanium; {
 		@import (multiple) "./colors-titanium.less";

@@ -217,7 +217,7 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	if (ri) App = ResolutionDecorator(ri, App);
 	if (i18n) App = I18nDecorator(App);
 	if (spotlight) App = SpotlightRootDecorator({noAutoFocus}, App);
-	if (skin) App = Skinnable({defaultSkin: 'gallium-day'}, App);
+	if (skin) App = Skinnable({defaultSkin: 'gallium'}, App);
 
 	// add webOS-specific key maps
 	addAll({
