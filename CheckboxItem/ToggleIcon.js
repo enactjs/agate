@@ -1,5 +1,5 @@
 /**
- * Agate styled checkbox components.
+ * Agate styled toggle icon.
  *
  * @example
  * <ToggleIcon selected>check</ToggleIcon>
@@ -51,7 +51,6 @@ const ToggleIconDecorator = compose(
 	Pure,
 	Skinnable
 );
-
 
 /**
  * A customizable Agate starting point [Icon]{@link agate/Icon.Icon} that responds to the

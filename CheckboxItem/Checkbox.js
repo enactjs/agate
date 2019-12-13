@@ -1,5 +1,5 @@
 /**
- * Agate styled checkbox components.
+ * Agate styled checkbox component.
  *
  * @example
  * <Checkbox onToggle={console.log} />

@@ -1,5 +1,5 @@
 /**
- * Agate styled item components with a toggleable checkbox.
+ * Agate styled toggleable item.
  *
  * @example
  * <ToggleItem component={Item} iconComponent={Icon} onToggle={console.log}>
@@ -54,7 +54,6 @@ const ToggleItemDecorator = hoc((config, Wrapped) => {
  * @private
  */
 const ToggleItem = ToggleItemDecorator(ToggleItemBase);
-
 
 export default ToggleItem;
 export {
