@@ -12,61 +12,12 @@
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
-import compose from 'ramda/src/compose';
-
-import Pure from '@enact/ui/internal/Pure';
-import UiToggleIcon from '@enact/ui/ToggleIcon';
 
 import Icon from '../Icon';
-import Skinnable from '../Skinnable/Skinnable';
+
+import ToggleIcon from './ToggleIcon';
 
 import css from './Checkbox.module.less';
-
-/**
- * A component that indicates a boolean state.
- *
- * @class ToggleIconBase
- * @memberof agate/ToggleIcon
- * @extends ui/ToggleIcon.ToggleIcon
- * @ui
- * @public
- */
-const ToggleIconBase = kind({
-	name: 'ToggleIcon',
-
-	render: (props) => {
-		return (
-			<UiToggleIcon {...props} iconComponent={Icon} />
-		);
-	}
-});
-
-/**
- * Agate-specific behaviors to apply to `ToggleIconBase`.
- *
- * @hoc
- * @memberof agate/ToggleIcon
- * @mixes agate/Skinnable.Skinnable
- * @public
- */
-const ToggleIconDecorator = compose(
-	Pure,
-	Skinnable
-);
-
-
-/**
- * A customizable Agate starting point [Icon]{@link agate/Icon.Icon} that responds to the
- * `selected` prop.
- *
- * @class ToggleIcon
- * @memberof agate/ToggleIcon
- * @extends agate/ToggleIcon.ToggleIconBase
- * @mixes agate/ToggleIcon.ToggleIconDecorator
- * @ui
- * @public
- */
-const ToggleIcon = ToggleIconDecorator(ToggleIconBase);
 
 /**
  * A checkbox component, ready to use in Agate applications.
@@ -83,7 +34,7 @@ const ToggleIcon = ToggleIconDecorator(ToggleIconBase);
  * @memberof agate/Checkbox
  * @extends agate/ToggleIcon.ToggleIcon
  * @ui
- * @public
+ * @private
  */
 const CheckboxBase = kind({
 	name: 'Checkbox',

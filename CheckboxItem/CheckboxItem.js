@@ -12,18 +12,13 @@
  */
 
 import kind from '@enact/core/kind';
-import hoc from '@enact/core/hoc';
-import Pure from '@enact/ui/internal/Pure';
-import Spottable from '@enact/spotlight/Spottable';
 import {SlotItem as SlotItemBase} from '@enact/ui/SlotItem';
-import {ToggleItemBase, ToggleItemDecorator as UiToggleItemDecorator} from '@enact/ui/ToggleItem';
 import PropTypes from 'prop-types';
 import React from 'react';
-import compose from 'ramda/src/compose';
-
-import Skinnable from '../Skinnable/Skinnable';
 
 import Checkbox from './Checkbox';
+import ToggleItem from './ToggleItem';
+
 import componentCss from './CheckboxItem.module.less';
 
 const SlotItem = kind({
@@ -32,42 +27,6 @@ const SlotItem = kind({
 		<SlotItemBase {...props} component="div" />
 	)
 });
-
-/**
- * Adds interactive functionality to `ToggleItemBase`.
- *
- * @class ToggleItemDecorator
- * @memberof agate/ToggleItem
- * @mixes ui/ToggleItem.ToggleItemDecorator
- * @mixes spotlight/Spottable.Spottable
- * @mixes agate/Marquee.MarqueeDecorator
- * @mixes agate/Skinnable
- * @hoc
- * @public
- */
-const ToggleItemDecorator = hoc((config, Wrapped) => {
-	return compose(
-		Pure,
-		UiToggleItemDecorator,
-		Spottable,
-		Skinnable
-	)(Wrapped);
-});
-
-/**
- * A Agate-styled item with built-in support for toggling and `Spotlight` focus.
- *
- * This is not intended to be used directly, but should be extended by a component that will
- * customize this component's appearance by supplying an `iconComponent` prop.
- *
- * @class ToggleItem
- * @memberof agate/ToggleItem
- * @extends agate/ToggleItem.ToggleItemBase
- * @mixes agate/ToggleItem.ToggleItemDecorator
- * @ui
- * @public
- */
-const ToggleItem = ToggleItemDecorator(ToggleItemBase);
 
 /**
  * An item with a checkbox component, ready to use in Agate applications.
@@ -119,8 +78,8 @@ const CheckboxItemBase = kind({
 	render: (props) => (
 		<ToggleItem
 			data-webos-voice-intent="SelectCheckItem"
-			{...props}
 			role="checkbox"
+			{...props}
 			component={SlotItem}
 			css={props.css}
 			iconComponent={Checkbox}
