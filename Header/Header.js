@@ -7,7 +7,6 @@
  * </Header>
  *
  * @module agate/Header
- * @exports HeaderBase
  * @exports Header
  */
 
@@ -48,13 +47,14 @@ const HeaderBase = kind({
 		 *  </Header>
 		 * ```
 		 *
+		 * @required
 		 * @type {String}
 		 */
 		title: PropTypes.string.isRequired,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
+		 * corresponding internal elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *

@@ -93,6 +93,7 @@ const SpinnerCore = kind({
  *
  * @class SpinnerBase
  * @memberof agate/Spinner
+ * @extends ui/Spinner.Spinner
  * @ui
  * @public
  */
@@ -107,11 +108,11 @@ const SpinnerBase = kind({
 		 * @default 'light'
 		 * @public
 		 */
-		color: PropTypes.string,
+		color: PropTypes.oneOf(['dark', 'light']),
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
+		 * corresponding internal elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *
@@ -126,8 +127,8 @@ const SpinnerBase = kind({
 		/**
 		 * The size of the component.
 		 *
-		 * Recommended usage is "medium" (default) for standalone and popup scenarios, while "small"
-		 * is best suited for use inside other elements, like {@link agate/SlotItem.SlotItem}.
+		 * Recommended usage is "large" (default) for standalone and popup scenarios, while "small"
+		 * is best suited for use inside other elements, like {@link agate/Item.Item}.
 		 *
 		 * @type {('huge'|'large'|'small'|'smallest')}
 		 * @default 'large'
@@ -178,7 +179,7 @@ const SpinnerBase = kind({
 });
 
 /**
- * Agate-specific Spinner behaviors to apply to [Spinner]{@link agate/Spinner.Spinner}.
+ * Agate-specific Spinner behaviors to apply to [Spinner]{@link agate/Spinner.SpinnerBase}.
  *
  * @hoc
  * @memberof agate/Spinner
@@ -195,6 +196,7 @@ const SpinnerDecorator = compose(
  *
  * @class Spinner
  * @memberof agate/Spinner
+ * @extends agate/Spinner.SpinnerBase
  * @mixes agate/Spinner.SpinnerDecorator
  * @ui
  * @public

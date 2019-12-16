@@ -1,3 +1,15 @@
+/**
+ * An Agate-themed Labeled Icon component.
+ *
+ * @example
+ * <LabeledIcon icon="star">Hello Enact!</LabeledIcon>
+ *
+ * @module agate/LabeledIcon
+ * @exports LabeledIcon
+ * @exports LabeledIconBase
+ * @exports LabeledIconDecorator
+ */
+
 import kind from '@enact/core/kind';
 import UiLabeledIcon from '@enact/ui/LabeledIcon';
 import Pure from '@enact/ui/internal/Pure';
@@ -9,32 +21,29 @@ import Skinnable from '../Skinnable';
 
 import componentCss from './LabeledIcon.module.less';
 
+/**
+ * A basic LabeledIcon component structure without any behaviors applied to it.
+ *
+ * @class LabeledIconBase
+ * @memberof agate/LabeledIcon
+ * @ui
+ * @public
+ */
 const LabeledIconBase = kind({
 	name: 'LabeledIcon',
 
-	propTypes: /** @lends agate/Icon.Icon.prototype */ {
-		/**
-		 * The icon content.
-		 *
-		 * May be specified as either:
-		 *
-		 * * A string that represents an icon from the [iconList]{@link ui/Icon.Icon.iconList},
-		 * * An HTML entity string, Unicode reference or hex value (in the form '0x...'),
-		 * * A URL specifying path to an icon image, or
-		 * * An object representing a resolution independent resource (See {@link ui/resolution}).
-		 *
-		 * @type {String|Object}
-		 * @public
-		 */
-		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+	propTypes: /** @lends agate/LabeledIcon.LabeledIconBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
+		 * corresponding internal elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *
 		 * * `labeledIcon` - The root class name
 		 * * `label` - Applied to the label element
+		 *
+		 * @type {Object}
+		 * @public
 		 */
 		css: PropTypes.object
 	},
@@ -52,15 +61,37 @@ const LabeledIconBase = kind({
 	})
 });
 
-
+/**
+ * Adds Agate specific behaviors to [LabeledIconBase]{@link agate/LabeledIcon.LabeledIconBase}.
+ *
+ * @hoc
+ * @memberof agate/LabeledIcon
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const LabeledIconDecorator = compose(
 	Pure,
 	Skinnable
 );
 
-
+/**
+ * An Agate-styled icon component with a label.
+ *
+ * Usage:
+ * ```
+ * <LabeledIcon icon="star" labelPosition="after">
+ *   Favorite
+ * </LabeledIcon>
+ * ```
+ *
+ * @class LabeledIcon
+ * @memberof agate/LabeledIcon
+ * @extends agate/LabeledIcon.LabeledIconBase
+ * @mixes agate/LabeledIcon.LabeledIconDecorator
+ * @ui
+ * @public
+ */
 const LabeledIcon = LabeledIconDecorator(LabeledIconBase);
-
 
 export default LabeledIcon;
 export {

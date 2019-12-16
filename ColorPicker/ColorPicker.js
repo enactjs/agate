@@ -2,7 +2,7 @@
  * Agate component to allow the user to choose a color.
  *
  * @example
- * <ColorPicker defaultValue="#ffcc00" onChange={handleChange}>{[#fff, #999, #000]}</ColorPicker>
+ * <ColorPicker defaultValue="#ffcc00">{['#fff', '#999', '#000']}</ColorPicker>
  *
  * @module agate/ColorPicker
  * @exports ColorPicker
@@ -54,7 +54,7 @@ const ColorPickerBase = kind({
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
+		 * corresponding internal elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *
@@ -66,11 +66,11 @@ const ColorPickerBase = kind({
 		 */
 		css: PropTypes.object,
 
+		// TODO: position `palette` like `Tooltip`
 		/**
 		 * The animation direction of the `palette`.
-		 * // TODO: position `palette` like `Tooltip`
 		 *
-		 * @type {Function}
+		 * @type {String}
 		 * @public
 		 */
 		direction: PropTypes.string,
@@ -92,7 +92,7 @@ const ColorPickerBase = kind({
 		onChange: PropTypes.func,
 
 		/**
-		 * Callback method passed to the [SwatchButton]{@link agate/SwatchButton.SwatchButton} component with a payload containing the `value` that was just selected.
+		 * Callback method passed to the [SwatchButton]{@link agate/ColorPicker.SwatchButton} component with a payload containing the `value` that was just selected.
 		 *
 		 * @type {Function}
 		 * @public
@@ -337,10 +337,10 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
  *
  * @hoc
  * @memberof agate/ColorPicker
+ * @mixes ui/Toggleable.Toggleable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
-
 const ColorPickerDecorator = compose(
 	Toggleable({toggle: null, prop: 'open', toggleProp: 'onClick'}),
 	ColorPickerExtended,
@@ -353,9 +353,7 @@ const ColorPickerDecorator = compose(
  * @class ColorPicker
  * @memberof agate/ColorPicker
  * @extends agate/ColorPicker.ColorPickerBase
- * @mixes agate/Button.ButtonDecorator
- * @mixes ui/Changeable.Changeable
- * @mixes agate/Skinnable.Skinnable
+ * @mixes agate/ColorPicker.ColorPickerDecorator
  * @ui
  * @public
  */

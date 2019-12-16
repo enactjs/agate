@@ -1,3 +1,15 @@
+/**
+ * A Popup menu component.
+ *
+ * @example
+ * <PopupMenu open title="Title">Hello!</PopupMenu>
+ *
+ * @module agate/PopupMenu
+ * @exports PopupMenu
+ * @exports PopupMenuBase
+ * @exports PopupMenuDecorator
+ */
+
 import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
@@ -15,9 +27,17 @@ import PopupState from '../Popup/PopupState';
 
 import componentCss from './PopupMenu.module.less';
 
+/**
+ * The base popup menu component.
+ *
+ * @class PopupMenuBase
+ * @memberof agate/PopupMenu
+ * @ui
+ * @public
+ */
 const PopupMenuBase = kind({
 	name: 'PopupMenu',
-	propTypes: {
+	propTypes: /** @lends agate/PopupMenu.PopupMenuBase.prototype */ {
 		closeButton: PropTypes.bool,
 		css: PropTypes.object,
 		noAnimation: PropTypes.bool,
@@ -87,14 +107,25 @@ const PopupMenuBase = kind({
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
-
 const PopupMenuDecorator = compose(
 	Slottable({slots: ['title']}),
 	Skinnable({prop: 'skin'}),
 	PopupState
 );
 
+/**
+ * A stateful component that renders a popup menu.
+ *
+ * @class PopupMenu
+ * @memberof agate/PopupMenu
+ * @ui
+ * @public
+ */
 const PopupMenu = PopupMenuDecorator(PopupMenuBase);
 
 export default PopupMenu;
-export {PopupMenu, PopupMenuBase};
+export {
+	PopupMenu,
+	PopupMenuBase,
+	PopupMenuDecorator
+};

@@ -1,7 +1,7 @@
 /**
- * Provides Agate-ez-themed Item component and interactive radio toggle icon.
+ * Provides Agate-themed Item component and interactive radio toggle icon.
  *
- * @module agate-ez/RadioItem
+ * @module agate/RadioItem
  * @exports RadioItem
  */
 
@@ -23,20 +23,22 @@ import componentCss from './RadioItem.module.less';
  * Renders an `Item` with a radio-dot component. Useful to show a selected state on an Item.
  *
  * @class RadioItem
- * @memberof agate-ez/RadioItem
- * @extends agate/RadioItem.RadioItem
+ * @memberof agate/RadioItem
+ * @extends agate/Item.Item
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes ui/Touchable.Touchable
+ * @mixes agate/Skinnable.Skinnable
  * @ui
  * @public
  */
-
-
 const RadioItemBase = kind({
 	name: 'RadioItemBase',
 
-	propTypes: /** @lends agate/RadioItem.RadioItemBase.prototype */ {
+	propTypes: /** @lends agate/RadioItem.RadioItem.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
+		 * corresponding internal elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *
@@ -49,16 +51,15 @@ const RadioItemBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Customize the component used as the icon label.
+		 * The icon to display when selected.
 		 *
-		 * @type {Element|Function|String}
-		 * @default {@link agate/Switch.Switch}
-		 * @public
+		 * @type {String}
+		 * @see {@link agate/Icon.Icon}
 		 */
-		icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]),
+		icon: PropTypes.string,
 
 		/**
-		 * If true the radio toggle will be selected.
+		 * Sets the RadioItem to its 'on' state.
 		 *
 		 * @type {Boolean}
 		 * @default false
@@ -94,7 +95,7 @@ const RadioItemBase = kind({
 	}
 });
 
-
+// Decorator is not exported so not documented
 const RadioItemDecorator = compose(
 	Toggleable({toggleProp: 'onTap'}),
 	Touchable,

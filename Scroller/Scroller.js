@@ -30,9 +30,8 @@ const dataContainerDisabledAttribute = 'data-spotlight-container-disabled';
 
 /**
  * An Agate-styled base component for [Scroller]{@link agate/Scroller.Scroller}.
- * In most circumstances, you will want to use the
- * [SpotlightContainerDecorator]{@link spotlight/SpotlightContainerDecorator.SpotlightContainerDecorator}
- * and the Scrollable version, [Scroller]{@link agate/Scroller.Scroller}.
+ *
+ * In most circumstances, you will want to use the version with behaviors applied.
  *
  * @class ScrollerBase
  * @memberof agate/Scroller
@@ -394,6 +393,7 @@ class ScrollerBase extends Component {
  * @public
  */
 
+// TODO: $L() is _not_ currently used so these docs are wrong!
 /**
  * Sets the hint string read when focusing the next button in the vertical scroll bar.
  *
@@ -435,7 +435,7 @@ class ScrollerBase extends Component {
  */
 
 /**
- * An Agate-styled Scroller, Scrollable applied.
+ * An Agate-styled Scroller with behaviors applied.
  *
  * Usage:
  * ```

@@ -17,10 +17,18 @@ import componentCss from './Panels.module.less';
 
 const getControlsId = (id) => id && `${id}-controls`;
 
+/**
+ * Basic Panels component without breadcrumbs or default [arranger]{@link ui/ViewManager.Arranger}
+ *
+ * @class Panels
+ * @memberof agate/Panels
+ * @ui
+ * @public
+ */
 const PanelsBase = kind({
 	name: 'Panels',
 
-	propTypes: {
+	propTypes: /** @lends agate/Panels.Panels.prototype */ {
 		/**
 		 * Function that generates unique identifiers for Panel instances.
 		 *

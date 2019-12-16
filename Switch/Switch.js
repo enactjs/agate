@@ -1,5 +1,5 @@
 /**
- * Provides a Agate-themed pill-shaped toggle switch component.
+ * Provides an Agate-themed toggle switch component.
  *
  * @example
  * <Switch />
@@ -25,16 +25,16 @@ import componentCss from './Switch.module.less';
 /**
  * Renders the base level DOM structure of the component.
  *
- * @class Switch
+ * @class SwitchBase
  * @memberof agate/Switch
- * @extends agate/ToggleIcon.ToggleIcon
+ * @extends ui/ToggleIcon.ToggleIconBase
  * @ui
  * @public
  */
 const SwitchBase = kind({
 	name: 'Switch',
 
-	propTypes: /** @lends agate/Switch.Switch.prototype */ {
+	propTypes: /** @lends agate/Switch.SwitchBase.prototype */ {
 		children: PropTypes.string,
 		css: PropTypes.object,
 
@@ -71,7 +71,7 @@ const SwitchBase = kind({
 		}
 	},
 
-	render: ({children, css, ...rest}) => {
+	render: ({css, ...rest}) => {
 		delete rest.noAnimation;
 
 		return (
@@ -79,18 +79,36 @@ const SwitchBase = kind({
 				{...rest}
 				css={css}
 				iconComponent={Icon}
-			>
-				{children}
-			</ToggleIconBase>
+			/>
 		);
 	}
 });
 
+/**
+ * Agate specific behaviors to apply to [Switch]{@link agate/Switch.SwitchBase}.
+ *
+ * @hoc
+ * @memberof agate/Switch
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const SwitchDecorator = compose(
+	// TODO: Should this be spottable?  onTap?
 	Toggleable({toggleProp: 'onClick'}),
 	Skinnable({prop: 'skin'})
 );
 
+/**
+ * A switch component with Agate behaviors.
+ *
+ * @class Switch
+ * @memberof agate/Switch
+ * @extends agate/Switch.SwitchBase
+ * @mixes agate/Switch.SwitchDecorator
+ * @ui
+ * @public
+ */
 const Switch = SwitchDecorator(SwitchBase);
 
 export default SwitchDecorator(SwitchBase);

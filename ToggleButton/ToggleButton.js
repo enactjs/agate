@@ -33,7 +33,7 @@ import css from './ToggleButton.module.less';
 const ToggleButtonBase = kind({
 	name: 'ToggleButton',
 
-	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
+	propTypes: /** @lends agate/ToggleButton.ToggleButtonBase.prototype */ {
 		/**
 		 * The string to be displayed as the main content of the toggle button.
 		 *
@@ -55,10 +55,10 @@ const ToggleButtonBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
-		 * Add an optional icon to the divider. This accepts any value that [Icon]{@agate/Icon}
-		 * supports.
+		 * The icon to display before the text.
 		 *
 		 * @type {String}
+		 * @see {@link agate/Icon.Icon}
 		 */
 		icon: PropTypes.string,
 
@@ -66,6 +66,7 @@ const ToggleButtonBase = kind({
 		 * Determines whether the button is currently in an "on" or "off" state.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		selected: PropTypes.bool,
@@ -73,11 +74,11 @@ const ToggleButtonBase = kind({
 		/**
 		 * The size of the button.
 		 *
-		 * @type {('small'|'large')}
+		 * @type {('smallest'|'small'|'large'|'huge')}
 		 * @default 'large'
 		 * @public
 		 */
-		size: PropTypes.oneOf(['small', 'large']),
+		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
 		 * Button text displayed in the 'off' state.
@@ -102,14 +103,14 @@ const ToggleButtonBase = kind({
 		toggleOnLabel: PropTypes.string,
 
 		/**
-		 * The shape of the button where `standard` is pill-shaped and `grid` is rectangular.
+		 * The button type.
 		 *
-		 * * Values: `'standard'`, `'grid'`
+		 * Grid buttons are intended to be grouped with other related buttons.
 		 *
-		 * @type {String}
+		 * @type {('grid'|'standard')}
 		 * @public
 		 */
-		type: PropTypes.oneOf(['standard', 'grid']),
+		type: PropTypes.oneOf(['grid', 'standard']),
 
 		/**
 		 * Shows toggle indicator.
@@ -122,13 +123,12 @@ const ToggleButtonBase = kind({
 	},
 
 	defaultProps: {
-		underline: false,
 		disabled: false,
-		minWidth: true,
 		selected: false,
 		size: 'large',
 		toggleOffLabel: '',
-		toggleOnLabel: ''
+		toggleOnLabel: '',
+		underline: false
 	},
 
 	styles: {
@@ -150,21 +150,17 @@ const ToggleButtonBase = kind({
 		}
 	},
 
-	render: ({children, icon, selected, ...rest}) => {
-		delete rest.underline;
-		delete rest.toggleOffLabel;
-		delete rest.toggleOnLabel;
+	render: (props) => {
+		delete props.underline;
+		delete props.toggleOffLabel;
+		delete props.toggleOnLabel;
 
 		return (
 			<Button
-				{...rest}
-				aria-pressed={selected}
+				{...props}
+				aria-pressed={props.selected}
 				css={css}
-				icon={icon}
-				selected={selected}
-			>
-				{children}
-			</Button>
+			/>
 		);
 	}
 });
@@ -180,8 +176,9 @@ const ToggleButtonBase = kind({
  * @class ToggleButton
  * @memberof agate/ToggleButton
  * @extends agate/ToggleButton.ToggleButtonBase
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes agate/Skinnable.Skinnable
  * @ui
- * @mixes ui/Toggleable
  * @public
  */
 const ToggleButton = Pure(

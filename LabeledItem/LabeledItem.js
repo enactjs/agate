@@ -6,7 +6,7 @@
  *
  * @module agate/LabeledItem
  * @exports LabeledItem
- * @exports LabeledItemBase
+ * @deprecated
  */
 
 import deprecate from '@enact/core/internal/deprecate';
@@ -15,6 +15,16 @@ import React from 'react';
 import Icon from '../Icon';
 import Item from '../Item';
 
+/**
+ * An item with a label.
+ *
+ * @class LabeledItem
+ * @memberof agate/LabeledItem
+ * @extends agate/Item.Item
+ * @ui
+ * @deprecated
+ * @public
+ */
 const LabeledItemBase = deprecate(
 	({children, titleIcon, ...rest}) => (
 		<Item {...rest}>
