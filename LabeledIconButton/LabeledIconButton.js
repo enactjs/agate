@@ -2,7 +2,7 @@
  * An Agate-themed Labeled Icon component.
  *
  * @example
- * <LabeledIconButton icon="star">Hello Enact!</LabeledIcon>
+ * <LabeledIconButton icon="star">Hello Enact!</LabeledIconButton>
  *
  * @module agate/LabeledIconButton
  * @exports LabeledIconButton
