@@ -37,6 +37,7 @@ const Icon = Skinnable(IconBase);
  * @class ButtonBase
  * @memberof agate/Button
  * @extends ui/Button.ButtonBase
+ * @omit minWidth
  * @ui
  * @public
  */
@@ -45,7 +46,7 @@ const ButtonBase = kind({
 
 	propTypes: /** @lends agate/Button.ButtonBase.prototype */ {
 		/**
-		 * Enable an animation that plays once when this component renders.
+		 * Animate when this component renders.
 		 *
 		 * @type {Boolean}
 		 * @public
@@ -53,7 +54,7 @@ const ButtonBase = kind({
 		animateOnRender: PropTypes.bool,
 
 		/**
-		 * Customize the animation by specifying amount of delay to be applied on the animation to the set of Buttons.
+		 * The delay before the button is animated, in milliseconds.
 		 *
 		 * @type {Number}
 		 * @public
@@ -74,7 +75,7 @@ const ButtonBase = kind({
 		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
 
 		/**
-		 * Displays a small message overlaid onto the button.
+		 * A small message overlaid onto the button.
 		 *
 		 * @type {Number|String}
 		 * @public
@@ -82,7 +83,7 @@ const ButtonBase = kind({
 		badge: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
 		/**
-		 * Set a custom color for the badge element.
+		 * A custom color for the badge element.
 		 *
 		 * This prop is only visible if the `badge` prop is also set.
 		 *
@@ -93,7 +94,7 @@ const ButtonBase = kind({
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
+		 * corresponding internal elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *
@@ -125,12 +126,14 @@ const ButtonBase = kind({
 		highlighted: PropTypes.bool,
 
 		/**
+		 * The position of this button in relation to other buttons.
+		 *
 		 * To create a collection of buttons that appear as one entity: buttons that butt up against
 		 * each other. Specify where the button is in the arrangement: 'left', 'center', or 'right'.
 		 * This prop is not recommended for use on a lonely button with no other buttons nearby.
 		 * Not specifying this optional prop leaves the button behaving normally.
 		 *
-		 * @type {String}
+		 * @type {('left'|'center'|'right')}
 		 * @public
 		 */
 		joinedPosition: PropTypes.oneOf(['left', 'center', 'right']),
@@ -154,10 +157,12 @@ const ButtonBase = kind({
 		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
-		 * Specify how this button will be used. Is it a standalone button, or is it in a grid of
-		 * other related buttons.
+		 * The button type.
 		 *
-		 * @type {String}
+		 * Grid buttons are intended to be grouped with other related buttons.
+		 *
+		 * @type {('grid'|'standard')}
+		 * @default 'standard'
 		 * @public
 		 */
 		type: PropTypes.oneOf(['grid', 'standard'])
@@ -166,8 +171,8 @@ const ButtonBase = kind({
 	defaultProps: {
 		backgroundOpacity: 'opaque',
 		iconComponent: Icon,
-		type: 'standard',
-		size: 'large'
+		size: 'large',
+		type: 'standard'
 	},
 
 	styles: {
@@ -223,26 +228,10 @@ const ButtonBase = kind({
 });
 
 /**
- * Enforces a minimum width on the Button.
- *
- * *NOTE*: This property's default is `true` and must be explicitly set to `false` to allow
- * the button to shrink to fit its contents.
- *
- * @name minWidth
- * @memberof agate/Button.ButtonBase.prototype
- * @type {Boolean}
- * @default true
- * @public
- */
-
-
-/**
  * Applies Agate specific behaviors to [Button]{@link agate/Button.ButtonBase} components.
  *
  * @hoc
  * @memberof agate/Button
- * @mixes i18n/Uppercase.Uppercase
- * @mixes agate/Marquee.MarqueeDecorator
  * @mixes ui/Button.ButtonDecorator
  * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable

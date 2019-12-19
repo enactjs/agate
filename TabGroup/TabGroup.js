@@ -1,3 +1,11 @@
+/**
+ * Provides an Agate-themed tab group.
+ *
+ * @module agate/TabGroup
+ * @exports TabGroup
+ * @exports TabGroupBase
+ */
+
 import {cap} from '@enact/core/util';
 import {Cell, Layout} from '@enact/ui/Layout';
 import Group from '@enact/ui/Group';
@@ -84,10 +92,19 @@ const TabBase = kind({
 });
 const Tab = Skinnable(Spottable(TabBase));
 
+/**
+ * TBD.
+ *
+ * @class TabGroup
+ * @memberof agate/TabGroup
+ * @mixes agate/Skinnable.Skinnable
+ * @ui
+ * @public
+ */
 const TabGroupBase = kind({
 	name: 'TabGroup',
 
-	propTypes: {
+	propTypes: /** @lends agate/TabGroup.TabGroup.prototype */ {
 		tabPosition: PropTypes.string.isRequired,
 		tabs: PropTypes.array.isRequired,
 		afterTabs: PropTypes.node,
@@ -163,6 +180,7 @@ const TabGroupBase = kind({
 
 TabGroupBase.defaultSlot = 'tabs';
 
+// Only documenting TabGroup since base is not useful for extension as-is
 const TabGroup = Skinnable(Slottable({slots: ['tabs', 'afterTabs', 'beforeTabs']}, TabGroupBase));
 
 export default TabGroup;
