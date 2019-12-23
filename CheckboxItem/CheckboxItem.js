@@ -12,6 +12,7 @@
  */
 
 import kind from '@enact/core/kind';
+import Item from '@enact/ui/Item';
 import {SlotItem as SlotItemBase} from '@enact/ui/SlotItem';
 import {Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
@@ -25,7 +26,7 @@ import componentCss from './CheckboxItem.module.less';
 const SlotItem = kind({
 	name: 'SlotItem',
 	render: (props) => (
-		<SlotItemBase {...props} component="div" />
+		<SlotItemBase {...props} component={Item} />
 	)
 });
 
