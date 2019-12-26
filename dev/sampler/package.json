@@ -16,7 +16,7 @@
     "extends": "enact/strict"
   },
   "dependencies": {
-    "@enact/agate": "../",
+    "@enact/agate": "../../",
     "@enact/core": "^3.2.0",
     "@enact/i18n": "^3.2.0",
     "@enact/ui": "^3.2.0",
