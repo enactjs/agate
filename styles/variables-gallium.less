@@ -106,10 +106,14 @@
 
 // Slider
 // ---------------------------------------
+@agate-slider-knob-height: 45px;
 @agate-slider-knob-border-radius: (@agate-slider-knob-height / 2);
-@agate-slider-knob-resting-state-scale: 0.8;
-@agate-slider-knob-transform: @agate-translate-center scale(0.8);
-@agate-slider-border-radius: 0;
+@agate-slider-knob-resting-state-scale: 0.77;
+// Additional offset (-12% at min position, 0% halfway, and +12% at max position) is needed when scaled down to 0.77 so that the knob stays within the progressbar
+@agate-slider-knob-transform: translate(calc((var(--ui-slider-proportion-end-knob) * -100%) + (-12% + (var(--ui-slider-proportion-end-knob) * 24%))), -50%) scale(@agate-slider-knob-resting-state-scale);
+// Additional offset (-5px at min position, 0px halfway, and +5px at max position) is needed when focused and scaled back to 1
+@agate-slider-knob-active-transform: translate(calc((var(--ui-slider-proportion-end-knob) * -100%) + (-5px + (var(--ui-slider-proportion-end-knob) * 10px))), -50%) scale(1);
+@agate-slider-border-radius: 3px;
 @agate-slider-horizontal-padding: ((@agate-slider-knob-height - @agate-slider-track-height) / 2) (@agate-slider-knob-height / 2);
 @agate-slider-vertical-margin: 0;
 @agate-slider-vertical-padding: (@agate-slider-knob-height / 2) ((@agate-slider-knob-height - @agate-slider-track-height) / 2);
