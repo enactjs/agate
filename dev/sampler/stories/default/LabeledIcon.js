@@ -11,17 +11,19 @@ import {mergeComponentMetadata} from '../../src/utils';
 LabeledIcon.displayName = 'LabeledIcon';
 
 const Config = mergeComponentMetadata('LabeledIcon', UiLabeledIconBase, UiLabeledIcon, UiIcon, IconBase, Icon, LabeledIcon);
-
 storiesOf('Agate', module)
 	.add(
 		'LabeledIcon',
 		() => (
 			<LabeledIcon
-				icon={select('icon', ['', ...iconNames], LabeledIcon, 'temperature')}
-				disabled={boolean('disabled', LabeledIcon)}
+				disabled={boolean('disabled', Config)}
+				flip={select('flip', ['', 'both', 'horizontal', 'vertical'], Config, '')}
+				icon={select('icon', ['', ...iconNames], Config, 'temperature')}
+				inline={boolean('inline', Config)}
+				labelPosition={select('labelPosition', ['above', 'after', 'before', 'below', 'left', 'right'], Config)}
 				size={select('size', ['small', 'large'], Config)}
 			>
-				{text('children', LabeledIcon, 'Hello LabeledIcon')}
+				{text('children', Config, 'Hello LabeledIcon')}
 			</LabeledIcon>
 		),
 		{

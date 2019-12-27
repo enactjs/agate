@@ -7,7 +7,7 @@ import React from 'react';
 import {action} from '@storybook/addon-actions';
 import {storiesOf} from '@storybook/react';
 
-import {select} from '../../src/enact-knobs';
+import {boolean, select} from '../../src/enact-knobs';
 
 TabbedPanels.displayName = 'TabbedPanels';
 
@@ -18,6 +18,7 @@ storiesOf('Agate', module)
 			<TabbedPanels
 				onClick={action('onClick')}
 				index={Number(select('index', ['0', '1', '2', '3'], TabbedPanels, '0'))}
+				noCloseButton={boolean('noCloseButton', TabbedPanels)}
 				onSelect={action('onSelect')}
 				orientation={select('orientation', ['vertical', 'horizontal'], TabbedPanels, 'vertical')}
 				tabPosition={select('tabPosition', ['before', 'after'], TabbedPanels, 'before')}

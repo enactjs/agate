@@ -1,9 +1,7 @@
 import Heading from '@enact/agate/Heading';
 import Icon from '@enact/agate/Icon';
 import Item from '@enact/agate/Item';
-import LabeledItem from '@enact/agate/LabeledItem';
 import Scroller from '@enact/agate/Scroller';
-import SlotItem from '@enact/agate/SlotItem';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -14,8 +12,6 @@ storiesOf('Agate QA.Item', module)
 		'Kitchen Sink',
 		() => (
 			<Scroller>
-				<LabeledItem label="label" titleIcon="home">LabeledItem</LabeledItem>
-				<SlotItem slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>SlotItem</SlotItem>
 				<Heading showLine>Item variations</Heading>
 				<Item>Default Item</Item>
 				<Item label="label above" labelPosition="above">Item</Item>

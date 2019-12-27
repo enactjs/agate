@@ -16,13 +16,15 @@ storiesOf('Agate', module)
 		() => (
 			<IncrementSlider
 				active={boolean('active', Config)}
+				backgroundProgress={number('backgroundProgress', Config, {range: true, min: 0, max: 1, step: 0.01})}
 				decrementIcon={select('decrementIcon', decrementIcons, Config)}
-				incrementIcon={select('incrementIcon', incrementIcons, Config)}
 				disabled={boolean('disabled', Config)}
 				focused={boolean('focused', Config)}
+				incrementIcon={select('incrementIcon', incrementIcons, Config)}
 				knobStep={number('knobStep', Config)}
 				max={number('max', Config)}
 				min={number('min', Config)}
+				noFill={boolean('noFill', Config)}
 				onActivate={action('onActivate')}
 				onChange={action('onChange')}
 				onDragEnd={action('onDragEnd')}

@@ -17,16 +17,18 @@ storiesOf('Agate', module)
 		'Input',
 		() => (
 			<Input
-				onChange={action('onChange')}
 				disabled={boolean('disabled', Config)}
+				dismissOnEnter={boolean('dismissOnEnter', Config)}
 				iconAfter={select('iconAfter', iconNames, Config)}
 				iconBefore={select('iconBefore', iconNames, Config)}
 				invalid={boolean('invalid', Config)}
 				invalidMessage={text('invalidMessage', Config)}
+				onBlur={action('onBlur')}
+				onChange={action('onChange')}
+				onFocus={action('onFocus')}
 				placeholder={text('placeholder', Config, 'Input text here')}
 				size={select('size', ['small', 'large'], Config)}
 				type={text('type', Config)}
-				defaultValue=""
 			/>
 		),
 		{

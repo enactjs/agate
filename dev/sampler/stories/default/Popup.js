@@ -15,11 +15,11 @@ storiesOf('Agate', module)
 			<div>
 				<Popup
 					closeButton={boolean('closeButton', Config)}
-					open={boolean('open', Config)}
 					noAnimation={boolean('noAnimation', Config)}
 					noAutoDismiss={boolean('noAutoDismiss', Config)}
 					onClose={action('onClose')}
 					onHide={action('onHide')}
+					open={boolean('open', Config)}
 					scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
 					spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
 					title={text('title', Config, 'Title')}

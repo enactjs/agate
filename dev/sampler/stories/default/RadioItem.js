@@ -15,8 +15,8 @@ storiesOf('Agate', module)
 		() => (
 			<div>
 				<RadioItem
-					defaultSelected={boolean('defaultSelected', Config)}
-					icon={select('icon', ['', ...iconNames], Config, 'music')}
+					disabled={boolean('disabled', Config)}
+					icon={select('icon', ['', ...iconNames], Config)}
 				>
 					{text('children', Config, 'Sound')}
 				</RadioItem>

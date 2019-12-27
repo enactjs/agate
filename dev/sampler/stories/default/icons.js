@@ -99,5 +99,5 @@ const starIcons = [
 	'halfstar'
 ];
 
-export default Object.keys(icons);
+export default Object.keys(icons).sort();
 export {decrementIcons, incrementIcons, listIcons, mediaIcons, arrowIcons, starIcons};

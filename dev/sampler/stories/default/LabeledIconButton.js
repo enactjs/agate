@@ -5,7 +5,7 @@ import {LabeledIconBase as UiLabeledIconBase, LabeledIcon as UiLabeledIcon} from
 
 import iconNames from './icons';
 import {mergeComponentMetadata} from '../../src/utils';
-import {boolean, select, text} from '../../src/enact-knobs';
+import {boolean, number, select, text} from '../../src/enact-knobs';
 
 const Config = mergeComponentMetadata('LabeledIconButton', UiLabeledIconBase, UiLabeledIcon, LabeledIconButton);
 Config.displayName = 'LabeledIconButton';
@@ -15,12 +15,15 @@ storiesOf('Agate', module)
 		'LabeledIconButton',
 		() => (
 			<LabeledIconButton
+				backgroundOpacity={select('backgroundOpacity', ['', 'opaque', 'lightOpaque', 'transparent'], Config, '')}
 				disabled={boolean('disabled', Config)}
+				highlighted={boolean('highlighted', Config)}
 				icon={select('icon', ['', ...iconNames], Config, 'temperature')}
 				inline={boolean('inline', Config)}
 				labelPosition={select('labelPosition', ['above', 'after', 'before', 'below', 'left', 'right'], Config)}
 				selected={boolean('selected', Config)}
-				size={select('size', ['small', 'large'], Config)}
+				size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}
+				spriteCount={number('spriteCount', Config, {min: 1}, 1)}
 			>
 				{text('children', Config, 'Hello LabeledIconButton')}
 			</LabeledIconButton>
