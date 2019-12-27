@@ -12,23 +12,15 @@
  */
 
 import kind from '@enact/core/kind';
-import Item from '@enact/ui/Item';
-import {SlotItem as SlotItemBase} from '@enact/ui/SlotItem';
 import {Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import Item from '../Item';
+
 import Checkbox from './Checkbox';
-import ToggleItem from './ToggleItem';
 
 import componentCss from './CheckboxItem.module.less';
-
-const SlotItem = kind({
-	name: 'SlotItem',
-	render: (props) => (
-		<SlotItemBase {...props} component={Item} />
-	)
-});
 
 /**
  * An item with a checkbox component, ready to use in Agate applications.
@@ -68,7 +60,9 @@ const CheckboxItemBase = kind({
 		 * @type {Object}
 		 * @public
 		 */
-		css: PropTypes.object
+		css: PropTypes.object,
+
+		icon: PropTypes.string
 	},
 
 	styles: {
@@ -77,19 +71,18 @@ const CheckboxItemBase = kind({
 		publicClassNames: ['checkboxItem']
 	},
 
-	computed: {
-		children: ({children}) => <Cell align="center">{children}</Cell>
-	},
-
-	render: (props) => (
-		<ToggleItem
+	render: ({children, icon, ...rest}) => (
+		<Item
 			data-webos-voice-intent="SelectCheckItem"
 			role="checkbox"
-			{...props}
-			component={SlotItem}
-			css={props.css}
-			iconComponent={Checkbox}
-		/>
+			{...rest}
+			css={rest.css}
+		>
+			<Checkbox slot="slotBefore">
+				{icon}
+			</Checkbox>
+			{children}
+		</Item>
 	)
 });
 
