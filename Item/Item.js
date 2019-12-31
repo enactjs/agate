@@ -99,32 +99,30 @@ const ItemBase = kind({
 	},
 	styles: {
 		css: componentCss,
-		publicClassNames: ['item']
+		publicClassNames: ['item', 'slotAfter', 'slotBefore']
 	},
 	computed: {
 		className: ({selected, styler}) => styler.append({selected})
 	},
-	render: ({children, componentRef, css, label, labelPosition, slotAfter, slotBefore, ...rest}) => {
-		return (
-			<UiItemBase {...rest} css={css} align="center" component={Row} ref={componentRef}>
-				{slotBefore ? (
-					<Cell className={css.slotBefore} shrink>
-						{slotBefore}
-					</Cell>
-				) : null}
-				<ItemContent
-					content={children}
-					label={label}
-					labelPosition={labelPosition}
-				/>
-				{slotAfter ? (
-					<Cell className={css.slotAfter} shrink>
-						{slotAfter}
-					</Cell>
-				) : null}
-			</UiItemBase>
-		);
-	}
+	render: ({children, componentRef, css, label, labelPosition, slotAfter, slotBefore, ...rest}) => (
+		<UiItemBase {...rest} css={css} align="center" component={Row} ref={componentRef}>
+			{slotBefore ? (
+				<Cell className={css.slotBefore} shrink>
+					{slotBefore}
+				</Cell>
+			) : null}
+			<ItemContent
+				content={children}
+				label={label}
+				labelPosition={labelPosition}
+			/>
+			{slotAfter ? (
+				<Cell className={css.slotAfter} shrink>
+					{slotAfter}
+				</Cell>
+			) : null}
+		</UiItemBase>
+	)
 });
 
 /**

@@ -12,11 +12,15 @@
  */
 
 import kind from '@enact/core/kind';
-import {Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 import React from 'react';
+import compose from 'ramda/src/compose';
+
+import Spottable from '@enact/spotlight/Spottable';
+import Toggleable from '@enact/ui/Toggleable';
 
 import Item from '../Item';
+import Skinnable from '../Skinnable';
 
 import Checkbox from './Checkbox';
 
@@ -62,7 +66,30 @@ const CheckboxItemBase = kind({
 		 */
 		css: PropTypes.object,
 
-		icon: PropTypes.string
+		/**
+		 * Customize the component used as the check in the checkbox.
+		 *
+		 * @type {Element|Function|String}
+		 * @default {@link agate/Switch.Switch}
+		 * @public
+		 */
+		icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]),
+
+		iconPosition: PropTypes.string,
+
+		/**
+		 * If true the checkbox will be selected.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		selected: PropTypes.bool
+	},
+
+	defaultProps: {
+		icon: 'check',
+		iconPosition: 'before'
 	},
 
 	styles: {
@@ -71,23 +98,30 @@ const CheckboxItemBase = kind({
 		publicClassNames: ['checkboxItem']
 	},
 
-	render: ({children, icon, ...rest}) => (
+	render: ({children, css, icon, iconPosition, selected, ...rest}) => (
 		<Item
 			data-webos-voice-intent="SelectCheckItem"
 			role="checkbox"
 			{...rest}
-			css={rest.css}
+			css={css}
 		>
-			<Checkbox slot="slotBefore">
-				{icon}
-			</Checkbox>
+			{iconPosition === 'after' ? (<Checkbox selected={selected} slot="slotAfter">{icon}</Checkbox>) : null}
 			{children}
+			{iconPosition === 'before' ? (<Checkbox selected={selected} slot="slotBefore">{icon}</Checkbox>) : null}
 		</Item>
 	)
 });
 
-export default CheckboxItemBase;
+const CheckboxItemDecorator = compose(
+	Toggleable({toggleProp: 'onClick'}),
+	Spottable,
+	Skinnable
+);
+
+const CheckboxItem = CheckboxItemDecorator(CheckboxItemBase);
+
+export default CheckboxItem;
 export {
-	CheckboxItemBase as CheckboxItem,
+	CheckboxItem,
 	CheckboxItemBase
 };

@@ -12,31 +12,20 @@
 		padding-right: @agate-checkboxitem-padding-right;
 		font-size: @agate-checkboxitem-font-size;
 
-		.slot {
-			&.after {
-				> :first-child {
-					-webkit-margin-start: @agate-checkboxitem-icon-margin;
-				}
+		.slotAfter {
+			-webkit-margin-start: @agate-checkboxitem-icon-margin;
+			-webkit-margin-end: 0;
+		}
 
-				> :last-child {
-					-webkit-margin-end: 0;
-				}
-			}
-
-			&.before {
-				> :first-child {
-					-webkit-margin-start: 0;
-				}
-
-				> :last-child {
-					-webkit-margin-end: @agate-checkboxitem-icon-margin;
-				}
-			}
+		.slotBefore {
+			-webkit-margin-start: 0;
+			-webkit-margin-end: @agate-checkboxitem-icon-margin;
 		}
 
 		.focus({
 			color: @agate-checkboxitem-focus-text-color;
 			background-color: @agate-checkboxitem-focus-bg-color;
+			border-color: white;
 		});
 	});
 }
