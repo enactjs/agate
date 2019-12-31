@@ -23,7 +23,7 @@ import componentCss from './Switch.module.less';
  *
  * @class Switch
  * @memberof agate/Switch
- * @extends agate/ToggleIcon.ToggleIcon
+ * @extends agate/internal/ToggleIcon
  * @ui
  * @public
  */

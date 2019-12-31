@@ -19,10 +19,9 @@ import compose from 'ramda/src/compose';
 import Spottable from '@enact/spotlight/Spottable';
 import Toggleable from '@enact/ui/Toggleable';
 
+import Checkbox from '../Checkbox';
 import Item from '../Item';
 import Skinnable from '../Skinnable';
-
-import Checkbox from './Checkbox';
 
 import componentCss from './CheckboxItem.module.less';
 

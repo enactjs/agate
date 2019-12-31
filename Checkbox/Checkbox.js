@@ -13,8 +13,8 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Icon from '../Icon';
-import ToggleIcon from '../internal/ToggleIcon';
+import Icon from '../Icon/Icon';
+import ToggleIcon from '../internal/ToggleIcon/ToggleIcon';
 
 import css from './Checkbox.module.less';
 
@@ -31,7 +31,7 @@ import css from './Checkbox.module.less';
  *
  * @class Checkbox
  * @memberof agate/Checkbox
- * @extends agate/ToggleIcon.ToggleIcon
+ * @extends agate/internal/ToggleIcon.ToggleIcon
  * @ui
  * @private
  */
