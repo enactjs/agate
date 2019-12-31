@@ -70,11 +70,18 @@ const CheckboxItemBase = kind({
 		 * Customize the component used as the check in the checkbox.
 		 *
 		 * @type {Element|Function|String}
-		 * @default {@link agate/Switch.Switch}
+		 * @default 'check'
 		 * @public
 		 */
 		icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]),
 
+		/**
+		 * Specifies on which side (`'before'` or `'after'`) of the text the checkbox appears.
+		 *
+		 * @type {('before'|'after')}
+		 * @default 'before'
+		 * @public
+		 */
 		iconPosition: PropTypes.string,
 
 		/**

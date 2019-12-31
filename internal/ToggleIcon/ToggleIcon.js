@@ -17,8 +17,8 @@ import compose from 'ramda/src/compose';
 import Pure from '@enact/ui/internal/Pure';
 import UiToggleIcon from '@enact/ui/ToggleIcon';
 
-import Icon from '../Icon/Icon';
-import Skinnable from '../Skinnable/Skinnable';
+import Icon from '../../Icon/Icon';
+import Skinnable from '../../Skinnable/Skinnable';
 
 /**
  * A component that indicates a boolean state.

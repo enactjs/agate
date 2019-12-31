@@ -12,13 +12,9 @@
 import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Icon from '../Icon';
-
-import Toggleable from '@enact/ui/Toggleable';
-import {ToggleIconBase} from '@enact/ui/ToggleIcon';
-import Skinnable from '../Skinnable';
-
-import compose from 'ramda/src/compose';
+import {ToggleIconBase} from '../internal/ToggleIcon';
 
 import componentCss from './Switch.module.less';
 
@@ -86,16 +82,8 @@ const SwitchBase = kind({
 	}
 });
 
-const SwitchDecorator = compose(
-	Toggleable({toggleProp: 'onClick'}),
-	Skinnable({prop: 'skin'})
-);
-
-const Switch = SwitchDecorator(SwitchBase);
-
-export default SwitchDecorator(SwitchBase);
+export default SwitchBase;
 export {
-	Switch,
-	SwitchBase,
-	SwitchDecorator
+	SwitchBase as Switch,
+	SwitchBase
 };
