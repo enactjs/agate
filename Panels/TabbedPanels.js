@@ -12,9 +12,17 @@ import Panels from './Panels';
 
 import componentCss from './TabbedPanels.module.less';
 
+/**
+ * Tabbed Panels component.
+ *
+ * @class TabbedPanels
+ * @memberof agate/Panels
+ * @ui
+ * @public
+ */
 const TabbedPanelsBase = kind({
 	name: 'TabbedPanels',
-	propTypes: {
+	propTypes: /** @lends agate/Panels.TabbedPanels.prototype */ {
 		afterTabs: PropTypes.node,
 		beforeTabs: PropTypes.node,
 		css: PropTypes.object,
@@ -84,6 +92,7 @@ const TabbedPanelsBase = kind({
 	}
 });
 
+// Currently not documenting the base output since it's not exported from index.js
 const TabbedPanels = Slottable(
 	{slots: ['tabs', 'afterTabs', 'beforeTabs']},
 	Changeable(

@@ -1,5 +1,5 @@
 /**
- * Provides a Agate-themed pill-shaped toggle switch component.
+ * Provides an Agate-themed toggle switch component.
  *
  * @example
  * <Switch />
@@ -21,16 +21,20 @@ import componentCss from './Switch.module.less';
 /**
  * Renders the base level DOM structure of the component.
  *
- * @class Switch
+ * @class SwitchBase
  * @memberof agate/Switch
+<<<<<<< HEAD
  * @extends agate/internal/ToggleIcon
+=======
+ * @extends ui/ToggleIcon.ToggleIconBase
+>>>>>>> develop
  * @ui
  * @public
  */
 const SwitchBase = kind({
 	name: 'Switch',
 
-	propTypes: /** @lends agate/Switch.Switch.prototype */ {
+	propTypes: /** @lends agate/Switch.SwitchBase.prototype */ {
 		children: PropTypes.string,
 		css: PropTypes.object,
 
@@ -67,7 +71,7 @@ const SwitchBase = kind({
 		}
 	},
 
-	render: ({children, css, ...rest}) => {
+	render: ({css, ...rest}) => {
 		delete rest.noAnimation;
 
 		return (
@@ -75,9 +79,7 @@ const SwitchBase = kind({
 				{...rest}
 				css={css}
 				iconComponent={Icon}
-			>
-				{children}
-			</ToggleIconBase>
+			/>
 		);
 	}
 });

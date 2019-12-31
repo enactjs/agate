@@ -7,12 +7,12 @@ import PropTypes from 'prop-types';
 import componentCss from './IncrementSliderButton.module.less';
 
 /**
- * An [Button]{@link moonstone/Button.Button} customized for
- * [IncrementSlider]{@link moonstone/IncrementSlider.IncrementSlider}. It is optimized to only
+ * An [Button]{@link agate/Button.Button} customized for
+ * [IncrementSlider]{@link agate/IncrementSlider.IncrementSlider}. It is optimized to only
  * update when `disabled` is changed to minimize unnecessary render cycles.
  *
  * @class IncrementSliderButton
- * @memberof moonstone/IncrementSlider
+ * @memberof agate/IncrementSlider
  * @ui
  * @private
  */
@@ -20,7 +20,7 @@ import componentCss from './IncrementSliderButton.module.less';
 const IncrementSliderButtonBase = kind({
 	name: 'IncrementSliderButton',
 
-	propTypes: /** @lends moonstone/IncrementSlider.IncrementSliderButton.prototype */ {
+	propTypes: /** @lends agate/IncrementSlider.IncrementSliderButton.prototype */ {
 		css: PropTypes.object,
 		onTap: PropTypes.func,
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),

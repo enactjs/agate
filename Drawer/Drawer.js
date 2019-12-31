@@ -1,3 +1,15 @@
+/**
+ * An Agate-themed drawer component.
+ *
+ * @example
+ * <Drawer header="Surprise">Hello Enact!</Drawer>
+ *
+ * @module agate/Drawer
+ * @exports Drawer
+ * @exports DrawerBase
+ * @exports DrawerDecorator
+ */
+
 import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
@@ -13,6 +25,14 @@ import PopupState from '../Popup/PopupState';
 
 import componentCss from './Drawer.module.less';
 
+/**
+ * A drawer component, without behaviors.
+ *
+ * @class DrawerBase
+ * @memberof agate/Drawer
+ * @ui
+ * @public
+ */
 const DrawerBase = kind({
 	name: 'Drawer',
 
@@ -73,17 +93,25 @@ const DrawerBase = kind({
  *
  * @hoc
  * @memberof agate/Drawer
+ * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
-
 const DrawerDecorator = compose(
 	Slottable({slots: ['header', 'footer']}),
 	Skinnable({prop: 'skin'}),
 	PopupState
 );
 
+/**
+ * A ready-to-use drawer component.
+ *
+ * @class Drawer
+ * @memberof agate/Drawer
+ * @ui
+ * @public
+ */
 const Drawer = DrawerDecorator(DrawerBase);
 
 export default Drawer;
-export {Drawer, DrawerBase};
+export {Drawer, DrawerBase, DrawerDecorator};
