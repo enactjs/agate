@@ -83,7 +83,8 @@
 			}
 
 			.knob {
-				left: ~"calc(var(--ui-slider-proportion-end-knob) * 100%)";
+				left: calc((var(--ui-slider-proportion-end-knob) * 100%) + @agate-slider-knob-left-offset);
+				// calc((var(--ui-slider-proportion-end-knob) * 100%) + (15px - (var(--ui-slider-proportion-end-knob) * 30px)))
 			}
 		}
 
