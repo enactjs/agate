@@ -66,22 +66,20 @@ const CheckboxItemBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Customize the component used as the check in the checkbox.
+		 * The icon content.
 		 *
-		 * @type {Element|Function|String}
+		 * May be specified as either:
+		 *
+		 * * A string that represents an icon from the [iconList]{@link ui/Icon.Icon.iconList},
+		 * * An HTML entity string, Unicode reference or hex value (in the form '0x...'),
+		 * * A URL specifying path to an icon image, or
+		 * * An object representing a resolution independent resource (See {@link ui/resolution})
+		 *
+		 * @type {String|Object}
 		 * @default 'check'
 		 * @public
 		 */
-		icon: PropTypes.oneOfType([PropTypes.element, PropTypes.func, PropTypes.string]),
-
-		/**
-		 * Specifies on which side (`'before'` or `'after'`) of the text the checkbox appears.
-		 *
-		 * @type {('before'|'after')}
-		 * @default 'before'
-		 * @public
-		 */
-		iconPosition: PropTypes.string,
+		icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
 		/**
 		 * If true the checkbox will be selected.
@@ -94,8 +92,7 @@ const CheckboxItemBase = kind({
 	},
 
 	defaultProps: {
-		icon: 'check',
-		iconPosition: 'before'
+		icon: 'check'
 	},
 
 	styles: {
@@ -104,16 +101,15 @@ const CheckboxItemBase = kind({
 		publicClassNames: ['checkboxItem']
 	},
 
-	render: ({children, css, icon, iconPosition, selected, ...rest}) => (
+	render: ({children, css, icon, selected, ...rest}) => (
 		<Item
 			data-webos-voice-intent="SelectCheckItem"
 			role="checkbox"
 			{...rest}
 			css={css}
 		>
-			{iconPosition === 'after' ? (<Checkbox selected={selected} slot="slotAfter">{icon}</Checkbox>) : null}
+			<Checkbox selected={selected} slot="slotBefore">{icon}</Checkbox>
 			{children}
-			{iconPosition === 'before' ? (<Checkbox selected={selected} slot="slotBefore">{icon}</Checkbox>) : null}
 		</Item>
 	)
 });
