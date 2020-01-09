@@ -1,0 +1,31 @@
+// Checkbox.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+
+.checkboxItem {
+	align-items: center;
+
+	.applySkins({
+		padding-left: @agate-checkboxitem-padding-left;
+		padding-right: @agate-checkboxitem-padding-right;
+		border-color: @agate-checkboxitem-border-color;
+		font-size: @agate-checkboxitem-font-size;
+
+		.slotAfter {
+			-webkit-margin-start: @agate-checkboxitem-icon-margin;
+			-webkit-margin-end: 0;
+		}
+
+		.slotBefore {
+			-webkit-margin-start: 0;
+			-webkit-margin-end: @agate-checkboxitem-icon-margin;
+		}
+
+		.focus({
+			color: @agate-checkboxitem-focus-text-color;
+			background-color: @agate-checkboxitem-focus-bg-color;
+			border-color: @agate-checkboxitem-focus-border-color;
+		});
+	});
+}

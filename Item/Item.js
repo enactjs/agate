@@ -100,7 +100,7 @@ const ItemBase = kind({
 	},
 	styles: {
 		css: componentCss,
-		publicClassNames: ['item']
+		publicClassNames: ['item', 'slotAfter', 'slotBefore']
 	},
 	computed: {
 		className: ({selected, styler}) => styler.append({selected})
