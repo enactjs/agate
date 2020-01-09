@@ -84,15 +84,15 @@
 @agate-slider-knob-width: @agate-slider-knob-height;
 @agate-slider-border-radius: 0;
 @agate-slider-horizontal-margin: 0 @agate-component-spacing;
-@agate-slider-horizontal-padding: ((@agate-slider-knob-height - @agate-slider-track-height) / 2) (@agate-slider-knob-height / 2);
+@agate-slider-horizontal-padding: ((@agate-slider-knob-height - @agate-slider-track-horizontal-height) / 2) (@agate-slider-knob-height / 2);
 @agate-slider-vertical-margin: 0;
-@agate-slider-vertical-padding: (@agate-slider-knob-height / 2) ((@agate-slider-knob-height - @agate-slider-track-height) / 2);
-@agate-slider-track-height: 6px;
+@agate-slider-vertical-padding: (@agate-slider-knob-height / 2) ((@agate-slider-knob-height - @agate-slider-track-horizontal-height) / 2);
+@agate-slider-track-horizontal-height: 6px;
 
 // IncrementSlider
 // ---------------------------------------
 @agate-incrementslider-horizontal-slider-margin: 0 (@agate-component-spacing * 2);
-@agate-incrementslider-horizontal-slider-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) ((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale);
+@agate-incrementslider-horizontal-slider-padding: ((@agate-slider-height - @agate-slider-track-horizontal-height) / 2) ((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale);
 @agate-incrementslider-horizontal-button-decrement-border-radius: @agate-button-border-radius;
 @agate-incrementslider-horizontal-button-decrement-border-width: @agate-button-border-width;
 @agate-incrementslider-horizontal-button-increment-border-radius: @agate-incrementslider-horizontal-button-decrement-border-radius;

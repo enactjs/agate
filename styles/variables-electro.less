@@ -126,9 +126,9 @@
 @agate-slider-knob-width: 30px;
 @agate-slider-border-radius: @electro-border-radius;
 @agate-slider-horizontal-margin: 3px 24px;
-@agate-slider-horizontal-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) ((@agate-slider-knob-width / 2) + 9);
+@agate-slider-horizontal-padding: ((@agate-slider-height - @agate-slider-track-horizontal-height) / 2) ((@agate-slider-knob-width / 2) + 9);
 @agate-slider-vertical-margin: 24px 3px;
-@agate-slider-vertical-padding: (@agate-slider-height / 2) ((@agate-slider-height - @agate-slider-track-height) / 2);
+@agate-slider-vertical-padding: (@agate-slider-height / 2) ((@agate-slider-height - @agate-slider-track-horizontal-height) / 2);
 @agate-slider-bg-transform: skewX(@electro-skew);
 @agate-slider-track-transform: skewX(@electro-negate-skew);
 
@@ -137,7 +137,7 @@
 @electro-incrementslider-horizontal-slider-undertuck: 15px; // the amount the slider tucks underneath the side buttons
 @agate-incrementslider-horizontal-margin: 3px @agate-component-spacing;
 @agate-incrementslider-horizontal-slider-margin: 0 -@electro-incrementslider-horizontal-slider-undertuck;
-@agate-incrementslider-horizontal-slider-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale) + @electro-incrementslider-horizontal-slider-undertuck + 9px);
+@agate-incrementslider-horizontal-slider-padding: ((@agate-slider-height - @agate-slider-track-horizontal-height) / 2) (((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale) + @electro-incrementslider-horizontal-slider-undertuck + 9px);
 @agate-incrementslider-horizontal-button-decrement-border-radius: @agate-button-border-radius;
 @agate-incrementslider-horizontal-button-decrement-border-width: @agate-button-border-width;
 @agate-incrementslider-horizontal-button-increment-border-radius: @agate-incrementslider-horizontal-button-decrement-border-radius;

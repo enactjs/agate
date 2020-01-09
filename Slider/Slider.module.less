@@ -18,8 +18,7 @@
 
 		.progressBar {
 			position: relative;
-			height: 100%;
-			width: 100%;
+			margin: @agate-slider-track-margin;
 			background-color: @agate-slider-track-bg-color;
 			background-image: @agate-slider-track-bg-image;
 			border-radius: @agate-slider-border-radius;
@@ -79,12 +78,15 @@
 			.progressBar,
 			.fill,
 			.load {
-				height: @agate-slider-track-height;
+				height: @agate-slider-track-horizontal-height;
+			}
+
+			.progressBar{
+				width: @agate-slider-track-horizontal-width;
 			}
 
 			.knob {
 				left: calc((var(--ui-slider-proportion-end-knob) * 100%) + @agate-slider-knob-left-offset);
-				// calc((var(--ui-slider-proportion-end-knob) * 100%) + (15px - (var(--ui-slider-proportion-end-knob) * 30px)))
 			}
 		}
 
@@ -98,7 +100,11 @@
 			.progressBar,
 			.fill,
 			.load {
-				width: @agate-slider-track-width;
+				width: @agate-slider-track-vertical-width;
+			}
+
+			.progressBar{
+				height: @agate-slider-track-vertical-height;
 			}
 
 			.knob {

@@ -116,23 +116,29 @@
 
 // Slider
 // ---------------------------------------
+@gallium-knob-offset: 18px; // the offset to keep the knob inside the progressbar.
+
 @agate-slider-knob-height: 45px;
 @agate-slider-knob-border-radius: (@agate-slider-knob-height / 2);
 @agate-slider-knob-resting-state-scale: 0.77;
 // Additional offset (-18px at min position, 0px halfway, and -18px at max position, with a total distance of 36px) is needed so that the knob stays within the progressbar.
-@agate-slider-knob-left-offset: calc(18px - (var(--ui-slider-proportion-end-knob) * 36px));
+@agate-slider-knob-left-offset: calc(@gallium-knob-offset - (var(--ui-slider-proportion-end-knob) * (@gallium-knob-offset * 2)));
 @agate-slider-knob-active-transform: @agate-translate-center scale(1);
 @agate-slider-knob-transform: @agate-translate-center scale(@agate-slider-knob-resting-state-scale);
 @agate-slider-border-radius: 3px;
-@agate-slider-horizontal-padding: ((@agate-slider-knob-height - @agate-slider-track-height) / 2) (@agate-slider-knob-height / 2);
+@agate-slider-horizontal-padding: ((@agate-slider-knob-height - @agate-slider-track-horizontal-height) / 2) (@agate-slider-knob-height / 2);
 @agate-slider-vertical-margin: 0;
-@agate-slider-vertical-padding: (@agate-slider-knob-height / 2) ((@agate-slider-knob-height - @agate-slider-track-height) / 2);
-@agate-slider-track-height: 6px;
+@agate-slider-vertical-padding: (@agate-slider-knob-height / 2) ((@agate-slider-knob-height - @agate-slider-track-horizontal-height) / 2);
+@agate-slider-track-horizontal-height: 6px;
+// offsetting the progress bar so that `PositionDecorator` can calculate the knob position properly at the min and max
+@agate-slider-track-margin: 0 -@gallium-knob-offset;
+@agate-slider-track-horizontal-width: calc(100% + (@gallium-knob-offset * 2));
+@agate-slider-track-vertical-height: @agate-slider-track-horizontal-width;
 
 // IncrementSlider
 // ---------------------------------------
 @agate-incrementslider-horizontal-slider-margin: 0 (@agate-component-spacing * 2);
-@agate-incrementslider-horizontal-slider-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) ((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale);
+@agate-incrementslider-horizontal-slider-padding: ((@agate-slider-height - @agate-slider-track-horizontal-height) / 2) ((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale);
 @agate-incrementslider-horizontal-button-decrement-border-radius: @agate-button-border-radius;
 @agate-incrementslider-horizontal-button-decrement-border-width: @agate-button-border-width;
 @agate-incrementslider-horizontal-button-increment-border-radius: @agate-incrementslider-horizontal-button-decrement-border-radius;
