@@ -122,7 +122,7 @@
 @agate-slider-knob-border-radius: (@agate-slider-knob-height / 2);
 @agate-slider-knob-resting-state-scale: 0.77;
 // Additional offset (-18px at min position, 0px halfway, and -18px at max position, with a total distance of 36px) is needed so that the knob stays within the progressbar.
-@agate-slider-knob-left-offset: calc(@gallium-knob-offset - (var(--ui-slider-proportion-end-knob) * (@gallium-knob-offset * 2)));
+@agate-slider-knob-position-offset: calc(@gallium-knob-offset - (var(--ui-slider-proportion-end-knob) * (@gallium-knob-offset * 2)));
 @agate-slider-knob-active-transform: @agate-translate-center scale(1);
 @agate-slider-knob-transform: @agate-translate-center scale(@agate-slider-knob-resting-state-scale);
 @agate-slider-border-radius: 3px;
@@ -131,8 +131,9 @@
 @agate-slider-vertical-padding: (@agate-slider-knob-height / 2) ((@agate-slider-knob-height - @agate-slider-track-horizontal-height) / 2);
 @agate-slider-track-horizontal-height: 6px;
 // offsetting the progress bar so that `PositionDecorator` can calculate the knob position properly at the min and max
-@agate-slider-track-margin: 0 -@gallium-knob-offset;
+@agate-slider-track-horizontal-margin: 0 -@gallium-knob-offset;
 @agate-slider-track-horizontal-width: calc(100% + (@gallium-knob-offset * 2));
+@agate-slider-track-vertical-margin: -@gallium-knob-offset 0;
 @agate-slider-track-vertical-height: @agate-slider-track-horizontal-width;
 
 // IncrementSlider
