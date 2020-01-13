@@ -23,11 +23,11 @@
 			.position(0, auto, auto, 0);
 			z-index: 10;
 			overflow: hidden;
-	
+
 			.breadcrumb {
 				position: absolute;
 				display: table;
-	
+
 				.breadcrumbContent {
 					display: table-cell;
 					vertical-align: middle;
@@ -62,12 +62,20 @@
 			.padding-start-end(@agate-panels-controls-padding-start, initial);
 		}
 
+		.partial {
+			background-color: @agate-panels-partial-bg-color;
+			background-image: @agate-panels-partial-bg-image;
+			height: @agate-panels-partial-height;
+			width: @agate-panels-partial-width;
+		}
+
 		&.breadcrumbPanels {
 			.breadcrumbs {
 				background-color: @agate-panels-breadcrumb-bg-color;
+				background-image: @agate-panels-breadcrumb-bg-image;
 				height: @agate-panels-breadcrumb-height;
 				width: @agate-panels-breadcrumb-width;
-				
+
 				.breadcrumb {
 					height: @agate-panels-breadcrumb-height;
 					width: @agate-panels-breadcrumb-width;

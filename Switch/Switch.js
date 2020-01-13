@@ -12,13 +12,9 @@
 import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Icon from '../Icon';
-
-import Toggleable from '@enact/ui/Toggleable';
-import {ToggleIconBase} from '@enact/ui/ToggleIcon';
-import Skinnable from '../Skinnable';
-
-import compose from 'ramda/src/compose';
+import {ToggleIconBase} from '../internal/ToggleIcon';
 
 import componentCss from './Switch.module.less';
 
@@ -27,7 +23,7 @@ import componentCss from './Switch.module.less';
  *
  * @class SwitchBase
  * @memberof agate/Switch
- * @extends ui/ToggleIcon.ToggleIconBase
+ * @extends agate/internal/ToggleIcon
  * @ui
  * @public
  */
@@ -84,36 +80,8 @@ const SwitchBase = kind({
 	}
 });
 
-/**
- * Agate specific behaviors to apply to [Switch]{@link agate/Switch.SwitchBase}.
- *
- * @hoc
- * @memberof agate/Switch
- * @mixes ui/Toggleable.Toggleable
- * @mixes agate/Skinnable.Skinnable
- * @public
- */
-const SwitchDecorator = compose(
-	// TODO: Should this be spottable?  onTap?
-	Toggleable({toggleProp: 'onClick'}),
-	Skinnable({prop: 'skin'})
-);
-
-/**
- * A switch component with Agate behaviors.
- *
- * @class Switch
- * @memberof agate/Switch
- * @extends agate/Switch.SwitchBase
- * @mixes agate/Switch.SwitchDecorator
- * @ui
- * @public
- */
-const Switch = SwitchDecorator(SwitchBase);
-
-export default SwitchDecorator(SwitchBase);
+export default SwitchBase;
 export {
-	Switch,
-	SwitchBase,
-	SwitchDecorator
+	SwitchBase as Switch,
+	SwitchBase
 };
