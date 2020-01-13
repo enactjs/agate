@@ -1,0 +1,39 @@
+// Dropdown.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+
+.Dropdown {
+	.applySkins({
+		.item {
+			border-color: gray;
+			border-style: solid;
+			border-width: 1px;
+		}
+		.transitionContainer {
+			position: absolute;
+			display: inline-block;
+			z-index: 1;
+			pointer-events: none;
+			min-width: 312px;
+			width: 100%;
+
+			&.openTransitionContainer {
+				pointer-events: inherit;
+			}
+		}
+		.dropdownList {
+			background-color: white;
+			overflow: hidden;
+			border-bottom-color: gray;
+			border-bottom-style: solid;
+			border-bottom-width: 1px;
+		}
+		.dropdownListWithScroller {
+			height: @agate-item-height * 4;
+			.scroller {
+				height: 100%;
+			}
+		}
+	});
+}
