@@ -50,6 +50,21 @@ const DropdownBase = kind({
 		 * @type {String[]|Array.<{key: (Number|String), children: (String|Component)}>}
 		 */
 		children: PropTypes.array,
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
+		css: PropTypes.object,
+		/**
+		 * The animation direction of the `palette`.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		direction: PropTypes.string,
 		/*
 		 * Called when an item is selected.
 		 *
@@ -85,6 +100,7 @@ const DropdownBase = kind({
 	computed: {
 		className: ({css, selected, styler}) => styler.append(selected && css.selected),
 		transitionContainerClassname: ({css, open, styler}) => styler.join(css.transitionContainer, (open ? css.openTransitionContainer : null)),
+		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected}) => {
 			if (isSelectedValid({children, selected})) {
 				const child = children[selected];
@@ -92,11 +108,22 @@ const DropdownBase = kind({
 			}
 
 			return children[0];
+		},
+		transitionDirection: ({direction}) => {
+			switch (direction) {
+				case 'left':
+					return 'right';
+				case 'right':
+					return 'left';
+				case 'up':
+					return 'down';
+				case 'down':
+					return 'up';
+			}
 		}
 	},
 
-	render: ({children, css, onSelect, open, icon, transitionContainerClassname, transitionDirection, title, dataSize, itemSize, styler, ...rest}) => {
-		delete rest.extended;
+	render: ({children, css, dropdownListClassname, onSelect, open, transitionContainerClassname, transitionDirection, title, ...rest}) => {
 		return (
 			<div {...rest}>
 				<Item {...rest} css={css}>
@@ -108,7 +135,7 @@ const DropdownBase = kind({
 					visible={open}
 					direction={transitionDirection}
 				>
-					<ContainerDiv className={styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4})} spotlightDisabled={!open} spotlightRestrict="self-only">
+					<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
 						<Scroller className={css.scroller}>
 							<Group
 								className={css.group}
