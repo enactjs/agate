@@ -3,19 +3,18 @@
 @import "../styles/mixins.less";
 @import "../styles/skin.less";
 
-.Dropdown {
+.dropdown {
 	.applySkins({
 		.item {
-			border-color: gray;
-			border-style: solid;
-			border-width: 1px;
+			border-color: @agate-dropdown-border-color;
+			border-style: @agate-dropdown-border-style;
+			border-width: @agate-dropdown-border-width;
 		}
 		.transitionContainer {
 			position: absolute;
 			display: inline-block;
 			z-index: 1;
 			pointer-events: none;
-			min-width: 312px;
 			width: 100%;
 
 			&.openTransitionContainer {
@@ -23,17 +22,20 @@
 			}
 		}
 		.dropdownList {
-			background-color: white;
+			background-color: @agate-dropdown-list-bg-color;
 			overflow: hidden;
-			border-bottom-color: gray;
-			border-bottom-style: solid;
-			border-bottom-width: 1px;
+			border-bottom-color: @agate-dropdown-border-color;
+			border-bottom-style: @agate-dropdown-border-style;
+			border-bottom-width: @agate-dropdown-border-width;
 		}
 		.dropdownListWithScroller {
-			height: @agate-item-height * 4;
+			height: @agate-dropdown-list-height;
 			.scroller {
 				height: 100%;
 			}
+		}
+		.selected {
+			color: @agate-dropdown-selected-color;
 		}
 	});
 }

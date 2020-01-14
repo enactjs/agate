@@ -59,7 +59,7 @@ const DropdownBase = kind({
 		 */
 		css: PropTypes.object,
 		/**
-		 * The animation direction of the `palette`.
+		 * The direction where the dropdown list appears.
 		 *
 		 * @type {String}
 		 * @public
@@ -75,13 +75,14 @@ const DropdownBase = kind({
 		 * Called when clicked on the dropdown to open.
 		 *
 		 * @type {Number}
+		 *
 		 */
-
 		open: PropTypes.bool,
 		/*
 		 * Index of the selected item.
 		 *
 		 * @type {Number}
+		 *
 		 */
 		selected: PropTypes.number
 	},
@@ -93,13 +94,13 @@ const DropdownBase = kind({
 
 	styles: {
 		css: componentCss,
-		className: 'Dropdown',
+		className: 'dropdown',
 		publicClassNames: true
 	},
 
 	computed: {
 		className: ({css, selected, styler}) => styler.append(selected && css.selected),
-		transitionContainerClassname: ({css, open, styler}) => styler.join(css.transitionContainer, (open ? css.openTransitionContainer : null)),
+		transitionContainerClassname: ({css, open, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open}),
 		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected}) => {
 			if (isSelectedValid({children, selected})) {
@@ -140,7 +141,7 @@ const DropdownBase = kind({
 							<Group
 								className={css.group}
 								childComponent={Item}
-								itemProps={{size: 'small', className: css.swatch}}
+								itemProps={{size: 'small'}}
 								onSelect={onSelect}
 							>{children || []}</Group>
 						</Scroller>
@@ -154,7 +155,7 @@ const DropdownBase = kind({
 
 
 /**
- * Applies Agate specific behaviors to [ColorPickerBase]{@link agate/Dropdown.DropdownBase}.
+ * Applies Agate specific behaviors to [DropdownBase]{@link agate/Dropdown.DropdownBase}.
  *
  * @hoc
  * @memberof agate/Dropdown
