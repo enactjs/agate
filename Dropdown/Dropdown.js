@@ -50,6 +50,7 @@ const DropdownBase = kind({
 		 * @type {String[]|Array.<{key: (Number|String), children: (String|Component)}>}
 		 */
 		children: PropTypes.array,
+
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
@@ -58,6 +59,7 @@ const DropdownBase = kind({
 		 * @public
 		 */
 		css: PropTypes.object,
+
 		/**
 		 * The direction where the dropdown list appears.
 		 *
@@ -65,12 +67,14 @@ const DropdownBase = kind({
 		 * @public
 		 */
 		direction: PropTypes.string,
+
 		/*
 		 * Called when an item is selected.
 		 *
 		 * @type {Function}
 		 */
 		onSelect: PropTypes.func,
+
 		/*
 		 * Called when clicked on the dropdown to open.
 		 *
@@ -78,6 +82,7 @@ const DropdownBase = kind({
 		 *
 		 */
 		open: PropTypes.bool,
+
 		/*
 		 * Index of the selected item.
 		 *
@@ -99,7 +104,6 @@ const DropdownBase = kind({
 	},
 
 	computed: {
-		className: ({css, selected, styler}) => styler.append(selected && css.selected),
 		transitionContainerClassname: ({css, open, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open}),
 		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected}) => {
