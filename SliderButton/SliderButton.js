@@ -45,6 +45,7 @@ const SliderKnob = kind({
 	},
 	render: ({...rest}) => {
 		delete rest.value;
+		// eslint-disable-next-line enact/prop-types
 		delete rest.tooltipComponent;
 		return (
 			<div
@@ -65,7 +66,9 @@ const SliderProgress = kind({
 		className: 'track'
 	},
 	render: ({children, css, values, ...rest}) => {
+		// eslint-disable-next-line enact/prop-types
 		delete rest.progressAnchor;
+		// eslint-disable-next-line enact/prop-types
 		delete rest.backgroundProgress;
 		return (
 			<Row {...rest} align="center">
