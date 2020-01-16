@@ -104,7 +104,7 @@ const DropdownBase = kind({
 	},
 
 	computed: {
-		transitionContainerClassname: ({css, open, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open}),
+		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'} ),
 		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected}) => {
 			if (isSelectedValid({children, selected})) {

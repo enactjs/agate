@@ -16,9 +16,15 @@
 			z-index: 1;
 			pointer-events: none;
 			width: 100%;
+			visibility: hidden;
 
 			&.openTransitionContainer {
 				pointer-events: inherit;
+				visibility: visible;
+			}
+
+			&.upTransitionContainer {
+				transform: translateY(calc(-100% - @agate-item-height));
 			}
 		}
 		.dropdownList {
