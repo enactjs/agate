@@ -1,3 +1,15 @@
+/**
+ * An Agate-themed Labeled Icon component.
+ *
+ * @example
+ * <LabeledIconButton icon="star">Hello Enact!</LabeledIconButton>
+ *
+ * @module agate/LabeledIconButton
+ * @exports LabeledIconButton
+ * @exports LabeledIconButtonBase
+ * @exports LabeledIconButtonDecorator
+ */
+
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import UiLabeledIcon from '@enact/ui/LabeledIcon';
@@ -27,7 +39,7 @@ const LabeledIconButtonBase = kind({
 		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
+		 * corresponding internal elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *
@@ -62,9 +74,8 @@ const LabeledIconButtonBase = kind({
 		/**
 		 * The component used to render the `icon`.
 		 *
-		 * This will receive the `icon` prop as `children` and should handle it appropriately. This
-		 * prop is ignored in the case of a component being passed into the `icon` prop. It will
-		 * also receive the `flip` and `size` props as set on the component.
+		 * This will receive the `icon` prop as `children` and should handle it appropriately.It
+		 * will also receive the `flip` and `size` props as set on the component.
 		 *
 		 * @type {Component}
 		 */
@@ -89,6 +100,7 @@ const LabeledIconButtonBase = kind({
 		 * @public
 		 */
 		spriteCount: PropTypes.number
+		// TODO: spriteCount prop bleeds!  Is this cruft?
 	},
 
 	styles: {
@@ -137,7 +149,7 @@ const LabeledIconButtonBase = kind({
 const LabeledIconButtonDecorator = ButtonDecorator;
 
 /**
- * A Agate-styled icon button component with a label.
+ * An Agate-styled icon button component with a label.
  *
  * Usage:
  * ```

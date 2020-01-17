@@ -1,5 +1,5 @@
 /**
- * Provides Agate-ez-themed item components and behaviors. Useful for content in lists.
+ * Provides Agate-themed item components and behaviors. Useful for content in lists.
  *
  * @example
  * <Item>Hello Enact!</Item>
@@ -7,6 +7,7 @@
  * @module agate/Item
  * @exports Item
  * @exports ItemBase
+ * @exports ItemDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -79,16 +80,16 @@ const ItemContent = kind({
 });
 
 /**
- * A agate-ez-styled item.
+ * Renders an Agate-styled Item without any behavior.
  *
  * @class ItemBase
- * @memberof agate-ez/Item
+ * @memberof agate/Item
  * @ui
  * @public
  */
 const ItemBase = kind({
 	name: 'Item',
-	propTypes: {
+	propTypes: /** @lends agate/Item.ItemBase.prototype */ {
 		componentRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
 		css: PropTypes.object,
 		label: PropTypes.node,
@@ -99,7 +100,7 @@ const ItemBase = kind({
 	},
 	styles: {
 		css: componentCss,
-		publicClassNames: ['item']
+		publicClassNames: ['item', 'slotAfter', 'slotBefore']
 	},
 	computed: {
 		className: ({selected, styler}) => styler.append({selected})
@@ -128,15 +129,14 @@ const ItemBase = kind({
 });
 
 /**
- * Agate specific item behaviors to apply to `Item`.
+ * Agate specific behaviors to apply to [Item]{@link agate/Item.ItemBase}.
  *
- * @class ItemDecorator
  * @hoc
  * @memberof agate/Item
- * @mixes spotlight.Spottable
- * @mixes ui/Marquee.MarqueeDecorator
- * @mixes agate/Skinnable
- * @ui
+ * @mixes ui/Item.ItemDecorator
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes ui/Marquee.MarqueeController
+ * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const ItemDecorator = compose(
@@ -149,6 +149,16 @@ const ItemDecorator = compose(
 	Skinnable
 );
 
+/**
+ * An item component with Agate behaviors applied.
+ *
+ * @class Item
+ * @memberof agate/Item
+ * @extends agate/Item.ItemBase
+ * @mixes agate/Item.ItemDecorator
+ * @ui
+ * @public
+ */
 const Item = ItemDecorator(ItemBase);
 
 export default Item;

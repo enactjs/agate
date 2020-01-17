@@ -1,6 +1,8 @@
 /**
  * @module agate/GridListImageItem
  * @exports GridListImageItem
+ * @exports GridListImageItemBase
+ * @exports GridListImageItemDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -58,7 +60,7 @@ const GridListImageItemBase = kind({
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
+		 * corresponding internal elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *
@@ -115,9 +117,8 @@ const GridListImageItemDecorator = compose(
 /**
  * @class GridListImageItem
  * @memberof agate/GridListImageItem
- * @extends agate/GridListIamgeItem.GridListImageItemBase
+ * @extends agate/GridListImageItem.GridListImageItemBase
  * @mixes agate/GridListImageItem.GridListImageItemDecorator
- * @see agate/GridListImageItem.GridListImageItemBase
  * @ui
  * @public
  */

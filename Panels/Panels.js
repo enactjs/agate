@@ -17,10 +17,18 @@ import componentCss from './Panels.module.less';
 
 const getControlsId = (id) => id && `${id}-controls`;
 
+/**
+ * Basic Panels component without breadcrumbs or default [arranger]{@link ui/ViewManager.Arranger}
+ *
+ * @class Panels
+ * @memberof agate/Panels
+ * @ui
+ * @public
+ */
 const PanelsBase = kind({
 	name: 'Panels',
 
-	propTypes: {
+	propTypes: /** @lends agate/Panels.Panels.prototype */ {
 		/**
 		 * Function that generates unique identifiers for Panel instances.
 		 *
@@ -81,6 +89,15 @@ const PanelsBase = kind({
 			PropTypes.func,
 			PropTypes.shape({current: PropTypes.any})
 		]),
+
+		/**
+		 * The portion of the screen that this `Panels` instance should cover.
+		 *
+		 * @type {('full'|'partial')}
+		 * @default 'full'
+		 * @public
+		 */
+		cover: PropTypes.oneOf(['full', 'partial']),
 
 		/**
 		 * Duration of the animation (in ms) when transitioning between `Panel` components.
@@ -182,6 +199,7 @@ const PanelsBase = kind({
 	},
 
 	defaultProps: {
+		cover: 'full',
 		duration: 500,
 		index: 0,
 		noAnimation: false,
@@ -214,7 +232,7 @@ const PanelsBase = kind({
 			return updatedChildProps;
 		},
 
-		className: ({controls, noCloseButton, styler}) => styler.append({
+		className: ({controls, cover, noCloseButton, styler}) => styler.append(cover, {
 			'agate-panels-hasControls': (!noCloseButton || !!controls) // If there is a close button or controls were specified
 		}),
 
@@ -246,6 +264,7 @@ const PanelsBase = kind({
 		...rest
 	}) => {
 		delete rest.controlsMeasurements;
+		delete rest.cover;
 		delete rest.onBack;
 
 		const controlsId = getControlsId(id);

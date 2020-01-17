@@ -1,8 +1,5 @@
 /**
- * Provides Agate-themed slider components and behaviors.
- *
- * @example/**
- * Provides Agate-themed progress bar component.
+ * Provides an Agate-themed progress bar component.
  *
  * @example
  * <ProgressBar progress={0.5} backgroundProgress={0.75} />
@@ -21,20 +18,22 @@ import Skinnable from '../Skinnable';
 import componentCss from './ProgressBar.module.less';
 
 /**
- * Renders a agate-styled progress bar.
+ * Renders an Agate-styled progress bar.
  *
- * @class ProgressBarBase
+ * @class ProgressBar
  * @memberof agate/ProgressBar
+ * @extends ui/ProgressBar.ProgressBar
+ * @mixes agate/Skinnable.Skinnable
  * @ui
  * @public
  */
 const ProgressBarBase = kind({
 	name: 'ProgressBar',
 
-	propTypes: /** @lends agate/ProgressBar.ProgressBarBase.prototype */ {
+	propTypes: /** @lends agate/ProgressBar.ProgressBar.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
+		 * corresponding internal elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *
@@ -46,11 +45,9 @@ const ProgressBarBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Sets the orientation of the slider.
+		 * Sets the orientation of the progress bar.
 		 *
-		 * * Values: `'horizontal'`, `'vertical'`
-		 *
-		 * @type {String}
+		 * @type {('horizontal'|'vertical')}
 		 * @default 'horizontal'
 		 * @public
 		 */
@@ -66,7 +63,7 @@ const ProgressBarBase = kind({
 		progress: PropTypes.number,
 
 		/**
-		 * The size of the progress bar
+		 * The size of the progress bar.
 		 *
 		 * @type {('small'|'large')}
 		 * @default 'large'
@@ -102,6 +99,7 @@ const ProgressBarBase = kind({
 	}
 });
 
+// Not documenting as base is not very useful to developers.
 const ProgressBar = Skinnable(ProgressBarBase);
 
 export default ProgressBar;

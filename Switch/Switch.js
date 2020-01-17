@@ -1,5 +1,5 @@
 /**
- * Provides a Agate-themed pill-shaped toggle switch component.
+ * Provides an Agate-themed toggle switch component.
  *
  * @example
  * <Switch />
@@ -12,29 +12,25 @@
 import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Icon from '../Icon';
-
-import Toggleable from '@enact/ui/Toggleable';
-import {ToggleIconBase} from '@enact/ui/ToggleIcon';
-import Skinnable from '../Skinnable';
-
-import compose from 'ramda/src/compose';
+import {ToggleIconBase} from '../internal/ToggleIcon';
 
 import componentCss from './Switch.module.less';
 
 /**
  * Renders the base level DOM structure of the component.
  *
- * @class Switch
+ * @class SwitchBase
  * @memberof agate/Switch
- * @extends agate/ToggleIcon.ToggleIcon
+ * @extends agate/internal/ToggleIcon
  * @ui
  * @public
  */
 const SwitchBase = kind({
 	name: 'Switch',
 
-	propTypes: /** @lends agate/Switch.Switch.prototype */ {
+	propTypes: /** @lends agate/Switch.SwitchBase.prototype */ {
 		children: PropTypes.string,
 		css: PropTypes.object,
 
@@ -71,7 +67,7 @@ const SwitchBase = kind({
 		}
 	},
 
-	render: ({children, css, ...rest}) => {
+	render: ({css, ...rest}) => {
 		delete rest.noAnimation;
 
 		return (
@@ -79,23 +75,13 @@ const SwitchBase = kind({
 				{...rest}
 				css={css}
 				iconComponent={Icon}
-			>
-				{children}
-			</ToggleIconBase>
+			/>
 		);
 	}
 });
 
-const SwitchDecorator = compose(
-	Toggleable({toggleProp: 'onClick'}),
-	Skinnable({prop: 'skin'})
-);
-
-const Switch = SwitchDecorator(SwitchBase);
-
-export default SwitchDecorator(SwitchBase);
+export default SwitchBase;
 export {
-	Switch,
-	SwitchBase,
-	SwitchDecorator
+	SwitchBase as Switch,
+	SwitchBase
 };

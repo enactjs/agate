@@ -28,7 +28,7 @@ const defaultConfig = {
 	emitSpotlightEvents: null
 };
 
-// Adds moonstone-specific slider behaviors
+// Adds agate-specific slider behaviors
 // * aria-valuetext handling
 //   * use aria-valuetext when set
 //   * defaults to current value

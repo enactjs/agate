@@ -12,6 +12,16 @@
 @agate-button-smallest-height: 30px;
 @agate-button-smallest-font-size: 18px;
 
+// Checkbox
+// ---------------------------------------
+@agate-checkbox-border-radius: 6px;
+@agate-checkbox-icon-font-size: 49px;
+
+// CheckboxItem
+// ---------------------------------------
+@agate-checkboxitem-icon-margin: 9px;
+@agate-checkboxitem-font-size: 30px;
+
 // ColorPicker
 // ---------------------------------------
 @agate-colorpicker-palette-border-radius: @agate-button-height;
@@ -36,14 +46,13 @@
 @agate-heading-spacing-large: 0;
 @agate-heading-spacing-medium: 0;
 @agate-heading-spacing-small: 0;
-@agate-heading-title-padding: @agate-heading-padding 50px;
+@agate-heading-title-padding: @agate-heading-padding 25px;
 @agate-heading-title-decoration-height: 28px;
 @agate-heading-title-decoration-width: auto;
-@agate-heading-title-decoration-positions: auto 0 0.5em 100px;
+@agate-heading-title-decoration-positions: auto -50px 0.5em 50px;
 @agate-heading-title-decoration-border-radius: 3px;
 @agate-heading-title-decoration-opacity: 0.8;
 @agate-heading-title-decoration-transform: skew(-10deg);
-@agate-heading-text-transform: uppercase;
 
 // Icon Sizes
 // ---------------------------------------
@@ -65,6 +74,7 @@
 @agate-panel-v-padding: @agate-app-keepout;
 // @agate-panel-h-padding: (@agate-app-keepout - @agate-spotlight-outset);
 @agate-panel-h-padding: extract(@agate-panels-panel-padding, 2);
+@agate-panels-partial-width: 890px;
 @agate-panels-breadcrumb-height: 100%;
 @agate-panels-breadcrumb-width: 105px;
 @agate-panels-controls-top: (extract(@agate-panels-panel-padding, 1) + 41px);
@@ -107,10 +117,14 @@
 
 // Slider
 // ---------------------------------------
+@agate-slider-knob-height: 45px;
 @agate-slider-knob-border-radius: (@agate-slider-knob-height / 2);
-@agate-slider-knob-resting-state-scale: 0.8;
-@agate-slider-knob-transform: @agate-translate-center scale(0.8);
-@agate-slider-border-radius: 0;
+@agate-slider-knob-resting-state-scale: 0.77;
+// Additional offset (-12% at min position, 0% halfway, and +12% at max position) is needed when scaled down to 0.77 so that the knob stays within the progressbar
+@agate-slider-knob-transform: translate(calc((var(--ui-slider-proportion-end-knob) * -100%) + (-12% + (var(--ui-slider-proportion-end-knob) * 24%))), -50%) scale(@agate-slider-knob-resting-state-scale);
+// Additional offset (-5px at min position, 0px halfway, and +5px at max position) is needed when focused and scaled back to 1
+@agate-slider-knob-active-transform: translate(calc((var(--ui-slider-proportion-end-knob) * -100%) + (-5px + (var(--ui-slider-proportion-end-knob) * 10px))), -50%) scale(1);
+@agate-slider-border-radius: 3px;
 @agate-slider-horizontal-padding: ((@agate-slider-knob-height - @agate-slider-track-height) / 2) (@agate-slider-knob-height / 2);
 @agate-slider-vertical-margin: 0;
 @agate-slider-vertical-padding: (@agate-slider-knob-height / 2) ((@agate-slider-knob-height - @agate-slider-track-height) / 2);

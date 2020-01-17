@@ -35,6 +35,7 @@ const defaultConfig = {
  * available from an upstream shared state.
  *
  * @hoc
+ * @memberof agate/Panels
  * @private
  */
 const SharedStateDecorator = hoc(defaultConfig, (config, Wrapped) => {
@@ -45,7 +46,7 @@ const SharedStateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 		static contextType = SharedState
 
-		static propTypes = {
+		static propTypes = /** @lends agate/Panels.SharedStateDecorator.prototype */ {
 			/**
 			 * Prevents the component from setting or restoring any framework shared state.
 			 *

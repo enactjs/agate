@@ -30,7 +30,7 @@ const placeholder =
 	'4NCg==';
 
 /**
- * A agate-styled image component without any behavior
+ * An Agate-styled image component without any behavior
  *
  * @class ImageBase
  * @memberof agate/Image
@@ -44,7 +44,7 @@ const ImageBase = kind({
 	propTypes: /** @lends agate/Image.ImageBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
+		 * corresponding internal elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *
@@ -86,7 +86,7 @@ const ImageBase = kind({
 });
 
 
-// This induces a render when there is a screen size change that has a corosponding image src value
+// This induces a render when there is a screen size change that has a corresponding image src value
 // associated with the new screen size. The render is kicked off by remembering the new image src.
 //
 // This hoc could (should) be rewritten at a later time to use a smarter context API and callbacks,
@@ -151,7 +151,7 @@ const ImageDecorator = compose(
 );
 
 /**
- * A agate-styled image component
+ * An Agate-styled image component
  *
  * ```
  * <Image
@@ -171,7 +171,6 @@ const ImageDecorator = compose(
  * @public
  */
 const Image = ImageDecorator(ImageBase);
-
 
 export default Image;
 export {
