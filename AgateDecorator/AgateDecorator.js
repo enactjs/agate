@@ -17,6 +17,7 @@ import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 import SpotlightRootDecorator from '@enact/spotlight/SpotlightRootDecorator';
 import convert from 'color-convert';
 
+import Chronometer from '../Chronometer';
 import Skinnable from '../Skinnable';
 
 import screenTypes from './screenTypes.json';
@@ -150,13 +151,18 @@ const CustomizableSkinStyle = kind({
 	},
 
 	computed: {
-		cssRules: ({className, accent, highlight}) => {
+		cssRules: ({className, accent, date, highlight}) => {
 			const accentObj = convert.hex.hsl(accent);
 			const highlightObj = convert.hex.hsl(highlight);
 
+			const secPercent = date.getSeconds() / 60;
+			const hueSec = ((secPercent * 255) + accentObj[0]) % 255;
+
+			const updatedAccent = '#' + convert.hsl.hex(hueSec, accentObj[1], accentObj[2]);
+
 			const style = {
-				'--agate-accent-color': accent,
-				'--agate-accent-h': accentObj[0],
+				'--agate-accent-color': updatedAccent,
+				'--agate-accent-h': hueSec,
 				'--agate-accent-s': accentObj[1] + '%',
 				'--agate-accent-l': accentObj[2] + '%',
 				'--agate-highlight-color': highlight,
@@ -235,7 +241,7 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		}
 
 		render () {
-			const {accent, className, highlight, ...rest} = this.props;
+			const {accent, className, date, highlight, ...rest} = this.props;
 			const customizableSkinClassName = 'agate-customized-skin';
 
 			const allClassNames = classnames(
@@ -248,14 +254,14 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 			return (
 				<React.Fragment>
-					{customSkin ? <CustomizableSkinStyle className={customizableSkinClassName} accent={accent} highlight={highlight} /> : null}
+					{customSkin ? <CustomizableSkinStyle className={customizableSkinClassName} date={date} accent={accent} highlight={highlight} /> : null}
 					<App {...rest} className={allClassNames} />
 				</React.Fragment>
 			);
 		}
 	};
 
-	return Decorator;
+	return Chronometer({tickFrequency: 'second'}, Decorator);
 });
 
 export default AgateDecorator;
