@@ -134,6 +134,15 @@ const CustomizableSkinStyle = kind({
 		accent: PropTypes.string,
 
 		/**
+		 * A date object to gather temporal information for time-based skins
+		 *
+		 * @type {Date}
+		 * @default 'October 29, 2019'
+		 * @public
+		 */
+		date: PropTypes.object,
+
+		/**
 		 * A custom highlight color, as a hex string.
 		 *
 		 * @memberof agate/AgateDecorator.AgateDecorator.prototype
@@ -147,6 +156,7 @@ const CustomizableSkinStyle = kind({
 	// TODO: Consider allowing `null` and dropping this override completely
 	defaultProps: {
 		accent: '#8b7efe',
+		date: new Date('October 29, 2019'),
 		highlight: '#c6c0fe'
 	},
 
@@ -237,6 +247,7 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 		static propTypes = {
 			accent: PropTypes.string,
+			date: PropTypes.object,
 			highlight: PropTypes.string
 		}
 
