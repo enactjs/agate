@@ -69,6 +69,14 @@ const DropdownBase = kind({
 		 */
 		direction: PropTypes.string,
 
+		/**
+		 * Disables Dropdown and becomes non-interactive.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
 		/*
 		 * Called when an item is selected.
 		 *
@@ -94,12 +102,14 @@ const DropdownBase = kind({
 		selected: PropTypes.number,
 
 		/**
-		 * Disables Dropdown and becomes non-interactive.
+		 * The primary title text of Dropdown.
+		 * The title will be replaced if an item is selected.
 		 *
-		 * @type {Boolean}
+		 * @type {String}
+		 * @required
 		 * @public
 		 */
-		disabled: PropTypes.bool
+		title: PropTypes.string
 	},
 
 	defaultProps: {
@@ -135,10 +145,12 @@ const DropdownBase = kind({
 				case 'down':
 					return 'up';
 				default:
-				   return 'down';
+					return 'down';
 			}
 		},
-		hasChildren: ({children}) => { children.length > 0 }
+		hasChildren: ({children}) => {
+			return children.length > 0;
+		}
 	},
 
 	render: ({children, css, dropdownListClassname, disabled, hasChildren, onSelect, open, selected, transitionContainerClassname, transitionDirection, title, ...rest}) => {
