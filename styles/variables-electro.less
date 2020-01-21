@@ -121,15 +121,14 @@
 // ---------------------------------------
 @agate-slider-knob-border-radius: @electro-border-radius;
 @agate-slider-knob-resting-state-scale: 0.8;
-@agate-slider-knob-transform: @agate-translate-center scale(@agate-slider-knob-resting-state-scale);
+@agate-slider-knob-transform: @agate-translate-center scale(@agate-slider-knob-resting-state-scale) skewX(@electro-skew);
 @agate-slider-knob-width: 30px;
 @agate-slider-border-radius: @electro-border-radius;
-@agate-slider-horizontal-margin: 3px 24px;
+@agate-slider-horizontal-margin: 3px 21px;
 @agate-slider-horizontal-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) ((@agate-slider-knob-width / 2) + 9);
-@agate-slider-vertical-margin: 24px 3px;
+@agate-slider-vertical-margin: 0 3px;
 @agate-slider-vertical-padding: (@agate-slider-height / 2) ((@agate-slider-height - @agate-slider-track-height) / 2);
 @agate-slider-bg-transform: skewX(@electro-skew);
-@agate-slider-track-transform: skewX(@electro-negate-skew);
 
 // IncrementSlider
 // ---------------------------------------
