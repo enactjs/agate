@@ -120,8 +120,8 @@
 @agate-slider-height: @agate-item-height;
 @agate-slider-width: @agate-slider-knob-height;
 @agate-slider-knob-height: 45px;
-@agate-slider-horizontal-anchorpoint-width: @agate-slider-knob-height;
-@agate-slider-vertical-anchorpoint-height: @agate-slider-knob-height;
+@agate-slider-horizontal-anchorpoint-width: (@agate-slider-knob-height * @agate-slider-knob-resting-state-scale - 1px); // just a touch under the resting state scale, to avoid subpixel rendering overflow
+@agate-slider-vertical-anchorpoint-height: (@agate-slider-knob-height * @agate-slider-knob-resting-state-scale - 1px); // just a touch under the resting state scale, to avoid subpixel rendering overflow
 @agate-slider-knob-border-radius: (@agate-slider-knob-height / 2);
 @agate-slider-knob-resting-state-scale: 0.9;
 @agate-slider-knob-transform: @agate-translate-center scale(@agate-slider-knob-resting-state-scale);
