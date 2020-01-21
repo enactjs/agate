@@ -11,15 +11,26 @@
 		width: @agate-slider-width;
 		box-sizing: border-box;
 		direction: ltr;
-		background-color: @agate-slider-bg-color;
-		background-image: @agate-slider-bg-image;
-		border-radius: @agate-slider-border-radius;
-		transform: @agate-slider-bg-transform;
+		background-color: transparent;
+		background-image: none;
+
+		&::before {
+			content: "";
+			position: absolute;
+			.position(0);
+			background-color: @agate-slider-bg-color;
+			background-image: @agate-slider-bg-image;
+			border-radius: @agate-slider-border-radius;
+			transform: @agate-slider-bg-transform;
+		}
 
 		.progressBar {
 			position: relative;
 			height: 100%;
 			width: 100%;
+		}
+
+		.bar {
 			background-color: @agate-slider-track-bg-color;
 			background-image: @agate-slider-track-bg-image;
 			border-radius: @agate-slider-border-radius;
@@ -53,6 +64,8 @@
 				background-color: @agate-slider-knob-bg-color;
 				background-image: @agate-slider-knob-bg-image;
 				box-shadow: @agate-slider-knob-shadow;
+				top: 50%;
+				left: 50%;
 			}
 		}
 
@@ -76,6 +89,11 @@
 			margin: @agate-slider-horizontal-margin;
 			padding: @agate-slider-horizontal-padding;
 
+			.bar {
+				left: ((@agate-slider-horizontal-anchorpoint-width / 2) * -1);
+				width: ~"calc(100% + " @agate-slider-horizontal-anchorpoint-width ~")";
+			}
+
 			.progressBar,
 			.fill,
 			.load {
@@ -93,6 +111,11 @@
 			min-height: 120px;
 			display: inline-block;
 			vertical-align: top;
+
+			.bar {
+				bottom: ((@agate-slider-vertical-anchorpoint-height / 2) * -1);
+				height: ~"calc(100% + " @agate-slider-vertical-anchorpoint-height ~")";
+			}
 
 			.progressBar,
 			.fill,
@@ -126,10 +149,15 @@
 			}
 
 			.focus({
-				background-color: @agate-slider-focus-bg-color;
-				background-image: @agate-slider-focus-bg-image;
+				background-color: transparent;
+				background-image: none;
 
-				.progressBar {
+				&::before {
+					background-color: @agate-slider-focus-bg-color;
+					background-image: @agate-slider-focus-bg-image;
+				}
+
+				.bar {
 					background-color: @agate-slider-track-focus-bg-color;
 					background-image: @agate-slider-track-focus-bg-image;
 				}
