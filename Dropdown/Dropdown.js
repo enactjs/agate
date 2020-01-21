@@ -43,7 +43,7 @@ const isSelectedValid = ({children, selected}) => Array.isArray(children) && chi
 const DropdownBase = kind({
 	name: 'Dropdown',
 
-	propTypes: /** @lends agate/Dropdown.Dropdown.prototype */ {
+	propTypes: /** @lends agate/Dropdown.DropdownBase.prototype */ {
 		/*
 		 * The selections for Dropdown
 		 *
@@ -56,14 +56,15 @@ const DropdownBase = kind({
 		 * corresponding internal elements and states of this component.
 		 *
 		 * @type {Object}
-		 * @public
+		 * @private
 		 */
 		css: PropTypes.object,
 
 		/**
 		 * The direction where the dropdown list appears.
 		 *
-		 * @type {String}
+		 * @type {('left'|'right'|'down'|'up')}
+		 * @default 'down'
 		 * @public
 		 */
 		direction: PropTypes.string,
@@ -78,7 +79,8 @@ const DropdownBase = kind({
 		/*
 		 * Called when clicked on the dropdown to open.
 		 *
-		 * @type {Number}
+		 * @type {Boolean}
+		 * @default false
 		 *
 		 */
 		open: PropTypes.bool,
@@ -89,7 +91,15 @@ const DropdownBase = kind({
 		 * @type {Number}
 		 *
 		 */
-		selected: PropTypes.number
+		selected: PropTypes.number,
+
+		/**
+		 * Disables Dropdown and becomes non-interactive.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool
 	},
 
 	defaultProps: {
@@ -106,13 +116,13 @@ const DropdownBase = kind({
 	computed: {
 		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'} ),
 		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
-		title: ({children, selected}) => {
+		title: ({children, selected, title}) => {
 			if (isSelectedValid({children, selected})) {
 				const child = children[selected];
 				return typeof child === 'object' ? child.children : child;
 			}
 
-			return children[0];
+			return title;
 		},
 		transitionDirection: ({direction}) => {
 			switch (direction) {
@@ -124,14 +134,17 @@ const DropdownBase = kind({
 					return 'down';
 				case 'down':
 					return 'up';
+				default:
+				   return 'down';
 			}
-		}
+		},
+		hasChildren: ({children}) => { children.length > 0 }
 	},
 
-	render: ({children, css, dropdownListClassname, onSelect, open, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+	render: ({children, css, dropdownListClassname, disabled, hasChildren, onSelect, open, selected, transitionContainerClassname, transitionDirection, title, ...rest}) => {
 		return (
 			<div {...rest}>
-				<Item {...rest} css={css}>
+				<Item {...rest} css={css} disabled={hasChildren ? disabled : true}>
 					<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
 					{title}
 				</Item>
@@ -147,6 +160,7 @@ const DropdownBase = kind({
 								childComponent={Item}
 								itemProps={{size: 'small'}}
 								onSelect={onSelect}
+								selected={selected}
 							>{children || []}</Group>
 						</Scroller>
 					</ContainerDiv>
@@ -156,14 +170,12 @@ const DropdownBase = kind({
 	}
 });
 
-
-
 /**
  * Applies Agate specific behaviors to [DropdownBase]{@link agate/Dropdown.DropdownBase}.
  *
  * @hoc
  * @memberof agate/Dropdown
- * @mixes ui/Toggleable.Toggleable
+ * @mixes agate/Dropdown.DropdownDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
