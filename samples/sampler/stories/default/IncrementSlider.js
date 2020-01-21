@@ -17,7 +17,6 @@ storiesOf('Agate', module)
 		() => (
 			<IncrementSlider
 				active={boolean('active', Config)}
-				backgroundProgress={number('backgroundProgress', Config, {range: true, min: 0, max: 1, step: 0.01})}
 				decrementIcon={select('decrementIcon', decrementIcons, Config)}
 				disabled={boolean('disabled', Config)}
 				focused={boolean('focused', Config)}
