@@ -1,0 +1,35 @@
+{
+  "name": "agate-sampler",
+  "version": "1.0.0",
+  "description": "Component samples for Agate",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "lint": "enact lint --strict",
+    "test": "echo \"No test suite\" && exit 0",
+    "pack": "build-storybook -c .storybook -o dist",
+    "pack-qa": "build-storybook -c .qa-storybook -o dist",
+    "serve": "start-storybook -p 8080 -c .storybook --ci"
+  },
+  "license": "Apache-2.0",
+  "eslintConfig": {
+    "extends": "enact/strict"
+  },
+  "dependencies": {
+    "@enact/core": "^3.2.5",
+    "@enact/i18n": "^3.2.5",
+    "@enact/ui": "^3.2.5",
+    "ilib": "^14.4.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@enact/storybook-utils": "^1.0.0",
+    "@storybook/addons": "5.3.5",
+    "@storybook/react": "5.3.5",
+    "@storybook/theming": "5.3.5",
+    "babel-loader": "^8.0.6",
+    "core-js": "^3.1.4"
+  }
+}
