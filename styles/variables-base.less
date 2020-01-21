@@ -346,6 +346,10 @@
 
 // Slider
 // ---------------------------------------
+@agate-slider-horizontal-anchorpoint-height: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
+@agate-slider-horizontal-anchorpoint-width: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
+@agate-slider-vertical-anchorpoint-height: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
+@agate-slider-vertical-anchorpoint-width: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
 @agate-slider-knob-height: @agate-slider-height;
 @agate-slider-knob-active-transform: @agate-slider-knob-transform;
 @agate-slider-knob-border-radius: @agate-slider-knob-height;
@@ -394,8 +398,13 @@
 // SliderButton
 // ---------------------------------------
 @agate-sliderbutton-border-radius: @agate-border-radius;
+@agate-sliderbutton-border-width: 0;
 @agate-sliderbutton-bg-transform: @agate-slider-bg-transform;
+@agate-sliderbutton-bg-clip: initial;
 @agate-sliderbutton-client-transform: @agate-slider-track-transform;
+@agate-sliderbutton-knob-border-radius: @agate-sliderbutton-border-radius;
+@agate-sliderbutton-knob-border-width: 0;
+@agate-sliderbutton-knob-transform: none;
 @agate-sliderbutton-margin: 3px 24px;
 
 // Spinner
