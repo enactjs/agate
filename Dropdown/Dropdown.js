@@ -1,10 +1,9 @@
 /**
- * Agate styled Header.
+ * Agate styled Dropdown.
  *
  * @example
  * <Dropdown
  * 		defaultSelected={2}
- *		inline
  *		title="Dropdown"
  * >
  *   {['Option 1', 'Option 2', 'Option 3', 'Option 4']}
@@ -12,6 +11,8 @@
  *
  * @module agate/Dropdown
  * @exports Dropdown
+ * @exports DropdownBase
+ * @exports DropdownDecorator
  */
 
 import React from 'react';
