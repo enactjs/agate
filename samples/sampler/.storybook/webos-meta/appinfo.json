@@ -1,6 +1,6 @@
 {
-	"id": "com.webos.app.agatesampler",
-	"version": "1.0.0-alpha.0",
+	"id": "com.webos.app.enactagatesampler",
+	"version": "1.0.0-alpha.9",
 	"vendor": "LGE-SVL",
 	"type": "web",
 	"main": "index.html",
