@@ -1,6 +1,6 @@
 'use strict';
-const Page = require('enact-ui-tests/test/Page.js');
-const {getText, hasClass} = require('enact-ui-tests/test/utils');
+const Page = require('@enact/ui-test-utils/test/Page.js');
+const {getText, hasClass} = require('@enact/ui-test-utils/test/utils');
 
 class AgateToggleButtonInterface {
 	constructor (id) {

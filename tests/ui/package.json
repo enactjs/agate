@@ -1,0 +1,14 @@
+{
+  "name": "ui-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": "wdio wdio.conf.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@enact/ui-test-utils": "github:enyojs/enact-ui-tests#feature/ui-lib-migration"
+  }
+}

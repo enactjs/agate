@@ -8,7 +8,6 @@
     "clean": "enact clean",
     "lint": "enact lint --strict",
     "test": "enact test",
-    "test-ui": "wdio tests/ui/wdio.conf.js",
     "test-watch": "enact test --watch",
     "transpile": "enact transpile"
   },
@@ -47,7 +46,7 @@
     "ilib": "^14.4.0 || ^14.4.0-webostv1"
   },
   "devDependencies": {
-    "enact-ui-tests": "github:enyojs/enact-ui-tests",
+    "@enact/ui-test-utils": "github:enyojs/enact-ui-tests",
     "ilib": "^14.4.0"
   }
 }
