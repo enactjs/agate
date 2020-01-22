@@ -44,7 +44,7 @@ const DropdownBase = kind({
 	name: 'Dropdown',
 
 	propTypes: /** @lends agate/Dropdown.DropdownBase.prototype */ {
-		/*
+		/**
 		 * The selections for Dropdown
 		 *
 		 * @type {String[]|Array.<{key: (Number|String), children: (String|Component)}>}
@@ -67,7 +67,7 @@ const DropdownBase = kind({
 		 * @default 'down'
 		 * @public
 		 */
-		direction: PropTypes.string,
+		direction: PropTypes.oneOf(['down', 'left', 'right', 'up']),
 
 		/**
 		 * Disables Dropdown and becomes non-interactive.
@@ -77,36 +77,37 @@ const DropdownBase = kind({
 		 */
 		disabled: PropTypes.bool,
 
-		/*
+		/**
 		 * Called when an item is selected.
 		 *
 		 * @type {Function}
+		 * @public
 		 */
 		onSelect: PropTypes.func,
 
-		/*
-		 * Called when clicked on the dropdown to open.
+		/**
+		 * Displays the items.
 		 *
 		 * @type {Boolean}
 		 * @default false
-		 *
+		 * @public
 		 */
 		open: PropTypes.bool,
 
-		/*
+		/**
 		 * Index of the selected item.
 		 *
 		 * @type {Number}
-		 *
+		 * @public
 		 */
 		selected: PropTypes.number,
 
 		/**
 		 * The primary title text of Dropdown.
-		 * The title will be replaced if an item is selected.
+		 *
+		 * The title will be replaced with the selected item, if set.
 		 *
 		 * @type {String}
-		 * @required
 		 * @public
 		 */
 		title: PropTypes.string
@@ -143,9 +144,8 @@ const DropdownBase = kind({
 				case 'up':
 					return 'down';
 				case 'down':
-					return 'up';
 				default:
-					return 'down';
+					return 'up';
 			}
 		},
 		hasChildren: ({children}) => {
@@ -197,8 +197,6 @@ const DropdownDecorator = compose(
 	Skinnable
 );
 
-
-
 /**
  * A Agate Dropdown component.
  *
@@ -210,11 +208,11 @@ const DropdownDecorator = compose(
  * @class Dropdown
  * @memberof agate/Dropdown
  * @extends agate/Dropdown.DropdownBase
+ * @mixes agate/Dropdown.DropdownDecorator
  * @ui
  * @public
  */
 const Dropdown = DropdownDecorator(DropdownBase);
-
 
 export default Dropdown;
 export {
