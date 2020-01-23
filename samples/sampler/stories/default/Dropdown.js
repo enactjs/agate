@@ -1,10 +1,10 @@
-import Dropdown, {DropdownBase} from '@enact/agate/Dropdown';
-import React from 'react';
-import {storiesOf} from '@storybook/react';
-import {action} from '@storybook/addon-actions';
-
-import {boolean, number, select, text} from  '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
+import {boolean, number, select, text} from  '@enact/storybook-utils/addons/knobs';
+import {action} from '@storybook/addon-actions';
+import {storiesOf} from '@storybook/react';
+import React from 'react';
+
+import Dropdown, {DropdownBase} from '../../../../Dropdown';
 
 const Config = mergeComponentMetadata('Dropdown', Dropdown, DropdownBase);
 Dropdown.displayName = 'Dropdown';

@@ -15,19 +15,21 @@
  * @exports DropdownDecorator
  */
 
-import React from 'react';
 import kind from '@enact/core/kind';
+import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
-import Icon from '@enact/agate/Icon';
-import Item from '@enact/agate/Item';
 import Toggleable from '@enact/ui/Toggleable';
 import Transition from '@enact/ui/Transition';
+import Scroller from '@enact/ui/Scroller';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
+import React from 'react';
+
+import Icon from '../Icon';
+import Item from '../Item';
 import Skinnable from '../Skinnable';
-import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
-import Scroller from '@enact/ui/Scroller';
+
 import componentCss from './Dropdown.module.less';
 
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
