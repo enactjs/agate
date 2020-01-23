@@ -43,7 +43,7 @@ import componentCss from './CheckboxItem.module.less';
  *
  * @class CheckboxItem
  * @memberof agate/CheckboxItem
- * @extends agate/ToggleItem.ToggleItem
+ * @extends agate/Item.Item
  * @omit iconComponent
  * @ui
  * @public

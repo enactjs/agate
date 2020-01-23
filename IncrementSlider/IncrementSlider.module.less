@@ -31,7 +31,10 @@
 			.slider {
 				flex-grow: 1;
 				margin: @agate-incrementslider-horizontal-slider-margin;
-				border-radius: @agate-incrementslider-border-radius;
+
+				&::before {
+					border-radius: @agate-incrementslider-border-radius;
+				}
 			}
 		}
 
@@ -55,7 +58,10 @@
 				order: 2;
 				margin: @agate-incrementslider-vertical-slider-margin;
 				padding: @agate-incrementslider-vertical-slider-padding;
-				border-radius: @agate-incrementslider-border-radius;
+
+				&::before {
+					border-radius: @agate-incrementslider-border-radius;
+				}
 			}
 
 			.incrementButton {

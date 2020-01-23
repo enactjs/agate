@@ -140,6 +140,12 @@
 @agate-datetimepicker-label-transform: none;
 @agate-datetimepicker-cell-transform: none;
 
+// Dropdown
+// ---------------------------------------
+@agate-dropdown-border-style: solid;
+@agate-dropdown-border-width: 1px;
+@agate-dropdown-list-height:  @agate-item-height * 4;
+
 // Drawer
 // ---------------------------------------
 @agate-drawer-border-radius: @agate-popup-border-radius;
@@ -340,6 +346,10 @@
 
 // Slider
 // ---------------------------------------
+@agate-slider-horizontal-anchorpoint-height: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
+@agate-slider-horizontal-anchorpoint-width: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
+@agate-slider-vertical-anchorpoint-height: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
+@agate-slider-vertical-anchorpoint-width: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
 @agate-slider-knob-height: @agate-slider-height;
 @agate-slider-knob-active-transform: @agate-slider-knob-transform;
 @agate-slider-knob-border-radius: @agate-slider-knob-height;
