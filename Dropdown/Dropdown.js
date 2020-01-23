@@ -163,7 +163,7 @@ const DropdownBase = kind({
 				</Item>
 				<Transition
 					className={transitionContainerClassname}
-					visible={open}
+					visible={open && !disabled}
 					direction={transitionDirection}
 				>
 					<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
