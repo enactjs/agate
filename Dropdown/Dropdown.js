@@ -199,7 +199,7 @@ const DropdownDecorator = compose(
 );
 
 /**
- * A Agate Dropdown component.
+ * An Agate Dropdown component.
  *
  * By default, `Dropdown` maintains the state of its `selected` property. Supply the
  * `defaultSelected` property to control its initial value. If you wish to directly control updates

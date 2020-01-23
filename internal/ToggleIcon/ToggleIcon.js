@@ -8,6 +8,7 @@
  * @exports ToggleIcon
  * @exports ToggleIconBase
  * @exports ToggleIconDecorator
+ * @private
  */
 
 import kind from '@enact/core/kind';
