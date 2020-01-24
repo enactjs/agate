@@ -3,7 +3,7 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import RadioItem from '../../../../RadioItem';
+import RadioItem from '@enact/agate/RadioItem';
 
 import iconNames from './icons';
 

@@ -4,7 +4,7 @@ import UiProgressBar from '@enact/ui/ProgressBar';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import ProgressBar, {ProgressBarBase} from '../../../../ProgressBar';
+import ProgressBar, {ProgressBarBase} from '@enact/agate/ProgressBar';
 
 ProgressBar.displayName = 'ProgressBar';
 const Config = mergeComponentMetadata('ProgressBar', UiProgressBar, ProgressBarBase, ProgressBar);

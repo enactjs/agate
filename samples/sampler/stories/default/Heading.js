@@ -3,7 +3,7 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Heading, {HeadingBase} from '../../../../Heading';
+import Heading, {HeadingBase} from '@enact/agate/Heading';
 
 Heading.displayName = 'Heading';
 const Config = mergeComponentMetadata('Heading', Heading, HeadingBase);

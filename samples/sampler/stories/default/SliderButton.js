@@ -4,8 +4,8 @@ import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import SliderButton, {SliderButtonBase} from '../../../../SliderButton';
-import {icons} from '../../../../Icon';
+import SliderButton, {SliderButtonBase} from '@enact/agate/SliderButton';
+import {icons} from '@enact/agate/Icon';
 
 SliderButton.displayName = 'SliderButton';
 const Config = mergeComponentMetadata('SliderButton', SliderButtonBase, SliderButton);

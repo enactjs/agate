@@ -5,7 +5,7 @@ import icons from './icons';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Input, {InputBase} from '../../../../Input';
+import Input, {InputBase} from '@enact/agate/Input';
 
 const iconNames = ['', ...icons];
 

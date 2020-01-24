@@ -1,10 +1,10 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Heading from '../../../../Heading';
-import Icon from '../../../../Icon';
-import Item from '../../../../Item';
-import Scroller from '../../../../Scroller';
+import Heading from '@enact/agate/Heading';
+import Icon from '@enact/agate/Icon';
+import Item from '@enact/agate/Item';
+import Scroller from '@enact/agate/Scroller';
 
 Item.displayName = 'Item';
 

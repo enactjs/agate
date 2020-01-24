@@ -4,7 +4,7 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import CheckboxItem from '../../../../CheckboxItem';
+import CheckboxItem from '@enact/agate/CheckboxItem';
 
 CheckboxItem.displayName = 'CheckboxItem';
 const Config = mergeComponentMetadata('CheckboxItem', CheckboxItem);

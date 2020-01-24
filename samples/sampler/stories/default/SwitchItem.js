@@ -3,7 +3,7 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import SwitchItem from '../../../../SwitchItem';
+import SwitchItem from '@enact/agate/SwitchItem';
 
 import iconNames from './icons';
 

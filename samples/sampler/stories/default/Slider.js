@@ -4,7 +4,7 @@ import {boolean, select, number} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Slider, {SliderBase} from '../../../../Slider';
+import Slider, {SliderBase} from '@enact/agate/Slider';
 
 Slider.displayName = 'Slider';
 const Config = mergeComponentMetadata('Slider', SliderBase, Slider);

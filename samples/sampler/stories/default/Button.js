@@ -5,7 +5,7 @@ import UiButton from '@enact/ui/Button';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Button, {ButtonBase} from '../../../../Button';
+import Button, {ButtonBase} from '@enact/agate/Button';
 
 import icons from './icons';
 

@@ -3,8 +3,8 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Button from '../../../../Button';
-import {Header, HeaderBase} from '../../../../Header';
+import Button from '@enact/agate/Button';
+import {Header, HeaderBase} from '@enact/agate/Header';
 
 Header.displayName = 'Header';
 const Config = mergeComponentMetadata('Header', HeaderBase, Header);

@@ -7,11 +7,11 @@ import {color} from '@storybook/addon-knobs';
 import {Row, Column, Cell} from '@enact/ui/Layout';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 
-import AgateDecorator from '../../../../AgateDecorator';
-import Heading from '../../../../Heading';
-import {Panels, Panel} from '../../../../Panels';
-import Skinnable from '../../../../Skinnable';
-import Scroller from '../../../../Scroller';
+import AgateDecorator from '@enact/agate/AgateDecorator';
+import Heading from '@enact/agate/Heading';
+import {Panels, Panel} from '@enact/agate/Panels';
+import Skinnable from '@enact/agate/Skinnable';
+import Scroller from '@enact/agate/Scroller';
 
 import css from './AgateEnvironment.module.less';
 

@@ -4,7 +4,7 @@ import {boolean, select, number} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import IncrementSlider, {IncrementSliderBase} from '../../../../IncrementSlider';
+import IncrementSlider, {IncrementSliderBase} from '@enact/agate/IncrementSlider';
 
 import {decrementIcons, incrementIcons} from './icons';
 

@@ -16,8 +16,10 @@
     "extends": "enact/strict"
   },
   "dependencies": {
+    "@enact/agate": "../../",
     "@enact/core": "^3.2.5",
     "@enact/ui": "^3.2.5",
+    "ilib": "^14.4.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6"
   },

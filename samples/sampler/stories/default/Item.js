@@ -4,8 +4,8 @@ import UiItem, {ItemBase as UiItemBase} from '@enact/ui/Item';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Icon, {icons} from '../../../../Icon';
-import Item, {ItemBase} from '../../../../Item';
+import Icon, {icons} from '@enact/agate/Icon';
+import Item, {ItemBase} from '@enact/agate/Item';
 
 const Config = mergeComponentMetadata('Item', UiItemBase, UiItem, ItemBase, Item);
 Item.displayName = 'Item';

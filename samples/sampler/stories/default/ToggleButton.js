@@ -5,8 +5,8 @@ import UIButton, {ButtonBase as UIButtonBase} from '@enact/ui/Button';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Button, {ButtonBase} from '../../../../Button';
-import ToggleButton, {ToggleButtonBase} from '../../../../ToggleButton';
+import Button, {ButtonBase} from '@enact/agate/Button';
+import ToggleButton, {ToggleButtonBase} from '@enact/agate/ToggleButton';
 
 import iconNames from './icons';
 

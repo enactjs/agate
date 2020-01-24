@@ -4,7 +4,7 @@ import {LabeledIconBase as UiLabeledIconBase, LabeledIcon as UiLabeledIcon} from
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import LabeledIconButton from '../../../../LabeledIconButton';
+import LabeledIconButton from '@enact/agate/LabeledIconButton';
 
 import iconNames from './icons';
 

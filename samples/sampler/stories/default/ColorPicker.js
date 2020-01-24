@@ -3,7 +3,7 @@ import {select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import ColorPicker from '../../../../ColorPicker';
+import ColorPicker from '@enact/agate/ColorPicker';
 
 ColorPicker.displayName = 'ColorPicker';
 const prop = {

@@ -4,7 +4,7 @@ import {action} from '@storybook/addon-actions';
 import {storiesOf} from '@storybook/react';
 import React from 'react';
 
-import Dropdown, {DropdownBase} from '../../../../Dropdown';
+import Dropdown, {DropdownBase} from '@enact/agate/Dropdown';
 
 const Config = mergeComponentMetadata('Dropdown', Dropdown, DropdownBase);
 Dropdown.displayName = 'Dropdown';

@@ -3,11 +3,11 @@ import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Button from '../../../../Button';
-import Icon from '../../../../Icon';
-import Item from '../../../../Item';
-import LabeledIconButton from '../../../../LabeledIconButton';
-import {Panel, TabbedPanels} from '../../../../Panels';
+import Button from '@enact/agate/Button';
+import Icon from '@enact/agate/Icon';
+import Item from '@enact/agate/Item';
+import LabeledIconButton from '@enact/agate/LabeledIconButton';
+import {Panel, TabbedPanels} from '@enact/agate/Panels';
 
 TabbedPanels.displayName = 'TabbedPanels';
 

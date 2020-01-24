@@ -6,8 +6,8 @@ import iconNames from './icons';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Icon, {IconBase} from '../../../../Icon';
-import Heading from '../../../../Heading';
+import Icon, {IconBase} from '@enact/agate/Icon';
+import Heading from '@enact/agate/Heading';
 
 // import icons
 import docs from '../../images/icon-enact-docs.png';
