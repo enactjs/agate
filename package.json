@@ -25,7 +25,8 @@
     "template": "html-template.ejs"
   },
   "eslintConfig": {
-    "extends": "enact/strict"
+    "extends": "enact/strict",
+    "root": true
   },
   "dependencies": {
     "@enact/core": "^3.2.0",
