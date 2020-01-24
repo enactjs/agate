@@ -9,6 +9,8 @@
     "lint": "enact lint --strict",
     "test": "enact test",
     "test-ui": "wdio tests/ui/wdio.conf.js",
+    "test-ui-docker": "wdio tests/ui/wdio.docker.conf.js",
+    "test-ui-tv": "wdio tests/ui/wdio.tv.conf.js",
     "test-watch": "enact test --watch",
     "transpile": "enact transpile"
   },
