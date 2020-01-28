@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "enact clean",
-    "lint": "enact lint --strict && eslint tests",
+    "lint": "enact lint --strict && cd tests && enact lint --local",
     "test": "enact test",
     "test-ui": "wdio tests/ui/wdio.conf.js",
     "test-ui-docker": "wdio tests/ui/wdio.docker.conf.js",
@@ -49,7 +49,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.4.3",
-    "@enact/ui-test-utils": "github:enactjs/ui-test-utils#develop",
+    "@enact/ui-test-utils": "^0.1.0",
     "ilib": "^14.4.0"
   }
 }
