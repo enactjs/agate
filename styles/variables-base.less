@@ -108,6 +108,19 @@
 @agate-button-smallest-badge-text-indent: @agate-button-small-badge-text-indent;
 @agate-button-smallest-badge-transform: @agate-button-badge-transform;
 
+// Checkbox
+// ---------------------------------------
+@agate-checkbox-size: 46px;
+@agate-checkbox-border-radius: inherit;
+@agate-checkbox-icon-font-size: inherit;
+
+// CheckboxItem
+// ---------------------------------------
+@agate-checkboxitem-padding-left: @agate-item-side-outset;
+@agate-checkboxitem-padding-right: @agate-item-side-outset;
+@agate-checkboxitem-icon-margin: @agate-component-spacing;
+@agate-checkboxitem-font-size: inherit;
+
 // ColorPicker
 // ---------------------------------------
 @agate-colorpicker-border-radius: @agate-border-radius;
@@ -126,6 +139,12 @@
 @agate-datetimepicker-transform: none;
 @agate-datetimepicker-label-transform: none;
 @agate-datetimepicker-cell-transform: none;
+
+// Dropdown
+// ---------------------------------------
+@agate-dropdown-border-style: solid;
+@agate-dropdown-border-width: 1px;
+@agate-dropdown-list-height:  @agate-item-height * 4;
 
 // Drawer
 // ---------------------------------------
@@ -255,6 +274,8 @@
 // ---------------------------------------
 @agate-panel-v-padding: @agate-app-keepout;
 @agate-panel-h-padding: inherit;
+@agate-panels-partial-height: auto;
+@agate-panels-partial-width: 50%;
 @agate-panels-breadcrumb-height: 100%;
 @agate-panels-breadcrumb-width: 100px;
 @agate-panels-controls-top: inherit;
@@ -325,6 +346,11 @@
 
 // Slider
 // ---------------------------------------
+@agate-slider-horizontal-anchorpoint-height: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
+@agate-slider-horizontal-anchorpoint-width: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
+@agate-slider-vertical-anchorpoint-height: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
+@agate-slider-vertical-anchorpoint-width: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
+@agate-slider-knob-height: @agate-slider-height;
 @agate-slider-knob-active-transform: @agate-slider-knob-transform;
 @agate-slider-knob-border-radius: @agate-slider-knob-height;
 @agate-slider-knob-border-width: 0;
@@ -372,8 +398,13 @@
 // SliderButton
 // ---------------------------------------
 @agate-sliderbutton-border-radius: @agate-border-radius;
+@agate-sliderbutton-border-width: 0;
 @agate-sliderbutton-bg-transform: @agate-slider-bg-transform;
+@agate-sliderbutton-bg-clip: initial;
 @agate-sliderbutton-client-transform: @agate-slider-track-transform;
+@agate-sliderbutton-knob-border-radius: @agate-sliderbutton-border-radius;
+@agate-sliderbutton-knob-border-width: 0;
+@agate-sliderbutton-knob-transform: none;
 @agate-sliderbutton-margin: 3px 24px;
 
 // Spinner

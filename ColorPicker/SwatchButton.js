@@ -1,13 +1,8 @@
-/**
+/*
  * Agate component to allow the user to choose a color.
  *
  * @example
  * <SwatchButton color="#ffcc00" onClick={handleClick} />
- *
- * @module agate/SwatchButton
- * @exports SwatchButton
- * @exports SwatchButtonBase
- * @exports SwatchButtonDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -23,20 +18,20 @@ import componentCss from './SwatchButton.module.less';
 
 
 /**
- * The color picker base component which sets-up the component's structure.
+ * A swatch component which sets-up the component's structure.
  *
  * This component is most often not used directly but may be composed within another component as it
- * is within [SwatchButton]{@link agate/SwatchButton.SwatchButton}.
+ * is within [SwatchButton]{@link agate/ColorPicker.SwatchButton}.
  *
  * @class SwatchButtonBase
- * @memberof agate/SwatchButton
+ * @memberof agate/ColorPicker
  * @ui
  * @public
  */
 const SwatchButtonBase = kind({
 	name: 'SwatchButton',
 
-	propTypes: /** @lends agate/SwatchButton.SwatchButtonBase.prototype */ {
+	propTypes: /** @lends agate/ColorPicker.SwatchButtonBase.prototype */ {
 		/**
 		 * The color of the swatch. If the `color` prop is not set.
 		 *
@@ -59,7 +54,7 @@ const SwatchButtonBase = kind({
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal Elements and states of this component.
+		 * corresponding internal elements and states of this component.
 		 *
 		 * The following classes are supported:
 		 *
@@ -109,28 +104,26 @@ const SwatchButtonBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [SwatchButtonBase]{@link agate/SwatchButton.SwatchButtonBase}.
+ * Applies Agate specific behaviors to [SwatchButton]{@link agate/ColorPicker.SwatchButtonBase}.
  *
  * @hoc
- * @memberof agate/SwatchButton
+ * @memberof agate/ColorPicker
+ * @mixes agate/Button.ButtonDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
-
 const SwatchButtonDecorator = compose(
 	ButtonDecorator,
 	Skinnable
 );
 
 /**
- * A color picker component, ready to use in Agate applications.
+ * A color picker swatch button component.
  *
  * @class SwatchButton
- * @memberof agate/SwatchButton
- * @extends agate/SwatchButton.SwatchButtonBase
- * @mixes agate/Button.ButtonDecorator
- * @mixes ui/Changeable.Changeable
- * @mixes agate/Skinnable.Skinnable
+ * @memberof agate/ColorPicker
+ * @extends agate/ColorPicker.SwatchButtonBase
+ * @mixes agate/ColorPicker.SwatchButtonDecorator
  * @ui
  * @public
  */

@@ -1,3 +1,15 @@
+/**
+ * Provides an Agate-themed button group.
+ *
+ * @example
+ * <SliderButton>{['Light Speed', 'Ridiculous Speed', 'Ludicrous Speed']}</SliderButton>
+ *
+ * @module agate/SliderButton
+ * @exports SliderButton
+ * @exports SliderButtonBase
+ * @exports SliderButtonDecorator
+ */
+
 import React from 'react';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
@@ -33,6 +45,8 @@ const SliderKnob = kind({
 	},
 	render: ({...rest}) => {
 		delete rest.value;
+		// eslint-disable-next-line enact/prop-types
+		delete rest.tooltipComponent;
 		return (
 			<div
 				{...rest}
@@ -45,14 +59,17 @@ const SliderProgress = kind({
 	name: 'SliderProgress',
 	propTypes: {
 		css: PropTypes.object,
-		values: PropTypes.arrayOf(PropTypes.number)
+		values: PropTypes.arrayOf(PropTypes.string)
 	},
 	styles: {
 		css: componentCss,
 		className: 'track'
 	},
 	render: ({children, css, values, ...rest}) => {
-
+		// eslint-disable-next-line enact/prop-types
+		delete rest.progressAnchor;
+		// eslint-disable-next-line enact/prop-types
+		delete rest.backgroundProgress;
 		return (
 			<Row {...rest} align="center">
 				{children}
@@ -66,6 +83,15 @@ const SliderProgress = kind({
 	}
 });
 
+/**
+ * Renders the base level DOM structure of the component.
+ *
+ * @class SliderButtonBase
+ * @memberof agate/SliderButton
+ * @extends ui/Slider.Slider
+ * @ui
+ * @public
+ */
 const SliderButtonBase = kind({
 	name: 'SliderButton',
 	propTypes: {
@@ -105,16 +131,32 @@ const SliderButtonBase = kind({
 	}
 });
 
-
+/**
+ * Agate specific behaviors to apply to [SliderButton]{@link agate/SliderButton.SliderButtonBase}.
+ *
+ * @hoc
+ * @memberof agate/SliderButton
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const SliderButtonDecorator = compose(
 	Pure,
 	Spottable,
 	Skinnable
 );
 
-
+/**
+ * Renders a slider that appears as a series of connected buttons.
+ *
+ * @class SliderButton
+ * @memberof agate/SliderButton
+ * @extends agate/SliderButton.SliderButtonBase
+ * @mixes agate/SliderButton.SliderButtonDecorator
+ * @ui
+ * @public
+ */
 const SliderButton = SliderButtonDecorator(SliderButtonBase);
-
 
 export default SliderButton;
 export {

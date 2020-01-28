@@ -9,7 +9,7 @@ describe('AgateDecorator', () => {
 
 	const AppRoot = (props) => <div id="app" {...props} />;
 
-	test('should add base gallium-day classes to wrapped component', function () {
+	test('should add base gallium classes to wrapped component', function () {
 		const config = {ri: false, i18n: false, spotlight: false, float: false, overlay: false};
 		const App = AgateDecorator(config, AppRoot);
 		const subject = mount(
@@ -21,7 +21,7 @@ describe('AgateDecorator', () => {
 		const appRoot = subject.find('#app');
 
 		const expected = true;
-		const actual = appRoot.hasClass('gallium-day');
+		const actual = appRoot.hasClass('gallium');
 
 		expect(actual).toBe(expected);
 	});

@@ -1,3 +1,15 @@
+/**
+ * Modal component that appears at the bottom of the screen and takes up the full screen width.
+ *
+ * @example
+ * <Popup open>Hello!</Popup>
+ *
+ * @module agate/Popup
+ * @exports Popup
+ * @exports PopupBase
+ * @exports PopupDecorator
+ */
+
 import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
@@ -14,9 +26,17 @@ import PopupState from './PopupState';
 
 import componentCss from './Popup.module.less';
 
+/**
+ * The base popup component.
+ *
+ * @class PopupBase
+ * @memberof agate/Popup
+ * @ui
+ * @public
+ */
 const PopupBase = kind({
 	name: 'Popup',
-	propTypes: {
+	propTypes: /** @lends agate/Popup.PopupBase.prototype */ {
 		buttons: PropTypes.oneOfType([
 			PropTypes.element,
 			PropTypes.arrayOf(PropTypes.element)
@@ -88,14 +108,28 @@ const PopupBase = kind({
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
-
 const PopupDecorator = compose(
 	Slottable({slots: ['closeButton', 'title', 'buttons']}),
 	Skinnable({prop: 'skin'}),
 	PopupState
 );
 
+/**
+ * A stateful component that renders a popup in a
+ * [FloatingLayer]{@link ui/FloatingLayer.FloatingLayer}.
+ *
+ * @class Popup
+ * @memberof agate/Popup
+ * @extends agate/Popup.PopupBase
+ * @mixes agate/Popup.PopupDecorator
+ * @ui
+ * @public
+ */
 const Popup = PopupDecorator(PopupBase);
 
 export default Popup;
-export {Popup, PopupBase};
+export {
+	Popup,
+	PopupBase,
+	PopupDecorator
+};
