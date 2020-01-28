@@ -127,13 +127,13 @@ const ButtonBase = kind({
 		 */
 		highlighted: PropTypes.bool,
 
-		/**
-		 * The component used to render the icon.
-		 *
-		 * @type {Component}
-		 * @public
-		 */
-		iconComponent: EnactPropTypes.component,
+		// /**
+		//  * The component used to render the icon.
+		//  *
+		//  * @type {Component}
+		//  * @public
+		//  */
+		// iconComponent: EnactPropTypes.component,
 
 		/**
 		 * The position of this button in relation to other buttons.
@@ -166,13 +166,13 @@ const ButtonBase = kind({
 		 */
 		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
-		/**
-		 * The amount of sprite "cells" in the src image of the `icon` being supplied. This prop has no effect without `icon`.
-		 *
-		 * @type {Number}
-		 * @public
-		 */
-		spriteCount: PropTypes.number,
+		// /**
+		//  * The amount of sprite "cells" in the src image of the `icon` being supplied. This prop has no effect without `icon`.
+		//  *
+		//  * @type {Number}
+		//  * @public
+		//  */
+		// spriteCount: PropTypes.number,
 
 		/**
 		 * The button type.
@@ -219,17 +219,18 @@ const ButtonBase = kind({
 				</React.Fragment>
 			);
 		},
-		iconComponent: ({iconComponent, spriteCount}) => {
-			// Don't burden basic HTML elements with the spriteCount prop (or other Icon-specific props)
-			if (typeof iconComponent === 'string') return iconComponent;
+		// Temporary reversion until > alpha.11
+		// iconComponent: ({iconComponent, spriteCount}) => {
+		// 	// Don't burden basic HTML elements with the spriteCount prop (or other Icon-specific props)
+		// 	if (typeof iconComponent === 'string') return iconComponent;
 
-			return (
-				<ComponentOverride
-					component={iconComponent}
-					spriteCount={spriteCount}
-				/>
-			);
-		},
+		// 	return (
+		// 		<ComponentOverride
+		// 			component={iconComponent}
+		// 			spriteCount={spriteCount}
+		// 		/>
+		// 	);
+		// },
 		style: ({animationDelay, badgeColor, style}) => ({
 			...style,
 			'--agate-button-animation-delay': animationDelay,
