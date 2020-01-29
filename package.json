@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "enact clean",
-    "lint": "enact lint --strict && cd tests && enact lint --local",
+    "lint": "enact lint --local",
     "test": "enact test",
     "test-ui": "wdio tests/ui/wdio.conf.js",
     "test-ui-docker": "wdio tests/ui/wdio.docker.conf.js",
