@@ -26,7 +26,7 @@ import componentCss from './LabeledIcon.module.less';
  *
  * @class LabeledIconBase
  * @memberof agate/LabeledIcon
- * @extends ui/LabeledIcon
+ * @extends ui/LabeledIcon.LabeledIcon
  * @ui
  * @public
  */
