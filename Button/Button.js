@@ -12,10 +12,10 @@
 
 import kind from '@enact/core/kind';
 import {cap} from '@enact/core/util';
-import EnactPropTypes from '@enact/core/internal/prop-types';
+// import EnactPropTypes from '@enact/core/internal/prop-types';
 import Spottable from '@enact/spotlight/Spottable';
 import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
-import ComponentOverride from '@enact/ui/ComponentOverride';
+// import ComponentOverride from '@enact/ui/ComponentOverride';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -247,6 +247,7 @@ const ButtonBase = kind({
 		delete rest.highlighted;
 		delete rest.joinedPosition;
 		delete rest.selected;
+		// eslint-disable-next-line enact/prop-types
 		delete rest.spriteCount;
 		delete rest.type;
 
