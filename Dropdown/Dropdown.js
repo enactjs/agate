@@ -15,6 +15,7 @@
  * @exports DropdownDecorator
  */
 
+import {handle, forward, forProp} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
@@ -81,6 +82,22 @@ const DropdownBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
+		 * Called when the Dropdown is closing.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onClose: PropTypes.func,
+
+		/**
+		 * Called when the Dropdown is opening.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onOpen: PropTypes.func,
+
+		/**
 		 * Called when an item is selected.
 		 *
 		 * @type {Function}
@@ -121,6 +138,18 @@ const DropdownBase = kind({
 		open: false
 	},
 
+	handlers: {
+		onSelect: handle(
+			forward('onSelect'),
+			forward('onClose')
+		),
+		onOpen: handle(
+			forward('onClick'),
+			forProp('open', false),
+			forward('onOpen')
+		)
+	},
+
 	styles: {
 		css: componentCss,
 		className: 'dropdown',
@@ -156,16 +185,23 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({children, css, dropdownListClassname, disabled, hasChildren, onSelect, open, selected, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+	render: ({children, css, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+		const opened = !disabled && open;
+
 		return (
 			<div {...rest}>
-				<Item {...rest} css={css} disabled={hasChildren ? disabled : true}>
+				<Item
+					{...rest}
+					css={css}
+					disabled={hasChildren ? disabled : true}
+					onClick={opened ? onClose : onOpen}
+				>
 					<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
 					{title}
 				</Item>
 				<Transition
 					className={transitionContainerClassname}
-					visible={open && !disabled}
+					visible={opened}
 					direction={transitionDirection}
 				>
 					<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
@@ -195,7 +231,7 @@ const DropdownBase = kind({
  * @public
  */
 const DropdownDecorator = compose(
-	Toggleable({toggle: null, prop: 'open', toggleProp: 'onClick'}),
+	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose'}),
 	Changeable({change: 'onSelect', prop: 'selected'}),
 	Skinnable
 );
