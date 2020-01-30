@@ -144,7 +144,6 @@ const DropdownBase = kind({
 			forward('onClose')
 		),
 		onOpen: handle(
-			forward('onClick'),
 			forProp('open', false),
 			forward('onOpen')
 		)
