@@ -21,13 +21,13 @@ import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
 import Toggleable from '@enact/ui/Toggleable';
 import Transition from '@enact/ui/Transition';
-import Scroller from '@enact/ui/Scroller';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
 import Icon from '../Icon';
 import Item from '../Item';
+import Scroller from '../Scroller';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Dropdown.module.less';
