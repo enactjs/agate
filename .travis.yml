@@ -15,7 +15,7 @@ install:
     - npm run bootstrap -- --ignore enact-sampler
     - npm run link-all
     - popd
-    - ls node_modules
+    - rm -fr node_modules
     - npm install
     - enact link
 script:
