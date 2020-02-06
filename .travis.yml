@@ -9,12 +9,12 @@ install:
     - npm config set prefer-offline true
     - npm install -g enactjs/cli#develop
     - npm install -g codecov
-    - git clone --branch=develop --depth 1 https://github.com/enactjs/enact .enact
-    - cd .enact
+    - git clone --branch=develop --depth 1 https://github.com/enactjs/enact ../enact
+    - pushd ../enact
     - npm install
     - npm run bootstrap -- --ignore enact-sampler
     - npm run link-all
-    - cd ..
+    - popd
     - npm install
     - enact link
 script:
