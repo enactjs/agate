@@ -1,5 +1,6 @@
 # Agate Components Library
-An experimental Enact theme, implementing a new radical approach to what could be done with the existing skinning system.
+
+> An experimental Enact theme, implementing a new radical approach to what could be done with the existing skinning system.
 
 ![Agate themes](http://enactjs.github.io/agate/images/agate-themes.jpg)
 
