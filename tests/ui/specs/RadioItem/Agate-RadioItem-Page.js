@@ -1,6 +1,6 @@
 'use strict';
-const Page = require('@enact/ui-test-utils/test/Page.js');
-const {element, getText, hasClass} = require('@enact/ui-test-utils/test/utils.js');
+const {Page} = require('@enact/ui-test-utils/utils');
+const {element, getText, hasClass} = require('@enact/ui-test-utils/utils');
 
 class AgateRadioItemInterface {
 	constructor (id) {
