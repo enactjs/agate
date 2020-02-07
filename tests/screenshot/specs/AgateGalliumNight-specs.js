@@ -4,5 +4,6 @@ const Page = require('./AgatePage');
 runTest({
 	testName: 'Agate Gallium Night',
 	Page: Page,
-	skin: 'gallium-night'
+	skin: 'gallium',
+	skinVariants: '"night"'
 });

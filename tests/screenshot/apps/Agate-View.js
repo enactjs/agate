@@ -127,6 +127,7 @@ const ExportedAgateApp = (props) => {
 
 	// Common test parameters
 	const skin = url.searchParams.get('skin');
+	const skinVariants = JSON.parse(url.searchParams.get('skinVariants'));
 
 	// Legacy test parameters
 	let locale = url.searchParams.get('locale');
@@ -136,7 +137,7 @@ const ExportedAgateApp = (props) => {
 	}
 
 	return (
-		<WrappedAgateApp {...props} skin={skin} locale={locale} />
+		<WrappedAgateApp {...props} skin={skin} skinVariants={skinVariants} locale={locale} />
 	);
 };
 

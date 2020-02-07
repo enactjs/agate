@@ -2,7 +2,8 @@ const {runTest} = require('@enact/ui-test-utils/utils');
 const Page = require('./AgatePage');
 
 runTest({
-	testName: 'Agate Gallium Day',
+	testName: 'Agate Copper Night',
 	Page: Page,
-	skin: 'gallium-day'
+	skin: 'copper',
+	skinVariants: '"night"'
 });
