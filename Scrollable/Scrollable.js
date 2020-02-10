@@ -18,7 +18,7 @@ import {utilDecorateChildProps} from '@enact/ui/Scrollable';
 import utilDOM from '@enact/ui/Scrollable/utilDOM';
 import utilEvent from '@enact/ui/Scrollable/utilEvent';
 import PropTypes from 'prop-types';
-import React, {Component, useContext, useRef} from 'react';
+import {Component, useContext, useRef} from 'react';
 
 import $L from '../internal/$L';
 import {SharedState} from '../Panels/SharedStateDecorator';
@@ -241,7 +241,7 @@ const useSpottableScroll = (props, instances, context) => {
 
 	useEventMonitor({}, instances, {lastPointer, scrollByPageOnPointerMode});
 
-	const {handleFlick, handleMouseDown} = useEventMouse({}, instances, {isScrollButtonFocused, type});
+	const {handleDragEnd, handleDragStart, handleFlick, handleMouseDown} = useEventMouse({}, instances, {isScrollButtonFocused, type});
 
 	const {handleTouchStart} = useEventTouch({}, instances, {isScrollButtonFocused});
 
@@ -269,12 +269,15 @@ const useSpottableScroll = (props, instances, context) => {
 	}
 
 	function stop () {
-		if (!props['data-spotlight-container-disabled']) {
+		if (mutableRef.current.isDragging && !mutableRef.current.isFlicked) return;
+
+		if (!props['data-spotlight-container-disabled'] || mutableRef.current.isFlicked || mutableRef.current.isWheeling) {
 			childAdapter.current.setContainerDisabled(false);
 		}
 
 		focusOnItem();
 		mutableRef.current.lastScrollPositionOnFocus = null;
+		mutableRef.current.isFlicked = false;
 		mutableRef.current.isWheeling = false;
 		stopVoice();
 	}
@@ -374,6 +377,8 @@ const useSpottableScroll = (props, instances, context) => {
 
 	return {
 		addEventListeners,
+		handleDragEnd,
+		handleDragStart,
 		handleFlick,
 		handleKeyDown,
 		handleMouseDown,
@@ -431,6 +436,7 @@ const useScroll = (props) => {
 		canScrollVertically: null,
 		getScrollBounds: null,
 		isDragging: null,
+		isFlicked: null,
 		isScrollAnimationTargetAccumulated: null,
 		isUpdatedScrollThumb: null,
 		lastInputType: null,
@@ -479,6 +485,8 @@ const useScroll = (props) => {
 
 	const {
 		addEventListeners,
+		handleDragEnd,
+		handleDragStart,
 		handleFlick,
 		handleKeyDown,
 		handleMouseDown,
@@ -550,6 +558,8 @@ const useScroll = (props) => {
 		addEventListeners,
 		handleResizeWindow,
 		horizontalScrollbarRef,
+		onDragEnd: handleDragEnd,
+		onDragStart: handleDragStart,
 		onFlick: handleFlick,
 		onKeyDown: handleKeyDown,
 		onMouseDown: handleMouseDown,

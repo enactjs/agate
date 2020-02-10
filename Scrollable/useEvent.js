@@ -4,7 +4,6 @@ import {onWindowReady} from '@enact/core/snapshot';
 import {clamp} from '@enact/core/util';
 import Spotlight, {getDirection} from '@enact/spotlight';
 import {getRect} from '@enact/spotlight/src/utils';
-import {getTargetByDirectionFromElement} from '@enact/spotlight/src/target';
 import {constants} from '@enact/ui/Scrollable';
 import utilEvent from '@enact/ui/Scrollable/utilEvent';
 import utilDOM from '@enact/ui/Scrollable/utilDOM';
@@ -151,7 +150,7 @@ const useEventFocus = (props, instances, context) => {
 };
 
 const useEventKey = (props, instances, context) => {
-	const {childAdapter, horizontalScrollbarRef, spottable, uiChildContainerRef, uiScrollAdapter, verticalScrollbarRef} = instances;
+	const {childAdapter, spottable, uiChildContainerRef, uiScrollAdapter} = instances;
 	const {hasFocus, isContent, type} = context;
 
 	// Functions
@@ -180,8 +179,6 @@ const useEventKey = (props, instances, context) => {
 					}
 				}
 			} else if (getDirection(keyCode) && (type === 'JS' || type === 'Native' && !Spotlight.getPointerMode())) {
-				const element = Spotlight.getCurrent();
-
 				uiScrollAdapter.current.lastInputType = 'arrowKey';
 				direction = getDirection(keyCode);
 			}
@@ -353,11 +350,26 @@ const useEventMouse = (props, instances, context) => {
 
 	// Functions
 
+	function handleDragEnd () {
+		uiScrollAdapter.current.isDragging = false;
+
+		if (!uiScrollAdapter.current.isFlicked) {
+			childAdapter.current.setContainerDisabled(false);
+		}
+	}
+
+	function handleDragStart () {
+		uiScrollAdapter.current.isDragging = true;
+		childAdapter.current.setContainerDisabled(true);
+	}
+
 	function handleFlick ({direction}) {
 		const
 			{canScrollHorizontally, canScrollVertically} = uiScrollAdapter.current,
 			bounds = uiScrollAdapter.current.getScrollBounds(),
 			focusedItem = Spotlight.getCurrent();
+
+		uiScrollAdapter.current.isFlicked = true;
 
 		if (focusedItem) {
 			focusedItem.blur();
@@ -386,6 +398,8 @@ const useEventMouse = (props, instances, context) => {
 	// Return
 
 	return {
+		handleDragEnd,
+		handleDragStart,
 		handleFlick,
 		handleMouseDown
 	};
