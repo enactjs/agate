@@ -1,10 +1,11 @@
 import {adaptEvent, forward, handle} from '@enact/core/handle';
-import {Cell, Layout} from '@enact/ui/Layout';
-import {Changeable} from '@enact/ui/Changeable';
 import kind from '@enact/core/kind';
+import {Changeable} from '@enact/ui/Changeable';
+import {Cell, Layout} from '@enact/ui/Layout';
+import Slottable from '@enact/ui/Slottable';
+import {shape} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Slottable from '@enact/ui/Slottable';
 
 import TabGroup from '../TabGroup';
 
@@ -24,11 +25,21 @@ const TabbedPanelsBase = kind({
 	name: 'TabbedPanels',
 	propTypes: /** @lends agate/Panels.TabbedPanels.prototype */ {
 		afterTabs: PropTypes.node,
+		arranger: shape,
 		beforeTabs: PropTypes.node,
+		childProps: PropTypes.object,
+		closeButtonAriaLabel: PropTypes.string,
+		controls: PropTypes.node,
+		controlsMeasurements: PropTypes.object,
+		cover: PropTypes.oneOf(['full', 'partial']),
 		css: PropTypes.object,
-		disabled: PropTypes.bool,
+		duration: PropTypes.number,
 		index: PropTypes.number,
+		noAnimation: PropTypes.bool,
 		noCloseButton: PropTypes.bool,
+		noSharedState: PropTypes.bool,
+		onApplicationClose: PropTypes.func,
+		onBack: PropTypes.func,
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 		tabPosition: PropTypes.string,
 		tabs: PropTypes.oneOfType([TabGroup])
@@ -64,14 +75,32 @@ const TabbedPanelsBase = kind({
 		className: ({css, orientation, styler, tabPosition}) => styler.append(tabPosition === 'after' ? css.reverse : '', orientation === 'vertical' ? css.column : ''),
 		tabOrientation: ({orientation}) => orientation === 'vertical' ? 'horizontal' : 'vertical'
 	},
-	render: ({afterTabs, beforeTabs, children, className, css, index, noCloseButton, onSelect, orientation, tabOrientation, tabPosition, tabs, ...rest}) => {
-		delete rest.disabled;
-
+	render: ({
+		afterTabs,
+		arranger,
+		beforeTabs,
+		childProps,
+		children,
+		closeButtonAriaLabel,
+		controls,
+		controlsMeasurements,
+		cover,
+		css,
+		duration,
+		index,
+		noAnimation,
+		noCloseButton,
+		noSharedState,
+		onApplicationClose,
+		onBack,
+		onSelect,
+		tabOrientation,
+		tabPosition,
+		tabs,
+		...rest
+	}) => {
 		return (
-			<Layout
-				className={className}
-				orientation={orientation}
-			>
+			<Layout {...rest}>
 				<Cell shrink>
 					<TabGroup
 						afterTabs={afterTabs}
@@ -85,12 +114,22 @@ const TabbedPanelsBase = kind({
 					/>
 				</Cell>
 				<Cell
+					arranger={arranger}
+					childProps={childProps}
 					className={css.panels}
+					closeButtonAriaLabel={closeButtonAriaLabel}
 					component={Panels}
+					controls={controls}
+					controlsMeasurements={controlsMeasurements}
+					cover={cover}
+					duration={duration}
+					noAnimation={noAnimation}
 					noCloseButton={noCloseButton}
+					noSharedState={noSharedState}
+					onApplicationClose={onApplicationClose}
+					onBack={onBack}
 					orientation={tabOrientation}
 					index={index}
-					{...rest}
 				>
 					{children}
 				</Cell>
