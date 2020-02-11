@@ -26,6 +26,7 @@ const TabbedPanelsBase = kind({
 		afterTabs: PropTypes.node,
 		beforeTabs: PropTypes.node,
 		css: PropTypes.object,
+		disabled: PropTypes.bool,
 		index: PropTypes.number,
 		noCloseButton: PropTypes.bool,
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
