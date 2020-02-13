@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import componentCss from './IncrementSliderButton.module.less';
 
 /**
- * An [Button]{@link agate/Button.Button} customized for
+ * A [Button]{@link agate/Button.Button} customized for
  * [IncrementSlider]{@link agate/IncrementSlider.IncrementSlider}. It is optimized to only
  * update when `disabled` is changed to minimize unnecessary render cycles.
  *

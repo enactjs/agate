@@ -57,7 +57,7 @@ const getTargetInViewByDirectionFromPosition = (direction, position, container) 
 };
 
 /**
- * A Agate-styled component that provides horizontal and vertical scrollbars.
+ * An Agate-styled component that provides horizontal and vertical scrollbars.
  *
  * @class ScrollableBase
  * @memberof agate/Scrollable
@@ -593,7 +593,7 @@ const useScroll = (props) => {
 };
 
 /**
- * A Agate-styled component that provides horizontal and vertical scrollbars.
+ * An Agate-styled component that provides horizontal and vertical scrollbars.
  *
  * @class Scrollable
  * @memberof agate/Scrollable

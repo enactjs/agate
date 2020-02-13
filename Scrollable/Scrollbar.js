@@ -10,7 +10,7 @@ import ScrollThumb from './ScrollThumb';
 import componentCss from './Scrollbar.module.less';
 
 /**
- * A Agate-styled scroller base component.
+ * An Agate-styled scroller base component.
  *
  * @class ScrollbarBase
  * @memberof agate/Scrollable
@@ -142,7 +142,7 @@ ScrollbarBase.defaultProps = {
 };
 
 /**
- * A Agate-styled scroll bar. It is used in [Scrollable]{@link agate/Scrollable.Scrollable}.
+ * An Agate-styled scroll bar. It is used in [Scrollable]{@link agate/Scrollable.Scrollable}.
  *
  * @class Scrollbar
  * @memberof agate/Scrollable

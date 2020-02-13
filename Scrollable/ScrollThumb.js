@@ -5,7 +5,7 @@ import React, {forwardRef, useEffect} from 'react';
 const nop = () => {};
 
 /**
- * A Agate-styled scroll thumb with agate behavior
+ * An Agate-styled scroll thumb with agate behavior
  *
  * @class ScrollThumb
  * @memberof agate/Scrollable

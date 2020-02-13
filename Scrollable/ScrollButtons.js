@@ -32,7 +32,7 @@ const
 	};
 
 /**
- * A Agate-styled scroll buttons. It is used in [Scrollbar]{@link agate/Scrollable.Scrollbar}.
+ * An Agate-styled scroll buttons. It is used in [Scrollbar]{@link agate/Scrollable.Scrollbar}.
  *
  * @class ScrollButtons
  * @memberof agate/Scrollable

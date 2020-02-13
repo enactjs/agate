@@ -36,7 +36,7 @@ import {useSpotlightConfig} from './useSpotlight';
 
 const dataContainerDisabledAttribute = 'data-spotlight-container-disabled';
 /**
- * A Agate-styled base component for [Scroller]{@link agate/Scroller.Scroller}.
+ * An Agate-styled base component for [Scroller]{@link agate/Scroller.Scroller}.
  * In most circumstances, you will want to use the
  * [SpotlightContainerDecorator]{@link spotlight/SpotlightContainerDecorator.SpotlightContainerDecorator}
  * and the Scrollable version, [Scroller]{@link agate/Scroller.Scroller}.
@@ -433,7 +433,7 @@ const useSpottableScroller = (props) => {
  */
 
 /**
- * A Agate-styled Scroller, Scrollable applied.
+ * An Agate-styled Scroller, Scrollable applied.
  *
  * Usage:
  * ```
