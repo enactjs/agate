@@ -4,7 +4,6 @@ import {storiesOf} from '@storybook/react';
 import Heading from '@enact/agate/Heading';
 import Icon from '@enact/agate/Icon';
 import Item from '@enact/agate/Item';
-import Scroller from '@enact/agate/Scroller';
 
 Item.displayName = 'Item';
 
@@ -12,7 +11,7 @@ storiesOf('Agate QA.Item', module)
 	.add(
 		'Kitchen Sink',
 		() => (
-			<Scroller>
+			<>
 				<Heading showLine>Item variations</Heading>
 				<Item>Default Item</Item>
 				<Item label="label above" labelPosition="above">Item</Item>
@@ -55,7 +54,7 @@ storiesOf('Agate QA.Item', module)
 				<Item inline label="label below" labelPosition="below" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Item</Item>
 				<Item inline label="label before" labelPosition="before" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Item</Item>
 				<Item inline label="label after" labelPosition="after" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Item</Item>
-			</Scroller>
+			</>
 		),
 		{
 			text: 'Item Kitchen Sink'

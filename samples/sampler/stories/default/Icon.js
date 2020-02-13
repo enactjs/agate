@@ -1,7 +1,6 @@
 import {emptify, mergeComponentMetadata} from '@enact/storybook-utils';
 import {select, text, number} from '@enact/storybook-utils/addons/knobs';
 import UiIcon from '@enact/ui/Icon';
-import Scroller from '@enact/ui/Scroller';
 import iconNames from './icons';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
@@ -25,7 +24,7 @@ storiesOf('Agate', module)
 			const size = select('size', ['smallest', 'small', 'large', 'huge'], Config, 'large');
 			const spriteCount = number('spriteCount', Config, {min: 1}, 1);
 			return (
-				<Scroller style={{height: '100%'}}>
+				<>
 					<Icon
 						flip={flip}
 						size={size}
@@ -37,7 +36,7 @@ storiesOf('Agate', module)
 					<br />
 					<Heading>All Icons</Heading>
 					{iconNames.map((icon, index) => <Icon key={index} size={size} title={icon}>{icon}</Icon>)}
-				</Scroller>
+				</>
 			);
 		},
 		{

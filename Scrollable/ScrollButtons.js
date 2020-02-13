@@ -1,13 +1,11 @@
 import {forward} from '@enact/core/handle';
 import {getTargetByDirectionFromElement} from '@enact/spotlight/src/target';
 import {is} from '@enact/core/keymap';
-import {Announce} from '@enact/ui/AnnounceDecorator';
 import Spotlight, {getDirection} from '@enact/spotlight';
+import utilEvent from '@enact/ui/Scrollable/utilEvent';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-
-// import $L from '../internal/$L';
 
 import ScrollButton from './ScrollButton';
 
@@ -55,14 +53,6 @@ class ScrollButtons extends Component {
 		thumbRenderer: PropTypes.func.isRequired,
 
 		/**
-		 * Called to alert the user for accessibility notifications.
-		 *
-		 * @type {Function}
-		 * @public
-		 */
-		announce: PropTypes.func,
-
-		/**
 		 * Specifies to reflect scrollbar's disabled property to the paging controls.
 		 * When it is `true`, both prev/next buttons are going to be disabled.
 		 *
@@ -82,11 +72,11 @@ class ScrollButtons extends Component {
 		focusableScrollButtons: PropTypes.bool,
 
 		/**
-		* Sets the hint string read when focusing the next button in the scroll bar.
-		*
-		* @type {String}
-		* @public
-		*/
+		 * Sets the hint string read when focusing the next button in the scroll bar.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		nextButtonAriaLabel: PropTypes.string,
 
 		/**
@@ -167,19 +157,18 @@ class ScrollButtons extends Component {
 			nextButtonDisabled: true
 		};
 
-		this.announceRef = React.createRef();
 		this.nextButtonRef = React.createRef();
 		this.prevButtonRef = React.createRef();
 	}
 
 	componentDidMount () {
-		this.nextButtonRef.current.addEventListener('keydown', this.onKeyDownNext);
-		this.prevButtonRef.current.addEventListener('keydown', this.onKeyDownPrev);
+		utilEvent('keydown').addEventListener(this.nextButtonRef, this.onKeyDownNext);
+		utilEvent('keydown').addEventListener(this.prevButtonRef, this.onKeyDownPrev);
 	}
 
 	componentWillUnmount () {
-		this.nextButtonRef.current.removeEventListener('keydown', this.onKeyDownNext);
-		this.prevButtonRef.current.removeEventListener('keydown', this.onKeyDownPrev);
+		utilEvent('keydown').removeEventListener(this.nextButtonRef, this.onKeyDownNext);
+		utilEvent('keydown').removeEventListener(this.prevButtonRef, this.onKeyDownPrev);
 	}
 
 	updateButtons = (bounds) => {
@@ -189,10 +178,8 @@ class ScrollButtons extends Component {
 			maxPos = vertical ? bounds.maxTop : bounds.maxLeft,
 			shouldDisablePrevButton = currentPos <= 0,
 			/* If a scroll size or a client size is not integer,
-			   browsers's max scroll position could be smaller than maxPos by 1 pixel.*/
-			shouldDisableNextButton = maxPos - currentPos <= 1;
-
-		const
+			   browser's max scroll position could be smaller than maxPos by 1 pixel.*/
+			shouldDisableNextButton = maxPos - currentPos <= 1,
 			updatePrevButton = (this.state.prevButtonDisabled !== shouldDisablePrevButton),
 			updateNextButton = (this.state.nextButtonDisabled !== shouldDisableNextButton);
 
@@ -212,35 +199,16 @@ class ScrollButtons extends Component {
 
 	isOneOfScrollButtonsFocused = () => {
 		const current = Spotlight.getCurrent();
-
 		return current === this.prevButtonRef.current || current === this.nextButtonRef.current;
-	}
-
-	onDownPrev = () => {
-		if (this.announceRef.current.announce) {
-			// eslint-disable-next-line no-unused-vars
-			const {rtl, vertical} = this.props;
-			// this.announceRef.current.announce(vertical && $L('UP') || rtl && $L('RIGHT') || $L('LEFT'));
-		}
-	}
-
-	onDownNext = () => {
-		if (this.announceRef.current.announce) {
-			// eslint-disable-next-line no-unused-vars
-			const {rtl, vertical} = this.props;
-			// this.announceRef.current.announce(vertical && $L('DOWN') || rtl && $L('LEFT') || $L('RIGHT'));
-		}
 	}
 
 	onClickPrev = (ev) => {
 		const {onPrevScroll, vertical} = this.props;
-
 		onPrevScroll({...ev, isPreviousScrollButton: true, isVerticalScrollBar: vertical});
 	}
 
 	onClickNext = (ev) => {
 		const {onNextScroll, vertical} = this.props;
-
 		onNextScroll({...ev, isPreviousScrollButton: false, isVerticalScrollBar: vertical});
 	}
 
@@ -369,7 +337,6 @@ class ScrollButtons extends Component {
 				disabled={disabled || prevButtonDisabled}
 				key="prevButton"
 				onClick={this.onClickPrev}
-				onDown={this.onDownPrev}
 				onHoldPulse={this.onClickPrev}
 				ref={this.prevButtonRef}
 				icon={prevIcon}
@@ -381,14 +348,9 @@ class ScrollButtons extends Component {
 				disabled={disabled || nextButtonDisabled}
 				key="nextButton"
 				onClick={this.onClickNext}
-				onDown={this.onDownNext}
 				onHoldPulse={this.onClickNext}
 				ref={this.nextButtonRef}
 				icon={nextIcon}
-			/>,
-			<Announce
-				key="announce"
-				ref={this.announceRef}
 			/>
 		];
 	}

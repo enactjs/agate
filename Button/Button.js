@@ -243,6 +243,7 @@ const ButtonBase = kind({
 		delete rest.animationDelay;
 		delete rest.backgroundOpacity;
 		delete rest.badge;
+		delete rest.badgeColor;
 		delete rest.highlighted;
 		delete rest.joinedPosition;
 		delete rest.selected;
