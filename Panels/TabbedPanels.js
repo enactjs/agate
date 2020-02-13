@@ -29,15 +29,11 @@ const TabbedPanelsBase = kind({
 		beforeTabs: PropTypes.node,
 		childProps: PropTypes.object,
 		closeButtonAriaLabel: PropTypes.string,
-		controls: PropTypes.node,
-		controlsMeasurements: PropTypes.object,
-		cover: PropTypes.oneOf(['full', 'partial']),
 		css: PropTypes.object,
 		duration: PropTypes.number,
 		index: PropTypes.number,
 		noAnimation: PropTypes.bool,
 		noCloseButton: PropTypes.bool,
-		noSharedState: PropTypes.bool,
 		onApplicationClose: PropTypes.func,
 		onBack: PropTypes.func,
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
@@ -82,15 +78,11 @@ const TabbedPanelsBase = kind({
 		childProps,
 		children,
 		closeButtonAriaLabel,
-		controls,
-		controlsMeasurements,
-		cover,
 		css,
 		duration,
 		index,
 		noAnimation,
 		noCloseButton,
-		noSharedState,
 		onApplicationClose,
 		onBack,
 		onSelect,
@@ -119,13 +111,9 @@ const TabbedPanelsBase = kind({
 					className={css.panels}
 					closeButtonAriaLabel={closeButtonAriaLabel}
 					component={Panels}
-					controls={controls}
-					controlsMeasurements={controlsMeasurements}
-					cover={cover}
 					duration={duration}
 					noAnimation={noAnimation}
 					noCloseButton={noCloseButton}
-					noSharedState={noSharedState}
 					onApplicationClose={onApplicationClose}
 					onBack={onBack}
 					orientation={tabOrientation}
