@@ -60,7 +60,7 @@ storiesOf('Agate', module)
 		() => {
 			return (
 				<VirtualList
-					style={{'height': ri.scale(600)+'px'}}
+					style={{'height': ri.scale(600) + 'px'}}
 					dataSize={updateDataSize(number('dataSize', VirtualListConfig, defaultDataSize))}
 					focusableScrollbar={boolean('focusableScrollbar', VirtualListConfig)}
 					horizontalScrollbar={select('horizontalScrollbar', prop.scrollbarOption, VirtualListConfig)}
