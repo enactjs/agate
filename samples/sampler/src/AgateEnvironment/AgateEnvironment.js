@@ -173,7 +173,9 @@ const StorybookDecorator = (story, config) => {
 	memory.skin = currentSkin;  // Remember the skin for the next time we load.
 	const accentFromURL = getPropFromURL('accent');
 	const highlightFromURL = getPropFromURL('highlight');
-	const locale = select('locale', locales, Config);
+	const localeFromURL = getPropFromURL('locale');
+	const currentLocale = localeFromURL ? localeFromURL : Config.defaultProps.locale;
+	const locale = select('locale', locales, Config, currentLocale);
 	const allSkins = boolean('show all skins', Config);
 	const skinKnobs = {};
 	if (!allSkins) {
