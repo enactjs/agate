@@ -27,7 +27,6 @@ const TabbedPanelsBase = kind({
 		afterTabs: PropTypes.node,
 		arranger: shape,
 		beforeTabs: PropTypes.node,
-		childProps: PropTypes.object,
 		closeButtonAriaLabel: PropTypes.string,
 		css: PropTypes.object,
 		duration: PropTypes.number,
@@ -75,7 +74,6 @@ const TabbedPanelsBase = kind({
 		afterTabs,
 		arranger,
 		beforeTabs,
-		childProps,
 		children,
 		closeButtonAriaLabel,
 		css,
@@ -107,7 +105,6 @@ const TabbedPanelsBase = kind({
 				</Cell>
 				<Cell
 					arranger={arranger}
-					childProps={childProps}
 					className={css.panels}
 					closeButtonAriaLabel={closeButtonAriaLabel}
 					component={Panels}
