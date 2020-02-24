@@ -8,7 +8,7 @@ import {storiesOf} from '@storybook/react';
 import {VirtualListBase as UiVirtualListBase} from '@enact/ui/VirtualList';
 
 import Item from '@enact/agate/Item';
-import VirtualList, {VirtualListBase} from '@enact/agate/VirtualList';
+import VirtualList, {VirtualListBasic} from '@enact/agate/VirtualList';
 
 const
 	wrapOption = {
@@ -52,7 +52,7 @@ const updateDataSize = (dataSize) => {
 
 updateDataSize(defaultDataSize);
 
-const VirtualListConfig = mergeComponentMetadata('VirtualList', UiVirtualListBase, UiScrollableBase, VirtualListBase);
+const VirtualListConfig = mergeComponentMetadata('VirtualList', UiVirtualListBase, UiScrollableBase, VirtualListBasic);
 
 storiesOf('Agate', module)
 	.add(
