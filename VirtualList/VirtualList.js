@@ -4,13 +4,13 @@
  * @module agate/VirtualList
  * @exports VirtualGridList
  * @exports VirtualList
- * @exports VirtualListBase
+ * @exports VirtualListBasic
  */
 
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {ResizeContext} from '@enact/ui/Resizable';
-import {gridListItemSizeShape, itemSizesShape, VirtualListBase as UiVirtualListBase} from '@enact/ui/VirtualList';
+import {gridListItemSizeShape, itemSizesShape, VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
 import PropTypes from 'prop-types';
 import React from 'react';
 import warning from 'warning';
@@ -19,14 +19,14 @@ import useScroll from '../Scrollable';
 import Scrollbar from '../Scrollable/Scrollbar';
 import Skinnable from '../Skinnable';
 
-import {useSpottableVirtualList, VirtualListBase} from './VirtualListBase';
+import {useSpottableVirtualList, VirtualListBasic} from './VirtualListBasic';
 
 /**
  * An Agate-styled scrollable and spottable virtual list component.
  *
  * @class VirtualList
  * @memberof agate/VirtualList
- * @extends agate/VirtualList.VirtualListBase
+ * @extends agate/VirtualList.VirtualListBasic
  * @ui
  * @public
  */
@@ -74,7 +74,7 @@ let VirtualList = ({itemSize, role, ...rest}) => {
 			<div {...scrollContainerProps}>
 				<div {...innerScrollContainerProps}>
 					<ChildWrapper {...childWrapperProps}>
-						<UiVirtualListBase {...uiChildProps} />
+						<UiVirtualListBasic {...uiChildProps} />
 					</ChildWrapper>
 					{isVerticalScrollbarVisible ? <Scrollbar {...verticalScrollbarProps} /> : null}
 				</div>
@@ -213,7 +213,7 @@ VirtualList = Skinnable(
  *
  * @class VirtualGridList
  * @memberof agate/VirtualList
- * @extends agate/VirtualList.VirtualListBase
+ * @extends agate/VirtualList.VirtualListBasic
  * @ui
  * @public
  */
@@ -245,7 +245,7 @@ let VirtualGridList = ({role, ...rest}) => {
 			<div {...scrollContainerProps}>
 				<div {...innerScrollContainerProps}>
 					<ChildWrapper {...childWrapperProps}>
-						<UiVirtualListBase {...uiChildProps} />
+						<UiVirtualListBasic {...uiChildProps} />
 					</ChildWrapper>
 					{isVerticalScrollbarVisible ? <Scrollbar {...verticalScrollbarProps} /> : null}
 				</div>
@@ -383,5 +383,5 @@ export default VirtualList;
 export {
 	VirtualGridList,
 	VirtualList,
-	VirtualListBase
+	VirtualListBasic
 };

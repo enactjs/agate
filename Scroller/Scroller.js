@@ -13,7 +13,7 @@
  *
  * @module agate/Scroller
  * @exports Scroller
- * @exports ScrollerBase
+ * @exports ScrollerBasic
  */
 
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
@@ -22,8 +22,8 @@ import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDeco
 import {getRect} from '@enact/spotlight/src/utils';
 import {ResizeContext} from '@enact/ui/Resizable';
 import ri from '@enact/ui/resolution';
-import utilDOM from '@enact/ui/Scrollable/utilDOM';
-import {ScrollerBase as UiScrollerBase} from '@enact/ui/Scroller';
+import utilDOM from '@enact/ui/useScroll/utilDOM';
+import {ScrollerBasic as UiScrollerBasic} from '@enact/ui/Scroller';
 import PropTypes from 'prop-types';
 import React, {Component, useCallback, useEffect} from 'react';
 
@@ -41,16 +41,16 @@ const dataContainerDisabledAttribute = 'data-spotlight-container-disabled';
  * [SpotlightContainerDecorator]{@link spotlight/SpotlightContainerDecorator.SpotlightContainerDecorator}
  * and the Scrollable version, [Scroller]{@link agate/Scroller.Scroller}.
  *
- * @class ScrollerBase
+ * @class ScrollerBasic
  * @memberof agate/Scroller
- * @extends ui/Scroller.ScrollerBase
+ * @extends ui/Scroller.ScrollerBasic
  * @ui
  * @public
  */
-class ScrollerBase extends Component {
-	static displayName = 'ScrollerBase'
+class ScrollerBasic extends Component {
+	static displayName = 'ScrollerBasic'
 
-	static propTypes = /** @lends agate/Scroller.ScrollerBase.prototype */ {
+	static propTypes = /** @lends agate/Scroller.ScrollerBasic.prototype */ {
 		/**
 		 * Passes the instance of [Scroller]{@link ui/Scroller.Scroller}.
 		 *
@@ -373,7 +373,7 @@ const useSpottableScroller = (props) => {
  * not move focus to the scrollbar controls.
  *
  * @name focusableScrollbar
- * @memberof agate/Scroller.ScrollerBase.prototype
+ * @memberof agate/Scroller.ScrollerBasic.prototype
  * @type {Boolean}
  * @default false
  * @public
@@ -387,7 +387,7 @@ const useSpottableScroller = (props) => {
  * `Panel`.
  *
  * @name id
- * @memberof agate/Scroller.ScrollerBase.prototype
+ * @memberof agate/Scroller.ScrollerBasic.prototype
  * @type {String}
  * @public
  */
@@ -396,7 +396,7 @@ const useSpottableScroller = (props) => {
  * Sets the hint string read when focusing the next button in the vertical scroll bar.
  *
  * @name scrollDownAriaLabel
- * @memberof agate/Scroller.ScrollerBase.prototype
+ * @memberof agate/Scroller.ScrollerBasic.prototype
  * @type {String}
  * @default $L('scroll down')
  * @public
@@ -406,7 +406,7 @@ const useSpottableScroller = (props) => {
  * Sets the hint string read when focusing the previous button in the horizontal scroll bar.
  *
  * @name scrollLeftAriaLabel
- * @memberof agate/Scroller.ScrollerBase.prototype
+ * @memberof agate/Scroller.ScrollerBasic.prototype
  * @type {String}
  * @default $L('scroll left')
  * @public
@@ -416,7 +416,7 @@ const useSpottableScroller = (props) => {
  * Sets the hint string read when focusing the next button in the horizontal scroll bar.
  *
  * @name scrollRightAriaLabel
- * @memberof agate/Scroller.ScrollerBase.prototype
+ * @memberof agate/Scroller.ScrollerBasic.prototype
  * @type {String}
  * @default $L('scroll right')
  * @public
@@ -426,7 +426,7 @@ const useSpottableScroller = (props) => {
  * Sets the hint string read when focusing the previous button in the vertical scroll bar.
  *
  * @name scrollUpAriaLabel
- * @memberof agate/Scroller.ScrollerBase.prototype
+ * @memberof agate/Scroller.ScrollerBasic.prototype
  * @type {String}
  * @default $L('scroll up')
  * @public
@@ -442,7 +442,7 @@ const useSpottableScroller = (props) => {
  *
  * @class Scroller
  * @memberof agate/Scroller
- * @extends agate/Scroller.ScrollerBase
+ * @extends agate/Scroller.ScrollerBasic
  * @ui
  * @public
  */
@@ -472,7 +472,7 @@ let Scroller = (props) => {
 			<div {...scrollContainerProps}>
 				<div {...innerScrollContainerProps}>
 					<ChildWrapper {...childWrapperProps}>
-						<UiScrollerBase {...uiChildProps} />
+						<UiScrollerBasic {...uiChildProps} />
 					</ChildWrapper>
 					{isVerticalScrollbarVisible ? <Scrollbar {...verticalScrollbarProps} /> : null}
 				</div>
@@ -548,5 +548,5 @@ Scroller = Skinnable(
 export default Scroller;
 export {
 	Scroller,
-	ScrollerBase
+	ScrollerBasic
 };

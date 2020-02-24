@@ -4,9 +4,9 @@ import {onWindowReady} from '@enact/core/snapshot';
 import {clamp} from '@enact/core/util';
 import Spotlight, {getDirection} from '@enact/spotlight';
 import {getRect} from '@enact/spotlight/src/utils';
-import {constants} from '@enact/ui/Scrollable';
-import utilEvent from '@enact/ui/Scrollable/utilEvent';
-import utilDOM from '@enact/ui/Scrollable/utilDOM';
+import {constants} from '@enact/ui/useScroll/';
+import utilEvent from '@enact/ui/useScroll/utilEvent';
+import utilDOM from '@enact/ui/useScroll/utilDOM';
 import {useEffect, useRef} from 'react';
 
 const {animationDuration, epsilon, isPageDown, isPageUp, paginationPageMultiplier, scrollWheelPageMultiplierForMaxPixel} = constants;

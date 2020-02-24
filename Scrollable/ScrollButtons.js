@@ -2,7 +2,7 @@ import {forward} from '@enact/core/handle';
 import {getTargetByDirectionFromElement} from '@enact/spotlight/src/target';
 import {is} from '@enact/core/keymap';
 import Spotlight, {getDirection} from '@enact/spotlight';
-import utilEvent from '@enact/ui/Scrollable/utilEvent';
+import utilEvent from '@enact/ui/useScroll/utilEvent';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
