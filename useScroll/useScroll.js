@@ -437,6 +437,6 @@ const useScroll = (props) => {
 export default useScroll;
 export {
 	dataIndexAttribute,
-	ScrollableBasic as ScrollableBase,
+	ScrollableBasic,
 	useScroll
 };

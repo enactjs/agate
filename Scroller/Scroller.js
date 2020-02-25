@@ -132,5 +132,5 @@ Scroller = Skinnable(
 export default Scroller;
 export {
 	Scroller,
-	ScrollerBasic as ScrollerBase
+	ScrollerBasic
 };
