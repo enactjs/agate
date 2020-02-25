@@ -2,17 +2,17 @@ import Spotlight from '@enact/spotlight';
 import {useEffect} from 'react';
 
 const useSpotlightConfig = (props, instances) => {
-	const {uiChildAdapter} = instances;
+	const {scrollContentHandle} = instances;
 
 	// Hooks
 
 	useEffect(() => {
 		function handleLeaveContainer ({direction, target}) {
 			// ensure we only scroll to boundary from the contents and not a scroll button which
-			// lie outside of uiChildContainerRef but within the spotlight container
+			// lie outside of scrollContentRef but within the spotlight container
 			if (props.scrollContainerContainsDangerously(target)) {
 				const
-					{scrollBounds: {maxLeft, maxTop}, scrollPos: {left, top}} = uiChildAdapter.current,
+					{scrollBounds: {maxLeft, maxTop}, scrollPos: {left, top}} = scrollContentHandle.current,
 					isVerticalDirection = (direction === 'up' || direction === 'down'),
 					pos = isVerticalDirection ? top : left,
 					max = isVerticalDirection ? maxTop : maxLeft;
@@ -32,7 +32,7 @@ const useSpotlightConfig = (props, instances) => {
 		}
 
 		configureSpotlight();
-	}, [props, uiChildAdapter]);
+	}, [props, scrollContentHandle]);
 };
 
 export {

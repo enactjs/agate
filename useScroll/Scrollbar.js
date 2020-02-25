@@ -13,7 +13,7 @@ import componentCss from './Scrollbar.module.less';
  * An Agate-styled scroller base component.
  *
  * @class ScrollbarBase
- * @memberof agate/Scrollable
+ * @memberof agate/useScroll
  * @extends ui/ScrollbarBase
  * @ui
  * @private
@@ -77,9 +77,9 @@ const ScrollbarBase = memo(forwardRef((props, ref) => {
 
 ScrollbarBase.displayName = 'ScrollbarBase';
 
-ScrollbarBase.propTypes = /** @lends agate/Scrollable.Scrollbar.prototype */ {
+ScrollbarBase.propTypes = /** @lends agate/useScroll.Scrollbar.prototype */ {
 	/**
-	 * Called when [ScrollThumb]{@link agate/Scrollable.ScrollThumb} is updated.
+	 * Called when [ScrollThumb]{@link agate/useScroll.ScrollThumb} is updated.
 	 *
 	 * @type {Function}
 	 * @private
@@ -142,10 +142,10 @@ ScrollbarBase.defaultProps = {
 };
 
 /**
- * An Agate-styled scroll bar. It is used in [Scrollable]{@link agate/Scrollable.Scrollable}.
+ * An Agate-styled scroll bar. It is used in [Scrollable]{@link agate/useScroll.Scrollable}.
  *
  * @class Scrollbar
- * @memberof agate/Scrollable
+ * @memberof agate/useScroll
  * @ui
  * @private
  */

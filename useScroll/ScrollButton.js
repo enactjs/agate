@@ -10,10 +10,10 @@ import css from './Scrollbar.module.less';
 
 /**
  * A [Button]{@link agate/Button.Button} used within
- * a [Scrollbar]{@link agate/Scrollable.Scrollbar}.
+ * a [Scrollbar]{@link agate/useScroll.Scrollbar}.
  *
  * @class ScrollButton
- * @memberof agate/Scrollable
+ * @memberof agate/useScroll
  * @extends agate/Button.Button
  * @ui
  * @private
@@ -21,7 +21,7 @@ import css from './Scrollbar.module.less';
 const ScrollButtonBase = kind({
 	name: 'ScrollButton',
 
-	propTypes: /** @lends agate/Scrollable.ScrollButton.prototype */ {
+	propTypes: /** @lends agate/useScroll.ScrollButton.prototype */ {
 		/**
 		 * Name of icon.
 		 *
@@ -44,7 +44,7 @@ const ScrollButtonBase = kind({
 		 * Sets the hint string read when focusing the scroll bar button.
 		 *
 		 * @type {String}
-		 * @memberof agate/Scrollable.ScrollButton.prototype
+		 * @memberof agate/useScroll.ScrollButton.prototype
 		 * @public
 		 */
 		'aria-label': PropTypes.string,

@@ -15,11 +15,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import warning from 'warning';
 
-import useScroll from '../Scrollable';
-import Scrollbar from '../Scrollable/Scrollbar';
+import useScroll from '../useScroll';
+import Scrollbar from '../useScroll/Scrollbar';
 import Skinnable from '../Skinnable';
 
-import {useSpottableVirtualList, VirtualListBasic} from './VirtualListBasic';
+import {useThemeVirtualList} from './useThemeVirtualList';
+import {VirtualListBasic} from './VirtualListBasic';
 
 /**
  * An Agate-styled scrollable and spottable virtual list component.
@@ -49,33 +50,33 @@ let VirtualList = ({itemSize, role, ...rest}) => {
 
 	const {
 		// Variables
-		childWrapper: ChildWrapper,
+		scrollContentWrapper: ScrollContentWrapper,
 		isHorizontalScrollbarVisible,
 		isVerticalScrollbarVisible,
 
 		// Child Props
 		resizeContextProps,
 		scrollContainerProps,
-		innerScrollContainerProps,
-		childWrapperProps,
-		childProps,
+		scrollInnerContainerProps,
+		scrollContentWrapperProps,
+		scrollContentProps,
 		verticalScrollbarProps,
 		horizontalScrollbarProps
 	} = useScroll({...rest, ...props});
 
-	const uiChildProps = useSpottableVirtualList({
-		...childProps,
+	const themeScrollContentProps = useThemeVirtualList({
+		...scrollContentProps,
 		focusableScrollbar: rest.focusableScrollbar,
-		role: role
+		role
 	});
 
 	return (
 		<ResizeContext.Provider {...resizeContextProps}>
 			<div {...scrollContainerProps}>
-				<div {...innerScrollContainerProps}>
-					<ChildWrapper {...childWrapperProps}>
-						<UiVirtualListBasic {...uiChildProps} />
-					</ChildWrapper>
+				<div {...scrollInnerContainerProps}>
+					<ScrollContentWrapper {...scrollContentWrapperProps}>
+						<UiVirtualListBasic {...themeScrollContentProps} />
+					</ScrollContentWrapper>
 					{isVerticalScrollbarVisible ? <Scrollbar {...verticalScrollbarProps} /> : null}
 				</div>
 				{isHorizontalScrollbarVisible ? <Scrollbar {...horizontalScrollbarProps} /> : null}
@@ -220,33 +221,33 @@ VirtualList = Skinnable(
 let VirtualGridList = ({role, ...rest}) => {
 	const {
 		// Variables
-		childWrapper: ChildWrapper,
+		scrollContentWrapper: ScrollContentWrapper,
 		isHorizontalScrollbarVisible,
 		isVerticalScrollbarVisible,
 
 		// Child Props
 		resizeContextProps,
 		scrollContainerProps,
-		innerScrollContainerProps,
-		childWrapperProps,
-		childProps,
+		scrollInnerContainerProps,
+		scrollContentWrapperProps,
+		scrollContentProps,
 		verticalScrollbarProps,
 		horizontalScrollbarProps
 	} = useScroll(rest);
 
-	const uiChildProps = useSpottableVirtualList({
-		...childProps,
+	const themeScrollContentProps = useThemeVirtualList({
+		...scrollContentProps,
 		focusableScrollbar: rest.focusableScrollbar,
-		role: role
+		role
 	});
 
 	return (
 		<ResizeContext.Provider {...resizeContextProps}>
 			<div {...scrollContainerProps}>
-				<div {...innerScrollContainerProps}>
-					<ChildWrapper {...childWrapperProps}>
-						<UiVirtualListBasic {...uiChildProps} />
-					</ChildWrapper>
+				<div {...scrollInnerContainerProps}>
+					<ScrollContentWrapper {...scrollContentWrapperProps}>
+						<UiVirtualListBasic {...themeScrollContentProps} />
+					</ScrollContentWrapper>
 					{isVerticalScrollbarVisible ? <Scrollbar {...verticalScrollbarProps} /> : null}
 				</div>
 				{isHorizontalScrollbarVisible ? <Scrollbar {...horizontalScrollbarProps} /> : null}
