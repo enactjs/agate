@@ -19,7 +19,7 @@ import useScroll from '../Scrollable';
 import Scrollbar from '../Scrollable/Scrollbar';
 import Skinnable from '../Skinnable';
 
-import {useSpottableVirtualList, VirtualListBasic} from './VirtualListBasic';
+import {useThemeVirtualList, VirtualListBasic} from './VirtualListBasic';
 
 /**
  * An Agate-styled scrollable and spottable virtual list component.
@@ -49,33 +49,33 @@ let VirtualList = ({itemSize, role, ...rest}) => {
 
 	const {
 		// Variables
-		childWrapper: ChildWrapper,
+		scrollContentWrapper: ScrollContentWrapper,
 		isHorizontalScrollbarVisible,
 		isVerticalScrollbarVisible,
 
 		// Child Props
 		resizeContextProps,
 		scrollContainerProps,
-		innerScrollContainerProps,
-		childWrapperProps,
-		childProps,
+		scrollInnerlContainerProps,
+		scrollContentWrapperProps,
+		scrollContentProps,
 		verticalScrollbarProps,
 		horizontalScrollbarProps
 	} = useScroll({...rest, ...props});
 
-	const uiChildProps = useSpottableVirtualList({
-		...childProps,
+	const themeScrollContentProps = useThemeVirtualList({
+		...scrollContentProps,
 		focusableScrollbar: rest.focusableScrollbar,
-		role: role
+		role
 	});
 
 	return (
 		<ResizeContext.Provider {...resizeContextProps}>
 			<div {...scrollContainerProps}>
-				<div {...innerScrollContainerProps}>
-					<ChildWrapper {...childWrapperProps}>
-						<UiVirtualListBasic {...uiChildProps} />
-					</ChildWrapper>
+				<div {...scrollInnerlContainerProps}>
+					<ScrollContentWrapper {...scrollContentWrapperProps}>
+						<UiVirtualListBasic {...themeScrollContentProps} />
+					</ScrollContentWrapper>
 					{isVerticalScrollbarVisible ? <Scrollbar {...verticalScrollbarProps} /> : null}
 				</div>
 				{isHorizontalScrollbarVisible ? <Scrollbar {...horizontalScrollbarProps} /> : null}
@@ -220,33 +220,33 @@ VirtualList = Skinnable(
 let VirtualGridList = ({role, ...rest}) => {
 	const {
 		// Variables
-		childWrapper: ChildWrapper,
+		scrollContentWrapper: ScrollContentWrapper,
 		isHorizontalScrollbarVisible,
 		isVerticalScrollbarVisible,
 
 		// Child Props
 		resizeContextProps,
 		scrollContainerProps,
-		innerScrollContainerProps,
-		childWrapperProps,
-		childProps,
+		scrollInnerlContainerProps,
+		scrollContentWrapperProps,
+		scrollContentProps,
 		verticalScrollbarProps,
 		horizontalScrollbarProps
-	} = useScroll(rest);
+	} = useScroll({...rest, ...props});
 
-	const uiChildProps = useSpottableVirtualList({
-		...childProps,
+	const themeScrollContentProps = useThemeVirtualList({
+		...scrollContentProps,
 		focusableScrollbar: rest.focusableScrollbar,
-		role: role
+		role
 	});
 
 	return (
 		<ResizeContext.Provider {...resizeContextProps}>
 			<div {...scrollContainerProps}>
-				<div {...innerScrollContainerProps}>
-					<ChildWrapper {...childWrapperProps}>
-						<UiVirtualListBasic {...uiChildProps} />
-					</ChildWrapper>
+				<div {...scrollInnerlContainerProps}>
+					<ScrollContentWrapper {...scrollContentWrapperProps}>
+						<UiVirtualListBasic {...themeScrollContentProps} />
+					</ScrollContentWrapper>
 					{isVerticalScrollbarVisible ? <Scrollbar {...verticalScrollbarProps} /> : null}
 				</div>
 				{isHorizontalScrollbarVisible ? <Scrollbar {...horizontalScrollbarProps} /> : null}
