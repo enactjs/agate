@@ -125,6 +125,11 @@ class ScrollableBasic extends Component { // ScrollableBasic is now only used in
 		 */
 		scrollLeftAriaLabel: PropTypes.string,
 
+		/*
+		 * TBD
+		 */
+		scrollMode: PropTypes.string,
+
 		/**
 		 * Sets the hint string read when focusing the next button in the horizontal scroll bar.
 		 *
@@ -141,19 +146,14 @@ class ScrollableBasic extends Component { // ScrollableBasic is now only used in
 		 * @default $L('scroll up')
 		 * @public
 		 */
-		scrollUpAriaLabel: PropTypes.string,
-
-		/*
-		 * TBD
-		 */
-		type: PropTypes.string
+		scrollUpAriaLabel: PropTypes.string
 	}
 
 	static defaultProps = {
 		'data-spotlight-container-disabled': false,
 		focusableScrollbar: false,
 		preventBubblingOnKeyDown: 'none',
-		type: 'JS'
+		scrollMode: 'translate'
 	}
 }
 

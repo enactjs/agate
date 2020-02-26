@@ -160,7 +160,7 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	preventBubblingOnKeyDown: PropTypes.oneOf(['none', 'programmatic']),
 	role: PropTypes.string,
 
-	type: PropTypes.string,
+	scrollMode: PropTypes.string,
 
 	/**
 	 * Specifies how to show vertical scrollbar.
@@ -191,7 +191,7 @@ VirtualList.defaultProps = {
 	},
 	preventBubblingOnKeyDown: 'programmatic',
 	role: 'list',
-	type: 'JS',
+	scrollMode: 'translate',
 	verticalScrollbar: 'auto'
 };
 
@@ -331,7 +331,8 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 
 	preventBubblingOnKeyDown: PropTypes.oneOf(['none', 'programmatic']),
 	role: PropTypes.string,
-	type: PropTypes.string,
+
+	scrollMode: PropTypes.string,
 
 	/**
 	 * Specifies how to show vertical scrollbar.
@@ -362,7 +363,7 @@ VirtualGridList.defaultProps = {
 	},
 	preventBubblingOnKeyDown: 'programmatic',
 	role: 'list',
-	type: 'JS',
+	scrollMode: 'translate',
 	verticalScrollbar: 'auto'
 };
 

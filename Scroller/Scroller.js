@@ -111,7 +111,7 @@ Scroller.defaultProps = {
 		wheel: true
 	},
 	preventBubblingOnKeyDown: 'none', // eslint-disable-line react/default-props-match-prop-types
-	type: 'JS', // eslint-disable-line react/default-props-match-prop-types
+	scrollMode: 'translate', // eslint-disable-line react/default-props-match-prop-types
 	verticalScrollbar: 'auto'
 };
 

@@ -11,7 +11,7 @@ const useThemeScrollContentHandle = () => {
 		setContainerDisabled: null,
 		setLastFocusedNode: null,
 		shouldPreventScrollByFocus: null,
-		type: null
+		scrollMode: null
 	});
 
 	// Functions
