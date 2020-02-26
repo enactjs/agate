@@ -153,7 +153,7 @@ class ScrollableBasic extends Component { // ScrollableBasic is now only used in
 		'data-spotlight-container-disabled': false,
 		focusableScrollbar: false,
 		preventBubblingOnKeyDown: 'none',
-		type: 'JS'
+		scrollMode: 'translate'
 	}
 }
 

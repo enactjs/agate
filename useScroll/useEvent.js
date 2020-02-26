@@ -14,7 +14,7 @@ let lastPointer = {x: 0, y: 0};
 
 const useEventFocus = (props, instances, context) => {
 	const {themeScrollContentHandle, spottable, scrollContainerRef, scrollContentRef, scrollContainerHandle} = instances;
-	const {alertThumb, isWheeling, type} = context;
+	const {alertThumb, isWheeling, scrollMode} = context;
 
 	// Functions
 
@@ -24,7 +24,7 @@ const useEventFocus = (props, instances, context) => {
 				{top, left} = pos,
 				bounds = scrollContainerHandle.current.getScrollBounds();
 
-			if (type === 'JS') {
+			if (scrollMode === 'translate') {
 				const
 					scrollHorizontally = bounds.maxLeft > 0 && left !== scrollContainerHandle.current.scrollLeft,
 					scrollVertically = bounds.maxTop > 0 && top !== scrollContainerHandle.current.scrollTop;
@@ -67,8 +67,8 @@ const useEventFocus = (props, instances, context) => {
 			// If scroll animation is ongoing, we need to pass last target position to
 			// determine correct scroll position.
 			if (lastPos & (
-				type === 'JS' && scrollContainerHandle.current.animator.isAnimating() ||
-				type === 'Native' && scrollContainerHandle.current.scrolling
+				scrollMode === 'translate' && scrollContainerHandle.current.animator.isAnimating() ||
+				scrollMode === 'native' && scrollContainerHandle.current.scrolling
 			)) {
 				const
 					contentRect = getRect(scrollContentNode),
@@ -107,7 +107,7 @@ const useEventFocus = (props, instances, context) => {
 			themeScrollContentHandle.current.shouldPreventScrollByFocus() :
 			false;
 
-		if (type === 'JS' && isWheeling) {
+		if (scrollMode === 'translate' && isWheeling) {
 			scrollContainerHandle.current.stop();
 			spottable.current.animateOnFocus = false;
 		}
@@ -151,7 +151,7 @@ const useEventFocus = (props, instances, context) => {
 
 const useEventKey = (props, instances, context) => {
 	const {themeScrollContentHandle, spottable, scrollContentRef, scrollContainerHandle} = instances;
-	const {hasFocus, isContent, type} = context;
+	const {hasFocus, isContent, scrollMode} = context;
 
 	// Functions
 
@@ -178,7 +178,7 @@ const useEventKey = (props, instances, context) => {
 						scrollByPage(direction);
 					}
 				}
-			} else if (getDirection(keyCode) && (type === 'JS' || type === 'Native' && !Spotlight.getPointerMode())) {
+			} else if (getDirection(keyCode) && (scrollMode === 'translate' || scrollMode === 'native' && !Spotlight.getPointerMode())) {
 				scrollContainerHandle.current.lastInputType = 'arrowKey';
 				direction = getDirection(keyCode);
 			}
@@ -195,7 +195,7 @@ const useEventKey = (props, instances, context) => {
 			pageDistance = directionFactor * bounds.clientHeight * paginationPageMultiplier;
 		let scrollPossible = false;
 
-		if (type === 'JS') {
+		if (scrollMode === 'translate') {
 			scrollPossible = isUp ? scrollTop > 0 : bounds.maxTop > scrollTop;
 		} else {
 			scrollPossible = isUp ? scrollTop > 0 : bounds.maxTop - scrollTop > epsilon;
@@ -221,7 +221,7 @@ const useEventKey = (props, instances, context) => {
 						x = clamp(contentRect.left, contentRect.right, (clientRect.right + clientRect.left) / 2);
 					let y = 0;
 
-					if (type === 'JS') {
+					if (scrollMode === 'translate') {
 						y = bounds.maxTop <= scrollTop + pageDistance || 0 >= scrollTop + pageDistance ?
 							contentRect[isUp ? 'top' : 'bottom'] + yAdjust :
 							clamp(contentRect.top, contentRect.bottom, (clientRect.bottom + clientRect.top) / 2);
@@ -346,7 +346,7 @@ onWindowReady(() => {
 
 const useEventMouse = (props, instances, context) => {
 	const {themeScrollContentHandle, scrollContainerHandle} = instances;
-	const {isScrollButtonFocused, type} = context;
+	const {isScrollButtonFocused, scrollMode} = context;
 
 	// Functions
 
@@ -390,7 +390,7 @@ const useEventMouse = (props, instances, context) => {
 
 		if (props['data-spotlight-container-disabled']) {
 			ev.preventDefault();
-		} else if (type === 'Native') {
+		} else if (scrollMode === 'native') {
 			themeScrollContentHandle.current.setContainerDisabled(false);
 		}
 	}
@@ -549,7 +549,7 @@ const useEventVoice = (props, instances, context) => {
 
 const useEventWheel = (props, instances, context) => {
 	const {themeScrollContentHandle, horizontalScrollbarRef, scrollContainerHandle, verticalScrollbarRef} = instances;
-	const {isScrollButtonFocused, type} = context;
+	const {isScrollButtonFocused, scrollMode} = context;
 
 	// Mutable value
 
@@ -661,7 +661,7 @@ const useEventWheel = (props, instances, context) => {
 	// Return
 
 	return {
-		handleWheel: type === 'JS' ? handleWheel : handleWheelNative,
+		handleWheel: scrollMode === 'translate' ? handleWheel : handleWheelNative,
 		isWheeling: mutableRef.current.isWheeling
 	};
 };

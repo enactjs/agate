@@ -50,7 +50,7 @@ const getTargetInViewByDirectionFromPosition = (direction, position, container) 
 
 const useThemeScroll = (props, instances, context) => {
 	const {themeScrollContentHandle, scrollContentRef, scrollContainerHandle, scrollContainerRef} = instances;
-	const {type} = context;
+	const {scrollMode} = context;
 	const contextSharedState = useContext(SharedState);
 
 	// Mutable value
@@ -77,15 +77,15 @@ const useThemeScroll = (props, instances, context) => {
 
 	useSpotlightRestore(props, instances);
 
-	const {handleWheel, isWheeling} = useEventWheel(props, instances, {isScrollButtonFocused, type});
+	const {handleWheel, isWheeling} = useEventWheel(props, instances, {isScrollButtonFocused, scrollMode});
 
-	const {calculateAndScrollTo, handleFocus, hasFocus} = useEventFocus(props, {...instances, spottable: mutableRef}, {alertThumb, isWheeling, type});
+	const {calculateAndScrollTo, handleFocus, hasFocus} = useEventFocus(props, {...instances, spottable: mutableRef}, {alertThumb, isWheeling, scrollMode});
 
-	const {handleKeyDown, lastPointer, scrollByPageOnPointerMode} = useEventKey(props, {...instances, spottable: mutableRef}, {hasFocus, isContent, type});
+	const {handleKeyDown, lastPointer, scrollByPageOnPointerMode} = useEventKey(props, {...instances, spottable: mutableRef}, {hasFocus, isContent, scrollMode});
 
 	useEventMonitor({}, instances, {lastPointer, scrollByPageOnPointerMode});
 
-	const {handleDragEnd, handleDragStart, handleFlick, handleMouseDown} = useEventMouse({}, instances, {isScrollButtonFocused, type});
+	const {handleDragEnd, handleDragStart, handleFlick, handleMouseDown} = useEventMouse({}, instances, {isScrollButtonFocused, scrollMode});
 
 	const {handleTouchStart} = useEventTouch({}, instances, {isScrollButtonFocused});
 
@@ -107,7 +107,7 @@ const useThemeScroll = (props, instances, context) => {
 	}
 
 	function start (animate) {
-		if (type === 'Native' && !animate) {
+		if (scrollMode === 'native' && !animate) {
 			focusOnItem();
 		}
 	}
@@ -251,9 +251,9 @@ const useScroll = (props) => {
 			preventBubblingOnKeyDown,
 			scrollDownAriaLabel,
 			scrollLeftAriaLabel,
+			scrollMode,
 			scrollRightAriaLabel,
 			scrollUpAriaLabel,
-			type,
 			...rest
 		} = props,
 		downButtonAriaLabel = scrollDownAriaLabel == null ? $L('scroll down') : scrollDownAriaLabel,
@@ -343,15 +343,15 @@ const useScroll = (props) => {
 		removeEventListeners,
 		scrollAndFocusScrollbarButton,
 		scrollbarProps,
-		scrollStopOnScroll, // Native
+		scrollStopOnScroll, // scrollMode 'native'
 		scrollTo,
-		start, // Native
-		stop // JS
-	} = useThemeScroll(props, instance, {type});
+		start, // scrollMode 'native'
+		stop // scrollMode 'translate'
+	} = useThemeScroll(props, instance, {scrollMode});
 
 	// Render
 
-	if (type === 'JS') {
+	if (scrollMode === 'translate') {
 		scrollProps.stop = stop;
 	} else {
 		scrollProps.scrollStopOnScroll = scrollStopOnScroll;
@@ -381,7 +381,7 @@ const useScroll = (props) => {
 		scrollTo,
 		setScrollContentHandle,
 		setScrollContainerHandle,
-		type,
+		scrollMode,
 		scrollContentHandle,
 		scrollContentRef,
 		scrollContainerRef,
