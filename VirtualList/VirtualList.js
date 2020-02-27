@@ -4,29 +4,29 @@
  * @module agate/VirtualList
  * @exports VirtualGridList
  * @exports VirtualList
- * @exports VirtualListBase
+ * @exports VirtualListBasic
  */
 
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {ResizeContext} from '@enact/ui/Resizable';
-import {gridListItemSizeShape, itemSizesShape, VirtualListBase as UiVirtualListBase} from '@enact/ui/VirtualList';
+import {gridListItemSizeShape, itemSizesShape, VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
 import PropTypes from 'prop-types';
 import React from 'react';
 import warning from 'warning';
 
-import useScroll from '../Scrollable';
-import Scrollbar from '../Scrollable/Scrollbar';
+import useScroll from '../useScroll';
+import Scrollbar from '../useScroll/Scrollbar';
 import Skinnable from '../Skinnable';
 
-import {useSpottableVirtualList, VirtualListBase} from './VirtualListBase';
+import {useThemeVirtualList} from './useThemeVirtualList';
+import {VirtualListBasic} from './VirtualListBasic';
 
 /**
  * An Agate-styled scrollable and spottable virtual list component.
  *
  * @class VirtualList
  * @memberof agate/VirtualList
- * @extends agate/VirtualList.VirtualListBase
  * @ui
  * @public
  */
@@ -49,33 +49,33 @@ let VirtualList = ({itemSize, role, ...rest}) => {
 
 	const {
 		// Variables
-		childWrapper: ChildWrapper,
+		scrollContentWrapper: ScrollContentWrapper,
 		isHorizontalScrollbarVisible,
 		isVerticalScrollbarVisible,
 
 		// Child Props
 		resizeContextProps,
 		scrollContainerProps,
-		innerScrollContainerProps,
-		childWrapperProps,
-		childProps,
+		scrollInnerContainerProps,
+		scrollContentWrapperProps,
+		scrollContentProps,
 		verticalScrollbarProps,
 		horizontalScrollbarProps
 	} = useScroll({...rest, ...props});
 
-	const uiChildProps = useSpottableVirtualList({
-		...childProps,
+	const themeScrollContentProps = useThemeVirtualList({
+		...scrollContentProps,
 		focusableScrollbar: rest.focusableScrollbar,
-		role: role
+		role
 	});
 
 	return (
 		<ResizeContext.Provider {...resizeContextProps}>
 			<div {...scrollContainerProps}>
-				<div {...innerScrollContainerProps}>
-					<ChildWrapper {...childWrapperProps}>
-						<UiVirtualListBase {...uiChildProps} />
-					</ChildWrapper>
+				<div {...scrollInnerContainerProps}>
+					<ScrollContentWrapper {...scrollContentWrapperProps}>
+						<UiVirtualListBasic {...themeScrollContentProps} />
+					</ScrollContentWrapper>
 					{isVerticalScrollbarVisible ? <Scrollbar {...verticalScrollbarProps} /> : null}
 				</div>
 				{isHorizontalScrollbarVisible ? <Scrollbar {...horizontalScrollbarProps} /> : null}
@@ -159,7 +159,7 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	preventBubblingOnKeyDown: PropTypes.oneOf(['none', 'programmatic']),
 	role: PropTypes.string,
 
-	type: PropTypes.string,
+	scrollMode: PropTypes.string,
 
 	/**
 	 * Specifies how to show vertical scrollbar.
@@ -190,7 +190,7 @@ VirtualList.defaultProps = {
 	},
 	preventBubblingOnKeyDown: 'programmatic',
 	role: 'list',
-	type: 'JS',
+	scrollMode: 'translate',
 	verticalScrollbar: 'auto'
 };
 
@@ -213,40 +213,39 @@ VirtualList = Skinnable(
  *
  * @class VirtualGridList
  * @memberof agate/VirtualList
- * @extends agate/VirtualList.VirtualListBase
  * @ui
  * @public
  */
 let VirtualGridList = ({role, ...rest}) => {
 	const {
 		// Variables
-		childWrapper: ChildWrapper,
+		scrollContentWrapper: ScrollContentWrapper,
 		isHorizontalScrollbarVisible,
 		isVerticalScrollbarVisible,
 
 		// Child Props
 		resizeContextProps,
 		scrollContainerProps,
-		innerScrollContainerProps,
-		childWrapperProps,
-		childProps,
+		scrollInnerContainerProps,
+		scrollContentWrapperProps,
+		scrollContentProps,
 		verticalScrollbarProps,
 		horizontalScrollbarProps
 	} = useScroll(rest);
 
-	const uiChildProps = useSpottableVirtualList({
-		...childProps,
+	const themeScrollContentProps = useThemeVirtualList({
+		...scrollContentProps,
 		focusableScrollbar: rest.focusableScrollbar,
-		role: role
+		role
 	});
 
 	return (
 		<ResizeContext.Provider {...resizeContextProps}>
 			<div {...scrollContainerProps}>
-				<div {...innerScrollContainerProps}>
-					<ChildWrapper {...childWrapperProps}>
-						<UiVirtualListBase {...uiChildProps} />
-					</ChildWrapper>
+				<div {...scrollInnerContainerProps}>
+					<ScrollContentWrapper {...scrollContentWrapperProps}>
+						<UiVirtualListBasic {...themeScrollContentProps} />
+					</ScrollContentWrapper>
 					{isVerticalScrollbarVisible ? <Scrollbar {...verticalScrollbarProps} /> : null}
 				</div>
 				{isHorizontalScrollbarVisible ? <Scrollbar {...horizontalScrollbarProps} /> : null}
@@ -330,7 +329,8 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 
 	preventBubblingOnKeyDown: PropTypes.oneOf(['none', 'programmatic']),
 	role: PropTypes.string,
-	type: PropTypes.string,
+
+	scrollMode: PropTypes.string,
 
 	/**
 	 * Specifies how to show vertical scrollbar.
@@ -361,7 +361,7 @@ VirtualGridList.defaultProps = {
 	},
 	preventBubblingOnKeyDown: 'programmatic',
 	role: 'list',
-	type: 'JS',
+	scrollMode: 'translate',
 	verticalScrollbar: 'auto'
 };
 
@@ -383,5 +383,5 @@ export default VirtualList;
 export {
 	VirtualGridList,
 	VirtualList,
-	VirtualListBase
+	VirtualListBasic
 };

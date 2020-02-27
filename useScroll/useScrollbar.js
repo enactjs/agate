@@ -1,10 +1,10 @@
 import Spotlight from '@enact/spotlight';
-import {constants} from '@enact/ui/Scrollable';
+import {constants} from '@enact/ui/useScroll';
 
 const {paginationPageMultiplier} = constants;
 
 const useScrollbar = (props, instances, context) => {
-	const {horizontalScrollbarRef, uiScrollAdapter, verticalScrollbarRef} = instances;
+	const {horizontalScrollbarRef, scrollContainerHandle, verticalScrollbarRef} = instances;
 	const {isContent} = context;
 
 	const scrollbarProps = {
@@ -24,19 +24,19 @@ const useScrollbar = (props, instances, context) => {
 
 	function onScrollbarButtonClick ({isPreviousScrollButton, isVerticalScrollBar}) {
 		const
-			{wheelDirection} = uiScrollAdapter.current,
-			bounds = uiScrollAdapter.current.getScrollBounds(),
+			{wheelDirection} = scrollContainerHandle.current,
+			bounds = scrollContainerHandle.current.getScrollBounds(),
 			direction = isPreviousScrollButton ? -1 : 1,
 			pageDistance = direction * (isVerticalScrollBar ? bounds.clientHeight : bounds.clientWidth) * paginationPageMultiplier;
 
-		uiScrollAdapter.current.lastInputType = 'scrollbarButton';
+		scrollContainerHandle.current.lastInputType = 'scrollbarButton';
 
 		if (direction !== wheelDirection) {
-			uiScrollAdapter.current.isScrollAnimationTargetAccumulated = false;
-			uiScrollAdapter.current.wheelDirection = direction;
+			scrollContainerHandle.current.isScrollAnimationTargetAccumulated = false;
+			scrollContainerHandle.current.wheelDirection = direction;
 		}
 
-		uiScrollAdapter.current.scrollToAccumulatedTarget(pageDistance, isVerticalScrollBar);
+		scrollContainerHandle.current.scrollToAccumulatedTarget(pageDistance, isVerticalScrollBar);
 	}
 
 	function focusOnScrollButton (scrollbarRef, isPreviousScrollButton) {
@@ -46,9 +46,9 @@ const useScrollbar = (props, instances, context) => {
 	}
 
 	function scrollAndFocusScrollbarButton (direction) {
-		if (uiScrollAdapter.current) {
+		if (scrollContainerHandle.current) {
 			const
-				{rtl} = uiScrollAdapter.current,
+				{rtl} = scrollContainerHandle.current,
 				isPreviousScrollButton = direction === 'up' || (rtl ? direction === 'right' : direction === 'left'),
 				isHorizontalDirection = direction === 'left' || direction === 'right',
 				isVerticalDirection = direction === 'up' || direction === 'down',
@@ -72,16 +72,16 @@ const useScrollbar = (props, instances, context) => {
 	}
 
 	function alertThumb () {
-		const bounds = uiScrollAdapter.current.getScrollBounds();
+		const bounds = scrollContainerHandle.current.getScrollBounds();
 
-		uiScrollAdapter.current.showThumb(bounds);
-		uiScrollAdapter.current.startHidingThumb();
+		scrollContainerHandle.current.showThumb(bounds);
+		scrollContainerHandle.current.startHidingThumb();
 	}
 
 	function alertThumbAfterRendered () {
 		const spotItem = Spotlight.getCurrent();
 
-		if (!Spotlight.getPointerMode() && isContent(spotItem) && uiScrollAdapter.current.isUpdatedScrollThumb) {
+		if (!Spotlight.getPointerMode() && isContent(spotItem) && scrollContainerHandle.current.isUpdatedScrollThumb) {
 			alertThumb();
 		}
 	}

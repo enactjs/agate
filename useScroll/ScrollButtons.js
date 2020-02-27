@@ -2,7 +2,7 @@ import {forward} from '@enact/core/handle';
 import {getTargetByDirectionFromElement} from '@enact/spotlight/src/target';
 import {is} from '@enact/core/keymap';
 import Spotlight, {getDirection} from '@enact/spotlight';
-import utilEvent from '@enact/ui/Scrollable/utilEvent';
+import utilEvent from '@enact/ui/useScroll/utilEvent';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
@@ -32,17 +32,17 @@ const
 	};
 
 /**
- * An Agate-styled scroll buttons. It is used in [Scrollbar]{@link agate/Scrollable.Scrollbar}.
+ * An Agate-styled scroll buttons. It is used in [Scrollbar]{@link agate/useScroll.Scrollbar}.
  *
  * @class ScrollButtons
- * @memberof agate/Scrollable
+ * @memberof agate/useScroll
  * @ui
  * @private
  */
 class ScrollButtons extends Component {
 	static displayName = 'ScrollButtons'
 
-	static propTypes = /** @lends agate/Scrollable.ScrollButtons.prototype */ {
+	static propTypes = /** @lends agate/useScroll.ScrollButtons.prototype */ {
 		/**
 		 * The render function for thumb.
 		 *

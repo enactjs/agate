@@ -1,4 +1,4 @@
-import {ScrollThumb as UiScrollThumb} from '@enact/ui/Scrollable/Scrollbar';
+import {ScrollThumb as UiScrollThumb} from '@enact/ui/useScroll/Scrollbar';
 import PropTypes from 'prop-types';
 import React, {forwardRef, useEffect} from 'react';
 
@@ -8,7 +8,7 @@ const nop = () => {};
  * An Agate-styled scroll thumb with agate behavior
  *
  * @class ScrollThumb
- * @memberof agate/Scrollable
+ * @memberof agate/useScroll
  * @extends ui/Scrollable/ScrollThumb
  * @ui
  * @private
@@ -23,9 +23,9 @@ const ScrollThumb = forwardRef(({cbAlertThumb, ...rest}, ref) => {
 
 ScrollThumb.displayName = 'ScrollThumb';
 
-ScrollThumb.propTypes = /** @lends agate/Scrollable.ScrollThumb.prototype */ {
+ScrollThumb.propTypes = /** @lends agate/useScroll.ScrollThumb.prototype */ {
 	/**
-	 * Called when [ScrollThumb]{@link agate/Scrollable.ScrollThumb} is updated.
+	 * Called when [ScrollThumb]{@link agate/useScroll.ScrollThumb} is updated.
 	 *
 	 * @type {Function}
 	 * @private

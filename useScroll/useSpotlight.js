@@ -1,5 +1,5 @@
 import Spotlight from '@enact/spotlight';
-import utilDOM from '@enact/ui/Scrollable/utilDOM';
+import utilDOM from '@enact/ui/useScroll/utilDOM';
 import {useContext, useEffect, useLayoutEffect} from 'react';
 
 import {SharedState} from '../Panels/SharedStateDecorator';
@@ -32,7 +32,7 @@ const useSpotlightConfig = (props) => {
 };
 
 const useSpotlightRestore = (props, instances) => {
-	const {uiScrollAdapter} = instances;
+	const {scrollContainerHandle} = instances;
 	const context = useContext(SharedState);
 
 	// Hooks
@@ -46,7 +46,7 @@ const useSpotlightRestore = (props, instances) => {
 				const scrollPosition = context.get(`${id}.scrollPosition`);
 
 				if (scrollPosition) {
-					uiScrollAdapter.current.scrollTo({
+					scrollContainerHandle.current.scrollTo({
 						position: scrollPosition,
 						animate: false
 					});
@@ -55,7 +55,7 @@ const useSpotlightRestore = (props, instances) => {
 		}
 
 		restoreScrollPosition();
-	}, [context, props, uiScrollAdapter]);
+	}, [context, props, scrollContainerHandle]);
 };
 
 export {

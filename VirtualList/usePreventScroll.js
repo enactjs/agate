@@ -1,17 +1,17 @@
-import utilEvent from '@enact/ui/Scrollable/utilEvent';
+import utilEvent from '@enact/ui/useScroll/utilEvent';
 import {useEffect} from 'react';
 
 const usePreventScroll = (props, instances, context) => {
-	const {uiChildContainerRef} = instances;
-	const {type} = context;
+	const {scrollContentRef} = instances;
+	const {scrollMode} = context;
 
 	// Hooks
 
 	useEffect(() => {
 		const {rtl} = props;
-		const containerNode = uiChildContainerRef.current;
+		const containerNode = scrollContentRef.current;
 
-		if (type === 'JS' && containerNode) {
+		if (scrollMode === 'translate' && containerNode) {
 			const preventScroll = () => {
 				containerNode.scrollTop = 0;
 				containerNode.scrollLeft = rtl ? containerNode.scrollWidth : 0;
@@ -24,7 +24,7 @@ const usePreventScroll = (props, instances, context) => {
 				utilEvent('scroll').removeEventListener(containerNode, preventScroll);
 			};
 		}
-	}, [props, type]); // eslint-disable-line react-hooks/exhaustive-deps
+	}, [props, scrollMode]); // eslint-disable-line react-hooks/exhaustive-deps
 };
 
 export default usePreventScroll;
