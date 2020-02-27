@@ -30,6 +30,19 @@ import Skinnable from '../Skinnable';
 import ScrollerBasic from './ScrollerBasic';
 import useThemeScroller from './useThemeScroller';
 
+/**
+ * An Agate-styled Scroller, Scrollable applied.
+ *
+ * Usage:
+ * ```
+ * <Scroller>Scroll me.</Scroller>
+ * ```
+ *
+ * @class Scroller
+ * @memberof agate/Scroller
+ * @ui
+ * @private
+ */
 let Scroller = (props) => {
 	// Hooks
 

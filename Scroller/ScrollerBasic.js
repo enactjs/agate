@@ -125,21 +125,6 @@ class ScrollerBasic extends Component {
  * @private
  */
 
-/**
- * An Agate-styled Scroller, Scrollable applied.
- *
- * Usage:
- * ```
- * <Scroller>Scroll me.</Scroller>
- * ```
- *
- * @class Scroller
- * @memberof agate/Scroller
- * @extends agate/Scroller.ScrollerBasic
- * @ui
- * @private
- */
-
 export default ScrollerBasic;
 export {
 	ScrollerBasic
