@@ -27,7 +27,6 @@ import {VirtualListBasic} from './VirtualListBasic';
  *
  * @class VirtualList
  * @memberof agate/VirtualList
- * @extends agate/VirtualList.VirtualListBasic
  * @ui
  * @public
  */
@@ -214,7 +213,6 @@ VirtualList = Skinnable(
  *
  * @class VirtualGridList
  * @memberof agate/VirtualList
- * @extends agate/VirtualList.VirtualListBasic
  * @ui
  * @public
  */
