@@ -130,7 +130,7 @@ const SwitchItemBase = kind({
 	render: ({children, css, icon, offText, onText, selected, ...rest}) => {
 
 		return (
-			<Item {...rest} css={css} label={selected ? onText : offText} labelPosition="after">
+			<Item aria-checked={selected} role="checkbox" {...rest} css={css} label={selected ? onText : offText} labelPosition="after">
 				{icon}
 				{children}
 				<Switch slot="slotAfter" selected={selected} className={css.switchIcon} />
