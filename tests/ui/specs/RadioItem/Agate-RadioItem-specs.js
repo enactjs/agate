@@ -7,7 +7,7 @@ describe('RadioItem', function () {
 	});
 
 	it('should have focus on first item at start', function () {
-		expect(Page.components.radioDefault.self.hasFocus()).to.be.true();
+		expect(Page.components.radioDefault.self.isFocused()).to.be.true();
 	});
 
 	describe('default', function () {
