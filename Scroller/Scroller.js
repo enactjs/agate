@@ -13,7 +13,6 @@
  *
  * @module agate/Scroller
  * @exports Scroller
- * @exports ScrollerBasic
  */
 
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
@@ -27,11 +26,10 @@ import useScroll from '../useScroll';
 import Scrollbar from '../useScroll/Scrollbar';
 import Skinnable from '../Skinnable';
 
-import ScrollerBasic from './ScrollerBasic';
 import useThemeScroller from './useThemeScroller';
 
 /**
- * An Agate-styled Scroller, Scrollable applied.
+ * An Agate-styled Scroller, useScroll applied.
  *
  * Usage:
  * ```
@@ -40,8 +38,9 @@ import useThemeScroller from './useThemeScroller';
  *
  * @class Scroller
  * @memberof agate/Scroller
+ * @extends ui/Scroller.ScrollerBasic
  * @ui
- * @private
+ * @public
  */
 let Scroller = (props) => {
 	// Hooks
@@ -80,35 +79,124 @@ let Scroller = (props) => {
 };
 
 Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
-	direction: PropTypes.oneOf(['both', 'horizontal', 'vertical']),
+	/**
+	 * This is set to `true` by SpotlightContainerDecorator
+	 *
+	 * @type {Boolean}
+	 * @private
+	 */
+	'data-spotlight-container': PropTypes.bool,
 
 	/**
-	 * Specifies how to show horizontal scrollbar.
+	 * `false` if the content of the list or the scroller could get focus
 	 *
-	 * Valid values are:
-	 * * `'auto'`,
-	 * * `'visible'`, and
-	 * * `'hidden'`.
-	 *
-	 * @type {String}
-	 * @default 'auto'
-	 * @public
+	 * @type {Boolean}
+	 * @default false
+	 * @private
 	 */
-	horizontalScrollbar: PropTypes.oneOf(['auto', 'visible', 'hidden']),
+	'data-spotlight-container-disabled': PropTypes.bool,
 
 	/**
-	 * Specifies how to show vertical scrollbar.
-	 *
-	 * Valid values are:
-	 * * `'auto'`,
-	 * * `'visible'`, and
-	 * * `'hidden'`.
+	 * This is passed onto the wrapped component to allow
+	 * it to customize the spotlight container for its use case.
 	 *
 	 * @type {String}
-	 * @default 'auto'
+	 * @private
+	 */
+	'data-spotlight-id': PropTypes.string,
+
+	/**
+	 * Allows 5-way navigation to the scrollbar controls. By default, 5-way will
+	 * not move focus to the scrollbar controls.
+	 *
+	 * @type {Boolean}
+	 * @default false
 	 * @public
 	 */
-	verticalScrollbar: PropTypes.oneOf(['auto', 'visible', 'hidden'])
+	focusableScrollbar: PropTypes.bool,
+
+	/**
+	 * Unique identifier for the component.
+	 *
+	 * When defined and when the `Scroller` is within a [Panel]{@link agate/Panels.Panel}, the
+	 * `Scroller` will store its scroll position and restore that position when returning to the
+	 * `Panel`.
+	 *
+	 * @type {String}
+	 * @public
+	 */
+	id: PropTypes.string,
+
+	/**
+	 * Specifies overscroll effects shows on which type of inputs.
+	 *
+	 * @type {Object}
+	 * @default {
+	 *	arrowKey: false,
+	 *	drag: false,
+	 *	pageKey: false,
+	 *	scrollbarButton: false,
+	 *	wheel: true
+	 * }
+	 * @private
+	 */
+	overscrollEffectOn: PropTypes.shape({
+		arrowKey: PropTypes.bool,
+		drag: PropTypes.bool,
+		pageKey: PropTypes.bool,
+		scrollbarButton: PropTypes.bool,
+		wheel: PropTypes.bool
+	}),
+
+	/**
+	 * Specifies preventing keydown events from bubbling up to applications.
+	 * Valid values are `'none'`, and `'programmatic'`.
+	 *
+	 * When it is `'none'`, every keydown event is bubbled.
+	 * When it is `'programmatic'`, an event bubbling is not allowed for a keydown input
+	 * which invokes programmatic spotlight moving.
+	 *
+	 * @type {String}
+	 * @default 'none'
+	 * @private
+	 */
+	preventBubblingOnKeyDown: PropTypes.oneOf(['none', 'programmatic']),
+
+	/**
+	 * Sets the hint string read when focusing the next button in the vertical scroll bar.
+	 *
+	 * @type {String}
+	 * @default $L('scroll down')
+	 * @public
+	 */
+	scrollDownAriaLabel: PropTypes.string,
+
+	/**
+	 * Sets the hint string read when focusing the previous button in the horizontal scroll bar.
+	 *
+	 * @type {String}
+	 * @default $L('scroll left')
+	 * @public
+	 */
+	scrollLeftAriaLabel: PropTypes.string,
+
+	/**
+	 * Sets the hint string read when focusing the next button in the horizontal scroll bar.
+	 *
+	 * @type {String}
+	 * @default $L('scroll right')
+	 * @public
+	 */
+	scrollRightAriaLabel: PropTypes.string,
+
+	/**
+	 * Sets the hint string read when focusing the previous button in the vertical scroll bar.
+	 *
+	 * @type {String}
+	 * @default $L('scroll up')
+	 * @public
+	 */
+	scrollUpAriaLabel: PropTypes.string
 };
 
 Scroller.defaultProps = {
@@ -144,6 +232,5 @@ Scroller = Skinnable(
 
 export default Scroller;
 export {
-	Scroller,
-	ScrollerBasic
+	Scroller
 };
