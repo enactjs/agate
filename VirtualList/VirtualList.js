@@ -4,7 +4,6 @@
  * @module agate/VirtualList
  * @exports VirtualGridList
  * @exports VirtualList
- * @exports VirtualListBasic
  */
 
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
@@ -20,13 +19,13 @@ import Scrollbar from '../useScroll/Scrollbar';
 import Skinnable from '../Skinnable';
 
 import {useThemeVirtualList} from './useThemeVirtualList';
-import {VirtualListBasic} from './VirtualListBasic';
 
 /**
  * An Agate-styled scrollable and spottable virtual list component.
  *
  * @class VirtualList
  * @memberof agate/VirtualList
+ * @extends ui/VirtualList.VirtualListBasic
  * @ui
  * @public
  */
@@ -105,10 +104,16 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	 */
 	itemSize: PropTypes.oneOfType([PropTypes.number, itemSizesShape]).isRequired,
 
-	cbScrollTo: PropTypes.func,
+	/**
+	 * This is set to `true` by SpotlightContainerDecorator
+	 *
+	 * @type {Boolean}
+	 * @private
+	 */
+	'data-spotlight-container': PropTypes.bool,
 
 	/**
-	 * `false` if the content of the list or the scroller could get focus
+	 * `false` if the content of the list could get focus
 	 *
 	 * @type {Boolean}
 	 * @default false
@@ -116,24 +121,53 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	 */
 	'data-spotlight-container-disabled': PropTypes.bool,
 
-	direction: PropTypes.oneOf(['horizontal', 'vertical']),
+	/**
+	 * This is passed onto the wrapped component to allow
+	 * it to customize the spotlight container for its use case.
+	 *
+	 * @type {String}
+	 * @private
+	 */
+	'data-spotlight-id': PropTypes.string,
+
+	/**
+	 * Allows 5-way navigation to the scrollbar controls. By default, 5-way will
+	 * not move focus to the scrollbar controls.
+	 *
+	 * @type {Boolean}
+	 * @default false
+	 * @public
+	 */
 	focusableScrollbar: PropTypes.bool,
 
 	/**
-	 * Specifies how to show horizontal scrollbar.
+	 * Unique identifier for the component.
 	 *
-	 * Valid values are:
-	 * * `'auto'`,
-	 * * `'visible'`, and
-	 * * `'hidden'`.
+	 * When defined and when the `VirtualList` is within a [Panel]{@link sandstone/Panels.Panel},
+	 * the `VirtualList` will store its scroll position and restore that position when returning to
+	 * the `Panel`.
 	 *
 	 * @type {String}
-	 * @default 'auto'
 	 * @public
 	 */
-	horizontalScrollbar: PropTypes.oneOf(['auto', 'visible', 'hidden']),
+	id: PropTypes.string,
 
-	itemSizes: PropTypes.array,
+	/**
+	 * Prop to check if horizontal Scrollbar exists or not.
+	 *
+	 * @type {Boolean}
+	 * @private
+	 */
+	isHorizontalScrollbarVisible: PropTypes.bool,
+
+	/**
+	 * Prop to check if vertical Scrollbar exists or not.
+	 *
+	 * @type {Boolean}
+	 * @private
+	 */
+	isVerticalScrollbarVisible: PropTypes.bool,
+
 
 	/**
 	 * Specifies overscroll effects shows on which type of inputs.
@@ -156,28 +190,93 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 		wheel: PropTypes.bool
 	}),
 
-	preventBubblingOnKeyDown: PropTypes.oneOf(['none', 'programmatic']),
-	role: PropTypes.string,
-
-	scrollMode: PropTypes.string,
-
 	/**
-	 * Specifies how to show vertical scrollbar.
+	 * Specifies preventing keydown events from bubbling up to applications.
+	 * Valid values are `'none'`, and `'programmatic'`.
 	 *
-	 * Valid values are:
-	 * * `'auto'`,
-	 * * `'visible'`, and
-	 * * `'hidden'`.
+	 * When it is `'none'`, every keydown event is bubbled.
+	 * When it is `'programmatic'`, an event bubbling is not allowed for a keydown input
+	 * which invokes programmatic spotlight moving.
 	 *
 	 * @type {String}
-	 * @default 'auto'
+	 * @default 'programmatic'
+	 * @private
+	 */
+	preventBubblingOnKeyDown: PropTypes.oneOf(['none', 'programmatic']),
+
+	/**
+	 * The ARIA role for the list.
+	 *
+	 * @type {String}
+	 * @default 'list'
 	 * @public
 	 */
-	verticalScrollbar: PropTypes.oneOf(['auto', 'visible', 'hidden'])
+	role: PropTypes.string,
+
+	/**
+	 * Sets the hint string read when focusing the next button in the vertical scroll bar.
+	 *
+	 * @type {String}
+	 * @default $L('scroll down')
+	 * @public
+	 */
+	scrollDownAriaLabel: PropTypes.string,
+
+	/**
+	 * Sets the hint string read when focusing the previous button in the horizontal scroll bar.
+	 *
+	 * @type {String}
+	 * @default $L('scroll left')
+	 * @public
+	 */
+	scrollLeftAriaLabel: PropTypes.string,
+
+	/**
+	 * Sets the hint string read when focusing the next button in the horizontal scroll bar.
+	 *
+	 * @type {String}
+	 * @default $L('scroll right')
+	 * @public
+	 */
+	scrollRightAriaLabel: PropTypes.string,
+
+	/**
+	 * Sets the hint string read when focusing the previous button in the vertical scroll bar.
+	 *
+	 * @type {String}
+	 * @default $L('scroll up')
+	 * @public
+	 */
+	scrollUpAriaLabel: PropTypes.string,
+
+	/**
+	 * Spotlight Id.
+	 *
+	 * @type {String}
+	 * @private
+	 */
+	spotlightId: PropTypes.string,
+
+	/**
+	 * When it's `true` and the spotlight focus cannot move to the given direction anymore by 5-way keys,
+	 * a list is scrolled with an animation to the other side and the spotlight focus moves in wraparound manner.
+	 *
+	 * When it's `'noAnimation'`, the spotlight focus moves in wraparound manner as same as when it's `true`
+	 * except that a list is scrolled without an animation.
+	 *
+	 * @type {Boolean|String}
+	 * @default false
+	 * @public
+	 */
+	wrap: PropTypes.oneOfType([
+		PropTypes.bool,
+		PropTypes.oneOf(['noAnimation'])
+	])
 };
 
 VirtualList.defaultProps = {
 	'data-spotlight-container-disabled': false,
+	dataSize: 0,
 	direction: 'vertical',
 	focusableScrollbar: false,
 	horizontalScrollbar: 'auto',
@@ -188,10 +287,13 @@ VirtualList.defaultProps = {
 		scrollbarButton: false,
 		wheel: true
 	},
+	pageScroll: false,
 	preventBubblingOnKeyDown: 'programmatic',
 	role: 'list',
 	scrollMode: 'translate',
-	verticalScrollbar: 'auto'
+	spacing: 0,
+	verticalScrollbar: 'auto',
+	wrap: false
 };
 
 VirtualList = Skinnable(
@@ -213,6 +315,7 @@ VirtualList = Skinnable(
  *
  * @class VirtualGridList
  * @memberof agate/VirtualList
+ * @extends ui/VirtualList.VirtualListBasic
  * @ui
  * @public
  */
@@ -277,10 +380,16 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	 */
 	itemSize: gridListItemSizeShape.isRequired,
 
-	cbScrollTo: PropTypes.func,
+	/**
+	 * This is set to `true` by SpotlightContainerDecorator
+	 *
+	 * @type {Boolean}
+	 * @private
+	 */
+	'data-spotlight-container': PropTypes.bool,
 
 	/**
-	 * `false` if the content of the list or the scroller could get focus
+	 * `false` if the content of the list could get focus
 	 *
 	 * @type {Boolean}
 	 * @default false
@@ -288,23 +397,52 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	 */
 	'data-spotlight-container-disabled': PropTypes.bool,
 
-	direction: PropTypes.oneOf(['horizontal', 'vertical']),
-	focusableScrollbar: PropTypes.bool,
 	/**
-	 * Specifies how to show horizontal scrollbar.
-	 *
-	 * Valid values are:
-	 * * `'auto'`,
-	 * * `'visible'`, and
-	 * * `'hidden'`.
+	 * This is passed onto the wrapped component to allow
+	 * it to customize the spotlight container for its use case.
 	 *
 	 * @type {String}
-	 * @default 'auto'
+	 * @private
+	 */
+	'data-spotlight-id': PropTypes.string,
+
+	/**
+	 * Allows 5-way navigation to the scrollbar controls. By default, 5-way will
+	 * not move focus to the scrollbar controls.
+	 *
+	 * @type {Boolean}
+	 * @default false
 	 * @public
 	 */
-	horizontalScrollbar: PropTypes.oneOf(['auto', 'visible', 'hidden']),
+	focusableScrollbar: PropTypes.bool,
 
-	itemSizes: PropTypes.array,
+	/**
+	 * Unique identifier for the component.
+	 *
+	 * When defined and when the `VirtualGridList` is within a [Panel]{@link sandstone/Panels.Panel},
+	 * the `VirtualGridList` will store its scroll position and restore that position when returning to
+	 * the `Panel`.
+	 *
+	 * @type {String}
+	 * @public
+	 */
+	id: PropTypes.string,
+
+	/**
+	 * Prop to check if horizontal Scrollbar exists or not.
+	 *
+	 * @type {Boolean}
+	 * @private
+	 */
+	isHorizontalScrollbarVisible: PropTypes.bool,
+
+	/**
+	 * Prop to check if vertical Scrollbar exists or not.
+	 *
+	 * @type {Boolean}
+	 * @private
+	 */
+	isVerticalScrollbarVisible: PropTypes.bool,
 
 	/**
 	 * Specifies overscroll effects shows on which type of inputs.
@@ -327,28 +465,93 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 		wheel: PropTypes.bool
 	}),
 
-	preventBubblingOnKeyDown: PropTypes.oneOf(['none', 'programmatic']),
-	role: PropTypes.string,
-
-	scrollMode: PropTypes.string,
-
 	/**
-	 * Specifies how to show vertical scrollbar.
+	 * Specifies preventing keydown events from bubbling up to applications.
+	 * Valid values are `'none'`, and `'programmatic'`.
 	 *
-	 * Valid values are:
-	 * * `'auto'`,
-	 * * `'visible'`, and
-	 * * `'hidden'`.
+	 * When it is `'none'`, every keydown event is bubbled.
+	 * When it is `'programmatic'`, an event bubbling is not allowed for a keydown input
+	 * which invokes programmatic spotlight moving.
 	 *
 	 * @type {String}
-	 * @default 'auto'
+	 * @default 'programmatic'
+	 * @private
+	 */
+	preventBubblingOnKeyDown: PropTypes.oneOf(['none', 'programmatic']),
+
+	/**
+	 * The ARIA role for the list.
+	 *
+	 * @type {String}
+	 * @default 'list'
 	 * @public
 	 */
-	verticalScrollbar: PropTypes.oneOf(['auto', 'visible', 'hidden'])
+	role: PropTypes.string,
+
+	/**
+	 * Sets the hint string read when focusing the next button in the vertical scroll bar.
+	 *
+	 * @type {String}
+	 * @default $L('scroll down')
+	 * @public
+	 */
+	scrollDownAriaLabel: PropTypes.string,
+
+	/**
+	 * Sets the hint string read when focusing the previous button in the horizontal scroll bar.
+	 *
+	 * @type {String}
+	 * @default $L('scroll left')
+	 * @public
+	 */
+	scrollLeftAriaLabel: PropTypes.string,
+
+	/**
+	 * Sets the hint string read when focusing the next button in the horizontal scroll bar.
+	 *
+	 * @type {String}
+	 * @default $L('scroll right')
+	 * @public
+	 */
+	scrollRightAriaLabel: PropTypes.string,
+
+	/**
+	 * Sets the hint string read when focusing the previous button in the vertical scroll bar.
+	 *
+	 * @type {String}
+	 * @default $L('scroll up')
+	 * @public
+	 */
+	scrollUpAriaLabel: PropTypes.string,
+
+	/**
+	 * Spotlight Id.
+	 *
+	 * @type {String}
+	 * @private
+	 */
+	spotlightId: PropTypes.string,
+
+	/**
+	 * When it's `true` and the spotlight focus cannot move to the given direction anymore by 5-way keys,
+	 * a list is scrolled with an animation to the other side and the spotlight focus moves in wraparound manner.
+	 *
+	 * When it's `'noAnimation'`, the spotlight focus moves in wraparound manner as same as when it's `true`
+	 * except that a list is scrolled without an animation.
+	 *
+	 * @type {Boolean|String}
+	 * @default false
+	 * @public
+	 */
+	wrap: PropTypes.oneOfType([
+		PropTypes.bool,
+		PropTypes.oneOf(['noAnimation'])
+	])
 };
 
 VirtualGridList.defaultProps = {
 	'data-spotlight-container-disabled': false,
+	dataSize: 0,
 	direction: 'vertical',
 	focusableScrollbar: false,
 	horizontalScrollbar: 'auto',
@@ -359,10 +562,13 @@ VirtualGridList.defaultProps = {
 		scrollbarButton: false,
 		wheel: true
 	},
+	pageScroll: false,
 	preventBubblingOnKeyDown: 'programmatic',
 	role: 'list',
 	scrollMode: 'translate',
-	verticalScrollbar: 'auto'
+	spacing: 0,
+	verticalScrollbar: 'auto',
+	wrap: false
 };
 
 VirtualGridList = Skinnable(
@@ -382,6 +588,5 @@ VirtualGridList = Skinnable(
 export default VirtualList;
 export {
 	VirtualGridList,
-	VirtualList,
-	VirtualListBasic
+	VirtualList
 };
