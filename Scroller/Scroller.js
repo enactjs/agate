@@ -313,19 +313,6 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	preventBubblingOnKeyDown: PropTypes.oneOf(['none', 'programmatic']),
 
 	/**
-	 * Specifies how to scroll.
-	 *
-	 * Valid values are:
-	 * * `'translate'`,
-	 * * `'native'`.
-	 *
-	 * @type {String}
-	 * @default 'translate'
-	 * @public
-	 */
-	scrollMode: PropTypes.string,
-
-	/**
 	 * Sets the hint string read when focusing the next button in the vertical scroll bar.
 	 *
 	 * @type {String}
@@ -342,6 +329,19 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	 * @public
 	 */
 	scrollLeftAriaLabel: PropTypes.string,
+
+	/**
+	 * Specifies how to scroll.
+	 *
+	 * Valid values are:
+	 * * `'translate'`,
+	 * * `'native'`.
+	 *
+	 * @type {String}
+	 * @default 'translate'
+	 * @public
+	 */
+	scrollMode: PropTypes.string,
 
 	/**
 	 * Sets the hint string read when focusing the next button in the horizontal scroll bar.

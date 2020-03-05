@@ -968,7 +968,6 @@ VirtualGridList.defaultProps = {
 	preventBubblingOnKeyDown: 'programmatic',
 	role: 'list',
 	scrollMode: 'translate',
-	spacing: 0,
 	verticalScrollbar: 'auto',
 	wrap: false
 };
