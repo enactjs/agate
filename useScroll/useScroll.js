@@ -1,3 +1,12 @@
+/**
+ * Agate-themed scrollable hook and behaviors.
+ *
+ * @module agate/useScroll
+ * @exports dataIndexAttribute
+ * @exports useScroll
+ * @private
+ */
+
 import {forward} from '@enact/core/handle';
 import platform from '@enact/core/platform';
 import Spotlight from '@enact/spotlight';
@@ -240,6 +249,14 @@ const useThemeScroll = (props, instances, context) => {
 	};
 };
 
+/**
+ * A custom hook that passes Agate-themed scrollable behavior information as its render prop.
+ *
+ * @class
+ * @memberof agate/useScroll
+ * @ui
+ * @private
+ */
 const useScroll = (props) => {
 	const
 		{

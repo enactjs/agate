@@ -63,7 +63,6 @@ class ScrollButtons extends Component {
 
 		/**
 		 * When it is `true`, it allows 5 way navigation to the ScrollButtons.
-		 * This value is set by `Scrollable`.
 		 *
 		 * @type {Boolean}
 		 * @default false
@@ -287,8 +286,8 @@ class ScrollButtons extends Component {
 				}
 			} else {
 				const
-					// If it is vertical `Scrollable`, move focus to the left for ltr or to the right for rtl
-					// If is is horizontal `Scrollable`, move focus to the up
+					// If it is vertical Scroller, move focus to the left for ltr or to the right for rtl
+					// If is is horizontal Scroller, move focus to the up
 					directionToContent = !vertical && 'up' || rtl && 'right' || 'left',
 					isLeavingDown = vertical && isNextButton && isDown,
 					isLeavingUp = vertical && isPrevButton && isUp,

@@ -28,6 +28,8 @@ import Skinnable from '../Skinnable';
 
 import useThemeScroller from './useThemeScroller';
 
+const nop = () => {};
+
 /**
  * An Agate-styled Scroller, useScroll applied.
  *
@@ -78,7 +80,38 @@ let Scroller = (props) => {
 	);
 };
 
+Scroller.displayName = 'Scroller';
+
 Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
+	/**
+	 * A callback function that receives a reference to the `scrollTo` feature.
+	 *
+	 * Once received, the `scrollTo` method can be called as an imperative interface.
+	 *
+	 * - {position: {x, y}} - Pixel value for x and/or y position
+	 * - {align} - Where the scroll area should be aligned. Values are:
+	 *   `'left'`, `'right'`, `'top'`, `'bottom'`,
+	 *   `'topleft'`, `'topright'`, `'bottomleft'`, and `'bottomright'`.
+	 * - {node} - Node to scroll into view
+	 * - {animate} - When `true`, scroll occurs with animation. When `false`, no
+	 *   animation occurs.
+	 * - {focus} - When `true`, attempts to focus item after scroll. Only valid when scrolling
+	 *   by `node`.
+	 * > Note: Only specify one of: `position`, `align`, `node`
+	 *
+	 * Example:
+	 * ```
+	 *	// If you set cbScrollTo prop like below;
+	 *	cbScrollTo: (fn) => {this.scrollTo = fn;}
+	 *	// You can simply call like below;
+	 *	this.scrollTo({align: 'top'}); // scroll to the top
+	 * ```
+	 *
+	 * @type {Function}
+	 * @public
+	 */
+	cbScrollTo: PropTypes.func,
+
 	/**
 	 * This is set to `true` by SpotlightContainerDecorator
 	 *
@@ -106,6 +139,20 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	'data-spotlight-id': PropTypes.string,
 
 	/**
+	 * Direction of the scroller.
+	 *
+	 * Valid values are:
+	 * * `'both'`,
+	 * * `'horizontal'`, and
+	 * * `'vertical'`.
+	 *
+	 * @type {String}
+	 * @default 'both'
+	 * @public
+	 */
+	direction: PropTypes.string,
+
+	/**
 	 * Allows 5-way navigation to the scrollbar controls. By default, 5-way will
 	 * not move focus to the scrollbar controls.
 	 *
@@ -114,6 +161,20 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	 * @public
 	 */
 	focusableScrollbar: PropTypes.bool,
+
+	/**
+	 * Specifies how to show horizontal scrollbar.
+	 *
+	 * Valid values are:
+	 * * `'auto'`,
+	 * * `'visible'`, and
+	 * * `'hidden'`.
+	 *
+	 * @type {String}
+	 * @default 'auto'
+	 * @public
+	 */
+	horizontalScrollbar: PropTypes.oneOf(['auto', 'visible', 'hidden']),
 
 	/**
 	 * Unique identifier for the component.
@@ -126,6 +187,95 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	 * @public
 	 */
 	id: PropTypes.string,
+
+	/**
+	 * Prevents scroll by dragging or flicking on the scroller.
+	 *
+	 * @type {Boolean}
+	 * @default false
+	 * @private
+	 */
+	noScrollByDrag: PropTypes.bool,
+
+	/**
+	 * Prevents scroll by wheeling on the scroller.
+	 *
+	 * @type {Boolean}
+	 * @default false
+	 * @public
+	 */
+	noScrollByWheel: PropTypes.bool,
+
+	/**
+	 * Called when scrolling.
+	 *
+	 * Passes `scrollLeft`, `scrollTop`.
+	 * It is not recommended to set this prop since it can cause performance degradation.
+	 * Use `onScrollStart` or `onScrollStop` instead.
+	 *
+	 * @type {Function}
+	 * @param {Object} event
+	 * @param {Number} event.scrollLeft Scroll left value.
+	 * @param {Number} event.scrollTop Scroll top value.
+	 * @public
+	 */
+	onScroll: PropTypes.func,
+
+	/**
+	 * Called when scroll starts.
+	 *
+	 * Passes `scrollLeft` and `scrollTop`.
+	 *
+	 * Example:
+	 * ```
+	 * onScrollStart = ({scrollLeft, scrollTop}) => {
+	 *     // do something with scrollLeft and scrollTop
+	 * }
+	 *
+	 * render = () => (
+	 *     <Scroller
+	 *         ...
+	 *         onScrollStart={this.onScrollStart}
+	 *         ...
+	 *     />
+	 * )
+	 * ```
+	 *
+	 * @type {Function}
+	 * @param {Object} event
+	 * @param {Number} event.scrollLeft Scroll left value.
+	 * @param {Number} event.scrollTop Scroll top value.
+	 * @public
+	 */
+	onScrollStart: PropTypes.func,
+
+	/**
+	 * Called when scroll stops.
+	 *
+	 * Passes `scrollLeft` and `scrollTop`.
+	 *
+	 * Example:
+	 * ```
+	 * onScrollStop = ({scrollLeft, scrollTop}) => {
+	 *     // do something with scrollLeft and scrollTop
+	 * }
+	 *
+	 * render = () => (
+	 *     <Scroller
+	 *         ...
+	 *         onScrollStop={this.onScrollStop}
+	 *         ...
+	 *     />
+	 * )
+	 * ```
+	 *
+	 * @type {Function}
+	 * @param {Object} event
+	 * @param {Number} event.scrollLeft Scroll left value.
+	 * @param {Number} event.scrollTop Scroll top value.
+	 * @public
+	 */
+	onScrollStop: PropTypes.func,
 
 	/**
 	 * Specifies overscroll effects shows on which type of inputs.
@@ -163,6 +313,19 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	preventBubblingOnKeyDown: PropTypes.oneOf(['none', 'programmatic']),
 
 	/**
+	 * Specifies how to scroll.
+	 *
+	 * Valid values are:
+	 * * `'translate'`,
+	 * * `'native'`.
+	 *
+	 * @type {String}
+	 * @default 'translate'
+	 * @public
+	 */
+	scrollMode: PropTypes.string,
+
+	/**
 	 * Sets the hint string read when focusing the next button in the vertical scroll bar.
 	 *
 	 * @type {String}
@@ -196,23 +359,42 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	 * @default $L('scroll up')
 	 * @public
 	 */
-	scrollUpAriaLabel: PropTypes.string
+	scrollUpAriaLabel: PropTypes.string,
+
+	/**
+	 * Specifies how to show vertical scrollbar.
+	 *
+	 * Valid values are:
+	 * * `'auto'`,
+	 * * `'visible'`, and
+	 * * `'hidden'`.
+	 *
+	 * @type {String}
+	 * @default 'auto'
+	 * @public
+	 */
+	verticalScrollbar: PropTypes.oneOf(['auto', 'visible', 'hidden'])
 };
 
 Scroller.defaultProps = {
-	'data-spotlight-container-disabled': false, // eslint-disable-line react/default-props-match-prop-types
+	'data-spotlight-container-disabled': false,
+	cbScrollTo: nop,
 	direction: 'both',
-	focusableScrollbar: false, // eslint-disable-line react/default-props-match-prop-types
+	focusableScrollbar: false,
 	horizontalScrollbar: 'auto',
-	overscrollEffectOn: { // eslint-disable-line react/default-props-match-prop-types
+	noScrollByWheel: false,
+	onScroll: nop,
+	onScrollStart: nop,
+	onScrollStop: nop,
+	overscrollEffectOn: {
 		arrowKey: false,
 		drag: false,
 		pageKey: false,
 		scrollbarButton: false,
 		wheel: true
 	},
-	preventBubblingOnKeyDown: 'none', // eslint-disable-line react/default-props-match-prop-types
-	scrollMode: 'translate', // eslint-disable-line react/default-props-match-prop-types
+	preventBubblingOnKeyDown: 'none',
+	scrollMode: 'translate',
 	verticalScrollbar: 'auto'
 };
 
