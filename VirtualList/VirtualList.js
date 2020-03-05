@@ -238,15 +238,6 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	itemSizes: PropTypes.arrayOf(PropTypes.number),
 
 	/**
-	 * Prevents scroll by dragging or flicking on the list.
-	 *
-	 * @type {Boolean}
-	 * @default false
-	 * @private
-	 */
-	noScrollByDrag: PropTypes.bool,
-
-	/**
 	 * Prevents scroll by wheeling on the list.
 	 *
 	 * @type {Boolean}
@@ -457,7 +448,6 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	 */
 	verticalScrollbar: PropTypes.oneOf(['auto', 'visible', 'hidden']),
 
-
 	/**
 	 * When it's `true` and the spotlight focus cannot move to the given direction anymore by 5-way keys,
 	 * a list is scrolled with an animation to the other side and the spotlight focus moves in wraparound manner.
@@ -481,7 +471,6 @@ VirtualList.defaultProps = {
 	direction: 'vertical',
 	focusableScrollbar: false,
 	horizontalScrollbar: 'auto',
-	noScrollByDrag: false,
 	noScrollByWheel: false,
 	onScroll: nop,
 	onScrollStart: nop,
@@ -710,15 +699,6 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	isVerticalScrollbarVisible: PropTypes.bool,
 
 	/**
-	 * Prevents scroll by dragging or flicking on the list.
-	 *
-	 * @type {Boolean}
-	 * @default false
-	 * @private
-	 */
-	noScrollByDrag: PropTypes.bool,
-
-	/**
 	 * Prevents scroll by wheeling on the list.
 	 *
 	 * @type {Boolean}
@@ -884,7 +864,7 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	 * * `'native'`.
 	 *
 	 * @type {String}
-	 * @default 'native'
+	 * @default 'translate'
 	 * @public
 	 */
 	scrollMode: PropTypes.string,
@@ -952,7 +932,6 @@ VirtualGridList.defaultProps = {
 	direction: 'vertical',
 	focusableScrollbar: false,
 	horizontalScrollbar: 'auto',
-	noScrollByDrag: false,
 	noScrollByWheel: false,
 	onScroll: nop,
 	onScrollStart: nop,

@@ -1,5 +1,6 @@
 /**
  * Provides Agate-themed scroller components and behaviors.
+ *
  * @example
  * <Scroller>
  * 	<div style={{height: '300px'}}>
@@ -121,7 +122,7 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	'data-spotlight-container': PropTypes.bool,
 
 	/**
-	 * `false` if the content of the list or the scroller could get focus
+	 * `false` if the content of the scroller could get focus
 	 *
 	 * @type {Boolean}
 	 * @default false
@@ -187,15 +188,6 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	 * @public
 	 */
 	id: PropTypes.string,
-
-	/**
-	 * Prevents scroll by dragging or flicking on the scroller.
-	 *
-	 * @type {Boolean}
-	 * @default false
-	 * @private
-	 */
-	noScrollByDrag: PropTypes.bool,
 
 	/**
 	 * Prevents scroll by wheeling on the scroller.
