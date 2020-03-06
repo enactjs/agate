@@ -221,7 +221,7 @@ const useSpottable = (props, instances, context) => {
 		const
 
 			{pageScroll} = props,
-			{numOfItems, primary} = scrollContentHandle.current,
+			{state: {numOfItems}, primary} = scrollContentHandle.current,
 			offsetToClientEnd = primary.clientSize - primary.itemSize,
 			focusedIndex = getNumberValue(item.getAttribute(dataIndexAttribute));
 
