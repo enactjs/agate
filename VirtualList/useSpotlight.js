@@ -68,7 +68,7 @@ const getNumberValue = (index) => index | 0;
 
 const useSpotlightRestore = (props, instances, context) => {
 	const {spottable, scrollContentRef} = instances;
-	const {getItemNode} = context
+	const {getItemNode} = context;
 
 	// Mutable value
 

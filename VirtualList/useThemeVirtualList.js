@@ -1,7 +1,7 @@
 import Spotlight, {getDirection} from '@enact/spotlight';
 import Accelerator from '@enact/spotlight/Accelerator';
 import Pause from '@enact/spotlight/Pause';
-import {Spottable, spottableClass} from '@enact/spotlight/Spottable';
+import {Spottable} from '@enact/spotlight/Spottable';
 import React, {useCallback, useEffect, useRef} from 'react';
 
 import {dataIndexAttribute} from '../useScroll';
@@ -16,8 +16,7 @@ const SpotlightPlaceholder = Spottable('div');
 const
 	nop = () => {},
 	// using 'bitwise or' for string > number conversion based on performance: https://jsperf.com/convert-string-to-number-techniques/7
-	getNumberValue = (index) => index | 0,
-	spottableSelector = `.${spottableClass}`;
+	getNumberValue = (index) => index | 0;
 
 const useSpottable = (props, instances, context) => {
 	const {itemRefs, scrollContainerRef, scrollContentHandle} = instances;
