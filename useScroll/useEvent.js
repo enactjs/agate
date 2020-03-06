@@ -130,14 +130,11 @@ const useEventFocus = (props, instances, context) => {
 	}
 
 	function hasFocus () {
-		let current = Spotlight.getCurrent();
+		const current = Spotlight.getCurrent();
 
-		if (!current) {
-			const spotlightId = Spotlight.getActiveContainer();
-			current = document.querySelector(`[data-spotlight-id="${spotlightId}"]`);
+		if (current) {
+			return utilDOM.containsDangerously(scrollContainerRef.current, current);
 		}
-
-		return utilDOM.containsDangerously(scrollContainerRef, current);
 	}
 
 	// Return

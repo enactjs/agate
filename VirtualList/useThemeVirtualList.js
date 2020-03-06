@@ -13,17 +13,19 @@ import {useSpotlightConfig, useSpotlightRestore} from './useSpotlight';
 const SpotlightAccelerator = new Accelerator();
 const SpotlightPlaceholder = Spottable('div');
 
-const nop = () => {};
-
 const
-	dataContainerDisabledAttribute = 'data-spotlight-container-disabled',
+	nop = () => {},
 	// using 'bitwise or' for string > number conversion based on performance: https://jsperf.com/convert-string-to-number-techniques/7
 	getNumberValue = (index) => index | 0,
 	spottableSelector = `.${spottableClass}`;
 
 const useSpottable = (props, instances, context) => {
-	const {scrollContentHandle, scrollContentRef} = instances;
+	const {itemRefs, scrollContainerRef, scrollContentHandle} = instances;
 	const {scrollMode} = context;
+	const getItemNode = (index) => {
+		const itemNode = itemRefs.current[index % scrollContentHandle.current.state.numOfItems];
+		return (itemNode && parseInt(itemNode.dataset.index) === index) ? itemNode : null;
+	};
 
 	// Mutable value
 
@@ -79,15 +81,11 @@ const useSpottable = (props, instances, context) => {
 		handleRestoreLastFocus,
 		setPreservedIndex,
 		updateStatesAndBounds
-	} = useSpotlightRestore(props, {...instances, spottable: mutableRef});
+	} = useSpotlightRestore(props, {...instances, spottable: mutableRef}, {getItemNode});
 
 	const setContainerDisabled = useCallback((bool) => {
-		const
-			{spotlightId} = props,
-			containerNode = document.querySelector(`[data-spotlight-id="${spotlightId}"]`);
-
-		if (containerNode) {
-			containerNode.setAttribute(dataContainerDisabledAttribute, bool);
+		if (scrollContainerRef.current) {
+			scrollContainerRef.current.dataset.spotlightContainerDisabled = bool;
 
 			if (bool) {
 				addGlobalKeyDownEventListener(handleGlobalKeyDown);
@@ -95,7 +93,7 @@ const useSpottable = (props, instances, context) => {
 				removeGlobalKeyDownEventListener();
 			}
 		}
-	}, [addGlobalKeyDownEventListener, handleGlobalKeyDown, props, removeGlobalKeyDownEventListener]);
+	}, [addGlobalKeyDownEventListener, handleGlobalKeyDown, removeGlobalKeyDownEventListener, scrollContainerRef]);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	function handleGlobalKeyDown () {
@@ -147,12 +145,12 @@ const useSpottable = (props, instances, context) => {
 			} else if (row === nextRow) {
 				focusByIndex(nextIndex);
 			} else {
+				const itemNode = getItemNode(nextIndex);
+
 				mutableRef.current.isScrolledBy5way = true;
 				mutableRef.current.isWrappedBy5way = isWrapped;
 
-				if (isWrapped && (
-					scrollContentRef.current.querySelector(`[data-index='${nextIndex}']${spottableSelector}`) == null
-				)) {
+				if (isWrapped && itemNode == null) {
 					if (wrap === true) {
 						pause.pause();
 						target.blur();
@@ -183,9 +181,9 @@ const useSpottable = (props, instances, context) => {
 	}
 
 	function focusByIndex (index) {
-		const item = scrollContentRef.current.querySelector(`[data-index='${index}']${spottableSelector}`);
+		const itemNode = getItemNode(index);
 
-		if (!item && index >= 0 && index < props.dataSize) {
+		if (!itemNode && index >= 0 && index < props.dataSize) {
 			// Item is valid but since the the dom doesn't exist yet, we set the index to focus after the ongoing update
 			setPreservedIndex(index);
 		} else {
@@ -195,7 +193,7 @@ const useSpottable = (props, instances, context) => {
 			}
 
 			pause.resume();
-			focusOnNode(item);
+			focusOnNode(itemNode);
 			setNodeIndexToBeFocused(null);
 			mutableRef.current.isScrolledByJump = false;
 		}
@@ -303,11 +301,11 @@ const useSpottable = (props, instances, context) => {
 };
 
 const useThemeVirtualList = (props) => {
-	const {scrollMode, scrollContentHandle, scrollContentRef} = props;
+	const {itemRefs, scrollMode, scrollContainerRef, scrollContentHandle, scrollContentRef} = props;
 
 	// Hooks
 
-	const instance = {scrollContentHandle, scrollContentRef};
+	const instance = {itemRefs, scrollContainerRef, scrollContentHandle, scrollContentRef};
 
 	const {
 		calculatePositionOnFocus,
@@ -360,6 +358,7 @@ const useThemeVirtualList = (props) => {
 	// not used by VirtualList
 	delete rest.focusableScrollbar;
 	delete rest.scrollAndFocusScrollbarButton;
+	delete rest.scrollContainerRef;
 	delete rest.spotlightId;
 	delete rest.scrollContainerHandle;
 	delete rest.wrap;
