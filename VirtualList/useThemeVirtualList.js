@@ -391,7 +391,6 @@ function listItemsRenderer (props) {
 	const {
 		cc,
 		handlePlaceholderFocus,
-		itemContainerRef: initUiItemContainerRef,
 		needsScrollingPlaceholder,
 		primary,
 		role,
@@ -401,7 +400,7 @@ function listItemsRenderer (props) {
 	return (
 		<>
 			{cc.length ? (
-				<div ref={initUiItemContainerRef} role={role}>{cc}</div>
+				<div role={role}>{cc}</div>
 			) : null}
 			{primary ? null : (
 				<SpotlightPlaceholder
