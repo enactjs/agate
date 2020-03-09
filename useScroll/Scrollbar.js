@@ -110,7 +110,6 @@ ScrollbarBase.propTypes = /** @lends agate/useScroll.Scrollbar.prototype */ {
 
 	/**
 	 * `true` if rtl, `false` if ltr.
-	 * Normally, [Scrollable]{@link ui/Scrollable.Scrollable} should set this value.
 	 *
 	 * @type {Boolean}
 	 * @private
@@ -142,7 +141,7 @@ ScrollbarBase.defaultProps = {
 };
 
 /**
- * An Agate-styled scroll bar. It is used in [Scrollable]{@link agate/useScroll.Scrollable}.
+ * An Agate-styled scroll bar.
  *
  * @class Scrollbar
  * @memberof agate/useScroll
