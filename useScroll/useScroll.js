@@ -281,6 +281,7 @@ const useScroll = (props) => {
 
 	const scrollContainerRef = useRef();
 	const scrollContentRef = useRef();
+	const itemRefs = useRef([]);
 
 	const horizontalScrollbarRef = useRef();
 	const verticalScrollbarRef = useRef();
@@ -413,7 +414,9 @@ const useScroll = (props) => {
 	});
 
 	assignProperties('scrollContentProps', {
+		...(props.itemRenderer ? {itemRefs} : {}),
 		onUpdate: handleScrollerUpdate,
+		scrollContainerRef,
 		scrollAndFocusScrollbarButton,
 		setThemeScrollContentHandle,
 		spotlightId,
