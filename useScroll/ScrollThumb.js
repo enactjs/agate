@@ -9,7 +9,6 @@ const nop = () => {};
  *
  * @class ScrollThumb
  * @memberof agate/useScroll
- * @extends ui/Scrollable/ScrollThumb
  * @ui
  * @private
  */
