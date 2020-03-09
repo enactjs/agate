@@ -455,6 +455,10 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	 * When it's `'noAnimation'`, the spotlight focus moves in wraparound manner as same as when it's `true`
 	 * except that a list is scrolled without an animation.
 	 *
+	 * Valid values are:
+	 * * `false`,
+	 * * `true`, and
+	 * * `'noAnimation'`
 	 * @type {Boolean|String}
 	 * @default false
 	 * @public
@@ -915,6 +919,11 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	 *
 	 * When it's `'noAnimation'`, the spotlight focus moves in wraparound manner as same as when it's `true`
 	 * except that a list is scrolled without an animation.
+	 *
+	 * Valid values are:
+	 * * `false`,
+	 * * `true`, and
+	 * * `'noAnimation'`
 	 *
 	 * @type {Boolean|String}
 	 * @default false

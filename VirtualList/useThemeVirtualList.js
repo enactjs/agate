@@ -230,10 +230,10 @@ const useSpottable = (props, instances, context) => {
 			let gridPosition = scrollContentHandle.current.getGridPosition(focusedIndex);
 
 			if (numOfItems > 0 && focusedIndex % numOfItems !== mutableRef.current.lastFocusedIndex % numOfItems) {
-				const node = scrollContentHandle.current.getItemNode(mutableRef.current.lastFocusedIndex);
+				const itemNode = scrollContentHandle.current.getItemNode(mutableRef.current.lastFocusedIndex);
 
-				if (node) {
-					node.blur();
+				if (itemNode) {
+					itemNode.blur();
 				}
 			}
 
@@ -304,6 +304,8 @@ const useSpottable = (props, instances, context) => {
 const useThemeVirtualList = (props) => {
 	const {itemRefs, scrollMode, scrollContainerRef, scrollContentHandle, scrollContentRef} = props;
 
+	// Mutable value
+
 	// Hooks
 
 	const instance = {itemRefs, scrollContainerRef, scrollContentHandle, scrollContentRef};
@@ -328,7 +330,7 @@ const useThemeVirtualList = (props) => {
 
 	usePreventScroll(props, instance, {scrollMode});
 
-	const adapter = {
+	const handle = {
 		calculatePositionOnFocus,
 		focusByIndex,
 		focusOnNode,
@@ -339,8 +341,8 @@ const useThemeVirtualList = (props) => {
 		shouldPreventScrollByFocus
 	};
 	useEffect(() => {
-		props.setThemeScrollContentHandle(adapter);
-	}, [adapter, props, props.setThemeScrollContentHandle]);
+		props.setThemeScrollContentHandle(handle);
+	}, [handle, props, props.setThemeScrollContentHandle]);
 
 	// Functions
 
