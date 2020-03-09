@@ -5,7 +5,7 @@ describe('Input', function () {
 	describe('disabled', function () {
 		it('should be disabled', function () {
 			Page.open();
-			expect(Page.disabledInput.hasFocus()).to.be.true();
+			expect(Page.disabledInput.isFocused()).to.be.true();
 		});
 	});
 });
