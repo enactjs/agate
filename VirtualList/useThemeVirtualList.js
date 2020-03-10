@@ -304,8 +304,6 @@ const useSpottable = (props, instances, context) => {
 const useThemeVirtualList = (props) => {
 	const {itemRefs, scrollMode, scrollContainerRef, scrollContentHandle, scrollContentRef} = props;
 
-	// Mutable value
-
 	// Hooks
 
 	const instance = {itemRefs, scrollContainerRef, scrollContentHandle, scrollContentRef};
