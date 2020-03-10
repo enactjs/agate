@@ -14,7 +14,6 @@ import {spottableClass} from '@enact/spotlight/Spottable';
 import {getTargetByDirectionFromPosition} from '@enact/spotlight/src/target';
 import {getRect, intersects} from '@enact/spotlight/src/utils';
 import {useScrollBase} from '@enact/ui/useScroll';
-import {useScrollContentHandle} from '@enact/ui/useScroll/useScrollContentHandle';
 import {assignPropertiesOf} from '@enact/ui/useScroll';
 import utilDOM from '@enact/ui/useScroll/utilDOM';
 import utilEvent from '@enact/ui/useScroll/utilEvent';
@@ -185,9 +184,10 @@ const useThemeScroll = (props, instances, context) => {
 
 	// Callback for scroller updates; calculate and, if needed, scroll to new position based on focused item.
 	function handleScrollerUpdate () {
-		if (scrollContainerHandle.current.scrollToInfo === null) {
-			const scrollHeight = scrollContainerHandle.current.getScrollBounds().scrollHeight;
+		const bounds = scrollContainerHandle.current.getScrollBounds();
+		const scrollHeight = bounds && bounds.scrollHeight && 0;
 
+		if (scrollContainerHandle.current.scrollToInfo === null) {
 			if (scrollHeight !== scrollContainerHandle.current.bounds.scrollHeight) {
 				calculateAndScrollTo();
 			}
@@ -196,7 +196,7 @@ const useThemeScroll = (props, instances, context) => {
 		// oddly, Scroller manages scrollContainerHandle.current.bounds so if we don't update it here (it is also
 		// updated in calculateAndScrollTo but we might not have made it to that point), it will be
 		// out of date when we land back in this method next time.
-		scrollContainerHandle.current.bounds.scrollHeight = scrollContainerHandle.current.getScrollBounds().scrollHeight;
+		scrollContainerHandle.current.bounds.scrollHeight = scrollHeight;
 	}
 
 	function handleResizeWindow () {
@@ -280,6 +280,7 @@ const useScroll = (props) => {
 	// Mutable value
 
 	const scrollContainerRef = useRef();
+	const scrollContentHandle = useRef();
 	const scrollContentRef = useRef();
 	const itemRefs = useRef([]);
 
@@ -322,8 +323,6 @@ const useScroll = (props) => {
 	const setScrollContainerHandle = (handle) => {
 		scrollContainerHandle.current = handle;
 	};
-
-	const [scrollContentHandle, setScrollContentHandle] = useScrollContentHandle();
 
 	// Hooks
 
@@ -396,7 +395,6 @@ const useScroll = (props) => {
 		onWheel: handleWheel,
 		removeEventListeners,
 		scrollTo,
-		setScrollContentHandle,
 		setScrollContainerHandle,
 		scrollMode,
 		scrollContentHandle,
@@ -448,6 +446,7 @@ const useScroll = (props) => {
 	return {
 		...collectionOfProperties,
 		scrollContentWrapper,
+		scrollContentHandle,
 		isHorizontalScrollbarVisible,
 		isVerticalScrollbarVisible
 	};

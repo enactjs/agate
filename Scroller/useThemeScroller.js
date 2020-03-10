@@ -270,6 +270,7 @@ const useThemeScroller = (props) => {
 	delete propsObject.onUpdate;
 	delete propsObject.scrollAndFocusScrollbarButton;
 	delete propsObject.scrollContainerRef;
+	delete propsObject.scrollContentHandle;
 	delete propsObject.setThemeScrollContentHandle;
 	delete propsObject.spotlightId;
 	delete propsObject.scrollContainerHandle;
