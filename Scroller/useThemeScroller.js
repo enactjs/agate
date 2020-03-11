@@ -248,7 +248,15 @@ const useSpottable = (props, instances) => {
 };
 
 const useThemeScroller = (props) => {
-	const {scrollContainerRef, scrollContentHandle, scrollContentRef} = props;
+	const {scrollContainerRef, ...rest} = props;
+	const {scrollContentHandle, scrollContentRef} = rest;
+
+	delete rest.onUpdate;
+	delete rest.scrollContainerContainsDangerously;
+	delete rest.scrollContainerHandle;
+	delete rest.scrollContainerRef;
+	delete rest.setThemeScrollContentHandle;
+	delete rest.spotlightId;
 
 	// Hooks
 
@@ -264,17 +272,7 @@ const useThemeScroller = (props) => {
 
 	// Render
 
-	const propsObject = Object.assign({}, props);
-
-	delete propsObject.scrollContainerContainsDangerously;
-	delete propsObject.onUpdate;
-	delete propsObject.scrollAndFocusScrollbarButton;
-	delete propsObject.scrollContainerRef;
-	delete propsObject.setThemeScrollContentHandle;
-	delete propsObject.spotlightId;
-	delete propsObject.scrollContainerHandle;
-
-	return propsObject;
+	return rest;
 };
 
 export default useThemeScroller;
