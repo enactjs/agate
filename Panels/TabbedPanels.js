@@ -37,7 +37,7 @@ const TabbedPanelsBase = kind({
 		onBack: PropTypes.func,
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 		tabPosition: PropTypes.string,
-		tabs: PropTypes.oneOfType([TabGroup])
+		tabs: PropTypes.array
 	},
 	defaultProps: {
 		index: 0,
