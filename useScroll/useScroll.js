@@ -85,15 +85,15 @@ const useThemeScroll = (props, instances) => {
 
 	useSpotlightRestore(props, instances);
 
-	const {handleWheel, isWheeling} = useEventWheel(props, instances, {isScrollButtonFocused, scrollMode});
+	const {handleWheel, isWheeling} = useEventWheel(props, instances, {isScrollButtonFocused});
 
-	const {calculateAndScrollTo, handleFocus, hasFocus} = useEventFocus(props, {...instances, spottable: mutableRef}, {alertThumb, isWheeling, scrollMode});
+	const {calculateAndScrollTo, handleFocus, hasFocus} = useEventFocus(props, {...instances, spottable: mutableRef}, {alertThumb, isWheeling});
 
-	const {handleKeyDown, lastPointer, scrollByPageOnPointerMode} = useEventKey(props, {...instances, spottable: mutableRef}, {hasFocus, isContent, scrollMode});
+	const {handleKeyDown, lastPointer, scrollByPageOnPointerMode} = useEventKey(props, {...instances, spottable: mutableRef}, {hasFocus, isContent});
 
 	useEventMonitor({}, instances, {lastPointer, scrollByPageOnPointerMode});
 
-	const {handleDragEnd, handleDragStart, handleFlick, handleMouseDown} = useEventMouse({}, instances, {isScrollButtonFocused, scrollMode});
+	const {handleDragEnd, handleDragStart, handleFlick, handleMouseDown} = useEventMouse({}, instances, {isScrollButtonFocused});
 
 	const {handleTouchStart} = useEventTouch({}, instances, {isScrollButtonFocused});
 
