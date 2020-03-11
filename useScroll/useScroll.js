@@ -184,10 +184,9 @@ const useThemeScroll = (props, instances, context) => {
 
 	// Callback for scroller updates; calculate and, if needed, scroll to new position based on focused item.
 	function handleScrollerUpdate () {
-		const bounds = scrollContainerHandle.current.getScrollBounds();
-		const scrollHeight = bounds && bounds.scrollHeight || 0;
-
 		if (scrollContainerHandle.current.scrollToInfo === null) {
+			const scrollHeight = scrollContainerHandle.current.getScrollBounds().scrollHeight;
+
 			if (scrollHeight !== scrollContainerHandle.current.bounds.scrollHeight) {
 				calculateAndScrollTo();
 			}
@@ -196,7 +195,7 @@ const useThemeScroll = (props, instances, context) => {
 		// oddly, Scroller manages scrollContainerHandle.current.bounds so if we don't update it here (it is also
 		// updated in calculateAndScrollTo but we might not have made it to that point), it will be
 		// out of date when we land back in this method next time.
-		scrollContainerHandle.current.bounds.scrollHeight = scrollHeight;
+		scrollContainerHandle.current.bounds.scrollHeight = scrollContainerHandle.current.getScrollBounds().scrollHeight;
 	}
 
 	function handleResizeWindow () {
