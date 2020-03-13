@@ -16,7 +16,8 @@ const
 		'&quot;noAnimation&quot;': 'noAnimation'
 	},
 	prop = {
-		scrollbarOption: ['auto', 'hidden', 'visible']
+		scrollbarOption: ['auto', 'hidden', 'visible'],
+		scrollModeOption: ['native', 'translate']
 	},
 	items = [],
 	defaultDataSize = 1000,
@@ -65,9 +66,11 @@ storiesOf('Agate', module)
 					horizontalScrollbar={select('horizontalScrollbar', prop.scrollbarOption, VirtualListConfig)}
 					itemRenderer={renderItem(ri.scale(number('itemSize', VirtualListConfig, 144)))}
 					itemSize={ri.scale(number('itemSize', VirtualListConfig, 144))}
+					key={select('scrollMode', prop.scrollModeOption, VirtualListConfig)}
 					noScrollByWheel={boolean('noScrollByWheel', VirtualListConfig)}
 					onScrollStart={action('onScrollStart')}
 					onScrollStop={action('onScrollStop')}
+					scrollMode={select('scrollMode', prop.scrollModeOption, VirtualListConfig)}
 					spacing={ri.scale(number('spacing', VirtualListConfig))}
 					spotlightDisabled={boolean('spotlightDisabled', VirtualListConfig, false)}
 					verticalScrollbar={select('verticalScrollbar', prop.scrollbarOption, VirtualListConfig)}
