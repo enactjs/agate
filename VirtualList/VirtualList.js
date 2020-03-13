@@ -456,6 +456,10 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	 * When it's `'noAnimation'`, the spotlight focus moves in wraparound manner as same as when it's `true`
 	 * except that a list is scrolled without an animation.
 	 *
+	 * Valid values are:
+	 * * `false`,
+	 * * `true`, and
+	 * * `'noAnimation'`
 	 * @type {Boolean|String}
 	 * @default false
 	 * @public
@@ -465,6 +469,20 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 		PropTypes.oneOf(['noAnimation'])
 	])
 };
+
+VirtualList = Skinnable(
+	SpotlightContainerDecorator(
+		{
+			overflow: true,
+			preserveId: true,
+			restrict: 'self-first'
+		},
+		I18nContextDecorator(
+			{rtlProp: 'rtl'},
+			VirtualList
+		)
+	)
+);
 
 VirtualList.defaultProps = {
 	'data-spotlight-container-disabled': false,
@@ -490,20 +508,6 @@ VirtualList.defaultProps = {
 	verticalScrollbar: 'auto',
 	wrap: false
 };
-
-VirtualList = Skinnable(
-	SpotlightContainerDecorator(
-		{
-			overflow: true,
-			preserveId: true,
-			restrict: 'self-first'
-		},
-		I18nContextDecorator(
-			{rtlProp: 'rtl'},
-			VirtualList
-		)
-	)
-);
 
 /**
  * An Agate-styled scrollable and spottable virtual grid list component.
@@ -918,6 +922,11 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	 * When it's `'noAnimation'`, the spotlight focus moves in wraparound manner as same as when it's `true`
 	 * except that a list is scrolled without an animation.
 	 *
+	 * Valid values are:
+	 * * `false`,
+	 * * `true`, and
+	 * * `'noAnimation'`
+	 *
 	 * @type {Boolean|String}
 	 * @default false
 	 * @public
@@ -927,6 +936,20 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 		PropTypes.oneOf(['noAnimation'])
 	])
 };
+
+VirtualGridList = Skinnable(
+	SpotlightContainerDecorator(
+		{
+			overflow: true,
+			preserveId: true,
+			restrict: 'self-first'
+		},
+		I18nContextDecorator(
+			{rtlProp: 'rtl'},
+			VirtualGridList
+		)
+	)
+);
 
 VirtualGridList.defaultProps = {
 	'data-spotlight-container-disabled': false,
@@ -952,20 +975,6 @@ VirtualGridList.defaultProps = {
 	verticalScrollbar: 'auto',
 	wrap: false
 };
-
-VirtualGridList = Skinnable(
-	SpotlightContainerDecorator(
-		{
-			overflow: true,
-			preserveId: true,
-			restrict: 'self-first'
-		},
-		I18nContextDecorator(
-			{rtlProp: 'rtl'},
-			VirtualGridList
-		)
-	)
-);
 
 export default VirtualList;
 export {

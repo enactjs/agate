@@ -121,7 +121,7 @@ const useSpottable = (props, instances, context) => {
 
 	function onAcceleratedKeyDown ({isWrapped, keyCode, nextIndex, repeat, target}) {
 		const {cbScrollTo, wrap} = props;
-		const {dimensionToExtent, primary: {clientSize, itemSize}, scrollPosition, scrollPositionTarget} = scrollContentHandle.current;
+		const {dimensionToExtent, primary: {contentSize, itemSize}, scrollPosition, scrollPositionTarget} = scrollContentHandle.current;
 		const index = getNumberValue(target.dataset.index);
 
 		mutableRef.current.isScrolledBy5way = false;
@@ -134,7 +134,7 @@ const useSpottable = (props, instances, context) => {
 				start = scrollContentHandle.current.getGridPosition(nextIndex).primaryPosition,
 				end = props.itemSizes ? scrollContentHandle.current.getItemBottomPosition(nextIndex) : start + itemSize,
 				startBoundary = (scrollMode === 'native') ? scrollPosition : scrollPositionTarget,
-				endBoundary = startBoundary + clientSize;
+				endBoundary = startBoundary + contentSize;
 
 			mutableRef.current.lastFocusedIndex = nextIndex;
 
@@ -151,7 +151,7 @@ const useSpottable = (props, instances, context) => {
 				mutableRef.current.isScrolledBy5way = true;
 				mutableRef.current.isWrappedBy5way = isWrapped;
 
-				if (isWrapped && itemNode == null) {
+				if (isWrapped && itemNode === null) {
 					if (wrap === true) {
 						pause.pause();
 						target.blur();
@@ -223,24 +223,24 @@ const useSpottable = (props, instances, context) => {
 
 			{pageScroll} = props,
 			{state: {numOfItems}, primary} = scrollContentHandle.current,
-			offsetToClientEnd = primary.clientSize - primary.itemSize,
+			offsetToClientEnd = primary.contentSize - primary.itemSize,
 			focusedIndex = getNumberValue(item.getAttribute(dataIndexAttribute));
 
 		if (!isNaN(focusedIndex)) {
 			let gridPosition = scrollContentHandle.current.getGridPosition(focusedIndex);
 
 			if (numOfItems > 0 && focusedIndex % numOfItems !== mutableRef.current.lastFocusedIndex % numOfItems) {
-				const node = scrollContentHandle.current.getItemNode(mutableRef.current.lastFocusedIndex);
+				const itemNode = getItemNode(mutableRef.current.lastFocusedIndex);
 
-				if (node) {
-					node.blur();
+				if (itemNode) {
+					itemNode.blur();
 				}
 			}
 
 			setNodeIndexToBeFocused(null);
 			mutableRef.current.lastFocusedIndex = focusedIndex;
 
-			if (primary.clientSize >= primary.itemSize) {
+			if (primary.contentSize >= primary.itemSize) {
 				if (gridPosition.primaryPosition > scrollPosition + offsetToClientEnd) { // forward over
 					gridPosition.primaryPosition -= pageScroll ? 0 : offsetToClientEnd;
 				} else if (gridPosition.primaryPosition >= scrollPosition) { // inside of client
@@ -328,7 +328,7 @@ const useThemeVirtualList = (props) => {
 
 	usePreventScroll(props, instance, {scrollMode});
 
-	const adapter = {
+	const handle = {
 		calculatePositionOnFocus,
 		focusByIndex,
 		focusOnNode,
@@ -339,8 +339,8 @@ const useThemeVirtualList = (props) => {
 		shouldPreventScrollByFocus
 	};
 	useEffect(() => {
-		props.setThemeScrollContentHandle(adapter);
-	}, [adapter, props, props.setThemeScrollContentHandle]);
+		props.setThemeScrollContentHandle(handle);
+	}, [handle, props, props.setThemeScrollContentHandle]);
 
 	// Functions
 

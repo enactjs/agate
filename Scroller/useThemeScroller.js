@@ -168,7 +168,7 @@ const useSpottable = (props, instances) => {
 	 * @private
 	 */
 	function calculateScrollLeft (item, scrollPosition) {
-		const childContainerNode = scrollContentRef.current;
+		const scrollContentNode = scrollContentRef.current;
 		const {
 			left: itemLeft,
 			width: itemWidth
@@ -178,11 +178,11 @@ const useSpottable = (props, instances) => {
 			{rtl} = props,
 			{clientWidth} = scrollContentHandle.current.scrollBounds,
 			rtlDirection = rtl ? -1 : 1,
-			{left: containerLeft} = childContainerNode.getBoundingClientRect(),
+			{left: containerLeft} = scrollContentNode.getBoundingClientRect(),
 			scrollLastPosition = scrollPosition ? scrollPosition : scrollContentHandle.current.scrollPos.left,
 			currentScrollLeft = rtl ? (scrollContentHandle.current.scrollBounds.maxLeft - scrollLastPosition) : scrollLastPosition,
 			// calculation based on client position
-			newItemLeft = childContainerNode.scrollLeft + (itemLeft - containerLeft);
+			newItemLeft = scrollContentNode.scrollLeft + (itemLeft - containerLeft);
 		let nextScrollLeft = scrollContentHandle.current.scrollPos.left;
 
 		if (newItemLeft + itemWidth > (clientWidth + currentScrollLeft) && itemWidth < clientWidth) {

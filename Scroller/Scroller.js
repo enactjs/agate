@@ -369,6 +369,20 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	verticalScrollbar: PropTypes.oneOf(['auto', 'visible', 'hidden'])
 };
 
+Scroller = Skinnable(
+	SpotlightContainerDecorator(
+		{
+			overflow: true,
+			preserveId: true,
+			restrict: 'self-first'
+		},
+		I18nContextDecorator(
+			{rtlProp: 'rtl'},
+			Scroller
+		)
+	)
+);
+
 Scroller.defaultProps = {
 	'data-spotlight-container-disabled': false,
 	cbScrollTo: nop,
@@ -390,20 +404,6 @@ Scroller.defaultProps = {
 	scrollMode: 'translate',
 	verticalScrollbar: 'auto'
 };
-
-Scroller = Skinnable(
-	SpotlightContainerDecorator(
-		{
-			overflow: true,
-			preserveId: true,
-			restrict: 'self-first'
-		},
-		I18nContextDecorator(
-			{rtlProp: 'rtl'},
-			Scroller
-		)
-	)
-);
 
 export default Scroller;
 export {
