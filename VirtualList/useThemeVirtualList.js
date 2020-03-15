@@ -360,6 +360,7 @@ const useThemeVirtualList = (props) => {
 	delete rest.focusableScrollbar;
 	delete rest.scrollAndFocusScrollbarButton;
 	delete rest.scrollContainerRef;
+	delete rest.scrollContentHandle;
 	delete rest.spotlightId;
 	delete rest.scrollContainerHandle;
 	delete rest.wrap;

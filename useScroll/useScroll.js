@@ -14,7 +14,6 @@ import {spottableClass} from '@enact/spotlight/Spottable';
 import {getTargetByDirectionFromPosition} from '@enact/spotlight/src/target';
 import {getRect, intersects} from '@enact/spotlight/src/utils';
 import {useScrollBase} from '@enact/ui/useScroll';
-import {useScrollContentHandle} from '@enact/ui/useScroll/useScrollContentHandle';
 import {assignPropertiesOf} from '@enact/ui/useScroll';
 import utilDOM from '@enact/ui/useScroll/utilDOM';
 import utilEvent from '@enact/ui/useScroll/utilEvent';
@@ -280,6 +279,7 @@ const useScroll = (props) => {
 	// Mutable value
 
 	const scrollContainerRef = useRef();
+	const scrollContentHandle = useRef();
 	const scrollContentRef = useRef();
 	const itemRefs = useRef([]);
 
@@ -322,8 +322,6 @@ const useScroll = (props) => {
 	const setScrollContainerHandle = (handle) => {
 		scrollContainerHandle.current = handle;
 	};
-
-	const [scrollContentHandle, setScrollContentHandle] = useScrollContentHandle();
 
 	// Hooks
 
@@ -396,7 +394,6 @@ const useScroll = (props) => {
 		onWheel: handleWheel,
 		removeEventListeners,
 		scrollTo,
-		setScrollContentHandle,
 		setScrollContainerHandle,
 		scrollMode,
 		scrollContentHandle,
@@ -448,6 +445,7 @@ const useScroll = (props) => {
 	return {
 		...collectionOfProperties,
 		scrollContentWrapper,
+		scrollContentHandle,
 		isHorizontalScrollbarVisible,
 		isVerticalScrollbarVisible
 	};
