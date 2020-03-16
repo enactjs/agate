@@ -55,9 +55,9 @@ const getTargetInViewByDirectionFromPosition = (direction, position, container) 
 	return getIntersectingElement(target, container);
 };
 
-const useThemeScroll = (props, instances, context) => {
+const useThemeScroll = (props, instances) => {
+	const {scrollMode} = props;
 	const {themeScrollContentHandle, scrollContentRef, scrollContainerHandle, scrollContainerRef} = instances;
-	const {scrollMode} = context;
 	const contextSharedState = useContext(SharedState);
 
 	// Mutable value
@@ -84,15 +84,15 @@ const useThemeScroll = (props, instances, context) => {
 
 	useSpotlightRestore(props, instances);
 
-	const {handleWheel, isWheeling} = useEventWheel(props, instances, {isScrollButtonFocused, scrollMode});
+	const {handleWheel, isWheeling} = useEventWheel(props, instances, {isScrollButtonFocused});
 
-	const {calculateAndScrollTo, handleFocus, hasFocus} = useEventFocus(props, {...instances, spottable: mutableRef}, {alertThumb, isWheeling, scrollMode});
+	const {calculateAndScrollTo, handleFocus, hasFocus} = useEventFocus(props, {...instances, spottable: mutableRef}, {alertThumb, isWheeling});
 
-	const {handleKeyDown, lastPointer, scrollByPageOnPointerMode} = useEventKey(props, {...instances, spottable: mutableRef}, {hasFocus, isContent, scrollMode});
+	const {handleKeyDown, lastPointer, scrollByPageOnPointerMode} = useEventKey(props, {...instances, spottable: mutableRef}, {hasFocus, isContent});
 
 	useEventMonitor({}, instances, {lastPointer, scrollByPageOnPointerMode});
 
-	const {handleDragEnd, handleDragStart, handleFlick, handleMouseDown} = useEventMouse({}, instances, {isScrollButtonFocused, scrollMode});
+	const {handleDragEnd, handleDragStart, handleFlick, handleMouseDown} = useEventMouse({}, instances, {isScrollButtonFocused});
 
 	const {handleTouchStart} = useEventTouch({}, instances, {isScrollButtonFocused});
 
@@ -362,7 +362,7 @@ const useScroll = (props) => {
 		scrollTo,
 		start, // scrollMode 'native'
 		stop // scrollMode 'translate'
-	} = useThemeScroll(props, instance, {scrollMode});
+	} = useThemeScroll(props, instance);
 
 	// Render
 
