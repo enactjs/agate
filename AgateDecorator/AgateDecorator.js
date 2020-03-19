@@ -215,7 +215,7 @@ const AgateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	let App = Wrapped;
 	if (float) App = FloatingLayerDecorator({wrappedClassName: bgClassName}, App);
 	if (ri) App = ResolutionDecorator(ri, App);
-	if (i18n) App = I18nDecorator(App);
+	if (i18n) App = I18nDecorator({sync: true}, App);
 	if (spotlight) App = SpotlightRootDecorator({noAutoFocus}, App);
 	if (skin) App = Skinnable({defaultSkin: 'gallium'}, App);
 
