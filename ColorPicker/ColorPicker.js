@@ -26,6 +26,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import convert from 'color-convert';
 
+import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
 import Button from '../Button';
 import Slider from '../Slider';
@@ -213,21 +214,21 @@ const ColorPickerBase = kind({
 						<div className={css.sliders}>
 							<Row align="center">
 								<Cell>
-									<label>Hue</label>
+									<label>{$L('Hue')}</label>
 									<Slider value={sliderValues.hsl[0]} min={0} max={360} onChange={onHueChanged} />
 								</Cell>
 								<Cell component="label" size="5ex">{sliderValues.hsl[0] + '˚'}</Cell>
 							</Row>
 							<Row align="center">
 								<Cell>
-									<label>Saturation</label>
+									<label>{$L('Saturation')}</label>
 									<Slider value={sliderValues.hsl[1]} min={0} max={100} onChange={onSaturationChanged} />
 								</Cell>
 								<Cell component="label" size="5ex">{sliderValues.hsl[1] + '%'}</Cell>
 							</Row>
 							<Row align="center">
 								<Cell>
-									<label>Lightness</label>
+									<label>{$L('Lightness')}</label>
 									<Slider value={sliderValues.hsl[2]} min={0} max={100} onChange={onLightnessChanged} />
 								</Cell>
 								<Cell component="label" size="5ex">{sliderValues.hsl[2] + '%'}</Cell>

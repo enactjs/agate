@@ -15,20 +15,12 @@ import kind from '@enact/core/kind';
 import {Cell, Column, Row} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 
+import $L from '../internal/$L';
 import Button from '../Button';
 import Picker from '../Picker';
 import Skinnable from '../Skinnable';
 
 import css from './DateTimePicker.module.less';
-
-const ranges = {
-	years: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027'],
-	months: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-	days: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
-	hours: ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
-	minutes: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'],
-	meridiem: ['AM', 'PM']
-};
 
 const PickerCell = kind({
 	name: 'PickerCell',
@@ -67,7 +59,7 @@ class DateTimePickerBase extends React.Component {
 		this.state = {
 			hour: '12',
 			minute: '00',
-			meridiem: 'AM',
+			meridiem: $L('AM'),
 			month: '1',
 			day: '1',
 			year: '2018'
@@ -78,6 +70,15 @@ class DateTimePickerBase extends React.Component {
 		if (this.props.onChange) {
 			this.props.onChange({...this.state});
 		}
+	}
+
+	ranges = {
+		years: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027'],
+		months: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+		days: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+		hours: ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
+		minutes: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'],
+		meridiem: [$L('AM'), $L('PM')]
 	}
 
 	onSave = () => {
@@ -104,32 +105,32 @@ class DateTimePickerBase extends React.Component {
 			<Row {...rest} className={classnames(className, css.dateTimePicker)} align="center center">
 				<Cell size="35%">
 					<Row align="center center">
-						<PickerCell className={css.pickerLeft} onChange={this.handleTimeChange('month')} range={ranges.months}>
-							Month
+						<PickerCell className={css.pickerLeft} onChange={this.handleTimeChange('month')} range={this.ranges.months}>
+							{$L('Month')}
 						</PickerCell>
-						<PickerCell className={css.pickerCell} onChange={this.handleTimeChange('day')} range={ranges.days}>
-							Day
+						<PickerCell className={css.pickerCell} onChange={this.handleTimeChange('day')} range={this.ranges.days}>
+							{$L('Day')}
 						</PickerCell>
-						<PickerCell className={css.pickerRight} onChange={this.handleTimeChange('year')} range={ranges.years}>
-							Year
+						<PickerCell className={css.pickerRight} onChange={this.handleTimeChange('year')} range={this.ranges.years}>
+							{$L('Year')}
 						</PickerCell>
 					</Row>
 				</Cell>
 				<Cell size="35%">
 					<Row align="center center">
-						<PickerCell className={css.pickerLeft} onChange={this.handleTimeChange('hour')} range={ranges.hours}>
-							Hour
+						<PickerCell className={css.pickerLeft} onChange={this.handleTimeChange('hour')} range={this.ranges.hours}>
+							{$L('Hour')}
 						</PickerCell>
-						<PickerCell className={css.pickerCell} onChange={this.handleTimeChange('minute')} range={ranges.minutes}>
-							Minute
+						<PickerCell className={css.pickerCell} onChange={this.handleTimeChange('minute')} range={this.ranges.minutes}>
+							{$L('Minute')}
 						</PickerCell>
-						<PickerCell className={css.pickerRight} onChange={this.handleTimeChange('meridiem')} range={ranges.meridiem}>
-							AM/PM
+						<PickerCell className={css.pickerRight} onChange={this.handleTimeChange('meridiem')} range={this.ranges.meridiem}>
+							{$L('AM/PM')}
 						</PickerCell>
 					</Row>
 				</Cell>
 				<Cell size="30%" shrink>
-					<Button onClick={this.onSave}>Save</Button>
+					<Button onClick={this.onSave}>{$L('Save')}</Button>
 				</Cell>
 			</Row>
 		);

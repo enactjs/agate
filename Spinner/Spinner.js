@@ -21,6 +21,7 @@ import UiSpinnerBase from '@enact/ui/Spinner';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Spinner.module.less';
+import $L from '../../moonstone/internal/$L/$L';
 
 /**
  * A component that shows spinning fan. Or bouncing 🏀🎾🏐⚽️.
@@ -55,7 +56,7 @@ const SpinnerCore = kind({
 	},
 
 	defaultProps: {
-		type: 'searching'
+		type: $L('searching')
 	},
 
 	styles: {
@@ -65,11 +66,11 @@ const SpinnerCore = kind({
 	computed: {
 		'aria-label': ({'aria-label': label, type}) => {
 			// TODO: These static values will need to be localized
-			return label || type === 'searching' ? 'Searching' : 'Loading';
+			return label || type === $L('searching') ? $L('Searching') : $L('Loading');
 		},
 		className: ({styler, type}) => styler.append(type),
 		spinnerNodes: ({styler, type}) => {
-			return Array.from({length: type === 'searching' ? 12 : 4}, (_, index) => (
+			return Array.from({length: type === $L('searching') ? 12 : 4}, (_, index) => (
 				<span className={styler.join('node', `node${index + 1}`)} key={`node${index}`} />
 			));
 		}

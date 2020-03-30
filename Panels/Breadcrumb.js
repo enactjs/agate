@@ -76,7 +76,7 @@ const BreadcrumbBase = kind({
 	render: ({children, index, onSelect, ...rest}) => (
 		<SpottableDiv
 			{...rest}
-			aria-label={'GO TO PREVIOUS'}
+			aria-label={$L('GO TO PREVIOUS')}
 			data-index={index}
 			onClick={onSelect}
 		>
