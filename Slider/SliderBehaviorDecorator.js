@@ -4,6 +4,8 @@ import Pause from '@enact/spotlight/Pause';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import $L from '../internal/$L';
+
 import {forwardSpotlightEvents} from './utils';
 
 const useHintOnActive = ({active}) => {
