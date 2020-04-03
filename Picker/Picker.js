@@ -16,12 +16,14 @@ import {adaptEvent, forEventProp, forward, handle, oneOf} from '@enact/core/hand
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
+import IdProvider from '@enact/ui/internal/IdProvider';
 import Touchable from '@enact/ui/Touchable';
 import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
+import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
 
 import css from './Picker.module.less';
@@ -64,6 +66,53 @@ const PickerBase = kind({
 		children: PropTypes.array.isRequired,
 
 		/**
+		 * Prevents read out of both the slider and the increment and decrement
+		 * buttons.
+		 *
+		 * @type {Boolean}
+		 * @memberof agate/Picker.PickerBase.prototype
+		 * @public
+		 */
+		'aria-hidden': PropTypes.bool,
+
+		/**
+		 * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
+		 * to the current value. This should only be used when the parent controls the value of
+		 * the picker directly through the props.
+		 *
+		 * @type {String|Number}
+		 * @memberof agate/Picker.PickerBase.prototype
+		 * @public
+		 */
+		'aria-valuetext': PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+		/**
+		 * Sets the hint string read when focusing the decrement button.
+		 *
+		 * @default 'previous item'
+		 * @type {String}
+		 * @public
+		 */
+		decrementAriaLabel: PropTypes.string,
+
+		/**
+		 * The picker id reference for setting aria-controls.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		id: PropTypes.string,
+
+		/**
+		 * Sets the hint string read when focusing the increment button.
+		 *
+		 * @default 'next item'
+		 * @type {String}
+		 * @public
+		 */
+		incrementAriaLabel: PropTypes.string,
+
+		/**
 		 * Index of the selected child.
 		 *
 		 * @type {Number}
@@ -97,17 +146,38 @@ const PickerBase = kind({
 	},
 
 	computed: {
-		activeClassName: ({styler}) => styler.join('active', 'item')
+		activeClassName: ({styler}) => styler.join('active', 'item'),
+		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel = $L('previous item'), min, value = min}) => {
+			return `${valueText != null ? valueText : value} ${decrementAriaLabel}`;
+		},
+		incrementAriaLabel: ({'aria-valuetext': valueText, incrementAriaLabel = $L('next item'), min, value = min}) => {
+			return `${valueText != null ? valueText : value} ${incrementAriaLabel}`;
+		}
 	},
 
 	render: (props) => {
-		const {activeClassName, children: values, handleDecrement, handleFlick, handleIncrement, value, ...rest} = props;
+		const {
+			activeClassName,
+			'aria-hidden': ariaHidden,
+			children: values,
+			decrementAriaLabel,
+			handleDecrement,
+			handleFlick,
+			handleIncrement,
+			id,
+			incrementAriaLabel,
+			value,
+			...rest
+		} = props;
 		const isFirst = value <= 0;
 		const isLast = value >= React.Children.count(values) - 1;
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
 				<PickerButtonItem
+					aria-controls={id}
+					aria-hidden={ariaHidden}
+					aria-label={decrementAriaLabel}
 					className={css.itemTop}
 					onClick={handleDecrement}
 					disabled={isFirst}
@@ -116,12 +186,21 @@ const PickerBase = kind({
 						{isFirst ? '' : values[value - 1]}
 					</div>
 				</PickerButtonItem>
-				<div className={activeClassName}>
+				<div
+					aria-hidden={ariaHidden}
+					aria-valuetext={values[value]}
+					className={activeClassName}
+					id={id}
+					role="spinbutton"
+				>
 					<div className={css.label}>
 						{values[value]}
 					</div>
 				</div>
 				<PickerButtonItem
+					aria-controls={id}
+					aria-hidden={ariaHidden}
+					aria-label={incrementAriaLabel}
 					className={css.itemBottom}
 					onClick={handleIncrement}
 					disabled={isLast}
@@ -145,6 +224,7 @@ const PickerBase = kind({
  * @public
  */
 const PickerDecorator = compose(
+	IdProvider({generateProp: null, prefix: 'p_'}),
 	Changeable,
 	Skinnable
 );
