@@ -147,10 +147,10 @@ const PickerBase = kind({
 
 	computed: {
 		activeClassName: ({styler}) => styler.join('active', 'item'),
-		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel = $L('previous item'), value, values}) => {
+		decrementAriaLabel: ({'aria-valuetext': valueText, children: values, decrementAriaLabel = $L('previous item'), value}) => {
 			return `${valueText != null ? valueText : values[value]} ${decrementAriaLabel}`;
 		},
-		incrementAriaLabel: ({'aria-valuetext': valueText, incrementAriaLabel = $L('next item'), value, values}) => {
+		incrementAriaLabel: ({'aria-valuetext': valueText, children: values, incrementAriaLabel = $L('next item'), value}) => {
 			return `${valueText != null ? valueText : values[value]} ${incrementAriaLabel}`;
 		}
 	},
@@ -176,6 +176,7 @@ const PickerBase = kind({
 			<PickerRoot {...rest} onFlick={handleFlick}>
 				<PickerButtonItem
 					aria-controls={id}
+					aria-disabled={isFirst}
 					aria-hidden={ariaHidden}
 					aria-label={decrementAriaLabel}
 					className={css.itemTop}
@@ -199,6 +200,7 @@ const PickerBase = kind({
 				</div>
 				<PickerButtonItem
 					aria-controls={id}
+					aria-disabled={isLast}
 					aria-hidden={ariaHidden}
 					aria-label={incrementAriaLabel}
 					className={css.itemBottom}
