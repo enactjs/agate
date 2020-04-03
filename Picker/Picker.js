@@ -147,11 +147,11 @@ const PickerBase = kind({
 
 	computed: {
 		activeClassName: ({styler}) => styler.join('active', 'item'),
-		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel = $L('previous item'), min, value = min}) => {
-			return `${valueText != null ? valueText : value} ${decrementAriaLabel}`;
+		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel = $L('previous item'), value, values}) => {
+			return `${valueText != null ? valueText : values[value]} ${decrementAriaLabel}`;
 		},
-		incrementAriaLabel: ({'aria-valuetext': valueText, incrementAriaLabel = $L('next item'), min, value = min}) => {
-			return `${valueText != null ? valueText : value} ${incrementAriaLabel}`;
+		incrementAriaLabel: ({'aria-valuetext': valueText, incrementAriaLabel = $L('next item'), value, values}) => {
+			return `${valueText != null ? valueText : values[value]} ${incrementAriaLabel}`;
 		}
 	},
 
