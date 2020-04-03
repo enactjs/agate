@@ -466,9 +466,6 @@ const IncrementSliderBase = kind({
 		delete rest.onSpotlightRight;
 		delete rest.onSpotlightUp;
 
-		console.log(incrementDisabled, id);
-		console.log(decrementDisabled, id);
-
 		return (
 			<div {...rest}>
 				<IncrementSliderButton
