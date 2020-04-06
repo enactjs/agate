@@ -106,26 +106,26 @@ class DateTimePickerBase extends React.Component {
 				<Cell size="35%">
 					<Row align="center center">
 						<PickerCell className={css.pickerLeft} onChange={this.handleTimeChange('month')} range={this.ranges.months}>
-							{$L('Month')}
+							{$L('month')}
 						</PickerCell>
 						<PickerCell className={css.pickerCell} onChange={this.handleTimeChange('day')} range={this.ranges.days}>
-							{$L('Day')}
+							{$L('day')}
 						</PickerCell>
 						<PickerCell className={css.pickerRight} onChange={this.handleTimeChange('year')} range={this.ranges.years}>
-							{$L('Year')}
+							{$L('year')}
 						</PickerCell>
 					</Row>
 				</Cell>
 				<Cell size="35%">
 					<Row align="center center">
 						<PickerCell className={css.pickerLeft} onChange={this.handleTimeChange('hour')} range={this.ranges.hours}>
-							{$L('Hour')}
+							{$L('hour')}
 						</PickerCell>
 						<PickerCell className={css.pickerCell} onChange={this.handleTimeChange('minute')} range={this.ranges.minutes}>
-							{$L('Minute')}
+							{$L('minute')}
 						</PickerCell>
 						<PickerCell className={css.pickerRight} onChange={this.handleTimeChange('meridiem')} range={this.ranges.meridiem}>
-							{$L('AM/PM')}
+							{$L('meridiem')}
 						</PickerCell>
 					</Row>
 				</Cell>
