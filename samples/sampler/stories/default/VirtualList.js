@@ -26,7 +26,7 @@ const
 		const itemStyle = {
 			borderBottom: ri.unit(6, 'rem') + ' solid #202328',
 			boxSizing: 'border-box',
-			height: size + 'px'
+			height: ri.unit(size, 'rem')
 		};
 
 		return (
@@ -60,7 +60,7 @@ storiesOf('Agate', module)
 		() => {
 			return (
 				<VirtualList
-					style={{height: ri.scale(600) + 'px'}}
+					style={{height: ri.scaleToRem(600)}}
 					dataSize={updateDataSize(number('dataSize', VirtualListConfig, defaultDataSize))}
 					focusableScrollbar={boolean('focusableScrollbar', VirtualListConfig)}
 					horizontalScrollbar={select('horizontalScrollbar', prop.scrollbarOption, VirtualListConfig)}
