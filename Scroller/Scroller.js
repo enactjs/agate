@@ -271,27 +271,6 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	onScrollStop: PropTypes.func,
 
 	/**
-	 * Specifies overscroll effects shows on which type of inputs.
-	 *
-	 * @type {Object}
-	 * @default {
-	 *	arrowKey: false,
-	 *	drag: false,
-	 *	pageKey: false,
-	 *	scrollbarButton: false,
-	 *	wheel: true
-	 * }
-	 * @private
-	 */
-	overscrollEffectOn: PropTypes.shape({
-		arrowKey: PropTypes.bool,
-		drag: PropTypes.bool,
-		pageKey: PropTypes.bool,
-		scrollbarButton: PropTypes.bool,
-		wheel: PropTypes.bool
-	}),
-
-	/**
 	 * Specifies preventing keydown events from bubbling up to applications.
 	 * Valid values are `'none'`, and `'programmatic'`.
 	 *
@@ -393,13 +372,6 @@ Scroller.defaultProps = {
 	onScroll: nop,
 	onScrollStart: nop,
 	onScrollStop: nop,
-	overscrollEffectOn: {
-		arrowKey: false,
-		drag: false,
-		pageKey: false,
-		scrollbarButton: false,
-		wheel: true
-	},
 	preventBubblingOnKeyDown: 'none',
 	scrollMode: 'translate',
 	verticalScrollbar: 'auto'
