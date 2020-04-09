@@ -467,11 +467,10 @@ const IncrementSliderBase = kind({
 		delete rest.onSpotlightUp;
 
 		return (
-			<div {...rest}>
+			<div aria-hidden={ariaHidden} {...rest}>
 				<IncrementSliderButton
 					aria-controls={!incrementDisabled ? id : null}
 					aria-label={decrementAriaLabel}
-					aria-hidden={ariaHidden}
 					className={css.decrementButton}
 					data-webos-voice-group-label={voiceGroupLabel}
 					disabled={decrementDisabled}
@@ -484,7 +483,6 @@ const IncrementSliderBase = kind({
 				<Slider
 					{...ariaProps}
 					active={active}
-					aria-hidden={ariaHidden}
 					backgroundProgress={backgroundProgress}
 					css={css}
 					disabled={disabled}
@@ -506,7 +504,6 @@ const IncrementSliderBase = kind({
 				/>
 				<IncrementSliderButton
 					aria-controls={!decrementDisabled ? id : null}
-					aria-hidden={ariaHidden}
 					aria-label={incrementAriaLabel}
 					className={css.incrementButton}
 					data-webos-voice-group-label={voiceGroupLabel}
