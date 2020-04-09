@@ -66,16 +66,6 @@ const PickerBase = kind({
 		children: PropTypes.array.isRequired,
 
 		/**
-		 * Prevents read out of both the slider and the increment and decrement
-		 * buttons.
-		 *
-		 * @type {Boolean}
-		 * @memberof agate/Picker.PickerBase.prototype
-		 * @public
-		 */
-		'aria-hidden': PropTypes.bool,
-
-		/**
 		 * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
 		 * to the current value. This should only be used when the parent controls the value of
 		 * the picker directly through the props.
@@ -157,8 +147,8 @@ const PickerBase = kind({
 
 	render: (props) => {
 		const {
+			'aria-valuetext': valueText,
 			activeClassName,
-			'aria-hidden': ariaHidden,
 			children: values,
 			decrementAriaLabel,
 			handleDecrement,
@@ -177,7 +167,6 @@ const PickerBase = kind({
 				<PickerButtonItem
 					aria-controls={id}
 					aria-disabled={isFirst}
-					aria-hidden={ariaHidden}
 					aria-label={decrementAriaLabel}
 					className={css.itemTop}
 					onClick={handleDecrement}
@@ -188,8 +177,7 @@ const PickerBase = kind({
 					</div>
 				</PickerButtonItem>
 				<div
-					aria-hidden={ariaHidden}
-					aria-valuetext={values[value]}
+					aria-valuetext={valueText !== 'undefined' ? valueText : values[value]}
 					className={activeClassName}
 					id={id}
 					role="spinbutton"
@@ -201,7 +189,6 @@ const PickerBase = kind({
 				<PickerButtonItem
 					aria-controls={id}
 					aria-disabled={isLast}
-					aria-hidden={ariaHidden}
 					aria-label={incrementAriaLabel}
 					className={css.itemBottom}
 					onClick={handleIncrement}
