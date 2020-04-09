@@ -17,8 +17,13 @@ const useThemeScrollbar = (props) => {
 
 	const {
 		cbAlertScrollbarTrack,
+		focusableScrollButtons,
+		nextButtonAriaLabel,
+		onKeyDownButton,
 		onNextScroll,
 		onPrevScroll,
+		preventBubblingOnKeyDown,
+		previousButtonAriaLabel,
 		rtl,
 		...rest
 	} = restProps;
@@ -29,8 +34,13 @@ const useThemeScrollbar = (props) => {
 		restProps: rest,
 		scrollbarProps,
 		scrollbarButtonsProps: {
+			focusableScrollButtons,
+			nextButtonAriaLabel,
+			onKeyDownButton,
 			onNextScroll,
 			onPrevScroll,
+			preventBubblingOnKeyDown,
+			previousButtonAriaLabel,
 			rtl,
 			vertical
 		},
@@ -46,7 +56,6 @@ const useThemeScrollbar = (props) => {
  *
  * @class ScrollbarBase
  * @memberof agate/useScroll
- * @extends ui/ScrollbarBase
  * @ui
  * @private
  */
@@ -75,9 +84,8 @@ const ScrollbarBase = memo((props) => {
 	});
 
 	return (
-		<div {...scrollbarProps}>
+		<div {...restProps} {...scrollbarProps}>
 			<ScrollButtons
-				{...restProps}
 				{...scrollbarButtonsProps}
 				ref={scrollButtonsRef}
 				scrollbarTrackRenderer={() => { // eslint-disable-line react/jsx-no-bind
@@ -167,5 +175,5 @@ Scrollbar.displayName = 'Scrollbar';
 export default Scrollbar;
 export {
 	Scrollbar,
-	Scrollbar as ScrollbarBase
+	ScrollbarBase
 };
