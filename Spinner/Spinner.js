@@ -18,10 +18,10 @@ import compose from 'ramda/src/compose';
 import React from 'react';
 import UiSpinnerBase from '@enact/ui/Spinner';
 
+import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Spinner.module.less';
-import $L from '../../moonstone/internal/$L/$L';
 
 /**
  * A component that shows spinning fan. Or bouncing 🏀🎾🏐⚽️.
