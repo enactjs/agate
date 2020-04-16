@@ -15,6 +15,9 @@
     "serve": "start-storybook -p 8080 -c .storybook --ci"
   },
   "license": "Apache-2.0",
+  "enact": {
+    "theme": "agate"
+  },
   "eslintConfig": {
     "extends": "enact/strict",
     "root": true
