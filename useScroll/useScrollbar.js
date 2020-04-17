@@ -4,11 +4,11 @@ import {constants} from '@enact/ui/useScroll';
 const {paginationPageMultiplier} = constants;
 
 const useScrollbar = (props, instances, context) => {
-	const {horizontalScrollbarRef, scrollContainerHandle, verticalScrollbarRef} = instances;
+	const {horizontalScrollbarHandle, scrollContainerHandle, verticalScrollbarHandle} = instances;
 	const {isContent} = context;
 
 	const scrollbarProps = {
-		cbAlertThumb: alertThumbAfterRendered,
+		cbAlertScrollbarTrack: alertScrollbarTrackAfterRendered,
 		onNextScroll: onScrollbarButtonClick,
 		onPrevScroll: onScrollbarButtonClick
 	};
@@ -17,8 +17,8 @@ const useScrollbar = (props, instances, context) => {
 
 	function isScrollButtonFocused () {
 		return (
-			horizontalScrollbarRef.current && horizontalScrollbarRef.current.isOneOfScrollButtonsFocused() ||
-			verticalScrollbarRef.current && verticalScrollbarRef.current.isOneOfScrollButtonsFocused()
+			horizontalScrollbarHandle.current && horizontalScrollbarHandle.current.isOneOfScrollButtonsFocused() ||
+			verticalScrollbarHandle.current && verticalScrollbarHandle.current.isOneOfScrollButtonsFocused()
 		);
 	}
 
@@ -39,9 +39,9 @@ const useScrollbar = (props, instances, context) => {
 		scrollContainerHandle.current.scrollToAccumulatedTarget(pageDistance, isVerticalScrollBar);
 	}
 
-	function focusOnScrollButton (scrollbarRef, isPreviousScrollButton) {
-		if (scrollbarRef.current) {
-			scrollbarRef.current.focusOnButton(isPreviousScrollButton);
+	function focusOnScrollButton (scrollbarHandle, isPreviousScrollButton) {
+		if (scrollbarHandle.current) {
+			scrollbarHandle.current.focusOnButton(isPreviousScrollButton);
 		}
 	}
 
@@ -63,7 +63,7 @@ const useScrollbar = (props, instances, context) => {
 
 				if (props.focusableScrollbar) {
 					focusOnScrollButton(
-						canScrollingVertically ? verticalScrollbarRef : horizontalScrollbarRef,
+						canScrollingVertically ? verticalScrollbarHandle : horizontalScrollbarHandle,
 						isPreviousScrollButton
 					);
 				}
@@ -71,25 +71,25 @@ const useScrollbar = (props, instances, context) => {
 		}
 	}
 
-	function alertThumb () {
+	function alertScrollbarTrack () {
 		const bounds = scrollContainerHandle.current.getScrollBounds();
 
-		scrollContainerHandle.current.showThumb(bounds);
-		scrollContainerHandle.current.startHidingThumb();
+		scrollContainerHandle.current.showScrollbarTrack(bounds);
+		scrollContainerHandle.current.startHidingScrollbarTrack();
 	}
 
-	function alertThumbAfterRendered () {
+	function alertScrollbarTrackAfterRendered () {
 		const spotItem = Spotlight.getCurrent();
 
-		if (!Spotlight.getPointerMode() && isContent(spotItem) && scrollContainerHandle.current.isUpdatedScrollThumb) {
-			alertThumb();
+		if (!Spotlight.getPointerMode() && isContent(spotItem) && scrollContainerHandle.current.isUpdatedScrollScrollbarTrack) {
+			alertScrollbarTrack();
 		}
 	}
 
 	// Return
 
 	return {
-		alertThumb,
+		alertScrollbarTrack,
 		isScrollButtonFocused,
 		onScrollbarButtonClick,
 		scrollAndFocusScrollbarButton,

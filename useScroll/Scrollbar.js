@@ -1,106 +1,111 @@
-// import ApiDecorator from '@enact/core/internal/ApiDecorator';
-import {ScrollbarBase as UiScrollbarBase} from '@enact/ui/useScroll/Scrollbar';
+import {useScrollbar as useScrollbarBase} from '@enact/ui/useScroll/Scrollbar';
 import PropTypes from 'prop-types';
-import React, {forwardRef, memo, useImperativeHandle, useRef} from 'react';
+import React, {memo, useEffect, useRef} from 'react';
 
 import ScrollButtons from './ScrollButtons';
-import ScrollThumb from './ScrollThumb';
-// import Skinnable from '../Skinnable';
+import ScrollbarTrack from './ScrollbarTrack';
+import Skinnable from '../Skinnable';
 
 import componentCss from './Scrollbar.module.less';
 
+const useThemeScrollbar = (props) => {
+	const {
+		restProps,
+		scrollbarProps,
+		scrollbarTrackProps
+	} = useScrollbarBase(props);
+
+	const {
+		cbAlertScrollbarTrack,
+		focusableScrollButtons,
+		nextButtonAriaLabel,
+		onKeyDownButton,
+		onNextScroll,
+		onPrevScroll,
+		preventBubblingOnKeyDown,
+		previousButtonAriaLabel,
+		rtl,
+		...rest
+	} = restProps;
+
+	const {vertical} = scrollbarTrackProps;
+
+	return {
+		restProps: rest,
+		scrollbarProps,
+		scrollbarButtonsProps: {
+			focusableScrollButtons,
+			nextButtonAriaLabel,
+			onKeyDownButton,
+			onNextScroll,
+			onPrevScroll,
+			preventBubblingOnKeyDown,
+			previousButtonAriaLabel,
+			rtl,
+			vertical
+		},
+		scrollbarTrackProps: {
+			...scrollbarTrackProps,
+			cbAlertScrollbarTrack
+		}
+	};
+};
+
 /**
- * An Agate-styled scroller base component.
+ * An Agate-styled scrollbar base component.
  *
  * @class ScrollbarBase
  * @memberof agate/useScroll
- * @extends ui/ScrollbarBase
  * @ui
  * @private
  */
-const ScrollbarBase = memo(forwardRef((props, ref) => {
-	// Refs
-	const scrollbarRef = useRef();
+const ScrollbarBase = memo((props) => {
 	const scrollButtonsRef = useRef();
-	// render
-	const {cbAlertThumb, clientSize, corner, vertical, ...rest} = props;
 
-	useImperativeHandle(ref, () => {
-		const {getContainerRef, showThumb, startHidingThumb, update: uiUpdate} = scrollbarRef.current;
+	const {
+		restProps,
+		scrollbarProps,
+		scrollbarButtonsProps,
+		scrollbarTrackProps
+	} = useThemeScrollbar(props);
+
+	useEffect(() => {
+		const {scrollbarHandle} = props;
+		const {update: uiUpdate} = scrollbarHandle.current;
 		const {focusOnButton, isOneOfScrollButtonsFocused, updateButtons} = scrollButtonsRef.current;
 
-		return {
-			focusOnButton,
-			get uiScrollbarContainer () {
-				return getContainerRef();
-			},
-			isOneOfScrollButtonsFocused,
-			showThumb,
-			startHidingThumb,
-			uiUpdate,
-			update: (bounds) => {
-				updateButtons(bounds);
-				uiUpdate(bounds);
-			}
+		scrollbarHandle.current.update = (bounds) => {
+			updateButtons(bounds);
+			uiUpdate(bounds);
 		};
-	}, [scrollbarRef, scrollButtonsRef]);
+
+		scrollbarHandle.current.focusOnButton = focusOnButton;
+		scrollbarHandle.current.isOneOfScrollButtonsFocused = isOneOfScrollButtonsFocused;
+	});
 
 	return (
-		<UiScrollbarBase
-			clientSize={clientSize}
-			corner={corner}
-			css={componentCss}
-			ref={scrollbarRef}
-			vertical={vertical}
-			childRenderer={({thumbRef}) => { // eslint-disable-line react/jsx-no-bind
-				return (
-					<ScrollButtons
-						{...rest}
-						ref={scrollButtonsRef}
-						vertical={vertical}
-						thumbRenderer={() => { // eslint-disable-line react/jsx-no-bind
-							return (
-								<ScrollThumb
-									cbAlertThumb={cbAlertThumb}
-									key="thumb"
-									ref={thumbRef}
-									vertical={vertical}
-								/>
-							);
-						}}
-					/>
-				);
-			}}
-		/>
+		<div {...restProps} {...scrollbarProps}>
+			<ScrollButtons
+				{...scrollbarButtonsProps}
+				ref={scrollButtonsRef}
+				scrollbarTrackRenderer={() => { // eslint-disable-line react/jsx-no-bind
+					return (
+						<ScrollbarTrack
+							{...scrollbarTrackProps}
+							key="scrollbarTrack"
+						/>
+					);
+				}}
+			/>
+		</div>
 	);
-}));
+});
 
 ScrollbarBase.displayName = 'ScrollbarBase';
 
 ScrollbarBase.propTypes = /** @lends agate/useScroll.Scrollbar.prototype */ {
 	/**
-	 * Called when [ScrollThumb]{@link agate/useScroll.ScrollThumb} is updated.
-	 *
-	 * @type {Function}
-	 * @private
-	 */
-	cbAlertThumb: PropTypes.func,
-
-	/**
-	 * Client size of the container; valid values are an object that has `clientWidth` and `clientHeight`.
-	 *
-	 * @type {Object}
-	 * @property {Number}    clientHeight    The client height of the list.
-	 * @property {Number}    clientWidth    The client width of the list.
-	 * @public
-	 */
-	clientSize: PropTypes.shape({
-		clientHeight: PropTypes.number.isRequired,
-		clientWidth: PropTypes.number.isRequired
-	}),
-
-	/**
-	 * Adds the corner between vertical and horizontal scrollbars.
+	 * If `true`, add the corner between vertical and horizontal scrollbars.
 	 *
 	 * @type {Booelan}
 	 * @default false
@@ -109,21 +114,34 @@ ScrollbarBase.propTypes = /** @lends agate/useScroll.Scrollbar.prototype */ {
 	corner: PropTypes.bool,
 
 	/**
+	 * Customizes the component by mapping the supplied collection of CSS class names to the
+	 * corresponding internal elements and states of this component.
+	 *
+	 * The following classes are supported:
+	 *
+	 * * `scrollbar` - The scrollbar component class
+	 *
+	 * @type {Object}
+	 * @public
+	 */
+	css: PropTypes.object,
+
+	/**
+	 * The minimum size of the thumb.
+	 * This value will be applied ri.scale.
+	 *
+	 * @type {number}
+	 * @public
+	 */
+	minThumbSize: PropTypes.number,
+
+	/**
 	 * `true` if rtl, `false` if ltr.
 	 *
 	 * @type {Boolean}
 	 * @private
 	 */
 	rtl: PropTypes.bool,
-
-	/**
-	 * Registers the ScrollButtons component with an
-	 * {@link core/internal/ApiDecorator.ApiDecorator}.
-	 *
-	 * @type {Function}
-	 * @private
-	 */
-	// setApiProvider: PropTypes.func,
 
 	/**
 	 * The scrollbar will be oriented vertically.
@@ -137,6 +155,8 @@ ScrollbarBase.propTypes = /** @lends agate/useScroll.Scrollbar.prototype */ {
 
 ScrollbarBase.defaultProps = {
 	corner: false,
+	css: componentCss,
+	minThumbSize: 18,
 	vertical: true
 };
 
@@ -148,24 +168,12 @@ ScrollbarBase.defaultProps = {
  * @ui
  * @private
  */
-/* TODO: Is it possible to use ApiDecorator?
-const Scrollbar = ApiDecorator(
-	{api: [
-		'focusOnButton',
-		'getContainerRef',
-		'isOneOfScrollButtonsFocused',
-		'showThumb',
-		'startHidingThumb',
-		'update'
-	]}, Skinnable(ScrollbarBase)
-);
-*/
-const Scrollbar = ScrollbarBase;
+const Scrollbar = Skinnable(ScrollbarBase);
 
 Scrollbar.displayName = 'Scrollbar';
 
 export default Scrollbar;
 export {
 	Scrollbar,
-	Scrollbar as ScrollbarBase
+	ScrollbarBase
 };

@@ -268,10 +268,6 @@ const useSpottable = (props, instances) => {
 		return ((scrollMode === 'translate') ? (mutableRef.current.isScrolledBy5way) : (mutableRef.current.isScrolledBy5way || mutableRef.current.isScrolledByJump));
 	}
 
-	function shouldPreventOverscrollEffect () {
-		return mutableRef.current.isWrappedBy5way;
-	}
-
 	function setLastFocusedNode (node) {
 		mutableRef.current.lastFocusedIndex = node.dataset && getNumberValue(node.dataset.index);
 	}
@@ -294,7 +290,6 @@ const useSpottable = (props, instances) => {
 		isNeededScrollingPlaceholder,
 		setContainerDisabled,
 		setLastFocusedNode,
-		shouldPreventOverscrollEffect,
 		shouldPreventScrollByFocus,
 		SpotlightPlaceholder,
 		updateStatesAndBounds
@@ -320,7 +315,6 @@ const useThemeVirtualList = (props) => {
 		isNeededScrollingPlaceholder,
 		setContainerDisabled,
 		setLastFocusedNode,
-		shouldPreventOverscrollEffect,
 		shouldPreventScrollByFocus,
 		SpotlightPlaceholder, // eslint-disable-line no-shadow
 		updateStatesAndBounds
@@ -335,7 +329,6 @@ const useThemeVirtualList = (props) => {
 		getScrollBounds,
 		setContainerDisabled,
 		setLastFocusedNode,
-		shouldPreventOverscrollEffect,
 		shouldPreventScrollByFocus
 	};
 	useEffect(() => {
