@@ -15,7 +15,7 @@ let lastPointer = {x: 0, y: 0};
 const useEventFocus = (props, instances, context) => {
 	const {scrollMode} = props;
 	const {scrollContainerHandle, scrollContainerRef, scrollContentRef, spottable, themeScrollContentHandle} = instances;
-	const {alertThumb, isWheeling} = context;
+	const {alertScrollbarTrack, isWheeling} = context;
 
 	// Functions
 
@@ -84,14 +84,7 @@ const useEventFocus = (props, instances, context) => {
 
 				pos = positionFn({item: spotItem, scrollPosition});
 			} else {
-				// scrollInfo passes in current `scrollHeight` and `scrollTop` before calculations
-				const
-					scrollInfo = {
-						previousScrollHeight: scrollContainerHandle.current.bounds.scrollHeight,
-						scrollTop: scrollContainerHandle.current.scrollTop
-					};
-
-				pos = positionFn({item: spotItem, scrollInfo});
+				pos = positionFn({item: spotItem});
 			}
 
 			if (pos && (pos.left !== scrollContainerHandle.current.scrollLeft || pos.top !== scrollContainerHandle.current.scrollTop)) {
@@ -114,7 +107,7 @@ const useEventFocus = (props, instances, context) => {
 		}
 
 		if (!Spotlight.getPointerMode()) {
-			alertThumb();
+			alertScrollbarTrack();
 		}
 
 		if (!(shouldPreventScrollByFocus || Spotlight.getPointerMode() || scrollContainerHandle.current.isDragging)) {
@@ -549,7 +542,7 @@ const useEventVoice = (props, instances, context) => {
 
 const useEventWheel = (props, instances, context) => {
 	const {scrollMode} = props;
-	const {themeScrollContentHandle, horizontalScrollbarRef, scrollContainerHandle, verticalScrollbarRef} = instances;
+	const {themeScrollContentHandle, horizontalScrollbarHandle, scrollContainerHandle, verticalScrollbarHandle} = instances;
 	const {isScrollButtonFocused} = context;
 
 	// Mutable value
@@ -587,13 +580,13 @@ const useEventWheel = (props, instances, context) => {
 			eventDelta = (-ev.wheelDeltaY || ev.deltaY);
 		let
 			delta = 0,
-			needToHideThumb = false;
+			needToHideScrollbarTrack = false;
 
 		if (typeof window !== 'undefined') {
 			window.document.activeElement.blur();
 		}
 
-		scrollContainerHandle.current.showThumb(bounds);
+		scrollContainerHandle.current.showScrollbarTrack(bounds);
 
 		// FIXME This routine is a temporary support for horizontal wheel scroll.
 		// FIXME If web engine supports horizontal wheel, this routine should be refined or removed.
@@ -607,17 +600,17 @@ const useEventWheel = (props, instances, context) => {
 				}
 
 				// Not to check if ev.target is a descendant of a wrapped component which may have a lot of nodes in it.
-				if ((horizontalScrollbarRef.current && utilDOM.containsDangerously(horizontalScrollbarRef.current.uiScrollbarContainer, ev.target)) ||
-					(verticalScrollbarRef.current && utilDOM.containsDangerously(verticalScrollbarRef.current.uiScrollbarContainer, ev.target))) {
+				if ((horizontalScrollbarHandle.current && utilDOM.containsDangerously(horizontalScrollbarHandle.current.getContainerRef(), ev.target)) ||
+					(verticalScrollbarHandle.current && utilDOM.containsDangerously(verticalScrollbarHandle.current.getContainerRef(), ev.target))) {
 					delta = scrollContainerHandle.current.calculateDistanceByWheel(eventDeltaMode, eventDelta, bounds.clientHeight * scrollWheelPageMultiplierForMaxPixel);
-					needToHideThumb = !delta;
+					needToHideScrollbarTrack = !delta;
 
 					ev.preventDefault();
 				}
 
 				ev.stopPropagation();
 			} else {
-				needToHideThumb = true;
+				needToHideScrollbarTrack = true;
 			}
 		} else if (canScrollHorizontally) { // this routine handles wheel events on any children for horizontal scroll.
 			if (eventDelta < 0 && scrollContainerHandle.current.scrollLeft > 0 || eventDelta > 0 && scrollContainerHandle.current.scrollLeft < bounds.maxLeft) {
@@ -630,12 +623,12 @@ const useEventWheel = (props, instances, context) => {
 				}
 
 				delta = scrollContainerHandle.current.calculateDistanceByWheel(eventDeltaMode, eventDelta, bounds.clientWidth * scrollWheelPageMultiplierForMaxPixel);
-				needToHideThumb = !delta;
+				needToHideScrollbarTrack = !delta;
 
 				ev.preventDefault();
 				ev.stopPropagation();
 			} else {
-				needToHideThumb = true;
+				needToHideScrollbarTrack = true;
 			}
 		}
 
@@ -654,8 +647,8 @@ const useEventWheel = (props, instances, context) => {
 			scrollContainerHandle.current.scrollToAccumulatedTarget(delta, canScrollVertically);
 		}
 
-		if (needToHideThumb) {
-			scrollContainerHandle.current.startHidingThumb();
+		if (needToHideScrollbarTrack) {
+			scrollContainerHandle.current.startHidingScrollbarTrack();
 		}
 	}
 
