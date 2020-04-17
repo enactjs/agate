@@ -73,7 +73,7 @@ const useThemeScroll = (props, instances) => {
 	// Hooks
 
 	const {
-		alertThumb,
+		alertScrollbarTrack,
 		isScrollButtonFocused,
 		onScrollbarButtonClick,
 		scrollAndFocusScrollbarButton,
@@ -86,7 +86,7 @@ const useThemeScroll = (props, instances) => {
 
 	const {handleWheel, isWheeling} = useEventWheel(props, instances, {isScrollButtonFocused});
 
-	const {calculateAndScrollTo, handleFocus, hasFocus} = useEventFocus(props, {...instances, spottable: mutableRef}, {alertThumb, isWheeling});
+	const {calculateAndScrollTo, handleFocus, hasFocus} = useEventFocus(props, {...instances, spottable: mutableRef}, {alertScrollbarTrack, isWheeling});
 
 	const {handleKeyDown, lastPointer, scrollByPageOnPointerMode} = useEventKey(props, {...instances, spottable: mutableRef}, {hasFocus, isContent});
 
@@ -283,10 +283,10 @@ const useScroll = (props) => {
 	const scrollContentRef = useRef();
 	const itemRefs = useRef([]);
 
-	const horizontalScrollbarRef = useRef();
-	const verticalScrollbarRef = useRef();
+	const horizontalScrollbarHandle = useRef();
+	const verticalScrollbarHandle = useRef();
 
-	// Adapters
+	// Handles
 
 	const [themeScrollContentHandle, setThemeScrollContentHandle] = useThemeScrollContentHandle();
 
@@ -300,7 +300,7 @@ const useScroll = (props) => {
 		isDragging: null,
 		isFlicked: null,
 		isScrollAnimationTargetAccumulated: null,
-		isUpdatedScrollThumb: null,
+		isUpdatedScrollScrollbarTrack: null,
 		lastInputType: null,
 		rtl: null,
 		scrollBounds: null,
@@ -312,9 +312,9 @@ const useScroll = (props) => {
 		scrollToAccumulatedTarget: null,
 		scrollToInfo: null,
 		scrollTop: null,
-		showThumb: null,
+		showScrollbarTrack: null,
 		start: null,
-		startHidingThumb: null,
+		startHidingScrollbarTrack: null,
 		stop: null,
 		wheelDirection: null
 	});
@@ -329,13 +329,13 @@ const useScroll = (props) => {
 		// Ref
 		scrollContainerRef,
 		scrollContentRef,
-		horizontalScrollbarRef,
-		verticalScrollbarRef,
 
-		// Adapter
+		// Handle
 		themeScrollContentHandle,
 		scrollContainerHandle,
-		scrollContentHandle
+		scrollContentHandle,
+		horizontalScrollbarHandle,
+		verticalScrollbarHandle
 	};
 
 	const
@@ -384,7 +384,7 @@ const useScroll = (props) => {
 		noScrollByDrag: !platform.touchscreen,
 		addEventListeners,
 		handleResizeWindow,
-		horizontalScrollbarRef,
+		horizontalScrollbarHandle,
 		onDragEnd: handleDragEnd,
 		onDragStart: handleDragStart,
 		onFlick: handleFlick,
@@ -399,7 +399,7 @@ const useScroll = (props) => {
 		scrollContentHandle,
 		scrollContentRef,
 		scrollContainerRef,
-		verticalScrollbarRef
+		verticalScrollbarHandle
 	});
 
 	assignProperties('scrollContainerProps', {
@@ -429,7 +429,7 @@ const useScroll = (props) => {
 		onKeyDownButton: handleKeyDown,
 		preventBubblingOnKeyDown,
 		previousButtonAriaLabel: upButtonAriaLabel,
-		ref: verticalScrollbarRef
+		scrollbarHandle: verticalScrollbarHandle
 	});
 
 	assignProperties('horizontalScrollbarProps', {
@@ -439,7 +439,7 @@ const useScroll = (props) => {
 		onKeyDownButton: handleKeyDown,
 		preventBubblingOnKeyDown,
 		previousButtonAriaLabel: leftButtonAriaLabel,
-		ref: horizontalScrollbarRef
+		scrollbarHandle: horizontalScrollbarHandle
 	});
 
 	return {

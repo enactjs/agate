@@ -44,13 +44,13 @@ class ScrollButtons extends Component {
 
 	static propTypes = /** @lends agate/useScroll.ScrollButtons.prototype */ {
 		/**
-		 * The render function for thumb.
+		 * The render function for scrollbar track.
 		 *
 		 * @type {Function}
 		 * @required
 		 * @private
 		 */
-		thumbRenderer: PropTypes.func.isRequired,
+		scrollbarTrackRenderer: PropTypes.func.isRequired,
 
 		/**
 		 * Specifies to reflect scrollbar's disabled property to the paging controls.
@@ -324,7 +324,7 @@ class ScrollButtons extends Component {
 
 	render () {
 		const
-			{disabled, nextButtonAriaLabel, previousButtonAriaLabel, rtl, thumbRenderer, vertical} = this.props,
+			{disabled, nextButtonAriaLabel, previousButtonAriaLabel, rtl, scrollbarTrackRenderer, vertical} = this.props,
 			{prevButtonDisabled, nextButtonDisabled} = this.state,
 			prevIcon = preparePrevButton(vertical),
 			nextIcon = prepareNextButton(vertical);
@@ -340,7 +340,7 @@ class ScrollButtons extends Component {
 				ref={this.prevButtonRef}
 				icon={prevIcon}
 			/>,
-			thumbRenderer(),
+			scrollbarTrackRenderer(),
 			<ScrollButton
 				aria-label={rtl && !vertical ? previousButtonAriaLabel : nextButtonAriaLabel}
 				data-spotlight-overflow="ignore"
