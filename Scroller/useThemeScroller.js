@@ -245,6 +245,7 @@ const useThemeScroller = (props) => {
 	const {scrollContentHandle, scrollContentRef} = rest;
 
 	delete rest.onUpdate;
+	delete rest.scrollAndFocusScrollbarButton;
 	delete rest.scrollContainerContainsDangerously;
 	delete rest.scrollContainerHandle;
 	delete rest.scrollContainerRef;
