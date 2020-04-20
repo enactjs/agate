@@ -1,6 +1,6 @@
 {
   "name": "agate-sampler",
-  "version": "1.0.0-alpha.9",
+  "version": "1.0.0-alpha.15",
   "description": "Component samples for Agate",
   "private": true,
   "main": "index.js",
@@ -15,6 +15,9 @@
     "serve": "start-storybook -p 8080 -c .storybook --ci"
   },
   "license": "Apache-2.0",
+  "enact": {
+    "theme": "agate"
+  },
   "eslintConfig": {
     "extends": "enact/strict",
     "root": true
