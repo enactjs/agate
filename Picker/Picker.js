@@ -177,7 +177,7 @@ const PickerBase = kind({
 					</div>
 				</PickerButtonItem>
 				<div
-					aria-valuetext={valueText !== 'undefined' ? valueText : values[value]}
+					aria-valuetext={typeof valueText !== 'undefined' ? valueText : values[value]}
 					className={activeClassName}
 					id={id}
 					role="spinbutton"
