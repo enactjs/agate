@@ -11,6 +11,7 @@
 
 import React from 'react';
 import classnames from 'classnames';
+import DateFmt from 'ilib/lib/DateFmt';
 import kind from '@enact/core/kind';
 import {Cell, Column, Row} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
@@ -39,6 +40,15 @@ const PickerCell = kind({
 	)
 });
 
+// Meridiem localization
+const merFormatter = new DateFmt({
+	template: 'a',
+	useNative: false,
+	timezone: 'local'
+});
+const meridiems = merFormatter.getMeridiemsRange();
+const meridiemLabels = meridiems.map(obj => obj.name);
+
 /**
  * A date/time Picker component.
  *
@@ -59,7 +69,7 @@ class DateTimePickerBase extends React.Component {
 		this.state = {
 			hour: '12',
 			minute: '00',
-			meridiem: $L('AM'),
+			meridiem: meridiemLabels[0],
 			month: '1',
 			day: '1',
 			year: '2018'
@@ -78,7 +88,7 @@ class DateTimePickerBase extends React.Component {
 		days: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
 		hours: ['12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
 		minutes: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59'],
-		meridiem: [$L('AM'), $L('PM')]
+		meridiem: meridiemLabels
 	}
 
 	onSave = () => {
@@ -92,7 +102,7 @@ class DateTimePickerBase extends React.Component {
 	}
 
 	handleTimeChange = (type) => ({value}) => {
-		this.setState({[type]: value});
+		this.setState({[type]: type === 'meridiem' ? meridiemLabels[value] : value});
 	}
 
 	render () {
