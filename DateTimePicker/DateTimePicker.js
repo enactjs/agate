@@ -135,7 +135,7 @@ class DateTimePickerBase extends React.Component {
 							{$L('minute')}
 						</PickerCell>
 						<PickerCell className={css.pickerRight} onChange={this.handleTimeChange('meridiem')} range={this.ranges.meridiem}>
-							{$L('meridiem')}
+							{this.ranges.meridiem.join(' / ')}
 						</PickerCell>
 					</Row>
 				</Cell>
