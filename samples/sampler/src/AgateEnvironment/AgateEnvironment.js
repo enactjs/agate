@@ -7,7 +7,7 @@ import {color} from '@storybook/addon-knobs';
 import {Row, Column, Cell} from '@enact/ui/Layout';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 
-import AgateDecorator from '@enact/agate/AgateDecorator';
+import ThemeDecorator from '@enact/agate/ThemeDecorator';
 import Heading from '@enact/agate/Heading';
 import {Panels, Panel} from '@enact/agate/Panels';
 import Skinnable from '@enact/agate/Skinnable';
@@ -77,8 +77,8 @@ const FullscreenBase = kind({
 	)
 });
 
-const Agate = AgateDecorator({overlay: false}, PanelsBase);
-const AgateFullscreen = AgateDecorator({overlay: false}, FullscreenBase);
+const Agate = ThemeDecorator({overlay: false}, PanelsBase);
+const AgateFullscreen = ThemeDecorator({overlay: false}, FullscreenBase);
 
 const locales = {
 	'local':                                                             '',
@@ -116,7 +116,7 @@ const getPropFromURL = (propName, fallbackValue) => {
 	if (startIndex > -1) {
 		const keyIndex = locationParams.indexOf('=', startIndex);
 
-		if (locationParams.indexOf('&', keyIndex) > -1 ) {
+		if (locationParams.indexOf('&', keyIndex) > -1) {
 			const valueIndex = locationParams.indexOf('&', keyIndex);
 			return decodeURIComponent(locationParams.substring(keyIndex + 1, valueIndex));
 		} else {
