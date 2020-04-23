@@ -3,7 +3,7 @@
  *
  * @module agate/AgateDecorator
  * @exports AgateDecorator
- * @deprecated Will be removed in 1.0.0-beta.1. Use {@link agate/ThemeDecorator} instead.
+ * @deprecated Will be removed in 2.0.0. Use {@link agate/ThemeDecorator} instead.
  */
 
 import deprecate from '@enact/core/internal/deprecate';
@@ -12,7 +12,7 @@ import ThemeDecorator from '@enact/agate/ThemeDecorator';
 const AgateDecorator = deprecate(ThemeDecorator, {
 	name: 'agate/AgateDecorator',
 	replacedBy: 'agate/ThemeDecorator',
-	until: '1.0.0-beta.1'
+	until: '2.0.0'
 });
 
 export default AgateDecorator;
