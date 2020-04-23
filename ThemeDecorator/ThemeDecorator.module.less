@@ -1,0 +1,94 @@
+// Agate Base App styles
+//
+
+// Core Rules
+@import "~@enact/ui/styles/core.less";
+
+// Agate Internal Rules
+@import "../styles/internal/fonts.less";
+
+// Agate Rules
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+@import "../styles/variables.less";
+
+/* Prevent browser's default focus treatment (at least in Chrome) */
+:focus {
+	outline: none;
+}
+.applySkins({
+
+	::selection {
+		color: @agate-spotlight-color;
+		background-color: @agate-spotlight-bg-color; // lighten(@agate-spotlight-bg-color, 18%);
+	}
+
+	// Spotlight
+	// This rule-set applies a generic spottable set of colors to anything with the spottable class
+	// that is a child of a skin. It's a blanket rule for components that don't technically need to
+	// be skinnable themselves, but still need to be focusable and inherit rules from their parent.
+	// The rule below this, should look identical, with the exception of the absence of the `parent`
+	// argument to the focus mixin. This allows that set of rules to prevail over this generic set.
+	//// Inherited Spottable rules (for components that aren't directly skinned)
+	.focus({
+		color: @agate-spotlight-color;
+		background-color: @agate-spotlight-bg-color;
+		background-image: @agate-spotlight-focus-bg-image;
+	}, parent);
+	//// Primary spottable rules (for any component with a skin applied to itself)
+	.focus({
+		color: @agate-spotlight-color;
+		background-color: @agate-spotlight-bg-color;
+		background-image: @agate-spotlight-focus-bg-image;
+	});
+
+	// Disabled Components
+	.disabled({
+		.vendor-opacity(@agate-disabled-opacity);
+
+		// Focused and disabled, must restore their natural opacity, then assign the faded text/content color
+		.focus({
+			.vendor-opacity(1);
+			color: @agate-spotlight-disabled-text-color;
+		});
+
+		cursor: default;
+
+		// Disabled children of disabled components
+		.disabled({
+			.vendor-opacity(1);
+		}, parent);
+	});
+});
+
+.root {
+	font-style: normal;
+	letter-spacing: normal;
+	overflow: hidden;
+
+	&:global(.enact-locale-right-to-left) {
+		direction: rtl;
+	}
+
+	// Skin settings
+	.applySkins({
+		font-family: @agate-base-font-family;
+		font-weight: @agate-base-font-weight;
+		font-size: @agate-base-font-size;
+		font-variant-ligatures: @agate-base-font-ligatures;
+		color: @agate-text-color;
+
+		&.bg {
+			background-color: @agate-bg-color;
+			background-image: @agate-bg-image;
+
+			&::before {
+				content: "";
+				display: block;
+				background-image: @agate-bg-image2;
+				position: absolute;
+				.position(0);
+			}
+		}
+	});
+}
