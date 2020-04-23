@@ -49,7 +49,8 @@
     "ramda": "^0.25.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
-    "recompose": "^0.30.0"
+    "recompose": "^0.30.0",
+    "warning": "^3.0.0"
   },
   "peerDependencies": {
     "ilib": "^14.4.0 || ^14.4.0-webostv1"
