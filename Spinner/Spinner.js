@@ -18,6 +18,7 @@ import compose from 'ramda/src/compose';
 import React from 'react';
 import UiSpinnerBase from '@enact/ui/Spinner';
 
+import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Spinner.module.less';
@@ -65,7 +66,7 @@ const SpinnerCore = kind({
 	computed: {
 		'aria-label': ({'aria-label': label, type}) => {
 			// TODO: These static values will need to be localized
-			return label || type === 'searching' ? 'Searching' : 'Loading';
+			return label || type === 'searching' ? $L('Searching') : $L('Loading');
 		},
 		className: ({styler, type}) => styler.append(type),
 		spinnerNodes: ({styler, type}) => {
