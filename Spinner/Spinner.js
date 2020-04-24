@@ -56,7 +56,7 @@ const SpinnerCore = kind({
 	},
 
 	defaultProps: {
-		type: $L('searching')
+		type: 'searching'
 	},
 
 	styles: {
@@ -66,11 +66,11 @@ const SpinnerCore = kind({
 	computed: {
 		'aria-label': ({'aria-label': label, type}) => {
 			// TODO: These static values will need to be localized
-			return label || type === $L('searching') ? $L('Searching') : $L('Loading');
+			return label || type === 'searching' ? $L('Searching') : $L('Loading');
 		},
 		className: ({styler, type}) => styler.append(type),
 		spinnerNodes: ({styler, type}) => {
-			return Array.from({length: type === $L('searching') ? 12 : 4}, (_, index) => (
+			return Array.from({length: type === 'searching' ? 12 : 4}, (_, index) => (
 				<span className={styler.join('node', `node${index + 1}`)} key={`node${index}`} />
 			));
 		}
