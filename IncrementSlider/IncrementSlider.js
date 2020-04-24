@@ -124,7 +124,7 @@ const IncrementSliderBase = kind({
 		/**
 		* Sets the hint string read when focusing the decrement button.
 		*
-		* @default 'press ok button to decrease the value'
+		* @default 'press button to decrease the value'
 		* @type {String}
 		* @public
 		*/
@@ -166,7 +166,7 @@ const IncrementSliderBase = kind({
 		/**
 		* Sets the hint string read when focusing the increment button.
 		*
-		* @default 'press ok button to increase the value'
+		* @default 'press button to increase the value'
 		* @type {String}
 		* @public
 		*/
@@ -412,14 +412,14 @@ const IncrementSliderBase = kind({
 		incrementDisabled: ({disabled, max, min, value = min}) => disabled || value >= max,
 		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel, min, value = min}) => {
 			if (decrementAriaLabel == null) {
-				decrementAriaLabel = $L('press ok button to decrease the value');
+				decrementAriaLabel = $L('press button to decrease the value');
 			}
 
 			return `${valueText != null ? valueText : value} ${decrementAriaLabel}`;
 		},
 		incrementAriaLabel: ({'aria-valuetext': valueText, incrementAriaLabel, min, value = min}) => {
 			if (incrementAriaLabel == null) {
-				incrementAriaLabel = $L('press ok button to increase the value');
+				incrementAriaLabel = $L('press button to increase the value');
 			}
 
 			return `${valueText != null ? valueText : value} ${incrementAriaLabel}`;
