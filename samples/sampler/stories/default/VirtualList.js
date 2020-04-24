@@ -4,7 +4,7 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import React from 'react';
 import ri from '@enact/ui/resolution';
 import {storiesOf} from '@storybook/react';
-import {VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
+import {VirtualListBase as UiVirtualListBase} from '@enact/ui/VirtualList';
 
 import Item from '@enact/agate/Item';
 import VirtualList from '@enact/agate/VirtualList';
@@ -52,7 +52,7 @@ const updateDataSize = (dataSize) => {
 
 updateDataSize(defaultDataSize);
 
-const VirtualListConfig = mergeComponentMetadata('VirtualList', UiVirtualListBasic, VirtualList);
+const VirtualListConfig = mergeComponentMetadata('VirtualList', UiVirtualListBase, VirtualList);
 
 storiesOf('Agate', module)
 	.add(
@@ -80,7 +80,7 @@ storiesOf('Agate', module)
 		},
 		{
 			info: {
-				text: 'Basic usage of VirtualList'
+				text: 'The basic usage of VirtualList'
 			}
 		}
 	);
