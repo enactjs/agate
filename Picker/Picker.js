@@ -140,6 +140,7 @@ const PickerBase = kind({
 		decrementAriaLabel: ({'aria-valuetext': valueText, children: values, decrementAriaLabel = $L('previous item'), value}) => {
 			return `${valueText != null ? valueText : values[value]} ${decrementAriaLabel}`;
 		},
+		id: ({id}) => `${id}_picker`,
 		incrementAriaLabel: ({'aria-valuetext': valueText, children: values, incrementAriaLabel = $L('next item'), value}) => {
 			return `${valueText != null ? valueText : values[value]} ${incrementAriaLabel}`;
 		}
@@ -213,7 +214,7 @@ const PickerBase = kind({
  * @public
  */
 const PickerDecorator = compose(
-	IdProvider({generateProp: null, prefix: 'p_'}),
+	IdProvider({generateProp: null}),
 	Changeable,
 	Skinnable
 );
