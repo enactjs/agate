@@ -3,7 +3,7 @@ import {loadStories} from '@enact/storybook-utils';
 import {configureActions} from '@enact/storybook-utils/addons/actions';
 import {withKnobs} from '@enact/storybook-utils/addons/knobs';
 
-import Agate from '../src/AgateEnvironment';
+import Agate from '../src/ThemeEnvironment';
 
 function config (stories, mod) {
 	configureActions();
