@@ -140,7 +140,7 @@ const PickerBase = kind({
 		decrementAriaLabel: ({'aria-valuetext': valueText, children: values, decrementAriaLabel = $L('previous item'), value}) => {
 			return `${valueText != null ? valueText : values[value]} ${decrementAriaLabel}`;
 		},
-		id: ({id}) => `${id}_picker`,
+		valueId: ({id}) => `${id}_value`,
 		incrementAriaLabel: ({'aria-valuetext': valueText, children: values, incrementAriaLabel = $L('next item'), value}) => {
 			return `${valueText != null ? valueText : values[value]} ${incrementAriaLabel}`;
 		}
@@ -155,9 +155,9 @@ const PickerBase = kind({
 			handleDecrement,
 			handleFlick,
 			handleIncrement,
-			id,
 			incrementAriaLabel,
 			value,
+			valueId,
 			...rest
 		} = props;
 		const isFirst = value <= 0;
@@ -166,7 +166,7 @@ const PickerBase = kind({
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
 				<PickerButtonItem
-					aria-controls={id}
+					aria-controls={valueId}
 					aria-disabled={isFirst}
 					aria-label={decrementAriaLabel}
 					className={css.itemTop}
@@ -180,7 +180,7 @@ const PickerBase = kind({
 				<div
 					aria-valuetext={typeof valueText !== 'undefined' ? valueText : values[value]}
 					className={activeClassName}
-					id={id}
+					id={valueId}
 					role="spinbutton"
 				>
 					<div className={css.label}>
@@ -188,7 +188,7 @@ const PickerBase = kind({
 					</div>
 				</div>
 				<PickerButtonItem
-					aria-controls={id}
+					aria-controls={valueId}
 					aria-disabled={isLast}
 					aria-label={incrementAriaLabel}
 					className={css.itemBottom}
