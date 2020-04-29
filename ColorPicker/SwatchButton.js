@@ -33,7 +33,7 @@ const SwatchButtonBase = kind({
 
 	propTypes: /** @lends agate/ColorPicker.SwatchButtonBase.prototype */ {
 		/**
-		 * The color of the swatch. If the `color` prop is not set.
+		 * The color of the swatch if the `color` prop is not set.
 		 *
 		 * The value should take the format of a HEX color. Ex: `#ffcc00` or `#3467af`
 		 *
@@ -58,7 +58,7 @@ const SwatchButtonBase = kind({
 		 *
 		 * The following classes are supported:
 		 *
-		 * * `colorPicker` - The root class name
+		 * * `swatchButton` - The root class name
 		 * * `colorSwatch` - The node that displays the chosen color. The current value is applied
 		 * 		as a background-color to this element.
 		 *
