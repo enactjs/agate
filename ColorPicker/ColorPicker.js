@@ -22,6 +22,7 @@ import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDeco
 
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
+import Pure from '@enact/ui/internal/Pure';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import convert from 'color-convert';
@@ -241,7 +242,7 @@ const ColorPickerBase = kind({
 });
 
 const ColorPickerExtended = hoc((config, Wrapped) => {
-	return class extends React.PureComponent {
+	return class extends React.Component {
 		static displayName = 'ColorPickerExtended'
 
 		static propTypes = {
@@ -342,6 +343,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
  * @public
  */
 const ColorPickerDecorator = compose(
+	Pure,
 	Toggleable({toggle: null, prop: 'open', toggleProp: 'onClick'}),
 	ColorPickerExtended,
 	Skinnable
