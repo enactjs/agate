@@ -36,6 +36,9 @@ import componentCss from './ColorPicker.module.less';
 
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 
+// helper function to convert color hex strings or kewords to hue, saturation, and lightness values
+const convertToHSL = (value) => convert[value.charAt(0) === '#' ? 'hex' : 'keyword'].hsl(value);
+
 /**
  * The color picker base component which sets-up the component's structure.
  *
@@ -168,13 +171,7 @@ const ColorPickerBase = kind({
 	computed: {
 		children: ({children}) => children || [],
 		className: ({extended, styler}) => styler.append({extended}),
-		sliderValues: ({value}) => {
-			const isHex = value.charAt(0) === '#';
-			if (isHex) {
-				return {hsl: convert.hex.hsl(value)};
-			}
-			return {hsl: convert.keyword.hsl(value)};
-		},
+		sliderValues: ({value}) => ({hsl: convertToHSL(value)}),
 		transitionContainerClassname: ({css, open, styler}) => styler.join(css.transitionContainer, (open ? css.openTransitionContainer : null)),
 		transitionDirection: ({direction}) => {
 			switch (direction) {
@@ -266,7 +263,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 
 		constructor (props) {
 			super(props);
-			this.hsl = convert[props.value.charAt(0) === '#' ? 'hex' : 'keyword'].hsl(props.value);
+			this.hsl = convertToHSL(props.value);
 			this.state = {
 				extended: props.defaultExtended || false
 			};
@@ -287,12 +284,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 		componentDidUpdate (prevProps) {
 			const {open, value} = this.props;
 			if (prevProps.value !== value) {
-				// try hex string first
-				if (value.charAt(0) === '#') {
-					this.hsl = convert.hex.hsl(value);
-				} else { // try keyword
-					this.hsl = convert.keyword.hsl(value);
-				}
+				this.hsl = convertToHSL(value);
 			}
 
 			if (!prevProps.open && open) {
