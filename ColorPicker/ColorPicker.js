@@ -177,7 +177,11 @@ const ColorPickerBase = kind({
 		children: ({children}) => children || [],
 		className: ({extended, styler}) => styler.append({extended}),
 		sliderValues: ({value}) => {
-			return {hsl: convert.hex.hsl(value)};
+			const isHex = value.charAt(0) === '#';
+			if (isHex) {
+				return {hsl: convert.hex.hsl(value)};
+			}
+			return {hsl: convert.keyword.hsl(value)};
 		},
 		transitionContainerClassname: ({css, open, styler}) => styler.join(css.transitionContainer, (open ? css.openTransitionContainer : null)),
 		transitionDirection: ({direction}) => {
@@ -258,7 +262,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 
 		constructor (props) {
 			super(props);
-			this.hsl = convert.hex.hsl(props.value);
+			this.hsl = convert[props.value.charAt(0) === '#' ? 'hex' : 'keyword'].hsl(props.value);
 			this.state = {
 				extended: props.defaultExtended || false
 			};
@@ -277,7 +281,12 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 		componentDidUpdate (prevProps) {
 			const {open, value} = this.props;
 			if (prevProps.value !== value) {
-				this.hsl = convert.hex.hsl(value);
+				// try hex string first
+				if (value.charAt(0) === '#') {
+					this.hsl = convert.hex.hsl(value);
+				} else { // try keyword
+					this.hsl = convert.keyword.hsl(value);
+				}
 			}
 
 			if (!prevProps.open && open) {
