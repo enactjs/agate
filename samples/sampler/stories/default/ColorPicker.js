@@ -7,7 +7,7 @@ import ColorPicker from '@enact/agate/ColorPicker';
 
 ColorPicker.displayName = 'ColorPicker';
 const prop = {
-	direction: ['top', 'right', 'bottom', 'left'],
+	direction: ['up', 'right', 'down', 'left'],
 	colors: ['green', 'yellow', 'orange', 'red', 'black', 'gray', 'white', 'maroon', 'brown']
 };
 
