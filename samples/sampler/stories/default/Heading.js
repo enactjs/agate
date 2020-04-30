@@ -10,7 +10,7 @@ const Config = mergeComponentMetadata('Heading', Heading, HeadingBase);
 
 const prop = {
 	colors: ['', '#E6444B', '#FDC902', '#986AAD', '#4E75E1', '#30CC83', '#44C8D5', '#47439B', '#2D32A6', '#4E75E1'],
-	sizes: ['', 'title', 'large', 'medium', 'small', 'tiny'],
+	sizes: ['', 'title', 'subtitle', 'large', 'medium', 'small', 'tiny'],
 	spacings: ['', 'auto', 'title', 'large', 'medium', 'small', 'none']
 };
 
