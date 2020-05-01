@@ -1,5 +1,5 @@
 import Input from '../../../../Input';
-import AgateDecorator from '../../../../AgateDecorator';
+import ThemeDecorator from '../../../../ThemeDecorator';
 import React from 'react';
 
 const app = (props) => <div {...props}>
@@ -14,5 +14,5 @@ const app = (props) => <div {...props}>
 	</div>
 </div>;
 
-export default AgateDecorator(app);
+export default ThemeDecorator(app);
 
