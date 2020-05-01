@@ -104,6 +104,7 @@ const skins = {
 	'Copper': 'copper',
 	'Electro': 'electro',
 	'Gallium': 'gallium',
+	'Silicon': 'silicon',
 	'Titanium': 'titanium'
 };
 
@@ -161,6 +162,10 @@ const StorybookDecorator = (story, config) => {
 		gallium: {
 			accent: '#8b7efe',
 			highlight: '#e16253'
+		},
+		silicon: {
+			accent: '#f1304f',
+			highlight: '#9e00d8'
 		},
 		titanium: {
 			accent: '#a6a6a6',
