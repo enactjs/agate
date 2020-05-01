@@ -1,17 +1,17 @@
 import React from 'react';
 import {mount} from 'enzyme';
-import AgateDecorator from '../';
+import ThemeDecorator from '../';
 import Spotlight from '@enact/spotlight';
 
-import css from '../AgateDecorator.module.less';
+import css from '../ThemeDecorator.module.less';
 
-describe('AgateDecorator', () => {
+describe('ThemeDecorator', () => {
 
 	const AppRoot = (props) => <div id="app" {...props} />;
 
 	test('should add base gallium classes to wrapped component', function () {
 		const config = {ri: false, i18n: false, spotlight: false, float: false, overlay: false};
-		const App = AgateDecorator(config, AppRoot);
+		const App = ThemeDecorator(config, AppRoot);
 		const subject = mount(
 			<App />
 		);
@@ -28,7 +28,7 @@ describe('AgateDecorator', () => {
 
 	test('should add author classes to wrapped component', function () {
 		const config = {ri: false, i18n: false, spotlight: false, float: false, overlay: false};
-		const App = AgateDecorator(config, AppRoot);
+		const App = ThemeDecorator(config, AppRoot);
 		const subject = mount(
 			<App className="author-class" />
 		);
@@ -45,7 +45,7 @@ describe('AgateDecorator', () => {
 
 	test('should not add .agate class to wrapped component when float is enabled', function () {
 		const config = {ri: false, i18n: false, spotlight: false, float: true, overlay: false};
-		const App = AgateDecorator(config, AppRoot);
+		const App = ThemeDecorator(config, AppRoot);
 		const subject = mount(
 			<App />
 		);
@@ -62,7 +62,7 @@ describe('AgateDecorator', () => {
 
 	test('should not add .bg class to wrapped component when overlay is enabled', function () {
 		const config = {ri: false, i18n: false, spotlight: false, float: false, overlay: true};
-		const App = AgateDecorator(config, AppRoot);
+		const App = ThemeDecorator(config, AppRoot);
 		const subject = mount(
 			<App />
 		);

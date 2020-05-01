@@ -3,7 +3,7 @@ import spotlight from '@enact/spotlight';
 import {urlParamsToObject} from '@enact/ui-test-utils/utils';
 import React from 'react';
 
-import AgateDecorator from '../../../AgateDecorator';
+import ThemeDecorator from '../../../ThemeDecorator';
 
 import {agateComponents, agateTestMetadata} from './AgateComponents';
 
@@ -23,7 +23,7 @@ spotlight.setPointerMode(true);
 const parsed = urlParamsToObject();
 
 function getWrapperClasses ({wrapper}) {
-	return cx ('wrapper', wrapper, parsed.skin);
+	return cx('wrapper', wrapper, parsed.skin);
 }
 
 function prepareTest (componentName, testId) {
@@ -121,7 +121,7 @@ class App extends React.Component {
 	}
 }
 
-const WrappedAgateApp = AgateDecorator({noAutoFocus: true}, App);
+const WrappedAgateApp = ThemeDecorator({noAutoFocus: true}, App);
 
 const ExportedAgateApp = (props) => {
 
