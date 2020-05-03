@@ -152,30 +152,6 @@ const ColorPickerBase = kind({
 		onClick: PropTypes.func,
 
 		/**
-		 * Callback method with a payload containing the hue value of the selected `color`.
-		 *
-		 * @type {Function}
-		 * @public
-		 */
-		onHueChanged: PropTypes.func,
-
-		/**
-		 * Callback method with a payload containing the lightness value of the selected `color`.
-		 *
-		 * @type {Function}
-		 * @public
-		 */
-		onLightnessChanged: PropTypes.func,
-
-		/**
-		 * Callback method with a payload containing the saturation value of the selected `color`.
-		 *
-		 * @type {Function}
-		 * @public
-		 */
-		onSaturationChanged: PropTypes.func,
-
-		/**
 		 * Callback method passed to the [Button]{@link agate/Button.Button} component as `onTap`. This is used to toggle the visibility of the H/S/L sliders.
 		 *
 		 * @type {Function}
@@ -218,6 +194,8 @@ const ColorPickerBase = kind({
 
 	handlers: {
 		onChange: handle(
+			// If there is a `data` member in the event, this came from `Group`'s `onSelect` handler and
+			// needs to be adapted for `ColorPicker`'s `onChange` handler.  If not, we can just forward it.
 			oneOf(
 				[
 					(ev) => !!('data' in ev),
@@ -265,7 +243,7 @@ const ColorPickerBase = kind({
 		}
 	},
 
-	render: ({children, css, onChange, onClick, onHueChanged, onSaturationChanged, onAdjustment, onLightnessChanged, onToggleExtended, open, sliderValues, transitionContainerClassname, transitionDirection, value, ...rest}) => {
+	render: ({children, css, onAdjustment, onChange, onClick, onToggleExtended, open, sliderValues, transitionContainerClassname, transitionDirection, value, ...rest}) => {
 		delete rest.extended;
 		return (
 			<div {...rest}>
