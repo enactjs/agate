@@ -171,7 +171,7 @@ const ColorPickerBase = kind({
 		 * The color value. Setting this directly will not allow interaction with the
 		 * component. Use `defaultValue` to enable interactive use.
 		 *
-		 * The color should take the format of a HEX color. Ex: `#ffcc00` or `#3467af`
+		 * The value should take the format of HEX RGB or a CSS color keyword. Ex: `#db7093` or `palevioletred`
 		 *
 		 * @type {String}
 		 * @see {@link ui/Changeable.Changeable}

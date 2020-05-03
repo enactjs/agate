@@ -35,7 +35,7 @@ const SwatchButtonBase = kind({
 		/**
 		 * The color of the swatch if the `color` prop is not set.
 		 *
-		 * The value should take the format of a HEX color. Ex: `#ffcc00` or `#3467af`
+		 * The value should take the format of HEX RGB or a CSS color keyword. Ex: `#db7093` or `palevioletred`
 		 *
 		 * @type {String}
 		 * @public
@@ -45,7 +45,7 @@ const SwatchButtonBase = kind({
 		/**
 		 * The color of the swatch.
 		 *
-		 * The value should take the format of a HEX color. Ex: `#ffcc00` or `#3467af`
+		 * The value should take the format of HEX RGB or a CSS color keyword. Ex: `#db7093` or `palevioletred`
 		 *
 		 * @type {String}
 		 * @public
