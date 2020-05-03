@@ -14,14 +14,14 @@ import convert from 'color-convert';
 import compose from 'ramda/src/compose';
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
-import {adaptEvent, forward, handle} from '@enact/core/handle';
+import {adaptEvent, forward, handle, oneOf} from '@enact/core/handle';
 import {on, off} from '@enact/core/dispatcher';
 import {Row, Cell} from '@enact/ui/Layout';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
 import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import ReactDOM from 'react-dom';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Toggleable from '@enact/ui/Toggleable';
@@ -29,15 +29,49 @@ import Transition from '@enact/ui/Transition';
 
 import Skinnable from '../Skinnable';
 import Button from '../Button';
-import Slider from '../Slider';
+import {Slider as AgateSlider} from '../Slider';
 import SwatchButton from './SwatchButton';
 
 import componentCss from './ColorPicker.module.less';
 
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 
+// TODO: mske these converters more robust with support for different types of adjustments
+// helper function to convert HSL values to color hex strings
+const convertToHex = ({h, s, l}) => (`#${convert.hsl.hex(h, s, l)}`);
 // helper function to convert color hex strings or kewords to hue, saturation, and lightness values
-const convertToHSL = (value) => convert[value.charAt(0) === '#' ? 'hex' : 'keyword'].hsl(value);
+const convertToHSL = (value) => (convert[value.charAt(0) === '#' ? 'hex' : 'keyword'].hsl(value));
+
+function Slider ({adjustment, onChange: onChangeValue, value: sliderValue, ...rest}) {
+	const [value, setValue] = useState(sliderValue);
+
+	// the `onChange` handler for user interaction
+	const onChange = useCallback(
+		(ev) => {
+			setValue(ev.value);
+			if (onChangeValue) {
+				onChangeValue({adjustment, value: ev.value});
+			}
+		},
+		[adjustment, onChangeValue]
+	);
+
+	// update the slider value when it has been changed non-interactively
+	useEffect(() => {
+		setValue(sliderValue);
+	}, [sliderValue]);
+
+	return (
+		<AgateSlider {...rest} onChange={onChange} value={value} />
+	);
+
+};
+
+Slider.prototype.propTypes = {
+	adjustment: PropTypes.string.isRequired,  // could limit this to ['hue', 'saturation', 'lightness'], but what if we want to allow other adjustments?
+	onChange: PropTypes.func,
+	value: PropTypes.number
+};
 
 /**
  * The color picker base component which sets-up the component's structure.
@@ -168,6 +202,33 @@ const ColorPickerBase = kind({
 		publicClassNames: ['colorPicker', 'palette']
 	},
 
+	handlers: {
+		onChange: handle(
+			oneOf(
+				[
+					(ev) => !!('data' in ev),
+					adaptEvent(
+						({data: value}) => ({value}),
+						forward('onChange')
+					)
+				],
+				[() => true, forward('onChange')]
+			)
+		),
+		onAdjustment: handle(
+			adaptEvent(
+				({adjustment, value: sliderValue}, {value: color}) => {
+					const [h, s, l] = convertToHSL(color);
+					const valueKey = adjustment.charAt(0);  // will equal 'h', 's', or 'l'
+
+					// forward an event to `onChange` with the color built using the adjusted h, s, or l value
+					return {value: convertToHex(Object.assign({}, {h, s, l}, {[valueKey]: sliderValue}))};
+				},
+				forward('onChange')
+			)
+		)
+	},
+
 	computed: {
 		children: ({children}) => children || [],
 		className: ({extended, styler}) => styler.append({extended}),
@@ -187,7 +248,7 @@ const ColorPickerBase = kind({
 		}
 	},
 
-	render: ({children, css, onChange, onClick, onHueChanged, onSaturationChanged, onLightnessChanged, onToggleExtended, open, sliderValues, transitionContainerClassname, transitionDirection, value, ...rest}) => {
+	render: ({children, css, onChange, onClick, onHueChanged, onSaturationChanged, onAdjustment, onLightnessChanged, onToggleExtended, open, sliderValues, transitionContainerClassname, transitionDirection, value, ...rest}) => {
 		delete rest.extended;
 		return (
 			<div {...rest}>
@@ -211,22 +272,22 @@ const ColorPickerBase = kind({
 						<div className={css.sliders}>
 							<Row align="center">
 								<Cell>
-									<label>Hue</label>
-									<Slider value={sliderValues.hsl[0]} min={0} max={360} onChange={onHueChanged} />
+									<label>{$L('Hue')}</label>
+									<Slider adjustment="hue" min={0} max={360} onChange={onAdjustment} value={sliderValues.hsl[0]} />
 								</Cell>
 								<Cell component="label" size="5ex">{sliderValues.hsl[0] + '˚'}</Cell>
 							</Row>
 							<Row align="center">
 								<Cell>
-									<label>Saturation</label>
-									<Slider value={sliderValues.hsl[1]} min={0} max={100} onChange={onSaturationChanged} />
+									<label>{$L('Saturation')}</label>
+									<Slider adjustment="saturation" min={0} max={100} onChange={onAdjustment} value={sliderValues.hsl[1]} />
 								</Cell>
 								<Cell component="label" size="5ex">{sliderValues.hsl[1] + '%'}</Cell>
 							</Row>
 							<Row align="center">
 								<Cell>
-									<label>Lightness</label>
-									<Slider value={sliderValues.hsl[2]} min={0} max={100} onChange={onLightnessChanged} />
+									<label>{$L('Lightness')}</label>
+									<Slider adjustment="lightness" min={0} max={100} onChange={onAdjustment} value={sliderValues.hsl[2]} />
 								</Cell>
 								<Cell component="label" size="5ex">{sliderValues.hsl[2] + '%'}</Cell>
 							</Row>
@@ -237,18 +298,6 @@ const ColorPickerBase = kind({
 		);
 	}
 });
-
-// This handler is meant to accommodate using `ColorPicker`'s `onChange` prop from `Changeable`
-// as the `onSelect` handler for its `Group` component that lists the set of pre-defined color
-// choices.  `onSelect` sends the chosen value in the `data` prop of its event but `Changeable`
-// expects `value`.  The slider handlers for hue, saturation, and light values in `ColorPickerExtended`
-// use this handler to update the `value` prop via `onChange` as well.
-const colorChangeHandler = handle(
-	adaptEvent(
-		({data: value}) => ({value}),
-		forward('onChange')
-	)
-);
 
 const ColorPickerExtended = hoc((config, Wrapped) => {
 	return class extends React.Component {
@@ -263,12 +312,9 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 
 		constructor (props) {
 			super(props);
-			this.hsl = convertToHSL(props.value);
 			this.state = {
 				extended: props.defaultExtended || false
 			};
-
-			colorChangeHandler.bindAs(this, 'onChange');
 		}
 
 		componentDidMount () {
@@ -282,10 +328,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 		}
 
 		componentDidUpdate (prevProps) {
-			const {open, value} = this.props;
-			if (prevProps.value !== value) {
-				this.hsl = convertToHSL(value);
-			}
+			const {open} = this.props;
 
 			if (!prevProps.open && open) {
 				on('click', this.handleClick);
@@ -297,10 +340,6 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 		componentWillUnmount () {
 			off('click', this.handleClick);
 		}
-
-		buildValue = ({h = this.hsl[0], s = this.hsl[1], l = this.hsl[2]} = {}) => (
-			'#' + convert.hsl.hex(h, s, l)
-		)
 
 		clickedOutsidePalette = ({target}) => !this.node.contains(target)
 
@@ -316,12 +355,6 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 			this.setState(({extended}) => ({extended: !extended}));
 		}
 
-		handleSlider = (type) => ({value: sliderValue}) => {
-			this.hsl[('hsl'.indexOf(type))] = sliderValue;
-			const value = this.buildValue();
-			this.onChange({data: value});
-		}
-
 		render () {
 			const {...rest} = this.props;
 			delete rest.defaultExtended;
@@ -330,11 +363,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 				<Wrapped
 					{...rest}
 					extended={this.state.extended}
-					onChange={this.onChange}
 					onToggleExtended={this.handleToggleExtended}
-					onHueChanged={this.handleSlider('h')}
-					onSaturationChanged={this.handleSlider('s')}
-					onLightnessChanged={this.handleSlider('l')}
 				/>
 			);
 		}
