@@ -122,6 +122,17 @@ const ColorPickerBase = kind({
 		extended: PropTypes.bool,
 
 		/**
+		 * Callback method with a payload containing the `value` of a color `adjustment`.
+		 *
+		 * Example return value:
+		 * {adjustment: 'h', value: 75} // hue value is 75
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onAdjustment: PropTypes.func,
+
+		/**
 		 * Callback method with a payload containing the `color` that was just selected.
 		 *
 		 * @type {Function}
@@ -216,16 +227,18 @@ const ColorPickerBase = kind({
 			)
 		),
 		onAdjustment: handle(
+			// forward an event to `ColorPicker`'s`onChange` with the color built using the adjusted h, s, or l value
 			adaptEvent(
 				({adjustment, value: sliderValue}, {value: color}) => {
 					const [h, s, l] = convertToHSL(color);
 					const valueKey = adjustment.charAt(0);  // will equal 'h', 's', or 'l'
 
-					// forward an event to `onChange` with the color built using the adjusted h, s, or l value
-					return {value: convertToHex(Object.assign({}, {h, s, l}, {[valueKey]: sliderValue}))};
+					return {value: convertToHex(Object.assign({h, s, l}, {[valueKey]: sliderValue}))};
 				},
 				forward('onChange')
-			)
+			),
+			// forward original event to supplied `onAdjustment` handler
+			forward('onAdjustment')
 		)
 	},
 
