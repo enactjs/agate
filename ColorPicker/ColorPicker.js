@@ -58,8 +58,8 @@ function Slider ({adjustment, onChange: onChangeValue, value: sliderValue, ...re
 
 	// update the slider value when it has been changed non-interactively
 	useEffect(() => {
-		setValue(sliderValue);
-	}, [sliderValue]);
+		onChange({value: sliderValue});
+	}, [onChange, sliderValue]);
 
 	return (
 		<AgateSlider {...rest} onChange={onChange} value={value} />
