@@ -42,7 +42,7 @@ const convertToHex = ({h, s, l}) => (`#${convert.hsl.hex(h, s, l)}`);
 // helper function to convert color hex strings or kewords to hue, saturation, and lightness values
 const convertToHSL = (value) => (convert[value.charAt(0) === '#' ? 'hex' : 'keyword'].hsl(value));
 
-function Slider ({adjustment, onChange: onChangeValue, value: sliderValue, ...rest}) {
+function Slider ({adjustment: valueKey, onChange: onChangeValue, value: sliderValue, ...rest}) {
 	const [value, setValue] = useState(sliderValue);
 
 	// the `onChange` handler for user interaction
@@ -50,10 +50,13 @@ function Slider ({adjustment, onChange: onChangeValue, value: sliderValue, ...re
 		(ev) => {
 			setValue(ev.value);
 			if (onChangeValue) {
-				onChangeValue({adjustment, value: ev.value});
+				onChangeValue({
+					adjustment: valueKey.charAt(0), // TODO: maybe also make this component have another prop to indicate what its value key should be to ensure no duplicates?
+					value: ev.value
+				});
 			}
 		},
-		[adjustment, onChangeValue]
+		[onChangeValue, valueKey]
 	);
 
 	// update the slider value when it has been changed non-interactively
@@ -227,13 +230,14 @@ const ColorPickerBase = kind({
 			)
 		),
 		onAdjustment: handle(
-			// forward an event to `ColorPicker`'s`onChange` with the color built using the adjusted h, s, or l value
+			// forward an adapted event to `ColorPicker`'s`onChange` with the color built using the adjusted
+			// h, s, or l value
 			adaptEvent(
-				({adjustment, value: sliderValue}, {value: color}) => {
-					const [h, s, l] = convertToHSL(color);
-					const valueKey = adjustment.charAt(0);  // will equal 'h', 's', or 'l'
+				({adjustment, value: sliderValue}, {value: currentColor}) => {
+					const [h, s, l] = convertToHSL(currentColor);
+					const value = convertToHex(Object.assign({h, s, l}, {[adjustment]: sliderValue}));
 
-					return {value: convertToHex(Object.assign({h, s, l}, {[valueKey]: sliderValue}))};
+					return {value};
 				},
 				forward('onChange')
 			),
