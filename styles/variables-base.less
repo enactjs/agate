@@ -67,6 +67,7 @@
 @agate-button-font-size: 36px;
 @agate-button-line-height: inherit;
 @agate-button-h-padding: 27px;
+@agate-button-h-margin: @agate-spotlight-outset;
 @agate-button-animation-duration: 500ms;
 @agate-button-client-animation-offset: 0;
 @agate-button-badge-animation-offset: 0;
@@ -78,6 +79,7 @@
 @agate-button-badge-letter-spacing: @agate-button-letter-spacing;
 @agate-button-badge-text-indent: inherit;
 @agate-button-badge-transform: none;
+@agate-button-font-family: @agate-base-font-family;
 @agate-button-huge-height: 250px;
 @agate-button-huge-font-size: 45px;
 @agate-button-huge-line-height: (@agate-button-huge-height - (2 * @agate-button-border-width));
@@ -107,6 +109,14 @@
 @agate-button-smallest-badge-letter-spacing: @agate-button-small-badge-letter-spacing;
 @agate-button-smallest-badge-text-indent: @agate-button-small-badge-text-indent;
 @agate-button-smallest-badge-transform: @agate-button-badge-transform;
+
+// Body
+// ----------------------------------
+@agate-body-small-font-size: 27px;
+@agate-body-font-size: 30px;
+@agate-body-font-weight: 300;
+@agate-body-line-height: @agate-body-font-size + 6;
+@agate-body-font-family: @agate-base-font-family;
 
 // Checkbox
 // ---------------------------------------
@@ -140,6 +150,20 @@
 @agate-datetimepicker-label-transform: none;
 @agate-datetimepicker-cell-transform: none;
 
+// Dialog
+// ---------------------------------------
+@agate-dialog-title-line-height: @agate-header-line-height;
+@agate-dialog-title-font-size: 48px;
+@agate-dialog-title-font-weight: bold;
+@agate-dialog-title-below-font-family: @agate-base-font-family;
+@agate-dialog-title-below-font-weight: normal;
+@agate-dialog-padding-top: 42px;
+@agate-dialog-padding-right: 42px;
+@agate-dialog-padding-bottom: 24px;
+@agate-dialog-padding-left: @agate-dialog-padding-right;
+@agate-dialog-closecontainer-separation: 18px;
+@agate-dialog-title-padding-right: (@agate-header-components-gutter - @agate-button-h-margin);
+
 // Dropdown
 // ---------------------------------------
 @agate-dropdown-border-style: solid;
@@ -163,6 +187,7 @@
 // ---------------------------------------
 @agate-header-border-bottom-width: 3px;
 @agate-header-border-bottom-style: solid;
+@agate-header-components-gutter: 60px;
 @agate-header-font-style: normal;
 @agate-header-height: 130px;
 @agate-header-letter-spacing: 0;
