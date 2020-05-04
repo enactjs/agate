@@ -193,20 +193,6 @@ const ColorPickerBase = kind({
 	},
 
 	handlers: {
-		onChange: handle(
-			// If there is a `data` member in the event, this came from `Group`'s `onSelect` handler and
-			// needs to be adapted for `ColorPicker`'s `onChange` handler.  If not, we can just forward it.
-			oneOf(
-				[
-					(ev) => !!('data' in ev),
-					adaptEvent(
-						({data: value}) => ({value}),
-						forward('onChange')
-					)
-				],
-				[() => true, forward('onChange')]
-			)
-		),
 		onAdjustment: handle(
 			// forward an adapted event to `ColorPicker`'s`onChange` with the color built using the adjusted
 			// h, s, or l value
@@ -221,6 +207,20 @@ const ColorPickerBase = kind({
 			),
 			// forward original event to supplied `onAdjustment` handler
 			forward('onAdjustment')
+		),
+		onChange: handle(
+			// If there is a `data` member in the event, this came from `Group`'s `onSelect` handler and
+			// needs to be adapted for `ColorPicker`'s `onChange` handler.  If not, we can just forward it.
+			oneOf(
+				[
+					(ev) => !!('data' in ev),
+					adaptEvent(
+						({data: value}) => ({value}),
+						forward('onChange')
+					)
+				],
+				[() => true, forward('onChange')]
+			)
 		)
 	},
 
