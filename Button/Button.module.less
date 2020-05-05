@@ -27,6 +27,7 @@
 		box-sizing: border-box;
 		font-size: @agate-button-font-size;
 		vertical-align: middle;
+		text-align: @agate-button-text-align;
 
 		.bg {
 			background-color: @agate-button-bg-color;
@@ -291,11 +292,37 @@
 			.bg {
 				background-color: @agate-button-focus-bg-color;
 				background-image: @agate-button-focus-bg-image;
+				border: none;
 			}
 
 			&,
 			.client {
 				color: @agate-button-focus-color;
+			}
+
+			&.highlighted {
+				.bg {
+					opacity: 1;
+				}
+			}
+		});
+	}
+
+	&:global(.spottable):active,
+	:global(.spottable):active & {
+		.applySkins({
+			background-color: transparent;
+			background-image: none;
+
+			.bg {
+				background-color: @agate-button-active-bg-color;
+				background-image: none;
+				border: @agate-button-border-width solid @agate-button-border-color;;
+			}
+
+			&,
+			.client {
+				color: @agate-button-active-color;
 			}
 
 			&.highlighted {
