@@ -27,6 +27,7 @@ import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDeco
 import Toggleable from '@enact/ui/Toggleable';
 import Transition from '@enact/ui/Transition';
 
+import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
 import Button from '../Button';
 import {Slider as AgateSlider} from '../Slider';
