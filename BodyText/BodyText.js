@@ -17,7 +17,7 @@ import compose from 'ramda/src/compose';
 import UiBodyText from '@enact/ui/BodyText';
 import Pure from '@enact/ui/internal/Pure';
 
-  import {MarqueeDecorator} from '@enact/ui/Marquee';
+import {MarqueeDecorator} from '@enact/ui/Marquee';
 import Skinnable from '../Skinnable';
 
 import componentCss from './BodyText.module.less';
