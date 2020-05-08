@@ -23,6 +23,7 @@ storiesOf('Agate', module)
 					scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
 					spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
 					title={text('title', Config, 'Title')}
+					center={boolean('center', Config)}
 				>
 					<div>{text('children', Config, 'Hello Popup')}</div>
 				</Popup>

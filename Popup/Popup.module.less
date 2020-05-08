@@ -25,6 +25,7 @@
 		&:not(.withTitle) {
 			.body {
 				color: @agate-popup-plain-body-color;
+				font-weight: @agate-popup-body-font-weight;
 			}
 		}
 
@@ -46,6 +47,12 @@
 			}
 		}
 
+		&.centeredContent {
+			text-align: center;
+			.buttons {
+				text-align: center;
+			}
+		}
 
 		.buttons {
 			padding: @agate-popup-buttons-padding;

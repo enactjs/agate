@@ -8,14 +8,32 @@
 // to this file with the real value for the "silicon" skin.
 //
 
+// Common
+// --------------------------------
+@agate-base-font-family: "LGSmartUI";
+
+// Body
+// ----------------------------------
+@agate-body-small-font-size: 25px;
+@agate-body-font-size: 28px;
+@agate-body-font-weight: normal;
+@agate-body-line-height: 1.5;
+@agate-body-font-family: @agate-base-font-family;
+
 // Button
 // ---------------------------------------
-@agate-button-border-radius: 6px;
 @agate-button-client-animation-offset: (@agate-button-animation-duration * 0.4);
 @agate-button-badge-animation-offset: (@agate-button-animation-duration * 0.8);
 @agate-button-badge-position: -3px 0 auto auto;
-@agate-button-small-height: 48px;
-@agate-button-small-font-size: 24px;
+@agate-button-border-radius: 37px;
+@agate-button-border-width: 2px;
+@agate-button-font-size: 36px;
+@agate-button-font-weight: 300;
+@agate-button-height: 75px;
+@agate-button-line-height: 1.17;
+@agate-button-small-height: 60px;
+@agate-button-small-font-size: 28px;
+@agate-button-small-line-height: 1.18;
 @agate-button-smallest-height: 30px;
 @agate-button-smallest-font-size: 18px;
 
@@ -99,17 +117,17 @@
 
 // Popup
 // ---------------------------------------
-@agate-popup-min-width: 100%;
-@agate-popup-max-width: 100%;
+@agate-popup-min-width: 510px;
+@agate-popup-max-width: 70%;
 @agate-popup-border-width: 1px 0;
-@agate-popup-border-radius: 0;
+@agate-popup-border-radius: 20px;
 @agate-popup-border: 1px solid transparent;
 @agate-popup-padding: (@agate-component-spacing * 4) @agate-component-spacing;
 @agate-popup-title-padding: 0 (@agate-button-small-height) 0 0;
 @agate-popup-body-padding: (@agate-component-spacing * 2);
 @agate-popup-body-margin: -@agate-component-spacing;  // Extend to the edge
 @agate-popup-body-border-radius: 0;
-@agate-popup-buttons-padding: 0 0 0 @agate-component-spacing;
+@agate-popup-buttons-padding: (@agate-component-spacing * 3) 0 0 0;
 @agate-popup-closebutton-position-left: auto;
 @agate-popup-closebutton-position-right: 0;
 
