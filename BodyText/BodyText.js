@@ -17,13 +17,13 @@ import compose from 'ramda/src/compose';
 import UiBodyText from '@enact/ui/BodyText';
 import Pure from '@enact/ui/internal/Pure';
 
-// import {MarqueeDecorator} from '../Marquee';
+  import {MarqueeDecorator} from '@enact/ui/Marquee';
 import Skinnable from '../Skinnable';
 
 import componentCss from './BodyText.module.less';
 
 // Create a Marquee using BodyText as the base
-// const MarqueeBodyText = MarqueeDecorator(UiBodyText);
+ const MarqueeBodyText = MarqueeDecorator(UiBodyText);
 
 /**
  * A simple text block component.
@@ -65,31 +65,31 @@ const BodyTextBase = kind({
 		 */
 		css: PropTypes.object,
 
-		// /**
-		//  * Toggles multi-line (`false`) vs single-line (`true`) behavior. `noWrap` mode
-		//  * automatically enables {@link agate/Marquee} so long text isn't permanently occluded.
-		//  *
-		//  * @type {Boolean}
-		//  * @default false
-		//  * @public
-		//  */
-		// noWrap: PropTypes.bool,
+		/**
+		 * Toggles multi-line (`false`) vs single-line (`true`) behavior. `noWrap` mode
+		 * automatically enables {@link ui/Marquee} so long text isn't permanently occluded.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		noWrap: PropTypes.bool,
 
-	// 	/**
-	// 	 * Sets the text size to one of the preset sizes.
-	// 	 * Available sizes: 'large' (default) and 'small'.
-	// 	 *
-	// 	 * @type {('small'|'large')}
-	// 	 * @default 'large'
-	// 	 * @public
-	// 	 */
-	// 	size: PropTypes.oneOf(['small', 'large'])
+		/**
+		 * Sets the text size to one of the preset sizes.
+		 * Available sizes: 'large' (default) and 'small'.
+		 *
+		 * @type {('small'|'large')}
+		 * @default 'large'
+		 * @public
+		 */
+		size: PropTypes.oneOf(['small', 'large'])
 
 	 },
 
 	defaultProps: {
-		// noWrap: false,
-		// size: 'large'
+		noWrap: false,
+		size: 'large'
 	},
 
 	styles: {
@@ -98,24 +98,24 @@ const BodyTextBase = kind({
 	},
 
 	computed: {
-		// className: ({noWrap, size, styler}) => styler.append(size, {noWrap})
+		 className: ({noWrap, size, styler}) => styler.append(size, {noWrap})
 	},
 
 	render: ({centered, css, noWrap, ...rest}) => {
-		// delete rest.size;
+		delete rest.size;
 
-		// if (noWrap) {
-		// 	return (
-		// 		<MarqueeBodyText
-		// 			component="div" // Assign a new component to BodyText, since DIV is not allowed inside a P tag (the default for BodyText)
-		// 			marqueeOn="render"
-		// 			{...rest}
-		// 			alignment={centered ? 'center' : null} // Centering Marquee
-		// 			centered={centered} // Centering UiBodyText
-		// 			css={css}
-		// 		/>
-		// 	);
-		// }
+		if (noWrap) {
+			return (
+				<MarqueeBodyText
+					component="div" // Assign a new component to BodyText, since DIV is not allowed inside a P tag (the default for BodyText)
+					marqueeOn="render"
+					{...rest}
+					alignment={centered ? 'center' : null} // Centering Marquee
+					centered={centered} // Centering UiBodyText
+					css={css}
+				/>
+			);
+		}
 		return (
 			<UiBodyText
 				{...rest}
