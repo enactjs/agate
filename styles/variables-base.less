@@ -64,10 +64,10 @@
 @agate-button-bg-transform: none;
 @agate-button-icon-border-radius: @agate-border-radius;
 @agate-button-height: 84px;
+@agate-button-width: inherit;
 @agate-button-font-size: 36px;
 @agate-button-line-height: inherit;
 @agate-button-h-padding: 27px;
-@agate-button-h-margin: @agate-spotlight-outset;
 @agate-button-animation-duration: 500ms;
 @agate-button-client-animation-offset: 0;
 @agate-button-badge-animation-offset: 0;
@@ -79,13 +79,14 @@
 @agate-button-badge-letter-spacing: @agate-button-letter-spacing;
 @agate-button-badge-text-indent: inherit;
 @agate-button-badge-transform: none;
-@agate-button-font-family: @agate-base-font-family;
+@agate-button-border-focus-width: inherit;
 @agate-button-huge-height: 250px;
 @agate-button-huge-font-size: 45px;
 @agate-button-huge-line-height: (@agate-button-huge-height - (2 * @agate-button-border-width));
 @agate-button-huge-h-padding: 36px;
 @agate-button-huge-border-width: 10px;
 @agate-button-small-height: 60px;
+@agate-button-small-width: inherit;
 @agate-button-small-font-size: 30px;
 @agate-button-small-line-height: (@agate-button-small-height - (2 * @agate-button-border-width));
 @agate-button-small-h-padding: 18px;
@@ -113,7 +114,6 @@
 @agate-button-font-stretch: normal;
 @agate-button-font-style: normal;
 @agate-button-text-align: center;
-
 
 // Body
 // ----------------------------------
@@ -155,20 +155,6 @@
 @agate-datetimepicker-label-transform: none;
 @agate-datetimepicker-cell-transform: none;
 
-// Dialog
-// ---------------------------------------
-@agate-dialog-title-line-height: @agate-header-line-height;
-@agate-dialog-title-font-size: 48px;
-@agate-dialog-title-font-weight: bold;
-@agate-dialog-title-below-font-family: @agate-base-font-family;
-@agate-dialog-title-below-font-weight: normal;
-@agate-dialog-padding-top: 42px;
-@agate-dialog-padding-right: 42px;
-@agate-dialog-padding-bottom: 24px;
-@agate-dialog-padding-left: @agate-dialog-padding-right;
-@agate-dialog-closecontainer-separation: 18px;
-@agate-dialog-title-padding-right: (@agate-header-components-gutter - @agate-button-h-margin);
-
 // Dropdown
 // ---------------------------------------
 @agate-dropdown-border-style: solid;
@@ -192,7 +178,6 @@
 // ---------------------------------------
 @agate-header-border-bottom-width: 3px;
 @agate-header-border-bottom-style: solid;
-@agate-header-components-gutter: 60px;
 @agate-header-font-style: normal;
 @agate-header-height: 130px;
 @agate-header-letter-spacing: 0;
@@ -288,6 +273,7 @@
 @agate-item-side-outset: @agate-component-spacing;
 @agate-item-height: 60px;
 @agate-item-height-large: 72px;
+@agate-item-line-height: 60px;
 @agate-item-vertical-padding: 3px;
 @agate-item-line-height: @agate-item-height - (@agate-item-vertical-padding * 2);
 @agate-item-line-height-large: @agate-item-height-large - (@agate-item-vertical-padding * 2);
@@ -424,6 +410,12 @@
 // ---------------------------------------
 @agate-radioitem-icon-border-width: @agate-button-border-width;
 @agate-radioitem-icon-border-radius: @agate-border-radius;
+@agate-radioitem-icon-opacity: inherit;
+@agate-radioitem-icon-selected-opacity: inherit;
+
+// Scrollbar
+// ---------------------------------------
+@agate-scroller-scrollbar-thumb-width: inherit;
 
 // SliderButton
 // ---------------------------------------
