@@ -140,10 +140,14 @@
 
 // Input
 // ---------------------------------------
-@agate-input-decorator-border-color:          @agate-background-active;
+@agate-input-active-border-image:             @agate-gradient;
+@agate-input-border-color:                    @agate-foreground;
+@agate-input-decorator-border-color:          transparent;
+@agate-input-decorator-focused-border-color:  transparent;
 @agate-input-focused-background-image:        none;
+@agate-input-focused-border-color:            transparent;
 @agate-input-focused-text-color:              @agate-foreground-active;
-@agate-input-placeholder-color:               fade(@agate-foreground, 80%);
+@agate-input-placeholder-color:               @agate-foreground;
 @agate-input-text-color:                      @agate-foreground;
 
 // Item
