@@ -54,7 +54,8 @@ const PopupBase = kind({
 	defaultProps: {
 		noAnimation: false,
 		closeButton: false,
-		open: false
+		open: false,
+		center: false
 	},
 	styles: {
 		css: componentCss,
