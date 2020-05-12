@@ -3,13 +3,13 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import BodyText , {BodyTextBase} from '@enact/agate/BodyText';
+import BodyText, {BodyTextBase} from '@enact/agate/BodyText';
 
 BodyText.displayName = 'BodyText';
 const Config = mergeComponentMetadata('BodyText', BodyText, BodyTextBase);
 
 const prop = {
-	sizes: ['large', 'small'],
+	sizes: ['large', 'small']
 };
 
 storiesOf('Agate', module)

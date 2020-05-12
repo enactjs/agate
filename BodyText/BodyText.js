@@ -23,7 +23,7 @@ import Skinnable from '../Skinnable';
 import componentCss from './BodyText.module.less';
 
 // Create a Marquee using BodyText as the base
- const MarqueeBodyText = MarqueeDecorator(UiBodyText);
+const MarqueeBodyText = MarqueeDecorator(UiBodyText);
 
 /**
  * A simple text block component.
@@ -85,7 +85,7 @@ const BodyTextBase = kind({
 		 */
 		size: PropTypes.oneOf(['small', 'large'])
 
-	 },
+	},
 
 	defaultProps: {
 		noWrap: false,
@@ -98,7 +98,7 @@ const BodyTextBase = kind({
 	},
 
 	computed: {
-		 className: ({noWrap, size, styler}) => styler.append(size, {noWrap})
+		className: ({noWrap, size, styler}) => styler.append(size, {noWrap})
 	},
 
 	render: ({centered, css, noWrap, ...rest}) => {
