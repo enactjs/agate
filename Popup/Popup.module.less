@@ -4,6 +4,12 @@
 @import "../styles/skin.less";
 
 .popup {
+	&.centeredContent {
+		text-align: center;
+		.buttons {
+			text-align: center;
+		}
+	}
 	.applySkins({
 		position: fixed;
 		top: 50%;
@@ -44,13 +50,6 @@
 		&.withCloseButton {
 			.title {
 				padding: @agate-popup-title-padding;
-			}
-		}
-
-		&.centeredContent {
-			text-align: center;
-			.buttons {
-				text-align: center;
 			}
 		}
 
