@@ -3,7 +3,10 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
+import BodyText from '@enact/ui/BodyText';
 import Heading, {HeadingBase} from '@enact/agate/Heading';
+
+import css from './Heading.module.less';
 
 Heading.displayName = 'Heading';
 const Config = mergeComponentMetadata('Heading', Heading, HeadingBase);
@@ -18,14 +21,25 @@ storiesOf('Agate', module)
 	.add(
 		'Heading',
 		() => (
-			<Heading
-				color={select('color', prop.colors, Config)}
-				showLine={boolean('showLine', Config)}
-				size={select('size', prop.sizes, Config)}
-				spacing={select('spacing', prop.spacings, Config)}
-			>
-				{text('children', Heading, 'Heading Text')}
-			</Heading>
+			<>
+				<Heading
+					color={select('color', prop.colors, Config)}
+					showLine={boolean('showLine', Config)}
+					size={select('size', prop.sizes, Config)}
+					spacing={select('spacing', prop.spacings, Config)}
+				>
+					{text('children', Heading, 'Heading Text')}
+				</Heading>
+				<BodyText
+					centered
+					className={css.bodyText}
+				>
+					The <em>spacing</em> prop will have no effect when using the Gallium skin.
+					<br />
+					<br />
+					Choose a different skin from the Global Knobs to see!
+				</BodyText>
+			</>
 		),
 		{
 			text: 'The basic Heading'
