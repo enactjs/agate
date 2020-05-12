@@ -64,6 +64,7 @@ const HeadingBase = kind({
 		 *
 		 * Allowed values include:
 		 * * `'auto'` - Value is based on the `size` prop for automatic usage.
+		 * * `'title'` - Specifically assign the `'title'` spacing.
 		 * * `'large'` - Specifically assign the `'large'` spacing.
 		 * * `'medium'` - Specifically assign the `'medium'` spacing.
 		 * * `'small'` - Specifically assign the `'small'` spacing.
