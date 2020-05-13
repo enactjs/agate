@@ -1,0 +1,51 @@
+import React from 'react';
+import {mount} from 'enzyme';
+import Button from '../Button';
+
+describe('Button Specs', () => {
+	test(
+		'should have \'disabled\' HTML attribute when \'disabled\' prop is provided',
+		() => {
+			const button = mount(
+				<Button disabled>I am a disabled Button</Button>
+			);
+
+			const expected = true;
+			const actual = button.find('div').at(0).prop('disabled');
+
+			expect(actual).toBe(expected);
+		}
+	);
+
+	describe('events', () => {
+		test('should call onClick when not disabled', () => {
+			const handleClick = jest.fn();
+			const subject = mount(
+				<Button onClick={handleClick}>I am a disabled Button</Button>
+			);
+
+			subject.simulate('click');
+
+			const expected = 1;
+			const actual = handleClick.mock.calls.length;
+
+			expect(actual).toBe(expected);
+		});
+
+		test('should not call onClick when disabled', () => {
+			const handleClick = jest.fn();
+			const subject = mount(
+				<Button disabled onClick={handleClick}>I am a disabled Button</Button>
+			);
+
+			subject.simulate('click');
+
+			const expected = 0;
+			const actual = handleClick.mock.calls.length;
+
+			expect(actual).toBe(expected);
+		});
+
+	});
+
+});
