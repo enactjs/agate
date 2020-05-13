@@ -9,7 +9,6 @@ describe('BodyText Specs', () => {
 		const subject = mount(
 			<BodyText />
 		);
-
 		const expected = 1;
 		const actual = subject.find('p').length;
 
