@@ -4,16 +4,19 @@
     --agate-gridlistimageitem-aspect-ratio: 1;
 
     .applySkins({
+        border: @agate-gridlistimageitem-border-width solid @agate-gridlistimageitem-border-color;
         .image {
-            position: relative;
-            height: 0px;
+            // This would make image to go out of GridListImageItem container
 
-            // with margins around image
-            // margin: calc(50% - 50% * var(--agate-gridlistimageitem-aspect-ratio)) 0;
-
-            // without margins
-            padding: calc(50% * var(--agate-gridlistimageitem-aspect-ratio, 1)) 0;
-            flex: 0 1 0%;
+            //position: relative;
+            //height: 0px;
+            //
+            //// with margins around image
+            //// margin: calc(50% - 50% * var(--agate-gridlistimageitem-aspect-ratio)) 0;
+            //
+            //// without margins
+            //padding: calc(50% * var(--agate-gridlistimageitem-aspect-ratio, 1)) 0;
+            //flex: 0 1 0%;
         }
 
         .overlayContainer {
@@ -37,4 +40,12 @@
             text-align: center;
         }
     });
+
+    &:global(.spottable):focus,
+    :global(.spottable):focus & {
+        .applySkins({
+            background-color: @agate-gridlistimageitem-focus-bg-color;
+            background-image: none;
+        });
+    }
 }

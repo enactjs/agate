@@ -11,6 +11,8 @@ import {GridListImageItem as UiGridListImageItem} from '@enact/ui/GridListImageI
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
+import Spottable from '@enact/spotlight/Spottable';
+import {Marquee, MarqueeController} from '@enact/ui/Marquee';
 
 import {ImageBase} from '../Image';
 import Icon from '../Icon';
@@ -31,6 +33,9 @@ const calcAspectRatio = memoize(aspectRatio => {
 
 	return 1;
 });
+const captionComponent = (props) => (
+	<Marquee alignment="center" marqueeOn="hover" {...props} />
+);
 
 /**
  * @class GridListImageItemBase
@@ -99,6 +104,7 @@ const GridListImageItemBase = kind({
 				css={css}
 				iconComponent={Icon}
 				imageComponent={ImageBase}
+				captionComponent={captionComponent}
 			/>
 		);
 	}
@@ -108,10 +114,13 @@ const GridListImageItemBase = kind({
  * @hoc
  * @memberof agate/GridListImageItem
  * @mixes agate/Skinnable.Skinnable
+ * @mixes ui/Marquee.MarqueeController
  * @public
  */
 const GridListImageItemDecorator = compose(
-	Skinnable
+	MarqueeController({marqueeOnFocus: true}),
+	Skinnable,
+	Spottable
 );
 
 /**
