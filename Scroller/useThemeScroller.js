@@ -263,7 +263,7 @@ const useThemeScroller = (props) => {
 			focusOnNode,
 			setContainerDisabled
 		});
-	}, [calculatePositionOnFocus, focusOnNode, props, props.setThemeScrollContentHandle, setContainerDisabled]);
+	}, [calculatePositionOnFocus, focusOnNode, props, setContainerDisabled]);
 
 	// Render
 
