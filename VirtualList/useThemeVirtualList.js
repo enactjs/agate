@@ -214,10 +214,6 @@ const useSpottable = (props, instances) => {
 		}
 	}
 
-	function isNeededScrollingPlaceholder () {
-		return mutableRef.current.nodeIndexToBeFocused != null && Spotlight.isPaused();
-	}
-
 	function calculatePositionOnFocus ({item, scrollPosition = scrollContentHandle.current.scrollPosition}) {
 		const
 
@@ -287,7 +283,6 @@ const useSpottable = (props, instances) => {
 		handlePlaceholderFocus,
 		handleRestoreLastFocus,
 		initItemRef,
-		isNeededScrollingPlaceholder,
 		setContainerDisabled,
 		setLastFocusedNode,
 		shouldPreventScrollByFocus,
@@ -312,7 +307,6 @@ const useThemeVirtualList = (props) => {
 		handlePlaceholderFocus,
 		handleRestoreLastFocus,
 		initItemRef,
-		isNeededScrollingPlaceholder,
 		setContainerDisabled,
 		setLastFocusedNode,
 		shouldPreventScrollByFocus,
@@ -343,9 +337,7 @@ const useThemeVirtualList = (props) => {
 
 	// Render
 
-	const
-		{itemRenderer, role, ...rest} = props,
-		needsScrollingPlaceholder = isNeededScrollingPlaceholder();
+	const {itemRenderer, ...rest} = props;
 
 	// not used by VirtualList
 	delete rest.scrollContainerContainsDangerously;
@@ -368,12 +360,10 @@ const useThemeVirtualList = (props) => {
 				index
 			})
 		),
-		itemsRenderer: (itemsRendererProps) => {
-			return listItemsRenderer({
-				...itemsRendererProps,
+		placeholderRenderer: (primary) => {
+			return placeholderRenderer({
 				handlePlaceholderFocus: handlePlaceholderFocus,
-				needsScrollingPlaceholder,
-				role,
+				primary,
 				SpotlightPlaceholder
 			});
 		},
@@ -383,36 +373,23 @@ const useThemeVirtualList = (props) => {
 };
 
 /* eslint-disable enact/prop-types */
-function listItemsRenderer (props) {
+function placeholderRenderer (props) {
 	const {
-		cc,
 		handlePlaceholderFocus,
-		needsScrollingPlaceholder,
 		primary,
-		role,
 		SpotlightPlaceholder // eslint-disable-line no-shadow
 	} = props;
 
-	return (
-		<>
-			{cc.length ? (
-				<div role={role}>{cc}</div>
-			) : null}
-			{primary ? null : (
-				<SpotlightPlaceholder
-					data-index={0}
-					data-vl-placeholder
-					// a zero width/height element can't be focused by spotlight so we're giving
-					// the placeholder a small size to ensure it is navigable
-					onFocus={handlePlaceholderFocus}
-					style={{width: 10}}
-				/>
-			)}
-			{needsScrollingPlaceholder ? (
-				<SpotlightPlaceholder />
-			) : null}
-		</>
-	);
+	return (primary ? null : (
+		<SpotlightPlaceholder
+			data-index={0}
+			data-vl-placeholder
+			// a zero width/height element can't be focused by spotlight so we're giving
+			// the placeholder a small size to ensure it is navigable
+			onFocus={handlePlaceholderFocus}
+			style={{width: 10}}
+		/>
+	));
 }
 /* eslint-enable enact/prop-types */
 
