@@ -1,8 +1,9 @@
 import React from 'react';
 import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
-import {mount} from 'enzyme';
+import {mount, shallow} from 'enzyme';
 
-import {Popup} from '../Popup';
+import {Popup, PopupBase} from '../Popup';
+import css from '../Popup.module.less';
 
 const FloatingLayerController = FloatingLayerDecorator('div');
 
@@ -33,6 +34,19 @@ describe('Popup specs', () => {
 
 		const expected = false;
 		const actual = popup.find('FloatingLayer').prop('open');
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should be rendered with centered content if center is set to true', () => {
+		const popup = shallow(
+			<PopupBase center>
+				<div>popup</div>
+			</PopupBase>
+		);
+
+		const expected = true;
+		const actual = popup.find(`.${css.popup}`).prop('center');
 
 		expect(actual).toBe(expected);
 	});
