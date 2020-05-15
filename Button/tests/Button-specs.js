@@ -45,7 +45,5 @@ describe('Button Specs', () => {
 
 			expect(actual).toBe(expected);
 		});
-
 	});
-
 });
