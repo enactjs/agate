@@ -1258,10 +1258,6 @@
     "@enact/agate": {
       "version": "file:../..",
       "requires": {
-        "@enact/core": "^3.3.0-alpha.8",
-        "@enact/i18n": "^3.3.0-alpha.8",
-        "@enact/spotlight": "^3.3.0-alpha.8",
-        "@enact/ui": "^3.3.0-alpha.8",
         "classnames": "^2.2.6",
         "color-convert": "^1.9.3",
         "deep-freeze": "0.0.1",
@@ -1269,8 +1265,8 @@
         "immer": "^3.2.0",
         "prop-types": "^15.6.2",
         "ramda": "^0.25.0",
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6",
+        "react": "^16.8.0",
+        "react-dom": "^16.8.0",
         "recompose": "^0.30.0",
         "warning": "^3.0.0"
       },
