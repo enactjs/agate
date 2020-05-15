@@ -1270,19 +1270,9 @@
         "prop-types": "^15.6.2",
         "ramda": "^0.25.0",
         "react": "^16.8.0",
-        "react-dom": "^16.8.0",
-        "recompose": "^0.30.0",
-        "warning": "^3.0.0"
+        "react-dom": "^16.8.0"
       },
       "dependencies": {
-        "@babel/runtime": {
-          "version": "7.9.6",
-          "resolved": "https://registry.npmjs.org/@babel/runtime/-/runtime-7.9.6.tgz",
-          "integrity": "sha512-64AF1xY3OAkFHqOb9s4jpgk1Mm5vDZ4L3acHvAml+53nO1XbXLuDodsVpO4OIUsmemlUHMxNdYMNJmsvOwLrvQ==",
-          "requires": {
-            "regenerator-runtime": "^0.13.4"
-          }
-        },
         "@enact/core": {
           "version": "3.2.6",
           "resolved": "https://registry.npmjs.org/@enact/core/-/core-3.2.6.tgz",
@@ -1302,17 +1292,6 @@
               "version": "0.24.1",
               "resolved": "https://registry.npmjs.org/ramda/-/ramda-0.24.1.tgz",
               "integrity": "sha1-w7d1UZfzW43DUCIoJixMkd22uFc="
-            },
-            "recompose": {
-              "version": "0.26.0",
-              "resolved": "https://registry.npmjs.org/recompose/-/recompose-0.26.0.tgz",
-              "integrity": "sha512-KwOu6ztO0mN5vy3+zDcc45lgnaUoaQse/a5yLVqtzTK13czSWnFGmXbQVmnoMgDkI5POd1EwIKSbjU1V7xdZog==",
-              "requires": {
-                "change-emitter": "^0.1.2",
-                "fbjs": "^0.8.1",
-                "hoist-non-react-statics": "^2.3.1",
-                "symbol-observable": "^1.0.4"
-              }
             }
           }
         },
@@ -1377,17 +1356,6 @@
               "version": "0.24.1",
               "resolved": "https://registry.npmjs.org/ramda/-/ramda-0.24.1.tgz",
               "integrity": "sha1-w7d1UZfzW43DUCIoJixMkd22uFc="
-            },
-            "recompose": {
-              "version": "0.26.0",
-              "resolved": "https://registry.npmjs.org/recompose/-/recompose-0.26.0.tgz",
-              "integrity": "sha512-KwOu6ztO0mN5vy3+zDcc45lgnaUoaQse/a5yLVqtzTK13czSWnFGmXbQVmnoMgDkI5POd1EwIKSbjU1V7xdZog==",
-              "requires": {
-                "change-emitter": "^0.1.2",
-                "fbjs": "^0.8.1",
-                "hoist-non-react-statics": "^2.3.1",
-                "symbol-observable": "^1.0.4"
-              }
             }
           }
         },
@@ -1614,28 +1582,16 @@
           "resolved": "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz",
           "integrity": "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
         },
-        "react-lifecycles-compat": {
-          "version": "3.0.4",
-          "resolved": "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz",
-          "integrity": "sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA=="
-        },
         "recompose": {
-          "version": "0.30.0",
-          "resolved": "https://registry.npmjs.org/recompose/-/recompose-0.30.0.tgz",
-          "integrity": "sha512-ZTrzzUDa9AqUIhRk4KmVFihH0rapdCSMFXjhHbNrjAWxBuUD/guYlyysMnuHjlZC/KRiOKRtB4jf96yYSkKE8w==",
+          "version": "0.26.0",
+          "resolved": "https://registry.npmjs.org/recompose/-/recompose-0.26.0.tgz",
+          "integrity": "sha512-KwOu6ztO0mN5vy3+zDcc45lgnaUoaQse/a5yLVqtzTK13czSWnFGmXbQVmnoMgDkI5POd1EwIKSbjU1V7xdZog==",
           "requires": {
-            "@babel/runtime": "^7.0.0",
             "change-emitter": "^0.1.2",
             "fbjs": "^0.8.1",
             "hoist-non-react-statics": "^2.3.1",
-            "react-lifecycles-compat": "^3.0.2",
             "symbol-observable": "^1.0.4"
           }
-        },
-        "regenerator-runtime": {
-          "version": "0.13.5",
-          "resolved": "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.5.tgz",
-          "integrity": "sha512-ZS5w8CpKFinUzOwW3c83oPeVXoNsrLsaCoLtJvAClH135j/R77RuymhiSErhm2lKcwSCIpmvIWSbDkIfAqKQlA=="
         },
         "safer-buffer": {
           "version": "2.1.2",
