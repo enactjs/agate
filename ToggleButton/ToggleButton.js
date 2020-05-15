@@ -163,8 +163,7 @@ const ToggleButtonBase = kind({
 		delete props.toggleOffLabel;
 		delete props.toggleOnLabel;
 
-		if(!props.icon && props.skin === 'silicon')
-		{
+		if (!props.icon && props.skin === 'silicon') {
 			props.icon = 'circle';
 		}
 
