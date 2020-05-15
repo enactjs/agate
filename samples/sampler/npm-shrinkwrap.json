@@ -1258,6 +1258,10 @@
     "@enact/agate": {
       "version": "file:../..",
       "requires": {
+        "@enact/core": "^3.2.0",
+        "@enact/i18n": "^3.2.0",
+        "@enact/spotlight": "^3.2.0",
+        "@enact/ui": "^3.2.0",
         "classnames": "^2.2.6",
         "color-convert": "^1.9.3",
         "deep-freeze": "0.0.1",
@@ -1694,9 +1698,9 @@
       }
     },
     "@enact/core": {
-      "version": "3.3.0-alpha.9",
-      "resolved": "https://registry.npmjs.org/@enact/core/-/core-3.3.0-alpha.9.tgz",
-      "integrity": "sha512-fD1jgXyokqqJGzuLWM6ApxoXJHa3ANVTH/lCAn9Jfi19foZ52rkdMu9oPDzkqaHnMX0SGrMyDNVIL0aZinwYVA==",
+      "version": "3.2.6",
+      "resolved": "https://registry.npmjs.org/@enact/core/-/core-3.2.6.tgz",
+      "integrity": "sha512-lhvlI0tnprt9WAtsmyXc2rRHCEePnLpR48muWSDYidXj5gqgUSQ3aoCf2HIDeVKputX7t+xOeQ4LOU2KaGBzZg==",
       "requires": {
         "classnames": "^2.2.5",
         "invariant": "^2.2.2",
@@ -1765,11 +1769,11 @@
       }
     },
     "@enact/ui": {
-      "version": "3.3.0-alpha.9",
-      "resolved": "https://registry.npmjs.org/@enact/ui/-/ui-3.3.0-alpha.9.tgz",
-      "integrity": "sha512-hUxG6LGge87phbqv8TaoB5mGxezHBuIsO0ca7oPW2nlvHPHUTqdT9Z2gRyRJJPwoeDuDtGZzy6s6WK7cgC79Lw==",
+      "version": "3.2.6",
+      "resolved": "https://registry.npmjs.org/@enact/ui/-/ui-3.2.6.tgz",
+      "integrity": "sha512-JSRM3wIPVHxvBzLMP8byLYusGI4No9reBCHR5/A0iUUrOI2ALAha3BJDsm2bnEOUvME6dsUqcknxckLB3D0Yhw==",
       "requires": {
-        "@enact/core": "^3.3.0-alpha.9",
+        "@enact/core": "^3.2.6",
         "classnames": "^2.2.5",
         "direction": "^1.0.1",
         "invariant": "^2.2.2",
