@@ -26,6 +26,8 @@
 @silicon-medium-pink: #ea448e;
 @silicon-faded-orange: #f3ae4d;
 @silicon-dark-two: #2a2742;
+@silicon-light-gray: #f2f2f2;
+@silicon-gray: #eeeeee;
 @silicon-gradient: linear-gradient(to right, @silicon-vibrant-purple, @silicon-magenta, @silicon-red-pink);
 
 
@@ -74,14 +76,17 @@
 
 // Button
 // ---------------------------------------
-@agate-button-color:          @agate-white;
-@agate-button-bg-color:       @agate-dark-gray;
+@agate-button-color:          @agate-black;
+@agate-button-bg-color:       @agate-white;
 @agate-button-bg-image:       none;
-@agate-button-border-color:   transparent;
+@agate-button-border-color:   rgba(0, 0, 0, 0.5);
 @agate-button-shadow:         none;
+@agate-button-active-color:   @agate-button-color;
+@agate-button-active-bg-color: @silicon-light-gray;
+@agate-button-focus-border-color:   @agate-button-border-color;
 @agate-button-focus-color:    @agate-spotlight-color;
-@agate-button-focus-bg-color: @agate-background-focus;
-@agate-button-focus-bg-image: @agate-button-bg-image;
+@agate-button-focus-bg-color: transparent;
+@agate-button-focus-bg-image: @silicon-gradient;
 @agate-button-highlighted-color: @agate-white;
 @agate-button-highlighted-bg-color: @agate-highlight;
 @agate-button-highlighted-bg-image: @agate-button-bg-image;
@@ -289,17 +294,20 @@
 
 // Toggle Colors
 // ---------------------------------------
-@agate-togglebutton-indicator-off-bg-color: black;
-@agate-togglebutton-indicator-on-bg-color: @agate-highlight;
-@agate-togglebutton-indicator-off-border-color: @agate-button-border-color;
-@agate-togglebutton-indicator-on-border-color: @agate-accent;
+@agate-togglebutton-border-color: rgba(0, 0, 0, 0.5);
+@agate-togglebutton-icon-off-color: @agate-black;
+@agate-togglebutton-icon-on-color: @silicon-red-pink;
+@agate-togglebutton-indicator-off-bg-color: transparent;
+@agate-togglebutton-indicator-on-bg-color: transparent;
+@agate-togglebutton-indicator-off-border-color: transparent;
+@agate-togglebutton-indicator-on-border-color: transparent;
 @agate-togglebutton-indicator-off-focus-bg-color: @agate-togglebutton-indicator-off-bg-color;
 @agate-togglebutton-indicator-on-focus-bg-color: @agate-togglebutton-indicator-on-bg-color;
 @agate-togglebutton-indicator-off-focus-border-color: @agate-togglebutton-indicator-on-focus-border-color;
-@agate-togglebutton-indicator-on-focus-border-color: @agate-white;
-@agate-togglebutton-indicator-disabled-off-bg-color: @agate-darker-gray;
+@agate-togglebutton-indicator-on-focus-border-color: transparent;
+@agate-togglebutton-indicator-disabled-off-bg-color: transparent;
 @agate-togglebutton-indicator-disabled-on-bg-color: @agate-togglebutton-indicator-disabled-off-bg-color;
-@agate-togglebutton-indicator-disabled-off-border-color: #6c6c6c;
+@agate-togglebutton-indicator-disabled-off-border-color: transparent;
 @agate-togglebutton-indicator-disabled-on-border-color: @agate-togglebutton-indicator-disabled-off-border-color;
 @agate-togglebutton-color: @agate-button-color;
 @agate-togglebutton-bg-color: @agate-button-bg-color;

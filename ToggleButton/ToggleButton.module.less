@@ -64,10 +64,27 @@
 	.applySkins({
 		.bg {
 			background-color: @agate-togglebutton-bg-color;
+			border: @agate-togglebutton-border-width solid @agate-togglebutton-border-color;
+			border-radius: @agate-togglebutton-border-radius;
+			height: @agate-togglebutton-height;
+			width: @agate-togglebutton-width;
 		}
 
 		.client {
 			color: @agate-togglebutton-color;
+			font-size: @agate-togglebutton-font-size;
+			font-weight: @agate-togglebutton-font-weight;
+			height: @agate-togglebutton-height;
+			line-height: @agate-togglebutton-line-height;
+			text-align: @agate-togglebutton-text-align;
+		}
+
+		.icon {
+			color: @agate-togglebutton-icon-off-color;
+			font-size: @agate-togglebutton-icon-font-size;
+			line-height: @agate-togglebutton-icon-size;
+			width: @agate-togglebutton-icon-size;
+			height: @agate-togglebutton-icon-size;
 		}
 
 		&.selected {
@@ -75,8 +92,20 @@
 				background-color: @agate-togglebutton-selected-bg-color;
 			}
 
+			.icon {
+				color: @agate-togglebutton-icon-on-color;
+				font-size: @agate-togglebutton-icon-font-size;
+				line-height: @agate-togglebutton-icon-size;
+				width: @agate-togglebutton-icon-size;
+				height: @agate-togglebutton-icon-size;
+			}
+
 			.client {
 				color: @agate-togglebutton-selected-color;
+				font-size: @agate-togglebutton-font-size;
+				font-weight: @agate-togglebutton-font-weight;
+				line-height: @agate-togglebutton-line-height;
+				text-align: @agate-togglebutton-text-align;
 			}
 		}
 	});

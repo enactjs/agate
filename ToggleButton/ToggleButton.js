@@ -81,6 +81,14 @@ const ToggleButtonBase = kind({
 		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
+		 * The current skin.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		skin: PropTypes.string,
+
+		/**
 		 * Button text displayed in the 'off' state.
 		 *
 		 * If not specified, `children` will be used for 'off' button text.
@@ -155,6 +163,12 @@ const ToggleButtonBase = kind({
 		delete props.toggleOffLabel;
 		delete props.toggleOnLabel;
 
+		if(!props.icon && props.skin === 'silicon')
+		{
+			props.icon = 'circle';
+		}
+
+
 		return (
 			<Button
 				{...props}
@@ -185,6 +199,7 @@ const ToggleButton = Pure(
 	Toggleable(
 		{prop: 'selected', toggleProp: 'onTap'},
 		Skinnable(
+			{prop: 'skin'},
 			ToggleButtonBase
 		)
 	)
