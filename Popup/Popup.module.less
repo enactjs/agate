@@ -5,26 +5,29 @@
 
 .popup {
 	position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%,-50%);
-		// .position(0);
-		box-sizing: border-box;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+	
 	&.centeredContent {
 		text-align: center;
 		.buttons {
 			text-align: center;
 		}
 	}
+	
 	.closeButton {
 		position: absolute;
 		top: 0;
 	}
+	
 	:global(.enact-locale-right-to-left) & {
 		.closeButton {
 			right: auto;
 		}
 	}
+	
 	.applySkins({
 		min-width: @agate-popup-min-width;
 		max-width: @agate-popup-max-width;
@@ -69,8 +72,6 @@
 		.closeButton {
 			left: @agate-popup-closebutton-position-left;
 			right: @agate-popup-closebutton-position-right;
-			// top: @agate-popup-padding;
-			// left: @agate-popup-padding;
 			margin: @agate-component-spacing;
 		}
 
