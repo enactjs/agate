@@ -41,7 +41,16 @@ const PopupBase = kind({
 			PropTypes.element,
 			PropTypes.arrayOf(PropTypes.element)
 		]),
-		center: PropTypes.bool,
+
+		/**
+		 * Centers the contents.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		centered: PropTypes.bool,
+
 		closeButton: PropTypes.bool,
 		css: PropTypes.object,
 		noAnimation: PropTypes.bool,
@@ -52,8 +61,9 @@ const PopupBase = kind({
 		title: PropTypes.string
 	},
 	defaultProps: {
-		noAnimation: false,
+		centered: false,
 		closeButton: false,
+		noAnimation: false,
 		open: false
 	},
 	styles: {
@@ -61,7 +71,7 @@ const PopupBase = kind({
 		className: 'popup'
 	},
 	computed: {
-		className: ({closeButton, title, styler, center}) => styler.append({withCloseButton: closeButton, withTitle: title, centeredContent: center})
+		className: ({closeButton, title, styler, centered}) => styler.append({withCloseButton: closeButton, withTitle: title, centered})
 	},
 	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, open, skin, title, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
