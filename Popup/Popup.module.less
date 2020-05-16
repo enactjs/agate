@@ -9,25 +9,26 @@
 	left: 50%;
 	transform: translate(-50%,-50%);
 	box-sizing: border-box;
-	
-	&.centeredContent {
+
+	&.centered {
 		text-align: center;
+
 		.buttons {
 			text-align: center;
 		}
 	}
-	
+
 	.closeButton {
 		position: absolute;
 		top: 0;
 	}
-	
+
 	:global(.enact-locale-right-to-left) & {
 		.closeButton {
 			right: auto;
 		}
 	}
-	
+
 	.applySkins({
 		min-width: @agate-popup-min-width;
 		max-width: @agate-popup-max-width;

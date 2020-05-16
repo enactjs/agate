@@ -40,13 +40,13 @@ describe('Popup specs', () => {
 
 	test('should be rendered with centered content if center is set to true', () => {
 		const popup = shallow(
-			<PopupBase center>
+			<PopupBase centered>
 				<div>popup</div>
 			</PopupBase>
 		);
 
 		const expected = true;
-		const actual = popup.find(`.${css.popup}`).prop('center');
+		const actual = popup.find(`.${css.popup}`).prop('centered');
 
 		expect(actual).toBe(expected);
 	});
