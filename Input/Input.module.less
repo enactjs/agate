@@ -98,31 +98,17 @@
 			box-shadow: 0 0 0 @agate-input-decorator-focus-border-width @agate-input-decorator-focused-border-color;
 
 			.input {
-				opacity: @agate-input-focused-opacity;
+				caret-color: @agate-accent;
 				color: @agate-input-focused-text-color;
 				border-image-slice: 1;
 				border-image-source: @agate-input-active-border-image;
 				border-width: 0 0 @agate-input-focused-border-width;
+				opacity: @agate-input-focused-opacity;
 
 				&::placeholder {
 					opacity: @agate-input-opacity;
 				}
-
-				&:focus {
-					opacity: @agate-input-focused-opacity;
-					color: @agate-input-focused-text-color;
-					caret-color: @agate-accent;
-					border-image-slice: 1;
-					border-image-source: @agate-input-active-border-image;
-					border-width: 0 0 @agate-input-focused-border-width;
-
-					&::placeholder {
-						opacity: @agate-input-opacity;
-					}
-				}
 			}
 		}
-
-
 	});
 }
