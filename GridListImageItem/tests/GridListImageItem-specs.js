@@ -12,7 +12,7 @@ describe('GridListImageItem Specs', () => {
 		);
 
 		const expected = caption;
-		const actual = content.find('.caption').hostNodes().text();
+		const actual = content.find('.caption').hostNodes().first().text();
 
 		expect(actual).toBe(expected);
 	});
@@ -23,7 +23,7 @@ describe('GridListImageItem Specs', () => {
 		);
 
 		const expected = subCaption;
-		const actual = content.find('.subCaption').hostNodes().text();
+		const actual = content.find('.subCaption').hostNodes().first().text();
 
 		expect(actual).toBe(expected);
 	});
