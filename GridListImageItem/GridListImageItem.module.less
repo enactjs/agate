@@ -1,51 +1,45 @@
 @import '../styles/skin.less';
 
 .gridListImageItem {
-    --agate-gridlistimageitem-aspect-ratio: 1;
+  --agate-gridlistimageitem-aspect-ratio: 1;
 
-    .applySkins({
-        border: @agate-gridlistimageitem-border-width solid @agate-gridlistimageitem-border-color;
-        .image {
-            // This would make image to go out of GridListImageItem container
+  .applySkins({
+	.image {
+	  position: relative;
+	  height: 0px;
 
-            //position: relative;
-            //height: 0px;
-            //
-            //// with margins around image
-            //// margin: calc(50% - 50% * var(--agate-gridlistimageitem-aspect-ratio)) 0;
-            //
-            //// without margins
-            //padding: calc(50% * var(--agate-gridlistimageitem-aspect-ratio, 1)) 0;
-            //flex: 0 1 0%;
-        }
+	  // with margins around image
+	  margin: calc(50% - 50% * var(--agate-gridlistimageitem-aspect-ratio)) 0;
+	}
 
-        .overlayContainer {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            height: auto;
-        }
+	.overlayContainer {
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	  height: auto;
+	}
 
-        .caption {
-            font-weight: @agate-gridlistimageitem-caption-weight;
-            height: @agate-gridlistimageitem-caption-height;
-            line-height: @agate-gridlistimageitem-caption-height;
-            text-align: center;
-        }
+	.caption {
+	  font-weight: @agate-gridlistimageitem-caption-weight;
+	  height: @agate-gridlistimageitem-caption-height;
+	  line-height: @agate-gridlistimageitem-caption-height;
+	  text-align: center;
+	}
 
-        .subCaption {
-            height: @agate-gridlistimageitem-subcaption-height;
-            line-height: @agate-gridlistimageitem-subcaption-height;
-            text-align: center;
-        }
-    });
+	.subCaption {
+	  height: @agate-gridlistimageitem-subcaption-height;
+	  line-height: @agate-gridlistimageitem-subcaption-height;
+	  text-align: center;
+	}
+  });
 
-    &:global(.spottable):focus,
-    :global(.spottable):focus & {
-        .applySkins({
-            background-color: @agate-gridlistimageitem-focus-bg-color;
-            background-image: none;
-        });
-    }
+  &:global(.spottable):focus,
+  :global(.spottable):focus & {
+	.applySkins({
+	  border: @agate-gridlistimageitem-border-width solid @agate-gridlistimageitem-border-color;
+	  background-color: @agate-gridlistimageitem-focus-bg-color;
+	  background-image: none;
+	});
+  }
 }
