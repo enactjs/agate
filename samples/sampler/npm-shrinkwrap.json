@@ -1258,9 +1258,9 @@
     "@enact/agate": {
       "version": "file:../..",
       "requires": {
-        "@enact/core": "^3.2.0",
-        "@enact/i18n": "^3.2.0",
-        "@enact/spotlight": "^3.2.0",
+        "@enact/core": "^3.3.0-alpha.8",
+        "@enact/i18n": "^3.3.0-alpha.8",
+        "@enact/spotlight": "^3.3.0-alpha.8",
         "@enact/ui": "^3.3.0-alpha.8",
         "classnames": "^2.2.6",
         "color-convert": "^1.9.3",
@@ -1276,9 +1276,9 @@
       }
     },
     "@enact/core": {
-      "version": "3.2.6",
-      "resolved": "https://registry.npmjs.org/@enact/core/-/core-3.2.6.tgz",
-      "integrity": "sha512-lhvlI0tnprt9WAtsmyXc2rRHCEePnLpR48muWSDYidXj5gqgUSQ3aoCf2HIDeVKputX7t+xOeQ4LOU2KaGBzZg==",
+      "version": "3.3.0-alpha.9",
+      "resolved": "https://registry.npmjs.org/@enact/core/-/core-3.3.0-alpha.9.tgz",
+      "integrity": "sha512-fD1jgXyokqqJGzuLWM6ApxoXJHa3ANVTH/lCAn9Jfi19foZ52rkdMu9oPDzkqaHnMX0SGrMyDNVIL0aZinwYVA==",
       "requires": {
         "classnames": "^2.2.5",
         "invariant": "^2.2.2",
