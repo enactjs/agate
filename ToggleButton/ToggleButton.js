@@ -167,7 +167,6 @@ const ToggleButtonBase = kind({
 			props.icon = 'circle';
 		}
 
-
 		return (
 			<Button
 				{...props}
