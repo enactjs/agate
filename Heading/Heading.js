@@ -41,8 +41,8 @@ const HeadingBase = kind({
 
 	propTypes: /** @lends agate/Heading.HeadingBase.prototype */ {
 		/**
-		 * Set a custom color to be used by the Heading. Defaults to the current accent color if
-		 * none is specified.
+		 * Set a custom color to be used by the Heading when `size` is "title".
+		 * Defaults to the current accent color if none is specified.
 		 *
 		 * @type {String}
 		 * @public

@@ -32,6 +32,11 @@ storiesOf('Agate', module)
 					<Heading {...knobProps}>
 						{text('children', Heading, 'Heading Text')}
 					</Heading>
+					{(knobProps.size === 'title') ? null : <BodyText
+						centered
+					>
+						The <em>color</em> prop only applies when the <em>size</em> prop is &quot;title&quot;.
+					</BodyText>}
 					<BodyText
 						centered
 						className={css.spacingNote}
