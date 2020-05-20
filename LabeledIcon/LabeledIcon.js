@@ -11,7 +11,7 @@
  */
 
 import kind from '@enact/core/kind';
-import UiLabeledIcon from '@enact/ui/LabeledIcon';
+import {LabeledIconBase as UiLabeledIcon} from '@enact/ui/LabeledIcon';
 import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
 import PropTypes from 'prop-types';
