@@ -18,8 +18,7 @@ storiesOf('Agate', module)
 				label={text('label', Config, '')}
 				labelPosition={select('labelPosition', ['', 'above', 'after', 'before', 'below'], Config, '')}
 				onToggle={action('onToggle')}
-			>
-			</Checkbox>
+			/>
 		),
 		{
 			info: {
