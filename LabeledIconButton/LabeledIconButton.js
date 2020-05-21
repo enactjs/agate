@@ -12,7 +12,7 @@
 
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
-import {LabeledIconBase as UiLabeledIcon} from '@enact/ui/LabeledIcon';
+import {LabeledIconBase as UiLabeledIconBase} from '@enact/ui/LabeledIcon';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -120,7 +120,7 @@ const LabeledIconButtonBase = kind({
 		spriteCount,
 		...rest
 	}) => {
-		return UiLabeledIcon.inline({
+		return UiLabeledIconBase.inline({
 			...rest,
 			icon: (
 				<Button

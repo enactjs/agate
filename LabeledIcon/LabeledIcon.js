@@ -11,7 +11,7 @@
  */
 
 import kind from '@enact/core/kind';
-import {LabeledIconBase as UiLabeledIcon} from '@enact/ui/LabeledIcon';
+import {LabeledIconBase as UiLabeledIconBase} from '@enact/ui/LabeledIcon';
 import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
 import PropTypes from 'prop-types';
@@ -55,7 +55,7 @@ const LabeledIconBase = kind({
 		publicClassNames: true
 	},
 
-	render: (props) => UiLabeledIcon.inline({
+	render: (props) => UiLabeledIconBase.inline({
 		iconComponent: Icon,
 		...props,
 		css: props.css
