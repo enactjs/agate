@@ -26,7 +26,7 @@ import componentCss from './LabeledIcon.module.less';
  *
  * @class LabeledIconBase
  * @memberof agate/LabeledIcon
- * @extends ui/LabeledIcon.LabeledIcon
+ * @extends ui/LabeledIcon.LabeledIconBase
  * @ui
  * @public
  */
@@ -67,13 +67,12 @@ const LabeledIconBase = kind({
  *
  * @hoc
  * @memberof agate/LabeledIcon
- * @mixes agate/LabeledIcon.UiLabeledIconDecorator
+ * @mixes agate/LabeledIcon.LabeledIconDecorator
  * @mixes agate/Skinnable.Skinnable
- * @mixes ui/Pure.Pure
  * @public
  */
 const LabeledIconDecorator = compose(
-	UiLabeledIconDecorator, 
+	UiLabeledIconDecorator,
 	Pure,
 	Skinnable
 );
