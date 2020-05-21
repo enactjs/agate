@@ -11,7 +11,7 @@
  */
 
 import kind from '@enact/core/kind';
-import {LabeledIconBase as UiLabeledIconBase} from '@enact/ui/LabeledIcon';
+import {LabeledIconBase as UiLabeledIconBase, LabeledIconDecorator as UiLabeledIconDecorator} from '@enact/ui/LabeledIcon';
 import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
 import PropTypes from 'prop-types';
@@ -67,10 +67,13 @@ const LabeledIconBase = kind({
  *
  * @hoc
  * @memberof agate/LabeledIcon
+ * @mixes agate/LabeledIcon.UiLabeledIconDecorator
  * @mixes agate/Skinnable.Skinnable
+ * @mixes ui/Pure.Pure
  * @public
  */
 const LabeledIconDecorator = compose(
+	UiLabeledIconDecorator, 
 	Pure,
 	Skinnable
 );
