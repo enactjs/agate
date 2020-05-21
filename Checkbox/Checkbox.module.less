@@ -9,8 +9,7 @@
 
 		width: @size;
 		height: @size;
-		border: @agate-checkbox-border;
-		border-color: @agate-checkbox-border-color;
+		border: @agate-checkbox-border-width solid @agate-checkbox-border-color;
 		border-radius: @agate-checkbox-border-radius;
 		color: @agate-checkbox-text-color;
 		background-color: @agate-checkbox-bg-color;
@@ -25,6 +24,7 @@
 		}
 
 		&.selected {
+			border-color: @agate-checkbox-selected-border-color;
 			.icon {
 				visibility: visible;
 			}

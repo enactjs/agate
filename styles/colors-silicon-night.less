@@ -11,8 +11,9 @@
 @agate-bg-color: black;
 @agate-bg-image: none;
 @agate-bg-image2: none;
-@agate-text-color: @agate-foreground;
-@agate-title-text-color: @agate-foreground;
+@agate-text-color: @agate-background;
+@agate-title-text-color: @agate-background;
+@agate-background: @agate-foreground;
 
 // Disabled Opacity
 // ---------------------------------------
@@ -49,9 +50,10 @@
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-text-color: @silicon-white;
-@agate-checkbox-bg-color: @silicon-black;
-@agate-checkbox-border-color: @silicon-white;
+@agate-checkbox-text-color: @agate-white;
+@agate-checkbox-bg-color: transparent;
+@agate-checkbox-border-color: rgba(255, 255, 255, 0.5);
+@agate-checkbox-selected-border-color: @agate-white;
 
 // CheckboxItem
 // ---------------------------------------
@@ -87,7 +89,6 @@
 @agate-heading-border-color: fadeout(@agate-heading-text-color, 30%);
 @agate-heading-text-color: @agate-text-color;
 @agate-heading-accent-color: @agate-accent;
-
 
 // Icon
 // ---------------------------------------
