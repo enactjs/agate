@@ -32,19 +32,24 @@ storiesOf('Agate', module)
 					<Heading {...knobProps}>
 						{text('children', Heading, 'Heading Text')}
 					</Heading>
-					{(knobProps.size === 'title') ? null : <BodyText
-						centered
-					>
-						The <em>color</em> prop only applies when the <em>size</em> prop is &quot;title&quot;.
-					</BodyText>}
 					<BodyText
 						centered
-						className={css.spacingNote}
+						className={css.spacingIndicator}
 					>
-						The <em>spacing</em> prop will have no effect when using the Gallium skin.
-						<br />
-						<br />
-						Choose a different skin from the Global Knobs to see!
+						This <a href="https://enactjs.com/docs/modules/ui/BodyText/">BodyText</a> component is rendered immediately after the Heading component and is<br />
+						meant to provide a visual indicator of the effects of changing the <code>spacing</code> prop.
+						<span className={css.spacingNote}>
+							<br />
+							<strong>Note</strong>: The <code>spacing</code> prop will have no effect when using the Gallium skin.
+							<br />
+							Choose a different skin from the Global Knobs to see!
+						</span>
+						{(knobProps.size === 'title' || typeof knobProps.color === 'undefined') ? null :
+							<span>
+								<br />
+								<strong>Note</strong>: The <code>color</code> prop only applies when the <code>size</code> prop is &quot;title&quot;.
+							</span>
+						}
 					</BodyText>
 				</>
 			);
