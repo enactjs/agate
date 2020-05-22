@@ -4,6 +4,7 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
+import LabeledIconButton from '@enact/agate/LabeledIconButton';
 import PopupMenu from '@enact/agate/PopupMenu';
 
 const Config = mergeComponentMetadata('PopupMenu', PopupMenu);
@@ -15,6 +16,7 @@ storiesOf('Agate', module)
 			<div>
 				<PopupMenu
 					closeButton={boolean('closeButton', Config)}
+					closeButtonLabel={text('closeButtonLabel', Config, 'Cancel')}
 					noAnimation={boolean('noAnimation', Config)}
 					noAutoDismiss={boolean('noAutoDismiss', Config)}
 					onClose={action('onClose')}
@@ -25,7 +27,12 @@ storiesOf('Agate', module)
 					spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
 					title={text('title', Config, 'Title')}
 				>
-					<div>{text('children', Config, 'Hello Popup')}</div>
+					<LabeledIconButton
+						inline
+						icon="profileA1"
+						size="huge"
+						backgroundOpacity="lightOpaque"
+					>User1</LabeledIconButton>
 				</PopupMenu>
 				Use KNOBS to interact with PopupMenu.
 			</div>
