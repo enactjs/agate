@@ -4,9 +4,9 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Popup from '@enact/agate/Popup';
+import {Popup, PopupBase} from '@enact/agate/Popup';
 
-const Config = mergeComponentMetadata('Popup', Popup);
+const Config = mergeComponentMetadata('Popup', PopupBase);
 
 storiesOf('Agate', module)
 	.add(
