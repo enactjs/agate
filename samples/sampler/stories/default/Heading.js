@@ -44,12 +44,12 @@ storiesOf('Agate', module)
 							<br />
 							Choose a different skin from the Global Knobs to see!
 						</span>
-						{(knobProps.size === 'title' || typeof knobProps.color === 'undefined') ? null :
+						{(knobProps.size === 'title' || typeof knobProps.color === 'undefined') ? null : (
 							<span>
 								<br />
 								<strong>Note</strong>: The <code>color</code> prop only applies when the <code>size</code> prop is &quot;title&quot;.
 							</span>
-						}
+						)}
 					</BodyText>
 				</>
 			);
