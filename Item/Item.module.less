@@ -75,10 +75,6 @@
 			}
 		}
 
-		&:active {
-			background-color: @agate-item-active-bg-color;
-		}
-
 		&.selected {
 			color: @agate-item-selected-color;
 		}
@@ -98,6 +94,7 @@
 		}
 
 		.focus({
+			border-color: @agate-item-focus-border-color;
 			border-image-slice: 1;
 			border-image-source: @agate-item-focus-border-image;
 			background-color: @agate-item-focus-bg-color;
@@ -109,5 +106,13 @@
 				}
 			}
 		});
+
+		&:global(.spottable):active,
+		:global(.spottable):active & {
+			.applySkins({
+				background-color: @agate-item-active-bg-color;
+				border-image-source: none;
+			});
+		}
 	});
 }
