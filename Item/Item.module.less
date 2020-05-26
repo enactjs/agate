@@ -95,7 +95,7 @@
 
 		.focus({
 			border-color: @agate-item-focus-border-color;
-			border-image-slice: 1;
+			border-image-slice: @agate-item-border-image-slice;
 			border-image-source: @agate-item-focus-border-image;
 			background-color: @agate-item-focus-bg-color;
 			color: @agate-item-focus-color;
@@ -106,13 +106,13 @@
 				}
 			}
 		});
-
-		&:global(.spottable):active,
-		:global(.spottable):active & {
-			.applySkins({
-				background-color: @agate-item-active-bg-color;
-				border-image-source: none;
-			});
-		}
 	});
+
+	&:global(.spottable):active,
+	:global(.spottable):active & {
+		.applySkins({
+			background-color: @agate-item-active-bg-color;
+			color: @agate-item-color;
+		});
+	}
 }
