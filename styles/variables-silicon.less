@@ -10,19 +10,22 @@
 
 // Button
 // ---------------------------------------
-@agate-button-border-radius: 37px;
+@agate-button-active-bg-image: none;
+@agate-button-border-radius: (@agate-button-height / 2);
 @agate-button-client-animation-offset: (@agate-button-animation-duration * 0.4);
 @agate-button-badge-animation-offset: (@agate-button-animation-duration * 0.8);
 @agate-button-badge-position: -3px 0 auto auto;
 @agate-button-border-width: 2px;
 @agate-button-font-size: 36px;
-@agate-button-font-weight: 300;
+@agate-button-font-weight: 300em;
 @agate-button-height: 75px;
-@agate-button-line-height: 1.17;
-@agate-button-border-focus-width: 0px;
+@agate-button-line-height: 1.17em;
+@agate-button-huge-border-radius: (@agate-button-huge-height / 2);
+@agate-button-huge-border-width: @agate-button-border-width;
+@agate-button-huge-height: 90px;
+@agate-button-small-border-radius: (@agate-button-small-height / 2);
 @agate-button-small-height: 60px;
 @agate-button-small-font-size: 28px;
-@agate-button-small-line-height: 1.18;
 @agate-button-smallest-height: 30px;
 @agate-button-smallest-font-size: 18px;
 
@@ -75,27 +78,24 @@
 
 // Input
 // ---------------------------------------
-@agate-input-border-width: 2px;
-@agate-input-decorator-border-width: 0px;
-@agate-input-decorator-focus-border-width: 0px;
+@agate-input-border-width: 3px;
+@agate-input-decorator-border-width: 0;
+@agate-input-decorator-focus-border-width: 0;
 @agate-input-decorator-height: 60px;
-@agate-input-focused-border-width: 2px;
 @agate-input-focused-opacity: 1;
 @agate-input-font-size: 28px;
 @agate-input-height: 33px;
-@agate-input-line-height: 1.18;
 @agate-input-opacity: 0.5;
 @agate-input-padding: 21px 32px 5px 0px;
 @agate-input-text-align: left;
 
 // Item
 // ---------------------------------------
-@agate-item-font-size: 32px;
-@agate-item-font-weight: normal;
+@agate-item-font-size: 40px;
+@agate-item-font-weight: 500;
 @agate-item-label-font-size: 30px;
 @agate-item-side-outset: 32px;
 @agate-item-height: 90px;
-@agate-item-line-height: 1.16;
 @agate-item-height-large: 120px;
 @agate-item-border-width: 3px;
 
@@ -186,7 +186,7 @@
 
 // RadioItem
 // ---------------------------------------
-@agate-radioitem-icon-border-width: 2px;
+@agate-radioitem-icon-border-width: 3px;
 
 // SliderButton
 // ---------------------------------------

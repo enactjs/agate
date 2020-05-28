@@ -10,7 +10,6 @@
 		box-shadow: 0 0 0 @agate-input-decorator-border-width @agate-input-decorator-border-color;
 		box-sizing: border-box;
 		vertical-align: middle;
-		font-family: @agate-base-font-family;
 
 		.input {
 			padding: @agate-input-padding;
@@ -20,7 +19,6 @@
 			text-overflow: ellipsis;
 			flex-grow: 1;
 			text-indent: 0.2em;
-			font-family: @agate-base-font-family;
 			font-size: @agate-input-font-size;
 			font-weight: @agate-input-font-weight;
 			opacity: @agate-input-opacity;
@@ -63,9 +61,8 @@
 
 		.input,
 		.icon {
-			font-family: @agate-base-font-family;
+			line-height: @agate-input-height;
 			height: @agate-input-height;
-			line-height: @agate-input-line-height;
 			vertical-align: middle;
 			margin: 0;
 		}
@@ -98,11 +95,11 @@
 			box-shadow: 0 0 0 @agate-input-decorator-focus-border-width @agate-input-decorator-focused-border-color;
 
 			.input {
-				caret-color: @agate-accent;
+				caret-color: @agate-input-caret-color;
 				color: @agate-input-focused-text-color;
 				border-image-slice: 1;
 				border-image-source: @agate-input-active-border-image;
-				border-width: 0 0 @agate-input-focused-border-width;
+				border-width: 0 0 @agate-input-border-width;
 				opacity: @agate-input-focused-opacity;
 
 				&::placeholder {
