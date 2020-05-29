@@ -18,7 +18,6 @@ storiesOf('Agate', module)
 			<ColorPicker
 				direction={select('direction', prop.direction, ColorPicker, 'right')}
 				onChange={action('onChange')}
-				defaultValue={text('value', ColorPicker, '#3467af')}
 			>
 				{prop.colors}
 			</ColorPicker>

@@ -238,18 +238,6 @@ const ColorPickerBase = kind({
 	}
 });
 
-// This handler is meant to accommodate using `ColorPicker`'s `onChange` prop from `Changeable`
-// as the `onSelect` handler for its `Group` component that lists the set of pre-defined color
-// choices.  `onSelect` sends the chosen value in the `data` prop of its event but `Changeable`
-// expects `value`.  The slider handlers for hue, saturation, and light values in `ColorPickerExtended`
-// use this handler to update the `value` prop via `onChange` as well.
-const colorChangeHandler = handle(
-	adaptEvent(
-		({data: value}) => ({value}),
-		forward('onChange')
-	)
-);
-
 const ColorPickerExtended = hoc((config, Wrapped) => {
 	return class extends React.Component {
 		static displayName = 'ColorPickerExtended'
@@ -263,12 +251,10 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 
 		constructor (props) {
 			super(props);
-			this.hsl = convertToHSL(props.value);
+			this.hsl = props.value ? convertToHSL(props.value) : [0, 0, 0];
 			this.state = {
 				extended: props.defaultExtended || false
 			};
-
-			colorChangeHandler.bindAs(this, 'onChange');
 		}
 
 		componentDidMount () {
@@ -304,13 +290,24 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 
 		clickedOutsidePalette = ({target}) => !this.node.contains(target)
 
-		handle = handle.bind(this);
+		// This handler is meant to accommodate using `ColorPicker`'s `onChange` prop from
+		// `Changeable` as the `onSelect` handler for its `Group` component that lists the set of
+		// pre-defined color choices.  `onSelect` sends the chosen value in the `data` prop of its
+		// event but `Changeable` expects `value`.  The slider handlers for hue, saturation, and
+		// light values in `ColorPickerExtended` use this handler to update the `value` prop via
+		// `onChange` as well.
+		handleChange = handle(
+			adaptEvent(
+				({data: value}) => ({value}),
+				forward('onChange')
+			)
+		).bindAs(this, 'handleChange')
 
 		// If a click happened outside the component area (and children of us) dismiss the palette by forwarding the onClick from Toggleable.
-		handleClick = this.handle(
+		handleClick = handle(
 			this.clickedOutsidePalette,
 			forward('onClick')
-		)
+		).bindAs(this, 'handleClick')
 
 		handleToggleExtended = () => {
 			this.setState(({extended}) => ({extended: !extended}));
@@ -319,7 +316,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 		handleSlider = (type) => ({value: sliderValue}) => {
 			this.hsl[('hsl'.indexOf(type))] = sliderValue;
 			const value = this.buildValue();
-			this.onChange({data: value});
+			this.handleChange({data: value});
 		}
 
 		render () {
@@ -330,7 +327,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 				<Wrapped
 					{...rest}
 					extended={this.state.extended}
-					onChange={this.onChange}
+					onChange={this.handleChange}
 					onToggleExtended={this.handleToggleExtended}
 					onHueChanged={this.handleSlider('h')}
 					onSaturationChanged={this.handleSlider('s')}
