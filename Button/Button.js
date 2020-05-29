@@ -120,7 +120,8 @@ const ButtonBase = kind({
 
 		/**
 		 * Provides a way to call special interface attention to this button. It will be "featured"
-		 * in some way by the theme's visual rules.
+		 * in some way by the theme's visual rules.  This property only has an effect when
+		 * `backgroundOpacity` is "opaque".
 		 *
 		 * @type {Boolean}
 		 * @public
@@ -244,6 +245,7 @@ const ButtonBase = kind({
 		delete rest.animationDelay;
 		delete rest.backgroundOpacity;
 		delete rest.badge;
+		delete rest.badgeColor;
 		delete rest.highlighted;
 		delete rest.joinedPosition;
 		delete rest.selected;
