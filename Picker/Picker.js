@@ -22,12 +22,13 @@ import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
+import PickerCore, {PickerItem} from '../internal/Picker';
 import Skinnable from '../Skinnable';
 
 import css from './Picker.module.less';
 
-const PickerRoot = Touchable('div');
-const PickerButtonItem = Spottable('div');
+// const PickerRoot = Touchable('div');
+// const PickerButtonItem = Spottable('div');
 
 const handleChange = direction => handle(
 	adaptEvent(
@@ -70,69 +71,69 @@ const PickerBase = kind({
 		 * @default 0
 		 * @public
 		 */
-		value: PropTypes.number
+		value: PropTypes.number,
+
+		/**
+		 * Disables the picker.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
+		/**
+		 * Called when the `value` changes.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onChange: PropTypes.func,
+
+		/**
+		 * Orientation of the picker.
+		 *
+		 * Controls whether the buttons are arranged horizontally or vertically around the value.
+		 *
+		 * * Values: `'horizontal'`, `'vertical'`
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+
 	},
 
 	defaultProps: {
 		value: 0
 	},
 
-	styles: {
-		css,
-		className: 'picker',
-		publicClassNames: true
-	},
-
-	handlers: {
-		handleDecrement: decrement,
-		handleFlick: handle(
-			forEventProp('direction', 'vertical'),
-			// ignore "slow" flicks by filtering out velocity below a threshold
-			oneOf(
-				[({velocityY}) => velocityY < 0, increment],
-				[({velocityY}) => velocityY > 0, decrement]
-			)
-		),
-		handleIncrement: increment
-	},
-
 	computed: {
-		activeClassName: ({styler}) => styler.join('active', 'item')
+		max: ({children}) => children && children.length ? children.length - 1 : 0,
+		children: ({children}) => React.Children.map(children, (child) => {
+			return (
+				<PickerItem
+					marqueeOn='hover'
+				>
+					{child}
+				</PickerItem>
+			);
+		}),
+		disabled: ({children, disabled}) => React.Children.count(children) > 1 ? disabled : true,
+		value: ({value, children}) => {
+			const max = children && children.length ? children.length - 1 : 0;
+			return clamp(0, max, value);
+		},
 	},
 
 	render: (props) => {
-		const {activeClassName, children: values, handleDecrement, handleFlick, handleIncrement, value, ...rest} = props;
-		const isFirst = value <= 0;
-		const isLast = value >= React.Children.count(values) - 1;
+		const {children, value, max, ...rest} = props;
 
 		return (
-			<PickerRoot {...rest} onFlick={handleFlick}>
-				<PickerButtonItem
-					className={css.itemTop}
-					onClick={handleDecrement}
-					disabled={isFirst}
-				>
-					<div className={css.label}>
-						{isFirst ? '' : values[value - 1]}
-					</div>
-				</PickerButtonItem>
-				<div className={activeClassName}>
-					<div className={css.label}>
-						{values[value]}
-					</div>
-				</div>
-				<PickerButtonItem
-					className={css.itemBottom}
-					onClick={handleIncrement}
-					disabled={isLast}
-				>
-					<div className={css.label}>
-						{isLast ? '' : values[value + 1]}
-					</div>
-				</PickerButtonItem>
-			</PickerRoot>
+			<PickerCore {...rest} min={0} max={max} index={value} step={1} value={value}>
+				{children}
+			</PickerCore>
 		);
-	}
+}
 });
 
 /**
