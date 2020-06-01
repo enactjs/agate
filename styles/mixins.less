@@ -22,26 +22,18 @@
 	padding-right: @agate-item-side-outset;
 }
 
-
-.agate-button-active() {
+.active(@rules; @target) when (isruleset(@rules)) and (@target = parent) {
 	.spottable({
 		&:active {
-			.bg {
-				background-color: @agate-button-active-bg-color;
-				background-image: @agate-button-active-bg-image;
-				border: @agate-button-border-width solid @agate-button-border-color;;
-			}
+			@rules();
+		}
+	}, @target);
+}
 
-			&,
-			.client {
-				color: @agate-button-active-color;
-			}
-
-			&.highlighted {
-				.bg {
-					opacity: 1;
-				}
-			}
+.active(@rules) when (isruleset(@rules)) {
+	.spottable({
+		&:active {
+			@rules();
 		}
 	});
 }
