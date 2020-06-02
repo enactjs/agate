@@ -12,34 +12,12 @@
  * @exports PickerDecorator
  */
 
-import {adaptEvent, forEventProp, forward, handle, oneOf} from '@enact/core/handle';
 import kind from '@enact/core/kind';
-import Spottable from '@enact/spotlight/Spottable';
-import Changeable from '@enact/ui/Changeable';
-import Touchable from '@enact/ui/Touchable';
 import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
-import compose from 'ramda/src/compose';
 import React from 'react';
 
-import PickerCore, {PickerItem} from '../internal/Picker';
-import Skinnable from '../Skinnable';
-
-import css from './Picker.module.less';
-
-// const PickerRoot = Touchable('div');
-// const PickerButtonItem = Spottable('div');
-
-const handleChange = direction => handle(
-	adaptEvent(
-		(ev, {value, children}) => ({
-			value: clamp(0, React.Children.count(children) - 1, value + direction)
-		}),
-		forward('onChange')
-	)
-);
-const increment = handleChange(1);
-const decrement = handleChange(-1);
+import PickerCore, {PickerItem, PickerDecorator} from '../internal/Picker';
 
 /**
  * The base `Picker` component.
@@ -65,15 +43,6 @@ const PickerBase = kind({
 		children: PropTypes.array.isRequired,
 
 		/**
-		 * Index of the selected child.
-		 *
-		 * @type {Number}
-		 * @default 0
-		 * @public
-		 */
-		value: PropTypes.number,
-
-		/**
 		 * Disables the picker.
 		 *
 		 * @type {Boolean}
@@ -89,18 +58,26 @@ const PickerBase = kind({
 		 */
 		onChange: PropTypes.func,
 
+		// /**
+		//  * Orientation of the picker.
+		//  *
+		//  * Controls whether the buttons are arranged horizontally or vertically around the value.
+		//  *
+		//  * * Values: `'horizontal'`, `'vertical'`
+		//  *
+		//  * @type {String}
+		//  * @public
+		//  */
+		// orientation: PropTypes.oneOf(['horizontal', 'vertical']).
+
 		/**
-		 * Orientation of the picker.
+		 * Index of the selected child.
 		 *
-		 * Controls whether the buttons are arranged horizontally or vertically around the value.
-		 *
-		 * * Values: `'horizontal'`, `'vertical'`
-		 *
-		 * @type {String}
+		 * @type {Number}
+		 * @default 0
 		 * @public
 		 */
-		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-
+		value: PropTypes.number
 	},
 
 	defaultProps: {
@@ -111,9 +88,7 @@ const PickerBase = kind({
 		max: ({children}) => children && children.length ? children.length - 1 : 0,
 		children: ({children}) => React.Children.map(children, (child) => {
 			return (
-				<PickerItem
-					marqueeOn='hover'
-				>
+				<PickerItem marqueeOn="hover">
 					{child}
 				</PickerItem>
 			);
@@ -122,7 +97,7 @@ const PickerBase = kind({
 		value: ({value, children}) => {
 			const max = children && children.length ? children.length - 1 : 0;
 			return clamp(0, max, value);
-		},
+		}
 	},
 
 	render: (props) => {
@@ -133,22 +108,8 @@ const PickerBase = kind({
 				{children}
 			</PickerCore>
 		);
-}
+	}
 });
-
-/**
- * Applies Agate specific behaviors to [PickerBase]{@link agate/Picker.PickerBase}.
- *
- * @hoc
- * @memberof agate/Picker
- * @mixes ui/Changeable.Changeable
- * @mixes agate/Skinnable.Skinnable
- * @public
- */
-const PickerDecorator = compose(
-	Changeable,
-	Skinnable
-);
 
 /**
  * A Picker component that allows selecting values from a list of values.
@@ -181,6 +142,5 @@ export default Picker;
 
 export {
 	Picker,
-	PickerBase,
-	PickerDecorator
+	PickerBase
 };

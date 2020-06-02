@@ -64,17 +64,6 @@ const RangePickerBase = kind({
 		value: PropTypes.number.isRequired,
 
 		/**
-		 * The `aria-valuetext` for the picker.
-		 *
-		 * By default, `aria-valuetext` is set to the current selected child value.
-		 *
-		 * @type {String}
-		 * @memberof agate/RangePicker.RangePickerBase.prototype
-		 * @public
-		 */
-		'aria-valuetext': PropTypes.string,
-
-		/**
 		 * Children from which to pick.
 		 *
 		 * @type {Node}
@@ -106,18 +95,18 @@ const RangePickerBase = kind({
 		 */
 		onChange: PropTypes.func,
 
-		/**
-		 * Orientation of the picker.
-		 *
-		 * Controls whether the buttons are arranged horizontally or vertically around the value.
-		 *
-		 * * Values: `'horizontal'`, `'vertical'`
-		 *
-		 * @type {String}
-		 * @default 'horizontal'
-		 * @public
-		 */
-		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+		// /**
+		//  * Orientation of the picker.
+		//  *
+		//  * Controls whether the buttons are arranged horizontally or vertically around the value.
+		//  *
+		//  * * Values: `'horizontal'`, `'vertical'`
+		//  *
+		//  * @type {String}
+		//  * @default 'horizontal'
+		//  * @public
+		//  */
+		// orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
 		 * The smallest value change allowed for the picker.
@@ -129,44 +118,22 @@ const RangePickerBase = kind({
 		 * @default 1
 		 * @public
 		 */
-		step: PropTypes.number,
-
-		/**
-		 * The width of the picker.
-		 *
-		 * A number can be used to set the minimum number of characters to be shown. Setting a
-		 * number to less than the number of characters in the longest value will cause the width to
-		 * grow for the longer values.
-		 *
-		 * A string can be used to select from pre-defined widths:
-		 *
-		 * * `'small'` - numeric values
-		 * * `'medium'` - single or short words
-		 * * `'large'` - maximum-sized pickers taking full width of its parent
-		 *
-		 * By default, the picker will size according to the longest valid value.
-		 *
-		 * @type {String|Number}
-		 * @public
-		 */
-		width: PropTypes.oneOfType([
-			PropTypes.oneOf([null, 'small', 'medium', 'large']),
-			PropTypes.number
-		]),
+		step: PropTypes.number
 	},
 
 	computed: {
 		disabled: ({disabled, max, min}) => min >= max ? true : disabled,
-		width: ({max, min, width}) => (width || Math.max(max.toString().length, min.toString().length)),
 		value: ({min, max, value}) => {
 			return clamp(min, max, value);
-		},
+		}
 	},
 
 	render: ({value, ...rest}) => {
 		return (
 			<PickerCore {...rest} index={0} value={value}>
-				<PickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{value}</PickerItem>
+				<PickerItem key={value}>
+					{value}
+				</PickerItem>
 			</PickerCore>
 		);
 	}

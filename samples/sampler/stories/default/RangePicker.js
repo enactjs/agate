@@ -17,13 +17,10 @@ storiesOf('Agate', module)
 					disabled={boolean('disabled', Config)}
 					onChange={action('onChange')}
 					min={number('min', Config, 0)}
-					max={number('max', Config, 100)}
+					max={number('max', Config, 20)}
 					step={number('step', Config, 1)}
-					defaultValue={number('defaultValue', Config, 1)}
-				>
-					{['LO', '16\xB0', '17\xB0', '18\xB0', '19\xB0', 'HI']}
-				</RangePicker>
-
+					defaultValue={number('defaultValue', Config, 5)}
+				/>
 			</div>
 		),
 		{

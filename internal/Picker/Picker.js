@@ -1,12 +1,3 @@
-/**
- * The base component for {@link agate/internal/Picker.Picker}.
- *
- * @class Picker
- * @memberof agate/internal/Picker
- * @ui
- * @private
- */
-
 import {adaptEvent, forEventProp, forward, handle, oneOf} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
@@ -16,6 +7,9 @@ import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
 import React from 'react';
+import {ViewManager} from '@enact/ui/ViewManager';
+import shouldUpdate from 'recompose/shouldUpdate';
+import equals from 'ramda/src/equals';
 
 import Skinnable from '../../Skinnable';
 
@@ -24,17 +18,19 @@ import css from './Picker.module.less';
 const PickerRoot = Touchable('div');
 const PickerButtonItem = Spottable('div');
 
+const PickerViewManager = shouldUpdate((props, nextProps) => {
+	return (
+		props.index !== nextProps.index ||
+		!equals(props.children, nextProps.children)
+	);
+})(ViewManager);
+
 const handleChange = direction => handle(
 	adaptEvent(
 		(ev, {min, max, step, value}) => ({
 			value: clamp(min, max, value + (direction * step))
 		}),
 		forward('onChange')
-
-// 		(ev, {value, children}) => ({
-// 	value: clamp(0, React.Children.count(children) - 1, value + direction)
-// }),
-// 	forward('onChange')
 	)
 );
 
@@ -42,24 +38,31 @@ const increment = handleChange(1);
 const decrement = handleChange(-1);
 
 /**
- * The base `Picker` component.
+ * The base component for {@link agate/internal/Picker.Picker}.
  *
- * This version is not [`spottable`]{@link spotlight/Spottable.Spottable}.
- *
- * @class PickerBase
- * @memberof agate/Picker
+ * @class Picker
+ * @memberof agate/internal/Picker
  * @ui
- * @public
+ * @private
  */
 const PickerBase = kind({
 	name: 'Picker',
 
 	propTypes: /** @lends agate/Picker.PickerBase.prototype */ {
 		/**
+		 * Index for internal ViewManager
+		 *
+		 * @type {Number}
+		 * @required
+		 * @public
+		 */
+		index: PropTypes.number.isRequired,
+
+		/**
 		 * The maximum value selectable by the picker (inclusive).
 		 *
 		 * The range between `min` and `max` should be evenly divisible by
-		 * [step]{@link moonstone/RangePicker.RangePickerBase.step}.
+		 * [step]{@link agate/internal/Picker.PickerBase.step}.
 		 *
 		 * @type {Number}
 		 * @required
@@ -71,7 +74,7 @@ const PickerBase = kind({
 		 * The minimum value selectable by the picker (inclusive).
 		 *
 		 * The range between `min` and `max` should be evenly divisible by
-		 * [step]{@link moonstone/RangePicker.RangePickerBase.step}.
+		 * [step]{@link agate/internal/Picker.PickerBase.step}.
 		 *
 		 * @type {Number}
 		 * @required
@@ -80,28 +83,12 @@ const PickerBase = kind({
 		min: PropTypes.number.isRequired,
 
 		/**
-		 * The smallest value change allowed for the picker.
+		 * Children from which to pick
 		 *
-		 * For example, a step of `2` would cause the picker to increment from 0 to 2 to 4, etc.
-		 * It must evenly divide into the range designated by `min` and `max`.
-		 *
-		 * @type {Number}
-		 * @default 1
+		 * @type {Node}
 		 * @public
 		 */
-		step: PropTypes.number,
-
-		/**
-		 * Overrides the `aria-valuetext` for the picker.
-		 *
-		 * By default, `aria-valuetext` is set to the current selected child and `accessibilityHint`
-		 * text.
-		 *
-		 * @type {String}
-		 * @memberof agate/internal/Picker.PickerBase.prototype
-		 * @public
-		 */
-		'aria-valuetext': PropTypes.string,
+		children: PropTypes.node,
 
 		/**
 		 * Class name for component.
@@ -112,14 +99,6 @@ const PickerBase = kind({
 		className: PropTypes.string,
 
 		/**
-		 * A function to run when the control should increment or decrement.
-		 *
-		 * @type {Function}
-		 * @public
-		 */
-		onChange: PropTypes.func,
-
-		/**
 		 * Disables the picker.
 		 *
 		 * @type {Boolean}
@@ -128,24 +107,36 @@ const PickerBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
-		 * Orientation of the picker.
+		 * A function to run when the control should increment or decrement.
 		 *
-		 * Controls whether the buttons are arranged horizontally or vertically around the value.
-		 *
-		 * * Values: `'horizontal'`, `'vertical'`
-		 *
-		 * @type {String}
+		 * @type {Function}
 		 * @public
 		 */
-		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+		onChange: PropTypes.func,
+
+		// /**
+		//  * Orientation of the picker.
+		//  *
+		//  * Controls whether the buttons are arranged horizontally or vertically around the value.
+		//  *
+		//  * * Values: `'horizontal'`, `'vertical'`
+		//  *
+		//  * @type {String}
+		//  * @public
+		//  */
+		// orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
-		 * Children from which to pick
+		 * Allow the picker to only increment or decrement by a given value.
 		 *
-		 * @type {Node}
+		 * A step of `2` would cause a picker to increment from 10 to 12 to 14, etc. It must evenly
+		 * divide into the range designated by `min` and `max`.
+		 *
+		 * @type {Number}
+		 * @default 1
 		 * @public
 		 */
-		children: PropTypes.node,
+		step: PropTypes.number,
 
 		/**
 		 * Index of the selected child.
@@ -186,9 +177,9 @@ const PickerBase = kind({
 	},
 
 	render: (props) => {
-		const {activeClassName, children: values, handleDecrement, handleFlick, handleIncrement, value, min, max, step,  ...rest} = props;
-		const isFirst = value <= min + step;
-		const isLast = value >= max - step;
+		const {activeClassName, children, handleDecrement, index, handleFlick, handleIncrement, value, min, max, step,  ...rest} = props;
+		const isFirst = value <= min;
+		const isLast = value >= max;
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
@@ -198,13 +189,14 @@ const PickerBase = kind({
 					disabled={isFirst}
 				>
 					<div className={css.label}>
-						{value <= min + step ? min : value - step}
-						{/*{isFirst ? '' : values[value - 1]}*/}
+						{isFirst ? '' :  clamp(min, max, Array.isArray(children) ? children[value - step] : value - step)}
 					</div>
 				</PickerButtonItem>
 				<div className={activeClassName}>
 					<div className={css.label}>
-						{value}
+						<PickerViewManager index={index}>
+							{children}
+						</PickerViewManager>
 					</div>
 				</div>
 				<PickerButtonItem
@@ -213,8 +205,7 @@ const PickerBase = kind({
 					disabled={isLast}
 				>
 					<div className={css.label}>
-						{value >= max - step ? max : value + step}
-						{/*{isLast ? '' : values[value + 1]}*/}
+						{isLast ? '' : clamp(min, max, Array.isArray(children) ? children[value + step] : value + step)}
 					</div>
 				</PickerButtonItem>
 			</PickerRoot>
@@ -252,22 +243,10 @@ const PickerDecorator = compose(
  */
 const Picker = PickerDecorator(PickerBase);
 
-/**
- * Default index of the selected child.
- *
- * *Note*: Changing `defaultValue` after initial render has no effect.
- *
- * @name defaultValue
- * @memberof agate/Picker.Picker.prototype
- * @type {Number}
- * @public
- */
-
 export default Picker;
 
 export {
 	Picker,
-	PickerBase,
 	PickerDecorator
 };
 export PickerItem from './PickerItem';
