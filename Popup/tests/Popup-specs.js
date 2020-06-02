@@ -3,7 +3,6 @@ import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 import {mount, shallow} from 'enzyme';
 
 import {Popup, PopupBase} from '../Popup';
-import css from '../Popup.module.less';
 
 const FloatingLayerController = FloatingLayerDecorator('div');
 
@@ -38,16 +37,25 @@ describe('Popup specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should be rendered with centered content if center is set to true', () => {
-		const popup = shallow(
-			<PopupBase centered>
-				<div>popup</div>
-			</PopupBase>
+	test('should apply \'centered\' class when open with centered', () => {
+		const subject = shallow(
+			<PopupBase centered />
 		);
 
-		const expected = true;
-		const actual = popup.find(`.${css.popup}`).prop('centered');
+		const expected = 'centered';
+		const actual = subject.find('div').at(0).prop('className');
 
-		expect(actual).toBe(expected);
+		expect(actual).toContain(expected);
+	});
+
+	test('should not apply \'centered\' class when open without centered', () => {
+		const subject = shallow(
+			<PopupBase />
+		);
+
+		const expected = '';
+		const actual = subject.find('div').at(0).prop('className');
+
+		expect(actual).toContain(expected);
 	});
 });
