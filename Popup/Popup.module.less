@@ -71,15 +71,8 @@
 		}
 
 		.closeButton {
-			left: @agate-popup-closebutton-position-left;
-			right: @agate-popup-closebutton-position-right;
+			.position-start-end(@agate-popup-closebutton-position-left, @agate-popup-closebutton-position-right);
 			margin: @agate-component-spacing;
-		}
-
-		:global(.enact-locale-right-to-left) & {
-			.closeButton {
-				left: @agate-spotlight-outset;
-			}
 		}
 	});
 }
