@@ -18,6 +18,7 @@ import Layout, {Cell} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 import Transition from '@enact/ui/Transition';
 
+import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
 import Heading from '../Heading';
 import LabeledIconButton from '../LabeledIconButton';
@@ -39,6 +40,7 @@ const PopupMenuBase = kind({
 	name: 'PopupMenu',
 	propTypes: /** @lends agate/PopupMenu.PopupMenuBase.prototype */ {
 		closeButton: PropTypes.bool,
+		closeButtonLabel: PropTypes.string,
 		css: PropTypes.object,
 		noAnimation: PropTypes.bool,
 		onClose: PropTypes.func,
@@ -50,6 +52,7 @@ const PopupMenuBase = kind({
 
 	defaultProps: {
 		closeButton: false,
+		closeButtonLabel: $L('Cancel'),
 		noAnimation: false,
 		open: false,
 		orientation: 'horizontal'
@@ -64,7 +67,7 @@ const PopupMenuBase = kind({
 		className: ({orientation, styler}) => styler.append(orientation)
 	},
 
-	render: ({children, closeButton, css, noAnimation, onClose, onHide, open, orientation, title, ...rest}) => {
+	render: ({children, closeButton, closeButtonLabel, css, noAnimation, onClose, onHide, open, orientation, title, ...rest}) => {
 		return (
 			<Transition
 				noAnimation={noAnimation}
@@ -90,7 +93,7 @@ const PopupMenuBase = kind({
 								className={css.closeButton}
 								size="huge"
 								backgroundOpacity="lightOpaque"
-							>cancel</LabeledIconButton> : null}
+							>{closeButtonLabel}</LabeledIconButton> : null}
 						</Scroller>
 					</Cell>
 				</Layout>
@@ -118,6 +121,8 @@ const PopupMenuDecorator = compose(
  *
  * @class PopupMenu
  * @memberof agate/PopupMenu
+ * @extends agate/PopupMenu.PopupMenuBase
+ * @mixes agate/PopupMenu.PopupMenuDecorator
  * @ui
  * @public
  */
