@@ -21,10 +21,12 @@
 			text-indent: 0.2em;
 			font-size: @agate-input-font-size;
 			font-weight: @agate-input-font-weight;
-
+			opacity: @agate-input-opacity;
 			border: none;
+			border-bottom: @agate-input-border-width solid @agate-input-border-color ;
 			background: transparent;
 			color: @agate-text-color;
+			text-align: @agate-input-text-align;
 
 			&::selection {
 				color: @agate-spotlight-color;
@@ -91,6 +93,19 @@
 			background-color: @agate-input-focused-background-color;
 			background-image: @agate-input-focused-background-image;
 			box-shadow: 0 0 0 @agate-input-decorator-focus-border-width @agate-input-decorator-focused-border-color;
+
+			.input {
+				caret-color: @agate-input-caret-color;
+				color: @agate-input-focused-text-color;
+				border-image-slice: 1;
+				border-image-source: @agate-input-active-border-image;
+				border-width: 0 0 @agate-input-border-width;
+				opacity: @agate-input-focused-opacity;
+
+				&::placeholder {
+					opacity: @agate-input-opacity;
+				}
+			}
 		}
 	});
 }
