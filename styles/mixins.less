@@ -22,6 +22,22 @@
 	padding-right: @agate-item-side-outset;
 }
 
+.active(@rules; @target) when (isruleset(@rules)) and (@target = parent) {
+	.spottable({
+		&:active {
+			@rules();
+		}
+	}, @target);
+}
+
+.active(@rules) when (isruleset(@rules)) {
+	.spottable({
+		&:active {
+			@rules();
+		}
+	});
+}
+
 .agate-body-text() {
 	a:link,
 	a:visited,

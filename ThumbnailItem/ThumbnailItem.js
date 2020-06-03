@@ -9,21 +9,21 @@
  * @exports ThumbnailItemBase
  */
 
-import {ItemBase, ItemDecorator} from '../Item';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {SlotItem} from '@enact/ui/SlotItem';
 
 import componentCss from './ThumbnailItem.module.less';
+import Item from '../Item';
+
 
 /**
  * A stateless, unfocusable item that can display a thumbnail.
  *
  * @class ThumbnailItemBase
  * @memberof agate/ThumbnailItem
- * @extends ui/SlotItem.SlotItem
- * @ui
+ * @extends agate/Item.Item
+ * @agate
  * @public
  */
 const ThumbnailItemBase = kind({
@@ -42,8 +42,7 @@ const ThumbnailItemBase = kind({
 
 	render: ({children, css, src, ...rest}) => {
 		return (
-			<SlotItem
-				component={ItemBase}
+			<Item
 				{...rest}
 			>
 				<slotBefore>
@@ -55,25 +54,13 @@ const ThumbnailItemBase = kind({
 				<div className={css.content}>
 					{children}
 				</div>
-			</SlotItem>
+			</Item>
 		);
 	}
 });
 
-/**
- * An item that can display a thumbnail with Agate behaviors applied.
- *
- * @class ThumbnailItem
- * @memberof agate/ThumbnailItem
- * @extends agate/ThumbnailItem.ThumbnailItemBase
- * @mixes agate/Item.ItemDecorator
- * @ui
- * @public
- */
-const ThumbnailItem = ItemDecorator(ThumbnailItemBase);
-
-export default ThumbnailItem;
+export default ThumbnailItemBase;
 export {
-	ThumbnailItem,
+	ThumbnailItemBase as ThumbnailItem,
 	ThumbnailItemBase
 };
