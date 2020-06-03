@@ -288,6 +288,7 @@
 				background-color: @agate-button-focus-bg-color;
 				background-image: @agate-button-focus-bg-image;
 				border-color: @agate-button-focus-border-color;
+				background-origin: @agate-button-focus-background-origin;
 			}
 
 			&,
@@ -306,7 +307,8 @@
 			.bg {
 				background-color: @agate-button-active-bg-color;
 				background-image: @agate-button-active-bg-image;
-				border: @agate-button-border-width solid @agate-button-border-color;;
+				border: @agate-button-border-width solid @agate-button-border-color;
+				opacity: @agate-button-active-opacity;
 			}
 
 			&,
@@ -320,5 +322,11 @@
 				}
 			}
 		});
+
+		.disabled({
+			.bg {
+				opacity: @agate-button-disabled-opacity;
+			}
+		})
 	});
 }
