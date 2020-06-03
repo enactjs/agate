@@ -61,30 +61,36 @@
 }
 
 .button {
+	display: inline-flex;
+
 	.applySkins({
 		.bg {
 			background-color: @agate-togglebutton-bg-color;
-			border: @agate-togglebutton-border-width solid @agate-togglebutton-border-color;
-			border-radius: @agate-togglebutton-border-radius;
-			height: @agate-togglebutton-height;
-			min-width: @agate-togglebutton-min-width;
 		}
 
 		.client {
 			color: @agate-togglebutton-color;
-			font-size: @agate-togglebutton-font-size;
-			font-weight: @agate-togglebutton-font-weight;
-			height: @agate-togglebutton-height;
-			line-height: @agate-togglebutton-line-height;
-			text-align: @agate-togglebutton-text-align;
+			min-width: @agate-togglebutton-text-min-width;
 		}
 
-		.icon {
-			color: @agate-togglebutton-icon-off-color;
-			font-size: @agate-togglebutton-icon-font-size;
-			height: @agate-togglebutton-icon-size;
-			line-height: @agate-togglebutton-icon-size;
-			width: @agate-togglebutton-icon-size;
+		.toggleIndicator {
+			color: @agate-togglebutton-indicator-off-color;
+			font-size: @agate-togglebutton-indicator-font-size;
+			margin-left: @agate-togglebutton-indicator-margin-left;
+			width: @agate-togglebutton-indicator-width;
+		}
+
+		&.minWidth {
+			&,
+			&.huge,
+			&.small,
+			&.smallest {
+				padding: 0 @agate-togglebutton-h-padding;
+
+				.client .icon {
+					margin: 0;
+				}
+			}
 		}
 
 		&.selected {
@@ -92,20 +98,12 @@
 				background-color: @agate-togglebutton-selected-bg-color;
 			}
 
-			.icon {
-				color: @agate-togglebutton-icon-on-color;
-				font-size: @agate-togglebutton-icon-font-size;
-				height: @agate-togglebutton-icon-size;
-				line-height: @agate-togglebutton-icon-size;
-				width: @agate-togglebutton-icon-size;
+			.toggleIndicator {
+				color: @agate-togglebutton-indicator-on-color;
 			}
 
 			.client {
-				color: @agate-togglebutton-selected-color;
-				font-size: @agate-togglebutton-font-size;
-				font-weight: @agate-togglebutton-font-weight;
-				line-height: @agate-togglebutton-line-height;
-				text-align: @agate-togglebutton-text-align;
+				color: @agate-togglebutton-selected-color;;
 			}
 		}
 	});

@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from '../Button';
+import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
 import css from './ToggleButton.module.less';
@@ -163,15 +164,12 @@ const ToggleButtonBase = kind({
 		delete props.toggleOffLabel;
 		delete props.toggleOnLabel;
 
-		if (!props.icon && props.skin === 'silicon') {
-			props.icon = 'circle';
-		}
-
 		return (
 			<Button
 				{...props}
 				aria-pressed={props.selected}
 				css={css}
+				decoration={props.skin === 'silicon' ? <Icon size={props.size} className={css.toggleIndicator}>circle</Icon> : null}
 			/>
 		);
 	}
