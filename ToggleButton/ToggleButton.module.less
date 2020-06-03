@@ -64,20 +64,20 @@
 	display: inline-flex;
 
 	.applySkins({
+		min-width: @agate-togglebutton-min-width;
+
 		.bg {
 			background-color: @agate-togglebutton-bg-color;
 		}
 
 		.client {
 			color: @agate-togglebutton-color;
-			min-width: @agate-togglebutton-text-min-width;
 		}
 
 		.toggleIndicator {
 			color: @agate-togglebutton-indicator-off-color;
 			font-size: @agate-togglebutton-indicator-font-size;
-			margin-left: @agate-togglebutton-indicator-margin-left;
-			width: @agate-togglebutton-indicator-width;
+			margin: @agate-togglebutton-indicator-margin;
 		}
 
 		&.minWidth {
