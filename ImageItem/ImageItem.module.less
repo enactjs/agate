@@ -2,6 +2,7 @@
 //
 
 @import '../styles/skin.less';
+@import '../styles/mixins.less';
 
 .imageItem {
   box-sizing: border-box;
@@ -24,6 +25,7 @@
         .image {
           width: 25%;
           height: 100%;
+          margin: auto 0; // leaving this to align image with caption when orientation="horizontal"
         }
       }
 
@@ -33,14 +35,10 @@
           height: 100%;
         }
       }
-  });
 
-  &:global(.spottable):focus,
-  :global(.spottable):focus & {
-    .applySkins({
-      border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
-      background-color: @agate-imageitem-focus-bg-color;
-      background-image: none;
-    });
-  }
+      .focus({
+        border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
+        background-color: @agate-imageitem-focus-bg-color;
+      })
+  });
 }
