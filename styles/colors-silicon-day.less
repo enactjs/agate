@@ -15,10 +15,7 @@
 // Silicon skin color palette
 @silicon-white: #ffffff;
 @silicon-black: #000000;
-@silicon-blue: #007aff;
-@silicon-brand: #ff2d55;
-@silicon-green: #4cd964;
-@silicon-red: #f24949;
+@silicon-accent: #ff2d55;
 @silicon-red-pink: #f1304f;
 @silicon-dark: #1b1f35;
 @silicon-vibrant-purple: #9e00d8;
@@ -36,7 +33,7 @@
 @silicon-gradient: linear-gradient(to right, @silicon-vibrant-purple, @silicon-magenta, @silicon-red-pink);
 
 // Abstracted Colors
-@agate-accent: var(--agate-accent-color, @silicon-brand);
+@agate-accent: var(--agate-accent-color, @silicon-accent);
 @agate-accent-h: var(--agate-accent-h, 350);
 @agate-accent-s: var(--agate-accent-s, 78%);
 @agate-accent-l: var(--agate-accent-l, 57%);
@@ -303,7 +300,7 @@
 // Toggle Colors
 // ---------------------------------------
 @agate-togglebutton-indicator-off-color: @silicon-dark-gray;
-@agate-togglebutton-indicator-on-color: @silicon-brand;
+@agate-togglebutton-indicator-on-color: @silicon-accent;
 @agate-togglebutton-indicator-off-bg-color: transparent;
 @agate-togglebutton-indicator-on-bg-color: transparent;
 @agate-togglebutton-indicator-off-border-color: transparent;
