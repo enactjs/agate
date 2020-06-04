@@ -471,8 +471,12 @@
 
 // ToggleButton
 // ---------------------------------------
-@agate-togglebutton-min-width: inherit;
-@agate-togglebutton-h-padding: @agate-button-h-padding;
+@agate-togglebutton-client-display: flex;
+@agate-togglebutton-min-width: @agate-button-height;
+@agate-togglebutton-padding: 0 @agate-button-h-padding;
+@agate-togglebutton-huge-padding: 0 @agate-button-huge-h-padding;
+@agate-togglebutton-small-padding: 0 @agate-button-small-h-padding;
+@agate-togglebutton-smallest-padding: 0 @agate-button-smallest-h-padding;
 @agate-togglebutton-indicator-font-size: (@agate-togglebutton-indicator-size * 2);
 @agate-togglebutton-indicator-size: @agate-icon-size;
 @agate-togglebutton-indicator-margin: inherit;
@@ -481,3 +485,4 @@
 @agate-togglebutton-indicator-border-radius: @agate-button-border-radius;
 @agate-togglebutton-indicator-height: 6px;
 @agate-togglebutton-indicator-transform: none;
+@agate-togglebutton-indicator-vertical-align: inherit;

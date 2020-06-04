@@ -61,10 +61,11 @@
 }
 
 .button {
-	display: inline-flex;
+	// display: inline-flex;
 
 	.applySkins({
 		min-width: @agate-togglebutton-min-width;
+		padding: @agate-togglebutton-padding;
 
 		.bg {
 			background-color: @agate-togglebutton-bg-color;
@@ -72,21 +73,25 @@
 
 		.client {
 			color: @agate-togglebutton-color;
+			display: @agate-togglebutton-client-display;
 		}
 
 		.toggleIndicator {
 			color: @agate-togglebutton-indicator-off-color;
 			font-size: @agate-togglebutton-indicator-font-size;
-			margin: @agate-togglebutton-indicator-margin;
+			vertical-align: @agate-togglebutton-indicator-vertical-align;
 		}
 
-		&.minWidth {
-			&,
-			&.huge,
-			&.small,
-			&.smallest {
-				padding: 0 @agate-togglebutton-h-padding;
-			}
+		&.huge {
+			padding: @agate-togglebutton-huge-padding;
+		}
+
+		&.small {
+			padding: @agate-togglebutton-small-padding;
+		}
+
+		&.smallest {
+			padding: @agate-togglebutton-smallest-padding;
 		}
 
 		&.selected {
