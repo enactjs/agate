@@ -78,7 +78,7 @@ const useThemeScroll = (props, instances) => {
 		onScrollbarButtonClick,
 		scrollAndFocusScrollbarButton,
 		scrollbarProps
-	} = useScrollbar(props, instances, {isContent});
+	} = useScrollbar(props, instances);
 
 	useSpotlightConfig(props);
 
@@ -300,7 +300,6 @@ const useScroll = (props) => {
 		isDragging: null,
 		isFlicked: null,
 		isScrollAnimationTargetAccumulated: null,
-		isUpdatedScrollScrollbarTrack: null,
 		lastInputType: null,
 		rtl: null,
 		scrollBounds: null,
