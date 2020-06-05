@@ -63,7 +63,6 @@
 .button {
 	.applySkins({
 		min-width: @agate-togglebutton-min-width;
-		padding: @agate-togglebutton-padding;
 
 		.bg {
 			background-color: @agate-togglebutton-bg-color;
@@ -71,25 +70,17 @@
 
 		.client {
 			color: @agate-togglebutton-color;
-			display: @agate-togglebutton-client-display;
+			padding-left: @agate-togglebutton-client-padding-left;
 		}
 
 		.toggleIndicator {
-			color: @agate-togglebutton-indicator-off-color;
-			font-size: @agate-togglebutton-indicator-font-size;
-			vertical-align: @agate-togglebutton-indicator-vertical-align;
-		}
-
-		&.huge {
-			padding: @agate-togglebutton-huge-padding;
-		}
-
-		&.small {
-			padding: @agate-togglebutton-small-padding;
-		}
-
-		&.smallest {
-			padding: @agate-togglebutton-smallest-padding;
+			color: @agate-togglebutton-toggleIndicator-off-color;
+			font-size: @agate-togglebutton-toggleIndicator-font-size;
+			position: @agate-togglebutton-toggleIndicator-position;
+			left: @agate-togglebutton-toogleIndicator-left;
+			height: @agate-togglebutton-toggleIndicator-height;
+			width: @agate-togglebutton-toggleIndicator-height;
+			line-height: @agate-togglebutton-toggleIndicator-height;
 		}
 
 		&.selected {
@@ -103,6 +94,48 @@
 
 			.client {
 				color: @agate-togglebutton-selected-color;
+			}
+		}
+
+		&.huge {
+			min-width: @agate-togglebutton-huge-min-width;
+
+			.client {
+				padding-left: @agate-togglebutton-huge-client-padding-left;
+			}
+
+			.toggleIndicator {
+				height: @agate-togglebutton-huge-toggleIndicator-height;
+				width: @agate-togglebutton-huge-toggleIndicator-width;
+				line-height: @agate-togglebutton-huge-toggleIndicator-height;
+			}
+		}
+
+		&.small {
+			min-width: @agate-togglebutton-small-min-width;
+
+			.client {
+				padding-left: @agate-togglebutton-small-client-padding-left;
+			}
+
+			.toggleIndicator {
+				height: @agate-togglebutton-small-toggleIndicator-height;
+				width: @agate-togglebutton-small-toggleIndicator-height;
+				line-height: @agate-togglebutton-small-toggleIndicator-height;
+			}
+		}
+
+		&.smallest {
+			min-width: @agate-togglebutton-smallest-min-width;
+
+			.client {
+				padding-left: @agate-togglebutton-smallest-client-padding-left;
+			}
+
+			.toggleIndicator {
+				height: @agate-togglebutton-smallest-toggleIndicator-height;
+				width: @agate-togglebutton-smallest-toggleIndicator-height;
+				line-height: @agate-togglebutton-smallest-toggleIndicator-height;
 			}
 		}
 	});
