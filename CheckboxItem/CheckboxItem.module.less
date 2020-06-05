@@ -24,12 +24,7 @@
 			-webkit-margin-end: @agate-checkboxitem-icon-margin;
 		}
 
-		&:hover {
-			background-color: @agate-checkboxitem-hover-bg-color;
-			color: @agate-checkboxitem-focus-text-color;
-		}
-
-		.focus({
+		.active({
 			border-color: @agate-checkboxitem-focus-border-color;
 			border-bottom-color: @agate-checkboxitem-focus-border-bottom-color;
 			color: @agate-checkboxitem-focus-text-color;
@@ -42,6 +37,12 @@
 					padding-right: @agate-checkboxitem-focus-before-padding-right;
 				}
 			}
+		});
+
+		.focus({
+			background-color: @agate-checkboxitem-hover-bg-color;
+			color: @agate-checkboxitem-focus-text-color;
+			border-color: @agate-checkboxitem-focus-border-color;
 		});
 	});
 }
