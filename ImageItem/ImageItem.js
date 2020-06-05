@@ -107,7 +107,7 @@ const ImageItemBase = kind({
  *
  * @hoc
  * @memberof agate/ImageItem
- * @mixes moonstone/Marquee.MarqueeController
+ * @mixes ui/Marquee.MarqueeController
  * @mixes agate/Skinnable.Skinnable
  * @mixes spotlight/Spottable.Spottable
  * @public
