@@ -24,25 +24,27 @@
 			-webkit-margin-end: @agate-checkboxitem-icon-margin;
 		}
 
+		.focus({
+			background-color: @agate-checkboxitem-focus-bg-color;
+			color: @agate-checkboxitem-focus-text-color;
+			border-color: @agate-checkboxitem-focus-border-color;
+			border-bottom-color: @agate-checkboxitem-border-bottom-color;
+		});
+
 		.active({
+			background-color: @agate-checkboxitem-selected-bg-color;
 			border-color: @agate-checkboxitem-focus-border-color;
 			border-bottom-color: @agate-checkboxitem-focus-border-bottom-color;
 			color: @agate-checkboxitem-focus-text-color;
 
 			.slotBefore {
 				&::before {
-					content: @agate-checkboxitem-focus-before-content;
-					color: @agate-checkboxitem-focus-before-color;
-					line-height: @agate-checkboxitem-focus-before-line-height;
-					padding-right: @agate-checkboxitem-focus-before-padding-right;
+					content: @agate-checkboxitem-selected-before-content;
+					color: @agate-checkboxitem-selected-before-color;
+					line-height: @agate-checkboxitem-selected-before-line-height;
+					padding-right: @agate-checkboxitem-selected-before-padding-right;
 				}
 			}
-		});
-
-		.focus({
-			background-color: @agate-checkboxitem-hover-bg-color;
-			color: @agate-checkboxitem-focus-text-color;
-			border-color: @agate-checkboxitem-focus-border-color;
 		});
 	});
 }
