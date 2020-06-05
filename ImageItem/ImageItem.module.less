@@ -5,14 +5,7 @@
 @import '../styles/mixins.less';
 
 .imageItem {
-  box-sizing: border-box;
-
     .applySkins({
-      .image {
-        display: block; // leaving this to prevent whitespace between inline-block elements
-        margin: 0;
-      }
-
       .caption {
         /* Public Class Names */
         font-weight: @agate-imageitem-caption-weight;
@@ -23,16 +16,7 @@
 
       &.horizontal {
         .image {
-          width: 25%;
-          height: 100%;
           margin: auto 0; // leaving this to align image with caption when orientation="horizontal"
-        }
-      }
-
-      &.vertical {
-        .image {
-          width: 100%;
-          height: 100%;
         }
       }
 
