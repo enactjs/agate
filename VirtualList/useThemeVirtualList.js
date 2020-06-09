@@ -147,6 +147,7 @@ const useSpottable = (props, instances) => {
 				focusByIndex(nextIndex);
 			} else {
 				const itemNode = getItemNode(nextIndex);
+				const stickTo = Math.abs(endBoundary - end) < Math.abs(startBoundary - start) ? 'end' : 'start';
 
 				mutableRef.current.isScrolledBy5way = true;
 				mutableRef.current.isWrappedBy5way = isWrapped;
@@ -166,7 +167,7 @@ const useSpottable = (props, instances) => {
 
 				cbScrollTo({
 					index: nextIndex,
-					stickTo: index < nextIndex ? 'end' : 'start',
+					stickTo,
 					animate: !(isWrapped && wrap === 'noAnimation')
 				});
 			}
@@ -188,6 +189,9 @@ const useSpottable = (props, instances) => {
 			// Item is valid but since the the dom doesn't exist yet, we set the index to focus after the ongoing update
 			setPreservedIndex(index);
 		} else {
+			// Remove any preservedIndex
+			setPreservedIndex(-1);
+
 			if (mutableRef.current.isWrappedBy5way) {
 				SpotlightAccelerator.reset();
 				mutableRef.current.isWrappedBy5way = false;
@@ -272,6 +276,10 @@ const useSpottable = (props, instances) => {
 		return scrollContentHandle.current.getScrollBounds();
 	}
 
+	function getScrollPositionTarget () {
+		return scrollContentHandle.current.scrollPositionTarget;
+	}
+
 	// Return
 
 	return {
@@ -280,6 +288,7 @@ const useSpottable = (props, instances) => {
 		focusOnNode,
 		getNodeIndexToBeFocused,
 		getScrollBounds,
+		getScrollPositionTarget,
 		handlePlaceholderFocus,
 		handleRestoreLastFocus,
 		initItemRef,
@@ -303,6 +312,7 @@ const useThemeVirtualList = (props) => {
 		focusOnNode,
 		getNodeIndexToBeFocused,
 		getScrollBounds,
+		getScrollPositionTarget,
 		handlePlaceholderFocus,
 		handleRestoreLastFocus,
 		initItemRef,
@@ -319,6 +329,7 @@ const useThemeVirtualList = (props) => {
 		focusByIndex,
 		focusOnNode,
 		getScrollBounds,
+		getScrollPositionTarget,
 		setContainerDisabled,
 		setLastFocusedNode,
 		shouldPreventScrollByFocus
@@ -337,10 +348,7 @@ const useThemeVirtualList = (props) => {
 
 	const {itemRenderer, ...rest} = props;
 
-	// not used by VirtualList
 	delete rest.scrollContainerContainsDangerously;
-	// not used by VirtualList
-	delete rest.focusableScrollbar;
 	delete rest.scrollAndFocusScrollbarButton;
 	delete rest.scrollContainerRef;
 	delete rest.scrollContentHandle;
