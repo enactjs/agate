@@ -348,6 +348,7 @@ const useThemeVirtualList = (props) => {
 
 	const {itemRenderer, ...rest} = props;
 
+	delete rest.focusableScrollbar;
 	delete rest.scrollContainerContainsDangerously;
 	delete rest.scrollAndFocusScrollbarButton;
 	delete rest.scrollContainerRef;
