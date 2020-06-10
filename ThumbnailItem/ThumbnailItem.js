@@ -30,8 +30,11 @@ const ThumbnailItemBase = kind({
 	name: 'ThumbnailItem',
 
 	propTypes: /** @lends agate/ThumbnailItem.ThumbnailItemBase.prototype */ {
+		content: PropTypes.string,
 		css: PropTypes.object,
-		src: PropTypes.string
+		src: PropTypes.string,
+		subComponents: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
+		subcontent: PropTypes.string
 	},
 
 	styles: {
@@ -40,7 +43,18 @@ const ThumbnailItemBase = kind({
 		publicClassNames: true
 	},
 
-	render: ({children, css, src, ...rest}) => {
+	computed: {
+		subComponents: ({content, subcontent, css, subComponents}) => {
+			return (
+				subComponents ? subComponents : <React.Fragment>
+					{content ? (<div className={css.content}>{content}</div>) : null}
+					{subcontent ? (<div className={css.subContent}>{subcontent}</div>) : null}
+				</React.Fragment>
+			);
+		}
+	},
+
+	render: ({css, src, subComponents, ...rest}) => {
 		return (
 			<Item
 				{...rest}
@@ -51,9 +65,7 @@ const ThumbnailItemBase = kind({
 						src={src}
 					/>
 				</slotBefore>
-				<div className={css.content}>
-					{children}
-				</div>
+				{subComponents}
 			</Item>
 		);
 	}
