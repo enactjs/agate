@@ -1,6 +1,8 @@
-import React from 'react';
 import {mount} from 'enzyme';
+import React from 'react';
+
 import {ImageItem} from '../ImageItem';
+
 import css from '../ImageItem.module.less';
 
 describe('ImageItem', () => {
@@ -10,6 +12,7 @@ describe('ImageItem', () => {
 		const subject = mount(
 			<ImageItem>{children}</ImageItem>
 		);
+
 		const expected = children;
 		const actual = subject.text();
 

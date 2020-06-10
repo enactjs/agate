@@ -5,24 +5,22 @@
 @import '../styles/mixins.less';
 
 .imageItem {
-    .applySkins({
-      .caption {
-        /* Public Class Names */
-        font-weight: @agate-imageitem-caption-weight;
-        height: @agate-imageitem-caption-height;
-        line-height: @agate-imageitem-caption-height;
-        text-align: center;
-      }
+  	.applySkins({
+		.caption {
+	  		height: @agate-imageitem-caption-height;
+	  		line-height: @agate-imageitem-caption-height;
+	  		text-align: center;
+		}
 
-      &.horizontal {
-        .image {
-          margin: auto 0; // leaving this to align image with caption when orientation="horizontal"
-        }
-      }
+		&.horizontal {
+	  		.image {
+				margin: auto 0; // leaving this to align image with caption when orientation="horizontal"
+	  		}
+		}
 
-      .focus({
-        border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
-        background-color: @agate-imageitem-focus-bg-color;
-      })
-  });
+		.focus({
+	  		border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
+	  		background-color: @agate-imageitem-focus-bg-color;
+		})
+  	});
 }

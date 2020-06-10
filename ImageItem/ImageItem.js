@@ -9,11 +9,11 @@
 
 import kind from '@enact/core/kind';
 import {ImageItem as UiImageItem} from '@enact/ui/ImageItem';
-import PropTypes from 'prop-types';
-import compose from 'ramda/src/compose';
-import React from 'react';
-import Spottable from '@enact/spotlight/Spottable';
 import {MarqueeDecorator, MarqueeController} from '@enact/ui/Marquee';
+import Spottable from '@enact/spotlight/Spottable';
+import compose from 'ramda/src/compose';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import ImageBase from '../Image';
 import Skinnable from '../Skinnable';
@@ -22,10 +22,17 @@ import componentCss from './ImageItem.module.less';
 
 const MarqueeImageItem = MarqueeDecorator(UiImageItem);
 
+/**
+ * @class ImageItemBase
+ * @extends ui/ImageItem.ImageItem
+ * @memberof agate/ImageItem
+ * @ui
+ * @public
+ */
 const ImageItemBase = kind({
 	name: 'ImageItem',
 
-	propTypes: /** @lends agate/ImageItem.ImageItem.prototype */ {
+	propTypes: /** @lends agate/ImageItem.ImageItemBase.prototype */ {
 		/**
 		 * The caption displayed with the image.
 		 *
@@ -42,9 +49,9 @@ const ImageItemBase = kind({
 		 *
 		 * * `imageItem` - The root component class
 		 * * `caption` - The caption component class
-		 * * `horizontal` - Applied when `orientation="horizontal"
+		 * * `horizontal` - Applied when `orientation="horizontal"`
 		 * * `image` - The image component class
-		 * * `vertical` - Applied when `orientation="vertical"
+		 * * `vertical` - Applied when `orientation="vertical"`
 		 *
 		 * @type {Object}
 		 * @public
@@ -79,25 +86,21 @@ const ImageItemBase = kind({
 		className: 'imageItem'
 	},
 
-	render: ({css, children, src, ...rest}) => {
+	render: ({children, css, src, ...rest}) => {
+
+		const [Component, marqueeProps] = children ? [MarqueeImageItem, {
+			alignment: 'center',
+			children
+		}] : [UiImageItem, null];
 
 		return (
-			children ?
-				<MarqueeImageItem
-					{...rest}
-					css={css}
-					alignment="center"
-					imageComponent={ImageBase}
-					src={src}
-				>
-					{children}
-				</MarqueeImageItem> :
-				<UiImageItem
-					{...rest}
-					css={css}
-					imageComponent={ImageBase}
-					src={src}
-				/>
+			<Component
+				{...rest}
+				{...marqueeProps}
+				css={css}
+				imageComponent={ImageBase}
+				src={src}
+			/>
 		);
 	}
 });
@@ -123,7 +126,6 @@ const ImageItemDecorator = compose(
  * @memberof agate/ImageItem
  * @extends agate/ImageItem.ImageItemBase
  * @mixes agate/ImageItem.ImageItemDecorator
- * @ui
  * @public
  */
 const ImageItem = ImageItemDecorator(ImageItemBase);
