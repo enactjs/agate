@@ -16,7 +16,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from '../Button';
-import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
 import css from './ToggleButton.module.less';
@@ -80,14 +79,6 @@ const ToggleButtonBase = kind({
 		 * @public
 		 */
 		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
-
-		/**
-		 * The current skin.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		skin: PropTypes.string,
 
 		/**
 		 * Button text displayed in the 'off' state.
@@ -194,7 +185,6 @@ const ToggleButton = Pure(
 	Toggleable(
 		{prop: 'selected', toggleProp: 'onTap'},
 		Skinnable(
-			{prop: 'skin'},
 			ToggleButtonBase
 		)
 	)
