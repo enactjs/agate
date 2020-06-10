@@ -169,7 +169,6 @@ const ToggleButtonBase = kind({
 				{...props}
 				aria-pressed={props.selected}
 				css={css}
-				decoration={props.skin === 'silicon' ? <Icon size={props.size} className={css.toggleIndicator}>circle</Icon> : null}
 			/>
 		);
 	}

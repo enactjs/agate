@@ -9,6 +9,7 @@
 			.position(@agate-togglebutton-indicator-position);
 			position: absolute;
 			height: @agate-togglebutton-indicator-height;
+			width: @agate-togglebutton-indicator-width;
 			background-color: @agate-togglebutton-indicator-off-bg-color;
 			border-color: @agate-togglebutton-indicator-off-border-color;
 			border-width: @agate-togglebutton-indicator-border-width;
@@ -73,23 +74,9 @@
 			padding-left: @agate-togglebutton-client-padding-left;
 		}
 
-		.toggleIndicator {
-			color: @agate-togglebutton-toggleIndicator-off-color;
-			font-size: @agate-togglebutton-toggleIndicator-font-size;
-			position: @agate-togglebutton-toggleIndicator-position;
-			left: @agate-togglebutton-toogleIndicator-left;
-			height: @agate-togglebutton-toggleIndicator-height;
-			width: @agate-togglebutton-toggleIndicator-height;
-			line-height: @agate-togglebutton-toggleIndicator-height;
-		}
-
 		&.selected {
 			.bg {
 				background-color: @agate-togglebutton-selected-bg-color;
-			}
-
-			.toggleIndicator {
-				color: @agate-togglebutton-toggleIndicator-on-color;
 			}
 
 			.client {
@@ -104,10 +91,8 @@
 				padding-left: @agate-togglebutton-huge-client-padding-left;
 			}
 
-			.toggleIndicator {
-				height: @agate-togglebutton-huge-toggleIndicator-height;
-				width: @agate-togglebutton-huge-toggleIndicator-width;
-				line-height: @agate-togglebutton-huge-toggleIndicator-height;
+			&::after {
+				.position(@agate-togglebutton-huge-indicator-position);
 			}
 		}
 
@@ -118,10 +103,8 @@
 				padding-left: @agate-togglebutton-small-client-padding-left;
 			}
 
-			.toggleIndicator {
-				height: @agate-togglebutton-small-toggleIndicator-height;
-				width: @agate-togglebutton-small-toggleIndicator-height;
-				line-height: @agate-togglebutton-small-toggleIndicator-height;
+			&::after {
+				.position(@agate-togglebutton-small-indicator-position);
 			}
 		}
 
@@ -132,10 +115,8 @@
 				padding-left: @agate-togglebutton-smallest-client-padding-left;
 			}
 
-			.toggleIndicator {
-				height: @agate-togglebutton-smallest-toggleIndicator-height;
-				width: @agate-togglebutton-smallest-toggleIndicator-height;
-				line-height: @agate-togglebutton-smallest-toggleIndicator-height;
+			&::after {
+				.position(@agate-togglebutton-smallest-indicator-position);
 			}
 		}
 	});
