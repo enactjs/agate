@@ -23,6 +23,8 @@ import componentCss from './ImageItem.module.less';
 const MarqueeImageItem = MarqueeDecorator(UiImageItem);
 
 /**
+ * An Agate styled ImageItem.
+ *
  * @class ImageItemBase
  * @extends ui/ImageItem.ImageItem
  * @memberof agate/ImageItem
@@ -122,6 +124,8 @@ const ImageItemDecorator = compose(
 );
 
 /**
+ * An Agate styled ImageItem with built-in support for marqueed text, and Spotlight focus.
+ *
  * @class ImageItem
  * @memberof agate/ImageItem
  * @extends agate/ImageItem.ImageItemBase
