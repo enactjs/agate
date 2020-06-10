@@ -3,7 +3,6 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Heading from '@enact/agate/Heading';
-
 import ImageItem from '@enact/agate/ImageItem';
 
 ImageItem.displayName = 'ImageItem';
