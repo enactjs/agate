@@ -7,12 +7,16 @@
 // as these are overrides to the "base" layer of colors.
 //
 
+// Abstracted Colors
+@agate-background: @agate-black;
+@agate-foreground: @agate-white;
+@agate-background-active: fade(@agate-white, 15%);
+@agate-foreground-active: @agate-black;
+@agate-foreground-focus: @agate-black;
+
 // Component color assignments
-@agate-bg-color: black;
 @agate-bg-image: none;
 @agate-bg-image2: none;
-@agate-text-color: @agate-background;
-@agate-title-text-color: @agate-background;
 
 // Disabled Opacity
 // ---------------------------------------
@@ -29,28 +33,25 @@
 
 // Button
 // ---------------------------------------
-@agate-button-color:          @agate-foreground;
-@agate-button-bg-color:       @agate-dark-gray;
+@agate-button-color:          @agate-black;
+@agate-button-bg-color:       @silicon-gray;
 @agate-button-bg-image:       none;
 @agate-button-border-color:   transparent;
 @agate-button-shadow:         none;
-@agate-button-focus-color:    @agate-spotlight-color;
-@agate-button-focus-bg-color: @agate-background-focus;
-@agate-button-focus-bg-image: @agate-button-bg-image;
-@agate-button-highlighted-color: @agate-white;
+@agate-button-active-color:   @agate-button-color;
+@agate-button-active-bg-color: @silicon-gray;
+@agate-button-active-bg-color: @silicon-light-gray;
+@agate-button-focus-border-color: transparent;
+@agate-button-focus-color:    @agate-white;
+@agate-button-focus-bg-color: transparent;
+@agate-button-focus-bg-image: @silicon-gradient;
+@agate-button-highlighted-color: @agate-black;
 @agate-button-highlighted-bg-color: @agate-highlight;
 @agate-button-highlighted-bg-image: @agate-button-bg-image;
 @agate-button-selected-color: @agate-button-color;
 @agate-button-selected-bg-color: @agate-button-bg-color;
 @agate-button-selected-border-color: @agate-accent;
-@agate-button-lightOpaque-color: @agate-black;
-@agate-button-lightOpaque-bg-color: @agate-light-gray;
 @agate-button-badge-bg-color: @agate-accent;
-
-// Checkbox
-// ---------------------------------------
-@agate-checkbox-text-color: @agate-white;
-@agate-checkbox-bg-color: @agate-accent;
 
 // CheckboxItem
 // ---------------------------------------
@@ -87,17 +88,19 @@
 @agate-heading-text-color: @agate-text-color;
 @agate-heading-accent-color: @agate-accent;
 
+
 // Icon
 // ---------------------------------------
 @agate-icon-color:       @agate-text-color;
 
 // Input
 // ---------------------------------------
+@agate-input-border-color:                    @agate-foreground;
 @agate-input-decorator-border-color:          fade(@agate-foreground, 30%);
 @agate-input-focused-background-image:        none;
-@agate-input-focused-text-color:              @agate-foreground-active;
-@agate-input-placeholder-color:               fade(@agate-foreground, 80%);
-@agate-input-text-color:                      @agate-foreground;
+@agate-input-focused-text-color:              @agate-foreground;
+@agate-input-placeholder-color:               @agate-foreground;
+@agate-input-text-color:                      @agate-text-color;
 
 // Item
 // ---------------------------------------
@@ -143,18 +146,6 @@
 @agate-picker-item-focus-bg-color: @agate-accent;
 @agate-picker-item-focus-bg-image: inherit;
 
-// Popup
-// ---------------------------------------
-@agate-popup-plain-body-color: @agate-accent;
-@agate-popup-bg-color: fade(black, 85%);
-@agate-popup-bg-image: none;
-@agate-popup-border-color: @agate-accent;
-@agate-popup-shadow: none;
-@agate-popup-body-border: none;
-@agate-popup-body-border-color: @agate-highlight transparent;
-@agate-popup-body-bg-color: ~"hsla(var(--agate-highlight-h, 0), var(--agate-highlight-s, 0), var(--agate-highlight-l, 0), 0.4)";
-@agate-popup-body-bg-image: none;
-
 // PopupMenu
 // ---------------------------------------
 @agate-popupmenu-bg-color: fade(black, 70%); // The design doc says 80% opacity in two places, but those are actually combined so 80% of 80%... ~71.25%.
@@ -171,12 +162,12 @@
 // RadioItem
 // ---------------------------------------
 @agate-radioitem-focus-color: @agate-item-color;
-@agate-radioitem-icon-border-color: @agate-highlight;
+@agate-radioitem-icon-border-color: @agate-white;
 @agate-radioitem-icon-bg-color: transparent;
 @agate-radioitem-icon-focus-bg-color: @agate-radioitem-icon-bg-color;
 @agate-radioitem-icon-focus-color: @agate-highlight;
 @agate-radioitem-icon-selected-bg-color: @agate-radioitem-icon-bg-color;
-@agate-radioitem-icon-selected-color: @agate-accent;
+@agate-radioitem-icon-selected-color: @agate-white;
 
 // Slider
 // ---------------------------------------
@@ -268,4 +259,4 @@
 
 // Scroller
 // ---------------------------------------
-@agate-scroller-scrollbar-thumb-bg-color: #373737;
+@agate-scroller-scrollbar-thumb-bg-color: @agate-white;
