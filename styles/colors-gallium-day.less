@@ -22,6 +22,7 @@
 @agate-darker-gray: #373737;
 @agate-dark-gray:   #5e5e5e;
 @agate-gray:        #8a8a8a;
+@agate-medium-gray: #c9c9c9;
 @agate-light-gray:  #ededed;
 @agate-white:       #fff;
 
@@ -115,7 +116,7 @@
 // ---------------------------------------
 @agate-input-decorator-border-color:          @agate-background-active;
 @agate-input-focused-background-image:        none;
-@agate-input-focused-text-color:              @agate-foreground-active;
+@agate-input-focused-text-color:              @agate-foreground;
 @agate-input-placeholder-color:               fade(@agate-foreground, 80%);
 @agate-input-text-color:                      @agate-foreground;
 
@@ -163,14 +164,14 @@
 
 // Popup
 // ---------------------------------------
-@agate-popup-plain-body-color: @agate-accent;
-@agate-popup-bg-color: fade(black, 85%);
+@agate-popup-plain-body-color: @agate-black;
+@agate-popup-bg-color: @agate-light-gray;
 @agate-popup-bg-image: none;
-@agate-popup-border-color: @agate-accent;
+@agate-popup-border-color: @agate-medium-gray;
 @agate-popup-shadow: none;
 @agate-popup-body-border: none;
 @agate-popup-body-border-color: @agate-highlight transparent;
-@agate-popup-body-bg-color: ~"hsla(var(--agate-highlight-h, 0), var(--agate-highlight-s, 0), var(--agate-highlight-l, 0), 0.4)";
+@agate-popup-body-bg-color: @agate-light-gray;
 @agate-popup-body-bg-image: none;
 
 // PopupMenu
