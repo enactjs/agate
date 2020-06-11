@@ -1,0 +1,84 @@
+// ContextualPopup.module.less
+//
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+@import '../styles/skin.less';
+
+.contextualPopup {
+  .container {
+    position: absolute;
+    border-style: solid;
+
+    .closeButton {
+      position: absolute;
+      margin: 0;
+    }
+  }
+
+  :global(.enact-locale-right-to-left) & {
+    .container {
+      direction: rtl;
+
+      .closeButton {
+        right: auto;
+      }
+    }
+  }
+
+  .arrow {
+    position: absolute;
+    will-change: transform;
+
+    &.up {
+      transform: rotate(180deg);
+    }
+    &.left {
+      transform: rotate(90deg);
+    }
+    &.right {
+      transform: rotate(-90deg);
+    }
+  }
+
+  // Skin colors
+  .applySkins({
+
+    .container {
+      background-color: @agate-contextual-popup-bg-color;
+      border-color: @agate-contextual-popup-border-color;
+      color: @agate-contextual-popup-color;
+      border-width: @agate-contextual-popup-border-width;
+      border-radius: @agate-contextual-popup-border-radius;
+      font-size: @agate-contextual-popup-font-size;
+      padding: @agate-contextual-popup-padding;
+
+      .closeButton {
+        right: @agate-spotlight-outset;
+        top: @agate-spotlight-outset;
+      }
+
+      &.reserveClose {
+        .padding-start-end(@agate-contextual-popup-padding-horizontal, @agate-button-small-height * 1.5);
+      }
+    }
+
+    :global(.enact-locale-right-to-left) & {
+      .closeButton {
+        left: @agate-spotlight-outset;
+      }
+    }
+
+    .arrow {
+      height: @agate-contextual-popup-arrow-height;
+      width: @agate-contextual-popup-arrow-width;
+
+      .arrowBorder {
+        fill: @agate-contextual-popup-border-color;
+      }
+
+      .arrowFill {
+        fill: @agate-contextual-popup-bg-color;
+      }
+    }
+  });
+}

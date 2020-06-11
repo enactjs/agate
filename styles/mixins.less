@@ -47,3 +47,24 @@
 		text-decoration: none;
 	}
 }
+
+// Applies RTL-compatible start and end padding to a selector
+.padding-start-end(@start; @end; @target) when (@target = parent) {
+	padding-left: @start;
+	padding-right: @end;
+
+	:global(.enact-locale-right-to-left)& {
+		padding-left: @end;
+		padding-right: @start;
+	}
+}
+
+.padding-start-end (@start, @end) {
+	padding-left: @start;
+	padding-right: @end;
+
+	:global(.enact-locale-right-to-left) & {
+		padding-left: @end;
+		padding-right: @start;
+	}
+}
