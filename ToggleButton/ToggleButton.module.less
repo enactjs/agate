@@ -86,26 +86,14 @@
 
 		&.huge {
 			min-width: @agate-togglebutton-huge-min-width;
-
-			&::after {
-				.position(@agate-togglebutton-huge-indicator-position);
-			}
 		}
 
 		&.small {
 			min-width: @agate-togglebutton-small-min-width;
-
-			&::after {
-				.position(@agate-togglebutton-small-indicator-position);
-			}
 		}
 
 		&.smallest {
 			min-width: @agate-togglebutton-smallest-min-width;
-
-			&::after {
-				.position(@agate-togglebutton-smallest-indicator-position);
-			}
 		}
 
 		&.minWidth {
@@ -113,7 +101,7 @@
 			&.huge,
 			&.small,
 			&.smallest {
-				padding: 0 @agate-button-h-padding;
+				padding: @agate-togglebutton-padding;
 			}
 		}
 	});
