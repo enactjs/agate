@@ -96,8 +96,10 @@
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-text-color: @agate-white;
-@agate-checkbox-bg-color: @agate-accent;
+@agate-checkbox-text-color: @agate-foreground;
+@agate-checkbox-bg-color: transparent;
+@agate-checkbox-border-color: fade(@agate-foreground, 50%);
+@agate-checkbox-selected-border-color: @agate-foreground;
 
 // CheckboxItem
 // ---------------------------------------
