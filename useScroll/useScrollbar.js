@@ -1,14 +1,12 @@
-import Spotlight from '@enact/spotlight';
 import {constants} from '@enact/ui/useScroll';
 
 const {paginationPageMultiplier} = constants;
 
-const useScrollbar = (props, instances, context) => {
+const useScrollbar = (props, instances) => {
 	const {horizontalScrollbarHandle, scrollContainerHandle, verticalScrollbarHandle} = instances;
-	const {isContent} = context;
 
 	const scrollbarProps = {
-		cbAlertScrollbarTrack: alertScrollbarTrackAfterRendered,
+		cbAlertScrollbarTrack: alertScrollbarTrack,
 		onNextScroll: onScrollbarButtonClick,
 		onPrevScroll: onScrollbarButtonClick
 	};
@@ -76,14 +74,6 @@ const useScrollbar = (props, instances, context) => {
 
 		scrollContainerHandle.current.showScrollbarTrack(bounds);
 		scrollContainerHandle.current.startHidingScrollbarTrack();
-	}
-
-	function alertScrollbarTrackAfterRendered () {
-		const spotItem = Spotlight.getCurrent();
-
-		if (!Spotlight.getPointerMode() && isContent(spotItem) && scrollContainerHandle.current.isUpdatedScrollScrollbarTrack) {
-			alertScrollbarTrack();
-		}
 	}
 
 	// Return
