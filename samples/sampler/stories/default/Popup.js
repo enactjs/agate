@@ -14,6 +14,7 @@ storiesOf('Agate', module)
 		() => (
 			<div>
 				<Popup
+					centered={boolean('centered', Config)}
 					closeButton={boolean('closeButton', Config)}
 					noAnimation={boolean('noAnimation', Config)}
 					noAutoDismiss={boolean('noAutoDismiss', Config)}

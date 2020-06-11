@@ -65,11 +65,6 @@
 @agate-button-lightOpaque-bg-color: @agate-light-gray;
 @agate-button-badge-bg-color: @agate-accent;
 
-// Checkbox
-// ---------------------------------------
-@agate-checkbox-text-color: @agate-white;
-@agate-checkbox-bg-color: @agate-accent;
-
 // CheckboxItem
 // ---------------------------------------
 @agate-checkboxitem-border-color: transparent;
@@ -104,7 +99,6 @@
 @agate-heading-border-color: fadeout(@agate-heading-text-color, 30%);
 @agate-heading-text-color: @agate-text-color;
 @agate-heading-accent-color: @agate-accent;
-
 
 // Icon
 // ---------------------------------------
@@ -163,14 +157,14 @@
 
 // Popup
 // ---------------------------------------
-@agate-popup-plain-body-color: @agate-accent;
-@agate-popup-bg-color: fade(black, 85%);
+@agate-popup-plain-body-color: @agate-white;
+@agate-popup-bg-color: @agate-bg-color;
 @agate-popup-bg-image: none;
-@agate-popup-border-color: @agate-accent;
+@agate-popup-border-color: @agate-black;
 @agate-popup-shadow: none;
 @agate-popup-body-border: none;
 @agate-popup-body-border-color: @agate-highlight transparent;
-@agate-popup-body-bg-color: ~"hsla(var(--agate-highlight-h, 0), var(--agate-highlight-s, 0), var(--agate-highlight-l, 0), 0.4)";
+@agate-popup-body-bg-color: @agate-bg-color;
 @agate-popup-body-bg-image: none;
 
 // PopupMenu
