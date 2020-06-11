@@ -8,6 +8,13 @@
 // to this file with the real value for the "silicon" skin.
 //
 
+// Body
+// ----------------------------------
+@agate-body-small-font-size: 25px;
+@agate-body-font-size: 28px;
+@agate-body-font-weight: normal;
+@agate-body-line-height: 1.5em;
+
 // Button
 // ---------------------------------------
 @agate-button-active-bg-image: none;
@@ -31,7 +38,9 @@
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-border-radius: 6px;
+@agate-checkbox-size: 27px;
+@agate-checkbox-border-width: 3px;
+@agate-checkbox-border-radius: 0;
 @agate-checkbox-icon-font-size: 49px;
 
 // CheckboxItem
@@ -126,17 +135,17 @@
 
 // Popup
 // ---------------------------------------
-@agate-popup-min-width: 100%;
-@agate-popup-max-width: 100%;
+@agate-popup-min-width: 510px;
+@agate-popup-max-width: 70%;
 @agate-popup-border-width: 1px 0;
-@agate-popup-border-radius: 0;
+@agate-popup-border-radius: 20px;
 @agate-popup-border: 1px solid transparent;
 @agate-popup-padding: (@agate-component-spacing * 4) @agate-component-spacing;
 @agate-popup-title-padding: 0 (@agate-button-small-height) 0 0;
 @agate-popup-body-padding: (@agate-component-spacing * 2);
 @agate-popup-body-margin: -@agate-component-spacing;  // Extend to the edge
 @agate-popup-body-border-radius: 0;
-@agate-popup-buttons-padding: 0 0 0 @agate-component-spacing;
+@agate-popup-buttons-padding: (2 * @agate-component-spacing) 0 0 0;
 @agate-popup-closebutton-position-left: auto;
 @agate-popup-closebutton-position-right: 0;
 
