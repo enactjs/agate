@@ -56,7 +56,7 @@
 @agate-button-active-opacity: inherit;
 @agate-button-border-width: 3px;
 @agate-button-border-radius: inherit;
-@agate-button-focus-background-origin: inherit;
+@agate-button-background-origin: inherit;
 @agate-button-font-weight: @agate-base-font-weight;
 @agate-button-letter-spacing: normal;
 @agate-button-text-indent: inherit;
@@ -474,11 +474,8 @@
 @agate-togglebutton-min-width: @agate-button-height;
 @agate-togglebutton-client-padding-left: @agate-button-border-width;
 @agate-togglebutton-huge-min-width: @agate-button-huge-height;
-@agate-togglebutton-huge-client-padding-left: @agate-button-border-width;
 @agate-togglebutton-small-min-width: @agate-button-small-height;
-@agate-togglebutton-small-client-padding-left: @agate-button-border-width;
 @agate-togglebutton-smallest-min-width: @agate-button-smallest-height;
-@agate-togglebutton-smallest-client-padding-left: @agate-button-border-width;
 @agate-togglebutton-indicator-size: @agate-icon-size;
 @agate-togglebutton-indicator-position: 0;
 @agate-togglebutton-indicator-border-width: 0;
@@ -486,6 +483,6 @@
 @agate-togglebutton-indicator-height: 6px;
 @agate-togglebutton-indicator-transform: none;
 @agate-togglebutton-indicator-width: auto;
-@agate-togglebutton-huge-indicator-position: 0;
-@agate-togglebutton-small-indicator-position: 0;
-@agate-togglebutton-smallest-indicator-position: 0;
+@agate-togglebutton-huge-indicator-position: @agate-togglebutton-indicator-position;
+@agate-togglebutton-small-indicator-position: @agate-togglebutton-indicator-position;
+@agate-togglebutton-smallest-indicator-position: @agate-togglebutton-indicator-position;
