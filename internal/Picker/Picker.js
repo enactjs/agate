@@ -114,17 +114,18 @@ const PickerBase = kind({
 		 */
 		onChange: PropTypes.func,
 
-		// /**
-		//  * Orientation of the picker.
-		//  *
-		//  * Controls whether the buttons are arranged horizontally or vertically around the value.
-		//  *
-		//  * * Values: `'horizontal'`, `'vertical'`
-		//  *
-		//  * @type {String}
-		//  * @public
-		//  */
-		// orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+		/**
+		 * Orientation of the picker.
+		 *
+		 * Controls whether the buttons are arranged horizontally or vertically around the value.
+		 *
+		 * * Values: `'horizontal'`, `'vertical'`
+		 *
+		 * @type {String}
+		 * @default 'vertical'
+		 * @public
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
 		 * Allow the picker to only increment or decrement by a given value.
@@ -149,6 +150,7 @@ const PickerBase = kind({
 	},
 
 	defaultProps: {
+		orientation: 'vertical',
 		step: 1,
 		value: 0
 	},
@@ -173,7 +175,8 @@ const PickerBase = kind({
 	},
 
 	computed: {
-		activeClassName: ({styler}) => styler.join('active', 'item')
+		activeClassName: ({styler}) => styler.join('active', 'item'),
+		className: ({orientation, styler}) => styler.append(orientation)
 	},
 
 	render: (props) => {

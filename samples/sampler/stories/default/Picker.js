@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -16,6 +16,7 @@ storiesOf('Agate', module)
 				<Picker
 					disabled={boolean('disabled', Config)}
 					onChange={action('onChange')}
+					orientation={select('orientation', ['vertical', 'horizontal'], Config)}
 				>
 					{['LO', '16\xB0', '17\xB0', '18\xB0', '19\xB0', 'HI']}
 				</Picker>
