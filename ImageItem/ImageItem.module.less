@@ -7,12 +7,13 @@
 .imageItem {
   	.applySkins({
 		border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
-			.focus({
-				&::before {
-					border-color: @agate-imageitem-focus-border-color;
-					background-color: @agate-imageitem-focus-bg-color;
-				}
-			});
+
+		.focus({
+			&::before {
+				border-color: @agate-imageitem-focus-border-color;
+				background-color: @agate-imageitem-focus-bg-color;
+			}
+		});
 
 		.caption {
 	  		height: @agate-imageitem-caption-height;
