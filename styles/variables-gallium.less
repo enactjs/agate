@@ -14,6 +14,7 @@
 
 // Checkbox
 // ---------------------------------------
+@agate-checkbox-border-width: 0;
 @agate-checkbox-border-radius: 6px;
 @agate-checkbox-icon-font-size: 49px;
 
@@ -96,19 +97,20 @@
 
 // Popup
 // ---------------------------------------
-@agate-popup-min-width: 100%;
-@agate-popup-max-width: 100%;
-@agate-popup-border-width: 1px 0;
-@agate-popup-border-radius: 0;
-@agate-popup-border: 1px solid transparent;
-@agate-popup-padding: (@agate-component-spacing * 4) @agate-component-spacing;
+@agate-popup-min-width: 510px;
+@agate-popup-max-width: 70%;
+@agate-popup-border-width: 3px;
+@agate-popup-border-radius: 20px;
+@agate-popup-border: 3px solid transparent;
+@agate-popup-padding: (@agate-component-spacing * 2.5) (@agate-component-spacing * 5);
 @agate-popup-title-padding: 0 (@agate-button-small-height) 0 0;
 @agate-popup-body-padding: (@agate-component-spacing * 2);
 @agate-popup-body-margin: -@agate-component-spacing;  // Extend to the edge
 @agate-popup-body-border-radius: 0;
-@agate-popup-buttons-padding: 0 0 0 @agate-component-spacing;
+@agate-popup-buttons-padding: (2 * @agate-component-spacing) 0 0 0;
 @agate-popup-closebutton-position-left: auto;
 @agate-popup-closebutton-position-right: 0;
+@agate-popup-body-font-weight: bold;
 
 // PopupMenu
 // ---------------------------------------
