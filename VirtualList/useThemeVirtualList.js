@@ -82,6 +82,14 @@ const useSpottable = (props, instances) => {
 		updateStatesAndBounds
 	} = useSpotlightRestore(props, {...instances, spottable: mutableRef}, {getItemNode});
 
+	function pauseSpotlight (bool) {
+		if (bool) {
+			pause.pause();
+		} else {
+			pause.resume();
+		}
+	}
+
 	const setContainerDisabled = useCallback((bool) => {
 		if (scrollContainerRef.current) {
 			scrollContainerRef.current.dataset.spotlightContainerDisabled = bool;
@@ -95,7 +103,13 @@ const useSpottable = (props, instances) => {
 	}, [addGlobalKeyDownEventListener, handleGlobalKeyDown, removeGlobalKeyDownEventListener, scrollContainerRef]);
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	function handleGlobalKeyDown () {
+	function handleGlobalKeyDown (ev) {
+		// To prevent scrolling by native scroller
+		if (scrollMode === 'native') {
+			ev.preventDefault();
+			ev.stopPropagation();
+		}
+
 		setContainerDisabled(false);
 	}
 
@@ -147,6 +161,7 @@ const useSpottable = (props, instances) => {
 				focusByIndex(nextIndex);
 			} else {
 				const itemNode = getItemNode(nextIndex);
+				const stickTo = Math.abs(endBoundary - end) < Math.abs(startBoundary - start) ? 'end' : 'start';
 
 				mutableRef.current.isScrolledBy5way = true;
 				mutableRef.current.isWrappedBy5way = isWrapped;
@@ -166,7 +181,7 @@ const useSpottable = (props, instances) => {
 
 				cbScrollTo({
 					index: nextIndex,
-					stickTo: index < nextIndex ? 'end' : 'start',
+					stickTo,
 					animate: !(isWrapped && wrap === 'noAnimation')
 				});
 			}
@@ -188,6 +203,9 @@ const useSpottable = (props, instances) => {
 			// Item is valid but since the the dom doesn't exist yet, we set the index to focus after the ongoing update
 			setPreservedIndex(index);
 		} else {
+			// Remove any preservedIndex
+			setPreservedIndex(-1);
+
 			if (mutableRef.current.isWrappedBy5way) {
 				SpotlightAccelerator.reset();
 				mutableRef.current.isWrappedBy5way = false;
@@ -283,6 +301,7 @@ const useSpottable = (props, instances) => {
 		handlePlaceholderFocus,
 		handleRestoreLastFocus,
 		initItemRef,
+		pauseSpotlight,
 		setContainerDisabled,
 		setLastFocusedNode,
 		shouldPreventScrollByFocus,
@@ -306,6 +325,7 @@ const useThemeVirtualList = (props) => {
 		handlePlaceholderFocus,
 		handleRestoreLastFocus,
 		initItemRef,
+		pauseSpotlight,
 		setContainerDisabled,
 		setLastFocusedNode,
 		shouldPreventScrollByFocus,
@@ -319,6 +339,7 @@ const useThemeVirtualList = (props) => {
 		focusByIndex,
 		focusOnNode,
 		getScrollBounds,
+		pauseSpotlight,
 		setContainerDisabled,
 		setLastFocusedNode,
 		shouldPreventScrollByFocus
@@ -337,10 +358,8 @@ const useThemeVirtualList = (props) => {
 
 	const {itemRenderer, ...rest} = props;
 
-	// not used by VirtualList
-	delete rest.scrollContainerContainsDangerously;
-	// not used by VirtualList
 	delete rest.focusableScrollbar;
+	delete rest.scrollContainerContainsDangerously;
 	delete rest.scrollAndFocusScrollbarButton;
 	delete rest.scrollContainerRef;
 	delete rest.scrollContentHandle;

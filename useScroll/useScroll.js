@@ -126,6 +126,10 @@ const useThemeScroll = (props, instances) => {
 			themeScrollContentHandle.current.setContainerDisabled(false);
 		}
 
+		if (themeScrollContentHandle.current.pauseSpotlight) {
+			themeScrollContentHandle.current.pauseSpotlight(false);
+		}
+
 		focusOnItem();
 		mutableRef.current.lastScrollPositionOnFocus = null;
 		mutableRef.current.isFlicked = false;
