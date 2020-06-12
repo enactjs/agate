@@ -6,6 +6,14 @@
 
 .imageItem {
   	.applySkins({
+		border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
+			.focus({
+				&::before {
+					border-color: @agate-imageitem-focus-border-color;
+					background-color: @agate-imageitem-focus-bg-color;
+				}
+			});
+
 		.caption {
 	  		height: @agate-imageitem-caption-height;
 	  		line-height: @agate-imageitem-caption-height;
@@ -17,10 +25,5 @@
 				margin: auto 0; // leaving this to align image with caption when orientation="horizontal"
 	  		}
 		}
-
-		.focus({
-	  		border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
-	  		background-color: @agate-imageitem-focus-bg-color;
-		})
   	});
 }
