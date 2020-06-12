@@ -59,7 +59,7 @@ const ThumbnailItemBase = kind({
 			<Item
 				{...rest}
 			>
-				<slotBefore>
+				<slotBefore slot="slotBefore">
 					<img
 						className={css.thumbnail}
 						src={src}

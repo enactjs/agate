@@ -1,5 +1,6 @@
 // ThumbnailItem.module.less
 //
+@import "../styles/mixins.less";
 @import "../styles/skin.less";
 
 .thumbnailItem {
@@ -10,16 +11,18 @@
 
 	.content {
 		overflow: hidden;
-		font-size: 28px;
 	}
 
 	.subContent {
 		overflow: hidden;
-		font-size: 24px;
 	}
 
 	.applySkins({
 		align-items: center;
+	  	line-height: @agate-thumbnailitem-line-height;
+	  	height: @agate-thumbnailitem-height;
+		border: @agate-thumbnailitem-border;
+		border-bottom: @agate-thumbnailitem-border-width solid @agate-thumbnailitem-border-color;
 
 		.thumbnail {
 			vertical-align: middle;
@@ -27,10 +30,26 @@
 
 		.content {
 			padding: 0 @agate-component-spacing;
+			font-size: @agate-thumbnailitem-content-font-size
 		}
 
 		.subContent {
 			padding: 0 @agate-component-spacing;
+			font-size: @agate-thumbnailitem-subcontent-font-size;
 		}
+
+	  	.focus({
+			border: @agate-thumbnailitem-border-focus;
+			border-bottom: @agate-thumbnailitem-border-width solid @agate-thumbnailitem-border-color;
+			background-color: @agate-thumbnailitem-focus-bg-color;
+
+			.content {
+				color: @agate-thumbnailitem-focus-text-color;
+			}
+
+			.subContent {
+				color: @agate-thumbnailitem-focus-text-color;
+			}
+		});
 	});
 }
