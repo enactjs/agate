@@ -39,10 +39,14 @@
 
 			.slotBefore {
 				&::before {
-					content: @agate-checkboxitem-selected-before-content;
-					color: @agate-checkboxitem-selected-before-color;
-					line-height: @agate-checkboxitem-selected-before-line-height;
-					padding-right: @agate-checkboxitem-selected-before-padding-right;
+					content: "";
+					height: @agate-indicator-height;
+					width: @agate-indicator-height;
+					background-color: @agate-indicator-bg-color;
+					border-radius: @agate-indicator-border-radius;
+					display: @agate-indicator-display;
+					align-self: @agate-indicator-align-self;
+					margin-right: @agate-indicator-margin-right;
 				}
 			}
 		});
