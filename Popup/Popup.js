@@ -75,6 +75,7 @@ const PopupBase = kind({
 	},
 	render: ({buttons, centered, children, closeButton, css, noAnimation, onClose, onHide, open, skin, title, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
+		delete rest.centered;
 
 		return (
 			<Transition
@@ -90,7 +91,6 @@ const PopupBase = kind({
 				<div
 					{...rest}
 				>
-					centered={centered}
 					{closeButton ? <Button
 						icon="closex"
 						onTap={onClose}
