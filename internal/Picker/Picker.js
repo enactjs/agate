@@ -187,7 +187,7 @@ const PickerBase = kind({
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
 				<PickerButtonItem
-					className={css.itemTop}
+					className={css.itemDecrement}
 					onClick={handleDecrement}
 					disabled={isFirst}
 				>
@@ -203,7 +203,7 @@ const PickerBase = kind({
 					</div>
 				</div>
 				<PickerButtonItem
-					className={css.itemBottom}
+					className={css.itemIncrement}
 					onClick={handleIncrement}
 					disabled={isLast}
 				>
@@ -230,20 +230,6 @@ const PickerDecorator = compose(
 	Skinnable
 );
 
-/**
- * A Picker component that allows selecting values from a list of values.
- *
- * By default, `Picker` maintains the state of its `value` property. Supply the `defaultValue`
- * property to control its initial value. If you wish to directly control updates to the component,
- * supply a value to `value` at creation time and update it in response to `onChange` events.
- *
- * @class Picker
- * @memberof agate/Picker
- * @extends agate/Picker.PickerBase
- * @mixes agate/Picker.PickerDecorator
- * @ui
- * @public
- */
 const Picker = PickerDecorator(PickerBase);
 
 export default Picker;

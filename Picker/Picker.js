@@ -11,6 +11,18 @@
  * @exports PickerBase
  * @exports PickerDecorator
  */
+/**
+ * A component for selecting values from a list of values.
+ *
+ * @example
+ * <Picker>
+ * 	{['A', 'B', 'C']}
+ * </Picker>
+ *
+ * @module agate/Picker
+ * @exports Picker
+ * @exports PickerBase
+ */
 
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
