@@ -73,7 +73,7 @@ const PopupBase = kind({
 	computed: {
 		className: ({closeButton, title, styler, centered}) => styler.append({withCloseButton: closeButton, withTitle: title, centered})
 	},
-	render: ({buttons, centered, children, closeButton, css, noAnimation, onClose, onHide, open, skin, title, ...rest}) => {
+	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, open, skin, title, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
 		delete rest.centered;
 
