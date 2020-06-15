@@ -5,26 +5,27 @@
 @import '../styles/mixins.less';
 
 .imageItem {
+  	&.horizontal {
+		.image {
+	  		margin: auto 0; // leaving this to align image with caption when orientation="horizontal"
+		}
+  	}
+
   	.applySkins({
 		border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
 
+	  	.caption {
+			height: @agate-imageitem-caption-height;
+			line-height: @agate-imageitem-caption-height;
+			text-align: center;
+	  	}
+
 		.focus({
 			&::before {
+			  	content: "";
 				border-color: @agate-imageitem-focus-border-color;
 				background-color: @agate-imageitem-focus-bg-color;
 			}
 		});
-
-		.caption {
-	  		height: @agate-imageitem-caption-height;
-	  		line-height: @agate-imageitem-caption-height;
-	  		text-align: center;
-		}
-
-		&.horizontal {
-	  		.image {
-				margin: auto 0; // leaving this to align image with caption when orientation="horizontal"
-	  		}
-		}
   	});
 }

@@ -11,8 +11,8 @@ import kind from '@enact/core/kind';
 import {ImageItem as UiImageItem} from '@enact/ui/ImageItem';
 import {MarqueeDecorator, MarqueeController} from '@enact/ui/Marquee';
 import Spottable from '@enact/spotlight/Spottable';
-import compose from 'ramda/src/compose';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
 import ImageBase from '../Image';
@@ -26,8 +26,8 @@ const MarqueeImageItem = MarqueeDecorator(UiImageItem);
  * An Agate styled ImageItem.
  *
  * @class ImageItemBase
- * @extends ui/ImageItem.ImageItem
  * @memberof agate/ImageItem
+ * @extends ui/ImageItem.ImageItem
  * @ui
  * @public
  */
@@ -89,7 +89,6 @@ const ImageItemBase = kind({
 	},
 
 	render: ({children, css, src, ...rest}) => {
-
 		const [Component, marqueeProps] = children ? [MarqueeImageItem, {
 			alignment: 'center',
 			children

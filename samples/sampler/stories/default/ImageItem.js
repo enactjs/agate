@@ -7,6 +7,7 @@ import {storiesOf} from '@storybook/react';
 import ImageItem, {ImageItemBase} from '@enact/agate/ImageItem';
 
 ImageItem.displayName = 'ImageItem';
+
 const Config = mergeComponentMetadata('ImageItem', ImageItem, ImageItemBase);
 
 storiesOf('Agate', module)
@@ -25,4 +26,14 @@ storiesOf('Agate', module)
 		{
 			text: 'Basic usage of ImageItem'
 		}
+	);
+
+storiesOf('Agate QA.Image', module)
+	.add(
+		'without children',
+		() => (
+			<div style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}>
+				<ImageItem src="http://placehold.it/300x400/9037ab/ffffff&text=Image0" />
+			</div>
+		)
 	);
