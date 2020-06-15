@@ -8,7 +8,6 @@ const decrement = (picker) => picker.find(`.${css.itemDecrement}`).first().simul
 const increment = (picker) => picker.find(`.${css.itemIncrement}`).first().simulate('click');
 
 describe('Picker Specs', () => {
-
 	test('should have a default \'value\' of 0', () => {
 		const picker = mount(
 			<Picker index={0} max={0} min={0} />

@@ -4,8 +4,7 @@ import React from 'react';
 import {Picker, PickerBase} from '../Picker';
 
 describe('Picker Specs', () => {
-	test(
-		'should set the max of <Picker> to be one less than the number of children',
+	test('should set the max of <Picker> to be one less than the number of children',
 		() => {
 			const picker = mount(
 				<Picker value={1}>
