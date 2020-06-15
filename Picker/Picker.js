@@ -58,17 +58,17 @@ const PickerBase = kind({
 		 */
 		onChange: PropTypes.func,
 
-		// /**
-		//  * Orientation of the picker.
-		//  *
-		//  * Controls whether the buttons are arranged horizontally or vertically around the value.
-		//  *
-		//  * * Values: `'horizontal'`, `'vertical'`
-		//  *
-		//  * @type {String}
-		//  * @public
-		//  */
-		// orientation: PropTypes.oneOf(['horizontal', 'vertical']).
+		/**
+		 * Orientation of the picker.
+		 *
+		 * Controls whether the buttons are arranged horizontally or vertically around the value.
+		 *
+		 * * Values: `'horizontal'`, `'vertical'`
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
 		 * Index of the selected child.
@@ -85,7 +85,6 @@ const PickerBase = kind({
 	},
 
 	computed: {
-		max: ({children}) => children && children.length ? children.length - 1 : 0,
 		children: ({children}) => React.Children.map(children, (child) => {
 			return (
 				<PickerItem marqueeOn="hover">
@@ -94,6 +93,7 @@ const PickerBase = kind({
 			);
 		}),
 		disabled: ({children, disabled}) => React.Children.count(children) > 1 ? disabled : true,
+		max: ({children}) => children && children.length ? children.length - 1 : 0,
 		value: ({value, children}) => {
 			const max = children && children.length ? children.length - 1 : 0;
 			return clamp(0, max, value);
@@ -139,7 +139,6 @@ const Picker = PickerDecorator(PickerBase);
  */
 
 export default Picker;
-
 export {
 	Picker,
 	PickerBase

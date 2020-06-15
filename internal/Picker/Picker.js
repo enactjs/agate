@@ -3,13 +3,13 @@ import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import Touchable from '@enact/ui/Touchable';
+import {ViewManager} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
-import React from 'react';
-import {ViewManager} from '@enact/ui/ViewManager';
-import shouldUpdate from 'recompose/shouldUpdate';
 import equals from 'ramda/src/equals';
+import React from 'react';
+import shouldUpdate from 'recompose/shouldUpdate';
 
 import Skinnable from '../../Skinnable';
 
@@ -180,7 +180,7 @@ const PickerBase = kind({
 	},
 
 	render: (props) => {
-		const {activeClassName, children, handleDecrement, index, handleFlick, handleIncrement, value, min, max, step,  ...rest} = props;
+		const {activeClassName, children, handleDecrement, handleFlick, handleIncrement, index, min, max, step, value, ...rest} = props;
 		const isFirst = value <= min;
 		const isLast = value >= max;
 
@@ -247,7 +247,6 @@ const PickerDecorator = compose(
 const Picker = PickerDecorator(PickerBase);
 
 export default Picker;
-
 export {
 	Picker,
 	PickerDecorator

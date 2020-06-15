@@ -95,18 +95,18 @@ const RangePickerBase = kind({
 		 */
 		onChange: PropTypes.func,
 
-		// /**
-		//  * Orientation of the picker.
-		//  *
-		//  * Controls whether the buttons are arranged horizontally or vertically around the value.
-		//  *
-		//  * * Values: `'horizontal'`, `'vertical'`
-		//  *
-		//  * @type {String}
-		//  * @default 'horizontal'
-		//  * @public
-		//  */
-		// orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+		/**
+		 * Orientation of the picker.
+		 *
+		 * Controls whether the buttons are arranged horizontally or vertically around the value.
+		 *
+		 * * Values: `'horizontal'`, `'vertical'`
+		 *
+		 * @type {String}
+		 * @default 'vertical'
+		 * @public
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
 		 * The smallest value change allowed for the picker.
