@@ -12,6 +12,7 @@
 
 	&.horizontal {
 		flex-direction: row;
+		display: inline-flex;
 	}
 
 	.applySkins({
@@ -43,6 +44,7 @@
 				background-color: @agate-picker-active-bg-color;
 				background-image: @agate-picker-active-bg-image;
 				font-size: @agate-picker-active-font-size;
+				font-weight: @agate-picker-active-font-weight;
 			}
 
 			&[disabled] {
@@ -59,11 +61,27 @@
 		.itemTop {
 			background-color: @agate-picker-item-top-bg-color;
 			background-image: @agate-picker-item-top-bg-image;
+			opacity: @agate-picker-item-top-opacity;
 		}
 
 		.itemBottom {
 			background-color: @agate-picker-item-bottom-bg-color;
 			background-image: @agate-picker-item-bottom-bg-image;
+			opacity: @agate-picker-item-bottom-opacity;
+		}
+
+		&.horizontal {
+			.item,
+			.itemTop,
+			.itemBottom {
+				max-width: @agate-picker-item-max-width;
+			}
+
+			.active,
+			.itemTop,
+			.itemBottom{
+				padding: @agate-picker-item-padding;
+			}
 		}
 	});
 }
