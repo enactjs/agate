@@ -59,15 +59,17 @@
 		}
 
 		.itemDecrement {
-			background-color: @agate-picker-item-decrement-bg-color;
 			background-image: @agate-picker-item-decrement-bg-image;
-			opacity: @agate-picker-item-decrement-opacity;
 		}
 
 		.itemIncrement {
-			background-color: @agate-picker-item-increment-bg-color;
 			background-image: @agate-picker-item-increment-bg-image;
-			opacity: @agate-picker-item-increment-opacity;
+		}
+
+		.itemDecrement,
+		.itemIncrement {
+			color: @agate-picker-item-color;
+			background-color: @agate-picker-item-bg-color;
 		}
 
 		&.horizontal {
