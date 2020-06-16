@@ -65,8 +65,6 @@ describe('Picker Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-
-
 	test('should increment by \'step\' value', () => {
 		const handleChange = jest.fn();
 		const picker = mount(
