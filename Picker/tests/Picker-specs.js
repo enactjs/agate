@@ -27,6 +27,7 @@ describe('Picker Specs', () => {
 		);
 
 		const actual = picker.find('Picker').last().prop('disabled');
+
 		expect(actual).toBe(true);
 	});
 });

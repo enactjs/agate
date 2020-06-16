@@ -19,8 +19,7 @@ describe('Picker Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test(
-		'should return an object {value: Number} that represents the next value of the Picker component when pressing the increment <div>',
+	test('should return an object {value: Number} that represents the next value of the Picker component when pressing the increment <div>',
 		() => {
 			const handleChange = jest.fn();
 			const picker = mount(
@@ -36,8 +35,7 @@ describe('Picker Specs', () => {
 		}
 	);
 
-	test(
-		'should return an object {value: Number} that represents the next value of the Picker component when pressing the decrement <div>',
+	test('should return an object {value: Number} that represents the next value of the Picker component when pressing the decrement <div>',
 		() => {
 			const handleChange = jest.fn();
 			const picker = mount(
@@ -97,8 +95,7 @@ describe('Picker Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test(
-		'should disable the increment button when there is no value to increment',
+	test('should disable the increment button when there is no value to increment',
 		() => {
 			const picker = mount(
 				<Picker index={0} max={2} min={0} value={2} />
@@ -111,8 +108,7 @@ describe('Picker Specs', () => {
 		}
 	);
 
-	test(
-		'should disable the decrement button when there is no value to decrement',
+	test('should disable the decrement button when there is no value to decrement',
 		() => {
 			const picker = mount(
 				<Picker index={0} max={2} min={0} value={0} />
