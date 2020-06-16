@@ -2,7 +2,11 @@
  * Provides an Agate-themed thumbnail item.
  *
  * @example
- * <ThumbnailItem src="https://dummyimage.com/64/e048e0/0011ff">An image!</ThumbnailItem>
+ * <ThumbnailItem
+ * 		src="https://dummyimage.com/64/e048e0/0011ff"
+ * 		content="Content"
+ * 		subContent="Sub Content"
+ * />
  *
  * @module agate/ThumbnailItem
  * @exports ThumbnailItem
@@ -13,9 +17,9 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import componentCss from './ThumbnailItem.module.less';
 import Item from '../Item';
 
+import componentCss from './ThumbnailItem.module.less';
 
 /**
  * A stateless, unfocusable item that can display a thumbnail.
@@ -23,18 +27,70 @@ import Item from '../Item';
  * @class ThumbnailItemBase
  * @memberof agate/ThumbnailItem
  * @extends agate/Item.Item
- * @agate
+ * @ui
  * @public
  */
 const ThumbnailItemBase = kind({
 	name: 'ThumbnailItem',
 
 	propTypes: /** @lends agate/ThumbnailItem.ThumbnailItemBase.prototype */ {
+		/**
+		 * The main content displayed with the thumbnail.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		content: PropTypes.string,
+
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `thumbnailItem` - The root component class
+		 * * `content` - The content component class
+		 * * `subContent` - The subContent component class
+		 * * `roundThumbnail` - Applied when `roundThumbnail="true"`
+		 * * `thumbnail` - The thumbnail component class
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * Applies a round thumbnail to the ThumbnailItem.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		roundThumbnail: PropTypes.bool,
+
+		/**
+		 * String value used to determine which thumbnail will appear on a specific screenSize.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		src: PropTypes.string,
-		subComponents: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
-		subcontent: PropTypes.string
+
+		/**
+		 * The components that will be shown with the thumbnail.
+		 *
+		 * @type {Element}
+		 * @private
+		 */
+		subComponents: PropTypes.element,
+
+		/**
+		 * The sub content displayed with the thumbnail.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		subContent: PropTypes.string
 	},
 
 	styles: {
@@ -44,11 +100,15 @@ const ThumbnailItemBase = kind({
 	},
 
 	computed: {
-		subComponents: ({content, subcontent, css, subComponents}) => {
+		className: ({roundThumbnail, styler}) => styler.append({
+			roundThumbnail: roundThumbnail === true
+		}),
+
+		subComponents: ({content, subContent, css}) => {
 			return (
-				subComponents ? subComponents : <React.Fragment>
-					{content ? (<div className={css.content}>{content}</div>) : null}
-					{subcontent ? (<div className={css.subContent}>{subcontent}</div>) : null}
+				<React.Fragment>
+					{content ? <div className={css.content}>{content}</div> : null}
+					{subContent ? <div className={css.subContent}>{subContent}</div> : null}
 				</React.Fragment>
 			);
 		}
@@ -59,7 +119,7 @@ const ThumbnailItemBase = kind({
 			<Item
 				{...rest}
 			>
-				<slotBefore slot="slotBefore">
+				<slotBefore className={css.slotBefore}>
 					<img
 						className={css.thumbnail}
 						src={src}
@@ -70,6 +130,16 @@ const ThumbnailItemBase = kind({
 		);
 	}
 });
+
+/**
+ * A stateless, unfocusable item that can display a thumbnail.
+ *
+ * @class ThumbnailItem
+ * @memberof agate/ThumbnailItem
+ * @extends agate/ThumbnailItem.ThumbnailItemBase
+ * @ui
+ * @public
+ */
 
 export default ThumbnailItemBase;
 export {
