@@ -33,7 +33,7 @@ storiesOf('Agate', module)
 				<ColorPicker
 					direction={direction}
 					onChange={action('onChange')}
-					value={select('value', colors, Config, colors[0])}
+					defaultValue={colors[0]}
 				>
 					{colors}
 				</ColorPicker>
