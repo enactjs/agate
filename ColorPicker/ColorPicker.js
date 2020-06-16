@@ -10,21 +10,22 @@
  * @exports ColorPickerDecorator
  */
 
-import kind from '@enact/core/kind';
-import hoc from '@enact/core/hoc';
-import {on, off} from '@enact/core/dispatcher';
-import {forward, handle} from '@enact/core/handle';
-import Group from '@enact/ui/Group';
-import Toggleable from '@enact/ui/Toggleable';
-import {Row, Cell} from '@enact/ui/Layout';
-import Transition from '@enact/ui/Transition';
-import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
-
-import PropTypes from 'prop-types';
+import convert from 'color-convert';
 import compose from 'ramda/src/compose';
+import hoc from '@enact/core/hoc';
+import kind from '@enact/core/kind';
+import {adaptEvent, forward, handle} from '@enact/core/handle';
+import {on, off} from '@enact/core/dispatcher';
+import {Row, Cell} from '@enact/ui/Layout';
+import Changeable from '@enact/ui/Changeable';
+import Group from '@enact/ui/Group';
+import PropTypes from 'prop-types';
+import Pure from '@enact/ui/internal/Pure';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import convert from 'color-convert';
+import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
+import Toggleable from '@enact/ui/Toggleable';
+import Transition from '@enact/ui/Transition';
 
 import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
@@ -35,6 +36,9 @@ import SwatchButton from './SwatchButton';
 import componentCss from './ColorPicker.module.less';
 
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
+
+// helper function to convert color hex strings or kewords to hue, saturation, and lightness values
+const convertToHSL = (value) => convert[value.charAt(0) === '#' ? 'hex' : 'keyword'].hsl(value);
 
 /**
  * The color picker base component which sets-up the component's structure.
@@ -165,19 +169,10 @@ const ColorPickerBase = kind({
 		publicClassNames: ['colorPicker', 'palette']
 	},
 
-	handlers: {
-		onChange: (ev, {onChange}) => {
-			if (onChange) {
-				onChange({value: ev.data});
-			}
-		}
-	},
-
 	computed: {
+		children: ({children}) => children || [],
 		className: ({extended, styler}) => styler.append({extended}),
-		sliderValues: ({value}) => {
-			return {hsl: convert.hex.hsl(value)};
-		},
+		sliderValues: ({value}) => ({hsl: convertToHSL(value)}),
 		transitionContainerClassname: ({css, open, styler}) => styler.join(css.transitionContainer, (open ? css.openTransitionContainer : null)),
 		transitionDirection: ({direction}) => {
 			switch (direction) {
@@ -197,7 +192,7 @@ const ColorPickerBase = kind({
 		delete rest.extended;
 		return (
 			<div {...rest}>
-				<SwatchButton onClick={onClick}>{value}</SwatchButton>
+				<SwatchButton color={value} onClick={onClick} />
 				<Transition
 					className={transitionContainerClassname}
 					visible={open}
@@ -205,11 +200,14 @@ const ColorPickerBase = kind({
 				>
 					<ContainerDiv className={css.palette} spotlightDisabled={!open} spotlightRestrict="self-only">
 						<Group
-							className={css.group}
 							childComponent={SwatchButton}
+							childProp="color"
+							className={css.group}
 							itemProps={{size: 'small', className: css.swatch}}
 							onSelect={onChange}
-						>{children || []}</Group>
+						>
+							{children}
+						</Group>
 						<Button icon="ellipsis" size="small" onTap={onToggleExtended} className={css.swatch} />
 						<div className={css.sliders}>
 							<Row align="center">
@@ -242,7 +240,7 @@ const ColorPickerBase = kind({
 });
 
 const ColorPickerExtended = hoc((config, Wrapped) => {
-	return class extends React.PureComponent {
+	return class extends React.Component {
 		static displayName = 'ColorPickerExtended'
 
 		static propTypes = {
@@ -254,7 +252,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 
 		constructor (props) {
 			super(props);
-			this.hsl = convert.hex.hsl(props.value);
+			this.hsl = props.value ? convertToHSL(props.value) : [0, 0, 0];
 			this.state = {
 				extended: props.defaultExtended || false
 			};
@@ -273,7 +271,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 		componentDidUpdate (prevProps) {
 			const {open, value} = this.props;
 			if (prevProps.value !== value) {
-				this.hsl = convert.hex.hsl(value);
+				this.hsl = convertToHSL(value);
 			}
 
 			if (!prevProps.open && open) {
@@ -293,13 +291,24 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 
 		clickedOutsidePalette = ({target}) => !this.node.contains(target)
 
-		handle = handle.bind(this);
+		// This handler is meant to accommodate using `ColorPicker`'s `onChange` prop from
+		// `Changeable` as the `onSelect` handler for its `Group` component that lists the set of
+		// pre-defined color choices.  `onSelect` sends the chosen value in the `data` prop of its
+		// event but `Changeable` expects `value`.  The slider handlers for hue, saturation, and
+		// light values in `ColorPickerExtended` use this handler to update the `value` prop via
+		// `onChange` as well.
+		handleChange = handle(
+			adaptEvent(
+				({data: value}) => ({value}),
+				forward('onChange')
+			)
+		).bindAs(this, 'handleChange')
 
 		// If a click happened outside the component area (and children of us) dismiss the palette by forwarding the onClick from Toggleable.
-		handleClick = this.handle(
+		handleClick = handle(
 			this.clickedOutsidePalette,
 			forward('onClick')
-		)
+		).bindAs(this, 'handleClick')
 
 		handleToggleExtended = () => {
 			this.setState(({extended}) => ({extended: !extended}));
@@ -308,11 +317,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 		handleSlider = (type) => ({value: sliderValue}) => {
 			this.hsl[('hsl'.indexOf(type))] = sliderValue;
 			const value = this.buildValue();
-			// this.setState({value});
-
-			if (this.props.onChange) {
-				this.props.onChange({value});
-			}
+			this.handleChange({data: value});
 		}
 
 		render () {
@@ -323,6 +328,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 				<Wrapped
 					{...rest}
 					extended={this.state.extended}
+					onChange={this.handleChange}
 					onToggleExtended={this.handleToggleExtended}
 					onHueChanged={this.handleSlider('h')}
 					onSaturationChanged={this.handleSlider('s')}
@@ -343,6 +349,8 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
  * @public
  */
 const ColorPickerDecorator = compose(
+	Pure,
+	Changeable,
 	Toggleable({toggle: null, prop: 'open', toggleProp: 'onClick'}),
 	ColorPickerExtended,
 	Skinnable
