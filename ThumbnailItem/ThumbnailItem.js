@@ -100,9 +100,7 @@ const ThumbnailItemBase = kind({
 	},
 
 	computed: {
-		className: ({roundThumbnail, styler}) => styler.append({
-			roundThumbnail: roundThumbnail === true
-		}),
+		className: ({roundThumbnail, styler}) => styler.append({roundThumbnail}),
 
 		subComponents: ({content, subContent, css}) => {
 			return (
@@ -135,8 +133,8 @@ const ThumbnailItemBase = kind({
  * A stateless, unfocusable item that can display a thumbnail.
  *
  * @class ThumbnailItem
- * @memberof agate/ThumbnailItem
- * @extends agate/ThumbnailItem.ThumbnailItemBase
+ * @memberof @agate/ThumbnailItem
+ * @extends @agate/ThumbnailItem.ThumbnailItemBase
  * @ui
  * @public
  */
