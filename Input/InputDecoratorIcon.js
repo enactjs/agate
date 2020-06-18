@@ -47,7 +47,7 @@ const InputDecoratorIconBase = kind({
 	},
 
 	defaultProps: {
-		size: 'large'
+		size: 'small'
 	},
 
 	styles: {

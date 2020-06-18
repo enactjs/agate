@@ -71,18 +71,22 @@
 			flex: 0 0;
 			width: auto;
 			margin: 0;
-		  	padding: @agate-input-icon-before-padding;
 
+		  	&.iconAfter,
 			&.iconBefore {
 				margin-left: @agate-input-icon-before-margin;
-			  	display: @agate-input-icon-before-display;
-			  	align-self: @agate-input-icon-before-align;
-			  	opacity: @agate-input-opacity;
-			  	border-bottom: @agate-input-border-width solid @agate-input-border-color;
+				display: @agate-input-icon-display;
+				align-self: @agate-input-icon-align;
+				opacity: @agate-input-opacity;
+				border-bottom: @agate-input-border-width solid @agate-input-border-color;
 			}
 
 			&.iconAfter {
-				margin-right: @agate-input-icon-after-margin;
+			  	padding: @agate-input-icon-after-padding;
+			}
+
+			&.iconBefore {
+			  	padding: @agate-input-icon-before-padding;
 			}
 		}
 
@@ -113,7 +117,13 @@
 
 			.icon {
 				color: @agate-input-focused-text-color;
-				&.iconBefore {
+
+			  	&.iconAfter {
+					opacity: @agate-input-focused-opacity;
+					border-color: @agate-input-active-border-color;
+				}
+
+			  	&.iconBefore {
 				  	opacity: @agate-input-focused-opacity;
 				  	border-color: @agate-input-active-border-color;
 				}
