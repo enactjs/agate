@@ -23,7 +23,7 @@
 			font-weight: @agate-input-font-weight;
 			opacity: @agate-input-opacity;
 			border: none;
-			border-bottom: @agate-input-border-width solid @agate-input-border-color ;
+			border-bottom: @agate-input-border-width solid @agate-input-border-color;
 			background: transparent;
 			color: @agate-text-color;
 			text-align: @agate-input-text-align;
@@ -71,9 +71,14 @@
 			flex: 0 0;
 			width: auto;
 			margin: 0;
+		  	padding: @agate-input-icon-before-padding;
 
 			&.iconBefore {
 				margin-left: @agate-input-icon-before-margin;
+			  	display: @agate-input-icon-before-display;
+			  	align-self: @agate-input-icon-before-align;
+			  	opacity: @agate-input-opacity;
+			  	border-bottom: @agate-input-border-width solid @agate-input-border-color;
 			}
 
 			&.iconAfter {
@@ -97,13 +102,20 @@
 			.input {
 				caret-color: @agate-input-caret-color;
 				color: @agate-input-focused-text-color;
-				border-image-slice: 1;
-				border-image-source: @agate-input-active-border-image;
+			  	border-color: @agate-input-active-border-color;
 				border-width: 0 0 @agate-input-border-width;
 				opacity: @agate-input-focused-opacity;
 
 				&::placeholder {
 					opacity: @agate-input-opacity;
+				}
+			}
+
+			.icon {
+				color: @agate-input-focused-text-color;
+				&.iconBefore {
+				  	opacity: @agate-input-focused-opacity;
+				  	border-color: @agate-input-active-border-color;
 				}
 			}
 		}
