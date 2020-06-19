@@ -9,7 +9,7 @@
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {ResizeContext} from '@enact/ui/Resizable';
-import {gridListItemSizeShape, itemSizesShape, VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
+import {gridListItemSizeShape, itemSizesShape, VirtualListBase as UiVirtualListBase} from '@enact/ui/VirtualList';
 import PropTypes from 'prop-types';
 import React from 'react';
 import warning from 'warning';
@@ -27,7 +27,7 @@ const nop = () => {};
  *
  * @class VirtualList
  * @memberof agate/VirtualList
- * @extends ui/VirtualList.VirtualListBasic
+ * @extends ui/VirtualList.VirtualListBase
  * @ui
  * @public
  */
@@ -76,7 +76,7 @@ let VirtualList = ({itemSize, role, ...rest}) => {
 			<div {...scrollContainerProps}>
 				<div {...scrollInnerContainerProps}>
 					<ScrollContentWrapper {...scrollContentWrapperProps}>
-						<UiVirtualListBasic {...themeScrollContentProps} ref={scrollContentHandle} />
+						<UiVirtualListBase {...themeScrollContentProps} ref={scrollContentHandle} />
 					</ScrollContentWrapper>
 					{isVerticalScrollbarVisible ? <Scrollbar {...verticalScrollbarProps} /> : null}
 				</div>
@@ -486,7 +486,7 @@ VirtualList.defaultProps = {
  *
  * @class VirtualGridList
  * @memberof agate/VirtualList
- * @extends ui/VirtualList.VirtualListBasic
+ * @extends ui/VirtualList.VirtualListBase
  * @ui
  * @public
  */
@@ -519,7 +519,7 @@ let VirtualGridList = ({role, ...rest}) => {
 			<div {...scrollContainerProps}>
 				<div {...scrollInnerContainerProps}>
 					<ScrollContentWrapper {...scrollContentWrapperProps}>
-						<UiVirtualListBasic {...themeScrollContentProps} ref={scrollContentHandle} />
+						<UiVirtualListBase {...themeScrollContentProps} ref={scrollContentHandle} />
 					</ScrollContentWrapper>
 					{isVerticalScrollbarVisible ? <Scrollbar {...verticalScrollbarProps} /> : null}
 				</div>

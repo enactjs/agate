@@ -19,7 +19,7 @@
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {ResizeContext} from '@enact/ui/Resizable';
-import {ScrollerBasic as UiScrollerBasic} from '@enact/ui/Scroller';
+import {ScrollerBase as UiScrollerBase} from '@enact/ui/Scroller';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -41,7 +41,7 @@ const nop = () => {};
  *
  * @class Scroller
  * @memberof agate/Scroller
- * @extends ui/Scroller.ScrollerBasic
+ * @extends ui/Scroller.ScrollerBase
  * @ui
  * @public
  */
@@ -72,7 +72,7 @@ let Scroller = (props) => {
 			<div {...scrollContainerProps}>
 				<div {...scrollInnerContainerProps}>
 					<ScrollContentWrapper {...scrollContentWrapperProps}>
-						<UiScrollerBasic {...themeScrollContentProps} ref={scrollContentHandle} />
+						<UiScrollerBase {...themeScrollContentProps} ref={scrollContentHandle} />
 					</ScrollContentWrapper>
 					{isVerticalScrollbarVisible ? <Scrollbar {...verticalScrollbarProps} /> : null}
 				</div>
