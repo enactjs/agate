@@ -217,19 +217,35 @@ const PickerBase = kind({
 		activeClassName: ({styler}) => styler.join('active', 'item'),
 		className: ({orientation, styler}) => styler.append(orientation),
 		decrementAriaLabel: ({'aria-valuetext': valueText, children: values, decrementAriaLabel = $L('previous item'), value}) => {
-			return `${valueText != null ? valueText : Array.isArray(values) ? values[value] : value} ${decrementAriaLabel}`;
+			if (Array.isArray(values)) {
+				return `${valueText != null ? valueText : values[value]} ${decrementAriaLabel}`;
+			} else {
+				return `${valueText != null ? valueText : value} ${decrementAriaLabel}`;
+			}
+
 		},
 		valueId: ({id}) => `${id}_value`,
 		incrementAriaLabel: ({'aria-valuetext': valueText, children: values, incrementAriaLabel = $L('next item'), value}) => {
-			return `${valueText != null ? valueText : Array.isArray(values) ? values[value] : value} ${incrementAriaLabel}`;
+			if (Array.isArray(values)) {
+				return `${valueText != null ? valueText : values[value]} ${incrementAriaLabel}`;
+			} else {
+				return `${valueText != null ? valueText : value} ${incrementAriaLabel}`;
+			}
+		},
+		currentValueText: ({'aria-valuetext': valueText, children: values, value}) => {
+			if (Array.isArray(values)) {
+				return `${typeof valueText !== 'undefined' ? valueText : values[value]}`;
+			} else {
+				return `${typeof valueText !== 'undefined' ? valueText : value}`;
+			}
 		}
 	},
 
 	render: (props) => {
 		const {
-			'aria-valuetext': valueText,
 			activeClassName,
 			children: values,
+			currentValueText,
 			decrementAriaLabel,
 			handleDecrement,
 			handleFlick,
@@ -261,7 +277,7 @@ const PickerBase = kind({
 					</div>
 				</PickerButtonItem>
 				<div
-					aria-valuetext={typeof valueText !== 'undefined' ? valueText : Array.isArray(values) ? values[value] : value}
+					aria-valuetext={currentValueText}
 					className={activeClassName}
 					id={valueId}
 					role="spinbutton"
