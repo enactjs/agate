@@ -1,28 +1,44 @@
 import {action} from '@enact/storybook-utils/addons/actions';
-import {select, text} from '@enact/storybook-utils/addons/knobs';
+import {mergeComponentMetadata} from '@enact/storybook-utils';
+import {select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import ColorPicker from '@enact/agate/ColorPicker';
+import ColorPicker, {ColorPickerBase} from '@enact/agate/ColorPicker';
 
 ColorPicker.displayName = 'ColorPicker';
+const Config = mergeComponentMetadata('ColorPicker', ColorPicker, ColorPickerBase);
+
 const prop = {
-	direction: ['top', 'right', 'bottom', 'left'],
-	colors: ['green', 'yellow', 'orange', 'red', 'black', 'gray', 'white', 'maroon', 'brown']
+	direction: ['up', 'right', 'down', 'left'],
+	presets: {
+		'Default': ['green', 'yellow', 'orange', 'red', 'black', 'gray', 'white', '#cc5500', 'maroon', 'brown'],
+		'Duck Tales': ['lavender', 'red', 'blue', 'green']
+	}
+};
+
+const StoryOptions = {
+	groupId: 'Story Options'
 };
 
 storiesOf('Agate', module)
 	.add(
 		'ColorPicker',
-		() => (
-			<ColorPicker
-				direction={select('direction', prop.direction, ColorPicker, 'right')}
-				defaultValue={text('defaultValue', ColorPicker, '#3467af')}
-				onChange={action('onChange')}
-			>
-				{prop.colors}
-			</ColorPicker>
-		),
+		() => {
+			const direction = select('direction', prop.direction, Config, 'right'); // moved out of component to force order of knobs in the story
+			const colors = prop.presets[
+				select('color palette', Object.keys(prop.presets), StoryOptions, 'Default')
+			];
+			return (
+				<ColorPicker
+					direction={direction}
+					onChange={action('onChange')}
+					defaultValue={colors[0]}
+				>
+					{colors}
+				</ColorPicker>
+			);
+		},
 		{
 			text: 'The basic ColorPicker'
 		}
