@@ -1,5 +1,5 @@
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -19,6 +19,7 @@ storiesOf('Agate', module)
 		() => (
 			<div style={{paddingBottom: '56.25%'}}>
 				<TabbedPanels
+					duration={number('duration', TabbedPanels)}
 					onClick={action('onClick')}
 					index={Number(select('index', ['0', '1', '2', '3'], TabbedPanels, '0'))}
 					noCloseButton={boolean('noCloseButton', TabbedPanels)}
