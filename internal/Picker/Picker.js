@@ -10,15 +10,11 @@ import {adaptEvent, forEventProp, forward, handle, oneOf} from '@enact/core/hand
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
-import IdProvider from '@enact/ui/internal/IdProvider';
 import Touchable from '@enact/ui/Touchable';
-import {ViewManager} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
-import equals from 'ramda/src/equals';
 import React from 'react';
-import shouldUpdate from 'recompose/shouldUpdate';
 
 import $L from '../$L';
 import Skinnable from '../../Skinnable';
@@ -27,13 +23,6 @@ import css from './Picker.module.less';
 
 const PickerRoot = Touchable('div');
 const PickerButtonItem = Spottable('div');
-
-const PickerViewManager = shouldUpdate((props, nextProps) => {
-	return (
-		props.index !== nextProps.index ||
-		!equals(props.children, nextProps.children)
-	);
-})(ViewManager);
 
 const handleChange = direction => handle(
 	adaptEvent(
@@ -59,15 +48,6 @@ const PickerBase = kind({
 	name: 'Picker',
 
 	propTypes: /** @lends agate/internal/Picker.Picker.prototype */ {
-		/**
-		 * Index for internal ViewManager
-		 *
-		 * @type {Number}
-		 * @required
-		 * @public
-		 */
-		index: PropTypes.number.isRequired,
-
 		/**
 		 * The maximum value selectable by the picker (inclusive).
 		 *
@@ -258,7 +238,6 @@ const PickerBase = kind({
 			handleDecrement,
 			handleFlick,
 			handleIncrement,
-			index,
 			incrementAriaLabel,
 			min,
 			max,
@@ -291,9 +270,7 @@ const PickerBase = kind({
 					role="spinbutton"
 				>
 					<div className={css.label}>
-						<PickerViewManager index={index}>
-							{values}
-						</PickerViewManager>
+						{Array.isArray(values) ? values[value] : value}
 					</div>
 				</div>
 				<PickerButtonItem
@@ -323,7 +300,6 @@ const PickerBase = kind({
  * @public
  */
 const PickerDecorator = compose(
-	IdProvider({generateProp: null}),
 	Changeable,
 	Skinnable
 );
@@ -335,4 +311,3 @@ export {
 	Picker,
 	PickerDecorator
 };
-export PickerItem from './PickerItem';

@@ -16,7 +16,7 @@ import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import PickerCore, {PickerItem} from '../internal/Picker';
+import PickerCore from '../internal/Picker';
 
 /**
  * RangePicker base component.
@@ -130,14 +130,44 @@ const RangePickerBase = kind({
 
 	render: ({value, ...rest}) => {
 		return (
-			<PickerCore {...rest} index={0} value={value}>
-				<PickerItem key={value}>
-					{value}
-				</PickerItem>
+			<PickerCore {...rest} value={value}>
+				{value}
 			</PickerCore>
 		);
 	}
 });
+
+/**
+ * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
+ * to the current value. This should only be used when the parent controls the value of
+ * the picker directly through the props.
+ *
+ * @name `aria-valuetext`
+ * @memberof agate/Picker.Picker.prototype
+ * @type {String|Number}
+ * @memberof agate/internal/Picker.Picker.prototype
+ * @public
+ */
+
+/**
+ * Sets the hint string read when focusing the decrement button.
+ *
+ * @name decrementAriaLabel
+ * @memberof agate/Picker.Picker.prototype
+ * @default 'previous item'
+ * @type {String}
+ * @public
+ */
+
+/**
+ * Sets the hint string read when focusing the increment button.
+ *
+ * @name incrementAriaLabel
+ * @memberof agate/Picker.Picker.prototype
+ * @default 'next item'
+ * @type {String}
+ * @public
+ */
 
 /**
  * A component that lets the user select a number from a range of numbers.

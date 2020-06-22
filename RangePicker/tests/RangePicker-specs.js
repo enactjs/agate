@@ -15,7 +15,7 @@ describe('RangePicker Specs', () => {
 		);
 
 		const expected = '10';
-		const actual = picker.find('PickerItem').text();
+		const actual = picker.find('.active').first().text();
 
 		expect(actual).toBe(expected);
 	});
@@ -28,7 +28,7 @@ describe('RangePicker Specs', () => {
 		increment(picker);
 
 		const expected = '11';
-		const actual = picker.find('PickerItem').first().text();
+		const actual = picker.find('.active').first().text();
 
 		expect(actual).toBe(expected);
 	});
@@ -41,7 +41,7 @@ describe('RangePicker Specs', () => {
 		decrement(picker);
 
 		const expected = '9';
-		const actual = picker.find('PickerItem').first().text();
+		const actual = picker.find('.active').first().text();
 
 		expect(actual).toBe(expected);
 	});

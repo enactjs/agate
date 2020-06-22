@@ -17,7 +17,7 @@ import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
 import React from 'react';
 
-import PickerCore, {PickerItem, PickerDecorator} from '../internal/Picker';
+import PickerCore, {PickerDecorator} from '../internal/Picker';
 
 /**
  * The base `Picker` component.
@@ -85,13 +85,6 @@ const PickerBase = kind({
 	},
 
 	computed: {
-		children: ({children}) => React.Children.map(children, (child) => {
-			return (
-				<PickerItem marqueeOn="hover">
-					{child}
-				</PickerItem>
-			);
-		}),
 		disabled: ({children, disabled}) => React.Children.count(children) > 1 ? disabled : true,
 		max: ({children}) => children && children.length ? children.length - 1 : 0,
 		value: ({value, children}) => {
@@ -104,12 +97,44 @@ const PickerBase = kind({
 		const {children, value, max, ...rest} = props;
 
 		return (
-			<PickerCore {...rest} min={0} max={max} index={value} step={1} value={value}>
+			<PickerCore {...rest} min={0} max={max} step={1} value={value}>
 				{children}
 			</PickerCore>
 		);
 	}
 });
+
+/**
+ * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
+ * to the current value. This should only be used when the parent controls the value of
+ * the picker directly through the props.
+ *
+ * @name `aria-valuetext`
+ * @memberof agate/Picker.Picker.prototype
+ * @type {String|Number}
+ * @memberof agate/internal/Picker.Picker.prototype
+ * @public
+ */
+
+/**
+ * Sets the hint string read when focusing the decrement button.
+ *
+ * @name decrementAriaLabel
+ * @memberof agate/Picker.Picker.prototype
+ * @default 'previous item'
+ * @type {String}
+ * @public
+ */
+
+/**
+ * Sets the hint string read when focusing the increment button.
+ *
+ * @name incrementAriaLabel
+ * @memberof agate/Picker.Picker.prototype
+ * @default 'next item'
+ * @type {String}
+ * @public
+ */
 
 /**
  * A Picker component that allows selecting values from a list of values.
