@@ -314,7 +314,7 @@ const PickerBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [PickerBase]{@link agate/internal/Picker.PickerBase}.
+ * Applies Agate specific behaviors to [PickerBase]{@link agate/Picker.PickerBase}.
  *
  * @hoc
  * @memberof agate/internal/Picker
