@@ -121,7 +121,7 @@ const PickerBase = kind({
  * @class Picker
  * @memberof agate/Picker
  * @extends agate/Picker.PickerBase
- * @mixes agate/Picker.PickerDecorator
+ * @mixes agate/internal/Picker.PickerDecorator
  * @ui
  * @public
  */

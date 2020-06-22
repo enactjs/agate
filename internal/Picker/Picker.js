@@ -1,3 +1,11 @@
+/**
+ * A internal Picker component.
+ *
+ * @module agate/internal/Picker
+ * @exports Picker
+ * @exports PickerDecorator
+ */
+
 import {adaptEvent, forEventProp, forward, handle, oneOf} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
@@ -50,7 +58,7 @@ const decrement = handleChange(-1);
 const PickerBase = kind({
 	name: 'Picker',
 
-	propTypes: /** @lends agate/Picker.PickerBase.prototype */ {
+	propTypes: /** @lends agate/internal/Picker.Picker.prototype */ {
 		/**
 		 * Index for internal ViewManager
 		 *
@@ -64,7 +72,7 @@ const PickerBase = kind({
 		 * The maximum value selectable by the picker (inclusive).
 		 *
 		 * The range between `min` and `max` should be evenly divisible by
-		 * [step]{@link agate/internal/Picker.PickerBase.step}.
+		 * [step]{@link agate/internal/Picker.Picker.step}.
 		 *
 		 * @type {Number}
 		 * @required
@@ -76,7 +84,7 @@ const PickerBase = kind({
 		 * The minimum value selectable by the picker (inclusive).
 		 *
 		 * The range between `min` and `max` should be evenly divisible by
-		 * [step]{@link agate/internal/Picker.PickerBase.step}.
+		 * [step]{@link agate/internal/Picker.Picker.step}.
 		 *
 		 * @type {Number}
 		 * @required
@@ -90,7 +98,7 @@ const PickerBase = kind({
 		 * the picker directly through the props.
 		 *
 		 * @type {String|Number}
-		 * @memberof agate/Picker.PickerBase.prototype
+		 * @memberof agate/internal/Picker.Picker.prototype
 		 * @public
 		 */
 		'aria-valuetext': PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -306,10 +314,10 @@ const PickerBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [PickerBase]{@link agate/Picker.PickerBase}.
+ * Applies Agate specific behaviors to [PickerBase]{@link agate/internal/Picker.PickerBase}.
  *
  * @hoc
- * @memberof agate/Picker
+ * @memberof agate/internal/Picker
  * @mixes ui/Changeable.Changeable
  * @mixes agate/Skinnable.Skinnable
  * @public
