@@ -157,6 +157,10 @@
 					background-image: @agate-slider-focus-bg-image;
 				}
 
+				.fill {
+					background-color: @agate-slider-focus-fill-bg-color;
+				}
+
 				.bar {
 					background-color: @agate-slider-track-focus-bg-color;
 					background-image: @agate-slider-track-focus-bg-image;
@@ -181,6 +185,9 @@
 			&:focus.active {
 				.knob::before {
 					transform: @agate-slider-knob-active-transform;
+					height: @agate-slider-active-knob-height;
+					width: @agate-slider-active-knob-width;
+					border-radius: @agate-slider-active-knob-border-radius;
 				}
 			}
 		});
