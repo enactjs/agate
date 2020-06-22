@@ -10,6 +10,7 @@ import {adaptEvent, forEventProp, forward, handle, oneOf} from '@enact/core/hand
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
+import IdProvider from '@enact/ui/internal/IdProvider';
 import Touchable from '@enact/ui/Touchable';
 import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
@@ -295,11 +296,13 @@ const PickerBase = kind({
  *
  * @hoc
  * @memberof agate/internal/Picker
+ * @mixes ui/internal/IdProvider.IdProvider
  * @mixes ui/Changeable.Changeable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const PickerDecorator = compose(
+	IdProvider({generateProp: null}),
 	Changeable,
 	Skinnable
 );

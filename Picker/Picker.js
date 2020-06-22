@@ -59,18 +59,6 @@ const PickerBase = kind({
 		onChange: PropTypes.func,
 
 		/**
-		 * Orientation of the picker.
-		 *
-		 * Controls whether the buttons are arranged horizontally or vertically around the value.
-		 *
-		 * * Values: `'horizontal'`, `'vertical'`
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-
-		/**
 		 * Index of the selected child.
 		 *
 		 * @type {Number}
@@ -112,7 +100,7 @@ const PickerBase = kind({
  * @name `aria-valuetext`
  * @memberof agate/Picker.Picker.prototype
  * @type {String|Number}
- * @memberof agate/internal/Picker.Picker.prototype
+ * @memberof agate/Picker.Picker.prototype
  * @public
  */
 
@@ -133,6 +121,20 @@ const PickerBase = kind({
  * @memberof agate/Picker.Picker.prototype
  * @default 'next item'
  * @type {String}
+ * @public
+ */
+
+/**
+ * Orientation of the picker.
+ *
+ * Controls whether the buttons are arranged horizontally or vertically around the value.
+ *
+ * * Values: `'horizontal'`, `'vertical'`
+ *
+ * @name orientation
+ * @memberof agate/Picker.Picker.prototype
+ * @type {String}
+ * @default 'vertical'
  * @public
  */
 

@@ -96,19 +96,6 @@ const RangePickerBase = kind({
 		onChange: PropTypes.func,
 
 		/**
-		 * Orientation of the picker.
-		 *
-		 * Controls whether the buttons are arranged horizontally or vertically around the value.
-		 *
-		 * * Values: `'horizontal'`, `'vertical'`
-		 *
-		 * @type {String}
-		 * @default 'vertical'
-		 * @public
-		 */
-		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-
-		/**
 		 * The smallest value change allowed for the picker.
 		 *
 		 * For example, a step of `2` would cause the picker to increment from 0 to 2 to 4, etc.
@@ -145,7 +132,7 @@ const RangePickerBase = kind({
  * @name `aria-valuetext`
  * @memberof agate/Picker.Picker.prototype
  * @type {String|Number}
- * @memberof agate/internal/Picker.Picker.prototype
+ * @memberof agate/RangePicker.RangePicker.prototype
  * @public
  */
 
@@ -153,7 +140,7 @@ const RangePickerBase = kind({
  * Sets the hint string read when focusing the decrement button.
  *
  * @name decrementAriaLabel
- * @memberof agate/Picker.Picker.prototype
+ * @memberof agate/RangePicker.RangePicker.prototype
  * @default 'previous item'
  * @type {String}
  * @public
@@ -163,9 +150,23 @@ const RangePickerBase = kind({
  * Sets the hint string read when focusing the increment button.
  *
  * @name incrementAriaLabel
- * @memberof agate/Picker.Picker.prototype
+ * @memberof agate/RangePicker.RangePicker.prototype
  * @default 'next item'
  * @type {String}
+ * @public
+ */
+
+/**
+ * Orientation of the picker.
+ *
+ * Controls whether the buttons are arranged horizontally or vertically around the value.
+ *
+ * * Values: `'horizontal'`, `'vertical'`
+ *
+ * @name orientation
+ * @memberof agate/RangePicker.RangePicker.prototype
+ * @type {String}
+ * @default 'vertical'
  * @public
  */
 
