@@ -1,5 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, text} from '@enact/storybook-utils/addons/knobs';
+import {text, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -15,10 +15,11 @@ storiesOf('Agate', module)
 		() => (
 			<ThumbnailItem
 				src="https://dummyimage.com/64/e048e0/0011ff"
-				roundThumbnail={boolean('roundThumbnail', Config)}
-				content={text('content', Config, 'Main Content')}
-				subContent={text('subContent', Config, 'Sub Content')}
-			/>
+				label={text('label', Config, 'Sub Content')}
+				type={select('type', ['round', 'square'], Config)}
+			>
+				{text('children', Config, 'Main Content')}
+			</ThumbnailItem>
 		),
 		{
 			text: 'Basic usage of ThumbnailItem'

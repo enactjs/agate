@@ -2,11 +2,7 @@
  * Provides an Agate-themed thumbnail item.
  *
  * @example
- * <ThumbnailItem
- * 		src="https://dummyimage.com/64/e048e0/0011ff"
- * 		content="Content"
- * 		subContent="Sub Content"
- * />
+ * <ThumbnailItem src="https://dummyimage.com/64/e048e0/0011ff">An image!</ThumbnailItem>
  *
  * @module agate/ThumbnailItem
  * @exports ThumbnailItem
@@ -40,7 +36,7 @@ const ThumbnailItemBase = kind({
 		 * @type {String}
 		 * @public
 		 */
-		content: PropTypes.string,
+		children: PropTypes.string,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -60,13 +56,13 @@ const ThumbnailItemBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Applies a round thumbnail to the ThumbnailItem.
+		 * The thumbnail type.
 		 *
-		 * @type {Boolean}
-		 * @default false
+		 * @type {('round'|'square')}
+		 * @default 'square'
 		 * @public
 		 */
-		roundThumbnail: PropTypes.bool,
+		type: PropTypes.oneOf(['round', 'square']),
 
 		/**
 		 * String value used to determine which thumbnail will appear on a specific screenSize.
@@ -77,20 +73,16 @@ const ThumbnailItemBase = kind({
 		src: PropTypes.string,
 
 		/**
-		 * The components that will be shown with the thumbnail.
-		 *
-		 * @type {Element}
-		 * @private
-		 */
-		subComponents: PropTypes.element,
-
-		/**
 		 * The sub content displayed with the thumbnail.
 		 *
 		 * @type {String}
 		 * @public
 		 */
-		subContent: PropTypes.string
+		label: PropTypes.string
+	},
+
+	defaultProps: {
+		type: 'square'
 	},
 
 	styles: {
@@ -100,19 +92,12 @@ const ThumbnailItemBase = kind({
 	},
 
 	computed: {
-		className: ({roundThumbnail, styler}) => styler.append({roundThumbnail}),
-
-		subComponents: ({content, subContent, css}) => {
-			return (
-				<React.Fragment>
-					{content ? <div className={css.content}>{content}</div> : null}
-					{subContent ? <div className={css.subContent}>{subContent}</div> : null}
-				</React.Fragment>
-			);
-		}
+		className: ({type, styler}) => styler.append({
+			roundThumbnail: type === 'round'
+		}),
 	},
 
-	render: ({css, src, subComponents, ...rest}) => {
+	render: ({css, children, label, src, ...rest}) => {
 		return (
 			<Item
 				{...rest}
@@ -123,7 +108,12 @@ const ThumbnailItemBase = kind({
 						src={src}
 					/>
 				</slotBefore>
-				{subComponents}
+				<div className={css.content}>
+					{children}
+				</div>
+				<div className={css.subContent}>
+					{label}
+				</div>
 			</Item>
 		);
 	}
