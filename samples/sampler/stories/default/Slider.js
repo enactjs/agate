@@ -25,6 +25,7 @@ storiesOf('Agate', module)
 				onKeyDown={action('onKeyDown')}
 				onKeyUp={action('onKeyUp')}
 				orientation={select('orientation', ['horizontal', 'vertical'], Config, 'horizontal')}
+				progressAnchor={number('progressAnchor', Config, {range: true, min: 0, max: 1, step: 0.1}, 0.5)}
 				step={number('step', Config)}
 			/>
 		),
