@@ -56,13 +56,12 @@ const ThumbnailItemBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * The thumbnail type.
+		 * The sub content displayed with the thumbnail.
 		 *
-		 * @type {('round'|'square')}
-		 * @default 'square'
+		 * @type {String}
 		 * @public
 		 */
-		type: PropTypes.oneOf(['round', 'square']),
+		label: PropTypes.string,
 
 		/**
 		 * String value used to determine which thumbnail will appear on a specific screenSize.
@@ -73,12 +72,13 @@ const ThumbnailItemBase = kind({
 		src: PropTypes.string,
 
 		/**
-		 * The sub content displayed with the thumbnail.
+		 * The thumbnail type.
 		 *
-		 * @type {String}
+		 * @type {('round'|'square')}
+		 * @default 'square'
 		 * @public
 		 */
-		label: PropTypes.string
+		type: PropTypes.oneOf(['round', 'square'])
 	},
 
 	defaultProps: {
@@ -94,7 +94,7 @@ const ThumbnailItemBase = kind({
 	computed: {
 		className: ({type, styler}) => styler.append({
 			roundThumbnail: type === 'round'
-		}),
+		})
 	},
 
 	render: ({css, children, label, src, ...rest}) => {
@@ -123,8 +123,8 @@ const ThumbnailItemBase = kind({
  * A stateless, unfocusable item that can display a thumbnail.
  *
  * @class ThumbnailItem
- * @memberof @agate/ThumbnailItem
- * @extends @agate/ThumbnailItem.ThumbnailItemBase
+ * @memberof agate/ThumbnailItem
+ * @extends agate/ThumbnailItem.ThumbnailItemBase
  * @ui
  * @public
  */

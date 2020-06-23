@@ -4,6 +4,8 @@
 @import "../styles/skin.less";
 
 .thumbnailItem {
+  	align-items: center;
+
 	.thumbnail {
 		height: auto;
 		width: auto;
@@ -16,24 +18,28 @@
 		}
 	}
 
-	.content {
-		overflow: hidden;
-	}
-
+	.content,
 	.subContent {
-		overflow: hidden;
+	  	overflow: hidden;
 	}
 
   	.slotBefore {
 	  	display: flex;
 	}
 
+  	.active({
+	  	.slotBefore {
+		  	&::before {
+			  	content: "";
+			}
+		}
+	});
+
 	.applySkins({
-		align-items: center;
 	  	line-height: @agate-thumbnailitem-line-height;
 	  	height: @agate-thumbnailitem-height;
-		border: @agate-thumbnailitem-border;
-		border-bottom: @agate-thumbnailitem-border-width solid @agate-thumbnailitem-border-color;
+	  	border: @agate-thumbnailitem-border;
+	  	border-bottom: @agate-thumbnailitem-border-bottom-width solid @agate-thumbnailitem-border-color;
 
 		.content {
 			padding: 0 @agate-component-spacing;
@@ -53,9 +59,8 @@
 		}
 
 	  	.focus({
-			border: @agate-thumbnailitem-border-focus;
-			border-bottom: @agate-thumbnailitem-border-width solid @agate-thumbnailitem-border-color;
-			background-color: @agate-thumbnailitem-focus-bg-color;
+		  	background-color: @agate-thumbnailitem-focus-bg-color;
+		  	border-color: @agate-thumbnailitem-focus-border-color;
 
 			.content {
 				color: @agate-thumbnailitem-focus-text-color;
@@ -71,12 +76,11 @@
 		  	border-color: @agate-thumbnailitem-selected-border-color;
 
 		  	.subContent {
-			  color: @agate-thumbnailitem-subcontent-selected-text-color;
+			  	color: @agate-thumbnailitem-subcontent-selected-text-color;
 			}
 
 		  	.slotBefore {
 				&::before {
-					content: "";
 					height: @agate-indicator-height;
 					width: @agate-indicator-height;
 					background-color: @agate-indicator-bg-color;

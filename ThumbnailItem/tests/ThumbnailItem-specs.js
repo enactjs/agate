@@ -6,9 +6,11 @@ import ThumbnailItem from '../ThumbnailItem';
 import css from '../ThumbnailItem.module.less';
 
 describe('ThumbnailItem Specs', () => {
-	test('should apply `.content` when content is defined', () => {
+	test('should apply `.content` when children is defined', () => {
 		const subject = shallow(
-			<ThumbnailItem content="content" />
+			<ThumbnailItem>
+				{'content'}
+			</ThumbnailItem>
 		);
 
 		const expected = 1;
@@ -17,9 +19,9 @@ describe('ThumbnailItem Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should apply `.subContent` when subContent is defined', () => {
+	test('should apply `.subContent` when label is defined', () => {
 		const subject = shallow(
-			<ThumbnailItem subContent="sub content" />
+			<ThumbnailItem label="sub content" />
 		);
 
 		const expected = 1;
@@ -28,9 +30,9 @@ describe('ThumbnailItem Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should apply `.roundThumbnail` when `roundThumbnail=true`', () 	=> {
+	test('should apply `.roundThumbnail` when `type=true`', () 	=> {
 		const subject = shallow(
-			<ThumbnailItem roundThumbnail />
+			<ThumbnailItem type="round" />
 		);
 
 		const expected = 1;
