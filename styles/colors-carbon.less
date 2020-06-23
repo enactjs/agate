@@ -42,7 +42,7 @@
 // ---------------------------------------
 @agate-button-color:          @agate-foreground;
 @agate-button-bg-color:       @agate-background;
-@agate-button-bg-image:       linear-gradient(to bottom left, transparent, #333);
+@agate-button-bg-image:       linear-gradient(to bottom left, transparent, @agate-darker-gray);
 @agate-button-border-color:   @agate-accent;
 @agate-button-shadow:         none;
 @agate-button-focus-color:    @agate-spotlight-color;
@@ -114,10 +114,10 @@
 // Panels
 // ---------------------------------------
 @agate-panels-partial-bg-color:       fade(@agate-bg-color, 50%);
-@agate-panels-tab-separator-border-color: #333;
+@agate-panels-tab-separator-border-color: @agate-darker-gray;
 @agate-panels-tab-color:              @agate-foreground;
 @agate-panels-tab-bg-color:           transparent;
-@agate-panels-tab-bg-image:           linear-gradient(to bottom, transparent, fade(#333, 50%));
+@agate-panels-tab-bg-image:           linear-gradient(to bottom, transparent, fade(@agate-darker-gray, 50%));
 @agate-panels-tab-selected-color:     fade(white, 90%);
 @agate-panels-tab-selected-bg-color:  transparent;
 @agate-panels-tab-selected-bg-image:  linear-gradient(to bottom, ~"hsla(var(--agate-highlight-h, 0), var(--agate-highlight-s, 0), var(--agate-highlight-l, 0), 0.1)", @agate-highlight 98%, @agate-accent);
@@ -183,7 +183,7 @@
 @agate-slider-focus-bg-color: @agate-slider-bg-color;
 @agate-slider-focus-bg-image: none;
 @agate-slider-knob-bg-color:  @agate-accent;
-@agate-slider-knob-bg-image:  linear-gradient(to bottom, transparent, fade(#333, 50%));
+@agate-slider-knob-bg-image:  linear-gradient(to bottom, transparent, fade(@agate-darker-gray, 50%));
 @agate-slider-knob-focus-bg-color: @agate-slider-knob-bg-color;
 @agate-slider-knob-focus-bg-image: @agate-slider-knob-bg-image;
 @agate-slider-knob-shadow-color: fade(black, 30%);
