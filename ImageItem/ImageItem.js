@@ -60,6 +60,8 @@ const ImageItemBase = kind({
 		 */
 		css: PropTypes.object,
 
+		labelOverImage: PropTypes.any,
+
 		/**
 		 * The layout orientation of the component.
 		 *
@@ -88,20 +90,28 @@ const ImageItemBase = kind({
 		className: 'imageItem'
 	},
 
-	render: ({children, css, src, ...rest}) => {
+	render: ({children, css, labelOverImage, src, ...rest}) => {
 		const [Component, marqueeProps] = children ? [MarqueeImageItem, {
 			alignment: 'center',
 			children
 		}] : [UiImageItem, null];
 
 		return (
-			<Component
-				{...rest}
-				{...marqueeProps}
-				css={css}
-				imageComponent={ImageBase}
-				src={src}
-			/>
+			<React.Fragment>
+				<Component
+					{...rest}
+					{...marqueeProps}
+					css={css}
+					imageComponent={ImageBase}
+					src={src}
+				/>
+				{labelOverImage ? (
+					<div className={css.labelOverImage}>
+						{labelOverImage}
+					</div>) :
+					null
+				}
+			</React.Fragment>
 		);
 	}
 });
