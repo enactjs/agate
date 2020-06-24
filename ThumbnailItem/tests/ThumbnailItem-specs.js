@@ -19,17 +19,6 @@ describe('ThumbnailItem Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should apply `.subContent` when label is defined', () => {
-		const subject = shallow(
-			<ThumbnailItem label="sub content" />
-		);
-
-		const expected = 1;
-		const actual = subject.find(`.${css.subContent}`).length;
-
-		expect(actual).toBe(expected);
-	});
-
 	test('should apply `.roundThumbnail` when `type=true`', () 	=> {
 		const subject = shallow(
 			<ThumbnailItem type="round" />

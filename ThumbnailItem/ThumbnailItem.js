@@ -61,7 +61,6 @@ const ThumbnailItemBase = kind({
 		 * @type {String}
 		 * @public
 		 */
-		label: PropTypes.string,
 
 		/**
 		 * String value used to determine which thumbnail will appear on a specific screenSize.
@@ -97,12 +96,10 @@ const ThumbnailItemBase = kind({
 		})
 	},
 
-	render: ({css, children, label, src, ...rest}) => {
+	render: ({css, children, src, ...rest}) => {
 		return (
-			<Item
-				{...rest}
-			>
-				<slotBefore className={css.slotBefore}>
+			<Item {...rest} css={css}>
+				<slotBefore>
 					<img
 						className={css.thumbnail}
 						src={src}
@@ -110,9 +107,6 @@ const ThumbnailItemBase = kind({
 				</slotBefore>
 				<div className={css.content}>
 					{children}
-				</div>
-				<div className={css.subContent}>
-					{label}
 				</div>
 			</Item>
 		);

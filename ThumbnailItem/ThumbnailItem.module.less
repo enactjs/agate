@@ -18,8 +18,7 @@
 		}
 	}
 
-	.content,
-	.subContent {
+	.content {
 	  	overflow: hidden;
 	}
 
@@ -41,15 +40,17 @@
 	  	border: @agate-thumbnailitem-border;
 	  	border-bottom: @agate-thumbnailitem-border-bottom-width solid @agate-thumbnailitem-border-color;
 
+		&.item {
+			.label {
+				padding: 0 @agate-component-spacing;
+				font-size: @agate-thumbnailitem-subcontent-font-size;
+				color: @agate-thumbnailitem-subcontent-text-color;
+			}
+		}
+
 		.content {
 			padding: 0 @agate-component-spacing;
 			font-size: @agate-thumbnailitem-content-font-size
-		}
-
-		.subContent {
-			padding: 0 @agate-component-spacing;
-			font-size: @agate-thumbnailitem-subcontent-font-size;
-		  	color: @agate-thumbnailitem-subcontent-text-color;
 		}
 
 		&.roundThumbnail {
@@ -66,20 +67,24 @@
 				color: @agate-thumbnailitem-focus-text-color;
 			}
 
-			.subContent {
-				color: @agate-thumbnailitem-subcontent-focus-text-color;
+			&.item {
+				.label {
+					color: @agate-thumbnailitem-subcontent-focus-text-color;
+				}
 			}
 		});
 
-	  	.active({
-		  	background-color: @agate-thumbnailitem-selected-bg-color;
-		  	border-color: @agate-thumbnailitem-selected-border-color;
+		.active({
+			background-color: @agate-thumbnailitem-selected-bg-color;
+			border-color: @agate-thumbnailitem-selected-border-color;
 
-		  	.subContent {
-			  	color: @agate-thumbnailitem-subcontent-selected-text-color;
+			&.item {
+				.label {
+					color: @agate-thumbnailitem-subcontent-selected-text-color;
+				}
 			}
 
-		  	.slotBefore {
+			.slotBefore {
 				&::before {
 					height: @agate-indicator-height;
 					width: @agate-indicator-height;
@@ -89,7 +94,7 @@
 					align-self: @agate-indicator-align-self;
 					margin-right: @agate-indicator-margin-right;
 				}
-		  	}
-	  	})
+			}
+		})
 	});
 }
