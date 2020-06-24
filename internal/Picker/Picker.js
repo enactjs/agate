@@ -314,7 +314,7 @@ const Picker = PickerDecorator(PickerBase);
 
 export default Picker;
 export {
-	PickerBase,
 	Picker,
+	PickerBase,
 	PickerDecorator
 };

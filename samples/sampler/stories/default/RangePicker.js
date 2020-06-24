@@ -20,7 +20,7 @@ storiesOf('Agate', module)
 					min={number('min', Config, 0)}
 					onChange={action('onChange')}
 					orientation={select('orientation', ['vertical', 'horizontal'], Config)}
-					step={number('step', Config, 1)}
+					step={number('step', Config)}
 				/>
 			</div>
 		),
