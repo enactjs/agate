@@ -82,7 +82,7 @@ const PickerBase = kind({
 	},
 
 	render: (props) => {
-		const {children, value, max, ...rest} = props;
+		const {children, max, value, ...rest} = props;
 
 		return (
 			<PickerCore {...rest} min={0} max={max} step={1} value={value}>

@@ -205,6 +205,13 @@ const PickerBase = kind({
 	computed: {
 		activeClassName: ({styler}) => styler.join('active', 'item'),
 		className: ({orientation, styler}) => styler.append(orientation),
+		currentValueText: ({'aria-valuetext': valueText, children: values, value}) => {
+			if (Array.isArray(values)) {
+				return `${typeof valueText !== 'undefined' ? valueText : values[value]}`;
+			} else {
+				return `${typeof valueText !== 'undefined' ? valueText : value}`;
+			}
+		},
 		decrementAriaLabel: ({'aria-valuetext': valueText, children: values, decrementAriaLabel = $L('previous item'), value}) => {
 			if (Array.isArray(values)) {
 				return `${valueText != null ? valueText : values[value]} ${decrementAriaLabel}`;
@@ -213,7 +220,6 @@ const PickerBase = kind({
 			}
 
 		},
-		valueId: ({id}) => `${id}_value`,
 		incrementAriaLabel: ({'aria-valuetext': valueText, children: values, incrementAriaLabel = $L('next item'), value}) => {
 			if (Array.isArray(values)) {
 				return `${valueText != null ? valueText : values[value]} ${incrementAriaLabel}`;
@@ -221,13 +227,7 @@ const PickerBase = kind({
 				return `${valueText != null ? valueText : value} ${incrementAriaLabel}`;
 			}
 		},
-		currentValueText: ({'aria-valuetext': valueText, children: values, value}) => {
-			if (Array.isArray(values)) {
-				return `${typeof valueText !== 'undefined' ? valueText : values[value]}`;
-			} else {
-				return `${typeof valueText !== 'undefined' ? valueText : value}`;
-			}
-		}
+		valueId: ({id}) => `${id}_value`
 	},
 
 	render: (props) => {
@@ -247,6 +247,9 @@ const PickerBase = kind({
 			valueId,
 			...rest
 		} = props;
+		const currentValue = Array.isArray(values) ? values[value] : value;
+		const decrementValue = clamp(min, max, Array.isArray(values) ? values[value - step] : value - step);
+		const incrementValue = clamp(min, max, Array.isArray(values) ? values[value + step] : value + step);
 		const isFirst = value <= min;
 		const isLast = value >= max;
 
@@ -257,11 +260,11 @@ const PickerBase = kind({
 					aria-disabled={isFirst}
 					aria-label={decrementAriaLabel}
 					className={css.itemDecrement}
-					onClick={handleDecrement}
 					disabled={isFirst}
+					onClick={handleDecrement}
 				>
 					<div className={css.label}>
-						{isFirst ? '' :  clamp(min, max, Array.isArray(values) ? values[value - step] : value - step)}
+						{isFirst ? '' : decrementValue}
 					</div>
 				</PickerButtonItem>
 				<div
@@ -271,7 +274,7 @@ const PickerBase = kind({
 					role="spinbutton"
 				>
 					<div className={css.label}>
-						{Array.isArray(values) ? values[value] : value}
+						{currentValue}
 					</div>
 				</div>
 				<PickerButtonItem
@@ -279,11 +282,11 @@ const PickerBase = kind({
 					aria-disabled={isLast}
 					aria-label={incrementAriaLabel}
 					className={css.itemIncrement}
-					onClick={handleIncrement}
 					disabled={isLast}
+					onClick={handleIncrement}
 				>
 					<div className={css.label}>
-						{isLast ? '' : clamp(min, max, Array.isArray(values) ? values[value + step] : value + step)}
+						{isLast ? '' : incrementValue}
 					</div>
 				</PickerButtonItem>
 			</PickerRoot>
@@ -311,6 +314,7 @@ const Picker = PickerDecorator(PickerBase);
 
 export default Picker;
 export {
+	PickerBase,
 	Picker,
 	PickerDecorator
 };

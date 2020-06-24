@@ -180,6 +180,7 @@ const RangePickerBase = kind({
  * @class RangePicker
  * @memberof agate/RangePicker
  * @mixes ui/Changeable.Changeable
+ * @mixes ui/internal/Pure.Pure
  * @ui
  * @public
  */

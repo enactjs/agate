@@ -4,9 +4,10 @@ import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
+import {PickerBase} from '@enact/agate/internal/Picker';
 import Picker from '@enact/agate/Picker';
 
-const Config = mergeComponentMetadata('Picker', Picker);
+const Config = mergeComponentMetadata('Picker', Picker, PickerBase);
 
 storiesOf('Agate', module)
 	.add(
