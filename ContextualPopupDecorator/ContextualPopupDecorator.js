@@ -25,7 +25,7 @@ import ReactDOM from 'react-dom';
 import {ContextualPopup} from './ContextualPopup';
 
 import css from './ContextualPopupDecorator.module.less';
-import Skinnable from "../Skinnable";
+import Skinnable from '../Skinnable';
 
 /**
  * Default config for {@link agate/ContextualPopupDecorator.ContextualPopupDecorator}
