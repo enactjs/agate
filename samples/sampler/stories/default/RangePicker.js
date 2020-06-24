@@ -13,16 +13,15 @@ storiesOf('Agate', module)
 	.add(
 		'RangePicker',
 		() => (
-			<div style={{padding: '0 20%'}}>
-				<RangePicker
-					disabled={boolean('disabled', Config)}
-					max={number('max', Config, 20)}
-					min={number('min', Config, 0)}
-					onChange={action('onChange')}
-					orientation={select('orientation', ['vertical', 'horizontal'], Config)}
-					step={number('step', Config)}
-				/>
-			</div>
+			<RangePicker
+				defaultValue={5}
+				disabled={boolean('disabled', Config)}
+				max={number('max', Config, 20)}
+				min={number('min', Config, 0)}
+				onChange={action('onChange')}
+				orientation={select('orientation', ['vertical', 'horizontal'], Config)}
+				step={number('step', Config)}
+			/>
 		),
 		{
 			text: 'Basic usage of RangePicker'
