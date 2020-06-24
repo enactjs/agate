@@ -18,22 +18,22 @@
 // Button
 // ---------------------------------------
 @agate-button-active-bg-image: none;
+@agate-button-active-opacity: 0.75;
 @agate-button-border-radius: (@agate-button-height / 2);
+@agate-button-background-origin: border-box;
 @agate-button-client-animation-offset: (@agate-button-animation-duration * 0.4);
 @agate-button-badge-animation-offset: (@agate-button-animation-duration * 0.8);
 @agate-button-badge-position: -3px 0 auto auto;
-@agate-button-border-width: 2px;
+@agate-button-border-width: 3px;
 @agate-button-font-size: 36px;
 @agate-button-font-weight: 300;
 @agate-button-height: 75px;
 @agate-button-line-height: 1.17em;
-@agate-button-huge-border-radius: (@agate-button-huge-height / 2);
 @agate-button-huge-border-width: @agate-button-border-width;
-@agate-button-huge-height: 90px;
 @agate-button-small-border-radius: (@agate-button-small-height / 2);
 @agate-button-small-height: 60px;
 @agate-button-small-font-size: 28px;
-@agate-button-smallest-height: 30px;
+@agate-button-smallest-height: 39px;
 @agate-button-smallest-font-size: 18px;
 
 // Checkbox
@@ -231,6 +231,14 @@
 
 // ToggleButton
 // ---------------------------------------
-@agate-togglebutton-indicator-position: auto 33px 9px 33px;
-@agate-togglebutton-indicator-height: 4px;
-@agate-togglebutton-indicator-border-width: 1px;
+@agate-togglebutton-min-width: 180px;
+@agate-togglebutton-client-padding-left: 24px;
+@agate-togglebutton-padding: 0 @agate-button-h-padding;
+@agate-togglebutton-huge-min-width: 360px;
+@agate-togglebutton-small-min-width: 144px;
+@agate-togglebutton-smallest-min-width: 108px;
+@agate-togglebutton-indicator-border-radius: 50%;
+@agate-togglebutton-indicator-position: 50% auto auto;
+@agate-togglebutton-indicator-height: 15px;
+@agate-togglebutton-indicator-transform: translate(-50%, -50%);
+@agate-togglebutton-indicator-width: @agate-togglebutton-indicator-height;
