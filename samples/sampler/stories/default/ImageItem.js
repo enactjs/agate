@@ -1,6 +1,6 @@
 import ri from '@enact/ui/resolution';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {text, select, boolean} from '@enact/storybook-utils/addons/knobs';
+import {text, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -16,10 +16,8 @@ storiesOf('Agate', module)
 		() => (
 			<div style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}>
 				<ImageItem
-					textOverImage={boolean('textOverImage', Config)}
 					src="http://placehold.it/300x400/9037ab/ffffff&text=Image0"
 					orientation={select('orientation', ['horizontal', 'vertical'], Config)}
-					labelOverImage={text('labelOverImage', Config, '')}
 				>
 					{text('children', Config, 'caption')}
 				</ImageItem>
@@ -35,9 +33,7 @@ storiesOf('Agate QA.Image', module)
 		'without children',
 		() => (
 			<div style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}>
-				<ImageItem src="http://placehold.it/300x400/9037ab/ffffff&text=Image0"
-					labelOverImage={text('labelOverImage', Config, '')}
-				/>
+				<ImageItem src="http://placehold.it/300x400/9037ab/ffffff&text=Image0" />
 			</div>
 		)
 	);
