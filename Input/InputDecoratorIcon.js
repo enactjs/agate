@@ -82,7 +82,7 @@ const InputDecoratorIconBase = kind({
  */
 
 const InputDecoratorIcon = compose(
-	onlyUpdateForKeys(['children', 'size', 'skin']),
+	onlyUpdateForKeys(['children', 'size']),
 	Skinnable({prop: 'skin'})
 )(InputDecoratorIconBase);
 
