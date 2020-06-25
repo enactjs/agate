@@ -3,8 +3,10 @@ import kind from '@enact/core/kind';
 import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
 import React from 'react';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 
 import Icon from '../Icon';
+import Skinnable from '../Skinnable';
 
 import css from './Input.module.less';
 
@@ -46,10 +48,6 @@ const InputDecoratorIconBase = kind({
 		size: PropTypes.oneOf(['small', 'large'])
 	},
 
-	defaultProps: {
-		size: 'small'
-	},
-
 	styles: {
 		css,
 		className: 'icon'
@@ -58,7 +56,8 @@ const InputDecoratorIconBase = kind({
 	computed: {
 		className: ({position, styler}) => {
 			return styler.append('icon' + (position === 'before' ? 'Before' : 'After'));
-		}
+		},
+		size: ({skin}) => (skin === 'silicon' ? 'small' : 'large')
 	},
 
 	render: ({children, ...rest}) => {
@@ -75,10 +74,15 @@ const InputDecoratorIconBase = kind({
  *
  * @class InputDecoratorIcon
  * @memberof agate/Input
+ * @mixes agate/Skinnable.Skinnable
  * @ui
  * @private
  */
-const InputDecoratorIcon = onlyUpdateForKeys(['children', 'size'])(InputDecoratorIconBase);
+
+const InputDecoratorIcon = compose(
+	onlyUpdateForKeys(['children', 'size', 'skin']),
+	Skinnable({prop: 'skin'})
+)(InputDecoratorIconBase);
 
 export default InputDecoratorIcon;
 export {
