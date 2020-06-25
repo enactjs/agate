@@ -20,6 +20,7 @@ storiesOf('Agate', module)
 					noAutoDismiss={boolean('noAutoDismiss', Config)}
 					onClose={action('onClose')}
 					onHide={action('onHide')}
+					onScreenDisplay={boolean('onScreenDisplay', Config)}
 					open={boolean('open', Config)}
 					scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
 					spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}

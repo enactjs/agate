@@ -56,6 +56,16 @@ const PopupBase = kind({
 		noAnimation: PropTypes.bool,
 		onClose: PropTypes.func,
 		onHide: PropTypes.func,
+
+		/**
+		 * Puts the popup on top of screen.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		onScreenDisplay: PropTypes.bool,
+
 		open: PropTypes.bool,
 		skin: PropTypes.string,
 		title: PropTypes.string
@@ -71,19 +81,20 @@ const PopupBase = kind({
 		className: 'popup'
 	},
 	computed: {
-		className: ({closeButton, title, styler, centered}) => styler.append({withCloseButton: closeButton, withTitle: title, centered})
+		className: ({centered, closeButton, onScreenDisplay, styler, title}) => styler.append({onScreenDisplay: onScreenDisplay, withCloseButton: closeButton, withTitle: title, centered})
 	},
-	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, open, skin, title, ...rest}) => {
+	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, open, onScreenDisplay, skin, title, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
+		const transitionType = (onScreenDisplay ? "slide" : "fade");
 		delete rest.centered;
 
 		return (
 			<Transition
 				noAnimation={noAnimation}
 				visible={open}
-				direction="down"
+				direction="up"
 				duration="short"
-				type="fade"
+				type={transitionType}
 				className={css.popupTransitionContainer}
 				onHide={onHide}
 				css={css}

@@ -18,6 +18,13 @@
 		}
 	}
 
+	&.onScreenDisplay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		transform: none;
+	}
+
 	.closeButton {
 		position: absolute;
 		top: 0;
@@ -30,6 +37,7 @@
 	}
 
 	.applySkins({
+		color: @agate-popup-text-color;
 		min-width: @agate-popup-min-width;
 		max-width: @agate-popup-max-width;
 		box-shadow: @agate-popup-shadow;
@@ -40,6 +48,19 @@
 		border-width: @agate-popup-border-width;
 		border-color: @agate-popup-border-color;
 		border-radius: @agate-popup-border-radius;
+		opacity: @agate-popup-opacity;
+
+		.title {
+			color: @agate-popup-text-color;
+		}
+
+		&.onScreenDisplay {
+			border-radius: @agate-popup-osd-border-radius;
+			max-width: 100%;
+			margin: @agate-popup-osd-margin;
+			padding: @agate-popup-osd-padding;
+			width: @agate-popup-osd-width;
+		}
 
 		&:not(.withTitle) {
 			.body {
