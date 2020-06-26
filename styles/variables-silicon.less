@@ -139,19 +139,21 @@
 @agate-popup-max-width: 70%;
 @agate-popup-border-width: 1px 0;
 @agate-popup-border-radius: 39px;
-@agate-popup-border: 1px solid transparent;
-@agate-popup-padding: (@agate-component-spacing * 4) @agate-component-spacing;
-@agate-popup-title-padding: 0 (@agate-button-small-height) 0 0;
-@agate-popup-body-padding: (@agate-component-spacing * 2);
-@agate-popup-body-margin: -@agate-component-spacing;  // Extend to the edge
-@agate-popup-body-border-radius: 0;
-@agate-popup-buttons-padding: (2 * @agate-component-spacing) 0 0 0;
+@agate-popup-border: none;
+@agate-popup-padding: (@agate-component-spacing * 2) 0 0 0;
+@agate-popup-closebutton-title-padding: 0 (@agate-button-small-height) 0 0;
+@agate-popup-title-padding: 0 @agate-component-spacing;
+@agate-popup-body-padding: (@agate-component-spacing * 2) 0 0 0;
+@agate-popup-body-margin: 0;  // Extend to the edge
+@agate-popup-body-border-radius: 0 0 @agate-popup-border-radius @agate-popup-border-radius;
+@agate-popup-buttons-border-radius: @agate-popup-body-border-radius;
+@agate-popup-buttons-padding: @agate-component-spacing 0;
+@agate-popup-content-padding: @agate-component-spacing @agate-component-spacing (3 * @agate-component-spacing) @agate-component-spacing;
 @agate-popup-closebutton-position-left: auto;
 @agate-popup-closebutton-position-right: 0;
 @agate-popup-opacity: 0.95;
 @agate-popup-osd-border-radius: 0 0 @agate-popup-border-radius @agate-popup-border-radius;
 @agate-popup-osd-margin-left: 21px;
-@agate-popup-osd-padding: 21px;
 @agate-popup-osd-width: 100%;
 @agate-popup-osd-width: calc(100% - (2 * @agate-popup-osd-margin-left));
 

@@ -86,13 +86,14 @@ const PopupBase = kind({
 	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, open, onScreenDisplay, skin, title, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
 		const transitionType = (onScreenDisplay ? "slide" : "fade");
+		const direction = (onScreenDisplay ? "up" : "down");
 		delete rest.centered;
 
 		return (
 			<Transition
 				noAnimation={noAnimation}
 				visible={open}
-				direction="up"
+				direction={direction}
 				duration="short"
 				type={transitionType}
 				className={css.popupTransitionContainer}

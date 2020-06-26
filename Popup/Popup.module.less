@@ -52,13 +52,13 @@
 
 		.title {
 			color: @agate-popup-text-color;
+			padding: @agate-popup-title-padding;
 		}
 
 		&.onScreenDisplay {
 			border-radius: @agate-popup-osd-border-radius;
 			max-width: 100%;
 			margin: @agate-popup-osd-margin;
-			padding: @agate-popup-osd-padding;
 			width: @agate-popup-osd-width;
 		}
 
@@ -83,12 +83,18 @@
 
 		&.withCloseButton {
 			.title {
-				padding: @agate-popup-title-padding;
+				padding: @agate-popup-closebutton-title-padding;
 			}
 		}
 
 		.buttons {
 			padding: @agate-popup-buttons-padding;
+			background-color: @agate-popup-buttons-bg-color;
+			border-radius: @agate-popup-buttons-border-radius;
+		}
+
+		.content {
+			padding: @agate-popup-content-padding;
 		}
 
 		.closeButton {

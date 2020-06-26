@@ -4,6 +4,7 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
+import {Button} from '@enact/agate/Button';
 import {Popup, PopupBase} from '@enact/agate/Popup';
 
 const Config = mergeComponentMetadata('Popup', PopupBase);
@@ -27,6 +28,10 @@ storiesOf('Agate', module)
 					title={text('title', Config, 'Title')}
 				>
 					<div>{text('children', Config, 'Hello Popup')}</div>
+					{/*<buttons>*/}
+					{/*	<Button>NO</Button>*/}
+					{/*	<Button>YES</Button>*/}
+					{/*</buttons>*/}
 				</Popup>
 				Use KNOBS to interact with Popup.
 			</div>
