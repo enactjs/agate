@@ -4,7 +4,7 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import {Button} from '@enact/agate/Button';
+import Button from '@enact/agate/Button';
 import {Popup, PopupBase} from '@enact/agate/Popup';
 
 const Config = mergeComponentMetadata('Popup', PopupBase);
@@ -13,7 +13,7 @@ storiesOf('Agate', module)
 	.add(
 		'Popup',
 		() => {
-			const closeButton = boolean('buttons', Config, false);
+			const buttons = boolean('buttons', Config, false);
 
 			return (
 				<div>
@@ -31,7 +31,7 @@ storiesOf('Agate', module)
 						title={text('title', Config, 'Title')}
 					>
 						<div>{text('children', Config, 'Hello Popup')}</div>
-						{closeButton ? (
+						{buttons ? (
 							<buttons>
 								<Button>NO</Button>
 								<Button>YES</Button>

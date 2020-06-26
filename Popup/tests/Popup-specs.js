@@ -51,4 +51,26 @@ describe('Popup specs', () => {
 
 		expect(actual).toBe(expected);
 	});
+
+	test('should be rendered in onScreenDisplay mode if onScreenDisplay is set to true', () => {
+		const popup = mount(
+			<Popup onScreenDisplay />
+		);
+
+		const expected = true;
+		const actual = popup.prop('onScreenDisplay');
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should not be rendered in onScreenDisplay mode if onScreenDisplay is set to false', () => {
+		const popup = mount(
+			<Popup onScreenDisplay={false} />
+		);
+
+		const expected = false;
+		const actual = popup.prop('onScreenDisplay');
+
+		expect(actual).toBe(expected);
+	});
 });

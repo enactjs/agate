@@ -39,7 +39,6 @@
 	.applySkins({
 		color: @agate-popup-text-color;
 		min-width: @agate-popup-min-width;
-		max-width: @agate-popup-max-width;
 		box-shadow: @agate-popup-shadow;
 		background-color: @agate-popup-bg-color;
 		background-image: @agate-popup-bg-image;
@@ -50,16 +49,15 @@
 		border-radius: @agate-popup-border-radius;
 		opacity: @agate-popup-opacity;
 
+		&.onScreenDisplay {
+			border-radius: @agate-popup-osd-border-radius;
+			margin: @agate-popup-osd-margin;
+			width: @agate-popup-osd-width;
+		}
+
 		.title {
 			color: @agate-popup-text-color;
 			padding: @agate-popup-title-padding;
-		}
-
-		&.onScreenDisplay {
-			border-radius: @agate-popup-osd-border-radius;
-			max-width: 100%;
-			margin: @agate-popup-osd-margin;
-			width: @agate-popup-osd-width;
 		}
 
 		&:not(.withTitle) {
