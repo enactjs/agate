@@ -106,13 +106,10 @@
 				}
 			}
 		});
-	});
 
-	&:global(.spottable):active,
-	:global(.spottable):active & {
-		.applySkins({
+		.active({
 			background-color: @agate-item-active-bg-color;
 			color: @agate-item-color;
 		});
-	}
+	});
 }
