@@ -15,6 +15,7 @@
 // Silicon skin color palette
 @silicon-white: #ffffff;
 @silicon-black: #000000;
+@silicon-accent: #ff2d55;
 @silicon-red-pink: #f1304f;
 @silicon-dark: #1b1f35;
 @silicon-vibrant-purple: #9e00d8;
@@ -28,11 +29,11 @@
 @silicon-dark-two: #2a2742;
 @silicon-light-gray: #f2f2f2;
 @silicon-gray: #eeeeee;
+@silicon-dark-gray: #777777;
 @silicon-gradient: linear-gradient(to right, @silicon-vibrant-purple, @silicon-magenta, @silicon-red-pink);
 
-
 // Abstracted Colors
-@agate-accent: var(--agate-accent-color, @silicon-red-pink);
+@agate-accent: var(--agate-accent-color, @silicon-accent);
 @agate-accent-h: var(--agate-accent-h, 350);
 @agate-accent-s: var(--agate-accent-s, 78%);
 @agate-accent-l: var(--agate-accent-l, 57%);
@@ -91,7 +92,7 @@
 @agate-button-highlighted-bg-image: @agate-button-bg-image;
 @agate-button-selected-color: @agate-button-color;
 @agate-button-selected-bg-color: @agate-button-bg-color;
-@agate-button-selected-border-color: @agate-accent;
+@agate-button-selected-border-color: @agate-button-border-color;
 @agate-button-badge-bg-color: @agate-accent;
 
 // Checkbox
@@ -138,6 +139,12 @@
 // Icon
 // ---------------------------------------
 @agate-icon-color: @agate-text-color;
+
+// ImageItem
+// ---------------------------------------
+@agate-imageitem-border-color: transparent;
+@agate-imageitem-focus-border-color: @agate-accent;
+@agate-imageitem-focus-bg-color: @agate-background-focus;
 
 // Input
 // ---------------------------------------
@@ -303,17 +310,17 @@
 
 // Toggle Colors
 // ---------------------------------------
-@agate-togglebutton-indicator-off-bg-color: black;
-@agate-togglebutton-indicator-on-bg-color: @agate-highlight;
-@agate-togglebutton-indicator-off-border-color: @agate-button-border-color;
-@agate-togglebutton-indicator-on-border-color: @agate-accent;
+@agate-togglebutton-indicator-off-bg-color: @silicon-dark-gray;
+@agate-togglebutton-indicator-on-bg-color: @agate-accent;
+@agate-togglebutton-indicator-off-border-color: transparent;
+@agate-togglebutton-indicator-on-border-color: transparent;
 @agate-togglebutton-indicator-off-focus-bg-color: @agate-togglebutton-indicator-off-bg-color;
 @agate-togglebutton-indicator-on-focus-bg-color: @agate-togglebutton-indicator-on-bg-color;
 @agate-togglebutton-indicator-off-focus-border-color: @agate-togglebutton-indicator-on-focus-border-color;
-@agate-togglebutton-indicator-on-focus-border-color: @agate-white;
-@agate-togglebutton-indicator-disabled-off-bg-color: @agate-darker-gray;
-@agate-togglebutton-indicator-disabled-on-bg-color: @agate-togglebutton-indicator-disabled-off-bg-color;
-@agate-togglebutton-indicator-disabled-off-border-color: #6c6c6c;
+@agate-togglebutton-indicator-on-focus-border-color: transparent;
+@agate-togglebutton-indicator-disabled-off-bg-color: @agate-togglebutton-indicator-off-bg-color;
+@agate-togglebutton-indicator-disabled-on-bg-color: @agate-togglebutton-indicator-on-bg-color;
+@agate-togglebutton-indicator-disabled-off-border-color: transparent;
 @agate-togglebutton-indicator-disabled-on-border-color: @agate-togglebutton-indicator-disabled-off-border-color;
 @agate-togglebutton-color: @agate-button-color;
 @agate-togglebutton-bg-color: @agate-button-bg-color;
