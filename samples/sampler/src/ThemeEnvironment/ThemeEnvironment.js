@@ -54,7 +54,7 @@ const PanelsBase = kind({
 
 	render: ({children, description, noHeader, noPanel, noPanels, title, ...rest}) => (
 		<div {...rest}>
-			{!noPanels ?<Panels {...rest} onApplicationClose={reloadPage}>
+			{!noPanels ? <Panels {...rest} onApplicationClose={reloadPage}>
 				{!noPanel ? <Panel className={css.panel}>
 					{!noHeader ? (
 						<Header title={title} subtitle={description} />
@@ -232,7 +232,7 @@ const StorybookDecorator = (story, config = {}) => {
 		const defaultHighlight = defaultColors[skinKnobs.skin].highlight;
 
 		skinKnobs.accent = useSkinDefaultStyles ? defaultAccent : color('accent', defaultAccent, Config.groupId);
-		skinKnobs.highlight = useSkinDefaultStyles ? defaultHighlight : color('highlight',defaultHighlight, Config.groupId);
+		skinKnobs.highlight = useSkinDefaultStyles ? defaultHighlight : color('highlight', defaultHighlight, Config.groupId);
 	}
 
 	return (
@@ -247,7 +247,7 @@ const StorybookDecorator = (story, config = {}) => {
 			title={`${config.kind} ${config.story}`.trim()}
 			{...skinKnobs}
 			{...config.props}
-			>
+		>
 			<Scroller>
 				{allSkins ? Object.keys(skins).map(skin => (
 					<SkinFrame skin={skins[skin]} key={skin}>
@@ -268,7 +268,7 @@ const FullscreenStorybookDecorator = (story, config = {}) => {
 			description={config.description}
 			locale={select('locale', locales, 'en-US')}
 			style={backgroundLabelMap[select('background', backgroundLabels, getKnobFromArgs(args, 'background'))]}
-			skinVariants={boolean('night mode', Config) && 'night'}
+			skinVariants={boolean('night mode') && 'night'}
 			title={`${config.kind} ${config.story}`.trim()}
 		>
 			{sample}
