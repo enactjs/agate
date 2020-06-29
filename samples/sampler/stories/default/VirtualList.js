@@ -1,10 +1,10 @@
+import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
-import {mergeComponentMetadata} from '@enact/storybook-utils';
-import React from 'react';
 import ri from '@enact/ui/resolution';
-import {storiesOf} from '@storybook/react';
 import {VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
+import React from 'react';
+import {storiesOf} from '@storybook/react';
 
 import Item from '@enact/agate/Item';
 import VirtualList from '@enact/agate/VirtualList';

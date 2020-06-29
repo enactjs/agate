@@ -40,6 +40,8 @@ storiesOf('Agate', module)
 			);
 		},
 		{
-			text: 'Basic usage of Icon'
+			info: {
+				text: 'Basic usage of Icon'
+			}
 		}
 	);

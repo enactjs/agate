@@ -34,6 +34,8 @@ storiesOf('Agate', module)
 			/>
 		),
 		{
-			text: 'The basic IncrementSlider'
+			info: {
+				text: 'Basic usage of IncrementSlider'
+			}
 		}
 	);

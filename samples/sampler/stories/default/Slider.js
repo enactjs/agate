@@ -29,6 +29,8 @@ storiesOf('Agate', module)
 			/>
 		),
 		{
-			text: 'The basic Slider'
+			info: {
+				text: 'Basic usage of Slider'
+			}
 		}
 	);

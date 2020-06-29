@@ -1,5 +1,5 @@
-import {action} from '@enact/storybook-utils/addons/actions';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
+import {action} from '@enact/storybook-utils/addons/actions';
 import {select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
@@ -40,6 +40,8 @@ storiesOf('Agate', module)
 			);
 		},
 		{
-			text: 'The basic ColorPicker'
+			info: {
+				text: 'Basic usage of ColorPicker'
+			}
 		}
 	);

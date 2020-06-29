@@ -43,6 +43,8 @@ storiesOf('Agate', module)
 			</Button>
 		),
 		{
-			text: 'The basic Button'
+			info: {
+				text: 'Basic usage of Button'
+			}
 		}
 	);

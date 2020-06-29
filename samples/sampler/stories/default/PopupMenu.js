@@ -74,6 +74,8 @@ storiesOf('Agate', module).add(
 		);
 	},
 	{
-		text: 'Basic usage of PopupMenu'
+		info: {
+			text: 'Basic usage of PopupMenu'
+		}
 	}
 );

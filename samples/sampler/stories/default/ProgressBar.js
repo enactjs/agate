@@ -21,6 +21,8 @@ storiesOf('Agate', module)
 			/>
 		),
 		{
-			text: 'The basic ProgressBar'
+			info: {
+				text: 'Basic usage of ProgressBar'
+			}
 		}
 	);

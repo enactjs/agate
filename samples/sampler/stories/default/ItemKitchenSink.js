@@ -57,6 +57,8 @@ storiesOf('Agate QA.Item', module)
 			</>
 		),
 		{
-			text: 'Item Kitchen Sink'
+			info: {
+				text: 'Item Kitchen Sink'
+			}
 		}
 	);

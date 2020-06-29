@@ -61,6 +61,8 @@ storiesOf('Agate', module)
 			</div>
 		),
 		{
-			text: 'The basic TabbedPanels'
+			info: {
+				text: 'Basic usage of TabbedPanels'
+			}
 		}
 	);

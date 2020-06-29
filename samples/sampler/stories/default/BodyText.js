@@ -26,6 +26,8 @@ storiesOf('Agate', module)
 			</BodyText>
 		),
 		{
-			text: 'The basic Body Text'
+			info: {
+				text: 'Basic usage of BodyText'
+			}
 		}
 	);

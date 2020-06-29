@@ -21,6 +21,8 @@ storiesOf('Agate', module)
 			/>
 		),
 		{
-			text: 'The basic DateTimePicker'
+			info: {
+				text: 'Basic usage of DateTimePicker'
+			}
 		}
 	);

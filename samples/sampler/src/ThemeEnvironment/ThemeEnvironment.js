@@ -1,26 +1,24 @@
-// Agate Environment
+// Theme Environment
 
 import kind from '@enact/core/kind';
-import React from 'react';
-import PropTypes from 'prop-types';
 import {color} from '@storybook/addon-knobs';
-import {Row, Column, Cell} from '@enact/ui/Layout';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
+import {Row, Cell} from '@enact/ui/Layout';
+import classnames from 'classnames';
+import PropTypes from 'prop-types';
+import qs from 'query-string';
+import React from 'react';
 
-import ThemeDecorator from '@enact/agate/ThemeDecorator';
+import Header from '@enact/agate/Header';
 import Heading from '@enact/agate/Heading';
 import {Panels, Panel} from '@enact/agate/Panels';
-import Skinnable from '@enact/agate/Skinnable';
 import Scroller from '@enact/agate/Scroller';
+import Skinnable from '@enact/agate/Skinnable';
+import ThemeDecorator from '@enact/agate/ThemeDecorator';
 
 import css from './ThemeEnvironment.module.less';
 
 const globalGroup = 'Global Knobs';
-
-// const reloadPage = () => {
-// 	const {protocol, host, pathname} = window.parent.location;
-// 	window.parent.location.href = protocol + '//' + host + pathname;
-// };
 
 const SkinFrame = Skinnable(kind({
 	name: 'SkinFrame',
@@ -39,32 +37,31 @@ const reloadPage = () => {
 };
 
 const PanelsBase = kind({
-	name: 'ThemeEnvironment',
+	name: 'ThemeEnvironmentPanels',
 
 	propTypes: {
 		description: PropTypes.string,
+		noHeader: PropTypes.bool,
+		noPanel: PropTypes.bool,
+		noPanels: PropTypes.bool,
 		title: PropTypes.string
 	},
 
-	render: ({children, title, description, ...rest}) => (
+	styles: {
+		css,
+		className: 'themeEnvironmentPanels'
+	},
+
+	render: ({children, description, noHeader, noPanel, noPanels, title, ...rest}) => (
 		<div {...rest}>
-			<Panels onApplicationClose={reloadPage}>
-				<Panel className={css.panel}>
-					<Column>
-						<Cell shrink>
-							<Heading showLine>{title}</Heading>
-							{description ? (
-								<div className={css.description}>
-									<p>{description}</p>
-								</div>
-							) : null}
-						</Cell>
-						<Cell className={css.storyBody}>
-							{children}
-						</Cell>
-					</Column>
-				</Panel>
-			</Panels>
+			{!noPanels ?<Panels {...rest} onApplicationClose={reloadPage}>
+				{!noPanel ? <Panel className={css.panel}>
+					{!noHeader ? (
+						<Header title={title} subtitle={description} />
+					) : null}
+					{children}
+				</Panel> : children}
+			</Panels> : <div {...rest}>{children}</div>}
 		</div>
 	)
 });
@@ -77,9 +74,10 @@ const FullscreenBase = kind({
 	)
 });
 
-const Agate = ThemeDecorator({overlay: false}, PanelsBase);
-const AgateFullscreen = ThemeDecorator({overlay: false}, FullscreenBase);
+const Theme = ThemeDecorator({overlay: false}, PanelsBase);
+const ThemeFullscreen = ThemeDecorator({overlay: false}, FullscreenBase);
 
+// NOTE: Locales taken from strawman. Might need to add more in the future.
 const locales = {
 	'local': '',
 	'en-US - US English': 'en-US',
@@ -98,6 +96,33 @@ const locales = {
 	'si-LK - Sinhala, external font family with different line metrics': 'si-LK'
 };
 
+// This mapping/remapping is necessary to support objects being used as select-knob values, since
+// they cannot be safely URL encoded during the knob saving/linking process.
+const backgroundLabels = {
+	'Default (Based on Skin)': '',
+	'Strawberries (Red)': 'backgroundColorful1',
+	'Tunnel (Green)': 'backgroundColorful2',
+	'Mountains (Blue)': 'backgroundColorful3',
+	'Misty River': 'backgroundColorful4',
+	'Turbulant Tides': 'backgroundColorful5',
+	'Space Station': 'backgroundColorful6',
+	'Warm Pup': 'backgroundColorful7',
+	'Random': 'backgroundColorful8'
+};
+
+// Values of `backgroundLabels` must be kept in sync with keys of `backgroundLabelMap`.
+const backgroundLabelMap = {
+	'': '',
+	'backgroundColorful1': '#bb3352 url("http://picsum.photos/1280/720?image=1080") no-repeat center/cover',
+	'backgroundColorful2': '#4e6a40 url("http://picsum.photos/1280/720?image=1063") no-repeat center/cover',
+	'backgroundColorful3': '#5985a8 url("http://picsum.photos/1280/720?image=930") no-repeat center/cover',
+	'backgroundColorful4': '#71736d url("http://picsum.photos/1280/720?image=1044") no-repeat center/cover',
+	'backgroundColorful5': '#547460 url("http://picsum.photos/1280/720?image=1053") no-repeat center/cover',
+	'backgroundColorful6': '#7c4590 url("http://picsum.photos/1280/720?image=967") no-repeat center/cover',
+	'backgroundColorful7': '#5d6542 url("http://picsum.photos/1280/720?image=1025") no-repeat center/cover',
+	'backgroundColorful8': '#555 url("http://picsum.photos/1280/720") no-repeat center/cover'
+};
+
 const skins = {
 	'Carbon': 'carbon',
 	'Cobalt': 'cobalt',
@@ -108,31 +133,28 @@ const skins = {
 	'Titanium': 'titanium'
 };
 
-// NOTE: Knobs cannot set locale in fullscreen mode. This allows any knob to be taken from the URL.
-const getPropFromURL = (propName, fallbackValue) => {
-	propName = encodeURI(propName);
-	const locationParams = window.parent.location.search;
+const getArgs = (str) => {
+	return qs.parse(str || (typeof window !== 'undefined' ? window.parent.location.search : ''));
+};
 
-	const startIndex = locationParams.indexOf('knob-' + propName);
-	if (startIndex > -1) {
-		const keyIndex = locationParams.indexOf('=', startIndex);
+// This allows any knob to be taken from the URL.
+const getKnobFromArgs = (args, propName, fallbackValue) => {
+	const knob = 'knob-' + propName;
+	let value = fallbackValue;
 
-		if (locationParams.indexOf('&', keyIndex) > -1) {
-			const valueIndex = locationParams.indexOf('&', keyIndex);
-			return decodeURIComponent(locationParams.substring(keyIndex + 1, valueIndex));
-		} else {
-			return decodeURIComponent(locationParams.substring(keyIndex + 1, locationParams.length));
+	if (args && knob in args) {
+		try {
+			// If it's valid JSON, parse it
+			value = JSON.parse(args[knob]);
+		} catch (e) {
+			// no handling required; allow fallbackValue to be used
 		}
 	}
 
-	return fallbackValue;
+	return value;
 };
 
-const memory = {
-	skin: null
-};
-
-const StorybookDecorator = (story, config) => {
+const StorybookDecorator = (story, config = {}) => {
 	const sample = story();
 	const Config = {
 		defaultProps: {
@@ -141,6 +163,14 @@ const StorybookDecorator = (story, config) => {
 			skin: 'gallium'
 		},
 		groupId: globalGroup
+	};
+	const DevelopmentConfig = {
+		defaultProps: {
+			'debug aria': false,
+			'debug layout': false,
+			'debug spotlight': false
+		},
+		groupId: 'Development'
 	};
 	const defaultColors = {
 		carbon: {
@@ -172,31 +202,52 @@ const StorybookDecorator = (story, config) => {
 			highlight: '#2a48ca'
 		}
 	};
-	const skinFromURL = getPropFromURL('skin');
-	const currentSkin = skinFromURL ? skinFromURL : Config.defaultProps.skin;
-	const newSkin = (memory.skin !== currentSkin);
-	memory.skin = currentSkin;  // Remember the skin for the next time we load.
-	const accentFromURL = getPropFromURL('accent');
-	const highlightFromURL = getPropFromURL('highlight');
-	const localeFromURL = getPropFromURL('locale');
-	const currentLocale = localeFromURL ? localeFromURL : Config.defaultProps.locale;
-	const locale = select('locale', locales, Config, currentLocale);
-	const allSkins = boolean('show all skins', Config);
+
+	if (config.parameters) {
+		if (config.parameters.info && config.parameters.info.text) {
+			config.description = config.parameters.info.text;
+		}
+		if (config.parameters.props) {
+			config.props = config.parameters.props;
+		}
+	}
+
+	const args = getArgs();
+	const classes = {
+		aria: boolean('debug aria', DevelopmentConfig, getKnobFromArgs(args, 'debug aria')),
+		layout: boolean('debug layout', DevelopmentConfig, getKnobFromArgs(args, 'debug layout')),
+		spotlight: boolean('debug spotlight', DevelopmentConfig, getKnobFromArgs(args, 'debug spotlight'))
+	};
+	if (Object.keys(classes).length > 0) {
+		classes.debug = true;
+	}
 	const skinKnobs = {};
+	const allSkins = boolean('show all skins', Config);
+
 	if (!allSkins) {
-		skinKnobs.skin = select('skin', skins, Config, currentSkin);
+		skinKnobs.skin = select('skin', skins, Config, getKnobFromArgs(args, 'skin'));
+		const useSkinDefaultStyles = boolean('default skin styles', Config);
+
+		const defaultAccent = defaultColors[skinKnobs.skin].accent;
+		const defaultHighlight = defaultColors[skinKnobs.skin].highlight;
+
+		skinKnobs.accent = useSkinDefaultStyles ? defaultAccent : color('accent', defaultAccent, Config.groupId);
+		skinKnobs.highlight = useSkinDefaultStyles ? defaultHighlight : color('highlight',defaultHighlight, Config.groupId);
 	}
 
 	return (
-		<Agate
-			title={`${config.kind} ${config.story}`.trim()}
+		<Theme
+			className={classnames(classes)}
 			description={config.description}
-			locale={locale}
-			{...skinKnobs}
+			locale={select('locale', locales, Config)}
 			skinVariants={boolean('night mode', Config) && 'night'}
-			accent={color('accent', (!newSkin && accentFromURL ? accentFromURL : defaultColors[currentSkin].accent), Config.groupId)}
-			highlight={color('highlight', (!newSkin && highlightFromURL ? highlightFromURL : defaultColors[currentSkin].highlight), Config.groupId)}
-		>
+			style={{
+				'--sand-env-background': backgroundLabelMap[select('background', backgroundLabels, Config, getKnobFromArgs(args, 'background'))]
+			}}
+			title={`${config.kind} ${config.story}`.trim()}
+			{...skinKnobs}
+			{...config.props}
+			>
 			<Scroller>
 				{allSkins ? Object.keys(skins).map(skin => (
 					<SkinFrame skin={skins[skin]} key={skin}>
@@ -205,22 +256,25 @@ const StorybookDecorator = (story, config) => {
 					</SkinFrame>
 				)) : sample}
 			</Scroller>
-		</Agate>
+		</Theme>
 	);
 };
 
-const FullscreenStorybookDecorator = (story, config) => {
+const FullscreenStorybookDecorator = (story, config = {}) => {
 	const sample = story();
+	const args = getArgs();
 	return (
-		<AgateFullscreen
-			title={`${config.kind} ${config.story}`.trim()}
+		<ThemeFullscreen
 			description={config.description}
-			skin={select('skin', skins, getPropFromURL('skin'))}
+			locale={select('locale', locales, 'en-US')}
+			style={backgroundLabelMap[select('background', backgroundLabels, getKnobFromArgs(args, 'background'))]}
+			skinVariants={boolean('night mode', Config) && 'night'}
+			title={`${config.kind} ${config.story}`.trim()}
 		>
 			{sample}
-		</AgateFullscreen>
+		</ThemeFullscreen>
 	);
 };
 
 export default StorybookDecorator;
-export {StorybookDecorator as Agate, FullscreenStorybookDecorator as AgateFullscreen};
+export {StorybookDecorator as Theme, FullscreenStorybookDecorator as ThemeFullscreen};

@@ -29,6 +29,8 @@ storiesOf('Agate', module)
 			</LabeledIcon>
 		),
 		{
-			text: 'Basic usage of LabeledIcon'
+			info: {
+				text: 'Basic usage of LabeledIcon'
+			}
 		}
 	);

@@ -24,6 +24,8 @@ storiesOf('Agate', module)
 			</div>
 		),
 		{
-			text: 'The basic RadioItem'
+			info: {
+				text: 'Basic usage of RadioItem'
+			}
 		}
 	);

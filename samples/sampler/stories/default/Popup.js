@@ -31,6 +31,8 @@ storiesOf('Agate', module)
 			</div>
 		),
 		{
-			text: 'Basic usage of Popup'
+			info: {
+				text: 'Basic usage of Popup'
+			}
 		}
 	);

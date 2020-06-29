@@ -55,6 +55,8 @@ storiesOf('Agate', module)
 			);
 		},
 		{
-			text: 'The basic Heading'
+			info: {
+				text: 'Basic usage of Heading'
+			}
 		}
 	);

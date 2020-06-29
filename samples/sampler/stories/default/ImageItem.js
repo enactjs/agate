@@ -1,6 +1,6 @@
-import ri from '@enact/ui/resolution';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {text, select} from '@enact/storybook-utils/addons/knobs';
+import ri from '@enact/ui/resolution';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -24,7 +24,9 @@ storiesOf('Agate', module)
 			</div>
 		),
 		{
-			text: 'Basic usage of ImageItem'
+			info: {
+				text: 'Basic usage of ImageItem'
+			}
 		}
 	);
 

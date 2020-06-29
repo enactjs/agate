@@ -73,6 +73,8 @@ storiesOf('Agate', module)
 			</div>
 		),
 		{
-			text: 'Basic usage of Spinner'
+			info: {
+				text: 'Basic usage of Spinner'
+			}
 		}
 	);

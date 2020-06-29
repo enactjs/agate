@@ -37,6 +37,8 @@ storiesOf('Agate', module)
 			);
 		},
 		{
-			text: 'Basic usage of Item'
+			info: {
+				text: 'Basic usage of of Item'
+			}
 		}
 	);

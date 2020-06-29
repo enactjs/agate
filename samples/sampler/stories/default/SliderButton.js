@@ -4,8 +4,8 @@ import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import SliderButton, {SliderButtonBase} from '@enact/agate/SliderButton';
 import {icons} from '@enact/agate/Icon';
+import SliderButton, {SliderButtonBase} from '@enact/agate/SliderButton';
 
 SliderButton.displayName = 'SliderButton';
 const Config = mergeComponentMetadata('SliderButton', SliderButtonBase, SliderButton);
@@ -39,6 +39,8 @@ storiesOf('Agate', module)
 			</SliderButton>
 		),
 		{
-			text: 'The basic SliderButton'
+			info: {
+				text: 'Basic usage of SliderButton'
+			}
 		}
 	);

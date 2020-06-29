@@ -1,7 +1,7 @@
 // ThemeEnvironment.module.less
 //
-@import "~../../../../styles/mixins.less";
-@import "~../../../../styles/skin.less";
+@import "../../../../styles/mixins.less";
+@import "../../../../styles/skin.less";
 
 .skinFrame {
 	padding: 1em;
@@ -20,6 +20,17 @@
 			.position(0);
 		}
 	});
+}
+
+.themeEnvironmentPanels {
+	&::before {
+		content: "";
+		background: var(--sand-env-background);
+		position: absolute;
+		.position(0);
+		filter: blur(6px);
+		opacity: 0.8;
+	}
 }
 
 // Fix for the +/- buttons

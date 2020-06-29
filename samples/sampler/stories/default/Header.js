@@ -43,6 +43,8 @@ storiesOf('Agate', module)
 			return story;
 		},
 		{
-			text: 'A block to use as a screen\'s title and description. Supports additional buttons, subtitle and title above.'
+			info: {
+				text: 'A block to use as a screen\'s title and description. Supports additional buttons, subtitle and title above.'
+			}
 		}
 	);

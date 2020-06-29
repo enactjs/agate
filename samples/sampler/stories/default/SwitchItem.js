@@ -10,7 +10,6 @@ import iconNames from './icons';
 const Config = mergeComponentMetadata('SwitchItem', SwitchItem);
 SwitchItem.displayName = 'SwitchItem';
 
-
 storiesOf('Agate', module)
 	.add(
 		'SwitchItem',
@@ -27,6 +26,8 @@ storiesOf('Agate', module)
 			</div>
 		),
 		{
-			text: 'The basic SwitchItem'
+			info: {
+				text: 'Basic usage of SwitchItem'
+			}
 		}
 	);

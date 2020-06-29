@@ -30,6 +30,8 @@ storiesOf('Agate', module)
 			</LabeledIconButton>
 		),
 		{
-			text: 'Basic usage of LabeledIconButton'
+			info: {
+				text: 'Basic usage of LabeledIconButton'
+			}
 		}
 	);

@@ -34,6 +34,8 @@ storiesOf('Agate', module)
 			</ToggleButton>
 		),
 		{
-			text: 'The basic ToggleButton'
+			info: {
+				text: 'Basic usage of ToggleButton'
+			}
 		}
 	);

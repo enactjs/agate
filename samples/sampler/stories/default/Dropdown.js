@@ -30,6 +30,8 @@ storiesOf('Agate', module)
 			);
 		},
 		{
-			text: 'The basic Dropdown'
+			info: {
+				text: 'Basic usage of Dropdown'
+			}
 		}
 	);

@@ -8,7 +8,6 @@ import ThumbnailItem from '@enact/agate/ThumbnailItem';
 const Config = mergeComponentMetadata('ThumbnailItem', ThumbnailItem);
 ThumbnailItem.displayName = 'ThumbnailItem';
 
-
 storiesOf('Agate', module)
 	.add(
 		'ThumbnailItem',
@@ -22,6 +21,8 @@ storiesOf('Agate', module)
 			</div>
 		),
 		{
-			text: 'The basic ThumbnailItem'
+			info: {
+				text: 'Basic usage of ThumbnailItem'
+			}
 		}
 	);
