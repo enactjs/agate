@@ -81,9 +81,9 @@ const PopupBase = kind({
 		className: 'popup'
 	},
 	computed: {
-		className: ({centered, closeButton, onScreenDisplay, styler, title}) => styler.append({onScreenDisplay: onScreenDisplay, withCloseButton: closeButton, withTitle: title, centered})
+		className: ({centered, closeButton, onScreenDisplay, styler, title}) => styler.append({onScreenDisplay, withCloseButton: closeButton, withTitle: title, centered})
 	},
-	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, open, onScreenDisplay, skin, title, ...rest}) => {
+	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, onScreenDisplay, open, skin, title, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
 		const transitionType = (onScreenDisplay ? 'slide' : 'fade');
 		const direction = (onScreenDisplay ? 'up' : 'down');
