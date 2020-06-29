@@ -44,6 +44,14 @@ const ImageItemBase = kind({
 		children: PropTypes.node,
 
 		/**
+		 * Display caption over image.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		childrenOverImage: PropTypes.bool,
+
+		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
 		 *
@@ -59,8 +67,6 @@ const ImageItemBase = kind({
 		 * @public
 		 */
 		css: PropTypes.object,
-
-		labelOverImage: PropTypes.any,
 
 		/**
 		 * The layout orientation of the component.
@@ -90,11 +96,19 @@ const ImageItemBase = kind({
 		className: 'imageItem'
 	},
 
-	render: ({children, css, labelOverImage, src, ...rest}) => {
-		const [Component, marqueeProps] = children ? [MarqueeImageItem, {
+	computed: {
+		className: ({childrenOverImage, styler}) => styler.append({
+			captionOverImage: childrenOverImage
+		})
+	},
+
+	render: ({children, css, childrenOverImage,  src, ...rest}) => {
+		const imageItemWithOverlayCaption = (children && childrenOverImage) ? [UiImageItem, children] : [UiImageItem, null];
+
+		const [Component, marqueeProps] = (children && !childrenOverImage) ? [MarqueeImageItem, {
 			alignment: 'center',
 			children
-		}] : [UiImageItem, null];
+		}] : imageItemWithOverlayCaption;
 
 		return (
 			<React.Fragment>
@@ -104,13 +118,9 @@ const ImageItemBase = kind({
 					css={css}
 					imageComponent={ImageBase}
 					src={src}
-				/>
-				{labelOverImage ? (
-						<div className={css.labelOverImage}>
-							{labelOverImage}
-						</div>) :
-					null
-				}
+				>
+					{children}
+				</Component>
 			</React.Fragment>
 		);
 	}

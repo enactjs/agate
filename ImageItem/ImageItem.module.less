@@ -11,7 +11,15 @@
 		}
   	}
 
-  	.applySkins({
+	&.captionOverImage {
+		.caption {
+			overflow: hidden;
+			position: absolute;
+			bottom: 6px;
+		}
+	}
+
+	.applySkins({
 		border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
 
 	  	.caption {
@@ -19,6 +27,19 @@
 			line-height: @agate-imageitem-caption-height;
 			text-align: center;
 	  	}
+
+		&.captionOverImage {
+			.caption {
+				width: @agate-imageitem-caption-overlay-width;
+				height: @agate-imageitem-caption-overlay-height;
+				color: @agate-imageitem-caption-overlay-text-color;
+				opacity: @agate-imageitem-caption-overlay-opacity;
+				padding: @agate-imageitem-caption-overlay-padding;
+				font-size: @agate-imageitem-caption-overlay-font-size;
+				line-height: @agate-imageitem-caption-overlay-line-height;
+				text-align: @agate-imageitem-caption-overlay-text-align;
+			}
+		}
 
 		.focus({
 			&::before {
@@ -28,16 +49,4 @@
 			}
 		});
   	});
-}
-
-.labelOverImage {
-	width: 340px;
-	height: 93px;
-	overflow: hidden;
-	color: #ffffff;
-	opacity: 0.5;
-	position: relative;
-	top: -100px;
-	padding: 0 20px 0 20px;
-	font-size: 20px;
 }
