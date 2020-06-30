@@ -40,6 +40,7 @@ const InputDecoratorIconBase = kind({
 
 		/**
 		 * The size of the icon.
+		 * Default value for 'silicon' skin is 'small', other skins use 'large' value.
 		 *
 		 * @type {('small'|'large')}
 		 * @default 'large'
@@ -47,6 +48,12 @@ const InputDecoratorIconBase = kind({
 		 */
 		size: PropTypes.oneOf(['small', 'large']),
 
+		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		skin: PropTypes.string
 	},
 
@@ -59,7 +66,7 @@ const InputDecoratorIconBase = kind({
 		className: ({position, styler}) => {
 			return styler.append('icon' + (position === 'before' ? 'Before' : 'After'));
 		},
-		size: ({skin}) => (skin === 'silicon' ? 'small' : 'large')
+		size: ({size, skin}) => (size || skin === 'silicon' ? 'small' : 'large')
 	},
 
 	render: ({children, ...rest}) => {
