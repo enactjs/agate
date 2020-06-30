@@ -17,6 +17,7 @@
 // Component color assignments
 @agate-bg-image: none;
 @agate-bg-image2: none;
+@agate-text-color: @agate-foreground;
 
 // Disabled Opacity
 // ---------------------------------------
@@ -104,12 +105,9 @@
 
 // Item
 // ---------------------------------------
-@agate-item-color:           @agate-text-color;
-@agate-item-label-color:     @agate-accent;
-@agate-item-focus-border-color: @agate-accent;
-@agate-item-focus-color:     @agate-spotlight-color;
-@agate-item-selected-color:  @agate-item-label-color;
-@agate-item-selected-outline: 5px solid @agate-item-focus-bg-color;
+@agate-item-border-bottom-color:  fade(@agate-white, 40%);
+@agate-item-color:                @agate-text-color;
+@agate-item-focus-bg-color:       fade(@agate-white, 15%);
 
 // LabeledIconButton
 // ---------------------------------------
