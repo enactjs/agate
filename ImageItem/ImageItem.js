@@ -36,20 +36,20 @@ const ImageItemBase = kind({
 
 	propTypes: /** @lends agate/ImageItem.ImageItemBase.prototype */ {
 		/**
+		 * Display caption over image.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		captionOverImage: PropTypes.bool,
+
+		/**
 		 * The caption displayed with the image.
 		 *
 		 * @type {Node}
 		 * @public
 		 */
 		children: PropTypes.node,
-
-		/**
-		 * Display caption over image.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		childrenOverImage: PropTypes.bool,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -97,15 +97,15 @@ const ImageItemBase = kind({
 	},
 
 	computed: {
-		className: ({childrenOverImage, styler}) => styler.append({
-			captionOverImage: childrenOverImage
+		className: ({captionOverImage, styler}) => styler.append({
+			captionOverImage: captionOverImage
 		})
 	},
 
-	render: ({children, css, childrenOverImage,  src, ...rest}) => {
-		const imageItemWithOverlayCaption = (children && childrenOverImage) ? [UiImageItem, children] : [UiImageItem, null];
+	render: ({captionOverImage, children, css,  src, ...rest}) => {
+		const imageItemWithOverlayCaption = (children && captionOverImage) ? [UiImageItem, children] : [UiImageItem, null];
 
-		const [Component, marqueeProps] = (children && !childrenOverImage) ? [MarqueeImageItem, {
+		const [Component, marqueeProps] = (children && !captionOverImage) ? [MarqueeImageItem, {
 			alignment: 'center',
 			children
 		}] : imageItemWithOverlayCaption;
