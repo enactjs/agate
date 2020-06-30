@@ -1,6 +1,6 @@
 import ri from '@enact/ui/resolution';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, text, select} from '@enact/storybook-utils/addons/knobs';
+import {text, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -18,7 +18,7 @@ storiesOf('Agate', module)
 				<ImageItem
 					src="http://placehold.it/300x400/9037ab/ffffff&text=Image0"
 					orientation={select('orientation', ['horizontal', 'vertical'], Config)}
-					captionOverImage={boolean('captionOverImage', Config)}
+					captionPosition={select('captionPosition', ['captionBelow', 'captionOverlay'], Config)}
 				>
 					{text('children', Config, 'caption')}
 				</ImageItem>

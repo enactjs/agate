@@ -36,12 +36,14 @@ const ImageItemBase = kind({
 
 	propTypes: /** @lends agate/ImageItem.ImageItemBase.prototype */ {
 		/**
-		 * Display caption over image.
+		 * Sets the position for caption.
+		 * Available positions: 'captionBelow' (default) and 'captionOverlay'.
 		 *
-		 * @type {Boolean}
+		 * @type {('captionBelow'|'captionOverlay')}
+		 * @default 'captionBelow'
 		 * @public
 		 */
-		captionOverImage: PropTypes.bool,
+		captionPosition: PropTypes.oneOf(['captionBelow', 'captionOverlay']),
 
 		/**
 		 * The caption displayed with the image.
@@ -88,7 +90,8 @@ const ImageItemBase = kind({
 	},
 
 	defaultProps: {
-		orientation: 'vertical'
+		orientation: 'vertical',
+		captionPosition: 'captionBelow'
 	},
 
 	styles: {
@@ -97,31 +100,26 @@ const ImageItemBase = kind({
 	},
 
 	computed: {
-		className: ({captionOverImage, styler}) => styler.append({
-			captionOverImage
+		className: ({captionPosition, styler}) => styler.append({
+			captionOverImage: captionPosition === 'captionOverlay'
 		})
 	},
 
-	render: ({captionOverImage, children, css,  src, ...rest}) => {
-		const imageItemWithOverlayCaption = (children && captionOverImage) ? [UiImageItem, children] : [UiImageItem, null];
-
-		const [Component, marqueeProps] = (children && !captionOverImage) ? [MarqueeImageItem, {
-			alignment: 'center',
-			children
-		}] : imageItemWithOverlayCaption;
+	render: ({captionPosition, children, css,  src, ...rest}) => {
+		const [Component, marqueeProps] = (children && (captionPosition === 'captionBelow')) ? [MarqueeImageItem, {
+			alignment: 'center'
+		}] : [UiImageItem, null];
 
 		return (
-			<React.Fragment>
-				<Component
-					{...rest}
-					{...marqueeProps}
-					css={css}
-					imageComponent={ImageBase}
-					src={src}
-				>
-					{children}
-				</Component>
-			</React.Fragment>
+			<Component
+				{...rest}
+				{...marqueeProps}
+				css={css}
+				imageComponent={ImageBase}
+				src={src}
+			>
+				{children}
+			</Component>
 		);
 	}
 });
