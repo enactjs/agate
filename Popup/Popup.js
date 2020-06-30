@@ -56,17 +56,17 @@ const PopupBase = kind({
 		noAnimation: PropTypes.bool,
 		onClose: PropTypes.func,
 		onHide: PropTypes.func,
+		open: PropTypes.bool,
 
 		/**
-		 * Puts the popup on top of screen.
+		 * Sets the position of the popup on the screen.
 		 *
-		 * @type {Boolean}
-		 * @default false
+		 * @type {('bottom'|'center'|'fullscreen'|'left'|'right'|'top')}
+		 * @default 'center'
 		 * @public
 		 */
-		onScreenDisplay: PropTypes.bool,
+		position: PropTypes.oneOf(['bottom', 'center', 'fullscreen', 'left', 'right', 'top']),
 
-		open: PropTypes.bool,
 		skin: PropTypes.string,
 		title: PropTypes.string
 	},
@@ -74,19 +74,20 @@ const PopupBase = kind({
 		centered: false,
 		closeButton: false,
 		noAnimation: false,
-		open: false
+		open: false,
+		position: 'center'
 	},
 	styles: {
 		css: componentCss,
 		className: 'popup'
 	},
 	computed: {
-		className: ({centered, closeButton, onScreenDisplay, styler, title}) => styler.append({onScreenDisplay, withCloseButton: closeButton, withTitle: title, centered})
+		className: ({centered, closeButton, position, styler, title}) => styler.append({top: position === 'top', withCloseButton: closeButton, withTitle: title, centered})
 	},
-	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, onScreenDisplay, open, skin, title, ...rest}) => {
+	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, open, position, skin, title, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
-		const transitionType = (onScreenDisplay ? 'slide' : 'fade');
-		const direction = (onScreenDisplay ? 'up' : 'down');
+		const transitionType = (position === 'center' ? 'fade' : 'slide');
+		const direction = (position === 'center' ? 'down' : 'up');
 		delete rest.centered;
 
 		return (
