@@ -98,7 +98,7 @@ const ImageItemBase = kind({
 
 	computed: {
 		className: ({captionOverImage, styler}) => styler.append({
-			captionOverImage: captionOverImage
+			captionOverImage
 		})
 	},
 
