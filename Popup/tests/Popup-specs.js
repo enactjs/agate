@@ -1,7 +1,7 @@
 import React from 'react';
 import {mount} from 'enzyme';
 
-import Popup from '../Popup';
+import {Popup, PopupBase} from '../Popup';
 
 describe('Popup specs', () => {
 	test('should be rendered opened if open is set to true', () => {
@@ -52,24 +52,13 @@ describe('Popup specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should be rendered in onScreenDisplay mode if onScreenDisplay is set to true', () => {
+	test('should have position=center when no position is specified', () => {
 		const popup = mount(
-			<Popup onScreenDisplay />
+			<PopupBase />
 		);
 
-		const expected = true;
-		const actual = popup.prop('onScreenDisplay');
-
-		expect(actual).toBe(expected);
-	});
-
-	test('should not be rendered in onScreenDisplay mode if onScreenDisplay is set to false', () => {
-		const popup = mount(
-			<Popup onScreenDisplay={false} />
-		);
-
-		const expected = false;
-		const actual = popup.prop('onScreenDisplay');
+		const expected = 'center';
+		const actual = popup.prop('position');
 
 		expect(actual).toBe(expected);
 	});
