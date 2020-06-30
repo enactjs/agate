@@ -18,7 +18,7 @@ storiesOf('Agate', module)
 				<ImageItem
 					src="http://placehold.it/300x400/9037ab/ffffff&text=Image0"
 					orientation={select('orientation', ['horizontal', 'vertical'], Config)}
-					captionPosition={select('captionPosition', ['captionBelow', 'captionOverlay'], Config)}
+					childrenPosition={select('childrenPosition', ['captionBelow', 'captionOverlay'], Config)}
 				>
 					{text('children', Config, 'caption')}
 				</ImageItem>
