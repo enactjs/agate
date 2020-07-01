@@ -61,11 +61,11 @@ const PopupBase = kind({
 		/**
 		 * Sets the position of the popup on the screen.
 		 *
-		 * @type {('bottom'|'center'|'fullscreen'|'left'|'right'|'top')}
+		 * @type {('center'|'top')}
 		 * @default 'center'
 		 * @public
 		 */
-		position: PropTypes.oneOf(['bottom', 'center', 'fullscreen', 'left', 'right', 'top']),
+		position: PropTypes.oneOf(['center', 'top']),
 
 		skin: PropTypes.string,
 		title: PropTypes.string

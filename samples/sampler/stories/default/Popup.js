@@ -25,7 +25,7 @@ storiesOf('Agate', module)
 						onClose={action('onClose')}
 						onHide={action('onHide')}
 						open={boolean('open', Config)}
-						position={select('position', ['bottom', 'center', 'fullscreen', 'left', 'right', 'top'], Config)}
+						position={select('position', ['center', 'top'], Config)}
 						scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
 						spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
 						title={text('title', Config, 'Title')}
