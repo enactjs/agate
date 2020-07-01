@@ -6,7 +6,7 @@ import {Header} from '../Header';
 describe('Header', () => {
 	test('should render a title when `title` prop is set', () => {
 		const subject = mount(
-			<Header title="title"/>
+			<Header title="title" />
 		);
 
 		const expected = 'title';
@@ -19,7 +19,8 @@ describe('Header', () => {
 		const subject = mount(
 			<Header
 				title="title"
-				subtitle="subtitle"/>
+				subtitle="subtitle"
+			/>
 		);
 
 		const expected = 'subtitle';
