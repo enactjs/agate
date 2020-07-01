@@ -5,6 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import componentCss from './IncrementSliderButton.module.less';
+import Skinnable from "../Skinnable";
 
 /**
  * A [Button]{@link agate/Button.Button} customized for
@@ -24,7 +25,9 @@ const IncrementSliderButtonBase = kind({
 		css: PropTypes.object,
 		onTap: PropTypes.func,
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-		role: PropTypes.string
+		role: PropTypes.string,
+
+		skin: PropTypes.string,
 	},
 
 	styles: {
@@ -36,7 +39,8 @@ const IncrementSliderButtonBase = kind({
 		className: ({orientation, role, styler}) => styler.append(orientation, role)
 	},
 
-	render: ({css, onTap, ...rest}) => {
+	render: ({css, onTap, skin, ...rest}) => {
+		const buttonSize = (skin === 'silicon' ? 'small' : 'large');
 		delete rest.orientation;
 		delete rest.role;
 		return (
@@ -46,13 +50,15 @@ const IncrementSliderButtonBase = kind({
 				onTap={onTap}
 				onHold={onTap}
 				onHoldPulse={onTap}
+				size={buttonSize}
 			/>
 		);
 	}
 });
 
-const OnlyUpdate = onlyUpdateForKeys(['children', 'disabled', 'icon', 'spotlightDisabled', 'aria-label']);
-const IncrementSliderButton = OnlyUpdate(IncrementSliderButtonBase);
+const IncrementSliderButtonDecorator = Skinnable({prop: 'skin'}, IncrementSliderButtonBase);
+const OnlyUpdate = onlyUpdateForKeys(['children', 'disabled', 'icon', 'spotlightDisabled', 'size', 'aria-label']);
+const IncrementSliderButton = OnlyUpdate(IncrementSliderButtonDecorator);
 
 export default IncrementSliderButton;
 export {
