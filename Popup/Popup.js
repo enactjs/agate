@@ -10,21 +10,28 @@
  * @exports PopupDecorator
  */
 
-import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
-import PropTypes from 'prop-types';
-import React from 'react';
+import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Layout, {Cell} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 import Transition from '@enact/ui/Transition';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
+import React from 'react';
 
-import Skinnable from '../Skinnable';
-import Heading from '../Heading';
 import Button from '../Button';
+import Heading from '../Heading';
+import Skinnable from '../Skinnable';
 
 import PopupState from './PopupState';
 
 import componentCss from './Popup.module.less';
+
+
+const TransitionContainer = SpotlightContainerDecorator(
+	{enterTo: 'default-element', preserveId: true},
+	Transition
+);
 
 /**
  * The base popup component.
@@ -91,7 +98,7 @@ const PopupBase = kind({
 		delete rest.centered;
 
 		return (
-			<Transition
+			<TransitionContainer
 				noAnimation={noAnimation}
 				visible={open}
 				direction={direction}
@@ -120,7 +127,7 @@ const PopupBase = kind({
 						</Cell> : null}
 					</Layout>
 				</div>
-			</Transition>
+			</TransitionContainer>
 		);
 	}
 });

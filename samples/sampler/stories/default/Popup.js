@@ -22,6 +22,7 @@ storiesOf('Agate', module)
 					onClose={action('onClose')}
 					onHide={action('onHide')}
 					open={boolean('open', Config)}
+					position={select('position', ['center', 'top'], Config)}
 					scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
 					spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
 					title={text('title', Config, 'Title')}
@@ -50,12 +51,15 @@ storiesOf('Agate QA.Popup', module)
 					onClose={action('onClose')}
 					onHide={action('onHide')}
 					open={boolean('open', Config)}
+					position={select('position', ['center', 'top'], Config)}
 					scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
 					spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
 				>
 					<div>{text('children', Config, 'Hello Popup')}</div>
-					<Button>NO</Button>
-					<Button>YES</Button>
+					<buttons>
+						<Button>NO</Button>
+						<Button>YES</Button>
+					</buttons>
 				</Popup>
 				Use KNOBS to interact with Popup.
 			</div>
