@@ -36,22 +36,22 @@ const ImageItemBase = kind({
 
 	propTypes: /** @lends agate/ImageItem.ImageItemBase.prototype */ {
 		/**
+		 * Sets the position for caption.
+		 * Available positions: 'below' (default) and 'overlay'.
+		 *
+		 * @type {('below'|'overlay')}
+		 * @default 'below'
+		 * @public
+		 */
+		captionPosition: PropTypes.oneOf(['below', 'overlay']),
+
+		/**
 		 * The caption displayed with the image.
 		 *
 		 * @type {Node}
 		 * @public
 		 */
 		children: PropTypes.node,
-
-		/**
-		 * Sets the position for caption.
-		 * Available positions: 'captionBelow' (default) and 'captionOverlay'.
-		 *
-		 * @type {('captionBelow'|'captionOverlay')}
-		 * @default 'captionBelow'
-		 * @public
-		 */
-		childrenPosition: PropTypes.oneOf(['captionBelow', 'captionOverlay']),
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -91,7 +91,7 @@ const ImageItemBase = kind({
 
 	defaultProps: {
 		orientation: 'vertical',
-		childrenPosition: 'captionBelow'
+		captionPosition: 'below'
 	},
 
 	styles: {
@@ -100,13 +100,13 @@ const ImageItemBase = kind({
 	},
 
 	computed: {
-		className: ({childrenPosition, styler}) => styler.append({
-			captionOverImage: childrenPosition === 'captionOverlay'
+		className: ({captionPosition, styler}) => styler.append({
+			captionOverlay: captionPosition === 'overlay'
 		})
 	},
 
-	render: ({children, childrenPosition, css,  src, ...rest}) => {
-		const [Component, marqueeProps] = (children && (childrenPosition === 'captionBelow')) ? [MarqueeImageItem, {
+	render: ({captionPosition, children, css,  src, ...rest}) => {
+		const [Component, marqueeProps] = (children && (captionPosition === 'below')) ? [MarqueeImageItem, {
 			alignment: 'center'
 		}] : [UiImageItem, null];
 
