@@ -44,6 +44,10 @@
 		border-bottom-color: @agate-item-border-bottom-color;
 		color: @agate-item-color;
 
+		&:last-child {
+			border-bottom-color: transparent;
+		}
+
 		.itemContent {
 			.label   {
 				color: @agate-item-label-color;
@@ -111,7 +115,7 @@
 			}
 		});
 
-		.active({
+		&.selected {
 			background-color: @agate-item-selected-bg-color;
 			border-color: @agate-item-focus-border-color;
 			border-bottom-color: @agate-item-selected-border-bottom-color;
@@ -128,6 +132,6 @@
 					margin-right: @agate-indicator-margin-right;
 				}
 
-		});
+		}
 	});
 }
