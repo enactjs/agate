@@ -97,11 +97,44 @@
 				border-radius: 0 0 30px 30px;
 				background-color: #eeeeee;
 
-				.item {
+				.dropDownListItem {
 					color: @agate-dropdown-item-color;
+
+					&.radioItem {
+						.icon {
+							border-color: @agate-dropdown-item-color;
+							background-color: transparent;
+						}
+						.focus({
+							color: @agate-dropdown-item-color;
+							border-color: transparent;
+
+							.icon {
+								color: @agate-dropdown-item-color;
+								border-color: @agate-dropdown-item-color;
+							}
+						});
+						&.selected {
+							.icon {
+								color: @agate-dropdown-item-color;
+								border-color: @agate-dropdown-item-color;
+							}
+						}
+					}
+
 				}
 			}
 		}
 	});
 }
 
+.applySkins({
+	.scrollbar {
+		.scrollbarTrackShown {
+			&::before {
+				background-color: red;
+			}
+		}
+
+	}
+});

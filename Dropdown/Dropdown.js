@@ -155,8 +155,7 @@ const DropdownBase = kind({
 
 	styles: {
 		css: componentCss,
-		className: 'dropdown',
-		publicClassNames: true
+		className: 'dropdown'
 	},
 
 	computed: {
@@ -215,7 +214,7 @@ const DropdownBase = kind({
 								<Group
 									className={css.group}
 									childComponent={RadioItem}
-									itemProps={{size: 'small'}}
+									itemProps={{size: 'small', className: css.dropDownListItem, css: css}}
 									onSelect={onSelect}
 									selected={selected}
 								>
@@ -243,7 +242,7 @@ const DropdownBase = kind({
 							direction={transitionDirection}
 						>
 							<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
-								<Scroller className={css.scroller}>
+								<Scroller className={css.scrollbar}>
 									<Group
 										className={css.group}
 										childComponent={Item}
