@@ -12,38 +12,52 @@ const Config = mergeComponentMetadata('Popup', PopupBase);
 storiesOf('Agate', module)
 	.add(
 		'Popup',
-		() => {
-			const buttons = boolean('buttons', Config, false);
-
-			return (
-				<div>
-					<Popup
-						centered={boolean('centered', Config)}
-						closeButton={boolean('closeButton', Config)}
-						noAnimation={boolean('noAnimation', Config)}
-						noAutoDismiss={boolean('noAutoDismiss', Config)}
-						onClose={action('onClose')}
-						onHide={action('onHide')}
-						open={boolean('open', Config)}
-						position={select('position', ['center', 'top'], Config)}
-						scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
-						spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
-						title={text('title', Config, 'Title')}
-					>
-						<div>{text('children', Config, 'Hello Popup')}</div>
-						{buttons ? (
-							<buttons>
-								<Button>NO</Button>
-								<Button>YES</Button>
-							</buttons>
-						) : null}
-
-					</Popup>
-					Use KNOBS to interact with Popup.
-				</div>
-			);
-		},
+		() => (
+			<div>
+				<Popup
+					centered={boolean('centered', Config)}
+					closeButton={boolean('closeButton', Config)}
+					noAnimation={boolean('noAnimation', Config)}
+					noAutoDismiss={boolean('noAutoDismiss', Config)}
+					onClose={action('onClose')}
+					onHide={action('onHide')}
+					open={boolean('open', Config)}
+					scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
+					spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
+					title={text('title', Config, 'Title')}
+				>
+					<div>{text('children', Config, 'Hello Popup')}</div>
+				</Popup>
+				Use KNOBS to interact with Popup.
+			</div>
+		),
 		{
 			text: 'Basic usage of Popup'
 		}
+	);
+
+storiesOf('Agate QA.Popup', module)
+	.add(
+		'with buttons',
+		() => (
+			<div>
+				<Button>Button</Button>
+				<Popup
+					centered={boolean('centered', Config)}
+					closeButton={boolean('closeButton', Config)}
+					noAnimation={boolean('noAnimation', Config)}
+					noAutoDismiss={boolean('noAutoDismiss', Config)}
+					onClose={action('onClose')}
+					onHide={action('onHide')}
+					open={boolean('open', Config)}
+					scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
+					spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
+				>
+					<div>{text('children', Config, 'Hello Popup')}</div>
+					<Button>NO</Button>
+					<Button>YES</Button>
+				</Popup>
+				Use KNOBS to interact with Popup.
+			</div>
+		)
 	);
