@@ -50,7 +50,7 @@ storiesOf('Agate QA.Item', module)
 				select('slotAfter Icon 1', iconList, Config),
 				select('slotAfter Icon 2', iconList, Config),
 				text('slotAfter Text', Config, 'Sub Text')
-			].filter(text=>!!text).map(text=>(iconList.indexOf(text) > 0 ? <Icon key={text}>{text}</Icon> : text));
+			].filter(subText => !!subText).map(subText => (iconList.indexOf(subText) > 0 ? <Icon key={subText}>{subText}</Icon> : subText));
 
 			return (
 				<Item
