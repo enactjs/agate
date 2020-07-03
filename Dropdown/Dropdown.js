@@ -159,7 +159,7 @@ const DropdownBase = kind({
 	},
 
 	computed: {
-		className: ({open, styler}) => styler.append({changedBorders: open}),
+		className: ({open, styler}) => styler.append({listOpen: open, listClosed: !open}),
 		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'} ),
 		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected, title}) => {
@@ -242,7 +242,7 @@ const DropdownBase = kind({
 							direction={transitionDirection}
 						>
 							<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
-								<Scroller className={css.scrollbar}>
+								<Scroller className={css.scroller}>
 									<Group
 										className={css.group}
 										childComponent={Item}

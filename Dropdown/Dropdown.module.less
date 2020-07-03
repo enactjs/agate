@@ -50,12 +50,15 @@
 			.button {
 				margin: 0;
 				width: 19rem;
-				font-size: 1.7rem;
+				font-size: 27px;
 
 				.bg {
 					background-color: #eeeeee;
 					border-color: transparent;
 					background-image: none;
+					border-radius: 35px 35px 0 0;
+					transition: border-radius 0.1s;
+					transition-delay: 0.5s;
 				}
 
 				&,
@@ -63,11 +66,18 @@
 					color: black;
 				}
 
-				&.changedBorders {
+				&.listOpen {
 					.bg {
 						border-color: transparent;
 						border-radius: 35px 35px 0 0;
 						border-bottom-color: rgba(0, 0, 0, 0.25);
+						transition: none;
+					}
+				}
+
+				&.listClosed {
+					.bg {
+						border-radius: 35px;
 					}
 				}
 
@@ -75,11 +85,11 @@
 					position: absolute;
 					right: 0;
 					margin: 0;
-					font-size: 1.5rem;
+					font-size: 27px;
 					color: @agate-accent;
-					width: 1rem;
-					height: 1rem;
-					line-height: 1rem;
+					width: 24px;
+					height: 24px;
+					line-height: 24px;
 
 				}
 			}
@@ -89,7 +99,6 @@
 				left: 0;
 				top: @agate-button-height;
 				width: inherit;
-				transition-duration: 0s;
 			}
 
 			.dropdownList {
@@ -124,17 +133,30 @@
 
 				}
 			}
+
+			.dropdownListWithScroller {
+				.scroller {
+					// FIXME:
+					[role="button"] {
+						.focus({
+							& > div {
+								background-image: none;
+							}
+						});
+					}
+
+					[role="button"] > div {
+						border-color: transparent;
+						color: black;
+					}
+
+					[role="button"] + div::before {
+						background-color: black;
+					}
+				}
+			}
 		}
 	});
 }
 
-.applySkins({
-	.scrollbar {
-		.scrollbarTrackShown {
-			&::before {
-				background-color: red;
-			}
-		}
 
-	}
-});
