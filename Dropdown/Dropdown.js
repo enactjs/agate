@@ -49,7 +49,7 @@ const isSelectedValid = ({children, selected}) => Array.isArray(children) && chi
 const DropdownBase = kind({
 	name: 'Dropdown',
 
-	propTypes: /** @lends @agate/Dropdown.DropdownBase.prototype */ {
+	propTypes: /** @lends agate/Dropdown.DropdownBase.prototype */ {
 		/**
 		 * The selections for Dropdown
 		 *
@@ -124,6 +124,12 @@ const DropdownBase = kind({
 		 */
 		selected: PropTypes.number,
 
+		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		skin: PropTypes.string,
 
 		/**
@@ -155,7 +161,8 @@ const DropdownBase = kind({
 
 	styles: {
 		css: componentCss,
-		className: 'dropdown'
+		className: 'dropdown',
+		publicClassNames: true
 	},
 
 	computed: {
@@ -217,6 +224,7 @@ const DropdownBase = kind({
 									itemProps={{size: 'small', className: css.dropDownListItem, css: css}}
 									onSelect={onSelect}
 									selected={selected}
+									selectedProp="selected"s
 								>
 									{children || []}
 								</Group>
@@ -263,12 +271,12 @@ const DropdownBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [DropdownBase]{@link @agate/Dropdown.DropdownBase}.
+ * Applies Agate specific behaviors to [DropdownBase]{@link agate/Dropdown.DropdownBase}.
  *
  * @hoc
  * @memberof agate/Dropdown
- * @mixes @agate/Dropdown.DropdownDecorator
- * @mixes @agate/Skinnable.Skinnable
+ * @mixes agate/Dropdown.DropdownDecorator
+ * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const DropdownDecorator = compose(
@@ -287,8 +295,8 @@ const DropdownDecorator = compose(
  *
  * @class Dropdown
  * @memberof agate/Dropdown
- * @extends @agate/Dropdown.DropdownBase
- * @mixes @agate/Dropdown.DropdownDecorator
+ * @extends agate/Dropdown.DropdownBase
+ * @mixes agate/Dropdown.DropdownDecorator
  * @ui
  * @public
  */

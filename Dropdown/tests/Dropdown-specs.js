@@ -1,6 +1,6 @@
 import React from 'react';
 import {mount} from 'enzyme';
-import {Dropdown, DropdownBase} from '../Dropdown';
+import {DropdownBase} from '../Dropdown';
 
 const title = 'Dropdown select';
 const children = ['option1', 'option2', 'option3'];
