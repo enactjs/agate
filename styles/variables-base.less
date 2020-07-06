@@ -336,11 +336,14 @@
 // Popup
 // ---------------------------------------
 @agate-popup-min-width: 510px;
+@agate-popup-max-width: 70%;
 @agate-popup-border-width: 1px;
 @agate-popup-border-radius: 3px;
 @agate-popup-border: 0 solid transparent;
 @agate-popup-padding: (@agate-component-spacing * 2);
-@agate-popup-closebutton-title-padding: 0 0 0 (@agate-button-small-height);
+@agate-popup-closebutton-title-padding-top-bottom: 0;
+@agate-popup-closebutton-title-padding-left: @agate-button-small-height;
+@agate-popup-closebutton-title-padding-right: 0;
 @agate-popup-title-padding: @agate-heading-padding;
 @agate-popup-body-border: @agate-popup-border;
 @agate-popup-body-padding: (@agate-component-spacing * 1.5);
@@ -357,6 +360,7 @@
 @agate-popup-top-border-radius: @agate-popup-border-radius;
 @agate-popup-top-margin: 0 @agate-popup-top-margin-left;
 @agate-popup-top-margin-left: 0;
+@agate-popup-top-max-width: inherit;
 @agate-popup-top-width: 100%;
 
 // PopupMenu

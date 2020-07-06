@@ -39,6 +39,7 @@
 	.applySkins({
 		color: @agate-popup-text-color;
 		min-width: @agate-popup-min-width;
+		max-width: @agate-popup-max-width;
 		box-shadow: @agate-popup-shadow;
 		background-color: @agate-popup-bg-color;
 		background-image: @agate-popup-bg-image;
@@ -52,6 +53,7 @@
 		&.top {
 			border-radius: @agate-popup-top-border-radius;
 			margin: @agate-popup-top-margin;
+			max-width: @agate-popup-top-max-width;
 			width: @agate-popup-top-width;
 		}
 
@@ -81,7 +83,9 @@
 
 		&.withCloseButton {
 			.title {
-				padding: @agate-popup-closebutton-title-padding;
+				padding-top: @agate-popup-closebutton-title-padding-top-bottom;
+				padding-bottom: @agate-popup-closebutton-title-padding-top-bottom;
+				.padding-start-end(@agate-popup-closebutton-title-padding-left, @agate-popup-closebutton-title-padding-right);
 			}
 		}
 
