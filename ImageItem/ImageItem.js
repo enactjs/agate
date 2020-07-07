@@ -36,6 +36,16 @@ const ImageItemBase = kind({
 
 	propTypes: /** @lends agate/ImageItem.ImageItemBase.prototype */ {
 		/**
+		 * Sets the position for caption.
+		 * Available positions: 'below' (default) and 'overlay'.
+		 *
+		 * @type {('below'|'overlay')}
+		 * @default 'below'
+		 * @public
+		 */
+		captionPosition: PropTypes.oneOf(['below', 'overlay']),
+
+		/**
 		 * The caption displayed with the image.
 		 *
 		 * @type {Node}
@@ -80,7 +90,8 @@ const ImageItemBase = kind({
 	},
 
 	defaultProps: {
-		orientation: 'vertical'
+		orientation: 'vertical',
+		captionPosition: 'below'
 	},
 
 	styles: {
@@ -88,10 +99,15 @@ const ImageItemBase = kind({
 		className: 'imageItem'
 	},
 
-	render: ({children, css, src, ...rest}) => {
-		const [Component, marqueeProps] = children ? [MarqueeImageItem, {
-			alignment: 'center',
-			children
+	computed: {
+		className: ({captionPosition, styler}) => styler.append({
+			captionOverlay: captionPosition === 'overlay'
+		})
+	},
+
+	render: ({captionPosition, children, css,  src, ...rest}) => {
+		const [Component, marqueeProps] = (children && (captionPosition === 'below')) ? [MarqueeImageItem, {
+			alignment: 'center'
 		}] : [UiImageItem, null];
 
 		return (
@@ -101,7 +117,9 @@ const ImageItemBase = kind({
 				css={css}
 				imageComponent={ImageBase}
 				src={src}
-			/>
+			>
+				{children}
+			</Component>
 		);
 	}
 });
