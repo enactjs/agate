@@ -168,6 +168,7 @@ const DropdownBase = kind({
 	computed: {
 		className: ({open, styler}) => styler.append({listOpen: open, listClosed: !open}),
 		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'} ),
+		dropdownButtonClassname: ({css, direction, styler}) => styler.join(css.dropdownButton, {upDropdownButton: direction === 'up'} ),
 		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected, title}) => {
 			if (isSelectedValid({children, selected})) {
@@ -195,14 +196,14 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({children, css, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+	render: ({children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
 		const opened = !disabled && open;
 		const dropdownButton = (skin === 'silicon');
 
 		return (
 			<div {...rest}>
 				{dropdownButton &&
-				<div className={css.dropdownButton}>
+				<div className={dropdownButtonClassname}>
 					<Button
 						{...rest}
 						css={css}
