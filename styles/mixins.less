@@ -18,8 +18,7 @@
 	font-size: @agate-item-font-size;
 	font-weight: @agate-item-font-weight;
 	line-height: @agate-item-height;
-	padding-left: @agate-item-side-outset;
-	padding-right: @agate-item-side-outset;
+	padding: @agate-item-top-bottom-outset @agate-item-side-outset;
 }
 
 .active(@rules; @target) when (isruleset(@rules)) and (@target = parent) {

@@ -43,7 +43,7 @@
 @agate-highlight-l: var(--agate-highlight-l, 42%);
 @agate-background: @agate-white;
 @agate-foreground: @agate-black;
-@agate-background-active: fade(@agate-black, 15%);
+@agate-background-active: fade(@agate-black, 10%);
 @agate-foreground-active: @agate-white;
 @agate-background-focus: @agate-accent;
 @agate-foreground-focus: @agate-white;
@@ -163,8 +163,11 @@
 // ---------------------------------------
 @agate-item-color:           @agate-text-color;
 @agate-item-label-color:     @agate-accent;
-@agate-item-focus-border-color: @agate-accent;
+@agate-item-border-color: fade(@agate-foreground, 40%);
+@agate-item-focus-border-color: transparent;
+@agate-item-focus-border-image: @agate-gradient;
 @agate-item-focus-color:     @agate-item-color;
+@agate-item-active-bg-color: @agate-background-active;
 @agate-item-selected-color:  @agate-item-label-color;
 @agate-item-selected-outline: 5px solid @agate-item-focus-bg-color;
 
