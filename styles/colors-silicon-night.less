@@ -104,12 +104,9 @@
 
 // Item
 // ---------------------------------------
-@agate-item-color:           @agate-text-color;
-@agate-item-label-color:     @agate-accent;
-@agate-item-focus-border-color: @agate-accent;
-@agate-item-focus-color:     @agate-spotlight-color;
-@agate-item-selected-color:  @agate-item-label-color;
-@agate-item-selected-outline: 5px solid @agate-item-focus-bg-color;
+@agate-item-border-bottom-color:  fade(@agate-white, 40%);
+@agate-item-color:                @agate-text-color;
+@agate-item-focus-bg-color:       fade(@agate-white, 15%);
 
 // LabeledIconButton
 // ---------------------------------------
@@ -157,13 +154,9 @@
 
 // Slider
 // ---------------------------------------
-@agate-slider-color:          @agate-accent;
-@agate-slider-track-bg-color: @agate-darker-gray;
+@agate-slider-track-bg-color: fade(@agate-white, 50%);
 @agate-slider-fill-bg-color:  @agate-white;
-@agate-slider-knob-bg-color:  @agate-dark-gray;
-@agate-slider-knob-focus-bg-color: @agate-accent;
-@agate-slider-knob-shadow:    0 3px 9px 3px fade(black, 30%);
-@agate-slider-knob-focus-shadow: @agate-slider-knob-shadow;
+@agate-slider-knob-bg-color:  @agate-white;
 
 // IncrementSlider
 // ---------------------------------------
