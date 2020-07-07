@@ -207,7 +207,8 @@ const DropdownBase = kind({
 						{...rest}
 						css={css}
 						disabled={hasChildren ? disabled : true}
-						onClick={opened ? onClose : onOpen}>
+						onClick={opened ? onClose : onOpen}
+					>
 						{title}
 						<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
 					</Button>
@@ -224,7 +225,7 @@ const DropdownBase = kind({
 									itemProps={{size: 'small', className: css.dropDownListItem, css: css}}
 									onSelect={onSelect}
 									selected={selected}
-									selectedProp="selected"s
+									selectedProp="selected"
 								>
 									{children || []}
 								</Group>
