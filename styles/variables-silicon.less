@@ -104,6 +104,19 @@
 // ImageItem
 // ---------------------------------------
 @agate-imageitem-border-width: 6px;
+@agate-imageitem-caption-overlay-height: 90px;
+@agate-imageitem-caption-overlay-width: 339px;
+@agate-imageitem-caption-overlay-padding: 0 21px 6px 21px;
+@agate-imageitem-caption-overlay-font-size: 21px;
+@agate-imageitem-caption-overlay-line-height: 24px;
+@agate-imageitem-caption-overlay-text-align: left;
+
+// Indicator
+// ---------------------------------------
+@agate-indicator-align-self:    center;
+@agate-indicator-border-radius: @agate-indicator-height / 2;
+@agate-indicator-height:        9px;
+@agate-indicator-margin-right:  21px;
 
 // Input
 // ---------------------------------------
@@ -120,13 +133,14 @@
 
 // Item
 // ---------------------------------------
-@agate-item-font-size: 40px;
-@agate-item-font-weight: 500;
-@agate-item-label-font-size: 30px;
-@agate-item-side-outset: 32px;
-@agate-item-height: 90px;
-@agate-item-height-large: 120px;
-@agate-item-border-width: 3px;
+@agate-item-border-width:     3px;
+@agate-item-font-size:        27px;
+@agate-item-font-weight:      normal;
+@agate-item-height:           90px;
+@agate-item-height-large:     120px;
+@agate-item-label-font-size:  30px;
+@agate-item-side-outset:      30px;
+@agate-item-sub-text-size:    24px;
 
 // Panels
 // ---------------------------------------
@@ -186,15 +200,17 @@
 // ---------------------------------------
 @agate-slider-height: @agate-item-height;
 @agate-slider-width: @agate-slider-knob-height;
-@agate-slider-knob-height: 45px;
+@agate-slider-knob-height: 30px;
 @agate-slider-horizontal-anchorpoint-width: (@agate-slider-knob-height * @agate-slider-knob-resting-state-scale - 1px); // just a touch under the resting state scale, to avoid subpixel rendering overflow
 @agate-slider-vertical-anchorpoint-height: (@agate-slider-knob-height * @agate-slider-knob-resting-state-scale - 1px); // just a touch under the resting state scale, to avoid subpixel rendering overflow
 @agate-slider-knob-border-radius: (@agate-slider-knob-height / 2);
 @agate-slider-knob-resting-state-scale: 0.9;
-@agate-slider-knob-transform: @agate-translate-center scale(@agate-slider-knob-resting-state-scale);
-@agate-slider-knob-active-transform: @agate-translate-center scale(1);
-@agate-slider-border-radius: 3px;
-@agate-slider-horizontal-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (@agate-slider-knob-height / 2);
+@agate-slider-knob-transform: @agate-translate-center;
+@agate-slider-active-knob-height: 60px;
+@agate-slider-active-knob-border-radius: (@agate-slider-active-knob-height / 2);
+@agate-slider-active-knob-transform: @agate-translate-center scale(@agate-slider-knob-resting-state-scale);
+@agate-slider-border-radius: 0;
+@agate-slider-horizontal-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (@agate-slider-active-knob-height / 2);
 @agate-slider-vertical-margin: 6px;
 @agate-slider-vertical-padding: (@agate-slider-knob-height / 2) ((@agate-slider-knob-height - @agate-slider-track-height) / 2);
 @agate-slider-track-height: 6px;
