@@ -145,6 +145,8 @@
 @agate-imageitem-border-color: transparent;
 @agate-imageitem-focus-border-color: @agate-accent;
 @agate-imageitem-focus-bg-color: @agate-background-focus;
+@agate-imageitem-caption-overlay-text-color: @agate-white;
+@agate-imageitem-caption-overlay-opacity: 0.5;
 
 // Indicator
 // ---------------------------------------
@@ -247,11 +249,12 @@
 // Slider
 // ---------------------------------------
 @agate-slider-color:          @agate-accent;
-@agate-slider-track-bg-color: fade(black, 10%);
-@agate-slider-fill-bg-color:  black;
-@agate-slider-knob-bg-color:  @agate-dark-gray;
+@agate-slider-track-bg-color: fade(@agate-black, 50%);
+@agate-slider-fill-bg-color:  @agate-black;
+@agate-slider-focus-fill-bg-color: @agate-accent;
+@agate-slider-knob-bg-color:  @agate-black;
 @agate-slider-knob-focus-bg-color: @agate-accent;
-@agate-slider-knob-shadow:    0 3px 9px 3px fade(black, 30%);
+@agate-slider-knob-shadow:    0;
 @agate-slider-knob-focus-shadow: @agate-slider-knob-shadow;
 
 // IncrementSlider
