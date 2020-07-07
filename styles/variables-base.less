@@ -242,6 +242,13 @@
 @agate-icon-smallest-font-size: (@agate-icon-smallest-size * 2);
 @agate-icon-sprite-smallest-size: @agate-icon-smallest-size;
 
+// Indicator
+// ---------------------------------------
+@agate-indicator-align-self:    inherit;
+@agate-indicator-border-radius: inherit;
+@agate-indicator-height:        inherit;
+@agate-indicator-margin-right:  inherit;
+
 // Input
 // ---------------------------------------
 @agate-input-font-size: 30px;
@@ -265,25 +272,32 @@
 // ---------------------------------------
 @agate-imageitem-caption-height: 48px;
 @agate-imageitem-border-width: inherit;
+@agate-imageitem-caption-overlay-height: inherit;
+@agate-imageitem-caption-overlay-width: inherit;
+@agate-imageitem-caption-overlay-padding: inherit;
+@agate-imageitem-caption-overlay-font-size: inherit;
+@agate-imageitem-caption-overlay-line-height: inherit;
+@agate-imageitem-caption-overlay-text-align: inherit;
+@agate-imageitem-caption-position-bottom: 6px;
 
 // Item
 // ---------------------------------------
-@agate-item-font-size: 30px;
-@agate-item-font-weight: @agate-base-font-weight;
-@agate-item-label-font-size: @agate-base-font-size;
-@agate-item-label-max-width: 40%;
-@agate-item-label-padding: 10px;
-@agate-item-content-min-width: 60%;
+@agate-item-border-width:             inherit;
+@agate-item-content-min-width:        60%;
+@agate-item-font-size:                30px;
+@agate-item-font-weight:              @agate-base-font-weight;
+@agate-item-height:                   60px;
+@agate-item-height-large:             72px;
+@agate-item-indent:                   36px;
 @agate-item-inline-content-max-width: 240px;
-@agate-item-side-outset: @agate-component-spacing;
-@agate-item-side-outset: @agate-component-spacing;
-@agate-item-height: 60px;
-@agate-item-height-large: 72px;
-@agate-item-vertical-padding: 3px;
-@agate-item-line-height: @agate-item-height - (@agate-item-vertical-padding * 2);
-@agate-item-line-height-large: @agate-item-height-large - (@agate-item-vertical-padding * 2);
-@agate-item-indent: 36px;
-@agate-item-border-width: inherit;
+@agate-item-label-font-size:          @agate-base-font-size;
+@agate-item-label-max-width:          40%;
+@agate-item-label-padding:            10px;
+@agate-item-line-height:              @agate-item-height - (@agate-item-vertical-padding * 2);
+@agate-item-line-height-large:        @agate-item-height-large - (@agate-item-vertical-padding * 2);
+@agate-item-side-outset:              @agate-component-spacing;
+@agate-item-sub-text-size:            inherit;
+@agate-item-vertical-padding:         3px;
 
 // LabeledIconButton
 // ---------------------------------------
