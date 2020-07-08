@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /**
  * Provides an Agate-themed thumbnail item.
  *
