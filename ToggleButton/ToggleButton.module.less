@@ -9,6 +9,7 @@
 			.position(@agate-togglebutton-indicator-position);
 			position: absolute;
 			height: @agate-togglebutton-indicator-height;
+			width: @agate-togglebutton-indicator-width;
 			background-color: @agate-togglebutton-indicator-off-bg-color;
 			border-color: @agate-togglebutton-indicator-off-border-color;
 			border-width: @agate-togglebutton-indicator-border-width;
@@ -62,12 +63,15 @@
 
 .button {
 	.applySkins({
+		min-width: @agate-togglebutton-min-width;
+
 		.bg {
 			background-color: @agate-togglebutton-bg-color;
 		}
 
 		.client {
 			color: @agate-togglebutton-color;
+			padding-left: @agate-togglebutton-client-padding-left;
 		}
 
 		&.selected {
@@ -77,6 +81,27 @@
 
 			.client {
 				color: @agate-togglebutton-selected-color;
+			}
+		}
+
+		&.huge {
+			min-width: @agate-togglebutton-huge-min-width;
+		}
+
+		&.small {
+			min-width: @agate-togglebutton-small-min-width;
+		}
+
+		&.smallest {
+			min-width: @agate-togglebutton-smallest-min-width;
+		}
+
+		&.minWidth {
+			&,
+			&.huge,
+			&.small,
+			&.smallest {
+				padding: @agate-togglebutton-padding;
 			}
 		}
 	});
