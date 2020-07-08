@@ -1,3 +1,4 @@
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -20,11 +21,11 @@ const ContextualPopupArrow = kind({
 	name: 'ContextualPopupArrow',
 
 	propTypes: /** @lends agate/ContextualPopupDecorator.ContextualPopupArrow.prototype */ {
-		direction: PropTypes.oneOf(['up', 'down', 'left', 'right'])
+		direction: PropTypes.oneOf(['above', 'below', 'left', 'right'])
 	},
 
 	defaultProps: {
-		direction: 'down'
+		direction: 'below'
 	},
 
 	styles: {
@@ -38,7 +39,7 @@ const ContextualPopupArrow = kind({
 
 	render: (props) => (
 		<svg {...props} viewBox="0 0 30 30">
-			<path d="M0 18 L15 0 L30 18" className={css.arrowBorder} />
+			{/*<path d="M0 18 L15 0 L30 18" className={css.arrowBorder} />*/}
 			<path d="M15 2 L0 20 L30 20 Z" className={css.arrowFill} />
 		</svg>
 	)
@@ -97,27 +98,35 @@ const ContextualPopupBase = kind({
 			bottom: PropTypes.number,
 			left: PropTypes.number,
 			right: PropTypes.number,
-			top: PropTypes.number
+			top: PropTypes.number,
+			width: PropTypes.number
 		}),
 
 		/**
 		 * Called with the reference to the container node.
 		 *
-		 * @type {Function}
+		 * @type {Object|Function}
 		 * @public
 		 */
-		containerRef: PropTypes.func,
+		containerRef: EnactPropTypes.ref,
 
 		/**
 		 * Direction of ContextualPopup.
 		 *
-		 * Can be one of: `'up'`, `'down'`, `'left'`, or `'right'`.
-		 *
-		 * @type {('up'|'down'|'left'|'right')}
-		 * @default 'down'
+		 * @type {('above'|'above center'|'above left'|'above right'|'below'|'below center'|'below left'|'below right'|'left middle'|'left top'|'left bottom'|'right middle'|'right top'|'right bottom')}
+		 * @default 'below'
 		 * @public
 		 */
-		direction: PropTypes.oneOf(['up', 'down', 'left', 'right']),
+		direction: PropTypes.oneOf(['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom']),
+
+		/**
+		 * Offset from the activator to apply to the position of the popup.
+		 *
+		 * @type {('none'|'overlap'|'small')}
+		 * @default 'small'
+		 * @public
+		 */
+		offset: PropTypes.oneOf(['none', 'overlap', 'small']),
 
 		/**
 		 * Called when the close button is clicked.
@@ -147,7 +156,8 @@ const ContextualPopupBase = kind({
 	},
 
 	defaultProps: {
-		direction: 'down',
+		direction: 'below center',
+		offset: 'small',
 		showCloseButton: false
 	},
 
@@ -157,7 +167,18 @@ const ContextualPopupBase = kind({
 	},
 
 	computed: {
-		className: ({showCloseButton, styler}) => styler.append({reserveClose: showCloseButton}),
+		arrowDirection: ({direction}) => {
+			const [arrowDirection] = direction.split(' ');
+			return arrowDirection;
+		},
+		className: ({direction, offset, showCloseButton, styler}) => styler.append(
+			{
+				fixedSize: direction === 'above' || direction === 'below'
+			},
+			direction.split(' '),
+			offset,
+			{reserveClose: showCloseButton}
+			),
 		closeButton: ({showCloseButton, onCloseButtonClick}) => {
 			if (showCloseButton) {
 				return (
@@ -165,6 +186,7 @@ const ContextualPopupBase = kind({
 						aria-label={$L('Close')}
 						backgroundOpacity="transparent"
 						className={css.closeButton}
+						css={css}
 						icon="closex"
 						onTap={onCloseButtonClick}
 						size="small"
@@ -174,7 +196,8 @@ const ContextualPopupBase = kind({
 		}
 	},
 
-	render: ({arrowPosition, containerPosition, containerRef, children, className, closeButton, direction, showArrow, ...rest}) => {
+	render: ({arrowDirection, arrowPosition, children, className, closeButton, containerPosition, containerRef, direction, showArrow, ...rest}) => {
+		delete rest.direction;
 		delete rest.onCloseButtonClick;
 		delete rest.showCloseButton;
 
@@ -184,7 +207,7 @@ const ContextualPopupBase = kind({
 					{children}
 					{closeButton}
 				</div>
-				{showArrow ? <ContextualPopupArrow direction={direction} style={arrowPosition} /> : null}
+				{showArrow ? <ContextualPopupArrow direction={arrowDirection} style={arrowPosition} /> : null}
 			</ContextualPopupRoot>
 		);
 	}

@@ -25,7 +25,6 @@ import ReactDOM from 'react-dom';
 import {ContextualPopup} from './ContextualPopup';
 
 import css from './ContextualPopupDecorator.module.less';
-import Skinnable from '../Skinnable';
 
 /**
  * Default config for {@link agate/ContextualPopupDecorator.ContextualPopupDecorator}
@@ -91,13 +90,23 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			popupComponent: EnactPropTypes.component.isRequired,
 
 			/**
-			 * Direction of popup with respect to the wrapped component.
+			 * Limits the range of voice control to the popup.
 			 *
-			 * @type {String}
-			 * @default 'down'
+			 * @memberof sandstone/ContextualPopupDecorator.ContextualPopupDecorator.prototype
+			 * @type {Boolean}
+			 * @default true
 			 * @public
 			 */
-			direction: PropTypes.oneOf(['up', 'down', 'left', 'right']),
+			'data-webos-voice-exclusive': PropTypes.bool,
+
+			/**
+			 * Direction of popup with respect to the wrapped component.
+			 *
+			 * @type {('above'|'above center'|'above left'|'above right'|'below'|'below center'|'below left'|'below right'|'left middle'|'left top'|'left bottom'|'right middle'|'right top'|'right bottom')}
+			 * @default 'below center'
+			 * @public
+			 */
+			direction: PropTypes.oneOf(['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom']),
 
 			/**
 			 * Disables closing the popup when the user presses the cancel key or taps outside the
@@ -108,6 +117,17 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * @public
 			 */
 			noAutoDismiss: PropTypes.bool,
+
+			/**
+			 * Offset from the activator to apply to the position of the popup.
+			 *
+			 * Only applies when `noArrow` is `true`.
+			 *
+			 * @type {('none'|'overlap'|'small')}
+			 * @default 'small'
+			 * @public
+			 */
+			offset: PropTypes.oneOf(['none', 'overlap', 'small']),
 
 			/**
 			 * Called when the user has attempted to close the popup.
@@ -217,7 +237,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 *   components beyond the popup, or
 			 * * `'self-only'` - Spotlight can only be set within the popup
 			 *
-			 * @type {String}
+			 * @type {('none'|'self-first'|'self-only')}
 			 * @default 'self-first'
 			 * @public
 			 */
@@ -225,8 +245,10 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		}
 
 		static defaultProps = {
-			direction: 'down',
+			'data-webos-voice-exclusive': true,
+			direction: 'below center',
 			noAutoDismiss: false,
+			offset: 'small',
 			open: false,
 			showCloseButton: false,
 			spotlightRestrict: 'self-first'
@@ -244,10 +266,10 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			this.overflow = {};
 			this.adjustedDirection = this.props.direction;
 
-			this.ARROW_WIDTH = ri.scale(30); // svg arrow width. used for arrow positioning
-			this.ARROW_OFFSET = noArrow ? 0 : ri.scale(18); // actual distance of the svg arrow displayed to offset overlaps with the container. Offset is when `noArrow` is false.
-			this.MARGIN = noArrow ? ri.scale(3) : ri.scale(9); // margin from an activator to the contextual popup.
+			this.ARROW_OFFSET = noArrow ? 0 : ri.scale(17); // actual distance of the svg arrow displayed to offset overlaps with the container. Offset is when `noArrow` is false.
+			this.ARROW_WIDTH = noArrow ? 0 : ri.scale(30); // svg arrow width. used for arrow positioning
 			this.KEEPOUT = ri.scale(12); // keep out distance on the edge of the screen
+			this.MARGIN = ri.scale(noArrow ? 3 : 9);
 
 			if (props.setApiProvider) {
 				props.setApiProvider(this);
@@ -262,24 +284,26 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		}
 
 		getSnapshotBeforeUpdate (prevProps, prevState) {
+			const snapshot = {
+				containerWidth: this.getContainerNodeWidth()
+			};
+
 			if (prevProps.open && !this.props.open) {
 				const current = Spotlight.getCurrent();
-				return {
-					shouldSpotActivator: (
-						// isn't set
-						!current ||
-						// is on the activator and we want to re-spot it so a11y read out can occur
-						current === prevState.activator ||
-						// is within the popup
-						this.containerNode.contains(current)
-					)
-				};
+				snapshot.shouldSpotActivator = (
+					// isn't set
+					!current ||
+					// is on the activator and we want to re-spot it so a11y read out can occur
+					current === prevState.activator ||
+					// is within the popup
+					this.containerNode.contains(current)
+				);
 			}
-			return null;
+			return snapshot;
 		}
 
 		componentDidUpdate (prevProps, prevState, snapshot) {
-			if (prevProps.direction !== this.props.direction) {
+			if (prevProps.direction !== this.props.direction || snapshot.containerWidth !== this.getContainerNodeWidth()) {
 				this.adjustedDirection = this.props.direction;
 				// NOTE: `setState` is called and will cause re-render
 				this.positionContextualPopup();
@@ -305,6 +329,10 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			Spotlight.remove(this.state.containerId);
 		}
 
+		getContainerNodeWidth () {
+			return this.containerNode && this.containerNode.getBoundingClientRect().width || 0;
+		}
+
 		updateLeaveFor (activator) {
 			Spotlight.set(this.state.containerId, {
 				leaveFor: {
@@ -316,14 +344,30 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			});
 		}
 
+		getContainerAdjustedPosition = () => {
+			const position = this.adjustedDirection;
+			const arr = this.adjustedDirection.split(' ');
+			let direction = null;
+			let anchor = null;
+
+			if (arr.length === 2) {
+				[direction, anchor] = arr;
+			} else {
+				direction = position;
+			}
+
+			return {anchor, direction};
+		}
+
 		getContainerPosition (containerNode, clientNode) {
 			const position = this.centerContainerPosition(containerNode, clientNode);
+			const {direction} = this.getContainerAdjustedPosition();
 
-			switch (this.adjustedDirection) {
-				case 'up':
+			switch (direction) {
+				case 'above':
 					position.top = clientNode.top - this.ARROW_OFFSET - containerNode.height - this.MARGIN;
 					break;
-				case 'down':
+				case 'below':
 					position.top = clientNode.bottom + this.ARROW_OFFSET + this.MARGIN;
 					break;
 				case 'right':
@@ -338,48 +382,88 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		}
 
 		centerContainerPosition (containerNode, clientNode) {
-			let pos = {};
-			if (this.adjustedDirection === 'up' || this.adjustedDirection === 'down') {
+			const pos = {};
+			const {anchor, direction} = this.getContainerAdjustedPosition();
+
+			if (direction === 'above' || direction === 'below') {
 				if (this.overflow.isOverLeft) {
 					// anchor to the left of the screen
 					pos.left = this.KEEPOUT;
 				} else if (this.overflow.isOverRight) {
 					// anchor to the right of the screen
 					pos.left = window.innerWidth - containerNode.width - this.KEEPOUT;
+				} else if (anchor) {
+					if (anchor === 'center') {
+						// center horizontally
+						pos.left = clientNode.left + (clientNode.width - containerNode.width) / 2;
+					} else if (anchor === 'left') {
+						// anchor to the left side of the activator
+						pos.left = clientNode.left;
+					} else {
+						// anchor to the right side of the activator
+						pos.left = clientNode.right - containerNode.width;
+					}
 				} else {
-					// center horizontally
-					pos.left = clientNode.left + (clientNode.width - containerNode.width) / 2;
+					// anchor to the left side of the activator, matching its width
+					pos.left = clientNode.left;
+					pos.width = clientNode.width;
 				}
-			} else if (this.adjustedDirection === 'left' || this.adjustedDirection === 'right') {
+
+			} else if (direction === 'left' || direction === 'right') {
 				if (this.overflow.isOverTop) {
 					// anchor to the top of the screen
 					pos.top = this.KEEPOUT;
 				} else if (this.overflow.isOverBottom) {
 					// anchor to the bottom of the screen
 					pos.top = window.innerHeight - containerNode.height - this.KEEPOUT;
-				} else {
+				} else if (anchor === 'middle') {
 					// center vertically
 					pos.top = clientNode.top - (containerNode.height - clientNode.height) / 2;
+				} else if (anchor === 'top') {
+					// anchor to the top of the activator
+					pos.top = clientNode.top;
+				} else {
+					// anchor to the bottom of the activator
+					pos.top = clientNode.bottom - containerNode.height;
 				}
 			}
 
 			return pos;
 		}
 
-		getArrowPosition (clientNode) {
+		getArrowPosition (containerNode, clientNode) {
 			const position = {};
+			const {anchor, direction} = this.getContainerAdjustedPosition();
 
-			if (this.adjustedDirection === 'up' || this.adjustedDirection === 'down') {
-				position.left = clientNode.left + (clientNode.width - this.ARROW_WIDTH) / 2;
+			if (direction === 'above' || direction === 'below') {
+				if (this.overflow.isOverRight && !this.overflow.isOverLeft) {
+					position.left = window.innerWidth - ((containerNode.width + this.ARROW_WIDTH) / 2) - this.KEEPOUT;
+				} else if (!this.overflow.isOverRight && this.overflow.isOverLeft) {
+					position.left = ((containerNode.width - this.ARROW_WIDTH) / 2) + this.KEEPOUT;
+				} else if (anchor === 'left') {
+					position.left = clientNode.left + (containerNode.width - this.ARROW_WIDTH) / 2;
+				} else if (anchor === 'right') {
+					position.left = clientNode.right - containerNode.width + (containerNode.width - this.ARROW_WIDTH) / 2;
+				} else {
+					position.left = clientNode.left + (clientNode.width - this.ARROW_WIDTH) / 2;
+				}
+			} else if (this.overflow.isOverBottom && !this.overflow.isOverTop) {
+				position.top = window.innerHeight - ((containerNode.height + this.ARROW_WIDTH) / 2) - this.KEEPOUT;
+			} else if (!this.overflow.isOverBottom && this.overflow.isOverTop) {
+				position.top = ((containerNode.height - this.ARROW_WIDTH) / 2) + this.KEEPOUT;
+			} else if (anchor === 'top') {
+				position.top = clientNode.top + (containerNode.height - this.ARROW_WIDTH) / 2;
+			} else if (anchor === 'bottom') {
+				position.top = clientNode.bottom - containerNode.height + (containerNode.height - this.ARROW_WIDTH) / 2;
 			} else {
 				position.top = clientNode.top + (clientNode.height - this.ARROW_WIDTH) / 2;
 			}
 
-			switch (this.adjustedDirection) {
-				case 'up':
+			switch (direction) {
+				case 'above':
 					position.top = clientNode.top - this.ARROW_WIDTH - this.MARGIN;
 					break;
-				case 'down':
+				case 'below':
 					position.top = clientNode.bottom + this.MARGIN;
 					break;
 				case 'left':
@@ -397,8 +481,9 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 
 		calcOverflow (container, client) {
 			let containerHeight, containerWidth;
+			const {anchor, direction} = this.getContainerAdjustedPosition();
 
-			if (this.adjustedDirection === 'up' || this.adjustedDirection === 'down') {
+			if (direction === 'above' || direction === 'below') {
 				containerHeight = container.height;
 				containerWidth = (container.width - client.width) / 2;
 			} else {
@@ -407,22 +492,32 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			}
 
 			this.overflow = {
-				isOverTop: client.top - containerHeight - this.ARROW_OFFSET - this.MARGIN - this.KEEPOUT < 0,
-				isOverBottom: client.bottom + containerHeight + this.ARROW_OFFSET + this.MARGIN + this.KEEPOUT  > window.innerHeight,
-				isOverLeft: client.left - containerWidth - this.ARROW_OFFSET - this.MARGIN - this.KEEPOUT < 0,
-				isOverRight: client.right + containerWidth + this.ARROW_OFFSET + this.MARGIN + this.KEEPOUT > window.innerWidth
+				isOverTop: anchor === 'top' && (direction === 'left' || direction === 'right') ?
+					!(client.top > this.KEEPOUT) :
+					client.top - containerHeight - this.ARROW_OFFSET - this.MARGIN - this.KEEPOUT < 0,
+				isOverBottom: anchor === 'bottom' && (direction === 'left' || direction === 'right') ?
+					client.bottom + this.KEEPOUT > window.innerHeight :
+					client.bottom + containerHeight + this.ARROW_OFFSET + this.MARGIN + this.KEEPOUT > window.innerHeight,
+				isOverLeft: anchor === 'left' && (direction === 'above' || direction === 'below') ?
+					!(client.left > this.KEEPOUT) :
+					client.left - containerWidth - this.ARROW_OFFSET - this.MARGIN - this.KEEPOUT < 0,
+				isOverRight: anchor === 'right' && (direction === 'above' || direction === 'below') ?
+					client.right + this.KEEPOUT > window.innerWidth :
+					client.right + containerWidth + this.ARROW_OFFSET + this.MARGIN + this.KEEPOUT > window.innerWidth
 			};
 		}
 
 		adjustDirection () {
-			if (this.overflow.isOverTop && !this.overflow.isOverBottom && this.adjustedDirection === 'up') {
-				this.adjustedDirection = 'down';
-			} else if (this.overflow.isOverBottom && !this.overflow.isOverTop && this.adjustedDirection === 'down') {
-				this.adjustedDirection = 'up';
-			} else if (this.overflow.isOverLeft && !this.overflow.isOverRight && this.adjustedDirection === 'left' && !this.props.rtl) {
-				this.adjustedDirection = 'right';
-			} else if (this.overflow.isOverRight && !this.overflow.isOverLeft && this.adjustedDirection === 'right' && !this.props.rtl) {
-				this.adjustedDirection = 'left';
+			const {anchor, direction} = this.getContainerAdjustedPosition();
+
+			if (this.overflow.isOverTop && !this.overflow.isOverBottom && direction === 'above') {
+				this.adjustedDirection = anchor ? `below ${anchor}` : 'below';
+			} else if (this.overflow.isOverBottom && !this.overflow.isOverTop && direction === 'below') {
+				this.adjustedDirection = anchor ? `above ${anchor}` : 'above';
+			} else if (this.overflow.isOverLeft && !this.overflow.isOverRight && direction === 'left' && !this.props.rtl) {
+				this.adjustedDirection = anchor ? `right ${anchor}` : 'right';
+			} else if (this.overflow.isOverRight && !this.overflow.isOverLeft && direction === 'right' && !this.props.rtl) {
+				this.adjustedDirection = anchor ? `left ${anchor}` : 'left';
 			}
 		}
 
@@ -460,7 +555,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 
 				this.setState({
 					direction: this.adjustedDirection,
-					arrowPosition: this.getArrowPosition(clientNode),
+					arrowPosition: this.getArrowPosition(containerNode, clientNode),
 					containerPosition: this.getContainerPosition(containerNode, clientNode)
 				});
 			}
@@ -551,7 +646,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		}
 
 		spotActivator = (activator) => {
-			if (activator && activator === Spotlight.getCurrent()) {
+			if (!Spotlight.getPointerMode() && activator && activator === Spotlight.getCurrent()) {
 				activator.blur();
 			}
 			if (!Spotlight.focus(activator)) {
@@ -573,7 +668,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		}
 
 		render () {
-			const {showCloseButton, popupComponent: PopupComponent, popupClassName, noAutoDismiss, open, onClose, popupProps, skin, spotlightRestrict, ...rest} = this.props;
+			const {'data-webos-voice-exclusive': voiceExclusive, showCloseButton, popupComponent: PopupComponent, popupClassName, noAutoDismiss, offset, onClose, open, popupProps, skin, spotlightRestrict, ...rest} = this.props;
 			const scrimType = spotlightRestrict === 'self-only' ? 'transparent' : 'none';
 			const popupPropsRef = Object.assign({}, popupProps);
 			const ariaProps = extractAriaProps(popupPropsRef);
@@ -609,6 +704,8 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 							arrowPosition={this.state.arrowPosition}
 							containerPosition={this.state.containerPosition}
 							containerRef={this.getContainerNode}
+							data-webos-voice-exclusive={voiceExclusive}
+							offset={noArrow ? offset : 'none'}
 							showArrow={!noArrow}
 							skin={skin}
 							spotlightId={this.state.containerId}
@@ -636,7 +733,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
  * ```
  * const ButtonWithPopup = ContextualPopupDecorator(Button);
  * <ButtonWithPopup
- *   direction="up"
+ *   direction="above center"
  *   open={this.state.open}
  *   popupComponent={CustomPopupComponent}
  * >
@@ -651,7 +748,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 const ContextualPopupDecorator = compose(
 	ApiDecorator({api: ['positionContextualPopup']}),
 	I18nContextDecorator({rtlProp: 'rtl'}),
-	Skinnable,
 	Decorator
 );
 
