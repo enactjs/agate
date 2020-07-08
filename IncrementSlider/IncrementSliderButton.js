@@ -24,15 +24,7 @@ const IncrementSliderButtonBase = kind({
 		css: PropTypes.object,
 		onTap: PropTypes.func,
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-		role: PropTypes.string,
-
-		/**
-		 * The current skin for this component.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		skin: PropTypes.string,
+		role: PropTypes.string
 	},
 
 	styles: {
@@ -44,7 +36,7 @@ const IncrementSliderButtonBase = kind({
 		className: ({orientation, role, styler}) => styler.append(orientation, role)
 	},
 
-	render: ({css, onTap, skin, ...rest}) => {
+	render: ({css, onTap, ...rest}) => {
 		delete rest.orientation;
 		delete rest.role;
 		return (
