@@ -145,6 +145,12 @@
 @agate-imageitem-border-color: transparent;
 @agate-imageitem-focus-border-color: @agate-accent;
 @agate-imageitem-focus-bg-color: @agate-background-focus;
+@agate-imageitem-caption-overlay-text-color: @agate-white;
+@agate-imageitem-caption-overlay-opacity: 0.5;
+
+// Indicator
+// ---------------------------------------
+@agate-indicator-bg-color: @agate-accent;
 
 // Indicator
 // ---------------------------------------
@@ -165,12 +171,16 @@
 
 // Item
 // ---------------------------------------
-@agate-item-color:           @agate-text-color;
-@agate-item-label-color:     @agate-accent;
-@agate-item-focus-border-color: @agate-accent;
-@agate-item-focus-color:     @agate-item-color;
-@agate-item-selected-color:  @agate-item-label-color;
-@agate-item-selected-outline: 5px solid @agate-item-focus-bg-color;
+@agate-item-border-bottom-color:          fade(@agate-black, 40%);
+@agate-item-color:                        @agate-text-color;
+@agate-item-label-color:                  @agate-accent;
+@agate-item-focus-bg-color:               fade(@agate-black, 15%);
+@agate-item-focus-border-bottom-color:    @agate-item-border-bottom-color;
+@agate-item-focus-border-color:           transparent;
+@agate-item-focus-text-color:             @agate-black;
+@agate-item-selected-bg-color:            transparent;
+@agate-item-selected-border-bottom-color: @agate-accent;
+@agate-item-selected-color:               @agate-item-label-color;
 
 // LabeledIconButton
 // ---------------------------------------
@@ -243,11 +253,12 @@
 // Slider
 // ---------------------------------------
 @agate-slider-color:          @agate-accent;
-@agate-slider-track-bg-color: fade(black, 10%);
-@agate-slider-fill-bg-color:  black;
-@agate-slider-knob-bg-color:  @agate-dark-gray;
+@agate-slider-track-bg-color: fade(@agate-black, 50%);
+@agate-slider-fill-bg-color:  @agate-black;
+@agate-slider-focus-fill-bg-color: @agate-accent;
+@agate-slider-knob-bg-color:  @agate-black;
 @agate-slider-knob-focus-bg-color: @agate-accent;
-@agate-slider-knob-shadow:    0 3px 9px 3px fade(black, 30%);
+@agate-slider-knob-shadow:    0;
 @agate-slider-knob-focus-shadow: @agate-slider-knob-shadow;
 
 // IncrementSlider
