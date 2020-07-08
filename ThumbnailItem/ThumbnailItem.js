@@ -56,6 +56,14 @@ const ThumbnailItemBase = kind({
 		css: PropTypes.object,
 
 		/**
+		 * Applies `selected` className.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		selected: PropTypes.bool,
+
+		/**
 		 * String value used to determine which thumbnail will appear on a specific screenSize.
 		 *
 		 * @type {String}
