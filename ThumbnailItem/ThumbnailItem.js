@@ -56,13 +56,6 @@ const ThumbnailItemBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * The sub content displayed with the thumbnail.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-
-		/**
 		 * String value used to determine which thumbnail will appear on a specific screenSize.
 		 *
 		 * @type {String}
@@ -91,8 +84,9 @@ const ThumbnailItemBase = kind({
 	},
 
 	computed: {
-		className: ({type, styler}) => styler.append({
-			roundThumbnail: type === 'round'
+		className: ({type, selected, styler}) => styler.append({
+			roundThumbnail: type === 'round',
+			selected
 		})
 	},
 

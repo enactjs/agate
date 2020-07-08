@@ -26,19 +26,9 @@
 	  	display: flex;
 	}
 
-  	.active({
-	  	.slotBefore {
-		  	&::before {
-			  	content: "";
-			}
-		}
-	});
-
 	.applySkins({
 	  	line-height: @agate-thumbnailitem-line-height;
 	  	height: @agate-thumbnailitem-height;
-	  	border: @agate-thumbnailitem-border;
-	  	border-bottom: @agate-thumbnailitem-border-bottom-width solid @agate-thumbnailitem-border-color;
 
 		&.item {
 			.label {
@@ -60,9 +50,6 @@
 		}
 
 	  	.focus({
-		  	background-color: @agate-thumbnailitem-focus-bg-color;
-		  	border-color: @agate-thumbnailitem-focus-border-color;
-
 			.content {
 				color: @agate-thumbnailitem-focus-text-color;
 			}
@@ -74,27 +61,12 @@
 			}
 		});
 
-		.active({
-			background-color: @agate-thumbnailitem-selected-bg-color;
-			border-color: @agate-thumbnailitem-selected-border-color;
-
+		&.selected {
 			&.item {
 				.label {
 					color: @agate-thumbnailitem-subcontent-selected-text-color;
 				}
 			}
-
-			.slotBefore {
-				&::before {
-					height: @agate-indicator-height;
-					width: @agate-indicator-height;
-					background-color: @agate-indicator-bg-color;
-					border-radius: @agate-indicator-border-radius;
-					display: @agate-indicator-display;
-					align-self: @agate-indicator-align-self;
-					margin-right: @agate-indicator-margin-right;
-				}
-			}
-		})
+		}
 	});
 }

@@ -1,5 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {text, select} from '@enact/storybook-utils/addons/knobs';
+import {text, select, boolean} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -17,6 +17,7 @@ storiesOf('Agate', module)
 				src="https://dummyimage.com/64/e048e0/0011ff"
 				label={text('label', Config, 'Sub Content')}
 				type={select('type', ['round', 'square'], Config)}
+				selected={boolean('selected', Config)}
 			>
 				{text('children', Config, 'Main Content')}
 			</ThumbnailItem>
