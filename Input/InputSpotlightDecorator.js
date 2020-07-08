@@ -109,7 +109,7 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 			 * @public
 			 */
 			spotlightDisabled: PropTypes.bool
-		}
+		};
 
 		constructor (props) {
 			super(props);
@@ -160,25 +160,25 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 					this.paused.resume();
 				}
 			}
-		}
+		};
 
 		focus = (focused, node) => {
 			this.setState({focused, node});
-		}
+		};
 
 		blur = () => {
 			this.setState((state) => (
 				state.focused || state.node ? {focused: null, node: null} : null
 			));
-		}
+		};
 
 		focusDecorator = (decorator) => {
 			this.focus('decorator', decorator);
-		}
+		};
 
 		focusInput = (decorator) => {
 			this.focus('input', decorator.querySelector('input'));
-		}
+		};
 
 		onBlur = (ev) => {
 			if (!this.props.autoFocus) {
@@ -205,7 +205,7 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 					this.blur();
 				}
 			}
-		}
+		};
 
 		onMouseDown = (ev) => {
 			const {disabled, spotlightDisabled} = this.props;
@@ -218,7 +218,7 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 			}
 
 			forwardMouseDown(ev, this.props);
-		}
+		};
 
 		onFocus = (ev) => {
 			forwardFocus(ev, this.props);
@@ -229,7 +229,7 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 				this.focusInput(ev.currentTarget);
 				ev.stopPropagation();
 			}
-		}
+		};
 
 		onKeyDown (ev) {
 			const {currentTarget, keyCode, preventDefault, target} = ev;
@@ -306,7 +306,7 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 			}
 
 			forwardKeyUp(ev, this.props);
-		}
+		};
 
 		setDownTarget (ev) {
 			const {repeat, target} = ev;

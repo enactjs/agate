@@ -232,7 +232,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		static propTypes = {
 			accent: PropTypes.string,
 			highlight: PropTypes.string
-		}
+		};
 
 		render () {
 			const {accent, className, highlight, ...rest} = this.props;
@@ -243,7 +243,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 				'enact-unselectable',
 				bgClassName,
 				css.root,
-				{[customizableSkinClassName]: customSkin},
+				{[customizableSkinClassName]: customSkin}
 			);
 
 			return (
