@@ -41,7 +41,12 @@
 		border-style: solid;
 		border-width: @agate-item-border-width;
 		border-color: @agate-item-border-color;
+		border-bottom-color: @agate-item-border-bottom-color;
 		color: @agate-item-color;
+
+		&:last-child {
+			border-bottom-color: transparent;
+		}
 
 		.itemContent {
 			.label   {
@@ -75,6 +80,10 @@
 			}
 		}
 
+		.slotAfter {
+			font-size: @agate-item-sub-text-size;
+		}
+
 		&.selected {
 			color: @agate-item-selected-color;
 		}
@@ -95,6 +104,7 @@
 
 		.focus({
 			border-color: @agate-item-focus-border-color;
+			border-bottom-color: @agate-item-focus-border-bottom-color;
 			background-color: @agate-item-focus-bg-color;
 			color: @agate-item-focus-color;
 
@@ -104,5 +114,23 @@
 				}
 			}
 		});
+
+		&.selected {
+			background-color: @agate-item-selected-bg-color;
+			border-color: @agate-item-focus-border-color;
+			border-bottom-color: @agate-item-selected-border-bottom-color;
+			color: @agate-item-focus-color;
+
+			&::before {
+				content: "";
+				height: @agate-indicator-height;
+				width: @agate-indicator-height;
+				background-color: @agate-indicator-bg-color;
+				border-radius: @agate-indicator-border-radius;
+				align-self: @agate-indicator-align-self;
+				margin-right: @agate-indicator-margin-right;
+			}
+
+		}
 	});
 }
