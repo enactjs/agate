@@ -44,7 +44,7 @@ storiesOf('Agate QA.Dropdown', module)
 				<div>
 					<div style={{height: '300px'}}>
 						<Dropdown
-							direction='down'
+							direction="down"
 							onSelect={action('onSelect')}
 							title={text('title', Config, 'Please select')}
 						>
@@ -53,7 +53,7 @@ storiesOf('Agate QA.Dropdown', module)
 					</div>
 					<div style={{height: '300px'}}>
 						<Dropdown
-							direction='left'
+							direction='"left'
 							onSelect={action('onSelect')}
 							title={text('title', Config, 'Please select')}
 						>
@@ -62,7 +62,7 @@ storiesOf('Agate QA.Dropdown', module)
 					</div>
 					<div style={{height: '300px'}}>
 						<Dropdown
-							direction='right'
+							direction="right"
 							onSelect={action('onSelect')}
 							title={text('title', Config, 'Please select')}
 						>
@@ -71,7 +71,7 @@ storiesOf('Agate QA.Dropdown', module)
 					</div>
 					<div>
 						<Dropdown
-							direction='up'
+							direction="up"
 							onSelect={action('onSelect')}
 							title={text('title', Config, 'Please select')}
 						>
