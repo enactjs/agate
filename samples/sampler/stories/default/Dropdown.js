@@ -46,16 +46,16 @@ storiesOf('Agate QA.Dropdown', module)
 						<Dropdown
 							direction="down"
 							onSelect={action('onSelect')}
-							title={text('title', Config, 'Please select')}
+							title="Down dropdown"
 						>
 							{items}
 						</Dropdown>
 					</div>
 					<div style={{height: '300px'}}>
 						<Dropdown
-							direction='"left'
+							direction="left"
 							onSelect={action('onSelect')}
-							title={text('title', Config, 'Please select')}
+							title="Left dropdown"
 						>
 							{items}
 						</Dropdown>
@@ -64,7 +64,7 @@ storiesOf('Agate QA.Dropdown', module)
 						<Dropdown
 							direction="right"
 							onSelect={action('onSelect')}
-							title={text('title', Config, 'Please select')}
+							title="Right dropdown"
 						>
 							{items}
 						</Dropdown>
@@ -73,7 +73,7 @@ storiesOf('Agate QA.Dropdown', module)
 						<Dropdown
 							direction="up"
 							onSelect={action('onSelect')}
-							title={text('title', Config, 'Please select')}
+							title="Up dropdown"
 						>
 							{items}
 						</Dropdown>
