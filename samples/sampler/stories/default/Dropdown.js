@@ -42,7 +42,7 @@ storiesOf('Agate QA.Dropdown', module)
 
 			return (
 				<div>
-					<div style={{height: '300px'}}>
+					<div style={{height: '350px'}}>
 						<Dropdown
 							direction="down"
 							onSelect={action('onSelect')}
@@ -51,7 +51,7 @@ storiesOf('Agate QA.Dropdown', module)
 							{items}
 						</Dropdown>
 					</div>
-					<div style={{height: '300px'}}>
+					<div style={{height: '350px'}}>
 						<Dropdown
 							direction="left"
 							onSelect={action('onSelect')}
@@ -60,7 +60,7 @@ storiesOf('Agate QA.Dropdown', module)
 							{items}
 						</Dropdown>
 					</div>
-					<div style={{height: '300px'}}>
+					<div style={{height: '350px'}}>
 						<Dropdown
 							direction="right"
 							onSelect={action('onSelect')}

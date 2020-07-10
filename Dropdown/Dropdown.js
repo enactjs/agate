@@ -198,21 +198,28 @@ const DropdownBase = kind({
 
 	render: ({children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
 		const opened = !disabled && open;
-		const dropdownButton = (skin === 'silicon');
+		const [DropDownButton, wrapperProps, groupProps] = (skin === 'silicon') ? [
+			Button,
+			{className: dropdownButtonClassname},
+			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'}
+		] : [
+			Item,
+			{},
+			{childComponent: Item, itemProps: {size: 'small'}}
+		];
 
 		return (
-			<div {...rest}>
-				{dropdownButton &&
-				<div className={dropdownButtonClassname}>
-					<Button
+			<div {...rest} >
+				<div {...wrapperProps}>
+					<DropDownButton
 						{...rest}
 						css={css}
 						disabled={hasChildren ? disabled : true}
 						onClick={opened ? onClose : onOpen}
 					>
-						{title}
 						<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
-					</Button>
+						{title}
+					</DropDownButton>
 					<Transition
 						className={transitionContainerClassname}
 						visible={opened}
@@ -222,11 +229,9 @@ const DropdownBase = kind({
 							<Scroller className={css.scroller}>
 								<Group
 									className={css.group}
-									childComponent={RadioItem}
-									itemProps={{size: 'small', className: css.dropDownListItem, css: css}}
 									onSelect={onSelect}
 									selected={selected}
-									selectedProp="selected"
+									{...groupProps}
 								>
 									{children || []}
 								</Group>
@@ -234,39 +239,6 @@ const DropdownBase = kind({
 						</ContainerDiv>
 					</Transition>
 				</div>
-				}
-				{!dropdownButton &&
-					<React.Fragment>
-						<Item
-							{...rest}
-							css={css}
-							disabled={hasChildren ? disabled : true}
-							onClick={opened ? onClose : onOpen}
-						>
-							<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
-							{title}
-						</Item>
-						<Transition
-							className={transitionContainerClassname}
-							visible={opened}
-							direction={transitionDirection}
-						>
-							<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
-								<Scroller className={css.scroller}>
-									<Group
-										className={css.group}
-										childComponent={Item}
-										itemProps={{size: 'small'}}
-										onSelect={onSelect}
-										selected={selected}
-									>
-										{children || []}
-									</Group>
-								</Scroller>
-							</ContainerDiv>
-						</Transition>
-					</React.Fragment>
-				}
 			</div>
 		);
 	}
