@@ -5,6 +5,8 @@
 @import '../styles/skin.less';
 
 .contextualPopup {
+  position: absolute;
+
   .container {
     position: absolute;
     background-clip: padding-box;
@@ -13,31 +15,6 @@
     box-sizing: border-box;
 
     &.none { /* Needed to prevent global class being added in the DOM */ }
-
-    //&.above {
-    //  &.overlap {	margin-top: @agate-contextualpopup-offset-overlap; }
-    //  &.small { margin-top: -@agate-contextualpopup-offset-small; }
-    //}
-    //&.below {
-    //  &.overlap {	margin-top: -@agate-contextualpopup-offset-overlap; }
-    //  &.small { margin-top: @agate-contextualpopup-offset-small; }
-    //}
-    //&.right {
-    //  &.top,
-    //  &.middle,
-    //  &.bottom {
-    //    &.overlap { margin-left: -@agate-contextualpopup-offset-overlap; }
-    //    &.small { margin-left: @agate-contextualpopup-offset-small; }
-    //  }
-    //}
-    //&.left  {
-    //  &.top,
-    //  &.middle,
-    //  &.bottom {
-    //    &.overlap { margin-left: @agate-contextualpopup-offset-overlap; }
-    //    &.small { margin-left: -@agate-contextualpopup-offset-small; }
-    //  }
-    //}
 
     &.fixedSize {
       overflow: hidden;
@@ -80,6 +57,7 @@
     .container {
       background-color: @agate-contextual-popup-bg-color;
       color: @agate-contextual-popup-color;
+      border-color: @agate-contextual-popup-border-color;
       border-radius: @agate-contextual-popup-border-radius;
       font-size: @agate-contextual-popup-font-size;
       padding: @agate-contextual-popup-padding;
@@ -112,8 +90,15 @@
     }
 
     :global(.enact-locale-right-to-left) & {
+      .container {
+        &.reserveClose {
+          .padding-start-end(@agate-button-small-height * 1.5, @agate-contextual-popup-padding-horizontal);
+        }
+      }
+
       .closeButton {
         left: @agate-spotlight-outset;
+        right: auto;
       }
     }
 

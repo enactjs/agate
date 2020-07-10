@@ -35,16 +35,6 @@ import css from './ContextualPopupDecorator.module.less';
  */
 const defaultConfig = {
 	/**
-	 * `ContextualPopup` without the arrow.
-	 *
-	 * @type {Boolean}
-	 * @default false
-	 * @memberof agate/ContextualPopupDecorator.ContextualPopupDecorator.defaultConfig
-	 * @public
-	 */
-	noArrow: false,
-
-	/**
 	 * Disables passing the `skin` prop to the wrapped component.
 	 *
 	 * @see {@link agate/Skinnable.Skinnable.skin}
@@ -73,7 +63,7 @@ const ContextualPopupContainer = SpotlightContainerDecorator(
 );
 
 const Decorator = hoc(defaultConfig, (config, Wrapped) => {
-	const {noArrow, noSkin, openProp} = config;
+	const {noSkin, openProp} = config;
 
 	return class extends React.Component {
 		static displayName = 'ContextualPopupDecorator'
@@ -117,17 +107,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * @public
 			 */
 			noAutoDismiss: PropTypes.bool,
-
-			/**
-			 * Offset from the activator to apply to the position of the popup.
-			 *
-			 * Only applies when `noArrow` is `true`.
-			 *
-			 * @type {('none'|'overlap'|'small')}
-			 * @default 'small'
-			 * @public
-			 */
-			offset: PropTypes.oneOf(['none', 'overlap', 'small']),
 
 			/**
 			 * Called when the user has attempted to close the popup.
@@ -248,7 +227,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			'data-webos-voice-exclusive': true,
 			direction: 'below center',
 			noAutoDismiss: false,
-			offset: 'small',
 			open: false,
 			showCloseButton: false,
 			spotlightRestrict: 'self-first'
@@ -266,10 +244,10 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			this.overflow = {};
 			this.adjustedDirection = this.props.direction;
 
-			this.ARROW_OFFSET = noArrow ? 0 : ri.scale(17); // actual distance of the svg arrow displayed to offset overlaps with the container. Offset is when `noArrow` is false.
-			this.ARROW_WIDTH = noArrow ? 0 : ri.scale(30); // svg arrow width. used for arrow positioning
+			this.ARROW_OFFSET = ri.scale(18); // actual distance of the svg arrow displayed to offset overlaps with the container.
+			this.ARROW_WIDTH = ri.scale(30); // svg arrow width. used for arrow positioning
 			this.KEEPOUT = ri.scale(12); // keep out distance on the edge of the screen
-			this.MARGIN = ri.scale(noArrow ? 3 : 9);
+			this.MARGIN = ri.scale(9);
 
 			if (props.setApiProvider) {
 				props.setApiProvider(this);
@@ -668,7 +646,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		}
 
 		render () {
-			const {'data-webos-voice-exclusive': voiceExclusive, showCloseButton, popupComponent: PopupComponent, popupClassName, noAutoDismiss, offset, onClose, open, popupProps, skin, spotlightRestrict, ...rest} = this.props;
+			const {'data-webos-voice-exclusive': voiceExclusive, showCloseButton, popupComponent: PopupComponent, popupClassName, noAutoDismiss, onClose, open, popupProps, skin, spotlightRestrict, ...rest} = this.props;
 			const scrimType = spotlightRestrict === 'self-only' ? 'transparent' : 'none';
 			const popupPropsRef = Object.assign({}, popupProps);
 			const ariaProps = extractAriaProps(popupPropsRef);
@@ -705,8 +683,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 							containerPosition={this.state.containerPosition}
 							containerRef={this.getContainerNode}
 							data-webos-voice-exclusive={voiceExclusive}
-							offset={noArrow ? offset : 'none'}
-							showArrow={!noArrow}
 							skin={skin}
 							spotlightId={this.state.containerId}
 							spotlightRestrict={spotlightRestrict}

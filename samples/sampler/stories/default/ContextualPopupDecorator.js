@@ -9,7 +9,6 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 
-
 const ContextualButton = ContextualPopupDecorator(Button);
 ContextualButton.displayName = 'ContextualButton';
 
@@ -19,7 +18,6 @@ const Config = mergeComponentMetadata('ContextualPopupDecorator', Button, Contex
 // manually. This can (should) be revisited later to find out why and a solution.
 Config.defaultProps = {
 	direction: 'below center',
-	offset: 'small',
 	open: true,
 	showCloseButton: true,
 	spotlightRestrict: 'self-first'
@@ -38,7 +36,6 @@ storiesOf('Agate', module)
 					direction={select('direction', ['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config)}
 					noAutoDismiss={boolean('noAutoDismiss', Config)}
 					onClose={action('onClose')}
-					offset={select('offset', ['none', 'overlap', 'small'], Config)}
 					open={boolean('open', Config)}
 					popupComponent={renderPopup}
 					showCloseButton={boolean('showCloseButton', Config)}

@@ -39,7 +39,7 @@ const ContextualPopupArrow = kind({
 
 	render: (props) => (
 		<svg {...props} viewBox="0 0 30 30">
-			{/*<path d="M0 18 L15 0 L30 18" className={css.arrowBorder} />*/}
+			<path d="M0 18 L15 0 L30 18" className={css.arrowBorder} />
 			<path d="M15 2 L0 20 L30 20 Z" className={css.arrowFill} />
 		</svg>
 	)
@@ -120,30 +120,12 @@ const ContextualPopupBase = kind({
 		direction: PropTypes.oneOf(['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom']),
 
 		/**
-		 * Offset from the activator to apply to the position of the popup.
-		 *
-		 * @type {('none'|'overlap'|'small')}
-		 * @default 'small'
-		 * @public
-		 */
-		offset: PropTypes.oneOf(['none', 'overlap', 'small']),
-
-		/**
 		 * Called when the close button is clicked.
 		 *
 		 * @type {Function}
 		 * @public
 		 */
 		onCloseButtonClick: PropTypes.func,
-
-		/**
-		 * Shows the arrow.
-		 *
-		 * @type {Boolean}
-		 * @default false
-		 * @public
-		 */
-		showArrow: PropTypes.bool,
 
 		/**
 		 * Shows the close button.
@@ -157,7 +139,6 @@ const ContextualPopupBase = kind({
 
 	defaultProps: {
 		direction: 'below center',
-		offset: 'small',
 		showCloseButton: false
 	},
 
@@ -171,14 +152,13 @@ const ContextualPopupBase = kind({
 			const [arrowDirection] = direction.split(' ');
 			return arrowDirection;
 		},
-		className: ({direction, offset, showCloseButton, styler}) => styler.append(
+		className: ({direction, showCloseButton, styler}) => styler.append(
 			{
 				fixedSize: direction === 'above' || direction === 'below'
 			},
 			direction.split(' '),
-			offset,
 			{reserveClose: showCloseButton}
-			),
+		),
 		closeButton: ({showCloseButton, onCloseButtonClick}) => {
 			if (showCloseButton) {
 				return (
@@ -196,18 +176,17 @@ const ContextualPopupBase = kind({
 		}
 	},
 
-	render: ({arrowDirection, arrowPosition, children, className, closeButton, containerPosition, containerRef, direction, showArrow, ...rest}) => {
-		delete rest.direction;
+	render: ({arrowDirection, arrowPosition, children, className, closeButton, containerPosition, containerRef, direction, ...rest}) => {
 		delete rest.onCloseButtonClick;
 		delete rest.showCloseButton;
 
 		return (
-			<ContextualPopupRoot aria-live="off" role="alert" {...rest} className={css.contextualPopup}>
+			<ContextualPopupRoot aria-live="off" role="alert" {...rest} className={css.contextualPopup} direction={direction}>
 				<div className={className} style={containerPosition} ref={containerRef}>
 					{children}
 					{closeButton}
 				</div>
-				{showArrow ? <ContextualPopupArrow direction={arrowDirection} style={arrowPosition} /> : null}
+				<ContextualPopupArrow direction={arrowDirection} style={arrowPosition} />
 			</ContextualPopupRoot>
 		);
 	}
