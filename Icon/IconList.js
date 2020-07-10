@@ -119,7 +119,14 @@ export default {
 	expand            : 0x0F00D3, // expand
 	radio             : 0x0F00D4, // radio
 	rearscreen        : 0x0F00D5, // rear_screen
-	weather           : 0x0F00D6  // weather
+	weather           : 0x0F00D6, // weather
+	fullscreen        : 0x0F00E1, // fullscreen
+	menu              : 0x0F00E2, // menu
+	history           : 0x0F00E3, // history
+	browser           : 0x0F00E4, // browser
+	lock              : 0x0F00E5, // lock
+	search2           : 0x0F00E6, // search2
+	bookmark          : 0x0F00E7  // bookmark
 };
 
 // Deprecated icon list from `Moonstone-Agate.ttf` for reference
