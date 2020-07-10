@@ -5,6 +5,7 @@ import {storiesOf} from '@storybook/react';
 import React from 'react';
 
 import Dropdown, {DropdownBase} from '@enact/agate/Dropdown';
+import ri from "@enact/ui/resolution";
 
 const Config = mergeComponentMetadata('Dropdown', Dropdown, DropdownBase);
 Dropdown.displayName = 'Dropdown';
@@ -42,7 +43,7 @@ storiesOf('Agate QA.Dropdown', module)
 
 			return (
 				<div>
-					<div style={{height: '350px'}}>
+					<div style={{height: ri.scaleToRem(350)}}>
 						<Dropdown
 							direction="down"
 							onSelect={action('onSelect')}
@@ -51,7 +52,7 @@ storiesOf('Agate QA.Dropdown', module)
 							{items}
 						</Dropdown>
 					</div>
-					<div style={{height: '350px'}}>
+					<div style={{height: ri.scaleToRem(350)}}>
 						<Dropdown
 							direction="left"
 							onSelect={action('onSelect')}
@@ -60,7 +61,7 @@ storiesOf('Agate QA.Dropdown', module)
 							{items}
 						</Dropdown>
 					</div>
-					<div style={{height: '350px'}}>
+					<div style={{height: ri.scaleToRem(350)}}>
 						<Dropdown
 							direction="right"
 							onSelect={action('onSelect')}
