@@ -21,6 +21,13 @@ const ContextualPopupArrow = kind({
 	name: 'ContextualPopupArrow',
 
 	propTypes: /** @lends agate/ContextualPopupDecorator.ContextualPopupArrow.prototype */ {
+		/**
+		 * Direction of ContextualPopupArrow.
+		 *
+		 * @type {('above'|'below'|'left'|'right')}
+		 * @default 'below'
+		 * @public
+		 */
 		direction: PropTypes.oneOf(['above', 'below', 'left', 'right'])
 	},
 

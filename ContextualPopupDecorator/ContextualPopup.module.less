@@ -23,16 +23,19 @@
     .closeButton {
       position: absolute;
       margin: 0;
+
+      .focus({
+        .bg {
+          background-color: transparent;
+          background-image: none;
+        }
+      });
     }
   }
 
   :global(.enact-locale-right-to-left) & {
     .container {
       direction: rtl;
-
-      .closeButton {
-        right: auto;
-      }
     }
   }
 
@@ -53,7 +56,6 @@
 
   // Skin colors
   .applySkins({
-
     .container {
       background-color: @agate-contextual-popup-bg-color;
       color: @agate-contextual-popup-color;
@@ -72,8 +74,6 @@
 
         .focus({
           .bg {
-            background-color: transparent;
-            background-image: none;
             border-color: @agate-contextual-popup-close-button-border-color;
           }
         });

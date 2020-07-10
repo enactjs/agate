@@ -17,8 +17,8 @@ import Spotlight, {getDirection} from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import FloatingLayer from '@enact/ui/FloatingLayer';
 import ri from '@enact/ui/resolution';
-import compose from 'ramda/src/compose';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
