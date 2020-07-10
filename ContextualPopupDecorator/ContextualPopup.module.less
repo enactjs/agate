@@ -5,110 +5,112 @@
 @import '../styles/skin.less';
 
 .contextualPopup {
-  position: absolute;
+	position: absolute;
 
-  .container {
-    position: absolute;
-    background-clip: padding-box;
-    -webkit-background-clip: padding-box;
-    -moz-background-clip: padding-box;
-    box-sizing: border-box;
+	.container {
+		position: absolute;
+		background-clip: padding-box;
+		-webkit-background-clip: padding-box;
+		-moz-background-clip: padding-box;
+		box-sizing: border-box;
 
-    &.none { /* Needed to prevent global class being added in the DOM */ }
+		&.none { /* Needed to prevent global class being added in the DOM */
+		}
 
-    &.fixedSize {
-      overflow: hidden;
-    }
+		&.fixedSize {
+			overflow: hidden;
+		}
 
-    .closeButton {
-      position: absolute;
-      margin: 0;
+		.closeButton {
+			position: absolute;
+			margin: 0;
 
-      .focus({
-        .bg {
-          background-color: transparent;
-          background-image: none;
-        }
-      });
-    }
-  }
+			.focus({
+				.bg {
+					background-color: transparent;
+					background-image: none;
+				}
+			});
+		}
+	}
 
-  :global(.enact-locale-right-to-left) & {
-    .container {
-      direction: rtl;
-    }
-  }
+	:global(.enact-locale-right-to-left) & {
+		.container {
+			direction: rtl;
+		}
+	}
 
-  .arrow {
-    position: absolute;
-    will-change: transform;
+	.arrow {
+		position: absolute;
+		will-change: transform;
 
-    &.above {
-      transform: rotate(180deg);
-    }
-    &.left {
-      transform: rotate(90deg);
-    }
-    &.right {
-      transform: rotate(-90deg);
-    }
-  }
+		&.above {
+			transform: rotate(180deg);
+		}
 
-  // Skin colors
-  .applySkins({
-    .container {
-      background-color: @agate-contextual-popup-bg-color;
-      color: @agate-contextual-popup-color;
-      border-color: @agate-contextual-popup-border-color;
-      border-radius: @agate-contextual-popup-border-radius;
-      font-size: @agate-contextual-popup-font-size;
-      padding: @agate-contextual-popup-padding;
+		&.left {
+			transform: rotate(90deg);
+		}
 
-      .closeButton {
-        right: @agate-spotlight-outset;
-        top: @agate-spotlight-outset;
+		&.right {
+			transform: rotate(-90deg);
+		}
+	}
 
-        .bg {
-          border-color: @agate-contextual-popup-close-button-border-color;
-        }
+	// Skin colors
+	.applySkins({
+		.container {
+			background-color: @agate-contextual-popup-bg-color;
+			color: @agate-contextual-popup-color;
+			border-color: @agate-contextual-popup-border-color;
+			border-radius: @agate-contextual-popup-border-radius;
+			font-size: @agate-contextual-popup-font-size;
+			padding: @agate-contextual-popup-padding;
 
-        .focus({
-          .bg {
-            border-color: @agate-contextual-popup-close-button-border-color;
-          }
-        });
+			.closeButton {
+				right: @agate-spotlight-outset;
+				top: @agate-spotlight-outset;
 
-        .icon {
-          color: @agate-contextual-popup-color;
-        }
+				.bg {
+					border-color: @agate-contextual-popup-close-button-border-color;
+				}
 
-      }
+				.focus({
+					.bg {
+						border-color: @agate-contextual-popup-close-button-border-color;
+					}
+				});
 
-      &.reserveClose {
-        .padding-start-end(@agate-contextual-popup-padding-horizontal, @agate-button-small-height * 1.5);
-      }
-    }
+				.icon {
+					color: @agate-contextual-popup-color;
+				}
+			}
 
-    :global(.enact-locale-right-to-left) & {
-      .container {
-        &.reserveClose {
-          .padding-start-end(@agate-button-small-height * 1.5, @agate-contextual-popup-padding-horizontal);
-        }
-      }
+			&.reserveClose {
+				.padding-start-end(@agate-contextual-popup-padding-horizontal, @agate-button-small-height * 1.5);
+			}
+		}
 
-      .closeButton {
-        left: @agate-spotlight-outset;
-        right: auto;
-      }
-    }
+		:global(.enact-locale-right-to-left) & {
+			.container {
+				&.reserveClose {
+					.padding-start-end(@agate-button-small-height * 1.5, @agate-contextual-popup-padding-horizontal);
+				}
+			}
 
-    .arrow {
-      height: @agate-contextual-popup-arrow-height;
-      width: @agate-contextual-popup-arrow-width;
+			.closeButton {
+				left: @agate-spotlight-outset;
+				right: auto;
+			}
+		}
 
-      .arrowFill {
-        fill: @agate-contextual-popup-bg-color;
-      }
-    }
-  });
+		.arrow {
+			height: @agate-contextual-popup-arrow-height;
+			width: @agate-contextual-popup-arrow-width;
+
+			.arrowFill {
+				fill: @agate-contextual-popup-bg-color;
+			}
+		}
+	});
 }
