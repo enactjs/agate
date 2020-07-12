@@ -36,50 +36,46 @@ storiesOf('Agate', module)
 
 storiesOf('Agate QA.Dropdown', module)
 	.add(
-		'Dropdown directions',
+		'with 4 directions',
 		() => {
 			const itemCount = number('items', Config, {range: true, min: 0, max: 50}, 5);
 			const items = (new Array(itemCount)).fill().map((i, index) => `Option ${index + 1}`);
 
 			return (
-				<div>
-					<div style={{height: ri.scaleToRem(350)}}>
-						<Dropdown
-							direction="down"
-							onSelect={action('onSelect')}
-							title="Down dropdown"
-						>
-							{items}
-						</Dropdown>
-					</div>
-					<div style={{height: ri.scaleToRem(350)}}>
-						<Dropdown
-							direction="left"
-							onSelect={action('onSelect')}
-							title="Left dropdown"
-						>
-							{items}
-						</Dropdown>
-					</div>
-					<div style={{height: ri.scaleToRem(350)}}>
-						<Dropdown
-							direction="right"
-							onSelect={action('onSelect')}
-							title="Right dropdown"
-						>
-							{items}
-						</Dropdown>
-					</div>
-					<div>
-						<Dropdown
-							direction="up"
-							onSelect={action('onSelect')}
-							title="Up dropdown"
-						>
-							{items}
-						</Dropdown>
-					</div>
-				</div>
+				<>
+					<Dropdown
+						direction="left"
+						onSelect={action('onSelect')}
+						style={{position: 'absolute', top: 0, right: 0}}
+						title="Left dropdown"
+					>
+						{items}
+					</Dropdown>
+					<Dropdown
+						direction="right"
+						onSelect={action('onSelect')}
+						style={{position: 'absolute', top: 0, left: 0}}
+						title="Right dropdown"
+					>
+						{items}
+					</Dropdown>
+					<Dropdown
+						direction="down"
+						onSelect={action('onSelect')}
+						style={{position: 'absolute', top: 0, left: '50%', transform: '-50%'}}
+						title="Down dropdown"
+					>
+						{items}
+					</Dropdown>
+					<Dropdown
+						direction="up"
+						onSelect={action('onSelect')}
+						style={{position: 'absolute', top: ri.scaleToRem(200), left: '50%', transform: '-50%'}}
+						title="Up dropdown"
+					>
+						{items}
+					</Dropdown>
+				</>
 			);
 		},
 		{
