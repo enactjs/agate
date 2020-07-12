@@ -5,7 +5,7 @@ import {storiesOf} from '@storybook/react';
 import React from 'react';
 
 import Dropdown, {DropdownBase} from '@enact/agate/Dropdown';
-import ri from "@enact/ui/resolution";
+import ri from '@enact/ui/resolution';
 
 const Config = mergeComponentMetadata('Dropdown', Dropdown, DropdownBase);
 Dropdown.displayName = 'Dropdown';
