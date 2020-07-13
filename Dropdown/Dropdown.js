@@ -196,7 +196,7 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+	render: ({children, className, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
 		const opened = !disabled && open;
 		const [DropDownButton, wrapperProps, groupProps] = (skin === 'silicon') ? [
 			Button,
@@ -209,10 +209,10 @@ const DropdownBase = kind({
 		];
 
 		return (
-			<div {...rest} >
+			<div className={className} {...rest} >
 				<div {...wrapperProps}>
 					<DropDownButton
-						{...rest}
+						className={className}
 						css={css}
 						disabled={hasChildren ? disabled : true}
 						onClick={opened ? onClose : onOpen}

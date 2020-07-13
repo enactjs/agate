@@ -46,7 +46,7 @@ storiesOf('Agate QA.Dropdown', module)
 					<Dropdown
 						direction="left"
 						onSelect={action('onSelect')}
-						style={{position: 'absolute', top: 0, right: 0}}
+						style={{position: 'absolute', top: 0, right: 0, width:'25%'}}
 						title="Left dropdown"
 					>
 						{items}
@@ -54,7 +54,7 @@ storiesOf('Agate QA.Dropdown', module)
 					<Dropdown
 						direction="right"
 						onSelect={action('onSelect')}
-						style={{position: 'absolute', top: 0, left: 0}}
+						style={{position: 'absolute', top: 0, left: 0, width:'25%'}}
 						title="Right dropdown"
 					>
 						{items}
@@ -62,7 +62,7 @@ storiesOf('Agate QA.Dropdown', module)
 					<Dropdown
 						direction="down"
 						onSelect={action('onSelect')}
-						style={{position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)'}}
+						style={{position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', width:'25%'}}
 						title="Down dropdown"
 					>
 						{items}
@@ -70,7 +70,7 @@ storiesOf('Agate QA.Dropdown', module)
 					<Dropdown
 						direction="up"
 						onSelect={action('onSelect')}
-						style={{position: 'absolute', top: ri.scaleToRem(200), left: '50%', transform: 'translateX(-50%)'}}
+						style={{position: 'absolute', top: ri.scaleToRem(350),  width:'25%'}}
 						title="Up dropdown"
 					>
 						{items}
