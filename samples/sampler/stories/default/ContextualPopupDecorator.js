@@ -18,7 +18,7 @@ const Config = mergeComponentMetadata('ContextualPopupDecorator', Button, Contex
 // manually. This can (should) be revisited later to find out why and a solution.
 Config.defaultProps = {
 	direction: 'below center',
-	open: true,
+	open: false,
 	showCloseButton: true,
 	spotlightRestrict: 'self-first'
 };
