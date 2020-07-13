@@ -82,7 +82,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			/**
 			 * Limits the range of voice control to the popup.
 			 *
-			 * @memberof sandstone/ContextualPopupDecorator.ContextualPopupDecorator.prototype
+			 * @memberof agate/ContextualPopupDecorator.ContextualPopupDecorator.prototype
 			 * @type {Boolean}
 			 * @default true
 			 * @public
