@@ -10,7 +10,7 @@ import Skinnable from '../Skinnable';
 import css from './ContextualPopup.module.less';
 
 /**
- * An SVG arrow for {@link agate/ContextualPopupDecorator/ContextualPopup.ContextualPopup}.
+ * An SVG arrow for {@link agate/ContextualPopupDecorator.ContextualPopup}.
  *
  * @class ContextualPopupArrow
  * @memberof agate/ContextualPopupDecorator
@@ -58,7 +58,7 @@ const ContextualPopupRoot = Skinnable(
 /**
  * A popup component used by
  * [ContextualPopupDecorator]{@link agate/ContextualPopupDecorator.ContextualPopupDecorator} to
- * wrap its [popupComponent]{@link agate/ContextualPopupDecorator.popupComponent}.
+ * wrap its [popupComponent]{@link agate/ContextualPopupDecorator.ContextualPopupDecorator.popupComponent}.
  *
  * `ContextualPopup` is usually not used directly but is made available for unique application use
  * cases.
