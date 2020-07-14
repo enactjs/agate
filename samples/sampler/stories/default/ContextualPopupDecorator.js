@@ -1,5 +1,5 @@
 import {ContextualPopupDecorator} from '@enact/agate/ContextualPopupDecorator';
-import BodyText from '../../../../../moonstone/BodyText';
+import BodyText from '@enact/agate/BodyText';
 import Button from '@enact/agate/Button';
 import ri from '@enact/ui/resolution';
 import React from 'react';
