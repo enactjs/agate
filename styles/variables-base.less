@@ -46,6 +46,7 @@
 @agate-base-font-family: "MuseoSans", sans-serif;
 @agate-base-font-size: 24px;
 @agate-base-font-weight: normal;
+@agate-base-line-height: @agate-base-font-size;
 @agate-base-font-ligatures: normal;
 @agate-icon-font-family: "Agate Icons";
 @agate-component-spacing: 12px;
@@ -143,6 +144,16 @@
 @agate-colorpicker-palette-swatch-margin: 12px;
 @agate-colorpicker-palette-margin: 0;
 @agate-colorpicker-palette-sliders-padding: @agate-colorpicker-palette-swatch-margin @agate-colorpicker-palette-swatch-margin (@agate-colorpicker-palette-swatch-margin * 2) @agate-colorpicker-palette-swatch-margin;
+
+// ContextualPopup
+// ---------------------------------------
+@agate-contextual-popup-arrow-height:       30px;
+@agate-contextual-popup-arrow-width:        30px;
+@agate-contextual-popup-border-radius:      inherit;
+@agate-contextual-popup-font-size:          inherit;
+@agate-contextual-popup-padding-vertical:   inherit;
+@agate-contextual-popup-padding-horizontal: inherit;
+@agate-contextual-popup-padding:            @agate-contextual-popup-padding-vertical @agate-contextual-popup-padding-horizontal;
 
 // DateTimePicker
 // ---------------------------------------
@@ -339,12 +350,16 @@
 @agate-panels-vertical-tab-margin: 0;
 @agate-panels-vertical-tab-width: inherit;
 
+// Picker
+// ---------------------------------------
 @agate-picker-border-radius: 0;
+@agate-picker-horizontal-item-width: 120px;
 @agate-picker-transform: none;
 @agate-picker-label-transform: none;
 @agate-picker-font-weight: @agate-base-font-weight;
 @agate-picker-font-size: 24px;
 @agate-picker-active-font-size: 36px;
+@agate-picker-active-font-weight: @agate-base-font-weight;
 @agate-picker-margin: @agate-component-spacing;
 
 // Popup
