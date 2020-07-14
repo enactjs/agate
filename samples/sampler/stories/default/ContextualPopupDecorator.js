@@ -19,7 +19,6 @@ const Config = mergeComponentMetadata('ContextualPopupDecorator', Button, Contex
 Config.defaultProps = {
 	direction: 'below center',
 	open: false,
-	showCloseButton: true,
 	spotlightRestrict: 'self-first'
 };
 
@@ -31,7 +30,7 @@ storiesOf('Agate', module)
 	.add(
 		'ContextualPopupDecorator',
 		() => (
-			<div style={{textAlign: 'center', marginTop: ri.unit(99, 'rem')}}>
+			<div style={{textAlign: 'center', marginTop: ri.scaleToRem(99)}}>
 				<ContextualButton
 					direction={select('direction', ['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config)}
 					noAutoDismiss={boolean('noAutoDismiss', Config)}

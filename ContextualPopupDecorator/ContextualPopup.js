@@ -51,9 +51,7 @@ const ContextualPopupArrow = kind({
 	)
 });
 
-const ContextualPopupRoot = Skinnable(
-	'div'
-);
+const ContextualPopupRoot = Skinnable('div');
 
 /**
  * A popup component used by
@@ -181,12 +179,13 @@ const ContextualPopupBase = kind({
 		}
 	},
 
-	render: ({arrowDirection, arrowPosition, children, className, closeButton, containerPosition, containerRef, direction, ...rest}) => {
+	render: ({arrowDirection, arrowPosition, children, className, closeButton, containerPosition, containerRef, ...rest}) => {
+		delete rest.direction;
 		delete rest.onCloseButtonClick;
 		delete rest.showCloseButton;
 
 		return (
-			<ContextualPopupRoot aria-live="off" role="alert" {...rest} className={css.contextualPopup} direction={direction}>
+			<ContextualPopupRoot aria-live="off" role="alert" {...rest} className={css.contextualPopup}>
 				<div className={className} style={containerPosition} ref={containerRef}>
 					{children}
 					{closeButton}
