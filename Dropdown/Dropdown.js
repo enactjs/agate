@@ -166,7 +166,7 @@ const DropdownBase = kind({
 	},
 
 	computed: {
-		className: ({open, styler}) => styler.append({listOpen: open, listClosed: !open}),
+		buttonClassName: ({open, styler}) => styler.append({open}),
 		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'} ),
 		dropdownButtonClassname: ({css, direction, styler}) => styler.join(css.dropdownButton, {upDropdownButton: direction === 'up'} ),
 		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
@@ -196,7 +196,7 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({children, className, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+	render: ({buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
 		const opened = !disabled && open;
 		const [DropDownButton, wrapperProps, groupProps] = (skin === 'silicon') ? [
 			Button,
@@ -209,10 +209,10 @@ const DropdownBase = kind({
 		];
 
 		return (
-			<div className={className} {...rest} >
+			<div {...rest} >
 				<div {...wrapperProps}>
 					<DropDownButton
-						className={className}
+						className={buttonClassName}
 						css={css}
 						disabled={hasChildren ? disabled : true}
 						onClick={opened ? onClose : onOpen}

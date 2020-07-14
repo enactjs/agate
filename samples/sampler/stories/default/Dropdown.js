@@ -70,7 +70,7 @@ storiesOf('Agate QA.Dropdown', module)
 					<Dropdown
 						direction="up"
 						onSelect={action('onSelect')}
-						style={{position: 'absolute', top: ri.scaleToRem(350),  width:'25%'}}
+						style={{position: 'absolute', top: ri.scaleToRem(440),  width:'25%'}}
 						title="Up dropdown"
 					>
 						{items}
