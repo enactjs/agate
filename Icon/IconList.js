@@ -126,7 +126,11 @@ export default {
 	browser           : 0x0F00E4, // browser
 	lock              : 0x0F00E5, // lock
 	search2           : 0x0F00E6, // search2
-	bookmark          : 0x0F00E7  // bookmark
+	bookmark          : 0x0F00E7,  // bookmark
+	star              : 0x0F00E8, // star_full
+	starhollow        : 0x0F00E9, // star_empty
+	starhalf          : 0x0F00EA, // star_half
+	refresh           : 0x0F00EB  // refresh
 };
 
 // Deprecated icon list from `Moonstone-Agate.ttf` for reference

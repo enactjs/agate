@@ -252,6 +252,10 @@ const IconBase = kind({
  * lock
  * search2
  * bookmark
+ * star
+ * hollowstar
+ * halfstar
+ * refresh
  * ```
  *
  * @name iconList
