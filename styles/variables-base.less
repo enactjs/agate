@@ -46,6 +46,7 @@
 @agate-base-font-family: "MuseoSans", sans-serif;
 @agate-base-font-size: 24px;
 @agate-base-font-weight: normal;
+@agate-base-line-height: @agate-base-font-size;
 @agate-base-font-ligatures: normal;
 @agate-icon-font-family: "Agate Icons";
 @agate-component-spacing: 12px;
@@ -143,6 +144,16 @@
 @agate-colorpicker-palette-swatch-margin: 12px;
 @agate-colorpicker-palette-margin: 0;
 @agate-colorpicker-palette-sliders-padding: @agate-colorpicker-palette-swatch-margin @agate-colorpicker-palette-swatch-margin (@agate-colorpicker-palette-swatch-margin * 2) @agate-colorpicker-palette-swatch-margin;
+
+// ContextualPopup
+// ---------------------------------------
+@agate-contextual-popup-arrow-height:       30px;
+@agate-contextual-popup-arrow-width:        30px;
+@agate-contextual-popup-border-radius:      inherit;
+@agate-contextual-popup-font-size:          inherit;
+@agate-contextual-popup-padding-vertical:   inherit;
+@agate-contextual-popup-padding-horizontal: inherit;
+@agate-contextual-popup-padding:            @agate-contextual-popup-padding-vertical @agate-contextual-popup-padding-horizontal;
 
 // DateTimePicker
 // ---------------------------------------
@@ -275,6 +286,17 @@
 @agate-input-margin: @agate-input-decorator-focus-border-width (@agate-spotlight-outset / 2);
 @agate-input-opacity: inherit;
 @agate-input-padding: 21px 32px;
+@agate-input-padding-top-bottom: 21px;
+@agate-input-padding-left: 32px;
+@agate-input-padding-right: 32px;
+@agate-input-icon-display: inherit;
+@agate-input-icon-align: inherit;
+@agate-input-icon-after-padding-top-bottom: inherit;
+@agate-input-icon-after-padding-right: inherit;
+@agate-input-icon-after-padding-left: inherit;
+@agate-input-icon-before-padding-top-bottom: inherit;
+@agate-input-icon-before-padding-right: inherit;
+@agate-input-icon-before-padding-left: inherit;
 @agate-input-icon-before-margin: 0 0 0 (@agate-spotlight-outset / 2);
 @agate-input-icon-after-margin: 0 (@agate-spotlight-outset / 2) 0 0;
 @agate-input-height: (@agate-icon-size - ((@agate-input-border-width * 2) + (extract(@agate-input-padding, 2) * 2)));
