@@ -180,7 +180,7 @@ const InputBase = kind({
 		rtl: PropTypes.bool,
 
 		/**
-		 * The size of the input field.
+		 * The size of the input field icon.
 		 *
 		 * @type {('small'|'large')}
 		 * @default 'large'
