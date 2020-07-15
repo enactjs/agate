@@ -23,7 +23,6 @@ import Item from '../Item';
  * @class ThumbnailItemBase
  * @memberof agate/ThumbnailItem
  * @extends agate/Item.Item
- * @agate
  * @public
  */
 const ThumbnailItemBase = kind({
