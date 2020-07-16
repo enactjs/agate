@@ -27,6 +27,13 @@
 // ---------------------------------------
 @agate-colorpicker-palette-border-radius: @agate-button-height;
 
+// ContextualPopup
+// ---------------------------------------
+@agate-contextual-popup-border-radius:      36px;
+@agate-contextual-popup-padding-vertical:   18px;
+@agate-contextual-popup-padding-horizontal: 30px;
+@agate-contextual-popup-font-size:          30px;
+
 // Drawer
 // ---------------------------------------
 @agate-drawer-border-radius: @agate-popup-border-radius;
@@ -60,6 +67,11 @@
 @agate-icon-small-size: 28px;
 @agate-icon-smallest-size: 18px;
 
+// Input
+// ---------------------------------------
+@agate-input-icon-display: flex;
+@agate-input-icon-align: center;
+
 // ImageItem
 // ---------------------------------------
 @agate-imageitem-border-width: 6px;
@@ -82,11 +94,9 @@
 
 // Panels
 // ---------------------------------------
-@agate-panel-v-padding: @agate-app-keepout;
 // @agate-panel-h-padding: (@agate-app-keepout - @agate-spotlight-outset);
 @agate-panel-h-padding: extract(@agate-panels-panel-padding, 2);
 @agate-panels-partial-width: 890px;
-@agate-panels-breadcrumb-height: 100%;
 @agate-panels-breadcrumb-width: 105px;
 @agate-panels-controls-top: (extract(@agate-panels-panel-padding, 1) + 41px);
 @agate-panels-controls-padding-start: 18px;
@@ -103,8 +113,6 @@
 
 // Popup
 // ---------------------------------------
-@agate-popup-min-width: 510px;
-@agate-popup-max-width: 70%;
 @agate-popup-border-width: 3px;
 @agate-popup-border-radius: 20px;
 @agate-popup-border: 3px solid transparent;
@@ -176,7 +184,6 @@
 // ---------------------------------------
 @agate-spinner-loading-border-radius: 999px;
 @agate-spinner-huge-loading-height: (@agate-spinner-huge-searching-height / 2);
-@agate-spinner-huge-loading-width: @agate-spinner-huge-loading-height;
 @agate-spinner-small-loading-height: (@agate-spinner-small-searching-height / 2);
 
 // Switch
