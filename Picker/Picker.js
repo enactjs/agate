@@ -97,8 +97,7 @@ const PickerBase = kind({
  * to the current value. This should only be used when the parent controls the value of
  * the picker directly through the props.
  *
- * @name `aria-valuetext`
- * @memberof agate/Picker.Picker.prototype
+ * @name aria-valuetext
  * @type {String|Number}
  * @memberof agate/Picker.Picker.prototype
  * @public
