@@ -299,7 +299,6 @@ const PickerBase = kind({
  *
  * @hoc
  * @memberof agate/internal/Picker
- * @mixes ui/internal/IdProvider.IdProvider
  * @mixes ui/Changeable.Changeable
  * @mixes agate/Skinnable.Skinnable
  * @public
