@@ -11,11 +11,12 @@
 @agate-highlight-h: var(--agate-highlight-h, 246);
 @agate-highlight-s: var(--agate-highlight-s, 25%);
 @agate-highlight-l: var(--agate-highlight-l, 100%);
-@agate-background: white;
+@agate-background: @agate-white;
 @agate-foreground: black;
 @agate-background-active: fade(black, 15%);
+@agate-foreground-active: @agate-white;
 @agate-background-focus: @agate-accent;
-@agate-foreground-focus: white;
+@agate-foreground-focus: @agate-white;
 @agate-gradient: linear-gradient(to bottom, ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.5)", @agate-accent);
 @agate-black:       #131313;
 @agate-darker-gray: #373737;
@@ -23,6 +24,7 @@
 @agate-gray:        #8a8a8a;
 @agate-medium-gray: #c9c9c9;
 @agate-light-gray:  #ededed;
+@agate-white:       white;
 
 // Component color assignments
 @agate-bg-color: @agate-background;
