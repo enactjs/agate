@@ -65,6 +65,7 @@ const useThemeScroll = (props, instances) => {
 	const mutableRef = useRef({
 		animateOnFocus: false,
 		indexToFocus: null,
+		isWheeling: false,
 		lastScrollPositionOnFocus: null,
 		nodeToFocus: null,
 		pointToFocus: null
