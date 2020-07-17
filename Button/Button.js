@@ -24,6 +24,7 @@ import compose from 'ramda/src/compose';
 import {IconBase} from '../Icon';
 // import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
+import TooltipDecorator from '../TooltipDecorator';
 
 import componentCss from './Button.module.less';
 
@@ -264,6 +265,7 @@ const ButtonBase = kind({
  *
  * @hoc
  * @memberof agate/Button
+ * @mixes agate/TooltipDecorator.TooltipDecorator
  * @mixes ui/Button.ButtonDecorator
  * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
@@ -271,6 +273,7 @@ const ButtonBase = kind({
  */
 const ButtonDecorator = compose(
 	Pure,
+	TooltipDecorator({tooltipDestinationProp: 'decoration'}),
 	// MarqueeDecorator({className: componentCss.marquee}),
 	UiButtonDecorator,
 	Spottable,
