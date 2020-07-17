@@ -65,6 +65,7 @@ const useThemeScroll = (props, instances) => {
 	const mutableRef = useRef({
 		animateOnFocus: false,
 		indexToFocus: null,
+		isWheeling: false,
 		lastScrollPositionOnFocus: null,
 		nodeToFocus: null,
 		pointToFocus: null
@@ -84,9 +85,9 @@ const useThemeScroll = (props, instances) => {
 
 	useSpotlightRestore(props, instances);
 
-	const {handleWheel, isWheeling} = useEventWheel(props, instances, {isScrollButtonFocused});
+	const {handleWheel} = useEventWheel(props, {...instances, spottable: mutableRef}, {isScrollButtonFocused});
 
-	const {calculateAndScrollTo, handleFocus, hasFocus} = useEventFocus(props, {...instances, spottable: mutableRef}, {alertScrollbarTrack, isWheeling});
+	const {calculateAndScrollTo, handleFocus, hasFocus} = useEventFocus(props, {...instances, spottable: mutableRef}, {alertScrollbarTrack});
 
 	const {handleKeyDown, lastPointer, scrollByPageOnPointerMode} = useEventKey(props, {...instances, spottable: mutableRef}, {hasFocus, isContent});
 
