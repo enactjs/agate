@@ -7,7 +7,7 @@ import css from './Tooltip.module.less';
 
 /**
  * {@link agate/TooltipDecorator.TooltipLabel} is a stateless tooltip component with
- * Moonston styling applied.
+ * Agate styling applied.
  *
  * @class TooltipLabel
  * @memberof agate/TooltipDecorator

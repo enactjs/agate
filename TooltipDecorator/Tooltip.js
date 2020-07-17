@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Skinnable from '../Skinnable';
+
 import TooltipLabel from './TooltipLabel';
 
 import css from './Tooltip.module.less';
