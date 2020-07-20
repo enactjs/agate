@@ -15,7 +15,7 @@ let lastPointer = {x: 0, y: 0};
 const useEventFocus = (props, instances, context) => {
 	const {scrollMode} = props;
 	const {scrollContainerHandle, scrollContainerRef, scrollContentRef, spottable, themeScrollContentHandle} = instances;
-	const {alertScrollbarTrack, isWheeling} = context;
+	const {alertScrollbarTrack} = context;
 
 	// Functions
 
@@ -101,9 +101,11 @@ const useEventFocus = (props, instances, context) => {
 			themeScrollContentHandle.current.shouldPreventScrollByFocus() :
 			false;
 
-		if (scrollMode === 'translate' && isWheeling) {
+		if (spottable.current.isWheeling) {
 			scrollContainerHandle.current.stop();
-			spottable.current.animateOnFocus = false;
+			if (scrollMode === 'translate') {
+				spottable.current.animateOnFocus = false;
+			}
 		}
 
 		if (!Spotlight.getPointerMode()) {
@@ -546,12 +548,8 @@ const useEventVoice = (props, instances, context) => {
 
 const useEventWheel = (props, instances, context) => {
 	const {scrollMode} = props;
-	const {themeScrollContentHandle, horizontalScrollbarHandle, scrollContainerHandle, verticalScrollbarHandle} = instances;
+	const {themeScrollContentHandle, horizontalScrollbarHandle, scrollContainerHandle, verticalScrollbarHandle, spottable} = instances;
 	const {isScrollButtonFocused} = context;
-
-	// Mutable value
-
-	const mutableRef = useRef({isWheeling: false});
 
 	// Functions
 
@@ -563,7 +561,7 @@ const useEventWheel = (props, instances, context) => {
 		}
 
 		if (delta !== 0) {
-			mutableRef.current.isWheeling = true;
+			spottable.current.isWheeling = true;
 			if (!props['data-spotlight-container-disabled']) {
 				themeScrollContentHandle.current.setContainerDisabled(true);
 			}
@@ -596,11 +594,11 @@ const useEventWheel = (props, instances, context) => {
 		// FIXME If web engine supports horizontal wheel, this routine should be refined or removed.
 		if (canScrollVertically) { // This routine handles wheel events on scrollbars for vertical scroll.
 			if (eventDelta < 0 && scrollContainerHandle.current.scrollTop > 0 || eventDelta > 0 && scrollContainerHandle.current.scrollTop < bounds.maxTop) {
-				if (!mutableRef.current.isWheeling) {
+				if (!spottable.current.isWheeling) {
 					if (!props['data-spotlight-container-disabled']) {
 						themeScrollContentHandle.current.setContainerDisabled(true);
 					}
-					mutableRef.current.isWheeling = true;
+					spottable.current.isWheeling = true;
 				}
 
 				// Not to check if ev.target is a descendant of a wrapped component which may have a lot of nodes in it.
@@ -618,12 +616,12 @@ const useEventWheel = (props, instances, context) => {
 			}
 		} else if (canScrollHorizontally) { // this routine handles wheel events on any children for horizontal scroll.
 			if (eventDelta < 0 && scrollContainerHandle.current.scrollLeft > 0 || eventDelta > 0 && scrollContainerHandle.current.scrollLeft < bounds.maxLeft) {
-				if (!mutableRef.current.isWheeling) {
+				if (!spottable.current.isWheeling) {
 					if (!props['data-spotlight-container-disabled']) {
 						themeScrollContentHandle.current.setContainerDisabled(true);
 					}
 
-					mutableRef.current.isWheeling = true;
+					spottable.current.isWheeling = true;
 				}
 
 				delta = scrollContainerHandle.current.calculateDistanceByWheel(eventDeltaMode, eventDelta, bounds.clientWidth * scrollWheelPageMultiplierForMaxPixel);
@@ -659,8 +657,7 @@ const useEventWheel = (props, instances, context) => {
 	// Return
 
 	return {
-		handleWheel: scrollMode === 'translate' ? handleWheel : handleWheelNative,
-		isWheeling: mutableRef.current.isWheeling
+		handleWheel: scrollMode === 'translate' ? handleWheel : handleWheelNative
 	};
 };
 
