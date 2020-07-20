@@ -198,12 +198,14 @@ const DropdownBase = kind({
 
 	render: ({buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
 		const opened = !disabled && open;
-		const [DropDownButton, wrapperProps, groupProps] = (skin === 'silicon') ? [
+		const [DropDownButton, wrapperProps, skinVariants, groupProps] = (skin === 'silicon') ? [
 			Button,
 			{className: dropdownButtonClassname},
+			{'night':false},
 			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'}
 		] : [
 			Item,
+			{},
 			{},
 			{childComponent: Item, itemProps: {size: 'small'}}
 		];
@@ -226,7 +228,7 @@ const DropdownBase = kind({
 						direction={transitionDirection}
 					>
 						<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
-							<Scroller className={css.scroller}>
+							<Scroller skinVariants={skinVariants} className={css.scroller}>
 								<Group
 									className={css.group}
 									onSelect={onSelect}
