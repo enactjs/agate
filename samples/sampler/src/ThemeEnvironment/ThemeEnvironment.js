@@ -196,15 +196,13 @@ const StorybookDecorator = (story, config) => {
 			locale={locale}
 			{...skinKnobs}
 			skinVariants={boolean('night mode', Config) && 'night'}
-			accent={
-				useSkinDefaultStyles ?
-					defaultColors[skinKnobs.skin].accent :
-					color('accent', (!newSkin && accentFromURL ? accentFromURL : defaultColors[currentSkin].accent), Config.groupId)
+			accent={useSkinDefaultStyles ?
+				defaultColors[skinKnobs.skin].accent :
+				color('accent', (!newSkin && accentFromURL ? accentFromURL : defaultColors[currentSkin].accent), Config.groupId)
 			}
-			highlight={
-				useSkinDefaultStyles ?
-					defaultColors[skinKnobs.skin].highlight :
-					color('highlight', (!newSkin && highlightFromURL ? highlightFromURL : defaultColors[currentSkin].highlight), Config.groupId)
+			highlight={useSkinDefaultStyles ?
+				defaultColors[skinKnobs.skin].highlight :
+				color('highlight', (!newSkin && highlightFromURL ? highlightFromURL : defaultColors[currentSkin].highlight), Config.groupId)
 			}
 		>
 			<Scroller>
