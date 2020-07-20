@@ -33,9 +33,9 @@ storiesOf('Agate', module)
 			const story = (
 				<Header
 					hideLine={boolean('hideLine', Config)}
-					subtitle={text('subtitle', Config, 'Subtitle')}
-					title={text('title', Config, 'Title')}
-					titleAbove={text('titleAbove', Config, 'Title Above')}
+					subtitle={text('subtitle', Config, 'Sub Title')}
+					title={text('title', Config, 'Main Title')}
+					titleAbove={text('titleAbove', Config, '')}
 				>
 					{children}
 				</Header>

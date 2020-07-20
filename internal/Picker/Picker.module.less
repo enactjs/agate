@@ -1,14 +1,19 @@
 // Picker.module.less
 //
-@import "../styles/mixins.less";
-@import "../styles/variables.less";
-@import "../styles/skin.less";
+@import "../../styles/mixins.less";
+@import "../../styles/variables.less";
+@import "../../styles/skin.less";
 
 
 .picker {
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
+
+	&.horizontal {
+		flex-direction: row;
+		display: inline-flex;
+	}
 
 	.applySkins({
 		align-items: center;
@@ -25,8 +30,8 @@
 		}
 
 		.item,
-		.itemTop,
-		.itemBottom {
+		.itemDecrement,
+		.itemIncrement {
 			margin: 0;
 			color: inherit;
 			width: 100%;
@@ -39,6 +44,7 @@
 				background-color: @agate-picker-active-bg-color;
 				background-image: @agate-picker-active-bg-image;
 				font-size: @agate-picker-active-font-size;
+				font-weight: @agate-picker-active-font-weight;
 			}
 
 			&[disabled] {
@@ -52,14 +58,26 @@
 			});
 		}
 
-		.itemTop {
-			background-color: @agate-picker-item-top-bg-color;
-			background-image: @agate-picker-item-top-bg-image;
+		.itemDecrement {
+			background-image: @agate-picker-item-decrement-bg-image;
 		}
 
-		.itemBottom {
-			background-color: @agate-picker-item-bottom-bg-color;
-			background-image: @agate-picker-item-bottom-bg-image;
+		.itemIncrement {
+			background-image: @agate-picker-item-increment-bg-image;
+		}
+
+		.itemDecrement,
+		.itemIncrement {
+			color: @agate-picker-item-color;
+			background-color: @agate-picker-item-bg-color;
+		}
+
+		&.horizontal {
+			.item,
+			.itemDecrement,
+			.itemIncrement {
+				width: @agate-picker-horizontal-item-width;
+			}
 		}
 	});
 }
