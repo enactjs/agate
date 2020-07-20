@@ -201,7 +201,7 @@ const DropdownBase = kind({
 		const [DropDownButton, wrapperProps, skinVariants, groupProps] = (skin === 'silicon') ? [
 			Button,
 			{className: dropdownButtonClassname},
-			{'night':false},
+			{'night': false},
 			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'}
 		] : [
 			Item,
