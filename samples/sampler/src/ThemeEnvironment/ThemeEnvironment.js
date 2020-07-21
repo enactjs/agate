@@ -190,7 +190,6 @@ const StorybookDecorator = (story, config) => {
 
 	return (
 		<Agate
-			key={skinKnobs.skin}
 			title={`${config.kind} ${config.story}`.trim()}
 			description={config.description}
 			locale={locale}
