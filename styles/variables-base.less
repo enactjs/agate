@@ -30,6 +30,8 @@
 // most CSS properties.
 //
 
+@import "./internal/utils.less";
+
 
 //
 // Variables
@@ -383,9 +385,10 @@
 @agate-popup-border-radius: 3px;
 @agate-popup-border: 0 solid transparent;
 @agate-popup-padding: (@agate-component-spacing * 2);
-@agate-popup-closebutton-title-padding-top-bottom: 0;
-@agate-popup-closebutton-title-padding-left: @agate-button-small-height;
-@agate-popup-closebutton-title-padding-right: 0;
+@agate-popup-closebutton-title-padding: 0 0 0 (@agate-button-small-height);
+//@agate-popup-closebutton-title-padding-top-bottom: 0;
+//@agate-popup-closebutton-title-padding-left: @agate-button-small-height;
+//@agate-popup-closebutton-title-padding-right: 0;
 @agate-popup-title-padding: @agate-heading-padding;
 @agate-popup-body-border: @agate-popup-border;
 @agate-popup-body-padding: (@agate-component-spacing * 1.5);
@@ -398,12 +401,8 @@
 @agate-popup-closebutton-position-left: 0;
 @agate-popup-closebutton-position-right: auto;
 @agate-popup-body-font-weight: @agate-base-font-weight;
-@agate-popup-opacity: 1;
 @agate-popup-top-border-radius: @agate-popup-border-radius;
-@agate-popup-top-margin: 0 @agate-popup-top-margin-left;
-@agate-popup-top-margin-left: 0;
 @agate-popup-top-max-width: inherit;
-@agate-popup-top-width: 100%;
 
 // PopupMenu
 // ---------------------------------------

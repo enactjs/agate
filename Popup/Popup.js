@@ -89,12 +89,12 @@ const PopupBase = kind({
 		className: 'popup'
 	},
 	computed: {
-		className: ({centered, closeButton, position, styler, title}) => styler.append({top: position === 'top', withCloseButton: closeButton, withTitle: title, centered})
+		className: ({centered, closeButton, position, styler, title}) => styler.append({top: position === 'top', withCloseButton: closeButton, withTitle: title, centered}),
+		transitionType : ({position}) => position === 'center' ? 'fade' : 'slide',
+		direction : ({position}) => position === 'center' ? 'down' : 'up'
 	},
-	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, open, position, skin, title, ...rest}) => {
+	render: ({buttons, children, closeButton, css, direction, noAnimation, onClose, onHide, open, skin, title, transitionType, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
-		const transitionType = (position === 'center' ? 'fade' : 'slide');
-		const direction = (position === 'center' ? 'down' : 'up');
 		delete rest.centered;
 
 		return (

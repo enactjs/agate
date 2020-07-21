@@ -22,6 +22,7 @@
 		position: absolute;
 		top: 0;
 		left: 0;
+		right: 0;
 		transform: none;
 	}
 
@@ -48,13 +49,10 @@
 		border-width: @agate-popup-border-width;
 		border-color: @agate-popup-border-color;
 		border-radius: @agate-popup-border-radius;
-		opacity: @agate-popup-opacity;
 
 		&.top {
 			border-radius: @agate-popup-top-border-radius;
-			margin: @agate-popup-top-margin;
 			max-width: @agate-popup-top-max-width;
-			width: @agate-popup-top-width;
 		}
 
 		.title {
@@ -83,9 +81,8 @@
 
 		&.withCloseButton {
 			.title {
-				padding-top: @agate-popup-closebutton-title-padding-top-bottom;
-				padding-bottom: @agate-popup-closebutton-title-padding-top-bottom;
-				.padding-start-end(@agate-popup-closebutton-title-padding-left, @agate-popup-closebutton-title-padding-right);
+				padding: @agate-popup-closebutton-title-padding;
+				.padding-start-end(.extract(@agate-popup-closebutton-title-padding, left)[], .extract(@agate-popup-closebutton-title-padding, right)[]);
 			}
 		}
 
