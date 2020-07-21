@@ -12,6 +12,7 @@
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
+import Slottable from '@enact/ui/Slottable';
 
 import Item from '../Item';
 
@@ -78,11 +79,11 @@ const ThumbnailItemBase = kind({
 		 * @default 'square'
 		 * @public
 		 */
-		type: PropTypes.oneOf(['round', 'square'])
+		type: PropTypes.oneOf(['normal', 'styled'])
 	},
 
 	defaultProps: {
-		type: 'square'
+		type: 'normal'
 	},
 
 	styles: {
@@ -93,7 +94,7 @@ const ThumbnailItemBase = kind({
 
 	computed: {
 		className: ({type, selected, styler}) => styler.append({
-			roundThumbnail: type === 'round',
+			roundThumbnail: type === 'styled',
 			selected
 		})
 	},
@@ -101,12 +102,12 @@ const ThumbnailItemBase = kind({
 	render: ({css, children, src, ...rest}) => {
 		return (
 			<Item {...rest} css={css}>
-				<slotBefore>
+				<div className={css.thumbnailContainer} slot="slotBefore">
 					<img
 						className={css.thumbnail}
 						src={src}
 					/>
-				</slotBefore>
+				</div>
 				<div className={css.content}>
 					{children}
 				</div>
@@ -114,6 +115,8 @@ const ThumbnailItemBase = kind({
 		);
 	}
 });
+
+const ThumbnailItem = Slottable({slots: ['img']}, ThumbnailItemBase);
 
 /**
  * A stateless, unfocusable item that can display a thumbnail.
@@ -125,8 +128,8 @@ const ThumbnailItemBase = kind({
  * @public
  */
 
-export default ThumbnailItemBase;
+export default ThumbnailItem;
 export {
-	ThumbnailItemBase as ThumbnailItem,
+	ThumbnailItem,
 	ThumbnailItemBase
 };

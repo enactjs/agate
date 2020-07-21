@@ -16,7 +16,7 @@ storiesOf('Agate', module)
 			<ThumbnailItem
 				src="https://dummyimage.com/64/e048e0/0011ff"
 				label={text('label', Config, 'Sub Content')}
-				type={select('type', ['round', 'square'], Config)}
+				type={select('type', ['normal', 'styled'], Config)}
 				selected={boolean('selected', Config)}
 			>
 				{text('children', Config, 'Main Content')}

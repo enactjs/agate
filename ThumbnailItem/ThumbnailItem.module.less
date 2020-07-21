@@ -7,9 +7,11 @@
   	align-items: center;
 
 	.thumbnail {
-		height: auto;
-		width: auto;
 	  	vertical-align: middle;
+	}
+
+	.thumbnailContainer {
+		display: flex;
 	}
 
 	&.roundThumbnail {
@@ -30,11 +32,16 @@
 	  	line-height: @agate-thumbnailitem-line-height;
 	  	height: @agate-thumbnailitem-height;
 
+		.thumbnail {
+			height: @agate-thumbnailitem-thumbnail-height;
+			width:@agate-thumbnailitem-thumbnail-width;
+		}
+
 		&.item {
 			.label {
 				padding: 0 @agate-component-spacing;
-				font-size: @agate-thumbnailitem-subcontent-font-size;
-				color: @agate-thumbnailitem-subcontent-text-color;
+				font-size: @agate-thumbnailitem-label-font-size;
+				color: @agate-thumbnailitem-label-text-color;
 			}
 		}
 
@@ -50,13 +57,9 @@
 		}
 
 	  	.focus({
-			.content {
-				color: @agate-thumbnailitem-focus-text-color;
-			}
-
 			&.item {
 				.label {
-					color: @agate-thumbnailitem-subcontent-focus-text-color;
+					color: @agate-thumbnailitem-label-focus-text-color;
 				}
 			}
 		});
@@ -64,7 +67,7 @@
 		&.selected {
 			&.item {
 				.label {
-					color: @agate-thumbnailitem-subcontent-selected-text-color;
+					color: @agate-thumbnailitem-label-selected-text-color;
 				}
 			}
 		}
