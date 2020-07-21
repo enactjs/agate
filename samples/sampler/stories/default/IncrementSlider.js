@@ -17,6 +17,7 @@ storiesOf('Agate', module)
 		() => (
 			<IncrementSlider
 				active={boolean('active', Config)}
+				buttonSize={select('buttonSize', ['small', 'large'], Config, 'large')}
 				decrementIcon={select('decrementIcon', decrementIcons, Config)}
 				disabled={boolean('disabled', Config)}
 				focused={boolean('focused', Config)}

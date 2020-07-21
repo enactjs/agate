@@ -24,7 +24,8 @@ const IncrementSliderButtonBase = kind({
 		css: PropTypes.object,
 		onTap: PropTypes.func,
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-		role: PropTypes.string
+		role: PropTypes.string,
+		size: PropTypes.oneOf(['small', 'large'])
 	},
 
 	styles: {
@@ -36,7 +37,7 @@ const IncrementSliderButtonBase = kind({
 		className: ({orientation, role, styler}) => styler.append(orientation, role)
 	},
 
-	render: ({css, onTap, ...rest}) => {
+	render: ({css, onTap, size, ...rest}) => {
 		delete rest.orientation;
 		delete rest.role;
 		return (
@@ -46,12 +47,13 @@ const IncrementSliderButtonBase = kind({
 				onTap={onTap}
 				onHold={onTap}
 				onHoldPulse={onTap}
+				size={size}
 			/>
 		);
 	}
 });
 
-const OnlyUpdate = onlyUpdateForKeys(['children', 'disabled', 'icon', 'spotlightDisabled', 'aria-label']);
+const OnlyUpdate = onlyUpdateForKeys(['children', 'disabled', 'icon', 'size', 'spotlightDisabled', 'aria-label']);
 const IncrementSliderButton = OnlyUpdate(IncrementSliderButtonBase);
 
 export default IncrementSliderButton;

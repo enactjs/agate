@@ -104,6 +104,14 @@ const IncrementSliderBase = kind({
 		backgroundProgress: PropTypes.number,
 
 		/**
+		 * The size of the buttons.
+		 *
+		 * @type {('small'|'large')}
+		 * @public
+		 */
+		buttonSize: PropTypes.oneOf(['small', 'large']),
+
+		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
 		 *
@@ -423,7 +431,7 @@ const IncrementSliderBase = kind({
 	},
 
 	computed: {
-		className: ({orientation, styler}) => styler.append(orientation),
+		className: ({buttonSize, orientation, styler}) => styler.append(buttonSize, orientation),
 		decrementDisabled: ({disabled, min, value = min}) => disabled || value <= min,
 		incrementDisabled: ({disabled, max, min, value = min}) => disabled || value >= max,
 		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel, min, value = min}) => {
@@ -446,6 +454,7 @@ const IncrementSliderBase = kind({
 		'aria-hidden': ariaHidden,
 		'data-webos-voice-group-label': voiceGroupLabel,
 		backgroundProgress,
+		buttonSize,
 		css,
 		decrementAriaLabel,
 		decrementDisabled,
@@ -495,6 +504,7 @@ const IncrementSliderBase = kind({
 					onTap={onDecrement}
 					onSpotlightDisappear={onDecrementSpotlightDisappear}
 					orientation={orientation}
+					size={buttonSize}
 					spotlightDisabled={spotlightDisabled}
 				/>
 				<Slider
@@ -530,6 +540,7 @@ const IncrementSliderBase = kind({
 					onSpotlightDisappear={onIncrementSpotlightDisappear}
 					onTap={onIncrement}
 					orientation={orientation}
+					size={buttonSize}
 					spotlightDisabled={spotlightDisabled}
 				/>
 			</div>
