@@ -140,7 +140,7 @@ export default {
 	displaycontrol    : 0x0F00EF, // displaycontrol
 	controlleft       : 0x0F00F0, // controlleft
 	controlright      : 0x0F00F1, // controlright
-	home              : 0x0F00F2, // mainpage
+	mainpage          : 0x0F00F2, // mainpage
 	playlist          : 0x0F00F3, // playlist
 	resume            : 0x0F00F4, // resume
 	trailer           : 0x0F00F5, // trailer

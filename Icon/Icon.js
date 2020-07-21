@@ -265,7 +265,7 @@ const IconBase = kind({
  * displaycontrol
  * controlleft
  * controlright
- * home
+ * mainpage
  * playlist
  * resume
  * trailer
