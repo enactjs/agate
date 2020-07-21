@@ -130,7 +130,22 @@ export default {
 	star              : 0x0F00E8, // star_full
 	starhollow        : 0x0F00E9, // star_empty
 	starhalf          : 0x0F00EA, // star_half
-	refresh           : 0x0F00EB  // refresh
+	refresh           : 0x0F00EB,  // refresh
+	time              : 0x0F002C, // time
+	pausebold         : 0x0F002D, // pause2
+	playbold          : 0x0F002E, // play2
+	controls          : 0x0F00EC, // controls
+	diagnostics       : 0x0F00ED, // diagnostics
+	mapbox            : 0x0F00EE, // mapbox
+	displaycontrol    : 0x0F00EF, // displaycontrol
+	controlleft       : 0x0F00F0, // controlleft
+	controlright      : 0x0F00F1, // controlright
+	home              : 0x0F00F2, // mainpage
+	playlist          : 0x0F00F3, // playlist
+	resume            : 0x0F00F4, // resume
+	trailer           : 0x0F00F5, // trailer
+	plusbold          : 0x0F00F6, // plus2
+	minusbold         : 0x0F00F7  // minus2
 };
 
 // Deprecated icon list from `Moonstone-Agate.ttf` for reference
