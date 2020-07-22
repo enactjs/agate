@@ -107,6 +107,7 @@ const IncrementSliderBase = kind({
 		 * The size of the buttons.
 		 *
 		 * @type {('small'|'large')}
+		 * @default 'large'
 		 * @public
 		 */
 		buttonSize: PropTypes.oneOf(['small', 'large']),
@@ -384,6 +385,7 @@ const IncrementSliderBase = kind({
 
 	defaultProps: {
 		backgroundProgress: 0,
+		buttonSize: 'large',
 		decrementIcon: 'minus',
 		incrementIcon: 'plus',
 		max: 100,

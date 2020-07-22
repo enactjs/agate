@@ -37,6 +37,12 @@
 					border-radius: @agate-incrementslider-border-radius;
 				}
 			}
+
+			&.small {
+				.slider {
+					padding: @agate-incrementslider-horizontal-small-slider-padding;
+				}
+			}
 		}
 
 		&.vertical {
@@ -68,10 +74,12 @@
 			.incrementButton {
 				order: 1;
 			}
-		}
 
-		&.small {
-
+			&.small {
+				.slider {
+					padding: @agate-incrementslider-vertical-small-slider-padding;
+				}
+			}
 		}
 	});
 }
