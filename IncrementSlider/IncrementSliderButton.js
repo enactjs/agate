@@ -53,7 +53,7 @@ const IncrementSliderButtonBase = kind({
 	}
 });
 
-const OnlyUpdate = onlyUpdateForKeys(['children', 'disabled', 'icon', 'size', 'spotlightDisabled', 'aria-label']);
+const OnlyUpdate = onlyUpdateForKeys(['aria-label', 'children', 'disabled', 'icon', 'size', 'spotlightDisabled']);
 const IncrementSliderButton = OnlyUpdate(IncrementSliderButtonBase);
 
 export default IncrementSliderButton;
