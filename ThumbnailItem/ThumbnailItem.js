@@ -75,7 +75,7 @@ const ThumbnailItemBase = kind({
 		/**
 		 * The thumbnail type.
 		 *
-		 * @type {('round'|'square')}
+		 * @type {('normal'|'styled')}
 		 * @default 'square'
 		 * @public
 		 */
