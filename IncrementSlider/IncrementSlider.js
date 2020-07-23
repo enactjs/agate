@@ -332,6 +332,21 @@ const IncrementSliderBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
+		 * Sets the point, as a proportion between 0 and 1, from which the slider is filled.
+		 *
+		 * Applies to both the slider's `value` and `backgroundProgress`. In both cases,
+		 * setting the value of `progressAnchor` will cause the slider to fill from that point
+		 * down, when `value` or `backgroundProgress` is proportionally less than the anchor, or up,
+		 * when `value` or `backgroundProgress` is proportionally greater than the anchor, rather
+		 * than always from the start of the slider.
+		 *
+		 * @type {Number}
+		 * @default 0
+		 * @public
+		 */
+		progressAnchor: PropTypes.number,
+
+		/**
 		 * Disables spotlight navigation into the component.
 		 *
 		 * @type {Boolean}
@@ -367,6 +382,7 @@ const IncrementSliderBase = kind({
 		min: 0,
 		noFill: false,
 		orientation: 'horizontal',
+		progressAnchor: 0,
 		spotlightDisabled: false,
 		step: 1
 	},
@@ -454,6 +470,7 @@ const IncrementSliderBase = kind({
 		onIncrementSpotlightDisappear,
 		onSpotlightDisappear,
 		orientation,
+		progressAnchor,
 		spotlightDisabled,
 		step,
 		value,
@@ -499,6 +516,7 @@ const IncrementSliderBase = kind({
 					onSpotlightDisappear={onSpotlightDisappear}
 					orientation={orientation}
 					spotlightDisabled={spotlightDisabled}
+					progressAnchor={progressAnchor}
 					step={step}
 					value={value}
 				/>
