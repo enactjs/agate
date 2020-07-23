@@ -176,7 +176,6 @@ const StorybookDecorator = (story, config) => {
 	const currentSkin = skinFromURL ? skinFromURL : Config.defaultProps.skin;
 	const newSkin = (memory.skin !== currentSkin);
 	memory.skin = currentSkin;  // Remember the skin for the next time we load.
-	const useSkinDefaultStyles = boolean('default skin styles', Config);
 	const accentFromURL = getPropFromURL('accent');
 	const highlightFromURL = getPropFromURL('highlight');
 	const localeFromURL = getPropFromURL('locale');
@@ -187,7 +186,7 @@ const StorybookDecorator = (story, config) => {
 	if (!allSkins) {
 		skinKnobs.skin = select('skin', skins, Config, currentSkin);
 	}
-	const {accent, highlight} = useSkinDefaultStyles && !allSkins ? defaultColors[skinKnobs.skin] : {};
+	const {accent, highlight} = !allSkins && boolean('default skin styles', Config) ? defaultColors[skinKnobs.skin] : {};
 
 	return (
 		<Agate
