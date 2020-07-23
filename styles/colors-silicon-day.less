@@ -30,8 +30,8 @@
 @silicon-light-gray: #f2f2f2;
 @silicon-gray: #eeeeee;
 @silicon-dark-gray: #777777;
+@silicon-night-rider-gray: #333333;
 @silicon-gradient: linear-gradient(to right, @silicon-vibrant-purple, @silicon-magenta, @silicon-red-pink);
-@silicon-night-rider: #333333;
 
 // Abstracted Colors
 @agate-accent: var(--agate-accent-color, @silicon-accent);
@@ -189,10 +189,10 @@
 // ---------------------------------------
 @agate-panels-bg-color:               @agate-white;
 @agate-panels-breadcrumb-bg-color:    @agate-light-gray;
-@agate-panels-tab-separator-border-color: @silicon-night-rider;
+@agate-panels-tab-separator-border-color: @silicon-night-rider-gray;
 @agate-panels-tab-color:              @agate-foreground;
 @agate-panels-tab-bg-color:           transparent;
-@agate-panels-tab-bg-image:           linear-gradient(to bottom, transparent, fade(@silicon-night-rider, 50%));
+@agate-panels-tab-bg-image:           linear-gradient(to bottom, transparent, fade(@silicon-night-rider-gray, 50%));
 @agate-panels-tab-selected-color:     fade(@agate-white, 90%);
 @agate-panels-tab-selected-bg-color:  transparent;
 @agate-panels-tab-selected-bg-image:  linear-gradient(to bottom, ~"hsla(var(--agate-highlight-h, 0), var(--agate-highlight-s, 0), var(--agate-highlight-l, 0), 0.1)", @agate-highlight 98%, @agate-accent);
