@@ -104,15 +104,6 @@ const IncrementSliderBase = kind({
 		backgroundProgress: PropTypes.number,
 
 		/**
-		 * The size of the buttons.
-		 *
-		 * @type {('small'|'large')}
-		 * @default 'large'
-		 * @public
-		 */
-		buttonSize: PropTypes.oneOf(['small', 'large']),
-
-		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
 		 *
@@ -163,6 +154,15 @@ const IncrementSliderBase = kind({
 		 * @public
 		 */
 		focused: PropTypes.bool,
+
+		/**
+		 * The size of the icons.
+		 *
+		 * @type {('small'|'large')}
+		 * @default 'large'
+		 * @public
+		 */
+		iconSize: PropTypes.oneOf(['small', 'large']),
 
 		/**
 		 * The slider id reference for setting aria-controls.
@@ -385,8 +385,8 @@ const IncrementSliderBase = kind({
 
 	defaultProps: {
 		backgroundProgress: 0,
-		buttonSize: 'large',
 		decrementIcon: 'minus',
+		iconSize: 'large',
 		incrementIcon: 'plus',
 		max: 100,
 		min: 0,
@@ -433,7 +433,7 @@ const IncrementSliderBase = kind({
 	},
 
 	computed: {
-		className: ({buttonSize, orientation, styler}) => styler.append(buttonSize, orientation),
+		className: ({iconSize, orientation, styler}) => styler.append(iconSize, orientation),
 		decrementDisabled: ({disabled, min, value = min}) => disabled || value <= min,
 		incrementDisabled: ({disabled, max, min, value = min}) => disabled || value >= max,
 		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel, min, value = min}) => {
@@ -456,13 +456,13 @@ const IncrementSliderBase = kind({
 		'aria-hidden': ariaHidden,
 		'data-webos-voice-group-label': voiceGroupLabel,
 		backgroundProgress,
-		buttonSize,
 		css,
 		decrementAriaLabel,
 		decrementDisabled,
 		decrementIcon,
 		disabled,
 		focused,
+		iconSize,
 		id,
 		incrementAriaLabel,
 		incrementDisabled,
@@ -506,7 +506,7 @@ const IncrementSliderBase = kind({
 					onTap={onDecrement}
 					onSpotlightDisappear={onDecrementSpotlightDisappear}
 					orientation={orientation}
-					size={buttonSize}
+					size={iconSize}
 					spotlightDisabled={spotlightDisabled}
 				/>
 				<Slider
@@ -542,7 +542,7 @@ const IncrementSliderBase = kind({
 					onSpotlightDisappear={onIncrementSpotlightDisappear}
 					onTap={onIncrement}
 					orientation={orientation}
-					size={buttonSize}
+					size={iconSize}
 					spotlightDisabled={spotlightDisabled}
 				/>
 			</div>

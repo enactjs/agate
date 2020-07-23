@@ -17,10 +17,10 @@ storiesOf('Agate', module)
 		() => (
 			<IncrementSlider
 				active={boolean('active', Config)}
-				buttonSize={select('buttonSize', ['small', 'large'], Config, 'large')}
 				decrementIcon={select('decrementIcon', decrementIcons, Config)}
 				disabled={boolean('disabled', Config)}
 				focused={boolean('focused', Config)}
+				iconSize={select('iconSize', ['small', 'large'], Config)}
 				incrementIcon={select('incrementIcon', incrementIcons, Config)}
 				knobStep={number('knobStep', Config)}
 				max={number('max', Config)}
@@ -30,7 +30,7 @@ storiesOf('Agate', module)
 				onChange={action('onChange')}
 				onDragEnd={action('onDragEnd')}
 				onDragStart={action('onDragStart')}
-				orientation={select('orientation', ['horizontal', 'vertical'], Config, 'horizontal')}
+				orientation={select('orientation', ['horizontal', 'vertical'], Config)}
 				progressAnchor={number('progressAnchor', Config, {range: true, min: 0, max: 1, step: 0.1}, 0)}
 				step={number('step', Config)}
 			/>
