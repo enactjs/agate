@@ -9,6 +9,8 @@
 	.applySkins({
 		padding-left: @agate-checkboxitem-padding-left;
 		padding-right: @agate-checkboxitem-padding-right;
+		border-color: @agate-checkboxitem-border-color;
+		border-bottom-color: @agate-checkboxitem-border-bottom-color;
 		font-size: @agate-checkboxitem-font-size;
 
 		.slotAfter {
@@ -20,5 +22,12 @@
 			-webkit-margin-start: 0;
 			-webkit-margin-end: @agate-checkboxitem-icon-margin;
 		}
+
+		.focus({
+			color: @agate-checkboxitem-focus-text-color;
+			background-color: @agate-checkboxitem-focus-bg-color;
+			border-color: @agate-checkboxitem-focus-border-color;
+			border-bottom-color: @agate-checkboxitem-border-bottom-color;
+		});
 	});
 }
