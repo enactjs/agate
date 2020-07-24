@@ -18,6 +18,14 @@
 		}
 	}
 
+	&.top {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		transform: none;
+	}
+
 	.closeButton {
 		position: absolute;
 		top: 0;
@@ -30,6 +38,7 @@
 	}
 
 	.applySkins({
+		color: @agate-popup-text-color;
 		min-width: @agate-popup-min-width;
 		max-width: @agate-popup-max-width;
 		box-shadow: @agate-popup-shadow;
@@ -40,6 +49,16 @@
 		border-width: @agate-popup-border-width;
 		border-color: @agate-popup-border-color;
 		border-radius: @agate-popup-border-radius;
+
+		&.top {
+			border-radius: @agate-popup-top-border-radius;
+			max-width: @agate-popup-top-max-width;
+		}
+
+		.title {
+			color: @agate-popup-text-color;
+			padding: @agate-popup-title-padding;
+		}
 
 		&:not(.withTitle) {
 			.body {
@@ -62,12 +81,19 @@
 
 		&.withCloseButton {
 			.title {
-				padding: @agate-popup-title-padding;
+				padding: @agate-popup-closebutton-title-padding;
+				.padding-start-end(.extract(@agate-popup-closebutton-title-padding, left)[], .extract(@agate-popup-closebutton-title-padding, right)[]);
 			}
 		}
 
 		.buttons {
 			padding: @agate-popup-buttons-padding;
+			background-color: @agate-popup-buttons-bg-color;
+			border-radius: @agate-popup-buttons-border-radius;
+		}
+
+		.content {
+			padding: @agate-popup-content-padding;
 		}
 
 		.closeButton {
