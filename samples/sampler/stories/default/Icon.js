@@ -1,7 +1,8 @@
 import {emptify, mergeComponentMetadata} from '@enact/storybook-utils';
 import {select, text, number} from '@enact/storybook-utils/addons/knobs';
 import UiIcon from '@enact/ui/Icon';
-import iconNames from './icons';
+import BodyText from '@enact/ui/BodyText';
+import {iconList, iconListSilicon} from './icons';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -23,8 +24,11 @@ storiesOf('Agate', module)
 			const flip = select('flip', ['', 'both', 'horizontal', 'vertical'], Config, '');
 			const size = select('size', ['smallest', 'small', 'large', 'huge'], Config, 'large');
 			const spriteCount = number('spriteCount', Config, {min: 1}, 1);
+			const skin = select('skin', [' ', 'silicon'], Config, ' ');
+			const iconNames = skin === 'silicon' ? iconListSilicon : iconList;
 			return (
 				<>
+					<BodyText>To use silicon set of icons, silicon skin must be selected in the global knobs as well</BodyText>
 					<Icon
 						flip={flip}
 						size={size}

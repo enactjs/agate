@@ -19,7 +19,7 @@ import PropTypes from 'prop-types';
 
 import Skinnable from '../Skinnable';
 
-import iconList from './IconList.js';
+import iconList, {iconListSilicon} from './IconList.js';
 
 import componentCss from './Icon.module.less';
 
@@ -109,13 +109,13 @@ const IconBase = kind({
 		})
 	},
 
-	render: (props) => {
-		delete props.spriteCount;
+	render: ({css, skin, ...rest}) => {
+		delete rest.spriteCount;
 
 		return UiIcon.inline({
-			...props,
-			css: props.css,
-			iconList
+			...rest,
+			css: css,
+			iconList: skin === 'silicon' ? iconListSilicon : iconList
 		});
 	}
 });
@@ -290,7 +290,7 @@ const IconBase = kind({
  */
 const IconDecorator = compose(
 	Pure,
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 /**
@@ -310,5 +310,6 @@ export {
 	Icon,
 	IconBase,
 	IconDecorator,
-	iconList as icons
+	iconList as icons,
+	iconListSilicon as iconSilicon
 };
