@@ -116,8 +116,8 @@ const iconListSilicon = {
 	battery3          : 0xF0160,  // battery3
 	battery4          : 0xF0161,  // battery4
 	batteryalert      : 0xF0162,  // batteryalert
-	batterycharging   : 0xF0163  // batterycharging
-}
+	batterycharging   : 0xF0163   // batterycharging
+};
 
 const iconList = {
 	circlelarge       : 0x025EF,  // shape: LARGE CIRCLE

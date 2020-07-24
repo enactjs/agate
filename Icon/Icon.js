@@ -79,6 +79,14 @@ const IconBase = kind({
 		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
+		 * The current skin.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		skin: PropTypes.string,
+
+		/**
 		 * The amount of sprite "cells" in the src image.
 		 *
 		 * This property only affects image-based icons, not icon glyphs.
