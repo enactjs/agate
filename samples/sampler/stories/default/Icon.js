@@ -6,6 +6,7 @@ import {iconList, iconListSilicon} from './icons';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
+import Skinnable from '@enact/agate/Skinnable';
 import Icon, {IconBase} from '@enact/agate/Icon';
 import Heading from '@enact/agate/Heading';
 
@@ -17,32 +18,40 @@ import logo from '../../images/icon-enact-logo.svg';
 Icon.displayName = 'Icon';
 const Config = mergeComponentMetadata('Icon', UiIcon, IconBase, Icon);
 
+const SkinnedIcon = Skinnable(
+	{prop: 'skin'},
+	({skin, ...rest}) => {
+		let iconNames;
+		const flip = select('flip', ['', 'both', 'horizontal', 'vertical'], Config, '');
+		const size = select('size', ['smallest', 'small', 'large', 'huge'], Config, 'large');
+		const spriteCount = number('spriteCount', Config, {min: 1}, 1);
+
+		switch (skin) { case 'silicon':  {iconNames = iconListSilicon; break; } default: { iconNames = iconList; }}
+
+		return (
+		<>
+			<Icon
+				{...rest}
+				flip={flip}
+				size={size}
+				spriteCount={spriteCount}
+			>
+				{emptify(select('src', ['', docs, factory, logo], Icon, '')) + emptify(select('icon', ['', ...iconNames], Icon, 'home')) + emptify(text('custom icon', Icon, ''))}
+			</Icon>
+			<br />
+			<br />
+			<Heading>All Icons</Heading>
+			{iconNames.map((icon, index) => <Icon key={index} size={size} title={icon}>{icon}</Icon>)}
+		</>
+	)}
+);
+
 storiesOf('Agate', module)
 	.add(
 		'Icon',
-		() => {
-			const flip = select('flip', ['', 'both', 'horizontal', 'vertical'], Config, '');
-			const size = select('size', ['smallest', 'small', 'large', 'huge'], Config, 'large');
-			const spriteCount = number('spriteCount', Config, {min: 1}, 1);
-			const skin = select('skin', [' ', 'silicon'], Config, ' ');
-			const iconNames = skin === 'silicon' ? iconListSilicon : iconList;
-			return (
-				<>
-					<BodyText>To use silicon set of icons, silicon skin must be selected in the global knobs as well</BodyText>
-					<Icon
-						flip={flip}
-						size={size}
-						spriteCount={spriteCount}
-					>
-						{emptify(select('src', ['', docs, factory, logo], Icon, '')) + emptify(select('icon', ['', ...iconNames], Icon, 'home')) + emptify(text('custom icon', Icon, ''))}
-					</Icon>
-					<br />
-					<br />
-					<Heading>All Icons</Heading>
-					{iconNames.map((icon, index) => <Icon key={index} size={size} title={icon}>{icon}</Icon>)}
-				</>
-			);
-		},
+		() => (
+			<SkinnedIcon />
+		),
 		{
 			text: 'Basic usage of Icon'
 		}
