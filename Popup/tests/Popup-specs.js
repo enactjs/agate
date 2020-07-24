@@ -1,7 +1,7 @@
 import React from 'react';
 import {mount} from 'enzyme';
 
-import Popup from '../Popup';
+import {Popup, PopupBase} from '../Popup';
 
 describe('Popup specs', () => {
 	test('should be rendered opened if open is set to true', () => {
@@ -48,6 +48,17 @@ describe('Popup specs', () => {
 
 		const expected = false;
 		const actual = popup.prop('centered');
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should have position=center when no position is specified', () => {
+		const popup = mount(
+			<PopupBase />
+		);
+
+		const expected = 'center';
+		const actual = popup.prop('position');
 
 		expect(actual).toBe(expected);
 	});
