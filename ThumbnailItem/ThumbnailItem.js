@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Slottable from '@enact/ui/Slottable';
 
+import Image from '../Image';
 import Item from '../Item';
 
 import componentCss from './ThumbnailItem.module.less';
@@ -65,6 +66,14 @@ const ThumbnailItemBase = kind({
 		selected: PropTypes.bool,
 
 		/**
+		 * Nodes to be inserted before `children`.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
+		slotBefore: PropTypes.node,
+
+		/**
 		 * String value used to determine which thumbnail will appear on a specific screenSize.
 		 *
 		 * @type {String}
@@ -76,7 +85,7 @@ const ThumbnailItemBase = kind({
 		 * The thumbnail type.
 		 *
 		 * @type {('normal'|'styled')}
-		 * @default 'square'
+		 * @default 'normal'
 		 * @public
 		 */
 		type: PropTypes.oneOf(['normal', 'styled'])
@@ -93,21 +102,19 @@ const ThumbnailItemBase = kind({
 	},
 
 	computed: {
-		className: ({type, selected, styler}) => styler.append({
-			roundThumbnail: type === 'styled',
-			selected
-		})
+		className: ({type, selected, styler}) => styler.append(type, {selected})
 	},
 
-	render: ({css, children, src, ...rest}) => {
+	render: ({css, children, src, slotBefore, ...rest}) => {
 		return (
 			<Item {...rest} css={css}>
-				<div className={css.thumbnailContainer} slot="slotBefore">
-					<img
+				<slotBefore>
+					<Image
 						className={css.thumbnail}
 						src={src}
 					/>
-				</div>
+					{slotBefore}
+				</slotBefore>
 				<div className={css.content}>
 					{children}
 				</div>
@@ -116,7 +123,7 @@ const ThumbnailItemBase = kind({
 	}
 });
 
-const ThumbnailItem = Slottable({slots: ['img']}, ThumbnailItemBase);
+const ThumbnailItem = Slottable({slots: ['img', 'slotBefore']}, ThumbnailItemBase);
 
 /**
  * A stateless, unfocusable item that can display a thumbnail.
