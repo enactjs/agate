@@ -10,21 +10,28 @@
  * @exports PopupDecorator
  */
 
-import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
-import PropTypes from 'prop-types';
-import React from 'react';
+import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Layout, {Cell} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 import Transition from '@enact/ui/Transition';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
+import React from 'react';
 
-import Skinnable from '../Skinnable';
-import Heading from '../Heading';
 import Button from '../Button';
+import Heading from '../Heading';
+import Skinnable from '../Skinnable';
 
 import PopupState from './PopupState';
 
 import componentCss from './Popup.module.less';
+
+
+const TransitionContainer = SpotlightContainerDecorator(
+	{enterTo: 'default-element', preserveId: true},
+	Transition
+);
 
 /**
  * The base popup component.
@@ -57,6 +64,16 @@ const PopupBase = kind({
 		onClose: PropTypes.func,
 		onHide: PropTypes.func,
 		open: PropTypes.bool,
+
+		/**
+		 * Sets the position of the popup on the screen.
+		 *
+		 * @type {('center'|'top')}
+		 * @default 'center'
+		 * @public
+		 */
+		position: PropTypes.oneOf(['center', 'top']),
+
 		skin: PropTypes.string,
 		title: PropTypes.string
 	},
@@ -64,26 +81,29 @@ const PopupBase = kind({
 		centered: false,
 		closeButton: false,
 		noAnimation: false,
-		open: false
+		open: false,
+		position: 'center'
 	},
 	styles: {
 		css: componentCss,
 		className: 'popup'
 	},
 	computed: {
-		className: ({closeButton, title, styler, centered}) => styler.append({withCloseButton: closeButton, withTitle: title, centered})
+		className: ({centered, closeButton, position, styler, title}) => styler.append({top: position === 'top', withCloseButton: closeButton, withTitle: title, centered}),
+		transitionType : ({position}) => position === 'center' ? 'fade' : 'slide',
+		direction : ({position}) => position === 'center' ? 'down' : 'up'
 	},
-	render: ({buttons, children, closeButton, css, noAnimation, onClose, onHide, open, skin, title, ...rest}) => {
+	render: ({buttons, children, closeButton, css, direction, noAnimation, onClose, onHide, open, skin, title, transitionType, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
 		delete rest.centered;
 
 		return (
-			<Transition
+			<TransitionContainer
 				noAnimation={noAnimation}
 				visible={open}
-				direction="down"
+				direction={direction}
 				duration="short"
-				type="fade"
+				type={transitionType}
 				className={css.popupTransitionContainer}
 				onHide={onHide}
 				css={css}
@@ -107,7 +127,7 @@ const PopupBase = kind({
 						</Cell> : null}
 					</Layout>
 				</div>
-			</Transition>
+			</TransitionContainer>
 		);
 	}
 });
