@@ -131,7 +131,7 @@ export default {
 	starhollow        : 0x0F00E9, // star_empty
 	starhalf          : 0x0F00EA, // star_half
 	refresh           : 0x0F00EB, // refresh
-	time              : 0x0F002C, // time
+	time              : 0x0F00E3, // time
 	pausebold         : 0x0F002D, // pause2
 	playbold          : 0x0F002E, // play2
 	controls          : 0x0F00EC, // controls
