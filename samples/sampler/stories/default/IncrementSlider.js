@@ -20,7 +20,6 @@ storiesOf('Agate', module)
 				decrementIcon={select('decrementIcon', decrementIcons, Config)}
 				disabled={boolean('disabled', Config)}
 				focused={boolean('focused', Config)}
-				iconSize={select('iconSize', ['small', 'large'], Config)}
 				incrementIcon={select('incrementIcon', incrementIcons, Config)}
 				knobStep={number('knobStep', Config)}
 				max={number('max', Config)}
@@ -32,6 +31,7 @@ storiesOf('Agate', module)
 				onDragStart={action('onDragStart')}
 				orientation={select('orientation', ['horizontal', 'vertical'], Config)}
 				progressAnchor={number('progressAnchor', Config, {range: true, min: 0, max: 1, step: 0.1}, 0)}
+				size={select('size', ['small', 'large'], Config)}
 				step={number('step', Config)}
 			/>
 		),
