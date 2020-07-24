@@ -30,6 +30,7 @@
 @silicon-light-gray: #f2f2f2;
 @silicon-gray: #eeeeee;
 @silicon-dark-gray: #777777;
+@silicon-very-light-gray: #cccccc;
 @silicon-gradient: linear-gradient(to right, @silicon-vibrant-purple, @silicon-magenta, @silicon-red-pink);
 
 // Abstracted Colors
@@ -223,14 +224,14 @@
 // Popup
 // ---------------------------------------
 @agate-popup-plain-body-color: @agate-foreground;
-@agate-popup-bg-color: @agate-background;
+@agate-popup-bg-color: fade(@silicon-gray, 95%);
 @agate-popup-bg-image: none;
-@agate-popup-border-color: @agate-background;
 @agate-popup-shadow: none;
 @agate-popup-body-border: none;
 @agate-popup-body-border-color: @agate-highlight transparent;
-@agate-popup-body-bg-color: @agate-background;
+@agate-popup-body-bg-color: transparent;
 @agate-popup-body-bg-image: none;
+@agate-popup-buttons-bg-color: @silicon-very-light-gray;
 
 // PopupMenu
 // ---------------------------------------

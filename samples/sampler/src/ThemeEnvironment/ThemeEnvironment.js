@@ -186,6 +186,7 @@ const StorybookDecorator = (story, config) => {
 	if (!allSkins) {
 		skinKnobs.skin = select('skin', skins, Config, currentSkin);
 	}
+	const {accent, highlight} = !allSkins && boolean('default skin styles', Config) ? defaultColors[skinKnobs.skin] : {};
 
 	return (
 		<Agate
@@ -194,8 +195,8 @@ const StorybookDecorator = (story, config) => {
 			locale={locale}
 			{...skinKnobs}
 			skinVariants={boolean('night mode', Config) && 'night'}
-			accent={color('accent', (!newSkin && accentFromURL ? accentFromURL : defaultColors[currentSkin].accent), Config.groupId)}
-			highlight={color('highlight', (!newSkin && highlightFromURL ? highlightFromURL : defaultColors[currentSkin].highlight), Config.groupId)}
+			accent={accent || color('accent', (!newSkin && accentFromURL ? accentFromURL : defaultColors[currentSkin].accent), Config.groupId)}
+			highlight={highlight || color('highlight', (!newSkin && highlightFromURL ? highlightFromURL : defaultColors[currentSkin].highlight), Config.groupId)}
 		>
 			<Scroller>
 				{allSkins ? Object.keys(skins).map(skin => (
