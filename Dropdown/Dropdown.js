@@ -16,7 +16,7 @@
  */
 import {on, off} from '@enact/core/dispatcher';
 import {handle, forward, forProp} from '@enact/core/handle';
-import hoc from "@enact/core/hoc";
+import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
@@ -26,7 +26,7 @@ import Transition from '@enact/ui/Transition';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
 
 import Button from '../Button';
 import Icon from '../Icon';
@@ -253,7 +253,7 @@ const DropDownExtended = hoc((config, Wrapped) => {
 		static displayName = 'DropDownExtended'
 
 		static propTypes = {
-			open: PropTypes.bool,
+			open: PropTypes.bool
 		}
 
 		constructor (props) {
