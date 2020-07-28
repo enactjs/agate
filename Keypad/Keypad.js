@@ -175,6 +175,17 @@ class Keypad extends React.Component {
 				});
 				break;
 
+			case 'ArrowLeft':
+				if (charIndex >= 0) {
+					newCharIndex = charIndex;
+					newCharIndex = newCharIndex - 1;
+
+					this.setState({
+						charIndex: newCharIndex
+					});
+				}
+				break;
+
 			case 'ArrowRight':
 				newCharIndex = charIndex;
 				newCharIndex = newCharIndex + 1;
