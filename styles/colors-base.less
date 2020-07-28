@@ -116,11 +116,10 @@
 
 // CheckboxItem
 // ---------------------------------------
-@agate-checkboxitem-border-color: inherit;
-@agate-checkboxitem-border-bottom-color: @agate-checkboxitem-border-color;
-@agate-checkboxitem-focus-border-color: inherit;
-@agate-checkboxitem-focus-text-color: inherit;
-@agate-checkboxitem-focus-bg-color: inherit;
+@agate-checkboxitem-border-color: @agate-item-border-color;
+@agate-checkboxitem-focus-border-color: @agate-item-focus-border-color;
+@agate-checkboxitem-focus-color: @agate-item-focus-color;
+@agate-checkboxitem-focus-bg-color: @agate-item-focus-bg-color;
 
 // ColorPicker
 // ---------------------------------------
@@ -195,17 +194,16 @@
 
 // Item
 // ---------------------------------------
-@agate-item-border-bottom-color:          inherit;
+@agate-item-bg-color:                     transparent;
 @agate-item-border-color:                 transparent;
-@agate-item-color:                        inherit;
-@agate-item-label-color:                  inherit;
-@agate-item-focus-bg-color:               inherit;
-@agate-item-focus-border-bottom-color:    inherit;
+@agate-item-color:                        @agate-foreground;
+@agate-item-label-color:                  @agate-item-color;
+@agate-item-focus-bg-color:               @agate-background-focus;
 @agate-item-focus-border-color:           transparent;
-@agate-item-focus-color:                  @agate-item-color;
-@agate-item-selected-bg-color:            inherit;
-@agate-item-selected-border-bottom-color: inherit;
-@agate-item-selected-color:               inherit;
+@agate-item-focus-color:                  @agate-foreground-focus;
+@agate-item-selected-bg-color:            @agate-item-bg-color;
+@agate-item-selected-border-color:        @agate-item-border-color;
+@agate-item-selected-color:               @agate-item-color;
 
 // LabeledIconButton
 // ---------------------------------------
