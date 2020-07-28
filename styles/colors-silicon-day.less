@@ -103,13 +103,6 @@
 @agate-checkbox-border-color: fade(@agate-foreground, 50%);
 @agate-checkbox-selected-border-color: @agate-foreground;
 
-// CheckboxItem
-// ---------------------------------------
-@agate-checkboxitem-border-color: transparent;
-@agate-checkboxitem-focus-border-color: transparent;
-@agate-checkboxitem-focus-text-color: @agate-background-focus;
-@agate-checkboxitem-focus-bg-color: transparent;
-
 // ColorPicker
 // ---------------------------------------
 @agate-colorpicker-bg-color: rgba(0, 0, 0, 0.5);
@@ -171,14 +164,13 @@
 
 // Item
 // ---------------------------------------
-@agate-item-border-bottom-color:          fade(@agate-black, 40%);
+@agate-item-border-color:                 fade(@agate-black, 40%);
 @agate-item-color:                        @agate-text-color;
 @agate-item-label-color:                  @agate-accent;
 @agate-item-focus-bg-color:               fade(@agate-black, 15%);
-@agate-item-focus-border-bottom-color:    @agate-item-border-bottom-color;
-@agate-item-focus-text-color:             @agate-black;
-@agate-item-selected-bg-color:            transparent;
-@agate-item-selected-border-bottom-color: @agate-accent;
+@agate-item-focus-border-color:           @agate-item-border-color;
+@agate-item-focus-color:                  @agate-item-color;
+@agate-item-selected-border-color:        @agate-accent;
 @agate-item-selected-color:               @agate-item-label-color;
 
 // LabeledIconButton
