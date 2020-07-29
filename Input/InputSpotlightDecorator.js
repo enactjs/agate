@@ -28,6 +28,23 @@ const handleKeyDown = handle(
 );
 
 /**
+ * Default config for [InputSpotlightDecorator]{@link agate/Input.InputSpotlightDecorator}.
+ *
+ * @memberof agate/Input/InputSpotlightDecorator.InputSpotlightDecorator
+ * @hocconfig
+ */
+const defaultConfig = {
+	/**
+	 * Suppress the pointer lock behavior of agate input
+	 *
+	 * @type {Boolean}
+	 * @default false
+	 * @memberof agate/Input/InputSpotlightDecorator.InputSpotlightDecorator.defaultConfig
+	*/
+	noLockPointer: false
+};
+
+/**
  * A higher-order component that manages the
  * spotlight behavior for an {@link agate/Input.Input}
  *
@@ -36,7 +53,8 @@ const handleKeyDown = handle(
  * @hoc
  * @private
  */
-const InputSpotlightDecorator = hoc((config, Wrapped) => {
+const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
+	const {noLockPointer} = config;
 	const Component = Spottable({emulateMouse: false}, Wrapped);
 	const forwardBlur = forward('onBlur');
 	const forwardMouseDown = forward('onMouseDown');
@@ -137,7 +155,9 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 					onSpotlightDisappear();
 				}
 
-				releasePointer(this.state.node);
+				if (!noLockPointer) {
+					releasePointer(this.state.node);
+				}
 			}
 		}
 
@@ -152,11 +172,15 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 			if (focusChanged) {
 				if (this.state.focused === 'input') {
 					forward('onActivate', {type: 'onActivate'}, this.props);
-					lockPointer(this.state.node);
+					if (!noLockPointer) {
+						lockPointer(this.state.node);
+					}
 					this.paused.pause();
 				} else if (prevState.focused === 'input') {
 					forward('onDeactivate', {type: 'onDeactivate'}, this.props);
-					releasePointer(prevState.node);
+					if (!noLockPointer) {
+						releasePointer(prevState.node);
+					}
 					this.paused.resume();
 				}
 			}
