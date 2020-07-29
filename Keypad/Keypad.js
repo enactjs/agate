@@ -242,8 +242,6 @@ class Keypad extends React.Component {
 					className={css.keypadInput}
 					css={css}
 					onClick={getCharIndex}
-					// onBlur={(e) => e.preventDefault()}
-					// onFocus={(e) => e.preventDefault()}
 					onKeyDown={(e) => appendToInput(e.key)}
 					onKeyUp={getCharIndex}
 					type="tel"
