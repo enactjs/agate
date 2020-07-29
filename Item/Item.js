@@ -38,7 +38,8 @@ const ItemContent = kind({
 	},
 	styles: {
 		className: 'itemContent',
-		css: componentCss
+		css: componentCss,
+		publicClassNames: ['label']
 	},
 	computed: {
 		className: ({label, labelPosition, styler}) => styler.append({
@@ -100,7 +101,7 @@ const ItemBase = kind({
 	},
 	styles: {
 		css: componentCss,
-		publicClassNames: ['item', 'slotAfter', 'slotBefore']
+		publicClassNames: ['item', 'label', 'slotAfter', 'slotBefore']
 	},
 	computed: {
 		className: ({selected, styler}) => styler.append({selected})
@@ -115,6 +116,7 @@ const ItemBase = kind({
 				) : null}
 				<ItemContent
 					content={children}
+					css={css}
 					label={label}
 					labelPosition={labelPosition}
 				/>

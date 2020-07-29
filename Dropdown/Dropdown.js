@@ -26,8 +26,10 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
+import Button from '../Button';
 import Icon from '../Icon';
 import Item from '../Item';
+import RadioItem from '../RadioItem';
 import Scroller from '../Scroller';
 import Skinnable from '../Skinnable';
 
@@ -123,6 +125,14 @@ const DropdownBase = kind({
 		selected: PropTypes.number,
 
 		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		skin: PropTypes.string,
+
+		/**
 		 * The primary title text of Dropdown.
 		 *
 		 * The title will be replaced with the selected item, if set.
@@ -156,7 +166,9 @@ const DropdownBase = kind({
 	},
 
 	computed: {
+		buttonClassName: ({open, styler}) => styler.append({open}),
 		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'} ),
+		dropdownButtonClassname: ({css, direction, styler}) => styler.join(css.dropdownButton, {upDropdownButton: direction === 'up'} ),
 		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected, title}) => {
 			if (isSelectedValid({children, selected})) {
@@ -184,37 +196,51 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({children, css, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+	render: ({buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
 		const opened = !disabled && open;
+		const [DropDownButton, wrapperProps, skinVariants, groupProps] = (skin === 'silicon') ? [
+			Button,
+			{className: dropdownButtonClassname},
+			{'night': false},
+			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'}
+		] : [
+			Item,
+			{},
+			{},
+			{childComponent: Item, itemProps: {size: 'small'}}
+		];
 
 		return (
-			<div {...rest}>
-				<Item
-					{...rest}
-					css={css}
-					disabled={hasChildren ? disabled : true}
-					onClick={opened ? onClose : onOpen}
-				>
-					<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
-					{title}
-				</Item>
-				<Transition
-					className={transitionContainerClassname}
-					visible={opened}
-					direction={transitionDirection}
-				>
-					<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
-						<Scroller className={css.scroller}>
-							<Group
-								className={css.group}
-								childComponent={Item}
-								itemProps={{size: 'small'}}
-								onSelect={onSelect}
-								selected={selected}
-							>{children || []}</Group>
-						</Scroller>
-					</ContainerDiv>
-				</Transition>
+			<div {...rest} >
+				<div {...wrapperProps}>
+					<DropDownButton
+						className={buttonClassName}
+						css={css}
+						disabled={hasChildren ? disabled : true}
+						onClick={opened ? onClose : onOpen}
+					>
+						<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
+						{title}
+					</DropDownButton>
+					<Transition
+						className={transitionContainerClassname}
+						visible={opened}
+						direction={transitionDirection}
+					>
+						<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
+							<Scroller skinVariants={skinVariants} className={css.scroller}>
+								<Group
+									className={css.group}
+									onSelect={onSelect}
+									selected={selected}
+									{...groupProps}
+								>
+									{children || []}
+								</Group>
+							</Scroller>
+						</ContainerDiv>
+					</Transition>
+				</div>
 			</div>
 		);
 	}
@@ -232,7 +258,7 @@ const DropdownBase = kind({
 const DropdownDecorator = compose(
 	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose'}),
 	Changeable({change: 'onSelect', prop: 'selected'}),
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 /**
