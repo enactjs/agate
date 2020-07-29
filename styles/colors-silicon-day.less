@@ -56,6 +56,7 @@
 @agate-gray:        #8a8a8a;
 @agate-light-gray:  #ededed;
 @agate-white:       @silicon-white;
+@agate-noble-gray:	#999999;
 
 // Component color assignments
 @agate-bg-color: @agate-background;
@@ -104,13 +105,6 @@
 @agate-checkbox-border-color: fade(@agate-foreground, 50%);
 @agate-checkbox-selected-border-color: @agate-foreground;
 
-// CheckboxItem
-// ---------------------------------------
-@agate-checkboxitem-border-color: transparent;
-@agate-checkboxitem-focus-border-color: transparent;
-@agate-checkboxitem-focus-text-color: @agate-background-focus;
-@agate-checkboxitem-focus-bg-color: transparent;
-
 // ColorPicker
 // ---------------------------------------
 @agate-colorpicker-bg-color: fade(@agate-black, 50%);
@@ -124,7 +118,16 @@
 
 // Dropdown
 // ---------------------------------------
+@agate-dropdown-button-bg-color: @silicon-gray;
+@agate-dropdown-button-border-color: transparent;
+@agate-dropdown-button-client-color: @agate-black;
+@agate-dropdown-button-icon-color: @agate-accent;
+@agate-dropdown-button-open-border-color: fade(@agate-black, 25%);
+@agate-dropdown-up-button-open-border-bottom-color: transparent;
 @agate-dropdown-selected-color: @agate-accent;
+@agate-dropdown-item-border-color: transparent;
+@agate-dropdown-item-color: @agate-black;
+@agate-dropdown-item-focus-bg-color: fade(@agate-black, 5%);
 
 // Drawer
 // ---------------------------------------
@@ -172,14 +175,13 @@
 
 // Item
 // ---------------------------------------
-@agate-item-border-bottom-color:          fade(@agate-black, 40%);
+@agate-item-border-color:                 fade(@agate-black, 40%);
 @agate-item-color:                        @agate-text-color;
 @agate-item-label-color:                  @agate-accent;
 @agate-item-focus-bg-color:               fade(@agate-black, 15%);
-@agate-item-focus-border-bottom-color:    @agate-item-border-bottom-color;
-@agate-item-focus-text-color:             @agate-black;
-@agate-item-selected-bg-color:            transparent;
-@agate-item-selected-border-bottom-color: @agate-accent;
+@agate-item-focus-border-color:           @agate-item-border-color;
+@agate-item-focus-color:                  @agate-item-color;
+@agate-item-selected-border-color:        @agate-accent;
 @agate-item-selected-color:               @agate-item-label-color;
 
 // LabeledIconButton
@@ -240,10 +242,10 @@
 // RadioItem
 // ---------------------------------------
 @agate-radioitem-focus-color: @agate-item-color;
-@agate-radioitem-icon-border-color: @agate-black;
+@agate-radioitem-icon-border-color: @agate-foreground;
 @agate-radioitem-icon-bg-color: transparent;
-@agate-radioitem-icon-focus-color: @agate-highlight;
-@agate-radioitem-icon-selected-color: @agate-black;
+@agate-radioitem-icon-focus-color: @agate-foreground;
+@agate-radioitem-icon-selected-color: @agate-foreground;
 
 // Slider
 // ---------------------------------------
@@ -298,6 +300,13 @@
 @agate-switch-focus-bg-color: @agate-text-color;
 @agate-switch-focus-color: @agate-black;
 @agate-switch-label-color: @agate-accent;
+
+// ThumbnailItem
+// ---------------------------------------
+@agate-thumbnailitem-label-text-color: @agate-noble-gray;
+@agate-thumbnailitem-label-focus-text-color: @agate-noble-gray;
+@agate-thumbnailitem-label-selected-text-color: @agate-foreground;
+@agate-roundthumbnailitem-border-color: @agate-foreground;
 
 // Toggle Colors
 // ---------------------------------------
