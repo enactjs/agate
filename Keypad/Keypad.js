@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-bind */
+
 /*
  * A keypad used to display a sequence of numbers and buttons, like a keyboard.
  */
@@ -9,27 +11,27 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from '../Button';
-import Input from "../Input";
+import Input from '../Input';
 
 import $L from '../internal/$L';
 
 import css from './Keypad.module.less';
 
 const KEY_LIST = [
-	{text: "1", subtext: ""},
-	{text: "2", subtext: "abc"},
-	{text: "3", subtext: "def"},
-	{text: "4", subtext: "ghi"},
-	{text: "5", subtext: "jkl"},
-	{text: "6", subtext: "mno"},
-	{text: "7", subtext: "pqrs"},
-	{text: "8", subtext: "tuv"},
-	{text: "9", subtext: "wxyz"},
-	{text: "*", subtext: ""},
-	{text: "0", subtext: ""},
-	{text: "#", subtext: ""},
-	{text: "phone", subtext: ""},
-	{text: "arrowleftturn", subtext: ""},
+	{text: '1', subtext: ''},
+	{text: '2', subtext: 'abc'},
+	{text: '3', subtext: 'def'},
+	{text: '4', subtext: 'ghi'},
+	{text: '5', subtext: 'jkl'},
+	{text: '6', subtext: 'mno'},
+	{text: '7', subtext: 'pqrs'},
+	{text: '8', subtext: 'tuv'},
+	{text: '9', subtext: 'wxyz'},
+	{text: '*', subtext: ''},
+	{text: '0', subtext: ''},
+	{text: '#', subtext: ''},
+	{text: 'phone', subtext: ''},
+	{text: 'arrowleftturn', subtext: ''}
 ];
 
 /*
@@ -43,8 +45,8 @@ const Key = kind({
 		// Event callback fired when this button is clicked. Includes the 'key' key in its event
 		// payload to let the clicker know what was clicked inside their callback.
 		onKeyButtonClick: PropTypes.func,
-		text: PropTypes.string,
-		subtext: PropTypes.string
+		subtext: PropTypes.string,
+		text: PropTypes.string
 	},
 
 	styles: {
@@ -53,10 +55,10 @@ const Key = kind({
 	},
 
 	computed: {
-		textComponent: ({css, text}) => {
+		textComponent: ({text}) => {
 			return (text != null && text !== '') ? <span className={css.text}>{text}</span> : null;
 		},
-		subtextComponent: ({css, subtext}) => {
+		subtextComponent: ({subtext}) => {
 			return (subtext != null && subtext !== '') ? <span className={css.subtext}>{subtext}</span> : null;
 		}
 	},
@@ -76,7 +78,8 @@ const Key = kind({
 					{...rest}
 					size="large"
 					css={css}
-					icon={children}>
+					icon={children}
+				>
 					{textComponent}
 					{subtextComponent}
 				</Button>
@@ -97,8 +100,8 @@ const KeypadBase = kind({
 	name: 'Key',
 
 	propTypes: {
-		appendToInput: PropTypes.func,
 		disabled: PropTypes.bool,
+		handleInputValue: PropTypes.func
 	},
 
 	styles: {
@@ -106,7 +109,7 @@ const KeypadBase = kind({
 		className: 'keypad'
 	},
 
-	render: ({appendToInput, disabled, ...rest}) => {
+	render: ({handleInputValue, disabled, ...rest}) => {
 		return (
 			<Layout align="center end" wrap {...rest} inline className={css.keypad}>
 				{KEY_LIST.map((keyText, rowIndex) => {
@@ -117,7 +120,7 @@ const KeypadBase = kind({
 							component={Key}
 							disabled={disabled}
 							key={`key${rowIndex}-${keyText.text}`}
-							onKeyButtonClick={() => appendToInput(keyText.text)}
+							onKeyButtonClick={() => handleInputValue(keyText.text)}
 							text={keyText.text === 'arrowleftturn' || keyText.text === 'phone' ? null : keyText.text}
 							subtext={keyText.subtext}
 						>
@@ -142,14 +145,17 @@ const KeypadBase = kind({
  */
 class Keypad extends React.Component {
 	static propTypes = /** @lends agate/Keypad.prototype */ {
-		appendToInput: PropTypes.func,
 		disabled: PropTypes.bool,
+		handleInputValue: PropTypes.func,
 		value: PropTypes.string
 	}
 
-	state = {
-		keypadInput: '',
-		charIndex: 0,
+	constructor (props) {
+		super(props);
+		this.state = {
+			keypadInput: '',
+			charIndex: 0
+		};
 	}
 
 	getCharIndex = (e) => {
@@ -158,7 +164,7 @@ class Keypad extends React.Component {
 		});
 	}
 
-	appendToInput = (keyValue) => {
+	handleInputValue = (keyValue) => {
 		const {keypadInput, charIndex} = this.state;
 		let newKeypadInput = keypadInput;
 		let newCharIndex;
@@ -207,11 +213,11 @@ class Keypad extends React.Component {
 
 			case 'ArrowUp':
 			case 'ArrowDown':
-				//do nothing;
+				// do nothing;
 				break;
 
 			case 'phone':
-				//method to call dialed number (keypadInput);
+				// method to call dialed number (keypadInput);
 				break;
 
 			default:
@@ -230,19 +236,19 @@ class Keypad extends React.Component {
 		});
 	};
 
-	render() {
-		const {appendToInput, getCharIndex} = this,
+	render () {
+		const {handleInputValue, getCharIndex} = this,
 			{disabled} = this.props,
 			{keypadInput} = this.state;
 
 		return (
 			<React.Fragment>
-				<KeypadBase appendToInput={appendToInput} disabled={disabled}/>
+				<KeypadBase handleInputValue={handleInputValue} disabled={disabled} />
 				<Input
 					className={css.keypadInput}
 					css={css}
 					onClick={getCharIndex}
-					onKeyDown={(e) => appendToInput(e.key)}
+					onKeyDown={(e) => handleInputValue(e.key)}
 					onKeyUp={getCharIndex}
 					type="tel"
 					value={keypadInput}
@@ -255,4 +261,4 @@ class Keypad extends React.Component {
 export default Keypad;
 export {
 	KeypadBase
-}
+};
