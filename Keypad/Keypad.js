@@ -92,7 +92,7 @@ const Key = kind({
  * The basic Layout of a Keypad component.
  *
  * @class KeypadBase
- * @memberof agate/DateTimePicker
+ * @memberof agate/Keypad
  * @ui
  * @public
  */
