@@ -256,6 +256,21 @@ const IconBase = kind({
  * hollowstar
  * halfstar
  * refresh
+ * time
+ * pausebold
+ * playbold
+ * controls
+ * diagnostics
+ * mapbox
+ * displaycontrol
+ * controlleft
+ * controlright
+ * mainpage
+ * playlist
+ * resume
+ * trailer
+ * plusbold
+ * minusbold
  * ```
  *
  * @name iconList
