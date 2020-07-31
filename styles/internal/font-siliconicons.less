@@ -2,8 +2,11 @@
 // -- Silicon Icons
 //
 
+@import "./font-agateicons.less";
+
 // Define local LESS variable for font paths
 @font-system-src-silicon-icons:  local("Silicon-Icons"), url(../../fonts/Silicon-Icons.ttf) format("truetype");
 
 // Generate @font-face Rules
-.buildFontFace("Silicon Icons"; @font-system-src-silicon-icons);
+.buildFontFace("Silicon Icons"; @font-system-src-agate-icons); // Start with a base of the Agate icons
+.buildFontFace("Silicon Icons"; @font-system-src-silicon-icons); // Layer the silicons onto that base

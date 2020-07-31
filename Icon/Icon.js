@@ -123,7 +123,7 @@ const IconBase = kind({
 		return UiIcon.inline({
 			...rest,
 			css: css,
-			iconList: skin === 'silicon' ? iconListSilicon : iconList
+			iconList: (skin === 'silicon' ? iconListSilicon : iconList)
 		});
 	}
 });
@@ -319,5 +319,5 @@ export {
 	IconBase,
 	IconDecorator,
 	iconList as icons,
-	iconListSilicon as iconSilicon
+	iconListSilicon as iconsSilicon
 };
