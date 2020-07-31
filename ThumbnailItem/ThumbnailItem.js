@@ -13,10 +13,12 @@
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
+import Slottable from '@enact/ui/Slottable';
 
-import componentCss from './ThumbnailItem.module.less';
+import Image from '../Image';
 import Item from '../Item';
 
+import componentCss from './ThumbnailItem.module.less';
 
 /**
  * A stateless, unfocusable item that can display a thumbnail.
@@ -24,15 +26,74 @@ import Item from '../Item';
  * @class ThumbnailItemBase
  * @memberof agate/ThumbnailItem
  * @extends agate/Item.Item
- * @agate
+ * @ui
  * @public
  */
 const ThumbnailItemBase = kind({
 	name: 'ThumbnailItem',
 
 	propTypes: /** @lends agate/ThumbnailItem.ThumbnailItemBase.prototype */ {
+		/**
+		 * The main content displayed with the thumbnail.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		children: PropTypes.string,
+
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `thumbnailItem` - The root component class
+		 * * `content` - The content component class
+		 * * `subContent` - The subContent component class
+		 * * `roundThumbnail` - Applied when `roundThumbnail="true"`
+		 * * `thumbnail` - The thumbnail component class
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
-		src: PropTypes.string
+
+		/**
+		 * Applies `selected` className.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		selected: PropTypes.bool,
+
+		/**
+		 * Nodes to be inserted before `children`.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
+		slotBefore: PropTypes.node,
+
+		/**
+		 * String value used to determine which thumbnail will appear on a specific screenSize.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		src: PropTypes.string,
+
+		/**
+		 * The thumbnail type.
+		 *
+		 * @type {('normal'|'styled')}
+		 * @default 'normal'
+		 * @public
+		 */
+		type: PropTypes.oneOf(['normal', 'styled'])
+	},
+
+	defaultProps: {
+		type: 'normal'
 	},
 
 	styles: {
@@ -41,16 +102,19 @@ const ThumbnailItemBase = kind({
 		publicClassNames: true
 	},
 
-	render: ({children, css, src, ...rest}) => {
+	computed: {
+		className: ({type, selected, styler}) => styler.append(type, {selected})
+	},
+
+	render: ({css, children, src, slotBefore, ...rest}) => {
 		return (
-			<Item
-				{...rest}
-			>
+			<Item {...rest} css={css}>
 				<slotBefore>
-					<img
+					<Image
 						className={css.thumbnail}
 						src={src}
 					/>
+					{slotBefore}
 				</slotBefore>
 				<div className={css.content}>
 					{children}
@@ -60,8 +124,20 @@ const ThumbnailItemBase = kind({
 	}
 });
 
-export default ThumbnailItemBase;
+const ThumbnailItem = Slottable({slots: ['img', 'slotBefore']}, ThumbnailItemBase);
+
+/**
+ * A stateless, unfocusable item that can display a thumbnail.
+ *
+ * @class ThumbnailItem
+ * @memberof agate/ThumbnailItem
+ * @extends agate/ThumbnailItem.ThumbnailItemBase
+ * @ui
+ * @public
+ */
+
+export default ThumbnailItem;
 export {
-	ThumbnailItemBase as ThumbnailItem,
+	ThumbnailItem,
 	ThumbnailItemBase
 };

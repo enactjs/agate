@@ -11,7 +11,14 @@
 		}
   	}
 
-  	.applySkins({
+	&.captionOverlay {
+		.caption {
+			overflow: hidden;
+			position: absolute;
+		}
+	}
+
+	.applySkins({
 		border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
 
 	  	.caption {
@@ -19,6 +26,20 @@
 			line-height: @agate-imageitem-caption-height;
 			text-align: center;
 	  	}
+
+		&.captionOverlay {
+			.caption {
+				width: @agate-imageitem-caption-overlay-width;
+				height: @agate-imageitem-caption-overlay-height;
+				color: @agate-imageitem-caption-overlay-text-color;
+				opacity: @agate-imageitem-caption-overlay-opacity;
+				padding: @agate-imageitem-caption-overlay-padding;
+				font-size: @agate-imageitem-caption-overlay-font-size;
+				line-height: @agate-imageitem-caption-overlay-line-height;
+				text-align: @agate-imageitem-caption-overlay-text-align;
+				bottom: @agate-imageitem-caption-position-bottom;
+			}
+		}
 
 		.focus({
 			&::before {

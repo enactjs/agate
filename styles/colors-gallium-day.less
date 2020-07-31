@@ -11,12 +11,12 @@
 @agate-highlight-h: var(--agate-highlight-h, 246);
 @agate-highlight-s: var(--agate-highlight-s, 25%);
 @agate-highlight-l: var(--agate-highlight-l, 100%);
-@agate-background: white;
+@agate-background: @agate-white;
 @agate-foreground: black;
 @agate-background-active: fade(black, 15%);
-@agate-foreground-active: white;
+@agate-foreground-active: @agate-white;
 @agate-background-focus: @agate-accent;
-@agate-foreground-focus: white;
+@agate-foreground-focus: @agate-white;
 @agate-gradient: linear-gradient(to bottom, ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.5)", @agate-accent);
 @agate-black:       #131313;
 @agate-darker-gray: #373737;
@@ -24,7 +24,7 @@
 @agate-gray:        #8a8a8a;
 @agate-medium-gray: #c9c9c9;
 @agate-light-gray:  #ededed;
-@agate-white:       #fff;
+@agate-white:       white;
 
 // Component color assignments
 @agate-bg-color: @agate-background;
@@ -69,17 +69,16 @@
 @agate-checkbox-text-color: @agate-white;
 @agate-checkbox-bg-color: @agate-accent;
 
-// CheckboxItem
-// ---------------------------------------
-@agate-checkboxitem-border-color: transparent;
-@agate-checkboxitem-focus-border-color: transparent;
-@agate-checkboxitem-focus-text-color: @agate-background-focus;
-@agate-checkboxitem-focus-bg-color: transparent;
-
 // ColorPicker
 // ---------------------------------------
 @agate-colorpicker-bg-color: rgba(0, 0, 0, 0.5);
-@agate-colorpicker-palette-shadow: @agate-popup-shadow;
+
+// ContextualPopup
+// ---------------------------------------
+@agate-contextual-popup-bg-color:                   @agate-accent;
+@agate-contextual-popup-border-color:               @agate-contextual-popup-bg-color;
+@agate-contextual-popup-close-button-border-color:  transparent;
+@agate-contextual-popup-color:                      @agate-white;
 
 // Dropdown
 // ---------------------------------------
@@ -87,31 +86,25 @@
 
 // Drawer
 // ---------------------------------------
-@agate-drawer-bg-color: @agate-popup-bg-color;
 @agate-drawer-bg-image: @agate-popup-bg-image;
-@agate-drawer-border-color: @agate-popup-border-color;
 @agate-drawer-shadow: @agate-popup-shadow;
 
 // FullscreenPopup
 // ---------------------------------------
-@agate-fullscreenpopup-bg-color: @agate-popup-bg-color;
 @agate-fullscreenpopup-bg-image: @agate-bg-image;
 
 // Heading
 // ---------------------------------------
 @agate-heading-border-color: fadeout(@agate-heading-text-color, 30%);
-@agate-heading-text-color: @agate-text-color;
 @agate-heading-accent-color: @agate-accent;
-
-// Icon
-// ---------------------------------------
-@agate-icon-color: @agate-text-color;
 
 // ImageItem
 // ---------------------------------------
 @agate-imageitem-border-color: transparent;
 @agate-imageitem-focus-border-color: @agate-accent;
 @agate-imageitem-focus-bg-color: @agate-background-focus;
+@agate-imageitem-caption-overlay-text-color: @agate-white;
+@agate-imageitem-caption-overlay-opacity: 0.5;
 
 // Input
 // ---------------------------------------
@@ -123,16 +116,16 @@
 
 // Item
 // ---------------------------------------
-@agate-item-color:           @agate-text-color;
-@agate-item-label-color:     @agate-accent;
-@agate-item-focus-border-color: @agate-accent;
-@agate-item-focus-color:     @agate-item-color;
-@agate-item-selected-color:  @agate-item-label-color;
-@agate-item-selected-outline: 5px solid @agate-item-focus-bg-color;
+@agate-item-color:                        @agate-text-color;
+@agate-item-label-color:                  @agate-accent;
+@agate-item-focus-color:                  @agate-item-color;
+@agate-item-focus-bg-color:               transparent;
+@agate-item-focus-border-color:           @agate-accent;
+@agate-item-selected-border-color:        @agate-accent;
+@agate-item-selected-color:               @agate-item-label-color;
 
 // LabeledIconButton
 // ---------------------------------------
-@agate-labelediconbutton-label-color: @agate-text-color;
 @agate-labelediconbutton-label-focus-color: @agate-accent;
 
 // Panels
@@ -155,10 +148,9 @@
 @agate-picker-active-color: inherit;
 @agate-picker-active-bg-color: @agate-accent;
 @agate-picker-active-bg-image: @agate-gradient;
-@agate-picker-item-top-bg-color: none;
-@agate-picker-item-top-bg-image: none;
-@agate-picker-item-bottom-bg-color: none;
-@agate-picker-item-bottom-bg-image: none;
+@agate-picker-item-bg-color: transparent;
+@agate-picker-item-decrement-bg-image: none;
+@agate-picker-item-increment-bg-image: none;
 @agate-picker-item-focus-color: @agate-spotlight-color;
 @agate-picker-item-focus-bg-color: @agate-accent;
 @agate-picker-item-focus-bg-image: inherit;
@@ -183,7 +175,6 @@
 // ProgressBar
 // ---------------------------------------
 @agate-progressbar-track-bg-color: @agate-slider-track-bg-color;
-@agate-progressbar-track-bg-image: @agate-slider-track-bg-image;
 @agate-progressbar-fill-bg-color: @agate-slider-fill-bg-color;
 @agate-progressbar-fill-bg-image: linear-gradient(to right, transparent, fade(white, 75%));
 @agate-progressbar-vertical-fill-bg-image: linear-gradient(to top, transparent, fade(white, 75%));
@@ -198,6 +189,10 @@
 @agate-radioitem-icon-selected-bg-color: @agate-radioitem-icon-bg-color;
 @agate-radioitem-icon-selected-color: @agate-accent;
 
+// Scroller
+// ---------------------------------------
+@agate-scroller-scrollbar-thumb-bg-color: #373737;
+
 // Slider
 // ---------------------------------------
 @agate-slider-color:          @agate-accent;
@@ -210,38 +205,16 @@
 
 // IncrementSlider
 // ---------------------------------------
-@agate-incrementslider-button-color: inherit;
 @agate-incrementslider-horizontal-button-decrement-border-color: @agate-button-border-color;
 @agate-incrementslider-horizontal-button-decrement-bg-color: @agate-button-bg-color;
 @agate-incrementslider-horizontal-button-decrement-bg-image: @agate-button-bg-image;
 @agate-incrementslider-horizontal-button-decrement-shadow: @agate-button-shadow;
-@agate-incrementslider-horizontal-button-decrement-focus-bg-color: @agate-button-focus-bg-color;
-@agate-incrementslider-horizontal-button-decrement-focus-bg-image: @agate-button-focus-bg-image;
-@agate-incrementslider-horizontal-button-increment-border-color: @agate-incrementslider-horizontal-button-decrement-border-color;
-@agate-incrementslider-horizontal-button-increment-bg-color: @agate-incrementslider-horizontal-button-decrement-bg-color;
-@agate-incrementslider-horizontal-button-increment-bg-image: @agate-incrementslider-horizontal-button-decrement-bg-image;
-@agate-incrementslider-horizontal-button-increment-shadow: @agate-incrementslider-horizontal-button-decrement-shadow;
-@agate-incrementslider-horizontal-button-increment-focus-bg-color: @agate-incrementslider-horizontal-button-decrement-focus-bg-color;
-@agate-incrementslider-horizontal-button-increment-focus-bg-image: @agate-incrementslider-horizontal-button-decrement-focus-bg-image;
-@agate-incrementslider-vertical-button-decrement-border-color: @agate-incrementslider-horizontal-button-decrement-border-color;
-@agate-incrementslider-vertical-button-decrement-bg-color: @agate-incrementslider-horizontal-button-decrement-bg-color;
-@agate-incrementslider-vertical-button-decrement-bg-image: @agate-incrementslider-horizontal-button-decrement-bg-image;
-@agate-incrementslider-vertical-button-decrement-shadow: @agate-incrementslider-horizontal-button-decrement-shadow;
-@agate-incrementslider-vertical-button-decrement-focus-bg-color: @agate-incrementslider-horizontal-button-decrement-focus-bg-color;
-@agate-incrementslider-vertical-button-decrement-focus-bg-image: @agate-incrementslider-horizontal-button-decrement-focus-bg-image;
-@agate-incrementslider-vertical-button-increment-border-color: @agate-incrementslider-horizontal-button-decrement-border-color;
-@agate-incrementslider-vertical-button-increment-bg-color: @agate-incrementslider-horizontal-button-decrement-bg-color;
-@agate-incrementslider-vertical-button-increment-bg-image: @agate-incrementslider-horizontal-button-decrement-bg-image;
-@agate-incrementslider-vertical-button-increment-shadow: @agate-incrementslider-horizontal-button-decrement-shadow;
-@agate-incrementslider-vertical-button-increment-focus-bg-color: @agate-incrementslider-horizontal-button-decrement-focus-bg-color;
-@agate-incrementslider-vertical-button-increment-focus-bg-image: @agate-incrementslider-horizontal-button-decrement-focus-bg-image;
 
 // SliderButton
 // ---------------------------------------
 @agate-sliderbutton-color:          @agate-text-color;
 @agate-sliderbutton-bg-color:       @agate-slider-track-bg-color;
 @agate-sliderbutton-bg-image:       @agate-slider-track-bg-image;
-@agate-sliderbutton-border-color:   transparent;
 @agate-sliderbutton-focus-color:    @agate-slider-focus-color;
 @agate-sliderbutton-focus-bg-color: @agate-slider-track-focus-bg-color;
 @agate-sliderbutton-focus-bg-image: @agate-slider-track-focus-bg-image;
@@ -286,6 +259,8 @@
 @agate-togglebutton-selected-color: @agate-button-selected-color;
 @agate-togglebutton-selected-bg-color:  @agate-button-selected-bg-color;
 
-// Scroller
+// Tooltip
 // ---------------------------------------
-@agate-scroller-scrollbar-thumb-bg-color: #373737;
+@agate-tooltip-bg-color:               @agate-darker-gray;
+@agate-tooltip-text-color:             @agate-white;
+@agate-tooltip-border-color:           @agate-dark-gray;

@@ -14,8 +14,8 @@ export default {
 	arrowharpoonright : 0x021C0,  // arrowharpoonright
 	ellipsis          : 0x022EF,  // ellipsis
 	check             : 0x02713,  // checkmark
-	arrowstraightup   : 0x0EFFEB,  // arrowstraightup
-	arrowuturn        : 0x0EFFEC,  // arrowuturn
+	arrowstraightup   : 0x0EFFEB, // arrowstraightup
+	arrowuturn        : 0x0EFFEC, // arrowuturn
 	arrowlargedown    : 0x0EFFED, // caret_down_large
 	arrowlargeup      : 0x0EFFEE, // caret_up_large
 	arrowlargeleft    : 0x0EFFEF, // caret_left_large
@@ -119,7 +119,33 @@ export default {
 	expand            : 0x0F00D3, // expand
 	radio             : 0x0F00D4, // radio
 	rearscreen        : 0x0F00D5, // rear_screen
-	weather           : 0x0F00D6  // weather
+	weather           : 0x0F00D6, // weather
+	fullscreen        : 0x0F00E1, // fullscreen
+	menu              : 0x0F00E2, // menu
+	history           : 0x0F00E3, // history
+	browser           : 0x0F00E4, // browser
+	lock              : 0x0F00E5, // lock
+	search2           : 0x0F00E6, // search2
+	bookmark          : 0x0F00E7, // bookmark
+	star              : 0x0F00E8, // star_full
+	starhollow        : 0x0F00E9, // star_empty
+	starhalf          : 0x0F00EA, // star_half
+	refresh           : 0x0F00EB, // refresh
+	time              : 0x0F00E3, // time
+	pausebold         : 0x0F002D, // pause2
+	playbold          : 0x0F002E, // play2
+	controls          : 0x0F00EC, // controls
+	diagnostics       : 0x0F00ED, // diagnostics
+	mapbox            : 0x0F00EE, // mapbox
+	displaycontrol    : 0x0F00EF, // displaycontrol
+	controlleft       : 0x0F00F0, // controlleft
+	controlright      : 0x0F00F1, // controlright
+	mainpage          : 0x0F00F2, // mainpage
+	playlist          : 0x0F00F3, // playlist
+	resume            : 0x0F00F4, // resume
+	trailer           : 0x0F00F5, // trailer
+	plusbold          : 0x0F00F6, // plus2
+	minusbold         : 0x0F00F7  // minus2
 };
 
 // Deprecated icon list from `Moonstone-Agate.ttf` for reference

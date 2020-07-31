@@ -245,6 +245,32 @@ const IconBase = kind({
  * radio
  * rearscreen
  * weather
+ * fullscreen
+ * menu
+ * history
+ * browser
+ * lock
+ * search2
+ * bookmark
+ * star
+ * hollowstar
+ * halfstar
+ * refresh
+ * time
+ * pausebold
+ * playbold
+ * controls
+ * diagnostics
+ * mapbox
+ * displaycontrol
+ * controlleft
+ * controlright
+ * mainpage
+ * playlist
+ * resume
+ * trailer
+ * plusbold
+ * minusbold
  * ```
  *
  * @name iconList

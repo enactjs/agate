@@ -42,6 +42,11 @@
 		border-width: @agate-item-border-width;
 		border-color: @agate-item-border-color;
 		color: @agate-item-color;
+		background-color: @agate-item-bg-color;
+
+		&:last-child {
+			border-bottom-color: transparent;
+		}
 
 		.itemContent {
 			.label   {
@@ -75,6 +80,10 @@
 			}
 		}
 
+		.slotAfter {
+			font-size: @agate-item-sub-text-size;
+		}
+
 		&.selected {
 			color: @agate-item-selected-color;
 		}
@@ -104,5 +113,34 @@
 				}
 			}
 		});
+
+		&.selected {
+			background-color: @agate-item-selected-bg-color;
+			border-color: @agate-item-selected-border-color;
+			color: @agate-item-focus-color;
+
+			&::before {
+				content: "";
+				height: @agate-indicator-height;
+				width: @agate-indicator-height;
+				background-color: @agate-indicator-bg-color;
+				border-radius: @agate-indicator-border-radius;
+				align-self: @agate-indicator-align-self;
+				margin-right: @agate-indicator-margin-right;
+			}
+
+			// Selected+Focus colors use both sets of colors
+			.focus({
+				border-color: @agate-item-selected-border-color;
+				background-color: @agate-item-focus-bg-color;
+				color: @agate-item-focus-color;
+
+				.itemContent {
+					.label {
+						color: @agate-item-focus-color;
+					}
+				}
+			});
+		}
 	});
 }
