@@ -1,0 +1,29 @@
+// Times.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
+
+.times {
+	.applySkins({
+
+
+	//.agate-text-base(@agate-mediaplayer-times-text-size);
+	//.agate-font-number();
+
+	white-space: nowrap;
+	min-width: 50px; // @agate-mediaplayer-times-min-width;
+
+	> * {
+		display: inline-block;
+	}
+
+	.separator {
+		padding: 0 1ex;
+	}
+
+	:global(.enact-locale-right-to-left) & {
+		direction: ltr;
+	}
+	})
+}

@@ -1,0 +1,45 @@
+// Feedback.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
+
+.applySkins({
+.feedback {
+	display: inline-block;
+	-webkit-margin-end: @agate-video-slider-tooltip-gutter-width;
+
+	&.hidden {
+		display: none;
+	}
+
+	> * {
+		display: inline-block;
+		margin: 0;
+		-webkit-margin-end: @agate-video-slider-tooltip-gutter-width;
+
+		&:last-child {
+			-webkit-margin-end: 0;
+		}
+	}
+
+	.message {
+		//.agate-font({
+			font-weight: normal; //@agate-video-feedback-message-font-weight;
+		//});
+		font-weight: normal; // @agate-video-feedback-message-font-weight;
+	}
+
+	.icon {
+		font-size: @agate-video-feedback-icon-font-size;
+		height: inherit;  // Use the height and line-height from the parent element to always middle align the icon, regardless of the container's size
+		line-height: inherit;
+		vertical-align: bottom;
+
+
+			color: inherit;
+
+	}
+}
+
+});

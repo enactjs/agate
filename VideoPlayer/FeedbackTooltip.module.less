@@ -1,0 +1,106 @@
+// FeedbackTooltip.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
+.applySkins({
+.feedbackTooltip {
+	position: absolute;
+	bottom: @agate-video-slider-tooltip-position-bottom;
+
+	&.shift {
+		//bottom: @agate-video-slider-tooltip-shift-position-bottom;
+
+		.content {
+			position: absolute;
+			.position(auto, 0, 0, 0);
+		}
+	}
+
+	&.hidden {
+		display: none;
+	}
+
+	.thumbnail,
+	.content {
+		pointer-events: none;
+		will-change: transform;
+	}
+
+	.thumbnail {
+		border-width: @agate-video-slider-tooltip-thumbnail-border-width;
+		border-style: solid;
+		border-radius: 0;
+		overflow: hidden;
+		transition: opacity 250ms;
+
+		.image {
+			margin: 0;
+			width: 30px;// @agate-video-slider-tooltip-thumbnail-width;
+			height: 30px; // @agate-video-slider-tooltip-thumbnail-height;
+		}
+	}
+
+	&.thumbnailDeactivated {
+		.thumbnail {
+			//opacity: @agate-video-slider-tooltip-deactivated-thumbnail-opacity;
+		}
+	}
+
+	.content {
+		//.agate-font({
+			font-size: 30px; // @agate-video-slider-tooltip-font-size;
+			font-weight: normal; // @agate-video-slider-tooltip-font-weight;
+		//});
+		//.agate-font-number();
+		//font-size: @agate-video-slider-tooltip-font-size;
+		//font-weight: @agate-video-slider-tooltip-font-weight;
+		//line-height: @agate-video-slider-tooltip-line-height;
+		white-space: nowrap;
+		text-align: center;
+		//margin-bottom: @agate-video-slider-tooltip-margin-bottom;
+	}
+
+	.alignmentContainer {
+		position: relative;
+		right: 50%;
+	}
+
+	.arrowContainer {
+		position: absolute;
+		left: 0;
+		right: 0;
+
+		&.hidden {
+			display: none;
+		}
+
+		.arrow {
+			margin: auto;
+			width: 0;
+			height: 0;
+			//border-top: @agate-video-slider-tooltip-arrow-border-top solid;
+			//border-right: @agate-video-slider-tooltip-arrow-border-left-right solid;
+			//border-left: @agate-video-slider-tooltip-arrow-border-left-right solid;
+		}
+	}
+
+
+		.thumbnail {
+			border-color: red; //@agate-video-slider-tooltip-thumbnail-border-color;
+		}
+
+		.arrow {
+			border-top-color: red; // @agate-video-slider-tooltip-thumbnail-border-color;
+			border-right-color: transparent;
+			border-left-color: transparent;
+		}
+
+		.content {
+			color: @agate-light-gray;
+			text-shadow: none; //@agate-mediaplayer-slider-tooltip-text-shadow;
+		}
+
+}
+
+});
