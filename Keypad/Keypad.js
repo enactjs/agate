@@ -45,6 +45,7 @@ const KEY_LIST = [
  *
  * @class Key
  * @memberof agate/Keypad.Key
+ * @ui
  * @public
  */
 const Key = kind({
@@ -182,7 +183,6 @@ const KeypadBase = kind({
  * @class Keypad
  * @memberof agate/Keypad
  * @extends agate/Keypad.KeypadBase
- * @mixes agate/Input
  * @ui
  * @public
  */
