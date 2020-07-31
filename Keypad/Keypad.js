@@ -309,7 +309,7 @@ class Keypad extends React.Component {
 		this.setState({
 			keypadInput: newKeypadInput
 		});
-	};
+	}
 
 	render () {
 		const {disabled} = this.props;
