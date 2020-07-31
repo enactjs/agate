@@ -1,7 +1,14 @@
 /* eslint-disable react/jsx-no-bind */
 
-/*
- * A keypad used to display a sequence of numbers and buttons, like a keyboard.
+/**
+ * Provides Agate-themed keypad components and behaviors. Used to display a sequence of numbers and buttons, like a keyboard.
+ *
+ * @example
+ * <Keypad />
+ *
+ * @module agate/Keypad
+ * @exports Keypad
+ * @exports KeypadBase
  */
 
 import {handle, forward, adaptEvent} from '@enact/core/handle';
@@ -11,7 +18,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from '../Button';
-import Input from '../Input';
 
 import $L from '../internal/$L';
 
@@ -34,18 +40,47 @@ const KEY_LIST = [
 	{text: 'arrowleftturn', subtext: ''}
 ];
 
-/*
- * A key used inside a Keypad Layout component.
+/**
+ * Renders an Agate-styled Key button.
+ *
+ * @class Key
+ * @memberof agate/Keypad
+ * @public
  */
 const Key = kind({
 	name: 'Key',
 
 	propTypes: {
+		/**
+		 * Applies a disabled style and the control becomes non-interactive.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		disabled: PropTypes.bool,
-		// Event callback fired when this button is clicked. Includes the 'key' key in its event
-		// payload to let the clicker know what was clicked inside their callback.
+
+		/**
+		 * Called when this button is clicked. Includes the 'key' key in its event payload to let the clicker know what was clicked inside their callback.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
 		onKeyButtonClick: PropTypes.func,
+
+		/**
+		 * Text displayed below the number/icon/symbol on the key.
+		 *
+		 * @type {String}
+		 */
 		subtext: PropTypes.string,
+
+		/**
+		 * Text displayed in the center of the key.
+		 *
+		 * @type {String}
+		 */
 		text: PropTypes.string
 	},
 
@@ -70,15 +105,15 @@ const Key = kind({
 		)
 	},
 
-	render: ({children, textComponent, subtextComponent, ...rest}) => {
+	render: ({children, subtextComponent, textComponent, ...rest}) => {
 		delete rest.onKeyButtonClick;
 		return (
 			<div className={css.keyContainer}>
 				<Button
 					{...rest}
-					size="large"
 					css={css}
 					icon={children}
+					size="large"
 				>
 					{textComponent}
 					{subtextComponent}
@@ -100,7 +135,22 @@ const KeypadBase = kind({
 	name: 'Key',
 
 	propTypes: {
+		/**
+		 * Applies a disabled style and the control becomes non-interactive.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		disabled: PropTypes.bool,
+
+		/**
+		 * Called when a button is clicked. Includes the 'key' key in its event payload, updates the state and the input value accordingly.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
 		handleInputValue: PropTypes.func
 	},
 
@@ -111,18 +161,18 @@ const KeypadBase = kind({
 
 	render: ({handleInputValue, disabled, ...rest}) => {
 		return (
-			<Layout align="center end" wrap {...rest} inline className={css.keypad}>
+			<Layout {...rest} align="center end" className={css.keypad} inline wrap>
 				{KEY_LIST.map((keyText, rowIndex) => {
 					return (
 						<Cell
 							aria-label={keyText.text === 'arrowleftturn' ? $L('Back Space') : keyText.text}
-							shrink
 							component={Key}
 							disabled={disabled}
 							key={`key${rowIndex}-${keyText.text}`}
 							onKeyButtonClick={() => handleInputValue(keyText.text)}
-							text={keyText.text === 'arrowleftturn' || keyText.text === 'phone' ? null : keyText.text}
+							shrink
 							subtext={keyText.subtext}
+							text={keyText.text === 'arrowleftturn' || keyText.text === 'phone' ? null : keyText.text}
 						>
 							{keyText.text === 'arrowleftturn' || keyText.text === 'phone' ? keyText.text : null}
 						</Cell>
@@ -145,23 +195,49 @@ const KeypadBase = kind({
  */
 class Keypad extends React.Component {
 	static propTypes = /** @lends agate/Keypad.prototype */ {
+		/**
+		 * Applies a disabled style and the control becomes non-interactive.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		disabled: PropTypes.bool,
+
+		/**
+		 * Called when a button is clicked. Includes the 'key' key in its event payload, updates the state and the input value accordingly.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
 		handleInputValue: PropTypes.func,
+
+		/**
+		 * Called when the input value is changed.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onChange: PropTypes.func,
+
+		/**
+		 * The value of the input.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		value: PropTypes.string
 	}
 
 	constructor (props) {
 		super(props);
+
 		this.state = {
 			keypadInput: '',
 			charIndex: 0
 		};
-	}
-
-	getCharIndex = (e) => {
-		this.setState({
-			charIndex: e.target.selectionStart
-		});
 	}
 
 	handleInputValue = (keyValue) => {
@@ -231,34 +307,23 @@ class Keypad extends React.Component {
 				break;
 		}
 
+		if (keypadInput !== newKeypadInput) {
+			this.props.onChange({value: newKeypadInput});
+		}
+
 		this.setState({
 			keypadInput: newKeypadInput
 		});
 	};
 
 	render () {
-		const {handleInputValue, getCharIndex} = this,
-			{disabled} = this.props,
-			{keypadInput} = this.state;
+		const {handleInputValue} = this;
+		const {disabled} = this.props;
 
 		return (
-			<React.Fragment>
-				<KeypadBase handleInputValue={handleInputValue} disabled={disabled} />
-				<Input
-					className={css.keypadInput}
-					css={css}
-					onClick={getCharIndex}
-					onKeyDown={(e) => handleInputValue(e.key)}
-					onKeyUp={getCharIndex}
-					type="tel"
-					value={keypadInput}
-				/>
-			</React.Fragment>
+			<KeypadBase handleInputValue={handleInputValue} disabled={disabled} />
 		);
 	}
 }
 
 export default Keypad;
-export {
-	KeypadBase
-};

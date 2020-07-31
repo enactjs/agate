@@ -1,3 +1,4 @@
+import {action} from '@enact/storybook-utils/addons/actions';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -8,9 +9,8 @@ storiesOf('Agate', module)
 		'Keypad',
 		() => {
 			return (
-				<div>
-					<Keypad />
-				</div>);
+				<Keypad onChange={action('onChange')} />
+			);
 		},
 		{
 			info: {
