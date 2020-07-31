@@ -44,14 +44,14 @@ const KEY_LIST = [
  * Renders an Agate-styled Key button.
  *
  * @class Key
- * @memberof agate/Keypad.Key
+ * @memberof agate/Keypad
  * @ui
  * @public
  */
 const Key = kind({
 	name: 'Key',
 
-	propTypes: {
+	propTypes: /** @lends agate/Keypad.Key.prototype */ {
 		/**
 		 * Called when this button is clicked. Includes the 'key' key in its event payload to let the clicker know what was clicked inside their callback.
 		 *
@@ -121,14 +121,15 @@ const Key = kind({
  * The basic Layout of a Keypad component.
  *
  * @class KeypadBase
- * @memberof agate/Keypad.KeypadBase
+ * @memberof agate/Keypad
+ * @extends agate/Keypad.Key
  * @ui
  * @public
  */
 const KeypadBase = kind({
 	name: 'Key',
 
-	propTypes: {
+	propTypes: /** @lends agate/Keypad.KeypadBase.prototype */{
 		/**
 		 * Applies a disabled style and the control becomes non-interactive.
 		 *
@@ -187,7 +188,7 @@ const KeypadBase = kind({
  * @public
  */
 class Keypad extends React.Component {
-	static propTypes = /** @lends agate/Keypad.prototype */ {
+	static propTypes = /** @lends agate/Keypad.Keypad.prototype */ {
 		/**
 		 * Applies a disabled style and the control becomes non-interactive.
 		 *
@@ -320,3 +321,6 @@ class Keypad extends React.Component {
 }
 
 export default Keypad;
+export {
+	Keypad
+};
