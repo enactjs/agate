@@ -1,124 +1,6 @@
 // Full List (Hash) of Agate Supported Icons
 //
 
-const iconListSilicon = {
-	plus              : 0x002D,   // plus
-	arrowleft         : 0x2190,   // arrowleft
-	arrowup           : 0x2191,   // arrowup
-	arrowturnleft     : 0x21B0,   // arrowturnleft
-	arrowturnright    : 0x21B1,   // arrowturnright
-	arrowuturn        : 0x21B1,   // arrowuturn
-	minus             : 0x2212,   // minus
-	ellipsis          : 0x022EF,  // ellipsis
-	backspace         : 0x02408,  // backspace
-	triangle          : 0x025B2,  // triangle
-	trianglehollow    : 0x025B3,  // trianglehollow
-	circle            : 0x025EF,  // circle
-	check             : 0x02713,  // check
-	square            : 0x02B1B,  // square
-	closex            : 0xEFFF5,  // closex
-	rewind            : 0xF0020,  // rewind
-	previousrewind    : 0xF0021,  // previousrewind
-	previous          : 0xF0022,  // previous
-	stop              : 0xF0023,  // stop
-	pause             : 0xF0024,  // pause
-	play              : 0xF0025,  // play
-	next              : 0xF0026,  // next
-	nextfastforward   : 0xF0027,  // nextfastforward
-	fastforward       : 0xF0028,  // fastforward
-	repeat            : 0xF0029,  // repeat
-	shuffle           : 0xF002A,  // shuffle
-	list              : 0xF002B,  // list
-	volumemute        : 0xF002C,  // volumemute
-	volumelow         : 0xF002D,  // volumelow
-	volumehigh        : 0xF002E,  // volumehigh
-	callaccept        : 0xF0060,  // callaccept
-	calldecline       : 0xF0061,  // calldecline
-	calldialing       : 0xF0062,  // calldialing
-	callmissed        : 0xF0063,  // callmissed
-	callreceiving     : 0xF0064,  // callreceiving
-	devicesetting     : 0xF0065,  // devicesetting
-	headset           : 0xF0066,  // headset
-	keypad            : 0xF0067,  // keypad
-	mic               : 0xF0068,  // mic
-	micmute           : 0xF0069,  // micmute
-	seat              : 0xF00B0,  // seat
-	seatairdown       : 0xF00B1,  // seatairdown
-	seatairup         : 0xF00B2,  // seatairup
-	seatairupdown     : 0xF00B3,  // seatairupdown
-	seatheat          : 0xF00B4,  // seatheat
-	seatcool          : 0xF00B5,  // seatcool
-	frontdefroster    : 0xF00B6,  // frontdefroster
-	backdefroster     : 0xF00B7,  // backdefroster
-	fan               : 0xF00B8,  // fan
-	fanhigh           : 0xF00B9,  // fanhigh
-	fanlow            : 0xF00BA,  // fanlow
-	search            : 0xF00E1,  // search
-	zoomin            : 0xF00E1,  // zoomin
-	zoomout           : 0xF00E1,  // zoomout
-	car1              : 0xF00E1,  // car1
-	car2              : 0xF00E1,  // car2
-	carupdate         : 0xF00E1,  // carupdate
-	cardiagnostics    : 0xF00E1,  // cardiagnostics
-	carcharging       : 0xF00E1,  // carcharging
-	carvalet          : 0xF00E1,  // carvalet
-	garagemode        : 0xF00EA,  // garagemode
-	alert             : 0xF00EB,  // alert
-	cone              : 0xF00EC,  // cone
-	map               : 0xF00ED,  // map
-	chargingstation   : 0xF00EE,  // chargingstation
-	gps               : 0xF00EF,  // gps
-	dashboard         : 0xF0110,  // dashboard
-	connection        : 0xF0111,  // connection
-	music             : 0xF0112,  // music
-	gear              : 0xF0113,  // gear
-	wifi              : 0xF0114,  // wifi
-	bluetooth         : 0xF0115,  // bluetooth
-	remote            : 0xF0116,  // remote
-	update            : 0xF0117,  // update
-	light             : 0xF0118,  // light
-	thumbs            : 0xF0119,  // thumbs
-	games             : 0xF011A,  // games
-	home              : 0xF011B,  // home
-	lock              : 0xF011C,  // lock
-	unlock            : 0xF011D,  // unlock
-	trash             : 0xF011E,  // trash
-	coffee            : 0xF011F,  // coffee
-	radio             : 0xF0120,  // radio
-	schedule          : 0xF0121,  // schedule
-	message           : 0xF0122,  // message
-	payment           : 0xF0123,  // payment
-	mail              : 0xF0124,  // mail
-	screenshare       : 0xF0125,  // screenshare
-	photo             : 0xF0126,  // photo
-	edit              : 0xF0127,  // edit
-	video             : 0xF0128,  // video
-	browser           : 0xF0129,  // browser
-	add               : 0xF012A,  // add
-	profile           : 0xF012B,  // profile
-	profilechange     : 0xF012C,  // profilechange
-	headset2          : 0xF0150,  // headset2
-	headsetbluetooth  : 0xF0151,  // headsetbluetooth
-	data              : 0xF0152,  // data
-	data5g            : 0xF0153,  // data5g
-	datalte           : 0xF0154,  // datalte
-	calling           : 0xF0155,  // calling
-	contact           : 0xF0156,  // contact
-	bluetoothmusic    : 0xF0157,  // bluetoothmusic
-	bluetoothsignalnone: 0xF0158,  // bluetoothsignalnone
-	bluetoothsignal1  : 0xF0159,  // bluetoothsignal1
-	bluetoothsignal2  : 0xF015A,  // bluetoothsignal2
-	bluetoothsignal3  : 0xF015B,  // bluetoothsignal3
-	bluetoothsignal4  : 0xF015C,  // bluetoothsignal4
-	battery0          : 0xF015D,  // battery0
-	battery1          : 0xF015E,  // battery1
-	battery2          : 0xF015F,  // battery2
-	battery3          : 0xF0160,  // battery3
-	battery4          : 0xF0161,  // battery4
-	batteryalert      : 0xF0162,  // batteryalert
-	batterycharging   : 0xF0163   // batterycharging
-};
-
 const iconList = {
 	circlelarge       : 0x025EF,  // shape: LARGE CIRCLE
 	squarelarge       : 0x02B1B,  // shape: BLACK SQUARE LARGE
@@ -162,7 +44,6 @@ const iconList = {
 	music             : 0x0F001D, // music
 	video             : 0x0F001E, // video
 	circle            : 0x0F001F, // circle
-	previous          : 0x0F0020, // previous
 	pairingdisplay    : 0x0F0021, // pairingdisplay
 	box               : 0x0F0022, // box
 	play              : 0x0F0023, // playicon
@@ -241,7 +122,6 @@ const iconList = {
 	fullscreen        : 0x0F00E1, // fullscreen
 	menu              : 0x0F00E2, // menu
 	history           : 0x0F00E3, // history
-	browser           : 0x0F00E4, // browser
 	lock              : 0x0F00E5, // lock
 	search2           : 0x0F00E6, // search2
 	bookmark          : 0x0F00E7, // bookmark
@@ -264,6 +144,83 @@ const iconList = {
 	trailer           : 0x0F00F5, // trailer
 	plusbold          : 0x0F00F6, // plus2
 	minusbold         : 0x0F00F7  // minus2
+};
+
+const iconListSilicon = {
+	...iconList,
+	arrowleft         : 0x2190,   // arrowleft
+	arrowturnleft     : 0x21B0,   // arrowturnleft
+	arrowturnright    : 0x21B1,   // arrowturnright
+	backspace         : 0x02408,  // backspace
+	triangle          : 0x025B2,  // triangle
+	trianglehollow    : 0x025B3,  // trianglehollow
+	rewind            : 0xF0030,  // rewind
+	rewindprevious    : 0xF0031,  // rewindprevious
+	stopsquare        : 0xF0032,  // stopsquare
+	fastforwardnext   : 0xF0033,  // fastforwardnext
+	fastforward       : 0xF0034,  // fastforward
+	callaccept        : 0xF00FE,  // callaccept
+	calldecline       : 0xF00FF,  // calldecline
+	calldialing       : 0xF0100,  // calldialing
+	callmissed        : 0xF0101,  // callmissed
+	callreceiving     : 0xF0102,  // callreceiving
+	devicesetting     : 0xF0103,  // devicesetting
+	headset           : 0xF0104,  // headset
+	keypad            : 0xF0105,  // keypad
+	mic               : 0xF0106,  // mic
+	micmute           : 0xF0107,  // micmute
+	car1              : 0xF0108,  // car1
+	car2              : 0xF0109,  // car2
+	carupdate         : 0xF010A,  // carupdate
+	cardiagnostics    : 0xF010B,  // cardiagnostics
+	carcharging       : 0xF010C,  // carcharging
+	carvalet          : 0xF010D,  // carvalet
+	garagemode        : 0xF010E,  // garagemode
+	cone              : 0xF010F,  // cone
+	chargingstation   : 0xF0110,  // chargingstation
+	gps               : 0xF0111,  // gps
+	replay            : 0xF0112,  // replay
+	backward10        : 0xF0113,  // backward10
+	forward10         : 0xF0114,  // forward10
+	remote            : 0xF0116,  // remote
+	light             : 0xF0118,  // light
+	thumbs            : 0xF0119,  // thumbs
+	games             : 0xF011A,  // games
+	unlock            : 0xF011D,  // unlock
+	trash             : 0xF011E,  // trash
+	coffee            : 0xF011F,  // coffee
+	message           : 0xF0122,  // message
+	payment           : 0xF0123,  // payment
+	mail              : 0xF0124,  // mail
+	screenshare       : 0xF0125,  // screenshare
+	photo             : 0xF0126,  // photo
+	add               : 0xF012A,  // add
+	userchange        : 0xF012C,  // userchange
+	seatcool          : 0xF012D,  // seatcool
+	fanhigh           : 0xF012E,  // fanhigh
+	fanlow            : 0xF012F,  // fanlow
+	zoomin            : 0xF0130,  // zoomin
+	zoomout           : 0xF0131,  // zoomout
+	headset2          : 0xF0150,  // headset2
+	headsetbluetooth  : 0xF0151,  // headsetbluetooth
+	data              : 0xF0152,  // data
+	data5g            : 0xF0153,  // data5g
+	datalte           : 0xF0154,  // datalte
+	calling           : 0xF0155,  // calling
+	contact           : 0xF0156,  // contact
+	bluetoothmusic    : 0xF0157,  // bluetoothmusic
+	bluetoothsignalnone: 0xF0158,  // bluetoothsignalnone
+	bluetoothsignal1  : 0xF0159,  // bluetoothsignal1
+	bluetoothsignal2  : 0xF015A,  // bluetoothsignal2
+	bluetoothsignal3  : 0xF015B,  // bluetoothsignal3
+	bluetoothsignal4  : 0xF015C,  // bluetoothsignal4
+	battery0          : 0xF015D,  // battery0
+	battery1          : 0xF015E,  // battery1
+	battery2          : 0xF015F,  // battery2
+	battery3          : 0xF0160,  // battery3
+	battery4          : 0xF0161,  // battery4
+	batteryalert      : 0xF0162,  // batteryalert
+	batterycharging   : 0xF0163   // batterycharging
 };
 
 // Deprecated icon list from `Moonstone-Agate.ttf` for reference
