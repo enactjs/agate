@@ -11,7 +11,7 @@
  * @exports KeypadBase
  */
 
-import {handle, forward, adaptEvent} from '@enact/core/handle';
+import {adaptEvent, forward, handle} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import Layout, {Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
@@ -101,6 +101,7 @@ const Key = kind({
 
 	render: ({children, subtextComponent, textComponent, ...rest}) => {
 		delete rest.onKeyButtonClick;
+
 		return (
 			<div className={css.keyContainer}>
 				<Button
@@ -154,7 +155,7 @@ const KeypadBase = kind({
 		className: 'keypad'
 	},
 
-	render: ({handleInputValue, disabled, ...rest}) => {
+	render: ({disabled, handleInputValue, ...rest}) => {
 		return (
 			<Layout {...rest} align="center end" className={css.keypad} inline wrap>
 				{KEY_LIST.map((keyText, rowIndex) => {
@@ -229,13 +230,13 @@ class Keypad extends React.Component {
 		super(props);
 
 		this.state = {
-			keypadInput: '',
-			charIndex: 0
+			charIndex: 0,
+			keypadInput: ''
 		};
 	}
 
 	handleInputValue = (keyValue) => {
-		const {keypadInput, charIndex} = this.state;
+		const {charIndex, keypadInput} = this.state;
 		let newKeypadInput = keypadInput;
 		let newCharIndex;
 
@@ -311,11 +312,11 @@ class Keypad extends React.Component {
 	};
 
 	render () {
-		const {handleInputValue} = this;
 		const {disabled} = this.props;
+		const {handleInputValue} = this;
 
 		return (
-			<KeypadBase handleInputValue={handleInputValue} disabled={disabled} />
+			<KeypadBase disabled={disabled} handleInputValue={handleInputValue} />
 		);
 	}
 }
