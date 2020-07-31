@@ -44,6 +44,7 @@ const iconList = {
 	music             : 0x0F001D, // music
 	video             : 0x0F001E, // video
 	circle            : 0x0F001F, // circle
+	previous          : 0x0F0020, // previous
 	pairingdisplay    : 0x0F0021, // pairingdisplay
 	box               : 0x0F0022, // box
 	play              : 0x0F0023, // playicon
@@ -122,6 +123,7 @@ const iconList = {
 	fullscreen        : 0x0F00E1, // fullscreen
 	menu              : 0x0F00E2, // menu
 	history           : 0x0F00E3, // history
+	browser           : 0x0F00E4, // browser
 	lock              : 0x0F00E5, // lock
 	search2           : 0x0F00E6, // search2
 	bookmark          : 0x0F00E7, // bookmark
