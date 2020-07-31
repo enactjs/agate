@@ -7,9 +7,10 @@ storiesOf('Agate', module)
 	.add(
 		'Keypad',
 		() => {
-			return (<div>
-				<Keypad />
-			</div>);
+			return (
+				<div>
+					<Keypad />
+				</div>);
 		},
 		{
 			info: {
