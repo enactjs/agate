@@ -44,22 +44,13 @@ const KEY_LIST = [
  * Renders an Agate-styled Key button.
  *
  * @class Key
- * @memberof agate/Keypad
+ * @memberof agate/Keypad.Key
  * @public
  */
 const Key = kind({
 	name: 'Key',
 
 	propTypes: {
-		/**
-		 * Applies a disabled style and the control becomes non-interactive.
-		 *
-		 * @type {Boolean}
-		 * @default false
-		 * @public
-		 */
-		disabled: PropTypes.bool,
-
 		/**
 		 * Called when this button is clicked. Includes the 'key' key in its event payload to let the clicker know what was clicked inside their callback.
 		 *
@@ -73,6 +64,7 @@ const Key = kind({
 		 * Text displayed below the number/icon/symbol on the key.
 		 *
 		 * @type {String}
+		 * @public
 		 */
 		subtext: PropTypes.string,
 
@@ -80,6 +72,7 @@ const Key = kind({
 		 * Text displayed in the center of the key.
 		 *
 		 * @type {String}
+		 * @public
 		 */
 		text: PropTypes.string
 	},
@@ -127,7 +120,7 @@ const Key = kind({
  * The basic Layout of a Keypad component.
  *
  * @class KeypadBase
- * @memberof agate/Keypad
+ * @memberof agate/Keypad.KeypadBase
  * @ui
  * @public
  */
