@@ -1,7 +1,7 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Keypad from '../../../../Keypad';
+import Keypad from '@enact/agate/Keypad';
 
 storiesOf('Agate', module)
 	.add(
