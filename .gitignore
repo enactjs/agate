@@ -68,6 +68,7 @@ typings/
 
 # Build output
 dist
+build
 
 # Testing
 errorShots
