@@ -6,6 +6,7 @@
 @import "~@enact/spotlight/styles/mixins.less";
 @import "~@enact/ui/styles/mixins.less";
 @import "../styles/variables.less";
+@import "./internal/utils.less";
 
 .position (@trbl) when (length(@trbl) = 4) {
 	top: extract(@trbl, 1);
@@ -20,4 +21,30 @@
 	line-height: @agate-item-height;
 	padding-left: @agate-item-side-outset;
 	padding-right: @agate-item-side-outset;
+}
+
+.active(@rules; @target) when (isruleset(@rules)) and (@target = parent) {
+	.spottable({
+		&:active {
+			@rules();
+		}
+	}, @target);
+}
+
+.active(@rules) when (isruleset(@rules)) {
+	.spottable({
+		&:active {
+			@rules();
+		}
+	});
+}
+
+.agate-body-text() {
+	a:link,
+	a:visited,
+	a:hover,
+	a:active {
+		color: inherit;
+		text-decoration: none;
+	}
 }

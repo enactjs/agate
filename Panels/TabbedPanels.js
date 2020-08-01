@@ -1,10 +1,11 @@
 import {adaptEvent, forward, handle} from '@enact/core/handle';
-import {Cell, Layout} from '@enact/ui/Layout';
-import {Changeable} from '@enact/ui/Changeable';
 import kind from '@enact/core/kind';
+import {Changeable} from '@enact/ui/Changeable';
+import {Cell, Layout} from '@enact/ui/Layout';
+import Slottable from '@enact/ui/Slottable';
+import {shape} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Slottable from '@enact/ui/Slottable';
 
 import TabGroup from '../TabGroup';
 
@@ -24,13 +25,19 @@ const TabbedPanelsBase = kind({
 	name: 'TabbedPanels',
 	propTypes: /** @lends agate/Panels.TabbedPanels.prototype */ {
 		afterTabs: PropTypes.node,
+		arranger: shape,
 		beforeTabs: PropTypes.node,
+		closeButtonAriaLabel: PropTypes.string,
 		css: PropTypes.object,
+		duration: PropTypes.number,
 		index: PropTypes.number,
+		noAnimation: PropTypes.bool,
 		noCloseButton: PropTypes.bool,
+		onApplicationClose: PropTypes.func,
+		onBack: PropTypes.func,
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 		tabPosition: PropTypes.string,
-		tabs: PropTypes.oneOfType([TabGroup])
+		tabs: PropTypes.array
 	},
 	defaultProps: {
 		index: 0,
@@ -63,7 +70,25 @@ const TabbedPanelsBase = kind({
 		className: ({css, orientation, styler, tabPosition}) => styler.append(tabPosition === 'after' ? css.reverse : '', orientation === 'vertical' ? css.column : ''),
 		tabOrientation: ({orientation}) => orientation === 'vertical' ? 'horizontal' : 'vertical'
 	},
-	render: ({afterTabs, beforeTabs, children, css, index, noCloseButton, onSelect, tabOrientation, tabPosition, tabs, ...rest}) => {
+	render: ({
+		afterTabs,
+		arranger,
+		beforeTabs,
+		children,
+		closeButtonAriaLabel,
+		css,
+		duration,
+		index,
+		noAnimation,
+		noCloseButton,
+		onApplicationClose,
+		onBack,
+		onSelect,
+		tabOrientation,
+		tabPosition,
+		tabs,
+		...rest
+	}) => {
 		return (
 			<Layout {...rest}>
 				<Cell shrink>
@@ -79,9 +104,15 @@ const TabbedPanelsBase = kind({
 					/>
 				</Cell>
 				<Cell
+					arranger={arranger}
 					className={css.panels}
+					closeButtonAriaLabel={closeButtonAriaLabel}
 					component={Panels}
+					duration={duration}
+					noAnimation={noAnimation}
 					noCloseButton={noCloseButton}
+					onApplicationClose={onApplicationClose}
+					onBack={onBack}
 					orientation={tabOrientation}
 					index={index}
 				>

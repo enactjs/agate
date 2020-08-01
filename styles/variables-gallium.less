@@ -14,6 +14,7 @@
 
 // Checkbox
 // ---------------------------------------
+@agate-checkbox-border-width: 0;
 @agate-checkbox-border-radius: 6px;
 @agate-checkbox-icon-font-size: 49px;
 
@@ -25,6 +26,13 @@
 // ColorPicker
 // ---------------------------------------
 @agate-colorpicker-palette-border-radius: @agate-button-height;
+
+// ContextualPopup
+// ---------------------------------------
+@agate-contextual-popup-border-radius:      36px;
+@agate-contextual-popup-padding-vertical:   18px;
+@agate-contextual-popup-padding-horizontal: 30px;
+@agate-contextual-popup-font-size:          30px;
 
 // Drawer
 // ---------------------------------------
@@ -38,6 +46,8 @@
 @agate-header-title-padding-right: 15px;
 @agate-header-title-font-size: 60px;
 @agate-header-title-text-indent: 0.05em;
+@agate-header-subtitle-padding: 9px 0 0 0;
+@agate-header-titleabove-padding: 0 0 9px 0;
 
 // Heading
 // ---------------------------------------
@@ -59,23 +69,40 @@
 @agate-icon-small-size: 28px;
 @agate-icon-smallest-size: 18px;
 
+// Input
+// ---------------------------------------
+@agate-input-icon-display: flex;
+@agate-input-icon-align: center;
+
+// ImageItem
+// ---------------------------------------
+@agate-imageitem-border-width: 6px;
+@agate-imageitem-caption-overlay-height: 90px;
+@agate-imageitem-caption-overlay-width: 339px;
+@agate-imageitem-caption-overlay-padding: 0 21px 6px 21px;
+@agate-imageitem-caption-overlay-font-size: 21px;
+@agate-imageitem-caption-overlay-line-height: 24px;
+@agate-imageitem-caption-overlay-text-align: left;
+
+// Indicator
+// ---------------------------------------
+@agate-indicator-display: none;
+
 // Item
 // ---------------------------------------
-@agate-item-font-size: 40px;
-@agate-item-font-weight: 500;
-@agate-item-label-font-size: 30px;
-@agate-item-side-outset: 32px;
-@agate-item-height: 90px;
-@agate-item-height-large: 120px;
-@agate-item-border-width: 3px;
+@agate-item-border-width:     3px;
+@agate-item-font-size:        40px;
+@agate-item-font-weight:      500;
+@agate-item-height:           90px;
+@agate-item-height-large:     120px;
+@agate-item-label-font-size:  30px;
+@agate-item-side-outset:      32px;
 
 // Panels
 // ---------------------------------------
-@agate-panel-v-padding: @agate-app-keepout;
 // @agate-panel-h-padding: (@agate-app-keepout - @agate-spotlight-outset);
 @agate-panel-h-padding: extract(@agate-panels-panel-padding, 2);
 @agate-panels-partial-width: 890px;
-@agate-panels-breadcrumb-height: 100%;
 @agate-panels-breadcrumb-width: 105px;
 @agate-panels-controls-top: (extract(@agate-panels-panel-padding, 1) + 41px);
 @agate-panels-controls-padding-start: 18px;
@@ -92,19 +119,18 @@
 
 // Popup
 // ---------------------------------------
-@agate-popup-min-width: 100%;
-@agate-popup-max-width: 100%;
-@agate-popup-border-width: 1px 0;
-@agate-popup-border-radius: 0;
-@agate-popup-border: 1px solid transparent;
-@agate-popup-padding: (@agate-component-spacing * 4) @agate-component-spacing;
-@agate-popup-title-padding: 0 (@agate-button-small-height) 0 0;
+@agate-popup-border-width: 3px;
+@agate-popup-border-radius: 20px;
+@agate-popup-border: 3px solid transparent;
+@agate-popup-padding: (@agate-component-spacing * 2.5) (@agate-component-spacing * 5);
+@agate-popup-closebutton-title-padding: 0 (@agate-button-small-height) 0 0;
 @agate-popup-body-padding: (@agate-component-spacing * 2);
 @agate-popup-body-margin: -@agate-component-spacing;  // Extend to the edge
 @agate-popup-body-border-radius: 0;
-@agate-popup-buttons-padding: 0 0 0 @agate-component-spacing;
+@agate-popup-buttons-padding: (2 * @agate-component-spacing) 0 0 0;
 @agate-popup-closebutton-position-left: auto;
 @agate-popup-closebutton-position-right: 0;
+@agate-popup-body-font-weight: bold;
 
 // PopupMenu
 // ---------------------------------------
@@ -125,7 +151,7 @@
 @agate-slider-knob-border-radius: (@agate-slider-knob-height / 2);
 @agate-slider-knob-resting-state-scale: 0.9;
 @agate-slider-knob-transform: @agate-translate-center scale(@agate-slider-knob-resting-state-scale);
-@agate-slider-knob-active-transform: @agate-translate-center scale(1);
+@agate-slider-active-knob-transform: @agate-translate-center scale(1);
 @agate-slider-border-radius: 3px;
 @agate-slider-horizontal-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (@agate-slider-knob-height / 2);
 @agate-slider-vertical-margin: 6px;
@@ -145,6 +171,7 @@
 @agate-incrementslider-vertical-button-decrement-border-width: @agate-incrementslider-horizontal-button-decrement-border-width;
 @agate-incrementslider-vertical-button-increment-border-radius: @agate-incrementslider-horizontal-button-decrement-border-radius;
 @agate-incrementslider-vertical-button-increment-border-width: @agate-incrementslider-horizontal-button-decrement-border-width;
+@agate-incrementslider-vertical-slider-padding: (((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale) + 3px) ((@agate-slider-height - @agate-slider-track-height) / 2);
 
 // RadioItem
 // ---------------------------------------
@@ -164,7 +191,6 @@
 // ---------------------------------------
 @agate-spinner-loading-border-radius: 999px;
 @agate-spinner-huge-loading-height: (@agate-spinner-huge-searching-height / 2);
-@agate-spinner-huge-loading-width: @agate-spinner-huge-loading-height;
 @agate-spinner-small-loading-height: (@agate-spinner-small-searching-height / 2);
 
 // Switch
@@ -176,8 +202,21 @@
 @agate-switch-icon-position-left: -9px;
 @agate-switch-selected-icon-position-left: ((@agate-switch-width - @agate-switch-height) + @agate-switch-icon-position-left);
 
+// ThumbnailItem
+// ---------------------------------------
+@agate-thumbnailitem-line-height: 39px;
+@agate-thumbnailitem-height: 120px;
+@agate-thumbnailitem-content-font-size: 27px;
+@agate-thumbnailitem-label-font-size: 24px;
+@agate-thumbnailitem-thumbnail-height: 60px;
+@agate-thumbnailitem-thumbnail-width: 60px;
+
 // ToggleButton
 // ---------------------------------------
 @agate-togglebutton-indicator-position: auto 33px 9px 33px;
 @agate-togglebutton-indicator-height: 4px;
 @agate-togglebutton-indicator-border-width: 1px;
+
+// Tooltip
+// ---------------------------------------
+@agate-tooltip-label-font-size: 27px;

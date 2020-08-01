@@ -11,7 +11,7 @@
  */
 
 import kind from '@enact/core/kind';
-import UiLabeledIcon from '@enact/ui/LabeledIcon';
+import {LabeledIconBase as UiLabeledIconBase, LabeledIconDecorator as UiLabeledIconDecorator} from '@enact/ui/LabeledIcon';
 import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
 import PropTypes from 'prop-types';
@@ -26,7 +26,7 @@ import componentCss from './LabeledIcon.module.less';
  *
  * @class LabeledIconBase
  * @memberof agate/LabeledIcon
- * @extends ui/LabeledIcon.LabeledIcon
+ * @extends ui/LabeledIcon.LabeledIconBase
  * @ui
  * @public
  */
@@ -55,7 +55,7 @@ const LabeledIconBase = kind({
 		publicClassNames: true
 	},
 
-	render: (props) => UiLabeledIcon.inline({
+	render: (props) => UiLabeledIconBase.inline({
 		iconComponent: Icon,
 		...props,
 		css: props.css
@@ -67,10 +67,12 @@ const LabeledIconBase = kind({
  *
  * @hoc
  * @memberof agate/LabeledIcon
+ * @mixes agate/LabeledIcon.LabeledIconDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const LabeledIconDecorator = compose(
+	UiLabeledIconDecorator,
 	Pure,
 	Skinnable
 );

@@ -12,7 +12,8 @@
 
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
-import UiLabeledIcon from '@enact/ui/LabeledIcon';
+import {LabeledIconBase as UiLabeledIconBase, LabeledIconDecorator as UiLabeledIconDecorator} from '@enact/ui/LabeledIcon';
+import compose from 'ramda/src/compose';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -28,7 +29,7 @@ const Button = Skinnable(ButtonBase);
  *
  * @class LabeledIconButtonBase
  * @memberof agate/LabeledIconButton
- * @extends ui/LabeledIcon.LabeledIcon
+ * @extends ui/LabeledIcon.LabeledIconBase
  * @ui
  * @public
  */
@@ -56,7 +57,8 @@ const LabeledIconButtonBase = kind({
 
 		/**
 		 * Provides a way to call special interface attention to this button. It will be "featured"
-		 * in some way by the theme's visual rules.
+		 * in some way by the theme's visual rules.  This property only has an effect when
+		 * `backgroundOpacity` is "opaque".
 		 *
 		 * @type {Boolean}
 		 * @public
@@ -120,7 +122,7 @@ const LabeledIconButtonBase = kind({
 		spriteCount,
 		...rest
 	}) => {
-		return UiLabeledIcon.inline({
+		return UiLabeledIconBase.inline({
 			...rest,
 			icon: (
 				<Button
@@ -143,10 +145,14 @@ const LabeledIconButtonBase = kind({
  *
  * @hoc
  * @memberof agate/LabeledIconButton
- * @mixes agate/Skinnable.Skinnable
+ * @mixes agate/Button.ButtonDecorator
+ * @mixes agate/LabeledIcon.LabeledIconDecorator
  * @public
  */
-const LabeledIconButtonDecorator = ButtonDecorator;
+const LabeledIconButtonDecorator = compose(
+	UiLabeledIconDecorator,
+	ButtonDecorator
+);
 
 /**
  * An Agate-styled icon button component with a label.

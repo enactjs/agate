@@ -24,12 +24,14 @@ import kind from '@enact/core/kind';
 import {extractAriaProps} from '@enact/core/util';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
+import IdProvider from '@enact/ui/internal/IdProvider';
 import Slottable from '@enact/ui/Slottable';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
+import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
 import {SliderBase} from '../Slider';
 import {emitChange} from '../Slider/utils';
@@ -122,7 +124,7 @@ const IncrementSliderBase = kind({
 		/**
 		* Sets the hint string read when focusing the decrement button.
 		*
-		* @default 'press ok button to decrease the value'
+		* @default 'press button to decrease the value'
 		* @type {String}
 		* @public
 		*/
@@ -164,7 +166,7 @@ const IncrementSliderBase = kind({
 		/**
 		* Sets the hint string read when focusing the increment button.
 		*
-		* @default 'press ok button to increase the value'
+		* @default 'press button to increase the value'
 		* @type {String}
 		* @public
 		*/
@@ -330,6 +332,21 @@ const IncrementSliderBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
+		 * Sets the point, as a proportion between 0 and 1, from which the slider is filled.
+		 *
+		 * Applies to both the slider's `value` and `backgroundProgress`. In both cases,
+		 * setting the value of `progressAnchor` will cause the slider to fill from that point
+		 * down, when `value` or `backgroundProgress` is proportionally less than the anchor, or up,
+		 * when `value` or `backgroundProgress` is proportionally greater than the anchor, rather
+		 * than always from the start of the slider.
+		 *
+		 * @type {Number}
+		 * @default 0
+		 * @public
+		 */
+		progressAnchor: PropTypes.number,
+
+		/**
 		 * Disables spotlight navigation into the component.
 		 *
 		 * @type {Boolean}
@@ -365,6 +382,7 @@ const IncrementSliderBase = kind({
 		min: 0,
 		noFill: false,
 		orientation: 'horizontal',
+		progressAnchor: 0,
 		spotlightDisabled: false,
 		step: 1
 	},
@@ -405,7 +423,23 @@ const IncrementSliderBase = kind({
 	},
 
 	computed: {
-		className: ({orientation, styler}) => styler.append(orientation)
+		className: ({orientation, styler}) => styler.append(orientation),
+		decrementDisabled: ({disabled, min, value = min}) => disabled || value <= min,
+		incrementDisabled: ({disabled, max, min, value = min}) => disabled || value >= max,
+		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel, min, value = min}) => {
+			if (decrementAriaLabel == null) {
+				decrementAriaLabel = $L('press button to decrease the value');
+			}
+
+			return `${valueText != null ? valueText : value} ${decrementAriaLabel}`;
+		},
+		incrementAriaLabel: ({'aria-valuetext': valueText, incrementAriaLabel, min, value = min}) => {
+			if (incrementAriaLabel == null) {
+				incrementAriaLabel = $L('press button to increase the value');
+			}
+
+			return `${valueText != null ? valueText : value} ${incrementAriaLabel}`;
+		}
 	},
 
 	render: ({active,
@@ -413,10 +447,14 @@ const IncrementSliderBase = kind({
 		'data-webos-voice-group-label': voiceGroupLabel,
 		backgroundProgress,
 		css,
+		decrementAriaLabel,
+		decrementDisabled,
 		decrementIcon,
 		disabled,
 		focused,
 		id,
+		incrementAriaLabel,
+		incrementDisabled,
 		incrementIcon,
 		knobStep,
 		max,
@@ -432,6 +470,7 @@ const IncrementSliderBase = kind({
 		onIncrementSpotlightDisappear,
 		onSpotlightDisappear,
 		orientation,
+		progressAnchor,
 		spotlightDisabled,
 		step,
 		value,
@@ -445,23 +484,22 @@ const IncrementSliderBase = kind({
 		delete rest.onSpotlightUp;
 
 		return (
-			<div {...rest}>
+			<div aria-hidden={ariaHidden} {...rest}>
 				<IncrementSliderButton
-					icon={decrementIcon}
-					aria-hidden={ariaHidden}
+					aria-controls={!incrementDisabled ? id : null}
+					aria-label={decrementAriaLabel}
 					className={css.decrementButton}
 					data-webos-voice-group-label={voiceGroupLabel}
-					disabled={disabled}
+					disabled={decrementDisabled}
+					icon={decrementIcon}
 					onTap={onDecrement}
 					onSpotlightDisappear={onDecrementSpotlightDisappear}
 					orientation={orientation}
-					role="decrement"
 					spotlightDisabled={spotlightDisabled}
 				/>
 				<Slider
 					{...ariaProps}
 					active={active}
-					aria-hidden={ariaHidden}
 					backgroundProgress={backgroundProgress}
 					css={css}
 					disabled={disabled}
@@ -478,19 +516,20 @@ const IncrementSliderBase = kind({
 					onSpotlightDisappear={onSpotlightDisappear}
 					orientation={orientation}
 					spotlightDisabled={spotlightDisabled}
+					progressAnchor={progressAnchor}
 					step={step}
 					value={value}
 				/>
 				<IncrementSliderButton
-					icon={incrementIcon}
-					aria-hidden={ariaHidden}
+					aria-controls={!decrementDisabled ? id : null}
+					aria-label={incrementAriaLabel}
 					className={css.incrementButton}
 					data-webos-voice-group-label={voiceGroupLabel}
-					disabled={disabled}
-					onTap={onIncrement}
+					disabled={incrementDisabled}
+					icon={incrementIcon}
 					onSpotlightDisappear={onIncrementSpotlightDisappear}
+					onTap={onIncrement}
 					orientation={orientation}
-					role="increment"
 					spotlightDisabled={spotlightDisabled}
 				/>
 			</div>
@@ -501,6 +540,7 @@ const IncrementSliderBase = kind({
 const IncrementSliderDecorator = compose(
 	Pure,
 	Changeable,
+	IdProvider({generateProp: null, prefix: 's_'}),
 	SliderBehaviorDecorator({emitSpotlightEvents: 'onSpotlightDirection'}),
 	Skinnable,
 	Slottable({slots: ['knob']})

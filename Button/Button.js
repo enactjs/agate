@@ -12,10 +12,10 @@
 
 import kind from '@enact/core/kind';
 import {cap} from '@enact/core/util';
-// import EnactPropTypes from '@enact/core/internal/prop-types';
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import Spottable from '@enact/spotlight/Spottable';
 import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
-// import ComponentOverride from '@enact/ui/ComponentOverride';
+import ComponentOverride from '@enact/ui/ComponentOverride';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -120,20 +120,21 @@ const ButtonBase = kind({
 
 		/**
 		 * Provides a way to call special interface attention to this button. It will be "featured"
-		 * in some way by the theme's visual rules.
+		 * in some way by the theme's visual rules.  This property only has an effect when
+		 * `backgroundOpacity` is "opaque".
 		 *
 		 * @type {Boolean}
 		 * @public
 		 */
 		highlighted: PropTypes.bool,
 
-		// /**
-		//  * The component used to render the icon.
-		//  *
-		//  * @type {Component}
-		//  * @public
-		//  */
-		// iconComponent: EnactPropTypes.component,
+		/**
+		 * The component used to render the icon.
+		 *
+		 * @type {Component}
+		 * @public
+		 */
+		iconComponent: EnactPropTypes.component,
 
 		/**
 		 * The position of this button in relation to other buttons.
@@ -166,13 +167,13 @@ const ButtonBase = kind({
 		 */
 		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
-		// /**
-		//  * The amount of sprite "cells" in the src image of the `icon` being supplied. This prop has no effect without `icon`.
-		//  *
-		//  * @type {Number}
-		//  * @public
-		//  */
-		// spriteCount: PropTypes.number,
+		/**
+		 * The amount of sprite "cells" in the src image of the `icon` being supplied. This prop has no effect without `icon`.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		spriteCount: PropTypes.number,
 
 		/**
 		 * The button type.
@@ -219,18 +220,17 @@ const ButtonBase = kind({
 				</React.Fragment>
 			);
 		},
-		// Temporary reversion until > alpha.11
-		// iconComponent: ({iconComponent, spriteCount}) => {
-		// 	// Don't burden basic HTML elements with the spriteCount prop (or other Icon-specific props)
-		// 	if (typeof iconComponent === 'string') return iconComponent;
+		iconComponent: ({iconComponent, spriteCount}) => {
+			// Don't burden basic HTML elements with the spriteCount prop (or other Icon-specific props)
+			if (typeof iconComponent === 'string') return iconComponent;
 
-		// 	return (
-		// 		<ComponentOverride
-		// 			component={iconComponent}
-		// 			spriteCount={spriteCount}
-		// 		/>
-		// 	);
-		// },
+			return (
+				<ComponentOverride
+					component={iconComponent}
+					spriteCount={spriteCount}
+				/>
+			);
+		},
 		style: ({animationDelay, badgeColor, style}) => ({
 			...style,
 			'--agate-button-animation-delay': animationDelay,
@@ -244,10 +244,10 @@ const ButtonBase = kind({
 		delete rest.animationDelay;
 		delete rest.backgroundOpacity;
 		delete rest.badge;
+		delete rest.badgeColor;
 		delete rest.highlighted;
 		delete rest.joinedPosition;
 		delete rest.selected;
-		// eslint-disable-next-line enact/prop-types
 		delete rest.spriteCount;
 		delete rest.type;
 

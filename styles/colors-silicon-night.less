@@ -1,0 +1,83 @@
+// Skin colors definitions
+//
+
+//
+// This color definition file is based on the "silicon-day" color file.
+// It's only necessary to include values that are different from day here,
+// as these are overrides to the "base" layer of colors.
+//
+
+// Abstracted Colors
+@agate-background: @agate-black;
+@agate-foreground: @agate-white;
+@agate-background-active: fade(@agate-white, 15%);
+@agate-foreground-active: @agate-black;
+@agate-foreground-focus: @agate-foreground;
+@agate-dim-gray: #6c6c6c;
+
+// Component color assignments
+@agate-bg-image: none;
+@agate-bg-image2: none;
+
+// Disabled Opacity
+// ---------------------------------------
+@agate-disabled-opacity: 0.6;
+@agate-disabled-translucent-opacity: 0.4;
+
+// Spotlight and State
+// ---------------------------------------
+@agate-spotlight-color:                @agate-foreground-focus;
+@agate-spotlight-bg-color:             @agate-background-focus;
+@agate-spotlight-border-color:         transparent;
+@agate-spotlight-disabled-text-color:  fade(@agate-spotlight-color, 40%);
+@agate-spotlight-focus-bg-image:       none;
+
+// Button
+// ---------------------------------------
+@agate-button-bg-color:       @silicon-gray;
+@agate-button-border-color:   transparent;
+@agate-button-active-color:   @agate-button-color;
+@agate-button-active-bg-color: @silicon-gray;
+@agate-button-focus-border-color: transparent;
+@agate-button-focus-color:    @agate-white;
+@agate-button-highlighted-color: @agate-black;
+@agate-button-selected-border-color: transparent;
+@agate-button-lightOpaque-color: @agate-button-color;
+@agate-button-lightOpaque-bg-color: @agate-light-gray;
+
+// Dropdown
+// ---------------------------------------
+@agate-dropdown-list-bg-color: @agate-bg-color;
+
+// Input
+// ---------------------------------------
+@agate-input-decorator-border-color:          fade(@agate-foreground, 30%);
+
+// Item
+// ---------------------------------------
+@agate-item-border-color:         fade(@agate-white, 40%);
+@agate-item-focus-bg-color:       fade(@agate-white, 15%);
+
+// LabeledIconButton
+// ---------------------------------------
+@agate-labelediconbutton-label-color: @agate-white;
+
+// Panels
+// ---------------------------------------
+@agate-panels-bg-color:               @agate-background;
+@agate-panels-partial-bg-color:       @agate-background;
+@agate-panels-breadcrumb-bg-color:    @agate-bg-color;
+
+// Popup
+// ---------------------------------------
+@agate-popup-plain-body-color: @agate-popup-text-color;
+@agate-popup-text-color: @agate-black;
+
+// Slider
+// ---------------------------------------
+@agate-slider-fill-bg-color:  @agate-white;
+@agate-slider-knob-bg-color:  @agate-white;
+
+// Scroller
+// ---------------------------------------
+@agate-scroller-scrollbar-thumb-bg-color: @agate-white;

@@ -1,6 +1,7 @@
 // Input.module.less
 //
 @import "../styles/skin.less";
+@import "~@enact/ui/styles/mixins.less";
 
 .decorator {
 	.applySkins({
@@ -12,7 +13,8 @@
 		vertical-align: middle;
 
 		.input {
-			padding: @agate-input-padding;
+			padding: @agate-input-padding-top-bottom @agate-input-padding-right @agate-input-padding-top-bottom @agate-input-padding-left;
+			.padding-start-end(@agate-input-padding-left, @agate-input-padding-right);
 			cursor: pointer;
 			white-space: nowrap;
 			overflow: hidden;
@@ -21,10 +23,12 @@
 			text-indent: 0.2em;
 			font-size: @agate-input-font-size;
 			font-weight: @agate-input-font-weight;
-
+			opacity: @agate-input-opacity;
 			border: none;
+			border-bottom: @agate-input-border-width solid @agate-input-border-color;
 			background: transparent;
 			color: @agate-text-color;
+			text-align: @agate-input-text-align;
 
 			&::selection {
 				color: @agate-spotlight-color;
@@ -70,12 +74,24 @@
 			width: auto;
 			margin: 0;
 
+			&.iconAfter,
 			&.iconBefore {
-				margin-left: @agate-input-icon-before-margin;
+				display: @agate-input-icon-display;
+				align-self: @agate-input-icon-align;
+				opacity: @agate-input-opacity;
+				border-bottom: @agate-input-border-width solid @agate-input-border-color;
 			}
 
 			&.iconAfter {
 				margin-right: @agate-input-icon-after-margin;
+				padding: @agate-input-icon-after-padding-top-bottom @agate-input-icon-after-padding-right @agate-input-icon-after-padding-top-bottom @agate-input-icon-after-padding-left;
+				.padding-start-end(@agate-input-icon-after-padding-left, @agate-input-icon-after-padding-right);
+			}
+
+			&.iconBefore {
+				margin-left: @agate-input-icon-before-margin;
+				padding: @agate-input-icon-before-padding-top-bottom @agate-input-icon-before-padding-right @agate-input-icon-before-padding-top-bottom @agate-input-icon-before-padding-left;
+				.padding-start-end(@agate-input-icon-before-padding-left, @agate-input-icon-before-padding-right);
 			}
 		}
 
@@ -91,6 +107,32 @@
 			background-color: @agate-input-focused-background-color;
 			background-image: @agate-input-focused-background-image;
 			box-shadow: 0 0 0 @agate-input-decorator-focus-border-width @agate-input-decorator-focused-border-color;
+
+			.input {
+				caret-color: @agate-input-caret-color;
+				color: @agate-input-focused-text-color;
+				border-color: @agate-input-active-border-color;
+				border-width: 0 0 @agate-input-border-width;
+				opacity: @agate-input-focused-opacity;
+
+				&::placeholder {
+					opacity: @agate-input-opacity;
+				}
+			}
+
+			.icon {
+				color: @agate-input-focused-text-color;
+
+				&.iconAfter {
+					opacity: @agate-input-focused-opacity;
+					border-color: @agate-input-active-border-color;
+				}
+
+				&.iconBefore {
+					opacity: @agate-input-focused-opacity;
+					border-color: @agate-input-active-border-color;
+				}
+			}
 		}
 	});
 }

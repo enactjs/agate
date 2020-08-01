@@ -16,6 +16,7 @@ const defaultConfig = {
 		copper: 'copper',
 		electro: 'electro',
 		gallium: 'gallium',
+		silicon: 'silicon',
 		titanium: 'titanium'
 	},
 	allowedVariants: ['night', 'highContrast'],
@@ -24,10 +25,9 @@ const defaultConfig = {
 
 /**
  * This Higher-order Component is based on [ui/Skinnable]{@link ui/Skinnable.Skinnable} and comes
- * pre-configured for Agate's supported skins: 'carbon', 'cobalt', 'cobalt-day', 'copper',
- * 'copper-day', 'electro', 'gallium-day', 'gallium-night', and 'titanium'. It is used to apply
- * the relevant skinning classes to each component and has been used to pre-select specific skins
- * for some components.
+ * pre-configured for Agate's supported skins: 'carbon', 'cobalt', 'copper', 'electro', 'gallium',
+ * 'silicon', and 'titanium'. It is used to apply the relevant skinning classes to each component
+ * and has been used to pre-select specific skins for some components.
  *
  * @class Skinnable
  * @memberof agate/Skinnable
@@ -43,7 +43,7 @@ const Skinnable = hoc(defaultConfig, UiSkinnable);
  *
  * Example:
  * ```
- * <Button skin="gallium-day">
+ * <Button skin="gallium" />
  * ```
  *
  * @name skin
