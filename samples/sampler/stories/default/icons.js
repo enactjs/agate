@@ -3,7 +3,7 @@
 // Grouped into logical sets for easy consumption.
 //
 
-import {icons} from '@enact/agate/Icon';
+import {icons, iconsSilicon} from '@enact/agate/Icon';
 
 const decrementIcons = [
 	'minus',
@@ -99,5 +99,8 @@ const starIcons = [
 	'halfstar'
 ];
 
-export default Object.keys(icons).sort();
-export {decrementIcons, incrementIcons, listIcons, mediaIcons, arrowIcons, starIcons};
+const iconList = Object.keys(icons).sort();
+const iconListSilicon = Object.keys(iconsSilicon).sort();
+
+export default iconList;
+export {decrementIcons, iconList, iconListSilicon, incrementIcons, listIcons, mediaIcons, arrowIcons, starIcons};
