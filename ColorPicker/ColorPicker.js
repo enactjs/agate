@@ -241,14 +241,14 @@ const ColorPickerBase = kind({
 
 const ColorPickerExtended = hoc((config, Wrapped) => {
 	return class extends React.Component {
-		static displayName = 'ColorPickerExtended'
+		static displayName = 'ColorPickerExtended';
 
 		static propTypes = {
 			defaultExtended: PropTypes.bool,
 			onChange: PropTypes.func,
 			open: PropTypes.bool,
 			value: PropTypes.string
-		}
+		};
 
 		constructor (props) {
 			super(props);
@@ -287,9 +287,9 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 
 		buildValue = ({h = this.hsl[0], s = this.hsl[1], l = this.hsl[2]} = {}) => (
 			'#' + convert.hsl.hex(h, s, l)
-		)
+		);
 
-		clickedOutsidePalette = ({target}) => !this.node.contains(target)
+		clickedOutsidePalette = ({target}) => !this.node.contains(target);
 
 		// This handler is meant to accommodate using `ColorPicker`'s `onChange` prop from
 		// `Changeable` as the `onSelect` handler for its `Group` component that lists the set of
@@ -302,23 +302,23 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 				({data: value}) => ({value}),
 				forward('onChange')
 			)
-		).bindAs(this, 'handleChange')
+		).bindAs(this, 'handleChange');
 
 		// If a click happened outside the component area (and children of us) dismiss the palette by forwarding the onClick from Toggleable.
 		handleClick = handle(
 			this.clickedOutsidePalette,
 			forward('onClick')
-		).bindAs(this, 'handleClick')
+		).bindAs(this, 'handleClick');
 
 		handleToggleExtended = () => {
 			this.setState(({extended}) => ({extended: !extended}));
-		}
+		};
 
 		handleSlider = (type) => ({value: sliderValue}) => {
 			this.hsl[('hsl'.indexOf(type))] = sliderValue;
 			const value = this.buildValue();
 			this.handleChange({data: value});
-		}
+		};
 
 		render () {
 			const {...rest} = this.props;

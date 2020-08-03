@@ -60,3 +60,15 @@ typings/
 # dotenv environment variables file
 .env
 
+# Editor
+.vscode
+
+# Mac
+.DS_Store
+
+# Build output
+dist
+build
+
+# Testing
+errorShots

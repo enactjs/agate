@@ -14,7 +14,7 @@ const forwardHide = forward('onHide');
 
 const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-vars
 	return class extends React.Component {
-		static displayName = 'PopupState'
+		static displayName = 'PopupState';
 
 		static propTypes = {
 			noAnimation: PropTypes.bool,
@@ -22,14 +22,14 @@ const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-v
 			onClose: PropTypes.func,
 			open: PropTypes.bool,
 			scrimType: PropTypes.oneOf(['transparent', 'translucent', 'none'])
-		}
+		};
 
 		static defaultProps = {
 			noAnimation: false,
 			noAutoDismiss: false,
 			open: false,
 			scrimType: 'translucent'
-		}
+		};
 
 		constructor (props) {
 			super(props);
@@ -65,7 +65,7 @@ const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-v
 					popupOpen: OpenState.OPENING
 				});
 			}
-		}
+		};
 
 		handlePopupHide = () => {
 			forwardHide(null, this.props);
@@ -74,7 +74,7 @@ const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-v
 				floatLayerOpen: false,
 				activator: null
 			});
-		}
+		};
 
 		render () {
 			const {noAutoDismiss, onClose, scrimType, ...rest} = this.props;
