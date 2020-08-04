@@ -112,7 +112,7 @@ const useEventFocus = (props, instances, context) => {
 			alertScrollbarTrack();
 		}
 
-		if (!(shouldPreventScrollByFocus || Spotlight.getPointerMode() || scrollContainerHandle.current.isDragging)) {
+		if (!(shouldPreventScrollByFocus || Spotlight.getPointerMode() || scrollContainerHandle.current.isDragging || spottable.current.indexToFocus)) {
 			const
 				item = ev.target,
 				spotItem = Spotlight.getCurrent();
@@ -128,8 +128,8 @@ const useEventFocus = (props, instances, context) => {
 	function hasFocus () {
 		const current = Spotlight.getCurrent();
 
-		if (current) {
-			return utilDOM.containsDangerously(scrollContainerRef.current, current);
+		if (current && scrollContainerRef.current) {
+			return utilDOM.containsDangerously(scrollContainerRef, current);
 		}
 	}
 
@@ -297,10 +297,16 @@ const pageKeyHandler = (ev) => {
 			elem = document.elementFromPoint(x, y);
 
 		if (elem) {
-			for (let [key, value] of scrollers) {
+			for (const [key, value] of scrollers) {
 				if (utilDOM.containsDangerously(value, elem)) {
-					key.scrollByPageOnPointerMode(ev);
-					break;
+					/* To handle page keys in nested scrollable components,
+					 * break the loop only when `scrollByPageOnPointerMode` returns `true`.
+					 * This approach assumes that an inner scrollable component is
+					 * mounted earlier than an outer scrollable component.
+					 */
+					if (key.scrollByPageOnPointerMode(ev)) {
+						break;
+					}
 				}
 			}
 		}
