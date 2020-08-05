@@ -2,8 +2,8 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Button from "../Button";
-import Icon from "../Icon";
+import Button from '../Button';
+import Icon from '../Icon';
 
 import $L from '../internal/$L';
 import css from './MediaControls.module.less';
@@ -21,6 +21,26 @@ const MediaControls = kind({
 	name: 'MediaControls',
 
 	propTypes: /** @lends agate/MediaPlayer.MediaControls.prototype */ {
+		/**
+		 * A string which is sent to the `menu` icon of the player controls. This can be
+		 * anything that is accepted by {@link agate/Icon.Icon}.
+		 *
+		 * @type {String}
+		 * @default 'menu'
+		 * @public
+		 */
+		menuIcon: PropTypes.string,
+
+		/**
+		 * A string which is sent to the `nextTrack` icon of the player controls. This can be
+		 * anything that is accepted by {@link agate/Icon.Icon}.
+		 *
+		 * @type {String}
+		 * @default 'nexttrack'
+		 * @public
+		 */
+		nextTrackIcon: PropTypes.string,
+
 		/**
 		 * `true` when the media is paused.
 		 *
@@ -51,7 +71,46 @@ const MediaControls = kind({
 		 * @default 'play'
 		 * @public
 		 */
-		playIcon: PropTypes.string
+		playIcon: PropTypes.string,
+
+		/**
+		 * A string which is sent to the `previousTrack` icon of the player controls. This can be
+		 * anything that is accepted by {@link agate/Icon.Icon}.
+		 *
+		 * @type {String}
+		 * @default 'previoustrack'
+		 * @public
+		 */
+		previousTrackIcon: PropTypes.string,
+
+		/**
+		 * A string which is sent to the `repeat` icon of the player controls. This can be
+		 * anything that is accepted by {@link agate/Icon.Icon}.
+		 *
+		 * @type {String}
+		 * @default 'repeat'
+		 * @public
+		 */
+		repeatIcon: PropTypes.string,
+
+		/**
+		 * A string which is sent to the `shuffle` icon of the player controls. This can be
+		 * anything that is accepted by {@link agate/Icon.Icon}.
+		 *
+		 * @type {String}
+		 * @default 'shuffle'
+		 * @public
+		 */
+		shuffleIcon: PropTypes.string,
+
+		/**
+		 * The visibility of the component. When `false`, the component will be hidden.
+		 *
+		 * @type {Boolean}
+		 * @default true
+		 * @public
+		 */
+		visible: PropTypes.bool
 	},
 
 	defaultProps: {
@@ -70,24 +129,19 @@ const MediaControls = kind({
 		className: 'controlsFrame'
 	},
 
-	render: ({menuIcon, nextTrackIcon, pauseIcon, paused, playIcon, previousTrackIcon, preview, previewProportion, repeatIcon, shuffleIcon, sliderClassName, ...rest}) => {
+	render: ({menuIcon, nextTrackIcon, pauseIcon, paused, playIcon, previousTrackIcon, repeatIcon, shuffleIcon, ...rest}) => {
+		delete rest.visible;
 
 		return (
 			<div className={css.mediaControls} {...rest}>
-				<Button aria-label={$L('Repeat')} backgroundOpacity="transparent" css={css} icon={repeatIcon}
-						size="large"/>
-				<Button aria-label={$L('Shuffle')} backgroundOpacity="transparent" css={css} icon={shuffleIcon}
-						size="large"/>
-				<Button aria-label={$L('Previous')} backgroundOpacity="transparent" css={css}
-						icon={previousTrackIcon} size="large"/>
-				<Button aria-label={paused ? $L('Play') : $L('Pause')} backgroundOpacity="transparent"
-						className={css.playPauseButton} css={css} size="large" >
+				<Button aria-label={$L('Repeat')} backgroundOpacity="transparent" css={css} icon={repeatIcon} size="large" />
+				<Button aria-label={$L('Shuffle')} backgroundOpacity="transparent" css={css} icon={shuffleIcon} size="large" />
+				<Button aria-label={$L('Previous')} backgroundOpacity="transparent" css={css} icon={previousTrackIcon} size="large" />
+				<Button aria-label={paused ? $L('Play') : $L('Pause')} backgroundOpacity="transparent" className={css.playPauseButton} css={css} size="large">
 					<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
 				</Button>
-				<Button aria-label={$L('Next')} backgroundOpacity="transparent" css={css} icon={nextTrackIcon}
-						size="large"/>
-				<Button aria-label={$L('Menu')} backgroundOpacity="transparent" css={css} icon={menuIcon}
-						size="large"/>
+				<Button aria-label={$L('Next')} backgroundOpacity="transparent" css={css} icon={nextTrackIcon} size="large" />
+				<Button aria-label={$L('Menu')} backgroundOpacity="transparent" css={css} icon={menuIcon} size="large" />
 			</div>
 		);
 	}

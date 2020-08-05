@@ -1,6 +1,5 @@
 import kind from '@enact/core/kind';
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Slider from '../Slider';
 
@@ -24,7 +23,7 @@ const MediaSlider = kind({
 		className: 'mediaSlider'
 	},
 
-	render: ({sliderClassName, ...rest}) => {
+	render: ({...rest}) => {
 
 		return (
 			<Slider

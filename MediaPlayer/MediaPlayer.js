@@ -21,11 +21,7 @@ const MediaPlayer = kind({
 		className: 'mediaPlayer'
 	},
 
-	computed: {
-		className: ({visible, styler}) => styler.append({hidden: !visible})
-	},
-
-	render: ({paused, ...rest}) => {
+	render: ({...rest}) => {
 		return (
 			<div className={css.mediaPlayer} {...rest}>
 				<MediaSlider />
