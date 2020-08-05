@@ -40,7 +40,7 @@ const
  * @private
  */
 class ScrollButtons extends Component {
-	static displayName = 'ScrollButtons'
+	static displayName = 'ScrollButtons';
 
 	static propTypes = /** @lends agate/useScroll.ScrollButtons.prototype */ {
 		/**
@@ -139,14 +139,14 @@ class ScrollButtons extends Component {
 		 * @public
 		 */
 		vertical: PropTypes.bool
-	}
+	};
 
 	static defaultProps = {
 		focusableScrollButtons: false,
 		onKeyDownButton: nop,
 		onNextScroll: nop,
 		onPrevScroll: nop
-	}
+	};
 
 	constructor (props) {
 		super(props);
@@ -194,26 +194,26 @@ class ScrollButtons extends Component {
 			});
 		}
 
-	}
+	};
 
 	isOneOfScrollButtonsFocused = () => {
 		const current = Spotlight.getCurrent();
 		return current === this.prevButtonRef.current || current === this.nextButtonRef.current;
-	}
+	};
 
 	onClickPrev = (ev) => {
 		const {onPrevScroll, vertical} = this.props;
 		onPrevScroll({...ev, isPreviousScrollButton: true, isVerticalScrollBar: vertical});
-	}
+	};
 
 	onClickNext = (ev) => {
 		const {onNextScroll, vertical} = this.props;
 		onNextScroll({...ev, isPreviousScrollButton: false, isVerticalScrollBar: vertical});
-	}
+	};
 
 	focusOnButton = (isPrev) => {
 		Spotlight.focus(isPrev ? this.prevButtonRef.current : this.nextButtonRef.current);
-	}
+	};
 
 	focusOnOppositeScrollButton = (ev, direction) => {
 		const buttonNode = (ev.target === this.nextButtonRef.current) ? this.prevButtonRef.current : this.nextButtonRef.current;
@@ -221,7 +221,7 @@ class ScrollButtons extends Component {
 		if (!Spotlight.focus(buttonNode)) {
 			Spotlight.move(direction);
 		}
-	}
+	};
 
 	onKeyDownButton = (ev, position) => {
 		const
@@ -312,15 +312,15 @@ class ScrollButtons extends Component {
 				}
 			}
 		}
-	}
+	};
 
 	onKeyDownPrev = (ev) => {
 		this.onKeyDownButton(ev, 'prev');
-	}
+	};
 
 	onKeyDownNext = (ev) => {
 		this.onKeyDownButton(ev, 'next');
-	}
+	};
 
 	render () {
 		const

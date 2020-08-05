@@ -18,10 +18,6 @@
   "enact": {
     "theme": "agate"
   },
-  "eslintConfig": {
-    "extends": "enact/strict",
-    "root": true
-  },
   "dependencies": {
     "@enact/agate": "../../",
     "@enact/core": "^3.4.0",
@@ -31,7 +27,7 @@
     "react": "^16.8.6"
   },
   "devDependencies": {
-    "@enact/storybook-utils": "^1.0.0",
+    "@enact/storybook-utils": "^2.0.0",
     "@storybook/addons": "5.3.5",
     "@storybook/react": "5.3.5",
     "@storybook/theming": "5.3.5",
