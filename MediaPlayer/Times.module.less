@@ -6,24 +6,12 @@
 
 .times {
 	.applySkins({
+		display: flex;
+		justify-content: space-between;
+		margin: 0 9px;
 
-
-	//.agate-text-base(@agate-mediaplayer-times-text-size);
-	//.agate-font-number();
-
-	white-space: nowrap;
-	min-width: 50px; // @agate-mediaplayer-times-min-width;
-
-	> * {
-		display: inline-block;
-	}
-
-	.separator {
-		padding: 0 1ex;
-	}
-
-	:global(.enact-locale-right-to-left) & {
-		direction: ltr;
-	}
+		:global(.enact-locale-right-to-left) & {
+			direction: ltr;
+		}
 	})
 }

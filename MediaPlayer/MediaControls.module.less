@@ -3,15 +3,8 @@
 @import "../styles/skin.less";
 
 .controlsFrame {
-	--actionGuideComponentHeight: 0;
-
 	position: relative;
 	display: block;
-
-	&.hidden {
-		will-change: opacity;
-		opacity: 0;
-	}
 
 	.mediaControls {
 		text-align: center;
@@ -23,57 +16,50 @@
 		}
 	}
 
-	.actionGuide {
-		padding-top: 10px; // @agate-mediaplayer-controls-actionguide-padding-top;
-		transition: opacity 0.5s linear; //@agate-mediaplayer-controls-actionguide-time linear;
-		&.hidden {
-			opacity: 0;
-		}
-	}
+}
 
-	.moreComponents {
-		position: absolute;
-		left: 0;
-		right: 0;
-		height: 0px;
-		opacity: 0;
-
-		.moreButtonsComponents {
-			> * {
-				margin: 0;
-				//margin-inline-start: @agate-mediaplayer-controls-morebuttons-margin-start;
-
-				&:first-child {
-					margin-inline-start: 0;
-				}
-			}
-		}
-
-		&.lift {
-			opacity: 1;
-			transition: transform 1s linear; //@agate-mediaplayer-controls-moreComponents-time linear;
-			transform: translateY(~"calc(var(--actionGuideComponentHeight) * -1)");
-		}
-
-		> :first-child {
-			margin-top: 10px; //@agate-mediaplayer-controls-moreComponents-margin-top;
-		}
-	}
 .applySkins({
 	.button {
-		height: 75px;// @agate-mediaplayer-button-height;
-		min-width: @agate-button-height; //@agate-mediaplayer-button-height;
-		margin: 0;
-		margin-inline-start: 10px; //@agate-mediaplayer-controls-button-margin-start;
-
-		.client {
-			padding: 5px; //@agate-mediaplayer-button-client-padding;
-		}
+		height: 60px;
+		min-width: 60px;
 
 		.bg {
-			border-radius: @agate-button-border-radius; // @agate-mediaplayer-button-border-radius;
+			border: transparent;
+			height: 60px;
+			width: 60px;
+		}
+
+		&,
+		.client {
+			width: 60px;
+		}
+
+		.icon {
+			padding: 0 30px;
+		}
+
+		&.playPauseButton {
+			height: 90px;
+			padding: 0;
+
+			.bg {
+				height: 90px;
+				width: 90px;
+				border-radius: 90px;
+			}
+
+			&,
+			.client {
+				width: 90px;
+			}
 		}
 	}
 });
 
+.icon {
+	.applySkins({
+		font-size: 60px;
+		margin: 0;
+		padding: 0 30px;
+	})
 }
