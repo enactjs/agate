@@ -296,6 +296,20 @@
 				color: @agate-button-focus-color;
 			}
 
+			&[disabled] {
+				.vendor-opacity(@agate-disabled-opacity);
+				color: @agate-button-color;
+
+				.bg {
+					background-color: @agate-button-bg-color;
+					background-image: none;
+				}
+
+				.client {
+					color: @agate-button-color;
+				}
+			}
+
 			&.highlighted {
 				.bg {
 					opacity: 1;
@@ -314,6 +328,16 @@
 			&,
 			.client {
 				color: @agate-button-active-color;
+			}
+
+			&[disabled] {
+				.bg {
+					opacity: 1;
+				}
+
+				.client {
+					color: @agate-button-color;
+				}
 			}
 
 			&.highlighted {

@@ -119,6 +119,15 @@ const ButtonBase = kind({
 		decoration: PropTypes.node,
 
 		/**
+		 * Disables Button and makes it non-interactive.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
+		/**
 		 * Provides a way to call special interface attention to this button. It will be "featured"
 		 * in some way by the theme's visual rules.  This property only has an effect when
 		 * `backgroundOpacity` is "opaque".
@@ -200,7 +209,7 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({animateOnRender, backgroundOpacity, highlighted, joinedPosition, selected, type, size, styler}) => styler.append(
+		className: ({animateOnRender, backgroundOpacity, disabled, highlighted, joinedPosition, selected, type, size, styler}) => styler.append(
 			backgroundOpacity,
 			size,
 			type,
