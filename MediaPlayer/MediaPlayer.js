@@ -1,12 +1,16 @@
 import kind from '@enact/core/kind';
 import EnactPropTypes from '@enact/core/internal/prop-types';
+import Pure from '@enact/ui/internal/Pure';
 import Media from '@enact/ui/Media';
+import Slottable from '@enact/ui/Slottable';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
 import css from './MediaPlayer.module.less';
 import MediaControls from './MediaControls';
 import MediaSlider from './MediaSlider';
+import Skinnable from '../Skinnable';
 import Times from './Times';
 
 /**
@@ -16,10 +20,19 @@ import Times from './Times';
  * @exports MediaPlayer
  */
 
-const MediaPlayer = kind({
+const MediaPlayerBase = kind({
 	name: 'MediaPlayer',
 
-	propTypes: /** @lends agate/MediaPlayer.prototype */ {
+	propTypes: /** @lends agate/MediaPlayer.MediaPlayerBase.prototype */ {
+		/**
+		 * Any children `<source>` tag elements will be sent directly to the media element as
+		 * sources.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
+		source: PropTypes.node.isRequired,
+
 		/**
 		 * Media component to use.
 		 *
@@ -33,25 +46,11 @@ const MediaPlayer = kind({
 		 * @default 'video'
 		 * @public
 		 */
-		mediaComponent: EnactPropTypes.renderable,
-
-		/**
-		 * Any children `<source>` tag elements will be sent directly to the media element as
-		 * sources.
-		 *
-		 * @type {Node}
-		 * @public
-		 */
-		source: PropTypes.node.isRequired
+		mediaComponent: EnactPropTypes.renderable
 	},
 
 	defaultProps: {
-		mediaComponent: 'video',
-		// source: 'http://media.w3.org/2010/05/sintel/trailer.mp4',
-		// source: '<source src="/media/examples/flower.mp4"\n' +
-		// 	'            type="video/mp4">'
-		source: '<source src="http://media.w3.org/2010/05/sintel/trailer.mp4"\n' +
-			'            type="video/mp4">'
+		mediaComponent: 'audio'
 	},
 
 	styles: {
@@ -71,4 +70,44 @@ const MediaPlayer = kind({
 	}
 });
 
+/**
+ * A higher-order component that adds Agate specific behaviors to `MediaPlayer`.
+ *
+ * @hoc
+ * @memberof agate/MediaPlayer
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes ui/Slottable.Slottable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
+const MediaPlayerDecorator = compose(
+	Pure,
+	Slottable({slots: ['source']}),
+	Skinnable
+);
+
+/**
+ * Aa Agate-styled `Media` component.
+ *
+ * Usage:
+ * ```
+ * <MediaPlayer>
+ *     <source src='' type='' />
+ * </MediaPlayer>
+ * ```
+ *
+ * @class MediaPlayer
+ * @memberof agate/MediaPlayer
+ * @extends agate/MediaPlayer.MediaPlayerBase
+ * @mixes agate/MediaPlayer.MediaPlayerDecorator
+ * @ui
+ * @public
+ */
+const MediaPlayer = MediaPlayerDecorator(MediaPlayerBase);
+
 export default MediaPlayer;
+export {
+	MediaPlayer,
+	MediaPlayerBase,
+	MediaPlayerDecorator
+};
