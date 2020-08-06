@@ -4,7 +4,7 @@ import {onWindowReady} from '@enact/core/snapshot';
 import {clamp} from '@enact/core/util';
 import Spotlight, {getDirection} from '@enact/spotlight';
 import {getRect} from '@enact/spotlight/src/utils';
-import {constants} from '@enact/ui/useScroll/';
+import {constants} from '@enact/ui/useScroll';
 import utilEvent from '@enact/ui/useScroll/utilEvent';
 import utilDOM from '@enact/ui/useScroll/utilDOM';
 import {useEffect, useRef} from 'react';

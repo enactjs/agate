@@ -345,7 +345,6 @@ const useThemeVirtualList = (props) => {
 	delete rest.scrollContainerRef;
 	delete rest.scrollContentHandle;
 	delete rest.spotlightId;
-
 	delete rest.wrap;
 
 	return {
