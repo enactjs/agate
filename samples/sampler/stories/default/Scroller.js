@@ -27,6 +27,7 @@ storiesOf('Agate', module)
 		'Scroller',
 		() => (
 			<Scroller
+				style={{height: ri.scaleToRem(540), width: ri.scaleToRem(1540)}}
 				direction={select('direction', prop.direction, ScrollerConfig)}
 				focusableScrollbar={boolean('focusableScrollbar', ScrollerConfig)}
 				horizontalScrollbar={select('horizontalScrollbar', prop.scrollbarOption, ScrollerConfig)}
@@ -61,6 +62,9 @@ storiesOf('Agate', module)
 			</Scroller>
 		),
 		{
+			props: {
+				noScroller: true
+			},
 			info: {
 				text: 'Basic usage of Scroller'
 			}

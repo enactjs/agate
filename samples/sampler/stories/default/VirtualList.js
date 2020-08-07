@@ -79,6 +79,9 @@ storiesOf('Agate', module)
 			);
 		},
 		{
+			props: {
+				noScroller: true
+			},
 			info: {
 				text: 'Basic usage of VirtualList'
 			}

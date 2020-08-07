@@ -187,6 +187,8 @@ const StorybookDecorator = (story, config) => {
 		skinKnobs.skin = select('skin', skins, Config, currentSkin);
 	}
 	const {accent, highlight} = !allSkins && boolean('default skin styles', Config) ? defaultColors[skinKnobs.skin] : {};
+	const noScroller = config.parameters && config.parameters.props && config.parameters.props.noScroller;
+	const Wrapper = noScroller ? React.Fragment : Scroller;
 
 	return (
 		<Agate
@@ -198,14 +200,14 @@ const StorybookDecorator = (story, config) => {
 			accent={accent || color('accent', (!newSkin && accentFromURL ? accentFromURL : defaultColors[currentSkin].accent), Config.groupId)}
 			highlight={highlight || color('highlight', (!newSkin && highlightFromURL ? highlightFromURL : defaultColors[currentSkin].highlight), Config.groupId)}
 		>
-			<Scroller>
+			<Wrapper>
 				{allSkins ? Object.keys(skins).map(skin => (
 					<SkinFrame skin={skins[skin]} key={skin}>
 						<Cell size="20%" component={Heading}>{skin}</Cell>
 						<Cell>{sample}</Cell>
 					</SkinFrame>
 				)) : sample}
-			</Scroller>
+			</Wrapper>
 		</Agate>
 	);
 };
