@@ -11,11 +11,6 @@ import Scroller from '@enact/agate/Scroller';
 
 const prop = {
 	direction: ['both', 'horizontal', 'vertical'],
-	focusableScrollbarOption: {
-		false: false,
-		true: true,
-		'&quot;byEnter&quot;': 'byEnter'
-	},
 	scrollbarOption: ['auto', 'hidden', 'visible'],
 	scrollModeOption: ['native', 'translate']
 };
@@ -27,7 +22,6 @@ storiesOf('Agate', module)
 		'Scroller',
 		() => (
 			<Scroller
-				style={{height: ri.scaleToRem(540), width: ri.scaleToRem(1540)}}
 				direction={select('direction', prop.direction, ScrollerConfig)}
 				focusableScrollbar={boolean('focusableScrollbar', ScrollerConfig)}
 				horizontalScrollbar={select('horizontalScrollbar', prop.scrollbarOption, ScrollerConfig)}
@@ -65,8 +59,6 @@ storiesOf('Agate', module)
 			props: {
 				noScroller: true
 			},
-			info: {
-				text: 'Basic usage of Scroller'
-			}
+			text: 'Basic usage of Scroller'
 		}
 	);
