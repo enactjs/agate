@@ -71,16 +71,16 @@ const ScrollbarBase = memo((props) => {
 	} = useThemeScrollbar(props);
 
 	const {
-		prevButtonDisabled,
-		nextButtonDisabled,
-		prevIcon,
-		nextIcon,
-		onClickPrev,
-		onClickNext,
-		prevButtonRef,
-		nextButtonRef,
 		focusOnButton,
 		isOneOfScrollButtonsFocused,
+		nextButtonDisabled,
+		nextButtonRef,
+		nextIcon,
+		onClickNext,
+		onClickPrev,
+		prevButtonDisabled,
+		prevButtonRef,
+		prevIcon,
 		updateButtons
 	} = useScrollButtons(scrollbarButtonsProps);
 
@@ -112,7 +112,6 @@ const ScrollbarBase = memo((props) => {
 			/>
 			<ScrollbarTrack
 				{...scrollbarTrackProps}
-				key="scrollbarTrack"
 			/>
 			<ScrollButton
 				aria-label={rtl && !vertical ? previousButtonAriaLabel : nextButtonAriaLabel}
