@@ -6,7 +6,6 @@ import utilEvent from '@enact/ui/useScroll/utilEvent';
 import React, {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 
-
 const
 	nop = () => {},
 	prepareButton = (isPrev) => (isVertical) => {
@@ -30,7 +29,7 @@ const
 	};
 
 /**
- * An Agate-styled scroll buttons. It is used in [Scrollbar]{@link agate/useScroll.Scrollbar}.
+ * A custom hook that returns Agate-themed scroll buttons behavior. It is used in [Scrollbar]{@link agate/useScroll.Scrollbar}.
  *
  * @function useScrollButtons
  * @memberof agate/useScroll
@@ -43,6 +42,16 @@ const useScrollButtons = (props) => {
 
 	const nextButtonRef = React.createRef();
 	const prevButtonRef = React.createRef();
+
+	useEffect(() => {
+		utilEvent('keydown').addEventListener(nextButtonRef, onKeyDownNext);
+		utilEvent('keydown').addEventListener(prevButtonRef, onKeyDownPrev);
+
+		return () => {
+			utilEvent('keydown').removeEventListener(nextButtonRef, onKeyDownNext);
+			utilEvent('keydown').removeEventListener(prevButtonRef, onKeyDownPrev);
+		};
+	}, []);	// eslint-disable-line react-hooks/exhaustive-deps
 
 	const updateButtons = (bounds) => {
 		const
@@ -58,39 +67,40 @@ const useScrollButtons = (props) => {
 
 		if (updatePrevButton) {
 			setPrevButtonDisabled(shouldDisablePrevButton);
-		} else if (updateNextButton) {
+		}
+		if (updateNextButton) {
 			setNextButtonDisabled(shouldDisableNextButton);
 		}
 	};
 
-	const isOneOfScrollButtonsFocused = () => {
+	function isOneOfScrollButtonsFocused () {
 		const current = Spotlight.getCurrent();
 		return current === prevButtonRef.current || current === nextButtonRef.current;
-	};
+	}
 
-	const onClickPrev = (ev) => {
+	function onClickPrev (ev) {
 		const {onPrevScroll = nop, vertical} = props;
 		onPrevScroll({...ev, isPreviousScrollButton: true, isVerticalScrollBar: vertical});
-	};
+	}
 
-	const onClickNext = (ev) => {
+	function onClickNext (ev) {
 		const {onNextScroll = nop, vertical} = props;
 		onNextScroll({...ev, isPreviousScrollButton: false, isVerticalScrollBar: vertical});
-	};
+	}
 
-	const focusOnButton = (isPrev) => {
+	function focusOnButton (isPrev) {
 		Spotlight.focus(isPrev ? prevButtonRef.current : nextButtonRef.current);
-	};
+	}
 
-	const focusOnOppositeScrollButton = (ev, direction) => {
+	function focusOnOppositeScrollButton (ev, direction) {
 		const buttonNode = (ev.target === nextButtonRef.current) ? prevButtonRef.current : nextButtonRef.current;
 
 		if (!Spotlight.focus(buttonNode)) {
 			Spotlight.move(direction);
 		}
-	};
+	}
 
-	const onKeyDownButton = (ev, position) => {
+	function onKeyDownButton (ev, position) {
 		const
 			{focusableScrollButtons, vertical, preventBubblingOnKeyDown} = props,
 			{keyCode} = ev,
@@ -179,38 +189,27 @@ const useScrollButtons = (props) => {
 				}
 			}
 		}
-	};
+	}
 
-	const onKeyDownPrev = (ev) => {
+	function onKeyDownPrev (ev) {
 		onKeyDownButton(ev, 'prev');
-	};
+	}
 
-	const onKeyDownNext = (ev) => {
+	function onKeyDownNext (ev) {
 		onKeyDownButton(ev, 'next');
-	};
-
-	useEffect(() => {
-		utilEvent('keydown').addEventListener(nextButtonRef, onKeyDownNext);
-		utilEvent('keydown').addEventListener(prevButtonRef, onKeyDownPrev);
-
-		return () => {
-			utilEvent('keydown').removeEventListener(nextButtonRef, onKeyDownNext);
-			utilEvent('keydown').removeEventListener(prevButtonRef, onKeyDownPrev);
-		};
-	}, []);	// eslint-disable-line react-hooks/exhaustive-deps
+	}
 
 	return {
-		prevButtonDisabled,
-		nextButtonDisabled,
-		prevIcon: preparePrevButton(props.vertical),
-		nextIcon: prepareNextButton(props.vertical),
-		onClickPrev,
-		onClickNext,
-		prevButtonRef,
-		nextButtonRef,
-
 		focusOnButton,
 		isOneOfScrollButtonsFocused,
+		nextButtonDisabled,
+		nextButtonRef,
+		nextIcon: prepareNextButton(props.vertical),
+		onClickNext,
+		onClickPrev,
+		prevButtonDisabled,
+		prevButtonRef,
+		prevIcon: preparePrevButton(props.vertical),
 		updateButtons
 	};
 };
