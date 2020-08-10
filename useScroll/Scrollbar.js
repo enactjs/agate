@@ -105,7 +105,6 @@ const ScrollbarBase = memo((props) => {
 				aria-label={rtl && !vertical ? nextButtonAriaLabel : previousButtonAriaLabel}
 				data-spotlight-overflow="ignore"
 				disabled={disabled || prevButtonDisabled}
-				key="prevButton"
 				onClick={onClickPrev}
 				onHoldPulse={onClickPrev}
 				ref={prevButtonRef}
@@ -119,7 +118,6 @@ const ScrollbarBase = memo((props) => {
 				aria-label={rtl && !vertical ? previousButtonAriaLabel : nextButtonAriaLabel}
 				data-spotlight-overflow="ignore"
 				disabled={disabled || nextButtonDisabled}
-				key="nextButton"
 				onClick={onClickNext}
 				onHoldPulse={onClickNext}
 				ref={nextButtonRef}
