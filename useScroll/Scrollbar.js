@@ -18,6 +18,7 @@ const useThemeScrollbar = (props) => {
 
 	const {
 		cbAlertScrollbarTrack,
+		disabled,
 		focusableScrollButtons,
 		nextButtonAriaLabel,
 		onKeyDownButton,
@@ -35,6 +36,7 @@ const useThemeScrollbar = (props) => {
 		restProps: rest,
 		scrollbarProps,
 		scrollbarButtonsProps: {
+			disabled,
 			focusableScrollButtons,
 			nextButtonAriaLabel,
 			onKeyDownButton,
@@ -253,6 +255,7 @@ ScrollbarBase.propTypes = /** @lends agate/useScroll.Scrollbar.prototype */ {
 ScrollbarBase.defaultProps = {
 	corner: false,
 	css: componentCss,
+	disabled: false,
 	minThumbSize: 18,
 	vertical: true
 };
