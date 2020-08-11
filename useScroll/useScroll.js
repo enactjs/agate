@@ -267,7 +267,6 @@ const useScroll = (props) => {
 			'data-spotlight-container': spotlightContainer,
 			'data-spotlight-container-disabled': spotlightContainerDisabled,
 			'data-spotlight-id': spotlightId,
-			disabled,
 			focusableScrollbar,
 			preventBubblingOnKeyDown,
 			scrollDownAriaLabel,
@@ -388,7 +387,6 @@ const useScroll = (props) => {
 		assignProperties,
 		noScrollByDrag: !platform.touchscreen,
 		addEventListeners,
-		disabled,
 		handleResizeWindow,
 		horizontalScrollbarHandle,
 		onDragEnd: handleDragEnd,
@@ -431,7 +429,6 @@ const useScroll = (props) => {
 
 	assignProperties('verticalScrollbarProps', {
 		...scrollbarProps,
-		disabled,
 		focusableScrollButtons: focusableScrollbar,
 		nextButtonAriaLabel: downButtonAriaLabel,
 		onKeyDownButton: handleKeyDown,
@@ -442,7 +439,6 @@ const useScroll = (props) => {
 
 	assignProperties('horizontalScrollbarProps', {
 		...scrollbarProps,
-		disabled,
 		focusableScrollButtons: focusableScrollbar,
 		nextButtonAriaLabel: rightButtonAriaLabel,
 		onKeyDownButton: handleKeyDown,
