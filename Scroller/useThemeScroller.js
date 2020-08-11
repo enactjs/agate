@@ -241,7 +241,7 @@ const useSpottable = (props, instances) => {
 };
 
 const useThemeScroller = (props) => {
-	const {scrollContentHandle, scrollContainerRef, ...rest} = props;
+	const {scrollContainerRef, scrollContentHandle, ...rest} = props;
 	const {scrollContentRef} = rest;
 
 	delete rest.onUpdate;
