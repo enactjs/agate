@@ -8,8 +8,8 @@ import Button from '@enact/agate/Button';
 import Icon from '@enact/agate/Icon';
 import Item from '@enact/agate/Item';
 import LabeledIconButton from '@enact/agate/LabeledIconButton';
-import {Panel} from '@enact/agate/Panels';
-import {TabbedPanels, TabbedPanelsBase} from '@enact/agate/Panels/TabbedPanels';
+import {Panel, TabbedPanels} from '@enact/agate/Panels';
+import {TabbedPanelsBase} from '@enact/agate/Panels/TabbedPanels';
 
 const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase);
 // `paddingBottom: '56.25%'` is a trick to impose 16:9 aspect ratio on the component, since padding percentage is based on the width, not the height.
