@@ -156,6 +156,7 @@ ScrollbarBase.propTypes = /** @lends agate/useScroll.Scrollbar.prototype */ {
 	 * When it is `true`, both prev/next buttons are going to be disabled.
 	 *
 	 * @type {Boolean}
+	 * @default false
 	 * @public
 	 */
 	disabled: PropTypes.bool,
@@ -250,9 +251,7 @@ ScrollbarBase.propTypes = /** @lends agate/useScroll.Scrollbar.prototype */ {
 };
 
 ScrollbarBase.defaultProps = {
-	corner: false,
 	css: componentCss,
-	disabled: false,
 	minThumbSize: 18,
 	vertical: true
 };
