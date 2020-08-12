@@ -7,6 +7,7 @@ import {shape} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import Skinnable from '../Skinnable';
 import TabGroup from '../TabGroup';
 
 import Panels from './Panels';
@@ -38,11 +39,6 @@ const TabbedPanelsBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 		tabPosition: PropTypes.string,
 		tabs: PropTypes.array
-	},
-	defaultProps: {
-		index: 0,
-		noCloseButton: false,
-		tabPosition: 'before'
 	},
 	styles: {
 		css: componentCss,
@@ -128,9 +124,15 @@ const TabbedPanels = Slottable(
 	{slots: ['tabs', 'afterTabs', 'beforeTabs']},
 	Changeable(
 		{prop: 'index', change: 'onSelect'},
-		TabbedPanelsBase
+		Skinnable(TabbedPanelsBase)
 	)
 );
+
+TabbedPanels.defaultProps = {
+	index: 0,
+	noCloseButton: false,
+	tabPosition: 'before'
+};
 
 export default TabbedPanels;
 export {
