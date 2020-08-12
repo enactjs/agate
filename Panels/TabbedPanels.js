@@ -40,6 +40,11 @@ const TabbedPanelsBase = kind({
 		tabPosition: PropTypes.string,
 		tabs: PropTypes.array
 	},
+	defaultProps: {
+		index: 0,
+		noCloseButton: false,
+		tabPosition: 'before'
+	},
 	styles: {
 		css: componentCss,
 		className: 'tabbedPanels enact-fit'
@@ -127,12 +132,6 @@ const TabbedPanels = Slottable(
 		Skinnable(TabbedPanelsBase)
 	)
 );
-
-TabbedPanels.defaultProps = {
-	index: 0,
-	noCloseButton: false,
-	tabPosition: 'before'
-};
 
 export default TabbedPanels;
 export {

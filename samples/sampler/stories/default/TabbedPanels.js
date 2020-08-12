@@ -8,17 +8,17 @@ import Button from '@enact/agate/Button';
 import Icon from '@enact/agate/Icon';
 import Item from '@enact/agate/Item';
 import LabeledIconButton from '@enact/agate/LabeledIconButton';
-import {Panel, TabbedPanels} from '@enact/agate/Panels';
+import {Panel} from '@enact/agate/Panels';
+import {TabbedPanels, TabbedPanelsBase} from '@enact/agate/Panels/TabbedPanels';
 
-const Config = mergeComponentMetadata('TabbedPanels', TabbedPanels);
+const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase);
 // `paddingBottom: '56.25%'` is a trick to impose 16:9 aspect ratio on the component, since padding percentage is based on the width, not the height.
 
 storiesOf('Agate', module)
 	.add(
 		'TabbedPanels',
 		() => {
-			const initialState = Config.defaultProps.index || 0;
-			const [panelIndex, setIndex] = React.useState(initialState);
+			const [panelIndex, setIndex] = React.useState(Config.defaultProps.index || 0);
 			const onSelect = (e) => {
 				setIndex(e.index);
 				action('onSelect')(e);
