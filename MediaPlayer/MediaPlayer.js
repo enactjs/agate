@@ -1,17 +1,18 @@
-import kind from '@enact/core/kind';
-import React from 'react';
-
-import css from './MediaPlayer.module.less';
-import MediaControls from './MediaControls';
-import MediaSlider from './MediaSlider';
-import Times from './Times';
-
 /**
  * Provides Agate-themed media player components.
  *
  * @module agate/MediaPlayer
  * @exports MediaPlayer
  */
+
+import kind from '@enact/core/kind';
+import React from 'react';
+
+import MediaControls from './MediaControls';
+import MediaSlider from './MediaSlider';
+import Times from './Times';
+
+import css from './MediaPlayer.module.less';
 
 const MediaPlayer = kind({
 	name: 'MediaPlayer',
@@ -23,7 +24,7 @@ const MediaPlayer = kind({
 
 	render: ({...rest}) => {
 		return (
-			<div className={css.mediaPlayer} {...rest}>
+			<div {...rest}>
 				<MediaSlider />
 				<Times />
 				<MediaControls />
@@ -33,3 +34,6 @@ const MediaPlayer = kind({
 });
 
 export default MediaPlayer;
+export {
+	MediaPlayer
+};

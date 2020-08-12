@@ -39,3 +39,6 @@ const MediaSlider = kind({
 });
 
 export default MediaSlider;
+export {
+	MediaSlider
+};

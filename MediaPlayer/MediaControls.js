@@ -2,10 +2,10 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import $L from '../internal/$L';
 import Button from '../Button';
 import Icon from '../Icon';
 
-import $L from '../internal/$L';
 import css from './MediaControls.module.less';
 
 /**
@@ -16,7 +16,6 @@ import css from './MediaControls.module.less';
  * @ui
  * @public
  */
-
 const MediaControls = kind({
 	name: 'MediaControls',
 
@@ -121,7 +120,8 @@ const MediaControls = kind({
 		playIcon: 'play',
 		previousTrackIcon: 'previoustrack',
 		repeatIcon: 'repeat',
-		shuffleIcon: 'shuffle'
+		shuffleIcon: 'shuffle',
+		visible: true
 	},
 
 	styles: {
@@ -133,7 +133,7 @@ const MediaControls = kind({
 		delete rest.visible;
 
 		return (
-			<div className={css.mediaControls} {...rest}>
+			<div {...rest}>
 				<Button aria-label={$L('Repeat')} backgroundOpacity="transparent" css={css} icon={repeatIcon} size="large" />
 				<Button aria-label={$L('Shuffle')} backgroundOpacity="transparent" css={css} icon={shuffleIcon} size="large" />
 				<Button aria-label={$L('Previous')} backgroundOpacity="transparent" css={css} icon={previousTrackIcon} size="large" />
@@ -148,3 +148,6 @@ const MediaControls = kind({
 });
 
 export default MediaControls;
+export {
+	MediaControls
+};

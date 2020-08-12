@@ -5,15 +5,12 @@
 .controlsFrame {
 	position: relative;
 	display: block;
+	text-align: center;
+	direction: ltr;
+	white-space: nowrap;
 
-	.mediaControls {
-		text-align: center;
-		direction: ltr;
-		white-space: nowrap;
-
-		> *:first-child {
-			margin-inline-start: 0;
-		}
+	> *:first-child {
+		margin-inline-start: 0;
 	}
 }
 
@@ -21,6 +18,7 @@
 	.button {
 		height: @agate-mediacontrols-button-height;
 		min-width: @agate-mediacontrols-button-min-width;
+		margin: @agate-mediacontrols-button-margin;
 
 		.bg {
 			border: @agate-mediacontrols-button-bg-border;

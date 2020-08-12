@@ -1,8 +1,9 @@
 import React from 'react';
 import kind from '@enact/core/kind';
 
-import css from './Times.module.less';
 import Skinnable from '../Skinnable';
+
+import css from './Times.module.less';
 
 /**
  * Agate-styled formatted time component.
