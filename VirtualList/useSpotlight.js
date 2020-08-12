@@ -6,9 +6,9 @@ const useSpotlightConfig = (props, instances) => {
 	// Hooks
 
 	useEffect(() => {
-		const {spottable: {current: {lastFocusedIndex}}} = instances;
+		function lastFocusedPersist () {
+			const {spottable: {current: {lastFocusedIndex}}} = instances;
 
-		const lastFocusedPersist = () => {
 			if (lastFocusedIndex != null) {
 				return {
 					container: false,
@@ -16,7 +16,21 @@ const useSpotlightConfig = (props, instances) => {
 					key: lastFocusedIndex
 				};
 			}
-		};
+		}
+
+		function lastFocusedRestore ({key}, all) {
+			const placeholder = all.find(el => 'vlPlaceholder' in el.dataset);
+
+			if (placeholder) {
+				placeholder.dataset.index = key;
+
+				return placeholder;
+			}
+
+			return all.reduce((focused, node) => {
+				return focused || Number(node.dataset.index) === key && node;
+			}, null);
+		}
 
 		function configureSpotlight () {
 			const {spacing, spotlightId} = props;
@@ -27,11 +41,13 @@ const useSpotlightConfig = (props, instances) => {
 				 * Returns the data-index as the key for last focused
 				 */
 				lastFocusedPersist,
+
 				/*
 				 * Restores the data-index into the placeholder if its the only element. Tries to find a
 				 * matching child otherwise.
 				 */
 				lastFocusedRestore,
+
 				/*
 				 * Directs spotlight focus to favor straight elements that are within range of `spacing`
 				 * over oblique elements, like scroll buttons.
@@ -42,26 +58,6 @@ const useSpotlightConfig = (props, instances) => {
 
 		configureSpotlight();
 	}, [props, instances]);
-
-	// Functions
-
-	/*
-	 * Restores the data-index into the placeholder if it exists. Tries to find a matching child
-	 * otherwise.
-	 */
-	function lastFocusedRestore ({key}, all) {
-		const placeholder = all.find(el => 'vlPlaceholder' in el.dataset);
-
-		if (placeholder) {
-			placeholder.dataset.index = key;
-
-			return placeholder;
-		}
-
-		return all.reduce((focused, node) => {
-			return focused || Number(node.dataset.index) === key && node;
-		}, null);
-	}
 };
 
 const getNumberValue = (index) => {
@@ -73,12 +69,13 @@ const getNumberValue = (index) => {
 
 const useSpotlightRestore = (props, instances, context) => {
 	const {scrollContentRef, spottable} = instances;
-	const {getItemNode} = context;
+	const {focusByIndex, getItemNode} = context;
 
 	// Mutable value
 
 	const mutableRef = useRef({
 		preservedIndex: false,
+		lastSpotlightDirection: null,
 		restoreLastFocused: false
 	});
 
@@ -96,6 +93,7 @@ const useSpotlightRestore = (props, instances, context) => {
 
 			if (index) {
 				mutableRef.current.preservedIndex = getNumberValue(index);
+				mutableRef.current.lastSpotlightDirection = null;
 				mutableRef.current.restoreLastFocused = true;
 			}
 		}
@@ -127,7 +125,7 @@ const useSpotlightRestore = (props, instances, context) => {
 
 				// try to focus the last focused item
 				spottable.current.isScrolledByJump = true;
-				const foundLastFocused = Spotlight.focus(itemNode);
+				const foundLastFocused = focusByIndex(mutableRef.current.preservedIndex, mutableRef.current.lastSpotlightDirection);
 				spottable.current.isScrolledByJump = false;
 
 				// but if that fails (because it isn't found or is disabled), focus the container so
@@ -152,8 +150,9 @@ const useSpotlightRestore = (props, instances, context) => {
 		));
 	}
 
-	function setPreservedIndex (index) {
+	function setPreservedIndex (index, direction = null) {
 		mutableRef.current.preservedIndex = index;
+		mutableRef.current.lastSpotlightDirection = direction;
 		mutableRef.current.restoreLastFocused = true;
 	}
 
