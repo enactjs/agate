@@ -35,11 +35,11 @@ class DateTimePickerBase extends React.Component {
 
 	constructor (props) {
 		super(props);
+
 		this.state = {
-			now: new Date(),
-			date: '',
-			time: '',
-			dateTime: ''
+			date: new Date(),
+			time: new Date(),
+			dateTime: new Date()
 		};
 	}
 
@@ -50,32 +50,37 @@ class DateTimePickerBase extends React.Component {
 	}
 
 	handleChange = (type) => ({value}) => {
+		const {date, time} = this.state;
+
 		this.setState({
-				[type]: value,
-				dateTime: value
-				}
-			);
+			[type]: value
+		});
+
+		setTimeout(() => {
+			let dateStr = date.toString();
+			let timeStr = time.toString();
+
+			this.setState({
+				dateTime: dateStr.slice(0, 16) + timeStr.slice(16, timeStr.length)
+			});
+		});
 	};
 
 	render () {
 		const {className, ...rest} = this.props;
-		const {now} = this.state;
+		const {date, time} = this.state;
 		delete rest.onChange;
-		console.log(this.state.date);
-		console.log(this.state.time);
-		console.log(this.state.dateTime);
-
 
 		return (
 			<Row {...rest} className={classnames(className, css.dateTimePicker)} align="center center">
 				<Cell>
 					<Row align="center center">
-						<TimePicker defaultValue={now} onChange={this.handleChange('time')} />
+						<TimePicker defaultValue={time} onChange={this.handleChange('time')} />
 					</Row>
 				</Cell>
 				<Cell>
 					<Row align="center center">
-						<DatePicker defaultValue={now} onChange={this.handleChange('date')}/>
+						<DatePicker defaultValue={date} onChange={this.handleChange('date')} />
 					</Row>
 				</Cell>
 			</Row>

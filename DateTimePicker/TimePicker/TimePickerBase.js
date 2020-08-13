@@ -12,17 +12,18 @@ const hours24 = [
 	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
 	'12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'
 ];
+
 const hours12 = [
 	'12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
 	'12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'
 ];
 
 /**
- * {@link agate/TimePicker/TimePickerBase.HourPicker} is a utility component to prevent the
+ * {@link agate/DateTimePicker/TimePicker/TimePickerBase.HourPicker} is a utility component to prevent the
  * animation of the picker when the display text doesn't change for 12-hour locales.
  *
  * @class HourPicker
- * @memberof agate/TimePicker/TimePickerBase
+ * @memberof agate/DateTimePicker/TimePicker/TimePickerBase
  * @ui
  * @private
  */
@@ -63,19 +64,19 @@ class HourPicker extends React.Component {
 }
 
 /**
-* {@link agate/TimePicker.TimePickerBase} is the stateless functional time picker
+* {@link agate/DateTimePicker/TimePicker.TimePickerBase} is the stateless functional time picker
 * component. Should not be used directly but may be composed within another component as it is
-* within {@link agate/TimePicker.TimePicker}.
+* within {@link agate/DateTimePicker/TimePicker.TimePicker}.
 *
 * @class TimePickerBase
-* @memberof agate/TimePicker
+* @memberof agate/DateTimePicker/TimePicker
 * @ui
 * @public
 */
 const TimePickerBase = kind({
 	name: 'TimePickerBase',
 
-	propTypes: /** @lends agate/TimePicker.TimePickerBase.prototype */ {
+	propTypes: /** @lends agate/DateTimePicker/TimePicker.TimePickerBase.prototype */ {
 		/**
 		 * The `hour` component of the time.
 		 *
@@ -132,14 +133,6 @@ const TimePickerBase = kind({
 		 * @public
 		 */
 		hourAriaLabel: PropTypes.string,
-
-		/**
-		 * The primary text of `TimePicker`.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		label: PropTypes.string,
 
 		/**
 		 * The "aria-label" for the meridiem picker.
@@ -234,7 +227,6 @@ const TimePickerBase = kind({
 		hourAriaLabel,
 		meridiem,
 		meridiemAriaLabel,
-		meridiemLabel,
 		meridiemPickerWidth,
 		meridiems,
 		minute,
@@ -243,13 +235,15 @@ const TimePickerBase = kind({
 		onChangeMeridiem,
 		onChangeMinute,
 		order,
-		rtl,
 		...rest
 	}) => {
 
+		delete rest.meridiemLabel;
+		delete rest.rtl;
+
 		return (
 			<DateTime {...rest} css={css}>
-				{order.map((picker, index) => {
+				{order.map((picker) => {
 					switch (picker) {
 						case 'h':
 						case 'k':

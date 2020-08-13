@@ -4,7 +4,7 @@
  * @example
  * <DatePicker onChange={console.log} />
  *
- * @module agate/DatePicker
+ * @module agate/DateTimePicker/DatePicker
  * @exports DatePicker
  * @exports DatePickerBase
  * @exports dateToLocaleString
@@ -96,11 +96,11 @@ const dateTimeConfig = {
 };
 
 /**
- * A date selection component, ready to use in agate applications.
+ * A date selection component, ready to use in Agate applications.
  *
  * `DatePicker` may be used to select the year, month, and day. It uses a standard `Date` object for
  * its `value` which can be shared as the `value` for a
- * [TimePicker]{@link agate/TimePicker.TimePicker} to select both a date and time.
+ * [TimePicker]{@link agate/DateTimePicker/TimePicker.TimePicker} to select both a date and time.
  *
  * By default, `DatePicker` maintains the state of its `value` property. Supply the
  * `defaultValue` property to control its initial value. If you wish to directly control updates
@@ -116,8 +116,8 @@ const dateTimeConfig = {
  * ```
  *
  * @class DatePicker
- * @memberof agate/DatePicker
- * @extends agate/DatePicker.DatePickerBase
+ * @memberof agate/DateTimePicker/DatePicker
+ * @extends agate/DateTimePicker/DatePicker.DatePickerBase
  * @mixes ui/Toggleable.Toggleable
  * @mixes ui/RadioDecorator.RadioDecorator
  * @mixes ui/Changeable.Changeable
@@ -144,7 +144,7 @@ const DatePicker = Pure(
  *
  * @name defaultValue
  * @type {Date}
- * @memberof agate/DatePicker.DatePicker.prototype
+ * @memberof agate/DateTimePicker/DatePicker.DatePicker.prototype
  * @public
  */
 
@@ -153,7 +153,7 @@ const DatePicker = Pure(
  *
  * @name value
  * @type {Date}
- * @memberof agate/DatePicker.DatePicker.prototype
+ * @memberof agate/DateTimePicker/DatePicker.DatePicker.prototype
  * @public
  */
 
@@ -161,7 +161,7 @@ const DatePicker = Pure(
  * Converts a standard `Date` object into a locale-specific string.
  *
  * @function
- * @memberof agate/DatePicker
+ * @memberof agate/DateTimePicker/DatePicker
  * @param {Date} date `Date` to convert
  * @returns {String?} Converted date or `null` if `date` is invalid
  */

@@ -1,13 +1,13 @@
 import kind from '@enact/core/kind';
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import componentCss from './DateTime.module.less';
 
 /**
  * {@link agate/internal/DateTime.DateTime} provides the surrounding
- * markup and styling for a {@link agate/DatePicker} and
- * {@link agate/TimePicker}.
+ * markup and styling for a {@link agate/DateTimePicker/DatePicker} and
+ * {@link agate/DateTimePicker/TimePicker}.
  *
  * @class DateTime
  * @memberof agate/internal/DateTime
@@ -18,14 +18,7 @@ const DateTimeBase = kind({
 	name: 'DateTime',
 
 	propTypes:  /** @lends agate/internal/DateTime.DateTime.prototype */ {
-		css: PropTypes.object,
-
-		/**
-		 * The label to display above the picker
-		 *
-		 * @type {String}
-		 */
-		label: PropTypes.string
+		css: PropTypes.object
 	},
 
 	styles: {
@@ -34,7 +27,7 @@ const DateTimeBase = kind({
 		publicClassNames: ['dateTime', 'pickers']
 	},
 
-	render: ({children, css, label, ...rest}) => (
+	render: ({children, css, ...rest}) => (
 		<div {...rest}>
 			<div className={css.pickers}>
 				{children}

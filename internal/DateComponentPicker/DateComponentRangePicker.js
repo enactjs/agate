@@ -1,7 +1,7 @@
-import Changeable from '@enact/ui/Changeable';
 import kind from '@enact/core/kind';
-import React from 'react';
+import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import RangePicker from '../../RangePicker';
 
@@ -57,7 +57,7 @@ const DateComponentRangePickerBase = kind({
 		className: 'dateComponentPicker'
 	},
 
-	render: ({label, max, min, value, ...rest}) => (
+	render: ({max, min, value, ...rest}) => (
 		<RangePicker
 			{...rest}
 			max={max}

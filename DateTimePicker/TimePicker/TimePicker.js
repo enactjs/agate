@@ -1,10 +1,10 @@
 /**
- * Provides a agate-themed time selection component.
+ * Provides an Agate-themed time selection component.
  *
  * @example
  * <TimePicker value={new Date()} />
  *
- * @module agate/TimePicker
+ * @module agate/DateTimePicker/TimePicker
  * @exports TimePicker
  * @exports TimePickerBase
  * @exports timeToLocaleString
@@ -198,7 +198,7 @@ const dateTimeConfig = {
 /**
  * A component that allows displaying or selecting time.
  *
- * Set the [value]{@link agate/TimePicker.TimePicker#value} property to a standard JavaScript
+ * Set the [value]{@link agate/DateTimePicker/TimePicker.TimePicker#value} property to a standard JavaScript
  * [Date] {@link /docs/developer-guide/glossary/#date} object to initialize the picker.
  *
  * By default, `TimePicker` maintains the state of its `value` property. Supply the
@@ -207,7 +207,7 @@ const dateTimeConfig = {
  * `onChange` events.
  *
  * @class TimePicker
- * @memberof agate/TimePicker
+ * @memberof agate/DateTimePicker/TimePicker
  * @mixes ui/Toggleable.Toggleable
  * @mixes ui/RadioDecorator.RadioDecorator
  * @mixes ui/Changeable.Changeable
@@ -219,7 +219,7 @@ const dateTimeConfig = {
  * Default value
  *
  * @name defaultValue
- * @memberof agate/TimePicker.TimePicker.prototype
+ * @memberof agate/DateTimePicker/TimePicker.TimePicker.prototype
  * @type {Number}
  * @public
  */
@@ -237,7 +237,7 @@ const TimePicker = Pure(
  * The selected date.
  *
  * @name value
- * @memberof agate/TimePicker.TimePicker
+ * @memberof agate/DateTimePicker/TimePicker.TimePicker
  * @instance
  * @type {Date}
  * @public
@@ -247,7 +247,7 @@ const TimePicker = Pure(
  * Converts a standard `Date` object into a locale-specific string.
  *
  * @function
- * @memberof agate/TimePicker
+ * @memberof agate/DateTimePicker/TimePicker
  * @param {Date} time `Date` to convert
  * @returns {String?} Converted date or `null` if `date` is invalid
  */
@@ -260,4 +260,8 @@ const timeToLocaleString = (time) => {
 };
 
 export default TimePicker;
-export {TimePicker, TimePickerBase, timeToLocaleString};
+export {
+	TimePicker,
+	TimePickerBase,
+	timeToLocaleString
+};

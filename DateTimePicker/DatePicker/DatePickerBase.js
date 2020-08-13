@@ -11,17 +11,17 @@ import css from './DatePicker.module.less';
  * A date selection component.
  *
  * This component is most often not used directly but may be composed within another component as it
- * is within [DatePicker]{@link agate/DatePicker.DatePicker}.
+ * is within [DatePicker]{@link agate/DateTimePicker/DatePicker.DatePicker}.
  *
  * @class DatePickerBase
- * @memberof agate/DatePicker
+ * @memberof agate/DateTimePicker/DatePicker
  * @ui
  * @public
  */
 const DatePickerBase = kind({
 	name: 'DatePickerBase',
 
-	propTypes:  /** @lends agate/DatePicker.DatePickerBase.prototype */ {
+	propTypes:  /** @lends agate/DateTimePicker/DatePicker.DatePickerBase.prototype */ {
 		/**
 		 * The `day` component of the Date.
 		 *
@@ -100,14 +100,6 @@ const DatePickerBase = kind({
 		 * @public
 		 */
 		disabled: PropTypes.bool,
-
-		/**
-		 * The primary text of the `DatePicker`.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		label: PropTypes.string,
 
 		/**
 		 * The maximum selectable `year` value.
@@ -207,11 +199,12 @@ const DatePickerBase = kind({
 		onChangeMonth,
 		onChangeYear,
 		order,
-		rtl,
 		year,
 		yearAriaLabel,
 		...rest
 	}) => {
+
+		delete rest.rtl;
 
 		return (
 			<DateTime {...rest}>
