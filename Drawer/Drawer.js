@@ -61,6 +61,10 @@ const DrawerBase = kind({
 		className: 'drawer'
 	},
 
+	computed: {
+		role: () => 'alert'
+	},
+
 	render: ({footer, children, css, noAnimation, onHide, open, header, ...rest}) => {
 		return (
 			<Transition

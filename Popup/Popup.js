@@ -91,7 +91,8 @@ const PopupBase = kind({
 	computed: {
 		className: ({centered, closeButton, position, styler, title}) => styler.append({top: position === 'top', withCloseButton: closeButton, withTitle: title, centered}),
 		transitionType : ({position}) => position === 'center' ? 'fade' : 'slide',
-		direction : ({position}) => position === 'center' ? 'down' : 'up'
+		direction : ({position}) => position === 'center' ? 'down' : 'up',
+		role: () => 'alert'
 	},
 	render: ({buttons, children, closeButton, css, direction, noAnimation, onClose, onHide, open, skin, title, transitionType, ...rest}) => {
 		const wideLayout = (skin === 'carbon');

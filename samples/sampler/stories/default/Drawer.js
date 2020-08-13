@@ -7,12 +7,13 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Drawer, {DrawerBase} from '@enact/agate/Drawer';
-import Heading from '@enact/agate/Heading';
+import Heading, {HeadingBase} from '@enact/agate/Heading';
 
 import css from './Drawer.module.less';
 
 Drawer.displayName = 'Drawer';
 const Config = mergeComponentMetadata('Drawer', Drawer, DrawerBase);
+const HeadingConfig = mergeComponentMetadata('Heading', Heading, HeadingBase);
 
 const StoryOptions = {
 	groupId: 'Story Options'
@@ -68,10 +69,10 @@ storiesOf('Agate', module)
 					>
 						<header>
 							<Heading
-								color={select('Heading color', headingValues.colors, StoryOptions)}
-								showLine={boolean('Heading showLine', StoryOptions)}
-								size={select('Heading size', headingValues.sizes, StoryOptions)}
-								spacing={select('Heading spacing', headingValues.spacings, StoryOptions)}
+								color={select('Heading color', headingValues.colors, HeadingConfig, '')}
+								showLine={boolean('Heading showLine', HeadingConfig)}
+								size={select('Heading size', headingValues.sizes, HeadingConfig, '')}
+								spacing={select('Heading spacing', headingValues.spacings, HeadingConfig, '')}
 							>
 								{text('header', Config, '[insert witty header text]')}
 							</Heading>

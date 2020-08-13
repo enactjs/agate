@@ -64,7 +64,8 @@ const PopupMenuBase = kind({
 	},
 
 	computed: {
-		className: ({orientation, styler}) => styler.append(orientation)
+		className: ({orientation, styler}) => styler.append(orientation),
+		role: () => 'alert'
 	},
 
 	render: ({children, closeButton, closeButtonLabel, css, noAnimation, onClose, onHide, open, orientation, title, ...rest}) => {
