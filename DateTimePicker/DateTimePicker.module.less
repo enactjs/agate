@@ -3,33 +3,17 @@
 @import "../styles/skin.less";
 
 .dateTimePicker {
+	position: relative;
+	width: 700px;
+
 	.applySkins({
-		font-size: 21px;	// Convert to LESS variable
+		font-size: @agate-picker-font-size;
 
-		.pickerCol {
-			margin: @agate-datetimepicker-margin;
-			transform: @agate-datetimepicker-transform;
-		}
-
-		.pickerCell,
-		.pickerLeft,
-		.pickerRight {
-			border-radius: 0;
-			transform: @agate-datetimepicker-cell-transform;
-		}
-
-		.label {
-			transform: @agate-datetimepicker-label-transform;
-		}
-
-		.pickerLeft {
-			border-top-left-radius: @agate-datetimepicker-border-radius;
-			border-bottom-left-radius: @agate-datetimepicker-border-radius;
-		}
-
-		.pickerRight {
-			border-top-right-radius: @agate-datetimepicker-border-radius;
-			border-bottom-right-radius: @agate-datetimepicker-border-radius;
+		.item {
+			&.active {
+				background-image: none;
+				background-color: transparent;
+			}
 		}
 	});
 }
