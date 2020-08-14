@@ -73,7 +73,7 @@ const PopupBase = kind({
 		 * @public
 		 */
 		position: PropTypes.oneOf(['center', 'top']),
-
+		role: PropTypes.string,
 		skin: PropTypes.string,
 		title: PropTypes.string
 	},
@@ -82,7 +82,8 @@ const PopupBase = kind({
 		closeButton: false,
 		noAnimation: false,
 		open: false,
-		position: 'center'
+		position: 'center',
+		role: 'alert'
 	},
 	styles: {
 		css: componentCss,
@@ -91,8 +92,7 @@ const PopupBase = kind({
 	computed: {
 		className: ({centered, closeButton, position, styler, title}) => styler.append({top: position === 'top', withCloseButton: closeButton, withTitle: title, centered}),
 		transitionType : ({position}) => position === 'center' ? 'fade' : 'slide',
-		direction : ({position}) => position === 'center' ? 'down' : 'up',
-		role: () => 'alert'
+		direction : ({position}) => position === 'center' ? 'down' : 'up'
 	},
 	render: ({buttons, children, closeButton, css, direction, noAnimation, onClose, onHide, open, skin, title, transitionType, ...rest}) => {
 		const wideLayout = (skin === 'carbon');

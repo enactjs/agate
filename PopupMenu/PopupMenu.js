@@ -47,6 +47,7 @@ const PopupMenuBase = kind({
 		onHide: PropTypes.func,
 		open: PropTypes.bool,
 		orientation: PropTypes.oneOf(['horizontal']),
+		role: PropTypes.string,
 		title: PropTypes.string
 	},
 
@@ -55,7 +56,8 @@ const PopupMenuBase = kind({
 		closeButtonLabel: $L('Cancel'),
 		noAnimation: false,
 		open: false,
-		orientation: 'horizontal'
+		orientation: 'horizontal',
+		role: 'alert'
 	},
 
 	styles: {
@@ -64,8 +66,7 @@ const PopupMenuBase = kind({
 	},
 
 	computed: {
-		className: ({orientation, styler}) => styler.append(orientation),
-		role: () => 'alert'
+		className: ({orientation, styler}) => styler.append(orientation)
 	},
 
 	render: ({children, closeButton, closeButtonLabel, css, noAnimation, onClose, onHide, open, orientation, title, ...rest}) => {

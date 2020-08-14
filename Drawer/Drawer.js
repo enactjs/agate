@@ -47,22 +47,20 @@ const DrawerBase = kind({
 		// and the .closeButton CSS in the LESS file all relate to this functionality.
 		// onClose: PropTypes.func,
 		onHide: PropTypes.func,
-		open: PropTypes.bool
+		open: PropTypes.bool,
+		role: PropTypes.string
 	},
 
 	defaultProps: {
 		noAnimation: false,
 		open: false,
-		orientation: 'vertical'
+		orientation: 'vertical',
+		role: 'alert'
 	},
 
 	styles: {
 		css: componentCss,
 		className: 'drawer'
-	},
-
-	computed: {
-		role: () => 'alert'
 	},
 
 	render: ({footer, children, css, noAnimation, onHide, open, header, ...rest}) => {
