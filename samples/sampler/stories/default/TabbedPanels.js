@@ -23,6 +23,12 @@ storiesOf('Agate', module)
 				setIndex(e.index);
 				action('onSelect')(e);
 			};
+			const onBeforeTabs = () => {
+				setIndex(Math.max(panelIndex - 1, 0));
+			};
+			const onAfterTabs = () => {
+				setIndex(Math.min(panelIndex + 1, 2));
+			};
 			return (
 				<div style={{paddingBottom: '56.25%'}}>
 					<TabbedPanels
@@ -40,10 +46,20 @@ storiesOf('Agate', module)
 						]}
 					>
 						<beforeTabs>
-							<Button size="small" type="grid" icon="arrowlargeleft" />
+							<Button
+								size="small"
+								type="grid"
+								icon="arrowlargeleft"
+								onClick={onBeforeTabs} // eslint-disable-line react/jsx-no-bind
+							/>
 						</beforeTabs>
 						<afterTabs>
-							<Button size="small" type="grid" icon="arrowlargeright" />
+							<Button
+								size="small"
+								type="grid"
+								icon="arrowlargeright"
+								onClick={onAfterTabs} // eslint-disable-line react/jsx-no-bind
+							/>
 						</afterTabs>
 						<Panel>
 							<Button icon="netbook">Click me!</Button>
