@@ -4,7 +4,7 @@
  * @example
  * <DatePicker onChange={console.log} />
  *
- * @module agate/DateTimePicker/DatePicker
+ * @module agate/DatePicker
  * @exports DatePicker
  * @exports DatePickerBase
  * @exports dateToLocaleString
@@ -14,8 +14,8 @@ import Pure from '@enact/ui/internal/Pure';
 import DateFactory from 'ilib/lib/DateFactory';
 import DateFmt from 'ilib/lib/DateFmt';
 
-import {DateTimeDecorator} from '../../internal/DateTime';
-import Skinnable from '../../Skinnable';
+import {DateTimeDecorator} from '../internal/DateTime';
+import Skinnable from '../Skinnable';
 
 import DatePickerBase from './DatePickerBase';
 
@@ -100,7 +100,7 @@ const dateTimeConfig = {
  *
  * `DatePicker` may be used to select the year, month, and day. It uses a standard `Date` object for
  * its `value` which can be shared as the `value` for a
- * [TimePicker]{@link agate/DateTimePicker/TimePicker.TimePicker} to select both a date and time.
+ * [TimePicker]{@link agate/TimePicker.TimePicker} to select both a date and time.
  *
  * By default, `DatePicker` maintains the state of its `value` property. Supply the
  * `defaultValue` property to control its initial value. If you wish to directly control updates
@@ -116,10 +116,8 @@ const dateTimeConfig = {
  * ```
  *
  * @class DatePicker
- * @memberof agate/DateTimePicker/DatePicker
- * @extends agate/DateTimePicker/DatePicker.DatePickerBase
- * @mixes ui/Toggleable.Toggleable
- * @mixes ui/RadioDecorator.RadioDecorator
+ * @memberof agate/DatePicker
+ * @extends agate/DatePicker.DatePickerBase
  * @mixes ui/Changeable.Changeable
  * @omit day
  * @omit maxDays
@@ -144,7 +142,7 @@ const DatePicker = Pure(
  *
  * @name defaultValue
  * @type {Date}
- * @memberof agate/DateTimePicker/DatePicker.DatePicker.prototype
+ * @memberof agate/DatePicker.DatePicker.prototype
  * @public
  */
 
@@ -153,7 +151,7 @@ const DatePicker = Pure(
  *
  * @name value
  * @type {Date}
- * @memberof agate/DateTimePicker/DatePicker.DatePicker.prototype
+ * @memberof agate/DatePicker.DatePicker.prototype
  * @public
  */
 
@@ -161,7 +159,7 @@ const DatePicker = Pure(
  * Converts a standard `Date` object into a locale-specific string.
  *
  * @function
- * @memberof agate/DateTimePicker/DatePicker
+ * @memberof agate/DatePicker
  * @param {Date} date `Date` to convert
  * @returns {String?} Converted date or `null` if `date` is invalid
  */

@@ -4,7 +4,7 @@
  * @example
  * <TimePicker value={new Date()} />
  *
- * @module agate/DateTimePicker/TimePicker
+ * @module agate/TimePicker
  * @exports TimePicker
  * @exports TimePickerBase
  * @exports timeToLocaleString
@@ -15,8 +15,8 @@ import DateFactory from 'ilib/lib/DateFactory';
 import DateFmt from 'ilib/lib/DateFmt';
 import LocaleInfo from 'ilib/lib/LocaleInfo';
 
-import {DateTimeDecorator} from '../../internal/DateTime';
-import Skinnable from '../../Skinnable';
+import {DateTimeDecorator} from '../internal/DateTime';
+import Skinnable from '../Skinnable';
 
 import TimePickerBase from './TimePickerBase';
 
@@ -81,25 +81,16 @@ const getLabelFormatter = () => new DateFmt({
 });
 
 const dateTimeConfig = {
-	customProps: function (i18n, value, {meridiemLabel}) {
+	customProps: function (i18n, value) {
 		let values = {
 			// i18n props
 			meridiems: i18n.meridiemLabels,
-			meridiemLabel,
 
 			// date components
 			hour: 12,
 			minute: 0,
 			meridiem: 0
 		};
-
-		if (i18n.meridiemEnabled && meridiemLabel == null) {
-			if (values.meridiems.length > 2) {
-				values.meridiemLabel = `${values.meridiems[0]} / ${values.meridiems[1]} ...`;
-			} else {
-				values.meridiemLabel = values.meridiems.join(' / ');
-			}
-		}
 
 		if (value) {
 			if (i18n.meridiemEnabled) {
@@ -198,7 +189,7 @@ const dateTimeConfig = {
 /**
  * A component that allows displaying or selecting time.
  *
- * Set the [value]{@link agate/DateTimePicker/TimePicker.TimePicker#value} property to a standard JavaScript
+ * Set the [value]{@link agate/TimePicker.TimePicker#value} property to a standard JavaScript
  * [Date] {@link /docs/developer-guide/glossary/#date} object to initialize the picker.
  *
  * By default, `TimePicker` maintains the state of its `value` property. Supply the
@@ -207,9 +198,7 @@ const dateTimeConfig = {
  * `onChange` events.
  *
  * @class TimePicker
- * @memberof agate/DateTimePicker/TimePicker
- * @mixes ui/Toggleable.Toggleable
- * @mixes ui/RadioDecorator.RadioDecorator
+ * @memberof agate/TimePicker
  * @mixes ui/Changeable.Changeable
  * @ui
  * @public
@@ -219,7 +208,7 @@ const dateTimeConfig = {
  * Default value
  *
  * @name defaultValue
- * @memberof agate/DateTimePicker/TimePicker.TimePicker.prototype
+ * @memberof agate/TimePicker.TimePicker.prototype
  * @type {Number}
  * @public
  */
@@ -237,7 +226,7 @@ const TimePicker = Pure(
  * The selected date.
  *
  * @name value
- * @memberof agate/DateTimePicker/TimePicker.TimePicker
+ * @memberof agate/TimePicker.TimePicker
  * @instance
  * @type {Date}
  * @public
@@ -247,7 +236,7 @@ const TimePicker = Pure(
  * Converts a standard `Date` object into a locale-specific string.
  *
  * @function
- * @memberof agate/DateTimePicker/TimePicker
+ * @memberof agate/TimePicker
  * @param {Date} time `Date` to convert
  * @returns {String?} Converted date or `null` if `date` is invalid
  */

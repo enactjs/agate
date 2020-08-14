@@ -6,8 +6,8 @@ import componentCss from './DateTime.module.less';
 
 /**
  * {@link agate/internal/DateTime.DateTime} provides the surrounding
- * markup and styling for a {@link agate/DateTimePicker/DatePicker} and
- * {@link agate/DateTimePicker/TimePicker}.
+ * markup and styling for a {@link agate/DatePicker} and
+ * {@link agate/TimePicker}.
  *
  * @class DateTime
  * @memberof agate/internal/DateTime

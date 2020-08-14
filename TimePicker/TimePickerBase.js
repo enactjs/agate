@@ -2,8 +2,8 @@ import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {DateComponentPicker, DateComponentRangePicker} from '../../internal/DateComponentPicker';
-import DateTime from '../../internal/DateTime';
+import {DateComponentPicker, DateComponentRangePicker} from '../internal/DateComponentPicker';
+import DateTime from '../internal/DateTime';
 
 import css from './TimePicker.module.less';
 
@@ -19,11 +19,11 @@ const hours12 = [
 ];
 
 /**
- * {@link agate/DateTimePicker/TimePicker/TimePickerBase.HourPicker} is a utility component to prevent the
+ * {@link agate/TimePicker/TimePickerBase.HourPicker} is a utility component to prevent the
  * animation of the picker when the display text doesn't change for 12-hour locales.
  *
  * @class HourPicker
- * @memberof agate/DateTimePicker/TimePicker/TimePickerBase
+ * @memberof agate/TimePicker/TimePickerBase
  * @ui
  * @private
  */
@@ -64,19 +64,19 @@ class HourPicker extends React.Component {
 }
 
 /**
-* {@link agate/DateTimePicker/TimePicker.TimePickerBase} is the stateless functional time picker
+* {@link agate/TimePicker.TimePickerBase} is the stateless functional time picker
 * component. Should not be used directly but may be composed within another component as it is
-* within {@link agate/DateTimePicker/TimePicker.TimePicker}.
+* within {@link agate/TimePicker.TimePicker}.
 *
 * @class TimePickerBase
-* @memberof agate/DateTimePicker/TimePicker
+* @memberof agate/TimePicker
 * @ui
 * @public
 */
 const TimePickerBase = kind({
 	name: 'TimePickerBase',
 
-	propTypes: /** @lends agate/DateTimePicker/TimePicker.TimePickerBase.prototype */ {
+	propTypes: /** @lends agate/TimePicker.TimePickerBase.prototype */ {
 		/**
 		 * The `hour` component of the time.
 		 *
@@ -144,14 +144,6 @@ const TimePickerBase = kind({
 		 * @public
 		 */
 		meridiemAriaLabel: PropTypes.string,
-
-		/**
-		 * The hint string read when focusing the meridiem picker.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		meridiemLabel: PropTypes.string,
 
 		/**
 		 * Array of meridiem labels to display.
@@ -238,7 +230,6 @@ const TimePickerBase = kind({
 		...rest
 	}) => {
 
-		delete rest.meridiemLabel;
 		delete rest.rtl;
 
 		return (

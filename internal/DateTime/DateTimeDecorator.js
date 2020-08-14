@@ -27,12 +27,10 @@ const toTime = (date) => {
 
 /**
  * {@link agate/internal/DateTimeDecorator.DateTimeDecorator} provides common behavior for
- * {@link agate/DateTimePicker/DatePicker.DatePicker} and {@link agate/DateTimePicker/TimePicker.TimePicker}.
+ * {@link agate/DatePicker.DatePicker} and {@link agate/TimePicker.TimePicker}.
  *
  * @class DateTimeDecorator
  * @memberof agate/internal/DateTimeDecorator
- * @mixes ui/Toggleable.Toggleable
- * @mixes ui/RadioDecorator.RadioDecorator
  * @mixes ui/Changeable.Changeable
  * @hoc
  * @private

@@ -2,8 +2,8 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import {DateComponentRangePicker} from '../../internal/DateComponentPicker';
-import DateTime from '../../internal/DateTime';
+import {DateComponentRangePicker} from '../internal/DateComponentPicker';
+import DateTime from '../internal/DateTime';
 
 import css from './DatePicker.module.less';
 
@@ -11,17 +11,17 @@ import css from './DatePicker.module.less';
  * A date selection component.
  *
  * This component is most often not used directly but may be composed within another component as it
- * is within [DatePicker]{@link agate/DateTimePicker/DatePicker.DatePicker}.
+ * is within [DatePicker]{@link agate/DatePicker.DatePicker}.
  *
  * @class DatePickerBase
- * @memberof agate/DateTimePicker/DatePicker
+ * @memberof agate/DatePicker
  * @ui
  * @public
  */
 const DatePickerBase = kind({
 	name: 'DatePickerBase',
 
-	propTypes:  /** @lends agate/DateTimePicker/DatePicker.DatePickerBase.prototype */ {
+	propTypes:  /** @lends agate/DatePicker.DatePickerBase.prototype */ {
 		/**
 		 * The `day` component of the Date.
 		 *
