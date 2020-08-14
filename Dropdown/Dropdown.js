@@ -17,9 +17,11 @@
 
 import {handle, forward, forProp} from '@enact/core/handle';
 import kind from '@enact/core/kind';
+import {extractAriaProps} from '@enact/core/util';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
+import IdProvider from '@enact/ui/internal/IdProvider';
 import Toggleable from '@enact/ui/Toggleable';
 import Transition from '@enact/ui/Transition';
 import PropTypes from 'prop-types';
@@ -167,8 +169,8 @@ const DropdownBase = kind({
 
 	computed: {
 		buttonClassName: ({open, styler}) => styler.append({open}),
-		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'} ),
-		dropdownButtonClassname: ({css, direction, styler}) => styler.join(css.dropdownButton, {upDropdownButton: direction === 'up'} ),
+		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'}),
+		dropdownButtonClassname: ({css, direction, styler}) => styler.join(css.dropdownButton, {upDropdownButton: direction === 'up'}),
 		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected, title}) => {
 			if (isSelectedValid({children, selected})) {
@@ -196,7 +198,10 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+	render: ({'aria-label': ariaLabel, ariaLabelledBy, buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+		const ariaProps = extractAriaProps(rest);
+		const calcAriaProps = ((ariaLabel != null) ? null : {role: 'region', 'aria-labelledby': ariaLabelledBy});
+
 		const opened = !disabled && open;
 		const [DropDownButton, wrapperProps, skinVariants, groupProps] = (skin === 'silicon') ? [
 			Button,
@@ -211,13 +216,14 @@ const DropdownBase = kind({
 		];
 
 		return (
-			<div {...rest} >
+			<div {...calcAriaProps} {...rest}>
 				<div {...wrapperProps}>
 					<DropDownButton
 						className={buttonClassName}
 						css={css}
 						disabled={hasChildren ? disabled : true}
 						onClick={opened ? onClose : onOpen}
+						{...ariaProps}
 					>
 						<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
 						{title}
@@ -256,6 +262,14 @@ const DropdownBase = kind({
  * @public
  */
 const DropdownDecorator = compose(
+	SpotlightContainerDecorator({
+		enterTo: 'default-element',
+		preserveId: true
+	}),
+	IdProvider({
+		generateProp: null,
+		prefix: 'd_'
+	}),
 	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose'}),
 	Changeable({change: 'onSelect', prop: 'selected'}),
 	Skinnable({prop: 'skin'})
