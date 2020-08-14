@@ -41,11 +41,12 @@ import componentCss from './Dropdown.module.less';
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
 
-const onTransitionHide = () => {
+const handleTransitionHide = (containerId) => () => {
+	const containerSelector = `[data-spotlight-id='${containerId}']`;
 	const current = Spotlight.getCurrent();
 
-	if (!Spotlight.isPaused() && current && document.querySelector(`.${componentCss.dropdownList}`).contains(current)) {
-		Spotlight.focus(`.${componentCss.dropdown}`);
+	if (!Spotlight.isPaused() && current && document.querySelector(`${containerSelector} .${componentCss.dropdownList}`).contains(current)) {
+		Spotlight.focus(`${containerSelector} .${componentCss.dropdown}`);
 	}
 };
 
@@ -223,6 +224,7 @@ const DropdownBase = kind({
 			{},
 			{childComponent: Item, itemProps: {size: 'small'}}
 		];
+		const onTransitionHide = handleTransitionHide(rest['data-spotlight-id']);
 
 		return (
 			<div {...calcAriaProps} {...rest}>
