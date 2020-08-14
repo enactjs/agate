@@ -18,6 +18,7 @@
 import {handle, forward, forProp} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import {extractAriaProps} from '@enact/core/util';
+import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
@@ -39,6 +40,14 @@ import componentCss from './Dropdown.module.less';
 
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
+
+const onTransitionHide = () => {
+	const current = Spotlight.getCurrent();
+
+	if (!Spotlight.isPaused() && current && document.querySelector(`.${componentCss.dropdownList}`).contains(current)) {
+		Spotlight.focus(`.${componentCss.dropdown}`);
+	}
+};
 
 /**
  * A stateless Dropdown component.
@@ -232,6 +241,7 @@ const DropdownBase = kind({
 						className={transitionContainerClassname}
 						visible={opened}
 						direction={transitionDirection}
+						onHide={onTransitionHide}
 					>
 						<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
 							<Scroller skinVariants={skinVariants} className={css.scroller}>
