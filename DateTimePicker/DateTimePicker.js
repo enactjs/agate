@@ -29,7 +29,7 @@ import css from './DateTimePicker.module.less';
  */
 
 const DateTimePickerBase = kind({
-	name: 'DateTimePicker',
+	name: 'DateTimePickerBase',
 
 	styles: {
 		css,

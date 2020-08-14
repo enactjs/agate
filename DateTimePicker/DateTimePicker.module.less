@@ -1,12 +1,15 @@
 // DateTimePicker.module.less
 //
 @import "../styles/skin.less";
+@import "../styles/variables.less";
 
 .dateTimePicker {
 	position: relative;
+}
 
-	.applySkins({
+.applySkins({
+	.dateTimePicker {
 		font-size: @agate-picker-font-size;
 		width: @agate-datetimepicker-width;
-	});
-}
+	}
+});
