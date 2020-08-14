@@ -47,18 +47,18 @@ storiesOf('Agate', module)
 					>
 						<beforeTabs>
 							<Button
-								size="small"
-								type="grid"
 								icon="arrowlargeleft"
 								onClick={onBeforeTabs} // eslint-disable-line react/jsx-no-bind
+								size="small"
+								type="grid"
 							/>
 						</beforeTabs>
 						<afterTabs>
 							<Button
-								size="small"
-								type="grid"
 								icon="arrowlargeright"
 								onClick={onAfterTabs} // eslint-disable-line react/jsx-no-bind
+								size="small"
+								type="grid"
 							/>
 						</afterTabs>
 						<Panel>
