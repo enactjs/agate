@@ -18,8 +18,6 @@
 @agate-gray:        #8a8a8a;
 @agate-medium-gray: #c9c9c9;
 @agate-light-gray:  #ededed;
-@agate-seal-brown-gray: #131313;
-@agate-night-rider-gray: #333333;
 @agate-background: @agate-white;
 @agate-foreground: @agate-black;
 @agate-background-active: fade(@agate-black, 15%);
@@ -27,6 +25,8 @@
 @agate-background-focus: @agate-accent;
 @agate-foreground-focus: @agate-white;
 @agate-gradient: linear-gradient(to bottom, ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.5)", @agate-accent);
+@gallium-seal-brown-gray: #131313;
+@gallium-night-rider-gray: #333333;
 
 // Component color assignments
 @agate-bg-color: @agate-background;
@@ -134,10 +134,10 @@
 // ---------------------------------------
 @agate-panels-bg-color:               @agate-white;
 @agate-panels-breadcrumb-bg-color:    @agate-light-gray;
-@agate-panels-tab-separator-border-color: @agate-night-rider-gray;
+@agate-panels-tab-separator-border-color: @gallium-night-rider-gray;
 @agate-panels-tab-color:              @agate-foreground;
 @agate-panels-tab-bg-color:           transparent;
-@agate-panels-tab-bg-image:           linear-gradient(to bottom, transparent, fade(@agate-night-rider-gray, 50%));
+@agate-panels-tab-bg-image:           linear-gradient(to bottom, transparent, fade(@gallium-night-rider-gray, 50%));
 @agate-panels-tab-selected-color:     fade(@agate-white, 90%);
 @agate-panels-tab-selected-bg-color:  transparent;
 @agate-panels-tab-selected-bg-image:  linear-gradient(to bottom, ~"hsla(var(--agate-highlight-h, 0), var(--agate-highlight-s, 0), var(--agate-highlight-l, 0), 0.1)", @agate-highlight 98%, @agate-accent);
@@ -159,7 +159,7 @@
 
 // Popup
 // ---------------------------------------
-@agate-popup-plain-body-color: @agate-seal-brown-gray;
+@agate-popup-plain-body-color: @gallium-seal-brown-gray;
 @agate-popup-bg-color: @agate-light-gray;
 @agate-popup-bg-image: none;
 @agate-popup-border-color: @agate-medium-gray;
