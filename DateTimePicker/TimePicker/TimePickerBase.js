@@ -2,7 +2,6 @@ import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import $L from '../../internal/$L';
 import {DateComponentPicker, DateComponentRangePicker} from '../../internal/DateComponentPicker';
 import DateTime from '../../internal/DateTime';
 
@@ -37,17 +36,13 @@ class HourPicker extends React.Component {
 		super(props);
 
 		this.state = {
-			noAnimation: false,
 			prevValue: props.value
 		};
 	}
 
 	static getDerivedStateFromProps (props, state) {
 		if (state.prevValue !== props.value) {
-			const hours = props.hasMeridiem ? hours12 : hours24;
-
 			return {
-				noAnimation: hours[state.prevValue] === hours[props.value],
 				prevValue: props.value
 			};
 		}
@@ -60,7 +55,7 @@ class HourPicker extends React.Component {
 		const hours = hasMeridiem ? hours12 : hours24;
 
 		return (
-			<DateComponentPicker {...rest} noAnimation={this.state.noAnimation}>
+			<DateComponentPicker {...rest}>
 				{hours}
 			</DateComponentPicker>
 		);
@@ -118,15 +113,6 @@ const TimePickerBase = kind({
 		 * @public
 		 */
 		order: PropTypes.arrayOf(PropTypes.oneOf(['h', 'k', 'm', 'a'])).isRequired,
-
-		/**
-		 * Disables voice control.
-		 *
-		 * @type {Boolean}
-		 * @memberof agate/TimePicker.TimePickerBase.prototype
-		 * @public
-		 */
-		'data-webos-voice-disabled': PropTypes.bool,
 
 		/**
 		 * Disables the `TimePicker`.
@@ -219,53 +205,16 @@ const TimePickerBase = kind({
 		onChangeMinute: PropTypes.func,
 
 		/**
-		 * Called when the component is removed while retaining focus.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onSpotlightDisappear: PropTypes.func,
-
-		/**
-		 * Called when the focus leaves the picker when the 5-way left key is pressed.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onSpotlightLeft: PropTypes.func,
-
-		/**
-		 * Called when the focus leaves the picker when the 5-way right key is pressed.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onSpotlightRight: PropTypes.func,
-
-		/**
 		 * Set content to RTL.
 		 *
 		 * @type {Boolean}
 		 * @private
 		 */
-		rtl: PropTypes.bool,
-
-		/**
-		 * Disables spotlight navigation into the component.
-		 *
-		 * @type {Boolean}
-		 * @default false
-		 * @public
-		 */
-		spotlightDisabled: PropTypes.bool
+		rtl: PropTypes.bool
 	},
 
 	defaultProps: {
-		disabled: false,
-		spotlightDisabled: false
+		disabled: false
 	},
 
 	styles: {
@@ -279,7 +228,6 @@ const TimePickerBase = kind({
 	},
 
 	render: ({
-		'data-webos-voice-disabled': voiceDisabled,
 		disabled,
 		hasMeridiem,
 		hour,
@@ -294,75 +242,42 @@ const TimePickerBase = kind({
 		onChangeHour,
 		onChangeMeridiem,
 		onChangeMinute,
-		onSpotlightDisappear,
-		onSpotlightLeft,
-		onSpotlightRight,
 		order,
 		rtl,
-		spotlightDisabled,
 		...rest
 	}) => {
-		const
-			hourAccessibilityHint = $L('hour'),
-			minuteAccessibilityHint = $L('minute');
 
 		return (
 			<DateTime {...rest} css={css}>
 				{order.map((picker, index) => {
-					// although we create a component array based on the provided
-					// order, we ultimately force order in CSS for RTL
-					const isFirst = index === 0;
-					const isLast = index === order.length - 1;
-					// meridiem will always be the left-most control in RTL, regardless of the provided order
-					const isLeft = rtl && picker === 'a' || isFirst && !rtl;
-					// minute will always be the right-most control in RTL, regardless of the provided order
-					const isRight = rtl && picker === 'm' || isLast && !rtl;
-
 					switch (picker) {
 						case 'h':
 						case 'k':
 							return (
 								<React.Fragment key="hour-picker">
 									<HourPicker
-										accessibilityHint={hourAccessibilityHint}
 										aria-label={hourAriaLabel}
 										className={css.hourPicker}
 										disabled={disabled}
-										data-webos-voice-disabled={voiceDisabled}
-										data-webos-voice-group-label={hourAccessibilityHint}
 										hasMeridiem={hasMeridiem}
 										onChange={onChangeHour}
-										onSpotlightDisappear={onSpotlightDisappear}
-										onSpotlightLeft={isLeft ? onSpotlightLeft : null}
-										onSpotlightRight={isRight ? onSpotlightRight : null}
-										spotlightDisabled={spotlightDisabled}
 										value={hour}
 										width={4}
-										wrap
 									/>
 								</React.Fragment>
 							);
 						case 'm':
 							return (
 								<DateComponentRangePicker
-									accessibilityHint={minuteAccessibilityHint}
 									aria-label={minuteAriaLabel}
 									className={css.minutePicker}
 									disabled={disabled}
-									data-webos-voice-disabled={voiceDisabled}
-									data-webos-voice-group-label={minuteAccessibilityHint}
 									key="minute-picker"
 									max={59}
 									min={0}
 									onChange={onChangeMinute}
-									onSpotlightDisappear={onSpotlightDisappear}
-									onSpotlightLeft={isLeft ? onSpotlightLeft : null}
-									onSpotlightRight={isRight ? onSpotlightRight : null}
-									padded
-									spotlightDisabled={spotlightDisabled}
 									value={minute}
 									width={4}
-									wrap
 								/>
 							);
 						case 'a':
@@ -372,18 +287,10 @@ const TimePickerBase = kind({
 									aria-valuetext={meridiems ? meridiems[meridiem] : null}
 									className={css.meridiemPicker}
 									disabled={disabled}
-									data-webos-voice-disabled={voiceDisabled}
-									data-webos-voice-group-label={meridiemLabel}
 									key="meridiem-picker"
 									onChange={onChangeMeridiem}
-									onSpotlightDisappear={onSpotlightDisappear}
-									onSpotlightLeft={isLeft ? onSpotlightLeft : null}
-									onSpotlightRight={isRight ? onSpotlightRight : null}
-									reverse
-									spotlightDisabled={spotlightDisabled}
 									value={meridiem}
 									width={meridiemPickerWidth}
-									wrap
 								>
 									{meridiems}
 								</DateComponentPicker>

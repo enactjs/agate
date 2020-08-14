@@ -71,12 +71,12 @@ class DateTimePickerBase extends React.Component {
 				<div className={css.pickerBackground} />
 				<Cell>
 					<Row align="center center">
-						<DatePicker defaultValue={now} onChange={this.handleChange('date')}/>
+						<TimePicker defaultValue={now} onChange={this.handleChange('time')} />
 					</Row>
 				</Cell>
 				<Cell>
 					<Row align="center center">
-						<TimePicker defaultValue={now} onChange={this.handleChange('time')} />
+						<DatePicker defaultValue={now} onChange={this.handleChange('date')}/>
 					</Row>
 				</Cell>
 			</Row>

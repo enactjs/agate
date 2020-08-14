@@ -60,6 +60,7 @@ const DateComponentRangePickerBase = kind({
 	render: ({label, max, min, value, ...rest}) => (
 		<RangePicker
 			{...rest}
+			css={css}
 			max={max}
 			min={min}
 			orientation="vertical"

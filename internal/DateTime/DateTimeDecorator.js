@@ -71,14 +71,6 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 			onChange: PropTypes.func,
 
 			/**
-			 * When `true`, the date picker is expanded to select a new date.
-			 *
-			 * @type {Boolean}
-			 * @public
-			 */
-			open: PropTypes.bool,
-
-			/**
 			 * The selected date
 			 *
 			 * @type {Date}
@@ -114,10 +106,7 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 		static getDerivedStateFromProps (props, state) {
 			let value = toTime(props.value);
 
-			if (props.open && !props.disabled && state.initialValue == null && state.value == null) {
-				// when the expandable opens, we cache the prop value so it can be restored on
-				// cancel and set value to be the current time if unset in order to initialize the
-				// pickers
+			if (!props.disabled && state.initialValue == null && state.value == null) {
 				return {
 					initialValue: value,
 					value: value || Date.now()
@@ -200,13 +189,6 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 			}
 		}
 
-		handleKeyDown = handle(
-			forward('onKeyDown'),
-			forProp('open', true),
-			forKey('cancel'),
-			call('handleCancel')
-		).bindAs(this, 'handleKeyDown')
-
 		render () {
 			const value = this.toIDate(this.state.value);
 			// pickerValue is only set when cancelling to prevent the unexpected changing of the
@@ -232,7 +214,6 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 					{...props}
 					{...this.handlers}
 					label={label}
-					onKeyDown={this.handleKeyDown}
 					order={order}
 					value={value}
 				/>

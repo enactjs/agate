@@ -83,15 +83,6 @@ const DatePickerBase = kind({
 		year: PropTypes.number.isRequired,
 
 		/**
-		 * Disables voice control.
-		 *
-		 * @type {Boolean}
-		 * @memberof agate/DatePicker.DatePickerBase.prototype
-		 * @public
-		 */
-		'data-webos-voice-disabled': PropTypes.bool,
-
-		/**
 		 * The "aria-label" for the day picker.
 		 *
 		 * If not specified, the "aria-label" for the day picker will be
@@ -203,7 +194,6 @@ const DatePickerBase = kind({
 	},
 
 	render: ({
-		'data-webos-voice-disabled': voiceDisabled,
 		disabled,
 		day,
 		dayAriaLabel,
@@ -226,7 +216,6 @@ const DatePickerBase = kind({
 		return (
 			<DateTime {...rest}>
 				{order.map((picker) => {
-
 					switch (picker) {
 						case 'd':
 							return (

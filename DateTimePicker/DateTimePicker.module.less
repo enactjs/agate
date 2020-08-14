@@ -6,18 +6,27 @@
 	position: relative;
 	width: 700px;
 
+	.pickerBackground {
+		position: absolute;
+		width: 95%;
+		z-index: -1;
+		left: 50%;
+		-webkit-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+
 	.applySkins({
 		font-size: @agate-picker-font-size;
 
 		.pickerBackground {
-			position: absolute;
+			//position: absolute;
 			height: @agate-button-height;
-			width: 95%;
-			background-image: linear-gradient(to right, rgb(158, 0, 216), rgb(186, 0, 136), rgb(241, 48, 79));
-			z-index: -1;
-			left: 50%;
-			-webkit-transform: translateX(-50%);
-			transform: translateX(-50%);
+			//width: 95%;
+			background-image:  linear-gradient(to right, rgb(158, 0, 216), rgb(186, 0, 136), rgb(241, 48, 79));
+			//z-index: -1;
+			//left: 50%;
+			//-webkit-transform: translateX(-50%);
+			//transform: translateX(-50%);
 		}
 
 		.item {
