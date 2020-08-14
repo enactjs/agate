@@ -55,7 +55,6 @@ const TabBase = kind({
 					<div className={css.labeledIcon}>
 						<ToggleButton
 							icon={icon}
-							inline={inline}
 							selected={selected}
 						/>
 						{children}
