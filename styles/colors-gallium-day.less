@@ -11,20 +11,22 @@
 @agate-highlight-h: var(--agate-highlight-h, 246);
 @agate-highlight-s: var(--agate-highlight-s, 25%);
 @agate-highlight-l: var(--agate-highlight-l, 100%);
-@agate-background: @agate-white;
-@agate-foreground: black;
-@agate-background-active: fade(black, 15%);
-@agate-foreground-active: @agate-white;
-@agate-background-focus: @agate-accent;
-@agate-foreground-focus: @agate-white;
-@agate-gradient: linear-gradient(to bottom, ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.5)", @agate-accent);
-@agate-black:       #131313;
+@agate-black:       #000000;
+@agate-white:       #ffffff;
 @agate-darker-gray: #373737;
 @agate-dark-gray:   #5e5e5e;
 @agate-gray:        #8a8a8a;
 @agate-medium-gray: #c9c9c9;
 @agate-light-gray:  #ededed;
-@agate-white:       white;
+@agate-background: @agate-white;
+@agate-foreground: @agate-black;
+@agate-background-active: fade(@agate-black, 15%);
+@agate-foreground-active: @agate-white;
+@agate-background-focus: @agate-accent;
+@agate-foreground-focus: @agate-white;
+@agate-gradient: linear-gradient(to bottom, ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.5)", @agate-accent);
+@gallium-seal-brown-gray: #131313;
+@gallium-night-rider-gray: #333333;
 
 // Component color assignments
 @agate-bg-color: @agate-background;
@@ -71,7 +73,7 @@
 
 // ColorPicker
 // ---------------------------------------
-@agate-colorpicker-bg-color: rgba(0, 0, 0, 0.5);
+@agate-colorpicker-bg-color: fade(@agate-black, 50%);
 
 // ContextualPopup
 // ---------------------------------------
@@ -136,11 +138,11 @@
 // ---------------------------------------
 @agate-panels-bg-color:               @agate-white;
 @agate-panels-breadcrumb-bg-color:    @agate-light-gray;
-@agate-panels-tab-separator-border-color: #333;
+@agate-panels-tab-separator-border-color: @gallium-night-rider-gray;
 @agate-panels-tab-color:              @agate-foreground;
 @agate-panels-tab-bg-color:           transparent;
-@agate-panels-tab-bg-image:           linear-gradient(to bottom, transparent, fade(#333, 50%));
-@agate-panels-tab-selected-color:     fade(white, 90%);
+@agate-panels-tab-bg-image:           linear-gradient(to bottom, transparent, fade(@gallium-night-rider-gray, 50%));
+@agate-panels-tab-selected-color:     fade(@agate-white, 90%);
 @agate-panels-tab-selected-bg-color:  transparent;
 @agate-panels-tab-selected-bg-image:  linear-gradient(to bottom, ~"hsla(var(--agate-highlight-h, 0), var(--agate-highlight-s, 0), var(--agate-highlight-l, 0), 0.1)", @agate-highlight 98%, @agate-accent);
 @agate-panels-tab-focus-color:        white;
@@ -161,7 +163,7 @@
 
 // Popup
 // ---------------------------------------
-@agate-popup-plain-body-color: @agate-black;
+@agate-popup-plain-body-color: @gallium-seal-brown-gray;
 @agate-popup-bg-color: @agate-light-gray;
 @agate-popup-bg-image: none;
 @agate-popup-border-color: @agate-medium-gray;
@@ -173,15 +175,15 @@
 
 // PopupMenu
 // ---------------------------------------
-@agate-popupmenu-bg-color: fade(black, 70%); // The design doc says 80% opacity in two places, but those are actually combined so 80% of 80%... ~71.25%.
+@agate-popupmenu-bg-color: fade(@agate-black, 70%); // The design doc says 80% opacity in two places, but those are actually combined so 80% of 80%... ~71.25%.
 @agate-popupmenu-bg-image: none;
 
 // ProgressBar
 // ---------------------------------------
 @agate-progressbar-track-bg-color: @agate-slider-track-bg-color;
 @agate-progressbar-fill-bg-color: @agate-slider-fill-bg-color;
-@agate-progressbar-fill-bg-image: linear-gradient(to right, transparent, fade(white, 75%));
-@agate-progressbar-vertical-fill-bg-image: linear-gradient(to top, transparent, fade(white, 75%));
+@agate-progressbar-fill-bg-image: linear-gradient(to right, transparent, fade(@agate-white, 75%));
+@agate-progressbar-vertical-fill-bg-image: linear-gradient(to top, transparent, fade(@agate-white, 75%));
 
 // RadioItem
 // ---------------------------------------
@@ -200,11 +202,11 @@
 // Slider
 // ---------------------------------------
 @agate-slider-color:          @agate-accent;
-@agate-slider-track-bg-color: fade(black, 10%);
-@agate-slider-fill-bg-color:  black;
+@agate-slider-track-bg-color: fade(@agate-black, 10%);
+@agate-slider-fill-bg-color:  @agate-black;
 @agate-slider-knob-bg-color:  @agate-dark-gray;
 @agate-slider-knob-focus-bg-color: @agate-accent;
-@agate-slider-knob-shadow:    0 3px 9px 3px fade(black, 30%);
+@agate-slider-knob-shadow:    0 3px 9px 3px fade(@agate-black, 30%);
 @agate-slider-knob-focus-shadow: @agate-slider-knob-shadow;
 
 // IncrementSlider
@@ -241,12 +243,12 @@
 @agate-switch-color: @agate-dark-gray;
 @agate-switch-selected-color: @agate-title-text-color;
 @agate-switch-focus-bg-color: @agate-text-color;
-@agate-switch-focus-color: black;
+@agate-switch-focus-color: @agate-black;
 @agate-switch-label-color: @agate-accent;
 
 // Toggle Colors
 // ---------------------------------------
-@agate-togglebutton-indicator-off-bg-color: black;
+@agate-togglebutton-indicator-off-bg-color: @agate-black;
 @agate-togglebutton-indicator-on-bg-color: @agate-highlight;
 @agate-togglebutton-indicator-off-border-color: @agate-button-border-color;
 @agate-togglebutton-indicator-on-border-color: @agate-accent;
