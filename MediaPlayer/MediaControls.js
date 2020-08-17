@@ -14,7 +14,7 @@ import css from './MediaControls.module.less';
  * @class MediaControls
  * @memberof agate/MediaPlayer
  * @ui
- * @public
+ * @private
  */
 const MediaControls = kind({
 	name: 'MediaControls',

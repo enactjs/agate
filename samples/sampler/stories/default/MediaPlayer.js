@@ -12,8 +12,6 @@ storiesOf('Agate', module)
 			);
 		},
 		{
-			info: {
-				text: 'The basic MediaPlayer'
-			}
+			text: 'The basic MediaPlayer'
 		}
 	);

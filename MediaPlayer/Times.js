@@ -11,7 +11,7 @@ import css from './Times.module.less';
  * @class Times
  * @memberof agate/MediaPlayer
  * @ui
- * @public
+ * @private
  */
 const TimesBase = kind({
 	name: 'Times',

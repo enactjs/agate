@@ -14,6 +14,14 @@ import Times from './Times';
 
 import css from './MediaPlayer.module.less';
 
+/**
+ * A player for media {@link agate/MediaPlayer.MediaPlayer}.
+ *
+ * @class MediaPlayer
+ * @memberof agate/MediaPlayer
+ * @ui
+ * @public
+ */
 const MediaPlayer = kind({
 	name: 'MediaPlayer',
 
