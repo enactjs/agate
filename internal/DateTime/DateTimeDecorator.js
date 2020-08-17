@@ -5,7 +5,7 @@
  * @private
  */
 
-import handle, {call, forKey, forProp, forward} from '@enact/core/handle';
+import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import {memoize} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
@@ -13,7 +13,6 @@ import Changeable from '@enact/ui/Changeable';
 import DateFactory from 'ilib/lib/DateFactory';
 import PropTypes from 'prop-types';
 import React from 'react';
-
 
 /*
  * Converts a JavaScript Date to unix time
@@ -32,8 +31,6 @@ const toTime = (date) => {
  *
  * @class DateTimeDecorator
  * @memberof agate/internal/DateTimeDecorator
- * @mixes ui/Toggleable.Toggleable
- * @mixes ui/RadioDecorator.RadioDecorator
  * @mixes ui/Changeable.Changeable
  * @hoc
  * @private
@@ -50,7 +47,7 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 	});
 
 	const Decorator = class extends React.Component {
-		static displayName = 'DateTimeDecorator'
+		static displayName = 'DateTimeDecorator';
 
 		static propTypes = /** @lends agate/internal/DateTimeDecorator.DateTimeDecorator.prototype */ {
 			/**
@@ -77,7 +74,7 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 			 * @public
 			 */
 			value: PropTypes.instanceOf(Date)
-		}
+		};
 
 		constructor (props) {
 			super(props);
@@ -162,17 +159,17 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 			}
 
 			return newValue;
-		}
+		};
 
 		emitChange = (date) => {
 			forward('onChange', {value: date ? date.getJSDate() : null}, this.props);
-		}
+		};
 
 		handlePickerChange = (handler, ev) => {
 			const value = this.toIDate(this.state.value);
 			handler(ev, value, memoizedI18nConfig(this.props.locale));
 			this.updateValue(value);
-		}
+		};
 
 		handleCancel = () => {
 			const {initialValue, value} = this.state;
@@ -187,7 +184,7 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 			if (initialValue !== value) {
 				this.emitChange(this.toIDate(initialValue));
 			}
-		}
+		};
 
 		render () {
 			const value = this.toIDate(this.state.value);
@@ -195,15 +192,11 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 			// picker values before closing.
 			const pickerValue = this.state.pickerValue ? this.toIDate(this.state.pickerValue) : value;
 
-			let label = null;
 			let props = null;
 			let order = defaultOrder;
 
 			const i18nConfig = memoizedI18nConfig(this.props.locale);
 			if (i18nConfig) {
-				if (value) {
-					label = i18nConfig.formatter.format(value);
-				}
 				props = customProps(i18nConfig, pickerValue, this.props);
 				order = i18nConfig.order;
 			}
@@ -213,7 +206,6 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 					{...this.props}
 					{...props}
 					{...this.handlers}
-					label={label}
 					order={order}
 					value={value}
 				/>

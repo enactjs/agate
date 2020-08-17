@@ -1,5 +1,5 @@
 /**
- * Provides a agate-themed time selection component.
+ * Provides an Agate-themed time selection component.
  *
  * @example
  * <TimePicker value={new Date()} />
@@ -15,8 +15,8 @@ import DateFactory from 'ilib/lib/DateFactory';
 import DateFmt from 'ilib/lib/DateFmt';
 import LocaleInfo from 'ilib/lib/LocaleInfo';
 
-import {DateTimeDecorator} from '../../internal/DateTime';
-import Skinnable from '../../Skinnable';
+import {DateTimeDecorator} from '../internal/DateTime';
+import Skinnable from '../Skinnable';
 
 import TimePickerBase from './TimePickerBase';
 
@@ -81,25 +81,16 @@ const getLabelFormatter = () => new DateFmt({
 });
 
 const dateTimeConfig = {
-	customProps: function (i18n, value, {meridiemLabel}) {
+	customProps: function (i18n, value) {
 		let values = {
 			// i18n props
 			meridiems: i18n.meridiemLabels,
-			meridiemLabel,
 
 			// date components
 			hour: 12,
 			minute: 0,
 			meridiem: 0
 		};
-
-		if (i18n.meridiemEnabled && meridiemLabel == null) {
-			if (values.meridiems.length > 2) {
-				values.meridiemLabel = `${values.meridiems[0]} / ${values.meridiems[1]} ...`;
-			} else {
-				values.meridiemLabel = values.meridiems.join(' / ');
-			}
-		}
 
 		if (value) {
 			if (i18n.meridiemEnabled) {
@@ -208,8 +199,6 @@ const dateTimeConfig = {
  *
  * @class TimePicker
  * @memberof agate/TimePicker
- * @mixes ui/Toggleable.Toggleable
- * @mixes ui/RadioDecorator.RadioDecorator
  * @mixes ui/Changeable.Changeable
  * @ui
  * @public
@@ -260,4 +249,8 @@ const timeToLocaleString = (time) => {
 };
 
 export default TimePicker;
-export {TimePicker, TimePickerBase, timeToLocaleString};
+export {
+	TimePicker,
+	TimePickerBase,
+	timeToLocaleString
+};

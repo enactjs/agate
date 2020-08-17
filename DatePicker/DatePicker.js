@@ -14,8 +14,8 @@ import Pure from '@enact/ui/internal/Pure';
 import DateFactory from 'ilib/lib/DateFactory';
 import DateFmt from 'ilib/lib/DateFmt';
 
-import {DateTimeDecorator} from '../../internal/DateTime';
-import Skinnable from '../../Skinnable';
+import {DateTimeDecorator} from '../internal/DateTime';
+import Skinnable from '../Skinnable';
 
 import DatePickerBase from './DatePickerBase';
 
@@ -96,7 +96,7 @@ const dateTimeConfig = {
 };
 
 /**
- * A date selection component, ready to use in agate applications.
+ * A date selection component, ready to use in Agate applications.
  *
  * `DatePicker` may be used to select the year, month, and day. It uses a standard `Date` object for
  * its `value` which can be shared as the `value` for a
@@ -118,8 +118,6 @@ const dateTimeConfig = {
  * @class DatePicker
  * @memberof agate/DatePicker
  * @extends agate/DatePicker.DatePickerBase
- * @mixes ui/Toggleable.Toggleable
- * @mixes ui/RadioDecorator.RadioDecorator
  * @mixes ui/Changeable.Changeable
  * @omit day
  * @omit maxDays

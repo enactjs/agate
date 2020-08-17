@@ -8,15 +8,12 @@
  * @exports DateTimePicker
  * @exports DateTimePickerBase
  */
-
 import React from 'react';
-import classnames from 'classnames';
+import kind from '@enact/core/kind';
 import {Cell, Row} from '@enact/ui/Layout';
-import PropTypes from 'prop-types';
-
-import DatePicker from './DatePicker';
+import DatePicker from '../DatePicker';
 import Skinnable from '../Skinnable';
-import TimePicker from './TimePicker';
+import TimePicker from '../TimePicker';
 
 import css from './DateTimePicker.module.less';
 
@@ -28,62 +25,32 @@ import css from './DateTimePicker.module.less';
  * @ui
  * @public
  */
-class DateTimePickerBase extends React.Component {
-	static propTypes = /** @lends agate/DateTimePicker.DateTimePickerBase.prototype */ {
-		onChange: PropTypes.func
-	};
+const DateTimePickerBase = kind({
+	name: 'DateTimePickerBase',
 
-	constructor (props) {
-		super(props);
-		this.state = {
-			now: new Date(),
-			date: '',
-			time: '',
-			dateTime: ''
-		};
-	}
+	styles: {
+		css,
+		className: 'dateTimePicker'
+	},
 
-	componentDidUpdate () {
-		if (this.props.onChange) {
-			this.props.onChange({...this.state});
-		}
-	}
-
-	handleChange = (type) => ({value}) => {
-		this.setState({
-				[type]: value,
-				dateTime: value
-				}
-			);
-	};
-
-	render () {
-		const {className, ...rest} = this.props;
-		const {now} = this.state;
-		delete rest.onChange;
-		console.log(this.state.date);
-		console.log(this.state.time);
-		console.log(this.state.dateTime);
-
-
+	render ({...rest}) {
 		return (
-			<Row {...rest} className={classnames(className, css.dateTimePicker)} align="center center">
+			<Row {...rest} className={css.dateTimePicker} align="center center">
 				<div className={css.pickerBackground} />
 				<Cell>
 					<Row align="center center">
-						<TimePicker defaultValue={now} onChange={this.handleChange('time')} />
+						<TimePicker />
 					</Row>
 				</Cell>
 				<Cell>
 					<Row align="center center">
-						<DatePicker defaultValue={now} onChange={this.handleChange('date')}/>
+						<DatePicker />
 					</Row>
 				</Cell>
 			</Row>
 		);
 	}
-}
-
+});
 /**
  * An Agate themed date/time Picker component.
  *
@@ -95,7 +62,6 @@ class DateTimePickerBase extends React.Component {
  * @public
  */
 const DateTimePicker = Skinnable(DateTimePickerBase);
-
 export default DateTimePicker;
 export {
 	DateTimePicker,

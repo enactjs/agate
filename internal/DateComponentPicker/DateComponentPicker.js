@@ -4,13 +4,13 @@ import Changeable from '@enact/ui/Changeable';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Picker from '../Picker';
+import Picker from '../../Picker';
 
 import css from './DateComponentPicker.module.less';
 
 /**
  * {@link agate/internal/DataComponentPicker.DateComponentPickerBase} allows the selection of one
- * part of the date or time using a {@link agate/Picker.Picker}.
+ * part of the date or time using a {@link agate/internal/Picker.Picker}.
  *
  * @class DateComponentPickerBase
  * @memberof agate/internal/DateComponentPicker
@@ -37,14 +37,7 @@ const DateComponentPickerBase = kind({
 		 * @required
 		 * @public
 		 */
-		value: PropTypes.number.isRequired,
-
-		/**
-		 * The label to display below the picker
-		 *
-		 * @type {String}
-		 */
-		label: PropTypes.string
+		value: PropTypes.number.isRequired
 	},
 
 	styles: {
@@ -56,10 +49,10 @@ const DateComponentPickerBase = kind({
 		children: ({children}) => mapAndFilterChildren(children, (child) => (
 			<div>{child}</div>
 		)),
-		max: ({children}) => React.Children.count(children) - 1,
+		max: ({children}) => React.Children.count(children) - 1
 	},
 
-	render: ({children, label, max, value, ...rest}) => (
+	render: ({children, max, value, ...rest}) => (
 		<Picker
 			{...rest}
 			css={css}
@@ -67,6 +60,7 @@ const DateComponentPickerBase = kind({
 			max={max}
 			min={0}
 			orientation="vertical"
+			showSecondaryValues
 			step={1}
 			value={value}
 		>

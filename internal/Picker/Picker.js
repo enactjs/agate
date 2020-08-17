@@ -36,6 +36,8 @@ const handleChange = direction => handle(
 
 const increment = handleChange(1);
 const decrement = handleChange(-1);
+const secondaryIncrement = handleChange(2);
+const secondaryDecrement = handleChange(-2);
 
 /**
  * The base component for {@link agate/internal/Picker.Picker}.
@@ -156,6 +158,15 @@ const PickerBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
+		 * Show secondary sets of values.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		showSecondaryValues: PropTypes.bool,
+
+		/**
 		 * Allow the picker to only increment or decrement by a given value.
 		 *
 		 * A step of `2` would cause a picker to increment from 10 to 12 to 14, etc. It must evenly
@@ -199,7 +210,9 @@ const PickerBase = kind({
 				[({velocityY}) => velocityY > 0, decrement]
 			)
 		),
-		handleIncrement: increment
+		handleIncrement: increment,
+		handleSecondaryDecrement: secondaryDecrement,
+		handleSecondaryIncrement: secondaryIncrement
 	},
 
 	computed: {
@@ -239,9 +252,12 @@ const PickerBase = kind({
 			handleDecrement,
 			handleFlick,
 			handleIncrement,
+			handleSecondaryDecrement,
+			handleSecondaryIncrement,
 			incrementAriaLabel,
 			min,
 			max,
+			showSecondaryValues,
 			step,
 			value,
 			valueId,
@@ -250,11 +266,29 @@ const PickerBase = kind({
 		const currentValue = Array.isArray(values) ? values[value] : value;
 		const decrementValue = clamp(min, max, Array.isArray(values) ? values[value - step] : value - step);
 		const incrementValue = clamp(min, max, Array.isArray(values) ? values[value + step] : value + step);
+		const secondaryDecrementValue = clamp(min, max, Array.isArray(values) ? values[value - step - step] : value - step - step);
+		const secondaryIncrementValue = clamp(min, max, Array.isArray(values) ? values[value + step + step] : value + step + step);
 		const isFirst = value <= min;
 		const isLast = value >= max;
+		const isSecond = value <= min + step;
+		const isPenultimate = value >= max - step;
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
+				{showSecondaryValues  &&
+					<PickerButtonItem
+						aria-controls={valueId}
+						aria-disabled={isSecond}
+						aria-label={decrementAriaLabel}
+						className={css.secondaryItemDecrement}
+						disabled={isSecond}
+						onClick={handleSecondaryDecrement}
+					>
+						<div className={css.label}>
+							{isSecond ? '' : secondaryDecrementValue}
+						</div>
+					</PickerButtonItem>
+				}
 				<PickerButtonItem
 					aria-controls={valueId}
 					aria-disabled={isFirst}
@@ -289,6 +323,20 @@ const PickerBase = kind({
 						{isLast ? '' : incrementValue}
 					</div>
 				</PickerButtonItem>
+				{showSecondaryValues &&
+					<PickerButtonItem
+						aria-controls={valueId}
+						aria-disabled={isPenultimate}
+						aria-label={incrementAriaLabel}
+						className={css.secondaryItemIncrement}
+						disabled={isPenultimate}
+						onClick={handleSecondaryIncrement}
+					>
+						<div className={css.label}>
+							{isPenultimate ? '' : secondaryIncrementValue}
+						</div>
+					</PickerButtonItem>
+				}
 			</PickerRoot>
 		);
 	}

@@ -2,8 +2,8 @@ import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {DateComponentPicker, DateComponentRangePicker} from '../../internal/DateComponentPicker';
-import DateTime from '../../internal/DateTime';
+import {DateComponentPicker, DateComponentRangePicker} from '../internal/DateComponentPicker';
+import DateTime from '../internal/DateTime';
 
 import css from './TimePicker.module.less';
 
@@ -12,6 +12,7 @@ const hours24 = [
 	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
 	'12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'
 ];
+
 const hours12 = [
 	'12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
 	'12', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'
@@ -30,7 +31,7 @@ class HourPicker extends React.Component {
 	static propTypes = {
 		hasMeridiem: PropTypes.bool,
 		value: PropTypes.number
-	}
+	};
 
 	constructor (props) {
 		super(props);
@@ -134,14 +135,6 @@ const TimePickerBase = kind({
 		hourAriaLabel: PropTypes.string,
 
 		/**
-		 * The primary text of `TimePicker`.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		label: PropTypes.string,
-
-		/**
 		 * The "aria-label" for the meridiem picker.
 		 *
 		 * If not specified, the "aria-label" for the meridiem picker will be
@@ -151,14 +144,6 @@ const TimePickerBase = kind({
 		 * @public
 		 */
 		meridiemAriaLabel: PropTypes.string,
-
-		/**
-		 * The hint string read when focusing the meridiem picker.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		meridiemLabel: PropTypes.string,
 
 		/**
 		 * Array of meridiem labels to display.
@@ -234,7 +219,6 @@ const TimePickerBase = kind({
 		hourAriaLabel,
 		meridiem,
 		meridiemAriaLabel,
-		meridiemLabel,
 		meridiemPickerWidth,
 		meridiems,
 		minute,
@@ -243,13 +227,14 @@ const TimePickerBase = kind({
 		onChangeMeridiem,
 		onChangeMinute,
 		order,
-		rtl,
 		...rest
 	}) => {
 
+		delete rest.rtl;
+
 		return (
 			<DateTime {...rest} css={css}>
-				{order.map((picker, index) => {
+				{order.map((picker) => {
 					switch (picker) {
 						case 'h':
 						case 'k':
@@ -264,21 +249,25 @@ const TimePickerBase = kind({
 										value={hour}
 										width={4}
 									/>
+									<div className={css.divider} />
 								</React.Fragment>
 							);
 						case 'm':
 							return (
-								<DateComponentRangePicker
-									aria-label={minuteAriaLabel}
-									className={css.minutePicker}
-									disabled={disabled}
-									key="minute-picker"
-									max={59}
-									min={0}
-									onChange={onChangeMinute}
-									value={minute}
-									width={4}
-								/>
+								<React.Fragment>
+									<DateComponentRangePicker
+										aria-label={minuteAriaLabel}
+										className={css.minutePicker}
+										disabled={disabled}
+										key="minute-picker"
+										max={59}
+										min={0}
+										onChange={onChangeMinute}
+										value={minute}
+										width={4}
+									/>
+									{hasMeridiem && <div className={css.divider} />}
+								</React.Fragment>
 							);
 						case 'a':
 							return (
