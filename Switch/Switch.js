@@ -9,9 +9,13 @@
  * @exports SwitchBase
  */
 
+import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
+import Skinnable from '../Skinnable';
+import Spottable from '@enact/spotlight/Spottable';
+import Toggleable from '@enact/ui/Toggleable';
 
 import Icon from '../Icon';
 import {ToggleIconBase} from '../internal/ToggleIcon';
@@ -41,6 +45,7 @@ const SwitchBase = kind({
 		 * @public
 		 */
 		noAnimation: PropTypes.bool,
+		onClick: PropTypes.func,
 		skin: PropTypes.string
 	},
 
@@ -66,7 +71,7 @@ const SwitchBase = kind({
 		}
 	},
 
-	render: ({css, ...rest}) => {
+	render: ({css, onClick, ...rest}) => {
 		delete rest.noAnimation;
 
 		return (
@@ -74,13 +79,22 @@ const SwitchBase = kind({
 				{...rest}
 				css={css}
 				iconComponent={Icon}
+				onToggle={onClick}
 			/>
 		);
 	}
 });
 
-export default SwitchBase;
+const SwitchDecorator = compose(
+	Toggleable({toggleProp: 'onClick'}),
+	Spottable,
+	Skinnable
+);
+
+const Switch = SwitchDecorator(SwitchBase);
+
+export default Switch;
 export {
-	SwitchBase as Switch,
+	Switch,
 	SwitchBase
 };
