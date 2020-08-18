@@ -20,6 +20,7 @@ import kind from '@enact/core/kind';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
+import {MarqueeDecorator} from "@enact/ui/Marquee";
 import Toggleable from '@enact/ui/Toggleable';
 import Transition from '@enact/ui/Transition';
 import PropTypes from 'prop-types';
@@ -36,6 +37,7 @@ import Skinnable from '../Skinnable';
 import componentCss from './Dropdown.module.less';
 
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
+const MarqueeButton = MarqueeDecorator({className: componentCss.marquee}, Button);
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
 
 /**
@@ -123,7 +125,6 @@ const DropdownBase = kind({
 		 * @public
 		 */
 		selected: PropTypes.number,
-
 		/**
 		 * The current skin for this component.
 		 *
@@ -196,18 +197,23 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+	render: ({buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, size, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
 		const opened = !disabled && open;
-		const [DropDownButton, wrapperProps, skinVariants, groupProps] = (skin === 'silicon') ? [
-			Button,
+		const [DropDownButton, dropDownButtonProps, wrapperProps, skinVariants, groupProps, iconComponent] = (skin === 'silicon') ? [
+			MarqueeButton,
+			{icon: open ? 'arrowlargeup' : 'arrowlargedown'},
 			{className: dropdownButtonClassname},
 			{'night': false},
-			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'}
+			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'},
+			[]
 		] : [
 			Item,
 			{},
 			{},
-			{childComponent: Item, itemProps: {size: 'small'}}
+			{},
+			{childComponent: Item, itemProps: {size: 'small'}},
+			[<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>]
+
 		];
 
 		return (
@@ -218,8 +224,9 @@ const DropdownBase = kind({
 						css={css}
 						disabled={hasChildren ? disabled : true}
 						onClick={opened ? onClose : onOpen}
+						{...dropDownButtonProps}
 					>
-						<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
+						{iconComponent}
 						{title}
 					</DropDownButton>
 					<Transition

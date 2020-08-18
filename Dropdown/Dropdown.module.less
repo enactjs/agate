@@ -3,6 +3,11 @@
 @import "../styles/mixins.less";
 @import "../styles/skin.less";
 
+
+.marquee {
+	margin-right: 42px;
+}
+
 .dropdown {
 	.transitionContainer {
 		position: absolute;
@@ -57,6 +62,8 @@
 			border-bottom-color: @agate-dropdown-border-color;
 			border-bottom-style: @agate-dropdown-border-style;
 			border-bottom-width: @agate-dropdown-border-width;
+			padding-top: @agate-dropdown-list-padding-top;
+			padding-bottom: @agate-dropdown-list-padding-bottom;
 		}
 
 		.dropdownListWithScroller {
@@ -74,8 +81,10 @@
 			width: @agate-dropdown-button-width;
 
 			.button {
+				height: @agate-dropdown-button-height;
 				width: @agate-dropdown-button-width;
 				font-size: @agate-dropdown-button-font-size;
+				padding: @agate-dropdown-button-padding;
 
 				.bg {
 					background-color: @agate-dropdown-button-bg-color;
@@ -99,9 +108,6 @@
 				.icon {
 					color: @agate-dropdown-button-icon-color;
 					font-size: @agate-dropdown-button-icon-font-size;
-					line-height: @agate-dropdown-button-icon-height;
-					width: @agate-dropdown-button-icon-height;
-					height: @agate-dropdown-button-icon-height;
 				}
 			}
 
@@ -120,9 +126,11 @@
 				.dropDownListItem {
 					font-size: @agate-dropdown-item-font-size;
 					font-weight: @agate-dropdown-item-font-weight;
+					line-height: @agate-dropdown-item-line-height;
 
 					&.radioItem {
 						border-color: @agate-dropdown-item-border-color;
+						border-width: @agate-dropdown-item-border-width;
 						padding-left: @agate-dropdown-item-padding;
 						padding-right: @agate-dropdown-item-padding;
 
