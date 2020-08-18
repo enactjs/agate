@@ -20,7 +20,7 @@ import kind from '@enact/core/kind';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
-import {MarqueeDecorator} from "@enact/ui/Marquee";
+import {MarqueeDecorator} from '@enact/ui/Marquee';
 import Toggleable from '@enact/ui/Toggleable';
 import Transition from '@enact/ui/Transition';
 import PropTypes from 'prop-types';
@@ -197,7 +197,7 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, size, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+	render: ({buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
 		const opened = !disabled && open;
 		const [DropDownButton, dropDownButtonProps, wrapperProps, skinVariants, groupProps, iconComponent] = (skin === 'silicon') ? [
 			MarqueeButton,
