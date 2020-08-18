@@ -10,6 +10,7 @@ import React from 'react';
 
 import MediaControls from './MediaControls';
 import MediaSlider from './MediaSlider';
+import Skinnable from '../Skinnable';
 import Times from './Times';
 
 import css from './MediaPlayer.module.less';
@@ -22,7 +23,7 @@ import css from './MediaPlayer.module.less';
  * @ui
  * @public
  */
-const MediaPlayer = kind({
+const MediaPlayerBase = kind({
 	name: 'MediaPlayer',
 
 	styles: {
@@ -41,7 +42,10 @@ const MediaPlayer = kind({
 	}
 });
 
+const MediaPlayer = Skinnable(MediaPlayerBase);
+
 export default MediaPlayer;
 export {
-	MediaPlayer
+	MediaPlayer,
+	MediaPlayerBase
 };

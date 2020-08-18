@@ -1,9 +1,7 @@
 import React from 'react';
 import kind from '@enact/core/kind';
 
-import Skinnable from '../Skinnable';
-
-import css from './Times.module.less';
+import css from './MediaPlayer.module.less';
 
 /**
  * Agate-styled formatted time component.
@@ -13,7 +11,7 @@ import css from './Times.module.less';
  * @ui
  * @private
  */
-const TimesBase = kind({
+const Times = kind({
 	name: 'Times',
 
 	styles: {
@@ -31,7 +29,5 @@ const TimesBase = kind({
 	}
 });
 
-const Times = Skinnable(TimesBase);
-
 export default Times;
-export {Times, TimesBase};
+export {Times};
