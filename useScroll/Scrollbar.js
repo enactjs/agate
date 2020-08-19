@@ -1,8 +1,9 @@
 import {useScrollbar as useScrollbarBase} from '@enact/ui/useScroll/Scrollbar';
 import PropTypes from 'prop-types';
-import React, {memo, useEffect, useRef} from 'react';
+import React, {memo, useEffect} from 'react';
 
-import ScrollButtons from './ScrollButtons';
+import ScrollButton from './ScrollButton';
+import useScrollButtons from './ScrollButtons';
 import ScrollbarTrack from './ScrollbarTrack';
 import Skinnable from '../Skinnable';
 
@@ -17,6 +18,7 @@ const useThemeScrollbar = (props) => {
 
 	const {
 		cbAlertScrollbarTrack,
+		disabled,
 		focusableScrollButtons,
 		nextButtonAriaLabel,
 		onKeyDownButton,
@@ -34,6 +36,7 @@ const useThemeScrollbar = (props) => {
 		restProps: rest,
 		scrollbarProps,
 		scrollbarButtonsProps: {
+			disabled,
 			focusableScrollButtons,
 			nextButtonAriaLabel,
 			onKeyDownButton,
@@ -60,8 +63,6 @@ const useThemeScrollbar = (props) => {
  * @private
  */
 const ScrollbarBase = memo((props) => {
-	const scrollButtonsRef = useRef();
-
 	const {
 		restProps,
 		scrollbarProps,
@@ -69,10 +70,25 @@ const ScrollbarBase = memo((props) => {
 		scrollbarTrackProps
 	} = useThemeScrollbar(props);
 
+	const {
+		focusOnButton,
+		isOneOfScrollButtonsFocused,
+		nextButtonDisabled,
+		nextButtonRef,
+		nextIcon,
+		onClickNext,
+		onClickPrev,
+		prevButtonDisabled,
+		prevButtonRef,
+		prevIcon,
+		updateButtons
+	} = useScrollButtons(scrollbarButtonsProps);
+
+	const {disabled, nextButtonAriaLabel, previousButtonAriaLabel, rtl, vertical} = scrollbarButtonsProps;
+
 	useEffect(() => {
 		const {scrollbarHandle} = props;
 		const {update: uiUpdate} = scrollbarHandle.current;
-		const {focusOnButton, isOneOfScrollButtonsFocused, updateButtons} = scrollButtonsRef.current;
 
 		scrollbarHandle.current.update = (bounds) => {
 			updateButtons(bounds);
@@ -85,17 +101,26 @@ const ScrollbarBase = memo((props) => {
 
 	return (
 		<div {...restProps} {...scrollbarProps}>
-			<ScrollButtons
-				{...scrollbarButtonsProps}
-				ref={scrollButtonsRef}
-				scrollbarTrackRenderer={() => { // eslint-disable-line react/jsx-no-bind
-					return (
-						<ScrollbarTrack
-							{...scrollbarTrackProps}
-							key="scrollbarTrack"
-						/>
-					);
-				}}
+			<ScrollButton
+				aria-label={rtl && !vertical ? nextButtonAriaLabel : previousButtonAriaLabel}
+				data-spotlight-overflow="ignore"
+				disabled={disabled || prevButtonDisabled}
+				onClick={onClickPrev}
+				onHoldPulse={onClickPrev}
+				ref={prevButtonRef}
+				icon={prevIcon}
+			/>
+			<ScrollbarTrack
+				{...scrollbarTrackProps}
+			/>
+			<ScrollButton
+				aria-label={rtl && !vertical ? previousButtonAriaLabel : nextButtonAriaLabel}
+				data-spotlight-overflow="ignore"
+				disabled={disabled || nextButtonDisabled}
+				onClick={onClickNext}
+				onHoldPulse={onClickNext}
+				ref={nextButtonRef}
+				icon={nextIcon}
 			/>
 		</div>
 	);
@@ -127,6 +152,25 @@ ScrollbarBase.propTypes = /** @lends agate/useScroll.Scrollbar.prototype */ {
 	css: PropTypes.object,
 
 	/**
+	 * Specifies to reflect scrollbar's disabled property to the paging controls.
+	 * When it is `true`, both prev/next buttons are going to be disabled.
+	 *
+	 * @type {Boolean}
+	 * @default false
+	 * @public
+	 */
+	disabled: PropTypes.bool,
+
+	/**
+	 * When it is `true`, it allows 5 way navigation to the ScrollButtons.
+	 *
+	 * @type {Boolean}
+	 * @default false
+	 * @private
+	 */
+	focusableScrollButtons: PropTypes.bool,
+
+	/**
 	 * The minimum size of the thumb.
 	 * This value will be applied ri.scale.
 	 *
@@ -134,6 +178,59 @@ ScrollbarBase.propTypes = /** @lends agate/useScroll.Scrollbar.prototype */ {
 	 * @public
 	 */
 	minThumbSize: PropTypes.number,
+
+	/**
+	 * Sets the hint string read when focusing the next button in the scroll bar.
+	 *
+	 * @type {String}
+	 * @public
+	 */
+	nextButtonAriaLabel: PropTypes.string,
+
+	/**
+	 * Called when the scrollbar's button is pressed and needs to be bubbled.
+	 *
+	 * @type {Function}
+	 * @private
+	 */
+	onKeyDownButton: PropTypes.func,
+
+	/**
+	 * Called when the scrollbar's down/right button is pressed.
+	 *
+	 * @type {Function}
+	 * @public
+	 */
+	onNextScroll: PropTypes.func,
+
+	/**
+	 * Called when the scrollbar's up/left button is pressed.
+	 *
+	 * @type {Function}
+	 * @public
+	 */
+	onPrevScroll: PropTypes.func,
+
+	/**
+	 * Specifies preventing keydown events from bubbling up to applications.
+	 * Valid values are `'none'`, and `'programmatic'`.
+	 *
+	 * When it is `'none'`, every keydown event is bubbled.
+	 * When it is `'programmatic'`, an event bubbling is not allowed for a keydown input
+	 * which invokes programmatic spotlight moving.
+	 *
+	 * @type {String}
+	 * @private
+	 */
+	preventBubblingOnKeyDown: PropTypes.oneOf(['none', 'programmatic']),
+
+	/**
+	 * Sets the hint string read when focusing the previous button in the scroll bar.
+	 *
+	 * @type {String}
+	 * @public
+	 */
+	previousButtonAriaLabel: PropTypes.string,
 
 	/**
 	 * `true` if rtl, `false` if ltr.
@@ -154,7 +251,6 @@ ScrollbarBase.propTypes = /** @lends agate/useScroll.Scrollbar.prototype */ {
 };
 
 ScrollbarBase.defaultProps = {
-	corner: false,
 	css: componentCss,
 	minThumbSize: 18,
 	vertical: true
