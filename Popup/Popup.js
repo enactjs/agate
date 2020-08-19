@@ -73,6 +73,7 @@ const PopupBase = kind({
 		 * @public
 		 */
 		position: PropTypes.oneOf(['center', 'top']),
+
 		skin: PropTypes.string,
 		title: PropTypes.string
 	},
