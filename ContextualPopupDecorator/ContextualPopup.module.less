@@ -15,8 +15,7 @@
 		-moz-background-clip: padding-box;
 		box-sizing: border-box;
 
-		&.none { /* Needed to prevent global class being added in the DOM */
-		}
+		&.none { /* Needed to prevent global class being added in the DOM */ }
 
 		&.fixedSize {
 			overflow: hidden;
@@ -89,6 +88,31 @@
 
 			&.reserveClose {
 				.padding-start-end(@agate-contextual-popup-padding-horizontal, @agate-button-small-height * 1.5);
+			}
+
+			&.above {
+				&.overlap { margin-top: @agate-contextual-popup-offset-overlap; }
+				&.small { margin-top: -@agate-contextual-popup-offset-small; }
+			}
+			&.below {
+				&.overlap { margin-top: -@agate-contextual-popup-offset-overlap; }
+				&.small { margin-top: @agate-contextual-popup-offset-small; }
+			}
+			&.right {
+				&.top,
+				&.middle,
+				&.bottom {
+					&.overlap { margin-left: -@agate-contextual-popup-offset-overlap; }
+					&.small { margin-left: @agate-contextual-popup-offset-small; }
+				}
+			}
+			&.left  {
+				&.top,
+				&.middle,
+				&.bottom {
+					&.overlap { margin-left: @agate-contextual-popup-offset-overlap; }
+					&.small { margin-left: -@agate-contextual-popup-offset-small; }
+				}
 			}
 		}
 
