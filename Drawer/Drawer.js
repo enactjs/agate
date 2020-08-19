@@ -47,15 +47,13 @@ const DrawerBase = kind({
 		// and the .closeButton CSS in the LESS file all relate to this functionality.
 		// onClose: PropTypes.func,
 		onHide: PropTypes.func,
-		open: PropTypes.bool,
-		role: PropTypes.string
+		open: PropTypes.bool
 	},
 
 	defaultProps: {
 		noAnimation: false,
 		open: false,
-		orientation: 'vertical',
-		role: 'alert'
+		orientation: 'vertical'
 	},
 
 	styles: {
@@ -76,6 +74,7 @@ const DrawerBase = kind({
 				css={css}
 			>
 				<Layout
+					role="alert"
 					{...rest}
 				>
 					{/* <Icon size="small" onClick={onClose} className={css.closeButton}>closex</Icon>*/}

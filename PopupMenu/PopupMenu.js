@@ -47,7 +47,6 @@ const PopupMenuBase = kind({
 		onHide: PropTypes.func,
 		open: PropTypes.bool,
 		orientation: PropTypes.oneOf(['horizontal']),
-		role: PropTypes.string,
 		title: PropTypes.string
 	},
 
@@ -56,8 +55,7 @@ const PopupMenuBase = kind({
 		closeButtonLabel: $L('Cancel'),
 		noAnimation: false,
 		open: false,
-		orientation: 'horizontal',
-		role: 'alert'
+		orientation: 'horizontal'
 	},
 
 	styles: {
@@ -81,7 +79,7 @@ const PopupMenuBase = kind({
 				onHide={onHide}
 				css={css}
 			>
-				<Layout orientation="vertical" align="center center" {...rest}>
+				<Layout orientation="vertical" align="center center" role="alert" {...rest}>
 					<Cell className={css.title} shrink>
 						<Heading size="title">{title}</Heading>
 					</Cell>

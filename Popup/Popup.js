@@ -73,7 +73,6 @@ const PopupBase = kind({
 		 * @public
 		 */
 		position: PropTypes.oneOf(['center', 'top']),
-		role: PropTypes.string,
 		skin: PropTypes.string,
 		title: PropTypes.string
 	},
@@ -82,8 +81,7 @@ const PopupBase = kind({
 		closeButton: false,
 		noAnimation: false,
 		open: false,
-		position: 'center',
-		role: 'alert'
+		position: 'center'
 	},
 	styles: {
 		css: componentCss,
@@ -110,6 +108,7 @@ const PopupBase = kind({
 				css={css}
 			>
 				<div
+					role="alert"
 					{...rest}
 				>
 					{closeButton ? <Button
