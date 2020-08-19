@@ -69,10 +69,10 @@ storiesOf('Agate', module)
 					>
 						<header>
 							<Heading
-								color={select('Heading color', headingValues.colors, HeadingConfig, '')}
-								showLine={boolean('Heading showLine', HeadingConfig)}
-								size={select('Heading size', headingValues.sizes, HeadingConfig, '')}
-								spacing={select('Heading spacing', headingValues.spacings, HeadingConfig, '')}
+								color={select('color', headingValues.colors, HeadingConfig, '')}
+								showLine={boolean('showLine', HeadingConfig)}
+								size={select('size', headingValues.sizes, HeadingConfig, '')}
+								spacing={select('spacing', headingValues.spacings, HeadingConfig, '')}
 							>
 								{text('header', Config, '[insert witty header text]')}
 							</Heading>
