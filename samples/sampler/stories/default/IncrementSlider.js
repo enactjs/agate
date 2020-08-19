@@ -29,8 +29,9 @@ storiesOf('Agate', module)
 				onChange={action('onChange')}
 				onDragEnd={action('onDragEnd')}
 				onDragStart={action('onDragStart')}
-				orientation={select('orientation', ['horizontal', 'vertical'], Config, 'horizontal')}
+				orientation={select('orientation', ['horizontal', 'vertical'], Config)}
 				progressAnchor={number('progressAnchor', Config, {range: true, min: 0, max: 1, step: 0.1}, 0)}
+				size={select('size', ['small', 'large'], Config)}
 				step={number('step', Config)}
 			/>
 		),

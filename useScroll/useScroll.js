@@ -403,6 +403,7 @@ const useScroll = (props) => {
 		scrollContentHandle,
 		scrollContentRef,
 		scrollContainerRef,
+		spotlightContainerDisabled,
 		verticalScrollbarHandle
 	});
 
