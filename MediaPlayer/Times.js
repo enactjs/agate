@@ -30,4 +30,6 @@ const Times = kind({
 });
 
 export default Times;
-export {Times};
+export {
+	Times
+};
