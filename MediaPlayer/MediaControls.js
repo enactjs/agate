@@ -138,7 +138,7 @@ const MediaControls = kind({
 				<Button aria-label={$L('Shuffle')} backgroundOpacity="transparent" css={css} icon={shuffleIcon} size="large" />
 				<Button aria-label={$L('Previous')} backgroundOpacity="transparent" css={css} icon={previousTrackIcon} size="large" />
 				<Button aria-label={paused ? $L('Play') : $L('Pause')} backgroundOpacity="transparent" className={css.playPauseButton} css={css} size="large">
-					<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
+					<Icon className={css.playPauseIcon} css={css}>{paused ? playIcon : pauseIcon}</Icon>
 				</Button>
 				<Button aria-label={$L('Next')} backgroundOpacity="transparent" css={css} icon={nextTrackIcon} size="large" />
 				<Button aria-label={$L('Menu')} backgroundOpacity="transparent" css={css} icon={menuIcon} size="large" />
