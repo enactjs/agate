@@ -208,10 +208,8 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({'aria-label': ariaLabel, ariaLabelledBy, buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+	render: ({buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
 		const ariaProps = extractAriaProps(rest);
-		const calcAriaProps = ((ariaLabel != null) ? null : {role: 'region', 'aria-labelledby': ariaLabelledBy});
-
 		const opened = !disabled && open;
 		const [DropDownButton, wrapperProps, skinVariants, groupProps] = (skin === 'silicon') ? [
 			Button,
@@ -227,7 +225,7 @@ const DropdownBase = kind({
 		const onTransitionHide = handleTransitionHide(rest['data-spotlight-id']);
 
 		return (
-			<div {...calcAriaProps} {...rest}>
+			<div {...rest}>
 				<div {...wrapperProps}>
 					<DropDownButton
 						className={buttonClassName}
