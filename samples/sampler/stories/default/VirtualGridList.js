@@ -1,31 +1,15 @@
-// import React from 'react';
-// import {storiesOf} from '@storybook/react';
-//
-// const
-// 	wrapOption ={
-// 		false: false,
-// 		true: true,
-// 		'&quot;noAnimation&quot;': 'noAnimation'
-// 	}
-
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import ri from '@enact/ui/resolution';
 import React from 'react';
-import {ScrollableBase as UiScrollableBase} from '@enact/ui/Scrollable';
 import {storiesOf} from '@storybook/react';
-import {VirtualListBase as UiVirtualListBase} from '@enact/ui/VirtualList';
+import {VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
 
 import ImageItem from '@enact/agate/ImageItem';
-import {VirtualGridList, VirtualList} from '@enact/agate/VirtualList';
+import VirtualList, {VirtualGridList} from '@enact/agate/VirtualList';
 
 const
-	wrapOption = {
-		false: false,
-		true: true,
-		'&quot;noAnimation&quot;': 'noAnimation'
-	},
 	prop = {
 		scrollbarOption: ['auto', 'hidden', 'visible']
 	},
@@ -37,12 +21,12 @@ const
 	),
 	// eslint-disable-next-line enact/prop-types
 	renderItem = ({index, ...rest}) => {
-		const {text, subText, source} = items[index];
+		const {text, src} = items[index];
 
 		return (
 			<ImageItem
 				{...rest}
-				src={source}
+				src={src}
 			>
 				{text}
 			</ImageItem>
@@ -60,11 +44,10 @@ const updateDataSize = (dataSize) => {
 		const
 			count = (headingZeros + i).slice(-itemNumberDigits),
 			text = `Item ${count}${shouldAddLongContent({index: i, modIndex: 2})}`,
-			subText = `SubItem ${count}${shouldAddLongContent({index: i, modIndex: 3})}`,
 			color = Math.floor((Math.random() * (0x1000000 - 0x101010)) + 0x101010).toString(16),
-			source = `http://placehold.it/300x300/${color}/ffffff&text=Image ${i}`;
+			src = `http://placehold.it/300x300/${color}/ffffff&text=Image ${i}`;
 
-		items.push({text, subText, source});
+		items.push({text, src});
 	}
 
 	return dataSize;
@@ -72,7 +55,7 @@ const updateDataSize = (dataSize) => {
 
 updateDataSize(defaultDataSize);
 
-const VirtualGridListConfig = mergeComponentMetadata('VirtualGridList', UiVirtualListBase, UiScrollableBase, VirtualList);
+const VirtualGridListConfig = mergeComponentMetadata('VirtualGridList', UiVirtualListBasic, VirtualList, VirtualGridList);
 
 storiesOf('Agate', module)
 	.add(
@@ -93,12 +76,9 @@ storiesOf('Agate', module)
 				spacing={ri.scale(number('spacing', VirtualGridListConfig, 20))}
 				spotlightDisabled={boolean('spotlightDisabled', VirtualGridListConfig, false)}
 				verticalScrollbar={select('verticalScrollbar', prop.scrollbarOption, VirtualGridListConfig)}
-				wrap={wrapOption[select('wrap', ['false', 'true', '"noAnimation"'], VirtualGridListConfig)]}
 			/>
 		),
 		{
-			info: {
-				text: 'Basic usage of VirtualGridList'
-			}
+			text: 'Basic usage of VirtualGridList'
 		}
 	);
