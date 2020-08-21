@@ -125,6 +125,7 @@ const DropdownBase = kind({
 		 * @public
 		 */
 		selected: PropTypes.number,
+
 		/**
 		 * The current skin for this component.
 		 *
