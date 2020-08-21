@@ -16,8 +16,6 @@ storiesOf('Agate', module)
 		() => (
 			<DateTimePicker
 				onChange={action('onChange')}
-				onClose={action('onClose')}
-				onSave={action('onSave')}
 			/>
 		),
 		{
