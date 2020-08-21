@@ -65,10 +65,18 @@
 
 .applySkins({
 	.scrollbar {
-		.scrollbarTrackShown {
-			&::before {
-				background-color: @agate-scroller-scrollbar-thumb-bg-color;
+		::before {
+			background-color: @agate-scroller-scrollbar-thumb-bg-color;
+		}
+
+		&.vertical {
+			::before {
 				width: @agate-scroller-scrollbar-thumb-width;
+			}
+		}
+		&.horizontal {
+			::before {
+				height: @agate-scroller-scrollbar-thumb-width;
 			}
 		}
 

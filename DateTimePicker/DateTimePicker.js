@@ -8,9 +8,11 @@
  * @exports DateTimePicker
  * @exports DateTimePickerBase
  */
+
 import React from 'react';
 import kind from '@enact/core/kind';
 import {Cell, Row} from '@enact/ui/Layout';
+
 import DatePicker from '../DatePicker';
 import Skinnable from '../Skinnable';
 import TimePicker from '../TimePicker';
@@ -25,6 +27,7 @@ import css from './DateTimePicker.module.less';
  * @ui
  * @public
  */
+
 const DateTimePickerBase = kind({
 	name: 'DateTimePickerBase',
 
@@ -34,6 +37,7 @@ const DateTimePickerBase = kind({
 	},
 
 	render ({...rest}) {
+
 		return (
 			<Row {...rest} className={css.dateTimePicker} align="center center">
 				<div className={css.pickerBackground} />
@@ -62,6 +66,7 @@ const DateTimePickerBase = kind({
  * @public
  */
 const DateTimePicker = Skinnable(DateTimePickerBase);
+
 export default DateTimePicker;
 export {
 	DateTimePicker,

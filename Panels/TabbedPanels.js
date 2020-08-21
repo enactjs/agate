@@ -7,6 +7,7 @@ import {shape} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import Skinnable from '../Skinnable';
 import TabGroup from '../TabGroup';
 
 import Panels from './Panels';
@@ -128,7 +129,7 @@ const TabbedPanels = Slottable(
 	{slots: ['tabs', 'afterTabs', 'beforeTabs']},
 	Changeable(
 		{prop: 'index', change: 'onSelect'},
-		TabbedPanelsBase
+		Skinnable(TabbedPanelsBase)
 	)
 );
 
