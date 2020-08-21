@@ -11,9 +11,15 @@ class AgateRadioItemInterface {
 		return browser.execute((el) => el.focus(), $(`#${this.id}`));
 	}
 
-	get self () { return $(`#${this.id}`); }
-	get textContent () { return getText(element('.Item_Item_content', this.self)); }
-	get isSelected () { return hasClass('RadioItem_RadioItem_selected', this.self); }
+	get self () {
+		return $(`#${this.id}`);
+	}
+	get textContent () {
+		return getText(element('.Item_Item_content', this.self));
+	}
+	get isSelected () {
+		return hasClass('RadioItem_RadioItem_selected', this.self);
+	}
 }
 
 

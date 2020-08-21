@@ -1,35 +1,15 @@
 // DateTimePicker.module.less
 //
 @import "../styles/skin.less";
+@import "../styles/variables.less";
 
 .dateTimePicker {
-	.applySkins({
-		font-size: 21px;	// Convert to LESS variable
-
-		.pickerCol {
-			margin: @agate-datetimepicker-margin;
-			transform: @agate-datetimepicker-transform;
-		}
-
-		.pickerCell,
-		.pickerLeft,
-		.pickerRight {
-			border-radius: 0;
-			transform: @agate-datetimepicker-cell-transform;
-		}
-
-		.label {
-			transform: @agate-datetimepicker-label-transform;
-		}
-
-		.pickerLeft {
-			border-top-left-radius: @agate-datetimepicker-border-radius;
-			border-bottom-left-radius: @agate-datetimepicker-border-radius;
-		}
-
-		.pickerRight {
-			border-top-right-radius: @agate-datetimepicker-border-radius;
-			border-bottom-right-radius: @agate-datetimepicker-border-radius;
-		}
-	});
+	position: relative;
 }
+
+.applySkins({
+	.dateTimePicker {
+		font-size: @agate-picker-font-size;
+		width: @agate-datetimepicker-width;
+	}
+});

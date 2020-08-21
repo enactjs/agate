@@ -347,6 +347,15 @@ const IncrementSliderBase = kind({
 		progressAnchor: PropTypes.number,
 
 		/**
+		 * The size of the incrementSlider.
+		 *
+		 * @type {('small'|'large')}
+		 * @default 'large'
+		 * @public
+		 */
+		size: PropTypes.oneOf(['small', 'large']),
+
+		/**
 		 * Disables spotlight navigation into the component.
 		 *
 		 * @type {Boolean}
@@ -383,6 +392,7 @@ const IncrementSliderBase = kind({
 		noFill: false,
 		orientation: 'horizontal',
 		progressAnchor: 0,
+		size: 'large',
 		spotlightDisabled: false,
 		step: 1
 	},
@@ -423,7 +433,7 @@ const IncrementSliderBase = kind({
 	},
 
 	computed: {
-		className: ({orientation, styler}) => styler.append(orientation),
+		className: ({orientation, size, styler}) => styler.append(orientation, size),
 		decrementDisabled: ({disabled, min, value = min}) => disabled || value <= min,
 		incrementDisabled: ({disabled, max, min, value = min}) => disabled || value >= max,
 		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel, min, value = min}) => {
@@ -471,6 +481,7 @@ const IncrementSliderBase = kind({
 		onSpotlightDisappear,
 		orientation,
 		progressAnchor,
+		size,
 		spotlightDisabled,
 		step,
 		value,
@@ -495,6 +506,7 @@ const IncrementSliderBase = kind({
 					onTap={onDecrement}
 					onSpotlightDisappear={onDecrementSpotlightDisappear}
 					orientation={orientation}
+					size={size}
 					spotlightDisabled={spotlightDisabled}
 				/>
 				<Slider
@@ -530,6 +542,7 @@ const IncrementSliderBase = kind({
 					onSpotlightDisappear={onIncrementSpotlightDisappear}
 					onTap={onIncrement}
 					orientation={orientation}
+					size={size}
 					spotlightDisabled={spotlightDisabled}
 				/>
 			</div>
