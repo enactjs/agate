@@ -266,8 +266,8 @@ const PickerBase = kind({
 		const currentValue = Array.isArray(values) ? values[value] : value;
 		const decrementValue = clamp(min, max, Array.isArray(values) ? values[value - step] : value - step);
 		const incrementValue = clamp(min, max, Array.isArray(values) ? values[value + step] : value + step);
-		const secondaryDecrementValue = clamp(min, max, Array.isArray(values) ? values[value - step - step] : value - step - step);
-		const secondaryIncrementValue = clamp(min, max, Array.isArray(values) ? values[value + step + step] : value + step + step);
+		const secondaryDecrementValue = clamp(min, max, Array.isArray(values) ? values[value - (2 * step)] : value - (2 * step));
+		const secondaryIncrementValue = clamp(min, max, Array.isArray(values) ? values[value + (2 * step)] : value + (2 * step));
 		const isFirst = value <= min;
 		const isLast = value >= max;
 		const isSecond = value <= min + step;
