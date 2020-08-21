@@ -55,30 +55,28 @@ const PanelsBase = kind({
 	},
 
 	render: ({children, description, noScroller, noPanel, noPanels, title, ...rest}) => {
-		const Wrapper = noScroller ? React.Fragment : Scroller;
+		const Wrapper = noScroller ? 'div' : Scroller;
 
 		return (
-			<Wrapper>
-				{!noPanels ? <div {...rest}>
-					<Panels onApplicationClose={reloadPage}>
-						{!noPanel ? <Panel className={css.panel}>
-							<Column>
-								<Cell shrink>
-									<Heading showLine>{title}</Heading>
-									{description ? (
-										<div className={css.description}>
-											<p>{description}</p>
-										</div>
-									) : null}
-								</Cell>
-								<Cell className={css.storyBody}>
-									{children}
-								</Cell>
-							</Column>
-						</Panel> : children}
-					</Panels>
-				</div> : <div {...rest}>{children}</div>}
-			</Wrapper>
+			!noPanels ? <Wrapper {...rest}>
+				<Panels onApplicationClose={reloadPage}>
+					{!noPanel ? <Panel className={css.panel}>
+						<Column>
+							<Cell shrink>
+								<Heading showLine>{title}</Heading>
+								{description ? (
+									<div className={css.description}>
+										<p>{description}</p>
+									</div>
+								) : null}
+							</Cell>
+							<Cell className={css.storyBody}>
+								{children}
+							</Cell>
+						</Column>
+					</Panel> : children}
+				</Panels>
+			</Wrapper> : <Wrapper {...rest}>{children}</Wrapper>
 		);
 	}
 });
