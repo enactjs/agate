@@ -12,7 +12,7 @@
  */
 
 import kind from '@enact/core/kind';
-import UiIcon from '@enact/ui/Icon';
+import {IconBase as UiIconBase} from '@enact/ui/Icon';
 import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
 import PropTypes from 'prop-types';
@@ -120,7 +120,7 @@ const IconBase = kind({
 	render: ({css, skin, ...rest}) => {
 		delete rest.spriteCount;
 
-		return UiIcon.inline({
+		return UiIconBase.inline({
 			...rest,
 			css: css,
 			iconList: (skin === 'silicon' ? iconListSilicon : iconList)
