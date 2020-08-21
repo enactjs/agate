@@ -1,20 +1,28 @@
-import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
+import {action} from "@enact/storybook-utils/addons/actions";
+import {boolean, number, select} from'@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import ri from '@enact/ui/resolution';
 import React from 'react';
+import ri from '@enact/ui/resolution';
 import {storiesOf} from '@storybook/react';
 import {VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
 
 import ImageItem from '@enact/agate/ImageItem';
 import VirtualList, {VirtualGridList} from '@enact/agate/VirtualList';
 
+const VirtualGridListConfig = mergeComponentMetadata('VirtualGridList', UiVirtualListBasic, VirtualGridList, VirtualList);
+
 const
+	wrapOption = {
+		false: false,
+		true: true,
+		'&quot;noAnimation&quot;': 'noAnimation'
+	},
 	prop = {
-		scrollbarOption: ['auto', 'hidden', 'visible']
+		direction: {horizontal: 'horizontal', vertical: 'vertical'},
+		scrollBarOption: ['auto', 'hidden', 'visible']
 	},
 	items = [],
-	defaultDataSize = 100,
+	defaultDataSize = 1000,
 	longContent = 'Lorem ipsum dolor sit amet',
 	shouldAddLongContent = ({index, modIndex}) => (
 		index % modIndex === 0 ? ` ${longContent}` : ''
@@ -55,30 +63,36 @@ const updateDataSize = (dataSize) => {
 
 updateDataSize(defaultDataSize);
 
-const VirtualGridListConfig = mergeComponentMetadata('VirtualGridList', UiVirtualListBasic, VirtualList, VirtualGridList);
-
 storiesOf('Agate', module)
 	.add(
 		'VirtualList.VirtualGridList',
-		() => (
-			<VirtualGridList
-				dataSize={updateDataSize(number('dataSize', VirtualGridListConfig, defaultDataSize))}
-				focusableScrollbar={boolean('focusableScrollbar', VirtualGridListConfig)}
-				horizontalScrollbar={select('horizontalScrollbar', prop.scrollbarOption, VirtualGridListConfig)}
-				itemRenderer={renderItem}
-				itemSize={{
-					minWidth: ri.scale(number('minWidth', VirtualGridListConfig, 180)),
-					minHeight: ri.scale(number('minHeight', VirtualGridListConfig, 270))
-				}}
-				noScrollByWheel={boolean('noScrollByWheel', VirtualGridListConfig)}
-				onScrollStart={action('onScrollStart')}
-				onScrollStop={action('onScrollStop')}
-				spacing={ri.scale(number('spacing', VirtualGridListConfig, 20))}
-				spotlightDisabled={boolean('spotlightDisabled', VirtualGridListConfig, false)}
-				verticalScrollbar={select('verticalScrollbar', prop.scrollbarOption, VirtualGridListConfig)}
-			/>
-		),
+		() => {
+			return (
+				<VirtualGridList
+					dataSize={updateDataSize(number('dataSize', VirtualGridListConfig, defaultDataSize))}
+					direction={select('direction', prop.direction, VirtualGridListConfig)}
+					focusableScrollbar={boolean('focusableScrollbar', VirtualGridListConfig)}
+					horizontalScrollbar={select('horizontalScrollBar', prop.scrollBarOption, VirtualGridListConfig)}
+					itemRenderer={renderItem}
+					itemSize={{
+						minWidth: ri.scale(number('minWidth', VirtualGridListConfig, 180)),
+						minHeight: ri.scale(number('minHeight', VirtualGridListConfig, 270))
+					}}
+					noScrollByWheel={boolean('noScrollByWheel', VirtualGridListConfig)}
+					onScrollStart={action('onScrollStart')}
+					onScrollStop={action('onScrollStop')}
+					spacing={ri.scale(number('spacing', VirtualGridListConfig, 20))}
+					spotlightDisabled={boolean('spotlightDisabled', VirtualGridListConfig, false)}
+					verticalScrollbar={select('verticalScrollBar', prop.scrollBarOption, VirtualGridListConfig)}
+					wrap={wrapOption[select('wrap', ['false', 'true', '"noAnimation"'], VirtualGridListConfig)]}
+				/>
+			)
+		},
 		{
+			props: {
+				noScroller: true
+			},
 			text: 'Basic usage of VirtualGridList'
 		}
 	);
+
