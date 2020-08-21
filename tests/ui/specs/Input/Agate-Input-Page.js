@@ -11,7 +11,9 @@ class AgateInputPage extends Page {
 		super.open('Agate-Input-View', urlExtra);
 	}
 
-	get disabledInput () { return $('#input5'); }
+	get disabledInput () {
+		return $('#input5');
+	}
 }
 
 module.exports = new AgateInputPage();

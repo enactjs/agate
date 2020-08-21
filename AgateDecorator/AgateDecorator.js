@@ -7,7 +7,7 @@
  */
 
 import deprecate from '@enact/core/internal/deprecate';
-import ThemeDecorator from '@enact/agate/ThemeDecorator';
+import ThemeDecorator from '../ThemeDecorator';
 
 const AgateDecorator = deprecate(ThemeDecorator, {
 	name: 'agate/AgateDecorator',

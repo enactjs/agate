@@ -1,19 +1,20 @@
 // Full List (Hash) of Agate Supported Icons
 //
 
-export default {
-	circlelarge       : 0x025EF,  // shape: LARGE CIRCLE
-	squarelarge       : 0x02B1B,  // shape: BLACK SQUARE LARGE
-	triangleup        : 0x025B2,  // shape: BLACK UP-POINTING TRIANGLE
-	plus              : 0x0002B,  // plus
-	minus             : 0x0002D,  // hyphen
-	arrowup           : 0x02191,  // arrowup
-	arrowdown         : 0x02193,  // arrowdown
-	arrowleftturn     : 0x021B6,  // arrowleftturn
-	arrowrightturn    : 0x021B7,  // arrowrightturn
-	arrowharpoonright : 0x021C0,  // arrowharpoonright
-	ellipsis          : 0x022EF,  // ellipsis
-	check             : 0x02713,  // checkmark
+// Agate Common Icons
+const iconList = {
+	circlelarge       : 0x0025EF, // shape: LARGE CIRCLE
+	squarelarge       : 0x002B1B, // shape: BLACK SQUARE LARGE
+	triangleup        : 0x0025B2, // shape: BLACK UP-POINTING TRIANGLE
+	plus              : 0x00002B, // plus
+	minus             : 0x00002D, // hyphen
+	arrowup           : 0x002191, // arrowup
+	arrowdown         : 0x002193, // arrowdown
+	arrowleftturn     : 0x0021B6, // arrowleftturn
+	arrowrightturn    : 0x0021B7, // arrowrightturn
+	arrowharpoonright : 0x0021C0, // arrowharpoonright
+	ellipsis          : 0x0022EF, // ellipsis
+	check             : 0x002713, // checkmark
 	arrowstraightup   : 0x0EFFEB, // arrowstraightup
 	arrowuturn        : 0x0EFFEC, // arrowuturn
 	arrowlargedown    : 0x0EFFED, // caret_down_large
@@ -130,18 +131,112 @@ export default {
 	star              : 0x0F00E8, // star_full
 	starhollow        : 0x0F00E9, // star_empty
 	starhalf          : 0x0F00EA, // star_half
-	refresh           : 0x0F00EB  // refresh
+	refresh           : 0x0F00EB, // refresh
+	time              : 0x0F00E3, // time
+	pausebold         : 0x0F002D, // pause2
+	playbold          : 0x0F002E, // play2
+	controls          : 0x0F00EC, // controls
+	diagnostics       : 0x0F00ED, // diagnostics
+	mapbox            : 0x0F00EE, // mapbox
+	displaycontrol    : 0x0F00EF, // displaycontrol
+	controlleft       : 0x0F00F0, // controlleft
+	controlright      : 0x0F00F1, // controlright
+	mainpage          : 0x0F00F2, // mainpage
+	playlist          : 0x0F00F3, // playlist
+	resume            : 0x0F00F4, // resume
+	trailer           : 0x0F00F5, // trailer
+	plusbold          : 0x0F00F6, // plus2
+	minusbold         : 0x0F00F7  // minus2
+};
+
+// Silicon-specific Icons
+// The common icons are layered into the @font-face definition in the font definition file.
+const iconListSilicon = {
+	...iconList,
+	arrowleft         : 0x002190, // arrowleft
+	arrowturnleft     : 0x0021B0, // arrowturnleft
+	arrowturnright    : 0x0021B1, // arrowturnright
+	backspace         : 0x002408, // backspace
+	triangle          : 0x0025B2, // triangle
+	trianglehollow    : 0x0025B3, // trianglehollow
+	rewind            : 0x0F0030, // rewind
+	rewindprevious    : 0x0F0031, // rewindprevious
+	stopsquare        : 0x0F0032, // stopsquare
+	fastforwardnext   : 0x0F0033, // fastforwardnext
+	fastforward       : 0x0F0034, // fastforward
+	callaccept        : 0x0F00FE, // callaccept
+	calldecline       : 0x0F00FF, // calldecline
+	calldialing       : 0x0F0100, // calldialing
+	callmissed        : 0x0F0101, // callmissed
+	callreceiving     : 0x0F0102, // callreceiving
+	devicesetting     : 0x0F0103, // devicesetting
+	headset           : 0x0F0104, // headset
+	keypad            : 0x0F0105, // keypad
+	mic               : 0x0F0106, // mic
+	micmute           : 0x0F0107, // micmute
+	car1              : 0x0F0108, // car1
+	car2              : 0x0F0109, // car2
+	carupdate         : 0x0F010A, // carupdate
+	cardiagnostics    : 0x0F010B, // cardiagnostics
+	carcharging       : 0x0F010C, // carcharging
+	carvalet          : 0x0F010D, // carvalet
+	garagemode        : 0x0F010E, // garagemode
+	cone              : 0x0F010F, // cone
+	chargingstation   : 0x0F0110, // chargingstation
+	gps               : 0x0F0111, // gps
+	replay            : 0x0F0112, // replay
+	backward10        : 0x0F0113, // backward10
+	forward10         : 0x0F0114, // forward10
+	remote            : 0x0F0116, // remote
+	light             : 0x0F0118, // light
+	thumbs            : 0x0F0119, // thumbs
+	games             : 0x0F011A, // games
+	unlock            : 0x0F011D, // unlock
+	trash             : 0x0F011E, // trash
+	coffee            : 0x0F011F, // coffee
+	message           : 0x0F0122, // message
+	payment           : 0x0F0123, // payment
+	mail              : 0x0F0124, // mail
+	screenshare       : 0x0F0125, // screenshare
+	photo             : 0x0F0126, // photo
+	add               : 0x0F012A, // add
+	userchange        : 0x0F012C, // userchange
+	seatcool          : 0x0F012D, // seatcool
+	fanhigh           : 0x0F012E, // fanhigh
+	fanlow            : 0x0F012F, // fanlow
+	zoomin            : 0x0F0130, // zoomin
+	zoomout           : 0x0F0131, // zoomout
+	headset2          : 0x0F0150, // headset2
+	headsetbluetooth  : 0x0F0151, // headsetbluetooth
+	data              : 0x0F0152, // data
+	data5g            : 0x0F0153, // data5g
+	datalte           : 0x0F0154, // datalte
+	calling           : 0x0F0155, // calling
+	contact           : 0x0F0156, // contact
+	bluetoothmusic    : 0x0F0157, // bluetoothmusic
+	bluetoothsignalnone: 0x0F0158, // bluetoothsignalnone
+	bluetoothsignal1  : 0x0F0159, // bluetoothsignal1
+	bluetoothsignal2  : 0x0F015A, // bluetoothsignal2
+	bluetoothsignal3  : 0x0F015B, // bluetoothsignal3
+	bluetoothsignal4  : 0x0F015C, // bluetoothsignal4
+	battery0          : 0x0F015D, // battery0
+	battery1          : 0x0F015E, // battery1
+	battery2          : 0x0F015F, // battery2
+	battery3          : 0x0F0160, // battery3
+	battery4          : 0x0F0161, // battery4
+	batteryalert      : 0x0F0162, // batteryalert
+	batterycharging   : 0x0F0163  // batterycharging
 };
 
 // Deprecated icon list from `Moonstone-Agate.ttf` for reference
 
 // export default {
-// 	plus              : 0x0002B,  // plus
-// 	minus             : 0x0002D,  // hyphen
-// 	arrowhookleft     : 0x021A9,  // LeftArrowHook
-// 	arrowhookright    : 0x021AA,  // RightArrowHook
-// 	ellipsis          : 0x022EF,  // ellipsis
-// 	check             : 0x02713,  // checkmark
+// 	plus              : 0x00002B, // plus
+// 	minus             : 0x00002D, // hyphen
+// 	arrowhookleft     : 0x0021A9, // LeftArrowHook
+// 	arrowhookright    : 0x0021AA, // RightArrowHook
+// 	ellipsis          : 0x0022EF, // ellipsis
+// 	check             : 0x002713, // checkmark
 // 	circle            : 0x0EFFDB, // record
 // 	stop              : 0x0EFFDC, // stop
 // 	play              : 0x0EFFDD, // play
@@ -186,57 +281,63 @@ export default {
 // 	halfstar          : 0x0F002A, // star_half
 // 	gear              : 0x0F002B, // gear
 // 	plug              : 0x0F002C, // input
-// 	lock              : 0x0F002D,  // lock
-// 	forward15         : 0x0F0041,  // forward15
-// 	back15            : 0x0F0042,  // back15
-// 	continousplay     : 0x0F0043,  // continous_play
-// 	playlist          : 0x0F0044,  // playlist
-// 	resumeplay        : 0x0F0045,  // resume_play
-// 	image             : 0x0F0046,  // image
-// 	audio             : 0x0F0061,  // audio
-// 	music             : 0x0F0062,  // music
-// 	languages         : 0x0F0081,  // languages
-// 	cc                : 0x0F0082,  // cc
-// 	ccon              : 0x0F0083,  // cc_on
-// 	ccoff             : 0x0F0084,  // cc_off
-// 	sub               : 0x0F0085,  // sub
-// 	recordings        : 0x0F00A1,  // recordings
-// 	livezoom          : 0x0F00A2,  // live_zoom
-// 	liveplayback      : 0x0F00A3,  // live_playback
-// 	liveplaybackoff   : 0x0F00A4,  // live_playback_off
-// 	repeat            : 0x0F00A5,  // repeat
-// 	repeatoff         : 0x0F00A6,  // repeat_off
-// 	series            : 0x0F00A7,  // series
-// 	repeatdownload    : 0x0F00A8,  // repeat_download
-// 	view360           : 0x0F00A9,  // view_360
-// 	view360off        : 0x0F00AA,  // view_360_off
-// 	info              : 0x0F00AB,  // info
-// 	airdown           : 0x0F00B5,  // air_down
-// 	airright          : 0x0F00B6,  // air_right
-// 	airup             : 0x0F00B7,  // air_up
-// 	heatseatleft      : 0x0F00B8,  // seat_heat_left
-// 	heatseatright     : 0x0F00B9,  // seat_heat_right
-// 	aircirculation    : 0x0F00BA,  // air_circulation
-// 	fan               : 0x0F00BB,  // fan
-// 	defrosterfront    : 0x0F00BC,  // defroster_front
-// 	defrosterback     : 0x0F00BD,  // defroster_back
-// 	user              : 0x0F00BE,  // users
-// 	home              : 0x0F00BF,  // home
-// 	temperature       : 0x0F00C0,  // temperature_icon
-// 	compass           : 0x0F00C1,  // compass
-// 	phone             : 0x0F00C2,  // phone
-// 	fanoff            : 0x0F00C9,  // fan_off
-// 	bluetooth         : 0x0F00CA,  // bluetooth
-// 	datetime          : 0x0F00CB,  // date_time
-// 	display           : 0x0F00CC,  // display
-// 	seatbelt          : 0x0F00CD,  // seat_belt
-// 	wifi              : 0x0F00CE,  // wifi
-// 	apps              : 0x0F00CF,  // apps
-// 	climate           : 0x0F00D0,  // climate
-// 	dashboard         : 0x0F00D1,  // dashboard
-// 	edit              : 0x0F00D2,  // edit
-// 	expand            : 0x0F00D3,  // expand
-// 	radio             : 0x0F00D4,  // radio
-// 	rearscreen        : 0x0F00D5,  // rear_screen
-// 	weather           : 0x0F00D6   // weather
+// 	lock              : 0x0F002D, // lock
+// 	forward15         : 0x0F0041, // forward15
+// 	back15            : 0x0F0042, // back15
+// 	continousplay     : 0x0F0043, // continous_play
+// 	playlist          : 0x0F0044, // playlist
+// 	resumeplay        : 0x0F0045, // resume_play
+// 	image             : 0x0F0046, // image
+// 	audio             : 0x0F0061, // audio
+// 	music             : 0x0F0062, // music
+// 	languages         : 0x0F0081, // languages
+// 	cc                : 0x0F0082, // cc
+// 	ccon              : 0x0F0083, // cc_on
+// 	ccoff             : 0x0F0084, // cc_off
+// 	sub               : 0x0F0085, // sub
+// 	recordings        : 0x0F00A1, // recordings
+// 	livezoom          : 0x0F00A2, // live_zoom
+// 	liveplayback      : 0x0F00A3, // live_playback
+// 	liveplaybackoff   : 0x0F00A4, // live_playback_off
+// 	repeat            : 0x0F00A5, // repeat
+// 	repeatoff         : 0x0F00A6, // repeat_off
+// 	series            : 0x0F00A7, // series
+// 	repeatdownload    : 0x0F00A8, // repeat_download
+// 	view360           : 0x0F00A9, // view_360
+// 	view360off        : 0x0F00AA, // view_360_off
+// 	info              : 0x0F00AB, // info
+// 	airdown           : 0x0F00B5, // air_down
+// 	airright          : 0x0F00B6, // air_right
+// 	airup             : 0x0F00B7, // air_up
+// 	heatseatleft      : 0x0F00B8, // seat_heat_left
+// 	heatseatright     : 0x0F00B9, // seat_heat_right
+// 	aircirculation    : 0x0F00BA, // air_circulation
+// 	fan               : 0x0F00BB, // fan
+// 	defrosterfront    : 0x0F00BC, // defroster_front
+// 	defrosterback     : 0x0F00BD, // defroster_back
+// 	user              : 0x0F00BE, // users
+// 	home              : 0x0F00BF, // home
+// 	temperature       : 0x0F00C0, // temperature_icon
+// 	compass           : 0x0F00C1, // compass
+// 	phone             : 0x0F00C2, // phone
+// 	fanoff            : 0x0F00C9, // fan_off
+// 	bluetooth         : 0x0F00CA, // bluetooth
+// 	datetime          : 0x0F00CB, // date_time
+// 	display           : 0x0F00CC, // display
+// 	seatbelt          : 0x0F00CD, // seat_belt
+// 	wifi              : 0x0F00CE, // wifi
+// 	apps              : 0x0F00CF, // apps
+// 	climate           : 0x0F00D0, // climate
+// 	dashboard         : 0x0F00D1, // dashboard
+// 	edit              : 0x0F00D2, // edit
+// 	expand            : 0x0F00D3, // expand
+// 	radio             : 0x0F00D4, // radio
+// 	rearscreen        : 0x0F00D5, // rear_screen
+// 	weather           : 0x0F00D6  // weather
 // };
+
+export default iconList;
+export {
+	iconList,
+	iconListSilicon
+};

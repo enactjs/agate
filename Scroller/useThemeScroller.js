@@ -32,7 +32,7 @@ const useSpottable = (props, instances) => {
 
 	useEffect(() => {
 		return () => setContainerDisabled(false);
-	}, [setContainerDisabled]);
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	useEffect(() => {
 		const {onUpdate} = props;
@@ -98,7 +98,7 @@ const useSpottable = (props, instances) => {
 		};
 		// adding threshold into these determinations ensures that items that are within that are
 		// near the bounds of the scroller cause the edge to be scrolled into view even when the
-		// itme itself is in view (e.g. due to margins)
+		// item itself is in view (e.g. due to margins)
 		const isItemBeforeView = (ib, sb, d) => ib.top + d - threshold < sb.top;
 		const isItemAfterView = (ib, sb, d) => ib.top + d + ib.height + threshold > sb.top + sb.height;
 		const canItemFit = (ib, sb) => ib.height <= sb.height;
@@ -241,15 +241,13 @@ const useSpottable = (props, instances) => {
 };
 
 const useThemeScroller = (props) => {
-	const {scrollContainerRef, ...rest} = props;
-	const {scrollContentHandle, scrollContentRef} = rest;
+	const {scrollContainerRef, scrollContentHandle, ...rest} = props;
+	const {scrollContentRef} = rest;
 
 	delete rest.onUpdate;
 	delete rest.scrollAndFocusScrollbarButton;
 	delete rest.scrollContainerContainsDangerously;
 	delete rest.scrollContainerHandle;
-	delete rest.scrollContainerRef;
-	delete rest.scrollContentHandle;
 	delete rest.setThemeScrollContentHandle;
 	delete rest.spotlightId;
 
@@ -257,13 +255,11 @@ const useThemeScroller = (props) => {
 
 	const {calculatePositionOnFocus, focusOnNode, setContainerDisabled} = useSpottable(props, {scrollContainerRef, scrollContentHandle, scrollContentRef});
 
-	useEffect(() => {
-		props.setThemeScrollContentHandle({
-			calculatePositionOnFocus,
-			focusOnNode,
-			setContainerDisabled
-		});
-	}, [calculatePositionOnFocus, focusOnNode, props, setContainerDisabled]);
+	props.setThemeScrollContentHandle({
+		calculatePositionOnFocus,
+		focusOnNode,
+		setContainerDisabled
+	});
 
 	// Render
 

@@ -1,0 +1,26 @@
+// TimePicker.module.less
+//
+
+.timePicker {
+	// hour and minute should always be left-to-right
+	.pickers {
+		direction: ltr;
+
+		:global(.enact-locale-right-to-left) & {
+			display: flex;
+			align-items: center;
+
+			.hourPicker {
+				order: 2;
+			}
+
+			.minutePicker {
+				order: 3;
+			}
+
+			.meridiemPicker{
+				order: 1;
+			}
+		}
+	}
+}
