@@ -44,3 +44,12 @@ body {
 	height: 100%;
 	position: relative !important;
 }
+.panel > section > div:not([class]):not([style]):first-child,
+// additional selector on first div right after themeEnvironment to add min-height to display Panels content when Panels are used as a component inside storybook.
+.themeEnvironment > div:first-child,
+// additional selector when noPanel option is used
+.themeEnvironment main > div {
+	width: 100%;
+	height: 100%;
+	position: relative !important;
+}

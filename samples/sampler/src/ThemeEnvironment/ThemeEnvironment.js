@@ -43,30 +43,44 @@ const PanelsBase = kind({
 
 	propTypes: {
 		description: PropTypes.string,
+		noScroller: PropTypes.bool,
+		noPanel: PropTypes.bool, // eslint-disable-line react/sort-prop-types
+		noPanels: PropTypes.bool, // eslint-disable-line react/sort-prop-types
 		title: PropTypes.string
 	},
 
-	render: ({children, title, description, ...rest}) => (
-		<div {...rest}>
-			<Panels onApplicationClose={reloadPage}>
-				<Panel className={css.panel}>
-					<Column>
-						<Cell shrink>
-							<Heading showLine>{title}</Heading>
-							{description ? (
-								<div className={css.description}>
-									<p>{description}</p>
-								</div>
-							) : null}
-						</Cell>
-						<Cell className={css.storyBody}>
-							{children}
-						</Cell>
-					</Column>
-				</Panel>
-			</Panels>
-		</div>
-	)
+	styles: {
+		css,
+		className: 'themeEnvironment'
+	},
+
+	render: ({children, description, noScroller, noPanel, noPanels, title, ...rest}) => {
+		const Wrapper = noScroller ? React.Fragment : Scroller;
+
+		return (
+			<Wrapper>
+				{!noPanels ? <div {...rest}>
+					<Panels onApplicationClose={reloadPage}>
+						{!noPanel ? <Panel className={css.panel}>
+							<Column>
+								<Cell shrink>
+									<Heading showLine>{title}</Heading>
+									{description ? (
+										<div className={css.description}>
+											<p>{description}</p>
+										</div>
+									) : null}
+								</Cell>
+								<Cell className={css.storyBody}>
+									{children}
+								</Cell>
+							</Column>
+						</Panel> : children}
+					</Panels>
+				</div> : <div {...rest}>{children}</div>}
+			</Wrapper>
+		);
+	}
 });
 
 const FullscreenBase = kind({
@@ -77,8 +91,8 @@ const FullscreenBase = kind({
 	)
 });
 
-const Agate = ThemeDecorator({overlay: false}, PanelsBase);
-const AgateFullscreen = ThemeDecorator({overlay: false}, FullscreenBase);
+const Theme = ThemeDecorator({overlay: false}, PanelsBase);
+const ThemeFullscreen = ThemeDecorator({overlay: false}, FullscreenBase);
 
 const locales = {
 	'local': '',
@@ -187,11 +201,12 @@ const StorybookDecorator = (story, config) => {
 		skinKnobs.skin = select('skin', skins, Config, currentSkin);
 	}
 	const {accent, highlight} = !allSkins && boolean('default skin styles', Config) ? defaultColors[skinKnobs.skin] : {};
-	const noScroller = config.parameters && config.parameters.props && config.parameters.props.noScroller;
-	const Wrapper = noScroller ? React.Fragment : Scroller;
+	if (config.parameters && config.parameters.props) {
+		config.props = config.parameters.props;
+	}
 
 	return (
-		<Agate
+		<Theme
 			title={`${config.kind} ${config.story}`.trim()}
 			description={config.description}
 			locale={locale}
@@ -199,31 +214,30 @@ const StorybookDecorator = (story, config) => {
 			skinVariants={boolean('night mode', Config) && 'night'}
 			accent={accent || color('accent', (!newSkin && accentFromURL ? accentFromURL : defaultColors[currentSkin].accent), Config.groupId)}
 			highlight={highlight || color('highlight', (!newSkin && highlightFromURL ? highlightFromURL : defaultColors[currentSkin].highlight), Config.groupId)}
+			{...config.props}
 		>
-			<Wrapper>
-				{allSkins ? Object.keys(skins).map(skin => (
-					<SkinFrame skin={skins[skin]} key={skin}>
-						<Cell size="20%" component={Heading}>{skin}</Cell>
-						<Cell>{sample}</Cell>
-					</SkinFrame>
-				)) : sample}
-			</Wrapper>
-		</Agate>
+			{allSkins ? Object.keys(skins).map(skin => (
+				<SkinFrame skin={skins[skin]} key={skin}>
+					<Cell size="20%" component={Heading}>{skin}</Cell>
+					<Cell>{sample}</Cell>
+				</SkinFrame>
+			)) : sample}
+		</Theme>
 	);
 };
 
 const FullscreenStorybookDecorator = (story, config) => {
 	const sample = story();
 	return (
-		<AgateFullscreen
+		<ThemeFullscreen
 			title={`${config.kind} ${config.story}`.trim()}
 			description={config.description}
 			skin={select('skin', skins, getPropFromURL('skin'))}
 		>
 			{sample}
-		</AgateFullscreen>
+		</ThemeFullscreen>
 	);
 };
 
 export default StorybookDecorator;
-export {StorybookDecorator as Agate, FullscreenStorybookDecorator as AgateFullscreen};
+export {StorybookDecorator as Theme, FullscreenStorybookDecorator as ThemeFullscreen};
