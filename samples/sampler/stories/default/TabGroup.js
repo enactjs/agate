@@ -1,10 +1,12 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import React from 'react';
+import {select} from '@enact/storybook-utils/addons/knobs';
 import {storiesOf} from '@storybook/react';
 
+import Button from '@enact/agate/Button';
 import TabGroup from '@enact/agate/TabGroup';
 
-// const Config = mergeComponentMetadata('TabGroup', TabGroup);
+const Config = mergeComponentMetadata('TabGroup', TabGroup);
 TabGroup.displayName = 'TabGroup';
 
 storiesOf('Agate', module)
@@ -12,14 +14,29 @@ storiesOf('Agate', module)
 		'TabGroup',
 		() => (
 			<TabGroup
-				tabPosition="above"
+				orientation={select('orientation', ['vertical', 'horizontal'], Config, 'horizontal')}
+				tabPosition={select('tabPosition', ['before', 'after'], Config, 'before')}
 				tabs={[
-					{title: 'Button', icon: 'netbook'},
-					{title: 'Item', icon: 'aircirculation'},
-					{title: 'LabeledIconButton', icon: 'temperature'}
+					{title: 'Home', icon: 'home'},
+					{title: 'Settings', icon: 'setting'},
+					{title: 'Theme', icon: 'display'}
 				]}
-				orientation="horizontal"
-			/>
+			>
+				<beforeTabs>
+					<Button
+						icon="arrowlargeleft"
+						size="small"
+						type="grid"
+					/>
+				</beforeTabs>
+				<afterTabs>
+					<Button
+						icon="arrowlargeright"
+						size="small"
+						type="grid"
+					/>
+				</afterTabs>
+			</TabGroup>
 		),
 		{
 			text: 'The basic TabGroup'

@@ -1,5 +1,5 @@
-import {action} from "@enact/storybook-utils/addons/actions";
-import {boolean, number, select} from'@enact/storybook-utils/addons/knobs';
+import {action} from '@enact/storybook-utils/addons/actions';
+import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import React from 'react';
 import ri from '@enact/ui/resolution';
@@ -86,7 +86,7 @@ storiesOf('Agate', module)
 					verticalScrollbar={select('verticalScrollBar', prop.scrollBarOption, VirtualGridListConfig)}
 					wrap={wrapOption[select('wrap', ['false', 'true', '"noAnimation"'], VirtualGridListConfig)]}
 				/>
-			)
+			);
 		},
 		{
 			props: {
