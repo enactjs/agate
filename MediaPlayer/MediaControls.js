@@ -25,6 +25,14 @@ const MediaControlsBase = kind({
 
 	propTypes: /** @lends agate/MediaPlayer.MediaControls.prototype */ {
 		/**
+		 * `true` when the media loops.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		loop: PropTypes.bool,
+
+		/**
 		 * A string which is sent to the `menu` icon of the player controls. This can be
 		 * anything that is accepted by {@link agate/Icon.Icon}.
 		 *
@@ -43,6 +51,14 @@ const MediaControlsBase = kind({
 		 * @public
 		 */
 		nextTrackIcon: PropTypes.string,
+
+		/**
+		 * Called when the user clicks the Loop button.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onLoopButtonClick: PropTypes.func,
 
 		/**
 		 * Called when the user clicks the Play button.
@@ -125,6 +141,7 @@ const MediaControlsBase = kind({
 	},
 
 	defaultProps: {
+		loop: false,
 		menuIcon: 'menu',
 		nextTrackIcon: 'nexttrack',
 		pauseIcon: 'pause',
@@ -140,12 +157,13 @@ const MediaControlsBase = kind({
 		className: 'controlsFrame'
 	},
 
-	render: ({menuIcon, nextTrackIcon, onPlayButtonClick, pauseIcon, paused, playIcon, previousTrackIcon, repeatIcon, shuffleIcon, ...rest}) => {
+	render: ({loop, loopClassName, menuIcon, nextTrackIcon, onLoopButtonClick, onPlayButtonClick, pauseIcon, paused, playIcon, previousTrackIcon, repeatIcon, shuffleIcon, ...rest}) => {
 		delete rest.visible;
 
 		return (
 			<div className={css.mediaControls} {...rest}>
-				<Button aria-label={$L('Repeat')} backgroundOpacity="transparent" css={css} icon={repeatIcon} size="large" />
+				<Button aria-label={$L('Repeat')} backgroundOpacity="transparent"
+						className={loop ? css.loop : ""} css={css}  icon={repeatIcon} onClick={onLoopButtonClick} size="large" />
 				<Button aria-label={$L('Shuffle')} backgroundOpacity="transparent" css={css} icon={shuffleIcon} size="large" />
 				<Button aria-label={$L('Previous')} backgroundOpacity="transparent" css={css} icon={previousTrackIcon} size="large" />
 				<Button aria-label={paused ? $L('Play') : $L('Pause')} backgroundOpacity="transparent"
@@ -174,6 +192,22 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 		static displayName = 'MediaControlsDecorator'
 
 		static propTypes = /** @lends agate/MediaPlayer.MediaControlsDecorator.prototype */ {
+			/**
+			 * The media loop state.
+			 *
+			 * @type {Boolean}
+			 * @public
+			 */
+			loop: PropTypes.bool,
+
+			/**
+			 * Called when media gets looped.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onLoopChange: PropTypes.func,
+
 			/**
 			 * Called when media gets paused.
 			 *
@@ -209,7 +243,6 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 
 		constructor (props) {
 			super(props);
-			this.mediaControlsNode = null;
 
 			this.paused = new Pause('MediaPlayer');
 
@@ -217,7 +250,6 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 
 		handlePlayButtonClick = (ev) => {
 			forward('onPlayButtonClick', ev, this.props);
-			console.log('clicked PLAY');
 			if (this.props.paused) {
 				forward('onPlay', ev, this.props);
 			} else {
@@ -225,14 +257,21 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 			}
 		}
 
+		handleLoopButtonClick = (ev) => {
+			forward('onLoopButtonClick', ev, this.props);
+			forward('onLoopChange', ev, this.props);
+		}
+
 		render () {
 			const props = Object.assign({}, this.props);
+			delete props.onLoopChange;
 			delete props.onPause;
 			delete props.onPlay;
 
 			return (
 				<Wrapped
 					{...props}
+					onLoopButtonClick={this.handleLoopButtonClick}
 					onPlayButtonClick={this.handlePlayButtonClick}
 				/>
 			);

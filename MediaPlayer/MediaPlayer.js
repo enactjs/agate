@@ -1,6 +1,5 @@
-import kind from '@enact/core/kind';
 import EnactPropTypes from '@enact/core/internal/prop-types';
-import {adaptEvent, call, forKey, forward, forwardWithPrevent, handle, preventDefault, stopImmediate, returnsTrue} from '@enact/core/handle';
+import {adaptEvent, call, forwardWithPrevent, handle} from '@enact/core/handle';
 import Pure from '@enact/ui/internal/Pure';
 import Media from '@enact/ui/Media';
 import Slottable from '@enact/ui/Slottable';
@@ -8,14 +7,12 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
-import css from './MediaPlayer.module.less';
 import MediaControls from './MediaControls';
 import MediaSlider from './MediaSlider';
 import Skinnable from '../Skinnable';
 import Times from './Times';
-import $L from '../internal/$L';
-import {Job} from '@enact/core/util';
-import Announce from '@enact/ui/AnnounceDecorator/Announce';
+
+import css from './MediaPlayer.module.less';
 
 const forwardWithState = (type) => adaptEvent(call('addStateToEvent'), forwardWithPrevent(type));
 
@@ -53,13 +50,21 @@ const MediaPlayerBase = class extends React.Component {
 		 * * `load()` - load media
 		 *
 		 * @type {String|Component}
-		 * @default 'video'
+		 * @default 'audio'
 		 * @public
 		 */
 		mediaComponent: EnactPropTypes.renderable,
 
 		/**
-		 * Called when video is paused
+		 * Called when media is looped
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onLoopChange: PropTypes.func,
+
+		/**
+		 * Called when media is paused
 		 *
 		 * @type {Function}
 		 * @public
@@ -67,7 +72,7 @@ const MediaPlayerBase = class extends React.Component {
 		onPause: PropTypes.func,
 
 		/**
-		 * Called when video is played
+		 * Called when media is played
 		 *
 		 * @type {Function}
 		 * @public
@@ -83,9 +88,10 @@ const MediaPlayerBase = class extends React.Component {
 		super(props);
 
 		// Internal State
-		this.audio = null;
+		this.media = null;
 
 		this.state = {
+			loop: false,
 			paused: true,
 		};
 	}
@@ -102,12 +108,6 @@ const MediaPlayerBase = class extends React.Component {
 		() => this.pause()
 	)
 
-	announceJob = new Job(msg => (this.announceRef && this.announceRef.announce(msg)), 200)
-
-	announce = (msg) => {
-		this.announceJob.start(msg);
-	}
-
 	//
 	// Handled Media events
 	//
@@ -122,27 +122,22 @@ const MediaPlayerBase = class extends React.Component {
 	}
 
 	/**
-	 * Returns an object with the current state of the media including `currentTime`, `duration`,
-	 * `paused`, `playbackRate`, `proportionLoaded`, and `proportionPlayed`.
+	 * Returns an object with the current state of the media
 	 *
 	 * @function
-	 * @memberof sandstone/VideoPlayer.VideoPlayerBase.prototype
+	 * @memberof agate/MediaPlayer.MediaPlayerBase.prototype
 	 * @returns {Object}
 	 * @public
 	 */
 	getMediaState = () => {
 		return {
-			//currentTime       : this.state.currentTime,
-			//duration          : this.state.duration,
-			paused            : this.state.paused,
-			//playbackRate      : this.video.playbackRate,
-			//proportionLoaded  : this.state.proportionLoaded,
-			//proportionPlayed  : this.state.proportionPlayed
+			loop: this.state.loop,
+			paused: this.state.paused,
 		};
 	}
 
 	/**
-	 * The primary means of interacting with the `<video>` element.
+	 * The primary means of interacting with the media element.
 	 *
 	 * @param  {String} action The method to preform.
 	 * @param  {Multiple} props  The arguments, in the format that the action method requires.
@@ -150,16 +145,14 @@ const MediaPlayerBase = class extends React.Component {
 	 * @private
 	 */
 	send = (action, props) => {
-		//this.clearPulsedPlayback();
-		//this.showFeedback();
-		//this.startDelayedFeedbackHide();
-		this.audio[action](props);
+		this.media[action](props);
 	}
 
 	handleEvent = () => {
-		const el = this.audio;
+		const el = this.media;
 		const updatedState = {
-			paused: el.paused,
+			loop: el.loop,
+			paused: el.paused
 		};
 
 		// If there's an error, we're obviously not loading, no matter what the readyState is.
@@ -168,34 +161,28 @@ const MediaPlayerBase = class extends React.Component {
 		this.setState(updatedState);
 	}
 
-
 	play = () => {
-		// must happen before send() to ensure feedback uses the right value
-		// TODO: refactor into this.state member
 		this.send('play');
-		this.announce($L('Play'));
 	}
-
 
 	pause = () => {
-		// must happen before send() to ensure feedback uses the right value
-		// TODO: refactor into this.state member
 		this.send('pause');
-		this.announce($L('Pause'));
 	}
 
-	setAudioRef = (node) => {
-		this.audio = node;
+	loopChange = () => {
+		this.setState({loop: !this.state.loop}, () => {
+			this.media.loop = this.state.loop;
+		})
+	}
+
+	setMediaRef = (node) => {
+		this.media = node;
 		this.setMedia();
-	}
-
-	setAnnounceRef = (node) => {
-		this.announceRef = node;
 	}
 
 	setMedia ({setMedia} = this.props) {
 		if (setMedia) {
-			setMedia(this.audio);
+			setMedia(this.media);
 		}
 	}
 
@@ -206,30 +193,28 @@ const MediaPlayerBase = class extends React.Component {
 			...rest
 		} = this.props;
 
-		rest.css = css;
 		rest.className = css.mediaPlayer;
 
 		return (
 			<div className={css.mediaPlayer} {...rest}>
-				<Media mediaComponent={mediaComponent} source={source} autoPlay controls {...rest} ref={this.setAudioRef} onUpdate={this.handleEvent} />
+				<Media
+					controls
+					loop={this.state.loop}
+					mediaComponent={mediaComponent}
+					onUpdate={this.handleEvent}
+					ref={this.setMediaRef}
+					source={source}
+					{...rest}
+				/>
 				<MediaSlider />
 				<Times />
 				<MediaControls
-					//onClose={this.handleMediaControlsClose}
-					//onFastForward={this.handleFastForward}
-					//onJump={this.handleJump}
-					//onJumpBackwardButtonClick={this.onJumpBackward}
-					//onJumpForwardButtonClick={this.onJumpForward}
+					loop={this.state.loop}
+					onLoopChange={this.loopChange}
 					onPause={this.handlePause}
 					onPlay={this.handlePlay}
-					//onRewind={this.handleRewind}
-					//onToggleMore={this.handleToggleMore}
 					paused={this.state.paused}
-					//spotlightId={this.mediaControlsSpotlightId}
-					//spotlightDisabled={!this.state.mediaControlsVisible || spotlightDisabled}
-					visible={this.state.mediaControlsVisible}
 				/>
-				<Announce ref={this.setAnnounceRef} />
 			</div>
 		);
 	}
