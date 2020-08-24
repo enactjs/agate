@@ -274,7 +274,7 @@ const PickerBase = kind({
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
-				{skin === "silicon"  &&
+				{skin === 'silicon'  &&
 					<PickerButtonItem
 						aria-controls={valueId}
 						aria-disabled={isSecond}
@@ -322,7 +322,7 @@ const PickerBase = kind({
 						{isLast ? '' : incrementValue}
 					</div>
 				</PickerButtonItem>
-				{skin === "silicon" &&
+				{skin === 'silicon' &&
 					<PickerButtonItem
 						aria-controls={valueId}
 						aria-disabled={isPenultimate}
