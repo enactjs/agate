@@ -74,6 +74,7 @@ const DrawerBase = kind({
 				css={css}
 			>
 				<Layout
+					role="alert"
 					{...rest}
 				>
 					{/* <Icon size="small" onClick={onClose} className={css.closeButton}>closex</Icon>*/}
