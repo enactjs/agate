@@ -239,35 +239,29 @@ const TimePickerBase = kind({
 						case 'h':
 						case 'k':
 							return (
-								<React.Fragment key="hour-picker">
-									<HourPicker
-										aria-label={hourAriaLabel}
-										className={css.hourPicker}
-										disabled={disabled}
-										hasMeridiem={hasMeridiem}
-										onChange={onChangeHour}
-										value={hour}
-										width={4}
-									/>
-									<div className={css.divider} />
-								</React.Fragment>
+								<HourPicker
+									aria-label={hourAriaLabel}
+									className={css.hourPicker}
+									disabled={disabled}
+									hasMeridiem={hasMeridiem}
+									onChange={onChangeHour}
+									value={hour}
+									width={4}
+								/>
 							);
 						case 'm':
 							return (
-								<React.Fragment>
-									<DateComponentRangePicker
-										aria-label={minuteAriaLabel}
-										className={css.minutePicker}
-										disabled={disabled}
-										key="minute-picker"
-										max={59}
-										min={0}
-										onChange={onChangeMinute}
-										value={minute}
-										width={4}
-									/>
-									{hasMeridiem && <div className={css.divider} />}
-								</React.Fragment>
+								<DateComponentRangePicker
+									aria-label={minuteAriaLabel}
+									className={css.minutePicker}
+									disabled={disabled}
+									key="minute-picker"
+									max={59}
+									min={0}
+									onChange={onChangeMinute}
+									value={minute}
+									width={4}
+								/>
 							);
 						case 'a':
 							return (

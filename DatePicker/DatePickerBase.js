@@ -174,12 +174,6 @@ const DatePickerBase = kind({
 		yearAriaLabel: PropTypes.string
 	},
 
-	computed: {
-		isDayLast: ({order}) => order.indexOf('d') === order.length - 1,
-		isMonthLast: ({order}) => order.indexOf('m') === order.length - 1,
-		isYearLast: ({order}) => order.indexOf('y') === order.length - 1
-	},
-
 	defaultProps: {
 		maxYear: 2099,
 		minYear: 1900,
@@ -195,9 +189,6 @@ const DatePickerBase = kind({
 		disabled,
 		day,
 		dayAriaLabel,
-		isDayLast,
-		isMonthLast,
-		isYearLast,
 		maxDays,
 		maxMonths,
 		maxYear,
@@ -221,54 +212,45 @@ const DatePickerBase = kind({
 					switch (picker) {
 						case 'd':
 							return (
-								<React.Fragment>
-									<DateComponentRangePicker
-										aria-label={dayAriaLabel}
-										className={css.day}
-										disabled={disabled}
-										key="day-picker"
-										max={maxDays}
-										min={1}
-										onChange={onChangeDate}
-										value={day}
-										width={4}
-									/>
-									{!isDayLast && <div className={css.divider} />}
-								</React.Fragment>
+								<DateComponentRangePicker
+									aria-label={dayAriaLabel}
+									className={css.day}
+									disabled={disabled}
+									key="day-picker"
+									max={maxDays}
+									min={1}
+									onChange={onChangeDate}
+									value={day}
+									width={4}
+								/>
 							);
 						case 'm':
 							return (
-								<React.Fragment>
-									<DateComponentRangePicker
-										aria-label={monthAriaLabel}
-										className={css.month}
-										disabled={disabled}
-										key="month-picker"
-										max={maxMonths}
-										min={1}
-										onChange={onChangeMonth}
-										value={month}
-										width={4}
-									/>
-									{!isMonthLast && <div className={css.divider} />}
-								</React.Fragment>
+								<DateComponentRangePicker
+									aria-label={monthAriaLabel}
+									className={css.month}
+									disabled={disabled}
+									key="month-picker"
+									max={maxMonths}
+									min={1}
+									onChange={onChangeMonth}
+									value={month}
+									width={4}
+								/>
 							);
 						case 'y':
 							return (
-								<React.Fragment>
-									<DateComponentRangePicker
-										aria-label={yearAriaLabel}
-										className={css.year}
-										disabled={disabled}
-										key="year-picker"
-										max={maxYear}
-										min={minYear}
-										onChange={onChangeYear}
-										value={year}
-										width={4}
-									/>
-									{!isYearLast && <div className={css.divider} />}
-								</React.Fragment>
+								<DateComponentRangePicker
+									aria-label={yearAriaLabel}
+									className={css.year}
+									disabled={disabled}
+									key="year-picker"
+									max={maxYear}
+									min={minYear}
+									onChange={onChangeYear}
+									value={year}
+									width={4}
+								/>
 							);
 					}
 					return null;

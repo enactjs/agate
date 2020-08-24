@@ -64,7 +64,6 @@ const DateComponentRangePickerBase = kind({
 			max={max}
 			min={min}
 			orientation="vertical"
-			showSecondaryValues
 			value={value}
 		/>
 	)

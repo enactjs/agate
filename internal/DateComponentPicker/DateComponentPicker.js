@@ -60,7 +60,6 @@ const DateComponentPickerBase = kind({
 			max={max}
 			min={0}
 			orientation="vertical"
-			showSecondaryValues
 			step={1}
 			value={value}
 		>

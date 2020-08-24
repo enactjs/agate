@@ -20,7 +20,6 @@ storiesOf('Agate', module)
 				min={number('min', Config, 0)}
 				onChange={action('onChange')}
 				orientation={select('orientation', ['vertical', 'horizontal'], Config)}
-				showSecondaryValues={boolean('showSecondaryValues', Config)}
 				step={number('step', Config)}
 			/>
 		),

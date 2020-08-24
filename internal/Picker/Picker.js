@@ -158,13 +158,12 @@ const PickerBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
-		 * Show secondary sets of values.
+		 * The current skin for this component.
 		 *
-		 * @type {Boolean}
-		 * @default false
+		 * @type {String}
 		 * @public
 		 */
-		showSecondaryValues: PropTypes.bool,
+		skin: PropTypes.string,
 
 		/**
 		 * Allow the picker to only increment or decrement by a given value.
@@ -257,7 +256,7 @@ const PickerBase = kind({
 			incrementAriaLabel,
 			min,
 			max,
-			showSecondaryValues,
+			skin,
 			step,
 			value,
 			valueId,
@@ -275,7 +274,7 @@ const PickerBase = kind({
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
-				{showSecondaryValues  &&
+				{skin === "silicon"  &&
 					<PickerButtonItem
 						aria-controls={valueId}
 						aria-disabled={isSecond}
@@ -323,7 +322,7 @@ const PickerBase = kind({
 						{isLast ? '' : incrementValue}
 					</div>
 				</PickerButtonItem>
-				{showSecondaryValues &&
+				{skin === "silicon" &&
 					<PickerButtonItem
 						aria-controls={valueId}
 						aria-disabled={isPenultimate}
@@ -354,7 +353,7 @@ const PickerBase = kind({
 const PickerDecorator = compose(
 	IdProvider({generateProp: null}),
 	Changeable,
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 const Picker = PickerDecorator(PickerBase);

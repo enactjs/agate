@@ -6,12 +6,11 @@
 .dateTimePicker {
 	position: relative;
 
-	.pickerBackground {
+	&::before {
+		content: "";
 		position: absolute;
 		width: 95%;
-		z-index: -1;
 		left: 50%;
-		-webkit-transform: translateX(-50%);
 		transform: translateX(-50%);
 	}
 }
@@ -21,7 +20,7 @@
 		font-size: @agate-picker-font-size;
 		width: @agate-datetimepicker-width;
 
-		.pickerBackground {
+		&::before {
 			height: @agate-button-height;
 			background-image: @agate-datetimepicker-active-container-bg-image;
 			background-color: @agate-datetimepicker-active-container-bg-color;

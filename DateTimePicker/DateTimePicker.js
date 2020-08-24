@@ -40,7 +40,6 @@ const DateTimePickerBase = kind({
 
 		return (
 			<Row {...rest} className={css.dateTimePicker} align="center center">
-				<div className={css.pickerBackground} />
 				<Cell>
 					<Row align="center center">
 						<TimePicker />
