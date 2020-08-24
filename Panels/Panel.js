@@ -3,6 +3,7 @@ import kind from '@enact/core/kind';
 import Slottable from '@enact/ui/Slottable';
 import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator, {spotlightDefaultClass} from '@enact/spotlight/SpotlightContainerDecorator';
+import ComponentOverride from '@enact/ui/ComponentOverride';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -155,16 +156,43 @@ const PanelBase = kind({
 		// nulling headerId prevents the aria-labelledby relationship which is necessary to allow
 		// aria-label to take precedence
 		// (see https://www.w3.org/TR/wai-aria/states_and_properties#aria-labelledby)
-		headerId: ({'aria-label': label}) => label ? null : `panel_${++panelId}_header`
+		ids: ({'aria-label': label}) => {
+			if (label) {
+				return {};
+			} else {
+				const labelledby = `panel_${++panelId}_title panel_${panelId}_subtitle`;
+				const [titleId, subtitleId] = labelledby.split(' ');
+
+				return {
+					labelledby,
+					subtitleId,
+					titleId
+				};
+			}
+		}
 	},
 
-	render: ({bodyClassName, css, children, header, headerId, spotOnRender, ...rest}) => {
+	render: ({
+		bodyClassName,
+		css,
+		children,
+		header,
+		ids: {labelledby = null, subtitleId = null, titleId = null},
+		spotOnRender,
+		...rest
+	}) => {
 		delete rest.autoFocus;
 		delete rest.hideChildren;
 
 		return (
-			<article role="region" {...rest} aria-labelledby={headerId} ref={spotOnRender}>
-				{header ? <div className={css.header} id={headerId}>{header}</div> : null}
+			<article role="region" {...rest} aria-labelledby={labelledby} ref={spotOnRender}>
+				<div className={css.header}>
+					<ComponentOverride
+						component={header}
+						subtitleId={subtitleId}
+						titleId={titleId}
+					/>
+				</div>
 				<section className={bodyClassName}>{children}</section>
 			</article>
 		);

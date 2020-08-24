@@ -88,6 +88,14 @@ const HeaderBase = kind({
 		subtitle: PropTypes.string,
 
 		/**
+		 * Subtitle id of the header.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		subtitleId: PropTypes.string,
+
+		/**
 		 * Text displayed above the title.
 		 *
 		 * This is a [`slot`]{@link ui/Slottable.Slottable}, so it can be used as a tag-name inside
@@ -95,7 +103,15 @@ const HeaderBase = kind({
 		 *
 		 * @type {String}
 		 */
-		titleAbove: PropTypes.string
+		titleAbove: PropTypes.string,
+
+		/**
+		 * Title id of the header.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		titleId: PropTypes.string
 	},
 
 	styles: {
@@ -106,24 +122,26 @@ const HeaderBase = kind({
 
 	computed: {
 		className: ({hideLine, styler}) => styler.append({hideLine, standard: true}),
-		subtitleComponent: ({css, subtitle}) => {
-			return (subtitle != null && subtitle !== '') ? <h2 className={css.subtitle}>{subtitle}</h2> : null;
+		subtitleComponent: ({css, subtitle, subtitleId}) => {
+			return (subtitle != null && subtitle !== '') ? <h2 className={css.subtitle} id={subtitleId}>{subtitle}</h2> : null;
 		},
 		titleAboveComponent: ({css, titleAbove}) => {
 			return (titleAbove != null && titleAbove !== '') ? <h2 className={css.titleAbove}>{titleAbove}</h2> : null;
 		}
 	},
 
-	render: ({children, css, title, titleAboveComponent, subtitleComponent, ...rest}) => {
+	render: ({children, css, title, titleId, titleAboveComponent, subtitleComponent, ...rest}) => {
 		delete rest.hideLine;
 		delete rest.subtitle;
+		delete rest.subtitleId;
 		delete rest.titleAbove;
+		delete rest.titleId;
 
 		return (
 			<Row component="header" aria-label={title} {...rest}>
 				<Column className={css.titleContainer}>
 					{titleAboveComponent}
-					<h1 className={css.title}>{title}</h1>
+					<h1 className={css.title} id={titleId}>{title}</h1>
 					{subtitleComponent}
 				</Column>
 				{children ? <Layout className={css.endSlot}>{children}</Layout> : null}
