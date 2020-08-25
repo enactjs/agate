@@ -238,7 +238,7 @@ const MediaPlayerBase = class extends React.Component {
 					{...rest}
 				/>
 				<MediaSlider />
-				<Times css={css} current={this.state.currentTime} formatter={durFmt} total={this.state.duration} />
+				<Times current={this.state.currentTime} formatter={durFmt} total={this.state.duration} />
 				<MediaControls
 					loop={this.state.loop}
 					onLoopChange={this.loopChange}
@@ -264,7 +264,8 @@ const MediaPlayerBase = class extends React.Component {
 const MediaPlayerDecorator = compose(
 	Pure,
 	Slottable({slots: ['source']}),
-	Skinnable
+	Skinnable,
+	I18nContextDecorator({localeProp: 'locale'})
 );
 
 /**
@@ -284,11 +285,7 @@ const MediaPlayerDecorator = compose(
  * @ui
  * @public
  */
-const MediaPlayer =
- I18nContextDecorator(
-	{localeProp: 'locale'},
-	 MediaPlayerDecorator(MediaPlayerBase)
-);
+const MediaPlayer = MediaPlayerDecorator(MediaPlayerBase);
 
 export default MediaPlayer;
 export {

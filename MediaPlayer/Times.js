@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import {secondsToPeriod, secondsToTime} from './util';
 
 import css from './MediaPlayer.module.less';
+import Skinnable from "../Skinnable";
 
+const SkinnableDiv = Skinnable('div');
 /**
  * Agate-styled formatted time component.
  *
@@ -62,15 +64,19 @@ const Times = kind({
 		currentPeriod:   ({current}) => secondsToPeriod(current),
 		currentReadable: ({current, formatter}) => secondsToTime(current, formatter),
 		totalPeriod:     ({total}) => secondsToPeriod(total),
-		remainingReadable:   ({current, total, formatter}) => secondsToTime(total - current,  formatter)
+		remainingReadable:   ({current, total, formatter}) => secondsToTime(total - current, formatter)
 	},
 
-	render: ({currentPeriod, currentReadable, remainingReadable, totalPeriod, ...rest}) => {
+	render: ({className, currentPeriod, currentReadable, remainingReadable, totalPeriod, ...rest}) => {
+		delete rest.current;
+		delete rest.formatter;
+		delete rest.total;
+
 		return (
-			<div {...rest}>
-				<time className={css.currentTime} dateTime={currentPeriod}>{currentReadable}</time>
-				<time className={css.remainingTime} dateTime={totalPeriod}>-{remainingReadable}</time>
-			</div>
+			<SkinnableDiv {...rest}>
+				<time dateTime={currentPeriod}>{currentReadable}</time>
+				<time dateTime={totalPeriod}>-{remainingReadable}</time>
+			</SkinnableDiv>
 		);
 	}
 });
