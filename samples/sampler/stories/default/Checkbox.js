@@ -16,7 +16,6 @@ storiesOf('Agate', module)
 			<Checkbox
 				disabled={boolean('disabled', Config)}
 				label={text('label', Config, '')}
-				labelPosition={select('labelPosition', ['', 'above', 'after', 'before', 'below'], Config, '')}
 				onToggle={action('onToggle')}
 			/>
 		),

@@ -10,13 +10,25 @@
  */
 
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
+import Toggleable from '@enact/ui/Toggleable';
 import PropTypes from 'prop-types';
 import React from 'react';
+import compose from 'ramda/src/compose';
 
 import Icon from '../Icon/Icon';
-import ToggleIcon from '../internal/ToggleIcon/ToggleIcon';
+import Skinnable from '../Skinnable';
+import ToggleIconBase from '../internal/ToggleIcon/ToggleIcon';
 
 import css from './Checkbox.module.less';
+
+const ToggleIconDecorator = compose(
+	Toggleable({toggleProp: 'onClick'}),
+	Spottable,
+	Skinnable
+);
+
+const ToggleIcon = ToggleIconDecorator(ToggleIconBase);
 
 /**
  * A checkbox component, ready to use in Agate applications.

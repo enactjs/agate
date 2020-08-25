@@ -19,7 +19,7 @@ import compose from 'ramda/src/compose';
 import Spottable from '@enact/spotlight/Spottable';
 import Toggleable from '@enact/ui/Toggleable';
 
-import Checkbox from '../Checkbox';
+import {CheckboxBase} from '../Checkbox';
 import Item from '../Item';
 import Skinnable from '../Skinnable';
 
@@ -103,12 +103,13 @@ const CheckboxItemBase = kind({
 
 	render: ({children, css, icon, selected, ...rest}) => (
 		<Item
+			aria-checked={selected}
 			data-webos-voice-intent="SelectCheckItem"
 			role="checkbox"
 			{...rest}
 			css={css}
 		>
-			<Checkbox selected={selected} slot="slotBefore">{icon}</Checkbox>
+			<CheckboxBase selected={selected} slot="slotBefore">{icon}</CheckboxBase>
 			{children}
 		</Item>
 	)
