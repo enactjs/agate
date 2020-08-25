@@ -36,6 +36,7 @@ import Scroller from '../Scroller';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Dropdown.module.less';
+import FloatingLayer, {FloatingLayerBase} from "@enact/ui/FloatingLayer";
 
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
@@ -224,13 +225,18 @@ const DropdownBase = kind({
 						<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
 						{title}
 					</DropDownButton>
+
+
 					<Transition
 						className={transitionContainerClassname}
 						visible={opened}
 						direction={transitionDirection}
 					>
+						<FloatingLayer open={open} scrimType="none" key="tooltipFloatingLayer">
 						<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
+
 							<Scroller skinVariants={skinVariants} className={css.scroller}>
+
 								<Group
 									className={css.group}
 									onSelect={onSelect}
@@ -239,9 +245,13 @@ const DropdownBase = kind({
 								>
 									{children || []}
 								</Group>
+
 							</Scroller>
+
 						</ContainerDiv>
+					</FloatingLayer>
 					</Transition>
+
 				</div>
 			</div>
 		);
@@ -315,7 +325,7 @@ const DropDownExtended = hoc((config, Wrapped) => {
 const DropdownDecorator = compose(
 	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose', toggleProp: 'onClick'}),
 	Changeable({change: 'onSelect', prop: 'selected'}),
-	DropDownExtended,
+	//DropDownExtended,
 	Skinnable({prop: 'skin'})
 );
 
