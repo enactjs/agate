@@ -287,11 +287,8 @@ const MediaPlayerDecorator = compose(
 const MediaPlayer =
  I18nContextDecorator(
 	{localeProp: 'locale'},
-
-		MediaPlayerDecorator(MediaPlayerBase)
-
+	 MediaPlayerDecorator(MediaPlayerBase)
 );
-	;
 
 export default MediaPlayer;
 export {

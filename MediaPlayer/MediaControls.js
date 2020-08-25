@@ -19,7 +19,6 @@ import css from './MediaControls.module.less';
  * @ui
  * @private
  */
-
 const MediaControlsBase = kind({
 	name: 'MediaControls',
 

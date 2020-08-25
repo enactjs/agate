@@ -2,9 +2,6 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import MediaPlayer from '@enact/agate/MediaPlayer';
-import {mergeComponentMetadata} from "@enact/storybook-utils";
-
-const Config = mergeComponentMetadata('MediaPlayer', MediaPlayer);
 
 storiesOf('Agate', module)
 	.add(

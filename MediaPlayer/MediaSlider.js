@@ -24,11 +24,10 @@ const MediaSlider = kind({
 	},
 
 	render: ({...rest}) => {
-
 		return (
 			<Slider
 				{...rest}
-				aria-hidden="true"
+				aria-hidden
 				css={css}
 				max={1}
 				min={0}
@@ -39,3 +38,6 @@ const MediaSlider = kind({
 });
 
 export default MediaSlider;
+export {
+	MediaSlider
+};
