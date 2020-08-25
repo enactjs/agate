@@ -12,7 +12,8 @@ storiesOf('Agate', module)
 		() => {
 			return (
 				<MediaPlayer>
-					<source src="https://www.w3schools.com/tags/horse.ogg" type="audio/mp3" />
+					{/*<source src="https://www.w3schools.com/tags/horse.ogg" type="audio/mp3" />*/}
+					<source src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3" type="audio/mp3" />
 				</MediaPlayer>
 			);
 		},

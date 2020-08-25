@@ -1,8 +1,10 @@
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import {adaptEvent, call, forwardWithPrevent, handle} from '@enact/core/handle';
+import {memoize} from '@enact/core/util';
 import Pure from '@enact/ui/internal/Pure';
 import Media from '@enact/ui/Media';
 import Slottable from '@enact/ui/Slottable';
+import DurationFmt from 'ilib/lib/DurationFmt';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -13,12 +15,23 @@ import Skinnable from '../Skinnable';
 import Times from './Times';
 
 import css from './MediaPlayer.module.less';
+import {I18nContextDecorator} from "@enact/i18n/I18nDecorator";
 
 const forwardWithState = (type) => adaptEvent(call('addStateToEvent'), forwardWithPrevent(type));
 
 // provide forwarding of events on media controls
 const forwardPlay = forwardWithState('onPlay');
 const forwardPause = forwardWithState('onPause');
+
+const memoGetDurFmt = memoize((/* locale */) => new DurationFmt({
+	length: 'medium', style: 'clock', useNative: false
+}));
+
+const getDurFmt = (locale) => {
+	if (typeof window === 'undefined') return null;
+
+	return memoGetDurFmt(locale);
+};
 
 /**
  * Provides Agate-themed media player components.
@@ -39,6 +52,15 @@ const MediaPlayerBase = class extends React.Component {
 		 * @public
 		 */
 		source: PropTypes.node.isRequired,
+
+		/**
+		 * The current locale as a
+		 * {@link https://tools.ietf.org/html/rfc5646|BCP 47 language tag}.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		locale: PropTypes.string,
 
 		/**
 		 * Media component to use.
@@ -91,6 +113,8 @@ const MediaPlayerBase = class extends React.Component {
 		this.media = null;
 
 		this.state = {
+			currentTime: 0,
+			duration: 0,
 			loop: false,
 			paused: true,
 		};
@@ -131,6 +155,8 @@ const MediaPlayerBase = class extends React.Component {
 	 */
 	getMediaState = () => {
 		return {
+			currentTime: this.state.currentTime,
+			duration: this.state.duration,
 			loop: this.state.loop,
 			paused: this.state.paused,
 		};
@@ -151,6 +177,8 @@ const MediaPlayerBase = class extends React.Component {
 	handleEvent = () => {
 		const el = this.media;
 		const updatedState = {
+			currentTime: el.currentTime,
+			duration: el.duration,
 			loop: el.loop,
 			paused: el.paused
 		};
@@ -188,12 +216,15 @@ const MediaPlayerBase = class extends React.Component {
 
 	render ()  {
 		const {
+			locale,
 			mediaComponent,
 			source,
 			...rest
 		} = this.props;
 
 		rest.className = css.mediaPlayer;
+
+		const durFmt = getDurFmt(locale);
 
 		return (
 			<div className={css.mediaPlayer} {...rest}>
@@ -207,7 +238,7 @@ const MediaPlayerBase = class extends React.Component {
 					{...rest}
 				/>
 				<MediaSlider />
-				<Times />
+				<Times current={this.state.currentTime} formatter={durFmt} total={this.state.duration} />
 				<MediaControls
 					loop={this.state.loop}
 					onLoopChange={this.loopChange}
@@ -253,7 +284,14 @@ const MediaPlayerDecorator = compose(
  * @ui
  * @public
  */
-const MediaPlayer = MediaPlayerDecorator(MediaPlayerBase);
+const MediaPlayer =
+ I18nContextDecorator(
+	{localeProp: 'locale'},
+
+		MediaPlayerDecorator(MediaPlayerBase)
+
+);
+	;
 
 export default MediaPlayer;
 export {
