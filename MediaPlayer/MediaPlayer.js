@@ -1,6 +1,7 @@
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import {adaptEvent, call, forwardWithPrevent, handle} from '@enact/core/handle';
 import {memoize} from '@enact/core/util';
+import {I18nContextDecorator} from "@enact/i18n/I18nDecorator";
 import Pure from '@enact/ui/internal/Pure';
 import Media from '@enact/ui/Media';
 import Slottable from '@enact/ui/Slottable';
@@ -15,7 +16,6 @@ import Skinnable from '../Skinnable';
 import Times from './Times';
 
 import css from './MediaPlayer.module.less';
-import {I18nContextDecorator} from "@enact/i18n/I18nDecorator";
 
 const forwardWithState = (type) => adaptEvent(call('addStateToEvent'), forwardWithPrevent(type));
 
@@ -227,7 +227,7 @@ const MediaPlayerBase = class extends React.Component {
 		const durFmt = getDurFmt(locale);
 
 		return (
-			<div className={css.mediaPlayer} {...rest}>
+			<div {...rest}>
 				<Media
 					controls
 					loop={this.state.loop}
@@ -238,7 +238,7 @@ const MediaPlayerBase = class extends React.Component {
 					{...rest}
 				/>
 				<MediaSlider />
-				<Times current={this.state.currentTime} formatter={durFmt} total={this.state.duration} />
+				<Times css={css} current={this.state.currentTime} formatter={durFmt} total={this.state.duration} />
 				<MediaControls
 					loop={this.state.loop}
 					onLoopChange={this.loopChange}

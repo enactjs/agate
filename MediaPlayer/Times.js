@@ -3,9 +3,8 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 
 import {secondsToPeriod, secondsToTime} from './util';
-import Skinnable from '../Skinnable';
 
-import css from './Times.module.less';
+import css from './MediaPlayer.module.less';
 
 /**
  * Agate-styled formatted time component.
@@ -13,9 +12,9 @@ import css from './Times.module.less';
  * @class Times
  * @memberof agate/MediaPlayer
  * @ui
- * @public
+ * @private
  */
-const TimesBase = kind({
+const Times = kind({
 	name: 'Times',
 
 	propTypes: /** @lends agate/MediaPlayer.Times.prototype */ {
@@ -76,7 +75,7 @@ const TimesBase = kind({
 	}
 });
 
-const Times = Skinnable(TimesBase);
-
 export default Times;
-export {Times, TimesBase};
+export {
+	Times
+};
