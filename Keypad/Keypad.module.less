@@ -3,21 +3,23 @@
 @import "../styles/skin.less";
 @import "../styles/mixins.less";
 
-.keypad {
-	height: 510px;
-	width: 480px;
+.applySkins({
+	.keypad {
+		height: @agate-keypad-height;
+		width: @agate-keypad-width;
 
-	.keyContainer {
-		display: flex;
-		justify-content: center;
-		width: 159px;
-	}
+		.keyContainer {
+			display: flex;
+			justify-content: center;
+			width: @agate-keypad-keycontainer-width;
+		}
 
-	.subtext {
-		bottom: 9px;
-		position: absolute;
+		.label {
+			bottom: @agate-keypad-subtext-bottom;
+			position: absolute;
+		}
 	}
-}
+});
 
 .button {
 	.applySkins({
@@ -40,19 +42,19 @@
 				line-height: @agate-keypad-text-line-height;
 			}
 
-			.subtext {
+			.label {
 				font-size: @agate-keypad-sub-text-font-size;
 				line-height: @agate-keypad-sub-text-line-height;
 			}
 
-			.subtext {
+			.label {
 				color: @agate-keypad-button-sub-text-color;
 			}
 		}
 
 		.focus({
 			.client {
-				.subtext {
+				.label {
 					color: @agate-keypad-button-focus-color;
 				}
 			}
@@ -67,7 +69,7 @@
 			.client {
 				color: @agate-keypad-button-active-color;
 
-				.subtext {
+				.label {
 					color: @agate-keypad-button-active-color;
 				}
 			}

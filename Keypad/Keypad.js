@@ -12,32 +12,35 @@
  */
 
 import {adaptEvent, forward, handle} from '@enact/core/handle';
+import compose from 'ramda/src/compose';
+import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import Layout, {Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from '../Button';
+import Skinnable from '../Skinnable';
 
 import $L from '../internal/$L';
 
 import css from './Keypad.module.less';
 
 const KEY_LIST = [
-	{text: '1', subtext: ''},
-	{text: '2', subtext: 'abc'},
-	{text: '3', subtext: 'def'},
-	{text: '4', subtext: 'ghi'},
-	{text: '5', subtext: 'jkl'},
-	{text: '6', subtext: 'mno'},
-	{text: '7', subtext: 'pqrs'},
-	{text: '8', subtext: 'tuv'},
-	{text: '9', subtext: 'wxyz'},
-	{text: '*', subtext: ''},
-	{text: '0', subtext: ''},
-	{text: '#', subtext: ''},
-	{text: 'phone', subtext: ''},
-	{text: 'arrowleftturn', subtext: ''}
+	{text: '1'},
+	{text: '2', label: 'abc'},
+	{text: '3', label: 'def'},
+	{text: '4', label: 'ghi'},
+	{text: '5', label: 'jkl'},
+	{text: '6', label: 'mno'},
+	{text: '7', label: 'pqrs'},
+	{text: '8', label: 'tuv'},
+	{text: '9', label: 'wxyz'},
+	{text: '*'},
+	{text: '0'},
+	{text: '#'},
+	{icon: 'phone'},
+	{icon: 'arrowleftturn'}
 ];
 
 /**
@@ -53,13 +56,12 @@ const Key = kind({
 
 	propTypes: /** @lends agate/Keypad.Key.prototype */ {
 		/**
-		 * Called when this button is clicked. Includes the 'key' key in its event payload to let the clicker know what was clicked inside their callback.
+		 * The icon displayed on the key.
 		 *
-		 * @type {Function}
-		 * @param {Object} event
+		 * @type {String}
 		 * @public
 		 */
-		onKeyButtonClick: PropTypes.func,
+		icon: PropTypes.string,
 
 		/**
 		 * Text displayed below the number/icon/symbol on the key.
@@ -67,7 +69,16 @@ const Key = kind({
 		 * @type {String}
 		 * @public
 		 */
-		subtext: PropTypes.string,
+		label: PropTypes.string,
+
+		/**
+		 * Called when this button is clicked. Includes the 'key' key in its event payload to let the clicker know what was clicked inside their callback.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onKeyButtonClick: PropTypes.func,
 
 		/**
 		 * Text displayed in the center of the key.
@@ -83,15 +94,6 @@ const Key = kind({
 		className: 'key'
 	},
 
-	computed: {
-		textComponent: ({text}) => {
-			return (text != null && text !== '') ? <span className={css.text}>{text}</span> : null;
-		},
-		subtextComponent: ({subtext}) => {
-			return (subtext != null && subtext !== '') ? <span className={css.subtext}>{subtext}</span> : null;
-		}
-	},
-
 	handlers: {
 		onClick: handle(
 			forward('onClick'),
@@ -99,7 +101,7 @@ const Key = kind({
 		)
 	},
 
-	render: ({children, subtextComponent, textComponent, ...rest}) => {
+	render: ({children, label, text, ...rest}) => {
 		delete rest.onKeyButtonClick;
 
 		return (
@@ -110,8 +112,8 @@ const Key = kind({
 					icon={children}
 					size="large"
 				>
-					{textComponent}
-					{subtextComponent}
+					{(text || text === 0) ? <span className={css.text}>{text}</span> : null}
+					{(label || label === 0) ? <span className={css.label}>{label}</span> : null}
 				</Button>
 			</div>
 		);
@@ -165,12 +167,12 @@ const KeypadBase = kind({
 							component={Key}
 							disabled={disabled}
 							key={`key${rowIndex}-${keyText.text}`}
-							onKeyButtonClick={() => handleInputValue(keyText.text)}
+							onKeyButtonClick={() => handleInputValue(keyText.icon === 'arrowleftturn' || keyText.icon === 'phone' ? keyText.icon : keyText.text)}
 							shrink
-							subtext={keyText.subtext}
-							text={keyText.text === 'arrowleftturn' || keyText.text === 'phone' ? null : keyText.text}
+							label={keyText.label}
+							text={keyText.icon === 'arrowleftturn' || keyText.icon === 'phone' ? null : keyText.text}
 						>
-							{keyText.text === 'arrowleftturn' || keyText.text === 'phone' ? keyText.text : null}
+							{keyText.icon === 'arrowleftturn' || keyText.icon === 'phone' ? keyText.icon : null}
 						</Cell>
 					);
 				})}
@@ -188,138 +190,133 @@ const KeypadBase = kind({
  * @ui
  * @public
  */
-class Keypad extends React.Component {
-	static propTypes = /** @lends agate/Keypad.Keypad.prototype */ {
-		/**
-		 * Applies a disabled style and the control becomes non-interactive.
-		 *
-		 * @type {Boolean}
-		 * @default false
-		 * @public
-		 */
-		disabled: PropTypes.bool,
+const KeypadExtended = hoc((config, Wrapped) => {
+	return class extends React.Component {
+		static propTypes = /** @lends agate/Keypad.Keypad.prototype */ {
+			/**
+			 * Applies a disabled style and the control becomes non-interactive.
+			 *
+			 * @type {Boolean}
+			 * @default false
+			 * @public
+			 */
+			disabled: PropTypes.bool,
 
-		/**
-		 * Called when a button is clicked. Includes the 'key' key in its event payload, updates the state and the input value accordingly.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		handleInputValue: PropTypes.func,
+			/**
+			 * Called when a button is clicked. Includes the 'key' key in its event payload, updates the state and the input value accordingly.
+			 *
+			 * @type {Function}
+			 * @param {Object} event
+			 * @public
+			 */
+			handleInputValue: PropTypes.func,
 
-		/**
-		 * Called when the input value is changed.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onChange: PropTypes.func,
+			/**
+			 * Called when the input value is changed.
+			 *
+			 * @type {Function}
+			 * @param {Object} event
+			 * @public
+			 */
+			onChange: PropTypes.func,
 
-		/**
-		 * The value of the input.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		value: PropTypes.string
-	}
-
-	constructor (props) {
-		super(props);
-
-		this.state = {
-			charIndex: 0,
-			keypadInput: ''
+			/**
+			 * The value of the input.
+			 *
+			 * @type {String}
+			 * @public
+			 */
+			value: PropTypes.string
 		};
-	}
 
-	handleInputValue = (keyValue) => {
-		const {charIndex, keypadInput} = this.state;
-		let newKeypadInput = keypadInput;
-		let newCharIndex;
+		constructor (props) {
+			super(props);
 
-		switch (keyValue) {
-			case 'arrowleftturn':
-			case 'Backspace':
-				newCharIndex = charIndex;
-				newKeypadInput = newKeypadInput.substring(0, charIndex - 1) + newKeypadInput.substring(charIndex, newKeypadInput.length);
-				newCharIndex = newCharIndex - 1;
+			this.state = {
+				charIndex: 0,
+				keypadInput: ''
+			};
+		}
 
-				this.setState({
-					charIndex: newCharIndex
-				});
-				break;
+		handleInputValue = (keyValue) => {
+			const {charIndex, keypadInput} = this.state;
+			let newKeypadInput = keypadInput;
+			let newCharIndex;
 
-			case 'ArrowLeft':
-				if (charIndex >= 0) {
+			switch (keyValue) {
+				case 'arrowleftturn':
+				case 'Backspace':
 					newCharIndex = charIndex;
+					newKeypadInput = newKeypadInput.substring(0, charIndex - 1) + newKeypadInput.substring(charIndex, newKeypadInput.length);
 					newCharIndex = newCharIndex - 1;
+					break;
 
-					this.setState({
-						charIndex: newCharIndex
-					});
-				}
-				break;
+				case 'ArrowLeft':
+					if (charIndex >= 0) {
+						newCharIndex = charIndex;
+						newCharIndex = newCharIndex - 1;
+					}
+					break;
 
-			case 'ArrowRight':
-				newCharIndex = charIndex;
-				newCharIndex = newCharIndex + 1;
+				case 'ArrowRight':
+					newCharIndex = charIndex;
+					newCharIndex = newCharIndex + 1;
+					break;
 
+				case 'Delete':
+					newCharIndex = charIndex;
+					newKeypadInput = newKeypadInput.substring(0, charIndex) + newKeypadInput.substring(charIndex + 1, newKeypadInput.length);
+					newCharIndex = newCharIndex - 1;
+					break;
+
+				case 'ArrowUp':
+				case 'ArrowDown':
+					// do nothing;
+					break;
+
+				case 'phone':
+					// method to call dialed number (keypadInput);
+					break;
+
+				default:
+					newCharIndex = charIndex;
+					newKeypadInput = newKeypadInput.substring(0, charIndex) + keyValue + newKeypadInput.substring(charIndex);
+					newCharIndex = newCharIndex + 1;
+					break;
+			}
+
+			if (keypadInput !== newKeypadInput) {
+				this.props.onChange({value: newKeypadInput});
+			}
+
+			if (keyValue !== 'phone') {
 				this.setState({
+					keypadInput: newKeypadInput,
 					charIndex: newCharIndex
 				});
-				break;
-
-			case 'Delete':
-				newCharIndex = charIndex;
-				newKeypadInput = newKeypadInput.substring(0, charIndex) + newKeypadInput.substring(charIndex + 1, newKeypadInput.length);
-				newCharIndex = newCharIndex - 1;
-
+			} else {
 				this.setState({
-					charIndex: newCharIndex
+					charIndex: 0,
+					keypadInput: ''
 				});
-				break;
-
-			case 'ArrowUp':
-			case 'ArrowDown':
-				// do nothing;
-				break;
-
-			case 'phone':
-				// method to call dialed number (keypadInput);
-				break;
-
-			default:
-				newCharIndex = charIndex;
-				newKeypadInput = newKeypadInput.substring(0, charIndex) + keyValue + newKeypadInput.substring(charIndex);
-				newCharIndex = newCharIndex + 1;
-
-				this.setState({
-					charIndex: newCharIndex
-				});
-				break;
+			}
 		}
 
-		if (keypadInput !== newKeypadInput) {
-			this.props.onChange({value: newKeypadInput});
+		render () {
+			return (
+				<Wrapped {...this.props} handleInputValue={this.handleInputValue} />
+
+			);
 		}
+	};
+});
 
-		this.setState({
-			keypadInput: newKeypadInput
-		});
-	}
+const KeypadDecorator = compose(
+	KeypadExtended,
+	Skinnable
+);
 
-	render () {
-		const {disabled} = this.props;
-		const {handleInputValue} = this;
-
-		return (
-			<KeypadBase disabled={disabled} handleInputValue={handleInputValue} />
-		);
-	}
-}
+const Keypad = KeypadDecorator(KeypadBase);
 
 export default Keypad;
 export {
