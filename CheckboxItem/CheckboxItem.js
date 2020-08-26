@@ -19,7 +19,7 @@ import compose from 'ramda/src/compose';
 import Spottable from '@enact/spotlight/Spottable';
 import Toggleable from '@enact/ui/Toggleable';
 
-import {CheckboxBase} from '../Checkbox';
+import Checkbox from '../Checkbox';
 import Item from '../Item';
 import Skinnable from '../Skinnable';
 
@@ -109,7 +109,7 @@ const CheckboxItemBase = kind({
 			{...rest}
 			css={css}
 		>
-			<CheckboxBase selected={selected} slot="slotBefore">{icon}</CheckboxBase>
+			<Checkbox selected={selected} slot="slotBefore">{icon}</Checkbox>
 			{children}
 		</Item>
 	)
