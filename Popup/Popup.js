@@ -109,6 +109,7 @@ const PopupBase = kind({
 				css={css}
 			>
 				<div
+					role="alert"
 					{...rest}
 				>
 					{closeButton ? <Button
