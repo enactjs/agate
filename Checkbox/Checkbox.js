@@ -9,27 +9,14 @@
  * @exports CheckboxBase
  */
 
-import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
-import Spottable from '@enact/spotlight/Spottable';
-import Toggleable from '@enact/ui/Toggleable';
 import PropTypes from 'prop-types';
 import React from 'react';
-import compose from 'ramda/src/compose';
 
 import Icon from '../Icon/Icon';
-import Skinnable from '../Skinnable';
-import ToggleIconBase from '../internal/ToggleIcon/ToggleIcon';
+import ToggleIcon from '../internal/ToggleIcon/ToggleIcon';
 
 import css from './Checkbox.module.less';
-
-const ToggleIconDecorator = compose(
-	Toggleable({toggleProp: 'onClick'}),
-	Spottable,
-	Skinnable
-);
-
-const ToggleIcon = ToggleIconDecorator(ToggleIconBase);
 
 /**
  * A checkbox component, ready to use in Agate applications.
@@ -60,42 +47,28 @@ const CheckboxBase = kind({
 		 * @default	'check'
 		 * @public
 		 */
-		children: PropTypes.string,
-
-		toggleIcon: PropTypes.any
+		children: PropTypes.string
 	},
 
 	defaultProps: {
-		children: 'check',
-		toggleIcon: ToggleIconBase
+		children: 'check'
 	},
 
-	render: ({children, toggleIcon: ToggleIconComponent, ...rest}) => {
+	render: ({children, ...rest}) => {
 		return (
-			<ToggleIconComponent
+			<ToggleIcon
 				{...rest}
 				css={css}
 				iconComponent={Icon}
 			>
 				{children}
-			</ToggleIconComponent>
+			</ToggleIcon>
 		);
 	}
 });
 
-const CheckboxDecorator = hoc((config, Wrapped) => {
-	// eslint-disable-next-line no-shadow
-	function CheckboxDecorator (props) {
-		return <Wrapped {...props} toggleIcon={ToggleIcon} />;
-	}
-
-	return CheckboxDecorator;
-});
-
-const Checkbox = CheckboxDecorator(CheckboxBase);
-
 export default CheckboxBase;
 export {
-	Checkbox,
+	CheckboxBase as Checkbox,
 	CheckboxBase
 };
