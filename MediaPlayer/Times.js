@@ -1,7 +1,7 @@
 import React from 'react';
 import kind from '@enact/core/kind';
 
-import css from './MediaPlayer.module.less';
+import css from './Times.module.less';
 
 /**
  * Agate-styled formatted time component.
