@@ -6,6 +6,7 @@ import {secondsToPeriod, secondsToTime} from './util';
 
 import css from './MediaPlayer.module.less';
 import Skinnable from "../Skinnable";
+import css from './Times.module.less';
 
 const SkinnableDiv = Skinnable('div');
 /**
