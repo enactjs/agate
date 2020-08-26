@@ -27,7 +27,7 @@ import Item from '../Item';
  */
 const LabeledItemBase = deprecate(
 	({children, titleIcon, ...rest}) => (
-		<Item {...rest}>
+		<Item role="button" {...rest}>
 			{children}
 			{titleIcon ? (
 				<Icon size="small">{titleIcon}</Icon>
