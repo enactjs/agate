@@ -1,6 +1,4 @@
-import React from 'react';
 // MediaPlayer utils.js
-//
 
 /**
  * Create a time object (hour, minute, second) from an amount of seconds

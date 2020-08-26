@@ -4,11 +4,8 @@ import PropTypes from 'prop-types';
 
 import {secondsToPeriod, secondsToTime} from './util';
 
-import css from './MediaPlayer.module.less';
-import Skinnable from "../Skinnable";
 import css from './Times.module.less';
 
-const SkinnableDiv = Skinnable('div');
 /**
  * Agate-styled formatted time component.
  *
@@ -42,7 +39,7 @@ const Times = kind({
 		current: PropTypes.number,
 
 		/**
-		 * The total time (duration) in seconds of the loaded video source.
+		 * The total time (duration) in seconds of the loaded media source.
 		 *
 		 * @type {Number}
 		 * @default 0
@@ -68,16 +65,16 @@ const Times = kind({
 		remainingReadable:   ({current, total, formatter}) => secondsToTime(total - current, formatter)
 	},
 
-	render: ({className, currentPeriod, currentReadable, remainingReadable, totalPeriod, ...rest}) => {
+	render: ({currentPeriod, currentReadable, remainingReadable, totalPeriod, ...rest}) => {
 		delete rest.current;
 		delete rest.formatter;
 		delete rest.total;
 
 		return (
-			<SkinnableDiv {...rest}>
+			<div {...rest}>
 				<time dateTime={currentPeriod}>{currentReadable}</time>
 				<time dateTime={totalPeriod}>-{remainingReadable}</time>
-			</SkinnableDiv>
+			</div>
 		);
 	}
 });
