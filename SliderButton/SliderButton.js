@@ -13,6 +13,7 @@
 import React from 'react';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
+import {useAnnounce} from '@enact/ui/AnnounceDecorator';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
@@ -96,12 +97,18 @@ const SliderButtonBase = kind({
 	name: 'SliderButton',
 	propTypes: {
 		children: PropTypes.array.isRequired,
+		announce: PropTypes.func,
 		css: PropTypes.object
 	},
 	styles: {
 		css: componentCss,
 		className: 'sliderButton',
 		publicClassNames: true
+	},
+	handlers: {
+		onChange: ({value}, {announce, children}) => {
+			announce(children[value]);
+		}
 	},
 	computed: {
 		max: ({children}) => (children && children.length ? children.length - 1 : 0),
@@ -131,6 +138,18 @@ const SliderButtonBase = kind({
 	}
 });
 
+// eslint-disable-next-line no-shadow
+const AnnounceDecorator = Wrapped => function AnnounceDecorator (props) {
+	const {announce, children} = useAnnounce();
+
+	return (
+		<React.Fragment>
+			<Wrapped {...props} announce={announce} />
+			{children}
+		</React.Fragment>
+	);
+};
+
 /**
  * Agate specific behaviors to apply to [SliderButton]{@link agate/SliderButton.SliderButtonBase}.
  *
@@ -142,6 +161,7 @@ const SliderButtonBase = kind({
  */
 const SliderButtonDecorator = compose(
 	Pure,
+	AnnounceDecorator,
 	Spottable,
 	Skinnable
 );
