@@ -60,7 +60,9 @@ const CheckboxBase = kind({
 		 * @default	'check'
 		 * @public
 		 */
-		children: PropTypes.string
+		children: PropTypes.string,
+
+		toggleIcon: PropTypes.any
 	},
 
 	defaultProps: {
@@ -68,23 +70,26 @@ const CheckboxBase = kind({
 		toggleIcon: ToggleIconBase
 	},
 
-	render: ({children, toggleIcon: ToggleIcon, ...rest}) => {
+	render: ({children, toggleIcon: ToggleIconComponent, ...rest}) => {
 		return (
-			<ToggleIcon
+			<ToggleIconComponent
 				{...rest}
 				css={css}
 				iconComponent={Icon}
 			>
 				{children}
-			</ToggleIcon>
+			</ToggleIconComponent>
 		);
 	}
 });
 
 const CheckboxDecorator = hoc((config, Wrapped) => {
-	return (props) => {
-		return <Wrapped {...props} toggleIcon={ToggleIcon} />
-	};
+	// eslint-disable-next-line no-shadow
+	function CheckboxDecorator (props) {
+		return <Wrapped {...props} toggleIcon={ToggleIcon} />;
+	}
+
+	return CheckboxDecorator;
 });
 
 const Checkbox = CheckboxDecorator(CheckboxBase);
