@@ -1,35 +1,46 @@
 import platform from '@enact/core/platform';
+import PropTypes from 'prop-types';
 import React from 'react';
 import {findDOMNode} from 'react-dom';
 
-const SliderButtonBehaviorDecorator = (Wrapped) => (({onChange, ...rest}) => {
-	const {children} = rest;
-	const [value, setValue] = React.useState(0);
-	const ref = React.useRef();
+// Adds agate-specific SliderButton behaviors
+// * aria-valuetext handling
+const SliderButtonBehaviorDecorator = (Wrapped) => {
+	const useValueText = ({onChange, ...rest}) => {
+		const {children} = rest;
+		const [valueText, setValueText] = React.useState(children[0]);
+		const ref = React.useRef();
 
-	const handleChange = ({value}) => {
-		onChange();
-		setValue(value);
-	}
-	
-	const handleDragStart = () => {
-		// on platforms with a touchscreen, we want to focus slider when dragging begins
-		if (platform.touchscreen) {
-			findDOMNode(ref.current).focus();
+		function handleChange ({value}) {
+			onChange();
+			setValueText(children[value]);
 		}
-	}
 
-	return (
-		<Wrapped
-			aria-valuetext={children[value]}
-			onChange={handleChange}
-			ref={ref}
-			role="slider"
-			{...rest}
-			onDragStart={handleDragStart}
-		/>
-	);
-});
+		function handleDragStart () {
+			// on platforms with a touchscreen, we want to focus slider when dragging begins
+			if (platform.touchscreen) {
+				findDOMNode(ref.current).focus(); // eslint-disable-line react/no-find-dom-node
+			}
+		}
+
+		return (
+			<Wrapped
+				aria-valuetext={valueText}
+				onChange={handleChange}
+				ref={ref}
+				role="slider"
+				{...rest}
+				onDragStart={handleDragStart}
+			/>
+		);
+	};
+
+	useValueText.propTypes = {
+		onChange: PropTypes.func
+	};
+
+	return useValueText;
+};
 
 export default SliderButtonBehaviorDecorator;
 export {
