@@ -179,6 +179,29 @@ const DropdownBase = kind({
 
 	computed: {
 		buttonClassName: ({open, styler}) => styler.append({open}),
+		children: ({children, selected}) => {
+			if (!Array.isArray(children)) return [];
+
+			return children.map((child, i) => {
+				const aria = {
+					role: 'checkbox',
+					'aria-checked': selected === i
+				};
+
+				if (typeof child === 'string') {
+					return {
+						...aria,
+						children: child,
+						key: `item_${child}`
+					};
+				}
+
+				return {
+					...aria,
+					...child
+				};
+			});
+		},
 		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'}),
 		dropdownButtonClassname: ({css, direction, styler}) => styler.join(css.dropdownButton, {upDropdownButton: direction === 'up'}),
 		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
@@ -228,6 +251,7 @@ const DropdownBase = kind({
 			<div {...rest}>
 				<div {...wrapperProps}>
 					<DropDownButton
+						role="button"
 						className={buttonClassName}
 						css={css}
 						disabled={hasChildren ? disabled : true}
