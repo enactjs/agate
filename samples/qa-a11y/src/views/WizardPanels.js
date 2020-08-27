@@ -1,10 +1,10 @@
-import BodyText from '@enact/sandstone/BodyText';
-import Button from '@enact/sandstone/Button';
-import CheckboxItem from '@enact/sandstone/CheckboxItem';
-import Icon from '@enact/sandstone/Icon';
-import Item from '@enact/sandstone/Item';
-import Scroller from '@enact/sandstone/Scroller';
-import WizardPanels from '@enact/sandstone/WizardPanels';
+import BodyText from '@enact/agate/BodyText';
+import Button from '@enact/agate/Button';
+import CheckboxItem from '@enact/agate/CheckboxItem';
+import Icon from '@enact/agate/Icon';
+import Item from '@enact/agate/Item';
+import Scroller from '@enact/agate/Scroller';
+import WizardPanels from '@enact/agate/WizardPanels';
 import React from 'react';
 
 class WizardPanelsView extends React.Component {

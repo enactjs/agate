@@ -1,7 +1,8 @@
-import {Header, Panel, Panels} from '@enact/sandstone/Panels';
-import Item from '@enact/sandstone/Item';
-import Scroller from '@enact/sandstone/Scroller';
-import VirtualList from '@enact/sandstone/VirtualList';
+import Header from '@enact/agate/Header';
+import {Panel, Panels} from '@enact/agate/Panels';
+import Item from '@enact/agate/Item';
+import Scroller from '@enact/agate/Scroller';
+import VirtualList from '@enact/agate/VirtualList';
 import ri from '@enact/ui/resolution';
 import React from 'react';
 

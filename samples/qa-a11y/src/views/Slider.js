@@ -1,5 +1,5 @@
-import Button from '@enact/sandstone/Button';
-import Slider from '@enact/sandstone/Slider';
+import Button from '@enact/agate/Button';
+import Slider from '@enact/agate/Slider';
 import PropTypes from 'prop-types';
 import React from 'react';
 

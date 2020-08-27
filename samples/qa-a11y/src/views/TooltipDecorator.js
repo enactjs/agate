@@ -1,5 +1,5 @@
-import Button from '@enact/sandstone/Button';
-import TooltipDecorator from '@enact/sandstone/TooltipDecorator';
+import Button from '@enact/agate/Button';
+import TooltipDecorator from '@enact/agate/TooltipDecorator';
 import React from 'react';
 
 import Section from '../components/Section';

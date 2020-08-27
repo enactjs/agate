@@ -1,6 +1,6 @@
-import CheckboxItem from '@enact/sandstone/CheckboxItem';
-import Item from '@enact/sandstone/Item';
-import {VirtualList} from '@enact/sandstone/VirtualList';
+import CheckboxItem from '@enact/agate/CheckboxItem';
+import Item from '@enact/agate/Item';
+import {VirtualList} from '@enact/agate/VirtualList';
 import Layout, {Cell} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 import React from 'react';

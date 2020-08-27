@@ -1,10 +1,19 @@
-import Button from '@enact/sandstone/Button';
-import {Header, Panel} from '@enact/sandstone/Panels';
+import Button from '@enact/agate/Button';
+import Header from '@enact/agate/Header';
+import {Panel} from '@enact/agate/Panels';
 import {Cell} from '@enact/ui/Layout';
 import React from 'react';
 
+const style = {
+	flex: '1 1 100%',
+	display: 'flex',
+	flexDirection: 'column',
+	width: '100%',
+	height: '100%'
+};
+
 const HeaderView = () => (
-	<>
+	<div style={style}>
 		<Cell>
 			<Panel>
 				<Header title="Header Title 0" />
@@ -22,42 +31,7 @@ const HeaderView = () => (
 			</Panel>
 			<hr />
 		</Cell>
-		<Cell>
-			<Panel>
-				<Header
-					closeButtonAriaLabel="This is Close"
-					subtitle="with closeButtonAriaLabel"
-					title="Header Title 2"
-				/>
-				<Button>Text 2</Button>
-			</Panel>
-			<hr />
-		</Cell>
-		<Cell>
-			<Panel>
-				<Header
-					closeButtonAriaLabel="This is Close"
-					subtitle="with closeButtonAriaLabel"
-					title="Compact Header Title 3"
-					type="compact"
-				/>
-				<Button>Text 3</Button>
-			</Panel>
-			<hr />
-		</Cell>
-		<Cell>
-			<Panel>
-				<Header
-					closeButtonAriaLabel="This is Close"
-					subtitle="with closeButtonAriaLabel"
-					title="Mini Header Title 4"
-					type="mini"
-				/>
-				<Button>Text 4</Button>
-			</Panel>
-			<hr />
-		</Cell>
-	</>
+	</div>
 );
 
 export default HeaderView;

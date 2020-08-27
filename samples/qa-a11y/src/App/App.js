@@ -1,6 +1,6 @@
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
-import Item from '@enact/sandstone/Item';
-import ThemeDecorator from '@enact/sandstone/ThemeDecorator';
+import Item from '@enact/agate/Item';
+import ThemeDecorator from '@enact/agate/ThemeDecorator';
 import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Layout, {Cell} from '@enact/ui/Layout';
@@ -10,47 +10,32 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 
-import Alert from '../views/Alert';
 import Button from '../views/Button';
-import Checkbox from '../views/Checkbox';
 import CheckboxItem from '../views/CheckboxItem';
-import ContextualMenuDecorator from '../views/ContextualMenuDecorator';
+import ColorPicker from '../views/ColorPicker';
 import ContextualPopupDecorator from '../views/ContextualPopupDecorator';
-import DatePicker from '../views/DatePicker';
-import DayPicker from '../views/DayPicker';
+import DateTimePicker from '../views/DateTimePicker';
+import Drawer from '../views/Drawer';
 import Dropdown from '../views/Dropdown';
-import FixedPopupPanels from '../views/FixedPopupPanels';
-import FlexiblePopupPanels from '../views/FlexiblePopupPanels';
-import FormCheckboxItem from '../views/FormCheckboxItem';
-import GroupView from '../views/Group';
 import Header from '../views/Header';
 import ImageItem from '../views/ImageItem';
 import Input from '../views/Input';
-import InputField from '../views/InputField';
 import ItemView from '../views/Item';
 import Option from '../views/Option';
 import Panels from '../views/Panels';
 import Picker from '../views/Picker';
 import Popup from '../views/Popup';
-import PopupTabLayout from '../views/PopupTabLayout';
 import ProgressBar from '../views/ProgressBar';
-import ProgressButton from '../views/ProgressButton';
 import RadioItem from '../views/RadioItem';
 import RangePicker from '../views/RangePicker';
 import ReadAlert from '../views/ReadAlert';
-import Region from '../views/Region';
 import Scroller from '../views/Scroller';
 import Slider from '../views/Slider';
 import Spinner from '../views/Spinner';
-import Switch from '../views/Switch';
 import SwitchItem from '../views/SwitchItem';
-import TabLayout from '../views/TabLayout';
-import TimePicker from '../views/TimePicker';
 import TooltipDecorator from '../views/TooltipDecorator';
-import VideoPlayer from '../views/VideoPlayer';
 import VirtualGridList from '../views/VirtualGridList';
 import VirtualList from '../views/VirtualList';
-import WizardPanels from '../views/WizardPanels';
 
 import appCss from './App.module.less';
 import Home from './Home';
@@ -61,46 +46,31 @@ const Menu = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 const views = [
 	{title: 'About qa-a11y', view: Home},
 	{debugProps: true, title: 'Option', view: Option},
-	{title: 'Alert', view: Alert},
 	{title: 'Button', view: Button},
-	{title: 'Checkbox', view: Checkbox},
 	{title: 'CheckboxItem', view: CheckboxItem},
-	{title: 'ContextualMenuDecorator', view: ContextualMenuDecorator},
+	{title: 'ColorPicker', view: ColorPicker},
 	{title: 'ContextualPopupDecorator', view: ContextualPopupDecorator},
-	{title: 'DatePicker', view: DatePicker},
-	{title: 'DayPicker', view: DayPicker},
+	{title: 'DateTimePicker', view: DateTimePicker},
+	{title: 'Drawer', view: Drawer},
 	{title: 'Dropdown', view: Dropdown},
-	{title: 'FixedPopupPanels', view: FixedPopupPanels},
-	{title: 'FlexiblePopupPanels', view: FlexiblePopupPanels},
-	{title: 'FormCheckboxItem', view: FormCheckboxItem},
-	{title: 'Group', view: GroupView},
 	{isHeader: false, title: 'Header', view: Header},
 	{title: 'ImageItem', view: ImageItem},
 	{title: 'Input', view: Input},
-	{title: 'InputField', view: InputField},
 	{title: 'Item', view: ItemView},
 	{isHeader: false, title: 'Panels', view: Panels},
 	{title: 'Picker', view: Picker},
 	{title: 'Popup', view: Popup},
-	{title: 'PopupTabLayout', view: PopupTabLayout},
 	{title: 'ProgressBar', view: ProgressBar},
-	{title: 'ProgressButton', view: ProgressButton},
 	{title: 'RadioItem', view: RadioItem},
 	{title: 'RangePicker', view: RangePicker},
 	{title: 'ReadAlert', view: ReadAlert},
-	{title: 'Region', view: Region},
 	{title: 'Scroller', view: Scroller},
 	{title: 'Slider', view: Slider},
 	{title: 'Spinner', view: Spinner},
-	{title: 'Switch', view: Switch},
 	{title: 'SwitchItem', view: SwitchItem},
-	{isHeader: false, title: 'TabLayout', view: TabLayout},
-	{title: 'TimePicker', view: TimePicker},
 	{title: 'TooltipDecorator', view: TooltipDecorator},
-	{isAriaHidden: true, title: 'VideoPlayer', view: VideoPlayer},
 	{title: 'VirtualGridList', view: VirtualGridList},
-	{title: 'VirtualList', view: VirtualList},
-	{isHeader: false, title: 'WizardPanels', view: WizardPanels}
+	{title: 'VirtualList', view: VirtualList}
 ];
 
 class AppBase extends React.Component {

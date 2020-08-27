@@ -1,4 +1,4 @@
-import RadioItem from '@enact/sandstone/RadioItem';
+import RadioItem from '@enact/agate/RadioItem';
 import React from 'react';
 
 import Section from '../components/Section';

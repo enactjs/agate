@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Cell, Row} from '@enact/ui/Layout';
 
-import Heading from '@enact/sandstone/Heading';
+import Heading from '@enact/agate/Heading';
 
 import css from './Section.module.less';
 

@@ -1,5 +1,5 @@
-import Scroller from '@enact/sandstone/Scroller';
-import ToggleButton from '@enact/sandstone/SwitchItem';
+import Scroller from '@enact/agate/Scroller';
+import ToggleButton from '@enact/agate/SwitchItem';
 import Layout, {Cell} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 import React from 'react';
@@ -37,10 +37,12 @@ class ScrollerView extends React.Component {
 				</Cell>
 				<Cell
 					component={Scroller}
-					focusableScrollbar="byEnter"
+					focusableScrollbar={true}
 					scrollMode={isNative ? 'native' : 'translate'}
-					verticalScrollThumbAriaLabel={customAriaLabel ? 'This is vertical scroll thumb' : null}
-					horizontalScrollThumbAriaLabel={customAriaLabel ? 'This is horizontal scroll thumb' : null}
+					scrollDownAriaLabel={customAriaLabel ? 'This is vertical scroll down aria label' : null}
+					scrollLeftAriaLabel={customAriaLabel ? 'This is horizontal scroll left aria label' : null}
+					scrollRightAriaLabel={customAriaLabel ? 'This is vertical scroll right aria label' : null}
+					scrollUpAriaLabel={customAriaLabel ? 'This is horizontal scroll up aria label' : null}
 				>
 					<div style={{width: ri.scaleToRem(6000)}}>
 						Foo<br />Bar<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />

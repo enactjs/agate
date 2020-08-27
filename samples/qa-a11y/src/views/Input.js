@@ -1,4 +1,4 @@
-import Input from '@enact/sandstone/Input';
+import Input from '@enact/agate/Input';
 import React from 'react';
 
 import Section from '../components/Section';
@@ -15,12 +15,10 @@ const InputView = () => (
 		</Section>
 
 		<Section className={appCss.marginTop} title="With type">
-			<Input alt="Number Type With Title, Subtitle, and Placeholder" placeholder="Placeholder" subtitle="Subtitle" title="Title" type="number" />
-			<Input alt="Disabled Number Type with Title, Subtitle, and Value" disabled subtitle="Subtitle" title="Title" type="number" value="1234" />
-			<Input alt="Passwordnumber Type with Title, Subtitle, and Placeholder" placeholder="Placeholder" subtitle="Subtitle" title="Title" type="passwordnumber" />
-			<Input alt="Disabled Passwordnumber Type with Title, Subtitle, and Value" disabled subtitle="Subtitle" title="Title" type="passwordnumber" value="1234" />
-			<Input alt="Password Type With Title, Subtitle, and Placeholder" placeholder="Placeholder" subtitle="Subtitle" title="Title" type="password" />
-			<Input alt="Disabled Password Type With Title, Subtitle, and Value" disabled subtitle="Subtitle" title="Title" type="password" value="1234" />
+			<Input alt="Number Type With Placeholder" placeholder="Placeholder" type="number" />
+			<Input alt="Disabled Number Type with Value" disabled type="number" value="1234" />
+			<Input alt="Password Type With Placeholder" placeholder="Placeholder" type="password" />
+			<Input alt="Disabled Password Type With Value" disabled type="password" value="1234" />
 		</Section>
 
 		<Section className={appCss.marginTop} title="With iconAfter">
@@ -36,8 +34,8 @@ const InputView = () => (
 		<Section className={appCss.marginTop} title="Aria-labelled">
 			<Input alt="Aria-labelled" aria-label="This is a Label 0." />
 			<Input alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled />
-			<Input alt="With popupAriaLabel" popupAriaLabel="This is a Label 2." />
-			<Input alt="Number Type With Title, Subtitle, and Placeholder" aria-label="This is a Label 3." placeholder="Placeholder" subtitle="Subtitle" title="Title" type="number" />
+			<Input alt="Aria-labelled Number Type With Placeholder" aria-label="This is a Label 2." placeholder="Placeholder" type="number" />
+			<Input alt="Aria-labelled and Disabled Number Type With Placeholder" aria-label="This is a Label 3." disabled placeholder="Placeholder" type="number" />
 		</Section>
 	</>
 );

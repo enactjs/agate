@@ -1,6 +1,6 @@
-import {FixedPopupPanels, Header, Panel} from '@enact/sandstone/FixedPopupPanels';
-import Item from '@enact/sandstone/Item';
-import TimePicker, {timeToLocaleString} from '@enact/sandstone/TimePicker';
+import {FixedPopupPanels, Header, Panel} from '@enact/agate/FixedPopupPanels';
+import Item from '@enact/agate/Item';
+import TimePicker, {timeToLocaleString} from '@enact/agate/TimePicker';
 import React from 'react';
 
 import Section from '../components/Section';

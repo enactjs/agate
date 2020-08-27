@@ -1,8 +1,8 @@
-import Button from '@enact/sandstone/Button';
-import Heading from '@enact/sandstone/Heading';
-import Item from '@enact/sandstone/Item';
-import Popup from '@enact/sandstone/Popup';
-import Scroller from '@enact/sandstone/Scroller';
+import Button from '@enact/agate/Button';
+import Heading from '@enact/agate/Heading';
+import Item from '@enact/agate/Item';
+import Popup from '@enact/agate/Popup';
+import Scroller from '@enact/agate/Scroller';
 import ri from '@enact/ui/resolution';
 import React from 'react';
 

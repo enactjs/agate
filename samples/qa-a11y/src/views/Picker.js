@@ -1,4 +1,4 @@
-import Picker from '@enact/sandstone/Picker';
+import Picker from '@enact/agate/Picker';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import React from 'react';
 
@@ -63,27 +63,6 @@ const PickerView = () => (
 			</Picker>
 		</Section>
 
-		<Section className={appCss.marginTop} title="Horizontal and Joined">
-			<Picker
-				alt="Horizontal and Joined"
-				joined
-				orientation="horizontal"
-				width="large"
-			>
-				{airports}
-			</Picker>
-
-			<Picker
-				alt="Horizontal, Joined, and Disabled"
-				disabled
-				joined
-				orientation="horizontal"
-				width="large"
-			>
-				{airports}
-			</Picker>
-		</Section>
-
 		<SpotlightContainerSection className={appCss.marginTop} title="Vertical" vertical>
 			<Picker
 				alt="Vertical"
@@ -94,27 +73,8 @@ const PickerView = () => (
 			</Picker>
 
 			<Picker
-				alt="Vertical and Joined"
-				joined
-				orientation="vertical"
-				width="medium"
-			>
-				{airports}
-			</Picker>
-
-			<Picker
 				alt="Vertical and Disabled"
 				disabled
-				orientation="vertical"
-				width="medium"
-			>
-				{airports}
-			</Picker>
-
-			<Picker
-				alt="Vertical, Joined, and Disabled"
-				disabled
-				joined
 				orientation="vertical"
 				width="medium"
 			>
@@ -147,31 +107,6 @@ const PickerView = () => (
 			</Picker>
 		</Section>
 
-		<Section className={appCss.marginTop} title="Horizontal and Joined">
-			<Picker
-				alt="Horizontal and Joined"
-				decrementAriaLabel="This is a Label 1."
-				incrementAriaLabel="This is a Label 2."
-				joined
-				orientation="horizontal"
-				width="large"
-			>
-				{airports}
-			</Picker>
-
-			<Picker
-				alt="Horizontal, Joined, and Disabled"
-				decrementAriaLabel="This is a Label 1."
-				disabled
-				incrementAriaLabel="This is a Label 2."
-				joined
-				orientation="horizontal"
-				width="large"
-			>
-				{airports}
-			</Picker>
-		</Section>
-
 		<SpotlightContainerSection className={appCss.marginTop} title="Vertical" vertical>
 			<Picker
 				alt="Vertical"
@@ -184,33 +119,10 @@ const PickerView = () => (
 			</Picker>
 
 			<Picker
-				alt="Vertical and Joined"
-				decrementAriaLabel="Decrement"
-				incrementAriaLabel="Increment"
-				joined
-				orientation="vertical"
-				width="medium"
-			>
-				{airports}
-			</Picker>
-
-			<Picker
 				alt="Vertical and Disabled"
 				decrementAriaLabel="Decrement"
 				disabled
 				incrementAriaLabel="Increment"
-				orientation="vertical"
-				width="medium"
-			>
-				{airports}
-			</Picker>
-
-			<Picker
-				alt="Vertical, Joined, and Disabled"
-				decrementAriaLabel="Decrement"
-				disabled
-				incrementAriaLabel="Increment"
-				joined
 				orientation="vertical"
 				width="medium"
 			>
@@ -241,29 +153,6 @@ const PickerView = () => (
 			</Picker>
 		</Section>
 
-		<Section className={appCss.marginTop} title="Horizontal and Joined">
-			<Picker
-				alt="Horizontal and Joined"
-				aria-label="This is a Label 2."
-				joined
-				orientation="horizontal"
-				width="large"
-			>
-				{airports}
-			</Picker>
-
-			<Picker
-				alt="Horizontal, Joined, and Disabled"
-				aria-label="This is a Label 3."
-				disabled
-				joined
-				orientation="horizontal"
-				width="large"
-			>
-				{airports}
-			</Picker>
-		</Section>
-
 		<SpotlightContainerSection className={appCss.marginTop} title="Vertical" vertical>
 			<Picker
 				alt="Vertical"
@@ -275,30 +164,9 @@ const PickerView = () => (
 			</Picker>
 
 			<Picker
-				alt="Vertical and Joined"
-				aria-label="This is a Label 5."
-				joined
-				orientation="vertical"
-				width="medium"
-			>
-				{airports}
-			</Picker>
-
-			<Picker
 				alt="Vertical and Disabled"
 				aria-label="This is a Label 6."
 				disabled
-				orientation="vertical"
-				width="medium"
-			>
-				{airports}
-			</Picker>
-
-			<Picker
-				alt="Vertical, Joined, and Disabled"
-				aria-label="This is a Label 7."
-				disabled
-				joined
 				orientation="vertical"
 				width="medium"
 			>
@@ -330,6 +198,17 @@ const PickerView = () => (
 			<CustomPicker
 				alt="Horizontal"
 				decrementAriaLabel="Decrement"
+				incrementAriaLabel="Increment"
+				orientation="horizontal"
+				width="large"
+			>
+				{subjects}
+			</CustomPicker>
+
+			<CustomPicker
+				alt="Horizontal and Disabled"
+				decrementAriaLabel="Decrement"
+				disabled
 				incrementAriaLabel="Increment"
 				orientation="horizontal"
 				width="large"

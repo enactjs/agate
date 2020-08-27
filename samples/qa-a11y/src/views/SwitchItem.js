@@ -1,4 +1,4 @@
-import SwitchItem from '@enact/sandstone/SwitchItem';
+import SwitchItem from '@enact/agate/SwitchItem';
 import React from 'react';
 
 import Section from '../components/Section';

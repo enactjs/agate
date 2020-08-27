@@ -1,5 +1,5 @@
-import Button from '@enact/sandstone/Button';
-import ProgressBar from '@enact/sandstone/ProgressBar';
+import Button from '@enact/agate/Button';
+import ProgressBar from '@enact/agate/ProgressBar';
 import React from 'react';
 
 import Section from '../components/Section';
