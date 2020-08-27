@@ -138,6 +138,7 @@ const SliderButtonBase = kind({
  *
  * @hoc
  * @memberof agate/SliderButton
+ * @mixes agate/SliderButton.SliderButtonBehaviorDecorator
  * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
  * @public

@@ -3,12 +3,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {findDOMNode} from 'react-dom';
 
-// Adds agate-specific SliderButton behaviors
-// * aria-valuetext handling
+/**
+ * SliderButtonBehaviorDecorator passes props to support a11y feature in SliderButton
+ *
+ * @class SliderButtonBehaviorDecorator
+ * @memberof agate/SliderButton
+ * @private
+ */
 const SliderButtonBehaviorDecorator = (Wrapped) => {
-	const useValueText = ({onChange, ...rest}) => {
+	// eslint-disable-next-line no-shadow
+	function SliderButtonBehaviorDecorator ({onChange, ...rest}) {
 		const {children} = rest;
-		const [valueText, setValueText] = React.useState(children[0]);
+		const [valueText, setValueText] = React.useState(children ? children[0] : null);
 		const ref = React.useRef();
 
 		function handleChange ({value}) {
@@ -26,20 +32,20 @@ const SliderButtonBehaviorDecorator = (Wrapped) => {
 		return (
 			<Wrapped
 				aria-valuetext={valueText}
-				onChange={handleChange}
 				ref={ref}
 				role="slider"
 				{...rest}
+				onChange={handleChange}
 				onDragStart={handleDragStart}
 			/>
 		);
-	};
+	}
 
-	useValueText.propTypes = {
+	SliderButtonBehaviorDecorator.propTypes = {
 		onChange: PropTypes.func
 	};
 
-	return useValueText;
+	return SliderButtonBehaviorDecorator;
 };
 
 export default SliderButtonBehaviorDecorator;
