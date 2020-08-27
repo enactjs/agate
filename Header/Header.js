@@ -33,6 +33,14 @@ const HeaderBase = kind({
 
 	propTypes: /** @lends agate/Header.Header.prototype */ {
 		/**
+		 * Sets the hint string read.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		'aria-label': PropTypes.string,
+
+		/**
 		 * Title of the header.
 		 *
 		 * This is a [`slot`]{@link ui/Slottable.Slottable}, so it can be used as a tag-name inside
