@@ -114,7 +114,7 @@ const HeaderBase = kind({
 
 	computed: {
 		'aria-label': ({title, subtitle}) => {
-			return (subtitle != null && subtitle !== '') ?
+			return subtitle ?
 				title + ' ' + subtitle :
 				title;
 		},
