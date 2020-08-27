@@ -33,14 +33,6 @@ const HeaderBase = kind({
 
 	propTypes: /** @lends agate/Header.Header.prototype */ {
 		/**
-		 * Sets the hint string read.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		'aria-label': PropTypes.string,
-
-		/**
 		 * Title of the header.
 		 *
 		 * This is a [`slot`]{@link ui/Slottable.Slottable}, so it can be used as a tag-name inside
@@ -59,6 +51,14 @@ const HeaderBase = kind({
 		 * @type {String}
 		 */
 		title: PropTypes.string.isRequired,
+
+		/**
+		 * Sets the hint string read.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		'aria-label': PropTypes.string,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
