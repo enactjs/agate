@@ -98,7 +98,6 @@ const SliderButtonBase = kind({
 	name: 'SliderButton',
 	propTypes: {
 		children: PropTypes.array.isRequired,
-		announce: PropTypes.func,
 		css: PropTypes.object
 	},
 	styles: {
