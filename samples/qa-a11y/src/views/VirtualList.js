@@ -1,57 +1,48 @@
 import CheckboxItem from '@enact/agate/CheckboxItem';
+import Header from '@enact/agate/Header';
 import Item from '@enact/agate/Item';
 import {VirtualList} from '@enact/agate/VirtualList';
-import Layout, {Cell} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 import React from 'react';
 
-const
-	items = [],
-	// eslint-disable-next-line enact/prop-types, enact/display-name
-	renderItem = ({index, ...rest}) => (
-		<Item {...rest}>
-			{items[index]}
-		</Item>
-	);
+const items = [];
+// eslint-disable-next-line enact/prop-types, enact/display-name
+const renderItem = ({index, ...rest}) => (
+	<Item {...rest}>
+		{items[index]}
+	</Item>
+);
 
 for (let i = 0; i < 100; i++) {
 	items.push('Item ' + ('00' + i).slice(-3));
 }
 
-class VirtualListView extends React.Component {
-	constructor () {
-		super();
-		this.state = {
-			isNative: true
-		};
-	}
+const VirtualListView = () => {
+	const [native, setNative] = React.useState(true);
+	const scrollMode = native ? 'native' : 'translate';
 
-	onToggleScrollMode = () => this.setState((state) => ({isNative: !state.isNative}));
+	const onToggleScrollMode = () => setNative(!native);
 
-	render () {
-		const
-			{isNative} = this.state,
-			scrollMode = isNative ? 'native' : 'translate';
-
-		return (
-			<Layout orientation="vertical">
-				<Cell shrink>
-					<CheckboxItem
-						onClick={this.onToggleScrollMode}
-						selected={isNative}
-					>
-						Native
-					</CheckboxItem>
-				</Cell>
-				<VirtualList
-					dataSize={items.length}
-					itemRenderer={renderItem}
-					itemSize={ri.scale(156)}
-					scrollMode={scrollMode}
-				/>
-			</Layout>
-		);
-	}
-}
+	return (
+		<>
+			<Header title="VirtualList">
+				<CheckboxItem
+					onClick={onToggleScrollMode}
+					selected={native}
+					style={{width: '250px'}} // FIXME: If no width, then the text doesn't display.
+				>
+					Native
+				</CheckboxItem>
+			</Header>
+			<VirtualList
+				dataSize={items.length}
+				itemRenderer={renderItem}
+				itemSize={ri.scale(156)}
+				scrollMode={scrollMode}
+				style={{height: 'calc(100% - 130px'}}
+			/>
+		</>
+	);
+};
 
 export default VirtualListView;

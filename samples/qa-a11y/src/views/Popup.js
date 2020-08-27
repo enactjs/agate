@@ -7,10 +7,10 @@ import ri from '@enact/ui/resolution';
 import React from 'react';
 
 import Section from '../components/Section';
-import useOpen from '../components/useOpen';
+import useBoolArray from '../components/useBoolArray';
 
 const PopupView = () => {
-	const [open, setOpen] = useOpen(5);
+	const [open, setOpen] = useBoolArray(5);
 
 	return (
 		<>

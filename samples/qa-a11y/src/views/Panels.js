@@ -11,52 +11,43 @@ for (let i = 0; i < 50; i++) {
 	itemList.push('item' + i);
 }
 
-class PanelsView extends React.Component {
-	constructor (props) {
-		super(props);
-		this.state = {
-			panelIndex: 0
-		};
-	}
+const PanelsView = () => {
+	const [index, setIndex] = React.useState(0);
 
-	nextPanel = () => this.setState({panelIndex: 1});
-
-	prevPanel = () => this.setState({panelIndex: 0});
-
-	customItem = ({index, ...rest}) => {
+	const nextPanel = () => setIndex(1);
+	const prevPanel = () => setIndex(0);
+	const customItem = ({index, ...rest}) => {
 		return (
-			<Item {...rest} onClick={this.nextPanel}>
+			<Item {...rest} onClick={nextPanel}>
 				{itemList[index]}
 			</Item>
 		);
 	};
 
-	render () {
-		return (
-			<Panels index={this.state.panelIndex} onBack={this.prevPanel}>
-				<Panel>
-					<Header title="Panel 0" />
-					<VirtualList
-						dataSize={itemList.length}
-						itemRenderer={this.customItem}
-						itemSize={ri.scale(156)}
-					/>
-				</Panel>
-				<Panel>
-					<Header title="Panel 1" />
-					<Scroller>
-						{
-							itemList.map((item, key) => {
-								return (
-									<Item onClick={this.prevPanel} key={key}>{item}</Item>
-								);
-							})
-						}
-					</Scroller>
-				</Panel>
-			</Panels>
-		);
-	}
-}
+	return (
+		<Panels index={index} onBack={prevPanel}>
+			<Panel>
+				<Header title="Panel 0" />
+				<VirtualList
+					dataSize={itemList.length}
+					itemRenderer={customItem}
+					itemSize={ri.scale(156)}
+				/>
+			</Panel>
+			<Panel>
+				<Header title="Panel 1" />
+				<Scroller>
+					{
+						itemList.map((item, key) => {
+							return (
+								<Item onClick={prevPanel} key={key}>{item}</Item>
+							);
+						})
+					}
+				</Scroller>
+			</Panel>
+		</Panels>
+	);
+};
 
 export default PanelsView;

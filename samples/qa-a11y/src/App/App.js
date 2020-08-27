@@ -64,13 +64,13 @@ const views = [
 	{title: 'RadioItem', view: RadioItem},
 	{title: 'RangePicker', view: RangePicker},
 	{title: 'ReadAlert', view: ReadAlert},
-	{title: 'Scroller', view: Scroller},
+	{isHeader: false, title: 'Scroller', view: Scroller},
 	{title: 'Slider', view: Slider},
 	{title: 'Spinner', view: Spinner},
 	{title: 'SwitchItem', view: SwitchItem},
 	{title: 'TooltipDecorator', view: TooltipDecorator},
-	{title: 'VirtualGridList', view: VirtualGridList},
-	{title: 'VirtualList', view: VirtualList}
+	{isHeader: false, title: 'VirtualGridList', view: VirtualGridList},
+	{isHeader: false, title: 'VirtualList', view: VirtualList}
 ];
 
 class AppBase extends React.Component {
@@ -101,7 +101,7 @@ class AppBase extends React.Component {
 		const {keyCode} = ev;
 		const {rtl, updateLocale} = this.props;
 
-		if (keyCode === 403 || keyCode === 82) { // Red Key or `r` key
+		if (keyCode === 403 || keyCode === 68) { // Red Key or `d` key
 			updateLocale(rtl ? 'en-US' : 'ar-SA');
 		} else if (keyCode === 404 || keyCode === 71) { // Green Key or `g` key
 			this.handleDebug();

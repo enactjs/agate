@@ -1,4 +1,4 @@
-import Header from '@enact/agate/Panels';
+import Header from '@enact/agate/Header';
 import {Panel} from '@enact/agate/Panels';
 import Scroller from '@enact/agate/Scroller';
 import Layout, {Cell} from '@enact/ui/Layout';

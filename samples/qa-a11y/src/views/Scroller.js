@@ -1,75 +1,68 @@
+import CheckboxItem from '@enact/agate/CheckboxItem';
+import Header from '@enact/agate/Header';
 import Scroller from '@enact/agate/Scroller';
-import ToggleButton from '@enact/agate/SwitchItem';
-import Layout, {Cell} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 import React from 'react';
 
-class ScrollerView extends React.Component {
-	constructor () {
-		super();
-		this.state = {
-			customAriaLabel: false,
-			isNative: true
-		};
-	}
+const ScrollerView = () => {
+	const [native, setNative] = React.useState(true);
+	const [customAriaLabel, setCustomAriaLabel] = React.useState(false);
+	const scrollMode = native ? 'native' : 'translate';
 
-	handleChangeAriaLabelButton = () => this.setState((state) => ({customAriaLabel: !state.customAriaLabel}));
+	const handleChangeJSNativeButton = () => setNative(!native);
+	const handleChangeAriaLabelButton = () => setCustomAriaLabel(!customAriaLabel);
 
-	handleChangeJSNativeButton = () => this.setState((state) => ({isNative: !state.isNative}));
-
-	render () {
-		const {isNative, customAriaLabel} = this.state;
-
-		return (
-			<Layout orientation="vertical">
-				<Cell shrink>
-					<ToggleButton
-						onClick={this.handleChangeAriaLabelButton}
-						selected={customAriaLabel}
-					>
-						Customizable aria-labels on ScrollThumbs
-					</ToggleButton>
-					<ToggleButton
-						onClick={this.handleChangeJSNativeButton}
-						selected={isNative}
-					>
-						Native
-					</ToggleButton>
-				</Cell>
-				<Cell
-					component={Scroller}
-					focusableScrollbar
-					scrollMode={isNative ? 'native' : 'translate'}
-					scrollDownAriaLabel={customAriaLabel ? 'This is vertical scroll down aria label' : null}
-					scrollLeftAriaLabel={customAriaLabel ? 'This is horizontal scroll left aria label' : null}
-					scrollRightAriaLabel={customAriaLabel ? 'This is vertical scroll right aria label' : null}
-					scrollUpAriaLabel={customAriaLabel ? 'This is horizontal scroll up aria label' : null}
+	return (
+		<>
+			<Header title="Scroller">
+				<CheckboxItem
+					onToggle={handleChangeAriaLabelButton}
+					selected={customAriaLabel}
+					style={{width: '350px'}} // FIXME: If no width, then the text doesn't display.
 				>
-					<div style={{width: ri.scaleToRem(6000)}}>
-						Foo<br />Bar<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />
-						Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow. Boom boom pow.
-						Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
-						Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
-						Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. <br />Foo<br />Bar<br />Bar<br />
-						Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />
-						Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
-						Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
-						Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
-						Boom boom pow. Boom boom pow. Boom boom pow. <br />Foo<br />Bar<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />
-						Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />
-						Foo<br />Bar<br />Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
-						Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
-						Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
-						Boom boom pow. <br />Foo<br />Bar<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />
-						Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow.
-						Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
-						Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
-						Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
-					</div>
-				</Cell>
-			</Layout>
-		);
-	}
-}
+					Customizable aria-labels on ScrollThumbs
+				</CheckboxItem>
+				<CheckboxItem
+					onToggle={handleChangeJSNativeButton}
+					selected={native}
+					style={{width: '250px'}} // FIXME: If no width, then the text doesn't display.
+				>
+					Native
+				</CheckboxItem>
+			</Header>
+			<Scroller
+				focusableScrollbar
+				scrollMode={scrollMode}
+				scrollDownAriaLabel={customAriaLabel ? 'This is vertical scroll down aria label' : null}
+				scrollLeftAriaLabel={customAriaLabel ? 'This is horizontal scroll left aria label' : null}
+				scrollRightAriaLabel={customAriaLabel ? 'This is vertical scroll right aria label' : null}
+				scrollUpAriaLabel={customAriaLabel ? 'This is horizontal scroll up aria label' : null}
+				style={{height: 'calc(100% - 130px'}}
+			>
+				<div style={{width: ri.scaleToRem(6000)}}>
+					Foo<br />Bar<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />
+					Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow. Boom boom pow.
+					Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
+					Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
+					Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. <br />Foo<br />Bar<br />Bar<br />
+					Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />
+					Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
+					Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
+					Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
+					Boom boom pow. Boom boom pow. Boom boom pow. <br />Foo<br />Bar<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />
+					Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />
+					Foo<br />Bar<br />Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
+					Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
+					Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
+					Boom boom pow. <br />Foo<br />Bar<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />
+					Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow<br />Foo<br />Bar<br />Boom boom pow.
+					Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
+					Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
+					Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow. Boom boom pow.
+				</div>
+			</Scroller>
+		</>
+	);
+};
 
 export default ScrollerView;
