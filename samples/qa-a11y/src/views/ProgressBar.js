@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-bind */
+
 import Button from '@enact/agate/Button';
 import ProgressBar from '@enact/agate/ProgressBar';
 import React from 'react';

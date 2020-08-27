@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-bind */
+
 import Picker from '@enact/agate/Picker';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import React from 'react';

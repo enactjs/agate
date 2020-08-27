@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-bind */
+
 import Header from '@enact/agate/Header';
 import {Panel, Panels} from '@enact/agate/Panels';
 import Item from '@enact/agate/Item';
@@ -16,10 +18,10 @@ const PanelsView = () => {
 
 	const nextPanel = () => setIndex(1);
 	const prevPanel = () => setIndex(0);
-	const customItem = ({index, ...rest}) => {
+	const customItem = ({index: itemIndex, ...rest}) => { // eslint-disable-line enact/prop-types
 		return (
 			<Item {...rest} onClick={nextPanel}>
-				{itemList[index]}
+				{itemList[itemIndex]}
 			</Item>
 		);
 	};

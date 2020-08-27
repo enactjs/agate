@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-bind */
+
 import Dropdown from '@enact/agate/Dropdown';
 import React from 'react';
 

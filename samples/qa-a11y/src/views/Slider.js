@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-bind */
+
 import Button from '@enact/agate/Button';
 import Slider from '@enact/agate/Slider';
 import PropTypes from 'prop-types';
