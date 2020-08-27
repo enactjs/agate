@@ -20,6 +20,7 @@ class PanelsView extends React.Component {
 	}
 
 	nextPanel = () => this.setState({panelIndex: 1});
+
 	prevPanel = () => this.setState({panelIndex: 0});
 
 	customItem = ({index, ...rest}) => {

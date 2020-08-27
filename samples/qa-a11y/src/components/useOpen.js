@@ -6,6 +6,7 @@ const useOpen = (num) => {
 		array.fill(false);
 		return array;
 	});
+
 	const updateOpen = (index, state) => () => {
 		const a = [
 			...open.slice(0, index),
@@ -13,11 +14,11 @@ const useOpen = (num) => {
 			...open.slice(index + 1)
 		];
 
-		debugger; setOpen(a)
+		setOpen(a);
 	};
 
 	return [open, updateOpen];
-}
+};
 
 export default useOpen;
 export {

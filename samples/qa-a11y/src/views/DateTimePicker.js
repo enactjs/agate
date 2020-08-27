@@ -7,7 +7,7 @@ const DatePickerView = () => (
 	<>
 		<Section title="Default">
 			<DateTimePicker alt="Normal" />
-			<DateTimePicker alt="Disabled" disabled/>
+			<DateTimePicker alt="Disabled" disabled />
 		</Section>
 	</>
 );

@@ -11,7 +11,7 @@ const ImageItemView = () => (
 			<ImageItem
 				alt="With Children"
 				orientation="horizontal"
-				src='http://via.placeholder.com/200x200/7ed31d/ffffff'
+				src="http://via.placeholder.com/200x200/7ed31d/ffffff"
 			>
 				Text 0
 			</ImageItem>
@@ -21,7 +21,7 @@ const ImageItemView = () => (
 				disabled
 				orientation="horizontal"
 				selected
-				src='http://via.placeholder.com/200x200/7ed31d/ffffff'
+				src="http://via.placeholder.com/200x200/7ed31d/ffffff"
 			>
 				Text 1
 			</ImageItem>
@@ -32,7 +32,7 @@ const ImageItemView = () => (
 				alt="Aria-labelled with Children"
 				aria-label="This is a Label 0."
 				orientation="horizontal"
-				src='http://via.placeholder.com/200x200/7ed31d/ffffff'
+				src="http://via.placeholder.com/200x200/7ed31d/ffffff"
 			>
 				Text 0
 			</ImageItem>
@@ -42,7 +42,7 @@ const ImageItemView = () => (
 				aria-label="This is a Label 1."
 				disabled
 				orientation="horizontal"
-				src='http://via.placeholder.com/200x200/7ed31d/ffffff'
+				src="http://via.placeholder.com/200x200/7ed31d/ffffff"
 			>
 				Text 1
 			</ImageItem>

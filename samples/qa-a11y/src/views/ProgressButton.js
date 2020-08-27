@@ -15,6 +15,7 @@ class ProgressButtonView extends React.Component {
 	}
 
 	handleDecreaseButtonValue = () => this.setState((state) => ({progressButtonValue: Math.max((state.progressButtonValue - 0.1).toFixed(1), 0)}));
+
 	handleIncreaseButtonValue = () => this.setState((state) => ({progressButtonValue: Math.min((state.progressButtonValue + 0.1).toFixed(1), 1)}));
 
 	render = () => {

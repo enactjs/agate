@@ -14,6 +14,7 @@ class ScrollerView extends React.Component {
 	}
 
 	handleChangeAriaLabelButton = () => this.setState((state) => ({customAriaLabel: !state.customAriaLabel}));
+
 	handleChangeJSNativeButton = () => this.setState((state) => ({isNative: !state.isNative}));
 
 	render () {
@@ -37,7 +38,7 @@ class ScrollerView extends React.Component {
 				</Cell>
 				<Cell
 					component={Scroller}
-					focusableScrollbar={true}
+					focusableScrollbar
 					scrollMode={isNative ? 'native' : 'translate'}
 					scrollDownAriaLabel={customAriaLabel ? 'This is vertical scroll down aria label' : null}
 					scrollLeftAriaLabel={customAriaLabel ? 'This is horizontal scroll left aria label' : null}

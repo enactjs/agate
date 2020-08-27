@@ -41,6 +41,6 @@ const DrawerView = () => {
 			</Section>
 		</>
 	);
-}
+};
 
 export default DrawerView;
