@@ -27,6 +27,14 @@ const SkinFrame = Skinnable(kind({
 
 	propTypes: {
 		/**
+		 * Hides the Panel's body components.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		hideChildren: PropTypes.bool,
+
+		/**
 		 * Spotlight Id.
 		 *
 		 * @type {String}
