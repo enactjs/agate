@@ -38,7 +38,6 @@ const defaultConfig = {
 	 * `ContextualPopup` without the arrow.
 	 *
 	 * @type {Boolean}
-	 * @default false
 	 * @memberof agate/ContextualPopupDecorator.ContextualPopupDecorator.defaultConfig
 	 * @public
 	 */
@@ -49,7 +48,6 @@ const defaultConfig = {
 	 *
 	 * @see {@link agate/Skinnable.Skinnable.skin}
 	 * @type {Boolean}
-	 * @default false
 	 * @memberof agate/ContextualPopupDecorator.ContextualPopupDecorator.defaultConfig
 	 * @public
 	 */
@@ -113,7 +111,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * popup.
 			 *
 			 * @type {Boolean}
-			 * @default false
 			 * @public
 			 */
 			noAutoDismiss: PropTypes.bool,
@@ -153,7 +150,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * Displays the contextual popup.
 			 *
 			 * @type {Boolean}
-			 * @default false
 			 * @public
 			 */
 			open: PropTypes.bool,
@@ -210,7 +206,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * Shows the close button.
 			 *
 			 * @type {Boolean}
-			 * @default false
 			 * @public
 			 */
 			showCloseButton: PropTypes.bool,
