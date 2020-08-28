@@ -46,7 +46,10 @@ const handleTransitionHide = (containerId) => () => {
 	const current = Spotlight.getCurrent();
 
 	if (!Spotlight.isPaused() && current && document.querySelector(`${containerSelector} .${componentCss.dropdownList}`).contains(current)) {
-		Spotlight.focus(`${containerSelector} .${componentCss.dropdown}`);
+		const focusResult = Spotlight.focus(`${containerSelector} .${componentCss.dropdown}`);
+		if (!focusResult && Spotlight.getPointerMode()) {
+			document.querySelector(`${containerSelector} .${componentCss.dropdown}`).focus();
+		}
 	}
 };
 
@@ -270,6 +273,7 @@ const DropdownBase = kind({
 						<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
 							<Scroller skinVariants={skinVariants} className={css.scroller}>
 								<Group
+									role="button"
 									className={css.group}
 									onSelect={onSelect}
 									selected={selected}
