@@ -198,8 +198,6 @@ const PickerBase = kind({
 
 	defaultProps: {
 		accessibilityHint: '',
-		decrementAriaLabel: $L('previous item'),
-		incrementAriaLabel: $L('next item'),
 		orientation: 'vertical',
 		step: 1,
 		value: 0
@@ -248,6 +246,8 @@ const PickerBase = kind({
 
 			return valueText;
 		},
+		decrementAriaLabel: ({decrementAriaLabel = $L('previous item')}) => decrementAriaLabel,
+		incrementAriaLabel: ({incrementAriaLabel = $L('next item')}) => incrementAriaLabel,
 		valueId: ({id}) => `${id}_value`
 	},
 
