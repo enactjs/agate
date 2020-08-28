@@ -176,7 +176,7 @@ const MediaPlayerBase = kind({
 		className: 'mediaPlayer'
 	},
 
-	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onLoopChange, onPause, onPlay, onUpdate, paused, source, total, proportionPlayed, onChange, ...rest}) => {
+	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onChange, onLoopChange, onPause, onPlay, onUpdate, paused, proportionPlayed, source, total, ...rest}) => {
 		const durFmt = getDurFmt(locale);
 
 		return (
