@@ -103,6 +103,14 @@ const MediaPlayerBase = kind({
 		mediaRef: PropTypes.func,
 
 		/**
+		 * Called when position of media slider is changed.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onChange: PropTypes.func,
+
+		/**
 		 * Called when media is looped
 		 *
 		 * @type {Function}
@@ -143,14 +151,20 @@ const MediaPlayerBase = kind({
 		paused: PropTypes.bool,
 
 		/**
+		 * Proportion of media file played.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		proportionPlayed: PropTypes.number,
+
+		/**
 		 * The total time (duration) in seconds of the loaded media source.
 		 *
 		 * @type {Number}
 		 * @public
 		 */
-		total: PropTypes.number,
-		proportionPlayed: PropTypes.number,
-		onChange: PropTypes.func
+		total: PropTypes.number
 	},
 
 	defaultProps: {
@@ -176,8 +190,8 @@ const MediaPlayerBase = kind({
 					source={source}
 				/>
 				<MediaSlider
-					value={proportionPlayed}
 					onChange={onChange}
+					value={proportionPlayed}
 				/>
 				<Times
 					current={currentTime}
@@ -383,15 +397,15 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 					{...rest}
 					currentTime={this.state.currentTime}
 					loop={this.state.loop}
+					onChange={this.onSliderChange}
 					onLoopChange={this.loopChange}
 					onPause={this.handlePause}
 					onPlay={this.handlePlay}
 					onUpdate={this.handleEvent}
 					paused={this.state.paused}
+					proportionPlayed={this.state.proportionPlayed}
 					mediaRef={this.setMediaRef}
 					total={this.state.duration}
-					proportionPlayed={this.state.proportionPlayed}
-					onChange={this.onSliderChange}
 				/>
 			);
 		}
