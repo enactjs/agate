@@ -37,7 +37,25 @@ const DateComponentPickerBase = kind({
 		 * @required
 		 * @public
 		 */
-		value: PropTypes.number.isRequired
+		value: PropTypes.number.isRequired,
+
+		/**
+		 * Sets the hint string read when focusing the picker.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		accessibilityHint: PropTypes.string,
+
+		/**
+		 * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
+		 * to the current selected child and accessibilityHint text.
+		 *
+		 * @type {String}
+		 * @memberof sandstone/internal/DateComponentPicker.DateComponentPickerBase.prototype
+		 * @public
+		 */
+		'aria-valuetext': PropTypes.string
 	},
 
 	styles: {
@@ -52,9 +70,11 @@ const DateComponentPickerBase = kind({
 		max: ({children}) => React.Children.count(children) - 1
 	},
 
-	render: ({children, max, value, ...rest}) => (
+	render: ({'aria-valuetext': ariaValuetext, accessibilityHint, children, max, value, ...rest}) => (
 		<Picker
 			{...rest}
+			accessibilityHint={accessibilityHint}
+			aria-valuetext={(accessibilityHint == null) ? ariaValuetext : null}
 			index={value}
 			max={max}
 			min={0}
