@@ -52,7 +52,6 @@ const DateComponentPickerBase = kind({
 		 * to the current selected child and accessibilityHint text.
 		 *
 		 * @type {String}
-		 * @memberof sandstone/internal/DateComponentPicker.DateComponentPickerBase.prototype
 		 * @public
 		 */
 		'aria-valuetext': PropTypes.string
