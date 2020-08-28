@@ -126,7 +126,6 @@ const ContextualPopupBase = kind({
 		 * Hides the arrow.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		noArrow: PropTypes.bool,
