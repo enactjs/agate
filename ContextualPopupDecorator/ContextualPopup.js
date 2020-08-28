@@ -123,6 +123,23 @@ const ContextualPopupBase = kind({
 		direction: PropTypes.oneOf(['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom']),
 
 		/**
+		 * Hides the arrow.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		noArrow: PropTypes.bool,
+
+		/**
+		 * Offset from the activator to apply to the position of the popup.
+		 *
+		 * @type {('none'|'overlap'|'small')}
+		 * @default 'small'
+		 * @public
+		 */
+		offset: PropTypes.oneOf(['none', 'overlap', 'small']),
+
+		/**
 		 * Called when the close button is clicked.
 		 *
 		 * @type {Function}
@@ -134,7 +151,6 @@ const ContextualPopupBase = kind({
 		 * Shows the close button.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		showCloseButton: PropTypes.bool
@@ -142,6 +158,7 @@ const ContextualPopupBase = kind({
 
 	defaultProps: {
 		direction: 'below center',
+		offset: 'small',
 		showCloseButton: false
 	},
 
@@ -155,12 +172,13 @@ const ContextualPopupBase = kind({
 			const [arrowDirection] = direction.split(' ');
 			return arrowDirection;
 		},
-		className: ({direction, showCloseButton, styler}) => styler.append(
+		className: ({direction, offset, showCloseButton, styler}) => styler.append(
 			{
 				fixedSize: direction === 'above' || direction === 'below'
 			},
 			direction.split(' '),
-			{reserveClose: showCloseButton}
+			{reserveClose: showCloseButton},
+			offset
 		),
 		closeButton: ({showCloseButton, onCloseButtonClick}) => {
 			if (showCloseButton) {
@@ -179,8 +197,9 @@ const ContextualPopupBase = kind({
 		}
 	},
 
-	render: ({arrowDirection, arrowPosition, children, className, closeButton, containerPosition, containerRef, ...rest}) => {
+	render: ({arrowDirection, arrowPosition, children, className, closeButton, containerPosition, containerRef, noArrow, ...rest}) => {
 		delete rest.direction;
+		delete rest.offset;
 		delete rest.onCloseButtonClick;
 		delete rest.showCloseButton;
 
@@ -190,7 +209,10 @@ const ContextualPopupBase = kind({
 					{children}
 					{closeButton}
 				</div>
-				<ContextualPopupArrow direction={arrowDirection} style={arrowPosition} />
+				{noArrow ?
+					null :
+					<ContextualPopupArrow direction={arrowDirection} style={arrowPosition} />
+				}
 			</ContextualPopupRoot>
 		);
 	}

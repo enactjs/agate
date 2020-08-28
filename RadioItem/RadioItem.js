@@ -83,11 +83,14 @@ const RadioItemBase = kind({
 		className: ({css, selected, styler}) => styler.append(selected && css.selected)
 	},
 
-	render: ({children, css, icon, ...rest}) => {
-		delete rest.selected;
-
+	render: ({children, css, icon, selected, ...rest}) => {
 		return (
-			<Item {...rest} css={css}>
+			<Item
+				aria-checked={selected}
+				role="checkbox"
+				{...rest}
+				css={css}
+			>
 				<Icon slot="slotBefore" className={css.icon} size="small">{icon}</Icon>
 				{children}
 			</Item>
