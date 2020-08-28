@@ -10,6 +10,7 @@ import Item from '@enact/agate/Item';
 import LabeledIconButton from '@enact/agate/LabeledIconButton';
 import {Panel, TabbedPanels} from '@enact/agate/Panels';
 import {TabbedPanelsBase} from '@enact/agate/Panels/TabbedPanels';
+import $L from '@enact/i18n/$L';
 
 const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase);
 // `paddingBottom: '56.25%'` is a trick to impose 16:9 aspect ratio on the component, since padding percentage is based on the width, not the height.
@@ -47,6 +48,7 @@ storiesOf('Agate', module)
 					>
 						<beforeTabs>
 							<Button
+								aria-label={$L('Previous Tab')}
 								icon="arrowlargeleft"
 								onClick={onBeforeTabs} // eslint-disable-line react/jsx-no-bind
 								size="small"
@@ -55,6 +57,7 @@ storiesOf('Agate', module)
 						</beforeTabs>
 						<afterTabs>
 							<Button
+								aria-label={$L('Next Tab')}
 								icon="arrowlargeright"
 								onClick={onAfterTabs} // eslint-disable-line react/jsx-no-bind
 								size="small"
