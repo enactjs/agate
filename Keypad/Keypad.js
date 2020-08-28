@@ -192,6 +192,8 @@ const KeypadBase = kind({
  */
 const KeypadExtended = hoc((config, Wrapped) => {
 	return class extends React.Component {
+		static displayName = 'KeypadExtended';
+
 		static propTypes = /** @lends agate/Keypad.Keypad.prototype */ {
 			/**
 			 * Applies a disabled style and the control becomes non-interactive.
@@ -300,7 +302,7 @@ const KeypadExtended = hoc((config, Wrapped) => {
 					keypadInput: ''
 				});
 			}
-		}
+		};
 
 		render () {
 			return (
