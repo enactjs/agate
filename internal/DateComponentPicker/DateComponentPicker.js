@@ -70,7 +70,7 @@ const DateComponentPickerBase = kind({
 		max: ({children}) => React.Children.count(children) - 1
 	},
 
-	render: ({'aria-valuetext': ariaValuetext, accessibilityHint, children, max, value, ...rest}) => (
+	render: ({accessibilityHint, 'aria-valuetext': ariaValuetext, children, max, value, ...rest}) => (
 		<Picker
 			{...rest}
 			accessibilityHint={accessibilityHint}
