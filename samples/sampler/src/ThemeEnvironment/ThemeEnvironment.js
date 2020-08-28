@@ -41,6 +41,7 @@ const SkinFrame = Skinnable(kind({
 	},
 
 	render: (props) => {
+		delete props.hideChildren;
 		delete props.spotlightId;
 
 		return (<Row {...props} />);
