@@ -101,7 +101,7 @@ class AppBase extends React.Component {
 		const {keyCode} = ev;
 		const {rtl, updateLocale} = this.props;
 
-		if (keyCode === 403 || keyCode === 68) { // Red Key or `d` key
+		if (keyCode === 403 || keyCode === 82) { // Red Key or `r` key
 			updateLocale(rtl ? 'en-US' : 'ar-SA');
 		} else if (keyCode === 404 || keyCode === 71) { // Green Key or `g` key
 			this.handleDebug();
