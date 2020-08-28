@@ -148,7 +148,9 @@ const MediaPlayerBase = kind({
 		 * @type {Number}
 		 * @public
 		 */
-		total: PropTypes.number
+		total: PropTypes.number,
+		proportionPlayed: PropTypes.number,
+		onChange: PropTypes.func
 	},
 
 	defaultProps: {
@@ -160,7 +162,7 @@ const MediaPlayerBase = kind({
 		className: 'mediaPlayer'
 	},
 
-	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onLoopChange, onPause, onPlay, onUpdate, paused, source, total, ...rest}) => {
+	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onLoopChange, onPause, onPlay, onUpdate, paused, source, total, proportionPlayed, onChange, ...rest}) => {
 		const durFmt = getDurFmt(locale);
 
 		return (
@@ -173,7 +175,10 @@ const MediaPlayerBase = kind({
 					ref={mediaRef}
 					source={source}
 				/>
-				<MediaSlider />
+				<MediaSlider
+					value={proportionPlayed}
+					onChange={onChange}
+				/>
 				<Times
 					current={currentTime}
 					formatter={durFmt}
@@ -255,7 +260,8 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 				currentTime: 0,
 				duration: 0,
 				loop: false,
-				paused: true
+				paused: true,
+				proportionPlayed: 0
 			};
 		}
 
@@ -297,7 +303,8 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 				currentTime: this.state.currentTime,
 				duration: this.state.duration,
 				loop: this.state.loop,
-				paused: this.state.paused
+				paused: this.state.paused,
+				proportionPlayed: this.state.proportionPlayed
 			};
 		}
 
@@ -319,7 +326,8 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 				currentTime: el.currentTime,
 				duration: el.duration,
 				loop: el.loop,
-				paused: el.paused
+				paused: el.paused,
+				proportionPlayed: el.proportionPlayed
 			};
 
 			// If there's an error, we're obviously not loading, no matter what the readyState is.
@@ -342,6 +350,16 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			}, () => {
 				this.media.loop = this.state.loop;
 			});
+		}
+
+		seek = (timeIndex) => {
+			this.media.currentTime = timeIndex;
+		}
+
+		onSliderChange = ({value}) => {
+			const time = value * this.state.duration;
+
+			this.seek(time);
 		}
 
 		setMediaRef = (node) => {
@@ -372,6 +390,8 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 					paused={this.state.paused}
 					mediaRef={this.setMediaRef}
 					total={this.state.duration}
+					proportionPlayed={this.state.proportionPlayed}
+					onChange={this.onSliderChange}
 				/>
 			);
 		}
