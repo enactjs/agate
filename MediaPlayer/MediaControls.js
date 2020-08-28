@@ -126,7 +126,8 @@ const MediaControlsBase = kind({
 		 * @default 'shuffle'
 		 * @public
 		 */
-		shuffleIcon: PropTypes.string
+		shuffleIcon: PropTypes.string,
+		onNextTrackButtonClick: PropTypes.func
 	},
 
 	defaultProps: {
@@ -146,7 +147,7 @@ const MediaControlsBase = kind({
 		className: 'controlsFrame'
 	},
 
-	render: ({loop, menuIcon, nextTrackIcon, onLoopButtonClick, onPlayButtonClick, pauseIcon, paused, playIcon, previousTrackIcon, repeatIcon, shuffleIcon, ...rest}) => {
+	render: ({loop, menuIcon, nextTrackIcon, onLoopButtonClick, onPlayButtonClick, pauseIcon, paused, playIcon, previousTrackIcon, repeatIcon, shuffleIcon, onNextTrackButtonClick, ...rest}) => {
 		return (
 			<div className={css.mediaControls} {...rest}>
 				<Button
@@ -161,7 +162,7 @@ const MediaControlsBase = kind({
 				>
 					<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
 				</Button>
-				<Button aria-label={$L('Next')} backgroundOpacity="transparent" css={css} icon={nextTrackIcon} size="large" />
+				<Button aria-label={$L('Next')} backgroundOpacity="transparent" css={css} icon={nextTrackIcon} size="large" onClick={onNextTrackButtonClick} />
 				<Button aria-label={$L('Menu')} backgroundOpacity="transparent" css={css} icon={menuIcon} size="large" />
 			</div>
 		);
@@ -214,7 +215,8 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 			 * @type {Boolean}
 			 * @public
 			 */
-			paused: PropTypes.bool
+			paused: PropTypes.bool,
+			onNextTrackChange: PropTypes.func
 		}
 
 		constructor (props) {
@@ -235,17 +237,24 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 			forward('onLoopChange', ev, this.props);
 		}
 
+		handleNextTrackButtonClick = (ev) => {
+			forward('onNextTrackButtonClick', ev, this.props);
+			forward('onNextTrackChange', ev, this.props);
+		}
+
 		render () {
 			const props = Object.assign({}, this.props);
 			delete props.onLoopChange;
 			delete props.onPause;
 			delete props.onPlay;
+			delete props.onNextTrackChange;
 
 			return (
 				<Wrapped
 					{...props}
 					onLoopButtonClick={this.handleLoopButtonClick}
 					onPlayButtonClick={this.handlePlayButtonClick}
+					onNextTrackButtonClick={this.handleNextTrackButtonClick}
 				/>
 			);
 		}

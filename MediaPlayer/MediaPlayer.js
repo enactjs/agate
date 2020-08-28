@@ -52,7 +52,8 @@ const MediaPlayerBase = kind({
 		 * @type {Node}
 		 * @public
 		 */
-		source: PropTypes.node.isRequired,
+		// source: PropTypes.node.isRequired,
+		source: PropTypes.object,
 
 		/**
 		 * The current time in seconds of the media source.
@@ -150,7 +151,9 @@ const MediaPlayerBase = kind({
 		 */
 		total: PropTypes.number,
 		proportionPlayed: PropTypes.number,
-		onChange: PropTypes.func
+		onChange: PropTypes.func,
+		onNextTrackButtonClick: PropTypes.func,
+		songIndex: PropTypes.number
 	},
 
 	defaultProps: {
@@ -162,7 +165,7 @@ const MediaPlayerBase = kind({
 		className: 'mediaPlayer'
 	},
 
-	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onLoopChange, onPause, onPlay, onUpdate, paused, source, total, proportionPlayed, onChange, ...rest}) => {
+	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onLoopChange, onPause, onPlay, onUpdate, paused, source, total, proportionPlayed, onChange, onNextTrackButtonClick, songIndex, ...rest}) => {
 		const durFmt = getDurFmt(locale);
 
 		return (
@@ -190,6 +193,7 @@ const MediaPlayerBase = kind({
 					onPause={onPause}
 					onPlay={onPlay}
 					paused={paused}
+					onNextTrackButtonClick={onNextTrackButtonClick}
 				/>
 			</div>
 		);
@@ -373,6 +377,10 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			}
 		}
 
+		handleNextTrackButtonClick = () => {
+			console.log('next track');
+		}
+
 		render () {
 			const {
 				...rest
@@ -392,6 +400,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 					total={this.state.duration}
 					proportionPlayed={this.state.proportionPlayed}
 					onChange={this.onSliderChange}
+					onNextTrackButtonClick={this.handleNextTrackButtonClick}
 				/>
 			);
 		}
