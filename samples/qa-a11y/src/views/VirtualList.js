@@ -21,15 +21,24 @@ for (let i = 0; i < 100; i++) {
 
 const VirtualListView = () => {
 	const [native, setNative] = React.useState(true);
+	const [customAriaLabel, setCustomAriaLabel] = React.useState(false);
 	const scrollMode = native ? 'native' : 'translate';
 
-	const onToggleScrollMode = () => setNative(!native);
+	const handleToggleScrollMode = () => setNative(!native);
+	const handleChangeAriaLabelButton = () => setCustomAriaLabel(!customAriaLabel);
 
 	return (
 		<>
 			<Header title="VirtualList">
 				<CheckboxItem
-					onClick={onToggleScrollMode}
+					onToggle={handleChangeAriaLabelButton}
+					selected={customAriaLabel}
+					style={{width: '350px'}} // FIXME: If no width, then the text doesn't display.
+				>
+					Customizable aria-labels on ScrollThumbs
+				</CheckboxItem>
+				<CheckboxItem
+					onClick={handleToggleScrollMode}
 					selected={native}
 					style={{width: '250px'}} // FIXME: If no width, then the text doesn't display.
 				>
@@ -39,8 +48,10 @@ const VirtualListView = () => {
 			<VirtualList
 				dataSize={items.length}
 				itemRenderer={renderItem}
-				itemSize={ri.scale(156)}
+				itemSize={ri.scale(78)}
+				scrollDownAriaLabel={customAriaLabel ? 'This is vertical scroll down aria label' : null}
 				scrollMode={scrollMode}
+				scrollUpAriaLabel={customAriaLabel ? 'This is horizontal scroll up aria label' : null}
 				style={{height: 'calc(100% - 130px'}}
 			/>
 		</>

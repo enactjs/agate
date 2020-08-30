@@ -34,9 +34,9 @@ const ScrollerView = () => {
 			</Header>
 			<Scroller
 				focusableScrollbar
-				scrollMode={scrollMode}
 				scrollDownAriaLabel={customAriaLabel ? 'This is vertical scroll down aria label' : null}
 				scrollLeftAriaLabel={customAriaLabel ? 'This is horizontal scroll left aria label' : null}
+				scrollMode={scrollMode}
 				scrollRightAriaLabel={customAriaLabel ? 'This is vertical scroll right aria label' : null}
 				scrollUpAriaLabel={customAriaLabel ? 'This is horizontal scroll up aria label' : null}
 				style={{height: 'calc(100% - 130px'}}

@@ -10,30 +10,30 @@ import Section from '../components/Section';
 import useBoolArray from '../components/useBoolArray';
 
 const PopupView = () => {
-	const [open, setOpen] = useBoolArray(5);
+	const [open, handleOpen] = useBoolArray(5);
 
 	return (
 		<>
 			<Section title="Default">
-				<Button alt="Normal" onClick={setOpen(0, true)}>Open 0</Button>
-				<Button alt="Long Text" onClick={setOpen(1, true)}>Open 1</Button>
-				<Button alt="With Scroller" onClick={setOpen(2, true)}>Open 2</Button>
-				<Button alt="With Buttons" onClick={setOpen(3, true)}>Open 3</Button>
+				<Button alt="Normal" onClick={handleOpen(0, true)}>Open 0</Button>
+				<Button alt="Long Text" onClick={handleOpen(1, true)}>Open 1</Button>
+				<Button alt="With Scroller" onClick={handleOpen(2, true)}>Open 2</Button>
+				<Button alt="With Buttons" onClick={handleOpen(3, true)}>Open 3</Button>
 			</Section>
 
 			<Section title="Aria-labelled">
-				<Button alt="Aria-lablled with Buttons" onClick={setOpen(4, true)}>Open 4</Button>
+				<Button alt="Aria-lablled with Buttons" onClick={handleOpen(4, true)}>Open 4</Button>
 			</Section>
 
 			<Popup
-				onClose={setOpen(0, false)}
+				onClose={handleOpen(0, false)}
 				open={open[0]}
 			>
 				<span>Content</span>
 			</Popup>
 
 			<Popup
-				onClose={setOpen(1, false)}
+				onClose={handleOpen(1, false)}
 				open={open[1]}
 			>
 				<span>
@@ -58,7 +58,7 @@ const PopupView = () => {
 			</Popup>
 
 			<Popup
-				onClose={setOpen(2, false)}
+				onClose={handleOpen(2, false)}
 				open={open[2]}
 			>
 				<Button>Button Outside Scroller</Button>
@@ -77,7 +77,7 @@ const PopupView = () => {
 			</Popup>
 
 			<Popup
-				onClose={setOpen(3, false)}
+				onClose={handleOpen(3, false)}
 				open={open[3]}
 				role="dialog"
 			>
@@ -88,7 +88,7 @@ const PopupView = () => {
 
 			<Popup
 				aria-label="This is a Label."
-				onClose={setOpen(4, false)}
+				onClose={handleOpen(4, false)}
 				open={open[4]}
 			>
 				<Heading showLine>Heading</Heading>

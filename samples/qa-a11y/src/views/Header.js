@@ -17,6 +17,7 @@ const HeaderView = () => (
 		<Cell>
 			<Panel>
 				<Header title="Header Title 0" />
+				<br />
 				<Button>Text 0</Button>
 			</Panel>
 			<hr />
@@ -27,6 +28,7 @@ const HeaderView = () => (
 					subtitle="Subtitle"
 					title="Header Title 1"
 				/>
+				<br />
 				<Button>Text 1</Button>
 			</Panel>
 			<hr />

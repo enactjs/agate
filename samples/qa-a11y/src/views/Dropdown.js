@@ -43,43 +43,32 @@ const DropdownView = () => (
 	<>
 		<Section title="String array as the children prop">
 			<Dropdown
-				alt="With Placeholder"
-				placeholder="Placeholder"
-			>
-				{['Option 0', 'Option 1', 'Option 2']}
-			</Dropdown>
-			<br />
-			<Dropdown
-				alt="With Placeholder and title"
-				placeholder="Placeholder"
+				alt="With a Title"
 				title="Title"
 			>
 				{['Option 0', 'Option 1', 'Option 2']}
 			</Dropdown>
 			<br />
 			<Dropdown
-				alt="Disabled with Placeholder and title"
+				alt="Disabled with a Title"
 				disabled
-				placeholder="Placeholder"
 				title="Title"
 			>
 				{['Option 0', 'Option 1', 'Option 2']}
 			</Dropdown>
 			<br />
 			<Dropdown
-				alt="Aria-lablelled with Placeholder and title"
+				alt="Aria-lablelled with a Title"
 				aria-label="This is a Label."
-				placeholder="Placeholder"
 				title="Title"
 			>
 				{['Option 0', 'Option 1', 'Option 2']}
 			</Dropdown>
 			<br />
 			<Dropdown
-				alt="Aria-lablelled and Disabled with Placeholder and title"
+				alt="Aria-lablelled and Disabled with a Title"
 				aria-label="This is a Label."
 				disabled
-				placeholder="Placeholder"
 				title="Title"
 			>
 				{['Option 0', 'Option 1', 'Option 2']}
@@ -88,16 +77,14 @@ const DropdownView = () => (
 
 		<Section className={appCss.marginTop} title="Object array as the children prop">
 			<Dropdown
-				alt="With Placeholder and Title"
-				placeholder="Placeholder"
+				alt="With a Title"
 				title="Title"
 			>
 				{list}
 			</Dropdown>
 			<br />
 			<Dropdown
-				alt="With Placeholder, Title, and Aria-labelled Disabled Options"
-				placeholder="Placeholder"
+				alt="With Title and Aria-labelled Disabled Options"
 				title="Title"
 			>
 				{disabledList}
@@ -107,7 +94,6 @@ const DropdownView = () => (
 		<Section className={appCss.marginTop} title="Aria-labelled Dropdown based on selected option's aria-label">
 			<A11yDropdown
 				aria-label="This is a Label."
-				placeholder="Placeholder"
 				title="Title"
 			>
 				{ariaLabelledList}
