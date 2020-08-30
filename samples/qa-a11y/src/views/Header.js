@@ -12,6 +12,7 @@ const style = {
 	height: '100%'
 };
 
+// FIXME: `<br /> has been added between the `Header` and `Button`. But it would be better to add a margin in the Panel's body.
 const HeaderView = () => (
 	<div style={style}>
 		<Cell>
