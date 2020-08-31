@@ -273,7 +273,7 @@ const DropdownBase = kind({
 						<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
 							<Scroller skinVariants={skinVariants} className={css.scroller}>
 								<Group
-									role="null"
+									role={null}
 									className={css.group}
 									onSelect={onSelect}
 									selected={selected}
