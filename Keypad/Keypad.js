@@ -111,6 +111,7 @@ const Key = kind({
 					css={css}
 					icon={children}
 					size="large"
+					role={null}
 				>
 					{(text || text === 0) ? <span className={css.text}>{text}</span> : null}
 					{(label || label === 0) ? <span className={css.label}>{label}</span> : null}
@@ -161,18 +162,28 @@ const KeypadBase = kind({
 		return (
 			<Layout {...rest} align="center end" className={css.keypad} inline wrap>
 				{KEY_LIST.map((keyText, rowIndex) => {
+					const {icon, text} = keyText;
+					const isIcon = icon === 'arrowleftturn' || icon === 'phone';
+
+					let ariaLabel = text;
+					if (icon === 'arrowleftturn') {
+						ariaLabel = $L('Back Space');
+					} else if (icon === 'phone') {
+						ariaLabel = $L('Call');
+					}
+
 					return (
 						<Cell
-							aria-label={keyText.text === 'arrowleftturn' ? $L('Back Space') : keyText.text}
+							aria-label={ariaLabel}
 							component={Key}
 							disabled={disabled}
-							key={`key${rowIndex}-${keyText.text}`}
-							onKeyButtonClick={() => handleInputValue(keyText.icon === 'arrowleftturn' || keyText.icon === 'phone' ? keyText.icon : keyText.text)}
+							key={`key${rowIndex}-${text}`}
+							onKeyButtonClick={() => handleInputValue(isIcon ? icon : text)}
 							shrink
 							label={keyText.label}
-							text={keyText.icon === 'arrowleftturn' || keyText.icon === 'phone' ? null : keyText.text}
+							text={isIcon ? null : text}
 						>
-							{keyText.icon === 'arrowleftturn' || keyText.icon === 'phone' ? keyText.icon : null}
+							{isIcon ? icon : null}
 						</Cell>
 					);
 				})}
