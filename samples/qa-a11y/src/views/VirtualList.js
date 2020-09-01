@@ -47,6 +47,7 @@ const VirtualListView = () => {
 			</Header>
 			<VirtualList
 				dataSize={items.length}
+				focusableScrollbar
 				itemRenderer={renderItem}
 				itemSize={ri.scale(78)}
 				scrollDownAriaLabel={customAriaLabel ? 'This is vertical scroll down aria label' : null}

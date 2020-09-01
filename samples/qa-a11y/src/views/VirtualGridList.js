@@ -77,6 +77,7 @@ const VirtualGridListView = () => {
 			<VirtualGridList
 				dataSize={items.length}
 				direction={horizontal ? 'horizontal' : 'vertical'}
+				focusableScrollbar
 				itemRenderer={renderItem}
 				itemSize={{
 					minWidth: ri.scale(339),
