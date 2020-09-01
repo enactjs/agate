@@ -167,9 +167,9 @@ const KeypadBase = kind({
 
 					let ariaLabel = text;
 					if (icon === 'arrowleftturn') {
-						ariaLabel = $L('Back Space');
+						ariaLabel = $L('backspace');
 					} else if (icon === 'phone') {
-						ariaLabel = $L('Call');
+						ariaLabel = $L('call');
 					}
 
 					return (
