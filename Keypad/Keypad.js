@@ -278,6 +278,9 @@ const KeypadExtended = hoc((config, Wrapped) => {
 
 				case 'phone':
 					// method to call dialed number (keypadInput);
+
+					newCharIndex = 0;
+					newKeypadInput = '';
 					break;
 
 				default:
@@ -291,23 +294,15 @@ const KeypadExtended = hoc((config, Wrapped) => {
 				this.props.onChange({value: newKeypadInput});
 			}
 
-			if (keyValue !== 'phone') {
-				this.setState({
-					keypadInput: newKeypadInput,
-					charIndex: newCharIndex
-				});
-			} else {
-				this.setState({
-					charIndex: 0,
-					keypadInput: ''
-				});
-			}
+			this.setState({
+				charIndex: newCharIndex,
+				keypadInput: newKeypadInput
+			});
 		};
 
 		render () {
 			return (
 				<Wrapped {...this.props} handleInputValue={this.handleInputValue} />
-
 			);
 		}
 	};

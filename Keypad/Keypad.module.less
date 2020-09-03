@@ -3,11 +3,13 @@
 @import "../styles/skin.less";
 @import "../styles/mixins.less";
 
+.keypad {
+	height: 510px;
+	width: 480px;
+}
+
 .applySkins({
 	.keypad {
-		height: @agate-keypad-height;
-		width: @agate-keypad-width;
-
 		.keyContainer {
 			display: flex;
 			justify-content: center;
@@ -80,17 +82,17 @@
 .keypadInput {
 	&.decorator {
 		.applySkins({
-			box-shadow: none;
+			box-shadow: @agate-keypad-input-decorator-box-shadow;
 
 			.input {
-				border-bottom: none;
+				border-bottom: @agate-keypad-input-border-bottom;
 				color: @agate-keypad-button-color;
-				font-size: 60px;
-				opacity: 1;
+				font-size: @agate-keypad-input-font-size;
+				opacity: @agate-keypad-input-opacity;
 			}
 
 			.focus({
-				box-shadow: none;
+				box-shadow: @agate-keypad-input-decorator-box-shadow;
 			});
 		});
 	}
