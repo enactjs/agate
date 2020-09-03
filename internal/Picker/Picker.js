@@ -274,7 +274,6 @@ const PickerBase = kind({
 			handleIncrement,
 			handleSecondaryDecrement,
 			handleSecondaryIncrement,
-			incrementAriaLabel,
 			incrementAriaLabel: incAriaLabel,
 			min,
 			max,

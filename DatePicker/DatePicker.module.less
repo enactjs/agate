@@ -6,24 +6,6 @@
 	.month,
 	.year {
 		/* These should be available to the JS but have no associated rules at this time. */
-		position: relative;
-
-		&:not(:last-child)::after {
-			content: '';
-			width: 3px;
-			height: 21px;
-			opacity: 0.4;
-			background-color: white;
-			display: inline-block;
-			vertical-align: inherit;
-			position: absolute;
-			top: 50%;
-			transform: translateY(-50%);
-			left: calc(100% - 3px);
-		}
 	}
 
-	.year {
-		padding: 0 12px;
-	}
 }

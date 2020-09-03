@@ -1,3 +1,4 @@
+import classnames from 'classnames'
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -6,7 +7,8 @@ import $L from '../internal/$L';
 import {DateComponentRangePicker} from '../internal/DateComponentPicker';
 import DateTime from '../internal/DateTime';
 
-import css from './DatePicker.module.less';
+import css from '../internal/DateTime/DateTime.module.less';
+import dateTimeCss from "../internal/DateTime/DateTime.module.less";
 
 /**
  * A date selection component.
@@ -183,10 +185,12 @@ const DatePickerBase = kind({
 
 	styles: {
 		css,
+		dateTimeCss,
 		className: 'datePicker'
 	},
 
 	render: ({
+		className,
 		disabled,
 		day,
 		dayAriaLabel,
@@ -210,7 +214,7 @@ const DatePickerBase = kind({
 		delete rest.rtl;
 
 		return (
-			<DateTime {...rest}>
+			<DateTime {...rest} className={classnames(className, dateTimeCss.timePicker)}>
 				{order.map((picker) => {
 					switch (picker) {
 						case 'd':
@@ -218,7 +222,7 @@ const DatePickerBase = kind({
 								<DateComponentRangePicker
 									accessibilityHint={dayAccessibilityHint}
 									aria-label={dayAriaLabel}
-									className={css.day}
+									className={classnames(css.day, dateTimeCss.day)}
 									disabled={disabled}
 									key="day-picker"
 									max={maxDays}
@@ -233,7 +237,7 @@ const DatePickerBase = kind({
 								<DateComponentRangePicker
 									accessibilityHint={monthAccessibilityHint}
 									aria-label={monthAriaLabel}
-									className={css.month}
+									className={classnames(css.month, dateTimeCss.month)}
 									disabled={disabled}
 									key="month-picker"
 									max={maxMonths}
@@ -248,7 +252,7 @@ const DatePickerBase = kind({
 								<DateComponentRangePicker
 									accessibilityHint={yearAccessibilityHint}
 									aria-label={yearAriaLabel}
-									className={css.year}
+									className={classnames(css.year, dateTimeCss.year)}
 									disabled={disabled}
 									key="year-picker"
 									max={maxYear}

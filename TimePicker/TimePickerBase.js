@@ -1,3 +1,4 @@
+import classnames from 'classnames'
 import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -7,6 +8,7 @@ import {DateComponentPicker, DateComponentRangePicker} from '../internal/DateCom
 import DateTime from '../internal/DateTime';
 
 import css from './TimePicker.module.less';
+import dateTimeCss from '../internal/DateTime/DateTime.module.less';
 
 // values to use in hour picker for 24 and 12 hour locales
 const hours24 = [
@@ -205,6 +207,7 @@ const TimePickerBase = kind({
 
 	styles: {
 		css,
+		dateTimeCss,
 		className: 'timePicker'
 	},
 
@@ -214,6 +217,7 @@ const TimePickerBase = kind({
 	},
 
 	render: ({
+		className,
 		disabled,
 		hasMeridiem,
 		hour,
@@ -236,7 +240,7 @@ const TimePickerBase = kind({
 		delete rest.rtl;
 
 		return (
-			<DateTime {...rest} css={css}>
+			<DateTime {...rest} css={css} className={classnames(className, dateTimeCss.timePicker)}>
 				{order.map((picker) => {
 					switch (picker) {
 						case 'h':
@@ -246,7 +250,7 @@ const TimePickerBase = kind({
 									<HourPicker
 										accessibilityHint={hourAccessibilityHint}
 										aria-label={hourAriaLabel}
-										className={css.hourPicker}
+										className={classnames(css.hourPicker, dateTimeCss.hourPicker)}
 										disabled={disabled}
 										hasMeridiem={hasMeridiem}
 										onChange={onChangeHour}
@@ -260,7 +264,7 @@ const TimePickerBase = kind({
 								<DateComponentRangePicker
 									accessibilityHint={minuteAccessibilityHint}
 									aria-label={minuteAriaLabel}
-									className={css.minutePicker}
+									className={classnames(css.minutePicker, dateTimeCss.minutePicker)}
 									disabled={disabled}
 									key="minute-picker"
 									max={59}
@@ -275,7 +279,7 @@ const TimePickerBase = kind({
 								<DateComponentPicker
 									aria-label={meridiemAriaLabel}
 									aria-valuetext={meridiems ? meridiems[meridiem] : null}
-									className={css.meridiemPicker}
+									className={classnames(css.meridiemPicker, dateTimeCss.meridiemPicker)}
 									disabled={disabled}
 									key="meridiem-picker"
 									onChange={onChangeMeridiem}

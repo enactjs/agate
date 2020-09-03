@@ -16,3 +16,26 @@
 		}
 	}
 }
+
+.datePicker, .timePicker {
+	.day,
+	.month,
+	.year,
+	.hourPicker,
+	.minutePicker,
+	.meridiemPicker {
+		position: relative;
+
+		&:nth-child(n+2)::before {
+			content: '';
+			width: 3px;
+			height: 21px;
+			opacity: 0.4;
+			background-color: white;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			right: calc(100% - 3px);
+		}
+	}
+}
