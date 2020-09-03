@@ -38,7 +38,7 @@ const getDurFmt = (locale) => {
 /**
  * A player for media {@link agate/MediaPlayer.MediaPlayer}.
  *
- * @class MediaPlayer
+ * @class MediaPlayerBase
  * @memberof agate/MediaPlayer
  * @ui
  * @public
@@ -46,7 +46,7 @@ const getDurFmt = (locale) => {
 const MediaPlayerBase = kind({
 	name: 'MediaPlayer',
 
-	propTypes: /** @lends agate/MediaPlayer.MediaControls.prototype */ {
+	propTypes: /** @lends agate/MediaPlayer.MediaPlayerBase.prototype */ {
 		/**
 		 * Any children `<source>` tag elements will be sent directly to the media element as
 		 * sources.
@@ -193,11 +193,19 @@ const MediaPlayerBase = kind({
 	}
 });
 
+/**
+ * Media player behaviors to apply to [MediaPlayerBase]{@link agate/MediaPlayer.MediaPlayerBase}.
+ *
+ * @class MediaPlayerExtended
+ * @memberof agate/MediaPlayer
+ * @hoc
+ * @private
+ */
 const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no-unused-vars
 	return class extends React.Component {
 		static displayName = 'MediaPlayerExtended';
 
-		static propTypes = /** @lends agate/MediaPlayer.MediaPlayerBase.prototype */ {
+		static propTypes = /** @lends agate/MediaPlayer.MediaPlayerExtended.prototype */ {
 			/**
 			 * The current locale as a
 			 * {@link https://tools.ietf.org/html/rfc5646|BCP 47 language tag}.
@@ -287,7 +295,8 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 		};
 
 		/**
-		 * Returns an object with the current state of the media
+		 * Returns an object with the current state of the media including `currentTime`, `duration`,
+		 * `paused` and `loop`
 		 *
 		 * @function
 		 * @memberof agate/MediaPlayer.MediaPlayerBase.prototype
@@ -330,14 +339,35 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			this.setState(updatedState);
 		};
 
+		/**
+		 * Programmatically plays the current media.
+		 *
+		 * @function
+		 * @memberof agate/MediaPlayer.MediaPlayerBase.prototype
+		 * @public
+		 */
 		play = () => {
 			this.send('play');
 		};
 
+		/**
+		 * Programmatically plays the current media.
+		 *
+		 * @function
+		 * @memberof agate/MediaPlayer.MediaPlayerBase.prototype
+		 * @public
+		 */
 		pause = () => {
 			this.send('pause');
 		};
 
+		/**
+		 * Programmatically sets the loop property of the media.
+		 *
+		 * @function
+		 * @memberof agate/MediaPlayer.MediaPlayerBase.prototype
+		 * @public
+		 */
 		loopChange = () => {
 			this.setState(prevState  => {
 				return ({loop: !prevState.loop});
@@ -348,14 +378,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 
 		setMediaRef = (node) => {
 			this.media = node;
-			this.setMedia();
 		};
-
-		setMedia ({setMedia} = this.props) {
-			if (setMedia) {
-				setMedia(this.media);
-			}
-		}
 
 		render () {
 			const {
@@ -388,6 +411,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
  * @mixes spotlight/Spottable.Spottable
  * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
+ * @mixes i18n/I18nContextDecorator.I18nContextDecorator
  * @public
  */
 const MediaPlayerDecorator = compose(
@@ -399,7 +423,7 @@ const MediaPlayerDecorator = compose(
 );
 
 /**
- * Aa Agate-styled `Media` component.
+ * An Agate-styled `Media` component.
  *
  * Usage:
  * ```

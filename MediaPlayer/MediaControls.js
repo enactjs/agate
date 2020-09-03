@@ -6,8 +6,8 @@ import React from 'react';
 
 import Button from '../Button';
 import Icon from '../Icon';
-
 import $L from '../internal/$L';
+
 import css from './MediaControls.module.less';
 
 /**
@@ -148,7 +148,7 @@ const MediaControlsBase = kind({
 
 	render: ({loop, menuIcon, nextTrackIcon, onLoopButtonClick, onPlayButtonClick, pauseIcon, paused, playIcon, previousTrackIcon, repeatIcon, shuffleIcon, ...rest}) => {
 		return (
-			<div className={css.mediaControls} {...rest}>
+			<div {...rest}>
 				<Button
 					aria-label={$L('Repeat')} backgroundOpacity="transparent"
 					className={loop ? css.loop : ''} css={css} icon={repeatIcon} onClick={onLoopButtonClick} size="large"

@@ -61,11 +61,11 @@ const Times = kind({
 	computed: {
 		currentPeriod:   ({current}) => secondsToPeriod(current),
 		currentReadable: ({current, formatter}) => secondsToTime(current, formatter),
-		totalPeriod:     ({total}) => secondsToPeriod(total),
+		remainingPeriod:     ({current, total}) => secondsToPeriod(total - current),
 		remainingReadable:   ({current, total, formatter}) => secondsToTime(total - current, formatter)
 	},
 
-	render: ({currentPeriod, currentReadable, remainingReadable, totalPeriod, ...rest}) => {
+	render: ({currentPeriod, currentReadable, remainingPeriod, remainingReadable, ...rest}) => {
 		delete rest.current;
 		delete rest.formatter;
 		delete rest.total;
@@ -73,7 +73,7 @@ const Times = kind({
 		return (
 			<div {...rest}>
 				<time dateTime={currentPeriod}>{currentReadable}</time>
-				<time dateTime={totalPeriod}>-{remainingReadable}</time>
+				<time dateTime={remainingPeriod}>-{remainingReadable}</time>
 			</div>
 		);
 	}
