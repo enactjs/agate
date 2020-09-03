@@ -36,10 +36,12 @@ const getDurFmt = (locale) => {
 };
 
 /**
- * Provides Agate-themed media player components.
+ * A player for media {@link agate/MediaPlayer.MediaPlayer}.
  *
- * @module agate/MediaPlayer
- * @exports MediaPlayer
+ * @class MediaPlayer
+ * @memberof agate/MediaPlayer
+ * @ui
+ * @public
  */
 const MediaPlayerBase = kind({
 	name: 'MediaPlayer',

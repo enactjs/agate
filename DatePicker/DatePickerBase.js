@@ -2,6 +2,7 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import $L from '../internal/$L';
 import {DateComponentRangePicker} from '../internal/DateComponentPicker';
 import DateTime from '../internal/DateTime';
 
@@ -203,7 +204,9 @@ const DatePickerBase = kind({
 		yearAriaLabel,
 		...rest
 	}) => {
-
+		const dayAccessibilityHint = $L('day');
+		const monthAccessibilityHint = $L('month');
+		const yearAccessibilityHint = $L('year');
 		delete rest.rtl;
 
 		return (
@@ -213,6 +216,7 @@ const DatePickerBase = kind({
 						case 'd':
 							return (
 								<DateComponentRangePicker
+									accessibilityHint={dayAccessibilityHint}
 									aria-label={dayAriaLabel}
 									className={css.day}
 									disabled={disabled}
@@ -227,6 +231,7 @@ const DatePickerBase = kind({
 						case 'm':
 							return (
 								<DateComponentRangePicker
+									accessibilityHint={monthAccessibilityHint}
 									aria-label={monthAriaLabel}
 									className={css.month}
 									disabled={disabled}
@@ -241,6 +246,7 @@ const DatePickerBase = kind({
 						case 'y':
 							return (
 								<DateComponentRangePicker
+									accessibilityHint={yearAccessibilityHint}
 									aria-label={yearAriaLabel}
 									className={css.year}
 									disabled={disabled}

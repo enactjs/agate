@@ -21,6 +21,8 @@ import UiSlider from '@enact/ui/Slider';
 
 import Skinnable from '../Skinnable';
 
+import SliderButtonBehaviorDecorator from './SliderButtonBehaviorDecorator';
+
 import componentCss from './SliderButton.module.less';
 
 const SliderKnob = kind({
@@ -142,6 +144,7 @@ const SliderButtonBase = kind({
  */
 const SliderButtonDecorator = compose(
 	Pure,
+	SliderButtonBehaviorDecorator,
 	Spottable,
 	Skinnable
 );
