@@ -200,7 +200,7 @@ const MediaPlayerBase = kind({
 		className: 'mediaPlayer'
 	},
 
-	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onChange, onEnded, onLoopChange, onNext, onPause, onPlay, onPrevious, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeatAll, shuffle, shuffledPlaylist, source, sourceIndex, total, ...rest}) => {
+	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onChange, onEnded, onLoopChange, onNext, onPause, onPlay, onPrevious, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeatAll, shuffle, source, sourceIndex, total, ...rest}) => {
 		const durFmt = getDurFmt(locale);
 
 		return (
@@ -212,7 +212,7 @@ const MediaPlayerBase = kind({
 					onEnded={onEnded}
 					onUpdate={onUpdate}
 					ref={mediaRef}
-					source={source[sourceIndex]}
+					source={playlist[sourceIndex]}
 				/>
 				<MediaSlider
 					onChange={onChange}
@@ -325,15 +325,14 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			this.media = null;
 
 			this.state = {
+				playlist: this.props.children,
 				currentTime: 0,
 				duration: 0,
 				loop: false,
 				paused: true,
-				playlist: this.props.children,
 				proportionPlayed: 0,
 				repeatAll: false,
 				shuffle: false,
-				shuffledPlaylist: [],
 				sourceIndex: 0
 			};
 		}
@@ -439,64 +438,90 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 		}
 
 		handleNext = () => {
-			if (this.state.shuffle) {
-				this.shufflePlaylist();
-			}
-			if (this.state.sourceIndex < this.props.children.length - 1) {
-				this.setState(prevState  => {
-					return ({sourceIndex: prevState.sourceIndex + 1});
-				}, () => {
-					this.play();
-				})
+			let currentIndex = this.state.sourceIndex;
+
+			if (currentIndex < this.state.playlist.length - 1) {
+				++currentIndex;
 			} else if (this.state.repeatAll) {
-				this.setState({
-					sourceIndex: 0
-				}, () => {
-					this.play();
-				})
+				currentIndex = 0;
+
+				if (this.state.shuffle) {
+					this.shufflePlaylist();
+				}
 			}
+
+			this.setState({
+				sourceIndex: currentIndex
+			}, () => {
+				this.play();
+			})
 		}
 
 		handlePrevious = () => {
-			if (this.state.sourceIndex > 0) {
-				this.setState(prevState => {
-					return ({sourceIndex: prevState.sourceIndex - 1});
-				}, () => {
-					this.play();
-				})
-			} else {
-				this.setState({
-					sourceIndex: this.props.children.length - 1
-				}, () => {
-					this.play();
-				})
+			let currentIndex = this.state.sourceIndex;
+
+			if (currentIndex > 0) {
+				--currentIndex;
+			} else if (this.state.repeatAll && !this.state.shuffle) {
+				currentIndex = this.state.playlist.length - 1;
 			}
+
+			this.setState({
+				sourceIndex: currentIndex
+			}, () => {
+				this.play();
+			})
 		}
 
-		shufflePlaylist = () => {
-			let playlist = this.props.children;
-			let counter = this.props.children.length;
+		shufflePlaylist = (currentMedia) => {
+			let remainingSize = this.props.children.length;
+			let playlist = [...this.props.children];
+			let currentMediaIndex;
 
 			// While there are elements in the array
-			while (counter > 0) {
+			while (remainingSize > 0) {
 				// Pick a random index
-				let index = Math.floor(Math.random() * counter);
+				let randomIndex = Math.floor(Math.random() * remainingSize);
 
-				// Decrease counter by 1
-				counter--;
+				// Decrease size by 1
+				remainingSize--;
 
 				// And swap the last element with it
-				let temp = playlist[counter];
-				playlist[counter] = playlist[index];
-				playlist[index] = temp;
+				let temp = playlist[remainingSize];
+				playlist[remainingSize] = playlist[randomIndex];
+				playlist[randomIndex] = temp;
+
+				if (playlist[remainingSize] === currentMedia) {
+					currentMediaIndex = remainingSize;
+				}
+			}
+			
+			if (currentMediaIndex !== undefined) {
+				let temp = playlist[0];
+				playlist[0] = playlist[currentMediaIndex];
+				playlist[currentMediaIndex] = temp;
 			}
 
-			console.log(playlist);
+			this.setState({
+				playlist,
+				sourceIndex: 0
+			})
 		}
 
 		handleShuffle = () => {
+			let currentMedia = this.state.playlist[this.state.sourceIndex];
+
 			this.setState(prevState  => {
 				return ({shuffle: !prevState.shuffle});
+			}, () => {
+				if (this.state.shuffle) {
+					this.shufflePlaylist(currentMedia);
+				} else {
+					this.setState({
+						playlist: this.props.children,
+						sourceIndex: currentMedia.key
+					})
+				}
 			})
 		};
 
@@ -542,11 +567,10 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 					onShuffle={this.handleShuffle}
 					onUpdate={this.handleEvent}
 					paused={this.state.paused}
-					proportionPlayed={this.state.proportionPlayed}
 					playlist={this.state.playlist}
+					proportionPlayed={this.state.proportionPlayed}
 					repeatAll={this.state.repeatAll}
 					shuffle={this.state.shuffle}
-					shuffledPlaylist={this.state.shuffledPlaylist}
 					sourceIndex={this.state.sourceIndex}
 					total={this.state.duration}
 				/>
