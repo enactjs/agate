@@ -52,10 +52,9 @@ const TabBase = kind({
 
 			if (className.includes('copper') || className.includes('cobalt')) {
 				return (
-					<div className={css.labeledIcon}>
+					<div aria-label={children} className={css.labeledIcon} role="region">
 						<ToggleButton
 							icon={icon}
-							inline={inline}
 							selected={selected}
 						/>
 						{children}

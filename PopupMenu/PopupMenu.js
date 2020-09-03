@@ -79,7 +79,7 @@ const PopupMenuBase = kind({
 				onHide={onHide}
 				css={css}
 			>
-				<Layout orientation="vertical" align="center center" {...rest}>
+				<Layout orientation="vertical" align="center center" role="alert" {...rest}>
 					<Cell className={css.title} shrink>
 						<Heading size="title">{title}</Heading>
 					</Cell>

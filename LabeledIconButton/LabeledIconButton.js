@@ -123,6 +123,7 @@ const LabeledIconButtonBase = kind({
 		...rest
 	}) => {
 		return UiLabeledIconBase.inline({
+			role: 'button',
 			...rest,
 			icon: (
 				<Button
