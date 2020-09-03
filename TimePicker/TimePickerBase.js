@@ -2,6 +2,7 @@ import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import $L from '../internal/$L';
 import {DateComponentPicker, DateComponentRangePicker} from '../internal/DateComponentPicker';
 import DateTime from '../internal/DateTime';
 
@@ -229,6 +230,8 @@ const TimePickerBase = kind({
 		order,
 		...rest
 	}) => {
+		const hourAccessibilityHint = $L('hour');
+		const minuteAccessibilityHint = $L('minute');
 
 		delete rest.rtl;
 
@@ -241,6 +244,7 @@ const TimePickerBase = kind({
 							return (
 								<React.Fragment key="hour-picker">
 									<HourPicker
+										accessibilityHint={hourAccessibilityHint}
 										aria-label={hourAriaLabel}
 										className={css.hourPicker}
 										disabled={disabled}
@@ -254,6 +258,7 @@ const TimePickerBase = kind({
 						case 'm':
 							return (
 								<DateComponentRangePicker
+									accessibilityHint={minuteAccessibilityHint}
 									aria-label={minuteAriaLabel}
 									className={css.minutePicker}
 									disabled={disabled}
