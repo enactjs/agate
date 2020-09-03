@@ -195,7 +195,7 @@ const MediaPlayerBase = kind({
 
 const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no-unused-vars
 	return class extends React.Component {
-		static displayName = 'MediaPlayerExtended'
+		static displayName = 'MediaPlayerExtended';
 
 		static propTypes = /** @lends agate/MediaPlayer.MediaPlayerBase.prototype */ {
 			/**
@@ -245,7 +245,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			 * @public
 			 */
 			onPlay: PropTypes.func
-		}
+		};
 
 		constructor (props) {
 			super(props);
@@ -261,17 +261,17 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			};
 		}
 
-		handle = handle.bind(this)
+		handle = handle.bind(this);
 
 		handlePlay = this.handle(
 			forwardPlay,
 			() => this.play()
-		)
+		);
 
 		handlePause = this.handle(
 			forwardPause,
 			() => this.pause()
-		)
+		);
 
 		//
 		// Handled Media events
@@ -284,7 +284,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 				// Specific state variables are included in the outgoing calback payload, not all of them
 				...this.getMediaState()
 			};
-		}
+		};
 
 		/**
 		 * Returns an object with the current state of the media
@@ -301,7 +301,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 				loop: this.state.loop,
 				paused: this.state.paused
 			};
-		}
+		};
 
 		/**
 		 * The primary means of interacting with the media element.
@@ -313,7 +313,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 		 */
 		send = (action, props) => {
 			this.media[action](props);
-		}
+		};
 
 		handleEvent = () => {
 			const el = this.media;
@@ -328,15 +328,15 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			if (updatedState.error) updatedState.loading = false;
 
 			this.setState(updatedState);
-		}
+		};
 
 		play = () => {
 			this.send('play');
-		}
+		};
 
 		pause = () => {
 			this.send('pause');
-		}
+		};
 
 		loopChange = () => {
 			this.setState(prevState  => {
@@ -344,12 +344,12 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			}, () => {
 				this.media.loop = this.state.loop;
 			});
-		}
+		};
 
 		setMediaRef = (node) => {
 			this.media = node;
 			this.setMedia();
-		}
+		};
 
 		setMedia ({setMedia} = this.props) {
 			if (setMedia) {

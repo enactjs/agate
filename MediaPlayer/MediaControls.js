@@ -180,7 +180,7 @@ const MediaControlsBase = kind({
  */
 const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-vars
 	class MediaControlsDecoratorHOC extends React.Component {
-		static displayName = 'MediaControlsDecorator'
+		static displayName = 'MediaControlsDecorator';
 
 		static propTypes = /** @lends agate/MediaPlayer.MediaControlsDecorator.prototype */ {
 
@@ -215,7 +215,7 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 			 * @public
 			 */
 			paused: PropTypes.bool
-		}
+		};
 
 		constructor (props) {
 			super(props);
@@ -228,12 +228,12 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 			} else {
 				forward('onPause', ev, this.props);
 			}
-		}
+		};
 
 		handleLoopButtonClick = (ev) => {
 			forward('onLoopButtonClick', ev, this.props);
 			forward('onLoopChange', ev, this.props);
-		}
+		};
 
 		render () {
 			const props = Object.assign({}, this.props);
