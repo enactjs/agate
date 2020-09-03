@@ -96,7 +96,7 @@ const SwatchButtonBase = kind({
 
 	render: ({colorSwatchStyle, css, ...rest}) => {
 		return (
-			<ButtonBase {...rest} css={css} minWidth={false}>
+			<ButtonBase aria-label={colorSwatchStyle.backgroundColor} {...rest} css={css} minWidth={false}>
 				<div className={css.colorSwatch} style={colorSwatchStyle} />
 			</ButtonBase>
 		);
