@@ -17,9 +17,12 @@
 
 import {handle, forward, forProp} from '@enact/core/handle';
 import kind from '@enact/core/kind';
+import {extractAriaProps} from '@enact/core/util';
+import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
+import IdProvider from '@enact/ui/internal/IdProvider';
 import Toggleable from '@enact/ui/Toggleable';
 import Transition from '@enact/ui/Transition';
 import PropTypes from 'prop-types';
@@ -37,6 +40,15 @@ import componentCss from './Dropdown.module.less';
 
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
+
+const handleTransitionHide = (containerId) => () => {
+	const containerSelector = `[data-spotlight-id='${containerId}']`;
+	const current = Spotlight.getCurrent();
+
+	if (!Spotlight.isPaused() && current && document.querySelector(`${containerSelector} .${componentCss.dropdownList}`).contains(current)) {
+		Spotlight.focus(`${containerSelector} .${componentCss.dropdown}`);
+	}
+};
 
 /**
  * A stateless Dropdown component.
@@ -167,8 +179,8 @@ const DropdownBase = kind({
 
 	computed: {
 		buttonClassName: ({open, styler}) => styler.append({open}),
-		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'} ),
-		dropdownButtonClassname: ({css, direction, styler}) => styler.join(css.dropdownButton, {upDropdownButton: direction === 'up'} ),
+		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'}),
+		dropdownButtonClassname: ({css, direction, styler}) => styler.join(css.dropdownButton, {upDropdownButton: direction === 'up'}),
 		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected, title}) => {
 			if (isSelectedValid({children, selected})) {
@@ -197,6 +209,7 @@ const DropdownBase = kind({
 	},
 
 	render: ({buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+		const ariaProps = extractAriaProps(rest);
 		const opened = !disabled && open;
 		const [DropDownButton, wrapperProps, skinVariants, groupProps] = (skin === 'silicon') ? [
 			Button,
@@ -209,15 +222,17 @@ const DropdownBase = kind({
 			{},
 			{childComponent: Item, itemProps: {size: 'small'}}
 		];
+		const onTransitionHide = handleTransitionHide(rest['data-spotlight-id']);
 
 		return (
-			<div {...rest} >
+			<div {...rest}>
 				<div {...wrapperProps}>
 					<DropDownButton
 						className={buttonClassName}
 						css={css}
 						disabled={hasChildren ? disabled : true}
 						onClick={opened ? onClose : onOpen}
+						{...ariaProps}
 					>
 						<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
 						{title}
@@ -226,6 +241,7 @@ const DropdownBase = kind({
 						className={transitionContainerClassname}
 						visible={opened}
 						direction={transitionDirection}
+						onHide={onTransitionHide}
 					>
 						<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
 							<Scroller skinVariants={skinVariants} className={css.scroller}>
@@ -256,6 +272,14 @@ const DropdownBase = kind({
  * @public
  */
 const DropdownDecorator = compose(
+	SpotlightContainerDecorator({
+		enterTo: 'default-element',
+		preserveId: true
+	}),
+	IdProvider({
+		generateProp: null,
+		prefix: 'd_'
+	}),
 	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose'}),
 	Changeable({change: 'onSelect', prop: 'selected'}),
 	Skinnable({prop: 'skin'})
