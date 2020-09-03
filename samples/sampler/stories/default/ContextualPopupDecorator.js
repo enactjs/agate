@@ -12,6 +12,9 @@ import {action} from '@enact/storybook-utils/addons/actions';
 const ContextualButton = ContextualPopupDecorator(Button);
 ContextualButton.displayName = 'ContextualButton';
 
+const ContextualButtonWithoutArrow = ContextualPopupDecorator({noArrow: true}, Button);
+ContextualButtonWithoutArrow.displayName = 'ContextualButtonWithoutArrow';
+
 const Config = mergeComponentMetadata('ContextualPopupDecorator', Button, ContextualButton);
 
 // NOTE: Something about the HOC is inhibiting accessing its defaultProps, so we're adding them here
@@ -48,6 +51,33 @@ storiesOf('Agate', module)
 		{
 			info: {
 				text: 'Basic usage of ContextualPopupDecorator'
+			}
+		}
+	);
+
+storiesOf('Agate QA.ContextualPopupDecorator', module)
+	.add(
+		'without an arrow',
+		() => (
+			<div style={{textAlign: 'center', marginTop: ri.scaleToRem(99)}}>
+				<ContextualButtonWithoutArrow
+					direction={select('direction', ['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config)}
+					noAutoDismiss={boolean('noAutoDismiss', Config)}
+					offset={select('offset', ['none', 'overlap', 'small'], Config, 'small')}
+					onClose={action('onClose')}
+					open={boolean('open', Config)}
+					popupComponent={renderPopup}
+					showCloseButton={boolean('showCloseButton', Config)}
+					spotlightRestrict={select('spotlightRestrict', ['none', 'self-first', 'self-only'], Config)}
+				>
+					{text('button string', Config, 'Hello Contextual Button')}
+				</ContextualButtonWithoutArrow>
+				<BodyText centered>Use KNOBS to interact with the ContextualPopup.</BodyText>
+			</div>
+		),
+		{
+			info: {
+				text: 'ContextualPopupDecorator without an arrow by setting {noArrow: true} in config'
 			}
 		}
 	);

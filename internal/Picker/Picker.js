@@ -74,6 +74,17 @@ const PickerBase = kind({
 		min: PropTypes.number.isRequired,
 
 		/**
+		 * Accessibility hint
+		 *
+		 * For example, `hour`, `year`, and `meridiem`
+		 *
+		 * @type {String}
+		 * @default ''
+		 * @public
+		 */
+		accessibilityHint: PropTypes.string,
+
+		/**
 		 * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
 		 * to the current value. This should only be used when the parent controls the value of
 		 * the picker directly through the props.
@@ -99,6 +110,14 @@ const PickerBase = kind({
 		 * @public
 		 */
 		className: PropTypes.string,
+
+		/**
+		 * Customize component style
+		 *
+		 * @type {Object}
+		 * @private
+		 */
+		css: PropTypes.object,
 
 		/**
 		 * Sets the hint string read when focusing the decrement button.
@@ -178,6 +197,7 @@ const PickerBase = kind({
 	},
 
 	defaultProps: {
+		accessibilityHint: '',
 		orientation: 'vertical',
 		step: 1,
 		value: 0
@@ -205,28 +225,29 @@ const PickerBase = kind({
 	computed: {
 		activeClassName: ({styler}) => styler.join('active', 'item'),
 		className: ({orientation, styler}) => styler.append(orientation),
-		currentValueText: ({'aria-valuetext': valueText, children: values, value}) => {
-			if (Array.isArray(values)) {
-				return `${typeof valueText !== 'undefined' ? valueText : values[value]}`;
-			} else {
-				return `${typeof valueText !== 'undefined' ? valueText : value}`;
-			}
-		},
-		decrementAriaLabel: ({'aria-valuetext': valueText, children: values, decrementAriaLabel = $L('previous item'), value}) => {
-			if (Array.isArray(values)) {
-				return `${valueText != null ? valueText : values[value]} ${decrementAriaLabel}`;
-			} else {
-				return `${valueText != null ? valueText : value} ${decrementAriaLabel}`;
+		currentValueText: ({accessibilityHint, 'aria-valuetext': ariaValueText, children, value}) => {
+			if (ariaValueText != null) {
+				return ariaValueText;
 			}
 
-		},
-		incrementAriaLabel: ({'aria-valuetext': valueText, children: values, incrementAriaLabel = $L('next item'), value}) => {
-			if (Array.isArray(values)) {
-				return `${valueText != null ? valueText : values[value]} ${incrementAriaLabel}`;
-			} else {
-				return `${valueText != null ? valueText : value} ${incrementAriaLabel}`;
+			let valueText = value;
+
+			if (children && Array.isArray(children)) {
+				if (children[value] && children[value].props) {
+					valueText = children[value].props.children;
+				} else {
+					valueText = children[value];
+				}
 			}
+
+			if (accessibilityHint) {
+				valueText = `${valueText} ${accessibilityHint}`;
+			}
+
+			return valueText;
 		},
+		decrementAriaLabel: ({decrementAriaLabel = $L('previous item')}) => decrementAriaLabel,
+		incrementAriaLabel: ({incrementAriaLabel = $L('next item')}) => incrementAriaLabel,
 		valueId: ({id}) => `${id}_value`
 	},
 
@@ -235,11 +256,11 @@ const PickerBase = kind({
 			activeClassName,
 			children: values,
 			currentValueText,
-			decrementAriaLabel,
+			decrementAriaLabel: decAriaLabel,
 			handleDecrement,
 			handleFlick,
 			handleIncrement,
-			incrementAriaLabel,
+			incrementAriaLabel: incAriaLabel,
 			min,
 			max,
 			step,
@@ -252,6 +273,11 @@ const PickerBase = kind({
 		const incrementValue = clamp(min, max, Array.isArray(values) ? values[value + step] : value + step);
 		const isFirst = value <= min;
 		const isLast = value >= max;
+		const decrementAriaLabel = `${currentValueText} ${decAriaLabel}`;
+		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
+
+		delete rest.accessibilityHint;
+		delete rest['aria-valuetext'];
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
