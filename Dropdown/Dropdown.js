@@ -226,7 +226,7 @@ const DropdownBase = kind({
 			{},
 			{},
 			{childComponent: Item, itemProps: {size: 'small'}},
-			[<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>]
+			[<Icon slot="slotAfter" key="icon" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>]
 
 		];
 		const onTransitionHide = handleTransitionHide(rest['data-spotlight-id']);
