@@ -1,4 +1,4 @@
-import classnames from 'classnames'
+import classnames from 'classnames';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -8,7 +8,7 @@ import {DateComponentRangePicker} from '../internal/DateComponentPicker';
 import DateTime from '../internal/DateTime';
 
 import css from '../internal/DateTime/DateTime.module.less';
-import dateTimeCss from "../internal/DateTime/DateTime.module.less";
+import dateTimeCss from '../internal/DateTime/DateTime.module.less';
 
 /**
  * A date selection component.

@@ -1,4 +1,4 @@
-import classnames from 'classnames'
+import classnames from 'classnames';
 import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
