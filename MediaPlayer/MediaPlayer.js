@@ -119,6 +119,14 @@ const MediaPlayerBase = kind({
 		onLoopChange: PropTypes.func,
 
 		/**
+		 * Called when jumping to next media
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onNext: PropTypes.func,
+
+		/**
 		 * Called when media is paused
 		 *
 		 * @type {Function}
@@ -133,6 +141,22 @@ const MediaPlayerBase = kind({
 		 * @public
 		 */
 		onPlay: PropTypes.func,
+
+		/**
+		 * Called when jumping to previous media
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onPrevious: PropTypes.func,
+
+		/**
+		 * Called when jumping to a random media
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onShuffle: PropTypes.func,
 
 		/**
 		 * Called when media is updating.
@@ -176,7 +200,7 @@ const MediaPlayerBase = kind({
 		className: 'mediaPlayer'
 	},
 
-	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onChange, onLoopChange, onPause, onPlay, onUpdate, paused, proportionPlayed, source, total, ...rest}) => {
+	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onChange, onEnded, onLoopChange, onNext, onPause, onPlay, onPrevious, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeatAll, shuffle, shuffledPlaylist, source, sourceIndex, total, ...rest}) => {
 		const durFmt = getDurFmt(locale);
 
 		return (
@@ -185,9 +209,10 @@ const MediaPlayerBase = kind({
 					controls
 					loop={loop}
 					mediaComponent={mediaComponent}
+					onEnded={onEnded}
 					onUpdate={onUpdate}
 					ref={mediaRef}
-					source={source}
+					source={source[sourceIndex]}
 				/>
 				<MediaSlider
 					onChange={onChange}
@@ -201,9 +226,14 @@ const MediaPlayerBase = kind({
 				<MediaControls
 					loop={loop}
 					onLoopChange={onLoopChange}
+					onNext={onNext}
 					onPause={onPause}
 					onPlay={onPlay}
+					onPrevious={onPrevious}
+					onShuffle={onShuffle}
 					paused={paused}
+					repeatAll={repeatAll}
+					shuffle={shuffle}
 				/>
 			</div>
 		);
@@ -248,6 +278,14 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			onLoopChange: PropTypes.func,
 
 			/**
+			 * Called when jumping to next media
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onNext: PropTypes.func,
+
+			/**
 			 * Called when media is paused
 			 *
 			 * @type {Function}
@@ -261,7 +299,23 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			 * @type {Function}
 			 * @public
 			 */
-			onPlay: PropTypes.func
+			onPlay: PropTypes.func,
+
+			/**
+			 * Called when jumping to previous media
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onPrevious: PropTypes.func,
+
+			/**
+			 * Called when jumping to a random media
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onShuffle: PropTypes.func
 		}
 
 		constructor (props) {
@@ -275,7 +329,12 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 				duration: 0,
 				loop: false,
 				paused: true,
-				proportionPlayed: 0
+				playlist: this.props.children,
+				proportionPlayed: 0,
+				repeatAll: false,
+				shuffle: false,
+				shuffledPlaylist: [],
+				sourceIndex: 0
 			};
 		}
 
@@ -364,7 +423,82 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			}, () => {
 				this.media.loop = this.state.loop;
 			});
+
+			if (this.state.loop) {
+				this.setState({repeatAll: true})
+			} else if (this.state.repeatAll) {
+				this.setState({
+					loop: false,
+					repeatAll: false
+				})
+			}
 		}
+
+		handleOnEnded = () => {
+			this.handleNext();
+		}
+
+		handleNext = () => {
+			if (this.state.shuffle) {
+				this.shufflePlaylist();
+			}
+			if (this.state.sourceIndex < this.props.children.length - 1) {
+				this.setState(prevState  => {
+					return ({sourceIndex: prevState.sourceIndex + 1});
+				}, () => {
+					this.play();
+				})
+			} else if (this.state.repeatAll) {
+				this.setState({
+					sourceIndex: 0
+				}, () => {
+					this.play();
+				})
+			}
+		}
+
+		handlePrevious = () => {
+			if (this.state.sourceIndex > 0) {
+				this.setState(prevState => {
+					return ({sourceIndex: prevState.sourceIndex - 1});
+				}, () => {
+					this.play();
+				})
+			} else {
+				this.setState({
+					sourceIndex: this.props.children.length - 1
+				}, () => {
+					this.play();
+				})
+			}
+		}
+
+		shufflePlaylist = () => {
+			let playlist = this.props.children;
+			let counter = this.props.children.length;
+
+			// While there are elements in the array
+			while (counter > 0) {
+				// Pick a random index
+				let index = Math.floor(Math.random() * counter);
+
+				// Decrease counter by 1
+				counter--;
+
+				// And swap the last element with it
+				let temp = playlist[counter];
+				playlist[counter] = playlist[index];
+				playlist[index] = temp;
+			}
+
+			console.log(playlist);
+		}
+
+		handleShuffle = () => {
+			this.setState(prevState  => {
+				return ({shuffle: !prevState.shuffle});
+			})
+		};
 
 		seek = (timeIndex) => {
 			this.media.currentTime = timeIndex;
@@ -397,14 +531,23 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 					{...rest}
 					currentTime={this.state.currentTime}
 					loop={this.state.loop}
+					mediaRef={this.setMediaRef}
 					onChange={this.onSliderChange}
+					onEnded={this.handleOnEnded}
 					onLoopChange={this.loopChange}
+					onNext={this.handleNext}
 					onPause={this.handlePause}
 					onPlay={this.handlePlay}
+					onPrevious={this.handlePrevious}
+					onShuffle={this.handleShuffle}
 					onUpdate={this.handleEvent}
 					paused={this.state.paused}
 					proportionPlayed={this.state.proportionPlayed}
-					mediaRef={this.setMediaRef}
+					playlist={this.state.playlist}
+					repeatAll={this.state.repeatAll}
+					shuffle={this.state.shuffle}
+					shuffledPlaylist={this.state.shuffledPlaylist}
+					sourceIndex={this.state.sourceIndex}
 					total={this.state.duration}
 				/>
 			);

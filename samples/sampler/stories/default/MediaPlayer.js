@@ -3,14 +3,25 @@ import {storiesOf} from '@storybook/react';
 
 import MediaPlayer from '@enact/agate/MediaPlayer';
 
+const audioFiles = [
+	"https://www.w3schools.com/tags/horse.ogg",
+	"https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3",
+	"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
+	"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3"
+];
+
 storiesOf('Agate', module)
 	.add(
 		'AudioPlayer',
 		() => {
 			return (
 				<MediaPlayer>
-					{/* <source src="https://www.w3schools.com/tags/horse.ogg" type="audio/mp3" />*/}
-					<source src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3" type="audio/mp3" />
+					{
+						audioFiles.map((audioFile, index) => (
+								<source key={index} src={audioFile} type="audio/mp3" />
+							)
+						)
+					}
 				</MediaPlayer>
 			);
 		},

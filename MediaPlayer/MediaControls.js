@@ -59,12 +59,36 @@ const MediaControlsBase = kind({
 		onLoopButtonClick: PropTypes.func,
 
 		/**
+		 * Called when the user clicks the Next button.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onNextButtonClick: PropTypes.func,
+
+		/**
 		 * Called when the user clicks the Play button.
 		 *
 		 * @type {Function}
 		 * @public
 		 */
 		onPlayButtonClick: PropTypes.func,
+
+		/**
+		 * Called when the user clicks the Previous button.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onPreviousButtonClick: PropTypes.func,
+
+		/**
+		 * Called when the user clicks the Shuffle button.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onShuffleButtonClick: PropTypes.func,
 
 		/**
 		 * `true` when the media is paused.
@@ -146,22 +170,22 @@ const MediaControlsBase = kind({
 		className: 'controlsFrame'
 	},
 
-	render: ({loop, menuIcon, nextTrackIcon, onLoopButtonClick, onPlayButtonClick, pauseIcon, paused, playIcon, previousTrackIcon, repeatIcon, shuffleIcon, ...rest}) => {
+	render: ({loop, menuIcon, nextTrackIcon, onLoopButtonClick, onNextButtonClick, onPlayButtonClick, onPreviousButtonClick, onShuffleButtonClick, pauseIcon, paused, playIcon, previousTrackIcon, repeatAll, repeatIcon, shuffle, shuffleIcon, ...rest}) => {
 		return (
 			<div className={css.mediaControls} {...rest}>
 				<Button
 					aria-label={$L('Repeat')} backgroundOpacity="transparent"
-					className={loop ? css.loop : ''} css={css} icon={repeatIcon} onClick={onLoopButtonClick} size="large"
+					className={repeatAll ? css.activeControl : ''} badge={loop ? '1' : ''} css={css} icon={repeatIcon} onClick={onLoopButtonClick} size="large"
 				/>
-				<Button aria-label={$L('Shuffle')} backgroundOpacity="transparent" css={css} icon={shuffleIcon} size="large" />
-				<Button aria-label={$L('Previous')} backgroundOpacity="transparent" css={css} icon={previousTrackIcon} size="large" />
+				<Button aria-label={$L('Shuffle')} backgroundOpacity="transparent" className={shuffle ? css.activeControl : ''} css={css} icon={shuffleIcon} onClick={onShuffleButtonClick} size="large" />
+				<Button aria-label={$L('Previous')} backgroundOpacity="transparent" css={css} icon={previousTrackIcon} onClick={onPreviousButtonClick} size="large" />
 				<Button
 					aria-label={paused ? $L('Play') : $L('Pause')} backgroundOpacity="transparent"
 					className={css.playPauseButton} css={css} onClick={onPlayButtonClick} size="large"
 				>
 					<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
 				</Button>
-				<Button aria-label={$L('Next')} backgroundOpacity="transparent" css={css} icon={nextTrackIcon} size="large" />
+				<Button aria-label={$L('Next')} backgroundOpacity="transparent" css={css} icon={nextTrackIcon} onClick={onNextButtonClick} size="large" />
 				<Button aria-label={$L('Menu')} backgroundOpacity="transparent" css={css} icon={menuIcon} size="large" />
 			</div>
 		);
@@ -193,6 +217,14 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 			onLoopChange: PropTypes.func,
 
 			/**
+			 * Called when jumping to next media.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onNext: PropTypes.func,
+
+			/**
 			 * Called when media gets paused.
 			 *
 			 * @type {Function}
@@ -209,6 +241,22 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 			onPlay: PropTypes.func,
 
 			/**
+			 * Called when jumping to previous media.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onPrevious: PropTypes.func,
+
+			/**
+			 * Called when jumping to a random media.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onShuffle: PropTypes.func,
+
+			/**
 			 * The media pause state.
 			 *
 			 * @type {Boolean}
@@ -221,6 +269,16 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 			super(props);
 		}
 
+		handleLoopButtonClick = (ev) => {
+			forward('onLoopButtonClick', ev, this.props);
+			forward('onLoopChange', ev, this.props);
+		}
+
+		handleNextButtonClick = (ev) => {
+			forward('onNextButtonClick', ev, this.props);
+			forward('onNext', ev, this.props);
+		}
+
 		handlePlayButtonClick = (ev) => {
 			forward('onPlayButtonClick', ev, this.props);
 			if (this.props.paused) {
@@ -230,22 +288,33 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 			}
 		}
 
-		handleLoopButtonClick = (ev) => {
-			forward('onLoopButtonClick', ev, this.props);
-			forward('onLoopChange', ev, this.props);
+		handlePreviousButtonClick = (ev) => {
+			forward('onPreviousButtonClick', ev, this.props);
+			forward('onPrevious', ev, this.props);
+		}
+
+		handleShuffleButtonClick = (ev) => {
+			forward('onShuffleButtonClick', ev, this.props);
+			forward('onShuffle', ev, this.props);
 		}
 
 		render () {
 			const props = Object.assign({}, this.props);
 			delete props.onLoopChange;
+			delete props.onNext;
 			delete props.onPause;
 			delete props.onPlay;
+			delete props.onPrevious;
+			delete props.onShuffle;
 
 			return (
 				<Wrapped
 					{...props}
 					onLoopButtonClick={this.handleLoopButtonClick}
+					onNextButtonClick={this.handleNextButtonClick}
 					onPlayButtonClick={this.handlePlayButtonClick}
+					onPreviousButtonClick={this.handlePreviousButtonClick}
+					onShuffleButtonClick={this.handleShuffleButtonClick}
 				/>
 			);
 		}
