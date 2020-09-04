@@ -1,6 +1,6 @@
-import EnactPropTypes from '@enact/core/internal/prop-types';
 import {adaptEvent, call, forwardWithPrevent, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import {memoize} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
@@ -162,13 +162,14 @@ const MediaPlayerBase = kind({
 		className: 'mediaPlayer'
 	},
 
-	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onLoopChange, onPause, onPlay, onUpdate, paused, source, total, ...rest}) => {
-		const durFmt = getDurFmt(locale);
+	computed: {
+		durFmt: ({locale}) => getDurFmt(locale)
+	},
 
+	render: ({currentTime, durFmt, locale, loop, mediaComponent, mediaRef, onLoopChange, onPause, onPlay, onUpdate, paused, source, total, ...rest}) => {
 		return (
 			<div {...rest}>
 				<Media
-					controls
 					loop={loop}
 					mediaComponent={mediaComponent}
 					onUpdate={onUpdate}
@@ -196,16 +197,16 @@ const MediaPlayerBase = kind({
 /**
  * Media player behaviors to apply to [MediaPlayerBase]{@link agate/MediaPlayer.MediaPlayerBase}.
  *
- * @class MediaPlayerExtended
+ * @class MediaPlayerBehaviorDecorator
  * @memberof agate/MediaPlayer
  * @hoc
  * @private
  */
-const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no-unused-vars
+const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disable-line no-unused-vars
 	return class extends React.Component {
-		static displayName = 'MediaPlayerExtended';
+		static displayName = 'MediaPlayerBehaviorDecorator';
 
-		static propTypes = /** @lends agate/MediaPlayer.MediaPlayerExtended.prototype */ {
+		static propTypes = /** @lends agate/MediaPlayer.MediaPlayerBehaviorDecorator.prototype */ {
 			/**
 			 * The current locale as a
 			 * {@link https://tools.ietf.org/html/rfc5646|BCP 47 language tag}.
@@ -415,7 +416,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
  * @public
  */
 const MediaPlayerDecorator = compose(
-	MediaPlayerExtended,
+	MediaPlayerBehaviorDecorator,
 	Pure,
 	Slottable({slots: ['source']}),
 	Skinnable,

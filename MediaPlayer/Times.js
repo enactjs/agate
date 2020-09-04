@@ -59,10 +59,10 @@ const Times = kind({
 	},
 
 	computed: {
-		currentPeriod:   ({current}) => secondsToPeriod(current),
+		currentPeriod: ({current}) => secondsToPeriod(current),
 		currentReadable: ({current, formatter}) => secondsToTime(current, formatter),
-		remainingPeriod:     ({current, total}) => secondsToPeriod(total - current),
-		remainingReadable:   ({current, total, formatter}) => secondsToTime(total - current, formatter)
+		remainingPeriod: ({current, total}) => secondsToPeriod(total - current),
+		remainingReadable: ({current, total, formatter}) => secondsToTime(total - current, formatter)
 	},
 
 	render: ({currentPeriod, currentReadable, remainingPeriod, remainingReadable, ...rest}) => {

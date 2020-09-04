@@ -4,9 +4,9 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import $L from '../internal/$L';
 import Button from '../Button';
 import Icon from '../Icon';
-import $L from '../internal/$L';
 
 import css from './MediaControls.module.less';
 
@@ -150,19 +150,42 @@ const MediaControlsBase = kind({
 		return (
 			<div {...rest}>
 				<Button
-					aria-label={$L('Repeat')} backgroundOpacity="transparent"
-					className={loop ? css.loop : ''} css={css} icon={repeatIcon} onClick={onLoopButtonClick} size="large"
+					aria-label={$L('Repeat')}
+					backgroundOpacity="transparent"
+					className={loop ? css.loop : ''}
+					css={css}
+					icon={repeatIcon}
+					onClick={onLoopButtonClick} size="large"
 				/>
-				<Button aria-label={$L('Shuffle')} backgroundOpacity="transparent" css={css} icon={shuffleIcon} size="large" />
+				<Button
+					aria-label={$L('Shuffle')}
+					backgroundOpacity="transparent"
+					css={css}
+					icon={shuffleIcon}
+					size="large" />
 				<Button aria-label={$L('Previous')} backgroundOpacity="transparent" css={css} icon={previousTrackIcon} size="large" />
 				<Button
-					aria-label={paused ? $L('Play') : $L('Pause')} backgroundOpacity="transparent"
-					className={css.playPauseButton} css={css} onClick={onPlayButtonClick} size="large"
+					aria-label={paused ? $L('Play') : $L('Pause')}
+					backgroundOpacity="transparent"
+					className={css.playPauseButton}
+					css={css}
+					onClick={onPlayButtonClick}
+					size="large"
 				>
 					<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
 				</Button>
-				<Button aria-label={$L('Next')} backgroundOpacity="transparent" css={css} icon={nextTrackIcon} size="large" />
-				<Button aria-label={$L('Menu')} backgroundOpacity="transparent" css={css} icon={menuIcon} size="large" />
+				<Button
+					aria-label={$L('Next')}
+					backgroundOpacity="transparent"
+					css={css}
+					icon={nextTrackIcon}
+					size="large" />
+				<Button
+					aria-label={$L('Menu')}
+					backgroundOpacity="transparent"
+					css={css}
+					icon={menuIcon}
+					size="large" />
 			</div>
 		);
 	}
@@ -174,7 +197,6 @@ const MediaControlsBase = kind({
  *
  * @class MediaControlsDecorator
  * @memberof agate/MediaPlayer
- * @mixes ui/Slottable.Slottable
  * @hoc
  * @private
  */
