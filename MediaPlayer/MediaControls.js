@@ -133,6 +133,14 @@ const MediaControlsBase = kind({
 		previousTrackIcon: PropTypes.string,
 
 		/**
+		 * `true` when the media playlist loops.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		repeatAll: PropTypes.bool,
+
+		/**
 		 * A string which is sent to the `repeat` icon of the player controls. This can be
 		 * anything that is accepted by {@link agate/Icon.Icon}.
 		 *
@@ -141,6 +149,14 @@ const MediaControlsBase = kind({
 		 * @public
 		 */
 		repeatIcon: PropTypes.string,
+
+		/**
+		 * `true` when the media playlist is shuffled.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		shuffle: PropTypes.bool,
 
 		/**
 		 * A string which is sent to the `shuffle` icon of the player controls. This can be

@@ -111,6 +111,14 @@ const MediaPlayerBase = kind({
 		onChange: PropTypes.func,
 
 		/**
+		 * Called when the media file reaches the end of its duration.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onEnded: PropTypes.func,
+
+		/**
 		 * Called when media is looped
 		 *
 		 * @type {Function}
@@ -175,12 +183,44 @@ const MediaPlayerBase = kind({
 		paused: PropTypes.bool,
 
 		/**
+		 * The current list of media.
+		 *
+		 * @type {Array}
+		 * @public
+		 */
+		playlist: PropTypes.arrayOf(PropTypes.node),
+
+		/**
 		 * Proportion of media file played.
 		 *
 		 * @type {Number}
 		 * @public
 		 */
 		proportionPlayed: PropTypes.number,
+
+		/**
+		 * `true` when the media playlist loops.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		repeatAll: PropTypes.bool,
+
+		/**
+		 * `true` when the media playlist is shuffled.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		shuffle: PropTypes.bool,
+
+		/**
+		 * The index of the current played media.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		sourceIndex: PropTypes.number,
 
 		/**
 		 * The total time (duration) in seconds of the loaded media source.
@@ -200,7 +240,7 @@ const MediaPlayerBase = kind({
 		className: 'mediaPlayer'
 	},
 
-	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onChange, onEnded, onLoopChange, onNext, onPause, onPlay, onPrevious, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeatAll, shuffle, source, sourceIndex, total, ...rest}) => {
+	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onChange, onEnded, onLoopChange, onNext, onPause, onPlay, onPrevious, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeatAll, shuffle, sourceIndex, total, ...rest}) => {
 		const durFmt = getDurFmt(locale);
 
 		return (
@@ -417,6 +457,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 		}
 
 		loopChange = () => {
+			// Handling the 3 states of loop: repeat one, repeat all and repeat none.
 			this.setState(prevState  => {
 				return ({loop: !prevState.loop});
 			}, () => {
@@ -424,16 +465,17 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			});
 
 			if (this.state.loop) {
-				this.setState({repeatAll: true})
+				this.setState({repeatAll: true});
 			} else if (this.state.repeatAll) {
 				this.setState({
 					loop: false,
 					repeatAll: false
-				})
+				});
 			}
 		}
 
 		handleOnEnded = () => {
+			// Play next media when current media ends.
 			this.handleNext();
 		}
 
@@ -443,6 +485,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			if (currentIndex < this.state.playlist.length - 1) {
 				++currentIndex;
 			} else if (this.state.repeatAll) {
+				// When repeatAll and shuffle are true, the playback of the list restarts and the media list is reshuffled.
 				currentIndex = 0;
 
 				if (this.state.shuffle) {
@@ -450,11 +493,11 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 				}
 			}
 
-			this.setState({
-				sourceIndex: currentIndex
+			this.setState(() => {
+				return ({sourceIndex: currentIndex});
 			}, () => {
 				this.play();
-			})
+			});
 		}
 
 		handlePrevious = () => {
@@ -466,11 +509,11 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 				currentIndex = this.state.playlist.length - 1;
 			}
 
-			this.setState({
-				sourceIndex: currentIndex
+			this.setState(() => {
+				return ({sourceIndex: currentIndex});
 			}, () => {
 				this.play();
-			})
+			});
 		}
 
 		shufflePlaylist = (currentMedia) => {
@@ -495,8 +538,9 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 					currentMediaIndex = remainingSize;
 				}
 			}
-			
-			if (currentMediaIndex !== undefined) {
+
+			// Keep the current media active and set it as the first element in the shuffled array
+			if (currentMediaIndex) {
 				let temp = playlist[0];
 				playlist[0] = playlist[currentMediaIndex];
 				playlist[currentMediaIndex] = temp;
@@ -505,7 +549,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			this.setState({
 				playlist,
 				sourceIndex: 0
-			})
+			});
 		}
 
 		handleShuffle = () => {
@@ -517,12 +561,13 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 				if (this.state.shuffle) {
 					this.shufflePlaylist(currentMedia);
 				} else {
+					// When resetting shuffle to false, the initial playlist is set with the last played media kept active.
 					this.setState({
 						playlist: this.props.children,
 						sourceIndex: currentMedia.key
-					})
+					});
 				}
-			})
+			});
 		};
 
 		seek = (timeIndex) => {
