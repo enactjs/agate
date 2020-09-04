@@ -54,6 +54,7 @@ const DateTimePickerBase = kind({
 		);
 	}
 });
+
 /**
  * An Agate themed date/time Picker component.
  *
