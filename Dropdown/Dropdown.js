@@ -198,6 +198,7 @@ const DropdownBase = kind({
 					isOverTop: client.top - container.height - KEEPOUT < 0,
 					isOverBottom: client.bottom + container.height + KEEPOUT > window.innerHeight
 				};
+
 				return overflow;
 			};
 
@@ -205,9 +206,10 @@ const DropdownBase = kind({
 				let adjustedDirection = direction;
 				if (overflow.isOverTop && !overflow.isOverBottom && direction === 'up') {
 					adjustedDirection = 'down';
-				} else if (overflow.isOverBottom && !overflow.isOverTop) {
+				} else if (overflow.isOverBottom && !overflow.isOverTop && direction === 'down') {
 					adjustedDirection = 'up';
 				}
+
 				return adjustedDirection;
 			};
 
@@ -224,7 +226,7 @@ const DropdownBase = kind({
 			return direction;
 		},
 
-		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
+		dropdownListClassName: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected, title}) => {
 			if (isSelectedValid({children, selected})) {
 				const child = children[selected];
@@ -238,14 +240,14 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, ...rest}) => {
+	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, ...rest}) => {
 		const ariaProps = extractAriaProps(rest);
-		const dropdownButtonClassname = classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'up'});
+		const dropdownButtonClassName = classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'up'});
 		const opened = !disabled && open;
-		const transitionContainerClassname = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
+		const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
 		const [DropDownButton, wrapperProps, skinVariants, groupProps] = (skin === 'silicon') ? [
 			Button,
-			{className: dropdownButtonClassname},
+			{className: dropdownButtonClassName},
 			{'night': false},
 			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'}
 		] : [
@@ -270,12 +272,12 @@ const DropdownBase = kind({
 						{title}
 					</DropDownButton>
 					<Transition
-						className={transitionContainerClassname}
+						className={transitionContainerClassName}
 						visible={opened}
 						direction={oppositeDirection[adjustedDirection]}
 						onHide={onTransitionHide}
 					>
-						<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
+						<ContainerDiv className={dropdownListClassName} spotlightDisabled={!open} spotlightRestrict="self-only">
 							<Scroller skinVariants={skinVariants} className={css.scroller}>
 								<Group
 									className={css.group}
