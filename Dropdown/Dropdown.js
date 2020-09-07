@@ -26,6 +26,7 @@ import IdProvider from '@enact/ui/internal/IdProvider';
 import ri from '@enact/ui/resolution';
 import Toggleable from '@enact/ui/Toggleable';
 import Transition from '@enact/ui/Transition';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -79,6 +80,15 @@ const DropdownBase = kind({
 		 * @private
 		 */
 		css: PropTypes.object,
+
+		/**
+		 * This is passed onto the wrapped component to allow
+		 * it to customize the spotlight container for its use case.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		'data-spotlight-id': PropTypes.string,
 
 		/**
 		 * The direction where the dropdown list appears.
@@ -228,11 +238,11 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, styler, title, ...rest}) => {
+	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, ...rest}) => {
 		const ariaProps = extractAriaProps(rest);
-		const dropdownButtonClassname = styler.join(css.dropdownButton, {upDropdownButton: adjustedDirection === 'up'});
+		const dropdownButtonClassname = classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'up'});
 		const opened = !disabled && open;
-		const transitionContainerClassname = styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: adjustedDirection === 'up'});
+		const transitionContainerClassname = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
 		const [DropDownButton, wrapperProps, skinVariants, groupProps] = (skin === 'silicon') ? [
 			Button,
 			{className: dropdownButtonClassname},

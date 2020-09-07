@@ -84,7 +84,7 @@ storiesOf('Agate QA.Dropdown', module)
 			text: 'The basic Dropdown'
 		}
 	).add(
-		'groups in Scroller',
+		'group in Scroller',
 		() => {
 			const itemCount = number('items', Config, {range: true, min: 0, max: 50}, 5);
 			const items = (new Array(itemCount)).fill().map((i, index) => `Option ${index + 1}`);
