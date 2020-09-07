@@ -2,31 +2,32 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import css from './IntensityControl.module.less';
+import Icon from '../Icon';
+
+import css from './FanSpeedControl.module.less';
 
 /**
- * A SVG for {@link agate/IntensityControl}.
+ * A SVG for {@link agate/FanSpeedControl}.
  *
- * @class IntensityControl
- * @memberof agate/IntensityControl
+ * @class FanSpeedControl
+ * @memberof agate/FanSpeedControl
  * @ui
  * @private
  */
-const IntensityControl = kind({
-	name: 'IntensityControl',
+const FanSpeedControl = kind({
+	name: 'FanSpeedControl',
 
-	propTypes: /** @lends agate/IntensityControl.prototype */ {
+	propTypes: /** @lends agate/FanSpeedControl.prototype */ {
 		/**
-		 * Opacity of IntensityControl.
+		 * Opacity of FanSpeedControl.
 		 *
 		 * @type {Number}
 		 * @public
 		 */
 		opacity: PropTypes.number,
 		value: PropTypes.number,
-
-		highlightedOpacity: PropTypes.number,
-		backgroundOpacity: PropTypes.number
+		backgroundOpacity: PropTypes.number,
+		highlightedOpacity: PropTypes.number
 	},
 
 	defaultProps: {
@@ -36,12 +37,12 @@ const IntensityControl = kind({
 
 	styles: {
 		css,
-		className: 'intensityControl'
+		className: 'fanSpeedControl'
 	},
 
-	render: ({value, highlightedOpacity, backgroundOpacity, ...props}) => {
+	render: ({backgroundOpacity, highlightedOpacity, value, ...rest}) => {
 		return (
-			<div style={{marginTop: "40px"}}>
+			<div {...rest}>
 				<svg width="300" height="300" viewBox="0 0 300 300">
 					<g fill="none">
 						<path id="area" className="st0" d="M0,0h300v300H0V0z"/>
@@ -67,9 +68,13 @@ const IntensityControl = kind({
 							  d="M256.1,256.1l-4.3-4.3c15.7-15.5,27.5-34.5,34.6-55.4l5.7,1.9c-1.2,3.4-2.5,6.8-3.9,10.1 c-3.8,8.9-8.4,17.5-13.8,25.5C269,241.8,262.9,249.3,256.1,256.1L256.1,256.1z"/>
 					</g>
 				</svg>
+				<div className={css.valueDisplay}>
+					<Icon className={css.fanIcon} css={css}>fan</Icon>
+					<span className={css.fanValue}>{value}</span>
+				</div>
 			</div>
 		)
 	}
 });
 
-export default IntensityControl;
+export default FanSpeedControl;

@@ -1,0 +1,38 @@
+// FanSpeedControl.module.less
+//
+
+@import '../styles/mixins.less';
+@import '../styles/skin.less';
+@import '../styles/variables.less';
+
+.fanSpeedControl {
+	display: inline-flex;
+	position: relative;
+
+	.valueDisplay {
+		align-items: center;
+		display: flex;
+		height: 120px;
+		justify-content: center;
+		left: 50%;
+		position: absolute;
+		top: 50%;
+		transform: translate(-50%,-50%);
+		width: 210px;
+
+		.fanValue {
+			font-size: 72px;
+			font-weight: 300;
+		}
+
+		.fanIcon {
+			.applySkins({
+				font-size: 120px;
+				height: 60px;
+				line-height: 60px;
+				margin: 0;
+				width: 60px;
+			})
+		}
+	}
+}
