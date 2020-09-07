@@ -12,6 +12,7 @@
 import React from 'react';
 import kind from '@enact/core/kind';
 import {Cell, Row} from '@enact/ui/Layout';
+import PropTypes from 'prop-types';
 
 import DatePicker from '../DatePicker';
 import Skinnable from '../Skinnable';
@@ -31,23 +32,33 @@ import css from './DateTimePicker.module.less';
 const DateTimePickerBase = kind({
 	name: 'DateTimePickerBase',
 
+	propTypes: /** @lends agate/DateTimePicker.DateTimePicker.prototype */ {
+		/**
+		 * Disables the `ImageItem`.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool
+	},
+
 	styles: {
 		css,
 		className: 'dateTimePicker'
 	},
 
-	render ({...rest}) {
+	render ({disabled, ...rest}) {
 
 		return (
 			<Row {...rest} className={css.dateTimePicker} align="center center">
 				<Cell>
 					<Row align="center center">
-						<TimePicker />
+						<TimePicker disabled={disabled} />
 					</Row>
 				</Cell>
 				<Cell>
 					<Row align="center center">
-						<DatePicker />
+						<DatePicker disabled={disabled} />
 					</Row>
 				</Cell>
 			</Row>

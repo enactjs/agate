@@ -250,13 +250,12 @@ const InputBase = kind({
 		delete rest.rtl;
 
 		return (
-			<div {...rest} disabled={disabled}>
+			<div {...rest} aria-disabled={disabled} disabled={disabled}>
 				<InputDecoratorIcon position="before" size={size}>
 					{iconBefore}
 				</InputDecoratorIcon>
 				<input
 					{...inputProps}
-					aria-disabled={disabled}
 					className={css.input}
 					disabled={disabled}
 					onChange={onChange}

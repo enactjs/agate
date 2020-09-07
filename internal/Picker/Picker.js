@@ -257,6 +257,7 @@ const PickerBase = kind({
 			children: values,
 			currentValueText,
 			decrementAriaLabel: decAriaLabel,
+			disabled,
 			handleDecrement,
 			handleFlick,
 			handleIncrement,
@@ -283,10 +284,10 @@ const PickerBase = kind({
 			<PickerRoot {...rest} onFlick={handleFlick}>
 				<PickerButtonItem
 					aria-controls={valueId}
-					aria-disabled={isFirst}
+					aria-disabled={disabled || isFirst}
 					aria-label={decrementAriaLabel}
 					className={css.itemDecrement}
-					disabled={isFirst}
+					disabled={disabled || isFirst}
 					onClick={handleDecrement}
 				>
 					<div className={css.label}>
@@ -305,10 +306,10 @@ const PickerBase = kind({
 				</div>
 				<PickerButtonItem
 					aria-controls={valueId}
-					aria-disabled={isLast}
+					aria-disabled={disabled || isLast}
 					aria-label={incrementAriaLabel}
 					className={css.itemIncrement}
-					disabled={isLast}
+					disabled={disabled || isLast}
 					onClick={handleIncrement}
 				>
 					<div className={css.label}>

@@ -85,6 +85,7 @@ const DropdownView = () => (
 			<br />
 			<Dropdown
 				alt="With Title and Aria-labelled Disabled Options"
+				disabled
 				title="Title"
 			>
 				{disabledList}
@@ -94,6 +95,7 @@ const DropdownView = () => (
 		<Section className={appCss.marginTop} title="Aria-labelled Dropdown based on selected option's aria-label">
 			<A11yDropdown
 				aria-label="This is a Label."
+				disabled
 				title="Title"
 			>
 				{ariaLabelledList}

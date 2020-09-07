@@ -7,10 +7,12 @@ import ri from '@enact/ui/resolution';
 import React from 'react';
 
 const ScrollerView = () => {
+	const [disabled, setDisabled] = React.useState(false);
 	const [native, setNative] = React.useState(true);
 	const [customAriaLabel, setCustomAriaLabel] = React.useState(false);
 	const scrollMode = native ? 'native' : 'translate';
 
+	const handleToggleDisabled = () => setDisabled(!disabled);
 	const handleChangeJSNativeButton = () => setNative(!native);
 	const handleChangeAriaLabelButton = () => setCustomAriaLabel(!customAriaLabel);
 
@@ -25,6 +27,13 @@ const ScrollerView = () => {
 					Customizable aria-labels on ScrollThumbs
 				</CheckboxItem>
 				<CheckboxItem
+					onClick={handleToggleDisabled}
+					selected={disabled}
+					style={{width: '250px'}} // FIXME: If no width, then the text doesn't display.
+				>
+					Disabled
+				</CheckboxItem>
+				<CheckboxItem
 					onToggle={handleChangeJSNativeButton}
 					selected={native}
 					style={{width: '250px'}} // FIXME: If no width, then the text doesn't display.
@@ -33,6 +42,7 @@ const ScrollerView = () => {
 				</CheckboxItem>
 			</Header>
 			<Scroller
+				disabled={disabled}
 				focusableScrollbar
 				scrollDownAriaLabel={customAriaLabel ? 'This is vertical scroll down aria label' : null}
 				scrollLeftAriaLabel={customAriaLabel ? 'This is horizontal scroll left aria label' : null}
