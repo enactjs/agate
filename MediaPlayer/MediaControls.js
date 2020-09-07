@@ -152,10 +152,11 @@ const MediaControlsBase = kind({
 				<Button
 					aria-label={$L('Repeat')}
 					backgroundOpacity="transparent"
-					className={loop ? css.loop : ''}
+					className={loop ? css.loop : null}
 					css={css}
 					icon={repeatIcon}
-					onClick={onLoopButtonClick} size="large"
+					onClick={onLoopButtonClick}
+					size="large"
 				/>
 				<Button
 					aria-label={$L('Shuffle')}
