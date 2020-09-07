@@ -12,17 +12,16 @@
  */
 
 import {adaptEvent, forward, handle} from '@enact/core/handle';
-import compose from 'ramda/src/compose';
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import Layout, {Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
+import $L from '../internal/$L';
 import Button from '../Button';
 import Skinnable from '../Skinnable';
-
-import $L from '../internal/$L';
 
 import css from './Keypad.module.less';
 
@@ -130,7 +129,7 @@ const Key = kind({
  * @public
  */
 const KeypadBase = kind({
-	name: 'Key',
+	name: 'Keypad',
 
 	propTypes: /** @lends agate/Keypad.KeypadBase.prototype */{
 		/**
@@ -184,15 +183,15 @@ const KeypadBase = kind({
 /**
  * A Keypad component with an Input to display the outcome.
  *
- * @class Keypad
+ * @class KeypadBehaviorDecorator
+ * @hoc
  * @memberof agate/Keypad
- * @extends agate/Keypad.KeypadBase
  * @ui
  * @public
  */
-const KeypadExtended = hoc((config, Wrapped) => {
+const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 	return class extends React.Component {
-		static displayName = 'KeypadExtended';
+		static displayName = 'KeypadBehaviorDecorator';
 
 		static propTypes = /** @lends agate/Keypad.Keypad.prototype */ {
 			/**
@@ -309,7 +308,7 @@ const KeypadExtended = hoc((config, Wrapped) => {
 });
 
 const KeypadDecorator = compose(
-	KeypadExtended,
+	KeypadBehaviorDecorator,
 	Skinnable
 );
 
@@ -317,5 +316,5 @@ const Keypad = KeypadDecorator(KeypadBase);
 
 export default Keypad;
 export {
-	Keypad
+	KeypadBase
 };
