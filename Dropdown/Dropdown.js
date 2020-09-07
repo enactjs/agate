@@ -225,7 +225,6 @@ const DropdownBase = kind({
 
 			return direction;
 		},
-
 		dropdownListClassName: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected, title}) => {
 			if (isSelectedValid({children, selected})) {
