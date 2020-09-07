@@ -288,4 +288,3 @@ export {
 	MediaControls,
 	MediaControlsDecorator
 };
-
