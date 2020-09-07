@@ -6,6 +6,7 @@ import React from 'react';
 
 import Dropdown, {DropdownBase} from '@enact/agate/Dropdown';
 import Scroller from '@enact/agate/Scroller';
+import Group from '@enact/ui/Group';
 import ri from '@enact/ui/resolution';
 
 const Config = mergeComponentMetadata('Dropdown', Dropdown, DropdownBase);
@@ -83,51 +84,25 @@ storiesOf('Agate QA.Dropdown', module)
 			text: 'The basic Dropdown'
 		}
 	).add(
-		'in Scroller with wrong direction',
+		'groups in Scroller',
 		() => {
 			const itemCount = number('items', Config, {range: true, min: 0, max: 50}, 5);
 			const items = (new Array(itemCount)).fill().map((i, index) => `Option ${index + 1}`);
+			const dropdowns = [];
+
+			for (let i = 0; i < 30; i++) {
+				dropdowns.push({children: items, title: text('title', Config, 'Please select'), key: i});
+			}
 
 			return (
 				<Scroller>
-					<Dropdown
-						direction="up"
+					<Group
+						childComponent={Dropdown}
+						style={{position: 'absolute', top: 0, width:'50%'}}
 						onSelect={action('onSelect')}
-						title="Up dropdown"
 					>
-						{items}
-					</Dropdown>
-					<div style={{marginTop: ri.scaleToRem(600)}}>
-						Mauris blandit sollicitudin mattis. Fusce commodo arcu vitae risus consectetur sollicitudin. Aliquam eget posuere orci. Cras pellentesque lobortis sapien non lacinia.
-					</div>
-					<Dropdown
-						onSelect={action('onSelect')}
-						title="default dropdown"
-					>
-						{items}
-					</Dropdown>
-					<div style={{marginTop: ri.scaleToRem(600)}}>
-						Mauris blandit sollicitudin mattis. Fusce commodo arcu vitae risus consectetur sollicitudin. Aliquam eget posuere orci. Cras pellentesque lobortis sapien non lacinia.
-					</div>
-					<Dropdown
-						onSelect={action('onSelect')}
-						title="Down dropdown"
-					>
-						{items}
-					</Dropdown>
-					<Dropdown
-						onSelect={action('onSelect')}
-						title="Down dropdown"
-					>
-						{items}
-					</Dropdown>
-					<Dropdown
-						direction="down"
-						onSelect={action('onSelect')}
-						title="Down dropdown"
-					>
-						{items}
-					</Dropdown>
+						{dropdowns}
+					</Group>
 				</Scroller>
 			);
 		},
