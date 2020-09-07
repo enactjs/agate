@@ -228,7 +228,7 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, styler, transitionDirection, title, ...rest}) => {
+	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, styler, title, ...rest}) => {
 		const ariaProps = extractAriaProps(rest);
 		const dropdownButtonClassname = styler.join(css.dropdownButton, {upDropdownButton: adjustedDirection === 'up'});
 		const opened = !disabled && open;
