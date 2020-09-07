@@ -110,8 +110,8 @@ const Key = kind({
 					{...rest}
 					css={css}
 					icon={children}
-					size="large"
 					role={null}
+					size="large"
 				>
 					{(text || text === 0) ? <span className={css.text}>{text}</span> : null}
 					{(label || label === 0) ? <span className={css.label}>{label}</span> : null}
