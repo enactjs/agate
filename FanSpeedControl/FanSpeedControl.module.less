@@ -19,20 +19,23 @@
 		top: 50%;
 		transform: translate(-50%,-50%);
 		width: 210px;
+	}
+
+	.applySkins({
+		.segment {
+			fill: @agate-fanspeedcontrol-color;
+		}
 
 		.fanValue {
-			font-size: 72px;
-			font-weight: 300;
+			font-size: @agate-fanspeedcontrol-font-size;
+			font-weight: @agate-fanspeedcontrol-font-weight;
 		}
 
 		.fanIcon {
-			.applySkins({
-				font-size: 120px;
-				height: 60px;
-				line-height: 60px;
-				margin: 0;
-				width: 60px;
-			})
+			font-size: @agate-fanspeedcontrol-icon-font-size;
+			height: @agate-fanspeedcontrol-icon-height;
+			line-height: @agate-fanspeedcontrol-icon-height;
+			width: @agate-fanspeedcontrol-icon-height;
 		}
-	}
+	})
 }

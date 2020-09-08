@@ -12,8 +12,9 @@ storiesOf('Agate', module)
 	.add(
 		'FanSpeedControl',
 		() => (
-			<div style={{marginTop: "40px"}}>
+			<div style={{marginTop: '40px'}}>
 				<FanSpeedControl
+					icon="fan"
 					value={number('value', Config, {range: true, min: 0, max: 10, step: 1}, 4)}
 				/>
 			</div>
