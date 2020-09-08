@@ -1,0 +1,35 @@
+// TemperatureControl.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+
+.temperatureControl {
+	.applySkins({
+		height: 330px;
+		width: 330px;
+
+		.background {
+			fill: #444;
+		}
+
+		.progressCold {
+			fill: #007aff;
+		}
+
+		.progressHot {
+			fill: #f24949;
+		}
+
+		.knobCold {
+			r: 16px;
+			fill: #007aff;
+
+		}
+
+		.knobHot {
+			r: 16px;
+			fill: #f24949;
+
+		}
+	});
+}
