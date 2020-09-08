@@ -184,16 +184,15 @@ const KeypadBase = kind({
  * A Keypad component with an Input to display the outcome.
  *
  * @class KeypadBehaviorDecorator
- * @hoc
  * @memberof agate/Keypad
- * @ui
+ * @hoc
  * @public
  */
 const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 	return class extends React.Component {
 		static displayName = 'KeypadBehaviorDecorator';
 
-		static propTypes = /** @lends agate/Keypad.Keypad.prototype */ {
+		static propTypes = /** @lends agate/Keypad.KeypadBehaviorDecorator.prototype */ {
 			/**
 			 * Applies a disabled style and the control becomes non-interactive.
 			 *
