@@ -267,11 +267,11 @@ const DropdownBase = kind({
 
 const DropDownExtended = hoc((config, Wrapped) => {
 	return class extends React.Component {
-		static displayName = 'DropDownExtended'
+		static displayName = 'DropDownExtended';
 
 		static propTypes = {
 			open: PropTypes.bool
-		}
+		};
 
 		constructor (props) {
 			super(props);
@@ -300,13 +300,13 @@ const DropDownExtended = hoc((config, Wrapped) => {
 			off('click', this.handleClick);
 		}
 
-		clickedOutsideDropdown = ({target}) => !this.node.contains(target)
+		clickedOutsideDropdown = ({target}) => !this.node.contains(target);
 
 		// If a click happened outside the component area close the dropdown by forwarding the onClick from Toggleable.
 		handleClick = handle(
 			this.clickedOutsideDropdown,
 			forward('onClick')
-		).bindAs(this, 'handleClick')
+		).bindAs(this, 'handleClick');
 
 		render () {
 			return (
