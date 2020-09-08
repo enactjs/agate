@@ -318,12 +318,8 @@ const DropDownExtended = hoc((config, Wrapped) => {
 		).bindAs(this, 'handleClick')
 
 		render () {
-			const {...rest} = this.props;
-
 			return (
-				<Wrapped
-					{...rest}
-				/>
+				<Wrapped {...this.props} />
 			);
 		}
 	};
