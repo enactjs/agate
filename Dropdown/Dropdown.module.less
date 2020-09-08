@@ -22,18 +22,10 @@
 		.button {
 			margin: 0;
 
-			.bg {
-				transition-delay: 0.5s;
-			}
-
 			.icon {
 				position: absolute;
 				right: 0;
 				margin: 0;
-			}
-
-			.marquee {
-				margin-right: 42px;
 			}
 		}
 
@@ -88,6 +80,7 @@
 					background-color: @agate-dropdown-button-bg-color;
 					border-color: @agate-dropdown-button-border-color;
 					background-image: @agate-dropdown-button-bg-image;
+					transition-delay: @agate-dropdown-button-transition-delay;
 				}
 
 				&,
@@ -106,6 +99,10 @@
 				.icon {
 					color: @agate-dropdown-button-icon-color;
 					font-size: @agate-dropdown-button-icon-font-size;
+				}
+
+				.marquee {
+					margin-right: @agate-dropdown-button-marquee-margin-right;
 				}
 			}
 
