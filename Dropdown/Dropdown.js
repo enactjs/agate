@@ -14,8 +14,9 @@
  * @exports DropdownBase
  * @exports DropdownDecorator
  */
-
+import {on, off} from '@enact/core/dispatcher';
 import {handle, forward, forProp} from '@enact/core/handle';
+import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import {extractAriaProps} from '@enact/core/util';
 import Spotlight from '@enact/spotlight';
@@ -28,6 +29,7 @@ import Transition from '@enact/ui/Transition';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import Button from '../Button';
 import Icon from '../Icon';
@@ -256,10 +258,62 @@ const DropdownBase = kind({
 							</Scroller>
 						</ContainerDiv>
 					</Transition>
+
 				</div>
 			</div>
 		);
 	}
+});
+
+const DropDownExtended = hoc((config, Wrapped) => {
+	return class extends React.Component {
+		static displayName = 'DropDownExtended';
+
+		static propTypes = {
+			open: PropTypes.bool
+		};
+
+		constructor (props) {
+			super(props);
+		}
+
+		componentDidMount () {
+			// eslint-disable-next-line react/no-find-dom-node
+			this.node = ReactDOM.findDOMNode(this);
+
+			if (this.props.open) {
+				on('click', this.handleClick);
+			}
+		}
+
+		componentDidUpdate (prevProps) {
+			const {open} = this.props;
+
+			if (!prevProps.open && open) {
+				on('click', this.handleClick);
+			} else if (prevProps.open && !open) {
+				off('click', this.handleClick);
+			}
+		}
+
+		componentWillUnmount () {
+			off('click', this.handleClick);
+		}
+
+		clickedOutsideDropdown = ({target}) => !this.node.contains(target);
+
+		// If a click happened outside the component area close the dropdown by forwarding the onClick from Toggleable.
+		handleClick = handle(
+			this.clickedOutsideDropdown,
+			forward('onClick')
+		).bindAs(this, 'handleClick');
+
+		render () {
+			return (
+				<Wrapped {...this.props} />
+			);
+		}
+	};
 });
 
 /**
@@ -280,8 +334,9 @@ const DropdownDecorator = compose(
 		generateProp: null,
 		prefix: 'd_'
 	}),
-	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose'}),
+	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose', toggleProp: 'onClick'}),
 	Changeable({change: 'onSelect', prop: 'selected'}),
+	DropDownExtended,
 	Skinnable({prop: 'skin'})
 );
 
