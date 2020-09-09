@@ -26,6 +26,7 @@ const MediaControlsBase = kind({
 		 * `true` when the media loops.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		loop: PropTypes.bool,
@@ -146,7 +147,7 @@ const MediaControlsBase = kind({
 		className: 'controlsFrame'
 	},
 
-	render: ({loop, menuIcon, nextTrackIcon, onLoopButtonClick, onPlayButtonClick, pauseIcon, paused, playIcon, previousTrackIcon, repeatIcon, shuffleIcon, ...rest}) => {
+	render: ({loop, menuIcon, nextTrackIcon, onLoopButtonClick, onPlayButtonClick, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffleIcon, ...rest}) => {
 		return (
 			<div {...rest}>
 				<Button
