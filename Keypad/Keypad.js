@@ -179,7 +179,7 @@ const KeypadBase = kind({
 							label={keyText.label}
 							text={keyText.text}
 						>
-							{keyText.icon ? keyText.icon : null}
+							{keyText.icon}
 						</Cell>
 					);
 				})}
