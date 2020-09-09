@@ -399,14 +399,8 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 			});
 		};
 
-		seek = (timeIndex) => {
-			this.media.currentTime = timeIndex;
-		}
-
 		onSliderChange = ({value}) => {
-			const time = value * this.state.duration;
-
-			this.seek(time);
+			this.media.currentTime = value * this.state.duration;
 		}
 
 		setMediaRef = (node) => {
