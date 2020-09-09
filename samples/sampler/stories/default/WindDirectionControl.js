@@ -11,7 +11,7 @@ storiesOf('Agate', module)
 	.add(
 		'WindDirectionControl',
 		() => (
-			<div style={{marginTop: "40px"}}>
+			<div style={{marginTop: '40px'}}>
 				<WindDirectionControl
 					airDirection={select('airDirection', ['', 'airDown', 'airRight', 'airUp'], Config, '')}
 				/>
