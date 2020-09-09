@@ -73,9 +73,9 @@ const FanSpeedControlBase = kind({
 	render: ({backgroundOpacity, highlightedOpacity, icon, value, ...rest}) => {
 		return (
 			<div {...rest}>
-				<svg width="300" height="300" viewBox="0 0 300 300">
+				<svg className={css.fanSpeedControlSvg} viewBox="0 0 300 300">
 					<g fill="none">
-						<path id="area" d="M0,0h300v300H0V0z" />
+						<path d="M0,0h300v300H0V0z" />
 						<path className={css.segment} opacity={value >= 1 ? highlightedOpacity : backgroundOpacity} d="M43.9,256.1c-6.8-6.8-12.9-14.2-18.3-22.2c-5.4-8-10.1-16.6-13.8-25.5c-1.4-3.3-2.7-6.7-3.9-10.1l5.7-1.9 c7.1,20.9,18.9,39.8,34.6,55.4L43.9,256.1L43.9,256.1z" />
 						<path className={css.segment} opacity={value >= 2 ? highlightedOpacity : backgroundOpacity} d="M6.7,194.4C5.3,189.8,4,185,3,180.2c-2-9.9-3-20.1-3-30.2c0-7.2,0.5-14.4,1.5-21.5l5.9,0.9 C6.5,136.2,6,143.1,6,150c0,14.4,2.1,28.8,6.4,42.6L6.7,194.4L6.7,194.4z" />
 						<path className={css.segment} opacity={value >= 3 ? highlightedOpacity : backgroundOpacity} d="M8.1,125.5l-5.9-0.9c0.3-1.6,0.6-3.2,0.9-4.8c2-9.7,4.9-19.1,8.7-28.2c3.8-8.9,8.4-17.5,13.8-25.5 c0.6-0.9,1.2-1.8,1.9-2.7l4.9,3.6C20,84.4,11.7,104.4,8.1,125.5L8.1,125.5z" />
