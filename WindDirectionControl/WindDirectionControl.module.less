@@ -1,0 +1,37 @@
+// WindDirectionControl.module.less
+//
+@import '../styles/mixins.less';
+@import '../styles/skin.less';
+@import '../styles/variables.less';
+
+.windDirectionControl {
+	display: inline-flex;
+	position: relative;
+
+	.windDirectionControlContainer {
+		height: 300px;
+		width: 300px;
+	}
+
+	.airDirectionDisplay {
+		align-items: center;
+		display: flex;
+		height: 120px;
+		justify-content: center;
+		left: 50%;
+		position: absolute;
+		top: 50%;
+		transform: translate(-50%,-50%);
+		width: 120px;
+
+		.airDirectionIcon {
+			.applySkins({
+				font-size: @agate-winddirectioncontrol-font-size;
+				height: @agate-winddirectioncontrol-height;
+				line-height: @agate-winddirectioncontrol-line-height;
+				margin: @agate-winddirectioncontrol-margin;
+				width: @agate-winddirectioncontrol-width;
+			})
+		}
+	}
+}
