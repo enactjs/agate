@@ -131,7 +131,15 @@ const KeypadBase = kind({
 		 * @param {Object} event
 		 * @public
 		 */
-		handleInputValue: PropTypes.func
+		handleInputValue: PropTypes.func,
+
+		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		skin: PropTypes.string
 	},
 
 	styles: {
@@ -154,7 +162,7 @@ const KeypadBase = kind({
 			{text: '0'},
 			{text: '#'},
 			{icon: 'phone'},
-			{icon: (skin === "silicon" ? 'backspace' : 'arrowleftturn')}
+			{icon: (skin === 'silicon' ? 'backspace' : 'arrowleftturn')}
 		];
 
 		return (
