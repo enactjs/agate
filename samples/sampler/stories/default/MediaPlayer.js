@@ -8,7 +8,9 @@ storiesOf('Agate', module)
 		'MediaPlayer',
 		() => {
 			return (
-				<MediaPlayer />
+				<MediaPlayer>
+					<source src="https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3" type="audio/mp3" />
+				</MediaPlayer>
 			);
 		},
 		{
