@@ -3,13 +3,11 @@
 @import "../styles/skin.less";
 @import "../styles/mixins.less";
 
-.keypad {
-	height: 510px;
-	width: 480px;
-}
-
 .applySkins({
 	.keypad {
+		height: @agate-keypad-height;
+		width: @agate-keypad-width;
+
 		.keyContainer {
 			display: flex;
 			justify-content: center;
@@ -17,13 +15,19 @@
 		}
 
 		.label {
-			bottom: @agate-keypad-subtext-bottom;
+			bottom: @agate-keypad-label-bottom;
 			position: absolute;
 		}
 	}
 });
 
 .button {
+	.client {
+		.icon {
+			margin: 0;
+		}
+	}
+
 	.applySkins({
 		&.key {
 			height: @agate-keypad-button-height;
@@ -45,9 +49,13 @@
 			}
 
 			.label {
-				color: @agate-keypad-button-sub-text-color;
-				font-size: @agate-keypad-sub-text-font-size;
-				line-height: @agate-keypad-sub-text-line-height;
+				color: @agate-keypad-button-label-color;
+				font-size: @agate-keypad-label-font-size;
+				line-height: @agate-keypad-label-line-height;
+			}
+
+			.icon {
+				margin: 0;
 			}
 		}
 

@@ -25,23 +25,6 @@ import Skinnable from '../Skinnable';
 
 import css from './Keypad.module.less';
 
-const KEY_LIST = [
-	{text: '1'},
-	{text: '2', label: 'abc'},
-	{text: '3', label: 'def'},
-	{text: '4', label: 'ghi'},
-	{text: '5', label: 'jkl'},
-	{text: '6', label: 'mno'},
-	{text: '7', label: 'pqrs'},
-	{text: '8', label: 'tuv'},
-	{text: '9', label: 'wxyz'},
-	{text: '*'},
-	{text: '0'},
-	{text: '#'},
-	{icon: 'phone'},
-	{icon: 'arrowleftturn'}
-];
-
 /**
  * Renders an Agate-styled Key button.
  *
@@ -156,22 +139,39 @@ const KeypadBase = kind({
 		className: 'keypad'
 	},
 
-	render: ({disabled, handleInputValue, ...rest}) => {
+	render: ({disabled, handleInputValue, skin, ...rest}) => {
+		const KEY_LIST = [
+			{text: '1'},
+			{text: '2', label: 'abc'},
+			{text: '3', label: 'def'},
+			{text: '4', label: 'ghi'},
+			{text: '5', label: 'jkl'},
+			{text: '6', label: 'mno'},
+			{text: '7', label: 'pqrs'},
+			{text: '8', label: 'tuv'},
+			{text: '9', label: 'wxyz'},
+			{text: '*'},
+			{text: '0'},
+			{text: '#'},
+			{icon: 'phone'},
+			{icon: (skin === "silicon" ? 'backspace' : 'arrowleftturn')}
+		];
+
 		return (
 			<Layout {...rest} align="center end" className={css.keypad} inline wrap>
 				{KEY_LIST.map((keyText, rowIndex) => {
 					return (
 						<Cell
-							aria-label={keyText.text === 'arrowleftturn' ? $L('Back Space') : keyText.text}
+							aria-label={keyText.icon === ('backspace' || 'arrowleftturn') ? $L('Back Space') : keyText.text}
 							component={Key}
 							disabled={disabled}
 							key={`key${rowIndex}-${keyText.text}`}
-							onKeyButtonClick={() => handleInputValue(keyText.icon === 'arrowleftturn' || keyText.icon === 'phone' ? keyText.icon : keyText.text)}
+							onKeyButtonClick={() => handleInputValue(keyText.icon ? keyText.icon : keyText.text)}
 							shrink
 							label={keyText.label}
-							text={keyText.icon === 'arrowleftturn' || keyText.icon === 'phone' ? null : keyText.text}
+							text={keyText.text}
 						>
-							{keyText.icon === 'arrowleftturn' || keyText.icon === 'phone' ? keyText.icon : null}
+							{keyText.icon ? keyText.icon : null}
 						</Cell>
 					);
 				})}
@@ -308,7 +308,7 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 
 const KeypadDecorator = compose(
 	KeypadBehaviorDecorator,
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 const Keypad = KeypadDecorator(KeypadBase);
