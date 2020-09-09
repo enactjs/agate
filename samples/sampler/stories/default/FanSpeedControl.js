@@ -1,7 +1,7 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {number} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
+import React from 'react';
 
 import FanSpeedControl from '@enact/agate/FanSpeedControl';
 
