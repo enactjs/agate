@@ -53,6 +53,14 @@ const HeaderBase = kind({
 		title: PropTypes.string.isRequired,
 
 		/**
+		 * Sets the hint string read.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		'aria-label': PropTypes.string,
+
+		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
 		 *
@@ -105,6 +113,11 @@ const HeaderBase = kind({
 	},
 
 	computed: {
+		'aria-label': ({'aria-label': ariaLabel, title, subtitle}) => {
+			return ariaLabel || subtitle ?
+				title + ' ' + subtitle :
+				title;
+		},
 		className: ({hideLine, styler}) => styler.append({hideLine, standard: true}),
 		subtitleComponent: ({css, subtitle}) => {
 			return (subtitle != null && subtitle !== '') ? <h2 className={css.subtitle}>{subtitle}</h2> : null;
@@ -120,7 +133,7 @@ const HeaderBase = kind({
 		delete rest.titleAbove;
 
 		return (
-			<Row component="header" aria-label={title} {...rest}>
+			<Row component="header" {...rest}>
 				<Column className={css.titleContainer}>
 					{titleAboveComponent}
 					<h1 className={css.title}>{title}</h1>

@@ -4,10 +4,10 @@ import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import $L from '../internal/$L';
 import Button from '../Button';
 import Icon from '../Icon';
 
-import $L from '../internal/$L';
 import css from './MediaControls.module.less';
 
 /**
@@ -26,6 +26,7 @@ const MediaControlsBase = kind({
 		 * `true` when the media loops.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		loop: PropTypes.bool,
@@ -146,23 +147,50 @@ const MediaControlsBase = kind({
 		className: 'controlsFrame'
 	},
 
-	render: ({loop, menuIcon, nextTrackIcon, onLoopButtonClick, onPlayButtonClick, pauseIcon, paused, playIcon, previousTrackIcon, repeatIcon, shuffleIcon, ...rest}) => {
+	render: ({loop, menuIcon, nextTrackIcon, onLoopButtonClick, onPlayButtonClick, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffleIcon, ...rest}) => {
 		return (
-			<div className={css.mediaControls} {...rest}>
+			<div {...rest}>
 				<Button
-					aria-label={$L('Repeat')} backgroundOpacity="transparent"
-					className={loop ? css.loop : ''} css={css} icon={repeatIcon} onClick={onLoopButtonClick} size="large"
+					aria-label={$L('Repeat')}
+					backgroundOpacity="transparent"
+					className={loop ? css.loop : null}
+					css={css}
+					icon={repeatIcon}
+					onClick={onLoopButtonClick}
+					size="large"
 				/>
-				<Button aria-label={$L('Shuffle')} backgroundOpacity="transparent" css={css} icon={shuffleIcon} size="large" />
+				<Button
+					aria-label={$L('Shuffle')}
+					backgroundOpacity="transparent"
+					css={css}
+					icon={shuffleIcon}
+					size="large"
+				/>
 				<Button aria-label={$L('Previous')} backgroundOpacity="transparent" css={css} icon={previousTrackIcon} size="large" />
 				<Button
-					aria-label={paused ? $L('Play') : $L('Pause')} backgroundOpacity="transparent"
-					className={css.playPauseButton} css={css} onClick={onPlayButtonClick} size="large"
+					aria-label={paused ? $L('Play') : $L('Pause')}
+					backgroundOpacity="transparent"
+					className={css.playPauseButton}
+					css={css}
+					onClick={onPlayButtonClick}
+					size="large"
 				>
 					<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
 				</Button>
-				<Button aria-label={$L('Next')} backgroundOpacity="transparent" css={css} icon={nextTrackIcon} size="large" />
-				<Button aria-label={$L('Menu')} backgroundOpacity="transparent" css={css} icon={menuIcon} size="large" />
+				<Button
+					aria-label={$L('Next')}
+					backgroundOpacity="transparent"
+					css={css}
+					icon={nextTrackIcon}
+					size="large"
+				/>
+				<Button
+					aria-label={$L('Menu')}
+					backgroundOpacity="transparent"
+					css={css}
+					icon={menuIcon}
+					size="large"
+				/>
 			</div>
 		);
 	}
@@ -174,13 +202,12 @@ const MediaControlsBase = kind({
  *
  * @class MediaControlsDecorator
  * @memberof agate/MediaPlayer
- * @mixes ui/Slottable.Slottable
  * @hoc
  * @private
  */
 const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-vars
 	class MediaControlsDecoratorHOC extends React.Component {
-		static displayName = 'MediaControlsDecorator'
+		static displayName = 'MediaControlsDecorator';
 
 		static propTypes = /** @lends agate/MediaPlayer.MediaControlsDecorator.prototype */ {
 
@@ -215,7 +242,7 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 			 * @public
 			 */
 			paused: PropTypes.bool
-		}
+		};
 
 		constructor (props) {
 			super(props);
@@ -228,12 +255,12 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 			} else {
 				forward('onPause', ev, this.props);
 			}
-		}
+		};
 
 		handleLoopButtonClick = (ev) => {
 			forward('onLoopButtonClick', ev, this.props);
 			forward('onLoopChange', ev, this.props);
-		}
+		};
 
 		render () {
 			const props = Object.assign({}, this.props);
@@ -262,4 +289,3 @@ export {
 	MediaControls,
 	MediaControlsDecorator
 };
-

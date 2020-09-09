@@ -1,6 +1,6 @@
-import EnactPropTypes from '@enact/core/internal/prop-types';
 import {adaptEvent, call, forwardWithPrevent, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import {memoize} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
@@ -36,15 +36,17 @@ const getDurFmt = (locale) => {
 };
 
 /**
- * Provides Agate-themed media player components.
+ * A player for media {@link agate/MediaPlayer.MediaPlayer}.
  *
- * @module agate/MediaPlayer
- * @exports MediaPlayer
+ * @class MediaPlayerBase
+ * @memberof agate/MediaPlayer
+ * @ui
+ * @public
  */
 const MediaPlayerBase = kind({
 	name: 'MediaPlayer',
 
-	propTypes: /** @lends agate/MediaPlayer.MediaControls.prototype */ {
+	propTypes: /** @lends agate/MediaPlayer.MediaPlayerBase.prototype */ {
 		/**
 		 * Any children `<source>` tag elements will be sent directly to the media element as
 		 * sources.
@@ -176,13 +178,14 @@ const MediaPlayerBase = kind({
 		className: 'mediaPlayer'
 	},
 
-	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onChange, onLoopChange, onPause, onPlay, onUpdate, paused, proportionPlayed, source, total, ...rest}) => {
-		const durFmt = getDurFmt(locale);
+	computed: {
+		durFmt: ({locale}) => getDurFmt(locale)
+	},
 
+	render: ({currentTime, locale, loop, mediaComponent, mediaRef, onChange, onLoopChange, onPause, onPlay, onUpdate, paused, proportionPlayed, source, total, ...rest}) => {
 		return (
 			<div {...rest}>
 				<Media
-					controls
 					loop={loop}
 					mediaComponent={mediaComponent}
 					onUpdate={onUpdate}
@@ -210,11 +213,19 @@ const MediaPlayerBase = kind({
 	}
 });
 
-const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no-unused-vars
+/**
+ * Media player behaviors to apply to [MediaPlayerBase]{@link agate/MediaPlayer.MediaPlayerBase}.
+ *
+ * @class MediaPlayerBehaviorDecorator
+ * @memberof agate/MediaPlayer
+ * @hoc
+ * @private
+ */
+const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disable-line no-unused-vars
 	return class extends React.Component {
-		static displayName = 'MediaPlayerExtended'
+		static displayName = 'MediaPlayerBehaviorDecorator';
 
-		static propTypes = /** @lends agate/MediaPlayer.MediaPlayerBase.prototype */ {
+		static propTypes = /** @lends agate/MediaPlayer.MediaPlayerBehaviorDecorator.prototype */ {
 			/**
 			 * The current locale as a
 			 * {@link https://tools.ietf.org/html/rfc5646|BCP 47 language tag}.
@@ -262,7 +273,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			 * @public
 			 */
 			onPlay: PropTypes.func
-		}
+		};
 
 		constructor (props) {
 			super(props);
@@ -279,17 +290,17 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			};
 		}
 
-		handle = handle.bind(this)
+		handle = handle.bind(this);
 
 		handlePlay = this.handle(
 			forwardPlay,
 			() => this.play()
-		)
+		);
 
 		handlePause = this.handle(
 			forwardPause,
 			() => this.pause()
-		)
+		);
 
 		//
 		// Handled Media events
@@ -302,10 +313,11 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 				// Specific state variables are included in the outgoing calback payload, not all of them
 				...this.getMediaState()
 			};
-		}
+		};
 
 		/**
-		 * Returns an object with the current state of the media
+		 * Returns an object with the current state of the media including `currentTime`, `duration`,
+		 * `paused` and `loop`
 		 *
 		 * @function
 		 * @memberof agate/MediaPlayer.MediaPlayerBase.prototype
@@ -320,7 +332,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 				paused: this.state.paused,
 				proportionPlayed: this.state.proportionPlayed
 			};
-		}
+		};
 
 		/**
 		 * The primary means of interacting with the media element.
@@ -332,7 +344,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 		 */
 		send = (action, props) => {
 			this.media[action](props);
-		}
+		};
 
 		handleEvent = () => {
 			const el = this.media;
@@ -348,23 +360,44 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 			if (updatedState.error) updatedState.loading = false;
 
 			this.setState(updatedState);
-		}
+		};
 
+		/**
+		 * Programmatically plays the current media.
+		 *
+		 * @function
+		 * @memberof agate/MediaPlayer.MediaPlayerBase.prototype
+		 * @public
+		 */
 		play = () => {
 			this.send('play');
-		}
+		};
 
+		/**
+		 * Programmatically plays the current media.
+		 *
+		 * @function
+		 * @memberof agate/MediaPlayer.MediaPlayerBase.prototype
+		 * @public
+		 */
 		pause = () => {
 			this.send('pause');
-		}
+		};
 
+		/**
+		 * Programmatically sets the loop property of the media.
+		 *
+		 * @function
+		 * @memberof agate/MediaPlayer.MediaPlayerBase.prototype
+		 * @public
+		 */
 		loopChange = () => {
 			this.setState(prevState  => {
 				return ({loop: !prevState.loop});
 			}, () => {
 				this.media.loop = this.state.loop;
 			});
-		}
+		};
 
 		seek = (timeIndex) => {
 			this.media.currentTime = timeIndex;
@@ -378,14 +411,7 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
 
 		setMediaRef = (node) => {
 			this.media = node;
-			this.setMedia();
-		}
-
-		setMedia ({setMedia} = this.props) {
-			if (setMedia) {
-				setMedia(this.media);
-			}
-		}
+		};
 
 		render () {
 			const {
@@ -420,10 +446,11 @@ const MediaPlayerExtended = hoc((config, Wrapped) => { // eslint-disable-line no
  * @mixes spotlight/Spottable.Spottable
  * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
+ * @mixes i18n/I18nContextDecorator.I18nContextDecorator
  * @public
  */
 const MediaPlayerDecorator = compose(
-	MediaPlayerExtended,
+	MediaPlayerBehaviorDecorator,
 	Pure,
 	Slottable({slots: ['source']}),
 	Skinnable,
@@ -431,7 +458,7 @@ const MediaPlayerDecorator = compose(
 );
 
 /**
- * Aa Agate-styled `Media` component.
+ * An Agate-styled `Media` component.
  *
  * Usage:
  * ```
