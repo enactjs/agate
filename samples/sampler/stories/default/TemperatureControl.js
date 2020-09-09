@@ -1,21 +1,19 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select, number} from '@enact/storybook-utils/addons/knobs';
+import {number} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import TemperatureControl, {TemperatureControlBase} from '@enact/agate/TemperatureControl';
 
-TemperatureControl.displayName = 'Temperature Control';
-const Config = mergeComponentMetadata('TemperatureControl',TemperatureControlBase, TemperatureControl);
+const Config = mergeComponentMetadata('Temperature Control',TemperatureControlBase, TemperatureControl);
 
 storiesOf('Agate', module)
 	.add(
-		'TemperatureControl',
+		'Temperature Control',
 		() => (
 			<TemperatureControl
-				minValue={number('minValue', Config)}
-				maxValue={number('maxValue', Config)}
+				min={number('min', Config)}
+				max={number('max', Config)}
 			/>
 		),
 		{

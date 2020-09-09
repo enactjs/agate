@@ -1,12 +1,10 @@
 /**
- * Provides Agate-themed slider components and behaviors.
+ * Provides Agate-themed temperature control components and behaviors.
  *
  * @example
  * <TemperatureControl
- *   defaultValue={-30}
  *   max={100}
  *   min={-100}
- *   step={10}
  * />
  *
  * @module agate/TemperatureControl
@@ -17,9 +15,7 @@
 
 import classnames from 'classnames'
 import Spottable from '@enact/spotlight/Spottable';
-import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
-import Slottable from '@enact/ui/Slottable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -31,8 +27,9 @@ import {
 	positionToAngle,
 	valueToAngle,
 	angleToValue,
-	arcPathWithRoundedEnds,
-	innerRadius
+	arcPath,
+	innerRadius,
+	outerRadius
 } from "./utils";
 
 import css from './TemperatureControl.module.less';
@@ -40,8 +37,8 @@ import css from './TemperatureControl.module.less';
 /**
  * Range-selection input component.
  *
- * @class SliderBase
- * @extends ui/TemperatureControl.SliderBase
+ * @class TemperatureControlBase
+ * @extends ui/TemperatureControl.TemperatureControlBase
  * @memberof agate/TemperatureControl
  * @ui
  * @public
@@ -51,21 +48,13 @@ import css from './TemperatureControl.module.less';
 	static displayName=  'TemperatureControl';
 
 	static propTypes = {
-		minValue: PropTypes.number,
-		maxValue: PropTypes.number,
-		startAngle: PropTypes.number, // 0 - 360 degrees
-		endAngle: PropTypes.number, // 0 - 360 degrees
-		direction: PropTypes.oneOf(['cw', 'ccw']),
-		axis: PropTypes.oneOf(['+x', '-x','+y','-y']),
+		min: PropTypes.number,
+		max: PropTypes.number
 	};
 
 	static defaultProps = {
-		minValue: 10,
-		maxValue: 30,
-		startAngle: 50,
-		endAngle: 310,
-		direction: "cw",
-		axis: "-y",
+		min: 10,
+		max: 30
 	};
 
 	constructor(props) {
@@ -74,40 +63,30 @@ import css from './TemperatureControl.module.less';
 		this.svgRef = React.createRef()
 
 		this.state = {
-			value: props.minValue
+			value: props.min
 		};
 	}
 
 	onMouseDown = (ev) => {
 		const svgRef = this.svgRef.current;
 		if (svgRef) {
-			svgRef.addEventListener("mousemove", this.processSelection);
+			svgRef.addEventListener("mousemove", this.calculateNewValue);
 			svgRef.addEventListener("mouseup", this.removeMouseListeners);
 		}
-		this.processSelection(ev);
+		this.setNewValue(ev);
 	};
 
 	removeMouseListeners = () => {
 		const svgRef = this.svgRef.current;
 		if (svgRef) {
-			svgRef.removeEventListener("mousemove", this.processSelection);
+			svgRef.removeEventListener("mousemove", this.calculateNewValue);
 			svgRef.removeEventListener("mouseup", this.removeMouseListeners);
 		}
 	};
 
-	onValueChange = (v) => {
-		this.setState({value: v});
-	}
-
-	processSelection = (ev) => {
-		const {
-			maxValue,
-			minValue,
-			direction,
-			axis,
-			startAngle,
-			endAngle
-		} = this.props;
+	 // Calculates the new SVG value based on the mouse cursor coordinates and sets the new value into the state
+	calculateNewValue = (ev) => {
+		const {max,	min} = this.props;
 
 		const svgRef = this.svgRef.current;
 		if (!svgRef) {
@@ -115,34 +94,25 @@ import css from './TemperatureControl.module.less';
 		}
 		// Find the coordinates with respect to the SVG
 		const svgPoint = svgRef.createSVGPoint();
-		const x = ev.clientX;
-		const y = ev.clientY;
-		svgPoint.x = x;
-		svgPoint.y = y;
+		svgPoint.x = ev.clientX;
+		svgPoint.y = ev.clientY;
 		const coordsInSvg = svgPoint.matrixTransform(svgRef.getScreenCTM().inverse());
 
-		const angle = positionToAngle(coordsInSvg, direction, axis);
-		// get the value based on the angle and round it to the nearest int value
-		let value = Math.round(angleToValue(angle, minValue, maxValue, startAngle, endAngle));
+		const angle = positionToAngle(coordsInSvg);
 
-		this.onValueChange(value);
+		// get the value based on the angle, min and max
+		let value = angleToValue(angle, min, max);
 
+		this.setState({value: value});
 	};
 
 	render() {
-		const {
-			className,
-			maxValue,
-			minValue,
-			startAngle,
-			endAngle,
-			direction,
-			axis,
-		} = this.props;
+		const {className, max, min} = this.props;
 
-		const valueAngle = valueToAngle(this.state.value, minValue, maxValue, startAngle, endAngle);
+		const valueAngle = valueToAngle(this.state.value, min, max);
 
-		const knobPosition = angleToPosition({ degree: valueAngle, direction, axis }, innerRadius + 3);
+		//knob center is at the center of the arc
+		const knobPosition = angleToPosition(valueAngle, innerRadius + ((outerRadius - innerRadius) / 2));
 
 		return (
 			<div className={classnames(className, css.temperatureControl)}>
@@ -150,74 +120,60 @@ import css from './TemperatureControl.module.less';
 					viewBox="0 0 350 350"
 					ref={this.svgRef}
 					onMouseDown={this.onMouseDown}
-					onClick={
-						/* TODO: be smarter about this -- for example, we could run this through our
-						calculation and determine how close we are to the arc, and use that to decide
-						if we propagate the click. */
-						ev => ev.stopPropagation()
-					}
 				>
 					<React.Fragment>
-						{/* Arc Background  */}
+						{/* background  */}
 						<path
-							d={arcPathWithRoundedEnds(valueAngle, endAngle, direction, axis)}
 							className={css.background}
+							d="M 56.26311131655841,274.6320795014136
+							A 155 155 0 1 1 293.7368886834416 274.6320795014136
+							A 3 3 0 1 0	298.33315534215546 278.48880515953283
+							A 161 161 0 1 0 51.666844657844536 278.48880515953283
+							A 3 3 0 1 0 56.26311131655841 274.6320795014136 Z"
 						/>
-						{/* Arc (render after background so it overlays it) */}
+						{/* selection arc */}
 						<path
-							d={arcPathWithRoundedEnds(startAngle, valueAngle, direction, axis)}
-							className={ this.state.value< minValue+ (maxValue - minValue)/2 ? css.progressCold: css.progressHot}
+							className={this.state.value < (min + (max - min) / 2) ? css.progressCold: css.progressHeat}
+							d={arcPath(valueAngle)}
 						/>
 					</React.Fragment>
 
 					<React.Fragment>
 						<circle
-							className={ this.state.value< minValue+ (maxValue - minValue)/2 ? css.knobCold: css.knobHot}
+							className={this.state.value < (min + (max - min) / 2) ? css.knobCold: css.knobHeat}
 							cx={knobPosition.x}
 							cy={knobPosition.y}
 						/>
 					</React.Fragment>
-
 				</svg>
-				{this.state.value}
+				<div className={css.valueDisplay}>
+					<span>{this.state.value}°C</span>
+				</div>
 			</div>
 		);
 	}
-
-
 };
 
-
 /**
- * Agate-specific slider behaviors to apply to [SliderBase]{@link agate/TemperatureControl.SliderBase}.
+ * Agate-specific slider behaviors to apply to [TemperatureControlBase]{@link agate/TemperatureControl.TemperatureControlBase}.
  *
  * @hoc
  * @memberof agate/TemperatureControl
- * @mixes ui/Changeable.Changeable
  * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
- * @mixes ui/Slottable.Slottable
  * @mixes ui/TemperatureControl.TemperatureControlDecorator
  * @public
  */
 const TemperatureControlDecorator = compose(
 	Pure,
-	Changeable,
-	//SliderBehaviorDecorator,
 	Spottable,
-	Slottable({slots: ['knob']}),
 	Skinnable
 );
 
 /**
- * TemperatureControl input with Agate styling, [`Spottable`]{@link spotlight/Spottable.Spottable},
- * [Touchable]{@link ui/Touchable} and [`TemperatureControlDecorator`]{@link agate/TemperatureControl.TemperatureControlDecorator}
+ * TemperatureControl input with Agate styling, [`Spottable`]{@link spotlight/Spottable.Spottable}
+ * and [`TemperatureControlDecorator`]{@link agate/TemperatureControl.TemperatureControlDecorator}
  * applied.
- *
- * By default, `TemperatureControl` maintains the state of its `value` property. Supply the `defaultValue`
- * property to control its initial value. If you wish to directly control updates to the
- * component, supply a value to `value` at creation time and update it in response to `onChange`
- * events.
  *
  * @class TemperatureControl
  * @memberof agate/TemperatureControl
@@ -225,21 +181,7 @@ const TemperatureControlDecorator = compose(
  * @ui
  * @public
  */
-
-/**
- * Overrides the `aria-valuetext` for the slider.
- *
- * By default, `aria-valuetext` is set to the current value. This should only be used when
- * the parent controls the value of the slider directly through the props.
- *
- * @name aria-valuetext
- * @memberof agate/TemperatureControl.TemperatureControl.prototype
- * @type {String|Number}
- * @public
- */
-
 const TemperatureControl = TemperatureControlDecorator(TemperatureControlBase);
-
 
 export default TemperatureControl;
 export {

@@ -4,32 +4,38 @@
 @import "../styles/skin.less";
 
 .temperatureControl {
+	position: relative;
+
+	.valueDisplay {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%,-50%);
+	}
+
+	.knobCold, .knobHeat {
+		r: 16;
+	}
+
 	.applySkins({
-		height: 330px;
-		width: 330px;
+		height: @agate-temperaturecontrol-height;
+		width: @agate-temperaturecontrol-height;
+
+		.valueDisplay {
+			font-size: @agate-temperaturecontrol-font-size;
+			font-weight: @agate-temperaturecontrol-font-weight;
+		}
 
 		.background {
-			fill: #444;
+			fill: @agate-temperaturecontrol-arc-background-color;
 		}
 
-		.progressCold {
-			fill: #007aff;
+		.progressCold, .knobCold {
+			fill: @agate-temperaturecontrol-arc-fill-cold-color;
 		}
 
-		.progressHot {
-			fill: #f24949;
-		}
-
-		.knobCold {
-			r: 16px;
-			fill: #007aff;
-
-		}
-
-		.knobHot {
-			r: 16px;
-			fill: #f24949;
-
+		.progressHeat, .knobHeat {
+			fill: @agate-temperaturecontrol-arc-fill-heat-color;
 		}
 	});
 }

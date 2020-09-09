@@ -1,56 +1,39 @@
-import PropTypes from 'prop-types';
 
 const svgSize = 350;
 const innerRadius = svgSize / 2 - 20;
+const outerRadius = innerRadius + 6;
+const startAngle = 50;
+const endAngle = 310;
 
-const angleToValue = (angle, minValue, maxValue, startAngle, endAngle) => {
-	//const { angle, minValue, maxValue, startAngle, endAngle } = params;
-	if (endAngle <= startAngle) {
-		// math assumes endAngle > startAngle
-		throw new Error("endAngle must be greater than startAngle");
-	}
+//direction: PropTypes.oneOf(['cw', 'ccw']),
+//axis: PropTypes.oneOf(['+x', '-x','+y','-y']),
+const direction= "cw";
+const axis= "-y";
 
+const angleToValue = (angle, min, max) => {
 	if (angle < startAngle) {
-		return minValue;
+		return min;
 	} else if (angle > endAngle) {
-		return maxValue;
+		return max;
 	} else {
 		const ratio = (angle - startAngle) / (endAngle - startAngle);
-		const value = ratio * (maxValue - minValue) + minValue;
-		return value;
+		const value = ratio * (max - min) + min;
+	    // round to the nearest int value
+		return Math.round(value);
 	}
 }
 
-const valueToAngle = (value, minValue, maxValue, startAngle, endAngle) =>
- {
-	if (endAngle <= startAngle) {
-		// math assumes endAngle > startAngle
-		throw new Error("endAngle must be greater than startAngle");
-	}
-	const ratio = (value - minValue) / (maxValue - minValue);
+const valueToAngle = (value, min, max) => {
+	const ratio = (value - min) / (max - min);
 	const angle = ratio * (endAngle - startAngle) + startAngle;
 	return angle;
 }
 
+const convertAngle = (angle, from, to) => {
+	console.log(angle);
+	angle = 360 - angle;
 
-const  convertAngle = (degree, from, to) => {
-	to = to || { direction: "ccw", axis: "+x" };
-console.log(from);
-	console.log(to);
-	if (from.direction !== to.direction) {
-		degree = degree === 0 ? 0 : 360 - degree;
-	}
-
-	if (from.axis === to.axis) {
-		// e.g. +x to +x
-		return degree;
-	}
-
-	if (from.axis[1] === to.axis[1]) {
-		// e.g. +x to -x
-		return (180 + degree) % 360;
-	}
-
+	console.log(to.direction);
 	switch (to.direction + from.axis + to.axis) {
 		case "ccw+x-y":
 		case "ccw-x+y":
@@ -60,7 +43,7 @@ console.log(from);
 		case "cw-y+x":
 		case "cw-x-y":
 		case "cw+x+y":
-			return (90 + degree) % 360;
+			return (90 + angle) % 360;
 		case "ccw+y-x":
 		case "ccw-y+x":
 		case "ccw+x+y":
@@ -69,19 +52,24 @@ console.log(from);
 		case "cw-x+y":
 		case "cw+y+x":
 		case "cw-y-x":
-			return (270 + degree) % 360;
+			return (270 + angle) % 360;
 		default:
 			throw new Error("Unhandled conversion");
 	}
 }
 
-const  angleToPosition = (angle,	radius) => {
+const angleToPosition = (angle, radius) => {
 	// js functions need radians, counterclockwise from positive x axis
-	console.log(angle);
-	const angleConverted = convertAngle(angle.degree, angle, {
-		direction: "ccw",
-		axis: "+x"
-	});
+	const angleConverted = convertAngle(
+		angle,
+		{
+			direction: direction,
+			axis: axis
+		},
+		{
+			direction: "ccw",
+			axis: "+x"
+		});
 	const angleInRad = (angleConverted / 180) * Math.PI;
 	let dX;
 	let dY;
@@ -114,7 +102,7 @@ const  angleToPosition = (angle,	radius) => {
 	return { x, y };
 }
 
-const positionToAngle = (position, direction, axis) => {
+const positionToAngle = (position) => {
 	const dX = position.x - svgSize / 2;
 	const dY = svgSize / 2 - position.y; // position.y increases downwards in svg
 	let theta = Math.atan2(dY, dX); // radians, counterclockwise from positive x axis
@@ -136,48 +124,47 @@ const positionToAngle = (position, direction, axis) => {
 }
 
 
-const arcPathWithRoundedEnds = (startAngle,	endAngle, direction, axis) => {
-	if (startAngle % 360 === endAngle % 360 && startAngle !== endAngle) {
+const arcPath = (angle) => {
+	if (startAngle % 360 === angle % 360 && startAngle !== angle) {
 		// if it is a full circle, slightly offset end angle because of known issue
-		endAngle = endAngle - 0.001;
+		angle = angle - 0.001;
 	}
-	const largeArc = endAngle - startAngle >= 180;
-	const outerRadius = innerRadius + 6;
+	const largeArc = angle - startAngle >= 180;
 
-	const innerArcStart = angleToPosition({ degree: startAngle, direction, axis }, innerRadius);
+	const innerArcStart = angleToPosition(startAngle, innerRadius);
 
 	const startPoint = `M ${innerArcStart.x},${innerArcStart.y}`;
 
-	const innerArcEnd = angleToPosition({ degree: endAngle, direction, axis }, innerRadius);
+	const innerArcEnd = angleToPosition( angle, innerRadius);
 
 	const innerArc = `
     A ${innerRadius} ${innerRadius} 0
       ${largeArc ? "1" : "0"}
-      ${direction === "cw" ? "1" : "0"}
+      1
       ${innerArcEnd.x} ${innerArcEnd.y}
   `;
 
-	const outerArcStart = angleToPosition({ degree: endAngle, direction, axis }, outerRadius);
+	const outerArcStart = angleToPosition(angle, outerRadius);
 	const firstButt = `
     A 3 3 0
       ${largeArc ? "1" : "0"}
-      ${direction === "cw" ? "0" : "1"}
+      0
       ${outerArcStart.x} ${outerArcStart.y}
   `;
 
-	const outerArcEnd = angleToPosition({ degree: startAngle, direction, axis }, outerRadius);
+	const outerArcEnd = angleToPosition(startAngle, outerRadius);
 
 	const outerArc = `
     A ${outerRadius} ${outerRadius} 0
       ${largeArc ? "1" : "0"}
-      ${direction === "cw" ? "0" : "1"}
+      0
       ${outerArcEnd.x} ${outerArcEnd.y}
   `;
 
 	const secondButt = `
     A 3 3 0
       ${largeArc ? "1" : "0"}
-      ${direction === "cw" ? "0" : "1"}
+      0
       ${innerArcStart.x} ${innerArcStart.y}
   `;
 
@@ -189,7 +176,7 @@ export {
 	angleToValue,
 	angleToPosition,
 	positionToAngle,
-	arcPathWithRoundedEnds,
-	svgSize,
-	innerRadius
+	arcPath,
+	innerRadius,
+	outerRadius
 };
