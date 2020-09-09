@@ -21,6 +21,3 @@ storiesOf('Agate', module)
 			text: 'The basic WindDirectionControl'
 		}
 	);
-
-
-
