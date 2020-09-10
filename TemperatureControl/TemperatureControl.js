@@ -34,7 +34,7 @@ import {
 import css from './TemperatureControl.module.less';
 
 /**
- * Range-selection input component.
+ * Temperature control base component.
  *
  * @class TemperatureControlBase
  * @extends ui/TemperatureControl.TemperatureControlBase
@@ -101,7 +101,9 @@ class TemperatureControlBase extends React.Component {
 
 		// get the value based on the angle, min and max
 		let value = angleToValue(angle, min, max);
-
+		if (value < min) {
+			value = min;
+		}
 		this.setState({value: value});
 	};
 
@@ -151,7 +153,7 @@ class TemperatureControlBase extends React.Component {
 }
 
 /**
- * Agate-specific slider behaviors to apply to [TemperatureControlBase]{@link agate/TemperatureControl.TemperatureControlBase}.
+ * Applies Agate specific behaviors to [TemperatureControlBase]{@link agate/TemperatureControl.TemperatureControlBase}.
  *
  * @hoc
  * @memberof agate/TemperatureControl
@@ -167,7 +169,7 @@ const TemperatureControlDecorator = compose(
 );
 
 /**
- * TemperatureControl input with Agate styling, [`Spottable`]{@link spotlight/Spottable.Spottable}
+ * TemperatureControl with Agate styling, [`Spottable`]{@link spotlight/Spottable.Spottable}
  * and [`TemperatureControlDecorator`]{@link agate/TemperatureControl.TemperatureControlDecorator}
  * applied.
  *

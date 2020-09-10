@@ -25,7 +25,7 @@ const valueToAngle = (value, min, max) => {
 
 // this conversion is needed so the 0 degree position can be on the bottom, instead of the right + to avoid negative values
 const convertAngle = (angle) => {
-	return ( 360 - angle) % 360;
+	return (270 + 360 - angle) % 360;
 };
 
 const angleToPosition = (angle, radius) => {

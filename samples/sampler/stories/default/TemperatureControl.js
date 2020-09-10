@@ -12,8 +12,8 @@ storiesOf('Agate', module)
 		'Temperature Control',
 		() => (
 			<TemperatureControl
-				min={number('min', Config)}
 				max={number('max', Config)}
+				min={number('min', Config)}
 			/>
 		),
 		{
