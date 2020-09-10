@@ -323,5 +323,6 @@ const Keypad = KeypadDecorator(KeypadBase);
 
 export default Keypad;
 export {
+	Keypad,
 	KeypadBase
 };
