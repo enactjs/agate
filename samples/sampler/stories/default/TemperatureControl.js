@@ -5,7 +5,7 @@ import {storiesOf} from '@storybook/react';
 
 import TemperatureControl, {TemperatureControlBase} from '@enact/agate/TemperatureControl';
 
-const Config = mergeComponentMetadata('Temperature Control',TemperatureControlBase, TemperatureControl);
+const Config = mergeComponentMetadata('Temperature Control', TemperatureControlBase, TemperatureControl);
 
 storiesOf('Agate', module)
 	.add(

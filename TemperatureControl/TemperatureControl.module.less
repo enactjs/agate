@@ -13,8 +13,9 @@
 		transform: translate(-50%,-50%);
 	}
 
-	.knobCold, .knobHeat {
-		r: 16;
+	.background, .progressCold, .progressHeat {
+		fill: none;
+		stroke-width: 6;
 	}
 
 	.applySkins({
@@ -27,14 +28,22 @@
 		}
 
 		.background {
-			fill: @agate-temperaturecontrol-arc-background-color;
+			stroke: @agate-temperaturecontrol-arc-background-color;
 		}
 
-		.progressCold, .knobCold {
+		.progressCold {
+			stroke: @agate-temperaturecontrol-arc-fill-cold-color;
+		}
+
+		.progressHeat {
+			stroke: @agate-temperaturecontrol-arc-fill-heat-color;
+		}
+
+		.knobCold {
 			fill: @agate-temperaturecontrol-arc-fill-cold-color;
 		}
 
-		.progressHeat, .knobHeat {
+		.knobHeat {
 			fill: @agate-temperaturecontrol-arc-fill-heat-color;
 		}
 	});

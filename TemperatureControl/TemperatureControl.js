@@ -13,7 +13,7 @@
  * @exports TemperatureControlDecorator
  */
 
-import classnames from 'classnames'
+import classnames from 'classnames';
 import Spottable from '@enact/spotlight/Spottable';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
@@ -24,13 +24,12 @@ import Skinnable from '../Skinnable';
 
 import {
 	angleToPosition,
-	positionToAngle,
-	valueToAngle,
 	angleToValue,
 	arcPath,
-	innerRadius,
-	outerRadius
-} from "./utils";
+	positionToAngle,
+	svgRadius,
+	valueToAngle
+} from './utils';
 
 import css from './TemperatureControl.module.less';
 
@@ -43,24 +42,24 @@ import css from './TemperatureControl.module.less';
  * @ui
  * @public
  */
- class TemperatureControlBase extends React.Component {
+class TemperatureControlBase extends React.Component {
 
 	static displayName=  'TemperatureControl';
 
 	static propTypes = {
-		min: PropTypes.number,
-		max: PropTypes.number
+		max: PropTypes.number,
+		min: PropTypes.number
 	};
 
 	static defaultProps = {
-		min: 10,
-		max: 30
+		max: 30,
+		min: 10
 	};
 
-	constructor(props) {
+	constructor (props) {
 		super(props);
 
-		this.svgRef = React.createRef()
+		this.svgRef = React.createRef();
 
 		this.state = {
 			value: props.min
@@ -70,21 +69,21 @@ import css from './TemperatureControl.module.less';
 	onMouseDown = (ev) => {
 		const svgRef = this.svgRef.current;
 		if (svgRef) {
-			svgRef.addEventListener("mousemove", this.calculateNewValue);
-			svgRef.addEventListener("mouseup", this.removeMouseListeners);
+			svgRef.addEventListener('mousemove', this.calculateNewValue);
+			svgRef.addEventListener('mouseup', this.removeMouseListeners);
 		}
-		this.setNewValue(ev);
+		this.calculateNewValue(ev);
 	};
 
 	removeMouseListeners = () => {
 		const svgRef = this.svgRef.current;
 		if (svgRef) {
-			svgRef.removeEventListener("mousemove", this.calculateNewValue);
-			svgRef.removeEventListener("mouseup", this.removeMouseListeners);
+			svgRef.removeEventListener('mousemove', this.calculateNewValue);
+			svgRef.removeEventListener('mouseup', this.removeMouseListeners);
 		}
 	};
 
-	 // Calculates the new SVG value based on the mouse cursor coordinates and sets the new value into the state
+	// Calculates the new SVG value based on the mouse cursor coordinates and sets the new value into the state
 	calculateNewValue = (ev) => {
 		const {max,	min} = this.props;
 
@@ -106,13 +105,13 @@ import css from './TemperatureControl.module.less';
 		this.setState({value: value});
 	};
 
-	render() {
+	render () {
 		const {className, max, min} = this.props;
 
 		const valueAngle = valueToAngle(this.state.value, min, max);
 
-		//knob center is at the center of the arc
-		const knobPosition = angleToPosition(valueAngle, innerRadius + ((outerRadius - innerRadius) / 2));
+		// position the knob on the arc
+		const knobPosition = angleToPosition(valueAngle, svgRadius);
 
 		return (
 			<div className={classnames(className, css.temperatureControl)}>
@@ -125,24 +124,21 @@ import css from './TemperatureControl.module.less';
 						{/* background  */}
 						<path
 							className={css.background}
-							d="M 56.26311131655841,274.6320795014136
-							A 155 155 0 1 1 293.7368886834416 274.6320795014136
-							A 3 3 0 1 0	298.33315534215546 278.48880515953283
-							A 161 161 0 1 0 51.666844657844536 278.48880515953283
-							A 3 3 0 1 0 56.26311131655841 274.6320795014136 Z"
+							d=" M 56.26311131655841 274.6320795014136 A 155 155 90 1 1 293.7368886834416 274.6320795014136"
 						/>
-						{/* selection arc */}
+						{/* value arc */}
 						<path
-							className={this.state.value < (min + (max - min) / 2) ? css.progressCold: css.progressHeat}
+							className={this.state.value < (min + (max - min) / 2) ? css.progressCold : css.progressHeat}
 							d={arcPath(valueAngle)}
 						/>
 					</React.Fragment>
 
 					<React.Fragment>
 						<circle
-							className={this.state.value < (min + (max - min) / 2) ? css.knobCold: css.knobHeat}
+							className={this.state.value < (min + (max - min) / 2) ? css.knobCold : css.knobHeat}
 							cx={knobPosition.x}
 							cy={knobPosition.y}
+							r={16}
 						/>
 					</React.Fragment>
 				</svg>
@@ -152,7 +148,7 @@ import css from './TemperatureControl.module.less';
 			</div>
 		);
 	}
-};
+}
 
 /**
  * Agate-specific slider behaviors to apply to [TemperatureControlBase]{@link agate/TemperatureControl.TemperatureControlBase}.
