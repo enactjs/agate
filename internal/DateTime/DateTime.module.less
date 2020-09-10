@@ -27,15 +27,12 @@
 	.meridiemPicker {
 		position: relative;
 
-		&:nth-child(n+2)::before {
-			content: '';
-			position: absolute;
-			top: 50%;
-			transform: translateY(-50%);
-		}
-
 		.applySkins({
 			&:nth-child(n+2)::before {
+				content: "";
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
 				width: @agate-datetimepicker-divider-width;
 				height: @agate-datetimepicker-divider-height;
 				opacity: @agate-datetimepicker-divider-opacity;

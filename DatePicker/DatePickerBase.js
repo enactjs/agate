@@ -210,7 +210,7 @@ const DatePickerBase = kind({
 		delete rest.rtl;
 
 		return (
-			<DateTime {...rest} className={css.datePicker}>
+			<DateTime {...rest}>
 				{order.map((picker) => {
 					switch (picker) {
 						case 'd':

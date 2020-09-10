@@ -207,7 +207,7 @@ const TimePickerBase = kind({
 
 	styles: {
 		css,
-		className: 'timePicker'
+		className: classnames('timePicker', dateTimeCss.timePicker)
 	},
 
 	computed: {
@@ -216,7 +216,6 @@ const TimePickerBase = kind({
 	},
 
 	render: ({
-		className,
 		disabled,
 		hasMeridiem,
 		hour,
@@ -239,7 +238,7 @@ const TimePickerBase = kind({
 		delete rest.rtl;
 
 		return (
-			<DateTime {...rest} css={css} className={classnames(className, dateTimeCss.timePicker)}>
+			<DateTime {...rest} css={css}>
 				{order.map((picker) => {
 					switch (picker) {
 						case 'h':
