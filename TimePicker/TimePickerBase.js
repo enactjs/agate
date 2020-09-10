@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import kind from '@enact/core/kind';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -8,7 +7,6 @@ import {DateComponentPicker, DateComponentRangePicker} from '../internal/DateCom
 import DateTime from '../internal/DateTime';
 
 import css from './TimePicker.module.less';
-import dateTimeCss from '../internal/DateTime/DateTime.module.less';
 
 // values to use in hour picker for 24 and 12 hour locales
 const hours24 = [
@@ -207,7 +205,7 @@ const TimePickerBase = kind({
 
 	styles: {
 		css,
-		className: classnames('timePicker', dateTimeCss.timePicker)
+		className: 'timePicker'
 	},
 
 	computed: {
@@ -248,7 +246,7 @@ const TimePickerBase = kind({
 									<HourPicker
 										accessibilityHint={hourAccessibilityHint}
 										aria-label={hourAriaLabel}
-										className={classnames(css.hourPicker, dateTimeCss.hourPicker)}
+										className={css.hourPicker}
 										disabled={disabled}
 										hasMeridiem={hasMeridiem}
 										onChange={onChangeHour}
@@ -262,7 +260,7 @@ const TimePickerBase = kind({
 								<DateComponentRangePicker
 									accessibilityHint={minuteAccessibilityHint}
 									aria-label={minuteAriaLabel}
-									className={classnames(css.minutePicker, dateTimeCss.minutePicker)}
+									className={css.minutePicker}
 									disabled={disabled}
 									key="minute-picker"
 									max={59}
@@ -277,7 +275,7 @@ const TimePickerBase = kind({
 								<DateComponentPicker
 									aria-label={meridiemAriaLabel}
 									aria-valuetext={meridiems ? meridiems[meridiem] : null}
-									className={classnames(css.meridiemPicker, dateTimeCss.meridiemPicker)}
+									className={css.meridiemPicker}
 									disabled={disabled}
 									key="meridiem-picker"
 									onChange={onChangeMeridiem}

@@ -7,6 +7,7 @@
 	display: inline-block;
 	text-align: center;
 	vertical-align: inherit;
+	position: relative;
 
 	.applySkins({
 		.item,
@@ -16,6 +17,18 @@
 				background-color: transparent;
 				background-image: none;
 			}
+		}
+
+		&:nth-child(n+2)::before {
+			content: "";
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			width: @agate-datetimepicker-divider-width;
+			height: @agate-datetimepicker-divider-height;
+			opacity: @agate-datetimepicker-divider-opacity;
+			background-color: @agate-datetimepicker-divider-bg-color;
+			right: calc(100% - @agate-datetimepicker-divider-width);
 		}
 	});
 }
