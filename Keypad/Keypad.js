@@ -25,6 +25,23 @@ import Skinnable from '../Skinnable';
 
 import css from './Keypad.module.less';
 
+const KEY_LIST = [
+	{text: '1'},
+	{text: '2', label: 'abc'},
+	{text: '3', label: 'def'},
+	{text: '4', label: 'ghi'},
+	{text: '5', label: 'jkl'},
+	{text: '6', label: 'mno'},
+	{text: '7', label: 'pqrs'},
+	{text: '8', label: 'tuv'},
+	{text: '9', label: 'wxyz'},
+	{text: '*'},
+	{text: '0'},
+	{text: '#'},
+	{icon: 'phone'},
+	{icon: 'arrowuturn'}
+];
+
 /**
  * Renders an Agate-styled Key button.
  *
@@ -131,15 +148,7 @@ const KeypadBase = kind({
 		 * @param {Object} event
 		 * @public
 		 */
-		handleInputValue: PropTypes.func,
-
-		/**
-		 * The current skin for this component.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		skin: PropTypes.string
+		handleInputValue: PropTypes.func
 	},
 
 	styles: {
@@ -147,30 +156,13 @@ const KeypadBase = kind({
 		className: 'keypad'
 	},
 
-	render: ({disabled, handleInputValue, skin, ...rest}) => {
-		const KEY_LIST = [
-			{text: '1'},
-			{text: '2', label: 'abc'},
-			{text: '3', label: 'def'},
-			{text: '4', label: 'ghi'},
-			{text: '5', label: 'jkl'},
-			{text: '6', label: 'mno'},
-			{text: '7', label: 'pqrs'},
-			{text: '8', label: 'tuv'},
-			{text: '9', label: 'wxyz'},
-			{text: '*'},
-			{text: '0'},
-			{text: '#'},
-			{icon: 'phone'},
-			{icon: (skin === 'silicon' ? 'backspace' : 'arrowleftturn')}
-		];
-
+	render: ({disabled, handleInputValue, ...rest}) => {
 		return (
 			<Layout {...rest} align="center end" className={css.keypad} inline wrap>
 				{KEY_LIST.map((keyText, rowIndex) => {
 					return (
 						<Cell
-							aria-label={keyText.icon === ('backspace' || 'arrowleftturn') ? $L('Back Space') : keyText.text}
+							aria-label={keyText.icon === 'arrowuturn' ? $L('Back Space') : keyText.text}
 							component={Key}
 							disabled={disabled}
 							key={`key${rowIndex}-${keyText.text}`}
@@ -252,7 +244,7 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 			let newCharIndex;
 
 			switch (keyValue) {
-				case 'arrowleftturn':
+				case 'arrowuturn':
 				case 'Backspace':
 					newCharIndex = charIndex;
 					newKeypadInput = newKeypadInput.substring(0, charIndex - 1) + newKeypadInput.substring(charIndex, newKeypadInput.length);
@@ -316,7 +308,7 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 
 const KeypadDecorator = compose(
 	KeypadBehaviorDecorator,
-	Skinnable({prop: 'skin'})
+	Skinnable
 );
 
 const Keypad = KeypadDecorator(KeypadBase);
