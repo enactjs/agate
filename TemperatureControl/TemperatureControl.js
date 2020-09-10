@@ -101,9 +101,7 @@ class TemperatureControlBase extends React.Component {
 
 		// get the value based on the angle, min and max
 		let value = angleToValue(angle, min, max);
-		if (value < min) {
-			value = min;
-		}
+
 		this.setState({value: value});
 	};
 
