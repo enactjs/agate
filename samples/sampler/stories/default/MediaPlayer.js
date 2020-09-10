@@ -12,7 +12,7 @@ const audioFiles = [
 
 storiesOf('Agate', module)
 	.add(
-		'AudioPlayer',
+		'MediaPlayer',
 		() => {
 			return (
 				<MediaPlayer>
@@ -24,24 +24,7 @@ storiesOf('Agate', module)
 		},
 		{
 			info: {
-				text: 'The basic AudioPlayer'
-			}
-		}
-	);
-
-storiesOf('Agate', module)
-	.add(
-		'VideoPlayer',
-		() => {
-			return (
-				<MediaPlayer mediaComponent="video">
-					<source src="http://media.w3.org/2010/05/sintel/trailer.mp4" />
-				</MediaPlayer>
-			);
-		},
-		{
-			info: {
-				text: 'The basic VideoPlayer'
+				text: 'The basic MediaPlayer'
 			}
 		}
 	);
