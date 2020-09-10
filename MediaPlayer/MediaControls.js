@@ -1,3 +1,5 @@
+import {forward} from '@enact/core/handle';
+import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -11,15 +13,24 @@ import css from './MediaControls.module.less';
 /**
  * A set of components for controlling media playback and rendering additional components.
  *
- * @class MediaControls
+ * @class MediaControlsBase
  * @memberof agate/MediaPlayer
  * @ui
  * @private
  */
-const MediaControls = kind({
+const MediaControlsBase = kind({
 	name: 'MediaControls',
 
 	propTypes: /** @lends agate/MediaPlayer.MediaControls.prototype */ {
+		/**
+		 * `true` when the media loops.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		loop: PropTypes.bool,
+
 		/**
 		 * A string which is sent to the `menu` icon of the player controls. This can be
 		 * anything that is accepted by {@link agate/Icon.Icon}.
@@ -39,6 +50,22 @@ const MediaControls = kind({
 		 * @public
 		 */
 		nextTrackIcon: PropTypes.string,
+
+		/**
+		 * Called when the user clicks the Loop button.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onLoopButtonClick: PropTypes.func,
+
+		/**
+		 * Called when the user clicks the Play button.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onPlayButtonClick: PropTypes.func,
 
 		/**
 		 * `true` when the media is paused.
@@ -100,19 +127,11 @@ const MediaControls = kind({
 		 * @default 'shuffle'
 		 * @public
 		 */
-		shuffleIcon: PropTypes.string,
-
-		/**
-		 * The visibility of the component. When `false`, the component will be hidden.
-		 *
-		 * @type {Boolean}
-		 * @default true
-		 * @public
-		 */
-		visible: PropTypes.bool
+		shuffleIcon: PropTypes.string
 	},
 
 	defaultProps: {
+		loop: false,
 		menuIcon: 'menu',
 		nextTrackIcon: 'nexttrack',
 		pauseIcon: 'pause',
@@ -120,8 +139,7 @@ const MediaControls = kind({
 		playIcon: 'play',
 		previousTrackIcon: 'previoustrack',
 		repeatIcon: 'repeat',
-		shuffleIcon: 'shuffle',
-		visible: true
+		shuffleIcon: 'shuffle'
 	},
 
 	styles: {
@@ -129,25 +147,145 @@ const MediaControls = kind({
 		className: 'controlsFrame'
 	},
 
-	render: ({menuIcon, nextTrackIcon, pauseIcon, paused, playIcon, previousTrackIcon, repeatIcon, shuffleIcon, ...rest}) => {
-		delete rest.visible;
-
+	render: ({loop, menuIcon, nextTrackIcon, onLoopButtonClick, onPlayButtonClick, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffleIcon, ...rest}) => {
 		return (
 			<div {...rest}>
-				<Button aria-label={$L('Repeat')} backgroundOpacity="transparent" css={css} icon={repeatIcon} size="large" />
-				<Button aria-label={$L('Shuffle')} backgroundOpacity="transparent" css={css} icon={shuffleIcon} size="large" />
+				<Button
+					aria-label={$L('Repeat')}
+					backgroundOpacity="transparent"
+					className={loop ? css.loop : null}
+					css={css}
+					icon={repeatIcon}
+					onClick={onLoopButtonClick}
+					size="large"
+				/>
+				<Button
+					aria-label={$L('Shuffle')}
+					backgroundOpacity="transparent"
+					css={css}
+					icon={shuffleIcon}
+					size="large"
+				/>
 				<Button aria-label={$L('Previous')} backgroundOpacity="transparent" css={css} icon={previousTrackIcon} size="large" />
-				<Button aria-label={paused ? $L('Play') : $L('Pause')} backgroundOpacity="transparent" className={css.playPauseButton} css={css} size="large">
-					<Icon className={css.playPauseIcon} css={css}>{paused ? playIcon : pauseIcon}</Icon>
+				<Button
+					aria-label={paused ? $L('Play') : $L('Pause')}
+					backgroundOpacity="transparent"
+					className={css.playPauseButton}
+					css={css}
+					onClick={onPlayButtonClick}
+					size="large"
+				>
+					<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
 				</Button>
-				<Button aria-label={$L('Next')} backgroundOpacity="transparent" css={css} icon={nextTrackIcon} size="large" />
-				<Button aria-label={$L('Menu')} backgroundOpacity="transparent" css={css} icon={menuIcon} size="large" />
+				<Button
+					aria-label={$L('Next')}
+					backgroundOpacity="transparent"
+					css={css}
+					icon={nextTrackIcon}
+					size="large"
+				/>
+				<Button
+					aria-label={$L('Menu')}
+					backgroundOpacity="transparent"
+					css={css}
+					icon={menuIcon}
+					size="large"
+				/>
 			</div>
 		);
 	}
 });
 
+/**
+ * Media control behaviors to apply to [MediaControlsBase]{@link agate/MediaPlayer.MediaControlsBase}.
+ * Provides built-in support for key handling for basic playback controls.
+ *
+ * @class MediaControlsDecorator
+ * @memberof agate/MediaPlayer
+ * @hoc
+ * @private
+ */
+const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-vars
+	class MediaControlsDecoratorHOC extends React.Component {
+		static displayName = 'MediaControlsDecorator';
+
+		static propTypes = /** @lends agate/MediaPlayer.MediaControlsDecorator.prototype */ {
+
+			/**
+			 * Called when media gets looped.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onLoopChange: PropTypes.func,
+
+			/**
+			 * Called when media gets paused.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onPause: PropTypes.func,
+
+			/**
+			 * Called when media starts playing.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onPlay: PropTypes.func,
+
+			/**
+			 * The media pause state.
+			 *
+			 * @type {Boolean}
+			 * @public
+			 */
+			paused: PropTypes.bool
+		};
+
+		constructor (props) {
+			super(props);
+		}
+
+		handlePlayButtonClick = (ev) => {
+			forward('onPlayButtonClick', ev, this.props);
+			if (this.props.paused) {
+				forward('onPlay', ev, this.props);
+			} else {
+				forward('onPause', ev, this.props);
+			}
+		};
+
+		handleLoopButtonClick = (ev) => {
+			forward('onLoopButtonClick', ev, this.props);
+			forward('onLoopChange', ev, this.props);
+		};
+
+		render () {
+			const props = Object.assign({}, this.props);
+			delete props.onLoopChange;
+			delete props.onPause;
+			delete props.onPlay;
+
+			return (
+				<Wrapped
+					{...props}
+					onLoopButtonClick={this.handleLoopButtonClick}
+					onPlayButtonClick={this.handlePlayButtonClick}
+				/>
+			);
+		}
+	}
+
+	return MediaControlsDecoratorHOC;
+});
+
+const MediaControls = MediaControlsDecorator(MediaControlsBase);
+
 export default MediaControls;
 export {
-	MediaControls
+	MediaControlsBase,
+	MediaControls,
+	MediaControlsDecorator
 };
