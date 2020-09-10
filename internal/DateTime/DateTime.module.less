@@ -1,5 +1,6 @@
 // DateTime.module.less
 //
+@import "../../styles/skin.less";
 
 .dateTime {
 	display: inline-block;
@@ -28,14 +29,19 @@
 
 		&:nth-child(n+2)::before {
 			content: '';
-			width: 3px;
-			height: 21px;
-			opacity: 0.4;
-			background-color: white;
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
-			right: calc(100% - 3px);
 		}
+
+		.applySkins({
+			&:nth-child(n+2)::before {
+				width: @agate-datetimepicker-divider-width;
+				height: @agate-datetimepicker-divider-height;
+				opacity: @agate-datetimepicker-divider-opacity;
+				background-color: @agate-datetimepicker-divider-bg-color;
+				right: calc(100% - @agate-datetimepicker-divider-width);
+			}
+		})
 	}
 }
