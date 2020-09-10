@@ -353,7 +353,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				duration: el.duration,
 				loop: el.loop,
 				paused: el.paused,
-				proportionPlayed: el.proportionPlayed
+				proportionPlayed: el.proportionPlayed || 0
 			};
 
 			// If there's an error, we're obviously not loading, no matter what the readyState is.
