@@ -600,7 +600,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 			if (setMedia) {
 				setMedia(this.media);
 			}
-		};
+		}
 
 		render () {
 			const {
