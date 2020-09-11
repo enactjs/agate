@@ -12,17 +12,16 @@
  */
 
 import {adaptEvent, forward, handle} from '@enact/core/handle';
-import compose from 'ramda/src/compose';
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import Layout, {Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
+import $L from '../internal/$L';
 import Button from '../Button';
 import Skinnable from '../Skinnable';
-
-import $L from '../internal/$L';
 
 import css from './Keypad.module.less';
 
@@ -40,7 +39,7 @@ const KEY_LIST = [
 	{text: '0'},
 	{text: '#'},
 	{icon: 'phone'},
-	{icon: 'arrowleftturn'}
+	{icon: 'arrowuturn'}
 ];
 
 /**
@@ -131,7 +130,7 @@ const Key = kind({
  * @public
  */
 const KeypadBase = kind({
-	name: 'Key',
+	name: 'Keypad',
 
 	propTypes: /** @lends agate/Keypad.KeypadBase.prototype */{
 		/**
@@ -163,10 +162,10 @@ const KeypadBase = kind({
 			<Layout {...rest} align="center end" className={css.keypad} inline wrap>
 				{KEY_LIST.map((keyText, rowIndex) => {
 					const {icon, text} = keyText;
-					const isIcon = icon === 'arrowleftturn' || icon === 'phone';
+					const isIcon = icon === 'arrowuturn' || icon === 'phone';
 
 					let ariaLabel = text;
-					if (icon === 'arrowleftturn') {
+					if (icon === 'arrowuturn') {
 						ariaLabel = $L('backspace');
 					} else if (icon === 'phone') {
 						ariaLabel = $L('call');
@@ -195,17 +194,16 @@ const KeypadBase = kind({
 /**
  * A Keypad component with an Input to display the outcome.
  *
- * @class Keypad
+ * @class KeypadBehaviorDecorator
  * @memberof agate/Keypad
- * @extends agate/Keypad.KeypadBase
- * @ui
+ * @hoc
  * @public
  */
-const KeypadExtended = hoc((config, Wrapped) => {
+const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 	return class extends React.Component {
-		static displayName = 'KeypadExtended';
+		static displayName = 'KeypadBehaviorDecorator';
 
-		static propTypes = /** @lends agate/Keypad.Keypad.prototype */ {
+		static propTypes = /** @lends agate/Keypad.KeypadBehaviorDecorator.prototype */ {
 			/**
 			 * Applies a disabled style and the control becomes non-interactive.
 			 *
@@ -257,7 +255,7 @@ const KeypadExtended = hoc((config, Wrapped) => {
 			let newCharIndex;
 
 			switch (keyValue) {
-				case 'arrowleftturn':
+				case 'arrowuturn':
 				case 'Backspace':
 					newCharIndex = charIndex;
 					newKeypadInput = newKeypadInput.substring(0, charIndex - 1) + newKeypadInput.substring(charIndex, newKeypadInput.length);
@@ -289,6 +287,9 @@ const KeypadExtended = hoc((config, Wrapped) => {
 
 				case 'phone':
 					// method to call dialed number (keypadInput);
+
+					newCharIndex = 0;
+					newKeypadInput = '';
 					break;
 
 				default:
@@ -302,30 +303,22 @@ const KeypadExtended = hoc((config, Wrapped) => {
 				this.props.onChange({value: newKeypadInput});
 			}
 
-			if (keyValue !== 'phone') {
-				this.setState({
-					keypadInput: newKeypadInput,
-					charIndex: newCharIndex
-				});
-			} else {
-				this.setState({
-					charIndex: 0,
-					keypadInput: ''
-				});
-			}
+			this.setState({
+				charIndex: newCharIndex,
+				keypadInput: newKeypadInput
+			});
 		};
 
 		render () {
 			return (
 				<Wrapped {...this.props} handleInputValue={this.handleInputValue} />
-
 			);
 		}
 	};
 });
 
 const KeypadDecorator = compose(
-	KeypadExtended,
+	KeypadBehaviorDecorator,
 	Skinnable
 );
 
@@ -333,5 +326,6 @@ const Keypad = KeypadDecorator(KeypadBase);
 
 export default Keypad;
 export {
-	Keypad
+	Keypad,
+	KeypadBase
 };

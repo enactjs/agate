@@ -149,16 +149,20 @@
 
 // ContextualPopup
 // ---------------------------------------
-@agate-contextual-popup-arrow-height:       30px;
-@agate-contextual-popup-arrow-width:        30px;
-@agate-contextual-popup-border-radius:      inherit;
-@agate-contextual-popup-font-size:          inherit;
-@agate-contextual-popup-padding-vertical:   inherit;
+@agate-contextual-popup-arrow-height: 30px;
+@agate-contextual-popup-arrow-width: 30px;
+@agate-contextual-popup-offset-overlap: 18px;
+@agate-contextual-popup-offset-small: 9px;
+@agate-contextual-popup-border-radius: inherit;
+@agate-contextual-popup-font-size: inherit;
+@agate-contextual-popup-padding-vertical: inherit;
 @agate-contextual-popup-padding-horizontal: inherit;
-@agate-contextual-popup-padding:            @agate-contextual-popup-padding-vertical @agate-contextual-popup-padding-horizontal;
+@agate-contextual-popup-padding: @agate-contextual-popup-padding-vertical @agate-contextual-popup-padding-horizontal;
 
 // DateTimePicker
 // ---------------------------------------
+@agate-datetimepicker-divider-height: inherit;
+@agate-datetimepicker-divider-width: inherit;
 @agate-datetimepicker-width: 699px;
 
 // Dropdown
@@ -168,16 +172,22 @@
 @agate-dropdown-button-bg-image: inherit;
 @agate-dropdown-button-font-size: inherit;
 @agate-dropdown-button-icon-font-size: inherit;
-@agate-dropdown-button-icon-height: inherit;
 @agate-dropdown-button-list-border-radius: inherit;
 @agate-dropdown-button-open-border-radius: inherit;
+@agate-dropdown-button-padding: inherit;
+@agate-dropdown-button-transition-delay: inherit;
+@agate-dropdown-button-marquee-margin-right: inherit;
 @agate-dropdown-up-button-list-border-radius: inherit;
 @agate-dropdown-up-button-open-border-radius: inherit;
+@agate-dropdown-button-height: inherit;
 @agate-dropdown-button-width: inherit;
+@agate-dropdown-item-border-width: 0;
 @agate-dropdown-item-font-size: inherit;
 @agate-dropdown-item-font-weight: inherit;
+@agate-dropdown-item-line-height: @agate-item-line-height;
 @agate-dropdown-item-padding: inherit;
 @agate-dropdown-list-height:  @agate-item-height * 4;
+@agate-dropdown-list-padding: inherit;
 @agate-dropdown-transitionContainer-width: inherit;
 
 // Drawer
@@ -337,21 +347,49 @@
 
 // Keypad
 // ---------------------------------------
-@agate-keypad-button-height: 		inherit;
-@agate-keypad-height: 				inherit;
-@agate-keypad-keycontainer-width: 	inherit;
-@agate-keypad-text-font-size: 		inherit;
-@agate-keypad-sub-text-font-size: 	inherit;
-@agate-keypad-text-line-height: 	inherit;
-@agate-keypad-subtext-bottom: 		inherit;
-@agate-keypad-sub-text-line-height: inherit;
-@agate-keypad-width: 				inherit;
+@agate-keypad-button-height:        inherit;
+@agate-keypad-height:               inherit;
+@agate-keypad-input-border-bottom:  inherit;
+@agate-keypad-input-font-size:      inherit;
+@agate-keypad-keycontainer-width:   inherit;
+@agate-keypad-label-bottom:         inherit;
+@agate-keypad-label-font-size:      inherit;
+@agate-keypad-label-line-height:    inherit;
+@agate-keypad-text-font-size:       inherit;
+@agate-keypad-text-line-height:     inherit;
+@agate-keypad-width:                inherit;
 
 // LabeledIconButton
 // ---------------------------------------
 @agate-labelediconbutton-label-font-size: 38px;
 @agate-labelediconbutton-label-font-weight: 500;
 @agate-labelediconbutton-label-margin: 20px;
+
+// MediaPlayer
+// ---------------------------------------
+@agate-mediacontrols-button-bg-border: inherit;
+@agate-mediacontrols-button-bg-height: inherit;
+@agate-mediacontrols-button-bg-width: inherit;
+@agate-mediacontrols-button-client-width: inherit;
+@agate-mediacontrols-button-height: inherit;
+@agate-mediacontrols-button-icon-padding: inherit;
+@agate-mediacontrols-button-margin: inherit;
+@agate-mediacontrols-button-min-width: inherit;
+@agate-mediacontrols-icon-font-size: inherit;
+@agate-mediacontrols-icon-margin: inherit;
+@agate-mediacontrols-icon-padding: inherit;
+@agate-mediacontrols-playpause-button-bg-border-radius: inherit;
+@agate-mediacontrols-playpause-button-bg-height: inherit;
+@agate-mediacontrols-playpause-button-bg-width: inherit;
+@agate-mediacontrols-playpause-button-client-width: inherit;
+@agate-mediacontrols-playpause-button-height: inherit;
+@agate-mediacontrols-playpause-button-padding: inherit;
+@agate-mediacontrols-playpause-icon-font-size: inherit;
+@agate-mediaplayer-height: inherit;
+@agate-mediaplayer-times-font-size: inherit;
+@agate-mediaplayer-times-line-height: inherit;
+@agate-mediaplayer-times-margin: inherit;
+@agate-mediaplayer-times-padding: inherit;
 
 // Panels
 // ---------------------------------------
@@ -397,7 +435,8 @@
 @agate-picker-font-size: 24px;
 @agate-picker-active-font-size: 36px;
 @agate-picker-active-font-weight: @agate-base-font-weight;
-@agate-picker-margin: @agate-component-spacing;
+@agate-picker-margin: 0;
+@agate-picker-padding: @agate-component-spacing;
 
 // Popup
 // ---------------------------------------

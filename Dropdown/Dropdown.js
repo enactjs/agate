@@ -14,17 +14,23 @@
  * @exports DropdownBase
  * @exports DropdownDecorator
  */
-
+import {on, off} from '@enact/core/dispatcher';
 import {handle, forward, forProp} from '@enact/core/handle';
+import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
+import {extractAriaProps} from '@enact/core/util';
+import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
+import {MarqueeDecorator} from '@enact/ui/Marquee';
+import IdProvider from '@enact/ui/internal/IdProvider';
 import Toggleable from '@enact/ui/Toggleable';
 import Transition from '@enact/ui/Transition';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import Button from '../Button';
 import Icon from '../Icon';
@@ -36,7 +42,20 @@ import Skinnable from '../Skinnable';
 import componentCss from './Dropdown.module.less';
 
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
+const MarqueeButton = MarqueeDecorator({className: componentCss.marquee}, Button);
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
+
+const handleTransitionHide = (containerId) => () => {
+	const containerSelector = `[data-spotlight-id='${containerId}']`;
+	const current = Spotlight.getCurrent();
+
+	if (!Spotlight.isPaused() && current && document.querySelector(`${containerSelector} .${componentCss.dropdownList}`).contains(current)) {
+		const focusResult = Spotlight.focus(`${containerSelector} .${componentCss.dropdown}`);
+		if (!focusResult && Spotlight.getPointerMode()) {
+			document.querySelector(`${containerSelector} .${componentCss.dropdown}`).focus();
+		}
+	}
+};
 
 /**
  * A stateless Dropdown component.
@@ -167,8 +186,31 @@ const DropdownBase = kind({
 
 	computed: {
 		buttonClassName: ({open, styler}) => styler.append({open}),
-		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'} ),
-		dropdownButtonClassname: ({css, direction, styler}) => styler.join(css.dropdownButton, {upDropdownButton: direction === 'up'} ),
+		children: ({children, selected}) => {
+			if (!Array.isArray(children)) return [];
+
+			return children.map((child, i) => {
+				const aria = {
+					role: 'checkbox',
+					'aria-checked': selected === i
+				};
+
+				if (typeof child === 'string') {
+					return {
+						...aria,
+						children: child,
+						key: `item_${child}`
+					};
+				}
+
+				return {
+					...aria,
+					...child
+				};
+			});
+		},
+		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'}),
+		dropdownButtonClassname: ({css, direction, styler}) => styler.join(css.dropdownButton, {upDropdownButton: direction === 'up'}),
 		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected, title}) => {
 			if (isSelectedValid({children, selected})) {
@@ -197,39 +239,51 @@ const DropdownBase = kind({
 	},
 
 	render: ({buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+		const ariaProps = extractAriaProps(rest);
 		const opened = !disabled && open;
-		const [DropDownButton, wrapperProps, skinVariants, groupProps] = (skin === 'silicon') ? [
-			Button,
+		const [DropDownButton, dropDownButtonProps, wrapperProps, skinVariants, groupProps, iconComponent] = (skin === 'silicon') ? [
+			MarqueeButton,
+			{icon: open ? 'arrowlargeup' : 'arrowlargedown'},
 			{className: dropdownButtonClassname},
 			{'night': false},
-			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'}
+			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'},
+			[]
 		] : [
 			Item,
 			{},
 			{},
-			{childComponent: Item, itemProps: {size: 'small'}}
+			{},
+			{childComponent: Item, itemProps: {size: 'small'}},
+			[<Icon slot="slotAfter" key="icon" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>]
+
 		];
+		const onTransitionHide = handleTransitionHide(rest['data-spotlight-id']);
 
 		return (
-			<div {...rest} >
+			<div {...rest}>
 				<div {...wrapperProps}>
 					<DropDownButton
+						role="button"
 						className={buttonClassName}
 						css={css}
 						disabled={hasChildren ? disabled : true}
 						onClick={opened ? onClose : onOpen}
+						{...dropDownButtonProps}
+						{...ariaProps}
 					>
-						<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
+						{iconComponent}
 						{title}
 					</DropDownButton>
 					<Transition
 						className={transitionContainerClassname}
 						visible={opened}
 						direction={transitionDirection}
+						onHide={onTransitionHide}
 					>
 						<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
 							<Scroller skinVariants={skinVariants} className={css.scroller}>
 								<Group
+									role={null}
 									className={css.group}
 									onSelect={onSelect}
 									selected={selected}
@@ -240,10 +294,62 @@ const DropdownBase = kind({
 							</Scroller>
 						</ContainerDiv>
 					</Transition>
+
 				</div>
 			</div>
 		);
 	}
+});
+
+const DropDownExtended = hoc((config, Wrapped) => {
+	return class extends React.Component {
+		static displayName = 'DropDownExtended';
+
+		static propTypes = {
+			open: PropTypes.bool
+		};
+
+		constructor (props) {
+			super(props);
+		}
+
+		componentDidMount () {
+			// eslint-disable-next-line react/no-find-dom-node
+			this.node = ReactDOM.findDOMNode(this);
+
+			if (this.props.open) {
+				on('click', this.handleClick);
+			}
+		}
+
+		componentDidUpdate (prevProps) {
+			const {open} = this.props;
+
+			if (!prevProps.open && open) {
+				on('click', this.handleClick);
+			} else if (prevProps.open && !open) {
+				off('click', this.handleClick);
+			}
+		}
+
+		componentWillUnmount () {
+			off('click', this.handleClick);
+		}
+
+		clickedOutsideDropdown = ({target}) => !this.node.contains(target);
+
+		// If a click happened outside the component area close the dropdown by forwarding the onClick from Toggleable.
+		handleClick = handle(
+			this.clickedOutsideDropdown,
+			forward('onClick')
+		).bindAs(this, 'handleClick');
+
+		render () {
+			return (
+				<Wrapped {...this.props} />
+			);
+		}
+	};
 });
 
 /**
@@ -256,8 +362,17 @@ const DropdownBase = kind({
  * @public
  */
 const DropdownDecorator = compose(
-	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose'}),
+	SpotlightContainerDecorator({
+		enterTo: 'default-element',
+		preserveId: true
+	}),
+	IdProvider({
+		generateProp: null,
+		prefix: 'd_'
+	}),
+	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose', toggleProp: 'onClick'}),
 	Changeable({change: 'onSelect', prop: 'selected'}),
+	DropDownExtended,
 	Skinnable({prop: 'skin'})
 );
 
