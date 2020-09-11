@@ -185,20 +185,20 @@ const MediaPlayerBase = kind({
 		paused: PropTypes.bool,
 
 		/**
-		 * Proportion of media file played.
-		 *
-		 * @type {Number}
-		 * @public
-		 */
-		proportionPlayed: PropTypes.number,
-
-		/**
 		 * The current list of media.
 		 *
 		 * @type {Array}
 		 * @public
 		 */
 		playlist: PropTypes.arrayOf(PropTypes.node),
+
+		/**
+		 * Proportion of media file played.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		proportionPlayed: PropTypes.number,
 
 		/**
 		 * `true` when the media playlist loops.
@@ -246,7 +246,7 @@ const MediaPlayerBase = kind({
 		durFmt: ({locale}) => getDurFmt(locale)
 	},
 
-	render: ({currentTime, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onLoopChange, onNext, onPause, onPlay, onPrevious, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeatAll, shuffle, source, sourceIndex, total, ...rest}) => {
+	render: ({currentTime, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onLoopChange, onNext, onPause, onPlay, onPrevious, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeatAll, shuffle, sourceIndex, total, ...rest}) => {
 		return (
 			<div {...rest}>
 				<Media
