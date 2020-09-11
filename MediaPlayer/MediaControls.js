@@ -206,14 +206,16 @@ const MediaControlsBase = kind({
 					css={css}
 					icon={shuffleIcon}
 					onClick={onShuffleButtonClick}
-					size="large" />
+					size="large"
+				/>
 				<Button
 					aria-label={$L('Previous')}
 					backgroundOpacity="transparent"
 					css={css}
 					icon={previousTrackIcon}
 					onClick={onPreviousButtonClick}
-					size="large" />
+					size="large"
+				/>
 				<Button
 					aria-label={paused ? $L('Play') : $L('Pause')}
 					backgroundOpacity="transparent"
@@ -230,13 +232,15 @@ const MediaControlsBase = kind({
 					css={css}
 					icon={nextTrackIcon}
 					onClick={onNextButtonClick}
-					size="large" />
+					size="large"
+				/>
 				<Button
 					aria-label={$L('Menu')}
 					backgroundOpacity="transparent"
 					css={css}
 					icon={menuIcon}
-					size="large" />
+					size="large"
+				/>
 			</div>
 		);
 	}
