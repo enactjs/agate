@@ -597,7 +597,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 					// When resetting shuffle to false, the initial playlist is set with the last played media kept active.
 					this.setState({
 						playlist: this.props.children,
-						sourceIndex: currentMedia.key
+						sourceIndex: parseInt(currentMedia.key)
 					});
 				}
 			});
@@ -611,10 +611,6 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 			const time = value * this.state.duration;
 
 			this.seek(time);
-		};
-
-		onSliderChange = ({value}) => {
-			this.media.currentTime = value * this.state.duration;
 		};
 
 		setMediaRef = (node) => {
