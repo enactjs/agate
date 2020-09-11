@@ -109,6 +109,7 @@ const Key = kind({
 					{...rest}
 					css={css}
 					icon={children}
+					role={null}
 					size="large"
 				>
 					{(text || text === 0) ? <span className={css.text}>{text}</span> : null}
@@ -160,18 +161,28 @@ const KeypadBase = kind({
 		return (
 			<Layout {...rest} align="center end" className={css.keypad} inline wrap>
 				{KEY_LIST.map((keyText, rowIndex) => {
+					const {icon, text} = keyText;
+					const isIcon = icon === 'arrowuturn' || icon === 'phone';
+
+					let ariaLabel = text;
+					if (icon === 'arrowuturn') {
+						ariaLabel = $L('backspace');
+					} else if (icon === 'phone') {
+						ariaLabel = $L('call');
+					}
+
 					return (
 						<Cell
-							aria-label={keyText.icon === 'arrowuturn' ? $L('Back Space') : keyText.text}
+							aria-label={ariaLabel}
 							component={Key}
 							disabled={disabled}
-							key={`key${rowIndex}-${keyText.text}`}
-							onKeyButtonClick={() => handleInputValue(keyText.icon ? keyText.icon : keyText.text)}
+							key={`key${rowIndex}-${text}`}
+							onKeyButtonClick={() => handleInputValue(isIcon ? icon : text)}
 							shrink
 							label={keyText.label}
-							text={keyText.text}
+							text={isIcon ? null : text}
 						>
-							{keyText.icon}
+							{isIcon ? icon : null}
 						</Cell>
 					);
 				})}
