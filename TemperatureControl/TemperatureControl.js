@@ -43,7 +43,6 @@ import css from './TemperatureControl.module.less';
  * @public
  */
 class TemperatureControlBase extends React.Component {
-
 	static displayName=  'TemperatureControl';
 
 	static propTypes = {
@@ -85,7 +84,7 @@ class TemperatureControlBase extends React.Component {
 
 	// Calculates the new SVG value based on the mouse cursor coordinates and sets the new value into the state
 	calculateNewValue = (ev) => {
-		const {max,	min} = this.props;
+		const {max, min} = this.props;
 
 		const svgRef = this.svgRef.current;
 		if (!svgRef) {
