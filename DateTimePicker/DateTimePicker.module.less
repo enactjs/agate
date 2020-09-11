@@ -5,11 +5,25 @@
 
 .dateTimePicker {
 	position: relative;
+
+	&::before {
+		content: "";
+		position: absolute;
+		width: 95%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 }
 
 .applySkins({
 	.dateTimePicker {
 		font-size: @agate-picker-font-size;
 		width: @agate-datetimepicker-width;
+
+		&::before {
+			height: @agate-button-height;
+			background-image: @agate-datetimepicker-active-container-bg-image;
+			background-color: @agate-datetimepicker-active-container-bg-color;
+		}
 	}
 });
