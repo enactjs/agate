@@ -4,7 +4,6 @@ import {storiesOf} from '@storybook/react';
 import MediaPlayer from '@enact/agate/MediaPlayer';
 
 const audioFiles = [
-	'https://www.w3schools.com/tags/horse.ogg',
 	'https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3',
 	'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',
 	'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3'

@@ -191,19 +191,52 @@ const MediaControlsBase = kind({
 		return (
 			<div {...rest}>
 				<Button
-					aria-label={$L('Repeat')} backgroundOpacity="transparent"
-					className={repeatAll ? css.activeControl : ''} badge={loop ? '1' : ''} css={css} icon={repeatIcon} onClick={onLoopButtonClick} size="large"
+					aria-label={$L('Repeat')}
+					backgroundOpacity="transparent"
+					badge={loop ? '1' : ''}
+					className={repeatAll ? css.activeControl : ''}
+					css={css} icon={repeatIcon}
+					onClick={onLoopButtonClick}
+					size="large"
 				/>
-				<Button aria-label={$L('Shuffle')} backgroundOpacity="transparent" className={shuffle ? css.activeControl : ''} css={css} icon={shuffleIcon} onClick={onShuffleButtonClick} size="large" />
-				<Button aria-label={$L('Previous')} backgroundOpacity="transparent" css={css} icon={previousTrackIcon} onClick={onPreviousButtonClick} size="large" />
 				<Button
-					aria-label={paused ? $L('Play') : $L('Pause')} backgroundOpacity="transparent"
-					className={css.playPauseButton} css={css} onClick={onPlayButtonClick} size="large"
+					aria-label={$L('Shuffle')}
+					backgroundOpacity="transparent"
+					className={shuffle ? css.activeControl : ''}
+					css={css}
+					icon={shuffleIcon}
+					onClick={onShuffleButtonClick}
+					size="large" />
+				<Button
+					aria-label={$L('Previous')}
+					backgroundOpacity="transparent"
+					css={css}
+					icon={previousTrackIcon}
+					onClick={onPreviousButtonClick}
+					size="large" />
+				<Button
+					aria-label={paused ? $L('Play') : $L('Pause')}
+					backgroundOpacity="transparent"
+					className={css.playPauseButton}
+					css={css}
+					onClick={onPlayButtonClick}
+					size="large"
 				>
 					<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
 				</Button>
-				<Button aria-label={$L('Next')} backgroundOpacity="transparent" css={css} icon={nextTrackIcon} onClick={onNextButtonClick} size="large" />
-				<Button aria-label={$L('Menu')} backgroundOpacity="transparent" css={css} icon={menuIcon} size="large" />
+				<Button
+					aria-label={$L('Next')}
+					backgroundOpacity="transparent"
+					css={css}
+					icon={nextTrackIcon}
+					onClick={onNextButtonClick}
+					size="large" />
+				<Button
+					aria-label={$L('Menu')}
+					backgroundOpacity="transparent"
+					css={css}
+					icon={menuIcon}
+					size="large" />
 			</div>
 		);
 	}
