@@ -44,14 +44,6 @@ const FanSpeedControlBase = kind({
 		icon: PropTypes.string,
 
 		/**
-		 * Opacity of FanSpeedControl SVG segments.
-		 *
-		 * @type {Number}
-		 * @public
-		 */
-		opacity: PropTypes.number,
-
-		/**
 		 * Value of FanSpeedControl.
 		 *
 		 * @type {Number}
