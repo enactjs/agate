@@ -45,7 +45,7 @@ const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div
 const MarqueeButton = MarqueeDecorator({className: componentCss.marquee}, Button);
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
 
-const handleTransitionHide = (containerId) => () => {
+const handleTransitionHide = (ev, {'data-spotlight-id': containerId}) => {
 	const containerSelector = `[data-spotlight-id='${containerId}']`;
 	const current = Spotlight.getCurrent();
 
@@ -170,7 +170,8 @@ const DropdownBase = kind({
 	handlers: {
 		onSelect: handle(
 			forward('onSelect'),
-			forward('onClose')
+			forward('onClose'),
+			handleTransitionHide
 		),
 		onOpen: handle(
 			forProp('open', false),
@@ -257,7 +258,6 @@ const DropdownBase = kind({
 			[<Icon slot="slotAfter" key="icon" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>]
 
 		];
-		const onTransitionHide = handleTransitionHide(rest['data-spotlight-id']);
 
 		return (
 			<div {...rest}>
@@ -278,7 +278,6 @@ const DropdownBase = kind({
 						className={transitionContainerClassname}
 						visible={opened}
 						direction={transitionDirection}
-						onHide={onTransitionHide}
 					>
 						<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
 							<Scroller skinVariants={skinVariants} className={css.scroller}>
