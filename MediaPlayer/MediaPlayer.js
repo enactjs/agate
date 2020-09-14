@@ -412,9 +412,10 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		};
 
 		onSliderChange = ({value}) => {
-			this.media.currentTime = value * this.state.duration;
+			const currentTime = value * this.state.duration;
+			const seconds = Math.floor(currentTime);
 
-			const seconds = Math.floor(value * this.state.duration);
+			this.media.currentTime = currentTime;
 
 			if (!isNaN(seconds)) {
 				const knobTime = secondsToTime(seconds, getDurFmt(this.props.locale), {includeHour: true});
