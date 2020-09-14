@@ -136,10 +136,9 @@ const ArcBase = kind({
 
 	render: ({color, endAngle, radius, startAngle, thickness, ...rest}) => {
 		const size = radius * 2 + thickness;
-		const viewBox = '0 ' + '0 ' + size + ' ' + size;
 
 		return (
-			<svg viewBox={viewBox} {...rest}>
+			<svg viewBox="0 0 300 300" {...rest}>
 				<path
 					stroke={color}
 					strokeWidth={thickness}
