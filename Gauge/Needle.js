@@ -54,7 +54,7 @@ const NeedleBase = kind({
 
 	styles: {
 		css: componentCss,
-		publicClassNames: ['needle']
+		publicClassNames: true
 	},
 
 	render: ({css, ...rest}) => {
