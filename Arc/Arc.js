@@ -87,9 +87,11 @@ const ArcBase = kind({
 		publicClassNames: true
 	},
 
-	render: ({color, endAngle, radius, startAngle, thickness, ...rest}) => {
-		const size = radius * 2 + thickness;
+	computed: {
+		size : ({radius, thickness}) => (radius * 2) + thickness
+	},
 
+	render: ({color, endAngle, radius, size, startAngle, thickness, ...rest}) => {
 		return (
 			<svg viewBox="0 0 300 300" {...rest}>
 				<path
