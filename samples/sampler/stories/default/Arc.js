@@ -5,7 +5,7 @@ import {storiesOf} from '@storybook/react';
 
 import Arc, {ArcBase} from '@enact/agate/Arc';
 
-Arc.displayName = 'Button';
+Arc.displayName = 'Arc';
 const Config = mergeComponentMetadata('Arc', ArcBase, Arc);
 
 // Set up some defaults for info and knobs
