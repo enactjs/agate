@@ -64,7 +64,6 @@ const arcPath = (startAngle, endAngle, svgRadius, svgSize) => {
  *
  * @class ArcBase
  * @memberof agate/Arc
- * @extends ui/Arc.ArcBase
  * @ui
  * @public
  */
