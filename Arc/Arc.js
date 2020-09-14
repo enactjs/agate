@@ -169,7 +169,7 @@ const ArcDecorator = compose(
  *
  * Usage:
  * ```
- * <Arc color="blue" endAngle={200} startAngle={0 radius={100} />
+ * <Arc color="blue" endAngle="200" startAngle="0" radius="100" />
  *
  * @class Arc
  * @memberof agate/Arc
