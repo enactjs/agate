@@ -1,3 +1,15 @@
+/**
+ * Agate styled arc components and behaviors.
+ *
+ * @example
+ * <Arc color="blue" endAngle={200} startAngle={0}" radius={100} />
+ *
+ * @module agate/Arc
+ * @exports Arc
+ * @exports ArcBase
+ * @exports ArcDecorator
+ */
+
 import kind from '@enact/core/kind';
 import Pure from '@enact/ui/internal/Pure';
 import ri from '@enact/ui/resolution';
@@ -35,7 +47,7 @@ const ArcBase = kind({
 		/**
 		 * The end angle(in degrees) of the arc.
 		 *
-		 * The value should be between 0 and 360 and should be greater than startAngle
+		 * The value should be between 0 and 360 and should be greater than startAngle.
 		 *
 		 * @type {number}
 		 * @default: 310
@@ -55,7 +67,7 @@ const ArcBase = kind({
 		/**
 		 * The start angle(in degrees) of the arc.
 		 *
-		 * The value should be between 0 and 360
+		 * The value should be between 0 and 360.
 		 *
 		 * @type {number}
 		 * @default: 50
@@ -64,7 +76,7 @@ const ArcBase = kind({
 		startAngle: PropTypes.number,
 
 		/**
-		 * The thickness of the arc.
+		 * The stroke width of the arc.
 		 *
 		 * @type {number}
 		 * @default: 1
