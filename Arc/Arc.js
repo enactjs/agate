@@ -1,13 +1,12 @@
 import kind from '@enact/core/kind';
 import Pure from '@enact/ui/internal/Pure';
+import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
-import React from 'react';
 import compose from 'ramda/src/compose';
+import React from 'react';
 import Skinnable from '../Skinnable';
 
 import {arcPath} from './utils';
-
-import css from './Arc.module.less';
 
 /**
  * An arc component.
@@ -71,7 +70,7 @@ const ArcBase = kind({
 		 * @default: 1
 		 * @public
 		 */
-		thickness: PropTypes.number
+		strokeWidth: PropTypes.number
 	},
 
 	defaultProps: {
@@ -79,25 +78,25 @@ const ArcBase = kind({
 		endAngle: 310,
 		radius: 100,
 		startAngle: 50,
-		thickness: 1
-	},
-
-	styles: {
-		css,
-		publicClassNames: true
+		strokeWidth: 1
 	},
 
 	computed: {
-		size : ({radius, thickness}) => (radius * 2) + thickness
+		height: ({radius}) => ri.scaleToRem(radius * 2),
+		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth),
+		width: ({radius}) => ri.scaleToRem(radius * 2)
 	},
 
-	render: ({color, endAngle, radius, size, startAngle, thickness, ...rest}) => {
+	render: ({color, endAngle, radius, size, startAngle, strokeWidth, ...rest}) => {
+		const halfStrokeWidth = strokeWidth / 2;
+		const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${radius * 2}  ${radius * 2}`;
+
 		return (
-			<svg viewBox="0 0 300 300" {...rest}>
+			<svg viewBox={viewBox} {...rest}>
 				<path
 					stroke={color}
-					strokeWidth={thickness}
-					d={arcPath(startAngle, endAngle, radius, size)}
+					strokeWidth={strokeWidth}
+					d={arcPath(startAngle, endAngle, radius - halfStrokeWidth, size)}
 					fill="none"
 				/>
 			</svg>
@@ -124,7 +123,7 @@ const ArcDecorator = compose(
  *
  * Usage:
  * ```
- * <Arc color="blue" endAngle="200" startAngle="0" radius="100" />
+ * <Arc color="blue" endAngle={200} startAngle={0}" radius={100} />
  *
  * @class Arc
  * @memberof agate/Arc

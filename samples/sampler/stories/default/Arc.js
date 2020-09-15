@@ -17,15 +17,13 @@ storiesOf('Agate', module)
 	.add(
 		'Arc',
 		() => (
-			<div style={{width:'40%', height:'40%'}}>
-				<Arc
-					color={select('color', prop.colors, Config)}
-					endAngle={number('endAngle', Config, {range: true, min: 0, max: 360})}
-					radius={number('radius', Config)}
-					startAngle={number('startAngle', Config, {range: true, min: 0, max: 360})}
-					thickness={number('thickness', Config)}
-				/>
-			</div>
+			<Arc
+				color={select('color', prop.colors, Config)}
+				endAngle={number('endAngle', Config, {range: true, min: 0, max: 360})}
+				radius={number('radius', Config)}
+				startAngle={number('startAngle', Config, {range: true, min: 0, max: 360})}
+				strokeWidth={number('strokeWidth', Config)}
+			/>
 		),
 		{
 			text: 'The basic arc'
