@@ -4,7 +4,7 @@ import Changeable from '@enact/ui/Changeable';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Picker from '../Picker';
+import Picker from '../../Picker';
 
 import css from './DateComponentPicker.module.less';
 
@@ -72,6 +72,7 @@ const DateComponentPickerBase = kind({
 	render: ({accessibilityHint, 'aria-valuetext': ariaValuetext, children, max, value, ...rest}) => (
 		<Picker
 			{...rest}
+			css={css}
 			accessibilityHint={accessibilityHint}
 			aria-valuetext={(accessibilityHint == null) ? ariaValuetext : null}
 			index={value}

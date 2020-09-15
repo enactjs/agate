@@ -105,6 +105,14 @@ const MediaPlayerBase = kind({
 		mediaRef: PropTypes.func,
 
 		/**
+		 * Called when position of media slider is changed.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onChange: PropTypes.func,
+
+		/**
 		 * Called when media is looped
 		 *
 		 * @type {Function}
@@ -145,6 +153,14 @@ const MediaPlayerBase = kind({
 		paused: PropTypes.bool,
 
 		/**
+		 * Proportion of media file played.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		proportionPlayed: PropTypes.number,
+
+		/**
 		 * The total time (duration) in seconds of the loaded media source.
 		 *
 		 * @type {Number}
@@ -166,7 +182,7 @@ const MediaPlayerBase = kind({
 		durFmt: ({locale}) => getDurFmt(locale)
 	},
 
-	render: ({currentTime, durFmt, loop, mediaComponent, mediaRef, onLoopChange, onPause, onPlay, onUpdate, paused, source, total, ...rest}) => {
+	render: ({currentTime, durFmt, loop, mediaComponent, mediaRef, onChange, onLoopChange, onPause, onPlay, onUpdate, paused, proportionPlayed, source, total, ...rest}) => {
 		return (
 			<div {...rest}>
 				<Media
@@ -176,7 +192,10 @@ const MediaPlayerBase = kind({
 					ref={mediaRef}
 					source={source}
 				/>
-				<MediaSlider />
+				<MediaSlider
+					onChange={onChange}
+					value={proportionPlayed}
+				/>
 				<Times
 					current={currentTime}
 					formatter={durFmt}
@@ -266,7 +285,8 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				currentTime: 0,
 				duration: 0,
 				loop: false,
-				paused: true
+				paused: true,
+				proportionPlayed: 0
 			};
 		}
 
@@ -309,7 +329,8 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				currentTime: this.state.currentTime,
 				duration: this.state.duration,
 				loop: this.state.loop,
-				paused: this.state.paused
+				paused: this.state.paused,
+				proportionPlayed: this.state.proportionPlayed
 			};
 		};
 
@@ -331,7 +352,8 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				currentTime: el.currentTime,
 				duration: el.duration,
 				loop: el.loop,
-				paused: el.paused
+				paused: el.paused,
+				proportionPlayed: el.proportionPlayed || 0
 			};
 
 			// If there's an error, we're obviously not loading, no matter what the readyState is.
@@ -377,6 +399,10 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 			});
 		};
 
+		onSliderChange = ({value}) => {
+			this.media.currentTime = value * this.state.duration;
+		};
+
 		setMediaRef = (node) => {
 			this.media = node;
 		};
@@ -391,11 +417,13 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 					{...rest}
 					currentTime={this.state.currentTime}
 					loop={this.state.loop}
+					onChange={this.onSliderChange}
 					onLoopChange={this.loopChange}
 					onPause={this.handlePause}
 					onPlay={this.handlePlay}
 					onUpdate={this.handleEvent}
 					paused={this.state.paused}
+					proportionPlayed={this.state.proportionPlayed}
 					mediaRef={this.setMediaRef}
 					total={this.state.duration}
 				/>

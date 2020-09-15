@@ -53,7 +53,10 @@ const handleTransitionHide = (containerId) => () => {
 	const current = Spotlight.getCurrent();
 
 	if (!Spotlight.isPaused() && current && document.querySelector(`${containerSelector} .${componentCss.dropdownList}`).contains(current)) {
-		Spotlight.focus(`${containerSelector} .${componentCss.dropdown}`);
+		const focusResult = Spotlight.focus(`${containerSelector} .${componentCss.dropdown}`);
+		if (!focusResult && Spotlight.getPointerMode()) {
+			document.querySelector(`${containerSelector} .${componentCss.dropdown}`).focus();
+		}
 	}
 };
 
@@ -194,7 +197,6 @@ const DropdownBase = kind({
 	},
 
 	computed: {
-		buttonClassName: ({open, styler}) => styler.append({open}),
 		adjustedDirection: ({direction, 'data-spotlight-id': containerId}) => {
 			const calcOverflow = (container, client, wrapper) => {
 				const KEEPOUT = ri.scale(24); // keep out distance on the edge of the screen
@@ -234,7 +236,31 @@ const DropdownBase = kind({
 
 			return direction;
 		},
-		dropdownListClassName: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
+		buttonClassName: ({open, styler}) => styler.append({open}),
+		children: ({children, selected}) => {
+			if (!Array.isArray(children)) return [];
+
+			return children.map((child, i) => {
+				const aria = {
+					role: 'checkbox',
+					'aria-checked': selected === i
+				};
+
+				if (typeof child === 'string') {
+					return {
+						...aria,
+						children: child,
+						key: `item_${child}`
+					};
+				}
+
+				return {
+					...aria,
+					...child
+				};
+			});
+		},
+		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected, title}) => {
 			if (isSelectedValid({children, selected})) {
 				const child = children[selected];
@@ -275,6 +301,7 @@ const DropdownBase = kind({
 			<div {...rest}>
 				<div {...wrapperProps}>
 					<DropDownButton
+						role="button"
 						className={buttonClassName}
 						css={css}
 						disabled={hasChildren ? disabled : true}
@@ -294,6 +321,7 @@ const DropdownBase = kind({
 						<ContainerDiv className={dropdownListClassName} spotlightDisabled={!open} spotlightRestrict="self-only">
 							<Scroller skinVariants={skinVariants} className={css.scroller}>
 								<Group
+									role={null}
 									className={css.group}
 									onSelect={onSelect}
 									selected={selected}
