@@ -25,8 +25,10 @@ import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
 import {MarqueeDecorator} from '@enact/ui/Marquee';
 import IdProvider from '@enact/ui/internal/IdProvider';
+import ri from '@enact/ui/resolution';
 import Toggleable from '@enact/ui/Toggleable';
 import Transition from '@enact/ui/Transition';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -41,6 +43,7 @@ import Skinnable from '../Skinnable';
 
 import componentCss from './Dropdown.module.less';
 
+const oppositeDirection = {left: 'right', right: 'left', up: 'down', down: 'up'};
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 const MarqueeButton = MarqueeDecorator({className: componentCss.marquee}, Button);
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
@@ -84,6 +87,15 @@ const DropdownBase = kind({
 		 * @private
 		 */
 		css: PropTypes.object,
+
+		/**
+		 * This is passed onto the wrapped component to allow
+		 * it to customize the spotlight container for its use case.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		'data-spotlight-id': PropTypes.string,
 
 		/**
 		 * The direction where the dropdown list appears.
@@ -185,6 +197,45 @@ const DropdownBase = kind({
 	},
 
 	computed: {
+		adjustedDirection: ({direction, 'data-spotlight-id': containerId}) => {
+			const calcOverflow = (container, client, wrapper) => {
+				const KEEPOUT = ri.scale(24); // keep out distance on the edge of the screen
+				const wrapperTop = (wrapper && wrapper.top) || 0;
+				const wrapperBottom = (wrapper && wrapper.bottom) || window.innerHeight;
+
+				const overflow = {
+					isOverTop: client.top - container.height - KEEPOUT < wrapperTop,
+					isOverBottom: client.bottom + container.height + KEEPOUT > wrapperBottom
+				};
+
+				return overflow;
+			};
+
+			const adjustDirection = (overflow) => {
+				let adjustedDirection = direction;
+				if (overflow.isOverTop && !overflow.isOverBottom && direction === 'up') {
+					adjustedDirection = 'down';
+				} else if (overflow.isOverBottom && !overflow.isOverTop && direction === 'down') {
+					adjustedDirection = 'up';
+				}
+
+				return adjustedDirection;
+			};
+
+			const containerSelector = `[data-spotlight-id='${containerId}']`;
+			const containerNode = document.querySelector(`${containerSelector} .${componentCss.dropdownList}`);
+			const clientNode = document.querySelector(`${containerSelector} .${componentCss.dropdown}`);
+			const wrapperNode = clientNode && clientNode.closest('div[style*=overflow]');
+
+			if (containerNode && clientNode) {
+				const containerNodeRect = containerNode.getBoundingClientRect();
+				const clientNodeRect = clientNode.getBoundingClientRect();
+				const wrapperNodeRect = wrapperNode && wrapperNode.getBoundingClientRect();
+				return adjustDirection(calcOverflow(containerNodeRect, clientNodeRect, wrapperNodeRect));
+			}
+
+			return direction;
+		},
 		buttonClassName: ({open, styler}) => styler.append({open}),
 		children: ({children, selected}) => {
 			if (!Array.isArray(children)) return [];
@@ -209,9 +260,7 @@ const DropdownBase = kind({
 				};
 			});
 		},
-		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'}),
-		dropdownButtonClassname: ({css, direction, styler}) => styler.join(css.dropdownButton, {upDropdownButton: direction === 'up'}),
-		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
+		dropdownListClassName: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected, title}) => {
 			if (isSelectedValid({children, selected})) {
 				const child = children[selected];
@@ -220,31 +269,20 @@ const DropdownBase = kind({
 
 			return title;
 		},
-		transitionDirection: ({direction}) => {
-			switch (direction) {
-				case 'left':
-					return 'right';
-				case 'right':
-					return 'left';
-				case 'up':
-					return 'down';
-				case 'down':
-				default:
-					return 'up';
-			}
-		},
 		hasChildren: ({children}) => {
 			return children.length > 0;
 		}
 	},
 
-	render: ({buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, ...rest}) => {
 		const ariaProps = extractAriaProps(rest);
+		const dropdownButtonClassName = classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'up'});
 		const opened = !disabled && open;
+		const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
 		const [DropDownButton, dropDownButtonProps, wrapperProps, skinVariants, groupProps, iconComponent] = (skin === 'silicon') ? [
 			MarqueeButton,
 			{icon: open ? 'arrowlargeup' : 'arrowlargedown'},
-			{className: dropdownButtonClassname},
+			{className: dropdownButtonClassName},
 			{'night': false},
 			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'},
 			[]
@@ -275,12 +313,12 @@ const DropdownBase = kind({
 						{title}
 					</DropDownButton>
 					<Transition
-						className={transitionContainerClassname}
+						className={transitionContainerClassName}
 						visible={opened}
-						direction={transitionDirection}
+						direction={oppositeDirection[adjustedDirection]}
 						onHide={onTransitionHide}
 					>
-						<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
+						<ContainerDiv className={dropdownListClassName} spotlightDisabled={!open} spotlightRestrict="self-only">
 							<Scroller skinVariants={skinVariants} className={css.scroller}>
 								<Group
 									role={null}
