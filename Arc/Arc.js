@@ -99,7 +99,7 @@ const ArcBase = kind({
 		width: ({radius}) => ri.scaleToRem(radius * 2)
 	},
 
-	render: ({color, endAngle, radius, size, startAngle, strokeWidth, ...rest}) => {
+	render: ({children, color, endAngle, radius, size, startAngle, strokeWidth, ...rest}) => {
 		const halfStrokeWidth = strokeWidth / 2;
 		const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${radius * 2}  ${radius * 2}`;
 
@@ -111,6 +111,7 @@ const ArcBase = kind({
 					d={arcPath(startAngle, endAngle, radius - halfStrokeWidth, size)}
 					fill="none"
 				/>
+				{children}
 			</svg>
 		);
 	}
