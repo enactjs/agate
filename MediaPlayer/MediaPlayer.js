@@ -121,14 +121,6 @@ const MediaPlayerBase = kind({
 		onEnded: PropTypes.func,
 
 		/**
-		 * Called when media is looped
-		 *
-		 * @type {Function}
-		 * @public
-		 */
-		onLoopChange: PropTypes.func,
-
-		/**
 		 * Called when jumping to next media
 		 *
 		 * @type {Function}
@@ -159,6 +151,14 @@ const MediaPlayerBase = kind({
 		 * @public
 		 */
 		onPrevious: PropTypes.func,
+
+		/**
+		 * Called when media is on repeat.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onRepeat: PropTypes.func,
 
 		/**
 		 * Called when jumping to a random media
@@ -201,12 +201,13 @@ const MediaPlayerBase = kind({
 		proportionPlayed: PropTypes.number,
 
 		/**
-		 * `true` when the media playlist loops.
+		 * The repeat mode of the media playlist.
 		 *
-		 * @type {Boolean}
+		 * @type {('none'|'one'|'all')}
+		 * @default 'none'
 		 * @public
 		 */
-		repeatAll: PropTypes.bool,
+		repeat: PropTypes.oneOf(['none', 'one', 'all']),
 
 		/**
 		 * `true` when the media playlist is shuffled.
@@ -246,7 +247,7 @@ const MediaPlayerBase = kind({
 		durFmt: ({locale}) => getDurFmt(locale)
 	},
 
-	render: ({currentTime, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onLoopChange, onNext, onPause, onPlay, onPrevious, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeatAll, shuffle, sourceIndex, total, ...rest}) => {
+	render: ({currentTime, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, total, ...rest}) => {
 		return (
 			<div {...rest}>
 				<Media
@@ -267,15 +268,14 @@ const MediaPlayerBase = kind({
 					total={total}
 				/>
 				<MediaControls
-					loop={loop}
-					onLoopChange={onLoopChange}
+					onRepeat={onRepeat}
 					onNext={onNext}
 					onPause={onPause}
 					onPlay={onPlay}
 					onPrevious={onPrevious}
 					onShuffle={onShuffle}
 					paused={paused}
-					repeatAll={repeatAll}
+					repeat={repeat}
 					shuffle={shuffle}
 				/>
 			</div>
@@ -321,14 +321,6 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 			mediaComponent: EnactPropTypes.renderable,
 
 			/**
-			 * Called when media is looped
-			 *
-			 * @type {Function}
-			 * @public
-			 */
-			onLoopChange: PropTypes.func,
-
-			/**
 			 * Called when jumping to next media
 			 *
 			 * @type {Function}
@@ -361,6 +353,14 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 			onPrevious: PropTypes.func,
 
 			/**
+			 * Called when media is on repeat mode.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onRepeat: PropTypes.func,
+
+			/**
 			 * Called when jumping to a random media
 			 *
 			 * @type {Function}
@@ -382,7 +382,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				loop: false,
 				paused: true,
 				proportionPlayed: 0,
-				repeatAll: false,
+				repeat: 'none',
 				shuffle: false,
 				sourceIndex: 0
 			};
@@ -489,21 +489,24 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		 * @memberof agate/MediaPlayer.MediaPlayerBase.prototype
 		 * @public
 		 */
-		loopChange = () => {
-			// Handling the 3 states of loop: repeat one, repeat all and repeat none.
-			this.setState(prevState  => {
-				return ({loop: !prevState.loop});
-			}, () => {
-				this.media.loop = this.state.loop;
-			});
-
-			if (this.state.loop) {
-				this.setState({repeatAll: true});
-			} else if (this.state.repeatAll) {
-				this.setState({
-					loop: false,
-					repeatAll: false
-				});
+		handleOnRepeat = () => {
+			// Handling the 3 states of repeat: repeat none, repeat one and repeat all
+			switch (this.state.repeat) {
+				case 'none':
+					this.setState(prevState  => {
+						return ({loop: !prevState.loop});
+					}, () => {
+						this.media.loop = this.state.loop;
+					});
+					this.setState({repeat: 'one'});
+					break;
+				case 'one':
+					this.setState({repeat: 'all'});
+					this.media.loop = false;
+					break;
+				case 'all':
+					this.setState({repeat: 'none'});
+					this.media.loop = false;
 			}
 		};
 
@@ -517,8 +520,8 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 
 			if (currentIndex < this.state.playlist.length - 1) {
 				++currentIndex;
-			} else if (this.state.repeatAll) {
-				// When repeatAll and shuffle are true, the playback of the list restarts and the media list is reshuffled.
+			} else if (this.state.repeat === 'all') {
+				// When repeat all and shuffle are true, the playback of the list restarts and the media list is reshuffled.
 				currentIndex = 0;
 
 				if (this.state.shuffle) {
@@ -538,7 +541,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 
 			if (currentIndex > 0) {
 				--currentIndex;
-			} else if (this.state.repeatAll && !this.state.shuffle) {
+			} else if (this.state.repeat === 'all' && !this.state.shuffle) {
 				currentIndex = this.state.playlist.length - 1;
 			}
 
@@ -615,14 +618,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 
 		setMediaRef = (node) => {
 			this.media = node;
-			this.setMedia();
 		};
-
-		setMedia ({setMedia} = this.props) {
-			if (setMedia) {
-				setMedia(this.media);
-			}
-		}
 
 		render () {
 			const {
@@ -637,16 +633,16 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 					mediaRef={this.setMediaRef}
 					onChange={this.onSliderChange}
 					onEnded={this.handleOnEnded}
-					onLoopChange={this.loopChange}
 					onNext={this.handleNext}
 					onPause={this.handlePause}
 					onPlay={this.handlePlay}
 					onPrevious={this.handlePrevious}
+					onRepeat={this.handleOnRepeat}
 					onShuffle={this.handleShuffle}
 					onUpdate={this.handleEvent}
 					paused={this.state.paused}
 					playlist={this.state.playlist}
-					repeatAll={this.state.repeatAll}
+					repeat={this.state.repeat}
 					shuffle={this.state.shuffle}
 					sourceIndex={this.state.sourceIndex}
 					proportionPlayed={this.state.proportionPlayed}

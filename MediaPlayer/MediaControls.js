@@ -1,4 +1,3 @@
-import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
@@ -23,15 +22,6 @@ const MediaControlsBase = kind({
 
 	propTypes: /** @lends agate/MediaPlayer.MediaControls.prototype */ {
 		/**
-		 * `true` when the media loops.
-		 *
-		 * @type {Boolean}
-		 * @default false
-		 * @public
-		 */
-		loop: PropTypes.bool,
-
-		/**
 		 * A string which is sent to the `menu` icon of the player controls. This can be
 		 * anything that is accepted by {@link agate/Icon.Icon}.
 		 *
@@ -52,20 +42,20 @@ const MediaControlsBase = kind({
 		nextTrackIcon: PropTypes.string,
 
 		/**
-		 * Called when the user clicks the Loop button.
-		 *
-		 * @type {Function}
-		 * @public
-		 */
-		onLoopButtonClick: PropTypes.func,
-
-		/**
 		 * Called when the user clicks the Next button.
 		 *
 		 * @type {Function}
 		 * @public
 		 */
-		onNextButtonClick: PropTypes.func,
+		onNext: PropTypes.func,
+
+		/**
+		 * Called when the user clicks the Pause button.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onPause: PropTypes.func,
 
 		/**
 		 * Called when the user clicks the Play button.
@@ -73,7 +63,7 @@ const MediaControlsBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onPlayButtonClick: PropTypes.func,
+		onPlay: PropTypes.func,
 
 		/**
 		 * Called when the user clicks the Previous button.
@@ -81,7 +71,15 @@ const MediaControlsBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onPreviousButtonClick: PropTypes.func,
+		onPrevious: PropTypes.func,
+
+		/**
+		 * Called when the user clicks the Loop button.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onRepeat: PropTypes.func,
 
 		/**
 		 * Called when the user clicks the Shuffle button.
@@ -89,7 +87,7 @@ const MediaControlsBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onShuffleButtonClick: PropTypes.func,
+		onShuffle: PropTypes.func,
 
 		/**
 		 * `true` when the media is paused.
@@ -134,12 +132,13 @@ const MediaControlsBase = kind({
 		previousTrackIcon: PropTypes.string,
 
 		/**
-		 * `true` when the media playlist loops.
+		 * The repeat mode of the media playlist.
 		 *
-		 * @type {Boolean}
+		 * @type {('none'|'one'|'all')}
+		 * @default 'none'
 		 * @public
 		 */
-		repeatAll: PropTypes.bool,
+		repeat: PropTypes.oneOf(['none', 'one', 'all']),
 
 		/**
 		 * A string which is sent to the `repeat` icon of the player controls. This can be
@@ -171,13 +170,13 @@ const MediaControlsBase = kind({
 	},
 
 	defaultProps: {
-		loop: false,
 		menuIcon: 'menu',
 		nextTrackIcon: 'nexttrack',
 		pauseIcon: 'pause',
 		paused: true,
 		playIcon: 'play',
 		previousTrackIcon: 'previoustrack',
+		repeat: 'none',
 		repeatIcon: 'repeat',
 		shuffleIcon: 'shuffle'
 	},
@@ -187,25 +186,38 @@ const MediaControlsBase = kind({
 		className: 'controlsFrame'
 	},
 
-	render: ({loop, menuIcon, nextTrackIcon, onLoopButtonClick, onNextButtonClick, onPlayButtonClick, onPreviousButtonClick, onShuffleButtonClick, pauseIcon, paused, playIcon, previousTrackIcon, repeatAll, repeatIcon, shuffle, shuffleIcon, ...rest}) => {
+	computed: {
+		badge: ({repeat}) => {
+			switch (repeat) {
+				case 'one':
+					return '1';
+				case 'all':
+					return 'A';
+				case 'none':
+					return '';
+			}
+		}
+	},
+
+	render: ({badge, menuIcon, nextTrackIcon, onRepeat, onNext, onPause, onPlay, onPrevious, onShuffle, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffle, shuffleIcon, ...rest}) => {
 		return (
 			<div {...rest}>
 				<Button
 					aria-label={$L('Repeat')}
 					backgroundOpacity="transparent"
-					badge={loop ? '1' : ''}
-					className={repeatAll ? css.activeControl : ''}
-					css={css} icon={repeatIcon}
-					onClick={onLoopButtonClick}
+					badge={badge}
+					css={css}
+					icon={repeatIcon}
+					onClick={onRepeat}
 					size="large"
 				/>
 				<Button
 					aria-label={$L('Shuffle')}
 					backgroundOpacity="transparent"
-					className={shuffle ? css.activeControl : ''}
+					className={shuffle ? css.repeat : ''}
 					css={css}
 					icon={shuffleIcon}
-					onClick={onShuffleButtonClick}
+					onClick={onShuffle}
 					size="large"
 				/>
 				<Button
@@ -213,7 +225,7 @@ const MediaControlsBase = kind({
 					backgroundOpacity="transparent"
 					css={css}
 					icon={previousTrackIcon}
-					onClick={onPreviousButtonClick}
+					onClick={onPrevious}
 					size="large"
 				/>
 				<Button
@@ -221,7 +233,7 @@ const MediaControlsBase = kind({
 					backgroundOpacity="transparent"
 					className={css.playPauseButton}
 					css={css}
-					onClick={onPlayButtonClick}
+					onClick={paused ? onPlay : onPause}
 					size="large"
 				>
 					<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
@@ -231,7 +243,7 @@ const MediaControlsBase = kind({
 					backgroundOpacity="transparent"
 					css={css}
 					icon={nextTrackIcon}
-					onClick={onNextButtonClick}
+					onClick={onNext}
 					size="large"
 				/>
 				<Button
@@ -259,115 +271,16 @@ const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line
 	class MediaControlsDecoratorHOC extends React.Component {
 		static displayName = 'MediaControlsDecorator';
 
-		static propTypes = /** @lends agate/MediaPlayer.MediaControlsDecorator.prototype */ {
-
-			/**
-			 * Called when media gets looped.
-			 *
-			 * @type {Function}
-			 * @public
-			 */
-			onLoopChange: PropTypes.func,
-
-			/**
-			 * Called when jumping to next media.
-			 *
-			 * @type {Function}
-			 * @public
-			 */
-			onNext: PropTypes.func,
-
-			/**
-			 * Called when media gets paused.
-			 *
-			 * @type {Function}
-			 * @public
-			 */
-			onPause: PropTypes.func,
-
-			/**
-			 * Called when media starts playing.
-			 *
-			 * @type {Function}
-			 * @public
-			 */
-			onPlay: PropTypes.func,
-
-			/**
-			 * Called when jumping to previous media.
-			 *
-			 * @type {Function}
-			 * @public
-			 */
-			onPrevious: PropTypes.func,
-
-			/**
-			 * Called when jumping to a random media.
-			 *
-			 * @type {Function}
-			 * @public
-			 */
-			onShuffle: PropTypes.func,
-
-			/**
-			 * The media pause state.
-			 *
-			 * @type {Boolean}
-			 * @public
-			 */
-			paused: PropTypes.bool
-		};
-
 		constructor (props) {
 			super(props);
 		}
 
-		handleLoopButtonClick = (ev) => {
-			forward('onLoopButtonClick', ev, this.props);
-			forward('onLoopChange', ev, this.props);
-		};
-
-		handleNextButtonClick = (ev) => {
-			forward('onNextButtonClick', ev, this.props);
-			forward('onNext', ev, this.props);
-		};
-
-		handlePlayButtonClick = (ev) => {
-			forward('onPlayButtonClick', ev, this.props);
-			if (this.props.paused) {
-				forward('onPlay', ev, this.props);
-			} else {
-				forward('onPause', ev, this.props);
-			}
-		};
-
-		handlePreviousButtonClick = (ev) => {
-			forward('onPreviousButtonClick', ev, this.props);
-			forward('onPrevious', ev, this.props);
-		};
-
-		handleShuffleButtonClick = (ev) => {
-			forward('onShuffleButtonClick', ev, this.props);
-			forward('onShuffle', ev, this.props);
-		};
-
 		render () {
 			const props = Object.assign({}, this.props);
-			delete props.onLoopChange;
-			delete props.onNext;
-			delete props.onPause;
-			delete props.onPlay;
-			delete props.onPrevious;
-			delete props.onShuffle;
 
 			return (
 				<Wrapped
 					{...props}
-					onLoopButtonClick={this.handleLoopButtonClick}
-					onNextButtonClick={this.handleNextButtonClick}
-					onPlayButtonClick={this.handlePlayButtonClick}
-					onPreviousButtonClick={this.handlePreviousButtonClick}
-					onShuffleButtonClick={this.handleShuffleButtonClick}
 				/>
 			);
 		}
