@@ -1,4 +1,3 @@
-import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -258,5 +257,5 @@ const MediaControls = kind({
 
 export default MediaControls;
 export {
-	MediaControls,
+	MediaControls
 };
