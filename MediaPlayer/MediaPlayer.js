@@ -268,11 +268,11 @@ const MediaPlayerBase = kind({
 					total={total}
 				/>
 				<MediaControls
-					onRepeat={onRepeat}
 					onNext={onNext}
 					onPause={onPause}
 					onPlay={onPlay}
 					onPrevious={onPrevious}
+					onRepeat={onRepeat}
 					onShuffle={onShuffle}
 					paused={paused}
 					repeat={repeat}
@@ -642,10 +642,10 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 					onUpdate={this.handleEvent}
 					paused={this.state.paused}
 					playlist={this.state.playlist}
+					proportionPlayed={this.state.proportionPlayed}
 					repeat={this.state.repeat}
 					shuffle={this.state.shuffle}
 					sourceIndex={this.state.sourceIndex}
-					proportionPlayed={this.state.proportionPlayed}
 					total={this.state.duration}
 				/>
 			);

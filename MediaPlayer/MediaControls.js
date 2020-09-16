@@ -9,15 +9,21 @@ import Icon from '../Icon';
 
 import css from './MediaControls.module.less';
 
+const badges = {
+	none: '',
+	one: '1',
+	all: 'A'
+};
+
 /**
  * A set of components for controlling media playback and rendering additional components.
  *
- * @class MediaControlsBase
+ * @class MediaControls
  * @memberof agate/MediaPlayer
  * @ui
  * @private
  */
-const MediaControlsBase = kind({
+const MediaControls = kind({
 	name: 'MediaControls',
 
 	propTypes: /** @lends agate/MediaPlayer.MediaControls.prototype */ {
@@ -187,16 +193,8 @@ const MediaControlsBase = kind({
 	},
 
 	computed: {
-		badge: ({repeat}) => {
-			switch (repeat) {
-				case 'one':
-					return '1';
-				case 'all':
-					return 'A';
-				case 'none':
-					return '';
-			}
-		}
+		badge: ({repeat}) => badges[repeat]
+
 	},
 
 	render: ({badge, menuIcon, nextTrackIcon, onRepeat, onNext, onPause, onPlay, onPrevious, onShuffle, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffle, shuffleIcon, ...rest}) => {
@@ -258,42 +256,7 @@ const MediaControlsBase = kind({
 	}
 });
 
-/**
- * Media control behaviors to apply to [MediaControlsBase]{@link agate/MediaPlayer.MediaControlsBase}.
- * Provides built-in support for key handling for basic playback controls.
- *
- * @class MediaControlsDecorator
- * @memberof agate/MediaPlayer
- * @hoc
- * @private
- */
-const MediaControlsDecorator = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-vars
-	class MediaControlsDecoratorHOC extends React.Component {
-		static displayName = 'MediaControlsDecorator';
-
-		constructor (props) {
-			super(props);
-		}
-
-		render () {
-			const props = Object.assign({}, this.props);
-
-			return (
-				<Wrapped
-					{...props}
-				/>
-			);
-		}
-	}
-
-	return MediaControlsDecoratorHOC;
-});
-
-const MediaControls = MediaControlsDecorator(MediaControlsBase);
-
 export default MediaControls;
 export {
-	MediaControlsBase,
 	MediaControls,
-	MediaControlsDecorator
 };
