@@ -511,8 +511,10 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		};
 
 		handleOnEnded = () => {
-			// Play next media when current media ends.
-			this.handleNext();
+			// Play next media only if current media is not last or, if it is last, only if repeat='all'
+			if (this.state.sourceIndex !== this.state.playlist.length - 1 || (this.state.sourceIndex === this.state.playlist.length - 1 && this.state.repeat === 'all')) {
+				this.handleNext();
+			}
 		};
 
 		handleNext = () => {
@@ -520,8 +522,8 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 
 			if (currentIndex < this.state.playlist.length - 1) {
 				++currentIndex;
-			} else if (this.state.repeat === 'all') {
-				// When repeat all and shuffle are true, the playback of the list restarts and the media list is reshuffled.
+			} else {
+				// When shuffle is true, the playback of the list restarts and the media list is reshuffled.
 				currentIndex = 0;
 
 				if (this.state.shuffle) {
@@ -541,7 +543,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 
 			if (currentIndex > 0) {
 				--currentIndex;
-			} else if (this.state.repeat === 'all' && !this.state.shuffle) {
+			} else if (!this.state.shuffle) {
 				currentIndex = this.state.playlist.length - 1;
 			}
 
