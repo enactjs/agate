@@ -11,7 +11,7 @@
  */
 
 import kind from '@enact/core/kind';
-import UiNeedle from '@enact/ui/Needle';
+import UiNeedle from '../Needle';
 // import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import React from 'react';

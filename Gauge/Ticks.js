@@ -14,7 +14,7 @@ import kind from '@enact/core/kind';
 // import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import React from 'react';
-import UiTicks from '@enact/ui/Ticks';
+import UiTicks from '../Ticks';
 
 
 import componentCss from './Ticks.module.less';
