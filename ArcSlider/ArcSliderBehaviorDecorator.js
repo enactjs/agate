@@ -1,15 +1,8 @@
-import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
-import platform from '@enact/core/platform';
-import Pause from '@enact/spotlight/Pause';
-import PropTypes from 'prop-types';
-import {findDOMNode} from 'react-dom';
 import React from 'react';
 
-import $L from '../internal/$L';
-
-import {forwardSpotlightEvents} from './utils';
-import {angleToValue, positionToAngle} from "../TemperatureControl/utils";
+import { positionToAngle} from "../Arc/utils";
+import {angleToValue} from "./utils";
 
 // Adds agate-specific arcSlider behaviors
 const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
@@ -32,7 +25,6 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 
 		onMouseDown = (ev) => {
 			const svgRef = this.svgRef.current;
-			console.log(svgRef);
 
 			if (svgRef) {
 				svgRef.addEventListener('mousemove', this.calculateNewValue);
@@ -51,7 +43,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 
 		// Calculates the new SVG value based on the mouse cursor coordinates and sets the new value into the state
 		calculateNewValue = (ev) => {
-			const {max, min} = this.props;
+			const {max, min, endAngle, startAngle, radius, strokeWidth} = this.props;
 
 			const svgRef = this.svgRef.current;
 			if (!svgRef) {
@@ -63,11 +55,11 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			svgPoint.y = ev.clientY;
 			const coordsInSvg = svgPoint.matrixTransform(svgRef.getScreenCTM().inverse());
 
-			const angle = positionToAngle(coordsInSvg);
+			const angle = positionToAngle(coordsInSvg, radius * 2 - strokeWidth);
 
 			// get the value based on the angle, min and max
-			let value = angleToValue(angle, min, max);
-console.log(angle, min, max)
+			let value = angleToValue(angle, min, max, startAngle, endAngle);
+
 			this.setState({value: value});
 		};
 

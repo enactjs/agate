@@ -4,6 +4,26 @@ const valueToAngle = (value, min, max, startAngle, endAngle) => {
 	return angle;
 };
 
+const angleToValue = (angle, min, max, startAngle, endAngle) => {
+
+	if (endAngle <= startAngle) {
+		// math assumes endAngle > startAngle
+		throw new Error('endAngle must be greater than startAngle');
+	}
+
+	if (angle < startAngle) {
+		return min;
+	} else if (angle > endAngle) {
+		return max;
+	} else {
+		const ratio = (angle - startAngle) / (endAngle - startAngle);
+		const value = ratio * (max - min) + min;
+		// round to the nearest int value
+		return Math.round(value);
+	}
+};
+
 export {
-	valueToAngle
+	valueToAngle,
+	angleToValue
 };

@@ -141,7 +141,7 @@ const ArcSliderBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		svgRef: PropTypes.func,
+		svgRef: PropTypes.object,
 
 		/**
 		 * The value of the slider.
@@ -173,7 +173,6 @@ const ArcSliderBase = kind({
 
 	render: ({backgroundColor, children, endAngle, foregroundColor, height, max, min, onMouseDown, radius, size, startAngle, strokeWidth, svgRef, value, width, ...rest}) => {
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
-		console.log(value, min, max, startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2) , size);
 
 		return (
@@ -194,11 +193,12 @@ const ArcSliderBase = kind({
 					radius={radius}
 					strokeWidth={strokeWidth}
 					color={foregroundColor}
+					svgPointerEvents="auto"
 					svgRef={svgRef}
 
 				>
 					<circle
-						//className={this.state.value < (min + (max - min) / 2) ? css.knobCold : css.knobHeat}
+						fill={foregroundColor}
 						cx={knobPosition.x}
 						cy={knobPosition.y}
 						r={ri.scaleToRem(15)}
