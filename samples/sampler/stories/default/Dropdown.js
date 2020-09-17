@@ -5,6 +5,8 @@ import {storiesOf} from '@storybook/react';
 import React from 'react';
 
 import Dropdown, {DropdownBase} from '@enact/agate/Dropdown';
+import Scroller from '@enact/agate/Scroller';
+import Group from '@enact/ui/Group';
 import ri from '@enact/ui/resolution';
 
 const Config = mergeComponentMetadata('Dropdown', Dropdown, DropdownBase);
@@ -76,6 +78,32 @@ storiesOf('Agate QA.Dropdown', module)
 						{items}
 					</Dropdown>
 				</>
+			);
+		},
+		{
+			text: 'The basic Dropdown'
+		}
+	).add(
+		'group in Scroller',
+		() => {
+			const itemCount = number('items', Config, {range: true, min: 0, max: 50}, 5);
+			const items = (new Array(itemCount)).fill().map((i, index) => `Option ${index + 1}`);
+			const dropdowns = [];
+
+			for (let i = 0; i < 30; i++) {
+				dropdowns.push({children: items, title: text('title', Config, 'Please select'), key: i});
+			}
+
+			return (
+				<Scroller>
+					<Group
+						childComponent={Dropdown}
+						style={{position: 'absolute', top: 0, width:'50%'}}
+						onSelect={action('onSelect')}
+					>
+						{dropdowns}
+					</Group>
+				</Scroller>
 			);
 		},
 		{
