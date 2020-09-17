@@ -57,6 +57,15 @@ const ArcBase = kind({
 		endAngle: PropTypes.number,
 
 		/**
+		 * Called when the path area is clicked.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onClick: PropTypes.func,
+
+		/**
 		 * The radius of the arc.
 		 *
 		 * @type {number}
@@ -100,17 +109,26 @@ const ArcBase = kind({
 		width: ({radius}) => ri.scaleToRem(radius * 2)
 	},
 
-	render: ({color, endAngle, radius, size, startAngle, strokeWidth, ...rest}) => {
+	render: ({color, endAngle, onClick, radius, size, startAngle, strokeWidth, ...rest}) => {
 		const halfStrokeWidth = strokeWidth / 2;
 		const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${radius * 2}  ${radius * 2}`;
 
 		return (
-			<svg viewBox={viewBox} {...rest}>
+			<svg {...rest} viewBox={viewBox} pointerEvents="none>">
 				<path
-					stroke={color}
-					strokeWidth={strokeWidth}
 					d={arcPath(startAngle, endAngle, radius - halfStrokeWidth, size)}
 					fill="none"
+					stroke={color}
+					strokeWidth={strokeWidth}
+				/>
+				{/* path used for click event handling */}
+				<path
+					d={arcPath(startAngle, endAngle, radius - halfStrokeWidth, size)}
+					fill="none"
+					onClick={onClick}
+					pointerEvents="auto"
+					stroke="transparent"
+					strokeWidth={radius}
 				/>
 			</svg>
 		);
