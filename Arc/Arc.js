@@ -122,7 +122,6 @@ const ArcBase = kind({
  *
  * @hoc
  * @memberof agate/Arc
- * @mixes ui/Arc.ArcDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
