@@ -118,6 +118,7 @@ const ArcBase = kind({
 				<path
 					d={arcPath(startAngle, endAngle, radius - halfStrokeWidth, size)}
 					fill="none"
+					pointerEvents="none"
 					stroke={color}
 					strokeWidth={strokeWidth}
 				/>
