@@ -30,16 +30,16 @@
 			background-color: @agate-datetimepicker-divider-bg-color;
 		}
 
-		&:nth-child(n+2)::before {
+		&:nth-child(n + 2)::before {
 			content: "";
 		}
 
 		:global(.enact-locale-right-to-left) & {
-			&:nth-child(n+2)::before {
+			&:nth-child(n + 3)::before {
 				content: none;
 			}
 
-			&:nth-child(-n+2)::before {
+			&:nth-child(-n + 2)::before {
 				content: "";
 			}
 		}
