@@ -16,6 +16,7 @@ import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
+
 import Skinnable from '../Skinnable';
 
 import {arcPath} from './utils';
@@ -39,7 +40,7 @@ const ArcBase = kind({
 		 * The color of the arc.
 		 *
 		 * @type {String}
-		 * @default: #000000
+		 * @default #000000
 		 * @public
 		 */
 		color: PropTypes.string,
@@ -50,16 +51,25 @@ const ArcBase = kind({
 		 * The value should be between 0 and 360 and should be greater than startAngle.
 		 *
 		 * @type {number}
-		 * @default: 310
+		 * @default 310
 		 * @public
 		 */
 		endAngle: PropTypes.number,
 
 		/**
+		 * Called when the path area is clicked.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onClick: PropTypes.func,
+
+		/**
 		 * The radius of the arc.
 		 *
 		 * @type {number}
-		 * @default: 100
+		 * @default 100
 		 * @public
 		 */
 		radius: PropTypes.number,
@@ -70,7 +80,7 @@ const ArcBase = kind({
 		 * The value should be between 0 and 360.
 		 *
 		 * @type {number}
-		 * @default: 50
+		 * @default 50
 		 * @public
 		 */
 		startAngle: PropTypes.number,
@@ -82,19 +92,15 @@ const ArcBase = kind({
 		 * @default: 1
 		 * @public
 		 */
-		strokeWidth: PropTypes.number,
-
-		ref: PropTypes.func,
-
-		onMouseDown: PropTypes.func
+		strokeWidth: PropTypes.number
 	},
 
 	defaultProps: {
 		color: '#000000',
 		endAngle: 310,
-		radius: 100,
+		radius: 150,
 		startAngle: 50,
-		strokeWidth: 1
+		strokeWidth: 9
 	},
 
 	computed: {
@@ -103,22 +109,29 @@ const ArcBase = kind({
 		width: ({radius}) => ri.scaleToRem(radius * 2)
 	},
 
-	render: ({children, color, endAngle, radius, size, startAngle, strokeWidth, ref, ...rest}) => {
+	render: ({color, endAngle, onClick, radius, size, startAngle, strokeWidth, ...rest}) => {
 		const halfStrokeWidth = strokeWidth / 2;
 		const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${radius * 2}  ${radius * 2}`;
 
 		return (
-			// <svg viewBox={viewBox} {...rest}>
-			<React.Fragment>
+			<svg {...rest} viewBox={viewBox} pointerEvents="none">
 				<path
-					stroke={color}
-					strokeWidth={strokeWidth}
 					d={arcPath(startAngle, endAngle, radius - halfStrokeWidth, size)}
 					fill="none"
+					pointerEvents="none"
+					stroke={color}
+					strokeWidth={strokeWidth}
 				/>
-				{children}
-			</React.Fragment>
-			// </svg>
+				{/* path used for click event handling */}
+				<path
+					d={arcPath(startAngle, endAngle, radius - halfStrokeWidth, size)}
+					fill="none"
+					onClick={onClick}
+					pointerEvents="auto"
+					stroke="transparent"
+					strokeWidth={radius}
+				/>
+			</svg>
 		);
 	}
 });
