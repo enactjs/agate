@@ -82,7 +82,11 @@ const ArcBase = kind({
 		 * @default: 1
 		 * @public
 		 */
-		strokeWidth: PropTypes.number
+		strokeWidth: PropTypes.number,
+
+		ref: PropTypes.func,
+
+		onMouseDown: PropTypes.func
 	},
 
 	defaultProps: {
@@ -99,12 +103,13 @@ const ArcBase = kind({
 		width: ({radius}) => ri.scaleToRem(radius * 2)
 	},
 
-	render: ({children, color, endAngle, radius, size, startAngle, strokeWidth, ...rest}) => {
+	render: ({children, color, endAngle, radius, size, startAngle, strokeWidth, ref, ...rest}) => {
 		const halfStrokeWidth = strokeWidth / 2;
 		const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${radius * 2}  ${radius * 2}`;
 
 		return (
-			<svg viewBox={viewBox} {...rest}>
+			// <svg viewBox={viewBox} {...rest}>
+			<React.Fragment>
 				<path
 					stroke={color}
 					strokeWidth={strokeWidth}
@@ -112,7 +117,8 @@ const ArcBase = kind({
 					fill="none"
 				/>
 				{children}
-			</svg>
+			</React.Fragment>
+			// </svg>
 		);
 	}
 });

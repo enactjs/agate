@@ -19,6 +19,7 @@ import React from 'react';
 import Skinnable from '../Skinnable';
 
 import Arc from "../Arc";
+import ArcSliderBehaviorDecorator from "./ArcSliderBehaviorDecorator";
 import {angleToPosition} from "../Arc/utils";
 import {valueToAngle} from "./utils";
 
@@ -50,6 +51,14 @@ const ArcSliderBase = kind({
 		 */
 		backgroundColor: PropTypes.string,
 
+		// /**
+		//  * Additional controls displayed.
+		//  *
+		//  * @type {Node}
+		//  * @public
+		//  */
+		// children: PropTypes.node,
+
 		/**
 		 * The color of the arc slider.
 		 *
@@ -60,13 +69,13 @@ const ArcSliderBase = kind({
 		foregroundColor: PropTypes.string,
 
 		/**
-		 * The diameter of the arc slider in px.
+		 * The radius of the arc slider in px.
 		 *
 		 * @type {number}
-		 * @default: 300
+		 * @default: 150
 		 * @public
 		 */
-		diameter: PropTypes.oneOf([240, 300]),
+		radius: PropTypes.oneOf([120, 150]),
 
 		/**
 		 * The end angle(in degrees) of the arc slider.
@@ -140,7 +149,7 @@ const ArcSliderBase = kind({
 	defaultProps: {
 		backgroundColor: '#000000',
 		foregroundColor: '#0000ff',
-		diameter: 300,
+		radius: 150,
 		endAngle: 310,
 		max: 100,
 		min: 0,
@@ -151,49 +160,48 @@ const ArcSliderBase = kind({
 	},
 
 	computed: {
-		radius: ({diameter}) => (diameter / 2),
-		size : ({diameter, strokeWidth}) => (diameter - strokeWidth),
+		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth),
+		height: ({radius}) => ri.scaleToRem(radius * 2),
+		width: ({radius}) => ri.scaleToRem(radius * 2)
 	},
 
-	render: ({backgroundColor, diameter, endAngle, foregroundColor, max, min, radius, size, startAngle, strokeWidth, value, ...rest}) => {
-		const halfStrokeWidth = strokeWidth / 2;
-		//const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${diameter}  ${diameter}`;
+	render: ({backgroundColor, children, endAngle, foregroundColor, max, min, onMouseDown, radius, size, startAngle, strokeWidth, svgRef, value, ...rest}) => {
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
-		const knobPosition = angleToPosition(valueAngle, radius - halfStrokeWidth , size);
+		console.log(value, min, max, startAngle, endAngle);
+		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2) , size);
+
+		const halfStrokeWidth = strokeWidth / 2;
+		const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${radius * 2}  ${radius * 2}`;
 
 		return (
-				<div
-					//ref={this.svgRef}
-					//onMouseDown={this.onMouseDown}
-					{...rest}
-					>
-					<Arc
-						style={{position: "absolute"}}
-						endAngle={endAngle}
-						startAngle={startAngle}
-						radius={radius}
-						strokeWidth={strokeWidth}
-						color={backgroundColor}
-					/>
-
-					<React.Fragment>
-						<Arc
-							style={{position: "absolute", overflow: "visible"}}
-							endAngle={valueAngle}
-							startAngle={startAngle}
-							radius={radius}
-							strokeWidth={strokeWidth}
-							color={foregroundColor}
-						>
-							<circle
-								//className={this.state.value < (min + (max - min) / 2) ? css.knobCold : css.knobHeat}
-								cx={knobPosition.x}
-								cy={knobPosition.y}
-								r={ri.scaleToRem(15)}
-							/>
-						</Arc>
-					</React.Fragment>
-				</div>
+			<svg
+				viewBox={viewBox}
+				{...rest}
+				ref={svgRef}
+				onMouseDown={onMouseDown}
+				style={{position: "absolute", overflow: "visible"}}>
+				<Arc
+					endAngle={endAngle}
+					startAngle={startAngle}
+					radius={radius}
+					strokeWidth={strokeWidth}
+					color={backgroundColor}
+				/>
+				<Arc
+					endAngle={valueAngle}
+					startAngle={startAngle}
+					radius={radius}
+					strokeWidth={strokeWidth}
+					color={foregroundColor}
+				/>
+				<circle
+					//className={this.state.value < (min + (max - min) / 2) ? css.knobCold : css.knobHeat}
+					cx={knobPosition.x}
+					cy={knobPosition.y}
+					r={ri.scaleToRem(15)}
+				/>
+				{children}
+			</svg>
 		);
 	}
 });
@@ -208,6 +216,7 @@ const ArcSliderBase = kind({
  */
 const ArcSliderDecorator = compose(
 	Pure,
+	ArcSliderBehaviorDecorator,
 	Skinnable
 );
 
