@@ -109,12 +109,12 @@ const ArcBase = kind({
 		width: ({radius}) => ri.scaleToRem(radius * 2)
 	},
 
-	render: ({color, endAngle, onClick, radius, size, startAngle, strokeWidth, ...rest}) => {
+	render: ({color, children, endAngle, onClick, radius, svgRef, size, startAngle, strokeWidth, ...rest}) => {
 		const halfStrokeWidth = strokeWidth / 2;
 		const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${radius * 2}  ${radius * 2}`;
 
 		return (
-			<svg {...rest} viewBox={viewBox} pointerEvents="none">
+			<svg {...rest} viewBox={viewBox} ref={svgRef}>
 				<path
 					d={arcPath(startAngle, endAngle, radius - halfStrokeWidth, size)}
 					fill="none"
@@ -131,6 +131,7 @@ const ArcBase = kind({
 					stroke="transparent"
 					strokeWidth={radius}
 				/>
+				{children}
 			</svg>
 		);
 	}

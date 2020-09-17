@@ -136,6 +136,14 @@ const ArcSliderBase = kind({
 		strokeWidth: PropTypes.number,
 
 		/**
+		 * Function that generates a reference to the current loaded media
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		svgRef: PropTypes.func,
+
+		/**
 		 * The value of the slider.
 		 *
 		 * Defaults to the value of `min`.
@@ -160,48 +168,44 @@ const ArcSliderBase = kind({
 	},
 
 	computed: {
-		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth),
-		height: ({radius}) => ri.scaleToRem(radius * 2),
-		width: ({radius}) => ri.scaleToRem(radius * 2)
+		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth)
 	},
 
-	render: ({backgroundColor, children, endAngle, foregroundColor, max, min, onMouseDown, radius, size, startAngle, strokeWidth, svgRef, value, ...rest}) => {
+	render: ({backgroundColor, children, endAngle, foregroundColor, height, max, min, onMouseDown, radius, size, startAngle, strokeWidth, svgRef, value, width, ...rest}) => {
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
 		console.log(value, min, max, startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2) , size);
 
-		const halfStrokeWidth = strokeWidth / 2;
-		const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${radius * 2}  ${radius * 2}`;
-
 		return (
-			<svg
-				viewBox={viewBox}
-				{...rest}
-				ref={svgRef}
+			<div
 				onMouseDown={onMouseDown}
-				style={{position: "absolute", overflow: "visible"}}>
-				<Arc
+			>
+				<Arc style={{position: "absolute", overflow: "visible"}}
 					endAngle={endAngle}
 					startAngle={startAngle}
 					radius={radius}
 					strokeWidth={strokeWidth}
 					color={backgroundColor}
+
 				/>
-				<Arc
+				<Arc style={{position: "absolute", overflow: "visible"}}
 					endAngle={valueAngle}
 					startAngle={startAngle}
 					radius={radius}
 					strokeWidth={strokeWidth}
 					color={foregroundColor}
-				/>
-				<circle
-					//className={this.state.value < (min + (max - min) / 2) ? css.knobCold : css.knobHeat}
-					cx={knobPosition.x}
-					cy={knobPosition.y}
-					r={ri.scaleToRem(15)}
-				/>
-				{children}
-			</svg>
+					svgRef={svgRef}
+
+				>
+					<circle
+						//className={this.state.value < (min + (max - min) / 2) ? css.knobCold : css.knobHeat}
+						cx={knobPosition.x}
+						cy={knobPosition.y}
+						r={ri.scaleToRem(15)}
+					/>
+				</Arc>
+
+			</div>
 		);
 	}
 });
