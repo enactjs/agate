@@ -114,7 +114,7 @@ const ArcBase = kind({
 		const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${radius * 2}  ${radius * 2}`;
 
 		return (
-			<svg {...rest} viewBox={viewBox} pointerEvents="none>">
+			<svg {...rest} viewBox={viewBox} pointerEvents="none">
 				<path
 					d={arcPath(startAngle, endAngle, radius - halfStrokeWidth, size)}
 					fill="none"
