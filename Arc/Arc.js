@@ -16,6 +16,7 @@ import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
+
 import Skinnable from '../Skinnable';
 
 import {arcPath} from './utils';
@@ -39,7 +40,7 @@ const ArcBase = kind({
 		 * The color of the arc.
 		 *
 		 * @type {String}
-		 * @default: #000000
+		 * @default #000000
 		 * @public
 		 */
 		color: PropTypes.string,
@@ -50,7 +51,7 @@ const ArcBase = kind({
 		 * The value should be between 0 and 360 and should be greater than startAngle.
 		 *
 		 * @type {number}
-		 * @default: 310
+		 * @default 310
 		 * @public
 		 */
 		endAngle: PropTypes.number,
@@ -59,7 +60,7 @@ const ArcBase = kind({
 		 * The radius of the arc.
 		 *
 		 * @type {number}
-		 * @default: 100
+		 * @default 100
 		 * @public
 		 */
 		radius: PropTypes.number,
@@ -70,7 +71,7 @@ const ArcBase = kind({
 		 * The value should be between 0 and 360.
 		 *
 		 * @type {number}
-		 * @default: 50
+		 * @default 50
 		 * @public
 		 */
 		startAngle: PropTypes.number,
@@ -88,9 +89,9 @@ const ArcBase = kind({
 	defaultProps: {
 		color: '#000000',
 		endAngle: 310,
-		radius: 100,
+		radius: 150,
 		startAngle: 50,
-		strokeWidth: 1
+		strokeWidth: 9
 	},
 
 	computed: {
