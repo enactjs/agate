@@ -256,6 +256,7 @@ const InputBase = kind({
 				</InputDecoratorIcon>
 				<input
 					{...inputProps}
+					aria-disabled={disabled}
 					className={css.input}
 					disabled={disabled}
 					onChange={onChange}
