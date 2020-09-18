@@ -21,8 +21,8 @@ storiesOf('Agate', module)
 		() => (
 			<ArcSlider
 				backgroundColor={select('backgroundColor', prop.colors, Config)}
-				foregroundColor={select('foregroundColor', prop.colors, Config)}
 				endAngle={number('endAngle', Config, {range: true, min: 0, max: 360})}
+				foregroundColor={select('foregroundColor', prop.colors, Config)}
 				max={number('max', Config)}
 				min={number('min', Config)}
 				onMouseDown={action('onMouseDown')}
