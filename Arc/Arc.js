@@ -89,7 +89,7 @@ const ArcBase = kind({
 		 * The stroke width of the arc.
 		 *
 		 * @type {number}
-		 * @default: 1
+		 * @default 9
 		 * @public
 		 */
 		strokeWidth: PropTypes.number,
@@ -112,12 +112,12 @@ const ArcBase = kind({
 		width: ({radius}) => ri.scaleToRem(radius * 2)
 	},
 
-	render: ({color, children, endAngle, onClick, radius, svgRef, size, startAngle, strokeWidth, svgPointerEvents, ...rest}) => {
+	render: ({color, endAngle, onClick, radius, size, startAngle, strokeWidth, svgPointerEvents, ...rest}) => {
 		const halfStrokeWidth = strokeWidth / 2;
 		const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${radius * 2}  ${radius * 2}`;
 
 		return (
-			<svg {...rest} viewBox={viewBox} pointerEvents={svgPointerEvents} ref={svgRef}>
+			<svg {...rest} viewBox={viewBox} pointerEvents={svgPointerEvents}>
 				<path
 					d={arcPath(startAngle, endAngle, radius - halfStrokeWidth, size)}
 					fill="none"
