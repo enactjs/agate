@@ -5,12 +5,6 @@ const valueToAngle = (value, min, max, startAngle, endAngle) => {
 };
 
 const angleToValue = (angle, min, max, startAngle, endAngle) => {
-
-	if (endAngle <= startAngle) {
-		// math assumes endAngle > startAngle
-		throw new Error('endAngle must be greater than startAngle');
-	}
-
 	if (angle < startAngle) {
 		return min;
 	} else if (angle > endAngle) {
