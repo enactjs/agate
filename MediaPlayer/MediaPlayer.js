@@ -4,6 +4,7 @@ import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import {memoize} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
+import {useAnnounce} from '@enact/ui/AnnounceDecorator';
 import Pure from '@enact/ui/internal/Pure';
 import Media from '@enact/ui/Media';
 import Slottable from '@enact/ui/Slottable';
@@ -12,10 +13,13 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
+import $L from '../internal/$L';
+
 import MediaControls from './MediaControls';
 import MediaSlider from './MediaSlider';
 import Skinnable from '../Skinnable';
 import Times from './Times';
+import {secondsToTime} from './util';
 
 import css from './MediaPlayer.module.less';
 
@@ -296,6 +300,14 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		static displayName = 'MediaPlayerBehaviorDecorator';
 
 		static propTypes = /** @lends agate/MediaPlayer.MediaPlayerBehaviorDecorator.prototype */ {
+			/**
+			 * Passed by AnnounceDecorator for accessibility.
+			 *
+			 * @type {Object}
+			 * @public
+			 */
+			announce: PropTypes.func,
+
 			/**
 			 * The current locale as a
 			 * {@link https://tools.ietf.org/html/rfc5646|BCP 47 language tag}.
@@ -606,14 +618,17 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 			});
 		};
 
-		seek = (timeIndex) => {
-			this.media.currentTime = timeIndex;
-		};
-
 		onSliderChange = ({value}) => {
-			const time = value * this.state.duration;
+			const currentTime = value * this.state.duration;
+			const seconds = Math.floor(currentTime);
 
-			this.seek(time);
+			this.media.currentTime = currentTime;
+
+			if (!isNaN(seconds)) {
+				const knobTime = secondsToTime(seconds, getDurFmt(this.props.locale), {includeHour: true});
+
+				this.props.announce(`${$L('jump to')} ${knobTime}`, true);
+			}
 		};
 
 		setMediaRef = (node) => {
@@ -624,6 +639,8 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 			const {
 				...rest
 			} = this.props;
+
+			delete rest.announce;
 
 			return (
 				<Wrapped
@@ -653,6 +670,18 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 	};
 });
 
+// eslint-disable-next-line no-shadow
+const AnnounceDecorator = Wrapped => function AnnounceDecorator (props) {
+	const {announce, children} = useAnnounce();
+
+	return (
+		<React.Fragment>
+			<Wrapped {...props} announce={announce} />
+			{children}
+		</React.Fragment>
+	);
+};
+
 /**
  * A higher-order component that adds Agate specific behaviors to `MediaPlayer`.
  *
@@ -665,6 +694,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
  * @public
  */
 const MediaPlayerDecorator = compose(
+	AnnounceDecorator,
 	MediaPlayerBehaviorDecorator,
 	Pure,
 	Slottable({slots: ['source']}),

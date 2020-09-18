@@ -4,11 +4,12 @@ import {storiesOf} from '@storybook/react';
 import MediaPlayer from '@enact/agate/MediaPlayer';
 
 const audioFiles = [
-	'https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_700KB.mp3',
-	'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3',
-	'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3',
-	'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3',
-	'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3'
+	'https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3',
+	'https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3',
+	'https://sampleswap.org/mp3/artist/47067/DJ-Masque_Oceanic-Dawn-160.mp3',
+	'https://sampleswap.org/mp3/artist/26546/benzoul_lovevoodoo-160.mp3',
+	'https://sampleswap.org/mp3/artist/19139/MarkNine_In-my-Place-160.mp3',
+	'https://sampleswap.org/mp3/artist/47067/DJ-Masque_Dont-Forget-To-Be-Yourself-160.mp3'
 ];
 
 storiesOf('Agate', module)
