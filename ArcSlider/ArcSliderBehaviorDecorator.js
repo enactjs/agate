@@ -17,8 +17,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			radius: PropTypes.number,
 			startAngle: PropTypes.number,
 			step: PropTypes.number,
-			strokeWidth: PropTypes.number,
-			value: PropTypes.number
+			strokeWidth: PropTypes.number
 		};
 
 		constructor (props) {
@@ -27,7 +26,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			this.svgRef = React.createRef();
 
 			this.state = {
-				value: props.value
+				value: props.min
 			};
 		}
 

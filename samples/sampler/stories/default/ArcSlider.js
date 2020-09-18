@@ -9,7 +9,7 @@ import ArcSlider, {ArcSliderBase} from '@enact/agate/ArcSlider';
 ArcSlider.displayName = 'ArcSlider';
 const Config = mergeComponentMetadata('ArcSlider', ArcSliderBase, ArcSlider);
 
-// Set up some defaults for info and knobs
+// Set up some defaults for colors and radius
 const prop = {
 	colors: ['', '#000000', '#fdc902', '#986aad', '#0000ff'],
 	radius: [120, 150]

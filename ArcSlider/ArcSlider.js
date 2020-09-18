@@ -45,7 +45,7 @@ const ArcSliderBase = kind({
 		 * The color of the background arc.
 		 *
 		 * @type {String}
-		 * @default: #000000
+		 * @default #000000
 		 * @public
 		 */
 		backgroundColor: PropTypes.string,
@@ -54,7 +54,7 @@ const ArcSliderBase = kind({
 		 * The color of the arc slider.
 		 *
 		 * @type {String}
-		 * @default: #000000
+		 * @default #000000
 		 * @public
 		 */
 		endAngle: PropTypes.number,
@@ -63,27 +63,25 @@ const ArcSliderBase = kind({
 		 * The radius of the arc slider in px.
 		 *
 		 * @type {number}
-		 * @default: 150
+		 * @default 150
 		 * @public
 		 */
 		foregroundColor: PropTypes.string,
 
 		/**
-		 * The end angle(in degrees) of the arc slider.
-		 *
-		 * The value should be between 0 and 360 and should be greater than startAngle.
+		 * The maximum value of the slider.
 		 *
 		 * @type {number}
-		 * @default: 310
+		 * @default 100
 		 * @public
 		 */
 		max: PropTypes.number,
 
 		/**
-		 * The maximum value of the slider.
+		 * The minimum value of the slider.
 		 *
 		 * @type {Number}
-		 * @default 100
+		 * @default 0
 		 * @public
 		 */
 		min: PropTypes.number,
@@ -98,10 +96,10 @@ const ArcSliderBase = kind({
 		onMouseDown: PropTypes.func,
 
 		/**
-		 * The minimum value of the slider.
+		 * The radius of the arc circle.
 		 *
 		 * @type {Number}
-		 * @default 0
+		 * @default 150
 		 * @public
 		 */
 		radius: PropTypes.oneOf([120, 150]),
@@ -112,7 +110,7 @@ const ArcSliderBase = kind({
 		 * The value should be between 0 and 360.
 		 *
 		 * @type {number}
-		 * @default: 50
+		 * @default 50
 		 * @public
 		 */
 		startAngle: PropTypes.number,
@@ -130,7 +128,7 @@ const ArcSliderBase = kind({
 		 * The stroke width of the arc slider.
 		 *
 		 * @type {number}
-		 * @default: 1
+		 * @default 6
 		 * @public
 		 */
 		strokeWidth: PropTypes.number,
@@ -158,13 +156,12 @@ const ArcSliderBase = kind({
 		backgroundColor: '#000000',
 		foregroundColor: '#0000ff',
 		radius: 150,
-		endAngle: 310,
+		endAngle: 250,
 		max: 100,
 		min: 0,
-		startAngle: 50,
+		startAngle: 30,
 		step: 1,
-		strokeWidth: 6,
-		value: 10
+		strokeWidth: 6
 	},
 
 	styles: {
