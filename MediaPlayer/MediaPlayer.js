@@ -566,9 +566,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				remainingSize--;
 
 				// And swap the last element with it
-				let temp = playlist[remainingSize];
-				playlist[remainingSize] = playlist[randomIndex];
-				playlist[randomIndex] = temp;
+				[playlist[remainingSize], playlist[randomIndex]] = [playlist[randomIndex], playlist[remainingSize]];
 
 				if (playlist[remainingSize] === currentMedia) {
 					currentMediaIndex = remainingSize;
