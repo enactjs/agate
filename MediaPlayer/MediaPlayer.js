@@ -590,7 +590,18 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 
 		handleShuffle = () => {
 			let currentMedia = this.state.playlist[this.state.sourceIndex];
-
+		this.setState(({shuffle}) => {
+			if (!shuffle) {
+				return ({shuffle: true});
+			} else {
+				// When resetting shuffle to false, the initial playlist is set with the last played media kept active.
+				return ({shuffle: false, playlist: this.props.children, sourceIndex: parseInt(currentMedia.key)});
+			}
+		}, () => {
+			if (this.state.shuffle) {
+				this.shufflePlaylist(currentMedia);
+			}
+		});
 			this.setState(prevState  => {
 				return ({shuffle: !prevState.shuffle});
 			}, () => {
