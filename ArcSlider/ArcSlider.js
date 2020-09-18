@@ -134,7 +134,7 @@ const ArcSliderBase = kind({
 		strokeWidth: PropTypes.number,
 
 		/**
-		 * Function that generates a reference to the current loaded media
+		 * Function that generates a reference to the current svg.
 		 *
 		 * @type {Function}
 		 * @public

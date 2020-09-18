@@ -104,7 +104,7 @@ const ArcBase = kind({
 		svgPointerEvents: PropTypes.oneOf(['none', 'auto']),
 
 		/**
-		 * A reference to the current svg
+		 * A reference to the current svg.
 		 *
 		 * @type {Function}
 		 * @public
