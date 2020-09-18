@@ -2,7 +2,7 @@
  * Agate styled arc slider components and behaviors.
  *
  * @example
- * <ArcSlider color="blue" endAngle={200} startAngle={0}" radius={100} />
+ * <ArcSlider backgroundColor="blue" endAngle={200} foregroundColor="red" startAngle={0} radius={150} />
  *
  * @module agate/ArcSlider
  * @exports ArcSlider
@@ -16,12 +16,13 @@ import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
+
+import Arc from '../Arc';
 import Skinnable from '../Skinnable';
 
-import Arc from "../Arc";
-import ArcSliderBehaviorDecorator from "./ArcSliderBehaviorDecorator";
-import {angleToPosition} from "../Arc/utils";
-import {valueToAngle} from "./utils";
+import ArcSliderBehaviorDecorator from './ArcSliderBehaviorDecorator';
+import {angleToPosition} from '../Arc/utils';
+import {valueToAngle} from './utils';
 
 /**
  * An arc slider component.
@@ -38,10 +39,6 @@ const ArcSliderBase = kind({
 	name: 'ArcSlider',
 
 	propTypes: /** @lends agate/ArcSlider.ArcSliderBase.prototype */ {
-
-
-//   children
-
 		/**
 		 * The color of the background arc.
 		 *
@@ -51,14 +48,6 @@ const ArcSliderBase = kind({
 		 */
 		backgroundColor: PropTypes.string,
 
-		// /**
-		//  * Additional controls displayed.
-		//  *
-		//  * @type {Node}
-		//  * @public
-		//  */
-		// children: PropTypes.node,
-
 		/**
 		 * The color of the arc slider.
 		 *
@@ -66,7 +55,7 @@ const ArcSliderBase = kind({
 		 * @default: #000000
 		 * @public
 		 */
-		foregroundColor: PropTypes.string,
+		endAngle: PropTypes.number,
 
 		/**
 		 * The radius of the arc slider in px.
@@ -75,7 +64,7 @@ const ArcSliderBase = kind({
 		 * @default: 150
 		 * @public
 		 */
-		radius: PropTypes.oneOf([120, 150]),
+		foregroundColor: PropTypes.string,
 
 		/**
 		 * The end angle(in degrees) of the arc slider.
@@ -86,7 +75,7 @@ const ArcSliderBase = kind({
 		 * @default: 310
 		 * @public
 		 */
-		endAngle: PropTypes.number,
+		max: PropTypes.number,
 
 		/**
 		 * The maximum value of the slider.
@@ -95,7 +84,16 @@ const ArcSliderBase = kind({
 		 * @default 100
 		 * @public
 		 */
-		max: PropTypes.number,
+		min: PropTypes.number,
+
+		/**
+		 * Called when the mouse is down over the arc slider area.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onMouseDown: PropTypes.func,
 
 		/**
 		 * The minimum value of the slider.
@@ -104,7 +102,7 @@ const ArcSliderBase = kind({
 		 * @default 0
 		 * @public
 		 */
-		min: PropTypes.number,
+		radius: PropTypes.oneOf([120, 150]),
 
 		/**
 		 * The start angle(in degrees) of the arc slider.
@@ -171,15 +169,14 @@ const ArcSliderBase = kind({
 		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth)
 	},
 
-	render: ({backgroundColor, children, endAngle, foregroundColor, height, max, min, onMouseDown, radius, size, startAngle, strokeWidth, svgRef, value, width, ...rest}) => {
+	render: ({backgroundColor, endAngle, foregroundColor, max, min, onMouseDown, radius, size, startAngle, strokeWidth, svgRef, value, ...rest}) => {
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
-		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2) , size);
+		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
 		return (
-			<div
-				onMouseDown={onMouseDown}
-			>
-				<Arc style={{position: "absolute", overflow: "visible"}}
+			<div onMouseDown={onMouseDown} {...rest}>
+				<Arc
+					style={{position: 'absolute', overflow: 'visible'}}
 					endAngle={endAngle}
 					startAngle={startAngle}
 					radius={radius}
@@ -187,7 +184,8 @@ const ArcSliderBase = kind({
 					color={backgroundColor}
 
 				/>
-				<Arc style={{position: "absolute", overflow: "visible"}}
+				<Arc
+					style={{position: 'absolute', overflow: 'visible'}}
 					endAngle={valueAngle}
 					startAngle={startAngle}
 					radius={radius}
@@ -204,7 +202,7 @@ const ArcSliderBase = kind({
 						r={ri.scaleToRem(15)}
 					/>
 				</Arc>
-
+				{value}
 			</div>
 		);
 	}
@@ -229,7 +227,7 @@ const ArcSliderDecorator = compose(
  *
  * Usage:
  * ```
- * <ArcSlider color="blue" endAngle={200} startAngle={0}" radius={100} />
+ * <ArcSlider backgroundColor="blue" endAngle={200} foregroundColor="red" startAngle={0} radius={150} />
  *
  * @class ArcSlider
  * @memberof agate/ArcSlider

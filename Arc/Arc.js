@@ -94,7 +94,22 @@ const ArcBase = kind({
 		 */
 		strokeWidth: PropTypes.number,
 
-		svgPointerEvents: PropTypes.oneOf(['none', 'auto'])
+		/**
+		 * Specifies if the svg  can become the target of pointer events.
+		 *
+		 * @type {number}
+		 * @default 'none'
+		 * @public
+		 */
+		svgPointerEvents: PropTypes.oneOf(['none', 'auto']),
+
+		/**
+		 * A reference to the current svg
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		svgRef: PropTypes.object
 	},
 
 	defaultProps: {
@@ -102,6 +117,7 @@ const ArcBase = kind({
 		endAngle: 310,
 		radius: 150,
 		startAngle: 50,
+		step: 1,
 		strokeWidth: 9,
 		svgPointerEvents: 'none'
 	},
@@ -112,12 +128,12 @@ const ArcBase = kind({
 		width: ({radius}) => ri.scaleToRem(radius * 2)
 	},
 
-	render: ({color, endAngle, onClick, radius, size, startAngle, strokeWidth, svgPointerEvents, ...rest}) => {
+	render: ({children, color, endAngle, onClick, radius, size, startAngle, strokeWidth, svgPointerEvents, svgRef, ...rest}) => {
 		const halfStrokeWidth = strokeWidth / 2;
 		const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${radius * 2}  ${radius * 2}`;
 
 		return (
-			<svg {...rest} viewBox={viewBox} pointerEvents={svgPointerEvents}>
+			<svg {...rest} viewBox={viewBox} pointerEvents={svgPointerEvents} ref={svgRef}>
 				<path
 					d={arcPath(startAngle, endAngle, radius - halfStrokeWidth, size)}
 					fill="none"
