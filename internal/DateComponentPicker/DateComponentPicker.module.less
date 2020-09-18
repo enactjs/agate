@@ -1,6 +1,7 @@
 // DateComponentPicker.module.less
 //
 @import '../../styles/variables.less';
+@import '../../styles/mixins.less';
 @import '../../styles/skin.less';
 
 .dateComponentPicker {
@@ -34,7 +35,7 @@
 			content: "";
 		}
 
-		:global(.enact-locale-right-to-left) & {
+		.enact-locale-rtl({
 			&:nth-child(n + 3)::before {
 				content: none;
 			}
@@ -42,6 +43,6 @@
 			&:nth-child(-n + 2)::before {
 				content: "";
 			}
-		}
+		});
 	});
 }
