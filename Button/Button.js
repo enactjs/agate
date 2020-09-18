@@ -21,14 +21,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import compose from 'ramda/src/compose';
 
-import {IconBase} from '../Icon';
+import Icon from '../Icon';
 // import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Button.module.less';
-
-// Make a basic Icon in case we need it later. This cuts `Pure` out of icon for a small gain.
-const Icon = Skinnable(IconBase);
 
 /**
  * A button component.
