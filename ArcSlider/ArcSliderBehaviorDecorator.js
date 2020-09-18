@@ -17,7 +17,8 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			radius: PropTypes.number,
 			startAngle: PropTypes.number,
 			step: PropTypes.number,
-			strokeWidth: PropTypes.number
+			strokeWidth: PropTypes.number,
+			value: PropTypes.number
 		}
 
 		constructor (props) {
@@ -26,7 +27,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			this.svgRef = React.createRef();
 
 			this.state = {
-				value: props.min
+				value: props.value
 			};
 		}
 
@@ -67,7 +68,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			// get the value based on the angle, min and max
 			let value = angleToValue(angle, min, max, startAngle, endAngle);
 
-			// adjust value based on the provided step
+			// adjust value based on the step
 			if (step) {
 				const delta = (value - min) % step;
 				if (delta < step / 2) {
@@ -86,8 +87,8 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			return (
 				<Wrapped
 					{...props}
-					svgRef={this.svgRef}
 					onMouseDown={this.onMouseDown}
+					svgRef={this.svgRef}
 					value={this.state.value}
 				/>
 			);

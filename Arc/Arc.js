@@ -20,6 +20,7 @@ import React from 'react';
 import Skinnable from '../Skinnable';
 
 import {arcPath} from './utils';
+import css from "../ArcSlider/ArcSlider.modules.less";
 
 /**
  * An arc component.
@@ -117,9 +118,12 @@ const ArcBase = kind({
 		endAngle: 310,
 		radius: 150,
 		startAngle: 50,
-		step: 1,
 		strokeWidth: 9,
 		svgPointerEvents: 'none'
+	},
+
+	styles: {
+		className: 'arc'
 	},
 
 	computed: {
