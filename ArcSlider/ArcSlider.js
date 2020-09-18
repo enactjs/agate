@@ -24,7 +24,7 @@ import ArcSliderBehaviorDecorator from './ArcSliderBehaviorDecorator';
 import {angleToPosition} from '../Arc/utils';
 import {valueToAngle} from './utils';
 
-import css from './ArcSlider.modules.less'
+import css from './ArcSlider.modules.less';
 
 /**
  * An arc slider component.
@@ -176,7 +176,7 @@ const ArcSliderBase = kind({
 		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth)
 	},
 
-	render: ({backgroundColor, css, endAngle, foregroundColor, max, min, onMouseDown, radius, size, startAngle, strokeWidth, svgRef, value, ...rest}) => {
+	render: ({backgroundColor, endAngle, foregroundColor, max, min, onMouseDown, radius, size, startAngle, strokeWidth, svgRef, value, ...rest}) => {
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 

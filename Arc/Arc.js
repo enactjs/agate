@@ -20,7 +20,6 @@ import React from 'react';
 import Skinnable from '../Skinnable';
 
 import {arcPath} from './utils';
-import css from "../ArcSlider/ArcSlider.modules.less";
 
 /**
  * An arc component.
