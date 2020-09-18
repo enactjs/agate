@@ -578,9 +578,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				remainingSize--;
 
 				// And swap the last element with it
-				let temp = playlist[remainingSize];
-				playlist[remainingSize] = playlist[randomIndex];
-				playlist[randomIndex] = temp;
+				[playlist[remainingSize], playlist[randomIndex]] = [playlist[randomIndex], playlist[remainingSize]];
 
 				if (playlist[remainingSize] === currentMedia) {
 					currentMediaIndex = remainingSize;
@@ -589,9 +587,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 
 			// Keep the current media active and set it as the first element in the shuffled array
 			if (currentMediaIndex) {
-				let temp = playlist[0];
-				playlist[0] = playlist[currentMediaIndex];
-				playlist[currentMediaIndex] = temp;
+				[playlist[0], playlist[currentMediaIndex]] = [playlist[currentMediaIndex], playlist[0]];
 			}
 
 			this.setState({
@@ -602,7 +598,18 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 
 		handleShuffle = () => {
 			let currentMedia = this.state.playlist[this.state.sourceIndex];
-
+		this.setState(({shuffle}) => {
+			if (!shuffle) {
+				return ({shuffle: true});
+			} else {
+				// When resetting shuffle to false, the initial playlist is set with the last played media kept active.
+				return ({shuffle: false, playlist: this.props.children, sourceIndex: parseInt(currentMedia.key)});
+			}
+		}, () => {
+			if (this.state.shuffle) {
+				this.shufflePlaylist(currentMedia);
+			}
+		});
 			this.setState(prevState  => {
 				return ({shuffle: !prevState.shuffle});
 			}, () => {
