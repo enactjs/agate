@@ -491,23 +491,21 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		 */
 		handleOnRepeat = () => {
 			// Handling the 3 states of repeat: repeat none, repeat one and repeat all
-			switch (this.state.repeat) {
-				case 'none':
-					this.setState(prevState  => {
-						return ({loop: !prevState.loop});
-					}, () => {
-						this.media.loop = this.state.loop;
-					});
-					this.setState({repeat: 'one'});
-					break;
-				case 'one':
-					this.setState({repeat: 'all'});
-					this.media.loop = false;
-					break;
-				case 'all':
-					this.setState({repeat: 'none'});
-					this.media.loop = false;
-			}
+			let loop = false;
+
+			this.setState(({repeat}) => {
+				switch (repeat) {
+					case 'none':
+						loop = !repeat.loop;
+						return ({loop, repeat: 'one'});
+					case 'one':
+						return ({repeat: 'all'});
+					case 'all':
+						return ({repeat: 'none'});
+				}
+			}, () => {
+				this.media.loop = loop;
+			});
 		};
 
 		handleOnEnded = () => {
