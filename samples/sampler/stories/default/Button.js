@@ -6,8 +6,9 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Button, {ButtonBase} from '@enact/agate/Button';
+import Skinnable from '@enact/agate/Skinnable';
 
-import icons from './icons';
+import iconList, {iconListSilicon} from './icons';
 
 Button.displayName = 'Button';
 const Config = mergeComponentMetadata('Button', UiButton, ButtonBase, Button);
@@ -16,15 +17,17 @@ const Config = mergeComponentMetadata('Button', UiButton, ButtonBase, Button);
 const prop = {
 	casing: ['preserve', 'sentence', 'word', 'upper'],
 	colors: ['', '#E6444B', '#FDC902', '#986AAD', '#4E75E1', '#30CC83', '#44C8D5', '#47439B', '#2D32A6', '#4E75E1'],
-	icons: ['', ...icons],
 	joinedPosition: ['', 'left', 'center', 'right']
 };
 
-storiesOf('Agate', module)
-	.add(
-		'Button',
-		() => (
+const SkinnedButton = Skinnable(
+	{prop: 'skin'},
+	({skin, ...rest}) => {
+		let icons = skin === 'silicon' ? ['', ...iconListSilicon] :  ['', ...iconList];
+
+		return (
 			<Button
+				{...rest}
 				animateOnRender={boolean('animateOnRender', Config)}
 				animationDelay={number('animationDelay', Config)}
 				backgroundOpacity={select('backgroundOpacity', ['opaque', 'lightOpaque', 'transparent'], Config)}
@@ -32,7 +35,7 @@ storiesOf('Agate', module)
 				badgeColor={select('badgeColor', prop.colors, Config)}
 				disabled={boolean('disabled', Config)}
 				highlighted={boolean('highlighted', Config)}
-				icon={select('icon', prop.icons, Config)}
+				icon={select('icon', icons, Config)}
 				joinedPosition={select('joinedPosition', prop.joinedPosition, Config)}
 				onClick={action('onClick')}
 				selected={boolean('selected', Config)}
@@ -41,6 +44,15 @@ storiesOf('Agate', module)
 			>
 				{text('children', Button, 'Click me')}
 			</Button>
+		);
+	}
+);
+
+storiesOf('Agate', module)
+	.add(
+		'Button',
+		() => (
+			<SkinnedButton />
 		),
 		{
 			text: 'The basic Button'
