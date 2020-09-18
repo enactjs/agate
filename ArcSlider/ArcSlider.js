@@ -183,26 +183,26 @@ const ArcSliderBase = kind({
 			<div onMouseDown={onMouseDown} {...rest}>
 				<Arc
 					className={css.arc}
-					endAngle={endAngle}
-					startAngle={valueAngle}
-					radius={radius}
-					strokeWidth={strokeWidth}
 					color={backgroundColor}
+					endAngle={endAngle}
+					radius={radius}
+					startAngle={valueAngle}
+					strokeWidth={strokeWidth}
 				/>
 				<Arc
 					className={css.arc}
-					endAngle={valueAngle}
-					startAngle={startAngle}
-					radius={radius+1}
-					strokeWidth={strokeWidth+1}
 					color={foregroundColor}
+					endAngle={valueAngle}
+					radius={radius}
+					startAngle={startAngle}
+					strokeWidth={strokeWidth}
 					svgPointerEvents="auto"
 					svgRef={svgRef}
 				>
 					<circle
-						fill={foregroundColor}
 						cx={knobPosition.x}
 						cy={knobPosition.y}
+						fill={foregroundColor}
 						r={ri.scaleToRem(15)}
 					/>
 				</Arc>
