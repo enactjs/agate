@@ -11,7 +11,7 @@ const Config = mergeComponentMetadata('ArcSlider', ArcSliderBase, ArcSlider);
 
 // Set up some defaults for info and knobs
 const prop = {
-	colors: ['', '#000000', '#FDC902', '#986AAD'],
+	colors: ['', '#000000', '#fdc902', '#986aad', '#0000ff'],
 	radius: [120, 150]
 };
 

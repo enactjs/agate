@@ -19,7 +19,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			step: PropTypes.number,
 			strokeWidth: PropTypes.number,
 			value: PropTypes.number
-		}
+		};
 
 		constructor (props) {
 			super(props);
