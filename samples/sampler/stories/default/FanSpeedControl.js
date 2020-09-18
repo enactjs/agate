@@ -1,5 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {number, select} from '@enact/storybook-utils/addons/knobs';
+import {select} from '@enact/storybook-utils/addons/knobs';
 import {storiesOf} from '@storybook/react';
 import React from 'react';
 
@@ -17,7 +17,6 @@ storiesOf('Agate', module)
 			<div style={{marginTop: '40px'}}>
 				<FanSpeedControl
 					icon={select('icon', ['', ...iconNames], Config, 'fan')}
-					value={number('value', Config, {range: true, min: 0, max: 10, step: 1}, 4)}
 				/>
 			</div>
 

@@ -1,8 +1,10 @@
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
 import Arc from '../Arc';
+import FanSpeedControlBehaviorDecorator from './FanSpeedControlBehaviourDecorator';
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
@@ -47,12 +49,22 @@ const FanSpeedControlBase = kind({
 		value: PropTypes.number
 	},
 
+	defaultProps: {
+		value: 4
+	},
+
 	styles: {
 		css,
 		className: 'fanSpeedControl'
 	},
 
-	render: ({icon, skinVariants, value, ...rest}) => {
+	render: ({icon, onClick, skinVariants, value, ...rest}) => {
+		// const handleClick = (index) => () => {
+		// 	value = index;
+		// 	console.log(value);
+		// 	console.log(index);
+		// } // eslint-disable-line no-console
+
 		return (
 			<div className={css.fanSpeedControl} {...rest}>
 				{FAN_SPEED.map((option, index) => {
@@ -72,9 +84,11 @@ const FanSpeedControlBase = kind({
 							endAngle={arcEndAngle}
 							opacity={value >= option ? 1 : 0.4}
 							key={index}
+							onClick={onClick(index)}
 							radius={150}
 							startAngle={arcStartAngle}
 							strokeWidth={5}
+							value={value}
 						/>
 					);
 				})}
@@ -87,6 +101,8 @@ const FanSpeedControlBase = kind({
 	}
 });
 
-const FanSpeedControl = Skinnable({variantsProp: 'skinVariants'}, FanSpeedControlBase);
+const FanSpeedControlDecorator = compose(FanSpeedControlBehaviorDecorator, Skinnable({variantsProp: 'skinVariants'}));
+
+const FanSpeedControl = FanSpeedControlDecorator(FanSpeedControlBase);
 
 export default FanSpeedControl;
