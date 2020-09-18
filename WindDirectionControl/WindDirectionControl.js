@@ -65,6 +65,8 @@ const WindDirectionControlBase = kind({
 	},
 
 	render: ({airDirection, componentIcon, skinVariants, ...rest}) => {
+		const handleClick = (index) => () => console.log(index); // eslint-disable-line no-console
+
 		return (
 			<div className={css.windDirectionControl} {...rest}>
 				{WIND_DIRECTION.map((windDirection, index) => {
@@ -85,6 +87,7 @@ const WindDirectionControlBase = kind({
 							endAngle={arcEndAngle}
 							opacity={airDirection === option ? 1 : 0.4}
 							key={index}
+							onClick={handleClick(index)}
 							radius={150}
 							startAngle={arcStartAngle}
 							strokeWidth={5}
