@@ -577,9 +577,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 
 			// Keep the current media active and set it as the first element in the shuffled array
 			if (currentMediaIndex) {
-				let temp = playlist[0];
-				playlist[0] = playlist[currentMediaIndex];
-				playlist[currentMediaIndex] = temp;
+				[playlist[0], playlist[currentMediaIndex]] = [playlist[currentMediaIndex], playlist[0]];
 			}
 
 			this.setState({
