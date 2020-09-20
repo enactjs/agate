@@ -34,7 +34,7 @@ const DateTimePickerBase = kind({
 
 	propTypes: /** @lends agate/DateTimePicker.DateTimePicker.prototype */ {
 		/**
-		 * Disables the `ImageItem`.
+		 * Disables the `DateTimePicker`.
 		 *
 		 * @type {Boolean}
 		 * @public

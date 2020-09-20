@@ -39,13 +39,11 @@ for (let i = 0; i < 100; i++) {
 }
 
 const VirtualGridListView = () => {
-	const [disabled, setDisabled] = React.useState(false);
 	const [native, setNative] = React.useState(true);
 	const [horizontal, setHorizontal] = React.useState(false);
 	const [customAriaLabel, setCustomAriaLabel] = React.useState(false);
 	const scrollMode = native ? 'native' : 'translate';
 
-	const handleToggleDisabled = () => setDisabled(!disabled);
 	const handleToggleScrollMode = () => setNative(!native);
 	const handleToggleOrientation = () => setHorizontal(!horizontal);
 	const handleChangeAriaLabelButton = () => setCustomAriaLabel(!customAriaLabel);
@@ -59,13 +57,6 @@ const VirtualGridListView = () => {
 					style={{width: '350px'}} // FIXME: If no width, then the text doesn't display.
 				>
 					Customizable aria-labels on ScrollThumbs
-				</CheckboxItem>
-				<CheckboxItem
-					onClick={handleToggleDisabled}
-					selected={disabled}
-					style={{width: '250px'}} // FIXME: If no width, then the text doesn't display.
-				>
-					Disabled
 				</CheckboxItem>
 				<CheckboxItem
 					onToggle={handleToggleOrientation}
@@ -86,7 +77,6 @@ const VirtualGridListView = () => {
 			<VirtualGridList
 				dataSize={items.length}
 				direction={horizontal ? 'horizontal' : 'vertical'}
-				disabled={disabled}
 				focusableScrollbar
 				itemRenderer={renderItem}
 				itemSize={{
