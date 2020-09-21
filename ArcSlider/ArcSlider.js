@@ -156,11 +156,11 @@ const ArcSliderBase = kind({
 
 	defaultProps: {
 		backgroundColor: '#000000',
-		foregroundColor: '#0000ff',
-		radius: 150,
 		endAngle: 250,
+		foregroundColor: '#0000ff',
 		max: 100,
 		min: 0,
+		radius: 150,
 		startAngle: 30,
 		step: 1,
 		strokeWidth: 6
