@@ -10,8 +10,6 @@ import Skinnable from '../Skinnable';
 
 import css from './FanSpeedControl.module.less';
 
-const FAN_SPEED = [1,2,3,4,5,6,7,8,9,10];
-
 /**
  * An Agate component for displaying fan speed {@link agate/FanSpeedControl}.
  *
@@ -31,6 +29,23 @@ const FanSpeedControlBase = kind({
 		 * @public
 		 */
 		icon: PropTypes.string,
+
+		/**
+		 * Called when the path area is clicked.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onClick: PropTypes.func,
+
+		/**
+		 * The size of FanSpeedControl. The number of arc segments to be rendered.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		size: PropTypes.number,
 
 		/**
 		 * Current skinVariant.
@@ -58,7 +73,14 @@ const FanSpeedControlBase = kind({
 		className: 'fanSpeedControl'
 	},
 
-	render: ({icon, onClick, skinVariants, value, ...rest}) => {
+	render: ({icon, onClick, size, skinVariants, value, ...rest}) => {
+
+		let FAN_SPEED = [];
+
+		for (let i = 1; i <= size; i++) {
+			FAN_SPEED.push(i);
+		}
+
 		return (
 			<div className={css.fanSpeedControl} {...rest}>
 				{FAN_SPEED.map((option, index) => {
@@ -76,9 +98,9 @@ const FanSpeedControlBase = kind({
 							className={css.fanSpeedArc}
 							color={skinVariants.night ? '#fff' : '#000'}
 							endAngle={arcEndAngle}
-							opacity={value >= option ? 1 : 0.4}
 							key={index}
 							onClick={onClick(index)}
+							opacity={value >= option ? 1 : 0.4}
 							radius={150}
 							startAngle={arcStartAngle}
 							strokeWidth={5}

@@ -37,15 +37,13 @@ const FanSpeedControlBehaviorDecorator = hoc((config, Wrapped) => {
 		handleClick = (index) => () => {
 			this.setState({
 				currentValue: index + 1
-			})
+			});
 		}
 
 		render () {
-			const props = Object.assign({}, this.props);
-
 			return (
 				<Wrapped
-					{...props}
+					{...this.props}
 					onClick={this.handleClick}
 					value={this.state.currentValue}
 				/>

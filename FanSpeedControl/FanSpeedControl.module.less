@@ -6,8 +6,8 @@
 @import '../styles/variables.less';
 
 .fanSpeedControl {
-	position: relative;
 	height: 320px;
+	position: relative;
 	width: 320px;
 
 	.valueDisplay {
@@ -18,6 +18,12 @@
 		position: absolute;
 		top: 50%;
 		transform: translate(-50%,-50%);
+	}
+
+	.fanSpeedArc {
+		height: 100%;
+		position: absolute;
+		width: 100%;
 	}
 
 	.applySkins({
@@ -34,10 +40,4 @@
 			margin-right: @agate-fanspeedcontrol-margin;
 		}
 	})
-}
-
-.fanSpeedArc {
-	position: absolute;
-	width: 100%;
-	height: 100%;
 }
