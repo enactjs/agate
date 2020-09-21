@@ -2,7 +2,7 @@
  * An Agate-themed drawer component.
  *
  * @example
- * <Drawer header="Surprise">Hello Enact!</Drawer>
+ * <Drawer open={true}>Hello Enact!</Drawer>
  *
  * @module agate/Drawer
  * @exports Drawer
