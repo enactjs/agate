@@ -104,6 +104,15 @@ const TemperatureControlBase = kind({
 		radius: PropTypes.number,
 
 		/**
+		 * The scale of the temperature(C or F).
+		 *
+		 * @type {('C'|'F')}
+		 * @default 'C'
+		 * @public
+		 */
+		scale: PropTypes.oneOf(['C', 'F']),
+
+		/**
 		 * The start angle(in degrees) of the arc slider.
 		 *
 		 * The value should be between 0 and 360.
@@ -139,6 +148,7 @@ const TemperatureControlBase = kind({
 		max: 30,
 		min: 10,
 		radius: 150,
+		scale: 'C',
 		startAngle: 50,
 		strokeWidth: 6,
 		value: 15
@@ -149,7 +159,7 @@ const TemperatureControlBase = kind({
 		className: 'temperatureControl'
 	},
 
-	render: ({componentRef, endAngle, max, min, onMouseDown, onTouchStart, radius, startAngle, strokeWidth, value, ...rest}) => {
+	render: ({componentRef, endAngle, max, min, onMouseDown, onTouchStart, radius, scale, startAngle, strokeWidth, value, ...rest}) => {
 		return (
 			<div {...rest} >
 				<ArcSlider
@@ -168,7 +178,7 @@ const TemperatureControlBase = kind({
 					value={value}
 				/>
 				<div className={css.valueDisplay}>
-					<span>{value}°C</span>
+					<span>{value}°{scale}</span>
 				</div>
 			</div>
 		);
