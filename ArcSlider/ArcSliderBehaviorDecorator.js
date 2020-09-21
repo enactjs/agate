@@ -23,7 +23,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 		constructor (props) {
 			super(props);
 
-			this.svgRef = React.createRef();
+			this.componentRef = React.createRef();
 
 			this.state = {
 				value: props.min
@@ -31,20 +31,20 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 		}
 
 		onMouseDown = (ev) => {
-			const svgRef = this.svgRef.current;
+			const componentRef = this.componentRef.current;
 
-			if (svgRef) {
-				svgRef.addEventListener('mousemove', this.calculateNewValue);
-				svgRef.addEventListener('mouseup', this.removeMouseListeners);
+			if (componentRef) {
+				componentRef.addEventListener('mousemove', this.calculateNewValue);
+				componentRef.addEventListener('mouseup', this.removeMouseListeners);
 			}
 			this.calculateNewValue(ev);
 		};
 
 		removeMouseListeners = () => {
-			const svgRef = this.svgRef.current;
-			if (svgRef) {
-				svgRef.removeEventListener('mousemove', this.calculateNewValue);
-				svgRef.removeEventListener('mouseup', this.removeMouseListeners);
+			const componentRef = this.componentRef.current;
+			if (componentRef) {
+				componentRef.removeEventListener('mousemove', this.calculateNewValue);
+				componentRef.removeEventListener('mouseup', this.removeMouseListeners);
 			}
 		};
 
@@ -52,15 +52,15 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 		calculateNewValue = (ev) => {
 			const {endAngle, max, min, radius, startAngle, step, strokeWidth} = this.props;
 
-			const svgRef = this.svgRef.current;
-			if (!svgRef) {
+			const componentRef = this.componentRef.current;
+			if (!componentRef) {
 				return;
 			}
 			// Find the coordinates with respect to the SVG
-			const svgPoint = svgRef.createSVGPoint();
+			const svgPoint = componentRef.createSVGPoint();
 			svgPoint.x = ev.clientX;
 			svgPoint.y = ev.clientY;
-			const coordsInSvg = svgPoint.matrixTransform(svgRef.getScreenCTM().inverse());
+			const coordsInSvg = svgPoint.matrixTransform(componentRef.getScreenCTM().inverse());
 
 			const angle = positionToAngle(coordsInSvg, radius * 2 - strokeWidth);
 
@@ -81,13 +81,11 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 		};
 
 		render () {
-			const props = Object.assign({}, this.props);
-
 			return (
 				<Wrapped
-					{...props}
+					{...this.props}
+					componentRef={this.componentRef}
 					onMouseDown={this.onMouseDown}
-					svgRef={this.svgRef}
 					value={this.state.value}
 				/>
 			);

@@ -2,7 +2,7 @@
  * Agate styled arc slider components and behaviors.
  *
  * @example
- * <ArcSlider backgroundColor="blue" endAngle={200} foregroundColor="red" startAngle={0} radius={150} step={2} />
+ * <ArcSlider backgroundColor="blue" endAngle={200} foregroundColor="red" radius={150} startAngle={0} step={2} />
  *
  * @module agate/ArcSlider
  * @exports ArcSlider
@@ -18,10 +18,10 @@ import compose from 'ramda/src/compose';
 import React from 'react';
 
 import Arc from '../Arc';
+import {angleToPosition} from '../Arc/utils';
 import Skinnable from '../Skinnable';
 
 import ArcSliderBehaviorDecorator from './ArcSliderBehaviorDecorator';
-import {angleToPosition} from '../Arc/utils';
 import {valueToAngle} from './utils';
 
 import css from './ArcSlider.modules.less';
@@ -51,19 +51,29 @@ const ArcSliderBase = kind({
 		backgroundColor: PropTypes.string,
 
 		/**
-		 * The color of the arc slider.
+		 * Function that generates a reference to the current svg.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		componentRef: PropTypes.object,
+
+		/**
+		 * The end angle(in degrees) of the arc slider.
+		 *
+		 * The value should be between 0 and 360.
 		 *
 		 * @type {String}
-		 * @default #000000
+		 * @default 250
 		 * @public
 		 */
 		endAngle: PropTypes.number,
 
 		/**
-		 * The radius of the arc slider in px.
+		 * The color of the foreground arc.
 		 *
 		 * @type {number}
-		 * @default 150
+		 * @default #0000ff
 		 * @public
 		 */
 		foregroundColor: PropTypes.string,
@@ -134,14 +144,6 @@ const ArcSliderBase = kind({
 		strokeWidth: PropTypes.number,
 
 		/**
-		 * Function that generates a reference to the current svg.
-		 *
-		 * @type {Function}
-		 * @public
-		 */
-		svgRef: PropTypes.object,
-
-		/**
 		 * The value of the slider.
 		 *
 		 * Defaults to the value of `min`.
@@ -173,7 +175,7 @@ const ArcSliderBase = kind({
 		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth)
 	},
 
-	render: ({backgroundColor, endAngle, foregroundColor, max, min, onMouseDown, radius, size, startAngle, strokeWidth, svgRef, value, ...rest}) => {
+	render: ({backgroundColor, componentRef, endAngle, foregroundColor, max, min, onMouseDown, radius, size, startAngle, strokeWidth, value, ...rest}) => {
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
@@ -196,8 +198,8 @@ const ArcSliderBase = kind({
 					radius={radius}
 					startAngle={startAngle}
 					strokeWidth={strokeWidth}
-					svgPointerEvents="auto"
-					svgRef={svgRef}
+					pointerEvents="auto"
+					componentRef={componentRef}
 				>
 					<circle
 						cx={knobPosition.x}
@@ -230,7 +232,7 @@ const ArcSliderDecorator = compose(
  *
  * Usage:
  * ```
- * <ArcSlider backgroundColor="blue" endAngle={200} foregroundColor="red" startAngle={0} radius={150} step={2} />
+ * <ArcSlider backgroundColor="blue" endAngle={200} foregroundColor="red" radius={150} startAngle={0} step={2} />
  *
  * @class ArcSlider
  * @memberof agate/ArcSlider
