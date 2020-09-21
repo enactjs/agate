@@ -46,6 +46,14 @@ const ArcBase = kind({
 		color: PropTypes.string,
 
 		/**
+		 * A reference to the current svg.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		componentRef: PropTypes.object,
+
+		/**
 		 * The end angle(in degrees) of the arc.
 		 *
 		 * The value should be between 0 and 360 and should be greater than startAngle.
@@ -103,18 +111,22 @@ const ArcBase = kind({
 		strokeWidth: 9
 	},
 
+	styles: {
+		className: 'arc'
+	},
+
 	computed: {
 		height: ({radius}) => ri.scaleToRem(radius * 2),
 		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth),
 		width: ({radius}) => ri.scaleToRem(radius * 2)
 	},
 
-	render: ({color, endAngle, onClick, radius, size, startAngle, strokeWidth, ...rest}) => {
+	render: ({children, color, componentRef, endAngle, onClick, radius, size, startAngle, strokeWidth, ...rest}) => {
 		const halfStrokeWidth = strokeWidth / 2;
 		const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${radius * 2}  ${radius * 2}`;
 
 		return (
-			<svg {...rest} viewBox={viewBox} pointerEvents="none">
+			<svg pointerEvents="none" {...rest} viewBox={viewBox} ref={componentRef}>
 				<path
 					d={arcPath(startAngle, endAngle, radius - halfStrokeWidth, size)}
 					fill="none"
@@ -131,6 +143,7 @@ const ArcBase = kind({
 					stroke="transparent"
 					strokeWidth={radius}
 				/>
+				{children}
 			</svg>
 		);
 	}
