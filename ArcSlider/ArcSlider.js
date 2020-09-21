@@ -61,7 +61,7 @@ const ArcSliderBase = kind({
 		/**
 		 * The end angle(in degrees) of the arc slider.
 		 *
-		 * The value should be between 0 and 360.
+		 * The value should be between 0 and 360 and should be greater than startAngle.
 		 *
 		 * @type {String}
 		 * @default 250
@@ -79,7 +79,7 @@ const ArcSliderBase = kind({
 		foregroundColor: PropTypes.string,
 
 		/**
-		 * The maximum value of the slider.
+		 * The maximum value of the slider and should be greater than min.
 		 *
 		 * @type {number}
 		 * @default 100
