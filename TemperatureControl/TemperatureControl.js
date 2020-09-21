@@ -153,11 +153,11 @@ const TemperatureControlBase = kind({
 		return (
 			<div {...rest} >
 				<ArcSlider
-					backgroundColor="#444"
+					backgroundColor="#444444"
 					className={css.slider}
 					componentRef={componentRef}
 					endAngle={endAngle}
-					foregroundColor={value < min + (max - min) / 2 ? '#00f' : '#ff2d55'}
+					foregroundColor={value < min + (max - min) / 2 ? '#007aff' : '#f24949'}
 					onMouseDown={onMouseDown}
 					onTouchStart={onTouchStart}
 					max={max}
@@ -166,8 +166,7 @@ const TemperatureControlBase = kind({
 					startAngle={startAngle}
 					strokeWidth={strokeWidth}
 					value={value}
-				>
-a				</ArcSlider>
+				/>
 				<div className={css.valueDisplay}>
 					<span>{value}°C</span>
 				</div>

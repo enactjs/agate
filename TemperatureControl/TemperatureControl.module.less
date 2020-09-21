@@ -6,13 +6,6 @@
 .temperatureControl {
 	position: relative;
 
-	.valueDisplay {
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%,-50%);
-	}
-
 	.slider {
 		display: flex;
 		align-items: center;
@@ -21,13 +14,20 @@
 		width: 100%;
 	}
 
+	.valueDisplay {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%,-50%);
+	}
+
 	.applySkins({
-		height: 321px;// @agate-temperaturecontrol-height;
-		width: 321px;// @agate-temperaturecontrol-height;
+		height: @agate-temperaturecontrol-height;
+		width: @agate-temperaturecontrol-height;
 
 		.valueDisplay {
-			font-size: 60px;// @agate-temperaturecontrol-font-size;
-			font-weight: 900; //@agate-temperaturecontrol-font-weight;
+			font-size: @agate-temperaturecontrol-font-size;
+			font-weight: @agate-temperaturecontrol-font-weight;
 		}
 	});
 }
