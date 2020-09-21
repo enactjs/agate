@@ -83,6 +83,15 @@ const SliderBase = kind({
 		 */
 		css: PropTypes.object,
 
+
+		/**
+		 * Disables component and does not generate events.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
 		/**
 		 * Indicates that the slider has gained focus.
 		 *
@@ -232,7 +241,7 @@ const SliderBase = kind({
 		})
 	},
 
-	render: ({css, ...rest}) => {
+	render: ({css, disabled, ...rest}) => {
 		delete rest.activateOnFocus;
 		delete rest.active;
 		delete rest.focused;
@@ -242,7 +251,9 @@ const SliderBase = kind({
 		return (
 			<UiSlider
 				{...rest}
+				aria-disabled={disabled}
 				css={css}
+				disabled={disabled}
 				progressBarComponent={
 					<ProgressBar css={css} />
 				}

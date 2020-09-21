@@ -84,7 +84,7 @@ const DropdownView = () => (
 			</Dropdown>
 			<br />
 			<Dropdown
-				alt="With Title and Aria-labelled Disabled Options"
+				alt="Aria-labelled with a Title and Disabled Options"
 				title="Title"
 			>
 				{disabledList}
