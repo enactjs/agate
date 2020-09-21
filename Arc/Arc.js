@@ -89,7 +89,7 @@ const ArcBase = kind({
 		 * The stroke width of the arc.
 		 *
 		 * @type {number}
-		 * @default: 1
+		 * @default 9
 		 * @public
 		 */
 		strokeWidth: PropTypes.number
