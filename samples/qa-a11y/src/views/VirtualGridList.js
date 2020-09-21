@@ -52,18 +52,18 @@ const VirtualGridListView = () => {
 		<>
 			<Header title="VirtualGridList">
 				<CheckboxItem
-					onToggle={handleToggleOrientation}
-					selected={horizontal}
-					style={{width: '300px'}} // FIXME: If no width, then the text doesn't display.
-				>
-					Horizontal
-				</CheckboxItem>
-				<CheckboxItem
 					onToggle={handleChangeAriaLabelButton}
 					selected={customAriaLabel}
 					style={{width: '350px'}} // FIXME: If no width, then the text doesn't display.
 				>
 					Customizable aria-labels on ScrollThumbs
+				</CheckboxItem>
+				<CheckboxItem
+					onToggle={handleToggleOrientation}
+					selected={horizontal}
+					style={{width: '300px'}} // FIXME: If no width, then the text doesn't display.
+				>
+					Horizontal
 				</CheckboxItem>
 				<CheckboxItem
 					onToggle={handleToggleScrollMode}

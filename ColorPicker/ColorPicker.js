@@ -81,6 +81,14 @@ const ColorPickerBase = kind({
 		direction: PropTypes.string,
 
 		/**
+		 * Disables the `ColorPicker`.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
+		/**
 		 * Determines whether the extended color controls (sliders) are visible
 		 *
 		 * @type {Boolean}
@@ -188,11 +196,11 @@ const ColorPickerBase = kind({
 		}
 	},
 
-	render: ({children, css, onChange, onClick, onHueChanged, onSaturationChanged, onLightnessChanged, onToggleExtended, open, sliderValues, transitionContainerClassname, transitionDirection, value, ...rest}) => {
+	render: ({children, css, disabled, onChange, onClick, onHueChanged, onSaturationChanged, onLightnessChanged, onToggleExtended, open, sliderValues, transitionContainerClassname, transitionDirection, value, ...rest}) => {
 		delete rest.extended;
 		return (
 			<div {...rest}>
-				<SwatchButton color={value} onClick={onClick} />
+				<SwatchButton color={value} disabled={disabled} onClick={onClick} />
 				<Transition
 					className={transitionContainerClassname}
 					visible={open}

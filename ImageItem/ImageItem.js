@@ -71,6 +71,14 @@ const ImageItemBase = kind({
 		css: PropTypes.object,
 
 		/**
+		 * Disables the `ImageItem`.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
+		/**
 		 * The layout orientation of the component.
 		 *
 		 * @type {('horizontal'|'vertical')}
@@ -105,7 +113,7 @@ const ImageItemBase = kind({
 		})
 	},
 
-	render: ({captionPosition, children, css,  src, ...rest}) => {
+	render: ({captionPosition, children, css, disabled, src, ...rest}) => {
 		const [Component, marqueeProps] = (children && (captionPosition === 'below')) ? [MarqueeImageItem, {
 			alignment: 'center'
 		}] : [UiImageItem, null];
@@ -114,7 +122,9 @@ const ImageItemBase = kind({
 			<Component
 				{...rest}
 				{...marqueeProps}
+				aria-disabled={disabled}
 				css={css}
+				disabled={disabled}
 				imageComponent={ImageBase}
 				src={src}
 			>

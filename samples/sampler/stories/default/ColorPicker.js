@@ -1,6 +1,6 @@
 import {action} from '@enact/storybook-utils/addons/actions';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -32,6 +32,7 @@ storiesOf('Agate', module)
 			return (
 				<ColorPicker
 					direction={direction}
+					disabled={boolean('disabled', Config)}
 					onChange={action('onChange')}
 					defaultValue={colors[0]}
 				>
