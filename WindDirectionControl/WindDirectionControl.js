@@ -1,3 +1,4 @@
+import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -5,6 +6,7 @@ import React from 'react';
 import Arc from '../Arc';
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
+import WindDirectionControlBehaviourDecorator from './WindDirectionControlBehaviourDecorator';
 
 import css from './WindDirectionControl.module.less';
 
@@ -30,10 +32,18 @@ const WindDirectionControlBase = kind({
 		 * State of WindDirectionControl.
 		 *
 		 * @type {('airDown'|'airRight'|'airUp')}
-		 * @default ''
 		 * @public
 		 */
 		airDirection: PropTypes.oneOf(['airDown', 'airRight', 'airUp']),
+
+		/**
+		 * Called when the path area is clicked.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onClick: PropTypes.func,
 
 		/**
 		 * Current skinVariant.
@@ -64,8 +74,7 @@ const WindDirectionControlBase = kind({
 		}
 	},
 
-	render: ({airDirection, componentIcon, skinVariants, ...rest}) => {
-		const handleClick = (index) => () => console.log(index); // eslint-disable-line no-console
+	render: ({airDirection, componentIcon, onClick, skinVariants, ...rest}) => {
 
 		return (
 			<div className={css.windDirectionControl} {...rest}>
@@ -87,7 +96,7 @@ const WindDirectionControlBase = kind({
 							endAngle={arcEndAngle}
 							opacity={airDirection === option ? 1 : 0.4}
 							key={index}
-							onClick={handleClick(index)}
+							onClick={onClick(option)}
 							radius={150}
 							startAngle={arcStartAngle}
 							strokeWidth={5}
@@ -102,6 +111,23 @@ const WindDirectionControlBase = kind({
 	}
 });
 
-const WindDirectionControl = Skinnable({variantsProp: 'skinVariants'}, WindDirectionControlBase);
+/**
+ * Applies Agate specific behaviors to [WindDirectionControl]{@link agate/WindDirectionControl.WindDirectionControlBase} components.
+ *
+ * @hoc
+ * @memberof agate/WindDirectionControl
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
+const WindDirectionControlDecorator = compose(
+	Skinnable({variantsProp: 'skinVariants'}),
+	WindDirectionControlBehaviourDecorator
+);
+
+const WindDirectionControl = WindDirectionControlDecorator(WindDirectionControlBase);
 
 export default WindDirectionControl;
+export {
+	WindDirectionControl,
+	WindDirectionControlBase
+};

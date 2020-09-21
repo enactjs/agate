@@ -4,27 +4,25 @@
 @import '../styles/skin.less';
 @import '../styles/variables.less';
 
-.windDirectionArc {
-	position: absolute;
-}
-
 .windDirectionControl {
+	.windDirectionArc {
+		position: absolute;
+	}
+
 	.airDirectionDisplay {
 		align-items: center;
 		display: flex;
 		height: 120px;
-		justify-content: center;
-		position: absolute;
-		transform: translate(60%, 60%);
+		transform: translate(60%, 70%);
 		width: 120px;
 
 		.airDirectionIcon {
 			.applySkins({
-				font-size: @agate-winddirectioncontrol-font-size;
-				height: @agate-winddirectioncontrol-height;
-				line-height: @agate-winddirectioncontrol-line-height;
-				margin: @agate-winddirectioncontrol-margin;
-				width: @agate-winddirectioncontrol-width;
+				font-size: @agate-winddirectioncontrol-icon-font-size;
+				height: @agate-winddirectioncontrol-icon-height;
+				line-height: @agate-winddirectioncontrol-icon-line-height;
+				margin: @agate-winddirectioncontrol-icon-margin;
+				width: @agate-winddirectioncontrol-icon-width;
 			})
 		}
 	}
