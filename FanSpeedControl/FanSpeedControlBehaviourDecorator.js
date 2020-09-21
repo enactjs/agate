@@ -2,7 +2,7 @@ import hoc from '@enact/core/hoc';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-// Adds Agate-specific fanSpeedControl behaviors
+// Adds Agate-specific FanSpeedControl behaviors
 const FanSpeedControlBehaviorDecorator = hoc((config, Wrapped) => {
 	return class extends React.Component {
 		static displayName = 'FanSpeedControlBehaviorDecorator';
@@ -38,13 +38,10 @@ const FanSpeedControlBehaviorDecorator = hoc((config, Wrapped) => {
 			this.setState({
 				currentValue: index + 1
 			})
-		} // eslint-disable-line no-console
-
+		}
 
 		render () {
 			const props = Object.assign({}, this.props);
-
-			// console.log(props)
 
 			return (
 				<Wrapped

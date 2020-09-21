@@ -59,12 +59,6 @@ const FanSpeedControlBase = kind({
 	},
 
 	render: ({icon, onClick, skinVariants, value, ...rest}) => {
-		// const handleClick = (index) => () => {
-		// 	value = index;
-		// 	console.log(value);
-		// 	console.log(index);
-		// } // eslint-disable-line no-console
-
 		return (
 			<div className={css.fanSpeedControl} {...rest}>
 				{FAN_SPEED.map((option, index) => {
