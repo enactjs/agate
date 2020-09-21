@@ -60,6 +60,11 @@
 @agate-contextual-popup-padding-horizontal: 36px;
 @agate-contextual-popup-font-size:          27px;
 
+// DateTimePicker
+// ---------------------------------------
+@agate-datetimepicker-divider-height: 21px;
+@agate-datetimepicker-divider-width: 3px;
+
 // Drawer
 // ---------------------------------------
 @agate-drawer-border-width: @agate-popup-border-width;
@@ -70,15 +75,21 @@
 @agate-dropdown-button-bg-image: none;
 @agate-dropdown-button-font-size: 27px;
 @agate-dropdown-button-icon-font-size: 36px;
-@agate-dropdown-button-icon-height: 24px;
+@agate-dropdown-button-transition-delay: 0.5s;
+@agate-dropdown-button-marquee-margin-right: 42px;
 @agate-dropdown-button-list-border-radius: 0 0 @agate-button-border-radius @agate-button-border-radius;
 @agate-dropdown-button-open-border-radius: @agate-button-border-radius @agate-button-border-radius 0 0;
 @agate-dropdown-up-button-list-border-radius: @agate-dropdown-button-open-border-radius;
 @agate-dropdown-up-button-open-border-radius: @agate-dropdown-button-list-border-radius;
+@agate-dropdown-button-height: 60px;
+@agate-dropdown-button-padding: 0 15px;
 @agate-dropdown-button-width: 300px;
 @agate-dropdown-item-font-size: @agate-dropdown-button-font-size;
 @agate-dropdown-item-font-weight: 300;
+@agate-dropdown-item-line-height: @agate-button-small-height;
 @agate-dropdown-item-padding: 15px;
+@agate-dropdown-list-height: @agate-button-small-height * 4;
+@agate-dropdown-list-padding: 15px 0 3px 0;
 
 // Header
 // ---------------------------------------
@@ -160,6 +171,20 @@
 @agate-item-side-outset:      30px;
 @agate-item-sub-text-size:    24px;
 
+// Keypad
+// ---------------------------------------
+@agate-keypad-button-height:        99px;
+@agate-keypad-height:               510px;
+@agate-keypad-input-border-bottom:  none;
+@agate-keypad-input-font-size:      60px;
+@agate-keypad-keycontainer-width:   159px;
+@agate-keypad-label-bottom:         9px;
+@agate-keypad-label-font-size:      12px;
+@agate-keypad-label-line-height:    18px;
+@agate-keypad-text-font-size:       42px;
+@agate-keypad-text-line-height:     57px;
+@agate-keypad-width:                480px;
+
 // MediaPlayer
 // ---------------------------------------
 @agate-mediacontrols-button-bg-border: transparent;
@@ -232,10 +257,6 @@
 // ---------------------------------------
 @agate-progressbar-height: 6px;
 @agate-progressbar-vertical-width: @agate-progressbar-height;
-
-// RadioItem
-// ---------------------------------------
-@agate-radioitem-icon-opacity: 0.5;
 
 // Scrollbar
 // ---------------------------------------

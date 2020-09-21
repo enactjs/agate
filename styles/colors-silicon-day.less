@@ -75,7 +75,6 @@
 @agate-spotlight-color:                @agate-foreground-focus;
 @agate-spotlight-bg-color:             @agate-background-focus;
 @agate-spotlight-border-color:         transparent;
-@agate-spotlight-disabled-text-color:  fade(@agate-spotlight-color, 40%);
 @agate-spotlight-focus-bg-image:       none;
 
 // Button
@@ -116,6 +115,13 @@
 @agate-contextual-popup-close-button-border-color:  transparent;
 @agate-contextual-popup-color:                      @agate-black;
 
+// DateTimePicker
+// ---------------------------------------
+@agate-datetimepicker-active-container-bg-color: transparent;
+@agate-datetimepicker-active-container-bg-image: @agate-gradient;
+@agate-datetimepicker-divider-bg-color: @agate-white;
+@agate-datetimepicker-divider-opacity: 0.4;
+
 // Dropdown
 // ---------------------------------------
 @agate-dropdown-button-bg-color: @silicon-gray;
@@ -124,7 +130,7 @@
 @agate-dropdown-button-icon-color: @agate-accent;
 @agate-dropdown-button-open-border-color: fade(@agate-black, 25%);
 @agate-dropdown-up-button-open-border-bottom-color: transparent;
-@agate-dropdown-selected-color: @agate-accent;
+@agate-dropdown-selected-color: @agate-black;
 @agate-dropdown-item-border-color: transparent;
 @agate-dropdown-item-color: @agate-black;
 @agate-dropdown-item-focus-bg-color: fade(@agate-black, 5%);
@@ -184,6 +190,18 @@
 @agate-item-selected-border-color:        @agate-accent;
 @agate-item-selected-color:               @agate-item-label-color;
 
+// Keypad
+// ---------------------------------------
+@agate-keypad-button-active-bg-color:     transparent;
+@agate-keypad-button-active-border-color: @agate-accent;
+@agate-keypad-button-active-color:        @agate-keypad-button-active-border-color;
+@agate-keypad-button-bg-color:            transparent;
+@agate-keypad-button-color:               @agate-foreground;
+@agate-keypad-button-focus-color:         @agate-white;
+@agate-keypad-button-label-color:         @silicon-dark-gray;
+@agate-keypad-input-decorator-box-shadow: none;
+@agate-keypad-input-opacity:              1;
+
 // LabeledIconButton
 // ---------------------------------------
 @agate-labelediconbutton-label-focus-color: @agate-accent;
@@ -219,8 +237,7 @@
 @agate-picker-item-bg-color: transparent;
 @agate-picker-item-decrement-bg-image: none;
 @agate-picker-item-increment-bg-image: none;
-@agate-picker-item-focus-color: @agate-picker-active-color;
-@agate-picker-item-focus-bg-color: @agate-accent;
+@agate-picker-secondary-item-color: fade(@agate-foreground, 35%);
 
 // Popup
 // ---------------------------------------

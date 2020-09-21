@@ -1,0 +1,104 @@
+// Keypad.module.less
+//
+@import "../styles/skin.less";
+@import "../styles/mixins.less";
+
+.applySkins({
+	.keypad {
+		height: @agate-keypad-height;
+		width: @agate-keypad-width;
+
+		.keyContainer {
+			display: flex;
+			justify-content: center;
+			width: @agate-keypad-keycontainer-width;
+		}
+
+		.label {
+			bottom: @agate-keypad-label-bottom;
+			position: absolute;
+		}
+	}
+});
+
+.button {
+	.client {
+		.icon {
+			margin: 0;
+		}
+	}
+
+	.applySkins({
+		&.key {
+			height: @agate-keypad-button-height;
+			width: @agate-keypad-button-height;
+		}
+
+		.bg {
+			background-color: @agate-keypad-button-bg-color;
+			border: none;
+			border-radius: @agate-keypad-button-height;
+		}
+
+		.client {
+			color: @agate-keypad-button-color;
+
+			.text {
+				font-size: @agate-keypad-text-font-size;
+				line-height: @agate-keypad-text-line-height;
+			}
+
+			.label {
+				color: @agate-keypad-button-label-color;
+				font-size: @agate-keypad-label-font-size;
+				line-height: @agate-keypad-label-line-height;
+			}
+
+			.icon {
+				margin: 0;
+			}
+		}
+
+		.focus({
+			.client {
+				.label {
+					color: @agate-keypad-button-focus-color;
+				}
+			}
+		});
+
+		.active({
+			.bg {
+				background-color: @agate-keypad-button-active-bg-color;
+				border-color: @agate-keypad-button-active-border-color;
+			}
+
+			.client {
+				color: @agate-keypad-button-active-color;
+
+				.label {
+					color: @agate-keypad-button-active-color;
+				}
+			}
+		});
+	});
+}
+
+.keypadInput {
+	&.decorator {
+		.applySkins({
+			box-shadow: @agate-keypad-input-decorator-box-shadow;
+
+			.input {
+				border-bottom: @agate-keypad-input-border-bottom;
+				color: @agate-keypad-button-color;
+				font-size: @agate-keypad-input-font-size;
+				opacity: @agate-keypad-input-opacity;
+			}
+
+			.focus({
+				box-shadow: @agate-keypad-input-decorator-box-shadow;
+			});
+		});
+	}
+}
