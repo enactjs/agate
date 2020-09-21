@@ -46,8 +46,8 @@ const WindDirectionControlBehaviourDecorator = hoc((config, Wrapped) => {
 			return (
 				<Wrapped
 					{...props}
-					onClick={this.handleClick}
 					airDirection={this.state.currentAirDirection}
+					onClick={this.handleClick}
 				/>
 			);
 		}

@@ -1,6 +1,6 @@
-import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
 import Arc from '../Arc';
@@ -17,7 +17,7 @@ const WIND_DIRECTION = [
 ];
 
 /**
- * A SVG for {@link agate/WindDirectionControl}.
+ * An Agate component for displaying Wind Direction Control {@link agate/WindDirectionControl}.
  *
  * @class WindDirectionControl
  * @memberof agate/WindDirectionControl
@@ -94,9 +94,9 @@ const WindDirectionControlBase = kind({
 							className={css.windDirectionArc}
 							color={skinVariants.night ? '#fff' : '#000'}
 							endAngle={arcEndAngle}
-							opacity={airDirection === option ? 1 : 0.4}
 							key={index}
 							onClick={onClick(option)}
+							opacity={airDirection === option ? 1 : 0.4}
 							radius={150}
 							startAngle={arcStartAngle}
 							strokeWidth={5}
