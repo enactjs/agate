@@ -13,38 +13,21 @@
 		transform: translate(-50%,-50%);
 	}
 
-	.background, .progressCold, .progressHeat {
-		fill: none;
-		stroke-width: 6;
+	.slider {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		width: 100%;
 	}
 
 	.applySkins({
-		height: @agate-temperaturecontrol-height;
-		width: @agate-temperaturecontrol-height;
+		height: 321px;// @agate-temperaturecontrol-height;
+		width: 321px;// @agate-temperaturecontrol-height;
 
 		.valueDisplay {
-			font-size: @agate-temperaturecontrol-font-size;
-			font-weight: @agate-temperaturecontrol-font-weight;
-		}
-
-		.background {
-			stroke: @agate-temperaturecontrol-arc-background-color;
-		}
-
-		.progressCold {
-			stroke: @agate-temperaturecontrol-arc-fill-cold-color;
-		}
-
-		.progressHeat {
-			stroke: @agate-temperaturecontrol-arc-fill-heat-color;
-		}
-
-		.knobCold {
-			fill: @agate-temperaturecontrol-arc-fill-cold-color;
-		}
-
-		.knobHeat {
-			fill: @agate-temperaturecontrol-arc-fill-heat-color;
+			font-size: 60px;// @agate-temperaturecontrol-font-size;
+			font-weight: 900; //@agate-temperaturecontrol-font-weight;
 		}
 	});
 }

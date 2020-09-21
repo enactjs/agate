@@ -13,8 +13,6 @@
  * @exports TemperatureControlDecorator
  */
 
-import classnames from 'classnames';
-import Spottable from '@enact/spotlight/Spottable';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
@@ -22,17 +20,13 @@ import React from 'react';
 
 import Skinnable from '../Skinnable';
 
-import {
-	angleToPosition,
-	angleToValue,
-	arcPath,
-	positionToAngle,
-	svgRadius,
-	valueToAngle
-} from './utils';
-
 import css from './TemperatureControl.module.less';
+import {ArcSliderBase} from '../ArcSlider';
+import {ArcSliderBehaviorDecorator} from '../ArcSlider/ArcSliderBehaviorDecorator';
+import kind from '@enact/core/kind';
 
+
+const ArcSlider = Skinnable(ArcSliderBase);
 /**
  * Temperature control base component.
  *
@@ -42,131 +36,163 @@ import css from './TemperatureControl.module.less';
  * @ui
  * @public
  */
-class TemperatureControlBase extends React.Component {
-	static displayName=  'TemperatureControl';
+const TemperatureControlBase = kind({
+	name: 'TemperatureControl',
 
-	static propTypes = {
+	propTypes: /** @lends agate/ArcSlider.ArcSliderBase.prototype */ {
+		/**
+		 * Function that generates a reference to the arc svg.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		componentRef: PropTypes.object,
+
+		/**
+		 * The end angle(in degrees) of the arc slider.
+		 *
+		 * The value should be between 0 and 360 and should be greater than startAngle.
+		 *
+		 * @type {number}
+		 * @default 310
+		 * @public
+		 */
+		endAngle: PropTypes.number,
+
+		/**
+		 * The minimum value of the slider.
+		 *
+		 * @type {Number}
+		 * @default 100
+		 * @public
+		 */
 		max: PropTypes.number,
-		min: PropTypes.number
-	};
 
-	static defaultProps = {
+		/**
+		 * The minimum value of the slider.
+		 *
+		 * @type {Number}
+		 * @default 0
+		 * @public
+		 */
+		min: PropTypes.number,
+
+		/**
+		 * Function that generates a reference to the current svg.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onMouseDown: PropTypes.func,
+
+		/**
+		 * Called when the touch starts over the arc slider area.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onTouchStart: PropTypes.func,
+
+		/**
+		 * The radius of the arc circle.
+		 *
+		 * @type {Number}
+		 * @default 150
+		 * @public
+		 */
+		radius: PropTypes.number,
+
+		/**
+		 * The start angle(in degrees) of the arc slider.
+		 *
+		 * The value should be between 0 and 360.
+		 *
+		 * @type {number}
+		 * @default 50
+		 * @public
+		 */
+		startAngle: PropTypes.number,
+
+		/**
+		 * The stroke width of the arc slider.
+		 *
+		 * @type {number}
+		 * @default 6
+		 * @public
+		 */
+		strokeWidth: PropTypes.number,
+
+		/**
+		 * The value of the slider.
+		 *
+		 * Defaults to the value of `min`.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		value: PropTypes.number
+	},
+
+	defaultProps: {
+		endAngle: 310,
 		max: 30,
-		min: 10
-	};
+		min: 10,
+		radius: 150,
+		startAngle: 50,
+		strokeWidth: 6,
+		value: 15
+	},
 
-	constructor (props) {
-		super(props);
+	styles: {
+		css,
+		className: 'temperatureControl'
+	},
 
-		this.svgRef = React.createRef();
-
-		this.state = {
-			value: props.min
-		};
-	}
-
-	onMouseDown = (ev) => {
-		const svgRef = this.svgRef.current;
-		if (svgRef) {
-			svgRef.addEventListener('mousemove', this.calculateNewValue);
-			svgRef.addEventListener('mouseup', this.removeMouseListeners);
-		}
-		this.calculateNewValue(ev);
-	};
-
-	removeMouseListeners = () => {
-		const svgRef = this.svgRef.current;
-		if (svgRef) {
-			svgRef.removeEventListener('mousemove', this.calculateNewValue);
-			svgRef.removeEventListener('mouseup', this.removeMouseListeners);
-		}
-	};
-
-	// Calculates the new SVG value based on the mouse cursor coordinates and sets the new value into the state
-	calculateNewValue = (ev) => {
-		const {max, min} = this.props;
-
-		const svgRef = this.svgRef.current;
-		if (!svgRef) {
-			return;
-		}
-		// Find the coordinates with respect to the SVG
-		const svgPoint = svgRef.createSVGPoint();
-		svgPoint.x = ev.clientX;
-		svgPoint.y = ev.clientY;
-		const coordsInSvg = svgPoint.matrixTransform(svgRef.getScreenCTM().inverse());
-
-		const angle = positionToAngle(coordsInSvg);
-
-		// get the value based on the angle, min and max
-		let value = angleToValue(angle, min, max);
-
-		this.setState({value: value});
-	};
-
-	render () {
-		const {className, max, min} = this.props;
-
-		const valueAngle = valueToAngle(this.state.value, min, max);
-
-		// position the knob on the arc
-		const knobPosition = angleToPosition(valueAngle, svgRadius);
-
+	render: ({componentRef, endAngle, max, min, onMouseDown, onTouchStart, radius, startAngle, strokeWidth, value, ...rest}) => {
 		return (
-			<div className={classnames(className, css.temperatureControl)}>
-				<svg
-					viewBox="0 0 350 350"
-					ref={this.svgRef}
-					onMouseDown={this.onMouseDown}
+			<div {...rest} >
+				<ArcSlider
+					backgroundColor="#444"
+					className={css.slider}
+					componentRef={componentRef}
+					endAngle={endAngle}
+					foregroundColor={value < min + (max - min) / 2 ? '#00f' : '#ff2d55'}
+					onMouseDown={onMouseDown}
+					onTouchStart={onTouchStart}
+					max={max}
+					min={min}
+					radius={radius}
+					startAngle={startAngle}
+					strokeWidth={strokeWidth}
+					value={value}
 				>
-					<React.Fragment>
-						{/* background  */}
-						<path
-							className={css.background}
-							d=" M 56.26311131655841 274.6320795014136 A 155 155 90 1 1 293.7368886834416 274.6320795014136"
-						/>
-						{/* value arc */}
-						<path
-							className={this.state.value < (min + (max - min) / 2) ? css.progressCold : css.progressHeat}
-							d={arcPath(valueAngle)}
-						/>
-					</React.Fragment>
-
-					<React.Fragment>
-						<circle
-							className={this.state.value < (min + (max - min) / 2) ? css.knobCold : css.knobHeat}
-							cx={knobPosition.x}
-							cy={knobPosition.y}
-							r={16}
-						/>
-					</React.Fragment>
-				</svg>
+a				</ArcSlider>
 				<div className={css.valueDisplay}>
-					<span>{this.state.value}°C</span>
+					<span>{value}°C</span>
 				</div>
 			</div>
 		);
 	}
-}
+});
 
 /**
  * Applies Agate specific behaviors to [TemperatureControlBase]{@link agate/TemperatureControl.TemperatureControlBase}.
  *
  * @hoc
  * @memberof agate/TemperatureControl
- * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
  * @mixes ui/TemperatureControl.TemperatureControlDecorator
  * @public
  */
 const TemperatureControlDecorator = compose(
 	Pure,
-	Spottable,
+	ArcSliderBehaviorDecorator,
 	Skinnable
 );
 
 /**
- * TemperatureControl with Agate styling, [`Spottable`]{@link spotlight/Spottable.Spottable}
+ * TemperatureControl with Agate styling
  * and [`TemperatureControlDecorator`]{@link agate/TemperatureControl.TemperatureControlDecorator}
  * applied.
  *

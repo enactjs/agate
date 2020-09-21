@@ -79,10 +79,10 @@ const ArcSliderBase = kind({
 		foregroundColor: PropTypes.string,
 
 		/**
-		 * The maximum value of the slider and should be greater than min.
+		 * The minimum value of the slider.
 		 *
-		 * @type {number}
-		 * @default 100
+		 * @type {Number}
+		 * @default 0
 		 * @public
 		 */
 		max: PropTypes.number,
