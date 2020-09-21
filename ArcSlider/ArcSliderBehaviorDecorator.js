@@ -1,4 +1,5 @@
 import hoc from '@enact/core/hoc';
+import platform from '@enact/core/platform';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -33,18 +34,33 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 		onMouseDown = (ev) => {
 			const componentRef = this.componentRef.current;
 
+			if (!platform.touchscreen) {
+				if (componentRef) {
+					componentRef.addEventListener('mousemove', this.calculateNewValue);
+					componentRef.addEventListener('mouseup', this.removeMouseListeners);
+				}
+				this.calculateNewValue(ev);
+			}
+		};
+
+		onTouchStart = (ev) => {
+			const componentRef = this.componentRef.current;
+
 			if (componentRef) {
-				componentRef.addEventListener('mousemove', this.calculateNewValue);
-				componentRef.addEventListener('mouseup', this.removeMouseListeners);
+				componentRef.addEventListener('touchmove', this.calculateNewValue);
+				componentRef.addEventListener('touchend', this.removeMouseListeners);
 			}
 			this.calculateNewValue(ev);
+
 		};
 
 		removeMouseListeners = () => {
 			const componentRef = this.componentRef.current;
 			if (componentRef) {
 				componentRef.removeEventListener('mousemove', this.calculateNewValue);
+				componentRef.removeEventListener('touchmove', this.calculateNewValue);
 				componentRef.removeEventListener('mouseup', this.removeMouseListeners);
+				componentRef.removeEventListener('touchend', this.removeMouseListeners);
 			}
 		};
 
@@ -58,8 +74,13 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			}
 			// Find the coordinates with respect to the SVG
 			const svgPoint = componentRef.createSVGPoint();
-			svgPoint.x = ev.clientX;
-			svgPoint.y = ev.clientY;
+			if (platform.touchscreen) {
+				svgPoint.x = ev.touches[0].clientX;
+				svgPoint.y = ev.touches[0].clientY;
+			} else {
+				svgPoint.x = ev.clientX;
+				svgPoint.y = ev.clientY;
+			}
 			const coordsInSvg = svgPoint.matrixTransform(componentRef.getScreenCTM().inverse());
 
 			const angle = positionToAngle(coordsInSvg, radius * 2 - strokeWidth);
@@ -86,6 +107,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 					{...this.props}
 					componentRef={this.componentRef}
 					onMouseDown={this.onMouseDown}
+					onTouchStart={this.onTouchStart}
 					value={this.state.value}
 				/>
 			);

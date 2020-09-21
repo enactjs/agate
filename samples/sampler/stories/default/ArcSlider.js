@@ -26,6 +26,7 @@ storiesOf('Agate', module)
 				max={number('max', Config)}
 				min={number('min', Config)}
 				onMouseDown={action('onMouseDown')}
+				onTouchStart={action('onTouchStart')}
 				radius={select('radius', prop.radius, Config)}
 				startAngle={number('startAngle', Config, {range: true, min: 0, max: 360})}
 				step={number('step', Config)}

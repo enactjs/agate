@@ -51,7 +51,7 @@ const ArcSliderBase = kind({
 		backgroundColor: PropTypes.string,
 
 		/**
-		 * Function that generates a reference to the current svg.
+		 * Function that generates a reference to the arc svg.
 		 *
 		 * @type {Function}
 		 * @public
@@ -104,6 +104,15 @@ const ArcSliderBase = kind({
 		 * @public
 		 */
 		onMouseDown: PropTypes.func,
+
+		/**
+		 * Called when the touch starts over the arc slider area.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onTouchStart: PropTypes.func,
 
 		/**
 		 * The radius of the arc circle.
@@ -175,14 +184,18 @@ const ArcSliderBase = kind({
 		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth)
 	},
 
-	render: ({backgroundColor, componentRef, endAngle, foregroundColor, max, min, onMouseDown, radius, size, startAngle, strokeWidth, value, ...rest}) => {
+	render: ({backgroundColor, componentRef, endAngle, foregroundColor, max, min, onMouseDown, onTouchStart, radius, size, startAngle, strokeWidth, value, ...rest}) => {
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
 		delete rest.step;
 
 		return (
-			<div onMouseDown={onMouseDown} {...rest}>
+			<div
+				onMouseDown={onMouseDown}
+				onTouchStart={onTouchStart}
+				{...rest}
+			>
 				<Arc
 					className={css.arc}
 					color={backgroundColor}
