@@ -64,10 +64,6 @@ const FanSpeedControlBase = kind({
 		value: PropTypes.number
 	},
 
-	defaultProps: {
-		value: 4
-	},
-
 	styles: {
 		css,
 		className: 'fanSpeedControl'
