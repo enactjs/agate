@@ -117,8 +117,15 @@ const FanSpeedControlBase = kind({
 	}
 });
 
-const FanSpeedControlDecorator = compose(FanSpeedControlBehaviorDecorator, Skinnable({variantsProp: 'skinVariants'}));
+const FanSpeedControlDecorator = compose(
+	FanSpeedControlBehaviorDecorator,
+	Skinnable({variantsProp: 'skinVariants'})
+);
 
 const FanSpeedControl = FanSpeedControlDecorator(FanSpeedControlBase);
 
 export default FanSpeedControl;
+export {
+	FanSpeedControl,
+	FanSpeedControlBase
+};
