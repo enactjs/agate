@@ -38,7 +38,7 @@ const FanSpeedControlBehaviorDecorator = hoc((config, Wrapped) => {
 			this.setState({
 				currentValue: index + 1
 			});
-		}
+		};
 
 		render () {
 			return (
