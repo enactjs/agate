@@ -1,4 +1,5 @@
 /**
+ * {@link agate/AgateDecorator} will be removed in 2.0.0. Use {@link agate/ThemeDecorator} instead.
  * Applies Agate specific styling and behaviors.
  *
  * @module agate/AgateDecorator
