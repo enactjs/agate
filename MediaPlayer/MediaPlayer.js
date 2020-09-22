@@ -551,19 +551,22 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		handlePrevious = () => {
 			let currentIndex = this.state.sourceIndex;
 
-			if (currentIndex > 0) {
-				--currentIndex;
-			} else if (!this.state.shuffle && this.state.repeat === 'all') {
-				currentIndex = this.state.playlist.length - 1;
-			} else if (!this.state.shuffle && this.state.repeat !== 'all') {
-				this.media.currentTime = 0;
-			}
+			if (this.state.repeat !== 'one' && (this.media.paused || this.media.currentTime < 2)) {
+				if (currentIndex > 0) {
+					--currentIndex;
+				} else if (!this.state.shuffle && this.state.repeat === 'all') {
+					currentIndex = this.state.playlist.length - 1;
+				}
 
-			this.setState(() => {
-				return ({sourceIndex: currentIndex});
-			}, () => {
+				this.setState(() => {
+					return ({sourceIndex: currentIndex});
+				}, () => {
+					this.play();
+				});
+			} else {
+				this.media.currentTime = 0;
 				this.play();
-			});
+			}
 		};
 
 		shufflePlaylist = (currentMedia) => {
