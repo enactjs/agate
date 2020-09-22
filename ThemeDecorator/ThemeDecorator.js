@@ -39,6 +39,15 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	customSkin: true,
 
 	/**
+	 * Disables use of full screen.
+	 *
+	 * @type {Boolean}
+	 * @default false
+	 * @public
+	 */
+	disableFullscreen: false,
+
+	/**
 	 * Enables a floating layer for popup components.
 	 *
 	 * If `false`, app will be responsible for applying the decorator.
@@ -203,7 +212,7 @@ const CustomizableSkinStyle = kind({
  */
 const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	// TODO: Document props passable to hoc ()
-	const {customSkin, float, i18n, noAutoFocus, overlay, ri, skin, spotlight} = config;
+	const {customSkin, float, i18n, noAutoFocus, overlay, ri, skin, spotlight, disableFullscreen} = config;
 
 	const bgClassName = classnames(
 		'enact-fit',
@@ -242,8 +251,12 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 				className,
 				'enact-unselectable',
 				bgClassName,
+				[bgClassName]: !float,
 				css.root,
-				{[customizableSkinClassName]: customSkin}
+				{
+					[customizableSkinClassName]: customSkin,
+					'enact-fit': !disableFullscreen
+				}
 			);
 
 			return (
