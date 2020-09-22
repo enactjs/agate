@@ -530,22 +530,27 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		handleNext = () => {
 			let currentIndex = this.state.sourceIndex;
 
-			if (currentIndex < this.state.playlist.length - 1) {
-				++currentIndex;
-			} else {
-				// When shuffle is true, the playback of the list restarts and the media list is reshuffled.
-				currentIndex = 0;
+			if (this.state.repeat !== 'one') {
+				if (currentIndex < this.state.playlist.length - 1) {
+					++currentIndex;
+				} else {
+					// When shuffle is true, the playback of the list restarts and the media list is reshuffled.
+					currentIndex = 0;
 
-				if (this.state.shuffle) {
-					this.shufflePlaylist();
+					if (this.state.shuffle) {
+						this.shufflePlaylist();
+					}
 				}
-			}
 
-			this.setState(() => {
-				return ({sourceIndex: currentIndex});
-			}, () => {
+				this.setState(() => {
+					return ({sourceIndex: currentIndex});
+				}, () => {
+					this.play();
+				});
+			} else {
+				this.media.currentTime = 0;
 				this.play();
-			});
+			}
 		};
 
 		handlePrevious = () => {
