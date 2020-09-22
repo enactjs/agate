@@ -123,6 +123,8 @@ const ArcSliderBase = kind({
 		 */
 		radius: PropTypes.oneOf([120, 150]),
 
+		setValue: PropTypes.func,
+
 		/**
 		 * The start angle(in degrees) of the arc slider.
 		 *
@@ -189,6 +191,7 @@ const ArcSliderBase = kind({
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
 		delete rest.step;
+		delete rest.setValue;
 
 		return (
 			<div

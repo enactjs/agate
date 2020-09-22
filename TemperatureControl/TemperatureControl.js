@@ -12,21 +12,17 @@
  * @exports TemperatureControlBase
  * @exports TemperatureControlDecorator
  */
-
+import classnames from 'classnames'
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
+import ArcSlider from '../ArcSlider';
 import Skinnable from '../Skinnable';
 
 import css from './TemperatureControl.module.less';
-import {ArcSliderBase} from '../ArcSlider';
-import {ArcSliderBehaviorDecorator} from '../ArcSlider/ArcSliderBehaviorDecorator';
-import kind from '@enact/core/kind';
 
-
-const ArcSlider = Skinnable(ArcSliderBase);
 /**
  * Temperature control base component.
  *
@@ -36,28 +32,17 @@ const ArcSlider = Skinnable(ArcSliderBase);
  * @ui
  * @public
  */
-const TemperatureControlBase = kind({
-	name: 'TemperatureControl',
+const TemperatureControlBase = class extends React.Component {
+	static displayName= 'TemperatureControl';
 
-	propTypes: /** @lends agate/ArcSlider.ArcSliderBase.prototype */ {
+	static propTypes = /** @lends agate/TemperatureControl.TemperatureControlBase.prototype */ {
 		/**
-		 * Function that generates a reference to the arc svg.
+		 * The default value of the control.
 		 *
-		 * @type {Function}
+		 * @type {Number}
 		 * @public
 		 */
-		componentRef: PropTypes.object,
-
-		/**
-		 * The end angle(in degrees) of the arc slider.
-		 *
-		 * The value should be between 0 and 360 and should be greater than startAngle.
-		 *
-		 * @type {number}
-		 * @default 310
-		 * @public
-		 */
-		endAngle: PropTypes.number,
+		defaultValue: PropTypes.number,
 
 		/**
 		 * The minimum value of the slider.
@@ -78,9 +63,10 @@ const TemperatureControlBase = kind({
 		min: PropTypes.number,
 
 		/**
-		 * Function that generates a reference to the current svg.
+		 * Called when the mouse is down over the arc slider area.
 		 *
 		 * @type {Function}
+		 * @param {Object} event
 		 * @public
 		 */
 		onMouseDown: PropTypes.func,
@@ -95,15 +81,6 @@ const TemperatureControlBase = kind({
 		onTouchStart: PropTypes.func,
 
 		/**
-		 * The radius of the arc circle.
-		 *
-		 * @type {Number}
-		 * @default 150
-		 * @public
-		 */
-		radius: PropTypes.number,
-
-		/**
 		 * The scale of the temperature(C or F).
 		 *
 		 * @type {('C'|'F')}
@@ -112,78 +89,113 @@ const TemperatureControlBase = kind({
 		 */
 		scale: PropTypes.oneOf(['C', 'F']),
 
-		/**
-		 * The start angle(in degrees) of the arc slider.
-		 *
-		 * The value should be between 0 and 360.
-		 *
-		 * @type {number}
-		 * @default 50
-		 * @public
-		 */
-		startAngle: PropTypes.number,
+		setValue: PropTypes.func,
 
-		/**
-		 * The stroke width of the arc slider.
-		 *
-		 * @type {number}
-		 * @default 6
-		 * @public
-		 */
-		strokeWidth: PropTypes.number,
+		setMax: PropTypes.func,
 
-		/**
-		 * The value of the slider.
-		 *
-		 * Defaults to the value of `min`.
-		 *
-		 * @type {Number}
-		 * @public
-		 */
-		value: PropTypes.number
-	},
+		setMin: PropTypes.func
+	};
 
-	defaultProps: {
-		endAngle: 310,
+	static defaultProps= {
 		max: 30,
 		min: 10,
-		radius: 150,
 		scale: 'C',
-		startAngle: 50,
-		strokeWidth: 6,
-		value: 15
-	},
+		defaultValue: 15
+	};
 
-	styles: {
-		css,
-		className: 'temperatureControl'
-	},
+	constructor (props) {
+		super(props);
 
-	render: ({componentRef, endAngle, max, min, onMouseDown, onTouchStart, radius, scale, startAngle, strokeWidth, value, ...rest}) => {
+		this.componentRef = React.createRef();
+
+		this.state = {
+			max: props.max,
+			min: props.min,
+			value: props.defaultValue,
+		};
+	}
+
+	componentDidUpdate (prevProps) {
+		const {scale} = this.props;
+
+		if (prevProps.scale !== scale && scale === 'C') {
+			this.toCelsius();
+		} else if (prevProps.scale !== scale && scale === 'F') {
+			this.toFahrenheit();
+		}
+	}
+
+	toCelsius() {
+		this.setState((prevState) => {
+			return({
+				max: Math.round((prevState.max - 32) * 5 / 9),
+				min: Math.round((prevState.min - 32) * 5 / 9),
+				value: Math.round((prevState.value - 32) * 5 / 9)
+			})
+		})
+	}
+
+	toFahrenheit() {
+		this.setState((prevState) => {
+			return({
+				max: Math.round((prevState.max * 9 / 5) + 32),
+				min: Math.round((prevState.min * 9 / 5) + 32),
+				value: Math.round((prevState.value * 9 / 5) + 32)
+			})
+		})
+	}
+
+	setValue = (values) => {
+		this.setState({
+			value: values.value,
+			max: values.max,
+			min: values.min
+		})
+	}
+
+	// setMax = (max) => {
+	// 	this.setState({
+	// 		max: max
+	// 	})
+	// }
+	// setMin = (min) => {
+	// 	this.setState({
+	// 		min: min
+	// 	})
+	// }
+
+
+	render () {
+		const {onMouseDown, onTouchStart, scale, ...rest} = this.props,
+			{ setValue, setMax, setMin} = this;
+
 		return (
-			<div {...rest} >
+			<div {...rest} className={classnames(rest.className, css.temperatureControl)}>
 				<ArcSlider
 					backgroundColor="#444444"
 					className={css.slider}
-					componentRef={componentRef}
-					endAngle={endAngle}
-					foregroundColor={value < min + (max - min) / 2 ? '#007aff' : '#f24949'}
-					onMouseDown={onMouseDown}
+					endAngle={310}
+					foregroundColor={this.state.value < this.state.min + (this.state.max - this.state.min) / 2 ? '#007aff' : '#f24949'}
+					onMouseDown={() => onMouseDown({value: this.state.value, max: this.state.max, min: this.state.min})}
 					onTouchStart={onTouchStart}
-					max={max}
-					min={min}
-					radius={radius}
-					startAngle={startAngle}
-					strokeWidth={strokeWidth}
-					value={value}
+					max={this.state.max}
+					min={this.state.min}
+					radius={150}
+					startAngle={50}
+					step={1}
+					strokeWidth={6}
+					value={this.state.value}
+					setValue={setValue}
+					// setMax={setMax}
+					// setMin={setMin}
 				/>
 				<div className={css.valueDisplay}>
-					<span>{value}°{scale}</span>
+					<span>{this.state.value}°{scale}</span>
 				</div>
 			</div>
 		);
 	}
-});
+};
 
 /**
  * Applies Agate specific behaviors to [TemperatureControlBase]{@link agate/TemperatureControl.TemperatureControlBase}.
@@ -196,7 +208,8 @@ const TemperatureControlBase = kind({
  */
 const TemperatureControlDecorator = compose(
 	Pure,
-	ArcSliderBehaviorDecorator,
+	//ArcSliderBehaviorDecorator,
+	//TemperatureControlBehaviorDecorator,
 	Skinnable
 );
 

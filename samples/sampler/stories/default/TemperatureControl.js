@@ -8,31 +8,24 @@ import TemperatureControl, {TemperatureControlBase} from '@enact/agate/Temperatu
 
 // Set up some defaults for colors and radius
 const prop = {
-	colors: ['', '#000000', '#444444', '#986aad', '#0000ff'],
-	radius: [120, 150],
 	scale: ['C', 'F']
 };
 
 TemperatureControl.displayName = 'Button';
-const Config = mergeComponentMetadata('TemperatureControl', TemperatureControlBase);
-
+const Config = mergeComponentMetadata('TemperatureControl', TemperatureControlBase, TemperatureControl);
 
 storiesOf('Agate', module)
 	.add(
 		'TemperatureControl',
 		() => (
 			<TemperatureControl
-				endAngle={number('endAngle', Config, {range: true, min: 0, max: 360})}
 				max={number('max', Config)}
 				min={number('min', Config)}
 				onMouseDown={action('onMouseDown')}
-				radius={select('radius', prop.radius, Config)}
 				scale={select('scale', prop.scale, Config)}
-				startAngle={number('startAngle', Config, {range: true, min: 0, max: 360})}
-				strokeWidth={number('strokeWidth', Config)}
 			/>
 		),
 		{
-			text: 'The basic arc'
+			text: 'Temperature Control'
 		}
 	);
