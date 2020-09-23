@@ -1,6 +1,5 @@
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import compose from 'ramda/src/compose';
 import React from 'react';
 
 import ArcPicker from '../ArcPicker';
@@ -75,7 +74,7 @@ const FanSpeedControlBase = class extends React.Component {
 		this.setState({
 			currentValue: value
 		});
-	}
+	};
 
 	render () {
 		const {setValue} = this;
@@ -89,7 +88,13 @@ const FanSpeedControlBase = class extends React.Component {
 
 		return (
 			<div className={classnames(className, css.fanSpeedControl)} >
-				<ArcPicker options={options} selectionType="cumulative" setValue={setValue} value={currentValue}>
+				<ArcPicker
+					endAngle={312}
+					options={options}
+					selectionType="cumulative"
+					setValue={setValue}
+					value={currentValue}
+				>
 					<Icon className={css.fanIcon} css={css}>{icon}</Icon>
 					<span className={css.fanValue}>{currentValue}</span>
 				</ArcPicker>
@@ -98,11 +103,7 @@ const FanSpeedControlBase = class extends React.Component {
 	}
 };
 
-const FanSpeedControlDecorator = compose(
-	Skinnable({variantsProp: 'skinVariants'})
-);
-
-const FanSpeedControl = FanSpeedControlDecorator(FanSpeedControlBase);
+const FanSpeedControl = Skinnable({variantsProp: 'skinVariants'})(FanSpeedControlBase);
 
 export default FanSpeedControl;
 export {
