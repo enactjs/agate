@@ -25,16 +25,16 @@ storiesOf('Agate', module)
 				foregroundColor={select('foregroundColor', prop.colors, Config)}
 				max={number('max', Config)}
 				min={number('min', Config)}
-				// onChange={action('onChange')}
-				// onDown={action('onDown')}
-				// onDrag={action('onDrag')}
-				// onDragEnd={action('onDragEnd')}
-				// onDragStart={action('onDragStart')}
+				onChange={action('onChange')}
+				onDown={action('onDown')}
+				onDrag={action('onDrag')}
+				onDragEnd={action('onDragEnd')}
+				onDragStart={action('onDragStart')}
 				radius={select('radius', prop.radius, Config)}
 				startAngle={number('startAngle', Config, {range: true, min: 0, max: 360})}
 				step={number('step', Config)}
 				strokeWidth={number('strokeWidth', Config)}
-				// setValue={action('setValue')}
+				setValue={action('setValue')}
 			/>
 		),
 		{
