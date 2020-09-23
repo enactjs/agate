@@ -6,6 +6,7 @@
  *   defaultValue={10}
  *   max={30}
  *   min={10}
+ *   scale="C"
  * />
  *
  * @module agate/TemperatureControl
@@ -71,8 +72,6 @@ const TemperatureControlBase = class extends React.Component {
 		 * @public
 		 */
 		scale: PropTypes.oneOf(['C', 'F'])
-
-		// setValue: PropTypes.func
 	};
 
 	static defaultProps= {
@@ -124,9 +123,9 @@ const TemperatureControlBase = class extends React.Component {
 
 	setValue = (values) => {
 		this.setState({
-			value: values.value,
 			max: values.max,
-			min: values.min
+			min: values.min,
+			value: values.value
 		});
 	}
 
@@ -168,8 +167,6 @@ const TemperatureControlBase = class extends React.Component {
  */
 const TemperatureControlDecorator = compose(
 	Pure,
-	// ArcSliderBehaviorDecorator,
-	// TemperatureControlBehaviorDecorator,
 	Skinnable
 );
 
@@ -177,6 +174,14 @@ const TemperatureControlDecorator = compose(
  * TemperatureControl with Agate styling
  * and [`TemperatureControlDecorator`]{@link agate/TemperatureControl.TemperatureControlDecorator}
  * applied.
+ * Usage
+ *
+ *  <TemperatureControl
+ *   defaultValue={10}
+ *   max={30}
+ *   min={10}
+ *   scale="C"
+ *   />
  *
  * @class TemperatureControl
  * @memberof agate/TemperatureControl

@@ -34,7 +34,7 @@ storiesOf('Agate', module)
 				startAngle={number('startAngle', Config, {range: true, min: 0, max: 360})}
 				step={number('step', Config)}
 				strokeWidth={number('strokeWidth', Config)}
-				//setValue={action('setValue')}
+				// setValue={action('setValue')}
 			/>
 		),
 		{

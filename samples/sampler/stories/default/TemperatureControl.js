@@ -6,7 +6,6 @@ import {storiesOf} from '@storybook/react';
 
 import TemperatureControl, {TemperatureControlBase} from '@enact/agate/TemperatureControl';
 
-// Set up some defaults for colors and radius
 const prop = {
 	scale: ['C', 'F']
 };
