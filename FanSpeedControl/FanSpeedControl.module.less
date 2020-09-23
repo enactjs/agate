@@ -1,0 +1,23 @@
+// FanSpeedControl.module.less
+//
+
+@import '../styles/mixins.less';
+@import '../styles/skin.less';
+@import '../styles/variables.less';
+
+.fanSpeedControl {
+	.applySkins({
+		.fanIcon {
+			font-size: @agate-fanspeedcontrol-icon-font-size;
+			height: @agate-fanspeedcontrol-icon-height;
+			line-height: @agate-fanspeedcontrol-icon-height;
+			width: @agate-fanspeedcontrol-icon-height;
+		}
+
+		.fanValue {
+			font-size: @agate-fanspeedcontrol-font-size;
+			font-weight: @agate-fanspeedcontrol-font-weight;
+			margin-right: @agate-fanspeedcontrol-margin;
+		}
+	})
+}

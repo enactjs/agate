@@ -117,12 +117,20 @@ const MediaPlayerBase = kind({
 		onChange: PropTypes.func,
 
 		/**
-		 * Called when media is looped
+		 * Called when the media file reaches the end of its duration.
 		 *
 		 * @type {Function}
 		 * @public
 		 */
-		onLoopChange: PropTypes.func,
+		onEnded: PropTypes.func,
+
+		/**
+		 * Called when jumping to next media
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onNext: PropTypes.func,
 
 		/**
 		 * Called when media is paused
@@ -141,6 +149,30 @@ const MediaPlayerBase = kind({
 		onPlay: PropTypes.func,
 
 		/**
+		 * Called when jumping to previous media
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onPrevious: PropTypes.func,
+
+		/**
+		 * Called when media is on repeat.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onRepeat: PropTypes.func,
+
+		/**
+		 * Called when jumping to a random media
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onShuffle: PropTypes.func,
+
+		/**
 		 * Called when media is updating.
 		 *
 		 * @type {Function}
@@ -157,12 +189,45 @@ const MediaPlayerBase = kind({
 		paused: PropTypes.bool,
 
 		/**
+		 * The current list of media.
+		 *
+		 * @type {Array}
+		 * @public
+		 */
+		playlist: PropTypes.arrayOf(PropTypes.node),
+
+		/**
 		 * Proportion of media file played.
 		 *
 		 * @type {Number}
 		 * @public
 		 */
 		proportionPlayed: PropTypes.number,
+
+		/**
+		 * The repeat mode of the media playlist.
+		 *
+		 * @type {('none'|'one'|'all')}
+		 * @default 'none'
+		 * @public
+		 */
+		repeat: PropTypes.oneOf(['none', 'one', 'all']),
+
+		/**
+		 * `true` when the media playlist is shuffled.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		shuffle: PropTypes.bool,
+
+		/**
+		 * The index of the current played media.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		sourceIndex: PropTypes.number,
 
 		/**
 		 * The total time (duration) in seconds of the loaded media source.
@@ -186,15 +251,16 @@ const MediaPlayerBase = kind({
 		durFmt: ({locale}) => getDurFmt(locale)
 	},
 
-	render: ({currentTime, durFmt, loop, mediaComponent, mediaRef, onChange, onLoopChange, onPause, onPlay, onUpdate, paused, proportionPlayed, source, total, ...rest}) => {
+	render: ({currentTime, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, total, ...rest}) => {
 		return (
 			<div {...rest}>
 				<Media
 					loop={loop}
 					mediaComponent={mediaComponent}
+					onEnded={onEnded}
 					onUpdate={onUpdate}
 					ref={mediaRef}
-					source={source}
+					source={playlist[sourceIndex]}
 				/>
 				<MediaSlider
 					onChange={onChange}
@@ -206,11 +272,15 @@ const MediaPlayerBase = kind({
 					total={total}
 				/>
 				<MediaControls
-					loop={loop}
-					onLoopChange={onLoopChange}
+					onNext={onNext}
 					onPause={onPause}
 					onPlay={onPlay}
+					onPrevious={onPrevious}
+					onRepeat={onRepeat}
+					onShuffle={onShuffle}
 					paused={paused}
+					repeat={repeat}
+					shuffle={shuffle}
 				/>
 			</div>
 		);
@@ -263,12 +333,12 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 			mediaComponent: EnactPropTypes.renderable,
 
 			/**
-			 * Called when media is looped
+			 * Called when jumping to next media
 			 *
 			 * @type {Function}
 			 * @public
 			 */
-			onLoopChange: PropTypes.func,
+			onNext: PropTypes.func,
 
 			/**
 			 * Called when media is paused
@@ -284,7 +354,31 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 			 * @type {Function}
 			 * @public
 			 */
-			onPlay: PropTypes.func
+			onPlay: PropTypes.func,
+
+			/**
+			 * Called when jumping to previous media
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onPrevious: PropTypes.func,
+
+			/**
+			 * Called when media is on repeat mode.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onRepeat: PropTypes.func,
+
+			/**
+			 * Called when jumping to a random media
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onShuffle: PropTypes.func
 		};
 
 		constructor (props) {
@@ -298,7 +392,11 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				duration: 0,
 				loop: false,
 				paused: true,
-				proportionPlayed: 0
+				playlist: this.props.children,
+				proportionPlayed: 0,
+				repeat: 'none',
+				shuffle: false,
+				sourceIndex: 0
 			};
 		}
 
@@ -403,11 +501,124 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		 * @memberof agate/MediaPlayer.MediaPlayerBase.prototype
 		 * @public
 		 */
-		loopChange = () => {
-			this.setState(prevState  => {
-				return ({loop: !prevState.loop});
+		handleOnRepeat = () => {
+			// Handling the 3 states of repeat: repeat none, repeat one and repeat all
+			let loop = false;
+
+			this.setState(({repeat}) => {
+				switch (repeat) {
+					case 'none':
+						loop = !repeat.loop;
+						return ({loop, repeat: 'one'});
+					case 'one':
+						return ({repeat: 'all'});
+					case 'all':
+						return ({repeat: 'none'});
+				}
 			}, () => {
-				this.media.loop = this.state.loop;
+				this.media.loop = loop;
+			});
+		};
+
+		handleOnEnded = () => {
+			// Play next media only if current media is not last or, if it is last, only if repeat='all'
+			if (this.state.sourceIndex !== this.state.playlist.length - 1 || (this.state.sourceIndex === this.state.playlist.length - 1 && this.state.repeat === 'all')) {
+				this.handleNext();
+			}
+		};
+
+		handleNext = () => {
+			let currentIndex = this.state.sourceIndex;
+
+			if (this.state.repeat !== 'one') {
+				if (currentIndex < this.state.playlist.length - 1) {
+					++currentIndex;
+				} else if (this.state.repeat === 'all') {
+					// When shuffle is true, the playback of the list restarts and the media list is reshuffled.
+					currentIndex = 0;
+
+					if (this.state.shuffle) {
+						this.shufflePlaylist();
+					}
+				}
+
+				this.setState(() => {
+					return ({sourceIndex: currentIndex});
+				}, () => {
+					this.play();
+				});
+			} else {
+				this.media.currentTime = 0;
+				this.play();
+			}
+		};
+
+		handlePrevious = () => {
+			let currentIndex = this.state.sourceIndex;
+
+			if (this.state.repeat !== 'one' && (this.media.paused || this.media.currentTime < 2)) {
+				if (currentIndex > 0) {
+					--currentIndex;
+				} else if (!this.state.shuffle && this.state.repeat === 'all') {
+					currentIndex = this.state.playlist.length - 1;
+				}
+
+				this.setState(() => {
+					return ({sourceIndex: currentIndex});
+				}, () => {
+					this.play();
+				});
+			} else {
+				this.media.currentTime = 0;
+				this.play();
+			}
+		};
+
+		shufflePlaylist = (currentMedia) => {
+			let remainingSize = this.props.children.length;
+			let playlist = [...this.props.children];
+			let currentMediaIndex;
+
+			// While there are elements in the array
+			while (remainingSize > 0) {
+				// Pick a random index
+				let randomIndex = Math.floor(Math.random() * remainingSize);
+
+				// Decrease size by 1
+				remainingSize--;
+
+				// And swap the last element with it
+				[playlist[remainingSize], playlist[randomIndex]] = [playlist[randomIndex], playlist[remainingSize]];
+
+				if (playlist[remainingSize] === currentMedia) {
+					currentMediaIndex = remainingSize;
+				}
+			}
+
+			// Keep the current media active and set it as the first element in the shuffled array
+			if (currentMediaIndex) {
+				[playlist[0], playlist[currentMediaIndex]] = [playlist[currentMediaIndex], playlist[0]];
+			}
+
+			this.setState({
+				playlist,
+				sourceIndex: 0
+			});
+		};
+
+		handleShuffle = () => {
+			let currentMedia = this.state.playlist[this.state.sourceIndex];
+			this.setState(({shuffle}) => {
+				if (!shuffle) {
+					return ({shuffle: true});
+				} else {
+					// When resetting shuffle to false, the initial playlist is set with the last played media kept active.
+					return ({shuffle: false, playlist: this.props.children, sourceIndex: parseInt(currentMedia.key)});
+				}
+			}, () => {
+				if (this.state.shuffle) {
+					this.shufflePlaylist(currentMedia);
+				}
 			});
 		};
 
@@ -440,14 +651,22 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 					{...rest}
 					currentTime={this.state.currentTime}
 					loop={this.state.loop}
+					mediaRef={this.setMediaRef}
 					onChange={this.onSliderChange}
-					onLoopChange={this.loopChange}
+					onEnded={this.handleOnEnded}
+					onNext={this.handleNext}
 					onPause={this.handlePause}
 					onPlay={this.handlePlay}
+					onPrevious={this.handlePrevious}
+					onRepeat={this.handleOnRepeat}
+					onShuffle={this.handleShuffle}
 					onUpdate={this.handleEvent}
 					paused={this.state.paused}
+					playlist={this.state.playlist}
 					proportionPlayed={this.state.proportionPlayed}
-					mediaRef={this.setMediaRef}
+					repeat={this.state.repeat}
+					shuffle={this.state.shuffle}
+					sourceIndex={this.state.sourceIndex}
 					total={this.state.duration}
 				/>
 			);
@@ -505,7 +724,6 @@ const MediaPlayerDecorator = compose(
  * @public
  */
 const MediaPlayer = MediaPlayerDecorator(MediaPlayerBase);
-
 
 export default MediaPlayer;
 export {
