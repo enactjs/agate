@@ -50,7 +50,7 @@ const TemperatureControlBase = class extends React.Component {
 		 * The minimum value of the slider.
 		 *
 		 * @type {Number}
-		 * @default 100
+		 * @default 30
 		 * @public
 		 */
 		max: PropTypes.number,
@@ -59,7 +59,7 @@ const TemperatureControlBase = class extends React.Component {
 		 * The minimum value of the slider.
 		 *
 		 * @type {Number}
-		 * @default 0
+		 * @default 10
 		 * @public
 		 */
 		min: PropTypes.number,
