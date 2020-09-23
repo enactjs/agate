@@ -91,7 +91,7 @@ const ArcSliderBase = kind({
 		/**
 		 * The minimum value of the slider.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 0
 		 * @public
 		 */
@@ -100,7 +100,7 @@ const ArcSliderBase = kind({
 		/**
 		 * The radius of the arc circle.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 150
 		 * @public
 		 */
