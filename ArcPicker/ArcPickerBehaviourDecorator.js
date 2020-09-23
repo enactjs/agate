@@ -1,6 +1,9 @@
 import hoc from '@enact/core/hoc';
+import {validateRangeOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
 import React from 'react';
+
+const validateRange = validateRangeOnce((props) => props, {'component': 'ArcPickerBehaviorDecorator'});
 
 // Adds Agate-specific ArcPicker behaviors
 const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
@@ -15,6 +18,14 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			 * @public
 			 */
 			options: PropTypes.array.isRequired,
+
+			/**
+			 * The maximum size of ArcPicker. The number of arc segments to be rendered.
+			 *
+			 * @type {Number}
+			 * @public
+			 */
+			max: PropTypes.number,
 
 			/**
 			 * Called when the path area is clicked.
@@ -46,18 +57,9 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			super(props);
 
 			this.state = {
-				currentValue: props.value || props.options[0]
+				currentValue: props.value || props.options[0],
+				max: props.max
 			};
-		}
-
-		componentDidUpdate(prevProps) {
-			if (this.props.max !== prevProps.max && this.props.max <= this.state.currentValue) {
-				this.setState({
-					currentValue: this.props.max
-				}, () => {
-					this.props.setValue(this.props.max);
-				});
-			}
 		}
 
 		handleClick = (option) => () => {
@@ -70,8 +72,14 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 
 		render () {
 			const {handleClick, props, state} = this;
-			const {setValue} = props;
+			const {setValue, max} = props;
 			const {currentValue} = state;
+
+			if (__DEV__) {
+				const valueProps = {value: currentValue, max};
+
+				validateRange(valueProps);
+			}
 
 			return (
 				<Wrapped

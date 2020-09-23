@@ -35,7 +35,7 @@ const FanSpeedControlBase = class extends React.Component {
 		 * @param {Object} event
 		 * @public
 		 */
-		onClick: PropTypes.func,
+		max: PropTypes.number,
 
 		/**
 		 * The maximum size of ArcPicker. The number of arc segments to be rendered.
@@ -43,7 +43,7 @@ const FanSpeedControlBase = class extends React.Component {
 		 * @type {Number}
 		 * @public
 		 */
-		max: PropTypes.number,
+		onClick: PropTypes.func,
 
 		/**
 		 * Current skinVariant.
