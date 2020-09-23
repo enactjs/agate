@@ -1,10 +1,16 @@
+import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
-import platform from '@enact/core/platform';
+import {validateRangeOnce, validateSteppedOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import {positionToAngle} from '../Arc/utils';
 import {angleToValue} from './utils';
+
+const validateValueRange = validateRangeOnce((props) => props, {'component': 'ArcSliderBehaviorDecorator'});
+const validateAngleRange = validateRangeOnce((props) => props, {'component': 'ArcSliderBehaviorDecorator', minName: 'startAngle', maxName: 'endAngle'});
+const validateStepValue = validateSteppedOnce((props) => props, {'component': 'ArcSliderBehaviorDecorator'});
+const validateStepMax = validateSteppedOnce((props) => props, {'component': 'ArcSliderBehaviorDecorator', valueName: 'max'});
 
 // Adds agate-specific arcSlider behaviors
 const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
@@ -35,60 +41,37 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			};
 		}
 
-		onMouseDown = (ev) => {
-			const componentRef = this.componentRef.current;
-
-			if (!platform.touchscreen) {
-				if (componentRef) {
-					componentRef.addEventListener('mousemove', this.calculateNewValue);
-					componentRef.addEventListener('mouseup', this.removeMouseListeners);
-				}
-				this.calculateNewValue(ev);
-			}
+		handleDown = ({clientX, clientY}) => {
+			const params = {x: clientX, y: clientY};
+			forward('onDown', params, this.props);
+			this.emitChangeForPosition(params);
 		};
 
-		onTouchStart = (ev) => {
-			const componentRef = this.componentRef.current;
-
-			if (componentRef) {
-				componentRef.addEventListener('touchmove', this.calculateNewValue);
-				componentRef.addEventListener('touchend', this.removeMouseListeners);
-			}
-			this.calculateNewValue(ev);
-
+		handleDragStart = (ev) => {
+			forward('onDragStart', ev, this.props);
+			this.emitChangeForPosition(ev);
 		};
 
-		removeMouseListeners = () => {
-			const componentRef = this.componentRef.current;
-			if (componentRef) {
-				componentRef.removeEventListener('mousemove', this.calculateNewValue);
-				componentRef.removeEventListener('touchmove', this.calculateNewValue);
-				componentRef.removeEventListener('mouseup', this.removeMouseListeners);
-				componentRef.removeEventListener('touchend', this.removeMouseListeners);
-			}
+		handleDrag = (ev) => {
+			forward('onDrag', ev, this.props);
+			this.emitChangeForPosition(ev);
 		};
 
 		// Calculates the new SVG value based on the mouse cursor coordinates and sets the new value into the state
-		calculateNewValue = (ev) => {
-			const {endAngle, max, min, radius, startAngle, step, strokeWidth} = this.props;
-
+		emitChangeForPosition = (ev) => {
 			const componentRef = this.componentRef.current;
 			if (!componentRef) {
 				return;
 			}
+
+			const {endAngle, max, min, radius, startAngle, step, strokeWidth} = this.props;
 			// Find the coordinates with respect to the SVG
 			const svgPoint = componentRef.createSVGPoint();
-			if (platform.touchscreen) {
-				svgPoint.x = ev.touches[0].clientX;
-				svgPoint.y = ev.touches[0].clientY;
-			} else {
-				svgPoint.x = ev.clientX;
-				svgPoint.y = ev.clientY;
-			}
+			svgPoint.x = ev.x;
+			svgPoint.y = ev.y;
 			const coordsInSvg = svgPoint.matrixTransform(componentRef.getScreenCTM().inverse());
 
 			const angle = positionToAngle(coordsInSvg, radius * 2 - strokeWidth);
-
 			// get the value based on the angle, min and max
 			let value = angleToValue(angle, min, max, startAngle, endAngle);
 
@@ -102,26 +85,47 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 				}
 			}
 
-			this.setState({
-				value: value,
-				min: min,
-				max: max
-			},() => {
-				this.props.setValue({
-					value: this.state.value,
-					max: this.state.max,
-					min: this.state.min
-				});
-			});
+			if (value !== this.state.value) {
+				this.setState(
+					() => ({
+						value: value,
+						min: min,
+						max: max
+					}),
+					() => {
+						this.props.setValue({
+							value: this.state.value,
+							max: this.state.max,
+							min: this.state.min
+						});
+						forward('onChange', {
+							type: 'onChange',
+							value
+						}, this.props);
+					}
+				);
+			}
 		};
 
 		render () {
+			if (__DEV__) {
+				const {endAngle, max, min, startAngle, step} = this.props;
+				const valueProps = {min, value: this.state.value || min, max, step};
+				const angleProps = {startAngle, endAngle};
+
+				validateValueRange(valueProps);
+				validateAngleRange(angleProps);
+				validateStepValue(valueProps);
+				validateStepMax(valueProps);
+			}
+
 			return (
 				<Wrapped
 					{...this.props}
 					componentRef={this.componentRef}
-					onMouseDown={this.onMouseDown}
-					onTouchStart={this.onTouchStart}
+					onDown={this.handleDown}
+					onDrag={this.handleDrag}
+					onDragStart={this.handleDragStart}
 					value={this.state.value}
 					max={this.state.max}
 					min={this.state.min}
