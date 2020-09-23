@@ -1,6 +1,7 @@
 // DateComponentPicker.module.less
 //
 @import '../../styles/variables.less';
+@import '../../styles/mixins.less';
 @import '../../styles/skin.less';
 
 .dateComponentPicker {
@@ -19,8 +20,7 @@
 			}
 		}
 
-		&:nth-child(n+2)::before {
-			content: "";
+		&::before {
 			position: absolute;
 			top: 50%;
 			left: 0;
@@ -30,5 +30,19 @@
 			opacity: @agate-datetimepicker-divider-opacity;
 			background-color: @agate-datetimepicker-divider-bg-color;
 		}
+
+		&:nth-child(n + 2)::before {
+			content: "";
+		}
+
+		.enact-locale-rtl({
+			&:nth-child(n + 3)::before {
+				content: none;
+			}
+
+			&:nth-child(-n + 2)::before {
+				content: "";
+			}
+		});
 	});
 }
