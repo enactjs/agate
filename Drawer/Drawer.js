@@ -1,9 +1,6 @@
 /**
  * An Agate-themed drawer component.
  *
- * @example
- * <Drawer style={{marginTop:'60px'}} open>Hello Enact!</Drawer>
- *
  * @module agate/Drawer
  * @exports Drawer
  * @exports DrawerBase
@@ -27,7 +24,6 @@ import componentCss from './Drawer.module.less';
 
 /**
  * A drawer component, without behaviors.
- *
  *
  * @class DrawerBase
  * @memberof agate/Drawer
@@ -107,6 +103,13 @@ const DrawerDecorator = compose(
 
 /**
  * A ready-to-use drawer component.
+ *
+ * Usage:
+ * ```
+ * <Drawer open>
+ * 	Hello Enact!
+ * </Drawer>
+ * ```
  *
  * @class Drawer
  * @memberof agate/Drawer
