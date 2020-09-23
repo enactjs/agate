@@ -21,6 +21,6 @@ storiesOf('Agate', module)
 			/>
 		),
 		{
-			text: 'The basic FanSpeedControl'
+			text: 'The basic ArcPicker'
 		}
 	);

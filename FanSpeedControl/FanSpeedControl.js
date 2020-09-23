@@ -14,7 +14,7 @@ import css from './FanSpeedControl.module.less';
  * An Agate component for displaying fan speed {@link agate/FanSpeedControl}.
  *
  * @class FanSpeedControlBase
- * @memberof agate/FanSpeedControl
+ * @memberof agate/ArcPicker
  * @ui
  * @private
  */
@@ -23,7 +23,7 @@ const FanSpeedControlBase = kind({
 
 	propTypes: /** @lends agate/FanSpeedControl.FanSpeedControlBase.prototype */ {
 		/**
-		 * FanSpeedControl icon.
+		 * ArcPicker icon.
 		 *
 		 * @type {String}
 		 * @public
@@ -40,7 +40,7 @@ const FanSpeedControlBase = kind({
 		onClick: PropTypes.func,
 
 		/**
-		 * The size of FanSpeedControl. The number of arc segments to be rendered.
+		 * The size of ArcPicker. The number of arc segments to be rendered.
 		 *
 		 * @type {Number}
 		 * @public
@@ -56,7 +56,7 @@ const FanSpeedControlBase = kind({
 		skinVariants: PropTypes.object,
 
 		/**
-		 * Value of FanSpeedControl.
+		 * Value of ArcPicker.
 		 *
 		 * @type {Number}
 		 * @public
@@ -79,31 +79,31 @@ const FanSpeedControlBase = kind({
 
 		return (
 			<div className={css.fanSpeedControl} {...rest}>
-				{FAN_SPEED.map((option, index) => {
+				{/* {FAN_SPEED.map((option, index) => {*/}
 
-					// Calc `arcStartAngle`, `arcEndAngle` based on `startAngle` and `endAngle` for every <Arc />
-					const startAngle = 50;
-					const endAngle = 312;
-					const pauseAngle = 2;
-					const arcSegments = FAN_SPEED.length;
-					let arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * index;
-					let arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * (index + 1) - pauseAngle;
+				{/*	// Calc `arcStartAngle`, `arcEndAngle` based on `startAngle` and `endAngle` for every <Arc />*/}
+				{/*	const startAngle = 50;*/}
+				{/*	const endAngle = 312;*/}
+				{/*	const pauseAngle = 2;*/}
+				{/*	const arcSegments = FAN_SPEED.length;*/}
+				{/*	let arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * index;*/}
+				{/*	let arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * (index + 1) - pauseAngle;*/}
 
-					return (
-						<Arc
-							className={css.fanSpeedArc}
-							color={skinVariants.night ? '#fff' : '#000'}
-							endAngle={arcEndAngle}
-							key={index}
-							onClick={onClick(index)}
-							opacity={value >= option ? 1 : 0.4}
-							radius={150}
-							startAngle={arcStartAngle}
-							strokeWidth={5}
-							value={value}
-						/>
-					);
-				})}
+				{/*	return (*/}
+				{/*		<Arc*/}
+				{/*			className={css.fanSpeedArc}*/}
+				{/*			color={skinVariants.night ? '#fff' : '#000'}*/}
+				{/*			endAngle={arcEndAngle}*/}
+				{/*			key={index}*/}
+				{/*			onClick={onClick(index)}*/}
+				{/*			opacity={value >= option ? 1 : 0.4}*/}
+				{/*			radius={150}*/}
+				{/*			startAngle={arcStartAngle}*/}
+				{/*			strokeWidth={5}*/}
+				{/*			value={value}*/}
+				{/*		/>*/}
+				{/*	);*/}
+				{/* })}*/}
 				<div className={css.valueDisplay}>
 					<Icon className={css.fanIcon} css={css}>{icon}</Icon>
 					<span className={css.fanValue}>{value}</span>

@@ -3,11 +3,19 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 // Adds Agate-specific ArcPicker behaviors
-const FanSpeedControlBehaviorDecorator = hoc((config, Wrapped) => {
+const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 	return class extends React.Component {
-		static displayName = 'FanSpeedControlBehaviorDecorator';
+		static displayName = 'ArcPickerBehaviorDecorator';
 
-		static propTypes = /** @lends agate/FanSpeedControl.FanSpeedControlBehaviorDecorator.prototype */ {
+		static propTypes = /** @lends agate/ArcPicker.ArcPickerBehaviorDecorator.prototype */ {
+			/**
+			 * The value options of ArcPicker.
+			 *
+			 * @type {Array}
+			 * @public
+			 */
+			options: PropTypes.array.isRequired,
+
 			/**
 			 * Called when the path area is clicked.
 			 *
@@ -30,13 +38,13 @@ const FanSpeedControlBehaviorDecorator = hoc((config, Wrapped) => {
 			super(props);
 
 			this.state = {
-				currentValue: 4
+				currentValue: props.options[0]
 			};
 		}
 
-		handleClick = (index) => () => {
+		handleClick = (option) => () => {
 			this.setState({
-				currentValue: index + 1
+				currentValue: option
 			});
 		};
 
@@ -52,7 +60,7 @@ const FanSpeedControlBehaviorDecorator = hoc((config, Wrapped) => {
 	};
 });
 
-export default FanSpeedControlBehaviorDecorator;
+export default ArcPickerBehaviorDecorator;
 export {
-	FanSpeedControlBehaviorDecorator
+	ArcPickerBehaviorDecorator
 };
