@@ -87,10 +87,10 @@ const ArcPickerBase = kind({
 		/**
 		 * Value of ArcPicker.
 		 *
-		 * @type {Number}
+		 * @type {Number|String}
 		 * @public
 		 */
-		value: PropTypes.number
+		value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 	},
 
 	defaultProps: {

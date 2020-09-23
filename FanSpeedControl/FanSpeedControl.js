@@ -38,12 +38,12 @@ const FanSpeedControlBase = class extends React.Component {
 		onClick: PropTypes.func,
 
 		/**
-		 * The size of ArcPicker. The number of arc segments to be rendered.
+		 * The maximum size of ArcPicker. The number of arc segments to be rendered.
 		 *
 		 * @type {Number}
 		 * @public
 		 */
-		size: PropTypes.number,
+		max: PropTypes.number,
 
 		/**
 		 * Current skinVariant.
@@ -78,18 +78,19 @@ const FanSpeedControlBase = class extends React.Component {
 
 	render () {
 		const {setValue} = this;
-		const {className, icon, size} = this.props;
+		const {className, icon, max} = this.props;
 		const {currentValue} = this.state;
 		const options = [];
 
-		for (let i = 1; i <= size; i++) {
+		for (let i = 1; i <= max; i++) {
 			options.push(i);
 		}
 
 		return (
-			<div className={classnames(className, css.fanSpeedControl)} >
+			<div className={classnames(className, css.fanSpeedControl)}>
 				<ArcPicker
 					endAngle={312}
+					max={max}
 					options={options}
 					selectionType="cumulative"
 					setValue={setValue}

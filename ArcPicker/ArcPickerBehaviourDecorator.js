@@ -36,10 +36,10 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			/**
 			 * Value of ArcPicker.
 			 *
-			 * @type {Number}
+			 * @type {Number|String}
 			 * @public
 			 */
-			value: PropTypes.number
+			value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 		};
 
 		constructor (props) {
@@ -48,6 +48,16 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			this.state = {
 				currentValue: props.value || props.options[0]
 			};
+		}
+
+		componentDidUpdate(prevProps) {
+			if (this.props.max !== prevProps.max && this.props.max <= this.state.currentValue) {
+				this.setState({
+					currentValue: this.props.max
+				}, () => {
+					this.props.setValue(this.props.max);
+				});
+			}
 		}
 
 		handleClick = (option) => () => {
@@ -59,12 +69,16 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 		};
 
 		render () {
+			const {handleClick, props, state} = this;
+			const {setValue} = props;
+			const {currentValue} = state;
+
 			return (
 				<Wrapped
-					{...this.props}
-					onClick={this.handleClick}
-					setValue={this.props.setValue}
-					value={this.state.currentValue}
+					{...props}
+					onClick={handleClick}
+					setValue={setValue}
+					value={currentValue}
 				/>
 			);
 		}
