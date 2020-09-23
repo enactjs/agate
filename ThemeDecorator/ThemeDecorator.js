@@ -250,11 +250,10 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			const allClassNames = classnames(
 				className,
 				'enact-unselectable',
-				bgClassName,
-				[bgClassName]: !float,
 				css.root,
 				{
 					[customizableSkinClassName]: customSkin,
+					[bgClassName]: !float,
 					'enact-fit': !disableFullscreen
 				}
 			);
