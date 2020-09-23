@@ -41,17 +41,17 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			const params = {x: clientX, y: clientY};
 			forward('onDown', params, this.props);
 			this.emitChangeForPosition(params);
-		}
+		};
 
 		handleDragStart = (ev) => {
 			forward('onDragStart', ev, this.props);
 			this.emitChangeForPosition(ev);
-		}
+		};
 
 		handleDrag = (ev) => {
 			forward('onDrag', ev, this.props);
 			this.emitChangeForPosition(ev);
-		}
+		};
 
 		// Calculates the new SVG value based on the mouse cursor coordinates and sets the new value into the state
 		emitChangeForPosition = (ev) => {
