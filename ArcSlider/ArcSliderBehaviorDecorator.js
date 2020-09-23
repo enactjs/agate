@@ -37,7 +37,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			};
 		}
 
-		handleDown = ({clientX, clientY, currentTarget, target}) => {
+		handleDown = ({clientX, clientY}) => {
 			const params = {x: clientX, y: clientY};
 			forward('onDown', params, this.props);
 			this.emitChangeForPosition(params);
@@ -96,8 +96,8 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 
 		render () {
 			if (__DEV__) {
-				const {endAngle, min, value = this.state.value, max, startAngle, step} = this.props;
-				const valueProps = {min, value: value || min, max, step};
+				const {endAngle, max, min, startAngle, step} = this.props;
+				const valueProps = {min, value: this.state.value || min, max, step};
 				const angleProps = {startAngle, endAngle};
 
 				validateValueRange(valueProps);
