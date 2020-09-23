@@ -1,10 +1,9 @@
-import kind from '@enact/core/kind';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
-import Arc from '../Arc';
-import FanSpeedControlBehaviorDecorator from './FanSpeedControlBehaviourDecorator';
+import ArcPicker from '../ArcPicker';
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
@@ -18,10 +17,10 @@ import css from './FanSpeedControl.module.less';
  * @ui
  * @private
  */
-const FanSpeedControlBase = kind({
-	name: 'FanSpeedControlBase',
+const FanSpeedControlBase = class extends React.Component {
+	static displayName = 'FanSpeedControlBase';
 
-	propTypes: /** @lends agate/FanSpeedControl.FanSpeedControlBase.prototype */ {
+	static propTypes = /** @lends agate/FanSpeedControl.FanSpeedControlBase.prototype */ {
 		/**
 		 * ArcPicker icon.
 		 *
@@ -62,59 +61,44 @@ const FanSpeedControlBase = kind({
 		 * @public
 		 */
 		value: PropTypes.number
-	},
+	};
 
-	styles: {
-		css,
-		className: 'fanSpeedControl'
-	},
+	constructor (props) {
+		super(props);
 
-	render: ({icon, onClick, size, skinVariants, value, ...rest}) => {
+		this.state = {
+			currentValue: 2
+		};
+	}
 
-		let FAN_SPEED = [];
+	setValue = (value) => {
+		this.setState({
+			currentValue: value
+		});
+	}
+
+	render () {
+		const {setValue} = this;
+		const {className, icon, size} = this.props;
+		const {currentValue} = this.state;
+		const options = [];
 
 		for (let i = 1; i <= size; i++) {
-			FAN_SPEED.push(i);
+			options.push(i);
 		}
 
 		return (
-			<div className={css.fanSpeedControl} {...rest}>
-				{/* {FAN_SPEED.map((option, index) => {*/}
-
-				{/*	// Calc `arcStartAngle`, `arcEndAngle` based on `startAngle` and `endAngle` for every <Arc />*/}
-				{/*	const startAngle = 50;*/}
-				{/*	const endAngle = 312;*/}
-				{/*	const pauseAngle = 2;*/}
-				{/*	const arcSegments = FAN_SPEED.length;*/}
-				{/*	let arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * index;*/}
-				{/*	let arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * (index + 1) - pauseAngle;*/}
-
-				{/*	return (*/}
-				{/*		<Arc*/}
-				{/*			className={css.fanSpeedArc}*/}
-				{/*			color={skinVariants.night ? '#fff' : '#000'}*/}
-				{/*			endAngle={arcEndAngle}*/}
-				{/*			key={index}*/}
-				{/*			onClick={onClick(index)}*/}
-				{/*			opacity={value >= option ? 1 : 0.4}*/}
-				{/*			radius={150}*/}
-				{/*			startAngle={arcStartAngle}*/}
-				{/*			strokeWidth={5}*/}
-				{/*			value={value}*/}
-				{/*		/>*/}
-				{/*	);*/}
-				{/* })}*/}
-				<div className={css.valueDisplay}>
+			<div className={classnames(className, css.fanSpeedControl)} >
+				<ArcPicker options={options} selectionType="cumulative" setValue={setValue} value={currentValue}>
 					<Icon className={css.fanIcon} css={css}>{icon}</Icon>
-					<span className={css.fanValue}>{value}</span>
-				</div>
+					<span className={css.fanValue}>{currentValue}</span>
+				</ArcPicker>
 			</div>
 		);
 	}
-});
+};
 
 const FanSpeedControlDecorator = compose(
-	FanSpeedControlBehaviorDecorator,
 	Skinnable({variantsProp: 'skinVariants'})
 );
 

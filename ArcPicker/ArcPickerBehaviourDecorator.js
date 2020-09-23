@@ -26,6 +26,14 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			onClick: PropTypes.func,
 
 			/**
+			 * Called to set the value of ArcPicker.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			setValue: PropTypes.func,
+
+			/**
 			 * Value of ArcPicker.
 			 *
 			 * @type {Number}
@@ -38,13 +46,15 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			super(props);
 
 			this.state = {
-				currentValue: props.options[0]
+				currentValue: props.value || props.options[0]
 			};
 		}
 
 		handleClick = (option) => () => {
 			this.setState({
 				currentValue: option
+			}, () => {
+				this.props.setValue(this.state.currentValue);
 			});
 		};
 
@@ -53,6 +63,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 				<Wrapped
 					{...this.props}
 					onClick={this.handleClick}
+					setValue={this.props.setValue}
 					value={this.state.currentValue}
 				/>
 			);

@@ -58,6 +58,14 @@ const ArcPickerBase = kind({
 		selectionType: PropTypes.oneOf(['single', 'cumulative']),
 
 		/**
+		 * Called to set the value of ArcPicker.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		setValue: PropTypes.func,
+
+		/**
 		 * Current skinVariant.
 		 *
 		 * @type {Object}
@@ -134,9 +142,12 @@ const ArcPickerBase = kind({
 
 	render: ({children, renderArcSegments, ...rest}) => {
 		delete rest.endAngle;
+		delete rest.options;
 		delete rest.selectionType;
+		delete rest.setValue;
 		delete rest.skinVariants;
 		delete rest.startAngle;
+		delete rest.value;
 
 		return (
 			<div className={css.arcPicker} {...rest}>

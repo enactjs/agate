@@ -14,13 +14,14 @@ storiesOf('Agate', module)
 	.add(
 		'FanSpeedControl',
 		() => (
-			<FanSpeedControl
-				icon={select('icon', ['', ...iconNames], Config, 'fan')}
-				size={number('size', Config, {range: true, min: 1, max: 40, step: 1}, 10)}
-				style={{marginTop: '40px'}}
-			/>
+			<div style={{marginTop: '40px'}}>
+				<FanSpeedControl
+					icon={select('icon', ['', ...iconNames], Config, 'fan')}
+					size={number('size', Config, {range: true, min: 1, max: 40, step: 1}, 10)}
+				/>
+			</div>
 		),
 		{
-			text: 'The basic ArcPicker'
+			text: 'The basic FanSpeedControl'
 		}
 	);
