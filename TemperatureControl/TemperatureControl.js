@@ -3,8 +3,9 @@
  *
  * @example
  * <TemperatureControl
- *   max={100}
- *   min={-100}
+ *   defaultValue={10}
+ *   max={30}
+ *   min={10}
  * />
  *
  * @module agate/TemperatureControl
@@ -106,8 +107,6 @@ const TemperatureControlBase = class extends React.Component {
 	constructor (props) {
 		super(props);
 
-		this.componentRef = React.createRef();
-
 		this.state = {
 			max: props.max,
 			min: props.min,
@@ -152,18 +151,6 @@ const TemperatureControlBase = class extends React.Component {
 			min: values.min
 		})
 	}
-
-	// setMax = (max) => {
-	// 	this.setState({
-	// 		max: max
-	// 	})
-	// }
-	// setMin = (min) => {
-	// 	this.setState({
-	// 		min: min
-	// 	})
-	// }
-
 
 	render () {
 		const {onMouseDown, onTouchStart, scale, ...rest} = this.props,
