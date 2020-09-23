@@ -13,6 +13,7 @@
 import kind from '@enact/core/kind';
 import Pure from '@enact/ui/internal/Pure';
 import ri from '@enact/ui/resolution';
+import Touchable from '@enact/ui/Touchable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -237,6 +238,7 @@ const ArcSliderBase = kind({
 const ArcSliderDecorator = compose(
 	Pure,
 	ArcSliderBehaviorDecorator,
+	Touchable,
 	Skinnable
 );
 
