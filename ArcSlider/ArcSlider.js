@@ -106,6 +106,13 @@ const ArcSliderBase = kind({
 		 */
 		radius: PropTypes.oneOf([120, 150]),
 
+		/**
+		 * Called when the value is set.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
 		setValue: PropTypes.func,
 
 		/**

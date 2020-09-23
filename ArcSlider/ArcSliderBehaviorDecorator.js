@@ -22,11 +22,11 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			max: PropTypes.number,
 			min: PropTypes.number,
 			radius: PropTypes.number,
+			setValue: PropTypes.func,
 			startAngle: PropTypes.number,
 			step: PropTypes.number,
 			strokeWidth: PropTypes.number,
-			setValue: PropTypes.func
-
+			value: PropTypes.number
 		};
 
 		constructor (props) {
@@ -37,7 +37,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			this.state = {
 				max: props.max,
 				min: props.min,
-				value: props.value ? props.value : props.min,
+				value: props.value ? props.value : props.min
 			};
 		}
 

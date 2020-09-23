@@ -13,7 +13,7 @@
  * @exports TemperatureControlBase
  * @exports TemperatureControlDecorator
  */
-import classnames from 'classnames'
+import classnames from 'classnames';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
@@ -64,44 +64,22 @@ const TemperatureControlBase = class extends React.Component {
 		min: PropTypes.number,
 
 		/**
-		 * Called when the mouse is down over the arc slider area.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onMouseDown: PropTypes.func,
-
-		/**
-		 * Called when the touch starts over the arc slider area.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onTouchStart: PropTypes.func,
-
-		/**
 		 * The scale of the temperature(C or F).
 		 *
 		 * @type {('C'|'F')}
 		 * @default 'C'
 		 * @public
 		 */
-		scale: PropTypes.oneOf(['C', 'F']),
+		scale: PropTypes.oneOf(['C', 'F'])
 
-		setValue: PropTypes.func,
-
-		setMax: PropTypes.func,
-
-		setMin: PropTypes.func
+		// setValue: PropTypes.func
 	};
 
 	static defaultProps= {
+		defaultValue: 15,
 		max: 30,
 		min: 10,
-		scale: 'C',
-		defaultValue: 15
+		scale: 'C'
 	};
 
 	constructor (props) {
@@ -110,7 +88,7 @@ const TemperatureControlBase = class extends React.Component {
 		this.state = {
 			max: props.max,
 			min: props.min,
-			value: props.defaultValue,
+			value: props.defaultValue
 		};
 	}
 
@@ -124,24 +102,24 @@ const TemperatureControlBase = class extends React.Component {
 		}
 	}
 
-	toCelsius() {
+	toCelsius () {
 		this.setState((prevState) => {
-			return({
+			return ({
 				max: Math.round((prevState.max - 32) * 5 / 9),
 				min: Math.round((prevState.min - 32) * 5 / 9),
 				value: Math.round((prevState.value - 32) * 5 / 9)
-			})
-		})
+			});
+		});
 	}
 
-	toFahrenheit() {
+	toFahrenheit () {
 		this.setState((prevState) => {
-			return({
+			return ({
 				max: Math.round((prevState.max * 9 / 5) + 32),
 				min: Math.round((prevState.min * 9 / 5) + 32),
 				value: Math.round((prevState.value * 9 / 5) + 32)
-			})
-		})
+			});
+		});
 	}
 
 	setValue = (values) => {
@@ -149,12 +127,11 @@ const TemperatureControlBase = class extends React.Component {
 			value: values.value,
 			max: values.max,
 			min: values.min
-		})
+		});
 	}
 
 	render () {
-		const {onMouseDown, onTouchStart, scale, ...rest} = this.props,
-			{ setValue, setMax, setMin} = this;
+		const {scale, ...rest} = this.props;
 
 		return (
 			<div {...rest} className={classnames(rest.className, css.temperatureControl)}>
@@ -163,18 +140,14 @@ const TemperatureControlBase = class extends React.Component {
 					className={css.slider}
 					endAngle={310}
 					foregroundColor={this.state.value < this.state.min + (this.state.max - this.state.min) / 2 ? '#007aff' : '#f24949'}
-					onMouseDown={() => onMouseDown({value: this.state.value, max: this.state.max, min: this.state.min})}
-					onTouchStart={onTouchStart}
 					max={this.state.max}
 					min={this.state.min}
 					radius={150}
+					setValue={this.setValue}
 					startAngle={50}
 					step={1}
 					strokeWidth={6}
 					value={this.state.value}
-					setValue={setValue}
-					// setMax={setMax}
-					// setMin={setMin}
 				/>
 				<div className={css.valueDisplay}>
 					<span>{this.state.value}°{scale}</span>
@@ -195,8 +168,8 @@ const TemperatureControlBase = class extends React.Component {
  */
 const TemperatureControlDecorator = compose(
 	Pure,
-	//ArcSliderBehaviorDecorator,
-	//TemperatureControlBehaviorDecorator,
+	// ArcSliderBehaviorDecorator,
+	// TemperatureControlBehaviorDecorator,
 	Skinnable
 );
 
