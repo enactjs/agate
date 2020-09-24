@@ -89,14 +89,6 @@ const ArcPickerBase = kind({
 		selectionType: PropTypes.oneOf(['single', 'cumulative']),
 
 		/**
-		 * Called to set the value of ArcPicker.
-		 *
-		 * @type {Function}
-		 * @public
-		 */
-		setValue: PropTypes.func,
-
-		/**
 		 * The start angle(in degrees) of the arc.
 		 *
 		 * The value should be between 0 and 360.

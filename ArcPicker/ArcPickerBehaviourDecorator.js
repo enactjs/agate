@@ -124,7 +124,6 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 					onChange={onChange}
 					onClick={handleClick}
 					value={currentValue}
-					values={values}
 				/>
 			);
 		}
