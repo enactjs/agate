@@ -20,7 +20,6 @@ storiesOf('Agate', module)
 			<TemperatureControl
 				max={number('max', Config)}
 				min={number('min', Config)}
-				onMouseDown={action('onMouseDown')}
 				scale={select('scale', prop.scale, Config)}
 			/>
 		),
