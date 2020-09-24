@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import {positionToAngle} from '../Arc/utils';
+
 import {angleToValue} from './utils';
 
 const validateValueRange = validateRangeOnce((props) => props, {'component': 'ArcSliderBehaviorDecorator'});
