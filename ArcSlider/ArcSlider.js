@@ -65,7 +65,7 @@ const ArcSliderBase = kind({
 		 *
 		 * The value should be between 0 and 360 and should be greater than startAngle.
 		 *
-		 * @type {String}
+		 * @type {Number}
 		 * @default 250
 		 * @public
 		 */
