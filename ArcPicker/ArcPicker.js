@@ -2,7 +2,7 @@
  * Agate styled arc picker components and behaviors.
  *
  * @example
- * <ArcPicker endAngle={200} selectionType="single" startAngle={0} />
+ * <ArcPicker backgroundColor="#444444" endAngle={200} foregroundColor="#eeeeee" selectionType="single" startAngle={0} />
  *
  * @module agate/ArcPicker
  * @exports ArcPicker
@@ -43,6 +43,15 @@ const ArcPickerBase = kind({
 		options: PropTypes.array.isRequired,
 
 		/**
+		 * The color of the unselected arcs.
+		 *
+		 * @type {String}
+		 * @default #444444
+		 * @public
+		 */
+		backgroundColor: PropTypes.string,
+
+		/**
 		 * The end angle(in degrees) of the arc.
 		 *
 		 * The value should be between 0 and 360 and should be greater than startAngle.
@@ -52,6 +61,15 @@ const ArcPickerBase = kind({
 		 * @public
 		 */
 		endAngle: PropTypes.number,
+
+		/**
+		 * The color of the selected arcs.
+		 *
+		 * @type {number}
+		 * @default #eeeeee
+		 * @public
+		 */
+		foregroundColor: PropTypes.string,
 
 		/**
 		 * Called when the path area is clicked.
@@ -79,14 +97,6 @@ const ArcPickerBase = kind({
 		setValue: PropTypes.func,
 
 		/**
-		 * Current skinVariant.
-		 *
-		 * @type {Object}
-		 * @public
-		 */
-		skinVariants: PropTypes.object,
-
-		/**
 		 * The start angle(in degrees) of the arc.
 		 *
 		 * The value should be between 0 and 360.
@@ -107,7 +117,9 @@ const ArcPickerBase = kind({
 	},
 
 	defaultProps: {
+		backgroundColor: '#444444',
 		endAngle: 310,
+		foregroundColor: '#eeeeee',
 		startAngle: 50
 	},
 
@@ -118,26 +130,25 @@ const ArcPickerBase = kind({
 
 	computed: {
 		arcSegments: (props) => {
-			const {endAngle, onClick, options, selectionType, skinVariants, startAngle, value} = props;
+			const {backgroundColor, endAngle, foregroundColor, onClick, options, selectionType, startAngle, value} = props;
 
 			return (
 				options.map((option, index) => {
-				// Calc `arcStartAngle`, `arcEndAngle` based on `startAngle` and `endAngle` for every <Arc />
+					// Calc `arcStartAngle`, `arcEndAngle` based on `startAngle` and `endAngle` for every <Arc />
 					const pauseAngle = 2;
 					const arcSegments = options.length;
 					const arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * index;
 					const arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * (index + 1) - pauseAngle;
 
-					const opacity = (selectionType === 'cumulative' && value > option || value === option) ? 1 : 0.4;
+					const color = (selectionType === 'cumulative' && value > option || value === option) ? foregroundColor : backgroundColor;
 
 					return (
 						<Arc
 							className={css.arc}
-							color={skinVariants.night ? '#fff' : '#000'}
+							color={color}
 							endAngle={arcEndAngle}
 							key={index}
 							onClick={onClick(option)}
-							opacity={opacity}
 							radius={150}
 							startAngle={arcStartAngle}
 							strokeWidth={5}
@@ -152,7 +163,6 @@ const ArcPickerBase = kind({
 		delete rest.options;
 		delete rest.selectionType;
 		delete rest.setValue;
-		delete rest.skinVariants;
 		delete rest.startAngle;
 		delete rest.value;
 
@@ -169,7 +179,7 @@ const ArcPickerBase = kind({
 
 const ArcPickerDecorator = compose(
 	ArcPickerBehaviorDecorator,
-	Skinnable({variantsProp: 'skinVariants'})
+	Skinnable
 );
 
 const ArcPicker = ArcPickerDecorator(ArcPickerBase);
