@@ -8,25 +8,12 @@
 	width: 321px;
 	height: 321px;
 
-	.windDirectionArc {
-		position: absolute;
-	}
-
-	.airDirectionDisplay {
-		align-items: center;
-		display: flex;
-		height: 120px;
-		transform: translate(60%, 70%);
-		width: 120px;
-
-		.airDirectionIcon {
-			.applySkins({
-				font-size: @agate-winddirectioncontrol-icon-font-size;
-				height: @agate-winddirectioncontrol-icon-height;
-				line-height: @agate-winddirectioncontrol-icon-line-height;
-				margin: @agate-winddirectioncontrol-icon-margin;
-				width: @agate-winddirectioncontrol-icon-width;
-			})
-		}
+	.airDirectionIcon {
+		.applySkins({
+			font-size: @agate-winddirectioncontrol-icon-font-size;
+			height: @agate-winddirectioncontrol-icon-height;
+			line-height: @agate-winddirectioncontrol-icon-line-height;
+			width: @agate-winddirectioncontrol-icon-width;
+		})
 	}
 }
