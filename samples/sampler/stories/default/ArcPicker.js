@@ -26,11 +26,11 @@ storiesOf('Agate', module)
 					backgroundColor={select('backgroundColor', prop.colors, Config)}
 					endAngle={number('endAngle', Config, {range: true, min: 0, max: 360})}
 					foregroundColor={select('foregroundColor', prop.colors, Config)}
-					options={items}
+					onChange={action('onChange')}
 					selectionType={select('selectionType', ['cumulative', 'single'], Config, 'cumulative')}
-					setValue={action('setValue')}
 					startAngle={number('startAngle', Config, {range: true, min: 0, max: 360})}
 					style={{marginTop: '40px'}}
+					values={items}
 				/>
 			);
 		},

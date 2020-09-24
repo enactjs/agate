@@ -2,6 +2,7 @@ import hoc from '@enact/core/hoc';
 import {validateRangeOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 const validateRange = validateRangeOnce((props) => props, {'component': 'ArcPickerBehaviorDecorator'});
 
@@ -17,15 +18,31 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			 * @type {Array}
 			 * @public
 			 */
-			options: PropTypes.array.isRequired,
+			values: PropTypes.array.isRequired,
 
 			/**
-			 * The maximum size of ArcPicker. The number of arc segments to be rendered.
+			 * The maximum value of ArcPicker.
 			 *
 			 * @type {Number}
 			 * @public
 			 */
 			max: PropTypes.number,
+
+			/**
+			 * The min value of ArcPicker.
+			 *
+			 * @type {Number}
+			 * @public
+			 */
+			min: PropTypes.number,
+
+			/**
+			 * Called when value is changed.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onChange: PropTypes.func,
 
 			/**
 			 * Called when the path area is clicked.
@@ -57,26 +74,46 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			super(props);
 
 			this.state = {
-				currentValue: props.value || props.options[0],
-				max: props.max
+				currentValue: props.value || props.values[0]
 			};
 		}
 
-		handleClick = (option) => () => {
+		componentDidMount () {
+			document.addEventListener('click', this.handleClickOutside, true);
+		}
+
+		componentWillUnmount () {
+			document.removeEventListener('click', this.handleClickOutside, true);
+		}
+
+		handleClickOutside = event => {
+			// eslint-disable-next-line react/no-find-dom-node
+			const domNode = ReactDOM.findDOMNode(this);
+
+			if (!domNode || !domNode.contains(event.target)) {
+				this.setState({
+					currentValue: 0
+				}, () => {
+					this.props.onChange({value: this.state.currentValue});
+				});
+			}
+		};
+
+		handleClick = (value) => () => {
 			this.setState({
-				currentValue: option
+				currentValue: value
 			}, () => {
-				this.props.setValue(this.state.currentValue);
+				this.props.onChange({value: this.state.currentValue});
 			});
 		};
 
 		render () {
 			const {handleClick, props, state} = this;
-			const {setValue, max} = props;
+			const {max, min, onChange} = props;
 			const {currentValue} = state;
 
 			if (__DEV__) {
-				const valueProps = {value: currentValue, max};
+				const valueProps = {value: currentValue, max, min};
 
 				validateRange(valueProps);
 			}
@@ -84,8 +121,8 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			return (
 				<Wrapped
 					{...props}
+					onChange={onChange}
 					onClick={handleClick}
-					setValue={setValue}
 					value={currentValue}
 				/>
 			);

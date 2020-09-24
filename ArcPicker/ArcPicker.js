@@ -40,7 +40,7 @@ const ArcPickerBase = kind({
 		 * @type {Array}
 		 * @public
 		 */
-		options: PropTypes.array.isRequired,
+		values: PropTypes.array.isRequired,
 
 		/**
 		 * The color of the unselected arcs.
@@ -117,9 +117,9 @@ const ArcPickerBase = kind({
 	},
 
 	defaultProps: {
-		backgroundColor: '#444444',
+		backgroundColor: '#eeeeee',
 		endAngle: 310,
-		foregroundColor: '#eeeeee',
+		foregroundColor: '#444444',
 		startAngle: 50
 	},
 
@@ -130,13 +130,13 @@ const ArcPickerBase = kind({
 
 	computed: {
 		arcSegments: (props) => {
-			const {backgroundColor, endAngle, foregroundColor, onClick, options, selectionType, startAngle, value} = props;
+			const {backgroundColor, endAngle, foregroundColor, onClick, values, selectionType, startAngle, value} = props;
 
 			return (
-				options.map((option, index) => {
+				values.map((option, index) => {
 					// Calc `arcStartAngle`, `arcEndAngle` based on `startAngle` and `endAngle` for every <Arc />
 					const pauseAngle = 2;
-					const arcSegments = options.length;
+					const arcSegments = values.length;
 					const arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * index;
 					const arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * (index + 1) - pauseAngle;
 
@@ -159,8 +159,10 @@ const ArcPickerBase = kind({
 	},
 
 	render: ({arcSegments, children, ...rest}) => {
+		delete rest.backgroundColor;
 		delete rest.endAngle;
-		delete rest.options;
+		delete rest.foregroundColor;
+		delete rest.values;
 		delete rest.selectionType;
 		delete rest.setValue;
 		delete rest.startAngle;
