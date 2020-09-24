@@ -3,7 +3,7 @@
  *
  * @example
  * <Scroller>
- * 	<div style={{height: '100px'}}>
+ * 	<div style={{height: 100}}>
  * 		<p>San Francisco</p>
  * 		<p>Seoul</p>
  * 		<p>Bangalore</p>
