@@ -20,12 +20,20 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			options: PropTypes.array.isRequired,
 
 			/**
-			 * The maximum size of ArcPicker. The number of arc segments to be rendered.
+			 * The maximum value of ArcPicker.
 			 *
 			 * @type {Number}
 			 * @public
 			 */
 			max: PropTypes.number,
+
+			/**
+			 * The min value of ArcPicker.
+			 *
+			 * @type {Number}
+			 * @public
+			 */
+			min: PropTypes.number,
 
 			/**
 			 * Called when the path area is clicked.
@@ -57,8 +65,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			super(props);
 
 			this.state = {
-				currentValue: props.value || props.options[0],
-				max: props.max
+				currentValue: props.value || props.options[0]
 			};
 		}
 
@@ -66,17 +73,17 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			this.setState({
 				currentValue: option
 			}, () => {
-				this.props.setValue(this.state.currentValue);
+				this.props.onChange({value: this.state.currentValue});
 			});
 		};
 
 		render () {
 			const {handleClick, props, state} = this;
-			const {setValue, max} = props;
+			const {max, min, onChange} = props;
 			const {currentValue} = state;
 
 			if (__DEV__) {
-				const valueProps = {value: currentValue, max};
+				const valueProps = {value: currentValue, max, min};
 
 				validateRange(valueProps);
 			}
@@ -84,8 +91,8 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			return (
 				<Wrapped
 					{...props}
+					onChange={onChange}
 					onClick={handleClick}
-					setValue={setValue}
 					value={currentValue}
 				/>
 			);

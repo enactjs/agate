@@ -18,6 +18,7 @@ storiesOf('Agate', module)
 				<FanSpeedControl
 					icon={select('icon', ['', ...iconNames], Config, 'fan')}
 					max={number('max', Config, {max: 40, min: 1, range: true, step: 1}, 10)}
+					min={number('min', Config, {max: 40, min: 1, range: true, step: 1}, 1)}
 				/>
 			</div>
 		),

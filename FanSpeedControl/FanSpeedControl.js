@@ -11,6 +11,7 @@
 
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
 import ArcPicker from '../ArcPicker';
@@ -18,6 +19,8 @@ import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
 import css from './FanSpeedControl.module.less';
+import Changeable from "@enact/ui/Changeable";
+import kind from "@enact/core/kind";
 
 /**
  * An Agate component for displaying fan speed {@link agate/FanSpeedControl}.
@@ -27,10 +30,10 @@ import css from './FanSpeedControl.module.less';
  * @ui
  * @private
  */
-const FanSpeedControlBase = class extends React.Component {
-	static displayName = 'FanSpeedControlBase';
+const FanSpeedControlBase = kind({
+	name: 'FanSpeedControlBase',
 
-	static propTypes = /** @lends agate/FanSpeedControl.FanSpeedControlBase.prototype */ {
+	propTypes: /** @lends agate/FanSpeedControl.FanSpeedControlBase.prototype */ {
 		/**
 		 * ArcPicker icon.
 		 *
@@ -40,13 +43,28 @@ const FanSpeedControlBase = class extends React.Component {
 		icon: PropTypes.string,
 
 		/**
-		 * Called when the path area is clicked.
+		 * The maximum value of FanSpeed.
 		 *
-		 * @type {Function}
-		 * @param {Object} event
+		 * @type {Number}
 		 * @public
 		 */
 		max: PropTypes.number,
+
+		/**
+		 * The minimum value of FanSpeed.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		min: PropTypes.number,
+
+		/**
+		 * Called when value is changed.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onChange: PropTypes.func,
 
 		/**
 		 * The maximum size of ArcPicker. The number of arc segments to be rendered.
@@ -57,68 +75,59 @@ const FanSpeedControlBase = class extends React.Component {
 		onClick: PropTypes.func,
 
 		/**
-		 * Current skinVariant.
-		 *
-		 * @type {Object}
-		 * @public
-		 */
-		skinVariants: PropTypes.object,
-
-		/**
 		 * Value of ArcPicker.
 		 *
 		 * @type {Number}
 		 * @public
 		 */
 		value: PropTypes.number
-	};
+	},
 
-	constructor (props) {
-		super(props);
+	defaultProps: {
+		value: 1
+	},
 
-		this.state = {
-			currentValue: 2
-		};
-	}
+	styles: {
+		css,
+		className: 'fanSpeedControl'
+	},
 
-	setValue = (value) => {
-		this.setState({
-			currentValue: value
-		});
-	};
+	render ({icon, max, min, onChange, value, ...rest}) {
+		const values = [];
 
-	render () {
-		const {setValue} = this;
-		const {className, icon, max} = this.props;
-		const {currentValue} = this.state;
-		const options = [];
-
-		for (let i = 1; i <= max; i++) {
-			options.push(i);
+		for (let i = min; i <= max; i++) {
+			values.push(i);
 		}
 
 		return (
-			<div className={classnames(className, css.fanSpeedControl)}>
+			<div {...rest}>
 				<ArcPicker
 					endAngle={312}
 					max={max}
-					options={options}
+					min={min}
+					onChange={onChange}
+					options={values}
 					selectionType="cumulative"
-					setValue={setValue}
-					value={currentValue}
+					value={value}
 				>
 					<Icon className={css.fanIcon} css={css}>{icon}</Icon>
-					<span className={css.fanValue}>{currentValue}</span>
+					<span className={css.fanValue}>{value}</span>
 				</ArcPicker>
 			</div>
 		);
 	}
-};
+});
 
-const FanSpeedControl = Skinnable({variantsProp: 'skinVariants'})(FanSpeedControlBase);
+const FanSpeedControlDecorator = compose(
+	Changeable,
+	Skinnable
+);
+
+const FanSpeedControl = FanSpeedControlDecorator(FanSpeedControlBase);
 
 export default FanSpeedControl;
 export {
 	FanSpeedControl,
-	FanSpeedControlBase
+	FanSpeedControlBase,
+	FanSpeedControlDecorator
 };
