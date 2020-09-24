@@ -97,7 +97,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 					this.props.onChange({value: this.state.currentValue});
 				});
 			}
-		}
+		};
 
 		handleClick = (value) => () => {
 			this.setState({
