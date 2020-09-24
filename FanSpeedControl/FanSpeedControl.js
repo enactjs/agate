@@ -9,7 +9,8 @@
  * @exports FanSpeedControlBase
  */
 
-import classnames from 'classnames';
+import kind from '@enact/core/kind';
+import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -19,8 +20,6 @@ import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
 import css from './FanSpeedControl.module.less';
-import Changeable from "@enact/ui/Changeable";
-import kind from "@enact/core/kind";
 
 /**
  * An Agate component for displaying fan speed {@link agate/FanSpeedControl}.

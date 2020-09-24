@@ -36,6 +36,14 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			min: PropTypes.number,
 
 			/**
+			 * Called when value is changed.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onChange: PropTypes.func,
+
+			/**
 			 * Called when the path area is clicked.
 			 *
 			 * @type {Function}
