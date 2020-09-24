@@ -11,7 +11,7 @@ const Config = mergeComponentMetadata('FanSpeedControl', ArcPicker, ArcPickerBas
 
 // Set up some defaults for colors
 const prop = {
-	colors: ['#444444', '#eeeeee', '#ffffff', '#986aad', '#0000ff'],
+	colors: ['#444444', '#eeeeee', '#ffffff', '#986aad', '#0000ff']
 };
 
 storiesOf('Agate', module)
