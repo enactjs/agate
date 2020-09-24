@@ -2,6 +2,8 @@ import hoc from '@enact/core/hoc';
 import {validateRangeOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
 import React from 'react';
+import ReactDOM from "react-dom";
+import {on} from "../../enact/packages/core/dispatcher";
 
 const validateRange = validateRangeOnce((props) => props, {'component': 'ArcPickerBehaviorDecorator'});
 
@@ -17,7 +19,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			 * @type {Array}
 			 * @public
 			 */
-			options: PropTypes.array.isRequired,
+			values: PropTypes.array.isRequired,
 
 			/**
 			 * The maximum value of ArcPicker.
@@ -73,13 +75,33 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			super(props);
 
 			this.state = {
-				currentValue: props.value || props.options[0]
+				currentValue: props.value || props.values[0]
 			};
 		}
 
-		handleClick = (option) => () => {
+		componentDidMount() {
+			document.addEventListener('click', this.handleClickOutside, true);
+		}
+
+		componentWillUnmount() {
+			document.removeEventListener('click', this.handleClickOutside, true);
+		}
+
+		handleClickOutside = event => {
+			const domNode = ReactDOM.findDOMNode(this);
+
+			if (!domNode || !domNode.contains(event.target)) {
+				this.setState({
+					currentValue: 0
+				}, () => {
+					this.props.onChange({value: this.state.currentValue});
+				});
+			}
+		}
+
+		handleClick = (value) => () => {
 			this.setState({
-				currentValue: option
+				currentValue: value
 			}, () => {
 				this.props.onChange({value: this.state.currentValue});
 			});
@@ -87,7 +109,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 
 		render () {
 			const {handleClick, props, state} = this;
-			const {max, min, onChange} = props;
+			const {max, min, onChange, values} = props;
 			const {currentValue} = state;
 
 			if (__DEV__) {
@@ -102,6 +124,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 					onChange={onChange}
 					onClick={handleClick}
 					value={currentValue}
+					values={values}
 				/>
 			);
 		}

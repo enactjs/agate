@@ -105,9 +105,9 @@ const FanSpeedControlBase = kind({
 					max={max}
 					min={min}
 					onChange={onChange}
-					options={values}
 					selectionType="cumulative"
 					value={value}
+					values={values}
 				>
 					<Icon className={css.fanIcon} css={css}>{icon}</Icon>
 					<span className={css.fanValue}>{value}</span>
