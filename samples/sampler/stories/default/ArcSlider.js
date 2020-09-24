@@ -37,6 +37,6 @@ storiesOf('Agate', module)
 			/>
 		),
 		{
-			text: 'The basic Arcslider'
+			text: 'The basic ArcSlider'
 		}
 	);
