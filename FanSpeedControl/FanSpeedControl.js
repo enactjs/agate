@@ -117,6 +117,16 @@ const FanSpeedControlBase = kind({
 	}
 });
 
+/**
+ * Applies Agate specific behaviors to [FanSpeedControl]{@link agate/FanSpeedControl.FanSpeedControlBase} components.
+ *
+ * @hoc
+ * @memberof agate/FanSpeedControl
+ * @mixes ui/Changeable.Changeable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
+
 const FanSpeedControlDecorator = compose(
 	Changeable,
 	Skinnable
