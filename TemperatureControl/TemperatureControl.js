@@ -127,7 +127,7 @@ const TemperatureControlBase = class extends React.Component {
 			min: values.min,
 			value: values.value
 		});
-	}
+	};
 
 	render () {
 		const {scale, ...rest} = this.props;

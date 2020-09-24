@@ -108,6 +108,14 @@ const ArcSliderBase = kind({
 		radius: PropTypes.number,
 
 		/**
+		 * Called when the value is changed.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		setValue: PropTypes.func,
+
+		/**
 		 * The start angle(in degrees) of the arc slider.
 		 *
 		 * The value should be between 0 and 360.
