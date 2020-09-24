@@ -1,4 +1,19 @@
-import classnames from 'classnames';
+/**
+ * Agate styled WindDirectionControl component and behavior.
+ *
+ * @example
+ * <WindDirectionControl />
+ *
+ * @module agate/WindDirectionControl
+ * @exports WindDirectionControl
+ * @exports WindDirectionControlBase
+ * @exports WindDirectionControlDecorator
+ */
+
+import kind from '@enact/core/kind';
+import Changeable from '@enact/ui/Changeable';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
 import ArcPicker from '../ArcPicker';
@@ -15,69 +30,89 @@ import css from './WindDirectionControl.module.less';
  * @ui
  * @private
  */
-const WindDirectionControlBase = class extends React.Component{
-	static displayName = 'WindDirectionControlBase';
+const WindDirectionControlBase = kind({
+	name: 'WindDirectionControlBase',
 
-	constructor (props) {
-		super(props);
+	propTypes: /** @lends agate/WindDirectionControl.WindDirectionControlBase.prototype */ {
+		/**
+		 * Called when value is changed.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onChange: PropTypes.func,
 
-		this.state = {
-			currentValue: 'airDown'
-		};
-	}
+		/**
+		 * State of WindDirectionControl.
+		 *
+		 * @type {(''|'airDown'|'airRight'|'airUp')}
+		 * @default 'airDown'
+		 * @public
+		 */
+		value:  PropTypes.oneOf(['', 'airDown', 'airRight', 'airUp'])
+	},
 
-	setValue = (value) => {
-		this.setState({
-			currentValue: value
-		});
-	};
+	defaultProps: {
+		value: 'airDown'
+	},
 
-	componentIcon = () => {
-		const {currentValue} = this.state;
+	styles: {
+		css,
+		className: 'windDirectionControl'
+	},
 
-		switch (currentValue) {
-			case 'airDown':
-				return 'airdown';
-			case 'airRight':
-				return 'airup';
-			case 'airUp':
-				return 'airright';
+	computed: {
+		componentIcon: (props) => {
+			const {value} = props;
+
+			switch (value) {
+				case 'airDown':
+					return 'airdown';
+				case 'airRight':
+					return 'airup';
+				case 'airUp':
+					return 'airright';
+			}
 		}
-	};
+	},
 
-	render() {
-		const options = ['airDown', 'airRight', 'airUp'];
-		const {currentValue} = this.state;
-		const {setValue} = this;
-		const {className} = this.props;
+	render: ({componentIcon,  onChange, value, ...rest}) => {
+		const values = ['airDown', 'airRight', 'airUp'];
 
 		return (
-			<div className={classnames(className, css.windDirectionControl)}>
+			<div {...rest}>
 				<ArcPicker
 					endAngle={210}
-					options={options}
-					setValue={setValue}
-					value={currentValue}
+					onChange={onChange}
+					value={value}
+					values={values}
 				>
-					<Icon className={css.airDirectionIcon} css={css}>{this.componentIcon()}</Icon>
+					<Icon className={css.airDirectionIcon} css={css}>{componentIcon}</Icon>
 				</ArcPicker>
 			</div>
 		);
 	}
-};
+});
 
 /**
- * Applies Agate specific behaviors to [WindDirectionControl]{@link agate/WindDirectionControl.WindDirectionControlBase} components.
+ * Applies Agate specific behaviors to [WindDirectionControl]{@link agate/WindDirectionControl.WindDirectionControl} components.
  *
  * @hoc
  * @memberof agate/WindDirectionControl
+ * @mixes ui/Changeable.Changeable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
-const WindDirectionControl = Skinnable({variantsProp: 'skinVariants'})(WindDirectionControlBase);
+const WindDirectionControlDecorator = compose(
+	Changeable,
+	Skinnable
+);
+
+const WindDirectionControl = WindDirectionControlDecorator(WindDirectionControlBase);
 
 export default WindDirectionControl;
 export {
 	WindDirectionControl,
-	WindDirectionControlBase
+	WindDirectionControlBase,
+	WindDirectionControlDecorator
 };

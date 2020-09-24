@@ -91,9 +91,9 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			const domNode = ReactDOM.findDOMNode(this);
 
 			if (!domNode || !domNode.contains(event.target)) {
-				this.setState({
-					currentValue: 0
-				}, () => {
+				this.setState((prevState) => ({
+					currentValue: typeof prevState.currentValue === 'number' ? 0 : ''
+				}), () => {
 					this.props.onChange({value: this.state.currentValue});
 				});
 			}
