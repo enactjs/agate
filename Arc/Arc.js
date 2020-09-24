@@ -2,7 +2,7 @@
  * Agate styled arc components and behaviors.
  *
  * @example
- * <Arc color="blue" endAngle={200} startAngle={0}" radius={100} />
+ * <Arc color="blue" endAngle={200} startAngle={0} radius={100} />
  *
  * @module agate/Arc
  * @exports Arc
@@ -10,6 +10,7 @@
  * @exports ArcDecorator
  */
 
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import Pure from '@enact/ui/internal/Pure';
 import ri from '@enact/ui/resolution';
@@ -46,19 +47,19 @@ const ArcBase = kind({
 		color: PropTypes.string,
 
 		/**
-		 * A reference to the current svg.
+		 * Function that generates a reference to the arc svg.
 		 *
-		 * @type {Function}
+		 * @type {Object|Function}
 		 * @public
 		 */
-		componentRef: PropTypes.object,
+		componentRef: EnactPropTypes.ref,
 
 		/**
 		 * The end angle(in degrees) of the arc.
 		 *
 		 * The value should be between 0 and 360 and should be greater than startAngle.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 310
 		 * @public
 		 */
@@ -76,7 +77,7 @@ const ArcBase = kind({
 		/**
 		 * The radius of the arc.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 100
 		 * @public
 		 */
@@ -87,7 +88,7 @@ const ArcBase = kind({
 		 *
 		 * The value should be between 0 and 360.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 50
 		 * @public
 		 */
@@ -96,7 +97,7 @@ const ArcBase = kind({
 		/**
 		 * The stroke width of the arc.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 9
 		 * @public
 		 */

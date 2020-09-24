@@ -10,6 +10,7 @@
  * @exports ArcSliderDecorator
  */
 
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import Pure from '@enact/ui/internal/Pure';
 import ri from '@enact/ui/resolution';
@@ -54,17 +55,17 @@ const ArcSliderBase = kind({
 		/**
 		 * Function that generates a reference to the arc svg.
 		 *
-		 * @type {Function}
+		 * @type {Object|Function}
 		 * @public
 		 */
-		componentRef: PropTypes.object,
+		componentRef: EnactPropTypes.ref,
 
 		/**
 		 * The end angle(in degrees) of the arc slider.
 		 *
 		 * The value should be between 0 and 360 and should be greater than startAngle.
 		 *
-		 * @type {String}
+		 * @type {Number}
 		 * @default 250
 		 * @public
 		 */
@@ -73,7 +74,7 @@ const ArcSliderBase = kind({
 		/**
 		 * The color of the foreground arc.
 		 *
-		 * @type {number}
+		 * @type {String}
 		 * @default #0000ff
 		 * @public
 		 */
@@ -82,7 +83,7 @@ const ArcSliderBase = kind({
 		/**
 		 * The maximum value of the slider and should be greater than min.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 100
 		 * @public
 		 */
@@ -104,23 +105,14 @@ const ArcSliderBase = kind({
 		 * @default 150
 		 * @public
 		 */
-		radius: PropTypes.oneOf([120, 150]),
-
-		/**
-		 * Called when the value is set.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		setValue: PropTypes.func,
+		radius: PropTypes.number,
 
 		/**
 		 * The start angle(in degrees) of the arc slider.
 		 *
 		 * The value should be between 0 and 360.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 50
 		 * @public
 		 */
@@ -138,7 +130,7 @@ const ArcSliderBase = kind({
 		/**
 		 * The stroke width of the arc slider.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 6
 		 * @public
 		 */
@@ -216,10 +208,11 @@ const ArcSliderBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [ArcSlider]{@link agate/ArcSlider.ArcSliderBase} components.
+ * Applies Agate specific behaviors to [ArcSlider]{@link agate/ArcSlider.ArcSlider} components.
  *
  * @hoc
  * @memberof agate/ArcSlider
+ * @mixes ui/Touchable.Touchable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
