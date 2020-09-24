@@ -1,16 +1,29 @@
+/**
+ * Agate styled arc picker components and behaviors.
+ *
+ * @example
+ * <ArcPicker endAngle={200} selectionType="single" startAngle={0} />
+ *
+ * @module agate/ArcPicker
+ * @exports ArcPicker
+ * @exports ArcPickerBase
+ * @exports ArcPickerDecorator
+ */
+
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
 import Arc from '../Arc';
-import ArcPickerBehaviorDecorator from './ArcPickerBehaviourDecorator';
 import Skinnable from '../Skinnable';
+
+import ArcPickerBehaviorDecorator from './ArcPickerBehaviourDecorator';
 
 import css from './ArcPicker.module.less';
 
 /**
- * An Agate component for displaying fan speed {@link agate/ArcPicker}.
+ * An Agate component for displaying an arc picker {@link agate/ArcPicker}.
  *
  * @class ArcPickerBase
  * @memberof agate/ArcPicker
@@ -104,7 +117,7 @@ const ArcPickerBase = kind({
 	},
 
 	computed: {
-		renderArcSegments: (props) => {
+		arcSegments: (props) => {
 			const {endAngle, onClick, options, selectionType, skinVariants, startAngle, value} = props;
 
 			return (
@@ -112,25 +125,19 @@ const ArcPickerBase = kind({
 				// Calc `arcStartAngle`, `arcEndAngle` based on `startAngle` and `endAngle` for every <Arc />
 					const pauseAngle = 2;
 					const arcSegments = options.length;
-					let arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * index;
-					let arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * (index + 1) - pauseAngle;
+					const arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * index;
+					const arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * (index + 1) - pauseAngle;
 
-					const opacity = () => {
-						if (selectionType === 'cumulative') {
-							return value >= option ? 1 : 0.4;
-						} else {
-							return value === option ? 1 : 0.4;
-						}
-					};
+					const opacity = (selectionType === 'cumulative' && value > option || value === option) ? 1 : 0.4;
 
 					return (
 						<Arc
-							className={css.fanSpeedArc}
+							className={css.arc}
 							color={skinVariants.night ? '#fff' : '#000'}
 							endAngle={arcEndAngle}
 							key={index}
 							onClick={onClick(option)}
-							opacity={opacity()}
+							opacity={opacity}
 							radius={150}
 							startAngle={arcStartAngle}
 							strokeWidth={5}
@@ -140,7 +147,7 @@ const ArcPickerBase = kind({
 		}
 	},
 
-	render: ({children, renderArcSegments, ...rest}) => {
+	render: ({arcSegments, children, ...rest}) => {
 		delete rest.endAngle;
 		delete rest.options;
 		delete rest.selectionType;
@@ -151,7 +158,7 @@ const ArcPickerBase = kind({
 
 		return (
 			<div className={css.arcPicker} {...rest}>
-				{renderArcSegments}
+				{arcSegments}
 				<div className={css.valueDisplay}>
 					{children}
 				</div>

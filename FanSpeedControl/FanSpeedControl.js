@@ -1,3 +1,14 @@
+/**
+ * Agate styled fan speed control components and behaviors.
+ *
+ * @example
+ * <FanSpeedControl icon="fan" max={10} />
+ *
+ * @module agate/FanSpeedControl
+ * @exports FanSpeedControl
+ * @exports FanSpeedControlBase
+ */
+
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
