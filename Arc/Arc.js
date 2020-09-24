@@ -2,7 +2,7 @@
  * Agate styled arc components and behaviors.
  *
  * @example
- * <Arc color="blue" endAngle={200} startAngle={0}" radius={100} />
+ * <Arc color="blue" endAngle={200} startAngle={0} radius={100} />
  *
  * @module agate/Arc
  * @exports Arc
