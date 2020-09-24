@@ -9,6 +9,11 @@ import ArcPicker, {ArcPickerBase} from '@enact/agate/ArcPicker';
 ArcPicker.displayName = 'ArcPicker';
 const Config = mergeComponentMetadata('FanSpeedControl', ArcPicker, ArcPickerBase);
 
+// Set up some defaults for colors
+const prop = {
+	colors: ['#444444', '#eeeeee', '#ffffff', '#986aad', '#0000ff']
+};
+
 storiesOf('Agate', module)
 	.add(
 		'ArcPicker',
@@ -18,7 +23,9 @@ storiesOf('Agate', module)
 
 			return (
 				<ArcPicker
+					backgroundColor={select('backgroundColor', prop.colors, Config)}
 					endAngle={number('endAngle', Config, {range: true, min: 0, max: 360})}
+					foregroundColor={select('foregroundColor', prop.colors, Config)}
 					options={items}
 					selectionType={select('selectionType', ['cumulative', 'single'], Config, 'cumulative')}
 					setValue={action('setValue')}

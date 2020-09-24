@@ -1,6 +1,16 @@
+/**
+ * Agate styled fan speed control components and behaviors.
+ *
+ * @example
+ * <FanSpeedControl icon="fan" max={10} />
+ *
+ * @module agate/FanSpeedControl
+ * @exports FanSpeedControl
+ * @exports FanSpeedControlBase
+ */
+
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import compose from 'ramda/src/compose';
 import React from 'react';
 
 import ArcPicker from '../ArcPicker';
@@ -36,15 +46,15 @@ const FanSpeedControlBase = class extends React.Component {
 		 * @param {Object} event
 		 * @public
 		 */
-		onClick: PropTypes.func,
+		max: PropTypes.number,
 
 		/**
-		 * The size of ArcPicker. The number of arc segments to be rendered.
+		 * The maximum size of ArcPicker. The number of arc segments to be rendered.
 		 *
 		 * @type {Number}
 		 * @public
 		 */
-		size: PropTypes.number,
+		onClick: PropTypes.func,
 
 		/**
 		 * Current skinVariant.
@@ -75,21 +85,28 @@ const FanSpeedControlBase = class extends React.Component {
 		this.setState({
 			currentValue: value
 		});
-	}
+	};
 
 	render () {
 		const {setValue} = this;
-		const {className, icon, size} = this.props;
+		const {className, icon, max} = this.props;
 		const {currentValue} = this.state;
 		const options = [];
 
-		for (let i = 1; i <= size; i++) {
+		for (let i = 1; i <= max; i++) {
 			options.push(i);
 		}
 
 		return (
-			<div className={classnames(className, css.fanSpeedControl)} >
-				<ArcPicker options={options} selectionType="cumulative" setValue={setValue} value={currentValue}>
+			<div className={classnames(className, css.fanSpeedControl)}>
+				<ArcPicker
+					endAngle={312}
+					max={max}
+					options={options}
+					selectionType="cumulative"
+					setValue={setValue}
+					value={currentValue}
+				>
 					<Icon className={css.fanIcon} css={css}>{icon}</Icon>
 					<span className={css.fanValue}>{currentValue}</span>
 				</ArcPicker>
@@ -98,11 +115,7 @@ const FanSpeedControlBase = class extends React.Component {
 	}
 };
 
-const FanSpeedControlDecorator = compose(
-	Skinnable({variantsProp: 'skinVariants'})
-);
-
-const FanSpeedControl = FanSpeedControlDecorator(FanSpeedControlBase);
+const FanSpeedControl = Skinnable({variantsProp: 'skinVariants'})(FanSpeedControlBase);
 
 export default FanSpeedControl;
 export {
