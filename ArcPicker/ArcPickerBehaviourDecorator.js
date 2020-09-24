@@ -2,8 +2,7 @@ import hoc from '@enact/core/hoc';
 import {validateRangeOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
 import React from 'react';
-import ReactDOM from "react-dom";
-import {on} from "../../enact/packages/core/dispatcher";
+import ReactDOM from 'react-dom';
 
 const validateRange = validateRangeOnce((props) => props, {'component': 'ArcPickerBehaviorDecorator'});
 
@@ -79,15 +78,16 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			};
 		}
 
-		componentDidMount() {
+		componentDidMount () {
 			document.addEventListener('click', this.handleClickOutside, true);
 		}
 
-		componentWillUnmount() {
+		componentWillUnmount () {
 			document.removeEventListener('click', this.handleClickOutside, true);
 		}
 
 		handleClickOutside = event => {
+			// eslint-disable-next-line react/no-find-dom-node
 			const domNode = ReactDOM.findDOMNode(this);
 
 			if (!domNode || !domNode.contains(event.target)) {
@@ -109,7 +109,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 
 		render () {
 			const {handleClick, props, state} = this;
-			const {max, min, onChange, values} = props;
+			const {max, min, onChange} = props;
 			const {currentValue} = state;
 
 			if (__DEV__) {
