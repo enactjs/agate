@@ -3,7 +3,6 @@ import hoc from '@enact/core/hoc';
 import {validateRangeOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 const validateRange = validateRangeOnce((props) => props, {'component': 'ArcPickerBehaviorDecorator'});
 
