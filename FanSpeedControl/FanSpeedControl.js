@@ -92,10 +92,10 @@ const FanSpeedControlBase = kind({
 	},
 
 	render ({icon, max, min, onChange, value, ...rest}) {
-		const values = [];
+		const children = [];
 
 		for (let i = min; i <= max; i++) {
-			values.push(i);
+			children.push(i);
 		}
 
 		return (
@@ -106,12 +106,14 @@ const FanSpeedControlBase = kind({
 					min={min}
 					onChange={onChange}
 					selectionType="cumulative"
+					slotCenter={
+						<>
+							<Icon className={css.fanIcon} css={css}>{icon}</Icon>
+							<span className={css.fanValue}>{value}</span>
+						</>
+					}
 					value={value}
-					values={values}
-				>
-					<Icon className={css.fanIcon} css={css}>{icon}</Icon>
-					<span className={css.fanValue}>{value}</span>
-				</ArcPicker>
+				>{children}</ArcPicker>
 			</div>
 		);
 	}

@@ -11,6 +11,8 @@
  */
 
 import kind from '@enact/core/kind';
+import Changeable from '@enact/ui/Changeable';
+import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -18,7 +20,7 @@ import React from 'react';
 import Arc from '../Arc';
 import Skinnable from '../Skinnable';
 
-import ArcPickerBehaviorDecorator from './ArcPickerBehaviourDecorator';
+import ArcPickerBehaviorDecorator from './ArcPickerBehaviorDecorator';
 
 import css from './ArcPicker.module.less';
 
@@ -37,10 +39,10 @@ const ArcPickerBase = kind({
 		/**
 		 * The value options of ArcPicker.
 		 *
-		 * @type {Array}
+		 * @type {Node}
 		 * @public
 		 */
-		values: PropTypes.array.isRequired,
+		children: PropTypes.node.isRequired,
 
 		/**
 		 * The color of the unselected arcs.
@@ -81,6 +83,15 @@ const ArcPickerBase = kind({
 		onClick: PropTypes.func,
 
 		/**
+		 * The radius of the arc circle.
+		 *
+		 * @type {Number}
+		 * @default 150
+		 * @public
+		 */
+		radius: PropTypes.number,
+
+		/**
 		 * The selection type of ArcPicker.
 		 *
 		 * @type {String}
@@ -89,12 +100,12 @@ const ArcPickerBase = kind({
 		selectionType: PropTypes.oneOf(['single', 'cumulative']),
 
 		/**
-		 * Called to set the value of ArcPicker.
+		 * Nodes to be inserted in the center of the ArcPicker.
 		 *
-		 * @type {Function}
+		 * @type {Node}
 		 * @public
 		 */
-		setValue: PropTypes.func,
+		slotCenter: PropTypes.node,
 
 		/**
 		 * The start angle(in degrees) of the arc.
@@ -106,6 +117,15 @@ const ArcPickerBase = kind({
 		 * @public
 		 */
 		startAngle: PropTypes.number,
+
+		/**
+		 * The stroke width of the arc picker.
+		 *
+		 * @type {Number}
+		 * @default 6
+		 * @public
+		 */
+		strokeWidth: PropTypes.number,
 
 		/**
 		 * Value of ArcPicker.
@@ -120,7 +140,9 @@ const ArcPickerBase = kind({
 		backgroundColor: '#eeeeee',
 		endAngle: 310,
 		foregroundColor: '#444444',
-		startAngle: 50
+		radius: 150,
+		startAngle: 50,
+		strokeWidth: 6
 	},
 
 	styles: {
@@ -130,13 +152,13 @@ const ArcPickerBase = kind({
 
 	computed: {
 		arcSegments: (props) => {
-			const {backgroundColor, endAngle, foregroundColor, onClick, values, selectionType, startAngle, value} = props;
+			const {backgroundColor, children, endAngle, foregroundColor, onClick, radius, selectionType, startAngle, strokeWidth, value} = props;
 
 			return (
-				values.map((option, index) => {
+				children.map((option, index) => {
 					// Calc `arcStartAngle`, `arcEndAngle` based on `startAngle` and `endAngle` for every <Arc />
 					const pauseAngle = 2;
-					const arcSegments = values.length;
+					const arcSegments = children.length;
 					const arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * index;
 					const arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * (index + 1) - pauseAngle;
 
@@ -149,30 +171,34 @@ const ArcPickerBase = kind({
 							endAngle={arcEndAngle}
 							key={index}
 							onClick={onClick(option)}
-							radius={150}
+							radius={radius}
 							startAngle={arcStartAngle}
-							strokeWidth={5}
+							strokeWidth={strokeWidth}
 						/>
 					);
 				}));
+		},
+		style: ({radius, style}) => {
+			const size = ri.scaleToRem(radius * 2);
+			return {...style, height: size, width: size};
 		}
 	},
 
-	render: ({arcSegments, children, ...rest}) => {
+	render: ({arcSegments, slotCenter, ...rest}) => {
 		delete rest.backgroundColor;
+		delete rest.children;
 		delete rest.endAngle;
 		delete rest.foregroundColor;
-		delete rest.values;
+		delete rest.onClick;
 		delete rest.selectionType;
-		delete rest.setValue;
 		delete rest.startAngle;
 		delete rest.value;
 
 		return (
-			<div className={css.arcPicker} {...rest}>
+			<div {...rest} className={css.arcPicker}>
 				{arcSegments}
 				<div className={css.valueDisplay}>
-					{children}
+					{slotCenter}
 				</div>
 			</div>
 		);
@@ -189,6 +215,7 @@ const ArcPickerBase = kind({
  * @public
  */
 const ArcPickerDecorator = compose(
+	Changeable,
 	ArcPickerBehaviorDecorator,
 	Skinnable
 );
