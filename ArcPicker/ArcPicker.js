@@ -11,6 +11,7 @@
  */
 
 import kind from '@enact/core/kind';
+import Changeable from '@enact/ui/Changeable';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
@@ -219,6 +220,7 @@ const ArcPickerBase = kind({
  * @public
  */
 const ArcPickerDecorator = compose(
+	Changeable,
 	ArcPickerBehaviorDecorator,
 	Skinnable
 );

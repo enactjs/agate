@@ -1,4 +1,5 @@
-import {forward} from '@enact/core/handle';
+import kind from '@enact/core/kind';
+import {forward, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import {validateRangeOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
@@ -15,10 +16,10 @@ const validateRange = validateRangeOnce((props) => props, {'component': 'ArcPick
  * @public
  */
 const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
-	return class extends React.Component {
-		static displayName = 'ArcPickerBehaviorDecorator';
+	return kind({
+		name: 'ArcPickerBehaviorDecorator',
 
-		static propTypes = /** @lends agate/ArcPicker.ArcPickerBehaviorDecorator.prototype */ {
+		propTypes: {
 			/**
 			 * The value options of ArcPicker.
 			 *
@@ -61,61 +62,36 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			onClick: PropTypes.func,
 
 			/**
-			 * Called to set the value of ArcPicker.
-			 *
-			 * @type {Function}
-			 * @public
-			 */
-			setValue: PropTypes.func,
-
-			/**
 			 * Value of ArcPicker.
 			 *
 			 * @type {Number|String}
 			 * @public
 			 */
 			value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-		};
+		},
 
-		constructor (props) {
-			super(props);
+		computed: {
+			onClick: ({onChange}) => (value) => (ev) => {
+				onChange({value});
+				ev.stopPropagation();
+			},
+			value: ({value, values}) => ((value || value === 0) ? value : values[0])
+		},
 
-			this.state = {
-				currentValue: props.value || props.values[0]
-			};
-		}
-
-		handleClick = (value) => (ev) => {
-			this.setState({
-				currentValue: value
-			}, () => {
-				forward('onChange', {value: this.state.currentValue}, this.props);
-			});
-
-			ev.stopPropagation();
-		};
-
-		render () {
-			const {handleClick, props, state} = this;
-			const {max, min, onChange} = props;
-			const {currentValue} = state;
+		render ({max, min, value, ...rest}) {
+			delete rest.rest;
 
 			if (__DEV__) {
-				const valueProps = {value: currentValue, max, min};
+				const valueProps = {value, max, min};
 
 				validateRange(valueProps);
 			}
 
 			return (
-				<Wrapped
-					{...props}
-					onChange={onChange}
-					onClick={handleClick}
-					value={currentValue}
-				/>
+				<Wrapped {...rest} value={value} />
 			);
 		}
-	};
+	});
 });
 
 export default ArcPickerBehaviorDecorator;
