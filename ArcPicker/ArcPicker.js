@@ -184,8 +184,9 @@ const ArcPickerBase = kind({
 		}
 	},
 
-	render: ({arcSegments, children, slotCenter, ...rest}) => {
+	render: ({arcSegments, slotCenter, ...rest}) => {
 		delete rest.backgroundColor;
+		delete rest.children;
 		delete rest.endAngle;
 		delete rest.foregroundColor;
 		delete rest.onClick;
