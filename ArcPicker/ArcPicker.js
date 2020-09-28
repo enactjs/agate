@@ -189,18 +189,17 @@ const ArcPickerBase = kind({
 		}
 	},
 
-	render: ({arcSegments, children, onClick, ...rest}) => {
+	render: ({arcSegments, children, onClick, values, ...rest}) => {
 		delete rest.backgroundColor;
 		delete rest.endAngle;
 		delete rest.foregroundColor;
-		delete rest.values;
 		delete rest.selectionType;
 		delete rest.setValue;
 		delete rest.startAngle;
 		delete rest.value;
 
 		return (
-			<div {...rest} className={css.arcPicker} onClick={onClick(0)}>
+			<div {...rest} className={css.arcPicker} onClick={onClick(values[0])}>
 				{arcSegments}
 				<div className={css.valueDisplay}>
 					{children}
