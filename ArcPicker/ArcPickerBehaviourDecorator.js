@@ -1,5 +1,5 @@
 import kind from '@enact/core/kind';
-import {forward, handle} from '@enact/core/handle';
+import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import {validateRangeOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
@@ -71,15 +71,15 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 		},
 
 		computed: {
-			onClick: ({onChange}) => (value) => (ev) => {
-				onChange({value});
+			onClick: (props) => (value) => (ev) => {
+				forward('onChange', {value}, props);
 				ev.stopPropagation();
 			},
 			value: ({value, values}) => ((value || value === 0) ? value : values[0])
 		},
 
 		render ({max, min, value, ...rest}) {
-			delete rest.rest;
+			delete rest.onChange;
 
 			if (__DEV__) {
 				const valueProps = {value, max, min};
