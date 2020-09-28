@@ -39,10 +39,10 @@ const ArcPickerBase = kind({
 		/**
 		 * The value options of ArcPicker.
 		 *
-		 * @type {Array}
+		 * @type {Node}
 		 * @public
 		 */
-		children: PropTypes.array.isRequired,
+		children: PropTypes.node.isRequired,
 
 		/**
 		 * The color of the unselected arcs.
@@ -100,7 +100,7 @@ const ArcPickerBase = kind({
 		selectionType: PropTypes.oneOf(['single', 'cumulative']),
 
 		/**
-		 * Nodes to be inserted in the center of the Picker.
+		 * Nodes to be inserted in the center of the ArcPicker.
 		 *
 		 * @type {Node}
 		 * @public
@@ -119,7 +119,7 @@ const ArcPickerBase = kind({
 		startAngle: PropTypes.number,
 
 		/**
-		 * The stroke width of the arc slider.
+		 * The stroke width of the arc picker.
 		 *
 		 * @type {Number}
 		 * @default 6

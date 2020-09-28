@@ -23,10 +23,10 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			/**
 			 * The value options of ArcPicker.
 			 *
-			 * @type {Array}
+			 * @type {Node}
 			 * @public
 			 */
-			children: PropTypes.array.isRequired,
+			children: PropTypes.node.isRequired,
 
 			/**
 			 * The maximum value of ArcPicker.
