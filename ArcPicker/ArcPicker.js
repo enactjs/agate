@@ -42,7 +42,7 @@ const ArcPickerBase = kind({
 		 * @type {Array}
 		 * @public
 		 */
-		values: PropTypes.array.isRequired,
+		children: PropTypes.array.isRequired,
 
 		/**
 		 * The color of the unselected arcs.
@@ -100,12 +100,12 @@ const ArcPickerBase = kind({
 		selectionType: PropTypes.oneOf(['single', 'cumulative']),
 
 		/**
-		 * Called to set the value of ArcPicker.
+		 * Nodes to be inserted in the center of the Picker.
 		 *
-		 * @type {Function}
+		 * @type {Node}
 		 * @public
 		 */
-		setValue: PropTypes.func,
+		slotCenter: PropTypes.node,
 
 		/**
 		 * The start angle(in degrees) of the arc.
@@ -152,10 +152,10 @@ const ArcPickerBase = kind({
 
 	computed: {
 		arcSegments: (props) => {
-			const {backgroundColor, endAngle, foregroundColor, onClick, radius, selectionType, startAngle, strokeWidth, value, values} = props;
+			const {backgroundColor, children, endAngle, foregroundColor, onClick, radius, selectionType, startAngle, strokeWidth, value} = props;
 
 			return (
-				values.map((option, index) => {
+				children.map((option, index) => {
 					if (index === 0) {
 						// If index is equal to 0, then no Arc is selected.
 						return null;
@@ -163,7 +163,7 @@ const ArcPickerBase = kind({
 
 					// Calc `arcStartAngle`, `arcEndAngle` based on `startAngle` and `endAngle` for every <Arc />
 					const pauseAngle = 2;
-					const arcSegments = values.length - 1;
+					const arcSegments = children.length - 1;
 					const arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * (index - 1);
 					const arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * index - pauseAngle;
 
@@ -179,7 +179,6 @@ const ArcPickerBase = kind({
 							radius={radius}
 							startAngle={arcStartAngle}
 							strokeWidth={strokeWidth}
-
 						/>
 					);
 				}));
@@ -190,20 +189,19 @@ const ArcPickerBase = kind({
 		}
 	},
 
-	render: ({arcSegments, children, onClick, values, ...rest}) => {
+	render: ({arcSegments, children, onClick, slotCenter, ...rest}) => {
 		delete rest.backgroundColor;
 		delete rest.endAngle;
 		delete rest.foregroundColor;
 		delete rest.selectionType;
-		delete rest.setValue;
 		delete rest.startAngle;
 		delete rest.value;
 
 		return (
-			<div {...rest} className={css.arcPicker} onClick={onClick(values[0])}>
+			<div {...rest} className={css.arcPicker} onClick={onClick(children[0])}>
 				{arcSegments}
 				<div className={css.valueDisplay}>
-					{children}
+					{slotCenter}
 				</div>
 			</div>
 		);
