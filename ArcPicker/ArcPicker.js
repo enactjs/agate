@@ -156,16 +156,11 @@ const ArcPickerBase = kind({
 
 			return (
 				children.map((option, index) => {
-					if (index === 0) {
-						// If index is equal to 0, then no Arc is selected.
-						return null;
-					}
-
 					// Calc `arcStartAngle`, `arcEndAngle` based on `startAngle` and `endAngle` for every <Arc />
 					const pauseAngle = 2;
-					const arcSegments = children.length - 1;
-					const arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * (index - 1);
-					const arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * index - pauseAngle;
+					const arcSegments = children.length;
+					const arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * index;
+					const arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * (index + 1) - pauseAngle;
 
 					const color = (selectionType === 'cumulative' && value > option || value === option) ? foregroundColor : backgroundColor;
 
@@ -189,16 +184,17 @@ const ArcPickerBase = kind({
 		}
 	},
 
-	render: ({arcSegments, children, onClick, slotCenter, ...rest}) => {
+	render: ({arcSegments, children, slotCenter, ...rest}) => {
 		delete rest.backgroundColor;
 		delete rest.endAngle;
 		delete rest.foregroundColor;
+		delete rest.onClick;
 		delete rest.selectionType;
 		delete rest.startAngle;
 		delete rest.value;
 
 		return (
-			<div {...rest} className={css.arcPicker} onClick={onClick(children[0])}>
+			<div {...rest} className={css.arcPicker}>
 				{arcSegments}
 				<div className={css.valueDisplay}>
 					{slotCenter}
