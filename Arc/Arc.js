@@ -2,7 +2,7 @@
  * Agate styled arc components and behaviors.
  *
  * @example
- * <Arc color="blue" endAngle={200} startAngle={0}" radius={100} />
+ * <Arc color="blue" endAngle={200} startAngle={0} radius={100} />
  *
  * @module agate/Arc
  * @exports Arc
@@ -10,6 +10,7 @@
  * @exports ArcDecorator
  */
 
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import Pure from '@enact/ui/internal/Pure';
 import ri from '@enact/ui/resolution';
@@ -46,11 +47,19 @@ const ArcBase = kind({
 		color: PropTypes.string,
 
 		/**
+		 * Function that generates a reference to the arc svg.
+		 *
+		 * @type {Object|Function}
+		 * @public
+		 */
+		componentRef: EnactPropTypes.ref,
+
+		/**
 		 * The end angle(in degrees) of the arc.
 		 *
 		 * The value should be between 0 and 360 and should be greater than startAngle.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 310
 		 * @public
 		 */
@@ -68,7 +77,7 @@ const ArcBase = kind({
 		/**
 		 * The radius of the arc.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 100
 		 * @public
 		 */
@@ -79,7 +88,7 @@ const ArcBase = kind({
 		 *
 		 * The value should be between 0 and 360.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 50
 		 * @public
 		 */
@@ -88,7 +97,7 @@ const ArcBase = kind({
 		/**
 		 * The stroke width of the arc.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 9
 		 * @public
 		 */
@@ -103,18 +112,22 @@ const ArcBase = kind({
 		strokeWidth: 9
 	},
 
+	styles: {
+		className: 'arc'
+	},
+
 	computed: {
 		height: ({radius}) => ri.scaleToRem(radius * 2),
 		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth),
 		width: ({radius}) => ri.scaleToRem(radius * 2)
 	},
 
-	render: ({color, endAngle, onClick, radius, size, startAngle, strokeWidth, ...rest}) => {
+	render: ({children, color, componentRef, endAngle, onClick, radius, size, startAngle, strokeWidth, ...rest}) => {
 		const halfStrokeWidth = strokeWidth / 2;
 		const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${radius * 2}  ${radius * 2}`;
 
 		return (
-			<svg {...rest} viewBox={viewBox} pointerEvents="none">
+			<svg pointerEvents="none" {...rest} viewBox={viewBox} ref={componentRef}>
 				<path
 					d={arcPath(startAngle, endAngle, radius - halfStrokeWidth, size)}
 					fill="none"
@@ -131,6 +144,7 @@ const ArcBase = kind({
 					stroke="transparent"
 					strokeWidth={radius}
 				/>
+				{children}
 			</svg>
 		);
 	}

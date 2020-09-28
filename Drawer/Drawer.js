@@ -1,9 +1,6 @@
 /**
  * An Agate-themed drawer component.
  *
- * @example
- * <Drawer header="Surprise">Hello Enact!</Drawer>
- *
  * @module agate/Drawer
  * @exports Drawer
  * @exports DrawerBase
@@ -106,6 +103,13 @@ const DrawerDecorator = compose(
 
 /**
  * A ready-to-use drawer component.
+ *
+ * Usage:
+ * ```
+ * <Drawer open>
+ * 	Hello Enact!
+ * </Drawer>
+ * ```
  *
  * @class Drawer
  * @memberof agate/Drawer

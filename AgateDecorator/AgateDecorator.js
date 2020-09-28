@@ -1,9 +1,9 @@
 /**
- * Applies Agate specific styling and behaviors.
+ * {@link agate/AgateDecorator} will be removed in 2.0.0. Use {@link agate/ThemeDecorator} instead.
  *
  * @module agate/AgateDecorator
  * @exports AgateDecorator
- * @deprecated Will be removed in 2.0.0. Use {@link agate/ThemeDecorator} instead.
+ * @deprecated
  */
 
 import deprecate from '@enact/core/internal/deprecate';
