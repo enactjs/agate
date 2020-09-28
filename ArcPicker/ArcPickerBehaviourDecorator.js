@@ -1,3 +1,4 @@
+import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import {validateRangeOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
@@ -85,33 +86,14 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			};
 		}
 
-		componentDidMount () {
-			document.addEventListener('click', this.handleClickOutside, true);
-		}
-
-		componentWillUnmount () {
-			document.removeEventListener('click', this.handleClickOutside, true);
-		}
-
-		handleClickOutside = event => {
-			// eslint-disable-next-line react/no-find-dom-node
-			const domNode = ReactDOM.findDOMNode(this);
-
-			if (!domNode || !domNode.contains(event.target)) {
-				this.setState((prevState) => ({
-					currentValue: typeof prevState.currentValue === 'number' ? 0 : ''
-				}), () => {
-					this.props.onChange({value: this.state.currentValue});
-				});
-			}
-		};
-
-		handleClick = (value) => () => {
+		handleClick = (value) => (ev) => {
 			this.setState({
 				currentValue: value
 			}, () => {
-				this.props.onChange({value: this.state.currentValue});
+				forward('onChange', {value: this.state.currentValue}, this.props);
 			});
+
+			ev.stopPropagation();
 		};
 
 		render () {

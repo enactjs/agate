@@ -1,6 +1,7 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {number, select} from '@enact/storybook-utils/addons/knobs';
+import ri from '@enact/ui/resolution';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -29,7 +30,7 @@ storiesOf('Agate', module)
 					onChange={action('onChange')}
 					selectionType={select('selectionType', ['cumulative', 'single'], Config, 'cumulative')}
 					startAngle={number('startAngle', Config, {range: true, min: 0, max: 360})}
-					style={{marginTop: '40px'}}
+					style={{marginTop: ri.scaleToRem(40)}}
 					values={items}
 				/>
 			);

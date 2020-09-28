@@ -11,6 +11,7 @@
  */
 
 import kind from '@enact/core/kind';
+import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -81,6 +82,15 @@ const ArcPickerBase = kind({
 		onClick: PropTypes.func,
 
 		/**
+		 * The radius of the arc circle.
+		 *
+		 * @type {Number}
+		 * @default 150
+		 * @public
+		 */
+		radius: PropTypes.number,
+
+		/**
 		 * The selection type of ArcPicker.
 		 *
 		 * @type {String}
@@ -108,6 +118,15 @@ const ArcPickerBase = kind({
 		startAngle: PropTypes.number,
 
 		/**
+		 * The stroke width of the arc slider.
+		 *
+		 * @type {Number}
+		 * @default 6
+		 * @public
+		 */
+		strokeWidth: PropTypes.number,
+
+		/**
 		 * Value of ArcPicker.
 		 *
 		 * @type {Number|String}
@@ -120,7 +139,9 @@ const ArcPickerBase = kind({
 		backgroundColor: '#eeeeee',
 		endAngle: 310,
 		foregroundColor: '#444444',
-		startAngle: 50
+		radius: 150,
+		startAngle: 50,
+		strokeWidth: 6
 	},
 
 	styles: {
@@ -130,15 +151,20 @@ const ArcPickerBase = kind({
 
 	computed: {
 		arcSegments: (props) => {
-			const {backgroundColor, endAngle, foregroundColor, onClick, values, selectionType, startAngle, value} = props;
+			const {backgroundColor, endAngle, foregroundColor, onClick, radius, selectionType, startAngle, strokeWidth, value, values} = props;
 
 			return (
 				values.map((option, index) => {
+					if (index === 0) {
+						// If index is equal to 0, then no Arc is selected.
+						return null;
+					}
+
 					// Calc `arcStartAngle`, `arcEndAngle` based on `startAngle` and `endAngle` for every <Arc />
 					const pauseAngle = 2;
-					const arcSegments = values.length;
-					const arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * index;
-					const arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * (index + 1) - pauseAngle;
+					const arcSegments = values.length - 1;
+					const arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * (index - 1);
+					const arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * index - pauseAngle;
 
 					const color = (selectionType === 'cumulative' && value > option || value === option) ? foregroundColor : backgroundColor;
 
@@ -149,16 +175,21 @@ const ArcPickerBase = kind({
 							endAngle={arcEndAngle}
 							key={index}
 							onClick={onClick(option)}
-							radius={150}
+							radius={radius}
 							startAngle={arcStartAngle}
-							strokeWidth={5}
+							strokeWidth={strokeWidth}
+
 						/>
 					);
 				}));
+		},
+		style: ({radius, style}) => {
+			const size = ri.scaleToRem(radius * 2);
+			return {...style, height: size, width: size};
 		}
 	},
 
-	render: ({arcSegments, children, ...rest}) => {
+	render: ({arcSegments, children, onClick, ...rest}) => {
 		delete rest.backgroundColor;
 		delete rest.endAngle;
 		delete rest.foregroundColor;
@@ -169,7 +200,7 @@ const ArcPickerBase = kind({
 		delete rest.value;
 
 		return (
-			<div className={css.arcPicker} {...rest}>
+			<div {...rest} className={css.arcPicker} onClick={onClick(0)}>
 				{arcSegments}
 				<div className={css.valueDisplay}>
 					{children}

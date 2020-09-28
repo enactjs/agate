@@ -97,11 +97,11 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 		constructor (props) {
 			super(props);
 
-			this.componentRef = React.createRef();
-
 			this.state = {
 				value: props.min
 			};
+
+			this.componentRef = React.createRef();
 		}
 
 		handleDown = ({clientX, clientY}) => {
