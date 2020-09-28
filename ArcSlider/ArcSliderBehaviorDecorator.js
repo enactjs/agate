@@ -13,18 +13,84 @@ const validateAngleRange = validateRangeOnce((props) => props, {'component': 'Ar
 const validateStepValue = validateSteppedOnce((props) => props, {'component': 'ArcSliderBehaviorDecorator'});
 const validateStepMax = validateSteppedOnce((props) => props, {'component': 'ArcSliderBehaviorDecorator', valueName: 'max'});
 
-// Adds agate-specific arcSlider behaviors
+/**
+ * Adds agate-specific arcSlider behaviors.
+ *
+ * @class ArcSliderBehaviorDecorator
+ * @memberof agate/ArcSlider
+ * @hoc
+ * @public
+ */
 const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 	return class extends React.Component {
 		static displayName = 'ArcSliderBehaviorDecorator';
 
-		static propTypes = {
+		static propTypes = /** @lends agate/ArcSlider.ArcSliderBehaviorDecorator.prototype */ {
+			/**
+			 * The end angle(in degrees) of the arc slider.
+			 *
+			 * The value should be between 0 and 360 and should be greater than startAngle.
+			 *
+			 * @type {Number}
+			 * @default 250
+			 * @public
+			 */
 			endAngle: PropTypes.number,
+
+			/**
+			 * The maximum value of the slider and should be greater than min.
+			 *
+			 * @type {Number}
+			 * @default 100
+			 * @public
+			 */
 			max: PropTypes.number,
+
+			/**
+			 * The minimum value of the slider.
+			 *
+			 * @type {Number}
+			 * @default 0
+			 * @public
+			 */
 			min: PropTypes.number,
+
+			/**
+			 * The radius of the arc circle.
+			 *
+			 * @type {Number}
+			 * @default 150
+			 * @public
+			 */
 			radius: PropTypes.number,
+
+			/**
+			 * The start angle(in degrees) of the arc slider.
+			 *
+			 * The value should be between 0 and 360.
+			 *
+			 * @type {Number}
+			 * @default 50
+			 * @public
+			 */
 			startAngle: PropTypes.number,
+
+			/**
+			 * The amount to increment or decrement the value.
+			 *
+			 * @type {Number}
+			 * @default 1
+			 * @public
+			 */
 			step: PropTypes.number,
+
+			/**
+			 * The stroke width of the arc slider.
+			 *
+			 * @type {Number}
+			 * @default 6
+			 * @public
+			 */
 			strokeWidth: PropTypes.number
 		};
 

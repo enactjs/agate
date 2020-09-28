@@ -25,9 +25,9 @@ import css from './FanSpeedControl.module.less';
  * An Agate component for displaying fan speed {@link agate/FanSpeedControl}.
  *
  * @class FanSpeedControlBase
- * @memberof agate/ArcPicker
+ * @memberof agate/FanSpeedControl
  * @ui
- * @private
+ * @public
  */
 const FanSpeedControlBase = kind({
 	name: 'FanSpeedControlBase',

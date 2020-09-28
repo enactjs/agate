@@ -6,7 +6,14 @@ import ReactDOM from 'react-dom';
 
 const validateRange = validateRangeOnce((props) => props, {'component': 'ArcPickerBehaviorDecorator'});
 
-// Adds Agate-specific ArcPicker behaviors
+/**
+ * Adds Agate-specific ArcPicker behaviors.
+ *
+ * @class ArcPickerBehaviorDecorator
+ * @memberof agate/ArcPicker
+ * @hoc
+ * @public
+ */
 const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 	return class extends React.Component {
 		static displayName = 'ArcPickerBehaviorDecorator';

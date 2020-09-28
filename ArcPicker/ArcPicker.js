@@ -28,7 +28,7 @@ import css from './ArcPicker.module.less';
  * @class ArcPickerBase
  * @memberof agate/ArcPicker
  * @ui
- * @private
+ * @public
  */
 const ArcPickerBase = kind({
 	name: 'ArcPickerBase',
@@ -179,15 +179,39 @@ const ArcPickerBase = kind({
 	}
 });
 
+/**
+ * Applies Agate specific behaviors to [ArcPicker]{@link agate/ArcPicker.ArcPicker} components.
+ *
+ * @hoc
+ * @memberof agate/ArcPicker
+ * @mixes agate/ArcPicker.ArcPickerBehaviorDecorator
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const ArcPickerDecorator = compose(
 	ArcPickerBehaviorDecorator,
 	Skinnable
 );
 
+/**
+ * An arc picker component, ready to use in Agate applications.
+ *
+ * Usage:
+ * ```
+ * <ArcPicker backgroundColor="#444444" endAngle={200} foregroundColor="#eeeeee" selectionType="single" startAngle={0} />
+ *
+ * @class ArcPicker
+ * @memberof agate/ArcPicker
+ * @extends agate/ArcPicker.ArcPickerBase
+ * @mixes agate/ArcPicker.ArcPickerDecorator
+ * @ui
+ * @public
+ */
 const ArcPicker = ArcPickerDecorator(ArcPickerBase);
 
 export default ArcPicker;
 export {
 	ArcPicker,
-	ArcPickerBase
+	ArcPickerBase,
+	ArcPickerDecorator
 };
