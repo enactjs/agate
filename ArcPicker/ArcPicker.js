@@ -20,7 +20,7 @@ import React from 'react';
 import Arc from '../Arc';
 import Skinnable from '../Skinnable';
 
-import ArcPickerBehaviorDecorator from './ArcPickerBehaviourDecorator';
+import ArcPickerBehaviorDecorator from './ArcPickerBehaviorDecorator';
 
 import css from './ArcPicker.module.less';
 
