@@ -205,7 +205,8 @@ const TimePickerBase = kind({
 
 	styles: {
 		css,
-		className: 'timePicker'
+		className: 'timePicker',
+		publicClassNames: true
 	},
 
 	computed: {

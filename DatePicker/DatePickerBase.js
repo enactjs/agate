@@ -183,7 +183,8 @@ const DatePickerBase = kind({
 
 	styles: {
 		css,
-		className: 'datePicker'
+		className: 'datePicker',
+		publicClassNames: true
 	},
 
 	render: ({
