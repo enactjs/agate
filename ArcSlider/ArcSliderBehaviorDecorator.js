@@ -22,8 +22,8 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			endAngle: PropTypes.number,
 			max: PropTypes.number,
 			min: PropTypes.number,
+			onChange: PropTypes.func,
 			radius: PropTypes.number,
-			setValue: PropTypes.func,
 			startAngle: PropTypes.number,
 			step: PropTypes.number,
 			strokeWidth: PropTypes.number,
@@ -36,8 +36,6 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			this.componentRef = React.createRef();
 
 			this.state = {
-				max: props.max,
-				min: props.min,
 				value: props.value ? props.value : props.min
 			};
 		}
@@ -88,17 +86,8 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 
 			if (value !== this.state.value) {
 				this.setState(
-					() => ({
-						max: max,
-						min: min,
-						value: value
-					}),
+					() => ({value}),
 					() => {
-						this.props.setValue({
-							max: this.state.max,
-							min: this.state.min,
-							value: this.state.value
-						});
 						forward('onChange', {
 							type: 'onChange',
 							value
@@ -124,8 +113,6 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 				<Wrapped
 					{...this.props}
 					componentRef={this.componentRef}
-					max={this.state.max}
-					min={this.state.min}
 					onDown={this.handleDown}
 					onDrag={this.handleDrag}
 					onDragStart={this.handleDragStart}

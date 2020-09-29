@@ -108,12 +108,12 @@ const ArcSliderBase = kind({
 		radius: PropTypes.number,
 
 		/**
-		 * Called when the value is changed.
+		 * Nodes to be inserted in the center of the ArcSlider.
 		 *
-		 * @type {Function}
+		 * @type {Node}
 		 * @public
 		 */
-		setValue: PropTypes.func,
+		slotCenter: PropTypes.node,
 
 		/**
 		 * The start angle(in degrees) of the arc slider.
@@ -169,19 +169,19 @@ const ArcSliderBase = kind({
 
 	styles: {
 		css,
-		className: 'arcSlider'
+		className: 'arcSlider',
+		publicClassNames: true
 	},
 
 	computed: {
 		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth)
 	},
 
-	render: ({backgroundColor, componentRef, endAngle, foregroundColor, max, min, radius, size, startAngle, strokeWidth, value, ...rest}) => {
+	render: ({backgroundColor, componentRef, endAngle, foregroundColor, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}) => {
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
 		delete rest.step;
-		delete rest.setValue;
 
 		return (
 			<div {...rest}>
@@ -210,6 +210,7 @@ const ArcSliderBase = kind({
 						r={ri.scaleToRem(15)}
 					/>
 				</Arc>
+				{slotCenter}
 			</div>
 		);
 	}

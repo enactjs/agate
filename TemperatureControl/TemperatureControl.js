@@ -6,7 +6,7 @@
  *   defaultValue={10}
  *   max={30}
  *   min={10}
- *   scale="C"
+ *   unit="Celsius"
  * />
  *
  * @module agate/TemperatureControl
@@ -14,8 +14,12 @@
  * @exports TemperatureControlBase
  * @exports TemperatureControlDecorator
  */
-import classnames from 'classnames';
+
+import kind from '@enact/core/kind';
+import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
+import MeasurementFactory from 'ilib/lib/MeasurementFactory';
+import UnitFmt from 'ilib/lib/UnitFmt';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -33,18 +37,10 @@ import css from './TemperatureControl.module.less';
  * @ui
  * @public
  */
-const TemperatureControlBase = class extends React.Component {
-	static displayName= 'TemperatureControl';
+const TemperatureControlBase =  kind({
+	name: 'TemperatureControl',
 
-	static propTypes = /** @lends agate/TemperatureControl.TemperatureControlBase.prototype */ {
-		/**
-		 * The default value of the control.
-		 *
-		 * @type {Number}
-		 * @public
-		 */
-		defaultValue: PropTypes.number,
-
+	propTypes: /** @lends agate/TemperatureControl.TemperatureControlBase.prototype */ {
 		/**
 		 * The minimum value of the slider.
 		 *
@@ -64,96 +60,73 @@ const TemperatureControlBase = class extends React.Component {
 		min: PropTypes.number,
 
 		/**
-		 * The scale of the temperature(C or F).
+		 * Called when value is changed.
 		 *
-		 * @type {('C'|'F')}
-		 * @default 'C'
+		 * @type {Function}
 		 * @public
 		 */
-		scale: PropTypes.oneOf(['C', 'F'])
-	};
+		onChange: PropTypes.func,
 
-	static defaultProps= {
-		defaultValue: 15,
+		/**
+		 * The unit of the temperature(Celsius or Fahrenheit).
+		 *
+		 * @type {('Celsius'|'Fahrenheit')}
+		 * @default 'Celsius'
+		 * @public
+		 */
+		unit: PropTypes.oneOf(['Celsius', 'Fahrenheit']),
+
+		/**
+		 * The value of the control.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
+		value: PropTypes.number
+	},
+	defaultProps: {
 		max: 30,
 		min: 10,
-		scale: 'C'
-	};
+		unit: 'Celsius',
+		value: 15
+	},
 
-	constructor (props) {
-		super(props);
+	styles: {
+		css,
+		className: 'temperatureControl',
+		publicClassNames: true
+	},
 
-		this.state = {
-			max: props.max,
-			min: props.min,
-			value: props.defaultValue
-		};
-	}
-
-	componentDidUpdate (prevProps) {
-		const {scale} = this.props;
-
-		if (prevProps.scale !== scale && scale === 'C') {
-			this.toCelsius();
-		} else if (prevProps.scale !== scale && scale === 'F') {
-			this.toFahrenheit();
-		}
-	}
-
-	toCelsius () {
-		this.setState((prevState) => {
-			return ({
-				max: Math.round((prevState.max - 32) * 5 / 9),
-				min: Math.round((prevState.min - 32) * 5 / 9),
-				value: Math.round((prevState.value - 32) * 5 / 9)
-			});
-		});
-	}
-
-	toFahrenheit () {
-		this.setState((prevState) => {
-			return ({
-				max: Math.round((prevState.max * 9 / 5) + 32),
-				min: Math.round((prevState.min * 9 / 5) + 32),
-				value: Math.round((prevState.value * 9 / 5) + 32)
-			});
-		});
-	}
-
-	setValue = (values) => {
-		this.setState({
-			max: values.max,
-			min: values.min,
-			value: values.value
-		});
-	};
-
-	render () {
-		const {scale, ...rest} = this.props;
+	render: ({max, min, onChange, unit, value, ...rest}) => {
+		let currentTemperature = MeasurementFactory({unit: unit, amount: value});
+		let ufmt = new UnitFmt({autoConvert: true, length: 'short', maxFractionDigits: 0, roundingMode: 'halfup'});
+		const currentTemperatureString =  ufmt.format(currentTemperature);
 
 		return (
-			<div {...rest} className={classnames(rest.className, css.temperatureControl)}>
+			<div {...rest}>
 				<ArcSlider
 					backgroundColor="#444444"
 					className={css.slider}
 					endAngle={310}
-					foregroundColor={this.state.value < this.state.min + (this.state.max - this.state.min) / 2 ? '#007aff' : '#f24949'}
-					max={this.state.max}
-					min={this.state.min}
+					foregroundColor={value < min + (max - min) / 2 ? '#007aff' : '#f24949'}
+					max={max}
+					min={min}
+					onChange={onChange}
 					radius={150}
-					setValue={this.setValue}
+					slotCenter={
+						<div className={css.valueDisplay}>
+							<span>{currentTemperatureString}</span>
+						</div>
+					}
 					startAngle={50}
 					step={1}
 					strokeWidth={6}
-					value={this.state.value}
+					value={value}
 				/>
-				<div className={css.valueDisplay}>
-					<span>{this.state.value}°{scale}</span>
-				</div>
 			</div>
 		);
 	}
-};
+});
 
 /**
  * Applies Agate specific behaviors to [TemperatureControlBase]{@link agate/TemperatureControl.TemperatureControlBase}.
@@ -165,6 +138,7 @@ const TemperatureControlBase = class extends React.Component {
  */
 const TemperatureControlDecorator = compose(
 	Pure,
+	Changeable,
 	Skinnable
 );
 
@@ -178,7 +152,7 @@ const TemperatureControlDecorator = compose(
  *   defaultValue={10}
  *   max={30}
  *   min={10}
- *   scale="C"
+ *   unit="Celsius"
  *   />
  *
  * @class TemperatureControl
