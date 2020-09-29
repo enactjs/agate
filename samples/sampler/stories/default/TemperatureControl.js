@@ -10,7 +10,7 @@ const prop = {
 	unit: ['Celsius', 'Fahrenheit']
 };
 
-TemperatureControl.displayName = 'Temperature Control';
+TemperatureControl.displayName = 'TemperatureControl';
 const Config = mergeComponentMetadata('TemperatureControl', TemperatureControlBase, TemperatureControl);
 
 storiesOf('Agate', module)

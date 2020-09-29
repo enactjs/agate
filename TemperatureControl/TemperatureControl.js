@@ -84,6 +84,7 @@ const TemperatureControlBase =  kind({
 		 */
 		value: PropTypes.number
 	},
+
 	defaultProps: {
 		max: 30,
 		min: 10,
@@ -114,9 +115,7 @@ const TemperatureControlBase =  kind({
 					onChange={onChange}
 					radius={150}
 					slotCenter={
-						<div className={css.valueDisplay}>
-							<span>{currentTemperatureString}</span>
-						</div>
+						<span>{currentTemperatureString}</span>
 					}
 					startAngle={50}
 					step={1}
@@ -148,7 +147,7 @@ const TemperatureControlDecorator = compose(
  * applied.
  * Usage
  *
- *  <TemperatureControl *
+ *  <TemperatureControl
  *   max={30}
  *   min={10}
  *   unit="Celsius"

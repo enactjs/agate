@@ -209,7 +209,9 @@ const ArcSliderBase = kind({
 						r={ri.scaleToRem(15)}
 					/>
 				</Arc>
-				{slotCenter}
+				<div className={css.valueDisplay}>
+					{slotCenter}
+				</div>
 			</div>
 		);
 	}
