@@ -252,7 +252,7 @@ const TimePickerBase = kind({
 										hasMeridiem={hasMeridiem}
 										onChange={onChangeHour}
 										value={hour}
-										width={4}
+										width={2}
 									/>
 								</React.Fragment>
 							);
@@ -268,7 +268,7 @@ const TimePickerBase = kind({
 									min={0}
 									onChange={onChangeMinute}
 									value={minute}
-									width={4}
+									width={2}
 								/>
 							);
 						case 'a':

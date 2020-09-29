@@ -239,6 +239,7 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			// the <input> has focus and Spotlight is paused.
 			if (!disabled && !spotlightDisabled) {
 				this.focusInput(ev.currentTarget);
+				ev.preventDefault();
 			}
 
 			forwardMouseDown(ev, this.props);

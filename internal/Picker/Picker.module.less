@@ -4,7 +4,6 @@
 @import "../../styles/variables.less";
 @import "../../styles/skin.less";
 
-
 .picker {
 	display: flex;
 	flex-direction: column;
@@ -26,6 +25,14 @@
 		margin: @agate-picker-margin;
 		padding: @agate-picker-padding;
 
+		.sizingPlaceholder {
+			height: 0;
+			visibility: hidden;
+			padding-left: .extract(@agate-picker-padding, left)[];
+			padding-right: .extract(@agate-picker-padding, right)[];
+			line-height: 0;
+		}
+
 		.label {
 			transform: @agate-picker-label-transform;
 		}
@@ -41,6 +48,11 @@
 			text-align: center;
 			height: @agate-button-height;
 			line-height: @agate-button-height;
+
+			.sizingPlaceholder {
+				font-size: @agate-picker-active-font-size;
+				font-weight: @agate-picker-active-font-weight;
+			}
 
 			&.active {
 				color: @agate-picker-active-color;
