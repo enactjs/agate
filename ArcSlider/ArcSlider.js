@@ -222,6 +222,7 @@ const ArcSliderBase = kind({
  *
  * @hoc
  * @memberof agate/ArcSlider
+ * @mixes agate/ArcSlider.ArcSliderBehaviorDecorator
  * @mixes ui/Touchable.Touchable
  * @mixes agate/Skinnable.Skinnable
  * @public
