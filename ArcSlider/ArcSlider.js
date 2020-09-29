@@ -26,7 +26,7 @@ import Skinnable from '../Skinnable';
 import ArcSliderBehaviorDecorator from './ArcSliderBehaviorDecorator';
 import {valueToAngle} from './utils';
 
-import css from './ArcSlider.modules.less';
+import css from './ArcSlider.module.less';
 
 /**
  * An arc slider component.
@@ -182,6 +182,8 @@ const ArcSliderBase = kind({
 
 		delete rest.step;
 
+		console.log('css variable:', css);
+
 		return (
 			<div {...rest}>
 				<Arc
@@ -230,7 +232,7 @@ const ArcSliderDecorator = compose(
 	Pure,
 	ArcSliderBehaviorDecorator,
 	Touchable,
-	Skinnable
+	//Skinnable
 );
 
 /**
