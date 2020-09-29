@@ -49,7 +49,11 @@
 			height: @agate-button-height;
 			line-height: @agate-button-height;
 
-			.sizingPlaceholder,
+			.sizingPlaceholder {
+				font-size: @agate-picker-active-font-size;
+				font-weight: @agate-picker-active-font-weight;
+			}
+
 			&.active {
 				color: @agate-picker-active-color;
 				background-color: @agate-picker-active-bg-color;
