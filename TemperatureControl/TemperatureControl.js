@@ -3,10 +3,10 @@
  *
  * @example
  * <TemperatureControl
- *   defaultValue={10}
  *   max={30}
  *   min={10}
  *   unit="Celsius"
+ *   defaultValue={10}
  * />
  *
  * @module agate/TemperatureControl
@@ -148,11 +148,11 @@ const TemperatureControlDecorator = compose(
  * applied.
  * Usage
  *
- *  <TemperatureControl
- *   defaultValue={10}
+ *  <TemperatureControl *
  *   max={30}
  *   min={10}
  *   unit="Celsius"
+ *   value={10}
  *   />
  *
  * @class TemperatureControl

@@ -169,8 +169,7 @@ const ArcSliderBase = kind({
 
 	styles: {
 		css,
-		className: 'arcSlider',
-		publicClassNames: true
+		className: 'arcSlider'
 	},
 
 	computed: {
