@@ -132,17 +132,23 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		constructor (props) {
 			super(props);
 
-			this.focused = null;
-			this.node = null;
+			this.state = {
+				focused: null,
+				node: null
+			};
 
 			this.paused = new Pause('InputSpotlightDecorator');
 			this.handleKeyDown = handleKeyDown.bind(this);
 		}
 
+		componentDidUpdate (_, prevState) {
+			this.updateFocus(prevState);
+		}
+
 		componentWillUnmount () {
 			this.paused.resume();
 
-			if (this.focused === 'input') {
+			if (this.state.focused === 'input') {
 				const {onSpotlightDisappear} = this.props;
 
 				if (onSpotlightDisappear) {
@@ -150,27 +156,24 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 				}
 
 				if (!noLockPointer) {
-					releasePointer(this.node);
+					releasePointer(this.state.node);
 				}
 			}
 		}
 
-		updateFocus = (prevState, curState) => {
-			this.node = curState.node;
-			this.focused = curState.focused;
-
-			if (this.node) {
-				if (Spotlight.getCurrent() !== this.node) {
-					this.node.focus();
+		updateFocus = (prevState) => {
+			if (this.state.node) {
+				if (Spotlight.getCurrent() !== this.state.node) {
+					this.state.node.focus();
 				}
 			}
 
-			const focusChanged = this.focused !== prevState.focused;
+			const focusChanged = this.state.focused !== prevState.focused;
 			if (focusChanged) {
-				if (this.focused === 'input') {
+				if (this.state.focused === 'input') {
 					forward('onActivate', {type: 'onActivate'}, this.props);
 					if (!noLockPointer) {
-						lockPointer(this.node);
+						lockPointer(this.state.node);
 					}
 					this.paused.pause();
 				} else if (prevState.focused === 'input') {
@@ -183,16 +186,22 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			}
 		};
 
+		focus = (focused, node) => {
+			this.setState({focused, node});
+		};
+
 		blur = () => {
-			this.updateFocus({focused: this.focused, node: this.node}, {focused: null, node: null});
+			this.setState((state) => (
+				state.focused || state.node ? {focused: null, node: null} : null
+			));
 		};
 
 		focusDecorator = (decorator) => {
-			this.updateFocus({focused: this.focused, node: this.node}, {focused: 'decorator', node: decorator});
+			this.focus('decorator', decorator);
 		};
 
 		focusInput = (decorator) => {
-			this.updateFocus({focused: this.focused, node: this.node}, {focused: 'input', node: decorator.querySelector('input')});
+			this.focus('input', decorator.querySelector('input'));
 		};
 
 		onBlur = (ev) => {
@@ -211,7 +220,7 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 					this.blur();
 				}
 			} else if (isBubbling(ev)) {
-				if (this.focused === 'input' && this.node === ev.target && ev.currentTarget !== ev.relatedTarget) {
+				if (this.state.focused === 'input' && this.state.node === ev.target && ev.currentTarget !== ev.relatedTarget) {
 					this.blur();
 					forwardBlur(ev, this.props);
 				} else {
@@ -241,7 +250,7 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 			// when in autoFocus mode, focusing the decorator directly will cause it to
 			// forward the focus onto the <input>
-			if (!isBubbling(ev) && (this.props.autoFocus && this.focused === null && !Spotlight.getPointerMode())) {
+			if (!isBubbling(ev) && (this.props.autoFocus && this.state.focused === null && !Spotlight.getPointerMode())) {
 				this.focusInput(ev.currentTarget);
 				ev.stopPropagation();
 			}
@@ -254,7 +263,7 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			// when the key interaction started
 			this.setDownTarget(ev);
 
-			if (this.focused === 'input') {
+			if (this.state.focused === 'input') {
 				const isDown = is('down', keyCode);
 				const isLeft = is('left', keyCode);
 				const isRight = is('right', keyCode);
@@ -312,11 +321,11 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			if (target === this.downTarget) {
 				this.downTarget = null;
 
-				if (this.focused === 'input' && dismissOnEnter && is('enter', keyCode)) {
+				if (this.state.focused === 'input' && dismissOnEnter && is('enter', keyCode)) {
 					this.focusDecorator(currentTarget);
 					// prevent Enter onKeyPress which triggers an onMouseDown via Spotlight
 					preventDefault();
-				} else if (this.focused !== 'input' && is('enter', keyCode)) {
+				} else if (this.state.focused !== 'input' && is('enter', keyCode)) {
 					this.focusInput(currentTarget);
 				}
 			}
@@ -341,7 +350,7 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			return (
 				<Component
 					{...props}
-					focused={this.focused === 'input'}
+					focused={this.state.focused === 'input'}
 					onBlur={this.onBlur}
 					onMouseDown={this.onMouseDown}
 					onFocus={this.onFocus}
