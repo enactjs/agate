@@ -29,7 +29,6 @@ import css from './TemperatureControl.module.less';
  * Temperature control base component.
  *
  * @class TemperatureControlBase
- * @extends ui/TemperatureControl.TemperatureControlBase
  * @memberof agate/TemperatureControl
  * @ui
  * @public
@@ -162,7 +161,6 @@ const TemperatureControlBase = class extends React.Component {
  * @hoc
  * @memberof agate/TemperatureControl
  * @mixes agate/Skinnable.Skinnable
- * @mixes ui/TemperatureControl.TemperatureControlDecorator
  * @public
  */
 const TemperatureControlDecorator = compose(
@@ -185,6 +183,7 @@ const TemperatureControlDecorator = compose(
  *
  * @class TemperatureControl
  * @memberof agate/TemperatureControl
+ * @extends agate/TemperatureControl.TemperatureControlBase
  * @mixes agate/TemperatureControl.TemperatureControlDecorator
  * @ui
  * @public
