@@ -182,8 +182,6 @@ const ArcSliderBase = kind({
 
 		delete rest.step;
 
-		console.log('css variable:', css);
-
 		return (
 			<div {...rest}>
 				<Arc
