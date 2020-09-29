@@ -232,7 +232,7 @@ const ArcSliderDecorator = compose(
 	Pure,
 	ArcSliderBehaviorDecorator,
 	Touchable,
-	//Skinnable
+	Skinnable
 );
 
 /**
