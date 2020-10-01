@@ -1,3 +1,4 @@
+import ri from '@enact/ui/resolution';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -10,8 +11,10 @@ storiesOf('Agate', module)
 		'WindDirectionControl',
 		() => {
 			return (
-				<div style={{marginTop: '40px'}}>
-					<WindDirectionControl />
+				<div>
+					<WindDirectionControl
+						style={{marginTop: ri.scaleToRem(40)}}
+					/>
 				</div>
 			);
 		},

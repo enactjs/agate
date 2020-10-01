@@ -49,7 +49,7 @@ const WindDirectionControlBase = kind({
 		 * @default 'airDown'
 		 * @public
 		 */
-		value:  PropTypes.oneOf(['', 'airDown', 'airRight', 'airUp'])
+		value:  PropTypes.oneOf(['airDown', 'airRight', 'airUp'])
 	},
 
 	defaultProps: {
@@ -77,7 +77,7 @@ const WindDirectionControlBase = kind({
 	},
 
 	render: ({componentIcon,  onChange, value, ...rest}) => {
-		const values = ['airDown', 'airRight', 'airUp'];
+		const children = ['airDown', 'airRight', 'airUp'];
 
 		return (
 			<div {...rest}>
@@ -85,9 +85,13 @@ const WindDirectionControlBase = kind({
 					endAngle={210}
 					onChange={onChange}
 					value={value}
-					values={values}
+					slotCenter={
+						<>
+							<Icon className={css.airDirectionIcon} css={css}>{componentIcon}</Icon>
+						</>
+					}
 				>
-					<Icon className={css.airDirectionIcon} css={css}>{componentIcon}</Icon>
+					{children}
 				</ArcPicker>
 			</div>
 		);

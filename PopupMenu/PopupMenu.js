@@ -1,9 +1,6 @@
 /**
  * A Popup menu component.
  *
- * @example
- * <PopupMenu open title="Title">Hello!</PopupMenu>
- *
  * @module agate/PopupMenu
  * @exports PopupMenu
  * @exports PopupMenuBase
@@ -118,6 +115,13 @@ const PopupMenuDecorator = compose(
 
 /**
  * A stateful component that renders a popup menu.
+ *
+ * Usage:
+ * ```
+ * <PopupMenu open title="Title">
+ * 	Hello!
+ * </PopupMenu>
+ * ```
  *
  * @class PopupMenu
  * @memberof agate/PopupMenu

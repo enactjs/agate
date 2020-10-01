@@ -25,9 +25,9 @@ import css from './FanSpeedControl.module.less';
  * An Agate component for displaying fan speed {@link agate/FanSpeedControl}.
  *
  * @class FanSpeedControlBase
- * @memberof agate/ArcPicker
+ * @memberof agate/FanSpeedControl
  * @ui
- * @private
+ * @public
  */
 const FanSpeedControlBase = kind({
 	name: 'FanSpeedControlBase',
@@ -92,10 +92,10 @@ const FanSpeedControlBase = kind({
 	},
 
 	render ({icon, max, min, onChange, value, ...rest}) {
-		const values = [];
+		const children = [];
 
 		for (let i = min; i <= max; i++) {
-			values.push(i);
+			children.push(i);
 		}
 
 		return (
@@ -106,16 +106,28 @@ const FanSpeedControlBase = kind({
 					min={min}
 					onChange={onChange}
 					selectionType="cumulative"
+					slotCenter={
+						<>
+							<Icon className={css.fanIcon} css={css}>{icon}</Icon>
+							<span className={css.fanValue}>{value}</span>
+						</>
+					}
 					value={value}
-					values={values}
-				>
-					<Icon className={css.fanIcon} css={css}>{icon}</Icon>
-					<span className={css.fanValue}>{value}</span>
-				</ArcPicker>
+				>{children}</ArcPicker>
 			</div>
 		);
 	}
 });
+
+/**
+ * Applies Agate specific behaviors to [FanSpeedControl]{@link agate/FanSpeedControl.FanSpeedControlBase} components.
+ *
+ * @hoc
+ * @memberof agate/FanSpeedControl
+ * @mixes ui/Changeable.Changeable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 
 const FanSpeedControlDecorator = compose(
 	Changeable,

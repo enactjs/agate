@@ -2,7 +2,7 @@
  * Provides Agate styled icon components and behaviors.
  *
  * @example
- * <Icon>flag</Icon>
+ * <Icon>closex</Icon>
  *
  * @module agate/Icon
  * @exports Icon
