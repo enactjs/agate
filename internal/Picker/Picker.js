@@ -12,12 +12,14 @@ import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import IdProvider from '@enact/ui/internal/IdProvider';
 import Touchable from '@enact/ui/Touchable';
+import {SlideLeftArranger, SlideTopArranger, ViewManager} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
 import $L from '../$L';
+import {PickerItem} from './Picker';
 import Skinnable from '../../Skinnable';
 
 import css from './Picker.module.less';
@@ -28,7 +30,8 @@ const PickerButtonItem = Spottable('div');
 const handleChange = direction => handle(
 	adaptEvent(
 		(ev, {min, max, step, value}) => ({
-			value: clamp(min, max, value + (direction * step))
+			value: clamp(min, max, value + (direction * step)),
+			reverseTransition: direction < 0
 		}),
 		forward('onChange')
 	)
@@ -47,7 +50,7 @@ const secondaryDecrement = handleChange(-2);
  * @ui
  * @private
  */
-const PickerBase = kind({
+const PickerBase = kind( {
 	name: 'Picker',
 
 	propTypes: /** @lends agate/internal/Picker.Picker.prototype */ {
@@ -177,6 +180,15 @@ const PickerBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
+		 * When it's `true` it changes the direction of the transition animation.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		reverseTransition: PropTypes.bool,
+
+		/**
 		 * The current skin for this component.
 		 *
 		 * @type {String}
@@ -293,8 +305,11 @@ const PickerBase = kind({
 			handleSecondaryDecrement,
 			handleSecondaryIncrement,
 			incrementAriaLabel: incAriaLabel,
+			index,
 			min,
 			max,
+			orientation,
+			reverseTransition,
 			skin,
 			step,
 			value,
@@ -302,6 +317,7 @@ const PickerBase = kind({
 			width,
 			...rest
 		} = props;
+
 		const currentValue = Array.isArray(values) ? values[value] : value;
 		const decrementValue = clamp(min, max, Array.isArray(values) ? values[value - step] : value - step);
 		const incrementValue = clamp(min, max, Array.isArray(values) ? values[value + step] : value + step);
@@ -323,6 +339,9 @@ const PickerBase = kind({
 		delete rest['aria-valuetext'];
 		delete rest.orientation;
 
+		const horizontal = orientation === 'horizontal';
+		let arranger = horizontal ? SlideLeftArranger : SlideTopArranger;
+
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
 				{skin === 'silicon'  &&
@@ -332,11 +351,18 @@ const PickerBase = kind({
 						aria-label={decrementAriaLabel}
 						className={css.secondaryItemDecrement}
 						disabled={isSecond}
-						onClick={handleSecondaryDecrement}
+						onClick={() => {handleDecrement(); setTimeout(() => handleDecrement(), 150)}}
 					>
-						<div className={css.label}>
-							{isSecond ? '' : secondaryDecrementValue}
-						</div>
+						<ViewManager
+							aria-hidden
+							arranger={arranger}
+							className={css.viewManager}
+							duration={150}
+							index={Array.isArray(values) ? index - 2 : 0}
+							reverseTransition={reverseTransition}
+						>
+							{isSecond ? '' : Array.isArray(values) ? values : (<PickerItem key={secondaryDecrementValue} style={{direction: 'ltr'}}>{secondaryDecrementValue}</PickerItem>)}
+						</ViewManager>
 					</PickerButtonItem>
 				}
 				<PickerButtonItem
@@ -347,9 +373,16 @@ const PickerBase = kind({
 					disabled={disabled || isFirst}
 					onClick={handleDecrement}
 				>
-					<div className={css.label}>
-						{isFirst ? '' : decrementValue}
-					</div>
+					<ViewManager
+							aria-hidden
+							arranger={arranger}
+							className={css.viewManager}
+							duration={150}
+							index={Array.isArray(values) ? index - 1 : 0}
+							reverseTransition={reverseTransition}
+						>
+						{isFirst ? '' : Array.isArray(values) ? values : (<PickerItem key={decrementValue} style={{direction: 'ltr'}}>{decrementValue}</PickerItem>)}
+					</ViewManager>
 				</PickerButtonItem>
 				<div
 					aria-valuetext={currentValueText}
@@ -358,9 +391,16 @@ const PickerBase = kind({
 					role="spinbutton"
 				>
 					{sizingPlaceholder}
-					<div className={css.label}>
-						{currentValue}
-					</div>
+						<ViewManager
+							aria-hidden
+							arranger={arranger}
+							className={css.viewManager}
+							duration={150}
+							index={Array.isArray(values) ? index : 0}
+							reverseTransition={reverseTransition}
+						>
+							{Array.isArray(values) ? values : (<PickerItem key={currentValue} style={{direction: 'ltr'}}>{currentValue}</PickerItem>)}
+						</ViewManager>
 				</div>
 				<PickerButtonItem
 					aria-controls={valueId}
@@ -370,9 +410,16 @@ const PickerBase = kind({
 					disabled={disabled || isLast}
 					onClick={handleIncrement}
 				>
-					<div className={css.label}>
-						{isLast ? '' : incrementValue}
-					</div>
+					<ViewManager
+						aria-hidden
+						arranger={arranger}
+						className={css.viewManager}
+						duration={150}
+						index={Array.isArray(values) ? index + 1 : 0}
+						reverseTransition={reverseTransition}
+					>
+						{isLast ? '' :Array.isArray(values) ? values : (<PickerItem key={incrementValue} style={{direction: 'ltr'}}>{incrementValue}</PickerItem>)}
+					</ViewManager>
 				</PickerButtonItem>
 				{skin === 'silicon' &&
 					<PickerButtonItem
@@ -381,11 +428,18 @@ const PickerBase = kind({
 						aria-label={incrementAriaLabel}
 						className={css.secondaryItemIncrement}
 						disabled={isPenultimate}
-						onClick={handleSecondaryIncrement}
+						onClick={() => {handleIncrement(); setTimeout(() => handleIncrement(), 150)}}
 					>
-						<div className={css.label}>
-							{isPenultimate ? '' : secondaryIncrementValue}
-						</div>
+						<ViewManager
+							aria-hidden
+							arranger={arranger}
+							className={css.viewManager}
+							duration={150}
+							index={Array.isArray(values) ? index + 2 : 0}
+							reverseTransition={reverseTransition}
+						>
+							{isPenultimate ? '' : Array.isArray(values) ? values : (<PickerItem key={secondaryIncrementValue} style={{direction: 'ltr'}}>{secondaryIncrementValue}</PickerItem>)}
+						</ViewManager>
 					</PickerButtonItem>
 				}
 			</PickerRoot>
@@ -405,6 +459,7 @@ const PickerBase = kind({
 const PickerDecorator = compose(
 	IdProvider({generateProp: null}),
 	Changeable,
+	Changeable({prop: 'reverseTransition'}),
 	Skinnable({prop: 'skin'})
 );
 
@@ -416,3 +471,4 @@ export {
 	PickerBase,
 	PickerDecorator
 };
+export PickerItem from './PickerItem';
