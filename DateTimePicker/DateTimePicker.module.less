@@ -1,5 +1,6 @@
 // DateTimePicker.module.less
 //
+@import "../styles/mixins.less";
 @import "../styles/skin.less";
 @import "../styles/variables.less";
 
@@ -21,7 +22,7 @@
 		width: @agate-datetimepicker-width;
 
 		&::before {
-			height: @agate-button-height;
+			height: @agate-picker-button-active-height;
 			background-image: @agate-datetimepicker-active-container-bg-image;
 			background-color: @agate-datetimepicker-active-container-bg-color;
 		}

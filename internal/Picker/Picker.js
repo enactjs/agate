@@ -331,7 +331,7 @@ const PickerBase = kind({
 						aria-disabled={isSecond}
 						aria-label={decrementAriaLabel}
 						className={css.secondaryItemDecrement}
-						disabled={isSecond}
+						disabled={disabled || isSecond}
 						onClick={handleSecondaryDecrement}
 					>
 						<div className={css.label}>
@@ -351,9 +351,11 @@ const PickerBase = kind({
 						{isFirst ? '' : decrementValue}
 					</div>
 				</PickerButtonItem>
-				<div
+				<PickerButtonItem
+					aria-disabled={disabled}
 					aria-valuetext={currentValueText}
 					className={activeClassName}
+					disabled={disabled}
 					id={valueId}
 					role="spinbutton"
 				>
@@ -361,7 +363,7 @@ const PickerBase = kind({
 					<div className={css.label}>
 						{currentValue}
 					</div>
-				</div>
+				</PickerButtonItem>
 				<PickerButtonItem
 					aria-controls={valueId}
 					aria-disabled={disabled || isLast}
@@ -380,7 +382,7 @@ const PickerBase = kind({
 						aria-disabled={isPenultimate}
 						aria-label={incrementAriaLabel}
 						className={css.secondaryItemIncrement}
-						disabled={isPenultimate}
+						disabled={disabled || isPenultimate}
 						onClick={handleSecondaryIncrement}
 					>
 						<div className={css.label}>

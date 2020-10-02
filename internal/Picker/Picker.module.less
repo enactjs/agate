@@ -46,8 +46,8 @@
 			color: inherit;
 			width: 100%;
 			text-align: center;
-			height: @agate-button-height;
-			line-height: @agate-button-height;
+			height: @agate-picker-button-height;
+			line-height: @agate-picker-button-height;
 
 			.sizingPlaceholder {
 				font-size: @agate-picker-active-font-size;
@@ -60,6 +60,14 @@
 				background-image: @agate-picker-active-bg-image;
 				font-size: @agate-picker-active-font-size;
 				font-weight: @agate-picker-active-font-weight;
+				height: @agate-picker-button-active-height;
+				line-height: @agate-picker-button-active-height;
+
+				.focus({
+					color: @agate-picker-active-color;
+					background-color: @agate-picker-active-bg-color;
+					background-image: @agate-picker-active-bg-image;
+				});
 			}
 
 			&[disabled] {
@@ -85,11 +93,23 @@
 		.itemIncrement {
 			color: @agate-picker-item-color;
 			background-color: @agate-picker-item-bg-color;
+
+			.focus({
+				&[disabled] {
+					color: @agate-picker-item-color;
+				}
+			});
 		}
 
 		.secondaryItemIncrement,
 		.secondaryItemDecrement {
 			color: @agate-picker-secondary-item-color;
+
+			.focus({
+				&[disabled] {
+					color: @agate-picker-secondary-item-color;
+				}
+			});
 		}
 
 		&.horizontal {
