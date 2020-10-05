@@ -203,7 +203,24 @@ const PickerBase = kind({
 		 * @default 0
 		 * @public
 		 */
-		value: PropTypes.number
+		value: PropTypes.number,
+
+		/**
+		 * Choose a specific size for your picker. `'small'`, `'medium'`, `'large'`, or set to `null` to
+		 * assume auto-sizing. `'small'` is good for numeric pickers, `'medium'` for single or short
+		 * word pickers, `'large'` for maximum-sized pickers.
+		 *
+		 * You may also supply a number. This number will determine the minimum size of the Picker.
+		 * Setting a number to less than the number of characters in your longest value may produce
+		 * unexpected results.
+		 *
+		 * @type {('small'|'medium'|'large'|Number)}
+		 * @public
+		 */
+		width: PropTypes.oneOfType([
+			PropTypes.oneOf([null, 'small', 'medium', 'large']),
+			PropTypes.number
+		])
 	},
 
 	defaultProps: {
@@ -282,6 +299,7 @@ const PickerBase = kind({
 			step,
 			value,
 			valueId,
+			width,
 			...rest
 		} = props;
 		const currentValue = Array.isArray(values) ? values[value] : value;
@@ -296,8 +314,14 @@ const PickerBase = kind({
 		const decrementAriaLabel = `${currentValueText} ${decAriaLabel}`;
 		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
 
+		let sizingPlaceholder = null;
+		if (typeof width === 'number' && width > 0) {
+			sizingPlaceholder = <div aria-hidden className={css.sizingPlaceholder}>{'0'.repeat(width)}</div>;
+		}
+
 		delete rest.accessibilityHint;
 		delete rest['aria-valuetext'];
+		delete rest.orientation;
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
@@ -333,6 +357,7 @@ const PickerBase = kind({
 					id={valueId}
 					role="spinbutton"
 				>
+					{sizingPlaceholder}
 					<div className={css.label}>
 						{currentValue}
 					</div>
