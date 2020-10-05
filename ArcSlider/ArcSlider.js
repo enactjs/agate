@@ -173,7 +173,11 @@ const ArcSliderBase = kind({
 	},
 
 	computed: {
-		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth)
+		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth),
+		style: ({radius, style}) => {
+			const size = ri.scaleToRem(radius * 2);
+			return {...style, height: size, width: size};
+		}
 	},
 
 	render: ({backgroundColor, componentRef, endAngle, foregroundColor, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}) => {

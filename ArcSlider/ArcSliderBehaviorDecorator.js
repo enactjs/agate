@@ -30,6 +30,16 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			value: PropTypes.number
 		};
 
+		static defaultProps = {
+			endAngle: 250,
+			max: 100,
+			min: 0,
+			radius: 150,
+			startAngle: 30,
+			step: 1,
+			strokeWidth: 6
+		};
+
 		constructor (props) {
 			super(props);
 

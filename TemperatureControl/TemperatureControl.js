@@ -6,7 +6,7 @@
  *   max={30}
  *   min={10}
  *   unit="Celsius"
- *   defaultValue={10}
+ *   value={10}
  * />
  *
  * @module agate/TemperatureControl
@@ -99,8 +99,8 @@ const TemperatureControlBase =  kind({
 	},
 
 	render: ({max, min, onChange, unit, value, ...rest}) => {
-		let currentTemperature = MeasurementFactory({unit: unit, amount: value});
-		let ufmt = new UnitFmt({autoConvert: true, length: 'short', maxFractionDigits: 0, roundingMode: 'halfup'});
+		const currentTemperature = MeasurementFactory({unit, amount: value});
+		const ufmt = new UnitFmt({autoConvert: true, length: 'short', maxFractionDigits: 0, roundingMode: 'halfup'});
 		const currentTemperatureString =  ufmt.format(currentTemperature);
 
 		return (
@@ -113,13 +113,10 @@ const TemperatureControlBase =  kind({
 					max={max}
 					min={min}
 					onChange={onChange}
-					radius={150}
 					slotCenter={
 						<span>{currentTemperatureString}</span>
 					}
 					startAngle={50}
-					step={1}
-					strokeWidth={6}
 					value={value}
 				/>
 			</div>
@@ -132,6 +129,7 @@ const TemperatureControlBase =  kind({
  *
  * @hoc
  * @memberof agate/TemperatureControl
+ * @mixes ui/Changeable.Changeable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
