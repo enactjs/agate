@@ -17,6 +17,6 @@ storiesOf('Agate', module)
 			/>
 		),
 		{
-			text: 'The basic DatPicker'
+			text: 'The basic DatePicker'
 		}
 	);

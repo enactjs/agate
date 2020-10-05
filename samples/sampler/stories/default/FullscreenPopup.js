@@ -16,10 +16,10 @@ storiesOf('Agate', module)
 		() => (
 			<div>
 				<FullscreenPopup
-					open={boolean('open', Config)}
-					noAnimation={boolean('noAnimation', Config)}
 					direction={select('direction', ['up', 'right', 'down', 'left'], Config, 'down')}
 					duration={select('duration', ['long', 'short'], Config, 'short')}
+					noAnimation={boolean('noAnimation', Config)}
+					open={boolean('open', Config)}
 					type={select('type', ['clip', 'fade', 'slide'], Config, 'slide')}
 				>
 					<BodyText>Hello FullscreenPopup</BodyText>

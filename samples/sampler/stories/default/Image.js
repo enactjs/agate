@@ -29,17 +29,17 @@ storiesOf('Agate', module)
 			>
 				<label
 					style={{
+						backgroundColor: 'rgba(255, 165, 0, 0.5)',
 						border: '#ffa500 dashed 1px',
 						borderBottomWidth: 0,
 						borderRadius: '12px 12px 0 0',
-						backgroundColor: 'rgba(255, 165, 0, 0.5)',
 						color: '#fff',
-						position: 'absolute',
-						transform: 'translateX(-1px) translateY(-100%)',
-						padding: '0.1em 1em',
-						fontWeight: 100,
+						fontSize: '32px',
 						fontStyle: 'italic',
-						fontSize: '32px'
+						fontWeight: 100,
+						padding: '0.1em 1em',
+						position: 'absolute',
+						transform: 'translateX(-1px) translateY(-100%)'
 					}}
 				>
 					Image Boundry
