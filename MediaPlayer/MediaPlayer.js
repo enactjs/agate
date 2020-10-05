@@ -291,8 +291,8 @@ const MediaPlayerBase = kind({
  * Media player behaviors to apply to [MediaPlayerBase]{@link agate/MediaPlayer.MediaPlayerBase}.
  *
  * @class MediaPlayerBehaviorDecorator
- * @memberof agate/MediaPlayer
  * @hoc
+ * @memberof agate/MediaPlayer
  * @private
  */
 const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disable-line no-unused-vars
@@ -695,7 +695,7 @@ const AnnounceDecorator = Wrapped => function AnnounceDecorator (props) {
  * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
  * @mixes i18n/I18nContextDecorator.I18nContextDecorator
- * @public
+ * @private
  */
 const MediaPlayerDecorator = compose(
 	AnnounceDecorator,
@@ -719,7 +719,6 @@ const MediaPlayerDecorator = compose(
  * @class MediaPlayer
  * @memberof agate/MediaPlayer
  * @extends agate/MediaPlayer.MediaPlayerBase
- * @mixes agate/MediaPlayer.MediaPlayerDecorator
  * @ui
  * @public
  */
@@ -728,6 +727,5 @@ const MediaPlayer = MediaPlayerDecorator(MediaPlayerBase);
 export default MediaPlayer;
 export {
 	MediaPlayer,
-	MediaPlayerBase,
-	MediaPlayerDecorator
+	MediaPlayerBase
 };

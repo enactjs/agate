@@ -6,6 +6,7 @@
  * @exports DropManager
  * @exports Draggable
  * @exports ResponsiveBox
+ * @private
  */
 
 import kind from '@enact/core/kind';
@@ -101,9 +102,9 @@ const DropManagerContext = React.createContext(defaultContainerShape);
  * TBD.
  *
  * @class DropManager
- * @memberof agate/DropManager
  * @hoc
- * @public
+ * @memberof agate/DropManager
+ * @private
  */
 const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 	const ArrangementState = Changeable({prop: configHoc.arrangementProp || fallbackArrangementProp});
@@ -312,7 +313,7 @@ const DraggableContainerContext = React.createContext(null);
  * @class Draggable
  * @memberof agate/DropManager
  * @ui
- * @public
+ * @private
  */
 const Draggable = (Wrapped) => kind({
 	name: 'Draggable',
@@ -361,7 +362,7 @@ const Draggable = (Wrapped) => kind({
  * @class ResponsiveBox
  * @memberof agate/DropManager
  * @ui
- * @public
+ * @private
  */
 const ResponsiveBox = (Wrapped) => setDisplayName('ResponsiveBox')(
 	(props) => {
@@ -394,9 +395,9 @@ const ResponsiveBox = (Wrapped) => setDisplayName('ResponsiveBox')(
  * TBD.
  *
  * @class Droppable
- * @memberof agate/DropManager
  * @hoc
- * @public
+ * @memberof agate/DropManager
+ * @private
  */
 const Droppable = hoc((configHoc, Wrapped) => {
 	const {arrangementProp, slots, ...rest} = configHoc;

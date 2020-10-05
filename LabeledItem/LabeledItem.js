@@ -7,6 +7,7 @@
  * @module agate/LabeledItem
  * @exports LabeledItem
  * @deprecated
+ * @private
  */
 
 import deprecate from '@enact/core/internal/deprecate';
@@ -23,7 +24,7 @@ import Item from '../Item';
  * @extends agate/Item.Item
  * @ui
  * @deprecated
- * @public
+ * @private
  */
 const LabeledItemBase = deprecate(
 	({children, titleIcon, ...rest}) => (
@@ -35,8 +36,9 @@ const LabeledItemBase = deprecate(
 		</Item>
 	),
 	{
-		name: 'LabeledItem',
-		replacedBy: 'Item'
+		name: 'agate/LabeledItem',
+		replacedBy: 'agate/Item',
+		until: '2.0.0'
 	}
 );
 

@@ -7,7 +7,6 @@
  * @module agate/ToggleIcon
  * @exports ToggleIcon
  * @exports ToggleIconBase
- * @exports ToggleIconDecorator
  * @private
  */
 
@@ -68,6 +67,5 @@ const ToggleIcon = ToggleIconDecorator(ToggleIconBase);
 export default ToggleIcon;
 export {
 	ToggleIcon,
-	ToggleIconBase,
-	ToggleIconDecorator
+	ToggleIconBase
 };

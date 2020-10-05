@@ -4,7 +4,6 @@
  * @module agate/SwitchItem
  * @exports SwitchItem
  * @exports SwitchItemBase
- * @exports SwitchItemDecorator
  */
 
 import React from 'react';
@@ -158,7 +157,7 @@ const SwitchItemBase = kind({
  * @mixes ui/Toggleable.Toggleable
  * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
- * @public
+ * @private
  */
 const SwitchItemDecorator = compose(
 	Toggleable({toggleProp: 'onClick'}),
@@ -173,7 +172,6 @@ const SwitchItemDecorator = compose(
  * @class SwitchItem
  * @memberof agate/SwitchItem
  * @extends agate/SwitchItem.SwitchItem
- * @mixes agate/SwitchItem.SwitchItemDecorator
  * @ui
  * @public
  */
@@ -182,6 +180,5 @@ const SwitchItem = SwitchItemDecorator(SwitchItemBase);
 export default SwitchItem;
 export {
 	SwitchItem,
-	SwitchItemBase,
-	SwitchItemDecorator
+	SwitchItemBase
 };

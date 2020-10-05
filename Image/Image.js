@@ -7,7 +7,6 @@
  * @module agate/Image
  * @exports Image
  * @exports ImageBase
- * @exports ImageDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -142,7 +141,7 @@ const ResponsiveImageDecorator = hoc((config, Wrapped) => {	// eslint-disable-li
  * @hoc
  * @memberof agate/Image
  * @mixes agate/Skinnable.Skinnable
- * @public
+ * @private
  */
 const ImageDecorator = compose(
 	Pure,
@@ -166,7 +165,6 @@ const ImageDecorator = compose(
  * @class Image
  * @memberof agate/Image
  * @extends agate/Image.ImageBase
- * @mixes agate/Image.ImageDecorator
  * @ui
  * @public
  */
@@ -175,6 +173,5 @@ const Image = ImageDecorator(ImageBase);
 export default Image;
 export {
 	Image,
-	ImageBase,
-	ImageDecorator
+	ImageBase
 };

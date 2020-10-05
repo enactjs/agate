@@ -153,4 +153,7 @@ const Header = Slottable({slots: ['subtitle', 'title', 'titleAbove']}, Skinnable
 Header.defaultSlot = 'header';
 
 export default Header;
-export {Header, HeaderBase};
+export {
+	Header,
+	HeaderBase
+};

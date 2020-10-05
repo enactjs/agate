@@ -2,10 +2,12 @@
  * @module agate/GridListImageItem
  * @exports GridListImageItem
  * @exports GridListImageItemBase
- * @exports GridListImageItemDecorator
+ * @deprecated
+ * @private
  */
 
 import kind from '@enact/core/kind';
+import deprecate from '@enact/core/internal/deprecate';
 import {memoize} from '@enact/core/util';
 import {GridListImageItem as UiGridListImageItem} from '@enact/ui/GridListImageItem';
 import PropTypes from 'prop-types';
@@ -34,10 +36,10 @@ const calcAspectRatio = memoize(aspectRatio => {
 
 /**
  * @class GridListImageItemBase
- * @extends ui/GridListImageItem.GridListImageItem
  * @memberof agate/GridListImageItem
+ * @extends ui/GridListImageItem.GridListImageItem
  * @ui
- * @public
+ * @private
  */
 const GridListImageItemBase = kind({
 	name: 'GridListImageItem',
@@ -90,7 +92,7 @@ const GridListImageItemBase = kind({
 		}
 	},
 
-	render: ({css, ...rest}) => {
+	render: deprecate(({css, ...rest}) => {
 		delete rest.aspectRatio;
 
 		return (
@@ -101,14 +103,18 @@ const GridListImageItemBase = kind({
 				imageComponent={ImageBase}
 			/>
 		);
-	}
+	}, {
+		name: 'agate/GridListImageItem',
+		replacedBy: 'agate/ImageItem',
+		until: '2.0.0'
+	})
 });
 
 /**
  * @hoc
  * @memberof agate/GridListImageItem
  * @mixes agate/Skinnable.Skinnable
- * @public
+ * @private
  */
 const GridListImageItemDecorator = compose(
 	Skinnable
@@ -118,15 +124,14 @@ const GridListImageItemDecorator = compose(
  * @class GridListImageItem
  * @memberof agate/GridListImageItem
  * @extends agate/GridListImageItem.GridListImageItemBase
- * @mixes agate/GridListImageItem.GridListImageItemDecorator
  * @ui
- * @public
+ * @deprecated
+ * @private
  */
 const GridListImageItem = GridListImageItemDecorator(GridListImageItemBase);
 
 export default GridListImageItem;
 export {
 	GridListImageItem,
-	GridListImageItemBase,
-	GridListImageItemDecorator
+	GridListImageItemBase
 };

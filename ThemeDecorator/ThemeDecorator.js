@@ -202,12 +202,12 @@ const CustomizableSkinStyle = kind({
  * Use the `skin` property to assign a skin. Ex: `<DecoratedApp skin="light" />`
  *
  * @class ThemeDecorator
+ * @hoc
  * @memberof agate/ThemeDecorator
  * @mixes ui/FloatingLayer.FloatingLayerDecorator
  * @mixes ui/resolution.ResolutionDecorator
  * @mixes spotlight/SpotlightRootDecorator.SpotlightRootDecorator
  * @mixes agate/Skinnable.Skinnable
- * @hoc
  * @public
  */
 const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {

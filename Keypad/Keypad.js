@@ -195,9 +195,9 @@ const KeypadBase = kind({
  * A Keypad component with an Input to display the outcome.
  *
  * @class KeypadBehaviorDecorator
- * @memberof agate/Keypad
  * @hoc
- * @public
+ * @memberof agate/Keypad
+ * @private
  */
 const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 	return class extends React.Component {

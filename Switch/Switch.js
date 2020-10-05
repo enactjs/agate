@@ -7,6 +7,7 @@
  * @module agate/Switch
  * @exports Switch
  * @exports SwitchBase
+ * @private
  */
 
 import kind from '@enact/core/kind';
@@ -24,7 +25,7 @@ import componentCss from './Switch.module.less';
  * @class SwitchBase
  * @memberof agate/Switch
  * @ui
- * @public
+ * @private
  */
 const SwitchBase = kind({
 	name: 'Switch',

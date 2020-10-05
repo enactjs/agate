@@ -70,8 +70,8 @@ const defaultConfig = {
  * Note that the direction of tooltip will be flipped horizontally in RTL locales.
  *
  * @class TooltipDecorator
- * @memberof agate/TooltipDecorator
  * @hoc
+ * @memberof agate/TooltipDecorator
  * @public
  */
 const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {

@@ -198,4 +198,7 @@ const RangePicker = Pure(
  */
 
 export default RangePicker;
-export {RangePicker, RangePickerBase};
+export {
+	RangePicker,
+	RangePickerBase
+};

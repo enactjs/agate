@@ -94,4 +94,7 @@ const FullscreenPopupDecorator = compose(
 const FullscreenPopup = FullscreenPopupDecorator(FullscreenPopupBase);
 
 export default FullscreenPopup;
-export {FullscreenPopup, FullscreenPopupBase};
+export {
+	FullscreenPopup,
+	FullscreenPopupBase
+};

@@ -9,7 +9,7 @@
  * @module agate/Picker
  * @exports Picker
  * @exports PickerBase
- * @exports PickerDecorator
+ * @private
  */
 
 import kind from '@enact/core/kind';
@@ -27,7 +27,7 @@ import PickerCore, {PickerDecorator} from '../internal/Picker';
  * @class PickerBase
  * @memberof agate/Picker
  * @ui
- * @public
+ * @private
  */
 const PickerBase = kind({
 	name: 'Picker',
@@ -100,7 +100,7 @@ const PickerBase = kind({
  * @name aria-valuetext
  * @type {String|Number}
  * @memberof agate/Picker.Picker.prototype
- * @public
+ * @private
  */
 
 /**
@@ -110,7 +110,7 @@ const PickerBase = kind({
  * @memberof agate/Picker.Picker.prototype
  * @default 'previous item'
  * @type {String}
- * @public
+ * @private
  */
 
 /**
@@ -120,7 +120,7 @@ const PickerBase = kind({
  * @memberof agate/Picker.Picker.prototype
  * @default 'next item'
  * @type {String}
- * @public
+ * @private
  */
 
 /**
@@ -134,7 +134,7 @@ const PickerBase = kind({
  * @memberof agate/Picker.Picker.prototype
  * @type {String}
  * @default 'vertical'
- * @public
+ * @private
  */
 
 /**
@@ -147,9 +147,8 @@ const PickerBase = kind({
  * @class Picker
  * @memberof agate/Picker
  * @extends agate/Picker.PickerBase
- * @mixes agate/internal/Picker.PickerDecorator
  * @ui
- * @public
+ * @private
  */
 const Picker = PickerDecorator(PickerBase);
 
@@ -161,7 +160,7 @@ const Picker = PickerDecorator(PickerBase);
  * @name defaultValue
  * @memberof agate/Picker.Picker.prototype
  * @type {Number}
- * @public
+ * @private
  */
 
 export default Picker;

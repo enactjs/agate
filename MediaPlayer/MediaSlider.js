@@ -10,8 +10,8 @@ import css from './MediaSlider.module.less';
  * [MediaPlayer]{@link agate/MediaPlayer.MediaPlayer}.
  *
  * @class MediaSlider
- * @extends agate/Slider.Slider
  * @memberof agate/MediaPlayer
+ * @extends agate/Slider.Slider
  * @ui
  * @private
  */

@@ -169,4 +169,7 @@ const TooltipBase = kind({
 const Tooltip = Skinnable(TooltipBase);
 
 export default Tooltip;
-export {Tooltip, TooltipBase};
+export {
+	Tooltip,
+	TooltipBase
+};

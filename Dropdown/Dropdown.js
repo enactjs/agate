@@ -12,7 +12,6 @@
  * @module agate/Dropdown
  * @exports Dropdown
  * @exports DropdownBase
- * @exports DropdownDecorator
  */
 import {on, off} from '@enact/core/dispatcher';
 import {handle, forward, forProp} from '@enact/core/handle';
@@ -394,9 +393,8 @@ const DropDownExtended = hoc((config, Wrapped) => {
  *
  * @hoc
  * @memberof agate/Dropdown
- * @mixes agate/Dropdown.DropdownDecorator
  * @mixes agate/Skinnable.Skinnable
- * @public
+ * @private
  */
 const DropdownDecorator = compose(
 	SpotlightContainerDecorator({
@@ -424,7 +422,6 @@ const DropdownDecorator = compose(
  * @class Dropdown
  * @memberof agate/Dropdown
  * @extends agate/Dropdown.DropdownBase
- * @mixes agate/Dropdown.DropdownDecorator
  * @ui
  * @public
  */
@@ -433,6 +430,5 @@ const Dropdown = DropdownDecorator(DropdownBase);
 export default Dropdown;
 export {
 	Dropdown,
-	DropdownBase,
-	DropdownDecorator
+	DropdownBase
 };

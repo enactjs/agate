@@ -7,7 +7,6 @@
  * @module agate/Item
  * @exports Item
  * @exports ItemBase
- * @exports ItemDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -139,7 +138,7 @@ const ItemBase = kind({
  * @mixes spotlight/Spottable.Spottable
  * @mixes ui/Marquee.MarqueeController
  * @mixes agate/Skinnable.Skinnable
- * @public
+ * @private
  */
 const ItemDecorator = compose(
 	ForwardRef({prop: 'componentRef'}),
@@ -157,7 +156,6 @@ const ItemDecorator = compose(
  * @class Item
  * @memberof agate/Item
  * @extends agate/Item.ItemBase
- * @mixes agate/Item.ItemDecorator
  * @ui
  * @public
  */
@@ -166,6 +164,5 @@ const Item = ItemDecorator(ItemBase);
 export default Item;
 export {
 	Item,
-	ItemBase,
-	ItemDecorator
+	ItemBase
 };

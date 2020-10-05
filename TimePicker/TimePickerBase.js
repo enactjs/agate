@@ -295,4 +295,6 @@ const TimePickerBase = kind({
 });
 
 export default TimePickerBase;
-export {TimePickerBase};
+export {
+	TimePickerBase
+};

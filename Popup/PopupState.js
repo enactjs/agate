@@ -101,4 +101,6 @@ const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-v
 });
 
 export default PopupState;
-export {PopupState};
+export {
+	PopupState
+};

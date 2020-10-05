@@ -4,6 +4,7 @@
  * @module agate/internal/Picker
  * @exports Picker
  * @exports PickerDecorator
+ * @private
  */
 
 import {adaptEvent, forEventProp, forward, handle, oneOf} from '@enact/core/handle';
@@ -400,7 +401,7 @@ const PickerBase = kind({
  * @memberof agate/internal/Picker
  * @mixes ui/Changeable.Changeable
  * @mixes agate/Skinnable.Skinnable
- * @public
+ * @private
  */
 const PickerDecorator = compose(
 	IdProvider({generateProp: null}),

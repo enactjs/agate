@@ -363,4 +363,6 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 });
 
 export default InputSpotlightDecorator;
-export {InputSpotlightDecorator};
+export {
+	InputSpotlightDecorator
+};

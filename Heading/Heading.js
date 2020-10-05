@@ -12,7 +12,6 @@
  * @module agate/Heading
  * @exports Heading
  * @exports HeadingBase
- * @exports HeadingDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -107,7 +106,7 @@ const HeadingBase = kind({
  * @hoc
  * @memberof agate/Heading
  * @mixes agate/Skinnable.Skinnable
- * @public
+ * @private
  */
 const HeadingDecorator = compose(
 	Pure,
@@ -133,7 +132,6 @@ const HeadingDecorator = compose(
  * @class Heading
  * @memberof agate/Heading
  * @extends agate/Heading.HeadingBase
- * @mixes agate/Heading.HeadingDecorator
  * @ui
  * @public
  */
@@ -142,6 +140,5 @@ const Heading = HeadingDecorator(HeadingBase);
 export default Heading;
 export {
 	Heading,
-	HeadingBase,
-	HeadingDecorator
+	HeadingBase
 };
