@@ -301,7 +301,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		componentDidUpdate (prevProps, prevState, snapshot) {
 			if (prevProps.direction !== this.props.direction ||
 				snapshot.containerWidth !== this.getContainerNodeWidth() ||
-				prevProps.rtl !== this.props.rtl) {
+				(this.props.open && prevProps.rtl !== this.props.rtl)) {
 				this.adjustedDirection = this.props.direction;
 				// NOTE: `setState` is called and will cause re-render
 				this.positionContextualPopup();
