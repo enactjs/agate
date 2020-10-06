@@ -7,6 +7,7 @@
  * @module agate/FanSpeedControl
  * @exports FanSpeedControl
  * @exports FanSpeedControlBase
+ * @exports FanSpeedControlDecorator
  */
 
 import kind from '@enact/core/kind';
