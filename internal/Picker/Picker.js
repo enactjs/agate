@@ -168,6 +168,16 @@ const PickerBase = kind( {
 		incrementAriaLabel: PropTypes.string,
 
 		/**
+		 * By default, the picker will animate transitions between items if it has a defined
+		 * `width`. Specifying `noAnimation` will prevent any transition animation for the
+		 * component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		noAnimation: PropTypes.bool,
+
+		/**
 		 * A function to run when the control should increment or decrement.
 		 *
 		 * @type {Function}
@@ -313,6 +323,7 @@ const PickerBase = kind( {
 			index,
 			min,
 			max,
+			noAnimation,
 			orientation,
 			reverseTransition,
 			skin,
@@ -402,6 +413,7 @@ const PickerBase = kind( {
 							className={css.viewManager}
 							duration={150}
 							index={Array.isArray(values) ? index - 2 : 0}
+							noAnimation={noAnimation || disabled}
 							reverseTransition={reverseTransition}
 						>
 							{secondaryDecrementValue()}
@@ -422,6 +434,7 @@ const PickerBase = kind( {
 						className={css.viewManager}
 						duration={150}
 						index={Array.isArray(values) ? index - 1 : 0}
+						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
 					>
 						{decrementValue()}
@@ -440,6 +453,7 @@ const PickerBase = kind( {
 						className={css.viewManager}
 						duration={150}
 						index={Array.isArray(values) ? index : 0}
+						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
 					>
 						{Array.isArray(values) ? values : (<PickerItem key={currentValue} style={{direction: 'ltr'}}>{currentValue}</PickerItem>)}
@@ -459,6 +473,7 @@ const PickerBase = kind( {
 						className={css.viewManager}
 						duration={150}
 						index={Array.isArray(values) ? index + 1 : 0}
+						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
 					>
 						{incrementValue()}
@@ -481,6 +496,7 @@ const PickerBase = kind( {
 							className={css.viewManager}
 							duration={150}
 							index={Array.isArray(values) ? index + 2 : 0}
+							noAnimation={noAnimation || disabled}
 							reverseTransition={reverseTransition}
 						>
 							{secondaryIncrementValue()}
