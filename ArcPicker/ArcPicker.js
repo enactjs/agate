@@ -42,6 +42,7 @@ const ArcPickerBase = kind({
 		 * The value options of ArcPicker.
 		 *
 		 * @type {Node}
+		 * @required
 		 * @public
 		 */
 		children: PropTypes.node.isRequired,
