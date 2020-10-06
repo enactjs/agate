@@ -210,6 +210,7 @@ const ArcPickerBase = kind({
  *
  * @hoc
  * @memberof agate/ArcPicker
+ * @mixes ui/Changeable.Changeable
  * @mixes agate/ArcPicker.ArcPickerBehaviorDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
