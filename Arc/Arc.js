@@ -8,6 +8,7 @@
  * @exports Arc
  * @exports ArcBase
  * @exports ArcDecorator
+ * @private
  */
 
 import EnactPropTypes from '@enact/core/internal/prop-types';
