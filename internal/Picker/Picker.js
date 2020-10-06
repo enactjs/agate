@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-bind */
+
 /**
  * A internal Picker component.
  *
@@ -39,8 +41,6 @@ const handleChange = direction => handle(
 
 const increment = handleChange(1);
 const decrement = handleChange(-1);
-const secondaryIncrement = handleChange(2);
-const secondaryDecrement = handleChange(-2);
 
 /**
  * The base component for {@link agate/internal/Picker.Picker}.
@@ -54,6 +54,15 @@ const PickerBase = kind( {
 	name: 'Picker',
 
 	propTypes: /** @lends agate/internal/Picker.Picker.prototype */ {
+		/**
+		 * Index for internal ViewManager
+		 *
+		 * @type {Number}
+		 * @required
+		 * @public
+		 */
+		index: PropTypes.number.isRequired,
+
 		/**
 		 * The maximum value selectable by the picker (inclusive).
 		 *
@@ -258,9 +267,7 @@ const PickerBase = kind( {
 				[({velocityY}) => velocityY > 0, decrement]
 			)
 		),
-		handleIncrement: increment,
-		handleSecondaryDecrement: secondaryDecrement,
-		handleSecondaryIncrement: secondaryIncrement
+		handleIncrement: increment
 	},
 
 	computed: {
@@ -302,8 +309,6 @@ const PickerBase = kind( {
 			handleDecrement,
 			handleFlick,
 			handleIncrement,
-			handleSecondaryDecrement,
-			handleSecondaryIncrement,
 			incrementAriaLabel: incAriaLabel,
 			index,
 			min,
@@ -319,10 +324,6 @@ const PickerBase = kind( {
 		} = props;
 
 		const currentValue = Array.isArray(values) ? values[value] : value;
-		const decrementValue = clamp(min, max, Array.isArray(values) ? values[value - step] : value - step);
-		const incrementValue = clamp(min, max, Array.isArray(values) ? values[value + step] : value + step);
-		const secondaryDecrementValue = clamp(min, max, Array.isArray(values) ? values[value - (2 * step)] : value - (2 * step));
-		const secondaryIncrementValue = clamp(min, max, Array.isArray(values) ? values[value + (2 * step)] : value + (2 * step));
 		const isFirst = value <= min;
 		const isLast = value >= max;
 		const isSecond = value <= min + step;
@@ -330,13 +331,53 @@ const PickerBase = kind( {
 		const decrementAriaLabel = `${currentValueText} ${decAriaLabel}`;
 		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
 
+		const decrementValue = () => {
+			if (isFirst) {
+				return '';
+			} else if (Array.isArray(values)) {
+				return values;
+			} else {
+				return (<PickerItem key={clamp(min, max, value - step)} style={{direction: 'ltr'}}>{clamp(min, max, value - step)}</PickerItem>);
+			}
+		};
+
+		const incrementValue = () => {
+			if (isLast) {
+				return '';
+			} else if (Array.isArray(values)) {
+				return values;
+			} else {
+				return (<PickerItem key={clamp(min, max, value + step)} style={{direction: 'ltr'}}>{clamp(min, max, value + step)}</PickerItem>);
+			}
+		};
+
+		const secondaryDecrementValue = () => {
+			if (isSecond) {
+				return '';
+			} else if (Array.isArray(values)) {
+				return values;
+			} else {
+				return (<PickerItem key={clamp(min, max, value - (2 * step))} style={{direction: 'ltr'}}>{clamp(min, max, value - (2 * step))}</PickerItem>);
+			}
+		};
+
+		const secondaryIncrementValue = () => {
+			if (isPenultimate) {
+				return '';
+			} else if (Array.isArray(values)) {
+				return values;
+			} else {
+				return (<PickerItem key={clamp(min, max, value + (2 * step))} style={{direction: 'ltr'}}>{clamp(min, max, value + (2 * step))}</PickerItem>);
+			}
+		};
+
 		let sizingPlaceholder = null;
 		if (typeof width === 'number' && width > 0) {
 			sizingPlaceholder = <div aria-hidden className={css.sizingPlaceholder}>{'0'.repeat(width)}</div>;
 		}
 
-		delete rest.accessibilityHint;
 		delete rest['aria-valuetext'];
+		delete rest.accessibilityHint;
 		delete rest.orientation;
 
 		const horizontal = orientation === 'horizontal';
@@ -351,7 +392,9 @@ const PickerBase = kind( {
 						aria-label={decrementAriaLabel}
 						className={css.secondaryItemDecrement}
 						disabled={isSecond}
-						onClick={() => {handleDecrement(); setTimeout(() => handleDecrement(), 150)}}
+						onClick={() => {
+							handleDecrement(); setTimeout(() => handleDecrement(), 150);
+						}}
 					>
 						<ViewManager
 							aria-hidden
@@ -361,7 +404,7 @@ const PickerBase = kind( {
 							index={Array.isArray(values) ? index - 2 : 0}
 							reverseTransition={reverseTransition}
 						>
-							{isSecond ? '' : Array.isArray(values) ? values : (<PickerItem key={secondaryDecrementValue} style={{direction: 'ltr'}}>{secondaryDecrementValue}</PickerItem>)}
+							{secondaryDecrementValue()}
 						</ViewManager>
 					</PickerButtonItem>
 				}
@@ -374,14 +417,14 @@ const PickerBase = kind( {
 					onClick={handleDecrement}
 				>
 					<ViewManager
-							aria-hidden
-							arranger={arranger}
-							className={css.viewManager}
-							duration={150}
-							index={Array.isArray(values) ? index - 1 : 0}
-							reverseTransition={reverseTransition}
-						>
-						{isFirst ? '' : Array.isArray(values) ? values : (<PickerItem key={decrementValue} style={{direction: 'ltr'}}>{decrementValue}</PickerItem>)}
+						aria-hidden
+						arranger={arranger}
+						className={css.viewManager}
+						duration={150}
+						index={Array.isArray(values) ? index - 1 : 0}
+						reverseTransition={reverseTransition}
+					>
+						{decrementValue()}
 					</ViewManager>
 				</PickerButtonItem>
 				<div
@@ -391,16 +434,16 @@ const PickerBase = kind( {
 					role="spinbutton"
 				>
 					{sizingPlaceholder}
-						<ViewManager
-							aria-hidden
-							arranger={arranger}
-							className={css.viewManager}
-							duration={150}
-							index={Array.isArray(values) ? index : 0}
-							reverseTransition={reverseTransition}
-						>
-							{Array.isArray(values) ? values : (<PickerItem key={currentValue} style={{direction: 'ltr'}}>{currentValue}</PickerItem>)}
-						</ViewManager>
+					<ViewManager
+						aria-hidden
+						arranger={arranger}
+						className={css.viewManager}
+						duration={150}
+						index={Array.isArray(values) ? index : 0}
+						reverseTransition={reverseTransition}
+					>
+						{Array.isArray(values) ? values : (<PickerItem key={currentValue} style={{direction: 'ltr'}}>{currentValue}</PickerItem>)}
+					</ViewManager>
 				</div>
 				<PickerButtonItem
 					aria-controls={valueId}
@@ -418,7 +461,7 @@ const PickerBase = kind( {
 						index={Array.isArray(values) ? index + 1 : 0}
 						reverseTransition={reverseTransition}
 					>
-						{isLast ? '' :Array.isArray(values) ? values : (<PickerItem key={incrementValue} style={{direction: 'ltr'}}>{incrementValue}</PickerItem>)}
+						{incrementValue()}
 					</ViewManager>
 				</PickerButtonItem>
 				{skin === 'silicon' &&
@@ -428,7 +471,9 @@ const PickerBase = kind( {
 						aria-label={incrementAriaLabel}
 						className={css.secondaryItemIncrement}
 						disabled={isPenultimate}
-						onClick={() => {handleIncrement(); setTimeout(() => handleIncrement(), 150)}}
+						onClick={() => {
+							handleIncrement(); setTimeout(() => handleIncrement(), 150);
+						}}
 					>
 						<ViewManager
 							aria-hidden
@@ -438,7 +483,7 @@ const PickerBase = kind( {
 							index={Array.isArray(values) ? index + 2 : 0}
 							reverseTransition={reverseTransition}
 						>
-							{isPenultimate ? '' : Array.isArray(values) ? values : (<PickerItem key={secondaryIncrementValue} style={{direction: 'ltr'}}>{secondaryIncrementValue}</PickerItem>)}
+							{secondaryIncrementValue()}
 						</ViewManager>
 					</PickerButtonItem>
 				}

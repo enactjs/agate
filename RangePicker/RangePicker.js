@@ -117,7 +117,7 @@ const RangePickerBase = kind({
 
 	render: ({value, ...rest}) => {
 		return (
-			<PickerCore {...rest} value={value}>
+			<PickerCore {...rest} index={0} value={value}>
 				{value}
 			</PickerCore>
 		);
