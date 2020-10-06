@@ -36,7 +36,7 @@ const ThumbnailItemBase = kind({
 		/**
 		 * The main content displayed with the thumbnail.
 		 *
-		 * @type {String}
+		 * @type {Node}
 		 * @public
 		 */
 		children: PropTypes.node,
