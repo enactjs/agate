@@ -8,7 +8,7 @@ describe('ThumbnailItem Specs', () => {
 		const subject = mount(
 			<ThumbnailItem
 				label="label"
-				type="square"
+				type="normal"
 			/>
 		);
 
