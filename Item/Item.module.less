@@ -43,7 +43,6 @@
 		border-color: @agate-item-border-color;
 		color: @agate-item-color;
 		background-color: @agate-item-bg-color;
-		height: @agate-item-height;
 
 		&:last-child {
 			border-bottom-color: transparent;
@@ -60,6 +59,7 @@
 			}
 
 			&.hasLabel {
+				padding: @agate-item-haslabel-padding;
 				&.labelBefore .label {
 					.padding-start-end(0, @agate-item-label-padding);
 				}
