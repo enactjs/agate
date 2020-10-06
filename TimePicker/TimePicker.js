@@ -104,7 +104,7 @@ const dateTimeConfig = {
 	},
 	defaultOrder: ['h', 'm', 'a'],
 	handlers: {
-		onChangeHour: function (ev, value) {
+		onHourChange: function (ev, value) {
 			const currentTime = DateFactory(value).getTimeExtended();
 			const currentHour = value.hour;
 
@@ -120,12 +120,12 @@ const dateTimeConfig = {
 			return value;
 		},
 
-		onChangeMinute: function (ev, value) {
+		onMinuteChange: function (ev, value) {
 			value.minute = ev.value;
 			return value;
 		},
 
-		onChangeMeridiem: function (ev, value, i18n) {
+		onMeridiemChange: function (ev, value, i18n) {
 			const {meridiemRanges} = i18n;
 			const meridiem = meridiemRanges[ev.value];
 

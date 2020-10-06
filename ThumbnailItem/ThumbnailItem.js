@@ -85,15 +85,15 @@ const ThumbnailItemBase = kind({
 		/**
 		 * The thumbnail type.
 		 *
-		 * @type {('normal'|'styled')}
-		 * @default 'normal'
+		 * @type {('square'|'circle')}
+		 * @default 'square'
 		 * @public
 		 */
-		type: PropTypes.oneOf(['normal', 'styled'])
+		type: PropTypes.oneOf(['square', 'circle'])
 	},
 
 	defaultProps: {
-		type: 'normal'
+		type: 'square'
 	},
 
 	styles: {

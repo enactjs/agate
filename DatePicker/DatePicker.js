@@ -50,17 +50,17 @@ const dateTimeConfig = {
 	},
 	defaultOrder: ['d', 'm', 'y'],
 	handlers: {
-		onChangeDate: (ev, value) => {
+		onDateChange: (ev, value) => {
 			value.day = ev.value;
 			return value;
 		},
 
-		onChangeMonth: (ev, value) => {
+		onMonthChange: (ev, value) => {
 			value.month = ev.value;
 			return value;
 		},
 
-		onChangeYear: (ev, value) => {
+		onYearChange: (ev, value) => {
 			value.year = ev.value;
 			return value;
 		}

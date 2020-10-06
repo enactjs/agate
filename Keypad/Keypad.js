@@ -149,7 +149,7 @@ const KeypadBase = kind({
 		 * @param {Object} event
 		 * @public
 		 */
-		handleInputValue: PropTypes.func
+		onKeyButtonClick: PropTypes.func
 	},
 
 	styles: {
@@ -157,7 +157,7 @@ const KeypadBase = kind({
 		className: 'keypad'
 	},
 
-	render: ({disabled, handleInputValue, ...rest}) => {
+	render: ({disabled, onKeyButtonClick, ...rest}) => {
 		return (
 			<Layout {...rest} align="center end" className={css.keypad} inline wrap>
 				{KEY_LIST.map((keyText, rowIndex) => {
@@ -177,7 +177,7 @@ const KeypadBase = kind({
 							component={Key}
 							disabled={disabled}
 							key={`key${rowIndex}-${text}`}
-							onKeyButtonClick={() => handleInputValue(isIcon ? icon : text)}
+							onKeyButtonClick={() => onKeyButtonClick(isIcon ? icon : text)}
 							shrink
 							label={keyText.label}
 							text={isIcon ? null : text}
@@ -311,7 +311,7 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 
 		render () {
 			return (
-				<Wrapped {...this.props} handleInputValue={this.handleInputValue} />
+				<Wrapped {...this.props} onKeyButtonClick={this.handleInputValue} />
 			);
 		}
 	};

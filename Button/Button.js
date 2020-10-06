@@ -249,7 +249,6 @@ const ButtonBase = kind({
 		delete rest.type;
 
 		return UiButtonBase.inline({
-			'data-webos-voice-intent': 'Select',
 			...rest,
 			css
 		});

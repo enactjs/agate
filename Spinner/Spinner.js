@@ -51,7 +51,7 @@ const SpinnerCore = kind({
 		 * @default 'searching'
 		 * @public
 		 */
-		type: PropTypes.string
+		type: PropTypes.oneOf(['loading', 'searching'])
 	},
 
 	defaultProps: {

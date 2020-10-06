@@ -113,15 +113,6 @@ const IncrementSliderBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * The `data-webos-voice-group-label` for the IconButton of IncrementSlider.
-		 *
-		 * @type {String}
-		 * @memberof agate/IncrementSlider.IncrementSliderBase.prototype
-		 * @public
-		 */
-		'data-webos-voice-group-label': PropTypes.string,
-
-		/**
 		* Sets the hint string read when focusing the decrement button.
 		*
 		* @default 'press button to decrease the value'
@@ -454,7 +445,6 @@ const IncrementSliderBase = kind({
 
 	render: ({active,
 		'aria-hidden': ariaHidden,
-		'data-webos-voice-group-label': voiceGroupLabel,
 		backgroundProgress,
 		css,
 		decrementAriaLabel,
@@ -500,7 +490,6 @@ const IncrementSliderBase = kind({
 					aria-controls={!incrementDisabled ? id : null}
 					aria-label={decrementAriaLabel}
 					className={css.decrementButton}
-					data-webos-voice-group-label={voiceGroupLabel}
 					disabled={decrementDisabled}
 					icon={decrementIcon}
 					onTap={onDecrement}
@@ -536,7 +525,6 @@ const IncrementSliderBase = kind({
 					aria-controls={!decrementDisabled ? id : null}
 					aria-label={incrementAriaLabel}
 					className={css.incrementButton}
-					data-webos-voice-group-label={voiceGroupLabel}
 					disabled={incrementDisabled}
 					icon={incrementIcon}
 					onSpotlightDisappear={onIncrementSpotlightDisappear}

@@ -70,13 +70,22 @@ const SwitchItemBase = kind({
 		icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
 		/**
+		 * Sets the switch to the 'on' state.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		selected: PropTypes.bool,
+
+		/**
 		 * Customize the text displayed when the switch is "off".
 		 *
 		 * @type {String}
 		 * @default 'off'
 		 * @public
 		 */
-		offText: PropTypes.string,
+		switchOffLabel: PropTypes.string,
 
 		/**
 		 * Customize the text displayed when the switch is "on".
@@ -85,23 +94,14 @@ const SwitchItemBase = kind({
 		 * @default 'on'
 		 * @public
 		 */
-		onText: PropTypes.string,
-
-		/**
-		 * Sets the switch to the 'on' state.
-		 *
-		 * @type {Boolean}
-		 * @default false
-		 * @public
-		 */
-		selected: PropTypes.bool
+		switchOnLabel: PropTypes.string
 	},
 
 	defaultProps: {
 		disabled: false,
-		offText: 'off',
-		onText: 'on',
-		selected: false
+		selected: false,
+		switchOffLabel: 'off',
+		switchOnLabel: 'on'
 	},
 
 	styles: {
@@ -126,7 +126,7 @@ const SwitchItemBase = kind({
 		)
 	},
 
-	render: ({children, css, icon, offText, onText, selected, ...rest}) => {
+	render: ({children, css, icon, selected, switchOffLabel, switchOnLabel, ...rest}) => {
 
 		return (
 			<Item
@@ -134,7 +134,7 @@ const SwitchItemBase = kind({
 				role="button"
 				{...rest}
 				css={css}
-				label={selected ? onText : offText}
+				label={selected ? switchOnLabel : switchOffLabel}
 				labelPosition="after"
 			>
 				{icon}
