@@ -387,12 +387,12 @@ const PickerBase = kind( {
 			sizingPlaceholder = <div aria-hidden className={css.sizingPlaceholder}>{'0'.repeat(width)}</div>;
 		}
 
+		const horizontal = orientation === 'horizontal';
+		const arranger = horizontal ? SlideLeftArranger : SlideTopArranger;
+
 		delete rest['aria-valuetext'];
 		delete rest.accessibilityHint;
 		delete rest.orientation;
-
-		const horizontal = orientation === 'horizontal';
-		let arranger = horizontal ? SlideLeftArranger : SlideTopArranger;
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
