@@ -4,6 +4,7 @@
  * @module agate/FullscreenPopup
  * @exports FullscreenPopup
  * @exports FullscreenPopupBase
+ * @exports FullscreenPopupDecorator
  */
 
 import compose from 'ramda/src/compose';
@@ -77,6 +78,14 @@ const FullscreenPopupBase = kind({
 	}
 });
 
+/**
+ * Applies Agate specific behaviors to [FullscreenPopupBase]{@link agate/FullscreenPopup.FullscreenPopupBase}.
+ *
+ * @hoc
+ * @memberof agate/FullscreenPopup
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const FullscreenPopupDecorator = compose(
 	Skinnable({prop: 'skin'}),
 	PopupState
@@ -87,7 +96,8 @@ const FullscreenPopupDecorator = compose(
  *
  * @class FullscreenPopup
  * @memberof agate/FullscreenPopup
- * @mixes agate/Skinnable.Skinnable
+ * @extends agate/FullscreenPopup.FullscreenPopupBase
+ * @mixes agate/FullscreenPopup.FullscreenPopupDecorator
  * @ui
  * @public
  */

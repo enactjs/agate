@@ -9,6 +9,7 @@
  * @module agate/Spinner
  * @exports Spinner
  * @exports SpinnerBase
+ * @exports SpinnerDecorator
  */
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
@@ -184,7 +185,7 @@ const SpinnerBase = kind({
  * @hoc
  * @memberof agate/Spinner
  * @mixes agate/Skinnable.Skinnable
- * @private
+ * @public
  */
 const SpinnerDecorator = compose(
 	Pure,
@@ -197,6 +198,7 @@ const SpinnerDecorator = compose(
  * @class Spinner
  * @memberof agate/Spinner
  * @extends agate/Spinner.SpinnerBase
+ * @mixes agate/Spinner.SpinnerDecorator
  * @ui
  * @public
  */
@@ -205,5 +207,6 @@ const Spinner = SpinnerDecorator(SpinnerBase);
 export default Spinner;
 export {
 	Spinner,
-	SpinnerBase
+	SpinnerBase,
+	SpinnerDecorator
 };

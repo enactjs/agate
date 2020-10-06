@@ -12,6 +12,7 @@
  * @module agate/Slider
  * @exports Slider
  * @exports SliderBase
+ * @exports SliderDecorator
  */
 
 // TODO: Add 'activated' styling for slider (If 5-way is needed)
@@ -45,6 +46,7 @@ import componentCss from './Slider.module.less';
  * @class SliderBase
  * @memberof agate/Slider
  * @extends ui/Slider.SliderBase
+ * @mixes agate/Slider.SliderDecorator
  * @ui
  * @public
  */
@@ -271,7 +273,7 @@ const SliderBase = kind({
  * @mixes agate/Skinnable.Skinnable
  * @mixes ui/Slottable.Slottable
  * @mixes ui/Slider.SliderDecorator
- * @private
+ * @public
  */
 const SliderDecorator = compose(
 	Pure,
@@ -284,7 +286,8 @@ const SliderDecorator = compose(
 
 /**
  * Slider input with Agate styling, [`Spottable`]{@link spotlight/Spottable.Spottable},
- * [Touchable]{@link ui/Touchable} and `SliderDecorator` applied.
+ * [Touchable]{@link ui/Touchable} and [`SliderDecorator`]{@link agate/Slider.SliderDecorator}
+ * applied.
  *
  * By default, `Slider` maintains the state of its `value` property. Supply the `defaultValue`
  * property to control its initial value. If you wish to directly control updates to the
@@ -293,6 +296,7 @@ const SliderDecorator = compose(
  *
  * @class Slider
  * @memberof agate/Slider
+ * @mixes agate/Slider.SliderDecorator
  * @ui
  * @public
  */
@@ -314,5 +318,6 @@ const Slider = SliderDecorator(SliderBase);
 export default Slider;
 export {
 	Slider,
-	SliderBase
+	SliderBase,
+	SliderDecorator
 };

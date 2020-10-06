@@ -7,6 +7,7 @@
  * @module agate/SliderButton
  * @exports SliderButton
  * @exports SliderButtonBase
+ * @exports SliderButtonDecorator
  */
 
 import React from 'react';
@@ -139,7 +140,7 @@ const SliderButtonBase = kind({
  * @memberof agate/SliderButton
  * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
- * @private
+ * @public
  */
 const SliderButtonDecorator = compose(
 	Pure,
@@ -154,6 +155,7 @@ const SliderButtonDecorator = compose(
  * @class SliderButton
  * @memberof agate/SliderButton
  * @extends agate/SliderButton.SliderButtonBase
+ * @mixes agate/SliderButton.SliderButtonDecorator
  * @ui
  * @public
  */
@@ -162,5 +164,6 @@ const SliderButton = SliderButtonDecorator(SliderButtonBase);
 export default SliderButton;
 export {
 	SliderButton,
-	SliderButtonBase
+	SliderButtonBase,
+	SliderButtonDecorator
 };

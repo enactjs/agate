@@ -7,6 +7,7 @@
  * @module agate/LabeledIconButton
  * @exports LabeledIconButton
  * @exports LabeledIconButtonBase
+ * @exports LabeledIconButtonDecorator
  */
 
 import EnactPropTypes from '@enact/core/internal/prop-types';
@@ -147,7 +148,7 @@ const LabeledIconButtonBase = kind({
  * @memberof agate/LabeledIconButton
  * @mixes ui/LabeledIcon.LabeledIconDecorator
  * @mixes agate/Button.ButtonDecorator
- * @private
+ * @public
  */
 const LabeledIconButtonDecorator = compose(
 	UiLabeledIconDecorator,
@@ -167,6 +168,7 @@ const LabeledIconButtonDecorator = compose(
  * @class LabeledIconButton
  * @memberof agate/LabeledIconButton
  * @extends agate/LabeledIconButton.LabeledIconButtonBase
+ * @mixes agate/LabeledIconButton.LabeledIconButtonDecorator
  * @ui
  * @public
  */
@@ -175,5 +177,6 @@ const LabeledIconButton = LabeledIconButtonDecorator(LabeledIconButtonBase);
 export default LabeledIconButton;
 export {
 	LabeledIconButton,
-	LabeledIconButtonBase
+	LabeledIconButtonBase,
+	LabeledIconButtonDecorator
 };

@@ -9,6 +9,7 @@
  * @module agate/CheckboxItem
  * @exports CheckboxItem
  * @exports CheckboxItemBase
+ * @exports CheckboxItemDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -114,6 +115,16 @@ const CheckboxItemBase = kind({
 	)
 });
 
+/**
+ * Applies Agate specific behaviors to [CheckboxItem]{@link agate/CheckboxItem.CheckboxItemBase} components.
+ *
+ * @hoc
+ * @memberof agate/CheckboxItem
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const CheckboxItemDecorator = compose(
 	Toggleable({toggleProp: 'onClick'}),
 	Spottable,
@@ -125,5 +136,6 @@ const CheckboxItem = CheckboxItemDecorator(CheckboxItemBase);
 export default CheckboxItem;
 export {
 	CheckboxItem,
-	CheckboxItemBase
+	CheckboxItemBase,
+	CheckboxItemDecorator
 };

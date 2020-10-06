@@ -4,6 +4,7 @@
  * @module agate/Drawer
  * @exports Drawer
  * @exports DrawerBase
+ * @exports DrawerDecorator
  */
 
 import compose from 'ramda/src/compose';
@@ -92,7 +93,7 @@ const DrawerBase = kind({
  * @memberof agate/Drawer
  * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
- * @private
+ * @public
  */
 const DrawerDecorator = compose(
 	Slottable({slots: ['header', 'footer']}),
@@ -112,6 +113,8 @@ const DrawerDecorator = compose(
  *
  * @class Drawer
  * @memberof agate/Drawer
+ * @extends agate/Drawer.DrawerBase
+ * @mixes agate/Drawer.DrawerDecorator
  * @ui
  * @public
  */
@@ -120,5 +123,6 @@ const Drawer = DrawerDecorator(DrawerBase);
 export default Drawer;
 export {
 	Drawer,
-	DrawerBase
+	DrawerBase,
+	DrawerDecorator
 };

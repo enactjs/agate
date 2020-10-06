@@ -7,6 +7,7 @@
  * @module agate/LabeledIcon
  * @exports LabeledIcon
  * @exports LabeledIconBase
+ * @exports LabeledIconDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -68,7 +69,7 @@ const LabeledIconBase = kind({
  * @memberof agate/LabeledIcon
  * @mixes ui/LabeledIcon.LabeledIconDecorator
  * @mixes agate/Skinnable.Skinnable
- * @private
+ * @public
  */
 const LabeledIconDecorator = compose(
 	UiLabeledIconDecorator,
@@ -89,6 +90,7 @@ const LabeledIconDecorator = compose(
  * @class LabeledIcon
  * @memberof agate/LabeledIcon
  * @extends agate/LabeledIcon.LabeledIconBase
+ * @mixes agate/LabeledIcon.LabeledIconDecorator
  * @ui
  * @public
  */
@@ -97,5 +99,6 @@ const LabeledIcon = LabeledIconDecorator(LabeledIconBase);
 export default LabeledIcon;
 export {
 	LabeledIcon,
-	LabeledIconBase
+	LabeledIconBase,
+	LabeledIconDecorator
 };

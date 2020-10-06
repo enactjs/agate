@@ -538,6 +538,16 @@ const IncrementSliderBase = kind({
 	}
 });
 
+/**
+ * Applies Agate specific behaviors to [IncrementSliderBase]{@link agate/IncrementSlider.IncrementSliderBase}
+ *
+ * @hoc
+ * @memberof agate/IncrementSlider
+ * @mixes ui/Changeable.Changeable
+ * @mixes agate/Skinnable.Skinnable
+ * @mixes ui/Slottable.Slottable
+ * @public
+ */
 const IncrementSliderDecorator = compose(
 	Pure,
 	Changeable,
@@ -559,6 +569,7 @@ const IncrementSliderDecorator = compose(
  * @class IncrementSlider
  * @memberof agate/IncrementSlider
  * @extends agate/IncrementSlider.IncrementSliderBase
+ * @mixes agate/IncrementSlider.IncrementSliderDecorator
  * @ui
  * @public
  */

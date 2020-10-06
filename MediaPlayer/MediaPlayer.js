@@ -1,3 +1,12 @@
+/**
+ * An Agate-styled `Media` component.
+ *
+ * @module agate/MediaPlayer
+ * @exports MediaPlayer
+ * @exports MediaPlayerBase
+ * @exports MediaPlayerDecorator
+ */
+
 import {adaptEvent, call, forwardWithPrevent, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import EnactPropTypes from '@enact/core/internal/prop-types';
@@ -695,7 +704,7 @@ const AnnounceDecorator = Wrapped => function AnnounceDecorator (props) {
  * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
  * @mixes i18n/I18nContextDecorator.I18nContextDecorator
- * @private
+ * @public
  */
 const MediaPlayerDecorator = compose(
 	AnnounceDecorator,
@@ -719,6 +728,7 @@ const MediaPlayerDecorator = compose(
  * @class MediaPlayer
  * @memberof agate/MediaPlayer
  * @extends agate/MediaPlayer.MediaPlayerBase
+ * @mixes agate/MediaPlayer.MediaPlayerDecorator
  * @ui
  * @public
  */
@@ -727,5 +737,6 @@ const MediaPlayer = MediaPlayerDecorator(MediaPlayerBase);
 export default MediaPlayer;
 export {
 	MediaPlayer,
-	MediaPlayerBase
+	MediaPlayerBase,
+	MediaPlayerDecorator
 };

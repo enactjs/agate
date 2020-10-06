@@ -7,7 +7,7 @@
  * @module agate/Arc
  * @exports Arc
  * @exports ArcBase
- * @private
+ * @exports ArcDecorator
  */
 
 import EnactPropTypes from '@enact/core/internal/prop-types';
@@ -182,5 +182,6 @@ const Arc = ArcDecorator(ArcBase);
 export default Arc;
 export {
 	Arc,
-	ArcBase
+	ArcBase,
+	ArcDecorator
 };

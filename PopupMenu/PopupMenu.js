@@ -4,6 +4,7 @@
  * @module agate/PopupMenu
  * @exports PopupMenu
  * @exports PopupMenuBase
+ * @exports PopupMenuDecorator
  */
 
 import compose from 'ramda/src/compose';
@@ -104,7 +105,7 @@ const PopupMenuBase = kind({
  * @hoc
  * @memberof agate/PopupMenu
  * @mixes agate/Skinnable.Skinnable
- * @private
+ * @public
  */
 const PopupMenuDecorator = compose(
 	Slottable({slots: ['title']}),
@@ -125,6 +126,7 @@ const PopupMenuDecorator = compose(
  * @class PopupMenu
  * @memberof agate/PopupMenu
  * @extends agate/PopupMenu.PopupMenuBase
+ * @mixes agate/PopupMenu.PopupMenuDecorator
  * @ui
  * @public
  */
@@ -133,5 +135,6 @@ const PopupMenu = PopupMenuDecorator(PopupMenuBase);
 export default PopupMenu;
 export {
 	PopupMenu,
-	PopupMenuBase
+	PopupMenuBase,
+	PopupMenuDecorator
 };

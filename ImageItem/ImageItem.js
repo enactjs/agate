@@ -4,6 +4,7 @@
  * @module agate/ImageItem
  * @exports ImageItem
  * @exports ImageItemBase
+ * @exports ImageItemDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -141,7 +142,7 @@ const ImageItemBase = kind({
  * @mixes ui/Marquee.MarqueeController
  * @mixes agate/Skinnable.Skinnable
  * @mixes spotlight/Spottable.Spottable
- * @private
+ * @public
  */
 const ImageItemDecorator = compose(
 	MarqueeController({marqueeOnFocus: true}),
@@ -155,6 +156,7 @@ const ImageItemDecorator = compose(
  * @class ImageItem
  * @memberof agate/ImageItem
  * @extends agate/ImageItem.ImageItemBase
+ * @mixes agate/ImageItem.ImageItemDecorator
  * @public
  */
 const ImageItem = ImageItemDecorator(ImageItemBase);
@@ -162,5 +164,6 @@ const ImageItem = ImageItemDecorator(ImageItemBase);
 export default ImageItem;
 export {
 	ImageItem,
-	ImageItemBase
+	ImageItemBase,
+	ImageItemDecorator
 };

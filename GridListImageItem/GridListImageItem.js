@@ -2,6 +2,7 @@
  * @module agate/GridListImageItem
  * @exports GridListImageItem
  * @exports GridListImageItemBase
+ * @exports GridListImageItemDecorator
  * @deprecated
  * @private
  */
@@ -124,6 +125,7 @@ const GridListImageItemDecorator = compose(
  * @class GridListImageItem
  * @memberof agate/GridListImageItem
  * @extends agate/GridListImageItem.GridListImageItemBase
+ * @mixes agate/GridListImageItem.GridListImageItemDecorator
  * @ui
  * @deprecated
  * @private
@@ -133,5 +135,6 @@ const GridListImageItem = GridListImageItemDecorator(GridListImageItemBase);
 export default GridListImageItem;
 export {
 	GridListImageItem,
-	GridListImageItemBase
+	GridListImageItemBase,
+	GridListImageItemDecorator
 };

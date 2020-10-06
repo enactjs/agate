@@ -317,15 +317,35 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 	};
 });
 
+/**
+ * Applies Agate specific behaviors to [KeyPadBase]{@link agate/Keypad.KeyPadBase}
+ *
+ * @hoc
+ * @memberof agate/Keypad
+ * @mixes ui/Marquee.MarqueeController
+ * @mixes agate/Skinnable.Skinnable
+ * @mixes spotlight/Spottable.Spottable
+ * @public
+ */
 const KeypadDecorator = compose(
 	KeypadBehaviorDecorator,
 	Skinnable
 );
 
+/**
+ * Provides Agate-themed keypad components and behaviors. Used to display a sequence of numbers and buttons, like a keyboard.
+ *
+ * @class Keypad
+ * @memberof agate/Keypad
+ * @extends agate/Keypad.KeyPadBase
+ * @mixes agate/Keypad.KeypadDecorator
+ * @public
+ */
 const Keypad = KeypadDecorator(KeypadBase);
 
 export default Keypad;
 export {
 	Keypad,
-	KeypadBase
+	KeypadBase,
+	KeypadDecorator
 };

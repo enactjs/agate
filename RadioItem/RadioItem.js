@@ -3,6 +3,8 @@
  *
  * @module agate/RadioItem
  * @exports RadioItem
+ * @exports RadioItemBase
+ * @exports RadioItemDecorator
  */
 
 import React from 'react';
@@ -25,10 +27,7 @@ import componentCss from './RadioItem.module.less';
  * @class RadioItem
  * @memberof agate/RadioItem
  * @extends agate/Item.Item
- * @mixes spotlight/Spottable.Spottable
- * @mixes ui/Toggleable.Toggleable
- * @mixes ui/Touchable.Touchable
- * @mixes agate/Skinnable.Skinnable
+ * @mixes agate/RadioItem.RadioItemDecorator
  * @ui
  * @public
  */
@@ -98,7 +97,17 @@ const RadioItemBase = kind({
 	}
 });
 
-// Decorator is not exported so not documented
+/**
+ * Applies Agate specific behaviors to [RadioItem]{@link agate/RadioItem.RadioItem} components.
+ *
+ * @hoc
+ * @memberof agate/RadioItem
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes ui/Touchable.Touchable
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const RadioItemDecorator = compose(
 	Toggleable({toggleProp: 'onTap'}),
 	Touchable,
@@ -110,5 +119,7 @@ const RadioItem = RadioItemDecorator(RadioItemBase);
 
 export default RadioItem;
 export {
-	RadioItem
+	RadioItem,
+	RadioItemBase,
+	RadioItemDecorator
 };

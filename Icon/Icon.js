@@ -7,6 +7,7 @@
  * @module agate/Icon
  * @exports Icon
  * @exports IconBase
+ * @exports IconDecorator
  * @exports icons
  */
 
@@ -293,7 +294,7 @@ const IconBase = kind({
  * @hoc
  * @memberof agate/Icon
  * @mixes agate/Skinnable.Skinnable
- * @private
+ * @public
  */
 const IconDecorator = compose(
 	Pure,
@@ -306,6 +307,7 @@ const IconDecorator = compose(
  * @class Icon
  * @memberof agate/Icon
  * @extends agate/Icon.IconBase
+ * @mixes agate/Icon.IconDecorator
  * @ui
  * @public
  */
@@ -315,6 +317,7 @@ export default Icon;
 export {
 	Icon,
 	IconBase,
+	IconDecorator,
 	iconList as icons,
 	iconListSilicon as iconsSilicon
 };

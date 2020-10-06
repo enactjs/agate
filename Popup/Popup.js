@@ -7,6 +7,7 @@
  * @module agate/Popup
  * @exports Popup
  * @exports PopupBase
+ * @exports PopupDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -138,7 +139,7 @@ const PopupBase = kind({
  * @hoc
  * @memberof agate/Popup
  * @mixes agate/Skinnable.Skinnable
- * @private
+ * @public
  */
 const PopupDecorator = compose(
 	Slottable({slots: ['closeButton', 'title', 'buttons']}),
@@ -153,6 +154,7 @@ const PopupDecorator = compose(
  * @class Popup
  * @memberof agate/Popup
  * @extends agate/Popup.PopupBase
+ * @mixes agate/Popup.PopupDecorator
  * @ui
  * @public
  */
@@ -161,5 +163,6 @@ const Popup = PopupDecorator(PopupBase);
 export default Popup;
 export {
 	Popup,
-	PopupBase
+	PopupBase,
+	PopupDecorator
 };
