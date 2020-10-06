@@ -24,6 +24,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			 * The value options of ArcPicker.
 			 *
 			 * @type {Node}
+			 * @required
 			 * @public
 			 */
 			children: PropTypes.node.isRequired,
