@@ -42,7 +42,7 @@ const SkinnedButton = Skinnable(
 				size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}
 				type={select('type', ['standard', 'grid'], Config)}
 			>
-				{text('children', Button, 'Click me')}
+				{text('children', Config, 'Click me')}
 			</Button>
 		);
 	}
