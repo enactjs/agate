@@ -14,6 +14,7 @@ import {clamp} from '@enact/core/util';
 import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
 import PickerCore from '../internal/Picker';
@@ -170,6 +171,19 @@ const RangePickerBase = kind({
  */
 
 /**
+ * Applies Agate specific behaviors to [RangePicker]{@link agate/RangePicker.RangePickerBase} components.
+ *
+ * @hoc
+ * @memberof agate/RangePicker
+ * @mixes ui/Changeable.Changeable
+ * @public
+ */
+const RangePickerDecorator = compose(
+	Pure,
+	Changeable
+);
+
+/**
  * A component that lets the user select a number from a range of numbers.
  *
  * By default, `RangePicker` maintains the state of its `value` property. Supply the `defaultValue`
@@ -178,15 +192,11 @@ const RangePickerBase = kind({
  *
  * @class RangePicker
  * @memberof agate/RangePicker
- * @mixes ui/Changeable.Changeable
+ * @mixes agate/RangePicker.RangePickerDecorator
  * @ui
  * @public
  */
-const RangePicker = Pure(
-	Changeable(
-		RangePickerBase
-	)
-);
+const RangePicker = RangePickerDecorator(RangePickerBase);
 
 /**
  * Default value
@@ -200,5 +210,6 @@ const RangePicker = Pure(
 export default RangePicker;
 export {
 	RangePicker,
-	RangePickerBase
+	RangePickerBase,
+	RangePickerDecorator
 };

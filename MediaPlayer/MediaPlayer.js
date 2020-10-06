@@ -703,7 +703,6 @@ const AnnounceDecorator = Wrapped => function AnnounceDecorator (props) {
  * @mixes spotlight/Spottable.Spottable
  * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
- * @mixes i18n/I18nContextDecorator.I18nContextDecorator
  * @public
  */
 const MediaPlayerDecorator = compose(

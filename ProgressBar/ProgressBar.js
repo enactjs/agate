@@ -11,6 +11,7 @@
 import kind from '@enact/core/kind';
 import UiProgressBar from '@enact/ui/ProgressBar';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
 import Skinnable from '../Skinnable';
@@ -23,7 +24,7 @@ import componentCss from './ProgressBar.module.less';
  * @class ProgressBar
  * @memberof agate/ProgressBar
  * @extends ui/ProgressBar.ProgressBar
- * @mixes agate/Skinnable.Skinnable
+ * @mixes agate/ProgressBar.ProgressBarDecorator
  * @ui
  * @public
  */
@@ -99,11 +100,24 @@ const ProgressBarBase = kind({
 	}
 });
 
+/**
+ * Applies Agate specific behaviors to [ProgressBar]{@link agate/ProgressBar.ProgressBar} components.
+ *
+ * @hoc
+ * @memberof agate/ProgressBar
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
+const ProgressBarDecorator = compose(
+	Skinnable
+);
+
 // Not documenting as base is not very useful to developers.
-const ProgressBar = Skinnable(ProgressBarBase);
+const ProgressBar = ProgressBarDecorator(ProgressBarBase);
 
 export default ProgressBar;
 export {
 	ProgressBar,
-	ProgressBarBase
+	ProgressBarBase,
+	ProgressBarDecorator
 };

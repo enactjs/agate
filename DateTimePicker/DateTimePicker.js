@@ -9,10 +9,11 @@
  * @exports DateTimePickerBase
  */
 
-import React from 'react';
 import kind from '@enact/core/kind';
 import {Cell, Row} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
+import React from 'react';
 
 import DatePicker from '../DatePicker';
 import Skinnable from '../Skinnable';
@@ -67,19 +68,32 @@ const DateTimePickerBase = kind({
 });
 
 /**
+ * Applies Agate specific behaviors to [DateTimePicker]{@link agate/DateTimePicker.DateTimePickerBase} components.
+ *
+ * @hoc
+ * @memberof agate/DateTimePicker
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
+const DateTimePickerDecorator = compose(
+	Skinnable
+);
+
+/**
  * An Agate themed date/time Picker component.
  *
  * @class DateTimePicker
  * @memberof agate/DateTimePicker
  * @extends agate/DateTimePicker.DateTimePickerBase
- * @mixes agate/Skinnable.Skinnable
+ * @mixes agate/DateTimePicker.DateTimePickerDecorator
  * @ui
  * @public
  */
-const DateTimePicker = Skinnable(DateTimePickerBase);
+const DateTimePicker = DateTimePickerDecorator(DateTimePickerBase);
 
 export default DateTimePicker;
 export {
 	DateTimePicker,
-	DateTimePickerBase
+	DateTimePickerBase,
+	DateTimePickerDecorator
 };

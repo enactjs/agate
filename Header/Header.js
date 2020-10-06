@@ -11,10 +11,11 @@
  */
 
 import kind from '@enact/core/kind';
-import React from 'react';
 import PropTypes from 'prop-types';
 import {Column, Row, Layout} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
+import compose from 'ramda/src/compose';
+import React from 'react';
 
 import Skinnable from '../Skinnable';
 
@@ -25,6 +26,7 @@ import componentCss from './Header.module.less';
  *
  * @class Header
  * @memberof agate/Header
+ * @mixes agate/Header.HeaderDecorator
  * @ui
  * @public
  */
@@ -145,8 +147,22 @@ const HeaderBase = kind({
 	}
 });
 
+/**
+ * Applies Agate specific behaviors to [Header]{@link agate/Header.Header} components.
+ *
+ * @hoc
+ * @memberof agate/Header
+ * @mixes ui/Slottable.Slottable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
+const HeaderDecorator = compose(
+	Slottable({slots: ['subtitle', 'title', 'titleAbove']}),
+	Skinnable
+);
+
 // Note that we only export this (even as HeaderBase). HeaderBase is not useful on its own.
-const Header = Slottable({slots: ['subtitle', 'title', 'titleAbove']}, Skinnable(HeaderBase));
+const Header = HeaderDecorator(HeaderBase);
 
 // Set up Header so when it's used in a slottable layout (like Panel), it is automatically
 // recognized as this specific slot.
@@ -155,5 +171,6 @@ Header.defaultSlot = 'header';
 export default Header;
 export {
 	Header,
-	HeaderBase
+	HeaderBase,
+	HeaderDecorator
 };

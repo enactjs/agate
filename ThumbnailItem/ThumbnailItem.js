@@ -11,9 +11,10 @@
  */
 
 import kind from '@enact/core/kind';
+import Slottable from '@enact/ui/Slottable';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Slottable from '@enact/ui/Slottable';
+import compose from 'ramda/src/compose';
 
 import Image from '../Image';
 import Item from '../Item';
@@ -124,7 +125,17 @@ const ThumbnailItemBase = kind({
 	}
 });
 
-const ThumbnailItem = Slottable({slots: ['img', 'slotBefore']}, ThumbnailItemBase);
+/**
+ * Applies Agate specific behaviors to [ThumbnailItem]{@link agate/ThumbnailItem.ThumbnailItemBase} components.
+ *
+ * @hoc
+ * @memberof agate/ThumbnailItem
+ * @mixes ui/Slottable.Slottable
+ * @public
+ */
+const ThumbnailItemDecorator = compose(
+	Slottable({slots: ['img', 'slotBefore']})
+);
 
 /**
  * A stateless, unfocusable item that can display a thumbnail.
@@ -132,12 +143,15 @@ const ThumbnailItem = Slottable({slots: ['img', 'slotBefore']}, ThumbnailItemBas
  * @class ThumbnailItem
  * @memberof agate/ThumbnailItem
  * @extends agate/ThumbnailItem.ThumbnailItemBase
+ * @mixes agate/ThumbnailItem.ThumbnailItemDecorator
  * @ui
  * @public
  */
+const ThumbnailItem = ThumbnailItemDecorator(ThumbnailItemBase);
 
 export default ThumbnailItem;
 export {
 	ThumbnailItem,
-	ThumbnailItemBase
+	ThumbnailItemBase,
+	ThumbnailItemDecorator
 };

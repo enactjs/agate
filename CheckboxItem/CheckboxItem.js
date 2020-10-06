@@ -116,7 +116,7 @@ const CheckboxItemBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [CheckboxItem]{@link agate/CheckboxItem.CheckboxItemBase} components.
+ * Applies Agate specific behaviors to [CheckboxItem]{@link agate/CheckboxItem.CheckboxItem} components.
  *
  * @hoc
  * @memberof agate/CheckboxItem

@@ -13,6 +13,7 @@ import kind from '@enact/core/kind';
 import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
 import Skinnable from '../Skinnable';
@@ -274,6 +275,22 @@ const InputBase = kind({
 });
 
 /**
+ * Applies Agate specific behaviors to [Input]{@link agate/Input.InputBase} components.
+ *
+ * @hoc
+ * @memberof agate/Input
+ * @mixes ui/Changeable.Changeable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
+const InputDecorator = compose(
+	Pure,
+	Changeable,
+	InputSpotlightDecorator,
+	Skinnable
+);
+
+/**
  * A Spottable, Agate styled input component with embedded icon support.
  *
  * By default, `Input` maintains the state of its `value` property. Supply the `defaultValue`
@@ -283,25 +300,16 @@ const InputBase = kind({
  * @class Input
  * @memberof agate/Input
  * @extends agate/Input.InputBase
- * @mixes ui/Changeable.Changeable
- * @mixes spotlight/Spottable.Spottable
- * @mixes agate/Skinnable.Skinnable
+ * @mixes agate/Input.InputDecorator
  * @ui
  * @public
  */
-const Input = Pure(
-	Changeable(
-		InputSpotlightDecorator(
-			Skinnable(
-				InputBase
-			)
-		)
-	)
-);
+const Input = InputDecorator(InputBase);
 
 export default Input;
 export {
 	extractInputProps,
 	Input,
-	InputBase
+	InputBase,
+	InputDecorator
 };

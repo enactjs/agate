@@ -14,6 +14,7 @@ import Pure from '@enact/ui/internal/Pure';
 import DateFactory from 'ilib/lib/DateFactory';
 import DateFmt from 'ilib/lib/DateFmt';
 import LocaleInfo from 'ilib/lib/LocaleInfo';
+import compose from 'ramda/src/compose';
 
 import {DateTimeDecorator} from '../internal/DateTime';
 import Skinnable from '../Skinnable';
@@ -187,6 +188,20 @@ const dateTimeConfig = {
 };
 
 /**
+ * Applies Agate specific behaviors to [TimePicker]{@link agate/TimePicker.TimePickerBase} components.
+ *
+ * @hoc
+ * @memberof agate/TimePicker
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
+const TimePickerDecorator = compose(
+	Pure,
+	Skinnable,
+	DateTimeDecorator(dateTimeConfig)
+);
+
+/**
  * A component that allows displaying or selecting time.
  *
  * Set the [value]{@link agate/TimePicker.TimePicker#value} property to a standard JavaScript
@@ -199,10 +214,11 @@ const dateTimeConfig = {
  *
  * @class TimePicker
  * @memberof agate/TimePicker
- * @mixes ui/Changeable.Changeable
+ * @mixes agate/TimePicker.TimePickerDecorator
  * @ui
  * @public
  */
+const TimePicker = TimePickerDecorator(TimePickerBase);
 
 /**
  * Default value
@@ -212,15 +228,6 @@ const dateTimeConfig = {
  * @type {Number}
  * @public
  */
-
-const TimePicker = Pure(
-	Skinnable(
-		DateTimeDecorator(
-			dateTimeConfig,
-			TimePickerBase
-		)
-	)
-);
 
 /**
  * The selected date.
