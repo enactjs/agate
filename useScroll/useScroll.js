@@ -76,7 +76,6 @@ const useThemeScroll = (props, instances) => {
 	const {
 		alertScrollbarTrack,
 		isScrollButtonFocused,
-		onScrollbarButtonClick,
 		scrollAndFocusScrollbarButton,
 		scrollbarProps
 	} = useScrollbar(props, instances);

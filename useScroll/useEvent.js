@@ -1,5 +1,4 @@
 import {forward} from '@enact/core/handle';
-import platform from '@enact/core/platform';
 import {onWindowReady} from '@enact/core/snapshot';
 import {clamp} from '@enact/core/util';
 import Spotlight, {getDirection} from '@enact/spotlight';
