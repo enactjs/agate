@@ -94,7 +94,7 @@ const ArcPickerBase = kind({
 		/**
 		 * The selection type of ArcPicker.
 		 *
-		 * @type {String}
+		 * @type {('single'|'cumulative')}
 		 * @public
 		 */
 		selectionType: PropTypes.oneOf(['single', 'cumulative']),
