@@ -8,7 +8,7 @@ import {storiesOf} from '@storybook/react';
 import ArcPicker, {ArcPickerBase} from '@enact/agate/ArcPicker';
 
 ArcPicker.displayName = 'ArcPicker';
-const Config = mergeComponentMetadata('FanSpeedControl', ArcPicker, ArcPickerBase);
+const Config = mergeComponentMetadata('ArcPicker', ArcPicker, ArcPickerBase);
 
 // Set up some defaults for colors
 const prop = {

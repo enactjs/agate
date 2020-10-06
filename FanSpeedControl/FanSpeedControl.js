@@ -7,6 +7,7 @@
  * @module agate/FanSpeedControl
  * @exports FanSpeedControl
  * @exports FanSpeedControlBase
+ * @exports FanSpeedControlDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -22,7 +23,9 @@ import Skinnable from '../Skinnable';
 import css from './FanSpeedControl.module.less';
 
 /**
- * An Agate component for displaying fan speed {@link agate/FanSpeedControl}.
+ * An Agate component for displaying fan speed.
+ * This component is most often not used directly but may be composed within another component as it
+ * is within [FanSpeedControl]{@link agate/FanSpeedControl.FanSpeedControl}.
  *
  * @class FanSpeedControlBase
  * @memberof agate/FanSpeedControl
@@ -74,9 +77,10 @@ const FanSpeedControlBase = kind({
 		onClick: PropTypes.func,
 
 		/**
-		 * Value of ArcPicker.
+		 * Value of FanSpeedControl.
 		 *
 		 * @type {Number}
+		 * @default 1
 		 * @public
 		 */
 		value: PropTypes.number

@@ -25,7 +25,9 @@ import ArcPickerBehaviorDecorator from './ArcPickerBehaviorDecorator';
 import css from './ArcPicker.module.less';
 
 /**
- * An Agate component for displaying an arc picker {@link agate/ArcPicker}.
+ * An Agate component for displaying an arc picker.
+ * This component is most often not used directly but may be composed within another component as it
+ * is within [ArcPicker]{@link agate/ArcPicker.ArcPicker}.
  *
  * @class ArcPickerBase
  * @memberof agate/ArcPicker
@@ -40,6 +42,7 @@ const ArcPickerBase = kind({
 		 * The value options of ArcPicker.
 		 *
 		 * @type {Node}
+		 * @required
 		 * @public
 		 */
 		children: PropTypes.node.isRequired,
@@ -94,10 +97,10 @@ const ArcPickerBase = kind({
 		/**
 		 * The selection type of ArcPicker.
 		 *
-		 * @type {('single'|'cumulative')}
+		 * @type {('cumulative'|'single')}
 		 * @public
 		 */
-		selectionType: PropTypes.oneOf(['single', 'cumulative']),
+		selectionType: PropTypes.oneOf(['cumulative', 'single']),
 
 		/**
 		 * Nodes to be inserted in the center of the ArcPicker.
