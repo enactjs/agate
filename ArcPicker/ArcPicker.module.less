@@ -10,7 +10,6 @@
 	.valueDisplay {
 		align-items: center;
 		display: flex;
-		height: 120px;
 		left: 50%;
 		position: absolute;
 		top: 50%;
@@ -20,4 +19,10 @@
 	.arc {
 		position: absolute;
 	}
+
+	.applySkins({
+		.valueDisplay {
+			height: @agate-arc-picker-value-display-height;
+		}
+	})
 }

@@ -198,7 +198,7 @@ const ArcPickerBase = kind({
 		delete rest.value;
 
 		return (
-			<div {...rest} className={css.arcPicker}>
+			<div {...rest}>
 				{arcSegments}
 				<div className={css.valueDisplay}>
 					{slotCenter}
