@@ -74,7 +74,7 @@ const FanSpeedControlBase = kind({
 		onClick: PropTypes.func,
 
 		/**
-		 * Value of ArcPicker.
+		 * Value of FanSpeedControl.
 		 *
 		 * @type {Number}
 		 * @default 1
