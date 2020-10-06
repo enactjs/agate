@@ -18,8 +18,8 @@ import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '
 import ComponentOverride from '@enact/ui/ComponentOverride';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
-import React from 'react';
 import compose from 'ramda/src/compose';
+import React from 'react';
 
 import Icon from '../Icon';
 // import {MarqueeDecorator} from '../Marquee';

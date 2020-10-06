@@ -5,17 +5,17 @@
  * @exports ThemeDecorator
  */
 
-import {addAll} from '@enact/core/keymap';
-import classnames from 'classnames';
-import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
+import {addAll} from '@enact/core/keymap';
+import kind from '@enact/core/kind';
 import I18nDecorator from '@enact/i18n/I18nDecorator';
-import React from 'react';
-import PropTypes from 'prop-types';
+import SpotlightRootDecorator from '@enact/spotlight/SpotlightRootDecorator';
 import {ResolutionDecorator} from '@enact/ui/resolution';
 import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
-import SpotlightRootDecorator from '@enact/spotlight/SpotlightRootDecorator';
+import classnames from 'classnames';
 import convert from 'color-convert';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import Skinnable from '../Skinnable';
 

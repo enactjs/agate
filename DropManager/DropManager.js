@@ -9,15 +9,15 @@
  * @private
  */
 
-import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
-import Slottable from '@enact/ui/Slottable';
+import kind from '@enact/core/kind';
 import Changeable from '@enact/ui/Changeable';
-import PropTypes from 'prop-types';
+import Slottable from '@enact/ui/Slottable';
 import classnames from 'classnames';
-import {setDisplayName} from 'recompose';
-import React from 'react';
+import PropTypes from 'prop-types';
 import {mergeDeepRight} from 'ramda';
+import React from 'react';
+import {setDisplayName} from 'recompose';
 
 import Rearrangeable from '../Rearrangeable';
 

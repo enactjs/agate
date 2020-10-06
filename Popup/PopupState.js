@@ -1,6 +1,6 @@
-import FloatingLayer from '@enact/ui/FloatingLayer';
 import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
+import FloatingLayer from '@enact/ui/FloatingLayer';
 import PropTypes from 'prop-types';
 import React from 'react';
 

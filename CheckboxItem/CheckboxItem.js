@@ -13,12 +13,11 @@
  */
 
 import kind from '@enact/core/kind';
-import PropTypes from 'prop-types';
-import React from 'react';
-import compose from 'ramda/src/compose';
-
 import Spottable from '@enact/spotlight/Spottable';
 import Toggleable from '@enact/ui/Toggleable';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
+import React from 'react';
 
 import Checkbox from '../Checkbox';
 import Item from '../Item';

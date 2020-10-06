@@ -12,11 +12,10 @@
  */
 
 import kind from '@enact/core/kind';
-import React from 'react';
-import compose from 'ramda/src/compose';
-
 import Pure from '@enact/ui/internal/Pure';
 import UiToggleIcon from '@enact/ui/ToggleIcon';
+import compose from 'ramda/src/compose';
+import React from 'react';
 
 import Icon from '../../Icon/Icon';
 import Skinnable from '../../Skinnable/Skinnable';

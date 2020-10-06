@@ -10,22 +10,22 @@
  * @exports ColorPickerDecorator
  */
 
-import convert from 'color-convert';
-import compose from 'ramda/src/compose';
+import {on, off} from '@enact/core/dispatcher';
+import {adaptEvent, forward, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
-import {adaptEvent, forward, handle} from '@enact/core/handle';
-import {on, off} from '@enact/core/dispatcher';
-import {Row, Cell} from '@enact/ui/Layout';
+import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
-import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
+import {Row, Cell} from '@enact/ui/Layout';
 import Toggleable from '@enact/ui/Toggleable';
 import Transition from '@enact/ui/Transition';
+import convert from 'color-convert';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
