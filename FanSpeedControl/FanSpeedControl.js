@@ -22,7 +22,9 @@ import Skinnable from '../Skinnable';
 import css from './FanSpeedControl.module.less';
 
 /**
- * An Agate component for displaying fan speed {@link agate/FanSpeedControl}.
+ * An Agate component for displaying fan speed.
+ * This component is most often not used directly but may be composed within another component as it
+ * is within [FanSpeedControl]{@link agate/FanSpeedControl.FanSpeedControl}.
  *
  * @class FanSpeedControlBase
  * @memberof agate/FanSpeedControl
