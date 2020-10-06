@@ -133,7 +133,7 @@ const DatePickerDecorator = compose(
  * @class DatePicker
  * @memberof agate/DatePicker
  * @extends agate/DatePicker.DatePickerBase
- * @mixes ui/Changeable.Changeable
+ * @mixes agate/DatePicker.DatePickerDecorator
  * @omit day
  * @omit maxDays
  * @omit maxMonths
@@ -183,5 +183,6 @@ export default DatePicker;
 export {
 	DatePicker,
 	DatePickerBase,
+	DatePickerDecorator,
 	dateToLocaleString
 };

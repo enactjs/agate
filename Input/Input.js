@@ -7,6 +7,7 @@
  * @module agate/Input
  * @exports Input
  * @exports InputBase
+ * @exports InputDecorator
  */
 
 import kind from '@enact/core/kind';

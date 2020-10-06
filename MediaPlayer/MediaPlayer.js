@@ -700,7 +700,6 @@ const AnnounceDecorator = Wrapped => function AnnounceDecorator (props) {
  *
  * @hoc
  * @memberof agate/MediaPlayer
- * @mixes spotlight/Spottable.Spottable
  * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
  * @public

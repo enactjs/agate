@@ -7,6 +7,7 @@
  * @module agate/TimePicker
  * @exports TimePicker
  * @exports TimePickerBase
+ * @exports TimePickerDecorator
  * @exports timeToLocaleString
  */
 
@@ -259,5 +260,6 @@ export default TimePicker;
 export {
 	TimePicker,
 	TimePickerBase,
+	TimePickerDecorator,
 	timeToLocaleString
 };

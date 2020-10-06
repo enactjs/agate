@@ -270,9 +270,8 @@ const SliderBase = kind({
  * @memberof agate/Slider
  * @mixes ui/Changeable.Changeable
  * @mixes spotlight/Spottable.Spottable
- * @mixes agate/Skinnable.Skinnable
  * @mixes ui/Slottable.Slottable
- * @mixes ui/Slider.SliderDecorator
+ * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const SliderDecorator = compose(
@@ -300,6 +299,7 @@ const SliderDecorator = compose(
  * @ui
  * @public
  */
+const Slider = SliderDecorator(SliderBase);
 
 /**
  * Overrides the `aria-valuetext` for the slider.
@@ -312,8 +312,6 @@ const SliderDecorator = compose(
  * @type {String|Number}
  * @public
  */
-
-const Slider = SliderDecorator(SliderBase);
 
 export default Slider;
 export {

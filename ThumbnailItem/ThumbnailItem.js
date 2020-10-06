@@ -8,6 +8,7 @@
  * @module agate/ThumbnailItem
  * @exports ThumbnailItem
  * @exports ThumbnailItemBase
+ * @exports ThumbnailItemDecorator
  */
 
 import kind from '@enact/core/kind';

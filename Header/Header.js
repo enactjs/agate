@@ -8,6 +8,8 @@
  *
  * @module agate/Header
  * @exports Header
+ * @exports HeaderBase
+ * @exports HeaderDecorator
  */
 
 import kind from '@enact/core/kind';

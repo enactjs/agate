@@ -7,6 +7,7 @@
  * @module agate/RangePicker
  * @exports RangePicker
  * @exports RangePickerBase
+ * @exports RangePickerDecorator
  */
 
 import kind from '@enact/core/kind';

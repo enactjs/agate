@@ -9,6 +9,7 @@
  * @module agate/Keypad
  * @exports Keypad
  * @exports KeypadBase
+ * @exports KeypadDecorator
  */
 
 import {adaptEvent, forward, handle} from '@enact/core/handle';
@@ -322,9 +323,7 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
  *
  * @hoc
  * @memberof agate/Keypad
- * @mixes ui/Marquee.MarqueeController
  * @mixes agate/Skinnable.Skinnable
- * @mixes spotlight/Spottable.Spottable
  * @public
  */
 const KeypadDecorator = compose(

@@ -7,6 +7,7 @@
  * @module agate/ToggleButton
  * @exports ToggleButton
  * @exports ToggleButtonBase
+ * @exports ToggleButtonDecorator
  */
 
 import kind from '@enact/core/kind';

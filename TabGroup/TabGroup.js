@@ -4,6 +4,7 @@
  * @module agate/TabGroup
  * @exports TabGroup
  * @exports TabGroupBase
+ * @exports TabGroupDecorator
  */
 
 import kind from '@enact/core/kind';

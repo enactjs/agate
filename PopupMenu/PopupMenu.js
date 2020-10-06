@@ -104,6 +104,7 @@ const PopupMenuBase = kind({
  *
  * @hoc
  * @memberof agate/PopupMenu
+ * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
