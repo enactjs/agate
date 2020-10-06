@@ -106,5 +106,6 @@ const FullscreenPopup = FullscreenPopupDecorator(FullscreenPopupBase);
 export default FullscreenPopup;
 export {
 	FullscreenPopup,
-	FullscreenPopupBase
+	FullscreenPopupBase,
+	FullscreenPopupDecorator
 };
