@@ -25,7 +25,9 @@ import ArcPickerBehaviorDecorator from './ArcPickerBehaviorDecorator';
 import css from './ArcPicker.module.less';
 
 /**
- * An Agate component for displaying an arc picker {@link agate/ArcPicker}.
+ * An Agate component for displaying an arc picker.
+ * This component is most often not used directly but may be composed within another component as it
+ * is within [ArcPicker]{@link agate/ArcPicker.ArcPicker}.
  *
  * @class ArcPickerBase
  * @memberof agate/ArcPicker
