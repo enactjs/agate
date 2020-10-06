@@ -94,10 +94,10 @@ const ArcPickerBase = kind({
 		/**
 		 * The selection type of ArcPicker.
 		 *
-		 * @type {('single'|'cumulative')}
+		 * @type {('cumulative'|'single')}
 		 * @public
 		 */
-		selectionType: PropTypes.oneOf(['single', 'cumulative']),
+		selectionType: PropTypes.oneOf(['cumulative', 'single']),
 
 		/**
 		 * Nodes to be inserted in the center of the ArcPicker.
