@@ -77,6 +77,7 @@ const FanSpeedControlBase = kind({
 		 * Value of ArcPicker.
 		 *
 		 * @type {Number}
+		 * @default 1
 		 * @public
 		 */
 		value: PropTypes.number
