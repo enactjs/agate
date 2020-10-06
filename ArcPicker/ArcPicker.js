@@ -112,7 +112,7 @@ const ArcPickerBase = kind({
 		 *
 		 * The value should be between 0 and 360.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 50
 		 * @public
 		 */
