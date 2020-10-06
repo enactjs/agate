@@ -68,7 +68,7 @@ const ArcPickerBase = kind({
 		 * The color of the selected arcs.
 		 *
 		 * @type {number}
-		 * @default #eeeeee
+		 * @default #444444
 		 * @public
 		 */
 		foregroundColor: PropTypes.string,
