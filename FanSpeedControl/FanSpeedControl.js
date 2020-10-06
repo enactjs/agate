@@ -95,7 +95,7 @@ const FanSpeedControlBase = kind({
 		className: 'fanSpeedControl'
 	},
 
-	render ({icon, max, min, onChange, value, ...rest}) {
+	render: ({icon, max, min, onChange, value, ...rest}) => {
 		const children = [];
 
 		for (let i = min; i <= max; i++) {
