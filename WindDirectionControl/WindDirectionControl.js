@@ -30,6 +30,7 @@ const children = ['airDown', 'airRight', 'airUp'];
  * An Agate component for displaying Wind Direction Control {@link agate/WindDirectionControl}.
  *
  * @class WindDirectionControlBase
+ * @memberof agate/WindDirectionControl
  * @extends agate/ArcPicker.ArcPicker
  * @ui
  * @public
