@@ -67,18 +67,7 @@ const WindDirectionControlBase = kind({
 	},
 
 	computed: {
-		componentIcon: (props) => {
-			const {value} = props;
-
-			switch (value) {
-				case 'airDown':
-					return 'airdown';
-				case 'airRight':
-					return 'airup';
-				case 'airUp':
-					return 'airright';
-			}
-		}
+		componentIcon: ({value}) => (value.toLowerCase())
 	},
 
 	render: ({componentIcon, onChange, value, ...rest}) => {
