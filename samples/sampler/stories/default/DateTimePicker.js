@@ -1,5 +1,6 @@
 import {mergeComponentMetadata, removeProps} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
+import {boolean} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -15,6 +16,7 @@ storiesOf('Agate', module)
 		'DateTimePicker',
 		() => (
 			<DateTimePicker
+				disabled={boolean('disabled', Config)}
 				onChange={action('onChange')}
 			/>
 		),

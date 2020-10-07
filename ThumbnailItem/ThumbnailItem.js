@@ -38,10 +38,10 @@ const ThumbnailItemBase = kind({
 		/**
 		 * The main content displayed with the thumbnail.
 		 *
-		 * @type {String}
+		 * @type {Node}
 		 * @public
 		 */
-		children: PropTypes.string,
+		children: PropTypes.node,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
