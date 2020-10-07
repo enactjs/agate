@@ -13,7 +13,7 @@
 import kind from '@enact/core/kind';
 import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
-import compose from 'ramda/src/compose';
+import {compose, range} from 'ramda';
 import React from 'react';
 
 import ArcPicker from '../ArcPicker';
@@ -97,16 +97,10 @@ const FanSpeedControlBase = kind({
 	},
 
 	computed: {
-		children: ({min, max}) => {
-			const children = [];
-			for (let i = min; i <= max; i++) {
-				children.push(i);
-			}
-			return children;
-		}
+		children: ({min, max}) => range(min, max + 1)
 	},
 
-	render ({children, icon, max, min, onChange, value, ...rest}) {
+	render: ({children, icon, max, min, onChange, value, ...rest}) => {
 		return (
 			<div {...rest}>
 				<ArcPicker
