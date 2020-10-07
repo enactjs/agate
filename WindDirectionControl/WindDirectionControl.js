@@ -86,9 +86,7 @@ const WindDirectionControlBase = kind({
 					onChange={onChange}
 					value={value}
 					slotCenter={
-						<>
-							<Icon className={css.airDirectionIcon} css={css}>{componentIcon}</Icon>
-						</>
+						<Icon className={css.airDirectionIcon} css={css}>{componentIcon}</Icon>
 					}
 				>
 					{children}
