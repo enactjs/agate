@@ -12,12 +12,21 @@
 // ---------------------------------------
 @agate-icon-font-family: "Silicon Icons";
 
+// Arc Slider
+// -------------------------------------------------
+@agate-arcslider-font-size: 72px;
+@agate-arcslider-font-weight: 300;
+
 // Body
 // ----------------------------------
 @agate-body-small-font-size: 25px;
 @agate-body-font-size: 28px;
 @agate-body-font-weight: normal;
 @agate-body-line-height: 1.5em;
+
+// ArcPicker
+// ---------------------------------------
+@agate-arc-picker-value-display-height: 120px;
 
 // Button
 // ---------------------------------------
@@ -90,6 +99,14 @@
 @agate-dropdown-item-padding: 15px;
 @agate-dropdown-list-height: @agate-button-small-height * 4;
 @agate-dropdown-list-padding: 15px 0 3px 0;
+
+// ArcPicker
+// ---------------------------------------
+@agate-fanspeedcontrol-font-size:        72px;
+@agate-fanspeedcontrol-font-weight:      300px;
+@agate-fanspeedcontrol-icon-font-size:   120px;
+@agate-fanspeedcontrol-icon-height:      60px;
+@agate-fanspeedcontrol-margin:           9px;
 
 // Header
 // ---------------------------------------
@@ -238,7 +255,7 @@
 @agate-popup-border-radius: 39px;
 @agate-popup-border: none;
 @agate-popup-padding: (@agate-component-spacing * 2) 0 0 0;
-@agate-popup-closebutton-title-padding: 0 (@agate-button-small-height) 0 0;
+@agate-popup-closebutton-title-padding: 0 (@agate-button-small-height) 0 @agate-component-spacing;
 @agate-popup-title-padding: 0 @agate-component-spacing;
 @agate-popup-body-padding: (@agate-component-spacing * 2) @agate-component-spacing 0 @agate-component-spacing;
 @agate-popup-body-border-radius: 0 0 @agate-popup-border-radius @agate-popup-border-radius;
