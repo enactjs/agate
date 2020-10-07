@@ -539,7 +539,7 @@ const IncrementSliderBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [IncrementSliderBase]{@link agate/IncrementSlider.IncrementSliderBase}
+ * Applies Agate specific behaviors to [IncrementSlider]{@link agate/IncrementSlider.IncrementSlider}
  *
  * @hoc
  * @memberof agate/IncrementSlider

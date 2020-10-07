@@ -134,7 +134,7 @@ const PopupBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [PopupBase]{@link agate/Popup.PopupBase}.
+ * Applies Agate specific behaviors to [Popup]{@link agate/Popup.Popup}.
  *
  * @hoc
  * @memberof agate/Popup

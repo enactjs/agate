@@ -85,7 +85,7 @@ const DrawerBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [DrawerBase]{@link agate/Drawer.DrawerBase}.
+ * Applies Agate specific behaviors to [Drawer]{@link agate/Drawer.Drawer}.
  *
  * @hoc
  * @memberof agate/Drawer

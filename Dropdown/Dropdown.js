@@ -390,7 +390,7 @@ const DropDownExtended = hoc((config, Wrapped) => {
 });
 
 /**
- * Applies Agate specific behaviors to [DropdownBase]{@link agate/Dropdown.DropdownBase}.
+ * Applies Agate specific behaviors to [Dropdown]{@link agate/Dropdown.Dropdown}.
  *
  * @hoc
  * @memberof agate/Dropdown

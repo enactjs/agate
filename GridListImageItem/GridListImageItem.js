@@ -3,7 +3,7 @@
  * @exports GridListImageItem
  * @exports GridListImageItemBase
  * @exports GridListImageItemDecorator
- * @deprecated
+ * @deprecated Will be removed in 2.0.0. Use {@link agate/ImageItem} instead.
  * @private
  */
 
@@ -127,7 +127,6 @@ const GridListImageItemDecorator = compose(
  * @extends agate/GridListImageItem.GridListImageItemBase
  * @mixes agate/GridListImageItem.GridListImageItemDecorator
  * @ui
- * @deprecated
  * @private
  */
 const GridListImageItem = GridListImageItemDecorator(GridListImageItemBase);

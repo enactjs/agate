@@ -168,7 +168,7 @@ const ToggleButtonBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [ToggleButton]{@link agate/ToggleButton.ToggleButtonBase} components.
+ * Applies Agate specific behaviors to [ToggleButton]{@link agate/ToggleButton.ToggleButton} components.
  *
  * @hoc
  * @memberof agate/ToggleButton

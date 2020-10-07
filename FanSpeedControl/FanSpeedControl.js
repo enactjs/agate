@@ -123,7 +123,7 @@ const FanSpeedControlBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [FanSpeedControl]{@link agate/FanSpeedControl.FanSpeedControlBase} components.
+ * Applies Agate specific behaviors to [FanSpeedControl]{@link agate/FanSpeedControl.FanSpeedControl} components.
  *
  * @hoc
  * @memberof agate/FanSpeedControl

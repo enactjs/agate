@@ -127,7 +127,7 @@ const ThumbnailItemBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [ThumbnailItem]{@link agate/ThumbnailItem.ThumbnailItemBase} components.
+ * Applies Agate specific behaviors to [ThumbnailItem]{@link agate/ThumbnailItem.ThumbnailItem} components.
  *
  * @hoc
  * @memberof agate/ThumbnailItem

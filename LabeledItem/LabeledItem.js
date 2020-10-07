@@ -7,7 +7,7 @@
  * @module agate/LabeledItem
  * @exports LabeledItem
  * @exports LabeledItemBase
- * @deprecated
+ * @deprecated Will be removed in 2.0.0. Use {@link agate/Item} instead.
  * @private
  */
 
@@ -24,7 +24,6 @@ import Item from '../Item';
  * @memberof agate/LabeledItem
  * @extends agate/Item.Item
  * @ui
- * @deprecated
  * @private
  */
 const LabeledItemBase = deprecate(

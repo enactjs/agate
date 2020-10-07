@@ -1,5 +1,5 @@
 /**
- * An Agate-styled `Media` component.
+ * An Agate-styled `MediaPlayer` component.
  *
  * @module agate/MediaPlayer
  * @exports MediaPlayer
@@ -714,7 +714,7 @@ const MediaPlayerDecorator = compose(
 );
 
 /**
- * An Agate-styled `Media` component.
+ * An Agate-styled `MediaPlayer` component.
  *
  * Usage:
  * ```

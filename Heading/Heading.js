@@ -102,7 +102,7 @@ const HeadingBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [HeadingBase]{@link agate/Heading.HeadingBase}.
+ * Applies Agate specific behaviors to [Heading]{@link agate/Heading.Heading}.
  *
  * @hoc
  * @memberof agate/Heading

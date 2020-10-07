@@ -30,11 +30,10 @@ import css from './DateTimePicker.module.less';
  * @ui
  * @public
  */
-
 const DateTimePickerBase = kind({
 	name: 'DateTimePickerBase',
 
-	propTypes: /** @lends agate/DateTimePicker.DateTimePicker.prototype */ {
+	propTypes: /** @lends agate/DateTimePicker.PickerBase.prototype */ {
 		/**
 		 * Disables the `DateTimePicker`.
 		 *
@@ -69,7 +68,7 @@ const DateTimePickerBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [DateTimePicker]{@link agate/DateTimePicker.DateTimePickerBase} components.
+ * Applies Agate specific behaviors to [DateTimePicker]{@link agate/DateTimePicker.DateTimePicker} components.
  *
  * @hoc
  * @memberof agate/DateTimePicker

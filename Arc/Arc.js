@@ -152,7 +152,7 @@ const ArcBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [Arc]{@link agate/Arc.ArcBase} components.
+ * Applies Agate specific behaviors to [Arc]{@link agate/Arc.Arc} components.
  *
  * @hoc
  * @memberof agate/Arc

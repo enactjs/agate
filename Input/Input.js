@@ -276,7 +276,7 @@ const InputBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [Input]{@link agate/Input.InputBase} components.
+ * Applies Agate specific behaviors to [Input]{@link agate/Input.Input} components.
  *
  * @hoc
  * @memberof agate/Input
