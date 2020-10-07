@@ -319,7 +319,7 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 });
 
 /**
- * Applies Agate specific behaviors to [Keypad]{@link agate/Keypad.Keypad}
+ * Applies Agate specific behaviors to [KeypadBase]{@link agate/Keypad.KeypadBase}
  *
  * @hoc
  * @memberof agate/Keypad

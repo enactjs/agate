@@ -189,7 +189,7 @@ const dateTimeConfig = {
 };
 
 /**
- * Applies Agate specific behaviors to [TimePicker]{@link agate/TimePicker.TimePicker} components.
+ * Applies Agate specific behaviors to [TimePickerBase]{@link agate/TimePicker.TimePickerBase} components.
  *
  * @hoc
  * @memberof agate/TimePicker

@@ -207,7 +207,7 @@ const ArcSliderBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [ArcSlider]{@link agate/ArcSlider.ArcSlider} components.
+ * Applies Agate specific behaviors to [ArcSliderBase]{@link agate/ArcSlider.ArcSliderBase} components.
  *
  * @hoc
  * @memberof agate/ArcSlider

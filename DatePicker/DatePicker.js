@@ -98,7 +98,7 @@ const dateTimeConfig = {
 };
 
 /**
- * Applies Agate specific behaviors to [DatePicker]{@link agate/DatePicker.DatePicker} components.
+ * Applies Agate specific behaviors to [DatePickerBase]{@link agate/DatePicker.DatePickerBase} components.
  *
  * @hoc
  * @memberof agate/DatePicker

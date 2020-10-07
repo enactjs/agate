@@ -172,7 +172,7 @@ const RangePickerBase = kind({
  */
 
 /**
- * Applies Agate specific behaviors to [RangePicker]{@link agate/RangePicker.RangePicker} components.
+ * Applies Agate specific behaviors to [RangePickerBase]{@link agate/RangePicker.RangePickerBase} components.
  *
  * @hoc
  * @memberof agate/RangePicker
@@ -193,6 +193,7 @@ const RangePickerDecorator = compose(
  *
  * @class RangePicker
  * @memberof agate/RangePicker
+ * @extends agate/RangePicker.RangePickerBase
  * @mixes agate/RangePicker.RangePickerDecorator
  * @ui
  * @public

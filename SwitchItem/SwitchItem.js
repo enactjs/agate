@@ -151,7 +151,7 @@ const SwitchItemBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [SwitchItem]{@link agate/SwitchItem.SwitchItem} components.
+ * Applies Agate specific behaviors to [SwitchItemBase]{@link agate/SwitchItem.SwitchItemBase} components.
  *
  * @hoc
  * @memberof agate/SwitchItem
@@ -172,7 +172,7 @@ const SwitchItemDecorator = compose(
  *
  * @class SwitchItem
  * @memberof agate/SwitchItem
- * @extends agate/SwitchItem.SwitchItem
+ * @extends agate/SwitchItem.SwitchItemBase
  * @mixes agate/SwitchItem.SwitchItemDecorator
  * @ui
  * @public

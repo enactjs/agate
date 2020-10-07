@@ -128,7 +128,7 @@ const BodyTextBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [BodyText]{@link agate/BodyText.BodyText}.
+ * Applies Agate specific behaviors to [BodyTextBase]{@link agate/BodyText.BodyTextBase}.
  *
  * @hoc
  * @memberof agate/BodyText

@@ -79,7 +79,7 @@ const FullscreenPopupBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [FullscreenPopup]{@link agate/FullscreenPopup.FullscreenPopup}.
+ * Applies Agate specific behaviors to [FullscreenPopupBase]{@link agate/FullscreenPopup.FullscreenPopupBase}.
  *
  * @hoc
  * @memberof agate/FullscreenPopup

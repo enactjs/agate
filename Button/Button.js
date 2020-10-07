@@ -256,7 +256,7 @@ const ButtonBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [Button]{@link agate/Button.Button} components.
+ * Applies Agate specific behaviors to [ButtonBase]{@link agate/Button.ButtonBase} components.
  *
  * @hoc
  * @memberof agate/Button

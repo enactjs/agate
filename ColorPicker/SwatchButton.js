@@ -103,7 +103,7 @@ const SwatchButtonBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [SwatchButton]{@link agate/ColorPicker.SwatchButton}.
+ * Applies Agate specific behaviors to [SwatchButtonBase]{@link agate/ColorPicker.SwatchButtonBase}.
  *
  * @hoc
  * @memberof agate/ColorPicker

@@ -348,7 +348,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 });
 
 /**
- * Applies Agate specific behaviors to [ColorPicker]{@link agate/ColorPicker.ColorPicker}.
+ * Applies Agate specific behaviors to [ColorPickerBase]{@link agate/ColorPicker.ColorPickerBase}.
  *
  * @hoc
  * @memberof agate/ColorPicker
