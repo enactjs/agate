@@ -92,8 +92,14 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			 * @default 6
 			 * @public
 			 */
-			strokeWidth: PropTypes.number
 			strokeWidth: PropTypes.number,
+
+			/**
+			 * The value of the slider.
+			 *
+			 * @type {Number}
+			 * @public
+			 */
 			value: PropTypes.number
 		};
 
