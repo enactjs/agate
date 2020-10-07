@@ -29,6 +29,7 @@ import css from './FanSpeedControl.module.less';
  *
  * @class FanSpeedControlBase
  * @memberof agate/FanSpeedControl
+ * @extends agate/ArcPicker.ArcPicker
  * @ui
  * @public
  */
