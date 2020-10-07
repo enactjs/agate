@@ -56,13 +56,20 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			min: PropTypes.number,
 
 			/**
+			 * Called when value is changed.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onChange: PropTypes.func,
+
+			/**
 			 * The radius of the arc circle.
 			 *
 			 * @type {Number}
 			 * @default 150
 			 * @public
 			 */
-			onChange: PropTypes.func,
 			radius: PropTypes.number,
 
 			/**
