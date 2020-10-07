@@ -183,7 +183,8 @@ const DatePickerBase = kind({
 
 	styles: {
 		css,
-		className: 'datePicker'
+		className: 'datePicker',
+		publicClassNames: true
 	},
 
 	render: ({
@@ -225,7 +226,7 @@ const DatePickerBase = kind({
 									min={1}
 									onChange={onChangeDate}
 									value={day}
-									width={4}
+									width={2}
 								/>
 							);
 						case 'm':
@@ -240,7 +241,7 @@ const DatePickerBase = kind({
 									min={1}
 									onChange={onChangeMonth}
 									value={month}
-									width={4}
+									width={2}
 								/>
 							);
 						case 'y':
