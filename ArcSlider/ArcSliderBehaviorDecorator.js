@@ -56,6 +56,14 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			min: PropTypes.number,
 
 			/**
+			 * Called when value is changed.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
+			onChange: PropTypes.func,
+
+			/**
 			 * The radius of the arc circle.
 			 *
 			 * @type {Number}
@@ -91,17 +99,37 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			 * @default 6
 			 * @public
 			 */
-			strokeWidth: PropTypes.number
+			strokeWidth: PropTypes.number,
+
+			/**
+			 * The value of the slider.
+			 *
+			 * Defaults to the value of `min`.
+			 *
+			 * @type {Number}
+			 * @public
+			 */
+			value: PropTypes.number
+		};
+
+		static defaultProps = {
+			endAngle: 250,
+			max: 100,
+			min: 0,
+			radius: 150,
+			startAngle: 30,
+			step: 1,
+			strokeWidth: 6
 		};
 
 		constructor (props) {
 			super(props);
 
-			this.state = {
-				value: props.min
-			};
-
 			this.componentRef = React.createRef();
+
+			this.state = {
+				value: props.value ? props.value : props.min
+			};
 		}
 
 		handleDown = ({clientX, clientY}) => {

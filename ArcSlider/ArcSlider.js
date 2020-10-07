@@ -26,7 +26,7 @@ import Skinnable from '../Skinnable';
 import ArcSliderBehaviorDecorator from './ArcSliderBehaviorDecorator';
 import {valueToAngle} from './utils';
 
-import css from './ArcSlider.modules.less';
+import css from './ArcSlider.module.less';
 
 /**
  * An arc slider component.
@@ -108,6 +108,14 @@ const ArcSliderBase = kind({
 		radius: PropTypes.number,
 
 		/**
+		 * Nodes to be inserted in the center of the ArcSlider.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
+		slotCenter: PropTypes.node,
+
+		/**
 		 * The start angle(in degrees) of the arc slider.
 		 *
 		 * The value should be between 0 and 360.
@@ -165,10 +173,14 @@ const ArcSliderBase = kind({
 	},
 
 	computed: {
-		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth)
+		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth),
+		style: ({radius, style}) => {
+			const size = ri.scaleToRem(radius * 2);
+			return {...style, height: size, width: size};
+		}
 	},
 
-	render: ({backgroundColor, componentRef, endAngle, foregroundColor, max, min, radius, size, startAngle, strokeWidth, value, ...rest}) => {
+	render: ({backgroundColor, componentRef, endAngle, foregroundColor, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}) => {
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
@@ -201,6 +213,9 @@ const ArcSliderBase = kind({
 						r={ri.scaleToRem(15)}
 					/>
 				</Arc>
+				<div className={css.valueDisplay}>
+					{slotCenter}
+				</div>
 			</div>
 		);
 	}
