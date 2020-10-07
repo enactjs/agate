@@ -97,6 +97,8 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			/**
 			 * The value of the slider.
 			 *
+			 * Defaults to the value of `min`.
+			 *
 			 * @type {Number}
 			 * @public
 			 */

@@ -147,6 +147,8 @@ const ArcSliderBase = kind({
 		/**
 		 * The value of the slider.
 		 *
+		 * Defaults to the value of `min`.
+		 *
 		 * @type {Number}
 		 * @public
 		 */
