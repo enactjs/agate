@@ -28,7 +28,7 @@ import css from './WindDirectionControl.module.less';
  * @class WindDirectionControl
  * @memberof agate/WindDirectionControl
  * @ui
- * @private
+ * @public
  */
 const WindDirectionControlBase = kind({
 	name: 'WindDirectionControlBase',
@@ -45,7 +45,7 @@ const WindDirectionControlBase = kind({
 		/**
 		 * State of WindDirectionControl.
 		 *
-		 * @type {(''|'airDown'|'airRight'|'airUp')}
+		 * @type {('airDown'|'airRight'|'airUp')}
 		 * @default 'airDown'
 		 * @public
 		 */
