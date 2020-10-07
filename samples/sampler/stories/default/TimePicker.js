@@ -14,6 +14,7 @@ storiesOf('Agate', module)
 		() => (
 			<TimePicker
 				disabled={boolean('disabled', Config)}
+				onChange={action('onChange')}
 			/>
 		),
 		{

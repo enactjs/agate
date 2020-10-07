@@ -14,6 +14,7 @@ storiesOf('Agate', module)
 		() => (
 			<DatePicker
 				disabled={boolean('disabled', Config)}
+				onChange={action('onChange')}
 			/>
 		),
 		{
