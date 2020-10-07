@@ -50,7 +50,7 @@ const decrement = handleChange(-1);
  * @ui
  * @private
  */
-const PickerBase = kind( {
+const PickerBase = kind({
 	name: 'Picker',
 
 	propTypes: /** @lends agate/internal/Picker.Picker.prototype */ {

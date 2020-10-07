@@ -5,6 +5,14 @@ import Marquee from '@enact/ui/Marquee';
 
 import css from './Picker.module.less';
 
+/**
+ * Renders an Agate-styled Picker Item without any behavior.
+ *
+ * @class PickerItemBase
+ * @memberof agate/PickerItem
+ * @ui
+ * @public
+ */
 const PickerItemBase = kind({
 	name: 'PickerItem',
 
@@ -12,10 +20,6 @@ const PickerItemBase = kind({
 		css,
 		className: 'item',
 		publicClassNames: true
-	},
-
-	computed: {
-		className: ({children, styler}) => styler.append({numeric: !isNaN(Number(children))})
 	},
 
 	render: (props) => (
