@@ -7,12 +7,13 @@
  * @module agate/FanSpeedControl
  * @exports FanSpeedControl
  * @exports FanSpeedControlBase
+ * @exports FanSpeedControlDecorator
  */
 
 import kind from '@enact/core/kind';
 import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
-import compose from 'ramda/src/compose';
+import {compose, range} from 'ramda';
 import React from 'react';
 
 import ArcPicker from '../ArcPicker';
@@ -22,7 +23,9 @@ import Skinnable from '../Skinnable';
 import css from './FanSpeedControl.module.less';
 
 /**
- * An Agate component for displaying fan speed {@link agate/FanSpeedControl}.
+ * An Agate component for displaying fan speed.
+ * This component is most often not used directly but may be composed within another component as it
+ * is within [FanSpeedControl]{@link agate/FanSpeedControl.FanSpeedControl}.
  *
  * @class FanSpeedControlBase
  * @memberof agate/FanSpeedControl
@@ -34,7 +37,7 @@ const FanSpeedControlBase = kind({
 
 	propTypes: /** @lends agate/FanSpeedControl.FanSpeedControlBase.prototype */ {
 		/**
-		 * ArcPicker icon.
+		 * FanSpeedControl icon.
 		 *
 		 * @type {String}
 		 * @public
@@ -42,7 +45,7 @@ const FanSpeedControlBase = kind({
 		icon: PropTypes.string,
 
 		/**
-		 * The maximum value of FanSpeed.
+		 * The maximum value of FanSpeedControl.
 		 *
 		 * @type {Number}
 		 * @public
@@ -50,7 +53,7 @@ const FanSpeedControlBase = kind({
 		max: PropTypes.number,
 
 		/**
-		 * The minimum value of FanSpeed.
+		 * The minimum value of FanSpeedControl.
 		 *
 		 * @type {Number}
 		 * @public
@@ -66,17 +69,19 @@ const FanSpeedControlBase = kind({
 		onChange: PropTypes.func,
 
 		/**
-		 * The maximum size of ArcPicker. The number of arc segments to be rendered.
+		 * Called when the path area is clicked.
 		 *
-		 * @type {Number}
+		 * @type {Function}
+		 * @param {Object} event
 		 * @public
 		 */
 		onClick: PropTypes.func,
 
 		/**
-		 * Value of ArcPicker.
+		 * Value of FanSpeedControl.
 		 *
 		 * @type {Number}
+		 * @default 1
 		 * @public
 		 */
 		value: PropTypes.number
@@ -91,13 +96,11 @@ const FanSpeedControlBase = kind({
 		className: 'fanSpeedControl'
 	},
 
-	render ({icon, max, min, onChange, value, ...rest}) {
-		const children = [];
+	computed: {
+		children: ({min, max}) => range(min, max + 1)
+	},
 
-		for (let i = min; i <= max; i++) {
-			children.push(i);
-		}
-
+	render: ({children, icon, max, min, onChange, value, ...rest}) => {
 		return (
 			<div {...rest}>
 				<ArcPicker
@@ -128,12 +131,30 @@ const FanSpeedControlBase = kind({
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
-
 const FanSpeedControlDecorator = compose(
 	Changeable,
 	Skinnable
 );
 
+/**
+ * FanSpeedControl with Agate styling and
+ * [`FanSpeedControlDecorator`]{@link agate/FanSpeedControl.FanSpeedControlDecorator} applied.
+ * Usage
+ *
+ *  <FanSpeedControl
+ *  	icon="fan"
+ *  	max={10}
+ *  	min={1}
+ *  	value={4}
+ *  />
+ *
+ * @class FanSpeedControl
+ * @memberof agate/FanSpeedControl
+ * @extends agate/FanSpeedControl.FanSpeedControlBase
+ * @mixes agate/FanSpeedControl.FanSpeedControlDecorator
+ * @ui
+ * @public
+ */
 const FanSpeedControl = FanSpeedControlDecorator(FanSpeedControlBase);
 
 export default FanSpeedControl;

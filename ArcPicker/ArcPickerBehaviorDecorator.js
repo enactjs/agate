@@ -24,6 +24,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			 * The value options of ArcPicker.
 			 *
 			 * @type {Node}
+			 * @required
 			 * @public
 			 */
 			children: PropTypes.node.isRequired,
@@ -78,7 +79,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			value: ({value, children}) => ((value || value === 0) ? value : children[0])
 		},
 
-		render ({max, min, value, ...rest}) {
+		render: ({max, min, value, ...rest}) => {
 			delete rest.onChange;
 
 			if (__DEV__) {

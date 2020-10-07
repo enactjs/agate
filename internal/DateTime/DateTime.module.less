@@ -1,8 +1,29 @@
 // DateTime.module.less
 //
+@import "../../styles/skin.less";
+@import "../../styles/variables.less";
 
 .dateTime {
-	display: inline-block;
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	width: fit-content;
+
+	&::before {
+		content: "";
+		position: absolute;
+		width: 95%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.applySkins({
+		&::before {
+			height: @agate-button-height;
+			background-image: @agate-datetimepicker-active-container-bg-image;
+			background-color: @agate-datetimepicker-active-container-bg-color;
+		}
+	});
 
 	.pickers {
 		vertical-align: middle;

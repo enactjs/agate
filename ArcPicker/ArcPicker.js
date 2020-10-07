@@ -25,7 +25,9 @@ import ArcPickerBehaviorDecorator from './ArcPickerBehaviorDecorator';
 import css from './ArcPicker.module.less';
 
 /**
- * An Agate component for displaying an arc picker {@link agate/ArcPicker}.
+ * An Agate component for displaying an arc picker.
+ * This component is most often not used directly but may be composed within another component as it
+ * is within [ArcPicker]{@link agate/ArcPicker.ArcPicker}.
  *
  * @class ArcPickerBase
  * @memberof agate/ArcPicker
@@ -40,6 +42,7 @@ const ArcPickerBase = kind({
 		 * The value options of ArcPicker.
 		 *
 		 * @type {Node}
+		 * @required
 		 * @public
 		 */
 		children: PropTypes.node.isRequired,
@@ -48,7 +51,7 @@ const ArcPickerBase = kind({
 		 * The color of the unselected arcs.
 		 *
 		 * @type {String}
-		 * @default #444444
+		 * @default #eeeeee
 		 * @public
 		 */
 		backgroundColor: PropTypes.string,
@@ -58,7 +61,7 @@ const ArcPickerBase = kind({
 		 *
 		 * The value should be between 0 and 360 and should be greater than startAngle.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 310
 		 * @public
 		 */
@@ -67,8 +70,8 @@ const ArcPickerBase = kind({
 		/**
 		 * The color of the selected arcs.
 		 *
-		 * @type {number}
-		 * @default #eeeeee
+		 * @type {String}
+		 * @default #444444
 		 * @public
 		 */
 		foregroundColor: PropTypes.string,
@@ -94,10 +97,10 @@ const ArcPickerBase = kind({
 		/**
 		 * The selection type of ArcPicker.
 		 *
-		 * @type {String}
+		 * @type {('cumulative'|'single')}
 		 * @public
 		 */
-		selectionType: PropTypes.oneOf(['single', 'cumulative']),
+		selectionType: PropTypes.oneOf(['cumulative', 'single']),
 
 		/**
 		 * Nodes to be inserted in the center of the ArcPicker.
@@ -112,7 +115,7 @@ const ArcPickerBase = kind({
 		 *
 		 * The value should be between 0 and 360.
 		 *
-		 * @type {number}
+		 * @type {Number}
 		 * @default 50
 		 * @public
 		 */
@@ -195,7 +198,7 @@ const ArcPickerBase = kind({
 		delete rest.value;
 
 		return (
-			<div {...rest} className={css.arcPicker}>
+			<div {...rest}>
 				{arcSegments}
 				<div className={css.valueDisplay}>
 					{slotCenter}
@@ -210,6 +213,7 @@ const ArcPickerBase = kind({
  *
  * @hoc
  * @memberof agate/ArcPicker
+ * @mixes ui/Changeable.Changeable
  * @mixes agate/ArcPicker.ArcPickerBehaviorDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public

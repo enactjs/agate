@@ -53,12 +53,12 @@ const DateTimePickerBase = kind({
 			<Row {...rest} className={css.dateTimePicker} align="center center">
 				<Cell>
 					<Row align="center center">
-						<TimePicker disabled={disabled} />
+						<TimePicker css={css} disabled={disabled} />
 					</Row>
 				</Cell>
 				<Cell>
 					<Row align="center center">
-						<DatePicker disabled={disabled} />
+						<DatePicker css={css} disabled={disabled} />
 					</Row>
 				</Cell>
 			</Row>
