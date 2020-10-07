@@ -6,6 +6,7 @@
  *
  * @module agate/LabeledItem
  * @exports LabeledItem
+ * @exports LabeledItemBase
  * @deprecated
  * @private
  */

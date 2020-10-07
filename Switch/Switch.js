@@ -22,7 +22,7 @@ import componentCss from './Switch.module.less';
 /**
  * Renders the base level DOM structure of the component.
  *
- * @class SwitchBase
+ * @class Switch
  * @memberof agate/Switch
  * @ui
  * @private
@@ -30,7 +30,7 @@ import componentCss from './Switch.module.less';
 const SwitchBase = kind({
 	name: 'Switch',
 
-	propTypes: /** @lends agate/Switch.SwitchBase.prototype */ {
+	propTypes: /** @lends agate/Switch.Switch.prototype */ {
 		children: PropTypes.string,
 		css: PropTypes.object,
 

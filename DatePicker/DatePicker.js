@@ -7,6 +7,7 @@
  * @module agate/DatePicker
  * @exports DatePicker
  * @exports DatePickerBase
+ * @exports DatePickerDecorator
  * @exports dateToLocaleString
  */
 

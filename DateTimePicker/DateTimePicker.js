@@ -7,6 +7,7 @@
  * @module agate/DateTimePicker
  * @exports DateTimePicker
  * @exports DateTimePickerBase
+ * @exports DateTimePickerDecorator
  */
 
 import kind from '@enact/core/kind';

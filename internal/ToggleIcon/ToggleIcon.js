@@ -60,6 +60,7 @@ const ToggleIconDecorator = compose(
  * @memberof agate/ToggleIcon
  * @extends agate/ToggleIcon.ToggleIconBase
  * @mixes agate/ToggleIcon.ToggleIconDecorator
+ * @ui
  * @private
  */
 const ToggleIcon = ToggleIconDecorator(ToggleIconBase);

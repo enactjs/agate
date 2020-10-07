@@ -271,4 +271,6 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 });
 
 export default ThemeDecorator;
-export {ThemeDecorator};
+export {
+	ThemeDecorator
+};

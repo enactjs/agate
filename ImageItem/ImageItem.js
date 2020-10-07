@@ -157,6 +157,7 @@ const ImageItemDecorator = compose(
  * @memberof agate/ImageItem
  * @extends agate/ImageItem.ImageItemBase
  * @mixes agate/ImageItem.ImageItemDecorator
+ * @ui
  * @public
  */
 const ImageItem = ImageItemDecorator(ImageItemBase);

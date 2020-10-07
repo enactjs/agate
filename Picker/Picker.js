@@ -9,7 +9,6 @@
  * @module agate/Picker
  * @exports Picker
  * @exports PickerBase
- * @exports PickerDecorator
  */
 
 import kind from '@enact/core/kind';
