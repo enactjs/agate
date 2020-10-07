@@ -22,11 +22,15 @@ import Skinnable from '../Skinnable';
 
 import css from './WindDirectionControl.module.less';
 
+// Children supplied to ArcPicker/WindDirectionControl. The number of items in this array represents the number of
+// Arcs rendered on the screen.
+const children = ['airDown', 'airRight', 'airUp'];
+
 /**
  * An Agate component for displaying Wind Direction Control {@link agate/WindDirectionControl}.
  *
- * @class WindDirectionControl
- * @memberof agate/WindDirectionControl
+ * @class WindDirectionControlBase
+ * @extends agate/ArcPicker.ArcPicker
  * @ui
  * @public
  */
@@ -76,18 +80,16 @@ const WindDirectionControlBase = kind({
 		}
 	},
 
-	render: ({componentIcon,  onChange, value, ...rest}) => {
-		const children = ['airDown', 'airRight', 'airUp'];
-
+	render: ({componentIcon, onChange, value, ...rest}) => {
 		return (
 			<div {...rest}>
 				<ArcPicker
 					endAngle={210}
 					onChange={onChange}
-					value={value}
 					slotCenter={
 						<Icon className={css.airDirectionIcon} css={css}>{componentIcon}</Icon>
 					}
+					value={value}
 				>
 					{children}
 				</ArcPicker>
@@ -97,7 +99,7 @@ const WindDirectionControlBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [WindDirectionControl]{@link agate/WindDirectionControl.WindDirectionControl} components.
+ * Applies Agate specific behaviors to [WindDirectionControlBase]{@link agate/WindDirectionControl.WindDirectionControlBase}.
  *
  * @hoc
  * @memberof agate/WindDirectionControl
@@ -110,6 +112,21 @@ const WindDirectionControlDecorator = compose(
 	Skinnable
 );
 
+/**
+ * WindDirectionControl with Agate styling and
+ * [`WindDirectionControlDecorator`]{@link agate/WindDirectionControl.WindDirectionControlDecorator} applied.
+ *
+ * Usage
+ *
+ *  <WindDirectionControl />
+ *
+ * @class WindDirectionControl
+ * @memberof agate/WindDirectionControl
+ * @extends agate/WindDirectionControl.WindDirectionControlBase
+ * @mixes agate/WindDirectionControl.WindDirectionControlDecorator
+ * @ui
+ * @public
+ */
 const WindDirectionControl = WindDirectionControlDecorator(WindDirectionControlBase);
 
 export default WindDirectionControl;
