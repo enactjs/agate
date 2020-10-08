@@ -5,11 +5,12 @@
 
 .dateTimePicker {
 	position: relative;
+	width: fit-content;
 
 	&::before {
 		content: "";
 		position: absolute;
-		width: 95%;
+		width: 100%;
 		left: 50%;
 		transform: translateX(-50%);
 	}
@@ -34,7 +35,6 @@
 .applySkins({
 	.dateTimePicker {
 		font-size: @agate-picker-font-size;
-		width: @agate-datetimepicker-width;
 
 		&::before {
 			height: @agate-button-height;

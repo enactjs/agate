@@ -10,7 +10,7 @@
  */
 
 import kind from '@enact/core/kind';
-import {Cell, Row} from '@enact/ui/Layout';
+import {Row} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -58,16 +58,12 @@ const DateTimePickerBase = kind({
 
 		return (
 			<Row {...rest} className={css.dateTimePicker} align="center center">
-				<Cell>
-					<Row align="center center">
-						<TimePicker css={css} disabled={disabled} onChange={onChange} />
-					</Row>
-				</Cell>
-				<Cell>
-					<Row align="center center">
-						<DatePicker css={css} disabled={disabled} onChange={onChange} />
-					</Row>
-				</Cell>
+				<Row align="center center">
+					<TimePicker css={css} disabled={disabled} onChange={onChange} />
+				</Row>
+				<Row align="center center">
+					<DatePicker css={css} disabled={disabled} onChange={onChange} />
+				</Row>
 			</Row>
 		);
 	}
