@@ -38,7 +38,15 @@ const DateTimePickerBase = kind({
 		 * @type {Boolean}
 		 * @public
 		 */
-		disabled: PropTypes.bool
+		disabled: PropTypes.bool,
+
+		/**
+		 * Handler for `onChange` events
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onChange: PropTypes.func
 	},
 
 	styles: {
@@ -46,18 +54,18 @@ const DateTimePickerBase = kind({
 		className: 'dateTimePicker'
 	},
 
-	render ({disabled, ...rest}) {
+	render ({disabled, onChange, ...rest}) {
 
 		return (
 			<Row {...rest} className={css.dateTimePicker} align="center center">
 				<Cell>
 					<Row align="center center">
-						<TimePicker css={css} disabled={disabled} />
+						<TimePicker css={css} disabled={disabled} onChange={onChange} />
 					</Row>
 				</Cell>
 				<Cell>
 					<Row align="center center">
-						<DatePicker css={css} disabled={disabled} />
+						<DatePicker css={css} disabled={disabled} onChange={onChange} />
 					</Row>
 				</Cell>
 			</Row>
