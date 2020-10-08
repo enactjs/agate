@@ -394,7 +394,6 @@ const DropDownExtended = hoc((config, Wrapped) => {
  *
  * @hoc
  * @memberof agate/Dropdown
- * @mixes agate/Dropdown.DropdownDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
  */

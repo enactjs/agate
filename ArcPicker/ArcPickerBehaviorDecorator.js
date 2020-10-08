@@ -11,15 +11,15 @@ const validateRange = validateRangeOnce((props) => props, {'component': 'ArcPick
  * Adds Agate-specific ArcPicker behaviors.
  *
  * @class ArcPickerBehaviorDecorator
- * @memberof agate/ArcPicker
  * @hoc
- * @public
+ * @memberof agate/ArcPicker
+ * @private
  */
 const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 	return kind({
 		name: 'ArcPickerBehaviorDecorator',
 
-		propTypes: {
+		propTypes: /** @lends agate/ArcPicker.ArcPickerBehaviorDecorator.prototype */{
 			/**
 			 * The value options of ArcPicker.
 			 *

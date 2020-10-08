@@ -1,6 +1,6 @@
 import kind from '@enact/core/kind';
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import Skinnable from '../Skinnable';
 
@@ -169,4 +169,7 @@ const TooltipBase = kind({
 const Tooltip = Skinnable(TooltipBase);
 
 export default Tooltip;
-export {Tooltip, TooltipBase};
+export {
+	Tooltip,
+	TooltipBase
+};

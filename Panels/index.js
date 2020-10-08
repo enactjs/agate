@@ -7,13 +7,14 @@
  * @exports Panel
  * @exports Panels
  * @exports PanelsBase
+ * @exports PanelsDecorator
  * @exports TabbedPanels
  */
 
 import Breadcrumb from './Breadcrumb';
 import BreadcrumbPanels from './BreadcrumbPanels';
 import Panel from './Panel';
-import {Panels, PanelsBase} from './Panels';
+import {Panels, PanelsBase, PanelsDecorator} from './Panels';
 import TabbedPanels from './TabbedPanels';
 
 export default Panels;
@@ -23,5 +24,6 @@ export {
 	Panel,
 	Panels,
 	PanelsBase,
+	PanelsDecorator,
 	TabbedPanels
 };

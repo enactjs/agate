@@ -1,6 +1,6 @@
-import React from 'react';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import {secondsToPeriod, secondsToTime} from './util';
 

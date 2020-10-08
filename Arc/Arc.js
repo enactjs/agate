@@ -8,6 +8,7 @@
  * @exports Arc
  * @exports ArcBase
  * @exports ArcDecorator
+ * @private
  */
 
 import EnactPropTypes from '@enact/core/internal/prop-types';
@@ -31,7 +32,7 @@ import {arcPath} from './utils';
  * @class ArcBase
  * @memberof agate/Arc
  * @ui
- * @public
+ * @private
  */
 const ArcBase = kind({
 	name: 'Arc',
@@ -151,12 +152,12 @@ const ArcBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [Arc]{@link agate/Arc.ArcBase} components.
+ * Applies Agate specific behaviors to [ArcBase]{@link agate/Arc.ArcBase} components.
  *
  * @hoc
  * @memberof agate/Arc
  * @mixes agate/Skinnable.Skinnable
- * @public
+ * @private
  */
 const ArcDecorator = compose(
 	Pure,
@@ -175,7 +176,7 @@ const ArcDecorator = compose(
  * @extends agate/Arc.ArcBase
  * @mixes agate/Arc.ArcDecorator
  * @ui
- * @public
+ * @private
  */
 const Arc = ArcDecorator(ArcBase);
 
