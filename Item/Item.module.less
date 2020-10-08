@@ -50,6 +50,7 @@
 
 		.itemContent {
 			line-height: @agate-item-itemcontent-line-height;
+
 			.label   {
 				color: @agate-item-label-color;
 				font-size: @agate-item-label-font-size;
@@ -58,6 +59,7 @@
 
 			&.hasLabel {
 				padding: @agate-item-haslabel-padding;
+
 				&.labelBefore .label {
 					.padding-start-end(0, @agate-item-label-padding);
 				}
@@ -65,7 +67,6 @@
 				&.labelAfter .label {
 					.padding-start-end(@agate-item-label-padding, 0);
 				}
-
 
 				&.labelAfter,
 				&.labelBefore {
