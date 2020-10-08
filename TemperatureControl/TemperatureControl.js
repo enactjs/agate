@@ -34,6 +34,7 @@ import css from './TemperatureControl.module.less';
  *
  * @class TemperatureControlBase
  * @memberof agate/TemperatureControl
+ * @extends agate/ArcSlider.ArcSlider
  * @ui
  * @public
  */

@@ -3,8 +3,8 @@ import hoc from '@enact/core/hoc';
 import platform from '@enact/core/platform';
 import Pause from '@enact/spotlight/Pause';
 import PropTypes from 'prop-types';
-import {findDOMNode} from 'react-dom';
 import React from 'react';
+import {findDOMNode} from 'react-dom';
 
 import $L from '../internal/$L';
 

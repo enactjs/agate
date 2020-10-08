@@ -1,8 +1,8 @@
 import kind from '@enact/core/kind';
 import {mapAndFilterChildren} from '@enact/core/util';
 import Changeable from '@enact/ui/Changeable';
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import Picker from '../../Picker';
 

@@ -45,8 +45,8 @@ const defaultConfig = {
  *
  * @class IdProvider
  * @hoc
- * @private
  * @memberof agate/Panels
+ * @private
  */
 const IdProvider = hoc(defaultConfig, (config, Wrapped) => {
 	const {generateProp, idProp, prefix} = config;

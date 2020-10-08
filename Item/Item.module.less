@@ -49,12 +49,17 @@
 		}
 
 		.itemContent {
+			line-height: @agate-item-itemcontent-line-height;
+
 			.label   {
 				color: @agate-item-label-color;
 				font-size: @agate-item-label-font-size;
+				line-height: @agate-item-label-line-height;
 			}
 
 			&.hasLabel {
+				padding: @agate-item-haslabel-padding;
+
 				&.labelBefore .label {
 					.padding-start-end(0, @agate-item-label-padding);
 				}
@@ -62,7 +67,6 @@
 				&.labelAfter .label {
 					.padding-start-end(@agate-item-label-padding, 0);
 				}
-
 
 				&.labelAfter,
 				&.labelBefore {
@@ -109,7 +113,7 @@
 
 			.itemContent {
 				.label {
-					color: @agate-item-focus-color;
+					color: @agate-item-label-color;
 				}
 			}
 		});
@@ -127,6 +131,12 @@
 				border-radius: @agate-indicator-border-radius;
 				align-self: @agate-indicator-align-self;
 				margin-right: @agate-indicator-margin-right;
+			}
+
+			.itemContent {
+				.label {
+					color: @agate-item-selected-label-color;
+				}
 			}
 
 			// Selected+Focus colors use both sets of colors

@@ -5,6 +5,8 @@
 @import '../styles/mixins.less';
 
 .imageItem {
+	position: relative;
+
   	&.horizontal {
 		.image {
 	  		margin: auto 0; // leaving this to align image with caption when orientation="horizontal"
@@ -15,6 +17,7 @@
 		.caption {
 			overflow: hidden;
 			position: absolute;
+			box-sizing: border-box;
 		}
 	}
 
@@ -29,7 +32,7 @@
 
 		&.captionOverlay {
 			.caption {
-				width: @agate-imageitem-caption-overlay-width;
+				width: 100%;
 				height: @agate-imageitem-caption-overlay-height;
 				color: @agate-imageitem-caption-overlay-text-color;
 				opacity: @agate-imageitem-caption-overlay-opacity;
@@ -38,6 +41,8 @@
 				line-height: @agate-imageitem-caption-overlay-line-height;
 				text-align: @agate-imageitem-caption-overlay-text-align;
 				bottom: @agate-imageitem-caption-position-bottom;
+				min-height: @agate-imageitem-caption-overlay-min-height;
+				max-height: @agate-imageitem-caption-overlay-max-height;
 			}
 		}
 

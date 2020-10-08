@@ -7,6 +7,7 @@
  * @module agate/Checkbox
  * @exports Checkbox
  * @exports CheckboxBase
+ * @private
  */
 
 import kind from '@enact/core/kind';

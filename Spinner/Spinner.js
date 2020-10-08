@@ -12,11 +12,11 @@
  * @exports SpinnerDecorator
  */
 import kind from '@enact/core/kind';
-import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
+import UiSpinnerBase from '@enact/ui/Spinner';
+import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
-import UiSpinnerBase from '@enact/ui/Spinner';
 
 import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
@@ -52,7 +52,7 @@ const SpinnerCore = kind({
 		 * @default 'searching'
 		 * @public
 		 */
-		type: PropTypes.string
+		type: PropTypes.oneOf(['loading', 'searching'])
 	},
 
 	defaultProps: {

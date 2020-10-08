@@ -4,6 +4,7 @@
  * @module agate/AgateDecorator
  * @exports AgateDecorator
  * @deprecated
+ * @private
  */
 
 import deprecate from '@enact/core/internal/deprecate';
@@ -16,4 +17,6 @@ const AgateDecorator = deprecate(ThemeDecorator, {
 });
 
 export default AgateDecorator;
-export {AgateDecorator};
+export {
+	AgateDecorator
+};
