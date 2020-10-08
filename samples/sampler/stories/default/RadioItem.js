@@ -19,7 +19,7 @@ storiesOf('Agate', module)
 					disabled={boolean('disabled', Config)}
 					icon={select('icon', ['', ...iconNames], Config)}
 				>
-					{text('children', Config, 'Sound')}
+					{text('children', Config, 'Hello RadioItem')}
 				</RadioItem>
 			</div>
 		),
