@@ -17,6 +17,7 @@
 		.caption {
 			overflow: hidden;
 			position: absolute;
+			box-sizing: border-box;
 		}
 	}
 
@@ -31,7 +32,7 @@
 
 		&.captionOverlay {
 			.caption {
-				width: @agate-imageitem-caption-overlay-width;
+				width: 100%;
 				height: @agate-imageitem-caption-overlay-height;
 				color: @agate-imageitem-caption-overlay-text-color;
 				opacity: @agate-imageitem-caption-overlay-opacity;
