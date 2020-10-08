@@ -97,8 +97,8 @@ const iconList = {
 	auto              : 0x0F00B3, // auto
 	airmode           : 0x0F00B4, // air_mode
 	airdown           : 0x0F00B5, // air_down
-	airright          : 0x0F00B6, // air_right
-	airup             : 0x0F00B7, // air_up
+	airup             : 0x0F00B6, // air_up
+	airright          : 0x0F00B7, // air_right
 	heatseatleft      : 0x0F00B8, // seat_heat_left
 	heatseatright     : 0x0F00B9, // seat_heat_right
 	aircirculation    : 0x0F00BA, // air_circulation
