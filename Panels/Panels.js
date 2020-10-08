@@ -22,6 +22,7 @@ const getControlsId = (id) => id && `${id}-controls`;
  *
  * @class Panels
  * @memberof agate/Panels
+ * @mixes agate/Panels.PanelsDecorator
  * @ui
  * @public
  */
@@ -299,6 +300,16 @@ const PanelsBase = kind({
 	}
 });
 
+/**
+ * Applies Agate specific behaviors to [Panels]{@link agate/Panels.Panels} components.
+ *
+ * @hoc
+ * @memberof agate/Panels
+ * @mixes ui/Slottable.Slottable
+ * @mixes ui/Measurable.Measurable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const PanelsDecorator = compose(
 	Slottable({slots: ['controls']}),
 	CancelDecorator({cancel: 'onBack'}),
@@ -312,5 +323,6 @@ const Panels = PanelsDecorator(PanelsBase);
 export default Panels;
 export {
 	Panels,
-	PanelsBase
+	PanelsBase,
+	PanelsDecorator
 };

@@ -1,3 +1,12 @@
+/**
+ * An Agate-styled `MediaPlayer` component.
+ *
+ * @module agate/MediaPlayer
+ * @exports MediaPlayer
+ * @exports MediaPlayerBase
+ * @exports MediaPlayerDecorator
+ */
+
 import {adaptEvent, call, forwardWithPrevent, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import EnactPropTypes from '@enact/core/internal/prop-types';
@@ -291,8 +300,8 @@ const MediaPlayerBase = kind({
  * Media player behaviors to apply to [MediaPlayerBase]{@link agate/MediaPlayer.MediaPlayerBase}.
  *
  * @class MediaPlayerBehaviorDecorator
- * @memberof agate/MediaPlayer
  * @hoc
+ * @memberof agate/MediaPlayer
  * @private
  */
 const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disable-line no-unused-vars
@@ -691,10 +700,8 @@ const AnnounceDecorator = Wrapped => function AnnounceDecorator (props) {
  *
  * @hoc
  * @memberof agate/MediaPlayer
- * @mixes spotlight/Spottable.Spottable
  * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
- * @mixes i18n/I18nContextDecorator.I18nContextDecorator
  * @public
  */
 const MediaPlayerDecorator = compose(
@@ -707,7 +714,7 @@ const MediaPlayerDecorator = compose(
 );
 
 /**
- * An Agate-styled `Media` component.
+ * An Agate-styled `MediaPlayer` component.
  *
  * Usage:
  * ```

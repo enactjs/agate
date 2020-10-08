@@ -49,8 +49,8 @@ const defaultConfig = {
  * spotlight behavior for an {@link agate/Input.Input}
  *
  * @class InputSpotlightDecorator
- * @memberof agate/Input/InputSpotlightDecorator
  * @hoc
+ * @memberof agate/Input/InputSpotlightDecorator
  * @private
  */
 const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
@@ -363,4 +363,6 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 });
 
 export default InputSpotlightDecorator;
-export {InputSpotlightDecorator};
+export {
+	InputSpotlightDecorator
+};

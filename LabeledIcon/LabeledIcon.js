@@ -67,7 +67,7 @@ const LabeledIconBase = kind({
  *
  * @hoc
  * @memberof agate/LabeledIcon
- * @mixes agate/LabeledIcon.LabeledIconDecorator
+ * @mixes ui/LabeledIcon.LabeledIconDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
  */

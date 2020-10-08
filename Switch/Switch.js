@@ -7,11 +7,12 @@
  * @module agate/Switch
  * @exports Switch
  * @exports SwitchBase
+ * @private
  */
 
 import kind from '@enact/core/kind';
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import Icon from '../Icon';
 import {ToggleIconBase} from '../internal/ToggleIcon';
@@ -21,15 +22,15 @@ import componentCss from './Switch.module.less';
 /**
  * Renders the base level DOM structure of the component.
  *
- * @class SwitchBase
+ * @class Switch
  * @memberof agate/Switch
  * @ui
- * @public
+ * @private
  */
 const SwitchBase = kind({
 	name: 'Switch',
 
-	propTypes: /** @lends agate/Switch.SwitchBase.prototype */ {
+	propTypes: /** @lends agate/Switch.Switch.prototype */ {
 		children: PropTypes.string,
 		css: PropTypes.object,
 

@@ -137,7 +137,7 @@ const DatePickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onChangeDate: PropTypes.func,
+		onDateChange: PropTypes.func,
 
 		/**
 		 * Called when the `month` component of the Date changes.
@@ -145,7 +145,7 @@ const DatePickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onChangeMonth: PropTypes.func,
+		onMonthChange: PropTypes.func,
 
 		/**
 		 * Called when the `year` component of the Date changes.
@@ -153,7 +153,7 @@ const DatePickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onChangeYear: PropTypes.func,
+		onYearChange: PropTypes.func,
 
 		/**
 		 * Indicates the content's text direction is right-to-left.
@@ -197,9 +197,9 @@ const DatePickerBase = kind({
 		minYear,
 		month,
 		monthAriaLabel,
-		onChangeDate,
-		onChangeMonth,
-		onChangeYear,
+		onDateChange,
+		onMonthChange,
+		onYearChange,
 		order,
 		year,
 		yearAriaLabel,
@@ -224,7 +224,7 @@ const DatePickerBase = kind({
 									key="day-picker"
 									max={maxDays}
 									min={1}
-									onChange={onChangeDate}
+									onChange={onDateChange}
 									value={day}
 									width={2}
 								/>
@@ -239,7 +239,7 @@ const DatePickerBase = kind({
 									key="month-picker"
 									max={maxMonths}
 									min={1}
-									onChange={onChangeMonth}
+									onChange={onMonthChange}
 									value={month}
 									width={2}
 								/>
@@ -254,7 +254,7 @@ const DatePickerBase = kind({
 									key="year-picker"
 									max={maxYear}
 									min={minYear}
-									onChange={onChangeYear}
+									onChange={onYearChange}
 									value={year}
 									width={4}
 								/>

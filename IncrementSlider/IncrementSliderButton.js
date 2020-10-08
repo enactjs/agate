@@ -1,8 +1,9 @@
 import kind from '@enact/core/kind';
-import Button from '../Button';
-import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
+
+import Button from '../Button';
 
 import componentCss from './IncrementSliderButton.module.less';
 

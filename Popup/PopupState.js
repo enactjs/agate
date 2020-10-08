@@ -1,6 +1,6 @@
-import FloatingLayer from '@enact/ui/FloatingLayer';
 import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
+import FloatingLayer from '@enact/ui/FloatingLayer';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -101,4 +101,6 @@ const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-v
 });
 
 export default PopupState;
-export {PopupState};
+export {
+	PopupState
+};

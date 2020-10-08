@@ -209,12 +209,11 @@ const ArcPickerBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [ArcPicker]{@link agate/ArcPicker.ArcPicker} components.
+ * Applies Agate specific behaviors to [ArcPickerBase]{@link agate/ArcPicker.ArcPickerBase} components.
  *
  * @hoc
  * @memberof agate/ArcPicker
  * @mixes ui/Changeable.Changeable
- * @mixes agate/ArcPicker.ArcPickerBehaviorDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
  */

@@ -9,10 +9,10 @@
  * @exports DateTimePickerBase
  */
 
-import React from 'react';
 import kind from '@enact/core/kind';
 import {Row} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import DatePicker from '../DatePicker';
 import Skinnable from '../Skinnable';
@@ -28,18 +28,25 @@ import css from './DateTimePicker.module.less';
  * @ui
  * @public
  */
-
 const DateTimePickerBase = kind({
 	name: 'DateTimePickerBase',
 
-	propTypes: /** @lends agate/DateTimePicker.DateTimePicker.prototype */ {
+	propTypes: /** @lends agate/DateTimePicker.DateTimePickerBase.prototype */ {
 		/**
 		 * Disables the `DateTimePicker`.
 		 *
 		 * @type {Boolean}
 		 * @public
 		 */
-		disabled: PropTypes.bool
+		disabled: PropTypes.bool,
+
+		/**
+		 * Handler for `onChange` events
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onChange: PropTypes.func
 	},
 
 	styles: {
@@ -47,15 +54,15 @@ const DateTimePickerBase = kind({
 		className: 'dateTimePicker'
 	},
 
-	render ({disabled, ...rest}) {
+	render ({disabled, onChange, ...rest}) {
 
 		return (
 			<Row {...rest} className={css.dateTimePicker} align="center center">
 				<Row align="center center">
-					<TimePicker css={css} disabled={disabled} />
+					<TimePicker css={css} disabled={disabled} onChange={onChange} />
 				</Row>
 				<Row align="center center">
-					<DatePicker css={css} disabled={disabled} />
+					<DatePicker css={css} disabled={disabled} onChange={onChange} />
 				</Row>
 			</Row>
 		);

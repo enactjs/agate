@@ -30,9 +30,9 @@ const toTime = (date) => {
  * {@link agate/DatePicker.DatePicker} and {@link agate/TimePicker.TimePicker}.
  *
  * @class DateTimeDecorator
+ * @hoc
  * @memberof agate/internal/DateTimeDecorator
  * @mixes ui/Changeable.Changeable
- * @hoc
  * @private
  */
 const DateTimeDecorator = hoc((config, Wrapped) => {
@@ -222,4 +222,6 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 });
 
 export default DateTimeDecorator;
-export {DateTimeDecorator};
+export {
+	DateTimeDecorator
+};
