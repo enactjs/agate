@@ -27,7 +27,7 @@ import css from './WindDirectionControl.module.less';
 const children = ['airDown', 'airRight', 'airUp'];
 
 /**
- * An Agate component for displaying Wind Direction Control {@link agate/WindDirectionControl}.
+ * An Agate component for displaying Wind Direction Control.
  *
  * @class WindDirectionControlBase
  * @memberof agate/WindDirectionControl
@@ -67,17 +67,17 @@ const WindDirectionControlBase = kind({
 	},
 
 	computed: {
-		componentIcon: ({value}) => (value.toLowerCase())
+		airDirectionIcon: ({value}) => (value.toLowerCase())
 	},
 
-	render: ({componentIcon, onChange, value, ...rest}) => {
+	render: ({airDirectionIcon, onChange, value, ...rest}) => {
 		return (
 			<div {...rest}>
 				<ArcPicker
 					endAngle={210}
 					onChange={onChange}
 					slotCenter={
-						<Icon className={css.airDirectionIcon} css={css}>{componentIcon}</Icon>
+						<Icon className={css.airDirectionIcon} css={css}>{airDirectionIcon}</Icon>
 					}
 					value={value}
 				>
@@ -104,7 +104,7 @@ const WindDirectionControlDecorator = compose(
 
 /**
  * WindDirectionControl with Agate styling and
- * [`WindDirectionControlDecorator`]{@link agate/WindDirectionControl.WindDirectionControlDecorator} applied.
+ * [WindDirectionControlDecorator]{@link agate/WindDirectionControl.WindDirectionControlDecorator} applied.
  *
  * Usage
  *
