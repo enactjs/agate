@@ -126,6 +126,15 @@ const SpinnerBase = kind({
 		css: PropTypes.object,
 
 		/**
+		 * Pauses the animation of the spinner
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		paused: PropTypes.bool,
+
+		/**
 		 * The size of the component.
 		 *
 		 * Recommended usage is "large" (default) for standalone and popup scenarios, while "small"
@@ -150,7 +159,8 @@ const SpinnerBase = kind({
 	defaultProps: {
 		color: 'light',
 		size: 'large',
-		transparent: false
+		transparent: false,
+		paused: false
 	},
 
 	styles: {
@@ -159,15 +169,17 @@ const SpinnerBase = kind({
 	},
 
 	computed: {
-		className: ({children, color, size, transparent, styler}) => styler.append(
+		className: ({children, color, size, transparent, paused, styler}) => styler.append(
 			color,
 			size,
-			{content: !!children, transparent}
+			{content: !!children, transparent},
+			{pausedAnimation: paused}
 		)
 	},
 
 	render: ({css, ...rest}) => {
 		delete rest.transparent;
+		delete rest.paused;
 
 		return (
 			<UiSpinnerBase

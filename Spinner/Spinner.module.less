@@ -140,6 +140,12 @@
 				border-radius: @agate-spinner-searching-border-radius;
 			}
 
+			&.pausedAnimation {
+				.node {
+					animation-play-state: paused;
+				}
+			}
+
 			.spin-loop(@searching-nodes);
 
 			&.huge {
@@ -200,6 +206,12 @@
 					var(--node-relative-offset) -
 					(var(--node-proportion-offset) * @agate-spinner-loading-width)
 				);
+			}
+
+			&.pausedAnimation {
+				.node {
+					animation-play-state: paused;
+				}
 			}
 
 			.bounce-loop(@loading-nodes);
