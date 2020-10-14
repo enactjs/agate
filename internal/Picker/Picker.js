@@ -28,8 +28,9 @@ const PickerButtonItem = Spottable('div');
 
 const handleChange = direction => handle(
 	adaptEvent(
-		(ev, {min, max, step, value}) => ({
-			value: clamp(min, max, value + (direction * step))
+		(ev, {min, max, step, value, children}) => ({
+			value: clamp(min, max, value + (direction * step)),
+			data: Array.isArray(children) ? children[value + (direction * step)] : value + (direction * step)
 		}),
 		forward('onChange')
 	)
