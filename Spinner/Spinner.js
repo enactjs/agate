@@ -158,9 +158,9 @@ const SpinnerBase = kind({
 
 	defaultProps: {
 		color: 'light',
+		paused: false,
 		size: 'large',
-		transparent: false,
-		paused: false
+		transparent: false
 	},
 
 	styles: {
@@ -169,7 +169,7 @@ const SpinnerBase = kind({
 	},
 
 	computed: {
-		className: ({children, color, size, transparent, paused, styler}) => styler.append(
+		className: ({children, color, paused, size, transparent, styler}) => styler.append(
 			color,
 			size,
 			{content: !!children, transparent},
@@ -178,8 +178,8 @@ const SpinnerBase = kind({
 	},
 
 	render: ({css, ...rest}) => {
-		delete rest.transparent;
 		delete rest.paused;
+		delete rest.transparent;
 
 		return (
 			<UiSpinnerBase
