@@ -43,6 +43,13 @@ const PopupMenuBase = kind({
 		onClose: PropTypes.func,
 		onHide: PropTypes.func,
 		open: PropTypes.bool,
+		/**
+		 * The layout orientation of the component
+		 *
+		 * @type {('horizontal')}
+		 * @default 'horizontal'
+		 * @private
+		 */
 		orientation: PropTypes.oneOf(['horizontal']),
 		title: PropTypes.string
 	},
