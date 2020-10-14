@@ -44,8 +44,9 @@ import componentCss from './Slider.module.less';
  * Range-selection input component.
  *
  * @class SliderBase
- * @extends ui/Slider.SliderBase
  * @memberof agate/Slider
+ * @extends ui/Slider.SliderBase
+ * @mixes agate/Slider.SliderDecorator
  * @ui
  * @public
  */
@@ -82,6 +83,15 @@ const SliderBase = kind({
 		 * @public
 		 */
 		css: PropTypes.object,
+
+
+		/**
+		 * Disables component and does not generate events.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
 
 		/**
 		 * Indicates that the slider has gained focus.
@@ -232,7 +242,7 @@ const SliderBase = kind({
 		})
 	},
 
-	render: ({css, ...rest}) => {
+	render: ({css, disabled, ...rest}) => {
 		delete rest.activateOnFocus;
 		delete rest.active;
 		delete rest.focused;
@@ -242,7 +252,9 @@ const SliderBase = kind({
 		return (
 			<UiSlider
 				{...rest}
+				aria-disabled={disabled}
 				css={css}
+				disabled={disabled}
 				progressBarComponent={
 					<ProgressBar css={css} />
 				}
@@ -258,9 +270,8 @@ const SliderBase = kind({
  * @memberof agate/Slider
  * @mixes ui/Changeable.Changeable
  * @mixes spotlight/Spottable.Spottable
- * @mixes agate/Skinnable.Skinnable
  * @mixes ui/Slottable.Slottable
- * @mixes ui/Slider.SliderDecorator
+ * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const SliderDecorator = compose(
@@ -288,6 +299,7 @@ const SliderDecorator = compose(
  * @ui
  * @public
  */
+const Slider = SliderDecorator(SliderBase);
 
 /**
  * Overrides the `aria-valuetext` for the slider.
@@ -300,8 +312,6 @@ const SliderDecorator = compose(
  * @type {String|Number}
  * @public
  */
-
-const Slider = SliderDecorator(SliderBase);
 
 export default Slider;
 export {

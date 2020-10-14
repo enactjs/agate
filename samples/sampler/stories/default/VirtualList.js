@@ -60,14 +60,12 @@ storiesOf('Agate', module)
 		() => {
 			return (
 				<VirtualList
-					style={{height: ri.scaleToRem(600)}}
 					dataSize={updateDataSize(number('dataSize', VirtualListConfig, defaultDataSize))}
 					focusableScrollbar={boolean('focusableScrollbar', VirtualListConfig)}
 					horizontalScrollbar={select('horizontalScrollbar', prop.scrollbarOption, VirtualListConfig)}
 					itemRenderer={renderItem(ri.scale(number('itemSize', VirtualListConfig, 144)))}
 					itemSize={ri.scale(number('itemSize', VirtualListConfig, 144))}
 					key={select('scrollMode', prop.scrollModeOption, VirtualListConfig)}
-					noScrollByWheel={boolean('noScrollByWheel', VirtualListConfig)}
 					onScrollStart={action('onScrollStart')}
 					onScrollStop={action('onScrollStop')}
 					scrollMode={select('scrollMode', prop.scrollModeOption, VirtualListConfig)}
@@ -79,8 +77,9 @@ storiesOf('Agate', module)
 			);
 		},
 		{
-			info: {
-				text: 'Basic usage of VirtualList'
-			}
+			props: {
+				noScroller: true
+			},
+			text: 'Basic usage of VirtualList'
 		}
 	);

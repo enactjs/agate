@@ -35,11 +35,19 @@ import css from './ContextualPopupDecorator.module.less';
  */
 const defaultConfig = {
 	/**
+	 * `ContextualPopup` without the arrow.
+	 *
+	 * @type {Boolean}
+	 * @memberof agate/ContextualPopupDecorator.ContextualPopupDecorator.defaultConfig
+	 * @public
+	 */
+	noArrow: false,
+
+	/**
 	 * Disables passing the `skin` prop to the wrapped component.
 	 *
 	 * @see {@link agate/Skinnable.Skinnable.skin}
 	 * @type {Boolean}
-	 * @default false
 	 * @memberof agate/ContextualPopupDecorator.ContextualPopupDecorator.defaultConfig
 	 * @public
 	 */
@@ -63,10 +71,10 @@ const ContextualPopupContainer = SpotlightContainerDecorator(
 );
 
 const Decorator = hoc(defaultConfig, (config, Wrapped) => {
-	const {noSkin, openProp} = config;
+	const {noArrow, noSkin, openProp} = config;
 
 	return class extends React.Component {
-		static displayName = 'ContextualPopupDecorator'
+		static displayName = 'ContextualPopupDecorator';
 
 		static propTypes = /** @lends agate/ContextualPopupDecorator.ContextualPopupDecorator.prototype */ {
 			/**
@@ -78,16 +86,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * @public
 			 */
 			popupComponent: EnactPropTypes.component.isRequired,
-
-			/**
-			 * Limits the range of voice control to the popup.
-			 *
-			 * @memberof agate/ContextualPopupDecorator.ContextualPopupDecorator.prototype
-			 * @type {Boolean}
-			 * @default true
-			 * @public
-			 */
-			'data-webos-voice-exclusive': PropTypes.bool,
 
 			/**
 			 * Direction of popup with respect to the wrapped component.
@@ -103,10 +101,20 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * popup.
 			 *
 			 * @type {Boolean}
-			 * @default false
 			 * @public
 			 */
 			noAutoDismiss: PropTypes.bool,
+
+			/**
+			 * Offset from the activator to apply to the position of the popup.
+			 *
+			 * Only applies when `noArrow` is `true`.
+			 *
+			 * @type {('none'|'overlap'|'small')}
+			 * @default 'small'
+			 * @public
+			 */
+			offset: PropTypes.oneOf(['none', 'overlap', 'small']),
 
 			/**
 			 * Called when the user has attempted to close the popup.
@@ -132,7 +140,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * Displays the contextual popup.
 			 *
 			 * @type {Boolean}
-			 * @default false
 			 * @public
 			 */
 			open: PropTypes.bool,
@@ -189,7 +196,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * Shows the close button.
 			 *
 			 * @type {Boolean}
-			 * @default false
 			 * @public
 			 */
 			showCloseButton: PropTypes.bool,
@@ -221,16 +227,16 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * @public
 			 */
 			spotlightRestrict: PropTypes.oneOf(['none', 'self-first', 'self-only'])
-		}
+		};
 
 		static defaultProps = {
-			'data-webos-voice-exclusive': true,
 			direction: 'below center',
 			noAutoDismiss: false,
+			offset: 'small',
 			open: false,
 			showCloseButton: false,
 			spotlightRestrict: 'self-first'
-		}
+		};
 
 		constructor (props) {
 			super(props);
@@ -244,10 +250,10 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			this.overflow = {};
 			this.adjustedDirection = this.props.direction;
 
-			this.ARROW_OFFSET = ri.scale(18); // actual distance of the svg arrow displayed to offset overlaps with the container.
-			this.ARROW_WIDTH = ri.scale(30); // svg arrow width. used for arrow positioning
+			this.MARGIN = noArrow ? 0 : ri.scale(9);
+			this.ARROW_WIDTH = noArrow ? 0 : ri.scale(30); // svg arrow width. used for arrow positioning
+			this.ARROW_OFFSET = noArrow ? 0 : ri.scale(18); // actual distance of the svg arrow displayed to offset overlaps with the container. Offset is when `noArrow` is false.
 			this.KEEPOUT = ri.scale(12); // keep out distance on the edge of the screen
-			this.MARGIN = ri.scale(9);
 
 			if (props.setApiProvider) {
 				props.setApiProvider(this);
@@ -277,11 +283,14 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 					this.containerNode.contains(current)
 				);
 			}
+
 			return snapshot;
 		}
 
 		componentDidUpdate (prevProps, prevState, snapshot) {
-			if (prevProps.direction !== this.props.direction || snapshot.containerWidth !== this.getContainerNodeWidth()) {
+			if (prevProps.direction !== this.props.direction ||
+				snapshot.containerWidth !== this.getContainerNodeWidth() ||
+				(this.props.open && prevProps.rtl !== this.props.rtl)) {
 				this.adjustedDirection = this.props.direction;
 				// NOTE: `setState` is called and will cause re-render
 				this.positionContextualPopup();
@@ -335,7 +344,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			}
 
 			return {anchor, direction};
-		}
+		};
 
 		getContainerPosition (containerNode, clientNode) {
 			const position = this.centerContainerPosition(containerNode, clientNode);
@@ -537,17 +546,17 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 					containerPosition: this.getContainerPosition(containerNode, clientNode)
 				});
 			}
-		}
+		};
 
 		getContainerNode = (node) => {
 			this.containerNode = node;
-		}
+		};
 
 		getClientNode = (node) => {
 			this.clientNode = ReactDOM.findDOMNode(node); // eslint-disable-line react/no-find-dom-node
-		}
+		};
 
-		handle = handle.bind(this)
+		handle = handle.bind(this);
 
 		handleKeyUp = this.handle(
 			forProp('open', true),
@@ -555,7 +564,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			() => Spotlight.getCurrent() === this.state.activator,
 			stop,
 			forward('onClose')
-		)
+		);
 
 		handleOpen = (ev) => {
 			forward('onOpen', ev, this.props);
@@ -566,14 +575,14 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 				activator: current
 			});
 			this.spotPopupContent();
-		}
+		};
 
 		handleClose = () => {
 			this.updateLeaveFor(null);
 			this.setState({
 				activator: null
 			});
-		}
+		};
 
 		handleDirectionalKey (ev) {
 			// prevent default page scrolling
@@ -606,7 +615,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 					this.spotPopupContent();
 				}
 			}
-		}
+		};
 
 		// handle key event from contextual popup and closes the popup
 		handleContainerKeyDown = (ev) => {
@@ -621,7 +630,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			if (Spotlight.move(direction) && !this.containerNode.contains(Spotlight.getCurrent())) {
 				forward('onClose', ev, this.props);
 			}
-		}
+		};
 
 		spotActivator = (activator) => {
 			if (!Spotlight.getPointerMode() && activator && activator === Spotlight.getCurrent()) {
@@ -630,7 +639,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			if (!Spotlight.focus(activator)) {
 				Spotlight.focus();
 			}
-		}
+		};
 
 		spotPopupContent = () => {
 			const {spotlightRestrict} = this.props;
@@ -643,10 +652,10 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			if (!Spotlight.focus(containerId)) {
 				Spotlight.setActiveContainer(containerId);
 			}
-		}
+		};
 
 		render () {
-			const {'data-webos-voice-exclusive': voiceExclusive, showCloseButton, popupComponent: PopupComponent, popupClassName, noAutoDismiss, onClose, open, popupProps, skin, spotlightRestrict, ...rest} = this.props;
+			const {showCloseButton, popupComponent: PopupComponent, popupClassName, noAutoDismiss, onClose, offset, open, popupProps, skin, spotlightRestrict, ...rest} = this.props;
 			const scrimType = spotlightRestrict === 'self-only' ? 'transparent' : 'none';
 			const popupPropsRef = Object.assign({}, popupProps);
 			const ariaProps = extractAriaProps(popupPropsRef);
@@ -675,14 +684,15 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 						<ContextualPopupContainer
 							{...ariaProps}
 							className={popupClassName}
-							showCloseButton={showCloseButton}
 							onCloseButtonClick={onClose}
 							onKeyDown={this.handleContainerKeyDown}
 							direction={this.state.direction}
 							arrowPosition={this.state.arrowPosition}
 							containerPosition={this.state.containerPosition}
 							containerRef={this.getContainerNode}
-							data-webos-voice-exclusive={voiceExclusive}
+							offset={noArrow ? offset : 'none'}
+							noArrow={noArrow}
+							showCloseButton={showCloseButton}
 							skin={skin}
 							spotlightId={this.state.containerId}
 							spotlightRestrict={spotlightRestrict}

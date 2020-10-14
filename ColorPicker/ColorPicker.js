@@ -10,22 +10,22 @@
  * @exports ColorPickerDecorator
  */
 
-import convert from 'color-convert';
-import compose from 'ramda/src/compose';
+import {on, off} from '@enact/core/dispatcher';
+import {adaptEvent, forward, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
-import {adaptEvent, forward, handle} from '@enact/core/handle';
-import {on, off} from '@enact/core/dispatcher';
-import {Row, Cell} from '@enact/ui/Layout';
+import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
-import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
+import {Row, Cell} from '@enact/ui/Layout';
 import Toggleable from '@enact/ui/Toggleable';
 import Transition from '@enact/ui/Transition';
+import convert from 'color-convert';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
@@ -81,6 +81,14 @@ const ColorPickerBase = kind({
 		direction: PropTypes.string,
 
 		/**
+		 * Disables the `ColorPicker`.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
+		/**
 		 * Determines whether the extended color controls (sliders) are visible
 		 *
 		 * @type {Boolean}
@@ -110,7 +118,7 @@ const ColorPickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onHueChanged: PropTypes.func,
+		onHueChange: PropTypes.func,
 
 		/**
 		 * Callback method with a payload containing the lightness value of the selected `color`.
@@ -118,7 +126,7 @@ const ColorPickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onLightnessChanged: PropTypes.func,
+		onLightnessChange: PropTypes.func,
 
 		/**
 		 * Callback method with a payload containing the saturation value of the selected `color`.
@@ -126,7 +134,7 @@ const ColorPickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onSaturationChanged: PropTypes.func,
+		onSaturationChange: PropTypes.func,
 
 		/**
 		 * Callback method passed to the [Button]{@link agate/Button.Button} component as `onTap`. This is used to toggle the visibility of the H/S/L sliders.
@@ -188,11 +196,11 @@ const ColorPickerBase = kind({
 		}
 	},
 
-	render: ({children, css, onChange, onClick, onHueChanged, onSaturationChanged, onLightnessChanged, onToggleExtended, open, sliderValues, transitionContainerClassname, transitionDirection, value, ...rest}) => {
+	render: ({children, css, disabled, onChange, onClick, onHueChange, onSaturationChange, onLightnessChange, onToggleExtended, open, sliderValues, transitionContainerClassname, transitionDirection, value, ...rest}) => {
 		delete rest.extended;
 		return (
 			<div {...rest}>
-				<SwatchButton color={value} onClick={onClick} />
+				<SwatchButton color={value} disabled={disabled} onClick={onClick} />
 				<Transition
 					className={transitionContainerClassname}
 					visible={open}
@@ -208,26 +216,26 @@ const ColorPickerBase = kind({
 						>
 							{children}
 						</Group>
-						<Button icon="ellipsis" size="small" onTap={onToggleExtended} className={css.swatch} />
+						<Button aria-label={$L('More')} icon="ellipsis" size="small" onTap={onToggleExtended} className={css.swatch} />
 						<div className={css.sliders}>
 							<Row align="center">
-								<Cell>
+								<Cell aria-label={$L('Hue')} role="region">
 									<label>{$L('Hue')}</label>
-									<Slider value={sliderValues.hsl[0]} min={0} max={360} onChange={onHueChanged} />
+									<Slider aria-label={$L('Degree')} value={sliderValues.hsl[0]} min={0} max={360} onChange={onHueChange} />
 								</Cell>
 								<Cell component="label" size="5ex">{sliderValues.hsl[0] + '˚'}</Cell>
 							</Row>
 							<Row align="center">
-								<Cell>
+								<Cell aria-label={$L('Saturation')} role="region">
 									<label>{$L('Saturation')}</label>
-									<Slider value={sliderValues.hsl[1]} min={0} max={100} onChange={onSaturationChanged} />
+									<Slider aria-label={$L('Percent')} value={sliderValues.hsl[1]} min={0} max={100} onChange={onSaturationChange} />
 								</Cell>
 								<Cell component="label" size="5ex">{sliderValues.hsl[1] + '%'}</Cell>
 							</Row>
 							<Row align="center">
-								<Cell>
+								<Cell aria-label={$L('Lightness')} role="region">
 									<label>{$L('Lightness')}</label>
-									<Slider value={sliderValues.hsl[2]} min={0} max={100} onChange={onLightnessChanged} />
+									<Slider aria-label={$L('Percent')} value={sliderValues.hsl[2]} min={0} max={100} onChange={onLightnessChange} />
 								</Cell>
 								<Cell component="label" size="5ex">{sliderValues.hsl[2] + '%'}</Cell>
 							</Row>
@@ -241,14 +249,14 @@ const ColorPickerBase = kind({
 
 const ColorPickerExtended = hoc((config, Wrapped) => {
 	return class extends React.Component {
-		static displayName = 'ColorPickerExtended'
+		static displayName = 'ColorPickerExtended';
 
 		static propTypes = {
 			defaultExtended: PropTypes.bool,
 			onChange: PropTypes.func,
 			open: PropTypes.bool,
 			value: PropTypes.string
-		}
+		};
 
 		constructor (props) {
 			super(props);
@@ -287,9 +295,9 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 
 		buildValue = ({h = this.hsl[0], s = this.hsl[1], l = this.hsl[2]} = {}) => (
 			'#' + convert.hsl.hex(h, s, l)
-		)
+		);
 
-		clickedOutsidePalette = ({target}) => !this.node.contains(target)
+		clickedOutsidePalette = ({target}) => !this.node.contains(target);
 
 		// This handler is meant to accommodate using `ColorPicker`'s `onChange` prop from
 		// `Changeable` as the `onSelect` handler for its `Group` component that lists the set of
@@ -302,23 +310,23 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 				({data: value}) => ({value}),
 				forward('onChange')
 			)
-		).bindAs(this, 'handleChange')
+		).bindAs(this, 'handleChange');
 
 		// If a click happened outside the component area (and children of us) dismiss the palette by forwarding the onClick from Toggleable.
 		handleClick = handle(
 			this.clickedOutsidePalette,
 			forward('onClick')
-		).bindAs(this, 'handleClick')
+		).bindAs(this, 'handleClick');
 
 		handleToggleExtended = () => {
 			this.setState(({extended}) => ({extended: !extended}));
-		}
+		};
 
 		handleSlider = (type) => ({value: sliderValue}) => {
 			this.hsl[('hsl'.indexOf(type))] = sliderValue;
 			const value = this.buildValue();
 			this.handleChange({data: value});
-		}
+		};
 
 		render () {
 			const {...rest} = this.props;
@@ -330,9 +338,9 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 					extended={this.state.extended}
 					onChange={this.handleChange}
 					onToggleExtended={this.handleToggleExtended}
-					onHueChanged={this.handleSlider('h')}
-					onSaturationChanged={this.handleSlider('s')}
-					onLightnessChanged={this.handleSlider('l')}
+					onHueChange={this.handleSlider('h')}
+					onSaturationChange={this.handleSlider('s')}
+					onLightnessChange={this.handleSlider('l')}
 				/>
 			);
 		}

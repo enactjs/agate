@@ -4,12 +4,12 @@
 
 // Named Colors
 @agate-background: #1f1f1f;
-@agate-foreground: white;
+@agate-foreground: @agate-white;
 @agate-foreground-active: @agate-foreground;
 @agate-foreground-focus: @agate-foreground;
 
 // Component color assignments
-@agate-bg-color: black;
+@agate-bg-color: @agate-black;
 @agate-text-color: @agate-foreground;
 @agate-title-text-color: @agate-foreground;
 
@@ -17,12 +17,11 @@
 // ---------------------------------------
 @agate-spotlight-color:                @agate-foreground-focus;
 @agate-spotlight-bg-color:             @agate-background-focus;
-@agate-spotlight-disabled-text-color:  fade(@agate-spotlight-color, 40%);
 
 // Button
 // ---------------------------------------
 @agate-button-color:          @agate-foreground;
-@agate-button-lightOpaque-color: @agate-black;
+@agate-button-lightOpaque-color: @gallium-seal-brown-gray;
 @agate-button-lightOpaque-bg-color: @agate-light-gray;
 
 // Dropdown
@@ -51,7 +50,7 @@
 // ---------------------------------------
 @agate-popup-plain-body-color: @agate-white;
 @agate-popup-bg-color: @agate-bg-color;
-@agate-popup-border-color: @agate-black;
+@agate-popup-border-color: @gallium-seal-brown-gray;
 @agate-popup-body-bg-color: @agate-bg-color;
 
 // RadioItem
@@ -60,7 +59,6 @@
 @agate-radioitem-icon-border-color: @agate-highlight;
 @agate-radioitem-icon-bg-color: transparent;
 @agate-radioitem-icon-focus-bg-color: @agate-radioitem-icon-bg-color;
-@agate-radioitem-icon-focus-color: @agate-highlight;
 @agate-radioitem-icon-selected-bg-color: @agate-radioitem-icon-bg-color;
 @agate-radioitem-icon-selected-color: @agate-accent;
 

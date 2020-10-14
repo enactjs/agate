@@ -9,15 +9,15 @@
  * @module agate/CheckboxItem
  * @exports CheckboxItem
  * @exports CheckboxItemBase
+ * @exports CheckboxItemDecorator
  */
 
 import kind from '@enact/core/kind';
-import PropTypes from 'prop-types';
-import React from 'react';
-import compose from 'ramda/src/compose';
-
 import Spottable from '@enact/spotlight/Spottable';
 import Toggleable from '@enact/ui/Toggleable';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
+import React from 'react';
 
 import Checkbox from '../Checkbox';
 import Item from '../Item';
@@ -44,6 +44,7 @@ import componentCss from './CheckboxItem.module.less';
  * @class CheckboxItem
  * @memberof agate/CheckboxItem
  * @extends agate/Item.Item
+ * @mixes agate/CheckboxItem.CheckboxItemDecorator
  * @omit iconComponent
  * @ui
  * @public
@@ -103,7 +104,7 @@ const CheckboxItemBase = kind({
 
 	render: ({children, css, icon, selected, ...rest}) => (
 		<Item
-			data-webos-voice-intent="SelectCheckItem"
+			aria-checked={selected}
 			role="checkbox"
 			{...rest}
 			css={css}
@@ -114,6 +115,16 @@ const CheckboxItemBase = kind({
 	)
 });
 
+/**
+ * Applies Agate specific behaviors to [CheckboxItem]{@link agate/CheckboxItem.CheckboxItem} components.
+ *
+ * @hoc
+ * @memberof agate/CheckboxItem
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const CheckboxItemDecorator = compose(
 	Toggleable({toggleProp: 'onClick'}),
 	Spottable,
@@ -125,5 +136,6 @@ const CheckboxItem = CheckboxItemDecorator(CheckboxItemBase);
 export default CheckboxItem;
 export {
 	CheckboxItem,
-	CheckboxItemBase
+	CheckboxItemBase,
+	CheckboxItemDecorator
 };

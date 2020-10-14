@@ -13,8 +13,8 @@
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import {LabeledIconBase as UiLabeledIconBase, LabeledIconDecorator as UiLabeledIconDecorator} from '@enact/ui/LabeledIcon';
-import compose from 'ramda/src/compose';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
 import {ButtonBase, ButtonDecorator} from '../Button';
@@ -123,6 +123,7 @@ const LabeledIconButtonBase = kind({
 		...rest
 	}) => {
 		return UiLabeledIconBase.inline({
+			role: 'button',
 			...rest,
 			icon: (
 				<Button
@@ -145,8 +146,8 @@ const LabeledIconButtonBase = kind({
  *
  * @hoc
  * @memberof agate/LabeledIconButton
+ * @mixes ui/LabeledIcon.LabeledIconDecorator
  * @mixes agate/Button.ButtonDecorator
- * @mixes agate/LabeledIcon.LabeledIconDecorator
  * @public
  */
 const LabeledIconButtonDecorator = compose(

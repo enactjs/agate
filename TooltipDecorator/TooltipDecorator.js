@@ -70,8 +70,8 @@ const defaultConfig = {
  * Note that the direction of tooltip will be flipped horizontally in RTL locales.
  *
  * @class TooltipDecorator
- * @memberof agate/TooltipDecorator
  * @hoc
+ * @memberof agate/TooltipDecorator
  * @public
  */
 const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
@@ -79,7 +79,7 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const tooltipDestinationProp = config.tooltipDestinationProp;
 
 	const Decorator = class extends React.Component {
-		static displayName = 'TooltipDecorator'
+		static displayName = 'TooltipDecorator';
 
 		static propTypes = /** @lends agate/TooltipDecorator.TooltipDecorator.prototype */ {
 			/**
@@ -204,14 +204,14 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * @public
 			 */
 			tooltipWidth: PropTypes.number
-		}
+		};
 
 		static defaultProps = {
 			disabled: false,
 			tooltipDelay: 500,
 			tooltipPosition: 'above',
 			tooltipUpdateDelay: 400
-		}
+		};
 
 		constructor (props) {
 			super(props);
@@ -312,15 +312,15 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 					showing: true
 				});
 			}
-		})
+		});
 
 		setTooltipLayoutJob = new Job(() => {
 			this.setTooltipLayout();
-		})
+		});
 
 		startTooltipLayoutJob = () => {
 			this.setTooltipLayoutJob.startAfter(this.props.tooltipUpdateDelay);
-		}
+		};
 
 		showTooltip = (client) => {
 			const {tooltipDelay, tooltipText} = this.props;
@@ -338,7 +338,7 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 					this.resizeObserver.observe(this.clientRef);
 				}
 			}
-		}
+		};
 
 		hideTooltip = () => {
 			if (this.props.tooltipText) {
@@ -360,9 +360,9 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 					this.setState({showing: false});
 				}
 			}
-		}
+		};
 
-		handle = handle.bind(this)
+		handle = handle.bind(this);
 
 		// Recalculate tooltip layout on keydown to make sure tooltip is positioned correctly in case something changes as a result of the keydown.
 		handleKeyDown = this.handle(
@@ -379,7 +379,7 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			(ev) => {
 				this.showTooltip(ev.target);
 			}
-		)
+		);
 
 		handleMouseOut = this.handle(
 			forward('onMouseOut'),
@@ -387,24 +387,24 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			() => {
 				this.hideTooltip();
 			}
-		)
+		);
 
 		handleFocus = this.handle(
 			forward('onFocus'),
 			({target}) => this.showTooltip(target)
-		)
+		);
 
 		handleBlur = this.handle(
 			forward('onBlur'),
 			this.hideTooltip
-		)
+		);
 
 		getTooltipRef = (node) => {
 			this.tooltipRef = node;
 			if (node) {
 				this.setTooltipLayout();
 			}
-		}
+		};
 
 		/**
 		 * Conditionally creates the FloatingLayer and Tooltip based on the presence of

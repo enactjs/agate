@@ -168,11 +168,7 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	/**
 	 * The layout direction of the list.
 	 *
-	 * Valid values are:
-	 * * `'horizontal'`, and
-	 * * `'vertical'`.
-	 *
-	 * @type {String}
+	 * @type {('horizontal'|'vertical')}
 	 * @default 'vertical'
 	 * @public
 	 */
@@ -191,12 +187,7 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	/**
 	 * Specifies how to show horizontal scrollbar.
 	 *
-	 * Valid values are:
-	 * * `'auto'`,
-	 * * `'visible'`, and
-	 * * `'hidden'`.
-	 *
-	 * @type {String}
+	 * @type {('auto'|'visible'|'hidden')}
 	 * @default 'auto'
 	 * @public
 	 */
@@ -243,7 +234,7 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	 *
 	 * @type {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
 	noScrollByWheel: PropTypes.bool,
 
@@ -422,7 +413,7 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	 * * `'visible'`, and
 	 * * `'hidden'`.
 	 *
-	 * @type {String}
+	 * @type {('auto'|'visible'|'hidden')}
 	 * @default 'auto'
 	 * @public
 	 */
@@ -439,7 +430,7 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	 * * `false`,
 	 * * `true`, and
 	 * * `'noAnimation'`
-	 * @type {Boolean|String}
+	 * @type {Boolean|'noAnimation'}
 	 * @default false
 	 * @public
 	 */
@@ -613,11 +604,7 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	/**
 	 * The layout direction of the list.
 	 *
-	 * Valid values are:
-	 * * `'horizontal'`, and
-	 * * `'vertical'`.
-	 *
-	 * @type {String}
+	 * @type {('horizontal'|'vertical')}
 	 * @default 'vertical'
 	 * @public
 	 */
@@ -636,12 +623,7 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	/**
 	 * Specifies how to show horizontal scrollbar.
 	 *
-	 * Valid values are:
-	 * * `'auto'`,
-	 * * `'visible'`, and
-	 * * `'hidden'`.
-	 *
-	 * @type {String}
+	 * @type {('auto'|'visible'|'hidden')}
 	 * @default 'auto'
 	 * @public
 	 */
@@ -681,7 +663,7 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	 *
 	 * @type {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
 	noScrollByWheel: PropTypes.bool,
 
@@ -860,7 +842,7 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	 * * `'visible'`, and
 	 * * `'hidden'`.
 	 *
-	 * @type {String}
+	 * @type {('auto'|'visible'|'hidden')}
 	 * @default 'auto'
 	 * @public
 	 */
@@ -878,7 +860,7 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	 * * `true`, and
 	 * * `'noAnimation'`
 	 *
-	 * @type {Boolean|String}
+	 * @type {Boolean|'noAnimation'}
 	 * @default false
 	 * @public
 	 */

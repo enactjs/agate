@@ -1,22 +1,19 @@
 /**
  * A Popup menu component.
  *
- * @example
- * <PopupMenu open title="Title">Hello!</PopupMenu>
- *
  * @module agate/PopupMenu
  * @exports PopupMenu
  * @exports PopupMenuBase
  * @exports PopupMenuDecorator
  */
 
-import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
-import PropTypes from 'prop-types';
-import React from 'react';
 import Layout, {Cell} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 import Transition from '@enact/ui/Transition';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
+import React from 'react';
 
 import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
@@ -46,6 +43,13 @@ const PopupMenuBase = kind({
 		onClose: PropTypes.func,
 		onHide: PropTypes.func,
 		open: PropTypes.bool,
+		/**
+		 * The layout orientation of the component
+		 *
+		 * @type {('horizontal')}
+		 * @default 'horizontal'
+		 * @private
+		 */
 		orientation: PropTypes.oneOf(['horizontal']),
 		title: PropTypes.string
 	},
@@ -79,7 +83,7 @@ const PopupMenuBase = kind({
 				onHide={onHide}
 				css={css}
 			>
-				<Layout orientation="vertical" align="center center" {...rest}>
+				<Layout orientation="vertical" align="center center" role="alert" {...rest}>
 					<Cell className={css.title} shrink>
 						<Heading size="title">{title}</Heading>
 					</Cell>
@@ -107,6 +111,7 @@ const PopupMenuBase = kind({
  *
  * @hoc
  * @memberof agate/PopupMenu
+ * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
@@ -118,6 +123,13 @@ const PopupMenuDecorator = compose(
 
 /**
  * A stateful component that renders a popup menu.
+ *
+ * Usage:
+ * ```
+ * <PopupMenu open title="Title">
+ * 	Hello!
+ * </PopupMenu>
+ * ```
  *
  * @class PopupMenu
  * @memberof agate/PopupMenu

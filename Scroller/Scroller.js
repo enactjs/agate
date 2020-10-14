@@ -3,7 +3,7 @@
  *
  * @example
  * <Scroller>
- * 	<div style={{height: '300px'}}>
+ * 	<div style={{height: '100%'}}>
  * 		<p>San Francisco</p>
  * 		<p>Seoul</p>
  * 		<p>Bangalore</p>
@@ -66,7 +66,6 @@ let Scroller = (props) => {
 	const themeScrollContentProps = useThemeScroller(scrollContentProps);
 
 	// Render
-
 	return (
 		<ResizeContext.Provider {...resizeContextProps}>
 			<div {...scrollContainerProps}>
@@ -152,7 +151,7 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	 * @default 'both'
 	 * @public
 	 */
-	direction: PropTypes.string,
+	direction: PropTypes.oneOf(['both', 'horizontal', 'vertical']),
 
 	/**
 	 * Allows 5-way navigation to the scrollbar controls. By default, 5-way will
@@ -195,7 +194,7 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	 *
 	 * @type {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
 	noScrollByWheel: PropTypes.bool,
 
@@ -309,11 +308,11 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	 * * `'translate'`,
 	 * * `'native'`.
 	 *
-	 * @type {String}
+	 * @type {('native'|'translate')}
 	 * @default 'translate'
 	 * @public
 	 */
-	scrollMode: PropTypes.string,
+	scrollMode: PropTypes.oneOf(['native', 'translate']),
 
 	/**
 	 * Sets the hint string read when focusing the next button in the horizontal scroll bar.

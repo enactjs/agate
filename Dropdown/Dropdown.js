@@ -14,17 +14,25 @@
  * @exports DropdownBase
  * @exports DropdownDecorator
  */
-
+import {on, off} from '@enact/core/dispatcher';
 import {handle, forward, forProp} from '@enact/core/handle';
+import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
+import {extractAriaProps} from '@enact/core/util';
+import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
+import {MarqueeDecorator} from '@enact/ui/Marquee';
+import IdProvider from '@enact/ui/internal/IdProvider';
+import ri from '@enact/ui/resolution';
 import Toggleable from '@enact/ui/Toggleable';
 import Transition from '@enact/ui/Transition';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import Button from '../Button';
 import Icon from '../Icon';
@@ -35,8 +43,22 @@ import Skinnable from '../Skinnable';
 
 import componentCss from './Dropdown.module.less';
 
+const oppositeDirection = {left: 'right', right: 'left', up: 'down', down: 'up'};
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
+const MarqueeButton = MarqueeDecorator({className: componentCss.marquee}, Button);
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
+
+const handleTransitionHide = (ev, {'data-spotlight-id': containerId}) => {
+	const containerSelector = `[data-spotlight-id='${containerId}']`;
+	const current = Spotlight.getCurrent();
+
+	if (!Spotlight.isPaused() && current && document.querySelector(`${containerSelector} .${componentCss.dropdownList}`).contains(current)) {
+		const focusResult = Spotlight.focus(`${containerSelector} .${componentCss.dropdown}`);
+		if (!focusResult && Spotlight.getPointerMode()) {
+			document.querySelector(`${containerSelector} .${componentCss.dropdown}`).focus();
+		}
+	}
+};
 
 /**
  * A stateless Dropdown component.
@@ -65,6 +87,15 @@ const DropdownBase = kind({
 		 * @private
 		 */
 		css: PropTypes.object,
+
+		/**
+		 * This is passed onto the wrapped component to allow
+		 * it to customize the spotlight container for its use case.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		'data-spotlight-id': PropTypes.string,
 
 		/**
 		 * The direction where the dropdown list appears.
@@ -151,7 +182,8 @@ const DropdownBase = kind({
 	handlers: {
 		onSelect: handle(
 			forward('onSelect'),
-			forward('onClose')
+			forward('onClose'),
+			handleTransitionHide
 		),
 		onOpen: handle(
 			forProp('open', false),
@@ -166,10 +198,70 @@ const DropdownBase = kind({
 	},
 
 	computed: {
+		adjustedDirection: ({direction, 'data-spotlight-id': containerId}) => {
+			const calcOverflow = (container, client, wrapper) => {
+				const KEEPOUT = ri.scale(24); // keep out distance on the edge of the screen
+				const wrapperTop = (wrapper && wrapper.top) || 0;
+				const wrapperBottom = (wrapper && wrapper.bottom) || window.innerHeight;
+
+				const overflow = {
+					isOverTop: client.top - container.height - KEEPOUT < wrapperTop,
+					isOverBottom: client.bottom + container.height + KEEPOUT > wrapperBottom
+				};
+
+				return overflow;
+			};
+
+			const adjustDirection = (overflow) => {
+				let adjustedDirection = direction;
+				if (overflow.isOverTop && !overflow.isOverBottom && direction === 'up') {
+					adjustedDirection = 'down';
+				} else if (overflow.isOverBottom && !overflow.isOverTop && direction === 'down') {
+					adjustedDirection = 'up';
+				}
+
+				return adjustedDirection;
+			};
+
+			const containerSelector = `[data-spotlight-id='${containerId}']`;
+			const containerNode = document.querySelector(`${containerSelector} .${componentCss.dropdownList}`);
+			const clientNode = document.querySelector(`${containerSelector} .${componentCss.dropdown}`);
+			const wrapperNode = clientNode && clientNode.closest('div[style*=overflow]');
+
+			if (containerNode && clientNode) {
+				const containerNodeRect = containerNode.getBoundingClientRect();
+				const clientNodeRect = clientNode.getBoundingClientRect();
+				const wrapperNodeRect = wrapperNode && wrapperNode.getBoundingClientRect();
+				return adjustDirection(calcOverflow(containerNodeRect, clientNodeRect, wrapperNodeRect));
+			}
+
+			return direction;
+		},
 		buttonClassName: ({open, styler}) => styler.append({open}),
-		transitionContainerClassname: ({css, open, direction, styler}) => styler.join(css.transitionContainer, {openTransitionContainer: open, upTransitionContainer: direction === 'up'} ),
-		dropdownButtonClassname: ({css, direction, styler}) => styler.join(css.dropdownButton, {upDropdownButton: direction === 'up'} ),
-		dropdownListClassname: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
+		children: ({children, selected}) => {
+			if (!Array.isArray(children)) return [];
+
+			return children.map((child, i) => {
+				const aria = {
+					role: 'checkbox',
+					'aria-checked': selected === i
+				};
+
+				if (typeof child === 'string') {
+					return {
+						...aria,
+						children: child,
+						key: `item_${child}`
+					};
+				}
+
+				return {
+					...aria,
+					...child
+				};
+			});
+		},
+		dropdownListClassName: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
 		title: ({children, selected, title}) => {
 			if (isSelectedValid({children, selected})) {
 				const child = children[selected];
@@ -178,58 +270,57 @@ const DropdownBase = kind({
 
 			return title;
 		},
-		transitionDirection: ({direction}) => {
-			switch (direction) {
-				case 'left':
-					return 'right';
-				case 'right':
-					return 'left';
-				case 'up':
-					return 'down';
-				case 'down':
-				default:
-					return 'up';
-			}
-		},
 		hasChildren: ({children}) => {
 			return children.length > 0;
 		}
 	},
 
-	render: ({buttonClassName, children, css, dropdownButtonClassname, dropdownListClassname, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionContainerClassname, transitionDirection, title, ...rest}) => {
+	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, ...rest}) => {
+		const ariaProps = extractAriaProps(rest);
+		const dropdownButtonClassName = classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'up'});
 		const opened = !disabled && open;
-		const [DropDownButton, wrapperProps, skinVariants, groupProps] = (skin === 'silicon') ? [
-			Button,
-			{className: dropdownButtonClassname},
+		const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
+		const [DropDownButton, dropDownButtonProps, wrapperProps, skinVariants, groupProps, iconComponent] = (skin === 'silicon') ? [
+			MarqueeButton,
+			{icon: open ? 'arrowlargeup' : 'arrowlargedown'},
+			{className: dropdownButtonClassName},
 			{'night': false},
-			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'}
+			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'},
+			[]
 		] : [
 			Item,
 			{},
 			{},
-			{childComponent: Item, itemProps: {size: 'small'}}
+			{},
+			{childComponent: Item, itemProps: {size: 'small'}},
+			[<Icon slot="slotAfter" key="icon" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>]
+
 		];
 
 		return (
-			<div {...rest} >
+			<div {...rest}>
 				<div {...wrapperProps}>
 					<DropDownButton
+						role="button"
 						className={buttonClassName}
 						css={css}
 						disabled={hasChildren ? disabled : true}
 						onClick={opened ? onClose : onOpen}
+						{...dropDownButtonProps}
+						{...ariaProps}
 					>
-						<Icon slot="slotAfter" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
+						{iconComponent}
 						{title}
 					</DropDownButton>
 					<Transition
-						className={transitionContainerClassname}
+						className={transitionContainerClassName}
 						visible={opened}
-						direction={transitionDirection}
+						direction={oppositeDirection[adjustedDirection]}
 					>
-						<ContainerDiv className={dropdownListClassname} spotlightDisabled={!open} spotlightRestrict="self-only">
+						<ContainerDiv className={dropdownListClassName} spotlightDisabled={!open} spotlightRestrict="self-only">
 							<Scroller skinVariants={skinVariants} className={css.scroller}>
 								<Group
+									role={null}
 									className={css.group}
 									onSelect={onSelect}
 									selected={selected}
@@ -240,10 +331,62 @@ const DropdownBase = kind({
 							</Scroller>
 						</ContainerDiv>
 					</Transition>
+
 				</div>
 			</div>
 		);
 	}
+});
+
+const DropDownExtended = hoc((config, Wrapped) => {
+	return class extends React.Component {
+		static displayName = 'DropDownExtended';
+
+		static propTypes = {
+			open: PropTypes.bool
+		};
+
+		constructor (props) {
+			super(props);
+		}
+
+		componentDidMount () {
+			// eslint-disable-next-line react/no-find-dom-node
+			this.node = ReactDOM.findDOMNode(this);
+
+			if (this.props.open) {
+				on('click', this.handleClick);
+			}
+		}
+
+		componentDidUpdate (prevProps) {
+			const {open} = this.props;
+
+			if (!prevProps.open && open) {
+				on('click', this.handleClick);
+			} else if (prevProps.open && !open) {
+				off('click', this.handleClick);
+			}
+		}
+
+		componentWillUnmount () {
+			off('click', this.handleClick);
+		}
+
+		clickedOutsideDropdown = ({target}) => !this.node.contains(target);
+
+		// If a click happened outside the component area close the dropdown by forwarding the onClick from Toggleable.
+		handleClick = handle(
+			this.clickedOutsideDropdown,
+			forward('onClick')
+		).bindAs(this, 'handleClick');
+
+		render () {
+			return (
+				<Wrapped {...this.props} />
+			);
+		}
+	};
 });
 
 /**
@@ -251,13 +394,21 @@ const DropdownBase = kind({
  *
  * @hoc
  * @memberof agate/Dropdown
- * @mixes agate/Dropdown.DropdownDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const DropdownDecorator = compose(
-	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose'}),
+	SpotlightContainerDecorator({
+		enterTo: 'default-element',
+		preserveId: true
+	}),
+	IdProvider({
+		generateProp: null,
+		prefix: 'd_'
+	}),
+	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose', toggleProp: 'onClick'}),
 	Changeable({change: 'onSelect', prop: 'selected'}),
+	DropDownExtended,
 	Skinnable({prop: 'skin'})
 );
 

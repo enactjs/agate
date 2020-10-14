@@ -6,7 +6,6 @@
  */
 
 import kind from '@enact/core/kind';
-
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -96,7 +95,7 @@ const SwatchButtonBase = kind({
 
 	render: ({colorSwatchStyle, css, ...rest}) => {
 		return (
-			<ButtonBase {...rest} css={css} minWidth={false}>
+			<ButtonBase aria-label={colorSwatchStyle.backgroundColor} {...rest} css={css} minWidth={false}>
 				<div className={css.colorSwatch} style={colorSwatchStyle} />
 			</ButtonBase>
 		);
@@ -104,7 +103,7 @@ const SwatchButtonBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [SwatchButton]{@link agate/ColorPicker.SwatchButtonBase}.
+ * Applies Agate specific behaviors to [SwatchButtonBase]{@link agate/ColorPicker.SwatchButtonBase}.
  *
  * @hoc
  * @memberof agate/ColorPicker

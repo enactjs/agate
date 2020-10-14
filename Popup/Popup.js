@@ -109,6 +109,7 @@ const PopupBase = kind({
 				css={css}
 			>
 				<div
+					role="alert"
 					{...rest}
 				>
 					{closeButton ? <Button
@@ -137,6 +138,7 @@ const PopupBase = kind({
  *
  * @hoc
  * @memberof agate/Popup
+ * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */

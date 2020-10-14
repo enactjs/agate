@@ -4,20 +4,22 @@
  * @module agate/TabGroup
  * @exports TabGroup
  * @exports TabGroupBase
+ * @exports TabGroupDecorator
  */
 
-import {cap} from '@enact/core/util';
-import {Cell, Layout} from '@enact/ui/Layout';
-import Group from '@enact/ui/Group';
 import kind from '@enact/core/kind';
-import ToggleButton from '../ToggleButton';
-import LabeledIcon from '../LabeledIcon';
-import PropTypes from 'prop-types';
-import React from 'react';
+import {cap} from '@enact/core/util';
+import Group from '@enact/ui/Group';
+import {Cell, Layout} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 import Spottable from '@enact/spotlight/Spottable';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
+import React from 'react';
 
+import LabeledIcon from '../LabeledIcon';
 import Skinnable from '../Skinnable';
+import ToggleButton from '../ToggleButton';
 
 import componentCss from './TabGroup.module.less';
 
@@ -52,10 +54,9 @@ const TabBase = kind({
 
 			if (className.includes('copper') || className.includes('cobalt')) {
 				return (
-					<div className={css.labeledIcon}>
+					<div aria-label={children} className={css.labeledIcon} role="region">
 						<ToggleButton
 							icon={icon}
-							inline={inline}
 							selected={selected}
 						/>
 						{children}
@@ -93,11 +94,11 @@ const TabBase = kind({
 const Tab = Skinnable(Spottable(TabBase));
 
 /**
- * TBD.
+ * A tab group component, ready to use in Agate applications.
  *
  * @class TabGroup
  * @memberof agate/TabGroup
- * @mixes agate/Skinnable.Skinnable
+ * @mixes agate/TabGroup.TabGroupDecorator
  * @ui
  * @public
  */
@@ -180,11 +181,26 @@ const TabGroupBase = kind({
 
 TabGroupBase.defaultSlot = 'tabs';
 
+/**
+ * Applies Agate specific behaviors to [TabGroup]{@link agate/TabGroup.TabGroup} components.
+ *
+ * @hoc
+ * @memberof agate/TabGroup
+ * @mixes agate/Skinnable.Skinnable
+ * @mixes ui/Slottable.Slottable
+ * @public
+ */
+const TabGroupDecorator = compose(
+	Skinnable,
+	Slottable({slots: ['tabs', 'afterTabs', 'beforeTabs']})
+);
+
 // Only documenting TabGroup since base is not useful for extension as-is
-const TabGroup = Skinnable(Slottable({slots: ['tabs', 'afterTabs', 'beforeTabs']}, TabGroupBase));
+const TabGroup = TabGroupDecorator(TabGroupBase);
 
 export default TabGroup;
 export {
 	TabGroup,
-	TabGroupBase
+	TabGroupBase,
+	TabGroupDecorator
 };

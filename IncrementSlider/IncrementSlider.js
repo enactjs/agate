@@ -25,8 +25,8 @@ import {extractAriaProps} from '@enact/core/util';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import IdProvider from '@enact/ui/internal/IdProvider';
-import Slottable from '@enact/ui/Slottable';
 import Pure from '@enact/ui/internal/Pure';
+import Slottable from '@enact/ui/Slottable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -111,15 +111,6 @@ const IncrementSliderBase = kind({
 		 * @private
 		 */
 		css: PropTypes.object,
-
-		/**
-		 * The `data-webos-voice-group-label` for the IconButton of IncrementSlider.
-		 *
-		 * @type {String}
-		 * @memberof agate/IncrementSlider.IncrementSliderBase.prototype
-		 * @public
-		 */
-		'data-webos-voice-group-label': PropTypes.string,
 
 		/**
 		* Sets the hint string read when focusing the decrement button.
@@ -347,6 +338,15 @@ const IncrementSliderBase = kind({
 		progressAnchor: PropTypes.number,
 
 		/**
+		 * The size of the incrementSlider.
+		 *
+		 * @type {('small'|'large')}
+		 * @default 'large'
+		 * @public
+		 */
+		size: PropTypes.oneOf(['small', 'large']),
+
+		/**
 		 * Disables spotlight navigation into the component.
 		 *
 		 * @type {Boolean}
@@ -383,6 +383,7 @@ const IncrementSliderBase = kind({
 		noFill: false,
 		orientation: 'horizontal',
 		progressAnchor: 0,
+		size: 'large',
 		spotlightDisabled: false,
 		step: 1
 	},
@@ -423,7 +424,7 @@ const IncrementSliderBase = kind({
 	},
 
 	computed: {
-		className: ({orientation, styler}) => styler.append(orientation),
+		className: ({orientation, size, styler}) => styler.append(orientation, size),
 		decrementDisabled: ({disabled, min, value = min}) => disabled || value <= min,
 		incrementDisabled: ({disabled, max, min, value = min}) => disabled || value >= max,
 		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel, min, value = min}) => {
@@ -444,7 +445,6 @@ const IncrementSliderBase = kind({
 
 	render: ({active,
 		'aria-hidden': ariaHidden,
-		'data-webos-voice-group-label': voiceGroupLabel,
 		backgroundProgress,
 		css,
 		decrementAriaLabel,
@@ -471,6 +471,7 @@ const IncrementSliderBase = kind({
 		onSpotlightDisappear,
 		orientation,
 		progressAnchor,
+		size,
 		spotlightDisabled,
 		step,
 		value,
@@ -489,12 +490,12 @@ const IncrementSliderBase = kind({
 					aria-controls={!incrementDisabled ? id : null}
 					aria-label={decrementAriaLabel}
 					className={css.decrementButton}
-					data-webos-voice-group-label={voiceGroupLabel}
 					disabled={decrementDisabled}
 					icon={decrementIcon}
 					onTap={onDecrement}
 					onSpotlightDisappear={onDecrementSpotlightDisappear}
 					orientation={orientation}
+					size={size}
 					spotlightDisabled={spotlightDisabled}
 				/>
 				<Slider
@@ -524,12 +525,12 @@ const IncrementSliderBase = kind({
 					aria-controls={!decrementDisabled ? id : null}
 					aria-label={incrementAriaLabel}
 					className={css.incrementButton}
-					data-webos-voice-group-label={voiceGroupLabel}
 					disabled={incrementDisabled}
 					icon={incrementIcon}
 					onSpotlightDisappear={onIncrementSpotlightDisappear}
 					onTap={onIncrement}
 					orientation={orientation}
+					size={size}
 					spotlightDisabled={spotlightDisabled}
 				/>
 			</div>
@@ -537,6 +538,16 @@ const IncrementSliderBase = kind({
 	}
 });
 
+/**
+ * Applies Agate specific behaviors to [IncrementSliderBase]{@link agate/IncrementSlider.IncrementSliderBase}
+ *
+ * @hoc
+ * @memberof agate/IncrementSlider
+ * @mixes ui/Changeable.Changeable
+ * @mixes agate/Skinnable.Skinnable
+ * @mixes ui/Slottable.Slottable
+ * @public
+ */
 const IncrementSliderDecorator = compose(
 	Pure,
 	Changeable,
@@ -558,6 +569,7 @@ const IncrementSliderDecorator = compose(
  * @class IncrementSlider
  * @memberof agate/IncrementSlider
  * @extends agate/IncrementSlider.IncrementSliderBase
+ * @mixes agate/IncrementSlider.IncrementSliderDecorator
  * @ui
  * @public
  */

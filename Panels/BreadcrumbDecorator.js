@@ -59,8 +59,8 @@ const defaultConfig = {
  * A higher-order component that adds breadcrumbs to a Panels component
  *
  * @class BreadcrumbDecorator
- * @type {Function}
  * @hoc
+ * @type {Function}
  * @private
  * @memberof agate/Panels
  */

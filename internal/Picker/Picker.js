@@ -4,6 +4,7 @@
  * @module agate/internal/Picker
  * @exports Picker
  * @exports PickerDecorator
+ * @private
  */
 
 import {adaptEvent, forEventProp, forward, handle, oneOf} from '@enact/core/handle';
@@ -36,6 +37,8 @@ const handleChange = direction => handle(
 
 const increment = handleChange(1);
 const decrement = handleChange(-1);
+const secondaryIncrement = handleChange(2);
+const secondaryDecrement = handleChange(-2);
 
 /**
  * The base component for {@link agate/internal/Picker.Picker}.
@@ -74,6 +77,17 @@ const PickerBase = kind({
 		min: PropTypes.number.isRequired,
 
 		/**
+		 * Accessibility hint
+		 *
+		 * For example, `hour`, `year`, and `meridiem`
+		 *
+		 * @type {String}
+		 * @default ''
+		 * @public
+		 */
+		accessibilityHint: PropTypes.string,
+
+		/**
 		 * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
 		 * to the current value. This should only be used when the parent controls the value of
 		 * the picker directly through the props.
@@ -99,6 +113,14 @@ const PickerBase = kind({
 		 * @public
 		 */
 		className: PropTypes.string,
+
+		/**
+		 * Customize component style
+		 *
+		 * @type {Object}
+		 * @private
+		 */
+		css: PropTypes.object,
 
 		/**
 		 * Sets the hint string read when focusing the decrement button.
@@ -156,6 +178,14 @@ const PickerBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		skin: PropTypes.string,
+
+		/**
 		 * Allow the picker to only increment or decrement by a given value.
 		 *
 		 * A step of `2` would cause a picker to increment from 10 to 12 to 14, etc. It must evenly
@@ -174,10 +204,28 @@ const PickerBase = kind({
 		 * @default 0
 		 * @public
 		 */
-		value: PropTypes.number
+		value: PropTypes.number,
+
+		/**
+		 * Choose a specific size for your picker. `'small'`, `'medium'`, `'large'`, or set to `null` to
+		 * assume auto-sizing. `'small'` is good for numeric pickers, `'medium'` for single or short
+		 * word pickers, `'large'` for maximum-sized pickers.
+		 *
+		 * You may also supply a number. This number will determine the minimum size of the Picker.
+		 * Setting a number to less than the number of characters in your longest value may produce
+		 * unexpected results.
+		 *
+		 * @type {('small'|'medium'|'large'|Number)}
+		 * @public
+		 */
+		width: PropTypes.oneOfType([
+			PropTypes.oneOf([null, 'small', 'medium', 'large']),
+			PropTypes.number
+		])
 	},
 
 	defaultProps: {
+		accessibilityHint: '',
 		orientation: 'vertical',
 		step: 1,
 		value: 0
@@ -199,34 +247,37 @@ const PickerBase = kind({
 				[({velocityY}) => velocityY > 0, decrement]
 			)
 		),
-		handleIncrement: increment
+		handleIncrement: increment,
+		handleSecondaryDecrement: secondaryDecrement,
+		handleSecondaryIncrement: secondaryIncrement
 	},
 
 	computed: {
 		activeClassName: ({styler}) => styler.join('active', 'item'),
 		className: ({orientation, styler}) => styler.append(orientation),
-		currentValueText: ({'aria-valuetext': valueText, children: values, value}) => {
-			if (Array.isArray(values)) {
-				return `${typeof valueText !== 'undefined' ? valueText : values[value]}`;
-			} else {
-				return `${typeof valueText !== 'undefined' ? valueText : value}`;
-			}
-		},
-		decrementAriaLabel: ({'aria-valuetext': valueText, children: values, decrementAriaLabel = $L('previous item'), value}) => {
-			if (Array.isArray(values)) {
-				return `${valueText != null ? valueText : values[value]} ${decrementAriaLabel}`;
-			} else {
-				return `${valueText != null ? valueText : value} ${decrementAriaLabel}`;
+		currentValueText: ({accessibilityHint, 'aria-valuetext': ariaValueText, children, value}) => {
+			if (ariaValueText != null) {
+				return ariaValueText;
 			}
 
-		},
-		incrementAriaLabel: ({'aria-valuetext': valueText, children: values, incrementAriaLabel = $L('next item'), value}) => {
-			if (Array.isArray(values)) {
-				return `${valueText != null ? valueText : values[value]} ${incrementAriaLabel}`;
-			} else {
-				return `${valueText != null ? valueText : value} ${incrementAriaLabel}`;
+			let valueText = value;
+
+			if (children && Array.isArray(children)) {
+				if (children[value] && children[value].props) {
+					valueText = children[value].props.children;
+				} else {
+					valueText = children[value];
+				}
 			}
+
+			if (accessibilityHint) {
+				valueText = `${valueText} ${accessibilityHint}`;
+			}
+
+			return valueText;
 		},
+		decrementAriaLabel: ({decrementAriaLabel = $L('previous item')}) => decrementAriaLabel,
+		incrementAriaLabel: ({incrementAriaLabel = $L('next item')}) => incrementAriaLabel,
 		valueId: ({id}) => `${id}_value`
 	},
 
@@ -235,32 +286,66 @@ const PickerBase = kind({
 			activeClassName,
 			children: values,
 			currentValueText,
-			decrementAriaLabel,
+			decrementAriaLabel: decAriaLabel,
+			disabled,
 			handleDecrement,
 			handleFlick,
 			handleIncrement,
-			incrementAriaLabel,
+			handleSecondaryDecrement,
+			handleSecondaryIncrement,
+			incrementAriaLabel: incAriaLabel,
 			min,
 			max,
+			skin,
 			step,
 			value,
 			valueId,
+			width,
 			...rest
 		} = props;
 		const currentValue = Array.isArray(values) ? values[value] : value;
 		const decrementValue = clamp(min, max, Array.isArray(values) ? values[value - step] : value - step);
 		const incrementValue = clamp(min, max, Array.isArray(values) ? values[value + step] : value + step);
+		const secondaryDecrementValue = clamp(min, max, Array.isArray(values) ? values[value - (2 * step)] : value - (2 * step));
+		const secondaryIncrementValue = clamp(min, max, Array.isArray(values) ? values[value + (2 * step)] : value + (2 * step));
 		const isFirst = value <= min;
 		const isLast = value >= max;
+		const isSecond = value <= min + step;
+		const isPenultimate = value >= max - step;
+		const decrementAriaLabel = `${currentValueText} ${decAriaLabel}`;
+		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
+
+		let sizingPlaceholder = null;
+		if (typeof width === 'number' && width > 0) {
+			sizingPlaceholder = <div aria-hidden className={css.sizingPlaceholder}>{'0'.repeat(width)}</div>;
+		}
+
+		delete rest.accessibilityHint;
+		delete rest['aria-valuetext'];
+		delete rest.orientation;
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
+				{skin === 'silicon'  &&
+					<PickerButtonItem
+						aria-controls={valueId}
+						aria-disabled={isSecond}
+						aria-label={decrementAriaLabel}
+						className={css.secondaryItemDecrement}
+						disabled={isSecond}
+						onClick={handleSecondaryDecrement}
+					>
+						<div className={css.label}>
+							{isSecond ? '' : secondaryDecrementValue}
+						</div>
+					</PickerButtonItem>
+				}
 				<PickerButtonItem
 					aria-controls={valueId}
-					aria-disabled={isFirst}
+					aria-disabled={disabled || isFirst}
 					aria-label={decrementAriaLabel}
 					className={css.itemDecrement}
-					disabled={isFirst}
+					disabled={disabled || isFirst}
 					onClick={handleDecrement}
 				>
 					<div className={css.label}>
@@ -273,40 +358,55 @@ const PickerBase = kind({
 					id={valueId}
 					role="spinbutton"
 				>
+					{sizingPlaceholder}
 					<div className={css.label}>
 						{currentValue}
 					</div>
 				</div>
 				<PickerButtonItem
 					aria-controls={valueId}
-					aria-disabled={isLast}
+					aria-disabled={disabled || isLast}
 					aria-label={incrementAriaLabel}
 					className={css.itemIncrement}
-					disabled={isLast}
+					disabled={disabled || isLast}
 					onClick={handleIncrement}
 				>
 					<div className={css.label}>
 						{isLast ? '' : incrementValue}
 					</div>
 				</PickerButtonItem>
+				{skin === 'silicon' &&
+					<PickerButtonItem
+						aria-controls={valueId}
+						aria-disabled={isPenultimate}
+						aria-label={incrementAriaLabel}
+						className={css.secondaryItemIncrement}
+						disabled={isPenultimate}
+						onClick={handleSecondaryIncrement}
+					>
+						<div className={css.label}>
+							{isPenultimate ? '' : secondaryIncrementValue}
+						</div>
+					</PickerButtonItem>
+				}
 			</PickerRoot>
 		);
 	}
 });
 
 /**
- * Applies Agate specific behaviors to [PickerBase]{@link agate/Picker.PickerBase}.
+ * Applies Agate specific behaviors to [Picker]{@link agate/Picker.Picker}.
  *
  * @hoc
  * @memberof agate/internal/Picker
  * @mixes ui/Changeable.Changeable
  * @mixes agate/Skinnable.Skinnable
- * @public
+ * @private
  */
 const PickerDecorator = compose(
 	IdProvider({generateProp: null}),
 	Changeable,
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 const Picker = PickerDecorator(PickerBase);

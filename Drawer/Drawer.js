@@ -1,9 +1,6 @@
 /**
  * An Agate-themed drawer component.
  *
- * @example
- * <Drawer header="Surprise">Hello Enact!</Drawer>
- *
  * @module agate/Drawer
  * @exports Drawer
  * @exports DrawerBase
@@ -12,15 +9,13 @@
 
 import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
-import PropTypes from 'prop-types';
-import React from 'react';
 import Layout, {Cell} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 import Transition from '@enact/ui/Transition';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import Skinnable from '../Skinnable';
-// import Icon from '../Icon';
-
 import PopupState from '../Popup/PopupState';
 
 import componentCss from './Drawer.module.less';
@@ -74,6 +69,7 @@ const DrawerBase = kind({
 				css={css}
 			>
 				<Layout
+					role="alert"
 					{...rest}
 				>
 					{/* <Icon size="small" onClick={onClose} className={css.closeButton}>closex</Icon>*/}
@@ -106,12 +102,25 @@ const DrawerDecorator = compose(
 /**
  * A ready-to-use drawer component.
  *
+ * Usage:
+ * ```
+ * <Drawer open>
+ * 	Hello Enact!
+ * </Drawer>
+ * ```
+ *
  * @class Drawer
  * @memberof agate/Drawer
+ * @extends agate/Drawer.DrawerBase
+ * @mixes agate/Drawer.DrawerDecorator
  * @ui
  * @public
  */
 const Drawer = DrawerDecorator(DrawerBase);
 
 export default Drawer;
-export {Drawer, DrawerBase, DrawerDecorator};
+export {
+	Drawer,
+	DrawerBase,
+	DrawerDecorator
+};

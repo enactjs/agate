@@ -2,13 +2,14 @@
  * Provides Agate styled icon components and behaviors.
  *
  * @example
- * <Icon>flag</Icon>
+ * <Icon>closex</Icon>
  *
  * @module agate/Icon
  * @exports Icon
  * @exports IconBase
  * @exports IconDecorator
  * @exports icons
+ * @exports iconsSilicon
  */
 
 import kind from '@enact/core/kind';

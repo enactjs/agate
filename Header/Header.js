@@ -8,13 +8,16 @@
  *
  * @module agate/Header
  * @exports Header
+ * @exports HeaderBase
+ * @exports HeaderDecorator
  */
 
 import kind from '@enact/core/kind';
-import React from 'react';
-import PropTypes from 'prop-types';
 import {Column, Row, Layout} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
+import React from 'react';
 
 import Skinnable from '../Skinnable';
 
@@ -25,6 +28,7 @@ import componentCss from './Header.module.less';
  *
  * @class Header
  * @memberof agate/Header
+ * @mixes agate/Header.HeaderDecorator
  * @ui
  * @public
  */
@@ -51,6 +55,14 @@ const HeaderBase = kind({
 		 * @type {String}
 		 */
 		title: PropTypes.string.isRequired,
+
+		/**
+		 * Sets the hint string read.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		'aria-label': PropTypes.string,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -105,6 +117,11 @@ const HeaderBase = kind({
 	},
 
 	computed: {
+		'aria-label': ({'aria-label': ariaLabel, title, subtitle}) => {
+			return ariaLabel || subtitle ?
+				title + ' ' + subtitle :
+				title;
+		},
 		className: ({hideLine, styler}) => styler.append({hideLine, standard: true}),
 		subtitleComponent: ({css, subtitle}) => {
 			return (subtitle != null && subtitle !== '') ? <h2 className={css.subtitle}>{subtitle}</h2> : null;
@@ -120,7 +137,7 @@ const HeaderBase = kind({
 		delete rest.titleAbove;
 
 		return (
-			<Row component="header" aria-label={title} {...rest}>
+			<Row component="header" {...rest}>
 				<Column className={css.titleContainer}>
 					{titleAboveComponent}
 					<h1 className={css.title}>{title}</h1>
@@ -132,12 +149,30 @@ const HeaderBase = kind({
 	}
 });
 
+/**
+ * Applies Agate specific behaviors to [Header]{@link agate/Header.Header} components.
+ *
+ * @hoc
+ * @memberof agate/Header
+ * @mixes ui/Slottable.Slottable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
+const HeaderDecorator = compose(
+	Slottable({slots: ['subtitle', 'title', 'titleAbove']}),
+	Skinnable
+);
+
 // Note that we only export this (even as HeaderBase). HeaderBase is not useful on its own.
-const Header = Slottable({slots: ['subtitle', 'title', 'titleAbove']}, Skinnable(HeaderBase));
+const Header = HeaderDecorator(HeaderBase);
 
 // Set up Header so when it's used in a slottable layout (like Panel), it is automatically
 // recognized as this specific slot.
 Header.defaultSlot = 'header';
 
 export default Header;
-export {Header, HeaderBase};
+export {
+	Header,
+	HeaderBase,
+	HeaderDecorator
+};

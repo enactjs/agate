@@ -1,10 +1,9 @@
 import {forward} from '@enact/core/handle';
-import platform from '@enact/core/platform';
 import {onWindowReady} from '@enact/core/snapshot';
 import {clamp} from '@enact/core/util';
 import Spotlight, {getDirection} from '@enact/spotlight';
 import {getRect} from '@enact/spotlight/src/utils';
-import {constants} from '@enact/ui/useScroll/';
+import {constants} from '@enact/ui/useScroll';
 import utilEvent from '@enact/ui/useScroll/utilEvent';
 import utilDOM from '@enact/ui/useScroll/utilDOM';
 import {useEffect, useRef} from 'react';
@@ -112,7 +111,7 @@ const useEventFocus = (props, instances, context) => {
 			alertScrollbarTrack();
 		}
 
-		if (!(shouldPreventScrollByFocus || Spotlight.getPointerMode() || scrollContainerHandle.current.isDragging)) {
+		if (!(shouldPreventScrollByFocus || Spotlight.getPointerMode() || scrollContainerHandle.current.isDragging || spottable.current.indexToFocus)) {
 			const
 				item = ev.target,
 				spotItem = Spotlight.getCurrent();
@@ -128,8 +127,8 @@ const useEventFocus = (props, instances, context) => {
 	function hasFocus () {
 		const current = Spotlight.getCurrent();
 
-		if (current) {
-			return utilDOM.containsDangerously(scrollContainerRef.current, current);
+		if (current && scrollContainerRef.current) {
+			return utilDOM.containsDangerously(scrollContainerRef, current);
 		}
 	}
 
@@ -297,10 +296,16 @@ const pageKeyHandler = (ev) => {
 			elem = document.elementFromPoint(x, y);
 
 		if (elem) {
-			for (let [key, value] of scrollers) {
+			for (const [key, value] of scrollers) {
 				if (utilDOM.containsDangerously(value, elem)) {
-					key.scrollByPageOnPointerMode(ev);
-					break;
+					/* To handle page keys in nested scrollable components,
+					 * break the loop only when `scrollByPageOnPointerMode` returns `true`.
+					 * This approach assumes that an inner scrollable component is
+					 * mounted earlier than an outer scrollable component.
+					 */
+					if (key.scrollByPageOnPointerMode(ev)) {
+						break;
+					}
 				}
 			}
 		}
@@ -421,128 +426,6 @@ const useEventTouch = (props, instnaces, context) => {
 
 	return {
 		handleTouchStart
-	};
-};
-
-const useEventVoice = (props, instances, context) => {
-	const {scrollContainerRef, scrollContainerHandle} = instances;
-	const {onScrollbarButtonClick} = context;
-
-	// Mutable value
-
-	const mutableRef = useRef({
-		isVoiceControl: false,
-		voiceControlDirection: 'vertical'
-	});
-
-	// Functions
-
-	const updateFocusAfterVoiceControl = () => {
-		const
-			spotItem = Spotlight.getCurrent(),
-			scrollContainerNode = scrollContainerRef.current;
-
-		if (utilDOM.containsDangerously(scrollContainerNode, spotItem)) {
-			const
-				viewportBounds = scrollContainerNode.getBoundingClientRect(),
-				spotItemBounds = spotItem.getBoundingClientRect(),
-				nodes = Spotlight.getSpottableDescendants(scrollContainerNode.dataset.spotlightId),
-				first = mutableRef.current.voiceControlDirection === 'vertical' ? 'top' : 'left',
-				last = mutableRef.current.voiceControlDirection === 'vertical' ? 'bottom' : 'right';
-
-			if (spotItemBounds[last] < viewportBounds[first] || spotItemBounds[first] > viewportBounds[last]) {
-				for (let i = 0; i < nodes.length; i++) {
-					const nodeBounds = nodes[i].getBoundingClientRect();
-
-					if (nodeBounds[first] > viewportBounds[first] && nodeBounds[last] < viewportBounds[last]) {
-						Spotlight.focus(nodes[i]);
-						break;
-					}
-				}
-			}
-		}
-	};
-
-	function stopVoice () {
-		if (mutableRef.current.isVoiceControl) {
-			mutableRef.current.isVoiceControl = false;
-			updateFocusAfterVoiceControl();
-		}
-	}
-
-	const isReachedEdge = (scrollPos, ltrBound, rtlBound, isRtl = false) => {
-		const bound = isRtl ? rtlBound : ltrBound;
-		return (bound === 0 && scrollPos === 0) || (bound > 0 && scrollPos >= bound - 1);
-	};
-
-	const handleVoice = (e) => {
-		const
-			isHorizontal = (props.direction === 'horizontal'),
-			isRtl = scrollContainerHandle.current.rtl,
-			{scrollTop, scrollLeft} = scrollContainerHandle.current,
-			{maxLeft, maxTop} = scrollContainerHandle.current.getScrollBounds(),
-			verticalDirection = ['up', 'down', 'top', 'bottom'],
-			horizontalDirection = isRtl ? ['right', 'left', 'rightmost', 'leftmost'] : ['left', 'right', 'leftmost', 'rightmost'],
-			movement = ['previous', 'next', 'first', 'last'];
-		let
-			scroll = e && e.detail && e.detail.scroll,
-			index = movement.indexOf(scroll);
-
-		if (index > -1) {
-			scroll = isHorizontal ? horizontalDirection[index] : verticalDirection[index];
-		}
-
-		mutableRef.current.voiceControlDirection = verticalDirection.includes(scroll) && 'vertical' || horizontalDirection.includes(scroll) && 'horizontal' || null;
-
-		// Case 1. Invalid direction
-		if (mutableRef.current.voiceControlDirection === null) {
-			mutableRef.current.isVoiceControl = false;
-		// Case 2. Cannot scroll
-		} else if (
-			(['up', 'top'].includes(scroll) && isReachedEdge(scrollTop, 0)) ||
-			(['down', 'bottom'].includes(scroll) && isReachedEdge(scrollTop, maxTop)) ||
-			(['left', 'leftmost'].includes(scroll) && isReachedEdge(scrollLeft, 0, maxLeft, isRtl)) ||
-			(['right', 'rightmost'].includes(scroll) && isReachedEdge(scrollLeft, maxLeft, 0, isRtl))
-		) {
-			if (window.webOSVoiceReportActionResult) {
-				window.webOSVoiceReportActionResult({voiceUi: {exception: 'alreadyCompleted'}});
-				e.preventDefault();
-			}
-		// Case 3. Can scroll
-		} else {
-			mutableRef.current.isVoiceControl = true;
-
-			if (['up', 'down', 'left', 'right'].includes(scroll)) {
-				const isPreviousScrollButton = (scroll === 'up') || (scroll === 'left' && !isRtl) || (scroll === 'right' && isRtl);
-				onScrollbarButtonClick({isPreviousScrollButton, isVerticalScrollBar: verticalDirection.includes(scroll)});
-			} else { // ['top', 'bottom', 'leftmost', 'rightmost'].includes(scroll)
-				scrollContainerHandle.current.scrollTo({align: verticalDirection.includes(scroll) && scroll || (scroll === 'leftmost' && isRtl || scroll === 'rightmost' && !isRtl) && 'right' || 'left'});
-			}
-
-			e.preventDefault();
-		}
-	};
-
-	function addVoiceEventListener (scrollContentRef) {
-		if (platform.webos) {
-			utilEvent('webOSVoice').addEventListener(scrollContentRef, handleVoice);
-			scrollContentRef.current.setAttribute('data-webos-voice-intent', 'Scroll');
-		}
-	}
-
-	function removeVoiceEventListener (scrollContentRef) {
-		if (platform.webos) {
-			utilEvent('webOSVoice').removeEventListener(scrollContentRef, handleVoice);
-			scrollContentRef.current.removeAttribute('data-webos-voice-intent');
-		}
-	}
-
-	// Return
-
-	return {
-		addVoiceEventListener,
-		removeVoiceEventListener,
-		stopVoice
 	};
 };
 
@@ -667,6 +550,5 @@ export {
 	useEventMonitor,
 	useEventMouse,
 	useEventTouch,
-	useEventVoice,
 	useEventWheel
 };

@@ -45,14 +45,14 @@ const defaultConfig = {
  *
  * @class IdProvider
  * @hoc
- * @private
  * @memberof agate/Panels
+ * @private
  */
 const IdProvider = hoc(defaultConfig, (config, Wrapped) => {
 	const {generateProp, idProp, prefix} = config;
 
 	return class extends React.Component {
-		static displayName = 'IdProvider'
+		static displayName = 'IdProvider';
 
 		constructor () {
 			super();
@@ -84,7 +84,7 @@ const IdProvider = hoc(defaultConfig, (config, Wrapped) => {
 			};
 
 			return id;
-		}
+		};
 
 		render () {
 			const props = Object.assign({}, this.props);

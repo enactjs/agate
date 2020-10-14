@@ -5,17 +5,17 @@
  * @exports ThemeDecorator
  */
 
-import {addAll} from '@enact/core/keymap';
-import classnames from 'classnames';
-import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
+import {addAll} from '@enact/core/keymap';
+import kind from '@enact/core/kind';
 import I18nDecorator from '@enact/i18n/I18nDecorator';
-import React from 'react';
-import PropTypes from 'prop-types';
+import SpotlightRootDecorator from '@enact/spotlight/SpotlightRootDecorator';
 import {ResolutionDecorator} from '@enact/ui/resolution';
 import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
-import SpotlightRootDecorator from '@enact/spotlight/SpotlightRootDecorator';
+import classnames from 'classnames';
 import convert from 'color-convert';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import Skinnable from '../Skinnable';
 
@@ -37,6 +37,15 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 * @public
 	 */
 	customSkin: true,
+
+	/**
+	 * Disables use of full screen.
+	 *
+	 * @type {Boolean}
+	 * @default false
+	 * @public
+	 */
+	disableFullscreen: false,
 
 	/**
 	 * Enables a floating layer for popup components.
@@ -193,17 +202,17 @@ const CustomizableSkinStyle = kind({
  * Use the `skin` property to assign a skin. Ex: `<DecoratedApp skin="light" />`
  *
  * @class ThemeDecorator
+ * @hoc
  * @memberof agate/ThemeDecorator
  * @mixes ui/FloatingLayer.FloatingLayerDecorator
  * @mixes ui/resolution.ResolutionDecorator
  * @mixes spotlight/SpotlightRootDecorator.SpotlightRootDecorator
  * @mixes agate/Skinnable.Skinnable
- * @hoc
  * @public
  */
 const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	// TODO: Document props passable to hoc ()
-	const {customSkin, float, i18n, noAutoFocus, overlay, ri, skin, spotlight} = config;
+	const {customSkin, float, i18n, noAutoFocus, overlay, ri, skin, spotlight, disableFullscreen} = config;
 
 	const bgClassName = classnames(
 		'enact-fit',
@@ -232,7 +241,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		static propTypes = {
 			accent: PropTypes.string,
 			highlight: PropTypes.string
-		}
+		};
 
 		render () {
 			const {accent, className, highlight, ...rest} = this.props;
@@ -241,9 +250,12 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			const allClassNames = classnames(
 				className,
 				'enact-unselectable',
-				bgClassName,
 				css.root,
-				{[customizableSkinClassName]: customSkin},
+				{
+					[customizableSkinClassName]: customSkin,
+					[bgClassName]: !float,
+					'enact-fit': !disableFullscreen
+				}
 			);
 
 			return (
@@ -259,4 +271,6 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 });
 
 export default ThemeDecorator;
-export {ThemeDecorator};
+export {
+	ThemeDecorator
+};

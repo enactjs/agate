@@ -8,9 +8,9 @@
  */
 
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
 import {ImageItem as UiImageItem} from '@enact/ui/ImageItem';
 import {MarqueeDecorator, MarqueeController} from '@enact/ui/Marquee';
-import Spottable from '@enact/spotlight/Spottable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -71,6 +71,14 @@ const ImageItemBase = kind({
 		css: PropTypes.object,
 
 		/**
+		 * Disables the `ImageItem`.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
+		/**
 		 * The layout orientation of the component.
 		 *
 		 * @type {('horizontal'|'vertical')}
@@ -105,7 +113,7 @@ const ImageItemBase = kind({
 		})
 	},
 
-	render: ({captionPosition, children, css,  src, ...rest}) => {
+	render: ({captionPosition, children, css, disabled, src, ...rest}) => {
 		const [Component, marqueeProps] = (children && (captionPosition === 'below')) ? [MarqueeImageItem, {
 			alignment: 'center'
 		}] : [UiImageItem, null];
@@ -114,7 +122,9 @@ const ImageItemBase = kind({
 			<Component
 				{...rest}
 				{...marqueeProps}
+				aria-disabled={disabled}
 				css={css}
+				disabled={disabled}
 				imageComponent={ImageBase}
 				src={src}
 			>
@@ -147,6 +157,7 @@ const ImageItemDecorator = compose(
  * @memberof agate/ImageItem
  * @extends agate/ImageItem.ImageItemBase
  * @mixes agate/ImageItem.ImageItemDecorator
+ * @ui
  * @public
  */
 const ImageItem = ImageItemDecorator(ImageItemBase);

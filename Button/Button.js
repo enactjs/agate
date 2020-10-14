@@ -18,17 +18,14 @@ import {ButtonBase as UiButtonBase, ButtonDecorator as UiButtonDecorator} from '
 import ComponentOverride from '@enact/ui/ComponentOverride';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
-import React from 'react';
 import compose from 'ramda/src/compose';
+import React from 'react';
 
-import {IconBase} from '../Icon';
+import Icon from '../Icon';
 // import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Button.module.less';
-
-// Make a basic Icon in case we need it later. This cuts `Pure` out of icon for a small gain.
-const Icon = Skinnable(IconBase);
 
 /**
  * A button component.
@@ -252,7 +249,6 @@ const ButtonBase = kind({
 		delete rest.type;
 
 		return UiButtonBase.inline({
-			'data-webos-voice-intent': 'Select',
 			...rest,
 			css
 		});
@@ -260,7 +256,7 @@ const ButtonBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [Button]{@link agate/Button.ButtonBase} components.
+ * Applies Agate specific behaviors to [ButtonBase]{@link agate/Button.ButtonBase} components.
  *
  * @hoc
  * @memberof agate/Button

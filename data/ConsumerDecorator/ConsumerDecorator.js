@@ -1,3 +1,9 @@
+/**
+ * @module agate/ConsumerDecorator
+ * @exports ConsumerDecorator
+ * @private
+ */
+
 import hoc from '@enact/core/hoc';
 import React, {Component} from 'react';
 
@@ -83,4 +89,6 @@ const ConsumerDecorator = hoc(defaultConfig, (config, Wrapped) => {
 });
 
 export default ConsumerDecorator;
-export {ConsumerDecorator};
+export {
+	ConsumerDecorator
+};

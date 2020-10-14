@@ -30,8 +30,8 @@ const defaultConfig = {
  * and has been used to pre-select specific skins for some components.
  *
  * @class Skinnable
- * @memberof agate/Skinnable
  * @hoc
+ * @memberof agate/Skinnable
  * @public
  */
 const Skinnable = hoc(defaultConfig, UiSkinnable);

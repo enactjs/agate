@@ -1,0 +1,48 @@
+// DateComponentPicker.module.less
+//
+@import '../../styles/variables.less';
+@import '../../styles/mixins.less';
+@import '../../styles/skin.less';
+
+.dateComponentPicker {
+	display: inline-block;
+	text-align: center;
+	vertical-align: inherit;
+	position: relative;
+
+	.applySkins({
+		.item,
+		.itemDecrement,
+		.itemIncrement {
+			&.active {
+				background-color: transparent;
+				background-image: none;
+			}
+		}
+
+		&::before {
+			position: absolute;
+			top: 50%;
+			left: 0;
+			transform: translateY(-50%);
+			width: @agate-datetimepicker-divider-width;
+			height: @agate-datetimepicker-divider-height;
+			opacity: @agate-datetimepicker-divider-opacity;
+			background-color: @agate-datetimepicker-divider-bg-color;
+		}
+
+		&:nth-child(n + 2)::before {
+			content: "";
+		}
+
+		.enact-locale-rtl({
+			&:nth-child(n + 3)::before {
+				content: none;
+			}
+
+			&:nth-child(-n + 2)::before {
+				content: "";
+			}
+		});
+	});
+}
