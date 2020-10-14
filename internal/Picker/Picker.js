@@ -30,7 +30,7 @@ const handleChange = direction => handle(
 	adaptEvent(
 		(ev, {min, max, step, value, children}) => ({
 			value: clamp(min, max, value + (direction * step)),
-			data: Array.isArray(children) ? children[clamp(min, max,value + (direction * step))] : clamp(min, max,value + (direction * step))
+			data: Array.isArray(children) ? children[clamp(min, max, value + (direction * step))] : clamp(min, max, value + (direction * step))
 		}),
 		forward('onChange')
 	)
