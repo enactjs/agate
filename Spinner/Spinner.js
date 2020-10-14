@@ -169,7 +169,7 @@ const SpinnerBase = kind({
 	},
 
 	computed: {
-		className: ({children, color, paused, size, transparent, styler}) => styler.append(
+		className: ({children, color, paused, size,  styler, transparent}) => styler.append(
 			color,
 			size,
 			{content: !!children, transparent},
