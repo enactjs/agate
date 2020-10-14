@@ -9,7 +9,6 @@ import Icon from './components/Icon';
 import Item from './components/Item';
 import LabeledIcon from './components/LabeledIcon';
 import LabeledIconButton from './components/LabeledIconButton';
-import LabeledItem from './components/LabeledItem';
 import ProgressBar from './components/ProgressBar';
 import Popup from './components/Popup';
 import Picker from './components/Picker';
@@ -28,7 +27,6 @@ const agateComponents = {
 	Item,
 	LabeledIcon,
 	LabeledIconButton,
-	LabeledItem,
 	ProgressBar,
 	Popup,
 	Picker,
