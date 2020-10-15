@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@enact/agate": "../../",
-    "@enact/core": "^3.4.0",
-    "@enact/ui": "^3.4.0",
+    "@enact/core": "^3.4.8",
+    "@enact/ui": "^3.4.8",
     "ilib": "^14.4.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6"
@@ -32,6 +32,6 @@
     "@storybook/react": "5.3.5",
     "@storybook/theming": "5.3.5",
     "babel-loader": "^8.0.6",
-    "core-js": "^3.1.4"
+    "core-js": "^3.6.5"
   }
 }
