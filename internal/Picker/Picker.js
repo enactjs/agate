@@ -331,7 +331,7 @@ const PickerBase = kind({
 						aria-controls={valueId}
 						aria-disabled={isSecond}
 						aria-label={decrementAriaLabel}
-						className={css.secondaryItemDecrement}
+						className={css.secondaryItem}
 						disabled={isSecond}
 						onClick={handleSecondaryDecrement}
 					>
@@ -380,7 +380,7 @@ const PickerBase = kind({
 						aria-controls={valueId}
 						aria-disabled={isPenultimate}
 						aria-label={incrementAriaLabel}
-						className={css.secondaryItemIncrement}
+						className={css.secondaryItem}
 						disabled={isPenultimate}
 						onClick={handleSecondaryIncrement}
 					>
