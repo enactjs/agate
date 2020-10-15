@@ -1,6 +1,6 @@
 # Change Log
 
-The following is a curated list of changes in the Enact sandstone module, newest changes on the top.
+The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
 ## [unreleased]
  
@@ -8,6 +8,7 @@ The following is a curated list of changes in the Enact sandstone module, newest
 - `agate/IncrementSlider` button color for Gallium skin
 - `agate/Panels` to show close button properly for night mode
 - `LabeledIconButton` max-width so that huge sized icon will not be cut off
+- `agate/Spinner` to pause the animation when `paused` prop is true
 
 ## [1.0.0] - 2020-10-14
 
