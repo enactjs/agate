@@ -66,7 +66,6 @@ storiesOf('Agate', module)
 					itemRenderer={renderItem(ri.scale(number('itemSize', VirtualListConfig, 144)))}
 					itemSize={ri.scale(number('itemSize', VirtualListConfig, 144))}
 					key={select('scrollMode', prop.scrollModeOption, VirtualListConfig)}
-					noScrollByWheel={boolean('noScrollByWheel', VirtualListConfig)}
 					onScrollStart={action('onScrollStart')}
 					onScrollStop={action('onScrollStop')}
 					scrollMode={select('scrollMode', prop.scrollModeOption, VirtualListConfig)}
