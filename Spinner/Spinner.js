@@ -167,7 +167,7 @@ const SpinnerBase = kind({
 	},
 
 	computed: {
-		className: ({children, skinVariants, paused, size, styler, transparent}) => styler.append(
+		className: ({children, paused, size, skinVariants, styler, transparent}) => styler.append(
 			skinVariants.night ? 'light' : 'dark',
 			size,
 			{content: !!children, transparent},

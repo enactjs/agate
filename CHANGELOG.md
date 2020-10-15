@@ -4,8 +4,9 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Fixed
 - `agate/Panels` to show close button properly for night mode
-- `LabeledIconButton` max-width so that huge sized icon will not be cut off
+- `agate/LabeledIconButton` max-width so that huge sized icon will not be cut off
 - `agate/Spinner` to pause the animation when `paused` prop is true
 - `agate/Spinner` changes color based on day/night mode and added `transparent` prop
 
