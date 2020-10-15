@@ -5,6 +5,7 @@ The following is a curated list of changes in the Enact sandstone module, newest
 ## [unreleased]
  
 ### Fixed
+- `agate/IncrementSlider` button color for Gallium skin
 - `agate/Panels` to show close button properly for night mode
 
 ## [1.0.0] - 2020-10-14
