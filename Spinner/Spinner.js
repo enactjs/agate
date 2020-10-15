@@ -103,15 +103,6 @@ const SpinnerBase = kind({
 
 	propTypes: /** @lends agate/Spinner.SpinnerBase.prototype */ {
 		/**
-		 * The color of the component.
-		 *
-		 * @type {('dark'|'light')}
-		 * @default 'light'
-		 * @public
-		 */
-		color: PropTypes.oneOf(['dark', 'light']),
-
-		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
 		 *
@@ -147,6 +138,14 @@ const SpinnerBase = kind({
 		size: PropTypes.oneOf(['huge', 'large', 'small', 'smallest']),
 
 		/**
+		 * Current skin variant.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
+		skinVariants: PropTypes.object,
+
+		/**
 		 * Removes the background color (making it transparent).
 		 *
 		 * @type {Boolean}
@@ -157,7 +156,6 @@ const SpinnerBase = kind({
 	},
 
 	defaultProps: {
-		color: 'light',
 		paused: false,
 		size: 'large',
 		transparent: false
@@ -169,16 +167,18 @@ const SpinnerBase = kind({
 	},
 
 	computed: {
-		className: ({children, color, paused, size, styler, transparent}) => styler.append(
-			color,
+		className: ({children, skinVariants, paused, size, styler, transparent}) => styler.append(
+			skinVariants.night ? 'light' : 'dark',
 			size,
 			{content: !!children, transparent},
-			{pausedAnimation: paused}
+			{pausedAnimation: paused},
+			{transparentBackground: transparent}
 		)
 	},
 
 	render: ({css, ...rest}) => {
 		delete rest.paused;
+		delete rest.skinVariants;
 		delete rest.transparent;
 
 		return (
@@ -201,7 +201,7 @@ const SpinnerBase = kind({
  */
 const SpinnerDecorator = compose(
 	Pure,
-	Skinnable
+	Skinnable({variantsProp: 'skinVariants'})
 );
 
 /**
