@@ -78,7 +78,6 @@ storiesOf('Agate', module)
 						minWidth: ri.scale(number('minWidth', VirtualGridListConfig, 180)),
 						minHeight: ri.scale(number('minHeight', VirtualGridListConfig, 270))
 					}}
-					noScrollByWheel={boolean('noScrollByWheel', VirtualGridListConfig)}
 					onScrollStart={action('onScrollStart')}
 					onScrollStop={action('onScrollStop')}
 					spacing={ri.scale(number('spacing', VirtualGridListConfig, 20))}

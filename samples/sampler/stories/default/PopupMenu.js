@@ -52,7 +52,6 @@ storiesOf('Agate', module).add(
 					noAutoDismiss={noAutoDismiss}
 					onClose={action('onClose')}
 					onHide={action('onHide')}
-					orientation={select('orientation', ['horizontal'], Config)}
 					scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
 					spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
 					title={text('title', Config, 'Title')}

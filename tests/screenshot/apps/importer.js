@@ -7,7 +7,6 @@ import Icon from '../../../Icon';
 import Item from '../../../Item';
 import LabeledIcon from '../../../LabeledIcon';
 import LabeledIconButton from '../../../LabeledIconButton';
-import LabeledItem from '../../../LabeledItem';
 import ProgressBar from '../../../ProgressBar';
 import Popup from '../../../Popup';
 import Picker from '../../../Picker';
@@ -26,7 +25,6 @@ const AgateExports = {
 	Item,
 	LabeledIcon,
 	LabeledIconButton,
-	LabeledItem,
 	ProgressBar,
 	Popup,
 	Picker,
