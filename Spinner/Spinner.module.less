@@ -140,12 +140,6 @@
 				border-radius: @agate-spinner-searching-border-radius;
 			}
 
-			&.pausedAnimation {
-				.node {
-					animation-play-state: paused;
-				}
-			}
-
 			.spin-loop(@searching-nodes);
 
 			&.huge {
@@ -208,12 +202,6 @@
 				);
 			}
 
-			&.pausedAnimation {
-				.node {
-					animation-play-state: paused;
-				}
-			}
-
 			.bounce-loop(@loading-nodes);
 
 			&.huge {
@@ -229,6 +217,15 @@
 					width: @agate-spinner-small-loading-width;
 					height: @agate-spinner-small-loading-height;
 					--node-width: @agate-spinner-small-loading-width;
+				}
+			}
+		}
+
+		&.searching,
+		&.loading {
+			&.pausedAnimation {
+				.node {
+					animation-play-state: paused;
 				}
 			}
 		}
