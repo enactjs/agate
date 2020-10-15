@@ -14,7 +14,6 @@
 	.controls {
 		position: absolute;
 		z-index: 1;
-		.remove-margin-on-edge-children();
 	}
 
 	&.breadcrumbPanels {
@@ -60,6 +59,7 @@
 			top: @agate-panels-controls-top;
 			.position-start-end(auto, @agate-panel-h-padding);
 			.padding-start-end(@agate-panels-controls-padding-start, initial);
+			.remove-margin-on-edge-children();
 		}
 
 		.partial {

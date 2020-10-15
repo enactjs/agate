@@ -5,6 +5,7 @@ The following is a curated list of changes in the Enact sandstone module, newest
 ## [unreleased]
  
 ### Fixed
+- `agate/Panels` to show close button properly for night mode
 - `agate/Picker` to fix the picker item width in horizontal
 
 ## [1.0.0] - 2020-10-14
