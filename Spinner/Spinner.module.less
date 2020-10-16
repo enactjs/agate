@@ -219,6 +219,16 @@
 					--node-width: @agate-spinner-small-loading-width;
 				}
 			}
+
+			.enact-locale-rtl({
+				.node {
+					right: calc(
+							var(--node-even-spacing) -
+							var(--node-relative-offset) -
+							(var(--node-proportion-offset) * @agate-spinner-loading-width)
+					);
+				}
+			});
 		}
 
 		&.searching,
