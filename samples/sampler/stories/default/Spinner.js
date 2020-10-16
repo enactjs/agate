@@ -1,14 +1,31 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
+import kind from '@enact/core/kind';
 import UiSpinner, {SpinnerBase as UiSpinnerBase} from '@enact/ui/Spinner';
 import ri from '@enact/ui/resolution';
 import React from 'react';
+import PropTypes from 'prop-types';
 import {storiesOf} from '@storybook/react';
 
+import Skinnable from '@enact/agate/Skinnable';
 import Spinner, {SpinnerBase} from '@enact/agate/Spinner';
 
 Spinner.displayName = 'Spinner';
 const Config = mergeComponentMetadata('Spinner', UiSpinnerBase, UiSpinner, SpinnerBase, Spinner);
+
+const SkinSpinnerBase = kind({
+	name: 'SkinSpinner',
+
+	propTypes: {
+		skinVariants: PropTypes.object,
+	},
+
+	render: ({skinVariants, ...rest}) => {
+		return <Spinner {...rest} color={skinVariants.night ? 'light' : 'dark'} />;
+	}
+});
+
+const SkinSpinner = Skinnable({variantsProp: 'skinVariants'}, SkinSpinnerBase);
 
 storiesOf('Agate', module)
 	.add(
@@ -59,7 +76,7 @@ storiesOf('Agate', module)
 							width: '100%'
 						}}
 					/>
-					<Spinner
+					<SkinSpinner
 						blockClickOn={select('blockClickOn', [null, 'container', 'screen'], Config)}
 						centered={boolean('centered', Config)}
 						paused={boolean('paused', Config)}
