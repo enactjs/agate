@@ -17,7 +17,7 @@ const SkinSpinnerBase = kind({
 	name: 'SkinSpinner',
 
 	propTypes: {
-		skinVariants: PropTypes.object,
+		skinVariants: PropTypes.object
 	},
 
 	render: ({skinVariants, ...rest}) => {
