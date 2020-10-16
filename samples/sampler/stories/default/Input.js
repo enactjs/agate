@@ -12,6 +12,10 @@ const iconNames = ['', ...icons];
 const Config = mergeComponentMetadata('Input', InputBase, Input);
 Input.displayName = 'Input';
 
+const prop = {
+	type: ['text', 'password', 'number']
+};
+
 storiesOf('Agate', module)
 	.add(
 		'Input',
@@ -28,7 +32,7 @@ storiesOf('Agate', module)
 				onFocus={action('onFocus')}
 				placeholder={text('placeholder', Config, 'Input text here')}
 				size={select('size', ['small', 'large'], Config)}
-				type={text('type', Config)}
+				type={select('type', prop.type, Config)}
 			/>
 		),
 		{
