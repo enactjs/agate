@@ -27,6 +27,10 @@
 			font-size: @agate-switch-icon-font-size;
 			line-height: inherit;
 			margin: 0;
+
+			.enact-locale-rtl({
+				right: @agate-switch-icon-position-left;
+			});
 		}
 
 		&.animated {
@@ -49,6 +53,10 @@
 				:global(.spottable):focus & {
 					color: @agate-switch-selected-color;
 				}
+
+				.enact-locale-rtl({
+					right: @agate-switch-selected-icon-position-right;
+				});
 			}
 			:global(.spottable):focus & {
 				background-color: @agate-switch-selected-focus-bg-color;
