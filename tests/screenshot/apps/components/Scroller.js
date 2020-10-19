@@ -13,7 +13,7 @@ const ScrollerTests = [
 	<Scroller horizontalScrollbar="visible">
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
 		Aenean id blandit nunc. Donec lacinia nisi vitae mi dictum, eget pulvinar nunc tincidunt. Integer vehicula tempus rutrum. Sed efficitur neque in arcu dignissim cursus.
-	</Scroller>,
+	</Scroller>
 ];
 
 export default ScrollerTests;

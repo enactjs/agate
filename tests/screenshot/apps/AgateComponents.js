@@ -1,7 +1,7 @@
 import {generateTestData} from '@enact/ui-test-utils/utils';
 
-import ArcPicker from "./components/ArcPicker";
-import ArcSlider from "./components/ArcSlider";
+import ArcPicker from './components/ArcPicker';
+import ArcSlider from './components/ArcSlider';
 import Button from './components/Button';
 import CheckboxItem from './components/CheckboxItem';
 import DateTimePicker from './components/DateTimePicker';

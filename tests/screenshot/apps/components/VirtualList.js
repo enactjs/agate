@@ -1,12 +1,11 @@
-import Item from "../../../../Item";
+import Item from '../../../../Item';
 import VirtualList from '../../../../VirtualList';
 import React from 'react';
 
 const items = [];
-const renderItem = (size) => ({index, ...rest}) => {
-
+const renderItem = () => ({index}) => {
 	return (
-		<Item {...rest}>
+		<Item>
 			{items[index]}
 		</Item>
 	);
