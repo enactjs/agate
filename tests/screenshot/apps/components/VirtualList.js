@@ -1,11 +1,10 @@
 import Item from '../../../../Item';
 import VirtualList from '../../../../VirtualList';
+import ri from '@enact/ui/resolution';
 import React from 'react';
-import ri from "@enact/ui/resolution";
 
-// eslint-disable-next-line enact/prop-types, enact/display-name
-const items = ['Item 000', 'Item 001', 'Item 002', 'Item 003', 'Item 004', 'Item 005', 'Item 006', 'Item 007', 'Item 008', 'Item 009'];
 const renderItem = () => ({index, ...rest}) => {
+	const items = ['Item 000', 'Item 001', 'Item 002', 'Item 003', 'Item 004', 'Item 005', 'Item 006', 'Item 007', 'Item 008', 'Item 009'];
 	const itemStyle = {
 		borderBottom: ri.unit(6, 'rem') + ' solid #202328',
 		boxSizing: 'border-box',
