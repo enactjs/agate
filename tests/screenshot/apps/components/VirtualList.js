@@ -1,8 +1,9 @@
+import Item from '../../../../Item';
 import VirtualList from '../../../../VirtualList';
 import React from 'react';
 import ri from "@enact/ui/resolution";
-import Item from "../../../../Item";
 
+// eslint-disable-next-line enact/prop-types, enact/display-name
 const items = ['Item 000', 'Item 001', 'Item 002', 'Item 003', 'Item 004', 'Item 005', 'Item 006', 'Item 007', 'Item 008', 'Item 009'];
 const renderItem = () => ({index, ...rest}) => {
 	const itemStyle = {
