@@ -3,7 +3,7 @@ import VirtualList from '../../../../VirtualList';
 import ri from '@enact/ui/resolution';
 import React from 'react';
 
-const renderItem = () => ({index, ...rest}) => {
+const renderItem = () => ({index, ...rest}) => { // eslint-disable-line enact/display-name, enact/prop-types
 	const items = ['Item 000', 'Item 001', 'Item 002', 'Item 003', 'Item 004', 'Item 005', 'Item 006', 'Item 007', 'Item 008', 'Item 009'];
 	const itemStyle = {
 		borderBottom: ri.unit(6, 'rem') + ' solid #202328',
