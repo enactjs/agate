@@ -3,7 +3,7 @@ import React from 'react';
 
 const HeadingTests = [
 	<Heading />,
-	<Heading size="title">tHis is a neW Heading - default</Heading>,
+	<Heading size="title">This is a new Heading</Heading>,
 	<Heading showLine spacing="small" />
 ];
 
