@@ -1,8 +1,10 @@
 import Button from '../../../Button';
+import ContextualPopupDecorator from '../../../ContextualPopupDecorator';
 import DateTimePicker from '../../../DateTimePicker';
 import Drawer from '../../../Drawer';
 import FullscreenPopup from '../../../FullscreenPopup';
 import Heading from '../../../Heading';
+import Header from '../../../Header';
 import IncrementSlider from '../../../IncrementSlider';
 import Input from '../../../Input';
 import Icon from '../../../Icon';
@@ -16,13 +18,16 @@ import RadioItem from '../../../RadioItem';
 import Slider from '../../../Slider';
 import SwitchItem from '../../../SwitchItem';
 import ToggleButton from '../../../ToggleButton';
+import TooltipDecorator from '../../../TooltipDecorator';
 
 const AgateExports = {
 	Button,
+	ContextualPopupDecorator,
 	DateTimePicker,
 	Drawer,
 	FullscreenPopup,
 	Heading,
+	Header,
 	IncrementSlider,
 	Input,
 	Icon,
@@ -35,7 +40,8 @@ const AgateExports = {
 	RadioItem,
 	Slider,
 	SwitchItem,
-	ToggleButton
+	ToggleButton,
+	TooltipDecorator
 };
 
 export default AgateExports;
