@@ -2,6 +2,8 @@ import {generateTestData} from '@enact/ui-test-utils/utils';
 
 import Button from './components/Button';
 import DateTimePicker from './components/DateTimePicker';
+import Drawer from './components/Drawer';
+import FullscreenPopup from './components/FullscreenPopup';
 import Heading from './components/Heading';
 import IncrementSlider from './components/IncrementSlider';
 import Input from './components/Input';
@@ -11,6 +13,7 @@ import LabeledIcon from './components/LabeledIcon';
 import LabeledIconButton from './components/LabeledIconButton';
 import ProgressBar from './components/ProgressBar';
 import Popup from './components/Popup';
+import PopupMenu from './components/PopupMenu';
 import Picker from './components/Picker';
 import RadioItem from './components/RadioItem';
 import Slider from './components/Slider';
@@ -20,6 +23,8 @@ import ToggleButton from './components/ToggleButton';
 const agateComponents = {
 	Button,
 	DateTimePicker,
+	Drawer,
+	FullscreenPopup,
 	Heading,
 	IncrementSlider,
 	Input,
@@ -29,6 +34,7 @@ const agateComponents = {
 	LabeledIconButton,
 	ProgressBar,
 	Popup,
+	PopupMenu,
 	Picker,
 	RadioItem,
 	Slider,

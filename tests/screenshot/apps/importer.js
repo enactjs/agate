@@ -1,5 +1,7 @@
 import Button from '../../../Button';
 import DateTimePicker from '../../../DateTimePicker';
+import Drawer from '../../../Drawer';
+import FullscreenPopup from '../../../FullscreenPopup';
 import Heading from '../../../Heading';
 import IncrementSlider from '../../../IncrementSlider';
 import Input from '../../../Input';
@@ -18,6 +20,8 @@ import ToggleButton from '../../../ToggleButton';
 const AgateExports = {
 	Button,
 	DateTimePicker,
+	Drawer,
+	FullscreenPopup,
 	Heading,
 	IncrementSlider,
 	Input,
