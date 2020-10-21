@@ -2,7 +2,9 @@
  * Agate styled arc picker components and behaviors.
  *
  * @example
- * <ArcPicker backgroundColor="#444444" endAngle={200} foregroundColor="#eeeeee" selectionType="single" startAngle={0} />
+ * <ArcPicker backgroundColor="#cccccc" endAngle={270} startAngle={0}>
+ * 	{[1,2,3,4,5]}
+ * </ArcPicker>
  *
  * @module agate/ArcPicker
  * @exports ArcPicker
