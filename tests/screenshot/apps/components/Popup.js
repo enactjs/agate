@@ -2,9 +2,9 @@ import Popup from '../../../../Popup';
 import React from 'react';
 
 const PopupTests = [
-	<Popup>Popup!</Popup>,
-	<Popup centered>Popup!</Popup>,
-	<Popup open>Popup!</Popup>
+	<Popup closeButton open>Popup!</Popup>,
+	<Popup centered open>Popup!</Popup>,
+	<Popup open position="top">Popup!</Popup>
 ];
 
 export default PopupTests;
