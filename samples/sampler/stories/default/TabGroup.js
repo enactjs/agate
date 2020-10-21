@@ -3,7 +3,6 @@ import React from 'react';
 import {select} from '@enact/storybook-utils/addons/knobs';
 import {storiesOf} from '@storybook/react';
 
-import Button from '@enact/agate/Button';
 import TabGroup from '@enact/agate/TabGroup';
 
 const Config = mergeComponentMetadata('TabGroup', TabGroup);
@@ -21,22 +20,7 @@ storiesOf('Agate', module)
 					{title: 'Settings', icon: 'setting'},
 					{title: 'Theme', icon: 'display'}
 				]}
-			>
-				<beforeTabs>
-					<Button
-						icon="arrowlargeleft"
-						size="small"
-						type="grid"
-					/>
-				</beforeTabs>
-				<afterTabs>
-					<Button
-						icon="arrowlargeright"
-						size="small"
-						type="grid"
-					/>
-				</afterTabs>
-			</TabGroup>
+			/>
 		),
 		{
 			text: 'The basic TabGroup'
