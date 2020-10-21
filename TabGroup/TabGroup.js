@@ -144,34 +144,18 @@ const TabGroupBase = kind({
 			return tab;
 		}),
 		beforeTabs: ({orientation}) => (
-			orientation === 'vertical' ? (
-				<Button
-					icon="arrowlargeup"
-					size="small"
-					type="grid"
-				/>
-			) : (
-				<Button
-					icon="arrowlargeleft"
-					size="small"
-					type="grid"
-				/>
-			)
+			<Button
+				icon={orientation === 'vertical' ? 'arrowlargeup' : 'arrowlargeleft'}
+				size="small"
+				type="grid"
+			/>
 		),
 		afterTabs: ({orientation}) => (
-			orientation === 'vertical' ? (
-				<Button
-					icon="arrowlargedown"
-					size="small"
-					type="grid"
-				/>
-			) : (
-				<Button
-					icon="arrowlargeright"
-					size="small"
-					type="grid"
-				/>
-			)
+			<Button
+				icon={orientation === 'vertical' ? 'arrowlargedown' : 'arrowlargeright'}
+				size="small"
+				type="grid"
+			/>
 		)
 	},
 
