@@ -40,7 +40,7 @@ storiesOf('Agate', module)
 						meant to provide a visual indicator of the effects of changing the <code>spacing</code> prop.
 						<span className={css.spacingNote}>
 							<br />
-							<strong>Note</strong>: The <code>spacing</code> prop will have no effect when using the Gallium skin.
+							<strong>Note</strong>: The <code>spacing</code> prop will have no effect when using the Gallium or Silicon skin.
 							<br />
 							Choose a different skin from the Global Knobs to see!
 						</span>
