@@ -6,4 +6,5 @@ const ImageItemTests = [
 	<ImageItem orientation="horizontal">caption</ImageItem>,
 	<ImageItem captionPosition="overlay">caption</ImageItem>
 ];
+
 export default ImageItemTests;

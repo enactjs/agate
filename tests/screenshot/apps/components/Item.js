@@ -7,4 +7,5 @@ const ItemTests = [
 	<Item slotBeforeIcon="circlelarge" slotAfterIcon="circlelarge" />,
 	<Item label="label text" labelPosition="below" />
 ];
+
 export default ItemTests;
