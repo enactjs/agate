@@ -59,6 +59,7 @@ const SliderBase = kind({
 		 * input keys.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		activateOnFocus: PropTypes.bool,
@@ -67,6 +68,7 @@ const SliderBase = kind({
 		 * Sets the knob to selected state and allows it to move via 5-way controls.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		active: PropTypes.bool,
@@ -89,6 +91,7 @@ const SliderBase = kind({
 		 * Disables component and does not generate events.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		disabled: PropTypes.bool,

@@ -41,7 +41,7 @@ import componentCss from './CheckboxItem.module.less';
  * </CheckboxItem>
  * ```
  *
- * @class CheckboxItem
+ * @class CheckboxItemBase
  * @memberof agate/CheckboxItem
  * @extends agate/Item.Item
  * @mixes agate/CheckboxItem.CheckboxItemDecorator
@@ -52,7 +52,7 @@ import componentCss from './CheckboxItem.module.less';
 const CheckboxItemBase = kind({
 	name: 'CheckboxItem',
 
-	propTypes: /** @lends agate/CheckboxItem.CheckboxItem.prototype */ {
+	propTypes: /** @lends agate/CheckboxItem.CheckboxItemBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
@@ -116,7 +116,7 @@ const CheckboxItemBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [CheckboxItem]{@link agate/CheckboxItem.CheckboxItem} components.
+ * Applies Agate specific behaviors to [CheckboxItemBase]{@link agate/CheckboxItem.CheckboxItemBase} components.
  *
  * @hoc
  * @memberof agate/CheckboxItem
@@ -131,6 +131,16 @@ const CheckboxItemDecorator = compose(
 	Skinnable
 );
 
+/**
+ * A Agate-styled item with a checkbox component.
+ *
+ * @class CheckboxItem
+ * @memberof agate/CheckboxItem
+ * @extends agate/CheckboxItem.CheckboxItemBase
+ * @mixes agate/CheckboxItem.CheckboxItemDecorator
+ * @ui
+ * @public
+ */
 const CheckboxItem = CheckboxItemDecorator(CheckboxItemBase);
 
 export default CheckboxItem;

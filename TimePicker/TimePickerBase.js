@@ -120,6 +120,7 @@ const TimePickerBase = kind({
 		 * Disables the `TimePicker`.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		disabled: PropTypes.bool,

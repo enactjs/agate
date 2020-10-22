@@ -33,6 +33,7 @@ import componentCss from './Heading.module.less';
  *
  * @class HeadingBase
  * @memberof agate/Heading
+ * @extends ui/Heading.Heading
  * @ui
  * @public
  */
