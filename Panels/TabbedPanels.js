@@ -1,10 +1,12 @@
 import {adaptEvent, forward, handle} from '@enact/core/handle';
 import kind from '@enact/core/kind';
+import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import {Changeable} from '@enact/ui/Changeable';
 import {Cell, Layout} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 import {shape} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
 import Skinnable from '../Skinnable';
@@ -37,6 +39,7 @@ const TabbedPanelsBase = kind({
 		onApplicationClose: PropTypes.func,
 		onBack: PropTypes.func,
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+		rtl: PropTypes.bool,
 		tabPosition: PropTypes.string,
 		tabs: PropTypes.array
 	},
@@ -88,8 +91,10 @@ const TabbedPanelsBase = kind({
 		tabOrientation,
 		tabPosition,
 		tabs,
+		rtl,
 		...rest
 	}) => {
+		console.log(rtl);
 		return (
 			<Layout {...rest}>
 				<Cell shrink>
@@ -125,13 +130,26 @@ const TabbedPanelsBase = kind({
 });
 
 // Currently not documenting the base output since it's not exported from index.js
-const TabbedPanels = Slottable(
-	{slots: ['tabs', 'afterTabs', 'beforeTabs']},
+// const TabbedPanels = Slottable(
+// 	{slots: ['tabs', 'afterTabs', 'beforeTabs']},
+// 	Changeable(
+// 		{prop: 'index', change: 'onSelect'},
+// 		Skinnable(TabbedPanelsBase)
+// 	)
+// );
+
+const TabbedPanelsDecorator = compose(
+	I18nContextDecorator({rtlProp: 'rtl'}),
 	Changeable(
-		{prop: 'index', change: 'onSelect'},
-		Skinnable(TabbedPanelsBase)
+		{prop: 'index', change: 'onSelect'}
+	),
+	Skinnable,
+	Slottable(
+		{slots: ['tabs', 'afterTabs', 'beforeTabs']},
 	)
 );
+
+const TabbedPanels = TabbedPanelsDecorator(TabbedPanelsBase);
 
 export default TabbedPanels;
 export {

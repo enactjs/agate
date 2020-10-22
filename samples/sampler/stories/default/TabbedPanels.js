@@ -1,3 +1,6 @@
+// import kind from '@enact/core/kind';
+// import PropTypes from 'prop-types';
+// import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
@@ -12,8 +15,21 @@ import {Panel, TabbedPanels} from '@enact/agate/Panels';
 import {TabbedPanelsBase} from '@enact/agate/Panels/TabbedPanels';
 import $L from '@enact/i18n/$L';
 
-const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase);
+const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase, TabbedPanels);
 // `paddingBottom: '56.25%'` is a trick to impose 16:9 aspect ratio on the component, since padding percentage is based on the width, not the height.
+
+// const RtlTabbedPanelsBase = kind({
+// 	name: 'RtlTabbedPanels',
+// 	propTypes: {
+// 		rtl: PropTypes.bool
+// 	},
+// 	render: ({...rest}) => {
+//
+// 		return <TabbedPanels {...rest}/>
+// 	}
+// });
+//
+// const RtlTabbedPanels = I18nContextDecorator({rtlProp: 'rtl'}, RtlTabbedPanelsBase);
 
 storiesOf('Agate', module)
 	.add(
@@ -31,7 +47,22 @@ storiesOf('Agate', module)
 				setIndex(Math.min(panelIndex + 1, 2));
 			};
 			const orientation = select('orientation', ['vertical', 'horizontal'], Config, 'vertical');
-
+			const rtl = boolean('rtl', Config, false);
+			console.log(rtl);
+			const beforeTabsIcon = () => {
+				if (orientation === 'vertical' && rtl) {
+					return 'arrowlargeright'
+				} else if (orientation === 'vertical' && !rtl) {
+					return 'arrowlargeleft'
+				} else return 'arrowlargeup'
+			};
+			const afterTabsIcon = () => {
+				if (orientation === 'vertical' && rtl) {
+					return 'arrowlargeleft'
+				} else if (orientation === 'vertical' && !rtl) {
+					return 'arrowlargeright'
+				} else return 'arrowlargedown'
+			};
 			return (
 				<div style={{paddingBottom: '56.25%'}}>
 					<TabbedPanels
@@ -41,6 +72,7 @@ storiesOf('Agate', module)
 						noCloseButton={boolean('noCloseButton', Config)}
 						onSelect={onSelect} // eslint-disable-line react/jsx-no-bind
 						orientation={orientation}
+						rtl={rtl}
 						tabPosition={select('tabPosition', ['before', 'after'], Config, 'before')}
 						tabs={[
 							{title: 'Button', icon: 'netbook'},
@@ -51,7 +83,7 @@ storiesOf('Agate', module)
 						<beforeTabs>
 							<Button
 								aria-label={$L('Previous Tab')}
-								icon={orientation  === 'vertical' ? 'arrowlargeleft' : 'arrowlargeup'}
+								icon={beforeTabsIcon()}
 								onClick={onBeforeTabs} // eslint-disable-line react/jsx-no-bind
 								size="small"
 								type="grid"
@@ -60,7 +92,7 @@ storiesOf('Agate', module)
 						<afterTabs>
 							<Button
 								aria-label={$L('Next Tab')}
-								icon={orientation  === 'vertical' ? 'arrowlargeright' : 'arrowlargedown'}
+								icon={afterTabsIcon()}
 								onClick={onAfterTabs} // eslint-disable-line react/jsx-no-bind
 								size="small"
 								type="grid"
