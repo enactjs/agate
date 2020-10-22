@@ -17,7 +17,6 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
-import Button from '../Button';
 import LabeledIcon from '../LabeledIcon';
 import Skinnable from '../Skinnable';
 import ToggleButton from '../ToggleButton';
@@ -142,21 +141,7 @@ const TabGroupBase = kind({
 			tab.children = tab.title || tab.children;
 			delete tab.title;
 			return tab;
-		}),
-		beforeTabs: ({orientation}) => (
-			<Button
-				icon={orientation === 'vertical' ? 'arrowlargeup' : 'arrowlargeleft'}
-				size="small"
-				type="grid"
-			/>
-		),
-		afterTabs: ({orientation}) => (
-			<Button
-				icon={orientation === 'vertical' ? 'arrowlargedown' : 'arrowlargeright'}
-				size="small"
-				type="grid"
-			/>
-		)
+		})
 	},
 
 	render: ({afterTabs, beforeTabs, className, css, labelPosition, orientation, selectedIndex, style, ...rest}) => {
