@@ -167,8 +167,8 @@ const HeaderDecorator = compose(
  *
  * @class Header
  * @memberof agate/Header
- * @extends agate/Header/HeaderBase
- * @mixes agate/Header/HeaderDecorator
+ * @extends agate/Header.HeaderBase
+ * @mixes agate/Header.HeaderDecorator
  * @ui
  * @public
  */
