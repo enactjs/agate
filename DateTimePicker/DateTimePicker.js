@@ -10,8 +10,10 @@
  */
 
 import kind from '@enact/core/kind';
+import Changeable from "@enact/ui/Changeable";
 import {Row} from '@enact/ui/Layout';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
+import compose from "ramda/src/compose";
 import React from 'react';
 
 import DatePicker from '../DatePicker';
@@ -19,8 +21,6 @@ import Skinnable from '../Skinnable';
 import TimePicker from '../TimePicker';
 
 import css from './DateTimePicker.module.less';
-import compose from "ramda/src/compose";
-import Changeable from "@enact/ui/Changeable";
 
 /**
  * A date/time Picker component.
