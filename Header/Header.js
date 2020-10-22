@@ -26,16 +26,15 @@ import componentCss from './Header.module.less';
 /**
  * A header component for a Panel with a `title`, `titleAbove`, `subtitle`
  *
- * @class Header
+ * @class HeaderBase
  * @memberof agate/Header
- * @mixes agate/Header.HeaderDecorator
  * @ui
  * @public
  */
 const HeaderBase = kind({
 	name: 'Header',
 
-	propTypes: /** @lends agate/Header.Header.prototype */ {
+	propTypes: /** @lends agate/Header.HeaderBase.prototype */ {
 		/**
 		 * Title of the header.
 		 *
@@ -163,7 +162,16 @@ const HeaderDecorator = compose(
 	Skinnable
 );
 
-// Note that we only export this (even as HeaderBase). HeaderBase is not useful on its own.
+/**
+ * An Agate-style header component
+ *
+ * @class Header
+ * @memberof agate/Header
+ * @extends agate/Header/HeaderBase
+ * @mixes agate/Header/HeaderDecorator
+ * @ui
+ * @public
+ */
 const Header = HeaderDecorator(HeaderBase);
 
 // Set up Header so when it's used in a slottable layout (like Panel), it is automatically

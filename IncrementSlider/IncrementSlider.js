@@ -56,8 +56,6 @@ const forwardWithType = (type, props) => forward(type, {type}, props);
  * @class IncrementSliderBase
  * @memberof agate/IncrementSlider
  * @extends agate/Slider.SliderBase
- * @mixes agate/Skinnable.Skinnable
- * @mixes spotlight/Spottable.Spottable
  * @ui
  * @public
  */
@@ -78,7 +76,6 @@ const IncrementSliderBase = kind({
 		 * buttons.
 		 *
 		 * @type {Boolean}
-		 * @memberof agate/IncrementSlider.IncrementSliderBase.prototype
 		 * @public
 		 */
 		'aria-hidden': PropTypes.bool,
@@ -89,7 +86,6 @@ const IncrementSliderBase = kind({
 		 * the slider directly through the props.
 		 *
 		 * @type {String|Number}
-		 * @memberof agate/IncrementSlider.IncrementSliderBase.prototype
 		 * @public
 		 */
 		'aria-valuetext': PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -127,6 +123,7 @@ const IncrementSliderBase = kind({
 		 * [vertical]{@link agate/IncrementSlider.IncrementSlider#vertical} is changed.
 		 *
 		 * @type {String}
+		 * @default 'minus'
 		 * @public
 		 */
 		decrementIcon: PropTypes.string,
@@ -169,6 +166,7 @@ const IncrementSliderBase = kind({
 		 * [vertical]{@link agate/IncrementSlider.IncrementSlider#vertical} is changed.
 		 *
 		 * @type {String}
+		 * @default 'plus'
 		 * @public
 		 */
 		incrementIcon: PropTypes.string,
@@ -205,6 +203,7 @@ const IncrementSliderBase = kind({
 		 * Hides the slider bar fill and prevents highlight when spotted.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		noFill: PropTypes.bool,
@@ -350,6 +349,7 @@ const IncrementSliderBase = kind({
 		 * Disables spotlight navigation into the component.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		spotlightDisabled: PropTypes.bool,

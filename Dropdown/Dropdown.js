@@ -76,6 +76,7 @@ const DropdownBase = kind({
 		 * The selections for Dropdown
 		 *
 		 * @type {String[]|Array.<{key: (Number|String), children: (String|Component)}>}
+		 * @public
 		 */
 		children: PropTypes.array,
 
