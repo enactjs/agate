@@ -39,9 +39,6 @@ storiesOf('Agate', module)
 						This <a href="https://enactjs.com/docs/modules/ui/BodyText/">BodyText</a> component is rendered immediately after the Heading component and is<br />
 						meant to provide a visual indicator of the effects of changing the <code>spacing</code> prop.
 						<span className={css.spacingNote}>
-							<br />
-							<strong>Note</strong>: The <code>spacing</code> prop will have no effect when using the Gallium or Silicon skin.
-							<br />
 							Choose a different skin from the Global Knobs to see!
 						</span>
 						{(knobProps.size === 'title' || typeof knobProps.color === 'undefined') ? null : (
