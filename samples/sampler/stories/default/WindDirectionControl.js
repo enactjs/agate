@@ -13,10 +13,7 @@ storiesOf('Agate', module)
 		() => {
 			return (
 				<div>
-					<WindDirectionControl
-						onChange={action('onChange')}
-						style={{marginTop: ri.scaleToRem(40)}}
-					/>
+					<WindDirectionControl onChange={action('onChange')}/>
 				</div>
 			);
 		},

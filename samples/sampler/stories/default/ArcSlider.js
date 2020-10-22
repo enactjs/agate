@@ -44,7 +44,6 @@ storiesOf('Agate', module)
 				startAngle={number('startAngle', Config, {range: true, min: 0, max: 360})}
 				step={number('step', Config)}
 				strokeWidth={number('strokeWidth', Config)}
-				style={{marginTop: ri.scaleToRem(40)}}
 			/>
 		),
 		{
@@ -63,7 +62,6 @@ storiesOf('Agate QA.Arc', module)
 				radius={number('radius', ArcConfig)}
 				startAngle={number('startAngle', ArcConfig, {range: true, min: 0, max: 360})}
 				strokeWidth={number('strokeWidth', ArcConfig)}
-				style={{marginTop: ri.scaleToRem(40)}}
 			/>
 		)
 	);

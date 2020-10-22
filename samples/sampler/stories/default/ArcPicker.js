@@ -30,7 +30,6 @@ storiesOf('Agate', module)
 					onChange={action('onChange')}
 					selectionType={select('selectionType', ['cumulative', 'single'], Config, 'cumulative')}
 					startAngle={number('startAngle', Config, {range: true, min: 0, max: 360})}
-					style={{marginTop: ri.scaleToRem(40)}}
 				>{items}</ArcPicker>
 			);
 		},

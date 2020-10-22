@@ -22,7 +22,6 @@ storiesOf('Agate', module)
 				max={number('max', Config)}
 				min={number('min', Config)}
 				onChange={action('onChange')}
-				style={{marginTop: ri.scaleToRem(40)}}
 				unit={select('unit', prop.unit, Config)}
 			/>
 		),
