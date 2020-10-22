@@ -10,10 +10,10 @@
  */
 
 import kind from '@enact/core/kind';
-import Changeable from "@enact/ui/Changeable";
+import Changeable from '@enact/ui/Changeable';
 import {Row} from '@enact/ui/Layout';
-import PropTypes from 'prop-types'
-import compose from "ramda/src/compose";
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
 import DatePicker from '../DatePicker';
@@ -69,10 +69,10 @@ const DateTimePickerBase = kind({
 		return (
 			<Row {...rest} className={css.dateTimePicker} align="center center">
 				<Row align="center center">
-					<TimePicker css={css} disabled={disabled} onChange={onChange} value={value}/>
+					<TimePicker css={css} disabled={disabled} onChange={onChange} value={value} />
 				</Row>
 				<Row align="center center">
-					<DatePicker css={css} disabled={disabled} onChange={onChange} value={value}/>
+					<DatePicker css={css} disabled={disabled} onChange={onChange} value={value} />
 				</Row>
 			</Row>
 		);
