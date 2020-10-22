@@ -1,5 +1,4 @@
 import {action} from '@enact/storybook-utils/addons/actions';
-import ri from '@enact/ui/resolution';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -13,7 +12,7 @@ storiesOf('Agate', module)
 		() => {
 			return (
 				<div>
-					<WindDirectionControl onChange={action('onChange')}/>
+					<WindDirectionControl onChange={action('onChange')} />
 				</div>
 			);
 		},
