@@ -19,6 +19,8 @@ import Skinnable from '../Skinnable';
 import TimePicker from '../TimePicker';
 
 import css from './DateTimePicker.module.less';
+import compose from "ramda/src/compose";
+import Changeable from "@enact/ui/Changeable";
 
 /**
  * A date/time Picker component.
@@ -46,7 +48,15 @@ const DateTimePickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onChange: PropTypes.func
+		onChange: PropTypes.func,
+
+		/**
+		 * The value of the DateTimePicker.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		value: PropTypes.any
 	},
 
 	styles: {
@@ -54,15 +64,15 @@ const DateTimePickerBase = kind({
 		className: 'dateTimePicker'
 	},
 
-	render ({disabled, onChange, ...rest}) {
+	render ({disabled, onChange, value, ...rest}) {
 
 		return (
 			<Row {...rest} className={css.dateTimePicker} align="center center">
 				<Row align="center center">
-					<TimePicker css={css} disabled={disabled} onChange={onChange} />
+					<TimePicker css={css} disabled={disabled} onChange={onChange} value={value}/>
 				</Row>
 				<Row align="center center">
-					<DatePicker css={css} disabled={disabled} onChange={onChange} />
+					<DatePicker css={css} disabled={disabled} onChange={onChange} value={value}/>
 				</Row>
 			</Row>
 		);
@@ -70,16 +80,30 @@ const DateTimePickerBase = kind({
 });
 
 /**
+ * Applies Agate specific behaviors to [DateTimePickerBase]{@link agate/DateTimePicker.DateTimePickerBase} components.
+ *
+ * @hoc
+ * @memberof agate/DateTimePicker
+ * @mixes agate/Skinnable.Skinnable
+ * @mixes ui/Changeable.Changeable
+ * @public
+ */
+const DateTimePickerDecorator = compose(
+	Skinnable,
+	Changeable
+);
+
+/**
  * An Agate themed date/time Picker component.
  *
  * @class DateTimePicker
  * @memberof agate/DateTimePicker
  * @extends agate/DateTimePicker.DateTimePickerBase
- * @mixes agate/Skinnable.Skinnable
+ * @mixes agate/DateTimePicker.DateTimePickerDecorator
  * @ui
  * @public
  */
-const DateTimePicker = Skinnable(DateTimePickerBase);
+const DateTimePicker = DateTimePickerDecorator(DateTimePickerBase);
 
 export default DateTimePicker;
 export {
