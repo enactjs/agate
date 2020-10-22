@@ -5,4 +5,5 @@ const KeypadTests = [
 	<Keypad />,
 	<Keypad disabled />
 ];
+
 export default KeypadTests;

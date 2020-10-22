@@ -22,5 +22,3 @@ const PanelsTests = [
 ];
 
 export default PanelsTests;
-
-
