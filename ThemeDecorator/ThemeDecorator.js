@@ -43,7 +43,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 * Disables use of full screen.
 	 *
 	 * @type {Boolean}
-	 * @default false\
+	 * @default false
 	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
