@@ -1,6 +1,9 @@
 /**
  * Provides Agate-themed Item component and interactive radio toggle icon.
  *
+ * @example
+ * <RadioItem>Item</RadioItem>
+ *
  * @module agate/RadioItem
  * @exports RadioItem
  * @exports RadioItemBase

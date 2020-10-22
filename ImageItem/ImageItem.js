@@ -1,6 +1,12 @@
 /**
  * Agate styled ImageItem.
  *
+ * @example
+ * <ImageItem
+ *  src="https://dummyimage.com/64/e048e0/0011ff"
+ *  style={{height: 64, width: 64}}
+ * />
+ *
  * @module agate/ImageItem
  * @exports ImageItem
  * @exports ImageItemBase
