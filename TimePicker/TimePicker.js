@@ -215,7 +215,7 @@ const TimePickerDecorator = compose(
  *
  * @class TimePicker
  * @memberof agate/TimePicker
- * @extends agate/TimePicker.TimePickerBase 
+ * @extends agate/TimePicker.TimePickerBase
  * @mixes agate/TimePicker.TimePickerDecorator
  * @ui
  * @public
