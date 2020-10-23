@@ -9,6 +9,8 @@ import {VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
 import Item from '@enact/agate/Item';
 import VirtualList from '@enact/agate/VirtualList';
 
+import css from './VirtualList.module.less';
+
 const
 	wrapOption = {
 		false: false,
@@ -20,17 +22,15 @@ const
 		scrollModeOption: ['native', 'translate']
 	},
 	items = [],
-	defaultDataSize = 1000,
+	defaultDataSize = 4,
 	// eslint-disable-next-line enact/prop-types, enact/display-name
 	renderItem = (size) => ({index, ...rest}) => {
 		const itemStyle = {
-			borderBottom: ri.unit(6, 'rem') + ' solid #202328',
-			boxSizing: 'border-box',
 			height: ri.unit(size, 'rem')
 		};
 
 		return (
-			<Item {...rest} style={itemStyle}>
+			<Item {...rest} className={index === items.length - 1 ? css.lastItem : css.item} style={itemStyle}>
 				{items[index]}
 			</Item>
 		);
@@ -60,6 +60,8 @@ storiesOf('Agate', module)
 		() => {
 			return (
 				<VirtualList
+					className={css.virtualList}
+					css={css}
 					dataSize={updateDataSize(number('dataSize', VirtualListConfig, defaultDataSize))}
 					focusableScrollbar={boolean('focusableScrollbar', VirtualListConfig)}
 					horizontalScrollbar={select('horizontalScrollbar', prop.scrollbarOption, VirtualListConfig)}

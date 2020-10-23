@@ -1,0 +1,24 @@
+@import '~@enact/agate/styles/mixins.less';
+@import '~@enact/agate/styles/skin.less';
+
+.virtualList {
+  .applySkins({
+    .item {
+      border-top: @agate-item-border-width solid transparent;
+      border-bottom: @agate-item-border-width solid #363b44;
+      border-left-width: 0;
+      border-right-width: 0;
+      box-sizing: border-box;
+
+      .focus({
+        border-color: @agate-item-focus-border-color;
+        border-style: solid;
+        border-width: @agate-item-border-width;
+      });
+
+      .lastItem {
+        border-bottom-color: transparent;
+      }
+    }
+  });
+}
