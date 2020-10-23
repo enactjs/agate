@@ -220,5 +220,14 @@
 				}
 			}
 		}
+
+		&.searching,
+		&.loading {
+			&.pausedAnimation {
+				.node {
+					animation-play-state: paused;
+				}
+			}
+		}
 	});
 }
