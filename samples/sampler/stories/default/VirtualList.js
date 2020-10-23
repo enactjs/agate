@@ -22,7 +22,7 @@ const
 		scrollModeOption: ['native', 'translate']
 	},
 	items = [],
-	defaultDataSize = 4,
+	defaultDataSize = 1000,
 	// eslint-disable-next-line enact/prop-types, enact/display-name
 	renderItem = (size) => ({index, ...rest}) => {
 		const itemStyle = {
@@ -61,7 +61,6 @@ storiesOf('Agate', module)
 			return (
 				<VirtualList
 					className={css.virtualList}
-					css={css}
 					dataSize={updateDataSize(number('dataSize', VirtualListConfig, defaultDataSize))}
 					focusableScrollbar={boolean('focusableScrollbar', VirtualListConfig)}
 					horizontalScrollbar={select('horizontalScrollbar', prop.scrollbarOption, VirtualListConfig)}
