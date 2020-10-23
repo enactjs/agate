@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
 import React from 'react';
 
-import PickerCore, {PickerDecorator} from '../internal/Picker';
+import {PickerBase as PickerCore, PickerDecorator} from '../internal/Picker';
 
 /**
  * The base `Picker` component.

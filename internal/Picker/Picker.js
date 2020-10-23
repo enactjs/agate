@@ -8,6 +8,7 @@
  */
 
 import {adaptEvent, forEventProp, forward, handle, oneOf} from '@enact/core/handle';
+import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
@@ -28,9 +29,8 @@ const PickerButtonItem = Spottable('div');
 
 const handleChange = direction => handle(
 	adaptEvent(
-		(ev, {min, max, step, value, children}) => ({
-			value: clamp(min, max, value + (direction * step)),
-			data: Array.isArray(children) ? children[clamp(min, max, value + (direction * step))] : clamp(min, max, value + (direction * step))
+		(ev, {min, max, step, value}) => ({
+			value: clamp(min, max, value + (direction * step))
 		}),
 		forward('onChange')
 	)
@@ -395,6 +395,25 @@ const PickerBase = kind({
 	}
 });
 
+const ChangeAdapter = hoc((config, Wrapped) => {
+	return kind({
+		name: 'ChangeAdapter',
+
+		handlers: {
+			onChange: handle(
+				adaptEvent(({value}, {children}) => {
+					return ({selected: value, value: Array.isArray(children) ? children[value] : value});
+				},
+				forward('onChange'))
+			)
+		},
+
+		render: (props) => {
+			return <Wrapped {...props} />;
+		}
+	});
+});
+
 /**
  * Applies Agate specific behaviors to [Picker]{@link agate/Picker.Picker}.
  *
@@ -405,6 +424,7 @@ const PickerBase = kind({
  * @private
  */
 const PickerDecorator = compose(
+	ChangeAdapter,
 	IdProvider({generateProp: null}),
 	Changeable,
 	Skinnable({prop: 'skin'})
