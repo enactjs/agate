@@ -13,7 +13,7 @@ const SliderButtonView = () => (
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<SliderButton alt="Aria-labelled" aria-label="This is a Label 0."  onChange={Function.prototype}>{['A', 'B', 'C']}</SliderButton>
+			<SliderButton alt="Aria-labelled" aria-label="This is a Label 0." onChange={Function.prototype}>{['A', 'B', 'C']}</SliderButton>
 			<SliderButton alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled onChange={Function.prototype}>{['A', 'B', 'C']}</SliderButton>
 		</Section>
 	</>

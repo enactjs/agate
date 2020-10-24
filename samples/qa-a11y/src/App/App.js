@@ -106,7 +106,7 @@ const tabTitles = [
 	{title: 'A-G'},
 	{title: 'H-N'},
 	{title: 'O-S'},
-	{title: 'T-Z'},
+	{title: 'T-Z'}
 ];
 
 class AppBase extends React.Component {
