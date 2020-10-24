@@ -45,6 +45,7 @@ import Slider from '../views/Slider';
 import SliderButton from '../views/SliderButton';
 import Spinner from '../views/Spinner';
 import SwitchItem from '../views/SwitchItem';
+import TemperatureControl from '../views/TemperatureControl';
 import TimePicker from '../views/TimePicker';
 import ToggleButton from '../views/ToggleButton';
 import TooltipDecorator from '../views/TooltipDecorator';
@@ -94,6 +95,7 @@ const views = [
 	{title: 'SliderButton', view: SliderButton},
 	{title: 'Spinner', view: Spinner},
 	{title: 'SwitchItem', view: SwitchItem},
+	{title: 'TemperatureControl', view: TemperatureControl},
 	{title: 'TimePicker', view: TimePicker},
 	{title: 'ToggleButton', view: ToggleButton},
 	{title: 'TooltipDecorator', view: TooltipDecorator},
