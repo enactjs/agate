@@ -1,4 +1,4 @@
-import DateTimePicker from '@enact/agate/DateTimePicker';
+import DatePicker from '@enact/agate/DatePicker';
 import React from 'react';
 
 import Section from '../components/Section';
@@ -6,8 +6,8 @@ import Section from '../components/Section';
 const DatePickerView = () => (
 	<>
 		<Section title="Default">
-			<DateTimePicker alt="Normal" />
-			<DateTimePicker alt="Disabled" disabled />
+			<DatePicker alt="Normal" />
+			<DatePicker alt="Disabled" disabled />
 		</Section>
 	</>
 );

@@ -1,22 +1,26 @@
-import CheckboxItem from '@enact/agate/CheckboxItem';
+import ArcPicker from '@enact/agate/ArcPicker';
 import React from 'react';
 
 import Section from '../components/Section';
 
 import appCss from '../App/App.module.less';
 
-const CheckboxItemView = () => (
+const ArcPickerView = () => (
 	<>
 		<Section title="Default">
-			<CheckboxItem alt="Normal">Text 0</CheckboxItem>
-			<CheckboxItem alt="Disabled" disabled>Text 1</CheckboxItem>
+			<ArcPicker alt="Normal">{[1,2,3,4,5]}</ArcPicker>
+			<ArcPicker alt="With slotCenter" slotCenter="SlotCenter">{[1,2,3,4,5]}</ArcPicker>
+			<ArcPicker alt="Disabled" disabled>{[1,2,3,4,5]}</ArcPicker>
+			<ArcPicker alt="Disabled with slotCenter" disabled slotCenter="SlotCenter">{[1,2,3,4,5]}</ArcPicker>
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<CheckboxItem alt="Aria-labelled" aria-label="This is a Label 0.">Text 0</CheckboxItem>
-			<CheckboxItem alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled>Text 1</CheckboxItem>
+			<ArcPicker alt="Aria-labelled" aria-label="This is a Label 4.">{[1,2,3,4,5]}</ArcPicker>
+			<ArcPicker alt="Aria-labelled with slotCenter" aria-label="This is a Label 5." slotCenter="SlotCenter">{[1,2,3,4,5]}</ArcPicker>
+			<ArcPicker alt="Aria-labelled and Disabled" aria-label="This is a Label 6." disabled>{[1,2,3,4,5]}</ArcPicker>
+			<ArcPicker alt="Aria-labelled and Disabled with slotCenter" aria-label="This is a Label 7." disabled slotCenter="SlotCenter">{[1,2,3,4,5]}</ArcPicker>
 		</Section>
 	</>
 );
 
-export default CheckboxItemView;
+export default ArcPickerView;

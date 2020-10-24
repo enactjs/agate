@@ -1,43 +1,22 @@
-/* eslint-disable react/jsx-no-bind */
-
-import Button from '@enact/agate/Button';
-import Slider from '@enact/agate/Slider';
-import PropTypes from 'prop-types';
+import SliderButton from '@enact/agate/SliderButton';
 import React from 'react';
 
 import Section from '../components/Section';
 
-const CustomSlider = ({customText, ...rest}) => {
-	const [value, setValue] = React.useState(0);
-	const valueText = `${customText} ${value}`;
+import appCss from '../App/App.module.less';
 
-	const handleChange = (ev) => setValue(ev.value);
-
-	return (
-		<Slider aria-valuetext={valueText} onChange={handleChange} value={value} {...rest} />
-	);
-};
-
-CustomSlider.propTypes = {
-	customText: PropTypes.string
-};
-
-const SliderView = () => (
+const SliderButtonView = () => (
 	<>
 		<Section title="Default">
-			<Slider alt="Normal" />
-			<Slider alt="Disabled" disabled />
+			<SliderButton alt="Normal" onChange={Function.prototype}>{['A', 'B', 'C']}</SliderButton>
+			<SliderButton alt="Disabled" disabled onChange={Function.prototype}>{['A', 'B', 'C']}</SliderButton>
 		</Section>
-		<br />
-		<br />
-		<Section title="Aria-ValueText">
-			<CustomSlider alt="Aria-valuetext" customText="This is Volume" />
-			<CustomSlider alt="Aria-valuetext and disabled" customText="This is Volume" disabled />
+
+		<Section className={appCss.marginTop} title="Aria-labelled">
+			<SliderButton alt="Aria-labelled" aria-label="This is a Label 0."  onChange={Function.prototype}>{['A', 'B', 'C']}</SliderButton>
+			<SliderButton alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled onChange={Function.prototype}>{['A', 'B', 'C']}</SliderButton>
 		</Section>
-		<br />
-		<br />
-		<Button>To Escape to the Left via 5-way Left</Button>
 	</>
 );
 
-export default SliderView;
+export default SliderButtonView;

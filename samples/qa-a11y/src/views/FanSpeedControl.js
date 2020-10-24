@@ -1,22 +1,22 @@
-import CheckboxItem from '@enact/agate/CheckboxItem';
+import FanSpeedControl from '@enact/agate/FanSpeedControl';
 import React from 'react';
 
 import Section from '../components/Section';
 
 import appCss from '../App/App.module.less';
 
-const CheckboxItemView = () => (
+const FanSpeedControlView = () => (
 	<>
 		<Section title="Default">
-			<CheckboxItem alt="Normal">Text 0</CheckboxItem>
-			<CheckboxItem alt="Disabled" disabled>Text 1</CheckboxItem>
+			<FanSpeedControl alt="Normal" icon="fan" max={5} min={1} />
+			<FanSpeedControl alt="Disabled" disabled icon="fan" max={5} min={1} />
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<CheckboxItem alt="Aria-labelled" aria-label="This is a Label 0.">Text 0</CheckboxItem>
-			<CheckboxItem alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled>Text 1</CheckboxItem>
+			<FanSpeedControl alt="Aria-labelled" aria-label="This is a Label 0." icon="fan" max={5} min={1} />
+			<FanSpeedControl alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled icon="fan" max={5} min={1} />
 		</Section>
 	</>
 );
 
-export default CheckboxItemView;
+export default FanSpeedControlView;

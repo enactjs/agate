@@ -1,22 +1,22 @@
-import CheckboxItem from '@enact/agate/CheckboxItem';
+import Heading from '@enact/agate/Heading';
 import React from 'react';
 
 import Section from '../components/Section';
 
 import appCss from '../App/App.module.less';
 
-const CheckboxItemView = () => (
+const HeadingView = () => (
 	<>
 		<Section title="Default">
-			<CheckboxItem alt="Normal">Text 0</CheckboxItem>
-			<CheckboxItem alt="Disabled" disabled>Text 1</CheckboxItem>
+			<Heading alt="Normal" size="large" showLine>Text 0</Heading>
+			<Heading alt="Disabled" disabled size="large" showLine>Text 1</Heading>
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<CheckboxItem alt="Aria-labelled" aria-label="This is a Label 0.">Text 0</CheckboxItem>
-			<CheckboxItem alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled>Text 1</CheckboxItem>
+			<Heading alt="Aria-labelled" aria-label="This is a Label 0." size="large" showLine>Text 0</Heading>
+			<Heading alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled size="large" showLine>Text 1</Heading>
 		</Section>
 	</>
 );
 
-export default CheckboxItemView;
+export default HeadingView;
