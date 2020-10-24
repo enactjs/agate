@@ -13,8 +13,8 @@ const WindDirectionControlView = () => (
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<WindDirectionControl alt="Aria-labelled" aria-label="This is a Label 0.">Text 0</WindDirectionControl>
-			<WindDirectionControl alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled>Text 1</WindDirectionControl>
+			<WindDirectionControl alt="Aria-labelled" aria-label="This is a Label.">Text 2</WindDirectionControl>
+			<WindDirectionControl alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled>Text 3</WindDirectionControl>
 		</Section>
 	</>
 );

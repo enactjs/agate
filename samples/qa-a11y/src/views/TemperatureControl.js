@@ -13,8 +13,8 @@ const TemperatureControlView = () => (
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<TemperatureControl alt="Aria-labelled" aria-label="This is a Label 0." />
-			<TemperatureControl alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled />
+			<TemperatureControl alt="Aria-labelled" aria-label="This is a Label." />
+			<TemperatureControl alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled />
 		</Section>
 	</>
 );

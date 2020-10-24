@@ -1,3 +1,4 @@
+import BodyText from '@enact/agate/BodyText';
 import Button from '@enact/agate/Button';
 import PopupMenu from '@enact/agate/PopupMenu';
 import React from 'react';
@@ -26,6 +27,7 @@ const PopupMenuView = () => {
 				onClose={handleOpen(0, false)}
 				open={open[0]}
 			>
+				<BodyText>Hello</BodyText>
 				<Button onClick={handleOpen(0, false)}>Close</Button>
 			</PopupMenu>
 
@@ -34,6 +36,7 @@ const PopupMenuView = () => {
 				open={open[1]}
 				title="Title"
 			>
+				<BodyText>Hello</BodyText>
 				<Button onClick={handleOpen(1, false)}>Close</Button>
 			</PopupMenu>
 
@@ -43,6 +46,7 @@ const PopupMenuView = () => {
 				open={open[2]}
 				title="Title"
 			>
+				<BodyText>Hello</BodyText>
 				<Button onClick={handleOpen(2, false)}>Close</Button>
 			</PopupMenu>
 
@@ -51,6 +55,7 @@ const PopupMenuView = () => {
 				onClose={handleOpen(3, false)}
 				open={open[3]}
 			>
+				<BodyText>Hello</BodyText>
 				<Button onClick={handleOpen(3, false)}>Close</Button>
 			</PopupMenu>
 
@@ -60,6 +65,7 @@ const PopupMenuView = () => {
 				open={open[4]}
 				title="Title"
 			>
+				<BodyText>Hello</BodyText>
 				<Button onClick={handleOpen(4, false)}>Close</Button>
 			</PopupMenu>
 
@@ -70,6 +76,7 @@ const PopupMenuView = () => {
 				open={open[5]}
 				title="Title"
 			>
+				<BodyText>Hello</BodyText>
 				<Button onClick={handleOpen(5, false)}>Close</Button>
 			</PopupMenu>
 		</>

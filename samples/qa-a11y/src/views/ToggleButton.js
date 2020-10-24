@@ -13,8 +13,8 @@ const ToggleButtonView = () => (
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<ToggleButton alt="Aria-labelled" aria-label="This is a Label 0." underline>Text 2</ToggleButton>
-			<ToggleButton alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled underline>Text 3</ToggleButton>
+			<ToggleButton alt="Aria-labelled" aria-label="This is a Label." underline>Text 2</ToggleButton>
+			<ToggleButton alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled underline>Text 3</ToggleButton>
 		</Section>
 	</>
 );
