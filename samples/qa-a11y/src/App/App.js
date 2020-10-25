@@ -13,6 +13,7 @@ import classnames from 'classnames';
 
 import ArcPicker from '../views/ArcPicker';
 import ArcSlider from '../views/ArcSlider';
+import BodyText from '../views/BodyText';
 import Button from '../views/Button';
 import CheckboxItem from '../views/CheckboxItem';
 import ColorPicker from '../views/ColorPicker';
@@ -26,6 +27,7 @@ import FullscreenPopup from '../views/FullscreenPopup';
 import Header from '../views/Header';
 import Heading from '../views/Heading';
 import ImageItem from '../views/ImageItem';
+import IncrementSlider from '../views/IncrementSlider';
 import Input from '../views/Input';
 import ItemView from '../views/Item';
 import Keypad from '../views/Keypad';
@@ -45,7 +47,10 @@ import Slider from '../views/Slider';
 import SliderButton from '../views/SliderButton';
 import Spinner from '../views/Spinner';
 import SwitchItem from '../views/SwitchItem';
+import TabbedPanelsView from '../views/TabbedPanels';
+import TabGroup from '../views/TabGroup';
 import TemperatureControl from '../views/TemperatureControl';
+import ThumbnailItem from '../views/ThumbnailItem';
 import TimePicker from '../views/TimePicker';
 import ToggleButton from '../views/ToggleButton';
 import TooltipDecorator from '../views/TooltipDecorator';
@@ -65,6 +70,7 @@ const views = [
 	{title: 'ArcPicker', view: ArcPicker},
 	{title: 'ArcSlider', view: ArcSlider},
 	{title: 'Button', view: Button},
+	{title: 'BodyText', view: BodyText},
 	{title: 'CheckboxItem', view: CheckboxItem},
 	{title: 'ColorPicker', view: ColorPicker},
 	{title: 'ContextualPopupDecorator', view: ContextualPopupDecorator},
@@ -77,6 +83,7 @@ const views = [
 	{isHeader: false, title: 'Header', view: Header},
 	{title: 'Heading', view: Heading},
 	{title: 'ImageItem', view: ImageItem},
+	{title: 'IncrementSlider', view: IncrementSlider},
 	{title: 'Input', view: Input},
 	{title: 'Item', view: ItemView},
 	{title: 'Keypad', view: Keypad},
@@ -95,7 +102,10 @@ const views = [
 	{title: 'SliderButton', view: SliderButton},
 	{title: 'Spinner', view: Spinner},
 	{title: 'SwitchItem', view: SwitchItem},
+	{isHeader: false, title: 'TabbedPanels', view: TabbedPanelsView},
+	{title: 'TabGroup', view: TabGroup},
 	{title: 'TemperatureControl', view: TemperatureControl},
+	{title: 'ThumbnailItem', view: ThumbnailItem},
 	{title: 'TimePicker', view: TimePicker},
 	{title: 'ToggleButton', view: ToggleButton},
 	{title: 'TooltipDecorator', view: TooltipDecorator},
