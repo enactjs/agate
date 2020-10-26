@@ -13,8 +13,8 @@ const ThumbnailItemView = () => (
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<ThumbnailItem alt="Aria-labelled" aria-label="This is a Label 0." src="https://dummyimage.com/64/e048e0/0011ff">Text 2</ThumbnailItem>
-			<ThumbnailItem alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled src="https://dummyimage.com/64/e048e0/0011ff">Text 3</ThumbnailItem>
+			<ThumbnailItem alt="Aria-labelled" aria-label="This is a Label." src="https://dummyimage.com/64/e048e0/0011ff">Text 2</ThumbnailItem>
+			<ThumbnailItem alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled src="https://dummyimage.com/64/e048e0/0011ff">Text 3</ThumbnailItem>
 		</Section>
 	</>
 );

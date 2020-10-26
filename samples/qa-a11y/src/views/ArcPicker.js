@@ -15,10 +15,10 @@ const ArcPickerView = () => (
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<ArcPicker alt="Aria-labelled" aria-label="This is a Label 4.">{[1, 2, 3, 4, 5]}</ArcPicker>
-			<ArcPicker alt="Aria-labelled with slotCenter" aria-label="This is a Label 5." slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</ArcPicker>
-			<ArcPicker alt="Aria-labelled and Disabled" aria-label="This is a Label 6." disabled>{[1, 2, 3, 4, 5]}</ArcPicker>
-			<ArcPicker alt="Aria-labelled and Disabled with slotCenter" aria-label="This is a Label 7." disabled slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</ArcPicker>
+			<ArcPicker alt="Aria-labelled" aria-label="This is a Label.">{[1, 2, 3, 4, 5]}</ArcPicker>
+			<ArcPicker alt="Aria-labelled with slotCenter" aria-label="This is a Label." slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</ArcPicker>
+			<ArcPicker alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled>{[1, 2, 3, 4, 5]}</ArcPicker>
+			<ArcPicker alt="Aria-labelled and Disabled with slotCenter" aria-label="This is a Label." disabled slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</ArcPicker>
 		</Section>
 	</>
 );

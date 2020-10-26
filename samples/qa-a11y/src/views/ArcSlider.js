@@ -15,10 +15,10 @@ const ArcSliderView = () => (
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<ArcSlider alt="Aria-labelled" aria-label="This is a Label 4." />
-			<ArcSlider alt="Aria-labelled with slotCenter" aria-label="This is a Label 5." slotCenter="SlotCenter" />
-			<ArcSlider alt="Aria-labelled and Disabled" aria-label="This is a Label 6." disabled />
-			<ArcSlider alt="Aria-labelled and Disabled with slotCenter" aria-label="This is a Label 7." disabled slotCenter="SlotCenter" />
+			<ArcSlider alt="Aria-labelled" aria-label="This is a Label." />
+			<ArcSlider alt="Aria-labelled with slotCenter" aria-label="This is a Label." slotCenter="SlotCenter" />
+			<ArcSlider alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled />
+			<ArcSlider alt="Aria-labelled and Disabled with slotCenter" aria-label="This is a Label." disabled slotCenter="SlotCenter" />
 		</Section>
 	</>
 );

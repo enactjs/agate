@@ -13,8 +13,8 @@ const HeadingView = () => (
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<Heading alt="Aria-labelled" aria-label="This is a Label 0." size="large" showLine>Text 0</Heading>
-			<Heading alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled size="large" showLine>Text 1</Heading>
+			<Heading alt="Aria-labelled" aria-label="This is a Label." size="large" showLine>Text 2</Heading>
+			<Heading alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled size="large" showLine>Text 3</Heading>
 		</Section>
 	</>
 );

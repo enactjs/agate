@@ -19,8 +19,8 @@ const TabGroupView = () => (
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<TabGroup alt="Aria-labelled" aria-label="This is a Label 0." tabPosition="before" tabs={tabs} />
-			<TabGroup alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled tabPosition="before" tabs={tabs} />
+			<TabGroup alt="Aria-labelled" aria-label="This is a Label." tabPosition="before" tabs={tabs} />
+			<TabGroup alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled tabPosition="before" tabs={tabs} />
 		</Section>
 	</>
 );

@@ -13,8 +13,8 @@ const LabeledIconButtonView = () => (
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<LabeledIconButton alt="Aria-labelled" aria-label="This is a Label 0." icon="star">Text 2</LabeledIconButton>
-			<LabeledIconButton alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled icon="star">Text 3</LabeledIconButton>
+			<LabeledIconButton alt="Aria-labelled" aria-label="This is a Label." icon="star">Text 2</LabeledIconButton>
+			<LabeledIconButton alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled icon="star">Text 3</LabeledIconButton>
 		</Section>
 	</>
 );

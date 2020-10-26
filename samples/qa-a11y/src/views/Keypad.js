@@ -13,8 +13,8 @@ const KeypadView = () => (
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<Keypad alt="Aria-labelled" aria-label="This is a Label 0." />
-			<Keypad alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled />
+			<Keypad alt="Aria-labelled" aria-label="This is a Label." />
+			<Keypad alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled />
 		</Section>
 	</>
 );

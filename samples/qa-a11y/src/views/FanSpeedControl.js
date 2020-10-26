@@ -13,8 +13,8 @@ const FanSpeedControlView = () => (
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
-			<FanSpeedControl alt="Aria-labelled" aria-label="This is a Label 0." icon="fan" max={5} min={1} />
-			<FanSpeedControl alt="Aria-labelled and Disabled" aria-label="This is a Label 1." disabled icon="fan" max={5} min={1} />
+			<FanSpeedControl alt="Aria-labelled" aria-label="This is a Label." icon="fan" max={5} min={1} />
+			<FanSpeedControl alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled icon="fan" max={5} min={1} />
 		</Section>
 	</>
 );
