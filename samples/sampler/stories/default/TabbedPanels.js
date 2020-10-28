@@ -29,6 +29,7 @@ const I18nTabbedPanelsBase = ({rtl}) => {
 	const onAfterTabs = () => {
 		setIndex(Math.min(panelIndex + 1, 2));
 	};
+	const orientation = select('orientation', ['vertical', 'horizontal'], Config, 'vertical');
 
 	return (
 		<div style={{paddingBottom: '56.25%'}}>
@@ -38,7 +39,7 @@ const I18nTabbedPanelsBase = ({rtl}) => {
 				index={panelIndex}
 				noCloseButton={boolean('noCloseButton', Config)}
 				onSelect={onSelect} // eslint-disable-line react/jsx-no-bind
-				orientation={select('orientation', ['vertical', 'horizontal'], Config, 'vertical')}
+				orientation={orientation}
 				tabPosition={select('tabPosition', ['before', 'after'], Config, 'before')}
 				tabs={[
 					{title: 'Button', icon: 'netbook'},
@@ -49,7 +50,7 @@ const I18nTabbedPanelsBase = ({rtl}) => {
 				<beforeTabs>
 					<Button
 						aria-label={$L('Previous Tab')}
-						icon={rtl ? 'arrowlargeright' : 'arrowlargeleft'}
+						icon={orientation === 'vertical' ? (rtl && 'arrowlargeright' || 'arrowlargeleft') : 'arrowlargeup'}
 						onClick={onBeforeTabs} // eslint-disable-line react/jsx-no-bind
 						size="small"
 						type="grid"
@@ -58,7 +59,7 @@ const I18nTabbedPanelsBase = ({rtl}) => {
 				<afterTabs>
 					<Button
 						aria-label={$L('Next Tab')}
-						icon={rtl ? 'arrowlargeleft' : 'arrowlargeright'}
+						icon={orientation === 'vertical' ? (rtl && 'arrowlargeleft' || 'arrowlargeright') : 'arrowlargedown'}
 						onClick={onAfterTabs} // eslint-disable-line react/jsx-no-bind
 						size="small"
 						type="grid"
