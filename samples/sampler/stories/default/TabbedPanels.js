@@ -2,6 +2,7 @@ import {action} from '@enact/storybook-utils/addons/actions';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
+import PropTypes from 'prop-types';
 import {storiesOf} from '@storybook/react';
 
 import Button from '@enact/agate/Button';
@@ -16,7 +17,7 @@ import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase);
 // `paddingBottom: '56.25%'` is a trick to impose 16:9 aspect ratio on the component, since padding percentage is based on the width, not the height.
 
-const TabbpedPanelsBase = ({rtl}) => {
+const I18nTabbpedPanelsBase = ({rtl}) => {
 	const [panelIndex, setIndex] = React.useState(Config.defaultProps.index || 0);
 	const onSelect = (e) => {
 		setIndex(e.index);
@@ -48,7 +49,7 @@ const TabbpedPanelsBase = ({rtl}) => {
 				<beforeTabs>
 					<Button
 						aria-label={$L('Previous Tab')}
-						icon={rtl ? "arrowlargeright" : "arrowlargeleft"}
+						icon={rtl ? 'arrowlargeright' : 'arrowlargeleft'}
 						onClick={onBeforeTabs} // eslint-disable-line react/jsx-no-bind
 						size="small"
 						type="grid"
@@ -57,7 +58,7 @@ const TabbpedPanelsBase = ({rtl}) => {
 				<afterTabs>
 					<Button
 						aria-label={$L('Next Tab')}
-						icon={rtl ? "arrowlargeleft" : "arrowlargeright"}
+						icon={rtl ? 'arrowlargeleft' : 'arrowlargeright'}
 						onClick={onAfterTabs} // eslint-disable-line react/jsx-no-bind
 						size="small"
 						type="grid"
@@ -87,13 +88,17 @@ const TabbpedPanelsBase = ({rtl}) => {
 	);
 };
 
-const TabbpedPanels = I18nContextDecorator({rtlProp: 'rtl'}, TabbpedPanelsBase);
+I18nTabbpedPanelsBase.propTypes = {
+	rtl: PropTypes.bool
+};
+
+const I18nTabbpedPanels = I18nContextDecorator({rtlProp: 'rtl'}, I18nTabbpedPanelsBase);
 
 storiesOf('Agate', module)
-.add(
-	'TabbedPanels',
+	.add(
+		'TabbedPanels',
 		() => {
-			return <TabbpedPanels />
+			return <I18nTabbpedPanels />;
 		},
 		{
 			text: 'The basic TabbedPanels'
