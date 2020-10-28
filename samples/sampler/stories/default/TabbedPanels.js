@@ -17,7 +17,7 @@ import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase);
 // `paddingBottom: '56.25%'` is a trick to impose 16:9 aspect ratio on the component, since padding percentage is based on the width, not the height.
 
-const I18nTabbpedPanelsBase = ({rtl}) => {
+const I18nTabbedPanelsBase = ({rtl}) => {
 	const [panelIndex, setIndex] = React.useState(Config.defaultProps.index || 0);
 	const onSelect = (e) => {
 		setIndex(e.index);
@@ -88,17 +88,17 @@ const I18nTabbpedPanelsBase = ({rtl}) => {
 	);
 };
 
-I18nTabbpedPanelsBase.propTypes = {
+I18nTabbedPanelsBase.propTypes = {
 	rtl: PropTypes.bool
 };
 
-const I18nTabbpedPanels = I18nContextDecorator({rtlProp: 'rtl'}, I18nTabbpedPanelsBase);
+const I18nTabbedPanels = I18nContextDecorator({rtlProp: 'rtl'}, I18nTabbedPanelsBase);
 
 storiesOf('Agate', module)
 	.add(
 		'TabbedPanels',
 		() => {
-			return <I18nTabbpedPanels />;
+			return <I18nTabbedPanels />;
 		},
 		{
 			text: 'The basic TabbedPanels'
