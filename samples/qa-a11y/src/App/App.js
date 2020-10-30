@@ -147,7 +147,7 @@ class AppBase extends React.Component {
 					data-menu={indexInViews}
 					key={indexInViews}
 					onClick={this.handleChangeView(indexInViews)}
-					slotBefore={('00' + indexInViews).slice(-2)}
+					slotBefore={<div className={appCss.slotBefore}>{('00' + indexInViews).slice(-2)}</div>}
 				>
 					{view.title}
 				</Item>
