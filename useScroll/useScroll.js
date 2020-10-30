@@ -25,7 +25,7 @@ import {SharedState} from '../Panels/SharedStateDecorator';
 import {useThemeScrollContentHandle} from './useThemeScrollContentHandle';
 import {
 	useEventFocus, useEventKey, useEventMonitor, useEventMouse,
-	useEventTouch, useEventVoice, useEventWheel
+	useEventTouch, useEventWheel
 } from './useEvent';
 import useScrollbar from './useScrollbar';
 import {useSpotlightConfig, useSpotlightRestore} from './useSpotlight';
@@ -76,7 +76,6 @@ const useThemeScroll = (props, instances) => {
 	const {
 		alertScrollbarTrack,
 		isScrollButtonFocused,
-		onScrollbarButtonClick,
 		scrollAndFocusScrollbarButton,
 		scrollbarProps
 	} = useScrollbar(props, instances);
@@ -96,12 +95,6 @@ const useThemeScroll = (props, instances) => {
 	const {handleDragEnd, handleDragStart, handleFlick, handleMouseDown} = useEventMouse({}, instances, {isScrollButtonFocused});
 
 	const {handleTouchStart} = useEventTouch({}, instances, {isScrollButtonFocused});
-
-	const {
-		addVoiceEventListener,
-		removeVoiceEventListener,
-		stopVoice
-	} = useEventVoice(props, instances, {onScrollbarButtonClick});
 
 	// Functions
 
@@ -135,7 +128,6 @@ const useThemeScroll = (props, instances) => {
 		mutableRef.current.lastScrollPositionOnFocus = null;
 		mutableRef.current.isFlicked = false;
 		mutableRef.current.isWheeling = false;
-		stopVoice();
 	}
 
 	function scrollStopOnScroll () {
@@ -214,19 +206,11 @@ const useThemeScroll = (props, instances) => {
 	// FIXME setting event handlers directly to work on the V8 snapshot.
 	function addEventListeners (ref) { // `ref` is always `scrollContentRef`.
 		utilEvent('focusin').addEventListener(ref, handleFocus);
-
-		if (ref.current) {
-			addVoiceEventListener(ref);
-		}
 	}
 
 	// FIXME setting event handlers directly to work on the V8 snapshot.
 	function removeEventListeners (ref) { // `ref` is always `scrollContentRef`.
 		utilEvent('focusin').removeEventListener(ref, handleFocus);
-
-		if (ref.current) {
-			removeVoiceEventListener(ref);
-		}
 	}
 
 	// Return

@@ -7,12 +7,14 @@
  * @module agate/DatePicker
  * @exports DatePicker
  * @exports DatePickerBase
+ * @exports DatePickerDecorator
  * @exports dateToLocaleString
  */
 
 import Pure from '@enact/ui/internal/Pure';
 import DateFactory from 'ilib/lib/DateFactory';
 import DateFmt from 'ilib/lib/DateFmt';
+import compose from 'ramda/src/compose';
 
 import {DateTimeDecorator} from '../internal/DateTime';
 import Skinnable from '../Skinnable';
@@ -50,17 +52,17 @@ const dateTimeConfig = {
 	},
 	defaultOrder: ['d', 'm', 'y'],
 	handlers: {
-		onChangeDate: (ev, value) => {
+		onDateChange: (ev, value) => {
 			value.day = ev.value;
 			return value;
 		},
 
-		onChangeMonth: (ev, value) => {
+		onMonthChange: (ev, value) => {
 			value.month = ev.value;
 			return value;
 		},
 
-		onChangeYear: (ev, value) => {
+		onYearChange: (ev, value) => {
 			value.year = ev.value;
 			return value;
 		}
@@ -96,6 +98,20 @@ const dateTimeConfig = {
 };
 
 /**
+ * Applies Agate specific behaviors to [DatePickerBase]{@link agate/DatePicker.DatePickerBase} components.
+ *
+ * @hoc
+ * @memberof agate/DatePicker
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
+const DatePickerDecorator = compose(
+	Pure,
+	Skinnable,
+	DateTimeDecorator(dateTimeConfig)
+);
+
+/**
  * A date selection component, ready to use in Agate applications.
  *
  * `DatePicker` may be used to select the year, month, and day. It uses a standard `Date` object for
@@ -118,7 +134,7 @@ const dateTimeConfig = {
  * @class DatePicker
  * @memberof agate/DatePicker
  * @extends agate/DatePicker.DatePickerBase
- * @mixes ui/Changeable.Changeable
+ * @mixes agate/DatePicker.DatePickerDecorator
  * @omit day
  * @omit maxDays
  * @omit maxMonths
@@ -128,14 +144,7 @@ const dateTimeConfig = {
  * @ui
  * @public
  */
-const DatePicker = Pure(
-	Skinnable(
-		DateTimeDecorator(
-			dateTimeConfig,
-			DatePickerBase
-		)
-	)
-);
+const DatePicker = DatePickerDecorator(DatePickerBase);
 
 /**
  * The initial value used when `value` is not set.
@@ -175,5 +184,6 @@ export default DatePicker;
 export {
 	DatePicker,
 	DatePickerBase,
+	DatePickerDecorator,
 	dateToLocaleString
 };

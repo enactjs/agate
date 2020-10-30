@@ -172,7 +172,6 @@
 // ---------------------------------------
 @agate-datetimepicker-divider-height: inherit;
 @agate-datetimepicker-divider-width: inherit;
-@agate-datetimepicker-width: 699px;
 
 // Dropdown
 // ---------------------------------------
@@ -243,9 +242,9 @@
 @agate-heading-margin: 0 @agate-spotlight-outset (1.5 * @agate-spotlight-outset) @agate-spotlight-outset;
 @agate-heading-padding: 0;
 @agate-heading-spacing-title: 0;
-@agate-heading-spacing-medium: @agate-component-spacing;
-@agate-heading-spacing-small: inherit;
-@agate-heading-spacing-large: inherit;
+@agate-heading-spacing-small: @agate-component-spacing;
+@agate-heading-spacing-medium: (@agate-component-spacing + 6px);
+@agate-heading-spacing-large: (@agate-component-spacing + 12px);
 @agate-heading-text-transform: none;
 @agate-heading-showline-padding: 12px;
 @agate-heading-letter-spacing: normal;
@@ -335,8 +334,9 @@
 // ---------------------------------------
 @agate-imageitem-caption-height: 48px;
 @agate-imageitem-border-width: inherit;
-@agate-imageitem-caption-overlay-height: inherit;
-@agate-imageitem-caption-overlay-width: inherit;
+@agate-imageitem-caption-overlay-height: initial;
+@agate-imageitem-caption-overlay-max-height: 96px;
+@agate-imageitem-caption-overlay-min-height: 33px;
 @agate-imageitem-caption-overlay-padding: inherit;
 @agate-imageitem-caption-overlay-font-size: inherit;
 @agate-imageitem-caption-overlay-line-height: inherit;
@@ -349,11 +349,14 @@
 @agate-item-content-min-width:        60%;
 @agate-item-font-size:                30px;
 @agate-item-font-weight:              @agate-base-font-weight;
+@agate-item-haslabel-padding:         21px 0;
 @agate-item-height:                   60px;
 @agate-item-height-large:             72px;
 @agate-item-indent:                   36px;
 @agate-item-inline-content-max-width: 240px;
-@agate-item-label-font-size:          @agate-base-font-size;
+@agate-item-itemcontent-line-height:  inherit;
+@agate-item-label-font-size:          inherit;
+@agate-item-label-line-height:        inherit;
 @agate-item-label-max-width:          40%;
 @agate-item-label-padding:            10px;
 @agate-item-line-height:              @agate-item-height - (@agate-item-vertical-padding * 2);
@@ -453,7 +456,7 @@
 @agate-picker-active-font-size: 36px;
 @agate-picker-active-font-weight: @agate-base-font-weight;
 @agate-picker-margin: 0;
-@agate-picker-padding: @agate-component-spacing;
+@agate-picker-padding: 6px;
 
 // Popup
 // ---------------------------------------
@@ -653,3 +656,10 @@
 @agate-tooltip-label-height: 45px;
 @agate-tooltip-label-font-weight: @agate-button-font-weight;
 @agate-tooltip-padding: 3px 18px;
+
+// WindDirectionControl
+// ---------------------------------------
+@agate-winddirectioncontrol-icon-font-size: @agate-winddirectioncontrol-icon-height;
+@agate-winddirectioncontrol-icon-height: 180px;
+@agate-winddirectioncontrol-icon-line-height: inherit;
+@agate-winddirectioncontrol-icon-width: inherit;

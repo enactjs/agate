@@ -138,6 +138,7 @@ const PopupBase = kind({
  *
  * @hoc
  * @memberof agate/Popup
+ * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */

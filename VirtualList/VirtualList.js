@@ -234,7 +234,7 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	 *
 	 * @type {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
 	noScrollByWheel: PropTypes.bool,
 
@@ -663,7 +663,7 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	 *
 	 * @type {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
 	noScrollByWheel: PropTypes.bool,
 

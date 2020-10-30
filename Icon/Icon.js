@@ -9,6 +9,7 @@
  * @exports IconBase
  * @exports IconDecorator
  * @exports icons
+ * @exports iconsSilicon
  */
 
 import kind from '@enact/core/kind';

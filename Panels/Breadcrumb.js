@@ -18,8 +18,8 @@ const SpottableDiv = Spottable('div');
  *
  * @type {Number}
  * @default 105;
- * @private
  * @memberof agate/Panels
+ * @private
  */
 export const breadcrumbWidth = 105;
 
@@ -48,8 +48,8 @@ const BreadcrumbBase = kind({
 		/**
 		 * Called when the breadcrumb is clicked.
 		 *
-		 * @private
 		 * @type {Function}
+		 * @private
 		 */
 		onClick: PropTypes.func,
 

@@ -172,7 +172,7 @@ const TimePickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onChangeHour: PropTypes.func,
+		onHourChange: PropTypes.func,
 
 		/**
 		 * Called on changes in the `meridiem` component of the time.
@@ -180,7 +180,7 @@ const TimePickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onChangeMeridiem: PropTypes.func,
+		onMeridiemChange: PropTypes.func,
 
 		/**
 		 * Called on changes in the `minute` component of the time.
@@ -188,7 +188,7 @@ const TimePickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onChangeMinute: PropTypes.func,
+		onMinuteChange: PropTypes.func,
 
 		/**
 		 * Set content to RTL.
@@ -211,7 +211,7 @@ const TimePickerBase = kind({
 
 	computed: {
 		hasMeridiem: ({order}) => order.indexOf('a') >= 0,
-		meridiemPickerWidth: ({meridiem, meridiems}) => meridiems[meridiem].length * 2
+		meridiemPickerWidth: ({meridiem, meridiems}) => meridiems[meridiem].length * 1.5
 	},
 
 	render: ({
@@ -225,9 +225,9 @@ const TimePickerBase = kind({
 		meridiems,
 		minute,
 		minuteAriaLabel,
-		onChangeHour,
-		onChangeMeridiem,
-		onChangeMinute,
+		onHourChange,
+		onMeridiemChange,
+		onMinuteChange,
 		order,
 		...rest
 	}) => {
@@ -250,7 +250,7 @@ const TimePickerBase = kind({
 										className={css.hourPicker}
 										disabled={disabled}
 										hasMeridiem={hasMeridiem}
-										onChange={onChangeHour}
+										onChange={onHourChange}
 										value={hour}
 										width={2}
 									/>
@@ -266,7 +266,7 @@ const TimePickerBase = kind({
 									key="minute-picker"
 									max={59}
 									min={0}
-									onChange={onChangeMinute}
+									onChange={onMinuteChange}
 									value={minute}
 									width={2}
 								/>
@@ -279,7 +279,7 @@ const TimePickerBase = kind({
 									className={css.meridiemPicker}
 									disabled={disabled}
 									key="meridiem-picker"
-									onChange={onChangeMeridiem}
+									onChange={onMeridiemChange}
 									value={meridiem}
 									width={meridiemPickerWidth}
 								>
@@ -296,4 +296,6 @@ const TimePickerBase = kind({
 });
 
 export default TimePickerBase;
-export {TimePickerBase};
+export {
+	TimePickerBase
+};

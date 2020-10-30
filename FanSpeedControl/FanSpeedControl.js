@@ -29,6 +29,7 @@ import css from './FanSpeedControl.module.less';
  *
  * @class FanSpeedControlBase
  * @memberof agate/FanSpeedControl
+ * @extends agate/ArcPicker.ArcPicker
  * @ui
  * @public
  */
@@ -123,7 +124,7 @@ const FanSpeedControlBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [FanSpeedControl]{@link agate/FanSpeedControl.FanSpeedControlBase} components.
+ * Applies Agate specific behaviors to [FanSpeedControlBase]{@link agate/FanSpeedControl.FanSpeedControlBase} components.
  *
  * @hoc
  * @memberof agate/FanSpeedControl

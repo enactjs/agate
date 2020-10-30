@@ -9,7 +9,6 @@
  * @module agate/Picker
  * @exports Picker
  * @exports PickerBase
- * @exports PickerDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -154,7 +153,6 @@ const PickerBase = kind({
  * @class Picker
  * @memberof agate/Picker
  * @extends agate/Picker.PickerBase
- * @mixes agate/internal/Picker.PickerDecorator
  * @ui
  * @public
  */

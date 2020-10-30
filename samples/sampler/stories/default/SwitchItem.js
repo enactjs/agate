@@ -19,8 +19,8 @@ storiesOf('Agate', module)
 				<SwitchItem
 					disabled={boolean('disabled', Config)}
 					icon={select('icon', ['', ...iconNames], Config, 'music')}
-					offText={text('offText', Config)}
-					onText={text('onText', Config)}
+					switchOffLabel={text('switchOffLabel', Config)}
+					switchOnLabel={text('switchOnLabel', Config)}
 				>
 					{text('children', Config, 'Sound')}
 				</SwitchItem>

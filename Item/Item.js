@@ -135,6 +135,7 @@ const ItemBase = kind({
  *
  * @hoc
  * @memberof agate/Item
+ * @mixes ui/Slottable.Slottable
  * @mixes ui/Item.ItemDecorator
  * @mixes spotlight/Spottable.Spottable
  * @mixes ui/Marquee.MarqueeController

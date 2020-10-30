@@ -1,3 +1,9 @@
+/**
+ * @module agate/ProviderDecorator
+ * @exports ProviderDecorator
+ * @private
+ */
+
 import freeze from 'deep-freeze';
 import {on, off} from '@enact/core/dispatcher';
 import hoc from '@enact/core/hoc';

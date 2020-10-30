@@ -11,9 +11,9 @@
  */
 
 import kind from '@enact/core/kind';
+import Slottable from '@enact/ui/Slottable';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Slottable from '@enact/ui/Slottable';
 
 import Image from '../Image';
 import Item from '../Item';
@@ -124,17 +124,17 @@ const ThumbnailItemBase = kind({
 	}
 });
 
-const ThumbnailItem = Slottable({slots: ['img', 'slotBefore']}, ThumbnailItemBase);
-
 /**
  * A stateless, unfocusable item that can display a thumbnail.
  *
  * @class ThumbnailItem
  * @memberof agate/ThumbnailItem
  * @extends agate/ThumbnailItem.ThumbnailItemBase
+ * @mixes ui/Slottable.Slottable
  * @ui
  * @public
  */
+const ThumbnailItem = Slottable({slots: ['img', 'slotBefore']}, ThumbnailItemBase);
 
 export default ThumbnailItem;
 export {

@@ -81,7 +81,6 @@ const useScrollbar = (props, instances) => {
 	return {
 		alertScrollbarTrack,
 		isScrollButtonFocused,
-		onScrollbarButtonClick,
 		scrollAndFocusScrollbarButton,
 		scrollbarProps
 	};
