@@ -22,16 +22,10 @@ const MediaPlayerView = () => (
 			<MediaPlayer alt="Normal">
 				{source}
 			</MediaPlayer>
-			<MediaPlayer alt="Disabled" disabled>
-				{source}
-			</MediaPlayer>
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
 			<MediaPlayer alt="Aria-labelled" aria-label="This is a Label.">
-				{source}
-			</MediaPlayer>
-			<MediaPlayer alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled>
 				{source}
 			</MediaPlayer>
 		</Section>

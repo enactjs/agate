@@ -16,8 +16,8 @@ const PopupView = () => {
 				<Button alt="With noAnimation" onClick={handleOpen(1, true)}>Open 1</Button>
 				<Button alt="With 'clip' type" onClick={handleOpen(2, true)}>Open 2</Button>
 				<Button alt="With 'fade' type" onClick={handleOpen(3, true)}>Open 3</Button>
-				<Button alt="With 'slide' type" onClick={handleOpen(3, true)}>Open 4</Button>
-				<Button alt="Disabled" onClick={handleOpen(3, true)}>Open 5</Button>
+				<Button alt="With 'slide' type" onClick={handleOpen(4, true)}>Open 4</Button>
+				<Button alt="Disabled" onClick={handleOpen(5, true)}>Open 5</Button>
 			</Section>
 
 			<Section title="Aria-labelled">
