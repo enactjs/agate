@@ -3,8 +3,6 @@ import React from 'react';
 
 import Section from '../components/Section';
 
-import appCss from '../App/App.module.less';
-
 const audioFiles = [
 	'https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3',
 	'https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3',
@@ -20,12 +18,6 @@ const MediaPlayerView = () => (
 	<>
 		<Section title="Default">
 			<MediaPlayer alt="Normal">
-				{source}
-			</MediaPlayer>
-		</Section>
-
-		<Section className={appCss.marginTop} title="Aria-labelled">
-			<MediaPlayer alt="Aria-labelled" aria-label="This is a Label.">
 				{source}
 			</MediaPlayer>
 		</Section>

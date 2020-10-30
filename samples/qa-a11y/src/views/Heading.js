@@ -1,22 +1,42 @@
+import Button from '@enact/agate/Button';
 import Heading from '@enact/agate/Heading';
+import Popup from '@enact/agate/Popup';
 import React from 'react';
 
 import Section from '../components/Section';
+import useBoolArray from '../components/useBoolArray';
 
 import appCss from '../App/App.module.less';
 
-const HeadingView = () => (
-	<>
-		<Section title="Default">
-			<Heading alt="Normal" size="large" showLine>Text 0</Heading>
-			<Heading alt="Disabled" disabled size="large" showLine>Text 1</Heading>
-		</Section>
+const HeadingView = () => {
+	const [open, handleOpen] = useBoolArray(2);
 
-		<Section className={appCss.marginTop} title="Aria-labelled">
-			<Heading alt="Aria-labelled" aria-label="This is a Label." size="large" showLine>Text 2</Heading>
-			<Heading alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled size="large" showLine>Text 3</Heading>
-		</Section>
-	</>
-);
+	return (
+		<>
+			<Section title="Default">
+				<Button alt="Normal" onClick={handleOpen(0, true)}>Open 0</Button>
+			</Section>
+			<Section className={appCss.marginTop} title="Aria-labelled">
+				<Button alt="Aria-labelled" onClick={handleOpen(1, true)}>Open 1</Button>
+			</Section>
+
+			<Popup
+				onClose={handleOpen(0, false)}
+				open={open[0]}
+			>
+				<Heading size="large" showLine>Text</Heading>
+				<Button onClick={handleOpen(0, false)}>Close</Button>
+			</Popup>
+
+			<Popup
+				onClose={handleOpen(1, false)}
+				open={open[1]}
+			>
+				<Heading alt="Aria-labelled" aria-label="This is a Label." size="large" showLine>Text</Heading>
+				<Button onClick={handleOpen(1, false)}>Close</Button>
+			</Popup>
+		</>
+	);
+};
 
 export default HeadingView;

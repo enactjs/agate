@@ -7,7 +7,7 @@ import Section from '../components/Section';
 import useBoolArray from '../components/useBoolArray';
 
 const PopupView = () => {
-	const [open, handleOpen] = useBoolArray(5);
+	const [open, handleOpen] = useBoolArray(12);
 
 	return (
 		<>
