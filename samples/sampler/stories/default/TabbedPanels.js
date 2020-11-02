@@ -30,6 +30,8 @@ storiesOf('Agate', module)
 			const onAfterTabs = () => {
 				setIndex(Math.min(panelIndex + 1, 2));
 			};
+			const orientation = select('orientation', ['vertical', 'horizontal'], Config, 'vertical');
+
 			return (
 				<div style={{paddingBottom: '56.25%'}}>
 					<TabbedPanels
@@ -38,7 +40,7 @@ storiesOf('Agate', module)
 						index={panelIndex}
 						noCloseButton={boolean('noCloseButton', Config)}
 						onSelect={onSelect} // eslint-disable-line react/jsx-no-bind
-						orientation={select('orientation', ['vertical', 'horizontal'], Config, 'vertical')}
+						orientation={orientation}
 						tabPosition={select('tabPosition', ['before', 'after'], Config, 'before')}
 						tabs={[
 							{title: 'Button', icon: 'netbook'},
@@ -49,7 +51,7 @@ storiesOf('Agate', module)
 						<beforeTabs>
 							<Button
 								aria-label={$L('Previous Tab')}
-								icon="arrowlargeleft"
+								icon={orientation  === 'vertical' ? 'arrowlargeleft' : 'arrowlargeup'}
 								onClick={onBeforeTabs} // eslint-disable-line react/jsx-no-bind
 								size="small"
 								type="grid"
@@ -58,7 +60,7 @@ storiesOf('Agate', module)
 						<afterTabs>
 							<Button
 								aria-label={$L('Next Tab')}
-								icon="arrowlargeright"
+								icon={orientation  === 'vertical' ? 'arrowlargeright' : 'arrowlargedown'}
 								onClick={onAfterTabs} // eslint-disable-line react/jsx-no-bind
 								size="small"
 								type="grid"
