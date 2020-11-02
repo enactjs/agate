@@ -342,44 +342,49 @@ const PickerBase = kind({
 		const isPenultimate = value >= max - step;
 		const decrementAriaLabel = `${currentValueText} ${decAriaLabel}`;
 		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
+		const transitionDuration = 150;
 
 		const decrementValue = () => {
+			const restrictedDecrementValue = clamp(min, max, value - step);
 			if (isFirst) {
 				return '';
 			} else if (Array.isArray(values)) {
 				return values;
 			} else {
-				return (<PickerItem key={clamp(min, max, value - step)} style={{direction: 'ltr'}}>{clamp(min, max, value - step)}</PickerItem>);
+				return (<PickerItem key={restrictedDecrementValue} style={{direction: 'ltr'}}>{restrictedDecrementValue}</PickerItem>);
 			}
 		};
 
 		const incrementValue = () => {
+			const restrictedIncrementValue = clamp(min, max, value + step);
 			if (isLast) {
 				return '';
 			} else if (Array.isArray(values)) {
 				return values;
 			} else {
-				return (<PickerItem key={clamp(min, max, value + step)} style={{direction: 'ltr'}}>{clamp(min, max, value + step)}</PickerItem>);
+				return (<PickerItem key={restrictedIncrementValue} style={{direction: 'ltr'}}>{restrictedIncrementValue}</PickerItem>);
 			}
 		};
 
 		const secondaryDecrementValue = () => {
+			const restrictedSecondaryDecrementValue = clamp(min, max, value - (2 * step));
 			if (isSecond) {
 				return '';
 			} else if (Array.isArray(values)) {
 				return values;
 			} else {
-				return (<PickerItem key={clamp(min, max, value - (2 * step))} style={{direction: 'ltr'}}>{clamp(min, max, value - (2 * step))}</PickerItem>);
+				return (<PickerItem key={restrictedSecondaryDecrementValue} style={{direction: 'ltr'}}>{restrictedSecondaryDecrementValue}</PickerItem>);
 			}
 		};
 
 		const secondaryIncrementValue = () => {
+			const restrictedSecondaryIncrementValue = clamp(min, max, value + (2 * step));
 			if (isPenultimate) {
 				return '';
 			} else if (Array.isArray(values)) {
 				return values;
 			} else {
-				return (<PickerItem key={clamp(min, max, value + (2 * step))} style={{direction: 'ltr'}}>{clamp(min, max, value + (2 * step))}</PickerItem>);
+				return (<PickerItem key={restrictedSecondaryIncrementValue} style={{direction: 'ltr'}}>{restrictedSecondaryIncrementValue}</PickerItem>);
 			}
 		};
 
@@ -405,14 +410,14 @@ const PickerBase = kind({
 						className={css.secondaryItemDecrement}
 						disabled={isSecond}
 						onClick={() => {
-							handleDecrement(); setTimeout(() => handleDecrement(), 150);
+							handleDecrement(); setTimeout(() => handleDecrement(), transitionDuration);
 						}}
 					>
 						<ViewManager
 							aria-hidden
 							arranger={arranger}
 							className={css.viewManager}
-							duration={150}
+							duration={transitionDuration}
 							index={Array.isArray(values) ? index - 2 : 0}
 							noAnimation={noAnimation || disabled}
 							reverseTransition={reverseTransition}
@@ -433,7 +438,7 @@ const PickerBase = kind({
 						aria-hidden
 						arranger={arranger}
 						className={css.viewManager}
-						duration={150}
+						duration={transitionDuration}
 						index={Array.isArray(values) ? index - 1 : 0}
 						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
@@ -452,7 +457,7 @@ const PickerBase = kind({
 						aria-hidden
 						arranger={arranger}
 						className={css.viewManager}
-						duration={150}
+						duration={transitionDuration}
 						index={Array.isArray(values) ? index : 0}
 						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
@@ -472,7 +477,7 @@ const PickerBase = kind({
 						aria-hidden
 						arranger={arranger}
 						className={css.viewManager}
-						duration={150}
+						duration={transitionDuration}
 						index={Array.isArray(values) ? index + 1 : 0}
 						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
@@ -488,14 +493,14 @@ const PickerBase = kind({
 						className={css.secondaryItemIncrement}
 						disabled={isPenultimate}
 						onClick={() => {
-							handleIncrement(); setTimeout(() => handleIncrement(), 150);
+							handleIncrement(); setTimeout(() => handleIncrement(), transitionDuration);
 						}}
 					>
 						<ViewManager
 							aria-hidden
 							arranger={arranger}
 							className={css.viewManager}
-							duration={150}
+							duration={transitionDuration}
 							index={Array.isArray(values) ? index + 2 : 0}
 							noAnimation={noAnimation || disabled}
 							reverseTransition={reverseTransition}
