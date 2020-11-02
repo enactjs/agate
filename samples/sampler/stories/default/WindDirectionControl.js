@@ -11,9 +11,7 @@ storiesOf('Agate', module)
 		'WindDirectionControl',
 		() => {
 			return (
-				<div>
-					<WindDirectionControl onChange={action('onChange')} />
-				</div>
+				<WindDirectionControl onChange={action('onChange')} />
 			);
 		},
 		{
