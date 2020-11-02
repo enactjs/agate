@@ -9,16 +9,16 @@ const ArcSliderView = () => (
 	<>
 		<Section title="Default">
 			<ArcSlider alt="Normal" />
-			<ArcSlider alt="With slotCenter" slotCenter="Text" />
-			<ArcSlider alt="Disabled" disabled />
-			<ArcSlider alt="Disabled with slotCenter" disabled slotCenter="Text" />
+			<ArcSlider alt="With slotCenter" className={appCss.marginTop} slotCenter="Text" />
+			<ArcSlider alt="Disabled" className={appCss.marginTop} disabled />
+			<ArcSlider alt="Disabled with slotCenter" className={appCss.marginTop} disabled slotCenter="Text" />
 		</Section>
 
 		<Section className={appCss.marginTop} title="Aria-labelled">
 			<ArcSlider alt="Aria-labelled" aria-label="This is a Label." />
-			<ArcSlider alt="Aria-labelled with slotCenter" aria-label="This is a Label." slotCenter="Text" />
-			<ArcSlider alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled />
-			<ArcSlider alt="Aria-labelled and Disabled with slotCenter" aria-label="This is a Label." disabled slotCenter="Text" />
+			<ArcSlider alt="Aria-labelled with slotCenter" className={appCss.marginTop} aria-label="This is a Label." slotCenter="Text" />
+			<ArcSlider alt="Aria-labelled and Disabled" className={appCss.marginTop} aria-label="This is a Label." disabled />
+			<ArcSlider alt="Aria-labelled and Disabled with slotCenter" className={appCss.marginTop} aria-label="This is a Label." disabled slotCenter="Text" />
 		</Section>
 	</>
 );

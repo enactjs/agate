@@ -1,7 +1,6 @@
+import Heading from '@enact/agate/Heading';
 import MediaPlayer from '@enact/agate/MediaPlayer';
 import React from 'react';
-
-import Section from '../components/Section';
 
 const audioFiles = [
 	'https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3',
@@ -16,11 +15,10 @@ const source = audioFiles.map((audioFile, index) => (<source key={index} src={au
 
 const MediaPlayerView = () => (
 	<>
-		<Section title="Default">
-			<MediaPlayer alt="Normal">
-				{source}
-			</MediaPlayer>
-		</Section>
+		<Heading showLine>Default</Heading>
+		<MediaPlayer alt="Normal">
+			{source}
+		</MediaPlayer>
 	</>
 );
 

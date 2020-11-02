@@ -5,6 +5,8 @@ import CheckboxItem from '@enact/agate/CheckboxItem';
 import {Panel, TabbedPanels} from '@enact/agate/Panels';
 import React from 'react';
 
+import appCss from '../App/App.module.less';
+
 const tabTitles = [
 	{title: 'A'},
 	{title: 'B'},
@@ -23,6 +25,7 @@ const TabbedPanelsView = () => {
 
 	return (
 		<TabbedPanels
+			className={appCss.tabbedPanels}
 			noAnimation={noAnimation}
 			noCloseButton={noCloseButton}
 			orientation={vertical ? 'vertical' : 'horizontal'}
