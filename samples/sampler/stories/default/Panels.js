@@ -6,6 +6,7 @@ import {storiesOf} from '@storybook/react';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean} from '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
+import ri from '@enact/ui/resolution';
 
 import Button from '@enact/agate/Button';
 import Header from '@enact/agate/Header';
@@ -25,7 +26,7 @@ const FirstPanel = kind({
 
 	render: ({onClick, ...rest}) => (
 		<Panel {...rest}>
-			<Header title="First Panel" />
+			<Header style={{marginBottom: ri.scaleToRem(18)}} title="First Panel" />
 			<Button onClick={onClick}>Click me</Button>
 		</Panel>
 	)
@@ -36,7 +37,7 @@ const SecondPanel = kind({
 
 	render: (props) => (
 		<Panel {...props}>
-			<Header title="Second Panel" />
+			<Header style={{marginBottom: ri.scaleToRem(18)}} title="Second Panel" />
 			<Button>Click me</Button>
 		</Panel>
 	)

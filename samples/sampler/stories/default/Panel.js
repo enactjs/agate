@@ -1,5 +1,6 @@
 import {text} from '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
+import ri from '@enact/ui/resolution';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -16,6 +17,7 @@ storiesOf('Agate', module)
 		() => (
 			<Panel>
 				<Header
+					style={{marginBottom: ri.scaleToRem(18)}}
 					subtitle={text('subtitle', HeaderConfig, 'Header Subtitle')}
 					title={text('title', HeaderConfig, 'Header Title')}
 				/>
