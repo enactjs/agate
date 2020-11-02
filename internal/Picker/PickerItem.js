@@ -9,8 +9,9 @@ import css from './Picker.module.less';
  *
  * @class PickerItemBase
  * @memberof agate/PickerItem
+ * @extends ui/Marquee.Marquee
  * @ui
- * @public
+ * @private
  */
 const PickerItemBase = kind({
 	name: 'PickerItem',
@@ -26,6 +27,15 @@ const PickerItemBase = kind({
 	)
 });
 
+/**
+ * An Agate styled PickerItem with built-in support for marqueed text.
+ *
+ * @class PickerItem
+ * @memberof agate/PickerItem
+ * @extends agate/PickerItem.PickerItemBase
+ * @ui
+ * @private
+ */
 export default PickerItemBase;
 export {
 	PickerItemBase as PickerItem,
