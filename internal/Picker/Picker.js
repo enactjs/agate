@@ -165,6 +165,50 @@ const PickerBase = kind({
 		onChange: PropTypes.func,
 
 		/**
+		 * A function to run when the picker is removed while retaining focus.
+		 *
+		 * @type {Function}
+		 * @private
+		 */
+		onSpotlightDisappear: PropTypes.func,
+
+		/**
+		 * The handler to run prior to focus leaving the picker when the 5-way down key is pressed.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightDown: PropTypes.func,
+
+		/**
+		 * The handler to run prior to focus leaving the picker when the 5-way left key is pressed.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightLeft: PropTypes.func,
+
+		/**
+		 * The handler to run prior to focus leaving the picker when the 5-way right key is pressed.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightRight: PropTypes.func,
+
+		/**
+		 * The handler to run prior to focus leaving the picker when the 5-way up key is pressed.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightUp: PropTypes.func,
+
+		/**
 		 * Orientation of the picker.
 		 *
 		 * Controls whether the buttons are arranged horizontally or vertically around the value.
@@ -184,6 +228,15 @@ const PickerBase = kind({
 		 * @public
 		 */
 		skin: PropTypes.string,
+
+		/**
+		 * When `true`, the component cannot be navigated using spotlight.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		spotlightDisabled: PropTypes.bool,
 
 		/**
 		 * Allow the picker to only increment or decrement by a given value.
@@ -227,6 +280,7 @@ const PickerBase = kind({
 	defaultProps: {
 		accessibilityHint: '',
 		orientation: 'vertical',
+		spotlightDisabled: false,
 		step: 1,
 		value: 0
 	},
@@ -296,7 +350,9 @@ const PickerBase = kind({
 			incrementAriaLabel: incAriaLabel,
 			min,
 			max,
+			onSpotlightDisappear,
 			skin,
+			spotlightDisabled,
 			step,
 			value,
 			valueId,
@@ -323,6 +379,10 @@ const PickerBase = kind({
 		delete rest.accessibilityHint;
 		delete rest['aria-valuetext'];
 		delete rest.orientation;
+		delete rest.onSpotlightDown;
+		delete rest.onSpotlightLeft;
+		delete rest.onSpotlightRight;
+		delete rest.onSpotlightUp;
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
@@ -334,6 +394,8 @@ const PickerBase = kind({
 						className={css.secondaryItemDecrement}
 						disabled={isSecond}
 						onClick={handleSecondaryDecrement}
+						onSpotlightDisappear={onSpotlightDisappear}
+						spotlightDisabled={spotlightDisabled}
 					>
 						<div className={css.label}>
 							{isSecond ? '' : secondaryDecrementValue}
@@ -347,6 +409,8 @@ const PickerBase = kind({
 					className={css.itemDecrement}
 					disabled={disabled || isFirst}
 					onClick={handleDecrement}
+					onSpotlightDisappear={onSpotlightDisappear}
+					spotlightDisabled={spotlightDisabled}
 				>
 					<div className={css.label}>
 						{isFirst ? '' : decrementValue}
@@ -370,6 +434,8 @@ const PickerBase = kind({
 					className={css.itemIncrement}
 					disabled={disabled || isLast}
 					onClick={handleIncrement}
+					onSpotlightDisappear={onSpotlightDisappear}
+					spotlightDisabled={spotlightDisabled}
 				>
 					<div className={css.label}>
 						{isLast ? '' : incrementValue}
@@ -383,6 +449,8 @@ const PickerBase = kind({
 						className={css.secondaryItemIncrement}
 						disabled={isPenultimate}
 						onClick={handleSecondaryIncrement}
+						onSpotlightDisappear={onSpotlightDisappear}
+						spotlightDisabled={spotlightDisabled}
 					>
 						<div className={css.label}>
 							{isPenultimate ? '' : secondaryIncrementValue}

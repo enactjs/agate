@@ -148,6 +148,33 @@ const DatePickerBase = kind({
 		onMonthChange: PropTypes.func,
 
 		/**
+		 * Called when the component is removed when it had focus.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightDisappear: PropTypes.func,
+
+		/**
+		 * Called prior to focus leaving the picker when the 5-way left key is pressed.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightLeft: PropTypes.func,
+
+		/**
+		 * Called prior to focus leaving the picker when the 5-way right key is pressed.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightRight: PropTypes.func,
+
+		/**
 		 * Called when the `year` component of the Date changes.
 		 *
 		 * @type {Function}
@@ -164,6 +191,15 @@ const DatePickerBase = kind({
 		rtl: PropTypes.bool,
 
 		/**
+		 * Disables 5-way spotlight from navigating into the component.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		spotlightDisabled: PropTypes.bool,
+
+		/**
 		 * The "aria-label" for the year picker.
 		 *
 		 * If not specified, the "aria-label" for the year picker will be
@@ -178,7 +214,8 @@ const DatePickerBase = kind({
 	defaultProps: {
 		maxYear: 2099,
 		minYear: 1900,
-		disabled: false
+		disabled: false,
+		spotlightDisabled: false
 	},
 
 	styles: {
@@ -200,7 +237,12 @@ const DatePickerBase = kind({
 		onDateChange,
 		onMonthChange,
 		onYearChange,
+		onSpotlightDisappear,
+		onSpotlightLeft,
+		onSpotlightRight,
 		order,
+		rtl,
+		spotlightDisabled,
 		year,
 		yearAriaLabel,
 		...rest
@@ -208,11 +250,15 @@ const DatePickerBase = kind({
 		const dayAccessibilityHint = $L('day');
 		const monthAccessibilityHint = $L('month');
 		const yearAccessibilityHint = $L('year');
-		delete rest.rtl;
 
 		return (
 			<DateTime {...rest}>
-				{order.map((picker) => {
+				{order.map((picker, index) => {
+					const isFirst = index === 0;
+					const isLast = index === order.length - 1;
+					const isLeft = isFirst && !rtl || isLast && rtl;
+					const isRight = isFirst && rtl || isLast && !rtl;
+
 					switch (picker) {
 						case 'd':
 							return (
@@ -225,6 +271,10 @@ const DatePickerBase = kind({
 									max={maxDays}
 									min={1}
 									onChange={onDateChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									onSpotlightLeft={isLeft ? onSpotlightLeft : null}
+									onSpotlightRight={isRight ? onSpotlightRight : null}
+									spotlightDisabled={spotlightDisabled}
 									value={day}
 									width={2}
 								/>
@@ -240,6 +290,10 @@ const DatePickerBase = kind({
 									max={maxMonths}
 									min={1}
 									onChange={onMonthChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									onSpotlightLeft={isLeft ? onSpotlightLeft : null}
+									onSpotlightRight={isRight ? onSpotlightRight : null}
+									spotlightDisabled={spotlightDisabled}
 									value={month}
 									width={2}
 								/>
@@ -255,6 +309,10 @@ const DatePickerBase = kind({
 									max={maxYear}
 									min={minYear}
 									onChange={onYearChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									onSpotlightLeft={isLeft ? onSpotlightLeft : null}
+									onSpotlightRight={isRight ? onSpotlightRight : null}
+									spotlightDisabled={spotlightDisabled}
 									value={year}
 									width={4}
 								/>
