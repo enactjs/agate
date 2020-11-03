@@ -1,6 +1,6 @@
 import Spinner from '../../../../Spinner';
 import React from 'react';
-import ri from "@enact/ui/resolution";
+import ri from '@enact/ui/resolution';
 
 const SpinnerTests = [
 	<div
@@ -36,7 +36,7 @@ const SpinnerTests = [
 				height: ri.unit(180, 'rem')
 			}}
 		>
-		<Spinner centered />
+			<Spinner centered />
 		</div>
 	</div>,
 	<div
@@ -74,7 +74,7 @@ const SpinnerTests = [
 		>
 			<Spinner type="loading" />
 		</div>
-	</div>,
+	</div>
 ];
 
 export default SpinnerTests;
