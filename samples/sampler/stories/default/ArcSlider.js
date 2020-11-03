@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {select, number} from '@enact/storybook-utils/addons/knobs';
-import ri from '@enact/ui/resolution';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -44,7 +43,6 @@ storiesOf('Agate', module)
 				startAngle={number('startAngle', Config, {range: true, min: 0, max: 360})}
 				step={number('step', Config)}
 				strokeWidth={number('strokeWidth', Config)}
-				style={{marginTop: ri.scaleToRem(40)}}
 			/>
 		),
 		{
@@ -63,7 +61,6 @@ storiesOf('Agate QA.Arc', module)
 				radius={number('radius', ArcConfig)}
 				startAngle={number('startAngle', ArcConfig, {range: true, min: 0, max: 360})}
 				strokeWidth={number('strokeWidth', ArcConfig)}
-				style={{marginTop: ri.scaleToRem(40)}}
 			/>
 		)
 	);
