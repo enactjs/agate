@@ -1,8 +1,11 @@
+import BodyText from '../../../BodyText';
 import ArcPicker from '../../../ArcPicker';
 import ArcSlider from '../../../ArcSlider';
 import Button from '../../../Button';
+import ColorPicker from '../../../ColorPicker';
 import CheckboxItem from '../../../CheckboxItem';
 import ContextualPopupDecorator from '../../../ContextualPopupDecorator';
+import DatePicker from '../../../DatePicker';
 import DateTimePicker from '../../../DateTimePicker';
 import Drawer from '../../../Drawer';
 import Dropdown from '../../../Dropdown';
@@ -19,17 +22,21 @@ import Item from '../../../Item';
 import Keypad from '../../../Keypad';
 import LabeledIcon from '../../../LabeledIcon';
 import LabeledIconButton from '../../../LabeledIconButton';
+import MediaPlayer from '../../../MediaPlayer';
 import Panels from '../../../Panels';
 import Picker from '../../../Picker';
 import Popup from '../../../Popup';
 import PopupMenu from '../../../PopupMenu';
 import ProgressBar from '../../../ProgressBar';
 import RadioItem from '../../../RadioItem';
+import RangePicker from '../../../RangePicker';
 import Scroller from '../../../Scroller';
 import Slider from '../../../Slider';
+import SliderButton from '../../../SliderButton';
 import Spinner from '../../../Spinner';
 import SwitchItem from '../../../SwitchItem';
 import TabGroup from '../../../TabGroup';
+import TimePicker from '../../../TimePicker';
 import TemperatureControl from '../../../TemperatureControl';
 import ThumbnailItem from '../../../ThumbnailItem';
 import ToggleButton from '../../../ToggleButton';
@@ -38,11 +45,14 @@ import VirtualList from '../../../VirtualList';
 import WindDirectionControl from '../../../WindDirectionControl';
 
 const AgateExports = {
+	BodyText,
 	ArcPicker,
 	ArcSlider,
 	Button,
+	ColorPicker,
 	CheckboxItem,
 	ContextualPopupDecorator,
+	DatePicker,
 	DateTimePicker,
 	Drawer,
 	Dropdown,
@@ -59,17 +69,23 @@ const AgateExports = {
 	Keypad,
 	LabeledIcon,
 	LabeledIconButton,
+	MediaPlayer,
 	Panels,
+	Picker,
 	Picker,
 	ProgressBar,
 	Popup,
 	PopupMenu,
+	ProgressBar,
 	RadioItem,
+	RangePicker,
 	Scroller,
 	Slider,
+	SliderButton,
 	Spinner,
 	SwitchItem,
 	TabGroup,
+	TimePicker,
 	TemperatureControl,
 	ThumbnailItem,
 	ToggleButton,
