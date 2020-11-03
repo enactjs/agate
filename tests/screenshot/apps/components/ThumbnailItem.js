@@ -6,4 +6,5 @@ const ThumbnailItemTests = [
 	<ThumbnailItem selected>Main Content</ThumbnailItem>,
 	<ThumbnailItem label="label content">Main Content</ThumbnailItem>
 ];
+
 export default ThumbnailItemTests;

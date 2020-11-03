@@ -34,4 +34,5 @@ const VirtualListTests = [
 		verticalScrollbar="visible" />
 	</div>
 ];
+
 export default VirtualListTests;

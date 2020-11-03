@@ -6,4 +6,5 @@ const CheckboxItemTests = [
 	<CheckboxItem selected>Hello CheckboxItem</CheckboxItem>,
 	<CheckboxItem label="test">Hello CheckboxItem</CheckboxItem>
 ];
+
 export default CheckboxItemTests;
