@@ -1,6 +1,6 @@
 import Spinner from '../../../../Spinner';
-import React from 'react';
 import ri from '@enact/ui/resolution';
+import React from 'react';
 
 const SpinnerTests = [
 	<div
