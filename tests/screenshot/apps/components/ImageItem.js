@@ -1,26 +1,30 @@
-import ImageItem from '../../../../ImageItem';
 import ri from '@enact/ui/resolution';
 import React from 'react';
+import ImageItem from '../../../../ImageItem';
+
+import img from '../../images/600x600.png';
+
+const style = {width: ri.scaleToRem(400), height: ri.scaleToRem(300)};
 
 const ImageItemTests = [
-	<div style={{width: '100%', height: '100%'}}>
-		<div style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}>
-			<ImageItem src="http://placehold.it/300x400/9037ab/ffffff&text=Image0">caption</ImageItem>
+	<div style={{height: '100%'}}>
+		<div style={style}>
+			<ImageItem src={img}>caption</ImageItem>
 		</div>
 	</div>,
-	<div style={{width: '100%', height: '100%'}}>
-		<div style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}>
-			<ImageItem src="http://placehold.it/300x400/9037ab/ffffff&text=Image0">caption</ImageItem>
+	<div style={{height: '100%'}}>
+		<div style={style}>
+			<ImageItem src={img}>caption</ImageItem>
 		</div>
 	</div>,
-	<div style={{width: '100%', height: '100%'}}>
-		<div style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}>
-			<ImageItem src="http://placehold.it/300x400/9037ab/ffffff&text=Image0" orientation="horizontal">caption</ImageItem>
+	<div style={{height: '100%'}}>
+		<div style={style}>
+			<ImageItem src={img} orientation="horizontal">caption</ImageItem>
 		</div>
 	</div>,
-	<div style={{width: '100%', height: '100%'}}>
-		<div style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}>
-			<ImageItem src="http://placehold.it/300x400/9037ab/ffffff&text=Image0" captionPosition="overlay">caption</ImageItem>
+	<div style={{height: '100%'}}>
+		<div style={style}>
+			<ImageItem src={img} captionPosition="overlay">caption</ImageItem>
 		</div>
 	</div>
 ];
