@@ -1,5 +1,8 @@
+import BodyText from '../../../BodyText';
 import Button from '../../../Button';
+import ColorPicker from '../../../ColorPicker';
 import ContextualPopupDecorator from '../../../ContextualPopupDecorator';
+import DatePicker from '../../../DatePicker';
 import DateTimePicker from '../../../DateTimePicker';
 import Drawer from '../../../Drawer';
 import Dropdown from '../../../Dropdown';
@@ -14,21 +17,28 @@ import Item from '../../../Item';
 import Keypad from '../../../Keypad';
 import LabeledIcon from '../../../LabeledIcon';
 import LabeledIconButton from '../../../LabeledIconButton';
+import MediaPlayer from '../../../MediaPlayer';
 import Panels from '../../../Panels';
-import ProgressBar from '../../../ProgressBar';
+import Picker from '../../../Picker';
 import Popup from '../../../Popup';
 import PopupMenu from '../../../PopupMenu';
-import Picker from '../../../Picker';
+import ProgressBar from '../../../ProgressBar';
 import RadioItem from '../../../RadioItem';
+import RangePicker from '../../../RangePicker';
 import Slider from '../../../Slider';
+import SliderButton from '../../../SliderButton';
 import SwitchItem from '../../../SwitchItem';
 import TabGroup from '../../../TabGroup';
+import TimePicker from '../../../TimePicker';
 import ToggleButton from '../../../ToggleButton';
 import TooltipDecorator from '../../../TooltipDecorator';
 
 const AgateExports = {
+	BodyText,
 	Button,
+	ColorPicker,
 	ContextualPopupDecorator,
+	DatePicker,
 	DateTimePicker,
 	Drawer,
 	Dropdown,
@@ -43,15 +53,19 @@ const AgateExports = {
 	Keypad,
 	LabeledIcon,
 	LabeledIconButton,
+	MediaPlayer,
 	Panels,
-	ProgressBar,
+	Picker,
 	Popup,
 	PopupMenu,
-	Picker,
+	ProgressBar,
 	RadioItem,
+	RangePicker,
 	Slider,
+	SliderButton,
 	SwitchItem,
 	TabGroup,
+	TimePicker,
 	ToggleButton,
 	TooltipDecorator
 };

@@ -1,7 +1,10 @@
 import {generateTestData} from '@enact/ui-test-utils/utils';
 
+import BodyText from './components/BodyText';
 import Button from './components/Button';
+import ColorPicker from './components/ColorPicker';
 import ContextualPopupDecorator from './components/ContextualPopupDecorator';
+import DatePicker from './components/DatePicker';
 import DateTimePicker from './components/DateTimePicker';
 import Drawer from './components/Drawer';
 import Dropdown from './components/Dropdown';
@@ -16,21 +19,28 @@ import Item from './components/Item';
 import Keypad from './components/Keypad';
 import LabeledIcon from './components/LabeledIcon';
 import LabeledIconButton from './components/LabeledIconButton';
+import MediaPlayer from './components/MediaPlayer';
 import Panels from './components/Panels';
-import ProgressBar from './components/ProgressBar';
+import Picker from './components/Picker';
 import Popup from './components/Popup';
 import PopupMenu from './components/PopupMenu';
-import Picker from './components/Picker';
+import ProgressBar from './components/ProgressBar';
 import RadioItem from './components/RadioItem';
+import RangePicker from './components/RangePicker';
 import Slider from './components/Slider';
+import SliderButton from './components/SliderButton';
 import SwitchItem from './components/SwitchItem';
 import TabGroup from './components/TabGroup';
+import TimePicker from './components/TimePicker';
 import ToggleButton from './components/ToggleButton';
 import TooltipDecorator from './components/TooltipDecorator';
 
 const agateComponents = {
+	BodyText,
 	Button,
+	ColorPicker,
 	ContextualPopupDecorator,
+	DatePicker,
 	DateTimePicker,
 	Drawer,
 	Dropdown,
@@ -45,15 +55,19 @@ const agateComponents = {
 	Keypad,
 	LabeledIcon,
 	LabeledIconButton,
+	MediaPlayer,
 	Panels,
-	ProgressBar,
+	Picker,
 	Popup,
 	PopupMenu,
-	Picker,
+	ProgressBar,
 	RadioItem,
+	RangePicker,
 	Slider,
+	SliderButton,
 	SwitchItem,
 	TabGroup,
+	TimePicker,
 	ToggleButton,
 	TooltipDecorator
 };
