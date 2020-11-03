@@ -1,0 +1,28 @@
+@import '~@enact/agate/styles/mixins.less';
+@import '~@enact/agate/styles/skin.less';
+
+.virtualList {
+  .item {
+    &::before {
+      content: "";
+      background-color: #363b44;
+      height: 3px;
+      width: 100%;
+      position: absolute;
+      top: 100%;
+      left: 0;
+    }
+
+    .applySkins({
+      .focus({
+        &::before {
+          background-color: @agate-item-focus-border-color;
+        }
+      });
+
+      .lastItem {
+        border-bottom-color: transparent;
+      }
+    });
+  }
+}
