@@ -1,9 +1,9 @@
-import BodyText from '../../../BodyText';
 import ArcPicker from '../../../ArcPicker';
 import ArcSlider from '../../../ArcSlider';
+import BodyText from '../../../BodyText';
 import Button from '../../../Button';
-import ColorPicker from '../../../ColorPicker';
 import CheckboxItem from '../../../CheckboxItem';
+import ColorPicker from '../../../ColorPicker';
 import ContextualPopupDecorator from '../../../ContextualPopupDecorator';
 import DatePicker from '../../../DatePicker';
 import DateTimePicker from '../../../DateTimePicker';
@@ -45,9 +45,10 @@ import VirtualList from '../../../VirtualList';
 import WindDirectionControl from '../../../WindDirectionControl';
 
 const AgateExports = {
-	BodyText,
+
 	ArcPicker,
 	ArcSlider,
+	BodyText,
 	Button,
 	ColorPicker,
 	CheckboxItem,
@@ -72,8 +73,6 @@ const AgateExports = {
 	MediaPlayer,
 	Panels,
 	Picker,
-	Picker,
-	ProgressBar,
 	Popup,
 	PopupMenu,
 	ProgressBar,
