@@ -19,6 +19,19 @@ const renderItem = () => ({index, ...rest}) => { // eslint-disable-line enact/di
 };
 
 const VirtualListTests = [
-	<VirtualList dataSize={10} itemSize={ri.scale( 144)} itemRenderer={renderItem(ri.scale(144))} />
+	<div>
+	<VirtualList
+		dataSize={10}
+		itemSize={ri.scale( 144)}
+		itemRenderer={renderItem(ri.scale(144))} />
+	</div>,
+	<div>
+	<VirtualList
+		dataSize={10}
+		horizontalScrollbar="visible"
+		itemSize={ri.scale( 144)}
+		itemRenderer={renderItem(ri.scale(144))}
+		verticalScrollbar="visible" />
+	</div>
 ];
 export default VirtualListTests;

@@ -1,14 +1,14 @@
 import ArcPicker from '../../../ArcPicker';
 import ArcSlider from '../../../ArcSlider';
 import Button from '../../../Button';
-import ContextualPopupDecorator from '../../../ContextualPopupDecorator';
 import CheckboxItem from '../../../CheckboxItem';
+import ContextualPopupDecorator from '../../../ContextualPopupDecorator';
 import DateTimePicker from '../../../DateTimePicker';
 import Drawer from '../../../Drawer';
 import Dropdown from '../../../Dropdown';
+import FanSpeedControl from '../../../FanSpeedControl';
 import FullscreenPopup from '../../../FullscreenPopup';
 import Header from '../../../Header';
-import FanSpeedControl from '../../../FanSpeedControl';
 import Heading from '../../../Heading';
 import Icon from '../../../Icon';
 import Image from '../../../Image';
@@ -20,10 +20,10 @@ import Keypad from '../../../Keypad';
 import LabeledIcon from '../../../LabeledIcon';
 import LabeledIconButton from '../../../LabeledIconButton';
 import Panels from '../../../Panels';
-import ProgressBar from '../../../ProgressBar';
+import Picker from '../../../Picker';
 import Popup from '../../../Popup';
 import PopupMenu from '../../../PopupMenu';
-import Picker from '../../../Picker';
+import ProgressBar from '../../../ProgressBar';
 import RadioItem from '../../../RadioItem';
 import Scroller from '../../../Scroller';
 import Slider from '../../../Slider';
@@ -41,14 +41,14 @@ const AgateExports = {
 	ArcPicker,
 	ArcSlider,
 	Button,
-	ContextualPopupDecorator,
 	CheckboxItem,
+	ContextualPopupDecorator,
 	DateTimePicker,
 	Drawer,
 	Dropdown,
+	FanSpeedControl,
 	FullscreenPopup,
 	Header,
-	FanSpeedControl,
 	Heading,
 	Icon,
 	Image,
@@ -60,21 +60,20 @@ const AgateExports = {
 	LabeledIcon,
 	LabeledIconButton,
 	Panels,
+	Picker,
 	ProgressBar,
 	Popup,
 	PopupMenu,
-	Picker,
 	RadioItem,
 	Scroller,
-	Spinner,
 	Slider,
+	Spinner,
 	SwitchItem,
 	TabGroup,
-	ToggleButton,
-	TooltipDecorator
 	TemperatureControl,
 	ThumbnailItem,
 	ToggleButton,
+	TooltipDecorator,
 	VirtualList,
 	WindDirectionControl
 };

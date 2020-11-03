@@ -3,8 +3,8 @@ import {generateTestData} from '@enact/ui-test-utils/utils';
 import ArcPicker from './components/ArcPicker';
 import ArcSlider from './components/ArcSlider';
 import Button from './components/Button';
-import ContextualPopupDecorator from './components/ContextualPopupDecorator';
 import CheckboxItem from './components/CheckboxItem';
+import ContextualPopupDecorator from './components/ContextualPopupDecorator';
 import DateTimePicker from './components/DateTimePicker';
 import Drawer from './components/Drawer';
 import Dropdown from './components/Dropdown';
@@ -22,9 +22,9 @@ import Keypad from './components/Keypad';
 import LabeledIcon from './components/LabeledIcon';
 import LabeledIconButton from './components/LabeledIconButton';
 import Panels from './components/Panels';
-import ProgressBar from './components/ProgressBar';
 import Popup from './components/Popup';
 import PopupMenu from './components/PopupMenu';
+import ProgressBar from './components/ProgressBar';
 import Picker from './components/Picker';
 import RadioItem from './components/RadioItem';
 import Scroller from './components/Scroller';
@@ -43,14 +43,14 @@ const agateComponents = {
 	ArcPicker,
 	ArcSlider,
 	Button,
-	ContextualPopupDecorator,
 	CheckboxItem,
+	ContextualPopupDecorator,
 	DateTimePicker,
 	Drawer,
 	Dropdown,
+	FanSpeedControl,
 	FullscreenPopup,
 	Header,
-	FanSpeedControl,
 	Heading,
 	Icon,
 	Image,
@@ -62,9 +62,9 @@ const agateComponents = {
 	LabeledIcon,
 	LabeledIconButton,
 	Panels,
-	ProgressBar,
 	Popup,
 	PopupMenu,
+	ProgressBar,
 	Picker,
 	RadioItem,
 	Scroller,
@@ -73,10 +73,9 @@ const agateComponents = {
 	SwitchItem,
 	TabGroup,
 	ToggleButton,
-	TooltipDecorator
+	TooltipDecorator,
 	TemperatureControl,
 	ThumbnailItem,
-	ToggleButton,
 	VirtualList,
 	WindDirectionControl
 };
