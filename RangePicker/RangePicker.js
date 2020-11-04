@@ -107,7 +107,16 @@ const RangePickerBase = kind({
 		 * @default 1
 		 * @public
 		 */
-		step: PropTypes.number
+		step: PropTypes.number,
+
+		/**
+		 * Allows picker to continue from the start of the list after it reaches the end and
+		 * vice-versa.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		wrap: PropTypes.bool
 	},
 
 	computed: {

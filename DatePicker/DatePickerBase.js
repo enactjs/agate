@@ -266,6 +266,7 @@ const DatePickerBase = kind({
 									accessibilityHint={dayAccessibilityHint}
 									aria-label={dayAriaLabel}
 									className={css.day}
+									data-last-element={isLast}
 									disabled={disabled}
 									key="day-picker"
 									max={maxDays}
@@ -277,6 +278,7 @@ const DatePickerBase = kind({
 									spotlightDisabled={spotlightDisabled}
 									value={day}
 									width={2}
+									wrap
 								/>
 							);
 						case 'm':
@@ -285,6 +287,7 @@ const DatePickerBase = kind({
 									accessibilityHint={monthAccessibilityHint}
 									aria-label={monthAriaLabel}
 									className={css.month}
+									data-last-element={isLast}
 									disabled={disabled}
 									key="month-picker"
 									max={maxMonths}
@@ -296,6 +299,7 @@ const DatePickerBase = kind({
 									spotlightDisabled={spotlightDisabled}
 									value={month}
 									width={2}
+									wrap
 								/>
 							);
 						case 'y':
@@ -304,6 +308,7 @@ const DatePickerBase = kind({
 									accessibilityHint={yearAccessibilityHint}
 									aria-label={yearAriaLabel}
 									className={css.year}
+									data-last-element={isLast}
 									disabled={disabled}
 									key="year-picker"
 									max={maxYear}
@@ -324,6 +329,15 @@ const DatePickerBase = kind({
 		);
 	}
 });
+
+/**
+ * Called when `Enter` key down on the last picker
+ *
+ * @name onComplete
+ * @memberof agate/DatePicker.DatePickerBase.prototype
+ * @type {Function}
+ * @public
+ */
 
 export default DatePickerBase;
 export {

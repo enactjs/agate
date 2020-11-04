@@ -274,7 +274,16 @@ const PickerBase = kind({
 		width: PropTypes.oneOfType([
 			PropTypes.oneOf([null, 'small', 'medium', 'large']),
 			PropTypes.number
-		])
+		]),
+
+		/**
+		 * Should the picker stop incrementing when the picker reaches the last element? Set `wrap`
+		 * to `true` to allow the picker to continue from the opposite end of the list of options.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		wrap: PropTypes.bool
 	},
 
 	defaultProps: {

@@ -1,12 +1,15 @@
 import kind from '@enact/core/kind';
 import {mapAndFilterChildren} from '@enact/core/util';
+import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Picker from '../../Picker';
+import PickerCore from '../Picker';
 
 import css from './DateComponentPicker.module.less';
+
+const Picker = Spottable(PickerCore);
 
 /**
  * {@link agate/internal/DataComponentPicker.DateComponentPickerBase} allows the selection of one
@@ -54,7 +57,15 @@ const DateComponentPickerBase = kind({
 		 * @type {String}
 		 * @public
 		 */
-		'aria-valuetext': PropTypes.string
+		'aria-valuetext': PropTypes.string,
+
+		/*
+		 * When `true`, allow the picker to continue from the opposite end of the list of options.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		wrap: PropTypes.bool
 	},
 
 	styles: {
@@ -69,7 +80,7 @@ const DateComponentPickerBase = kind({
 		max: ({children}) => React.Children.count(children) - 1
 	},
 
-	render: ({accessibilityHint, 'aria-valuetext': ariaValuetext, children, max, value, ...rest}) => (
+	render: ({accessibilityHint, 'aria-valuetext': ariaValuetext, children, max, value, wrap, ...rest}) => (
 		<Picker
 			{...rest}
 			css={css}
@@ -81,6 +92,7 @@ const DateComponentPickerBase = kind({
 			orientation="vertical"
 			step={1}
 			value={value}
+			wrap={wrap}
 		>
 			{children}
 		</Picker>

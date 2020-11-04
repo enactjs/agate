@@ -191,16 +191,53 @@ const TimePickerBase = kind({
 		onMinuteChange: PropTypes.func,
 
 		/**
+		 * Called when the component is removed while retaining focus.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightDisappear: PropTypes.func,
+
+		/**
+		 * Called when the focus leaves the picker when the 5-way left key is pressed.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightLeft: PropTypes.func,
+
+		/**
+		 * Called when the focus leaves the picker when the 5-way right key is pressed.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightRight: PropTypes.func,
+
+		/**
 		 * Set content to RTL.
 		 *
 		 * @type {Boolean}
 		 * @private
 		 */
-		rtl: PropTypes.bool
+		rtl: PropTypes.bool,
+
+		/**
+		 * Disables 5-way spotlight from navigating into the component.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		spotlightDisabled: PropTypes.bool
 	},
 
 	defaultProps: {
-		disabled: false
+		disabled: false,
+		spotlightDisabled: false
 	},
 
 	styles: {
@@ -228,17 +265,30 @@ const TimePickerBase = kind({
 		onHourChange,
 		onMeridiemChange,
 		onMinuteChange,
+		onSpotlightDisappear,
+		onSpotlightLeft,
+		onSpotlightRight,
 		order,
+		rtl,
+		spotlightDisabled,
 		...rest
 	}) => {
 		const hourAccessibilityHint = $L('hour');
 		const minuteAccessibilityHint = $L('minute');
 
-		delete rest.rtl;
-
 		return (
 			<DateTime {...rest} css={css}>
-				{order.map((picker) => {
+				{order.map((picker, index) => {
+					// although we create a component array based on the provided
+					// order, we ultimately force order in CSS for RTL
+					const isFirst = index === 0;
+					const isLast = index === order.length - 1;
+					// meridiem will always be the left-most control in RTL, regardless of the provided order
+					const isLeft = rtl && picker === 'a' || isFirst && !rtl;
+					// minute will always be the right-most control in RTL, regardless of the provided order
+					const isRight = rtl && picker === 'm' || isLast && !rtl;
+					const isLastElement = rtl ? isLeft : isLast;
+
 					switch (picker) {
 						case 'h':
 						case 'k':
@@ -248,11 +298,17 @@ const TimePickerBase = kind({
 										accessibilityHint={hourAccessibilityHint}
 										aria-label={hourAriaLabel}
 										className={css.hourPicker}
+										data-last-element={isLastElement}
 										disabled={disabled}
 										hasMeridiem={hasMeridiem}
 										onChange={onHourChange}
+										onSpotlightDisappear={onSpotlightDisappear}
+										onSpotlightLeft={isLeft ? onSpotlightLeft : null}
+										onSpotlightRight={isRight ? onSpotlightRight : null}
+										spotlightDisabled={spotlightDisabled}
 										value={hour}
 										width={2}
+										wrap
 									/>
 								</React.Fragment>
 							);
@@ -262,13 +318,19 @@ const TimePickerBase = kind({
 									accessibilityHint={minuteAccessibilityHint}
 									aria-label={minuteAriaLabel}
 									className={css.minutePicker}
+									data-last-element={isLastElement}
 									disabled={disabled}
 									key="minute-picker"
 									max={59}
 									min={0}
 									onChange={onMinuteChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									onSpotlightLeft={isLeft ? onSpotlightLeft : null}
+									onSpotlightRight={isRight ? onSpotlightRight : null}
+									spotlightDisabled={spotlightDisabled}
 									value={minute}
 									width={2}
+									wrap
 								/>
 							);
 						case 'a':
@@ -277,11 +339,17 @@ const TimePickerBase = kind({
 									aria-label={meridiemAriaLabel}
 									aria-valuetext={meridiems ? meridiems[meridiem] : null}
 									className={css.meridiemPicker}
+									data-last-element={isLastElement}
 									disabled={disabled}
 									key="meridiem-picker"
 									onChange={onMeridiemChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									onSpotlightLeft={isLeft ? onSpotlightLeft : null}
+									onSpotlightRight={isRight ? onSpotlightRight : null}
+									spotlightDisabled={spotlightDisabled}
 									value={meridiem}
 									width={meridiemPickerWidth}
+									wrap
 								>
 									{meridiems}
 								</DateComponentPicker>
@@ -294,6 +362,15 @@ const TimePickerBase = kind({
 		);
 	}
 });
+
+/**
+ * Called when `Enter` key down on the last picker
+ *
+ * @name onComplete
+ * @memberof agate/TimePicker.TimePickerBase.prototype
+ * @type {Function}
+ * @public
+ */
 
 export default TimePickerBase;
 export {
