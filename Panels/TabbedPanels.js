@@ -16,8 +16,9 @@ import componentCss from './TabbedPanels.module.less';
 
 /**
  * Tabbed Panels component.
- * 
+ *
  * Usage:
+ * ```
  * <TabbedPanels
  *   orientation={'vertical'}
  *   tabs={[
