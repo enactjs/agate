@@ -28,7 +28,7 @@ const SwitchItemTests = [
 		<SwitchItem selected>Hello SwitchItem</SwitchItem>,
 		<SwitchItem disabled>Hello SwitchItem</SwitchItem>,
 		// with icon
-		<SwitchItem icon="music">Hello SwitchItem</SwitchItem>,
+		<SwitchItem icon="music">Hello SwitchItem</SwitchItem>
 	])
 ];
 export default SwitchItemTests;
