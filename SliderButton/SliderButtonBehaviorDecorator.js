@@ -16,7 +16,7 @@ const SliderButtonBehaviorDecorator = hoc((config, Wrapped) => {
 	return class extends React.Component {
 		static displayName = 'SliderButtonBehaviorDecorator';
 
-		static propTypes = /** @lends agate/ArcSlider.ArcSliderBehaviorDecorator.prototype */ {
+		static propTypes = /** @lends agate/SliderButton.SliderButtonBehaviorDecorator.prototype */ {
 			/**
 			 * Items displayed with SliderButton.
 			 *
@@ -45,15 +45,11 @@ const SliderButtonBehaviorDecorator = hoc((config, Wrapped) => {
 		}
 
 		handleChange = ({value}) => {
-			this.setState(
-				() => ({valueText: this.props.children[value]}),
-				() => {
-					forward('onChange', {
-						type: 'onChange',
-						value
-					}, this.props);
-				}
-			);
+			this.setState(() => ({valueText: this.props.children[value]}));
+			forward('onChange', {
+				type: 'onChange',
+				value
+			}, this.props);
 		};
 
 		handleDragStart = () => {
@@ -66,12 +62,12 @@ const SliderButtonBehaviorDecorator = hoc((config, Wrapped) => {
 		render () {
 			return (
 				<Wrapped
-					{...this.props}
 					aria-valuetext={this.state.valueText}
+					role="slider"
+					{...this.props}
 					onChange={this.handleChange}
 					onDragStart={this.handleDragStart}
 					ref={this.ref}
-					role="slider"
 				/>
 			);
 		}
