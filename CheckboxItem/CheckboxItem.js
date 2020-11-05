@@ -44,7 +44,6 @@ import componentCss from './CheckboxItem.module.less';
  * @class CheckboxItemBase
  * @memberof agate/CheckboxItem
  * @extends agate/Item.Item
- * @mixes agate/CheckboxItem.CheckboxItemDecorator
  * @omit iconComponent
  * @ui
  * @public
