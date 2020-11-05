@@ -3,10 +3,10 @@
  *
  * @example
  * <Heading
- *   size="large"
- *   spacing="small"
+ * 	size="large"
+ * 	spacing="small"
  * >
- *   A Content Section Heading
+ * 	A Content Section Heading
  * </Heading>
  *
  * @module agate/Heading

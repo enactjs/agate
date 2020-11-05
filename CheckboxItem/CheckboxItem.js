@@ -34,10 +34,10 @@ import componentCss from './CheckboxItem.module.less';
  * Usage:
  * ```
  * <CheckboxItem
- * 	defaultSelected={selected}
- * 	onToggle={handleToggle}
+ *   defaultSelected={selected}
+ *   onToggle={handleToggle}
  * >
- *  Item with a Checkbox
+ *   Item with a Checkbox
  * </CheckboxItem>
  * ```
  *

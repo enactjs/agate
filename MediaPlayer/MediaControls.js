@@ -98,6 +98,7 @@ const MediaControls = kind({
 		 * `true` when the media is paused.
 		 *
 		 * @type {Boolean}
+		 * @default true
 		 * @public
 		 */
 		paused: PropTypes.bool,

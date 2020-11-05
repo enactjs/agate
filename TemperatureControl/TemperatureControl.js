@@ -143,10 +143,10 @@ const TemperatureControlDecorator = compose(
  * Usage:
  * ```
  * <TemperatureControl
- * 	max={30}
- * 	min={10}
- *	unit="Celsius"
- *	value={10}
+ *   max={30}
+ *   min={10}
+ *   unit="Celsius"
+ *   value={10}
  * />
  * ```
  *

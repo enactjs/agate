@@ -3,10 +3,10 @@
  *
  * @example
  * <Slider
- *   defaultValue={-30}
- *   max={100}
- *   min={-100}
- *   step={10}
+ * 	defaultValue={-30}
+ * 	max={100}
+ * 	min={-100}
+ * 	step={10}
  * />
  *
  * @module agate/Slider

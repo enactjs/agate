@@ -144,10 +144,10 @@ const FanSpeedControlDecorator = compose(
  * Usage:
  * ```
  * <FanSpeedControl
- * 	icon="fan"
- * 	max={10}
- *	min={1}
- * 	value={4}
+ *   icon="fan"
+ *   max={10}
+ *   min={1}
+ *   value={4}
  * />
  * ```
  *

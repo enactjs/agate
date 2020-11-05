@@ -16,6 +16,19 @@ import componentCss from './TabbedPanels.module.less';
 
 /**
  * Tabbed Panels component.
+ * 
+ * Usage:
+ * <TabbedPanels
+ *   orientation={'vertical'}
+ *   tabs={[
+ *     {title: 'Panel1', icon: 'netbook'},
+ *     {title: 'Panel2', icon: 'aircirculation'}
+ *   ]}
+ * >
+ *   <Panel>Hello Panel 1</Panel>
+ *   <Panel>Hello Panel 2</Panel>
+ * </TabbedPanels>
+ * ```
  *
  * @class TabbedPanels
  * @memberof agate/Panels

@@ -126,8 +126,8 @@ const DatePickerDecorator = compose(
  * Usage:
  * ```
  * <DatePicker
- *  defaultValue={selectedDate}
- *  onChange={handleChange}
+ *   defaultValue={selectedDate}
+ *   onChange={handleChange}
  * />
  * ```
  *

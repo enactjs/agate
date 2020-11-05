@@ -3,13 +3,13 @@
  *
  * @example
  * <IncrementSlider
- *   decrementIcon="minus"
- *   defaultValue={-25}
- *   incrementIcon="plus"
- *   knobStep={25}
- *   max={100}
- *   min={-100}
- *   step={5}
+ * 	decrementIcon="minus"
+ * 	defaultValue={-25}
+ * 	incrementIcon="plus"
+ * 	knobStep={25}
+ * 	max={100}
+ * 	min={-100}
+ * 	step={5}
  * />
  *
  * @module agate/IncrementSlider
@@ -111,8 +111,8 @@ const IncrementSliderBase = kind({
 		/**
 		* Sets the hint string read when focusing the decrement button.
 		*
-		* @default 'press button to decrease the value'
 		* @type {String}
+		* @default 'press button to decrease the value'
 		* @public
 		*/
 		decrementAriaLabel: PropTypes.string,

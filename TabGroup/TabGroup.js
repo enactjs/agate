@@ -203,13 +203,14 @@ const TabGroupDecorator = compose(
  * Usage:
  * ```
  * <TabGroup
- *  tabPosition={'before'}
- *  tabs={[
- *   {title: 'Home', icon: 'home'},
- *   {title: 'Settings', icon: 'setting'},
- *   {title: 'Theme', icon: 'display'}
- *  ]}
+ *   tabPosition={'before'}
+ *   tabs={[
+ *     {title: 'Home', icon: 'home'},
+ *     {title: 'Settings', icon: 'setting'},
+ *     {title: 'Theme', icon: 'display'}
+ *   ]}
  * />
+ * ```
  *
  * @class TabGroup
  * @memberof agate/TabGroup
