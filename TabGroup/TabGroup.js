@@ -2,7 +2,7 @@
  * Provides an Agate-themed tab group.
  *
  * @example
- * <TabGroup tabPosition={'before'} tabs={[{title: 'Home'},{title: 'Settings'}]} /
+ * <TabGroup tabPosition={'before'} tabs={[{title: 'Home'},{title: 'Settings'}]} />
  *
  * @module agate/TabGroup
  * @exports TabGroup
