@@ -98,9 +98,7 @@ const I18nTabbedPanels = I18nContextDecorator({rtlProp: 'rtl'}, I18nTabbedPanels
 storiesOf('Agate', module)
 	.add(
 		'TabbedPanels',
-		() => {
-			return <I18nTabbedPanels />;
-		},
+		() => (<I18nTabbedPanels />),
 		{
 			text: 'The basic TabbedPanels'
 		}
