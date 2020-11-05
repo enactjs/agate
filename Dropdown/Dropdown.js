@@ -3,10 +3,10 @@
  *
  * @example
  * <Dropdown
- * 		defaultSelected={2}
- *		title="Dropdown"
+ * 	defaultSelected={2}
+ * 	title="Dropdown"
  * >
- *   {['Option 1', 'Option 2', 'Option 3', 'Option 4']}
+ * 	{['Option 1', 'Option 2', 'Option 3', 'Option 4']}
  * </Dropdown>
  *
  * @module agate/Dropdown

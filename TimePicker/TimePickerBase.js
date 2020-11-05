@@ -65,15 +65,15 @@ class HourPicker extends React.Component {
 }
 
 /**
-* {@link agate/TimePicker.TimePickerBase} is the stateless functional time picker
-* component. Should not be used directly but may be composed within another component as it is
-* within {@link agate/TimePicker.TimePicker}.
-*
-* @class TimePickerBase
-* @memberof agate/TimePicker
-* @ui
-* @public
-*/
+ * {@link agate/TimePicker.TimePickerBase} is the stateless functional time picker
+ * component. Should not be used directly but may be composed within another component as it is
+ * within {@link agate/TimePicker.TimePicker}.
+ *
+ * @class TimePickerBase
+ * @memberof agate/TimePicker
+ * @ui
+ * @public
+ */
 const TimePickerBase = kind({
 	name: 'TimePickerBase',
 

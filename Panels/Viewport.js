@@ -17,6 +17,7 @@ import css from './Panels.module.less';
  *
  * @class Viewport
  * @memberof agate/Panels
+ * @ui
  * @private
  */
 const ViewportBase = class extends React.Component {

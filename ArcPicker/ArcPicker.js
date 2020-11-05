@@ -231,6 +231,7 @@ const ArcPickerDecorator = compose(
  * Usage:
  * ```
  * <ArcPicker backgroundColor="#444444" endAngle={200} foregroundColor="#eeeeee" selectionType="single" startAngle={0} />
+ * ```
  *
  * @class ArcPicker
  * @memberof agate/ArcPicker

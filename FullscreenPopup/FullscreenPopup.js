@@ -21,6 +21,13 @@ import componentCss from './FullscreenPopup.module.less';
 /**
  * Full screen popup component.
  *
+ * Usage:
+ * ```
+ * <FullscreenPopup open>
+ *   Hello Fullscreen Popup
+ * </FullscreenPopup>
+ * ```
+ *
  * @class FullscreenPopupBase
  * @memberof agate/FullscreenPopup
  * @exports ui/Transition/Transition

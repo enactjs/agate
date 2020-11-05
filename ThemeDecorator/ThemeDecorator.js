@@ -248,7 +248,24 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		static displayName = 'ThemeDecorator';
 
 		static propTypes = {
+			/**
+			 * A custom accent color, as a hex string.
+			 *
+			 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+			 * @type {String}
+			 * @default '#8b7efe'
+			 * @public
+			 */
 			accent: PropTypes.string,
+
+			/**
+			 * A custom highlight color, as a hex string.
+			 *
+			 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+			 * @type {String}
+			 * @default '#c6c0fe'
+			 * @public
+			 */
 			highlight: PropTypes.string
 		};
 

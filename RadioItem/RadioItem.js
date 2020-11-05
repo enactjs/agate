@@ -30,7 +30,6 @@ import componentCss from './RadioItem.module.less';
  * @class RadioItemBase
  * @memberof agate/RadioItem
  * @extends agate/Item.Item
- * @mixes agate/RadioItem.RadioItemDecorator
  * @ui
  * @public
  */
@@ -120,7 +119,7 @@ const RadioItemDecorator = compose(
 );
 
 /**
- * An Agate-styled Radio Item.
+ * An Agate-styled RadioItem.
  *
  * @class RadioItem
  * @memberof agate/RadioItem

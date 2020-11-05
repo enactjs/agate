@@ -121,7 +121,7 @@ const ArcSliderBase = kind({
 		 * The value should be between 0 and 360.
 		 *
 		 * @type {Number}
-		 * @default 50
+		 * @default 30
 		 * @public
 		 */
 		startAngle: PropTypes.number,
@@ -244,6 +244,7 @@ const ArcSliderDecorator = compose(
  * Usage:
  * ```
  * <ArcSlider backgroundColor="blue" endAngle={200} foregroundColor="red" radius={150} startAngle={0} step={2} />
+ * ```
  *
  * @class ArcSlider
  * @memberof agate/ArcSlider
