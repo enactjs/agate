@@ -2,7 +2,7 @@
  * Agate styled arc slider components and behaviors.
  *
  * @example
- * <ArcSlider backgroundColor="blue" endAngle={200} radius={150} startAngle={0} step={2} />
+ * <ArcSlider />
  *
  * @module agate/ArcSlider
  * @exports ArcSlider
