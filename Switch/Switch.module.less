@@ -27,24 +27,19 @@
 			font-size: @agate-switch-icon-font-size;
 			line-height: inherit;
 			margin: 0;
+			position: absolute;
 
 			.enact-locale-rtl({
+				left: auto;
 				right: @agate-switch-icon-position-left;
 			});
 		}
 
 		&.animated {
-			-webkit-transition: background-color 0.2s;
 			transition: background-color 0.2s;
 
 			.icon {
-				-webkit-transition: left 0.2s, color 0.2s;
-				transition: left 0.2s, color 0.2s;
-
-				.enact-locale-rtl({
-					-webkit-transition: right 0.2s, color 0.2s;
-					transition: right 0.2s, color 0.2s;
-				});
+				transition: left 0.2s, right 0.2s, color 0.2s;
 			}
 		}
 
@@ -60,7 +55,7 @@
 				}
 
 				.enact-locale-rtl({
-					right: @agate-switch-selected-icon-position-right;
+					right: @agate-switch-selected-icon-position-left;
 				});
 			}
 			:global(.spottable):focus & {
