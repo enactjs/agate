@@ -10,6 +10,7 @@
  * @exports ButtonDecorator
  */
 
+import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import {cap} from '@enact/core/util';
 import EnactPropTypes from '@enact/core/internal/prop-types';
@@ -22,8 +23,9 @@ import compose from 'ramda/src/compose';
 import React from 'react';
 
 import Icon from '../Icon';
-// import {MarqueeDecorator} from '../Marquee';
+import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
+import TooltipDecorator from '../TooltipDecorator';
 
 import componentCss from './Button.module.less';
 
@@ -134,6 +136,24 @@ const ButtonBase = kind({
 		iconComponent: EnactPropTypes.component,
 
 		/**
+		 * True if button is an icon only button.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @private
+		 */
+		iconOnly: PropTypes.bool,
+
+		/**
+		 * Specifies on which side (`'before'` or `'after'`) of the text the icon appears.
+		 *
+		 * @type {('before'|'after')}
+		 * @default 'before'
+		 * @public
+		 */
+		iconPosition: PropTypes.oneOf(['before', 'after']),
+
+		/**
 		 * The position of this button in relation to other buttons.
 		 *
 		 * To create a collection of buttons that appear as one entity: buttons that butt up against
@@ -145,6 +165,15 @@ const ButtonBase = kind({
 		 * @public
 		 */
 		joinedPosition: PropTypes.oneOf(['left', 'center', 'right']),
+
+		/**
+		 * Boolean controlling whether this component should enforce the "minimum width" rules.
+		 *
+		 * @type {Boolean}
+		 * @default true
+		 * @public
+		 */
+		minWidth: PropTypes.bool,
 
 		/**
 		 * Provides a way to call special interface attention to this button. It will be "featured"
@@ -187,6 +216,7 @@ const ButtonBase = kind({
 	defaultProps: {
 		backgroundOpacity: 'opaque',
 		iconComponent: Icon,
+		iconPosition: 'before',
 		size: 'large',
 		type: 'standard'
 	},
@@ -197,10 +227,13 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({animateOnRender, backgroundOpacity, highlighted, joinedPosition, selected, type, size, styler}) => styler.append(
+		className: ({animateOnRender, backgroundOpacity, highlighted, iconOnly, iconPosition, joinedPosition, selected, type, size, styler}) => styler.append(
+			{iconOnly},
 			backgroundOpacity,
 			size,
 			type,
+			// iconBefore/iconAfter only applies when using text and an icon
+			!iconOnly && `icon${cap(iconPosition)}`,
 			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
 			{
 				animateOnRender,
@@ -233,7 +266,7 @@ const ButtonBase = kind({
 			'--agate-button-animation-delay': animationDelay,
 			'--agate-button-badge-bg-color': badgeColor
 		}),
-		minWidth: ({children}) => (React.Children.count(children) === 0 || children === '')
+		minWidth: ({iconOnly, minWidth}) => ((minWidth != null) ? minWidth : !iconOnly)
 	},
 
 	render: ({css, ...rest}) => {
@@ -243,9 +276,12 @@ const ButtonBase = kind({
 		delete rest.badge;
 		delete rest.badgeColor;
 		delete rest.highlighted;
+		delete rest.iconOnly;
+		delete rest.iconPosition;
 		delete rest.joinedPosition;
 		delete rest.selected;
 		delete rest.spriteCount;
+		delete rest.tooltipText;
 		delete rest.type;
 
 		return UiButtonBase.inline({
@@ -253,6 +289,28 @@ const ButtonBase = kind({
 			css
 		});
 	}
+});
+
+/**
+ * A higher-order component that determines if it is a button that only displays an icon.
+ *
+ * @class IconButtonDecorator
+ * @memberof agate/Button
+ * @hoc
+ * @private
+ */
+const IconButtonDecorator = hoc((config, Wrapped) => {
+	return kind({
+		name: 'IconButtonDecorator',
+		computed: {
+			iconOnly: ({children}) => (React.Children.toArray(children).filter(Boolean).length === 0)
+		},
+		render: (props) => {
+			return (
+				<Wrapped {...props} />
+			);
+		}
+	});
 });
 
 /**
@@ -267,7 +325,9 @@ const ButtonBase = kind({
  */
 const ButtonDecorator = compose(
 	Pure,
-	// MarqueeDecorator({className: componentCss.marquee}),
+	IconButtonDecorator,
+	TooltipDecorator({tooltipDestinationProp: 'decoration'}),
+	MarqueeDecorator({className: componentCss.marquee}),
 	UiButtonDecorator,
 	Spottable,
 	Skinnable

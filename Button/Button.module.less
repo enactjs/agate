@@ -22,6 +22,7 @@
 		text-indent: @agate-button-text-indent;  // Keep the text centered
 		font-variant-ligatures: @agate-button-font-ligatures;
 		min-width: @agate-button-height;
+		max-width: @agate-button-max-width;
 		padding: 0 @agate-button-h-padding;
 		margin: 0 @agate-component-spacing;
 		box-sizing: border-box;
@@ -45,7 +46,7 @@
 			color: @agate-button-color;
 
 			.icon {
-				-webkit-margin-start: 0;
+				.margin-start-end(@agate-button-icon-margin-start, @agate-button-icon-margin-end);
 			}
 		}
 
@@ -67,6 +68,16 @@
 		&.grid {
 			.bg {
 				border-radius: @agate-button-grid-border-radius;
+			}
+		}
+
+		&.iconAfter {
+			.client {
+				flex-direction: row-reverse;
+			}
+
+			.icon {
+				.margin-start-end(@agate-button-icon-position-after-margin-start, @agate-button-icon-position-after-margin-end);
 			}
 		}
 
@@ -95,7 +106,16 @@
 			}
 		}
 
-		&.minWidth {
+		// Only center the text if there is no icon. We'll explicitly override Marquee's
+		// alignment for this case, relying on the parent node's alignment preference (inherit).
+		// Otherwise, the default is to just leave alignment to Marquee to handle.
+		//&:not(.hasIcon) {
+		//	.marquee {
+		//		text-align: inherit;
+		//	}
+		//}
+
+		&.iconOnly {
 			&,
 			&.huge,
 			&.small,
