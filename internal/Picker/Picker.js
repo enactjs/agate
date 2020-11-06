@@ -522,9 +522,9 @@ const ChangeAdapter = hoc((config, Wrapped) => {
 		handlers: {
 			onChange: handle(
 				adaptEvent(({value}) => {
-						return ({value});
-					},
-					forward('onChange'))
+					return ({value});
+				},
+				forward('onChange'))
 			)
 		},
 
