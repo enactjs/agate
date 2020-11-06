@@ -10,8 +10,8 @@
  * @exports ButtonDecorator
  */
 
-import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
+import hoc from '@enact/core/hoc';
 import {cap} from '@enact/core/util';
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import Spottable from '@enact/spotlight/Spottable';
@@ -38,7 +38,6 @@ import componentCss from './Button.module.less';
  * @class ButtonBase
  * @memberof agate/Button
  * @extends ui/Button.ButtonBase
- * @omit minWidth
  * @ui
  * @public
  */
@@ -281,7 +280,6 @@ const ButtonBase = kind({
 		delete rest.joinedPosition;
 		delete rest.selected;
 		delete rest.spriteCount;
-		delete rest.tooltipText;
 		delete rest.type;
 
 		return UiButtonBase.inline({
@@ -326,8 +324,8 @@ const IconButtonDecorator = hoc((config, Wrapped) => {
 const ButtonDecorator = compose(
 	Pure,
 	IconButtonDecorator,
+	MarqueeDecorator,
 	TooltipDecorator({tooltipDestinationProp: 'decoration'}),
-	MarqueeDecorator({className: componentCss.marquee}),
 	UiButtonDecorator,
 	Spottable,
 	Skinnable
