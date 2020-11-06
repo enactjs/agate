@@ -2,7 +2,8 @@ import DateTimePicker from '../../../../DateTimePicker';
 import React from 'react';
 
 const DateTimePickerTests = [
-	<DateTimePicker />
+	<DateTimePicker />,
+	<DateTimePicker disabled />
 ];
 
 export default DateTimePickerTests;
