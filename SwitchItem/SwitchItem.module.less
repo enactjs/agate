@@ -9,7 +9,10 @@
 	}
 
 	.switchIcon {
-		margin-left: 10px;
 		pointer-events: none;
+
+		.applySkins({
+			.margin-start-end(@agate-switch-icon-margin, 0);
+		});
 	}
 }
