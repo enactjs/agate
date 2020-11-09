@@ -3,6 +3,15 @@
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
 ## [unreleased]
+
+### Added
+- `agate/Marquee` new component
+- `agate/Button` marquee decorator
+- `agate/Button` tooltip decorator
+- `agate/Button` iconOnly, iconPosition, minWidth props
+
+### Changed
+- `agate/Button` minWidth computed with IconButtonDecorator HoC
  
 ### Fixed
 - `agate/DateTimePicker` returned value by onChange event
