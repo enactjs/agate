@@ -101,6 +101,18 @@ const PickerBase = kind({
 		accessibilityHint: PropTypes.string,
 
 		/**
+		 * The "aria-label" for the picker.
+		 *
+		 * While the `aria-label` will always be set on the root node, that node is only focusable
+		 * when the picker is `joined`.
+		 *
+		 * @type {String}
+		 * @memberof agate/internal/Picker.PickerBase.prototype
+		 * @public
+		 */
+		'aria-label': PropTypes.string,
+
+		/**
 		 * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
 		 * to the current value. This should only be used when the parent controls the value of
 		 * the picker directly through the props.
@@ -358,7 +370,7 @@ const PickerBase = kind({
 
 	computed: {
 		activeClassName: ({styler}) => styler.join('active', 'item'),
-		'aria-label': ({'aria-label': ariaLabel, 'aria-valueText': valueText}) => {
+		'aria-label': ({'aria-label': ariaLabel, 'aria-valuetext': valueText}) => {
 			if (ariaLabel != null) {
 				return ariaLabel;
 			}
