@@ -45,7 +45,7 @@ const SliderButtonBehaviorDecorator = hoc((config, Wrapped) => {
 		}
 
 		handleChange = ({value}) => {
-			this.setState(() => ({valueText: this.props.children[value]}));
+			this.setState((prevState, props) => ({valueText: props.children[value]}));
 			forward('onChange', {
 				type: 'onChange',
 				value
