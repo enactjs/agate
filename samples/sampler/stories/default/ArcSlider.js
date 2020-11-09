@@ -6,7 +6,6 @@ import {storiesOf} from '@storybook/react';
 
 import Arc, {ArcBase} from '@enact/agate/Arc';
 import ArcSlider, {ArcSliderBase} from '@enact/agate/ArcSlider';
-import TemperatureControl from "../../../../TemperatureControl";
 
 ArcSlider.displayName = 'ArcSlider';
 const Config = mergeComponentMetadata('ArcSlider', ArcSliderBase, ArcSlider);
