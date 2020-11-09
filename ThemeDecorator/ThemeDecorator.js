@@ -253,7 +253,6 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			 *
 			 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
 			 * @type {String}
-			 * @default '#8b7efe'
 			 * @public
 			 */
 			accent: PropTypes.string,
@@ -263,7 +262,6 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			 *
 			 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
 			 * @type {String}
-			 * @default '#c6c0fe'
 			 * @public
 			 */
 			highlight: PropTypes.string
