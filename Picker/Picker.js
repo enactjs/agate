@@ -97,7 +97,7 @@ const PickerBase = kind({
 	},
 
 	defaultProps: {
-		orientation: "vertical",
+		orientation: 'vertical',
 		value: 0
 	},
 

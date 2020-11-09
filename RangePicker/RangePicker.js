@@ -19,7 +19,7 @@ import compose from 'ramda/src/compose';
 import React from 'react';
 
 import PickerCore from '../internal/Picker';
-import PickerItem from "../internal/Picker/PickerItem";
+import PickerItem from '../internal/Picker/PickerItem';
 
 /**
  * RangePicker base component.
