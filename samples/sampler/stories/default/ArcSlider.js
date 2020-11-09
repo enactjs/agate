@@ -1,11 +1,12 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {select, number} from '@enact/storybook-utils/addons/knobs';
+import {select, number, boolean} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Arc, {ArcBase} from '@enact/agate/Arc';
 import ArcSlider, {ArcSliderBase} from '@enact/agate/ArcSlider';
+import TemperatureControl from "../../../../TemperatureControl";
 
 ArcSlider.displayName = 'ArcSlider';
 const Config = mergeComponentMetadata('ArcSlider', ArcSliderBase, ArcSlider);
@@ -30,6 +31,7 @@ storiesOf('Agate', module)
 		() => (
 			<ArcSlider
 				backgroundColor={select('backgroundColor', prop.colors, Config)}
+				disabled={boolean('disabled', Config)}
 				endAngle={number('endAngle', Config, {range: true, min: 0, max: 360})}
 				foregroundColor={select('foregroundColor', prop.colors, Config)}
 				max={number('max', Config)}
