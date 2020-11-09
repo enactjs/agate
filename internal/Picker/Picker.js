@@ -515,6 +515,14 @@ const PickerBase = kind({
 	}
 });
 
+/**
+ * A higher-order component that filters the values returned by the onChange event on {@link agate/internal/Picker.Picker}
+ *
+ * @class ChangeAdapter
+ * @hoc
+ * @memberof agate/internal/Picker
+ * @private
+ */
 const ChangeAdapter = hoc((config, Wrapped) => {
 	return kind({
 		name: 'ChangeAdapter',
@@ -545,8 +553,8 @@ const ChangeAdapter = hoc((config, Wrapped) => {
  */
 const PickerDecorator = compose(
 	IdProvider({generateProp: null}),
-	ChangeAdapter,
 	Changeable,
+	ChangeAdapter,
 	Changeable({prop: 'reverseTransition'}),
 	Skinnable({prop: 'skin'})
 );
