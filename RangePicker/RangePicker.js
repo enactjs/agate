@@ -66,6 +66,18 @@ const RangePickerBase = kind({
 		value: PropTypes.number.isRequired,
 
 		/**
+		 * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
+		 * to the current value. This should only be used when the parent controls the value of
+		 * the picker directly through the props.
+		 *
+		 * @name aria-valuetext
+		 * @type {String|Number}
+		 * @memberof agate/RangePicker.RangePicker.prototype
+		 * @public
+		 */
+		'aria-valuetext': PropTypes.string,
+
+		/**
 		 * Children from which to pick.
 		 *
 		 * @type {Node}
@@ -90,12 +102,36 @@ const RangePickerBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
+		 * Disables animation.
+		 *
+		 * By default, the picker will animate transitions between items, provided a `width` is
+		 * defined.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		noAnimation: PropTypes.bool,
+
+		/**
 		 * Called when `value` changes.
 		 *
 		 * @type {Function}
 		 * @public
 		 */
 		onChange: PropTypes.func,
+
+		/**
+		 * Orientation of the picker.
+		 *
+		 * Controls whether the buttons are arranged horizontally or vertically around the value.
+		 *
+		 * * Values: `'horizontal'`, `'vertical'`
+		 *
+		 * @type {'horizontal'|'vertical'}
+		 * @default 'horizontal'
+		 * @public
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
 		 * The smallest value change allowed for the picker.
@@ -136,17 +172,6 @@ const RangePickerBase = kind({
 });
 
 /**
- * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
- * to the current value. This should only be used when the parent controls the value of
- * the picker directly through the props.
- *
- * @name aria-valuetext
- * @type {String|Number}
- * @memberof agate/RangePicker.RangePicker.prototype
- * @public
- */
-
-/**
  * Sets the hint string read when focusing the decrement button.
  *
  * @name decrementAriaLabel
@@ -163,20 +188,6 @@ const RangePickerBase = kind({
  * @memberof agate/RangePicker.RangePicker.prototype
  * @default 'next item'
  * @type {String}
- * @public
- */
-
-/**
- * Orientation of the picker.
- *
- * Controls whether the buttons are arranged horizontally or vertically around the value.
- *
- * * Values: `'horizontal'`, `'vertical'`
- *
- * @name orientation
- * @memberof agate/RangePicker.RangePicker.prototype
- * @type {String}
- * @default 'vertical'
  * @public
  */
 
