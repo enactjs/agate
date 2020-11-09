@@ -81,6 +81,10 @@
 			}
 		}
 
+		&.minWidth {
+			min-width: @agate-button-min-width;
+		}
+
 		// opaque
 		&.opaque {
 			/* Available for export */
@@ -189,6 +193,10 @@
 			font-size: @agate-button-small-font-size;
 			line-height: @agate-button-line-height;
 			padding: 0 @agate-button-small-h-padding;
+
+			&.minWidth {
+				min-width: @agate-button-small-min-width;
+			}
 
 			.client::before {
 				bottom: 12px;
