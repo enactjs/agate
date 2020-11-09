@@ -50,6 +50,26 @@ const PickerBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
+		 * Disables marqueeing of items.
+		 *
+		 * By default, each picker item is wrapped by a
+		 * [`Marquee`]{@link ui/Marquee.Marquee}. When this is set, the items will
+		 * not be wrapped.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		marqueeDisabled: PropTypes.bool,
+
+		/**
+		 * Disables transition animation.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		noAnimation: PropTypes.bool,
+
+		/**
 		 * Called when the `value` changes.
 		 *
 		 * @type {Function}
@@ -64,10 +84,20 @@ const PickerBase = kind({
 		 * @default 0
 		 * @public
 		 */
-		value: PropTypes.number
+		value: PropTypes.number,
+
+		/**
+		 * Allows picker to continue from the start of the list after it reaches the end and
+		 * vice-versa.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		wrap: PropTypes.bool
 	},
 
 	defaultProps: {
+		orientation: "vertical",
 		value: 0
 	},
 

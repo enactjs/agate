@@ -19,6 +19,7 @@ import compose from 'ramda/src/compose';
 import React from 'react';
 
 import PickerCore from '../internal/Picker';
+import PickerItem from "../internal/Picker/PickerItem";
 
 /**
  * RangePicker base component.
@@ -165,7 +166,7 @@ const RangePickerBase = kind({
 	render: ({value, ...rest}) => {
 		return (
 			<PickerCore {...rest} index={0} value={value}>
-				{value}
+				<PickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{value}</PickerItem>
 			</PickerCore>
 		);
 	}
