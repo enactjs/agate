@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-bind */
+
 /**
  * A internal Picker component.
  *
@@ -9,16 +11,19 @@
 
 import {adaptEvent, forEventProp, forward, handle, oneOf} from '@enact/core/handle';
 import kind from '@enact/core/kind';
+import hoc from '@enact/core/hoc';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import IdProvider from '@enact/ui/internal/IdProvider';
 import Touchable from '@enact/ui/Touchable';
+import {SlideLeftArranger, SlideTopArranger, ViewManager} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
 import $L from '../$L';
+import {PickerItem} from './Picker';
 import Skinnable from '../../Skinnable';
 
 import css from './Picker.module.less';
@@ -29,7 +34,8 @@ const PickerButtonItem = Spottable('div');
 const handleChange = direction => handle(
 	adaptEvent(
 		(ev, {min, max, step, value}) => ({
-			value: clamp(min, max, value + (direction * step))
+			value: clamp(min, max, value + (direction * step)),
+			reverseTransition: direction < 0
 		}),
 		forward('onChange')
 	)
@@ -37,8 +43,6 @@ const handleChange = direction => handle(
 
 const increment = handleChange(1);
 const decrement = handleChange(-1);
-const secondaryIncrement = handleChange(2);
-const secondaryDecrement = handleChange(-2);
 
 /**
  * The base component for {@link agate/internal/Picker.Picker}.
@@ -52,6 +56,15 @@ const PickerBase = kind({
 	name: 'Picker',
 
 	propTypes: /** @lends agate/internal/Picker.Picker.prototype */ {
+		/**
+		 * Index for internal ViewManager
+		 *
+		 * @type {Number}
+		 * @required
+		 * @public
+		 */
+		index: PropTypes.number.isRequired,
+
 		/**
 		 * The maximum value selectable by the picker (inclusive).
 		 *
@@ -157,6 +170,16 @@ const PickerBase = kind({
 		incrementAriaLabel: PropTypes.string,
 
 		/**
+		 * By default, the picker will animate transitions between items if it has a defined
+		 * `width`. Specifying `noAnimation` will prevent any transition animation for the
+		 * component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		noAnimation: PropTypes.bool,
+
+		/**
 		 * A function to run when the control should increment or decrement.
 		 *
 		 * @type {Function}
@@ -220,6 +243,15 @@ const PickerBase = kind({
 		 * @public
 		 */
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+
+		/**
+		 * When it's `true` it changes the direction of the transition animation.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		reverseTransition: PropTypes.bool,
 
 		/**
 		 * The current skin for this component.
@@ -310,9 +342,7 @@ const PickerBase = kind({
 				[({velocityY}) => velocityY > 0, decrement]
 			)
 		),
-		handleIncrement: increment,
-		handleSecondaryDecrement: secondaryDecrement,
-		handleSecondaryIncrement: secondaryIncrement
+		handleIncrement: increment
 	},
 
 	computed: {
@@ -354,12 +384,14 @@ const PickerBase = kind({
 			handleDecrement,
 			handleFlick,
 			handleIncrement,
-			handleSecondaryDecrement,
-			handleSecondaryIncrement,
 			incrementAriaLabel: incAriaLabel,
+			index,
 			min,
 			max,
+			noAnimation,
 			onSpotlightDisappear,
+			orientation,
+			reverseTransition,
 			skin,
 			spotlightDisabled,
 			step,
@@ -368,25 +400,70 @@ const PickerBase = kind({
 			width,
 			...rest
 		} = props;
+
 		const currentValue = Array.isArray(values) ? values[value] : value;
-		const decrementValue = clamp(min, max, Array.isArray(values) ? values[value - step] : value - step);
-		const incrementValue = clamp(min, max, Array.isArray(values) ? values[value + step] : value + step);
-		const secondaryDecrementValue = clamp(min, max, Array.isArray(values) ? values[value - (2 * step)] : value - (2 * step));
-		const secondaryIncrementValue = clamp(min, max, Array.isArray(values) ? values[value + (2 * step)] : value + (2 * step));
 		const isFirst = value <= min;
 		const isLast = value >= max;
 		const isSecond = value <= min + step;
 		const isPenultimate = value >= max - step;
 		const decrementAriaLabel = `${currentValueText} ${decAriaLabel}`;
 		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
+		const transitionDuration = 150;
+
+		const decrementValue = () => {
+			const restrictedDecrementValue = clamp(min, max, value - step);
+			if (isFirst) {
+				return '';
+			} else if (Array.isArray(values)) {
+				return values;
+			} else {
+				return (<PickerItem key={restrictedDecrementValue} style={{direction: 'ltr'}}>{restrictedDecrementValue}</PickerItem>);
+			}
+		};
+
+		const incrementValue = () => {
+			const restrictedIncrementValue = clamp(min, max, value + step);
+			if (isLast) {
+				return '';
+			} else if (Array.isArray(values)) {
+				return values;
+			} else {
+				return (<PickerItem key={restrictedIncrementValue} style={{direction: 'ltr'}}>{restrictedIncrementValue}</PickerItem>);
+			}
+		};
+
+		const secondaryDecrementValue = () => {
+			const restrictedSecondaryDecrementValue = clamp(min, max, value - (2 * step));
+			if (isSecond) {
+				return '';
+			} else if (Array.isArray(values)) {
+				return values;
+			} else {
+				return (<PickerItem key={restrictedSecondaryDecrementValue} style={{direction: 'ltr'}}>{restrictedSecondaryDecrementValue}</PickerItem>);
+			}
+		};
+
+		const secondaryIncrementValue = () => {
+			const restrictedSecondaryIncrementValue = clamp(min, max, value + (2 * step));
+			if (isPenultimate) {
+				return '';
+			} else if (Array.isArray(values)) {
+				return values;
+			} else {
+				return (<PickerItem key={restrictedSecondaryIncrementValue} style={{direction: 'ltr'}}>{restrictedSecondaryIncrementValue}</PickerItem>);
+			}
+		};
 
 		let sizingPlaceholder = null;
 		if (typeof width === 'number' && width > 0) {
 			sizingPlaceholder = <div aria-hidden className={css.sizingPlaceholder}>{'0'.repeat(width)}</div>;
 		}
 
-		delete rest.accessibilityHint;
+		const horizontal = orientation === 'horizontal';
+		const arranger = horizontal ? SlideLeftArranger : SlideTopArranger;
+
 		delete rest['aria-valuetext'];
+		delete rest.accessibilityHint;
 		delete rest.orientation;
 		delete rest.onSpotlightDown;
 		delete rest.onSpotlightLeft;
@@ -402,13 +479,23 @@ const PickerBase = kind({
 						aria-label={decrementAriaLabel}
 						className={css.secondaryItemDecrement}
 						disabled={isSecond}
-						onClick={handleSecondaryDecrement}
+						onClick={() => {
+							handleDecrement(); setTimeout(() => handleDecrement(), transitionDuration);
+						}}
 						onSpotlightDisappear={onSpotlightDisappear}
 						spotlightDisabled={spotlightDisabled}
 					>
-						<div className={css.label}>
-							{isSecond ? '' : secondaryDecrementValue}
-						</div>
+						<ViewManager
+							aria-hidden
+							arranger={arranger}
+							className={css.viewManager}
+							duration={transitionDuration}
+							index={Array.isArray(values) ? index - 2 : 0}
+							noAnimation={noAnimation || disabled}
+							reverseTransition={reverseTransition}
+						>
+							{secondaryDecrementValue()}
+						</ViewManager>
 					</PickerButtonItem>
 				}
 				<PickerButtonItem
@@ -421,9 +508,17 @@ const PickerBase = kind({
 					onSpotlightDisappear={onSpotlightDisappear}
 					spotlightDisabled={spotlightDisabled}
 				>
-					<div className={css.label}>
-						{isFirst ? '' : decrementValue}
-					</div>
+					<ViewManager
+						aria-hidden
+						arranger={arranger}
+						className={css.viewManager}
+						duration={transitionDuration}
+						index={Array.isArray(values) ? index - 1 : 0}
+						noAnimation={noAnimation || disabled}
+						reverseTransition={reverseTransition}
+					>
+						{decrementValue()}
+					</ViewManager>
 				</PickerButtonItem>
 				<div
 					aria-valuetext={currentValueText}
@@ -432,9 +527,17 @@ const PickerBase = kind({
 					role="spinbutton"
 				>
 					{sizingPlaceholder}
-					<div className={css.label}>
-						{currentValue}
-					</div>
+					<ViewManager
+						aria-hidden
+						arranger={arranger}
+						className={css.viewManager}
+						duration={transitionDuration}
+						index={Array.isArray(values) ? index : 0}
+						noAnimation={noAnimation || disabled}
+						reverseTransition={reverseTransition}
+					>
+						{Array.isArray(values) ? values : (<PickerItem key={currentValue} style={{direction: 'ltr'}}>{currentValue}</PickerItem>)}
+					</ViewManager>
 				</div>
 				<PickerButtonItem
 					aria-controls={valueId}
@@ -446,9 +549,17 @@ const PickerBase = kind({
 					onSpotlightDisappear={onSpotlightDisappear}
 					spotlightDisabled={spotlightDisabled}
 				>
-					<div className={css.label}>
-						{isLast ? '' : incrementValue}
-					</div>
+					<ViewManager
+						aria-hidden
+						arranger={arranger}
+						className={css.viewManager}
+						duration={transitionDuration}
+						index={Array.isArray(values) ? index + 1 : 0}
+						noAnimation={noAnimation || disabled}
+						reverseTransition={reverseTransition}
+					>
+						{incrementValue()}
+					</ViewManager>
 				</PickerButtonItem>
 				{skin === 'silicon' &&
 					<PickerButtonItem
@@ -457,18 +568,55 @@ const PickerBase = kind({
 						aria-label={incrementAriaLabel}
 						className={css.secondaryItemIncrement}
 						disabled={isPenultimate}
-						onClick={handleSecondaryIncrement}
 						onSpotlightDisappear={onSpotlightDisappear}
 						spotlightDisabled={spotlightDisabled}
+						onClick={() => {
+							handleIncrement(); setTimeout(() => handleIncrement(), transitionDuration);
+						}}
 					>
-						<div className={css.label}>
-							{isPenultimate ? '' : secondaryIncrementValue}
-						</div>
+						<ViewManager
+							aria-hidden
+							arranger={arranger}
+							className={css.viewManager}
+							duration={transitionDuration}
+							index={Array.isArray(values) ? index + 2 : 0}
+							noAnimation={noAnimation || disabled}
+							reverseTransition={reverseTransition}
+						>
+							{secondaryIncrementValue()}
+						</ViewManager>
 					</PickerButtonItem>
 				}
 			</PickerRoot>
 		);
 	}
+});
+
+/**
+ * A higher-order component that filters the values returned by the onChange event on {@link agate/internal/Picker.Picker}
+ *
+ * @class ChangeAdapter
+ * @hoc
+ * @memberof agate/internal/Picker
+ * @private
+ */
+const ChangeAdapter = hoc((config, Wrapped) => {
+	return kind({
+		name: 'ChangeAdapter',
+
+		handlers: {
+			onChange: handle(
+				adaptEvent(({value}) => {
+					return ({value});
+				},
+				forward('onChange'))
+			)
+		},
+
+		render: (props) => {
+			return <Wrapped {...props} />;
+		}
+	});
 });
 
 /**
@@ -483,6 +631,8 @@ const PickerBase = kind({
 const PickerDecorator = compose(
 	IdProvider({generateProp: null}),
 	Changeable,
+	ChangeAdapter,
+	Changeable({prop: 'reverseTransition'}),
 	Skinnable({prop: 'skin'})
 );
 
@@ -494,3 +644,4 @@ export {
 	PickerBase,
 	PickerDecorator
 };
+export PickerItem from './PickerItem';
