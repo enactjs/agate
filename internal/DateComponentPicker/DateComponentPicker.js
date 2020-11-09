@@ -1,15 +1,13 @@
 import kind from '@enact/core/kind';
 import {mapAndFilterChildren} from '@enact/core/util';
-import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import PickerCore from '../Picker';
+import Picker from '../../Picker';
 
 import css from './DateComponentPicker.module.less';
 
-const Picker = Spottable(PickerCore);
 
 /**
  * {@link agate/internal/DataComponentPicker.DateComponentPickerBase} allows the selection of one

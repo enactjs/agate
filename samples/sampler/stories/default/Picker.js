@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -15,9 +15,14 @@ storiesOf('Agate', module)
 		() => (
 			<div style={{padding: '0 20%'}}>
 				<Picker
+					aria-label={text('aria-label', Picker, '')}
+					decrementAriaLabel={text('decrementAriaLabel', Picker, '')}
 					disabled={boolean('disabled', Config)}
+					incrementAriaLabel={text('incrementAriaLabel', Picker, '')}
+					noAnimation={boolean('noAnimation', Picker)}
 					onChange={action('onChange')}
 					orientation={select('orientation', ['vertical', 'horizontal'], Config)}
+					wrap={boolean('wrap', Picker)}
 				>
 					{['LO', '16\xB0', '17\xB0', '18\xB0', '19\xB0', 'HI']}
 				</Picker>
