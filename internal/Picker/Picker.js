@@ -245,6 +245,17 @@ const PickerBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
+		 * When `true`, the picker buttons operate in the reverse direction such that pressing
+		 * up/left decrements the value and down/right increments the value. This is more natural
+		 * for vertical lists of text options where "up" implies a spatial change rather than
+		 * incrementing the value.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		reverse: PropTypes.bool,
+
+		/**
 		 * When it's `true` it changes the direction of the transition animation.
 		 *
 		 * @type {Boolean}
@@ -347,6 +358,13 @@ const PickerBase = kind({
 
 	computed: {
 		activeClassName: ({styler}) => styler.join('active', 'item'),
+		'aria-label': ({'aria-label': ariaLabel, 'aria-valueText': valueText}) => {
+			if (ariaLabel != null) {
+				return ariaLabel;
+			}
+
+			return valueText;
+		},
 		className: ({orientation, styler}) => styler.append(orientation),
 		currentValueText: ({accessibilityHint, 'aria-valuetext': ariaValueText, children, value}) => {
 			if (ariaValueText != null) {
@@ -377,6 +395,7 @@ const PickerBase = kind({
 	render: (props) => {
 		const {
 			activeClassName,
+			'aria-label': ariaLabel,
 			children: values,
 			currentValueText,
 			decrementAriaLabel: decAriaLabel,
@@ -470,6 +489,12 @@ const PickerBase = kind({
 		delete rest.onSpotlightRight;
 		delete rest.onSpotlightUp;
 
+		delete rest.decrementAriaLabel;
+		delete rest.incrementAriaLabel;
+		delete rest.noAnimation;
+		delete rest.onChange;
+		delete rest.wrap;
+
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
 				{skin === 'silicon'  &&
@@ -521,6 +546,7 @@ const PickerBase = kind({
 					</ViewManager>
 				</PickerButtonItem>
 				<div
+					aria-label={ariaLabel}
 					aria-valuetext={currentValueText}
 					className={activeClassName}
 					id={valueId}
