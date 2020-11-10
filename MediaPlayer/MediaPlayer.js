@@ -538,15 +538,15 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 
 		preventErrorPlay = () => {
 			const playPromise = this.play();
-			if (playPromise !== undefined) {
-				playPromise.then(_ => {
+			if (playPromise) {
+				playPromise.then(() => {
 					this.play();
 				})
-					.catch(error => {
+					.catch(() => {
 						// Auto-play was prevented
 					});
 			}
-		}
+		};
 
 		handleNext = () => {
 			let currentIndex = this.state.sourceIndex;
