@@ -194,7 +194,6 @@
 				--node-proportion-offset: calc((~"var(--node-index)" - 1) / (@loading-nodes - 1));
 				--node-even-spacing: calc(~"var(--node-proportion-offset)" * 100%);
 				--node-relative-offset: calc((~"var(--node-index)" - 1) * ~"var(--node-width)");
-
 				--node-position: calc(var(--node-even-spacing) - var(--node-relative-offset) - (var(--node-proportion-offset) * @agate-spinner-loading-width));
 
 				left: var(--node-position);

@@ -242,9 +242,9 @@
 @agate-heading-margin: 0 @agate-spotlight-outset (1.5 * @agate-spotlight-outset) @agate-spotlight-outset;
 @agate-heading-padding: 0;
 @agate-heading-spacing-title: 0;
-@agate-heading-spacing-medium: @agate-component-spacing;
-@agate-heading-spacing-small: inherit;
-@agate-heading-spacing-large: inherit;
+@agate-heading-spacing-small: @agate-component-spacing;
+@agate-heading-spacing-medium: (@agate-component-spacing + 6px);
+@agate-heading-spacing-large: (@agate-component-spacing + 12px);
 @agate-heading-text-transform: none;
 @agate-heading-showline-padding: 12px;
 @agate-heading-letter-spacing: normal;
@@ -613,6 +613,7 @@
 @agate-switch-height: 48px;
 @agate-switch-width: 96px;
 @agate-switch-border-radius: (@agate-switch-height / 2);
+@agate-switch-icon-margin: 9px;
 @agate-switch-icon-scale: 2;
 @agate-switch-icon-font-family: @agate-icon-font-family;
 @agate-switch-icon-font-size: (@agate-switch-height * @agate-switch-icon-scale);
