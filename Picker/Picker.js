@@ -12,11 +12,15 @@
  */
 
 import kind from '@enact/core/kind';
+import Changeable from "@enact/ui/Changeable";
+import Pure from "@enact/ui/internal/Pure";
 import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
+import compose from "ramda/src/compose";
 import React from 'react';
 
-import PickerCore, {PickerDecorator, PickerItem} from '../internal/Picker';
+import PickerCore, {PickerItem} from '../internal/Picker';
+
 /**
  * The base `Picker` component.
  *
@@ -90,6 +94,7 @@ const PickerBase = kind({
 		 * vice-versa.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		wrap: PropTypes.bool
@@ -174,6 +179,19 @@ const PickerBase = kind({
  * @default 'vertical'
  * @public
  */
+
+/**
+ * Applies Agate specific behaviors to [PickerBase]{@link agate/Picker.PickerBase} components.
+ *
+ * @hoc
+ * @memberof agate/Picker
+ * @mixes ui/Changeable.Changeable
+ * @public
+ */
+const PickerDecorator = compose(
+	Pure,
+	Changeable
+);
 
 /**
  * A Picker component that allows selecting values from a list of values.
