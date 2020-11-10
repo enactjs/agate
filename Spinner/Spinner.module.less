@@ -187,12 +187,6 @@
 				height: @agate-spinner-loading-height;
 				border-radius: @agate-spinner-loading-border-radius;
 
-				--node-index: 1;
-				--node-width: @agate-spinner-loading-width;
-				--node-proportion-offset: calc((~"var(--node-index)" - 1) / (@loading-nodes - 1));
-				--node-even-spacing: calc(~"var(--node-proportion-offset)" * 100%);
-				--node-relative-offset: calc((~"var(--node-index)" - 1) * ~"var(--node-width)");
-
 				// These nodes are relatively positioned so we can use the width of the parent node
 				// in our carculations. The math below works as follows:
 				//    1. Evenly distribute the nodes across the parent's width.
@@ -202,11 +196,19 @@
 				//       ever increasing amount of pixels off of each node progressively until the
 				//       last one, where we end up subtracting its entire width, so it fits neatly
 				//       inside the parent.
-				left: calc(
-					var(--node-even-spacing) -
-					var(--node-relative-offset) -
-					(var(--node-proportion-offset) * @agate-spinner-loading-width)
-				);
+				--node-index: 1;
+				--node-width: @agate-spinner-loading-width;
+				--node-proportion-offset: calc((~"var(--node-index)" - 1) / (@loading-nodes - 1));
+				--node-even-spacing: calc(~"var(--node-proportion-offset)" * 100%);
+				--node-relative-offset: calc((~"var(--node-index)" - 1) * ~"var(--node-width)");
+				--node-position: calc(var(--node-even-spacing) - var(--node-relative-offset) - (var(--node-proportion-offset) * @agate-spinner-loading-width));
+
+				left: var(--node-position);
+
+				.enact-locale-rtl({
+					right: var(--node-position);
+					left: initial;
+				});
 			}
 
 			.bounce-loop(@loading-nodes);
