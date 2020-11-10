@@ -13,7 +13,7 @@ import Spinner, {SpinnerBase} from '@enact/agate/Spinner';
 Spinner.displayName = 'Spinner';
 const Config = mergeComponentMetadata('Spinner', UiSpinnerBase, UiSpinner, SpinnerBase, Spinner);
 
-const SkinSpinnerBase = kind({
+const SkinnedSpinnerBase = kind({
 	name: 'SkinSpinner',
 
 	propTypes: {
@@ -25,7 +25,7 @@ const SkinSpinnerBase = kind({
 	}
 });
 
-const SkinSpinner = Skinnable({variantsProp: 'skinVariants'}, SkinSpinnerBase);
+const SkinnedSpinner = Skinnable({variantsProp: 'skinVariants'}, SkinnedSpinnerBase);
 
 storiesOf('Agate', module)
 	.add(
@@ -76,7 +76,7 @@ storiesOf('Agate', module)
 							width: '100%'
 						}}
 					/>
-					<SkinSpinner
+					<SkinnedSpinner
 						blockClickOn={select('blockClickOn', [null, 'container', 'screen'], Config)}
 						centered={boolean('centered', Config)}
 						paused={boolean('paused', Config)}
