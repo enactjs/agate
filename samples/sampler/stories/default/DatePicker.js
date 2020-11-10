@@ -18,7 +18,6 @@ storiesOf('Agate', module)
 				disabled={boolean('disabled', Config)}
 				monthAriaLabel={text('monthAriaLabel', Config)}
 				onChange={action('onChange')}
-				onComplete={action('onComplete')}
 				spotlightDisabled={boolean('spotlightDisabled', Config)}
 				yearAriaLabel={text('yearAriaLabel', Config)}
 			/>

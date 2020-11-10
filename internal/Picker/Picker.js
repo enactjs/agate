@@ -31,10 +31,20 @@ import css from './Picker.module.less';
 const PickerRoot = Touchable('div');
 const PickerButtonItem = Spottable('div');
 
+const wrapRange = (min, max, value) => {
+	if (value > max) {
+		return min;
+	} else if (value < min) {
+		return max;
+	} else {
+		return value;
+	}
+};
+
 const handleChange = direction => handle(
 	adaptEvent(
-		(ev, {min, max, step, value}) => ({
-			value: clamp(min, max, value + (direction * step)),
+		(ev, {min, max, step, value, wrap}) => ({
+			value: wrap ? wrapRange(min, max, value + (direction * step)) :  clamp(min, max, value + (direction * step)),
 			reverseTransition: direction < 0
 		}),
 		forward('onChange')
@@ -429,10 +439,10 @@ const PickerBase = kind({
 			value,
 			valueId,
 			width,
+			wrap,
 			...rest
 		} = props;
 
-		const currentValue = Array.isArray(values) ? values[value] : value;
 		const isFirst = value <= min;
 		const isLast = value >= max;
 		const isSecond = value <= min + step;
@@ -442,8 +452,8 @@ const PickerBase = kind({
 		const transitionDuration = 150;
 
 		const decrementValue = () => {
-			const restrictedDecrementValue = clamp(min, max, value - step);
-			if (isFirst) {
+			const restrictedDecrementValue = wrap ? wrapRange(min, max, value - step) : clamp(min, max, value - step);
+			if (isFirst && !wrap) {
 				return '';
 			} else if (Array.isArray(values)) {
 				return values;
@@ -453,8 +463,8 @@ const PickerBase = kind({
 		};
 
 		const incrementValue = () => {
-			const restrictedIncrementValue = clamp(min, max, value + step);
-			if (isLast) {
+			const restrictedIncrementValue = wrap ? wrapRange(min, max, value + step) : clamp(min, max, value + step);
+			if (isLast && !wrap) {
 				return '';
 			} else if (Array.isArray(values)) {
 				return values;
@@ -464,8 +474,8 @@ const PickerBase = kind({
 		};
 
 		const secondaryDecrementValue = () => {
-			const restrictedSecondaryDecrementValue = clamp(min, max, value - (2 * step));
-			if (isSecond) {
+			const restrictedSecondaryDecrementValue = wrap ? wrapRange(min, max, value - (2 * step)) : clamp(min, max, value - (2 * step));
+			if (isSecond && !wrap) {
 				return '';
 			} else if (Array.isArray(values)) {
 				return values;
@@ -475,14 +485,54 @@ const PickerBase = kind({
 		};
 
 		const secondaryIncrementValue = () => {
-			const restrictedSecondaryIncrementValue = clamp(min, max, value + (2 * step));
-			if (isPenultimate) {
+			const restrictedSecondaryIncrementValue = wrap ? wrapRange(min, max, value + (2 * step)) : clamp(min, max, value + (2 * step));
+			if (isPenultimate && !wrap) {
 				return '';
 			} else if (Array.isArray(values)) {
 				return values;
 			} else {
 				return (<PickerItem key={restrictedSecondaryIncrementValue} style={{direction: 'ltr'}}>{restrictedSecondaryIncrementValue}</PickerItem>);
 			}
+		};
+
+		const currentItemIndex = () => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index);
+				} else return index;
+			} else return 0;
+		};
+
+		const decrementItemIndex = () => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index - 1);
+				} else return index - 1;
+			} else return 0;
+		};
+
+		const incrementItemIndex = () => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index + 1);
+				} else return index + 1;
+			} else return 0;
+		};
+
+		const secondaryDecrementItemIndex = () => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index - 2);
+				} else return index - 2;
+			} else return 0;
+		};
+
+		const secondaryIncrementItemIndex = () => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index + 2);
+				} else return index + 2;
+			} else return 0;
 		};
 
 		let sizingPlaceholder = null;
@@ -527,7 +577,7 @@ const PickerBase = kind({
 							arranger={arranger}
 							className={css.viewManager}
 							duration={transitionDuration}
-							index={Array.isArray(values) ? index - 2 : 0}
+							index={secondaryDecrementItemIndex()}
 							noAnimation={noAnimation || disabled}
 							reverseTransition={reverseTransition}
 						>
@@ -550,7 +600,7 @@ const PickerBase = kind({
 						arranger={arranger}
 						className={css.viewManager}
 						duration={transitionDuration}
-						index={Array.isArray(values) ? index - 1 : 0}
+						index={decrementItemIndex()}
 						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
 					>
@@ -570,11 +620,11 @@ const PickerBase = kind({
 						arranger={arranger}
 						className={css.viewManager}
 						duration={transitionDuration}
-						index={Array.isArray(values) ? index : 0}
+						index={currentItemIndex()}
 						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
 					>
-						{Array.isArray(values) ? values : (<PickerItem key={currentValue} style={{direction: 'ltr'}}>{currentValue}</PickerItem>)}
+						{values}
 					</ViewManager>
 				</div>
 				<PickerButtonItem
@@ -592,7 +642,7 @@ const PickerBase = kind({
 						arranger={arranger}
 						className={css.viewManager}
 						duration={transitionDuration}
-						index={Array.isArray(values) ? index + 1 : 0}
+						index={incrementItemIndex()}
 						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
 					>
@@ -617,7 +667,7 @@ const PickerBase = kind({
 							arranger={arranger}
 							className={css.viewManager}
 							duration={transitionDuration}
-							index={Array.isArray(values) ? index + 2 : 0}
+							index={secondaryIncrementItemIndex()}
 							noAnimation={noAnimation || disabled}
 							reverseTransition={reverseTransition}
 						>
