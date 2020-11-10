@@ -536,7 +536,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 			}
 		};
 
-		preventErrorPlay = () => {
+		asyncPlay = () => {
 			const playPromise = this.play();
 			if (playPromise) {
 				playPromise.then(() => {
@@ -566,11 +566,11 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				this.setState(() => {
 					return ({sourceIndex: currentIndex});
 				}, () => {
-					this.preventErrorPlay();
+					this.asyncPlay();
 				});
 			} else {
 				this.media.currentTime = 0;
-				this.preventErrorPlay();
+				this.asyncPlay();
 			}
 		};
 
@@ -587,11 +587,11 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				this.setState(() => {
 					return ({sourceIndex: currentIndex});
 				}, () => {
-					this.preventErrorPlay();
+					this.asyncPlay();
 				});
 			} else {
 				this.media.currentTime = 0;
-				this.preventErrorPlay();
+				this.asyncPlay();
 			}
 		};
 
