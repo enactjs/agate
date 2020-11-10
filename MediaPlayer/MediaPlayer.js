@@ -15,7 +15,6 @@ import {memoize} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import {useAnnounce} from '@enact/ui/AnnounceDecorator';
 import Pure from '@enact/ui/internal/Pure';
-import Media from '@enact/ui/Media';
 import Slottable from '@enact/ui/Slottable';
 import DurationFmt from 'ilib/lib/DurationFmt';
 import PropTypes from 'prop-types';
@@ -24,6 +23,7 @@ import React from 'react';
 
 import $L from '../internal/$L';
 
+import Media from '../Media';
 import MediaControls from './MediaControls';
 import MediaSlider from './MediaSlider';
 import Skinnable from '../Skinnable';
@@ -462,7 +462,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		 * @private
 		 */
 		send = (action, props) => {
-			this.media[action](props);
+			return this.media[action](props);
 		};
 
 		handleEvent = () => {
@@ -489,7 +489,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		 * @public
 		 */
 		play = () => {
-			this.send('play');
+			return this.send('play');
 		};
 
 		/**
@@ -536,6 +536,18 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 			}
 		};
 
+		preventErrorPlay = () => {
+			const playPromise = this.play();
+			if (playPromise !== undefined) {
+				playPromise.then(_ => {
+					this.play();
+				})
+					.catch(error => {
+						// Auto-play was prevented
+					});
+			}
+		}
+
 		handleNext = () => {
 			let currentIndex = this.state.sourceIndex;
 
@@ -554,11 +566,11 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				this.setState(() => {
 					return ({sourceIndex: currentIndex});
 				}, () => {
-					this.play();
+					this.preventErrorPlay();
 				});
 			} else {
 				this.media.currentTime = 0;
-				this.play();
+				this.preventErrorPlay();
 			}
 		};
 
@@ -575,11 +587,11 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				this.setState(() => {
 					return ({sourceIndex: currentIndex});
 				}, () => {
-					this.play();
+					this.preventErrorPlay();
 				});
 			} else {
 				this.media.currentTime = 0;
-				this.play();
+				this.preventErrorPlay();
 			}
 		};
 
