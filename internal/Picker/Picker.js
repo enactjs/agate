@@ -267,17 +267,6 @@ const PickerBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
-		 * When `true`, the picker buttons operate in the reverse direction such that pressing
-		 * up/left decrements the value and down/right increments the value. This is more natural
-		 * for vertical lists of text options where "up" implies a spatial change rather than
-		 * incrementing the value.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		reverse: PropTypes.bool,
-
-		/**
 		 * When it's `true` it changes the direction of the transition animation.
 		 *
 		 * @type {Boolean}

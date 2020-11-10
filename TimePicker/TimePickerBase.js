@@ -363,15 +363,6 @@ const TimePickerBase = kind({
 	}
 });
 
-/**
- * Called when `Enter` key down on the last picker
- *
- * @name onComplete
- * @memberof agate/TimePicker.TimePickerBase.prototype
- * @type {Function}
- * @public
- */
-
 export default TimePickerBase;
 export {
 	TimePickerBase

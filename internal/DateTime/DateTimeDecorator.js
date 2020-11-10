@@ -5,17 +5,16 @@
  * @private
  */
 
-import handle, {call, forKey, forProp, forward} from '@enact/core/handle';
+import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import {memoize} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
-import Spotlight from '@enact/spotlight';
 import Changeable from '@enact/ui/Changeable';
 import DateFactory from 'ilib/lib/DateFactory';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-/*
+/**
  * Converts a JavaScript Date to unix time
  *
  * @param	{Date}	date	A Date to convert
@@ -67,22 +66,6 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 			 * @public
 			 */
 			onChange: PropTypes.func,
-
-			/**
-			 * Handler for `onComplete` event
-			 *
-			 * @type {Function}
-			 * @public
-			 */
-			onComplete: PropTypes.func,
-
-			/**
-			 * Indicates the content's text direction is right-to-left.
-			 *
-			 * @type {Boolean}
-			 * @private
-			 */
-			rtl: PropTypes.bool,
 
 			/**
 			 * The selected date
@@ -203,23 +186,6 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 			}
 		};
 
-		handleEnter = (ev) => {
-			if (ev.target && ev.target.dataset.lastElement === 'true') {
-				const value = this.state.value ? this.toIDate(this.state.value) : null;
-
-				forward('onComplete', {value: value ? value.getJSDate() : null}, this.props);
-			} else {
-				Spotlight.move(this.props.rtl ? 'left' : 'right');
-			}
-		};
-
-		handleKeyDown = handle(
-			forward('onKeyDown'),
-			forKey('enter'),
-			forProp('disabled', false),
-			call('handleEnter')
-		).bindAs(this, 'handleKeyDown');
-
 		render () {
 			const value = this.toIDate(this.state.value);
 			// pickerValue is only set when cancelling to prevent the unexpected changing of the
@@ -235,15 +201,11 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 				order = i18nConfig.order;
 			}
 
-			const rest = Object.assign({}, this.props);
-			delete rest.onComplete;
-
 			return (
 				<Wrapped
 					{...this.props}
 					{...props}
 					{...this.handlers}
-					// onKeyDown={this.handleKeyDown}
 					order={order}
 					value={value}
 				/>

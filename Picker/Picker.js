@@ -12,11 +12,11 @@
  */
 
 import kind from '@enact/core/kind';
-import Changeable from "@enact/ui/Changeable";
-import Pure from "@enact/ui/internal/Pure";
+import Changeable from '@enact/ui/Changeable';
+import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
-import compose from "ramda/src/compose";
+import compose from 'ramda/src/compose';
 import React from 'react';
 
 import PickerCore, {PickerItem} from '../internal/Picker';
@@ -51,18 +51,6 @@ const PickerBase = kind({
 		 * @public
 		 */
 		disabled: PropTypes.bool,
-
-		/**
-		 * Disables marqueeing of items.
-		 *
-		 * By default, each picker item is wrapped by a
-		 * [`Marquee`]{@link ui/Marquee.Marquee}. When this is set, the items will
-		 * not be wrapped.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		marqueeDisabled: PropTypes.bool,
 
 		/**
 		 * Disables transition animation.

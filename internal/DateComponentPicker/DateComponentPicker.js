@@ -78,24 +78,22 @@ const DateComponentPickerBase = kind({
 		max: ({children}) => React.Children.count(children) - 1
 	},
 
-	render: ({accessibilityHint, 'aria-valuetext': ariaValuetext, children, max, value, wrap, ...rest}) => {
-		return (
-			<PickerCore
-				{...rest}
-				accessibilityHint={accessibilityHint}
-				aria-valuetext={(accessibilityHint == null) ? ariaValuetext : null}
-				css={css}
-				index={value}
-				max={max}
-				min={0}
-				orientation="vertical"
-				value={value}
-				wrap={wrap}
-			>
-				{children}
-			</PickerCore>
-		);
-	}
+	render: ({accessibilityHint, 'aria-valuetext': ariaValuetext, children, max, value, wrap, ...rest}) => (
+		<PickerCore
+			{...rest}
+			accessibilityHint={accessibilityHint}
+			aria-valuetext={(accessibilityHint == null) ? ariaValuetext : null}
+			css={css}
+			index={value}
+			max={max}
+			min={0}
+			orientation="vertical"
+			value={value}
+			wrap={wrap}
+		>
+			{children}
+		</PickerCore>
+	)
 });
 
 /**
