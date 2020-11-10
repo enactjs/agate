@@ -14,6 +14,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Spinner` to pause the animation when `paused` prop is true
 - `agate/SwitchItem` icon position for all skins RTL locale and Electro/Titanium both LTR and RTL locale
 - `agate/Picker` picker item width in horizontal for silicon
+- `agate/TemperatureControl` to not be draggable when it's disabled
 
 ## [1.0.0] - 2020-10-14
 

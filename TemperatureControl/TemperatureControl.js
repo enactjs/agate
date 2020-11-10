@@ -43,6 +43,14 @@ const TemperatureControlBase =  kind({
 
 	propTypes: /** @lends agate/TemperatureControl.TemperatureControlBase.prototype */ {
 		/**
+		 * Disables TemperatureControl and becomes non-interactive.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
+		/**
 		 * The minimum value of the slider.
 		 *
 		 * @type {Number}
@@ -99,7 +107,7 @@ const TemperatureControlBase =  kind({
 		publicClassNames: true
 	},
 
-	render: ({max, min, onChange, unit, value, ...rest}) => {
+	render: ({disabled, max, min, onChange, unit, value, ...rest}) => {
 		const currentTemperature = MeasurementFactory({unit, amount: value});
 		const ufmt = new UnitFmt({autoConvert: true, length: 'short', maxFractionDigits: 0, roundingMode: 'halfup'});
 		const currentTemperatureString =  ufmt.format(currentTemperature);
@@ -109,6 +117,7 @@ const TemperatureControlBase =  kind({
 				<ArcSlider
 					backgroundColor="#444444"
 					className={css.slider}
+					disabled={disabled}
 					endAngle={310}
 					foregroundColor={value < min + (max - min) / 2 ? '#007aff' : '#f24949'}
 					max={max}
