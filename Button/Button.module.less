@@ -63,6 +63,10 @@
 			color: @agate-button-badge-color;
 			background-color: var(--agate-button-badge-bg-color, @agate-button-badge-bg-color);
 			z-index: 1;
+
+			.enact-locale-rtl({
+				.position(@agate-button-badge-position-rtl);
+			});
 		}
 
 		&.grid {
@@ -213,6 +217,10 @@
 				letter-spacing: @agate-button-small-badge-letter-spacing;
 				text-indent: @agate-button-small-badge-text-indent;
 				transform: @agate-button-small-badge-transform;
+
+				.enact-locale-rtl({
+					.position(@agate-button-small-badge-position-rtl);
+				});
 			}
 		}
 
@@ -232,6 +240,10 @@
 				letter-spacing: @agate-button-smallest-badge-letter-spacing;
 				text-indent: @agate-button-smallest-badge-text-indent;
 				transform: @agate-button-smallest-badge-transform;
+
+				.enact-locale-rtl({
+					.position(@agate-button-smallest-badge-position-rtl);
+				});
 			}
 		}
 

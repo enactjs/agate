@@ -57,6 +57,7 @@ const ButtonBase = kind({
 		 * The delay before the button is animated, in milliseconds.
 		 *
 		 * @type {Number}
+		 * @default 0
 		 * @public
 		 */
 		animationDelay: PropTypes.number,
@@ -129,10 +130,10 @@ const ButtonBase = kind({
 		/**
 		 * The component used to render the icon.
 		 *
-		 * @type {Component}
-		 * @public
+		 * @type {Component|Node}
+		 * @private
 		 */
-		iconComponent: EnactPropTypes.component,
+		iconComponent: EnactPropTypes.componentOverride,
 
 		/**
 		 * True if button is an icon only button.
@@ -212,8 +213,10 @@ const ButtonBase = kind({
 	},
 
 	defaultProps: {
+		animationDelay: 0,
 		backgroundOpacity: 'opaque',
 		iconComponent: Icon,
+		iconOnly: false,
 		iconPosition: 'before',
 		size: 'large',
 		type: 'standard'

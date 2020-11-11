@@ -42,8 +42,8 @@ export {
 	 *
 	 * @see {@link ui/Marquee.Marquee}
 	 * @class Marquee
-	 * @extends ui/Marquee.Marquee
 	 * @memberof agate/Marquee
+	 * @extends ui/Marquee.Marquee
 	 * @ui
 	 * @public
 	 */
@@ -54,8 +54,8 @@ export {
 	 *
 	 * @see {@link ui/Marquee.Marquee}
 	 * @class MarqueeBase
-	 * @extends ui/Marquee.MarqueeBase
 	 * @memberof agate/Marquee
+	 * @extends ui/Marquee.MarqueeBase
 	 * @ui
 	 * @public
 	 */
@@ -67,8 +67,8 @@ export {
 	 * @see {@link ui/Marquee.MarqueeController}
 	 * @hoc
 	 * @name MarqueeController
-	 * @extends ui/Marquee.MarqueeController
 	 * @memberof agate/Marquee
+	 * @extends ui/Marquee.MarqueeController
 	 * @public
 	 */
 	MarqueeController,
@@ -79,8 +79,8 @@ export {
 	 * @see {@link ui/Marquee.MarqueeDecorator}
 	 * @hoc
 	 * @name MarqueeDecorator
-	 * @extends ui/Marquee.MarqueeDecorator
 	 * @memberof agate/Marquee
+	 * @extends ui/Marquee.MarqueeDecorator
 	 * @public
 	 */
 	MarqueeDecorator
