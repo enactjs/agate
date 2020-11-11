@@ -1,5 +1,4 @@
 import {forward} from '@enact/core/handle';
-import hoc from '@enact/core/hoc';
 import platform from '@enact/core/platform';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -12,67 +11,47 @@ import {findDOMNode} from 'react-dom';
  * @memberof agate/SliderButton
  * @private
  */
-const SliderButtonBehaviorDecorator = hoc((config, Wrapped) => {
-	return class extends React.Component {
-		static displayName = 'SliderButtonBehaviorDecorator';
+const SliderButtonBehaviorDecorator = (Wrapped) => {
+	// eslint-disable-next-line no-shadow
+	function SliderButtonBehaviorDecorator (props) {
+		console.log(props);
+		const {children} = props;
+		const [valueText, setValueText] = React.useState(children ? children[0] : null);
+		const ref = React.useRef();
 
-		static propTypes = /** @lends agate/SliderButton.SliderButtonBehaviorDecorator.prototype */ {
-			/**
-			 * Items displayed with SliderButton.
-			 *
-			 * @type {Function}
-			 * @private
-			 */
-			children: PropTypes.node,
-
-			/**
-			 * Called when value is changed.
-			 *
-			 * @type {Function}
-			 * @private
-			 */
-			onChange: PropTypes.func
-		};
-
-		constructor (props) {
-			super(props);
-
-			this.ref = React.createRef();
-
-			this.state = {
-				valueText: props.children ? props.children[0] : null
-			};
-		}
-
-		handleChange = ({value}) => {
-			this.setState((prevState, props) => ({valueText: props.children[value]}));
+		function handleChange ({value}) {
+			setValueText(children[value]);
 			forward('onChange', {
 				type: 'onChange',
 				value
-			}, this.props);
-		};
+			}, props);
+		}
 
-		handleDragStart = () => {
+		function handleDragStart () {
 			// on platforms with a touchscreen, we want to focus slider when dragging begins
 			if (platform.touchscreen) {
-				findDOMNode(ref.current).focus(); // eslint-disable-line
+				findDOMNode(ref.current).focus(); // eslint-disable-line react/no-find-dom-node
 			}
-		};
-
-		render () {
-			return (
-				<Wrapped
-					aria-valuetext={this.state.valueText}
-					role="slider"
-					{...this.props}
-					onChange={this.handleChange}
-					onDragStart={this.handleDragStart}
-					ref={this.ref}
-				/>
-			);
 		}
+
+		return (
+			<Wrapped
+				aria-valuetext={valueText}
+				ref={ref}
+				role="slider"
+				{...props}
+				onChange={handleChange}
+				onDragStart={handleDragStart}
+			/>
+		);
+	}
+
+	SliderButtonBehaviorDecorator.propTypes = {
+		onChange: PropTypes.func
 	};
-});
+
+	return SliderButtonBehaviorDecorator;
+};
 
 export default SliderButtonBehaviorDecorator;
 export {
