@@ -299,6 +299,7 @@ const PickerBase = kind({
 		 * to `true` to allow the picker to continue from the opposite end of the list of options.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		wrap: PropTypes.bool
@@ -307,6 +308,7 @@ const PickerBase = kind({
 	defaultProps: {
 		accessibilityHint: '',
 		orientation: 'vertical',
+		reverseTransition: false,
 		spotlightDisabled: false,
 		step: 1,
 		value: 0,

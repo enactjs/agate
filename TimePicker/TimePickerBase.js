@@ -253,26 +253,17 @@ const TimePickerBase = kind({
 		onMinuteChange,
 		onSpotlightDisappear,
 		order,
-		rtl,
 		spotlightDisabled,
 		...rest
 	}) => {
 		const hourAccessibilityHint = $L('hour');
 		const minuteAccessibilityHint = $L('minute');
 
+		delete rest.rtl;
+
 		return (
 			<DateTime {...rest} css={css}>
-				{order.map((picker, index) => {
-					// although we create a component array based on the provided
-					// order, we ultimately force order in CSS for RTL
-					const isFirst = index === 0;
-					const isLast = index === order.length - 1;
-					// meridiem will always be the left-most control in RTL, regardless of the provided order
-					const isLeft = rtl && picker === 'a' || isFirst && !rtl;
-					// minute will always be the right-most control in RTL, regardless of the provided order
-					const isRight = rtl && picker === 'm' || isLast && !rtl;
-					const isLastElement = rtl ? isLeft : isLast;
-
+				{order.map((picker) => {
 					switch (picker) {
 						case 'h':
 						case 'k':
@@ -282,7 +273,6 @@ const TimePickerBase = kind({
 										accessibilityHint={hourAccessibilityHint}
 										aria-label={hourAriaLabel}
 										className={css.hourPicker}
-										data-last-element={isLastElement}
 										disabled={disabled}
 										hasMeridiem={hasMeridiem}
 										onChange={onHourChange}
@@ -300,7 +290,6 @@ const TimePickerBase = kind({
 									accessibilityHint={minuteAccessibilityHint}
 									aria-label={minuteAriaLabel}
 									className={css.minutePicker}
-									data-last-element={isLastElement}
 									disabled={disabled}
 									key="minute-picker"
 									max={59}
@@ -319,7 +308,6 @@ const TimePickerBase = kind({
 									aria-label={meridiemAriaLabel}
 									aria-valuetext={meridiems ? meridiems[meridiem] : null}
 									className={css.meridiemPicker}
-									data-last-element={isLastElement}
 									disabled={disabled}
 									key="meridiem-picker"
 									onChange={onMeridiemChange}

@@ -221,7 +221,6 @@ const DatePickerBase = kind({
 		onYearChange,
 		onSpotlightDisappear,
 		order,
-		rtl,
 		spotlightDisabled,
 		year,
 		yearAriaLabel,
@@ -230,15 +229,11 @@ const DatePickerBase = kind({
 		const dayAccessibilityHint = $L('day');
 		const monthAccessibilityHint = $L('month');
 		const yearAccessibilityHint = $L('year');
+		delete rest.rtl;
 
 		return (
 			<DateTime {...rest}>
-				{order.map((picker, index) => {
-					const isFirst = index === 0;
-					const isLast = index === order.length - 1;
-					const isLeft = isFirst && !rtl || isLast && rtl;
-					const isRight = isFirst && rtl || isLast && !rtl;
-
+				{order.map((picker) => {
 					switch (picker) {
 						case 'd':
 							return (
@@ -246,7 +241,6 @@ const DatePickerBase = kind({
 									accessibilityHint={dayAccessibilityHint}
 									aria-label={dayAriaLabel}
 									className={css.day}
-									data-last-element={isLast}
 									disabled={disabled}
 									key="day-picker"
 									max={maxDays}
@@ -265,7 +259,6 @@ const DatePickerBase = kind({
 									accessibilityHint={monthAccessibilityHint}
 									aria-label={monthAriaLabel}
 									className={css.month}
-									data-last-element={isLast}
 									disabled={disabled}
 									key="month-picker"
 									max={maxMonths}
@@ -284,7 +277,6 @@ const DatePickerBase = kind({
 									accessibilityHint={yearAccessibilityHint}
 									aria-label={yearAriaLabel}
 									className={css.year}
-									data-last-element={isLast}
 									disabled={disabled}
 									key="year-picker"
 									max={maxYear}

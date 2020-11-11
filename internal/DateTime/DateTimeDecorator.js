@@ -14,7 +14,7 @@ import DateFactory from 'ilib/lib/DateFactory';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-/**
+/*
  * Converts a JavaScript Date to unix time
  *
  * @param	{Date}	date	A Date to convert
