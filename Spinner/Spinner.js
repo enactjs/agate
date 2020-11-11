@@ -173,7 +173,8 @@ const SpinnerBase = kind({
 			color,
 			size,
 			{content: !!children, transparent},
-			{pausedAnimation: paused}
+			{pausedAnimation: paused},
+			{transparentBackground: transparent}
 		)
 	},
 
