@@ -15,6 +15,7 @@ import {memoize} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import {useAnnounce} from '@enact/ui/AnnounceDecorator';
 import Pure from '@enact/ui/internal/Pure';
+import Media from '@enact/ui/Media';
 import Slottable from '@enact/ui/Slottable';
 import DurationFmt from 'ilib/lib/DurationFmt';
 import PropTypes from 'prop-types';
@@ -23,7 +24,6 @@ import React from 'react';
 
 import $L from '../internal/$L';
 
-import Media from '../Media';
 import MediaControls from './MediaControls';
 import MediaSlider from './MediaSlider';
 import Skinnable from '../Skinnable';
