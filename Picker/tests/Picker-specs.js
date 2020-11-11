@@ -12,7 +12,7 @@ describe('Picker Specs', () => {
 		);
 
 		const expected = '2';
-		const actual = picker.find('PickerItem').text();
+		const actual = picker.find('PickerItem').at(1).text();
 
 		expect(actual).toBe(expected);
 	});
