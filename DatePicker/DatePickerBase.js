@@ -286,6 +286,7 @@ const DatePickerBase = kind({
 									spotlightDisabled={spotlightDisabled}
 									value={year}
 									width={4}
+									wrap
 								/>
 							);
 					}
