@@ -10,8 +10,8 @@
  * @exports ButtonDecorator
  */
 
-import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
+import kind from '@enact/core/kind';
 import {cap} from '@enact/core/util';
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import Spottable from '@enact/spotlight/Spottable';
@@ -169,7 +169,6 @@ const ButtonBase = kind({
 		 * Boolean controlling whether this component should enforce the "minimum width" rules.
 		 *
 		 * @type {Boolean}
-		 * @default true
 		 * @public
 		 */
 		minWidth: PropTypes.bool,
@@ -300,9 +299,11 @@ const ButtonBase = kind({
 const IconButtonDecorator = hoc((config, Wrapped) => {
 	return kind({
 		name: 'IconButtonDecorator',
+
 		computed: {
 			iconOnly: ({children}) => (React.Children.toArray(children).filter(Boolean).length === 0)
 		},
+
 		render: (props) => {
 			return (
 				<Wrapped {...props} />

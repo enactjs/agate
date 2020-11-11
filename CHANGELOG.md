@@ -5,15 +5,14 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ## [unreleased]
 
 ### Added
-- `agate/Marquee` new component
-- `agate/Button` marquee decorator
-- `agate/Button` tooltip decorator
-- `agate/Button` iconOnly, iconPosition, minWidth props
 
-### Changed
-- `agate/Button` minWidth computed with IconButtonDecorator HoC
+- `agate/Button` prop `iconOnly`, `iconPosition`, and `minWidth`
+- `agate/Marquee` component
  
 ### Fixed
+
+- `agate/Button` to marquee when focused
+- `agate/Button` to show a tooltip when hovered
 - `agate/DateTimePicker` returned value by onChange event
 - `agate/Heading` to support `spacing` for Gallium and Silicon
 - `agate/IncrementSlider` button color for Gallium skin
