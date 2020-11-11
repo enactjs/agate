@@ -204,24 +204,6 @@ const TimePickerBase = kind({
 		onSpotlightDisappear: PropTypes.func,
 
 		/**
-		 * Called when the focus leaves the picker when the 5-way left key is pressed.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onSpotlightLeft: PropTypes.func,
-
-		/**
-		 * Called when the focus leaves the picker when the 5-way right key is pressed.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onSpotlightRight: PropTypes.func,
-
-		/**
 		 * Set content to RTL.
 		 *
 		 * @type {Boolean}
@@ -270,8 +252,6 @@ const TimePickerBase = kind({
 		onMeridiemChange,
 		onMinuteChange,
 		onSpotlightDisappear,
-		onSpotlightLeft,
-		onSpotlightRight,
 		order,
 		rtl,
 		spotlightDisabled,
@@ -307,8 +287,6 @@ const TimePickerBase = kind({
 										hasMeridiem={hasMeridiem}
 										onChange={onHourChange}
 										onSpotlightDisappear={onSpotlightDisappear}
-										onSpotlightLeft={isLeft ? onSpotlightLeft : null}
-										onSpotlightRight={isRight ? onSpotlightRight : null}
 										spotlightDisabled={spotlightDisabled}
 										value={hour}
 										width={2}
@@ -329,8 +307,6 @@ const TimePickerBase = kind({
 									min={0}
 									onChange={onMinuteChange}
 									onSpotlightDisappear={onSpotlightDisappear}
-									onSpotlightLeft={isLeft ? onSpotlightLeft : null}
-									onSpotlightRight={isRight ? onSpotlightRight : null}
 									spotlightDisabled={spotlightDisabled}
 									value={minute}
 									width={2}
@@ -348,12 +324,9 @@ const TimePickerBase = kind({
 									key="meridiem-picker"
 									onChange={onMeridiemChange}
 									onSpotlightDisappear={onSpotlightDisappear}
-									onSpotlightLeft={isLeft ? onSpotlightLeft : null}
-									onSpotlightRight={isRight ? onSpotlightRight : null}
 									spotlightDisabled={spotlightDisabled}
 									value={meridiem}
 									width={meridiemPickerWidth}
-									wrap
 								>
 									{meridiems}
 								</DateComponentPicker>

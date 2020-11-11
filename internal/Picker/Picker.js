@@ -218,42 +218,6 @@ const PickerBase = kind({
 		onSpotlightDisappear: PropTypes.func,
 
 		/**
-		 * The handler to run prior to focus leaving the picker when the 5-way down key is pressed.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onSpotlightDown: PropTypes.func,
-
-		/**
-		 * The handler to run prior to focus leaving the picker when the 5-way left key is pressed.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onSpotlightLeft: PropTypes.func,
-
-		/**
-		 * The handler to run prior to focus leaving the picker when the 5-way right key is pressed.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onSpotlightRight: PropTypes.func,
-
-		/**
-		 * The handler to run prior to focus leaving the picker when the 5-way up key is pressed.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onSpotlightUp: PropTypes.func,
-
-		/**
 		 * Orientation of the picker.
 		 *
 		 * Controls whether the buttons are arranged horizontally or vertically around the value.
@@ -345,7 +309,8 @@ const PickerBase = kind({
 		orientation: 'vertical',
 		spotlightDisabled: false,
 		step: 1,
-		value: 0
+		value: 0,
+		wrap: false
 	},
 
 	styles: {
@@ -535,10 +500,6 @@ const PickerBase = kind({
 		delete rest['aria-valuetext'];
 		delete rest.accessibilityHint;
 		delete rest.orientation;
-		delete rest.onSpotlightDown;
-		delete rest.onSpotlightLeft;
-		delete rest.onSpotlightRight;
-		delete rest.onSpotlightUp;
 
 		delete rest.decrementAriaLabel;
 		delete rest.incrementAriaLabel;

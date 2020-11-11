@@ -157,24 +157,6 @@ const DatePickerBase = kind({
 		onSpotlightDisappear: PropTypes.func,
 
 		/**
-		 * Called prior to focus leaving the picker when the 5-way left key is pressed.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onSpotlightLeft: PropTypes.func,
-
-		/**
-		 * Called prior to focus leaving the picker when the 5-way right key is pressed.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onSpotlightRight: PropTypes.func,
-
-		/**
 		 * Called when the `year` component of the Date changes.
 		 *
 		 * @type {Function}
@@ -238,8 +220,6 @@ const DatePickerBase = kind({
 		onMonthChange,
 		onYearChange,
 		onSpotlightDisappear,
-		onSpotlightLeft,
-		onSpotlightRight,
 		order,
 		rtl,
 		spotlightDisabled,
@@ -273,8 +253,6 @@ const DatePickerBase = kind({
 									min={1}
 									onChange={onDateChange}
 									onSpotlightDisappear={onSpotlightDisappear}
-									onSpotlightLeft={isLeft ? onSpotlightLeft : null}
-									onSpotlightRight={isRight ? onSpotlightRight : null}
 									spotlightDisabled={spotlightDisabled}
 									value={day}
 									width={2}
@@ -294,8 +272,6 @@ const DatePickerBase = kind({
 									min={1}
 									onChange={onMonthChange}
 									onSpotlightDisappear={onSpotlightDisappear}
-									onSpotlightLeft={isLeft ? onSpotlightLeft : null}
-									onSpotlightRight={isRight ? onSpotlightRight : null}
 									spotlightDisabled={spotlightDisabled}
 									value={month}
 									width={2}
@@ -315,8 +291,6 @@ const DatePickerBase = kind({
 									min={minYear}
 									onChange={onYearChange}
 									onSpotlightDisappear={onSpotlightDisappear}
-									onSpotlightLeft={isLeft ? onSpotlightLeft : null}
-									onSpotlightRight={isRight ? onSpotlightRight : null}
 									spotlightDisabled={spotlightDisabled}
 									value={year}
 									width={4}
