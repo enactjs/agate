@@ -76,6 +76,13 @@
 	line-height: 0;
 
 	.applySkins({
+		background-color: @agate-spinner-bg-color;
+		border-radius: 50%;
+
+		&.transparentBackground {
+			background-color: @agate-spinner-transparent-bg-color;
+		}
+
 		.bg {
 			display: inline-block;
 			width: @agate-spinner-size;
