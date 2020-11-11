@@ -14,7 +14,6 @@ import {findDOMNode} from 'react-dom';
 const SliderButtonBehaviorDecorator = (Wrapped) => {
 	// eslint-disable-next-line no-shadow
 	function SliderButtonBehaviorDecorator (props) {
-		console.log(props);
 		const {children} = props;
 		const [valueText, setValueText] = React.useState(children ? children[0] : null);
 		const ref = React.useRef();
