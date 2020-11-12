@@ -34,6 +34,7 @@ const defaultConfig = {
  * `updateOnMount` config member which will initiate an update cycle within React once the data is
  * available from an upstream shared state.
  *
+ * @class SharedStateDecorator
  * @hoc
  * @memberof agate/Panels
  * @private

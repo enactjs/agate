@@ -2,12 +2,7 @@
  * Provides Agate-themed temperature control components and behaviors.
  *
  * @example
- * <TemperatureControl
- *   max={30}
- *   min={10}
- *   unit="Celsius"
- *   value={10}
- * />
+ * <TemperatureControl min={0} max={40} unit="Fahrenheit" />
  *
  * @module agate/TemperatureControl
  * @exports TemperatureControl
@@ -153,14 +148,16 @@ const TemperatureControlDecorator = compose(
  * TemperatureControl with Agate styling
  * and [`TemperatureControlDecorator`]{@link agate/TemperatureControl.TemperatureControlDecorator}
  * applied.
- * Usage
  *
- *  <TemperatureControl
+ * Usage:
+ * ```
+ * <TemperatureControl
  *   max={30}
  *   min={10}
  *   unit="Celsius"
  *   value={10}
- *   />
+ * />
+ * ```
  *
  * @class TemperatureControl
  * @memberof agate/TemperatureControl

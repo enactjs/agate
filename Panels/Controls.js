@@ -98,8 +98,8 @@ const ControlsBase = kind({
  * ```
  *
  * @class Controls
- * @mixes spotlight/SpotlightContainerDecorator
  * @memberof agate/Panels
+ * @mixes spotlight/SpotlightContainerDecorator
  * @ui
  * @private
  */

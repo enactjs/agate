@@ -11,6 +11,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Panels` to show close button properly for night mode
 - `agate/PopupMenu` to display distinguishable title
 - `agate/LabeledIconButton` max-width so that huge sized icon will not be cut off
+- `agate/SliderButton` to not show console error in sampler
 - `agate/Spinner` to pause the animation when `paused` prop is true
 - `agate/Spinner` to show correct layout of spinner when `type` is `loading` in `right-to-left` locale
 - `agate/Spinner` to support `transparent` prop properly

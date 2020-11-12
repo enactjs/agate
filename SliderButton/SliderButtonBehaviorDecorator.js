@@ -1,3 +1,4 @@
+import {forward} from '@enact/core/handle';
 import platform from '@enact/core/platform';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -12,14 +13,17 @@ import {findDOMNode} from 'react-dom';
  */
 const SliderButtonBehaviorDecorator = (Wrapped) => {
 	// eslint-disable-next-line no-shadow
-	function SliderButtonBehaviorDecorator ({onChange, ...rest}) {
-		const {children} = rest;
+	function SliderButtonBehaviorDecorator (props) {
+		const {children} = props;
 		const [valueText, setValueText] = React.useState(children ? children[0] : null);
 		const ref = React.useRef();
 
 		function handleChange ({value}) {
-			onChange();
 			setValueText(children[value]);
+			forward('onChange', {
+				type: 'onChange',
+				value
+			}, props);
 		}
 
 		function handleDragStart () {
@@ -34,7 +38,7 @@ const SliderButtonBehaviorDecorator = (Wrapped) => {
 				aria-valuetext={valueText}
 				ref={ref}
 				role="slider"
-				{...rest}
+				{...props}
 				onChange={handleChange}
 				onDragStart={handleDragStart}
 			/>
