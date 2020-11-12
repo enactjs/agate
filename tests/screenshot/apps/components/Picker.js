@@ -29,7 +29,13 @@ const PickerTests = [
 	{
 		locale: 'ar-SA',
 		component: 	<Picker orientation="horizontal">{pickerList.temperatures}</Picker>
-	}
+	},
+
+	// Wrap
+	<Picker wrap>{pickerList.temperatures}</Picker>,
+	<Picker disabled wrap>{pickerList.temperatures}</Picker>,
+	<Picker value={0} wrap>{pickerList.temperatures}</Picker>,
+	<Picker orientation="horizontal" wrap>{pickerList.temperatures}</Picker>,
 ];
 
 export default PickerTests;
