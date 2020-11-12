@@ -34,8 +34,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/internal/DateTime` prop `locale` and `value`
 
-
-
 ## [1.0.0] - 2020-10-14
 
 Initial release.
