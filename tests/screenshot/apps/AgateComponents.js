@@ -4,6 +4,7 @@ import ArcPicker from './components/ArcPicker';
 import ArcSlider from './components/ArcSlider';
 import BodyText from './components/BodyText';
 import Button from './components/Button';
+import Checkbox from './components/Checkbox';
 import CheckboxItem from './components/CheckboxItem';
 import ColorPicker from './components/ColorPicker';
 import ContextualPopupDecorator from './components/ContextualPopupDecorator';
@@ -51,6 +52,7 @@ const agateComponents = {
 	ArcSlider,
 	BodyText,
 	Button,
+	Checkbox,
 	CheckboxItem,
 	ColorPicker,
 	ContextualPopupDecorator,
