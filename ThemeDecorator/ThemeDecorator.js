@@ -139,24 +139,22 @@ const CustomizableSkinStyle = kind({
 
 	propTypes: {
 		className: PropTypes.string.isRequired,
-
 		/**
 		 * A custom accent color, as a hex string.
 		 *
-		 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+		 * @memberof agate/ThemeDecorator.CustomizableSkinStyle.prototype
 		 * @type {String}
 		 * @default '#8b7efe'
-		 * @public
+		 * @private
 		 */
 		accent: PropTypes.string,
-
 		/**
 		 * A custom highlight color, as a hex string.
 		 *
-		 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+		 * @memberof agate/ThemeDecorator.CustomizableSkinStyle.prototype
 		 * @type {String}
 		 * @default '#c6c0fe'
-		 * @public
+		 * @private
 		 */
 		highlight: PropTypes.string
 	},
@@ -248,7 +246,21 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		static displayName = 'ThemeDecorator';
 
 		static propTypes = {
+			/**
+			 * A custom accent color, as a hex string.
+			 *
+			 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+			 * @type {String}
+			 * @public
+			 */
 			accent: PropTypes.string,
+			/**
+			 * A custom highlight color, as a hex string.
+			 *
+			 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+			 * @type {String}
+			 * @public
+			 */
 			highlight: PropTypes.string
 		};
 
