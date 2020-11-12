@@ -35,7 +35,7 @@ const PickerTests = [
 	<Picker wrap>{pickerList.temperatures}</Picker>,
 	<Picker disabled wrap>{pickerList.temperatures}</Picker>,
 	<Picker value={0} wrap>{pickerList.temperatures}</Picker>,
-	<Picker orientation="horizontal" wrap>{pickerList.temperatures}</Picker>,
+	<Picker orientation="horizontal" wrap>{pickerList.temperatures}</Picker>
 ];
 
 export default PickerTests;
