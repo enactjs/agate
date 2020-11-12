@@ -172,8 +172,9 @@ const CheckboxBase = kind({
  * @class CheckboxDecorator
  * @memberof agate/Checkbox
  * @mixes ui/Toggleable.Toggleable
- * @mixes agate/Skinnable.Skinnable
+ * @mixes ui/Touchable.Touchable
  * @mixes spotlight/Spottable.Spottable
+ * @mixes agate/Skinnable.Skinnable
  * @hoc
  * @public
  */

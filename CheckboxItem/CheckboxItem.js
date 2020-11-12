@@ -14,9 +14,8 @@
 
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
-import React from 'react';
 import compose from 'ramda/src/compose';
-
+import React from 'react';
 import Pure from '@enact/ui/internal/Pure';
 import Slottable from '@enact/ui/Slottable';
 import Toggleable from '@enact/ui/Toggleable';
@@ -48,10 +47,9 @@ Checkbox.displayname = 'Checkbox';
  * </CheckboxItem>
  * ```
  *
- * @class CheckboxItem
+ * @class CheckboxItemBase
  * @memberof agate/CheckboxItem
  * @extends agate/Item.Item
- * @mixes agate/CheckboxItem.CheckboxItemDecorator
  * @omit iconComponent
  * @ui
  * @public
@@ -59,7 +57,7 @@ Checkbox.displayname = 'Checkbox';
 const CheckboxItemBase = kind({
 	name: 'CheckboxItem',
 
-	propTypes: /** @lends agate/CheckboxItem.CheckboxItem.prototype */ {
+	propTypes: /** @lends agate/CheckboxItem.CheckboxItemBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal Elements and states of this component.
@@ -152,7 +150,6 @@ const CheckboxItemBase = kind({
 
 	render: ({children, css, icon, indeterminate, indeterminateIcon, selected, slotBefore, ...rest}) => (
 		<Item
-			data-webos-voice-intent="SelectCheckItem"
 			role="checkbox"
 			{...rest}
 			aria-checked={selected}
