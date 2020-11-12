@@ -501,12 +501,11 @@ const PickerBase = kind({
 
 		delete rest['aria-valuetext'];
 		delete rest.accessibilityHint;
-		delete rest.orientation;
-
 		delete rest.decrementAriaLabel;
 		delete rest.incrementAriaLabel;
 		delete rest.noAnimation;
 		delete rest.onChange;
+		delete rest.orientation;
 		delete rest.wrap;
 
 		return (

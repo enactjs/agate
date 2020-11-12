@@ -61,7 +61,7 @@ class HourPicker extends React.Component {
 		const hours = hasMeridiem ? hours12 : hours24;
 
 		return (
-			<DateComponentPicker noAnimation={this.state.noAnimation} {...rest}>
+			<DateComponentPicker {...rest} noAnimation={this.state.noAnimation}>
 				{hours}
 			</DateComponentPicker>
 		);
