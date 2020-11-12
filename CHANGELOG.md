@@ -3,8 +3,13 @@
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
 ## [unreleased]
+
+### Added
+- `agate/Checkbox` prop `disabled`, `indeterminate` and `indeterminateIcon`
+- `agate/CheckboxItem` prop `disabled`, `indeterminate`, `indeterminateIcon` and `slotbefore`
  
 ### Fixed
+
 - `agate/DateTimePicker` returned value by onChange event
 - `agate/Heading` to support `spacing` for Gallium and Silicon
 - `agate/IncrementSlider` button color for Gallium skin
