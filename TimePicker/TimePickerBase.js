@@ -38,13 +38,17 @@ class HourPicker extends React.Component {
 		super(props);
 
 		this.state = {
+			noAnimation: false,
 			prevValue: props.value
 		};
 	}
 
 	static getDerivedStateFromProps (props, state) {
 		if (state.prevValue !== props.value) {
+			const hours = props.hasMeridiem ? hours12 : hours24;
+
 			return {
+				noAnimation: hours[state.prevValue] === hours[props.value],
 				prevValue: props.value
 			};
 		}
@@ -57,7 +61,7 @@ class HourPicker extends React.Component {
 		const hours = hasMeridiem ? hours12 : hours24;
 
 		return (
-			<DateComponentPicker {...rest}>
+			<DateComponentPicker {...rest} noAnimation={this.state.noAnimation}>
 				{hours}
 			</DateComponentPicker>
 		);
