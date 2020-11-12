@@ -2,7 +2,7 @@
  * Agate styled fan speed control components and behaviors.
  *
  * @example
- * <FanSpeedControl icon="fan" max={10} />
+ * <FanSpeedControl icon="fan" max={5} min={1} />
  *
  * @module agate/FanSpeedControl
  * @exports FanSpeedControl
@@ -140,14 +140,16 @@ const FanSpeedControlDecorator = compose(
 /**
  * FanSpeedControl with Agate styling and
  * [`FanSpeedControlDecorator`]{@link agate/FanSpeedControl.FanSpeedControlDecorator} applied.
- * Usage
  *
- *  <FanSpeedControl
- *  	icon="fan"
- *  	max={10}
- *  	min={1}
- *  	value={4}
- *  />
+ * Usage:
+ * ```
+ * <FanSpeedControl
+ *   icon="fan"
+ *   max={10}
+ *   min={1}
+ *   value={4}
+ * />
+ * ```
  *
  * @class FanSpeedControl
  * @memberof agate/FanSpeedControl

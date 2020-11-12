@@ -2,7 +2,7 @@
  * A component for selecting a number from a range of numbers.
  *
  * @example
- * <RangePicker defaultValue={70} min={0} max={100}></RangePicker>
+ * <RangePicker defaultValue={70} min={0} max={100} />
  *
  * @module agate/RangePicker
  * @exports RangePicker
@@ -119,7 +119,7 @@ const RangePickerBase = kind({
 
 	render: ({value, ...rest}) => {
 		return (
-			<PickerCore {...rest} value={value}>
+			<PickerCore {...rest} index={0} value={value}>
 				{value}
 			</PickerCore>
 		);

@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
 import React from 'react';
 
-import PickerCore, {PickerDecorator} from '../internal/Picker';
+import PickerCore, {PickerDecorator, PickerItem} from '../internal/Picker';
 
 /**
  * The base `Picker` component.
@@ -72,6 +72,13 @@ const PickerBase = kind({
 	},
 
 	computed: {
+		children: ({children}) => React.Children.map(children, (child) => {
+			return (
+				<PickerItem>
+					{child}
+				</PickerItem>
+			);
+		}),
 		disabled: ({children, disabled}) => React.Children.count(children) > 1 ? disabled : true,
 		max: ({children}) => children && children.length ? children.length - 1 : 0,
 		value: ({value, children}) => {
@@ -84,7 +91,7 @@ const PickerBase = kind({
 		const {children, max, value, ...rest} = props;
 
 		return (
-			<PickerCore {...rest} min={0} max={max} step={1} value={value}>
+			<PickerCore {...rest} index={value} min={0} max={max} step={1} value={value}>
 				{children}
 			</PickerCore>
 		);

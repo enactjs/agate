@@ -175,6 +175,7 @@ ScrollbarBase.propTypes = /** @lends agate/useScroll.Scrollbar.prototype */ {
 	 * This value will be applied ri.scale.
 	 *
 	 * @type {Number}
+	 * @default 18
 	 * @public
 	 */
 	minThumbSize: PropTypes.number,
