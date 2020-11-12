@@ -542,9 +542,9 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				playPromise.then(() => {
 					this.play();
 				})
-				.catch(() => {
-					// Auto-play was prevented
-				});
+					.catch(() => {
+						// Auto-play was prevented
+					});
 			}
 		};
 
