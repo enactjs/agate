@@ -49,7 +49,7 @@ const CheckboxBase = kind({
 		 *
 		 * May be specified as either:
 		 *
-		 * * A string that represents an icon from the [iconList]{@link sandstone/Icon.Icon.iconList},
+		 * * A string that represents an icon from the [iconList]{@link agate/Icon.Icon.iconList},
 		 * * An HTML entity string, Unicode reference or hex value (in the form '0x...'),
 		 * * A URL specifying path to an icon image, or
 		 * * An object representing a resolution independent resource (See {@link ui/resolution})
@@ -185,15 +185,15 @@ const CheckboxDecorator = compose(
 );
 
 /**
- * A Sandstone-styled checkbox component.
+ * An Agate-styled checkbox component.
  *
  * `Checkbox` will manage its `selected` state via [Toggleable]{@link ui/Toggleable} unless set
  * directly.
  *
  * @class Checkbox
- * @memberof sandstone/Checkbox
- * @extends sandstone/Checkbox.CheckboxBase
- * @mixes sandstone/Checkbox.CheckboxDecorator
+ * @memberof agate/Checkbox
+ * @extends agate/Checkbox.CheckboxBase
+ * @mixes agate/Checkbox.CheckboxDecorator
  * @ui
  * @public
  */
