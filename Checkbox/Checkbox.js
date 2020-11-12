@@ -78,7 +78,8 @@ const CheckboxBase = kind({
 	// Additional styles block
 	styles: {
 		css: css,
-		className: 'toggleIcon'
+		className: 'checkbox',
+		publicClassNames: true
 	},
 
 	// Additional computed block
@@ -93,7 +94,6 @@ const CheckboxBase = kind({
 		delete rest.indeterminateIcon;
 		delete rest.standalone;
 
-		console.log(rest);
 		return (
 			<div
 				{...rest}
@@ -102,14 +102,12 @@ const CheckboxBase = kind({
 				disabled={disabled}
 				role="checkbox"
 			>
-				<div>
-					<Icon
-						size="small"
-						className={css.icon}
-					>
-						{children}
-					</Icon>
-				</div>
+				<Icon
+					size="small"
+					className={css.icon}
+				>
+					{children}
+				</Icon>
 			</div>
 		)
 	}

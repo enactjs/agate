@@ -3,7 +3,7 @@
 @import "../styles/mixins.less";
 @import "../styles/skin.less";
 
-.toggleIcon {
+.checkbox {
 	.applySkins({
 		@size: @agate-checkbox-size;
 
@@ -13,8 +13,10 @@
 		border-radius: @agate-checkbox-border-radius;
 		color: @agate-checkbox-text-color;
 		background-color: @agate-checkbox-bg-color;
+		margin: 12px; // create variable like icon margin ---> check with Icon size='large' if you delete this
 
 		.icon {
+			position: absolute;
 			font-size: @agate-checkbox-icon-font-size;
 			visibility: hidden;
 			margin: 0;
@@ -23,16 +25,19 @@
 			height: @size;
 		}
 
-		&.selected {
+		&.selected,
+		&.indeterminate {
 			border-color: @agate-checkbox-selected-border-color;
 			.icon {
 				visibility: visible;
 			}
 		}
 
-		// Indeterminate styles
-		&.indeterminate {
-			visibility: visible;
-		}
+		//// Indeterminate styles
+		//&.indeterminate {
+		//	.icon {
+		//		visibility: visible;
+		//	}
+		//}
 	});
 }
