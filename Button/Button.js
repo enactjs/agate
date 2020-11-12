@@ -281,7 +281,7 @@ const ButtonDecorator = compose(
  * Usage:
  * ```
  * <Button
- *   backgroundOpacity="translucent"
+ *   backgroundOpacity="transparent"
  *   color="blue"
  * >
  *   Press me!

@@ -30,7 +30,7 @@ import componentCss from './FullscreenPopup.module.less';
  *
  * @class FullscreenPopupBase
  * @memberof agate/FullscreenPopup
- * @exports ui/Transition/Transition
+ * @extends ui/Transition.Transition
  * @ui
  * @public
  */
