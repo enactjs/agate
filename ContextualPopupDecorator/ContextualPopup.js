@@ -117,7 +117,7 @@ const ContextualPopupBase = kind({
 		 * Direction of ContextualPopup.
 		 *
 		 * @type {('above'|'above center'|'above left'|'above right'|'below'|'below center'|'below left'|'below right'|'left middle'|'left top'|'left bottom'|'right middle'|'right top'|'right bottom')}
-		 * @default 'below'
+		 * @default 'below center'
 		 * @public
 		 */
 		direction: PropTypes.oneOf(['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom']),
@@ -151,6 +151,7 @@ const ContextualPopupBase = kind({
 		 * Shows the close button.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		showCloseButton: PropTypes.bool

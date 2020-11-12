@@ -98,6 +98,7 @@ const DatePickerBase = kind({
 		 * Disables the `DatePicker`.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		disabled: PropTypes.bool,

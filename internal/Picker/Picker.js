@@ -138,8 +138,8 @@ const PickerBase = kind({
 		/**
 		 * Sets the hint string read when focusing the decrement button.
 		 *
-		 * @default 'previous item'
 		 * @type {String}
+		 * @default 'previous item'
 		 * @public
 		 */
 		decrementAriaLabel: PropTypes.string,
