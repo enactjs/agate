@@ -12,19 +12,16 @@
 
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
-
-import Icon from '../Icon/Icon';
-import ToggleIcon from '../internal/ToggleIcon/ToggleIcon';
-
-import css from './Checkbox.module.less';
-
-// Imports added from sandstone
 import Spottable from '@enact/spotlight/Spottable';
 import Touchable from '@enact/ui/Touchable';
 import Toggleable from '@enact/ui/Toggleable';
-import compose from 'ramda/src/compose';
+
+import Icon from '../Icon/Icon';
 import Skinnable from '../Skinnable';
+
+import css from './Checkbox.module.less';
 
 /**
  * A checkbox component, ready to use in Agate applications.
@@ -37,11 +34,11 @@ import Skinnable from '../Skinnable';
  * <Checkbox selected />
  * ```
  *
- * @class Checkbox
+ * @class CheckboxBase
  * @memberof agate/Checkbox
- * @extends agate/internal/ToggleIcon.ToggleIcon
+ * @extends agate/Icon.Icon
  * @ui
- * @private
+ * @public
  */
 const CheckboxBase = kind({
 	name: 'Checkbox',
@@ -50,49 +47,105 @@ const CheckboxBase = kind({
 		/**
 		 * The icon displayed when `selected`.
 		 *
-		 * @see {@link agate/Icon.Icon.children}
+		 * May be specified as either:
+		 *
+		 * * A string that represents an icon from the [iconList]{@link sandstone/Icon.Icon.iconList},
+		 * * An HTML entity string, Unicode reference or hex value (in the form '0x...'),
+		 * * A URL specifying path to an icon image, or
+		 * * An object representing a resolution independent resource (See {@link ui/resolution})
+		 *
+		 * @see {@link agate/Icon.IconBase.children}
 		 * @type {String|Object}
 		 * @default	'check'
 		 * @public
 		 */
 		children: PropTypes.string,
 
-		// Additional prop-types
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `checkbox` - The root class name
+		 * * `selected` - Applied when the `selected` prop is true
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * Disables Checkbox and becomes non-interactive.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		disabled: PropTypes.bool,
+
+		/**
+		 * Enables the "indeterminate" state.
+		 *
+		 * An indeterminate, mixed, or half-selected state is typically used in a hierarchy or group
+		 * to represent that some, not all, children are selected.
+		 *
+		 * NOTE: This does not prevent updating the `selected` state. Applications must control this
+		 * property directly.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		indeterminate: PropTypes.bool,
+
+		/**
+		 * The icon to be used in the `indeterminate` state.
+		 *
+		 * May be specified as either:
+		 *
+		 * * A string that represents an icon from the [iconList]{@link agate/Icon.Icon.iconList},
+		 * * An HTML entity string, Unicode reference or hex value (in the form '0x...'),
+		 * * A URL specifying path to an icon image, or
+		 * * An object representing a resolution independent resource (See {@link ui/resolution})
+		 *
+		 * @type {String}
+		 * @default 'minus'
+		 * @public
+		 */
 		indeterminateIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-		selected: PropTypes.bool,
-		standalone: PropTypes.bool
+
+		/**
+		 * Sets whether this control is in the 'on' or 'off' state. `true` for 'on', `false` for 'off'.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		selected: PropTypes.bool
 	},
 
 	defaultProps: {
 		children: 'check',
-
-		// Additional defaultProps
 		indeterminate: false,
 		indeterminateIcon: 'minus',
 		selected: false
 	},
 
-	// Additional styles block
 	styles: {
 		css: css,
 		className: 'checkbox',
 		publicClassNames: true
 	},
 
-	// Additional computed block
 	computed: {
 		className: ({indeterminate, selected, styler}) => styler.append({selected, indeterminate}),
 		children: ({indeterminate, indeterminateIcon, children}) => (indeterminate ? indeterminateIcon : children)
 	},
 
-	// Render function from Sandstone
-	render: ({children, css, disabled, selected, ...rest}) => {
+	render: ({children, disabled, selected, ...rest}) => {
 		delete rest.indeterminate;
 		delete rest.indeterminateIcon;
-		delete rest.standalone;
 
 		return (
 			<div
@@ -109,23 +162,21 @@ const CheckboxBase = kind({
 					{children}
 				</Icon>
 			</div>
-		)
+		);
 	}
-
-	// render: ({children, ...rest}) => {
-	// 	return (
-	// 		<ToggleIcon
-	// 			{...rest}
-	// 			css={css}
-	// 			iconComponent={Icon}
-	// 		>
-	// 			{children}
-	// 		</ToggleIcon>
-	// 	);
-	// }
 });
 
-// Compose like sandstone
+/**
+ * Adds interactive functionality to `Checkbox`.
+ *
+ * @class CheckboxDecorator
+ * @memberof agate/Checkbox
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes agate/Skinnable.Skinnable
+ * @mixes spotlight/Spottable.Spottable
+ * @hoc
+ * @public
+ */
 const CheckboxDecorator = compose(
 	Toggleable({toggleProp: 'onClick'}),
 	Touchable,
@@ -133,19 +184,24 @@ const CheckboxDecorator = compose(
 	Skinnable
 );
 
-// Assign variable like sandstone
+/**
+ * A Sandstone-styled checkbox component.
+ *
+ * `Checkbox` will manage its `selected` state via [Toggleable]{@link ui/Toggleable} unless set
+ * directly.
+ *
+ * @class Checkbox
+ * @memberof sandstone/Checkbox
+ * @extends sandstone/Checkbox.CheckboxBase
+ * @mixes sandstone/Checkbox.CheckboxDecorator
+ * @ui
+ * @public
+ */
 const Checkbox = CheckboxDecorator(CheckboxBase);
 
-// Sandstone-like exports
 export default Checkbox;
 export {
 	Checkbox,
 	CheckboxBase,
 	CheckboxDecorator
 };
-
-// export default CheckboxBase;
-// export {
-// 	CheckboxBase as Checkbox,
-// 	CheckboxBase
-// };
