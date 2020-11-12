@@ -5,14 +5,16 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ## [unreleased]
 
 ### Added
+
 - `agate/DatePicker` prop `onSpotlightDissapear` and `spotlightDisabled`
-- `agate/internal/DateComponentRangePicker` prop `accesabilityHint` and `wrap`
-- `agate/internal/Picker` prop `onSpotlightDissapear`, `spotlightDisabled` and `wrap`
 - `agate/Picker` prop `noAnimation` and `wrap`
 - `agate/RangePicker` prop `noAnimation` and `wrap`
 - `agate/TimePicker` prop `onSpotlightDissapear` and `spotlightDisabled`
+- `agate/internal/DateComponentRangePicker` prop `accesabilityHint` and `wrap`
+- `agate/internal/Picker` prop `onSpotlightDissapear`, `spotlightDisabled` and `wrap`
  
 ### Fixed
+
 - `agate/DateTimePicker` returned value by onChange event
 - `agate/Heading` to support `spacing` for Gallium and Silicon
 - `agate/IncrementSlider` button color for Gallium skin
@@ -29,6 +31,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/TemperatureControl` to not be draggable when it's disabled
 
 ### Removed
+
 - `agate/internal/DateTime` prop `locale` and `value`
 
 

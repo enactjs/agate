@@ -8,7 +8,6 @@ import PickerCore, {PickerItem} from '../Picker';
 
 import css from './DateComponentPicker.module.less';
 
-
 /**
  * {@link agate/internal/DataComponentPicker.DateComponentPickerBase} allows the selection of one
  * part of the date or time using a {@link agate/internal/Picker.Picker}.
