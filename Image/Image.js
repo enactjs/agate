@@ -153,6 +153,7 @@ const ImageDecorator = compose(
 /**
  * An Agate-styled image component
  *
+ * Usage:
  * ```
  * <Image
  *   src={{

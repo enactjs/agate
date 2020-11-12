@@ -127,7 +127,7 @@ const PopupMenuDecorator = compose(
  * Usage:
  * ```
  * <PopupMenu open title="Title">
- * 	Hello!
+ *   Hello!
  * </PopupMenu>
  * ```
  *

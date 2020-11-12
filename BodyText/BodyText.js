@@ -149,7 +149,7 @@ const BodyTextDecorator = compose(
  * Usage:
  * ```
  * <BodyText>
- *  I have a Ham radio. There are many like it, but this one is mine.
+ *   I have a Ham radio. There are many like it, but this one is mine.
  * </BodyText>
  * ```
  *
