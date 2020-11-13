@@ -21,6 +21,7 @@ import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
+import warning from 'warning';
 
 import Icon from '../Icon';
 import {MarqueeDecorator} from '../Marquee';
@@ -244,6 +245,11 @@ const ButtonBase = kind({
 				selected
 			}
 		),
+		checkPropsIncompatibility: ({highlighted, iconOnly, joinedPosition, selected, type}) => {
+			warning(!(highlighted && selected),'"highlighted" prop cannot be used at the same time with "selected" prop.');
+			warning(!(iconOnly && joinedPosition && type), '"iconOnly" prop cannot be used at the same time with "joinedPosition" and "type" props.');
+			warning(!(joinedPosition && type === "grid"), '"joinedPosition" and "type" (with "grid" value) props cannot be used at the same time.');
+		},
 		decoration: ({badge, css, decoration}) => {
 			if (!badge) return decoration;
 			return (
@@ -278,6 +284,7 @@ const ButtonBase = kind({
 		delete rest.backgroundOpacity;
 		delete rest.badge;
 		delete rest.badgeColor;
+		delete rest.checkPropsIncompatibility;
 		delete rest.highlighted;
 		delete rest.iconOnly;
 		delete rest.iconPosition;
