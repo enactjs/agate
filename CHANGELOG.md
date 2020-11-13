@@ -6,7 +6,8 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
-- `agate/Button` prop `iconOnly`, `iconPosition`, and `minWidth`
+- `agate/Button` `checkPropsIncompatibility` function to warn props incompatibility
+- `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
 - `agate/Marquee` component
  
 ### Fixed
