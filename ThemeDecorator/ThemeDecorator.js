@@ -34,6 +34,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 *
 	 * @type {Boolean}
 	 * @default true
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	customSkin: true,
@@ -43,6 +44,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 *
 	 * @type {Boolean}
 	 * @default false
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	disableFullscreen: false,
@@ -55,6 +57,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 * @type {Boolean}
 	 * @default true
 	 * @see {@link ui/FloatingLayer.FloatingLayerDecorator}
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	float: true,
@@ -67,6 +70,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 * @type {Boolean}
 	 * @default true
 	 * @see {@link i18n/I18nDecorator}
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	i18n: true,
@@ -76,6 +80,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 *
 	 * @type {Boolean}
 	 * @default false
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	noAutoFocus: false,
@@ -85,6 +90,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 *
 	 * @type {Boolean}
 	 * @default false
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	overlay: false,
@@ -94,6 +100,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 *
 	 * @type {Object}
 	 * @see {@link ui/resolution}
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	ri: {
@@ -106,6 +113,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 * @type {Boolean}
 	 * @default true
 	 * @see {@link agate/Skinnable}
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	skin: true,
@@ -118,6 +126,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 * @type {Boolean}
 	 * @default true
 	 * @see {@link spotlight/SpotlightRootDecorator}
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	spotlight: true
@@ -130,24 +139,22 @@ const CustomizableSkinStyle = kind({
 
 	propTypes: {
 		className: PropTypes.string.isRequired,
-
 		/**
 		 * A custom accent color, as a hex string.
 		 *
-		 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+		 * @memberof agate/ThemeDecorator.CustomizableSkinStyle.prototype
 		 * @type {String}
 		 * @default '#8b7efe'
-		 * @public
+		 * @private
 		 */
 		accent: PropTypes.string,
-
 		/**
 		 * A custom highlight color, as a hex string.
 		 *
-		 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+		 * @memberof agate/ThemeDecorator.CustomizableSkinStyle.prototype
 		 * @type {String}
 		 * @default '#c6c0fe'
-		 * @public
+		 * @private
 		 */
 		highlight: PropTypes.string
 	},
@@ -239,7 +246,21 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		static displayName = 'ThemeDecorator';
 
 		static propTypes = {
+			/**
+			 * A custom accent color, as a hex string.
+			 *
+			 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+			 * @type {String}
+			 * @public
+			 */
 			accent: PropTypes.string,
+			/**
+			 * A custom highlight color, as a hex string.
+			 *
+			 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+			 * @type {String}
+			 * @public
+			 */
 			highlight: PropTypes.string
 		};
 

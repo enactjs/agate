@@ -19,10 +19,18 @@ import Skinnable from '../Skinnable';
 import componentCss from './FullscreenPopup.module.less';
 
 /**
- * Full screen popup component, ready to use in Agate applications.
+ * Full screen popup component.
+ *
+ * Usage:
+ * ```
+ * <FullscreenPopup open>
+ *   Hello Fullscreen Popup
+ * </FullscreenPopup>
+ * ```
  *
  * @class FullscreenPopupBase
  * @memberof agate/FullscreenPopup
+ * @extends ui/Transition.Transition
  * @ui
  * @public
  */

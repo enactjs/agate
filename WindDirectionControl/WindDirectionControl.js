@@ -106,9 +106,10 @@ const WindDirectionControlDecorator = compose(
  * WindDirectionControl with Agate styling and
  * [WindDirectionControlDecorator]{@link agate/WindDirectionControl.WindDirectionControlDecorator} applied.
  *
- * Usage
- *
- *  <WindDirectionControl />
+ * Usage:
+ * ```
+ * <WindDirectionControl />
+ * ```
  *
  * @class WindDirectionControl
  * @memberof agate/WindDirectionControl

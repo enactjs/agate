@@ -105,7 +105,7 @@ const DrawerDecorator = compose(
  * Usage:
  * ```
  * <Drawer open>
- * 	Hello Enact!
+ *   Hello Enact!
  * </Drawer>
  * ```
  *

@@ -29,7 +29,6 @@ import css from './ContextualPopupDecorator.module.less';
 /**
  * Default config for {@link agate/ContextualPopupDecorator.ContextualPopupDecorator}
  *
- * @type {Object}
  * @hocconfig
  * @memberof agate/ContextualPopupDecorator.ContextualPopupDecorator
  */
@@ -101,6 +100,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * popup.
 			 *
 			 * @type {Boolean}
+			 * @default false
 			 * @public
 			 */
 			noAutoDismiss: PropTypes.bool,
@@ -140,6 +140,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * Displays the contextual popup.
 			 *
 			 * @type {Boolean}
+			 * @default false
 			 * @public
 			 */
 			open: PropTypes.bool,
@@ -196,6 +197,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * Shows the close button.
 			 *
 			 * @type {Boolean}
+			 * @default false
 			 * @public
 			 */
 			showCloseButton: PropTypes.bool,
