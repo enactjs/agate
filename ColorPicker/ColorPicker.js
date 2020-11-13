@@ -76,6 +76,7 @@ const ColorPickerBase = kind({
 		 * The animation direction of the `palette`.
 		 *
 		 * @type {String}
+		 * @default 'right'
 		 * @public
 		 */
 		direction: PropTypes.string,
@@ -148,6 +149,7 @@ const ColorPickerBase = kind({
 		 * Opens ColorPicker with the contents visible.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		open: PropTypes.bool,
@@ -160,6 +162,7 @@ const ColorPickerBase = kind({
 		 *
 		 * @type {String}
 		 * @see {@link ui/Changeable.Changeable}
+		 * @default '#cccccc'
 		 * @public
 		 */
 		value: PropTypes.string

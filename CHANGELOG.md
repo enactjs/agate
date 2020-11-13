@@ -16,6 +16,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/DateTimePicker` returned value by onChange event
 - `agate/Heading` to support `spacing` for Gallium and Silicon
 - `agate/IncrementSlider` button color for Gallium skin
+- `agate/Keypad` to not show console error in sampler
 - `agate/Panels` to show close button properly for night mode
 - `agate/PopupMenu` to display distinguishable title
 - `agate/LabeledIconButton` max-width so that huge sized icon will not be cut off

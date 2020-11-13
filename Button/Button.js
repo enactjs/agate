@@ -71,6 +71,7 @@ const ButtonBase = kind({
 		 * * `'transparent'`.
 		 *
 		 * @type {('opaque'|'lightOpaque'|'transparent')}
+		 * @default 'opaque'
 		 * @public
 		 */
 		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
@@ -131,6 +132,7 @@ const ButtonBase = kind({
 		 * The component used to render the icon.
 		 *
 		 * @type {Component|Node}
+		 * @default Icon
 		 * @private
 		 */
 		iconComponent: EnactPropTypes.componentOverride,
@@ -341,10 +343,9 @@ const ButtonDecorator = compose(
  * Usage:
  * ```
  * <Button
- * 	backgroundOpacity="translucent"
- * 	color="blue"
+ *   backgroundOpacity="transparent"
  * >
- * 	Press me!
+ *   Press me!
  * </Button>
  * ```
  *

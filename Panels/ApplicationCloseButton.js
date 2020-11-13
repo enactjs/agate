@@ -14,6 +14,7 @@ import Button from '../Button';
  *
  * @class ApplicationCloseButton
  * @memberof agate/Panels
+ * @ui
  * @private
  */
 const ApplicationCloseButton = kind({
