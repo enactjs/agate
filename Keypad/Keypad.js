@@ -301,7 +301,9 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 			}
 
 			if (keypadInput !== newKeypadInput) {
-				this.props.onChange({value: newKeypadInput});
+				forward('onChange', {
+					value: newKeypadInput
+				}, this.props);
 			}
 
 			this.setState({
