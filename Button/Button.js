@@ -246,9 +246,9 @@ const ButtonBase = kind({
 			}
 		),
 		checkPropsIncompatibility: ({highlighted, iconOnly, joinedPosition, selected, type}) => {
-			warning(!(highlighted && selected),'"highlighted" prop cannot be used at the same time with "selected" prop.');
+			warning(!(highlighted && selected), '"highlighted" prop cannot be used at the same time with "selected" prop.');
 			warning(!(iconOnly && joinedPosition && type), '"iconOnly" prop cannot be used at the same time with "joinedPosition" and "type" props.');
-			warning(!(joinedPosition && type === "grid"), '"joinedPosition" and "type" (with "grid" value) props cannot be used at the same time.');
+			warning(!(joinedPosition && type === 'grid'), '"joinedPosition" and "type" (with "grid" value) props cannot be used at the same time.');
 		},
 		decoration: ({badge, css, decoration}) => {
 			if (!badge) return decoration;
