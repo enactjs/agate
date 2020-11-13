@@ -489,7 +489,15 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		 * @public
 		 */
 		play = () => {
-			return this.send('play');
+			const playPromise = this.send('play');
+
+			if (playPromise) {
+				playPromise.then(() => {
+					// Automatic playback started!
+				}).catch(() => {
+					// Auto-play was prevented
+				});
+			}
 		};
 
 		/**
@@ -536,17 +544,6 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 			}
 		};
 
-		asyncPlay = () => {
-			const playPromise = this.play();
-			if (playPromise) {
-				playPromise.then(() => {
-					this.play();
-				}).catch(() => {
-					// Auto-play was prevented
-				});
-			}
-		};
-
 		handleNext = () => {
 			let currentIndex = this.state.sourceIndex;
 
@@ -565,11 +562,11 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				this.setState(() => {
 					return ({sourceIndex: currentIndex});
 				}, () => {
-					this.asyncPlay();
+					this.play();
 				});
 			} else {
 				this.media.currentTime = 0;
-				this.asyncPlay();
+				this.play();
 			}
 		};
 
@@ -586,11 +583,11 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				this.setState(() => {
 					return ({sourceIndex: currentIndex});
 				}, () => {
-					this.asyncPlay();
+					this.play();
 				});
 			} else {
 				this.media.currentTime = 0;
-				this.asyncPlay();
+				this.play();
 			}
 		};
 
