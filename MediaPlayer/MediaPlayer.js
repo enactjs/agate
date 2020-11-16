@@ -462,7 +462,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		 * @private
 		 */
 		send = (action, props) => {
-			this.media[action](props);
+			return this.media[action](props);
 		};
 
 		handleEvent = () => {
@@ -489,7 +489,15 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		 * @public
 		 */
 		play = () => {
-			this.send('play');
+			const playPromise = this.send('play');
+
+			if (playPromise) {
+				playPromise.then(() => {
+					// Automatic playback started!
+				}).catch(() => {
+					// Auto-play was prevented
+				});
+			}
 		};
 
 		/**
