@@ -6,6 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
  
 ### Fixed
 - `agate/DateTimePicker` returned value by onChange event
+- `agate/FanSpeedControl` to center text when there is no icon
 - `agate/Heading` to support `spacing` for Gallium and Silicon
 - `agate/IncrementSlider` button color for Gallium skin
 - `agate/Keypad` to not show console error in sampler

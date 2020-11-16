@@ -98,7 +98,8 @@ const FanSpeedControlBase = kind({
 	},
 
 	computed: {
-		children: ({min, max}) => range(min, max + 1)
+		children: ({min, max}) => range(min, max + 1),
+		className: ({icon, styler}) => styler.append({noIcon: !icon})
 	},
 
 	render: ({children, icon, max, min, onChange, value, ...rest}) => {
