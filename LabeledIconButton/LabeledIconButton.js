@@ -10,9 +10,11 @@
  * @exports LabeledIconButtonDecorator
  */
 
+import Image from '@enact/agate/Image';
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import {LabeledIconBase as UiLabeledIconBase, LabeledIconDecorator as UiLabeledIconDecorator} from '@enact/ui/LabeledIcon';
+import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -22,7 +24,41 @@ import Skinnable from '../Skinnable';
 
 import componentCss from './LabeledIconButton.module.less';
 
+import profileA1 from './profileA1.png';
+import profileA2 from './profileA2.png';
+import profileA3 from './profileA3.png';
+import profileA4 from './profileA4.png';
+import profileB1 from './profileB1.png';
+import profileB2 from './profileB2.png';
+import profileB3 from './profileB3.png';
+import profileB4 from './profileB4.png';
+import profileC1 from './profileC1.png';
+import profileC2 from './profileC2.png';
+import profileC3 from './profileC3.png';
+import profileC4 from './profileC4.png';
+
 const Button = Skinnable(ButtonBase);
+
+const src = {
+	'hd':  'http://via.placeholder.com/200x200',
+	'fhd': 'http://via.placeholder.com/300x300',
+	'uhd': 'http://via.placeholder.com/600x600'
+};
+
+const profileIcons = {
+	profileA1,
+	profileA2,
+	profileA3,
+	profileA4,
+	profileB1,
+	profileB2,
+	profileB3,
+	profileB4,
+	profileC1,
+	profileC2,
+	profileC3,
+	profileC4
+};
 
 /**
  * An icon button component with a label.
@@ -122,6 +158,25 @@ const LabeledIconButtonBase = kind({
 		spriteCount,
 		...rest
 	}) => {
+		let profileProps = null;
+
+		if (typeof icon === 'string' && icon.slice(0, 7) === 'profile') {
+			profileProps = {
+				icon: '',
+				iconComponent: (
+					<Image
+						sizing='fit'
+						src={profileIcons[icon]}
+						style={{
+							width: '100%',
+							height: '100%'
+						}}
+					/>
+				),
+				backgroundOpacity: 'transparent'
+			};
+		}
+
 		return UiLabeledIconBase.inline({
 			role: 'button',
 			...rest,
@@ -134,6 +189,7 @@ const LabeledIconButtonBase = kind({
 					pressed={pressed}
 					selected={selected}
 					spriteCount={spriteCount}
+					{...profileProps}
 				/>
 			),
 			css
