@@ -23,7 +23,7 @@ class AgateItemInterface {
 class AgateItemPage extends Page {
 	constructor () {
 		super();
-		this.title = 'Item Test';
+		this.title = 'Agate Item Test';
 		const item1 = new AgateItemInterface('item1');
 		const item2Disabled = new AgateItemInterface('item2Disabled');
 		const item3WithLabel = new AgateItemInterface('item3WithLabel');
@@ -32,8 +32,7 @@ class AgateItemPage extends Page {
 		const item6Inline = new AgateItemInterface('item6Inline');
 		const item7Inline = new AgateItemInterface('item7Inline');
 		const item8Inline = new AgateItemInterface('item8Inline');
-		const item9 = new AgateItemInterface('item9');
-		this.components = {item1, item2Disabled, item3WithLabel, item4Inline, item5InlineDisabled, item6Inline, item7Inline, item8Inline, item9};
+		this.components = {item1, item2Disabled, item3WithLabel, item4Inline, item5InlineDisabled, item6Inline, item7Inline, item8Inline};
 	}
 
 	open (urlExtra) {
