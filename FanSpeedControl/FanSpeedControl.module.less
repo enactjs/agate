@@ -6,19 +6,28 @@
 @import '../styles/variables.less';
 
 .fanSpeedControl {
+	.fanValue {
+		text-align: center;
+	}
+
+	&.noIcon {
+		.fanIcon {
+			display: none;
+		}
+	}
+
 	.applySkins({
 		.fanIcon {
 			font-size: @agate-fanspeedcontrol-icon-font-size;
 			height: @agate-fanspeedcontrol-icon-height;
 			line-height: @agate-fanspeedcontrol-icon-height;
+			margin: 0;
 			width: @agate-fanspeedcontrol-icon-height;
 		}
 
 		.fanValue {
 			font-size: @agate-fanspeedcontrol-font-size;
-			font-weight: @agate-fanspeedcontrol-font-weight;
-			margin-right: @agate-fanspeedcontrol-margin;
-			width: @agate-fanspeedcontrol-icon-height;
+			width: @agate-fanspeedcontrol-value-width;
 		}
-	})
+	});
 }
