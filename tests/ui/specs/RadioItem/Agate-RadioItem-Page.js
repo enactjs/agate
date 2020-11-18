@@ -20,6 +20,9 @@ class AgateRadioItemInterface {
 	get isSelected () {
 		return hasClass('RadioItem_RadioItem_selected', this.self);
 	}
+	get isInline () {
+		return $(`#${this.id}.Item_Item_inline`).isExisting();
+	}
 }
 
 
@@ -29,7 +32,11 @@ class AgateRadioItemPage extends Page {
 		this.title = 'Agate RadioItem Test';
 		const radioDefault = new AgateRadioItemInterface('radioItem1');
 		const radioDefaultSelected = new AgateRadioItemInterface('radioItem2');
-		this.components = {radioDefault, radioDefaultSelected};
+		const radioInline = new AgateRadioItemInterface('radioItem3');
+		const radioDisabled = new AgateRadioItemInterface('radioItem4');
+		const radioInlineDisabled = new AgateRadioItemInterface('radioItem5');
+
+		this.components = {radioDefault, radioDefaultSelected, radioInline, radioDisabled, radioInlineDisabled};
 	}
 
 	open (urlExtra) {
