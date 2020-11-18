@@ -1,7 +1,5 @@
 'use strict';
-const {element, getComponent, getText, Page} = require('@enact/ui-test-utils/utils');
-
-const getIcon = getComponent({component: 'Icon'});
+const {element, Page} = require('@enact/ui-test-utils/utils');
 
 class PickerInterface {
 	constructor (id) {
@@ -14,9 +12,6 @@ class PickerInterface {
 
 	get self () {
 		return element(`#${this.id}`, browser);
-	}
-	get chevron () {
-		return getText(getIcon(this.self));
 	}
 
 	get hour () {
