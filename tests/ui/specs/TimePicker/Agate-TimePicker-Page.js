@@ -35,8 +35,8 @@ class PickerInterface {
 	incrementer (picker) {
 		return element('.internal_Picker_Picker_itemIncrement', picker);
 	}
-	item (picker) {
-		return element('.internal_Picker_Picker_item', picker);
+	active (picker) {
+		return element('.internal_Picker_Picker_active', picker);
 	}
 }
 

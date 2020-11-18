@@ -132,134 +132,125 @@ describe('TimePicker', function () {
 			});
 		});
 
-		// describe('with \'defaultValue\'', function () {
-		// 	// supplied value is `new Date(2009, 5, 6)` (time will be midnight)
-		// 	const timePicker = Page.components.timePickerWithDefaultValue;
-		//
-		// 	describe('5-way', function () {
-		// 		it('should not update on select', function () {
-		// 			timePicker.focus();
-		// 			Page.spotlightSelect();
-		//
-		// 			const {hour, minute, meridiem} = extractValues(timePicker);
-		//
-		// 			expect(hour).to.equal(12);
-		// 			expect(minute).to.equal(0);
-		// 			expect(meridiem).to.equal('AM');
-		// 		});
-		// 	});
-		// });
-		//
-		// describe('disabled', function () {
-		// 	const timePicker = Page.components.timePickerDisabled;
-		//
-		// 	describe('5-way', function () {
-		// 		it('should not update on select', function () {
-		// 			Page.spotlightSelect();
-		// 			timePicker.focus();
-		// 		});
-		// 	});
-		//
-		// 	describe('pointer', function () {
-		// 		it('should not update hour on click', function () {
-		// 			timePicker.hour.click();
-		// 			expect(timePicker.hour.isFocused()).to.be.true();
-		//
-		// 			timePicker.incrementer(timePicker.hour).click();
-		// 			browser.pause(500);
-		// 			const {hour: value} = extractValues(timePicker);
-		// 			expect(value).to.equal(12);
-		// 		});
-		// 	});
-		// });
-		//
-		// describe('disabled with \'defaultValue\'', function () {
-		// 	const timePicker = Page.components.timePickerDisabledWithDefaultValue;
-		// 	it('should not update \'defaultValue\' on click', function () {
-		// 		const {hour, minute, meridiem} = extractValues(timePicker);
-		//
-		// 		timePicker.minute.click();
-		// 		expect(timePicker.minute.isFocused()).to.be.true();
-		// 		timePicker.decrementer(timePicker.minute).click();
-		//
-		// 		timePicker.hour.click();
-		// 		expect(timePicker.hour.isFocused()).to.be.true();
-		// 		timePicker.decrementer(timePicker.hour).click();
-		//
-		// 		timePicker.meridiem.click();
-		// 		expect(timePicker.meridiem.isFocused()).to.be.true();
-		// 		timePicker.decrementer(timePicker.meridiem).click();
-		//
-		// 		browser.pause(500);
-		// 		expect(hour).to.equal(12);
-		// 		expect(minute).to.equal(0);
-		// 		expect(meridiem).to.equal('AM');
-		// 	});
-		//
-		// });
+		describe('with \'defaultValue\'', function () {
+			// supplied value is `new Date(2009, 5, 6)` (time will be midnight)
+			const timePicker = Page.components.timePickerWithDefaultValue;
+
+			describe('5-way', function () {
+				it('should not update on select', function () {
+					timePicker.focus();
+					Page.spotlightSelect();
+
+					const {hour, minute, meridiem} = extractValues(timePicker);
+
+					expect(hour).to.equal(12);
+					expect(minute).to.equal(0);
+					expect(meridiem).to.equal('AM');
+				});
+			});
+		});
+
+		describe('disabled', function () {
+			const timePicker = Page.components.timePickerDisabled;
+
+			describe('5-way', function () {
+				it('should not update on select', function () {
+					Page.spotlightSelect();
+					timePicker.focus();
+				});
+			});
+
+			describe('pointer', function () {
+				it('should not update hour on click', function () {
+					const {hour} = extractValues(timePicker);
+					timePicker.decrementer(timePicker.hour).click();
+					expect(timePicker.decrementer(timePicker.hour).isFocused()).to.be.true();
+					browser.pause(500);
+					const {hour: value} = extractValues(timePicker);
+					expect(value).to.equal(hour);
+				});
+			});
+		});
+
+		describe('disabled with \'defaultValue\'', function () {
+			const timePicker = Page.components.timePickerDisabledWithDefaultValue;
+			it('should not update \'defaultValue\' on click', function () {
+				const {hour, minute, meridiem} = extractValues(timePicker);
+
+				timePicker.decrementer(timePicker.minute).click();
+				expect(timePicker.decrementer(timePicker.minute).isFocused()).to.be.true();
+
+				timePicker.decrementer(timePicker.hour).click();
+				expect(timePicker.decrementer(timePicker.hour).isFocused()).to.be.true();
+
+				timePicker.decrementer(timePicker.meridiem).click();
+				expect(timePicker.decrementer(timePicker.meridiem).isFocused()).to.be.true();
+
+				browser.pause(500);
+				expect(hour).to.equal(12);
+				expect(minute).to.equal(0);
+				expect(meridiem).to.equal('AM');
+			});
+
+		});
 	});
 
-	// describe('RTL locale', function () {
-	// 	const timePicker = Page.components.timePickerDefault;
-	//
-	// 	beforeEach(function () {
-	// 		Page.open('?locale=ar-SA');
-	// 	});
-	//
-	// 	it('should focus middle picker (hour) when selected', function () {
-	// 		browser.waitUntil(() => timePicker.hour.isFocused(), {timeout: 1500,  interval: 100});
-	// 	});
-	//
-	// 	it('should have minute-hour-meridiem order', function () {
-	// 		browser.waitUntil(() => timePicker.hour.isFocused(), {timeout: 1500,  timeoutMsg: 'initial', interval: 100});
-	// 		Page.spotlightRight();
-	// 		browser.waitUntil(() => timePicker.minute.isFocused(), {timeout: 1500,  timeoutMsg: 'minute', interval: 100});
-	// 		Page.spotlightLeft();
-	// 		browser.waitUntil(() => timePicker.hour.isFocused(), {timeout: 1500,  timeoutMsg: 'hour', interval: 100});
-	// 		Page.spotlightLeft();
-	// 		browser.waitUntil(() => timePicker.meridiem.isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem', interval: 100});
-	// 	});
-	// });
-	//
-	// describe('24-hour locale', function () {
-	// 	const timePicker = Page.components.timePickerWithDefaultValue;
-	//
-	// 	beforeEach(function () {
-	// 		Page.open('?locale=fr-FR');
-	// 	});
-	//
-	// 	it('should not have a meridiem picker', function () {
-	// 		expect(timePicker.meridiem.isExisting(), 'meridiem exists').to.be.false();
-	// 	});
-	//
-	// 	it('should display hours in 24-hour format', function () {
-	// 		expect(extractValues(timePicker).hour).to.equal(0); // midnight hour
-	// 	});
-	//
-	// 	it('should increment hours from 23 to 0', function () {
-	// 		// FIXME: replace with trigger for expandable open (or replace with defaultOpen picker)
-	// 		Page.delay(500);
-	//
-	// 		// go to 23 first
-	// 		timePicker.hour.click();
-	// 		expect(timePicker.hour.isFocused()).to.be.true();
-	//
-	// 		timePicker.decrementer(timePicker.hour).click();
-	// 		expect(extractValues(timePicker).hour).to.equal(23);
-	// 		// now increment
-	// 		timePicker.incrementer(timePicker.hour).click();
-	// 		expect(extractValues(timePicker).hour).to.equal(0);
-	// 	});
-	//
-	// 	it('should decrement hours from 0 to 23', function () {
-	// 		// FIXME: replace with trigger for expandable open (or replace with defaultOpen picker)
-	// 		Page.delay(500);
-	// 		timePicker.hour.click();
-	// 		expect(timePicker.hour.isFocused()).to.be.true();
-	//
-	// 		timePicker.decrementer(timePicker.hour).click();
-	// 		expect(extractValues(timePicker).hour).to.equal(23);
-	// 	});
-	// });
+	describe('RTL locale', function () {
+		const timePicker = Page.components.timePickerDefault;
 
+		beforeEach(function () {
+			Page.open('?locale=ar-SA');
+		});
+
+		it('should focus middle picker (hour) when selected', function () {
+			browser.waitUntil(() => timePicker.decrementer(timePicker.hour).isFocused(), {timeout: 1500,  interval: 100});
+		});
+
+		it('should have minute-hour-meridiem order', function () {
+			browser.waitUntil(() => timePicker.decrementer(timePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'initial', interval: 100});
+			Page.spotlightRight();
+			browser.waitUntil(() => timePicker.decrementer(timePicker.minute).isFocused(), {timeout: 1500,  timeoutMsg: 'minute', interval: 100});
+			Page.spotlightLeft();
+			browser.waitUntil(() => timePicker.decrementer(timePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'hour', interval: 100});
+			Page.spotlightLeft();
+			browser.waitUntil(() => timePicker.decrementer(timePicker.meridiem).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem', interval: 100});
+		});
+	});
+
+	describe('24-hour locale', function () {
+		const timePicker = Page.components.timePickerWithDefaultValue;
+
+		beforeEach(function () {
+			Page.open('?locale=fr-FR');
+		});
+
+		it('should not have a meridiem picker', function () {
+			expect(timePicker.meridiem.isExisting(), 'meridiem exists').to.be.false();
+		});
+
+		it('should display hours in 24-hour format', function () {
+			expect(extractValues(timePicker).hour).to.equal(0); // midnight hour
+		});
+
+		it('should increment hours from 0 to 23', function () {
+			for (let i = 0; i < 24; i++) {
+				timePicker.incrementer(timePicker.hour).click();
+			}
+			const {hour} = extractValues(timePicker);
+			expect(hour).to.equal(23);
+		});
+
+		it('should decrement hours from 23 to 0', function () {
+			// go to 23 first
+			for (let i = 0; i < 24; i++) {
+				timePicker.incrementer(timePicker.hour).click();
+			}
+			expect(extractValues(timePicker).hour).to.equal(23);
+			// now decrement
+			for (let i = 0; i < 24; i++) {
+				timePicker.decrementer(timePicker.hour).click();
+			}
+			expect(extractValues(timePicker).hour).to.equal(0);
+		});
+	});
 });
