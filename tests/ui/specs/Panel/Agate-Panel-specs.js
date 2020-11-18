@@ -117,8 +117,6 @@ describe('Panel', function () {
 			expect(actual).to.equal(expected);
 		});
 
-		// this test passed manually but fails in automation because the 'last-focused' element
-		// isn't preserved.
 		it('should focus the `last-focused` when moving backward', () => {
 			Page.open('?defaultIndex=5');
 
