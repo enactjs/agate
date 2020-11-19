@@ -6,6 +6,7 @@ import {storiesOf} from '@storybook/react';
 
 import {PickerBase} from '@enact/agate/internal/Picker';
 import RangePicker from '@enact/agate/RangePicker';
+import TimePicker from "../../../../TimePicker";
 
 const Config = mergeComponentMetadata('RangePicker', RangePicker, PickerBase);
 
@@ -21,6 +22,7 @@ storiesOf('Agate', module)
 				noAnimation={boolean('noAnimation', Config)}
 				onChange={action('onChange')}
 				orientation={select('orientation', ['vertical', 'horizontal'], Config)}
+				spotlightDisabled={boolean('spotlightDisabled', Config)}
 				step={number('step', Config)}
 				wrap={boolean('wrap', Config)}
 			/>

@@ -6,6 +6,7 @@ import {storiesOf} from '@storybook/react';
 
 import {PickerBase} from '@enact/agate/internal/Picker';
 import Picker from '@enact/agate/Picker';
+import TimePicker from "../../../../TimePicker";
 
 const Config = mergeComponentMetadata('Picker', Picker, PickerBase);
 
@@ -22,6 +23,7 @@ storiesOf('Agate', module)
 					noAnimation={boolean('noAnimation', Config)}
 					onChange={action('onChange')}
 					orientation={select('orientation', ['vertical', 'horizontal'], Config)}
+					spotlightDisabled={boolean('spotlightDisabled', Config)}
 					wrap={boolean('wrap', Config)}
 				>
 					{['LO', '16\xB0', '17\xB0', '18\xB0', '19\xB0', 'HI']}
