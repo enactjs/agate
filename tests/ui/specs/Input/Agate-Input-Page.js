@@ -1,7 +1,7 @@
 'use strict';
 const {Page} = require('@enact/ui-test-utils/utils');
 
-class SpotlightMultiplePage extends Page {
+class AgateInputPage extends Page {
 	constructor () {
 		super();
 		this.title = 'Agate Input Test';
@@ -31,4 +31,4 @@ class SpotlightMultiplePage extends Page {
 	}
 }
 
-module.exports = new SpotlightMultiplePage();
+module.exports = new AgateInputPage();
