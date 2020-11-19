@@ -390,7 +390,7 @@ const PickerBase = kind({
 				return decrementAriaLabel;
 			}
 
-			if (this.props.type === 'number') {
+			if (type === 'number') {
 				return `${valueText} ${$L('decrease the value')}`;
 			} else {
 				return `${valueText} ${$L('previous item')}`;
@@ -401,7 +401,7 @@ const PickerBase = kind({
 				return incrementAriaLabel;
 			}
 
-			if (this.props.type === 'number') {
+			if (type === 'number') {
 				return `${valueText} ${$L('increase the value')}`;
 			} else {
 				return `${valueText} ${$L('next item')}`;
