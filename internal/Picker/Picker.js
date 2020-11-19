@@ -359,7 +359,7 @@ const PickerBase = kind({
 			return valueText;
 		},
 		className: ({orientation, styler}) => styler.append(orientation),
-		currentItemIndex: ({children: values, index, max, min}) => {
+		currentItemIndex: ({children: values, index, max, min, wrap}) => {
 			if (Array.isArray(values)) {
 				if (wrap) {
 					return wrapRange(min, max, index);
@@ -398,7 +398,7 @@ const PickerBase = kind({
 				return `${$L('previous item')}`;
 			}
 		},
-		decrementItemIndex: ({children: values, index, max, min}) => {
+		decrementItemIndex: ({children: values, index, max, min, wrap}) => {
 			if (Array.isArray(values)) {
 				if (wrap) {
 					return wrapRange(min, max, index - 1);
@@ -416,21 +416,21 @@ const PickerBase = kind({
 				return `${$L('next item')}`;
 			}
 		},
-		incrementItemIndex: ({children: values, index, max, min}) => {
+		incrementItemIndex: ({children: values, index, max, min, wrap}) => {
 			if (Array.isArray(values)) {
 				if (wrap) {
 					return wrapRange(min, max, index + 1);
 				} else return index + 1;
 			} else return 0;
 		},
-		secondaryDecrementItemIndex: ({children: values, index, max, min}) => {
+		secondaryDecrementItemIndex: ({children: values, index, max, min, wrap}) => {
 			if (Array.isArray(values)) {
 				if (wrap) {
 					return wrapRange(min, max, index - 2);
 				} else return index - 2;
 			} else return 0;
 		},
-		secondaryIncrementItemIndex: ({children: values, index, max, min}) => {
+		secondaryIncrementItemIndex: ({children: values, index, max, min, wrap}) => {
 			if (Array.isArray(values)) {
 				if (wrap) {
 					return wrapRange(min, max, index + 2);
@@ -455,7 +455,6 @@ const PickerBase = kind({
 			handleIncrement,
 			incrementAriaLabel: incAriaLabel,
 			incrementItemIndex,
-			index,
 			min,
 			max,
 			noAnimation,
