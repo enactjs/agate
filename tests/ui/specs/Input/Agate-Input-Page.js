@@ -1,7 +1,7 @@
 'use strict';
 const {Page} = require('@enact/ui-test-utils/utils');
 
-class AgateInputPage extends Page {
+class SpotlightMultiplePage extends Page {
 	constructor () {
 		super();
 		this.title = 'Agate Input Test';
@@ -11,9 +11,24 @@ class AgateInputPage extends Page {
 		super.open('Agate-Input-View', urlExtra);
 	}
 
+	get input1 () {
+		return $('#input1');
+	}
+	get input2 () {
+		return $('#input2');
+	}
+	get input3 () {
+		return $('#input3');
+	}
+	get input4 () {
+		return $('#input4');
+	}
 	get disabledInput () {
 		return $('#input5');
 	}
+	get inputElement1 () {
+		return $('#input1 input');
+	}
 }
 
-module.exports = new AgateInputPage();
+module.exports = new SpotlightMultiplePage();
