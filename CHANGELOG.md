@@ -6,13 +6,17 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
+- `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
 - `agate/DatePicker` prop `onSpotlightDisappear` and `spotlightDisabled`
+- `agate/Marquee` component
 - `agate/Picker` prop `noAnimation` and `wrap`
 - `agate/RangePicker` prop `noAnimation` and `wrap`
 - `agate/TimePicker` prop `onSpotlightDisappear` and `spotlightDisabled`
  
 ### Fixed
 
+- `agate/Button` to marquee when focused
+- `agate/Button` to show a tooltip when hovered
 - `agate/DateTimePicker` returned value by onChange event
 - `agate/FanSpeedControl` to center text when there is no icon
 - `agate/Heading` to support `spacing` for Gallium and Silicon
