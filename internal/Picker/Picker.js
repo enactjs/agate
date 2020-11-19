@@ -33,9 +33,9 @@ const PickerButtonItem = Spottable('div');
 
 const wrapRange = (min, max, value) => {
 	if (value > max) {
-		return min;
+		return min + (value - max - 1);
 	} else if (value < min) {
-		return max;
+		return max - (min - value - 1);
 	} else {
 		return value;
 	}
