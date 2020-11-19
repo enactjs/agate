@@ -20,15 +20,15 @@ const PickerTests = [
 	// RTL
 	{
 		locale: 'ar-SA',
-		component: 	<Picker>{pickerList.temperatures}</Picker>
+		component: <Picker>{pickerList.temperatures}</Picker>
 	},
 	{
 		locale: 'ar-SA',
-		component: 	<Picker disabled>{pickerList.temperatures}</Picker>
+		component: <Picker disabled>{pickerList.temperatures}</Picker>
 	},
 	{
 		locale: 'ar-SA',
-		component: 	<Picker orientation="horizontal">{pickerList.temperatures}</Picker>
+		component: <Picker orientation="horizontal">{pickerList.temperatures}</Picker>
 	},
 
 	// Wrap

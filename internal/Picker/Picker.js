@@ -235,7 +235,6 @@ const PickerBase = kind({
 		 * When it's `true` it changes the direction of the transition animation.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		reverseTransition: PropTypes.bool,
@@ -318,7 +317,6 @@ const PickerBase = kind({
 		 * to `true` to allow the picker to continue from the opposite end of the list of options.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		wrap: PropTypes.bool
@@ -327,12 +325,9 @@ const PickerBase = kind({
 	defaultProps: {
 		accessibilityHint: '',
 		orientation: 'vertical',
-		reverseTransition: false,
-		spotlightDisabled: false,
 		step: 1,
 		type: 'string',
-		value: 0,
-		wrap: false
+		value: 0
 	},
 
 	styles: {
@@ -364,6 +359,13 @@ const PickerBase = kind({
 			return valueText;
 		},
 		className: ({orientation, styler}) => styler.append(orientation),
+		currentItemIndex: ({children: values, index, max, min}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index);
+				} else return index;
+			} else return 0;
+		},
 		currentValueText: ({accessibilityHint, 'aria-valuetext': ariaValueText, children, value}) => {
 			if (ariaValueText != null) {
 				return ariaValueText;
@@ -385,27 +387,55 @@ const PickerBase = kind({
 
 			return valueText;
 		},
-		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel = $L('previous item'), type}) => {
+		decrementAriaLabel: ({decrementAriaLabel, type}) => {
 			if (decrementAriaLabel != null) {
 				return decrementAriaLabel;
 			}
 
 			if (type === 'number') {
-				return `${valueText} ${$L('decrease the value')}`;
+				return `${$L('decrease the value')}`;
 			} else {
-				return `${valueText} ${$L('previous item')}`;
+				return `${$L('previous item')}`;
 			}
 		},
-		incrementAriaLabel: ({'aria-valuetext': valueText, incrementAriaLabel, type}) => {
+		decrementItemIndex: ({children: values, index, max, min}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index - 1);
+				} else return index - 1;
+			} else return 0;
+		},
+		incrementAriaLabel: ({incrementAriaLabel, type}) => {
 			if (incrementAriaLabel != null) {
 				return incrementAriaLabel;
 			}
 
 			if (type === 'number') {
-				return `${valueText} ${$L('increase the value')}`;
+				return `${$L('increase the value')}`;
 			} else {
-				return `${valueText} ${$L('next item')}`;
+				return `${$L('next item')}`;
 			}
+		},
+		incrementItemIndex: ({children: values, index, max, min}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index + 1);
+				} else return index + 1;
+			} else return 0;
+		},
+		secondaryDecrementItemIndex: ({children: values, index, max, min}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index - 2);
+				} else return index - 2;
+			} else return 0;
+		},
+		secondaryIncrementItemIndex: ({children: values, index, max, min}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index + 2);
+				} else return index + 2;
+			} else return 0;
 		},
 		valueId: ({id}) => `${id}_value`
 	},
@@ -415,13 +445,16 @@ const PickerBase = kind({
 			activeClassName,
 			'aria-label': ariaLabel,
 			children: values,
+			currentItemIndex,
 			currentValueText,
 			decrementAriaLabel: decAriaLabel,
+			decrementItemIndex,
 			disabled,
 			handleDecrement,
 			handleFlick,
 			handleIncrement,
 			incrementAriaLabel: incAriaLabel,
+			incrementItemIndex,
 			index,
 			min,
 			max,
@@ -429,6 +462,8 @@ const PickerBase = kind({
 			onSpotlightDisappear,
 			orientation,
 			reverseTransition,
+			secondaryDecrementItemIndex,
+			secondaryIncrementItemIndex,
 			skin,
 			spotlightDisabled,
 			step,
@@ -491,46 +526,6 @@ const PickerBase = kind({
 			}
 		};
 
-		const currentItemIndex = () => {
-			if (Array.isArray(values)) {
-				if (wrap) {
-					return wrapRange(min, max, index);
-				} else return index;
-			} else return 0;
-		};
-
-		const decrementItemIndex = () => {
-			if (Array.isArray(values)) {
-				if (wrap) {
-					return wrapRange(min, max, index - 1);
-				} else return index - 1;
-			} else return 0;
-		};
-
-		const incrementItemIndex = () => {
-			if (Array.isArray(values)) {
-				if (wrap) {
-					return wrapRange(min, max, index + 1);
-				} else return index + 1;
-			} else return 0;
-		};
-
-		const secondaryDecrementItemIndex = () => {
-			if (Array.isArray(values)) {
-				if (wrap) {
-					return wrapRange(min, max, index - 2);
-				} else return index - 2;
-			} else return 0;
-		};
-
-		const secondaryIncrementItemIndex = () => {
-			if (Array.isArray(values)) {
-				if (wrap) {
-					return wrapRange(min, max, index + 2);
-				} else return index + 2;
-			} else return 0;
-		};
-
 		let sizingPlaceholder = null;
 		if (typeof width === 'number' && width > 0) {
 			sizingPlaceholder = <div aria-hidden className={css.sizingPlaceholder}>{'0'.repeat(width)}</div>;
@@ -568,7 +563,7 @@ const PickerBase = kind({
 							arranger={arranger}
 							className={css.viewManager}
 							duration={transitionDuration}
-							index={secondaryDecrementItemIndex()}
+							index={secondaryDecrementItemIndex}
 							noAnimation={noAnimation || disabled}
 							reverseTransition={reverseTransition}
 						>
@@ -591,7 +586,7 @@ const PickerBase = kind({
 						arranger={arranger}
 						className={css.viewManager}
 						duration={transitionDuration}
-						index={decrementItemIndex()}
+						index={decrementItemIndex}
 						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
 					>
@@ -611,7 +606,7 @@ const PickerBase = kind({
 						arranger={arranger}
 						className={css.viewManager}
 						duration={transitionDuration}
-						index={currentItemIndex()}
+						index={currentItemIndex}
 						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
 					>
@@ -633,7 +628,7 @@ const PickerBase = kind({
 						arranger={arranger}
 						className={css.viewManager}
 						duration={transitionDuration}
-						index={incrementItemIndex()}
+						index={incrementItemIndex}
 						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
 					>
@@ -658,7 +653,7 @@ const PickerBase = kind({
 							arranger={arranger}
 							className={css.viewManager}
 							duration={transitionDuration}
-							index={secondaryIncrementItemIndex()}
+							index={secondaryIncrementItemIndex}
 							noAnimation={noAnimation || disabled}
 							reverseTransition={reverseTransition}
 						>
