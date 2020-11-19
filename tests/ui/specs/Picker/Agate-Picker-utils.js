@@ -1,8 +1,7 @@
 // Utility methods for testing
 
 const extractValue = (picker) => {
-	console.log(parseInt(picker.active.getText()));
-	return parseInt(picker.active.getText());
+	return picker.active(picker.self).getText();
 };
 
 module.exports = {

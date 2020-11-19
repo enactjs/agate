@@ -1,5 +1,5 @@
 const Page = require('./Agate-Picker-Page');
-const {extractValue} = require('./Agate-TimePicker-utils.js');
+const {extractValue} = require('./Agate-Picker-utils.js');
 
 describe('Picker', function () {
 
@@ -12,25 +12,26 @@ describe('Picker', function () {
 			const picker = Page.components.pickerDefault;
 
 			describe('5-way', function () {
-				it('should change the value backwards when decrementing the picker', function () {
-					const oldValue = extractValue(picker);
-					browser.waitUntil(() => picker.decrementer.isFocused(), {timeout: 1500,  interval: 100});
+				it('should change the value forward when incrementing the picker', function () {
+					browser.waitUntil(() => picker.decrementer(picker.self).isFocused(), {timeout: 1500,  interval: 100});
+					Page.spotlightDown();
+					browser.waitUntil(() => picker.incrementer(picker.self).isFocused(), {timeout: 1500,  interval: 100});
 					Page.spotlightSelect();
-					const {newValue} = extractValue(picker);
-					const expected = oldValue;
-					expect(newValue).to.equal(expected);
+					const newValue = extractValue(picker);
+					expect(newValue).to.equal('Korea');
 				});
 
-				// it('should increase the hour when incrementing the picker', function () {
-				// 	const {hour} = extractValues(timePicker);
-				// 	Page.spotlightDown();
-				// 	browser.waitUntil(() => timePicker.incrementer(timePicker.hour).isFocused(), {timeout: 1500,  interval: 100});
-				// 	Page.spotlightSelect();
-				// 	const {hour: value} = extractValues(timePicker);
-				// 	const expected = hour > 1 ? hour + 1 : 12;
-				// 	expect(value).to.equal(expected);
-				// });
-
+				it('should change the value backward when incrementing the picker', function () {
+					browser.waitUntil(() => picker.decrementer(picker.self).isFocused(), {timeout: 1500,  interval: 100});
+					Page.spotlightDown();
+					browser.waitUntil(() => picker.incrementer(picker.self).isFocused(), {timeout: 1500,  interval: 100});
+					Page.spotlightSelect();
+					Page.spotlightUp();
+					browser.waitUntil(() => picker.decrementer(picker.self).isFocused(), {timeout: 1500,  interval: 100});
+					Page.spotlightSelect();
+					const newValue = extractValue(picker);
+					expect(newValue).to.equal('Romania');
+				});
 			});
 
 			describe('pointer', function () {
