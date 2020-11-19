@@ -6,7 +6,6 @@ import {storiesOf} from '@storybook/react';
 
 import {PickerBase} from '@enact/agate/internal/Picker';
 import Picker from '@enact/agate/Picker';
-import TimePicker from "../../../../TimePicker";
 
 const Config = mergeComponentMetadata('Picker', Picker, PickerBase);
 

@@ -6,7 +6,6 @@ import {storiesOf} from '@storybook/react';
 
 import {PickerBase} from '@enact/agate/internal/Picker';
 import RangePicker from '@enact/agate/RangePicker';
-import TimePicker from "../../../../TimePicker";
 
 const Config = mergeComponentMetadata('RangePicker', RangePicker, PickerBase);
 
