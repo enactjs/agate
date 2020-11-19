@@ -18,7 +18,9 @@ const DateTimeBase = kind({
 	name: 'DateTime',
 
 	propTypes:  /** @lends agate/internal/DateTime.DateTime.prototype */ {
-		css: PropTypes.object
+		css: PropTypes.object,
+		locale: PropTypes.string,
+		value: PropTypes.any
 	},
 
 	styles: {
@@ -28,6 +30,9 @@ const DateTimeBase = kind({
 	},
 
 	render: ({children, css, ...rest}) => {
+		delete rest.locale;
+		delete rest.value;
+
 		return (
 			<div {...rest}>
 				<div className={css.pickers}>

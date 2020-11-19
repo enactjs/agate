@@ -45,12 +45,40 @@ const PickerBase = kind({
 		children: PropTypes.array.isRequired,
 
 		/**
+		 * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
+		 * to the current value. This should only be used when the parent controls the value of
+		 * the picker directly through the props.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		'aria-label': PropTypes.string,
+
+		/**
+		 * Sets the hint string read when focusing the decrement button.
+		 *
+		 * @default 'previous item'
+		 * @type {String}
+		 * @public
+		 */
+		decrementAriaLabel: PropTypes.string,
+
+		/**
 		 * Disables the picker.
 		 *
 		 * @type {Boolean}
 		 * @public
 		 */
 		disabled: PropTypes.bool,
+
+		/**
+		 * Sets the hint string read when focusing the increment button.
+		 *
+		 * @default 'next item'
+		 * @type {String}
+		 * @public
+		 */
+		incrementAriaLabel: PropTypes.string,
 
 		/**
 		 * Disables transition animation.
@@ -69,6 +97,19 @@ const PickerBase = kind({
 		onChange: PropTypes.func,
 
 		/**
+		 * Orientation of the picker.
+		 *
+		 * Controls whether the buttons are arranged horizontally or vertically around the value.
+		 *
+		 * * Values: `'horizontal'`, `'vertical'`
+		 *
+		 * @type {String}
+		 * @default 'vertical'
+		 * @public
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+
+		/**
 		 * Index of the selected child.
 		 *
 		 * @type {Number}
@@ -82,7 +123,6 @@ const PickerBase = kind({
 		 * vice-versa.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		wrap: PropTypes.bool
@@ -90,8 +130,7 @@ const PickerBase = kind({
 
 	defaultProps: {
 		orientation: 'vertical',
-		value: 0,
-		wrap: false
+		value: 0
 	},
 
 	computed: {
@@ -122,51 +161,6 @@ const PickerBase = kind({
 		);
 	}
 });
-
-/**
- * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
- * to the current value. This should only be used when the parent controls the value of
- * the picker directly through the props.
- *
- * @name aria-valuetext
- * @type {String|Number}
- * @memberof agate/Picker.Picker.prototype
- * @public
- */
-
-/**
- * Sets the hint string read when focusing the decrement button.
- *
- * @name decrementAriaLabel
- * @memberof agate/Picker.Picker.prototype
- * @default 'previous item'
- * @type {String}
- * @public
- */
-
-/**
- * Sets the hint string read when focusing the increment button.
- *
- * @name incrementAriaLabel
- * @memberof agate/Picker.Picker.prototype
- * @default 'next item'
- * @type {String}
- * @public
- */
-
-/**
- * Orientation of the picker.
- *
- * Controls whether the buttons are arranged horizontally or vertically around the value.
- *
- * * Values: `'horizontal'`, `'vertical'`
- *
- * @name orientation
- * @memberof agate/Picker.Picker.prototype
- * @type {String}
- * @default 'vertical'
- * @public
- */
 
 /**
  * Applies Agate specific behaviors to [PickerBase]{@link agate/Picker.PickerBase} components.

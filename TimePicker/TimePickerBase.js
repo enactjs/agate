@@ -216,15 +216,13 @@ const TimePickerBase = kind({
 		 * Disables 5-way spotlight from navigating into the component.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		spotlightDisabled: PropTypes.bool
 	},
 
 	defaultProps: {
-		disabled: false,
-		spotlightDisabled: false
+		disabled: false
 	},
 
 	styles: {

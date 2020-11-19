@@ -113,8 +113,9 @@ const PickerBase = kind({
 		/**
 		 * The "aria-label" for the picker.
 		 *
-		 * While the `aria-label` will always be set on the root node, that node is only focusable
-		 * when the picker is `joined`.
+		 * By default, `aria-valuetext` is set to the current value.
+		 * This should only be used when the parent controls the value of
+		 * the picker directly through the props.
 		 *
 		 * @type {String}
 		 * @memberof agate/internal/Picker.PickerBase.prototype
@@ -251,7 +252,6 @@ const PickerBase = kind({
 		 * When `true`, the component cannot be navigated using spotlight.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		spotlightDisabled: PropTypes.bool,
@@ -267,6 +267,25 @@ const PickerBase = kind({
 		 * @public
 		 */
 		step: PropTypes.number,
+
+		/**
+		 * The type of picker. It determines the aria-label for the next and previous buttons.
+		 *
+		 * Depending on the `type`, `decrementAriaLabel`, and `incrementAriaLabel`,
+		 * the screen readers read out differently when Spotlight is on the next button, the previous button,
+		 * or the picker itself.
+		 *
+		 * For example, if Spotlight is on the next button
+		 * and aria label props(`decrementAriaLabel` and `incrementAriaLabel`) are not defined,
+		 * then the screen readers read out as follows.
+		 *	`'string'` type: `'next item'`
+		 * 	`'number'` type: `'increase the value'`
+		 *
+		 * @type {('number'|'string')}
+		 * @default 'string'
+		 * @public
+		 */
+		type: PropTypes.oneOf(['number', 'string']),
 
 		/**
 		 * Index of the selected child.
@@ -311,6 +330,7 @@ const PickerBase = kind({
 		reverseTransition: false,
 		spotlightDisabled: false,
 		step: 1,
+		type: 'string',
 		value: 0,
 		wrap: false
 	},
@@ -365,8 +385,28 @@ const PickerBase = kind({
 
 			return valueText;
 		},
-		decrementAriaLabel: ({decrementAriaLabel = $L('previous item')}) => decrementAriaLabel,
-		incrementAriaLabel: ({incrementAriaLabel = $L('next item')}) => incrementAriaLabel,
+		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel = $L('previous item'), type}) => {
+			if (decrementAriaLabel != null) {
+				return decrementAriaLabel;
+			}
+
+			if (this.props.type === 'number') {
+				return `${valueText} ${$L('decrease the value')}`;
+			} else {
+				return `${valueText} ${$L('previous item')}`;
+			}
+		},
+		incrementAriaLabel: ({'aria-valuetext': valueText, incrementAriaLabel, type}) => {
+			if (incrementAriaLabel != null) {
+				return incrementAriaLabel;
+			}
+
+			if (this.props.type === 'number') {
+				return `${valueText} ${$L('increase the value')}`;
+			} else {
+				return `${valueText} ${$L('next item')}`;
+			}
+		},
 		valueId: ({id}) => `${id}_value`
 	},
 

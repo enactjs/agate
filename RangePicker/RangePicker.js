@@ -67,6 +67,16 @@ const RangePickerBase = kind({
 		value: PropTypes.number.isRequired,
 
 		/**
+		 * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
+		 * to the current value. This should only be used when the parent controls the value of
+		 * the picker directly through the props.
+		 *
+		 * @type {String|Number}
+		 * @public
+		 */
+		'aria-valuetext': PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+		/**
 		 * Children from which to pick.
 		 *
 		 * @type {Node}
@@ -83,12 +93,30 @@ const RangePickerBase = kind({
 		className: PropTypes.string,
 
 		/**
+		 * Sets the hint string read when focusing the decrement button.
+		 *
+		 * @default 'decrease the value'
+		 * @type {String}
+		 * @public
+		 */
+		decrementAriaLabel: PropTypes.string,
+
+		/**
 		 * Disables the picker.
 		 *
 		 * @type {Boolean}
 		 * @public
 		 */
 		disabled: PropTypes.bool,
+
+		/**
+		 * Sets the hint string read when focusing the increment button.
+		 *
+		 * @default 'increase the value'
+		 * @type {String}
+		 * @public
+		 */
+		incrementAriaLabel: PropTypes.string,
 
 		/**
 		 * Disables animation.
@@ -108,6 +136,19 @@ const RangePickerBase = kind({
 		 * @public
 		 */
 		onChange: PropTypes.func,
+
+		/**
+		 * Orientation of the picker.
+		 *
+		 * Controls whether the buttons are arranged horizontally or vertically around the value.
+		 *
+		 * * Values: `'horizontal'`, `'vertical'`
+		 *
+		 * @type {String}
+		 * @default 'vertical'
+		 * @public
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
 		 * The smallest value change allowed for the picker.
@@ -140,57 +181,12 @@ const RangePickerBase = kind({
 
 	render: ({value, ...rest}) => {
 		return (
-			<PickerCore {...rest} index={0} value={value}>
+			<PickerCore {...rest} index={0} type="number" value={value}>
 				<PickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{value}</PickerItem>
 			</PickerCore>
 		);
 	}
 });
-
-/**
- * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
- * to the current value. This should only be used when the parent controls the value of
- * the picker directly through the props.
- *
- * @name aria-valuetext
- * @type {String|Number}
- * @memberof agate/RangePicker.RangePicker.prototype
- * @public
- */
-
-/**
- * Sets the hint string read when focusing the decrement button.
- *
- * @name decrementAriaLabel
- * @memberof agate/RangePicker.RangePicker.prototype
- * @default 'previous item'
- * @type {String}
- * @public
- */
-
-/**
- * Sets the hint string read when focusing the increment button.
- *
- * @name incrementAriaLabel
- * @memberof agate/RangePicker.RangePicker.prototype
- * @default 'next item'
- * @type {String}
- * @public
- */
-
-/**
- * Orientation of the picker.
- *
- * Controls whether the buttons are arranged horizontally or vertically around the value.
- *
- * * Values: `'horizontal'`, `'vertical'`
- *
- * @name orientation
- * @memberof agate/RangePicker.RangePicker.prototype
- * @type {String}
- * @default 'vertical'
- * @public
- */
 
 /**
  * Applies Agate specific behaviors to [RangePickerBase]{@link agate/RangePicker.RangePickerBase} components.

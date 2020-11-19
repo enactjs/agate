@@ -177,7 +177,6 @@ const DatePickerBase = kind({
 		 * Disables 5-way spotlight from navigating into the component.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		spotlightDisabled: PropTypes.bool,
@@ -197,8 +196,7 @@ const DatePickerBase = kind({
 	defaultProps: {
 		maxYear: 2099,
 		minYear: 1900,
-		disabled: false,
-		spotlightDisabled: false
+		disabled: false
 	},
 
 	styles: {
