@@ -1,6 +1,6 @@
 'use strict';
 const {Page} = require('@enact/ui-test-utils/utils');
-const {element, getText, hasClass} = require('@enact/ui-test-utils/utils');
+const {element} = require('@enact/ui-test-utils/utils');
 
 class AgatePickerInterface {
 	constructor (id) {
@@ -12,13 +12,23 @@ class AgatePickerInterface {
 	}
 
 	get self () {
-		return $(`#${this.id}`);
+		return $(`#${this.id}`, browser);
 	}
-	get textContent () {
-		return getText(element('.Item_Item_content', this.self));
+
+	get picker () {
+		return element('.internal_Picker_Picker_picker', this.self);
 	}
-	get isSelected () {
-		return hasClass('Picker_Picker_selected', this.self);
+
+	decrementer (picker) {
+		return element('.internal_Picker_Picker_itemDecrement', picker);
+	}
+
+	incrementer (picker) {
+		return element('.internal_Picker_Picker_itemIncrement', picker);
+	}
+
+	active (picker) {
+		return element('.internal_Picker_Picker_active', picker);
 	}
 }
 
@@ -27,9 +37,11 @@ class AgatePickerPage extends Page {
 	constructor () {
 		super();
 		this.title = 'Agate Picker Test';
-		const pickerDefault = new AgatePickerInterface('picker1');
-		const pickerDefaultSelected = new AgatePickerInterface('picker2');
-		this.components = {pickerDefault, pickerDefaultSelected};
+		const pickerDefault = new AgatePickerInterface('pickerDefault');
+		const pickerDisabled = new AgatePickerInterface('pickerDisabled');
+		const pickerWithDefaultValue = new AgatePickerInterface('pickerWithDefaultValue');
+		const pickerHorizontal = new AgatePickerInterface('pickerHorizontal');
+		this.components = {pickerDefault, pickerDisabled, pickerWithDefaultValue, pickerHorizontal};
 	}
 
 	open (urlExtra) {
