@@ -1,14 +1,14 @@
 'use strict';
 const {Page} = require('@enact/ui-test-utils/utils');
 
-class AgateInputPage extends Page {
+class InputPage extends Page {
 	constructor () {
 		super();
 		this.title = 'Agate Input Test';
 	}
 
 	open (urlExtra) {
-		super.open('Agate-Input-View', urlExtra);
+		super.open('Input-View', urlExtra);
 	}
 
 	get input1 () {
@@ -31,4 +31,4 @@ class AgateInputPage extends Page {
 	}
 }
 
-module.exports = new AgateInputPage();
+module.exports = new InputPage();

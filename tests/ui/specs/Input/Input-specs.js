@@ -1,4 +1,4 @@
-const Page = require('./Agate-Input-Page');
+const Page = require('./InputPage');
 
 describe('Input', function () {
 
