@@ -16,6 +16,7 @@
 @agate-button-client-animation-offset: (@agate-button-animation-duration * 0.4);
 @agate-button-badge-animation-offset: (@agate-button-animation-duration * 0.8);
 @agate-button-badge-position: -3px 0 auto auto;
+@agate-button-badge-position-rtl: -3px auto auto 0;
 @agate-button-small-height: 48px;
 @agate-button-small-font-size: 24px;
 @agate-button-smallest-height: 30px;
@@ -159,12 +160,12 @@
 // Panels
 // ---------------------------------------
 // @agate-panel-h-padding: (@agate-app-keepout - @agate-spotlight-outset);
+@agate-panels-panel-padding: 51px 60px 51px 39px;
 @agate-panel-h-padding: extract(@agate-panels-panel-padding, 2);
 @agate-panels-partial-width: 890px;
 @agate-panels-breadcrumb-width: 105px;
-@agate-panels-controls-top: (extract(@agate-panels-panel-padding, 1) + 41px);
+@agate-panels-controls-top: (extract(@agate-panels-panel-padding, 1) - 3px);
 @agate-panels-controls-padding-start: 18px;
-@agate-panels-panel-padding: 50px 60px 50px 40px;
 @agate-panels-panel-header-padding: 0;
 @agate-panels-panel-body-padding: 0;
 @agate-panels-tab-margin: 0;
