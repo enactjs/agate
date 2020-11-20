@@ -1,5 +1,5 @@
-const Page = require('./Agate-DatePicker-Page');
-const {daysInMonth, extractValues, validateTitle} = require('./Agate-DatePicker-utils.js');
+const Page = require('./DatePickerPage');
+const {daysInMonth, extractValues, validateTitle} = require('./DatePicker-utils.js');
 
 describe('DatePicker', function () {
 

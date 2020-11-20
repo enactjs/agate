@@ -39,7 +39,7 @@ class PickerInterface {
 	}
 }
 
-class AgateDatePickerPage extends Page {
+class DatePickerPage extends Page {
 	constructor () {
 		super();
 		this.title = 'DatePicker Test';
@@ -55,4 +55,4 @@ class AgateDatePickerPage extends Page {
 	}
 }
 
-module.exports = new AgateDatePickerPage();
+module.exports = new DatePickerPage();
