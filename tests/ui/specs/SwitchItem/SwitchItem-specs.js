@@ -1,4 +1,4 @@
-const Page = require('./SwitchItem-Page');
+const Page = require('./SwitchItemPage');
 
 describe('SwitchItem', function () {
 	beforeEach(function () {
