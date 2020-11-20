@@ -550,8 +550,8 @@ const PickerBase = kind({
 						aria-disabled={isSecond}
 						aria-label={decrementAriaLabel}
 						className={css.secondaryItemDecrement}
-						disabled={isSecond}
-						onClick={() => {
+						disabled={disabled || isSecond}
+						onClick={isSecond ? () => {} : () => {
 							handleDecrement(); setTimeout(() => handleDecrement(), transitionDuration);
 						}}
 						onSpotlightDisappear={onSpotlightDisappear}
@@ -576,7 +576,7 @@ const PickerBase = kind({
 					aria-label={decrementAriaLabel}
 					className={css.itemDecrement}
 					disabled={disabled || isFirst}
-					onClick={handleDecrement}
+					onClick={isFirst ? () => {} : handleDecrement}
 					onSpotlightDisappear={onSpotlightDisappear}
 					spotlightDisabled={spotlightDisabled}
 				>
@@ -618,7 +618,7 @@ const PickerBase = kind({
 					aria-label={incrementAriaLabel}
 					className={css.itemIncrement}
 					disabled={disabled || isLast}
-					onClick={handleIncrement}
+					onClick={isLast ? () => {} : handleIncrement}
 					onSpotlightDisappear={onSpotlightDisappear}
 					spotlightDisabled={spotlightDisabled}
 				>
@@ -640,10 +640,10 @@ const PickerBase = kind({
 						aria-disabled={isPenultimate}
 						aria-label={incrementAriaLabel}
 						className={css.secondaryItemIncrement}
-						disabled={isPenultimate}
+						disabled={disabled || isPenultimate}
 						onSpotlightDisappear={onSpotlightDisappear}
 						spotlightDisabled={spotlightDisabled}
-						onClick={() => {
+						onClick={isPenultimate ? () => {} : () => {
 							handleIncrement(); setTimeout(() => handleIncrement(), transitionDuration);
 						}}
 					>
