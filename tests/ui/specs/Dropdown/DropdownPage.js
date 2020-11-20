@@ -1,14 +1,10 @@
 'use strict';
 
-const {element, componentSelector, getComponent, Page} = require('@enact/ui-test-utils/utils');
+const {element, componentSelector, getComponent, hasClass, Page} = require('@enact/ui-test-utils/utils');
 
 class DropdownInterface {
 	constructor (id) {
 		this.id = id;
-	}
-
-	focusActivator () {
-		return browser.execute((el) => el.focus(), this.self.$('[role="button"]'));
 	}
 
 	get childItem () {
@@ -26,22 +22,13 @@ class DropdownInterface {
 		return getComponent({component: 'Dropdown', child: 'dropdownList'}, browser);
 	}
 
-	get focusedItemText () {
-		return browser.execute(() => {
-			const focused = document.activeElement;
-			// naive test that the focused element is a dropdown item
-			if (focused.dataset.index) {
-				return focused.textContent;
-			}
-
-			return null;
-		});
-	}
-
 	get self () {
 		return element(`#${this.id}`, browser);
 	}
 
+	get isOpen () {
+		return hasClass('Dropdown_Dropdown_open', this.self);
+	}
 }
 
 class DropdownPage extends Page {
@@ -55,22 +42,14 @@ class DropdownPage extends Page {
 		const dropdown2 = new DropdownInterface('dropdown2');
 		const dropdown3 = new DropdownInterface('dropdown3');
 		const dropdownDefault = new DropdownInterface('dropdownDefault');
-		const dropdownSelected = new DropdownInterface('dropdownSelected');
-		const dropdownChangeSelected = new DropdownInterface('dropdownChangeSelected');
-		const dropdownChangeChildren = new DropdownInterface('dropdownChangeChildren');
-		const dropdownChangeLessChildren = new DropdownInterface('dropdownChangeLessChildren');
-		this.components = {dropdown1, dropdown2, dropdown3, dropdownDefault, dropdownSelected, dropdownChangeSelected, dropdownChangeChildren, dropdownChangeLessChildren };
-	}
-
-	openDropdown (component) {
-		component.focusActivator();
-		this.spotlightSelect();
+		const dropdownDirectionRight = new DropdownInterface('dropdownDirectionRight');
+		const dropdownDisabled = new DropdownInterface('dropdownDisabled');
+		this.components = {dropdown1, dropdown2, dropdown3, dropdownDefault, dropdownDirectionRight, dropdownDisabled};
 	}
 
 	open (layout = '', urlExtra) {
-		super.open(`Agate-Dropdown${layout}-View`, urlExtra);
+		super.open(`Dropdown${layout}-View`, urlExtra);
 	}
-
 }
 
 module.exports = new DropdownPage();
