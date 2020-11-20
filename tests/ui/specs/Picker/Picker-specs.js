@@ -1,5 +1,5 @@
-const Page = require('./Agate-Picker-Page');
-const {extractValue} = require('./Agate-Picker-utils.js');
+const Page = require('./PickerPage');
+const {extractValue} = require('./Picker-utils.js');
 
 describe('Picker', function () {
 

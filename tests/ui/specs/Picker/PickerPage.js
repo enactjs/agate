@@ -33,7 +33,7 @@ class AgatePickerInterface {
 }
 
 
-class AgatePickerPage extends Page {
+class PickerPage extends Page {
 	constructor () {
 		super();
 		this.title = 'Agate Picker Test';
@@ -49,4 +49,4 @@ class AgatePickerPage extends Page {
 	}
 }
 
-module.exports = new AgatePickerPage();
+module.exports = new PickerPage();
