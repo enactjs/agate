@@ -81,15 +81,15 @@ const DateTimePickerBase = kind({
 		className: 'dateTimePicker'
 	},
 
-	render ({disabled, onChange, spotlightDisabled, value, ...rest}) {
+	render ({disabled, onChange, onSpotlightDisappear, spotlightDisabled, value, ...rest}) {
 
 		return (
 			<Row {...rest} className={css.dateTimePicker} align="center center">
 				<Row align="center center">
-					<TimePicker css={css} disabled={disabled} onChange={onChange} spotlightDisabled={spotlightDisabled} value={value} />
+					<TimePicker css={css} disabled={disabled} onChange={onChange} onSpotlightDisappear={onSpotlightDisappear} spotlightDisabled={spotlightDisabled} value={value} />
 				</Row>
 				<Row align="center center">
-					<DatePicker css={css} disabled={disabled} onChange={onChange} spotlightDisabled={spotlightDisabled} value={value} />
+					<DatePicker css={css} disabled={disabled} onChange={onChange} onSpotlightDisappear={onSpotlightDisappear} spotlightDisabled={spotlightDisabled} value={value} />
 				</Row>
 			</Row>
 		);
