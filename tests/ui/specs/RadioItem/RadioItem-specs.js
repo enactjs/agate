@@ -1,4 +1,4 @@
-const Page = require('./Agate-RadioItem-Page');
+const Page = require('./RadioItemPage');
 
 describe('RadioItem', function () {
 

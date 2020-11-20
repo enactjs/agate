@@ -26,10 +26,10 @@ class AgateRadioItemInterface {
 }
 
 
-class AgateRadioItemPage extends Page {
+class RadioItemPage extends Page {
 	constructor () {
 		super();
-		this.title = 'Agate RadioItem Test';
+		this.title = 'RadioItem Test';
 		const radioDefault = new AgateRadioItemInterface('radioItem1');
 		const radioDefaultSelected = new AgateRadioItemInterface('radioItem2');
 		const radioInline = new AgateRadioItemInterface('radioItem3');
@@ -40,8 +40,8 @@ class AgateRadioItemPage extends Page {
 	}
 
 	open (urlExtra) {
-		super.open('Agate-RadioItem-View', urlExtra);
+		super.open('RadioItem-View', urlExtra);
 	}
 }
 
-module.exports = new AgateRadioItemPage();
+module.exports = new RadioItemPage();
