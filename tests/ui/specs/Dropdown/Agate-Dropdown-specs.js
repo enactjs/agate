@@ -9,10 +9,10 @@ function waitForFocusedText (dropdown, text, timeout, timeoutMsg = `timed out wa
 
 describe('Dropdown', function () {
 
-	describe('changing props', function () {
-		beforeEach(function () {
-			Page.open();
-		});
+	// describe('changing props', function () {
+	// 	beforeEach(function () {
+	// 		Page.open();
+	// 	});
 
 		// it('should focus the first item when `selected` changes to `null`', function () {
 		// 	const dropdown = Page.components.dropdownChangeSelected;
@@ -101,28 +101,28 @@ describe('Dropdown', function () {
 	// 	});
 	// });
 
-	describe('pointer', function () {
-		beforeEach(function () {
-			Page.open();
-		});
-
-		it('should dismiss dropdown when clicking outside', function () {
-			const dropdown = Page.components.dropdownDefault;
-
-			// Open the first dropdown and wait for the first list item to be focused
-			// Page.openDropdown(dropdown);
-			Page.spotlightSelect();
-			Page.spotlightDown();
-			waitForFocusedText(dropdown, 'one', 500, undefined, 100);
-
-			// Step 3: Click in the area outside the Dropdown (in the empty space created by the wrapper)
-			const wrapper = $('#wrapper');
-			wrapper.click({x: 0, y: 0});
-
-			// Verify Step 3: that the floating list no longer exists (Dropdown is closed)
-			expect(dropdown.list.isExisting()).to.not.be.true();
-		});
-	});
+	// describe('pointer', function () {
+	// 	beforeEach(function () {
+	// 		Page.open();
+	// 	});
+	//
+	// 	it('should dismiss dropdown when clicking outside', function () {
+	// 		const dropdown = Page.components.dropdownDefault;
+	//
+	// 		// Open the first dropdown and wait for the first list item to be focused
+	// 		// Page.openDropdown(dropdown);
+	// 		Page.spotlightSelect();
+	// 		Page.spotlightDown();
+	// 		waitForFocusedText(dropdown, 'one', 500, undefined, 100);
+	//
+	// 		// Step 3: Click in the area outside the Dropdown (in the empty space created by the wrapper)
+	// 		const wrapper = $('#wrapper');
+	// 		wrapper.click({x: 0, y: 0});
+	//
+	// 		// Verify Step 3: that the floating list no longer exists (Dropdown is closed)
+	// 		expect(dropdown.list.isExisting()).to.not.be.true();
+	// 	});
+	// });
 
 	// describe('5-way and pointer', function () {
 	// 	beforeEach(function () {
@@ -159,39 +159,50 @@ describe('Dropdown', function () {
 	// 	});
 	// });
 
-	// describe('in scroller', function () {
-	// 	beforeEach(function () {
-	// 		Page.open('InScroller');
-	// 	});
-	//
-	// 	function getDropdownOffset (dropdown, scroller) {
-	// 		return browser.execute((a, b) => {
-	// 			return a.getBoundingClientRect().top - b.getBoundingClientRect().top;
-	// 		}, dropdown, scroller);
-	// 	}
-	//
-	// 	it('should have title visible when focusing button via 5-way', function () {
-	// 		Page.spotlightLeft();
-	// 		expect(Page.components.dropdown1.childItem.isFocused()).to.be.true();
-	//
-	// 		Page.spotlightDown();
-	// 		Page.delay(250);
-	//
-	// 		// Verify that we have scrolled down
-	// 		expect(getDropdownOffset(
-	// 			Page.components.dropdown1.self,
-	// 			$('#scroller')
-	// 		)).to.not.equal(0);
-	//
-	// 		Page.spotlightUp();
-	// 		Page.delay(250);
-	//
-	// 		const expected = 0;
-	// 		const actual = getDropdownOffset(
-	// 			Page.components.dropdown1.self,
-	// 			$('#scroller')
-	// 		);
-	// 		expect(actual).to.equal(expected);
-	// 	});
+	describe('in scroller', function () {
+		beforeEach(function () {
+			Page.open('InScroller');
+		});
+
+		function getDropdownOffset (dropdown, scroller) {
+			return browser.execute((a, b) => {
+				return a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+			}, dropdown, scroller);
+		}
+
+		it('should have title visible when focusing button via 5-way', function () {
+			Page.spotlightLeft();
+			expect(Page.components.dropdown1.childItem.isFocused()).to.be.true();
+			console.log('offset1:',getDropdownOffset(
+				Page.components.dropdown1.self,
+				$('#scroller')
+			));
+			Page.spotlightDown();
+			Page.delay(250);
+
+
+			// Verify that we have scrolled down
+			expect(getDropdownOffset(
+				Page.components.dropdown1.self,
+				$('#scroller')
+			)).to.not.equal(0);
+			console.log('offset2:',getDropdownOffset(
+				Page.components.dropdown1.self,
+				$('#scroller')
+			));
+			Page.spotlightUp();
+			Page.delay(250);
+
+			const expected = 0;
+			const actual = getDropdownOffset(
+				Page.components.dropdown1.self,
+				$('#scroller')
+			);
+			console.log('offset3:',getDropdownOffset(
+				Page.components.dropdown1.self,
+				$('#scroller')
+			));
+			expect(actual).to.equal(expected);
+		});
 	});
 });
