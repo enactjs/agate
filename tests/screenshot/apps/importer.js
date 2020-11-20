@@ -22,6 +22,7 @@ import Item from '../../../Item';
 import Keypad from '../../../Keypad';
 import LabeledIcon from '../../../LabeledIcon';
 import LabeledIconButton from '../../../LabeledIconButton';
+import Marquee from '../../../Marquee';
 import MediaPlayer from '../../../MediaPlayer';
 import Panels from '../../../Panels';
 import Picker from '../../../Picker';
@@ -70,6 +71,7 @@ const AgateExports = {
 	Keypad,
 	LabeledIcon,
 	LabeledIconButton,
+	Marquee,
 	MediaPlayer,
 	Panels,
 	Picker,
