@@ -12,10 +12,12 @@ const pickerList = [
 ];
 
 const app = (props) => <div {...props}>
-	<Picker id="pickerDefault">{pickerList}</Picker>,
-	<Picker disabled id="pickerDisabled">{pickerList}</Picker>,
-	<Picker value={1} id="pickerWithDefaultValue">{pickerList}</Picker>,
-	<Picker orientation="horizontal" id="pickerHorizontal">{pickerList}</Picker>,
+	<div>
+		<Picker defaultValue={1} orientation="horizontal" id="pickerHorizontal">{pickerList}</Picker>
+		<Picker id="pickerDefault">{pickerList}</Picker>
+		<Picker disabled id="pickerDisabled">{pickerList}</Picker>
+		<Picker defaultValue={1} id="pickerWithDefaultValue">{pickerList}</Picker>
+	</div>
 </div>;
 
 export default ThemeDecorator(app);

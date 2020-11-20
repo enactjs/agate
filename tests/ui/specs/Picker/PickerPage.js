@@ -30,6 +30,21 @@ class AgatePickerInterface {
 	active (picker) {
 		return element('.internal_Picker_Picker_active', picker);
 	}
+
+
+	activeElement () {
+		// return element(
+		// 	`${componentSelector({component: 'Item'})}[data-index="${index}"]`,
+		// 	this.list
+		// );
+
+	return browser.execute(() => {
+			const focused = document.activeElement;
+
+				return focused;
+
+		});
+	}
 }
 
 

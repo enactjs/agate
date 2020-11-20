@@ -17,7 +17,7 @@ storiesOf('Agate', module)
 				<Picker
 					disabled={boolean('disabled', Config)}
 					onChange={action('onChange')}
-					orientation={select('orientation', ['vertical', 'horizontal'], Config)}
+					orientation="horizontal"
 				>
 					{['LO', '16\xB0', '17\xB0', '18\xB0', '19\xB0', 'HI']}
 				</Picker>
