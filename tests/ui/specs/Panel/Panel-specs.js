@@ -1,4 +1,4 @@
-const Page = require('./Agate-Panel-Page');
+const Page = require('./PanelPage');
 
 describe('Panel', function () {
 

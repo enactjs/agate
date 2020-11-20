@@ -53,7 +53,7 @@ class PanelPage extends Page {
 	}
 
 	open (urlExtra) {
-		super.open('Agate-Panel-View', urlExtra);
+		super.open('Panel-View', urlExtra);
 	}
 
 	waitForExist (selector, timeout) {
