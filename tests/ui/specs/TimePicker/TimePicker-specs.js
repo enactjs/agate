@@ -1,5 +1,5 @@
-const Page = require('./Agate-TimePicker-Page');
-const {extractValues, validateTitle} = require('./Agate-TimePicker-utils.js');
+const Page = require('./TimePickerPage');
+const {extractValues, validateTitle} = require('./TimePicker-utils.js');
 
 describe('TimePicker', function () {
 

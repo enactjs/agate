@@ -35,7 +35,7 @@ class PickerInterface {
 	}
 }
 
-class AgateTimePickerPage extends Page {
+class TimePickerPage extends Page {
 	constructor () {
 		super();
 		this.title = 'TimePicker Test';
@@ -51,4 +51,4 @@ class AgateTimePickerPage extends Page {
 	}
 }
 
-module.exports = new AgateTimePickerPage();
+module.exports = new TimePickerPage();
