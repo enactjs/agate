@@ -4,7 +4,6 @@ import {boolean, select, number} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Arc, {ArcBase} from '@enact/agate/Arc';
 import ArcSlider, {ArcSliderBase} from '@enact/agate/ArcSlider';
 
 ArcSlider.displayName = 'ArcSlider';
@@ -14,14 +13,6 @@ const Config = mergeComponentMetadata('ArcSlider', ArcSliderBase, ArcSlider);
 const prop = {
 	colors: ['', '#000000', '#fdc902', '#986aad', '#0000ff'],
 	radius: [120, 150]
-};
-
-Arc.displayName = 'Arc';
-const ArcConfig = mergeComponentMetadata('Arc', ArcBase, Arc);
-
-// Set up some defaults for info and knobs
-const arcProp = {
-	colors: ['', '#000000', '#FDC902', '#986AAD']
 };
 
 storiesOf('Agate', module)
@@ -49,19 +40,4 @@ storiesOf('Agate', module)
 		{
 			text: 'The basic ArcSlider'
 		}
-	);
-
-storiesOf('Agate QA.Arc', module)
-	.add(
-		'with Arc',
-		() => (
-			<Arc
-				color={select('color', arcProp.colors, ArcConfig)}
-				endAngle={number('endAngle', ArcConfig, {range: true, min: 0, max: 360})}
-				onClick={action('onClick')}
-				radius={number('radius', ArcConfig)}
-				startAngle={number('startAngle', ArcConfig, {range: true, min: 0, max: 360})}
-				strokeWidth={number('strokeWidth', ArcConfig)}
-			/>
-		)
 	);
