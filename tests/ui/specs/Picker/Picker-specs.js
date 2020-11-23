@@ -44,7 +44,7 @@ describe('Picker', function () {
 					expect(newValue).to.equal('Korea');
 				});
 
-				it('should decrease the hour when decrementing the picker', function () {
+				it('should decrease the value when decrementing the picker', function () {
 					picker.incrementer(picker.self).click();
 					browser.waitUntil(() => picker.incrementer(picker.self).isFocused(), {timeout: 1500,  interval: 100});
 					picker.decrementer(picker.self).click();
