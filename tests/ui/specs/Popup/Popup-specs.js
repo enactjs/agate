@@ -646,42 +646,42 @@ describe('Popup', function () {
 				expect(popup.buttonCancel.isFocused()).to.be.true();
 			});
 
-			// it.skip('should not spot Buttons Outside of Popup', function () {
-			// 	popupCommon.buttonPopup6.click();
-			// 	browser.pause(1000);
-			//
-			// 	// Verify the popup opens
-			// 	expectOpen(popupCommon);
-			//
-			// 	// Hover a button outside Popup (step 4)
-			// 	$('#buttonPopup9').moveTo({xOffset: 200, yOffset: 200});
-			// 	// Test spotlight cannot leave popup (step 4)
-			// 	Page.spotlightUp();
-			//
-			// 	// Check spotlight is NOT on buttons outside popup (verify step 4)
-			// 	expect(popup.buttonOK.isFocused()).to.be.true();
-			//
-			// 	// Hover the button 'spotlightRestrict - self-only' outside of the popup (step 6)
-			// 	Page.spotlightUp();
-			//
-			// 	// Check spotlight is on the button 'spotlightRestrict - self-only' outside popup (verify step 6)
-			// 	expect(popupCommon.buttonPopup6.isFocused()).to.be.true();
-			//
-			// 	// Open popup (step 7)
-			// 	popupCommon.buttonPopup6.click();
-			// 	Page.waitForOpen(popup);
-			//
-			// 	// Verify the popup opens (step 7)
-			// 	expectOpen(popupCommon);
-			//
-			// 	// Hover outside Popup (step 8)
-			// 	$('#buttonPopup9').moveTo({xOffset: 200, yOffset: 200});
-			// 	// Test spotlight cannot leave popup (step 8)
-			// 	Page.spotlightUp();
-			//
-			// 	// Check spotlight is NOT on buttons outside popup (verify step 8)
-			// 	expect(popup.buttonOK.isFocused()).to.be.true();
-			// });
+			it.skip('should not spot Buttons Outside of Popup', function () {
+				popupCommon.buttonPopup6.click();
+				browser.pause(1000);
+
+				// Verify the popup opens
+				expectOpen(popupCommon);
+
+				// Hover a button outside Popup (step 4)
+				$('#buttonPopup9').moveTo({xOffset: 200, yOffset: 200});
+				// Test spotlight cannot leave popup (step 4)
+				Page.spotlightUp();
+
+				// Check spotlight is NOT on buttons outside popup (verify step 4)
+				expect(popup.buttonOK.isFocused()).to.be.true();
+
+				// Hover the button 'spotlightRestrict - self-only' outside of the popup (step 6)
+				Page.spotlightUp();
+
+				// Check spotlight is on the button 'spotlightRestrict - self-only' outside popup (verify step 6)
+				expect(popupCommon.buttonPopup6.isFocused()).to.be.true();
+
+				// Open popup (step 7)
+				popupCommon.buttonPopup6.click();
+				browser.pause(1000);
+
+				// Verify the popup opens (step 7)
+				expectOpen(popupCommon);
+
+				// Hover outside Popup (step 8)
+				$('#buttonPopup9').moveTo({xOffset: 200, yOffset: 200});
+				// Test spotlight cannot leave popup (step 8)
+				Page.spotlightUp();
+
+				// Check spotlight is NOT on buttons outside popup (verify step 8)
+				expect(popup.buttonOK.isFocused()).to.be.true();
+			});
 		});
 	});
 
@@ -1056,9 +1056,9 @@ describe('Popup', function () {
 			// it('should dismiss the popup on click on outside the popup', function () {
 			// 	popupCommon.buttonPopup9.click();
 			//
+			// 	browser.pause(1000);
 			// 	expectNoneScrimOpen(popupCommon);
 			//
-			// 	browser.pause(1000);
 			// 	Page.clickPopupMain();
 			// 	browser.pause(1000);
 			//
