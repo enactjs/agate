@@ -44,7 +44,7 @@ describe('RangePicker', function () {
 					expect(newValue).to.equal(5);
 				});
 
-				it('should decrease the hour when decrementing the rangePicker', function () {
+				it('should decrease the value when decrementing the rangePicker', function () {
 					rangePicker.incrementer(rangePicker.self).click();
 					browser.waitUntil(() => rangePicker.incrementer(rangePicker.self).isFocused(), {timeout: 1500,  interval: 100});
 					rangePicker.decrementer(rangePicker.self).click();
