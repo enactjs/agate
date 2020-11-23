@@ -51,7 +51,7 @@ class DatePickerPage extends Page {
 	}
 
 	open (urlExtra) {
-		super.open('Agate-DatePicker-View', urlExtra);
+		super.open('DatePicker-View', urlExtra);
 	}
 }
 
