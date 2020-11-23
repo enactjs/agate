@@ -29,7 +29,7 @@ describe('TimePicker', function () {
 					browser.waitUntil(() => timePicker.decrementer(timePicker.hour).isFocused(), {timeout: 1500,  interval: 100});
 					Page.spotlightSelect();
 					const {hour: value} = extractValues(timePicker);
-					const expected = hour < 12 ? hour - 1 : 1;
+					const expected = hour > 1 ? hour - 1 : 12;
 					expect(value).to.equal(expected);
 				});
 
@@ -39,7 +39,7 @@ describe('TimePicker', function () {
 					browser.waitUntil(() => timePicker.incrementer(timePicker.hour).isFocused(), {timeout: 1500,  interval: 100});
 					Page.spotlightSelect();
 					const {hour: value} = extractValues(timePicker);
-					const expected = hour > 1 ? hour + 1 : 12;
+					const expected = hour < 12 ? hour + 1 : 1;
 					expect(value).to.equal(expected);
 				});
 
