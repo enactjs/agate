@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import {mount, shallow} from 'enzyme';
 import {CheckboxItemBase} from '../CheckboxItem';
 import css from '../../Checkbox/Checkbox.module.less';
 
@@ -7,7 +7,7 @@ describe('CheckboxItem Specs', () => {
 	test('should support a custom icon', () => {
 		const expected = 'star';
 
-		const subject = mount(
+		const subject = shallow(
 			<CheckboxItemBase icon={expected}>
 				Hello CheckboxItem
 			</CheckboxItemBase>

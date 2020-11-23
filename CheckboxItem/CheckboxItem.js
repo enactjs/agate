@@ -13,12 +13,12 @@
  */
 
 import kind from '@enact/core/kind';
-import PropTypes from 'prop-types';
-import compose from 'ramda/src/compose';
-import React from 'react';
 import Pure from '@enact/ui/internal/Pure';
 import Slottable from '@enact/ui/Slottable';
 import Toggleable from '@enact/ui/Toggleable';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
+import React from 'react';
 
 import {CheckboxBase} from '../Checkbox';
 import {ItemBase, ItemDecorator} from '../Item';
@@ -40,10 +40,10 @@ Checkbox.displayName = 'Checkbox';
  * Usage:
  * ```
  * <CheckboxItem
- *  defaultSelected={selected}
- *  onToggle={handleToggle}
+ *   defaultSelected={selected}
+ *   onToggle={handleToggle}
  * >
- *  Item with a Checkbox
+ *   Item with a Checkbox
  * </CheckboxItem>
  * ```
  *
