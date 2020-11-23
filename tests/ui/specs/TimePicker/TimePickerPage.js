@@ -47,7 +47,7 @@ class TimePickerPage extends Page {
 	}
 
 	open (urlExtra) {
-		super.open('Agate-TimePicker-View', urlExtra);
+		super.open('TimePicker-View', urlExtra);
 	}
 }
 
