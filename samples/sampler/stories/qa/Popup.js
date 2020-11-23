@@ -4,15 +4,17 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
+import Button from '@enact/agate/Button';
 import {Popup, PopupBase} from '@enact/agate/Popup';
 
 const Config = mergeComponentMetadata('Popup', PopupBase);
 
-storiesOf('Agate', module)
+storiesOf('Popup', module)
 	.add(
-		'Popup',
+		'with buttons',
 		() => (
 			<div>
+				<Button>Button</Button>
 				<Popup
 					centered={boolean('centered', Config)}
 					closeButton={boolean('closeButton', Config)}
@@ -24,14 +26,14 @@ storiesOf('Agate', module)
 					position={select('position', ['center', 'top'], Config)}
 					scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
 					spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
-					title={text('title', Config, 'Title')}
 				>
 					<div>{text('children', Config, 'Hello Popup')}</div>
+					<buttons>
+						<Button>NO</Button>
+						<Button>YES</Button>
+					</buttons>
 				</Popup>
 				Use KNOBS to interact with Popup.
 			</div>
-		),
-		{
-			text: 'Basic usage of Popup'
-		}
+		)
 	);

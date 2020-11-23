@@ -25,6 +25,7 @@ import Item from './components/Item';
 import Keypad from './components/Keypad';
 import LabeledIcon from './components/LabeledIcon';
 import LabeledIconButton from './components/LabeledIconButton';
+import Marquee from './components/Marquee';
 import MediaPlayer from './components/MediaPlayer';
 import Panels from './components/Panels';
 import Picker from './components/Picker';
@@ -73,6 +74,7 @@ const agateComponents = {
 	Keypad,
 	LabeledIcon,
 	LabeledIconButton,
+	Marquee,
 	MediaPlayer,
 	Panels,
 	Picker,
