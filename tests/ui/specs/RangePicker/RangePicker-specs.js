@@ -98,10 +98,10 @@ describe('RangePicker', function () {
 			});
 
 			it('should decrement to negative number', function () {
-					rangePicker.decrementer(rangePicker.self).click();
-					browser.pause(500);
-					const newValue = extractValue(rangePicker);
-					expect(newValue).to.equal(-1);
+				rangePicker.decrementer(rangePicker.self).click();
+				browser.pause(500);
+				const newValue = extractValue(rangePicker);
+				expect(newValue).to.equal(-1);
 			});
 		});
 	});
