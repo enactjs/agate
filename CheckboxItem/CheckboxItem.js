@@ -29,7 +29,7 @@ import componentCss from './CheckboxItem.module.less';
 const Item = ItemDecorator(ItemBase);
 
 const Checkbox = Skinnable(CheckboxBase);
-Checkbox.displayname = 'Checkbox';
+Checkbox.displayName = 'Checkbox';
 
 /**
  * An item with a checkbox component, ready to use in Agate applications.
@@ -40,8 +40,8 @@ Checkbox.displayname = 'Checkbox';
  * Usage:
  * ```
  * <CheckboxItem
- * 	defaultSelected={selected}
- * 	onToggle={handleToggle}
+ *  defaultSelected={selected}
+ *  onToggle={handleToggle}
  * >
  *  Item with a Checkbox
  * </CheckboxItem>
@@ -158,9 +158,9 @@ const CheckboxItemBase = kind({
 		>
 			<slotBefore>
 				<Checkbox
-					selected={selected}
 					indeterminate={indeterminate}
 					indeterminateIcon={indeterminateIcon}
+					selected={selected}
 				>
 					{icon}
 				</Checkbox>

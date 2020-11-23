@@ -19,7 +19,6 @@ describe('CheckboxItem Specs', () => {
 	});
 
 	test('should render correct icon when selected', () => {
-
 		const subject = mount(
 			<CheckboxItemBase selected />
 		);
@@ -31,7 +30,6 @@ describe('CheckboxItem Specs', () => {
 	});
 
 	test('should include the indeterminate class when indeterminate', () => {
-
 		const subject = mount(
 			<CheckboxItemBase indeterminate>
 				Hello CheckboxItem
@@ -45,7 +43,6 @@ describe('CheckboxItem Specs', () => {
 	});
 
 	test('should not include the indeterminate class when not indeterminate', () => {
-
 		const subject = mount(
 			<CheckboxItemBase>
 				Hello CheckboxItem

@@ -11,12 +11,12 @@
  */
 
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
+import Toggleable from '@enact/ui/Toggleable';
+import Touchable from '@enact/ui/Touchable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
-import Spottable from '@enact/spotlight/Spottable';
-import Touchable from '@enact/ui/Touchable';
-import Toggleable from '@enact/ui/Toggleable';
 
 import Icon from '../Icon/Icon';
 import Skinnable from '../Skinnable';
@@ -43,7 +43,7 @@ import css from './Checkbox.module.less';
 const CheckboxBase = kind({
 	name: 'Checkbox',
 
-	propTypes: /** @lends agate/Checkbox.Checkbox.prototype */ {
+	propTypes: /** @lends agate/Checkbox.CheckboxBase.prototype */ {
 		/**
 		 * The icon displayed when `selected`.
 		 *
