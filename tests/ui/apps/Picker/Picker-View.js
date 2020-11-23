@@ -13,7 +13,6 @@ const pickerList = [
 
 const app = (props) => <div {...props}>
 	<div>
-		<Picker defaultValue={1} orientation="horizontal" id="pickerHorizontal">{pickerList}</Picker>
 		<Picker id="pickerDefault">{pickerList}</Picker>
 		<Picker disabled id="pickerDisabled">{pickerList}</Picker>
 		<Picker defaultValue={1} id="pickerWithDefaultValue">{pickerList}</Picker>

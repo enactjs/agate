@@ -8,7 +8,7 @@ class AgatePickerInterface {
 	}
 
 	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}`));
+		return browser.execute((el) => el.focus(), $(`#${this.id}>div`));
 	}
 
 	get self () {
@@ -30,37 +30,20 @@ class AgatePickerInterface {
 	active (picker) {
 		return element('.internal_Picker_Picker_active', picker);
 	}
-
-
-	activeElement () {
-		// return element(
-		// 	`${componentSelector({component: 'Item'})}[data-index="${index}"]`,
-		// 	this.list
-		// );
-
-	return browser.execute(() => {
-			const focused = document.activeElement;
-
-				return focused;
-
-		});
-	}
 }
-
 
 class PickerPage extends Page {
 	constructor () {
 		super();
-		this.title = 'Agate Picker Test';
+		this.title = 'Picker Test';
 		const pickerDefault = new AgatePickerInterface('pickerDefault');
 		const pickerDisabled = new AgatePickerInterface('pickerDisabled');
 		const pickerWithDefaultValue = new AgatePickerInterface('pickerWithDefaultValue');
-		const pickerHorizontal = new AgatePickerInterface('pickerHorizontal');
-		this.components = {pickerDefault, pickerDisabled, pickerWithDefaultValue, pickerHorizontal};
+		this.components = {pickerDefault, pickerDisabled, pickerWithDefaultValue};
 	}
 
 	open (urlExtra) {
-		super.open('Agate-Picker-View', urlExtra);
+		super.open('Picker-View', urlExtra);
 	}
 }
 
