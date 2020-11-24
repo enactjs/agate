@@ -2,7 +2,7 @@
 const {Page} = require('@enact/ui-test-utils/utils');
 const {element} = require('@enact/ui-test-utils/utils');
 
-class AgatePickerInterface {
+class PickerInterface {
 	constructor (id) {
 		this.id = id;
 	}
@@ -36,9 +36,9 @@ class PickerPage extends Page {
 	constructor () {
 		super();
 		this.title = 'Picker Test';
-		const pickerDefault = new AgatePickerInterface('pickerDefault');
-		const pickerDisabled = new AgatePickerInterface('pickerDisabled');
-		const pickerWithDefaultValue = new AgatePickerInterface('pickerWithDefaultValue');
+		const pickerDefault = new PickerInterface('pickerDefault');
+		const pickerDisabled = new PickerInterface('pickerDisabled');
+		const pickerWithDefaultValue = new PickerInterface('pickerWithDefaultValue');
 		this.components = {pickerDefault, pickerDisabled, pickerWithDefaultValue};
 	}
 

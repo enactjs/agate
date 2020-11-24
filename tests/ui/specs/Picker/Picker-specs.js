@@ -19,7 +19,7 @@ describe('Picker', function () {
 					Page.spotlightSelect();
 					browser.pause(500);
 					const newValue = extractValue(picker);
-					expect(newValue).to.equal('Korea');
+					expect(newValue).to.equal('Banana');
 				});
 
 				it('should change the value backward when decrementing the picker', function () {
@@ -32,7 +32,7 @@ describe('Picker', function () {
 					Page.spotlightSelect();
 					browser.pause(500);
 					const newValue = extractValue(picker);
-					expect(newValue).to.equal('Romania');
+					expect(newValue).to.equal('Apple');
 				});
 			});
 
@@ -41,7 +41,7 @@ describe('Picker', function () {
 					picker.incrementer(picker.self).click();
 					browser.pause(500);
 					const newValue = extractValue(picker);
-					expect(newValue).to.equal('Korea');
+					expect(newValue).to.equal('Banana');
 				});
 
 				it('should decrease the value when decrementing the picker', function () {
@@ -50,7 +50,7 @@ describe('Picker', function () {
 					picker.decrementer(picker.self).click();
 					browser.pause(500);
 					const newValue = extractValue(picker);
-					expect(newValue).to.equal('Romania');
+					expect(newValue).to.equal('Apple');
 				});
 			});
 		});
@@ -62,7 +62,7 @@ describe('Picker', function () {
 			it('should have the default value selected', function () {
 				browser.pause(500);
 				const newValue = extractValue(picker);
-				expect(newValue).to.equal('Korea');
+				expect(newValue).to.equal('Banana');
 			});
 		});
 

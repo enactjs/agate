@@ -3,12 +3,10 @@ import ThemeDecorator from '../../../../ThemeDecorator';
 import React from 'react';
 
 const pickerList = [
-	'Romania',
-	'Korea',
-	'USA',
-	'France',
-	'Germany',
-	'Japan'
+	'Apple',
+	'Banana',
+	'Clementine',
+	'Durian'
 ];
 
 const app = (props) => <div {...props}>
