@@ -1,5 +1,3 @@
-
-
 'use strict';
 const {Page} = require('@enact/ui-test-utils/utils');
 const {componentSelector, element} = require('@enact/ui-test-utils/utils');
