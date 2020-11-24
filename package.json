@@ -10,6 +10,7 @@
     "cleanall": "enact clean --all",
     "lint": "enact lint --strict",
     "sampler": "npm run --prefix samples/sampler serve",
+    "sampler-qa": "npm run --prefix samples/sampler serve-qa",
     "test": "enact test",
     "test-ui": "start-tests tests/ui/wdio.conf.js",
     "test-ui-docker": "start-tests tests/ui/wdio.docker.conf.js",
