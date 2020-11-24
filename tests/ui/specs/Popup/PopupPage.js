@@ -104,6 +104,18 @@ class PopupPage extends Page {
 	clickPopupMain () {
 		$('#popupMain').click();
 	}
+
+	waitForOpen (selector, timeout) {
+		if (typeof selector !== 'string') selector = `#${selector.id}`;
+
+		$(selector).waitForExist({timeout});
+	}
+
+	waitForClose (selector, timeout) {
+		if (typeof selector !== 'string') selector = `#${selector.id}`;
+
+		$(selector).waitForExist({timeout, reverse: true});
+	}
 }
 
 module.exports = new PopupPage();
