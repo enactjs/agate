@@ -15,9 +15,6 @@ describe('Dropdown', function () {
 	});
 
 	describe('5-way', function () {
-		beforeEach(function () {
-			Page.open();
-		});
 
 		it('should focus the `#dropdownDirectionRight` when 5-way right', function () {
 			expect(Page.components.dropdownDefault.childItem.isFocused()).to.be.true();
@@ -45,9 +42,6 @@ describe('Dropdown', function () {
 	});
 
 	describe('pointer', function () {
-		beforeEach(function () {
-			Page.open();
-		});
 
 		it('should dismiss dropdown when clicking outside', function () {
 			const dropdown = Page.components.dropdownDefault;
