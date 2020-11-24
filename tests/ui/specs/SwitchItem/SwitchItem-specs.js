@@ -166,7 +166,7 @@ describe('SwitchItem', function () {
 		});
 
 		describe('pointer', function () {
-			it('should not select the item when clicked', function () {
+			it('should not unselect the item when clicked', function () {
 				switchItem.self.click();
 				expect(switchItem.isSelected).to.be.true();
 			});
