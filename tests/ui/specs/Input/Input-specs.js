@@ -2,7 +2,7 @@ const Page = require('./InputPage');
 
 describe('Input', function () {
 
-	it('should have focus on first item at start', function () {
+	it('should have focus on first input at start', function () {
 		Page.open();
 		expect(Page.input1.isFocused()).to.be.true();
 	});
