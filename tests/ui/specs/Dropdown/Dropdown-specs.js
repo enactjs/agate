@@ -73,7 +73,7 @@ describe('Dropdown', function () {
 			}, dropdown, scroller);
 		}
 
-		it('should have title visible when focusing button via 5-way', function () {
+		it('should scroll into view when navigating dropdown via 5-way', function () {
 			expect(Page.components.dropdown1.childItem.isFocused()).to.be.true();
 
 			Page.spotlightDown();
