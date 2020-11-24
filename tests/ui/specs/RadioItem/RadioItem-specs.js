@@ -189,7 +189,7 @@ describe('RadioItem', function () {
 			expect(radioItem.isSelected).to.be.true();
 		});
 
-		it('should display inline item', function () {
+		it('should display item inline', function () {
 			expect(radioItem.isInline).to.be.true();
 		});
 

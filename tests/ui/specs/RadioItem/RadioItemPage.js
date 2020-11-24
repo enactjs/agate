@@ -2,7 +2,7 @@
 const {Page} = require('@enact/ui-test-utils/utils');
 const {element, getText, hasClass} = require('@enact/ui-test-utils/utils');
 
-class AgateRadioItemInterface {
+class RadioItemInterface {
 	constructor (id) {
 		this.id = id;
 	}
@@ -30,11 +30,11 @@ class RadioItemPage extends Page {
 	constructor () {
 		super();
 		this.title = 'RadioItem Test';
-		const radioDefault = new AgateRadioItemInterface('radioItem1');
-		const radioDefaultSelected = new AgateRadioItemInterface('radioItem2');
-		const radioInline = new AgateRadioItemInterface('radioItem3');
-		const radioDisabled = new AgateRadioItemInterface('radioItem4');
-		const radioInlineDisabled = new AgateRadioItemInterface('radioItem5');
+		const radioDefault = new RadioItemInterface('radioItem1');
+		const radioDefaultSelected = new RadioItemInterface('radioItem2');
+		const radioInline = new RadioItemInterface('radioItem3');
+		const radioDisabled = new RadioItemInterface('radioItem4');
+		const radioInlineDisabled = new RadioItemInterface('radioItem5');
 
 		this.components = {radioDefault, radioDefaultSelected, radioInline, radioDisabled, radioInlineDisabled};
 	}
