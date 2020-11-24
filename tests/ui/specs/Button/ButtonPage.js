@@ -8,6 +8,7 @@ class ButtonInterface {
 	constructor (id) {
 		this.id = id;
 		this.selector = `#${this.id}`;
+		this.badgeSelector = `#${this.id} > .enact_ui_Button_Button_decoration > .Button_Button_badge`;
 	}
 
 	focus () {
@@ -50,6 +51,9 @@ class ButtonInterface {
 	}
 	get isTransparent () {
 		return hasClass('transparent', this.self);
+	}
+	get isWithBadge () {
+		return $(this.badgeSelector).isExisting();
 	}
 }
 

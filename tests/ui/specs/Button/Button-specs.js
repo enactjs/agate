@@ -13,6 +13,7 @@ describe('Button', function () {
 		buttonJoinedRight,
 		buttonSizeSmall,
 		buttonTransparent,
+		buttonWithBadge,
 		iconButton
 	} = Page.components;
 
@@ -35,6 +36,10 @@ describe('Button', function () {
 
 		it('should be transparent', function () {
 			expect(buttonTransparent.isTransparent).to.be.true();
+		});
+
+		it('should have badge decoration', function () {
+			expect(buttonWithBadge.isWithBadge).to.be.true();
 		});
 	});
 
