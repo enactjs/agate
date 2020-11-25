@@ -9,10 +9,10 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 
-const ContextualButton = ContextualPopupDecorator(Button);
-ContextualButton.displayName = 'ContextualButton';
+const ContextualButtonWithoutArrow = ContextualPopupDecorator({noArrow: true}, Button);
+ContextualButtonWithoutArrow.displayName = 'ContextualButtonWithoutArrow';
 
-const Config = mergeComponentMetadata('ContextualPopupDecorator', Button, ContextualButton);
+const Config = mergeComponentMetadata('ContextualPopupDecorator', Button, ContextualButtonWithoutArrow);
 
 // NOTE: Something about the HOC is inhibiting accessing its defaultProps, so we're adding them here
 // manually. This can (should) be revisited later to find out why and a solution.
@@ -26,14 +26,15 @@ const renderPopup = () => (
 	<div>{text('popup string', {groupId: 'Popup'}, 'Hello Contextual Popup')}</div>
 );
 
-storiesOf('Agate', module)
+storiesOf('ContextualPopupDecorator', module)
 	.add(
-		'ContextualPopupDecorator',
+		'without an arrow',
 		() => (
 			<div style={{textAlign: 'center', marginTop: ri.scaleToRem(99)}}>
-				<ContextualButton
+				<ContextualButtonWithoutArrow
 					direction={select('direction', ['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config)}
 					noAutoDismiss={boolean('noAutoDismiss', Config)}
+					offset={select('offset', ['none', 'overlap', 'small'], Config, 'small')}
 					onClose={action('onClose')}
 					open={boolean('open', Config)}
 					popupComponent={renderPopup}
@@ -41,13 +42,13 @@ storiesOf('Agate', module)
 					spotlightRestrict={select('spotlightRestrict', ['none', 'self-first', 'self-only'], Config)}
 				>
 					{text('button string', Config, 'Hello Contextual Button')}
-				</ContextualButton>
+				</ContextualButtonWithoutArrow>
 				<BodyText centered>Use KNOBS to interact with the ContextualPopup.</BodyText>
 			</div>
 		),
 		{
 			info: {
-				text: 'Basic usage of ContextualPopupDecorator'
+				text: 'ContextualPopupDecorator without an arrow by setting {noArrow: true} in config'
 			}
 		}
 	);
