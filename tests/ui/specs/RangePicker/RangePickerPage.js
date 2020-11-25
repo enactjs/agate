@@ -2,7 +2,7 @@
 const {Page} = require('@enact/ui-test-utils/utils');
 const {element} = require('@enact/ui-test-utils/utils');
 
-class AgateRangePickerInterface {
+class RangePickerInterface {
 	constructor (id) {
 		this.id = id;
 	}
@@ -36,9 +36,9 @@ class RangePickerPage extends Page {
 	constructor () {
 		super();
 		this.title = 'RangePicker Test';
-		const rangePickerDefault = new AgateRangePickerInterface('rangePickerDefault');
-		const rangePickerDisabled = new AgateRangePickerInterface('rangePickerDisabled');
-		const rangePickerWithNegativeValues = new AgateRangePickerInterface('rangePickerWithNegativeValues');
+		const rangePickerDefault = new RangePickerInterface('rangePickerDefault');
+		const rangePickerDisabled = new RangePickerInterface('rangePickerDisabled');
+		const rangePickerWithNegativeValues = new RangePickerInterface('rangePickerWithNegativeValues');
 		this.components = {rangePickerDefault, rangePickerDisabled, rangePickerWithNegativeValues};
 	}
 

@@ -13,9 +13,9 @@ describe('RangePicker', function () {
 
 			describe('5-way', function () {
 				it('should change the value forward when incrementing the rangePicker', function () {
-					browser.waitUntil(() => rangePicker.decrementer(rangePicker.self).isFocused(), {timeout: 1500,  interval: 100});
+					expect(rangePicker.decrementer(rangePicker.self).isFocused()).to.be.true();
 					Page.spotlightDown();
-					browser.waitUntil(() => rangePicker.incrementer(rangePicker.self).isFocused(), {timeout: 1500,  interval: 100});
+					expect(rangePicker.incrementer(rangePicker.self).isFocused()).to.be.true();
 					Page.spotlightSelect();
 					browser.pause(500);
 					const newValue = extractValue(rangePicker);
@@ -23,12 +23,12 @@ describe('RangePicker', function () {
 				});
 
 				it('should change the value backward when decrementing the rangePicker', function () {
-					browser.waitUntil(() => rangePicker.decrementer(rangePicker.self).isFocused(), {timeout: 1500,  interval: 100});
+					expect(rangePicker.decrementer(rangePicker.self).isFocused()).to.be.true();
 					Page.spotlightDown();
-					browser.waitUntil(() => rangePicker.incrementer(rangePicker.self).isFocused(), {timeout: 1500,  interval: 100});
+					expect(rangePicker.incrementer(rangePicker.self).isFocused()).to.be.true();
 					Page.spotlightSelect();
 					Page.spotlightUp();
-					browser.waitUntil(() => rangePicker.decrementer(rangePicker.self).isFocused(), {timeout: 1500,  interval: 100});
+					expect(rangePicker.decrementer(rangePicker.self).isFocused()).to.be.true();
 					Page.spotlightSelect();
 					browser.pause(500);
 					const newValue = extractValue(rangePicker);
@@ -46,7 +46,7 @@ describe('RangePicker', function () {
 
 				it('should decrease the value when decrementing the rangePicker', function () {
 					rangePicker.incrementer(rangePicker.self).click();
-					browser.waitUntil(() => rangePicker.incrementer(rangePicker.self).isFocused(), {timeout: 1500,  interval: 100});
+					expect(rangePicker.incrementer(rangePicker.self).isFocused()).to.be.true();
 					rangePicker.decrementer(rangePicker.self).click();
 					browser.pause(500);
 					const newValue = extractValue(rangePicker);
