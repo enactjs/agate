@@ -60,7 +60,6 @@ describe('Picker', function () {
 			const picker = Page.components.pickerWithDefaultValue;
 
 			it('should have the default value selected', function () {
-				browser.pause(500);
 				const newValue = extractValue(picker);
 				expect(newValue).to.equal('Banana');
 			});

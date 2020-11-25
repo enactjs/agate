@@ -12,7 +12,7 @@ const pickerList = [
 const app = (props) => <div {...props}>
 	<div>
 		<Picker id="pickerDefault">{pickerList}</Picker>
-		<Picker disabled id="pickerDisabled">{pickerList}</Picker>
+		<Picker defaultValue={1} disabled id="pickerDisabled">{pickerList}</Picker>
 		<Picker defaultValue={1} id="pickerWithDefaultValue">{pickerList}</Picker>
 	</div>
 </div>;
