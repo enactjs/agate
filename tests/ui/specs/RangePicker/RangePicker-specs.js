@@ -92,7 +92,6 @@ describe('RangePicker', function () {
 			const rangePicker = Page.components.rangePickerWithNegativeValues;
 
 			it('should have the default value selected', function () {
-				browser.pause(500);
 				const newValue = extractValue(rangePicker);
 				expect(newValue).to.equal(0);
 			});
