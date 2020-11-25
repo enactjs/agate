@@ -2,6 +2,7 @@ import ArcPicker from '../../../ArcPicker';
 import ArcSlider from '../../../ArcSlider';
 import BodyText from '../../../BodyText';
 import Button from '../../../Button';
+import Checkbox from '../../../Checkbox';
 import CheckboxItem from '../../../CheckboxItem';
 import ColorPicker from '../../../ColorPicker';
 import ContextualPopupDecorator from '../../../ContextualPopupDecorator';
@@ -22,6 +23,7 @@ import Item from '../../../Item';
 import Keypad from '../../../Keypad';
 import LabeledIcon from '../../../LabeledIcon';
 import LabeledIconButton from '../../../LabeledIconButton';
+import Marquee from '../../../Marquee';
 import MediaPlayer from '../../../MediaPlayer';
 import Panels from '../../../Panels';
 import Picker from '../../../Picker';
@@ -51,6 +53,7 @@ const AgateExports = {
 	BodyText,
 	Button,
 	ColorPicker,
+	Checkbox,
 	CheckboxItem,
 	ContextualPopupDecorator,
 	DatePicker,
@@ -70,6 +73,7 @@ const AgateExports = {
 	Keypad,
 	LabeledIcon,
 	LabeledIconButton,
+	Marquee,
 	MediaPlayer,
 	Panels,
 	Picker,

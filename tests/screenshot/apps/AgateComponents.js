@@ -4,6 +4,7 @@ import ArcPicker from './components/ArcPicker';
 import ArcSlider from './components/ArcSlider';
 import BodyText from './components/BodyText';
 import Button from './components/Button';
+import Checkbox from './components/Checkbox';
 import CheckboxItem from './components/CheckboxItem';
 import ColorPicker from './components/ColorPicker';
 import ContextualPopupDecorator from './components/ContextualPopupDecorator';
@@ -24,6 +25,7 @@ import Item from './components/Item';
 import Keypad from './components/Keypad';
 import LabeledIcon from './components/LabeledIcon';
 import LabeledIconButton from './components/LabeledIconButton';
+import Marquee from './components/Marquee';
 import MediaPlayer from './components/MediaPlayer';
 import Panels from './components/Panels';
 import Picker from './components/Picker';
@@ -51,6 +53,7 @@ const agateComponents = {
 	ArcSlider,
 	BodyText,
 	Button,
+	Checkbox,
 	CheckboxItem,
 	ColorPicker,
 	ContextualPopupDecorator,
@@ -71,6 +74,7 @@ const agateComponents = {
 	Keypad,
 	LabeledIcon,
 	LabeledIconButton,
+	Marquee,
 	MediaPlayer,
 	Panels,
 	Picker,

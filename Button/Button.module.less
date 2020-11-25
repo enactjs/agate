@@ -22,6 +22,7 @@
 		text-indent: @agate-button-text-indent;  // Keep the text centered
 		font-variant-ligatures: @agate-button-font-ligatures;
 		min-width: @agate-button-height;
+		max-width: @agate-button-max-width;
 		padding: 0 @agate-button-h-padding;
 		margin: 0 @agate-component-spacing;
 		box-sizing: border-box;
@@ -45,7 +46,7 @@
 			color: @agate-button-color;
 
 			.icon {
-				-webkit-margin-start: 0;
+				.margin-start-end(@agate-button-icon-margin-start, @agate-button-icon-margin-end);
 			}
 		}
 
@@ -62,12 +63,30 @@
 			color: @agate-button-badge-color;
 			background-color: var(--agate-button-badge-bg-color, @agate-button-badge-bg-color);
 			z-index: 1;
+
+			.enact-locale-rtl({
+				.position(@agate-button-badge-position-rtl);
+			});
 		}
 
 		&.grid {
 			.bg {
 				border-radius: @agate-button-grid-border-radius;
 			}
+		}
+
+		&.iconAfter {
+			.client {
+				flex-direction: row-reverse;
+			}
+
+			.icon {
+				.margin-start-end(@agate-button-icon-position-after-margin-start, @agate-button-icon-position-after-margin-end);
+			}
+		}
+
+		&.minWidth {
+			min-width: @agate-button-min-width;
 		}
 
 		// opaque
@@ -95,7 +114,7 @@
 			}
 		}
 
-		&.minWidth {
+		&.iconOnly {
 			&,
 			&.huge,
 			&.small,
@@ -179,6 +198,10 @@
 			line-height: @agate-button-line-height;
 			padding: 0 @agate-button-small-h-padding;
 
+			&.minWidth {
+				min-width: @agate-button-small-min-width;
+			}
+
 			.client::before {
 				bottom: 12px;
 				left: 18px;
@@ -194,6 +217,10 @@
 				letter-spacing: @agate-button-small-badge-letter-spacing;
 				text-indent: @agate-button-small-badge-text-indent;
 				transform: @agate-button-small-badge-transform;
+
+				.enact-locale-rtl({
+					.position(@agate-button-small-badge-position-rtl);
+				});
 			}
 		}
 
@@ -213,6 +240,10 @@
 				letter-spacing: @agate-button-smallest-badge-letter-spacing;
 				text-indent: @agate-button-smallest-badge-text-indent;
 				transform: @agate-button-smallest-badge-transform;
+
+				.enact-locale-rtl({
+					.position(@agate-button-smallest-badge-position-rtl);
+				});
 			}
 		}
 
