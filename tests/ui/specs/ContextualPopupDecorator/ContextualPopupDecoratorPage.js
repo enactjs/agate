@@ -11,16 +11,8 @@ class ButtonInterface {
 		return browser.execute((el) => el.focus(), $(this.selector));
 	}
 
-	hover () {
-		return $(this.selector).moveTo({xOffset: 0, yOffset: 0});
-	}
-
 	get self () {
 		return $(this.selector);
-	}
-
-	get isButtonExist () {
-		return this.self.isExisting();
 	}
 }
 
