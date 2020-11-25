@@ -38,15 +38,14 @@ class DropdownPage extends Page {
 		this.components = new Proxy({}, {
 			get: (target, name) => new DropdownInterface(name)
 		});
-		const dropdownDefault = new DropdownInterface('dropdownDefault');
-		const dropdownDirectionRight = new DropdownInterface('dropdownDirectionRight');
-		const dropdownDisabled = new DropdownInterface('dropdownDisabled');
-		const dropdownSelected = new DropdownInterface('dropdownSelected');
-		this.components = {dropdownDefault, dropdownDirectionRight, dropdownDisabled, dropdownSelected};
+		const dropdown1 = new DropdownInterface('dropdown1');
+		const dropdown2 = new DropdownInterface('dropdown2');
+		const dropdown3 = new DropdownInterface('dropdown3');
+		this.components = {dropdown1, dropdown2, dropdown3};
 	}
 
 	open (urlExtra) {
-		super.open(`Dropdown-View`, urlExtra);
+		super.open(`DropdownInScroller-View`, urlExtra);
 	}
 }
 
