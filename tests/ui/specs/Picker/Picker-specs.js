@@ -13,9 +13,9 @@ describe('Picker', function () {
 
 			describe('5-way', function () {
 				it('should change the value forward when incrementing the picker', function () {
-					browser.waitUntil(() => picker.decrementer(picker.self).isFocused(), {timeout: 1500,  interval: 100});
+					expect(picker.decrementer(picker.self).isFocused()).to.be.true();
 					Page.spotlightDown();
-					browser.waitUntil(() => picker.incrementer(picker.self).isFocused(), {timeout: 1500,  interval: 100});
+					expect(picker.incrementer(picker.self).isFocused()).to.be.true();
 					Page.spotlightSelect();
 					browser.pause(500);
 					const newValue = extractValue(picker);
@@ -23,12 +23,12 @@ describe('Picker', function () {
 				});
 
 				it('should change the value backward when decrementing the picker', function () {
-					browser.waitUntil(() => picker.decrementer(picker.self).isFocused(), {timeout: 1500,  interval: 100});
+					expect(picker.decrementer(picker.self).isFocused()).to.be.true();
 					Page.spotlightDown();
-					browser.waitUntil(() => picker.incrementer(picker.self).isFocused(), {timeout: 1500,  interval: 100});
+					expect(picker.incrementer(picker.self).isFocused()).to.be.true();
 					Page.spotlightSelect();
 					Page.spotlightUp();
-					browser.waitUntil(() => picker.decrementer(picker.self).isFocused(), {timeout: 1500,  interval: 100});
+					expect(picker.decrementer(picker.self).isFocused()).to.be.true();
 					Page.spotlightSelect();
 					browser.pause(500);
 					const newValue = extractValue(picker);
@@ -46,7 +46,7 @@ describe('Picker', function () {
 
 				it('should decrease the value when decrementing the picker', function () {
 					picker.incrementer(picker.self).click();
-					browser.waitUntil(() => picker.incrementer(picker.self).isFocused(), {timeout: 1500,  interval: 100});
+					expect(picker.incrementer(picker.self).isFocused()).to.be.true();
 					picker.decrementer(picker.self).click();
 					browser.pause(500);
 					const newValue = extractValue(picker);
@@ -56,7 +56,7 @@ describe('Picker', function () {
 		});
 
 		describe('with \'defaultValue\'', function () {
-			// supplied value is `Korea`
+			// supplied value is `Banana`
 			const picker = Page.components.pickerWithDefaultValue;
 
 			it('should have the default value selected', function () {
