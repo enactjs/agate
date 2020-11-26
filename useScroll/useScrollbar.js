@@ -21,20 +21,22 @@ const useScrollbar = (props, instances) => {
 	}
 
 	function onScrollbarButtonClick ({isPreviousScrollButton, isVerticalScrollBar}) {
-		const
-			{wheelDirection} = scrollContainerHandle.current,
-			bounds = scrollContainerHandle.current.getScrollBounds(),
-			direction = isPreviousScrollButton ? -1 : 1,
-			pageDistance = direction * (isVerticalScrollBar ? bounds.clientHeight : bounds.clientWidth) * paginationPageMultiplier;
+		if (scrollContainerHandle.current) {
+			const
+				{wheelDirection} = scrollContainerHandle.current,
+				bounds = scrollContainerHandle.current.getScrollBounds(),
+				direction = isPreviousScrollButton ? -1 : 1,
+				pageDistance = direction * (isVerticalScrollBar ? bounds.clientHeight : bounds.clientWidth) * paginationPageMultiplier;
 
-		scrollContainerHandle.current.lastInputType = 'scrollbarButton';
+			scrollContainerHandle.current.lastInputType = 'scrollbarButton';
 
-		if (direction !== wheelDirection) {
-			scrollContainerHandle.current.isScrollAnimationTargetAccumulated = false;
-			scrollContainerHandle.current.wheelDirection = direction;
+			if (direction !== wheelDirection) {
+				scrollContainerHandle.current.isScrollAnimationTargetAccumulated = false;
+				scrollContainerHandle.current.wheelDirection = direction;
+			}
+
+			scrollContainerHandle.current.scrollToAccumulatedTarget(pageDistance, isVerticalScrollBar);
 		}
-
-		scrollContainerHandle.current.scrollToAccumulatedTarget(pageDistance, isVerticalScrollBar);
 	}
 
 	function focusOnScrollButton (scrollbarHandle, isPreviousScrollButton) {

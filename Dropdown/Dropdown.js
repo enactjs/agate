@@ -203,7 +203,7 @@ const DropdownBase = kind({
 			const calcOverflow = (container, client, wrapper) => {
 				const KEEPOUT = ri.scale(24); // keep out distance on the edge of the screen
 				const wrapperTop = (wrapper && wrapper.top) || 0;
-				const wrapperBottom = (wrapper && wrapper.bottom) || window.innerHeight;
+				const wrapperBottom = (wrapper && wrapper.bottom) || (typeof window !== 'undefined' && window.innerHeight);
 
 				const overflow = {
 					isOverTop: client.top - container.height - KEEPOUT < wrapperTop,

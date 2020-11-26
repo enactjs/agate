@@ -160,7 +160,7 @@ const ArcPickerBase = kind({
 			const {backgroundColor, children, endAngle, foregroundColor, onClick, radius, selectionType, startAngle, strokeWidth, value} = props;
 
 			return (
-				children.map((option, index) => {
+				children && children.map((option, index) => {
 					// Calc `arcStartAngle`, `arcEndAngle` based on `startAngle` and `endAngle` for every <Arc />
 					const pauseAngle = 2;
 					const arcSegments = children.length;

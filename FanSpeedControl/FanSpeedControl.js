@@ -38,20 +38,12 @@ const FanSpeedControlBase = kind({
 
 	propTypes: /** @lends agate/FanSpeedControl.FanSpeedControlBase.prototype */ {
 		/**
-		 * FanSpeedControl icon.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		icon: PropTypes.string,
-
-		/**
 		 * The maximum value of FanSpeedControl.
 		 *
 		 * @type {Number}
 		 * @public
 		 */
-		max: PropTypes.number,
+		max: PropTypes.number.isRequired,
 
 		/**
 		 * The minimum value of FanSpeedControl.
@@ -59,7 +51,15 @@ const FanSpeedControlBase = kind({
 		 * @type {Number}
 		 * @public
 		 */
-		min: PropTypes.number,
+		min: PropTypes.number.isRequired,
+
+		/**
+		 * FanSpeedControl icon.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		icon: PropTypes.string,
 
 		/**
 		 * Called when value is changed.

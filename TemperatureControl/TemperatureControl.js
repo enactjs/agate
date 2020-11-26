@@ -104,8 +104,12 @@ const TemperatureControlBase =  kind({
 
 	render: ({disabled, max, min, onChange, unit, value, ...rest}) => {
 		const currentTemperature = MeasurementFactory({unit, amount: value});
-		const ufmt = new UnitFmt({autoConvert: true, length: 'short', maxFractionDigits: 0, roundingMode: 'halfup'});
-		const currentTemperatureString =  ufmt.format(currentTemperature);
+		let currentTemperatureString = currentTemperature;
+
+		if (typeof window !== 'undefined') {
+			const ufmt = new UnitFmt({autoConvert: true, length: 'short', maxFractionDigits: 0, roundingMode: 'halfup'});
+			currentTemperatureString =  ufmt.format(currentTemperature);
+		}
 
 		return (
 			<div {...rest}>
