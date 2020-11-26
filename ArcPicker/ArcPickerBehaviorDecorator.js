@@ -23,11 +23,11 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			/**
 			 * The value options of ArcPicker.
 			 *
-			 * @type {Node}
+			 * @type {Array}
 			 * @required
 			 * @public
 			 */
-			children: PropTypes.node.isRequired,
+			children: PropTypes.array.isRequired,
 
 			/**
 			 * The maximum value of ArcPicker.
@@ -76,7 +76,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 				forward('onChange', {value}, props);
 				ev.stopPropagation();
 			},
-			value: ({value, children}) => ((value || value === 0) ? value : children[0])
+			value: ({value, children}) => ((value || value === 0) ? value : (children && children[0]))
 		},
 
 		render: ({max, min, value, ...rest}) => {
