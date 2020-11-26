@@ -20,6 +20,22 @@ describe('Dropdown', function () {
 		it('should have correct text', function () {
 			expect(dropdownSelected.selectedValue).to.equal('two');
 		});
+
+		it('should have correct text after changing selected value', function () {
+			expect(Page.components.dropdownDefault.childItem.isFocused()).to.be.true();
+
+			Page.spotlightDown();
+			Page.spotlightDown();
+			expect(dropdownSelected.selectedValue).to.equal('two');
+
+			Page.spotlightSelect();
+			Page.spotlightDown();
+			// Page.spotlightSelect();
+			console.log(dropdownSelected.selectedValue)
+
+			//
+			// expect(dropdownSelected.selectedValue).to.equal('three');
+		});
 	});
 
 	describe('5-way', function () {

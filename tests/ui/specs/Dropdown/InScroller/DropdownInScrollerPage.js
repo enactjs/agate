@@ -45,7 +45,7 @@ class DropdownPage extends Page {
 	}
 
 	open (urlExtra) {
-		super.open(`DropdownInScroller-View`, urlExtra);
+		super.open('DropdownInScroller-View', urlExtra);
 	}
 }
 
