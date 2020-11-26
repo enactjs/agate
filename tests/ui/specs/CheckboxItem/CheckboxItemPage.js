@@ -1,10 +1,10 @@
 'use strict';
 const {Page} = require('@enact/ui-test-utils/utils');
-const {element, getText} = require('@enact/ui-test-utils/utils');
 
 class CheckboxItemInterface {
 	constructor (id) {
 		this.id = id;
+		this.marqueeTextSelector = `#${this.id} > div .enact_ui_Marquee_Marquee_text`;
 		this.checkboxIconSelector = `#${this.id} > .Item_Item_slotBefore .Checkbox_Checkbox_icon`;
 		this.slotBeforeNodeSelector = `#${this.id} >  .Item_Item_slotBefore > div:last-child`;
 	}
@@ -16,8 +16,11 @@ class CheckboxItemInterface {
 	get self () {
 		return $(`#${this.id}`);
 	}
-	get textContent () {
-		return getText(element('.Item_Item_content', this.self));
+	get value () {
+		return $(this.marqueeTextSelector);
+	}
+	get valueText () {
+		return this.value.getText();
 	}
 	get checkboxIcon () {
 		return $(this.checkboxIconSelector);
