@@ -9,6 +9,7 @@ const extractValues = (picker) => {
 	const year = parseInt(picker.active(picker.year).getText());
 
 	return {day, month, year};
+
 };
 
 module.exports = {
