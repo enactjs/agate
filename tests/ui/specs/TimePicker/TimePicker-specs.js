@@ -263,25 +263,18 @@ describe('TimePicker', function () {
 			expect(extractValues(timePicker).hour).to.equal(0); // midnight hour
 		});
 
-		it('should increment hours from 0 to 23', function () {
-			for (let i = 0; i < 24; i++) {
-				timePicker.incrementer(timePicker.hour).click();
-			}
-			const {hour} = extractValues(timePicker);
-			expect(hour).to.equal(23);
+		it('should increment hours from 23 to 0', function () {
+			// go to 23 first
+			timePicker.decrementer(timePicker.hour).click();
+			expect(extractValues(timePicker).hour).to.equal(23);
+			// now increment
+			timePicker.incrementer(timePicker.hour).click();
+			expect(extractValues(timePicker).hour).to.equal(0);
 		});
 
-		it('should decrement hours from 23 to 0', function () {
-			// go to 23 first
-			for (let i = 0; i < 24; i++) {
-				timePicker.incrementer(timePicker.hour).click();
-			}
+		it('should decrement hours from 0 to 23', function () {
+			timePicker.decrementer(timePicker.hour).click();
 			expect(extractValues(timePicker).hour).to.equal(23);
-			// now decrement
-			for (let i = 0; i < 24; i++) {
-				timePicker.decrementer(timePicker.hour).click();
-			}
-			expect(extractValues(timePicker).hour).to.equal(0);
 		});
 	});
 });
