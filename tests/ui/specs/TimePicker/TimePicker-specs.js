@@ -83,6 +83,23 @@ describe('TimePicker', function () {
 					const {hour: value} = extractValues(timePicker);
 					expect(value).to.equal(hour);
 				});
+
+				it('should change the meridiem on hour boundaries', function () {
+					const {meridiem} = extractValues(timePicker);
+					if (meridiem === 'AM') {
+						Page.spotlightDown();
+						browser.waitUntil(() => timePicker.incrementer(timePicker.hour).isFocused(), {timeout: 1500,  interval: 100});
+					} else {
+						browser.waitUntil(() => timePicker.decrementer(timePicker.hour).isFocused(), {timeout: 1500,  interval: 100});
+					}
+					// 12 hours ought to change the value text if meridiem changes
+					for (let i = 12; i; i -= 1) {
+						Page.spotlightSelect();
+					}
+
+					const {meridiem: value} = extractValues(timePicker);
+					expect(value !== meridiem).to.be.true();
+				});
 			});
 
 			describe('pointer', function () {
@@ -124,6 +141,24 @@ describe('TimePicker', function () {
 					const {minute: value} = extractValues(timePicker);
 					const expected = minute !== 0 ? minute - 1 : 59;
 					expect(value).to.equal(expected);
+				});
+
+				it('should change the meridiem on hour boundaries', function () {
+					const {meridiem} = extractValues(timePicker);
+					if (meridiem === 'AM') {
+						// 12 hours ought to change the value text if meridiem changes
+						for (let i = 12; i; i -= 1) {
+							timePicker.incrementer(timePicker.hour).click();
+						}
+					} else {
+						// 12 hours ought to change the value text if meridiem changes
+						for (let i = 12; i; i -= 1) {
+							timePicker.decrementer(timePicker.hour).click();
+						}
+					}
+
+					const {meridiem: value} = extractValues(timePicker);
+					expect(value !== meridiem).to.be.true();
 				});
 			});
 		});
