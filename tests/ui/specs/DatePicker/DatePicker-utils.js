@@ -11,15 +11,7 @@ const extractValues = (picker) => {
 	return {day, month, year};
 };
 
-// Validations are self-contained 'it' statements
-function validateTitle (picker, title) {
-	it('should have correct title', function () {
-		expect(picker.titleText).to.equal(title);
-	});
-}
-
 module.exports = {
 	daysInMonth,
-	extractValues,
-	validateTitle
+	extractValues
 };

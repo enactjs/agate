@@ -1,5 +1,5 @@
 const Page = require('./DatePickerPage');
-const {daysInMonth, extractValues, validateTitle} = require('./DatePicker-utils.js');
+const {daysInMonth, extractValues} = require('./DatePicker-utils.js');
 
 describe('DatePicker', function () {
 
@@ -10,10 +10,6 @@ describe('DatePicker', function () {
 
 		describe('default', function () {
 			const datePicker = Page.components.datePickerDefault;
-
-			it('should have correct title', function () {
-				validateTitle(datePicker, 'Date Picker Default');
-			});
 
 			it('should have month-day-year order', function () {
 				expect(datePicker.decrementer(datePicker.month).isFocused(), 'Month').to.be.true();
