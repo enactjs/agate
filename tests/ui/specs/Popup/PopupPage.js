@@ -33,7 +33,7 @@ class PopupCommon {
 	get buttonPopup10 () {
 		return element('#buttonPopup10', browser);
 	}
-	get   popupLayer () {
+	get popupLayer () {
 		return element('#floatLayer', browser);
 	}
 	get isPopupExist () {
@@ -50,25 +50,25 @@ class PopupInterface {
 		this.id = id;
 	}
 
-	get          self () {
+	get self () {
 		return element(`#${this.id}`, browser);
 	}
-	get      buttonOK () {
+	get buttonOK () {
 		return element(`#${this.id} #buttonOK`, browser);
 	}
-	get  buttonCancel () {
+	get buttonCancel () {
 		return element(`#${this.id} #buttonCancel`, browser);
 	}
-	get   closeSymbol () {
+	get closeSymbol () {
 		return getText(element(`#${this.id} .Icon_Icon_icon`, browser));
 	}
-	get         popup () {
+	get popup () {
 		return element(`#${this.id}`, browser);
 	}
-	get         title () {
+	get title () {
 		return getText(element(`#${this.id}>div>div>div`, browser));
 	}
-	get        isOpen () {
+	get isOpen () {
 		return $(`.enact_ui_Transition_Transition_shown #${this.id}`).isExisting();
 	}
 }
