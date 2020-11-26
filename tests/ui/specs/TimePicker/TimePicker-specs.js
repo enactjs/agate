@@ -1,5 +1,5 @@
 const Page = require('./TimePickerPage');
-const {extractValues, validateTitle} = require('./TimePicker-utils.js');
+const {extractValues} = require('./TimePicker-utils.js');
 
 describe('TimePicker', function () {
 
@@ -10,10 +10,6 @@ describe('TimePicker', function () {
 
 		describe('default', function () {
 			const timePicker = Page.components.timePickerDefault;
-
-			it('should have correct title', function () {
-				validateTitle(timePicker, 'Time Picker Default');
-			});
 
 			it('should have hour-minute-meridiem order', function () {
 				browser.waitUntil(() => timePicker.decrementer(timePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'hour focused'});
