@@ -1,6 +1,8 @@
 'use strict';
 
-const {element, componentSelector, getComponent, hasClass, Page} = require('@enact/ui-test-utils/utils');
+const {element, componentSelector, getComponent, getSubComponent, getText, hasClass, Page} = require('@enact/ui-test-utils/utils');
+
+const getMarqueeText = getSubComponent({lib: 'ui', component:'Marquee', child:'text'});
 
 class DropdownInterface {
 	constructor (id) {
@@ -28,6 +30,10 @@ class DropdownInterface {
 
 	get isOpen () {
 		return hasClass('Dropdown_Dropdown_open', this.self);
+	}
+
+	get selectedValue () {
+		return getText(getMarqueeText(this.self));
 	}
 }
 

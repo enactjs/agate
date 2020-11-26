@@ -14,6 +14,14 @@ describe('Dropdown', function () {
 		});
 	});
 
+	describe('default', function () {
+		const dropdownSelected = Page.components.dropdownSelected;
+
+		it('should have correct text', function () {
+			expect(dropdownSelected.selectedValue).to.equal('two');
+		});
+	});
+
 	describe('5-way', function () {
 
 		it('should focus the `#dropdownDirectionRight` when 5-way right', function () {
@@ -34,7 +42,7 @@ describe('Dropdown', function () {
 			expect(Page.components.dropdownDefault.childItem.isFocused()).to.be.true();
 
 			Page.spotlightSelect();
-			browser.pause(1000);
+			Page.delay(1000);
 			Page.spotlightDown();
 
 			expect(Page.components.dropdownDefault.item(0).isFocused()).to.be.true();
@@ -48,14 +56,14 @@ describe('Dropdown', function () {
 
 			// Open the first dropdown and wait for the first list item to be focused
 			Page.spotlightSelect();
-			browser.pause(1000);
+			Page.delay(1000);
 			Page.spotlightDown();
 
 			// Click in the area outside the Dropdown (in the empty space created by the wrapper)
 			const wrapper = $('#wrapper');
 			wrapper.click({x: 0, y: 0});
 
-			browser.pause(1000);
+			Page.delay(1000);
 
 			// Verify that the floating list no longer exists (Dropdown is closed)
 			expect(dropdown.isOpen).to.not.be.true();
