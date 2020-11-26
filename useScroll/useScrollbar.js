@@ -72,10 +72,12 @@ const useScrollbar = (props, instances) => {
 	}
 
 	function alertScrollbarTrack () {
-		const bounds = scrollContainerHandle.current.getScrollBounds();
+		if (scrollContainerHandle.current) {
+			const bounds = scrollContainerHandle.current.getScrollBounds();
 
-		scrollContainerHandle.current.showScrollbarTrack(bounds);
-		scrollContainerHandle.current.startHidingScrollbarTrack();
+			scrollContainerHandle.current.showScrollbarTrack(bounds);
+			scrollContainerHandle.current.startHidingScrollbarTrack();
+		}
 	}
 
 	// Return

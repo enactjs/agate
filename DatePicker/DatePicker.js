@@ -108,7 +108,7 @@ const dateTimeConfig = {
 const DatePickerDecorator = compose(
 	Pure,
 	Skinnable,
-	DateTimeDecorator(dateTimeConfig)
+	DateTimeDecorator
 );
 
 /**
@@ -144,7 +144,7 @@ const DatePickerDecorator = compose(
  * @ui
  * @public
  */
-const DatePicker = DatePickerDecorator(DatePickerBase);
+const DatePicker = DatePickerDecorator(dateTimeConfig, DatePickerBase);
 
 /**
  * The initial value used when `value` is not set.

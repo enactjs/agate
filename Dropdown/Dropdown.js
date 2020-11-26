@@ -200,40 +200,42 @@ const DropdownBase = kind({
 
 	computed: {
 		adjustedDirection: ({direction, 'data-spotlight-id': containerId}) => {
-			const calcOverflow = (container, client, wrapper) => {
-				const KEEPOUT = ri.scale(24); // keep out distance on the edge of the screen
-				const wrapperTop = (wrapper && wrapper.top) || 0;
-				const wrapperBottom = (wrapper && wrapper.bottom) || (typeof window !== 'undefined' && window.innerHeight);
+			if (typeof window !== 'undefined') {
+				const calcOverflow = (container, client, wrapper) => {
+					const KEEPOUT = ri.scale(24); // keep out distance on the edge of the screen
+					const wrapperTop = (wrapper && wrapper.top) || 0;
+					const wrapperBottom = (wrapper && wrapper.bottom) || window.innerHeight;
 
-				const overflow = {
-					isOverTop: client.top - container.height - KEEPOUT < wrapperTop,
-					isOverBottom: client.bottom + container.height + KEEPOUT > wrapperBottom
+					const overflow = {
+						isOverTop: client.top - container.height - KEEPOUT < wrapperTop,
+						isOverBottom: client.bottom + container.height + KEEPOUT > wrapperBottom
+					};
+
+					return overflow;
 				};
 
-				return overflow;
-			};
+				const adjustDirection = (overflow) => {
+					let adjustedDirection = direction;
+					if (overflow.isOverTop && !overflow.isOverBottom && direction === 'up') {
+						adjustedDirection = 'down';
+					} else if (overflow.isOverBottom && !overflow.isOverTop && direction === 'down') {
+						adjustedDirection = 'up';
+					}
 
-			const adjustDirection = (overflow) => {
-				let adjustedDirection = direction;
-				if (overflow.isOverTop && !overflow.isOverBottom && direction === 'up') {
-					adjustedDirection = 'down';
-				} else if (overflow.isOverBottom && !overflow.isOverTop && direction === 'down') {
-					adjustedDirection = 'up';
+					return adjustedDirection;
+				};
+
+				const containerSelector = `[data-spotlight-id='${containerId}']`;
+				const containerNode = document.querySelector(`${containerSelector} .${componentCss.dropdownList}`);
+				const clientNode = document.querySelector(`${containerSelector} .${componentCss.dropdown}`);
+				const wrapperNode = clientNode && clientNode.closest('div[style*=overflow]');
+
+				if (containerNode && clientNode) {
+					const containerNodeRect = containerNode.getBoundingClientRect();
+					const clientNodeRect = clientNode.getBoundingClientRect();
+					const wrapperNodeRect = wrapperNode && wrapperNode.getBoundingClientRect();
+					return adjustDirection(calcOverflow(containerNodeRect, clientNodeRect, wrapperNodeRect));
 				}
-
-				return adjustedDirection;
-			};
-
-			const containerSelector = `[data-spotlight-id='${containerId}']`;
-			const containerNode = document.querySelector(`${containerSelector} .${componentCss.dropdownList}`);
-			const clientNode = document.querySelector(`${containerSelector} .${componentCss.dropdown}`);
-			const wrapperNode = clientNode && clientNode.closest('div[style*=overflow]');
-
-			if (containerNode && clientNode) {
-				const containerNodeRect = containerNode.getBoundingClientRect();
-				const clientNodeRect = clientNode.getBoundingClientRect();
-				const wrapperNodeRect = wrapperNode && wrapperNode.getBoundingClientRect();
-				return adjustDirection(calcOverflow(containerNodeRect, clientNodeRect, wrapperNodeRect));
 			}
 
 			return direction;

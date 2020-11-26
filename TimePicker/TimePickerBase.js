@@ -215,7 +215,7 @@ const TimePickerBase = kind({
 	},
 
 	computed: {
-		hasMeridiem: ({order}) => order.indexOf('a') >= 0,
+		hasMeridiem: ({order}) => order && order.indexOf('a') >= 0,
 		meridiemPickerWidth: ({meridiem, meridiems}) => meridiems && meridiems[meridiem].length * 1.5
 	},
 

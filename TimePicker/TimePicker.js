@@ -199,7 +199,7 @@ const dateTimeConfig = {
 const TimePickerDecorator = compose(
 	Pure,
 	Skinnable,
-	DateTimeDecorator(dateTimeConfig)
+	DateTimeDecorator
 );
 
 /**
@@ -220,7 +220,7 @@ const TimePickerDecorator = compose(
  * @ui
  * @public
  */
-const TimePicker = TimePickerDecorator(TimePickerBase);
+const TimePicker = TimePickerDecorator(dateTimeConfig, TimePickerBase);
 
 /**
  * Default value
