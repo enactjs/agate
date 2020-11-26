@@ -26,15 +26,18 @@ describe('Dropdown', function () {
 
 			Page.spotlightDown();
 			Page.spotlightDown();
+			expect(dropdownSelected.childItem.isFocused()).to.be.true();
 			expect(dropdownSelected.selectedValue).to.equal('two');
 
 			Page.spotlightSelect();
+			Page.delay(1000);
 			Page.spotlightDown();
-			// Page.spotlightSelect();
-			console.log(dropdownSelected.selectedValue)
+			Page.spotlightDown();
+			Page.spotlightDown();
+			Page.spotlightSelect();
+			Page.delay(1000);
 
-			//
-			// expect(dropdownSelected.selectedValue).to.equal('three');
+			expect(dropdownSelected.selectedValue).to.equal('three');
 		});
 	});
 
