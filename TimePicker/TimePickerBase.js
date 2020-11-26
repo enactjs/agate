@@ -243,7 +243,7 @@ const TimePickerBase = kind({
 
 		return (
 			<DateTime {...rest} css={css}>
-				{order.map((picker) => {
+				{order && order.map((picker) => {
 					switch (picker) {
 						case 'h':
 						case 'k':
