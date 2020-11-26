@@ -101,10 +101,6 @@ class PopupPage extends Page {
 		$('#floatLayer').click();
 	}
 
-	clickPopupMain () {
-		$('#popupMain').click();
-	}
-
 	waitForOpen (selector, timeout) {
 		if (typeof selector !== 'string') selector = `#${selector.id}`;
 
