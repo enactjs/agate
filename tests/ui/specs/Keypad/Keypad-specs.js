@@ -6,7 +6,7 @@ describe('Keypad', function () {
 		Page.open();
 	});
 
-	describe('5 way', function () {
+	describe('5-way', function () {
 		const keypad = Page.components.keypadDefault;
 
 		it('should have focus on first button at start', function () {
@@ -26,7 +26,7 @@ describe('Keypad', function () {
 		});
 	});
 
-	describe('5 way disabled', function () {
+	describe('5-way disabled', function () {
 		const keypad = Page.components.keypadDisabled;
 
 		it('buttons are focusable when navigating down/left/right/up', function () {

@@ -41,4 +41,22 @@ describe('Keypad Specs', () => {
 
 		expect(actual).toBe(expected);
 	});
+
+	describe('Disabled Keypad', () => {
+		test('should not run the onChange handler when disabled', () => {
+			const handleChange = jest.fn();
+			const keypad = mount(
+				<Keypad disabled onChange={handleChange} />
+			);
+
+			click(keypad, 2);
+			click(keypad, 5);
+			click(keypad, 7);
+
+			const expected = 0;
+			const actual = handleChange.mock.calls.length;
+
+			expect(actual).toBe(expected);
+		});
+	});
 });
