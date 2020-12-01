@@ -25,4 +25,22 @@ describe('ArcPicker Specs', () => {
 			expect(secondActual).toBe(secondExpected);
 		}
 	);
+
+	test(
+		'should not run the onChange handler when disabled',
+		() => {
+			const handleChange = jest.fn();
+			const arcPicker = mount(
+				<ArcPicker disabled onChange={handleChange}>{[1, 2, 3, 4]}</ArcPicker>
+			);
+
+			// find second Arc and click on the second <path> element inside of it
+			arcPicker.find('Arc').at(1).find('path').at(1).simulate('click');
+
+			const expected = 0;
+			const actual = handleChange.mock.calls.length;
+
+			expect(actual).toBe(expected);
+		}
+	);
 });
