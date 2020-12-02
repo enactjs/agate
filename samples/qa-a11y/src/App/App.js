@@ -1,6 +1,5 @@
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import Item from '@enact/agate/Item';
-import {Panel, TabbedPanels} from '@enact/agate/Panels';
 import ThemeDecorator from '@enact/agate/ThemeDecorator';
 import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
@@ -114,13 +113,6 @@ const views = [
 	{title: 'WindDirectionControl', view: WindDirectionControl}
 ];
 
-const tabTitles = [
-	{title: 'A-G'},
-	{title: 'H-N'},
-	{title: 'O-S'},
-	{title: 'T-Z'}
-];
-
 class AppBase extends React.Component {
 	static propTypes = {
 		rtl: PropTypes.bool,
@@ -135,33 +127,6 @@ class AppBase extends React.Component {
 			jumpToView: '',
 			selected: 0
 		};
-
-		this.viewItems = [];
-		this.viewItems.length = tabTitles.length;
-
-		views.forEach((view, indexInViews) => {
-			const item = (
-				<Item
-					aria-label={view.title}
-					className={appCss.navItem}
-					data-menu={indexInViews}
-					key={indexInViews}
-					onClick={this.handleChangeView(indexInViews)}
-					slotBefore={<div className={appCss.slotBefore}>{('00' + indexInViews).slice(-2)}</div>}
-				>
-					{view.title}
-				</Item>
-			);
-
-			const indexInPanels = indexInViews < 2 ?
-				0 :
-				tabTitles.findIndex(({title}) => {
-					return view.title[0] <= title[title.length - 1];
-				});
-
-			this.viewItems[indexInPanels] = this.viewItems[indexInPanels] || [];
-			this.viewItems[indexInPanels].push(item);
-		});
 	}
 
 	componentDidMount () {
@@ -216,14 +181,18 @@ class AppBase extends React.Component {
 				<Layout {...rest} className={appCss.layout}>
 					<Cell component={Menu} id="menu" size="20%" spotlightId="menu">
 						<div className={appCss.jumpToView}>Jump To, View: {jumpToView}</div>
-						<TabbedPanels
-							noAnimation
-							noCloseButton
-							orientation="vertical"
-							tabs={tabTitles}
-						>
-							{this.viewItems.map((items, index) => <Panel key={index} style={{padding: 0}}>{items}</Panel>)}
-						</TabbedPanels>
+						{views.map((view, i) => (
+							<Item
+								aria-label={view.title}
+								className={appCss.navItem}
+								data-menu={i}
+								key={i}
+								onClick={this.handleChangeView(i)}
+								slotBefore={('00' + i).slice(-2)}
+							>
+								{view.title}
+							</Item>
+						))}
 					</Cell>
 					<Cell component={ViewManager} index={selected}>
 						{views.map((view, i) => (
