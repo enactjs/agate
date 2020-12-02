@@ -9,8 +9,23 @@ spotlight.setPointerMode(false);
 
 const app = (props) => <div {...props}>
 	<div>
-		<WindDirectionControl id="windDirectionControl1" />
-		<WindDirectionControl id="windDirectionControl2" disabled />
+		<WindDirectionControl
+			id="windDirectionControl1"
+			style={{display: 'inline-block', width: '30%'}}
+		/>
+		<WindDirectionControl
+			id="windDirectionControl2"
+			value="airRight"
+			style={{display: 'inline-block', width: '30%'}}
+		/>
+		<WindDirectionControl
+			id="windDirectionControl3"
+			value="airUp"
+		/>
+		<WindDirectionControl
+			id="windDirectionControl4"
+			disabled
+		/>
 	</div>
 </div>;
 

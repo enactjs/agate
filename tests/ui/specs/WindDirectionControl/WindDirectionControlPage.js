@@ -6,6 +6,14 @@ class WindDirectionControlInterface {
 		this.id = id;
 		this.selector = `#${this.id}`;
 	}
+
+	coloredPath (index) {
+		return $(this.selector + ' .ArcPicker_ArcPicker_arc:nth-child(' + index + ') path:first-child');
+	}
+
+	clickablePath (index) {
+		return $(this.selector + ' .ArcPicker_ArcPicker_arc:nth-child(' + index + ') path:nth-child(2)');
+	}
 }
 
 class WindDirectionControlPage extends Page {
@@ -13,10 +21,14 @@ class WindDirectionControlPage extends Page {
 		super();
 		this.title = 'WindDirectionControl Test';
 		const windDirectionControlDefault = new WindDirectionControlInterface('windDirectionControl1');
-		const windDirectionControlDisabled = new WindDirectionControlInterface('windDirectionControl2');
+		const winDirectionControlAirRight = new WindDirectionControlInterface('windDirectionControl2');
+		const windDirectionControlAirUp = new WindDirectionControlInterface('windDirectionControl3');
+		const windDirectionControlDisabled = new WindDirectionControlInterface('windDirectionControl4');
 
 		this.components = {
 			windDirectionControlDefault,
+			winDirectionControlAirRight,
+			windDirectionControlAirUp,
 			windDirectionControlDisabled
 		};
 	}
