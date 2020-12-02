@@ -13,8 +13,6 @@ describe('Picker', function () {
 
 			describe('5-way', function () {
 				it('should change the value forward when incrementing the picker', function () {
-					expect(picker.decrementer(picker.self).isFocused()).to.be.true();
-					Page.spotlightDown();
 					expect(picker.incrementer(picker.self).isFocused()).to.be.true();
 					Page.spotlightSelect();
 					browser.pause(500);
@@ -23,8 +21,6 @@ describe('Picker', function () {
 				});
 
 				it('should change the value backward when decrementing the picker', function () {
-					expect(picker.decrementer(picker.self).isFocused()).to.be.true();
-					Page.spotlightDown();
 					expect(picker.incrementer(picker.self).isFocused()).to.be.true();
 					Page.spotlightSelect();
 					Page.spotlightUp();
