@@ -1,6 +1,9 @@
 import React from 'react';
 import {mount} from 'enzyme';
 import Input from '../Input';
+import Spotlight from '@enact/spotlight';
+
+const isPaused = () => Spotlight.isPaused() ? 'paused' : 'not paused';
 
 describe('Input Specs', () => {
 	test('should have an input element', () => {
@@ -50,4 +53,69 @@ describe('Input Specs', () => {
 		expect(subject.find('input').prop('value')).toBe('hello');
 	});
 
+	test('should pause spotlight when input has focus', () => {
+		const subject = mount(
+			<Input />
+		);
+
+		subject.simulate('mouseDown');
+
+		const expected = 'paused';
+		const actual = isPaused();
+
+		Spotlight.resume();
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should activate input on enter', () => {
+		const node = document.body.appendChild(document.createElement('div'));
+		const handleChange = jest.fn();
+
+		const subject = mount(
+			<Input onActivate={handleChange} />,
+			{attachTo: node}
+		);
+		const input = subject.find('input');
+
+		input.simulate('keyDown', {which: 13, keyCode: 13, code: 13});
+		input.simulate('keyUp', {which: 13, keyCode: 13, code: 13});
+		node.remove();
+
+		const expected = 1;
+		const actual = handleChange.mock.calls.length;
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should pause spotlight when input has focus', () => {
+		const subject = mount(
+			<Input />
+		);
+
+		subject.simulate('mouseDown');
+
+		const expected = 'paused';
+		const actual = isPaused();
+
+		Spotlight.resume();
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should resume spotlight on unmount', () => {
+		const subject = mount(
+			<Input />
+		);
+
+		subject.simulate('mouseDown');
+		subject.unmount();
+
+		const expected = 'not paused';
+		const actual = isPaused();
+
+		Spotlight.resume();
+
+		expect(actual).toBe(expected);
+	});
 });
