@@ -1,20 +1,24 @@
+import Button from '@enact/agate/Button';
 import WindDirectionControl from '@enact/agate/WindDirectionControl';
 import React from 'react';
 
+import AriaValuetextDecorator from '../components/AriaValuetextDecorator';
 import Section from '../components/Section';
 
-import appCss from '../App/App.module.less';
+const AriaValueTextWindDirectionControl = AriaValuetextDecorator({value: 'airDown'}, WindDirectionControl);
 
 const WindDirectionControlView = () => (
 	<>
-		<Section title="Default">
+		<Section title="Default" vertical>
 			<WindDirectionControl alt="Normal">Text 0</WindDirectionControl>
 			<WindDirectionControl alt="Disabled" disabled>Text 1</WindDirectionControl>
+			<Button icon="arrowdown" />
 		</Section>
 
-		<Section className={appCss.marginTop} title="Aria-labelled">
-			<WindDirectionControl alt="Aria-labelled" aria-label="This is a Label.">Text 2</WindDirectionControl>
-			<WindDirectionControl alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled>Text 3</WindDirectionControl>
+		<Section title="Aria-ValueText" vertical>
+			<AriaValueTextWindDirectionControl alt="Aria-valuetext" aria-valuetext="This is a Label.">Text 2</AriaValueTextWindDirectionControl>
+			<AriaValueTextWindDirectionControl alt="Aria-valuetext and Disabled" aria-valuetext="This is a Label." disabled>Text 3</AriaValueTextWindDirectionControl>
+			<Button icon="arrowup" />
 		</Section>
 	</>
 );

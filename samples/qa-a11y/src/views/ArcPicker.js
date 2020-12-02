@@ -1,24 +1,30 @@
+/* eslint-disable react/jsx-no-bind */
+
 import ArcPicker from '@enact/agate/ArcPicker';
+import Button from '@enact/agate/Button';
 import React from 'react';
 
+import AriaValuetextDecorator from '../components/AriaValuetextDecorator';
 import Section from '../components/Section';
 
-import appCss from '../App/App.module.less';
+const AriaValueTextArcPicker = AriaValuetextDecorator(ArcPicker);
 
 const ArcPickerView = () => (
 	<>
-		<Section title="Default">
+		<Section title="Default" vertical>
 			<ArcPicker alt="Normal">{[1, 2, 3, 4, 5]}</ArcPicker>
 			<ArcPicker alt="With slotCenter" slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</ArcPicker>
 			<ArcPicker alt="Disabled" disabled>{[1, 2, 3, 4, 5]}</ArcPicker>
 			<ArcPicker alt="Disabled with slotCenter" disabled slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</ArcPicker>
+			<Button icon="arrowdown" />
 		</Section>
 
-		<Section className={appCss.marginTop} title="Aria-labelled">
-			<ArcPicker alt="Aria-labelled" aria-label="This is a Label.">{[1, 2, 3, 4, 5]}</ArcPicker>
-			<ArcPicker alt="Aria-labelled with slotCenter" aria-label="This is a Label." slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</ArcPicker>
-			<ArcPicker alt="Aria-labelled and Disabled" aria-label="This is a Label." disabled>{[1, 2, 3, 4, 5]}</ArcPicker>
-			<ArcPicker alt="Aria-labelled and Disabled with slotCenter" aria-label="This is a Label." disabled slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</ArcPicker>
+		<Section title="Aria-ValueText" vertical>
+			<AriaValueTextArcPicker alt="Aria-valuetext" aria-valuetext="This is a Label.">{[1, 2, 3, 4, 5]}</AriaValueTextArcPicker>
+			<AriaValueTextArcPicker alt="Aria-valuetext with slotCenter" aria-valuetext="This is a Label." slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</AriaValueTextArcPicker>
+			<AriaValueTextArcPicker alt="Aria-valuetext and Disabled" aria-valuetext="This is a Label." disabled>{[1, 2, 3, 4, 5]}</AriaValueTextArcPicker>
+			<AriaValueTextArcPicker alt="Aria-valuetext and Disabled with slotCenter" aria-valuetext="This is a Label." disabled slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</AriaValueTextArcPicker>
+			<Button icon="arrowup" />
 		</Section>
 	</>
 );

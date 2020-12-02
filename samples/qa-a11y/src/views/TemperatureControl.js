@@ -5,7 +5,7 @@ import Section from '../components/Section';
 
 const TemperatureControlView = () => (
 	<>
-		<Section title="Default">
+		<Section title="Default" vertical>
 			<TemperatureControl alt="Normal" />
 			<TemperatureControl alt="Disabled" disabled />
 		</Section>

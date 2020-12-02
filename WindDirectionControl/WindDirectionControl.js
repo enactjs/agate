@@ -11,6 +11,7 @@
  */
 
 import kind from '@enact/core/kind';
+import {extractAriaProps} from '@enact/core/util';
 import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
@@ -70,10 +71,14 @@ const WindDirectionControlBase = kind({
 		airDirectionIcon: ({value}) => (value.toLowerCase())
 	},
 
-	render: ({airDirectionIcon, onChange, value, ...rest}) => {
+	render: ({airDirectionIcon, disabled, onChange, value, ...rest}) => {
+		const ariaProps = extractAriaProps(rest);
+
 		return (
 			<div {...rest}>
 				<ArcPicker
+					{...ariaProps}
+					disabled={disabled}
 					endAngle={210}
 					onChange={onChange}
 					slotCenter={

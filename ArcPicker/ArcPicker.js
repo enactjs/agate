@@ -12,7 +12,10 @@
  * @exports ArcPickerDecorator
  */
 
+import {forward} from '@enact/core/handle';
+import {is} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
@@ -25,6 +28,9 @@ import Skinnable from '../Skinnable';
 import ArcPickerBehaviorDecorator from './ArcPickerBehaviorDecorator';
 
 import css from './ArcPicker.module.less';
+
+const isDown = is('down');
+const isUp = is('up');
 
 /**
  * An Agate component for displaying an arc picker.
@@ -155,6 +161,23 @@ const ArcPickerBase = kind({
 		className: 'arcPicker'
 	},
 
+	handlers: {
+		onKeyDown: (ev, props) => {
+			const {children, disabled, onClick, value} = props
+			const index = children.findIndex(child => child === value);
+
+			forward('onKeyDown', ev, props);
+
+			if (!disabled) {
+				if (isDown(ev.keyCode)) {
+					onClick(children[Math.max(index - 1, 0)])(ev);
+				} else if (isUp(ev.keyCode)) {
+					onClick(children[Math.min(index + 1, children.length - 1)])(ev);
+				}
+			}
+		}
+	},
+
 	computed: {
 		arcSegments: (props) => {
 			const {backgroundColor, children, endAngle, foregroundColor, onClick, radius, selectionType, startAngle, strokeWidth, value} = props;
@@ -189,7 +212,7 @@ const ArcPickerBase = kind({
 		}
 	},
 
-	render: ({arcSegments, slotCenter, ...rest}) => {
+	render: ({arcSegments, disabled, slotCenter, value, ...rest}) => {
 		delete rest.backgroundColor;
 		delete rest.children;
 		delete rest.endAngle;
@@ -197,10 +220,9 @@ const ArcPickerBase = kind({
 		delete rest.onClick;
 		delete rest.selectionType;
 		delete rest.startAngle;
-		delete rest.value;
 
 		return (
-			<div {...rest}>
+			<div aria-disabled={disabled} aria-valuetext={value} role="slider" {...rest} disabled={disabled}>
 				{arcSegments}
 				<div className={css.valueDisplay}>
 					{slotCenter}
@@ -222,6 +244,7 @@ const ArcPickerBase = kind({
 const ArcPickerDecorator = compose(
 	Changeable,
 	ArcPickerBehaviorDecorator,
+	Spottable,
 	Skinnable
 );
 

@@ -11,6 +11,7 @@
  */
 
 import kind from '@enact/core/kind';
+import {extractAriaProps} from '@enact/core/util';
 import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
 import {compose, range} from 'ramda';
@@ -102,10 +103,14 @@ const FanSpeedControlBase = kind({
 		className: ({icon, styler}) => styler.append({noIcon: !icon})
 	},
 
-	render: ({children, icon, max, min, onChange, value, ...rest}) => {
+	render: ({children, disabled, icon, max, min, onChange, value, ...rest}) => {
+		const ariaProps = extractAriaProps(rest);
+
 		return (
 			<div {...rest}>
 				<ArcPicker
+					{...ariaProps}
+					disabled={disabled}
 					endAngle={312}
 					max={max}
 					min={min}

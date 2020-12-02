@@ -10,8 +10,11 @@
  * @exports ArcSliderDecorator
  */
 
+import {forward} from '@enact/core/handle';
+import {is} from '@enact/core/keymap';
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
 import Pure from '@enact/ui/internal/Pure';
 import ri from '@enact/ui/resolution';
 import Touchable from '@enact/ui/Touchable';
@@ -27,6 +30,9 @@ import ArcSliderBehaviorDecorator from './ArcSliderBehaviorDecorator';
 import {valueToAngle} from './utils';
 
 import css from './ArcSlider.module.less';
+
+const isDown = is('down');
+const isUp = is('up');
 
 /**
  * An arc slider component.
@@ -172,6 +178,22 @@ const ArcSliderBase = kind({
 		className: 'arcSlider'
 	},
 
+	handlers: {
+		onKeyDown: (ev, props) => {
+			const {disabled, max, min, onChange, step, value} = props
+
+			forward('onKeyDown', ev, props);
+
+			if (!disabled) {
+				if (isDown(ev.keyCode)) {
+					onChange(ev, Math.max(value - step, min));
+				} else if (isUp(ev.keyCode)) {
+					onChange(ev, Math.min(value + step, max));
+				}
+			}
+		}
+	},
+
 	computed: {
 		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth),
 		style: ({radius, style}) => {
@@ -180,14 +202,14 @@ const ArcSliderBase = kind({
 		}
 	},
 
-	render: ({backgroundColor, componentRef, endAngle, foregroundColor, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}) => {
+	render: ({backgroundColor, componentRef, disabled, endAngle, foregroundColor, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}) => {
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
 		delete rest.step;
 
 		return (
-			<div {...rest}>
+			<div aria-disabled={disabled} aria-valuetext={value} role="slider" {...rest} disabled={disabled}>
 				<Arc
 					className={css.arc}
 					color={backgroundColor}
@@ -235,6 +257,7 @@ const ArcSliderDecorator = compose(
 	Pure,
 	ArcSliderBehaviorDecorator,
 	Touchable,
+	Spottable,
 	Skinnable
 );
 

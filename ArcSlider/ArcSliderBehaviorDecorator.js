@@ -176,6 +176,10 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 				}
 			}
 
+			this.handleChange(ev, value);
+		};
+
+		handleChange = (ev, value) => {
 			if (value !== this.state.value) {
 				this.setState(
 					() => ({value}),
@@ -186,6 +190,10 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 						}, this.props);
 					}
 				);
+			}
+
+			if (ev.stopPropagation) {
+				ev.stopPropagation();
 			}
 		};
 
@@ -205,6 +213,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 				<Wrapped
 					{...this.props}
 					componentRef={this.componentRef}
+					onChange={this.handleChange}
 					onDown={this.handleDown}
 					onDrag={this.handleDrag}
 					onDragStart={this.handleDragStart}

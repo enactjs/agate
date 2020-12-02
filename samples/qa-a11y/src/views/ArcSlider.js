@@ -1,24 +1,28 @@
 import ArcSlider from '@enact/agate/ArcSlider';
+import Button from '@enact/agate/Button';
 import React from 'react';
 
+import AriaValuetextDecorator from '../components/AriaValuetextDecorator';
 import Section from '../components/Section';
 
-import appCss from '../App/App.module.less';
+const AriaValueTextSlider = AriaValuetextDecorator(ArcSlider);
 
 const ArcSliderView = () => (
 	<>
-		<Section title="Default">
+		<Section title="Default" vertical>
 			<ArcSlider alt="Normal" />
-			<ArcSlider alt="With slotCenter" className={appCss.marginTop} slotCenter="Text" />
-			<ArcSlider alt="Disabled" className={appCss.marginTop} disabled />
-			<ArcSlider alt="Disabled with slotCenter" className={appCss.marginTop} disabled slotCenter="Text" />
+			<ArcSlider alt="With slotCenter" slotCenter="Text" />
+			<ArcSlider alt="Disabled" disabled />
+			<ArcSlider alt="Disabled with slotCenter" disabled slotCenter="Text" />
+			<Button icon="arrowdown" />
 		</Section>
 
-		<Section className={appCss.marginTop} title="Aria-labelled">
-			<ArcSlider alt="Aria-labelled" aria-label="This is a Label." />
-			<ArcSlider alt="Aria-labelled with slotCenter" className={appCss.marginTop} aria-label="This is a Label." slotCenter="Text" />
-			<ArcSlider alt="Aria-labelled and Disabled" className={appCss.marginTop} aria-label="This is a Label." disabled />
-			<ArcSlider alt="Aria-labelled and Disabled with slotCenter" className={appCss.marginTop} aria-label="This is a Label." disabled slotCenter="Text" />
+		<Section title="Aria-ValueText" vertical>
+			<AriaValueTextSlider alt="Aria-valuetext" aria-valuetext="This is a Label." />
+			<AriaValueTextSlider alt="Aria-valuetext with slotCenter" aria-valuetext="This is a Label." slotCenter="Text" />
+			<AriaValueTextSlider alt="Aria-valuetext and Disabled" aria-valuetext="This is a Label." disabled />
+			<AriaValueTextSlider alt="Aria-valuetext and Disabled with slotCenter" aria-valuetext="This is a Label." disabled slotCenter="Text" />
+			<Button icon="arrowup" />
 		</Section>
 	</>
 );

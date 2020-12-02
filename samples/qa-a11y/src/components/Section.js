@@ -1,4 +1,5 @@
 import kind from '@enact/core/kind';
+import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Cell, Row} from '@enact/ui/Layout';
@@ -35,7 +36,7 @@ const SectionBase = kind({
 		vertical ?
 			<Cell size={1500} {...rest}>
 				<Heading showLine>{title}</Heading>
-				<Row className={css.componentDemo}>
+				<Row className={classNames(css.componentDemo, css.vertical)}>
 					{React.Children.map(children, child => (
 						<Cell component="label" size="20%">
 							<div>{child.props.alt}</div>
