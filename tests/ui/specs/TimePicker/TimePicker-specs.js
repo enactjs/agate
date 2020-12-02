@@ -12,11 +12,21 @@ describe('TimePicker', function () {
 			const timePicker = Page.components.timePickerDefault;
 
 			it('should have hour-minute-meridiem order', function () {
-				browser.waitUntil(() => timePicker.decrementer(timePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'hour focused'});
-				Page.spotlightRight();
-				browser.waitUntil(() => timePicker.decrementer(timePicker.minute).isFocused(), {timeout: 1500,  timeoutMsg: 'minute focused'});
-				Page.spotlightRight();
-				browser.waitUntil(() => timePicker.decrementer(timePicker.meridiem).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem focused'});
+				const {meridiem} = extractValues(timePicker);
+				if (meridiem === 'AM') {
+					Page.spotlightDown();
+					browser.waitUntil(() => timePicker.incrementer(timePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'hour focused'});
+					Page.spotlightRight();
+					browser.waitUntil(() => timePicker.incrementer(timePicker.minute).isFocused(), {timeout: 1500,  timeoutMsg: 'minute focused'});
+					Page.spotlightRight();
+					browser.waitUntil(() => timePicker.incrementer(timePicker.meridiem).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem focused'});
+				} else {
+					browser.waitUntil(() => timePicker.decrementer(timePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'hour focused'});
+					Page.spotlightRight();
+					browser.waitUntil(() => timePicker.decrementer(timePicker.minute).isFocused(), {timeout: 1500,  timeoutMsg: 'minute focused'});
+					Page.spotlightRight();
+					browser.waitUntil(() => timePicker.decrementer(timePicker.meridiem).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem focused'});
+				}
 			});
 
 			describe('5-way', function () {
@@ -61,23 +71,20 @@ describe('TimePicker', function () {
 					expect(value).to.equal(expected);
 				});
 
-				it('should not change displayed hour when decrementing the meridiem picker', function () {
-					const {hour} = extractValues(timePicker);
-					Page.spotlightRight();
-					Page.spotlightRight();
-					browser.waitUntil(() => timePicker.decrementer(timePicker.meridiem).isFocused(), {timeout: 1500,  interval: 100});
-					Page.spotlightSelect();
-
-					const {hour: value} = extractValues(timePicker);
-					expect(value).to.equal(hour);
-				});
-
-				it('should not change displayed hour when incrementing the meridiem picker', function () {
-					const {hour} = extractValues(timePicker);
-					Page.spotlightRight();
-					Page.spotlightRight();
-					Page.spotlightDown();
-					browser.waitUntil(() => timePicker.incrementer(timePicker.meridiem).isFocused(), {timeout: 1500,  interval: 100});
+				it('should not change displayed hour when changing the meridiem picker', function () {
+					const {hour, meridiem} = extractValues(timePicker);
+					if (meridiem === 'AM') {
+						// change to PM
+						Page.spotlightDown();
+						Page.spotlightRight();
+						Page.spotlightRight();
+						browser.waitUntil(() => timePicker.incrementer(timePicker.meridiem).isFocused(), {timeout: 1500,  interval: 100});
+					} else {
+						// change to AM
+						Page.spotlightRight();
+						Page.spotlightRight();
+						browser.waitUntil(() => timePicker.decrementer(timePicker.meridiem).isFocused(), {timeout: 1500,  interval: 100});
+					}
 					Page.spotlightSelect();
 
 					const {hour: value} = extractValues(timePicker);
@@ -214,8 +221,13 @@ describe('TimePicker', function () {
 				timePicker.decrementer(timePicker.hour).click();
 				expect(timePicker.decrementer(timePicker.hour).isFocused()).to.be.true();
 
-				timePicker.decrementer(timePicker.meridiem).click();
-				expect(timePicker.decrementer(timePicker.meridiem).isFocused()).to.be.true();
+				if (meridiem === 'AM') {
+					timePicker.incrementer(timePicker.meridiem).click();
+					expect(timePicker.incrementer(timePicker.meridiem).isFocused()).to.be.true();
+				} else {
+					timePicker.decrementer(timePicker.meridiem).click();
+					expect(timePicker.decrementer(timePicker.meridiem).isFocused()).to.be.true();
+				}
 
 				browser.pause(500);
 				expect(hour).to.equal(12);
@@ -238,13 +250,27 @@ describe('TimePicker', function () {
 		});
 
 		it('should have minute-hour-meridiem order', function () {
-			browser.waitUntil(() => timePicker.decrementer(timePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'initial', interval: 100});
-			Page.spotlightRight();
-			browser.waitUntil(() => timePicker.decrementer(timePicker.minute).isFocused(), {timeout: 1500,  timeoutMsg: 'minute', interval: 100});
-			Page.spotlightLeft();
-			browser.waitUntil(() => timePicker.decrementer(timePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'hour', interval: 100});
-			Page.spotlightLeft();
-			browser.waitUntil(() => timePicker.decrementer(timePicker.meridiem).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem', interval: 100});
+			const {meridiem} = extractValues(timePicker);
+			if (meridiem === 'ص') {
+				Page.spotlightDown();
+				browser.waitUntil(() => timePicker.incrementer(timePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'initial', interval: 100});
+				Page.spotlightRight();
+				browser.waitUntil(() => timePicker.incrementer(timePicker.minute).isFocused(), {timeout: 1500,  timeoutMsg: 'minute', interval: 100});
+				Page.spotlightLeft();
+				browser.waitUntil(() => timePicker.incrementer(timePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'hour', interval: 100});
+				Page.spotlightLeft();
+				browser.waitUntil(() => timePicker.incrementer(timePicker.meridiem).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem', interval: 100});
+			} else {
+				browser.waitUntil(() => timePicker.decrementer(timePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'initial', interval: 100});
+				Page.spotlightRight();
+				browser.waitUntil(() => timePicker.decrementer(timePicker.minute).isFocused(), {timeout: 1500,  timeoutMsg: 'minute', interval: 100});
+				Page.spotlightLeft();
+				browser.waitUntil(() => timePicker.decrementer(timePicker.hour).isFocused(), {timeout: 1500,  timeoutMsg: 'hour', interval: 100});
+				Page.spotlightLeft();
+				browser.waitUntil(() => timePicker.decrementer(timePicker.meridiem).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem', interval: 100});
+			}
+
+
 		});
 	});
 
