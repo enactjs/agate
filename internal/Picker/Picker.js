@@ -555,7 +555,7 @@ const PickerBase = kind({
 							handleDecrement(); setTimeout(() => handleDecrement(), transitionDuration);
 						}}
 						onSpotlightDisappear={onSpotlightDisappear}
-						spotlightDisabled={spotlightDisabled}
+						spotlightDisabled={spotlightDisabled || secondaryDecrementValue() === ''}
 					>
 						<ViewManager
 							aria-hidden
@@ -578,7 +578,7 @@ const PickerBase = kind({
 					disabled={disabled || isFirst}
 					onClick={decrementValue() === '' ? () => {} : handleDecrement}
 					onSpotlightDisappear={onSpotlightDisappear}
-					spotlightDisabled={spotlightDisabled}
+					spotlightDisabled={spotlightDisabled || decrementValue() === ''}
 				>
 					<ViewManager
 						aria-hidden
@@ -620,7 +620,7 @@ const PickerBase = kind({
 					disabled={disabled || isLast}
 					onClick={incrementValue() === '' ? () => {} : handleIncrement}
 					onSpotlightDisappear={onSpotlightDisappear}
-					spotlightDisabled={spotlightDisabled}
+					spotlightDisabled={spotlightDisabled || incrementValue() === ''}
 				>
 					<ViewManager
 						aria-hidden
@@ -641,11 +641,11 @@ const PickerBase = kind({
 						aria-label={incrementAriaLabel}
 						className={css.secondaryItemIncrement}
 						disabled={disabled || isPenultimate}
-						onSpotlightDisappear={onSpotlightDisappear}
-						spotlightDisabled={spotlightDisabled}
 						onClick={secondaryIncrementValue() === '' ? () => {} : () => {
 							handleIncrement(); setTimeout(() => handleIncrement(), transitionDuration);
 						}}
+						onSpotlightDisappear={onSpotlightDisappear}
+						spotlightDisabled={spotlightDisabled || secondaryIncrementValue() === ''}
 					>
 						<ViewManager
 							aria-hidden
