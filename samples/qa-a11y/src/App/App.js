@@ -1,5 +1,6 @@
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import Item from '@enact/agate/Item';
+import Scroller from '@enact/agate/Scroller';
 import ThemeDecorator from '@enact/agate/ThemeDecorator';
 import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
@@ -41,7 +42,7 @@ import ProgressBar from '../views/ProgressBar';
 import RadioItem from '../views/RadioItem';
 import RangePicker from '../views/RangePicker';
 import ReadAlert from '../views/ReadAlert';
-import Scroller from '../views/Scroller';
+import ScrollerView from '../views/Scroller';
 import Slider from '../views/Slider';
 import SliderButton from '../views/SliderButton';
 import Spinner from '../views/Spinner';
@@ -96,7 +97,7 @@ const views = [
 	{title: 'RadioItem', view: RadioItem},
 	{title: 'RangePicker', view: RangePicker},
 	{title: 'ReadAlert', view: ReadAlert},
-	{isHeader: false, title: 'Scroller', view: Scroller},
+	{isHeader: false, title: 'Scroller', view: ScrollerView},
 	{title: 'Slider', view: Slider},
 	{title: 'SliderButton', view: SliderButton},
 	{title: 'Spinner', view: Spinner},
@@ -172,6 +173,18 @@ class AppBase extends React.Component {
 		const {className, ...rest} = this.props;
 		const {isDebugMode, jumpToView, selected} = this.state;
 		const debugAriaClass = isDebugMode ? 'aria debug' : null;
+		const menu = views.map((view, i) => (
+			<Item
+				aria-label={view.title}
+				className={appCss.navItem}
+				data-menu={i}
+				key={i}
+				onClick={this.handleChangeView(i)}
+				slotBefore={('00' + i).slice(-2)}
+			>
+				{view.title}
+			</Item>
+		));
 
 		delete rest.rtl;
 		delete rest.updateLocale;
@@ -180,19 +193,10 @@ class AppBase extends React.Component {
 			<div className={classnames(className, debugAriaClass, appCss.app)}>
 				<Layout {...rest} className={appCss.layout}>
 					<Cell component={Menu} id="menu" size="20%" spotlightId="menu">
-						<div className={appCss.jumpToView}>Jump To, View: {jumpToView}</div>
-						{views.map((view, i) => (
-							<Item
-								aria-label={view.title}
-								className={appCss.navItem}
-								data-menu={i}
-								key={i}
-								onClick={this.handleChangeView(i)}
-								slotBefore={('00' + i).slice(-2)}
-							>
-								{view.title}
-							</Item>
-						))}
+						<div className={appCss.jumpToView}>Jump To View: {jumpToView}</div>
+						<Scroller className={appCss.scroller}>
+							{menu}
+						</Scroller>
 					</Cell>
 					<Cell component={ViewManager} index={selected}>
 						{views.map((view, i) => (
