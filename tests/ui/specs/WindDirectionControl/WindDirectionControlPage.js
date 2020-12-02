@@ -1,5 +1,5 @@
 'use strict';
-const {Page} = require('@enact/ui-test-utils/utils');
+const {getText, Page} = require('@enact/ui-test-utils/utils');
 
 class WindDirectionControlInterface {
 	constructor (id) {
@@ -13,6 +13,10 @@ class WindDirectionControlInterface {
 
 	clickablePath (index) {
 		return $(this.selector + ' .ArcPicker_ArcPicker_arc:nth-child(' + index + ') path:nth-child(2)');
+	}
+
+	iconValue () {
+		return  getText($(this.selector + ' .ArcPicker_ArcPicker_valueDisplay>div')).codePointAt();
 	}
 }
 
