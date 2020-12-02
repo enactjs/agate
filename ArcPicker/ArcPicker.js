@@ -65,6 +65,14 @@ const ArcPickerBase = kind({
 		backgroundColor: PropTypes.string,
 
 		/**
+		 * Whether or not the component is in a disabled state.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
+		/**
 		 * The end angle(in degrees) of the arc.
 		 *
 		 * The value should be between 0 and 360 and should be greater than startAngle.
@@ -163,7 +171,7 @@ const ArcPickerBase = kind({
 
 	handlers: {
 		onKeyDown: (ev, props) => {
-			const {children, disabled, onClick, value} = props
+			const {children, disabled, onClick, value} = props;
 			const index = children.findIndex(child => child === value);
 
 			forward('onKeyDown', ev, props);
@@ -222,6 +230,7 @@ const ArcPickerBase = kind({
 		delete rest.startAngle;
 
 		return (
+			// eslint-disable-next-line jsx-a11y/role-has-required-aria-props
 			<div aria-disabled={disabled} aria-valuetext={value} role="slider" {...rest} disabled={disabled}>
 				{arcSegments}
 				<div className={css.valueDisplay}>

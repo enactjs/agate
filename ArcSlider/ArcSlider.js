@@ -67,6 +67,14 @@ const ArcSliderBase = kind({
 		componentRef: EnactPropTypes.ref,
 
 		/**
+		 * Whether or not the component is in a disabled state.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
+		/**
 		 * The end angle(in degrees) of the arc slider.
 		 *
 		 * The value should be between 0 and 360 and should be greater than startAngle.
@@ -103,6 +111,14 @@ const ArcSliderBase = kind({
 		 * @public
 		 */
 		min: PropTypes.number,
+
+		/**
+		 * Called when value is changed.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onChange: PropTypes.func,
 
 		/**
 		 * The radius of the arc circle.
@@ -180,7 +196,7 @@ const ArcSliderBase = kind({
 
 	handlers: {
 		onKeyDown: (ev, props) => {
-			const {disabled, max, min, onChange, step, value} = props
+			const {disabled, max, min, onChange, step, value} = props;
 
 			forward('onKeyDown', ev, props);
 
@@ -209,6 +225,7 @@ const ArcSliderBase = kind({
 		delete rest.step;
 
 		return (
+			// eslint-disable-next-line jsx-a11y/role-has-required-aria-props
 			<div aria-disabled={disabled} aria-valuetext={value} role="slider" {...rest} disabled={disabled}>
 				<Arc
 					className={css.arc}
