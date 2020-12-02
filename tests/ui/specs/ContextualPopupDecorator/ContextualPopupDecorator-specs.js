@@ -16,14 +16,11 @@ describe('ContextualPopupDecorator', function () {
 		});
 
 		describe('using 5-way', function () {
-			// The menu is open and the first item has focus
-			beforeEach(function () {
-				Page.spotlightSelect();
-			});
 
 			it('should have Spotlight on button when ContextualPopup1 opens', function () {
 				let popupButton = $('#popupButton1');
 
+				Page.spotlightSelect();
 				expect(popupButton.isFocused()).to.be.true();
 			});
 
