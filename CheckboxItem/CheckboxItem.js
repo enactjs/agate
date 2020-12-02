@@ -133,10 +133,6 @@ const CheckboxItemBase = kind({
 		slotBefore: PropTypes.node
 	},
 
-	defaultProps: {
-		icon: 'check'
-	},
-
 	styles: {
 		css: componentCss,
 		className: 'checkboxItem',
