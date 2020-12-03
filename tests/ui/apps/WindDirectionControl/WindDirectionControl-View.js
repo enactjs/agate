@@ -13,21 +13,21 @@ spotlight.setPointerMode(false);
 const app = (props) => <div {...props}>
 	<Scroller style={{height: ri.scaleToRem(900)}}>
 		<div>
-			<Heading>Default</Heading>
+			<Heading>WindDirectionControl Default</Heading>
 			<WindDirectionControl
 				id="windDirectionControl1"
 			/>
-			<Heading>Air Right</Heading>
+			<Heading>WindDirectionControl Air Right</Heading>
 			<WindDirectionControl
 				id="windDirectionControl2"
 				value="airRight"
 			/>
-			<Heading>Air Up</Heading>
+			<Heading>WindDirectionControl Air Up</Heading>
 			<WindDirectionControl
 				id="windDirectionControl3"
 				value="airUp"
 			/>
-			<Heading>Disabled</Heading>
+			<Heading>WindDirectionControl Disabled</Heading>
 			<WindDirectionControl
 				id="windDirectionControl4"
 				disabled

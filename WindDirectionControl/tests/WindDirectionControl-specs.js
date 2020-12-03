@@ -29,7 +29,7 @@ describe('WindDirectionControl Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should chnage value when clicking on the first arc segment', () => {
+	test('should change value when clicking on the first arc segment', () => {
 		const handleChange = jest.fn();
 		// initiate WindDirectionControl with second arc selected
 		const windDirectionControl = mount(
