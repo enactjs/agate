@@ -1,3 +1,4 @@
+import Heading from '../../../../Heading';
 import FanSpeedControl from '../../../../FanSpeedControl';
 import ThemeDecorator from '../../../../ThemeDecorator';
 import React from 'react';
@@ -9,10 +10,20 @@ spotlight.setPointerMode(false);
 
 const app = (props) => <div {...props}>
 	<div>
+		<Heading>FanSpeedControl Default</Heading>
 		<FanSpeedControl
-			min={1}
-			max={10}
+			id="fanSpeedControlDefault"
 			icon="fan"
+			max={10}
+			min={1}
+		/>
+		<Heading>FanSpeedControl Disabled</Heading>
+		<FanSpeedControl
+			id="fanSpeedControlDisabled"
+			disabled
+			icon="fan"
+			max={10}
+			min={1}
 		/>
 	</div>
 </div>;
