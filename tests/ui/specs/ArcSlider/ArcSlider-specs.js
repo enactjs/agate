@@ -14,16 +14,16 @@ describe('ArcSlider', function () {
 			const originalCy = arcSlider.circle.getCSSProperty('cy').value;
 
 			arcSlider.self.click({x: 5, y: -10});
-			const Cx1 = arcSlider.circle.getCSSProperty('cx').value;
-			const Cy1 = arcSlider.circle.getCSSProperty('cy').value;
-			expect(Cx1 !== originalCx).to.be.true();
-			expect(Cy1 !== originalCy).to.be.true();
+			const cx1 = arcSlider.circle.getCSSProperty('cx').value;
+			const cy1 = arcSlider.circle.getCSSProperty('cy').value;
+			expect(cx1 !== originalCx).to.be.true();
+			expect(cy1 !== originalCy).to.be.true();
 
 			arcSlider.self.click({x: -15, y: -20});
-			const Cx2 = arcSlider.circle.getCSSProperty('cx').value;
-			const Cy2 = arcSlider.circle.getCSSProperty('cy').value;
-			expect(Cx2 !== Cx1).to.be.true();
-			expect(Cy2 !== Cy1).to.be.true();
+			const cx2 = arcSlider.circle.getCSSProperty('cx').value;
+			const cy2 = arcSlider.circle.getCSSProperty('cy').value;
+			expect(cx2 !== cx1).to.be.true();
+			expect(cy2 !== cy1).to.be.true();
 		});
 
 		it('should have default foregroundColor', function () {
