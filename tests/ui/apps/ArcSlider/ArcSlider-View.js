@@ -12,6 +12,8 @@ const app = (props) => <div {...props}>
 	<div>
 		<Heading>ArcSlider default</Heading>
 		<ArcSlider id="arcSliderDefault" />
+		<Heading>ArcSlider custom min, max, endAngle, startAngle</Heading>
+		<ArcSlider endAngle={350} foregroundColor="#fdc902" min={0} max={2} startAngle={10} id="arcSliderCustom" />
 		<Heading>ArcSlider disabled</Heading>
 		<ArcSlider disabled id="arcSliderDisabled" />
 	</div>

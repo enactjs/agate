@@ -7,8 +7,12 @@ class ArcSliderInterface {
 		this.selector = `#${this.id}`;
 	}
 
-	circle () {
+	get circle () {
 		return $(this.selector + ' .ArcSlider_ArcSlider_arc:nth-child(2) circle');
+	}
+
+	coloredPath (index) {
+		return $(this.selector + ' .ArcSlider_ArcSlider_arc:nth-child(' + index + ') path:first-child');
 	}
 
 	get self () {
@@ -21,8 +25,9 @@ class ArcSliderPage extends Page {
 		super();
 		this.title = 'ArcSlider Test';
 		const arcSliderDefault = new ArcSliderInterface('arcSliderDefault');
+		const arcSliderCustom = new ArcSliderInterface('arcSliderCustom');
 		const arcSliderDisabled = new ArcSliderInterface('arcSliderDisabled');
-		this.components = {arcSliderDefault, arcSliderDisabled};
+		this.components = {arcSliderDefault, arcSliderCustom, arcSliderDisabled};
 	}
 
 	open (urlExtra) {
