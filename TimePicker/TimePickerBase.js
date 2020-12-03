@@ -196,12 +196,29 @@ const TimePickerBase = kind({
 		onMinuteChange: PropTypes.func,
 
 		/**
+		 * Called when the component is removed while retaining focus.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightDisappear: PropTypes.func,
+
+		/**
 		 * Set content to RTL.
 		 *
 		 * @type {Boolean}
 		 * @private
 		 */
-		rtl: PropTypes.bool
+		rtl: PropTypes.bool,
+
+		/**
+		 * Disables 5-way spotlight from navigating into the component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		spotlightDisabled: PropTypes.bool
 	},
 
 	defaultProps: {
@@ -233,7 +250,9 @@ const TimePickerBase = kind({
 		onHourChange,
 		onMeridiemChange,
 		onMinuteChange,
+		onSpotlightDisappear,
 		order,
+		spotlightDisabled,
 		...rest
 	}) => {
 		const hourAccessibilityHint = $L('hour');
@@ -256,8 +275,11 @@ const TimePickerBase = kind({
 										disabled={disabled}
 										hasMeridiem={hasMeridiem}
 										onChange={onHourChange}
+										onSpotlightDisappear={onSpotlightDisappear}
+										spotlightDisabled={spotlightDisabled}
 										value={hour}
 										width={2}
+										wrap
 									/>
 								</React.Fragment>
 							);
@@ -272,8 +294,11 @@ const TimePickerBase = kind({
 									max={59}
 									min={0}
 									onChange={onMinuteChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									spotlightDisabled={spotlightDisabled}
 									value={minute}
 									width={2}
+									wrap
 								/>
 							);
 						case 'a':
@@ -285,6 +310,8 @@ const TimePickerBase = kind({
 									disabled={disabled}
 									key="meridiem-picker"
 									onChange={onMeridiemChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									spotlightDisabled={spotlightDisabled}
 									value={meridiem}
 									width={meridiemPickerWidth}
 								>

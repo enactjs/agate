@@ -51,6 +51,23 @@ const DateTimePickerBase = kind({
 		onChange: PropTypes.func,
 
 		/**
+		 * Called when the component is removed when it had focus.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightDisappear: PropTypes.func,
+
+		/**
+		 * Disables 5-way spotlight from navigating into the component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		spotlightDisabled: PropTypes.bool,
+
+		/**
 		 * The value of the DateTimePicker.
 		 *
 		 * @type {String}
@@ -64,15 +81,15 @@ const DateTimePickerBase = kind({
 		className: 'dateTimePicker'
 	},
 
-	render ({disabled, onChange, value, ...rest}) {
+	render ({disabled, onChange, onSpotlightDisappear, spotlightDisabled, value, ...rest}) {
 
 		return (
 			<Row {...rest} className={css.dateTimePicker} align="center center">
 				<Row align="center center">
-					<TimePicker css={css} disabled={disabled} onChange={onChange} value={value} />
+					<TimePicker css={css} disabled={disabled} onChange={onChange} onSpotlightDisappear={onSpotlightDisappear} spotlightDisabled={spotlightDisabled} value={value} />
 				</Row>
 				<Row align="center center">
-					<DatePicker css={css} disabled={disabled} onChange={onChange} value={value} />
+					<DatePicker css={css} disabled={disabled} onChange={onChange} onSpotlightDisappear={onSpotlightDisappear} spotlightDisabled={spotlightDisabled} value={value} />
 				</Row>
 			</Row>
 		);
