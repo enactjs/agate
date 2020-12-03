@@ -15,7 +15,7 @@ class ButtonInterface {
 		return $(this.selector);
 	}
 	get isOpen () {
-		return $(`.ContextualPopupDecorator_ContextualPopup_container`).isExisting();
+		return $('.ContextualPopupDecorator_ContextualPopup_container').isExisting();
 	}
 
 }
