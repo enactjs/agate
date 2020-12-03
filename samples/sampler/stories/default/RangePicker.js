@@ -18,9 +18,12 @@ storiesOf('Agate', module)
 				disabled={boolean('disabled', Config)}
 				max={number('max', Config, 20)}
 				min={number('min', Config, 0)}
+				noAnimation={boolean('noAnimation', Config)}
 				onChange={action('onChange')}
 				orientation={select('orientation', ['vertical', 'horizontal'], Config)}
+				spotlightDisabled={boolean('spotlightDisabled', Config)}
 				step={number('step', Config)}
+				wrap={boolean('wrap', Config)}
 			/>
 		),
 		{

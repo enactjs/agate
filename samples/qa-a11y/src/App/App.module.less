@@ -16,11 +16,12 @@ h2 {
 }
 
 .jumpToView {
-	position: absolute;
-	bottom: 0;
-	z-index: 1;
 	height: 60px;
 	font-size: 36px;
+}
+
+.scroller {
+	height: calc(100% - 60px)
 }
 
 .layout {
@@ -28,13 +29,16 @@ h2 {
 }
 
 .navItem {
-	height: 60px;
+	height: 36px;
+	margin: 0;
+
 	& > div {
-		font-size: 24px;
+		font-size: 21px;
 	}
 
-	.slotBefore {
-		width: 40px;
+	& > div:first-child {
+		position: absolute;
+		left: 1px;
 	}
 }
 

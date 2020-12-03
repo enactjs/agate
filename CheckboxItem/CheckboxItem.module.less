@@ -12,12 +12,21 @@
 		border-color: @agate-checkboxitem-border-color;
 		font-size: @agate-checkboxitem-font-size;
 
+		&.selected {
+			border-color: @agate-checkboxitem-selected-border-color;
+			&::before {
+				content: none; // Overwrite the selected styles for Item
+			}
+		}
+
 		.slotAfter {
 			-webkit-margin-start: @agate-checkboxitem-icon-margin;
 			-webkit-margin-end: 0;
 		}
 
 		.slotBefore {
+			display: flex;
+			align-items: center;
 			-webkit-margin-start: 0;
 			-webkit-margin-end: @agate-checkboxitem-icon-margin;
 		}
