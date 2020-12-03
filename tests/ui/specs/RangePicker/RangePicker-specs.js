@@ -13,8 +13,6 @@ describe('RangePicker', function () {
 
 			describe('5-way', function () {
 				it('should change the value forward when incrementing the rangePicker', function () {
-					expect(rangePicker.decrementer(rangePicker.self).isFocused()).to.be.true();
-					Page.spotlightDown();
 					expect(rangePicker.incrementer(rangePicker.self).isFocused()).to.be.true();
 					Page.spotlightSelect();
 					browser.pause(500);
@@ -23,8 +21,6 @@ describe('RangePicker', function () {
 				});
 
 				it('should change the value backward when decrementing the rangePicker', function () {
-					expect(rangePicker.decrementer(rangePicker.self).isFocused()).to.be.true();
-					Page.spotlightDown();
 					expect(rangePicker.incrementer(rangePicker.self).isFocused()).to.be.true();
 					Page.spotlightSelect();
 					Page.spotlightUp();
