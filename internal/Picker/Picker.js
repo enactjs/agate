@@ -31,10 +31,20 @@ import css from './Picker.module.less';
 const PickerRoot = Touchable('div');
 const PickerButtonItem = Spottable('div');
 
+const wrapRange = (min, max, value) => {
+	if (value > max) {
+		return min + (value - max - 1);
+	} else if (value < min) {
+		return max - (min - value - 1);
+	} else {
+		return value;
+	}
+};
+
 const handleChange = direction => handle(
 	adaptEvent(
-		(ev, {min, max, step, value}) => ({
-			value: clamp(min, max, value + (direction * step)),
+		(ev, {min, max, step, value, wrap}) => ({
+			value: wrap ? wrapRange(min, max, value + (direction * step)) :  clamp(min, max, value + (direction * step)),
 			reverseTransition: direction < 0
 		}),
 		forward('onChange')
@@ -99,6 +109,19 @@ const PickerBase = kind({
 		 * @public
 		 */
 		accessibilityHint: PropTypes.string,
+
+		/**
+		 * The "aria-label" for the picker.
+		 *
+		 * By default, `aria-valuetext` is set to the current value.
+		 * This should only be used when the parent controls the value of
+		 * the picker directly through the props.
+		 *
+		 * @type {String}
+		 * @memberof agate/internal/Picker.PickerBase.prototype
+		 * @public
+		 */
+		'aria-label': PropTypes.string,
 
 		/**
 		 * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
@@ -188,6 +211,14 @@ const PickerBase = kind({
 		onChange: PropTypes.func,
 
 		/**
+		 * A function to run when the picker is removed while retaining focus.
+		 *
+		 * @type {Function}
+		 * @private
+		 */
+		onSpotlightDisappear: PropTypes.func,
+
+		/**
 		 * Orientation of the picker.
 		 *
 		 * Controls whether the buttons are arranged horizontally or vertically around the value.
@@ -204,7 +235,6 @@ const PickerBase = kind({
 		 * When it's `true` it changes the direction of the transition animation.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		reverseTransition: PropTypes.bool,
@@ -218,6 +248,14 @@ const PickerBase = kind({
 		skin: PropTypes.string,
 
 		/**
+		 * When `true`, the component cannot be navigated using spotlight.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		spotlightDisabled: PropTypes.bool,
+
+		/**
 		 * Allow the picker to only increment or decrement by a given value.
 		 *
 		 * A step of `2` would cause a picker to increment from 10 to 12 to 14, etc. It must evenly
@@ -228,6 +266,25 @@ const PickerBase = kind({
 		 * @public
 		 */
 		step: PropTypes.number,
+
+		/**
+		 * The type of picker. It determines the aria-label for the next and previous buttons.
+		 *
+		 * Depending on the `type`, `decrementAriaLabel`, and `incrementAriaLabel`,
+		 * the screen readers read out differently when Spotlight is on the next button, the previous button,
+		 * or the picker itself.
+		 *
+		 * For example, if Spotlight is on the next button
+		 * and aria label props(`decrementAriaLabel` and `incrementAriaLabel`) are not defined,
+		 * then the screen readers read out as follows.
+		 *	`'string'` type: `'next item'`
+		 * 	`'number'` type: `'increase the value'`
+		 *
+		 * @type {('number'|'string')}
+		 * @default 'string'
+		 * @public
+		 */
+		type: PropTypes.oneOf(['number', 'string']),
 
 		/**
 		 * Index of the selected child.
@@ -253,13 +310,23 @@ const PickerBase = kind({
 		width: PropTypes.oneOfType([
 			PropTypes.oneOf([null, 'small', 'medium', 'large']),
 			PropTypes.number
-		])
+		]),
+
+		/**
+		 * Should the picker stop incrementing when the picker reaches the last element? Set `wrap`
+		 * to `true` to allow the picker to continue from the opposite end of the list of options.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		wrap: PropTypes.bool
 	},
 
 	defaultProps: {
 		accessibilityHint: '',
 		orientation: 'vertical',
 		step: 1,
+		type: 'string',
 		value: 0
 	},
 
@@ -284,7 +351,21 @@ const PickerBase = kind({
 
 	computed: {
 		activeClassName: ({styler}) => styler.join('active', 'item'),
+		'aria-label': ({'aria-label': ariaLabel, 'aria-valuetext': valueText}) => {
+			if (ariaLabel != null) {
+				return ariaLabel;
+			}
+
+			return valueText;
+		},
 		className: ({orientation, styler}) => styler.append(orientation),
+		currentItemIndex: ({children: values, index, max, min, wrap}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index);
+				} else return index;
+			} else return 0;
+		},
 		currentValueText: ({accessibilityHint, 'aria-valuetext': ariaValueText, children, value}) => {
 			if (ariaValueText != null) {
 				return ariaValueText;
@@ -306,37 +387,92 @@ const PickerBase = kind({
 
 			return valueText;
 		},
-		decrementAriaLabel: ({decrementAriaLabel = $L('previous item')}) => decrementAriaLabel,
-		incrementAriaLabel: ({incrementAriaLabel = $L('next item')}) => incrementAriaLabel,
+		decrementAriaLabel: ({decrementAriaLabel, type}) => {
+			if (decrementAriaLabel != null) {
+				return decrementAriaLabel;
+			}
+
+			if (type === 'number') {
+				return `${$L('decrease the value')}`;
+			} else {
+				return `${$L('previous item')}`;
+			}
+		},
+		decrementItemIndex: ({children: values, index, max, min, wrap}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index - 1);
+				} else return index - 1;
+			} else return 0;
+		},
+		incrementAriaLabel: ({incrementAriaLabel, type}) => {
+			if (incrementAriaLabel != null) {
+				return incrementAriaLabel;
+			}
+
+			if (type === 'number') {
+				return `${$L('increase the value')}`;
+			} else {
+				return `${$L('next item')}`;
+			}
+		},
+		incrementItemIndex: ({children: values, index, max, min, wrap}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index + 1);
+				} else return index + 1;
+			} else return 0;
+		},
+		secondaryDecrementItemIndex: ({children: values, index, max, min, wrap}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index - 2);
+				} else return index - 2;
+			} else return 0;
+		},
+		secondaryIncrementItemIndex: ({children: values, index, max, min, wrap}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index + 2);
+				} else return index + 2;
+			} else return 0;
+		},
 		valueId: ({id}) => `${id}_value`
 	},
 
 	render: (props) => {
 		const {
 			activeClassName,
+			'aria-label': ariaLabel,
 			children: values,
+			currentItemIndex,
 			currentValueText,
 			decrementAriaLabel: decAriaLabel,
+			decrementItemIndex,
 			disabled,
 			handleDecrement,
 			handleFlick,
 			handleIncrement,
 			incrementAriaLabel: incAriaLabel,
-			index,
+			incrementItemIndex,
 			min,
 			max,
 			noAnimation,
+			onSpotlightDisappear,
 			orientation,
 			reverseTransition,
+			secondaryDecrementItemIndex,
+			secondaryIncrementItemIndex,
 			skin,
+			spotlightDisabled,
 			step,
 			value,
 			valueId,
 			width,
+			wrap,
 			...rest
 		} = props;
 
-		const currentValue = Array.isArray(values) ? values[value] : value;
 		const isFirst = value <= min;
 		const isLast = value >= max;
 		const isSecond = value <= min + step;
@@ -346,8 +482,8 @@ const PickerBase = kind({
 		const transitionDuration = 150;
 
 		const decrementValue = () => {
-			const restrictedDecrementValue = clamp(min, max, value - step);
-			if (isFirst) {
+			const restrictedDecrementValue = wrap ? wrapRange(min, max, value - step) : clamp(min, max, value - step);
+			if (isFirst && !wrap) {
 				return '';
 			} else if (Array.isArray(values)) {
 				return values;
@@ -357,8 +493,8 @@ const PickerBase = kind({
 		};
 
 		const incrementValue = () => {
-			const restrictedIncrementValue = clamp(min, max, value + step);
-			if (isLast) {
+			const restrictedIncrementValue = wrap ? wrapRange(min, max, value + step) : clamp(min, max, value + step);
+			if (isLast && !wrap) {
 				return '';
 			} else if (Array.isArray(values)) {
 				return values;
@@ -368,8 +504,8 @@ const PickerBase = kind({
 		};
 
 		const secondaryDecrementValue = () => {
-			const restrictedSecondaryDecrementValue = clamp(min, max, value - (2 * step));
-			if (isSecond) {
+			const restrictedSecondaryDecrementValue = wrap ? wrapRange(min, max, value - (2 * step)) : clamp(min, max, value - (2 * step));
+			if (isSecond && !wrap) {
 				return '';
 			} else if (Array.isArray(values)) {
 				return values;
@@ -379,8 +515,8 @@ const PickerBase = kind({
 		};
 
 		const secondaryIncrementValue = () => {
-			const restrictedSecondaryIncrementValue = clamp(min, max, value + (2 * step));
-			if (isPenultimate) {
+			const restrictedSecondaryIncrementValue = wrap ? wrapRange(min, max, value + (2 * step)) : clamp(min, max, value + (2 * step));
+			if (isPenultimate && !wrap) {
 				return '';
 			} else if (Array.isArray(values)) {
 				return values;
@@ -399,7 +535,12 @@ const PickerBase = kind({
 
 		delete rest['aria-valuetext'];
 		delete rest.accessibilityHint;
+		delete rest.decrementAriaLabel;
+		delete rest.incrementAriaLabel;
+		delete rest.noAnimation;
+		delete rest.onChange;
 		delete rest.orientation;
+		delete rest.wrap;
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
@@ -409,17 +550,19 @@ const PickerBase = kind({
 						aria-disabled={isSecond}
 						aria-label={decrementAriaLabel}
 						className={css.secondaryItemDecrement}
-						disabled={isSecond}
-						onClick={() => {
+						disabled={disabled || isSecond}
+						onClick={secondaryDecrementValue() === '' ? () => {} : () => {
 							handleDecrement(); setTimeout(() => handleDecrement(), transitionDuration);
 						}}
+						onSpotlightDisappear={onSpotlightDisappear}
+						spotlightDisabled={spotlightDisabled || secondaryDecrementValue() === ''}
 					>
 						<ViewManager
 							aria-hidden
 							arranger={arranger}
 							className={css.viewManager}
 							duration={transitionDuration}
-							index={Array.isArray(values) ? index - 2 : 0}
+							index={secondaryDecrementItemIndex}
 							noAnimation={noAnimation || disabled}
 							reverseTransition={reverseTransition}
 						>
@@ -433,14 +576,16 @@ const PickerBase = kind({
 					aria-label={decrementAriaLabel}
 					className={css.itemDecrement}
 					disabled={disabled || isFirst}
-					onClick={handleDecrement}
+					onClick={decrementValue() === '' ? () => {} : handleDecrement}
+					onSpotlightDisappear={onSpotlightDisappear}
+					spotlightDisabled={spotlightDisabled || decrementValue() === ''}
 				>
 					<ViewManager
 						aria-hidden
 						arranger={arranger}
 						className={css.viewManager}
 						duration={transitionDuration}
-						index={Array.isArray(values) ? index - 1 : 0}
+						index={decrementItemIndex}
 						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
 					>
@@ -448,6 +593,7 @@ const PickerBase = kind({
 					</ViewManager>
 				</PickerButtonItem>
 				<div
+					aria-label={ariaLabel}
 					aria-valuetext={currentValueText}
 					className={activeClassName}
 					id={valueId}
@@ -459,11 +605,11 @@ const PickerBase = kind({
 						arranger={arranger}
 						className={css.viewManager}
 						duration={transitionDuration}
-						index={Array.isArray(values) ? index : 0}
+						index={currentItemIndex}
 						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
 					>
-						{Array.isArray(values) ? values : (<PickerItem key={currentValue} style={{direction: 'ltr'}}>{currentValue}</PickerItem>)}
+						{values}
 					</ViewManager>
 				</div>
 				<PickerButtonItem
@@ -472,14 +618,16 @@ const PickerBase = kind({
 					aria-label={incrementAriaLabel}
 					className={css.itemIncrement}
 					disabled={disabled || isLast}
-					onClick={handleIncrement}
+					onClick={incrementValue() === '' ? () => {} : handleIncrement}
+					onSpotlightDisappear={onSpotlightDisappear}
+					spotlightDisabled={spotlightDisabled || incrementValue() === ''}
 				>
 					<ViewManager
 						aria-hidden
 						arranger={arranger}
 						className={css.viewManager}
 						duration={transitionDuration}
-						index={Array.isArray(values) ? index + 1 : 0}
+						index={incrementItemIndex}
 						noAnimation={noAnimation || disabled}
 						reverseTransition={reverseTransition}
 					>
@@ -492,17 +640,19 @@ const PickerBase = kind({
 						aria-disabled={isPenultimate}
 						aria-label={incrementAriaLabel}
 						className={css.secondaryItemIncrement}
-						disabled={isPenultimate}
-						onClick={() => {
+						disabled={disabled || isPenultimate}
+						onClick={secondaryIncrementValue() === '' ? () => {} : () => {
 							handleIncrement(); setTimeout(() => handleIncrement(), transitionDuration);
 						}}
+						onSpotlightDisappear={onSpotlightDisappear}
+						spotlightDisabled={spotlightDisabled || secondaryIncrementValue() === ''}
 					>
 						<ViewManager
 							aria-hidden
 							arranger={arranger}
 							className={css.viewManager}
 							duration={transitionDuration}
-							index={Array.isArray(values) ? index + 2 : 0}
+							index={secondaryIncrementItemIndex}
 							noAnimation={noAnimation || disabled}
 							reverseTransition={reverseTransition}
 						>

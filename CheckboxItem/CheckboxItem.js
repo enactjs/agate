@@ -82,7 +82,6 @@ const CheckboxItemBase = kind({
 		 * * An object representing a resolution independent resource (See {@link ui/resolution})
 		 *
 		 * @type {String|Object}
-		 * @default 'check'
 		 * @public
 		 */
 		icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -132,10 +131,6 @@ const CheckboxItemBase = kind({
 		 * @public
 		 */
 		slotBefore: PropTypes.node
-	},
-
-	defaultProps: {
-		icon: 'check'
 	},
 
 	styles: {

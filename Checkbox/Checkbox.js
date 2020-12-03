@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
-import Icon from '../Icon/Icon';
+import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
 import css from './Checkbox.module.less';
@@ -79,7 +79,6 @@ const CheckboxBase = kind({
 		 * Disables Checkbox and becomes non-interactive.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		disabled: PropTypes.bool,
@@ -127,13 +126,11 @@ const CheckboxBase = kind({
 
 	defaultProps: {
 		children: 'check',
-		indeterminate: false,
-		indeterminateIcon: 'minus',
-		selected: false
+		indeterminateIcon: 'minus'
 	},
 
 	styles: {
-		css: css,
+		css,
 		className: 'checkbox',
 		publicClassNames: true
 	},
