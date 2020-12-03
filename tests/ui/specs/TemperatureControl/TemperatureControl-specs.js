@@ -119,12 +119,12 @@ describe('TemperatureControl', function () {
 		});
 
 		it('should have direction rtl', function () {
-			expect(temperatureControl.self.getCSSProperty('direction').value === "rtl").to.be.true();
+			expect(temperatureControl.self.getCSSProperty('direction').value === 'rtl').to.be.true();
 		});
 
 		it('value should have arabic characters', function () {
 			// we test the character for temperature degrees
-			expect(temperatureControl.valueText.includes("°م")).to.be.true();
+			expect(temperatureControl.valueText.includes('°م')).to.be.true();
 		});
 	});
 });
