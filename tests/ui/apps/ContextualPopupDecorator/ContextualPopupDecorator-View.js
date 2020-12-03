@@ -36,7 +36,6 @@ class app extends Component {
 					onClose={() => this.clickHandler({button1Open: false})}
 					open={button1Open}
 					popupComponent={renderPopup1}
-					spotlightRestrict="self-only"
 				>
 					Contextual Popup Button1
 				</ContextualButton>

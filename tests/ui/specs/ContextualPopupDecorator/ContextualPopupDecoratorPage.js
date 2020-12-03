@@ -14,6 +14,10 @@ class ButtonInterface {
 	get self () {
 		return $(this.selector);
 	}
+	get isOpen () {
+		return $(`.ContextualPopupDecorator_ContextualPopup_container`).isExisting();
+	}
+
 }
 
 class ContextualPopupDecoratorPage extends Page {
