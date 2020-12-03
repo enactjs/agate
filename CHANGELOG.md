@@ -9,7 +9,11 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
 - `agate/Checkbox` prop `disabled`, `indeterminate`, and `indeterminateIcon`
 - `agate/CheckboxItem` prop `disabled`, `indeterminate`, `indeterminateIcon`, and `slotbefore`
+- `agate/DatePicker` prop `onSpotlightDisappear` and `spotlightDisabled`
 - `agate/Marquee` component
+- `agate/Picker` prop `noAnimation` and `wrap`
+- `agate/RangePicker` prop `noAnimation` and `wrap`
+- `agate/TimePicker` prop `onSpotlightDisappear` and `spotlightDisabled`
  
 ### Fixed
 
