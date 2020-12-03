@@ -13,17 +13,23 @@
  */
 
 import kind from '@enact/core/kind';
-import Spottable from '@enact/spotlight/Spottable';
+import Pure from '@enact/ui/internal/Pure';
+import Slottable from '@enact/ui/Slottable';
 import Toggleable from '@enact/ui/Toggleable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
-import Checkbox from '../Checkbox';
-import Item from '../Item';
+import {CheckboxBase} from '../Checkbox';
+import {ItemBase, ItemDecorator} from '../Item';
 import Skinnable from '../Skinnable';
 
 import componentCss from './CheckboxItem.module.less';
+
+const Item = ItemDecorator(ItemBase);
+
+const Checkbox = Skinnable(CheckboxBase);
+Checkbox.displayName = 'Checkbox';
 
 /**
  * An item with a checkbox component, ready to use in Agate applications.
@@ -76,10 +82,38 @@ const CheckboxItemBase = kind({
 		 * * An object representing a resolution independent resource (See {@link ui/resolution})
 		 *
 		 * @type {String|Object}
-		 * @default 'check'
 		 * @public
 		 */
 		icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+
+		/**
+		 * Enables the "indeterminate" state.
+		 *
+		 * An indeterminate, mixed, or half-selected state is typically used in a hierarchy or group
+		 * to represent that some, not all, children are selected.
+		 *
+		 * NOTE: This does not prevent updating the `selected` state. Applications must control this
+		 * property directly.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		indeterminate: PropTypes.bool,
+
+		/**
+		 * The icon to be used in the `indeterminate` state.
+		 *
+		 * May be specified as either:
+		 *
+		 * * A string that represents an icon from the [iconList]{@link agate/Icon.Icon.iconList},
+		 * * An HTML entity string, Unicode reference or hex value (in the form '0x...'),
+		 * * A URL specifying path to an icon image, or
+		 * * An object representing a resolution independent resource (See {@link ui/resolution})
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		indeterminateIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
 		/**
 		 * If true the checkbox will be selected.
@@ -88,11 +122,15 @@ const CheckboxItemBase = kind({
 		 * @default false
 		 * @public
 		 */
-		selected: PropTypes.bool
-	},
+		selected: PropTypes.bool,
 
-	defaultProps: {
-		icon: 'check'
+		/**
+		 * Nodes to be inserted after the checkbox and before `children`.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
+		slotBefore: PropTypes.node
 	},
 
 	styles: {
@@ -101,37 +139,52 @@ const CheckboxItemBase = kind({
 		publicClassNames: ['checkboxItem']
 	},
 
-	render: ({children, css, icon, selected, ...rest}) => (
+	computed: {
+		className: ({selected, styler}) => styler.append({selected})
+	},
+
+	render: ({children, css, icon, indeterminate, indeterminateIcon, selected, slotBefore, ...rest}) => (
 		<Item
-			aria-checked={selected}
 			role="checkbox"
 			{...rest}
+			aria-checked={selected}
 			css={css}
+			selected={selected}
 		>
-			<Checkbox selected={selected} slot="slotBefore">{icon}</Checkbox>
+			<slotBefore>
+				<Checkbox
+					indeterminate={indeterminate}
+					indeterminateIcon={indeterminateIcon}
+					selected={selected}
+				>
+					{icon}
+				</Checkbox>
+				{slotBefore}
+			</slotBefore>
 			{children}
 		</Item>
 	)
 });
 
 /**
- * Applies Agate specific behaviors to [CheckboxItemBase]{@link agate/CheckboxItem.CheckboxItemBase} components.
+ * Applies Agate specific behaviors to [CheckboxItem]{@link agate/CheckboxItem.CheckboxItem} components.
  *
  * @hoc
  * @memberof agate/CheckboxItem
  * @mixes ui/Toggleable.Toggleable
- * @mixes spotlight/Spottable.Spottable
- * @mixes agate/Skinnable.Skinnable
+ * @mixes spotlight/Slottable.Slottable
  * @public
  */
 const CheckboxItemDecorator = compose(
 	Toggleable({toggleProp: 'onClick'}),
-	Spottable,
-	Skinnable
+	Slottable({slots: ['label', 'slotAfter', 'slotBefore']})
 );
 
 /**
- * A Agate-styled item with a checkbox component.
+ * An Agate-styled item with a checkbox component.
+ *
+ * `CheckboxItem` will manage its `selected` state via [Toggleable]{@link ui/Toggleable} unless set
+ * directly.
  *
  * @class CheckboxItem
  * @memberof agate/CheckboxItem
@@ -140,7 +193,11 @@ const CheckboxItemDecorator = compose(
  * @ui
  * @public
  */
-const CheckboxItem = CheckboxItemDecorator(CheckboxItemBase);
+const CheckboxItem = Pure(
+	CheckboxItemDecorator(
+		CheckboxItemBase
+	)
+);
 
 export default CheckboxItem;
 export {

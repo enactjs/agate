@@ -2,6 +2,7 @@ import ArcPicker from '../../../ArcPicker';
 import ArcSlider from '../../../ArcSlider';
 import BodyText from '../../../BodyText';
 import Button from '../../../Button';
+import Checkbox from '../../../Checkbox';
 import CheckboxItem from '../../../CheckboxItem';
 import ColorPicker from '../../../ColorPicker';
 import ContextualPopupDecorator from '../../../ContextualPopupDecorator';
@@ -52,6 +53,7 @@ const AgateExports = {
 	BodyText,
 	Button,
 	ColorPicker,
+	Checkbox,
 	CheckboxItem,
 	ContextualPopupDecorator,
 	DatePicker,
