@@ -13,6 +13,7 @@
 
 import Breadcrumb from './Breadcrumb';
 import BreadcrumbPanels from './BreadcrumbPanels';
+import ListedPanels from './ListedPanels';
 import Panel from './Panel';
 import {Panels, PanelsBase, PanelsDecorator} from './Panels';
 import TabbedPanels from './TabbedPanels';
@@ -21,6 +22,7 @@ export default Panels;
 export {
 	BreadcrumbPanels,
 	Breadcrumb,
+	ListedPanels,
 	Panel,
 	Panels,
 	PanelsBase,
