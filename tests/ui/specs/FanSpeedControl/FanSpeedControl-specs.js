@@ -36,6 +36,14 @@ describe('FanSpeedControl', function () {
 		});
 	});
 
+	describe('custom', function () {
+		const fanSpeedControl = Page.components.fanSpeedControlCustom;
+
+		it('should display custom icon', function () {
+			expect(fanSpeedControl.iconValue()).to.equal(983060); // decimal converted charCode of Unicode 'happyface' character
+		});
+	});
+
 	describe('disabled', function () {
 		const fanSpeedControl = Page.components.fanSpeedControlDisabled;
 

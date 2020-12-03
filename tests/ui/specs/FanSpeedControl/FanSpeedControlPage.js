@@ -29,9 +29,10 @@ class FanSpeedControlPage extends Page {
 		super();
 		this.title = 'FanSpeedControl Test';
 		const fanSpeedControlDefault = new FanSpeedControlInterface('fanSpeedControlDefault');
+		const fanSpeedControlCustom = new FanSpeedControlInterface('fanSpeedControlCustom');
 		const fanSpeedControlDisabled = new FanSpeedControlInterface('fanSpeedControlDisabled');
 
-		this.components = {fanSpeedControlDefault, fanSpeedControlDisabled};
+		this.components = {fanSpeedControlDefault, fanSpeedControlCustom, fanSpeedControlDisabled};
 	}
 
 	open (urlExtra) {
