@@ -55,7 +55,7 @@ describe('TemperatureControl', function () {
 	});
 
 	describe('custom', function () {
-		// slider has 3 value. first value is active in the bottom-left quarter. second value is active for top half and third value is active for bottom-right quarter
+		// slider has 3 values. first value is active in the bottom-left quarter. second value is active for top half and third value is active for bottom-right quarter
 		const temperatureControl = Page.components.temperatureControlCustom;
 
 		it('should not change the position of the slider knob on click on the bottom-left part of the circle', function () {
