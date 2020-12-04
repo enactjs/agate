@@ -10,32 +10,31 @@ import timeCss from '../../TimePicker/TimePicker.module.less';
 
 describe('DateTimePicker', () => {
 
-	// test(
-	// 	'should emit an onChange event when changing a component picker',
-	// 	() => {
-	// 		const handleChange = jest.fn();
-	// 		const subject = mount(
-	// 			<DateTimePicker onChange={handleChange} value={new Date(2000, 0, 1, 12, 30, 0)} locale="en-US" />
-	// 		);
-	//
-	// 		const base = subject.find('DateComponentRangePicker').first();
-	//
-	// 		base.prop('onChange')({value: 0});
-	//
-	// 		const expected = 1;
-	// 		const actual = handleChange.mock.calls.length;
-	//
-	// 		expect(actual).toBe(expected);
-	// 	}
-	// );
+	test(
+		'should emit an onChange event when changing a component picker',
+		() => {
+			const handleChange = jest.fn();
+			const subject = mount(
+				<DateTimePicker onChange={handleChange} value={new Date(2000, 0, 1, 12, 30)} locale="en-US" />
+			);
+
+			const base = subject.find('DateComponentRangePicker').first();
+
+			base.prop('onChange')({value: 0});
+
+			const expected = 1;
+			const actual = handleChange.mock.calls.length;
+
+			expect(actual).toBe(expected);
+		}
+	);
 
 	test('should accept a JavaScript Date for its value prop', () => {
 		const subject = mount(
-			<DateTimePicker value={new Date(2000, 0, 1, 12, 30, 0)} locale="en-US" />
+			<DateTimePicker value={new Date(2000, 0, 1, 12, 30)} locale="en-US" />
 		);
 
 		const yearPicker = subject.find(`DateComponentRangePicker.${dateCss.year}`);
-		console.log(yearPicker);
 
 		const expectedYear = 2000;
 		const actualYear = yearPicker.prop('value');
@@ -53,7 +52,7 @@ describe('DateTimePicker', () => {
 	test('should set "dayAriaLabel" to day picker', () => {
 		const label = 'custom day aria-label';
 		const subject = mount(
-			<DateTimePicker dayAriaLabel={label} value={new Date(2000, 0, 1, 12, 0, 0)} />
+			<DateTimePicker dayAriaLabel={label} value={new Date(2000, 0, 1, 12, 0)} />
 		);
 
 		const dayPicker = subject.find(`DateComponentRangePicker.${dateCss.day}`);
@@ -67,7 +66,7 @@ describe('DateTimePicker', () => {
 	test('should set "monthAriaLabel" to month picker', () => {
 		const label = 'custom month aria-label';
 		const subject = mount(
-			<DateTimePicker monthAriaLabel={label} value={new Date(2000, 0, 1, 12, 0, 0)} />
+			<DateTimePicker monthAriaLabel={label} value={new Date(2000, 0, 1, 12, 0)} />
 		);
 
 		const monthPicker = subject.find(`DateComponentRangePicker.${dateCss.month}`);
@@ -81,7 +80,7 @@ describe('DateTimePicker', () => {
 	test('should set "yearAriaLabel" to year picker', () => {
 		const label = 'custom year aria-label';
 		const subject = mount(
-			<DateTimePicker value={new Date(2000, 0, 1, 12, 0, 0)} yearAriaLabel={label} />
+			<DateTimePicker value={new Date(2000, 0, 1, 12, 0)} yearAriaLabel={label} />
 		);
 
 		const yearPicker = subject.find(`DateComponentRangePicker.${dateCss.year}`);
