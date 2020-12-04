@@ -136,13 +136,20 @@ const locales = {
 	'si-LK - Sinhala, external font family with different line metrics': 'si-LK'
 };
 
-const skins = {
+const skins = process.env.SKIN === 'silicon' ? {
 	'Carbon': 'carbon',
 	'Cobalt': 'cobalt',
 	'Copper': 'copper',
 	'Electro': 'electro',
 	'Gallium': 'gallium',
 	'Silicon': 'silicon',
+	'Titanium': 'titanium'
+} : {
+	'Carbon': 'carbon',
+	'Cobalt': 'cobalt',
+	'Copper': 'copper',
+	'Electro': 'electro',
+	'Gallium': 'gallium',
 	'Titanium': 'titanium'
 };
 
