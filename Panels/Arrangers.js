@@ -97,7 +97,31 @@ const BreadcrumbArranger = {
 	leave: enter
 };
 
+/**
+ * Arranger that cross fade between panels.
+ *
+ * @type {Arranger}
+ * @private
+ */
+const CrossFadeArranger = {
+	enter: (config) => {
+		return arrange(config, [
+			{opacity: 0, offset: 0},
+			{opacity: 0, offset: 0.5},
+			{opacity: 1, offset: 1}
+		], animationOptions);
+	},
+	leave: (config) => {
+		return arrange(config, [
+			{opacity: 1, offset: 0},
+			{opacity: 0, offset: 0.5},
+			{opacity: 0, offset: 1}
+		], animationOptions);
+	}
+};
+
 export {
 	BreadcrumbArranger,
+	CrossFadeArranger,
 	PanelsArranger
 };

@@ -4,6 +4,7 @@ import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {storiesOf} from '@storybook/react';
+import compose from 'ramda/src/compose';
 
 import Button from '@enact/agate/Button';
 import Icon from '@enact/agate/Icon';
@@ -19,28 +20,49 @@ const Config = mergeComponentMetadata('ListedPanels', ListedPanelsBase);
 
 const I18nListedPanelsBase = ({rtl}) => {
 	const [panelIndex, setIndex] = React.useState(Config.defaultProps.index || 0);
+	const [listIndex, setListIndex] = React.useState(Config.defaultProps.listIndex || 0);
 	const onSelect = (e) => {
 		setIndex(e.index);
 		action('onSelect')(e);
 	};
 
+	const onClick = (e) => {
+		setListIndex(1);
+		setIndex(1);
+	};
+
+	const backward = () => {
+		setListIndex(listIndex - 1);
+		setIndex(0);
+	};
+	const handleBack = compose(backward, action('onBack'));
+
 	return (
 		<div style={{paddingBottom: '56.25%'}}>
 			<ListedPanels
-				duration={number('duration', Config, 500)}
-				onClick={action('onClick')}
+				duration={number('duration', Config, 400)}
 				index={panelIndex}
+				listIndex={listIndex}
+				onBack={handleBack}
+				onClick={action('onClick')}
 				onSelect={onSelect} // eslint-disable-line react/jsx-no-bind
 				items={[
-					{title: 'Profiles'},
-					{title: 'Devices'},
-					{title: 'Sound'},
-					{title: 'Display'},
-					{title: 'System'}
+					[
+						{title: 'Profiles'},
+						{title: 'Devices'},
+						{title: 'Sound'},
+						{title: 'Display'},
+						{title: 'System'}
+					],
+					[
+						{title: 'Profile1'},
+						{title: 'Profile2'},
+						{title: 'Profile3'}
+					]
 				]}
 			>
 				<Panel>
-					<Button icon="netbook">Click me!</Button>
+					<Button icon="netbook" onClick={onClick}>Click me!</Button>
 				</Panel>
 				<Panel>
 					<Item label="label" labelPosition="before" slotBefore={<Icon>aircirculation</Icon>}>Hello Item</Item>
@@ -52,6 +74,11 @@ const I18nListedPanelsBase = ({rtl}) => {
 					>
 						Hello LabeledIconButton
 					</LabeledIconButton>
+				</Panel>
+				<Panel>
+					<div>
+						A simple view with no associated tab
+					</div>
 				</Panel>
 				<Panel>
 					<div>

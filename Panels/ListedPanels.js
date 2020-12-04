@@ -2,7 +2,7 @@ import {adaptEvent, forward, handle} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import {Changeable} from '@enact/ui/Changeable';
 import {Cell, Layout} from '@enact/ui/Layout';
-import {shape} from '@enact/ui/ViewManager';
+import {shape, SlideLeftArranger} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -10,7 +10,9 @@ import Item from '../Item';
 import Scroller from '../Scroller';
 import Skinnable from '../Skinnable';
 
-import Panels from './Panels';
+import {Panels} from './Panels';
+import {Panel} from './Panel';
+import {CrossFadeArranger} from './Arrangers';
 
 import componentCss from './ListedPanels.module.less';
 
@@ -44,26 +46,38 @@ const ListedPanelsBase = kind({
 		duration: PropTypes.number,
 		index: PropTypes.number,
 		items: PropTypes.array,
+		listIndex: PropTypes.number,
 		noAnimation: PropTypes.bool,
 		onBack: PropTypes.func,
 		onSelect: PropTypes.func
 	},
 	defaultProps: {
-		index: 0
+		arranger: SlideLeftArranger,
+		index: 0,
+		listIndex: 0
 	},
 	styles: {
 		css: componentCss,
 		className: 'listedPanels enact-fit'
 	},
+	handlers: {
+		onSelect: handle(
+			adaptEvent(({selected}) => ({index: selected}), forward('onSelect'))
+		)
+	},
 	computed: {
-		listItems: ({items, onSelect}) => {
-			const handleClick = () => handle(
-				adaptEvent(({selected}) => ({index: selected}), forward('onSelect'))
-			);
+		listChildren: ({items, onSelect}) => {
 			if (items) {
-				return items.map((item, index) => {
-					const {title: children, itemProps} = item;
-					return <Item key={index} onClick={() => handleClick(index)} {...itemProps}>{children}</Item>;
+				return items.map((item) => {
+					return (<Panel>
+						<Scroller>
+							{item.map((i, index) => {
+								const {title: children, itemProps} = i;
+								// eslint-disable-next-line react/jsx-no-bind
+								return <Item key={index} onClick={() => onSelect({selected: index})} {...itemProps}>{children}</Item>;
+							})}
+						</Scroller>
+					</Panel>);
 				});
 			}
 		}
@@ -75,7 +89,8 @@ const ListedPanelsBase = kind({
 		duration,
 		index,
 		noAnimation,
-		listItems,
+		listChildren,
+		listIndex,
 		onBack,
 		...rest
 	}) => {
@@ -85,24 +100,23 @@ const ListedPanelsBase = kind({
 					arranger={arranger}
 					className={css.listPanels}
 					component={Panels}
+					cover="partial"
 					duration={duration}
 					noAnimation={noAnimation}
 					noCloseButton
 					onBack={onBack}
+					index={listIndex}
 					size="30%"
 				>
-					<Scroller>
-						{listItems}
-					</Scroller>
+					{listChildren}
 				</Cell>
 				<Cell
-					arranger={arranger}
+					arranger={CrossFadeArranger}
 					className={css.panels}
 					component={Panels}
 					duration={duration}
 					noAnimation={noAnimation}
 					noCloseButton
-					onBack={onBack}
 					index={index}
 					size="70%"
 				>
