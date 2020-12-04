@@ -37,10 +37,10 @@ const SwatchButtonBase = kind({
 		 *
 		 * The value should take the format of a HEX color. Ex: `#ffcc00` or `#3467af`
 		 *
-		 * @type {String}
+		 * @type {Object}
 		 * @public
 		 */
-		children: PropTypes.string,
+		children: PropTypes.object,
 
 		/**
 		 * The color of the swatch.
