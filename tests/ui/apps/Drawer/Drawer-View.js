@@ -1,11 +1,11 @@
+import BodyText from '../../../../BodyText';
 import Button from '../../../../Button';
 import Drawer from '../../../../Drawer';
+import Heading from '../../../../Heading';
 import ThemeDecorator from '../../../../ThemeDecorator';
 import React, {Component} from 'react';
 import spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
-import Heading from '../../../../Heading';
-import BodyText from '../../../../../enact/packages/ui/BodyText';
 
 const Container = SpotlightContainerDecorator('div');
 
