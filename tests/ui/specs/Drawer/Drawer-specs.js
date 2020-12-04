@@ -206,80 +206,80 @@ describe('Drawer', function () {
 				expectClosed(drawerCommon);
 			});
 		});
+	});
 
-		describe('with scrimType - none', function () {
+	describe('with scrimType - none', function () {
 
-			const drawer = Page.components.drawer4;
+		const drawer = Page.components.drawer4;
 
-			it('should have correct heading', function () {
+		it('should have correct heading', function () {
+			drawerCommon.buttonDrawer4.click();
+			Page.waitForOpen(drawer);
+
+			expectNoneScrimOpen(drawerCommon);
+			validateTitle(drawer, 'Drawer without scrim');
+		});
+
+		describe('using 5-way', function () {
+
+			it('should open drawer', function () {
+				Page.spotlightRight();
+				Page.spotlightRight();
+				Page.spotlightRight();
+				Page.spotlightSelect();
+				Page.waitForOpen(drawer);
+
+				expectNoneScrimOpen(drawerCommon);
+				expect(drawer.isOpen).to.be.true();
+			});
+
+			it('should close drawer with cancel button on 5-way right in drawer container', function () {
+				Page.spotlightRight();
+				Page.spotlightRight();
+				Page.spotlightRight();
+				Page.spotlightSelect();
+				Page.waitForOpen(drawer);
+
+				expectNoneScrimOpen(drawerCommon);
+
+				Page.spotlightDown();
+				Page.spotlightSelect();
+
+				Page.waitForClose(drawer);
+				expectClosed(drawerCommon);
+			});
+		});
+
+		describe('using pointer', function () {
+
+			it('should open the drawer without scrim on click', function () {
+				drawerCommon.buttonDrawer4.click();
+
+				expectNoneScrimOpen(drawerCommon);
+			});
+
+			it('should close the popup on click in drawer container', function () {
 				drawerCommon.buttonDrawer4.click();
 				Page.waitForOpen(drawer);
 
 				expectNoneScrimOpen(drawerCommon);
-				validateTitle(drawer, 'Drawer without scrim');
+
+				drawer.buttonOK.click();
+				Page.waitForClose(drawer);
+
+				expectClosed(drawerCommon);
 			});
 
-			describe('using 5-way', function () {
+			it('should close the drawer on cancel click in drawer container', function () {
+				drawerCommon.buttonDrawer4.click();
+				Page.waitForOpen(drawer);
 
-				it('should open drawer', function () {
-					Page.spotlightRight();
-					Page.spotlightRight();
-					Page.spotlightRight();
-					Page.spotlightSelect();
-					Page.waitForOpen(drawer);
+				expectNoneScrimOpen(drawerCommon);
 
-					expectNoneScrimOpen(drawerCommon);
-					expect(drawer.isOpen).to.be.true();
-				});
+				drawer.buttonCancel.click();
+				Page.waitForClose(drawer);
 
-				it('should close drawer with cancel button on 5-way right in drawer container', function () {
-					Page.spotlightRight();
-					Page.spotlightRight();
-					Page.spotlightRight();
-					Page.spotlightSelect();
-					Page.waitForOpen(drawer);
-
-					expectNoneScrimOpen(drawerCommon);
-
-					Page.spotlightDown();
-					Page.spotlightSelect();
-
-					Page.waitForClose(drawer);
-					expectClosed(drawerCommon);
-				});
-			});
-
-			describe('using pointer', function () {
-
-				it('should open the drawer without scrim on click', function () {
-					drawerCommon.buttonDrawer4.click();
-
-					expectNoneScrimOpen(drawerCommon);
-				});
-
-				it('should close the popup on click in drawer container', function () {
-					drawerCommon.buttonDrawer4.click();
-					Page.waitForOpen(drawer);
-
-					expectNoneScrimOpen(drawerCommon);
-
-					drawer.buttonOK.click();
-					Page.waitForClose(drawer);
-
-					expectClosed(drawerCommon);
-				});
-
-				it('should close the drawer on cancel click in drawer container', function () {
-					drawerCommon.buttonDrawer4.click();
-					Page.waitForOpen(drawer);
-
-					expectNoneScrimOpen(drawerCommon);
-
-					drawer.buttonCancel.click();
-					Page.waitForClose(drawer);
-
-					expectClosed(drawerCommon);
-				});
+				expectClosed(drawerCommon);
 			});
 		});
 	});

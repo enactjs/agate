@@ -27,7 +27,7 @@ class app extends Component {
 			<div id="drawerMain" {...this.props}>
 				<p>
 					UI testing for Drawer Component
-					1. showLine=false 2. noAnimation 3. scrimType="transparent" 4. scrimType="none"
+					1. showLine=false 2. noAnimation 3. scrimType=transparent 4. scrimType=none
 				</p>
 				<div>
 					<Button id="buttonDrawer1" onClick={() => this.clickHandler({open1: true})}>No Line</Button>
@@ -68,10 +68,10 @@ class app extends Component {
 				>
 					<header>
 						<Heading
-							color='#FDC902'
+							color="#FDC902"
 							showLine
-							size='small'
-							spacing='small'
+							size="small"
+							spacing="small"
 						>
 							Drawer without animation
 						</Heading>
@@ -95,10 +95,10 @@ class app extends Component {
 				>
 					<header>
 						<Heading
-							color='#FDC902'
+							color="#FDC902"
 							showLine
-							size='small'
-							spacing='small'
+							size="small"
+							spacing="small"
 						>
 							Drawer with transparent scrim
 						</Heading>
@@ -122,10 +122,10 @@ class app extends Component {
 				>
 					<header>
 						<Heading
-							color='#FDC902'
+							color="#FDC902"
 							showLine
-							size='small'
-							spacing='small'
+							size="small"
+							spacing="small"
 						>
 							Drawer without scrim
 						</Heading>
