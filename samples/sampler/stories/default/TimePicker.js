@@ -1,5 +1,5 @@
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean} from '@enact/storybook-utils/addons/knobs';
+import {boolean, text} from '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
@@ -15,7 +15,11 @@ storiesOf('Agate', module)
 		() => (
 			<TimePicker
 				disabled={boolean('disabled', Config)}
+				hourAriaLabel={text('hourAriaLabel', Config, '')}
+				meridiemAriaLabel={text('meridiemAriaLabel', Config, '')}
+				minuteAriaLabel={text('minuteAriaLabel', Config, '')}
 				onChange={action('onChange')}
+				spotlightDisabled={boolean('spotlightDisabled', Config)}
 			/>
 		),
 		{

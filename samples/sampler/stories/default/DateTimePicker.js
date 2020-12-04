@@ -18,6 +18,7 @@ storiesOf('Agate', module)
 			<DateTimePicker
 				disabled={boolean('disabled', Config)}
 				onChange={action('onChange')}
+				spotlightDisabled={boolean('spotlightDisabled', Config)}
 			/>
 		),
 		{
