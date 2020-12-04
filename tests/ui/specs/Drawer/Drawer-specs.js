@@ -263,7 +263,6 @@ describe('Drawer', function () {
 
 					expectNoneScrimOpen(drawerCommon);
 
-					Page.waitForOpen(drawer);
 					drawer.buttonOK.click();
 					Page.waitForClose(drawer);
 
@@ -276,7 +275,6 @@ describe('Drawer', function () {
 
 					expectNoneScrimOpen(drawerCommon);
 
-					Page.waitForOpen(drawer);
 					drawer.buttonCancel.click();
 					Page.waitForClose(drawer);
 
