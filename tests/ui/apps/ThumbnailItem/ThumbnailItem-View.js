@@ -46,6 +46,7 @@ const app = (props) => <div {...props}>
 		</ThumbnailItem>
 		<ThumbnailItem
 			id="thumbnailItem6"
+			disabled
 			src="https://dummyimage.com/64/e048e0/0011ff"
 		>
 			Thumbnail Item disabled
