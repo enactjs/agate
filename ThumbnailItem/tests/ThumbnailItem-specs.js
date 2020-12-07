@@ -69,7 +69,7 @@ describe('ThumbnailItem Specs', () => {
 		expect(actual).toContain(expected);
 	});
 
-	test('should apply `styled` className when `typed=styled`', () => {
+	test('should apply `styled` className when `type=styled`', () => {
 		const children = 'Main children';
 		const subject = mount(
 			<ThumbnailItem

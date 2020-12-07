@@ -1,7 +1,7 @@
 import ThemeDecorator from '../../../../ThemeDecorator';
 import ThumbnailItem from '../../../../ThumbnailItem';
-import React from 'react';
 import spotlight from '@enact/spotlight';
+import React from 'react';
 
 // NOTE: Forcing pointer mode off so we can be sure that regardless of webOS pointer mode the app
 // runs the same way
