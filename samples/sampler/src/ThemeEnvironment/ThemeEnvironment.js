@@ -1,6 +1,7 @@
 // Agate Environment
 
 import kind from '@enact/core/kind';
+import {cap} from '@enact/core/util';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {color} from '@storybook/addon-knobs';
@@ -136,15 +137,7 @@ const locales = {
 	'si-LK - Sinhala, external font family with different line metrics': 'si-LK'
 };
 
-const skins = process.env.SKIN === 'silicon' ? {
-	'Carbon': 'carbon',
-	'Cobalt': 'cobalt',
-	'Copper': 'copper',
-	'Electro': 'electro',
-	'Gallium': 'gallium',
-	'Silicon': 'silicon',
-	'Titanium': 'titanium'
-} : {
+const skins = {
 	'Carbon': 'carbon',
 	'Cobalt': 'cobalt',
 	'Copper': 'copper',
@@ -152,6 +145,10 @@ const skins = process.env.SKIN === 'silicon' ? {
 	'Gallium': 'gallium',
 	'Titanium': 'titanium'
 };
+
+if (process.env.SKIN) {
+	skins[cap(process.env.SKIN)] = process.env.SKIN;
+}
 
 // NOTE: Knobs cannot set locale in fullscreen mode. This allows any knob to be taken from the URL.
 const getPropFromURL = (propName, fallbackValue) => {
