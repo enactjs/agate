@@ -46,6 +46,7 @@ const ListedPanelsBase = kind({
 		duration: PropTypes.number,
 		index: PropTypes.number,
 		items: PropTypes.array,
+		itemComponent: PropTypes.renderable,
 		listIndex: PropTypes.number,
 		noAnimation: PropTypes.bool,
 		onBack: PropTypes.func,
@@ -54,6 +55,7 @@ const ListedPanelsBase = kind({
 	defaultProps: {
 		arranger: SlideLeftArranger,
 		index: 0,
+		itemComponent: Item,
 		listIndex: 0
 	},
 	styles: {
@@ -66,15 +68,15 @@ const ListedPanelsBase = kind({
 		)
 	},
 	computed: {
-		listChildren: ({items, onSelect}) => {
+		listChildren: ({items, itemComponent: ItemComponent, onSelect}) => {
 			if (items) {
 				return items.map((item) => {
 					return (<Panel>
 						<Scroller>
 							{item.map((i, index) => {
-								const {title: children, itemProps} = i;
+								const {title: children, ...itemProps} = i;
 								// eslint-disable-next-line react/jsx-no-bind
-								return <Item key={index} onClick={() => onSelect({selected: index})} {...itemProps}>{children}</Item>;
+								return <ItemComponent key={index} onClick={() => onSelect({selected: index})} {...itemProps}>{children}</ItemComponent>;
 							})}
 						</Scroller>
 					</Panel>);
