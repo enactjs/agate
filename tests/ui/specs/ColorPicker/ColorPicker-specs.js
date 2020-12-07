@@ -14,78 +14,82 @@ describe('ColorPicker', function () {
 		});
 	});
 
-	// describe('default', function () {
-	// 	const dropdownSelected = Page.components.dropdownSelected;
-	//
-	// 	it('should have correct text', function () {
-	// 		expect(dropdownSelected.selectedValue).to.equal('two');
-	// 	});
-	//
-	// 	it('should have correct text after changing selected value', function () {
-	// 		expect(Page.components.dropdownDefault.childItem.isFocused()).to.be.true();
-	//
-	// 		Page.spotlightDown();
-	// 		Page.spotlightDown();
-	// 		expect(dropdownSelected.childItem.isFocused()).to.be.true();
-	// 		expect(dropdownSelected.selectedValue).to.equal('two');
-	//
-	// 		Page.spotlightSelect();
-	// 		Page.delay(1000);
-	// 		Page.spotlightDown();
-	// 		Page.spotlightDown();
-	// 		Page.spotlightDown();
-	// 		Page.spotlightSelect();
-	// 		Page.delay(1000);
-	//
-	// 		expect(dropdownSelected.selectedValue).to.equal('three');
-	// 	});
-	// });
+	describe('default', function () {
+		const colorPickerDefault = Page.components.colorPickerDefault;
 
-	// describe('5-way', function () {
-	//
-	// 	it('should focus the `#dropdownDirectionRight` when 5-way right', function () {
-	// 		expect(Page.components.dropdownDefault.childItem.isFocused()).to.be.true();
-	//
-	// 		Page.spotlightRight();
-	// 		expect(Page.components.dropdownDirectionRight.childItem.isFocused()).to.be.true();
-	// 	});
-	//
-	// 	it('should focus `#dropdownDisabled` when 5-way down', function () {
-	// 		expect(Page.components.dropdownDefault.childItem.isFocused()).to.be.true();
-	//
-	// 		Page.spotlightDown();
-	// 		expect(Page.components.dropdownDisabled.childItem.isFocused()).to.be.true();
-	// 	});
-	//
-	// 	it('should focus the first item in `#dropdownDefault` option list when 5-way enter and down', function () {
-	// 		expect(Page.components.dropdownDefault.childItem.isFocused()).to.be.true();
-	//
-	// 		Page.spotlightSelect();
-	// 		Page.delay(1000);
-	// 		Page.spotlightDown();
-	//
-	// 		expect(Page.components.dropdownDefault.item(0).isFocused()).to.be.true();
-	// 	});
-	// });
-	//
-	// describe('pointer', function () {
-	//
-	// 	it('should dismiss dropdown when clicking outside', function () {
-	// 		const dropdown = Page.components.dropdownDefault;
-	//
-	// 		// Open the first dropdown and wait for the first list item to be focused
-	// 		Page.spotlightSelect();
-	// 		Page.delay(1000);
-	// 		Page.spotlightDown();
-	//
-	// 		// Click in the area outside the Dropdown (in the empty space created by the wrapper)
-	// 		const wrapper = $('#wrapper');
-	// 		wrapper.click({x: 0, y: 0});
-	//
-	// 		Page.delay(1000);
-	//
-	// 		// Verify that the floating list no longer exists (Dropdown is closed)
-	// 		expect(dropdown.isOpen).to.not.be.true();
-	// 	});
-	// });
+		it('should have correct value', function () {
+			expect(colorPickerDefault.colorSwatch).to.equal('#FF7FAE');
+		});
+
+		it('should have correct color code after changing selected value', function () {
+			expect(colorPickerDefault.button.isFocused()).to.be.true();
+			expect(colorPickerDefault.colorSwatch).to.equal('#FF7FAE');
+
+			Page.spotlightSelect();
+			Page.delay(1000);
+			Page.spotlightRight();
+			Page.spotlightSelect();
+			browser.pause(100);
+
+			expect(colorPickerDefault.colorSwatch).to.equal('#8333E9');
+		});
+	});
+
+	describe('5-way', function () {
+
+		it('should not open the `#colorPickerDisabled` when 5-way down and select', function () {
+			const colorPickerDisabled = Page.components.colorPickerDisabled;
+
+			expect(Page.components.colorPickerDefault.button.isFocused()).to.be.true();
+
+			Page.spotlightDown();
+			Page.spotlightSelect();
+			expect(colorPickerDisabled.isOpen).to.not.be.true();
+		});
+
+		it('should focus the `#colorPickerDirectionUp` when 5-way down, then down', function () {
+			const colorPickerDirectionUp = Page.components.colorPickerDirectionUp;
+
+			expect(Page.components.colorPickerDefault.button.isFocused()).to.be.true();
+
+			Page.spotlightDown();
+			Page.spotlightDown();
+			expect(colorPickerDirectionUp.button.isFocused()).to.be.true();
+		});
+
+		it('should focus the first color item in `#colorPickerOpen` option list when 5-way right', function () {
+			const colorPickerOpen = Page.components.colorPickerOpen;
+
+			expect(Page.components.colorPickerDefault.button.isFocused()).to.be.true();
+
+			Page.spotlightDown();
+			Page.spotlightDown();
+			Page.spotlightDown();
+			Page.spotlightSelect();
+			Page.spotlightRight();
+
+			expect(colorPickerOpen.item(0).isFocused()).to.be.true();
+		});
+	});
+
+	describe('pointer', function () {
+
+		it('should dismiss colorPicker when clicking outside', function () {
+			const colorPicker = Page.components.colorPickerDefault;
+
+			// Open the first colorPicker and wait for the first color list item to be focused
+			Page.spotlightSelect();
+			Page.delay(1000);
+			Page.spotlightRight();
+
+			// Click in the area outside the ColorPicker (in the empty space created by the wrapper)
+			const wrapper = $('#wrapper');
+			wrapper.click({x: 0, y: 0});
+
+			Page.delay(1000);
+
+			// Verify that the floating list no longer exists (ColorPicker is closed)
+			expect(colorPicker.isOpen).to.not.be.true();
+		});
+	});
 });

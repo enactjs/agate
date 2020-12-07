@@ -1,44 +1,38 @@
 'use strict';
 
-const {element, componentSelector, getComponent, getSubComponent, getText, hasClass, Page} = require('@enact/ui-test-utils/utils');
-
-const getMarqueeText = getSubComponent({lib: 'ui', component:'Marquee', child:'text'});
+const {element, componentSelector, getComponent, getSubComponent,Page} = require('@enact/ui-test-utils/utils');
 
 class ColorPickerInterface {
 	constructor (id) {
 		this.id = id;
 	}
-	//
-	// get childItem () {
-	// 	return getComponent({component: 'Dropdown', child: 'item'}, this.self);
-	// }
 
-	// item (index) {
-	// 	return element(
-	// 		`${componentSelector({component: 'Item'})}[data-index="${index}"]`,
-	// 		this.list
-	// 	);
-	// }
+	get self () {
+		return element(`#${this.id}`, browser);
+	}
 
 	get button () {
 		return element(`#${this.id}>.ColorPicker_SwatchButton_swatchButton`, browser);
 	}
 
-	// get list () {
-	// 	return getComponent({component: 'Dropdown', child: 'dropdownList'}, browser);
-	// }
-
-	get self () {
-		return element(`#${this.id}`, browser);
+	get colorSwatch () {
+		return this.button.getAttribute('aria-label');
 	}
-	//
-	// get isOpen () {
-	// 	return hasClass('Dropdown_Dropdown_open', this.self);
-	// }
-	//
-	// get selectedValue () {
-	// 	return getText(getMarqueeText(this.self));
-	// }
+
+	get isOpen () {
+		return $(`.enact_ui_Transition_Transition_shown #${this.id}`).isExisting();
+	}
+
+	get colorList () {
+		return getComponent({component: 'ColorPicker', child: 'palette'}, browser);
+	}
+
+	item (index) {
+		return element(
+			`${componentSelector({component: 'Button'})}[data-index="${index}"]`,
+			this.colorList
+		);
+	}
 }
 
 class ColorPickerPage extends Page {
@@ -49,10 +43,10 @@ class ColorPickerPage extends Page {
 			get: (target, name) => new ColorPickerInterface(name)
 		});
 		const colorPickerDefault = new ColorPickerInterface('colorPickerDefault');
-		// const dropdownDirectionRight = new DropdownInterface('dropdownDirectionRight');
-		// const dropdownDisabled = new DropdownInterface('dropdownDisabled');
-		// const dropdownSelected = new DropdownInterface('dropdownSelected');
-		this.components = {colorPickerDefault};
+		const colorPickerDisabled = new ColorPickerInterface('colorPickerDisabled');
+		const colorPickerDirectionUp = new ColorPickerInterface('colorPickerDirectionUp');
+		const colorPickerOpen = new ColorPickerInterface('colorPickerOpen');
+		this.components = {colorPickerDefault, colorPickerDisabled, colorPickerDirectionUp, colorPickerOpen};
 	}
 
 	open (urlExtra) {

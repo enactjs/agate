@@ -18,7 +18,7 @@ const app = (props) => <div {...props}>
 		</ColorPicker>
 		<ColorPicker
 			id="colorPickerDisabled"
-			disabled={false}
+			disabled
 			defaultValue="#44C5CB"
 			style={{padding: '40px'}}
 		>
