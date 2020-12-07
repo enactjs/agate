@@ -14,7 +14,11 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Picker` prop `noAnimation` and `wrap`
 - `agate/RangePicker` prop `noAnimation` and `wrap`
 - `agate/TimePicker` prop `onSpotlightDisappear` and `spotlightDisabled`
- 
+
+### Changed
+
+- `agate/FullscreenPopup` to support `duration` prop as not only a string but also a number
+
 ### Fixed
 
 - `agate/Button` to marquee when focused
