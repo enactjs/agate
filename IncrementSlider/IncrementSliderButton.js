@@ -1,13 +1,14 @@
 import kind from '@enact/core/kind';
-import Button from '../Button';
-import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
+
+import Button from '../Button';
 
 import componentCss from './IncrementSliderButton.module.less';
 
 /**
- * An [Button]{@link agate/Button.Button} customized for
+ * A [Button]{@link agate/Button.Button} customized for
  * [IncrementSlider]{@link agate/IncrementSlider.IncrementSlider}. It is optimized to only
  * update when `disabled` is changed to minimize unnecessary render cycles.
  *
@@ -24,7 +25,8 @@ const IncrementSliderButtonBase = kind({
 		css: PropTypes.object,
 		onTap: PropTypes.func,
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-		role: PropTypes.string
+		role: PropTypes.string,
+		size: PropTypes.oneOf(['small', 'large'])
 	},
 
 	styles: {
@@ -36,7 +38,7 @@ const IncrementSliderButtonBase = kind({
 		className: ({orientation, role, styler}) => styler.append(orientation, role)
 	},
 
-	render: ({css, onTap, ...rest}) => {
+	render: ({css, onTap, size, ...rest}) => {
 		delete rest.orientation;
 		delete rest.role;
 		return (
@@ -46,12 +48,13 @@ const IncrementSliderButtonBase = kind({
 				onTap={onTap}
 				onHold={onTap}
 				onHoldPulse={onTap}
+				size={size}
 			/>
 		);
 	}
 });
 
-const OnlyUpdate = onlyUpdateForKeys(['children', 'disabled', 'icon', 'spotlightDisabled', 'aria-label']);
+const OnlyUpdate = onlyUpdateForKeys(['aria-label', 'children', 'disabled', 'icon', 'size', 'spotlightDisabled']);
 const IncrementSliderButton = OnlyUpdate(IncrementSliderButtonBase);
 
 export default IncrementSliderButton;

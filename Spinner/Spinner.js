@@ -4,7 +4,7 @@
  * Used for indicating to the user that something is busy and interaction is temporarily suspended.
  *
  * @example
- * <Spinner color="light" size="small" type="searching" />
+ * <Spinner color="dark" size="small" type="searching" />
  *
  * @module agate/Spinner
  * @exports Spinner
@@ -12,12 +12,13 @@
  * @exports SpinnerDecorator
  */
 import kind from '@enact/core/kind';
-import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
+import UiSpinnerBase from '@enact/ui/Spinner';
+import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
-import UiSpinnerBase from '@enact/ui/Spinner';
 
+import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Spinner.module.less';
@@ -51,7 +52,7 @@ const SpinnerCore = kind({
 		 * @default 'searching'
 		 * @public
 		 */
-		type: PropTypes.string
+		type: PropTypes.oneOf(['loading', 'searching'])
 	},
 
 	defaultProps: {
@@ -65,7 +66,7 @@ const SpinnerCore = kind({
 	computed: {
 		'aria-label': ({'aria-label': label, type}) => {
 			// TODO: These static values will need to be localized
-			return label || type === 'searching' ? 'Searching' : 'Loading';
+			return label || type === 'searching' ? $L('Searching') : $L('Loading');
 		},
 		className: ({styler, type}) => styler.append(type),
 		spinnerNodes: ({styler, type}) => {
@@ -125,6 +126,15 @@ const SpinnerBase = kind({
 		css: PropTypes.object,
 
 		/**
+		 * Pauses the animation of the spinner
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		paused: PropTypes.bool,
+
+		/**
 		 * The size of the component.
 		 *
 		 * Recommended usage is "large" (default) for standalone and popup scenarios, while "small"
@@ -148,6 +158,7 @@ const SpinnerBase = kind({
 
 	defaultProps: {
 		color: 'light',
+		paused: false,
 		size: 'large',
 		transparent: false
 	},
@@ -158,14 +169,17 @@ const SpinnerBase = kind({
 	},
 
 	computed: {
-		className: ({children, color, size, transparent, styler}) => styler.append(
+		className: ({children, color, paused, size, styler, transparent}) => styler.append(
 			color,
 			size,
-			{content: !!children, transparent}
+			{content: !!children, transparent},
+			{pausedAnimation: paused},
+			{transparentBackground: transparent}
 		)
 	},
 
 	render: ({css, ...rest}) => {
+		delete rest.paused;
 		delete rest.transparent;
 
 		return (

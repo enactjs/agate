@@ -1,0 +1,23 @@
+@import '~@enact/agate/styles/mixins.less';
+@import '~@enact/agate/styles/skin.less';
+
+.applySkins({
+	.spacingIndicator {
+		border: 9px solid @agate-highlight;
+		margin-top: 0;
+
+		code {
+			color: @agate-accent;
+		}
+	}
+});
+
+.spacingNote {
+	display: none;
+}
+
+:global(.gallium) {
+	.spacingNote {
+		display: block;
+	}
+}

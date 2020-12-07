@@ -1,15 +1,21 @@
 language: node_js
 node_js:
-    - "lts/*"
+    - "10"
 sudo: false
-cache:
-  directories:
-    - $(npm config get cache)
+cache: npm
 install:
     - npm config set prefer-offline true
     - npm install -g enactjs/cli#develop
+    - npm install -g codecov
+    - git clone --branch=develop --depth 1 https://github.com/enactjs/enact ../enact
+    - pushd ../enact
     - npm install
-
+    - npm run lerna exec -- --ignore enact-sampler --concurrency 1 -- npm --no-package-lock link
+    - npm run lerna link -- --ignore enact-sampler
+    - popd
+    - rm -fr node_modules/@enact
+    - npm install
+    - enact link
 script:
     - npm run lint -- -- --max-warnings 0 .
     - npm run test

@@ -19,6 +19,7 @@
 @agate-button-border-radius: @electro-border-radius;
 @agate-button-icon-border-radius: @agate-button-border-radius;
 @agate-button-badge-position: auto -3px -6px auto;
+@agate-button-badge-position-rtl: auto auto -6px -3px;
 @agate-button-badge-border-radius: 3px;
 @agate-button-badge-padding: 0 6px;
 
@@ -53,9 +54,6 @@
 
 // Heading
 // ---------------------------------------
-@agate-heading-spacing-large: 24px;
-@agate-heading-spacing-medium: 24px;
-@agate-heading-spacing-small: 12px;
 @agate-heading-title-padding: @agate-heading-padding 50px;
 @agate-heading-title-decoration-height: 28px;
 @agate-heading-title-decoration-width: auto;
@@ -67,6 +65,7 @@
 
 // Panels
 // ---------------------------------------
+@agate-panels-controls-top: (@agate-component-spacing + 21px);
 @agate-panels-panel-padding: @agate-component-spacing;
 @agate-panels-tab-bar-margin: 0;
 @agate-panels-tab-bg-position: 0;
@@ -97,12 +96,13 @@
 @agate-picker-font-size: 21px;
 @agate-picker-active-font-size: 27px;
 @agate-picker-margin: @agate-component-spacing;
+@agate-picker-padding: 0;
 
 // Popup
 // ---------------------------------------
 @agate-popup-border-radius: @electro-border-radius;
 @agate-popup-border: none;
-@agate-popup-title-padding: 0;
+@agate-popup-closebutton-title-padding: 0;
 @agate-popup-body-border-radius: @electro-border-radius;
 @agate-popup-closebutton-position-left: auto;
 @agate-popup-closebutton-position-right: 18px;
@@ -119,6 +119,7 @@
 
 // Slider
 // ---------------------------------------
+@agate-slider-active-knob-width: @agate-slider-knob-width;
 @agate-slider-knob-border-radius: @electro-border-radius;
 @agate-slider-knob-resting-state-scale: 0.8;
 @agate-slider-knob-transform: @agate-translate-center scale(@agate-slider-knob-resting-state-scale) skewX(@electro-skew);
@@ -165,6 +166,8 @@
 // Switch
 // ---------------------------------------
 @agate-switch-icon-scale: 2.8;
+@agate-switch-icon-position-left: -9px;
+@agate-switch-selected-icon-position-left: ((@agate-switch-width - @agate-switch-height) + @agate-switch-icon-position-left);
 
 // ToggleButton
 // ---------------------------------------

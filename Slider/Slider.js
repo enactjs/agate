@@ -3,10 +3,10 @@
  *
  * @example
  * <Slider
- *   defaultValue={-30}
- *   max={100}
- *   min={-100}
- *   step={10}
+ * 	defaultValue={-30}
+ * 	max={100}
+ * 	min={-100}
+ * 	step={10}
  * />
  *
  * @module agate/Slider
@@ -44,8 +44,9 @@ import componentCss from './Slider.module.less';
  * Range-selection input component.
  *
  * @class SliderBase
- * @extends ui/Slider.SliderBase
  * @memberof agate/Slider
+ * @extends ui/Slider.SliderBase
+ * @mixes agate/Slider.SliderDecorator
  * @ui
  * @public
  */
@@ -58,6 +59,7 @@ const SliderBase = kind({
 		 * input keys.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		activateOnFocus: PropTypes.bool,
@@ -66,6 +68,7 @@ const SliderBase = kind({
 		 * Sets the knob to selected state and allows it to move via 5-way controls.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		active: PropTypes.bool,
@@ -82,6 +85,16 @@ const SliderBase = kind({
 		 * @public
 		 */
 		css: PropTypes.object,
+
+
+		/**
+		 * Disables component and does not generate events.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		disabled: PropTypes.bool,
 
 		/**
 		 * Indicates that the slider has gained focus.
@@ -154,6 +167,21 @@ const SliderBase = kind({
 		onKeyUp: PropTypes.func,
 
 		/**
+		 * Sets the point, as a proportion between 0 and 1, from which the slider is filled.
+		 *
+		 * Applies to both the slider's `value` and `backgroundProgress`. In both cases,
+		 * setting the value of `progressAnchor` will cause the slider to fill from that point
+		 * down, when `value` or `backgroundProgress` is proportionally less than the anchor, or up,
+		 * when `value` or `backgroundProgress` is proportionally greater than the anchor, rather
+		 * than always from the start of the slider.
+		 *
+		 * @type {Number}
+		 * @default 0
+		 * @public
+		 */
+		progressAnchor: PropTypes.number,
+
+		/**
 		 * The amount to increment or decrement the value.
 		 *
 		 * @type {Number}
@@ -179,6 +207,7 @@ const SliderBase = kind({
 		disabled: false,
 		max: 100,
 		min: 0,
+		progressAnchor: 0,
 		step: 1
 	},
 
@@ -216,7 +245,7 @@ const SliderBase = kind({
 		})
 	},
 
-	render: ({css, ...rest}) => {
+	render: ({css, disabled, ...rest}) => {
 		delete rest.activateOnFocus;
 		delete rest.active;
 		delete rest.focused;
@@ -226,7 +255,9 @@ const SliderBase = kind({
 		return (
 			<UiSlider
 				{...rest}
+				aria-disabled={disabled}
 				css={css}
+				disabled={disabled}
 				progressBarComponent={
 					<ProgressBar css={css} />
 				}
@@ -242,9 +273,8 @@ const SliderBase = kind({
  * @memberof agate/Slider
  * @mixes ui/Changeable.Changeable
  * @mixes spotlight/Spottable.Spottable
- * @mixes agate/Skinnable.Skinnable
  * @mixes ui/Slottable.Slottable
- * @mixes ui/Slider.SliderDecorator
+ * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const SliderDecorator = compose(
@@ -272,6 +302,7 @@ const SliderDecorator = compose(
  * @ui
  * @public
  */
+const Slider = SliderDecorator(SliderBase);
 
 /**
  * Overrides the `aria-valuetext` for the slider.
@@ -284,8 +315,6 @@ const SliderDecorator = compose(
  * @type {String|Number}
  * @public
  */
-
-const Slider = SliderDecorator(SliderBase);
 
 export default Slider;
 export {

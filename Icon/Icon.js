@@ -2,13 +2,14 @@
  * Provides Agate styled icon components and behaviors.
  *
  * @example
- * <Icon>flag</Icon>
+ * <Icon>closex</Icon>
  *
  * @module agate/Icon
  * @exports Icon
  * @exports IconBase
  * @exports IconDecorator
  * @exports icons
+ * @exports iconsSilicon
  */
 
 import kind from '@enact/core/kind';
@@ -19,7 +20,7 @@ import PropTypes from 'prop-types';
 
 import Skinnable from '../Skinnable';
 
-import iconList from './IconList.js';
+import iconList, {iconListSilicon} from './IconList.js';
 
 import componentCss from './Icon.module.less';
 
@@ -35,7 +36,7 @@ import componentCss from './Icon.module.less';
 const IconBase = kind({
 	name: 'Icon',
 
-	propTypes: /** @lends agate/Icon.Icon.prototype */ {
+	propTypes: /** @lends agate/Icon.IconBase.prototype */ {
 		/**
 		 * The icon content.
 		 *
@@ -79,6 +80,14 @@ const IconBase = kind({
 		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
+		 * The current skin.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		skin: PropTypes.string,
+
+		/**
 		 * The amount of sprite "cells" in the src image.
 		 *
 		 * This property only affects image-based icons, not icon glyphs.
@@ -109,13 +118,13 @@ const IconBase = kind({
 		})
 	},
 
-	render: (props) => {
-		delete props.spriteCount;
+	render: ({css, skin, ...rest}) => {
+		delete rest.spriteCount;
 
 		return UiIcon.inline({
-			...props,
-			css: props.css,
-			iconList
+			...rest,
+			css: css,
+			iconList: (skin === 'silicon' ? iconListSilicon : iconList)
 		});
 	}
 });
@@ -245,6 +254,32 @@ const IconBase = kind({
  * radio
  * rearscreen
  * weather
+ * fullscreen
+ * menu
+ * history
+ * browser
+ * lock
+ * search2
+ * bookmark
+ * star
+ * hollowstar
+ * halfstar
+ * refresh
+ * time
+ * pausebold
+ * playbold
+ * controls
+ * diagnostics
+ * mapbox
+ * displaycontrol
+ * controlleft
+ * controlright
+ * mainpage
+ * playlist
+ * resume
+ * trailer
+ * plusbold
+ * minusbold
  * ```
  *
  * @name iconList
@@ -264,7 +299,7 @@ const IconBase = kind({
  */
 const IconDecorator = compose(
 	Pure,
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 /**
@@ -284,5 +319,6 @@ export {
 	Icon,
 	IconBase,
 	IconDecorator,
-	iconList as icons
+	iconList as icons,
+	iconListSilicon as iconsSilicon
 };

@@ -30,9 +30,6 @@
 
 // Heading
 // ---------------------------------------
-@agate-heading-spacing-large: 24px;
-@agate-heading-spacing-medium: 24px;
-@agate-heading-spacing-small: 12px;
 @agate-heading-title-decoration-height: 28px;
 @agate-heading-title-decoration-width: auto;
 @agate-heading-title-decoration-positions: auto 0 0.5em 100px;
@@ -43,6 +40,8 @@
 
 // Panels
 // ---------------------------------------
+@agate-panel-h-padding: 99px;
+@agate-panels-controls-top: (@agate-component-spacing - 6px);
 @agate-panels-partial-height: 50%;
 @agate-panels-partial-width: auto;
 @agate-panels-tab-margin: 0;
@@ -61,7 +60,7 @@
 @agate-popup-border-radius: 0;
 @agate-popup-border: 1px solid transparent;
 @agate-popup-padding: (@agate-component-spacing * 4) @agate-component-spacing;
-@agate-popup-title-padding: 0 (@agate-button-small-height) 0 0;
+@agate-popup-closebutton-title-padding: 0 (@agate-button-small-height) 0 0;
 @agate-popup-body-border: @agate-popup-border;
 @agate-popup-body-padding: (@agate-component-spacing * 2);
 @agate-popup-body-margin: -@agate-component-spacing;  // Extend to the edge
@@ -78,7 +77,7 @@
 
 // Slider
 // ---------------------------------------
-@agate-slider-knob-active-transform: @agate-translate-center scale(1);
+@agate-slider-active-knob-transform: @agate-translate-center scale(1);
 @agate-slider-knob-border-radius: (@agate-slider-knob-height / 2);
 @agate-slider-knob-border-width: 0;
 @agate-slider-knob-resting-state-scale: 0.8;

@@ -1,0 +1,121 @@
+// Picker.module.less
+//
+@import "../../styles/mixins.less";
+@import "../../styles/variables.less";
+@import "../../styles/skin.less";
+
+.picker {
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+
+	&.horizontal {
+		flex-direction: row;
+		display: inline-flex;
+	}
+
+	.applySkins({
+		align-items: center;
+		justify-content: center;
+		min-width: 72px;
+		font-weight: @agate-picker-font-weight;
+		font-size: @agate-picker-font-size;
+		border-radius: @agate-picker-border-radius;
+		transform: @agate-picker-transform;
+		margin: @agate-picker-margin;
+		padding: @agate-picker-padding;
+
+		.sizingPlaceholder {
+			height: 0;
+			visibility: hidden;
+			padding-left: .extract(@agate-picker-padding, left)[];
+			padding-right: .extract(@agate-picker-padding, right)[];
+			line-height: 0;
+		}
+
+		.label {
+			transform: @agate-picker-label-transform;
+		}
+
+		.item,
+		.itemDecrement,
+		.itemIncrement,
+		.secondaryItemIncrement,
+		.secondaryItemDecrement {
+			margin: 0;
+			color: inherit;
+			width: 100%;
+			text-align: center;
+			height: @agate-button-height;
+			line-height: @agate-button-height;
+
+			.sizingPlaceholder {
+				font-size: @agate-picker-active-font-size;
+				font-weight: @agate-picker-active-font-weight;
+			}
+
+			&.active {
+				color: @agate-picker-active-color;
+				background-color: @agate-picker-active-bg-color;
+				background-image: @agate-picker-active-bg-image;
+				font-size: @agate-picker-active-font-size;
+				font-weight: @agate-picker-active-font-weight;
+			}
+
+			&[disabled] {
+				.vendor-opacity(@agate-disabled-opacity);
+			}
+
+			.focus({
+				color: @agate-picker-item-focus-color;
+				background-color: transparent;
+				background-image: @agate-picker-item-focus-bg-image;
+			});
+		}
+
+		.itemDecrement {
+			background-image: @agate-picker-item-decrement-bg-image;
+		}
+
+		.itemIncrement {
+			background-image: @agate-picker-item-increment-bg-image;
+		}
+
+		.itemDecrement,
+		.itemIncrement {
+			color: @agate-picker-item-color;
+			background-color: @agate-picker-item-bg-color;
+		}
+
+		.secondaryItemIncrement,
+		.secondaryItemDecrement {
+			color: @agate-picker-secondary-item-color;
+		}
+
+		&.horizontal {
+			.item,
+			.itemDecrement,
+			.itemIncrement,
+			.secondaryItemIncrement,
+			.secondaryItemDecrement {
+				width: @agate-picker-horizontal-item-width;
+			}
+		}
+	});
+
+	.viewManager {
+		overflow: hidden;
+		height: 100%;
+
+		.item {
+			position: relative;
+		}
+
+		> .item:nth-child(2) {
+			// the second element in the ViewManager should be offset by the container height
+			// so the transition can position two relative views next to each other safely.
+			top: -100%;
+		}
+	}
+
+}

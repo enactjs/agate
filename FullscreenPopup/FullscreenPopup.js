@@ -4,13 +4,14 @@
  * @module agate/FullscreenPopup
  * @exports FullscreenPopup
  * @exports FullscreenPopupBase
+ * @exports FullscreenPopupDecorator
  */
 
-import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
-import PropTypes from 'prop-types';
-import React from 'react';
 import Transition from '@enact/ui/Transition';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
+import React from 'react';
 
 import PopupState from '../Popup/PopupState';
 import Skinnable from '../Skinnable';
@@ -18,10 +19,18 @@ import Skinnable from '../Skinnable';
 import componentCss from './FullscreenPopup.module.less';
 
 /**
- * TBD.
+ * Full screen popup component.
+ *
+ * Usage:
+ * ```
+ * <FullscreenPopup open>
+ *   Hello Fullscreen Popup
+ * </FullscreenPopup>
+ * ```
  *
  * @class FullscreenPopupBase
  * @memberof agate/FullscreenPopup
+ * @extends ui/Transition.Transition
  * @ui
  * @public
  */
@@ -77,21 +86,34 @@ const FullscreenPopupBase = kind({
 	}
 });
 
+/**
+ * Applies Agate specific behaviors to [FullscreenPopupBase]{@link agate/FullscreenPopup.FullscreenPopupBase}.
+ *
+ * @hoc
+ * @memberof agate/FullscreenPopup
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const FullscreenPopupDecorator = compose(
 	Skinnable({prop: 'skin'}),
 	PopupState
 );
 
 /**
- * TBD.
+ * Full screen popup component, ready to use in Agate applications.
  *
  * @class FullscreenPopup
  * @memberof agate/FullscreenPopup
- * @mixes agate/Skinnable.Skinnable
+ * @extends agate/FullscreenPopup.FullscreenPopupBase
+ * @mixes agate/FullscreenPopup.FullscreenPopupDecorator
  * @ui
  * @public
  */
 const FullscreenPopup = FullscreenPopupDecorator(FullscreenPopupBase);
 
 export default FullscreenPopup;
-export {FullscreenPopup, FullscreenPopupBase};
+export {
+	FullscreenPopup,
+	FullscreenPopupBase,
+	FullscreenPopupDecorator
+};

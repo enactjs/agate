@@ -1,6 +1,9 @@
 /**
  * Provides Agate-themed Item component and interactive toggle switch icon.
  *
+ * @example
+ * <SwitchItem>Item</SwitchItem>
+ *
  * @module agate/SwitchItem
  * @exports SwitchItem
  * @exports SwitchItemBase
@@ -71,13 +74,22 @@ const SwitchItemBase = kind({
 		icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
 		/**
+		 * Sets the switch to the 'on' state.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		selected: PropTypes.bool,
+
+		/**
 		 * Customize the text displayed when the switch is "off".
 		 *
 		 * @type {String}
 		 * @default 'off'
 		 * @public
 		 */
-		offText: PropTypes.string,
+		switchOffLabel: PropTypes.string,
 
 		/**
 		 * Customize the text displayed when the switch is "on".
@@ -86,23 +98,14 @@ const SwitchItemBase = kind({
 		 * @default 'on'
 		 * @public
 		 */
-		onText: PropTypes.string,
-
-		/**
-		 * Sets the switch to the 'on' state.
-		 *
-		 * @type {Boolean}
-		 * @default false
-		 * @public
-		 */
-		selected: PropTypes.bool
+		switchOnLabel: PropTypes.string
 	},
 
 	defaultProps: {
 		disabled: false,
-		offText: 'off',
-		onText: 'on',
-		selected: false
+		selected: false,
+		switchOffLabel: 'off',
+		switchOnLabel: 'on'
 	},
 
 	styles: {
@@ -127,20 +130,31 @@ const SwitchItemBase = kind({
 		)
 	},
 
-	render: ({children, css, icon, offText, onText, selected, ...rest}) => {
+	render: ({children, css, icon, selected, switchOffLabel, switchOnLabel, ...rest}) => {
 
 		return (
-			<Item {...rest} css={css} label={selected ? onText : offText} labelPosition="after">
+			<Item
+				aria-pressed={selected}
+				role="button"
+				{...rest}
+				css={css}
+				label={selected ? switchOnLabel : switchOffLabel}
+				labelPosition="after"
+			>
 				{icon}
 				{children}
-				<Switch slot="slotAfter" selected={selected} className={css.switchIcon} />
+				<Switch
+					className={css.switchIcon}
+					selected={selected}
+					slot="slotAfter"
+				/>
 			</Item>
 		);
 	}
 });
 
 /**
- * Applies Agate specific behaviors to [SwitchItem]{@link agate/SwitchItem.SwitchItemBase} components.
+ * Applies Agate specific behaviors to [SwitchItemBase]{@link agate/SwitchItem.SwitchItemBase} components.
  *
  * @hoc
  * @memberof agate/SwitchItem
@@ -161,7 +175,7 @@ const SwitchItemDecorator = compose(
  *
  * @class SwitchItem
  * @memberof agate/SwitchItem
- * @extends agate/SwitchItem.SwitchItem
+ * @extends agate/SwitchItem.SwitchItemBase
  * @mixes agate/SwitchItem.SwitchItemDecorator
  * @ui
  * @public

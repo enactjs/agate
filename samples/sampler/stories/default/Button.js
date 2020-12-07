@@ -6,8 +6,9 @@ import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Button, {ButtonBase} from '@enact/agate/Button';
+import Skinnable from '@enact/agate/Skinnable';
 
-import icons from './icons';
+import iconList, {iconListSilicon} from './icons';
 
 Button.displayName = 'Button';
 const Config = mergeComponentMetadata('Button', UiButton, ButtonBase, Button);
@@ -16,15 +17,30 @@ const Config = mergeComponentMetadata('Button', UiButton, ButtonBase, Button);
 const prop = {
 	casing: ['preserve', 'sentence', 'word', 'upper'],
 	colors: ['', '#E6444B', '#FDC902', '#986AAD', '#4E75E1', '#30CC83', '#44C8D5', '#47439B', '#2D32A6', '#4E75E1'],
-	icons: ['', ...icons],
-	joinedPosition: ['', 'left', 'center', 'right']
+	iconFlip: ['', 'auto', 'both', 'horizontal', 'vertical'],
+	iconPosition: ['', 'before', 'after'],
+	joinedPosition: ['', 'left', 'center', 'right'],
+	minWidth: {'undefined/null (automatic)': '', 'true (enforce)': true, 'false (ignore)': 'false'}
 };
 
-storiesOf('Agate', module)
-	.add(
-		'Button',
-		() => (
+// The following is needed to allow us to disambiguate between minWidth=false and minWidth=undefined
+const threeWayBoolean = (value) => {
+	switch (value) {
+		case 'true': return true;
+		case 'false': return false;
+		case '': return null;
+		default: return value;
+	}
+};
+
+const SkinnedButton = Skinnable(
+	{prop: 'skin'},
+	({skin, ...rest}) => {
+		let icons = skin === 'silicon' ? ['', ...iconListSilicon] :  ['', ...iconList];
+
+		return (
 			<Button
+				{...rest}
 				animateOnRender={boolean('animateOnRender', Config)}
 				animationDelay={number('animationDelay', Config)}
 				backgroundOpacity={select('backgroundOpacity', ['opaque', 'lightOpaque', 'transparent'], Config)}
@@ -32,15 +48,28 @@ storiesOf('Agate', module)
 				badgeColor={select('badgeColor', prop.colors, Config)}
 				disabled={boolean('disabled', Config)}
 				highlighted={boolean('highlighted', Config)}
-				icon={select('icon', prop.icons, Config)}
+				icon={select('icon', icons, Config)}
+				iconFlip={select('iconFlip', prop.iconFlip, Config)}
+				iconPosition={select('iconPosition', prop.iconPosition, Config)}
 				joinedPosition={select('joinedPosition', prop.joinedPosition, Config)}
+				minWidth={threeWayBoolean(select('minWidth', prop.minWidth, Config))}
 				onClick={action('onClick')}
 				selected={boolean('selected', Config)}
 				size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}
+				tooltipText={text('tooltipText', Config, 'This is a Button')}
 				type={select('type', ['standard', 'grid'], Config)}
 			>
-				{text('children', Button, 'Click me')}
+				{text('children', Config, 'Click me')}
 			</Button>
+		);
+	}
+);
+
+storiesOf('Agate', module)
+	.add(
+		'Button',
+		() => (
+			<SkinnedButton />
 		),
 		{
 			text: 'The basic Button'

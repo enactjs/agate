@@ -1,32 +1,34 @@
 {
   "name": "agate-sampler",
-  "version": "1.0.0-alpha.9",
-  "description": "Component samples for Agate",
+  "version": "1.0.0-alpha.16",
+  "description": "Component and QA samples for Agate",
   "private": true,
   "main": "index.js",
   "scripts": {
-    "bootstrap": "npm i && enact link",
+    "bootstrap": "enact bootstrap",
+    "clean": "enact clean",
+    "cleanall": "enact clean --all",
     "lint": "enact lint --strict",
     "test": "echo \"No test suite\" && exit 0",
     "pack": "build-storybook -c .storybook -o dist",
     "pack-qa": "build-storybook -c .qa-storybook -o dist",
-    "serve": "start-storybook -p 8080 -c .storybook --ci"
+    "serve": "start-storybook -p 8080 -c .storybook --ci",
+    "serve-qa": "start-storybook -p 8080 -c .qa-storybook --ci"
   },
   "license": "Apache-2.0",
-  "eslintConfig": {
-    "extends": "enact/strict",
-    "root": true
+  "enact": {
+    "theme": "agate"
   },
   "dependencies": {
     "@enact/agate": "../../",
-    "@enact/core": "^3.2.5",
-    "@enact/ui": "^3.2.5",
+    "@enact/core": "^3.4.0",
+    "@enact/ui": "^3.4.0",
     "ilib": "^14.4.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6"
   },
   "devDependencies": {
-    "@enact/storybook-utils": "^1.0.0",
+    "@enact/storybook-utils": "^2.0.0",
     "@storybook/addons": "5.3.5",
     "@storybook/react": "5.3.5",
     "@storybook/theming": "5.3.5",

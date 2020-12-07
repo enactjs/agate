@@ -34,6 +34,7 @@ const defaultConfig = {
  * `updateOnMount` config member which will initiate an update cycle within React once the data is
  * available from an upstream shared state.
  *
+ * @class SharedStateDecorator
  * @hoc
  * @memberof agate/Panels
  * @private
@@ -42,9 +43,9 @@ const SharedStateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {idProp, updateOnMount} = config;
 
 	return class extends React.Component {
-		static displayName = 'SharedStateDecorator'
+		static displayName = 'SharedStateDecorator';
 
-		static contextType = SharedState
+		static contextType = SharedState;
 
 		static propTypes = /** @lends agate/Panels.SharedStateDecorator.prototype */ {
 			/**
@@ -55,7 +56,7 @@ const SharedStateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * @public
 			 */
 			noSharedState: PropTypes.bool
-		}
+		};
 
 		constructor (props) {
 			super(props);

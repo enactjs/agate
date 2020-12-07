@@ -66,6 +66,7 @@ function toIString (str) {
 
 	if (!rb) {
 		createResBundle({sync: true, onLoad: setResBundle});
+		rb = getResBundle();
 	}
 
 	return getIStringFromBundle(str, rb);

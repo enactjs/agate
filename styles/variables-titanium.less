@@ -10,6 +10,7 @@
 // ---------------------------------------
 @agate-button-border-radius: 9999px;
 @agate-button-badge-position: auto auto -18% 50%;
+@agate-button-badge-position-rtl: @agate-button-badge-position;
 @agate-button-badge-transform: @agate-translate-center;
 
 // ColorPicker
@@ -32,9 +33,6 @@
 
 // Heading
 // ---------------------------------------
-@agate-heading-spacing-large: 24px;
-@agate-heading-spacing-medium: 24px;
-@agate-heading-spacing-small: 12px;
 @agate-heading-title-padding: @agate-heading-padding 50px;
 @agate-heading-title-decoration-height: 28px;
 @agate-heading-title-decoration-width: auto;
@@ -68,6 +66,8 @@
 // Switch
 // ---------------------------------------
 @agate-switch-icon-scale: 2.8;
+@agate-switch-icon-position-left: -9px;
+@agate-switch-selected-icon-position-left: ((@agate-switch-width - @agate-switch-height) + @agate-switch-icon-position-left);
 
 // ToggleButton
 // ---------------------------------------

@@ -3,13 +3,13 @@
  *
  * @example
  * <IncrementSlider
- *   decrementIcon="minus"
- *   defaultValue={-25}
- *   incrementIcon="plus"
- *   knobStep={25}
- *   max={100}
- *   min={-100}
- *   step={5}
+ * 	decrementIcon="minus"
+ * 	defaultValue={-25}
+ * 	incrementIcon="plus"
+ * 	knobStep={25}
+ * 	max={100}
+ * 	min={-100}
+ * 	step={5}
  * />
  *
  * @module agate/IncrementSlider
@@ -24,12 +24,14 @@ import kind from '@enact/core/kind';
 import {extractAriaProps} from '@enact/core/util';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
-import Slottable from '@enact/ui/Slottable';
+import IdProvider from '@enact/ui/internal/IdProvider';
 import Pure from '@enact/ui/internal/Pure';
+import Slottable from '@enact/ui/Slottable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
+import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
 import {SliderBase} from '../Slider';
 import {emitChange} from '../Slider/utils';
@@ -54,8 +56,6 @@ const forwardWithType = (type, props) => forward(type, {type}, props);
  * @class IncrementSliderBase
  * @memberof agate/IncrementSlider
  * @extends agate/Slider.SliderBase
- * @mixes agate/Skinnable.Skinnable
- * @mixes spotlight/Spottable.Spottable
  * @ui
  * @public
  */
@@ -76,7 +76,6 @@ const IncrementSliderBase = kind({
 		 * buttons.
 		 *
 		 * @type {Boolean}
-		 * @memberof agate/IncrementSlider.IncrementSliderBase.prototype
 		 * @public
 		 */
 		'aria-hidden': PropTypes.bool,
@@ -87,7 +86,6 @@ const IncrementSliderBase = kind({
 		 * the slider directly through the props.
 		 *
 		 * @type {String|Number}
-		 * @memberof agate/IncrementSlider.IncrementSliderBase.prototype
 		 * @public
 		 */
 		'aria-valuetext': PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -111,19 +109,10 @@ const IncrementSliderBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * The `data-webos-voice-group-label` for the IconButton of IncrementSlider.
-		 *
-		 * @type {String}
-		 * @memberof agate/IncrementSlider.IncrementSliderBase.prototype
-		 * @public
-		 */
-		'data-webos-voice-group-label': PropTypes.string,
-
-		/**
 		* Sets the hint string read when focusing the decrement button.
 		*
-		* @default 'press ok button to decrease the value'
 		* @type {String}
+		* @default 'press button to decrease the value'
 		* @public
 		*/
 		decrementAriaLabel: PropTypes.string,
@@ -134,6 +123,7 @@ const IncrementSliderBase = kind({
 		 * [vertical]{@link agate/IncrementSlider.IncrementSlider#vertical} is changed.
 		 *
 		 * @type {String}
+		 * @default 'minus'
 		 * @public
 		 */
 		decrementIcon: PropTypes.string,
@@ -164,7 +154,7 @@ const IncrementSliderBase = kind({
 		/**
 		* Sets the hint string read when focusing the increment button.
 		*
-		* @default 'press ok button to increase the value'
+		* @default 'press button to increase the value'
 		* @type {String}
 		* @public
 		*/
@@ -176,6 +166,7 @@ const IncrementSliderBase = kind({
 		 * [vertical]{@link agate/IncrementSlider.IncrementSlider#vertical} is changed.
 		 *
 		 * @type {String}
+		 * @default 'plus'
 		 * @public
 		 */
 		incrementIcon: PropTypes.string,
@@ -212,6 +203,7 @@ const IncrementSliderBase = kind({
 		 * Hides the slider bar fill and prevents highlight when spotted.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		noFill: PropTypes.bool,
@@ -330,9 +322,34 @@ const IncrementSliderBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
+		 * Sets the point, as a proportion between 0 and 1, from which the slider is filled.
+		 *
+		 * Applies to both the slider's `value` and `backgroundProgress`. In both cases,
+		 * setting the value of `progressAnchor` will cause the slider to fill from that point
+		 * down, when `value` or `backgroundProgress` is proportionally less than the anchor, or up,
+		 * when `value` or `backgroundProgress` is proportionally greater than the anchor, rather
+		 * than always from the start of the slider.
+		 *
+		 * @type {Number}
+		 * @default 0
+		 * @public
+		 */
+		progressAnchor: PropTypes.number,
+
+		/**
+		 * The size of the incrementSlider.
+		 *
+		 * @type {('small'|'large')}
+		 * @default 'large'
+		 * @public
+		 */
+		size: PropTypes.oneOf(['small', 'large']),
+
+		/**
 		 * Disables spotlight navigation into the component.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		spotlightDisabled: PropTypes.bool,
@@ -365,6 +382,8 @@ const IncrementSliderBase = kind({
 		min: 0,
 		noFill: false,
 		orientation: 'horizontal',
+		progressAnchor: 0,
+		size: 'large',
 		spotlightDisabled: false,
 		step: 1
 	},
@@ -405,18 +424,37 @@ const IncrementSliderBase = kind({
 	},
 
 	computed: {
-		className: ({orientation, styler}) => styler.append(orientation)
+		className: ({orientation, size, styler}) => styler.append(orientation, size),
+		decrementDisabled: ({disabled, min, value = min}) => disabled || value <= min,
+		incrementDisabled: ({disabled, max, min, value = min}) => disabled || value >= max,
+		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel, min, value = min}) => {
+			if (decrementAriaLabel == null) {
+				decrementAriaLabel = $L('press button to decrease the value');
+			}
+
+			return `${valueText != null ? valueText : value} ${decrementAriaLabel}`;
+		},
+		incrementAriaLabel: ({'aria-valuetext': valueText, incrementAriaLabel, min, value = min}) => {
+			if (incrementAriaLabel == null) {
+				incrementAriaLabel = $L('press button to increase the value');
+			}
+
+			return `${valueText != null ? valueText : value} ${incrementAriaLabel}`;
+		}
 	},
 
 	render: ({active,
 		'aria-hidden': ariaHidden,
-		'data-webos-voice-group-label': voiceGroupLabel,
 		backgroundProgress,
 		css,
+		decrementAriaLabel,
+		decrementDisabled,
 		decrementIcon,
 		disabled,
 		focused,
 		id,
+		incrementAriaLabel,
+		incrementDisabled,
 		incrementIcon,
 		knobStep,
 		max,
@@ -432,6 +470,8 @@ const IncrementSliderBase = kind({
 		onIncrementSpotlightDisappear,
 		onSpotlightDisappear,
 		orientation,
+		progressAnchor,
+		size,
 		spotlightDisabled,
 		step,
 		value,
@@ -445,23 +485,22 @@ const IncrementSliderBase = kind({
 		delete rest.onSpotlightUp;
 
 		return (
-			<div {...rest}>
+			<div aria-hidden={ariaHidden} {...rest}>
 				<IncrementSliderButton
-					icon={decrementIcon}
-					aria-hidden={ariaHidden}
+					aria-controls={!incrementDisabled ? id : null}
+					aria-label={decrementAriaLabel}
 					className={css.decrementButton}
-					data-webos-voice-group-label={voiceGroupLabel}
-					disabled={disabled}
+					disabled={decrementDisabled}
+					icon={decrementIcon}
 					onTap={onDecrement}
 					onSpotlightDisappear={onDecrementSpotlightDisappear}
 					orientation={orientation}
-					role="decrement"
+					size={size}
 					spotlightDisabled={spotlightDisabled}
 				/>
 				<Slider
 					{...ariaProps}
 					active={active}
-					aria-hidden={ariaHidden}
 					backgroundProgress={backgroundProgress}
 					css={css}
 					disabled={disabled}
@@ -478,19 +517,20 @@ const IncrementSliderBase = kind({
 					onSpotlightDisappear={onSpotlightDisappear}
 					orientation={orientation}
 					spotlightDisabled={spotlightDisabled}
+					progressAnchor={progressAnchor}
 					step={step}
 					value={value}
 				/>
 				<IncrementSliderButton
-					icon={incrementIcon}
-					aria-hidden={ariaHidden}
+					aria-controls={!decrementDisabled ? id : null}
+					aria-label={incrementAriaLabel}
 					className={css.incrementButton}
-					data-webos-voice-group-label={voiceGroupLabel}
-					disabled={disabled}
-					onTap={onIncrement}
+					disabled={incrementDisabled}
+					icon={incrementIcon}
 					onSpotlightDisappear={onIncrementSpotlightDisappear}
+					onTap={onIncrement}
 					orientation={orientation}
-					role="increment"
+					size={size}
 					spotlightDisabled={spotlightDisabled}
 				/>
 			</div>
@@ -498,9 +538,20 @@ const IncrementSliderBase = kind({
 	}
 });
 
+/**
+ * Applies Agate specific behaviors to [IncrementSliderBase]{@link agate/IncrementSlider.IncrementSliderBase}
+ *
+ * @hoc
+ * @memberof agate/IncrementSlider
+ * @mixes ui/Changeable.Changeable
+ * @mixes agate/Skinnable.Skinnable
+ * @mixes ui/Slottable.Slottable
+ * @public
+ */
 const IncrementSliderDecorator = compose(
 	Pure,
 	Changeable,
+	IdProvider({generateProp: null, prefix: 's_'}),
 	SliderBehaviorDecorator({emitSpotlightEvents: 'onSpotlightDirection'}),
 	Skinnable,
 	Slottable({slots: ['knob']})
@@ -518,6 +569,7 @@ const IncrementSliderDecorator = compose(
  * @class IncrementSlider
  * @memberof agate/IncrementSlider
  * @extends agate/IncrementSlider.IncrementSliderBase
+ * @mixes agate/IncrementSlider.IncrementSliderDecorator
  * @ui
  * @public
  */

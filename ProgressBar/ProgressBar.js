@@ -6,6 +6,7 @@
  *
  * @module agate/ProgressBar
  * @exports ProgressBar
+ * @exports ProgressBarBase
  */
 
 import kind from '@enact/core/kind';

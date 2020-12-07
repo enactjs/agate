@@ -1,8 +1,8 @@
-import classnames from 'classnames';
 import {forward, handle} from '@enact/core/handle';
 import Spotlight from '@enact/spotlight';
 import Pause from '@enact/spotlight/Pause';
 import ViewManager, {shape, SlideBottomArranger as VerticalArranger, SlideRightArranger as HorizontalArranger} from '@enact/ui/ViewManager';
+import classnames from 'classnames';
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -17,12 +17,13 @@ import css from './Panels.module.less';
  *
  * @class Viewport
  * @memberof agate/Panels
+ * @ui
  * @private
  */
 const ViewportBase = class extends React.Component {
-	static displayName = 'Viewport'
+	static displayName = 'Viewport';
 
-	static contextType = SharedState
+	static contextType = SharedState;
 
 	static propTypes = /** @lends agate/Panels.Viewport.prototype */ {
 
@@ -88,13 +89,13 @@ const ViewportBase = class extends React.Component {
 		 * @public
 		 */
 		orientation: PropTypes.string
-	}
+	};
 
 	static defaultProps = {
 		duration: 500,
 		index: 0,
 		noAnimation: false
-	}
+	};
 
 	constructor () {
 		super();
@@ -134,7 +135,7 @@ const ViewportBase = class extends React.Component {
 		}
 
 		return true;
-	}
+	};
 
 	removeTransitioningClass = () => {
 		if (this.node) {
@@ -142,25 +143,25 @@ const ViewportBase = class extends React.Component {
 		}
 
 		return true;
-	}
+	};
 
-	pause = () => this.paused.pause()
+	pause = () => this.paused.pause();
 
-	resume = () => this.paused.resume()
+	resume = () => this.paused.resume();
 
-	handle = handle.bind(this)
+	handle = handle.bind(this);
 
 	handleTransition = this.handle(
 		forward('onTransition'),
 		this.removeTransitioningClass,
 		this.resume
-	)
+	);
 
 	handleWillTransition = this.handle(
 		forward('onWillTransition'),
 		this.addTransitioningClass,
 		this.pause
-	)
+	);
 
 	mapChildren = (children, generateId) => React.Children.map(children, (child, index) => {
 		if (child) {
@@ -178,7 +179,7 @@ const ViewportBase = class extends React.Component {
 		} else {
 			return null;
 		}
-	})
+	});
 
 	getArranger = () => {
 		const {arranger, orientation} = this.props;
@@ -186,9 +187,9 @@ const ViewportBase = class extends React.Component {
 		if (arranger) return arranger;
 		if (orientation === 'vertical') return VerticalArranger;
 		else return HorizontalArranger;
-	}
+	};
 
-	getEnteringProp = (noAnimation) => noAnimation ? null : 'hideChildren'
+	getEnteringProp = (noAnimation) => noAnimation ? null : 'hideChildren';
 
 	render () {
 		const {children, duration, generateId, index, noAnimation, ...rest} = this.props;

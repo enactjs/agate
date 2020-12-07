@@ -10,16 +10,18 @@
  * @exports SliderButtonDecorator
  */
 
-import React from 'react';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Pure from '@enact/ui/internal/Pure';
-import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import {Cell, Row} from '@enact/ui/Layout';
 import UiSlider from '@enact/ui/Slider';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import Skinnable from '../Skinnable';
+
+import SliderButtonBehaviorDecorator from './SliderButtonBehaviorDecorator';
 
 import componentCss from './SliderButton.module.less';
 
@@ -142,6 +144,7 @@ const SliderButtonBase = kind({
  */
 const SliderButtonDecorator = compose(
 	Pure,
+	SliderButtonBehaviorDecorator,
 	Spottable,
 	Skinnable
 );

@@ -1,0 +1,141 @@
+// ContextualPopup.module.less
+//
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+@import '../styles/skin.less';
+
+.contextualPopup {
+	.agate-body-text();
+	position: absolute;
+
+	.container {
+		position: absolute;
+		background-clip: padding-box;
+		-webkit-background-clip: padding-box;
+		-moz-background-clip: padding-box;
+		box-sizing: border-box;
+
+		&.none { /* Needed to prevent global class being added in the DOM */ }
+
+		&.fixedSize {
+			overflow: hidden;
+		}
+
+		.closeButton {
+			position: absolute;
+			margin: 0;
+
+			.focus({
+				.bg {
+					background-color: transparent;
+					background-image: none;
+				}
+			});
+		}
+	}
+
+	:global(.enact-locale-right-to-left) & {
+		.container {
+			direction: rtl;
+		}
+	}
+
+	.arrow {
+		position: absolute;
+		will-change: transform;
+
+		&.above {
+			transform: rotate(180deg);
+		}
+
+		&.left {
+			transform: rotate(90deg);
+		}
+
+		&.right {
+			transform: rotate(-90deg);
+		}
+	}
+
+	// Skin colors
+	.applySkins({
+		.container {
+			background-color: @agate-contextual-popup-bg-color;
+			color: @agate-contextual-popup-color;
+			border-color: @agate-contextual-popup-border-color;
+			border-radius: @agate-contextual-popup-border-radius;
+			font-size: @agate-contextual-popup-font-size;
+			padding: @agate-contextual-popup-padding;
+
+			.closeButton {
+				right: @agate-spotlight-outset;
+				top: @agate-spotlight-outset;
+
+				.bg {
+					border-color: @agate-contextual-popup-close-button-border-color;
+				}
+
+				.focus({
+					.bg {
+						border-color: @agate-contextual-popup-close-button-border-color;
+					}
+				});
+
+				.icon {
+					color: @agate-contextual-popup-color;
+				}
+			}
+
+			&.reserveClose {
+				.padding-start-end(@agate-contextual-popup-padding-horizontal, @agate-button-small-height * 1.5);
+			}
+
+			&.above {
+				&.overlap { margin-top: @agate-contextual-popup-offset-overlap; }
+				&.small { margin-top: -@agate-contextual-popup-offset-small; }
+			}
+			&.below {
+				&.overlap { margin-top: -@agate-contextual-popup-offset-overlap; }
+				&.small { margin-top: @agate-contextual-popup-offset-small; }
+			}
+			&.right {
+				&.top,
+				&.middle,
+				&.bottom {
+					&.overlap { margin-left: -@agate-contextual-popup-offset-overlap; }
+					&.small { margin-left: @agate-contextual-popup-offset-small; }
+				}
+			}
+			&.left  {
+				&.top,
+				&.middle,
+				&.bottom {
+					&.overlap { margin-left: @agate-contextual-popup-offset-overlap; }
+					&.small { margin-left: -@agate-contextual-popup-offset-small; }
+				}
+			}
+		}
+
+		:global(.enact-locale-right-to-left) & {
+			.container {
+				&.reserveClose {
+					.padding-start-end(@agate-button-small-height * 1.5, @agate-contextual-popup-padding-horizontal);
+				}
+			}
+
+			.closeButton {
+				left: @agate-spotlight-outset;
+				right: auto;
+			}
+		}
+
+		.arrow {
+			height: @agate-contextual-popup-arrow-height;
+			width: @agate-contextual-popup-arrow-width;
+
+			.arrowFill {
+				fill: @agate-contextual-popup-bg-color;
+			}
+		}
+	});
+}

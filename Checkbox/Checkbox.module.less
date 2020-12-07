@@ -3,17 +3,19 @@
 @import "../styles/mixins.less";
 @import "../styles/skin.less";
 
-.toggleIcon {
+.checkbox {
 	.applySkins({
 		@size: @agate-checkbox-size;
 
 		width: @size;
 		height: @size;
+		border: @agate-checkbox-border-width solid @agate-checkbox-border-color;
 		border-radius: @agate-checkbox-border-radius;
 		color: @agate-checkbox-text-color;
 		background-color: @agate-checkbox-bg-color;
 
 		.icon {
+			position: absolute;
 			font-size: @agate-checkbox-icon-font-size;
 			visibility: hidden;
 			margin: 0;
@@ -22,7 +24,9 @@
 			height: @size;
 		}
 
-		&.selected {
+		&.selected,
+		&.indeterminate {
+			border-color: @agate-checkbox-selected-border-color;
 			.icon {
 				visibility: visible;
 			}

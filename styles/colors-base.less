@@ -72,7 +72,6 @@
 @agate-spotlight-color:                inherit;
 @agate-spotlight-bg-color:             inherit;
 @agate-spotlight-border-color:         inherit;
-@agate-spotlight-disabled-text-color:  inherit;
 @agate-spotlight-focus-bg-image:       inherit;
 
 // Button
@@ -82,6 +81,9 @@
 @agate-button-bg-image:       inherit;
 @agate-button-border-color:   inherit;
 @agate-button-shadow:         inherit;
+@agate-button-active-color:   inherit;
+@agate-button-active-bg-color: inherit;
+@agate-button-focus-border-color:   @agate-button-border-color;
 @agate-button-focus-color:    inherit;
 @agate-button-focus-bg-color: inherit;
 @agate-button-focus-bg-image: inherit;
@@ -108,24 +110,50 @@
 // ---------------------------------------
 @agate-checkbox-text-color: inherit;
 @agate-checkbox-bg-color: inherit;
+@agate-checkbox-border-color: inherit;
+@agate-checkbox-selected-border-color: inherit;
 
 // CheckboxItem
 // ---------------------------------------
-@agate-checkboxitem-border-color: inherit;
-@agate-checkboxitem-focus-border-color: inherit;
-@agate-checkboxitem-focus-text-color: inherit;
-@agate-checkboxitem-focus-bg-color: inherit;
+@agate-checkboxitem-border-color: @agate-item-border-color;
+@agate-checkboxitem-focus-border-color: @agate-item-focus-border-color;
+@agate-checkboxitem-focus-color: @agate-item-focus-color;
+@agate-checkboxitem-focus-bg-color: @agate-item-focus-bg-color;
+@agate-checkboxitem-selected-border-color: inherit;
 
 // ColorPicker
 // ---------------------------------------
 @agate-colorpicker-bg-color: @agate-popup-bg-color;
 @agate-colorpicker-palette-shadow: @agate-popup-shadow;
 
+// ContextualPopup
+// ---------------------------------------
+@agate-contextual-popup-bg-color:                   inherit;
+@agate-contextual-popup-border-color:               inherit;
+@agate-contextual-popup-close-button-border-color:  inherit;
+@agate-contextual-popup-color:                      inherit;
+
+// DateTimePicker
+// ---------------------------------------
+@agate-datetimepicker-active-container-bg-color: inherit;
+@agate-datetimepicker-active-container-bg-image: inherit;
+@agate-datetimepicker-divider-bg-color: inherit;
+@agate-datetimepicker-divider-opacity: inherit;
+
 // Dropdown
 // ---------------------------------------
 @agate-dropdown-border-color: @agate-gray;
+@agate-dropdown-button-bg-color: inherit;
+@agate-dropdown-button-border-color: inherit;
+@agate-dropdown-button-client-color: inherit;
+@agate-dropdown-button-icon-color: inherit;
+@agate-dropdown-button-open-border-color: inherit;
+@agate-dropdown-up-button-open-border-bottom-color: inherit;
 @agate-dropdown-list-bg-color: @agate-white;
 @agate-dropdown-selected-color: inherit;
+@agate-dropdown-item-border-color: inherit;
+@agate-dropdown-item-color: inherit;
+@agate-dropdown-item-focus-bg-color: inherit;
 
 // Drawer
 // ---------------------------------------
@@ -134,10 +162,19 @@
 @agate-drawer-border-color: @agate-popup-border-color;
 @agate-drawer-shadow: inherit;
 
+// ArcPicker
+// ---------------------------------------
+@agate-fanspeedcontrol-color: @agate-text-color;
+
 // FullscreenPopup
 // ---------------------------------------
 @agate-fullscreenpopup-bg-color: @agate-popup-bg-color;
 @agate-fullscreenpopup-bg-image: inherit;
+
+// Header
+// ---------------------------------------
+@agate-header-subtitle-text-color: inherit;
+@agate-header-subtitle-opacity: inherit;
 
 // Heading
 // ---------------------------------------
@@ -149,26 +186,57 @@
 // ---------------------------------------
 @agate-icon-color: @agate-text-color;
 
+// ImageItem
+// ---------------------------------------
+@agate-imageitem-border-color: inherit;
+@agate-imageitem-focus-border-color: inherit;
+@agate-imageitem-focus-bg-color: inherit;
+@agate-imageitem-caption-overlay-text-color: inherit;
+@agate-imageitem-caption-overlay-opacity: inherit;
+
+// Indicator
+// ---------------------------------------
+@agate-indicator-bg-color: inherit;
+
 // Input
 // ---------------------------------------
+@agate-input-active-border-color:             inherit;
+@agate-input-border-color:                    inherit;
+@agate-input-caret-color:                     inherit;
 @agate-input-decorator-border-color:          inherit;
 @agate-input-decorator-focused-border-color:  @agate-accent;
 @agate-input-focused-background-color:        @agate-background;
 @agate-input-focused-background-image:        inherit;
+@agate-input-focused-border-color:            inherit;
 @agate-input-focused-text-color:              inherit;
 @agate-input-placeholder-color:               inherit;
 @agate-input-text-color:                      inherit;
 
 // Item
 // ---------------------------------------
-@agate-item-color: inherit;
-@agate-item-label-color: inherit;
-@agate-item-border-color: transparent;
-@agate-item-focus-border-color: transparent;
-@agate-item-focus-bg-color: inherit;
-@agate-item-focus-color: @agate-item-color;
-@agate-item-selected-color: inherit;
-@agate-item-selected-outline: inherit;
+@agate-item-bg-color:                     transparent;
+@agate-item-border-color:                 transparent;
+@agate-item-color:                        @agate-foreground;
+@agate-item-label-color:                  @agate-item-color;
+@agate-item-focus-bg-color:               @agate-background-focus;
+@agate-item-focus-border-color:           transparent;
+@agate-item-focus-color:                  @agate-foreground-focus;
+@agate-item-selected-bg-color:            @agate-item-bg-color;
+@agate-item-selected-border-color:        @agate-item-border-color;
+@agate-item-selected-color:               @agate-item-color;
+@agate-item-selected-label-color:         inherit;
+
+// Keypad
+// ---------------------------------------
+@agate-keypad-button-active-bg-color:     transparent;
+@agate-keypad-button-active-border-color: @agate-accent;
+@agate-keypad-button-active-color:        @agate-keypad-button-active-border-color;
+@agate-keypad-button-bg-color:            transparent;
+@agate-keypad-button-color:               inherit;
+@agate-keypad-button-focus-color:         inherit;
+@agate-keypad-button-label-color:         inherit;
+@agate-keypad-input-decorator-box-shadow: inherit;
+@agate-keypad-input-opacity:              inherit;
 
 // LabeledIconButton
 // ---------------------------------------
@@ -178,6 +246,13 @@
 // LabeledItem
 // ---------------------------------------
 @agate-labeleditem-label-color: @agate-text-color;
+
+// MediaPlayer
+// ---------------------------------------
+@agate-mediaslider-bar-color: inherit;
+@agate-mediaslider-fill-bg-image: inherit;
+@agate-mediaslider-focused-bar-color: inherit;
+@agate-mediaslider-focused-fill-bg-image: inherit;
 
 // Panels
 // ---------------------------------------
@@ -202,13 +277,14 @@
 @agate-picker-active-color: inherit;
 @agate-picker-active-bg-color: inherit;
 @agate-picker-active-bg-image: inherit;
-@agate-picker-item-top-bg-color: inherit;
-@agate-picker-item-top-bg-image: inherit;
-@agate-picker-item-bottom-bg-color: inherit;
-@agate-picker-item-bottom-bg-image: inherit;
+@agate-picker-item-color: inherit;
+@agate-picker-item-bg-color: inherit;
+@agate-picker-item-decrement-bg-image: inherit;
+@agate-picker-item-increment-bg-image: inherit;
 @agate-picker-item-focus-color: inherit;
 @agate-picker-item-focus-bg-color: inherit;
 @agate-picker-item-focus-bg-image: inherit;
+@agate-picker-secondary-item-color: inherit;
 
 // Popup
 // ---------------------------------------
@@ -221,11 +297,14 @@
 @agate-popup-body-border-color: inherit;
 @agate-popup-body-bg-color: inherit;
 @agate-popup-body-bg-image: inherit;
+@agate-popup-buttons-bg-color: inherit;
+@agate-popup-text-color: @agate-text-color;
 
 // PopupMenu
 // ---------------------------------------
 @agate-popupmenu-bg-color: inherit;
 @agate-popupmenu-bg-image: inherit;
+@agate-popupmenu-title-color: @agate-white;
 
 // ProgressBar
 // ---------------------------------------
@@ -241,9 +320,13 @@
 @agate-radioitem-icon-border-color: inherit;
 @agate-radioitem-icon-bg-color: inherit;
 @agate-radioitem-icon-focus-bg-color: @agate-radioitem-icon-bg-color;
-@agate-radioitem-icon-focus-color: inherit;
+@agate-radioitem-icon-focus-color: transparent;
 @agate-radioitem-icon-selected-bg-color: @agate-radioitem-icon-bg-color;
 @agate-radioitem-icon-selected-color: @agate-item-color;
+
+// Scroller
+// ---------------------------------------
+@agate-scroller-scrollbar-thumb-bg-color: inherit;
 
 // Slider
 // ---------------------------------------
@@ -259,6 +342,7 @@
 @agate-slider-focus-color:    @agate-slider-color;
 @agate-slider-focus-bg-color: @agate-slider-bg-color;
 @agate-slider-focus-bg-image: @agate-slider-bg-image;
+@agate-slider-focus-fill-bg-color: @agate-slider-fill-bg-color;
 @agate-slider-knob-bg-color:  inherit;
 @agate-slider-knob-bg-image:  inherit;
 @agate-slider-knob-focus-bg-color: inherit;
@@ -268,7 +352,9 @@
 
 // IncrementSlider
 // ---------------------------------------
+@agate-incrementslider-button-bg-color: @agate-button-bg-color;
 @agate-incrementslider-button-color: inherit;
+@agate-incrementslider-color: inherit;
 @agate-incrementslider-horizontal-button-decrement-border-color: inherit;
 @agate-incrementslider-horizontal-button-decrement-bg-color: @agate-slider-bg-color;
 @agate-incrementslider-horizontal-button-decrement-bg-image: @agate-slider-bg-image;
@@ -311,8 +397,10 @@
 
 // Spinner
 // ---------------------------------------
-@agate-spinner-light-color: inherit;
+@agate-spinner-bg-color: @agate-gray;
 @agate-spinner-dark-color: inherit;
+@agate-spinner-light-color: inherit;
+@agate-spinner-transparent-bg-color: transparent;
 
 // Switch
 // ---------------------------------------
@@ -324,6 +412,14 @@
 @agate-switch-selected-bg-color: inherit;
 @agate-switch-selected-color: inherit;
 @agate-switch-selected-focus-bg-color: @agate-switch-selected-bg-color;
+
+// ThumbnailItem
+// ---------------------------------------
+@agate-thumbnailitem-focus-text-color: inherit;
+@agate-thumbnailitem-label-text-color: inherit;
+@agate-thumbnailitem-label-focus-text-color: inherit;
+@agate-thumbnailitem-label-selected-text-color: inherit;
+@agate-roundthumbnailitem-border-color: inherit;
 
 // Toggle Colors
 // ---------------------------------------
@@ -344,6 +440,8 @@
 @agate-togglebutton-selected-color: @agate-button-selected-color;
 @agate-togglebutton-selected-bg-color:  @agate-button-selected-bg-color;
 
-// Scroller
+// Tooltip
 // ---------------------------------------
-@agate-scroller-scrollthumb-bg-color: inherit;
+@agate-tooltip-bg-color:               inherit;
+@agate-tooltip-text-color:             inherit;
+@agate-tooltip-border-color:           inherit;

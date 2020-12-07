@@ -1,6 +1,7 @@
 // ColorPicker.module.less
 //;
 @import "../styles/mixins.less";
+@import "../styles/variables.less";
 @import "../styles/skin.less";
 
 .colorPicker {
@@ -14,7 +15,6 @@
 		z-index: 1;
 		pointer-events: none;
 		min-width: 312px;
-		width: 100%;
 
 		&.openTransitionContainer {
 			pointer-events: inherit;
@@ -36,6 +36,10 @@
 	}
 
 	.applySkins({
+		.transitionContainer {
+			width: calc(100% - @agate-button-height - 2* @agate-component-spacing);
+		}
+
 		.palette {
 			background-color: @agate-colorpicker-bg-color;
 			border-radius: @agate-colorpicker-palette-border-radius;

@@ -6,8 +6,13 @@
 	position: relative;
 
 	.applySkins({
+		color: @agate-incrementslider-color;
 		margin: @agate-incrementslider-horizontal-margin;
 		direction: ltr;	// Always arrange this according to LTR rules
+
+		&.large {
+			/* Available for export */
+		}
 
 		&.horizontal {
 			margin: @agate-incrementslider-horizontal-margin;
@@ -34,6 +39,12 @@
 
 				&::before {
 					border-radius: @agate-incrementslider-border-radius;
+				}
+			}
+
+			&.small {
+				.slider {
+					padding: @agate-incrementslider-horizontal-small-slider-padding;
 				}
 			}
 		}
@@ -66,6 +77,12 @@
 
 			.incrementButton {
 				order: 1;
+			}
+
+			&.small {
+				.slider {
+					padding: @agate-incrementslider-vertical-small-slider-padding;
+				}
 			}
 		}
 	});

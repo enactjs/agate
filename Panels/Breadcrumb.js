@@ -4,6 +4,8 @@ import Spottable from '@enact/spotlight/Spottable';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import $L from '../internal/$L';
+
 import css from './Panels.module.less';
 
 // Since we expose `onSelect` to handle breadcrumb selection, we need that handler to be set on a
@@ -16,8 +18,8 @@ const SpottableDiv = Spottable('div');
  *
  * @type {Number}
  * @default 105;
- * @private
  * @memberof agate/Panels
+ * @private
  */
 export const breadcrumbWidth = 105;
 
@@ -46,8 +48,8 @@ const BreadcrumbBase = kind({
 		/**
 		 * Called when the breadcrumb is clicked.
 		 *
-		 * @private
 		 * @type {Function}
+		 * @private
 		 */
 		onClick: PropTypes.func,
 
@@ -76,7 +78,7 @@ const BreadcrumbBase = kind({
 	render: ({children, index, onSelect, ...rest}) => (
 		<SpottableDiv
 			{...rest}
-			aria-label={'GO TO PREVIOUS'}
+			aria-label={$L('GO TO PREVIOUS')}
 			data-index={index}
 			onClick={onSelect}
 		>

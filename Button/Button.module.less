@@ -22,6 +22,7 @@
 		text-indent: @agate-button-text-indent;  // Keep the text centered
 		font-variant-ligatures: @agate-button-font-ligatures;
 		min-width: @agate-button-height;
+		max-width: @agate-button-max-width;
 		padding: 0 @agate-button-h-padding;
 		margin: 0 @agate-component-spacing;
 		box-sizing: border-box;
@@ -30,13 +31,14 @@
 
 		.bg {
 			background-color: @agate-button-bg-color;
+			background-origin: @agate-button-background-origin;
 			border: @agate-button-border-width solid @agate-button-border-color;
 			border-radius: @agate-button-border-radius;
 			color: @agate-button-color;
 			background-image: @agate-button-bg-image;
 			box-shadow: @agate-button-shadow;
 			transform: @agate-button-bg-transform;
-			backdrop-filter: blur(3px);
+			// backdrop-filter: blur(3px);
 		}
 
 		.client {
@@ -44,7 +46,7 @@
 			color: @agate-button-color;
 
 			.icon {
-				-webkit-margin-start: 0;
+				.margin-start-end(@agate-button-icon-margin-start, @agate-button-icon-margin-end);
 			}
 		}
 
@@ -61,12 +63,30 @@
 			color: @agate-button-badge-color;
 			background-color: var(--agate-button-badge-bg-color, @agate-button-badge-bg-color);
 			z-index: 1;
+
+			.enact-locale-rtl({
+				.position(@agate-button-badge-position-rtl);
+			});
 		}
 
 		&.grid {
 			.bg {
 				border-radius: @agate-button-grid-border-radius;
 			}
+		}
+
+		&.iconAfter {
+			.client {
+				flex-direction: row-reverse;
+			}
+
+			.icon {
+				.margin-start-end(@agate-button-icon-position-after-margin-start, @agate-button-icon-position-after-margin-end);
+			}
+		}
+
+		&.minWidth {
+			min-width: @agate-button-min-width;
 		}
 
 		// opaque
@@ -94,7 +114,7 @@
 			}
 		}
 
-		&.minWidth {
+		&.iconOnly {
 			&,
 			&.huge,
 			&.small,
@@ -171,11 +191,16 @@
 		}
 
 		&.small {
+			border-radius: @agate-button-small-border-radius;
 			height: @agate-button-small-height;
 			min-width: @agate-button-small-height;
 			font-size: @agate-button-small-font-size;
-			line-height: @agate-button-small-line-height;
+			line-height: @agate-button-line-height;
 			padding: 0 @agate-button-small-h-padding;
+
+			&.minWidth {
+				min-width: @agate-button-small-min-width;
+			}
 
 			.client::before {
 				bottom: 12px;
@@ -192,6 +217,10 @@
 				letter-spacing: @agate-button-small-badge-letter-spacing;
 				text-indent: @agate-button-small-badge-text-indent;
 				transform: @agate-button-small-badge-transform;
+
+				.enact-locale-rtl({
+					.position(@agate-button-small-badge-position-rtl);
+				});
 			}
 		}
 
@@ -211,6 +240,10 @@
 				letter-spacing: @agate-button-smallest-badge-letter-spacing;
 				text-indent: @agate-button-smallest-badge-text-indent;
 				transform: @agate-button-smallest-badge-transform;
+
+				.enact-locale-rtl({
+					.position(@agate-button-smallest-badge-position-rtl);
+				});
 			}
 		}
 
@@ -278,19 +311,15 @@
 				}
 			}
 		}
-	});
 
-	// TODO: Replace with an updated .focus() mixin that can apply rules both when focused and
-	// within a focused node
-	&:global(.spottable):focus,
-	:global(.spottable):focus & {
-		.applySkins({
+		.focus({
 			background-color: transparent;
 			background-image: none;
 
 			.bg {
 				background-color: @agate-button-focus-bg-color;
 				background-image: @agate-button-focus-bg-image;
+				border-color: @agate-button-focus-border-color;
 			}
 
 			&,
@@ -304,5 +333,25 @@
 				}
 			}
 		});
-	}
+
+		.active({
+			.bg {
+				background-color: @agate-button-active-bg-color;
+				background-image: @agate-button-active-bg-image;
+				border: @agate-button-border-width solid @agate-button-border-color;
+				opacity: @agate-button-active-opacity;
+			}
+
+			&,
+			.client {
+				color: @agate-button-active-color;
+			}
+
+			&.highlighted {
+				.bg {
+					opacity: 1;
+				}
+			}
+		});
+	});
 }

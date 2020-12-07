@@ -61,6 +61,17 @@
 			@componentRules();
 		});
 	});
+	.buildSkinRules(silicon; {
+		@import (multiple) "./variables-silicon.less";
+
+		@import (multiple) "./colors-silicon-day.less";
+		@componentRules();
+
+		.buildSkinRules(night; {
+			@import (multiple) "./colors-silicon-night.less";
+			@componentRules();
+		});
+	});
 	.buildSkinRules(titanium; {
 		@import (multiple) "./colors-titanium.less";
 		@import (multiple) "./variables-titanium.less";

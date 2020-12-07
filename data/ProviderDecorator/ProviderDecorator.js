@@ -1,3 +1,9 @@
+/**
+ * @module agate/ProviderDecorator
+ * @exports ProviderDecorator
+ * @private
+ */
+
 import freeze from 'deep-freeze';
 import {on, off} from '@enact/core/dispatcher';
 import hoc from '@enact/core/hoc';
@@ -17,7 +23,7 @@ const ProviderDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const PureWrapped = React.memo(Wrapped);
 
 	return class extends Component {
-		static displayName = 'ProviderDecorator'
+		static displayName = 'ProviderDecorator';
 
 		constructor (props) {
 			super(props);
@@ -42,7 +48,7 @@ const ProviderDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 		handleBlur = () => {
 			this.focused = false;
-		}
+		};
 
 		handleFocus = () => {
 			this.focused = true;
@@ -50,7 +56,7 @@ const ProviderDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			while (this.queue.length) {
 				this.setState(this.queue.shift());
 			}
-		}
+		};
 
 		updateAppState = (cb) => {
 			const updater = produce(cb);

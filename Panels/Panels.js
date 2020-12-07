@@ -20,7 +20,7 @@ const getControlsId = (id) => id && `${id}-controls`;
 /**
  * Basic Panels component without breadcrumbs or default [arranger]{@link ui/ViewManager.Arranger}
  *
- * @class Panels
+ * @class PanelsBase
  * @memberof agate/Panels
  * @ui
  * @public
@@ -28,7 +28,7 @@ const getControlsId = (id) => id && `${id}-controls`;
 const PanelsBase = kind({
 	name: 'Panels',
 
-	propTypes: /** @lends agate/Panels.Panels.prototype */ {
+	propTypes: /** @lends agate/Panels.PanelsBase.prototype */ {
 		/**
 		 * Function that generates unique identifiers for Panel instances.
 		 *
@@ -299,6 +299,16 @@ const PanelsBase = kind({
 	}
 });
 
+/**
+ * Applies Agate specific behaviors to [Panels]{@link agate/Panels.Panels} components.
+ *
+ * @hoc
+ * @memberof agate/Panels
+ * @mixes ui/Slottable.Slottable
+ * @mixes ui/Measurable.Measurable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const PanelsDecorator = compose(
 	Slottable({slots: ['controls']}),
 	CancelDecorator({cancel: 'onBack'}),
@@ -307,10 +317,21 @@ const PanelsDecorator = compose(
 	Skinnable
 );
 
+/**
+ * An Agate-styled Panels component
+ *
+ * @class Panels
+ * @memberof agate/Panels
+ * @extends agate/Panels.PanelsBase
+ * @mixes agate/Panels.PanelsDecorator
+ * @ui
+ * @public
+ */
 const Panels = PanelsDecorator(PanelsBase);
 
 export default Panels;
 export {
 	Panels,
-	PanelsBase
+	PanelsBase,
+	PanelsDecorator
 };

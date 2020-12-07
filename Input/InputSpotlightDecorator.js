@@ -28,15 +28,33 @@ const handleKeyDown = handle(
 );
 
 /**
+ * Default config for [InputSpotlightDecorator]{@link agate/Input.InputSpotlightDecorator}.
+ *
+ * @memberof agate/Input/InputSpotlightDecorator.InputSpotlightDecorator
+ * @hocconfig
+ */
+const defaultConfig = {
+	/**
+	 * Suppress the pointer lock behavior of agate input
+	 *
+	 * @type {Boolean}
+	 * @default false
+	 * @memberof agate/Input/InputSpotlightDecorator.InputSpotlightDecorator.defaultConfig
+	*/
+	noLockPointer: false
+};
+
+/**
  * A higher-order component that manages the
  * spotlight behavior for an {@link agate/Input.Input}
  *
  * @class InputSpotlightDecorator
- * @memberof agate/Input/InputSpotlightDecorator
  * @hoc
+ * @memberof agate/Input/InputSpotlightDecorator
  * @private
  */
-const InputSpotlightDecorator = hoc((config, Wrapped) => {
+const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
+	const {noLockPointer} = config;
 	const Component = Spottable({emulateMouse: false}, Wrapped);
 	const forwardBlur = forward('onBlur');
 	const forwardMouseDown = forward('onMouseDown');
@@ -109,7 +127,7 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 			 * @public
 			 */
 			spotlightDisabled: PropTypes.bool
-		}
+		};
 
 		constructor (props) {
 			super(props);
@@ -137,7 +155,9 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 					onSpotlightDisappear();
 				}
 
-				releasePointer(this.state.node);
+				if (!noLockPointer) {
+					releasePointer(this.state.node);
+				}
 			}
 		}
 
@@ -152,33 +172,37 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 			if (focusChanged) {
 				if (this.state.focused === 'input') {
 					forward('onActivate', {type: 'onActivate'}, this.props);
-					lockPointer(this.state.node);
+					if (!noLockPointer) {
+						lockPointer(this.state.node);
+					}
 					this.paused.pause();
 				} else if (prevState.focused === 'input') {
 					forward('onDeactivate', {type: 'onDeactivate'}, this.props);
-					releasePointer(prevState.node);
+					if (!noLockPointer) {
+						releasePointer(prevState.node);
+					}
 					this.paused.resume();
 				}
 			}
-		}
+		};
 
 		focus = (focused, node) => {
 			this.setState({focused, node});
-		}
+		};
 
 		blur = () => {
 			this.setState((state) => (
 				state.focused || state.node ? {focused: null, node: null} : null
 			));
-		}
+		};
 
 		focusDecorator = (decorator) => {
 			this.focus('decorator', decorator);
-		}
+		};
 
 		focusInput = (decorator) => {
 			this.focus('input', decorator.querySelector('input'));
-		}
+		};
 
 		onBlur = (ev) => {
 			if (!this.props.autoFocus) {
@@ -205,7 +229,7 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 					this.blur();
 				}
 			}
-		}
+		};
 
 		onMouseDown = (ev) => {
 			const {disabled, spotlightDisabled} = this.props;
@@ -215,10 +239,11 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 			// the <input> has focus and Spotlight is paused.
 			if (!disabled && !spotlightDisabled) {
 				this.focusInput(ev.currentTarget);
+				ev.preventDefault();
 			}
 
 			forwardMouseDown(ev, this.props);
-		}
+		};
 
 		onFocus = (ev) => {
 			forwardFocus(ev, this.props);
@@ -229,10 +254,10 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 				this.focusInput(ev.currentTarget);
 				ev.stopPropagation();
 			}
-		}
+		};
 
 		onKeyDown (ev) {
-			const {currentTarget, keyCode, preventDefault, target} = ev;
+			const {currentTarget, keyCode, target} = ev;
 
 			// cache the target if this is the first keyDown event to ensure the component had focus
 			// when the key interaction started
@@ -258,7 +283,7 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 
 				// prevent modifying the value via 5-way for numeric fields
 				if ((isUp || isDown) && target.type === 'number') {
-					preventDefault();
+					ev.preventDefault();
 				}
 
 				if (shouldSpotlightMove) {
@@ -289,7 +314,7 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 
 		onKeyUp = (ev) => {
 			const {dismissOnEnter} = this.props;
-			const {currentTarget, keyCode, preventDefault, target} = ev;
+			const {currentTarget, keyCode, target} = ev;
 
 			// verify that we have a matching pair of key down/up events to avoid adjusting focus
 			// when the component received focus mid-press
@@ -299,14 +324,14 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 				if (this.state.focused === 'input' && dismissOnEnter && is('enter', keyCode)) {
 					this.focusDecorator(currentTarget);
 					// prevent Enter onKeyPress which triggers an onMouseDown via Spotlight
-					preventDefault();
+					ev.preventDefault();
 				} else if (this.state.focused !== 'input' && is('enter', keyCode)) {
 					this.focusInput(currentTarget);
 				}
 			}
 
 			forwardKeyUp(ev, this.props);
-		}
+		};
 
 		setDownTarget (ev) {
 			const {repeat, target} = ev;
@@ -338,4 +363,6 @@ const InputSpotlightDecorator = hoc((config, Wrapped) => {
 });
 
 export default InputSpotlightDecorator;
-export {InputSpotlightDecorator};
+export {
+	InputSpotlightDecorator
+};

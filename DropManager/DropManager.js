@@ -6,17 +6,18 @@
  * @exports DropManager
  * @exports Draggable
  * @exports ResponsiveBox
+ * @private
  */
 
-import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
-import Slottable from '@enact/ui/Slottable';
+import kind from '@enact/core/kind';
 import Changeable from '@enact/ui/Changeable';
-import PropTypes from 'prop-types';
+import Slottable from '@enact/ui/Slottable';
 import classnames from 'classnames';
-import {setDisplayName} from 'recompose';
-import React from 'react';
+import PropTypes from 'prop-types';
 import {mergeDeepRight} from 'ramda';
+import React from 'react';
+import {setDisplayName} from 'recompose';
 
 import Rearrangeable from '../Rearrangeable';
 
@@ -101,9 +102,9 @@ const DropManagerContext = React.createContext(defaultContainerShape);
  * TBD.
  *
  * @class DropManager
- * @memberof agate/DropManager
  * @hoc
- * @public
+ * @memberof agate/DropManager
+ * @private
  */
 const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 	const ArrangementState = Changeable({prop: configHoc.arrangementProp || fallbackArrangementProp});
@@ -312,7 +313,7 @@ const DraggableContainerContext = React.createContext(null);
  * @class Draggable
  * @memberof agate/DropManager
  * @ui
- * @public
+ * @private
  */
 const Draggable = (Wrapped) => kind({
 	name: 'Draggable',
@@ -361,7 +362,7 @@ const Draggable = (Wrapped) => kind({
  * @class ResponsiveBox
  * @memberof agate/DropManager
  * @ui
- * @public
+ * @private
  */
 const ResponsiveBox = (Wrapped) => setDisplayName('ResponsiveBox')(
 	(props) => {
@@ -394,9 +395,9 @@ const ResponsiveBox = (Wrapped) => setDisplayName('ResponsiveBox')(
  * TBD.
  *
  * @class Droppable
- * @memberof agate/DropManager
  * @hoc
- * @public
+ * @memberof agate/DropManager
+ * @private
  */
 const Droppable = hoc((configHoc, Wrapped) => {
 	const {arrangementProp, slots, ...rest} = configHoc;
