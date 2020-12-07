@@ -1,5 +1,5 @@
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean} from '@enact/storybook-utils/addons/knobs';
+import {boolean, text} from '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
@@ -14,8 +14,12 @@ storiesOf('Agate', module)
 		'DatePicker',
 		() => (
 			<DatePicker
+				dayAriaLabel={text('dayAriaLabel', Config)}
 				disabled={boolean('disabled', Config)}
+				monthAriaLabel={text('monthAriaLabel', Config)}
 				onChange={action('onChange')}
+				spotlightDisabled={boolean('spotlightDisabled', Config)}
+				yearAriaLabel={text('yearAriaLabel', Config)}
 			/>
 		),
 		{
