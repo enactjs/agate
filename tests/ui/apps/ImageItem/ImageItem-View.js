@@ -2,8 +2,8 @@ import Heading from '../../../../Heading';
 import ImageItem from '../../../../ImageItem';
 import Scroller from '../../../../Scroller';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import ri from '@enact/ui/resolution';
 import spotlight from '@enact/spotlight';
+import ri from '@enact/ui/resolution';
 import React from 'react';
 
 // NOTE: Forcing pointer mode off so we can be sure that regardless of webOS pointer mode the app
