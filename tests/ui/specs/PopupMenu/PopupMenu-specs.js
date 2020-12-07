@@ -1,5 +1,5 @@
 let Page = require('./PopupMenuPage'),
-	{validateLabel, validateTitle, expectClosed, expectOpen} = require('./PopupMenu-utils.js');
+	{validateTitle, expectClosed, expectOpen} = require('./PopupMenu-utils.js');
 
 describe('PopupMenu', function () {
 
