@@ -18,6 +18,13 @@ class ArcSliderInterface {
 	get self () {
 		return $(this.selector);
 	}
+
+	get knobPosition () {
+		const cx = parseInt(this.circle.getCSSProperty('cx').value);
+		const cy = parseInt(this.circle.getCSSProperty('cy').value);
+
+		return {cx, cy};
+	}
 }
 
 class ArcSliderPage extends Page {
