@@ -8,14 +8,15 @@ const app = (props) => <div {...props}>
 		<Heading>Slider default</Heading>
 		<Slider defaultValue={0} id="sliderDefault"  />
 		<Heading>Slider activate on focus</Heading>
-		<Slider activateOnFocus="true" id="sliderActivateOnFocus"  />
+		<Slider activateOnFocus id="sliderActivateOnFocus"  />
 		<Heading>Slider custom progressAnchor</Heading>
-		<Slider activateOnFocus="true" id="sliderCustomProgressAnchor" progressAnchor={0.7} showAnchor />
+		<Slider activateOnFocus id="sliderCustomProgressAnchor" progressAnchor={0.7} showAnchor />
 		<Heading>Slider vertical</Heading>
-		<Slider activateOnFocus="true" id="sliderVertical" orientation="vertical" />
+		<Slider id="sliderVertical" max={10} orientation="vertical" />
 		<Heading>Slider disabled</Heading>
 		<Slider disabled id="sliderDisabled"  />
-
+		<Heading>Slider vertical disabled</Heading>
+		<Slider disabled id="sliderVerticalDisabled" max={10} orientation="vertical" />
 	</div>
 </div>;
 

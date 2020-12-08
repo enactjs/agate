@@ -1,34 +1,34 @@
 'use strict';
 const {Page} = require('@enact/ui-test-utils/utils');
-const {element} = require('@enact/ui-test-utils/utils');
 
 class SliderInterface {
 	constructor (id) {
 		this.id = id;
+		this.selector = `#${this.id}`;
 	}
 
 	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}>div`));
+		return browser.execute((el) => el.focus(), $(`#${this.id}`));
 	}
 
 	get self () {
-		return $(`#${this.id}`, browser);
+		return $(this.selector);
 	}
 
-	get slider () {
-		return element('.internal_Picker_Picker_picker', this.self);
+	get knob () {
+		return $(this.selector + ' .Slider_Slider_knob');
 	}
 
-	decrementer (slider) {
-		return element('.internal_Picker_Picker_itemDecrement', slider);
+	get knobPositionHorizontal () {
+		return parseInt(this.knob.getCSSProperty('left').value);
 	}
 
-	incrementer (slider) {
-		return element('.internal_Picker_Picker_itemIncrement', slider);
+	get knobPositionVertical () {
+		return parseInt(this.knob.getCSSProperty('bottom').value);
 	}
 
-	active (slider) {
-		return element('.internal_Picker_Picker_active', slider);
+	get sliderFillWidth () {
+		return parseInt($(this.selector + ' .Slider_Slider_fill').getCSSProperty('width').value);
 	}
 }
 
@@ -40,8 +40,9 @@ class SliderPage extends Page {
 		const sliderDisabled = new SliderInterface('sliderDisabled');
 		const sliderCustomProgressAnchor = new SliderInterface('sliderCustomProgressAnchor');
 		const sliderVertical = new SliderInterface('sliderVertical');
+		const sliderVerticalDisabled = new SliderInterface('sliderVerticalDisabled');
 		const sliderActivateOnFocus = new SliderInterface('sliderActivateOnFocus');
-		this.components = {sliderDefault, sliderDisabled, sliderCustomProgressAnchor, sliderVertical, sliderActivateOnFocus};
+		this.components = {sliderDefault, sliderDisabled, sliderCustomProgressAnchor, sliderVertical, sliderVerticalDisabled, sliderActivateOnFocus};
 	}
 
 	open (urlExtra) {
