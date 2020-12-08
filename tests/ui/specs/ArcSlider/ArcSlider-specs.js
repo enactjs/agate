@@ -10,20 +10,20 @@ describe('ArcSlider', function () {
 		const arcSlider = Page.components.arcSliderDefault;
 
 		it('should change the position of the slider knob on each different click position', function () {
-			const originalCx = arcSlider.circle.getCSSProperty('cx').value;
-			const originalCy = arcSlider.circle.getCSSProperty('cy').value;
+			const originalCx = parseInt(arcSlider.circle.getCSSProperty('cx').value);
+			const originalCy = parseInt(arcSlider.circle.getCSSProperty('cy').value);
 
 			arcSlider.self.click({x: 5, y: -10});
-			const cx1 = arcSlider.circle.getCSSProperty('cx').value;
-			const cy1 = arcSlider.circle.getCSSProperty('cy').value;
-			expect(cx1 !== originalCx).to.be.true();
-			expect(cy1 !== originalCy).to.be.true();
+			const cx1 = parseInt(arcSlider.circle.getCSSProperty('cx').value);
+			const cy1 = parseInt(arcSlider.circle.getCSSProperty('cy').value);
+			expect(cx1).to.be.above(originalCx);
+			expect(cy1).to.be.below(originalCy);
 
 			arcSlider.self.click({x: -15, y: -20});
-			const cx2 = arcSlider.circle.getCSSProperty('cx').value;
-			const cy2 = arcSlider.circle.getCSSProperty('cy').value;
-			expect(cx2 !== cx1).to.be.true();
-			expect(cy2 !== cy1).to.be.true();
+			const cx2 = parseInt(arcSlider.circle.getCSSProperty('cx').value);
+			const cy2 = parseInt(arcSlider.circle.getCSSProperty('cy').value);
+			expect(cx2).to.be.below(cx1);
+			expect(cy2).to.be.above(cy1);
 		});
 
 		it('should have default foregroundColor', function () {
@@ -43,19 +43,19 @@ describe('ArcSlider', function () {
 			// bottom-left part means negative x and positive y
 			arcSlider.self.click({x: -5, y: 5});
 
-			expect(arcSlider.circle.getCSSProperty('cx').value === originalCx).to.be.true();
-			expect(arcSlider.circle.getCSSProperty('cy').value === originalCy).to.be.true();
+			expect(arcSlider.circle.getCSSProperty('cx').value).to.equal(originalCx);
+			expect(arcSlider.circle.getCSSProperty('cy').value).to.equal(originalCy);
 		});
 
 		it('should change the position of the slider knob on click on the top part of the circle', function () {
-			const originalCx = arcSlider.circle.getCSSProperty('cx').value;
-			const originalCy = arcSlider.circle.getCSSProperty('cy').value;
+			const originalCx = parseInt(arcSlider.circle.getCSSProperty('cx').value);
+			const originalCy = parseInt(arcSlider.circle.getCSSProperty('cy').value);
 
 			// top part means any value x and negative value for y
 			arcSlider.self.click({x: 10, y: -10});
 
-			expect(arcSlider.circle.getCSSProperty('cx').value !== originalCx).to.be.true();
-			expect(arcSlider.circle.getCSSProperty('cy').value !== originalCy).to.be.true();
+			expect(parseInt(arcSlider.circle.getCSSProperty('cx').value)).to.be.above(originalCx);
+			expect(parseInt(arcSlider.circle.getCSSProperty('cy').value)).to.be.below(originalCy);
 		});
 
 		it('should have custom foregroundColor', function () {
@@ -74,8 +74,8 @@ describe('ArcSlider', function () {
 
 			arcSlider.self.click({x: -5, y: 0});
 
-			expect(arcSlider.circle.getCSSProperty('cx').value === originalCx).to.be.true();
-			expect(arcSlider.circle.getCSSProperty('cy').value === originalCy).to.be.true();
+			expect(arcSlider.circle.getCSSProperty('cx').value).to.equal(originalCx);
+			expect(arcSlider.circle.getCSSProperty('cy').value).to.equal(originalCy);
 		});
 	});
 });
