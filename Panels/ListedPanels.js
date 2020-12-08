@@ -2,7 +2,7 @@ import {adaptEvent, forward, handle} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import {Changeable} from '@enact/ui/Changeable';
 import {Cell, Layout} from '@enact/ui/Layout';
-import {shape, SlideLeftArranger} from '@enact/ui/ViewManager';
+import {shape} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -10,9 +10,9 @@ import Item from '../Item';
 import Scroller from '../Scroller';
 import Skinnable from '../Skinnable';
 
-import {Panels} from './Panels';
-import {Panel} from './Panel';
 import {CrossFadeArranger} from './Arrangers';
+import {Panel} from './Panel';
+import {Panels} from './Panels';
 
 import componentCss from './ListedPanels.module.less';
 
@@ -45,18 +45,16 @@ const ListedPanelsBase = kind({
 		css: PropTypes.object,
 		duration: PropTypes.number,
 		index: PropTypes.number,
-		items: PropTypes.array,
 		itemComponent: PropTypes.renderable,
-		listIndex: PropTypes.number,
+		items: PropTypes.array,
 		noAnimation: PropTypes.bool,
 		onBack: PropTypes.func,
 		onSelect: PropTypes.func
 	},
 	defaultProps: {
-		arranger: SlideLeftArranger,
+		arranger: CrossFadeArranger,
 		index: 0,
-		itemComponent: Item,
-		listIndex: 0
+		itemComponent: Item
 	},
 	styles: {
 		css: componentCss,
@@ -70,17 +68,16 @@ const ListedPanelsBase = kind({
 	computed: {
 		listChildren: ({items, itemComponent: ItemComponent, onSelect}) => {
 			if (items) {
-				return items.map((item) => {
-					return (<Panel>
+				return (
+					<Panel>
 						<Scroller>
-							{item.map((i, index) => {
-								const {title: children, ...itemProps} = i;
+							{items.map((item, index) => {
+								const {title: children, ...itemProps} = item;
 								// eslint-disable-next-line react/jsx-no-bind
 								return <ItemComponent key={index} onClick={() => onSelect({selected: index})} {...itemProps}>{children}</ItemComponent>;
 							})}
 						</Scroller>
 					</Panel>);
-				});
 			}
 		}
 	},
@@ -90,37 +87,27 @@ const ListedPanelsBase = kind({
 		css,
 		duration,
 		index,
-		noAnimation,
 		listChildren,
-		listIndex,
-		onBack,
+		noAnimation,
 		...rest
 	}) => {
 		return (
 			<Layout {...rest}>
 				<Cell
-					arranger={arranger}
-					className={css.listPanels}
-					component={Panels}
-					cover="partial"
-					duration={duration}
-					noAnimation={noAnimation}
-					noCloseButton
-					onBack={onBack}
-					index={listIndex}
+					className={css.listPanel}
 					size="30%"
 				>
 					{listChildren}
 				</Cell>
 				<Cell
-					arranger={CrossFadeArranger}
+					arranger={arranger}
 					className={css.panels}
 					component={Panels}
+					cover="partial"
 					duration={duration}
 					noAnimation={noAnimation}
 					noCloseButton
 					index={index}
-					size="70%"
 				>
 					{children}
 				</Cell>

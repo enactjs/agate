@@ -1,5 +1,5 @@
 import {scale, unit} from '@enact/ui/resolution';
-import {arrange} from '@enact/ui/ViewManager/Arranger';
+import {arrange, SlideArranger} from '@enact/ui/ViewManager/Arranger';
 
 import {breadcrumbWidth} from './Breadcrumb';
 
@@ -120,8 +120,17 @@ const CrossFadeArranger = {
 	}
 };
 
+/**
+ * Arranger that slide partially between panels.
+ *
+ * @type {Arranger}
+ * @private
+ */
+const PartialSlideArranger = SlideArranger({amount: 30, direction: 'left'});
+
 export {
 	BreadcrumbArranger,
 	CrossFadeArranger,
-	PanelsArranger
+	PanelsArranger,
+	PartialSlideArranger
 };
