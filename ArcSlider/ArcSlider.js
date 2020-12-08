@@ -50,6 +50,15 @@ const ArcSliderBase = kind({
 
 	propTypes: /** @lends agate/ArcSlider.ArcSliderBase.prototype */ {
 		/**
+		 * The accent color of the arcs.
+		 *
+		 * @type {String}
+		 * @default #8b7efe
+		 * @public
+		 */
+		accentColor: PropTypes.string,
+
+		/**
 		 * The color of the background arc.
 		 *
 		 * @type {String}
@@ -93,6 +102,14 @@ const ArcSliderBase = kind({
 		 * @public
 		 */
 		foregroundColor: PropTypes.string,
+
+		/**
+		 * Whether or not the component is focused.
+		 *
+		 * @type {Boolean}
+		 * @private
+		 */
+		isFocused: PropTypes.bool,
 
 		/**
 		 * The maximum value of the slider and should be greater than min.
@@ -178,6 +195,7 @@ const ArcSliderBase = kind({
 	},
 
 	defaultProps: {
+		accentColor: '#8b7efe',
 		backgroundColor: '#000000',
 		endAngle: 250,
 		foregroundColor: '#0000ff',
@@ -218,7 +236,7 @@ const ArcSliderBase = kind({
 		}
 	},
 
-	render: ({backgroundColor, componentRef, disabled, endAngle, foregroundColor, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}) => {
+	render: ({accentColor, backgroundColor, componentRef, disabled, endAngle, foregroundColor, isFocused, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}) => {
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
@@ -248,7 +266,7 @@ const ArcSliderBase = kind({
 					<circle
 						cx={knobPosition.x}
 						cy={knobPosition.y}
-						fill={foregroundColor}
+						fill={isFocused ? accentColor : foregroundColor}
 						r={ri.scaleToRem(15)}
 					/>
 				</Arc>

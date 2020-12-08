@@ -128,6 +128,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			this.componentRef = React.createRef();
 
 			this.state = {
+				isFocused: false,
 				value: props.value ? props.value : props.min
 			};
 		}
@@ -197,6 +198,14 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			}
 		};
 
+		handleBlur = () => {
+			this.setState({isFocused: false});
+		};
+
+		handleFocus = () => {
+			this.setState({isFocused: true});
+		};
+
 		render () {
 			if (__DEV__) {
 				const {endAngle, max, min, startAngle, step} = this.props;
@@ -213,10 +222,13 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 				<Wrapped
 					{...this.props}
 					componentRef={this.componentRef}
+					isFocused={this.state.isFocused}
+					onBlur={this.handleBlur}
 					onChange={this.handleChange}
 					onDown={this.handleDown}
 					onDrag={this.handleDrag}
 					onDragStart={this.handleDragStart}
+					onFocus={this.handleFocus}
 					value={this.state.value}
 				/>
 			);

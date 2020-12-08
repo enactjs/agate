@@ -1,4 +1,3 @@
-import kind from '@enact/core/kind';
 import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import {validateRangeOnce} from '@enact/ui/internal/validators';
@@ -16,10 +15,10 @@ const validateRange = validateRangeOnce((props) => props, {'component': 'ArcPick
  * @private
  */
 const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
-	return kind({
-		name: 'ArcPickerBehaviorDecorator',
+	return class extends React.Component {
+		static displayName = 'ArcPickerBehaviorDecorator';
 
-		propTypes: /** @lends agate/ArcPicker.ArcPickerBehaviorDecorator.prototype */{
+		static propTypes = /** @lends agate/ArcPicker.ArcPickerBehaviorDecorator.prototype */{
 			/**
 			 * The value options of ArcPicker.
 			 *
@@ -69,17 +68,33 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			 * @public
 			 */
 			value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-		},
+		};
 
-		computed: {
-			onClick: (props) => (value) => (ev) => {
-				forward('onChange', {value}, props);
-				ev.stopPropagation();
-			},
-			value: ({value, children}) => ((value || value === 0) ? value : children[0])
-		},
+		constructor (props) {
+			super(props);
 
-		render: ({max, min, value, ...rest}) => {
+			this.state = {
+				isFocused: false
+			};
+		}
+
+		handleClick = (value) => (ev) => {
+			forward('onChange', {value}, this.props);
+			ev.stopPropagation();
+		};
+
+		handleBlur = () => {
+			this.setState({isFocused: false});
+		};
+
+		handleFocus = () => {
+			this.setState({isFocused: true});
+		};
+
+		render () {
+			const {children, max, min, value: valueProp, ...rest} = this.props;
+			const value = ((valueProp || valueProp === 0) ? valueProp : children[0]);
+
 			delete rest.onChange;
 
 			if (__DEV__) {
@@ -89,10 +104,19 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			}
 
 			return (
-				<Wrapped {...rest} value={value} />
+				<Wrapped
+					{...rest}
+					isFocused={this.state.isFocused}
+					onBlur={this.handleBlur}
+					onClick={this.handleClick}
+					onFocus={this.handleFocus}
+					value={value}
+				>
+					{children}
+				</Wrapped>
 			);
 		}
-	});
+	};
 });
 
 export default ArcPickerBehaviorDecorator;

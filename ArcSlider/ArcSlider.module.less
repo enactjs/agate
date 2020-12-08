@@ -25,5 +25,14 @@
 			font-size: @agate-arcslider-font-size;
 			font-weight: @agate-arcslider-font-weight;
 		}
+
+		.spottable({
+			&:focus {
+				// Remove default Spottable visual effect
+				background-color: transparent;
+				background-image: none;
+				color: initial;
+			}
+		});
 	});
 }

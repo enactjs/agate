@@ -272,7 +272,7 @@ const ArcPickerBase = kind({
 const ArcPickerDecorator = compose(
 	Changeable,
 	ArcPickerBehaviorDecorator,
-	Spottable({focusedProp: 'isFocused'}),
+	Spottable,
 	Skinnable
 );
 
