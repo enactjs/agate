@@ -56,6 +56,15 @@ const ArcPickerBase = kind({
 		children: PropTypes.node.isRequired,
 
 		/**
+		 * The accent color of the arcs.
+		 *
+		 * @type {String}
+		 * @default #8b7efe
+		 * @public
+		 */
+		accentColor: PropTypes.string,
+
+		/**
 		 * The color of the unselected arcs.
 		 *
 		 * @type {String}
@@ -91,6 +100,14 @@ const ArcPickerBase = kind({
 		 * @public
 		 */
 		foregroundColor: PropTypes.string,
+
+		/**
+		 * Whether or not the component is focused.
+		 *
+		 * @type {Boolean}
+		 * @private
+		 */
+		isFocused: PropTypes.bool,
 
 		/**
 		 * Called when the path area is clicked.
@@ -156,6 +173,7 @@ const ArcPickerBase = kind({
 	},
 
 	defaultProps: {
+		accentColor: '#8b7efe',
 		backgroundColor: '#eeeeee',
 		endAngle: 310,
 		foregroundColor: '#444444',
@@ -188,7 +206,7 @@ const ArcPickerBase = kind({
 
 	computed: {
 		arcSegments: (props) => {
-			const {backgroundColor, children, endAngle, foregroundColor, onClick, radius, selectionType, startAngle, strokeWidth, value} = props;
+			const {accentColor, backgroundColor, children, endAngle, foregroundColor, isFocused, onClick, radius, selectionType, startAngle, strokeWidth, value} = props;
 
 			return (
 				children.map((option, index) => {
@@ -197,8 +215,7 @@ const ArcPickerBase = kind({
 					const arcSegments = children.length;
 					const arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * index;
 					const arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * (index + 1) - pauseAngle;
-
-					const color = (selectionType === 'cumulative' && value > option || value === option) ? foregroundColor : backgroundColor;
+					const color = (selectionType === 'cumulative' && value > option || value === option) ? (isFocused && accentColor || foregroundColor) : backgroundColor;
 
 					return (
 						<Arc
@@ -221,10 +238,12 @@ const ArcPickerBase = kind({
 	},
 
 	render: ({arcSegments, disabled, slotCenter, value, ...rest}) => {
+		delete rest.accentColor;
 		delete rest.backgroundColor;
 		delete rest.children;
 		delete rest.endAngle;
 		delete rest.foregroundColor;
+		delete rest.isFocused;
 		delete rest.onClick;
 		delete rest.selectionType;
 		delete rest.startAngle;
@@ -253,7 +272,7 @@ const ArcPickerBase = kind({
 const ArcPickerDecorator = compose(
 	Changeable,
 	ArcPickerBehaviorDecorator,
-	Spottable,
+	Spottable({focusedProp: 'isFocused'}),
 	Skinnable
 );
 
