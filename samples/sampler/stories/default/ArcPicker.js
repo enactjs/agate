@@ -25,7 +25,6 @@ storiesOf('Agate', module)
 				<ArcPicker
 					accentColor={select('accentColor', prop.colors, Config)}
 					backgroundColor={select('backgroundColor', prop.colors, Config)}
-					backgroundColor={select('backgroundColor', prop.colors, Config)}
 					endAngle={number('endAngle', Config, {range: true, min: 0, max: 360})}
 					foregroundColor={select('foregroundColor', prop.colors, Config)}
 					onChange={action('onChange')}
