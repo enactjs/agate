@@ -17,11 +17,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Changed
 
-- `agate/ArcPicker` to read out audio guidance when focused via 5-way keys
-- `agate/ArcSlider` to read out audio guidance when focused via 5-way keys
-- `agate/FanSpeedControl` to read out audio guidance when focused via 5-way keys
-- `agate/TemperatureControl` to read out audio guidance when focused via 5-way keys
-- `agate/WindDirectionControl` to read out audio guidance when focused via 5-way keys
+- `agate/ArcPicker`, `agate/ArcSlider`, `agate/FanSpeedControl`, `agate/TemperatureControl` and `agate/WindDirectionControl` to read out audio guidance when focused via 5-way keys
 
 ### Fixed
 
