@@ -6,6 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
+- `agate/ArcPicker`, `agate/ArcSlider` prop `accentColor` to customize accent color when focused
 - `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
 - `agate/Checkbox` prop `disabled`, `indeterminate`, and `indeterminateIcon`
 - `agate/CheckboxItem` prop `disabled`, `indeterminate`, `indeterminateIcon`, and `slotbefore`
