@@ -11,7 +11,7 @@ const Config = mergeComponentMetadata('ArcSlider', ArcSliderBase, ArcSlider);
 
 // Set up some defaults for colors and radius
 const prop = {
-	colors: ['', '#000000', '#fdc902', '#986aad', '#0000ff'],
+	colors: ['', '#000000', '#fdc902', '#986aad', '#0000ff', '#8b7efe'],
 	radius: [120, 150]
 };
 
@@ -20,6 +20,7 @@ storiesOf('Agate', module)
 		'ArcSlider',
 		() => (
 			<ArcSlider
+				accentColor={select('accentColor', prop.colors, Config)}
 				backgroundColor={select('backgroundColor', prop.colors, Config)}
 				disabled={boolean('disabled', Config)}
 				endAngle={number('endAngle', Config, {range: true, min: 0, max: 360})}
