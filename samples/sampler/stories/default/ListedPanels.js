@@ -20,49 +20,27 @@ const Config = mergeComponentMetadata('ListedPanels', ListedPanelsBase);
 
 const I18nListedPanelsBase = ({rtl}) => {
 	const [panelIndex, setIndex] = React.useState(Config.defaultProps.index || 0);
-	const [listIndex, setListIndex] = React.useState(Config.defaultProps.listIndex || 0);
 	const onSelect = (e) => {
 		setIndex(e.index);
 		action('onSelect')(e);
 	};
-
-	const onClick = (e) => {
-		setListIndex(1);
-		setIndex(1);
-	};
-
-	const backward = () => {
-		setListIndex(listIndex - 1);
-		setIndex(0);
-	};
-	const handleBack = compose(backward, action('onBack'));
 
 	return (
 		<div style={{paddingBottom: '56.25%'}}>
 			<ListedPanels
 				duration={number('duration', Config, 400)}
 				index={panelIndex}
-				listIndex={listIndex}
-				onBack={handleBack}
-				onClick={action('onClick')}
 				onSelect={onSelect} // eslint-disable-line react/jsx-no-bind
 				items={[
-					[
-						{title: 'Profiles'},
-						{title: 'Devices'},
-						{title: 'Sound'},
-						{title: 'Display'},
-						{title: 'System'}
-					],
-					[
-						{title: 'Profile1'},
-						{title: 'Profile2'},
-						{title: 'Profile3'}
-					]
+					{title: 'Profiles'},
+					{title: 'Devices'},
+					{title: 'Sound'},
+					{title: 'Display'},
+					{title: 'System'}
 				]}
 			>
 				<Panel>
-					<Button icon="netbook" onClick={onClick}>Click me!</Button>
+					<Button icon="netbook">Click me!</Button>
 				</Panel>
 				<Panel>
 					<Item label="label" labelPosition="before" slotBefore={<Icon>aircirculation</Icon>}>Hello Item</Item>
