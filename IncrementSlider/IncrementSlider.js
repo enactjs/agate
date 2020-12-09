@@ -64,6 +64,16 @@ const IncrementSliderBase = kind({
 
 	propTypes: /** @lends agate/IncrementSlider.IncrementSliderBase.prototype */ {
 		/**
+		 * Activates the slider knob when focused so that it may be manipulated via the directional
+		 * input keys.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		activateOnFocus: PropTypes.bool,
+
+		/**
 		 * Sets the knob to selected state and allows it to move via 5-way controls.
 		 *
 		 * @type {Boolean}
@@ -337,6 +347,14 @@ const IncrementSliderBase = kind({
 		progressAnchor: PropTypes.number,
 
 		/**
+		 * Displays an anchor at `progressAnchor`.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		showAnchor: PropTypes.bool,
+
+		/**
 		 * The size of the incrementSlider.
 		 *
 		 * @type {('small'|'large')}
@@ -424,7 +442,7 @@ const IncrementSliderBase = kind({
 	},
 
 	computed: {
-		className: ({orientation, size, styler}) => styler.append(orientation, size),
+		className: ({orientation, size, showAnchor, styler}) => styler.append(orientation, showAnchor, size),
 		decrementDisabled: ({disabled, min, value = min}) => disabled || value <= min,
 		incrementDisabled: ({disabled, max, min, value = min}) => disabled || value >= max,
 		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel, min, value = min}) => {
@@ -443,7 +461,8 @@ const IncrementSliderBase = kind({
 		}
 	},
 
-	render: ({active,
+	render: ({activateOnFocus,
+		active,
 		'aria-hidden': ariaHidden,
 		backgroundProgress,
 		css,
@@ -471,6 +490,7 @@ const IncrementSliderBase = kind({
 		onSpotlightDisappear,
 		orientation,
 		progressAnchor,
+		showAnchor,
 		size,
 		spotlightDisabled,
 		step,
@@ -500,6 +520,7 @@ const IncrementSliderBase = kind({
 				/>
 				<Slider
 					{...ariaProps}
+					activateOnFocus={activateOnFocus}
 					active={active}
 					backgroundProgress={backgroundProgress}
 					css={css}
@@ -516,6 +537,7 @@ const IncrementSliderBase = kind({
 					onDragStart={onDragStart}
 					onSpotlightDisappear={onSpotlightDisappear}
 					orientation={orientation}
+					showAnchor={showAnchor}
 					spotlightDisabled={spotlightDisabled}
 					progressAnchor={progressAnchor}
 					step={step}
