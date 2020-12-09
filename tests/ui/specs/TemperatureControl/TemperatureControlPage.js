@@ -22,6 +22,13 @@ class TemperatureControlInterface {
 	get self () {
 		return $(this.selector + ' .TemperatureControl_TemperatureControl_slider');
 	}
+
+	get knobPosition () {
+		const cx = parseInt(this.circle.getCSSProperty('cx').value);
+		const cy = parseInt(this.circle.getCSSProperty('cy').value);
+
+		return {cx, cy};
+	}
 }
 
 class TemperatureControlPage extends Page {

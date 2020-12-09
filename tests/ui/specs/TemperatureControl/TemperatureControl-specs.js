@@ -10,18 +10,15 @@ describe('TemperatureControl', function () {
 		const temperatureControl = Page.components.temperatureControlDefault;
 
 		it('should change the position of the slider knob on each different click position', function () {
-			const originalCx = temperatureControl.circle.getCSSProperty('cx').value;
-			const originalCy = temperatureControl.circle.getCSSProperty('cy').value;
+			const {cx: originalCx, cy: originalCy} = temperatureControl.knobPosition;
 
 			temperatureControl.self.click({x: 0, y: -10});
-			const cx1 = temperatureControl.circle.getCSSProperty('cx').value;
-			const cy1 = temperatureControl.circle.getCSSProperty('cy').value;
+			const {cx: cx1, cy: cy1} = temperatureControl.knobPosition;
 			expect(cx1 !== originalCx).to.be.true();
 			expect(cy1 !== originalCy).to.be.true();
 
 			temperatureControl.self.click({x: -15, y: -20});
-			const cx2 = temperatureControl.circle.getCSSProperty('cx').value;
-			const cy2 = temperatureControl.circle.getCSSProperty('cy').value;
+			const {cx: cx2, cy: cy2} = temperatureControl.knobPosition;
 			expect(cx2 !== cx1).to.be.true();
 			expect(cy2 !== cy1).to.be.true();
 		});
@@ -59,24 +56,25 @@ describe('TemperatureControl', function () {
 		const temperatureControl = Page.components.temperatureControlCustom;
 
 		it('should not change the position of the slider knob on click on the bottom-left part of the circle', function () {
-			const originalCx = temperatureControl.circle.getCSSProperty('cx').value;
-			const originalCy = temperatureControl.circle.getCSSProperty('cy').value;
+			const {cx: originalCx, cy: originalCy} = temperatureControl.knobPosition;
 			// bottom-left part means negative x and positive y
 			temperatureControl.self.click({x: -5, y: 5});
 
-			expect(temperatureControl.circle.getCSSProperty('cx').value === originalCx).to.be.true();
-			expect(temperatureControl.circle.getCSSProperty('cy').value === originalCy).to.be.true();
+			const {cx, cy} = temperatureControl.knobPosition;
+			expect(cx === originalCx).to.be.true();
+			expect(cy === originalCy).to.be.true();
 		});
 
 		it('should change the position of the slider knob on click on the top part of the circle', function () {
-			const originalCx = temperatureControl.circle.getCSSProperty('cx').value;
-			const originalCy = temperatureControl.circle.getCSSProperty('cy').value;
+			const {cx: originalCx, cy: originalCy} = temperatureControl.knobPosition;
 
 			// top part means any value x and negative value for y
 			temperatureControl.self.click({x: 10, y: -10});
 
-			expect(temperatureControl.circle.getCSSProperty('cx').value !== originalCx).to.be.true();
-			expect(temperatureControl.circle.getCSSProperty('cy').value !== originalCy).to.be.true();
+			const {cx, cy} = temperatureControl.knobPosition;
+
+			expect(cx !== originalCx).to.be.true();
+			expect(cy !== originalCy).to.be.true();
 		});
 
 		it('should not change value of the temperature on click on the bottom-left part of the circle', function () {
@@ -101,13 +99,13 @@ describe('TemperatureControl', function () {
 		const temperatureControl = Page.components.temperatureControlDisabled;
 
 		it('should not change the position of the slider knob on click', function () {
-			const originalCx = temperatureControl.circle.getCSSProperty('cx').value;
-			const originalCy = temperatureControl.circle.getCSSProperty('cy').value;
+			const {cx: originalCx, cy: originalCy} = temperatureControl.knobPosition;
 
 			temperatureControl.self.click({x: -5, y: 0});
 
-			expect(temperatureControl.circle.getCSSProperty('cx').value === originalCx).to.be.true();
-			expect(temperatureControl.circle.getCSSProperty('cy').value === originalCy).to.be.true();
+			const {cx, cy} = temperatureControl.knobPosition;
+			expect(cx === originalCx).to.be.true();
+			expect(cy === originalCy).to.be.true();
 		});
 	});
 
