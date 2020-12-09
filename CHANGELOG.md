@@ -19,6 +19,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/Button` to marquee when focused
 - `agate/Button` to show a tooltip when hovered
+- `agate/Button` to correctly compute `minWidth`
 - `agate/DateTimePicker` returned value by onChange event
 - `agate/FanSpeedControl` to center text when there is no icon
 - `agate/Heading` to support `spacing` for Gallium and Silicon

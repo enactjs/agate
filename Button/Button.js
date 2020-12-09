@@ -275,7 +275,7 @@ const ButtonBase = kind({
 			'--agate-button-animation-delay': animationDelay,
 			'--agate-button-badge-bg-color': badgeColor
 		}),
-		minWidth: ({iconOnly, minWidth}) => ((minWidth != null) ? minWidth : !iconOnly)
+		minWidth: ({minWidth}) => ((minWidth != null) ? minWidth : false)
 	},
 
 	render: ({css, ...rest}) => {
@@ -317,6 +317,7 @@ const IconButtonDecorator = hoc((config, Wrapped) => {
 		},
 
 		render: (props) => {
+			console.log(props.iconOnly);
 			return (
 				<Wrapped {...props} />
 			);
