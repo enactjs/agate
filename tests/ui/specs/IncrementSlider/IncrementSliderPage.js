@@ -49,8 +49,7 @@ class IncrementSliderPage extends Page {
 		const incrementSliderCustomProgressAnchor = new IncrementSliderInterface('incrementSliderCustomProgressAnchor');
 		const incrementSliderVertical = new IncrementSliderInterface('incrementSliderVertical');
 		const incrementSliderVerticalDisabled = new IncrementSliderInterface('incrementSliderVerticalDisabled');
-		const incrementSliderActivateOnFocus = new IncrementSliderInterface('incrementSliderActivateOnFocus');
-		this.components = {incrementSliderDefault, incrementSliderDisabled, incrementSliderCustomProgressAnchor, incrementSliderVertical, incrementSliderVerticalDisabled, incrementSliderActivateOnFocus};
+		this.components = {incrementSliderDefault, incrementSliderDisabled, incrementSliderCustomProgressAnchor, incrementSliderVertical, incrementSliderVerticalDisabled};
 	}
 
 	open (urlExtra) {

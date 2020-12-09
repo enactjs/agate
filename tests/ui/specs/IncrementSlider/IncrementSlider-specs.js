@@ -64,33 +64,6 @@ describe('IncrementSlider', function () {
 			});
 		});
 
-		describe('with `activateOnFocus`', function () {
-			const incrementSlider = Page.components.incrementSliderActivateOnFocus;
-
-			describe('5-way', function () {
-				it('should activate on focus and can increment the value', function () {
-					incrementSlider.focusSlider();
-					// Page.spotlightRight();
-					const originalValue = incrementSlider.knobPositionHorizontal;
-					Page.spotlightRight();
-					// expect knob `left` css prop to be bigger than original one
-					const newValue = incrementSlider.knobPositionHorizontal;
-					expect(newValue > originalValue).to.be.true();
-				});
-
-				it('should activate on focus and can decrement the value', function () {
-					incrementSlider.focusSlider();
-					Page.spotlightRight();
-					Page.spotlightRight();
-					const originalValue = incrementSlider.knobPositionHorizontal;
-					Page.spotlightLeft();
-					// expect knob `left` css prop to be smaller than original one
-					const newValue = incrementSlider.knobPositionHorizontal;
-					expect(newValue < originalValue).to.be.true();
-				});
-			});
-		});
-
 		describe('with custom `progressAnchor`', function () {
 			const incrementSlider = Page.components.incrementSliderCustomProgressAnchor;
 
