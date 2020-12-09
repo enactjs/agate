@@ -317,7 +317,6 @@ const IconButtonDecorator = hoc((config, Wrapped) => {
 		},
 
 		render: (props) => {
-			console.log(props.iconOnly);
 			return (
 				<Wrapped {...props} />
 			);
