@@ -17,7 +17,7 @@ const app = (props) => <div {...props}>
 			<Heading>TabGroup default</Heading>
 			<TabGroup
 				className="tabGroupDefault"
-				tabPosition='before'
+				tabPosition="before"
 				tabs={[
 					{title: 'Home', icon: 'home'},
 					{title: 'Settings', icon: 'setting'},
@@ -27,7 +27,7 @@ const app = (props) => <div {...props}>
 			<Heading>TabGroup with slotBefore/slotAfter</Heading>
 			<TabGroup
 				className="tabGroupSlotBeforeAfter"
-				tabPosition='before'
+				tabPosition="before"
 				tabs={[
 					{title: 'Home', icon: 'home'},
 					{title: 'Settings', icon: 'setting'},
@@ -37,7 +37,7 @@ const app = (props) => <div {...props}>
 				<beforeTabs>
 					<Button
 						className="previousButton"
-						icon='arrowlargeleft'
+						icon="arrowlargeleft"
 						size="small"
 						type="grid"
 					/>
@@ -45,16 +45,16 @@ const app = (props) => <div {...props}>
 				<afterTabs>
 					<Button
 						className="nextButton"
-						icon='arrowlargeright'
+						icon="arrowlargeright"
 						size="small"
 						type="grid"
 					/>
 				</afterTabs>
 			</TabGroup>
-			<Heading>TabGroup tabPosition before</Heading>
+			<Heading>TabGroup tabPosition after</Heading>
 			<TabGroup
 				className="tabGroupTabPositionAfter"
-				tabPosition='after'
+				tabPosition="after"
 				tabs={[
 					{title: 'Home', icon: 'home'},
 					{title: 'Settings', icon: 'setting'},
@@ -66,7 +66,7 @@ const app = (props) => <div {...props}>
 				<TabGroup
 					className="tabGroupVertical"
 					orientation="vertical"
-					tabPosition='before'
+					tabPosition="before"
 					tabs={[
 						{title: 'Home', icon: 'home'},
 						{title: 'Settings', icon: 'setting'},

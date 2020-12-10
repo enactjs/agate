@@ -14,7 +14,7 @@ describe('TabGroup', function () {
 			});
 
 			it('should display `home` icon', function () {
-				expect(tabGroup.iconValue(1)).to.equal(983231);
+				expect(tabGroup.iconValue(1)).to.equal(983231); // decimal converted charCode of Unicode 'home' character
 			});
 		});
 
@@ -27,7 +27,7 @@ describe('TabGroup', function () {
 			});
 
 			it('should display `setting` icon', function () {
-				expect(tabGroup.iconValue(2)).to.equal(983083);
+				expect(tabGroup.iconValue(2)).to.equal(983083); // decimal converted charCode of Unicode 'setting' character
 			});
 		});
 
@@ -40,7 +40,7 @@ describe('TabGroup', function () {
 			});
 
 			it('should display `display` icon', function () {
-				expect(tabGroup.iconValue(3)).to.equal(983244);
+				expect(tabGroup.iconValue(3)).to.equal(983244); // decimal converted charCode of Unicode 'display' character
 			});
 		});
 	});
