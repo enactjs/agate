@@ -18,23 +18,13 @@ const audioFiles = [
 ];
 
 const app = (props) => <div {...props}>
-	<div style={{height: '600px', display: 'flex', flexDirection: 'column', justifyContent: 'space-around'}}>
-		<div>
-			<Heading>Media Player Default</Heading>
-			<MediaPlayer id="mediaPlayerDefault">
-				{
-					audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
-				}
-			</MediaPlayer>
-		</div>
-		<div>
-			<Heading>Media Player Disabled</Heading>
-			<MediaPlayer disabled id="mediaPlayerDisabled">
-				{
-					audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
-				}
-			</MediaPlayer>
-		</div>
+	<div>
+		<Heading>Media Player Default</Heading>
+		<MediaPlayer id="mediaPlayerDefault">
+			{
+				audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
+			}
+		</MediaPlayer>
 	</div>
 </div>;
 

@@ -24,16 +24,20 @@ class MediaPlayerInterface {
 		return getComponent({component: 'Slider', child: 'slider'}, this.self);
 	}
 
+	get knob () {
+		return getComponent({component: 'Slider', child: 'knob'}, this.self);
+	}
+
 	get button () {
 		return getComponent({component: 'Button', child: 'button'}, this.self);
 	}
 
-	get playButton () {
-		return element('.MediaPlayer_MediaControls_playPauseButton', this.self);
-	}
-
 	get icon () {
 		return getComponent({component: 'Button', child: 'icon'}, this.self);
+	}
+
+	get playButton () {
+		return element('.MediaPlayer_MediaControls_playPauseButton', this.self);
 	}
 
 	get previousButton () {
@@ -55,6 +59,10 @@ class MediaPlayerInterface {
 	get menuButton () {
 		return $(this.selector + '>div>div[aria-label=Menu]');
 	}
+
+	get source () {
+		return $(this.selector + '>audio>source').getAttribute('src');
+	}
 }
 
 class MediaPlayerPage extends Page {
@@ -62,8 +70,7 @@ class MediaPlayerPage extends Page {
 		super();
 		this.title = 'MediaPlayer Test';
 		const mediaPlayerDefault = new MediaPlayerInterface('mediaPlayerDefault');
-		const mediaPlayerDisabled = new MediaPlayerInterface('mediaPlayerDisabled');
-		this.components = {mediaPlayerDefault, mediaPlayerDisabled};
+		this.components = {mediaPlayerDefault};
 	}
 
 	open (urlExtra) {
