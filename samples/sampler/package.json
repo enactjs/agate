@@ -1,6 +1,6 @@
 {
   "name": "agate-sampler",
-  "version": "1.0.0-alpha.16",
+  "version": "1.1.0",
   "description": "Component and QA samples for Agate",
   "private": true,
   "main": "index.js",
@@ -21,8 +21,8 @@
   },
   "dependencies": {
     "@enact/agate": "../../",
-    "@enact/core": "^3.4.9",
-    "@enact/ui": "^3.4.9",
+    "@enact/core": "^3.4.10",
+    "@enact/ui": "^3.4.10",
     "ilib": "^14.4.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6"
