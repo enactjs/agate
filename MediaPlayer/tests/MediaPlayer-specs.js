@@ -1,5 +1,5 @@
-import React from 'react';
 import {mount} from 'enzyme';
+import React from 'react';
 
 import MediaPlayer from '../MediaPlayer';
 import css from '../../Slider/Slider.module.less';
