@@ -79,10 +79,10 @@ describe('TabGroup Specs', () => {
 		expect(secondActual).toBe(secondExpected);
 	});
 
-	test('should apply `horizontal` when `orientation=horizontal`', () => {
+	test('should apply `vertical` when `orientation=vertical`', () => {
 		const subject = mount(
 			<TabGroup
-				orientation="horizontal"
+				orientation="vertical"
 				tabPosition="before"
 				tabs={[
 					{title: 'Home', icon: 'home'},
@@ -92,7 +92,7 @@ describe('TabGroup Specs', () => {
 			/>
 		);
 
-		const expected = 'horizontal';
+		const expected = 'vertical';
 		const actual = subject.find('TabGroup').prop('orientation');
 
 		expect(actual).toBe(expected);
