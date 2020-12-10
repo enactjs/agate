@@ -8,7 +8,6 @@ describe('ColorPicker', function () {
 	});
 
 	describe('focus management', function () {
-
 		it('should focus the `#colorPickerDefault` when page loads', function () {
 			expect(Page.components.colorPickerDefault.button.isFocused()).to.be.true();
 		});
@@ -20,8 +19,12 @@ describe('ColorPicker', function () {
 		it('should have correct value', function () {
 			expect(colorPickerDefault.colorSwatch).to.equal('#FF7FAE');
 		});
+	});
 
+	describe('5-way', function () {
 		it('should have correct color code after changing selected value', function () {
+			const colorPickerDefault = Page.components.colorPickerDefault;
+
 			expect(colorPickerDefault.button.isFocused()).to.be.true();
 			expect(colorPickerDefault.colorSwatch).to.equal('#FF7FAE');
 
@@ -33,9 +36,6 @@ describe('ColorPicker', function () {
 
 			expect(colorPickerDefault.colorSwatch).to.equal('#8333E9');
 		});
-	});
-
-	describe('5-way', function () {
 
 		it('should not open the `#colorPickerDisabled` when 5-way down and select', function () {
 			const colorPickerDisabled = Page.components.colorPickerDisabled;
@@ -73,6 +73,22 @@ describe('ColorPicker', function () {
 	});
 
 	describe('pointer', function () {
+		it('should open colorPicker on click and select a new color', function () {
+			const colorPicker = Page.components.colorPickerDefault;
+			const oldColor = colorPicker.colorSwatch;
+
+			// Open the first colorPicker and wait for the first color list item to be focused
+			colorPicker.button.click();
+			Page.delay(1000);
+
+			// Click on first button in palette
+			colorPicker.item(1).click();
+			Page.delay(1000);
+
+			// Verify the selected color
+			const newColor = colorPicker.colorSwatch;
+			expect(oldColor !== newColor).to.be.true();
+		});
 
 		it('should dismiss colorPicker when clicking outside', function () {
 			const colorPicker = Page.components.colorPickerDefault;

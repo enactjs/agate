@@ -1,6 +1,6 @@
 'use strict';
 
-const {element, componentSelector, getComponent, getSubComponent,Page} = require('@enact/ui-test-utils/utils');
+const {element, Page} = require('@enact/ui-test-utils/utils');
 
 class ColorPickerInterface {
 	constructor (id) {
