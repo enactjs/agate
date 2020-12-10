@@ -77,13 +77,13 @@ describe('MediaPlayer', () => {
 			const source = getSourceNode(subject);
 
 			subject.setProps({
-				source: ['abc.mp4']
+				source: ['abc.mp3']
 			});
 
 			expect(getSourceNode(subject)).toBe(source);
 
 			subject.setProps({
-				source: ['def.mp4']
+				source: ['def.mp3']
 			});
 
 			expect(getSourceNode(subject)).toBe(source);
