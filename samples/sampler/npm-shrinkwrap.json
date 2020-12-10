@@ -1365,10 +1365,10 @@
     "@enact/agate": {
       "version": "file:../..",
       "requires": {
-        "@enact/core": "^3.4.9",
-        "@enact/i18n": "^3.4.9",
-        "@enact/spotlight": "^3.4.9",
-        "@enact/ui": "^3.4.9",
+        "@enact/core": "^3.4.10",
+        "@enact/i18n": "^3.4.10",
+        "@enact/spotlight": "^3.4.10",
+        "@enact/ui": "^3.4.10",
         "classnames": "^2.2.6",
         "color-convert": "^1.9.3",
         "deep-freeze": "0.0.1",
