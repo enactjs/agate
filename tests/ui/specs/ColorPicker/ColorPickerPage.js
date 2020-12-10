@@ -5,6 +5,7 @@ const {element, componentSelector, getComponent, getSubComponent,Page} = require
 class ColorPickerInterface {
 	constructor (id) {
 		this.id = id;
+		this.selector = `#${this.id}`;
 	}
 
 	get self () {
@@ -23,15 +24,8 @@ class ColorPickerInterface {
 		return $(`.enact_ui_Transition_Transition_shown #${this.id}`).isExisting();
 	}
 
-	get colorList () {
-		return getComponent({component: 'ColorPicker', child: 'palette'}, browser);
-	}
-
 	item (index) {
-		return element(
-			`${componentSelector({component: 'Button'})}[data-index="${index}"]`,
-			this.colorList
-		);
+		return $(this.selector + ` .ColorPicker_ColorPicker_palette .ColorPicker_SwatchButton_swatchButton:nth-child(${index})`);
 	}
 }
 

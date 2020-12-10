@@ -68,7 +68,7 @@ describe('ColorPicker', function () {
 			Page.spotlightSelect();
 			Page.spotlightRight();
 
-			expect(colorPickerOpen.item(0).isFocused()).to.be.true();
+			expect(colorPickerOpen.item(1).isFocused()).to.be.true();
 		});
 	});
 
