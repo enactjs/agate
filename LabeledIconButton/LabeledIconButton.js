@@ -122,6 +122,8 @@ const LabeledIconButtonBase = kind({
 		spriteCount,
 		...rest
 	}) => {
+		delete rest.iconOnly;
+
 		return UiLabeledIconBase.inline({
 			role: 'button',
 			...rest,
