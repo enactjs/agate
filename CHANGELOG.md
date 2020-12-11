@@ -25,10 +25,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/IncrementSlider` button color for Gallium skin
 - `agate/Input` run time error when using `dismissOnEnter`
 - `agate/Keypad` to not show console error in sampler
-- `agate/Keypad` to have buttons with `minWidth` false
+- `agate/Keypad` to have buttons with proper width
 - `agate/LabeledIconButton` max-width so that huge sized icon will not be cut off
 - `agate/MediaPlayer` play function on handleNext and handlePrevious to handle events asynchronously
-- `agate/MediaPlayer` to have buttons with `minWidth` false
+- `agate/MediaPlayer` to have buttons with proper width
 - `agate/Panels` to show close button properly for night mode
 - `agate/Picker` picker item width in horizontal for silicon
 - `agate/PopupMenu` to display distinguishable title
@@ -38,7 +38,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Spinner` to support `transparent` prop properly
 - `agate/SwitchItem` icon position for all skins RTL locale and Electro/Titanium both LTR and RTL locale
 - `agate/TemperatureControl` to not be draggable when it's disabled
-- `agate/ToggleButton` to use `Button` with `minWidth` false
+- `agate/ToggleButton` to have Button with proper width
 
 ## [1.0.0] - 2020-10-14
 
