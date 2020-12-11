@@ -37,6 +37,15 @@ class LabeledIconButtonInterface {
 	isSmallest () {
 		return $(this.selector + ' .Button_Button_smallest').isExisting();
 	}
+	isSmall () {
+		return $(this.selector + ' .Button_Button_small').isExisting();
+	}
+	isHuge () {
+		return $(this.selector + ' .Button_Button_huge').isExisting();
+	}
+	isDisabled () {
+		return $(this.selector + ' .Button_Button_button').getAttribute('aria-disabled');
+	}
 
 	// get textContent () {
 	// 	return getText(this.selector + ' .LabeledIcon_LabeledIcon_label');
@@ -67,7 +76,7 @@ class LabeledIconButtonPage extends Page {
 			LabeledIconButtonSmall,
 			LabeledIconButtonHuge,
 			LabeledIconButtonDisabled
-		}
+		};
 	}
 
 	open (urlExtra) {

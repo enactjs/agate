@@ -33,7 +33,7 @@ describe('LabeledIconButton', function () {
 			it('should focus the labeled icon button when hovered', function () {
 				labeledIconButton.hover();
 				expect(labeledIconButton.self.isFocused()).to.be.true();
-			})
+			});
 		});
 	});
 
@@ -61,7 +61,7 @@ describe('LabeledIconButton', function () {
 			it('should focus the labeled icon button when hovered', function () {
 				labeledIconButton.hover();
 				expect(labeledIconButton.self.isFocused()).to.be.true();
-			})
+			});
 		});
 	});
 
@@ -93,7 +93,7 @@ describe('LabeledIconButton', function () {
 			it('should focus the labeled icon button when hovered', function () {
 				labeledIconButton.hover();
 				expect(labeledIconButton.self.isFocused()).to.be.true();
-			})
+			});
 		});
 	});
 
@@ -125,7 +125,7 @@ describe('LabeledIconButton', function () {
 			it('should focus the labeled icon button when hovered', function () {
 				labeledIconButton.hover();
 				expect(labeledIconButton.self.isFocused()).to.be.true();
-			})
+			});
 		});
 	});
 
@@ -157,7 +157,7 @@ describe('LabeledIconButton', function () {
 			it('should focus the labeled icon button when hovered', function () {
 				labeledIconButton.hover();
 				expect(labeledIconButton.self.isFocused()).to.be.true();
-			})
+			});
 		});
 	});
 
@@ -174,6 +174,118 @@ describe('LabeledIconButton', function () {
 
 		it('should have smallest button', function () {
 			expect(labeledIconButton.isSmallest()).to.be.true();
+		});
+
+		describe('5-way', function () {
+			it('should focus the labeled icon button with 5-way Down', function () {
+				Page.components.LabeledIconButtonTransparent.focus();
+				Page.spotlightDown();
+
+				expect(labeledIconButton.self.isFocused()).to.be.true();
+			});
+		});
+
+		describe('pointer', function () {
+			it('should focus the labeled icon button when hovered', function () {
+				labeledIconButton.hover();
+				expect(labeledIconButton.self.isFocused()).to.be.true();
+			});
+		});
+	});
+
+	describe('small', function () {
+		const labeledIconButton = Page.components.LabeledIconButtonSmall;
+
+		it('should have correct text', function () {
+			expect(labeledIconButton.valueText).to.equal('LabeledIconButton small');
+		});
+
+		it('should display `temperature` icon', function () {
+			expect(labeledIconButton.iconValue()).to.equal(983232); // decimal converted charCode of Unicode 'temperature' character
+		});
+
+		it('should have small button', function () {
+			expect(labeledIconButton.isSmall()).to.be.true();
+		});
+
+		describe('5-way', function () {
+			it('should focus the labeled icon button with 5-way Down', function () {
+				Page.components.LabeledIconButtonSmallest.focus();
+				Page.spotlightDown();
+
+				expect(labeledIconButton.self.isFocused()).to.be.true();
+			});
+		});
+
+		describe('pointer', function () {
+			it('should focus the labeled icon button when hovered', function () {
+				labeledIconButton.hover();
+				expect(labeledIconButton.self.isFocused()).to.be.true();
+			});
+		});
+	});
+
+	describe('huge', function () {
+		const labeledIconButton = Page.components.LabeledIconButtonHuge;
+
+		it('should have correct text', function () {
+			expect(labeledIconButton.valueText).to.equal('LabeledIconButton huge');
+		});
+
+		it('should display `temperature` icon', function () {
+			expect(labeledIconButton.iconValue()).to.equal(983232); // decimal converted charCode of Unicode 'temperature' character
+		});
+
+		it('should have huge button', function () {
+			expect(labeledIconButton.isHuge()).to.be.true();
+		});
+
+		describe('5-way', function () {
+			it('should focus the labeled icon button with 5-way Down', function () {
+				Page.components.LabeledIconButtonSmall.focus();
+				Page.spotlightDown();
+
+				expect(labeledIconButton.self.isFocused()).to.be.true();
+			});
+		});
+
+		describe('pointer', function () {
+			it('should focus the labeled icon button when hovered', function () {
+				labeledIconButton.hover();
+				expect(labeledIconButton.self.isFocused()).to.be.true();
+			});
+		});
+	});
+
+	describe('disabled', function () {
+		const labeledIconButton = Page.components.LabeledIconButtonDisabled;
+
+		it('should have correct text', function () {
+			expect(labeledIconButton.valueText).to.equal('LabeledIconButton disabled');
+		});
+
+		it('should display `temperature` icon', function () {
+			expect(labeledIconButton.iconValue()).to.equal(983232); // decimal converted charCode of Unicode 'temperature' character
+		});
+
+		it('should be disabled', function () {
+			expect(labeledIconButton.isDisabled()).to.equal('true');
+		});
+
+		describe('5-way', function () {
+			it('should focus the labeled icon button with 5-way Down', function () {
+				Page.components.LabeledIconButtonDisabled.focus();
+				Page.spotlightDown();
+
+				expect(labeledIconButton.self.isFocused()).to.be.true();
+			});
+		});
+
+		describe('pointer', function () {
+			it('should focus the labeled icon button when hovered', function () {
+				labeledIconButton.hover();
+				expect(labeledIconButton.self.isFocused()).to.be.true();
+			});
 		});
 	});
 });

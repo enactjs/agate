@@ -122,7 +122,7 @@ const LabeledIconButtonBase = kind({
 		spriteCount,
 		...rest
 	}) => {
-		delete rest.iconOnly;
+		delete rest.iconOnly; // eslint-disable-line
 
 		return UiLabeledIconBase.inline({
 			role: 'button',
