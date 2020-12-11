@@ -46,10 +46,6 @@ class LabeledIconButtonInterface {
 	isDisabled () {
 		return $(this.selector + ' .Button_Button_button').getAttribute('aria-disabled');
 	}
-
-	// get textContent () {
-	// 	return getText(this.selector + ' .LabeledIcon_LabeledIcon_label');
-	// }
 }
 
 class LabeledIconButtonPage extends Page {
