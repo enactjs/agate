@@ -12,8 +12,6 @@
  * @exports ArcPickerDecorator
  */
 
-import {forward} from '@enact/core/handle';
-import {is} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
@@ -28,9 +26,6 @@ import Skinnable from '../Skinnable';
 import ArcPickerBehaviorDecorator from './ArcPickerBehaviorDecorator';
 
 import css from './ArcPicker.module.less';
-
-const isDown = is('down');
-const isUp = is('up');
 
 /**
  * An Agate component for displaying an arc picker.
@@ -185,23 +180,6 @@ const ArcPickerBase = kind({
 	styles: {
 		css,
 		className: 'arcPicker'
-	},
-
-	handlers: {
-		onKeyDown: (ev, props) => {
-			const {children, disabled, onClick, value} = props;
-			const index = children.findIndex(child => child === value);
-
-			forward('onKeyDown', ev, props);
-
-			if (!disabled) {
-				if (isDown(ev.keyCode)) {
-					onClick(children[Math.max(index - 1, 0)])(ev);
-				} else if (isUp(ev.keyCode)) {
-					onClick(children[Math.min(index + 1, children.length - 1)])(ev);
-				}
-			}
-		}
 	},
 
 	computed: {

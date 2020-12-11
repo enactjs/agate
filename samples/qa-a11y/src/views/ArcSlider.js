@@ -13,14 +13,14 @@ const ArcSliderView = () => (
 			<ArcSlider alt="Normal" />
 			<div />
 			<ArcSlider alt="Disabled" disabled />
-			<Button icon="arrowdown" />
+			<Button aria-label="5 way Down to move to the next line" icon="arrowdown" />
 		</Section>
 
 		<Section title="Aria-ValueText" vertical>
 			<AriaValueTextSlider alt="Aria-valuetext" aria-valuetext="This is a Label." />
 			<div />
 			<AriaValueTextSlider alt="Aria-valuetext and Disabled" aria-valuetext="This is a Label." disabled />
-			<Button icon="arrowup" />
+			<Button aria-label="5 way Up to move to the previous line" icon="arrowup" />
 		</Section>
 	</>
 );

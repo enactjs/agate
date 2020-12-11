@@ -16,7 +16,7 @@ const ArcPickerView = () => (
 			<ArcPicker alt="With slotCenter" slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</ArcPicker>
 			<ArcPicker alt="Disabled" disabled>{[1, 2, 3, 4, 5]}</ArcPicker>
 			<ArcPicker alt="Disabled with slotCenter" disabled slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</ArcPicker>
-			<Button icon="arrowdown" />
+			<Button aria-label="5 way Down to move to the next line" icon="arrowdown" />
 		</Section>
 
 		<Section title="Aria-ValueText" vertical>
@@ -24,7 +24,7 @@ const ArcPickerView = () => (
 			<AriaValueTextArcPicker alt="Aria-valuetext with slotCenter" aria-valuetext="This is a Label." slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</AriaValueTextArcPicker>
 			<AriaValueTextArcPicker alt="Aria-valuetext and Disabled" aria-valuetext="This is a Label." disabled>{[1, 2, 3, 4, 5]}</AriaValueTextArcPicker>
 			<AriaValueTextArcPicker alt="Aria-valuetext and Disabled with slotCenter" aria-valuetext="This is a Label." disabled slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</AriaValueTextArcPicker>
-			<Button icon="arrowup" />
+			<Button aria-label="5 way Up to move to the previous line" icon="arrowup" />
 		</Section>
 	</>
 );

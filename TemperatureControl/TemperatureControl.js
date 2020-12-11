@@ -110,6 +110,7 @@ const TemperatureControlBase =  kind({
 		return (
 			<div {...rest}>
 				<ArcSlider
+					aria-valuetext={currentTemperatureString}
 					backgroundColor="#444444"
 					className={css.slider}
 					disabled={disabled}
