@@ -13,7 +13,6 @@ describe('LabeledIconButton Specs', () => {
 			</LabeledIconButton>
 		);
 
-		// console.log(subject.debug());
 		const expected = 'Hello LabeledIconButton';
 		const actual = subject.find('label').text();
 
@@ -106,7 +105,7 @@ describe('LabeledIconButton Specs', () => {
 		);
 
 		const expected = 'smallest';
-		const actual = subject.find('div[role="button"]').at(1).prop('className');
+		const actual = subject.find('Button').prop('size');
 
 		expect(actual).toContain(expected);
 	});
@@ -122,7 +121,7 @@ describe('LabeledIconButton Specs', () => {
 		);
 
 		const expected = 'small';
-		const actual = subject.find('div[role="button"]').at(1).prop('className');
+		const actual = subject.find('Button').prop('size');
 
 		expect(actual).toContain(expected);
 	});
@@ -137,7 +136,7 @@ describe('LabeledIconButton Specs', () => {
 		);
 
 		const expected = 'large';
-		const actual = subject.find('div[role="button"]').at(1).prop('className');
+		const actual = subject.find('Button').prop('size');
 
 		expect(actual).toContain(expected);
 	});
@@ -153,7 +152,7 @@ describe('LabeledIconButton Specs', () => {
 		);
 
 		const expected = 'huge';
-		const actual = subject.find('div[role="button"]').at(1).prop('className');
+		const actual = subject.find('Button').prop('size');
 
 		expect(actual).toContain(expected);
 	});
