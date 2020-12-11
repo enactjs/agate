@@ -25,6 +25,7 @@ import Skinnable from '../Skinnable';
 import {ThemeContext} from '../ThemeDecorator';
 
 import ArcPickerBehaviorDecorator from './ArcPickerBehaviorDecorator';
+
 import css from './ArcPicker.module.less';
 
 /**
