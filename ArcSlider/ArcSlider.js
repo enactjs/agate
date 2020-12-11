@@ -23,6 +23,7 @@ import React from 'react';
 import Arc from '../Arc';
 import {angleToPosition} from '../Arc/utils';
 import Skinnable from '../Skinnable';
+import {ThemeContext} from '../ThemeDecorator';
 
 import ArcSliderBehaviorDecorator from './ArcSliderBehaviorDecorator';
 import {valueToAngle} from './utils';
@@ -44,15 +45,6 @@ const ArcSliderBase = kind({
 	name: 'ArcSlider',
 
 	propTypes: /** @lends agate/ArcSlider.ArcSliderBase.prototype */ {
-		/**
-		 * The accent color of the arcs.
-		 *
-		 * @type {String}
-		 * @default #8b7efe
-		 * @public
-		 */
-		accentColor: PropTypes.string,
-
 		/**
 		 * Overrides the `aria-valuetext` for the ArcSlider. By default, `aria-valuetext` is set
 		 * to the current value.
@@ -191,7 +183,6 @@ const ArcSliderBase = kind({
 	},
 
 	defaultProps: {
-		accentColor: '#8b7efe',
 		backgroundColor: '#000000',
 		endAngle: 250,
 		foregroundColor: '#0000ff',
@@ -202,6 +193,8 @@ const ArcSliderBase = kind({
 		step: 1,
 		strokeWidth: 6
 	},
+
+	contextType: ThemeContext,
 
 	styles: {
 		css,
@@ -216,7 +209,10 @@ const ArcSliderBase = kind({
 		}
 	},
 
-	render: ({accentColor, 'aria-valuetext': ariaValuetext, backgroundColor, componentRef, disabled, endAngle, foregroundColor, isFocused, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}) => {
+	render: (
+		{'aria-valuetext': ariaValuetext, backgroundColor, componentRef, disabled, endAngle, foregroundColor, isFocused, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest},
+		{accent: accentColor}
+	) => {
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 

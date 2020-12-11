@@ -11,7 +11,7 @@ const Config = mergeComponentMetadata('ArcPicker', ArcPicker, ArcPickerBase);
 
 // Set up some defaults for colors
 const prop = {
-	colors: ['#444444', '#eeeeee', '#ffffff', '#986aad', '#0000ff', '#8b7efe']
+	colors: ['#444444', '#eeeeee', '#ffffff', '#986aad', '#0000ff']
 };
 
 storiesOf('Agate', module)
@@ -23,7 +23,6 @@ storiesOf('Agate', module)
 
 			return (
 				<ArcPicker
-					accentColor={select('accentColor', prop.colors, Config)}
 					backgroundColor={select('backgroundColor', prop.colors, Config)}
 					endAngle={number('endAngle', Config, {range: true, min: 0, max: 360})}
 					foregroundColor={select('foregroundColor', prop.colors, Config)}

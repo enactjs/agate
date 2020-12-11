@@ -22,6 +22,8 @@ import Skinnable from '../Skinnable';
 import screenTypes from './screenTypes.json';
 import css from './ThemeDecorator.module.less';
 
+const ThemeContext = React.createContext(null);
+
 /**
  * Default config for {@link agate/ThemeDecorator.ThemeDecorator}.
  *
@@ -280,10 +282,10 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			);
 
 			return (
-				<React.Fragment>
+				<ThemeContext.Provider value={{accent, highlight}}>
 					{customSkin ? <CustomizableSkinStyle className={customizableSkinClassName} accent={accent} highlight={highlight} /> : null}
-					<App {...rest} className={allClassNames} />
-				</React.Fragment>
+					<App {...rest} accent={accent} className={allClassNames} />
+				</ThemeContext.Provider>
 			);
 		}
 	};
@@ -293,5 +295,6 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 export default ThemeDecorator;
 export {
-	ThemeDecorator
+	ThemeDecorator,
+	ThemeContext
 };

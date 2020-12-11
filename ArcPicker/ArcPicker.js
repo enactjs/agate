@@ -22,9 +22,9 @@ import React from 'react';
 
 import Arc from '../Arc';
 import Skinnable from '../Skinnable';
+import {ThemeContext} from '../ThemeDecorator';
 
 import ArcPickerBehaviorDecorator from './ArcPickerBehaviorDecorator';
-
 import css from './ArcPicker.module.less';
 
 /**
@@ -49,15 +49,6 @@ const ArcPickerBase = kind({
 		 * @public
 		 */
 		children: PropTypes.node.isRequired,
-
-		/**
-		 * The accent color of the arcs.
-		 *
-		 * @type {String}
-		 * @default #8b7efe
-		 * @public
-		 */
-		accentColor: PropTypes.string,
 
 		/**
 		 * The color of the unselected arcs.
@@ -168,7 +159,6 @@ const ArcPickerBase = kind({
 	},
 
 	defaultProps: {
-		accentColor: '#8b7efe',
 		backgroundColor: '#eeeeee',
 		endAngle: 310,
 		foregroundColor: '#444444',
@@ -177,14 +167,16 @@ const ArcPickerBase = kind({
 		strokeWidth: 6
 	},
 
+	contextType: ThemeContext,
+
 	styles: {
 		css,
 		className: 'arcPicker'
 	},
 
 	computed: {
-		arcSegments: (props) => {
-			const {accentColor, backgroundColor, children, endAngle, foregroundColor, isFocused, onClick, radius, selectionType, startAngle, strokeWidth, value} = props;
+		arcSegments: (props, {accent: accentColor}) => {
+			const {backgroundColor, children, endAngle, foregroundColor, isFocused, onClick, radius, selectionType, startAngle, strokeWidth, value} = props;
 
 			return (
 				children.map((option, index) => {
@@ -216,7 +208,6 @@ const ArcPickerBase = kind({
 	},
 
 	render: ({arcSegments, disabled, slotCenter, value, ...rest}) => {
-		delete rest.accentColor;
 		delete rest.backgroundColor;
 		delete rest.children;
 		delete rest.endAngle;
