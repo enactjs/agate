@@ -146,8 +146,10 @@ const skins = {
 	'Titanium': 'titanium'
 };
 
-if (process.env.SKIN) {
-	skins[cap(process.env.SKIN)] = process.env.SKIN;
+if (process.env.SKINS) {
+	JSON.parse(process.env.SKINS).forEach(skin => {
+		skins[cap(skin)] = skin;
+	});
 }
 
 // NOTE: Knobs cannot set locale in fullscreen mode. This allows any knob to be taken from the URL.
