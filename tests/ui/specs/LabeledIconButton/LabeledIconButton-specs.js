@@ -184,13 +184,6 @@ describe('LabeledIconButton', function () {
 				expect(labeledIconButton.self.isFocused()).to.be.true();
 			});
 		});
-
-		describe('pointer', function () {
-			it('should focus the labeled icon button when hovered', function () {
-				labeledIconButton.hover();
-				expect(labeledIconButton.self.isFocused()).to.be.true();
-			});
-		});
 	});
 
 	describe('small', function () {
@@ -213,13 +206,6 @@ describe('LabeledIconButton', function () {
 				Page.components.LabeledIconButtonSmallest.focus();
 				Page.spotlightDown();
 
-				expect(labeledIconButton.self.isFocused()).to.be.true();
-			});
-		});
-
-		describe('pointer', function () {
-			it('should focus the labeled icon button when hovered', function () {
-				labeledIconButton.hover();
 				expect(labeledIconButton.self.isFocused()).to.be.true();
 			});
 		});
@@ -248,13 +234,6 @@ describe('LabeledIconButton', function () {
 				expect(labeledIconButton.self.isFocused()).to.be.true();
 			});
 		});
-
-		describe('pointer', function () {
-			it('should focus the labeled icon button when hovered', function () {
-				labeledIconButton.hover();
-				expect(labeledIconButton.self.isFocused()).to.be.true();
-			});
-		});
 	});
 
 	describe('disabled', function () {
@@ -277,13 +256,6 @@ describe('LabeledIconButton', function () {
 				Page.components.LabeledIconButtonDisabled.focus();
 				Page.spotlightDown();
 
-				expect(labeledIconButton.self.isFocused()).to.be.true();
-			});
-		});
-
-		describe('pointer', function () {
-			it('should focus the labeled icon button when hovered', function () {
-				labeledIconButton.hover();
 				expect(labeledIconButton.self.isFocused()).to.be.true();
 			});
 		});
