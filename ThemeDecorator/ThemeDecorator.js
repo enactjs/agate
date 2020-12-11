@@ -266,6 +266,11 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			highlight: PropTypes.string
 		};
 
+		static defaultProps = {
+			accent: '#8b7efe',
+			highlight: '#c6c0fe'
+		};
+
 		render () {
 			const {accent, className, highlight, ...rest} = this.props;
 			const customizableSkinClassName = 'agate-customized-skin';
