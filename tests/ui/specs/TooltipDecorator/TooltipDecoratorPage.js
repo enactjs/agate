@@ -1,7 +1,23 @@
 'use strict';
-const {element, Page} = require('@enact/ui-test-utils/utils');
+const {element, getText, Page} = require('@enact/ui-test-utils/utils');
 
-class Wrapper {
+class TooltipButtonInterface {
+	constructor (id) {
+		this.id = id;
+		this.selector = `#${this.id}`;
+	}
+
+	focus () {
+		return browser.execute((el) => el.focus(), $(this.selector));
+	}
+
+	hover () {
+		return $(this.selector).moveTo({xOffset: 0, yOffset: 0});
+	}
+
+	get self () {
+		return $(this.selector);
+	}
 
 	get buttonPopup1 () {
 		return element('#buttonPopup1', browser);
@@ -15,27 +31,12 @@ class Wrapper {
 		return element('#buttonPopup3', browser);
 	}
 
-	get floatLayer () {
-		return element('#floatLayer', browser);
+	get tooltipText () {
+		return getText(element('.enact-fit.enact-clip.enact-untouchable>div', browser));
 	}
 
 	get isTooltipShowing () {
-		return this.floatLayer.$('.enact_ui_FloatingLayer_Scrim_scrim').isExisting();
-	}
-}
-
-class TooltipButtonInterface {
-	constructor (id) {
-		this.id = id;
-		this.selector = `#${this.id}`;
-	}
-
-	focus () {
-		return browser.execute((el) => el.focus(), $(this.selector));
-	}
-
-	get self () {
-		return $(this.selector);
+		return element('.enact-fit.enact-clip.enact-untouchable>div', browser).isExisting();
 	}
 }
 
@@ -43,12 +44,11 @@ class TooltipDecoratorPage extends Page {
 	constructor () {
 		super();
 		this.title = 'TooltipDecorator Test';
-		this.wrapper = new Wrapper('wrapper');
-		const tooltipButton1 = new TooltipButtonInterface('tooltipButton1');
-		const tooltipButton2 = new TooltipButtonInterface('tooltipButton2');
-		const tooltipButton3 = new TooltipButtonInterface('tooltipButton3');
+		const tooltipDefault = new TooltipButtonInterface('tooltipButton1');
+		const tooltipDelayed = new TooltipButtonInterface('tooltipButton2');
+		const tooltipButtonDisabled = new TooltipButtonInterface('tooltipButton3');
 
-		this.components = {tooltipButton1, tooltipButton2, tooltipButton3};
+		this.components = {tooltipDefault, tooltipDelayed, tooltipButtonDisabled};
 	}
 
 	open (urlExtra) {

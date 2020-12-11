@@ -14,7 +14,7 @@ class app extends Component {
 
 	render () {
 		return (
-			<div id="wrapper" style={{padding: '40px'}}>
+			<div style={{padding: '40px'}}>
 				<TooltipButton
 					id="tooltipButton1"
 					tooltipPosition="right middle"
@@ -27,7 +27,7 @@ class app extends Component {
 					backgroundOpacity="transparent"
 					selected
 					tooltipText="Hello Tooltip Button 2"
-					tooltipDelay={2000}
+					tooltipDelay={1000}
 				>
 					Tooltip Button 2
 				</TooltipButton>
