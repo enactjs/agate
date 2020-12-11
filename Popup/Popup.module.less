@@ -84,6 +84,13 @@
 				.padding-start-end(.extract(@agate-popup-closebutton-title-padding, left)[], .extract(@agate-popup-closebutton-title-padding, right)[]);
 			}
 
+			&:not(.withTitle) {
+				.content {
+					.padding-start-end(.extract(@agate-popup-closebutton-content-padding, left)[], .extract(@agate-popup-closebutton-content-padding, right)[]);
+					margin: 0 12px 18px 12px;
+				}
+			}
+
 			&.centered {
 				.title {
 					padding: @agate-popup-closebutton-centered-title-padding;
