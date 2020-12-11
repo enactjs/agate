@@ -9,13 +9,13 @@ const AriaValueTextFanSpeedControl = AriaValuetextDecorator(FanSpeedControl);
 
 const FanSpeedControlView = () => (
 	<>
-		<Section title="Default" vertical>
+		<Section horizontal title="Default">
 			<FanSpeedControl alt="Normal" icon="fan" max={5} min={1} />
 			<FanSpeedControl alt="Disabled" disabled icon="fan" max={5} min={1} />
 			<Button icon="arrowdown" />
 		</Section>
 
-		<Section title="Aria-ValueText" vertical>
+		<Section horizontal title="Aria-ValueText">
 			<AriaValueTextFanSpeedControl alt="Aria-valuetext" aria-valuetext="This is a Label." icon="fan" max={5} min={1} />
 			<AriaValueTextFanSpeedControl alt="Aria-valuetext and Disabled" aria-valuetext="This is a Label." disabled icon="fan" max={5} min={1} />
 			<Button icon="arrowup" />

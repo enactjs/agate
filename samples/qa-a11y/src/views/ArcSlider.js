@@ -9,14 +9,14 @@ const AriaValueTextSlider = AriaValuetextDecorator(ArcSlider);
 
 const ArcSliderView = () => (
 	<>
-		<Section title="Default" vertical>
+		<Section horizontal title="Default">
 			<ArcSlider alt="Normal" />
 			<div />
 			<ArcSlider alt="Disabled" disabled />
 			<Button aria-label="5 way Down to move to the next line" icon="arrowdown" />
 		</Section>
 
-		<Section title="Aria-ValueText" vertical>
+		<Section horizontal title="Aria-ValueText">
 			<AriaValueTextSlider alt="Aria-valuetext" aria-valuetext="This is a Label." />
 			<div />
 			<AriaValueTextSlider alt="Aria-valuetext and Disabled" aria-valuetext="This is a Label." disabled />

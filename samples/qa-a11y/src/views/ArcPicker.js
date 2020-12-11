@@ -11,7 +11,7 @@ const AriaValueTextArcPicker = AriaValuetextDecorator(ArcPicker);
 
 const ArcPickerView = () => (
 	<>
-		<Section title="Default" vertical>
+		<Section horizontal title="Default">
 			<ArcPicker alt="Normal">{[1, 2, 3, 4, 5]}</ArcPicker>
 			<ArcPicker alt="With slotCenter" slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</ArcPicker>
 			<ArcPicker alt="Disabled" disabled>{[1, 2, 3, 4, 5]}</ArcPicker>
@@ -19,7 +19,7 @@ const ArcPickerView = () => (
 			<Button aria-label="5 way Down to move to the next line" icon="arrowdown" />
 		</Section>
 
-		<Section title="Aria-ValueText" vertical>
+		<Section horizontal title="Aria-ValueText">
 			<AriaValueTextArcPicker alt="Aria-valuetext" aria-valuetext="This is a Label.">{[1, 2, 3, 4, 5]}</AriaValueTextArcPicker>
 			<AriaValueTextArcPicker alt="Aria-valuetext with slotCenter" aria-valuetext="This is a Label." slotCenter="SlotCenter">{[1, 2, 3, 4, 5]}</AriaValueTextArcPicker>
 			<AriaValueTextArcPicker alt="Aria-valuetext and Disabled" aria-valuetext="This is a Label." disabled>{[1, 2, 3, 4, 5]}</AriaValueTextArcPicker>

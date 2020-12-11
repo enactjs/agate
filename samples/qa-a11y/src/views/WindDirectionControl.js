@@ -9,13 +9,13 @@ const AriaValueTextWindDirectionControl = AriaValuetextDecorator({value: 'airDow
 
 const WindDirectionControlView = () => (
 	<>
-		<Section title="Default" vertical>
+		<Section horizontal title="Default">
 			<WindDirectionControl alt="Normal">Text 0</WindDirectionControl>
 			<WindDirectionControl alt="Disabled" disabled>Text 1</WindDirectionControl>
 			<Button icon="arrowdown" />
 		</Section>
 
-		<Section title="Aria-ValueText" vertical>
+		<Section horizontal title="Aria-ValueText">
 			<AriaValueTextWindDirectionControl alt="Aria-valuetext" aria-valuetext="This is a Label.">Text 2</AriaValueTextWindDirectionControl>
 			<AriaValueTextWindDirectionControl alt="Aria-valuetext and Disabled" aria-valuetext="This is a Label." disabled>Text 3</AriaValueTextWindDirectionControl>
 			<Button icon="arrowup" />
