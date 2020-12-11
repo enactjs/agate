@@ -29,6 +29,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/MediaPlayer` play function on handleNext and handlePrevious to handle events asynchronously
 - `agate/Panels` to show close button properly for night mode
 - `agate/Picker` picker item width in horizontal for silicon
+- `agate/Popup` content padding and margin with `closeButton`
 - `agate/PopupMenu` to display distinguishable title
 - `agate/SliderButton` to not show console error in sampler
 - `agate/Spinner` to pause the animation when `paused` prop is true
