@@ -15,7 +15,7 @@ describe('ArcPicker', function () {
 
 		it('should select the third arc when it is clicked', function () {
 			arcPicker.clickablePath(3).click();
-			expect(arcPicker.coloredPath(3).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
+			expect(arcPicker.coloredPath(3).getCSSProperty('stroke').value).to.equal('rgb(139,126,254)');
 			// previous arcs should remain unselected
 			expect(arcPicker.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(238,238,238)');
 			expect(arcPicker.coloredPath(2).getCSSProperty('stroke').value).to.equal('rgb(238,238,238)');
@@ -27,9 +27,9 @@ describe('ArcPicker', function () {
 
 		it('should select all arcs up to the clicked arc', function () {
 			arcPicker.clickablePath(3).click();
-			expect(arcPicker.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
-			expect(arcPicker.coloredPath(2).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
-			expect(arcPicker.coloredPath(3).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
+			expect(arcPicker.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(139,126,254)');
+			expect(arcPicker.coloredPath(2).getCSSProperty('stroke').value).to.equal('rgb(139,126,254)');
+			expect(arcPicker.coloredPath(3).getCSSProperty('stroke').value).to.equal('rgb(139,126,254)');
 			// next one is unselected
 			expect(arcPicker.coloredPath(4).getCSSProperty('stroke').value).to.equal('rgb(238,238,238)');
 		});
@@ -46,7 +46,7 @@ describe('ArcPicker', function () {
 			arcPicker.clickablePath(3).click();
 			expect(arcPicker.coloredPath(3).getCSSProperty('stroke').value).to.equal('rgb(238,238,238)');
 			// first arc should remain selected
-			expect(arcPicker.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
+			expect(arcPicker.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(139,126,254)');
 		});
 	});
 

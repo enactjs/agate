@@ -14,9 +14,9 @@ describe('FanSpeedControl', function () {
 
 		it('should select all arcs up to the clicked arc', function () {
 			fanSpeedControl.clickablePath(3).click();
-			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
-			expect(fanSpeedControl.coloredPath(2).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
-			expect(fanSpeedControl.coloredPath(3).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
+			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(139,126,254)');
+			expect(fanSpeedControl.coloredPath(2).getCSSProperty('stroke').value).to.equal('rgb(139,126,254)');
+			expect(fanSpeedControl.coloredPath(3).getCSSProperty('stroke').value).to.equal('rgb(139,126,254)');
 			// next one is unselected
 			expect(fanSpeedControl.coloredPath(4).getCSSProperty('stroke').value).to.equal('rgb(238,238,238)');
 		});
@@ -63,7 +63,7 @@ describe('FanSpeedControl', function () {
 			fanSpeedControl.clickablePath(3).click();
 			expect(fanSpeedControl.coloredPath(3).getCSSProperty('stroke').value).to.equal('rgb(238,238,238)');
 			// first arc should remain selected
-			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
+			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(139,126,254)');
 		});
 	});
 });
