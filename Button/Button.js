@@ -275,7 +275,7 @@ const ButtonBase = kind({
 			'--agate-button-animation-delay': animationDelay,
 			'--agate-button-badge-bg-color': badgeColor
 		}),
-		minWidth: ({minWidth}) => ((minWidth != null) ? minWidth : false)
+		minWidth: ({iconOnly, minWidth}) => ((minWidth != null) ? minWidth : !iconOnly)
 	},
 
 	render: ({css, ...rest}) => {
