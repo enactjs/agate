@@ -36,7 +36,7 @@ const SectionBase = kind({
 		horizontal ?
 			<Cell size={1500} {...rest}>
 				<Heading showLine>{title}</Heading>
-				<Row className={classNames(css.componentDemo, css.vertical)}>
+				<Row className={classNames(css.componentDemo, css.horizontal)}>
 					{React.Children.map(children, child => (
 						<Cell component="label" size="20%">
 							<div>{child.props.alt}</div>
