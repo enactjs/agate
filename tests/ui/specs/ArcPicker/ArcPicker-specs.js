@@ -10,7 +10,7 @@ describe('ArcPicker', function () {
 		const arcPicker = Page.components.arcPickerDefault;
 
 		it('should have the first arc selected by default', function () {
-			expect(arcPicker.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
+			expect(arcPicker.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(139,126,254)');
 		});
 
 		it('should select the third arc when it is clicked', function () {

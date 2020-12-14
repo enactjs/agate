@@ -48,7 +48,7 @@ describe('FanSpeedControl', function () {
 		const fanSpeedControl = Page.components.fanSpeedControlDisabled;
 
 		it('should have the first arc selected by default', function () {
-			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
+			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(139,126,254)');
 		});
 
 		it('should display `fan` icon', function () {
