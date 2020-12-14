@@ -78,13 +78,17 @@ class DrawerPage extends Page {
 	}
 
 	waitForOpen (selector, timeout) {
-		if (typeof selector !== 'string') selector = `#${selector.id}`;
+		if (typeof selector !== 'string') {
+			selector = `#${selector.id}`;
+		}
 
 		$(selector).waitForExist({timeout});
 	}
 
 	waitForClose (selector, timeout) {
-		if (typeof selector !== 'string') selector = `#${selector.id}`;
+		if (typeof selector !== 'string') {
+			selector = `#${selector.id}`;
+		}
 
 		$(selector).waitForExist({timeout, reverse: true});
 	}
