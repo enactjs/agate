@@ -24,6 +24,37 @@ import css from './ThemeDecorator.module.less';
 
 const ThemeContext = React.createContext(null);
 
+const defaultColors = {
+	carbon: {
+		accent: '#8fd43a',
+		highlight: '#6abe0b'
+	},
+	cobalt: {
+		accent: '#8c81ff',
+		highlight: '#ffffff'
+	},
+	copper: {
+		accent: '#a47d66',
+		highlight: '#ffffff'
+	},
+	electro: {
+		accent: '#0359f0',
+		highlight: '#ff8100'
+	},
+	gallium: {
+		accent: '#8b7efe',
+		highlight: '#e16253'
+	},
+	silicon: {
+		accent: '#f1304f',
+		highlight: '#9e00d8'
+	},
+	titanium: {
+		accent: '#a6a6a6',
+		highlight: '#2a48ca'
+	}
+};
+
 /**
  * Default config for {@link agate/ThemeDecorator.ThemeDecorator}.
  *
@@ -222,6 +253,7 @@ const CustomizableSkinStyle = kind({
 const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	// TODO: Document props passable to hoc ()
 	const {customSkin, float, i18n, noAutoFocus, overlay, ri, skin, spotlight, disableFullscreen} = config;
+	const defaultSkin = 'gallium';
 
 	const bgClassName = classnames(
 		'enact-fit',
@@ -235,7 +267,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	if (ri) App = ResolutionDecorator(ri, App);
 	if (i18n) App = I18nDecorator({sync: true}, App);
 	if (spotlight) App = SpotlightRootDecorator({noAutoFocus}, App);
-	if (skin) App = Skinnable({defaultSkin: 'gallium'}, App);
+	if (skin) App = Skinnable({defaultSkin}, App);
 
 	// add webOS-specific key maps
 	addAll({
@@ -263,16 +295,20 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * @type {String}
 			 * @public
 			 */
-			highlight: PropTypes.string
-		};
+			highlight: PropTypes.string,
 
-		static defaultProps = {
-			accent: '#8b7efe',
-			highlight: '#c6c0fe'
+			/**
+			 * The name of the skin a component should use to render itself.
+			 *
+			 * @type {String}
+			 * @public
+			 */
+			skin: PropTypes.string
 		};
 
 		render () {
-			const {accent, className, highlight, ...rest} = this.props;
+			const currentSkin = this.props.skin || defaultSkin;
+			const {accent = defaultColors[currentSkin].accent, className, highlight = defaultColors[currentSkin].highlight, ...rest} = this.props;
 			const customizableSkinClassName = 'agate-customized-skin';
 
 			const allClassNames = classnames(
