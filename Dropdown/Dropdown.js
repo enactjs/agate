@@ -357,6 +357,7 @@ const DropDownExtended = hoc((config, Wrapped) => {
 
 			if (this.props.open) {
 				on('click', this.handleClick);
+				on('keydown', this.handleKeyDown);
 			}
 		}
 
@@ -365,22 +366,34 @@ const DropDownExtended = hoc((config, Wrapped) => {
 
 			if (!prevProps.open && open) {
 				on('click', this.handleClick);
+				on('keydown', this.handleKeyDown);
 			} else if (prevProps.open && !open) {
 				off('click', this.handleClick);
+				off('keydown', this.handleKeyDown);
 			}
 		}
 
 		componentWillUnmount () {
 			off('click', this.handleClick);
+			off('keydown', this.handleKeyDown);
 		}
 
 		clickedOutsideDropdown = ({target}) => !this.node.contains(target);
+
+		escKeyPressed = (event) => {
+			return (event.keyCode === 27);
+		};
 
 		// If a click happened outside the component area close the dropdown by forwarding the onClick from Toggleable.
 		handleClick = handle(
 			this.clickedOutsideDropdown,
 			forward('onClick')
 		).bindAs(this, 'handleClick');
+
+		handleKeyDown = handle(
+			this.escKeyPressed,
+			forward('onClick')
+		).bindAs(this, 'handleKeyDown');
 
 		render () {
 			return (
