@@ -104,7 +104,8 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 		};
 
 		handleKeyDown = (ev, props) => {
-			const {children, disabled, value} = this.props;
+			const {children, disabled, value: valueProp} = this.props;
+			const value = ((valueProp || valueProp === 0) ? valueProp : children[0]);
 			const index = children.findIndex(child => child === value);
 
 			forward('onKeyDown', ev, props);

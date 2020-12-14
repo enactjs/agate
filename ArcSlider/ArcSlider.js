@@ -209,10 +209,7 @@ const ArcSliderBase = kind({
 		}
 	},
 
-	render: (
-		{'aria-valuetext': ariaValuetext, backgroundColor, componentRef, disabled, endAngle, foregroundColor, isFocused, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest},
-		{accent: accentColor}
-	) => {
+	render: ({'aria-valuetext': ariaValuetext, backgroundColor, componentRef, disabled, endAngle, foregroundColor, isFocused, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}, {accent: accentColor}) => {
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
