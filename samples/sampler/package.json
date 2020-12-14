@@ -23,6 +23,7 @@
     "@enact/agate": "../../",
     "@enact/core": "^3.4.0",
     "@enact/ui": "^3.4.0",
+    "dotenv": "^8.2.0",
     "ilib": "^14.4.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6"
