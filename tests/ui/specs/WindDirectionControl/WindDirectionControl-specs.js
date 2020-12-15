@@ -12,7 +12,7 @@ describe('WindDirectionControl', function () {
 		const windDirectionControl = Page.components.windDirectionControlDefault;
 
 		it('should have the first arc selected by default', function () {
-			expect(windDirectionControl.coloredPath(1).getCSSProperty('stroke').value).to.equal(selectedColor);
+			expect(windDirectionControl.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
 		});
 
 		it('should display `airdown` icon', function () {
