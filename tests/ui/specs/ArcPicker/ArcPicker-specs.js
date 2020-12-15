@@ -12,6 +12,11 @@ describe('ArcPicker', function () {
 	describe('default', function () {
 		const arcPicker = Page.components.arcPickerDefault;
 
+		it('should select the first arc when it is clicked', function () {
+			arcPicker.clickablePath(1).click();
+			expect(arcPicker.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
+		});
+
 		it('should have the first arc selected by default', function () {
 			expect(arcPicker.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
 		});

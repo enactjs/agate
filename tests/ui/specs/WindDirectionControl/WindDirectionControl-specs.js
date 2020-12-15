@@ -11,6 +11,11 @@ describe('WindDirectionControl', function () {
 	describe('default', function () {
 		const windDirectionControl = Page.components.windDirectionControlDefault;
 
+		it('should select the first arc when it is clicked', function () {
+			windDirectionControl.clickablePath(1).click();
+			expect(windDirectionControl.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
+		});
+
 		it('should have the first arc selected by default', function () {
 			expect(windDirectionControl.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
 		});

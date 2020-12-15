@@ -11,6 +11,11 @@ describe('FanSpeedControl', function () {
 	describe('default', function () {
 		const fanSpeedControl = Page.components.fanSpeedControlDefault;
 
+		it('should select the first arc when it is clicked', function () {
+			fanSpeedControl.clickablePath(1).click();
+			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
+		});
+
 		it('should have the first arc selected by default', function () {
 			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
 		});
