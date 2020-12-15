@@ -712,9 +712,9 @@ const Picker = PickerDecorator(PickerBase);
 
 export default Picker;
 export {
+	ChangeAdapter,
 	Picker,
 	PickerBase,
-	PickerDecorator,
-	ChangeAdapter
+	PickerDecorator
 };
 export PickerItem from './PickerItem';
