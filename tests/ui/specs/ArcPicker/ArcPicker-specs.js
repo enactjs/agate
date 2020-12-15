@@ -12,16 +12,16 @@ describe('ArcPicker', function () {
 	describe('default', function () {
 		const arcPicker = Page.components.arcPickerDefault;
 
+		it('should have the first arc selected by default', function () {
+			expect(arcPicker.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
+		});
+
 		it('should select the third arc when it is clicked', function () {
 			arcPicker.clickablePath(3).click();
 			expect(arcPicker.coloredPath(3).getCSSProperty('stroke').value).to.equal(accentColor);
 			// previous arcs should remain unselected
 			expect(arcPicker.coloredPath(1).getCSSProperty('stroke').value).to.equal(unselectedColor);
 			expect(arcPicker.coloredPath(2).getCSSProperty('stroke').value).to.equal(unselectedColor);
-		});
-
-		it('should have the first arc selected by default', function () {
-			expect(arcPicker.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
 		});
 	});
 
