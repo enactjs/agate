@@ -3,7 +3,7 @@ import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import RangePicker from '../../RangePicker';
+import {RangePickerBase} from '../../RangePicker';
 
 import css from './DateComponentPicker.module.less';
 
@@ -74,7 +74,7 @@ const DateComponentRangePickerBase = kind({
 	},
 
 	render: ({accessibilityHint, max, min, value, wrap, ...rest}) => (
-		<RangePicker
+		<RangePickerBase
 			{...rest}
 			accessibilityHint={(accessibilityHint == null) ? value : accessibilityHint}
 			css={css}

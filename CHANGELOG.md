@@ -19,6 +19,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/Button` to marquee when focused
 - `agate/Button` to show a tooltip when hovered
+- `agate/DatePicker` transition direction for day when month is changed
 - `agate/DateTimePicker` returned value by onChange event
 - `agate/FanSpeedControl` to center text when there is no icon
 - `agate/Heading` to support `spacing` for Gallium and Silicon
@@ -36,6 +37,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Spinner` to support `transparent` prop properly
 - `agate/SwitchItem` icon position for all skins RTL locale and Electro/Titanium both LTR and RTL locale
 - `agate/TemperatureControl` to not be draggable when it's disabled
+- `agate/TimePicker` transition direction for meridiem when hour is changed
 
 ## [1.0.0] - 2020-10-14
 

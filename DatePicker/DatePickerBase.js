@@ -166,6 +166,14 @@ const DatePickerBase = kind({
 		onYearChange: PropTypes.func,
 
 		/**
+		 * When it's `true` it changes the direction of the transition animation.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		reverseTransition: PropTypes.bool,
+
+		/**
 		 * Indicates the content's text direction is right-to-left.
 		 *
 		 * @type {Boolean}
@@ -220,6 +228,7 @@ const DatePickerBase = kind({
 		onYearChange,
 		onSpotlightDisappear,
 		order,
+		reverseTransition,
 		spotlightDisabled,
 		year,
 		yearAriaLabel,
@@ -250,6 +259,7 @@ const DatePickerBase = kind({
 									value={day}
 									width={2}
 									wrap
+									reverseTransition={reverseTransition}
 								/>
 							);
 						case 'm':
@@ -268,6 +278,7 @@ const DatePickerBase = kind({
 									value={month}
 									width={2}
 									wrap
+									reverseTransition={reverseTransition}
 								/>
 							);
 						case 'y':

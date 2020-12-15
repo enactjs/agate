@@ -704,7 +704,6 @@ const ChangeAdapter = hoc((config, Wrapped) => {
 const PickerDecorator = compose(
 	IdProvider({generateProp: null}),
 	Changeable,
-	ChangeAdapter,
 	Changeable({prop: 'reverseTransition'}),
 	Skinnable({prop: 'skin'})
 );
@@ -715,6 +714,7 @@ export default Picker;
 export {
 	Picker,
 	PickerBase,
-	PickerDecorator
+	PickerDecorator,
+	ChangeAdapter
 };
 export PickerItem from './PickerItem';

@@ -81,7 +81,8 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 
 			this.state = {
 				initialValue: null,
-				value: null
+				value: null,
+				reverseTransition: null
 			};
 
 			const newValue = toTime(this.props.value);
@@ -161,6 +162,12 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 			return newValue;
 		};
 
+		updateTransition = (transition) => {
+			this.setState({
+				reverseTransition: transition
+			});
+		};
+
 		emitChange = (date) => {
 			forward('onChange', {value: date ? date.getJSDate() : null}, this.props);
 		};
@@ -169,6 +176,7 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 			const value = this.toIDate(this.state.value);
 			handler(ev, value, memoizedI18nConfig(this.props.locale));
 			this.updateValue(value);
+			this.updateTransition(ev.reverseTransition);
 		};
 
 		handleCancel = () => {
@@ -197,7 +205,7 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 
 			const i18nConfig = memoizedI18nConfig(this.props.locale);
 			if (i18nConfig) {
-				props = customProps(i18nConfig, pickerValue, this.props);
+				props = customProps(i18nConfig, pickerValue, this.state.reverseTransition, this.props);
 				order = i18nConfig.order;
 			}
 
