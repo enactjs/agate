@@ -255,11 +255,11 @@ const DatePickerBase = kind({
 									min={1}
 									onChange={onDateChange}
 									onSpotlightDisappear={onSpotlightDisappear}
+									reverseTransition={reverseTransition}
 									spotlightDisabled={spotlightDisabled}
 									value={day}
 									width={2}
 									wrap
-									reverseTransition={reverseTransition}
 								/>
 							);
 						case 'm':
@@ -274,11 +274,11 @@ const DatePickerBase = kind({
 									min={1}
 									onChange={onMonthChange}
 									onSpotlightDisappear={onSpotlightDisappear}
+									reverseTransition={reverseTransition}
 									spotlightDisabled={spotlightDisabled}
 									value={month}
 									width={2}
 									wrap
-									reverseTransition={reverseTransition}
 								/>
 							);
 						case 'y':
@@ -293,6 +293,7 @@ const DatePickerBase = kind({
 									min={minYear}
 									onChange={onYearChange}
 									onSpotlightDisappear={onSpotlightDisappear}
+									reverseTransition={reverseTransition}
 									spotlightDisabled={spotlightDisabled}
 									value={year}
 									width={4}

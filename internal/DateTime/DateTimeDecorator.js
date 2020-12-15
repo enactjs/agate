@@ -81,8 +81,8 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 
 			this.state = {
 				initialValue: null,
-				value: null,
-				reverseTransition: null
+				reverseTransition: null,
+				value: null
 			};
 
 			const newValue = toTime(this.props.value);
