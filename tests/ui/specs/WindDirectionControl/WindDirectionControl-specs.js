@@ -12,7 +12,7 @@ describe('WindDirectionControl', function () {
 		const windDirectionControl = Page.components.windDirectionControlDefault;
 
 		it('should have the first arc selected by default', function () {
-			expect(windDirectionControl.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
+			expect(windDirectionControl.coloredPath(1).getCSSProperty('stroke').value).to.equal(selectedColor);
 		});
 
 		it('should display `airdown` icon', function () {
@@ -55,7 +55,7 @@ describe('WindDirectionControl', function () {
 			expect(windDirectionControl.iconValue()).to.equal(983221); // decimal converted charCode of Unicode 'airdown' character
 		});
 
-		it.skip('should not select the third arc when clicked', function () {
+		it('should not select the third arc when clicked', function () {
 			windDirectionControl.clickablePath(3).click();
 			expect(windDirectionControl.coloredPath(3).getCSSProperty('stroke').value).to.equal(unselectedColor);
 			// first arc should remain selected

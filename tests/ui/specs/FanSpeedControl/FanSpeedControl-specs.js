@@ -12,7 +12,7 @@ describe('FanSpeedControl', function () {
 		const fanSpeedControl = Page.components.fanSpeedControlDefault;
 
 		it('should have the first arc selected by default', function () {
-			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
+			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal(selectedColor);
 		});
 
 		it('should select all arcs up to the clicked arc', function () {
@@ -62,7 +62,7 @@ describe('FanSpeedControl', function () {
 			expect(fanSpeedControl.fanValue()).to.equal('1');
 		});
 
-		it.skip('should not select the third arc when it is clicked', function () {
+		it('should not select the third arc when it is clicked', function () {
 			fanSpeedControl.clickablePath(3).click();
 			expect(fanSpeedControl.coloredPath(3).getCSSProperty('stroke').value).to.equal(unselectedColor);
 			// first arc should remain selected
