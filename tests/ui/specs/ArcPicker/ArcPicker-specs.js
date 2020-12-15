@@ -13,6 +13,8 @@ describe('ArcPicker', function () {
 		const arcPicker = Page.components.arcPickerDefault;
 
 		it('should have the first arc selected by default', function () {
+			Page.spotlightSelect();
+
 			expect(arcPicker.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
 		});
 
