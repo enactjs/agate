@@ -11,7 +11,7 @@ describe('IncrementSlider', function () {
 			const incrementSlider = Page.components.incrementSliderDefault;
 
 			describe('5-way', function () {
-				it('should increment the value of horizontal incrementSlider on key right when active', function () {
+				it('should increment the value of horizontal incrementSlider on right arrow key when active', function () {
 					expect(incrementSlider.decrementButton.isFocused()).to.be.true();
 					Page.spotlightRight();
 					const originalValue = incrementSlider.knobPositionHorizontal;
@@ -22,7 +22,7 @@ describe('IncrementSlider', function () {
 					expect(newValue > originalValue).to.be.true();
 				});
 
-				it('should decrement the value of horizontal incrementSlider on key left when active', function () {
+				it('should decrement the value of horizontal incrementSlider on left arrow key when active', function () {
 					expect(incrementSlider.decrementButton.isFocused()).to.be.true();
 					Page.spotlightRight();
 					Page.spotlightSelect();
@@ -76,7 +76,7 @@ describe('IncrementSlider', function () {
 			const incrementSlider = Page.components.incrementSliderVertical;
 
 			describe('5-way', function () {
-				it('should increment the value of horizontal incrementSlider on key down when active', function () {
+				it('should increment the value of vertical incrementSlider on up arrow key when active', function () {
 					incrementSlider.focusSlider();
 					const originalValue = incrementSlider.knobPositionVertical;
 					Page.spotlightSelect();
@@ -87,7 +87,7 @@ describe('IncrementSlider', function () {
 					expect(newValue > originalValue).to.be.true();
 				});
 
-				it('should decrement the value of horizontal incrementSlider on key up when active', function () {
+				it('should decrement the value of vertical incrementSlider on down arrow key when active', function () {
 					incrementSlider.focusSlider();
 					Page.spotlightSelect();
 					Page.spotlightUp();
@@ -100,7 +100,7 @@ describe('IncrementSlider', function () {
 			});
 
 			describe('pointer', function () {
-				it('should change the value of horizontal incrementSlider on incrementSlider click at position', function () {
+				it('should change the value of vertical incrementSlider on incrementSlider click at position', function () {
 					const originalValue = incrementSlider.knobPositionVertical;
 					incrementSlider.self.click();
 					// expect knob `left` css prop to be greater than original one
@@ -114,17 +114,17 @@ describe('IncrementSlider', function () {
 			const incrementSlider = Page.components.incrementSliderDisabled;
 
 			describe('5-way', function () {
-				it('should not increment the value of horizontal incrementSlider on key right when active', function () {
+				it('should not increment the value of horizontal incrementSlider on right arrow key when active', function () {
 					incrementSlider.focusSlider();
 					const originalValue = incrementSlider.knobPositionHorizontal;
 					Page.spotlightSelect();
 					Page.spotlightRight();
 					// expect knob `left` css prop to be equal to original one
 					const newValue = incrementSlider.knobPositionHorizontal;
-					expect(newValue === originalValue).to.be.true();
+					expect(newValue).to.equal(originalValue);
 				});
 
-				it('should not decrement the value of horizontal incrementSlider on key left when active', function () {
+				it('should not decrement the value of horizontal incrementSlider on left arrow key when active', function () {
 					incrementSlider.focusSlider();
 					Page.spotlightSelect();
 					Page.spotlightRight();
@@ -154,12 +154,12 @@ describe('IncrementSlider', function () {
 					incrementSlider.incrementButton.click();
 					// expect knob `left` css prop to be bigger than original one
 					const value1 = incrementSlider.knobPositionHorizontal;
-					expect(value1 === originalValue).to.be.true();
+					expect(value1).to.equal(originalValue);
 
 					incrementSlider.decrementButton.click();
 					// expect knob `left` css prop to be less than value1
 					const value2 = incrementSlider.knobPositionHorizontal;
-					expect(value2 === value1).to.be.true();
+					expect(value2).to.equal(value1);
 				});
 			});
 		});
@@ -168,7 +168,7 @@ describe('IncrementSlider', function () {
 			const incrementSlider = Page.components.incrementSliderVerticalDisabled;
 
 			describe('5-way', function () {
-				it('should not increment the value of horizontal incrementSlider on key down when active', function () {
+				it('should not increment the value of vertical incrementSlider on up arrow key when active', function () {
 					incrementSlider.focusSlider();
 					const originalValue = incrementSlider.knobPositionVertical;
 					Page.spotlightSelect();
@@ -179,7 +179,7 @@ describe('IncrementSlider', function () {
 					expect(newValue === originalValue).to.be.true();
 				});
 
-				it('should not decrement the value of horizontal incrementSlider on key up when active', function () {
+				it('should not decrement the value of vertical incrementSlider on down arrow key when active', function () {
 					incrementSlider.focusSlider();
 					Page.spotlightSelect();
 					Page.spotlightUp();
@@ -192,7 +192,7 @@ describe('IncrementSlider', function () {
 			});
 
 			describe('pointer', function () {
-				it('should not change the value of horizontal incrementSlider on incrementSlider click at position', function () {
+				it('should not change the value of vertical incrementSlider on incrementSlider click at position', function () {
 					incrementSlider.focusSlider();
 					const originalValue = incrementSlider.knobPositionVertical;
 					incrementSlider.self.click();

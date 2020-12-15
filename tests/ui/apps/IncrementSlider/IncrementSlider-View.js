@@ -6,7 +6,7 @@ import React from 'react';
 const app = (props) => <div {...props}>
 	<div>
 		<Heading>IncrementSlider default</Heading>
-		<IncrementSlider defaultValue={0} className="incrementSliderDefault" />
+		<IncrementSlider className="incrementSliderDefault" />
 		<Heading>IncrementSlider custom progressAnchor</Heading>
 		<IncrementSlider className="incrementSliderCustomProgressAnchor" progressAnchor={0.7} />
 		<Heading>IncrementSlider vertical</Heading>
