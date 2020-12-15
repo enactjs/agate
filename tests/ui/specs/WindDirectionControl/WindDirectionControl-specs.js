@@ -55,7 +55,7 @@ describe('WindDirectionControl', function () {
 			expect(windDirectionControl.iconValue()).to.equal(983221); // decimal converted charCode of Unicode 'airdown' character
 		});
 
-		it('should not select the third arc when clicked', function () {
+		it.skip('should not select the third arc when clicked', function () {
 			windDirectionControl.clickablePath(3).click();
 			expect(windDirectionControl.coloredPath(3).getCSSProperty('stroke').value).to.equal(unselectedColor);
 			// first arc should remain selected

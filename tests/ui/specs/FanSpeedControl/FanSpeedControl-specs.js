@@ -62,7 +62,7 @@ describe('FanSpeedControl', function () {
 			expect(fanSpeedControl.fanValue()).to.equal('1');
 		});
 
-		it('should not select the third arc when it is clicked', function () {
+		it.skip('should not select the third arc when it is clicked', function () {
 			fanSpeedControl.clickablePath(3).click();
 			expect(fanSpeedControl.coloredPath(3).getCSSProperty('stroke').value).to.equal(unselectedColor);
 			// first arc should remain selected
