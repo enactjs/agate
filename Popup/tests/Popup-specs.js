@@ -7,7 +7,9 @@ import css from '../Popup.module.less';
 describe('Popup specs', () => {
 	test('should set role to alert by default', () => {
 		const popup = shallow(
-			<PopupBase><div>popup</div></PopupBase>
+			<PopupBase>
+				<div>popup</div>
+			</PopupBase>
 		);
 
 		const expected = 'alert';
