@@ -11,8 +11,8 @@ const Config = mergeComponentMetadata('Popup', PopupBase);
 
 const prop = {
 	buttons: {
-		'no': null,
-		'yes': <buttons>
+		'no buttons': null,
+		'2 buttons': <buttons>
 			<Button>OK</Button>
 			<Button>Cancel</Button>
 		</buttons>
@@ -23,7 +23,7 @@ storiesOf('Agate', module)
 	.add(
 		'Popup',
 		() => {
-			const buttonsSelection = select('buttons', ['no', 'yes'], Config, 'no');
+			const buttonsSelection = select('buttons', ['no buttons', '2 buttons'], Config, 'no');
 			const buttons = prop.buttons[buttonsSelection];
 
 			return (
