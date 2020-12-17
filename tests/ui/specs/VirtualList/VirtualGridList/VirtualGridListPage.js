@@ -47,7 +47,7 @@ class VirtualGridListPage extends Page {
 				}
 				// else, it's inside the list itself, increment y and try again
 			}
-			return 'unknown';	// we didn't find it?!
+			return 'unknown';
 		}, scrollableSelector);
 	}
 

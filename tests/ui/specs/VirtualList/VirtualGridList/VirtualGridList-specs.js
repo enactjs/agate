@@ -31,8 +31,8 @@ describe('Focus after calling scrollTo()', function () {
 		Page.checkScrollbyPagekey('down');
 		Page.checkScrollbyPagekey('down');
 		Page.checkScrollbyPagekey('down');
-		// Step 2-2: Set to pointer mode.
-		// Step 2-3: Hover the 'Click me' item.
+		// Set to pointer mode.
+		// Hover the 'Click me' item.
 		Page.showPointerByKeycode();
 		Page.item(20).moveTo();
 		// Click 'Click me' item.
@@ -40,7 +40,7 @@ describe('Focus after calling scrollTo()', function () {
 		Page.delay(500);
 		// Verify: list is scrolled to first item.
 		expect(Page.topLeftVisibleItemId()).to.equal('item0');
-		// Step 3-2 Verify: There is no spotlight on any item.
+		// Verify: There is no spotlight on any item.
 		expectNoFocusedItem();
 		// Press 5-way Left.
 		// Verify: Set to 5-way mode.

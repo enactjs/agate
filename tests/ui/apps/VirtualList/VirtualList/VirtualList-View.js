@@ -1,3 +1,5 @@
+import spotlight from '@enact/spotlight';
+import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {Row, Column, Cell} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
@@ -8,8 +10,6 @@ import Input from '../../../../../Input';
 import SwitchItem from '../../../../../SwitchItem';
 import VirtualList from '../../../../../VirtualList';
 import ThemeDecorator from '../../../../../ThemeDecorator';
-import spotlight from '@enact/spotlight';
-import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 
 const ListContainer = SpotlightContainerDecorator('div');
 const OptionsContainer = SpotlightContainerDecorator({leaveFor: {down: '#left'}}, 'div');

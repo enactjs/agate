@@ -42,27 +42,27 @@ describe('Wrap', function () {
 		// 5-way Spot the first item.
 		Page.spotlightRight();
 		// Verify: Spotlight displays on the first item.
-		expectFocusedItem(0, 'step 5 focus');
-		// Step 6: 5-way Up.
+		expectFocusedItem(0, 'first item focus');
+		// 5-way Up.
 		Page.spotlightUp();
-		// Verify: The list *does not* Scroll to the Bottom. 2. Spotlight is on the close button 'x'.
-		expect(Page.buttonTop.isFocused(), 'step 6 focus').to.be.true();  // buttonTop replaces the X button
+		// Verify: The list *does not* Scroll to the Bottom. 2. Spotlight is on the buttonTop
+		expect(Page.buttonTop.isFocused(), 'button top focus').to.be.true();
 		Page.spotlightDown();
 		expectFocusedItem(0);
 		Page.pageDown();
 		waitUntilFocused(4, 'focus Item 4');
 		Page.fiveWayToItem(9);
-		// Step 7: 2. Click the last item.
+		// Click the last item.
 		Page.spotlightSelect();
-		// Verify Step 7: Spotlight is on the last item.
+		// Spotlight is on the last item.
 		Page.delay(1000);
 		expectFocusedItem(9, 'focus Item 9');
-		// Step 8: 5-way Down
+		// 5-way Down
 		Page.spotlightDown();
 		Page.spotlightDown(); // 1 extra 5-way down to check Spotlight does not pass buttonBottom when wrap is off.
 		Page.delay(1000);
-		// Verify Step 8: 1. The list *does not* Scroll to the Top. 2. Spotlight stays on the last item.
+		// Verify 1. The list *does not* Scroll to the Top. 2. Spotlight stays on the last item.
 		// Checking focus is on buttonBottom instead of last item since 5-way Down on last item using this app takes Spotlight to buttonBottom.
-		expect(Page.buttonBottom.isFocused(), 'step 8 focus').to.be.true();
+		expect(Page.buttonBottom.isFocused(), 'last item focus').to.be.true();
 	});
 });
