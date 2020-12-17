@@ -482,7 +482,6 @@ const PickerBase = kind({
 		const transitionDuration = 150;
 
 		const decrementValue = () => {
-			console.log("min: ", min, " max: ", max);
 			const restrictedDecrementValue = wrap ? wrapRange(min, max, value - step) : clamp(min, max, value - step);
 			if (isFirst && !wrap) {
 				return '';
