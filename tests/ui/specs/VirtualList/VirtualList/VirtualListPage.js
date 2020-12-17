@@ -1,7 +1,7 @@
 'use strict';
 const {element, Page} = require('@enact/ui-test-utils/utils');
 
-const {focusedElement, waitUntilFocused, waitUntilVisible} = require('./VirtualList-utils');
+const {focusedElement, waitUntilFocused, waitUntilVisible} = require('../VirtualList-utils');
 
 const listItemSelector = '.enact_ui_VirtualList_VirtualList_listItem';
 const scrollableSelector = '.enact_ui_useScroll_useScroll_scroll';

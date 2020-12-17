@@ -1,5 +1,5 @@
 const Page = require('../VirtualListPage');
-const {expectFocusedItem, waitUntilFocused} = require('../VirtualList-utils');
+const {expectFocusedItem, waitUntilFocused} = require('../../VirtualList-utils');
 
 describe('Wrap', function () {
 	beforeEach(function () {
