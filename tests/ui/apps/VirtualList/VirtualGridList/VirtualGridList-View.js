@@ -142,6 +142,7 @@ class app extends React.Component {
 						<Button id="noLabel" onClick={this.onToggleLabel} selected={noLabel} size="small">Media item</Button>
 						<Button id="translate" onClick={this.onToggle} selected={translate} size="small">translate Mode</Button>
 						<Button id="spotlightDisabled" onClick={this.onToggle} selected={spotlightDisabled} size="small"> spotlightDisabled</Button>
+						<span id="scrolling" ref={this.scrollingRef}>Not Scrolling</span>
 						<div>
 							<div style={{display:'inline-block'}}>
 								Number of items:
@@ -159,7 +160,6 @@ class app extends React.Component {
 								Min height:
 								<Input id="minHeight" defaultValue={minHeight} type="number" onChange={this.onChangeHeight} size="small" style={inputStyle} />
 							</div>
-							<span id="scrolling" ref={this.scrollingRef}>Not Scrolling</span>
 						</div>
 					</Cell>
 					<Cell component={ListContainer}>

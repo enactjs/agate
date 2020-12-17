@@ -72,7 +72,7 @@ class app extends React.Component {
 			<div {...this.props}>
 				<Column>
 					<Cell component={OptionsContainer} shrink>
-						<Input id="numItems" defaultValue={numItems} type="number" onChange={this.onChangeNumItems} size="small" style={inputStyle} />
+						Number of items: <Input id="numItems" defaultValue={numItems} type="number" onChange={this.onChangeNumItems} size="small" style={inputStyle} />
 					</Cell>
 					<Cell>
 						<Panels index={index}>

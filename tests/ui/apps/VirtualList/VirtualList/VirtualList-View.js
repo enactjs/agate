@@ -160,6 +160,7 @@ class app extends React.Component {
 						<Button {...buttonDefaultProps} id="disabled" onClick={this.onToggle} selected={disabled}>DisabledItem</Button>
 						<Button {...buttonDefaultProps} id="hasChildProps" onClick={this.onToggle} selected={hasChildProps}>childProps</Button>
 						<Button {...buttonDefaultProps} id="nativeScroll" onClick={this.onToggle} selected={nativeScroll}>NativeScroll</Button>
+						<span id="scrolling" ref={this.scrollingRef}>Not Scrolling</span>
 						<div>
 							<div style={{display:'inline-block'}}>
 								Number of items:
@@ -173,7 +174,6 @@ class app extends React.Component {
 								Item size:
 								<Input id="itemSize" defaultValue={itemSize} type="number" onChange={this.onChangeitemSize} size="small" style={inputStyle} />
 							</div>
-							<span id="scrolling" ref={this.scrollingRef}>Not Scrolling</span>
 						</div>
 					</Cell>
 					<Cell component={ListContainer}>
