@@ -52,7 +52,6 @@ describe('RadioItem', () => {
 			</RadioItem>
 		);
 
-		// console.log(radioItem.debug());
 		const expected = 'check';
 		const actual = radioItem.find('Icon').prop('children');
 
