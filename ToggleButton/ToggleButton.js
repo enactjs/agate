@@ -162,6 +162,7 @@ const ToggleButtonBase = kind({
 				{...props}
 				aria-pressed={props.selected}
 				css={css}
+				minWidth={false}
 			/>
 		);
 	}
