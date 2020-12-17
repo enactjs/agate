@@ -39,10 +39,10 @@ describe('RadioItem', () => {
 			</RadioItem>
 		);
 
-		const expected = 'selected';
-		const actual = radioItem.find(`div.${css.selected}`).prop('className');
+		const expected = 1;
+		const actual = radioItem.find(`.${css.selected}`).first().length;
 
-		expect(actual).toContain(expected);
+		expect(actual).toBe(expected);
 	});
 
 	test('should support custom icon', () => {
