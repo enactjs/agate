@@ -44,11 +44,11 @@ class TooltipDecoratorPage extends Page {
 	constructor () {
 		super();
 		this.title = 'TooltipDecorator Test';
-		const tooltipDefault = new TooltipButtonInterface('tooltipButton1');
-		const tooltipDelayed = new TooltipButtonInterface('tooltipButton2');
+		const tooltipButtonDefault = new TooltipButtonInterface('tooltipButton1');
+		const tooltipButtonDelayed = new TooltipButtonInterface('tooltipButton2');
 		const tooltipButtonDisabled = new TooltipButtonInterface('tooltipButton3');
 
-		this.components = {tooltipDefault, tooltipDelayed, tooltipButtonDisabled};
+		this.components = {tooltipButtonDefault, tooltipButtonDelayed, tooltipButtonDisabled};
 	}
 
 	open (urlExtra) {

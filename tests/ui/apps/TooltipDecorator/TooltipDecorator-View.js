@@ -16,26 +16,26 @@ const app = (props) =>
 		<TooltipButton
 			id="tooltipButton1"
 			tooltipPosition="right middle"
-			tooltipText="Hello Tooltip Button 1"
+			tooltipText="Hello Tooltip Button Default"
 		>
-			Tooltip Button 1
+			Tooltip Button Default
 		</TooltipButton>
 		<TooltipButton
 			id="tooltipButton2"
 			backgroundOpacity="transparent"
 			selected
-			tooltipText="Hello Tooltip Button 2"
+			tooltipText="Hello Tooltip Button Delayed"
 			tooltipDelay={1000}
 		>
-			Tooltip Button 2
+			Tooltip Button Delayed
 		</TooltipButton>
 		<TooltipButton
 			id="tooltipButton3"
 			disabled
 			size="small"
-			tooltipText="Hello Tooltip Button 3"
+			tooltipText="Hello Tooltip Button Disabled"
 		>
-			Tooltip Button 3
+			Tooltip Button Disabled
 		</TooltipButton>
 	</div>;
 
