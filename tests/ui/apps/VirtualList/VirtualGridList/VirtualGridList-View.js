@@ -143,19 +143,19 @@ class app extends React.Component {
 						<Button id="translate" onClick={this.onToggle} selected={translate} size="small">translate Mode</Button>
 						<Button id="spotlightDisabled" onClick={this.onToggle} selected={spotlightDisabled} size="small"> spotlightDisabled</Button>
 						<div>
-							<div style={{display:"inline-block"}}>
+							<div style={{display:'inline-block'}}>
 								Number of items:
 								<Input id="numItems" defaultValue={numItems} type="number" onChange={this.onChangeNumItems} size="small" style={inputStyle} />
 							</div>
-							<div style={{display:"inline-block"}}>
+							<div style={{display:'inline-block'}}>
 								Item spacing:
 								<Input id="spacing" defaultValue={spacing} type="number" onChange={this.onChangeSpacing} size="small" style={inputStyle} />
 							</div>
-							<div style={{display:"inline-block"}}>
+							<div style={{display:'inline-block'}}>
 								Min width:
 								<Input id="minWidth" defaultValue={minWidth} type="number" onChange={this.onChangeWidth} size="small" style={inputStyle} />
 							</div>
-							<div style={{display:"inline-block"}}>
+							<div style={{display:'inline-block'}}>
 								Min height:
 								<Input id="minHeight" defaultValue={minHeight} type="number" onChange={this.onChangeHeight} size="small" style={inputStyle} />
 							</div>

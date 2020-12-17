@@ -161,15 +161,15 @@ class app extends React.Component {
 						<Button {...buttonDefaultProps} id="hasChildProps" onClick={this.onToggle} selected={hasChildProps}>childProps</Button>
 						<Button {...buttonDefaultProps} id="nativeScroll" onClick={this.onToggle} selected={nativeScroll}>NativeScroll</Button>
 						<div>
-							<div style={{display:"inline-block"}}>
+							<div style={{display:'inline-block'}}>
 								Number of items:
 								<Input id="numItems" defaultValue={numItems} type="number" onChange={this.onChangeNumItems} size="small" style={inputStyle} />
 							</div>
-							<div style={{display:"inline-block"}}>
+							<div style={{display:'inline-block'}}>
 								Item spacing:
 								<Input id="spacing" defaultValue={spacing} type="number" onChange={this.onChangeSpacing} size="small" style={inputStyle} />
 							</div>
-							<div style={{display:"inline-block"}}>
+							<div style={{display:'inline-block'}}>
 								Item size:
 								<Input id="itemSize" defaultValue={itemSize} type="number" onChange={this.onChangeitemSize} size="small" style={inputStyle} />
 							</div>
