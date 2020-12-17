@@ -14,7 +14,6 @@ describe('VirtualGridList', function () {
 		it('should focus first item on first focus', function () {
 			Page.spotlightDown();
 			Page.spotlightDown();
-			Page.spotlightRight();
 			expectFocusedItem(0);
 		});
 	});
@@ -39,28 +38,28 @@ describe('Focus after calling scrollTo()', function () {
 		// Click 'Click me' item.
 		browser.positionClick();
 		Page.delay(500);
-		// Step 3-1 Verify: list is scrolled to first item.
+		// Verify: list is scrolled to first item.
 		expect(Page.topLeftVisibleItemId()).to.equal('item0');
 		// Step 3-2 Verify: There is no spotlight on any item.
 		expectNoFocusedItem();
-		// Step 4: Press 5-way Left.
-		// Step 4-1 Verify: Set to 5-way mode.
+		// Press 5-way Left.
+		// Verify: Set to 5-way mode.
 		Page.hidePointerByKeycode();
 		Page.spotlightLeft();
-		// Step 4-2 Verify: Spotlight on item0.
+		// Verify: Spotlight on item0.
 		expectFocusedItem(0);
-		// Step 5: Press 5-way down 5 times.
+		// Press 5-way down 5 times.
 		for (let i = 1; i < 6; i++) {
 			Page.spotlightDown();
 			waitUntilFocused(i * 4);
 			waitUntilVisible(i * 4);
 		}
 		Page.delay(500);
-		// Step 6: Press 5-way OK.
+		// Press 5-way OK.
 		Page.spotlightSelect();
-		// Step 6-1 Verify: list is scrolled to first item.
+		// Verify: list is scrolled to first item.
 		expect(Page.topLeftVisibleItemId()).to.equal('item0');
-		// Step 6-2 Verify: Spotlight on item0.
+		// Verify: Spotlight on item0.
 		expectFocusedItem(0);
 	});
 });

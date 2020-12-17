@@ -22,61 +22,57 @@ class VirtualListPage extends Page {
 		super.open(`VirtualList${layout}-View`, urlExtra);
 	}
 
-	// button api
+
 	get buttonHideScrollbar () {
 		return element('#hideScrollbar', browser);
 	}
+
 	get buttonTop () {
 		return element('#top', browser);
 	}
+
 	get buttonLeft () {
 		return element('#left', browser);
 	}
+
 	get buttonRight () {
 		return element('#right', browser);
 	}
+
 	get buttonBottom () {
 		return element('#bottom', browser);
 	}
+
 	get buttonWrap () {
 		return element('#wrap', browser);
 	}
-	get buttonJumpToItem () {
-		return element('#jumpTo', browser);
-	}
-	get buttonJumpToItemWithoutFocus () {
-		return element('#jumpToWithoutFocus', browser);
-	}
+
 	get buttonDisabledItem () {
 		return element('#disabled', browser);
 	}
+
 	get buttonChildProps () {
 		return element('#hasChildProps', browser);
 	}
+
 	get buttonNativeScroll () {
 		return element('#nativeScroll', browser);
 	}
 
-	// inputField api
 	get inputfieldNumItems () {
 		return element('#numItems', browser);
 	}
-	get inputfieldSpacing () {
-		return element('#spacing', browser);
-	}
+
 	get inputfieldItemSize () {
 		return element('#itemSize', browser);
 	}
 
-	// scrollBar api
-	get scrollbar () {
-		return $(`${verticalScrollbarSelector}`);
-	}
 	getVerticalScrollbarRect () {
 		return browser.execute(function (_verticalScrollbarSelector) {
 			return document.querySelector(_verticalScrollbarSelector).getBoundingClientRect();
 		}, verticalScrollbarSelector);
 	}
+
 	getVerticalScrollbarTrackRect () {
 		return browser.execute(function (_verticalScrollbarTrackSelector) {
 			return document.querySelector(_verticalScrollbarTrackSelector).getBoundingClientRect();
@@ -87,6 +83,7 @@ class VirtualListPage extends Page {
 	get scrollThumb () {
 		return $(`${scrollThumbSelector}`);
 	}
+
 	getScrollThumbPosition () {
 		return browser.execute(function (_scrollbarSelector) {
 			const scrollbar = document.querySelector(_scrollbarSelector);
@@ -95,10 +92,6 @@ class VirtualListPage extends Page {
 
 	}
 
-	// list api
-	get list () {
-		return element('#list', browser);
-	}
 	getListRect () {
 		return browser.execute(function (_scrollContentSelector) {
 			return document.querySelector(_scrollContentSelector).getBoundingClientRect();
@@ -109,6 +102,7 @@ class VirtualListPage extends Page {
 	item (id) {
 		return element(`#${typeof id === 'number' ? `item${id}` : id}`, browser);
 	}
+
 	topVisibleItemId () {
 		return browser.execute(function (_scrollableSelector) {
 			const scroller = document.querySelector(_scrollableSelector),
@@ -130,6 +124,7 @@ class VirtualListPage extends Page {
 			return 'unknown';	// we didn't find it?!
 		}, scrollableSelector);
 	}
+
 	bottomVisibleItemId () {
 		return browser.execute(function (_scrollableSelector) {
 			const scroller = document.querySelector(_scrollableSelector),
@@ -155,19 +150,7 @@ class VirtualListPage extends Page {
 			return 'unknown';	// we didn't find it?!
 		}, scrollableSelector);
 	}
-	itemOffsetTopById (id) {
-		return browser.execute(function (_element) {
-			return _element.getBoundingClientRect().top;
-		}, this.item(id).value);
-	}
-	itemSpacing () {
-		return browser.execute(function (_listItemSelector) {
-			const itemContent = document.querySelectorAll(_listItemSelector);
-			const firstItemRect = itemContent[0].getBoundingClientRect();
-			const secondItemRect = itemContent[1].getBoundingClientRect();
-			return Math.round(secondItemRect.top - firstItemRect.top - firstItemRect.height);
-		}, listItemSelector);
-	}
+
 	getItemSize () {
 		return browser.execute(function (_listItemSelector) {
 			const itemContent = document.querySelector(_listItemSelector);
@@ -179,16 +162,19 @@ class VirtualListPage extends Page {
 			};
 		}, listItemSelector);
 	}
+
 	itemDisabled () {
 		return browser.execute(function () {
 			return document.activeElement.getAttribute('aria-disabled') === 'true';
 		});
 	}
+
 	textContent () {
 		return browser.execute(function () {
 			return document.activeElement.innerText.split('\n')[0];
 		});
 	}
+
 	spotlightSize () {
 		return browser.execute(function () {
 			return document.activeElement.clientHeight;
@@ -212,6 +198,7 @@ class VirtualListPage extends Page {
 			waitUntilVisible(i + direction);
 		}
 	}
+
 	checkScrollbyPagekey (way) {
 		const initialThumbPosition = this.getScrollThumbPosition();
 		if (way === 'down') {
@@ -224,9 +211,11 @@ class VirtualListPage extends Page {
 			expect((initialThumbPosition > this.getScrollThumbPosition())).to.be.true();
 		}
 	}
+
 	backSpace () {
 		return this.keyDelay('Backspace');
 	}
+
 	numPad (num) {
 		let Inputnum = 'numpad' + String(num);
 		return this.keyDelay(Inputnum);

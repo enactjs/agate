@@ -160,10 +160,21 @@ class app extends React.Component {
 						<Button {...buttonDefaultProps} id="disabled" onClick={this.onToggle} selected={disabled}>DisabledItem</Button>
 						<Button {...buttonDefaultProps} id="hasChildProps" onClick={this.onToggle} selected={hasChildProps}>childProps</Button>
 						<Button {...buttonDefaultProps} id="nativeScroll" onClick={this.onToggle} selected={nativeScroll}>NativeScroll</Button>
-						<Input id="numItems" defaultValue={numItems} type="number" onChange={this.onChangeNumItems} size="small" style={inputStyle} />
-						<Input id="spacing" defaultValue={spacing} type="number" onChange={this.onChangeSpacing} size="small" style={inputStyle} />
-						<Input id="itemSize" defaultValue={itemSize} type="number" onChange={this.onChangeitemSize} size="small" style={inputStyle} />
-						<span id="scrolling" ref={this.scrollingRef}>Not Scrolling</span>
+						<div>
+							<div style={{display:"inline-block"}}>
+								Number of items:
+								<Input id="numItems" defaultValue={numItems} type="number" onChange={this.onChangeNumItems} size="small" style={inputStyle} />
+							</div>
+							<div style={{display:"inline-block"}}>
+								Item spacing:
+								<Input id="spacing" defaultValue={spacing} type="number" onChange={this.onChangeSpacing} size="small" style={inputStyle} />
+							</div>
+							<div style={{display:"inline-block"}}>
+								Item size:
+								<Input id="itemSize" defaultValue={itemSize} type="number" onChange={this.onChangeitemSize} size="small" style={inputStyle} />
+							</div>
+							<span id="scrolling" ref={this.scrollingRef}>Not Scrolling</span>
+						</div>
 					</Cell>
 					<Cell component={ListContainer}>
 						<Row align="center">

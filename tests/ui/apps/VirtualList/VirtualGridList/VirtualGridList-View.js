@@ -73,8 +73,8 @@ class app extends React.Component {
 			horizontal: false,
 			noLabel: false,
 			numItems: 100,
-			minHeight: 400,
-			minWidth: 600,
+			minHeight: 450,
+			minWidth: 700,
 			spacing: 24,
 			spotlightDisabled: false,
 			translate: false,
@@ -142,22 +142,30 @@ class app extends React.Component {
 						<Button id="noLabel" onClick={this.onToggleLabel} selected={noLabel} size="small">Media item</Button>
 						<Button id="translate" onClick={this.onToggle} selected={translate} size="small">translate Mode</Button>
 						<Button id="spotlightDisabled" onClick={this.onToggle} selected={spotlightDisabled} size="small"> spotlightDisabled</Button>
-						<Input id="numItems" defaultValue={numItems} type="number" onChange={this.onChangeNumItems} size="small" style={inputStyle} />
-						<Input id="spacing" defaultValue={spacing} type="number" onChange={this.onChangeSpacing} size="small" style={inputStyle} />
-						<Input id="minWidth" defaultValue={minWidth} type="number" onChange={this.onChangeWidth} size="small" style={inputStyle} />
-						<Input id="minHeight" defaultValue={minHeight} type="number" onChange={this.onChangeHeight} size="small" style={inputStyle} />
-						<span id="scrolling" ref={this.scrollingRef}>Not Scrolling</span>
+						<div>
+							<div style={{display:"inline-block"}}>
+								Number of items:
+								<Input id="numItems" defaultValue={numItems} type="number" onChange={this.onChangeNumItems} size="small" style={inputStyle} />
+							</div>
+							<div style={{display:"inline-block"}}>
+								Item spacing:
+								<Input id="spacing" defaultValue={spacing} type="number" onChange={this.onChangeSpacing} size="small" style={inputStyle} />
+							</div>
+							<div style={{display:"inline-block"}}>
+								Min width:
+								<Input id="minWidth" defaultValue={minWidth} type="number" onChange={this.onChangeWidth} size="small" style={inputStyle} />
+							</div>
+							<div style={{display:"inline-block"}}>
+								Min height:
+								<Input id="minHeight" defaultValue={minHeight} type="number" onChange={this.onChangeHeight} size="small" style={inputStyle} />
+							</div>
+							<span id="scrolling" ref={this.scrollingRef}>Not Scrolling</span>
+						</div>
 					</Cell>
 					<Cell component={ListContainer}>
 						<Row align="center">
-							<Cell component={Button} shrink id="left">
-								Left
-							</Cell>
 							<Cell align="stretch">
 								<Column align="center">
-									<Cell component={Button} shrink id="top">
-										Top
-									</Cell>
 									<Cell>
 										<VirtualGridList
 											dataSize={numItems}
@@ -180,13 +188,7 @@ class app extends React.Component {
 											wrap={wrap}
 										/>
 									</Cell>
-									<Cell component={Button} shrink id="bottom">
-										Bottom
-									</Cell>
 								</Column>
-							</Cell>
-							<Cell component={Button} shrink id="right">
-								Right
 							</Cell>
 						</Row>
 					</Cell>

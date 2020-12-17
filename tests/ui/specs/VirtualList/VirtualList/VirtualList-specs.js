@@ -142,15 +142,12 @@ describe('VirtualList', function () {
 		});
 
 		it('should  display childProps', function () {
-			// Set translate ScrollMode.
-			//Page.buttonNativeScroll.moveTo();
-			//Page.spotlightSelect();
-			// Verify 1-2:The first item shows 'Item 000'.
+			// Verify: The first item shows 'Item 00'.
 			Page.buttonLeft.moveTo();
 			Page.spotlightRight();
 			expectFocusedItem(0);
 			expect(Page.textContent()).to.equal('Item 00');
-			// Verify 1-3: The second item shows 'Item 001'.
+			// Verify: The second item shows 'Item 01'.
 			Page.spotlightDown();
 			expectFocusedItem(1);
 			expect(Page.textContent()).to.equal('Item 01');
