@@ -232,7 +232,7 @@ const DatePickerBase = kind({
 
 		return (
 			<DateTime {...rest}>
-				{order.map((picker) => {
+				{order && order.map((picker) => {
 					switch (picker) {
 						case 'd':
 							return (
