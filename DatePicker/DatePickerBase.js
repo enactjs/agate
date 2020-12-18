@@ -95,6 +95,14 @@ const DatePickerBase = kind({
 		dayAriaLabel: PropTypes.string,
 
 		/**
+		 * When it's `true` it changes the direction of the transition animation for day.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		dayReverseTransition: PropTypes.bool,
+
+		/**
 		 * Disables the `DatePicker`.
 		 *
 		 * @type {Boolean}
@@ -165,13 +173,6 @@ const DatePickerBase = kind({
 		 */
 		onYearChange: PropTypes.func,
 
-		/**
-		 * When it's `true` it changes the direction of the transition animation.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		reverseTransition: PropTypes.bool,
 
 		/**
 		 * Indicates the content's text direction is right-to-left.
@@ -217,6 +218,7 @@ const DatePickerBase = kind({
 		disabled,
 		day,
 		dayAriaLabel,
+		dayReverseTransition,
 		maxDays,
 		maxMonths,
 		maxYear,
@@ -228,7 +230,6 @@ const DatePickerBase = kind({
 		onYearChange,
 		onSpotlightDisappear,
 		order,
-		reverseTransition,
 		spotlightDisabled,
 		year,
 		yearAriaLabel,
@@ -255,7 +256,7 @@ const DatePickerBase = kind({
 									min={1}
 									onChange={onDateChange}
 									onSpotlightDisappear={onSpotlightDisappear}
-									reverseTransition={reverseTransition}
+									reverseTransition={dayReverseTransition}
 									spotlightDisabled={spotlightDisabled}
 									value={day}
 									width={2}
@@ -274,7 +275,6 @@ const DatePickerBase = kind({
 									min={1}
 									onChange={onMonthChange}
 									onSpotlightDisappear={onSpotlightDisappear}
-									reverseTransition={reverseTransition}
 									spotlightDisabled={spotlightDisabled}
 									value={month}
 									width={2}
@@ -293,7 +293,6 @@ const DatePickerBase = kind({
 									min={minYear}
 									onChange={onYearChange}
 									onSpotlightDisappear={onSpotlightDisappear}
-									reverseTransition={reverseTransition}
 									spotlightDisabled={spotlightDisabled}
 									value={year}
 									width={4}

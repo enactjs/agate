@@ -29,14 +29,14 @@ const getLabelFormatter = () => new DateFmt({
 });
 
 const dateTimeConfig = {
-	customProps: function (i18n, value, reverseTransition, props) {
+	customProps: function (i18n, value, dayReverseTransition, props) {
 		const values = {
 			maxMonths: 12,
 			maxDays: 31,
 			year: 1900,
 			month: 1,
 			day: 1,
-			reverseTransition: false
+			dayReverseTransition: false
 		};
 
 		if (value && i18n) {
@@ -49,8 +49,8 @@ const dateTimeConfig = {
 			values.minYear = i18n.toLocalYear(props.minYear || DatePickerBase.defaultProps.minYear);
 		}
 
-		if (reverseTransition) {
-			values.reverseTransition = reverseTransition;
+		if (dayReverseTransition) {
+			values.dayReverseTransition = dayReverseTransition;
 		}
 
 		return values;
