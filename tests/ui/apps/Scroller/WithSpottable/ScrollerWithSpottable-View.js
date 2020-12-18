@@ -3,7 +3,8 @@ import {Row, Column, Cell} from '@enact/ui/Layout';
 import React from 'react';
 
 import {Button} from '../../../../../Button';
-import {Panel, Header} from '../../../../../Panels';
+import {Header} from '../../../../../Header';
+import {Panel} from '../../../../../Panels';
 import Scroller from '../../../../../Scroller';
 import ThemeDecorator from '../../../../../ThemeDecorator';
 

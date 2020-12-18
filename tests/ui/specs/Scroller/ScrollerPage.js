@@ -1,14 +1,13 @@
 'use strict';
 const {element, Page} = require('@enact/ui-test-utils/utils');
 
-const focusableBodySelector = '.Scroller_Scroller_focusableBody';
-const horizontalscrollbarSelector = '.useScroll_useScroll_horizontalScrollbar';
-const scrollbarSelector = '.useScroll_ScrollbarTrack_scrollbarTrack';
-const scrollContentSelector = '.enact_ui_Scroller_Scroller_scroller';
-const scrollHorizontalThumbSelector = '.useScroll_useScroll_horizontalScrollbar .useScroll_ScrollbarTrack_thumb';
-const scrollThumbSelector = '.useScroll_ScrollbarTrack_thumb';
-const scrollVerticalThumbSelector = '.useScroll_ScrollbarTrack_vertical  .useScroll_ScrollbarTrack_thumb';
-const verticalscrollbarSelector = '.useScroll_useScroll_verticalScrollbar';
+const horizontalscrollbarSelector = '.useScroll_Scrollbar_scrollbar_useScroll_Scrollbar_horizontal';
+const scrollbarSelector = '.enact_ui_useScroll_ScrollbarTrack_scrollbarTrack';
+const scrollContentSelector = '.enact_ui_useScroll_useScroll_scrollContentWrapper';
+const scrollHorizontalThumbSelector = '..useScroll_Scrollbar_scrollbar.useScroll_Scrollbar_horizontal';
+const scrollThumbSelector = '.enact_ui_useScroll_ScrollbarTrack_scrollbarTrack:before';
+const scrollVerticalThumbSelector = '.useScroll_Scrollbar_scrollbar.useScroll_Scrollbar_vertical';
+const verticalscrollbarSelector = '.useScroll_Scrollbar_scrollbar.useScroll_Scrollbar_vertical';
 
 class ScrollerPage extends Page {
 
@@ -46,10 +45,6 @@ class ScrollerPage extends Page {
 		return element('#focusableScrollbarKnobs', browser);
 	}
 
-	// scrollable api
-	get focusableBody () {
-		return $(`${focusableBodySelector}`);
-	}
 	get verticalScrollThumb () {
 		return $(`${scrollVerticalThumbSelector}`);
 	}
