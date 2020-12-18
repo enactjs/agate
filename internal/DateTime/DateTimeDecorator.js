@@ -22,7 +22,7 @@ import React from 'react';
  * @returns	{undefined}
  */
 const toTime = (date) => {
-	return date && date.getTime();
+	return (date && typeof date.getTime === 'function') ? date.getTime() : null;
 };
 
 /**
