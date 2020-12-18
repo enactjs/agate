@@ -41,7 +41,7 @@ describe('Disabled item', function () {
 		expectFocusedItem(0);
 	});
 
-	it('should navigate disabled and enabled items with native scrollmode [GT-29035]', function () {
+	it('should navigate disabled and enabled items with native scrollmode', function () {
 		// Toggle on DisabledItems.(DisabledItem Button for this test.)
 		Page.buttonDisabledItem.moveTo();
 		Page.spotlightSelect();

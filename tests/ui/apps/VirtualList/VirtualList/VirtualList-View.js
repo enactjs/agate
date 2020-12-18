@@ -142,7 +142,7 @@ class app extends React.Component {
 		this.setState({spacing: obj.value});
 	};
 
-	onChangeitemSize = ({value}) => {
+	onChangeItemSize = ({value}) => {
 		this.setState({itemSize: parseInt(value)});
 	};
 
@@ -172,7 +172,7 @@ class app extends React.Component {
 							</div>
 							<div style={{display:'inline-block'}}>
 								Item size:
-								<Input id="itemSize" defaultValue={itemSize} type="number" onChange={this.onChangeitemSize} size="small" style={inputStyle} />
+								<Input id="itemSize" defaultValue={itemSize} type="number" onChange={this.onChangeItemSize} size="small" style={inputStyle} />
 							</div>
 						</div>
 					</Cell>

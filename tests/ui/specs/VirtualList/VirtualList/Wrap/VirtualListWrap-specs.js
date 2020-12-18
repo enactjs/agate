@@ -6,7 +6,7 @@ describe('Wrap', function () {
 		Page.open();
 	});
 
-	it('should wrap when', function () {
+	it('should wrap when moving from first item to last item with 5-way navigation', function () {
 		// Set wrap to true
 		Page.buttonWrap.moveTo();
 		Page.spotlightSelect();
