@@ -1,15 +1,15 @@
 // ProgressBarTooltip.module.less
 //
-@import '../styles/variables.less';
-@import '../styles/mixins.less';
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
 
 .tooltip {
 	--tooltip-progress-proportion: 0;
 	--tooltip-progress-percent: ~"calc(var(--tooltip-progress-proportion) * 100%)";
 
-	.tooltipLabel {
-		.sand-font-number();
-	}
+	//.tooltipLabel {
+	//	.agate-font-number();
+	//}
 
 	.before (@ruleset) {
 		&.left,
@@ -26,82 +26,85 @@
 			@ruleset();
 		}
 	}
+	.applySkins({
 
-	&.horizontal {
-		left: var(--tooltip-progress-percent);
+		&.horizontal {
+			left: var(--tooltip-progress-percent);
 
-		&.above {
-			bottom: @sand-progressbar-tooltip-above-offset;
+			&.above {
+				bottom: @agate-progressbar-tooltip-above-offset;
+			}
+
+			&.below {
+				top: @agate-progressbar-tooltip-below-offset;
+			}
 		}
 
-		&.below {
-			top: @sand-progressbar-tooltip-below-offset;
-		}
-	}
+		&.vertical {
+			bottom: var(--tooltip-progress-percent);
 
-	&.vertical {
-		bottom: var(--tooltip-progress-percent);
-
-		// Left side
-		.before({
-			right: @sand-progressbar-tooltip-before-offset;
-		});
-
-		// Right side
-		.after({
-			left: @sand-progressbar-tooltip-after-offset;
-		});
-	}
-
-	&.radial {
-		left: 50%;
-		bottom: 50%;
-
-		&.above,
-		&.below {
+			// Left side
 			.before({
-				left: 50%;
+				right: @agate-progressbar-tooltip-before-offset;
+			});
+
+			// Right side
+			.after({
+				left: @agate-progressbar-tooltip-after-offset;
+			});
+		}
+
+		&.radial {
+			left: 50%;
+			bottom: 50%;
+
+			&.above,
+			&.below {
+				.before({
+					left: 50%;
+				});
+
+				.after({
+					left: 50%;
+				});
+
+				&.center {
+					left: 50%;
+				}
+			}
+
+			&.center {
+				&.above {
+					bottom: ~"calc(100% + " @agate-progressbar-tooltip-radial-offset ~")";
+				}
+
+				&.below {
+					top: ~"calc(100% + " @agate-progressbar-tooltip-radial-offset ~")";
+				}
+			}
+
+			.before({
+				left: -@agate-progressbar-tooltip-radial-offset;
+
+				&.above {
+					bottom: ~"calc(100% + " @agate-progressbar-tooltip-radial-offset ~")";
+				}
+				&.below {
+					top: ~"calc(100% + " @agate-progressbar-tooltip-radial-offset ~")";
+				}
 			});
 
 			.after({
-				left: 50%;
+				left: ~"calc(100% + " @agate-progressbar-tooltip-radial-offset ~")";
+
+				&.above {
+					bottom: ~"calc(100% + " @agate-progressbar-tooltip-radial-offset ~")";
+				}
+
+				&.below {
+					top: ~"calc(100% + " @agate-progressbar-tooltip-radial-offset ~")";
+				}
 			});
-
-			&.center {
-				left: 50%;
-			}
 		}
-
-		&.center {
-			&.above {
-				bottom: ~"calc(100% + " @sand-progressbar-tooltip-radial-offset ~")";
-			}
-			&.below {
-				top: ~"calc(100% + " @sand-progressbar-tooltip-radial-offset ~")";
-			}
-		}
-
-		.before({
-			left: -@sand-progressbar-tooltip-radial-offset;
-
-			&.above {
-				bottom: ~"calc(100% + " @sand-progressbar-tooltip-radial-offset ~")";
-			}
-			&.below {
-				top: ~"calc(100% + " @sand-progressbar-tooltip-radial-offset ~")";
-			}
-		});
-
-		.after({
-			left: ~"calc(100% + " @sand-progressbar-tooltip-radial-offset ~")";
-
-			&.above {
-				bottom: ~"calc(100% + " @sand-progressbar-tooltip-radial-offset ~")";
-			}
-
-			&.below {
-				top: ~"calc(100% + " @sand-progressbar-tooltip-radial-offset ~")";
-			}
-		});
-	}
+	})
 }
