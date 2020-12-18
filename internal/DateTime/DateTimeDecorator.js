@@ -154,7 +154,6 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 			const newValue = date.getTimeExtended();
 			const changed =	this.props.value == null || this.props.value !== newValue;
 
-			// only day changes
 			if (prevMaxDays === maxDays) {
 				this.setState({
 					value: newValue,
