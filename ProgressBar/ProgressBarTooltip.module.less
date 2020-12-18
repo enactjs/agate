@@ -1,0 +1,107 @@
+// ProgressBarTooltip.module.less
+//
+@import '../styles/variables.less';
+@import '../styles/mixins.less';
+
+.tooltip {
+	--tooltip-progress-proportion: 0;
+	--tooltip-progress-percent: ~"calc(var(--tooltip-progress-proportion) * 100%)";
+
+	.tooltipLabel {
+		.sand-font-number();
+	}
+
+	.before (@ruleset) {
+		&.left,
+		&.before,
+		:global(.enact-locale-right-to-left) &.after {
+			@ruleset();
+		}
+	}
+
+	.after (@ruleset) {
+		&.right,
+		&.after,
+		:global(.enact-locale-right-to-left) &.before {
+			@ruleset();
+		}
+	}
+
+	&.horizontal {
+		left: var(--tooltip-progress-percent);
+
+		&.above {
+			bottom: @sand-progressbar-tooltip-above-offset;
+		}
+
+		&.below {
+			top: @sand-progressbar-tooltip-below-offset;
+		}
+	}
+
+	&.vertical {
+		bottom: var(--tooltip-progress-percent);
+
+		// Left side
+		.before({
+			right: @sand-progressbar-tooltip-before-offset;
+		});
+
+		// Right side
+		.after({
+			left: @sand-progressbar-tooltip-after-offset;
+		});
+	}
+
+	&.radial {
+		left: 50%;
+		bottom: 50%;
+
+		&.above,
+		&.below {
+			.before({
+				left: 50%;
+			});
+
+			.after({
+				left: 50%;
+			});
+
+			&.center {
+				left: 50%;
+			}
+		}
+
+		&.center {
+			&.above {
+				bottom: ~"calc(100% + " @sand-progressbar-tooltip-radial-offset ~")";
+			}
+			&.below {
+				top: ~"calc(100% + " @sand-progressbar-tooltip-radial-offset ~")";
+			}
+		}
+
+		.before({
+			left: -@sand-progressbar-tooltip-radial-offset;
+
+			&.above {
+				bottom: ~"calc(100% + " @sand-progressbar-tooltip-radial-offset ~")";
+			}
+			&.below {
+				top: ~"calc(100% + " @sand-progressbar-tooltip-radial-offset ~")";
+			}
+		});
+
+		.after({
+			left: ~"calc(100% + " @sand-progressbar-tooltip-radial-offset ~")";
+
+			&.above {
+				bottom: ~"calc(100% + " @sand-progressbar-tooltip-radial-offset ~")";
+			}
+
+			&.below {
+				top: ~"calc(100% + " @sand-progressbar-tooltip-radial-offset ~")";
+			}
+		});
+	}
+}
