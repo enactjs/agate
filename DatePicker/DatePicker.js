@@ -29,7 +29,7 @@ const getLabelFormatter = () => new DateFmt({
 });
 
 const dateTimeConfig = {
-	customProps: function (i18n, value, reverseTransition,  props) {
+	customProps: function (i18n, value, reverseTransition, props) {
 		const values = {
 			maxMonths: 12,
 			maxDays: 31,
