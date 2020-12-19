@@ -3,6 +3,8 @@ import React from 'react';
 
 import LabeledIconButton from '../LabeledIconButton';
 
+import css from '../LabeledIconButton.module.less';
+
 describe('LabeledIconButton Specs', () => {
 	test('should render label when given children', () => {
 		const subject = mount(
@@ -56,10 +58,10 @@ describe('LabeledIconButton Specs', () => {
 			</LabeledIconButton>
 		);
 
-		const expected = true;
-		const actual = subject.find('LabeledIconButton').prop('highlighted');
+		const expected = 'highlighted';
+		const actual = subject.find(`div.${css.button}`).prop('className');
 
-		expect(actual).toBe(expected);
+		expect(actual).toContain(expected);
 	});
 
 	test('should render selected LabeledIconButton', () => {
@@ -72,10 +74,10 @@ describe('LabeledIconButton Specs', () => {
 			</LabeledIconButton>
 		);
 
-		const expected = true;
-		const actual = subject.find('LabeledIconButton').prop('selected');
+		const expected = 'selected';
+		const actual = subject.find(`div.${css.button}`).prop('className');
 
-		expect(actual).toBe(expected);
+		expect(actual).toContain(expected);
 	});
 
 	test('should render inline LabeledIconButton', () => {
@@ -88,10 +90,10 @@ describe('LabeledIconButton Specs', () => {
 			</LabeledIconButton>
 		);
 
-		const expected = true;
-		const actual = subject.find('LabeledIconButton').prop('inline');
+		const expected = 'inline';
+		const actual = subject.find(`div.${css.labeledIconButton}`).prop('className');
 
-		expect(actual).toBe(expected);
+		expect(actual).toContain(expected);
 	});
 
 	test('should render smallest LabeledIconButton', () => {
@@ -105,7 +107,7 @@ describe('LabeledIconButton Specs', () => {
 		);
 
 		const expected = 'smallest';
-		const actual = subject.find('Button').prop('size');
+		const actual = subject.find(`div.${css.button}`).prop('className');
 
 		expect(actual).toContain(expected);
 	});
@@ -121,7 +123,7 @@ describe('LabeledIconButton Specs', () => {
 		);
 
 		const expected = 'small';
-		const actual = subject.find('Button').prop('size');
+		const actual = subject.find(`div.${css.button}`).prop('className');
 
 		expect(actual).toContain(expected);
 	});
@@ -136,7 +138,7 @@ describe('LabeledIconButton Specs', () => {
 		);
 
 		const expected = 'large';
-		const actual = subject.find('Button').prop('size');
+		const actual = subject.find(`div.${css.button}`).prop('className');
 
 		expect(actual).toContain(expected);
 	});
@@ -152,7 +154,7 @@ describe('LabeledIconButton Specs', () => {
 		);
 
 		const expected = 'huge';
-		const actual = subject.find('Button').prop('size');
+		const actual = subject.find(`div.${css.button}`).prop('className');
 
 		expect(actual).toContain(expected);
 	});
@@ -168,9 +170,9 @@ describe('LabeledIconButton Specs', () => {
 		);
 
 		const expected = 'left';
-		const actual = subject.find('LabeledIconButton').prop('labelPosition');
+		const actual = subject.find(`div.${css.labeledIconButton}`).prop('className');
 
-		expect(actual).toBe(expected);
+		expect(actual).toContain(expected);
 	});
 
 	test('should render LabeledIconButton with label position right', () => {
@@ -184,9 +186,9 @@ describe('LabeledIconButton Specs', () => {
 		);
 
 		const expected = 'right';
-		const actual = subject.find('LabeledIconButton').prop('labelPosition');
+		const actual = subject.find(`div.${css.labeledIconButton}`).prop('className');
 
-		expect(actual).toBe(expected);
+		expect(actual).toContain(expected);
 	});
 
 	test('should render LabeledIconButton with label position above', () => {
@@ -200,9 +202,9 @@ describe('LabeledIconButton Specs', () => {
 		);
 
 		const expected = 'above';
-		const actual = subject.find('LabeledIconButton').prop('labelPosition');
+		const actual = subject.find(`div.${css.labeledIconButton}`).prop('className');
 
-		expect(actual).toBe(expected);
+		expect(actual).toContain(expected);
 	});
 
 	test('should render LabeledIconButton with label position below', () => {
@@ -216,8 +218,8 @@ describe('LabeledIconButton Specs', () => {
 		);
 
 		const expected = 'below';
-		const actual = subject.find('LabeledIconButton').prop('labelPosition');
+		const actual = subject.find(`div.${css.labeledIconButton}`).prop('className');
 
-		expect(actual).toBe(expected);
+		expect(actual).toContain(expected);
 	});
 });
