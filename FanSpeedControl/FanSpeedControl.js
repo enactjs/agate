@@ -47,28 +47,30 @@ const FanSpeedControlBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
+		 * The maximum value of FanSpeedControl.
+		 *
+		 * @type {Number}
+		 * @default 10
+		 * @public
+		 */
+		max: PropTypes.number.isRequired,
+
+		/**
+		 * The minimum value of FanSpeedControl.
+		 *
+		 * @type {Number}
+		 * @default 1
+		 * @public
+		 */
+		min: PropTypes.number.isRequired,
+
+		/**
 		 * FanSpeedControl icon.
 		 *
 		 * @type {String}
 		 * @public
 		 */
 		icon: PropTypes.string,
-
-		/**
-		 * The maximum value of FanSpeedControl.
-		 *
-		 * @type {Number}
-		 * @public
-		 */
-		max: PropTypes.number,
-
-		/**
-		 * The minimum value of FanSpeedControl.
-		 *
-		 * @type {Number}
-		 * @public
-		 */
-		min: PropTypes.number,
 
 		/**
 		 * Called when value is changed.
@@ -98,6 +100,8 @@ const FanSpeedControlBase = kind({
 	},
 
 	defaultProps: {
+		max: 10,
+		min: 1,
 		value: 1
 	},
 

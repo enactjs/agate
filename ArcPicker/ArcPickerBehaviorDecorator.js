@@ -26,11 +26,11 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			/**
 			 * The value options of ArcPicker.
 			 *
-			 * @type {Node}
+			 * @type {Array}
 			 * @required
 			 * @public
 			 */
-			children: PropTypes.node.isRequired,
+			children: PropTypes.array.isRequired,
 
 			/**
 			 * Whether or not the component is in a disabled state.
@@ -121,7 +121,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 
 		render () {
 			const {children, max, min, value: valueProp, ...rest} = this.props;
-			const value = ((valueProp || valueProp === 0) ? valueProp : children[0]);
+			const value = ((valueProp || valueProp === 0) ? valueProp : (children && children[0]));
 
 			delete rest.onChange;
 

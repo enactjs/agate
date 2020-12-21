@@ -74,7 +74,7 @@ const DateComponentPickerBase = kind({
 		children: ({children}) => mapAndFilterChildren(children, (child) => (
 			<PickerItem>{child}</PickerItem>
 		)),
-		max: ({children}) => React.Children.count(children) - 1
+		max: ({children}) => children ? React.Children.count(children) - 1 : 0
 	},
 
 	render: ({accessibilityHint, 'aria-valuetext': ariaValuetext, children, max, value, wrap, ...rest}) => (
