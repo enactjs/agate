@@ -15,21 +15,23 @@ describe('Scroller', function () {
 		});
 
 		it('should focus on scroll up button with focusableScrollbar `true`', function () {
-			// Step 3: Knobs > Scroller > focusableScrollbar > true
+			// Set focusableScrollbar=true
 			ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			ScrollerPage.spotlightSelect();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightSelect();
-			// Step 4: Hover on the vertical Scroller.
+
+			// Focus on scroll up button.
 			ScrollerPage.showPointerByKeycode();
 			ScrollerPage.button('scroll up').moveTo();
-			// Step 4 Verify: Spotlight is on the Scroll up button.
+
+			// Verify if Spotlight is on the scroll up button.
 			expect(ScrollerPage.button('scroll up').isFocused()).to.be.true();
 		});
 
 		it('should focus on scroll up button with 5-way key and focusableScrollbar `true`', function () {
-			// Step 3: Knobs > Scroller > focusableScrollbar > true
+			// Set focusableScrollbar=true
 			ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			ScrollerPage.spotlightSelect();
 			ScrollerPage.spotlightDown();
@@ -45,18 +47,18 @@ describe('Scroller', function () {
 		});
 
 		it('should Scrolling via 5-way Key with Spotlight on the scroll down button', function () {
-			// Step 3: Knobs > Scroller > focusableScrollbar > true
+			// Set focusableScrollbar=true
 			ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			ScrollerPage.spotlightSelect();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightSelect();
 
-			// Step 4 Verify: Scroll thumb's position is at the top of the verticalScrollbar track.
+			// Verify if scroll thumb's position is at the top of the verticalScrollbar track.
 			const initialVerticalScrollThumbPosition = ScrollerPage.getScrollThumbPosition().vertical;
 			expect(initialVerticalScrollThumbPosition).to.equal('0');
 
-			// Step 5: Focus on the Scroll down button in verticalScrollbar.
+			// Focus on the scroll down button in verticalScrollbar.
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightRight();
@@ -64,11 +66,11 @@ describe('Scroller', function () {
 
 			expect(ScrollerPage.button('scroll down').isFocused()).to.be.true();
 
-			// Step 6: 5-Way Select.
+			// 5-Way Select.
 			ScrollerPage.spotlightSelect();
 			ScrollerPage.delay(1000);
 
-			// Step 7 Verify: Scroll thumb moves down.
+			// Verify if scroll thumb moves down.
 			expect((ScrollerPage.getScrollThumbPosition().vertical > initialVerticalScrollThumbPosition)).to.be.true();
 		});
 	});
@@ -81,21 +83,23 @@ describe('Scroller', function () {
 		});
 
 		it('should focus on scroll left button with focusableScrollbar `true`', function () {
-			// Step 3: Knobs > Scroller > focusableScrollbar > true
+			// Set focusableScrollbar=true
 			ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			ScrollerPage.spotlightSelect();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightSelect();
-			// Step 4: Hover on the horizontal Scroller.
+
+			// Focus on the scroll left button.
 			ScrollerPage.showPointerByKeycode();
 			ScrollerPage.button('scroll left').moveTo();
-			// Step 4 Verify: Spotlight is on the Scroll left button.
+
+			// Verify if Spotlight is on the scroll left button.
 			expect(ScrollerPage.button('scroll left').isFocused()).to.be.true();
 		});
 
 		it('should focus on scroll right button with 5-way key and focusableScrollbar `true`', function () {
-			// Step 3: Knobs > Scroller > focusableScrollbar > true
+			// Set focusableScrollbar=true
 			ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			ScrollerPage.spotlightSelect();
 			ScrollerPage.spotlightDown();
@@ -110,18 +114,18 @@ describe('Scroller', function () {
 		});
 
 		it('should Scrolling via 5-way Key with Spotlight on the scroll left button', function () {
-			// Step 3: Knobs > Scroller > focusableScrollbar > true
+			// Set focusableScrollbar=true
 			ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			ScrollerPage.spotlightSelect();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightSelect();
 
-			// Step 4 Verify: Scroll thumb's position is at right=0 of the horizontalScrollbar track.
+			// Verify if scroll thumb's position is at right=0 of the horizontalScrollbar track.
 			const initialVerticalScrollThumbPosition = ScrollerPage.getScrollThumbPosition().horizontal;
 			expect(initialVerticalScrollThumbPosition).to.equal('0');
 
-			// Step 5: Focus on the Scroll left button in horizontalScrollbar.
+			// Focus on the Scroll left button in horizontalScrollbar.
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightDown();
@@ -129,11 +133,11 @@ describe('Scroller', function () {
 
 			expect(ScrollerPage.button('scroll left').isFocused()).to.be.true();
 
-			// Step 6: 5-Way Select.
+			// 5-Way Select.
 			ScrollerPage.spotlightSelect();
 			ScrollerPage.delay(1000);
 
-			// Step 7 Verify: Scroll thumb moves left.
+			// Verify if Scroll thumb moves left.
 			expect((ScrollerPage.getScrollThumbPosition().horizontal > initialVerticalScrollThumbPosition)).to.be.true();
 		});
 	});
