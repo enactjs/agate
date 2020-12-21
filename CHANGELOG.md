@@ -15,7 +15,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Marquee` component
 - `agate/Picker` prop `noAnimation` and `wrap`
 - `agate/RangePicker` prop `noAnimation` and `wrap`
-- `agate/ThemeDecorator` context `ThemeContext` to share the context including `accent` and `highlight` properties
+- `agate/ThemeDecorator` context `ThemeContext` to apply `accent` color to `agate/ArcPicker` and `agate/ArcSlider` when they're focused
 - `agate/TimePicker` prop `onSpotlightDisappear` and `spotlightDisabled`
 
 ### Changed
