@@ -7,10 +7,6 @@
 	--tooltip-progress-proportion: 0;
 	--tooltip-progress-percent: ~"calc(var(--tooltip-progress-proportion) * 100%)";
 
-	//.tooltipLabel {
-	//	.agate-font-number();
-	//}
-
 	.before (@ruleset) {
 		&.left,
 		&.before,
@@ -26,8 +22,8 @@
 			@ruleset();
 		}
 	}
-	.applySkins({
 
+	.applySkins({
 		&.horizontal {
 			left: var(--tooltip-progress-percent);
 

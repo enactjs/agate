@@ -20,9 +20,9 @@ import compose from 'ramda/src/compose';
 import React from 'react';
 
 import Skinnable from '../Skinnable';
-import {ProgressBarTooltip} from './ProgressBarTooltip';
 
 import componentCss from './ProgressBar.module.less';
+import {ProgressBarTooltip} from './ProgressBarTooltip';
 
 /**
  * Renders an Agate-styled progress bar.
@@ -135,7 +135,6 @@ const ProgressBarBase = kind({
 	},
 
 	defaultProps: {
-		backgroundProgress: 0,
 		orientation: 'horizontal',
 		progress: 0,
 		size: 'large'

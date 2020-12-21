@@ -32,6 +32,7 @@ import compose from 'ramda/src/compose';
 import React from 'react';
 
 import $L from '../internal/$L';
+import {ProgressBarTooltip} from '../ProgressBar';
 import Skinnable from '../Skinnable';
 import {SliderBase} from '../Slider';
 import {emitChange} from '../Slider/utils';
@@ -39,7 +40,6 @@ import SliderBehaviorDecorator from '../Slider/SliderBehaviorDecorator';
 
 import IncrementSliderButton from './IncrementSliderButton';
 import componentCss from './IncrementSlider.module.less';
-import {ProgressBarTooltip} from '../ProgressBar';
 
 const isDown = is('down');
 const isLeft = is('left');

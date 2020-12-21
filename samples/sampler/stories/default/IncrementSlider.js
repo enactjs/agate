@@ -12,7 +12,7 @@ const Config = mergeComponentMetadata('IncrementSlider', IncrementSliderBase, In
 const IncrementSliderTooltipConfig = mergeComponentMetadata('IncrementSliderTooltip', IncrementSliderTooltip);
 
 IncrementSlider.displayName = 'IncrementSlider';
-IncrementSliderTooltip.displayName = 'SliderTooltip';
+IncrementSliderTooltip.displayName = 'IncrementSliderTooltip';
 
 
 storiesOf('Agate', module)
