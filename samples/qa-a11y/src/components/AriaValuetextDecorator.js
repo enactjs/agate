@@ -4,7 +4,7 @@ import hoc from '@enact/core/hoc';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const AriaValuetextDecorator  = hoc((config, Wrapped) => {
+const AriaValueTextDecorator  = hoc((config, Wrapped) => {
 	let defaultValue;
 	if (config) {
 		defaultValue = config.value;
@@ -13,7 +13,7 @@ const AriaValuetextDecorator  = hoc((config, Wrapped) => {
 	}
 
 	// eslint-disable-next-line no-shadow
-	function AriaValuetextDecorator ({'aria-valuetext': ariaValueText, ...rest}) {
+	function AriaValueTextDecorator ({'aria-valuetext': ariaValueText, ...rest}) {
 		const [value, setValue] = React.useState(defaultValue);
 		const valueText = `${ariaValueText} ${value}`;
 
@@ -24,14 +24,14 @@ const AriaValuetextDecorator  = hoc((config, Wrapped) => {
 		);
 	}
 
-	AriaValuetextDecorator.propTypes = {
+	AriaValueTextDecorator.propTypes = {
 		'aria-valuetext': PropTypes.string
 	};
 
-	return AriaValuetextDecorator;
+	return AriaValueTextDecorator;
 });
 
-export default AriaValuetextDecorator;
+export default AriaValueTextDecorator;
 export {
-	AriaValuetextDecorator
+	AriaValueTextDecorator
 };

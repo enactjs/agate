@@ -2,10 +2,10 @@ import Button from '@enact/agate/Button';
 import WindDirectionControl from '@enact/agate/WindDirectionControl';
 import React from 'react';
 
-import AriaValuetextDecorator from '../components/AriaValuetextDecorator';
+import AriaValueTextDecorator from '../components/AriaValueTextDecorator';
 import Section from '../components/Section';
 
-const AriaValueTextWindDirectionControl = AriaValuetextDecorator({value: 'airDown'}, WindDirectionControl);
+const AriaValueTextWindDirectionControl = AriaValueTextDecorator({value: 'airDown'}, WindDirectionControl);
 
 const WindDirectionControlView = () => (
 	<>
