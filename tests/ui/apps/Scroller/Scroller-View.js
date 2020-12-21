@@ -101,29 +101,29 @@ class app extends React.Component {
 										<Scroller
 											direction={this.state.direction}
 											focusableScrollbar={this.state.focusableScrollbar}
-											horizontalScrollbar="visible"
+											horizontalScrollbar={getScrollbarVisibility(hideScrollbar)}
 											key={nativeScroll ? 'native' : 'translate'}
 											onScrollStart={this.onScrollStart}
 											onScrollStop={this.onScrollStop}
 											scrollMode={nativeScroll ? 'native' : 'translate'}
 											style={{
-												height: ri.scaleToRem(1680),
-												width: ri.scaleToRem(2400)
+												height: ri.scaleToRem(500),
+												width: ri.scaleToRem(1000)
 											}}
-											verticalScrollbar="visible"
+											verticalScrollbar={getScrollbarVisibility(hideScrollbar)}
 										>
 											<div
 												style={{
-													height: ri.scaleToRem(2004),
-													width: ri.scaleToRem(4002),
-													marginTop: ri.scaleToRem(200)
+													height: ri.scaleToRem(700),
+													width: ri.scaleToRem(1500),
+													marginTop: ri.scaleToRem(100)
 												}}
 											>
 												Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
 												Aenean id blandit nunc. Donec lacinia nisi vitae mi dictum, eget pulvinar nunc tincidunt. Integer vehicula tempus rutrum. Sed efficitur neque in arcu dignissim cursus.
 												<div
 													style={{
-														marginTop: ri.scaleToRem(1602)
+														marginTop: ri.scaleToRem(400)
 													}}
 												>
 													Mauris blandit sollicitudin mattis. Fusce commodo arcu vitae risus consectetur sollicitudin. Aliquam eget posuere orci. Cras pellentesque lobortis sapien non lacinia.

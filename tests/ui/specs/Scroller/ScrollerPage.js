@@ -1,13 +1,7 @@
 'use strict';
-const {element, Page} = require('@enact/ui-test-utils/utils');
+const {componentSelector, element, Page} = require('@enact/ui-test-utils/utils');
 
-const horizontalscrollbarSelector = '.useScroll_Scrollbar_scrollbar_useScroll_Scrollbar_horizontal';
 const scrollbarSelector = '.enact_ui_useScroll_ScrollbarTrack_scrollbarTrack';
-const scrollContentSelector = '.enact_ui_useScroll_useScroll_scrollContentWrapper';
-const scrollHorizontalThumbSelector = '..useScroll_Scrollbar_scrollbar.useScroll_Scrollbar_horizontal';
-const scrollThumbSelector = '.enact_ui_useScroll_ScrollbarTrack_scrollbarTrack:before';
-const scrollVerticalThumbSelector = '.useScroll_Scrollbar_scrollbar.useScroll_Scrollbar_vertical';
-const verticalscrollbarSelector = '.useScroll_Scrollbar_scrollbar.useScroll_Scrollbar_vertical';
 
 class ScrollerPage extends Page {
 
@@ -24,20 +18,32 @@ class ScrollerPage extends Page {
 	get button1 () {
 		return element('#Page_1_Button', browser);
 	}
+
 	get button2 () {
 		return element('#Page_2_Button', browser);
 	}
+
 	get button3 () {
 		return element('#Page_3_Button', browser);
 	}
+
 	get buttonTop () {
 		return element('#top', browser);
 	}
+
 	get buttonHideScrollbar () {
 		return element('#hideScrollbar', browser);
 	}
+
 	get buttonNativeScroll () {
 		return element('#nativeScroll', browser);
+	}
+
+	button (text) {
+		return element(
+			`${componentSelector({component: 'Button'})}[aria-label="${text}"]`,
+			browser
+		);
 	}
 
 	// dropdown api
@@ -45,12 +51,6 @@ class ScrollerPage extends Page {
 		return element('#focusableScrollbarKnobs', browser);
 	}
 
-	get verticalScrollThumb () {
-		return $(`${scrollVerticalThumbSelector}`);
-	}
-	get horizontalScrollThumb () {
-		return $(`${scrollHorizontalThumbSelector}`);
-	}
 	getScrollThumbPosition () {
 		return browser.execute(function (_scrollbarSelector) {
 			const scrollbar = document.querySelectorAll(_scrollbarSelector);
@@ -59,53 +59,6 @@ class ScrollerPage extends Page {
 				horizontal: scrollbar[1].style.getPropertyValue('--scrollbar-thumb-progress-ratio')
 			};
 		}, scrollbarSelector);
-	}
-	getScrollerRect () {
-		return browser.execute(function (_scrollContentSelector) {
-			const scroller = document.querySelector(_scrollContentSelector);
-			return scroller.getBoundingClientRect();
-		}, scrollContentSelector);
-	}
-	getScrollThumbRect () {
-		return browser.execute(function (_scrollThumbSelector) {
-			const scrollThumb = document.querySelectorAll(_scrollThumbSelector);
-			return {
-				vertical: scrollThumb[0].getBoundingClientRect(),
-				horizontal: scrollThumb[1].getBoundingClientRect()
-			};
-		}, scrollThumbSelector);
-	}
-	getScrollBarRect () {
-		return browser.execute(function (_scrollbarSelector) {
-			const scrollbar = document.querySelectorAll(_scrollbarSelector);
-			return {
-				vertical: scrollbar[0].getBoundingClientRect(),
-				horizontal: scrollbar[1].getBoundingClientRect()
-			};
-		}, scrollbarSelector);
-	}
-	moveToScrollTrack (direction, way) {
-		if (direction === 'vertical') {
-			const verticalScroll = way === 'Down' ? this.getScrollThumbRect().vertical.bottom - this.getScrollBarRect().vertical.top + 50 :
-				this.getScrollThumbRect().vertical.top - this.getScrollBarRect().vertical.top - 50;
-			$(`${verticalscrollbarSelector}`).moveTo({xOffset: 0, yOffset: Math.round(verticalScroll)});
-		} else if (direction === 'horizontal') {
-			const horizontalScroll = way === 'Left' ? this.getScrollThumbRect().horizontal.left - this.getScrollBarRect().horizontal.left - 50 :
-				this.getScrollThumbRect().horizontal.right - this.getScrollBarRect().horizontal.left + 50;
-			$(`${horizontalscrollbarSelector}`).moveTo({xOffset: Math.round(horizontalScroll), yOffset: 0});
-		}
-	}
-	getVerticalScrollOffsetLeft () {
-		return browser.execute(function (_verticalscrollbarSelector) {
-			const verticalscrollbar = document.querySelector(_verticalscrollbarSelector);
-			return verticalscrollbar.offsetLeft === 0 ? 0 : verticalscrollbar.offsetLeft + verticalscrollbar.clientWidth;
-		}, verticalscrollbarSelector);
-	}
-	getHorizontalScrollOffsetTop () {
-		return browser.execute(function (_horizontalscrollbarSelector) {
-			const horizontalscrollbar = document.querySelector(_horizontalscrollbarSelector);
-			return horizontalscrollbar.offsetTop + horizontalscrollbar.clientHeight;
-		}, horizontalscrollbarSelector);
 	}
 }
 
