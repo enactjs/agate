@@ -39,17 +39,6 @@ const ProgressBarBase = kind({
 
 	propTypes: /** @lends agate/ProgressBar.ProgressBar.prototype */ {
 		/**
-		 * The proportion of the loaded portion of the progress bar.
-		 *
-		 * * Valid values are between `0` and `1`.
-		 *
-		 * @type {Number}
-		 * @default 0
-		 * @public
-		 */
-		backgroundProgress: PropTypes.number,
-
-		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
 		 *
@@ -73,11 +62,11 @@ const ProgressBarBase = kind({
 		/**
 		 * Sets the orientation of the progress bar.
 		 *
-		 * @type {('horizontal'|'vertical')}
+		 * @type {('horizontal'|'vertical'|'radial')}
 		 * @default 'horizontal'
 		 * @public
 		 */
-		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+		orientation: PropTypes.oneOf(['horizontal', 'vertical', 'radial']),
 
 		/**
 		 * A number between `0` and `1` indicating the proportion of the filled portion of the bar.
