@@ -39,6 +39,7 @@ import SliderBehaviorDecorator from '../Slider/SliderBehaviorDecorator';
 
 import IncrementSliderButton from './IncrementSliderButton';
 import componentCss from './IncrementSlider.module.less';
+import {ProgressBarTooltip} from '../ProgressBar';
 
 const isDown = is('down');
 const isLeft = is('left');
@@ -363,6 +364,43 @@ const IncrementSliderBase = kind({
 		 */
 		step: PropTypes.number,
 
+
+		/**
+		 * Enables the built-in tooltip
+		 *
+		 * To customize the tooltip, pass either a custom tooltip component or an instance of
+		 * [IncrementSliderTooltip]{@link agate/IncrementSlider.IncrementSliderTooltip} with additional props configured.
+		 *
+		 * ```
+		 * <IncrementSlider
+		 *   tooltip={
+		 *     <IncrementSliderTooltip percent side="after" />
+		 *   }
+		 * />
+		 * ```
+		 *
+		 * The tooltip may also be passed as a child via the `"tooltip"` slot. See
+		 * [Slottable]{@link ui/Slottable} for more information on how slots can be used.
+		 *
+		 * ```
+		 * <IncrementSlider>
+		 *   <IncrementSliderTooltip percent side="after" />
+		 * </IncrementSlider>
+		 * ```
+		 *
+		 * If a custom tooltip is provided, it will receive the following props:
+		 *
+		 * * `children` - The `value` prop from the slider
+		 * * `visible` - `true` if the tooltip should be displayed
+		 * * `orientation` - The value of the `orientation` prop from the slider
+		 * * `proportion` - A number between 0 and 1 representing the proportion of the `value` in
+		 *   terms of `min` and `max`
+		 *
+		 * @type {Boolean|Element|Function}
+		 * @public
+		 */
+		tooltip: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
+
 		/**
 		 * The value of the increment slider.
 		 *
@@ -440,7 +478,8 @@ const IncrementSliderBase = kind({
 			}
 
 			return `${valueText != null ? valueText : value} ${incrementAriaLabel}`;
-		}
+		},
+		tooltip: ({tooltip}) => tooltip === true ? ProgressBarTooltip : tooltip
 	},
 
 	render: ({active,
@@ -474,6 +513,7 @@ const IncrementSliderBase = kind({
 		size,
 		spotlightDisabled,
 		step,
+		tooltip,
 		value,
 		...rest
 	}) => {
@@ -519,6 +559,7 @@ const IncrementSliderBase = kind({
 					spotlightDisabled={spotlightDisabled}
 					progressAnchor={progressAnchor}
 					step={step}
+					tooltip={tooltip}
 					value={value}
 				/>
 				<IncrementSliderButton
@@ -554,7 +595,7 @@ const IncrementSliderDecorator = compose(
 	IdProvider({generateProp: null, prefix: 's_'}),
 	SliderBehaviorDecorator({emitSpotlightEvents: 'onSpotlightDirection'}),
 	Skinnable,
-	Slottable({slots: ['knob']})
+	Slottable({slots: ['knob', 'tooltip']})
 );
 
 /**
@@ -579,5 +620,6 @@ export default IncrementSlider;
 export {
 	IncrementSlider,
 	IncrementSliderBase,
-	IncrementSliderDecorator
+	IncrementSliderDecorator,
+	ProgressBarTooltip as IncrementSliderTooltip
 };

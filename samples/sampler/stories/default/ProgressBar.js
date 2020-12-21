@@ -6,7 +6,7 @@ import {storiesOf} from '@storybook/react';
 
 import ProgressBar, {ProgressBarBase, ProgressBarTooltip} from '@enact/agate/ProgressBar';
 
-const ProgressBarConfig = mergeComponentMetadata('ProgressBar', ProgressBar, UiProgressBar, );
+const ProgressBarConfig = mergeComponentMetadata('ProgressBar', ProgressBarBase, ProgressBar, UiProgressBar );
 const ProgressBarTooltipConfig = mergeComponentMetadata('ProgressBarTooltip', ProgressBarTooltip);
 
 ProgressBar.displayName = 'ProgressBar';
@@ -25,10 +25,9 @@ storiesOf('Agate', module)
 
 			return (
 				<ProgressBar
-					backgroundProgress={number('backgroundProgress', ProgressBarConfig, {range: true, min: 0, max: 1, step: 0.01}, 0.5)}
 					disabled={disabled}
 					highlighted={boolean('highlighted', ProgressBarConfig)}
-					orientation={select('orientation', ['horizontal', 'vertical'], ProgressBarConfig)}
+					orientation={select('orientation', ['horizontal', 'vertical', 'radial'], ProgressBarConfig)}
 					progress={number('progress', ProgressBarConfig, {range: true, min: 0, max: 1, step: 0.01}, 0.4)}
 					progressAnchor={number('progressAnchor', ProgressBarConfig, {range: true, min: 0, max: 1, step: 0.01}, 0)}
 					showAnchor={boolean('showAnchor', ProgressBarConfig)}
