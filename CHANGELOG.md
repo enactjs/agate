@@ -2,6 +2,16 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Added
+
+- `agate/Popup` `bottom`, `fullscreen`, `left` and `right` values to `direction` prop
+
+### Changed
+
+- `agate/FullScreenPopup` to be deprecated
+
 ## [1.1.0] - 2020-12-22
 
 ### Added
