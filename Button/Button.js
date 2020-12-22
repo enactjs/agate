@@ -10,6 +10,7 @@
  * @exports ButtonDecorator
  */
 
+import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import {cap} from '@enact/core/util';
 import EnactPropTypes from '@enact/core/internal/prop-types';
@@ -20,10 +21,12 @@ import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
+import warning from 'warning';
 
 import Icon from '../Icon';
-// import {MarqueeDecorator} from '../Marquee';
+import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
+import TooltipDecorator from '../TooltipDecorator';
 
 import componentCss from './Button.module.less';
 
@@ -36,7 +39,6 @@ import componentCss from './Button.module.less';
  * @class ButtonBase
  * @memberof agate/Button
  * @extends ui/Button.ButtonBase
- * @omit minWidth
  * @ui
  * @public
  */
@@ -56,6 +58,7 @@ const ButtonBase = kind({
 		 * The delay before the button is animated, in milliseconds.
 		 *
 		 * @type {Number}
+		 * @default 0
 		 * @public
 		 */
 		animationDelay: PropTypes.number,
@@ -69,6 +72,7 @@ const ButtonBase = kind({
 		 * * `'transparent'`.
 		 *
 		 * @type {('opaque'|'lightOpaque'|'transparent')}
+		 * @default 'opaque'
 		 * @public
 		 */
 		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
@@ -128,10 +132,29 @@ const ButtonBase = kind({
 		/**
 		 * The component used to render the icon.
 		 *
-		 * @type {Component}
+		 * @type {Component|Node}
+		 * @default Icon
+		 * @private
+		 */
+		iconComponent: EnactPropTypes.componentOverride,
+
+		/**
+		 * True if button is an icon only button.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @private
+		 */
+		iconOnly: PropTypes.bool,
+
+		/**
+		 * Specifies on which side (`'before'` or `'after'`) of the text the icon appears.
+		 *
+		 * @type {('before'|'after')}
+		 * @default 'before'
 		 * @public
 		 */
-		iconComponent: EnactPropTypes.component,
+		iconPosition: PropTypes.oneOf(['before', 'after']),
 
 		/**
 		 * The position of this button in relation to other buttons.
@@ -145,6 +168,14 @@ const ButtonBase = kind({
 		 * @public
 		 */
 		joinedPosition: PropTypes.oneOf(['left', 'center', 'right']),
+
+		/**
+		 * Boolean controlling whether this component should enforce the "minimum width" rules.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		minWidth: PropTypes.bool,
 
 		/**
 		 * Provides a way to call special interface attention to this button. It will be "featured"
@@ -185,8 +216,11 @@ const ButtonBase = kind({
 	},
 
 	defaultProps: {
+		animationDelay: 0,
 		backgroundOpacity: 'opaque',
 		iconComponent: Icon,
+		iconOnly: false,
+		iconPosition: 'before',
 		size: 'large',
 		type: 'standard'
 	},
@@ -197,10 +231,13 @@ const ButtonBase = kind({
 	},
 
 	computed: {
-		className: ({animateOnRender, backgroundOpacity, highlighted, joinedPosition, selected, type, size, styler}) => styler.append(
+		className: ({animateOnRender, backgroundOpacity, highlighted, iconOnly, iconPosition, joinedPosition, selected, type, size, styler}) => styler.append(
+			{iconOnly},
 			backgroundOpacity,
 			size,
 			type,
+			// iconBefore/iconAfter only applies when using text and an icon
+			!iconOnly && `icon${cap(iconPosition)}`,
 			(joinedPosition && 'joined' + cap(joinedPosition)),  // If `joinedPosition` is present, prepend the word "joined" to the variable, so the classes are clearer.
 			{
 				animateOnRender,
@@ -208,6 +245,11 @@ const ButtonBase = kind({
 				selected
 			}
 		),
+		checkPropsIncompatibility: ({highlighted, iconOnly, joinedPosition, selected, type}) => {
+			warning(!(highlighted && selected), '"highlighted" prop cannot be used at the same time with "selected" prop.');
+			warning(!(iconOnly && joinedPosition && type), '"iconOnly" prop cannot be used at the same time with "joinedPosition" and "type" props.');
+			warning(!(joinedPosition && type === 'grid'), '"joinedPosition" and "type" (with "grid" value) props cannot be used at the same time.');
+		},
 		decoration: ({badge, css, decoration}) => {
 			if (!badge) return decoration;
 			return (
@@ -233,7 +275,7 @@ const ButtonBase = kind({
 			'--agate-button-animation-delay': animationDelay,
 			'--agate-button-badge-bg-color': badgeColor
 		}),
-		minWidth: ({children}) => (React.Children.count(children) === 0 || children === '')
+		minWidth: ({iconOnly, minWidth}) => ((minWidth != null) ? minWidth : !iconOnly)
 	},
 
 	render: ({css, ...rest}) => {
@@ -242,7 +284,10 @@ const ButtonBase = kind({
 		delete rest.backgroundOpacity;
 		delete rest.badge;
 		delete rest.badgeColor;
+		delete rest.checkPropsIncompatibility;
 		delete rest.highlighted;
+		delete rest.iconOnly;
+		delete rest.iconPosition;
 		delete rest.joinedPosition;
 		delete rest.selected;
 		delete rest.spriteCount;
@@ -253,6 +298,30 @@ const ButtonBase = kind({
 			css
 		});
 	}
+});
+
+/**
+ * A higher-order component that determines if it is a button that only displays an icon.
+ *
+ * @class IconButtonDecorator
+ * @memberof agate/Button
+ * @hoc
+ * @private
+ */
+const IconButtonDecorator = hoc((config, Wrapped) => {
+	return kind({
+		name: 'IconButtonDecorator',
+
+		computed: {
+			iconOnly: ({children}) => (React.Children.toArray(children).filter(Boolean).length === 0)
+		},
+
+		render: (props) => {
+			return (
+				<Wrapped {...props} />
+			);
+		}
+	});
 });
 
 /**
@@ -267,7 +336,9 @@ const ButtonBase = kind({
  */
 const ButtonDecorator = compose(
 	Pure,
-	// MarqueeDecorator({className: componentCss.marquee}),
+	IconButtonDecorator,
+	MarqueeDecorator,
+	TooltipDecorator({tooltipDestinationProp: 'decoration'}),
 	UiButtonDecorator,
 	Spottable,
 	Skinnable
@@ -279,10 +350,9 @@ const ButtonDecorator = compose(
  * Usage:
  * ```
  * <Button
- * 	backgroundOpacity="translucent"
- * 	color="blue"
+ *   backgroundOpacity="transparent"
  * >
- * 	Press me!
+ *   Press me!
  * </Button>
  * ```
  *

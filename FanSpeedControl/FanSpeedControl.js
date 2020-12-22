@@ -2,7 +2,7 @@
  * Agate styled fan speed control components and behaviors.
  *
  * @example
- * <FanSpeedControl icon="fan" max={10} />
+ * <FanSpeedControl icon="fan" max={5} min={1} />
  *
  * @module agate/FanSpeedControl
  * @exports FanSpeedControl
@@ -38,28 +38,30 @@ const FanSpeedControlBase = kind({
 
 	propTypes: /** @lends agate/FanSpeedControl.FanSpeedControlBase.prototype */ {
 		/**
+		 * The maximum value of FanSpeedControl.
+		 *
+		 * @type {Number}
+		 * @default 10
+		 * @public
+		 */
+		max: PropTypes.number.isRequired,
+
+		/**
+		 * The minimum value of FanSpeedControl.
+		 *
+		 * @type {Number}
+		 * @default 1
+		 * @public
+		 */
+		min: PropTypes.number.isRequired,
+
+		/**
 		 * FanSpeedControl icon.
 		 *
 		 * @type {String}
 		 * @public
 		 */
 		icon: PropTypes.string,
-
-		/**
-		 * The maximum value of FanSpeedControl.
-		 *
-		 * @type {Number}
-		 * @public
-		 */
-		max: PropTypes.number,
-
-		/**
-		 * The minimum value of FanSpeedControl.
-		 *
-		 * @type {Number}
-		 * @public
-		 */
-		min: PropTypes.number,
 
 		/**
 		 * Called when value is changed.
@@ -89,6 +91,8 @@ const FanSpeedControlBase = kind({
 	},
 
 	defaultProps: {
+		max: 10,
+		min: 1,
 		value: 1
 	},
 
@@ -98,7 +102,8 @@ const FanSpeedControlBase = kind({
 	},
 
 	computed: {
-		children: ({min, max}) => range(min, max + 1)
+		children: ({min, max}) => range(min, max + 1),
+		className: ({icon, styler}) => styler.append({noIcon: !icon})
 	},
 
 	render: ({children, icon, max, min, onChange, value, ...rest}) => {
@@ -140,14 +145,16 @@ const FanSpeedControlDecorator = compose(
 /**
  * FanSpeedControl with Agate styling and
  * [`FanSpeedControlDecorator`]{@link agate/FanSpeedControl.FanSpeedControlDecorator} applied.
- * Usage
  *
- *  <FanSpeedControl
- *  	icon="fan"
- *  	max={10}
- *  	min={1}
- *  	value={4}
- *  />
+ * Usage:
+ * ```
+ * <FanSpeedControl
+ *   icon="fan"
+ *   max={10}
+ *   min={1}
+ *   value={4}
+ * />
+ * ```
  *
  * @class FanSpeedControl
  * @memberof agate/FanSpeedControl

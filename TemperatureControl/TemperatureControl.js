@@ -2,12 +2,7 @@
  * Provides Agate-themed temperature control components and behaviors.
  *
  * @example
- * <TemperatureControl
- *   max={30}
- *   min={10}
- *   unit="Celsius"
- *   value={10}
- * />
+ * <TemperatureControl min={0} max={40} unit="Fahrenheit" />
  *
  * @module agate/TemperatureControl
  * @exports TemperatureControl
@@ -42,6 +37,14 @@ const TemperatureControlBase =  kind({
 	name: 'TemperatureControl',
 
 	propTypes: /** @lends agate/TemperatureControl.TemperatureControlBase.prototype */ {
+		/**
+		 * Disables TemperatureControl and becomes non-interactive.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
 		/**
 		 * The minimum value of the slider.
 		 *
@@ -99,16 +102,21 @@ const TemperatureControlBase =  kind({
 		publicClassNames: true
 	},
 
-	render: ({max, min, onChange, unit, value, ...rest}) => {
+	render: ({disabled, max, min, onChange, unit, value, ...rest}) => {
 		const currentTemperature = MeasurementFactory({unit, amount: value});
-		const ufmt = new UnitFmt({autoConvert: true, length: 'short', maxFractionDigits: 0, roundingMode: 'halfup'});
-		const currentTemperatureString =  ufmt.format(currentTemperature);
+		let currentTemperatureString = null;
+
+		if (typeof window !== 'undefined') {
+			const ufmt = new UnitFmt({autoConvert: true, length: 'short', maxFractionDigits: 0, roundingMode: 'halfup'});
+			currentTemperatureString =  ufmt.format(currentTemperature);
+		}
 
 		return (
 			<div {...rest}>
 				<ArcSlider
 					backgroundColor="#444444"
 					className={css.slider}
+					disabled={disabled}
 					endAngle={310}
 					foregroundColor={value < min + (max - min) / 2 ? '#007aff' : '#f24949'}
 					max={max}
@@ -144,14 +152,16 @@ const TemperatureControlDecorator = compose(
  * TemperatureControl with Agate styling
  * and [`TemperatureControlDecorator`]{@link agate/TemperatureControl.TemperatureControlDecorator}
  * applied.
- * Usage
  *
- *  <TemperatureControl
+ * Usage:
+ * ```
+ * <TemperatureControl
  *   max={30}
  *   min={10}
  *   unit="Celsius"
  *   value={10}
- *   />
+ * />
+ * ```
  *
  * @class TemperatureControl
  * @memberof agate/TemperatureControl

@@ -79,7 +79,7 @@ const ArcBase = kind({
 		 * The radius of the arc.
 		 *
 		 * @type {Number}
-		 * @default 100
+		 * @default 150
 		 * @public
 		 */
 		radius: PropTypes.number,
@@ -170,6 +170,7 @@ const ArcDecorator = compose(
  * Usage:
  * ```
  * <Arc color="blue" endAngle={200} startAngle={0}" radius={100} />
+ * ```
  *
  * @class Arc
  * @memberof agate/Arc

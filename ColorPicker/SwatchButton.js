@@ -24,6 +24,7 @@ import componentCss from './SwatchButton.module.less';
  *
  * @class SwatchButtonBase
  * @memberof agate/ColorPicker
+ * @extends agate/Button.ButtonBase
  * @ui
  * @public
  */

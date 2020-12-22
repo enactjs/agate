@@ -1,6 +1,9 @@
 /**
  * Provides Agate-themed Item component and interactive radio toggle icon.
  *
+ * @example
+ * <RadioItem>Item</RadioItem>
+ *
  * @module agate/RadioItem
  * @exports RadioItem
  * @exports RadioItemBase
@@ -24,17 +27,16 @@ import componentCss from './RadioItem.module.less';
 /**
  * Renders an `Item` with a radio-dot component. Useful to show a selected state on an Item.
  *
- * @class RadioItem
+ * @class RadioItemBase
  * @memberof agate/RadioItem
  * @extends agate/Item.Item
- * @mixes agate/RadioItem.RadioItemDecorator
  * @ui
  * @public
  */
 const RadioItemBase = kind({
 	name: 'RadioItemBase',
 
-	propTypes: /** @lends agate/RadioItem.RadioItem.prototype */ {
+	propTypes: /** @lends agate/RadioItem.RadioItemBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
@@ -54,6 +56,7 @@ const RadioItemBase = kind({
 		 *
 		 * @type {String}
 		 * @see {@link agate/Icon.Icon}
+		 * @default 'circle'
 		 */
 		icon: PropTypes.string,
 
@@ -115,6 +118,16 @@ const RadioItemDecorator = compose(
 	Skinnable
 );
 
+/**
+ * An Agate-styled RadioItem.
+ *
+ * @class RadioItem
+ * @memberof agate/RadioItem
+ * @extends agate/RadioItem.RadioItemBase
+ * @mixes agate/RadioItem.RadioItemDecorator
+ * @ui
+ * @public
+ */
 const RadioItem = RadioItemDecorator(RadioItemBase);
 
 export default RadioItem;

@@ -107,8 +107,7 @@ const dateTimeConfig = {
  */
 const DatePickerDecorator = compose(
 	Pure,
-	Skinnable,
-	DateTimeDecorator(dateTimeConfig)
+	Skinnable
 );
 
 /**
@@ -126,8 +125,8 @@ const DatePickerDecorator = compose(
  * Usage:
  * ```
  * <DatePicker
- *  defaultValue={selectedDate}
- *  onChange={handleChange}
+ *   defaultValue={selectedDate}
+ *   onChange={handleChange}
  * />
  * ```
  *
@@ -144,7 +143,12 @@ const DatePickerDecorator = compose(
  * @ui
  * @public
  */
-const DatePicker = DatePickerDecorator(DatePickerBase);
+const DatePicker = DatePickerDecorator(
+	DateTimeDecorator(
+		dateTimeConfig,
+		DatePickerBase
+	)
+);
 
 /**
  * The initial value used when `value` is not set.

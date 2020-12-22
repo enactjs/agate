@@ -98,6 +98,7 @@ const DatePickerBase = kind({
 		 * Disables the `DatePicker`.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		disabled: PropTypes.bool,
@@ -148,6 +149,15 @@ const DatePickerBase = kind({
 		onMonthChange: PropTypes.func,
 
 		/**
+		 * Called when the component is removed when it had focus.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightDisappear: PropTypes.func,
+
+		/**
 		 * Called when the `year` component of the Date changes.
 		 *
 		 * @type {Function}
@@ -162,6 +172,14 @@ const DatePickerBase = kind({
 		 * @private
 		 */
 		rtl: PropTypes.bool,
+
+		/**
+		 * Disables 5-way spotlight from navigating into the component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		spotlightDisabled: PropTypes.bool,
 
 		/**
 		 * The "aria-label" for the year picker.
@@ -200,7 +218,9 @@ const DatePickerBase = kind({
 		onDateChange,
 		onMonthChange,
 		onYearChange,
+		onSpotlightDisappear,
 		order,
+		spotlightDisabled,
 		year,
 		yearAriaLabel,
 		...rest
@@ -212,7 +232,7 @@ const DatePickerBase = kind({
 
 		return (
 			<DateTime {...rest}>
-				{order.map((picker) => {
+				{order && order.map((picker) => {
 					switch (picker) {
 						case 'd':
 							return (
@@ -225,8 +245,11 @@ const DatePickerBase = kind({
 									max={maxDays}
 									min={1}
 									onChange={onDateChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									spotlightDisabled={spotlightDisabled}
 									value={day}
 									width={2}
+									wrap
 								/>
 							);
 						case 'm':
@@ -240,8 +263,11 @@ const DatePickerBase = kind({
 									max={maxMonths}
 									min={1}
 									onChange={onMonthChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									spotlightDisabled={spotlightDisabled}
 									value={month}
 									width={2}
+									wrap
 								/>
 							);
 						case 'y':
@@ -255,8 +281,11 @@ const DatePickerBase = kind({
 									max={maxYear}
 									min={minYear}
 									onChange={onYearChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									spotlightDisabled={spotlightDisabled}
 									value={year}
 									width={4}
+									wrap
 								/>
 							);
 					}

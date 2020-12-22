@@ -198,8 +198,7 @@ const dateTimeConfig = {
  */
 const TimePickerDecorator = compose(
 	Pure,
-	Skinnable,
-	DateTimeDecorator(dateTimeConfig)
+	Skinnable
 );
 
 /**
@@ -215,11 +214,17 @@ const TimePickerDecorator = compose(
  *
  * @class TimePicker
  * @memberof agate/TimePicker
+ * @extends agate/TimePicker.TimePickerBase
  * @mixes agate/TimePicker.TimePickerDecorator
  * @ui
  * @public
  */
-const TimePicker = TimePickerDecorator(TimePickerBase);
+const TimePicker = TimePickerDecorator(
+	DateTimeDecorator(
+		dateTimeConfig,
+		TimePickerBase
+	)
+);
 
 /**
  * Default value

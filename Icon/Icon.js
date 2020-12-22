@@ -36,7 +36,7 @@ import componentCss from './Icon.module.less';
 const IconBase = kind({
 	name: 'Icon',
 
-	propTypes: /** @lends agate/Icon.Icon.prototype */ {
+	propTypes: /** @lends agate/Icon.IconBase.prototype */ {
 		/**
 		 * The icon content.
 		 *

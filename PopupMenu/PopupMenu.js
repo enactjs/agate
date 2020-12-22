@@ -85,7 +85,7 @@ const PopupMenuBase = kind({
 			>
 				<Layout orientation="vertical" align="center center" role="alert" {...rest}>
 					<Cell className={css.title} shrink>
-						<Heading size="title">{title}</Heading>
+						<Heading css={css} size="title">{title}</Heading>
 					</Cell>
 					<Cell shrink className={css.body} align="stretch">
 						<Scroller direction={orientation} horizontalScrollbar="hidden" verticalScrollbar="hidden">
@@ -127,7 +127,7 @@ const PopupMenuDecorator = compose(
  * Usage:
  * ```
  * <PopupMenu open title="Title">
- * 	Hello!
+ *   Hello!
  * </PopupMenu>
  * ```
  *

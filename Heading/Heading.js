@@ -3,10 +3,10 @@
  *
  * @example
  * <Heading
- *   size="large"
- *   spacing="small"
+ * 	size="large"
+ * 	spacing="small"
  * >
- *   A Content Section Heading
+ * 	A Content Section Heading
  * </Heading>
  *
  * @module agate/Heading
@@ -33,6 +33,7 @@ import componentCss from './Heading.module.less';
  *
  * @class HeadingBase
  * @memberof agate/Heading
+ * @extends ui/Heading.Heading
  * @ui
  * @public
  */
@@ -83,7 +84,8 @@ const HeadingBase = kind({
 
 	styles: {
 		css: componentCss,
-		className: 'heading'
+		className: 'heading',
+		publicClassNames: true
 	},
 
 	computed: {

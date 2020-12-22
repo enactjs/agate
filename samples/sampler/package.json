@@ -1,7 +1,7 @@
 {
   "name": "agate-sampler",
-  "version": "1.0.0-alpha.16",
-  "description": "Component samples for Agate",
+  "version": "1.1.0",
+  "description": "Component and QA samples for Agate",
   "private": true,
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "test": "echo \"No test suite\" && exit 0",
     "pack": "build-storybook -c .storybook -o dist",
     "pack-qa": "build-storybook -c .qa-storybook -o dist",
-    "serve": "start-storybook -p 8080 -c .storybook --ci"
+    "serve": "start-storybook -p 8080 -c .storybook --ci",
+    "serve-qa": "start-storybook -p 8080 -c .qa-storybook --ci"
   },
   "license": "Apache-2.0",
   "enact": {
@@ -20,8 +21,9 @@
   },
   "dependencies": {
     "@enact/agate": "../../",
-    "@enact/core": "^3.4.0",
-    "@enact/ui": "^3.4.0",
+    "@enact/core": "^3.4.11",
+    "@enact/ui": "^3.4.11",
+    "dotenv": "^8.2.0",
     "ilib": "^14.4.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6"

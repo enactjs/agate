@@ -1,6 +1,9 @@
 /**
  * Provides Agate-themed Item component and interactive toggle switch icon.
  *
+ * @example
+ * <SwitchItem>Item</SwitchItem>
+ *
  * @module agate/SwitchItem
  * @exports SwitchItem
  * @exports SwitchItemBase

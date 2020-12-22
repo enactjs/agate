@@ -530,10 +530,10 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	 * Usage:
 	 * ```
 	 * <VirtualGridList
-	 * 	itemSize={{
-	 * 		minWidth: ri.scale(360),
-	 * 		minHeight: ri.scale(540)
-	 * 	}}
+	 *   itemSize={{
+	 *     minWidth: ri.scale(360),
+	 *     minHeight: ri.scale(540)
+	 *   }}
 	 * />
 	 * ```
 	 *

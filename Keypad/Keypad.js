@@ -110,6 +110,7 @@ const Key = kind({
 					{...rest}
 					css={css}
 					icon={children}
+					minWidth={false}
 					role={null}
 					size="large"
 				>
@@ -301,7 +302,9 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 			}
 
 			if (keypadInput !== newKeypadInput) {
-				this.props.onChange({value: newKeypadInput});
+				forward('onChange', {
+					value: newKeypadInput
+				}, this.props);
 			}
 
 			this.setState({
@@ -339,6 +342,7 @@ const KeypadDecorator = compose(
  * @extends agate/Keypad.KeypadBase
  * @mixes agate/Keypad.KeypadDecorator
  * @public
+ * @ui
  */
 const Keypad = KeypadDecorator(KeypadBase);
 

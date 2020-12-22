@@ -2,7 +2,9 @@
  * Agate styled arc picker components and behaviors.
  *
  * @example
- * <ArcPicker backgroundColor="#444444" endAngle={200} foregroundColor="#eeeeee" selectionType="single" startAngle={0} />
+ * <ArcPicker backgroundColor="#cccccc">
+ * 	{[1,2,3,4,5]}
+ * </ArcPicker>
  *
  * @module agate/ArcPicker
  * @exports ArcPicker
@@ -41,11 +43,11 @@ const ArcPickerBase = kind({
 		/**
 		 * The value options of ArcPicker.
 		 *
-		 * @type {Node}
+		 * @type {Array}
 		 * @required
 		 * @public
 		 */
-		children: PropTypes.node.isRequired,
+		children: PropTypes.array.isRequired,
 
 		/**
 		 * The color of the unselected arcs.
@@ -157,6 +159,7 @@ const ArcPickerBase = kind({
 		arcSegments: (props) => {
 			const {backgroundColor, children, endAngle, foregroundColor, onClick, radius, selectionType, startAngle, strokeWidth, value} = props;
 
+			if (!Array.isArray(children)) return [];
 			return (
 				children.map((option, index) => {
 					// Calc `arcStartAngle`, `arcEndAngle` based on `startAngle` and `endAngle` for every <Arc />
@@ -229,6 +232,7 @@ const ArcPickerDecorator = compose(
  * Usage:
  * ```
  * <ArcPicker backgroundColor="#444444" endAngle={200} foregroundColor="#eeeeee" selectionType="single" startAngle={0} />
+ * ```
  *
  * @class ArcPicker
  * @memberof agate/ArcPicker

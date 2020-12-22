@@ -98,6 +98,7 @@ const MediaControls = kind({
 		 * `true` when the media is paused.
 		 *
 		 * @type {Boolean}
+		 * @default true
 		 * @public
 		 */
 		paused: PropTypes.bool,
@@ -230,6 +231,7 @@ const MediaControls = kind({
 					backgroundOpacity="transparent"
 					className={css.playPauseButton}
 					css={css}
+					minWidth={false}
 					onClick={paused ? onPlay : onPause}
 					size="large"
 				>

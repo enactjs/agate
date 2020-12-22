@@ -269,7 +269,7 @@ const MediaPlayerBase = kind({
 					onEnded={onEnded}
 					onUpdate={onUpdate}
 					ref={mediaRef}
-					source={playlist[sourceIndex]}
+					source={playlist ? playlist[sourceIndex] : null}
 				/>
 				<MediaSlider
 					onChange={onChange}
@@ -462,7 +462,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		 * @private
 		 */
 		send = (action, props) => {
-			this.media[action](props);
+			return this.media[action](props);
 		};
 
 		handleEvent = () => {
@@ -489,7 +489,15 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 		 * @public
 		 */
 		play = () => {
-			this.send('play');
+			const playPromise = this.send('play');
+
+			if (playPromise) {
+				playPromise.then(() => {
+					// Automatic playback started!
+				}).catch(() => {
+					// Auto-play was prevented
+				});
+			}
 		};
 
 		/**
@@ -719,7 +727,7 @@ const MediaPlayerDecorator = compose(
  * Usage:
  * ```
  * <MediaPlayer>
- *     <source src='' type='' />
+ *   <source src={['https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3']} type='audio/mp3' />
  * </MediaPlayer>
  * ```
  *
