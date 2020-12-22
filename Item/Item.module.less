@@ -80,8 +80,25 @@
 			}
 		}
 
+		.slotAfter,
+		.slotBefore {
+			line-height: 0;
+
+			> * {
+				vertical-align: middle;
+
+				&:first-child {
+					margin-inline-start: 0;
+				}
+				&:last-child {
+					margin-inline-end: 0;
+				}
+			}
+		}
+
 		.slotAfter {
 			font-size: @agate-item-sub-text-size;
+			padding-left: 9px; // @agate-item-slotafter-padding-left -- poate este nevoie doar in gallium
 		}
 
 		&.selected {
@@ -100,6 +117,35 @@
 			.content {
 				width: unset;
 			}
+		}
+
+		&.centered {
+			.itemContent,
+			.content {
+				max-width: fit-content;
+			}
+		}
+
+		&.large { /* Needed to prevent global class being added in the DOM */ }
+
+		&.small {
+			font-size: 40px; // @agate-item-small-font-size
+			line-height: 48px; // @agate-item-small-line-height
+
+			.itemContent {
+				&.hasLabel {
+					padding: 10px 0;
+				}
+			}
+
+			//.label {
+			//	line-height: 30px;
+			//}
+
+			//&.hasLabel {
+			//		line-height: 54px; // @agate-item-small-haslabel-line-height
+			//		height: 50px;
+			//}
 		}
 
 		.focus({

@@ -20,19 +20,27 @@ storiesOf('Agate', module)
 			const slotAfterIcon = select('slotAfter Icon', iconList, Config);
 			return (
 				<Item
+					centered={boolean('centered', Config)}
 					disabled={boolean('disabled', Config)}
 					inline={boolean('inline', Config)}
 					label={text('label', Config)}
 					labelPosition={select('labelPosition', ['above', 'after', 'before', 'below'], Config, 'below')}
 					selected={boolean('selected', Config)}
-				>
-					{slotBeforeIcon ? <slotBefore>
+					size={select('size', ['small', 'large'], Config)}
+					slotBefore={slotBeforeIcon ? <slotBefore>
 						<Icon>{slotBeforeIcon}</Icon>
 					</slotBefore> : null}
-					{text('children', Config, 'Hello Item')}
-					{slotAfterIcon ? <slotAfter>
+					slotAfter={slotAfterIcon ? <slotAfter>
 						<Icon>{slotAfterIcon}</Icon>
 					</slotAfter> : null}
+				>
+					{/*{slotBeforeIcon ? <slotBefore>*/}
+					{/*	<Icon>{slotBeforeIcon}</Icon>*/}
+					{/*</slotBefore> : null}*/}
+					{text('children', Config, 'Hello Item')}
+					{/*{slotAfterIcon ? <slotAfter>*/}
+					{/*	<Icon>{slotAfterIcon}</Icon>*/}
+					{/*</slotAfter> : null}*/}
 				</Item>
 			);
 		},

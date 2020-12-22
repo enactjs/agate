@@ -10,13 +10,14 @@
  * @exports ItemDecorator
  */
 
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
-import ForwardRef from '@enact/ui/ForwardRef';
+// import ForwardRef from '@enact/ui/ForwardRef';
 import Slottable from '@enact/ui/Slottable';
 import {ItemBase as UiItemBase, ItemDecorator as UiItemDecorator} from '@enact/ui/Item';
 import {Cell, Layout, Row} from '@enact/ui/Layout';
-import {Marquee, MarqueeController} from '@enact/ui/Marquee';
+// import {Marquee, MarqueeController} from '@enact/ui/Marquee';
 import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
 import PropTypes from 'prop-types';
@@ -24,6 +25,7 @@ import React from 'react';
 
 import componentCss from './Item.module.less';
 import Skinnable from '../Skinnable';
+import {Marquee, MarqueeController} from '../Marquee';
 
 const ItemContent = kind({
 	name: 'ItemContent',
@@ -53,31 +55,57 @@ const ItemContent = kind({
 			return (labelPosition === 'above' || labelPosition === 'below') ? 'vertical' : 'horizontal';
 		}
 	},
-	render: ({orientation, content, css, label, ...rest}) => {
+	// Render method from Sandstone
+	render: ({orientation, content, css, label, marqueeOn,  ...rest}) => {
 		delete rest.labelPosition;
 
-		// Due to flex-box sizing (used in Layout/Cell), in a vertical orientation with no height
-		// specified, all of the cells should be set to `shrink` so their height is summed to define
-		// the height of the entire Layout. Without this, a cell will collapse, causing unwanted overlap.
-		const contentElement = (
-			<Cell component={Marquee} className={css.content} shrink={(label != null && orientation === 'vertical')}>
-				{content}
-			</Cell>
-		);
-
-		if (label == null) return contentElement;
-
-		return (
-			<Cell {...rest}>
-				<Layout orientation={orientation}>
-					{contentElement}
-					<Cell component={Marquee} className={css.label} shrink>
-						{label}
-					</Cell>
-				</Layout>
-			</Cell>
-		);
+		if (!label) {
+			return (
+				<Cell {...rest} component={Marquee} className={css.content} marqueeOn={marqueeOn}>
+					{content}
+				</Cell>
+			);
+		} else {
+			return (
+				<Cell {...rest}>
+					<Layout orientation={orientation}>
+						<Cell component={Marquee} className={css.content} marqueeOn={marqueeOn} shrink>
+							{content}
+						</Cell>
+						<Cell component={Marquee} className={css.label} marqueeOn={marqueeOn} shrink>
+							{label}
+						</Cell>
+					</Layout>
+				</Cell>
+			);
+		}
 	}
+
+	// render: ({orientation, content, css, label, ...rest}) => {
+	// 	delete rest.labelPosition;
+	//
+	// 	// Due to flex-box sizing (used in Layout/Cell), in a vertical orientation with no height
+	// 	// specified, all of the cells should be set to `shrink` so their height is summed to define
+	// 	// the height of the entire Layout. Without this, a cell will collapse, causing unwanted overlap.
+	// 	const contentElement = (
+	// 		<Cell component={Marquee} className={css.content} shrink={(label != null && orientation === 'vertical')}>
+	// 			{content}
+	// 		</Cell>
+	// 	);
+	//
+	// 	if (label == null) return contentElement;
+	//
+	// 	return (
+	// 		<Cell {...rest}>
+	// 			<Layout orientation={orientation}>
+	// 				{contentElement}
+	// 				<Cell component={Marquee} className={css.label} shrink>
+	// 					{label}
+	// 				</Cell>
+	// 			</Layout>
+	// 		</Cell>
+	// 	);
+	// }
 });
 
 /**
@@ -85,30 +113,64 @@ const ItemContent = kind({
  *
  * @class ItemBase
  * @memberof agate/Item
+ * @extends ui/Item.ItemBase
  * @ui
  * @public
  */
 const ItemBase = kind({
 	name: 'Item',
+
 	propTypes: /** @lends agate/Item.ItemBase.prototype */ {
-		componentRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+		// componentRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+		componentRef: EnactPropTypes.ref, // sandstone
 		css: PropTypes.object,
 		label: PropTypes.node,
 		labelPosition: PropTypes.oneOf(['above', 'after', 'before', 'below']),
 		selected: PropTypes.bool,
 		slotAfter: PropTypes.node,
-		slotBefore: PropTypes.node
+		slotBefore: PropTypes.node,
+		// Extra props from Sandstone
+		centered: PropTypes.bool,
+		disabled:PropTypes.bool,
+		inline: PropTypes.bool,
+		marqueeOn: PropTypes.oneOf(['focus', 'hover', 'render']),
+		size: PropTypes.oneOf(['large', 'small'])
 	},
+
+	//Extra default props from Sandstone
+	defaultProps: {
+		labelPosition: 'below',
+		size: 'large'
+	},
+
 	styles: {
 		css: componentCss,
 		publicClassNames: ['item', 'label', 'slotAfter', 'slotBefore']
 	},
+
 	computed: {
-		className: ({selected, styler}) => styler.append({selected})
+		className: ({selected, centered, size, styler}) => styler.append({
+			selected,
+			centered,
+			small: size === 'small',
+			large: size === 'large'
+		}),
+		// Extra computed from Sandstone
+		label: ({label}) => (typeof label === 'number' ? label.toString() : label)
 	},
-	render: ({children, componentRef, css, label, labelPosition, slotAfter, slotBefore, ...rest}) => {
+
+	// Extra props added after slotBefore
+	render: ({children, componentRef, css, label, labelPosition, slotAfter, slotBefore, centered, inline, marqueeOn, size, ...rest}) => {
+		// Return method from Sandstone
 		return (
-			<UiItemBase {...rest} css={css} align="center" component={Row} ref={componentRef}>
+			<UiItemBase
+				component={Row}
+				align={centered ? 'center center' : 'center'}
+				ref={componentRef}
+				{...rest}
+				inline={inline}
+				css={css}
+			>
 				{slotBefore ? (
 					<Cell className={css.slotBefore} shrink>
 						{slotBefore}
@@ -119,6 +181,8 @@ const ItemBase = kind({
 					css={css}
 					label={label}
 					labelPosition={labelPosition}
+					marqueeOn={marqueeOn}
+					shrink={inline}
 				/>
 				{slotAfter ? (
 					<Cell className={css.slotAfter} shrink>
@@ -127,6 +191,27 @@ const ItemBase = kind({
 				) : null}
 			</UiItemBase>
 		);
+
+		// return (
+		// 	<UiItemBase {...rest} css={css} align="center" component={Row} ref={componentRef}>
+		// 		{slotBefore ? (
+		// 			<Cell className={css.slotBefore} shrink>
+		// 				{slotBefore}
+		// 			</Cell>
+		// 		) : null}
+		// 		<ItemContent
+		// 			content={children}
+		// 			css={css}
+		// 			label={label}
+		// 			labelPosition={labelPosition}
+		// 		/>
+		// 		{slotAfter ? (
+		// 			<Cell className={css.slotAfter} shrink>
+		// 				{slotAfter}
+		// 			</Cell>
+		// 		) : null}
+		// 	</UiItemBase>
+		// );
 	}
 });
 
@@ -143,12 +228,12 @@ const ItemBase = kind({
  * @public
  */
 const ItemDecorator = compose(
-	ForwardRef({prop: 'componentRef'}),
+	// ForwardRef({prop: 'componentRef'}),
 	Slottable({slots: ['label', 'slotAfter', 'slotBefore']}),
-	Pure,
+	// Pure,
 	UiItemDecorator,
 	Spottable,
-	MarqueeController({marqueeOnFocus: true}),
+	MarqueeController({marqueeOnFocus: true, invalidateProps: ['inline']}),
 	Skinnable
 );
 
@@ -162,7 +247,7 @@ const ItemDecorator = compose(
  * @ui
  * @public
  */
-const Item = ItemDecorator(ItemBase);
+const Item = Pure(ItemDecorator(ItemBase));
 
 export default Item;
 export {
