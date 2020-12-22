@@ -1,9 +1,10 @@
 import React from 'react';
 import {mount} from 'enzyme';
 
+import Button from '../../Button';
 import Header from '../../Header';
 import Panel from '../Panel';
-import Panels from '../Panels';
+import Panels, {PanelsBase} from '../Panels';
 
 describe('Panels Specs', () => {
 	test(
@@ -127,5 +128,112 @@ describe('Panels Specs', () => {
 				expect(actual).toBe(expected);
 			}
 		);
+
+		test(
+			'should insert additional Panels-level buttons into the global-navigation area when declaring controls prop',
+			() => {
+				const panels = mount(
+					<Panels
+						controls={<Button id="controlButtonTest">Control button</Button>}
+						index={0}
+					>
+						<Panel>
+							<Header title="Panel Title" />
+						</Panel>
+					</Panels>
+				);
+
+				const controlButton = panels.find('Controls').find('Button#controlButtonTest');
+
+				const expected = 1;
+				const actual = controlButton.length;
+
+				expect(actual).toBe(expected);
+			}
+		);
 	});
+
+
+	describe('childProps', () => {
+		test('should not add aria-owns when noCloseButton is true and no controls', () => {
+			const id = 'id';
+			const childProps = {};
+			const props = {
+				childProps,
+				noCloseButton: true,
+				id
+			};
+
+			const expected = childProps;
+			const actual = PanelsBase.computed.childProps(props);
+
+			expect(actual).toBe(expected);
+		});
+
+		test('should not add aria-owns when id is not set', () => {
+			const childProps = {};
+			const props = {
+				childProps,
+				noCloseButton: false
+			};
+
+			const expected = childProps;
+			const actual = PanelsBase.computed.childProps(props);
+
+			expect(actual).toBe(expected);
+		});
+
+		test('should add aria-owns', () => {
+			const id = 'id';
+			const childProps = {};
+			const props = {
+				childProps,
+				noCloseButton: false,
+				id
+			};
+
+			const expected = `${id}-controls`;
+			const actual = PanelsBase.computed.childProps(props)['aria-owns'];
+
+			expect(actual).toBe(expected);
+		});
+
+		test('should append aria-owns', () => {
+			const id = 'id';
+			const ariaOwns = ':allthethings:';
+			const childProps = {
+				'aria-owns': ariaOwns
+			};
+			const props = {
+				childProps,
+				noCloseButton: false,
+				id
+			};
+
+			const expected = `${ariaOwns} ${id}-controls`;
+			const actual = PanelsBase.computed.childProps(props)['aria-owns'];
+
+			expect(actual).toBe(expected);
+		});
+
+		test('should append aria-owns with noCloseButton and controls', () => {
+			const id = 'id';
+			const ariaOwns = ':allthethings:';
+			const childProps = {
+				'aria-owns': ariaOwns
+			};
+			const props = {
+				childProps,
+				controls: <div>Hello</div>,
+				noCloseButton: true,
+				id
+			};
+
+			const expected = `${ariaOwns} ${id}-controls`;
+			const actual = PanelsBase.computed.childProps(props)['aria-owns'];
+
+			expect(actual).toBe(expected);
+		});
+	});
+
 });
