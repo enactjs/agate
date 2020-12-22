@@ -1,7 +1,8 @@
 import React from 'react';
-import {mount} from 'enzyme';
+import {mount, shallow} from 'enzyme';
 
 import {Popup, PopupBase} from '../Popup';
+import css from '../Popup.module.less';
 
 describe('Popup specs', () => {
 	test('should be rendered opened if open is set to true', () => {
@@ -61,5 +62,60 @@ describe('Popup specs', () => {
 		const actual = popup.prop('position');
 
 		expect(actual).toBe(expected);
+	});
+
+	test('should have `top` class when position prop is set to `top`', () => {
+		const popup = shallow(
+			<PopupBase position="top" />
+		);
+
+		const expected = 'top';
+		const actual = popup.find(`.${css.popup}`).prop('className');
+
+		expect(actual).toContain(expected);
+	});
+
+	test('should have `bottom` class when position prop is set to `bottom`', () => {
+		const popup = shallow(
+			<PopupBase position="bottom" />
+		);
+
+		const expected = 'bottom';
+		const actual = popup.find(`.${css.popup}`).prop('className');
+
+		expect(actual).toContain(expected);
+	});
+
+	test('should have `left` class when position prop is set to `left`', () => {
+		const popup = shallow(
+			<PopupBase position="left" />
+		);
+
+		const expected = 'left';
+		const actual = popup.find(`.${css.popup}`).prop('className');
+
+		expect(actual).toContain(expected);
+	});
+
+	test('should have `right` class when position prop is set to `right`', () => {
+		const popup = shallow(
+			<PopupBase position="right" />
+		);
+
+		const expected = 'right';
+		const actual = popup.find(`.${css.popup}`).prop('className');
+
+		expect(actual).toContain(expected);
+	});
+
+	test('should have `fullscreen` class when position prop is set to `fullscreen`', () => {
+		const popup = shallow(
+			<PopupBase position="fullscreen" />
+		);
+
+		const expected = 'fullscreen';
+		const actual = popup.find(`.${css.popup}`).prop('className');
+
+		expect(actual).toContain(expected);
 	});
 });

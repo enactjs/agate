@@ -33,6 +33,15 @@ const TransitionContainer = SpotlightContainerDecorator(
 	Transition
 );
 
+const transitionDirection = {
+	bottom: 'down',
+	center: 'down',
+	fullscreen: 'down',
+	left: 'left',
+	right: 'right',
+	top: 'up'
+};
+
 /**
  * The base popup component.
  *
@@ -72,7 +81,7 @@ const PopupBase = kind({
 		 * @default 'center'
 		 * @public
 		 */
-		position: PropTypes.oneOf(['center', 'top']),
+		position: PropTypes.oneOf(['bottom', 'center', 'fullscreen', 'left', 'right', 'top']),
 
 		skin: PropTypes.string,
 		title: PropTypes.string
@@ -86,20 +95,21 @@ const PopupBase = kind({
 	},
 	styles: {
 		css: componentCss,
-		className: 'popup'
+		className: 'popup',
+		publicClassNames: ['popup', 'body', 'popupTransitionContainer', 'top', 'right', 'bottom', 'left']
 	},
 	computed: {
-		className: ({centered, closeButton, position, styler, title}) => styler.append({top: position === 'top', withCloseButton: closeButton, withTitle: title, centered}),
+		className: ({centered, closeButton, position, styler, title}) => styler.append(position, {withCloseButton: closeButton, withTitle: title, centered}),
 		transitionType : ({position}) => position === 'center' ? 'fade' : 'slide',
-		direction : ({position}) => position === 'center' ? 'down' : 'up'
+		direction : ({position}) => transitionDirection[position]
 	},
-	render: ({buttons, children, closeButton, css, direction, noAnimation, onClose, onHide, open, skin, title, transitionType, ...rest}) => {
+	render: ({buttons, children, closeButton, css, direction, noAnimation, onClose, onHide, open, position, skin, title, transitionType, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
 		delete rest.centered;
 
 		return (
 			<TransitionContainer
-				noAnimation={noAnimation}
+				noAnimation={position === 'fullscreen' ? true : noAnimation}
 				visible={open}
 				direction={direction}
 				duration="short"
