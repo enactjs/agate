@@ -2,6 +2,15 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Added
+
+- `agate/IncrementSlider` prop `tooltip`
+- `agate/ProgressBar` prop `highlighted`, `tooltip`
+- `agate/ProgressBarTooltip` component
+- `agate/Slider` prop `tooltip`
+
 ## [1.1.0] - 2020-12-22
 
 ### Added
