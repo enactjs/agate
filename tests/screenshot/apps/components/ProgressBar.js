@@ -1,12 +1,14 @@
-import Heading from '../../../../Heading';
-import ProgressBar, {ProgressBarTooltip} from '../../../../ProgressBar';
+import ProgressBar from '../../../../ProgressBar';
 import React from 'react';
 
 const ProgressBarTests = [
 	<ProgressBar />,
 	<ProgressBar orientation="vertical" />,
 	<ProgressBar orientation="radial" />,
+	<ProgressBar progress={0.75} highlighted />,
 	<ProgressBar progress={0.75} size="small" />,
+	<ProgressBar progress={0.75} disabled />,
+	<ProgressBar progress={0.75} progressAnchor={0.5} showAnchor />
 ];
 
 export default ProgressBarTests;
