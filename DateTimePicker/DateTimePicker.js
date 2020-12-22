@@ -125,10 +125,10 @@ const DateTimePickerBase = kind({
 		/**
 		 * The value of the DateTimePicker.
 		 *
-		 * @type {String}
+		 * @type {Date}
 		 * @public
 		 */
-		value: PropTypes.any,
+		value: PropTypes.instanceOf(Date),
 
 		/**
 		 * The "aria-label" for the year picker.
