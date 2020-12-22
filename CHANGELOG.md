@@ -2,6 +2,13 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Fixed
+
+- `agate/DatePicker` transition direction for day when month is changed
+- `agate/TimePicker` transition direction for meridiem when hour is changed
+
 ## [1.1.0] - 2020-12-22
 
 ### Added
@@ -20,7 +27,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ArcPicker` to display correct `font-size` and `font-weight`
 - `agate/Button` to marquee when focused
 - `agate/Button` to show a tooltip when hovered
-- `agate/DatePicker` transition direction for day when month is changed
 - `agate/DateTimePicker` returned value by onChange event
 - `agate/Dropdown` to support closing dropdown with back key
 - `agate/FanSpeedControl` to center text when there is no icon
@@ -40,7 +46,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Spinner` to support `transparent` prop properly
 - `agate/SwitchItem` icon position for all skins in RTL locale and Electro/Titanium in all locales
 - `agate/TemperatureControl` to not be draggable when it's disabled
-- `agate/TimePicker` transition direction for meridiem when hour is changed
 
 ## [1.0.0] - 2020-10-14
 
