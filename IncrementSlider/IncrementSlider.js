@@ -69,7 +69,6 @@ const IncrementSliderBase = kind({
 		 * input keys.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		activateOnFocus: PropTypes.bool,
