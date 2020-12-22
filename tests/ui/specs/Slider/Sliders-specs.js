@@ -11,7 +11,7 @@ describe('Slider', function () {
 			const slider = Page.components.sliderDefault;
 
 			describe('5-way', function () {
-				it('should increment the value of horizontal slider on key right when active', function () {
+				it('should increment the value of horizontal slider on arrow right key when active', function () {
 					expect(slider.self.isFocused()).to.be.true();
 					const originalValue = slider.knobPositionHorizontal;
 					Page.spotlightSelect();
@@ -21,7 +21,7 @@ describe('Slider', function () {
 					expect(newValue > originalValue).to.be.true();
 				});
 
-				it('should decrement the value of horizontal slider on key left when active', function () {
+				it('should decrement the value of horizontal slider on arrow left key when active', function () {
 					expect(slider.self.isFocused()).to.be.true();
 					Page.spotlightSelect();
 					Page.spotlightRight();
@@ -85,7 +85,7 @@ describe('Slider', function () {
 			const slider = Page.components.sliderVertical;
 
 			describe('5-way', function () {
-				it('should increment the value of horizontal slider on key down when active', function () {
+				it('should increment the value of vertical slider on arrow up key when active', function () {
 					slider.focus();
 					const originalValue = slider.knobPositionVertical;
 					Page.spotlightSelect();
@@ -96,7 +96,7 @@ describe('Slider', function () {
 					expect(newValue > originalValue).to.be.true();
 				});
 
-				it('should decrement the value of horizontal slider on key up when active', function () {
+				it('should decrement the value of vertical slider on arrow down key when active', function () {
 					slider.focus();
 					Page.spotlightSelect();
 					Page.spotlightUp();
@@ -124,7 +124,7 @@ describe('Slider', function () {
 			const slider = Page.components.sliderDisabled;
 
 			describe('5-way', function () {
-				it('should not increment the value of horizontal slider on key right when active', function () {
+				it('should not increment the value of horizontal slider on arrow right key when active', function () {
 					slider.focus();
 					const originalValue = slider.knobPositionHorizontal;
 					Page.spotlightSelect();
@@ -134,7 +134,7 @@ describe('Slider', function () {
 					expect(newValue === originalValue).to.be.true();
 				});
 
-				it('should not decrement the value of horizontal slider on key left when active', function () {
+				it('should not decrement the value of horizontal slider on arrow left key when active', function () {
 					slider.focus();
 					Page.spotlightSelect();
 					Page.spotlightRight();
@@ -163,7 +163,7 @@ describe('Slider', function () {
 			const slider = Page.components.sliderVerticalDisabled;
 
 			describe('5-way', function () {
-				it('should not increment the value of horizontal slider on key down when active', function () {
+				it('should not increment the value of horizontal slider on arrow down key when active', function () {
 					slider.focus();
 					const originalValue = slider.knobPositionVertical;
 					Page.spotlightSelect();
@@ -174,7 +174,7 @@ describe('Slider', function () {
 					expect(newValue === originalValue).to.be.true();
 				});
 
-				it('should not decrement the value of horizontal slider on key up when active', function () {
+				it('should not decrement the value of horizontal slider on arrow up key when active', function () {
 					slider.focus();
 					Page.spotlightSelect();
 					Page.spotlightUp();
