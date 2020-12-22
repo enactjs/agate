@@ -27,6 +27,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Input` run time error when using `dismissOnEnter`
 - `agate/Keypad` to not show console error in sampler
 - `agate/Keypad`, `agate/MediaPlayer`, and `agate/ToggleButton` to have buttons with proper width
+- `agate/LabeledIconButton` button shape to circular
 - `agate/MediaPlayer` play function on handleNext and handlePrevious to handle events asynchronously
 - `agate/Panels` to show close button properly for night mode
 - `agate/Picker` picker item width in horizontal for silicon
