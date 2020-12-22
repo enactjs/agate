@@ -269,7 +269,7 @@ const MediaPlayerBase = kind({
 					onEnded={onEnded}
 					onUpdate={onUpdate}
 					ref={mediaRef}
-					source={playlist[sourceIndex]}
+					source={playlist ? playlist[sourceIndex] : null}
 				/>
 				<MediaSlider
 					onChange={onChange}

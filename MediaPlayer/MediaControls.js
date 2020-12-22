@@ -231,6 +231,7 @@ const MediaControls = kind({
 					backgroundOpacity="transparent"
 					className={css.playPauseButton}
 					css={css}
+					minWidth={false}
 					onClick={paused ? onPlay : onPause}
 					size="large"
 				>
