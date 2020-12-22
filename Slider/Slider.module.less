@@ -69,6 +69,47 @@
 			}
 		}
 
+	  	&.showAnchor {
+		  .knob {
+			z-index: 1;
+		  }
+
+		  .progressBar {
+			.bar {
+			  &::after {
+				content: "";
+				background-color: @agate-slider-fill-bg-color;
+				position: absolute;
+				transform: translate(-50%, -50%);
+			  }
+			}
+
+
+			&.horizontal {
+			  .bar {
+				&::after {
+				  width: @agate-progressbar-anchor-width;
+				  height: @agate-progressbar-anchor-height;
+				  top: 50%;
+				  left: ~"calc(var(--ui-progressbar-proportion-anchor) * 100%)";
+				}
+			  }
+			}
+
+			&.vertical {
+			  .bar {
+				&::after {
+				  width: @agate-progressbar-anchor-height;
+				  height: @agate-progressbar-anchor-width;
+				  bottom: ~"calc(var(--ui-progressbar-proportion-anchor) * 100% - " (@agate-slider-horizontal-anchorpoint-width / 2) ~")";
+				  left: 50%;
+				  transform: translate(-50%, 50%);
+				}
+			  }
+			}
+		  }
+	  	}
+
 		&.noFill {
 			.fill {
 				background-color: transparent;
