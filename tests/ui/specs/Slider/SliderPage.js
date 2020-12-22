@@ -19,6 +19,10 @@ class SliderInterface {
 		return $(this.selector + ' .Slider_Slider_knob');
 	}
 
+	get tooltip () {
+		return $(this.selector + ' .ProgressBar_ProgressBarTooltip_tooltip');
+	}
+
 	get knobPositionHorizontal () {
 		return parseInt(this.knob.getCSSProperty('left').value);
 	}
@@ -39,10 +43,11 @@ class SliderPage extends Page {
 		const sliderDefault = new SliderInterface('sliderDefault');
 		const sliderDisabled = new SliderInterface('sliderDisabled');
 		const sliderCustomProgressAnchor = new SliderInterface('sliderCustomProgressAnchor');
+		const sliderWithTooltip = new SliderInterface('sliderWithTooltip');
 		const sliderVertical = new SliderInterface('sliderVertical');
 		const sliderVerticalDisabled = new SliderInterface('sliderVerticalDisabled');
 		const sliderActivateOnFocus = new SliderInterface('sliderActivateOnFocus');
-		this.components = {sliderDefault, sliderDisabled, sliderCustomProgressAnchor, sliderVertical, sliderVerticalDisabled, sliderActivateOnFocus};
+		this.components = {sliderDefault, sliderDisabled, sliderCustomProgressAnchor, sliderVertical, sliderWithTooltip, sliderVerticalDisabled, sliderActivateOnFocus};
 	}
 
 	open (urlExtra) {
