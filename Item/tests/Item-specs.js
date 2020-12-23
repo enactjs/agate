@@ -37,7 +37,7 @@ describe('Item Specs', () => {
 		);
 
 		const expected = '0';
-		const actual =item.find(`.${css.label}`).first().text();
+		const actual = item.find(`.${css.label}`).first().text();
 
 		expect(actual).toBe(expected);
 	});
@@ -51,7 +51,7 @@ describe('Item Specs', () => {
 			</Item>
 		);
 
-		const actual =item.find(`.${css.content}`).first().text();
+		const actual = item.find(`.${css.content}`).first().text();
 
 		expect(actual).toBe(expected);
 	});

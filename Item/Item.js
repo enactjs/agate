@@ -13,36 +13,81 @@
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
-// import ForwardRef from '@enact/ui/ForwardRef';
-import Slottable from '@enact/ui/Slottable';
+import Pure from '@enact/ui/internal/Pure';
 import {ItemBase as UiItemBase, ItemDecorator as UiItemDecorator} from '@enact/ui/Item';
 import {Cell, Layout, Row} from '@enact/ui/Layout';
-// import {Marquee, MarqueeController} from '@enact/ui/Marquee';
-import Pure from '@enact/ui/internal/Pure';
-import compose from 'ramda/src/compose';
+import Slottable from '@enact/ui/Slottable';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
-import componentCss from './Item.module.less';
-import Skinnable from '../Skinnable';
 import {Marquee, MarqueeController} from '../Marquee';
+import Skinnable from '../Skinnable';
+
+import componentCss from './Item.module.less';
 
 const ItemContent = kind({
 	name: 'ItemContent',
-	propTypes: {
+
+	propTypes:  /** @lends agate/Item.ItemContent.prototype */ {
+		/**
+		 * Text displayed when passed as children.
+		 *
+		 * @type {String | Number}
+		 * @public
+		 */
 		content: PropTypes.any,
+
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * `itemContent` - The root class name
+		 * `content` - The content class name
+		 * `label` - The label class name
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * Text displayed when passed in `label` prop.
+		 *
+		 * @type {String | Number}
+		 * @public
+		 */
 		label: PropTypes.any,
-		labelPosition: PropTypes.any
+
+		/**
+		 * Repositioning of label.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		labelPosition: PropTypes.oneOf(['above', 'after', 'before', 'below']),
+
+		/**
+		 * Determines what triggers the marquee to start its animation.
+		 *
+		 * @type {('focus'|'hover'|'render')}
+		 * @public
+		 */
+		marqueeOn: PropTypes.oneOf(['focus', 'hover', 'render'])
 	},
+
 	defaultProps: {
 		labelPosition: 'below'
 	},
+
 	styles: {
 		className: 'itemContent',
 		css: componentCss,
 		publicClassNames: ['label']
 	},
+
 	computed: {
 		className: ({label, labelPosition, styler}) => styler.append({
 			hasLabel: Boolean(label),
@@ -51,12 +96,13 @@ const ItemContent = kind({
 			labelBefore: labelPosition === 'before',
 			labelBelow: labelPosition === 'below'
 		}),
+
 		orientation: ({labelPosition}) => {
 			return (labelPosition === 'above' || labelPosition === 'below') ? 'vertical' : 'horizontal';
 		}
 	},
-	// Render method from Sandstone
-	render: ({orientation, content, css, label, marqueeOn,  ...rest}) => {
+
+	render: ({content, css, marqueeOn, label, orientation, ...rest}) => {
 		delete rest.labelPosition;
 
 		if (!label) {
@@ -80,32 +126,6 @@ const ItemContent = kind({
 			);
 		}
 	}
-
-	// render: ({orientation, content, css, label, ...rest}) => {
-	// 	delete rest.labelPosition;
-	//
-	// 	// Due to flex-box sizing (used in Layout/Cell), in a vertical orientation with no height
-	// 	// specified, all of the cells should be set to `shrink` so their height is summed to define
-	// 	// the height of the entire Layout. Without this, a cell will collapse, causing unwanted overlap.
-	// 	const contentElement = (
-	// 		<Cell component={Marquee} className={css.content} shrink={(label != null && orientation === 'vertical')}>
-	// 			{content}
-	// 		</Cell>
-	// 	);
-	//
-	// 	if (label == null) return contentElement;
-	//
-	// 	return (
-	// 		<Cell {...rest}>
-	// 			<Layout orientation={orientation}>
-	// 				{contentElement}
-	// 				<Cell component={Marquee} className={css.label} shrink>
-	// 					{label}
-	// 				</Cell>
-	// 			</Layout>
-	// 		</Cell>
-	// 	);
-	// }
 });
 
 /**
@@ -121,23 +141,120 @@ const ItemBase = kind({
 	name: 'Item',
 
 	propTypes: /** @lends agate/Item.ItemBase.prototype */ {
-		// componentRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-		componentRef: EnactPropTypes.ref, // sandstone
-		css: PropTypes.object,
-		label: PropTypes.node,
-		labelPosition: PropTypes.oneOf(['above', 'after', 'before', 'below']),
-		selected: PropTypes.bool,
-		slotAfter: PropTypes.node,
-		slotBefore: PropTypes.node,
-		// Extra props from Sandstone
+		/**
+		 * Centers the slots and content.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
 		centered: PropTypes.bool,
+
+		/**
+		 * Called with a reference to the root component.
+		 *
+		 * @type {Object|Function}
+		 * @public
+		 */
+		componentRef: EnactPropTypes.ref,
+
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * `item` - The root class name
+		 * `slotBefore` - The slot (container) preceding the text of this component
+		 * `slotAfter` - The slot (container) following the text of this component
+		 * `selected` - Applied to a `selected` button
+		 *
+		 * @type {Object}
+		 * @public
+		 */
+		css: PropTypes.object,
+
+		/**
+		 * Applies a disabled style and the control becomes non-interactive.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
 		disabled:PropTypes.bool,
+
+		/**
+		 * Applies inline styling to the item.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
 		inline: PropTypes.bool,
+
+		/**
+		 * The label to be displayed along with the text.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
+		label: PropTypes.node,
+
+		/**
+		 * The position of the label relative to the primary content, `children`.
+		 *
+		 * @type {('above'|'after'|'before'|'below')}
+		 * @public
+		 */
+		labelPosition: PropTypes.oneOf(['above', 'after', 'before', 'below']),
+
+		/**
+		 * Determines what triggers the marquee to start its animation.
+		 *
+		 * @type {('focus'|'hover'|'render')}
+		 * @public
+		 */
 		marqueeOn: PropTypes.oneOf(['focus', 'hover', 'render']),
-		size: PropTypes.oneOf(['large', 'small'])
+
+		/**
+		 * Applies a selected style to the component.
+		 *
+		 * @type {Boolean}
+		 * @private
+		 */
+		selected: PropTypes.bool,
+
+		/**
+		 * The size of the item.
+		 *
+		 * @type {('large'|'small')}
+		 * @default 'large'
+		 * @private
+		 */
+		size: PropTypes.oneOf(['small', 'large']),
+
+		/**
+		 * Nodes to be inserted after `children`.
+		 *
+		 * For LTR locales, the nodes are inserted to the right of the primary content. For RTL
+		 * locales, the nodes are inserted to the left. If nothing is specified, nothing, not even
+		 * an empty container, is rendered in this place.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
+		slotAfter: PropTypes.node,
+
+		/**
+		 * Nodes to be inserted before `children` and `label`.
+		 *
+		 * For LTR locales, the nodes are inserted to the left of the primary content. For RTL
+		 * locales, the nodes are inserted to the right. If nothing is specified, nothing, not even
+		 * an empty container, is rendered in this place.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
+		slotBefore: PropTypes.node
 	},
 
-	//Extra default props from Sandstone
 	defaultProps: {
 		labelPosition: 'below',
 		size: 'large'
@@ -155,13 +272,10 @@ const ItemBase = kind({
 			small: size === 'small',
 			large: size === 'large'
 		}),
-		// Extra computed from Sandstone
 		label: ({label}) => (typeof label === 'number' ? label.toString() : label)
 	},
 
-	// Extra props added after slotBefore
-	render: ({children, componentRef, css, label, labelPosition, slotAfter, slotBefore, centered, inline, marqueeOn, size, ...rest}) => {
-		// Return method from Sandstone
+	render: ({centered, children, componentRef, css, inline, label, labelPosition, marqueeOn, slotAfter, slotBefore, ...rest}) => {
 		return (
 			<UiItemBase
 				component={Row}
@@ -191,54 +305,37 @@ const ItemBase = kind({
 				) : null}
 			</UiItemBase>
 		);
-
-		// return (
-		// 	<UiItemBase {...rest} css={css} align="center" component={Row} ref={componentRef}>
-		// 		{slotBefore ? (
-		// 			<Cell className={css.slotBefore} shrink>
-		// 				{slotBefore}
-		// 			</Cell>
-		// 		) : null}
-		// 		<ItemContent
-		// 			content={children}
-		// 			css={css}
-		// 			label={label}
-		// 			labelPosition={labelPosition}
-		// 		/>
-		// 		{slotAfter ? (
-		// 			<Cell className={css.slotAfter} shrink>
-		// 				{slotAfter}
-		// 			</Cell>
-		// 		) : null}
-		// 	</UiItemBase>
-		// );
 	}
 });
 
 /**
  * Agate specific behaviors to apply to [Item]{@link agate/Item.ItemBase}.
  *
+ * @class ItemDecorator
  * @hoc
  * @memberof agate/Item
- * @mixes ui/Slottable.Slottable
  * @mixes ui/Item.ItemDecorator
- * @mixes spotlight/Spottable.Spottable
- * @mixes ui/Marquee.MarqueeController
+ * @mixes agate/Marquee.MarqueeController
+ * @mixes ui/Slottable.Slottable
  * @mixes agate/Skinnable.Skinnable
+ * @mixes spotlight/Spottable.Spottable
  * @public
  */
 const ItemDecorator = compose(
-	// ForwardRef({prop: 'componentRef'}),
-	Slottable({slots: ['label', 'slotAfter', 'slotBefore']}),
-	// Pure,
-	UiItemDecorator,
-	Spottable,
 	MarqueeController({marqueeOnFocus: true, invalidateProps: ['inline']}),
-	Skinnable
+	UiItemDecorator,
+	Slottable({slots: ['label', 'slotAfter', 'slotBefore']}),
+	Skinnable,
+	Spottable
 );
 
 /**
  * An item component with Agate behaviors applied.
+ *
+ * Usage:
+ * ```
+ * <Item>Item Content</Item>
+ * ```
  *
  * @class Item
  * @memberof agate/Item

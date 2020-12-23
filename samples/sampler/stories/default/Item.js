@@ -4,20 +4,16 @@ import UiItem, {ItemBase as UiItemBase} from '@enact/ui/Item';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import Icon, {icons} from '@enact/agate/Icon';
+import Icon from '@enact/agate/Icon';
 import Item, {ItemBase} from '@enact/agate/Item';
 
 const Config = mergeComponentMetadata('Item', UiItemBase, UiItem, ItemBase, Item);
 Item.displayName = 'Item';
 
-const iconList = [null, ...Object.keys(icons)];
-
 storiesOf('Agate', module)
 	.add(
 		'Item',
 		() => {
-			const slotBeforeIcon = select('slotBefore Icon', iconList, Config);
-			const slotAfterIcon = select('slotAfter Icon', iconList, Config);
 			return (
 				<Item
 					centered={boolean('centered', Config)}
@@ -27,20 +23,10 @@ storiesOf('Agate', module)
 					labelPosition={select('labelPosition', ['above', 'after', 'before', 'below'], Config, 'below')}
 					selected={boolean('selected', Config)}
 					size={select('size', ['small', 'large'], Config)}
-					slotBefore={slotBeforeIcon ? <slotBefore>
-						<Icon>{slotBeforeIcon}</Icon>
-					</slotBefore> : null}
-					slotAfter={slotAfterIcon ? <slotAfter>
-						<Icon>{slotAfterIcon}</Icon>
-					</slotAfter> : null}
+					slotBefore={select('slotBefore', {'': '', '<Icon />' : 'icon'}, Config) ? <Icon size="small">speaker</Icon> : null}
+					slotAfter={select('slotAfter', {'': '', '<Icon />' : 'icon'}, Config) ? <Icon size="small">arrowlargeright</Icon> : null}
 				>
-					{/*{slotBeforeIcon ? <slotBefore>*/}
-					{/*	<Icon>{slotBeforeIcon}</Icon>*/}
-					{/*</slotBefore> : null}*/}
 					{text('children', Config, 'Hello Item')}
-					{/*{slotAfterIcon ? <slotAfter>*/}
-					{/*	<Icon>{slotAfterIcon}</Icon>*/}
-					{/*</slotAfter> : null}*/}
 				</Item>
 			);
 		},
