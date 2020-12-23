@@ -151,6 +151,29 @@ describe('Panels Specs', () => {
 				expect(actual).toBe(expected);
 			}
 		);
+
+		test(
+			'should insert additional Panels-level buttons into the global-navigation area when declaring controls prop',
+			() => {
+				const panels = mount(
+					<Panels
+						controls={<Button id="controlButtonTest">Control button</Button>}
+						index={0}
+					>
+						<Panel>
+							<Header title="Panel Title" />
+						</Panel>
+					</Panels>
+				);
+
+				const controlButton = panels.find('Controls').find('Button#controlButtonTest');
+
+				const expected = 1;
+				const actual = controlButton.length;
+
+				expect(actual).toBe(expected);
+			}
+		);
 	});
 
 
