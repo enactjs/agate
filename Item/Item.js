@@ -268,8 +268,8 @@ const ItemBase = kind({
 	computed: {
 		className: ({selected, centered, size, styler}) => styler.append(
 			{
-			selected,
-			centered
+				selected,
+				centered
 			},
 			size
 		),
