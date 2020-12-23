@@ -5,7 +5,7 @@
  * @exports FullscreenPopup
  * @exports FullscreenPopupBase
  * @exports FullscreenPopupDecorator
- * @deprecated Will be removed in 2.0.0. Use {@link agate/Popup} with position="fullScreen" instead.
+ * @deprecated Will be removed in 2.0.0. Use {@link agate/Popup} with position="fullscreen" instead.
  */
 
 import kind from '@enact/core/kind';
