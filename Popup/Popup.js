@@ -67,11 +67,69 @@ const PopupBase = kind({
 		 */
 		centered: PropTypes.bool,
 
+		/**
+		 * When true, popup displays a close button.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		closeButton: PropTypes.bool,
+
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `popup` - The root class name
+		 * * `body` - Applied to the body content container
+		 * * `popupTransitionContainer` - Applied to the Popup's outermost container. Sizing can be
+		 *                                applied here for percentage-of-screen values.
+		 * * `top` - Applied when the `position` is 'top'
+		 * * `right` - Applied when the `position` is 'right'
+		 * * `bottom` - Applied when the `position` is 'bottom'
+		 * * `left` - Applied when the `position` is 'left'
+		 *
+		 * @type {Object}
+		 * @private
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * Disables transition animation.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		noAnimation: PropTypes.bool,
+
+		/**
+		 * Called when the popup is closed.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
 		onClose: PropTypes.func,
+
+		/**
+		 * Called after the popup's "hide" transition finishes.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
 		onHide: PropTypes.func,
+
+		/**
+		 * Controls the visibility of the Popup.
+		 *
+		 * By default, the Popup and its contents are not rendered until `open`.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		open: PropTypes.bool,
 
 		/**
@@ -83,7 +141,20 @@ const PopupBase = kind({
 		 */
 		position: PropTypes.oneOf(['bottom', 'center', 'fullscreen', 'left', 'right', 'top']),
 
+		/**
+		 * The current skin.
+		 *
+		 * @type {String}
+		 * @private
+		 */
 		skin: PropTypes.string,
+
+		/**
+		 * The primary text of the popup.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		title: PropTypes.string
 	},
 	defaultProps: {
