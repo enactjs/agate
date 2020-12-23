@@ -93,8 +93,24 @@
 			max-width: 100%;
 		}
 
+		&.bottom {
+			border-radius: @agate-popup-border-radius @agate-popup-border-radius @agate-popup-fullscreen-border-radius @agate-popup-fullscreen-border-radius;
+		}
+
+		&.left {
+			border-radius: @agate-popup-fullscreen-border-radius @agate-popup-border-radius @agate-popup-border-radius @agate-popup-fullscreen-border-radius;
+		}
+
 		&.fullscreen {
-			border-radius: 0;
+			border-radius: @agate-popup-fullscreen-border-radius;
+		}
+
+		&.right {
+			border-radius: @agate-popup-border-radius @agate-popup-fullscreen-border-radius @agate-popup-fullscreen-border-radius @agate-popup-border-radius;
+		}
+
+		&.top {
+			border-radius: @agate-popup-fullscreen-border-radius @agate-popup-fullscreen-border-radius @agate-popup-border-radius @agate-popup-border-radius;
 		}
 
 		.title {
