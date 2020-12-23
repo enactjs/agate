@@ -533,6 +533,7 @@ const PickerBase = kind({
 		const horizontal = orientation === 'horizontal';
 		const arranger = horizontal ? SlideLeftArranger : SlideTopArranger;
 
+		const color = ['yellow', 'blue', 'gray', 'gray', 'green']; // TEMP
 		delete rest['aria-valuetext'];
 		delete rest.accessibilityHint;
 		delete rest.decrementAriaLabel;
@@ -541,125 +542,48 @@ const PickerBase = kind({
 		delete rest.onChange;
 		delete rest.orientation;
 		delete rest.wrap;
-
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
-				{skin === 'silicon'  &&
-					<PickerButtonItem
-						aria-controls={valueId}
-						aria-disabled={isSecond}
-						aria-label={decrementAriaLabel}
-						className={css.secondaryItemDecrement}
-						disabled={disabled || isSecond}
-						onClick={secondaryDecrementValue() === '' ? () => {} : () => {
-							handleDecrement(); setTimeout(() => handleDecrement(), transitionDuration);
-						}}
-						onSpotlightDisappear={onSpotlightDisappear}
-						spotlightDisabled={spotlightDisabled || secondaryDecrementValue() === ''}
-					>
-						<ViewManager
-							aria-hidden
-							arranger={arranger}
-							className={css.viewManager}
-							duration={transitionDuration}
-							index={secondaryDecrementItemIndex}
-							noAnimation={noAnimation || disabled}
-							reverseTransition={reverseTransition}
-						>
-							{secondaryDecrementValue()}
-						</ViewManager>
-					</PickerButtonItem>
-				}
-				<PickerButtonItem
-					aria-controls={valueId}
-					aria-disabled={disabled || isFirst}
-					aria-label={decrementAriaLabel}
-					className={css.itemDecrement}
-					disabled={disabled || isFirst}
-					onClick={decrementValue() === '' ? () => {} : handleDecrement}
-					onSpotlightDisappear={onSpotlightDisappear}
-					spotlightDisabled={spotlightDisabled || decrementValue() === ''}
+				<ViewManager
+					aria-hidden
+					arranger={arranger}
+					className={css.viewManager}
+					duration={transitionDuration}
+					start={Array.isArray(values) ? currentItemIndex - 1  : 0}
+					index={Array.isArray(values) ? currentItemIndex : 0}
+					end={Array.isArray(values) ? currentItemIndex + 1 : 0}
+					noAnimation={noAnimation || disabled}
+					// reverseTransiion={reverseTransition}
 				>
-					<ViewManager
-						aria-hidden
-						arranger={arranger}
-						className={css.viewManager}
-						duration={transitionDuration}
-						index={decrementItemIndex}
-						noAnimation={noAnimation || disabled}
-						reverseTransition={reverseTransition}
-					>
-						{decrementValue()}
-					</ViewManager>
-				</PickerButtonItem>
-				<div
-					aria-label={ariaLabel}
-					aria-valuetext={currentValueText}
-					className={activeClassName}
-					id={valueId}
-					role="spinbutton"
-				>
-					{sizingPlaceholder}
-					<ViewManager
-						aria-hidden
-						arranger={arranger}
-						className={css.viewManager}
-						duration={transitionDuration}
-						index={currentItemIndex}
-						noAnimation={noAnimation || disabled}
-						reverseTransition={reverseTransition}
-					>
-						{values}
-					</ViewManager>
-				</div>
-				<PickerButtonItem
-					aria-controls={valueId}
-					aria-disabled={disabled || isLast}
-					aria-label={incrementAriaLabel}
-					className={css.itemIncrement}
-					disabled={disabled || isLast}
-					onClick={incrementValue() === '' ? () => {} : handleIncrement}
-					onSpotlightDisappear={onSpotlightDisappear}
-					spotlightDisabled={spotlightDisabled || incrementValue() === ''}
-				>
-					<ViewManager
-						aria-hidden
-						arranger={arranger}
-						className={css.viewManager}
-						duration={transitionDuration}
-						index={incrementItemIndex}
-						noAnimation={noAnimation || disabled}
-						reverseTransition={reverseTransition}
-					>
-						{incrementValue()}
-					</ViewManager>
-				</PickerButtonItem>
-				{skin === 'silicon' &&
-					<PickerButtonItem
-						aria-controls={valueId}
-						aria-disabled={isPenultimate}
-						aria-label={incrementAriaLabel}
-						className={css.secondaryItemIncrement}
-						disabled={disabled || isPenultimate}
-						onClick={secondaryIncrementValue() === '' ? () => {} : () => {
-							handleIncrement(); setTimeout(() => handleIncrement(), transitionDuration);
-						}}
-						onSpotlightDisappear={onSpotlightDisappear}
-						spotlightDisabled={spotlightDisabled || secondaryIncrementValue() === ''}
-					>
-						<ViewManager
-							aria-hidden
-							arranger={arranger}
-							className={css.viewManager}
-							duration={transitionDuration}
-							index={secondaryIncrementItemIndex}
-							noAnimation={noAnimation || disabled}
-							reverseTransition={reverseTransition}
-						>
-							{secondaryIncrementValue()}
-						</ViewManager>
-					</PickerButtonItem>
-				}
+					{Array.isArray(values) && values.map((v, i) => {
+						return (
+							// console.log(v) ||
+							<PickerButtonItem
+								style={{border: "1px solid black", background: color[i]}}
+								key={i}
+								aria-controls={valueId}
+								aria-disabled={disabled || isFirst}
+								aria-label={incrementAriaLabel}
+								className={css.itemIncrement}
+								disabled={disabled || isFirst}
+								onClick={incrementValue() === '' ? () => {} : handleIncrement}
+								onSpotlightDisappear={onSpotlightDisappear}
+								spotlightDisabled={spotlightDisabled || incrementValue() === ''}
+							>
+								{v}
+							</PickerButtonItem>
+						);
+					})}
+{/*
+					<div onClick={()=>{currentItemIndex++})}>1</div>
+					<div onClick={handleIncrement}>2</div>
+					<div onClick={handleIncrement}>3</div>
+					<div onClick={handleIncrement}>4</div>
+					<div onClick={handleIncrement}>5</div>
+					<div onClick={handleIncrement}>6</div>
+					<div onClick={handleIncrement}>7</div>
+					<div onClick={handleIncrement}>8</div> */}
+				</ViewManager>
 			</PickerRoot>
 		);
 	}
