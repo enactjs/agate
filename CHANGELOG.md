@@ -2,7 +2,7 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
-## [unreleased]
+## [1.1.1] - 2020-12-23
 
 ### Added
 
@@ -11,6 +11,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Changed
 
 - `agate/FullScreenPopup` to be deprecated
+
+### Fixed
+
+- Sampler build failure
 
 ## [1.1.0] - 2020-12-22
 
