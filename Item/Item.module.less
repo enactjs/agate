@@ -68,8 +68,7 @@
 				&.labelBefore {
 					.content {
 						box-sizing: border-box;
-						// when showing content and label inline, favor content
-						min-width: @agate-item-content-min-width;
+						width: @agate-item-content-width;
 					}
 
 					.label {
@@ -119,7 +118,6 @@
 			}
 
 			&.hasLabel {
-				width: fit-content;
 				.slotAfter {
 					padding-left: @agate-item-slotafter-padding-left;
 				}
