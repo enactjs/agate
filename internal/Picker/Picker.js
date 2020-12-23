@@ -16,7 +16,7 @@ import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import IdProvider from '@enact/ui/internal/IdProvider';
 import Touchable from '@enact/ui/Touchable';
-import {SlideLeftArranger, SlideTopArranger, ViewManager} from '@enact/ui/ViewManager';
+import {arrange, SlideLeftArranger, SlideTopArranger, ViewManager} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
@@ -47,7 +47,7 @@ const handleChange = direction => handle(
 			value: wrap ? wrapRange(min, max, value + (direction * step)) :  clamp(min, max, value + (direction * step)),
 			reverseTransition: direction < 0
 		}),
-		forward('onChange')
+		forward('onChange'),
 	)
 );
 
@@ -479,7 +479,7 @@ const PickerBase = kind({
 		const isPenultimate = value >= max - step;
 		const decrementAriaLabel = `${currentValueText} ${decAriaLabel}`;
 		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
-		const transitionDuration = 150;
+		const transitionDuration = 1500;
 
 		const decrementValue = () => {
 			const restrictedDecrementValue = wrap ? wrapRange(min, max, value - step) : clamp(min, max, value - step);
@@ -530,10 +530,36 @@ const PickerBase = kind({
 			sizingPlaceholder = <div aria-hidden className={css.sizingPlaceholder}>{'0'.repeat(width)}</div>;
 		}
 
+		// 애초에 start/end prop이 있을때 사용할 수 있는 Arrange가 없어서 만들어줄 수 밖에 없음
+		// 내려갈때용 Arranger 따로 정의해야하는건지..모르겠음.. 내려갈때 커버가안됨.
+		const SlideTopUpwardArranger = {
+			enter: (config) => arrange(config, [
+				{transform: 'translateY(100%)'},
+				{transform: 'translateY(0%)'}
+			]),
+			leave: (config) => arrange(config, [ // 이게문제임.. ui/ViewManager 문제임
+				{transform: 'translateY(-300%)'},
+				{transform: 'translateY(-400%)'}
+			]),
+			stay: (config) => arrange(config, [
+				{transform: 'translateY(100%)'},
+				{transform: 'translateY(0%)'}
+			])
+		};
+
 		const horizontal = orientation === 'horizontal';
-		const arranger = horizontal ? SlideLeftArranger : SlideTopArranger;
+		const arranger = horizontal ? SlideLeftArranger : SlideTopUpwardArranger; /// SlideTopArranger ;
 
 		const color = ['yellow', 'blue', 'gray', 'gray', 'green']; // TEMP
+
+		const onClickHandler = (index) => (ev) => {
+			if (currentItemIndex <= index && incrementValue() !== '') {
+				handleIncrement(ev);
+			} else if (currentItemIndex >= index && decrementValue() !== '') {
+				handleDecrement(ev);
+			}
+		};
+
 		delete rest['aria-valuetext'];
 		delete rest.accessibilityHint;
 		delete rest.decrementAriaLabel;
@@ -549,24 +575,24 @@ const PickerBase = kind({
 					arranger={arranger}
 					className={css.viewManager}
 					duration={transitionDuration}
-					start={Array.isArray(values) ? currentItemIndex - 1  : 0}
+					start={Array.isArray(values) ? decrementItemIndex  : 0}
 					index={Array.isArray(values) ? currentItemIndex : 0}
-					end={Array.isArray(values) ? currentItemIndex + 1 : 0}
+					end={Array.isArray(values) ? incrementItemIndex : 0}
 					noAnimation={noAnimation || disabled}
-					// reverseTransiion={reverseTransition}
+					reverseTransiion={reverseTransition}
 				>
-					{Array.isArray(values) && values.map((v, i) => {
+					{Array.isArray(values) && values.map((v, index) => {
 						return (
-							// console.log(v) ||
+							console.log(v) ||
 							<PickerButtonItem
-								style={{border: "1px solid black", background: color[i]}}
-								key={i}
+								style={{border: "1px solid black", background: color[index]}}
+								key={index}
 								aria-controls={valueId}
 								aria-disabled={disabled || isFirst}
 								aria-label={incrementAriaLabel}
 								className={css.itemIncrement}
 								disabled={disabled || isFirst}
-								onClick={incrementValue() === '' ? () => {} : handleIncrement}
+								onClick={onClickHandler(index)}
 								onSpotlightDisappear={onSpotlightDisappear}
 								spotlightDisabled={spotlightDisabled || incrementValue() === ''}
 							>
@@ -574,15 +600,6 @@ const PickerBase = kind({
 							</PickerButtonItem>
 						);
 					})}
-{/*
-					<div onClick={()=>{currentItemIndex++})}>1</div>
-					<div onClick={handleIncrement}>2</div>
-					<div onClick={handleIncrement}>3</div>
-					<div onClick={handleIncrement}>4</div>
-					<div onClick={handleIncrement}>5</div>
-					<div onClick={handleIncrement}>6</div>
-					<div onClick={handleIncrement}>7</div>
-					<div onClick={handleIncrement}>8</div> */}
 				</ViewManager>
 			</PickerRoot>
 		);
