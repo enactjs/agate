@@ -15,8 +15,9 @@
  * @exports DropdownDecorator
  */
 import {on, off} from '@enact/core/dispatcher';
-import {handle, forward, forProp} from '@enact/core/handle';
+import {forKey, forward, forProp, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
+import {add} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
 import {extractAriaProps} from '@enact/core/util';
 import Spotlight from '@enact/spotlight';
@@ -59,6 +60,9 @@ const handleTransitionHide = (ev, {'data-spotlight-id': containerId}) => {
 		}
 	}
 };
+
+// Add keymap for escape key
+add('cancel', 27);
 
 /**
  * A stateless Dropdown component.
@@ -359,6 +363,7 @@ const DropDownExtended = hoc((config, Wrapped) => {
 
 			if (this.props.open) {
 				on('click', this.handleClick);
+				on('keydown', this.handleKeyDown);
 			}
 		}
 
@@ -367,13 +372,16 @@ const DropDownExtended = hoc((config, Wrapped) => {
 
 			if (!prevProps.open && open) {
 				on('click', this.handleClick);
+				on('keydown', this.handleKeyDown);
 			} else if (prevProps.open && !open) {
 				off('click', this.handleClick);
+				off('keydown', this.handleKeyDown);
 			}
 		}
 
 		componentWillUnmount () {
 			off('click', this.handleClick);
+			off('keydown', this.handleKeyDown);
 		}
 
 		clickedOutsideDropdown = ({target}) => !this.node.contains(target);
@@ -383,6 +391,11 @@ const DropDownExtended = hoc((config, Wrapped) => {
 			this.clickedOutsideDropdown,
 			forward('onClick')
 		).bindAs(this, 'handleClick');
+
+		handleKeyDown = handle(
+			forKey('cancel'),
+			forward('onClick')
+		).bindAs(this, 'handleKeyDown');
 
 		render () {
 			return (
