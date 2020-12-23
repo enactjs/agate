@@ -8,6 +8,12 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel` and `yearAriaLabel`
 
+## [1.1.1] - 2020-12-23
+
+### Fixed
+
+- Sampler build failure
+
 ## [1.1.0] - 2020-12-22
 
 ### Added
@@ -16,7 +22,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Checkbox` prop `disabled`, `indeterminate`, and `indeterminateIcon`
 - `agate/CheckboxItem` prop `disabled`, `indeterminate`, `indeterminateIcon`, and `slotbefore`
 - `agate/DatePicker` prop `onSpotlightDisappear` and `spotlightDisabled`
-- `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel` and `yearAriaLabel`
 - `agate/Marquee` component
 - `agate/Picker` prop `noAnimation` and `wrap`
 - `agate/RangePicker` prop `noAnimation` and `wrap`
