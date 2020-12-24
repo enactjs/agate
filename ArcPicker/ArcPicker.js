@@ -176,7 +176,8 @@ const ArcPickerBase = kind({
 	},
 
 	computed: {
-		arcSegments: (props, {accent: accentColor}) => {
+		arcSegments: (props, context) => {
+			const {accent: accentColor} = context || {};
 			const {backgroundColor, children, endAngle, foregroundColor, isFocused, onClick, radius, selectionType, startAngle, strokeWidth, value} = props;
 
 			if (!Array.isArray(children)) return [];
