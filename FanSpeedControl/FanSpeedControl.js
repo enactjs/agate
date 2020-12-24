@@ -39,14 +39,6 @@ const FanSpeedControlBase = kind({
 
 	propTypes: /** @lends agate/FanSpeedControl.FanSpeedControlBase.prototype */ {
 		/**
-		 * Whether or not the component is in a disabled state.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		disabled: PropTypes.bool,
-
-		/**
 		 * The maximum value of FanSpeedControl.
 		 *
 		 * @type {Number}
@@ -63,6 +55,14 @@ const FanSpeedControlBase = kind({
 		 * @public
 		 */
 		min: PropTypes.number.isRequired,
+
+		/**
+		 * Whether or not the component is in a disabled state.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
 
 		/**
 		 * FanSpeedControl icon.
