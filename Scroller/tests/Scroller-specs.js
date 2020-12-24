@@ -121,6 +121,90 @@ describe('Scroller', () => {
 		);
 
 		test(
+			'should set a custom "aria-label" to the left scroll button in the horizontal scrollbar',
+			() => {
+				const label = 'custom button aria label';
+				const subject = mount(
+					<Scroller
+						horizontalScrollbar="visible"
+						scrollLeftAriaLabel={label}
+						verticalScrollbar="visible"
+					>
+						{contents}
+					</Scroller>
+				);
+
+				const expected = label;
+				const actual = subject.find('ScrollButton').at(2).prop('aria-label');
+
+				expect(actual).toBe(expected);
+			}
+		);
+
+		test(
+			'should set a custom "aria-label" to the right scroll button in the horizontal scrollbar',
+			() => {
+				const label = 'custom button aria label';
+				const subject = mount(
+					<Scroller
+						horizontalScrollbar="visible"
+						scrollRightAriaLabel={label}
+						verticalScrollbar="visible"
+					>
+						{contents}
+					</Scroller>
+				);
+
+				const expected = label;
+				const actual = subject.find('ScrollButton').at(3).prop('aria-label');
+
+				expect(actual).toBe(expected);
+			}
+		);
+
+		test(
+			'should set a null string "aria-label" to the up scroll button in the vertical scrollbar',
+			() => {
+				const label = '';
+				const subject = mount(
+					<Scroller
+						horizontalScrollbar="visible"
+						scrollUpAriaLabel={label}
+						verticalScrollbar="visible"
+					>
+						{contents}
+					</Scroller>
+				);
+
+				const expected = label;
+				const actual = subject.find('ScrollButton').at(0).prop('aria-label');
+
+				expect(actual).toBe(expected);
+			}
+		);
+
+		test(
+			'should set a null string "aria-label" to the down scroll button in the vertical scrollbar',
+			() => {
+				const label = '';
+				const subject = mount(
+					<Scroller
+						horizontalScrollbar="visible"
+						scrollDownAriaLabel={label}
+						verticalScrollbar="visible"
+					>
+						{contents}
+					</Scroller>
+				);
+
+				const expected = label;
+				const actual = subject.find('ScrollButton').at(1).prop('aria-label');
+
+				expect(actual).toBe(expected);
+			}
+		);
+
+		test(
 			'should set a null string "aria-label" to the left scroll button in the horizontal scrollbar',
 			() => {
 				const label = '';
@@ -142,7 +226,7 @@ describe('Scroller', () => {
 		);
 
 		test(
-			'should set a null string "aria-label" to the right scroll button in the vertical scrollbar',
+			'should set a null string "aria-label" to the right scroll button in the horizontal scrollbar',
 			() => {
 				const label = '';
 				const subject = mount(
