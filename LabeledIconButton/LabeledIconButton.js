@@ -83,6 +83,14 @@ const LabeledIconButtonBase = kind({
 		 */
 		iconComponent: EnactPropTypes.component,
 
+		/**
+		 * True if button is an icon only button.
+		 *
+		 * @type {Boolean}
+		 * @private
+		 */
+		iconOnly: PropTypes.bool,
+
 		// forwarded from Spottable
 		pressed: PropTypes.bool,
 
@@ -122,7 +130,7 @@ const LabeledIconButtonBase = kind({
 		spriteCount,
 		...rest
 	}) => {
-		delete rest.iconOnly; // eslint-disable-line
+		delete rest.iconOnly;
 
 		return UiLabeledIconBase.inline({
 			role: 'button',
@@ -132,6 +140,7 @@ const LabeledIconButtonBase = kind({
 					backgroundOpacity={backgroundOpacity}
 					icon={icon}
 					iconComponent={iconComponent}
+					iconOnly
 					highlighted={highlighted}
 					pressed={pressed}
 					selected={selected}
