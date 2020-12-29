@@ -48,7 +48,7 @@ const secondsToPeriod = (seconds) => {
 const secondsToTime = (seconds, durfmt, config) => {
 	const includeHour = config && config.includeHour;
 
-	if (durfmt) {
+	if (durfmt && typeof durfmt.format === 'function') {
 		const parsedTime = parseTime(seconds);
 		const timeString = durfmt.format(parsedTime).toString();
 
