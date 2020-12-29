@@ -15,8 +15,9 @@
  * @exports DropdownDecorator
  */
 import {on, off} from '@enact/core/dispatcher';
-import {handle, forward, forProp} from '@enact/core/handle';
+import {forKey, forward, forProp, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
+import {add} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
 import {extractAriaProps} from '@enact/core/util';
 import Spotlight from '@enact/spotlight';
@@ -59,6 +60,9 @@ const handleTransitionHide = (ev, {'data-spotlight-id': containerId}) => {
 		}
 	}
 };
+
+// Add keymap for escape key
+add('cancel', 27);
 
 /**
  * A stateless Dropdown component.
@@ -200,40 +204,42 @@ const DropdownBase = kind({
 
 	computed: {
 		adjustedDirection: ({direction, 'data-spotlight-id': containerId}) => {
-			const calcOverflow = (container, client, wrapper) => {
-				const KEEPOUT = ri.scale(24); // keep out distance on the edge of the screen
-				const wrapperTop = (wrapper && wrapper.top) || 0;
-				const wrapperBottom = (wrapper && wrapper.bottom) || window.innerHeight;
+			if (typeof window !== 'undefined') {
+				const calcOverflow = (container, client, wrapper) => {
+					const KEEPOUT = ri.scale(24); // keep out distance on the edge of the screen
+					const wrapperTop = (wrapper && wrapper.top) || 0;
+					const wrapperBottom = (wrapper && wrapper.bottom) || window.innerHeight;
 
-				const overflow = {
-					isOverTop: client.top - container.height - KEEPOUT < wrapperTop,
-					isOverBottom: client.bottom + container.height + KEEPOUT > wrapperBottom
+					const overflow = {
+						isOverTop: client.top - container.height - KEEPOUT < wrapperTop,
+						isOverBottom: client.bottom + container.height + KEEPOUT > wrapperBottom
+					};
+
+					return overflow;
 				};
 
-				return overflow;
-			};
+				const adjustDirection = (overflow) => {
+					let adjustedDirection = direction;
+					if (overflow.isOverTop && !overflow.isOverBottom && direction === 'up') {
+						adjustedDirection = 'down';
+					} else if (overflow.isOverBottom && !overflow.isOverTop && direction === 'down') {
+						adjustedDirection = 'up';
+					}
 
-			const adjustDirection = (overflow) => {
-				let adjustedDirection = direction;
-				if (overflow.isOverTop && !overflow.isOverBottom && direction === 'up') {
-					adjustedDirection = 'down';
-				} else if (overflow.isOverBottom && !overflow.isOverTop && direction === 'down') {
-					adjustedDirection = 'up';
+					return adjustedDirection;
+				};
+
+				const containerSelector = `[data-spotlight-id='${containerId}']`;
+				const containerNode = document.querySelector(`${containerSelector} .${componentCss.dropdownList}`);
+				const clientNode = document.querySelector(`${containerSelector} .${componentCss.dropdown}`);
+				const wrapperNode = clientNode && clientNode.closest('div[style*=overflow]');
+
+				if (containerNode && clientNode) {
+					const containerNodeRect = containerNode.getBoundingClientRect();
+					const clientNodeRect = clientNode.getBoundingClientRect();
+					const wrapperNodeRect = wrapperNode && wrapperNode.getBoundingClientRect();
+					return adjustDirection(calcOverflow(containerNodeRect, clientNodeRect, wrapperNodeRect));
 				}
-
-				return adjustedDirection;
-			};
-
-			const containerSelector = `[data-spotlight-id='${containerId}']`;
-			const containerNode = document.querySelector(`${containerSelector} .${componentCss.dropdownList}`);
-			const clientNode = document.querySelector(`${containerSelector} .${componentCss.dropdown}`);
-			const wrapperNode = clientNode && clientNode.closest('div[style*=overflow]');
-
-			if (containerNode && clientNode) {
-				const containerNodeRect = containerNode.getBoundingClientRect();
-				const clientNodeRect = clientNode.getBoundingClientRect();
-				const wrapperNodeRect = wrapperNode && wrapperNode.getBoundingClientRect();
-				return adjustDirection(calcOverflow(containerNodeRect, clientNodeRect, wrapperNodeRect));
 			}
 
 			return direction;
@@ -357,6 +363,7 @@ const DropDownExtended = hoc((config, Wrapped) => {
 
 			if (this.props.open) {
 				on('click', this.handleClick);
+				on('keydown', this.handleKeyDown);
 			}
 		}
 
@@ -365,13 +372,16 @@ const DropDownExtended = hoc((config, Wrapped) => {
 
 			if (!prevProps.open && open) {
 				on('click', this.handleClick);
+				on('keydown', this.handleKeyDown);
 			} else if (prevProps.open && !open) {
 				off('click', this.handleClick);
+				off('keydown', this.handleKeyDown);
 			}
 		}
 
 		componentWillUnmount () {
 			off('click', this.handleClick);
+			off('keydown', this.handleKeyDown);
 		}
 
 		clickedOutsideDropdown = ({target}) => !this.node.contains(target);
@@ -381,6 +391,11 @@ const DropDownExtended = hoc((config, Wrapped) => {
 			this.clickedOutsideDropdown,
 			forward('onClick')
 		).bindAs(this, 'handleClick');
+
+		handleKeyDown = handle(
+			forKey('cancel'),
+			forward('onClick')
+		).bindAs(this, 'handleKeyDown');
 
 		render () {
 			return (
