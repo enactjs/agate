@@ -95,7 +95,7 @@ const DatePickerBase = kind({
 		dayAriaLabel: PropTypes.string,
 
 		/**
-		 * When it's `true` it changes the direction of the transition animation for day.
+		 * When it's `true`, it changes the direction of the transition animation for the day.
 		 *
 		 * @type {Boolean}
 		 * @public
