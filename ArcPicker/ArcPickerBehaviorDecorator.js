@@ -1,9 +1,12 @@
-import kind from '@enact/core/kind';
 import {forward} from '@enact/core/handle';
+import {is} from '@enact/core/keymap';
 import hoc from '@enact/core/hoc';
 import {validateRangeOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
 import React from 'react';
+
+const isDown = is('down');
+const isUp = is('up');
 
 const validateRange = validateRangeOnce((props) => props, {'component': 'ArcPickerBehaviorDecorator'});
 
@@ -16,10 +19,10 @@ const validateRange = validateRangeOnce((props) => props, {'component': 'ArcPick
  * @private
  */
 const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
-	return kind({
-		name: 'ArcPickerBehaviorDecorator',
+	return class extends React.Component {
+		static displayName = 'ArcPickerBehaviorDecorator';
 
-		propTypes: /** @lends agate/ArcPicker.ArcPickerBehaviorDecorator.prototype */{
+		static propTypes = /** @lends agate/ArcPicker.ArcPickerBehaviorDecorator.prototype */{
 			/**
 			 * The value options of ArcPicker.
 			 *
@@ -28,6 +31,14 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			 * @public
 			 */
 			children: PropTypes.array.isRequired,
+
+			/**
+			 * Whether or not the component is in a disabled state.
+			 *
+			 * @type {Boolean}
+			 * @public
+			 */
+			disabled: PropTypes.bool,
 
 			/**
 			 * The maximum value of ArcPicker.
@@ -69,17 +80,49 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			 * @public
 			 */
 			value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-		},
+		};
 
-		computed: {
-			onClick: (props) => (value) => (ev) => {
-				forward('onChange', {value}, props);
-				ev.stopPropagation();
-			},
-			value: ({value, children}) => ((value || value === 0) ? value : (children && children[0]))
-		},
+		constructor (props) {
+			super(props);
 
-		render: ({max, min, value, ...rest}) => {
+			this.state = {
+				isFocused: false
+			};
+		}
+
+		handleClick = (value) => (ev) => {
+			forward('onChange', {value}, this.props);
+			ev.stopPropagation();
+		};
+
+		handleBlur = () => {
+			this.setState({isFocused: false});
+		};
+
+		handleFocus = () => {
+			this.setState({isFocused: true});
+		};
+
+		handleKeyDown = (ev, props) => {
+			const {children, disabled, value: valueProp} = this.props;
+			const value = ((valueProp || valueProp === 0) ? valueProp : children[0]);
+			const index = children.findIndex(child => child === value);
+
+			forward('onKeyDown', ev, props);
+
+			if (!disabled) {
+				if (isDown(ev.keyCode)) {
+					this.handleClick(children[Math.max(index - 1, 0)])(ev);
+				} else if (isUp(ev.keyCode)) {
+					this.handleClick(children[Math.min(index + 1, children.length - 1)])(ev);
+				}
+			}
+		};
+
+		render () {
+			const {children, max, min, value: valueProp, ...rest} = this.props;
+			const value = ((valueProp || valueProp === 0) ? valueProp : (children && children[0]));
+
 			delete rest.onChange;
 
 			if (__DEV__) {
@@ -89,10 +132,20 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			}
 
 			return (
-				<Wrapped {...rest} value={value} />
+				<Wrapped
+					{...rest}
+					isFocused={this.state.isFocused}
+					onBlur={this.handleBlur}
+					onClick={this.handleClick}
+					onFocus={this.handleFocus}
+					onKeyDown={this.handleKeyDown}
+					value={value}
+				>
+					{children}
+				</Wrapped>
 			);
 		}
-	});
+	};
 });
 
 export default ArcPickerBehaviorDecorator;
