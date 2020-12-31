@@ -173,7 +173,6 @@ const DatePickerBase = kind({
 		 */
 		onYearChange: PropTypes.func,
 
-
 		/**
 		 * Indicates the content's text direction is right-to-left.
 		 *
