@@ -3,6 +3,7 @@
  *
  * @module agate/ThemeDecorator
  * @exports ThemeDecorator
+ * @exports ThemeContext
  */
 
 import hoc from '@enact/core/hoc';
@@ -279,7 +280,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const Decorator = class extends React.Component {
 		static displayName = 'ThemeDecorator';
 
-		static propTypes = {
+		static propTypes = /** @lends agate/ThemeDecorator.ThemeDecorator.prototype */ {
 			/**
 			 * A custom accent color, as a hex string.
 			 *
