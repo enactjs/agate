@@ -12,6 +12,7 @@
 
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
 import Pure from '@enact/ui/internal/Pure';
 import ri from '@enact/ui/resolution';
 import Touchable from '@enact/ui/Touchable';
@@ -22,6 +23,7 @@ import React from 'react';
 import Arc from '../Arc';
 import {angleToPosition} from '../Arc/utils';
 import Skinnable from '../Skinnable';
+import {ThemeContext} from '../ThemeDecorator';
 
 import ArcSliderBehaviorDecorator from './ArcSliderBehaviorDecorator';
 import {valueToAngle} from './utils';
@@ -44,6 +46,15 @@ const ArcSliderBase = kind({
 
 	propTypes: /** @lends agate/ArcSlider.ArcSliderBase.prototype */ {
 		/**
+		 * Overrides the `aria-valuetext` for the ArcSlider. By default, `aria-valuetext` is set
+		 * to the current value.
+		 *
+		 * @type {String|Number}
+		 * @public
+		 */
+		'aria-valuetext': PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+		/**
 		 * The color of the background arc.
 		 *
 		 * @type {String}
@@ -59,6 +70,14 @@ const ArcSliderBase = kind({
 		 * @public
 		 */
 		componentRef: EnactPropTypes.ref,
+
+		/**
+		 * Whether or not the component is in a disabled state.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
 
 		/**
 		 * The end angle(in degrees) of the arc slider.
@@ -79,6 +98,14 @@ const ArcSliderBase = kind({
 		 * @public
 		 */
 		foregroundColor: PropTypes.string,
+
+		/**
+		 * Whether or not the component is focused.
+		 *
+		 * @type {Boolean}
+		 * @private
+		 */
+		isFocused: PropTypes.bool,
 
 		/**
 		 * The maximum value of the slider and should be greater than min.
@@ -167,6 +194,8 @@ const ArcSliderBase = kind({
 		strokeWidth: 6
 	},
 
+	contextType: ThemeContext,
+
 	styles: {
 		css,
 		className: 'arcSlider'
@@ -180,14 +209,16 @@ const ArcSliderBase = kind({
 		}
 	},
 
-	render: ({backgroundColor, componentRef, endAngle, foregroundColor, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}) => {
+	render: ({'aria-valuetext': ariaValuetext, backgroundColor, componentRef, disabled, endAngle, foregroundColor, isFocused, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}, context) => {
+		const {accent: accentColor} = context || {};
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
 		delete rest.step;
 
 		return (
-			<div {...rest}>
+			// eslint-disable-next-line jsx-a11y/role-has-required-aria-props
+			<div aria-disabled={disabled} aria-valuetext={ariaValuetext || value} role="slider" {...rest} disabled={disabled}>
 				<Arc
 					className={css.arc}
 					color={backgroundColor}
@@ -209,7 +240,7 @@ const ArcSliderBase = kind({
 					<circle
 						cx={knobPosition.x}
 						cy={knobPosition.y}
-						fill={foregroundColor}
+						fill={isFocused ? accentColor : foregroundColor}
 						r={ri.scaleToRem(15)}
 					/>
 				</Arc>
@@ -235,6 +266,7 @@ const ArcSliderDecorator = compose(
 	Pure,
 	ArcSliderBehaviorDecorator,
 	Touchable,
+	Spottable,
 	Skinnable
 );
 
