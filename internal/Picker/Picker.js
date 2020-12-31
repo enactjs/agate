@@ -118,7 +118,7 @@ const PickerBase = kind({
 		 * the picker directly through the props.
 		 *
 		 * @type {String}
-		 * @memberof agate/internal/Picker.PickerBase.prototype
+		 * @memberof agate/internal/Picker.Picker.prototype
 		 * @public
 		 */
 		'aria-label': PropTypes.string,
