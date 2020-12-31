@@ -4,6 +4,12 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Added
+
+- `agate/ArcPicker` and `agate/ArcSlider` prop `disabled` to be inactive
+- `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
+- `agate/Button` prop `iconOnly`, `iconPosition`, and `minWidth`
+
 ### Fixed
 
 - `agate/DatePicker` transition direction for day when month is changed
@@ -26,8 +32,13 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Marquee` component
 - `agate/Picker` prop `noAnimation` and `wrap`
 - `agate/RangePicker` prop `noAnimation` and `wrap`
+- `agate/ThemeDecorator` context `ThemeContext` to apply `accent` color to `agate/ArcPicker` and `agate/ArcSlider` when they're focused
 - `agate/TimePicker` prop `onSpotlightDisappear` and `spotlightDisabled`
- 
+
+### Changed
+
+- `agate/ArcPicker`, `agate/ArcSlider`, `agate/FanSpeedControl`, `agate/TemperatureControl`, and `agate/WindDirectionControl` to read out audio guidance when focused via 5-way keys
+
 ### Fixed
 
 - `agate/ArcPicker` to display correct `font-size` and `font-weight`
