@@ -38,7 +38,7 @@ const SectionBase = kind({
 				<Heading showLine>{title}</Heading>
 				<Row className={classNames(css.componentDemo, css.horizontal)}>
 					{React.Children.map(children, child => (
-						<Cell component="label" size="30%">
+						<Cell component="label" size="20%">
 							<div>{child.props.alt}</div>
 							{child}
 						</Cell>
