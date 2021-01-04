@@ -10,11 +10,13 @@ class SliderButtonInterface {
 	get self () {
 		return $(this.selector);
 	}
-	knobValue () {
+	getKnob () {
 		return $(this.selector + ' .SliderButton_SliderButton_knob');
 	}
 	clickableItem (index) {
-		return $(this.selector + ` .SliderButton_SliderButton_track>div:nth-child(${index})`);
+		const parent = $(this.selector + ' .SliderButton_SliderButton_track');
+
+		return parent.$$('.SliderButton_SliderButton_client')[index];
 	}
 }
 
