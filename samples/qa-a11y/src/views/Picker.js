@@ -54,7 +54,7 @@ const PickerView = () => (
 			</Picker>
 		</Section>
 
-		<SpotlightContainerSection className={appCss.marginTop} title="Vertical" vertical>
+		<SpotlightContainerSection className={appCss.marginTop} horizontal title="Vertical">
 			<Picker
 				alt="Vertical"
 				orientation="vertical"
@@ -98,7 +98,7 @@ const PickerView = () => (
 			</Picker>
 		</Section>
 
-		<SpotlightContainerSection className={appCss.marginTop} title="Vertical" vertical>
+		<SpotlightContainerSection className={appCss.marginTop} horizontal title="Vertical">
 			<Picker
 				alt="Vertical"
 				decrementAriaLabel="Decrement"
@@ -144,7 +144,7 @@ const PickerView = () => (
 			</Picker>
 		</Section>
 
-		<SpotlightContainerSection className={appCss.marginTop} title="Vertical" vertical>
+		<SpotlightContainerSection className={appCss.marginTop} horizontal title="Vertical">
 			<Picker
 				alt="Vertical"
 				aria-label="This is a Label 4."
