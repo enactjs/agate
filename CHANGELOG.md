@@ -12,6 +12,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [1.1.1] - 2020-12-23
 
+### Added
+
+- `agate/Switch` prop `disabled` and `selected`
+
 ### Fixed
 
 - Sampler build failure
