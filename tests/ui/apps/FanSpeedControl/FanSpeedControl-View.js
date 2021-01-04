@@ -1,10 +1,10 @@
 import Heading from '../../../../Heading';
 import FanSpeedControl from '../../../../FanSpeedControl';
-import Scroller from '../../../../Scroller';
 import ThemeDecorator from '../../../../ThemeDecorator';
 import React from 'react';
 import spotlight from '@enact/spotlight';
-import {scaleToRem} from '@enact/ui/resolution';
+
+import Section from '../../components/Section';
 
 // NOTE: Forcing pointer mode off so we can be sure that regardless of webOS pointer mode the app
 // runs the same way
@@ -12,7 +12,7 @@ spotlight.setPointerMode(false);
 
 const app = (props) => <div {...props}>
 	<div>
-		<Scroller style={{height: scaleToRem(900)}}>
+		<Section>
 			<Heading>FanSpeedControl Default</Heading>
 			<FanSpeedControl
 				id="fanSpeedControlDefault"
@@ -20,6 +20,8 @@ const app = (props) => <div {...props}>
 				max={10}
 				min={1}
 			/>
+		</Section>
+		<Section>
 			<Heading>FanSpeedControl Custom</Heading>
 			<FanSpeedControl
 				id="fanSpeedControlCustom"
@@ -27,6 +29,8 @@ const app = (props) => <div {...props}>
 				max={10}
 				min={1}
 			/>
+		</Section>
+		<Section>
 			<Heading>FanSpeedControl Disabled</Heading>
 			<FanSpeedControl
 				id="fanSpeedControlDisabled"
@@ -35,7 +39,7 @@ const app = (props) => <div {...props}>
 				max={10}
 				min={1}
 			/>
-		</Scroller>
+		</Section>
 	</div>
 </div>;
 
