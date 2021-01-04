@@ -13,6 +13,7 @@
  */
 
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
@@ -21,6 +22,7 @@ import React from 'react';
 
 import Arc from '../Arc';
 import Skinnable from '../Skinnable';
+import {ThemeContext} from '../ThemeDecorator';
 
 import ArcPickerBehaviorDecorator from './ArcPickerBehaviorDecorator';
 
@@ -43,11 +45,11 @@ const ArcPickerBase = kind({
 		/**
 		 * The value options of ArcPicker.
 		 *
-		 * @type {Node}
+		 * @type {Array}
 		 * @required
 		 * @public
 		 */
-		children: PropTypes.node.isRequired,
+		children: PropTypes.array.isRequired,
 
 		/**
 		 * The color of the unselected arcs.
@@ -57,6 +59,14 @@ const ArcPickerBase = kind({
 		 * @public
 		 */
 		backgroundColor: PropTypes.string,
+
+		/**
+		 * Whether or not the component is in a disabled state.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
 
 		/**
 		 * The end angle(in degrees) of the arc.
@@ -77,6 +87,14 @@ const ArcPickerBase = kind({
 		 * @public
 		 */
 		foregroundColor: PropTypes.string,
+
+		/**
+		 * Whether or not the component is focused.
+		 *
+		 * @type {Boolean}
+		 * @private
+		 */
+		isFocused: PropTypes.bool,
 
 		/**
 		 * Called when the path area is clicked.
@@ -150,15 +168,19 @@ const ArcPickerBase = kind({
 		strokeWidth: 6
 	},
 
+	contextType: ThemeContext,
+
 	styles: {
 		css,
 		className: 'arcPicker'
 	},
 
 	computed: {
-		arcSegments: (props) => {
-			const {backgroundColor, children, endAngle, foregroundColor, onClick, radius, selectionType, startAngle, strokeWidth, value} = props;
+		arcSegments: (props, context) => {
+			const {accent: accentColor} = context || {};
+			const {backgroundColor, children, endAngle, foregroundColor, isFocused, onClick, radius, selectionType, startAngle, strokeWidth, value} = props;
 
+			if (!Array.isArray(children)) return [];
 			return (
 				children.map((option, index) => {
 					// Calc `arcStartAngle`, `arcEndAngle` based on `startAngle` and `endAngle` for every <Arc />
@@ -166,8 +188,7 @@ const ArcPickerBase = kind({
 					const arcSegments = children.length;
 					const arcStartAngle = startAngle + (endAngle - startAngle) / arcSegments * index;
 					const arcEndAngle = startAngle + (endAngle - startAngle) / arcSegments * (index + 1) - pauseAngle;
-
-					const color = (selectionType === 'cumulative' && value > option || value === option) ? foregroundColor : backgroundColor;
+					const color = (selectionType === 'cumulative' && value > option || value === option) ? (isFocused && accentColor || foregroundColor) : backgroundColor;
 
 					return (
 						<Arc
@@ -189,18 +210,19 @@ const ArcPickerBase = kind({
 		}
 	},
 
-	render: ({arcSegments, slotCenter, ...rest}) => {
+	render: ({arcSegments, disabled, slotCenter, value, ...rest}) => {
 		delete rest.backgroundColor;
 		delete rest.children;
 		delete rest.endAngle;
 		delete rest.foregroundColor;
+		delete rest.isFocused;
 		delete rest.onClick;
 		delete rest.selectionType;
 		delete rest.startAngle;
-		delete rest.value;
 
 		return (
-			<div {...rest}>
+			// eslint-disable-next-line jsx-a11y/role-has-required-aria-props
+			<div aria-disabled={disabled} aria-valuetext={value} role="slider" {...rest} disabled={disabled}>
 				{arcSegments}
 				<div className={css.valueDisplay}>
 					{slotCenter}
@@ -222,6 +244,7 @@ const ArcPickerBase = kind({
 const ArcPickerDecorator = compose(
 	Changeable,
 	ArcPickerBehaviorDecorator,
+	Spottable,
 	Skinnable
 );
 

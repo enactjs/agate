@@ -1,4 +1,5 @@
 import {forward} from '@enact/core/handle';
+import {is} from '@enact/core/keymap';
 import hoc from '@enact/core/hoc';
 import {validateRangeOnce, validateSteppedOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
@@ -7,6 +8,9 @@ import React from 'react';
 import {positionToAngle} from '../Arc/utils';
 
 import {angleToValue} from './utils';
+
+const isDown = is('down');
+const isUp = is('up');
 
 const validateValueRange = validateRangeOnce((props) => props, {'component': 'ArcSliderBehaviorDecorator'});
 const validateAngleRange = validateRangeOnce((props) => props, {'component': 'ArcSliderBehaviorDecorator', minName: 'startAngle', maxName: 'endAngle'});
@@ -26,6 +30,14 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 		static displayName = 'ArcSliderBehaviorDecorator';
 
 		static propTypes = /** @lends agate/ArcSlider.ArcSliderBehaviorDecorator.prototype */ {
+			/**
+			 * Whether or not the component is in a disabled state.
+			 *
+			 * @type {Boolean}
+			 * @public
+			 */
+			disabled: PropTypes.bool,
+
 			/**
 			 * The end angle(in degrees) of the arc slider.
 			 *
@@ -128,6 +140,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			this.componentRef = React.createRef();
 
 			this.state = {
+				isFocused: false,
 				value: props.value ? props.value : props.min
 			};
 		}
@@ -135,7 +148,10 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 		handleDown = ({clientX, clientY}) => {
 			const params = {x: clientX, y: clientY};
 			forward('onDown', params, this.props);
-			this.emitChangeForPosition(params);
+
+			if (clientX != null && clientY != null) {
+				this.emitChangeForPosition(params);
+			}
 		};
 
 		handleDragStart = (ev) => {
@@ -176,6 +192,10 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 				}
 			}
 
+			this.handleChange(ev, value);
+		};
+
+		handleChange = (ev, value) => {
 			if (value !== this.state.value) {
 				this.setState(
 					() => ({value}),
@@ -186,6 +206,33 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 						}, this.props);
 					}
 				);
+			}
+
+			if (ev.stopPropagation) {
+				ev.stopPropagation();
+			}
+		};
+
+		handleBlur = () => {
+			this.setState({isFocused: false});
+		};
+
+		handleFocus = () => {
+			this.setState({isFocused: true});
+		};
+
+		handleKeyDown = (ev) => {
+			const {disabled, max, min, step} = this.props;
+			const {value} = this.state;
+
+			forward('onKeyDown', ev, this.props);
+
+			if (!disabled) {
+				if (isDown(ev.keyCode)) {
+					this.handleChange(ev, Math.max(value - step, min));
+				} else if (isUp(ev.keyCode)) {
+					this.handleChange(ev, Math.min(value + step, max));
+				}
 			}
 		};
 
@@ -205,9 +252,14 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 				<Wrapped
 					{...this.props}
 					componentRef={this.componentRef}
+					isFocused={this.state.isFocused}
+					onBlur={this.handleBlur}
+					onChange={this.handleChange}
 					onDown={this.handleDown}
 					onDrag={this.handleDrag}
 					onDragStart={this.handleDragStart}
+					onFocus={this.handleFocus}
+					onKeyDown={this.handleKeyDown}
 					value={this.state.value}
 				/>
 			);
