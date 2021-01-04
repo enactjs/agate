@@ -20,7 +20,7 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
-import {ButtonBase, ButtonDecorator} from '../Button';
+import {ButtonBase} from '../Button';
 import Skinnable from '../Skinnable';
 
 import componentCss from './LabeledIconButton.module.less';
