@@ -12,7 +12,10 @@
 
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
+import {ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
 import {LabeledIconBase as UiLabeledIconBase, LabeledIconDecorator as UiLabeledIconDecorator} from '@enact/ui/LabeledIcon';
+import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -163,7 +166,10 @@ const LabeledIconButtonBase = kind({
  */
 const LabeledIconButtonDecorator = compose(
 	UiLabeledIconDecorator,
-	ButtonDecorator
+	Pure,
+	UiButtonDecorator,
+	Spottable,
+	Skinnable
 );
 
 /**
