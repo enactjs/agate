@@ -17,7 +17,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Changed
 
-- `agate/FullscreenPopup` to support `duration` prop as not only a string but also a number
+- `agate/FullscreenPopup` prop `duration` to support any valid CSS value
 
 ### Fixed
 
