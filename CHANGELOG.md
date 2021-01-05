@@ -10,11 +10,14 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
 - `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
 
+### Fixed
+
+- `agate/Dropdown` to not close when clicking the list scroller
+
 ## [1.1.1] - 2020-12-23
 
 ### Fixed
 
-- `agate/Dropdown` to not close when clicking the list scroller
 - Sampler build failure
 
 ## [1.1.0] - 2020-12-22
