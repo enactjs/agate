@@ -21,7 +21,7 @@ describe('SliderButton Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should set "aria-valueText" to value when value is changed', () => {
+	test('should set "aria-valueText" to text when value is changed to the 2nd item', () => {
 		const handleChange = jest.fn();
 		const evt = {value: 1};
 		const sliderButton = mount(
@@ -36,26 +36,7 @@ describe('SliderButton Specs', () => {
 		expect(valueText).toBe('Ridiculous Speed');
 	});
 
-	test('should emit an onChange event when changing to value 2', () => {
-		const handleChange = jest.fn();
-		const evt = {value: 2};
-		const sliderButton = mount(
-			<SliderButton onChange={handleChange}>
-				{children}
-			</SliderButton>
-		);
-
-		sliderButton.find('SliderButton').simulate('change', evt);
-
-		const expected = 2;
-		const actual = handleChange.mock.calls[0][0].value;
-		expect(actual).toBe(expected);
-
-		const valueText = sliderButton.find('SliderButton').prop('aria-valuetext');
-		expect(valueText).toBe('Ludicrous Speed');
-	});
-
-	test('should set "aria-valueText" to value when value is changed', () => {
+	test('should set "aria-valueText" to text when value is changed to the 3rd item', () => {
 		const handleChange = jest.fn();
 		const evt = {value: 2};
 		const sliderButton = mount(
@@ -70,23 +51,7 @@ describe('SliderButton Specs', () => {
 		expect(valueText).toBe('Ludicrous Speed');
 	});
 
-	test('should emit an onChange event when changing to value 0', () => {
-		const handleChange = jest.fn();
-		const evt = {value: 0};
-		const sliderButton = mount(
-			<SliderButton onChange={handleChange}>
-				{children}
-			</SliderButton>
-		);
-
-		sliderButton.find('SliderButton').simulate('change', evt);
-
-		const expected = 0;
-		const actual = handleChange.mock.calls[0][0].value;
-		expect(actual).toBe(expected);
-	});
-
-	test('should set "aria-valueText" to value when value is changed', () => {
+	test('should set "aria-valueText" to text when value is changed to the 1st item', () => {
 		const handleChange = jest.fn();
 		const evt = {value: 0};
 		const sliderButton = mount(
