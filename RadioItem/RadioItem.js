@@ -12,6 +12,8 @@
 
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
+import Pure from '@enact/ui/internal/Pure';
+import Slottable from '@enact/ui/Slottable';
 import Toggleable from '@enact/ui/Toggleable';
 import Touchable from '@enact/ui/Touchable';
 import PropTypes from 'prop-types';
@@ -67,7 +69,15 @@ const RadioItemBase = kind({
 		 * @default false
 		 * @public
 		 */
-		selected: PropTypes.bool
+		selected: PropTypes.bool,
+
+		/**
+		 * Nodes to be inserted after the radio button and before `children`.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
+		slotBefore: PropTypes.node
 	},
 
 	defaultProps: {
@@ -85,7 +95,7 @@ const RadioItemBase = kind({
 		className: ({css, selected, styler}) => styler.append(selected && css.selected)
 	},
 
-	render: ({children, css, icon, selected, ...rest}) => {
+	render: ({children, css, icon, selected, slotBefore, ...rest}) => {
 		return (
 			<Item
 				aria-checked={selected}
@@ -93,7 +103,10 @@ const RadioItemBase = kind({
 				{...rest}
 				css={css}
 			>
-				<Icon slot="slotBefore" className={css.icon} size="small">{icon}</Icon>
+				<slotBefore>
+					<Icon className={css.icon} size="small">{icon}</Icon>
+					{slotBefore}
+				</slotBefore>
 				{children}
 			</Item>
 		);
@@ -114,6 +127,7 @@ const RadioItemBase = kind({
 const RadioItemDecorator = compose(
 	Toggleable({toggleProp: 'onTap'}),
 	Touchable,
+	Slottable({slots: ['label', 'slotAfter', 'slotBefore']}),
 	Spottable,
 	Skinnable
 );
@@ -128,7 +142,11 @@ const RadioItemDecorator = compose(
  * @ui
  * @public
  */
-const RadioItem = RadioItemDecorator(RadioItemBase);
+const RadioItem = Pure(
+	RadioItemDecorator(
+		RadioItemBase
+	)
+);
 
 export default RadioItem;
 export {

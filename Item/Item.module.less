@@ -2,6 +2,7 @@
 //
 @import "../styles/mixins.less";
 @import "../styles/skin.less";
+@import "../styles/variables-base.less";
 
 .item {
 	// Item's display is override Layout so forcing it back here'
@@ -24,14 +25,32 @@
 		}
 	}
 
+	.slotAfter,
+	.slotBefore {
+		align-items: center;
+
+		// Remove the specific edge margin on direct children so the slot can define the proper
+		// spacing for itself.
+
+		& > div:first-child {
+			margin-inline-start: 0;
+		}
+
+		& > div:last-child {
+			margin-inline-end: 0;
+		}
+	}
+
 	.slotAfter {
 		display: flex;
 		justify-content: center;
+		margin-inline-start: @agate-item-slotafter-spacing;
 	}
 
 	.slotBefore {
 		display: flex;
 		justify-content: center;
+		margin-inline-end: @agate-item-slotbefore-spacing;
 	}
 
 	.applySkins({
