@@ -172,7 +172,7 @@ const CheckboxItemBase = kind({
  * @hoc
  * @memberof agate/CheckboxItem
  * @mixes ui/Toggleable.Toggleable
- * @mixes ui/Slottable.Slottable
+ * @mixes spotlight/Slottable.Slottable
  * @public
  */
 const CheckboxItemDecorator = compose(
