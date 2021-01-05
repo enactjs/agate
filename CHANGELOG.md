@@ -14,6 +14,8 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
+- `agate/Dropdown` to not close when clicking the list scroller
+
 - Sampler build failure
 
 ## [1.1.0] - 2020-12-22
