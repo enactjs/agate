@@ -35,7 +35,7 @@ import compose from 'ramda/src/compose';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Button from '../Button';
+import {ButtonBase} from '../Button';
 import Icon from '../Icon';
 import Item from '../Item';
 import RadioItem from '../RadioItem';
@@ -46,6 +46,7 @@ import componentCss from './Dropdown.module.less';
 
 const oppositeDirection = {left: 'right', right: 'left', up: 'down', down: 'up'};
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
+const Button = Skinnable(ButtonBase);
 const MarqueeButton = MarqueeDecorator({className: componentCss.marquee}, Button);
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
 
