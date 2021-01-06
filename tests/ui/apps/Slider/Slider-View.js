@@ -1,4 +1,4 @@
-import {scaleToRem} from "@enact/ui/resolution";
+import {scaleToRem} from '@enact/ui/resolution';
 import React from 'react';
 
 import Heading from '../../../../Heading';
