@@ -347,14 +347,6 @@ const IncrementSliderBase = kind({
 		progressAnchor: PropTypes.number,
 
 		/**
-		 * Displays an anchor at `progressAnchor`.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		showAnchor: PropTypes.bool,
-
-		/**
 		 * The size of the incrementSlider.
 		 *
 		 * @type {('small'|'large')}
@@ -442,7 +434,7 @@ const IncrementSliderBase = kind({
 	},
 
 	computed: {
-		className: ({orientation, size, showAnchor, styler}) => styler.append(orientation, showAnchor, size),
+		className: ({orientation, size, styler}) => styler.append(orientation, size),
 		decrementDisabled: ({disabled, min, value = min}) => disabled || value <= min,
 		incrementDisabled: ({disabled, max, min, value = min}) => disabled || value >= max,
 		decrementAriaLabel: ({'aria-valuetext': valueText, decrementAriaLabel, min, value = min}) => {
@@ -490,7 +482,6 @@ const IncrementSliderBase = kind({
 		onSpotlightDisappear,
 		orientation,
 		progressAnchor,
-		showAnchor,
 		size,
 		spotlightDisabled,
 		step,
@@ -537,7 +528,6 @@ const IncrementSliderBase = kind({
 					onDragStart={onDragStart}
 					onSpotlightDisappear={onSpotlightDisappear}
 					orientation={orientation}
-					showAnchor={showAnchor}
 					spotlightDisabled={spotlightDisabled}
 					progressAnchor={progressAnchor}
 					step={step}
