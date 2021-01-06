@@ -9,14 +9,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ArcPicker` and `agate/ArcSlider` prop `disabled` to be inactive
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
 - `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
+- `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
+- `agate/Popup` `duration` and `type` props
 
-## [1.1.1] - 2020-12-23
-
-### Added
-
-- `agate/Popup` `bottom`, `fullscreen`, `left` and `right` values to `direction` prop
-
-### Changed
+### Deprecated
 
 - `agate/FullScreenPopup` to be deprecated
 

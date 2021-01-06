@@ -7,7 +7,7 @@
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%,-50%);
+	transform: translate(-50%, -50%);
 	box-sizing: border-box;
 
 	.body {
@@ -22,6 +22,10 @@
 		}
 	}
 
+	&.center {
+		/* Defined to prevent global export */
+	}
+
 	&.bottom,
 	&.fullscreen,
 	&.left,
@@ -29,6 +33,7 @@
 	&.top {
 		left: 0;
 		right: 0;
+		top: 0;
 		transform: none;
 	}
 
@@ -37,14 +42,9 @@
 		top: auto;
 	}
 
-	&.top {
-		top: 0;
-	}
-
 	&.left,
 	&.right {
 		height: 100%;
-		top: 0;
 	}
 
 	&.right {
@@ -58,7 +58,6 @@
 	}
 
 	&.fullscreen {
-		top: 0;
 		height: 100%;
 		width: 100%;
 	}

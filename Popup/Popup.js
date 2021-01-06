@@ -53,6 +53,14 @@ const transitionDirection = {
 const PopupBase = kind({
 	name: 'Popup',
 	propTypes: /** @lends agate/Popup.PopupBase.prototype */ {
+		/**
+		 * Buttons to be included within the Popup component.
+		 *
+		 * Typically, these buttons would be used to close or take action on the dialog.
+		 *
+		 * @type {Element|Element[]}
+		 * @public
+		 */
 		buttons: PropTypes.oneOfType([
 			PropTypes.element,
 			PropTypes.arrayOf(PropTypes.element)
@@ -92,9 +100,20 @@ const PopupBase = kind({
 		 * * `left` - Applied when the `position` is 'left'
 		 *
 		 * @type {Object}
-		 * @private
+		 * @public
 		 */
 		css: PropTypes.object,
+
+		/**
+		 * Controls how long the transition should take.
+		 * Supported preset durations are: `'short'` (250ms), `'medium'` (500ms), and `'long'` (1s).
+		 * `'medium'` (500ms) is default when no others are specified.
+		 *
+		 * @type {String}
+		 * @default 'medium'
+		 * @public
+		 */
+		duration: PropTypes.string,
 
 		/**
 		 * Disables transition animation.
@@ -135,7 +154,7 @@ const PopupBase = kind({
 		/**
 		 * Sets the position of the popup on the screen.
 		 *
-		 * @type {('center'|'top')}
+		 * @type {('bottom'|'center'|'fullscreen'|'left'|'right'|'top')}
 		 * @default 'center'
 		 * @public
 		 */
@@ -155,11 +174,23 @@ const PopupBase = kind({
 		 * @type {String}
 		 * @public
 		 */
-		title: PropTypes.string
+		title: PropTypes.string,
+
+		/**
+		 * The type of transition to affect the content.
+		 *
+		 * Supported types are: `'slide'`, `'clip'`, and `'fade'`.
+		 *
+		 * @type {String}
+		 * @default 'slide'
+		 * @public
+		 */
+		type: PropTypes.oneOf(['slide', 'fade'])
 	},
 	defaultProps: {
 		centered: false,
 		closeButton: false,
+		duration: 'medium',
 		noAnimation: false,
 		open: false,
 		position: 'center'
@@ -171,16 +202,16 @@ const PopupBase = kind({
 	},
 	computed: {
 		className: ({centered, closeButton, position, styler, title}) => styler.append(position, {withCloseButton: closeButton, withTitle: title, centered}),
-		transitionType : ({position}) => position === 'center' ? 'fade' : 'slide',
-		direction : ({position}) => transitionDirection[position]
+		transitionType: ({position}) => position === 'center' ? 'fade' : 'slide',
+		direction: ({position}) => transitionDirection[position]
 	},
-	render: ({buttons, children, closeButton, css, direction, noAnimation, onClose, onHide, open, position, skin, title, transitionType, ...rest}) => {
+	render: ({buttons, children, closeButton, css, direction, noAnimation, onClose, onHide, open, skin, title, transitionType, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
 		delete rest.centered;
 
 		return (
 			<TransitionContainer
-				noAnimation={position === 'fullscreen' ? true : noAnimation}
+				noAnimation={noAnimation}
 				visible={open}
 				direction={direction}
 				duration="short"

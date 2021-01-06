@@ -16,6 +16,7 @@ storiesOf('Agate', module)
 				<Popup
 					centered={boolean('centered', Config)}
 					closeButton={boolean('closeButton', Config)}
+					duration={select('duration', ['short', 'medium', 'long'], Config)}
 					noAnimation={boolean('noAnimation', Config)}
 					noAutoDismiss={boolean('noAutoDismiss', Config)}
 					onClose={action('onClose')}
