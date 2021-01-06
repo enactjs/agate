@@ -1,4 +1,7 @@
 const Page = require('./FanSpeedControlPage');
+const accentColor = 'rgb(139,126,254)'; // selected and focused
+const selectedColor = 'rgb(68,68,68)';
+const unselectedColor = 'rgb(238,238,238)';
 
 describe('FanSpeedControl', function () {
 	beforeEach(function () {
@@ -9,16 +12,18 @@ describe('FanSpeedControl', function () {
 		const fanSpeedControl = Page.components.fanSpeedControlDefault;
 
 		it('should have the first arc selected by default', function () {
-			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
+			Page.spotlightSelect();
+
+			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
 		});
 
 		it('should select all arcs up to the clicked arc', function () {
 			fanSpeedControl.clickablePath(3).click();
-			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
-			expect(fanSpeedControl.coloredPath(2).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
-			expect(fanSpeedControl.coloredPath(3).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
+			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
+			expect(fanSpeedControl.coloredPath(2).getCSSProperty('stroke').value).to.equal(accentColor);
+			expect(fanSpeedControl.coloredPath(3).getCSSProperty('stroke').value).to.equal(accentColor);
 			// next one is unselected
-			expect(fanSpeedControl.coloredPath(4).getCSSProperty('stroke').value).to.equal('rgb(238,238,238)');
+			expect(fanSpeedControl.coloredPath(4).getCSSProperty('stroke').value).to.equal(unselectedColor);
 		});
 
 		it('should display `fan` icon', function () {
@@ -48,7 +53,7 @@ describe('FanSpeedControl', function () {
 		const fanSpeedControl = Page.components.fanSpeedControlDisabled;
 
 		it('should have the first arc selected by default', function () {
-			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
+			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal(selectedColor);
 		});
 
 		it('should display `fan` icon', function () {
@@ -61,9 +66,9 @@ describe('FanSpeedControl', function () {
 
 		it('should not select the third arc when it is clicked', function () {
 			fanSpeedControl.clickablePath(3).click();
-			expect(fanSpeedControl.coloredPath(3).getCSSProperty('stroke').value).to.equal('rgb(238,238,238)');
+			expect(fanSpeedControl.coloredPath(3).getCSSProperty('stroke').value).to.equal(unselectedColor);
 			// first arc should remain selected
-			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal('rgb(68,68,68)');
+			expect(fanSpeedControl.coloredPath(1).getCSSProperty('stroke').value).to.equal(accentColor);
 		});
 	});
 });
