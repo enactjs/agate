@@ -79,16 +79,6 @@ describe('Popup specs', () => {
 
 			expect(actual).toBe(expected);
 		});
-
-		test('should not have center class', () => {
-			const popup = shallow(
-				<PopupBase open position="center">
-					<div>popup</div>
-				</PopupBase>
-			);
-
-			expect(popup.find(`.${css.popup}`).prop('className').split(' ')).not.toContain('center');
-		});
 	});
 
 	describe('with position top', function () {
