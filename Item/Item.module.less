@@ -2,7 +2,6 @@
 //
 @import "../styles/mixins.less";
 @import "../styles/skin.less";
-@import "../styles/variables-base.less";
 
 .item {
 	// Item's display is override Layout so forcing it back here'
@@ -44,13 +43,11 @@
 	.slotAfter {
 		display: flex;
 		justify-content: center;
-		margin-inline-start: @agate-item-slotafter-spacing;
 	}
 
 	.slotBefore {
 		display: flex;
 		justify-content: center;
-		margin-inline-end: @agate-item-slotbefore-spacing;
 	}
 
 	.applySkins({
@@ -101,7 +98,13 @@
 
 		.slotAfter {
 			font-size: @agate-item-sub-text-size;
+			margin-inline-start: @agate-item-slotafter-spacing;
 		}
+
+		.slotBefore {
+			margin-inline-end: @agate-item-slotbefore-spacing;
+		}
+
 
 		&.selected {
 			color: @agate-item-selected-color;
