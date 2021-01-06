@@ -64,16 +64,6 @@ const IncrementSliderBase = kind({
 
 	propTypes: /** @lends agate/IncrementSlider.IncrementSliderBase.prototype */ {
 		/**
-		 * Activates the slider knob when focused so that it may be manipulated via the directional
-		 * input keys.
-		 *
-		 * @type {Boolean}
-		 * @default false
-		 * @public
-		 */
-		activateOnFocus: PropTypes.bool,
-
-		/**
 		 * Sets the knob to selected state and allows it to move via 5-way controls.
 		 *
 		 * @type {Boolean}
@@ -453,8 +443,7 @@ const IncrementSliderBase = kind({
 		}
 	},
 
-	render: ({activateOnFocus,
-		active,
+	render: ({active,
 		'aria-hidden': ariaHidden,
 		backgroundProgress,
 		css,
@@ -511,7 +500,6 @@ const IncrementSliderBase = kind({
 				/>
 				<Slider
 					{...ariaProps}
-					activateOnFocus={activateOnFocus}
 					active={active}
 					backgroundProgress={backgroundProgress}
 					css={css}
