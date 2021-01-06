@@ -179,13 +179,13 @@ const PopupBase = kind({
 		/**
 		 * The type of transition to affect the content.
 		 *
-		 * Supported types are: `'slide'`, `'clip'`, and `'fade'`.
+		 * Supported types are: `'slide'` and `'fade'`.
 		 *
 		 * @type {String}
-		 * @default 'slide'
+		 * @default 'fade'
 		 * @public
 		 */
-		type: PropTypes.oneOf(['slide', 'fade'])
+		type: PropTypes.oneOf(['fade', 'slide'])
 	},
 	defaultProps: {
 		centered: false,
@@ -193,7 +193,8 @@ const PopupBase = kind({
 		duration: 'medium',
 		noAnimation: false,
 		open: false,
-		position: 'center'
+		position: 'center',
+		type: 'fade'
 	},
 	styles: {
 		css: componentCss,
@@ -202,7 +203,11 @@ const PopupBase = kind({
 	},
 	computed: {
 		className: ({centered, closeButton, position, styler, title}) => styler.append(position, {withCloseButton: closeButton, withTitle: title, centered}),
-		transitionType: ({position}) => position === 'center' ? 'fade' : 'slide',
+		transitionType: ({position, type}) => {
+			const setTransitionType = position === 'center' ? 'fade' : 'slide';
+
+			return type ? type : setTransitionType;
+		},
 		direction: ({position}) => transitionDirection[position]
 	},
 	render: ({buttons, children, closeButton, css, direction, noAnimation, onClose, onHide, open, skin, title, transitionType, ...rest}) => {
