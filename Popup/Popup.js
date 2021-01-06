@@ -193,8 +193,7 @@ const PopupBase = kind({
 		duration: 'medium',
 		noAnimation: false,
 		open: false,
-		position: 'center',
-		type: 'fade'
+		position: 'center'
 	},
 	styles: {
 		css: componentCss,

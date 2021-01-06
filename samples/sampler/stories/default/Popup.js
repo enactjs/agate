@@ -26,7 +26,7 @@ storiesOf('Agate', module)
 					scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
 					spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
 					title={text('title', Config, 'Title')}
-					type={select('type', ['fade', 'slide'], Config)}
+					type={select('type', [null, 'fade', 'slide'], Config)}
 				>
 					<div>{text('children', Config, 'Hello Popup')}</div>
 				</Popup>
