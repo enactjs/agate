@@ -1,12 +1,12 @@
-import kind from "@enact/core/kind";
+import kind from '@enact/core/kind';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import ri from '@enact/ui/resolution';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Spinner from '@enact/agate/Spinner';
-import Skinnable from "@enact/agate/Skinnable";
+import Skinnable from '@enact/agate/Skinnable';
 
 Spinner.displayName = 'Spinner';
 
@@ -52,4 +52,4 @@ storiesOf('Spinner', module)
 				</div>
 			</div>
 		)
-	)
+	);
