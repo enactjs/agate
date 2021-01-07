@@ -159,13 +159,13 @@ const LabeledIconButtonBase = kind({
 /**
  * Adds Agate specific behaviors to [LabeledIconButtonBase]{@link agate/LabeledIconButton.LabeledIconButtonBase}.
  *
- * @hoc
  * @memberof agate/LabeledIconButton
+ * @hoc
  * @mixes ui/Button.ButtonDecorator
  * @mixes ui/LabeledIcon.LabeledIconDecorator
  * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
- * @mixes agate/TooltipDecorator
+ * @mixes agate/TooltipDecorator.TooltipDecorator
  * @public
  */
 const LabeledIconButtonDecorator = compose(
