@@ -22,6 +22,7 @@ import React from 'react';
 
 import {ButtonBase} from '../Button';
 import Skinnable from '../Skinnable';
+import TooltipDecorator from '../TooltipDecorator';
 
 import componentCss from './LabeledIconButton.module.less';
 
@@ -160,14 +161,18 @@ const LabeledIconButtonBase = kind({
  *
  * @hoc
  * @memberof agate/LabeledIconButton
+ * @mixes ui/Button.ButtonDecorator
  * @mixes ui/LabeledIcon.LabeledIconDecorator
- * @mixes agate/Button.ButtonDecorator
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes agate/Skinnable.Skinnable
+ * @mixes agate/TooltipDecorator
  * @public
  */
 const LabeledIconButtonDecorator = compose(
-	UiLabeledIconDecorator,
 	Pure,
 	UiButtonDecorator,
+	UiLabeledIconDecorator,
+	TooltipDecorator,
 	Spottable,
 	Skinnable
 );
