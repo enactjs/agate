@@ -11,17 +11,22 @@
  */
 
 import kind from '@enact/core/kind';
+import {handle, adaptEvent, forwardCustom, forwardWithPrevent} from '@enact/core/handle';
+import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
+import {isRtlText} from '@enact/i18n/util';
 import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
+import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
+import Tooltip from '../TooltipDecorator/Tooltip';
 
 import InputDecoratorIcon from './InputDecoratorIcon';
 import InputSpotlightDecorator from './InputSpotlightDecorator';
-import {extractInputProps} from './util';
+import {calcAriaLabel, extractInputProps} from './util';
 
 import componentCss from './Input.module.less';
 
@@ -96,6 +101,15 @@ const InputBase = kind({
 		 * @public
 		 */
 		iconBefore: PropTypes.string,
+
+		/**
+		 * The size of the input field icon.
+		 *
+		 * @type {('small'|'large')}
+		 * @default 'large'
+		 * @public
+		 */
+		iconSize: PropTypes.oneOf(['small', 'large']),
 
 		/**
 		 * Indicates [value]{@link agate/Input.InputBase.value} is invalid and shows
@@ -182,9 +196,9 @@ const InputBase = kind({
 		rtl: PropTypes.bool,
 
 		/**
-		 * The size of the input field icon.
+		 * The size of the input field.
 		 *
-		 * @type {('small'|'large')}
+		 * @type {('large'|'small')}
 		 * @default 'large'
 		 * @public
 		 */
@@ -216,6 +230,7 @@ const InputBase = kind({
 		dismissOnEnter: false,
 		invalid: false,
 		placeholder: '',
+		size: 'large',
 		type: 'text'
 	},
 
@@ -226,40 +241,78 @@ const InputBase = kind({
 	},
 
 	handlers: {
-		onChange: (ev, {onChange}) => {
-			if (onChange) {
-				onChange({value: ev.target.value});
-			}
-		}
+		onChange: handle(
+			adaptEvent(
+				ev => ({
+					type: 'onBeforeChange',
+					value: ev.target.value
+				}),
+				forwardWithPrevent('onBeforeChange')
+			),
+			forwardCustom('onChange', ev => ({
+				stopPropagation: () => ev.stopPropagation(),
+				value: ev.target.value
+			}))
+		)
 	},
 
+	// handlers: {
+	// 	onChange: (ev, {onChange}) => {
+	// 		if (onChange) {
+	// 			onChange({value: ev.target.value});
+	// 		}
+	// 	}
+	// },
+
 	computed: {
-		// 'aria-label': ({placeholder, type, value}) => {
-		// 	const title = (value == null || value === '') ? placeholder : '';
-		// 	return calcAriaLabel(title, type, value);
-		// },
-		className: ({focused, invalid, styler}) => styler.append({focused, invalid}),
+		'aria-label': ({placeholder, type, value}) => {
+			const title = (value == null || value === '') ? placeholder : '';
+			return calcAriaLabel(title, type, value);
+		},
+		className: ({focused, invalid, size, styler}) => styler.append({focused, invalid}, size),
+		dir: ({value, placeholder}) => isRtlText(value || placeholder) ? 'rtl' : 'ltr',
+		invalidTooltip: ({css, invalid, invalidMessage = $L('Please enter a valid value.')}) => {
+			if (invalid && invalidMessage) {
+				return (
+					<Tooltip css={css} relative>
+						{invalidMessage}
+					</Tooltip>
+				);
+			}
+		},
 		// ensure we have a value so the internal <input> is always controlled
 		value: ({value}) => typeof value === 'number' ? value : (value || '')
 	},
 
-	render: ({css, disabled, iconAfter, iconBefore, onChange, placeholder, size, type, value, ...rest}) => {
+	// computed: {
+	// 	'aria-label': ({placeholder, type, value}) => {
+	// 		const title = (value == null || value === '') ? placeholder : '';
+	// 		return calcAriaLabel(title, type, value);
+	// 	},
+	// 	className: ({focused, invalid, styler}) => styler.append({focused, invalid}),
+	// 	// ensure we have a value so the internal <input> is always controlled
+	// 	value: ({value}) => typeof value === 'number' ? value : (value || '')
+	// },
+
+	render: ({css, dir, disabled, iconAfter, iconBefore, invalidTooltip, iconSize, onChange, placeholder, type, value, ...rest}) => {
 		const inputProps = extractInputProps(rest);
 		delete rest.dismissOnEnter;
 		delete rest.focused;
 		delete rest.invalid;
 		delete rest.invalidMessage;
+		delete rest.onBeforeChange;
 		delete rest.rtl;
 
 		return (
 			<div {...rest} aria-disabled={disabled} disabled={disabled}>
-				<InputDecoratorIcon position="before" size={size}>
+				<InputDecoratorIcon position="before" size={iconSize}>
 					{iconBefore}
 				</InputDecoratorIcon>
 				<input
 					{...inputProps}
 					aria-disabled={disabled}
 					className={css.input}
+					dir={dir}
 					disabled={disabled}
 					onChange={onChange}
 					placeholder={placeholder}
@@ -267,9 +320,10 @@ const InputBase = kind({
 					type={type}
 					value={value}
 				/>
-				<InputDecoratorIcon position="after" size={size}>
+				<InputDecoratorIcon position="after" size={iconSize}>
 					{iconAfter}
 				</InputDecoratorIcon>
+				{invalidTooltip}
 			</div>
 		);
 	}
@@ -286,6 +340,7 @@ const InputBase = kind({
  */
 const InputDecorator = compose(
 	Pure,
+	I18nContextDecorator({rtlProp: 'rtl'}),
 	Changeable,
 	InputSpotlightDecorator,
 	Skinnable
@@ -309,7 +364,7 @@ const Input = InputDecorator(InputBase);
 
 export default Input;
 export {
-	extractInputProps,
+	// extractInputProps,
 	Input,
 	InputBase,
 	InputDecorator
