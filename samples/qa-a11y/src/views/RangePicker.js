@@ -35,7 +35,7 @@ const RangePickerView = () => (
 			/>
 		</Section>
 
-		<SpotlightContainerSection className={appCss.marginTop} title="Vertical" vertical>
+		<SpotlightContainerSection className={appCss.marginTop} horizontal title="Vertical">
 			<RangePicker
 				alt="Vertical"
 				defaultValue={0}
@@ -87,7 +87,7 @@ const RangePickerView = () => (
 			/>
 		</Section>
 
-		<SpotlightContainerSection className={appCss.marginTop} title="Vertical" vertical>
+		<SpotlightContainerSection className={appCss.marginTop} horizontal title="Vertical">
 			<RangePicker
 				alt="Vertical"
 				decrementAriaLabel="This is a Label 9."
@@ -141,7 +141,7 @@ const RangePickerView = () => (
 			/>
 		</Section>
 
-		<SpotlightContainerSection className={appCss.marginTop} title="Vertical" vertical>
+		<SpotlightContainerSection className={appCss.marginTop} horizontal title="Vertical">
 			<RangePicker
 				alt="Vertical"
 				aria-label="This is a Label 21."
