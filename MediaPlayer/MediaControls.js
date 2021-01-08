@@ -1,4 +1,6 @@
 import kind from '@enact/core/kind';
+import {SpotlightContainerDecorator, spotlightDefaultClass} from '@enact/spotlight/SpotlightContainerDecorator';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -13,6 +15,10 @@ const badges = {
 	one: '1',
 	all: 'A'
 };
+
+const Container = SpotlightContainerDecorator({
+	enterTo: 'default-element'
+}, 'div');
 
 /**
  * A set of components for controlling media playback and rendering additional components.
@@ -197,61 +203,63 @@ const MediaControls = kind({
 
 	},
 
-	render: ({badge, menuIcon, nextTrackIcon, onRepeat, onNext, onPause, onPlay, onPrevious, onShuffle, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffle, shuffleIcon, ...rest}) => {
+	render: ({badge, menuIcon, nextTrackIcon, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffle, shuffleIcon, spotlightDisabled, ...rest}) => {
 		return (
 			<div {...rest}>
-				<Button
-					aria-label={$L('Repeat')}
-					backgroundOpacity="transparent"
-					badge={badge}
-					css={css}
-					icon={repeatIcon}
-					onClick={onRepeat}
-					size="large"
-				/>
-				<Button
-					aria-label={$L('Shuffle')}
-					backgroundOpacity="transparent"
-					className={shuffle ? css.repeat : ''}
-					css={css}
-					icon={shuffleIcon}
-					onClick={onShuffle}
-					size="large"
-				/>
-				<Button
-					aria-label={$L('Previous')}
-					backgroundOpacity="transparent"
-					css={css}
-					icon={previousTrackIcon}
-					onClick={onPrevious}
-					size="large"
-				/>
-				<Button
-					aria-label={paused ? $L('Play') : $L('Pause')}
-					backgroundOpacity="transparent"
-					className={css.playPauseButton}
-					css={css}
-					minWidth={false}
-					onClick={paused ? onPlay : onPause}
-					size="large"
-				>
-					<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
-				</Button>
-				<Button
-					aria-label={$L('Next')}
-					backgroundOpacity="transparent"
-					css={css}
-					icon={nextTrackIcon}
-					onClick={onNext}
-					size="large"
-				/>
-				<Button
-					aria-label={$L('Menu')}
-					backgroundOpacity="transparent"
-					css={css}
-					icon={menuIcon}
-					size="large"
-				/>
+				<Container spotlightDisabled={spotlightDisabled}>
+					<Button
+						aria-label={$L('Repeat')}
+						backgroundOpacity="transparent"
+						badge={badge}
+						css={css}
+						icon={repeatIcon}
+						onClick={onRepeat}
+						size="large"
+					/>
+					<Button
+						aria-label={$L('Shuffle')}
+						backgroundOpacity="transparent"
+						className={shuffle ? css.repeat : ''}
+						css={css}
+						icon={shuffleIcon}
+						onClick={onShuffle}
+						size="large"
+					/>
+					<Button
+						aria-label={$L('Previous')}
+						backgroundOpacity="transparent"
+						css={css}
+						icon={previousTrackIcon}
+						onClick={onPrevious}
+						size="large"
+					/>
+					<Button
+						aria-label={paused ? $L('Play') : $L('Pause')}
+						backgroundOpacity="transparent"
+						className={classnames(css.playPauseButton, spotlightDefaultClass)}
+						css={css}
+						minWidth={false}
+						onClick={paused ? onPlay : onPause}
+						size="large"
+					>
+						<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
+					</Button>
+					<Button
+						aria-label={$L('Next')}
+						backgroundOpacity="transparent"
+						css={css}
+						icon={nextTrackIcon}
+						onClick={onNext}
+						size="large"
+					/>
+					<Button
+						aria-label={$L('Menu')}
+						backgroundOpacity="transparent"
+						css={css}
+						icon={menuIcon}
+						size="large"
+					/>
+				</Container>
 			</div>
 		);
 	}

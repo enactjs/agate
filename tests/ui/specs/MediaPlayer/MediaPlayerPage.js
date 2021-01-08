@@ -1,6 +1,6 @@
 'use strict';
 const {Page} = require('@enact/ui-test-utils/utils');
-const {element, getComponent} = require('@enact/ui-test-utils/utils');
+const {element, getComponent, getText} = require('@enact/ui-test-utils/utils');
 
 class MediaPlayerInterface {
 	constructor (id) {
@@ -13,7 +13,7 @@ class MediaPlayerInterface {
 	}
 
 	hover (ariaLabel) {
-		return $(this.selector + `>div>div[aria-label=${ariaLabel}]`).moveTo({xOffset: 0, yOffset: 0});
+		return $(this.selector + `>div>div>div[aria-label=${ariaLabel}]`).moveTo({xOffset: 0, yOffset: 0});
 	}
 
 	get self () {
@@ -41,23 +41,27 @@ class MediaPlayerInterface {
 	}
 
 	get previousButton () {
-		return $(this.selector + '>div>div[aria-label=Previous]');
+		return $(this.selector + '>div>div>div[aria-label=Previous]');
 	}
 
 	get nextButton () {
-		return $(this.selector + '>div>div[aria-label=Next]');
+		return $(this.selector + '>div>div>div[aria-label=Next]');
 	}
 
 	get shuffleButton () {
-		return $(this.selector + '>div>div[aria-label=Shuffle]');
+		return $(this.selector + '>div>div>div[aria-label=Shuffle]');
 	}
 
 	get repeatButton () {
-		return $(this.selector + '>div>div[aria-label=Repeat]');
+		return $(this.selector + '>div>div>div[aria-label=Repeat]');
+	}
+
+	get repeatStatus () {
+		return getText($(this.selector + '>div>div>div[aria-label=Repeat]' + '> .enact_ui_Button_Button_decoration > .Button_Button_badge'));
 	}
 
 	get menuButton () {
-		return $(this.selector + '>div>div[aria-label=Menu]');
+		return $(this.selector + '>div>div>div[aria-label=Menu]');
 	}
 
 	get source () {
