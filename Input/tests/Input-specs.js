@@ -46,7 +46,7 @@ describe('Input Specs', () => {
 	test('should support iconAfter', () => {
 		const expected = 'happyface';
 		const subject = mount(
-			<Input iconAfter={expected}/>
+			<Input iconAfter={expected} />
 		);
 
 		const actual = subject.find('Icon').prop('children');
@@ -57,7 +57,7 @@ describe('Input Specs', () => {
 	test('should support iconBefore', () => {
 		const expected = 'happyface';
 		const subject = mount(
-			<Input iconBefore={expected}/>
+			<Input iconBefore={expected} />
 		);
 
 		const actual = subject.find('Icon').prop('children');
@@ -78,7 +78,7 @@ describe('Input Specs', () => {
 
 	test('should have iconSize small when iconSize prop equals small', () => {
 		const subject = mount(
-			<Input iconAfter="happyface" iconSize="small"/>
+			<Input iconAfter="happyface" iconSize="small" />
 		);
 
 		const expected = 'small';

@@ -8,7 +8,7 @@ const InputTests = [
 	<Input size="small" />,
 	<Input invalid />,
 	<Input invalid invalidMessage="Custom invalid message" />,
-	<Input iconAfter="cancel" iconSize="small"/>
+	<Input iconAfter="cancel" iconSize="small" />
 ];
 
 export default InputTests;

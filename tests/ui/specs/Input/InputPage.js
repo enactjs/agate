@@ -27,7 +27,7 @@ class InputPage extends Page {
 		return $('#input5');
 	}
 	get smallInput () {
-		return $('#input6')
+		return $('#input6');
 	}
 	get inputElement1 () {
 		return $('#input1 input');
