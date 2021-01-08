@@ -178,7 +178,16 @@ const MediaControls = kind({
 		 * @default 'shuffle'
 		 * @public
 		 */
-		shuffleIcon: PropTypes.string
+		shuffleIcon: PropTypes.string,
+
+		/**
+		 * Disables spotlight navigation into the component.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		spotlightDisabled: PropTypes.bool
 	},
 
 	defaultProps: {
