@@ -11,7 +11,6 @@ import Tooltip from '../TooltipDecorator/Tooltip';
 import componentCss from './ProgressBarTooltip.module.less';
 
 const verticalPositions = ['before', 'after', 'left', 'right'];
-const isVerticalModeRadial = (orientation, position) => orientation === 'radial' && verticalPositions.includes(position);
 
 // prop-type validator that warns on invalid orientation + position
 /* istanbul ignore next */
@@ -99,7 +98,6 @@ const getSide = (orientation, position) => {
 			case 'right':
 				return [position, 'above'];
 			default:
-				// invalid values for radial so use defaults
 				return ['auto', 'above'];
 		}
 	}
@@ -135,14 +133,13 @@ const ProgressBarTooltipBase = kind({
 		/**
 		 * Sets the orientation of the tooltip based on the orientation of the bar.
 		 *
-		 * 'vertical' sends the tooltip to one of the sides, 'horizontal' positions it above the
-		 * bar, 'radial' can position it on all sides.
+		 * 'vertical' sends the tooltip to one of the sides, 'horizontal' positions it above the bar.
 		 *
-		 * @type {('horizontal'|'vertical'|'radial')}
+		 * @type {('horizontal'|'vertical')}
 		 * @default 'horizontal'
 		 * @public
 		 */
-		orientation: PropTypes.oneOf(['horizontal', 'vertical', 'radial']),
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
 		 * Displays the value as a percentage.
@@ -156,7 +153,7 @@ const ProgressBarTooltipBase = kind({
 		/**
 		 * Position of the tooltip with respect to the progress bar.
 		 *
-		 * * For `orientation="horizontal"` or `orientation="radial"` progress bars, the default value is `'above'`.
+		 * * For `orientation="horizontal"` progress bars, the default value is `'above'`.
 		 * * For `orientation="vertical"` progress bars, the default value is `'before'`.
 		 *
 		 * When using `'before'` or `'after'` alone or in any of the below combinations, `'before'`
@@ -165,7 +162,7 @@ const ProgressBarTooltipBase = kind({
 		 * `'after'` will position the tooltip on the opposite side: the right side for LTR and
 		 * left for RTL.
 		 *
-		 * Valid values when `orientation="horizontal"` or `orientation="radial"`
+		 * Valid values when `orientation="horizontal"`
 		 *
 		 * | *Value* | *Tooltip Direction* |
 		 * |---|---|
@@ -182,7 +179,7 @@ const ProgressBarTooltipBase = kind({
 		 * | `'below right'` | Below component, flowing to the right |
 		 * | `'below after'` | Below component, flowing to the end of text |
 		 *
-		 * Valid values when `orientation="vertical"` or `orientation="radial"`
+		 * Valid values when `orientation="vertical"`
 		 *
 		 * | *Value* | *Tooltip Direction* |
 		 * |---|---|
@@ -195,7 +192,7 @@ const ProgressBarTooltipBase = kind({
 		 * @public
 		 */
 		position: validatePosition(PropTypes.oneOf([
-			// horizontal or radial
+			// horizontal
 			'above',
 			'above before',
 			'above left',
@@ -209,7 +206,7 @@ const ProgressBarTooltipBase = kind({
 			'below right',
 			'below after',
 
-			// vertical or radial
+			// vertical
 			'left',
 			'before',
 			'right',
@@ -274,8 +271,8 @@ const ProgressBarTooltipBase = kind({
 			return styler.append(
 				orientation,
 				{
-					above: (v === 'above' && !isVerticalModeRadial(orientation, position)),
-					below: (v === 'below' && !isVerticalModeRadial(orientation, position)),
+					above: (v === 'above'),
+					below: (v === 'below'),
 					before: (h === 'before'),
 					after: (h === 'after'),
 					center: (h === 'center'),
@@ -285,7 +282,7 @@ const ProgressBarTooltipBase = kind({
 			);
 		},
 		arrowAnchor: ({orientation, position, rtl}) => {
-			if (orientation === 'vertical' || isVerticalModeRadial(orientation, position)) return 'middle';
+			if (orientation === 'vertical') return 'middle';
 
 			const [h] = getSide(orientation, position);
 			switch (h) {
@@ -305,7 +302,7 @@ const ProgressBarTooltipBase = kind({
 			const [h, v] = getSide(orientation, position);
 
 			let dir = 'right';
-			if (orientation === 'vertical' || isVerticalModeRadial(orientation, position)) {
+			if (orientation === 'vertical') {
 				if (
 					// forced to the left
 					h === 'left' ||

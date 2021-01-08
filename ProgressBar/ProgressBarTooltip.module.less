@@ -49,58 +49,5 @@
 				left: @agate-progressbar-tooltip-after-offset;
 			});
 		}
-
-		&.radial {
-			left: 50%;
-			bottom: 50%;
-
-			&.above,
-			&.below {
-				.before({
-					left: 50%;
-				});
-
-				.after({
-					left: 50%;
-				});
-
-				&.center {
-					left: 50%;
-				}
-			}
-
-			&.center {
-				&.above {
-					bottom: ~"calc(100% + " @agate-progressbar-tooltip-radial-offset ~")";
-				}
-
-				&.below {
-					top: ~"calc(100% + " @agate-progressbar-tooltip-radial-offset ~")";
-				}
-			}
-
-			.before({
-				left: -@agate-progressbar-tooltip-radial-offset;
-
-				&.above {
-					bottom: ~"calc(100% + " @agate-progressbar-tooltip-radial-offset ~")";
-				}
-				&.below {
-					top: ~"calc(100% + " @agate-progressbar-tooltip-radial-offset ~")";
-				}
-			});
-
-			.after({
-				left: ~"calc(100% + " @agate-progressbar-tooltip-radial-offset ~")";
-
-				&.above {
-					bottom: ~"calc(100% + " @agate-progressbar-tooltip-radial-offset ~")";
-				}
-
-				&.below {
-					top: ~"calc(100% + " @agate-progressbar-tooltip-radial-offset ~")";
-				}
-			});
-		}
 	})
 }

@@ -130,9 +130,7 @@ const ProgressBarBase = kind({
 	},
 
 	computed: {
-		className: ({size, styler}) => styler.append({
-			size
-		}),
+		className: ({size, styler}) => styler.append(size),
 		tooltip: ({tooltip}) => tooltip === true ? ProgressBarTooltip : tooltip
 	},
 

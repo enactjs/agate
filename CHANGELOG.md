@@ -9,7 +9,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ArcPicker` and `agate/ArcSlider` prop `disabled` to be inactive
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
 - `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
-- `agate/IncrementSlider` prop `tooltip`
+- `agate/IncrementSlider` prop `activateOnFocus` and `tooltip`
 - `agate/ProgressBar` prop `highlighted`, `tooltip`
 - `agate/ProgressBarTooltip` component
 - `agate/Slider` prop `tooltip`

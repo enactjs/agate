@@ -27,7 +27,7 @@ storiesOf('Agate', module)
 				<ProgressBar
 					disabled={disabled}
 					highlighted={boolean('highlighted', ProgressBarConfig)}
-					orientation={select('orientation', ['horizontal', 'vertical', 'radial'], ProgressBarConfig)}
+					orientation={select('orientation', ['horizontal', 'vertical'], ProgressBarConfig)}
 					progress={number('progress', ProgressBarConfig, {range: true, min: 0, max: 1, step: 0.01}, 0.4)}
 					progressAnchor={number('progressAnchor', ProgressBarConfig, {range: true, min: 0, max: 1, step: 0.01}, 0)}
 					size={select('size', ['small', 'large'], ProgressBarConfig)}
