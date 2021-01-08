@@ -110,6 +110,7 @@ const Key = kind({
 					{...rest}
 					css={css}
 					icon={children}
+					minWidth={false}
 					role={null}
 					size="large"
 				>
