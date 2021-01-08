@@ -1,5 +1,5 @@
 'use strict';
-const {getSubComponent, getText, Page} = require('@enact/ui-test-utils/utils');
+const {getText, Page} = require('@enact/ui-test-utils/utils');
 
 class LabeledIconButtonInterface {
 	constructor (id) {

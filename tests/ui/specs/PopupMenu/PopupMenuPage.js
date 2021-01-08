@@ -1,5 +1,5 @@
 'use strict';
-const {element, getSubComponent, getText, Page} = require('@enact/ui-test-utils/utils');
+const {element, getText, Page} = require('@enact/ui-test-utils/utils');
 
 class PopupMenuCommon {
 
