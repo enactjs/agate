@@ -21,6 +21,72 @@ describe('Input Specs', () => {
 		expect(subject.find('input').prop('placeholder')).toBe('hello');
 	});
 
+	test('should have size large by default', () => {
+		const subject = mount(
+			<Input />
+		);
+
+		const expected = 'large';
+		const actual = subject.find('input').prop('size');
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should have size small when size prop equals "small"', () => {
+		const subject = mount(
+			<Input size="small" />
+		);
+
+		const expected = 'small';
+		const actual = subject.find('input').prop('size');
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should support iconAfter', () => {
+		const expected = 'happyface';
+		const subject = mount(
+			<Input iconAfter={expected}/>
+		);
+
+		const actual = subject.find('Icon').prop('children');
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should support iconBefore', () => {
+		const expected = 'happyface';
+		const subject = mount(
+			<Input iconBefore={expected}/>
+		);
+
+		const actual = subject.find('Icon').prop('children');
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should have iconSize large by default', () => {
+		const subject = mount(
+			<Input iconAfter="happyface" />
+		);
+
+		const expected = 'large';
+		const actual = subject.find('Icon').prop('size');
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should have iconSize small when iconSize prop equals small', () => {
+		const subject = mount(
+			<Input iconAfter="happyface" iconSize="small"/>
+		);
+
+		const expected = 'small';
+		const actual = subject.find('Icon').prop('size');
+
+		expect(actual).toBe(expected);
+	});
+
 	test('should callback onChange when the text changes', () => {
 		const handleChange = jest.fn();
 		const value = 'blah';
