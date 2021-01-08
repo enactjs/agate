@@ -7,7 +7,6 @@ import {storiesOf} from '@storybook/react';
 import IncrementSlider, {IncrementSliderBase, IncrementSliderTooltip} from '@enact/agate/IncrementSlider';
 
 import {decrementIcons, incrementIcons} from './icons';
-import Slider from "../../../../Slider";
 
 const Config = mergeComponentMetadata('IncrementSlider', IncrementSliderBase, IncrementSlider);
 const IncrementSliderTooltipConfig = mergeComponentMetadata('IncrementSliderTooltip', IncrementSliderTooltip);
