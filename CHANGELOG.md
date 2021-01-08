@@ -13,6 +13,8 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/Dropdown` to show focused icon color for Silicon skin
+- `agate/LabeledIconButton` to display label text on multiple lines (removed marquee)
+- `agate/LabeledIconButton` `max-width` to display huge sized icon correctly
 
 ## [1.1.1] - 2020-12-23
 
