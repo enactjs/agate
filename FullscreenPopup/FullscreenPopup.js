@@ -39,7 +39,7 @@ const FullscreenPopupBase = kind({
 	propTypes: /** @lends agate/FullscreenPopup.FullscreenPopupBase.prototype */ {
 		css: PropTypes.object,
 		direction: PropTypes.string,
-		duration: PropTypes.string,
+		duration: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 		noAnimation: PropTypes.bool,
 		onHide: PropTypes.func,
 		open: PropTypes.bool,

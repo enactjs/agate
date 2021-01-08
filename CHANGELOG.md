@@ -43,6 +43,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Changed
 
 - `agate/ArcPicker`, `agate/ArcSlider`, `agate/FanSpeedControl`, `agate/TemperatureControl`, and `agate/WindDirectionControl` to read out audio guidance when focused via 5-way keys
+- `agate/FullscreenPopup` prop `duration` to support any valid CSS value
 
 ### Fixed
 
