@@ -1,8 +1,6 @@
 'use strict';
 const {element, getSubComponent, getText, Page} = require('@enact/ui-test-utils/utils');
 
-const getMarqueeText = getSubComponent({lib: 'ui', component:'Marquee', child:'text'});
-
 class PopupMenuCommon {
 
 	get buttonPopupMenu1 () {
@@ -68,7 +66,7 @@ class PopupMenuInterface {
 		return $(`.enact_ui_Transition_Transition_shown #${this.id}`).isExisting();
 	}
 	get label () {
-		return getText(getMarqueeText(this.buttonClose));
+		return getText(element(`#${this.id} label`, browser));
 	}
 }
 
