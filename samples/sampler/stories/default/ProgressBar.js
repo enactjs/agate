@@ -30,7 +30,6 @@ storiesOf('Agate', module)
 					orientation={select('orientation', ['horizontal', 'vertical', 'radial'], ProgressBarConfig)}
 					progress={number('progress', ProgressBarConfig, {range: true, min: 0, max: 1, step: 0.01}, 0.4)}
 					progressAnchor={number('progressAnchor', ProgressBarConfig, {range: true, min: 0, max: 1, step: 0.01}, 0)}
-					showAnchor={boolean('showAnchor', ProgressBarConfig)}
 					size={select('size', ['small', 'large'], ProgressBarConfig)}
 				>
 					{tooltip ? (

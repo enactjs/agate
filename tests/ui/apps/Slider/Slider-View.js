@@ -5,7 +5,6 @@ import Heading from '../../../../Heading';
 import Scroller from '../../../../Scroller';
 import Slider, {SliderTooltip} from '../../../../Slider';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import React from 'react';
 
 const app = (props) => <div {...props}>
 	<div>
@@ -16,7 +15,7 @@ const app = (props) => <div {...props}>
 			<Slider activateOnFocus id="sliderActivateOnFocus"  />
 			<Heading>Slider custom progressAnchor</Heading>
 			<Slider activateOnFocus id="sliderCustomProgressAnchor" progressAnchor={0.7} />
-			<Heading>IncrementSlider with tooltip</Heading>
+			<Heading>Slider with tooltip</Heading>
 			<Slider id="sliderWithTooltip">
 				<SliderTooltip />
 			</Slider>

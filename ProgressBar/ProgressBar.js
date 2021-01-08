@@ -52,21 +52,13 @@ const ProgressBarBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Highlights the filled portion.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		highlighted: PropTypes.bool,
-
-		/**
 		 * Sets the orientation of the progress bar.
 		 *
-		 * @type {('horizontal'|'vertical'|'radial')}
+		 * @type {('horizontal'|'vertical')}
 		 * @default 'horizontal'
 		 * @public
 		 */
-		orientation: PropTypes.oneOf(['horizontal', 'vertical', 'radial']),
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
 		 * A number between `0` and `1` indicating the proportion of the filled portion of the bar.
@@ -76,14 +68,6 @@ const ProgressBarBase = kind({
 		 * @public
 		 */
 		progress: PropTypes.number,
-
-		/**
-		 * Displays an anchor at `progressAnchor`.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		showAnchor: PropTypes.bool,
 
 		/**
 		 * The size of the progress bar.
@@ -146,9 +130,7 @@ const ProgressBarBase = kind({
 	},
 
 	computed: {
-		className: ({highlighted, showAnchor, size, styler}) => styler.append({
-			highlighted,
-			showAnchor,
+		className: ({size, styler}) => styler.append({
 			size
 		}),
 		tooltip: ({tooltip}) => tooltip === true ? ProgressBarTooltip : tooltip
@@ -156,8 +138,6 @@ const ProgressBarBase = kind({
 
 	render: ({css, orientation, progress, tooltip, ...rest}) => {
 		delete rest.tooltip;
-		delete rest.highlighted;
-		delete rest.showAnchor;
 		delete rest.size;
 
 		return (

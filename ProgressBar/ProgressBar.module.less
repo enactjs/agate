@@ -14,16 +14,9 @@
 		border-radius: @agate-progressbar-border-radius;
 		transform: @agate-progressbar-track-transform;
 
-		&.showAnchor {
-			&::after {
-				content: "";
-				position: absolute;
-				transform: translate(-50%, -50%);
-			}
-		}
 
 		&.large {
-			/* Available for export */
+			/* Defined to prevent global export */
 		}
 
 		&.small {
@@ -31,14 +24,7 @@
 		}
 
 		&.horizontal {
-			&.showAnchor {
-				&::after {
-					width: @agate-progressbar-anchor-width;
-					height: @agate-progressbar-anchor-height;
-					top: 50%;
-					left: ~"calc(var(--ui-progressbar-proportion-anchor) * 100%)";
-				}
-			}
+			/* Defined to prevent global export */
 		}
 
 		&.vertical {
@@ -52,63 +38,6 @@
 
 			.fill {
 				background-image: @agate-progressbar-vertical-fill-bg-image;
-			}
-
-			&.showAnchor {
-				&::after {
-					width: @agate-progressbar-anchor-height;
-					height: @agate-progressbar-anchor-width;
-					bottom: ~"calc(var(--ui-progressbar-proportion-anchor) * 100%)";
-					left: 50%;
-					transform: translate(-50%, 50%);
-				}
-			}
-		}
-
-		&.radial {
-			background-color: transparent;
-			height: @agate-progressbar-radial-size;
-			width: @agate-progressbar-radial-size;
-
-			.bar {
-				border-color: @agate-progressbar-radial-bar-bg-color;
-				border-width: @agate-progressbar-radial-thickness;
-				overflow: visible;
-			}
-
-			.fill {
-				.position(-@agate-progressbar-radial-thickness);
-				border-color: @agate-progressbar-radial-fill-bg-color;
-
-				&::before,
-				&::after {
-					border-color: inherit;
-					border-width: @agate-progressbar-radial-thickness;
-				}
-			}
-
-			.bar,
-			.fill {
-				background-color: transparent;
-			}
-		}
-
-		&.highlighted {
-			.fill {
-				background-color: @agate-progressbar-highlighted-fill-bg-color;
-			}
-
-			&.radial {
-				.fill {
-					background-color: transparent;
-					border-color: @agate-progressbar-highlighted-fill-bg-color;
-				}
-			}
-		}
-
-		&.showAnchor {
-			&::after {
-				background-color: @agate-progressbar-track-bg-color;
 			}
 		}
 

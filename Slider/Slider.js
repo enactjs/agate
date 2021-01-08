@@ -184,14 +184,6 @@ const SliderBase = kind({
 		progressAnchor: PropTypes.number,
 
 		/**
-		 * Displays an anchor at `progressAnchor`.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		showAnchor: PropTypes.bool,
-
-		/**
 		 * The amount to increment or decrement the value.
 		 *
 		 * @type {Number}
@@ -270,7 +262,6 @@ const SliderBase = kind({
 			forward('onActivate')
 		),
 		onKeyDown: handle(
-			forProp('disabled', false),
 			forwardWithPrevent('onKeyDown'),
 			anyPass([
 				handleIncrement,
@@ -278,7 +269,6 @@ const SliderBase = kind({
 			])
 		),
 		onKeyUp: handle(
-			forProp('disabled', false),
 			forwardWithPrevent('onKeyUp'),
 			forProp('activateOnFocus', false),
 			forKey('enter'),
@@ -287,10 +277,9 @@ const SliderBase = kind({
 	},
 
 	computed: {
-		className: ({activateOnFocus, active, showAnchor, styler}) => styler.append({
+		className: ({activateOnFocus, active, styler}) => styler.append({
 			activateOnFocus,
-			active,
-			showAnchor
+			active
 		}),
 		tooltip: ({tooltip}) => tooltip === true ? ProgressBarTooltip : tooltip
 	},
@@ -300,7 +289,6 @@ const SliderBase = kind({
 		delete rest.active;
 		delete rest.knobStep;
 		delete rest.onActivate;
-		delete rest.showAnchor;
 
 		return (
 			<UiSlider

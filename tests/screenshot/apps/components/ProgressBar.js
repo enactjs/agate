@@ -8,7 +8,7 @@ const ProgressBarTests = [
 	<ProgressBar progress={0.75} highlighted />,
 	<ProgressBar progress={0.75} size="small" />,
 	<ProgressBar progress={0.75} disabled />,
-	<ProgressBar progress={0.75} progressAnchor={0.5} showAnchor />
+	<ProgressBar progress={0.75} progressAnchor={0.5} />
 ];
 
 export default ProgressBarTests;
