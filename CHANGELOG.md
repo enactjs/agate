@@ -12,7 +12,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
-- `agate/Dropdown` icon color for Silicon skin
+- `agate/Dropdown` to show focused icon color for Silicon skin
 
 ## [1.1.1] - 2020-12-23
 
