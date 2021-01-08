@@ -21,7 +21,7 @@ storiesOf('Agate', module)
 		'Input',
 		() => (
 			<Input
-				onBeforeChange={action('onBeforeChange')}
+				autoFocus={boolean('autoFocus', Config)}
 				disabled={boolean('disabled', Config)}
 				dismissOnEnter={boolean('dismissOnEnter', Config)}
 				iconAfter={select('iconAfter', iconNames, Config)}
@@ -29,10 +29,12 @@ storiesOf('Agate', module)
 				iconSize={select('iconSize', ['small', 'large'], Config, 'large')}
 				invalid={boolean('invalid', Config)}
 				invalidMessage={text('invalidMessage', Config)}
+				onBeforeChange={action('onBeforeChange')}
 				onBlur={action('onBlur')}
 				onChange={action('onChange')}
 				onFocus={action('onFocus')}
 				placeholder={text('placeholder', Config, 'Input text here')}
+				size={select('size', ['small', 'large'], Config, 'large')}
 				type={select('type', prop.type, Config)}
 			/>
 		),

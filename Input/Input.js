@@ -31,7 +31,7 @@ import {calcAriaLabel, extractInputProps} from './util';
 import componentCss from './Input.module.less';
 
 /**
- * An input component
+ * An input component.
  *
  * @class InputBase
  * @memberof agate/Input
@@ -132,6 +132,16 @@ const InputBase = kind({
 		 * @public
 		 */
 		invalidMessage: PropTypes.string,
+
+		/**
+		 * Called before the input value is changed.
+		 *
+		 * The change can be prevented by calling `preventDefault` on the event.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onBeforeChange: PropTypes.func,
 
 		/**
 		 * Called when blurred.
@@ -256,14 +266,6 @@ const InputBase = kind({
 		)
 	},
 
-	// handlers: {
-	// 	onChange: (ev, {onChange}) => {
-	// 		if (onChange) {
-	// 			onChange({value: ev.target.value});
-	// 		}
-	// 	}
-	// },
-
 	computed: {
 		'aria-label': ({placeholder, type, value}) => {
 			const title = (value == null || value === '') ? placeholder : '';
@@ -284,17 +286,7 @@ const InputBase = kind({
 		value: ({value}) => typeof value === 'number' ? value : (value || '')
 	},
 
-	// computed: {
-	// 	'aria-label': ({placeholder, type, value}) => {
-	// 		const title = (value == null || value === '') ? placeholder : '';
-	// 		return calcAriaLabel(title, type, value);
-	// 	},
-	// 	className: ({focused, invalid, styler}) => styler.append({focused, invalid}),
-	// 	// ensure we have a value so the internal <input> is always controlled
-	// 	value: ({value}) => typeof value === 'number' ? value : (value || '')
-	// },
-
-	render: ({css, dir, disabled, iconAfter, iconBefore, invalidTooltip, iconSize, onChange, placeholder, type, value, ...rest}) => {
+	render: ({css, dir, disabled, iconAfter, iconBefore, invalidTooltip, iconSize, onChange, placeholder, size, type, value, ...rest}) => {
 		const inputProps = extractInputProps(rest);
 		delete rest.dismissOnEnter;
 		delete rest.focused;
@@ -316,6 +308,7 @@ const InputBase = kind({
 					disabled={disabled}
 					onChange={onChange}
 					placeholder={placeholder}
+					size={size}
 					tabIndex={-1}
 					type={type}
 					value={value}
@@ -332,6 +325,7 @@ const InputBase = kind({
 /**
  * Applies Agate specific behaviors to [InputBase]{@link agate/Input.InputBase} components.
  *
+ * @class InputDecorator
  * @hoc
  * @memberof agate/Input
  * @mixes ui/Changeable.Changeable
@@ -356,15 +350,98 @@ const InputDecorator = compose(
  * @class Input
  * @memberof agate/Input
  * @extends agate/Input.InputBase
- * @mixes agate/Input.InputDecorator
+ * @mixes ui/Changeable.Changeable
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes sandstone/Skinnable.Skinnable
  * @ui
  * @public
  */
 const Input = InputDecorator(InputBase);
 
+/**
+ * Focuses the internal input when the component gains 5-way focus.
+ *
+ * By default, the internal input is not editable when the component is focused via 5-way and must
+ * be selected to become interactive. In pointer mode, the input will be editable when clicked.
+ *
+ * @name autoFocus
+ * @memberof agate/Input.prototype
+ * @type {Boolean}
+ * @default false
+ * @public
+ */
+
+/**
+ * Applies a disabled style and prevents interacting with the component.
+ *
+ * @name disabled
+ * @memberof agate/Input.prototype
+ * @type {Boolean}
+ * @default false
+ * @public
+ */
+
+/**
+ * Sets the initial value.
+ *
+ * @name defaultValue
+ * @memberof agate/Input.prototype
+ * @type {String}
+ * @public
+ */
+
+/**
+ * Blurs the input when the "enter" key is pressed.
+ *
+ * @name dismissOnEnter
+ * @memberof agate/Input.prototype
+ * @type {Boolean}
+ * @default false
+ * @public
+ */
+
+/**
+ * Called when the internal input is focused.
+ *
+ * @name onActivate
+ * @memberof agate/Input.prototype
+ * @type {Function}
+ * @param {Object} event
+ * @public
+ */
+
+/**
+ * Called when the internal input loses focus.
+ *
+ * @name onDeactivate
+ * @memberof agate/Input.prototype
+ * @type {Function}
+ * @param {Object} event
+ * @public
+ */
+
+/**
+ * Called when the component is removed when it had focus.
+ *
+ * @name onSpotlightDisappear
+ * @memberof agate/Input.prototype
+ * @type {Function}
+ * @param {Object} event
+ * @public
+ */
+
+/**
+ * Disables spotlight navigation into the component.
+ *
+ * @name spotlightDisabled
+ * @memberof agate/Input.prototype
+ * @type {Boolean}
+ * @default false
+ * @public
+ */
+
 export default Input;
 export {
-	// extractInputProps,
 	Input,
 	InputBase,
 	InputDecorator
