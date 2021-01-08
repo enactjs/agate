@@ -10,6 +10,12 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
 - `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
 
+### Fixed
+
+- `agate/Dropdown` to show focused icon color for Silicon skin
+- `agate/LabeledIconButton` to display label text on multiple lines (removed marquee)
+- `agate/LabeledIconButton` `max-width` to display huge sized icon correctly
+
 ## [1.1.1] - 2020-12-23
 
 ### Fixed
@@ -33,6 +39,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Changed
 
 - `agate/ArcPicker`, `agate/ArcSlider`, `agate/FanSpeedControl`, `agate/TemperatureControl`, and `agate/WindDirectionControl` to read out audio guidance when focused via 5-way keys
+- `agate/FullscreenPopup` prop `duration` to support any valid CSS value
 
 ### Fixed
 

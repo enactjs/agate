@@ -12,13 +12,17 @@
 
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
+import {ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
+import Pure from '@enact/ui/internal/Pure';
 import {LabeledIconBase as UiLabeledIconBase, LabeledIconDecorator as UiLabeledIconDecorator} from '@enact/ui/LabeledIcon';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
-import {ButtonBase, ButtonDecorator} from '../Button';
+import {ButtonBase} from '../Button';
 import Skinnable from '../Skinnable';
+import TooltipDecorator from '../TooltipDecorator';
 
 import componentCss from './LabeledIconButton.module.less';
 
@@ -155,15 +159,22 @@ const LabeledIconButtonBase = kind({
 /**
  * Adds Agate specific behaviors to [LabeledIconButtonBase]{@link agate/LabeledIconButton.LabeledIconButtonBase}.
  *
- * @hoc
  * @memberof agate/LabeledIconButton
+ * @hoc
+ * @mixes ui/Button.ButtonDecorator
  * @mixes ui/LabeledIcon.LabeledIconDecorator
- * @mixes agate/Button.ButtonDecorator
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes agate/Skinnable.Skinnable
+ * @mixes agate/TooltipDecorator.TooltipDecorator
  * @public
  */
 const LabeledIconButtonDecorator = compose(
+	Pure,
+	UiButtonDecorator,
 	UiLabeledIconDecorator,
-	ButtonDecorator
+	TooltipDecorator,
+	Spottable,
+	Skinnable
 );
 
 /**
