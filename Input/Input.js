@@ -11,7 +11,7 @@
  */
 
 import kind from '@enact/core/kind';
-import {handle, adaptEvent, forwardCustom, forwardWithPrevent} from '@enact/core/handle';
+import {adaptEvent, forwardCustom, forwardWithPrevent, handle} from '@enact/core/handle';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import {isRtlText} from '@enact/i18n/util';
 import Changeable from '@enact/ui/Changeable';
@@ -286,7 +286,7 @@ const InputBase = kind({
 		value: ({value}) => typeof value === 'number' ? value : (value || '')
 	},
 
-	render: ({css, dir, disabled, iconAfter, iconBefore, invalidTooltip, iconSize, onChange, placeholder, size, type, value, ...rest}) => {
+	render: ({css, dir, disabled, iconAfter, iconBefore, iconSize, invalidTooltip, onChange, placeholder, size, type, value, ...rest}) => {
 		const inputProps = extractInputProps(rest);
 		delete rest.dismissOnEnter;
 		delete rest.focused;
@@ -352,7 +352,7 @@ const InputDecorator = compose(
  * @extends agate/Input.InputBase
  * @mixes ui/Changeable.Changeable
  * @mixes spotlight/Spottable.Spottable
- * @mixes sandstone/Skinnable.Skinnable
+ * @mixes agate/Skinnable.Skinnable
  * @ui
  * @public
  */
