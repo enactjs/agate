@@ -11,17 +11,17 @@ describe('Slider', function () {
 			const slider = Page.components.sliderDefault;
 
 			describe('5-way', function () {
-				it('should increment the value of horizontal slider on key right when active', function () {
+				it('should increment the value of horizontal slider on arrow right key when active', function () {
 					expect(slider.self.isFocused()).to.be.true();
 					const originalValue = slider.knobPositionHorizontal;
 					Page.spotlightSelect();
 					Page.spotlightRight();
 					// expect knob `left` css prop to be bigger than original one
 					const newValue = slider.knobPositionHorizontal;
-					expect(newValue > originalValue).to.be.true();
+					expect(newValue).to.be.above(originalValue);
 				});
 
-				it('should decrement the value of horizontal slider on key left when active', function () {
+				it('should decrement the value of horizontal slider on arrow left key when active', function () {
 					expect(slider.self.isFocused()).to.be.true();
 					Page.spotlightSelect();
 					Page.spotlightRight();
@@ -30,7 +30,7 @@ describe('Slider', function () {
 					Page.spotlightLeft();
 					// expect knob `left` css prop to be smaller than original one
 					const newValue = slider.knobPositionHorizontal;
-					expect(newValue < originalValue).to.be.true();
+					expect(newValue).to.be.below(originalValue);
 				});
 			});
 
@@ -41,7 +41,7 @@ describe('Slider', function () {
 					slider.self.click();
 					// expect knob `left` css prop to be bigger than original one
 					const newValue = slider.knobPositionHorizontal;
-					expect(newValue > originalValue).to.be.true();
+					expect(newValue).to.be.above(originalValue);
 				});
 			});
 		});
@@ -56,7 +56,7 @@ describe('Slider', function () {
 					Page.spotlightRight();
 					// expect knob `left` css prop to be bigger than original one
 					const newValue = slider.knobPositionHorizontal;
-					expect(newValue > originalValue).to.be.true();
+					expect(newValue).to.be.above(originalValue);
 				});
 
 				it('should activate on focus and can decrement the value', function () {
@@ -67,7 +67,7 @@ describe('Slider', function () {
 					Page.spotlightLeft();
 					// expect knob `left` css prop to be smaller than original one
 					const newValue = slider.knobPositionHorizontal;
-					expect(newValue < originalValue).to.be.true();
+					expect(newValue).to.be.below(originalValue);
 				});
 			});
 		});
@@ -77,7 +77,7 @@ describe('Slider', function () {
 
 			it('fill bar should be greater than 0 when value is at minimum', function () {
 				slider.focus();
-				expect(slider.sliderFillWidth > 0).to.be.true();
+				expect(slider.sliderFillWidth).to.be.above(0);
 			});
 		});
 
@@ -94,7 +94,7 @@ describe('Slider', function () {
 			const slider = Page.components.sliderVertical;
 
 			describe('5-way', function () {
-				it('should increment the value of horizontal slider on key down when active', function () {
+				it('should increment the value of vertical slider on arrow up key when active', function () {
 					slider.focus();
 					const originalValue = slider.knobPositionVertical;
 					Page.spotlightSelect();
@@ -102,10 +102,10 @@ describe('Slider', function () {
 					Page.spotlightUp();
 					// expect knob `bottom` css prop to be greater than original one
 					const newValue = slider.knobPositionVertical;
-					expect(newValue > originalValue).to.be.true();
+					expect(newValue).to.be.above(originalValue);
 				});
 
-				it('should decrement the value of horizontal slider on key up when active', function () {
+				it('should decrement the value of vertical slider on arrow down key when active', function () {
 					slider.focus();
 					Page.spotlightSelect();
 					Page.spotlightUp();
@@ -113,7 +113,7 @@ describe('Slider', function () {
 					Page.spotlightDown();
 					// expect knob `bottom` css prop to be less than original one
 					const newValue = slider.knobPositionVertical;
-					expect(newValue < originalValue).to.be.true();
+					expect(newValue).to.be.below(originalValue);
 				});
 			});
 
@@ -124,7 +124,7 @@ describe('Slider', function () {
 					slider.self.click();
 					// expect knob `left` css prop to be greater than original one
 					const newValue = slider.knobPositionVertical;
-					expect(newValue > originalValue).to.be.true();
+					expect(newValue).to.be.above(originalValue);
 				});
 			});
 		});
@@ -133,17 +133,17 @@ describe('Slider', function () {
 			const slider = Page.components.sliderDisabled;
 
 			describe('5-way', function () {
-				it('should not increment the value of horizontal slider on key right when active', function () {
+				it('should not increment the value of horizontal disabled slider on arrow right key when active', function () {
 					slider.focus();
 					const originalValue = slider.knobPositionHorizontal;
 					Page.spotlightSelect();
 					Page.spotlightRight();
 					// expect knob `left` css prop to be equal to original one
 					const newValue = slider.knobPositionHorizontal;
-					expect(newValue === originalValue).to.be.true();
+					expect(newValue).to.equal(originalValue);
 				});
 
-				it('should not decrement the value of horizontal slider on key left when active', function () {
+				it('should not decrement the value of horizontal disabled slider on arrow left key when active', function () {
 					slider.focus();
 					Page.spotlightSelect();
 					Page.spotlightRight();
@@ -152,18 +152,18 @@ describe('Slider', function () {
 					Page.spotlightLeft();
 					// expect knob `left` css prop to be equal to original one
 					const newValue = slider.knobPositionHorizontal;
-					expect(newValue === originalValue).to.be.true();
+					expect(newValue).to.equal(originalValue);
 				});
 			});
 
 			describe('pointer', function () {
-				it('should not change the value of horizontal slider on slider click at position', function () {
+				it('should not change the value of horizontal disabled slider on slider click at position', function () {
 					slider.focus();
 					const originalValue = slider.knobPositionHorizontal;
 					slider.self.click();
 					// expect knob `left` css prop to be equal to original one
 					const newValue = slider.knobPositionHorizontal;
-					expect(newValue === originalValue).to.be.true();
+					expect(newValue).to.equal(originalValue);
 				});
 			});
 		});
@@ -172,7 +172,7 @@ describe('Slider', function () {
 			const slider = Page.components.sliderVerticalDisabled;
 
 			describe('5-way', function () {
-				it('should not increment the value of horizontal slider on key down when active', function () {
+				it('should not increment the value of vertical disabled slider on arrow down key when active', function () {
 					slider.focus();
 					const originalValue = slider.knobPositionVertical;
 					Page.spotlightSelect();
@@ -180,10 +180,10 @@ describe('Slider', function () {
 					Page.spotlightUp();
 					// expect knob `bottom` css prop to be equal to original one
 					const newValue = slider.knobPositionVertical;
-					expect(newValue === originalValue).to.be.true();
+					expect(newValue).to.equal(originalValue);
 				});
 
-				it('should not decrement the value of horizontal slider on key up when active', function () {
+				it('should not decrement the value of vertical disabled slider on arrow up key when active', function () {
 					slider.focus();
 					Page.spotlightSelect();
 					Page.spotlightUp();
@@ -191,18 +191,18 @@ describe('Slider', function () {
 					Page.spotlightDown();
 					// expect knob `bottom` css prop to be equal to original one
 					const newValue = slider.knobPositionVertical;
-					expect(newValue === originalValue).to.be.true();
+					expect(newValue).to.equal(originalValue);
 				});
 			});
 
 			describe('pointer', function () {
-				it('should not change the value of horizontal slider on slider click at position', function () {
+				it('should not change the value of vertical disabled slider on slider click at position', function () {
 					slider.focus();
 					const originalValue = slider.knobPositionVertical;
 					slider.self.click();
 					// expect knob `left` css prop to be equal to original one
 					const newValue = slider.knobPositionVertical;
-					expect(newValue === originalValue).to.be.true();
+					expect(newValue).to.equal(originalValue);
 				});
 			});
 		});

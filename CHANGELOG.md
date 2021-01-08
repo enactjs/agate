@@ -6,10 +6,19 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
+- `agate/ArcPicker` and `agate/ArcSlider` prop `disabled` to be inactive
+- `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
+- `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
 - `agate/IncrementSlider` prop `tooltip`
 - `agate/ProgressBar` prop `highlighted`, `tooltip`
 - `agate/ProgressBarTooltip` component
 - `agate/Slider` prop `tooltip`
+
+### Fixed
+
+- `agate/Dropdown` to show focused icon color for Silicon skin
+- `agate/LabeledIconButton` to display label text on multiple lines (removed marquee)
+- `agate/LabeledIconButton` `max-width` to display huge sized icon correctly
 
 ## [1.1.1] - 2020-12-23
 
@@ -28,8 +37,13 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Marquee` component
 - `agate/Picker` prop `noAnimation` and `wrap`
 - `agate/RangePicker` prop `noAnimation` and `wrap`
+- `agate/ThemeDecorator` context `ThemeContext` to apply `accent` color to `agate/ArcPicker` and `agate/ArcSlider` when they're focused
 - `agate/TimePicker` prop `onSpotlightDisappear` and `spotlightDisabled`
- 
+
+### Changed
+
+- `agate/ArcPicker`, `agate/ArcSlider`, `agate/FanSpeedControl`, `agate/TemperatureControl`, and `agate/WindDirectionControl` to read out audio guidance when focused via 5-way keys
+
 ### Fixed
 
 - `agate/ArcPicker` to display correct `font-size` and `font-weight`
