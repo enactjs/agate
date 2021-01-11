@@ -10,7 +10,10 @@
  * @exports PopupDecorator
  */
 
+import {on, off} from '@enact/core/dispatcher';
+import {is} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
+import Spotlight, {getDirection} from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Layout, {Cell} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
@@ -18,6 +21,7 @@ import Transition from '@enact/ui/Transition';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
+import warning from 'warning';
 
 import Button from '../Button';
 import Heading from '../Heading';
@@ -27,7 +31,10 @@ import PopupState from './PopupState';
 
 import componentCss from './Popup.module.less';
 
-
+const isDown = is('down');
+const isLeft = is('left');
+const isRight = is('right');
+const isUp = is('up');
 const TransitionContainer = SpotlightContainerDecorator(
 	{enterTo: 'default-element', preserveId: true},
 	Transition
@@ -63,6 +70,14 @@ const PopupBase = kind({
 		noAnimation: PropTypes.bool,
 		onClose: PropTypes.func,
 		onHide: PropTypes.func,
+
+		/**
+		 * Called after the popup's "show" transition finishes.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onShow: PropTypes.func,
 		open: PropTypes.bool,
 
 		/**

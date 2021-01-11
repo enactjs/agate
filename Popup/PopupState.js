@@ -11,6 +11,7 @@ const OpenState = {
 };
 
 const forwardHide = forward('onHide');
+const forwardShow = forward('onShow');
 
 const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-vars
 	return class extends React.Component {
