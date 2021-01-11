@@ -14,7 +14,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Deprecated
 
-- `agate/FullScreenPopup` to be deprecated
+- `agate/FullScreenPopup`, use `agate/Popup` instead
 
 ### Fixed
 
