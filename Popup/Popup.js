@@ -190,7 +190,7 @@ const PopupBase = kind({
 	defaultProps: {
 		centered: false,
 		closeButton: false,
-		duration: 'medium',
+		duration: 'short',
 		noAnimation: false,
 		open: false,
 		position: 'center'
@@ -218,7 +218,7 @@ const PopupBase = kind({
 				noAnimation={noAnimation}
 				visible={open}
 				direction={direction}
-				duration="short"
+				duration={duration}
 				type={transitionType}
 				className={css.popupTransitionContainer}
 				onHide={onHide}
