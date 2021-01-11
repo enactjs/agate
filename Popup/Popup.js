@@ -209,7 +209,7 @@ const PopupBase = kind({
 		},
 		direction: ({position}) => transitionDirection[position]
 	},
-	render: ({buttons, children, closeButton, css, direction, noAnimation, onClose, onHide, open, skin, title, transitionType, ...rest}) => {
+	render: ({buttons, children, closeButton, css, direction, duration, noAnimation, onClose, onHide, open, skin, title, transitionType, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
 		delete rest.centered;
 
