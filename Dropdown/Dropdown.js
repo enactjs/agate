@@ -120,6 +120,14 @@ const DropdownBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
+		 * Called when the Dropdown is clicked.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onClick: PropTypes.func,
+
+		/**
 		 * Called when the Dropdown is closing.
 		 *
 		 * @type {Function}
@@ -283,7 +291,7 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, ...rest}) => {
+	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClick, onSelect, open, selected, skin, title, ...rest}) => {
 		const ariaProps = extractAriaProps(rest);
 		const dropdownButtonClassName = classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'up'});
 		const opened = !disabled && open;
@@ -313,8 +321,7 @@ const DropdownBase = kind({
 						className={buttonClassName}
 						css={css}
 						disabled={hasChildren ? disabled : true}
-						onClick={onOpen}
-						onClose={onClose}
+						onClick={onClick}
 						{...dropDownButtonProps}
 						{...ariaProps}
 					>
