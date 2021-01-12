@@ -77,6 +77,12 @@ class MediaPlayerPage extends Page {
 		this.components = {mediaPlayerDefault};
 	}
 
+	waitForPlayMedia (mediaPlayer, timeout) {
+		browser.waitUntil(function () {
+			return mediaPlayer.knob.getCSSProperty('left').value !== '0px';
+		}, {timeout});
+	}
+
 	open (urlExtra) {
 		super.open('MediaPlayer-View', urlExtra);
 	}

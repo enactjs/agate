@@ -6,12 +6,6 @@ describe('MediaPlayer', function () {
 		Page.open();
 	});
 
-	function waitForPlayMedia (mediaPlayer, timeout) {
-		browser.waitUntil(function () {
-			return mediaPlayer.knob.getCSSProperty('left').value !== '0px';
-		}, {timeout});
-	}
-
 	describe('default', function () {
 		const mediaPlayer = Page.components.mediaPlayerDefault;
 
@@ -23,7 +17,7 @@ describe('MediaPlayer', function () {
 			expect(mediaPlayer.knob.getCSSProperty('left').value).to.equal('0px');
 
 			mediaPlayer.playButton.click();
-			waitForPlayMedia(mediaPlayer);
+			Page.waitForPlayMedia(mediaPlayer);
 
 			expect(mediaPlayer.knob.getCSSProperty('left').value).to.not.equal('0px');
 		});
@@ -32,7 +26,7 @@ describe('MediaPlayer', function () {
 			expect(mediaPlayer.source).to.equal('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
 
 			mediaPlayer.nextButton.click();
-			waitForPlayMedia(mediaPlayer);
+			Page.waitForPlayMedia(mediaPlayer);
 
 			expect(mediaPlayer.source).to.equal('https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3');
 		});
@@ -45,7 +39,7 @@ describe('MediaPlayer', function () {
 			expect(mediaPlayer.repeatStatus).to.equal('1');
 
 			mediaPlayer.nextButton.click();
-			waitForPlayMedia(mediaPlayer);
+			Page.waitForPlayMedia(mediaPlayer);
 
 			expect(mediaPlayer.source).to.equal('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
 		});
