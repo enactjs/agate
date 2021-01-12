@@ -54,6 +54,21 @@
 			border-bottom-style: @agate-dropdown-border-style;
 			border-bottom-width: @agate-dropdown-border-width;
 			padding: @agate-dropdown-list-padding;
+
+			.item {
+				border-color: @agate-item-border-color;
+				border-width: @agate-item-border-width;
+
+				.focus({
+					border-color: @agate-item-focus-border-color;
+				});
+
+				&[data-selected="true"] {
+					&:not(:focus) {
+						color: @agate-dropdown-selected-color;
+					}
+				}
+			}
 		}
 
 		.dropdownListWithScroller {
