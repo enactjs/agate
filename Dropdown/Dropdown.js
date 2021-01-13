@@ -384,11 +384,6 @@ const DropDownExtended = hoc((config, Wrapped) => {
 				on('click', this.handleClick);
 				on('keydown', this.handleKeyDown);
 			}
-
-			// Spotlight.set(this.node.dataset.spotlightId, {
-			// 	defaultElement: '[data-selected="true"]',
-			// 	enterTo: 'default-element'
-			// });
 		}
 
 		componentDidUpdate (prevProps) {
@@ -407,50 +402,6 @@ const DropDownExtended = hoc((config, Wrapped) => {
 			off('click', this.handleClick);
 			off('keydown', this.handleKeyDown);
 		}
-
-		// spotActivator = (activator) => {
-		// 	this.paused.resume();
-		//
-		// 	// only spot the activator if the popup is closed
-		// 	if (this.props.open) return;
-		//
-		// 	const current = Spotlight.getCurrent();
-		// 	const containerNode = getContainerNode(this.state.containerId);
-		//
-		// 	off('keydown', this.handleKeyDown);
-		//
-		// 	// if there is no currently-spotted control or it is wrapped by the popup's container, we
-		// 	// know it's safe to change focus
-		// 	if (!current || (containerNode && containerNode.contains(current))) {
-		// 		// attempt to set focus to the activator, if available
-		// 		if (!Spotlight.isPaused() && !Spotlight.focus(activator)) {
-		// 			Spotlight.focus();
-		// 		}
-		// 	}
-		// };
-
-		// spotPopupContent = () => {
-		// 	this.paused.resume();
-		//
-		// 	// only spot the activator if the popup is open
-		// 	if (!this.props.open) return;
-		//
-		// 	const {containerId} = this.state;
-		//
-		// 	on('keydown', this.handleKeyDown);
-		//
-		// 	if (!Spotlight.isPaused() && !Spotlight.focus(containerId)) {
-		// 		const current = Spotlight.getCurrent();
-		//
-		// 		// In cases where the container contains no spottable controls or we're in pointer-mode, focus
-		// 		// cannot inherently set the active container or blur the active control, so we must do that
-		// 		// here.
-		// 		if (current) {
-		// 			current.blur();
-		// 		}
-		// 		Spotlight.setActiveContainer(containerId);
-		// 	}
-		// };
 
 		clickedOutsideDropdown = ({target}) => !this.node.contains(target);
 
