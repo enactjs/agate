@@ -120,14 +120,6 @@ const DropdownBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
-		 * Called when the Dropdown is clicked.
-		 *
-		 * @type {Function}
-		 * @public
-		 */
-		onClick: PropTypes.func,
-
-		/**
 		 * Called when the Dropdown is closing.
 		 *
 		 * @type {Function}
@@ -291,7 +283,7 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClick, onSelect, open, selected, skin, title, ...rest}) => {
+	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, ...rest}) => {
 		const ariaProps = extractAriaProps(rest);
 		const dropdownButtonClassName = classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'up'});
 		const opened = !disabled && open;
@@ -321,7 +313,7 @@ const DropdownBase = kind({
 						className={buttonClassName}
 						css={css}
 						disabled={hasChildren ? disabled : true}
-						onClick={onClick}
+						onClick={opened ? onClose : onOpen}
 						{...dropDownButtonProps}
 						{...ariaProps}
 					>
@@ -397,12 +389,12 @@ const DropDownExtended = hoc((config, Wrapped) => {
 		// If a click happened outside the component area close the dropdown by forwarding the onClick from Toggleable.
 		handleClick = handle(
 			this.clickedOutsideDropdown,
-			forward('onClick')
+			forward('onClose')
 		).bindAs(this, 'handleClick');
 
 		handleKeyDown = handle(
 			forKey('cancel'),
-			forward('onClick')
+			forward('onClose')
 		).bindAs(this, 'handleKeyDown');
 
 		render () {
@@ -430,7 +422,7 @@ const DropdownDecorator = compose(
 		generateProp: null,
 		prefix: 'd_'
 	}),
-	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose', toggleProp: 'onClick'}),
+	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose'}),
 	Changeable({change: 'onSelect', prop: 'selected'}),
 	DropDownExtended,
 	Skinnable({prop: 'skin'})
