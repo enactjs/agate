@@ -2,6 +2,7 @@ import Popup from '../../../../Popup';
 import React from 'react';
 
 const PopupTests = [
+	<Popup open>Popup!</Popup>,
 	<Popup closeButton open>Popup!</Popup>,
 	<Popup centered open>Popup!</Popup>,
 	<Popup duration="medium" open>Popup!</Popup>,
