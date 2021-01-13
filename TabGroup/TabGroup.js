@@ -30,12 +30,61 @@ const TabBase = kind({
 	name: 'Tab',
 
 	propTypes: {
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `tab` - The root class name
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * The icon displayed on the tab.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		icon: PropTypes.string,
+
+		/**
+		 * The position of the label on the tab.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		labelPosition: PropTypes.string,
+
+		/**
+		 * Called when the tab is clicked.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
 		onClick: PropTypes.func,
+
+		/**
+		 * Orientation of the tab.
+		 *
+		 * * Values: `'horizontal'`, `'vertical'`
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		orientation: PropTypes.string,
-		selected: PropTypes.bool
+
+		/**
+		 * Provides a way to call special interface attention to the tab. It will be "featured"
+		 * in some way by the theme's visual rules.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		selected: PropTypes.bool,
 	},
 
 	defaultProps: {
@@ -108,12 +157,68 @@ const TabGroupBase = kind({
 	name: 'TabGroup',
 
 	propTypes: /** @lends agate/TabGroup.TabGroupBase.prototype */ {
+		/**
+		 * The position of the TabGroup related to the tab contents.
+		 *
+		 * @type {String}
+		 * @required
+		 */
 		tabPosition: PropTypes.string.isRequired,
+
+		/**
+		 * The provided list of tabs.
+		 *
+		 * @type {Array}
+		 * @required
+		 * @public
+		 */
 		tabs: PropTypes.array.isRequired,
+
+		/**
+		 * Nodes to be inserted before the tabs.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
 		afterTabs: PropTypes.node,
+
+		/**
+		 * Nodes to be inserted after the tabs.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
 		beforeTabs: PropTypes.node,
+
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `tabBar` - The root class name
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * Orientation of the tabs.
+		 *
+		 * * Values: `'horizontal'`, `'vertical'`
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		orientation: PropTypes.string,
+
+		/**
+		 * Index of the selected tab.
+		 *
+		 * @type {Number}
+		 * @required
+		 */
 		selectedIndex: PropTypes.number
 	},
 
