@@ -13,9 +13,11 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
+- `agate/DatePicker` transition direction for day when month is changed
 - `agate/Dropdown` to show focused icon color for Silicon skin
 - `agate/LabeledIconButton` to display label text on multiple lines (removed marquee)
 - `agate/LabeledIconButton` `max-width` to display huge sized icon correctly
+- `agate/TimePicker` transition direction for meridiem when hour is changed
 
 ## [1.1.1] - 2020-12-23
 
