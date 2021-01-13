@@ -1,3 +1,4 @@
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -42,6 +43,20 @@ const TooltipBase = kind({
 		arrowAnchor: PropTypes.oneOf(['left', 'center', 'right', 'top', 'middle', 'bottom']),
 
 		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `tooltip` - The root component class
+		 * * `tooltipLabel` - Applied the label node
+		 *
+		 * @type {Object}
+		 * @public
+		 */
+		css: PropTypes.object,
+
+		/**
 		 * Direction of label in relation to the activator.
 		 *
 		 * @type {('above'|'below'|'left'|'right')}
@@ -65,6 +80,17 @@ const TooltipBase = kind({
 		 * @public
 		 */
 		labelOffset: PropTypes.number,
+
+		/**
+		 * Allows the tooltip to marquee.
+		 *
+		 * Specifying a [`width`]{@link agate/TooltipDecorator.TooltipBase#width} restricts
+		 * the marquee to that size.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		marquee: PropTypes.bool,
 
 		/**
 		 * Style object for tooltip position.
@@ -97,7 +123,7 @@ const TooltipBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		tooltipRef: PropTypes.func,
+		tooltipRef: EnactPropTypes.ref,
 
 		/**
 		 * The width of tooltip content in pixels (px).
@@ -138,7 +164,7 @@ const TooltipBase = kind({
 		}
 	},
 
-	render: ({children, tooltipRef, width, labelOffset, ...rest}) => {
+	render: ({arrowAnchor, children, tooltipRef, width, labelOffset, marquee, ...rest}) => {
 		delete rest.arrowAnchor;
 		delete rest.labelOffset;
 		delete rest.direction;
@@ -149,7 +175,7 @@ const TooltipBase = kind({
 			<div {...rest}>
 				<div className={css.tooltipAnchor} ref={tooltipRef} >
 					<div className={css.tooltipArrow} />
-					<TooltipLabel width={width} style={labelOffset}>
+					<TooltipLabel className={css.tooltipLabel} centered={arrowAnchor === 'center'} marquee={marquee} width={width} style={labelOffset}>
 						{children}
 					</TooltipLabel>
 				</div>

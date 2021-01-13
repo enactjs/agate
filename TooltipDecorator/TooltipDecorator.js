@@ -109,6 +109,17 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			tooltipDelay: PropTypes.number,
 
 			/**
+			 * Allows the tooltip to marquee.
+			 *
+			 * Specifying a [`tooltipWidth`]{@link agate/TooltipDecorator.TooltipDecorator#tooltipWidth}
+			 * restricts the marquee to that size.
+			 *
+			 * @type {Boolean}
+			 * @public
+			 */
+			tooltipMarquee: PropTypes.bool,
+
+			/**
 			 * Position of the tooltip with respect to the wrapped component.
 			 *
 			 * | *Value* | *Tooltip Direction* |
@@ -195,15 +206,21 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			tooltipUpdateDelay: PropTypes.number,
 
 			/**
-			 * The width of tooltip content in pixels (px).
+			 * The width of tooltip content.
 			 *
-			 * If the content goes over the given width, it will automatically wrap. When `null`,
-			 * content does not wrap.
+			 * Value expects a number of pixels, which will be automatically scaled to the
+			 * appropriate size given the current screen resolution, or a string value containing a
+			 * measurement and a valid CSS unit included. If the content goes over the given width,
+			 * it will automatically wrap, or marquee if `marquee` is enabled.
 			 *
-			 * @type {Number|null}
+			 * When `null`, content will auto-size and not wrap. If `tooltipMarquee` is also
+			 * enabled, marqueeing will begin when the width is greater than the default (theme
+			 * specified) width.
+			 *
+			 * @type {Number|String}
 			 * @public
 			 */
-			tooltipWidth: PropTypes.number
+			tooltipWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 		};
 
 		static defaultProps = {
@@ -414,7 +431,7 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		 * @private
 		 */
 		renderTooltip () {
-			const {children, tooltipRelative, tooltipProps, tooltipText, tooltipWidth} = this.props;
+			const {children, tooltipMarquee, tooltipRelative, tooltipProps, tooltipText, tooltipWidth} = this.props;
 
 			if (tooltipText) {
 				let renderedTooltip = (
@@ -425,6 +442,7 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 						{...tooltipProps}
 						arrowAnchor={this.state.arrowAnchor}
 						direction={this.state.tooltipDirection}
+						marquee={tooltipMarquee}
 						position={tooltipRelative ? null : this.state.position}
 						relative={tooltipRelative}
 						style={{display: ((tooltipRelative && !this.state.showing) ? 'none' : null)}}
@@ -442,6 +460,8 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 							{renderedTooltip}
 						</FloatingLayerBase>
 					);
+				} else if (!this.state.showing) {
+					renderedTooltip = null;
 				}
 
 				if (tooltipDestinationProp === 'children') {
@@ -476,6 +496,7 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 			delete props.rtl;
 			delete props.tooltipDelay;
+			delete props.tooltipMarquee;
 			delete props.tooltipPosition;
 			delete props.tooltipProps;
 			delete props.tooltipRelative;

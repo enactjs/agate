@@ -35,6 +35,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/RangePicker` prop `noAnimation` and `wrap`
 - `agate/ThemeDecorator` context `ThemeContext` to apply `accent` color to `agate/ArcPicker` and `agate/ArcSlider` when they're focused
 - `agate/TimePicker` prop `onSpotlightDisappear` and `spotlightDisabled`
+- `agate/TooltipDecorator` prop `tooltipMarquee` to support marquee for long tooltip and prop `tooltipWidth` to set a width for tooltip
 
 ### Changed
 

@@ -68,15 +68,22 @@
 		}
 
 		.tooltipLabel {
+			--agate-tooltip-label-width: auto;
+
 			font-size: @agate-tooltip-label-font-size;
 			font-weight: @agate-tooltip-label-font-weight;
 			line-height: @agate-tooltip-label-height;
 			white-space: nowrap;
+			width: var(--agate-tooltip-label-width); // assign a width if necessary, but without a width, "auto" is just fine.
 			padding: @agate-tooltip-padding;
 			border-radius: @agate-tooltip-border-radius;
 
-			:global(.enact-locale-right-to-left) & {
+			.enact-locale-rtl({
 				text-align: right;
+			});
+
+			&.marquee {
+				max-width: var(--agate-tooltip-label-width, @agate-tooltip-marquee-width); // If using a marquee, use the preferred width, and if none is provided, fall back to our default variable.
 			}
 
 			&.multi {
