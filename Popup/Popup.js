@@ -182,7 +182,6 @@ const PopupBase = kind({
 		 * Supported types are: `'slide'` and `'fade'`.
 		 *
 		 * @type {String}
-		 * @default 'fade'
 		 * @public
 		 */
 		type: PropTypes.oneOf(['fade', 'slide'])
