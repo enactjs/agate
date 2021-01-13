@@ -32,8 +32,6 @@ describe('Dropdown', function () {
 			Page.spotlightSelect();
 			Page.delay(1000);
 			Page.spotlightDown();
-			Page.spotlightDown();
-			Page.spotlightDown();
 			Page.spotlightSelect();
 			Page.delay(1000);
 
@@ -57,12 +55,11 @@ describe('Dropdown', function () {
 			expect(Page.components.dropdownDisabled.childItem.isFocused()).to.be.true();
 		});
 
-		it('should focus the first item in `#dropdownDefault` option list when 5-way enter and down', function () {
+		it('should focus the first item in `#dropdownDefault` option list when 5-way enter', function () {
 			expect(Page.components.dropdownDefault.childItem.isFocused()).to.be.true();
 
 			Page.spotlightSelect();
 			Page.delay(1000);
-			Page.spotlightDown();
 
 			expect(Page.components.dropdownDefault.item(0).isFocused()).to.be.true();
 		});

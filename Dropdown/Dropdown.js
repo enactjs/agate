@@ -43,6 +43,7 @@ import Scroller from '../Scroller';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Dropdown.module.less';
+import itemCss from '../Item/Item.module.less';
 
 const oppositeDirection = {left: 'right', right: 'left', up: 'down', down: 'up'};
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
@@ -65,20 +66,18 @@ const handleTransitionShow = (ev, {'data-spotlight-id': containerId}) => {
 	const containerSelector = `[data-spotlight-id='${containerId}']`;
 	const current = Spotlight.getCurrent();
 
-	if (!Spotlight.isPaused() && current) {
-		setTimeout(
-			() => {
-				document.querySelector(`${containerSelector} .${componentCss.dropdownList} .${componentCss.item}`).focus();
+	// Focus function is delayed until dropdown (transition) animation ends.
+	setTimeout(
+		() => {
+			if (!Spotlight.getPointerMode()) {
+				if (!Spotlight.isPaused() && current && document.querySelector(`${containerSelector} .${componentCss.dropdownList} .${itemCss.selected}`)) {
+					document.querySelector(`${containerSelector} .${componentCss.dropdownList} .${itemCss.selected}`).focus();
+				} else {
+					document.querySelector(`${containerSelector} .${componentCss.dropdownList} .${itemCss.item}`).focus();
+				}
 			}
-			, 0);
-
-		// const focusResult = Spotlight.focus(`${containerSelector} .${componentCss.dropdownList} .${componentCss.item}`);
-		//
-		// if (!focusResult && Spotlight.getPointerMode()) {
-		//     console.log(document.querySelector(`${containerSelector} .${componentCss.dropdownList}`));
-		//     document.querySelector(`${containerSelector} .${componentCss.dropdownList}`).focus();
-		// }
-	}
+		}, 500
+	);
 };
 
 // Add keymap for escape key
@@ -320,7 +319,7 @@ const DropdownBase = kind({
 			{},
 			{},
 			{},
-			{childComponent: Item, itemProps: {size: 'small', css}},
+			{childComponent: Item, itemProps: {size: 'small', css}, selectedProp: 'selected'},
 			[<Icon slot="slotAfter" key="icon" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>]
 
 		];
