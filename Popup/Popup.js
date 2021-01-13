@@ -110,7 +110,7 @@ const PopupBase = kind({
 		 * `'medium'` (500ms) is default when no others are specified.
 		 *
 		 * @type {String}
-		 * @default 'medium'
+		 * @default 'short'
 		 * @public
 		 */
 		duration: PropTypes.string,
