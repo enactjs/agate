@@ -84,7 +84,7 @@ const TabBase = kind({
 		 * @type {Boolean}
 		 * @public
 		 */
-		selected: PropTypes.bool,
+		selected: PropTypes.bool
 	},
 
 	defaultProps: {
