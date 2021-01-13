@@ -107,7 +107,7 @@ const PopupBase = kind({
 		/**
 		 * Controls how long the transition should take.
 		 * Supported preset durations are: `'short'` (250ms), `'medium'` (500ms), and `'long'` (1s).
-		 * `'medium'` (500ms) is default when no others are specified.
+		 * `'short'` (250ms) is default when no others are specified.
 		 *
 		 * @type {String}
 		 * @default 'short'
