@@ -191,7 +191,6 @@ const DropdownBase = kind({
 			handleTransitionHide
 		),
 		onOpen: handle(
-			forward('onClick'),
 			forProp('open', false),
 			forward('onOpen')
 		)
