@@ -385,7 +385,7 @@ const DropDownExtended = hoc((config, Wrapped) => {
 
 		clickedOutsideDropdown = ({target}) => !this.node.contains(target);
 
-		// If a click happened outside the component area close the dropdown by forwarding the onClick from Toggleable.
+		// If a click happened outside the component area close the dropdown by forwarding onClose from Toggleable.
 		handleClick = handle(
 			this.clickedOutsideDropdown,
 			forward('onClose')
