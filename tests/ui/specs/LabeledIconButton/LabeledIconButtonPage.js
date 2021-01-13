@@ -1,7 +1,5 @@
 'use strict';
-const {getSubComponent, getText, Page} = require('@enact/ui-test-utils/utils');
-
-const getMarqueeText = getSubComponent({lib: 'ui', component: 'Marquee', child: 'text'});
+const {getText, Page} = require('@enact/ui-test-utils/utils');
 
 class LabeledIconButtonInterface {
 	constructor (id) {
@@ -13,14 +11,14 @@ class LabeledIconButtonInterface {
 		return browser.execute((el) => el.focus(), $(`#${this.id}`));
 	}
 	hover () {
-		return $(this.selector).moveTo({xOffset: 0, yOffset: 0});
+		return $(this.selector).moveTo({xOffset: 10, yOffset: 10});
 	}
 
 	get self () {
 		return $(this.selector);
 	}
 	get valueText () {
-		return getText(getMarqueeText(this.self));
+		return getText($(this.selector + ' label'));
 	}
 	iconValue () {
 		return getText($(this.selector + ' .Icon_Icon_icon')).codePointAt();
