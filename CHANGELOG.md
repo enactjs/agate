@@ -4,6 +4,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Deprecated
+
+- `agate/FullScreenPopup`, use `agate/Popup` instead
+
 ### Added
 
 - `agate/ArcPicker` and `agate/ArcSlider` prop `disabled` to be inactive
@@ -11,10 +15,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Button` prop `iconOnly`, `iconPosition`, and `minWidth`
 - `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
 - `agate/Popup` `duration` and `type` props
-
-### Deprecated
-
-- `agate/FullScreenPopup`, use `agate/Popup` instead
 
 ### Fixed
 
