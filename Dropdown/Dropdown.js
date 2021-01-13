@@ -66,15 +66,18 @@ const handleTransitionShow = (ev, {'data-spotlight-id': containerId}) => {
 	const current = Spotlight.getCurrent();
 
 	if (!Spotlight.isPaused() && current) {
+		setTimeout(
+			() => {
+				document.querySelector(`${containerSelector} .${componentCss.dropdownList} .${componentCss.item}`).focus();
+			}
+			, 0);
 
-		const focusResult = Spotlight.focus(`${containerSelector} .${componentCss.dropdownList} .${componentCss.item}`);
-
-		document.querySelector(`${containerSelector} .${componentCss.dropdownList} .${componentCss.item}`).focus();
-
-		if (!focusResult && Spotlight.getPointerMode()) {
-			console.log(document.querySelector(`${containerSelector} .${componentCss.dropdownList} .${componentCss.item}`));
-			document.querySelector(`${containerSelector} .${componentCss.dropdownList} .${componentCss.item}`).focus();
-		}
+		// const focusResult = Spotlight.focus(`${containerSelector} .${componentCss.dropdownList} .${componentCss.item}`);
+		//
+		// if (!focusResult && Spotlight.getPointerMode()) {
+		//     console.log(document.querySelector(`${containerSelector} .${componentCss.dropdownList}`));
+		//     document.querySelector(`${containerSelector} .${componentCss.dropdownList}`).focus();
+		// }
 	}
 };
 
