@@ -37,7 +37,7 @@ import componentCss from './TabGroup.module.less';
 const TabBase = kind({
 	name: 'Tab',
 
-	propTypes: /** @lends agate/TabGroup.Tab.prototype */ {
+	propTypes: /** @lends agate/TabGroup.TabBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
