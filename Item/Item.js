@@ -179,7 +179,7 @@ const ItemBase = kind({
 		 * @type {Boolean}
 		 * @public
 		 */
-		disabled:PropTypes.bool,
+		disabled: PropTypes.bool,
 
 		/**
 		 * Applies inline styling to the item.

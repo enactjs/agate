@@ -39,9 +39,9 @@ describe('Item', function () {
 					expect(Page.components.item6Inline.self.isFocused()).to.be.true();
 				});
 
-				it('should focus an inline item with 5-way Down', function () {
+				it('should focus an inline item with 5-way Right', function () {
 					item7Inline.focus();
-					Page.spotlightDown();
+					Page.spotlightRight();
 					expect(Page.components.item8Inline.self.isFocused()).to.be.true();
 				});
 			});
@@ -112,7 +112,7 @@ describe('Item', function () {
 
 				it('should focus an inline item with 5-way Left', function () {
 					item7Inline.focus();
-					Page.spotlightDown();
+					Page.spotlightLeft();
 					expect(Page.components.item8Inline.self.isFocused()).to.be.true();
 				});
 			});
