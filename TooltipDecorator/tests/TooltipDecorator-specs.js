@@ -4,8 +4,8 @@ import {FloatingLayerBase, FloatingLayerDecorator} from '@enact/ui/FloatingLayer
 
 import Button from '../../Button';
 import {Tooltip} from '../Tooltip';
-import TooltipLabel from '../TooltipLabel';
 import TooltipDecorator from '../TooltipDecorator';
+import TooltipLabel from '../TooltipLabel';
 
 const TooltipButton = TooltipDecorator(
 	{tooltipDestinationProp: 'decoration'},

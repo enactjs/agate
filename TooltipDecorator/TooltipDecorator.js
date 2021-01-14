@@ -431,7 +431,7 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		 * @private
 		 */
 		renderTooltip () {
-			const {children, tooltipMarquee, tooltipRelative, tooltipProps, tooltipText, tooltipWidth} = this.props;
+			const {children, tooltipMarquee, tooltipProps, tooltipRelative, tooltipText, tooltipWidth} = this.props;
 
 			if (tooltipText) {
 				let renderedTooltip = (

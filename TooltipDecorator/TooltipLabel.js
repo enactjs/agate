@@ -51,7 +51,7 @@ const TooltipLabel = kind({
 		/**
 		 * The width of tooltip content in pixels (px). If the content goes over the given width,
 		 * then it will automatically wrap. When `null`, content does not wrap.
-		 * * If the content goes over the given width, it will automatically wrap, or marquee if
+		 * If the content goes over the given width, it will automatically wrap, or marquee if
 		 * `marquee` is enabled.
 		 *
 		 * @type {Number|String}
