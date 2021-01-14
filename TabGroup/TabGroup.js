@@ -26,10 +26,18 @@ import ToggleButton from '../ToggleButton';
 
 import componentCss from './TabGroup.module.less';
 
+/**
+ * A Tab component.
+ *
+ * @class TabBase
+ * @memberof agate/TabGroup
+ * @ui
+ * @public
+ */
 const TabBase = kind({
 	name: 'Tab',
 
-	propTypes: {
+	propTypes: /** @lends agate/TabGroup.Tab.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
