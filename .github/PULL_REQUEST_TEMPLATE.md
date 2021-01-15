@@ -5,6 +5,10 @@
 * [ ] At least one test case is included for this feature or bug fix
 * [ ] Documentation was added or is not needed
 
+* [ ] Documentation was verified or is not change any comment
+* [ ] ui-test was passed or is not needed
+* [ ] screenshot-test was verified or is not needed
+
 * [ ] This is an API breaking change
 
 ### Issue Resolved / Feature Added
