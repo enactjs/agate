@@ -29,52 +29,11 @@ import componentCss from './Item.module.less';
 const ItemContent = kind({
 	name: 'ItemContent',
 
-	propTypes:  /** @lends agate/Item.ItemContent.prototype */ {
-		/**
-		 * Text displayed when passed as children.
-		 *
-		 * @type {String | Number}
-		 * @public
-		 */
+	propTypes: {
 		content: PropTypes.any,
-
-		/**
-		 * Customizes the component by mapping the supplied collection of CSS class names to the
-		 * corresponding internal elements and states of this component.
-		 *
-		 * The following classes are supported:
-		 *
-		 * `itemContent` - The root class name
-		 * `content` - The content class name
-		 * `label` - The label class name
-		 *
-		 * @type {Object}
-		 * @public
-		 */
 		css: PropTypes.object,
-
-		/**
-		 * Text displayed when passed in `label` prop.
-		 *
-		 * @type {String | Number}
-		 * @public
-		 */
 		label: PropTypes.any,
-
-		/**
-		 * Repositioning of label.
-		 *
-		 * @type {String}
-		 * @public
-		 */
 		labelPosition: PropTypes.oneOf(['above', 'after', 'before', 'below']),
-
-		/**
-		 * Determines what triggers the marquee to start its animation.
-		 *
-		 * @type {('focus'|'hover'|'render')}
-		 * @public
-		 */
 		marqueeOn: PropTypes.oneOf(['focus', 'hover', 'render'])
 	},
 
