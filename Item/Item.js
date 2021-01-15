@@ -30,14 +30,14 @@ import componentCss from './Item.module.less';
  * Renders the Item content.
  *
  * @class ItemContent
- * @memberof agate/ItemContent
+ * @memberof agate/Item
  * @ui
  * @public
  */
 const ItemContent = kind({
 	name: 'ItemContent',
 
-	propTypes:  /** @lends agate/ItemContent.prototype */ {
+	propTypes:  /** @lends agate/Item.ItemContent.prototype */ {
 		/**
 		 * Text displayed when passed as children.
 		 *
