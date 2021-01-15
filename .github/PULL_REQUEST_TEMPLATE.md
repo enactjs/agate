@@ -6,8 +6,8 @@
 * [ ] Documentation was added or is not needed
 
 * [ ] Documentation was verified or this PR does not change any comment
-* [ ] ui-test was passed or is not needed
-* [ ] screenshot-test was verified or is not needed
+* [ ] UI test was passed or is not needed
+* [ ] Screenshot test was verified or is not needed
 
 * [ ] This is an API breaking change
 
