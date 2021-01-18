@@ -9,6 +9,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ArcPicker` and `agate/ArcSlider` prop `disabled` to be inactive
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
 - `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
+- `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
 - `agate/Popup` content padding and margin with `closeButton`
 
 ### Fixed
