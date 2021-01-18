@@ -10,8 +10,8 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
 - `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
+- `agate/Input` prop `iconSize`, `invalid`, `invalidMessage`, and `size`
 - `agate/Popup` content padding and margin with `closeButton`
-- `agate/Input` prop `iconSize`, `invalid`, `invalidMessage` and `size`
 
 ### Fixed
 
