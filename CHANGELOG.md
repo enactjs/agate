@@ -14,6 +14,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
+- `agate/Button` to not center the icon when it has `minWidth`
 - `agate/DatePicker` transition direction for day when month is changed
 - `agate/Dropdown` to show focused icon color for Silicon skin
 - `agate/Dropdown` to not show double marquee text

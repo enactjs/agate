@@ -27,6 +27,7 @@
 		margin: 0 @agate-component-spacing;
 		box-sizing: border-box;
 		font-size: @agate-button-font-size;
+		text-align: center;
 		vertical-align: middle;
 
 		.bg {
@@ -315,6 +316,18 @@
 				.client {
 					color: @agate-button-transparent-selected-color;
 				}
+			}
+		}
+
+		// override Marquee's alignment, relying on the parent node's alignment preference (inherit).
+		.marquee {
+			text-align: inherit;
+		}
+
+		// Flex grow the marquee text only if there is text. this is to prevent the descentration of the icon in case of iconOnly
+		&:not(.iconOnly) {
+			.marquee {
+				flex-grow: 1;
 			}
 		}
 

@@ -21,14 +21,10 @@ import {add} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
 import {extractAriaProps} from '@enact/core/util';
 import Spotlight from '@enact/spotlight';
-import Spottable from '@enact/spotlight/Spottable';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
-import {ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
-import {MarqueeDecorator} from '@enact/ui/Marquee';
 import IdProvider from '@enact/ui/internal/IdProvider';
-import Pure from '@enact/ui/internal/Pure';
 import ri from '@enact/ui/resolution';
 import Toggleable from '@enact/ui/Toggleable';
 import Transition from '@enact/ui/Transition';
@@ -38,27 +34,17 @@ import compose from 'ramda/src/compose';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {ButtonBase} from '../Button';
+import Button from '../Button';
 import Icon from '../Icon';
 import Item from '../Item';
 import RadioItem from '../RadioItem';
 import Scroller from '../Scroller';
 import Skinnable from '../Skinnable';
-import TooltipDecorator from '../TooltipDecorator';
 
 import componentCss from './Dropdown.module.less';
 
 const oppositeDirection = {left: 'right', right: 'left', up: 'down', down: 'up'};
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
-const ButtonDecorator = compose(
-	Pure,
-	UiButtonDecorator,
-	TooltipDecorator({tooltipDestinationProp: 'decoration'}),
-	Spottable,
-	Skinnable
-);
-const Button = ButtonDecorator(ButtonBase);
-const MarqueeButton = MarqueeDecorator({className: componentCss.marquee}, Button);
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
 
 const handleTransitionHide = (ev, {'data-spotlight-id': containerId}) => {
@@ -300,8 +286,8 @@ const DropdownBase = kind({
 		const opened = !disabled && open;
 		const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
 		const [DropDownButton, dropDownButtonProps, wrapperProps, skinVariants, groupProps, iconComponent] = (skin === 'silicon') ? [
-			MarqueeButton,
-			{icon: open ? 'arrowlargeup' : 'arrowlargedown'},
+			Button,
+			{icon: open ? 'arrowlargeup' : 'arrowlargedown', iconPosition: 'after'},
 			{className: dropdownButtonClassName},
 			{'night': false},
 			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'},
