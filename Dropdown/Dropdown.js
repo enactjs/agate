@@ -287,7 +287,7 @@ const DropdownBase = kind({
 		const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
 		const [DropDownButton, dropDownButtonProps, wrapperProps, skinVariants, groupProps, iconComponent] = (skin === 'silicon') ? [
 			Button,
-			{icon: open ? 'arrowlargeup' : 'arrowlargedown', iconPosition: 'after'},
+			{icon: open ? 'arrowlargeup' : 'arrowlargedown', iconPosition: 'after', minWidth: true},
 			{className: dropdownButtonClassName},
 			{'night': false},
 			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'},
