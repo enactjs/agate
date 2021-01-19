@@ -81,6 +81,7 @@ class app extends Component {
 					</Container>
 				</Popup>
 				<Popup
+					closeButton
 					id="popup2"
 					open={this.state.open2}
 					noAnimation={false}
