@@ -1,13 +1,13 @@
 import {on, off} from '@enact/core/dispatcher';
 import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
+import {is} from '@enact/core/keymap';
 import Pause from '@enact/spotlight/Pause';
 import Spotlight, {getDirection} from '@enact/spotlight';
 import FloatingLayer from '@enact/ui/FloatingLayer';
 import PropTypes from 'prop-types';
 import React from 'react';
 import warning from 'warning';
-import {is} from "../../enact/packages/core/keymap";
 
 const isDown = is('down');
 const isLeft = is('left');
