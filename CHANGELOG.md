@@ -13,7 +13,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
 - `agate/Popup` content padding and margin with `closeButton`
 - `agate/Switch` prop `disabled` to disable switch and become non-interactive
-- `agate/Switch` prop `disabled` to set whether the control is in the 'on' or 'off' state
+- `agate/Switch` prop `selected` to set whether the control is in the 'on' or 'off' state
 
 ### Changed
 
