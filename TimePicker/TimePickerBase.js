@@ -314,6 +314,7 @@ const TimePickerBase = kind({
 									spotlightDisabled={spotlightDisabled}
 									value={meridiem}
 									width={meridiemPickerWidth}
+									reverseTransition={null}
 								>
 									{meridiems}
 								</DateComponentPicker>
