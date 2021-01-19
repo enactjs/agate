@@ -338,7 +338,6 @@ const DropdownBase = kind({
 							</Scroller>
 						</ContainerDiv>
 					</Transition>
-
 				</div>
 			</div>
 		);

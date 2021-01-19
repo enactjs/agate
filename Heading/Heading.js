@@ -19,8 +19,11 @@ import kind from '@enact/core/kind';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
+import defaultProps from 'recompose/defaultProps';
+import setPropTypes from 'recompose/setPropTypes';
 import UiHeading from '@enact/ui/Heading';
 
+import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Heading.module.less';
@@ -108,11 +111,19 @@ const HeadingBase = kind({
  *
  * @hoc
  * @memberof agate/Heading
+ * @mixes agate/Marquee.MarqueeDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const HeadingDecorator = compose(
+	setPropTypes({
+		marqueeOn: PropTypes.oneOf(['hover', 'render'])
+	}),
+	defaultProps({
+		marqueeOn: 'render'
+	}),
 	Pure,
+	MarqueeDecorator,
 	Skinnable
 );
 
@@ -140,6 +151,21 @@ const HeadingDecorator = compose(
  * @public
  */
 const Heading = HeadingDecorator(HeadingBase);
+
+/**
+ * Marquee animation trigger.
+ *
+ * Allowed values include:
+ * * `'hover'` - Marquee begins when the pointer enters the component
+ * * `'render'` - Marquee begins when the component is rendered
+ *
+ * @name marqueeOn
+ * @type {('hover'|'render')}
+ * @default 'render'
+ * @memberof agate/Heading.Heading.prototype
+ * @see {@link agate/Marquee.Marquee}
+ * @public
+ */
 
 export default Heading;
 export {
