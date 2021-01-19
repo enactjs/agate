@@ -12,7 +12,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
 - `agate/Input` prop `iconSize` to change the size of icon from `slotBefore` and `slotAfter` (default large)
-- `agate/Input` prop `invalid` to display a tooltip with a message when `invalid` prop is true, 
+- `agate/Input` prop `invalid` to display a tooltip with a message when `invalid` prop is true 
 - `agate/Input` prop `invalidMessage` to customize the tooltip message when `invalid` prop is true
 - `agate/Input` prop `size` to change the size of input (default large)
 - `agate/Popup` content padding and margin with `closeButton`
