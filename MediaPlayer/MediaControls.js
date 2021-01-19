@@ -203,7 +203,7 @@ const MediaControls = kind({
 
 	},
 
-	render: ({badge, menuIcon, nextTrackIcon, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffle, shuffleIcon, spotlightDisabled, ...rest}) => {
+	render: ({badge, menuIcon, nextTrackIcon, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffle, shuffleIcon, ...rest}) => {
 		return (
 			<div {...rest}>
 				<Container spotlightDisabled={spotlightDisabled}>
