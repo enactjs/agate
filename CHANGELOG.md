@@ -12,6 +12,8 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
 - `agate/Popup` content padding and margin with `closeButton`
+- `agate/Switch` prop `disabled` to disable switch and become non-interactive
+- `agate/Switch` prop `disabled` to set whether the control is in the 'on' or 'off' state
 
 ### Changed
 
@@ -26,10 +28,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/TimePicker` transition direction for meridiem when hour is changed
 
 ## [1.1.1] - 2020-12-23
-
-### Added
-
-- `agate/Switch` prop `disabled` and `selected`
 
 ### Fixed
 
