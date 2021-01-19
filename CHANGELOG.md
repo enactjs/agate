@@ -11,11 +11,12 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
-- `agate/IncrementSlider` prop `activateOnFocus` and `tooltip`
+- `agate/IncrementSlider` prop `activateOnFocus` to support slider activation when slider gets focused
+- `agate/IncrementSlider` prop `tooltip` to enable the built-in tooltip
 - `agate/Popup` content padding and margin with `closeButton`
-- `agate/ProgressBar` prop `highlighted`, `tooltip`
+- `agate/ProgressBar` prop `tooltip`  to enable the built-in tooltip
 - `agate/ProgressBarTooltip` component
-- `agate/Slider` prop `tooltip`
+- `agate/Slider` prop `tooltip` to enable the built-in tooltip
 
 ### Changed
 
