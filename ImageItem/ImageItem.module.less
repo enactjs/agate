@@ -24,6 +24,13 @@
 	.applySkins({
 		border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
 
+		&.horizontal {
+			.image {
+				width: @agate-imageitem-horizontal-image-width;
+				height: @agate-imageitem-horizontal-image-height;
+			}
+		}
+
 	  	.caption {
 			height: @agate-imageitem-caption-height;
 			line-height: @agate-imageitem-caption-height;
