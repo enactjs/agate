@@ -95,6 +95,14 @@ const DatePickerBase = kind({
 		dayAriaLabel: PropTypes.string,
 
 		/**
+		 * When it's `true`, it changes the direction of the transition animation for the day.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		dayReverseTransition: PropTypes.bool,
+
+		/**
 		 * Disables the `DatePicker`.
 		 *
 		 * @type {Boolean}
@@ -209,6 +217,7 @@ const DatePickerBase = kind({
 		disabled,
 		day,
 		dayAriaLabel,
+		dayReverseTransition,
 		maxDays,
 		maxMonths,
 		maxYear,
@@ -246,6 +255,7 @@ const DatePickerBase = kind({
 									min={1}
 									onChange={onDateChange}
 									onSpotlightDisappear={onSpotlightDisappear}
+									reverseTransition={dayReverseTransition}
 									spotlightDisabled={spotlightDisabled}
 									value={day}
 									width={2}
