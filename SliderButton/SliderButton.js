@@ -12,6 +12,7 @@
 
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
+import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
 import {Cell, Row} from '@enact/ui/Layout';
@@ -144,6 +145,7 @@ const SliderButtonBase = kind({
  */
 const SliderButtonDecorator = compose(
 	Pure,
+	Changeable,
 	SliderButtonBehaviorDecorator,
 	Spottable,
 	Skinnable

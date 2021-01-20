@@ -21,7 +21,6 @@ const SliderButtonBehaviorDecorator = (Wrapped) => {
 		const {children} = props;
 		const [valueText, setValueText] = React.useState(children ? children[0] : null);
 		const ref = React.useRef();
-		console.log(props);
 
 		function handleChange ({value}) {
 			setValueText(children[value]);
@@ -38,44 +37,13 @@ const SliderButtonBehaviorDecorator = (Wrapped) => {
 			}
 		}
 
-		function handleKeyDown (ev, props) {
-			forward('onKeyDown', ev, props);
-
+		function handleKeyDown (ev) {
 			if (isLeft(ev.keyCode)) {
-				handleChange({value: 0});
-				// forward('onKeyDown', ev, props);
+				handleChange({value: Math.max(children.indexOf(valueText) - 1, 0)});
 			} else if (isRight(ev.keyCode)) {
-				handleChange({value: 1});
-				// forward('onKeyDown', ev, props);
+				handleChange({value: Math.min(children.indexOf(valueText) + 1, children.length - 1)});
 			}
 		}
-
-		// function handleKeyDown (ev, props) {
-		// 	const value = ((valueText || valueText === 0) ? valueText : children[0]);
-		// 	const index = children.findIndex(child => child === value);
-		//
-		// 	forward('onKeyDown', ev, props);
-		//
-		// 	if (!disabled) {
-		// 		if (isLeft(ev.keyCode)) {
-		// 			handleChange(valueText);
-		// 		} else if (isRight(ev.keyCode)) {
-		// 			handleChange(children[Math.min(index + 1, value.length - 1)]);
-		// 		}
-		// 	}
-		// }
-
-		// function handleKeyDown ({value}) {
-		// 	forward('onKeyDown', {
-		// 		type: 'onChange',
-		// 		value
-		// 	}, props);
-		// 	setValueText(children[value]);
-		// }
-
-		// function handleKeyDown () {
-		// 	console.log('test');
-		// }
 
 		return (
 			<Wrapped
