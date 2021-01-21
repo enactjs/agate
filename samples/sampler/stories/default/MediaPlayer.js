@@ -1,7 +1,11 @@
+import {mergeComponentMetadata} from '@enact/storybook-utils';
+import {boolean} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import MediaPlayer from '@enact/agate/MediaPlayer';
+
+const Config = mergeComponentMetadata('MediaPlayer', MediaPlayer);
 
 const audioFiles = [
 	'https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3',
@@ -17,7 +21,9 @@ storiesOf('Agate', module)
 		'MediaPlayer',
 		() => {
 			return (
-				<MediaPlayer>
+				<MediaPlayer
+					disabled={boolean('disabled', Config)}
+				>
 					{
 						audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 					}
