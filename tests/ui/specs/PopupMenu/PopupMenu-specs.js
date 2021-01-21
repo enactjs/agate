@@ -317,13 +317,14 @@ describe('PopupMenu', function () {
 				expectClosed(popupMenuCommon);
 			});
 
-			it.skip('should dismiss the popupMenu on 5-way select close button', function () {
+			it('should dismiss the popupMenu on 5-way select close button', function () {
 				Page.spotlightDown();
 				Page.spotlightSelect();
 				Page.waitForOpen(popupMenu);
 
 				expectOpen(popupMenuCommon);
 
+				Page.waitForFocused(popupMenu.buttonClose);
 				Page.spotlightSelect();
 				Page.waitForClose(popupMenu);
 
