@@ -120,7 +120,7 @@ const PopupMenuBase = kind({
 		open: PropTypes.bool,
 
 		/**
-		 * The layout orientation of the component
+		 * The layout orientation of the component.
 		 *
 		 * @type {('horizontal')}
 		 * @default 'horizontal'
@@ -179,19 +179,20 @@ const PopupMenuBase = kind({
 				visible={open}
 			>
 				<Layout orientation="vertical" align="center center" role="alert" {...rest}>
-					<Cell className={css.title} shrink>
+					<Cell className={css.popupMenuTitle} shrink>
 						<Heading css={css} size="title">{title}</Heading>
 					</Cell>
 					<Cell shrink className={css.body} align="stretch">
 						<Scroller direction={orientation} horizontalScrollbar="hidden" verticalScrollbar="hidden">
 							{children}
 							{closeButton ? <LabeledIconButton
-								inline
-								icon="cancel"
-								onClick={onClose}
-								className={css.closeButton}
-								size="huge"
 								backgroundOpacity="lightOpaque"
+								className={css.closeButton}
+								css={css}
+								icon="cancel"
+								inline
+								onClick={onClose}
+								size="huge"
 							>{closeButtonLabel}</LabeledIconButton> : null}
 						</Scroller>
 					</Cell>
