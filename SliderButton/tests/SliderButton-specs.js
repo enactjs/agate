@@ -81,4 +81,34 @@ describe('SliderButton Specs', () => {
 		const actual = handleChange.mock.calls.length;
 		expect(actual).toBe(expected);
 	});
+
+	test('should change value on arrow right key press', () => {
+		const handleChange = jest.fn();
+		const sliderButton = mount(
+			<SliderButton onChange={handleChange}>
+				{children}
+			</SliderButton>
+		);
+
+		sliderButton.find('SliderButton').simulate('keyDown', {which: 39, keyCode: 39, code: 39});
+
+		const expected = 1;
+		const actual = handleChange.mock.calls[0][0].value;
+		expect(actual).toBe(expected);
+	});
+
+	test('should change value on arrow right left  press', () => {
+		const handleChange = jest.fn();
+		const sliderButton = mount(
+			<SliderButton onChange={handleChange} defaultValue={1}>
+				{children}
+			</SliderButton>
+		);
+
+		sliderButton.find('SliderButton').simulate('keyDown', {which: 37, keyCode: 37, code: 37});
+
+		const expected = 0;
+		const actual = handleChange.mock.calls[0][0].value;
+		expect(actual).toBe(expected);
+	});
 });
