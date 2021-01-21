@@ -23,6 +23,17 @@ describe('SliderButton', function () {
 
 			expect(sliderButton.getKnob().getAttribute('proportion')).to.equal('1');
 		});
+
+		describe('5-way', function () {
+			it('should move focus between options on 5-way navigation', function () {
+				Page.spotlightRight();
+				expect(sliderButton.getKnob().getAttribute('proportion')).to.equal('0.5');
+				Page.spotlightRight();
+				expect(sliderButton.getKnob().getAttribute('proportion')).to.equal('1');
+				Page.spotlightLeft();
+				expect(sliderButton.getKnob().getAttribute('proportion')).to.equal('0.5');
+			});
+		});
 	});
 
 	describe('slider button with five items', function () {
@@ -55,6 +66,25 @@ describe('SliderButton', function () {
 
 			expect(sliderButton.getKnob().getAttribute('proportion')).to.equal('1');
 		});
+
+		describe('5-way', function () {
+			it('should move focus between options on 5-way navigation', function () {
+				// first move focus on current sliderButton
+				Page.spotlightDown();
+				// try to move focus to second option
+				Page.spotlightRight();
+				expect(sliderButton.getKnob().getAttribute('proportion')).to.equal('0.25');
+				Page.spotlightRight();
+				expect(sliderButton.getKnob().getAttribute('proportion')).to.equal('0.5');
+				Page.spotlightRight();
+				expect(sliderButton.getKnob().getAttribute('proportion')).to.equal('0.75');
+				Page.spotlightRight();
+				expect(sliderButton.getKnob().getAttribute('proportion')).to.equal('1');
+				Page.spotlightLeft();
+				Page.spotlightLeft();
+				expect(sliderButton.getKnob().getAttribute('proportion')).to.equal('0.5');
+			});
+		});
 	});
 
 	describe('disabled', function () {
@@ -68,6 +98,17 @@ describe('SliderButton', function () {
 			sliderButton.clickableItem(2).click();
 
 			expect(sliderButton.getKnob().getAttribute('proportion')).to.equal('0');
+		});
+
+		describe('5-way', function () {
+			it('should not move focus between options on 5-way navigation', function () {
+				// first move focus on current sliderButton
+				Page.spotlightDown();
+				Page.spotlightDown();
+				// try to move focus to second option
+				Page.spotlightRight();
+				expect(sliderButton.getKnob().getAttribute('proportion')).to.equal('0');
+			});
 		});
 	});
 });
