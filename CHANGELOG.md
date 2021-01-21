@@ -31,6 +31,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Dropdown` to show focused icon color for Silicon skin
 - `agate/LabeledIconButton` to display label text on multiple lines (removed marquee)
 - `agate/LabeledIconButton` `max-width` to display huge sized icon correctly
+- `agate/MediaPlayer` previous button functionality to play media from the beginning after being paused
 - `agate/TimePicker` transition direction for meridiem when hour is changed
 
 ## [1.1.1] - 2020-12-23
