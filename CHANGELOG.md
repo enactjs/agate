@@ -20,6 +20,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
 - `agate/Popup` `duration` and `type` props to customize transition style
 - `agate/Popup` content padding and margin with `closeButton`
+- `agate/PopupMenu` `onShow` and `spotlightId` props to handle focus with 5-way navigation
 
 ### Changed
 

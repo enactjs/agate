@@ -463,8 +463,6 @@ describe('Popup', function () {
 				expect(popup.buttonCancel.isFocused()).to.be.true();
 			});
 
-
-
 			it('should close the popup on spotlight select on cancel in the popup', function () {
 				Page.spotlightRight();
 				Page.spotlightDown();

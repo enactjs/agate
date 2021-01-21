@@ -22,6 +22,30 @@ describe('PopupMenu', function () {
 		const popupMenu = Page.components.popupMenu1;
 
 		describe('using 5-way', function () {
+
+			it('should spot default button in popup container', function () {
+				Page.spotlightSelect();
+				Page.waitForOpen(popupMenu);
+
+				expectOpen(popupMenuCommon);
+
+				Page.waitForFocused(popupMenu.buttonOK);
+				expect(popupMenu.buttonOK.isFocused()).to.be.true();
+			});
+
+			it('should spot cancel button on 5-way right in popup container', function () {
+				Page.spotlightSelect();
+				Page.waitForOpen(popupMenu);
+
+				expectOpen(popupMenuCommon);
+
+				Page.waitForFocused(popupMenu.buttonOK);
+				Page.spotlightRight();
+
+				Page.waitForFocused(popupMenu.buttonCancel);
+				expect(popupMenu.buttonCancel.isFocused()).to.be.true();
+			});
+
 			it('should dismiss the popupMenu on escape key', function () {
 				Page.spotlightSelect();
 				Page.waitForOpen(popupMenu);
@@ -32,6 +56,20 @@ describe('PopupMenu', function () {
 				Page.waitForClose(popupMenu);
 
 				expectClosed(popupMenuCommon);
+			});
+
+			it('should spot back the popup button on closing the popup', function () {
+				Page.spotlightSelect();
+				Page.waitForOpen(popupMenu);
+
+				expectOpen(popupMenuCommon);
+				Page.waitForFocused(popupMenu.buttonOK);
+
+				Page.spotlightSelect();
+				Page.waitForClose(popupMenu);
+
+				expectClosed(popupMenuCommon);
+				expect(popupMenuCommon.buttonPopupMenu1.isFocused()).to.be.true();
 			});
 
 			it('should spot back the popupMenu button on auto dismiss the popupMenu', function () {
@@ -49,6 +87,7 @@ describe('PopupMenu', function () {
 		});
 
 		describe('using pointer', function () {
+
 			it('should open the popupMenu with scrim on click', function () {
 				popupMenuCommon.buttonPopupMenu1.click();
 				Page.waitForOpen(popupMenu);
@@ -99,6 +138,18 @@ describe('PopupMenu', function () {
 		const popupMenu = Page.components.popupMenu2;
 
 		describe('using 5-way', function () {
+
+			it('should spot default button in popup container', function () {
+				Page.spotlightRight();
+				Page.spotlightSelect();
+				Page.waitForOpen(popupMenu);
+
+				expectOpen(popupMenuCommon);
+
+				Page.waitForFocused(popupMenu.buttonOK);
+				expect(popupMenu.buttonOK.isFocused()).to.be.true();
+			});
+
 			it('should not dismiss the popupMenu on escape key', function () {
 				Page.spotlightRight();
 				Page.spotlightSelect();
@@ -114,6 +165,7 @@ describe('PopupMenu', function () {
 		});
 
 		describe('using pointer', function () {
+
 			it('should open the popupMenu with scrim on click', function () {
 				popupMenuCommon.buttonPopupMenu2.click();
 				Page.waitForOpen(popupMenu);
@@ -163,6 +215,7 @@ describe('PopupMenu', function () {
 		const popupMenu = Page.components.popupMenu3;
 
 		describe('using 5-way', function () {
+
 			it('should dismiss the popupMenu on escape key', function () {
 				Page.spotlightRight();
 				Page.spotlightRight();
@@ -194,6 +247,7 @@ describe('PopupMenu', function () {
 		});
 
 		describe('using pointer', function () {
+
 			it('should open the popupMenu with scrim on click', function () {
 				popupMenuCommon.buttonPopupMenu3.click();
 				Page.waitForOpen(popupMenu);
@@ -220,6 +274,34 @@ describe('PopupMenu', function () {
 		const popupMenu = Page.components.popupMenu4;
 
 		describe('using 5-way', function () {
+
+			it('should spot default button in popup container', function () {
+				Page.spotlightRight();
+				Page.spotlightRight();
+				Page.spotlightRight();
+				Page.spotlightSelect();
+				browser.pause(100); // needed to pass instead of waitTransitionEnd
+
+				expectOpen(popupMenuCommon);
+
+				Page.waitForFocused(popupMenu.buttonOK);
+				expect(popupMenu.buttonOK.isFocused()).to.be.true();
+			});
+
+			it('should spot cancel button on 5-way down and right in popup container', function () {
+				Page.spotlightRight();
+				Page.spotlightRight();
+				Page.spotlightRight();
+				Page.spotlightSelect();
+				browser.pause(100); // needed to pass instead of waitTransitionEnd
+
+				expectOpen(popupMenuCommon);
+
+				Page.spotlightRight();
+				Page.waitForFocused(popupMenu.buttonCancel);
+				expect(popupMenu.buttonCancel.isFocused()).to.be.true();
+			});
+
 			it('should dismiss the popupMenu on escape key', function () {
 				Page.spotlightRight();
 				Page.spotlightRight();
@@ -253,6 +335,7 @@ describe('PopupMenu', function () {
 		});
 
 		describe('using pointer', function () {
+
 			it('should open the popupMenu with scrim on click', function () {
 				popupMenuCommon.buttonPopupMenu4.click();
 				browser.pause(100); // needed to pass instead of waitTransitionEnd
@@ -304,6 +387,18 @@ describe('PopupMenu', function () {
 		const popupMenu = Page.components.popupMenu5;
 
 		describe('using 5-way', function () {
+
+			it('should spot default button in popup container', function () {
+				Page.spotlightDown();
+				Page.spotlightSelect();
+				Page.waitForOpen(popupMenu);
+
+				expectOpen(popupMenuCommon);
+
+				Page.waitForFocused(popupMenu.buttonClose);
+				expect(popupMenu.buttonClose.isFocused()).to.be.true();
+			});
+
 			it('should dismiss the popupMenu on escape key', function () {
 				Page.spotlightDown();
 				Page.spotlightSelect();
@@ -347,23 +442,12 @@ describe('PopupMenu', function () {
 		});
 
 		describe('using pointer', function () {
+
 			it('should open the popupMenu with scrim on click', function () {
 				popupMenuCommon.buttonPopupMenu5.click();
 				Page.waitForOpen(popupMenu);
 
 				expectOpen(popupMenuCommon);
-			});
-
-			it('should dismiss the popupMenu on escape key', function () {
-				popupMenuCommon.buttonPopupMenu5.click();
-				Page.waitForOpen(popupMenu);
-
-				expectOpen(popupMenuCommon);
-
-				Page.backKey();
-				Page.waitForClose(popupMenu);
-
-				expectClosed(popupMenuCommon);
 			});
 
 			it('should close the popupMenu and scrim on close button click in popupMenu container', function () {
@@ -394,6 +478,33 @@ describe('PopupMenu', function () {
 		});
 
 		describe('using 5-way', function () {
+			it('should spot default button in popup container', function () {
+				Page.spotlightDown();
+				Page.spotlightRight();
+				Page.spotlightSelect();
+				Page.waitForOpen(popupMenu);
+
+				expectOpen(popupMenuCommon);
+
+				Page.waitForFocused(popupMenu.buttonOK);
+				expect(popupMenu.buttonOK.isFocused()).to.be.true();
+			});
+
+			it('should spot cancel button on 5-way right in popup container', function () {
+				Page.spotlightDown();
+				Page.spotlightRight();
+				Page.spotlightSelect();
+				Page.waitForOpen(popupMenu);
+
+				expectOpen(popupMenuCommon);
+
+				Page.waitForFocused(popupMenu.buttonOK);
+				Page.spotlightRight();
+
+				Page.waitForFocused(popupMenu.buttonCancel);
+				expect(popupMenu.buttonCancel.isFocused()).to.be.true();
+			});
+
 			it('should dismiss the popupMenu on escape key', function () {
 				Page.spotlightDown();
 				Page.spotlightRight();
