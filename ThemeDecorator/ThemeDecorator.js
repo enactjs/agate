@@ -5,6 +5,7 @@
  * @exports ThemeDecorator
  */
 
+import {setRootId} from '@enact/core/dispatcher';
 import hoc from '@enact/core/hoc';
 import {addAll} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
@@ -106,6 +107,14 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	ri: {
 		screenTypes
 	},
+
+	/**
+	 * Specifies the id of the React DOM tree root node
+	 *
+	 * @type {String}
+	 * @public
+	 */
+	rootId: 'root',
 
 	/**
 	 * Applies skinning support.
@@ -219,7 +228,7 @@ const CustomizableSkinStyle = kind({
  */
 const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	// TODO: Document props passable to hoc ()
-	const {customSkin, float, i18n, noAutoFocus, overlay, ri, skin, spotlight, disableFullscreen} = config;
+	const {customSkin, float, i18n, noAutoFocus, overlay, ri, skin, spotlight, disableFullscreen, rootId} = config;
 
 	const bgClassName = classnames(
 		'enact-fit',
@@ -241,6 +250,9 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		pointerHide: 1537,
 		pointerShow: 1536
 	});
+
+	// set the DOM node ID of the React DOM tree root
+	setRootId(rootId);
 
 	const Decorator = class extends React.Component {
 		static displayName = 'ThemeDecorator';

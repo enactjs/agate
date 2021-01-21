@@ -13,6 +13,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Marquee` component
 - `agate/Picker` prop `noAnimation` and `wrap`
 - `agate/RangePicker` prop `noAnimation` and `wrap`
+- `agate/ThemeDecorator` config `rootId` to specify React DOM tree root for global event handlers
 - `agate/TimePicker` prop `onSpotlightDisappear` and `spotlightDisabled`
  
 ### Fixed
