@@ -4,7 +4,6 @@
 * [ ] A [CHANGELOG entry](http://enactjs.com/docs/developer-guide/contributing/changelogs/) is included
 * [ ] At least one test case is included for this feature or bug fix
 * [ ] Documentation was added or is not needed
-
 * [ ] Documentation was verified or is not changed
 * [ ] UI test was passed or is not needed
 * [ ] Screenshot test was verified or is not needed
