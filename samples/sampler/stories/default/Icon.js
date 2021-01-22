@@ -20,7 +20,7 @@ Icon.displayName = 'Icon';
 const Config = mergeComponentMetadata('Icon', UiIcon, IconBase, Icon);
 
 const SkinnedIconBase = kind({
-	name: 'SkinIcon',
+	name: 'SkinnedIcon',
 
 	propTypes: {
 		skin: PropTypes.string

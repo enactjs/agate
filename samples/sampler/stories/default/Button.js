@@ -36,7 +36,7 @@ const threeWayBoolean = (value) => {
 };
 
 const SkinnedButtonBase = kind({
-	name: 'SkinButton',
+	name: 'SkinnedButton',
 
 	propTypes: {
 		skin: PropTypes.string
