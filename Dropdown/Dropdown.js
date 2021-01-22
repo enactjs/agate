@@ -24,7 +24,6 @@ import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
-import {MarqueeDecorator} from '@enact/ui/Marquee';
 import IdProvider from '@enact/ui/internal/IdProvider';
 import ri from '@enact/ui/resolution';
 import Toggleable from '@enact/ui/Toggleable';
@@ -46,7 +45,6 @@ import componentCss from './Dropdown.module.less';
 
 const oppositeDirection = {left: 'right', right: 'left', up: 'down', down: 'up'};
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
-const MarqueeButton = MarqueeDecorator({className: componentCss.marquee}, Button);
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
 
 const handleTransitionHide = (ev, {'data-spotlight-id': containerId}) => {
@@ -288,8 +286,8 @@ const DropdownBase = kind({
 		const opened = !disabled && open;
 		const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
 		const [DropDownButton, dropDownButtonProps, wrapperProps, skinVariants, groupProps, iconComponent] = (skin === 'silicon') ? [
-			MarqueeButton,
-			{icon: open ? 'arrowlargeup' : 'arrowlargedown'},
+			Button,
+			{icon: open ? 'arrowlargeup' : 'arrowlargedown', iconPosition: 'after', minWidth: true},
 			{className: dropdownButtonClassName},
 			{'night': false},
 			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'},
