@@ -19,7 +19,6 @@ const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase);
 
 const I18nTabbedPanelsBase = ({rtl, ...rest}) => {
 	const [panelIndex, setIndex] = React.useState(Config.defaultProps.index || 0);
-	console.log(rtl);
 	const onSelect = (e) => {
 		setIndex(e.index);
 		action('onSelect')(e);

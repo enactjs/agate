@@ -8,7 +8,7 @@ import {storiesOf} from '@storybook/react';
 import Marquee from '@enact/agate/Marquee';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 
-Marquee.displayName= 'Marquee';
+Marquee.displayName = 'Marquee';
 const Config = mergeComponentMetadata('Marquee', Marquee);
 
 const I18nMarqueeBase = kind({
@@ -18,25 +18,15 @@ const I18nMarqueeBase = kind({
 		rtl: PropTypes.bool
 	},
 
-	render: ({rtl, props, ...rest}) => {
-		const value = text('marqueeSpacing', Config, '50%');
-		const spacing = () => {
-			if (value && value.indexOf('%') > 0) {
-				return value;
-			}
-
-			return Number.parseInt(value);
-		};
-
+	render: ({rtl, ...rest}) => {
 		const marqueeText = rtl ? 'قفز الثعلب البني السريع فوق الكلب الكسول. طائر الفاصوليا يطير عند غروب الشمس.' : 'The quick brown fox jumped over the lazy dog. The bean bird flies at sundown.';
 		return (
 			<Marquee
 				{...rest}
-				marqueeSpacing={spacing()}
 			>
 				{marqueeText}
 			</Marquee>
-		)
+		);
 	}
 });
 
@@ -46,6 +36,15 @@ storiesOf('Agate', module)
 	.add(
 		'Marquee',
 		() => {
+			const value = text('marqueeSpacing', Config, '50%');
+			const spacing = () => {
+				if (value && value.indexOf('%') > 0) {
+					return value;
+				}
+
+				return Number.parseInt(value);
+			};
+
 			const disabled = boolean('disabled', Config);
 			return (
 				<section>
@@ -58,13 +57,13 @@ storiesOf('Agate', module)
 						marqueeOn={select('marqueeOn', ['hover', 'render'], Config, 'render')}
 						marqueeOnRenderDelay={1000}
 						marqueeResetDelay={number('marqueeResetDelay', Config, 1000)}
+						marqueeSpacing={spacing()}
 						marqueeSpeed={number('marqueeSpeed', Config, 60)}
 						style={{width: '600px'}}
 					/>
-					{disabled ?
-					<p style={{fontSize: '70%', fontStyle: 'italic'}}><sup>*</sup>Marquee does not visually respond to <code>disabled</code> state.</p> : <p/>}
-			</section>
-			)
+					{disabled ? <p style={{fontSize: '70%', fontStyle: 'italic'}}><sup>*</sup>Marquee does not visually respond to <code>disabled</code> state.</p> : <p />}
+				</section>
+			);
 		},
 		{
 			text: 'Basic usage of Marquee'
