@@ -17,8 +17,9 @@ import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase);
 // `paddingBottom: '56.25%'` is a trick to impose 16:9 aspect ratio on the component, since padding percentage is based on the width, not the height.
 
-const I18nTabbedPanelsBase = ({rtl}) => {
+const I18nTabbedPanelsBase = ({rtl, ...rest}) => {
 	const [panelIndex, setIndex] = React.useState(Config.defaultProps.index || 0);
+	console.log(rtl);
 	const onSelect = (e) => {
 		setIndex(e.index);
 		action('onSelect')(e);
@@ -34,10 +35,9 @@ const I18nTabbedPanelsBase = ({rtl}) => {
 	return (
 		<div style={{paddingBottom: '56.25%'}}>
 			<TabbedPanels
-				duration={number('duration', Config, 500)}
-				onClick={action('onClick')}
+				{...rest}
 				index={panelIndex}
-				noCloseButton={boolean('noCloseButton', Config)}
+
 				onSelect={onSelect} // eslint-disable-line react/jsx-no-bind
 				orientation={orientation}
 				tabPosition={select('tabPosition', ['before', 'after'], Config, 'before')}
@@ -98,7 +98,13 @@ const I18nTabbedPanels = I18nContextDecorator({rtlProp: 'rtl'}, I18nTabbedPanels
 storiesOf('Agate', module)
 	.add(
 		'TabbedPanels',
-		() => (<I18nTabbedPanels />),
+		() => (
+			<I18nTabbedPanels
+				duration={number('duration', Config, 500)}
+				onClick={action('onClick')}
+				noCloseButton={boolean('noCloseButton', Config)}
+			/>
+		),
 		{
 			text: 'The basic TabbedPanels'
 		}

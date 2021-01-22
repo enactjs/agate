@@ -42,13 +42,14 @@ const SecondPanel = kind({
 	)
 });
 
-const BasicPanels = () => {
+const BasicPanels = ({...rest}) => {
 	const [index, setIndex] = React.useState(0);
 	const goNext = () => setIndex(clamp(0, 2, index + 1));
 	const goPrevious = () => setIndex(clamp(0, 2, index - 1));
 
 	return (
 		<Panels
+			{...rest}
 			index={index}
 			noAnimation={boolean('noAnimation', Config, false)}
 			noCloseButton={boolean('noCloseButton', Config, false)}
@@ -57,7 +58,7 @@ const BasicPanels = () => {
 			orientation={select('orientation', ['horizontal', 'vertical'], Config)}
 		>
 			<FirstPanel onClick={goNext} />
-			<SecondPanel />
+			<SecondPanel onClick={goPrevious} />
 		</Panels>
 	);
 };
@@ -65,7 +66,13 @@ const BasicPanels = () => {
 storiesOf('Agate', module)
 	.add(
 		'Panels',
-		() => (<BasicPanels />),
+		() => (
+			<BasicPanels
+				noAnimation={boolean('noAnimation', Config, false)}
+				noCloseButton={boolean('noCloseButton', Config, false)}
+				onApplicationClose={action('onClose')}
+			/>
+		),
 		{
 			props: {
 				noScroller: true,
