@@ -4,14 +4,23 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Deprecated
+
+- `agate/FullScreenPopup`, use `agate/Popup` instead
+
 ### Added
 
 - `agate/ArcPicker` and `agate/ArcSlider` prop `disabled` to be inactive
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
-- `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
+- `agate/Button` prop `iconOnly`, `iconPosition`, and `minWidth`
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
+- `agate/Popup` `'aria-live'`, `noAlertRole`, and `role` props to support accessibility
+- `agate/Popup` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
+- `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
+- `agate/Popup` `duration` and `type` props to customize transition style
 - `agate/Popup` content padding and margin with `closeButton`
+- `agate/PopupMenu` `onShow` and `spotlightId` props to handle focus with 5-way navigation
 
 ### Changed
 

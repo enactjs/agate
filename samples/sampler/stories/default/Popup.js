@@ -31,15 +31,18 @@ storiesOf('Agate', module)
 					<Popup
 						centered={boolean('centered', Config)}
 						closeButton={boolean('closeButton', Config)}
+						duration={select('duration', ['short', 'medium', 'long'], Config)}
 						noAnimation={boolean('noAnimation', Config)}
 						noAutoDismiss={boolean('noAutoDismiss', Config)}
 						onClose={action('onClose')}
 						onHide={action('onHide')}
+						onShow={action('onShow')}
 						open={boolean('open', Config)}
-						position={select('position', ['center', 'top'], Config)}
+						position={select('position', ['bottom', 'center', 'fullscreen', 'left', 'right', 'top'], Config)}
 						scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
 						spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
 						title={text('title', Config, 'Title')}
+						type={select('type', [null, 'fade', 'slide'], Config)}
 					>
 						<div>{text('children', Config, 'Hello Popup')}</div>
 						{buttons}
