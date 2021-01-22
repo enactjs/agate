@@ -232,8 +232,8 @@ const TimePickerBase = kind({
 	},
 
 	computed: {
-		hasMeridiem: ({order}) => order.indexOf('a') >= 0,
-		meridiemPickerWidth: ({meridiem, meridiems}) => meridiems[meridiem].length * 1.5
+		hasMeridiem: ({order}) => order && order.indexOf('a') >= 0,
+		meridiemPickerWidth: ({meridiem, meridiems}) => meridiems && meridiems[meridiem].length * 1.5
 	},
 
 	render: ({
@@ -262,7 +262,7 @@ const TimePickerBase = kind({
 
 		return (
 			<DateTime {...rest} css={css}>
-				{order.map((picker) => {
+				{order && order.map((picker) => {
 					switch (picker) {
 						case 'h':
 						case 'k':
@@ -314,6 +314,7 @@ const TimePickerBase = kind({
 									spotlightDisabled={spotlightDisabled}
 									value={meridiem}
 									width={meridiemPickerWidth}
+									reverseTransition={null}
 								>
 									{meridiems}
 								</DateComponentPicker>

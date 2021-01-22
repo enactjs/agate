@@ -29,13 +29,14 @@ const getLabelFormatter = () => new DateFmt({
 });
 
 const dateTimeConfig = {
-	customProps: function (i18n, value, props) {
+	customProps: function (i18n, value, dayReverseTransition, props) {
 		const values = {
 			maxMonths: 12,
 			maxDays: 31,
 			year: 1900,
 			month: 1,
-			day: 1
+			day: 1,
+			dayReverseTransition: false
 		};
 
 		if (value && i18n) {
@@ -46,6 +47,10 @@ const dateTimeConfig = {
 			values.maxDays = i18n.formatter.cal.getMonLength(values.month, values.year);
 			values.maxYear = i18n.toLocalYear(props.maxYear || DatePickerBase.defaultProps.maxYear);
 			values.minYear = i18n.toLocalYear(props.minYear || DatePickerBase.defaultProps.minYear);
+		}
+
+		if (dayReverseTransition) {
+			values.dayReverseTransition = dayReverseTransition;
 		}
 
 		return values;
@@ -107,8 +112,7 @@ const dateTimeConfig = {
  */
 const DatePickerDecorator = compose(
 	Pure,
-	Skinnable,
-	DateTimeDecorator(dateTimeConfig)
+	Skinnable
 );
 
 /**
@@ -144,7 +148,12 @@ const DatePickerDecorator = compose(
  * @ui
  * @public
  */
-const DatePicker = DatePickerDecorator(DatePickerBase);
+const DatePicker = DatePickerDecorator(
+	DateTimeDecorator(
+		dateTimeConfig,
+		DatePickerBase
+	)
+);
 
 /**
  * The initial value used when `value` is not set.

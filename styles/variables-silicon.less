@@ -12,7 +12,13 @@
 // ---------------------------------------
 @agate-icon-font-family: "Silicon Icons";
 
-// Arc Slider
+// ArcPicker
+// ---------------------------------------
+@agate-arcpicker-value-display-height: 120px;
+@agate-arcpicker-font-size: 72px;
+@agate-arcpicker-font-weight: 300;
+
+// ArcSlider
 // -------------------------------------------------
 @agate-arcslider-font-size: 72px;
 @agate-arcslider-font-weight: 300;
@@ -23,10 +29,6 @@
 @agate-body-font-size: 28px;
 @agate-body-font-weight: normal;
 @agate-body-line-height: 1.5em;
-
-// ArcPicker
-// ---------------------------------------
-@agate-arc-picker-value-display-height: 120px;
 
 // Button
 // ---------------------------------------
@@ -85,6 +87,8 @@
 @agate-dropdown-button-bg-image: none;
 @agate-dropdown-button-font-size: 27px;
 @agate-dropdown-button-icon-font-size: 36px;
+@agate-dropdown-button-icon-margin-right: 9px;
+@agate-dropdown-button-icon-width: 24px;
 @agate-dropdown-button-transition-delay: 0.5s;
 @agate-dropdown-button-marquee-margin-right: 42px;
 @agate-dropdown-button-list-border-radius: 0 0 @agate-button-border-radius @agate-button-border-radius;
@@ -101,9 +105,8 @@
 @agate-dropdown-list-height: @agate-button-small-height * 4;
 @agate-dropdown-list-padding: 15px 0 3px 0;
 
-// ArcPicker
+// FanSpeedControl
 // ---------------------------------------
-@agate-fanspeedcontrol-font-size:        72px;
 @agate-fanspeedcontrol-icon-font-size:   120px;
 @agate-fanspeedcontrol-icon-height:      60px;
 @agate-fanspeedcontrol-value-width:      90px;
@@ -254,8 +257,10 @@
 @agate-popup-border: none;
 @agate-popup-padding: (@agate-component-spacing * 2) 0 0 0;
 @agate-popup-closebutton-title-padding: 0 (@agate-button-small-height) 0 @agate-component-spacing;
+@agate-popup-closebutton-content-padding: @agate-popup-closebutton-title-padding;
+@agate-popup-content-margin: 0 12px;
 @agate-popup-title-padding: 0 @agate-component-spacing;
-@agate-popup-body-padding: (@agate-component-spacing * 2) @agate-component-spacing 0 @agate-component-spacing;
+@agate-popup-body-padding: 0;
 @agate-popup-body-border-radius: 0 0 @agate-popup-border-radius @agate-popup-border-radius;
 @agate-popup-buttons-border-radius: @agate-popup-body-border-radius;
 @agate-popup-buttons-padding: @agate-component-spacing 0;

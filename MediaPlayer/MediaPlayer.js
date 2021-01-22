@@ -269,7 +269,7 @@ const MediaPlayerBase = kind({
 					onEnded={onEnded}
 					onUpdate={onUpdate}
 					ref={mediaRef}
-					source={playlist[sourceIndex]}
+					source={playlist ? playlist[sourceIndex] : null}
 				/>
 				<MediaSlider
 					onChange={onChange}
@@ -583,6 +583,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 				this.setState(() => {
 					return ({sourceIndex: currentIndex});
 				}, () => {
+					this.media.currentTime = 0;
 					this.play();
 				});
 			} else {

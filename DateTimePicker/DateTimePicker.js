@@ -35,12 +35,67 @@ const DateTimePickerBase = kind({
 
 	propTypes: /** @lends agate/DateTimePicker.DateTimePickerBase.prototype */ {
 		/**
+		 * The "aria-label" for the day picker.
+		 *
+		 * If not specified, the "aria-label" for the day picker will be
+		 * a combination of the current value and 'day change a value with up down button'.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		dayAriaLabel: PropTypes.string,
+
+		/**
 		 * Disables the `DateTimePicker`.
 		 *
 		 * @type {Boolean}
 		 * @public
 		 */
 		disabled: PropTypes.bool,
+
+		/**
+		 * The "aria-label" for the hour picker
+		 *
+		 * If not specified, the "aria-label" for the hour picker will be
+		 * a combination of the current value and 'hour change a value with up down button'.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		hourAriaLabel: PropTypes.string,
+
+		/**
+		 * The "aria-label" for the meridiem picker.
+		 *
+		 * If not specified, the "aria-label" for the meridiem picker will be
+		 * a combination of the current value and 'change a value with up down button'.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		meridiemAriaLabel: PropTypes.string,
+
+		/**
+		 * The "aria-label" for the minute picker.
+		 *
+		 * If not specified, the "aria-label" for the minute picker will be
+		 * a combination of the current value and 'minute change a value with up down button'.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		minuteAriaLabel: PropTypes.string,
+
+		/**
+		 * The "aria-label" for the month picker.
+		 *
+		 * If not specified, the "aria-label" for the month picker will be
+		 * a combination of the current value and 'month change a value with up down button'.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		monthAriaLabel: PropTypes.string,
 
 		/**
 		 * Handler for `onChange` events
@@ -70,10 +125,21 @@ const DateTimePickerBase = kind({
 		/**
 		 * The value of the DateTimePicker.
 		 *
+		 * @type {Date}
+		 * @public
+		 */
+		value: PropTypes.instanceOf(Date),
+
+		/**
+		 * The "aria-label" for the year picker.
+		 *
+		 * If not specified, the "aria-label" for the year picker will be
+		 * a combination of the current value and 'year change a value with up down button'.
+		 *
 		 * @type {String}
 		 * @public
 		 */
-		value: PropTypes.any
+		yearAriaLabel: PropTypes.string
 	},
 
 	styles: {
@@ -81,15 +147,15 @@ const DateTimePickerBase = kind({
 		className: 'dateTimePicker'
 	},
 
-	render ({disabled, onChange, onSpotlightDisappear, spotlightDisabled, value, ...rest}) {
+	render ({dayAriaLabel, disabled, hourAriaLabel, meridiemAriaLabel, minuteAriaLabel, monthAriaLabel, onChange, onSpotlightDisappear, spotlightDisabled, value, yearAriaLabel, ...rest}) {
 
 		return (
 			<Row {...rest} className={css.dateTimePicker} align="center center">
 				<Row align="center center">
-					<TimePicker css={css} disabled={disabled} onChange={onChange} onSpotlightDisappear={onSpotlightDisappear} spotlightDisabled={spotlightDisabled} value={value} />
+					<TimePicker {...rest} css={css} disabled={disabled} hourAriaLabel={hourAriaLabel} meridiemAriaLabel={meridiemAriaLabel} minuteAriaLabel={minuteAriaLabel} onChange={onChange} onSpotlightDisappear={onSpotlightDisappear} spotlightDisabled={spotlightDisabled} value={value} />
 				</Row>
 				<Row align="center center">
-					<DatePicker css={css} disabled={disabled} onChange={onChange} onSpotlightDisappear={onSpotlightDisappear} spotlightDisabled={spotlightDisabled} value={value} />
+					<DatePicker {...rest} css={css} dayAriaLabel={dayAriaLabel} disabled={disabled} monthAriaLabel={monthAriaLabel} onChange={onChange} onSpotlightDisappear={onSpotlightDisappear} spotlightDisabled={spotlightDisabled} value={value} yearAriaLabel={yearAriaLabel} />
 				</Row>
 			</Row>
 		);
