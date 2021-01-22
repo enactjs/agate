@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 
 import Button from '@enact/agate/Button';
@@ -54,6 +54,7 @@ const BasicPanels = () => {
 			noCloseButton={boolean('noCloseButton', Config, false)}
 			onApplicationClose={action('onClose')}
 			onBack={goPrevious}
+			orientation={select('orientation', ['horizontal', 'vertical'], Config)}
 		>
 			<FirstPanel onClick={goNext} />
 			<SecondPanel />
