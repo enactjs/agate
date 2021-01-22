@@ -191,6 +191,9 @@ const DropdownBase = kind({
 		onOpen: handle(
 			forProp('open', false),
 			forward('onOpen')
+		),
+		onScrollerClick: handle(
+			(ev) => ev.stopPropagation()
 		)
 	},
 
@@ -280,7 +283,7 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, ...rest}) => {
+	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClose, onOpen, onScrollerClick, onSelect, open, selected, skin, title, ...rest}) => {
 		const ariaProps = extractAriaProps(rest);
 		const dropdownButtonClassName = classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'up'});
 		const opened = !disabled && open;
@@ -323,7 +326,7 @@ const DropdownBase = kind({
 						direction={oppositeDirection[adjustedDirection]}
 					>
 						<ContainerDiv className={dropdownListClassName} spotlightDisabled={!open} spotlightRestrict="self-only">
-							<Scroller skinVariants={skinVariants} className={css.scroller}>
+							<Scroller skinVariants={skinVariants} className={css.scroller} onClick={onScrollerClick}>
 								<Group
 									role={null}
 									className={css.group}
@@ -383,15 +386,15 @@ const DropDownExtended = hoc((config, Wrapped) => {
 
 		clickedOutsideDropdown = ({target}) => !this.node.contains(target);
 
-		// If a click happened outside the component area close the dropdown by forwarding onClose from Toggleable.
+		// If a click happened outside the component area close the dropdown by forwarding onClick from Toggleable.
 		handleClick = handle(
 			this.clickedOutsideDropdown,
-			forward('onClose')
+			forward('onClick')
 		).bindAs(this, 'handleClick');
 
 		handleKeyDown = handle(
 			forKey('cancel'),
-			forward('onClose')
+			forward('onClick')
 		).bindAs(this, 'handleKeyDown');
 
 		render () {
@@ -419,7 +422,7 @@ const DropdownDecorator = compose(
 		generateProp: null,
 		prefix: 'd_'
 	}),
-	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose'}),
+	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose', toggleProp: 'onClick'}),
 	Changeable({change: 'onSelect', prop: 'selected'}),
 	DropDownExtended,
 	Skinnable({prop: 'skin'})
