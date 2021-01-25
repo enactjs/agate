@@ -1,5 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, number, text} from  '@enact/storybook-utils/addons/knobs';
+import {boolean, number, text, select} from  '@enact/storybook-utils/addons/knobs';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {storiesOf} from '@storybook/react';
 import React from 'react';
@@ -22,6 +22,13 @@ storiesOf('Agate', module)
 						disabled={boolean('disabled', Config)}
 						onSelect={action('onSelect')}
 						title={text('title', Config, 'Please select')}
+
+						direction={select('direction', ['above', 'below'], Config)}
+						onClose={action('onClose')}
+						onOpen={action('onOpen')}
+						placeholder={text('placeholder', Config)}
+						size={select('size', ['small', 'large'], Config)}
+						width={select('width', ['tiny', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
 					>
 						{items}
 					</Dropdown>
