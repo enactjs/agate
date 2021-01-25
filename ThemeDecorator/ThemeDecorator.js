@@ -6,7 +6,7 @@
  * @exports ThemeContext
  */
 
-import {setRootId} from '@enact/core/dispatcher';
+import {setDefaultTargetById} from '@enact/core/dispatcher';
 import hoc from '@enact/core/hoc';
 import {addAll} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
@@ -146,6 +146,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 * Specifies the id of the React DOM tree root node
 	 *
 	 * @type {String}
+	 * @default 'root'
 	 * @public
 	 */
 	rootId: 'root',
@@ -287,7 +288,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	});
 
 	// set the DOM node ID of the React DOM tree root
-	setRootId(rootId);
+	setDefaultTargetById(rootId);
 
 	const Decorator = class extends React.Component {
 		static displayName = 'ThemeDecorator';
