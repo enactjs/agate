@@ -2,6 +2,12 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Added
+
+- `agate/ThemeDecorator` config `rootId` to specify React DOM tree root for global event handlers
+
 ## [1.1.2] - 2021-02-05
 
 ### Deprecated
