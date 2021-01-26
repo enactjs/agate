@@ -36,13 +36,67 @@ import componentCss from './PopupMenu.module.less';
 const PopupMenuBase = kind({
 	name: 'PopupMenu',
 	propTypes: /** @lends agate/PopupMenu.PopupMenuBase.prototype */ {
+		/**
+		 * Omits the close button.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		closeButton: PropTypes.bool,
+
+		/**
+		 * The label for the close button.
+		 *
+		 * @type {String}
+		 * @default 'Cancel'
+		 * @public
+		 */
 		closeButtonLabel: PropTypes.string,
+
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * Disable popup menu transitions.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		noAnimation: PropTypes.bool,
+
+		/**
+		 * Called when the user has attempted to close the popup menu.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
 		onClose: PropTypes.func,
+
+		/**
+		 * Called after the transition to hide the popup menu has finished.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
 		onHide: PropTypes.func,
+
+		/**
+		 * Displays the popup menu.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		open: PropTypes.bool,
+
 		/**
 		 * The layout orientation of the component
 		 *
@@ -51,6 +105,13 @@ const PopupMenuBase = kind({
 		 * @private
 		 */
 		orientation: PropTypes.oneOf(['horizontal']),
+
+		/**
+		 * The primary title text of the popup menu.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		title: PropTypes.string
 	},
 

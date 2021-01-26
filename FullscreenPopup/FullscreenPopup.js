@@ -37,12 +37,68 @@ import componentCss from './FullscreenPopup.module.less';
 const FullscreenPopupBase = kind({
 	name: 'FullscreenPopup',
 	propTypes: /** @lends agate/FullscreenPopup.FullscreenPopupBase.prototype */ {
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * The animation direction of the popup.
+		 *
+		 * @type {String}
+		 * @default 'down'
+		 * @public
+		 */
 		direction: PropTypes.string,
+
+		/**
+		 * The transition duration of the popup.
+		 *
+		 * @type {Number|String}
+		 * @default 'short'
+		 * @public
+		 */
 		duration: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+		/**
+		 * Disable popup transitions.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		noAnimation: PropTypes.bool,
+
+		/**
+		 * Called after the transition to hide the popup has finished.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
 		onHide: PropTypes.func,
+
+		/**
+		 * Displays the popup.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		open: PropTypes.bool,
+
+		/**
+		 * Type of popup.
+		 *
+		 * * Supported types are: `'slide'`, `'clip'`, and `'fade'`.
+		 *
+		 * @type {('slide'|'clip'|'fade')}
+		 * @default 'slide'
+		 * @public
+		 */
 		type: PropTypes.string
 	},
 
