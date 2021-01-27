@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {number, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -24,6 +24,7 @@ storiesOf('Agate', module)
 			return (
 				<ArcPicker
 					backgroundColor={select('backgroundColor', prop.colors, Config)}
+					disabled={boolean('disabled', Config)}
 					endAngle={number('endAngle', Config, {range: true, min: 0, max: 360})}
 					foregroundColor={select('foregroundColor', prop.colors, Config)}
 					onChange={action('onChange')}

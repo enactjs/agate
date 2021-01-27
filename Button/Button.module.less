@@ -133,6 +133,12 @@
 				.bg {
 					border-radius: @agate-button-icon-border-radius;
 				}
+
+				&.minWidth {
+					.bg {
+						border-radius: @agate-button-border-radius;
+					}
+				}
 			}
 		}
 
@@ -309,6 +315,18 @@
 				.client {
 					color: @agate-button-transparent-selected-color;
 				}
+			}
+		}
+
+		// override Marquee's alignment.
+		.marquee {
+			text-align: center;
+		}
+
+		// Flex grow the marquee text only if there is text or the button has minWidth applied. this is to prevent the descentration of the icon in case of iconOnly.
+		&:not(.iconOnly), &.minWidth {
+			.marquee {
+				flex-grow: 1;
 			}
 		}
 
