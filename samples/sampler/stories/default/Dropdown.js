@@ -28,7 +28,7 @@ storiesOf('Agate', module)
 						onOpen={action('onOpen')}
 						placeholder={text('placeholder', Config)}
 						size={select('size', ['small', 'large'], Config)}
-						width={select('width', ['tiny', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+						width={select('width', ['tiny', 'small', 'medium', 'large', 'x-large', 'huge', 'auto'], Config)}
 					>
 						{items}
 					</Dropdown>
