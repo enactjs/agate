@@ -19,16 +19,13 @@ storiesOf('Agate', module)
 			return (
 				<div>
 					<Dropdown
-						disabled={boolean('disabled', Config)}
-						onSelect={action('onSelect')}
-						title={text('title', Config, 'Please select')}
-
 						direction={select('direction', ['above', 'below'], Config)}
+						disabled={boolean('disabled', Config)}
 						onClose={action('onClose')}
 						onOpen={action('onOpen')}
-						placeholder={text('placeholder', Config)}
-						size={select('size', ['small', 'large'], Config)}
-						width={select('width', ['tiny', 'small', 'medium', 'large', 'x-large', 'huge', 'auto'], Config)}
+						onSelect={action('onSelect')}
+						title={text('title', Config, 'Please select')}
+						width={select('width', ['tiny', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
 					>
 						{items}
 					</Dropdown>

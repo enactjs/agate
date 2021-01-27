@@ -87,6 +87,13 @@ const DropdownListBase = kind({
 		]),
 
 		/**
+		 * Placement of the Dropdown List.
+		 *
+		 * @type {String}
+		 */
+		direction: PropTypes.string,
+
+		/**
 		 * Called when an item is selected.
 		 *
 		 * @type {Function}
@@ -171,13 +178,12 @@ const DropdownListBase = kind({
 
 			return transitionDirection;
 		},
-		className: ({children, width, styler}) => styler.append(width, {dropdownListWithScroller: children.length > 4})
+		className: ({children, direction, width, styler}) => styler.append(direction.substr(0, direction.indexOf(' ')), width, {dropdownListWithScroller: children.length > 4})
 	},
 
 	render: ({adjustedDirection, children, disabled, dropdownListClassName, groupProps, open, selected, skinVariants, onSelect, ...rest}) => {
 		const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
 		const opened = !disabled && open;
-console.log(disabled, skinVariants);
 		delete rest.width;
 		delete rest.transitionDirection;
 
@@ -226,14 +232,14 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 		static displayName = 'DropdownListSpotlightDecorator';
 
 		static propTypes = {
-			/*
+			/**
 			 * Called when an item receives focus.
 			 *
 			 * @type {Function}
 			 */
 			onFocus: PropTypes.func,
 
-			/*
+			/**
 			 * Index of the selected item.
 			 *
 			 * @type {Number}
@@ -280,9 +286,9 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 			}
 		}
 
-		// setScrollTo = (scrollTo) => {
-		// 	this.scrollTo = scrollTo;
-		// };
+		setScrollTo = (scrollTo) => {
+			this.scrollTo = scrollTo;
+		};
 
 		resetFocus (keysDiffer) {
 			let adjustedFocusIndex;
@@ -293,7 +299,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 					adjustedFocusIndex = targetIndex;
 				}
 			}
-
+			console.log(adjustedFocusIndex);
 			this.setState({
 				prevChildren: this.props.children,
 				prevFocused: adjustedFocusIndex,
@@ -305,10 +311,10 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 
 		scrollIntoView = () => {
 			let {selected} = this.props;
-
-			if (this.state.prevFocused == null && !isSelectedValid(this.props)) {
+			if (this.state.prevFocused == null && !isSelectedValid(selected)) {
 				selected = 0;
 			} else if (this.state.prevFocused != null) {
+				console.log(2);
 				selected = this.state.prevFocused;
 			}
 
@@ -329,6 +335,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 
 		handleFocus = (ev) => {
 			const current = ev.target;
+
 			if (this.state.ready === ReadyState.DONE && !Spotlight.getPointerMode() &&
 				current.dataset['index'] != null && this.node.contains(current)
 			) {
@@ -344,7 +351,11 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 
 		render () {
 			return (
-				<Wrapped {...this.props} onFocus={this.handleFocus} />
+				<Wrapped
+					{...this.props}
+					onFocus={this.handleFocus}
+					// scrollTo={this.setScrollTo}
+				/>
 			);
 		}
 	};
@@ -353,7 +364,6 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 const DropdownListDecorator = compose(
 	DropdownListSpotlightDecorator,
 	Skinnable({variantsProp: 'skinVariants'})
-	//Skinnable
 );
 
 const DropdownList = DropdownListDecorator(DropdownListBase);

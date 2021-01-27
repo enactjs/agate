@@ -15,39 +15,59 @@
  * @exports DropdownDecorator
  */
 import {forward, forProp, handle} from '@enact/core/handle';
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import {extractAriaProps} from '@enact/core/util';
+import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
+import ForwardRef from '@enact/ui/ForwardRef';
 import IdProvider from '@enact/ui/internal/IdProvider';
-import ri from '@enact/ui/resolution';
+import Pure from '@enact/ui/internal/Pure';
 import Toggleable from '@enact/ui/Toggleable';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
+import not from 'ramda/src/not';
 import React from 'react';
+import warning from 'warning';
 
 import Button from '../Button';
+import ContextualPopupDecorator from '../ContextualPopupDecorator';
+import Icon from '../Icon';
 import Item from '../Item';
 import RadioItem from '../RadioItem';
 import Skinnable from '../Skinnable';
-import {compareChildren} from './DropdownList';
+
+import DropdownList, {compareChildren, isSelectedValid} from './DropdownList';
 import componentCss from './Dropdown.module.less';
-import ContextualPopupDecorator from '../ContextualPopupDecorator';
-import ForwardRef from '@enact/ui/ForwardRef';
-import EnactPropTypes from '@enact/core/internal/prop-types';
-import DropdownList from './DropdownList';
-import not from 'ramda/src/not';
-import warning from 'warning';
-import Pure from '@enact/ui/internal/Pure';
-import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 
-const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
-
+/**
+ * A stateless Dropdown Button component.
+ *
+ * @class DropdownButtonBase
+ * @memberof agate/Dropdown
+ * @ui
+ * @public
+ */
 const DropdownButtonBase = kind({
 	name: 'DropdownButtonBase',
 
-	propTypes: {
+	propTypes: /** @lends agate/Dropdown.DropdownButtonBase.prototype */ {
+		/**
+		 * Shows if the dropdown is opened.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		dropdownOpened: PropTypes.bool,
+
+		/**
+		 * Forwards a reference to the this component.
+		 *
+		 * @type {Object|Function}
+		 * @private
+		 */
 		forwardRef: EnactPropTypes.ref,
 
 		/**
@@ -59,27 +79,25 @@ const DropdownButtonBase = kind({
 		skin: PropTypes.string
 	},
 
-	render: ({children, css, forwardRef, opened, skin, ...rest}) => {
-		return (	(skin === 'silicon') ?
-			<Button
-				role="button"
-				{...rest}
-				css={css}
-				ref={forwardRef}
-				icon={opened ? 'arrowlargeup' : 'arrowlargedown'}
-				iconPosition="after"
-				minWidth
-			>
-				{children}
-			</Button> :
-			<Item
-				role="button"
-				{...rest}
-				css={componentCss}
-				ref={forwardRef}
-			>
-				{children}
-			</Item>
+	render: ({children, dropdownOpened, forwardRef, skin, ...rest}) => {
+		return (
+			(skin === 'silicon') ?
+				<Button
+					{...rest}
+					icon={dropdownOpened ? 'arrowlargeup' : 'arrowlargedown'}
+					iconPosition="after"
+					minWidth
+					ref={forwardRef}
+				>
+					{children}
+				</Button> :
+				<Item
+					{...rest}
+					ref={forwardRef}
+				>
+					{children}
+					<Icon slot="slotAfter" key="icon" size="small">{dropdownOpened ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
+				</Item>
 		);
 	}
 });
@@ -92,8 +110,6 @@ const DropdownButton = ContextualPopupDecorator(
 );
 DropdownButton.displayName = 'DropdownButton';
 
-
-
 /**
  * A stateless Dropdown component.
  *
@@ -102,7 +118,6 @@ DropdownButton.displayName = 'DropdownButton';
  * @ui
  * @public
  */
-
 const DropdownBase = kind({
 	name: 'Dropdown',
 
@@ -140,15 +155,6 @@ const DropdownBase = kind({
 		 * @private
 		 */
 		'data-spotlight-id': PropTypes.string,
-
-		// 		/**
-		// 		 * The direction where the dropdown list appears.
-		// 		 *
-		// 		 * @type {('left'|'right'|'down'|'up')}
-		// 		 * @default 'down'
-		// 		 * @public
-		// 		 */
-		// 		direction: PropTypes.oneOf(['down', 'left', 'right', 'up']),
 
 		/**
 		 * Placement of the Dropdown.
@@ -191,7 +197,6 @@ const DropdownBase = kind({
 		 */
 		onOpen: PropTypes.func,
 
-
 		/**
 		 * Called when an item is selected.
 		 *
@@ -208,7 +213,6 @@ const DropdownBase = kind({
 		 * Displays the items.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		open: PropTypes.bool,
@@ -228,15 +232,6 @@ const DropdownBase = kind({
 		 * @public
 		 */
 		selected: PropTypes.number,
-
-		/**
-		 * The size of the Dropdown's [Button]{@link sandstone/Button.Button} component.
-		 *
-		 * @type {('large'|'small')}
-		 * @default 'small'
-		 * @public
-		 */
-		size: PropTypes.oneOf(['large', 'small']),
 
 		/**
 		 * The current skin for this component.
@@ -267,18 +262,15 @@ const DropdownBase = kind({
 		/**
 		 * Width of the Dropdown.
 		 *
-		 * @type {('huge'|'large'|'x-large'|'medium'|'small'|'tiny'|'auto')}
+		 * @type {('huge'|'large'|'x-large'|'medium'|'small'|'tiny')}
 		 * @default 'medium'
 		 * @public
 		 */
-		width: PropTypes.oneOf(['tiny', 'small', 'medium', 'large', 'x-large', 'huge', 'auto'])
+		width: PropTypes.oneOf(['tiny', 'small', 'medium', 'large', 'x-large', 'huge'])
 	},
 
 	defaultProps: {
 		direction: 'below',
-		// direction: 'down',
-		open: false,
-		size: 'small',
 		width: 'medium',
 		transitionDirection: 'down'
 	},
@@ -303,47 +295,6 @@ const DropdownBase = kind({
 	},
 
 	computed: {
-		adjustedDirection: ({direction, 'data-spotlight-id': containerId}) => {
-			if (typeof window !== 'undefined') {
-				const calcOverflow = (container, client, wrapper) => {
-					const KEEPOUT = ri.scale(24); // keep out distance on the edge of the screen
-					const wrapperTop = (wrapper && wrapper.top) || 0;
-					const wrapperBottom = (wrapper && wrapper.bottom) || window.innerHeight;
-
-					const overflow = {
-						isOverTop: client.top - container.height - KEEPOUT < wrapperTop,
-						isOverBottom: client.bottom + container.height + KEEPOUT > wrapperBottom
-					};
-
-					return overflow;
-				};
-
-				const adjustDirection = (overflow) => {
-					let adjustedDirection = direction;
-					if (overflow.isOverTop && !overflow.isOverBottom && direction === 'up') {
-						adjustedDirection = 'down';
-					} else if (overflow.isOverBottom && !overflow.isOverTop && direction === 'down') {
-						adjustedDirection = 'up';
-					}
-
-					return adjustedDirection;
-				};
-
-				const containerSelector = `[data-spotlight-id='${containerId}']`;
-				const containerNode = document.querySelector(`${containerSelector} .${componentCss.dropdownList}`);
-				const clientNode = document.querySelector(`${containerSelector} .${componentCss.dropdown}`);
-				const wrapperNode = clientNode && clientNode.closest('div[style*=overflow]');
-
-				if (containerNode && clientNode) {
-					const containerNodeRect = containerNode.getBoundingClientRect();
-					const clientNodeRect = clientNode.getBoundingClientRect();
-					const wrapperNodeRect = wrapperNode && wrapperNode.getBoundingClientRect();
-					return adjustDirection(calcOverflow(containerNodeRect, clientNodeRect, wrapperNodeRect));
-				}
-			}
-
-			return direction;
-		},
 		ariaLabelledBy: ({id, title}) => (title ? `${id}_title` : void 0),
 		children: ({children, selected}) => {
 			if (!Array.isArray(children)) return [];
@@ -373,7 +324,7 @@ const DropdownBase = kind({
 				};
 			});
 		},
-		className: ({adjustedDirection, css, width, title, skin, styler}) => styler.append(`${width}Width`, {hasTitle: Boolean(title)}, skin === 'silicon' ? classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'up'}) : {}),
+		className: ({css, direction, width, title, skin, styler}) => styler.append(`${width}Width`, {hasTitle: Boolean(title)}, skin === 'silicon' ? classnames(css.dropdownButton, {[css.upDropdownButton]: direction === 'above'}) : {}),
 		buttonClassName: ({open, styler}) => styler.append({open}),
 		direction: ({direction}) => `${direction} center`,
 		title: ({children, selected, title}) => {
@@ -389,7 +340,7 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({adjustedDirection, 'aria-label': ariaLabel, ariaLabelledBy, buttonClassName, children, css, direction, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, size, skin, transitionDirection, title, width, ...rest}) => {
+	render: ({'aria-label': ariaLabel, ariaLabelledBy, buttonClassName, children, css, direction, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionDirection, title, width, ...rest}) => {
 		delete rest.rtl;
 
 		const ariaProps = extractAriaProps(rest);
@@ -399,31 +350,31 @@ const DropdownBase = kind({
 			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'} :
 			{childComponent: Item, itemProps: {size: 'small'}};
 
-		const popupProps = {'aria-live': null, children, disabled, groupProps, onSelect, open, selected, skinVariants: skin === 'silicon' ? {'night': false} : {}, transitionDirection, width, role: null};
+		const popupProps = {'aria-live': null, children, direction, disabled, groupProps, onSelect, open, selected, skinVariants: skin === 'silicon' ? {'night': false} : {}, transitionDirection, width, role: null};
 
 		// `ui/Group`/`ui/Repeater` will throw an error if empty so we disable the Dropdown and
 		// prevent Dropdown to open if there are no children.
 		const openDropdown = hasChildren && !disabled && open;
-console.log(popupProps);
+
 		return (
 			<div {...calcAriaProps} {...rest}>
 				<DropdownButton
 					aria-label={ariaLabel}
 					className={buttonClassName}
+					css={css}
 					direction={direction}
 					disabled={hasChildren ? disabled : true}
-					icon={openDropdown ? 'arrowlargeup' : 'arrowlargedown'}
-					popupProps={popupProps}
-					popupComponent={DropdownList}
+					dropdownOpened={openDropdown}
 					onClick={onOpen}
 					onClose={onClose}
 					open={openDropdown}
-					opened={openDropdown}
-					size={size}
+					popupProps={popupProps}
+					popupComponent={DropdownList}
+					role="button"
 					skin={skin}
 					spotlightRestrict="self-only"
 					{...ariaProps}
-					css={css}
+
 				>
 					{title}
 				</DropdownButton>
@@ -452,9 +403,7 @@ console.log(popupProps);
 // 	},
 //
 // 	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, ...rest}) => {
-// 		const ariaProps = extractAriaProps(rest);
 // 		const dropdownButtonClassName = classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'up'});
-// 		const opened = !disabled && open;
 // 		const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
 // 		const [DropDownButtonOld, dropDownButtonProps, wrapperProps, skinVariants, groupProps, iconComponent] = (skin === 'silicon') ? [
 // 			Button,
@@ -518,11 +467,20 @@ console.log(popupProps);
 // });
 
 /**
- * Applies Agate specific behaviors to [DropdownBase]{@link agate/Dropdown.DropdownBase}.
+ * Applies Agate specific behaviors and functionality to
+ * [DropdownBase]{@link agate/Dropdown.DropdownBase}.
  *
  * @hoc
- * @memberof agate/Dropdown
+ * @memberof sandstone/Dropdown
+ * @mixes ui/Changeable.Changeable
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes spotlight/SpotlightContainerDecorator.SpotlightContainerDecorator
  * @mixes agate/Skinnable.Skinnable
+ * @omit selected
+ * @omit defaultSelected
+ * @omit value
+ * @omit defaultValue
+ * @omit onChange
  * @public
  */
 const DropdownDecorator = compose(
