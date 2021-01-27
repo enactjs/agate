@@ -399,12 +399,12 @@ const DropdownBase = kind({
 			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'} :
 			{childComponent: Item, itemProps: {size: 'small'}};
 
-		const popupProps = {'aria-live': null, children, groupProps, onSelect, selected, skinVariants: skin === 'silicon' ? {'night': false} : {}, transitionDirection, width, role: null};
+		const popupProps = {'aria-live': null, children, disabled, groupProps, onSelect, open, selected, skinVariants: skin === 'silicon' ? {'night': false} : {}, transitionDirection, width, role: null};
 
 		// `ui/Group`/`ui/Repeater` will throw an error if empty so we disable the Dropdown and
 		// prevent Dropdown to open if there are no children.
 		const openDropdown = hasChildren && !disabled && open;
-
+console.log(popupProps);
 		return (
 			<div {...calcAriaProps} {...rest}>
 				<DropdownButton

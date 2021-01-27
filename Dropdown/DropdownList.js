@@ -174,10 +174,10 @@ const DropdownListBase = kind({
 		className: ({children, width, styler}) => styler.append(width, {dropdownListWithScroller: children.length > 4})
 	},
 
-	render: ({adjustedDirection, children, dataSize, disabled, dropdownListClassName, itemSize, scrollTo, groupProps, open, selected, skinVariants, onSelect, ...rest}) => {
+	render: ({adjustedDirection, children, disabled, dropdownListClassName, groupProps, open, selected, skinVariants, onSelect, ...rest}) => {
 		const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
 		const opened = !disabled && open;
-
+console.log(disabled, skinVariants);
 		delete rest.width;
 		delete rest.transitionDirection;
 
@@ -352,8 +352,8 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 
 const DropdownListDecorator = compose(
 	DropdownListSpotlightDecorator,
-	// Skinnable({variantsProp: 'skinVariants'})
-	Skinnable
+	Skinnable({variantsProp: 'skinVariants'})
+	//Skinnable
 );
 
 const DropdownList = DropdownListDecorator(DropdownListBase);
