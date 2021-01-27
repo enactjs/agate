@@ -25,7 +25,7 @@ describe('SliderButton', function () {
 		});
 
 		describe('5-way', function () {
-			it('should move focus between options on 5-way navigation', function () {
+			it('should change value between options on 5-way navigation', function () {
 				Page.spotlightRight();
 				expect(sliderButton.getKnob().getAttribute('proportion')).to.equal('0.5');
 				Page.spotlightRight();
@@ -68,7 +68,7 @@ describe('SliderButton', function () {
 		});
 
 		describe('5-way', function () {
-			it('should move focus between options on 5-way navigation', function () {
+			it('should change value between options on 5-way navigation', function () {
 				// first move focus on current sliderButton
 				Page.spotlightDown();
 				// try to move focus to second option
@@ -101,7 +101,7 @@ describe('SliderButton', function () {
 		});
 
 		describe('5-way', function () {
-			it('should not move focus between options on 5-way navigation', function () {
+			it('should not change value between options on 5-way navigation', function () {
 				// first move focus on current sliderButton
 				Page.spotlightDown();
 				Page.spotlightDown();
