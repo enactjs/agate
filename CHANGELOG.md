@@ -8,9 +8,9 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/ArcPicker` and `agate/ArcSlider` prop `disabled` to be inactive
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
-- `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
+- `agate/Item` prop `centered`, `disabled`, `inline`, `marqueeOn`, and `size`
 - `agate/Popup` content padding and margin with `closeButton`
 
 ### Changed
@@ -43,7 +43,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Checkbox` prop `disabled`, `indeterminate`, and `indeterminateIcon`
 - `agate/CheckboxItem` prop `disabled`, `indeterminate`, `indeterminateIcon`, and `slotbefore`
 - `agate/DatePicker` prop `onSpotlightDisappear` and `spotlightDisabled`
-- `agate/Item` prop `centered` and `size`
 - `agate/Marquee` component
 - `agate/Picker` prop `noAnimation` and `wrap`
 - `agate/RangePicker` prop `noAnimation` and `wrap`
