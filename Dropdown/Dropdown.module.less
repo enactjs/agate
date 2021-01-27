@@ -21,12 +21,6 @@
 	.dropdownButton {
 		.button {
 			margin: 0;
-
-			.icon {
-				position: absolute;
-				right: 0;
-				margin: 0;
-			}
 		}
 
 		.transitionContainer {
@@ -86,6 +80,7 @@
 				&,
 				.client {
 					color: @agate-dropdown-button-client-color;
+					flex-direction: row-reverse;
 				}
 
 				&.open {
@@ -99,10 +94,8 @@
 				.icon {
 					color: @agate-dropdown-button-icon-color;
 					font-size: @agate-dropdown-button-icon-font-size;
-				}
-
-				.marquee {
-					margin-right: @agate-dropdown-button-marquee-margin-right;
+					width: @agate-dropdown-button-icon-width;
+					margin-right: @agate-dropdown-button-icon-margin-right;
 				}
 
 				.focus({
