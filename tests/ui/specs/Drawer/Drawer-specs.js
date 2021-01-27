@@ -77,6 +77,8 @@ describe('Drawer', function () {
 
 				expectOpen(drawerCommon);
 
+				// Add  delay for Jenkins fail that Cancle button is clicked before drawer is fully opened.
+				Page.delay(300);
 				drawer.buttonCancel.click();
 				Page.waitForClose(drawer);
 
@@ -200,6 +202,8 @@ describe('Drawer', function () {
 
 				expectOpen(drawerCommon);
 
+				// Add  delay for Jenkins fail that Cancle button is clicked before drawer is fully opened.
+				Page.delay(300);
 				drawer.buttonCancel.click();
 				Page.waitForClose(drawer);
 
