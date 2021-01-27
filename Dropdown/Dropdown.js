@@ -382,89 +382,6 @@ const DropdownBase = kind({
 		);
 	}
 });
-// const DropdownBase = kind({
-// 	name: 'Dropdown',
-//
-// 	handlers: {
-// 		onSelect: handle(
-// 			forward('onSelect'),
-// 			forward('onClose'),
-// 			handleTransitionHide
-// 		),
-// 		onOpen: handle(
-// 			forProp('open', false),
-// 			forward('onOpen')
-// 		)
-// 	},
-//
-//
-// 	computed: {
-// 		dropdownListClassName: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
-// 	},
-//
-// 	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, ...rest}) => {
-// 		const dropdownButtonClassName = classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'up'});
-// 		const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
-// 		const [DropDownButtonOld, dropDownButtonProps, wrapperProps, skinVariants, groupProps, iconComponent] = (skin === 'silicon') ? [
-// 			Button,
-// 			{icon: open ? 'arrowlargeup' : 'arrowlargedown', iconPosition: 'after', minWidth: true},
-// 			{className: dropdownButtonClassName},
-// 			{'night': false},
-// 			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'},
-// 			[]
-// 		] : [
-// 			Item,
-// 			{},
-// 			{},
-// 			{},
-// 			{childComponent: Item, itemProps: {size: 'small'}},
-// 			[<Icon slot="slotAfter" key="icon" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>]
-//
-// 		];
-//
-// 		return (
-// 			<div {...rest}>
-// 				<div {...wrapperProps}>
-// 					<DropdownButton
-// 						role="button"
-// 						className={buttonClassName}
-// 						css={css}
-// 						disabled={hasChildren ? disabled : true}
-// 						onClick={opened ? onClose : onOpen}
-// 						open={open}
-// 						// {...dropDownButtonProps}
-// 						{...ariaProps}
-// 						popupComponent={DropdownList
-// 						// 	<Transition
-// 						// 	className={transitionContainerClassName}
-// 						// 	visible={opened}
-// 						// 	direction={oppositeDirection[adjustedDirection]}
-// 						// >
-// 						// 	<ContainerDiv className={dropdownListClassName} spotlightDisabled={!open} spotlightRestrict="self-only">
-// 						// 		<Scroller skinVariants={skinVariants} className={css.scroller}>
-// 						// 			<Group
-// 						// 				role={null}
-// 						// 				className={css.group}
-// 						// 				onSelect={onSelect}
-// 						// 				selected={selected}
-// 						// 				{...groupProps}
-// 						// 			>
-// 						// 				{children || []}
-// 						// 			</Group>
-// 						// 		</Scroller>
-// 						// 	</ContainerDiv>
-// 						// </Transition>
-// 						}
-// 					>
-// 						{iconComponent}
-// 						{title}
-// 					</DropdownButton>
-//
-// 				</div>
-// 			</div>
-// 		);
-// 	}
-// });
 
 /**
  * Applies Agate specific behaviors and functionality to
@@ -476,11 +393,6 @@ const DropdownBase = kind({
  * @mixes ui/Toggleable.Toggleable
  * @mixes spotlight/SpotlightContainerDecorator.SpotlightContainerDecorator
  * @mixes agate/Skinnable.Skinnable
- * @omit selected
- * @omit defaultSelected
- * @omit value
- * @omit defaultValue
- * @omit onChange
  * @public
  */
 const DropdownDecorator = compose(
@@ -489,11 +401,11 @@ const DropdownDecorator = compose(
 			children: compareChildren
 		}
 	}),
-	SpotlightContainerDecorator,
-	// SpotlightContainerDecorator({
-	// 	enterTo: 'default-element',
-	// 	preserveId: true
-	// }),
+	// SpotlightContainerDecorator,
+	SpotlightContainerDecorator({
+		enterTo: 'default-element',
+		preserveId: true
+	}),
 	I18nContextDecorator({
 		rtlProp: 'rtl'
 	}),
@@ -502,15 +414,12 @@ const DropdownDecorator = compose(
 		prefix: 'd_'
 	}),
 	Changeable({change: 'onSelect', prop: 'selected'}),
-	// Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose', toggleProp: 'onClick'}),
 	Toggleable({
 		activate: 'onOpen',
 		deactivate: 'onClose',
 		prop: 'open',
 		toggle: null
 	}),
-
-	// DropDownExtended,
 	Skinnable({prop: 'skin'})
 );
 
