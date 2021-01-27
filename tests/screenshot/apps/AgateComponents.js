@@ -13,7 +13,6 @@ import DateTimePicker from './components/DateTimePicker';
 import Drawer from './components/Drawer';
 import Dropdown from './components/Dropdown';
 import FanSpeedControl from './components/FanSpeedControl';
-import FullscreenPopup from './components/FullscreenPopup';
 import Header from './components/Header';
 import Heading from './components/Heading';
 import Icon from './components/Icon';
@@ -62,7 +61,6 @@ const agateComponents = {
 	Drawer,
 	Dropdown,
 	FanSpeedControl,
-	FullscreenPopup,
 	Header,
 	Heading,
 	Icon,
