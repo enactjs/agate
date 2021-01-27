@@ -41,7 +41,19 @@ const LabeledIconButtonBase = kind({
 	name: 'LabeledIconButton',
 
 	propTypes: /** @lends agate/LabeledIconButton.LabeledIconButtonBase.prototype */ {
+		/**
+		 * The background opacity of this labeled icon button.
+		 *
+		 * Valid values are:
+		 * * `'opaque'`,
+		 * * `'lightOpaque'`, and
+		 * * `'transparent'`.
+		 *
+		 * @type {('opaque'|'lightOpaque'|'transparent')}
+		 * @public
+		 */
 		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
+
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.

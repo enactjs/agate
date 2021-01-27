@@ -31,7 +31,21 @@ const SwitchBase = kind({
 	name: 'Switch',
 
 	propTypes: /** @lends agate/Switch.Switch.prototype */ {
+		/**
+		 * The contents for the switch.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		children: PropTypes.string,
+
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
 
 		/**
@@ -42,6 +56,13 @@ const SwitchBase = kind({
 		 * @public
 		 */
 		noAnimation: PropTypes.bool,
+
+		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		skin: PropTypes.string
 	},
 

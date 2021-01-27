@@ -31,7 +31,7 @@ import componentCss from './Drawer.module.less';
 const DrawerBase = kind({
 	name: 'Drawer',
 
-	propTypes: {
+	propTypes: /** @lends agate/Drawer.DrawerBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
