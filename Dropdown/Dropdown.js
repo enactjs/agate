@@ -148,15 +148,6 @@ const DropdownBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * This is passed onto the wrapped component to allow
-		 * it to customize the spotlight container for its use case.
-		 *
-		 * @type {String}
-		 * @private
-		 */
-		'data-spotlight-id': PropTypes.string,
-
-		/**
 		 * Placement of the Dropdown.
 		 *
 		 * @type {('above'|'below')}
@@ -242,7 +233,7 @@ const DropdownBase = kind({
 		skin: PropTypes.string,
 
 		/**
-		 * The primary title text of Dropdown.
+		 * Text displayed in the Dropdown when nothing is selected.
 		 *
 		 * The title will be replaced with the selected item, if set.
 		 *
@@ -250,14 +241,6 @@ const DropdownBase = kind({
 		 * @public
 		 */
 		title: PropTypes.string,
-
-		/** The direction where the dropdown list appears.
-		 *
-		 * @type {('left'|'right'|'down'|'up')}
-		 * @default 'down'
-		 * @public
-		 */
-		transitionDirection: PropTypes.oneOf(['down', 'left', 'right', 'up']),
 
 		/**
 		 * Width of the Dropdown.
@@ -271,8 +254,7 @@ const DropdownBase = kind({
 
 	defaultProps: {
 		direction: 'below',
-		width: 'medium',
-		transitionDirection: 'down'
+		width: 'medium'
 	},
 
 	handlers: {
@@ -296,6 +278,7 @@ const DropdownBase = kind({
 
 	computed: {
 		ariaLabelledBy: ({id, title}) => (title ? `${id}_title` : void 0),
+		buttonClassName: ({open, styler}) => styler.append({open}),
 		children: ({children, selected}) => {
 			if (!Array.isArray(children)) return [];
 
@@ -325,8 +308,10 @@ const DropdownBase = kind({
 			});
 		},
 		className: ({css, direction, width, title, skin, styler}) => styler.append(`${width}Width`, {hasTitle: Boolean(title)}, skin === 'silicon' ? classnames(css.dropdownButton, {[css.upDropdownButton]: direction === 'above'}) : {}),
-		buttonClassName: ({open, styler}) => styler.append({open}),
 		direction: ({direction}) => `${direction} center`,
+		hasChildren: ({children}) => {
+			return children.length > 0;
+		},
 		title: ({children, selected, title}) => {
 			if (isSelectedValid({children, selected})) {
 				const child = children[selected];
@@ -334,13 +319,10 @@ const DropdownBase = kind({
 			}
 
 			return title;
-		},
-		hasChildren: ({children}) => {
-			return children.length > 0;
 		}
 	},
 
-	render: ({'aria-label': ariaLabel, ariaLabelledBy, buttonClassName, children, css, direction, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, transitionDirection, title, width, ...rest}) => {
+	render: ({'aria-label': ariaLabel, ariaLabelledBy, buttonClassName, children, css, direction, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, width, ...rest}) => {
 		delete rest.rtl;
 
 		const ariaProps = extractAriaProps(rest);
@@ -350,7 +332,7 @@ const DropdownBase = kind({
 			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'} :
 			{childComponent: Item, itemProps: {size: 'small'}};
 
-		const popupProps = {'aria-live': null, children, direction, disabled, groupProps, onSelect, open, selected, skinVariants: skin === 'silicon' ? {'night': false} : {}, transitionDirection, width, role: null};
+		const popupProps = {'aria-live': null, children, direction, disabled, groupProps, onSelect, open, selected, skinVariants: skin === 'silicon' ? {'night': false} : {}, width, role: null};
 
 		// `ui/Group`/`ui/Repeater` will throw an error if empty so we disable the Dropdown and
 		// prevent Dropdown to open if there are no children.
@@ -401,7 +383,6 @@ const DropdownDecorator = compose(
 			children: compareChildren
 		}
 	}),
-	// SpotlightContainerDecorator,
 	SpotlightContainerDecorator({
 		enterTo: 'default-element',
 		preserveId: true
