@@ -112,4 +112,70 @@ describe('Popup specs', () => {
 			expect(popup.prop('className').split(' ')).not.toContain(firstPosition);
 		});
 	});
+
+	test('should have `center` class when position prop is set to `center` (default)', () => {
+		const popup = shallow(
+			<PopupBase position="center" />
+		);
+
+		const expected = 'center';
+		const actual = popup.find(`.${css.popup}`).prop('className');
+
+		expect(actual).toContain(expected);
+	});
+
+	test('should have `top` class when position prop is set to `top`', () => {
+		const popup = shallow(
+			<PopupBase position="top" />
+		);
+
+		const expected = 'top';
+		const actual = popup.find(`.${css.popup}`).prop('className');
+
+		expect(actual).toContain(expected);
+	});
+
+	test('should have `bottom` class when position prop is set to `bottom`', () => {
+		const popup = shallow(
+			<PopupBase position="bottom" />
+		);
+
+		const expected = 'bottom';
+		const actual = popup.find(`.${css.popup}`).prop('className');
+
+		expect(actual).toContain(expected);
+	});
+
+	test('should have `left` class when position prop is set to `left`', () => {
+		const popup = shallow(
+			<PopupBase position="left" />
+		);
+
+		const expected = 'left';
+		const actual = popup.find(`.${css.popup}`).prop('className');
+
+		expect(actual).toContain(expected);
+	});
+
+	test('should have `right` class when position prop is set to `right`', () => {
+		const popup = shallow(
+			<PopupBase position="right" />
+		);
+
+		const expected = 'right';
+		const actual = popup.find(`.${css.popup}`).prop('className');
+
+		expect(actual).toContain(expected);
+	});
+
+	test('should have `fullscreen` class when position prop is set to `fullscreen`', () => {
+		const popup = shallow(
+			<PopupBase position="fullscreen" />
+		);
+
+		const expected = 'fullscreen';
+		const actual = popup.find(`.${css.popup}`).prop('className');
+
+		expect(actual).toContain(expected);
+	});
 });
