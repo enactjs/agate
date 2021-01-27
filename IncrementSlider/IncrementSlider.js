@@ -67,7 +67,7 @@ const IncrementSliderBase = kind({
 		 * Sets the knob to selected state and allows it to move via 5-way controls.
 		 *
 		 * @type {Boolean}
-		 * @public
+		 * @private
 		 */
 		active: PropTypes.bool,
 
@@ -139,7 +139,7 @@ const IncrementSliderBase = kind({
 		/**
 		 * Indicates focused state.
 		 * @type {Boolean}
-		 * @public
+		 * @private
 		 */
 		focused: PropTypes.bool,
 

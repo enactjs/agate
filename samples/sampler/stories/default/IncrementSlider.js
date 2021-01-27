@@ -16,10 +16,8 @@ storiesOf('Agate', module)
 		'IncrementSlider',
 		() => (
 			<IncrementSlider
-				active={boolean('active', Config)}
 				decrementIcon={select('decrementIcon', decrementIcons, Config)}
 				disabled={boolean('disabled', Config)}
-				focused={boolean('focused', Config)}
 				incrementIcon={select('incrementIcon', incrementIcons, Config)}
 				knobStep={number('knobStep', Config)}
 				max={number('max', Config)}

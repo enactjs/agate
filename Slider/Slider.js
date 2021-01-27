@@ -69,7 +69,7 @@ const SliderBase = kind({
 		 *
 		 * @type {Boolean}
 		 * @default false
-		 * @public
+		 * @private
 		 */
 		active: PropTypes.bool,
 
@@ -100,7 +100,7 @@ const SliderBase = kind({
 		 * Indicates that the slider has gained focus.
 		 *
 		 * @type {Boolean}
-		 * @public
+		 * @private
 		 */
 		focused: PropTypes.bool,
 
