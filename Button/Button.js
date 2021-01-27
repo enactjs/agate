@@ -337,7 +337,7 @@ const IconButtonDecorator = hoc((config, Wrapped) => {
 const ButtonDecorator = compose(
 	Pure,
 	IconButtonDecorator,
-	MarqueeDecorator,
+	MarqueeDecorator({className: componentCss.marquee}),
 	TooltipDecorator({tooltipDestinationProp: 'decoration'}),
 	UiButtonDecorator,
 	Spottable,
