@@ -90,14 +90,14 @@ describe('SliderButton Specs', () => {
 			</SliderButton>
 		);
 
-		sliderButton.find('SliderButton').simulate('keyDown', {which: 39, keyCode: 39, code: 39});
+		sliderButton.find('SliderButton').simulate('keyDown', {keyCode: 39});
 
 		const expected = 1;
 		const actual = handleChange.mock.calls[0][0].value;
 		expect(actual).toBe(expected);
 	});
 
-	test('should change value on arrow right left  press', () => {
+	test('should change value on arrow right left press', () => {
 		const handleChange = jest.fn();
 		const sliderButton = mount(
 			<SliderButton onChange={handleChange} defaultValue={1}>
@@ -105,7 +105,7 @@ describe('SliderButton Specs', () => {
 			</SliderButton>
 		);
 
-		sliderButton.find('SliderButton').simulate('keyDown', {which: 37, keyCode: 37, code: 37});
+		sliderButton.find('SliderButton').simulate('keyDown', {keyCode: 37});
 
 		const expected = 0;
 		const actual = handleChange.mock.calls[0][0].value;
