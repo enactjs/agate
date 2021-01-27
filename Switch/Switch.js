@@ -145,7 +145,9 @@ const SwitchBase = kind({
  * @class SwitchDecorator
  * @memberof agate/Switch
  * @mixes ui/Toggleable.Toggleable
+ * @mixes ui/Touchable.Touchable
  * @mixes spotlight/Spottable.Spottable
+ * @mixes agate/Skinnable.Skinnable
  * @hoc
  * @public
  */
