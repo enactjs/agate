@@ -81,10 +81,10 @@ const TabBase = kind({
 		 *
 		 * * Values: `'horizontal'`, `'vertical'`
 		 *
-		 * @type {String}
+		 * @type {('horizontal'|'vertical')}
 		 * @public
 		 */
-		orientation: PropTypes.string,
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
 		 * Provides a way to call special interface attention to the tab. It will be "featured"
@@ -218,10 +218,10 @@ const TabGroupBase = kind({
 		 *
 		 * * Values: `'horizontal'`, `'vertical'`
 		 *
-		 * @type {String}
+		 * @type {('horizontal'|'vertical')}
 		 * @public
 		 */
-		orientation: PropTypes.string,
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
 		 * Index of the selected tab.
