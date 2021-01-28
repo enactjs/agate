@@ -32,11 +32,11 @@ const IncrementSliderButtonBase = kind({
 		css: PropTypes.object,
 
 		/**
-			 * Event handler for 'tap' pointer events
-			 *
-			 * @type {Function}
-			 * @public
-			 */
+		 * Event handler for 'tap' pointer events
+		 *
+		 * @type {Function}
+		 * @public
+		 */
 		onTap: PropTypes.func,
 
 		/**
@@ -49,12 +49,12 @@ const IncrementSliderButtonBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
-	 * The ARIA role for the list.
-	 *
-	 * @type {String}
-	 * @default 'list'
-	 * @public
-	 */
+		 * The ARIA role for the list.
+		 *
+		 * @type {String}
+		 * @default 'list'
+		 * @public
+		 */
 		role: PropTypes.string,
 
 		/**
