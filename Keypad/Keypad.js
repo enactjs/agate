@@ -23,10 +23,8 @@ import React from 'react';
 
 import $L from '../internal/$L';
 import Button from '../Button';
-import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
-import componentCss from '../Button/Button.module.less';
 import css from './Keypad.module.less';
 
 const Container = SpotlightContainerDecorator({
@@ -49,8 +47,6 @@ const KEY_LIST = [
 	{icon: 'phone'},
 	{icon: 'arrowuturn'}
 ];
-
-const MarqueeButton = MarqueeDecorator({className: componentCss.marquee}, Button);
 
 /**
  * Renders an Agate-styled Key button.
@@ -115,17 +111,18 @@ const Key = kind({
 
 		return (
 			<div className={css.keyContainer}>
-				<MarqueeButton
+				<Button
 					{...rest}
 					css={css}
 					icon={children}
+					marqueeDisabled
 					minWidth={false}
 					role={null}
 					size="large"
 				>
 					{(text || text === 0) ? <span className={css.text}>{text}</span> : null}
 					{(label || label === 0) ? <span className={css.label}>{label}</span> : null}
-				</MarqueeButton>
+				</Button>
 			</div>
 		);
 	}
