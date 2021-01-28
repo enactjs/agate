@@ -171,6 +171,7 @@ const TabGroupBase = kind({
 		 *
 		 * @type {String}
 		 * @required
+		 * @public
 		 */
 		tabPosition: PropTypes.string.isRequired,
 
@@ -184,7 +185,7 @@ const TabGroupBase = kind({
 		tabs: PropTypes.array.isRequired,
 
 		/**
-		 * Nodes to be inserted before the tabs.
+		 * Nodes to be inserted after the tabs.
 		 *
 		 * @type {Node}
 		 * @public
@@ -192,7 +193,7 @@ const TabGroupBase = kind({
 		afterTabs: PropTypes.node,
 
 		/**
-		 * Nodes to be inserted after the tabs.
+		 * Nodes to be inserted before the tabs.
 		 *
 		 * @type {Node}
 		 * @public

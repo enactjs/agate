@@ -107,7 +107,12 @@
 				transform: @agate-panels-tab-group-horizontal-transform;
 
 				.tab {
+					border-bottom: @agate-panels-tab-separator-border-width solid @agate-panels-tab-separator-border-color;
 					margin: @agate-panels-vertical-tab-margin;
+
+					&:last-child {
+						border-bottom-width: 0;
+					}
 
 					&::before {
 						.position(@agate-panels-vertical-tab-bg-position);
