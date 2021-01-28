@@ -15,15 +15,15 @@
  * @exports DropdownDecorator
  */
 import {on, off} from '@enact/core/dispatcher';
-import {handle, forward, forProp} from '@enact/core/handle';
+import {forKey, forward, forProp, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
+import {add} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
 import {extractAriaProps} from '@enact/core/util';
 import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
-import {MarqueeDecorator} from '@enact/ui/Marquee';
 import IdProvider from '@enact/ui/internal/IdProvider';
 import ri from '@enact/ui/resolution';
 import Toggleable from '@enact/ui/Toggleable';
@@ -45,7 +45,6 @@ import componentCss from './Dropdown.module.less';
 
 const oppositeDirection = {left: 'right', right: 'left', up: 'down', down: 'up'};
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
-const MarqueeButton = MarqueeDecorator({className: componentCss.marquee}, Button);
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
 
 const handleTransitionHide = (ev, {'data-spotlight-id': containerId}) => {
@@ -59,6 +58,9 @@ const handleTransitionHide = (ev, {'data-spotlight-id': containerId}) => {
 		}
 	}
 };
+
+// Add keymap for escape key
+add('cancel', 27);
 
 /**
  * A stateless Dropdown component.
@@ -189,6 +191,9 @@ const DropdownBase = kind({
 		onOpen: handle(
 			forProp('open', false),
 			forward('onOpen')
+		),
+		onScrollerClick: handle(
+			(ev) => ev.stopPropagation()
 		)
 	},
 
@@ -278,14 +283,14 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, ...rest}) => {
+	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClose, onOpen, onScrollerClick, onSelect, open, selected, skin, title, ...rest}) => {
 		const ariaProps = extractAriaProps(rest);
 		const dropdownButtonClassName = classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'up'});
 		const opened = !disabled && open;
 		const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
 		const [DropDownButton, dropDownButtonProps, wrapperProps, skinVariants, groupProps, iconComponent] = (skin === 'silicon') ? [
-			MarqueeButton,
-			{icon: open ? 'arrowlargeup' : 'arrowlargedown'},
+			Button,
+			{icon: open ? 'arrowlargeup' : 'arrowlargedown', iconPosition: 'after', minWidth: true},
 			{className: dropdownButtonClassName},
 			{'night': false},
 			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'},
@@ -321,7 +326,7 @@ const DropdownBase = kind({
 						direction={oppositeDirection[adjustedDirection]}
 					>
 						<ContainerDiv className={dropdownListClassName} spotlightDisabled={!open} spotlightRestrict="self-only">
-							<Scroller skinVariants={skinVariants} className={css.scroller}>
+							<Scroller skinVariants={skinVariants} className={css.scroller} onClick={onScrollerClick}>
 								<Group
 									role={null}
 									className={css.group}
@@ -334,7 +339,6 @@ const DropdownBase = kind({
 							</Scroller>
 						</ContainerDiv>
 					</Transition>
-
 				</div>
 			</div>
 		);
@@ -359,6 +363,7 @@ const DropDownExtended = hoc((config, Wrapped) => {
 
 			if (this.props.open) {
 				on('click', this.handleClick);
+				on('keydown', this.handleKeyDown);
 			}
 		}
 
@@ -367,13 +372,16 @@ const DropDownExtended = hoc((config, Wrapped) => {
 
 			if (!prevProps.open && open) {
 				on('click', this.handleClick);
+				on('keydown', this.handleKeyDown);
 			} else if (prevProps.open && !open) {
 				off('click', this.handleClick);
+				off('keydown', this.handleKeyDown);
 			}
 		}
 
 		componentWillUnmount () {
 			off('click', this.handleClick);
+			off('keydown', this.handleKeyDown);
 		}
 
 		clickedOutsideDropdown = ({target}) => !this.node.contains(target);
@@ -383,6 +391,11 @@ const DropDownExtended = hoc((config, Wrapped) => {
 			this.clickedOutsideDropdown,
 			forward('onClick')
 		).bindAs(this, 'handleClick');
+
+		handleKeyDown = handle(
+			forKey('cancel'),
+			forward('onClick')
+		).bindAs(this, 'handleKeyDown');
 
 		render () {
 			return (

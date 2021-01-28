@@ -13,6 +13,7 @@ const Config = mergeComponentMetadata('Heading', Heading, HeadingBase);
 
 const prop = {
 	colors: ['', '#E6444B', '#FDC902', '#986AAD', '#4E75E1', '#30CC83', '#44C8D5', '#47439B', '#2D32A6', '#4E75E1'],
+	marqueeOn: ['hover', 'render'],
 	sizes: ['', 'title', 'subtitle', 'large', 'medium', 'small', 'tiny'],
 	spacings: ['', 'auto', 'title', 'large', 'medium', 'small', 'none']
 };
@@ -23,6 +24,7 @@ storiesOf('Agate', module)
 		() => {
 			const knobProps = {
 				color: select('color', prop.colors, Config),
+				marqueeOn: select('marqueeOn', prop.marqueeOn, Config),
 				showLine: boolean('showLine', Config),
 				size: select('size', prop.sizes, Config),
 				spacing: select('spacing', prop.spacings, Config)

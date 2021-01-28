@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
-import PickerCore from '../internal/Picker';
+import PickerCore, {ChangeAdapter} from '../internal/Picker';
 import PickerItem from '../internal/Picker/PickerItem';
 
 /**
@@ -198,7 +198,8 @@ const RangePickerBase = kind({
  */
 const RangePickerDecorator = compose(
 	Pure,
-	Changeable
+	Changeable,
+	ChangeAdapter
 );
 
 /**

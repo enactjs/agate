@@ -194,6 +194,8 @@
 @agate-dropdown-button-bg-image: inherit;
 @agate-dropdown-button-font-size: inherit;
 @agate-dropdown-button-icon-font-size: inherit;
+@agate-dropdown-button-icon-margin-right: inherit;
+@agate-dropdown-button-icon-width: inherit;
 @agate-dropdown-button-list-border-radius: inherit;
 @agate-dropdown-button-open-border-radius: inherit;
 @agate-dropdown-button-padding: inherit;
@@ -475,11 +477,18 @@
 @agate-popup-min-width: 510px;
 @agate-popup-max-width: 70%;
 @agate-popup-border-width: 1px;
-@agate-popup-border-radius: 3px;
+@agate-popup-border-radius: inherit;
+@agate-popup-bottom-border-radius: @agate-popup-border-radius @agate-popup-border-radius @agate-popup-fullscreen-border-radius @agate-popup-fullscreen-border-radius;
+@agate-popup-fullscreen-border-radius: inherit;
+@agate-popup-left-border-radius: @agate-popup-fullscreen-border-radius @agate-popup-border-radius @agate-popup-border-radius @agate-popup-fullscreen-border-radius;
+@agate-popup-right-border-radius: @agate-popup-border-radius @agate-popup-fullscreen-border-radius @agate-popup-fullscreen-border-radius @agate-popup-border-radius;
+@agate-popup-top-border-radius: @agate-popup-fullscreen-border-radius @agate-popup-fullscreen-border-radius @agate-popup-border-radius @agate-popup-border-radius;
 @agate-popup-border: 0 solid transparent;
 @agate-popup-padding: (@agate-component-spacing * 2);
 @agate-popup-closebutton-title-padding: 0 0 0 (@agate-button-small-height);
+@agate-popup-closebutton-content-padding: 0;
 @agate-popup-closebutton-centered-title-padding: 0 (@agate-button-small-height);
+@agate-popup-content-margin: 0;
 @agate-popup-title-padding: @agate-heading-padding;
 @agate-popup-body-border: @agate-popup-border;
 @agate-popup-body-padding: (@agate-component-spacing * 1.5);
@@ -492,8 +501,6 @@
 @agate-popup-closebutton-position-left: 0;
 @agate-popup-closebutton-position-right: auto;
 @agate-popup-body-font-weight: @agate-base-font-weight;
-@agate-popup-top-border-radius: @agate-popup-border-radius;
-@agate-popup-top-max-width: inherit;
 
 // PopupMenu
 // ---------------------------------------

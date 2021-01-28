@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {number, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -16,6 +16,7 @@ storiesOf('Agate', module)
 		'FanSpeedControl',
 		() => (
 			<FanSpeedControl
+				disabled={boolean('disabled', Config)}
 				icon={select('icon', ['', ...iconNames], Config, 'fan')}
 				max={number('max', Config, {max: 40, min: 1, range: true, step: 1}, 10)}
 				min={number('min', Config, {max: 40, min: 1, range: true, step: 1}, 1)}
