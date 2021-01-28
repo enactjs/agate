@@ -55,6 +55,7 @@ const TabBase = kind({
 		 * The icon displayed on the tab.
 		 *
 		 * @type {String}
+		 * @default 'star'
 		 * @public
 		 */
 		icon: PropTypes.string,
