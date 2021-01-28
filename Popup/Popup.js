@@ -312,7 +312,7 @@ const PopupBase = kind({
 						onTap={onClose}
 						size="small"
 					/> : null}
-					{title ? <Heading className={css.title}>{title}</Heading> : null}
+					{title ? <Heading className={css.title} marqueeDisabled>{title}</Heading> : null}
 					<Layout orientation={wideLayout ? 'horizontal' : 'vertical'} className={css.body}>
 						<Cell shrink={!wideLayout} className={css.content}>
 							{children}
