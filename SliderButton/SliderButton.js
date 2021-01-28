@@ -25,6 +25,14 @@ import SliderButtonBehaviorDecorator from './SliderButtonBehaviorDecorator';
 
 import componentCss from './SliderButton.module.less';
 
+/**
+ * Renders the slider knob.
+ *
+ * @class SliderKnob
+ * @memberof agate/SliderButton
+ * @ui
+ * @public
+ */
 const SliderKnob = kind({
 	name: 'SliderKnob',
 	propTypes: /** @lends agate/SliderButton.SliderKnob.prototype */ {
@@ -71,6 +79,14 @@ const SliderKnob = kind({
 	}
 });
 
+/**
+ * Renders the slider progress.
+ *
+ * @class SliderProgress
+ * @memberof agate/SliderButton
+ * @ui
+ * @public
+ */
 const SliderProgress = kind({
 	name: 'SliderProgress',
 	propTypes: /** @lends agate/SliderButton.SliderProgress.prototype */ {
