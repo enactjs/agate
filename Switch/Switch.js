@@ -26,7 +26,7 @@ import componentCss from './Switch.module.less';
 /**
  * Renders the base level DOM structure of the component.
  *
- * @class Switch
+ * @class SwitchBase
  * @memberof agate/Switch
  * @ui
  * @private
@@ -34,7 +34,7 @@ import componentCss from './Switch.module.less';
 const SwitchBase = kind({
 	name: 'Switch',
 
-	propTypes: /** @lends agate/Switch.Switch.prototype */ {
+	propTypes: /** @lends agate/Switch.SwitchBase.prototype */ {
 		/**
 		 * The icon displayed by the component.
 		 *
@@ -49,7 +49,7 @@ const SwitchBase = kind({
 		 * @type {String|Object}
 		 * @public
 		 */
-		children: PropTypes.string,
+		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -64,7 +64,6 @@ const SwitchBase = kind({
 		 * Disables Switch and becomes non-interactive.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		disabled: PropTypes.bool,
@@ -82,7 +81,6 @@ const SwitchBase = kind({
 		 * Sets whether this control is in the 'on' or 'off' state. `true` for 'on', `false` for 'off'.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		selected: PropTypes.bool,
@@ -91,7 +89,7 @@ const SwitchBase = kind({
 		 * The current skin for this component.
 		 *
 		 * @type {String}
-		 * @public
+		 * @private
 		 */
 		skin: PropTypes.string
 	},
@@ -120,7 +118,7 @@ const SwitchBase = kind({
 		}
 	},
 
-	render: ({children, disabled, css, selected, ...rest}) => {
+	render: ({children, css, disabled, selected, ...rest}) => {
 		delete rest.noAnimation;
 
 		return (
