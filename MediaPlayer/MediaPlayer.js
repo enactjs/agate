@@ -65,6 +65,7 @@ const MediaPlayerBase = kind({
 		 * sources.
 		 *
 		 * @type {Node}
+		 * @required
 		 * @public
 		 */
 		source: PropTypes.node.isRequired,
