@@ -12,13 +12,12 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/ArcPicker` and `agate/ArcSlider` prop `disabled` to be inactive
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
-- `agate/Button` prop `iconOnly`, `iconPosition`, and `minWidth`
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
 - `agate/Popup` `'aria-live'`, `noAlertRole`, and `role` props to support accessibility
-- `agate/Popup` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
 - `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
 - `agate/Popup` `duration` and `type` props to customize transition style
+- `agate/Popup` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
 - `agate/Popup` content padding and margin with `closeButton`
 - `agate/PopupMenu` `onShow` and `spotlightId` props to handle focus with 5-way navigation
 
@@ -32,6 +31,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/DatePicker` transition direction for day when month is changed
 - `agate/Dropdown` to show focused icon color for Silicon skin
 - `agate/Dropdown` to not show double marquee text
+- `agate/Dropdown` to not close when clicking the list scroller
 - `agate/LabeledIconButton` to display label text on multiple lines (removed marquee)
 - `agate/LabeledIconButton` `max-width` to display huge sized icon correctly
 - `agate/MediaPlayer` previous button functionality to play media from the beginning after being paused
