@@ -1,26 +1,29 @@
+import classnames from 'classnames';
 import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
+import Group from '@enact/ui/Group';
 import ri from '@enact/ui/resolution';
+import Transition from '@enact/ui/Transition';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
+import equals from 'ramda/src/equals';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Scroller from '../Scroller';
 import Skinnable from '../Skinnable';
-import classnames from 'classnames';
 
 import css from './Dropdown.module.less';
-import equals from 'ramda/src/equals';
-import Scroller from '../Scroller';
-import Group from '@enact/ui/Group';
-import Transition from '@enact/ui/Transition';
-
+import VirtualList from "../VirtualList";
+import Item from "../Item";
+import {forward} from "@enact/core/handle";
+import Icon from "../Icon";
 
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
-const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
+
 const oppositeDirection = {left: 'right', right: 'left', up: 'down', down: 'up'};
 
 const getKey = ({children, selected}) => {
@@ -38,16 +41,15 @@ const indexFromKey = (children, key) => {
 	return index;
 };
 
-
 /**
  * Compares two children and returns true if they are equivalent, false otherwise.
  *
  * @function
  * @param   {children}    a    children props
- *  @param   {children}    b    children props
+ * @param   {children}    b    children props
  *
  * @returns {Boolean}          `true` if same
- * @memberof sandstone/internal/util
+ * @memberof agate/Dropdown
  * @private
  */
 const compareChildren = (a, b) => {
@@ -68,6 +70,7 @@ const compareChildren = (a, b) => {
 	return true;
 };
 
+const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 
 const DropdownListBase = kind({
 	name: 'DropdownListBase',
@@ -117,7 +120,7 @@ const DropdownListBase = kind({
 		/**
 		 * State of possible skin variants.
 		 *
-		 * Used to scale the `itemSize` of the `VirtualList` based on large-text mode
+		 * Used to style the internal [Scroller]{@link agate/Scroller.Scroller}.
 		 *
 		 * @type {Object}
 		 */
@@ -136,63 +139,105 @@ const DropdownListBase = kind({
 		className: 'dropdownList'
 	},
 
+	// handlers: {
+	// 	itemRenderer: ({index, ...rest}, props) => {
+	// 		const {children, selected} = props;
+	// 		const isSelected = index === selected;
+	// 		const slotAfter = isSelected ? (<Icon>check</Icon>) : null;
+	//
+	// 		let child = children[index];
+	// 		if (typeof child === 'string') {
+	// 			child = {children: child};
+	// 		}
+	// 		const data = child.children;
+	//
+	// 		return (
+	// 			<Item
+	// 				{...rest}
+	// 				{...child}
+	// 				slotAfter={slotAfter}
+	// 				data-selected={isSelected}
+	// 				// eslint-disable-next-line react/jsx-no-bind
+	// 				onClick={() => forward('onSelect', {data, selected: index}, props)}
+	// 				size="small"
+	// 			/>
+	// 		);
+	// 	}
+	// },
+
 	computed: {
-		adjustedDirection: ({transitionDirection, 'data-spotlight-id': containerId}) => {
-			if (typeof window !== 'undefined') {
-				const calcOverflow = (container, client, wrapper) => {
-					const KEEPOUT = ri.scale(24); // keep out distance on the edge of the screen
-					const wrapperTop = (wrapper && wrapper.top) || 0;
-					const wrapperBottom = (wrapper && wrapper.bottom) || window.innerHeight;
-
-					const overflow = {
-						isOverTop: client.top - container.height - KEEPOUT < wrapperTop,
-						isOverBottom: client.bottom + container.height + KEEPOUT > wrapperBottom
-					};
-
-					return overflow;
-				};
-
-				const adjustDirection = (overflow) => {
-					let adjustedDirection = transitionDirection;
-					if (overflow.isOverTop && !overflow.isOverBottom && transitionDirection === 'up') {
-						adjustedDirection = 'down';
-					} else if (overflow.isOverBottom && !overflow.isOverTop && transitionDirection === 'down') {
-						adjustedDirection = 'up';
-					}
-
-					return adjustedDirection;
-				};
-
-				const containerSelector = `[data-spotlight-id='${containerId}']`;
-				const containerNode = document.querySelector(`${containerSelector} .${css.dropdownList}`);
-				const clientNode = document.querySelector(`${containerSelector} .${css.dropdown}`);
-				const wrapperNode = clientNode && clientNode.closest('div[style*=overflow]');
-
-				if (containerNode && clientNode) {
-					const containerNodeRect = containerNode.getBoundingClientRect();
-					const clientNodeRect = clientNode.getBoundingClientRect();
-					const wrapperNodeRect = wrapperNode && wrapperNode.getBoundingClientRect();
-					return adjustDirection(calcOverflow(containerNodeRect, clientNodeRect, wrapperNodeRect));
-				}
-			}
-
-			return transitionDirection;
-		},
-		className: ({children, direction, width, styler}) => styler.append(direction.substr(0, direction.indexOf(' ')), width, {dropdownListWithScroller: children.length > 4})
+		// adjustedDirection: ({transitionDirection, 'data-spotlight-id': containerId}) => {
+		// 	if (typeof window !== 'undefined') {
+		// 		const calcOverflow = (container, client, wrapper) => {
+		// 			const KEEPOUT = ri.scale(24); // keep out distance on the edge of the screen
+		// 			const wrapperTop = (wrapper && wrapper.top) || 0;
+		// 			const wrapperBottom = (wrapper && wrapper.bottom) || window.innerHeight;
+		//
+		// 			const overflow = {
+		// 				isOverTop: client.top - container.height - KEEPOUT < wrapperTop,
+		// 				isOverBottom: client.bottom + container.height + KEEPOUT > wrapperBottom
+		// 			};
+		//
+		// 			return overflow;
+		// 		};
+		//
+		// 		const adjustDirection = (overflow) => {
+		// 			let adjustedDirection = transitionDirection;
+		// 			if (overflow.isOverTop && !overflow.isOverBottom && transitionDirection === 'up') {
+		// 				adjustedDirection = 'down';
+		// 			} else if (overflow.isOverBottom && !overflow.isOverTop && transitionDirection === 'down') {
+		// 				adjustedDirection = 'up';
+		// 			}
+		//
+		// 			return adjustedDirection;
+		// 		};
+		//
+		// 		const containerSelector = `[data-spotlight-id='${containerId}']`;
+		// 		const containerNode = document.querySelector(`${containerSelector} .${css.dropdownList}`);
+		// 		const clientNode = document.querySelector(`${containerSelector} .${css.dropdown}`);
+		// 		const wrapperNode = clientNode && clientNode.closest('div[style*=overflow]');
+		//
+		// 		if (containerNode && clientNode) {
+		// 			const containerNodeRect = containerNode.getBoundingClientRect();
+		// 			const clientNodeRect = clientNode.getBoundingClientRect();
+		// 			const wrapperNodeRect = wrapperNode && wrapperNode.getBoundingClientRect();
+		// 			return adjustDirection(calcOverflow(containerNodeRect, clientNodeRect, wrapperNodeRect));
+		// 		}
+		// 	}
+		//
+		// 	return transitionDirection;
+		// },
+		className: ({children, direction, width, styler}) => styler.append(direction.substr(0, direction.indexOf(' ')), width, {dropdownListWithScroller: children.length > 4}),
+		// dataSize: ({children}) => children ? children.length : 0,
+		// // Note: Retaining this in case we need to support different item sizes for large text mode:
+		// // itemSize: ({skinVariants}) => ri.scale(skinVariants && skinVariants.largeText ? 126 : 126)
+		// itemSize: () => 126
 	},
 
-	render: ({adjustedDirection, children, disabled, dropdownListClassName, groupProps, open, selected, skinVariants, onSelect, ...rest}) => {
-		const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
+	render: ({dataSize, itemSize, children, disabled, dropdownListClassName, groupProps, open, scrollTo, selected, skinVariants, onSelect, ...rest}) => {
+		//const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
 		const opened = !disabled && open;
 		delete rest.width;
 		delete rest.transitionDirection;
+		delete rest.direction
+		delete rest.children;
+		delete rest.onSelect;
+		delete rest.selected;
+		delete rest.skinVariants;
 
 		return (
-			<Transition
-				className={transitionContainerClassName}
-				visible={opened}
-				direction={oppositeDirection[adjustedDirection]}
-			>
+			// <VirtualList
+			// 	{...rest}
+			// 	cbScrollTo={scrollTo}
+			// 	dataSize={dataSize}
+			// 	itemSize={ri.scale(itemSize)}
+			// 	style={{height: ri.scaleToRem((itemSize * dataSize) + 36)}}
+			// />
+			// <Transition
+			// 	className={transitionContainerClassName}
+			// 	visible={opened}
+			// 	direction={oppositeDirection[adjustedDirection]}
+			// >
 				<ContainerDiv
 					{...rest}
 					spotlightDisabled={!open}
@@ -201,6 +246,7 @@ const DropdownListBase = kind({
 					<Scroller
 						skinVariants={skinVariants}
 						className={css.scroller}
+						cbScrollTo={scrollTo}
 					>
 						<Group
 							role={null}
@@ -213,7 +259,7 @@ const DropdownListBase = kind({
 						</Group>
 					</Scroller>
 				</ContainerDiv>
-			</Transition>
+			// </Transition>
 		);
 	}
 });
@@ -232,14 +278,14 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 		static displayName = 'DropdownListSpotlightDecorator';
 
 		static propTypes = {
-			/**
+			/*
 			 * Called when an item receives focus.
 			 *
 			 * @type {Function}
 			 */
 			onFocus: PropTypes.func,
 
-			/**
+			/*
 			 * Index of the selected item.
 			 *
 			 * @type {Number}
@@ -269,6 +315,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 		}
 
 		componentDidUpdate () {
+			console.log(this.state.ready);
 			if (this.state.ready === ReadyState.INIT) {
 				this.scrollIntoView();
 			} else if (this.state.ready === ReadyState.SCROLLED) {
@@ -299,7 +346,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 					adjustedFocusIndex = targetIndex;
 				}
 			}
-			console.log(adjustedFocusIndex);
+
 			this.setState({
 				prevChildren: this.props.children,
 				prevFocused: adjustedFocusIndex,
@@ -311,20 +358,20 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 
 		scrollIntoView = () => {
 			let {selected} = this.props;
-			if (this.state.prevFocused == null && !isSelectedValid(selected)) {
+
+			if (this.state.prevFocused == null && !isSelectedValid(this.props)) {
 				selected = 0;
 			} else if (this.state.prevFocused != null) {
-				console.log(2);
 				selected = this.state.prevFocused;
 			}
 
-			// this.scrollTo({
-			// 	animate: false,
-			// 	focus: true,
-			// 	index: selected,
-			// 	offset: ri.scale(126 * 2), // @sand-item-small-height * 2 (TODO: large text mode not supported!)
-			// 	stickTo: 'start' // offset from the top of the dropdown
-			// });
+			this.scrollTo({
+				animate: false,
+				focus: true,
+				index: selected,
+				offset: ri.scale(300 * 2), // @sand-item-small-height * 2 (TODO: large text mode not supported!)
+				stickTo: 'start' // offset from the top of the dropdown
+			});
 
 			this.setState({ready: ReadyState.SCROLLED});
 		};
@@ -335,7 +382,6 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 
 		handleFocus = (ev) => {
 			const current = ev.target;
-
 			if (this.state.ready === ReadyState.DONE && !Spotlight.getPointerMode() &&
 				current.dataset['index'] != null && this.node.contains(current)
 			) {
@@ -351,11 +397,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 
 		render () {
 			return (
-				<Wrapped
-					{...this.props}
-					onFocus={this.handleFocus}
-					// scrollTo={this.setScrollTo}
-				/>
+				<Wrapped {...this.props} onFocus={this.handleFocus} scrollTo={this.setScrollTo} />
 			);
 		}
 	};

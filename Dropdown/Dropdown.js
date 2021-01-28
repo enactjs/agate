@@ -41,6 +41,28 @@ import Skinnable from '../Skinnable';
 
 import DropdownList, {compareChildren, isSelectedValid} from './DropdownList';
 import componentCss from './Dropdown.module.less';
+import itemCss from '../Item/Item.module.less';
+import Spotlight from "@enact/spotlight";
+
+const handleTransitionShow = (ev, {'data-spotlight-id': containerId}) => {
+	const containerSelector = `[data-spotlight-id='${containerId}']`;
+	const current = Spotlight.getCurrent();
+	console.log(containerSelector);
+	// Focus function is delayed until dropdown (transition) animation ends.
+	setTimeout(
+		() => {
+			if (!Spotlight.getPointerMode()) {
+				if (!Spotlight.isPaused() && current && document.querySelector(`.${componentCss.dropdownList} .${itemCss.selected}`)) {
+					console.log(document.querySelector(`.${componentCss.dropdownList}`));
+					document.querySelector(`.${componentCss.dropdownList} .${itemCss.selected}`).focus();
+				} else {
+					console.log(document.querySelector(`.${componentCss.dropdownList}`));
+					document.querySelector(`.${componentCss.dropdownList} .${itemCss.item}`).focus();
+				}
+			}
+		}, 10
+	);
+};
 
 /**
  * A stateless Dropdown Button component.
@@ -146,6 +168,15 @@ const DropdownBase = kind({
 		 * @private
 		 */
 		css: PropTypes.object,
+
+		/**
+		 * This is passed onto the wrapped component to allow
+		 * it to customize the spotlight container for its use case.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		'data-spotlight-id': PropTypes.string,
 
 		/**
 		 * Placement of the Dropdown.
@@ -266,7 +297,8 @@ const DropdownBase = kind({
 			forward('onClick'),
 			not(forProp('disabled', true)),
 			not(forProp('open', true)),
-			forward('onOpen')
+			forward('onOpen'),
+			//handleTransitionShow
 		)
 	},
 
@@ -330,7 +362,7 @@ const DropdownBase = kind({
 
 		const groupProps =  (skin === 'silicon') ?
 			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'} :
-			{childComponent: Item, itemProps: {size: 'small'}};
+			{childComponent: Item, itemProps: {size: 'small', css}, selectedProp: 'selected'};
 
 		const popupProps = {'aria-live': null, children, direction, disabled, groupProps, onSelect, open, selected, skinVariants: skin === 'silicon' ? {'night': false} : {}, width, role: null};
 
