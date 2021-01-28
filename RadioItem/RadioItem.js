@@ -54,15 +54,6 @@ const RadioItemBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Applies a disabled style and the control becomes non-interactive.
-		 *
-		 * @type {Boolean}
-		 * @default false
-		 * @public
-		 */
-		disabled: PropTypes.bool,
-
-		/**
 		 * The icon to display when selected.
 		 *
 		 * @type {String}
