@@ -8,6 +8,7 @@
  */
 
 import kind from '@enact/core/kind';
+import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Layout, {Cell} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 import Transition from '@enact/ui/Transition';
@@ -24,7 +25,6 @@ import Scroller from '../Scroller';
 import PopupState from '../Popup/PopupState';
 
 import componentCss from './PopupMenu.module.less';
-import SpotlightContainerDecorator from "../../enact/packages/spotlight/SpotlightContainerDecorator";
 
 const TransitionContainer = SpotlightContainerDecorator(
 	{enterTo: 'default-element', preserveId: true},
