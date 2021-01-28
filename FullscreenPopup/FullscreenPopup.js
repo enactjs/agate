@@ -99,7 +99,7 @@ const FullscreenPopupBase = kind({
 		 * @default 'slide'
 		 * @public
 		 */
-		type: PropTypes.string
+		type: PropTypes.oneOf(['slide', 'clip', 'fade'])
 	},
 
 	defaultProps: {

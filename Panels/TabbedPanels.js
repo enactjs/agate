@@ -40,7 +40,7 @@ const TabbedPanelsBase = kind({
 	name: 'TabbedPanels',
 	propTypes: /** @lends agate/Panels.TabbedPanels.prototype */ {
 		/**
-		* Components to be included after the tabs.
+		* Nodes to be included after the tabs.
 		*
 		* @type {Node}
 		* @public
@@ -58,7 +58,7 @@ const TabbedPanelsBase = kind({
 		arranger: shape,
 
 		/**
-		* Components to be included before the tabs.
+		* Nodes to be included before the tabs.
 		*
 		* @type {Node}
 		* @public
@@ -100,7 +100,7 @@ const TabbedPanelsBase = kind({
 		index: PropTypes.number,
 
 		/**
-		 * Disable tabbed panels transitions.
+		 * Disables tabbed panels transition animations.
 		 *
 		 * @type {Boolean}
 		 * @default false
