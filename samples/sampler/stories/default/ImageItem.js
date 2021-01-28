@@ -1,6 +1,7 @@
-import ri from '@enact/ui/resolution';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
+import {action} from '@enact/storybook-utils/addons/actions';
 import {text, select} from '@enact/storybook-utils/addons/knobs';
+import ri from '@enact/ui/resolution';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -16,6 +17,8 @@ storiesOf('Agate', module)
 		() => (
 			<div style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}>
 				<ImageItem
+					onError={action('onError')}
+					onLoad={action('onLoad')}
 					src="http://placehold.it/300x400/9037ab/ffffff&text=Image0"
 					orientation={select('orientation', ['horizontal', 'vertical'], Config)}
 					captionPosition={select('captionPosition', ['below', 'overlay'], Config)}
