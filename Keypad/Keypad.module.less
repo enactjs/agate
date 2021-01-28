@@ -12,22 +12,11 @@
 			display: flex;
 			justify-content: center;
 			width: @agate-keypad-keycontainer-width;
+		}
 
-			.marquee {
-				height: 100%;
-
-				.text {
-					height: 100%;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-				}
-			}
-
-			.label {
-				bottom: @agate-keypad-label-bottom;
-				position: absolute;
-			}
+		.label {
+			bottom: @agate-keypad-label-bottom;
+			position: absolute;
 		}
 	}
 });
@@ -93,19 +82,6 @@
 			}
 		});
 	});
-
-	.marquee {
-		.applySkins({
-			height: 100%;
-
-			.text {
-				height: 100%;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			}
-		})
-	}
 }
 
 .keypadInput {
