@@ -15,6 +15,7 @@
 import {adaptEvent, forward, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
+import {SpotlightContainerDecorator} from '@enact/spotlight/SpotlightContainerDecorator';
 import Layout, {Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
@@ -22,9 +23,15 @@ import React from 'react';
 
 import $L from '../internal/$L';
 import Button from '../Button';
+import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
+import componentCss from '../Button/Button.module.less';
 import css from './Keypad.module.less';
+
+const Container = SpotlightContainerDecorator({
+	enterTo: 'default-element'
+}, 'div');
 
 const KEY_LIST = [
 	{text: '1'},
@@ -42,6 +49,8 @@ const KEY_LIST = [
 	{icon: 'phone'},
 	{icon: 'arrowuturn'}
 ];
+
+const MarqueeButton = MarqueeDecorator({className: componentCss.marquee}, Button);
 
 /**
  * Renders an Agate-styled Key button.
@@ -106,7 +115,7 @@ const Key = kind({
 
 		return (
 			<div className={css.keyContainer}>
-				<Button
+				<MarqueeButton
 					{...rest}
 					css={css}
 					icon={children}
@@ -116,7 +125,7 @@ const Key = kind({
 				>
 					{(text || text === 0) ? <span className={css.text}>{text}</span> : null}
 					{(label || label === 0) ? <span className={css.label}>{label}</span> : null}
-				</Button>
+				</MarqueeButton>
 			</div>
 		);
 	}
@@ -151,7 +160,15 @@ const KeypadBase = kind({
 		 * @param {Object} event
 		 * @public
 		 */
-		onKeyButtonClick: PropTypes.func
+		onKeyButtonClick: PropTypes.func,
+
+		/**
+		 * Disables 5-way spotlight from navigating into the component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		spotlightDisabled: PropTypes.bool
 	},
 
 	styles: {
@@ -159,36 +176,38 @@ const KeypadBase = kind({
 		className: 'keypad'
 	},
 
-	render: ({disabled, onKeyButtonClick, ...rest}) => {
+	render: ({disabled, onKeyButtonClick, spotlightDisabled, ...rest}) => {
 		return (
-			<Layout {...rest} align="center end" className={css.keypad} inline wrap>
-				{KEY_LIST.map((keyText, rowIndex) => {
-					const {icon, text} = keyText;
-					const isIcon = icon === 'arrowuturn' || icon === 'phone';
+			<Container spotlightDisabled={spotlightDisabled}>
+				<Layout {...rest} align="center end" className={css.keypad} inline wrap>
+					{KEY_LIST.map((keyText, rowIndex) => {
+						const {icon, text} = keyText;
+						const isIcon = icon === 'arrowuturn' || icon === 'phone';
 
-					let ariaLabel = text;
-					if (icon === 'arrowuturn') {
-						ariaLabel = $L('backspace');
-					} else if (icon === 'phone') {
-						ariaLabel = $L('call');
-					}
+						let ariaLabel = text;
+						if (icon === 'arrowuturn') {
+							ariaLabel = $L('backspace');
+						} else if (icon === 'phone') {
+							ariaLabel = $L('call');
+						}
 
-					return (
-						<Cell
-							aria-label={ariaLabel}
-							component={Key}
-							disabled={disabled}
-							key={`key${rowIndex}-${text}`}
-							onKeyButtonClick={() => onKeyButtonClick(isIcon ? icon : text)}
-							shrink
-							label={keyText.label}
-							text={isIcon ? null : text}
-						>
-							{isIcon ? icon : null}
-						</Cell>
-					);
-				})}
-			</Layout>
+						return (
+							<Cell
+								aria-label={ariaLabel}
+								component={Key}
+								disabled={disabled}
+								key={`key${rowIndex}-${text}`}
+								onKeyButtonClick={() => onKeyButtonClick(isIcon ? icon : text)}
+								shrink
+								label={keyText.label}
+								text={isIcon ? null : text}
+							>
+								{isIcon ? icon : null}
+							</Cell>
+						);
+					})}
+				</Layout>
+			</Container>
 		);
 	}
 });
