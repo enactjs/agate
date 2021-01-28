@@ -36,7 +36,6 @@ import Button from '../Button';
 import ContextualPopupDecorator from '../ContextualPopupDecorator';
 import Icon from '../Icon';
 import Item from '../Item';
-import RadioItem from '../RadioItem';
 import Skinnable from '../Skinnable';
 
 import DropdownList, {compareChildren, isSelectedValid} from './DropdownList';
@@ -275,7 +274,7 @@ const DropdownBase = kind({
 			forward('onClick'),
 			not(forProp('disabled', true)),
 			not(forProp('open', true)),
-			forward('onOpen'),
+			forward('onOpen')
 		)
 	},
 
@@ -337,11 +336,7 @@ const DropdownBase = kind({
 		const ariaProps = extractAriaProps(rest);
 		const calcAriaProps = ariaLabel != null ? null : {role: 'region', 'aria-labelledby': ariaLabelledBy};
 
-		const groupProps =  (skin === 'silicon') ?
-			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'} :
-			{childComponent: Item, itemProps: {size: 'small', css}, selectedProp: 'selected'};
-
-		const popupProps = {'aria-live': null, children, direction, disabled, groupProps, onSelect, open, selected, skinVariants: skin === 'silicon' ? {'night': false} : {}, width, role: null};
+		const popupProps = {'aria-live': null, children, direction, disabled, onSelect, open, selected, skinVariants: skin === 'silicon' ? {'night': false} : {}, width, role: null};
 
 		// `ui/Group`/`ui/Repeater` will throw an error if empty so we disable the Dropdown and
 		// prevent Dropdown to open if there are no children.
