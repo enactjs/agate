@@ -42,6 +42,7 @@ const FanSpeedControlBase = kind({
 		 *
 		 * @type {Number}
 		 * @default 10
+		 * @required
 		 * @public
 		 */
 		max: PropTypes.number.isRequired,
@@ -51,6 +52,7 @@ const FanSpeedControlBase = kind({
 		 *
 		 * @type {Number}
 		 * @default 1
+		 * @required
 		 * @public
 		 */
 		min: PropTypes.number.isRequired,
