@@ -32,7 +32,7 @@ import componentCss from './Item.module.less';
  * @class ItemContent
  * @memberof agate/Item
  * @ui
- * @public
+ * @private
  */
 const ItemContent = kind({
 	name: 'ItemContent',
@@ -41,7 +41,7 @@ const ItemContent = kind({
 		/**
 		 * Text displayed when passed as children.
 		 *
-		 * @type {String | Number}
+		 * @type {*}
 		 * @public
 		 */
 		content: PropTypes.any,
@@ -52,8 +52,6 @@ const ItemContent = kind({
 		 *
 		 * The following classes are supported:
 		 *
-		 * `itemContent` - The root class name
-		 * `content` - The content class name
 		 * `label` - The label class name
 		 *
 		 * @type {Object}
@@ -64,15 +62,16 @@ const ItemContent = kind({
 		/**
 		 * Text displayed when passed in `label` prop.
 		 *
-		 * @type {String | Number}
+		 * @type {*}
 		 * @public
 		 */
 		label: PropTypes.any,
 
 		/**
-		 * Repositioning of label.
+		 * The position of the label relative to the primary content, `content`.
 		 *
-		 * @type {String}
+		 * @type {('above'|'after'|'before'|'below')}
+		 * @default 'below'
 		 * @public
 		 */
 		labelPosition: PropTypes.oneOf(['above', 'after', 'before', 'below']),
@@ -97,8 +96,7 @@ const ItemContent = kind({
 	},
 
 	computed: {
-		className: ({label, labelPosition, styler}) => styler.append({
-			hasLabel: Boolean(label),
+		className: ({labelPosition, styler}) => styler.append({
 			labelAbove: labelPosition === 'above',
 			labelAfter: labelPosition === 'after',
 			labelBefore: labelPosition === 'before',
@@ -209,6 +207,7 @@ const ItemBase = kind({
 		 * The position of the label relative to the primary content, `children`.
 		 *
 		 * @type {('above'|'after'|'before'|'below')}
+		 * @default 'below'
 		 * @public
 		 */
 		labelPosition: PropTypes.oneOf(['above', 'after', 'before', 'below']),
@@ -234,7 +233,7 @@ const ItemBase = kind({
 		 *
 		 * @type {('large'|'small')}
 		 * @default 'large'
-		 * @private
+		 * @public
 		 */
 		size: PropTypes.oneOf(['small', 'large']),
 
@@ -274,8 +273,9 @@ const ItemBase = kind({
 	},
 
 	computed: {
-		className: ({selected, centered, size, styler}) => styler.append(
+		className: ({label, centered, selected, size, styler}) => styler.append(
 			{
+				hasLabel: label != null,
 				selected,
 				centered
 			},
@@ -331,11 +331,11 @@ const ItemBase = kind({
  * @public
  */
 const ItemDecorator = compose(
-	MarqueeController({marqueeOnFocus: true, invalidateProps: ['inline']}),
 	UiItemDecorator,
 	Slottable({slots: ['label', 'slotAfter', 'slotBefore']}),
-	Skinnable,
-	Spottable
+	Spottable,
+	MarqueeController({marqueeOnFocus: true, invalidateProps: ['inline']}),
+	Skinnable
 );
 
 /**

@@ -8,8 +8,8 @@
 	display: flex;
 	position: relative;
 
-	.itemContent {
-		&.hasLabel {
+	&.hasLabel {
+		.itemContent {
 			&.labelAfter,
 			&.labelBelow {
 				.content { order: 1; }
@@ -44,16 +44,8 @@
 		color: @agate-item-color;
 		background-color: @agate-item-bg-color;
 
-		.itemContent {
-			line-height: @agate-item-itemcontent-line-height;
-
-			.label   {
-				color: @agate-item-label-color;
-				font-size: @agate-item-label-font-size;
-				line-height: @agate-item-label-line-height;
-			}
-
-			&.hasLabel {
+		&.hasLabel {
+			.itemContent {
 				padding: @agate-item-haslabel-padding;
 
 				&.labelBefore .label {
@@ -76,6 +68,16 @@
 						max-width: @agate-item-label-max-width;
 					}
 				}
+			}
+		}
+
+		.itemContent {
+			line-height: @agate-item-itemcontent-line-height;
+
+			.label   {
+				color: @agate-item-label-color;
+				font-size: @agate-item-label-font-size;
+				line-height: @agate-item-label-line-height;
 			}
 		}
 
@@ -110,9 +112,13 @@
 		}
 
 		&.centered {
-			.itemContent,
-			.content,
 			&.hasLabel {
+				.itemContent {
+					max-width: fit-content;
+				}
+			}
+
+			.content {
 				max-width: fit-content;
 			}
 
@@ -128,15 +134,17 @@
 			font-size: @agate-item-small-font-size;
 			line-height: @agate-item-small-line-height;
 
+			&.hasLabel {
+				.itemContent {
+					padding: @agate-item-small-haslabel-padding;
+				}
+			}
+
 			.itemContent {
 				line-height: @agate-item-small-itemcontent-line-height;
 
 				.label {
 					font-size: @agate-item-small-label-font-size;
-				}
-
-				&.hasLabel {
-					padding: @agate-item-small-haslabel-padding;
 				}
 			}
 		}
