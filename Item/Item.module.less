@@ -26,17 +26,20 @@
 
 	.slotAfter,
 	.slotBefore {
-		align-items: center;
+		line-height: 0;  // Attempt to get the children of this to always vertically-align their middles with the text
 
-		// Remove the specific edge margin on direct children so the slot can define the proper
-		// spacing for itself.
+		> * {
+			// vertically align all direct children
+			vertical-align: middle;
 
-		& > div:first-child {
-			margin-inline-start: 0;
-		}
-
-		& > div:last-child {
-			margin-inline-end: 0;
+			// Remove the specific edge margin on direct children so the slot can define the proper
+			// spacing for itself.
+			&:first-child {
+				margin-inline-start: 0;
+			}
+			&:last-child {
+				margin-inline-end: 0;
+			}
 		}
 	}
 
