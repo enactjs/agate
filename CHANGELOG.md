@@ -4,10 +4,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
-### Deprecated
-
-- `agate/FullScreenPopup`, use `agate/Popup` instead
-
 ### Added
 
 - `agate/ArcPicker` and `agate/ArcSlider` prop `disabled` to be inactive
@@ -15,9 +11,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
 - `agate/Popup` content padding and margin with `closeButton`
-- `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
-- `agate/Popup` `duration` and `type` props
-- `agate/RadioItem` prop `disabled` and `slotBefore`
+- `agate/RadioItem` prop `slotBefore`
 
 ### Changed
 
