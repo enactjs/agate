@@ -7,8 +7,12 @@
 	position: fixed;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%,-50%);
+	transform: translate(-50%, -50%);
 	box-sizing: border-box;
+
+	.body {
+		height: auto;
+	}
 
 	&.centered {
 		text-align: center;
@@ -18,12 +22,44 @@
 		}
 	}
 
+	&.center {
+		/* Defined to prevent global export */
+	}
+
+	&.bottom,
+	&.fullscreen,
+	&.left,
+	&.right,
 	&.top {
-		position: absolute;
-		top: 0;
 		left: 0;
 		right: 0;
+		top: 0;
 		transform: none;
+	}
+
+	&.bottom {
+		bottom: 0;
+		top: auto;
+	}
+
+	&.left,
+	&.right {
+		height: 100%;
+	}
+
+	&.right {
+		right: 0;
+		left: auto;
+	}
+
+	&.left {
+		left: 0;
+		right: auto;
+	}
+
+	&.fullscreen {
+		height: 100%;
+		width: 100%;
 	}
 
 	.closeButton {
@@ -50,9 +86,30 @@
 		border-color: @agate-popup-border-color;
 		border-radius: @agate-popup-border-radius;
 
+		&.bottom,
+		&.fullscreen,
+		&.top {
+			max-width: 100%;
+		}
+
+		&.bottom {
+			border-radius: @agate-popup-bottom-border-radius;
+		}
+
+		&.left {
+			border-radius: @agate-popup-left-border-radius;
+		}
+
+		&.fullscreen {
+			border-radius: @agate-popup-fullscreen-border-radius;
+		}
+
+		&.right {
+			border-radius: @agate-popup-right-border-radius;
+		}
+
 		&.top {
 			border-radius: @agate-popup-top-border-radius;
-			max-width: @agate-popup-top-max-width;
 		}
 
 		.title {
@@ -84,6 +141,12 @@
 				.padding-start-end(.extract(@agate-popup-closebutton-title-padding, left)[], .extract(@agate-popup-closebutton-title-padding, right)[]);
 			}
 
+			&:not(.withTitle) {
+				.content {
+					.padding-start-end(.extract(@agate-popup-closebutton-content-padding, left)[], .extract(@agate-popup-closebutton-content-padding, right)[]);
+				}
+			}
+
 			&.centered {
 				.title {
 					padding: @agate-popup-closebutton-centered-title-padding;
@@ -99,6 +162,7 @@
 
 		.content {
 			padding: @agate-popup-content-padding;
+			margin: @agate-popup-content-margin;
 		}
 
 		.closeButton {
