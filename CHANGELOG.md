@@ -12,7 +12,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
 - `agate/Popup` content padding and margin with `closeButton`
-- `agate/RadioItem` prop `disabled` and `slotBefore`
+- `agate/RadioItem` prop `slotBefore`
 
 ### Changed
 
