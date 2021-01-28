@@ -1,6 +1,7 @@
 import React from 'react';
 import {mount, shallow} from 'enzyme';
 import Dropdown, {DropdownBase} from '../Dropdown';
+import DropdownList from '../DropdownList';
 
 const children = ['option1', 'option2', 'option3'];
 const title = 'Dropdown select';
@@ -30,6 +31,19 @@ describe('Dropdown', () => {
 
 		const expected = children[selectedIndex];
 		const actual = dropDown.find('.text').text();
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should have `title` when `selected` is invalid', () => {
+		const dropDown = shallow(
+			<DropdownBase title={title} selected={-1}>
+				{children}
+			</DropdownBase>
+		);
+
+		const expected = title;
+		const actual = dropDown.find('DropdownButton').prop('children');
 
 		expect(actual).toBe(expected);
 	});
@@ -77,42 +91,41 @@ describe('Dropdown', () => {
 
 	test('should update when children are added', () => {
 		const dropDown = shallow(
-			<DropdownBase title={title}>
+			<Dropdown title={title}>
 				{children}
-			</DropdownBase>
+			</Dropdown>
 		);
 
 		const updatedChildren = children.concat('option4', 'option5');
 		dropDown.setProps({children: updatedChildren});
-
 		const expected = 5;
-		const actual = dropDown.find('.group').children().length;
+		const actual = dropDown.children().length;
 
 		expect(actual).toBe(expected);
 	});
 
 	test('should set the `role` of items to "checkbox"', () => {
-		const dropDown = mount(
-			<Dropdown open title={title}>
-				{['item1']}
-			</Dropdown>
+		const dropDown = shallow(
+			<DropdownBase title={title} defaultOpen>
+				{['item']}
+			</DropdownBase>
 		);
 
 		const expected = 'checkbox';
-		const actual = dropDown.find('.dropdownList Item').prop('role');
+		const actual = dropDown.find('DropdownButton').prop('popupProps').children[0].role;
 
 		expect(actual).toBe(expected);
 	});
 
 	test('should set the `aria-checked` state of the `selected` item', () => {
-		const dropDown = mount(
-			<Dropdown open title={title} selected={0}>
+		const dropDown = shallow(
+			<DropdownBase title={title} selected={0}>
 				{['item']}
-			</Dropdown>
+			</DropdownBase>
 		);
 
 		const expected = true;
-		const actual = dropDown.find('.dropdownList Item').prop('aria-checked');
+		const actual = dropDown.find('DropdownButton').prop('popupProps').children[0]['aria-checked'];
 
 		expect(actual).toBe(expected);
 	});
@@ -129,7 +142,9 @@ describe('Dropdown', () => {
 		);
 
 		const expected = true;
-		const actual = dropDown.find('.dropdownList Item').prop('disabled');
+		//const actual = dropDown.find('.dropdownList Item').prop('disabled');
+
+		const actual = dropDown.find('DropdownButton').prop('popupProps').children[0].disabled;
 
 		expect(actual).toBe(expected);
 	});
@@ -151,11 +166,26 @@ describe('Dropdown', () => {
 			role: 'button',
 			'aria-checked': false
 		};
-		const actual = {
-			role: dropDown.find('.dropdownList Item').prop('role'),
-			'aria-checked': dropDown.find('.dropdownList Item').prop('aria-checked')
-		};
+		const actual = dropDown.find('DropdownButton').prop('popupProps').children[0];
 
 		expect(actual).toMatchObject(expected);
+	});
+
+	describe('DropdownList', () => {
+		test('should include `data` and `selected` in `onSelect` callback', () => {
+			const handler = jest.fn();
+			const dropDown = mount(
+				<Dropdown onSelect={handler}>
+					{children}
+				</Dropdown>
+			);
+console.log(dropDown.debug());
+			dropDown.find('Item').at(0).simulate('click');
+
+			const expected = {data: 'option1', selected: 0};
+			const actual = handler.mock.calls[0][0];
+
+			expect(actual).toEqual(expected);
+		});
 	});
 });

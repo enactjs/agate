@@ -21,6 +21,8 @@ import VirtualList from "../VirtualList";
 import Item from "../Item";
 import {forward} from "@enact/core/handle";
 import Icon from "../Icon";
+import componentCss from "./Dropdown.module.less";
+import itemCss from "../Item/Item.module.less";
 
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
 
@@ -134,6 +136,11 @@ const DropdownListBase = kind({
 		width: PropTypes.oneOf(['tiny', 'small', 'medium', 'large', 'x-large', 'huge'])
 	},
 
+	defaultProps: {
+		direction: "below center",
+		selected: 0
+	},
+
 	styles: {
 		css,
 		className: 'dropdownList'
@@ -218,12 +225,6 @@ const DropdownListBase = kind({
 		//const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
 		const opened = !disabled && open;
 		delete rest.width;
-		delete rest.transitionDirection;
-		delete rest.direction
-		delete rest.children;
-		delete rest.onSelect;
-		delete rest.selected;
-		delete rest.skinVariants;
 
 		return (
 			// <VirtualList
@@ -246,7 +247,7 @@ const DropdownListBase = kind({
 					<Scroller
 						skinVariants={skinVariants}
 						className={css.scroller}
-						cbScrollTo={scrollTo}
+						//cbScrollTo={scrollTo}
 					>
 						<Group
 							role={null}
@@ -315,7 +316,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 		}
 
 		componentDidUpdate () {
-			console.log(this.state.ready);
+			this.handleTransitionShow();
 			if (this.state.ready === ReadyState.INIT) {
 				this.scrollIntoView();
 			} else if (this.state.ready === ReadyState.SCROLLED) {
@@ -332,6 +333,20 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 				}
 			}
 		}
+
+		handleTransitionShow = () => {
+			//const containerSelector = `[data-spotlight-id='${containerId}']`;
+			const current = Spotlight.getCurrent();
+			console.log(document.querySelector(`.${componentCss.dropdownList} .${itemCss.selected}`));
+			// Focus function is delayed until dropdown (transition) animation ends.
+				if (!Spotlight.getPointerMode()) {
+					if (!Spotlight.isPaused() && current && document.querySelector(`.${componentCss.dropdownList} .${itemCss.selected}`)) {
+						document.querySelector(`.${componentCss.dropdownList} .${itemCss.selected}`).focus();
+					} else {
+						document.querySelector(`.${componentCss.dropdownList} .${itemCss.item}`).focus();
+					}
+				}
+		};
 
 		setScrollTo = (scrollTo) => {
 			this.scrollTo = scrollTo;
@@ -357,22 +372,25 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 		}
 
 		scrollIntoView = () => {
-			let {selected} = this.props;
-
-			if (this.state.prevFocused == null && !isSelectedValid(this.props)) {
-				selected = 0;
-			} else if (this.state.prevFocused != null) {
-				selected = this.state.prevFocused;
-			}
-
-			this.scrollTo({
-				animate: false,
-				focus: true,
-				index: selected,
-				offset: ri.scale(300 * 2), // @sand-item-small-height * 2 (TODO: large text mode not supported!)
-				stickTo: 'start' // offset from the top of the dropdown
-			});
-
+			this.handleTransitionShow();
+			// let {selected} = this.props;
+			//
+			// if (this.state.prevFocused == null && !isSelectedValid(this.props)) {
+			// 	selected = 0;
+			// } else if (this.state.prevFocused != null) {
+			// 	selected = this.state.prevFocused;
+			// }
+			//
+			// console.log(selected);
+			//
+			// this.scrollTo({
+			// 	animate: false,
+			// 	focus: true,
+			// 	index: selected,
+			// 	offset: ri.scale(300 * 2), // @sand-item-small-height * 2 (TODO: large text mode not supported!)
+			// 	stickTo: 'start' // offset from the top of the dropdown
+			// });
+			// console.log(this.scrollTo);
 			this.setState({ready: ReadyState.SCROLLED});
 		};
 
@@ -397,7 +415,10 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 
 		render () {
 			return (
-				<Wrapped {...this.props} onFocus={this.handleFocus} scrollTo={this.setScrollTo} />
+				<Wrapped {...this.props}
+						 onFocus={this.handleFocus}
+						 //scrollTo={this.setScrollTo}
+				/>
 			);
 		}
 	};

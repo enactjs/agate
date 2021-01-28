@@ -41,28 +41,6 @@ import Skinnable from '../Skinnable';
 
 import DropdownList, {compareChildren, isSelectedValid} from './DropdownList';
 import componentCss from './Dropdown.module.less';
-import itemCss from '../Item/Item.module.less';
-import Spotlight from "@enact/spotlight";
-
-const handleTransitionShow = (ev, {'data-spotlight-id': containerId}) => {
-	const containerSelector = `[data-spotlight-id='${containerId}']`;
-	const current = Spotlight.getCurrent();
-	console.log(containerSelector);
-	// Focus function is delayed until dropdown (transition) animation ends.
-	setTimeout(
-		() => {
-			if (!Spotlight.getPointerMode()) {
-				if (!Spotlight.isPaused() && current && document.querySelector(`.${componentCss.dropdownList} .${itemCss.selected}`)) {
-					console.log(document.querySelector(`.${componentCss.dropdownList}`));
-					document.querySelector(`.${componentCss.dropdownList} .${itemCss.selected}`).focus();
-				} else {
-					console.log(document.querySelector(`.${componentCss.dropdownList}`));
-					document.querySelector(`.${componentCss.dropdownList} .${itemCss.item}`).focus();
-				}
-			}
-		}, 10
-	);
-};
 
 /**
  * A stateless Dropdown Button component.
@@ -298,7 +276,6 @@ const DropdownBase = kind({
 			not(forProp('disabled', true)),
 			not(forProp('open', true)),
 			forward('onOpen'),
-			//handleTransitionShow
 		)
 	},
 
