@@ -58,7 +58,7 @@ const DrawerBase = kind({
 		header: PropTypes.node,
 
 		/**
-		 * Disable drawer transitions.
+		 * Disables drawer transition animation.
 		 *
 		 * @type {Boolean}
 		 * @default false

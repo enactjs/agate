@@ -64,7 +64,7 @@ const PopupMenuBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Disable popup menu transitions.
+		 * Disables popup menu transition animation.
 		 *
 		 * @type {Boolean}
 		 * @default false
