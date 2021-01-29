@@ -566,6 +566,7 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
 				Page.spotlightRight();
 				Page.spotlightLeft();
@@ -1018,6 +1019,7 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectNoneScrimOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
 				Page.spotlightRight();
 				Page.spotlightLeft();
