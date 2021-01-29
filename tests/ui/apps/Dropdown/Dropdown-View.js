@@ -9,10 +9,10 @@ spotlight.setPointerMode(false);
 
 const app = (props) => <div {...props}>
 	<div style={{padding: 100}} id="wrapper">
-		<Dropdown id="dropdownDefault" title="Default" style={{display: 'inline-block', width: '50%'}}>
+		<Dropdown id="dropdownDefault" title="Default">
 			{['one', 'two', 'three', 'four', 'five']}
 		</Dropdown>
-		<Dropdown direction="right" id="dropdownDirectionRight" title="DirectionRight" style={{display: 'inline-block', width: '50%'}}>
+		<Dropdown direction="above" id="dropdownDirectionAbove" title="Direction Above">
 			{['one', 'two', 'three', 'four', 'five']}
 		</Dropdown>
 		<Dropdown disabled id="dropdownDisabled" title="Disabled">

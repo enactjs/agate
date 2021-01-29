@@ -102,7 +102,7 @@ const DropdownButtonBase = kind({
 });
 
 const DropdownButton = ContextualPopupDecorator(
-	{noArrow: true},
+	{configClassName: componentCss.contextualPopup, noArrow: true},
 	ForwardRef(
 		DropdownButtonBase
 	)

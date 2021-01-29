@@ -25,7 +25,6 @@ describe('Dropdown', function () {
 			expect(Page.components.dropdownDefault.childItem.isFocused()).to.be.true();
 
 			Page.spotlightDown();
-			Page.spotlightDown();
 			expect(dropdownSelected.childItem.isFocused()).to.be.true();
 			expect(dropdownSelected.selectedValue).to.equal('two');
 
@@ -37,32 +36,30 @@ describe('Dropdown', function () {
 			Page.spotlightSelect();
 			Page.delay(1000);
 
-			expect(dropdownSelected.selectedValue).to.equal('three');
+			expect(dropdownSelected.selectedValue).to.equal('five');
 		});
 	});
 
 	describe('5-way', function () {
 
-		it('should focus the `#dropdownDirectionRight` when 5-way right', function () {
+		it('should focus the `#dropdownDirectionAbove` when 5-way right', function () {
 			expect(Page.components.dropdownDefault.childItem.isFocused()).to.be.true();
 
 			Page.spotlightRight();
-			expect(Page.components.dropdownDirectionRight.childItem.isFocused()).to.be.true();
+			expect(Page.components.dropdownDirectionAbove.childItem.isFocused()).to.be.true();
 		});
 
-		it('should focus `#dropdownDisabled` when 5-way down', function () {
+		it('should focus `#dropdownSelected` when 5-way right', function () {
 			expect(Page.components.dropdownDefault.childItem.isFocused()).to.be.true();
 
 			Page.spotlightDown();
-			expect(Page.components.dropdownDisabled.childItem.isFocused()).to.be.true();
+			expect(Page.components.dropdownSelected.childItem.isFocused()).to.be.true();
 		});
 
 		it('should focus the first item in `#dropdownDefault` option list when 5-way enter and down', function () {
 			expect(Page.components.dropdownDefault.childItem.isFocused()).to.be.true();
 
 			Page.spotlightSelect();
-			Page.delay(1000);
-			Page.spotlightDown();
 
 			expect(Page.components.dropdownDefault.item(0).isFocused()).to.be.true();
 		});

@@ -4,6 +4,8 @@
 @import "../styles/skin.less";
 
 .dropdown {
+	display: inline-block;
+
 	.applySkins({
 		&.tinyWidth {
 			.button, .item {
@@ -43,6 +45,7 @@
 
 		.item {
 			border: @agate-dropdown-border-width @agate-dropdown-border-style @agate-dropdown-border-color;
+			display: flex;
 
 				&::before {
 					content: none; // Overwrite the selected styles for Item
@@ -119,6 +122,7 @@
 				}
 			}
 		}
+
 	});
 }
 
@@ -211,4 +215,14 @@
 	.applySkins({
 		height: @agate-dropdown-list-height;
 	})
+}
+
+.contextualPopup {
+	.container {
+		.applySkins({
+			padding: 0;
+			margin-top: 0;
+		})
+	}
+
 }
