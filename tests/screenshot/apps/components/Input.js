@@ -34,7 +34,7 @@ const InputTests = [
 	// Small input
 	<Input value="Simple value" size="small" />,
 	<Input value="Simple value" iconBefore="happyface" size="small" />,
-	<Input value="Simple value" iconAfter="happyface" size="small" />,
+	<Input value="Simple value" iconAfter="happyface" size="small" />
 ];
 
 export default InputTests;

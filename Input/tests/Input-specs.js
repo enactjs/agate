@@ -76,7 +76,7 @@ describe('Input Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should set con size to small when size equals small', () => {
+	test('should set icon size to small when size equals small', () => {
 		const subject = mount(
 			<Input iconAfter="happyface" size="small" />
 		);
