@@ -33,6 +33,15 @@ const TransitionContainer = SpotlightContainerDecorator(
 	Transition
 );
 
+const transitionDirection = {
+	bottom: 'down',
+	center: 'down',
+	fullscreen: 'down',
+	left: 'left',
+	right: 'right',
+	top: 'up'
+};
+
 /**
  * The base popup component.
  *
@@ -44,6 +53,14 @@ const TransitionContainer = SpotlightContainerDecorator(
 const PopupBase = kind({
 	name: 'Popup',
 	propTypes: /** @lends agate/Popup.PopupBase.prototype */ {
+		/**
+		 * Buttons to be included within the Popup component.
+		 *
+		 * Typically, these buttons would be used to close or take action on the dialog.
+		 *
+		 * @type {Element|Element[]}
+		 * @public
+		 */
 		buttons: PropTypes.oneOfType([
 			PropTypes.element,
 			PropTypes.arrayOf(PropTypes.element)
@@ -58,42 +75,140 @@ const PopupBase = kind({
 		 */
 		centered: PropTypes.bool,
 
+		/**
+		 * When true, popup displays a close button.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		closeButton: PropTypes.bool,
+
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `popup` - The root class name
+		 * * `body` - Applied to the body content container
+		 * * `popupTransitionContainer` - Applied to the Popup's outermost container. Sizing can be
+		 *                                applied here for percentage-of-screen values.
+		 * * `top` - Applied when the `position` is 'top'
+		 * * `right` - Applied when the `position` is 'right'
+		 * * `bottom` - Applied when the `position` is 'bottom'
+		 * * `left` - Applied when the `position` is 'left'
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * Controls how long the transition should take.
+		 * Supported preset durations are: `'short'` (250ms), `'medium'` (500ms), and `'long'` (1s).
+		 * `'short'` (250ms) is default when no others are specified.
+		 *
+		 * @type {String}
+		 * @default 'short'
+		 * @public
+		 */
+		duration: PropTypes.string,
+
+		/**
+		 * Disables transition animation.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		noAnimation: PropTypes.bool,
+
+		/**
+		 * Called when the popup is closed.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
 		onClose: PropTypes.func,
+
+		/**
+		 * Called after the popup's "hide" transition finishes.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
 		onHide: PropTypes.func,
+
+		/**
+		 * Controls the visibility of the Popup.
+		 *
+		 * By default, the Popup and its contents are not rendered until `open`.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		open: PropTypes.bool,
 
 		/**
 		 * Sets the position of the popup on the screen.
 		 *
-		 * @type {('center'|'top')}
+		 * @type {('bottom'|'center'|'fullscreen'|'left'|'right'|'top')}
 		 * @default 'center'
 		 * @public
 		 */
-		position: PropTypes.oneOf(['center', 'top']),
+		position: PropTypes.oneOf(['bottom', 'center', 'fullscreen', 'left', 'right', 'top']),
 
+		/**
+		 * The current skin.
+		 *
+		 * @type {String}
+		 * @private
+		 */
 		skin: PropTypes.string,
-		title: PropTypes.string
+
+		/**
+		 * The primary text of the popup.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		title: PropTypes.string,
+
+		/**
+		 * The type of transition to affect the content.
+		 *
+		 * Supported types are: `'slide'` and `'fade'`.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		type: PropTypes.oneOf(['fade', 'slide'])
 	},
 	defaultProps: {
 		centered: false,
 		closeButton: false,
+		duration: 'short',
 		noAnimation: false,
 		open: false,
 		position: 'center'
 	},
 	styles: {
 		css: componentCss,
-		className: 'popup'
+		className: 'popup',
+		publicClassNames: ['popup', 'body', 'popupTransitionContainer', 'top', 'right', 'bottom', 'left']
 	},
 	computed: {
-		className: ({centered, closeButton, position, styler, title}) => styler.append({top: position === 'top', withCloseButton: closeButton, withTitle: title, centered}),
-		transitionType : ({position}) => position === 'center' ? 'fade' : 'slide',
-		direction : ({position}) => position === 'center' ? 'down' : 'up'
+		className: ({centered, closeButton, position, styler, title}) => styler.append(position, {withCloseButton: closeButton, withTitle: title, centered}),
+		transitionType: ({position, type}) => {
+			const setTransitionType = position === 'center' ? 'fade' : 'slide';
+
+			return type ? type : setTransitionType;
+		},
+		direction: ({position}) => transitionDirection[position]
 	},
-	render: ({buttons, children, closeButton, css, direction, noAnimation, onClose, onHide, open, skin, title, transitionType, ...rest}) => {
+	render: ({buttons, children, closeButton, css, direction, duration, noAnimation, onClose, onHide, open, skin, title, transitionType, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
 		delete rest.centered;
 
@@ -102,7 +217,7 @@ const PopupBase = kind({
 				noAnimation={noAnimation}
 				visible={open}
 				direction={direction}
-				duration="short"
+				duration={duration}
 				type={transitionType}
 				className={css.popupTransitionContainer}
 				onHide={onHide}
