@@ -95,4 +95,38 @@ describe('MediaPlayer', function () {
 			});
 		});
 	});
+
+	describe('spotlightDisabled', function () {
+		const mediaPlayer = Page.components.mediaPlayerSpotlightDisabled;
+
+		it('should not have the slider knob focused', function () {
+			expect(mediaPlayer.slider.isFocused()).to.not.be.true();
+		});
+
+		describe('5-way', function () {
+
+			it('should not focus `play` button on 5-way down', function () {
+				expect(mediaPlayer.slider.isFocused()).to.not.be.true();
+
+				Page.spotlightDown();
+
+				expect(mediaPlayer.playButton.isFocused()).to.not.be.true();
+			});
+		});
+
+		describe('using pointer', function () {
+
+			it('should not focus `next` button on hover', function () {
+				mediaPlayer.hover('Next');
+
+				expect(mediaPlayer.nextButton.isFocused()).to.not.be.true();
+			});
+
+			it('should not focus `menu` button on hover', function () {
+				mediaPlayer.hover('Menu');
+
+				expect(mediaPlayer.menuButton.isFocused()).to.not.be.true();
+			});
+		});
+	});
 });

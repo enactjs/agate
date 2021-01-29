@@ -13,6 +13,7 @@ import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import {memoize} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
+import {SpotlightContainerDecorator} from '@enact/spotlight/SpotlightContainerDecorator';
 import {useAnnounce} from '@enact/ui/AnnounceDecorator';
 import Pure from '@enact/ui/internal/Pure';
 import Media from '@enact/ui/Media';
@@ -31,6 +32,10 @@ import Times from './Times';
 import {secondsToTime} from './util';
 
 import css from './MediaPlayer.module.less';
+
+const Container = SpotlightContainerDecorator({
+	enterTo: 'default-element'
+}, 'div');
 
 const forwardWithState = (type) => adaptEvent(call('addStateToEvent'), forwardWithPrevent(type));
 
@@ -239,6 +244,14 @@ const MediaPlayerBase = kind({
 		sourceIndex: PropTypes.number,
 
 		/**
+		 * Disables 5-way spotlight from navigating into the component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		spotlightDisabled: PropTypes.bool,
+
+		/**
 		 * The total time (duration) in seconds of the loaded media source.
 		 *
 		 * @type {Number}
@@ -260,37 +273,39 @@ const MediaPlayerBase = kind({
 		durFmt: ({locale}) => getDurFmt(locale)
 	},
 
-	render: ({currentTime, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, total, ...rest}) => {
+	render: ({currentTime, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, spotlightDisabled, total, ...rest}) => {
 		return (
 			<div {...rest}>
-				<Media
-					loop={loop}
-					mediaComponent={mediaComponent}
-					onEnded={onEnded}
-					onUpdate={onUpdate}
-					ref={mediaRef}
-					source={playlist ? playlist[sourceIndex] : null}
-				/>
-				<MediaSlider
-					onChange={onChange}
-					value={proportionPlayed}
-				/>
-				<Times
-					current={currentTime}
-					formatter={durFmt}
-					total={total}
-				/>
-				<MediaControls
-					onNext={onNext}
-					onPause={onPause}
-					onPlay={onPlay}
-					onPrevious={onPrevious}
-					onRepeat={onRepeat}
-					onShuffle={onShuffle}
-					paused={paused}
-					repeat={repeat}
-					shuffle={shuffle}
-				/>
+				<Container spotlightDisabled={spotlightDisabled}>
+					<Media
+						loop={loop}
+						mediaComponent={mediaComponent}
+						onEnded={onEnded}
+						onUpdate={onUpdate}
+						ref={mediaRef}
+						source={playlist ? playlist[sourceIndex] : null}
+					/>
+					<MediaSlider
+						onChange={onChange}
+						value={proportionPlayed}
+					/>
+					<Times
+						current={currentTime}
+						formatter={durFmt}
+						total={total}
+					/>
+					<MediaControls
+						onNext={onNext}
+						onPause={onPause}
+						onPlay={onPlay}
+						onPrevious={onPrevious}
+						onRepeat={onRepeat}
+						onShuffle={onShuffle}
+						paused={paused}
+						repeat={repeat}
+						shuffle={shuffle}
+					/>
+				</Container>
 			</div>
 		);
 	}

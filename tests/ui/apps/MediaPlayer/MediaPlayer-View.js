@@ -18,9 +18,17 @@ const audioFiles = [
 ];
 
 const app = (props) => <div {...props}>
-	<div>
+	<div style={{marginTop: '40px'}}>
 		<Heading>Media Player Default</Heading>
 		<MediaPlayer id="mediaPlayerDefault">
+			{
+				audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
+			}
+		</MediaPlayer>
+	</div>
+	<div style={{marginTop: '80px'}}>
+		<Heading>Media Player SpotlightDisabled</Heading>
+		<MediaPlayer id="mediaPlayerSpotlightDisabled" spotlightDisabled>
 			{
 				audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 			}
