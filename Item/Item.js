@@ -37,7 +37,15 @@ import componentCss from './Item.module.less';
 const ItemContent = kind({
 	name: 'ItemContent',
 
-	propTypes:  /** @lends agate/Item.ItemContent.prototype */ {
+	propTypes: /** @lends agate/Item.ItemContent.prototype */ {
+		/**
+		 * Centers the content.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		centered: PropTypes.bool,
+
 		/**
 		 * Text displayed when passed as children.
 		 *
@@ -108,12 +116,13 @@ const ItemContent = kind({
 		}
 	},
 
-	render: ({content, css, marqueeOn, label, orientation, ...rest}) => {
+	// eslint-disable-next-line enact/prop-types
+	render: ({centered, content, css, marqueeOn, label, orientation, styler, ...rest}) => {
 		delete rest.labelPosition;
 
 		if (!label) {
 			return (
-				<Cell {...rest} component={Marquee} className={css.content} marqueeOn={marqueeOn}>
+				<Cell {...rest} component={Marquee} className={styler.append(css.content)} marqueeOn={marqueeOn}>
 					{content}
 				</Cell>
 			);
@@ -121,7 +130,7 @@ const ItemContent = kind({
 			return (
 				<Cell {...rest}>
 					<Layout orientation={orientation}>
-						<Cell component={Marquee} className={css.content} marqueeOn={marqueeOn} shrink>
+						<Cell component={Marquee} className={css.content} marqueeOn={marqueeOn} shrink={orientation === 'vertical' || centered}>
 							{content}
 						</Cell>
 						<Cell component={Marquee} className={css.label} marqueeOn={marqueeOn} shrink>
@@ -158,7 +167,7 @@ const ItemBase = kind({
 		/**
 		 * Called with a reference to the root component.
 		 *
-		 * @type {Object|Function}
+		 * @type {Function|Object}
 		 * @public
 		 */
 		componentRef: EnactPropTypes.ref,
@@ -231,7 +240,7 @@ const ItemBase = kind({
 		/**
 		 * The size of the item.
 		 *
-		 * @type {('large'|'small')}
+		 * @type {('small'|'large')}
 		 * @default 'large'
 		 * @public
 		 */
@@ -273,7 +282,7 @@ const ItemBase = kind({
 	},
 
 	computed: {
-		className: ({label, centered, selected, size, styler}) => styler.append(
+		className: ({centered, label, selected, size, styler}) => styler.append(
 			{
 				hasLabel: label != null,
 				selected,
@@ -285,6 +294,8 @@ const ItemBase = kind({
 	},
 
 	render: ({centered, children, componentRef, css, inline, label, labelPosition, marqueeOn, slotAfter, slotBefore, ...rest}) => {
+		delete rest.size;
+
 		return (
 			<UiItemBase
 				component={Row}
@@ -300,6 +311,7 @@ const ItemBase = kind({
 					</Cell>
 				) : null}
 				<ItemContent
+					centered={centered}
 					content={children}
 					css={css}
 					label={label}

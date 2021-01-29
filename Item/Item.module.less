@@ -24,11 +24,7 @@
 		}
 	}
 
-	.slotAfter {
-		display: flex;
-		justify-content: center;
-	}
-
+	.slotAfter,
 	.slotBefore {
 		display: flex;
 		justify-content: center;
@@ -46,6 +42,7 @@
 
 		&.hasLabel {
 			.itemContent {
+				line-height: @agate-item-itemcontent-line-height;
 				padding: @agate-item-haslabel-padding;
 
 				&.labelBefore .label {
@@ -55,30 +52,28 @@
 				&.labelAfter .label {
 					.padding-start-end(@agate-item-label-padding, 0);
 				}
+			}
+		}
 
-				&.labelAfter,
-				&.labelBefore {
-					.content {
-						box-sizing: border-box;
-						width: @agate-item-content-width;
-					}
+		&:not(.centered) {
+			.labelAfter,
+			.labelBefore {
+				.content {
+					box-sizing: border-box;
+					min-width: @agate-item-content-width;
+				}
 
-					.label {
-						box-sizing: border-box;
-						max-width: @agate-item-label-max-width;
-					}
+				.label {
+					box-sizing: border-box;
+					max-width: @agate-item-label-max-width;
 				}
 			}
 		}
 
-		.itemContent {
-			line-height: @agate-item-itemcontent-line-height;
-
-			.label   {
-				color: @agate-item-label-color;
-				font-size: @agate-item-label-font-size;
-				line-height: @agate-item-label-line-height;
-			}
+		.label {
+			color: @agate-item-label-color;
+			font-size: @agate-item-label-font-size;
+			line-height: @agate-item-label-line-height;
 		}
 
 		.slotAfter {
@@ -106,19 +101,13 @@
 
 			&.hasLabel {
 				.slotAfter {
-					padding-left: @agate-item-slotafter-padding-left;
+					.padding-start-end(@agate-item-slotafter-padding-left, 0);
 				}
 			}
 		}
 
 		&.centered {
-			&.hasLabel {
-				.itemContent {
-					max-width: fit-content;
-				}
-			}
-
-			.content {
+			.itemContent {
 				max-width: fit-content;
 			}
 
