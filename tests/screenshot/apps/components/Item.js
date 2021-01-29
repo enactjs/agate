@@ -85,7 +85,7 @@ const ItemTests = [
 			<Item slotBefore={slotBeforeIcon} inline>Hello Item</Item>,
 			<Item slotBefore={slotBeforeIcon} inline disabled>Hello Item</Item>,
 			<Item slotBefore={slotBeforeIcon} inline selected>Hello Item</Item>,
-			<Item slotBefore={slotBeforeIcon} inline disabled selected>Hello Item</Item>,
+			<Item slotBefore={slotBeforeIcon} inline disabled selected>Hello Item</Item>
 		]
 	},
 	{
@@ -95,11 +95,9 @@ const ItemTests = [
 			<Item slotAfter={slotAfterIcon} inline>Hello Item</Item>,
 			<Item slotAfter={slotAfterIcon} inline disabled>Hello Item</Item>,
 			<Item slotAfter={slotAfterIcon} inline selected>Hello Item</Item>,
-			<Item slotAfter={slotAfterIcon} inline disabled selected>Hello Item</Item>,
+			<Item slotAfter={slotAfterIcon} inline disabled selected>Hello Item</Item>
 		]
-	},
-
-
+	}
 ];
 
 export default ItemTests;
