@@ -80,12 +80,12 @@
 
 				&.iconAfter {
 					padding: @agate-input-small-icon-after-padding-top-bottom @agate-input-small-icon-after-padding-right @agate-input-small-icon-after-padding-top-bottom @agate-input-small-icon-after-padding-left;
-					.padding-start-end(@agate-input-small-padding-left, @agate-input-small-padding-right);
+					.padding-start-end( @agate-input-small-icon-after-padding-left, @agate-input-small-icon-after-padding-right);
 				}
 
 				&.iconBefore {
 					padding: @agate-input-small-icon-before-padding-top-bottom @agate-input-small-icon-before-padding-right @agate-input-small-icon-before-padding-top-bottom @agate-input-small-icon-before-padding-left;
-					.padding-start-end(@agate-input-icon-before-padding-left, @agate-input-icon-before-padding-right);
+					.padding-start-end( @agate-input-small-icon-before-padding-left,  @agate-input-small-icon-before-padding-right);
 				}
 			}
 		}
@@ -126,6 +126,18 @@
 
 		&.invalid input {
 			color: @agate-red;
+		}
+
+		&.hasIconAfter {
+			.input {
+				padding-right: @agate-input-hasiconafter-padding-right;
+			}
+		}
+
+		&.hasIconBefore {
+			.input {
+				padding-left: @agate-input-hasiconbefore-padding-left;
+			}
 		}
 
 		// Spotlight Colors

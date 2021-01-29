@@ -103,15 +103,6 @@ const InputBase = kind({
 		iconBefore: PropTypes.string,
 
 		/**
-		 * The size of the input field icon.
-		 *
-		 * @type {('small'|'large')}
-		 * @default 'large'
-		 * @public
-		 */
-		iconSize: PropTypes.oneOf(['small', 'large']),
-
-		/**
 		 * Indicates [value]{@link agate/Input.InputBase.value} is invalid and shows
 		 * [invalidMessage]{@link agate/Input.InputBase.invalidMessage}, if set.
 		 *
@@ -271,7 +262,7 @@ const InputBase = kind({
 			const title = (value == null || value === '') ? placeholder : '';
 			return calcAriaLabel(title, type, value);
 		},
-		className: ({focused, invalid, size, styler}) => styler.append({focused, invalid}, size),
+		className: ({focused, iconBefore, iconAfter, invalid, size, styler}) => styler.append({focused, invalid, hasIconBefore: iconBefore, hasIconAfter: iconAfter}, size),
 		dir: ({value, placeholder}) => isRtlText(value || placeholder) ? 'rtl' : 'ltr',
 		invalidTooltip: ({css, invalid, invalidMessage = $L('Please enter a valid value.')}) => {
 			if (invalid && invalidMessage) {
@@ -286,7 +277,7 @@ const InputBase = kind({
 		value: ({value}) => typeof value === 'number' ? value : (value || '')
 	},
 
-	render: ({css, dir, disabled, iconAfter, iconBefore, iconSize, invalidTooltip, onChange, placeholder, size, type, value, ...rest}) => {
+	render: ({css, dir, disabled, iconAfter, iconBefore, invalidTooltip, onChange, placeholder, size, type, value, ...rest}) => {
 		const inputProps = extractInputProps(rest);
 		delete rest.dismissOnEnter;
 		delete rest.focused;
@@ -297,7 +288,7 @@ const InputBase = kind({
 
 		return (
 			<div {...rest} aria-disabled={disabled} disabled={disabled}>
-				<InputDecoratorIcon position="before" size={iconSize}>
+				<InputDecoratorIcon position="before" size={size}>
 					{iconBefore}
 				</InputDecoratorIcon>
 				<input
@@ -313,7 +304,7 @@ const InputBase = kind({
 					type={type}
 					value={value}
 				/>
-				<InputDecoratorIcon position="after" size={iconSize}>
+				<InputDecoratorIcon position="after" size={size}>
 					{iconAfter}
 				</InputDecoratorIcon>
 				{invalidTooltip}

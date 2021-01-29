@@ -26,7 +26,6 @@ storiesOf('Agate', module)
 				dismissOnEnter={boolean('dismissOnEnter', Config)}
 				iconAfter={select('iconAfter', iconNames, Config)}
 				iconBefore={select('iconBefore', iconNames, Config)}
-				iconSize={select('iconSize', ['small', 'large'], Config, 'large')}
 				invalid={boolean('invalid', Config)}
 				invalidMessage={text('invalidMessage', Config)}
 				onBeforeChange={action('onBeforeChange')}

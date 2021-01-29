@@ -65,7 +65,7 @@ describe('Input Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should have iconSize large by default', () => {
+	test('should have icon size large by default', () => {
 		const subject = mount(
 			<Input iconAfter="happyface" />
 		);
@@ -76,9 +76,9 @@ describe('Input Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should have iconSize small when iconSize prop equals small', () => {
+	test('should set con size to small when size equals small', () => {
 		const subject = mount(
-			<Input iconAfter="happyface" iconSize="small" />
+			<Input iconAfter="happyface" size="small" />
 		);
 
 		const expected = 'small';
