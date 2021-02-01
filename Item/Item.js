@@ -32,16 +32,24 @@ import componentCss from './Item.module.less';
  * @class ItemContent
  * @memberof agate/Item
  * @ui
- * @public
+ * @private
  */
 const ItemContent = kind({
 	name: 'ItemContent',
 
-	propTypes:  /** @lends agate/Item.ItemContent.prototype */ {
+	propTypes: /** @lends agate/Item.ItemContent.prototype */ {
+		/**
+		 * Centers the content.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		centered: PropTypes.bool,
+
 		/**
 		 * Text displayed when passed as children.
 		 *
-		 * @type {String | Number}
+		 * @type {*}
 		 * @public
 		 */
 		content: PropTypes.any,
@@ -52,8 +60,6 @@ const ItemContent = kind({
 		 *
 		 * The following classes are supported:
 		 *
-		 * `itemContent` - The root class name
-		 * `content` - The content class name
 		 * `label` - The label class name
 		 *
 		 * @type {Object}
@@ -64,15 +70,16 @@ const ItemContent = kind({
 		/**
 		 * Text displayed when passed in `label` prop.
 		 *
-		 * @type {String | Number}
+		 * @type {*}
 		 * @public
 		 */
 		label: PropTypes.any,
 
 		/**
-		 * Repositioning of label.
+		 * The position of the label relative to the primary content, `content`.
 		 *
-		 * @type {String}
+		 * @type {('above'|'after'|'before'|'below')}
+		 * @default 'below'
 		 * @public
 		 */
 		labelPosition: PropTypes.oneOf(['above', 'after', 'before', 'below']),
@@ -97,8 +104,7 @@ const ItemContent = kind({
 	},
 
 	computed: {
-		className: ({label, labelPosition, styler}) => styler.append({
-			hasLabel: Boolean(label),
+		className: ({labelPosition, styler}) => styler.append({
 			labelAbove: labelPosition === 'above',
 			labelAfter: labelPosition === 'after',
 			labelBefore: labelPosition === 'before',
@@ -110,12 +116,13 @@ const ItemContent = kind({
 		}
 	},
 
-	render: ({content, css, marqueeOn, label, orientation, ...rest}) => {
+	// eslint-disable-next-line enact/prop-types
+	render: ({centered, content, css, marqueeOn, label, orientation, styler, ...rest}) => {
 		delete rest.labelPosition;
 
 		if (!label) {
 			return (
-				<Cell {...rest} component={Marquee} className={css.content} marqueeOn={marqueeOn}>
+				<Cell {...rest} component={Marquee} className={styler.append(css.content)} marqueeOn={marqueeOn}>
 					{content}
 				</Cell>
 			);
@@ -123,7 +130,7 @@ const ItemContent = kind({
 			return (
 				<Cell {...rest}>
 					<Layout orientation={orientation}>
-						<Cell component={Marquee} className={css.content} marqueeOn={marqueeOn} shrink>
+						<Cell component={Marquee} className={css.content} marqueeOn={marqueeOn} shrink={orientation === 'vertical' || centered}>
 							{content}
 						</Cell>
 						<Cell component={Marquee} className={css.label} marqueeOn={marqueeOn} shrink>
@@ -160,7 +167,7 @@ const ItemBase = kind({
 		/**
 		 * Called with a reference to the root component.
 		 *
-		 * @type {Object|Function}
+		 * @type {Function|Object}
 		 * @public
 		 */
 		componentRef: EnactPropTypes.ref,
@@ -209,6 +216,7 @@ const ItemBase = kind({
 		 * The position of the label relative to the primary content, `children`.
 		 *
 		 * @type {('above'|'after'|'before'|'below')}
+		 * @default 'below'
 		 * @public
 		 */
 		labelPosition: PropTypes.oneOf(['above', 'after', 'before', 'below']),
@@ -232,9 +240,9 @@ const ItemBase = kind({
 		/**
 		 * The size of the item.
 		 *
-		 * @type {('large'|'small')}
+		 * @type {('small'|'large')}
 		 * @default 'large'
-		 * @private
+		 * @public
 		 */
 		size: PropTypes.oneOf(['small', 'large']),
 
@@ -274,8 +282,9 @@ const ItemBase = kind({
 	},
 
 	computed: {
-		className: ({selected, centered, size, styler}) => styler.append(
+		className: ({centered, label, selected, size, styler}) => styler.append(
 			{
+				hasLabel: label != null,
 				selected,
 				centered
 			},
@@ -285,6 +294,8 @@ const ItemBase = kind({
 	},
 
 	render: ({centered, children, componentRef, css, inline, label, labelPosition, marqueeOn, slotAfter, slotBefore, ...rest}) => {
+		delete rest.size;
+
 		return (
 			<UiItemBase
 				component={Row}
@@ -300,6 +311,7 @@ const ItemBase = kind({
 					</Cell>
 				) : null}
 				<ItemContent
+					centered={centered}
 					content={children}
 					css={css}
 					label={label}
@@ -331,11 +343,11 @@ const ItemBase = kind({
  * @public
  */
 const ItemDecorator = compose(
-	MarqueeController({marqueeOnFocus: true, invalidateProps: ['inline']}),
 	UiItemDecorator,
 	Slottable({slots: ['label', 'slotAfter', 'slotBefore']}),
-	Skinnable,
-	Spottable
+	Spottable,
+	MarqueeController({marqueeOnFocus: true, invalidateProps: ['inline']}),
+	Skinnable
 );
 
 /**
