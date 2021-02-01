@@ -23,7 +23,6 @@ import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDeco
 import Changeable from '@enact/ui/Changeable';
 import ForwardRef from '@enact/ui/ForwardRef';
 import IdProvider from '@enact/ui/internal/IdProvider';
-import Pure from '@enact/ui/internal/Pure';
 import Toggleable from '@enact/ui/Toggleable';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
@@ -38,8 +37,10 @@ import Icon from '../Icon';
 import Item from '../Item';
 import Skinnable from '../Skinnable';
 
-import DropdownList, {compareChildren, isSelectedValid} from './DropdownList';
+import DropdownList from './DropdownList';
 import componentCss from './Dropdown.module.less';
+
+const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
 
 /**
  * A stateless Dropdown Button component.
@@ -336,7 +337,7 @@ const DropdownBase = kind({
 		const ariaProps = extractAriaProps(rest);
 		const calcAriaProps = ariaLabel != null ? null : {role: 'region', 'aria-labelledby': ariaLabelledBy};
 
-		const popupProps = {'aria-live': null, children, direction, disabled, onSelect, open, selected, skinVariants: skin === 'silicon' ? {'night': false} : {}, width, role: null};
+		const popupProps = {'aria-live': null, children, direction, disabled, onSelect, open, selected, skin, skinVariants: skin === 'silicon' ? {'night': false} : {}, width, role: null};
 
 		// `ui/Group`/`ui/Repeater` will throw an error if empty so we disable the Dropdown and
 		// prevent Dropdown to open if there are no children.
@@ -358,7 +359,6 @@ const DropdownBase = kind({
 					popupComponent={DropdownList}
 					role="button"
 					skin={skin}
-					spotlightRestrict="self-only"
 					{...ariaProps}
 
 				>
@@ -382,11 +382,6 @@ const DropdownBase = kind({
  * @public
  */
 const DropdownDecorator = compose(
-	Pure({
-		propComparators: {
-			children: compareChildren
-		}
-	}),
 	SpotlightContainerDecorator({
 		enterTo: 'default-element',
 		preserveId: true
