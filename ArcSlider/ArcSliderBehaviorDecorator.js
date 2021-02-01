@@ -145,6 +145,31 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			};
 		}
 
+		componentDidUpdate(prevProps ) {
+			if(this.state.value && this.state.value > this.props.max && this.props.max !== prevProps.max) {
+				 const value =  this.props.max;
+				 this.setState(() => {
+						return ({value})
+				 }, () => {
+						forward('onChange', {
+							 type: 'onChange',
+							 value
+						}, this.props);
+				 });
+			}
+			if( this.state.value && this.state.value < this.props.min && this.props.min !== prevProps.min) {
+				 const value =  this.props.min;
+				 this.setState(() => {
+						return ({value})
+				 }, () => {
+						forward('onChange', {
+							 type: 'onChange',
+							 value
+						}, this.props);
+				 });
+			}
+	 }
+
 		handleDown = ({clientX, clientY}) => {
 			const params = {x: clientX, y: clientY};
 			forward('onDown', params, this.props);
@@ -180,7 +205,12 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 
 			const angle = positionToAngle(coordsInSvg, radius * 2 - strokeWidth);
 			// get the value based on the angle, min and max
-			let value = angleToValue(angle, min, max, startAngle, endAngle);
+			let value;
+			if(max <= min) {
+				value = angleToValue(angle, min, min, startAngle, endAngle);
+			} else {
+				value = angleToValue(angle, min, max, startAngle, endAngle);
+			}
 
 			// adjust value based on the step
 			if (step) {
@@ -239,7 +269,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 		render () {
 			if (__DEV__) {
 				const {endAngle, max, min, startAngle, step} = this.props;
-				const valueProps = {min, value: this.state.value || min, max, step};
+				const valueProps = {min, value: this.state.value, max, step};
 				const angleProps = {startAngle, endAngle};
 
 				validateValueRange(valueProps);
