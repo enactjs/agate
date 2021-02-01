@@ -300,7 +300,7 @@ const DropdownBase = kind({
 			{},
 			{},
 			{},
-			{childComponent: Item, itemProps: {size: 'small'}},
+			{childComponent: Item},
 			[<Icon slot="slotAfter" key="icon" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>]
 
 		];
