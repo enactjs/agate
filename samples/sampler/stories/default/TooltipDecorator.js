@@ -9,7 +9,7 @@ import React from 'react';
 import iconNames from './icons';
 
 Button.displayName = 'TooltipDecorator';
-const Config = mergeComponentMetadata('TooltipDecorator',  TooltipDecorator, Tooltip, TooltipBase);
+const Config = mergeComponentMetadata('TooltipDecorator', TooltipDecorator, Tooltip, TooltipBase);
 const TooltipButton = TooltipDecorator(
 	{tooltipDestinationProp: 'decoration'},
 	Button
@@ -49,8 +49,8 @@ storiesOf('Agate', module)
 					size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}
 					tooltipDelay={number('tooltipDelay', Config, 500)}
 					tooltipMarquee={boolean('tooltipMarquee', Config)}
-					tooltipRelative={boolean('tooltipRelative', Config)}
 					tooltipPosition={select('tooltipPosition', prop.tooltipPosition, Config)}
+					tooltipRelative={boolean('tooltipRelative', Config)}
 					tooltipText={text('tooltip', Config, 'Tooltip')}
 					tooltipWidth={number('tooltipWidth', Config)}
 				>
