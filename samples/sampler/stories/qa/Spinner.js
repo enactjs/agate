@@ -42,10 +42,10 @@ storiesOf('Spinner', module)
 					}}
 				>
 					<SkinnedSpinner
-						transparent={boolean('transparent', Spinner, false)}
-						centered={boolean('centered', Spinner, false)}
 						blockClickOn={select('blockClickOn', [null, 'container', 'screen'], Spinner)}
+						centered={boolean('centered', Spinner, false)}
 						scrim={boolean('scrim', Spinner, true)}
+						transparent={boolean('transparent', Spinner, false)}
 					>
 						{text('content', Spinner, prop.longText)}
 					</SkinnedSpinner>
