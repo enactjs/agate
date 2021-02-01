@@ -158,7 +158,7 @@ const DropdownListBase = kind({
 		className: ({children, direction, width, styler}) => styler.append(direction.substr(0, direction.indexOf(' ')), width, {dropdownListWithScroller: children.length > 4}),
 		groupProps: ({skin}) => (skin === 'silicon') ?
 			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'} :
-			{childComponent: Item, itemProps: {size: 'small', css}, selectedProp: 'selected'}
+			{childComponent: Item, itemProps: {css}, selectedProp: 'selected'}
 	},
 
 	render: ({children, groupProps, open, selected, skinVariants, onSelect, ...rest}) => {
