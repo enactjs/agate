@@ -194,6 +194,8 @@
 @agate-dropdown-button-bg-image: inherit;
 @agate-dropdown-button-font-size: inherit;
 @agate-dropdown-button-icon-font-size: inherit;
+@agate-dropdown-button-icon-margin-right: inherit;
+@agate-dropdown-button-icon-width: inherit;
 @agate-dropdown-button-list-border-radius: inherit;
 @agate-dropdown-button-open-border-radius: inherit;
 @agate-dropdown-button-padding: inherit;
@@ -358,7 +360,7 @@
 // Item
 // ---------------------------------------
 @agate-item-border-width:             inherit;
-@agate-item-content-min-width:        60%;
+@agate-item-content-width:            60%;
 @agate-item-font-size:                30px;
 @agate-item-font-weight:              @agate-base-font-weight;
 @agate-item-haslabel-padding:         21px 0;
@@ -367,6 +369,7 @@
 @agate-item-indent:                   36px;
 @agate-item-inline-content-max-width: 240px;
 @agate-item-itemcontent-line-height:  inherit;
+@agate-item-inline-max-width:         400px;
 @agate-item-label-font-size:          inherit;
 @agate-item-label-line-height:        inherit;
 @agate-item-label-max-width:          40%;
@@ -376,6 +379,14 @@
 @agate-item-side-outset:              @agate-component-spacing;
 @agate-item-sub-text-size:            inherit;
 @agate-item-vertical-padding:         3px;
+@agate-item-small-font-size:          inherit;
+@agate-item-small-height:             54px;
+@agate-item-small-itemcontent-line-height: inherit;
+@agate-item-small-line-height:        @agate-item-small-height - (@agate-item-vertical-padding * 2);
+@agate-item-small-label-font-size:    inherit;
+@agate-item-small-label-line-height:  inherit;
+@agate-item-small-haslabel-padding:   12px 0;
+@agate-item-slotafter-padding-left:   inherit;
 
 // Keypad
 // ---------------------------------------
@@ -475,7 +486,12 @@
 @agate-popup-min-width: 510px;
 @agate-popup-max-width: 70%;
 @agate-popup-border-width: 1px;
-@agate-popup-border-radius: 3px;
+@agate-popup-border-radius: inherit;
+@agate-popup-bottom-border-radius: @agate-popup-border-radius @agate-popup-border-radius @agate-popup-fullscreen-border-radius @agate-popup-fullscreen-border-radius;
+@agate-popup-fullscreen-border-radius: inherit;
+@agate-popup-left-border-radius: @agate-popup-fullscreen-border-radius @agate-popup-border-radius @agate-popup-border-radius @agate-popup-fullscreen-border-radius;
+@agate-popup-right-border-radius: @agate-popup-border-radius @agate-popup-fullscreen-border-radius @agate-popup-fullscreen-border-radius @agate-popup-border-radius;
+@agate-popup-top-border-radius: @agate-popup-fullscreen-border-radius @agate-popup-fullscreen-border-radius @agate-popup-border-radius @agate-popup-border-radius;
 @agate-popup-border: 0 solid transparent;
 @agate-popup-padding: (@agate-component-spacing * 2);
 @agate-popup-closebutton-title-padding: 0 0 0 (@agate-button-small-height);
@@ -494,8 +510,6 @@
 @agate-popup-closebutton-position-left: 0;
 @agate-popup-closebutton-position-right: auto;
 @agate-popup-body-font-weight: @agate-base-font-weight;
-@agate-popup-top-border-radius: @agate-popup-border-radius;
-@agate-popup-top-max-width: inherit;
 
 // PopupMenu
 // ---------------------------------------

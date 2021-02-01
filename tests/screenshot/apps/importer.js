@@ -11,7 +11,6 @@ import DateTimePicker from '../../../DateTimePicker';
 import Drawer from '../../../Drawer';
 import Dropdown from '../../../Dropdown';
 import FanSpeedControl from '../../../FanSpeedControl';
-import FullscreenPopup from '../../../FullscreenPopup';
 import Header from '../../../Header';
 import Heading from '../../../Heading';
 import Icon from '../../../Icon';
@@ -61,7 +60,6 @@ const AgateExports = {
 	Drawer,
 	Dropdown,
 	FanSpeedControl,
-	FullscreenPopup,
 	Header,
 	Heading,
 	Icon,
