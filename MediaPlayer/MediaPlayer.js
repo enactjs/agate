@@ -83,6 +83,14 @@ const MediaPlayerBase = kind({
 		currentTime: PropTypes.number,
 
 		/**
+		 * Removes interactive capability from this component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
+		/**
 		 * The current locale as a
 		 * {@link https://tools.ietf.org/html/rfc5646|BCP 47 language tag}.
 		 *
@@ -102,11 +110,23 @@ const MediaPlayerBase = kind({
 		/**
 		 * Media component to use.
 		 *
-		 * The default (`'video'`) renders an `HTMLVideoElement`. Custom media components must have
+		 * The default (`'audio'`) renders an `HTMLMediaElement`. Custom media components must have
 		 * a similar API structure, exposing the following APIs:
 		 *
+		 * Properties:
+		 * * `currentTime` {Number} - Playback index of the media in seconds
+		 * * `duration` {Number} - Media's entire duration in seconds
+		 * * `loop` {Boolean} - Indicates whether the media element should start over when it reaches the end
+		 * * `paused` {Boolean} - Playing vs paused state. `true` means the media is paused
+		 * * `proportionPlayed` {Number} - A value between `0` and `1` representing the
+		 *	proportion of the media that has already been played
+		 *
 		 * Methods:
+		 * * `play()` - play media
+		 * * `pause()` - pause media
 		 * * `load()` - load media
+		 *
+		 * The [`source`] property is passed to the media component as a child node.
 		 *
 		 * @type {String|Component}
 		 * @default 'audio'
