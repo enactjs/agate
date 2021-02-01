@@ -5,7 +5,7 @@
  * @exports	ContextualPopup
  * @exports	ContextualPopupDecorator
  */
-import classnames from 'classnames'
+import classnames from 'classnames';
 import ApiDecorator from '@enact/core/internal/ApiDecorator';
 import {on, off} from '@enact/core/dispatcher';
 import {handle, forProp, forKey, forward, stop} from '@enact/core/handle';
