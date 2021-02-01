@@ -5,7 +5,7 @@
  * @exports	ContextualPopup
  * @exports	ContextualPopupDecorator
  */
-
+import classnames from 'classnames'
 import ApiDecorator from '@enact/core/internal/ApiDecorator';
 import {on, off} from '@enact/core/dispatcher';
 import {handle, forProp, forKey, forward, stop} from '@enact/core/handle';
@@ -70,7 +70,7 @@ const ContextualPopupContainer = SpotlightContainerDecorator(
 );
 
 const Decorator = hoc(defaultConfig, (config, Wrapped) => {
-	const {noArrow, noSkin, openProp} = config;
+	const {css2, configClassName, noArrow, noSkin, openProp} = config;
 
 	return class extends React.Component {
 		static displayName = 'ContextualPopupDecorator';
@@ -685,7 +685,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 					>
 						<ContextualPopupContainer
 							{...ariaProps}
-							className={popupClassName}
+							className={classnames(popupClassName, configClassName)}
 							onCloseButtonClick={onClose}
 							onKeyDown={this.handleContainerKeyDown}
 							direction={this.state.direction}
@@ -698,6 +698,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 							skin={skin}
 							spotlightId={this.state.containerId}
 							spotlightRestrict={spotlightRestrict}
+							css={css2}
 						>
 							<PopupComponent {...popupPropsRef} />
 						</ContextualPopupContainer>

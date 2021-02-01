@@ -163,6 +163,8 @@ const DropdownListBase = kind({
 
 	render: ({children, groupProps, open, selected, skinVariants, onSelect, ...rest}) => {
 		delete rest.width;
+		delete rest.direction;
+		delete rest.skin;
 
 		return (
 			<ContainerDiv
