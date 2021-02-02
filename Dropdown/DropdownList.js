@@ -49,14 +49,6 @@ const DropdownListBase = kind({
 		onSelect: PropTypes.func,
 
 		/**
-		 * Displays the items.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		open: PropTypes.bool,
-
-		/**
 		 * Callback function that will receive the scroller's scrollTo() method
 		 *
 		 * @type {Function}
@@ -111,7 +103,7 @@ const DropdownListBase = kind({
 			{childComponent: Item, itemProps: {css}, selectedProp: 'selected'}
 	},
 
-	render: ({children, groupProps, open, selected, skinVariants, scrollTo, onSelect, ...rest}) => {
+	render: ({children, groupProps, selected, skinVariants, scrollTo, onSelect, ...rest}) => {
 		delete rest.width;
 		delete rest.direction;
 		delete rest.skin;
@@ -119,7 +111,6 @@ const DropdownListBase = kind({
 		return (
 			<ContainerDiv
 				{...rest}
-				spotlightDisabled={!open}
 				spotlightRestrict="self-only"
 			>
 				<Scroller
@@ -145,30 +136,6 @@ const DropdownListBase = kind({
 const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 	return class extends React.Component {
 		static displayName = 'DropdownListSpotlightDecorator';
-
-		static propTypes = {
-			/**
-			 * Called when an item receives focus.
-			 *
-			 * @type {Function}
-			 */
-			onFocus: PropTypes.func,
-
-			/**
-			 * Index of the selected item.
-			 *
-			 * @type {Number}
-			 */
-			selected: PropTypes.number,
-
-			/**
-			 * The current skin for this component.
-			 *
-			 * @type {String}
-			 * @public
-			 */
-			skin: PropTypes.string
-		};
 
 		constructor (props) {
 			super(props);
