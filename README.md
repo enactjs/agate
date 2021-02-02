@@ -13,11 +13,14 @@ A theme is a collection of components all styled the same way, with the same gen
 This theme composes a few dozen components, each of which is styled to represent several different "skins". However, the experimental part is that these "skins" are not simply color swapping, but include shapes, measurements, layouts, and arrangements, making them less like the Enact definition of a skin and more like "skin+". This approach is the middle-ground between a skin and a theme. All of the components here share a common set of behavioral and interaction features while looking completely different.
 
 ## Let's create your own Agate App
+
 The Enact CLI itself can install the agate template via NPM or git URI.
 ```
 enact template install @enact/template-agate
 ```
+
 Once installed, you can specify the `agate` template during new application creation:
+
 ```
 enact create -t agate MyApp
 ```
