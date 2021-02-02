@@ -278,7 +278,7 @@ const ItemBase = kind({
 
 	styles: {
 		css: componentCss,
-		publicClassNames: ['item', 'label', 'slotAfter', 'slotBefore']
+		publicClassNames: ['item', 'label', 'selected', 'slotAfter', 'slotBefore']
 	},
 
 	computed: {

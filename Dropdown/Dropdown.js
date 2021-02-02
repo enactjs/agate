@@ -103,7 +103,7 @@ const DropdownButtonBase = kind({
 });
 
 const DropdownButton = ContextualPopupDecorator(
-	{css2: componentCss, configClassName: componentCss.contextualPopup, noArrow: true},
+	{noArrow: true},
 	ForwardRef(
 		DropdownButtonBase
 	)
@@ -349,14 +349,14 @@ const DropdownBase = kind({
 					aria-label={ariaLabel}
 					className={buttonClassName}
 					css={css}
-					direction={direction}
 					disabled={hasChildren ? disabled : true}
 					dropdownOpened={openDropdown}
 					onClick={onOpen}
 					onClose={onClose}
 					open={openDropdown}
-					popupProps={popupProps}
+					popupClassName={componentCss.contextualPopup}
 					popupComponent={DropdownList}
+					popupProps={popupProps}
 					role="button"
 					skin={skin}
 					{...ariaProps}

@@ -6,6 +6,10 @@
 .dropdown {
 	display: inline-block;
 
+	.selected {
+		/* Available for customization */
+	}
+
 	.applySkins({
 		&.tinyWidth {
 			.button, .item {
@@ -50,10 +54,6 @@
 				&::before {
 					content: none; // Overwrite the selected styles for Item
 				}
-		}
-
-		.selected {
-			color: @agate-dropdown-selected-color;
 		}
 
 		&.dropdownButton {
@@ -132,7 +132,6 @@
 		border-radius: @agate-dropdown-list-border-radius;
 		background-color: @agate-dropdown-list-bg-color;
 		overflow: hidden;
-		padding: @agate-dropdown-list-padding;
 
 		.item {
 			border-color: @agate-item-border-color;
@@ -141,6 +140,10 @@
 			.focus({
 				border-color: @agate-item-focus-border-color;
 			});
+
+			&.selected {
+				color: @agate-item-color;
+			}
 		}
 
 		.dropDownListItem {
@@ -219,9 +222,9 @@
 
 .contextualPopup {
 	//.container {
-		//.applySkins({
-			padding: 0 ;
-			margin-top: 0 ;
-		//})
+	//.applySkins({
+	padding: 0;
+	margin-top: 0;
+	//})
 	//}
 }

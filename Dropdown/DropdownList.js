@@ -14,7 +14,6 @@ import Scroller from '../Scroller';
 import Skinnable from '../Skinnable';
 
 import css from './Dropdown.module.less';
-import itemCss from '../Item/Item.module.less';
 
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 
@@ -97,8 +96,7 @@ const DropdownListBase = kind({
 	},
 
 	defaultProps: {
-		direction: 'below center',
-		selected: 0
+		direction: 'below center'
 	},
 
 	styles: {
@@ -180,12 +178,10 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 			// scroll to selected item and focus it
 			const current = Spotlight.getCurrent();
 			if (!Spotlight.getPointerMode() && !Spotlight.isPaused() && current && document.querySelector(`.${css.dropdownList}`)) {
-				const node = this.props.skin === 'silicon' ? document.querySelector(`.${css.dropdownList} .${css.selected}`) : document.querySelector(`.${css.dropdownList} .${itemCss.selected}`);
-
 				this.scrollTo({
 					animate: false,
 					focus: true,
-					node: node
+					node: document.querySelector(`.${css.dropdownList} .${css.selected}`)
 				});
 			}
 		}
