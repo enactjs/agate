@@ -349,6 +349,7 @@ const DropdownBase = kind({
 					aria-label={ariaLabel}
 					className={buttonClassName}
 					css={css}
+					direction={direction}
 					disabled={hasChildren ? disabled : true}
 					dropdownOpened={openDropdown}
 					onClick={onOpen}

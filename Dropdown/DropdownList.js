@@ -143,8 +143,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 
 		componentDidUpdate () {
 			// scroll to selected item and focus it
-			const current = Spotlight.getCurrent();
-			if (!Spotlight.getPointerMode() && !Spotlight.isPaused() && current && document.querySelector(`.${css.dropdownList}`)) {
+			if (!Spotlight.isPaused() && Spotlight.getCurrent() && document.querySelector(`.${css.dropdownList}`)) {
 				this.scrollTo({
 					animate: false,
 					focus: true,
