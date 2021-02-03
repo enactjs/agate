@@ -3,8 +3,7 @@
 @import "../styles/mixins.less";
 @import "../styles/skin.less";
 
-// Interally theme our implementation using published classes from ToggleItem and ToggleIcon
-.toggleIcon {
+.switch {
 	.applySkins({
 		background-color: @agate-switch-bg-color;
 		border-radius: @agate-switch-border-radius;
@@ -27,15 +26,19 @@
 			font-size: @agate-switch-icon-font-size;
 			line-height: inherit;
 			margin: 0;
+			position: absolute;
+
+			.enact-locale-rtl({
+				left: auto;
+				right: @agate-switch-icon-position-left;
+			});
 		}
 
 		&.animated {
-			-webkit-transition: background-color 0.2s;
 			transition: background-color 0.2s;
 
 			.icon {
-				-webkit-transition: left 0.2s, color 0.2s;
-				transition: left 0.2s, color 0.2s;
+				transition: left 0.2s, right 0.2s, color 0.2s;
 			}
 		}
 
@@ -49,22 +52,19 @@
 				:global(.spottable):focus & {
 					color: @agate-switch-selected-color;
 				}
+
+				.enact-locale-rtl({
+					left: auto;
+					right: @agate-switch-selected-icon-position-left;
+				});
 			}
 			:global(.spottable):focus & {
 				background-color: @agate-switch-selected-focus-bg-color;
 			}
 		}
 
-		// .disabled({
-		// 	background-color: @agate-foreground;
-
-		// 	.icon {
-		// 		color: @agate-switch-color;
-		// 	}
-		// });
-
 		.focus({
-			.toggleIcon {
+			.switch {
 				background-color: @agate-switch-focus-bg-color;
 
 				.icon,

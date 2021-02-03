@@ -59,10 +59,9 @@ const defaultConfig = {
  * A higher-order component that adds breadcrumbs to a Panels component
  *
  * @class BreadcrumbDecorator
- * @type {Function}
+ * @memberof agate/Panels
  * @hoc
  * @private
- * @memberof agate/Panels
  */
 const BreadcrumbDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {max, panelArranger, className: cfgClassName} = config;

@@ -22,7 +22,7 @@ import React from 'react';
  * @returns	{undefined}
  */
 const toTime = (date) => {
-	return date && date.getTime();
+	return (date && typeof date.getTime === 'function') ? date.getTime() : null;
 };
 
 /**
@@ -30,9 +30,9 @@ const toTime = (date) => {
  * {@link agate/DatePicker.DatePicker} and {@link agate/TimePicker.TimePicker}.
  *
  * @class DateTimeDecorator
+ * @hoc
  * @memberof agate/internal/DateTimeDecorator
  * @mixes ui/Changeable.Changeable
- * @hoc
  * @private
  */
 const DateTimeDecorator = hoc((config, Wrapped) => {
@@ -81,6 +81,7 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 
 			this.state = {
 				initialValue: null,
+				dayReverseTransition: null,
 				value: null
 			};
 
@@ -141,18 +142,34 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 		 *
 		 * @returns {Number}			Updated internal value
 		 */
-		updateValue = (value) => {
+		updateValue = (value, reverseTransition) => {
 			const {day, month, year} = value;
 			const maxDays = value.cal.getMonLength(month, year);
 			value.day = (day <= maxDays) ? day : maxDays;
+
+			const prevValue = this.toIDate(this.state.value);
+			const prevMaxDays = prevValue.cal.getMonLength(prevValue.month, prevValue.year);
 
 			const date = DateFactory(value);
 			const newValue = date.getTimeExtended();
 			const changed =	this.props.value == null || this.props.value !== newValue;
 
-			this.setState({
-				value: newValue
-			});
+			if (prevMaxDays === maxDays) {
+				this.setState({
+					value: newValue,
+					dayReverseTransition: reverseTransition
+				});
+			} else if (prevValue.day === prevMaxDays || (prevValue.day !== prevMaxDays && prevValue.day > maxDays)) {
+				this.setState({
+					value: newValue,
+					dayReverseTransition: true
+				});
+			} else if (prevValue.day !== prevMaxDays && prevValue.day <= maxDays ) {
+				this.setState({
+					value: newValue,
+					dayReverseTransition: false
+				});
+			}
 
 			if (changed) {
 				this.emitChange(date);
@@ -168,7 +185,7 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 		handlePickerChange = (handler, ev) => {
 			const value = this.toIDate(this.state.value);
 			handler(ev, value, memoizedI18nConfig(this.props.locale));
-			this.updateValue(value);
+			this.updateValue(value, ev.reverseTransition);
 		};
 
 		handleCancel = () => {
@@ -197,7 +214,7 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 
 			const i18nConfig = memoizedI18nConfig(this.props.locale);
 			if (i18nConfig) {
-				props = customProps(i18nConfig, pickerValue, this.props);
+				props = customProps(i18nConfig, pickerValue, this.state.dayReverseTransition, this.props);
 				order = i18nConfig.order;
 			}
 
@@ -222,4 +239,6 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 });
 
 export default DateTimeDecorator;
-export {DateTimeDecorator};
+export {
+	DateTimeDecorator
+};

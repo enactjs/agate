@@ -1,12 +1,24 @@
 // Variables for any components
 //
 
+// ArcPicker
+// ---------------------------------------
+@agate-arcpicker-value-display-height: 120px;
+@agate-arcpicker-font-size: 72px;
+@agate-arcpicker-font-weight: 300;
+
+// ArcSlider
+// -------------------------------------------------
+@agate-arcslider-font-size: 72px;
+@agate-arcslider-font-weight: 300;
+
 // Button
 // ---------------------------------------
 @agate-button-border-radius: 6px;
 @agate-button-client-animation-offset: (@agate-button-animation-duration * 0.4);
 @agate-button-badge-animation-offset: (@agate-button-animation-duration * 0.8);
 @agate-button-badge-position: -3px 0 auto auto;
+@agate-button-badge-position-rtl: -3px auto auto 0;
 @agate-button-small-height: 48px;
 @agate-button-small-font-size: 24px;
 @agate-button-smallest-height: 30px;
@@ -46,6 +58,12 @@
 @agate-drawer-border: @agate-popup-border;
 @agate-drawer-padding: @agate-popup-padding;
 
+// FanSpeedControl
+// ---------------------------------------
+@agate-fanspeedcontrol-icon-font-size:   120px;
+@agate-fanspeedcontrol-icon-height:      60px;
+@agate-fanspeedcontrol-value-width:      90px;
+
 // Header
 // ---------------------------------------
 @agate-header-title-padding-right: 15px;
@@ -58,9 +76,6 @@
 // ---------------------------------------
 @agate-heading-padding: 3px 0;
 @agate-heading-medium-font-size: 30px;
-@agate-heading-spacing-large: 0;
-@agate-heading-spacing-medium: 0;
-@agate-heading-spacing-small: 0;
 @agate-heading-title-padding: @agate-heading-padding 25px;
 @agate-heading-title-decoration-height: 28px;
 @agate-heading-title-decoration-width: auto;
@@ -78,15 +93,15 @@
 // ---------------------------------------
 @agate-input-icon-display: flex;
 @agate-input-icon-align: center;
+@agate-input-hasiconbefore-padding-left: 0;
+@agate-input-hasiconafter-padding-right: 0;
 
 // ImageItem
 // ---------------------------------------
 @agate-imageitem-border-width: 6px;
-@agate-imageitem-caption-overlay-height: 90px;
-@agate-imageitem-caption-overlay-width: 339px;
 @agate-imageitem-caption-overlay-padding: 0 21px 6px 21px;
 @agate-imageitem-caption-overlay-font-size: 21px;
-@agate-imageitem-caption-overlay-line-height: 24px;
+@agate-imageitem-caption-overlay-line-height: 30px;
 @agate-imageitem-caption-overlay-text-align: left;
 
 // Indicator
@@ -100,8 +115,15 @@
 @agate-item-font-weight:      500;
 @agate-item-height:           90px;
 @agate-item-height-large:     120px;
-@agate-item-label-font-size:  30px;
 @agate-item-side-outset:      32px;
+@agate-item-itemcontent-line-height:  42px;
+@agate-item-label-font-size:          27px;
+@agate-item-label-line-height:        33px;
+@agate-item-small-font-size:          40px;
+@agate-item-small-label-font-size:    27px;
+@agate-item-small-label-line-height:  33px;
+@agate-item-slotafter-padding-left:   21px;
+@agate-item-small-itemcontent-line-height: 42px;
 
 // Keypad
 // ---------------------------------------
@@ -145,12 +167,12 @@
 // Panels
 // ---------------------------------------
 // @agate-panel-h-padding: (@agate-app-keepout - @agate-spotlight-outset);
+@agate-panels-panel-padding: 51px 60px 51px 39px;
 @agate-panel-h-padding: extract(@agate-panels-panel-padding, 2);
 @agate-panels-partial-width: 890px;
 @agate-panels-breadcrumb-width: 105px;
-@agate-panels-controls-top: (extract(@agate-panels-panel-padding, 1) + 41px);
+@agate-panels-controls-top: (extract(@agate-panels-panel-padding, 1) - 3px);
 @agate-panels-controls-padding-start: 18px;
-@agate-panels-panel-padding: 50px 60px 50px 40px;
 @agate-panels-panel-header-padding: 0;
 @agate-panels-panel-body-padding: 0;
 @agate-panels-tab-margin: 0;
@@ -167,8 +189,10 @@
 // ---------------------------------------
 @agate-popup-border-width: 3px;
 @agate-popup-border-radius: 20px;
+@agate-popup-fullscreen-border-radius: @agate-popup-border-radius;
 @agate-popup-border: 3px solid transparent;
 @agate-popup-padding: (@agate-component-spacing * 2.5) (@agate-component-spacing * 5);
+@agate-popup-title-padding: 0;
 @agate-popup-closebutton-title-padding: 0 (@agate-button-small-height) 0 0;
 @agate-popup-body-padding: (@agate-component-spacing * 2);
 @agate-popup-body-margin: -@agate-component-spacing;  // Extend to the edge

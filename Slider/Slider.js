@@ -3,10 +3,10 @@
  *
  * @example
  * <Slider
- *   defaultValue={-30}
- *   max={100}
- *   min={-100}
- *   step={10}
+ * 	defaultValue={-30}
+ * 	max={100}
+ * 	min={-100}
+ * 	step={10}
  * />
  *
  * @module agate/Slider
@@ -44,8 +44,9 @@ import componentCss from './Slider.module.less';
  * Range-selection input component.
  *
  * @class SliderBase
- * @extends ui/Slider.SliderBase
  * @memberof agate/Slider
+ * @extends ui/Slider.SliderBase
+ * @mixes agate/Slider.SliderDecorator
  * @ui
  * @public
  */
@@ -58,6 +59,7 @@ const SliderBase = kind({
 		 * input keys.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		activateOnFocus: PropTypes.bool,
@@ -66,6 +68,7 @@ const SliderBase = kind({
 		 * Sets the knob to selected state and allows it to move via 5-way controls.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		active: PropTypes.bool,
@@ -88,6 +91,7 @@ const SliderBase = kind({
 		 * Disables component and does not generate events.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		disabled: PropTypes.bool,
@@ -269,9 +273,8 @@ const SliderBase = kind({
  * @memberof agate/Slider
  * @mixes ui/Changeable.Changeable
  * @mixes spotlight/Spottable.Spottable
- * @mixes agate/Skinnable.Skinnable
  * @mixes ui/Slottable.Slottable
- * @mixes ui/Slider.SliderDecorator
+ * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const SliderDecorator = compose(
@@ -299,6 +302,7 @@ const SliderDecorator = compose(
  * @ui
  * @public
  */
+const Slider = SliderDecorator(SliderBase);
 
 /**
  * Overrides the `aria-valuetext` for the slider.
@@ -311,8 +315,6 @@ const SliderDecorator = compose(
  * @type {String|Number}
  * @public
  */
-
-const Slider = SliderDecorator(SliderBase);
 
 export default Slider;
 export {

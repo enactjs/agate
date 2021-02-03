@@ -1,0 +1,36 @@
+// ArcSlider.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
+
+.arcSlider {
+	position: relative;
+
+	.arc {
+		position: absolute;
+		overflow: visible;
+	}
+
+	.valueDisplay {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: fit-content;
+	}
+
+	.applySkins({
+		.valueDisplay {
+			font-size: @agate-arcslider-font-size;
+			font-weight: @agate-arcslider-font-weight;
+		}
+
+		.focus({
+			// Remove default Spottable visual effect
+			background-color: transparent;
+			background-image: none;
+			color: initial;
+		});
+	});
+}

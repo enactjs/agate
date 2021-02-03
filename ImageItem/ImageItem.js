@@ -1,6 +1,12 @@
 /**
  * Agate styled ImageItem.
  *
+ * @example
+ * <ImageItem
+ * 	src="https://dummyimage.com/64/e048e0/0011ff"
+ * 	style={{height: 64, width: 64}}
+ * />
+ *
  * @module agate/ImageItem
  * @exports ImageItem
  * @exports ImageItemBase
@@ -8,9 +14,9 @@
  */
 
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
 import {ImageItem as UiImageItem} from '@enact/ui/ImageItem';
 import {MarqueeDecorator, MarqueeController} from '@enact/ui/Marquee';
-import Spottable from '@enact/spotlight/Spottable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
@@ -157,6 +163,7 @@ const ImageItemDecorator = compose(
  * @memberof agate/ImageItem
  * @extends agate/ImageItem.ImageItemBase
  * @mixes agate/ImageItem.ImageItemDecorator
+ * @ui
  * @public
  */
 const ImageItem = ImageItemDecorator(ImageItemBase);

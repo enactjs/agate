@@ -194,7 +194,7 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	 *
 	 * @type {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
 	noScrollByWheel: PropTypes.bool,
 

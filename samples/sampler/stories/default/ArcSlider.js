@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {select, number} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select, number} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
@@ -21,6 +21,7 @@ storiesOf('Agate', module)
 		() => (
 			<ArcSlider
 				backgroundColor={select('backgroundColor', prop.colors, Config)}
+				disabled={boolean('disabled', Config)}
 				endAngle={number('endAngle', Config, {range: true, min: 0, max: 360})}
 				foregroundColor={select('foregroundColor', prop.colors, Config)}
 				max={number('max', Config)}

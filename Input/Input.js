@@ -7,24 +7,31 @@
  * @module agate/Input
  * @exports Input
  * @exports InputBase
+ * @exports InputDecorator
  */
 
 import kind from '@enact/core/kind';
+import {adaptEvent, forwardCustom, forwardWithPrevent, handle} from '@enact/core/handle';
+import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
+import {isRtlText} from '@enact/i18n/util';
 import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 import React from 'react';
 
+import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
+import Tooltip from '../TooltipDecorator/Tooltip';
 
 import InputDecoratorIcon from './InputDecoratorIcon';
 import InputSpotlightDecorator from './InputSpotlightDecorator';
-import {extractInputProps} from './util';
+import {calcAriaLabel, extractInputProps} from './util';
 
 import componentCss from './Input.module.less';
 
 /**
- * An input component
+ * An input component.
  *
  * @class InputBase
  * @memberof agate/Input
@@ -118,6 +125,16 @@ const InputBase = kind({
 		invalidMessage: PropTypes.string,
 
 		/**
+		 * Called before the input value is changed.
+		 *
+		 * The change can be prevented by calling `preventDefault` on the event.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onBeforeChange: PropTypes.func,
+
+		/**
 		 * Called when blurred.
 		 *
 		 * @type {Function}
@@ -180,9 +197,9 @@ const InputBase = kind({
 		rtl: PropTypes.bool,
 
 		/**
-		 * The size of the input field icon.
+		 * The size of the input field.
 		 *
-		 * @type {('small'|'large')}
+		 * @type {('large'|'small')}
 		 * @default 'large'
 		 * @public
 		 */
@@ -214,6 +231,7 @@ const InputBase = kind({
 		dismissOnEnter: false,
 		invalid: false,
 		placeholder: '',
+		size: 'large',
 		type: 'text'
 	},
 
@@ -224,29 +242,48 @@ const InputBase = kind({
 	},
 
 	handlers: {
-		onChange: (ev, {onChange}) => {
-			if (onChange) {
-				onChange({value: ev.target.value});
-			}
-		}
+		onChange: handle(
+			adaptEvent(
+				ev => ({
+					type: 'onBeforeChange',
+					value: ev.target.value
+				}),
+				forwardWithPrevent('onBeforeChange')
+			),
+			forwardCustom('onChange', ev => ({
+				stopPropagation: () => ev.stopPropagation(),
+				value: ev.target.value
+			}))
+		)
 	},
 
 	computed: {
-		// 'aria-label': ({placeholder, type, value}) => {
-		// 	const title = (value == null || value === '') ? placeholder : '';
-		// 	return calcAriaLabel(title, type, value);
-		// },
-		className: ({focused, invalid, styler}) => styler.append({focused, invalid}),
+		'aria-label': ({placeholder, type, value}) => {
+			const title = (value == null || value === '') ? placeholder : '';
+			return calcAriaLabel(title, type, value);
+		},
+		className: ({focused, iconBefore, iconAfter, invalid, size, styler}) => styler.append({focused, invalid, hasIconBefore: iconBefore, hasIconAfter: iconAfter}, size),
+		dir: ({value, placeholder}) => isRtlText(value || placeholder) ? 'rtl' : 'ltr',
+		invalidTooltip: ({css, invalid, invalidMessage = $L('Please enter a valid value.')}) => {
+			if (invalid && invalidMessage) {
+				return (
+					<Tooltip css={css} relative>
+						{invalidMessage}
+					</Tooltip>
+				);
+			}
+		},
 		// ensure we have a value so the internal <input> is always controlled
 		value: ({value}) => typeof value === 'number' ? value : (value || '')
 	},
 
-	render: ({css, disabled, iconAfter, iconBefore, onChange, placeholder, size, type, value, ...rest}) => {
+	render: ({css, dir, disabled, iconAfter, iconBefore, invalidTooltip, onChange, placeholder, size, type, value, ...rest}) => {
 		const inputProps = extractInputProps(rest);
 		delete rest.dismissOnEnter;
 		delete rest.focused;
 		delete rest.invalid;
 		delete rest.invalidMessage;
+		delete rest.onBeforeChange;
 		delete rest.rtl;
 
 		return (
@@ -258,9 +295,11 @@ const InputBase = kind({
 					{...inputProps}
 					aria-disabled={disabled}
 					className={css.input}
+					dir={dir}
 					disabled={disabled}
 					onChange={onChange}
 					placeholder={placeholder}
+					size={size}
 					tabIndex={-1}
 					type={type}
 					value={value}
@@ -268,10 +307,29 @@ const InputBase = kind({
 				<InputDecoratorIcon position="after" size={size}>
 					{iconAfter}
 				</InputDecoratorIcon>
+				{invalidTooltip}
 			</div>
 		);
 	}
 });
+
+/**
+ * Applies Agate specific behaviors to [InputBase]{@link agate/Input.InputBase} components.
+ *
+ * @class InputDecorator
+ * @hoc
+ * @memberof agate/Input
+ * @mixes ui/Changeable.Changeable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
+const InputDecorator = compose(
+	Pure,
+	I18nContextDecorator({rtlProp: 'rtl'}),
+	Changeable,
+	InputSpotlightDecorator,
+	Skinnable
+);
 
 /**
  * A Spottable, Agate styled input component with embedded icon support.
@@ -289,19 +347,93 @@ const InputBase = kind({
  * @ui
  * @public
  */
-const Input = Pure(
-	Changeable(
-		InputSpotlightDecorator(
-			Skinnable(
-				InputBase
-			)
-		)
-	)
-);
+const Input = InputDecorator(InputBase);
+
+/**
+ * Focuses the internal input when the component gains 5-way focus.
+ *
+ * By default, the internal input is not editable when the component is focused via 5-way and must
+ * be selected to become interactive. In pointer mode, the input will be editable when clicked.
+ *
+ * @name autoFocus
+ * @memberof agate/Input.prototype
+ * @type {Boolean}
+ * @default false
+ * @public
+ */
+
+/**
+ * Applies a disabled style and prevents interacting with the component.
+ *
+ * @name disabled
+ * @memberof agate/Input.prototype
+ * @type {Boolean}
+ * @default false
+ * @public
+ */
+
+/**
+ * Sets the initial value.
+ *
+ * @name defaultValue
+ * @memberof agate/Input.prototype
+ * @type {String}
+ * @public
+ */
+
+/**
+ * Blurs the input when the "enter" key is pressed.
+ *
+ * @name dismissOnEnter
+ * @memberof agate/Input.prototype
+ * @type {Boolean}
+ * @default false
+ * @public
+ */
+
+/**
+ * Called when the internal input is focused.
+ *
+ * @name onActivate
+ * @memberof agate/Input.prototype
+ * @type {Function}
+ * @param {Object} event
+ * @public
+ */
+
+/**
+ * Called when the internal input loses focus.
+ *
+ * @name onDeactivate
+ * @memberof agate/Input.prototype
+ * @type {Function}
+ * @param {Object} event
+ * @public
+ */
+
+/**
+ * Called when the component is removed when it had focus.
+ *
+ * @name onSpotlightDisappear
+ * @memberof agate/Input.prototype
+ * @type {Function}
+ * @param {Object} event
+ * @public
+ */
+
+/**
+ * Disables spotlight navigation into the component.
+ *
+ * @name spotlightDisabled
+ * @memberof agate/Input.prototype
+ * @type {Boolean}
+ * @default false
+ * @public
+ */
 
 export default Input;
 export {
-	extractInputProps,
 	Input,
-	InputBase
+	InputBase,
+	InputDecorator
 };

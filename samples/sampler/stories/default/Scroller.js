@@ -26,7 +26,6 @@ storiesOf('Agate', module)
 				focusableScrollbar={boolean('focusableScrollbar', ScrollerConfig)}
 				horizontalScrollbar={select('horizontalScrollbar', prop.scrollbarOption, ScrollerConfig)}
 				key={select('scrollMode', prop.scrollModeOption, ScrollerConfig)}
-				noScrollByWheel={boolean('noScrollByWheel', ScrollerConfig)}
 				onScrollStart={action('onScrollStart')}
 				onScrollStop={action('onScrollStop')}
 				scrollMode={select('scrollMode', prop.scrollModeOption, ScrollerConfig)}

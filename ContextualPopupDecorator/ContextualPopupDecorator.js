@@ -29,7 +29,6 @@ import css from './ContextualPopupDecorator.module.less';
 /**
  * Default config for {@link agate/ContextualPopupDecorator.ContextualPopupDecorator}
  *
- * @type {Object}
  * @hocconfig
  * @memberof agate/ContextualPopupDecorator.ContextualPopupDecorator
  */
@@ -88,16 +87,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			popupComponent: EnactPropTypes.component.isRequired,
 
 			/**
-			 * Limits the range of voice control to the popup.
-			 *
-			 * @memberof agate/ContextualPopupDecorator.ContextualPopupDecorator.prototype
-			 * @type {Boolean}
-			 * @default true
-			 * @public
-			 */
-			'data-webos-voice-exclusive': PropTypes.bool,
-
-			/**
 			 * Direction of popup with respect to the wrapped component.
 			 *
 			 * @type {('above'|'above center'|'above left'|'above right'|'below'|'below center'|'below left'|'below right'|'left middle'|'left top'|'left bottom'|'right middle'|'right top'|'right bottom')}
@@ -111,6 +100,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * popup.
 			 *
 			 * @type {Boolean}
+			 * @default false
 			 * @public
 			 */
 			noAutoDismiss: PropTypes.bool,
@@ -150,6 +140,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * Displays the contextual popup.
 			 *
 			 * @type {Boolean}
+			 * @default false
 			 * @public
 			 */
 			open: PropTypes.bool,
@@ -206,6 +197,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * Shows the close button.
 			 *
 			 * @type {Boolean}
+			 * @default false
 			 * @public
 			 */
 			showCloseButton: PropTypes.bool,
@@ -240,7 +232,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		};
 
 		static defaultProps = {
-			'data-webos-voice-exclusive': true,
 			direction: 'below center',
 			noAutoDismiss: false,
 			offset: 'small',
@@ -299,7 +290,9 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		}
 
 		componentDidUpdate (prevProps, prevState, snapshot) {
-			if (prevProps.direction !== this.props.direction || snapshot.containerWidth !== this.getContainerNodeWidth()) {
+			if (prevProps.direction !== this.props.direction ||
+				snapshot.containerWidth !== this.getContainerNodeWidth() ||
+				(this.props.open && prevProps.rtl !== this.props.rtl)) {
 				this.adjustedDirection = this.props.direction;
 				// NOTE: `setState` is called and will cause re-render
 				this.positionContextualPopup();
@@ -664,7 +657,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		};
 
 		render () {
-			const {'data-webos-voice-exclusive': voiceExclusive, showCloseButton, popupComponent: PopupComponent, popupClassName, noAutoDismiss, onClose, offset, open, popupProps, skin, spotlightRestrict, ...rest} = this.props;
+			const {showCloseButton, popupComponent: PopupComponent, popupClassName, noAutoDismiss, onClose, offset, open, popupProps, skin, spotlightRestrict, ...rest} = this.props;
 			const scrimType = spotlightRestrict === 'self-only' ? 'transparent' : 'none';
 			const popupPropsRef = Object.assign({}, popupProps);
 			const ariaProps = extractAriaProps(popupPropsRef);
@@ -699,7 +692,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 							arrowPosition={this.state.arrowPosition}
 							containerPosition={this.state.containerPosition}
 							containerRef={this.getContainerNode}
-							data-webos-voice-exclusive={voiceExclusive}
 							offset={noArrow ? offset : 'none'}
 							noArrow={noArrow}
 							showCloseButton={showCloseButton}

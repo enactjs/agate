@@ -2,7 +2,7 @@
  * Agate styled arc slider components and behaviors.
  *
  * @example
- * <ArcSlider backgroundColor="blue" endAngle={200} foregroundColor="red" radius={150} startAngle={0} step={2} />
+ * <ArcSlider />
  *
  * @module agate/ArcSlider
  * @exports ArcSlider
@@ -12,6 +12,7 @@
 
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
 import Pure from '@enact/ui/internal/Pure';
 import ri from '@enact/ui/resolution';
 import Touchable from '@enact/ui/Touchable';
@@ -22,11 +23,12 @@ import React from 'react';
 import Arc from '../Arc';
 import {angleToPosition} from '../Arc/utils';
 import Skinnable from '../Skinnable';
+import {ThemeContext} from '../ThemeDecorator';
 
 import ArcSliderBehaviorDecorator from './ArcSliderBehaviorDecorator';
 import {valueToAngle} from './utils';
 
-import css from './ArcSlider.modules.less';
+import css from './ArcSlider.module.less';
 
 /**
  * An arc slider component.
@@ -44,6 +46,15 @@ const ArcSliderBase = kind({
 
 	propTypes: /** @lends agate/ArcSlider.ArcSliderBase.prototype */ {
 		/**
+		 * Overrides the `aria-valuetext` for the ArcSlider. By default, `aria-valuetext` is set
+		 * to the current value.
+		 *
+		 * @type {String|Number}
+		 * @public
+		 */
+		'aria-valuetext': PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+		/**
 		 * The color of the background arc.
 		 *
 		 * @type {String}
@@ -59,6 +70,14 @@ const ArcSliderBase = kind({
 		 * @public
 		 */
 		componentRef: EnactPropTypes.ref,
+
+		/**
+		 * Whether or not the component is in a disabled state.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
 
 		/**
 		 * The end angle(in degrees) of the arc slider.
@@ -79,6 +98,14 @@ const ArcSliderBase = kind({
 		 * @public
 		 */
 		foregroundColor: PropTypes.string,
+
+		/**
+		 * Whether or not the component is focused.
+		 *
+		 * @type {Boolean}
+		 * @private
+		 */
+		isFocused: PropTypes.bool,
 
 		/**
 		 * The maximum value of the slider and should be greater than min.
@@ -108,12 +135,20 @@ const ArcSliderBase = kind({
 		radius: PropTypes.number,
 
 		/**
+		 * Nodes to be inserted in the center of the ArcSlider.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
+		slotCenter: PropTypes.node,
+
+		/**
 		 * The start angle(in degrees) of the arc slider.
 		 *
 		 * The value should be between 0 and 360.
 		 *
 		 * @type {Number}
-		 * @default 50
+		 * @default 30
 		 * @public
 		 */
 		startAngle: PropTypes.number,
@@ -159,23 +194,31 @@ const ArcSliderBase = kind({
 		strokeWidth: 6
 	},
 
+	contextType: ThemeContext,
+
 	styles: {
 		css,
 		className: 'arcSlider'
 	},
 
 	computed: {
-		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth)
+		size : ({radius, strokeWidth}) => (radius * 2 - strokeWidth),
+		style: ({radius, style}) => {
+			const size = ri.scaleToRem(radius * 2);
+			return {...style, height: size, width: size};
+		}
 	},
 
-	render: ({backgroundColor, componentRef, endAngle, foregroundColor, max, min, radius, size, startAngle, strokeWidth, value, ...rest}) => {
+	render: ({'aria-valuetext': ariaValuetext, backgroundColor, componentRef, disabled, endAngle, foregroundColor, isFocused, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}, context) => {
+		const {accent: accentColor} = context || {};
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
 		delete rest.step;
 
 		return (
-			<div {...rest}>
+			// eslint-disable-next-line jsx-a11y/role-has-required-aria-props
+			<div aria-disabled={disabled} aria-valuetext={ariaValuetext || value} role="slider" {...rest} disabled={disabled}>
 				<Arc
 					className={css.arc}
 					color={backgroundColor}
@@ -197,20 +240,24 @@ const ArcSliderBase = kind({
 					<circle
 						cx={knobPosition.x}
 						cy={knobPosition.y}
-						fill={foregroundColor}
+						fill={isFocused ? accentColor : foregroundColor}
 						r={ri.scaleToRem(15)}
 					/>
 				</Arc>
+				<div className={css.valueDisplay}>
+					{slotCenter}
+				</div>
 			</div>
 		);
 	}
 });
 
 /**
- * Applies Agate specific behaviors to [ArcSlider]{@link agate/ArcSlider.ArcSlider} components.
+ * Applies Agate specific behaviors to [ArcSliderBase]{@link agate/ArcSlider.ArcSliderBase} components.
  *
  * @hoc
  * @memberof agate/ArcSlider
+ * @mixes agate/ArcSlider.ArcSliderBehaviorDecorator
  * @mixes ui/Touchable.Touchable
  * @mixes agate/Skinnable.Skinnable
  * @public
@@ -219,6 +266,7 @@ const ArcSliderDecorator = compose(
 	Pure,
 	ArcSliderBehaviorDecorator,
 	Touchable,
+	Spottable,
 	Skinnable
 );
 
@@ -228,6 +276,7 @@ const ArcSliderDecorator = compose(
  * Usage:
  * ```
  * <ArcSlider backgroundColor="blue" endAngle={200} foregroundColor="red" radius={150} startAngle={0} step={2} />
+ * ```
  *
  * @class ArcSlider
  * @memberof agate/ArcSlider

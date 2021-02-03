@@ -8,6 +8,7 @@
  * @exports Arc
  * @exports ArcBase
  * @exports ArcDecorator
+ * @private
  */
 
 import EnactPropTypes from '@enact/core/internal/prop-types';
@@ -31,7 +32,7 @@ import {arcPath} from './utils';
  * @class ArcBase
  * @memberof agate/Arc
  * @ui
- * @public
+ * @private
  */
 const ArcBase = kind({
 	name: 'Arc',
@@ -78,7 +79,7 @@ const ArcBase = kind({
 		 * The radius of the arc.
 		 *
 		 * @type {Number}
-		 * @default 100
+		 * @default 150
 		 * @public
 		 */
 		radius: PropTypes.number,
@@ -151,12 +152,12 @@ const ArcBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [Arc]{@link agate/Arc.ArcBase} components.
+ * Applies Agate specific behaviors to [ArcBase]{@link agate/Arc.ArcBase} components.
  *
  * @hoc
  * @memberof agate/Arc
  * @mixes agate/Skinnable.Skinnable
- * @public
+ * @private
  */
 const ArcDecorator = compose(
 	Pure,
@@ -169,13 +170,14 @@ const ArcDecorator = compose(
  * Usage:
  * ```
  * <Arc color="blue" endAngle={200} startAngle={0}" radius={100} />
+ * ```
  *
  * @class Arc
  * @memberof agate/Arc
  * @extends agate/Arc.ArcBase
  * @mixes agate/Arc.ArcDecorator
  * @ui
- * @public
+ * @private
  */
 const Arc = ArcDecorator(ArcBase);
 

@@ -21,20 +21,22 @@ const useScrollbar = (props, instances) => {
 	}
 
 	function onScrollbarButtonClick ({isPreviousScrollButton, isVerticalScrollBar}) {
-		const
-			{wheelDirection} = scrollContainerHandle.current,
-			bounds = scrollContainerHandle.current.getScrollBounds(),
-			direction = isPreviousScrollButton ? -1 : 1,
-			pageDistance = direction * (isVerticalScrollBar ? bounds.clientHeight : bounds.clientWidth) * paginationPageMultiplier;
+		if (scrollContainerHandle.current) {
+			const
+				{wheelDirection} = scrollContainerHandle.current,
+				bounds = scrollContainerHandle.current.getScrollBounds(),
+				direction = isPreviousScrollButton ? -1 : 1,
+				pageDistance = direction * (isVerticalScrollBar ? bounds.clientHeight : bounds.clientWidth) * paginationPageMultiplier;
 
-		scrollContainerHandle.current.lastInputType = 'scrollbarButton';
+			scrollContainerHandle.current.lastInputType = 'scrollbarButton';
 
-		if (direction !== wheelDirection) {
-			scrollContainerHandle.current.isScrollAnimationTargetAccumulated = false;
-			scrollContainerHandle.current.wheelDirection = direction;
+			if (direction !== wheelDirection) {
+				scrollContainerHandle.current.isScrollAnimationTargetAccumulated = false;
+				scrollContainerHandle.current.wheelDirection = direction;
+			}
+
+			scrollContainerHandle.current.scrollToAccumulatedTarget(pageDistance, isVerticalScrollBar);
 		}
-
-		scrollContainerHandle.current.scrollToAccumulatedTarget(pageDistance, isVerticalScrollBar);
 	}
 
 	function focusOnScrollButton (scrollbarHandle, isPreviousScrollButton) {
@@ -70,10 +72,12 @@ const useScrollbar = (props, instances) => {
 	}
 
 	function alertScrollbarTrack () {
-		const bounds = scrollContainerHandle.current.getScrollBounds();
+		if (scrollContainerHandle.current) {
+			const bounds = scrollContainerHandle.current.getScrollBounds();
 
-		scrollContainerHandle.current.showScrollbarTrack(bounds);
-		scrollContainerHandle.current.startHidingScrollbarTrack();
+			scrollContainerHandle.current.showScrollbarTrack(bounds);
+			scrollContainerHandle.current.startHidingScrollbarTrack();
+		}
 	}
 
 	// Return
@@ -81,7 +85,6 @@ const useScrollbar = (props, instances) => {
 	return {
 		alertScrollbarTrack,
 		isScrollButtonFocused,
-		onScrollbarButtonClick,
 		scrollAndFocusScrollbarButton,
 		scrollbarProps
 	};

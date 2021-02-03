@@ -49,8 +49,8 @@ const defaultConfig = {
  * spotlight behavior for an {@link agate/Input.Input}
  *
  * @class InputSpotlightDecorator
- * @memberof agate/Input/InputSpotlightDecorator
  * @hoc
+ * @memberof agate/Input/InputSpotlightDecorator
  * @private
  */
 const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
@@ -257,7 +257,7 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		};
 
 		onKeyDown (ev) {
-			const {currentTarget, keyCode, preventDefault, target} = ev;
+			const {currentTarget, keyCode, target} = ev;
 
 			// cache the target if this is the first keyDown event to ensure the component had focus
 			// when the key interaction started
@@ -283,7 +283,7 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 				// prevent modifying the value via 5-way for numeric fields
 				if ((isUp || isDown) && target.type === 'number') {
-					preventDefault();
+					ev.preventDefault();
 				}
 
 				if (shouldSpotlightMove) {
@@ -314,19 +314,21 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 		onKeyUp = (ev) => {
 			const {dismissOnEnter} = this.props;
-			const {currentTarget, keyCode, preventDefault, target} = ev;
+			const {currentTarget, keyCode, target} = ev;
 
 			// verify that we have a matching pair of key down/up events to avoid adjusting focus
 			// when the component received focus mid-press
 			if (target === this.downTarget) {
 				this.downTarget = null;
 
-				if (this.state.focused === 'input' && dismissOnEnter && is('enter', keyCode)) {
-					this.focusDecorator(currentTarget);
-					// prevent Enter onKeyPress which triggers an onMouseDown via Spotlight
-					preventDefault();
-				} else if (this.state.focused !== 'input' && is('enter', keyCode)) {
-					this.focusInput(currentTarget);
+				if (!this.props.disabled) {
+					if (this.state.focused === 'input' && dismissOnEnter && is('enter', keyCode)) {
+						this.focusDecorator(currentTarget);
+						// prevent Enter onKeyPress which triggers an onMouseDown via Spotlight
+						ev.preventDefault();
+					} else if (this.state.focused !== 'input' && is('enter', keyCode)) {
+						this.focusInput(currentTarget);
+					}
 				}
 			}
 
@@ -363,4 +365,6 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 });
 
 export default InputSpotlightDecorator;
-export {InputSpotlightDecorator};
+export {
+	InputSpotlightDecorator
+};

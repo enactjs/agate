@@ -115,9 +115,27 @@
 		&.horizontal {
 			.item,
 			.itemDecrement,
-			.itemIncrement {
+			.itemIncrement,
+			.secondaryItemIncrement,
+			.secondaryItemDecrement {
 				width: @agate-picker-horizontal-item-width;
 			}
 		}
 	});
+
+	.viewManager {
+		overflow: hidden;
+		height: 100%;
+
+		.item {
+			position: relative;
+		}
+
+		> .item:nth-child(2) {
+			// the second element in the ViewManager should be offset by the container height
+			// so the transition can position two relative views next to each other safely.
+			top: -100%;
+		}
+	}
+
 }

@@ -1,8 +1,8 @@
-import classnames from 'classnames';
 import {forward, handle} from '@enact/core/handle';
 import Spotlight from '@enact/spotlight';
 import Pause from '@enact/spotlight/Pause';
 import ViewManager, {shape, SlideBottomArranger as VerticalArranger, SlideRightArranger as HorizontalArranger} from '@enact/ui/ViewManager';
+import classnames from 'classnames';
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -17,6 +17,7 @@ import css from './Panels.module.less';
  *
  * @class Viewport
  * @memberof agate/Panels
+ * @ui
  * @private
  */
 const ViewportBase = class extends React.Component {

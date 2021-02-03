@@ -9,6 +9,7 @@
  * @module agate/Keypad
  * @exports Keypad
  * @exports KeypadBase
+ * @exports KeypadDecorator
  */
 
 import {adaptEvent, forward, handle} from '@enact/core/handle';
@@ -109,6 +110,7 @@ const Key = kind({
 					{...rest}
 					css={css}
 					icon={children}
+					minWidth={false}
 					role={null}
 					size="large"
 				>
@@ -149,7 +151,7 @@ const KeypadBase = kind({
 		 * @param {Object} event
 		 * @public
 		 */
-		handleInputValue: PropTypes.func
+		onKeyButtonClick: PropTypes.func
 	},
 
 	styles: {
@@ -157,7 +159,7 @@ const KeypadBase = kind({
 		className: 'keypad'
 	},
 
-	render: ({disabled, handleInputValue, ...rest}) => {
+	render: ({disabled, onKeyButtonClick, ...rest}) => {
 		return (
 			<Layout {...rest} align="center end" className={css.keypad} inline wrap>
 				{KEY_LIST.map((keyText, rowIndex) => {
@@ -177,7 +179,7 @@ const KeypadBase = kind({
 							component={Key}
 							disabled={disabled}
 							key={`key${rowIndex}-${text}`}
-							onKeyButtonClick={() => handleInputValue(isIcon ? icon : text)}
+							onKeyButtonClick={() => onKeyButtonClick(isIcon ? icon : text)}
 							shrink
 							label={keyText.label}
 							text={isIcon ? null : text}
@@ -195,9 +197,9 @@ const KeypadBase = kind({
  * A Keypad component with an Input to display the outcome.
  *
  * @class KeypadBehaviorDecorator
- * @memberof agate/Keypad
  * @hoc
- * @public
+ * @memberof agate/Keypad
+ * @private
  */
 const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 	return class extends React.Component {
@@ -300,7 +302,9 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 			}
 
 			if (keypadInput !== newKeypadInput) {
-				this.props.onChange({value: newKeypadInput});
+				forward('onChange', {
+					value: newKeypadInput
+				}, this.props);
 			}
 
 			this.setState({
@@ -311,21 +315,40 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 
 		render () {
 			return (
-				<Wrapped {...this.props} handleInputValue={this.handleInputValue} />
+				<Wrapped {...this.props} onKeyButtonClick={this.handleInputValue} />
 			);
 		}
 	};
 });
 
+/**
+ * Applies Agate specific behaviors to [KeypadBase]{@link agate/Keypad.KeypadBase}
+ *
+ * @hoc
+ * @memberof agate/Keypad
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const KeypadDecorator = compose(
 	KeypadBehaviorDecorator,
 	Skinnable
 );
 
+/**
+ * Provides Agate-themed keypad components and behaviors. Used to display a sequence of numbers and buttons, like a keyboard.
+ *
+ * @class Keypad
+ * @memberof agate/Keypad
+ * @extends agate/Keypad.KeypadBase
+ * @mixes agate/Keypad.KeypadDecorator
+ * @public
+ * @ui
+ */
 const Keypad = KeypadDecorator(KeypadBase);
 
 export default Keypad;
 export {
 	Keypad,
-	KeypadBase
+	KeypadBase,
+	KeypadDecorator
 };

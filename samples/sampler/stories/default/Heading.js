@@ -13,6 +13,7 @@ const Config = mergeComponentMetadata('Heading', Heading, HeadingBase);
 
 const prop = {
 	colors: ['', '#E6444B', '#FDC902', '#986AAD', '#4E75E1', '#30CC83', '#44C8D5', '#47439B', '#2D32A6', '#4E75E1'],
+	marqueeOn: ['hover', 'render'],
 	sizes: ['', 'title', 'subtitle', 'large', 'medium', 'small', 'tiny'],
 	spacings: ['', 'auto', 'title', 'large', 'medium', 'small', 'none']
 };
@@ -23,6 +24,7 @@ storiesOf('Agate', module)
 		() => {
 			const knobProps = {
 				color: select('color', prop.colors, Config),
+				marqueeOn: select('marqueeOn', prop.marqueeOn, Config),
 				showLine: boolean('showLine', Config),
 				size: select('size', prop.sizes, Config),
 				spacing: select('spacing', prop.spacings, Config)
@@ -39,9 +41,6 @@ storiesOf('Agate', module)
 						This <a href="https://enactjs.com/docs/modules/ui/BodyText/">BodyText</a> component is rendered immediately after the Heading component and is<br />
 						meant to provide a visual indicator of the effects of changing the <code>spacing</code> prop.
 						<span className={css.spacingNote}>
-							<br />
-							<strong>Note</strong>: The <code>spacing</code> prop will have no effect when using the Gallium skin.
-							<br />
 							Choose a different skin from the Global Knobs to see!
 						</span>
 						{(knobProps.size === 'title' || typeof knobProps.color === 'undefined') ? null : (

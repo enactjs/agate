@@ -3,24 +3,58 @@
  *
  * @module agate/ThemeDecorator
  * @exports ThemeDecorator
+ * @exports ThemeContext
  */
 
-import {addAll} from '@enact/core/keymap';
-import classnames from 'classnames';
-import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
+import {addAll} from '@enact/core/keymap';
+import kind from '@enact/core/kind';
 import I18nDecorator from '@enact/i18n/I18nDecorator';
-import React from 'react';
-import PropTypes from 'prop-types';
+import SpotlightRootDecorator from '@enact/spotlight/SpotlightRootDecorator';
 import {ResolutionDecorator} from '@enact/ui/resolution';
 import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
-import SpotlightRootDecorator from '@enact/spotlight/SpotlightRootDecorator';
+import classnames from 'classnames';
 import convert from 'color-convert';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import Skinnable from '../Skinnable';
 
 import screenTypes from './screenTypes.json';
 import css from './ThemeDecorator.module.less';
+
+const ThemeContext = React.createContext(null);
+
+const defaultColors = {
+	carbon: {
+		accent: '#8fd43a',
+		highlight: '#6abe0b'
+	},
+	cobalt: {
+		accent: '#8c81ff',
+		highlight: '#ffffff'
+	},
+	copper: {
+		accent: '#a47d66',
+		highlight: '#ffffff'
+	},
+	electro: {
+		accent: '#0359f0',
+		highlight: '#ff8100'
+	},
+	gallium: {
+		accent: '#8b7efe',
+		highlight: '#e16253'
+	},
+	silicon: {
+		accent: '#f1304f',
+		highlight: '#9e00d8'
+	},
+	titanium: {
+		accent: '#a6a6a6',
+		highlight: '#2a48ca'
+	}
+};
 
 /**
  * Default config for {@link agate/ThemeDecorator.ThemeDecorator}.
@@ -34,6 +68,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 *
 	 * @type {Boolean}
 	 * @default true
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	customSkin: true,
@@ -43,6 +78,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 *
 	 * @type {Boolean}
 	 * @default false
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	disableFullscreen: false,
@@ -55,6 +91,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 * @type {Boolean}
 	 * @default true
 	 * @see {@link ui/FloatingLayer.FloatingLayerDecorator}
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	float: true,
@@ -67,6 +104,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 * @type {Boolean}
 	 * @default true
 	 * @see {@link i18n/I18nDecorator}
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	i18n: true,
@@ -76,6 +114,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 *
 	 * @type {Boolean}
 	 * @default false
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	noAutoFocus: false,
@@ -85,6 +124,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 *
 	 * @type {Boolean}
 	 * @default false
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	overlay: false,
@@ -94,6 +134,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 *
 	 * @type {Object}
 	 * @see {@link ui/resolution}
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	ri: {
@@ -106,6 +147,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 * @type {Boolean}
 	 * @default true
 	 * @see {@link agate/Skinnable}
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	skin: true,
@@ -118,6 +160,7 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 * @type {Boolean}
 	 * @default true
 	 * @see {@link spotlight/SpotlightRootDecorator}
+	 * @memberof agate/ThemeDecorator.ThemeDecorator.defaultConfig
 	 * @public
 	 */
 	spotlight: true
@@ -130,24 +173,22 @@ const CustomizableSkinStyle = kind({
 
 	propTypes: {
 		className: PropTypes.string.isRequired,
-
 		/**
 		 * A custom accent color, as a hex string.
 		 *
-		 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+		 * @memberof agate/ThemeDecorator.CustomizableSkinStyle.prototype
 		 * @type {String}
 		 * @default '#8b7efe'
-		 * @public
+		 * @private
 		 */
 		accent: PropTypes.string,
-
 		/**
 		 * A custom highlight color, as a hex string.
 		 *
-		 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+		 * @memberof agate/ThemeDecorator.CustomizableSkinStyle.prototype
 		 * @type {String}
 		 * @default '#c6c0fe'
-		 * @public
+		 * @private
 		 */
 		highlight: PropTypes.string
 	},
@@ -202,17 +243,18 @@ const CustomizableSkinStyle = kind({
  * Use the `skin` property to assign a skin. Ex: `<DecoratedApp skin="light" />`
  *
  * @class ThemeDecorator
+ * @hoc
  * @memberof agate/ThemeDecorator
  * @mixes ui/FloatingLayer.FloatingLayerDecorator
  * @mixes ui/resolution.ResolutionDecorator
  * @mixes spotlight/SpotlightRootDecorator.SpotlightRootDecorator
  * @mixes agate/Skinnable.Skinnable
- * @hoc
  * @public
  */
 const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	// TODO: Document props passable to hoc ()
 	const {customSkin, float, i18n, noAutoFocus, overlay, ri, skin, spotlight, disableFullscreen} = config;
+	const defaultSkin = 'gallium';
 
 	const bgClassName = classnames(
 		'enact-fit',
@@ -226,7 +268,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	if (ri) App = ResolutionDecorator(ri, App);
 	if (i18n) App = I18nDecorator({sync: true}, App);
 	if (spotlight) App = SpotlightRootDecorator({noAutoFocus}, App);
-	if (skin) App = Skinnable({defaultSkin: 'gallium'}, App);
+	if (skin) App = Skinnable({defaultSkin}, App);
 
 	// add webOS-specific key maps
 	addAll({
@@ -238,13 +280,36 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const Decorator = class extends React.Component {
 		static displayName = 'ThemeDecorator';
 
-		static propTypes = {
+		static propTypes = /** @lends agate/ThemeDecorator.ThemeDecorator.prototype */ {
+			/**
+			 * A custom accent color, as a hex string.
+			 *
+			 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+			 * @type {String}
+			 * @public
+			 */
 			accent: PropTypes.string,
-			highlight: PropTypes.string
+			/**
+			 * A custom highlight color, as a hex string.
+			 *
+			 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+			 * @type {String}
+			 * @public
+			 */
+			highlight: PropTypes.string,
+
+			/**
+			 * The name of the skin a component should use to render itself.
+			 *
+			 * @type {String}
+			 * @public
+			 */
+			skin: PropTypes.string
 		};
 
 		render () {
-			const {accent, className, highlight, ...rest} = this.props;
+			const currentSkin = this.props.skin || defaultSkin;
+			const {accent = defaultColors[currentSkin].accent, className, highlight = defaultColors[currentSkin].highlight, ...rest} = this.props;
 			const customizableSkinClassName = 'agate-customized-skin';
 
 			const allClassNames = classnames(
@@ -259,10 +324,10 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			);
 
 			return (
-				<React.Fragment>
+				<ThemeContext.Provider value={{accent, highlight}}>
 					{customSkin ? <CustomizableSkinStyle className={customizableSkinClassName} accent={accent} highlight={highlight} /> : null}
-					<App {...rest} className={allClassNames} />
-				</React.Fragment>
+					<App {...rest} accent={accent} highlight={highlight} className={allClassNames} />
+				</ThemeContext.Provider>
 			);
 		}
 	};
@@ -271,4 +336,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 });
 
 export default ThemeDecorator;
-export {ThemeDecorator};
+export {
+	ThemeDecorator,
+	ThemeContext
+};

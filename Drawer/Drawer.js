@@ -9,15 +9,13 @@
 
 import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
-import PropTypes from 'prop-types';
-import React from 'react';
 import Layout, {Cell} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 import Transition from '@enact/ui/Transition';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import Skinnable from '../Skinnable';
-// import Icon from '../Icon';
-
 import PopupState from '../Popup/PopupState';
 
 import componentCss from './Drawer.module.less';
@@ -107,16 +105,22 @@ const DrawerDecorator = compose(
  * Usage:
  * ```
  * <Drawer open>
- * 	Hello Enact!
+ *   Hello Enact!
  * </Drawer>
  * ```
  *
  * @class Drawer
  * @memberof agate/Drawer
+ * @extends agate/Drawer.DrawerBase
+ * @mixes agate/Drawer.DrawerDecorator
  * @ui
  * @public
  */
 const Drawer = DrawerDecorator(DrawerBase);
 
 export default Drawer;
-export {Drawer, DrawerBase, DrawerDecorator};
+export {
+	Drawer,
+	DrawerBase,
+	DrawerDecorator
+};

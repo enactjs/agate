@@ -1,23 +1,28 @@
 /**
  * Provides an Agate-themed tab group.
  *
+ * @example
+ * <TabGroup tabPosition={'before'} tabs={[{title: 'Home'},{title: 'Settings'}]} />
+ *
  * @module agate/TabGroup
  * @exports TabGroup
  * @exports TabGroupBase
+ * @exports TabGroupDecorator
  */
 
-import {cap} from '@enact/core/util';
-import {Cell, Layout} from '@enact/ui/Layout';
-import Group from '@enact/ui/Group';
 import kind from '@enact/core/kind';
-import ToggleButton from '../ToggleButton';
-import LabeledIcon from '../LabeledIcon';
-import PropTypes from 'prop-types';
-import React from 'react';
+import {cap} from '@enact/core/util';
+import Group from '@enact/ui/Group';
+import {Cell, Layout} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 import Spottable from '@enact/spotlight/Spottable';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
+import React from 'react';
 
+import LabeledIcon from '../LabeledIcon';
 import Skinnable from '../Skinnable';
+import ToggleButton from '../ToggleButton';
 
 import componentCss from './TabGroup.module.less';
 
@@ -92,18 +97,17 @@ const TabBase = kind({
 const Tab = Skinnable(Spottable(TabBase));
 
 /**
- * TBD.
+ * A Tab Group component.
  *
- * @class TabGroup
+ * @class TabGroupBase
  * @memberof agate/TabGroup
- * @mixes agate/Skinnable.Skinnable
  * @ui
  * @public
  */
 const TabGroupBase = kind({
 	name: 'TabGroup',
 
-	propTypes: /** @lends agate/TabGroup.TabGroup.prototype */ {
+	propTypes: /** @lends agate/TabGroup.TabGroupBase.prototype */ {
 		tabPosition: PropTypes.string.isRequired,
 		tabs: PropTypes.array.isRequired,
 		afterTabs: PropTypes.node,
@@ -179,11 +183,47 @@ const TabGroupBase = kind({
 
 TabGroupBase.defaultSlot = 'tabs';
 
-// Only documenting TabGroup since base is not useful for extension as-is
-const TabGroup = Skinnable(Slottable({slots: ['tabs', 'afterTabs', 'beforeTabs']}, TabGroupBase));
+/**
+ * Applies Agate specific behaviors to [TabGroup]{@link agate/TabGroup.TabGroupBase} components.
+ *
+ * @hoc
+ * @memberof agate/TabGroup
+ * @mixes agate/Skinnable.Skinnable
+ * @mixes ui/Slottable.Slottable
+ * @public
+ */
+const TabGroupDecorator = compose(
+	Skinnable,
+	Slottable({slots: ['tabs', 'afterTabs', 'beforeTabs']})
+);
+
+/**
+ * An Tab Group component, ready to use in Agate applications.
+ *
+ * Usage:
+ * ```
+ * <TabGroup
+ *   tabPosition={'before'}
+ *   tabs={[
+ *     {title: 'Home', icon: 'home'},
+ *     {title: 'Settings', icon: 'setting'},
+ *     {title: 'Theme', icon: 'display'}
+ *   ]}
+ * />
+ * ```
+ *
+ * @class TabGroup
+ * @memberof agate/TabGroup
+ * @extends agate/TabGroup.TabGroupBase
+ * @mixes agate/TabGroup.TabGroupDecorator
+ * @ui
+ * @public
+ */
+const TabGroup = TabGroupDecorator(TabGroupBase);
 
 export default TabGroup;
 export {
 	TabGroup,
-	TabGroupBase
+	TabGroupBase,
+	TabGroupDecorator
 };
