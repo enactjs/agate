@@ -1,4 +1,4 @@
-// import $L from '../internal/$L';
+import $L from '../internal/$L';
 
 /**
  * Determines the `aria-label` for an Input
@@ -11,16 +11,16 @@
  * @returns {String}           `aria-label` value
  * @private
  */
-// const calcAriaLabel = function (prefix, type, value = '') {
-// 	const hint = $L('Input field');
-//
-// 	if (type === 'password' && value) {
-// 		const character = value.length > 1 ? $L('characters') : $L('character');
-// 		value = `${value.length} ${character}`;
-// 	}
-//
-// 	return `${prefix} ${value} ${hint}`;
-// };
+const calcAriaLabel = function (prefix, type, value = '') {
+	const hint = $L('Input field');
+
+	if (type === 'password' && value) {
+		const character = value.length > 1 ? $L('characters') : $L('character');
+		value = `${value.length} ${character}`;
+	}
+
+	return `${prefix} ${value} ${hint}`;
+};
 
 /**
  * Removes `<input>` related props from `props` and returns them in a new object.
@@ -54,6 +54,6 @@ const extractInputProps = function (props) {
 };
 
 export {
-	// calcAriaLabel,
+	calcAriaLabel,
 	extractInputProps
 };
