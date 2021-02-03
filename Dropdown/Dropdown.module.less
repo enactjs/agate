@@ -61,6 +61,7 @@
 				margin: 0;
 				height: @agate-dropdown-button-height;
 				font-size: @agate-dropdown-button-font-size;
+				max-width: @agate-dropdown-button-max-width;
 				padding: @agate-dropdown-button-padding;
 
 				.bg {
@@ -94,6 +95,12 @@
 						border-bottom-color: @agate-dropdown-button-open-border-color;
 						transition: none;
 					}
+
+					.focus({
+						.bg {
+							border-bottom-color: @agate-dropdown-button-open-border-color;
+						}
+					});
 				}
 
 				.icon {
@@ -118,6 +125,12 @@
 							border-bottom-color: @agate-dropdown-up-button-open-border-bottom-color;
 							border-top-color: @agate-dropdown-button-open-border-color;
 						}
+
+						.focus({
+							.bg {
+								border-bottom-color: @agate-dropdown-up-button-open-border-bottom-color;
+							}
+						})
 					}
 				}
 			}
@@ -220,11 +233,16 @@
 	})
 }
 
-.contextualPopup {
-	//.container {
-	//.applySkins({
-	padding: 0;
-	margin-top: 0;
-	//})
-	//}
+.contextualPopupContainer {
+	// FIXME: increase specificity or refactor ContextualPopup
+	&.contextualPopupContainer {
+		&.contextualPopupContainer {
+			&.contextualPopupContainer {
+				&.contextualPopupContainer {
+					padding: 0;
+					margin-top: 0;
+				}
+			}
+		}
+	}
 }
