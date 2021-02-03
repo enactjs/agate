@@ -95,6 +95,15 @@ const LabeledIconButtonBase = kind({
 		 */
 		iconOnly: PropTypes.bool,
 
+		/**
+		 * The position of the label relative to icon button.
+		 *
+		 * @type {('above'|'after'|'before'|'below')}
+		 * @default 'below'
+		 * @public
+		 */
+		labelPosition: PropTypes.oneOf(['above', 'after', 'before', 'below', 'left', 'right']),
+
 		// forwarded from Spottable
 		pressed: PropTypes.bool,
 
@@ -106,6 +115,9 @@ const LabeledIconButtonBase = kind({
 		 * [css]{@link agate/LabeledIconButton.LabeledIconButtonBase.css} prop.
 		 */
 		selected: PropTypes.bool,
+
+		// forwarded from Button
+		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
 		 * The amount of sprite "cells" in the src image.
@@ -121,6 +133,10 @@ const LabeledIconButtonBase = kind({
 		css: componentCss,
 		className: 'labeledIconButton',
 		publicClassNames: true
+	},
+
+	computed: {
+		className: ({labelPosition, size, styler}) => styler.append((labelPosition === 'above' || labelPosition === 'below') ? '' : size)
 	},
 
 	render: ({

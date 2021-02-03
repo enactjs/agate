@@ -15,8 +15,31 @@
 		/* Public Class Names */
 	}
 
+	.label {
+		text-overflow: ellipsis;
+		overflow: hidden;
+		width: 100%;
+		white-space: nowrap;
+	}
+
 	.applySkins({
-		max-width: min-content;
+		max-width: 291px;
+
+		&.smallest {
+			max-width: calc(291px + @agate-button-smallest-height);
+		}
+
+		&.small {
+			max-width: calc(291px + @agate-button-small-height);
+		}
+
+		&.large {
+			max-width: calc(291px + @agate-button-height);
+		}
+
+		&.huge {
+			max-width: calc(291px + @agate-button-huge-height);
+		}
 
 		.label {
 			margin-top: @agate-labelediconbutton-label-margin;
