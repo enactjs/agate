@@ -26,6 +26,9 @@ class InputPage extends Page {
 	get disabledInput () {
 		return $('#input5');
 	}
+	get smallInput () {
+		return $('#input6');
+	}
 	get inputElement1 () {
 		return $('#input1 input');
 	}
