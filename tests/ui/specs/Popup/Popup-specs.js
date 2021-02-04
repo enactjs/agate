@@ -806,7 +806,7 @@ describe('Popup', function () {
 				Page.showPointerByKeycode();
 				// Position the pointer inside popup to the right of the Cancel button (step 4)
 				$('#buttonCancel').moveTo({xOffset: 200, yOffset: 200});
-				// 5-way to the OK button (step 5)
+				// 5-way to the Cancel button (step 5)
 				Page.spotlightLeft();
 
 				// Spotlight is on Cancel button (verify step 5)
