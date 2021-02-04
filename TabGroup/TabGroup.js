@@ -160,7 +160,7 @@ const Tab = Skinnable(Spottable(TabBase));
  * @class TabGroupBase
  * @memberof agate/TabGroup
  * @ui
- * @public
+ * @private
  */
 const TabGroupBase = kind({
 	name: 'TabGroup',
