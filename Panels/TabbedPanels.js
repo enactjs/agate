@@ -159,6 +159,7 @@ const TabbedPanelsBase = kind({
 		tabs: PropTypes.array
 	},
 	defaultProps: {
+		closeButtonAriaLabel: 'Exit app',
 		index: 0,
 		noCloseButton: false,
 		tabPosition: 'before'

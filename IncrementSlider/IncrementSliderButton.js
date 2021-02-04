@@ -68,6 +68,12 @@ const IncrementSliderButtonBase = kind({
 		size: PropTypes.oneOf(['small', 'large'])
 	},
 
+	defaultProps: {
+		orientation: 'horizontal',
+		role: 'list',
+		size: 'large'
+	},
+
 	styles: {
 		css: componentCss,
 		className: 'incrementSliderButton'

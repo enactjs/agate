@@ -87,7 +87,16 @@ const DrawerBase = kind({
 		 * @default false
 		 * @public
 		 */
-		open: PropTypes.bool
+		open: PropTypes.bool,
+
+		/**
+		 * Orientation of the drawer.
+		 *
+		 * @type {('horizontal'|'vertical')}
+		 * @default 'vertical'
+		 * @private
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical'])
 	},
 
 	defaultProps: {
