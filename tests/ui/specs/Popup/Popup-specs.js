@@ -741,7 +741,7 @@ describe('Popup', function () {
 				expect(popup.buttonOK.isFocused()).to.be.true();
 			});
 
-			it('should spot the cancel button on 5-way down, right then down in popup container', function () {
+			it('should spot the popup button on 5-way down, right then down in popup container', function () {
 				Page.spotlightDown();
 				Page.spotlightDown();
 				Page.spotlightSelect();
@@ -873,7 +873,7 @@ describe('Popup', function () {
 				expect(popup.buttonOK.isFocused()).to.be.true();
 			});
 
-			it('should spot the cancel button on 5-way right then down in popup container', function () {
+			it('should spot the popup button on 5-way right then down in popup container', function () {
 				Page.spotlightRight();
 				Page.spotlightDown();
 				Page.spotlightDown();
@@ -1028,7 +1028,7 @@ describe('Popup', function () {
 				expect(popup.buttonOK.isFocused()).to.be.true();
 			});
 
-			it('should spot the cancel button on 5-way right then down in popup container', function () {
+			it('should spot the popup button on 5-way right then down in popup container', function () {
 				Page.spotlightRight();
 				Page.spotlightRight();
 				Page.spotlightDown();
