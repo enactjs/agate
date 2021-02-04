@@ -35,12 +35,11 @@ const forwardHide = forward('onHide');
 const forwardShow = forward('onShow');
 
 /**
- * A stateful component that renders a popup in a
+ * A hoc component that renders a popup in a
  * [FloatingLayer]{@link ui/FloatingLayer.FloatingLayer}.
  *
- * @class Popup
+ * @hoc PopupState
  * @memberof agate/Popup
- * @extends agate/Popup.PopupBase
  * @ui
  * @public
  */
