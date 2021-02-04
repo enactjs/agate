@@ -32,7 +32,7 @@ import componentCss from './TabGroup.module.less';
  * @class TabBase
  * @memberof agate/TabGroup
  * @ui
- * @public
+ * @private
  */
 const TabBase = kind({
 	name: 'Tab',
@@ -160,7 +160,7 @@ const Tab = Skinnable(Spottable(TabBase));
  * @class TabGroupBase
  * @memberof agate/TabGroup
  * @ui
- * @private
+ * @public
  */
 const TabGroupBase = kind({
 	name: 'TabGroup',
