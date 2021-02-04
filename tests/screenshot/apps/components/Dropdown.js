@@ -7,7 +7,7 @@ const DropdownTests = [
 	<Dropdown disabled title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
 
 	// Different Widths
-	<Dropdown title="Select your option" width="tiny">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
+	<Dropdown title="Select your option" width="smallest">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
 	<Dropdown title="Select your option" width="small">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
 	<Dropdown title="Select your option" width="large">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
 	<Dropdown title="Select your option" width="x-large">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
@@ -21,7 +21,7 @@ const DropdownTests = [
 	<Dropdown defaultSelected={1} open>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
 	<Dropdown disabled open title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
 	// long options text
-	<Dropdown open title="Select your option" width="tiny">{['Option 1234567890123457', 'Option 2345678902345678', 'Option 345678903456789034567890']}</Dropdown>,
+	<Dropdown open title="Select your option" width="smallest">{['Option 1234567890123457', 'Option 2345678902345678', 'Option 345678903456789034567890']}</Dropdown>,
 
 	// Open with different widths
 	<Dropdown open title="Select your option" width="small">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,

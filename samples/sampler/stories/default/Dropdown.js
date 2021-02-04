@@ -25,7 +25,7 @@ storiesOf('Agate', module)
 						onOpen={action('onOpen')}
 						onSelect={action('onSelect')}
 						title={text('title', Config, 'Please select')}
-						width={select('width', ['tiny', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+						width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
 					>
 						{items}
 					</Dropdown>

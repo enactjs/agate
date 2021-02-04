@@ -254,11 +254,11 @@ const DropdownBase = kind({
 		/**
 		 * Width of the Dropdown.
 		 *
-		 * @type {('huge'|'large'|'x-large'|'medium'|'small'|'tiny')}
+		 * @type {('smallest'|'small'|'medium'|'large'|'x-large'|'huge')}
 		 * @default 'medium'
 		 * @public
 		 */
-		width: PropTypes.oneOf(['tiny', 'small', 'medium', 'large', 'x-large', 'huge'])
+		width: PropTypes.oneOf(['smallest', 'small', 'medium', 'large', 'x-large', 'huge'])
 	},
 
 	defaultProps: {

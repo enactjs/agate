@@ -83,7 +83,7 @@ describe('Dropdown', () => {
 		);
 
 		const expected = true;
-		const actual = dropDown.find('Item.dropdown').prop('disabled');
+		const actual = dropDown.find('DropdownButton').prop('disabled');
 
 		expect(actual).toBe(expected);
 	});
@@ -166,5 +166,49 @@ describe('Dropdown', () => {
 		const actual = dropDown.find('DropdownButton').prop('popupProps').children[0];
 
 		expect(actual).toMatchObject(expected);
+	});
+
+	test('should apply smallest width when width prop equals "smallest"', () => {
+		const dropDown = mount(
+			<DropdownBase width="smallest">
+				{children}
+			</DropdownBase>
+		);
+		const expected = 'smallestWidth';
+		const actual = dropDown.find('div').at(0).prop('className');
+		expect(actual).toContain(expected);
+	});
+
+	test('should apply small width when width prop equals "small"', () => {
+		const dropDown = mount(
+			<DropdownBase width="small">
+				{children}
+			</DropdownBase>
+		);
+		const expected = 'smallWidth';
+		const actual = dropDown.find('div').at(0).prop('className');
+		expect(actual).toContain(expected);
+	});
+
+	test('should apply large width when width prop equals "large"', () => {
+		const dropDown = mount(
+			<DropdownBase width="large">
+				{children}
+			</DropdownBase>
+		);
+		const expected = 'largeWidth';
+		const actual = dropDown.find('div').at(0).prop('className');
+		expect(actual).toContain(expected);
+	});
+
+	test('should huge smallest width when width prop equals "huge"', () => {
+		const dropDown = mount(
+			<DropdownBase width="huge">
+				{children}
+			</DropdownBase>
+		);
+		const expected = 'hugeWidth';
+		const actual = dropDown.find('div').at(0).prop('className');
+		expect(actual).toContain(expected);
 	});
 });
