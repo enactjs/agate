@@ -8,8 +8,8 @@
 	display: flex;
 	position: relative;
 
-	.itemContent {
-		&.hasLabel {
+	&.hasLabel {
+		.itemContent {
 			&.labelAfter,
 			&.labelBelow {
 				.content { order: 1; }
@@ -24,11 +24,7 @@
 		}
 	}
 
-	.slotAfter {
-		display: flex;
-		justify-content: center;
-	}
-
+	.slotAfter,
 	.slotBefore {
 		display: flex;
 		justify-content: center;
@@ -44,16 +40,9 @@
 		color: @agate-item-color;
 		background-color: @agate-item-bg-color;
 
-		.itemContent {
-			line-height: @agate-item-itemcontent-line-height;
-
-			.label   {
-				color: @agate-item-label-color;
-				font-size: @agate-item-label-font-size;
-				line-height: @agate-item-label-line-height;
-			}
-
-			&.hasLabel {
+		&.hasLabel {
+			.itemContent {
+				line-height: @agate-item-itemcontent-line-height;
 				padding: @agate-item-haslabel-padding;
 
 				&.labelBefore .label {
@@ -63,21 +52,28 @@
 				&.labelAfter .label {
 					.padding-start-end(@agate-item-label-padding, 0);
 				}
+			}
+		}
 
-				&.labelAfter,
-				&.labelBefore {
-					.content {
-						box-sizing: border-box;
-						// when showing content and label inline, favor content
-						min-width: @agate-item-content-min-width;
-					}
+		&:not(.centered) {
+			.labelAfter,
+			.labelBefore {
+				.content {
+					box-sizing: border-box;
+					min-width: @agate-item-content-width;
+				}
 
-					.label {
-						box-sizing: border-box;
-						max-width: @agate-item-label-max-width;
-					}
+				.label {
+					box-sizing: border-box;
+					max-width: @agate-item-label-max-width;
 				}
 			}
+		}
+
+		.label {
+			color: @agate-item-label-color;
+			font-size: @agate-item-label-font-size;
+			line-height: @agate-item-label-line-height;
 		}
 
 		.slotAfter {
@@ -91,6 +87,7 @@
 		&.inline {
 			// overriding ui/Item's inline-block
 			display: inline-flex;
+			max-width: @agate-item-inline-max-width;
 
 			.itemContent {
 				max-width: @agate-item-inline-content-max-width;
@@ -98,7 +95,46 @@
 
 			.itemContent,
 			.content {
-				width: unset;
+				flex-shrink: 1;
+				overflow: auto;
+			}
+
+			&.hasLabel {
+				.slotAfter {
+					.padding-start-end(@agate-item-slotafter-padding-left, 0);
+				}
+			}
+		}
+
+		&.centered {
+			.itemContent {
+				max-width: fit-content;
+			}
+
+			&.inline {
+				max-width: @agate-item-inline-max-width;
+			}
+		}
+
+		&.large { /* Needed to prevent global class being added in the DOM */ }
+
+		// TODO: needs to be modified when new requirements for small item is available
+		&.small {
+			font-size: @agate-item-small-font-size;
+			line-height: @agate-item-small-line-height;
+
+			&.hasLabel {
+				.itemContent {
+					padding: @agate-item-small-haslabel-padding;
+				}
+			}
+
+			.itemContent {
+				line-height: @agate-item-small-itemcontent-line-height;
+
+				.label {
+					font-size: @agate-item-small-label-font-size;
+				}
 			}
 		}
 
