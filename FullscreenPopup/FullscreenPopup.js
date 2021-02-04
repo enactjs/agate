@@ -5,8 +5,10 @@
  * @exports FullscreenPopup
  * @exports FullscreenPopupBase
  * @exports FullscreenPopupDecorator
+ * @deprecated Will be removed in 2.0.0. Use {@link agate/Popup} with position="fullscreen" instead.
  */
 
+import deprecate from '@enact/core/internal/deprecate';
 import kind from '@enact/core/kind';
 import Transition from '@enact/ui/Transition';
 import PropTypes from 'prop-types';
@@ -119,7 +121,7 @@ const FullscreenPopupBase = kind({
 		className: ({styler}) => styler.append('enact-fit')
 	},
 
-	render: ({children, className, css, direction, duration, noAnimation, onHide, open, type, ...rest}) => {
+	render: deprecate(({children, className, css, direction, duration, noAnimation, onHide, open, type, ...rest}) => {
 
 		return (
 			<Transition
@@ -139,7 +141,11 @@ const FullscreenPopupBase = kind({
 				</div>
 			</Transition>
 		);
-	}
+	}, {
+		name: 'agate/FullscreenPopup',
+		replacedBy: 'agate/Popup',
+		until: '2.0.0'
+	})
 });
 
 /**
