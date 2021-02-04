@@ -12,8 +12,11 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/ArcPicker` and `agate/ArcSlider` prop `disabled` to be inactive
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
+- `agate/ContextualPopup` prop `css` to support customizations
+- `agate/ContextualPopupDecorator` prop `css` to support customizations
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
 - `agate/Dropdown` prop `width` to support multiple widths
+- `agate/Dropdown/DropdownList` component
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
 - `agate/Input` prop `invalid` to display a tooltip with a message when `invalid` prop is true 
 - `agate/Input` prop `invalidMessage` to customize the tooltip message when `invalid` prop is true
@@ -26,7 +29,8 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Changed
 
 - `agate/Heading` to support marquee
-- `agate/Dropdown` to user ContextualPopup as wrapper for the DropdownList
+- `agate/Item` to have a `selected` publicClassname
+- `agate/Dropdown` to use ContextualPopup as wrapper for the DropdownList
 
 ### Fixed
 

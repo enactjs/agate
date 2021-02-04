@@ -374,7 +374,7 @@ const DropdownBase = kind({
  * [DropdownBase]{@link agate/Dropdown.DropdownBase}.
  *
  * @hoc
- * @memberof sandstone/Dropdown
+ * @memberof agate/Dropdown
  * @mixes ui/Changeable.Changeable
  * @mixes ui/Toggleable.Toggleable
  * @mixes spotlight/SpotlightContainerDecorator.SpotlightContainerDecorator
