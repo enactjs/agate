@@ -25,7 +25,6 @@ storiesOf('Agate', module)
 				selected={boolean('selected', Config)}
 				size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}
 				spriteCount={number('spriteCount', Config, {min: 1}, 1)}
-				tooltipText={text('tooltipText', Config, 'This is a Labeled Icon Button')}
 			>
 				{text('children', Config, 'Hello LabeledIconButton')}
 			</LabeledIconButton>
