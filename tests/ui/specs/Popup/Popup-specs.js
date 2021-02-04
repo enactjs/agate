@@ -566,6 +566,7 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
 				Page.spotlightRight();
 				Page.spotlightLeft();
@@ -752,8 +753,9 @@ describe('Popup', function () {
 				Page.spotlightRight();
 				Page.waitForFocused(popup.buttonCancel);
 				Page.spotlightDown();
+				Page.waitForFocused(popupCommon.buttonPopup7);
 
-				expect(popup.buttonCancel.isFocused()).to.be.true();
+				expect(popupCommon.buttonPopup7.isFocused()).to.be.true();
 			});
 
 			it('should spot back the popup button on auto dismiss the popup', function () {
@@ -805,7 +807,7 @@ describe('Popup', function () {
 				Page.showPointerByKeycode();
 				// Position the pointer inside popup to the right of the Cancel button (step 4)
 				$('#buttonCancel').moveTo({xOffset: 200, yOffset: 200});
-				// 5-way to the OK button (step 5)
+				// 5-way to the Cancel button (step 5)
 				Page.spotlightLeft();
 
 				// Spotlight is on Cancel button (verify step 5)
@@ -883,9 +885,9 @@ describe('Popup', function () {
 
 				Page.spotlightRight();
 				Page.waitForFocused(popup.buttonCancel);
-				Page.spotlightDown();
+				Page.waitForFocused(popupCommon.buttonPopup8);
 
-				expect(popup.buttonCancel.isFocused()).to.be.true();
+				expect(popupCommon.buttonPopup8.isFocused()).to.be.true();
 			});
 
 			it('should spot back the popup button on auto dismiss the popup', function () {
@@ -1018,6 +1020,7 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectNoneScrimOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
 				Page.spotlightRight();
 				Page.spotlightLeft();
@@ -1038,9 +1041,9 @@ describe('Popup', function () {
 
 				Page.spotlightRight();
 				Page.waitForFocused(popup.buttonCancel);
-				Page.spotlightDown();
+				Page.waitForFocused(popupCommon.buttonPopup8);
 
-				expect(popup.buttonCancel.isFocused()).to.be.true();
+				expect(popupCommon.buttonPopup8.isFocused()).to.be.true();
 			});
 
 			it('should spot back the popup button on auto dismiss the popup', function () {
