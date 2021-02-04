@@ -230,19 +230,16 @@
 
 	.applySkins({
 		height: @agate-dropdown-list-height;
-	})
+	});
 }
 
-// FIXME: increase specificity or refactor ContextualPopup
-.contextualPopupContainer {
-	&.contextualPopupContainer {
-		&.contextualPopupContainer {
-			&.contextualPopupContainer {
-				&.contextualPopupContainer {
-					padding: 0;
-					margin-top: 0;
-				}
+.applySkins({
+	.contextualPopup{
+		.container {
+			padding: 0;
+			&.below {
+				&.small { margin-top: 0; }
 			}
 		}
 	}
-}
+});

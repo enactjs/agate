@@ -355,7 +355,6 @@ const DropdownBase = kind({
 					onClick={onOpen}
 					onClose={onClose}
 					open={openDropdown}
-					popupClassName={componentCss.contextualPopupContainer}
 					popupComponent={DropdownList}
 					popupProps={popupProps}
 					role="button"

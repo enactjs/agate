@@ -7,7 +7,7 @@ import $L from '../internal/$L';
 import Button from '../Button';
 import Skinnable from '../Skinnable';
 
-import css from './ContextualPopup.module.less';
+import componentCss from './ContextualPopup.module.less';
 
 /**
  * An SVG arrow for {@link agate/ContextualPopupDecorator.ContextualPopup}.
@@ -36,17 +36,17 @@ const ContextualPopupArrow = kind({
 	},
 
 	styles: {
-		css,
+		css: componentCss,
 		className: 'arrow'
 	},
 
 	computed: {
-		className: ({direction, styler}) => styler.append(direction, css.arrow)
+		className: ({direction, styler}) => styler.append(direction, componentCss.arrow)
 	},
 
 	render: (props) => (
 		<svg {...props} viewBox="0 0 30 30">
-			<path d="M15 2 L0 20 L30 20 Z" className={css.arrowFill} />
+			<path d="M15 2 L0 20 L30 20 Z" className={componentCss.arrowFill} />
 		</svg>
 	)
 });
@@ -114,6 +114,21 @@ const ContextualPopupBase = kind({
 		containerRef: EnactPropTypes.ref,
 
 		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `contextualPopup` - The root class name
+		 * * `container` - Applied to the container
+		 * * `arrow` - Applied to the arrow
+		 *
+		 * @type {Object}
+		 * @public
+		 */
+		css: PropTypes.object,
+
+		/**
 		 * Direction of ContextualPopup.
 		 *
 		 * @type {('above'|'above center'|'above left'|'above right'|'below'|'below center'|'below left'|'below right'|'left middle'|'left top'|'left bottom'|'right middle'|'right top'|'right bottom')}
@@ -164,8 +179,9 @@ const ContextualPopupBase = kind({
 	},
 
 	styles: {
-		css,
-		className: 'container'
+		css: componentCss,
+		className: 'container',
+		publicClassNames: true
 	},
 
 	computed: {
@@ -181,7 +197,7 @@ const ContextualPopupBase = kind({
 			{reserveClose: showCloseButton},
 			offset
 		),
-		closeButton: ({showCloseButton, onCloseButtonClick}) => {
+		closeButton: ({css, showCloseButton, onCloseButtonClick}) => {
 			if (showCloseButton) {
 				return (
 					<Button
@@ -198,7 +214,7 @@ const ContextualPopupBase = kind({
 		}
 	},
 
-	render: ({arrowDirection, arrowPosition, children, className, closeButton, containerPosition, containerRef, noArrow, ...rest}) => {
+	render: ({arrowDirection, arrowPosition, children, className, closeButton, containerPosition, containerRef, css, noArrow, ...rest}) => {
 		delete rest.direction;
 		delete rest.offset;
 		delete rest.onCloseButtonClick;
