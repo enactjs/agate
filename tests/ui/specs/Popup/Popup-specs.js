@@ -1041,9 +1041,9 @@ describe('Popup', function () {
 
 				Page.spotlightRight();
 				Page.waitForFocused(popup.buttonCancel);
-				Page.spotlightDown();
+				Page.waitForFocused(popupCommon.buttonPopup8);
 
-				expect(popup.buttonCancel.isFocused()).to.be.true();
+				expect(popupCommon.buttonPopup8.isFocused()).to.be.true();
 			});
 
 			it('should spot back the popup button on auto dismiss the popup', function () {
