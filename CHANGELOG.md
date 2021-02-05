@@ -4,6 +4,12 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Changed
+
+- `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
+
+## [1.1.2] - 2021-02-05
+
 ### Deprecated
 
 - `agate/FullScreenPopup`, use `agate/Popup` instead
@@ -37,6 +43,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/LabeledIconButton` to display label text on multiple lines (removed marquee)
 - `agate/LabeledIconButton` `max-width` to display huge sized icon correctly
 - `agate/MediaPlayer` previous button functionality to play media from the beginning after being paused
+- `agate/TabGroup` tab `border-bottom` to be applied for vertical orientation
 - `agate/TimePicker` transition direction for meridiem when hour is changed
 
 ## [1.1.1] - 2020-12-23
