@@ -25,6 +25,7 @@ import componentCss from './Drawer.module.less';
  *
  * @class DrawerBase
  * @memberof agate/Drawer
+ * @extends ui/Transition.Transition
  * @ui
  * @public
  */

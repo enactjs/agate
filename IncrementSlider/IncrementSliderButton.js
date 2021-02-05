@@ -14,6 +14,7 @@ import componentCss from './IncrementSliderButton.module.less';
  *
  * @class IncrementSliderButton
  * @memberof agate/IncrementSlider
+ * @extends agate/Button
  * @ui
  * @private
  */
