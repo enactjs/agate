@@ -2,7 +2,7 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
-## [unreleased]
+## [1.1.2] - 2021-02-05
 
 ### Deprecated
 
@@ -14,6 +14,9 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
+- `agate/Input` prop `invalid` to display a tooltip with a message when `invalid` prop is true 
+- `agate/Input` prop `invalidMessage` to customize the tooltip message when `invalid` prop is true
+- `agate/Input` prop `size` to change the size of both input and icons (default large)
 - `agate/Item` prop `centered`, `disabled`, `inline`, `marqueeOn`, and `size`
 - `agate/Popup` content padding and margin with `closeButton`
 - `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
@@ -34,6 +37,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/LabeledIconButton` to display label text on multiple lines (removed marquee)
 - `agate/LabeledIconButton` `max-width` to display huge sized icon correctly
 - `agate/MediaPlayer` previous button functionality to play media from the beginning after being paused
+- `agate/TabGroup` tab `border-bottom` to be applied for vertical orientation
 - `agate/TimePicker` transition direction for meridiem when hour is changed
 
 ## [1.1.1] - 2020-12-23
