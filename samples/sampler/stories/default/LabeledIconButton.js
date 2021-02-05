@@ -26,7 +26,7 @@ storiesOf('Agate', module)
 				size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}
 				spriteCount={number('spriteCount', Config, {min: 1}, 1)}
 			>
-				{text('children', Config, 'Hello LabeledIconButton')}
+				{text('children', Config, 'Hello LabeledIconButton !')}
 			</LabeledIconButton>
 		),
 		{

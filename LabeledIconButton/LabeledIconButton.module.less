@@ -8,6 +8,8 @@
 @import '../LabeledIcon/LabeledIcon.module.less';
 
 .labeledIconButton {
+	overflow: hidden;
+
 	&.icon,
 	&.label,
 	&.selected,
@@ -16,29 +18,28 @@
 	}
 
 	.label {
-		text-overflow: ellipsis;
-		overflow: hidden;
-		width: 100%;
-		white-space: nowrap;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
 	}
 
 	.applySkins({
-		max-width: 291px;
+		max-width: @agate-labelediconbutton-max-width;
 
 		&.smallest {
-			max-width: calc(291px + @agate-button-smallest-height);
+			max-width: calc(@agate-labelediconbutton-max-width + @agate-button-smallest-height);
 		}
 
 		&.small {
-			max-width: calc(291px + @agate-button-small-height);
+			max-width: calc(@agate-labelediconbutton-max-width + @agate-button-small-height);
 		}
 
 		&.large {
-			max-width: calc(291px + @agate-button-height);
+			max-width: calc(@agate-labelediconbutton-max-width + @agate-button-height);
 		}
 
 		&.huge {
-			max-width: calc(291px + @agate-button-huge-height);
+			max-width: calc(@agate-labelediconbutton-max-width + @agate-button-huge-height);
 		}
 
 		.label {
