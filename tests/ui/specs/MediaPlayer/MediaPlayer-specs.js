@@ -45,7 +45,6 @@ describe('MediaPlayer', function () {
 		});
 
 		describe('5-way', function () {
-
 			it('should focus `play` button on 5-way down', function () {
 				expect(mediaPlayer.slider.isFocused()).to.be.true();
 
@@ -81,7 +80,6 @@ describe('MediaPlayer', function () {
 		});
 
 		describe('using pointer', function () {
-
 			it('should focus `next` button on hover', function () {
 				mediaPlayer.hover('Next');
 
@@ -104,7 +102,6 @@ describe('MediaPlayer', function () {
 		});
 
 		describe('5-way', function () {
-
 			it('should not focus `play` button on 5-way down', function () {
 				expect(mediaPlayer.slider.isFocused()).to.not.be.true();
 
@@ -115,7 +112,6 @@ describe('MediaPlayer', function () {
 		});
 
 		describe('using pointer', function () {
-
 			it('should not focus `next` button on hover', function () {
 				mediaPlayer.hover('Next');
 
