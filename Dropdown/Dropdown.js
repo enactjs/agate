@@ -38,6 +38,7 @@ import Item from '../Item';
 import Skinnable from '../Skinnable';
 
 import DropdownList from './DropdownList';
+
 import componentCss from './Dropdown.module.less';
 
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
