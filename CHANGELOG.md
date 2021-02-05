@@ -4,6 +4,9 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Added
+- `agate/TooltipDecorator` prop `tooltipMarquee` to support marquee for long tooltip, prop `tooltipWidth` to set a width for tooltip text, and prop `marquee` to allow the tooltip to use Marquee
+
 ### Changed
 
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
