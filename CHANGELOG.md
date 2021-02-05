@@ -4,6 +4,24 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Added
+
+- `agate/ContextualPopup` prop `css` to support customizations
+- `agate/ContextualPopupDecorator` prop `css` to support customizations
+- `agate/Dropdown` prop `width` to support multiple widths
+- `agate/Dropdown/DropdownList` component
+
+### Changed
+
+- `agate/Item` to have a `selected` publicClassname
+- `agate/Dropdown` to use ContextualPopup as wrapper for the DropdownList
+
+### Fixed
+
+- `agate/Panel` padding for Carbon skin to show correct ContextualPopup position in sampler app
+
+## [1.1.2] - 2021-02-05
+
 ### Deprecated
 
 - `agate/FullScreenPopup`, use `agate/Popup` instead
@@ -12,11 +30,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/ArcPicker` and `agate/ArcSlider` prop `disabled` to be inactive
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
-- `agate/ContextualPopup` prop `css` to support customizations
-- `agate/ContextualPopupDecorator` prop `css` to support customizations
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
-- `agate/Dropdown` prop `width` to support multiple widths
-- `agate/Dropdown/DropdownList` component
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
 - `agate/Input` prop `invalid` to display a tooltip with a message when `invalid` prop is true 
 - `agate/Input` prop `invalidMessage` to customize the tooltip message when `invalid` prop is true
@@ -29,8 +43,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Changed
 
 - `agate/Heading` to support marquee
-- `agate/Item` to have a `selected` publicClassname
-- `agate/Dropdown` to use ContextualPopup as wrapper for the DropdownList
 
 ### Fixed
 
@@ -42,7 +54,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/LabeledIconButton` to display label text on multiple lines (removed marquee)
 - `agate/LabeledIconButton` `max-width` to display huge sized icon correctly
 - `agate/MediaPlayer` previous button functionality to play media from the beginning after being paused
-- `agate/Panel` padding for Carbon skin to show correct ContextualPopup position in sampler app
+- `agate/TabGroup` tab `border-bottom` to be applied for vertical orientation
 - `agate/TimePicker` transition direction for meridiem when hour is changed
 
 ## [1.1.1] - 2020-12-23
