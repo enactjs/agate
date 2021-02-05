@@ -48,7 +48,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/MediaPlayer` previous button functionality to play media from the beginning after being paused
 - `agate/TabGroup` tab `border-bottom` to be applied for vertical orientation
 - `agate/TimePicker` transition direction for meridiem when hour is changed
-- `agate/ArcSlider` to display correctly when `min` prop equals `max` prop or when `min` is greater than `max`
 
 ## [1.1.1] - 2020-12-23
 
