@@ -145,11 +145,13 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 			};
 		}
 
-		componentDidUpdate (prevProps ) {
-			if (this.state.value && this.state.value > this.props.max && this.props.max !== prevProps.max) {
-				this.handleChange(null, this.props.max);
-			} else if ( this.state.value && this.state.value < this.props.min && this.props.min !== prevProps.min) {
-				this.handleChange(null, this.props.min);
+		componentDidUpdate (prevProps) {
+			if ( this.props.max !== prevProps.max || this.props.min !== prevProps.min) {
+				if (this.state.value && this.state.value >= this.props.max) {
+					this.handleChange(null, this.props.max);
+				} else if ( this.state.value && this.state.value <= this.props.min) {
+					this.handleChange(null, this.props.min);
+				}
 			}
 		}
 
