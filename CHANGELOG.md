@@ -4,6 +4,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Changed
+
+- `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
+
 ### Fixed
 
 - `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
