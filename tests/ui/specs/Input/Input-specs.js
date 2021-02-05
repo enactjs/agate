@@ -32,6 +32,14 @@ describe('Input', function () {
 		expect(Page.input4.isFocused()).to.be.true();
 	});
 
+	it('should focus small input on 5-way down and 5-way right', function () {
+		Page.open();
+		Page.spotlightDown();
+		Page.spotlightDown();
+		Page.spotlightRight();
+		expect(Page.smallInput.isFocused()).to.be.true();
+	});
+
 	it('should have text-align to "right" when in ar-SA locale', function () {
 		Page.open('?locale=ar-SA');
 		expect(Page.inputElement1.getCSSProperty('text-align').value).to.equal('right');
