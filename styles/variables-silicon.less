@@ -87,6 +87,8 @@
 @agate-dropdown-button-bg-image: none;
 @agate-dropdown-button-font-size: 27px;
 @agate-dropdown-button-icon-font-size: 36px;
+@agate-dropdown-button-icon-margin-right: 9px;
+@agate-dropdown-button-icon-width: 24px;
 @agate-dropdown-button-transition-delay: 0.5s;
 @agate-dropdown-button-marquee-margin-right: 42px;
 @agate-dropdown-button-list-border-radius: 0 0 @agate-button-border-radius @agate-button-border-radius;
@@ -172,6 +174,19 @@
 @agate-input-icon-before-padding-right: 9px;
 @agate-input-icon-before-padding-left: 21px;
 @agate-input-text-align: left;
+@agate-input-small-height: 39px;
+@agate-input-small-padding-top: 15px;
+@agate-input-small-padding-left: 0;
+@agate-input-small-padding-bottom: 15px;
+@agate-input-small-padding-right: 27px;
+@agate-input-small-icon-after-padding-top-bottom: 15px;
+@agate-input-small-icon-after-padding-right: 15px;
+@agate-input-small-icon-after-padding-left: 6px;
+@agate-input-small-icon-before-padding-top-bottom: 15px;
+@agate-input-small-icon-before-padding-right: 6px;
+@agate-input-small-icon-before-padding-left: 15px;
+@agate-input-small-icon-align-self: end;
+@agate-input-small-font-size: 21px;
 
 // Item
 // ---------------------------------------
@@ -180,12 +195,15 @@
 @agate-item-font-weight:      normal;
 @agate-item-height:           102px;
 @agate-item-height-large:     120px;
-@agate-item-label-font-size:  30px;
 @agate-item-side-outset:      30px;
 @agate-item-sub-text-size:    24px;
 @agate-item-itemcontent-line-height:  42px;
 @agate-item-label-font-size:          24px;
 @agate-item-label-line-height:        33px;
+@agate-item-small-font-size:          33px;
+@agate-item-small-label-font-size:    24px;
+@agate-item-small-label-line-height:  33px;
+@agate-item-small-itemcontent-line-height: 42px;
 
 // Keypad
 // ---------------------------------------
@@ -252,11 +270,14 @@
 // ---------------------------------------
 @agate-popup-border-width: 1px 0;
 @agate-popup-border-radius: 39px;
+@agate-popup-fullscreen-border-radius: 0;
 @agate-popup-border: none;
 @agate-popup-padding: (@agate-component-spacing * 2) 0 0 0;
 @agate-popup-closebutton-title-padding: 0 (@agate-button-small-height) 0 @agate-component-spacing;
+@agate-popup-closebutton-content-padding: @agate-popup-closebutton-title-padding;
+@agate-popup-content-margin: 0 12px;
 @agate-popup-title-padding: 0 @agate-component-spacing;
-@agate-popup-body-padding: (@agate-component-spacing * 2) @agate-component-spacing 0 @agate-component-spacing;
+@agate-popup-body-padding: 0;
 @agate-popup-body-border-radius: 0 0 @agate-popup-border-radius @agate-popup-border-radius;
 @agate-popup-buttons-border-radius: @agate-popup-body-border-radius;
 @agate-popup-buttons-padding: @agate-component-spacing 0;
