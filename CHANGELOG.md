@@ -12,6 +12,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ProgressBarTooltip` component
 - `agate/Slider` prop `tooltip` to enable the built-in tooltip
 
+### Changed
+
+- `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
+
 ## [1.1.2] - 2021-02-05
 
 ### Deprecated
