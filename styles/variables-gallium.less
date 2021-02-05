@@ -93,6 +93,8 @@
 // ---------------------------------------
 @agate-input-icon-display: flex;
 @agate-input-icon-align: center;
+@agate-input-hasiconbefore-padding-left: 0;
+@agate-input-hasiconafter-padding-right: 0;
 
 // ImageItem
 // ---------------------------------------
@@ -113,11 +115,15 @@
 @agate-item-font-weight:      500;
 @agate-item-height:           90px;
 @agate-item-height-large:     120px;
-@agate-item-label-font-size:  30px;
 @agate-item-side-outset:      32px;
 @agate-item-itemcontent-line-height:  42px;
 @agate-item-label-font-size:          27px;
 @agate-item-label-line-height:        33px;
+@agate-item-small-font-size:          40px;
+@agate-item-small-label-font-size:    27px;
+@agate-item-small-label-line-height:  33px;
+@agate-item-slotafter-padding-left:   21px;
+@agate-item-small-itemcontent-line-height: 42px;
 
 // Keypad
 // ---------------------------------------
@@ -181,6 +187,7 @@
 // ---------------------------------------
 @agate-popup-border-width: 3px;
 @agate-popup-border-radius: 20px;
+@agate-popup-fullscreen-border-radius: @agate-popup-border-radius;
 @agate-popup-border: 3px solid transparent;
 @agate-popup-padding: (@agate-component-spacing * 2.5) (@agate-component-spacing * 5);
 @agate-popup-title-padding: 0;
