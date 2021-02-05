@@ -1,5 +1,5 @@
-import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
+import kind from '@enact/core/kind';
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
