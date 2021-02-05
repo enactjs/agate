@@ -33,6 +33,14 @@ const MediaControls = kind({
 
 	propTypes: /** @lends agate/MediaPlayer.MediaControls.prototype */ {
 		/**
+		 * Removes interactive capability from buttons inside this component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
+		/**
 		 * A string which is sent to the `menu` icon of the player controls. This can be
 		 * anything that is accepted by {@link agate/Icon.Icon}.
 		 *
@@ -203,7 +211,7 @@ const MediaControls = kind({
 
 	},
 
-	render: ({badge, menuIcon, nextTrackIcon, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffle, shuffleIcon, ...rest}) => {
+	render: ({badge, disabled, menuIcon, nextTrackIcon, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffle, shuffleIcon, ...rest}) => {
 		return (
 			<div {...rest}>
 				<Container>
@@ -212,6 +220,7 @@ const MediaControls = kind({
 						backgroundOpacity="transparent"
 						badge={badge}
 						css={css}
+						disabled={disabled}
 						icon={repeatIcon}
 						onClick={onRepeat}
 						size="large"
@@ -221,6 +230,7 @@ const MediaControls = kind({
 						backgroundOpacity="transparent"
 						className={shuffle ? css.repeat : ''}
 						css={css}
+						disabled={disabled}
 						icon={shuffleIcon}
 						onClick={onShuffle}
 						size="large"
@@ -229,6 +239,7 @@ const MediaControls = kind({
 						aria-label={$L('Previous')}
 						backgroundOpacity="transparent"
 						css={css}
+						disabled={disabled}
 						icon={previousTrackIcon}
 						onClick={onPrevious}
 						size="large"
@@ -238,6 +249,7 @@ const MediaControls = kind({
 						backgroundOpacity="transparent"
 						className={classnames(css.playPauseButton, spotlightDefaultClass)}
 						css={css}
+						disabled={disabled}
 						minWidth={false}
 						onClick={paused ? onPlay : onPause}
 						size="large"
@@ -248,6 +260,7 @@ const MediaControls = kind({
 						aria-label={$L('Next')}
 						backgroundOpacity="transparent"
 						css={css}
+						disabled={disabled}
 						icon={nextTrackIcon}
 						onClick={onNext}
 						size="large"
@@ -256,6 +269,7 @@ const MediaControls = kind({
 						aria-label={$L('Menu')}
 						backgroundOpacity="transparent"
 						css={css}
+						disabled={disabled}
 						icon={menuIcon}
 						size="large"
 					/>

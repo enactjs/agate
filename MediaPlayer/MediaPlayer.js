@@ -294,7 +294,7 @@ const MediaPlayerBase = kind({
 		durFmt: ({locale}) => getDurFmt(locale)
 	},
 
-	render: ({currentTime, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, spotlightDisabled, total, ...rest}) => {
+	render: ({currentTime, disabled, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, spotlightDisabled, total, ...rest}) => {
 		return (
 			<div {...rest}>
 				<Container spotlightDisabled={spotlightDisabled}>
@@ -307,6 +307,7 @@ const MediaPlayerBase = kind({
 						source={playlist ? playlist[sourceIndex] : null}
 					/>
 					<MediaSlider
+						disabled={disabled}
 						onChange={onChange}
 						value={proportionPlayed}
 					/>
@@ -316,6 +317,7 @@ const MediaPlayerBase = kind({
 						total={total}
 					/>
 					<MediaControls
+						disabled={disabled}
 						onNext={onNext}
 						onPause={onPause}
 						onPlay={onPlay}
