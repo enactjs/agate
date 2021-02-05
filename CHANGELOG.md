@@ -2,6 +2,12 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Changed
+
+- `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
+
 ## [1.1.2] - 2021-02-05
 
 ### Deprecated
