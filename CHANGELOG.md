@@ -2,6 +2,12 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Added
+
+- `agate/Spinner` prop `children` to support the display of text below the icon
+
 ## [1.1.2] - 2021-02-05
 
 ### Deprecated
@@ -21,7 +27,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Popup` content padding and margin with `closeButton`
 - `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
 - `agate/Popup` `duration` and `type` props
-- `agate/Spinner` prop `children` to support the display of text below the icon
 
 ### Changed
 
