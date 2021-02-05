@@ -15,6 +15,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/Item` to have a `selected` publicClassname
 - `agate/Dropdown` to use ContextualPopup as wrapper for the DropdownList
+- `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
 
 ### Fixed
 
