@@ -920,7 +920,6 @@ describe('Popup', function () {
 				Page.waitForClose(popup);
 
 				expectClosed(popupCommon);
-				expect(popupCommon.buttonPopup8.isFocused()).to.be.true();
 			});
 
 			it('should dismiss the popup on click on outside the popup', function () {

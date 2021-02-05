@@ -59,6 +59,7 @@ storiesOf('Agate', module).add(
 							Warning! With <code>closeButton=false</code> and <code>noAutoDismiss=true</code> it will be impossible to close this menu.
 						</h2>)}
 					<LabeledIconButton
+						css={css}
 						inline
 						icon="home"
 						size="huge"
@@ -67,6 +68,7 @@ storiesOf('Agate', module).add(
 						Home
 					</LabeledIconButton>
 					<LabeledIconButton
+						css={css}
 						inline
 						icon="user"
 						size="huge"
