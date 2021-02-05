@@ -42,6 +42,11 @@ function prepareTest (componentName, testId) {
 
 	let component = agateComponents[componentName][testId];
 
+	// If test wants focus, set mode to 5-way so auto-focus works
+	if (component.focus) {
+		spotlight.setPointerMode(false);
+	}
+
 	// If this is a complex test (not a bare component), extract component for cloning
 	if (component.component) {
 		component = component.component;
@@ -121,7 +126,6 @@ class App extends React.Component {
 	}
 }
 
-const WrappedAgateApp = ThemeDecorator({noAutoFocus: true}, App);
 
 const ExportedAgateApp = (props) => {
 
@@ -131,10 +135,14 @@ const ExportedAgateApp = (props) => {
 
 	// Legacy test parameters
 	let locale = url.searchParams.get('locale');
+	let noAutoFocus = true;
 
 	if (props.testId >= 0 && agateComponents[props.component] && agateComponents[props.component][props.testId]) {
 		locale = agateComponents[props.component][props.testId].locale;
+		noAutoFocus = !agateComponents[props.component][props.testId].focus;
 	}
+
+	const WrappedAgateApp = ThemeDecorator({noAutoFocus}, App);
 
 	return (
 		<WrappedAgateApp {...props} skin={skin} skinVariants={skinVariants} locale={locale} />
