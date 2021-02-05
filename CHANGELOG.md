@@ -11,6 +11,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Popup` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
 - `agate/PopupMenu` `onShow` and `spotlightId` props to handle focus with 5-way navigation
 
+### Changed
+
+- `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
+
 ## [1.1.2] - 2021-02-05
 
 ### Deprecated
