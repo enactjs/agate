@@ -2,7 +2,7 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
-## [unreleased]
+## [1.1.2] - 2021-02-05
 
 ### Deprecated
 
