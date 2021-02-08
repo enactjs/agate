@@ -25,6 +25,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Input` prop `size` to change the size of both input and icons (default large)
 - `agate/Item` prop `centered`, `disabled`, `inline`, `marqueeOn`, and `size`
 - `agate/Popup` content padding and margin with `closeButton`
+- `agate/ThemeDecorator` config `rootId` to specify React DOM tree root for global event handlers
 - `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
 - `agate/Popup` `duration` and `type` props
 
