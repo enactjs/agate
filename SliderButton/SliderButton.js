@@ -31,7 +31,7 @@ import componentCss from './SliderButton.module.less';
  * @class SliderKnob
  * @memberof agate/SliderButton
  * @ui
- * @public
+ * @private
  */
 const SliderKnob = kind({
 	name: 'SliderKnob',
@@ -85,7 +85,7 @@ const SliderKnob = kind({
  * @class SliderProgress
  * @memberof agate/SliderButton
  * @ui
- * @public
+ * @private
  */
 const SliderProgress = kind({
 	name: 'SliderProgress',
