@@ -7,7 +7,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Added
 
 - `agate/Popup` `aria-live` and `role` props to support accessibility
-- `agate/Popup` `duration` and `type` props to customize transition style
 - `agate/Popup` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
 - `agate/PopupMenu` `onShow` and `spotlightId` props to handle focus with 5-way navigation
 
@@ -31,8 +30,9 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Input` prop `invalidMessage` to customize the tooltip message when `invalid` prop is true
 - `agate/Input` prop `size` to change the size of both input and icons (default large)
 - `agate/Item` prop `centered`, `disabled`, `inline`, `marqueeOn`, and `size`
-- `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
 - `agate/Popup` content padding and margin with `closeButton`
+- `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
+- `agate/Popup` `duration` and `type` props
 
 ### Changed
 
