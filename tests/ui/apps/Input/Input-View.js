@@ -37,6 +37,11 @@ const app = (props) => <div {...props}>
 				disabled
 				defaultValue="Input field five"
 			/>
+			<Input
+				id="input6"
+				size="small"
+				defaultValue="Input field small"
+			/>
 		</div>
 	</div>
 </div>;
