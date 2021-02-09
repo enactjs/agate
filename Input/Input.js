@@ -24,6 +24,7 @@ import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
 import Tooltip from '../TooltipDecorator/Tooltip';
 
+import InputBehaviorDecorator from './InputBehaviorDecorator';
 import InputDecoratorIcon from './InputDecoratorIcon';
 import InputSpotlightDecorator from './InputSpotlightDecorator';
 import {calcAriaLabel, extractInputProps} from './util';
@@ -241,21 +242,21 @@ const InputBase = kind({
 		publicClassNames: ['decorator', 'input']
 	},
 
-	handlers: {
-		onChange: handle(
-			adaptEvent(
-				ev => ({
-					type: 'onBeforeChange',
-					value: ev.target.value
-				}),
-				forwardWithPrevent('onBeforeChange')
-			),
-			forwardCustom('onChange', ev => ({
-				stopPropagation: () => ev.stopPropagation(),
-				value: ev.target.value
-			}))
-		)
-	},
+	// handlers: {
+	// 	onChange: handle(
+	// 		adaptEvent(
+	// 			ev => ({
+	// 				type: 'onBeforeChange',
+	// 				value: ev.target.value
+	// 			}),
+	// 			forwardWithPrevent('onBeforeChange')
+	// 		),
+	// 		forwardCustom('onChange', ev => ({
+	// 			stopPropagation: () => ev.stopPropagation(),
+	// 			value: ev.target.value
+	// 		}))
+	// 	)
+	// },
 
 	computed: {
 		'aria-label': ({placeholder, type, value}) => {
@@ -325,6 +326,7 @@ const InputBase = kind({
  */
 const InputDecorator = compose(
 	Pure,
+	InputBehaviorDecorator,
 	I18nContextDecorator({rtlProp: 'rtl'}),
 	Changeable,
 	InputSpotlightDecorator,
