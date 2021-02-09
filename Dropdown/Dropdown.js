@@ -191,6 +191,9 @@ const DropdownBase = kind({
 		onOpen: handle(
 			forProp('open', false),
 			forward('onOpen')
+		),
+		onScrollerClick: handle(
+			(ev) => ev.stopPropagation()
 		)
 	},
 
@@ -280,7 +283,7 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, ...rest}) => {
+	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClose, onOpen, onScrollerClick, onSelect, open, selected, skin, title, ...rest}) => {
 		const ariaProps = extractAriaProps(rest);
 		const dropdownButtonClassName = classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'up'});
 		const opened = !disabled && open;
@@ -297,7 +300,7 @@ const DropdownBase = kind({
 			{},
 			{},
 			{},
-			{childComponent: Item, itemProps: {size: 'small'}},
+			{childComponent: Item},
 			[<Icon slot="slotAfter" key="icon" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>]
 
 		];
@@ -323,7 +326,7 @@ const DropdownBase = kind({
 						direction={oppositeDirection[adjustedDirection]}
 					>
 						<ContainerDiv className={dropdownListClassName} spotlightDisabled={!open} spotlightRestrict="self-only">
-							<Scroller skinVariants={skinVariants} className={css.scroller}>
+							<Scroller skinVariants={skinVariants} className={css.scroller} onClick={onScrollerClick}>
 								<Group
 									role={null}
 									className={css.group}

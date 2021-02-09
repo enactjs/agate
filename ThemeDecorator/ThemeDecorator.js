@@ -266,12 +266,10 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {customSkin, float, i18n, noAutoFocus, overlay, ri, skin, spotlight, disableFullscreen, rootId} = config;
 	const defaultSkin = 'gallium';
 
-	const bgClassName = classnames(
-		'enact-fit',
-		{
-			[css.bg]: !overlay
-		}
-	);
+	const bgClassName = classnames({
+		'enact-fit': !disableFullscreen,
+		[css.bg]: !overlay
+	});
 
 	let App = Wrapped;
 	if (float) App = FloatingLayerDecorator({wrappedClassName: bgClassName}, App);

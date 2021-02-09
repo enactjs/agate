@@ -1,4 +1,4 @@
-const Page = require('./Agate-ItemPage');
+const Page = require('./ItemPage');
 
 describe('Item', function () {
 	const item1 = Page.components.item1;

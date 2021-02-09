@@ -4,15 +4,30 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Changed
+
+- `agate/ThemeDecorator` config `rootId` to specify React DOM tree root for global event handlers
+- `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
+
+## [1.1.2] - 2021-02-05
+
+### Deprecated
+
+- `agate/FullScreenPopup`, use `agate/Popup` instead
+
 ### Added
 
 - `agate/ArcPicker` and `agate/ArcSlider` prop `disabled` to be inactive
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
-- `agate/Button` prop `iconOnly`, `iconPosition` and `minWidth`
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
+- `agate/Input` prop `invalid` to display a tooltip with a message when `invalid` prop is true 
+- `agate/Input` prop `invalidMessage` to customize the tooltip message when `invalid` prop is true
+- `agate/Input` prop `size` to change the size of both input and icons (default large)
+- `agate/Item` prop `centered`, `disabled`, `inline`, `marqueeOn`, and `size`
 - `agate/Popup` content padding and margin with `closeButton`
-- `agate/ThemeDecorator` config `rootId` to specify React DOM tree root for global event handlers
+- `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
+- `agate/Popup` `duration` and `type` props
 
 ### Changed
 
@@ -24,9 +39,11 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/DatePicker` transition direction for day when month is changed
 - `agate/Dropdown` to show focused icon color for Silicon skin
 - `agate/Dropdown` to not show double marquee text
+- `agate/Dropdown` to not close when clicking the list scroller
 - `agate/LabeledIconButton` to display label text on multiple lines (removed marquee)
 - `agate/LabeledIconButton` `max-width` to display huge sized icon correctly
 - `agate/MediaPlayer` previous button functionality to play media from the beginning after being paused
+- `agate/TabGroup` tab `border-bottom` to be applied for vertical orientation
 - `agate/TimePicker` transition direction for meridiem when hour is changed
 
 ## [1.1.1] - 2020-12-23
