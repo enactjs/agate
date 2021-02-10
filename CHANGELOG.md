@@ -8,10 +8,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
 
-### Fixed
-
-- `agate/internal/Picker` to show correct focus color
-
 ## [1.1.2] - 2021-02-05
 
 ### Deprecated
