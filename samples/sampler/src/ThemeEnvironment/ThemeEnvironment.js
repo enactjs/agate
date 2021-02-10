@@ -8,8 +8,7 @@ import {color} from '@storybook/addon-knobs';
 import {Row, Column, Cell} from '@enact/ui/Layout';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 
-// import ThemeDecorator from '@enact/agate/ThemeDecorator';
-import ThemeDecorator from '../../../../ThemeDecorator';
+import ThemeDecorator from '@enact/agate/ThemeDecorator';
 import Heading from '@enact/agate/Heading';
 import {Panels, Panel} from '@enact/agate/Panels';
 import Skinnable from '@enact/agate/Skinnable';
@@ -236,16 +235,20 @@ const StorybookDecorator = (story, config) => {
 		config.props = config.parameters.props;
 	}
 
+	// NOTE: 'config' object is not extensible
+	const hasInfoText = config.parameters && config.parameters.info && config.parameters.info.text;
+	const hasProps = config.parameters && config.parameters.props;
+
 	return (
 		<Theme
-			title={`${config.kind} ${config.story}`.trim()}
-			description={config.description}
+			title={`${config.kind}`.replaceAll('/', ' ').trim()}
+			description={hasInfoText ? config.parameters.info.text : null}
 			locale={locale}
 			{...skinKnobs}
 			skinVariants={boolean('night mode', Config) && 'night'}
 			accent={accent || color('accent', (!newSkin && accentFromURL ? accentFromURL : defaultColors[currentSkin].accent), Config.groupId)}
 			highlight={highlight || color('highlight', (!newSkin && highlightFromURL ? highlightFromURL : defaultColors[currentSkin].highlight), Config.groupId)}
-			{...config.props}
+			{...hasProps ? config.parameters.props : null}
 		>
 			{allSkins ? Object.keys(skins).map(skin => (
 				<SkinFrame skin={skins[skin]} key={skin}>

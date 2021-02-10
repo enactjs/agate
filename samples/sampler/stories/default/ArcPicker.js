@@ -40,6 +40,6 @@ export const _ArcPicker = () => {
 _ArcPicker.storyName = 'ArcPicker';
 _ArcPicker.parameters = {
 	info: {
-		text: 'Basic usage of Alert'
+		text: 'Basic usage of ArcPicker'
 	}
 };
