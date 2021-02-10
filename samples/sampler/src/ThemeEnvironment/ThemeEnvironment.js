@@ -231,9 +231,9 @@ const StorybookDecorator = (story, config) => {
 		skinKnobs.skin = select('skin', skins, Config, currentSkin);
 	}
 	const {accent, highlight} = !allSkins && boolean('default skin styles', Config) ? defaultColors[skinKnobs.skin] : {};
-	if (config.parameters && config.parameters.props) {
-		config.props = config.parameters.props;
-	}
+	// if (config.parameters && config.parameters.props) {
+	// 	config.props = config.parameters.props;
+	// }
 
 	// NOTE: 'config' object is not extensible
 	const hasInfoText = config.parameters && config.parameters.info && config.parameters.info.text;
