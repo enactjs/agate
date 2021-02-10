@@ -20,7 +20,7 @@
     "theme": "agate"
   },
   "dependencies": {
-    "@enact/agate": "enactjs/agate#feature/react17",
+    "@enact/agate": "../../",
     "@enact/core": "^3.4.11",
     "@enact/ui": "^3.4.11",
     "@enact/i18n": "^3.4.11",
