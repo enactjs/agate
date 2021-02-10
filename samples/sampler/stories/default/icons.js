@@ -5,7 +5,7 @@
 
 import {icons, iconsSilicon} from '@enact/agate/Icon';
 
-const decrementIcons = [
+export const decrementIcons = [
 	'minus',
 	'minusbold',
 	'arrowlargedown',
@@ -14,7 +14,7 @@ const decrementIcons = [
 	'previoustrack'
 ];
 
-const incrementIcons = [
+export const incrementIcons = [
 	'plus',
 	'plusbold',
 	'arrowlargeup',
@@ -23,7 +23,7 @@ const incrementIcons = [
 	'nexttrack'
 ];
 
-const listIcons = [
+export const listIcons = [
 	'denselist',
 	'bulletlist',
 	'list',
@@ -31,7 +31,7 @@ const listIcons = [
 	'playlist'
 ];
 
-const mediaIcons = [
+export const mediaIcons = [
 	'circle',
 	'stop',
 	'play',
@@ -66,7 +66,7 @@ const mediaIcons = [
 	'info'
 ];
 
-const arrowIcons = [
+export const arrowIcons = [
 	'arrowlargedown',
 	'arrowlargeup',
 	'arrowlargeleft',
@@ -77,14 +77,14 @@ const arrowIcons = [
 	'arrowsmallright'
 ];
 
-const starIcons = [
+export const starIcons = [
 	'star',
 	'hollowstar',
 	'halfstar'
 ];
 
-const iconList = Object.keys(icons).sort();
-const iconListSilicon = Object.keys(iconsSilicon).sort();
+export const iconList = Object.keys(icons).sort();
+export const iconListSilicon = Object.keys(iconsSilicon).sort();
 
-export default iconList;
-export {decrementIcons, iconList, iconListSilicon, incrementIcons, listIcons, mediaIcons, arrowIcons, starIcons};
+// export default iconList;
+// export {decrementIcons, iconList, iconListSilicon, incrementIcons, listIcons, mediaIcons, arrowIcons, starIcons};

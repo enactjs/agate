@@ -8,7 +8,8 @@ import {color} from '@storybook/addon-knobs';
 import {Row, Column, Cell} from '@enact/ui/Layout';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 
-import ThemeDecorator from '@enact/agate/ThemeDecorator';
+// import ThemeDecorator from '@enact/agate/ThemeDecorator';
+import ThemeDecorator from '../../../../ThemeDecorator';
 import Heading from '@enact/agate/Heading';
 import {Panels, Panel} from '@enact/agate/Panels';
 import Skinnable from '@enact/agate/Skinnable';
@@ -231,9 +232,9 @@ const StorybookDecorator = (story, config) => {
 		skinKnobs.skin = select('skin', skins, Config, currentSkin);
 	}
 	const {accent, highlight} = !allSkins && boolean('default skin styles', Config) ? defaultColors[skinKnobs.skin] : {};
-	// if (config.parameters && config.parameters.props) {
-	// 	config.props = config.parameters.props;
-	// }
+	if (config.parameters && config.parameters.props) {
+		config.props = config.parameters.props;
+	}
 
 	return (
 		<Theme
