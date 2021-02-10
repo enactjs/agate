@@ -29,9 +29,10 @@ import Skinnable from '../Skinnable';
 import componentCss from '../Button/Button.module.less';
 import css from './Keypad.module.less';
 
-const Container = SpotlightContainerDecorator({
-	enterTo: 'default-element'
-}, 'div');
+const SpotlightContainerLayout = SpotlightContainerDecorator(
+	{enterTo: 'default-element'},
+	Layout
+);
 
 const KEY_LIST = [
 	{text: '1'},
@@ -178,36 +179,34 @@ const KeypadBase = kind({
 
 	render: ({disabled, onKeyButtonClick, spotlightDisabled, ...rest}) => {
 		return (
-			<Container spotlightDisabled={spotlightDisabled}>
-				<Layout {...rest} align="center end" className={css.keypad} inline wrap>
-					{KEY_LIST.map((keyText, rowIndex) => {
-						const {icon, text} = keyText;
-						const isIcon = icon === 'arrowuturn' || icon === 'phone';
+			<SpotlightContainerLayout {...rest} align="center end" className={css.keypad} inline spotlightDisabled={spotlightDisabled} wrap>
+				{KEY_LIST.map((keyText, rowIndex) => {
+					const {icon, text} = keyText;
+					const isIcon = icon === 'arrowuturn' || icon === 'phone';
 
-						let ariaLabel = text;
-						if (icon === 'arrowuturn') {
-							ariaLabel = $L('backspace');
-						} else if (icon === 'phone') {
-							ariaLabel = $L('call');
-						}
+					let ariaLabel = text;
+					if (icon === 'arrowuturn') {
+						ariaLabel = $L('backspace');
+					} else if (icon === 'phone') {
+						ariaLabel = $L('call');
+					}
 
-						return (
-							<Cell
-								aria-label={ariaLabel}
-								component={Key}
-								disabled={disabled}
-								key={`key${rowIndex}-${text}`}
-								onKeyButtonClick={() => onKeyButtonClick(isIcon ? icon : text)}
-								shrink
-								label={keyText.label}
-								text={isIcon ? null : text}
-							>
-								{isIcon ? icon : null}
-							</Cell>
-						);
-					})}
-				</Layout>
-			</Container>
+					return (
+						<Cell
+							aria-label={ariaLabel}
+							component={Key}
+							disabled={disabled}
+							key={`key${rowIndex}-${text}`}
+							onKeyButtonClick={() => onKeyButtonClick(isIcon ? icon : text)}
+							shrink
+							label={keyText.label}
+							text={isIcon ? null : text}
+						>
+							{isIcon ? icon : null}
+						</Cell>
+					);
+				})}
+			</SpotlightContainerLayout>
 		);
 	}
 });
