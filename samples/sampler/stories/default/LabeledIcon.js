@@ -8,7 +8,7 @@ import {storiesOf} from '@storybook/react';
 import Icon, {IconBase} from '@enact/agate/Icon';
 import LabeledIcon from '@enact/agate/LabeledIcon';
 
-import iconNames from './icons';
+import {iconList} from './icons';
 
 LabeledIcon.displayName = 'LabeledIcon';
 

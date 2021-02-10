@@ -6,7 +6,7 @@ import {storiesOf} from '@storybook/react';
 
 import FanSpeedControl from '@enact/agate/FanSpeedControl';
 
-import iconNames from './icons';
+import {iconList} from './icons';
 
 FanSpeedControl.displayName = 'FanSpeedControl';
 const Config = mergeComponentMetadata('FanSpeedControl', FanSpeedControl);

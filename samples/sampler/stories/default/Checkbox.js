@@ -5,7 +5,7 @@ import React from 'react';
 
 import Checkbox, {CheckboxBase} from '@enact/agate/Checkbox';
 
-import iconNames from './icons';
+import {iconList} from './icons';
 
 Checkbox.displayName = 'Checkbox';
 const Config = mergeComponentMetadata('Checkbox', CheckboxBase, Checkbox);

@@ -6,7 +6,7 @@ import {storiesOf} from '@storybook/react';
 
 import LabeledIconButton from '@enact/agate/LabeledIconButton';
 
-import iconNames from './icons';
+import {iconList} from './icons';
 
 const Config = mergeComponentMetadata('LabeledIconButton', UiLabeledIconBase, UiLabeledIcon, LabeledIconButton);
 Config.displayName = 'LabeledIconButton';

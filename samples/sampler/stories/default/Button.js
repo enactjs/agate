@@ -7,7 +7,7 @@ import React from 'react';
 import Button, {ButtonBase} from '@enact/agate/Button';
 import Skinnable from '@enact/agate/Skinnable';
 
-// import iconList, {iconListSilicon} from './icons';
+import {iconList, iconListSilicon} from './icons';
 
 Button.displayName = 'Button';
 const Config = mergeComponentMetadata('Button', UiButton, ButtonBase, Button);
@@ -35,7 +35,7 @@ const threeWayBoolean = (value) => {
 const SkinnedButton = Skinnable(
 	{prop: 'skin'},
 	({skin, ...rest}) => {
-		// let icons = skin === 'silicon' ? ['', ...iconListSilicon] :  ['', ...iconList];
+		let icons = skin === 'silicon' ? ['', ...iconListSilicon] :  ['', ...iconList];
 
 		return (
 			<Button
@@ -47,8 +47,8 @@ const SkinnedButton = Skinnable(
 				badgeColor={select('badgeColor', prop.colors, Config)}
 				disabled={boolean('disabled', Config)}
 				highlighted={boolean('highlighted', Config)}
-				// icon={select('icon', icons, Config)}
-				// iconFlip={select('iconFlip', prop.iconFlip, Config)}
+				icon={select('icon', icons, Config)}
+				iconFlip={select('iconFlip', prop.iconFlip, Config)}
 				iconPosition={select('iconPosition', prop.iconPosition, Config)}
 				joinedPosition={select('joinedPosition', prop.joinedPosition, Config)}
 				minWidth={threeWayBoolean(select('minWidth', prop.minWidth, Config))}

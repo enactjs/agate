@@ -6,7 +6,7 @@ import {storiesOf} from '@storybook/react';
 
 import RadioItem from '@enact/agate/RadioItem';
 
-import iconNames from './icons';
+import {iconList} from './icons';
 
 const Config = mergeComponentMetadata('RadioItem', RadioItem);
 RadioItem.displayName = 'RadioItem';

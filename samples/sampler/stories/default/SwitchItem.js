@@ -5,7 +5,7 @@ import {storiesOf} from '@storybook/react';
 
 import SwitchItem from '@enact/agate/SwitchItem';
 
-import iconNames from './icons';
+import {iconList} from './icons';
 
 const Config = mergeComponentMetadata('SwitchItem', SwitchItem);
 SwitchItem.displayName = 'SwitchItem';
