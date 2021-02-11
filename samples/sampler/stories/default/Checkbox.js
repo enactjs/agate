@@ -19,10 +19,10 @@ export const _Checkbox = () => (
 	<Checkbox
 		disabled={boolean('disabled', Config)}
 		indeterminate={boolean('indeterminate', Config)}
-		indeterminateIcon={select('indeterminateIcon', ['', ...iconNames], Config)}
+		indeterminateIcon={select('indeterminateIcon', ['', ...iconList], Config)}
 		onToggle={action('onToggle')}
 	>
-		{select('children', ['', ...iconNames], Config)}
+		{select('children', ['', ...iconList], Config)}
 	</Checkbox>
 );
 

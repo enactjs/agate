@@ -19,15 +19,15 @@ export default {
 }
 
 export const _CheckboxItem = () => {
-	const slotBeforeSelection = select('slotBefore', ['', ...iconNames], Config);
+	const slotBeforeSelection = select('slotBefore', ['', ...iconList], Config);
 	const slotBefore = slotBeforeSelection ? (<Icon slot="slotBefore">{slotBeforeSelection}</Icon>) : null;
 
 	return (
 		<CheckboxItem
 			disabled={boolean('disabled', Config)}
-			icon={select('icon', iconNames, Config)}
+			icon={select('icon', iconList, Config)}
 			indeterminate={boolean('indeterminate', Config)}
-			indeterminateIcon={select('indeterminateIcon', iconNames, Config)}
+			indeterminateIcon={select('indeterminateIcon', iconList, Config)}
 			inline={boolean('inline', Config)}
 			label={text('label', Config)}
 			labelPosition={select('labelPosition', ['above', 'after', 'before', 'below'], Config)}

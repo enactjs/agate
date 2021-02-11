@@ -6,12 +6,11 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import React from 'react';
 
 import Drawer, {DrawerBase} from '@enact/agate/Drawer';
-import Heading, {HeadingBase} from '@enact/agate/Heading';
+import Heading from '@enact/agate/Heading';
 
 import css from './Drawer.module.less';
 
 const Config = mergeComponentMetadata('Drawer', Drawer, DrawerBase);
-const HeadingConfig = mergeComponentMetadata('Heading', Heading, HeadingBase);
 
 const StoryOptions = {
 	groupId: 'Story Options'
@@ -68,12 +67,7 @@ export const _Drawer = () => {
 				style={drawerStyle}
 			>
 				<header>
-					<Heading
-						color={select('color', headingValues.colors, HeadingConfig, '')}
-						showLine={boolean('showLine', HeadingConfig)}
-						size={select('size', headingValues.sizes, HeadingConfig, '')}
-						spacing={select('spacing', headingValues.spacings, HeadingConfig, '')}
-					>
+					<Heading>
 						{text('header', Config, '[insert witty header text]')}
 					</Heading>
 				</header>
