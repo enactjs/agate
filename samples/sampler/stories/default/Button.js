@@ -57,7 +57,7 @@ const SkinnedButton = Skinnable({prop: 'skin'}, SkinnedButtonBase);
 export default {
 	title: 'Agate/Button',
 	component: 'Button'
-}
+};
 
 export const _Button = () => (
 	<SkinnedButton

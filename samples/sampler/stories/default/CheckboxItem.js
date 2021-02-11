@@ -16,7 +16,7 @@ Config.defaultProps.icon = CheckboxBase.defaultProps.children;
 export default {
 	title: 'Agate/CheckboxItem',
 	component: 'CheckboxItem'
-}
+};
 
 export const _CheckboxItem = () => {
 	const slotBeforeSelection = select('slotBefore', ['', ...iconList], Config);

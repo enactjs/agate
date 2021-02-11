@@ -15,7 +15,7 @@ const prop = {
 export default {
 	title: 'Agate/BodyText',
 	component: 'BodyText'
-}
+};
 
 export const _BodyText = () => (
 	<BodyText

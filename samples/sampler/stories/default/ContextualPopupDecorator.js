@@ -27,7 +27,7 @@ const renderPopup = () => (
 export default {
 	title: 'Agate/ContextualPopupDecorator',
 	component: 'ContextualPopupDecorator'
-}
+};
 
 export const _ContextualPopupDecorator = () => (
 	<div style={{textAlign: 'center', marginTop: ri.scaleToRem(99)}}>

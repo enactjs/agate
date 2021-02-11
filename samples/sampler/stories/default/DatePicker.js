@@ -10,7 +10,7 @@ const Config = mergeComponentMetadata('DatePicker', DatePicker, DatePickerBase);
 export default {
 	title: 'Agate/DatePicker',
 	component: 'DatePicker'
-}
+};
 
 export const _DatePicker = () => (
 	<DatePicker

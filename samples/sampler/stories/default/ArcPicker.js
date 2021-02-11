@@ -16,7 +16,7 @@ const prop = {
 export default {
 	title: 'Agate/ArcPicker',
 	component: 'ArcPicker'
-}
+};
 
 export const _ArcPicker = () => {
 	const itemCount = number('items', Config, {range: true, min: 0, max: 40}, 8);
@@ -34,7 +34,7 @@ export const _ArcPicker = () => {
 		>
 			{items}
 		</ArcPicker>
-	)
+	);
 };
 
 _ArcPicker.storyName = 'ArcPicker';

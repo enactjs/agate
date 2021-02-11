@@ -13,7 +13,7 @@ const Config = mergeComponentMetadata('Checkbox', CheckboxBase, Checkbox);
 export default {
 	title: 'Agate/Checkbox',
 	component: 'Checkbox'
-}
+};
 
 export const _Checkbox = () => (
 	<Checkbox
