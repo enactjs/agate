@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {number, text} from '@enact/storybook-utils/addons/knobs';
 import {action} from '@enact/storybook-utils/addons/actions';
+import {number, text} from '@enact/storybook-utils/addons/knobs';
 import Group from '@enact/ui/Group';
 import ri from '@enact/ui/resolution';
 import React from 'react';
