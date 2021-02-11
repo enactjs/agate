@@ -36,7 +36,7 @@ const convertToRGBa = (hex, opacity) => `rgba(${convert.hex.rgb(hex)},${opacity}
 export default {
 	title: 'Agate/Drawer',
 	component: 'Drawer'
-}
+};
 
 export const _Drawer = () => {
 	const noDrawerAnimation = boolean('noAnimation', Config); // moved out of component to force order of knobs in the story

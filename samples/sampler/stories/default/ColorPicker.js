@@ -23,7 +23,7 @@ const StoryOptions = {
 export default {
 	title: 'Agate/ColorPicker',
 	component: 'ColorPicker'
-}
+};
 
 export const _ColorPicker = () => {
 	const direction = select('direction', prop.direction, Config, 'right'); // moved out of component to force order of knobs in the story

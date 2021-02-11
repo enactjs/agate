@@ -13,7 +13,7 @@ DateTimePicker.displayName = 'DateTimePicker';
 export default {
 	title: 'Agate/DateTimePicker',
 	component: 'DateTimePicker'
-}
+};
 
 export const _DateTimePicker = () => (
 	<DateTimePicker

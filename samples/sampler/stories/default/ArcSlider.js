@@ -17,7 +17,7 @@ const prop = {
 export default {
 	title: 'Agate/ArcSlider',
 	component: 'ArcSlider'
-}
+};
 
 export const _ArcSlider = () => (
 	<ArcSlider
