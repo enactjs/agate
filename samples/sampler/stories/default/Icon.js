@@ -1,9 +1,11 @@
-import {emptify, mergeComponentMetadata} from '@enact/storybook-utils';
+import kind from '@enact/core/kind';
+import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {select, text, number} from '@enact/storybook-utils/addons/knobs';
 import UiIcon from '@enact/ui/Icon';
-import {iconList, iconListSilicon} from './icons';
+import PropTypes from 'prop-types';
 import React from 'react';
-import {storiesOf} from '@storybook/react';
+
+import {iconList, iconListSilicon} from './icons';
 
 import Skinnable from '@enact/agate/Skinnable';
 import Icon, {IconBase} from '@enact/agate/Icon';
@@ -14,19 +16,21 @@ import docs from '../../images/icon-enact-docs.png';
 import factory from '../../images/icon-enact-factory.svg';
 import logo from '../../images/icon-enact-logo.svg';
 
-Icon.displayName = 'Icon';
 const Config = mergeComponentMetadata('Icon', UiIcon, IconBase, Icon);
 
-const SkinnedIcon = Skinnable(
-	{prop: 'skin'},
-	({skin, ...rest}) => {
+const SkinnedIconBase = kind({
+	name: 'SkinnedIcon',
+
+	propTypes: {
+		skin: PropTypes.string
+	},
+
+	render: ({skin, ...rest}) => {
 		let iconNames;
-		const flip = select('flip', ['', 'both', 'horizontal', 'vertical'], Config, '');
 		const size = select('size', ['smallest', 'small', 'large', 'huge'], Config, 'large');
-		const spriteCount = number('spriteCount', Config, {min: 1}, 1);
 
 		switch (skin) {
-			case 'silicon':  {
+			case 'silicon': {
 				iconNames = iconListSilicon; break;
 			}
 			default: {
@@ -34,15 +38,22 @@ const SkinnedIcon = Skinnable(
 			}
 		}
 
+		const iconType = select('icon type',['glyph', 'url src', 'custom'], Config, 'glyph');
+		let children;
+
+		switch (iconType) {
+			case 'glyph': children = select('icon', ['', ...iconNames], Config, 'home'); break;
+			case 'url src': children = select('src', ['', docs, factory, logo], Config, logo); break;
+			default: children = text('custom icon', Config);
+		}
+
 		return (
 			<>
 				<Icon
 					{...rest}
-					flip={flip}
 					size={size}
-					spriteCount={spriteCount}
 				>
-					{emptify(select('src', ['', docs, factory, logo], Icon, '')) + emptify(select('icon', ['', ...iconNames], Icon, 'home')) + emptify(text('custom icon', Icon, ''))}
+					{children}
 				</Icon>
 				<br />
 				<br />
@@ -51,15 +62,30 @@ const SkinnedIcon = Skinnable(
 			</>
 		);
 	}
-);
+});
 
-storiesOf('Agate', module)
-	.add(
-		'Icon',
-		() => (
-			<SkinnedIcon />
-		),
-		{
-			text: 'Basic usage of Icon'
-		}
+const SkinnedIcon = Skinnable({prop: 'skin'}, SkinnedIconBase);
+
+export default {
+	title: 'Agate/Icon',
+	component: 'Icon'
+}
+
+export const _Icon = () => {
+	const flip = select('flip', ['', 'both', 'horizontal', 'vertical'], Config, '');
+	const spriteCount = number('spriteCount', Config, {min: 1}, 1);
+
+	return (
+		<SkinnedIcon
+			flip={flip}
+			spriteCount={spriteCount}
+		/>
 	);
+};
+
+_Icon.storyName = 'Icon';
+_Icon.parameters = {
+	info: {
+		text: 'Basic usage of Icon'
+	}
+};

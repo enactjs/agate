@@ -53,13 +53,13 @@ export const _Drawer = () => {
 			Use the <em>open</em> knob to show or hide the Drawer.<br />
 			<br />
 			<span className={css.galliumNote}>
-						The styling in the Gallium skin does not set a background color for the Drawer,
-						therefore it will inherit the value that &lt;body&gt; has.  In some cases it
-						may be difficult to see the contents clearly.<br />
-						<br />
-						You can override the background color for the Drawer in the Story Options or
-						choose a different skin (or night mode🌛) from the Global Knobs to see!
-					</span>
+				The styling in the Gallium skin does not set a background color for the Drawer,
+				therefore it will inherit the value that &lt;body&gt; has.  In some cases it
+				may be difficult to see the contents clearly.<br />
+				<br />
+				You can override the background color for the Drawer in the Story Options or
+				choose a different skin (or night mode🌛) from the Global Knobs to see!
+			</span>
 			<Drawer
 				noAnimation={noDrawerAnimation}
 				onHide={action('onHide')}
