@@ -1,7 +1,7 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-import UiIcon from '@enact/ui/Icon';
 import {LabeledIconBase as UiLabeledIconBase, LabeledIcon as UiLabeledIcon} from '@enact/ui/LabeledIcon';
+import UiIcon from '@enact/ui/Icon';
 import React from 'react';
 
 import Icon, {IconBase} from '@enact/agate/Icon';
@@ -14,7 +14,7 @@ const Config = mergeComponentMetadata('LabeledIcon', UiLabeledIconBase, UiLabele
 export default {
 	title: 'Agate/LabeledIcon',
 	component: 'LabeledIcon'
-}
+};
 
 export const _LabeledIcon = () => (
 	<LabeledIcon

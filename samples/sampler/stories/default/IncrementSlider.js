@@ -12,7 +12,7 @@ const Config = mergeComponentMetadata('IncrementSlider', IncrementSliderBase, In
 export default {
 	title: 'Agate/IncrementSlider',
 	component: 'IncrementSlider'
-}
+};
 
 export const _IncrementSlider = () => (
 	<IncrementSlider

@@ -6,7 +6,6 @@ import React from 'react';
 import SliderButton, {SliderButtonBase} from '@enact/agate/SliderButton';
 import {icons} from '@enact/agate/Icon';
 
-SliderButton.displayName = 'SliderButton';
 const Config = mergeComponentMetadata('SliderButton', SliderButtonBase, SliderButton);
 
 // Set up some defaults for info and knobs

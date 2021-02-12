@@ -9,7 +9,6 @@ import ToggleButton, {ToggleButtonBase} from '@enact/agate/ToggleButton';
 
 import {iconList} from './icons';
 
-ToggleButton.displayName = 'ToggleButton';
 const Config = mergeComponentMetadata('ToggleButton', UIButtonBase, UIButton, ButtonBase, Button, ToggleButtonBase, ToggleButton);
 
 export default {

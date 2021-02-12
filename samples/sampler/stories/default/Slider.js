@@ -5,7 +5,6 @@ import React from 'react';
 
 import Slider, {SliderBase} from '@enact/agate/Slider';
 
-Slider.displayName = 'Slider';
 const Config = mergeComponentMetadata('Slider', SliderBase, Slider);
 
 export default {

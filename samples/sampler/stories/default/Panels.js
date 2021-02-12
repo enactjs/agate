@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-no-bind */
 
-import PropTypes from 'prop-types';
-import React from 'react';
+import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
-import {mergeComponentMetadata} from '@enact/storybook-utils';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import Button from '@enact/agate/Button';
 import Header from '@enact/agate/Header';
@@ -61,7 +61,7 @@ const BasicPanels = ({...rest}) => {
 export default {
 	title: 'Agate/Panels',
 	component: 'Panels'
-}
+};
 
 export const _Panels = () => (
 	<BasicPanels

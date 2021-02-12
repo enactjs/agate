@@ -11,7 +11,7 @@ const Config = mergeComponentMetadata('RangePicker', RangePicker, PickerBase);
 export default {
 	title: 'Agate/RangePicker',
 	component: 'RangePicker'
-}
+};
 
 export const _RangePicker = () => (
 	<RangePicker

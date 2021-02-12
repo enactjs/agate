@@ -38,7 +38,7 @@ const SkinnedIconBase = kind({
 			}
 		}
 
-		const iconType = select('icon type',['glyph', 'url src', 'custom'], Config, 'glyph');
+		const iconType = select('icon type', ['glyph', 'url src', 'custom'], Config, 'glyph');
 		let children;
 
 		switch (iconType) {
@@ -69,7 +69,7 @@ const SkinnedIcon = Skinnable({prop: 'skin'}, SkinnedIconBase);
 export default {
 	title: 'Agate/Icon',
 	component: 'Icon'
-}
+};
 
 export const _Icon = () => {
 	const flip = select('flip', ['', 'both', 'horizontal', 'vertical'], Config, '');

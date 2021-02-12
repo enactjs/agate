@@ -19,7 +19,7 @@ const prop = {
 export default {
 	title: 'Agate/Heading',
 	component: 'Heading'
-}
+};
 
 export const _Heading = () => {
 	const knobProps = {

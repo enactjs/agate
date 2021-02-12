@@ -18,7 +18,7 @@ const audioFiles = [
 export default {
 	title: 'Agate/MediaPlayer',
 	component: 'MediaPlayer'
-}
+};
 
 export const _MediaPlayer = () => (
 	<MediaPlayer

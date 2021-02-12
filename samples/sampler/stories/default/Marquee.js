@@ -23,7 +23,7 @@ const I18nMarqueeBase = kind({
 			<Marquee {...rest}>
 				{marqueeText}
 			</Marquee>
-		)
+		);
 	}
 });
 
@@ -32,7 +32,7 @@ const I18nMarquee = I18nContextDecorator({rtlProp: 'rtl'}, I18nMarqueeBase);
 export default {
 	title: 'Agate/Marquee',
 	component: 'Marquee'
-}
+};
 
 export const _Marquee = () => {
 	const value = text('marqueeSpacing', Config, '50%');

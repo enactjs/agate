@@ -6,7 +6,6 @@ import Button from '@enact/agate/Button';
 import TabGroup from '@enact/agate/TabGroup';
 
 const Config = mergeComponentMetadata('TabGroup', TabGroup);
-TabGroup.displayName = 'TabGroup';
 
 export default {
 	title: 'Agate/TabGroup',

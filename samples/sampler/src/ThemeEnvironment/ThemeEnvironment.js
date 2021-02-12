@@ -2,26 +2,26 @@
 
 import kind from '@enact/core/kind';
 import {cap} from '@enact/core/util';
+import {Row, Column, Cell} from '@enact/ui/Layout';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {color} from '@storybook/addon-knobs';
-import {Row, Column, Cell} from '@enact/ui/Layout';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 
-import ThemeDecorator from '@enact/agate/ThemeDecorator';
 import Heading from '@enact/agate/Heading';
 import {Panels, Panel} from '@enact/agate/Panels';
 import Skinnable from '@enact/agate/Skinnable';
 import Scroller from '@enact/agate/Scroller';
+import ThemeDecorator from '@enact/agate/ThemeDecorator';
 
 import css from './ThemeEnvironment.module.less';
 
 const globalGroup = 'Global Knobs';
 
-// const reloadPage = () => {
-// 	const {protocol, host, pathname} = window.parent.location;
-// 	window.parent.location.href = protocol + '//' + host + pathname;
-// };
+const reloadPage = () => {
+	const {protocol, host, pathname} = window.parent.location;
+	window.parent.location.href = protocol + '//' + host + pathname;
+};
 
 const SkinFrame = Skinnable(kind({
 	name: 'SkinFrame',
@@ -56,11 +56,6 @@ const SkinFrame = Skinnable(kind({
 		return (<Row {...props} />);
 	}
 }));
-
-const reloadPage = () => {
-	const {protocol, host, pathname} = window.parent.location;
-	window.parent.location.href = protocol + '//' + host + pathname;
-};
 
 const PanelsBase = kind({
 	name: 'ThemeEnvironment',

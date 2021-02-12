@@ -12,7 +12,7 @@ const HeaderConfig = mergeComponentMetadata('Header', Header);
 export default {
 	title: 'Agate/Panel',
 	component: 'Panel'
-}
+};
 
 export const _Panel = () => (
 	<Panel>

@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, number, text} from  '@enact/storybook-utils/addons/knobs';
 import {action} from '@enact/storybook-utils/addons/actions';
+import {boolean, number, text} from  '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 
 import Dropdown, {DropdownBase} from '@enact/agate/Dropdown';
@@ -10,7 +10,7 @@ const Config = mergeComponentMetadata('Dropdown', Dropdown, DropdownBase);
 export default {
 	title: 'Agate/Dropdown',
 	component: 'Dropdown'
-}
+};
 
 export const _Dropdown = () => {
 	const itemCount = number('items', Config, {range: true, min: 0, max: 50}, 5);

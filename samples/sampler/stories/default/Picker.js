@@ -11,7 +11,7 @@ const Config = mergeComponentMetadata('Picker', Picker, PickerBase);
 export default {
 	title: 'Agate/Picker',
 	component: 'Picker'
-}
+};
 
 export const _Picker = () => (
 	<Picker

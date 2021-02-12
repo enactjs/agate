@@ -12,7 +12,7 @@ const Config = mergeComponentMetadata('LabeledIconButton', UiLabeledIconBase, Ui
 export default {
 	title: 'Agate/LabeledIconButton',
 	component: 'LabeledIconButton'
-}
+};
 
 export const _LabeledIconButton = () => (
 	<LabeledIconButton

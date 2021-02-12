@@ -1,5 +1,5 @@
-import {object, select} from '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
+import {object, select} from '@enact/storybook-utils/addons/knobs';
 import ri from '@enact/ui/resolution';
 import React from 'react';
 
@@ -16,7 +16,7 @@ const Config = mergeComponentMetadata('Image', Image, ImageBase, ImageDecorator)
 export default {
 	title: 'Agate/Image',
 	component: 'Image'
-}
+};
 
 export const _Image = () => (
 	<Image

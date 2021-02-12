@@ -7,7 +7,6 @@ import React from 'react';
 import Button, {ButtonBase} from '@enact/agate/Button';
 import TooltipDecorator from '@enact/agate/TooltipDecorator';
 
-Button.displayName = 'TooltipDecorator';
 const Config = mergeComponentMetadata('TooltipDecorator', UiButton, ButtonBase, Button);
 const TooltipButton = TooltipDecorator({tooltipDestinationProp: 'decoration'}, Button);
 

@@ -21,7 +21,7 @@ const prop = {
 export default {
 	title: 'Agate/Popup',
 	component: 'Popup'
-}
+};
 
 export const _Popup = () => {
 	const buttonsSelection = select('buttons', ['no buttons', '2 buttons'], Config, 'no');

@@ -1,8 +1,8 @@
-import {action} from '@enact/storybook-utils/addons/actions';
-import BodyText from '@enact/ui/BodyText';
-import {boolean, number, select, text} from '@enact/storybook-utils/addons/knobs';
 import convert from 'color-convert';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
+import {action} from '@enact/storybook-utils/addons/actions';
+import {boolean, number, select, text} from '@enact/storybook-utils/addons/knobs';
+import BodyText from '@enact/ui/BodyText';
 import React from 'react';
 
 import Drawer, {DrawerBase} from '@enact/agate/Drawer';

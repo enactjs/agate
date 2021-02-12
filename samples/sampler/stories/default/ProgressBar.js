@@ -10,7 +10,7 @@ const Config = mergeComponentMetadata('ProgressBar', UiProgressBar, ProgressBarB
 export default {
 	title: 'Agate/ProgressBar',
 	component: 'ProgressBar'
-}
+};
 
 export const _ProgressBar = () => (
 	<ProgressBar

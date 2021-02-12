@@ -12,7 +12,7 @@ const Config = mergeComponentMetadata('RadioItem', RadioItem);
 export default {
 	title: 'Agate/RadioItem',
 	component: 'RadioItem'
-}
+};
 
 export const _RadioItem = () => (
 	<div>

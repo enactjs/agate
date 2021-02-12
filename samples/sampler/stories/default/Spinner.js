@@ -1,15 +1,14 @@
 import kind from '@enact/core/kind';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
-import ri from '@enact/ui/resolution';
 import UiSpinner, {SpinnerBase as UiSpinnerBase} from '@enact/ui/Spinner';
+import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import Skinnable from '@enact/agate/Skinnable';
 import Spinner, {SpinnerBase} from '@enact/agate/Spinner';
 
-Spinner.displayName = 'Spinner';
 const Config = mergeComponentMetadata('Spinner', UiSpinnerBase, UiSpinner, SpinnerBase, Spinner);
 
 const SkinnedSpinnerBase = kind({

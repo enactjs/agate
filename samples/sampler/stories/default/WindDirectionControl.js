@@ -5,7 +5,6 @@ import React from 'react';
 
 import WindDirectionControl, {WindDirectionControlBase} from '@enact/agate/WindDirectionControl';
 
-WindDirectionControl.displayName = 'WindDirectionControl';
 const Config = mergeComponentMetadata('WindDirectionControl', WindDirectionControlBase, WindDirectionControl);
 
 export default {

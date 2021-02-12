@@ -1,7 +1,7 @@
 import $L from '@enact/i18n/$L';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
-import {action} from '@enact/storybook-utils/addons/actions';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
+import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
 import PropTypes from 'prop-types';
 import React from 'react';

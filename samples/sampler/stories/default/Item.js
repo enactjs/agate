@@ -11,7 +11,7 @@ const Config = mergeComponentMetadata('Item', UiItemBase, UiItem, ItemBase, Item
 export default {
 	title: 'Agate/Item',
 	component: 'Item'
-}
+};
 
 export const _Item = () => (
 	<Item

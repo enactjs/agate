@@ -12,7 +12,7 @@ const Config = mergeComponentMetadata('FanSpeedControl', FanSpeedControl);
 export default {
 	title: 'Agate/FanSpeedControl',
 	component: 'FanSpeedControl'
-}
+};
 
 export const _FanSpeedControl = () => (
 	<FanSpeedControl

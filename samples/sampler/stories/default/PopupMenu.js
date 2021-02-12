@@ -39,7 +39,7 @@ const Story = ({children: {props, type: Component}, ...rest}) => {
 export default {
 	title: 'Agate/PopupMenu',
 	component: 'PopupMenu'
-}
+};
 
 export const _PopupMenu = () => {
 	const closeButton = boolean('closeButton', Config);

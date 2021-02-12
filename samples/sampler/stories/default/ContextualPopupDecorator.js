@@ -1,12 +1,12 @@
-import {ContextualPopupDecorator} from '@enact/agate/ContextualPopupDecorator';
-import BodyText from '@enact/agate/BodyText';
-import Button from '@enact/agate/Button';
+import {mergeComponentMetadata} from '@enact/storybook-utils';
+import {action} from '@enact/storybook-utils/addons/actions';
+import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import ri from '@enact/ui/resolution';
 import React from 'react';
 
-import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {action} from '@enact/storybook-utils/addons/actions';
+import BodyText from '@enact/agate/BodyText';
+import Button from '@enact/agate/Button';
+import {ContextualPopupDecorator} from '@enact/agate/ContextualPopupDecorator';
 
 const ContextualButton = ContextualPopupDecorator(Button);
 

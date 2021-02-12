@@ -10,7 +10,7 @@ const Config = mergeComponentMetadata('Keypad', Keypad);
 export default {
 	title: 'Agate/Keypad',
 	component: 'Keypad'
-}
+};
 
 export const _Keypad = () => (
 	<Keypad
