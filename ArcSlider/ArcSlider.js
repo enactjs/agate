@@ -14,7 +14,6 @@ import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Pure from '@enact/ui/internal/Pure';
-import {Cell} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 import Touchable from '@enact/ui/Touchable';
 import PropTypes from 'prop-types';
@@ -109,6 +108,12 @@ const ArcSliderBase = kind({
 		 */
 		isFocused: PropTypes.bool,
 
+		/**
+		 * Determines what triggers the marquee to start its animation.
+		 *
+		 * @type {('focus'|'hover'|'render')}
+		 * @public
+		 */
 		marqueeOn: PropTypes.oneOf(['focus', 'hover', 'render']),
 
 		/**
@@ -196,8 +201,7 @@ const ArcSliderBase = kind({
 		radius: 150,
 		startAngle: 30,
 		step: 1,
-		strokeWidth: 6,
-		slotCenter: 'slotCenter'
+		strokeWidth: 6
 	},
 
 	contextType: ThemeContext,
@@ -250,13 +254,7 @@ const ArcSliderBase = kind({
 						r={ri.scaleToRem(15)}
 					/>
 				</Arc>
-				<Cell {...rest} component={Marquee} alignment="center" className={css.valueDisplay} marqueeOn={marqueeOn}>
-					{slotCenter}
-				</Cell>
-				{/* <Marquee children={slotCenter} alignment="center" css={css.valueDisplay}/> */}
-				{/* <div className={css.valueDisplay}>
-					{slotCenter}
-				</div> */}
+				<Marquee className={css.valueDisplay} marqueeOn={marqueeOn} alignment="center">{slotCenter}</Marquee>
 			</div>
 		);
 	}

@@ -13,23 +13,18 @@
 	}
 
 	.valueDisplay {
-		// position: absolute;
-		// left: 50%;
-		// top: 50%;
-		// transform: translate(-50%, -50%);
-		// width: fit-content;
-		display: flex;
-		align-items: center;
-		margin-left: auto;
-		margin-right: auto;
-		max-width: 80%;
-		
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: fit-content;
 	}
 
 	.applySkins({
 		.valueDisplay {
 			font-size: @agate-arcslider-font-size;
 			font-weight: @agate-arcslider-font-weight;
+			max-width: @agate-arcslider-slotcenter-max-width;
 		}
 
 		.focus({

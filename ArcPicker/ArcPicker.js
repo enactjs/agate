@@ -15,7 +15,6 @@
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
-import {Cell} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
@@ -98,6 +97,12 @@ const ArcPickerBase = kind({
 		 */
 		isFocused: PropTypes.bool,
 
+		/**
+		 * Determines what triggers the marquee to start its animation.
+		 *
+		 * @type {('focus'|'hover'|'render')}
+		 * @public
+		 */
 		marqueeOn: PropTypes.oneOf(['focus', 'hover', 'render']),
 
 		/**
@@ -229,12 +234,7 @@ const ArcPickerBase = kind({
 			// eslint-disable-next-line jsx-a11y/role-has-required-aria-props
 			<div aria-disabled={disabled} aria-valuetext={value} role="slider" {...rest} disabled={disabled}>
 				{arcSegments}
-				<Cell {...rest} component={Marquee} className={css.valueDisplay} marqueeOn={marqueeOn}>
-					{slotCenter}
-				</Cell>
-				{/* <div className={css.valueDisplay}>
-					{slotCenter}
-				</div> */}
+				<Marquee className={css.valueDisplay} marqueeOn={marqueeOn} alignment="center">{slotCenter}</Marquee>
 			</div>
 		);
 	}
