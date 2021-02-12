@@ -15,12 +15,14 @@
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
+import {Cell} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import React from 'react';
 
 import Arc from '../Arc';
+import {Marquee, MarqueeController} from '../Marquee';
 import Skinnable from '../Skinnable';
 import {ThemeContext} from '../ThemeDecorator';
 
@@ -96,6 +98,8 @@ const ArcPickerBase = kind({
 		 */
 		isFocused: PropTypes.bool,
 
+		marqueeOn: PropTypes.oneOf(['focus', 'hover', 'render']),
+
 		/**
 		 * Called when the path area is clicked.
 		 *
@@ -163,6 +167,7 @@ const ArcPickerBase = kind({
 		backgroundColor: '#eeeeee',
 		endAngle: 310,
 		foregroundColor: '#444444',
+		marqueeOn: 'render',
 		radius: 150,
 		startAngle: 50,
 		strokeWidth: 6
@@ -210,7 +215,7 @@ const ArcPickerBase = kind({
 		}
 	},
 
-	render: ({arcSegments, disabled, slotCenter, value, ...rest}) => {
+	render: ({arcSegments, disabled, marqueeOn, slotCenter, value, ...rest}) => {
 		delete rest.backgroundColor;
 		delete rest.children;
 		delete rest.endAngle;
@@ -224,9 +229,12 @@ const ArcPickerBase = kind({
 			// eslint-disable-next-line jsx-a11y/role-has-required-aria-props
 			<div aria-disabled={disabled} aria-valuetext={value} role="slider" {...rest} disabled={disabled}>
 				{arcSegments}
-				<div className={css.valueDisplay}>
+				<Cell {...rest} component={Marquee} className={css.valueDisplay} marqueeOn={marqueeOn}>
 					{slotCenter}
-				</div>
+				</Cell>
+				{/* <div className={css.valueDisplay}>
+					{slotCenter}
+				</div> */}
 			</div>
 		);
 	}
@@ -244,6 +252,7 @@ const ArcPickerBase = kind({
 const ArcPickerDecorator = compose(
 	Changeable,
 	ArcPickerBehaviorDecorator,
+	MarqueeController({marqueeOnFocus: true}),
 	Spottable,
 	Skinnable
 );

@@ -14,6 +14,7 @@ import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Pure from '@enact/ui/internal/Pure';
+import {Cell} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 import Touchable from '@enact/ui/Touchable';
 import PropTypes from 'prop-types';
@@ -22,6 +23,7 @@ import React from 'react';
 
 import Arc from '../Arc';
 import {angleToPosition} from '../Arc/utils';
+import {Marquee, MarqueeController} from '../Marquee';
 import Skinnable from '../Skinnable';
 import {ThemeContext} from '../ThemeDecorator';
 
@@ -107,6 +109,8 @@ const ArcSliderBase = kind({
 		 */
 		isFocused: PropTypes.bool,
 
+		marqueeOn: PropTypes.oneOf(['focus', 'hover', 'render']),
+
 		/**
 		 * The maximum value of the slider and should be greater than min.
 		 *
@@ -186,12 +190,14 @@ const ArcSliderBase = kind({
 		backgroundColor: '#000000',
 		endAngle: 250,
 		foregroundColor: '#0000ff',
+		marqueeOn: 'render',
 		max: 100,
 		min: 0,
 		radius: 150,
 		startAngle: 30,
 		step: 1,
-		strokeWidth: 6
+		strokeWidth: 6,
+		slotCenter: 'slotCenter'
 	},
 
 	contextType: ThemeContext,
@@ -209,7 +215,7 @@ const ArcSliderBase = kind({
 		}
 	},
 
-	render: ({'aria-valuetext': ariaValuetext, backgroundColor, componentRef, disabled, endAngle, foregroundColor, isFocused, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}, context) => {
+	render: ({'aria-valuetext': ariaValuetext, backgroundColor, componentRef, disabled, endAngle, foregroundColor, isFocused, marqueeOn, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}, context) => {
 		const {accent: accentColor} = context || {};
 		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
@@ -244,9 +250,13 @@ const ArcSliderBase = kind({
 						r={ri.scaleToRem(15)}
 					/>
 				</Arc>
-				<div className={css.valueDisplay}>
+				<Cell {...rest} component={Marquee} alignment="center" className={css.valueDisplay} marqueeOn={marqueeOn}>
 					{slotCenter}
-				</div>
+				</Cell>
+				{/* <Marquee children={slotCenter} alignment="center" css={css.valueDisplay}/> */}
+				{/* <div className={css.valueDisplay}>
+					{slotCenter}
+				</div> */}
 			</div>
 		);
 	}
@@ -265,6 +275,7 @@ const ArcSliderBase = kind({
 const ArcSliderDecorator = compose(
 	Pure,
 	ArcSliderBehaviorDecorator,
+	MarqueeController({marqueeOnFocus: true}),
 	Touchable,
 	Spottable,
 	Skinnable
