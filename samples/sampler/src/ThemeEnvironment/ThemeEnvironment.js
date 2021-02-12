@@ -2,16 +2,17 @@
 
 import kind from '@enact/core/kind';
 import {cap} from '@enact/core/util';
-import {Row, Column, Cell} from '@enact/ui/Layout';
-import React from 'react';
-import PropTypes from 'prop-types';
-import {color} from '@storybook/addon-knobs';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
+import {Row, Column, Cell} from '@enact/ui/Layout';
+import PropTypes from 'prop-types';
+import React from 'react';
+import {color} from '@storybook/addon-knobs';
 
 import Heading from '@enact/agate/Heading';
 import {Panels, Panel} from '@enact/agate/Panels';
-import Skinnable from '@enact/agate/Skinnable';
 import Scroller from '@enact/agate/Scroller';
+import Skinnable from '@enact/agate/Skinnable';
+
 import ThemeDecorator from '@enact/agate/ThemeDecorator';
 
 import css from './ThemeEnvironment.module.less';
@@ -226,9 +227,6 @@ const StorybookDecorator = (story, config) => {
 		skinKnobs.skin = select('skin', skins, Config, currentSkin);
 	}
 	const {accent, highlight} = !allSkins && boolean('default skin styles', Config) ? defaultColors[skinKnobs.skin] : {};
-	// if (config.parameters && config.parameters.props) {
-	// 	config.props = config.parameters.props;
-	// }
 
 	// NOTE: 'config' object is not extensible
 	const hasInfoText = config.parameters && config.parameters.info && config.parameters.info.text;

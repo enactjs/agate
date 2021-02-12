@@ -1,9 +1,10 @@
 import kind from '@enact/core/kind';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean} from '@enact/storybook-utils/addons/knobs';
+import ri from '@enact/ui/resolution';
 import React from 'react';
 import PropTypes from 'prop-types';
-import ri from '@enact/ui/resolution';
+
 
 import BodyText from '@enact/agate/BodyText';
 import Button from '@enact/agate/Button';
