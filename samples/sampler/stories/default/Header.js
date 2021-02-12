@@ -24,7 +24,7 @@ const prop = {
 export default {
 	title: 'Agate/Header',
 	component: 'Header'
-}
+};
 
 export const _Header = () => {
 	const childrenSelection = select('children', ['no buttons', '1 button', '2 buttons'], Config);
