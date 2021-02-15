@@ -42,11 +42,16 @@
 		}
 
 		.client {
-			padding: @agate-button-border-width; // We match the amount removed by the line-height above, so the text doesn't overlap the border
+			padding: @agate-button-client-padding;
 			color: @agate-button-color;
 
 			.icon {
+				font-size: @agate-button-icon-font-size;
+				height: @agate-button-icon-width;
+				line-height: @agate-button-icon-width;
 				.margin-start-end(@agate-button-icon-margin-start, @agate-button-icon-margin-end);
+				padding: @agate-button-icon-padding;
+				width: @agate-button-icon-width;
 			}
 		}
 
@@ -186,6 +191,7 @@
 
 		&.huge {
 			height: @agate-button-huge-height;
+			max-width: @agate-button-huge-max-width;
 			min-width: @agate-button-huge-height;
 			line-height: @agate-button-huge-line-height;
 			font-size: @agate-button-huge-font-size;
@@ -194,15 +200,23 @@
 			.bg {
 				border-width: @agate-button-huge-border-width;
 			}
+
+			&.minWidth {
+				min-width: @agate-button-huge-min-width;
+			}
 		}
 
 		&.small {
-			border-radius: @agate-button-small-border-radius;
 			height: @agate-button-small-height;
+			max-width: @agate-button-small-max-width;
 			min-width: @agate-button-small-height;
 			font-size: @agate-button-small-font-size;
 			line-height: @agate-button-line-height;
 			padding: 0 @agate-button-small-h-padding;
+
+			.bg {
+				border-radius: @agate-button-small-border-radius;
+			}
 
 			&.minWidth {
 				min-width: @agate-button-small-min-width;
@@ -232,10 +246,15 @@
 
 		&.smallest {
 			height: @agate-button-smallest-height;
+			max-width: @agate-button-smallest-max-width;
 			min-width: @agate-button-smallest-height;
 			line-height: @agate-button-smallest-line-height;
 			font-size: @agate-button-smallest-font-size;
 			padding: 0 @agate-button-smallest-h-padding;
+
+			.bg {
+				border-radius: @agate-button-smallest-border-radius;
+			}
 
 			.badge {
 				.position(@agate-button-smallest-badge-position);
@@ -247,11 +266,22 @@
 				text-indent: @agate-button-smallest-badge-text-indent;
 				transform: @agate-button-smallest-badge-transform;
 
+				&.minWidth {
+					min-width: @agate-button-smallest-min-width;
+				}
+
+
 				.enact-locale-rtl({
 					.position(@agate-button-smallest-badge-position-rtl);
 				});
 			}
 		}
+
+		.disabled({
+			.bg {
+				opacity: 0.5;
+			}
+		});
 
 		&.highlighted {
 			.bg {
@@ -348,6 +378,12 @@
 			&.highlighted {
 				.bg {
 					opacity: 1;
+				}
+			}
+
+			&.selected {
+				.bg {
+					border-color: @agate-button-selected-focus-border-color;
 				}
 			}
 		});
