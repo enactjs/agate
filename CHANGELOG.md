@@ -9,9 +9,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
 - `agate/ArcPicker` to use `Marquee` for slotCenter
 - `agate/ArcSlider` to use `Marquee` for slotCenter
-- `agate/FanSpeedControl` to use `Marquee` for slotCenter
-- `agate/TemperatureControl` to use `Marquee` for slotCenter
-- `agate/WindDirectionControl` to use `Marquee` for slotCenter
 
 ## [1.1.2] - 2021-02-05
 
