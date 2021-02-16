@@ -6,6 +6,8 @@
 
 .heading {
 	.applySkins({
+		max-width: @agate-heading-max-width;
+		height: @agate-heading-height;
 		border-bottom: @agate-heading-border-width solid transparent;
 		margin: @agate-heading-margin;
 		padding: @agate-heading-padding;
@@ -14,6 +16,12 @@
 		color: @agate-heading-text-color;
 		text-transform: @agate-heading-text-transform;
 		font-variant-ligatures: @agate-heading-font-ligatures;
+
+		.backButton {
+			align-items: center;
+			display: flex;
+			justify-content: center;
+		}
 
 		&.showLine {
 			border-bottom-color: @agate-heading-border-color;

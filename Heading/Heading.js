@@ -15,14 +15,18 @@
  * @exports HeadingDecorator
  */
 
+
 import kind from '@enact/core/kind';
+import UiHeading from '@enact/ui/Heading';
 import Pure from '@enact/ui/internal/Pure';
+import Layout, {Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
+import React from 'react';
 import defaultProps from 'recompose/defaultProps';
 import setPropTypes from 'recompose/setPropTypes';
-import UiHeading from '@enact/ui/Heading';
 
+import Button from '../Button';
 import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
@@ -56,12 +60,29 @@ const HeadingBase = kind({
 		css: PropTypes.object,
 
 		/**
+		 * Shows the back button.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		showBackButton: PropTypes.bool,
+
+		/**
 		 * Adds a horizontal-rule (line) under the component
 		 *
 		 * @type {Boolean}
 		 * @public
 		 */
 		showLine: PropTypes.bool,
+
+		/**
+		 * The current skin.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		skin: PropTypes.string,
 
 		/**
 		 * The size of the spacing around the Heading.
@@ -99,10 +120,25 @@ const HeadingBase = kind({
 		})
 	},
 
-	render: ({css, ...rest}) => {
+	render: ({children, css, showBackButton, skin, ...rest}) => {
+		const icon = skin === 'silicon' ? 'arrowleft' : 'arrowlargeleft';
 		delete rest.color;
 		delete rest.showLine;
-		return UiHeading.inline({css, ...rest});
+
+		return (
+			<UiHeading css={css} {...rest}>
+				<Layout>
+					{showBackButton ?
+						<Cell className={css.backButton} shrink>
+							<Button icon={icon} size="small" />
+						</Cell> : null
+					}
+					<Cell>
+						{children}
+					</Cell>
+				</Layout>
+			</UiHeading>
+		);
 	}
 });
 
@@ -124,7 +160,7 @@ const HeadingDecorator = compose(
 	}),
 	Pure,
 	MarqueeDecorator,
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 /**

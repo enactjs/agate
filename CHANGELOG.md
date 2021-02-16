@@ -4,6 +4,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Added
+
+- `agate/Heading` prop `showBackButton`
+
 ### Changed
 
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
