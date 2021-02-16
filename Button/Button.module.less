@@ -100,30 +100,6 @@
 			min-width: @agate-button-min-width;
 		}
 
-		// opaque
-		&.opaque {
-			/* Available for export */
-		}
-
-		&.lightOpaque {
-			.bg {
-				background-color: @agate-button-lightOpaque-bg-color;
-			}
-
-			.client {
-				color: @agate-button-lightOpaque-color;
-			}
-		}
-
-		&.transparent {
-			.bg {
-				background-color: @agate-button-transparent-bg-color;
-			}
-
-			.client {
-				color: @agate-button-transparent-color;
-			}
-		}
 
 		&.iconOnly {
 			.bg {
@@ -187,6 +163,51 @@
 					}
 				}
 			}
+		}
+
+		// opaque
+		&.opaque {
+			/* Available for export */
+		}
+
+		&.lightOpaque {
+			.bg {
+				background-color: @agate-button-lightOpaque-bg-color;
+			}
+
+			.client {
+				color: @agate-button-lightOpaque-color;
+			}
+
+			.disabled({
+				.bg {
+					background-color: @agate-button-lightOpaque-bg-color;
+				}
+
+				.client {
+					color: @agate-button-lightOpaque-color;
+				}
+			})
+		}
+
+		&.transparent {
+			.bg {
+				background-color: @agate-button-transparent-bg-color;
+			}
+
+			.client {
+				color: @agate-button-transparent-color;
+			}
+
+			.disabled({
+				.bg {
+					background-color: @agate-button-transparent-bg-color;
+				}
+
+				.client {
+					color: @agate-button-transparent-color;
+				}
+			})
 		}
 
 		&.animateOnRender {
