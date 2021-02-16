@@ -51,13 +51,13 @@
     "react-dom": "^17.0.1",
     "recompose": "^0.30.0",
     "warning": "^3.0.0",
-    "ilib": "^14.2.0"
+    "ilib": "^14.4.0"
   },
   "peerDependencies": {
     "ilib": "^14.4.0 || ^14.6.0-webos"
   },
   "devDependencies": {
-    "@enact/ui-test-utils": "^0.5.0",
+    "@enact/ui-test-utils": "^0.6.0",
     "eslint-config-enact-proxy": "^1.0.0",
     "ilib": "^14.4.0"
   }
