@@ -1,5 +1,4 @@
 import {mount} from 'enzyme';
-import React from 'react';
 import FanSpeedControl from '../FanSpeedControl';
 
 describe('FanSpeedControl Specs', () => {

@@ -1,5 +1,4 @@
 import Dropdown from '../../../../Dropdown';
-import React from 'react';
 
 const DropdownTests = [
 	<Dropdown open>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,

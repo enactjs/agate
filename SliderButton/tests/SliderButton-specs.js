@@ -1,5 +1,4 @@
 import {mount} from 'enzyme';
-import React from 'react';
 import SliderButton from '../SliderButton';
 
 const children = ['Light Speed', 'Ridiculous Speed', 'Ludicrous Speed'];
