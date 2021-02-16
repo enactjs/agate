@@ -43,9 +43,9 @@ describe('Heading Specs', () => {
 			</Heading>
 		);
 
-		const closeButton = heading.find('Button');
+		const backButton = heading.find('Button');
 		const expected = 1;
-		const actual = closeButton.length;
+		const actual = backButton.length;
 
 		expect(actual).toBe(expected);
 	});
