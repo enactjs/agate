@@ -120,6 +120,38 @@
 		}
 
 		&.iconOnly {
+			.bg {
+				background-color: @agate-button-iconOnly-bg-color;
+				border-color: @agate-button-iconOnly-border-color;
+			}
+
+			.client {
+				color: @agate-button-iconOnly-color;
+			}
+
+			&.selected {
+				.bg {
+					background-color: @agate-button-iconOnly-bg-color;
+					border-color: @agate-button-iconOnly-selected-border-color;
+				}
+
+				.client {
+					color: @agate-button-iconOnly-color;
+				}
+			}
+
+			.focus({
+				.bg {
+					border-color: @agate-button-iconOnly-border-color;
+				}
+			});
+
+			.disabled({
+				.client {
+					opacity: 0.5;
+				}
+			});
+
 			&,
 			&.huge,
 			&.small,
