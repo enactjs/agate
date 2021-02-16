@@ -1,5 +1,4 @@
 import Button from '../../../../Button';
-import React from 'react';
 
 const ButtonTests = [
 	<Button>Click me</Button>,

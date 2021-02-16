@@ -31,7 +31,7 @@ import Transition from '@enact/ui/Transition';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
+import {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 import Button from '../Button';
@@ -346,7 +346,7 @@ const DropdownBase = kind({
 });
 
 const DropDownExtended = hoc((config, Wrapped) => {
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'DropDownExtended';
 
 		static propTypes = {

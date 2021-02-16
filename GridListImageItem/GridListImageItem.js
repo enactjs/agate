@@ -13,7 +13,6 @@ import {memoize} from '@enact/core/util';
 import {GridListImageItem as UiGridListImageItem} from '@enact/ui/GridListImageItem';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import {ImageBase} from '../Image';
 import Icon from '../Icon';

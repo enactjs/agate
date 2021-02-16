@@ -3,7 +3,6 @@ import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import kind from '@enact/core/kind';
 import UiSpinner, {SpinnerBase as UiSpinnerBase} from '@enact/ui/Spinner';
 import ri from '@enact/ui/resolution';
-import React from 'react';
 import PropTypes from 'prop-types';
 import {storiesOf} from '@storybook/react';
 

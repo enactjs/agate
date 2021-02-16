@@ -1,5 +1,4 @@
 import ImageItem from '@enact/agate/ImageItem';
-import React from 'react';
 
 import Section from '../components/Section';
 
