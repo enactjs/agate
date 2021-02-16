@@ -46,14 +46,20 @@
 			color: @agate-button-color;
 
 			.icon {
-				font-size: @agate-button-icon-font-size;
-				height: @agate-button-icon-width;
-				line-height: @agate-button-icon-width;
 				.margin-start-end(@agate-button-icon-margin-start, @agate-button-icon-margin-end);
 				padding: @agate-button-icon-padding;
-				width: @agate-button-icon-width;
 			}
 		}
+
+		.disabled({
+			.bg {
+				background-color: @agate-button-disabled-bg-color;
+			}
+
+			.client {
+				color: @agate-button-disabled-color;
+			}
+		});
 
 		.badge {
 			position: absolute;
@@ -147,8 +153,12 @@
 			});
 
 			.disabled({
+				.bg {
+					background-color: @agate-button-iconOnly-bg-color;
+				}
+
 				.client {
-					opacity: 0.5;
+					color: @agate-button-iconOnly-disabled-color;
 				}
 			});
 
@@ -308,12 +318,6 @@
 				});
 			}
 		}
-
-		.disabled({
-			.bg {
-				opacity: 0.5;
-			}
-		});
 
 		&.highlighted {
 			.bg {

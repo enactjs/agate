@@ -86,6 +86,8 @@
 @agate-button-shadow:         none;
 @agate-button-active-color:   @agate-button-color;
 @agate-button-active-bg-color: @silicon-light-gray;
+@agate-button-disabled-bg-color: fade(@agate-button-bg-color, 50%);
+@agate-button-disabled-color:  fade(@agate-button-color, 50%);
 @agate-button-focus-color:    @agate-spotlight-color;
 @agate-button-focus-bg-color: transparent;
 @agate-button-focus-bg-image: @silicon-gradient;
@@ -94,6 +96,7 @@
 @agate-button-highlighted-bg-image: @agate-button-bg-image;
 @agate-button-iconOnly-bg-color: @agate-button-transparent-bg-color;
 @agate-button-iconOnly-color: @agate-button-transparent-color;
+@agate-button-iconOnly-disabled-color: fade(@agate-button-iconOnly-color, 50%);
 @agate-button-iconOnly-selected-border-color: @agate-button-iconOnly-color;
 @agate-button-selected-color: @agate-button-color;
 @agate-button-selected-bg-color: @agate-button-bg-color;
