@@ -4,9 +4,17 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Added
+
+- `agate/BodyText` Scroller to apply a vertical scroll when contents are larger than the container
+
 ### Changed
 
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
+
+### Fixed
+
+- `agate/BodyText` to match latest designs
 
 ## [1.1.2] - 2021-02-05
 
