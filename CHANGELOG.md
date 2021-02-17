@@ -8,6 +8,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
 
+### Fixed
+
+- `agate/Button` style to match latest design for Silicon skin
+
 ## [1.1.2] - 2021-02-05
 
 ### Deprecated
