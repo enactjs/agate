@@ -155,7 +155,7 @@ const ButtonTests = [
 		<Button icon="arrowharpoonright" iconFlip="horizontal">click me</Button>,
 		<Button icon="arrowharpoonright" iconFlip="vertical">click me</Button>,
 		<Button icon="arrowharpoonright" iconFlip="both">click me</Button>,
-		<Button icon="arrowharpoonright" iconFlip="auto">click me</Button>,
+		<Button icon="arrowharpoonright" iconFlip="auto">click me</Button>
 	])
 ];
 
