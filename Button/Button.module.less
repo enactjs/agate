@@ -264,6 +264,19 @@
 				border-width: @agate-button-huge-border-width;
 			}
 
+			.client {
+				.icon {
+					.margin-start-end(@agate-button-huge-icon-margin-start, @agate-button-huge-icon-margin-end);
+					padding: @agate-button-huge-icon-padding;
+				}
+			}
+
+			&.iconAfter {
+				.icon {
+					.margin-start-end(@agate-button-huge-icon-position-after-margin-start, @agate-button-huge-icon-position-after-margin-end);
+				}
+			}
+
 			&.minWidth {
 				min-width: @agate-button-huge-min-width;
 			}
@@ -281,14 +294,26 @@
 				border-radius: @agate-button-small-border-radius;
 			}
 
-			&.minWidth {
-				min-width: @agate-button-small-min-width;
+			.client {
+				::before {
+					bottom: 12px;
+					left: 18px;
+					right: 18px;
+				}
+
+				.icon {
+					.margin-start-end(@agate-button-small-icon-margin-start, @agate-button-small-icon-margin-end);
+				}
 			}
 
-			.client::before {
-				bottom: 12px;
-				left: 18px;
-				right: 18px;
+			&.iconAfter {
+				.icon {
+					.margin-start-end(@agate-button-small-icon-position-after-margin-start, @agate-button-small-icon-position-after-margin-end);
+				}
+			}
+
+			&.minWidth {
+				min-width: @agate-button-small-min-width;
 			}
 
 			.badge {
@@ -317,6 +342,18 @@
 
 			.bg {
 				border-radius: @agate-button-smallest-border-radius;
+			}
+
+			.client {
+				.icon {
+					.margin-start-end(@agate-button-smallest-icon-margin-start, @agate-button-smallest-icon-margin-end);
+				}
+			}
+
+			&.iconAfter {
+				.icon {
+					.margin-start-end(@agate-button-smallest-icon-position-after-margin-start, @agate-button-smallest-icon-position-after-margin-end);
+				}
 			}
 
 			.badge {
