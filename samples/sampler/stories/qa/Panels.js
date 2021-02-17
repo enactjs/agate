@@ -1,25 +1,31 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
-import Routable, {Link, Route} from '@enact/ui/Routable';
+import Routable, {Route, Linkable} from '@enact/ui/Routable';
 import {storiesOf} from '@storybook/react';
-
-import {Panels, Panel, BreadcrumbPanels} from '@enact/agate/Panels';
-import Item from '@enact/agate/Item';
-import {clamp} from '@enact/core/util';
-import Header from '../../../../Header';
+import {handle, forward} from '@enact/core/handle';
 import kind from "@enact/core/kind";
-import Button from "../../../../Button";
+import {clamp} from '@enact/core/util';
+
+import Button from "@enact/agate/Button";
+import Header from '@enact/agate/Header';
+import Icon from '@enact/agate/Icon';
+import Item from '@enact/agate/Item';
+import {Panels, Panel, BreadcrumbPanels} from '@enact/agate/Panels';
+import Scroller from '@enact/agate/Scroller';
 import * as PropTypes from "prop-types";
+
+import componentCss from './MenuItem.module.less';
 
 Panels.displayName = 'Panels';
 const Config = mergeComponentMetadata('Panels', Panels);
-
 
 const BasicPanels = () => {
 	const [index, setIndex] = React.useState(0);
 	const goNext = () => setIndex(clamp(0, 2, index + 1));
 	const goPrevious = () => setIndex(clamp(0, 2, index - 1));
+	const goFirst = () => setIndex(0);
+	const goThird = () => setIndex(2);
 
 	return (
 		<Panels
@@ -28,19 +34,19 @@ const BasicPanels = () => {
 			noCloseButton={boolean('noCloseButton', Config, false)}
 			orientation={select('orientation', ['horizontal', 'vertical'], Config)}
 		>
-			<Panel spotlightId="first-panel-container">
+			<Panel>
 				<Header title="First Panel" />
-				<Item onClick={goPrevious}>First</Item>
 				<Item onClick={goNext}>Second</Item>
+				<Item onClick={goThird}>Third</Item>
 			</Panel>
-			<Panel spotlightId="second-panel-container">
+			<Panel>
 				<Header title="Second Panel" />
-				<Item onClick={goNext}>Third</Item>
 				<Item onClick={goPrevious}>First</Item>
+				<Item onClick={goNext}>Third</Item>
 			</Panel>
-			<Panel spotlightId="third-panel-container">
+			<Panel>
 				<Header title="Third Panel" />
-				<Item onClick={goNext}>First</Item>
+				<Item onClick={goFirst}>First</Item>
 				<Item onClick={goPrevious}>Second</Item>
 			</Panel>
 		</Panels>
@@ -61,28 +67,111 @@ storiesOf('Panels', module)
 		}
 	);
 
+const MenuItemBase = kind({
+	name: 'MenuItem',
 
+	propTypes: {
+		css: PropTypes.object,
+		icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+	},
 
-const MainPanel = () => {
+	defaultProps: {
+		disabled: false,
+		invisible: false
+	},
+
+	styles: {
+		css: componentCss,
+		className: 'menuItem'
+	},
+
+	handlers: {
+		onClick: handle(
+			forward('onClick')
+		)
+	},
+
+	computed: {
+		iconBefore: ({icon}) => {
+			if (!icon) return;
+
+			return (<Button size="large" backgroundOpacity="lightOpaque" icon={icon} />);
+		}
+	},
+
+	render: ({css, iconBefore, invisible, disabled, ...rest}) => {
+		return (
+			(invisible)? null :
+			<Item
+				css={css}
+				{...rest}
+				disabled={disabled}
+				slotAfter={
+					<Icon size="small">arrowlargeright</Icon>
+				}
+				slotBefore={iconBefore}
+			/>
+		);
+	}
+});
+
+const LinkedMenuItem = Linkable(MenuItemBase);
+
+const MenuItem = ({...rest}) => {
+	if (!rest.path) rest.path = '';
 	return (
-		<Item>Main panel</Item>
+		<LinkedMenuItem {...rest} />
 	);
 };
-const Page1 = () => {
-	return (
-		<Item>Page1</Item>
-	);
-};
-const Page2 = () => {
-	return (
-		<Item>Page2</Item>
-	);
-};
-const EndPage = () => {
-	return (
-		<Item>End page</Item>
-	);
-};
+
+const MainPanel = kind({
+	name: 'MainPanel',
+
+	render: () => (
+		<Panel spotlightId="main-panel-container">
+			<Scroller>
+				<MenuItem path="./page1">Pages</MenuItem>
+				<MenuItem path="./page2">General</MenuItem>
+			</Scroller>
+		</Panel>
+	)
+});
+
+const Page1 = kind({
+	name: 'Page',
+
+	render: () => (
+    <Panel spotlightId="page1-container">
+      <Scroller>
+          <MenuItem path="./endPage">Page1</MenuItem>
+          <MenuItem path="./endPage">Page2</MenuItem>
+      </Scroller>
+    </Panel>
+	)
+});
+
+const Page2 = kind({
+	name: 'Page',
+
+	render: () => (
+    <Panel spotlightId="page2-container">
+      <Scroller>
+          <MenuItem path="./endPage">Page1</MenuItem>
+          <MenuItem path="./endPage">Page2</MenuItem>
+      </Scroller>
+    </Panel>
+	)
+});
+
+const EndPage = kind({
+	name: 'Page',
+
+	render: () => (
+    <div>
+        <h1>EndPage</h1>
+    </div>
+	)
+});
 
 const BreadcrumbPanelsBase  = kind({
 	name: 'Panels',
@@ -98,8 +187,6 @@ const BreadcrumbPanelsBase  = kind({
 
 const RoutablePanels = Routable({navigate: 'onNavigate'}, BreadcrumbPanelsBase);
 
-let appPath ='/settings'
-
 const App = class extends React.Component {
 	constructor(props) {
 		super(props);
@@ -107,7 +194,6 @@ const App = class extends React.Component {
 	}
 
 	onNavigate = ({path}) => {
-		console.log(`path=${path} ${appPath}`);
 		this.setState({appPath: path})
 	}
 
@@ -135,11 +221,11 @@ storiesOf('Panels', module)
 		() => (
 				<App />
 		),
-		{
+    {
 			props: {
 				noScroller: true,
 				noPanels: true
 			},
-			text: 'The basic Panels'
+			text: 'Routable panels'
 		}
 	);
