@@ -1,6 +1,8 @@
 import Button from '../../../../Button';
 import React from 'react';
 
+import {withConfig} from './utils';
+
 const ButtonTests = [
 	<Button>Click me</Button>,
 	<Button icon="home" iconPosition="after" selected>Click me</Button>,
