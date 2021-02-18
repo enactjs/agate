@@ -1,12 +1,13 @@
 /* eslint-disable react/jsx-no-bind */
-import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, select} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
-import Routable, {Route, Linkable} from '@enact/ui/Routable';
-import {storiesOf} from '@storybook/react';
 import {handle, forward} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import {clamp} from '@enact/core/util';
+import {mergeComponentMetadata} from '@enact/storybook-utils';
+import {boolean, select} from '@enact/storybook-utils/addons/knobs';
+import Routable, {Route, Linkable} from '@enact/ui/Routable';
+import PropTypes from 'prop-types';
+import React from 'react';
+import {storiesOf} from '@storybook/react';
 
 import Button from '@enact/agate/Button';
 import Header from '@enact/agate/Header';
@@ -14,7 +15,6 @@ import Icon from '@enact/agate/Icon';
 import Item from '@enact/agate/Item';
 import {Panels, Panel, BreadcrumbPanels} from '@enact/agate/Panels';
 import Scroller from '@enact/agate/Scroller';
-import * as PropTypes from 'prop-types';
 
 import componentCss from './MenuItem.module.less';
 
