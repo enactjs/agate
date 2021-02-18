@@ -21,7 +21,7 @@ import React from 'react';
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
-import css from './Checkbox.module.less';
+import componentCss from './Checkbox.module.less';
 
 /**
  * A checkbox component, ready to use in Agate applications.
@@ -130,7 +130,7 @@ const CheckboxBase = kind({
 	},
 
 	styles: {
-		css,
+		css: componentCss,
 		className: 'checkbox',
 		publicClassNames: true
 	},
@@ -140,7 +140,7 @@ const CheckboxBase = kind({
 		children: ({indeterminate, indeterminateIcon, children}) => (indeterminate ? indeterminateIcon : children)
 	},
 
-	render: ({children, disabled, selected, ...rest}) => {
+	render: ({children, css, disabled, selected, ...rest}) => {
 		delete rest.indeterminate;
 		delete rest.indeterminateIcon;
 
@@ -152,6 +152,7 @@ const CheckboxBase = kind({
 				disabled={disabled}
 				role="checkbox"
 			>
+				<div className={css.bg} />
 				<Icon
 					size="small"
 					className={css.icon}

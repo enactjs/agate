@@ -4,31 +4,51 @@
 @import "../styles/skin.less";
 
 .checkbox {
+	display: inline-block;
+	position: relative;
+
 	.applySkins({
 		@size: @agate-checkbox-size;
 
 		width: @size;
 		height: @size;
-		border: @agate-checkbox-border-width solid @agate-checkbox-border-color;
 		border-radius: @agate-checkbox-border-radius;
 		color: @agate-checkbox-text-color;
 		background-color: @agate-checkbox-bg-color;
 
+		.bg {
+			position: absolute;
+			width: @agate-checkbox-bg-height-width;
+			height: @agate-checkbox-bg-height-width;
+			border-radius: 50%;
+			.position(@agate-checkbox-container-position);
+			z-index: -1;
+		}
+
 		.icon {
 			position: absolute;
 			font-size: @agate-checkbox-icon-font-size;
-			visibility: hidden;
+			color: transparent;
 			margin: 0;
 			line-height: @size;
 			width: @size;
 			height: @size;
+			border: @agate-checkbox-border-width solid @agate-checkbox-border-color;
 		}
+
+		.focus({
+			background-color: @agate-checkbox-focus-bg-color;
+
+			.bg {
+				background-image: @agate-checkbox-focus-bg-image;
+			}
+		});
 
 		&.selected,
 		&.indeterminate {
-			border-color: @agate-checkbox-selected-border-color;
 			.icon {
-				visibility: visible;
+				color: @agate-checkbox-selected-color;
+				border-color: @agate-checkbox-selected-border-color;
 			}
 		}
 	});
