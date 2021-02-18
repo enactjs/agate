@@ -8,8 +8,6 @@
 @import '../LabeledIcon/LabeledIcon.module.less';
 
 .labeledIconButton {
-	overflow: hidden;
-
 	&.icon,
 	&.label,
 	&.selected,
@@ -18,9 +16,10 @@
 	}
 
 	.label {
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 2;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		width: 100%;
+		white-space: nowrap;
 	}
 
 	.applySkins({
