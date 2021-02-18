@@ -1,19 +1,20 @@
+/* eslint-disable react/jsx-no-bind */
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import Routable, {Route, Linkable} from '@enact/ui/Routable';
 import {storiesOf} from '@storybook/react';
 import {handle, forward} from '@enact/core/handle';
-import kind from "@enact/core/kind";
+import kind from '@enact/core/kind';
 import {clamp} from '@enact/core/util';
 
-import Button from "@enact/agate/Button";
+import Button from '@enact/agate/Button';
 import Header from '@enact/agate/Header';
 import Icon from '@enact/agate/Icon';
 import Item from '@enact/agate/Item';
 import {Panels, Panel, BreadcrumbPanels} from '@enact/agate/Panels';
 import Scroller from '@enact/agate/Scroller';
-import * as PropTypes from "prop-types";
+import * as PropTypes from 'prop-types';
 
 import componentCss from './MenuItem.module.less';
 
@@ -72,12 +73,12 @@ const MenuItemBase = kind({
 
 	propTypes: {
 		css: PropTypes.object,
-		icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+		icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+		path: PropTypes.string
 	},
 
 	defaultProps: {
-		disabled: false,
-		invisible: false
+		disabled: false
 	},
 
 	styles: {
@@ -99,13 +100,11 @@ const MenuItemBase = kind({
 		}
 	},
 
-	render: ({css, iconBefore, invisible, disabled, ...rest}) => {
+	render: ({css, iconBefore, ...rest}) => {
 		return (
-			(invisible)? null :
 			<Item
 				css={css}
 				{...rest}
-				disabled={disabled}
 				slotAfter={
 					<Icon size="small">arrowlargeright</Icon>
 				}
@@ -115,20 +114,13 @@ const MenuItemBase = kind({
 	}
 });
 
-const LinkedMenuItem = Linkable(MenuItemBase);
-
-const MenuItem = ({...rest}) => {
-	if (!rest.path) rest.path = '';
-	return (
-		<LinkedMenuItem {...rest} />
-	);
-};
+const MenuItem = Linkable(MenuItemBase);
 
 const MainPanel = kind({
 	name: 'MainPanel',
 
-	render: () => (
-		<Panel spotlightId="main-panel-container">
+	render: (props) => (
+		<Panel spotlightId="main-panel-container" {...props}>
 			<Scroller>
 				<MenuItem path="./page1">Pages</MenuItem>
 				<MenuItem path="./page2">General</MenuItem>
@@ -140,26 +132,26 @@ const MainPanel = kind({
 const Page1 = kind({
 	name: 'Page',
 
-	render: () => (
-    <Panel spotlightId="page1-container">
-      <Scroller>
-          <MenuItem path="./endPage">Page1</MenuItem>
-          <MenuItem path="./endPage">Page2</MenuItem>
-      </Scroller>
-    </Panel>
+	render: (props) => (
+		<Panel spotlightId="page1-container" {...props}>
+			<Scroller>
+				<MenuItem path="./endPage">Page1</MenuItem>
+				<MenuItem path="./endPage">Page2</MenuItem>
+			</Scroller>
+		</Panel>
 	)
 });
 
 const Page2 = kind({
 	name: 'Page',
 
-	render: () => (
-    <Panel spotlightId="page2-container">
-      <Scroller>
-          <MenuItem path="./endPage">Page1</MenuItem>
-          <MenuItem path="./endPage">Page2</MenuItem>
-      </Scroller>
-    </Panel>
+	render: (props) => (
+		<Panel spotlightId="page2-container" {...props}>
+			<Scroller>
+				<MenuItem path="./endPage">Page1</MenuItem>
+				<MenuItem path="./endPage">Page2</MenuItem>
+			</Scroller>
+		</Panel>
 	)
 });
 
@@ -167,9 +159,9 @@ const EndPage = kind({
 	name: 'Page',
 
 	render: () => (
-    <div>
-        <h1>EndPage</h1>
-    </div>
+		<div>
+			<h1>EndPage</h1>
+		</div>
 	)
 });
 
@@ -188,16 +180,18 @@ const BreadcrumbPanelsBase  = kind({
 const RoutablePanels = Routable({navigate: 'onNavigate'}, BreadcrumbPanelsBase);
 
 const App = class extends React.Component {
-	constructor(props) {
+	static displayName = 'App';
+
+	constructor (props) {
 		super(props);
 		this.state = {appPath: '/settings'};
 	}
 
 	onNavigate = ({path}) => {
-		this.setState({appPath: path})
-	}
+		this.setState({appPath: path});
+	};
 
-	render() {
+	render () {
 		return (
 			<div {...this.props}>
 				<RoutablePanels path={this.state.appPath} onNavigate={this.onNavigate} cover="partial">
@@ -213,15 +207,15 @@ const App = class extends React.Component {
 			</div>
 		);
 	}
-}
+};
 
 storiesOf('Panels', module)
 	.add(
 		'Route preserve focus',
 		() => (
-				<App />
+			<App />
 		),
-    {
+		{
 			props: {
 				noScroller: true,
 				noPanels: true
