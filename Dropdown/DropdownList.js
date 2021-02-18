@@ -15,6 +15,8 @@ import Skinnable from '../Skinnable';
 
 import css from './Dropdown.module.less';
 
+const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
+
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 
 const DropdownListBase = kind({
@@ -177,5 +179,6 @@ const DropdownList = DropdownListDecorator(DropdownListBase);
 export default DropdownList;
 export {
 	DropdownList,
-	DropdownListBase
+	DropdownListBase,
+	isSelectedValid
 };

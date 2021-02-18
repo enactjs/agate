@@ -37,11 +37,9 @@ import Icon from '../Icon';
 import Item from '../Item';
 import Skinnable from '../Skinnable';
 
-import DropdownList from './DropdownList';
+import DropdownList, {isSelectedValid} from './DropdownList';
 
 import componentCss from './Dropdown.module.less';
-
-const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
 
 /**
  * A stateless Dropdown Button component.
@@ -72,6 +70,14 @@ const DropdownButtonBase = kind({
 		forwardRef: EnactPropTypes.ref,
 
 		/**
+		 * The icon displayed on the dropdown button.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		icon: PropTypes.string,
+
+		/**
 		 * The current skin for this component.
 		 *
 		 * @type {String}
@@ -80,12 +86,12 @@ const DropdownButtonBase = kind({
 		skin: PropTypes.string
 	},
 
-	render: ({children, dropdownOpened, forwardRef, skin, ...rest}) => {
+	render: ({children, forwardRef, icon, skin, ...rest}) => {
 		return (
 			(skin === 'silicon') ?
 				<Button
 					{...rest}
-					icon={dropdownOpened ? 'arrowlargeup' : 'arrowlargedown'}
+					icon={icon}
 					iconPosition="after"
 					minWidth
 					ref={forwardRef}
@@ -97,7 +103,7 @@ const DropdownButtonBase = kind({
 					ref={forwardRef}
 				>
 					{children}
-					<Icon slot="slotAfter" key="icon" size="small">{dropdownOpened ? 'arrowlargeup' : 'arrowlargedown'}</Icon>
+					<Icon slot="slotAfter" key="icon" size="small">{icon}</Icon>
 				</Item>
 		);
 	}
@@ -115,7 +121,10 @@ DropdownButton.displayName = 'DropdownButton';
  * A stateless Dropdown component.
  *
  * @class DropdownBase
- * @memberof agate/Dropdown
+ * @memeberof agate/Dropdown
+ * @extends agate/Button.Button
+ * @extends agate/ContextualPopupDecorator.ContextualPopupDecorator
+ * @omit popupComponent
  * @ui
  * @public
  */
@@ -132,12 +141,23 @@ const DropdownBase = kind({
 		'aria-label': PropTypes.string,
 
 		/**
-		 * The selections for Dropdown
+		 * Items to be displayed in the `Dropdown` when `open`.
+		 *
+		 * Takes either an array of strings or an array of objects. When strings, the values will be
+		 * used in the generated components as the readable text. When objects, the properties will
+		 * be passed onto an `Item` component; `children` as well as a unique `key` properties are
+		 * required.
 		 *
 		 * @type {String[]|Array.<{key: (Number|String), children: (String|Component)}>}
 		 * @public
 		 */
-		children: PropTypes.array,
+		children: PropTypes.oneOfType([
+			PropTypes.arrayOf(PropTypes.string),
+			PropTypes.arrayOf(PropTypes.shape({
+				children: EnactPropTypes.renderable.isRequired,
+				key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+			}))
+		]),
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -147,15 +167,6 @@ const DropdownBase = kind({
 		 * @private
 		 */
 		css: PropTypes.object,
-
-		/**
-		 * This is passed onto the wrapped component to allow
-		 * it to customize the spotlight container for its use case.
-		 *
-		 * @type {String}
-		 * @private
-		 */
-		'data-spotlight-id': PropTypes.string,
 
 		/**
 		 * Placement of the Dropdown.
@@ -288,7 +299,6 @@ const DropdownBase = kind({
 
 	computed: {
 		ariaLabelledBy: ({id, title}) => (title ? `${id}_title` : void 0),
-		buttonClassName: ({open, styler}) => styler.append({open}),
 		children: ({children, selected}) => {
 			if (!Array.isArray(children)) return [];
 
@@ -317,7 +327,7 @@ const DropdownBase = kind({
 				};
 			});
 		},
-		className: ({css, direction, width, title, skin, styler}) => styler.append(`${width}Width`, {hasTitle: Boolean(title)}, skin === 'silicon' ? classnames(css.dropdownButton, {[css.upDropdownButton]: direction === 'above'}) : {}),
+		className: ({css, direction, open, width, title, skin, styler}) => styler.append(`${width}Width`, {hasTitle: Boolean(title), open}, skin === 'silicon' ? classnames(css.dropdownButton, {[css.upDropdownButton]: direction === 'above'}) : {}),
 		direction: ({direction}) => `${direction} center`,
 		hasChildren: ({children}) => {
 			return children.length > 0;
@@ -332,7 +342,7 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({'aria-label': ariaLabel, ariaLabelledBy, buttonClassName, children, css, direction, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, width, ...rest}) => {
+	render: ({'aria-label': ariaLabel, ariaLabelledBy, children, css, direction, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, width, ...rest}) => {
 		delete rest.rtl;
 
 		const ariaProps = extractAriaProps(rest);
@@ -348,13 +358,13 @@ const DropdownBase = kind({
 			<div {...calcAriaProps} {...rest}>
 				<DropdownButton
 					aria-label={ariaLabel}
-					className={buttonClassName}
 					css={css}
 					direction={direction}
 					disabled={hasChildren ? disabled : true}
-					dropdownOpened={openDropdown}
+					icon={openDropdown ? 'arrowlargeup' : 'arrowlargedown'}
 					onClick={onOpen}
 					onClose={onClose}
+					offset="none"
 					open={openDropdown}
 					popupComponent={DropdownList}
 					popupProps={popupProps}

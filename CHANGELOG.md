@@ -9,17 +9,16 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ContextualPopup` prop `css` to support customizations
 - `agate/ContextualPopupDecorator` prop `css` to support customizations
 - `agate/Dropdown` prop `width` to support multiple widths
-- `agate/Dropdown/DropdownList` component
+- `agate/Item` to have a `selected` publicClassname
 
 ### Changed
 
-- `agate/Item` to have a `selected` publicClassname
-- `agate/Dropdown` to use ContextualPopup as wrapper for the DropdownList
+- `agate/Dropdown` to use `agate/ContextualPopup`
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
 
 ### Fixed
 
-- `agate/Panel` padding for Carbon skin to show correct ContextualPopup position in sampler app
+- `agate/Panel` padding for Carbon skin to show correct `agate/ContextualPopup` position in sampler app
 
 ## [1.1.2] - 2021-02-05
 
