@@ -5,8 +5,14 @@
 @import "../styles/skin.less";
 
 .heading {
+	.backButton {
+		align-items: center;
+		display: flex;
+		justify-content: center;
+	}
+
 	.applySkins({
-		max-width: @agate-heading-max-width;
+		width: @agate-heading-width;
 		height: @agate-heading-height;
 		border-bottom: @agate-heading-border-width solid transparent;
 		margin: @agate-heading-margin;
@@ -18,9 +24,14 @@
 		font-variant-ligatures: @agate-heading-font-ligatures;
 
 		.backButton {
-			align-items: center;
-			display: flex;
-			justify-content: center;
+			.bg {
+				border: none;
+				background-color: transparent;
+			}
+
+			.client {
+				color: @agate-heading-text-color
+			}
 		}
 
 		&.showLine {
@@ -51,18 +62,21 @@
 				opacity: @agate-heading-title-decoration-opacity;
 			}
 		}
+
 		&.large {
 			font-family: @agate-heading-large-font-family;
 			font-weight: @agate-heading-large-font-weight;
 			font-style: @agate-heading-large-font-style;
 			font-size: @agate-heading-large-font-size;
 		}
+
 		&.medium {
 			font-family: @agate-heading-medium-font-family;
 			font-weight: @agate-heading-medium-font-weight;
 			font-style: @agate-heading-medium-font-style;
 			font-size: @agate-heading-medium-font-size;
 		}
+
 		&.small,
 		&.tiny {
 			font-family: @agate-heading-small-font-family;
@@ -77,18 +91,22 @@
 			margin-bottom: @agate-heading-spacing-title;
 			min-height: @agate-heading-spacing-title;
 		}
+
 		&.largeSpacing {
 			margin-bottom: @agate-heading-spacing-large;
 			min-height: @agate-heading-spacing-large;
 		}
+
 		&.mediumSpacing {
 			margin-bottom: @agate-heading-spacing-medium;
 			min-height: @agate-heading-spacing-medium;
 		}
+
 		&.smallSpacing {
 			margin-bottom: @agate-heading-spacing-small;
 			min-height: @agate-heading-spacing-small;
 		}
+
 		&.noneSpacing {
 			margin-bottom: 0;
 			min-height: 0;

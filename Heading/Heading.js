@@ -15,7 +15,6 @@
  * @exports HeadingDecorator
  */
 
-
 import kind from '@enact/core/kind';
 import UiHeading from '@enact/ui/Heading';
 import Pure from '@enact/ui/internal/Pure';
@@ -63,7 +62,6 @@ const HeadingBase = kind({
 		 * Shows the back button.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		showBackButton: PropTypes.bool,
@@ -130,7 +128,7 @@ const HeadingBase = kind({
 				<Layout>
 					{showBackButton ?
 						<Cell className={css.backButton} shrink>
-							<Button icon={icon} size="small" />
+							<Button css={css} icon={icon} size="small" />
 						</Cell> : null
 					}
 					<Cell>
