@@ -70,7 +70,7 @@ describe('Dropdown', () => {
 		);
 
 		const expected = 'Please select';
-		const actual = dropDown.find('Item.dropdown').prop('aria-label');
+		const actual = dropDown.find('DropdownButton').prop('aria-label');
 
 		expect(actual).toBe(expected);
 	});
