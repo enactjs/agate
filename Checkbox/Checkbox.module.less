@@ -42,6 +42,10 @@
 			.bg {
 				background-image: @agate-checkbox-focus-bg-image;
 			}
+
+			.icon {
+				border-color: @agate-checkbox-focus-icon-border-color;
+			}
 		});
 
 		&.selected,
@@ -50,6 +54,13 @@
 				color: @agate-checkbox-selected-color;
 				border-color: @agate-checkbox-selected-border-color;
 			}
+
+			.focus({
+				.icon {
+					border-color: @agate-checkbox-focus-icon-border-color;
+					color: @agate-checkbox-focus-icon-color;
+				}
+			})
 		}
 	});
 }
