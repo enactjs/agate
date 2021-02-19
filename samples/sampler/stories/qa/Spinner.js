@@ -38,7 +38,7 @@ storiesOf('Spinner', module)
 				<div
 					style={{
 						height: ri.scaleToRem(300),
-						border: ri.scaleToRem(6) + ' dotted blue'
+						border: ri.scaleToRem(2) + ' dotted red'
 					}}
 				>
 					<SkinnedSpinner
