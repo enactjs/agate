@@ -7,6 +7,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Added
 
 - `agate/BodyText` Scroller to apply a vertical scroll when contents are larger than the container
+- `agate/Spinner` prop `children` to support the display of text below the icon
 
 ### Changed
 
@@ -14,7 +15,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
-- `agate/BodyText` to match latest designs
+- `agate/BodyText` to match latest design for Silicon skin
 
 ## [1.1.2] - 2021-02-05
 
