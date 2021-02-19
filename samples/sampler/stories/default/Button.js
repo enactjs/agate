@@ -55,6 +55,7 @@ const SkinnedButtonBase = kind({
 });
 
 const SkinnedButton = Skinnable({prop: 'skin'}, SkinnedButtonBase);
+SkinnedButton.displayName = 'Button';
 
 storiesOf('Agate', module)
 	.add(

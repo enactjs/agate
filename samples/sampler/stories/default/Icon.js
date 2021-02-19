@@ -39,13 +39,13 @@ const SkinnedIconBase = kind({
 			}
 		}
 
-		const iconType = select('icon type', ['glyph', 'url src', 'custom'], Config, 'glyph');
-		let children;
+		const children = select('children', ['glyph', 'url src'], Config, 'glyph');
+		let availableIcons;
 
-		switch (iconType) {
-			case 'glyph': children = select('icon', ['', ...iconNames], Icon, 'home'); break;
-			case 'url src': children = select('src', ['', docs, factory, logo], Config, logo); break;
-			default: children = text('custom icon', Config);
+		switch (children) {
+			case 'glyph': availableIcons = select('icon', ['', ...iconNames], Icon, 'home'); break;
+			case 'url src': availableIcons = select('src', ['', docs, factory, logo], Config, logo); break;
+			default: break;
 		}
 
 		return (
@@ -54,7 +54,7 @@ const SkinnedIconBase = kind({
 					{...rest}
 					size={size}
 				>
-					{children}
+					{availableIcons}
 				</Icon>
 				<br />
 				<br />
@@ -66,6 +66,7 @@ const SkinnedIconBase = kind({
 });
 
 const SkinnedIcon = Skinnable({prop: 'skin'}, SkinnedIconBase);
+SkinnedIcon.displayName = 'Icon';
 
 storiesOf('Agate', module)
 	.add(
