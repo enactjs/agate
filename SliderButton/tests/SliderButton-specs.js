@@ -97,7 +97,7 @@ describe('SliderButton Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should change value on arrow right left press', () => {
+	test('should change value on arrow left press', () => {
 		const handleChange = jest.fn();
 		const sliderButton = mount(
 			<SliderButton onChange={handleChange} defaultValue={1}>
