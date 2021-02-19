@@ -88,52 +88,56 @@
 					width: @agate-dropdown-button-icon-width;
 					margin-right: @agate-dropdown-button-icon-margin-right;
 				}
-			}
-
-			.focus({
-				.bg {
-					background-color: @agate-dropdown-button-bg-color;
-					border-color: @agate-dropdown-button-border-color;
-					background-image: @agate-dropdown-button-bg-image;
-				}
-
-				&,
-				.client {
-					color: @agate-dropdown-button-client-color;
-				}
-
-				.icon {
-					color: @agate-dropdown-button-icon-focus-color;
-				}
-			});
-
-			&.open {
-				.bg {
-					border-radius: @agate-dropdown-button-open-border-radius;
-					border-bottom-color: @agate-dropdown-button-open-border-color;
-					transition: none;
-				}
 
 				.focus({
 					.bg {
-						border-bottom-color: @agate-dropdown-button-open-border-color;
+						background-color: @agate-dropdown-button-bg-color;
+						border-color: @agate-dropdown-button-border-color;
+						background-image: @agate-dropdown-button-bg-image;
+					}
+
+					&,
+					.client {
+						color: @agate-dropdown-button-client-color;
+					}
+
+					.icon {
+						color: @agate-dropdown-button-icon-focus-color;
 					}
 				});
 			}
 
-			&.upDropdownButton {
-				&.open {
+			&.open {
+				.button {
 					.bg {
-						border-radius: @agate-dropdown-up-button-open-border-radius;
-						border-bottom-color: @agate-dropdown-up-button-open-border-bottom-color;
-						border-top-color: @agate-dropdown-button-open-border-color;
+						border-radius: @agate-dropdown-button-open-border-radius;
+						border-bottom-color: @agate-dropdown-button-open-border-color;
+						transition: none;
 					}
 
 					.focus({
 						.bg {
-							border-bottom-color: @agate-dropdown-up-button-open-border-bottom-color;
+							border-bottom-color: @agate-dropdown-button-open-border-color;
 						}
-					})
+					});
+				}
+			}
+
+			&.upDropdownButton {
+				&.open {
+					.button {
+						.bg {
+							border-radius: @agate-dropdown-up-button-open-border-radius;
+							border-bottom-color: @agate-dropdown-up-button-open-border-bottom-color;
+							border-top-color: @agate-dropdown-button-open-border-color;
+						}
+
+						.focus({
+							.bg {
+								border-bottom-color: @agate-dropdown-up-button-open-border-bottom-color;
+							}
+						})
+					}
 				}
 			}
 		}

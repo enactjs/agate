@@ -2,7 +2,6 @@ import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import Spotlight from '@enact/spotlight';
-import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Group from '@enact/ui/Group';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
@@ -16,8 +15,6 @@ import Skinnable from '../Skinnable';
 import css from './Dropdown.module.less';
 
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
-
-const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 
 const DropdownListBase = kind({
 	name: 'DropdownListBase',
@@ -111,10 +108,7 @@ const DropdownListBase = kind({
 		delete rest.skin;
 
 		return (
-			<ContainerDiv
-				{...rest}
-				spotlightRestrict="self-only"
-			>
+			<div {...rest}>
 				<Scroller
 					skinVariants={skinVariants}
 					className={css.scroller}
@@ -130,7 +124,7 @@ const DropdownListBase = kind({
 						{children || []}
 					</Group>
 				</Scroller>
-			</ContainerDiv>
+			</div>
 		);
 	}
 });

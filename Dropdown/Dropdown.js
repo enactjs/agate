@@ -54,14 +54,6 @@ const DropdownButtonBase = kind({
 
 	propTypes: /** @lends agate/Dropdown.DropdownButtonBase.prototype */ {
 		/**
-		 * Shows if the dropdown is opened.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		dropdownOpened: PropTypes.bool,
-
-		/**
 		 * Forwards a reference to the this component.
 		 *
 		 * @type {Object|Function}
@@ -370,8 +362,8 @@ const DropdownBase = kind({
 					popupProps={popupProps}
 					role="button"
 					skin={skin}
+					spotlightRestrict="self-only"
 					{...ariaProps}
-
 				>
 					{title}
 				</DropdownButton>
