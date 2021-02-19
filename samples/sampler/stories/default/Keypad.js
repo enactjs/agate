@@ -16,6 +16,7 @@ storiesOf('Agate', module)
 				<Keypad
 					disabled={boolean('disabled', Config)}
 					onChange={action('onChange')}
+					spotlightDisabled={boolean('spotlightDisabled', Config)}
 				/>
 			);
 		},
