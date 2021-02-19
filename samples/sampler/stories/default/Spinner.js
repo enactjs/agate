@@ -1,5 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import kind from '@enact/core/kind';
 import UiSpinner, {SpinnerBase as UiSpinnerBase} from '@enact/ui/Spinner';
 import ri from '@enact/ui/resolution';
@@ -84,7 +84,9 @@ storiesOf('Agate', module)
 						size={select('size', ['huge', 'large', 'small', 'smallest'], Config)}
 						type={select('type', ['loading', 'searching'], Config, 'searching')}
 						transparent={boolean('transparent', Config)}
-					/>
+					>
+						{text('content', Config, '')}
+					</SkinnedSpinner>
 				</div>
 			</div>
 		),

@@ -4,7 +4,7 @@
  * Used for indicating to the user that something is busy and interaction is temporarily suspended.
  *
  * @example
- * <Spinner color="dark" size="small" type="searching" />
+ * <Spinner color="dark" size="small" type="searching">Loading message...</Spinner>
  *
  * @module agate/Spinner
  * @exports Spinner
@@ -19,12 +19,13 @@ import compose from 'ramda/src/compose';
 import React from 'react';
 
 import $L from '../internal/$L';
+import Marquee from '../Marquee';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Spinner.module.less';
 
 /**
- * A component that shows spinning fan. Or bouncing 🏀🎾🏐⚽️.
+ * A component that shows spinning fan. Or bouncing 🏀🎾🏐⚽ , with optional text as children.
  *
  * @class SpinnerCore
  * @memberof agate/Spinner
@@ -76,7 +77,7 @@ const SpinnerCore = kind({
 		}
 	},
 
-	render: ({css, spinnerNodes, ...rest}) => {
+	render: ({children, css, spinnerNodes, ...rest}) => {
 		delete rest.type;
 
 		return (
@@ -84,6 +85,12 @@ const SpinnerCore = kind({
 				<div className={css.bg}>
 					{spinnerNodes}
 				</div>
+				{children ?
+					<Marquee className={css.client} marqueeOn="render" alignment="center">
+						{children}
+					</Marquee> :
+					null
+				}
 			</div>
 		);
 	}
@@ -178,7 +185,7 @@ const SpinnerBase = kind({
 		)
 	},
 
-	render: ({css, ...rest}) => {
+	render: ({children, css, ...rest}) => {
 		delete rest.paused;
 		delete rest.transparent;
 
@@ -187,7 +194,9 @@ const SpinnerBase = kind({
 				{...rest}
 				css={css}
 				component={SpinnerCore}
-			/>
+			>
+				{children}
+			</UiSpinnerBase>
 		);
 	}
 });

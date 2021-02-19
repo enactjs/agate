@@ -7,10 +7,15 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Added
 
 - `agate/Heading` prop `showBackButton`
+- `agate/Spinner` prop `children` to support the display of text below the icon
 
 ### Changed
 
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
+
+### Fixed
+
+- `agate/Heading` style to match latest design for Silicon skin
 
 ## [1.1.2] - 2021-02-05
 
