@@ -72,7 +72,43 @@ const SpinnerTests = [
 				height: ri.unit(180, 'rem')
 			}}
 		>
+			<Spinner>Loading content</Spinner>
+		</div>
+	</div>,
+	<div
+		style={{
+			outline: 'teal dashed 1px',
+			position: 'relative',
+			padding: ri.unit(90, 'rem'),
+			backgroundColor: 'rgba(0, 187, 187, 0.5)'
+		}}
+	>
+		<div
+			style={{
+				outline: 'teal dashed 1px',
+				position: 'relative',
+				height: ri.unit(180, 'rem')
+			}}
+		>
 			<Spinner type="loading" />
+		</div>
+	</div>,
+	<div
+		style={{
+			outline: 'teal dashed 1px',
+			position: 'relative',
+			padding: ri.unit(90, 'rem'),
+			backgroundColor: 'rgba(0, 187, 187, 0.5)'
+		}}
+	>
+		<div
+			style={{
+				outline: 'teal dashed 1px',
+				position: 'relative',
+				height: ri.unit(180, 'rem')
+			}}
+		>
+			<Spinner type="loading">Loading content</Spinner>
 		</div>
 	</div>
 ];
