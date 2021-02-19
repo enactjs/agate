@@ -4,6 +4,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Added
+
+- `agate/Spinner` prop `children` to support the display of text below the icon
+
 ### Changed
 
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
@@ -29,6 +33,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Input` prop `invalidMessage` to customize the tooltip message when `invalid` prop is true
 - `agate/Input` prop `size` to change the size of both input and icons (default large)
 - `agate/Item` prop `centered`, `disabled`, `inline`, `marqueeOn`, and `size`
+- `agate/Keypad` prop `spotlightDisabled` to disable 5-way navigation
 - `agate/Popup` content padding and margin with `closeButton`
 - `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
 - `agate/Popup` `duration` and `type` props
