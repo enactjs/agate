@@ -1,6 +1,6 @@
 import kind from '@enact/core/kind';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {select, text, number} from '@enact/storybook-utils/addons/knobs';
+import {select, number} from '@enact/storybook-utils/addons/knobs';
 import UiIcon from '@enact/ui/Icon';
 import {iconList, iconListSilicon} from './icons';
 import PropTypes from 'prop-types';
