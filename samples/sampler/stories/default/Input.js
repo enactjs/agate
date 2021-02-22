@@ -35,6 +35,7 @@ storiesOf('Agate', module)
 				placeholder={text('placeholder', Config, 'Input text here')}
 				size={select('size', ['small', 'large'], Config, 'large')}
 				type={select('type', prop.type, Config)}
+				clearInputButton={boolean('clearButton', Config)}
 			/>
 		),
 		{

@@ -11,7 +11,7 @@
  */
 
 import kind from '@enact/core/kind';
-import {adaptEvent, forwardCustom, forwardWithPrevent, handle} from '@enact/core/handle';
+import {adaptEvent, forward, forwardCustom, forwardWithPrevent, handle, log} from '@enact/core/handle';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import {isRtlText} from '@enact/i18n/util';
 import Changeable from '@enact/ui/Changeable';
@@ -23,6 +23,7 @@ import React from 'react';
 import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
 import Tooltip from '../TooltipDecorator/Tooltip';
+import Button from '../Button';
 
 import InputBehaviorDecorator from './InputBehaviorDecorator';
 import InputDecoratorIcon from './InputDecoratorIcon';
@@ -224,7 +225,9 @@ const InputBase = kind({
 		 * @type {String|Number}
 		 * @public
 		 */
-		value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+		value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+		clearInputButton: PropTypes.bool
 	},
 
 	defaultProps: {
@@ -233,7 +236,8 @@ const InputBase = kind({
 		invalid: false,
 		placeholder: '',
 		size: 'large',
-		type: 'text'
+		type: 'text',
+		clearInputButton: true
 	},
 
 	styles: {
@@ -242,21 +246,47 @@ const InputBase = kind({
 		publicClassNames: ['decorator', 'input']
 	},
 
-	// handlers: {
-	// 	onChange: handle(
-	// 		adaptEvent(
-	// 			ev => ({
-	// 				type: 'onBeforeChange',
-	// 				value: ev.target.value
-	// 			}),
-	// 			forwardWithPrevent('onBeforeChange')
-	// 		),
-	// 		forwardCustom('onChange', ev => ({
-	// 			stopPropagation: () => ev.stopPropagation(),
-	// 			value: ev.target.value
-	// 		}))
-	// 	)
-	// },
+	handlers: {
+		onChange: handle(
+			adaptEvent(
+				ev => ({
+					type: 'onBeforeChange',
+					value: ev.target.value
+				}),
+				forwardWithPrevent('onBeforeChange')
+			),
+			// forwardCustom('onChange', ev => ({
+			// 	stopPropagation: () => ev.stopPropagation(),
+			// 	value: ev.target.value
+			// }))
+
+
+
+			forward('onChange'),
+			// (ev) => {
+			// 	ev.persist();
+			// 	return true;
+			// },
+			// forward("onChange")
+			// forwardWithPrevent('onChange')
+			// adaptEvent(
+			// 	ev => ({
+			// 		type: 'onChange',
+			// 		value: ev.target.value
+			// 	}),
+			// 	forwardWithPrevent('onChange')
+			// ),
+			// forwardCustom('onChange', ev => ({
+			// 	// stopPropagation: () => ev.stopPropagation(),
+			// 	value: ev.target.value
+			// 	// value: ev
+			// })),
+			// (ev, props) => log('log', ev, props)
+		),
+		onClick: handle(
+			forward('onClick')
+		)
+	},
 
 	computed: {
 		'aria-label': ({placeholder, type, value}) => {
@@ -278,7 +308,7 @@ const InputBase = kind({
 		value: ({value}) => typeof value === 'number' ? value : (value || '')
 	},
 
-	render: ({css, dir, disabled, iconAfter, iconBefore, invalidTooltip, onChange, placeholder, size, type, value, ...rest}) => {
+	render: ({clearInputButton, css, dir, disabled, iconAfter, iconBefore, invalidTooltip, onChange, onClick, placeholder, size, type, value, ...rest}) => {
 		const inputProps = extractInputProps(rest);
 		delete rest.dismissOnEnter;
 		delete rest.focused;
@@ -305,6 +335,14 @@ const InputBase = kind({
 					type={type}
 					value={value}
 				/>
+				{/* {clearInputButton ?  */}
+				{value?.length > 1 ? 
+					<Button 
+						className={css.clearInputButton} 
+						onClick={onClick} 
+						icon="closex" 
+						size="smallest"/> : 
+						null}
 				<InputDecoratorIcon position="after" size={size}>
 					{iconAfter}
 				</InputDecoratorIcon>
@@ -328,7 +366,7 @@ const InputDecorator = compose(
 	Pure,
 	InputBehaviorDecorator,
 	I18nContextDecorator({rtlProp: 'rtl'}),
-	Changeable,
+	// Changeable,
 	InputSpotlightDecorator,
 	Skinnable
 );

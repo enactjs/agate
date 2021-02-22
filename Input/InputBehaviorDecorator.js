@@ -32,7 +32,9 @@ const InputBehaviorDecorator = hoc((config, Wrapped) => {
 		static displayName = 'InputBehaviorDecorator';
 
 		static propTypes = /** @lends agate/Input.InputBehaviorDecorator.prototype */ {
-			
+			value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+			onChange: PropTypes.func,
 		};
 
 		static defaultProps = {
@@ -43,10 +45,12 @@ const InputBehaviorDecorator = hoc((config, Wrapped) => {
 			super(props);
 
 			this.componentRef = React.createRef();
+			console.log(props);
 
 			this.state = {
-				isFocused: false,
-				value: props.value ? props.value : null
+				// isFocused: false,
+				value: props.value ? props.value : ''
+				// value: props.value
 			};
 		}
 
@@ -100,25 +104,34 @@ const InputBehaviorDecorator = hoc((config, Wrapped) => {
 		// 	this.handleChange(ev, value);
 		// };
 
-		handleChange = (ev, value) => {
+		handleChange = (ev) => {
       console.log(ev);
-      console.log(value);
-			if (value !== this.state.value) {
-				this.setState({value}
-					// () => ({value})
-          ,
-					() => {
-						forward('onChange', {
-							type: 'onChange',
-							value
-						}, this.props);
-					}
-				);
-			}
 
-			if (ev.stopPropagation) {
-				ev.stopPropagation();
-			}
+			this.setState({value: ev.target.value})
+			// if (value !== this.state.value) {
+			// 	// this.setState({value})
+			// 	this.setState(
+			// 		// {value}
+			// 		() => ({value})
+      //     ,
+			// 		() => {
+			// 			forward('onChange', {
+			// 				type: 'onChange',
+			// 				value
+			// 			}, this.props);
+			// 		}
+			// 	);
+			// }
+
+			// if (ev.stopPropagation) {
+			// 	ev.stopPropagation();
+			// }
+		};
+
+		handleClear = (ev) => {
+      console.log(ev);
+
+			this.setState({value: null})
 		};
 
 		// handleBlur = () => {
@@ -163,6 +176,7 @@ const InputBehaviorDecorator = hoc((config, Wrapped) => {
 					// isFocused={this.state.isFocused}
 					// onBlur={this.handleBlur}
 					onChange={this.handleChange}
+					onClick={this.handleClear}
 					// onDown={this.handleDown}
 					// onDrag={this.handleDrag}
 					// onDragStart={this.handleDragStart}
