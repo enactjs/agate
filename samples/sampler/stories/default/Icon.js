@@ -38,7 +38,6 @@ const SkinnedIconBase = kind({
 				iconNames = iconList;
 			}
 		}
-
 		const iconType = select('icon type', ['glyph', 'url src', 'custom'], Config, 'glyph');
 		let children;
 
