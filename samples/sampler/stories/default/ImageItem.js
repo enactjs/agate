@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {text, select} from '@enact/storybook-utils/addons/knobs';
 import ri from '@enact/ui/resolution';
-import React from 'react';
 
 import ImageItem, {ImageItemBase} from '@enact/agate/ImageItem';
 

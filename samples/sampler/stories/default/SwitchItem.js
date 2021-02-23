@@ -1,6 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
 
 import SwitchItem from '@enact/agate/SwitchItem';
 

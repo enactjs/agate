@@ -17,14 +17,14 @@ import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 import classnames from 'classnames';
 import convert from 'color-convert';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {createContext, Component} from 'react';
 
 import Skinnable from '../Skinnable';
 
 import screenTypes from './screenTypes.json';
 import css from './ThemeDecorator.module.less';
 
-const ThemeContext = React.createContext(null);
+const ThemeContext = createContext(null);
 
 const defaultColors = {
 	carbon: {
@@ -288,7 +288,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	// set the DOM node ID of the React DOM tree root
 	setDefaultTargetById(rootId);
 
-	const Decorator = class extends React.Component {
+	const Decorator = class extends Component {
 		static displayName = 'ThemeDecorator';
 
 		static propTypes = /** @lends agate/ThemeDecorator.ThemeDecorator.prototype */ {

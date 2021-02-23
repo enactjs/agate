@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, number} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
 
 import IncrementSlider, {IncrementSliderBase} from '@enact/agate/IncrementSlider';
 

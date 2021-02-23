@@ -1,5 +1,4 @@
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
 
 import BodyText from '@enact/agate/BodyText';
 

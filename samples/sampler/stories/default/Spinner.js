@@ -4,7 +4,6 @@ import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import UiSpinner, {SpinnerBase as UiSpinnerBase} from '@enact/ui/Spinner';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Skinnable from '@enact/agate/Skinnable';
 import Spinner, {SpinnerBase} from '@enact/agate/Spinner';

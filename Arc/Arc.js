@@ -17,7 +17,6 @@ import Pure from '@enact/ui/internal/Pure';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import Skinnable from '../Skinnable';
 

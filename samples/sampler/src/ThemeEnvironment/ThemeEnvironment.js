@@ -2,11 +2,10 @@
 
 import kind from '@enact/core/kind';
 import {cap} from '@enact/core/util';
-import {boolean, select} from '@enact/storybook-utils/addons/knobs';
-import {Row, Column, Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
-import React from 'react';
 import {color} from '@storybook/addon-knobs';
+import {Row, Column, Cell} from '@enact/ui/Layout';
+import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 
 import Heading from '@enact/agate/Heading';
 import {Panels, Panel} from '@enact/agate/Panels';

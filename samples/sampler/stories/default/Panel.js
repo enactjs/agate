@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {text} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
 
 import Button from '@enact/agate/Button';
 import Header from '@enact/agate/Header';

@@ -3,7 +3,6 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {select, text, number} from '@enact/storybook-utils/addons/knobs';
 import UiIcon from '@enact/ui/Icon';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import {iconList, iconListSilicon} from './icons';
 

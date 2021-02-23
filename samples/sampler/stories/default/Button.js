@@ -4,7 +4,6 @@ import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, text, number} from '@enact/storybook-utils/addons/knobs';
 import UiButton from '@enact/ui/Button';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Button, {ButtonBase} from '@enact/agate/Button';
 import Skinnable from '@enact/agate/Skinnable';

@@ -1,6 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
 
 import MediaPlayer from '@enact/agate/MediaPlayer';
 

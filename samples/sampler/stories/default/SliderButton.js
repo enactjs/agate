@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
 
 import SliderButton, {SliderButtonBase} from '@enact/agate/SliderButton';
 import {icons} from '@enact/agate/Icon';

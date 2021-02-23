@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, text} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
 
 import DatePicker, {DatePickerBase} from '@enact/agate/DatePicker';
 
