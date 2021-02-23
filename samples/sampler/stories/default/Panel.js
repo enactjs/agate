@@ -1,5 +1,4 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {action} from '@enact/storybook-utils/addons/actions';
 import {text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
@@ -20,7 +19,7 @@ storiesOf('Agate', module)
 					subtitle={text('subtitle', HeaderConfig, 'Header Subtitle')}
 					title={text('title', HeaderConfig, 'Header Title')}
 				/>
-				<Button onClick={action('onClick')}>Click me</Button>
+				<Button>Click me</Button>
 			</Panel>
 		),
 		{
