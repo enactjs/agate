@@ -73,15 +73,17 @@ class app extends React.Component {
 						<Button id="hideScrollbar" onClick={this.handleToggle} selected={hideScrollbar}>hide scrollbar</Button>
 						<Button id="nativeScroll" onClick={this.handleToggle} selected={nativeScroll}>NativeScroll</Button>
 						<Dropdown
+							id="focusableScrollbarKnobs"
 							onSelect={this.handleSelectFocusableScrollbar}
 							title="FocusableScrollbar"
-							id="focusableScrollbarKnobs"
+							width="small"
 						>
 							{Object.keys(prop.focusableScrollbarOption)}
 						</Dropdown>
 						<Dropdown
 							onSelect={this.handleSelectDirection}
 							title="Direction"
+							width="small"
 						>
 							{Object.keys(prop.directionOption)}
 						</Dropdown>
