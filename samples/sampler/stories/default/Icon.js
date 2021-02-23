@@ -1,6 +1,6 @@
 import kind from '@enact/core/kind';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {select, number} from '@enact/storybook-utils/addons/knobs';
+import {number, select, text} from '@enact/storybook-utils/addons/knobs';
 import UiIcon from '@enact/ui/Icon';
 import {iconList, iconListSilicon} from './icons';
 import PropTypes from 'prop-types';
@@ -39,13 +39,13 @@ const SkinnedIconBase = kind({
 			}
 		}
 
-		const children = select('children', ['glyph', 'url src'], Config, 'glyph');
-		let availableIcons;
+		const iconType = select('icon type', ['glyph', 'url src', 'custom'], Config, 'glyph');
+		let children;
 
-		switch (children) {
-			case 'glyph': availableIcons = select('icon', ['', ...iconNames], Icon, 'home'); break;
-			case 'url src': availableIcons = select('src', ['', docs, factory, logo], Config, logo); break;
-			default: break;
+		switch (iconType) {
+			case 'glyph': children = select('icon', ['', ...iconNames], Icon, 'home'); break;
+			case 'url src': children = select('src', ['', docs, factory, logo], Config, logo); break;
+			default: children = text('custom icon', Config);
 		}
 
 		return (
@@ -54,7 +54,7 @@ const SkinnedIconBase = kind({
 					{...rest}
 					size={size}
 				>
-					{availableIcons}
+					{children}
 				</Icon>
 				<br />
 				<br />
