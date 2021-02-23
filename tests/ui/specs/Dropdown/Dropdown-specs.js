@@ -49,7 +49,7 @@ describe('Dropdown', function () {
 			expect(Page.components.dropdownDirectionAbove.childItem.isFocused()).to.be.true();
 		});
 
-		it('should focus `#dropdownSelected` when 5-way right', function () {
+		it('should focus `#dropdownSelected` when 5-way down', function () {
 			expect(Page.components.dropdownDefault.childItem.isFocused()).to.be.true();
 
 			Page.spotlightDown();

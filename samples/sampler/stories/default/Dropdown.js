@@ -5,7 +5,8 @@ import {storiesOf} from '@storybook/react';
 import React from 'react';
 
 import Dropdown, {DropdownBase} from '@enact/agate/Dropdown';
-import ri from '@enact/ui/resolution';
+
+import css from './Dropdown.module.less';
 
 const Config = mergeComponentMetadata('Dropdown', Dropdown, DropdownBase);
 Dropdown.displayName = 'Dropdown';
@@ -18,7 +19,7 @@ storiesOf('Agate', module)
 			const items = (new Array(itemCount)).fill().map((i, index) => `Option ${index + 1}`);
 
 			return (
-				<div style={{marginLeft: ri.scaleToRem(10)}}>
+				<div className={css.parentContainer}>
 					<Dropdown
 						direction={select('direction', ['above', 'below'], Config)}
 						disabled={boolean('disabled', Config)}
