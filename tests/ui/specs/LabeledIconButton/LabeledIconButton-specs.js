@@ -23,7 +23,7 @@ describe('LabeledIconButton', function () {
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Up', function () {
 				Page.components.LabeledIconButtonCustom.focus();
-				Page.spotlightUp();
+				Page.spotlightLeft();
 
 				expect(labeledIconButton.self.isFocused()).to.be.true();
 			});
@@ -51,7 +51,7 @@ describe('LabeledIconButton', function () {
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', function () {
 				Page.components.LabeledIconButtonDefault.focus();
-				Page.spotlightDown();
+				Page.spotlightRight();
 
 				expect(labeledIconButton.self.isFocused()).to.be.true();
 			});
@@ -83,7 +83,7 @@ describe('LabeledIconButton', function () {
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', function () {
 				Page.components.LabeledIconButtonCustom.focus();
-				Page.spotlightDown();
+				Page.spotlightRight();
 
 				expect(labeledIconButton.self.isFocused()).to.be.true();
 			});
@@ -114,7 +114,7 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', function () {
-				Page.components.LabeledIconButtonSelected.focus();
+				Page.components.LabeledIconButtonDefault.focus();
 				Page.spotlightDown();
 
 				expect(labeledIconButton.self.isFocused()).to.be.true();
@@ -146,7 +146,7 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', function () {
-				Page.components.LabeledIconButtonHighlighted.focus();
+				Page.components.LabeledIconButtonCustom.focus();
 				Page.spotlightDown();
 
 				expect(labeledIconButton.self.isFocused()).to.be.true();
@@ -178,9 +178,16 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', function () {
-				Page.components.LabeledIconButtonTransparent.focus();
+				Page.components.LabeledIconButtonSelected.focus();
 				Page.spotlightDown();
 
+				expect(labeledIconButton.self.isFocused()).to.be.true();
+			});
+		});
+
+		describe('pointer', function () {
+			it('should focus the labeled icon button when hovered', function () {
+				labeledIconButton.hover();
 				expect(labeledIconButton.self.isFocused()).to.be.true();
 			});
 		});
@@ -203,9 +210,16 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', function () {
-				Page.components.LabeledIconButtonSmallest.focus();
+				Page.components.LabeledIconButtonHighlighted.focus();
 				Page.spotlightDown();
 
+				expect(labeledIconButton.self.isFocused()).to.be.true();
+			});
+		});
+
+		describe('pointer', function () {
+			it('should focus the labeled icon button when hovered', function () {
+				labeledIconButton.hover();
 				expect(labeledIconButton.self.isFocused()).to.be.true();
 			});
 		});
@@ -228,9 +242,16 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', function () {
-				Page.components.LabeledIconButtonSmall.focus();
+				Page.components.LabeledIconButtonTransparent.focus();
 				Page.spotlightDown();
 
+				expect(labeledIconButton.self.isFocused()).to.be.true();
+			});
+		});
+
+		describe('pointer', function () {
+			it('should focus the labeled icon button when hovered', function () {
+				labeledIconButton.hover();
 				expect(labeledIconButton.self.isFocused()).to.be.true();
 			});
 		});
@@ -253,9 +274,16 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', function () {
-				Page.components.LabeledIconButtonDisabled.focus();
+				Page.components.LabeledIconButtonSmallest.focus();
 				Page.spotlightDown();
 
+				expect(labeledIconButton.self.isFocused()).to.be.true();
+			});
+		});
+
+		describe('pointer', function () {
+			it('should focus the labeled icon button when hovered', function () {
+				labeledIconButton.hover();
 				expect(labeledIconButton.self.isFocused()).to.be.true();
 			});
 		});
