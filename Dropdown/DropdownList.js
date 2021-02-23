@@ -3,7 +3,6 @@ import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import Spotlight from '@enact/spotlight';
-import Group from '@enact/ui/Group';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
@@ -132,13 +131,13 @@ const DropdownListBase = kind({
 	},
 
 	computed: {
-		className: ({children, direction, width, styler}) => styler.append(direction.substr(0, direction.indexOf(' ')), width, {dropdownListWithScroller: children.length > 4}),
+		className: ({children, direction, skin, width, styler}) => styler.append(direction.substr(0, direction.indexOf(' ')), width, {dropdownListWithScroller: children.length > 4}, {dropdownListWithOverwriteScroller: skin === 'silicon'}),
 		dataSize: ({children}) => children ? children.length : 0,
 		// Note: Retaining this in case we need to support different item sizes for large text mode:
 		itemSize: ({skin}) => (skin === 'silicon') ? ri.scale(60) : ri.scale(90)
 	},
 
-	render: ({children, dataSize, itemSize, groupProps, selected, scrollTo, onSelect, ...rest}) => {
+	render: ({dataSize, itemRenderer, itemSize, scrollTo, ...rest}) => {
 		delete rest.width;
 		delete rest.direction;
 		delete rest.skin;
@@ -146,11 +145,10 @@ const DropdownListBase = kind({
 		return (
 			<div {...rest}>
 				<VirtualList
-					className={css.virtualList}
-					css={css}
-					{...rest}
 					cbScrollTo={scrollTo}
+					className={css.virtualList}
 					dataSize={dataSize}
+					itemRenderer={itemRenderer}
 					itemSize={itemSize}
 				/>
 			</div>
@@ -290,7 +288,11 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 
 		render () {
 			return (
-				<Wrapped {...this.props} onFocus={this.handleFocus} scrollTo={this.setScrollTo} />
+				<Wrapped
+					{...this.props}
+					onFocus={this.handleFocus}
+					scrollTo={this.setScrollTo}
+				/>
 			);
 		}
 	};

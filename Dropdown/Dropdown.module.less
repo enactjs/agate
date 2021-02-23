@@ -212,24 +212,25 @@
 		&.dropdownListWithScroller {
 			height: @agate-dropdown-list-height;
 
-			.virtualList {
-				height: 100%;
-				// FIXME:
-				[role="button"] {
-					.focus({
-						& > div {
-							background-image: none;
-						}
-					});
-				}
+			&.dropdownListWithOverwriteScroller {
+				.virtualList {
+					// FIXME:
+					[role="button"] {
+						.focus({
+							& > div {
+								background-image: none;
+							}
+						});
+					}
 
-				[role="button"] > div {
-					border-color: transparent;
-					color: black;
-				}
+					[role="button"] > div {
+						border-color: transparent;
+						color: black;
+					}
 
-				[role="button"] + div::before {
-					background-color: black;
+					[role="button"] + div::before {
+						background-color: black;
+					}
 				}
 			}
 		}
