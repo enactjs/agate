@@ -174,6 +174,8 @@ const RangePickerBase = kind({
 	computed: {
 		disabled: ({disabled, max, min}) => min >= max ? true : disabled,
 		value: ({min, max, value}) => {
+			console.log("min? ", min);
+			console.log("max? ", max);
 			return clamp(min, max, value);
 		}
 	},
