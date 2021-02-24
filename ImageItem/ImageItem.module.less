@@ -24,11 +24,11 @@
 	.applySkins({
 		border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
 
-	  	.caption {
+		.caption {
 			height: @agate-imageitem-caption-height;
 			line-height: @agate-imageitem-caption-height;
 			text-align: center;
-	  	}
+		}
 
 		&.captionOverlay {
 			.caption {
@@ -51,6 +51,10 @@
 			  	content: "";
 				border-color: @agate-imageitem-focus-border-color;
 				background-color: @agate-imageitem-focus-bg-color;
+			}
+
+			.caption {
+				background-image: @agate-imageitem-caption-background-image;
 			}
 		});
   	});
