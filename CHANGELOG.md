@@ -16,6 +16,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
 - `agate/SliderButton` styling to visually show the focused state
+- `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
 
 ## [1.1.2] - 2021-02-05
 
