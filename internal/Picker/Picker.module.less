@@ -5,9 +5,14 @@
 @import "../../styles/skin.less";
 
 .picker {
-	display: flex;
-	flex-direction: column;
+
 	overflow: hidden;
+	height: 225px;
+
+	.root {
+		display: flex;
+		flex-direction: column;
+	}
 
 	&.horizontal {
 		flex-direction: row;

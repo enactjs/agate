@@ -338,11 +338,12 @@ const PickerBase = kind({
 	handlers: {
 		handleDecrement: decrement,
 		handleFlick: handle(
-			forEventProp('direction', 'vertical'),
+			() => {console.log("flicking"); increment},
+			//forEventProp('orientation', 'vertical'),
 			// ignore "slow" flicks by filtering out velocity below a threshold
 			oneOf(
-				[({velocityY}) => velocityY < 0, increment],
-				[({velocityY}) => velocityY > 0, decrement]
+				[({velocityX}) => {console.log(velocityX),velocityX < 0, increment}],
+				[({velocityX}) => {console.log(velocityX),velocityX > 0, decrement}]
 			)
 		),
 		handleIncrement: increment
@@ -480,49 +481,49 @@ const PickerBase = kind({
 		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
 		const transitionDuration = 150;
 
-		const decrementValue = () => {
-			const restrictedDecrementValue = wrap ? wrapRange(min, max, value - step) : clamp(min, max, value - step);
-			if (isFirst && !wrap) {
-				return '';
-			} else if (Array.isArray(values)) {
-				return values;
-			} else {
-				return (<PickerItem key={restrictedDecrementValue} style={{direction: 'ltr'}}>{restrictedDecrementValue}</PickerItem>);
-			}
-		};
-
-		const incrementValue = () => {
-			const restrictedIncrementValue = wrap ? wrapRange(min, max, value + step) : clamp(min, max, value + step);
-			if (isLast && !wrap) {
-				return '';
-			} else if (Array.isArray(values)) {
-				return values;
-			} else {
-				return (<PickerItem key={restrictedIncrementValue} style={{direction: 'ltr'}}>{restrictedIncrementValue}</PickerItem>);
-			}
-		};
-
-		const secondaryDecrementValue = () => {
-			const restrictedSecondaryDecrementValue = wrap ? wrapRange(min, max, value - (2 * step)) : clamp(min, max, value - (2 * step));
-			if (isSecond && !wrap) {
-				return '';
-			} else if (Array.isArray(values)) {
-				return values;
-			} else {
-				return (<PickerItem key={restrictedSecondaryDecrementValue} style={{direction: 'ltr'}}>{restrictedSecondaryDecrementValue}</PickerItem>);
-			}
-		};
-
-		const secondaryIncrementValue = () => {
-			const restrictedSecondaryIncrementValue = wrap ? wrapRange(min, max, value + (2 * step)) : clamp(min, max, value + (2 * step));
-			if (isPenultimate && !wrap) {
-				return '';
-			} else if (Array.isArray(values)) {
-				return values;
-			} else {
-				return (<PickerItem key={restrictedSecondaryIncrementValue} style={{direction: 'ltr'}}>{restrictedSecondaryIncrementValue}</PickerItem>);
-			}
-		};
+		// const decrementValue = () => {
+		// 	const restrictedDecrementValue = wrap ? wrapRange(min, max, value - step) : clamp(min, max, value - step);
+		// 	if (isFirst && !wrap) {
+		// 		return '';
+		// 	} else if (Array.isArray(values)) {
+		// 		return values;
+		// 	} else {
+		// 		return (<PickerItem key={restrictedDecrementValue} style={{direction: 'ltr'}}>{restrictedDecrementValue}</PickerItem>);
+		// 	}
+		// };
+		//
+		// const incrementValue = () => {
+		// 	const restrictedIncrementValue = wrap ? wrapRange(min, max, value + step) : clamp(min, max, value + step);
+		// 	if (isLast && !wrap) {
+		// 		return '';
+		// 	} else if (Array.isArray(values)) {
+		// 		return values;
+		// 	} else {
+		// 		return (<PickerItem key={restrictedIncrementValue} style={{direction: 'ltr'}}>{restrictedIncrementValue}</PickerItem>);
+		// 	}
+		// };
+		//
+		// const secondaryDecrementValue = () => {
+		// 	const restrictedSecondaryDecrementValue = wrap ? wrapRange(min, max, value - (2 * step)) : clamp(min, max, value - (2 * step));
+		// 	if (isSecond && !wrap) {
+		// 		return '';
+		// 	} else if (Array.isArray(values)) {
+		// 		return values;
+		// 	} else {
+		// 		return (<PickerItem key={restrictedSecondaryDecrementValue} style={{direction: 'ltr'}}>{restrictedSecondaryDecrementValue}</PickerItem>);
+		// 	}
+		// };
+		//
+		// const secondaryIncrementValue = () => {
+		// 	const restrictedSecondaryIncrementValue = wrap ? wrapRange(min, max, value + (2 * step)) : clamp(min, max, value + (2 * step));
+		// 	if (isPenultimate && !wrap) {
+		// 		return '';
+		// 	} else if (Array.isArray(values)) {
+		// 		return values;
+		// 	} else {
+		// 		return (<PickerItem key={restrictedSecondaryIncrementValue} style={{direction: 'ltr'}}>{restrictedSecondaryIncrementValue}</PickerItem>);
+		// 	}
+		// };
 
 		let sizingPlaceholder = null;
 		if (typeof width === 'number' && width > 0) {
@@ -542,124 +543,35 @@ const PickerBase = kind({
 		delete rest.wrap;
 
 		return (
-			<PickerRoot {...rest} onFlick={handleFlick}>
-				{skin === 'silicon'  &&
-					<PickerButtonItem
-						aria-controls={valueId}
-						aria-disabled={isSecond}
-						aria-label={decrementAriaLabel}
-						className={css.secondaryItemDecrement}
-						disabled={disabled || isSecond}
-						onClick={secondaryDecrementValue() === '' ? () => {} : () => {
-							handleDecrement(); setTimeout(() => handleDecrement(), transitionDuration);
-						}}
-						onSpotlightDisappear={onSpotlightDisappear}
-						spotlightDisabled={spotlightDisabled || secondaryDecrementValue() === ''}
-					>
-						<ViewManager
-							aria-hidden
-							arranger={arranger}
-							className={css.viewManager}
-							duration={transitionDuration}
-							index={secondaryDecrementItemIndex}
-							noAnimation={noAnimation || disabled}
-							reverseTransition={reverseTransition}
-						>
-							{secondaryDecrementValue()}
-						</ViewManager>
-					</PickerButtonItem>
-				}
-				<PickerButtonItem
-					aria-controls={valueId}
-					aria-disabled={disabled || isFirst}
-					aria-label={decrementAriaLabel}
-					className={css.itemDecrement}
-					disabled={disabled || isFirst}
-					onClick={decrementValue() === '' ? () => {} : handleDecrement}
-					onSpotlightDisappear={onSpotlightDisappear}
-					spotlightDisabled={spotlightDisabled || decrementValue() === ''}
-				>
-					<ViewManager
-						aria-hidden
-						arranger={arranger}
-						className={css.viewManager}
-						duration={transitionDuration}
-						index={decrementItemIndex}
-						noAnimation={noAnimation || disabled}
-						reverseTransition={reverseTransition}
-					>
-						{decrementValue()}
-					</ViewManager>
-				</PickerButtonItem>
-				<div
-					aria-label={ariaLabel}
-					aria-valuetext={currentValueText}
-					className={activeClassName}
-					id={valueId}
-					role="spinbutton"
-				>
-					{sizingPlaceholder}
-					<ViewManager
-						aria-hidden
-						arranger={arranger}
-						className={css.viewManager}
-						duration={transitionDuration}
-						index={currentItemIndex}
-						noAnimation={noAnimation || disabled}
-						reverseTransition={reverseTransition}
-					>
-						{values}
-					</ViewManager>
-				</div>
-				<PickerButtonItem
-					aria-controls={valueId}
-					aria-disabled={disabled || isLast}
-					aria-label={incrementAriaLabel}
-					className={css.itemIncrement}
-					disabled={disabled || isLast}
-					onClick={incrementValue() === '' ? () => {} : handleIncrement}
-					onSpotlightDisappear={onSpotlightDisappear}
-					spotlightDisabled={spotlightDisabled || incrementValue() === ''}
-				>
-					<ViewManager
-						aria-hidden
-						arranger={arranger}
-						className={css.viewManager}
-						duration={transitionDuration}
-						index={incrementItemIndex}
-						noAnimation={noAnimation || disabled}
-						reverseTransition={reverseTransition}
-					>
-						{incrementValue()}
-					</ViewManager>
-				</PickerButtonItem>
-				{skin === 'silicon' &&
-					<PickerButtonItem
-						aria-controls={valueId}
-						aria-disabled={isPenultimate}
-						aria-label={incrementAriaLabel}
-						className={css.secondaryItemIncrement}
-						disabled={disabled || isPenultimate}
-						onClick={secondaryIncrementValue() === '' ? () => {} : () => {
-							handleIncrement(); setTimeout(() => handleIncrement(), transitionDuration);
-						}}
-						onSpotlightDisappear={onSpotlightDisappear}
-						spotlightDisabled={spotlightDisabled || secondaryIncrementValue() === ''}
-					>
-						<ViewManager
-							aria-hidden
-							arranger={arranger}
-							className={css.viewManager}
-							duration={transitionDuration}
-							index={secondaryIncrementItemIndex}
-							noAnimation={noAnimation || disabled}
-							reverseTransition={reverseTransition}
-						>
-							{secondaryIncrementValue()}
-						</ViewManager>
-					</PickerButtonItem>
-				}
+			<div {...rest}>
+			<PickerRoot className={css.root} onFlick={handleFlick} >
+				{values}
+
+				{/*<div*/}
+				{/*	aria-label={ariaLabel}*/}
+				{/*	aria-valuetext={currentValueText}*/}
+				{/*	className={activeClassName}*/}
+				{/*	id={valueId}*/}
+				{/*	role="spinbutton"*/}
+				{/*>*/}
+				{/*	{sizingPlaceholder}*/}
+
+				{/*	<ViewManager*/}
+				{/*		aria-hidden*/}
+				{/*		arranger={arranger}*/}
+				{/*		className={css.viewManager}*/}
+				{/*		duration={transitionDuration}*/}
+				{/*		index={currentItemIndex}*/}
+				{/*		noAnimation={noAnimation || disabled}*/}
+				{/*		reverseTransition={reverseTransition}*/}
+				{/*	>*/}
+				{/*		{values}*/}
+				{/*	</ViewManager>*/}
+				{/*</div>*/}
+
+
 			</PickerRoot>
+				</div>
 		);
 	}
 });
