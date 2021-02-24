@@ -37,6 +37,7 @@ const DatePickerBase = kind({
 		 * The number of days in the month.
 		 *
 		 * @type {Number}
+		 * @default 31
 		 * @required
 		 * @public
 		 */
@@ -46,6 +47,7 @@ const DatePickerBase = kind({
 		 * The number of months in the year.
 		 *
 		 * @type {Number}
+		 * @default 12
 		 * @required
 		 * @public
 		 */
@@ -201,6 +203,8 @@ const DatePickerBase = kind({
 	},
 
 	defaultProps: {
+		maxDays: 31,
+		maxMonths: 12,
 		maxYear: 2099,
 		minYear: 1900,
 		disabled: false
