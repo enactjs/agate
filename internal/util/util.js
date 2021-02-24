@@ -1,28 +1,6 @@
 import equals from 'ramda/src/equals';
 
 /**
- * Removes voice control related props from `props` and returns them in a new object.
- *
- * @function
- * @param   {Object}    props    Props object
- *
- * @returns {Object}             voice control related props
- * @memberof agate/internal/util
- * @private
- */
-const extractVoiceProps = function (props) {
-	const obj = {};
-	Object.keys(props).forEach(key => {
-		if (key.indexOf('data-webos-voice-') === 0) {
-			obj[key] = props[key];
-			delete props[key];
-		}
-	});
-
-	return obj;
-};
-
-/**
  * Compares two children and returns true if they are equivalent, false otherwise.
  *
  * @function
@@ -52,6 +30,5 @@ const compareChildren = (a, b) => {
 };
 
 export {
-	compareChildren,
-	extractVoiceProps
+	compareChildren
 };
