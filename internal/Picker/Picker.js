@@ -479,12 +479,7 @@ const PickerBase = kind({
 		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
 		const transitionDuration = 150;
 
-		console.log("pickerbase min? ", min);
-		console.log("pickerbase max? ", max);
-
 		const decrementValue = () => {
-			console.log("pickerbase decrementV min? ", min);
-			console.log("pickerbase decrementV max? ", max);
 			const restrictedDecrementValue = wrap ? wrapRange(min, max, value - step) : clamp(min, max, value - step);
 			if (isFirst && !wrap) {
 				return '';

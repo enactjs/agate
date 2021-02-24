@@ -23,6 +23,7 @@ const DateComponentRangePickerBase = kind({
 		 * The maximum value for the date component
 		 *
 		 * @type {Number}
+		 * @default 1
 		 * @required
 		 */
 		max: PropTypes.number.isRequired,
@@ -31,6 +32,7 @@ const DateComponentRangePickerBase = kind({
 		 * The minimum value for the date component
 		 *
 		 * @type {Number}
+		 * @default 0
 		 * @required
 		 */
 		min: PropTypes.number.isRequired,
@@ -68,6 +70,8 @@ const DateComponentRangePickerBase = kind({
 	},
 
 	styles: {
+		max: 1,
+		min: 0,
 		css,
 		className: 'dateComponentPicker'
 	},
