@@ -62,7 +62,7 @@ SkinnedButton.displayName = 'Button';
 storiesOf('Agate', module)
 	.add(
 		'Button',
-		({...rest}) => (
+		() => (
 			<SkinnedButton
 				animateOnRender={boolean('animateOnRender', Config)}
 				animationDelay={number('animationDelay', Config)}
