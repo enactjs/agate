@@ -8,9 +8,9 @@
 	position: relative;
 
   	&.horizontal {
-		.image {
-	  		margin: auto 0; // leaving this to align image with caption when orientation="horizontal"
-		}
+			.image {
+					margin: auto 0; // leaving this to align image with caption when orientation="horizontal"
+			}
   	}
 
 	&.captionOverlay {
@@ -23,6 +23,13 @@
 
 	.applySkins({
 		border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
+
+		&:not(.captionOverlay) {
+			.caption {
+				font-size: 27px;
+				line-height: 60px;
+			}
+		}
 
 		.caption {
 			height: @agate-imageitem-caption-height;
@@ -53,9 +60,17 @@
 				background-color: @agate-imageitem-focus-bg-color;
 			}
 
-			.caption {
-				background-image: @agate-imageitem-caption-background-image;
+			&:not(.captionOverlay) {
+				.caption {
+					background-image: @agate-imageitem-caption-background-image;
+				}
 			}
+
+			// &.captionOverlay {
+			// 	.caption {
+			// 		background-image: @agate-imageitem-caption-background-image;
+			// 	}
+			// }
 		});
   	});
 }
