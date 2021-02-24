@@ -17,6 +17,11 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Dropdown` to use `agate/ContextualPopup`
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
 
+### Fixed
+
+- `agate/SliderButton` 5-way navigation functionality to change value via direction keys
+- `agate/SliderButton` styling to visually show the focused state
+
 ## [1.1.2] - 2021-02-05
 
 ### Deprecated
