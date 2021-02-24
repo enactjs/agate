@@ -4,6 +4,7 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
 
+import Icon from '@enact/agate/Icon';
 import RadioItem from '@enact/agate/RadioItem';
 
 import iconNames from './icons';
@@ -14,17 +15,21 @@ RadioItem.displayName = 'RadioItem';
 storiesOf('Agate', module)
 	.add(
 		'RadioItem',
-		() => (
-			<div>
+		() => {
+			const slotBeforeSelection = select('slotBefore', ['', ...iconNames], Config);
+			const slotBefore = slotBeforeSelection ? (<Icon size="small" slot="slotBefore">{slotBeforeSelection}</Icon>) : null;
+
+			return (
 				<RadioItem
 					disabled={boolean('disabled', Config)}
 					icon={select('icon', ['', ...iconNames], Config)}
 					onToggle={action('onToggle')}
 				>
+					{slotBefore}
 					{text('children', Config, 'Hello RadioItem')}
 				</RadioItem>
-			</div>
-		),
+			);
+		},
 		{
 			text: 'The basic RadioItem'
 		}
