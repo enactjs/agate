@@ -480,7 +480,8 @@ const PickerBase = kind({
 		const transitionDuration = 150;
 
 		const decrementValue = () => {
-			const restrictedDecrementValue = wrap ? wrapRange(min, max, value - step) : clamp(min, max, value - step);
+			const clampledValue = min < max ? clamp(min, max, value - step) : min;
+			const restrictedDecrementValue = wrap ? wrapRange(min, max, value - step) : clampledValue;
 			if (isFirst && !wrap) {
 				return '';
 			} else if (Array.isArray(values)) {
@@ -491,7 +492,8 @@ const PickerBase = kind({
 		};
 
 		const incrementValue = () => {
-			const restrictedIncrementValue = wrap ? wrapRange(min, max, value + step) : clamp(min, max, value + step);
+			const clampledValue = min < max ? clamp(min, max, value + step) : max;
+			const restrictedIncrementValue = wrap ? wrapRange(min, max, value + step) : clampledValue;
 			if (isLast && !wrap) {
 				return '';
 			} else if (Array.isArray(values)) {
