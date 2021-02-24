@@ -131,7 +131,7 @@ const DropdownListBase = kind({
 	},
 
 	computed: {
-		className: ({children, direction, skin, width, styler}) => styler.append(direction.substr(0, direction.indexOf(' ')), width, {dropdownListWithScroller: children.length > 4}, {dropdownListWithOverwriteScroller: skin === 'silicon'}),
+		className: ({direction, skin, width, styler}) => styler.append(direction.substr(0, direction.indexOf(' ')), width, {dropdownListWithCustomizedScroller: skin === 'silicon'}),
 		dataSize: ({children}) => children ? children.length : 0,
 		// Note: Retaining this in case we need to support different item sizes for large text mode:
 		itemSize: ({skin}) => (skin === 'silicon') ? ri.scale(60) : ri.scale(90)
@@ -143,15 +143,13 @@ const DropdownListBase = kind({
 		delete rest.skin;
 
 		return (
-			<div {...rest}>
-				<VirtualList
-					cbScrollTo={scrollTo}
-					className={css.virtualList}
-					dataSize={dataSize}
-					itemRenderer={itemRenderer}
-					itemSize={itemSize}
-				/>
-			</div>
+			<VirtualList
+				{...rest}
+				cbScrollTo={scrollTo}
+				dataSize={dataSize}
+				itemRenderer={itemRenderer}
+				itemSize={itemSize}
+			/>
 		);
 	}
 });
@@ -259,9 +257,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 			this.scrollTo({
 				animate: false,
 				focus: true,
-				index: selected,
-				offset: ri.scale(126 * 2), // @sand-item-small-height * 2 (TODO: large text mode not supported!)
-				stickTo: 'start' // offset from the top of the dropdown
+				index: selected
 			});
 
 			this.setState({ready: ReadyState.SCROLLED});

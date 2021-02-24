@@ -149,6 +149,7 @@
 		border-bottom: @agate-dropdown-border-width @agate-dropdown-border-style @agate-dropdown-border-color;
 		border-radius: @agate-dropdown-list-border-radius;
 		background-color: @agate-dropdown-list-bg-color;
+		height: @agate-dropdown-list-height;
 		overflow: hidden;
 
 		.item {
@@ -209,29 +210,23 @@
 			border-radius: @agate-dropdown-up-button-list-border-radius;
 		}
 
-		&.dropdownListWithScroller {
-			height: @agate-dropdown-list-height;
-
-			&.dropdownListWithOverwriteScroller {
-				.virtualList {
-					// FIXME:
-					[role="button"] {
-						.focus({
-							& > div {
-								background-image: none;
-							}
-						});
+		&.dropdownListWithCustomizedScroller {
+			// FIXME:
+			[role="button"] {
+				.focus({
+					& > div {
+						background-image: none;
 					}
+				});
+			}
 
-					[role="button"] > div {
-						border-color: transparent;
-						color: black;
-					}
+			[role="button"] > div {
+				border-color: transparent;
+				color: black;
+			}
 
-					[role="button"] + div::before {
-						background-color: black;
-					}
-				}
+			[role="button"] + div::before {
+				background-color: black;
 			}
 		}
 	});
