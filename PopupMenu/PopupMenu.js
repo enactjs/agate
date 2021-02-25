@@ -13,7 +13,6 @@ import Slottable from '@enact/ui/Slottable';
 import Transition from '@enact/ui/Transition';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import $L from '../internal/$L';
 import Skinnable from '../Skinnable';

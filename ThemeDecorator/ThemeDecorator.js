@@ -6,6 +6,7 @@
  * @exports ThemeContext
  */
 
+import {setDefaultTargetById} from '@enact/core/dispatcher';
 import hoc from '@enact/core/hoc';
 import {addAll} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
@@ -16,14 +17,14 @@ import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 import classnames from 'classnames';
 import convert from 'color-convert';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {createContext, Component} from 'react';
 
 import Skinnable from '../Skinnable';
 
 import screenTypes from './screenTypes.json';
 import css from './ThemeDecorator.module.less';
 
-const ThemeContext = React.createContext(null);
+const ThemeContext = createContext(null);
 
 const defaultColors = {
 	carbon: {
@@ -142,6 +143,15 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	},
 
 	/**
+	 * Specifies the id of the React DOM tree root node
+	 *
+	 * @type {String}
+	 * @default 'root'
+	 * @public
+	 */
+	rootId: 'root',
+
+	/**
 	 * Applies skinning support.
 	 *
 	 * @type {Boolean}
@@ -253,7 +263,7 @@ const CustomizableSkinStyle = kind({
  */
 const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	// TODO: Document props passable to hoc ()
-	const {customSkin, float, i18n, noAutoFocus, overlay, ri, skin, spotlight, disableFullscreen} = config;
+	const {customSkin, float, i18n, noAutoFocus, overlay, ri, skin, spotlight, disableFullscreen, rootId} = config;
 	const defaultSkin = 'gallium';
 
 	const bgClassName = classnames(
@@ -277,7 +287,10 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		pointerShow: 1536
 	});
 
-	const Decorator = class extends React.Component {
+	// set the DOM node ID of the React DOM tree root
+	setDefaultTargetById(rootId);
+
+	const Decorator = class extends Component {
 		static displayName = 'ThemeDecorator';
 
 		static propTypes = /** @lends agate/ThemeDecorator.ThemeDecorator.prototype */ {

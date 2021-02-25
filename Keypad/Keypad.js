@@ -18,7 +18,7 @@ import kind from '@enact/core/kind';
 import Layout, {Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
+import {Component} from 'react';
 
 import $L from '../internal/$L';
 import Button from '../Button';
@@ -202,7 +202,7 @@ const KeypadBase = kind({
  * @private
  */
 const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'KeypadBehaviorDecorator';
 
 		static propTypes = /** @lends agate/Keypad.KeypadBehaviorDecorator.prototype */ {

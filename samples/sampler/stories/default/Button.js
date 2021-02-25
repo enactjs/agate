@@ -2,7 +2,6 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, text, number} from '@enact/storybook-utils/addons/knobs';
 import UiButton from '@enact/ui/Button';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Button, {ButtonBase} from '@enact/agate/Button';

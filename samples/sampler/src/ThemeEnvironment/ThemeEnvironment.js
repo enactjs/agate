@@ -2,7 +2,6 @@
 
 import kind from '@enact/core/kind';
 import {cap} from '@enact/core/util';
-import React from 'react';
 import PropTypes from 'prop-types';
 import {color} from '@storybook/addon-knobs';
 import {Row, Column, Cell} from '@enact/ui/Layout';

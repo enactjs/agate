@@ -1,5 +1,5 @@
 import hoc from '@enact/core/hoc';
-import React from 'react';
+import {Component} from 'react';
 
 let GlobalId = 0;
 
@@ -51,7 +51,7 @@ const defaultConfig = {
 const IdProvider = hoc(defaultConfig, (config, Wrapped) => {
 	const {generateProp, idProp, prefix} = config;
 
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'IdProvider';
 
 		constructor () {

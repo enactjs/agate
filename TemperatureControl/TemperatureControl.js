@@ -17,7 +17,6 @@ import MeasurementFactory from 'ilib/lib/MeasurementFactory';
 import UnitFmt from 'ilib/lib/UnitFmt';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import ArcSlider from '../ArcSlider';
 import Skinnable from '../Skinnable';

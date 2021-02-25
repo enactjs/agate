@@ -1,5 +1,4 @@
 import {action} from '@enact/storybook-utils/addons/actions';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Keypad from '@enact/agate/Keypad';
