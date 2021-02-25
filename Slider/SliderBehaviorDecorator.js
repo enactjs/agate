@@ -3,7 +3,7 @@ import hoc from '@enact/core/hoc';
 import platform from '@enact/core/platform';
 import Pause from '@enact/spotlight/Pause';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {Component} from 'react';
 import {findDOMNode} from 'react-dom';
 
 import $L from '../internal/$L';
@@ -46,7 +46,7 @@ const defaultConfig = {
 const SliderBehaviorDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {emitSpotlightEvents} = config;
 
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'SliderBehaviorDecorator';
 
 		static propTypes = {

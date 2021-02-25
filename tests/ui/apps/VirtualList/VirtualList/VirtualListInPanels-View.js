@@ -2,7 +2,7 @@ import spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {Column, Cell} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
-import React from 'react';
+import {Component} from 'react';
 
 import Header from '../../../../../Header';
 import Input from '../../../../../Input';
@@ -46,7 +46,7 @@ const updateDataSize = (dataSize) => {
 	return dataSize;
 };
 
-class app extends React.Component {
+class app extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {

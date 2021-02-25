@@ -13,7 +13,6 @@ import kind from '@enact/core/kind';
 import Transition from '@enact/ui/Transition';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import PopupState from '../Popup/PopupState';
 import Skinnable from '../Skinnable';

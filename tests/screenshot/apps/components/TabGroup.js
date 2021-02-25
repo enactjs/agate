@@ -1,5 +1,4 @@
 import TabGroup from '../../../../TabGroup';
-import React from 'react';
 
 const TabGroupTests = [
 	<TabGroup

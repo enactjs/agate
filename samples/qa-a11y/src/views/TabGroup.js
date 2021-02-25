@@ -1,5 +1,4 @@
 import TabGroup from '@enact/agate/TabGroup';
-import React from 'react';
 
 import Section from '../components/Section';
 

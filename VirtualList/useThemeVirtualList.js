@@ -4,7 +4,7 @@ import Pause from '@enact/spotlight/Pause';
 import {getTargetByDirectionFromElement} from '@enact/spotlight/src/target';
 import {Spottable} from '@enact/spotlight/Spottable';
 import utilDOM from '@enact/ui/useScroll/utilDOM';
-import React, {useCallback, useEffect, useRef} from 'react';
+import {useCallback, useEffect, useRef} from 'react';
 
 import {dataIndexAttribute} from '../useScroll';
 

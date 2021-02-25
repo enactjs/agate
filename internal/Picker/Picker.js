@@ -20,7 +20,6 @@ import {SlideLeftArranger, SlideTopArranger, ViewManager} from '@enact/ui/ViewMa
 import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import $L from '../$L';
 import {PickerItem} from './Picker';

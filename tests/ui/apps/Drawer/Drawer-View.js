@@ -3,7 +3,7 @@ import Button from '../../../../Button';
 import Drawer from '../../../../Drawer';
 import Heading from '../../../../Heading';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import React, {Component} from 'react';
+import {Component} from 'react';
 import spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 
