@@ -1,5 +1,4 @@
 import IncrementSlider from '../../../../IncrementSlider';
-import React from 'react';
 
 const IncrementSliderTests = [
 	<IncrementSlider />,

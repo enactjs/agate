@@ -8,9 +8,9 @@ import freeze from 'deep-freeze';
 import {on, off} from '@enact/core/dispatcher';
 import hoc from '@enact/core/hoc';
 import {produce} from 'immer';
-import React, {Component} from 'react';
+import {createContext, memo, Component} from 'react';
 
-const Context = React.createContext();
+const Context = createContext();
 
 const defaultConfig = {
 	pauseOnBlur: false,
@@ -20,7 +20,7 @@ const defaultConfig = {
 const ProviderDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {pauseOnBlur, state: defaultState} = config;
 
-	const PureWrapped = React.memo(Wrapped);
+	const PureWrapped = memo(Wrapped);
 
 	return class extends Component {
 		static displayName = 'ProviderDecorator';

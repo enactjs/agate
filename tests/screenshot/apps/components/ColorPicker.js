@@ -1,5 +1,4 @@
 import ColorPicker from '../../../../ColorPicker';
-import React from 'react';
 
 const ColorPickerTests = [
 	<ColorPicker>{[]}</ColorPicker>,

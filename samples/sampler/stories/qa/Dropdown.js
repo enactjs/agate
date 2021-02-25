@@ -3,7 +3,6 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, number, select, text} from  '@enact/storybook-utils/addons/knobs';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {storiesOf} from '@storybook/react';
-import React from 'react';
 
 import Button from '@enact/agate/Button';
 import Dropdown, {DropdownBase} from '@enact/agate/Dropdown';

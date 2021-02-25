@@ -11,7 +11,6 @@ import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDeco
 import {ResizeContext} from '@enact/ui/Resizable';
 import {gridListItemSizeShape, itemSizesShape, VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
 import PropTypes from 'prop-types';
-import React from 'react';
 import warning from 'warning';
 
 import useScroll from '../useScroll';

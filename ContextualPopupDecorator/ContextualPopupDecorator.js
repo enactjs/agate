@@ -19,7 +19,7 @@ import FloatingLayer from '@enact/ui/FloatingLayer';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
+import {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 import {ContextualPopup} from './ContextualPopup';
@@ -72,7 +72,7 @@ const ContextualPopupContainer = SpotlightContainerDecorator(
 const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {noArrow, noSkin, openProp} = config;
 
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'ContextualPopupDecorator';
 
 		static propTypes = /** @lends agate/ContextualPopupDecorator.ContextualPopupDecorator.prototype */ {
