@@ -2,6 +2,7 @@ import Group from '@enact/ui/Group';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, number, select, text} from  '@enact/storybook-utils/addons/knobs';
 import {action} from '@enact/storybook-utils/addons/actions';
+import {Component} from 'react'
 import {storiesOf} from '@storybook/react';
 
 import Button from '@enact/agate/Button';
@@ -19,7 +20,7 @@ const list = [
 	{children: 'hello 3', 'key': 'key3', 'aria-label': 'aria 3'}
 ];
 
-class AutoDismissDropdown extends React.Component {
+class AutoDismissDropdown extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
@@ -51,7 +52,7 @@ class AutoDismissDropdown extends React.Component {
 	}
 }
 
-class DisabledDropdown extends React.Component {
+class DisabledDropdown extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
