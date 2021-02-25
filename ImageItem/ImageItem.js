@@ -100,7 +100,8 @@ const ImageItemBase = kind({
 		 * @type {String|Object}
 		 * @public
 		 */
-		src: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+		src: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+		sizing: PropTypes.oneOf(['fit', 'fill', 'none'])
 	},
 
 	defaultProps: {
@@ -114,14 +115,17 @@ const ImageItemBase = kind({
 	},
 
 	computed: {
-		className: ({captionPosition, styler}) => styler.append({
+		className: ({captionPosition, styler, sizing}) => styler.append({
 			captionOverlay: captionPosition === 'overlay'
-		})
+			
+		},sizing),
+		sizing: ({sizing, orientation}) => orientation === 'horizontal' ? sizing : 'fill',
+		imageComponentSizing: ({orientation}) => orientation === 'horizontal' ? 'none' : 'fill'
 	},
 
-	render: ({captionPosition, children, css, disabled, orientation, src, ...rest}) => {
+	render: ({captionPosition, children, css, disabled, imageComponentSizing, orientation, src, sizing, ...rest}) => {
 		const [Component, marqueeProps] = (children && (orientation === 'horizontal' || captionPosition === 'below')) ? [MarqueeImageItem, {
-			alignment: 'center'
+			alignment: orientation === 'horizontal' ? 'left' : 'center'
 		}] : [UiImageItem, null];
 
 		return (
@@ -131,7 +135,7 @@ const ImageItemBase = kind({
 				aria-disabled={disabled}
 				css={css}
 				disabled={disabled}
-				imageComponent={ImageBase}
+				imageComponent={<ImageBase sizing={imageComponentSizing}/>}
 				orientation={orientation}
 				src={src}
 			>

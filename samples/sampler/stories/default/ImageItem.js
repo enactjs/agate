@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {object, text, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, object, text, select} from '@enact/storybook-utils/addons/knobs';
 import ri from '@enact/ui/resolution';
 import React from 'react';
 import {storiesOf} from '@storybook/react';
@@ -25,9 +25,11 @@ storiesOf('Agate', module)
 				<ImageItem
 					onError={action('onError')}
 					onLoad={action('onLoad')}
-					orientation={select('orientation', ['horizontal', 'vertical'], Config)}
+					orientation={select('orientation', ['horizontal', 'vertical'], Config, 'horizontal')}
 					captionPosition={select('captionPosition', ['below', 'overlay'], Config)}
 					src={object('src', Config, src)}
+					sizing={select('sizing', ['fill', 'fit', 'none'], Config, 'fill')}
+					disabled={boolean('disabled', Config)}
 				>
 					{text('children', Config, 'caption')}
 				</ImageItem>
