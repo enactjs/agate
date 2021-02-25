@@ -7,11 +7,12 @@
 .picker {
 
 	overflow: hidden;
-	height: 225px;
+	height: 252px;
 
 	.root {
 		display: flex;
 		flex-direction: column;
+		z-index: 1;
 	}
 
 	&.horizontal {
@@ -28,7 +29,7 @@
 		border-radius: @agate-picker-border-radius;
 		transform: @agate-picker-transform;
 		margin: @agate-picker-margin;
-		padding: @agate-picker-padding;
+		//padding: @agate-picker-padding;
 
 		.sizingPlaceholder {
 			height: 0;
@@ -59,10 +60,20 @@
 				font-weight: @agate-picker-active-font-weight;
 			}
 
-			&.active {
-				color: @agate-picker-active-color;
+			&.indicator {
 				background-color: @agate-picker-active-bg-color;
 				background-image: @agate-picker-active-bg-image;
+				height: 84px;
+				position: absolute;
+				left: 0;
+				top: 84px;
+				z-index: -1;
+
+				//padding: @agate-picker-padding;
+			}
+
+			&.selected {
+				color: @agate-picker-active-color;
 				font-size: @agate-picker-active-font-size;
 				font-weight: @agate-picker-active-font-weight;
 			}

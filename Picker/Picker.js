@@ -134,9 +134,9 @@ const PickerBase = kind({
 	},
 
 	computed: {
-		children: ({children}) => Children.map(children, (child) => (
-			<PickerItem>{child}</PickerItem>
-		)),
+		// children: ({children}) => Children.map(children, (child) => (
+		// 	<PickerItem>{child}</PickerItem>
+		// )),
 		disabled: ({children, disabled}) => Children.count(children) > 1 ? disabled : true,
 		max: ({children}) => children && children.length ? children.length - 1 : 0,
 		value: ({value, children}) => {
@@ -147,7 +147,7 @@ const PickerBase = kind({
 
 	render: (props) => {
 		const {children, max, value, ...rest} = props;
-
+console.log(value);
 		return (
 			<PickerCore
 				{...rest}
