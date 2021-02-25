@@ -28,10 +28,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import not from 'ramda/src/not';
-import React from 'react';
 import warning from 'warning';
-import {Component} from 'react';
-import ReactDOM from 'react-dom';
 
 import Button from '../Button';
 import ContextualPopupDecorator from '../ContextualPopupDecorator';
