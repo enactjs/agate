@@ -1,5 +1,4 @@
 import CheckboxItem from '@enact/agate/CheckboxItem';
-import React from 'react';
 
 import Section from '../components/Section';
 

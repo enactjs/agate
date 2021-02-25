@@ -2,7 +2,6 @@ import {ContextualPopupDecorator} from '@enact/agate/ContextualPopupDecorator';
 import BodyText from '@enact/agate/BodyText';
 import Button from '@enact/agate/Button';
 import ri from '@enact/ui/resolution';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';

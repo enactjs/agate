@@ -16,7 +16,6 @@ import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import PickerCore, {ChangeAdapter} from '../internal/Picker';
 import PickerItem from '../internal/Picker/PickerItem';

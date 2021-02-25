@@ -1,6 +1,5 @@
 import Button from '@enact/agate/Button';
 import FanSpeedControl from '@enact/agate/FanSpeedControl';
-import React from 'react';
 
 import AriaValueTextDecorator from '../components/AriaValueTextDecorator';
 import Section from '../components/Section';
