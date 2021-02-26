@@ -2,7 +2,7 @@ import Group from '@enact/ui/Group';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, number, select, text} from  '@enact/storybook-utils/addons/knobs';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {Component} from 'react'
+import {Component} from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Button from '@enact/agate/Button';
