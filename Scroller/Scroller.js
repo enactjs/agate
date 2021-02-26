@@ -21,7 +21,6 @@ import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDeco
 import {ResizeContext} from '@enact/ui/Resizable';
 import {ScrollerBasic as UiScrollerBasic} from '@enact/ui/Scroller';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import useScroll from '../useScroll';
 import Scrollbar from '../useScroll/Scrollbar';

@@ -2,7 +2,7 @@
 
 import hoc from '@enact/core/hoc';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {useState} from 'react';
 
 const AriaValueTextDecorator  = hoc((config, Wrapped) => {
 	let defaultValue;
@@ -14,7 +14,7 @@ const AriaValueTextDecorator  = hoc((config, Wrapped) => {
 
 	// eslint-disable-next-line no-shadow
 	function AriaValueTextDecorator ({'aria-valuetext': ariaValueText, ...rest}) {
-		const [value, setValue] = React.useState(defaultValue);
+		const [value, setValue] = useState(defaultValue);
 		const valueText = `${ariaValueText} ${value}`;
 
 		const handleChange = (ev) => setValue(ev.value);

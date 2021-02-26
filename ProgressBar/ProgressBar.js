@@ -17,7 +17,6 @@ import UiProgressBar from '@enact/ui/ProgressBar';
 import Slottable from '@enact/ui/Slottable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import Skinnable from '../Skinnable';
 

@@ -19,7 +19,6 @@ import {ImageItem as UiImageItem} from '@enact/ui/ImageItem';
 import {MarqueeDecorator, MarqueeController} from '@enact/ui/Marquee';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import ImageBase from '../Image';
 import Skinnable from '../Skinnable';

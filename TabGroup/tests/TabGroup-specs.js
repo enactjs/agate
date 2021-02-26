@@ -1,5 +1,4 @@
 import {mount} from 'enzyme';
-import React from 'react';
 
 import Button from '../../Button';
 import TabGroup from '../TabGroup';

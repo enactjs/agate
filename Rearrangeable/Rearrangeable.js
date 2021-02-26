@@ -8,7 +8,6 @@
 
 import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
-import React from 'react';
 
 const propRemapper = (arrangementProp, slotNames, props) => {
 	if (!props[arrangementProp]) return props;

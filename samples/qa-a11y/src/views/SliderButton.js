@@ -1,5 +1,4 @@
 import SliderButton from '@enact/agate/SliderButton';
-import React from 'react';
 
 import Section from '../components/Section';
 
