@@ -18,7 +18,6 @@ import ri from '@enact/ui/resolution';
 import Touchable from '@enact/ui/Touchable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import Arc from '../Arc';
 import {angleToPosition} from '../Arc/utils';

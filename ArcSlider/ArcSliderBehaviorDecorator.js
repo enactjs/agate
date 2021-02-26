@@ -3,7 +3,7 @@ import {is} from '@enact/core/keymap';
 import hoc from '@enact/core/hoc';
 import {validateRangeOnce, validateSteppedOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {createRef, Component} from 'react';
 
 import {positionToAngle} from '../Arc/utils';
 
@@ -26,7 +26,7 @@ const validateStepMax = validateSteppedOnce((props) => props, {'component': 'Arc
  * @public
  */
 const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'ArcSliderBehaviorDecorator';
 
 		static propTypes = /** @lends agate/ArcSlider.ArcSliderBehaviorDecorator.prototype */ {
@@ -137,7 +137,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 		constructor (props) {
 			super(props);
 
-			this.componentRef = React.createRef();
+			this.componentRef = createRef();
 
 			this.state = {
 				isFocused: false,

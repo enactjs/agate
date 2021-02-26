@@ -1,5 +1,4 @@
 import Image from '../../../../Image';
-import React from 'react';
 
 const ImageTests = [
 	<Image />,

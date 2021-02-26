@@ -1,6 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {text, select, boolean} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import ThumbnailItem, {ThumbnailItemBase} from '@enact/agate/ThumbnailItem';

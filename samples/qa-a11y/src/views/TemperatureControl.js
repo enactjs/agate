@@ -1,5 +1,4 @@
 import TemperatureControl from '@enact/agate/TemperatureControl';
-import React from 'react';
 
 import Section from '../components/Section';
 

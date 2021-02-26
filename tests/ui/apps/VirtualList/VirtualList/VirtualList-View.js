@@ -3,7 +3,7 @@ import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDeco
 import {Row, Column, Cell} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {Component, createRef} from 'react';
 
 import Button from '../../../../../Button';
 import Input from '../../../../../Input';
@@ -46,7 +46,7 @@ const updateDataSize = (dataSize) => {
 	return dataSize;
 };
 
-class StatefulSwitchItem extends React.Component {
+class StatefulSwitchItem extends Component {
 	static displayName = 'StatefulSwitchItem';
 	static propTypes = {
 		index: PropTypes.number
@@ -89,7 +89,7 @@ class StatefulSwitchItem extends React.Component {
 	}
 }
 
-class app extends React.Component {
+class app extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
@@ -102,8 +102,8 @@ class app extends React.Component {
 			itemSize: 100,
 			wrap: false
 		};
-		this.rootRef = React.createRef();
-		this.scrollingRef = React.createRef();
+		this.rootRef = createRef();
+		this.scrollingRef = createRef();
 		updateDataSize(this.state.numItems);
 	}
 
