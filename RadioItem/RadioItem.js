@@ -77,7 +77,8 @@ const RadioItemBase = kind({
 		 * @type {Node}
 		 * @public
 		 */
-		slotBefore: PropTypes.node
+		slotBefore: PropTypes.node,
+		inline: PropTypes.bool
 	},
 
 	defaultProps: {
@@ -92,10 +93,10 @@ const RadioItemBase = kind({
 	},
 
 	computed: {
-		className: ({css, selected, styler}) => styler.append(selected && css.selected)
+		className: ({css, inline, selected, styler}) => styler.append(selected && css.selected, {inline})
 	},
 
-	render: ({children, css, icon, selected, slotBefore, ...rest}) => {
+	render: ({children, css, icon, inline, selected, slotBefore, ...rest}) => {
 		return (
 			<Item
 				aria-checked={selected}

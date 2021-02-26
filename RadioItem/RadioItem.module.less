@@ -5,9 +5,9 @@
 
 // Public
 .radioItem {
-	.icon {
-		margin: 0;
-	}
+	//.icon {
+	//	margin: 0;
+	//}
 
 	.applySkins({
 		.icon {
@@ -18,6 +18,27 @@
 			border-radius: @agate-radioitem-icon-border-radius;
 			color: transparent;
 			opacity: @agate-radioitem-icon-opacity;
+			margin: @agate-radioitem-icon-margin;
+			width: @agate-radioitem-icon-width;
+			height: @agate-radioitem-icon-height;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		&.inline {
+			max-width: @agate-radioitem-inline-max-width;
+
+			&.item {
+				padding: @agate-radioitem-inline-padding;
+			}
+		}
+
+		.slotBefore {
+			padding: @agate-radioitem-slotbefore-padding;
+			display: flex;
+			align-items: center;
+			margin-inline-end: @agate-radioitem-slotbefore-margin-end;
 		}
 
 		.focus({
@@ -30,6 +51,8 @@
 		});
 
 		&.selected {
+			border-color: @agate-radioitem-selected-border-color;
+
 			.icon {
 				color: @agate-radioitem-icon-selected-color;
 				background-color: @agate-radioitem-icon-selected-bg-color;
