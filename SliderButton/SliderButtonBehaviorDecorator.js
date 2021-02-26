@@ -2,7 +2,7 @@ import {forward} from '@enact/core/handle';
 import {is} from '@enact/core/keymap';
 import platform from '@enact/core/platform';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {useState, useRef} from 'react';
 import {findDOMNode} from 'react-dom';
 
 const isLeft = is('left');
@@ -19,8 +19,8 @@ const SliderButtonBehaviorDecorator = (Wrapped) => {
 	// eslint-disable-next-line no-shadow
 	function SliderButtonBehaviorDecorator (props) {
 		const {children} = props;
-		const [valueText, setValueText] = React.useState(children ? children[0] : null);
-		const ref = React.useRef();
+		const [valueText, setValueText] = useState(children ? children[0] : null);
+		const ref = useRef();
 
 		function handleChange ({value}) {
 			setValueText(children[value]);

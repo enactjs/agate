@@ -15,7 +15,6 @@ import {extractAriaProps} from '@enact/core/util';
 import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
 import {compose, range} from 'ramda';
-import React from 'react';
 
 import ArcPicker from '../ArcPicker';
 import Icon from '../Icon';

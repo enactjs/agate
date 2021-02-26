@@ -4,7 +4,6 @@ import {number, select, text} from '@enact/storybook-utils/addons/knobs';
 import UiIcon from '@enact/ui/Icon';
 import {iconList, iconListSilicon} from './icons';
 import PropTypes from 'prop-types';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Skinnable from '@enact/agate/Skinnable';

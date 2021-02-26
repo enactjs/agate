@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import {useState} from 'react';
 import {storiesOf} from '@storybook/react';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
@@ -42,8 +42,8 @@ const SecondPanel = kind({
 	)
 });
 
-const BasicPanels = ({...rest}) => {
-	const [index, setIndex] = React.useState(0);
+const BasicPanels = () => {
+	const [index, setIndex] = useState(0);
 	const goNext = () => setIndex(clamp(0, 2, index + 1));
 	const goPrevious = () => setIndex(clamp(0, 2, index - 1));
 

@@ -18,7 +18,6 @@ import Changeable from '@enact/ui/Changeable';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import Arc from '../Arc';
 import Skinnable from '../Skinnable';
