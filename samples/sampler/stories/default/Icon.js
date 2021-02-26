@@ -2,7 +2,6 @@ import {emptify, mergeComponentMetadata} from '@enact/storybook-utils';
 import {select, text, number} from '@enact/storybook-utils/addons/knobs';
 import UiIcon from '@enact/ui/Icon';
 import {iconList, iconListSilicon} from './icons';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Skinnable from '@enact/agate/Skinnable';

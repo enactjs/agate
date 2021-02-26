@@ -8,7 +8,7 @@ import Layout, {Cell} from '@enact/ui/Layout';
 import ViewManager from '@enact/ui/ViewManager';
 import compose from 'ramda/src/compose';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {Component} from 'react';
 import classnames from 'classnames';
 
 import ArcPicker from '../views/ArcPicker';
@@ -114,7 +114,7 @@ const views = [
 	{title: 'WindDirectionControl', view: WindDirectionControl}
 ];
 
-class AppBase extends React.Component {
+class AppBase extends Component {
 	static propTypes = {
 		rtl: PropTypes.bool,
 		updateLocale: PropTypes.func
