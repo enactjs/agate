@@ -175,13 +175,16 @@ const RangePickerBase = kind({
 		disabled: ({disabled, max, min}) => min >= max ? true : disabled,
 		value: ({min, max, value}) => {
 			return clamp(min, max, value);
-		}
+		},
+		children: ({min, max, step}) => {return Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step)), )}
 	},
 
-	render: ({value, ...rest}) => {
+	render: ({value, children, ...rest}) => {
+		console.log(children);
 		return (
 			<PickerCore {...rest} index={0} type="number" value={value}>
-				<PickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{value}</PickerItem>
+				{children}
+				{/*<PickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{value}</PickerItem>*/}
 			</PickerCore>
 		);
 	}

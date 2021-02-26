@@ -335,24 +335,12 @@ const PickerBase = class extends Component {
 			nodeStyle.webkitTransform = value;
 		};
 
-		const setTransition = (nodeStyle, value) => {
-			nodeStyle.transition = value;
-			nodeStyle.webkitTransition = value;
-		};
 
-		const scrollTo = (_x, y, time = .3) => {
+		const scrollTo = (_x, y) => {
 			if (scrollY !== y) {
 				scrollY = y;
-				if (time && !this.props.noAnimate) {
-					setTransition(this.contentRef.style, `cubic-bezier(0,0,0.2,1.15) ${time}s`);
-				}
 				setTransform(this.contentRef.style, `translate3d(0,${-y}px,0)`);
-				setTimeout(() => {
-					this.scrollingComplete();
-					if (this.contentRef) {
-						setTransition(this.contentRef.style, '');
-					}
-				}, +time * 1000);
+				this.scrollingComplete();
 			}
 		};
 
@@ -385,12 +373,9 @@ const PickerBase = class extends Component {
 			let targetY = scrollY;
 			const height = ((this.props.children).length - 1) * this.itemHeight;
 
-			let time = .3;
-
 			const velocity = Velocity.getVelocity(targetY) * 4;
 			if (velocity) {
 				targetY = velocity * 40 + targetY;
-				time = Math.abs(velocity) * .1;
 			}
 
 			if (targetY % this.itemHeight !== 0) {
@@ -403,8 +388,7 @@ const PickerBase = class extends Component {
 				targetY = height;
 			}
 
-			scrollTo(0, targetY, time < .3 ? .3 : time);
-			this.onScrollChange();
+			scrollTo(0, targetY);
 		};
 
 		const onStart = (y) => {
@@ -425,7 +409,6 @@ const PickerBase = class extends Component {
 			scrollY = lastY - y + startY;
 			Velocity.record(scrollY);
 
-			this.onScrollChange();
 			setTransform(this.contentRef.style, `translate3d(0,${-scrollY}px,0)`);
 		};
 
@@ -467,7 +450,6 @@ const PickerBase = class extends Component {
 
 		if (value !== undefined) {
 			const children = Children.toArray(this.props.children);
-			//console.log(children);
 			selectedValueState = children[value];
 			console.log(selectedValueState);
 		} else if (defaultSelectedValue !== undefined) {
@@ -480,18 +462,6 @@ const PickerBase = class extends Component {
 			itemHeight: 0,
 			selectedValue: selectedValueState
 		};
-
-
-		// const { value, defaultValue } = this.props;
-		// if (value !== undefined) {
-		// 	selectedValueState = value;
-		// } else if (defaultValue !== undefined) {
-		// 	selectedValueState = defaultValue;
-		// } else {
-		// 	console.log(this.props.children);
-		// 	const children = Children.toArray(this.props.children);
-		// 	selectedValueState = children && children[0] && children[0].props.value;
-		// }
 
 	}
 
@@ -539,12 +509,7 @@ const PickerBase = class extends Component {
 		return passiveSupported;
 	}
 
-	componentDidUpdate (prevProps) {
-		this.select(this.state.selectedValue, this.itemHeight, this.scrollToWithoutAnimation);
-	}
-
 	componentWillUnmount () {
-
 		this.contentRef.removeEventListener('wheel', this.handleWheel);
 	}
 
@@ -552,46 +517,25 @@ const PickerBase = class extends Component {
 		this.scrollHanders.scrollTo(0, top);
 	}
 
-	scrollToWithoutAnimation = (top) => {
-		this.scrollHanders.scrollTo(0, top, 0);
-	}
-
 	computeChildIndex(top, itemHeight, childrenLength) {
 		const index = Math.round(top / itemHeight);
 		return Math.min(index, childrenLength - 1);
 	}
 
-	onScrollChange = () => {
-		const top = this.scrollHanders.getValue();
-		if (top >= 0) {
-			const children = Children.toArray(this.props.children);
-			const index = this.computeChildIndex(top, this.itemHeight, children.length);
-			if (this.scrollValue !== index) {
-				this.scrollValue = index;
-				const child = children[index];
-				if (child && this.props.onScrollChange) {
-					this.props.onScrollChange(child);
-				} else if (!child && console.warn) {
-					console.warn('child not found', children, index);
-				}
-			}
-		}
-	}
-
 	scrollingComplete = () => {
 		const top = this.scrollHanders.getValue();
 		if (top >= 0) {
-			this.doScrollingComplete(top, this.itemHeight, this.fireValueChange);
+			this.doScrollingComplete(top, this.itemHeight);
 		}
 	}
 
-	doScrollingComplete = (top, itemHeight, fireValueChange) => {
+	doScrollingComplete = (top, itemHeight) => {
 		const children = Children.toArray(this.props.children);
 		const index = this.computeChildIndex(top, itemHeight, children.length);
 		const child = children[index];
-		console.log(index);
-		if (child) {
-			fireValueChange(child);
+		console.log(child);
+		if (child || child === 0) {
+			this.fireValueChange(child, index);
 		} else if (console.warn) {
 			console.warn('child not found', children, index);
 		}
@@ -608,16 +552,17 @@ const PickerBase = class extends Component {
 		this.selectByIndex(0, itemHeight, scrollTo);
 	}
 
-	fireValueChange = (selectedValue) => {
+	fireValueChange = (selectedValue, selectedValueIndex) => {
+		const {onChange} = this.props;
+		console.log(selectedValue);
 		if (selectedValue !== this.state.selectedValue) {
 			if (!('selectedValue' in this.props)) {
+				console.log("SetState");
 				this.setState({
 					selectedValue,
 				});
 			}
-			if (this.onValueChange) {
-				this.onValueChange(selectedValue);
-			}
+			onChange({value: selectedValueIndex});
 		}
 	}
 
@@ -635,41 +580,14 @@ const PickerBase = class extends Component {
 		};
 	}
 
-	handleChange = direction => handle(
-		adaptEvent(
-			(ev, {min, max, step, value, wrap}) => ({
-				value: wrap ? wrapRange(min, max, value + (direction * step)) :  clamp(min, max, value + (direction * step)),
-				reverseTransition: direction < 0
-			}),
-			forward('onChange')
-		)
-	);
-
-	handleDecrement = () => {
-		this.handleChange(-1);
-	};
-
-	handleIncrement = () => {
-		this.handleChange(1);
-	};
-
-	handleFlick = () => handle(
-			() => {console.log("flicking"); increment},
-			//forEventProp('orientation', 'vertical'),
-			// ignore "slow" flicks by filtering out velocity below a threshold
-			oneOf(
-				[({velocityX}) => {console.log(velocityX),velocityX < 0, this.handleIncrement()}],
-				[({velocityX}) => {console.log(velocityX),velocityX > 0, this.handleDecrement()}]
-			)
-		);
-
-			currentItemIndex = ({children: values, index, max, min, wrap}) => {
+		currentItemIndex = ({children: values, index, max, min, wrap}) => {
 			if (Array.isArray(values)) {
 				if (wrap) {
 					return wrapRange(min, max, index);
 				} else return index;
 			} else return 0;
 		};
+
 		currentValueText = ({accessibilityHint, 'aria-valuetext': ariaValueText, children, value}) => {
 			if (ariaValueText != null) {
 				return ariaValueText;
@@ -732,9 +650,6 @@ const PickerBase = class extends Component {
 			} else return 0;
 		};
 
-		activeClassName = ({styler}) => styler.join('active', 'item');
-
-
 		calcAriaLabel = ({'aria-label': ariaLabel, 'aria-valuetext': valueText}) => {
 			if (ariaLabel != null) {
 				return ariaLabel;
@@ -743,11 +658,7 @@ const PickerBase = class extends Component {
 			return valueText;
 		};
 
-		className = ({orientation, styler}) => styler.append(orientation);
-
 		valueId =  ({id}) => `${id}_value`
-
-
 
 		render ()  {
 		const {
@@ -796,28 +707,6 @@ const PickerBase = class extends Component {
 		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
 		const transitionDuration = 150;
 
-		// const decrementValue = () => {
-		// 	const restrictedDecrementValue = wrap ? wrapRange(min, max, value - step) : clamp(min, max, value - step);
-		// 	if (isFirst && !wrap) {
-		// 		return '';
-		// 	} else if (Array.isArray(values)) {
-		// 		return values;
-		// 	} else {
-		// 		return (<PickerItem key={restrictedDecrementValue} style={{direction: 'ltr'}}>{restrictedDecrementValue}</PickerItem>);
-		// 	}
-		// };
-		//
-		// const incrementValue = () => {
-		// 	const restrictedIncrementValue = wrap ? wrapRange(min, max, value + step) : clamp(min, max, value + step);
-		// 	if (isLast && !wrap) {
-		// 		return '';
-		// 	} else if (Array.isArray(values)) {
-		// 		return values;
-		// 	} else {
-		// 		return (<PickerItem key={restrictedIncrementValue} style={{direction: 'ltr'}}>{restrictedIncrementValue}</PickerItem>);
-		// 	}
-		// };
-
 		let sizingPlaceholder = null;
 		if (typeof width === 'number' && width > 0) {
 			sizingPlaceholder = <div aria-hidden className={css.sizingPlaceholder}>{'0'.repeat(width)}</div>;
@@ -837,7 +726,6 @@ const PickerBase = class extends Component {
 
 			const { selectedValue } = this.state;
 		const map = (item) => {
-			console.log(item);
 			//const { value } = item.props;
 
 			return (
