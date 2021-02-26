@@ -1,5 +1,4 @@
 import Item from '../../../../Item';
-import React from 'react';
 import Icon from '../../../../Icon';
 
 const slotBeforeIcon = <Icon>circlelarge</Icon>;

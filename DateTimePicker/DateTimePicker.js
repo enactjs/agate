@@ -14,7 +14,6 @@ import Changeable from '@enact/ui/Changeable';
 import {Row} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import DatePicker from '../DatePicker';
 import Skinnable from '../Skinnable';

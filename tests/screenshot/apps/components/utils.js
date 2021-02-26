@@ -1,8 +1,8 @@
-import React from 'react';
+import {isValidElement} from 'react';
 
 const withConfig = (config, tests) => {
 	return tests.map(t => {
-		if (React.isValidElement(t)) {
+		if (isValidElement(t)) {
 			return {
 				...config,
 				component: t

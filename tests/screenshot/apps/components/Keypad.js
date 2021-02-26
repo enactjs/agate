@@ -1,5 +1,4 @@
 import Keypad from '../../../../Keypad';
-import React from 'react';
 
 const KeypadTests = [
 	<Keypad />,
