@@ -1,5 +1,4 @@
 import DatePicker from '@enact/agate/DatePicker';
-import React from 'react';
 
 import Section from '../components/Section';
 

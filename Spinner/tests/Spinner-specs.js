@@ -1,5 +1,4 @@
 import {mount} from 'enzyme';
-import React from 'react';
 
 import Spinner from '../Spinner';
 
@@ -123,6 +122,46 @@ describe('Spinner Specs', () => {
 
 		const expected = 'off';
 		const actual = subject.find(`div.${css.spinner}`).prop('aria-live');
+
+		expect(actual).toBe(expected);
+	});
+
+	test(
+		'should not have client node when Spinner has no children',
+		() => {
+			const spinner = mount(
+				<Spinner />
+			);
+
+			const expected = false;
+			const actual = spinner.find(`div.${css.client}`).exists();
+
+			expect(actual).toBe(expected);
+		}
+	);
+
+	test('should have a client node when Spinner has children', () => {
+		const spinner = mount(
+			<Spinner>
+				Loading...
+			</Spinner>
+		);
+
+		const expected = true;
+		const actual = spinner.find(`div.${css.client}`).exists();
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should have content class when Spinner has children', () => {
+		const spinner = mount(
+			<Spinner>
+				Loading...
+			</Spinner>
+		);
+
+		const expected = true;
+		const actual = spinner.find(`div.${css.spinner}`).hasClass(css.content);
 
 		expect(actual).toBe(expected);
 	});

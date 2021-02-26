@@ -2,7 +2,7 @@ import spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {Row, Column, Cell} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
-import React from 'react';
+import {createRef, Component} from 'react';
 
 import {Button} from '../../../../Button';
 import Dropdown from '../../../../Dropdown';
@@ -29,7 +29,7 @@ const prop = {
 	}
 };
 
-class app extends React.Component {
+class app extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
@@ -38,7 +38,7 @@ class app extends React.Component {
 			hideScrollbar: false,
 			nativeScroll: true
 		};
-		this.scrollingRef = React.createRef();
+		this.scrollingRef = createRef();
 	}
 
 	onScrollStart = () => {

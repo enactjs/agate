@@ -13,7 +13,6 @@
 import kind from '@enact/core/kind';
 import Slottable from '@enact/ui/Slottable';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Image from '../Image';
 import Item from '../Item';

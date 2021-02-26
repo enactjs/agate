@@ -1,7 +1,7 @@
-import React from 'react';
+import {useState} from 'react';
 
 const useBoolArray = (num) => {
-	const [bools, setBool] = React.useState(() => (new Array(num)).fill(false));
+	const [bools, setBool] = useState(() => (new Array(num)).fill(false));
 
 	const handler = (index, bool) => () => setBool([
 		...bools.slice(0, index),
