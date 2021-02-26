@@ -49,7 +49,6 @@ const BasicPanels = () => {
 
 	return (
 		<Panels
-			{...rest}
 			index={index}
 			noAnimation={boolean('noAnimation', Config, false)}
 			noCloseButton={boolean('noCloseButton', Config, false)}

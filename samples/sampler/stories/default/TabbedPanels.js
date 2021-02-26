@@ -17,7 +17,7 @@ import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase);
 // `paddingBottom: '56.25%'` is a trick to impose 16:9 aspect ratio on the component, since padding percentage is based on the width, not the height.
 
-const I18nTabbedPanelsBase = ({rtl}) => {
+const I18nTabbedPanelsBase = ({rtl, ...rest}) => {
 	const [panelIndex, setIndex] = useState(Config.defaultProps.index || 0);
 	const onSelect = (e) => {
 		setIndex(e.index);
@@ -36,7 +36,6 @@ const I18nTabbedPanelsBase = ({rtl}) => {
 			<TabbedPanels
 				{...rest}
 				index={panelIndex}
-
 				onSelect={onSelect} // eslint-disable-line react/jsx-no-bind
 				orientation={orientation}
 				tabPosition={select('tabPosition', ['before', 'after'], Config, 'before')}
