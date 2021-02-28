@@ -101,7 +101,8 @@ const ImageItemBase = kind({
 		 * @public
 		 */
 		src: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-		sizing: PropTypes.oneOf(['fit', 'fill', 'none'])
+		sizing: PropTypes.oneOf(['fit', 'fill', 'none']),
+		skin: PropTypes.string
 	},
 
 	defaultProps: {
@@ -123,9 +124,9 @@ const ImageItemBase = kind({
 		imageComponentSizing: ({orientation}) => orientation === 'horizontal' ? 'none' : 'fill'
 	},
 
-	render: ({captionPosition, children, css, disabled, imageComponentSizing, orientation, src, sizing, ...rest}) => {
+	render: ({captionPosition, children, css, disabled, imageComponentSizing, orientation, skin, src, sizing, ...rest}) => {
 		const [Component, marqueeProps] = (children && (orientation === 'horizontal' || captionPosition === 'below')) ? [MarqueeImageItem, {
-			alignment: orientation === 'horizontal' ? 'left' : 'center'
+			alignment: skin === 'silicon' && orientation === 'horizontal' ? 'left' : 'center'
 		}] : [UiImageItem, null];
 
 		return (
@@ -157,7 +158,7 @@ const ImageItemBase = kind({
  */
 const ImageItemDecorator = compose(
 	MarqueeController({marqueeOnFocus: true}),
-	Skinnable,
+	Skinnable({prop: 'skin'}),
 	Spottable
 );
 

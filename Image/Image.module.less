@@ -1,7 +1,16 @@
 // Image.module.less
 //
 
+@import '../styles/skin.less';
+@import '../styles/mixins.less';
+
 .image {
-	width: 399px;
-	height: 300px;
+	//width: 399px;
+	//height: 300px;
+	.applySkins({
+		& {
+			height: @agate-image-height;
+			width: @agate-image-width;
+		}
+	})
 }
