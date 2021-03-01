@@ -4,13 +4,27 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Added
+
+- `agate/Spinner` prop `children` to support the display of text below the icon
+
 ### Changed
 
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
 
 ### Fixed
 
+- `agate/SliderButton` 5-way navigation functionality to change value via direction keys
+- `agate/SliderButton` styling to visually show the focused state
 - `agate/TooltipDecorator` to position correctly on rtl locale
+
+## [2.0.0-alpha.1] - 2021-02-25
+
+-  The framework was updated to support React 17.0.1
+
+### Added
+
+- `agate/ThemeDecorator` config `rootId` to specify React DOM tree root for global event handlers
 
 ## [1.1.2] - 2021-02-05
 

@@ -2,7 +2,6 @@ import Heading from '../../../../Heading';
 import Scroller from '../../../../Scroller';
 import TemperatureControl from '../../../../TemperatureControl';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import React from 'react';
 import spotlight from '@enact/spotlight';
 import ri from '@enact/ui/resolution';
 
