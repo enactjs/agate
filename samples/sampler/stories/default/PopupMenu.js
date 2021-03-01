@@ -1,7 +1,7 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Button from '@enact/agate/Button';

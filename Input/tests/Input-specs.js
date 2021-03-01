@@ -1,4 +1,3 @@
-import React from 'react';
 import {mount} from 'enzyme';
 import Input from '../Input';
 import {Spotlight} from '@enact/spotlight';

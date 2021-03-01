@@ -2,7 +2,6 @@ import Button from '@enact/agate/Button';
 import Header from '@enact/agate/Header';
 import {Panel} from '@enact/agate/Panels';
 import {Cell} from '@enact/ui/Layout';
-import React from 'react';
 
 const style = {
 	flex: '1 1 100%',
