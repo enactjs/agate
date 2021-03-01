@@ -147,7 +147,6 @@ const PickerBase = kind({
 
 	render: (props) => {
 		const {children, max, value, ...rest} = props;
-console.log(value);
 		return (
 			<PickerCore
 				{...rest}

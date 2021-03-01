@@ -20,18 +20,18 @@ import {SlideLeftArranger, SlideTopArranger, ViewManager} from '@enact/ui/ViewMa
 import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
-import {Children,Component} from 'react';
+import {Children, Component} from 'react';
 
 import $L from '../$L';
 import {PickerItem} from './Picker';
 import Skinnable from '../../Skinnable';
 
 import css from './Picker.module.less';
-import platform from "../../../enact/packages/core/platform";
-import {cap, Job, mergeClassNameMaps} from "../../../enact/packages/core/util";
-import Spotlight, {getDirection} from "../../../enact/packages/spotlight";
-import Layout, {Cell} from "../../../enact/packages/ui/Layout";
-import classnames from "classnames";
+import platform from '../../../enact/packages/core/platform';
+import {cap, Job, mergeClassNameMaps} from '../../../enact/packages/core/util';
+import Spotlight, {getDirection} from '../../../enact/packages/spotlight';
+import Layout, {Cell} from '../../../enact/packages/ui/Layout';
+import classnames from 'classnames';
 
 import ReactDOM from 'react-dom';
 
@@ -323,93 +323,95 @@ const PickerBase = class extends Component {
 		value: 0
 	};
 
+	constructor (props) {
+		super(props);
+
+		this.initContentRef = this.initRef('contentRef');
+		this.initRootRef = this.initRef('rootRef');
+		this.initIndicatorRef = this.initRef('indicatorRef');
+
+		let selectedValueState;
+		const {value, defaultSelectedValue} = this.props;
+
+		if (value !== undefined) {
+			const children = Children.toArray(this.props.children);
+			selectedValueState = children[value];
+		} else if (defaultSelectedValue !== undefined) {
+			selectedValueState = defaultSelectedValue;
+		} else {
+			const children = Children.toArray(this.props.children);
+			selectedValueState = children && children[0] && children[0].value;
+		}
+		this.state = {
+			itemHeight: 0,
+			selectedValue: selectedValueState,
+			scrollY: -1,
+			lastY: 0,
+			startY: 0,
+			isMoving: false
+		};
+	}
+
 	scrollHanders = (() => {
-		let scrollY = -1;
-		let lastY = 0;
-		let startY = 0;
-		let scrollDisabled = false;
-		let isMoving = false;
 
 		const setTransform = (nodeStyle, value) => {
 			nodeStyle.transform = value;
 			nodeStyle.webkitTransform = value;
 		};
 
-
-		const scrollTo = (_x, y) => {
-			if (scrollY !== y) {
-				scrollY = y;
-				setTransform(this.contentRef.style, `translate3d(0,${-y}px,0)`);
-				this.scrollingComplete();
+		const scrollTo = (y) => {
+			if (this.state.scrollY !== y) {
+				this.setState(() => {
+					return ({scrollY: y});
+				}, () => {
+					setTransform(this.contentRef.style, `translate(0,${-y}px)`);
+					this.scrollingComplete();
+				});
 			}
 		};
 
-		const Velocity = ((minInterval = 30, maxInterval = 100) => {
-			let _time = 0;
-			let _y = 0;
-			let _velocity = 0;
-			const recorder = {
-				record: (y) => {
-					const now = +new Date();
-					_velocity = (y - _y) / (now - _time);
-					if (now - _time >= minInterval) {
-						_velocity = now - _time <= maxInterval ? _velocity : 0;
-						_y = y;
-						_time = now;
-					}
-				},
-				getVelocity: (y) => {
-					if (y !== _y) {
-						recorder.record(y);
-					}
-					return _velocity;
-				},
-			};
-			return recorder;
-		})();
-
 		const onFinish = () => {
-			isMoving = false;
-			let targetY = scrollY;
-			const height = ((this.props.children).length - 1) * this.itemHeight;
+			this.setState(() => {
+				return ({isMoving: false});
+			}, () => {
+				let targetY = this.state.scrollY;
+				const height = ((this.props.children).length - 1) * this.state.itemHeight;
+				if (targetY % this.state.itemHeight !== 0) {
+					targetY = Math.round(targetY / this.state.itemHeight) * this.state.itemHeight;
+				}
 
-			const velocity = Velocity.getVelocity(targetY) * 4;
-			if (velocity) {
-				targetY = velocity * 40 + targetY;
-			}
+				if (targetY < 0) {
+					targetY = 0;
+				} else if (targetY > height) {
+					targetY = height;
+				}
 
-			if (targetY % this.itemHeight !== 0) {
-				targetY = Math.round(targetY / this.itemHeight) * this.itemHeight;
-			}
-
-			if (targetY < 0) {
-				targetY = 0;
-			} else if (targetY > height) {
-				targetY = height;
-			}
-
-			scrollTo(0, targetY);
+				scrollTo(targetY);
+			});
 		};
 
 		const onStart = (y) => {
-			if (scrollDisabled) {
+			if (this.props.disabled) {
 				return;
 			}
 
-			isMoving = true;
-			startY = y;
-			lastY = scrollY;
+			this.setState({
+				isMoving: true,
+				startY: y,
+				lastY: this.state.scrollY
+			});
 		};
 
 		const onMove = (y) => {
-			if (scrollDisabled || !isMoving) {
+			if (this.props.disabled || !this.state.isMoving) {
 				return;
 			}
 
-			scrollY = lastY - y + startY;
-			Velocity.record(scrollY);
-
-			setTransform(this.contentRef.style, `translate3d(0,${-scrollY}px,0)`);
+			this.setState(() => {
+				return ({scrollY: this.state.lastY - y + this.state.startY});
+			}, () => {
+				setTransform(this.contentRef.style, `translate3d(0,${-this.state.scrollY}px,0)`);
+			});
 		};
 
 		return {
@@ -427,152 +429,84 @@ const PickerBase = class extends Component {
 			touchcancel: () => onFinish(),
 			mouseup: () => onFinish(),
 			getValue: () => {
-				return scrollY;
+				return this.state.scrollY;
 			},
-			scrollTo,
-			setDisabled: (disabled = false) => {
-				scrollDisabled = disabled;
-			},
+			scrollTo
 		};
 	})();
 
-	constructor (props) {
-		super(props);
-
-
-
-		this.initContentRef = this.initRef('contentRef');
-		this.initRootRef = this.initRef('rootRef');
-		this.initIndicatorRef = this.initRef('indicatorRef');
-
-		let selectedValueState;
-		const { value, defaultSelectedValue } = this.props;
-
-		if (value !== undefined) {
-			const children = Children.toArray(this.props.children);
-			selectedValueState = children[value];
-			console.log(selectedValueState);
-		} else if (defaultSelectedValue !== undefined) {
-			selectedValueState = defaultSelectedValue;
-		} else {
-			const children = Children.toArray(this.props.children);
-			selectedValueState = children && children[0] && children[0].value;
-		}
-		this.state = {
-			itemHeight: 0,
-			selectedValue: selectedValueState
-		};
-
-	}
-
 	componentDidMount () {
-		//this.contentRef.addEventListener('wheel', this.handleWheel);
-		const { contentRef, rootRef, indicatorRef } = this;
+		// this.contentRef.addEventListener('wheel', this.handleWheel);
+		const {contentRef, rootRef, indicatorRef} = this;
 		const rootHeight =  rootRef.getBoundingClientRect().height;
-		const itemHeight = this.itemHeight = indicatorRef.getBoundingClientRect().height;
+		const itemHeight = indicatorRef.getBoundingClientRect().height;
+		this.setState({itemHeight});
 		let num = Math.floor(rootHeight / itemHeight);
 		if (num % 2 === 0) {
 			num--;
 		}
 		num--;
 		num /= 2;
-		
+
 		contentRef.style.padding = `${itemHeight * num}px 0`;
 		indicatorRef.style.top = `${itemHeight * num}px`;
 
-		//this.scrollHanders.setDisabled(this.props.disabled);
-		this.select(this.state.selectedValue, this.itemHeight, this.scrollTo);
+		this.select(this.state.selectedValue, itemHeight);
 
-		const passiveSupported = this.passiveSupported();
-		const willPreventDefault = passiveSupported ? { passive: false } : false;
-		const willNotPreventDefault = passiveSupported ? { passive: true } : false;
 		Object.keys(this.scrollHanders).forEach(key => {
 			if (key.indexOf('touch') === 0 || key.indexOf('mouse') === 0) {
-				const pd = key.indexOf('move') >= 0 ? willPreventDefault : willNotPreventDefault;
-				(rootRef).addEventListener(key, this.scrollHanders[key], pd );
+				(rootRef).addEventListener(key, this.scrollHanders[key] );
 			}
 		});
-
 	}
 
-	passiveSupported() {
-		let passiveSupported = false;
-
-		try {
-			const options = Object.defineProperty({}, 'passive', {
-				get: () => {
-					passiveSupported = true;
-				},
-			});
-			window.addEventListener('test', null , options);
-		} catch (err) { }
-		return passiveSupported;
-	}
-
-	componentWillUnmount () {
-		this.contentRef.removeEventListener('wheel', this.handleWheel);
-	}
+	// componentWillUnmount () {
+	// 	this.contentRef.removeEventListener('wheel', this.handleWheel);
+	// }
 
 	scrollTo = (top) => {
-		this.scrollHanders.scrollTo(0, top);
-	}
+		this.scrollHanders.scrollTo(top);
+	};
 
-	computeChildIndex(top, itemHeight, childrenLength) {
-		const index = Math.round(top / itemHeight);
-		return Math.min(index, childrenLength - 1);
-	}
+	select = (value, itemHeight) => {
+		if(!itemHeight) return;
+
+		const children = Children.toArray(this.props.children);
+		for (let i = 0, len = children.length; i < len; i++) {
+			if (children[i] === value) {
+				this.scrollTo(i * itemHeight);
+				return;
+			}
+		}
+		this.scrollTo(0 * itemHeight);
+	};
 
 	scrollingComplete = () => {
 		const top = this.scrollHanders.getValue();
 		if (top >= 0) {
-			this.doScrollingComplete(top, this.itemHeight);
-		}
-	}
-
-	doScrollingComplete = (top, itemHeight) => {
-		const children = Children.toArray(this.props.children);
-		const index = this.computeChildIndex(top, itemHeight, children.length);
-		const child = children[index];
-		console.log(child);
-		if (child || child === 0) {
-			this.fireValueChange(child, index);
-		} else if (console.warn) {
-			console.warn('child not found', children, index);
-		}
-	}
-
-	select = (value, itemHeight, scrollTo) => {
-		const children = Children.toArray(this.props.children);
-		for (let i = 0, len = children.length; i < len; i++) {
-			if (children[i] === value) {
-				this.selectByIndex(i, itemHeight, scrollTo);
-				return;
+			const children = Children.toArray(this.props.children);
+			const index = this.computeChildIndex(top, this.state.itemHeight, children.length);
+			const child = children[index];
+			if (child || child === 0) {
+				this.fireValueChange(child, index);
 			}
 		}
-		this.selectByIndex(0, itemHeight, scrollTo);
+	};
+
+	computeChildIndex (top, itemHeight, childrenLength) {
+		const index = Math.round(top / itemHeight);
+		return Math.min(index, childrenLength - 1);
 	}
 
 	fireValueChange = (selectedValue, selectedValueIndex) => {
 		const {onChange} = this.props;
-		console.log(selectedValue);
 		if (selectedValue !== this.state.selectedValue) {
-			if (!('selectedValue' in this.props)) {
-				console.log("SetState");
-				this.setState({
-					selectedValue,
-				});
-			}
+			this.setState({
+				selectedValue
+			});
 			onChange({value: selectedValueIndex});
 		}
-	}
-
-	selectByIndex(index, itemHeight, zscrollTo) {
-		if (index < 0 || index >= Children.count(this.props.children) || !itemHeight) {
-			return;
-		}
-		zscrollTo(index * itemHeight);
-	}
-
+	};
 
 	initRef (prop) {
 		return (ref) => {
@@ -580,92 +514,83 @@ const PickerBase = class extends Component {
 		};
 	}
 
-		currentItemIndex = ({children: values, index, max, min, wrap}) => {
-			if (Array.isArray(values)) {
-				if (wrap) {
-					return wrapRange(min, max, index);
-				} else return index;
-			} else return 0;
-		};
+	currentValueText = ({accessibilityHint, 'aria-valuetext': ariaValueText, children, value}) => {
+		if (ariaValueText != null) {
+			return ariaValueText;
+		}
 
-		currentValueText = ({accessibilityHint, 'aria-valuetext': ariaValueText, children, value}) => {
-			if (ariaValueText != null) {
-				return ariaValueText;
-			}
+		let valueText = value;
 
-			let valueText = value;
-
-			if (children && Array.isArray(children)) {
-				if (children[value] && children[value].props) {
-					valueText = children[value].props.children;
-				} else {
-					valueText = children[value];
-				}
-			}
-
-			if (accessibilityHint) {
-				valueText = `${valueText} ${accessibilityHint}`;
-			}
-
-			return valueText;
-		};
-
-		decrementAriaLabel = ({decrementAriaLabel, type}) => {
-			if (decrementAriaLabel != null) {
-				return decrementAriaLabel;
-			}
-
-			if (type === 'number') {
-				return `${$L('decrease the value')}`;
+		if (children && Array.isArray(children)) {
+			if (children[value] && children[value].props) {
+				valueText = children[value].props.children;
 			} else {
-				return `${$L('previous item')}`;
+				valueText = children[value];
 			}
-		};
+		}
 
-		decrementItemIndex = ({children: values, index, max, min, wrap}) => {
-			if (Array.isArray(values)) {
-				if (wrap) {
-					return wrapRange(min, max, index - 1);
-				} else return index - 1;
-			} else return 0;
-		};
+		if (accessibilityHint) {
+			valueText = `${valueText} ${accessibilityHint}`;
+		}
 
-		incrementAriaLabel= ({incrementAriaLabel, type}) => {
-			if (incrementAriaLabel != null) {
-				return incrementAriaLabel;
-			}
+		return valueText;
+	};
 
-			if (type === 'number') {
-				return `${$L('increase the value')}`;
-			} else {
-				return `${$L('next item')}`;
-			}
-		};
+	decrementAriaLabel = ({decrementAriaLabel, type}) => {
+		if (decrementAriaLabel != null) {
+			return decrementAriaLabel;
+		}
 
-		incrementItemIndex=  ({children: values, index, max, min, wrap}) => {
-			if (Array.isArray(values)) {
-				if (wrap) {
-					return wrapRange(min, max, index + 1);
-				} else return index + 1;
-			} else return 0;
-		};
+		if (type === 'number') {
+			return `${$L('decrease the value')}`;
+		} else {
+			return `${$L('previous item')}`;
+		}
+	};
 
-		calcAriaLabel = ({'aria-label': ariaLabel, 'aria-valuetext': valueText}) => {
-			if (ariaLabel != null) {
-				return ariaLabel;
-			}
+	decrementItemIndex = ({children: values, index, max, min, wrap}) => {
+		if (Array.isArray(values)) {
+			if (wrap) {
+				return wrapRange(min, max, index - 1);
+			} else return index - 1;
+		} else return 0;
+	};
 
-			return valueText;
-		};
+	incrementAriaLabel= ({incrementAriaLabel, type}) => {
+		if (incrementAriaLabel != null) {
+			return incrementAriaLabel;
+		}
 
-		valueId =  ({id}) => `${id}_value`
+		if (type === 'number') {
+			return `${$L('increase the value')}`;
+		} else {
+			return `${$L('next item')}`;
+		}
+	};
 
-		render ()  {
+	incrementItemIndex=  ({children: values, index, max, min, wrap}) => {
+		if (Array.isArray(values)) {
+			if (wrap) {
+				return wrapRange(min, max, index + 1);
+			} else return index + 1;
+		} else return 0;
+	};
+
+	calcAriaLabel = ({'aria-label': ariaLabel, 'aria-valuetext': valueText}) => {
+		if (ariaLabel != null) {
+			return ariaLabel;
+		}
+
+		return valueText;
+	};
+
+	valueId =  ({id}) => `${id}_value`;
+
+	render ()  {
 		const {
-			//'aria-label': ariaLabel,
+		// 'aria-label': ariaLabel,
 			children: values,
 			className,
-			currentItemIndex,
 			currentValueText,
 			decrementAriaLabel: decAriaLabel,
 			decrementItemIndex,
@@ -690,10 +615,6 @@ const PickerBase = class extends Component {
 			valueId,
 			width,
 			wrap,
-			prefixCls,
-			itemStyle,
-			indicatorStyle,
-			indicatorClassName = '',
 			...rest
 		} = this.props;
 
@@ -724,64 +645,61 @@ const PickerBase = class extends Component {
 		delete rest.orientation;
 		delete rest.wrap;
 
-			const { selectedValue } = this.state;
+		const {selectedValue} = this.state;
 		const map = (item) => {
-			//const { value } = item.props;
+		// const { value } = item.props;
 
 			return (
-				<div
-					//style={{ ...itemStyle, ...style }}
-					className={selectedValue === item ? classnames(css.selected, css.item) : css.item}
-					//key={value}
-				>
+				<div className={selectedValue === item ? classnames(css.selected, css.item) : css.item}>
 					{item}
 				</div>
 			);
 		};
 
-			// compatibility for preact
-			const items = Children ? Children.map(values, map) : ([]).concat(values).map(map);
+		// compatibility for preact
+		const items = Children ? Children.map(values, map) : ([]).concat(values).map(map);
 
 
-			return (
+		return (
 			<div {...rest} className={classnames(className, css.picker)} ref={this.initRootRef}>
 				<div
-					className={classnames(
-						css.indicator,
-						css.item,
-						className
-					)}
-					ref={el => this.indicatorRef = el}
-					style={indicatorStyle}
+					className={classnames(css.itemDecrement, css.item, className)}
 				/>
-			<PickerRoot className={css.root} onFlick={handleFlick}  ref={this.initContentRef} >
-				{items}
+				<div
+					className={classnames(css.indicator, css.item, className)}
+					ref={el => this.indicatorRef = el}
+				/>
+				<div
+					className={classnames(css.itemIncrement, css.item, className)}
+				/>
+				<PickerRoot className={css.root} onFlick={handleFlick} ref={this.initContentRef} >
+					{items}
 
-				{/*<div*/}
-				{/*	aria-label={calcAriaLabel}*/}
-				{/*	aria-valuetext={currentValueText}*/}
-				{/*	className={this.activeClassName}*/}
-				{/*	id={valueId}*/}
-				{/*	role="spinbutton"*/}
-				{/*>*/}
-				{/*	{sizingPlaceholder}*/}
+					{/* <div*/}
+					{/*	aria-label={calcAriaLabel}*/}
+					{/*	aria-valuetext={currentValueText}*/}
+					{/*	className={this.activeClassName}*/}
+					{/*	id={valueId}*/}
+					{/*	role="spinbutton"*/}
+					{/* >*/}
+					{/*	{sizingPlaceholder}*/}
 
-				{/*	<ViewManager*/}
-				{/*		aria-hidden*/}
-				{/*		arranger={arranger}*/}
-				{/*		className={css.viewManager}*/}
-				{/*		duration={transitionDuration}*/}
-				{/*		index={currentItemIndex}*/}
-				{/*		noAnimation={noAnimation || disabled}*/}
-				{/*		reverseTransition={reverseTransition}*/}
-				{/*	>*/}
-				{/*		{values}*/}
-				{/*	</ViewManager>*/}
-				{/*</div>*/}
+					{/*	<ViewManager*/}
+					{/*		aria-hidden*/}
+					{/*		arranger={arranger}*/}
+					{/*		className={css.viewManager}*/}
+					{/*		duration={transitionDuration}*/}
+					{/*		index={currentItemIndex}*/}
+					{/*		noAnimation={noAnimation || disabled}*/}
+					{/*		reverseTransition={reverseTransition}*/}
+					{/*	>*/}
+					{/*		{values}*/}
+					{/*	</ViewManager>*/}
+					{/* </div>*/}
 
 
-			</PickerRoot>
-				</div>
+				</PickerRoot>
+			</div>
 		);
 	}
 };

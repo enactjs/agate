@@ -176,7 +176,9 @@ const RangePickerBase = kind({
 		value: ({min, max, value}) => {
 			return clamp(min, max, value);
 		},
-		children: ({min, max, step}) => {return Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step)), )}
+		children: ({min, max, step}) => {
+			return Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step)) );
+		}
 	},
 
 	render: ({value, children, ...rest}) => {
@@ -184,7 +186,7 @@ const RangePickerBase = kind({
 		return (
 			<PickerCore {...rest} index={0} type="number" value={value}>
 				{children}
-				{/*<PickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{value}</PickerItem>*/}
+				{/* <PickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{value}</PickerItem>*/}
 			</PickerCore>
 		);
 	}
