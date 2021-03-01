@@ -2,7 +2,6 @@ import kind from '@enact/core/kind';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Spinner from '@enact/agate/Spinner';

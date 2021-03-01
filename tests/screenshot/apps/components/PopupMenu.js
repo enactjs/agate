@@ -1,5 +1,4 @@
 import PopupMenu from '../../../../PopupMenu';
-import React from 'react';
 
 const PopupMenuTests = [
 	<PopupMenu open title="Title">PopupMenu!</PopupMenu>,

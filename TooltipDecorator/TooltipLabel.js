@@ -1,7 +1,6 @@
 import kind from '@enact/core/kind';
 import {isRtlText} from '@enact/i18n/util';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import css from './Tooltip.module.less';
 

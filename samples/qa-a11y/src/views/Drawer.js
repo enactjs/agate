@@ -1,6 +1,5 @@
 import Button from '@enact/agate/Button';
 import Drawer from '@enact/agate/Drawer';
-import React from 'react';
 
 import Section from '../components/Section';
 import useBoolArray from '../components/useBoolArray';

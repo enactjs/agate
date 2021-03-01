@@ -28,7 +28,6 @@ import UiSlider from '@enact/ui/Slider';
 import PropTypes from 'prop-types';
 import anyPass from 'ramda/src/anyPass';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import Skinnable from '../Skinnable';
 

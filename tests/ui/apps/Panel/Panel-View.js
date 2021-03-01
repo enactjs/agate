@@ -1,4 +1,4 @@
-import React from 'react';
+import {useState, useCallback} from 'react';
 import spotlight from '@enact/spotlight';
 
 import Button from '../../../../Button';
@@ -26,9 +26,9 @@ function PanelWithNav ({children, index, subtitle, onNext, onPrev, ...rest}) {
 }
 
 function App ({defaultIndex = 0, ...rest}) {
-	const [index, setIndex] = React.useState(defaultIndex);
-	const onNext = React.useCallback(() => setIndex(index + 1), [index, setIndex]);
-	const onPrev = React.useCallback(() => setIndex(index - 1), [index, setIndex]);
+	const [index, setIndex] = useState(defaultIndex);
+	const onNext = useCallback(() => setIndex(index + 1), [index, setIndex]);
+	const onPrev = useCallback(() => setIndex(index - 1), [index, setIndex]);
 
 	if (typeof window !== 'undefined') {
 		window.setPanelIndex = setIndex;
