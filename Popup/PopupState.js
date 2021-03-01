@@ -2,7 +2,7 @@ import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import FloatingLayer from '@enact/ui/FloatingLayer';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {Component} from 'react';
 
 const OpenState = {
 	CLOSED: 0,
@@ -13,7 +13,7 @@ const OpenState = {
 const forwardHide = forward('onHide');
 
 const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-vars
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'PopupState';
 
 		static propTypes = {

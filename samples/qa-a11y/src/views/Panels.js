@@ -6,7 +6,7 @@ import Item from '@enact/agate/Item';
 import Scroller from '@enact/agate/Scroller';
 import VirtualList from '@enact/agate/VirtualList';
 import ri from '@enact/ui/resolution';
-import React from 'react';
+import {useState} from 'react';
 
 const itemList = [];
 for (let i = 0; i < 50; i++) {
@@ -14,7 +14,7 @@ for (let i = 0; i < 50; i++) {
 }
 
 const PanelsView = () => {
-	const [index, setIndex] = React.useState(0);
+	const [index, setIndex] = useState(0);
 
 	const nextPanel = () => setIndex(1);
 	const prevPanel = () => setIndex(0);

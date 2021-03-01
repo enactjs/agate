@@ -12,12 +12,12 @@
 
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
+import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
 import {Cell, Row} from '@enact/ui/Layout';
 import UiSlider from '@enact/ui/Slider';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Skinnable from '../Skinnable';
 
@@ -197,12 +197,14 @@ const SliderButtonBase = kind({
  *
  * @hoc
  * @memberof agate/SliderButton
+ * @mixes ui/Changeable.Changeable
  * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const SliderButtonDecorator = compose(
 	Pure,
+	Changeable,
 	SliderButtonBehaviorDecorator,
 	Spottable,
 	Skinnable

@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, number} from '@enact/storybook-utils/addons/knobs';
 import UiProgressBar from '@enact/ui/ProgressBar';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import ProgressBar, {ProgressBarBase} from '@enact/agate/ProgressBar';

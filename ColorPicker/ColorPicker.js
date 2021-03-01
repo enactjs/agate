@@ -24,7 +24,7 @@ import Transition from '@enact/ui/Transition';
 import convert from 'color-convert';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
+import {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 import $L from '../internal/$L';
@@ -251,7 +251,7 @@ const ColorPickerBase = kind({
 });
 
 const ColorPickerExtended = hoc((config, Wrapped) => {
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'ColorPickerExtended';
 
 		static propTypes = {

@@ -29,7 +29,8 @@ class KeypadPage extends Page {
 		this.title = 'Keypad Test';
 		const keypadDefault = new KeypadInterface('keypadDefault');
 		const keypadDisabled = new KeypadInterface('keypadDisabled');
-		this.components = {keypadDefault, keypadDisabled};
+		const keypadSpotlightDisabled = new KeypadInterface('keypadSpotlightDisabled');
+		this.components = {keypadDefault, keypadDisabled, keypadSpotlightDisabled};
 	}
 
 	open (urlExtra) {

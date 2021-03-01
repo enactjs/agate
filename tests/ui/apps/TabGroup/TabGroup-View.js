@@ -3,7 +3,6 @@ import Heading from '../../../../Heading';
 import Scroller from '../../../../Scroller';
 import TabGroup from '../../../../TabGroup';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import React from 'react';
 import {scaleToRem} from '@enact/ui/resolution';
 import spotlight from '@enact/spotlight';
 

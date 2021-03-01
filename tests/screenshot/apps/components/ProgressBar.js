@@ -1,5 +1,4 @@
 import ProgressBar from '../../../../ProgressBar';
-import React from 'react';
 
 const ProgressBarTests = [
 	<ProgressBar />,
