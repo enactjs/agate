@@ -3,7 +3,6 @@ import ContextualPopupDecorator from '@enact/agate/ContextualPopupDecorator';
 import RadioItem from '@enact/agate/RadioItem';
 import Group from '@enact/ui/Group';
 import Toggleable from '@enact/ui/Toggleable';
-import React from 'react';
 
 import Section from '../components/Section';
 

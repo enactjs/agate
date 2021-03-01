@@ -1,7 +1,6 @@
 import ArcPicker from '../../../../ArcPicker';
 import Heading from '../../../../Heading';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import React from 'react';
 import spotlight from '@enact/spotlight';
 
 import Section from '../../components/Section';
