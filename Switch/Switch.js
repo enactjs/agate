@@ -11,18 +11,21 @@
  */
 
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
+import Toggleable from '@enact/ui/Toggleable';
+import Touchable from '@enact/ui/Touchable';
 import PropTypes from 'prop-types';
-import React from 'react';
+import compose from 'ramda/src/compose';
 
 import Icon from '../Icon';
-import {ToggleIconBase} from '../internal/ToggleIcon';
+import Skinnable from '../Skinnable';
 
 import componentCss from './Switch.module.less';
 
 /**
  * Renders the base level DOM structure of the component.
  *
- * @class Switch
+ * @class SwitchBase
  * @memberof agate/Switch
  * @ui
  * @private
@@ -30,9 +33,39 @@ import componentCss from './Switch.module.less';
 const SwitchBase = kind({
 	name: 'Switch',
 
-	propTypes: /** @lends agate/Switch.Switch.prototype */ {
-		children: PropTypes.string,
+	propTypes: /** @lends agate/Switch.SwitchBase.prototype */ {
+		/**
+		 * The icon displayed by the component.
+		 *
+		 * May be specified as either:
+		 *
+		 * * A string that represents an icon from the [iconList]{@link agate/Icon.Icon.iconList},
+		 * * An HTML entity string, Unicode reference or hex value (in the form '0x...'),
+		 * * A URL specifying path to an icon image, or
+		 * * An object representing a resolution independent resource (See {@link ui/resolution})
+		 *
+		 * @see {@link agate/Icon.IconBase.children}
+		 * @type {String|Object}
+		 * @public
+		 */
+		children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * Disables Switch and becomes non-interactive.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
 
 		/**
 		 * Disables animation.
@@ -42,6 +75,21 @@ const SwitchBase = kind({
 		 * @public
 		 */
 		noAnimation: PropTypes.bool,
+
+		/**
+		 * Sets whether this control is in the 'on' or 'off' state. `true` for 'on', `false` for 'off'.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		selected: PropTypes.bool,
+
+		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @private
+		 */
 		skin: PropTypes.string
 	},
 
@@ -50,12 +98,14 @@ const SwitchBase = kind({
 	},
 
 	styles: {
-		css: componentCss
+		css: componentCss,
+		className: 'switch'
 	},
 
 	computed: {
-		className: ({noAnimation, styler}) => styler.append({
-			animated: !noAnimation
+		className: ({noAnimation, selected, styler}) => styler.append({
+			animated: !noAnimation,
+			selected
 		}),
 		children: ({children, skin}) => {
 			if (children) return children;
@@ -67,21 +117,62 @@ const SwitchBase = kind({
 		}
 	},
 
-	render: ({css, ...rest}) => {
+	render: ({children, css, disabled, selected, ...rest}) => {
 		delete rest.noAnimation;
 
 		return (
-			<ToggleIconBase
+			<div
 				{...rest}
-				css={css}
-				iconComponent={Icon}
-			/>
+				aria-disabled={disabled}
+				aria-pressed={selected}
+				disabled={disabled}
+				role="button"
+			>
+				<Icon className={css.icon}>
+					{children}
+				</Icon>
+			</div>
 		);
 	}
 });
 
-export default SwitchBase;
+/**
+ * Adds interactive functionality to `Switch`.
+ *
+ * @class SwitchDecorator
+ * @memberof agate/Switch
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes ui/Touchable.Touchable
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes agate/Skinnable.Skinnable
+ * @hoc
+ * @public
+ */
+const SwitchDecorator = compose(
+	Toggleable({toggleProp: 'onTap'}),
+	Touchable,
+	Spottable,
+	Skinnable
+);
+
+/**
+ * An Agate-styled component that looks like a toggle switch.
+ *
+ * `Switch` will manage its `selected` state via [Toggleable]{@link ui/Toggleable} unless set
+ * directly.
+ *
+ * @class Switch
+ * @memberof agate/Switch
+ * @extends agate/Switch.SwitchBase
+ * @mixes agate/Switch.SwitchDecorator
+ * @ui
+ * @public
+ */
+const Switch = SwitchDecorator(SwitchBase);
+
+export default Switch;
 export {
-	SwitchBase as Switch,
-	SwitchBase
+	Switch,
+	SwitchBase,
+	SwitchDecorator
 };

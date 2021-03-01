@@ -1,6 +1,5 @@
 import ArcSlider from '@enact/agate/ArcSlider';
 import Button from '@enact/agate/Button';
-import React from 'react';
 
 import AriaValueTextDecorator from '../components/AriaValueTextDecorator';
 import Section from '../components/Section';

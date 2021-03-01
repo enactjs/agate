@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
+import {Fragment} from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Button from '@enact/agate/Button';
@@ -15,10 +15,10 @@ const prop = {
 		'no buttons': null,
 		'1 button': <Button icon="home" />,
 		'2 buttons': (
-			<React.Fragment>
+			<Fragment>
 				<Button>A Button</Button>
 				<Button icon="home" />
-			</React.Fragment>
+			</Fragment>
 		)
 	}
 };

@@ -5,7 +5,7 @@ import {getDirection, Spotlight} from '@enact/spotlight';
 import Pause from '@enact/spotlight/Pause';
 import Spottable from '@enact/spotlight/Spottable';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {Component as ReactComponent} from 'react';
 
 import {lockPointer, releasePointer} from './pointer';
 
@@ -61,7 +61,7 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const forwardFocus = forward('onFocus');
 	const forwardKeyUp = forward('onKeyUp');
 
-	return class extends React.Component {
+	return class extends ReactComponent {
 		static displayName = 'InputSpotlightDecorator';
 
 		static propTypes = /** @lends agate/Input/InputSpotlightDecorator.InputSpotlightDecorator.prototype */ {
@@ -321,12 +321,14 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			if (target === this.downTarget) {
 				this.downTarget = null;
 
-				if (this.state.focused === 'input' && dismissOnEnter && is('enter', keyCode)) {
-					this.focusDecorator(currentTarget);
-					// prevent Enter onKeyPress which triggers an onMouseDown via Spotlight
-					ev.preventDefault();
-				} else if (this.state.focused !== 'input' && is('enter', keyCode)) {
-					this.focusInput(currentTarget);
+				if (!this.props.disabled) {
+					if (this.state.focused === 'input' && dismissOnEnter && is('enter', keyCode)) {
+						this.focusDecorator(currentTarget);
+						// prevent Enter onKeyPress which triggers an onMouseDown via Spotlight
+						ev.preventDefault();
+					} else if (this.state.focused !== 'input' && is('enter', keyCode)) {
+						this.focusInput(currentTarget);
+					}
 				}
 			}
 

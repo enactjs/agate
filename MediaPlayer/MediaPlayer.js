@@ -20,7 +20,7 @@ import Slottable from '@enact/ui/Slottable';
 import DurationFmt from 'ilib/lib/DurationFmt';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
+import {Component, Fragment} from 'react';
 
 import $L from '../internal/$L';
 
@@ -65,6 +65,7 @@ const MediaPlayerBase = kind({
 		 * sources.
 		 *
 		 * @type {Node}
+		 * @required
 		 * @public
 		 */
 		source: PropTypes.node.isRequired,
@@ -305,7 +306,7 @@ const MediaPlayerBase = kind({
  * @private
  */
 const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disable-line no-unused-vars
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'MediaPlayerBehaviorDecorator';
 
 		static propTypes = /** @lends agate/MediaPlayer.MediaPlayerBehaviorDecorator.prototype */ {
@@ -693,16 +694,16 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 });
 
 // eslint-disable-next-line no-shadow
-const AnnounceDecorator = Wrapped => function AnnounceDecorator (props) {
+const AnnounceDecorator = Wrapped => (function AnnounceDecorator (props) {
 	const {announce, children} = useAnnounce();
 
 	return (
-		<React.Fragment>
+		<Fragment>
 			<Wrapped {...props} announce={announce} />
 			{children}
-		</React.Fragment>
+		</Fragment>
 	);
-};
+});
 
 /**
  * A higher-order component that adds Agate specific behaviors to `MediaPlayer`.

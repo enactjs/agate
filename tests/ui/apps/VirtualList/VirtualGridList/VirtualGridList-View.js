@@ -2,7 +2,7 @@ import spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {Row, Column, Cell} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
-import React from 'react';
+import {createRef, Component} from 'react';
 
 import {Button} from '../../../../../Button';
 import Input from '../../../../../Input';
@@ -65,7 +65,7 @@ const updateData = (dataSize, noLabel) => {
 	return dataSize;
 };
 
-class app extends React.Component {
+class app extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
@@ -80,8 +80,8 @@ class app extends React.Component {
 			translate: false,
 			wrap: false
 		};
-		this.rootRef = React.createRef();
-		this.scrollingRef = React.createRef();
+		this.rootRef = createRef();
+		this.scrollingRef = createRef();
 		updateData(this.state.numItems, this.state.noLabel);
 	}
 

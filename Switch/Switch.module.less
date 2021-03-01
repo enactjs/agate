@@ -3,8 +3,7 @@
 @import "../styles/mixins.less";
 @import "../styles/skin.less";
 
-// Interally theme our implementation using published classes from ToggleItem and ToggleIcon
-.toggleIcon {
+.switch {
 	.applySkins({
 		background-color: @agate-switch-bg-color;
 		border-radius: @agate-switch-border-radius;
@@ -64,16 +63,8 @@
 			}
 		}
 
-		// .disabled({
-		// 	background-color: @agate-foreground;
-
-		// 	.icon {
-		// 		color: @agate-switch-color;
-		// 	}
-		// });
-
 		.focus({
-			.toggleIcon {
+			.switch {
 				background-color: @agate-switch-focus-bg-color;
 
 				.icon,

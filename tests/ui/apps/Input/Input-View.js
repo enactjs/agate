@@ -1,6 +1,5 @@
 import Input from '../../../../Input';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import React from 'react';
 import spotlight from '@enact/spotlight';
 
 window.spotlight = spotlight;
@@ -36,6 +35,11 @@ const app = (props) => <div {...props}>
 				id="input5"
 				disabled
 				defaultValue="Input field five"
+			/>
+			<Input
+				id="input6"
+				size="small"
+				defaultValue="Input field small"
 			/>
 		</div>
 	</div>

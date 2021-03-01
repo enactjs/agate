@@ -17,7 +17,7 @@ import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
-import React from 'react';
+import {Children} from 'react';
 
 import PickerCore, {ChangeAdapter, PickerItem} from '../internal/Picker';
 
@@ -134,10 +134,10 @@ const PickerBase = kind({
 	},
 
 	computed: {
-		children: ({children}) => React.Children.map(children, (child) => (
+		children: ({children}) => Children.map(children, (child) => (
 			<PickerItem>{child}</PickerItem>
 		)),
-		disabled: ({children, disabled}) => React.Children.count(children) > 1 ? disabled : true,
+		disabled: ({children, disabled}) => Children.count(children) > 1 ? disabled : true,
 		max: ({children}) => children && children.length ? children.length - 1 : 0,
 		value: ({value, children}) => {
 			const max = children && children.length ? children.length - 1 : 0;

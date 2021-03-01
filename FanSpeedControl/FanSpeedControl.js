@@ -15,7 +15,6 @@ import {extractAriaProps} from '@enact/core/util';
 import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
 import {compose, range} from 'ramda';
-import React from 'react';
 
 import ArcPicker from '../ArcPicker';
 import Icon from '../Icon';
@@ -43,6 +42,7 @@ const FanSpeedControlBase = kind({
 		 *
 		 * @type {Number}
 		 * @default 10
+		 * @required
 		 * @public
 		 */
 		max: PropTypes.number.isRequired,
@@ -52,6 +52,7 @@ const FanSpeedControlBase = kind({
 		 *
 		 * @type {Number}
 		 * @default 1
+		 * @required
 		 * @public
 		 */
 		min: PropTypes.number.isRequired,

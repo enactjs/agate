@@ -18,7 +18,6 @@ import Toggleable from '@enact/ui/Toggleable';
 import Touchable from '@enact/ui/Touchable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import Icon from '../Icon';
 import Item from '../Item';

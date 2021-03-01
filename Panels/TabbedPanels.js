@@ -5,7 +5,6 @@ import {Cell, Layout} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 import {shape} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Skinnable from '../Skinnable';
 import TabGroup from '../TabGroup';

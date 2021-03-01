@@ -3,7 +3,7 @@ import {is} from '@enact/core/keymap';
 import hoc from '@enact/core/hoc';
 import {validateRangeOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {Component} from 'react';
 
 const isDown = is('down');
 const isUp = is('up');
@@ -19,7 +19,7 @@ const validateRange = validateRangeOnce((props) => props, {'component': 'ArcPick
  * @private
  */
 const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'ArcPickerBehaviorDecorator';
 
 		static propTypes = /** @lends agate/ArcPicker.ArcPickerBehaviorDecorator.prototype */{
