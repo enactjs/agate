@@ -2,7 +2,6 @@ import kind from '@enact/core/kind';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import ForwardRef from '@enact/ui/ForwardRef';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import ApplicationCloseButton from './ApplicationCloseButton';
 

@@ -4,7 +4,6 @@ import Slottable from '@enact/ui/Slottable';
 import Spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator, {spotlightDefaultClass} from '@enact/spotlight/SpotlightContainerDecorator';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Skinnable from '../Skinnable';
 

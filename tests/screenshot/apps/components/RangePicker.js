@@ -1,5 +1,4 @@
 import RangePicker from '../../../../RangePicker';
-import React from 'react';
 
 const RangePickerTests = [
 	<RangePicker min={0} max={10} step={5} value={0} />,
