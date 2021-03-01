@@ -5,33 +5,6 @@
 
 .labeledIcon {
 	.applySkins({
-		min-width: 96px;
-		max-width: 300px;
-		margin: @agate-component-spacing;
-		padding: 0 @agate-component-spacing;
-
-		// The following rules adjust the margin of icon so it behaves in a predictable way for users of
-		// this component, when applying their own styling/layout rules.
-		&.below .icon {
-			margin-top: 0;
-			margin-bottom: @agate-component-spacing;
-		}
-
-		&.above .icon {
-			margin-top: @agate-component-spacing;
-			margin-bottom: 0;
-		}
-
-		&.after,
-		&.before,
-		&.left,
-		&.right {
-			.icon {
-				margin-top: 0;
-				margin-bottom: 0;
-			}
-		}
-
 		.label {
 			text-overflow: ellipsis;
 			overflow: hidden;
@@ -71,10 +44,15 @@
 		&.small,
 		&.large,
 		&.huge {
-			&.above,
+			&.above {
+				.icon {
+					margin: @agate-labeledicon-margin-vertical-above;
+				}
+			}
+
 			&.below {
 				.icon {
-					margin: @agate-labeledicon-margin;
+					margin: @agate-labeledicon-margin-vertical-below;
 				}
 			}
 
@@ -82,17 +60,17 @@
 			&.before,
 			&.left,
 			&.right {
-				padding: @agate-labeledicon-padding;
+				padding: @agate-labeledicon-horizontal-padding;
 			}
 
 			.icon {
-				margin: @agate-labeledicon-margin;
+				margin: @agate-labeledicon-margin-horizontal;
 			}
 		}
 
 		&.smallest,
 		&.small {
-			padding: @agate-labeledicon-padding-small @agate-labeledicon-padding @agate-labeledicon-padding-smallest;
+			padding: @agate-labeledicon-small-padding;
 
 			&.after,
 			&.right {
@@ -186,8 +164,8 @@
 			}
 		}
 
-		.large,
-		.huge {
+		&.large,
+		&.huge {
 			&.above,
 			&.below {
 				max-width: @agate-labeledicon-large-vertical-max-width;
@@ -200,7 +178,7 @@
 		}
 
 		&.large {
-			padding: @agate-labeledicon-padding-large @agate-labeledicon-padding @agate-labeledicon-padding-small;
+			padding: @agate-labeledicon-large-padding;
 
 			.label {
 				font-size: @agate-labeledicon-large-font-size;
@@ -260,7 +238,7 @@
 		}
 
 		&.huge {
-			padding: @agate-labeledicon-padding-huge @agate-labeledicon-padding @agate-labeledicon-padding-medium;
+			padding: @agate-labeledicon-huge-padding;
 
 			.label {
 				font-size: @agate-labeledicon-huge-font-size;
