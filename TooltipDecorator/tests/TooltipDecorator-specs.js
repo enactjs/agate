@@ -1,4 +1,3 @@
-import React from 'react';
 import {mount} from 'enzyme';
 import {FloatingLayerBase, FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 import {Tooltip} from '../Tooltip';

@@ -2,7 +2,6 @@
 
 import ArcPicker from '@enact/agate/ArcPicker';
 import Button from '@enact/agate/Button';
-import React from 'react';
 
 import AriaValueTextDecorator from '../components/AriaValueTextDecorator';
 import Section from '../components/Section';

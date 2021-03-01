@@ -18,7 +18,6 @@ import Slottable from '@enact/ui/Slottable';
 import Toggleable from '@enact/ui/Toggleable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import {CheckboxBase} from '../Checkbox';
 import {ItemBase, ItemDecorator} from '../Item';

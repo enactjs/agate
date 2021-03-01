@@ -1,5 +1,4 @@
 import ThumbnailItem from '@enact/agate/ThumbnailItem';
-import React from 'react';
 
 import Section from '../components/Section';
 

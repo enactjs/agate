@@ -1,6 +1,6 @@
 import {ScrollbarTrack as UiScrollbarTrack} from '@enact/ui/useScroll/Scrollbar';
 import PropTypes from 'prop-types';
-import React, {forwardRef, useEffect} from 'react';
+import {forwardRef, useEffect} from 'react';
 
 const nop = () => {};
 

@@ -1,5 +1,4 @@
 import Header from '../../../../Header';
-import React from 'react';
 
 const HeaderTests = [
 	<Header hideLine title="Header Title" />,
