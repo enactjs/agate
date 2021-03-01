@@ -12,7 +12,6 @@
 import kind from '@enact/core/kind';
 import UiProgressBar from '@enact/ui/ProgressBar';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Skinnable from '../Skinnable';
 

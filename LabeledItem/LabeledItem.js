@@ -12,7 +12,6 @@
  */
 
 import deprecate from '@enact/core/internal/deprecate';
-import React from 'react';
 
 import Icon from '../Icon';
 import Item from '../Item';

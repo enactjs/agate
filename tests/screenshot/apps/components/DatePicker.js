@@ -1,5 +1,4 @@
 import DatePicker from '../../../../DatePicker';
-import React from 'react';
 
 const DatePickerTests = [
 	<DatePicker value={new Date()} />,

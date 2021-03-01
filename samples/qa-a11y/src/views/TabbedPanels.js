@@ -3,7 +3,7 @@
 import Button from '@enact/agate/Button';
 import CheckboxItem from '@enact/agate/CheckboxItem';
 import {Panel, TabbedPanels} from '@enact/agate/Panels';
-import React from 'react';
+import {useState} from 'react';
 
 import appCss from '../App/App.module.less';
 
@@ -15,9 +15,9 @@ const tabTitles = [
 ];
 
 const TabbedPanelsView = () => {
-	const [noAnimation, setNoAnimation] = React.useState(false);
-	const [noCloseButton, setNoCloseButton] = React.useState(false);
-	const [vertical, setVertical] = React.useState(false);
+	const [noAnimation, setNoAnimation] = useState(false);
+	const [noCloseButton, setNoCloseButton] = useState(false);
+	const [vertical, setVertical] = useState(false);
 
 	const handleNoAnimation = () => setNoAnimation(!noAnimation);
 	const handleNoCloseButton = () => setNoCloseButton(!noCloseButton);

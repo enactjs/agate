@@ -1,7 +1,6 @@
 import Button from '../../../../Button';
 import ThemeDecorator from '../../../../ThemeDecorator';
 import TooltipDecorator from '../../../../TooltipDecorator';
-import React from 'react';
 import spotlight from '@enact/spotlight';
 import {scaleToRem} from '@enact/ui/resolution';
 

@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, text, number} from '@enact/storybook-utils/addons/knobs';
 import {LabeledIconBase as UiLabeledIconBase, LabeledIcon as UiLabeledIcon} from '@enact/ui/LabeledIcon';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import LabeledIconButton from '@enact/agate/LabeledIconButton';
