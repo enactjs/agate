@@ -2,7 +2,7 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import {storiesOf} from '@storybook/react';
 
-import BodyText from '@enact/ui/BodyText';
+import BodyText from '@enact/agate/BodyText';
 import Heading, {HeadingBase} from '@enact/agate/Heading';
 
 import css from './Heading.module.less';
@@ -23,7 +23,9 @@ storiesOf('Agate', module)
 		() => {
 			const knobProps = {
 				color: select('color', prop.colors, Config),
+				disabled: boolean('disabled', Config),
 				marqueeOn: select('marqueeOn', prop.marqueeOn, Config),
+				showBackButton: boolean('showBackButton', Config),
 				showLine: boolean('showLine', Config),
 				size: select('size', prop.sizes, Config),
 				spacing: select('spacing', prop.spacings, Config)
