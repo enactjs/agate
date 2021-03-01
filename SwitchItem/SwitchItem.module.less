@@ -8,6 +8,28 @@
 		vertical-align: middle;
 	}
 
+	.applySkins({
+		.label {
+			color: @agate-switchitem-label-color;
+		}
+
+		&.selected {
+			border-color: @agate-switchitem-selected-border-color;
+
+			.label {
+				color: @agate-switchitem-label-selected-color;
+			}
+		}
+
+		.focus({
+			&.selected {
+				.label {
+					color: @agate-switchitem-label-focus-selected-color;
+				}
+			}
+		})
+	});
+
 	.switchIcon {
 		pointer-events: none;
 

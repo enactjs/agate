@@ -121,6 +121,7 @@ const SwitchItemBase = kind({
 	},
 
 	computed: {
+		className: ({selected, styler}) => styler.append({selected}),
 		icon: ({css, icon}) => (icon ?
 			<Icon size="small" slot="slotBefore" className={css.icon}>
 				{icon}
