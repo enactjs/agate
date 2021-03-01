@@ -1,7 +1,6 @@
 import Keypad from '../../../../Keypad';
 import Scroller from '../../../../Scroller';
 import ThemeDecorator  from '../../../../ThemeDecorator';
-import React from 'react';
 import spotlight from '@enact/spotlight';
 import {scaleToRem} from '@enact/ui/resolution';
 

@@ -1,6 +1,5 @@
 import Button from '../../../../Button';
 import TooltipDecorator from '../../../../TooltipDecorator';
-import React from 'react';
 
 const TooltipButton = TooltipDecorator({tooltipDestinationProp: 'decoration'}, Button);
 

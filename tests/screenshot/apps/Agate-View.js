@@ -1,7 +1,7 @@
 import classnames from 'classnames/bind';
 import spotlight from '@enact/spotlight';
 import {urlParamsToObject} from '@enact/ui-test-utils/utils';
-import React from 'react';
+import {cloneElement, Component as ReactComponent} from 'react';
 
 import ThemeDecorator from '../../../ThemeDecorator';
 
@@ -63,7 +63,7 @@ function prepareTest (componentName, testId) {
 	}
 
 	return {
-		testElement: React.cloneElement(component, ElementProps, children),
+		testElement: cloneElement(component, ElementProps, children),
 		wrapperClasses: getWrapperClasses(agateComponents[componentName][testId])
 	};
 }
@@ -86,7 +86,7 @@ function prepareFromUrl () {
 		wrapperClasses: getWrapperClasses({skin: parsed.skin, wrapper: wrapperProps})
 	};
 }
-class App extends React.Component {
+class App extends ReactComponent {
 	static getDerivedStateFromError () {
 		// Update state so the next render will show the fallback UI.
 		return {hasError: true};

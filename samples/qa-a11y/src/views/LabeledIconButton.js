@@ -1,5 +1,4 @@
 import LabeledIconButton from '@enact/agate/LabeledIconButton';
-import React from 'react';
 
 import Section from '../components/Section';
 

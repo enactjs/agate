@@ -1,4 +1,3 @@
-import React from 'react';
 import {mount, shallow} from 'enzyme';
 import {FloatingLayerBase, FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 

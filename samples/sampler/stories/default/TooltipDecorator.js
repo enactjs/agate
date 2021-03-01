@@ -4,7 +4,6 @@ import {boolean, number, select, text} from '@enact/storybook-utils/addons/knobs
 import {storiesOf} from '@storybook/react';
 import Button from '@enact/agate/Button';
 import TooltipDecorator, {Tooltip, TooltipBase} from '@enact/agate/TooltipDecorator';
-import React from 'react';
 
 import iconNames from './icons';
 
