@@ -6,6 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
+- `agate/BodyText` Scroller to apply a vertical scroll when contents are larger than the container
 - `agate/Spinner` prop `children` to support the display of text below the icon
 
 ### Changed
@@ -14,6 +15,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
+- `agate/BodyText` to match latest design for Silicon skin
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
 - `agate/SliderButton` styling to visually show the focused state
 

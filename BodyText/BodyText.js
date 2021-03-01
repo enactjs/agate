@@ -13,10 +13,11 @@
 import kind from '@enact/core/kind';
 import UiBodyText from '@enact/ui/BodyText';
 import Pure from '@enact/ui/internal/Pure';
+import {MarqueeDecorator} from '@enact/ui/Marquee';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
-import {MarqueeDecorator} from '@enact/ui/Marquee';
+import Scroller from '../Scroller';
 import Skinnable from '../Skinnable';
 
 import componentCss from './BodyText.module.less';
@@ -66,6 +67,16 @@ const BodyTextBase = kind({
 		css: PropTypes.object,
 
 		/**
+		 * Allows 5-way navigation to the scrollbar controls. By default, 5-way will
+		 * not move focus to the scrollbar controls.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		focusableScrollbar: PropTypes.bool,
+
+		/**
 		 * Toggles multi-line (`false`) vs single-line (`true`) behavior. `noWrap` mode
 		 * automatically enables {@link ui/Marquee} so long text isn't permanently occluded.
 		 *
@@ -101,7 +112,7 @@ const BodyTextBase = kind({
 		className: ({noWrap, size, styler}) => styler.append(size, {noWrap})
 	},
 
-	render: ({centered, css, noWrap, ...rest}) => {
+	render: ({centered, css, focusableScrollbar, noWrap, ...rest}) => {
 		delete rest.size;
 
 		if (noWrap) {
@@ -117,11 +128,13 @@ const BodyTextBase = kind({
 			);
 		}
 		return (
-			<UiBodyText
-				{...rest}
-				centered={centered}
-				css={css}
-			/>
+			<Scroller verticalScrollbar="visible" focusableScrollbar={focusableScrollbar}>
+				<UiBodyText
+					{...rest}
+					centered={centered}
+					css={css}
+				/>
+			</Scroller>
 		);
 	}
 });

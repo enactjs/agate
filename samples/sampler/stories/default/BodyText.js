@@ -18,6 +18,8 @@ storiesOf('Agate', module)
 		() => (
 			<BodyText
 				centered={boolean('centered', Config)}
+				disabled={boolean('disabled', Config)}
+				focusableScrollbar={boolean('focusableScrollbar', Config)}
 				noWrap={boolean('noWrap', Config)}
 				size={select('size', prop.sizes, Config)}
 			>
