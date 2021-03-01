@@ -1,5 +1,4 @@
 import Popup from '../../../../Popup';
-import React from 'react';
 
 const PopupTests = [
 	<Popup open>Popup!</Popup>,

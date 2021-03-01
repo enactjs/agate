@@ -1,7 +1,6 @@
 import Heading from '../../../../Heading';
 import MediaPlayer from '../../../../MediaPlayer';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import React from 'react';
 import spotlight from '@enact/spotlight';
 
 // NOTE: Forcing pointer mode off so we can be sure that regardless of webOS pointer mode the app
