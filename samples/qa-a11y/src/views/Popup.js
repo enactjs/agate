@@ -4,7 +4,6 @@ import Item from '@enact/agate/Item';
 import Popup from '@enact/agate/Popup';
 import Scroller from '@enact/agate/Scroller';
 import ri from '@enact/ui/resolution';
-import React from 'react';
 
 import Section from '../components/Section';
 import useBoolArray from '../components/useBoolArray';

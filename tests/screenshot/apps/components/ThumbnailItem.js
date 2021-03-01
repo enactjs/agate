@@ -1,4 +1,3 @@
-import React from 'react';
 import ThumbnailItem from '../../../../ThumbnailItem';
 
 import img from '../../images/600x600.png';

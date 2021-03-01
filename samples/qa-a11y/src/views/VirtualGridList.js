@@ -5,7 +5,7 @@ import Header from '@enact/agate/Header';
 import ImageItem from '@enact/agate/ImageItem';
 import {VirtualGridList} from '@enact/agate/VirtualList';
 import ri from '@enact/ui/resolution';
-import React from 'react';
+import {useState} from 'react';
 
 const items = [];
 // eslint-disable-next-line enact/prop-types, enact/display-name
@@ -39,9 +39,9 @@ for (let i = 0; i < 100; i++) {
 }
 
 const VirtualGridListView = () => {
-	const [native, setNative] = React.useState(true);
-	const [horizontal, setHorizontal] = React.useState(false);
-	const [customAriaLabel, setCustomAriaLabel] = React.useState(false);
+	const [native, setNative] = useState(true);
+	const [horizontal, setHorizontal] = useState(false);
+	const [customAriaLabel, setCustomAriaLabel] = useState(false);
 	const scrollMode = native ? 'native' : 'translate';
 
 	const handleToggleScrollMode = () => setNative(!native);
