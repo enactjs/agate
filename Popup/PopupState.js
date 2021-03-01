@@ -6,7 +6,7 @@ import Pause from '@enact/spotlight/Pause';
 import Spotlight, {getDirection} from '@enact/spotlight';
 import FloatingLayer from '@enact/ui/FloatingLayer';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {Component} from 'react';
 import warning from 'warning';
 
 const isDown = is('down');
@@ -44,7 +44,7 @@ const forwardShow = forward('onShow');
  * @public
  */
 const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-vars
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'PopupState';
 
 		static propTypes = {
