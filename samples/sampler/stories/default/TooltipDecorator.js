@@ -5,7 +5,6 @@ import {storiesOf} from '@storybook/react';
 import Button, {ButtonBase} from '@enact/agate/Button';
 import TooltipDecorator from '@enact/agate/TooltipDecorator';
 import UiButton from '@enact/ui/Button';
-import React from 'react';
 
 Button.displayName = 'TooltipDecorator';
 const Config = mergeComponentMetadata('TooltipDecorator', UiButton, ButtonBase, Button);

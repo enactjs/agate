@@ -1,6 +1,5 @@
 import Picker from '../../../../Picker';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import React from 'react';
 
 const pickerList = [
 	'Apple',

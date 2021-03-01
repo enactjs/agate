@@ -1,6 +1,5 @@
 import RangePicker from '../../../../RangePicker';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import React from 'react';
 
 const app = (props) => <div {...props}>
 	<div>

@@ -1,7 +1,6 @@
 import Heading from '../../../../Heading';
 import IncrementSlider from '../../../../IncrementSlider';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import React from 'react';
 
 const app = (props) => <div {...props}>
 	<div>
