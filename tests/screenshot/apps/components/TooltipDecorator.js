@@ -12,6 +12,7 @@ const TooltipDecoratorTests = [
 
 	// RTL
 	...withConfig({
+		focus: true,
 		locale: 'ar-SA'
 	}, [
 		<TooltipButton tooltipText="tooltip">Click me</TooltipButton>,
