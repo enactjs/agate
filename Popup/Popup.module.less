@@ -79,6 +79,7 @@
 
 	.applySkins({
 		color: @agate-popup-text-color;
+		font-size: @agate-popup-font-size;
 		min-width: @agate-popup-min-width;
 		max-width: @agate-popup-max-width;
 		box-shadow: @agate-popup-shadow;
@@ -149,6 +150,10 @@
 			font-size: @agate-popup-title-font-size;
 			padding: @agate-popup-title-padding;
 			margin: @agate-popup-title-margin;
+
+			:global(.enact-locale-right-to-left) & {
+				padding: @agate-popup-title-padding-rtl;
+			}
 		}
 
 		&:not(.withTitle) {
@@ -179,7 +184,7 @@
 
 			&.centered {
 				.title {
-					padding: @agate-popup-closebutton-centered-title-padding;
+					.padding-start-end(.extract(@agate-popup-closebutton-title-padding, left)[], .extract(@agate-popup-closebutton-title-padding, right)[]);
 				}
 			}
 		}
