@@ -10,6 +10,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ContextualPopupDecorator` prop `css` to support customizations
 - `agate/Dropdown` prop `width` to support multiple widths
 - `agate/Item` to have a `selected` publicClassname
+- `agate/RadioItem` prop `slotBefore`
 - `agate/Spinner` prop `children` to support the display of text below the icon
 
 ### Changed
@@ -52,7 +53,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Popup` content padding and margin with `closeButton`
 - `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
 - `agate/Popup` `duration` and `type` props
-- `agate/RadioItem` prop `slotBefore`
 
 ### Changed
 
