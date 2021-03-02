@@ -4,11 +4,12 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import {storiesOf} from '@storybook/react';
 
 import Icon from '@enact/agate/Icon';
-import RadioItem from '@enact/agate/RadioItem';
+import Item, {ItemBase} from '@enact/agate/Item';
+import RadioItem, {RadioItemBase} from '@enact/agate/RadioItem';
 
 import iconNames from './icons';
 
-const Config = mergeComponentMetadata('RadioItem', RadioItem);
+const Config = mergeComponentMetadata('RadioItem', ItemBase, Item, RadioItemBase, RadioItem);
 RadioItem.displayName = 'RadioItem';
 
 storiesOf('Agate', module)
