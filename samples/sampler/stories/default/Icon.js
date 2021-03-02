@@ -1,6 +1,6 @@
 import kind from '@enact/core/kind';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {select, text, number} from '@enact/storybook-utils/addons/knobs';
+import {number, select, text} from '@enact/storybook-utils/addons/knobs';
 import UiIcon from '@enact/ui/Icon';
 import PropTypes from 'prop-types';
 
@@ -64,6 +64,7 @@ const SkinnedIconBase = kind({
 });
 
 const SkinnedIcon = Skinnable({prop: 'skin'}, SkinnedIconBase);
+SkinnedIcon.displayName = 'Icon';
 
 export default {
 	title: 'Agate/Icon',

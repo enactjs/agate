@@ -29,7 +29,7 @@ export const _ToggleButton = () => (
 		type={select('type', ['grid', 'standard'], Config, 'standard')}
 		underline={boolean('underline', Config, true)}
 	>
-		{text('children', ToggleButton, 'Click me')}
+		{text('children', Config, 'Click me')}
 	</ToggleButton>
 );
 

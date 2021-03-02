@@ -46,6 +46,8 @@ const SkinnedButtonBase = kind({
 			<Button
 				{...rest}
 				icon={select('icon', icons, Config)}
+				iconFlip={select('iconFlip', prop.iconFlip, Config)}
+				iconPosition={select('iconPosition', prop.iconPosition, Config)}
 			/>
 		);
 	}
@@ -67,8 +69,6 @@ export const _Button = () => (
 		badgeColor={select('badgeColor', prop.colors, Config)}
 		disabled={boolean('disabled', Config)}
 		highlighted={boolean('highlighted', Config)}
-		iconFlip={select('iconFlip', prop.iconFlip, Config)}
-		iconPosition={select('iconPosition', prop.iconPosition, Config)}
 		joinedPosition={select('joinedPosition', prop.joinedPosition, Config)}
 		minWidth={threeWayBoolean(select('minWidth', prop.minWidth, Config))}
 		onClick={action('onClick')}

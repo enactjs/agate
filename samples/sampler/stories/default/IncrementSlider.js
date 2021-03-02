@@ -16,6 +16,7 @@ export default {
 export const _IncrementSlider = () => (
 	<IncrementSlider
 		decrementIcon={select('decrementIcon', decrementIcons, Config)}
+		disabled={boolean('disabled', Config)}
 		focused={boolean('focused', Config)}
 		incrementIcon={select('incrementIcon', incrementIcons, Config)}
 		knobStep={number('knobStep', Config)}

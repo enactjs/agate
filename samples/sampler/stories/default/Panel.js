@@ -1,5 +1,4 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {action} from '@enact/storybook-utils/addons/actions';
 import {text} from '@enact/storybook-utils/addons/knobs';
 
 import Button from '@enact/agate/Button';
@@ -19,7 +18,7 @@ export const _Panel = () => (
 			subtitle={text('subtitle', HeaderConfig, 'Header Subtitle')}
 			title={text('title', HeaderConfig, 'Header Title')}
 		/>
-		<Button onClick={action('onClick')}>Click me</Button>
+		<Button>Click me</Button>
 	</Panel>
 );
 

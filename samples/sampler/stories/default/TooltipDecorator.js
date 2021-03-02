@@ -23,7 +23,7 @@ export const _TooltipButton = () => (
 		size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}
 		tooltipText={text('tooltip', Config, 'Tooltip')}
 	>
-		{text('children', Button, 'Click me')}
+		{text('children', Config, 'Click me')}
 	</TooltipButton>
 );
 

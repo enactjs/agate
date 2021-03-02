@@ -47,15 +47,15 @@ export const _Marquee = () => {
 	return (
 		<section>
 			<I18nMarquee
-				disabled={disabled}
 				alignment={select('alignment', [null, 'left', 'right', 'center'], Config)}
+				disabled={boolean('disabled', Config)}
 				forceDirection={select('forceDirection', [null, 'rtl', 'ltr'], Config)}
 				marqueeDelay={number('marqueeDelay', Config, 1000)}
 				marqueeDisabled={boolean('marqueeDisabled', Config)}
 				marqueeOn={select('marqueeOn', ['hover', 'render'], Config, 'render')}
 				marqueeOnRenderDelay={1000}
 				marqueeResetDelay={number('marqueeResetDelay', Config, 1000)}
-				marqueeSpacing={spacing()}
+				marqueeSpacing={spacing(text('marqueeSpacing', Config, '50%'))}
 				marqueeSpeed={number('marqueeSpeed', Config, 60)}
 				style={{width: '600px'}}
 			/>

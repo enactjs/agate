@@ -42,7 +42,7 @@ const ImageItemBase = kind({
 	propTypes: /** @lends agate/ImageItem.ImageItemBase.prototype */ {
 		/**
 		 * Sets the position for caption.
-		 * Available positions: 'below' (default) and 'overlay'.
+		 * This props is only valid when `orientation` is `vertical`.
 		 *
 		 * @type {('below'|'overlay')}
 		 * @default 'below'
@@ -118,8 +118,8 @@ const ImageItemBase = kind({
 		})
 	},
 
-	render: ({captionPosition, children, css, disabled, src, ...rest}) => {
-		const [Component, marqueeProps] = (children && (captionPosition === 'below')) ? [MarqueeImageItem, {
+	render: ({captionPosition, children, css, disabled, orientation, src, ...rest}) => {
+		const [Component, marqueeProps] = (children && (orientation === 'horizontal' || captionPosition === 'below')) ? [MarqueeImageItem, {
 			alignment: 'center'
 		}] : [UiImageItem, null];
 
@@ -131,6 +131,7 @@ const ImageItemBase = kind({
 				css={css}
 				disabled={disabled}
 				imageComponent={ImageBase}
+				orientation={orientation}
 				src={src}
 			>
 				{children}

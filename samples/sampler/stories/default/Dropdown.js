@@ -1,8 +1,10 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, number, text} from  '@enact/storybook-utils/addons/knobs';
+import {boolean, number, text, select} from  '@enact/storybook-utils/addons/knobs';
 
 import Dropdown, {DropdownBase} from '@enact/agate/Dropdown';
+
+import css from './Dropdown.module.less';
 
 const Config = mergeComponentMetadata('Dropdown', Dropdown, DropdownBase);
 
@@ -16,11 +18,15 @@ export const _Dropdown = () => {
 	const items = (new Array(itemCount)).fill().map((i, index) => `Option ${index + 1}`);
 
 	return (
-		<div>
+		<div className={css.parentContainer}>
 			<Dropdown
+				direction={select('direction', ['above', 'below'], Config)}
 				disabled={boolean('disabled', Config)}
+				onClose={action('onClose')}
+				onOpen={action('onOpen')}
 				onSelect={action('onSelect')}
 				title={text('title', Config, 'Please select')}
+				width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
 			>
 				{items}
 			</Dropdown>
