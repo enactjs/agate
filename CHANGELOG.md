@@ -6,8 +6,12 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
+- `agate/ContextualPopup` prop `css` to support customizations
+- `agate/ContextualPopupDecorator` prop `css` to support customizations
+- `agate/Dropdown` prop `width` to support multiple widths
 - `agate/IncrementSlider` prop `activateOnFocus` to support slider activation when slider gets focused
 - `agate/IncrementSlider` prop `tooltip` to enable the built-in tooltip
+- `agate/Item` to have a `selected` publicClassname
 - `agate/ProgressBar` prop `tooltip`  to enable the built-in tooltip
 - `agate/ProgressBarTooltip` component
 - `agate/Slider` prop `tooltip` to enable the built-in tooltip
@@ -15,12 +19,14 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Changed
 
+- `agate/Dropdown` to use `agate/ContextualPopup`
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
 
 ### Fixed
 
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
 - `agate/SliderButton` styling to visually show the focused state
+- `agate/TooltipDecorator` to position correctly on rtl locale
 
 ## [2.0.0-alpha.1] - 2021-02-25
 

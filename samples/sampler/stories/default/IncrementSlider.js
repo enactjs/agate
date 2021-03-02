@@ -29,10 +29,8 @@ storiesOf('Agate', module)
 			return (
 				<IncrementSlider
 					activateOnFocus={boolean('activateOnFocus', Config)}
-					active={boolean('active', Config)}
 					decrementIcon={select('decrementIcon', decrementIcons, Config)}
 					disabled={disabled}
-					focused={boolean('focused', Config)}
 					incrementIcon={select('incrementIcon', incrementIcons, Config)}
 					knobStep={number('knobStep', Config)}
 					max={number('max', Config)}

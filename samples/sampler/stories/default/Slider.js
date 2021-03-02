@@ -26,9 +26,7 @@ storiesOf('Agate', module)
 			return (
 				<Slider
 					activateOnFocus={boolean('activateOnFocus', Config)}
-					active={boolean('active', Config)}
 					disabled={disabled}
-					focused={boolean('focused', Config)}
 					knobStep={number('knobStep', Config)}
 					max={number('max', Config)}
 					min={number('min', Config)}
