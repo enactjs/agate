@@ -7,17 +7,13 @@
 .imageItem {
 	position: relative;
 
-  	&.horizontal {
-		.image {
-	  		margin: auto 0; // leaving this to align image with caption when orientation="horizontal"
-		}
-  	}
-
-	&.captionOverlay {
-		.caption {
-			overflow: hidden;
-			position: absolute;
-			box-sizing: border-box;
+	&.vertical {
+		&.captionOverlay {
+			.caption {
+				overflow: hidden;
+				position: absolute;
+				box-sizing: border-box;
+			}
 		}
 	}
 
