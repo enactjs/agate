@@ -9,6 +9,15 @@
 	}
 
 	.applySkins({
+		.icon {
+			padding: @agate-switchitem-icon-padding;
+			margin: @agate-switchitem-icon-margin;
+		}
+
+		.slotBefore {
+			margin-right: @agate-switchitem-slotbefore-margin-right;
+		}
+
 		.label {
 			color: @agate-switchitem-label-color;
 		}
@@ -27,14 +36,17 @@
 					color: @agate-switchitem-label-focus-selected-color;
 				}
 			}
-		})
-	});
-
-	.switchIcon {
-		pointer-events: none;
-
-		.applySkins({
-			.margin-start-end(@agate-switch-icon-margin, 0);
 		});
-	}
+
+		.switchIcon {
+			pointer-events: none;
+			.margin-start-end(@agate-switch-icon-margin, 0);
+		}
+	});
+}
+
+.item {
+	.applySkins({
+		padding: @agate-switchitem-padding;
+	})
 }
