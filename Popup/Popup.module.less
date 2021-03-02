@@ -151,9 +151,9 @@
 			padding: @agate-popup-title-padding;
 			margin: @agate-popup-title-margin;
 
-			:global(.enact-locale-right-to-left) & {
+            .enact-locale-rtl({
 				padding: @agate-popup-title-padding-rtl;
-			}
+			});
 		}
 
 		&:not(.withTitle) {
@@ -207,12 +207,10 @@
 		.closeButton {
 			.position(@agate-popup-closebutton-position-top, @agate-popup-closebutton-position-right, @agate-popup-closebutton-position-bottom, @agate-popup-closebutton-position-left);
 			margin: @agate-popup-closebutton-margin;
-		}
 
-		:global(.enact-locale-right-to-left) & {
-			.closeButton {
-				.position(@agate-popup-closebutton-position-top, @agate-popup-closebutton-position-left, @agate-popup-closebutton-position-bottom, @agate-popup-closebutton-position-right);
-			}
+          .enact-locale-rtl({
+            .position(@agate-popup-closebutton-position-top, @agate-popup-closebutton-position-left, @agate-popup-closebutton-position-bottom, @agate-popup-closebutton-position-right);
+          });
 		}
 	});
 }
