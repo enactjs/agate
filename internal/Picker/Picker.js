@@ -186,16 +186,6 @@ const PickerBase = class extends Component {
 		incrementAriaLabel: PropTypes.string,
 
 		/**
-		 * By default, the picker will animate transitions between items if it has a defined
-		 * `width`. Specifying `noAnimation` will prevent any transition animation for the
-		 * component.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		noAnimation: PropTypes.bool,
-
-		/**
 		 * A function to run when the control should increment or decrement.
 		 *
 		 * @type {Function}
@@ -548,14 +538,6 @@ const PickerBase = class extends Component {
 		}
 	};
 
-	decrementItemIndex = ({children: values, index, max, min, wrap}) => {
-		if (Array.isArray(values)) {
-			if (wrap) {
-				return wrapRange(min, max, index - 1);
-			} else return index - 1;
-		} else return 0;
-	};
-
 	incrementAriaLabel= ({incrementAriaLabel, type}) => {
 		if (incrementAriaLabel != null) {
 			return incrementAriaLabel;
@@ -566,14 +548,6 @@ const PickerBase = class extends Component {
 		} else {
 			return `${$L('next item')}`;
 		}
-	};
-
-	incrementItemIndex=  ({children: values, index, max, min, wrap}) => {
-		if (Array.isArray(values)) {
-			if (wrap) {
-				return wrapRange(min, max, index + 1);
-			} else return index + 1;
-		} else return 0;
 	};
 
 	calcAriaLabel = ({'aria-label': ariaLabel, 'aria-valuetext': valueText}) => {
@@ -593,21 +567,16 @@ const PickerBase = class extends Component {
 			className,
 			currentValueText,
 			decrementAriaLabel: decAriaLabel,
-			decrementItemIndex,
 			disabled,
 			handleDecrement,
 			handleFlick,
 			handleIncrement,
 			incrementAriaLabel: incAriaLabel,
-			incrementItemIndex,
 			min,
 			max,
-			noAnimation,
 			onSpotlightDisappear,
 			orientation,
 			reverseTransition,
-			secondaryDecrementItemIndex,
-			secondaryIncrementItemIndex,
 			skin,
 			spotlightDisabled,
 			step,
@@ -618,23 +587,13 @@ const PickerBase = class extends Component {
 			...rest
 		} = this.props;
 
-
-
-		const isFirst = value <= min;
-		const isLast = value >= max;
-		const isSecond = value <= min + step;
-		const isPenultimate = value >= max - step;
 		const decrementAriaLabel = `${currentValueText} ${decAriaLabel}`;
 		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
-		const transitionDuration = 150;
 
 		let sizingPlaceholder = null;
 		if (typeof width === 'number' && width > 0) {
 			sizingPlaceholder = <div aria-hidden className={css.sizingPlaceholder}>{'0'.repeat(width)}</div>;
 		}
-
-		const horizontal = orientation === 'horizontal';
-		const arranger = horizontal ? SlideLeftArranger : SlideTopArranger;
 
 		delete rest['aria-valuetext'];
 		delete rest.accessibilityHint;
@@ -645,59 +604,42 @@ const PickerBase = class extends Component {
 		delete rest.orientation;
 		delete rest.wrap;
 
-		const {selectedValue} = this.state;
 		const map = (item) => {
-		// const { value } = item.props;
-
 			return (
-				<div className={selectedValue === item ? classnames(css.selected, css.item) : css.item}>
+				<div className={this.state.selectedValue === item ? classnames(css.selected, css.item) : css.item}>
+					{sizingPlaceholder}
 					{item}
 				</div>
 			);
 		};
 
-		// compatibility for preact
 		const items = Children ? Children.map(values, map) : ([]).concat(values).map(map);
-
 
 		return (
 			<div {...rest} className={classnames(className, css.picker)} ref={this.initRootRef}>
 				<div
+					aria-controls={valueId}
+					aria-disabled={disabled}
+					aria-label={decrementAriaLabel}
 					className={classnames(css.itemDecrement, css.item, className)}
+					disabled={disabled}
 				/>
 				<div
+					aria-label={this.calcAriaLabel}
+					aria-valuetext={currentValueText}
 					className={classnames(css.indicator, css.item, className)}
 					ref={el => this.indicatorRef = el}
+					id={valueId}
 				/>
 				<div
+					aria-controls={valueId}
+					aria-disabled={disabled}
+					aria-label={incrementAriaLabel}
 					className={classnames(css.itemIncrement, css.item, className)}
+					disabled={disabled}
 				/>
 				<PickerRoot className={css.root} onFlick={handleFlick} ref={this.initContentRef} >
 					{items}
-
-					{/* <div*/}
-					{/*	aria-label={calcAriaLabel}*/}
-					{/*	aria-valuetext={currentValueText}*/}
-					{/*	className={this.activeClassName}*/}
-					{/*	id={valueId}*/}
-					{/*	role="spinbutton"*/}
-					{/* >*/}
-					{/*	{sizingPlaceholder}*/}
-
-					{/*	<ViewManager*/}
-					{/*		aria-hidden*/}
-					{/*		arranger={arranger}*/}
-					{/*		className={css.viewManager}*/}
-					{/*		duration={transitionDuration}*/}
-					{/*		index={currentItemIndex}*/}
-					{/*		noAnimation={noAnimation || disabled}*/}
-					{/*		reverseTransition={reverseTransition}*/}
-					{/*	>*/}
-					{/*		{values}*/}
-					{/*	</ViewManager>*/}
-					{/* </div>*/}
-
-
 				</PickerRoot>
 			</div>
 		);

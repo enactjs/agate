@@ -81,14 +81,6 @@ const PickerBase = kind({
 		incrementAriaLabel: PropTypes.string,
 
 		/**
-		 * Disables transition animation.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		noAnimation: PropTypes.bool,
-
-		/**
 		 * Called when the `value` changes.
 		 *
 		 * @type {Function}
