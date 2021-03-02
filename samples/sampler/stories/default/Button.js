@@ -1,8 +1,9 @@
+import kind from '@enact/core/kind';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, text, number} from '@enact/storybook-utils/addons/knobs';
 import UiButton from '@enact/ui/Button';
-import React from 'react';
+import PropTypes from 'prop-types';
 import {storiesOf} from '@storybook/react';
 
 import Button, {ButtonBase} from '@enact/agate/Button';
@@ -33,14 +34,35 @@ const threeWayBoolean = (value) => {
 	}
 };
 
-const SkinnedButton = Skinnable(
-	{prop: 'skin'},
-	({skin, ...rest}) => {
+const SkinnedButtonBase = kind({
+	name: 'SkinnedButton',
+
+	propTypes: {
+		skin: PropTypes.string
+	},
+
+	render: ({skin, ...rest}) => {
 		let icons = skin === 'silicon' ? ['', ...iconListSilicon] :  ['', ...iconList];
 
 		return (
 			<Button
 				{...rest}
+				icon={select('icon', icons, Config)}
+				iconFlip={select('iconFlip', prop.iconFlip, Config)}
+				iconPosition={select('iconPosition', prop.iconPosition, Config)}
+			/>
+		);
+	}
+});
+
+const SkinnedButton = Skinnable({prop: 'skin'}, SkinnedButtonBase);
+SkinnedButton.displayName = 'Button';
+
+storiesOf('Agate', module)
+	.add(
+		'Button',
+		() => (
+			<SkinnedButton
 				animateOnRender={boolean('animateOnRender', Config)}
 				animationDelay={number('animationDelay', Config)}
 				backgroundOpacity={select('backgroundOpacity', ['opaque', 'lightOpaque', 'transparent'], Config)}
@@ -48,9 +70,6 @@ const SkinnedButton = Skinnable(
 				badgeColor={select('badgeColor', prop.colors, Config)}
 				disabled={boolean('disabled', Config)}
 				highlighted={boolean('highlighted', Config)}
-				icon={select('icon', icons, Config)}
-				iconFlip={select('iconFlip', prop.iconFlip, Config)}
-				iconPosition={select('iconPosition', prop.iconPosition, Config)}
 				joinedPosition={select('joinedPosition', prop.joinedPosition, Config)}
 				minWidth={threeWayBoolean(select('minWidth', prop.minWidth, Config))}
 				onClick={action('onClick')}
@@ -60,16 +79,7 @@ const SkinnedButton = Skinnable(
 				type={select('type', ['standard', 'grid'], Config)}
 			>
 				{text('children', Config, 'Click me')}
-			</Button>
-		);
-	}
-);
-
-storiesOf('Agate', module)
-	.add(
-		'Button',
-		() => (
-			<SkinnedButton />
+			</SkinnedButton>
 		),
 		{
 			text: 'The basic Button'

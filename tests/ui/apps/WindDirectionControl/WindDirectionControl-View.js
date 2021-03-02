@@ -1,7 +1,6 @@
 import Heading from '../../../../Heading';
 import ThemeDecorator from '../../../../ThemeDecorator';
 import WindDirectionControl from '../../../../WindDirectionControl';
-import React from 'react';
 import spotlight from '@enact/spotlight';
 
 import Section from '../../components/Section';

@@ -1,6 +1,5 @@
 import Input from '../../../../Input';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import React from 'react';
 import spotlight from '@enact/spotlight';
 
 window.spotlight = spotlight;

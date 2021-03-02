@@ -1,5 +1,4 @@
 import TimePicker from '@enact/agate/TimePicker';
-import React from 'react';
 
 import Section from '../components/Section';
 

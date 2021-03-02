@@ -1,6 +1,5 @@
-import {text} from '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import React from 'react';
+import {text} from '@enact/storybook-utils/addons/knobs';
 import {storiesOf} from '@storybook/react';
 
 import Button from '@enact/agate/Button';

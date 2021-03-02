@@ -19,7 +19,6 @@ import {ImageItem as UiImageItem} from '@enact/ui/ImageItem';
 import {MarqueeDecorator, MarqueeController} from '@enact/ui/Marquee';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import ImageBase from '../Image';
 import Skinnable from '../Skinnable';
@@ -43,7 +42,7 @@ const ImageItemBase = kind({
 	propTypes: /** @lends agate/ImageItem.ImageItemBase.prototype */ {
 		/**
 		 * Sets the position for caption.
-		 * Available positions: 'below' (default) and 'overlay'.
+		 * This props is only valid when `orientation` is `vertical`.
 		 *
 		 * @type {('below'|'overlay')}
 		 * @default 'below'
@@ -119,7 +118,7 @@ const ImageItemBase = kind({
 	computed: {
 		className: ({captionPosition, styler, sizing}) => styler.append({
 			captionOverlay: captionPosition === 'overlay'
-			
+
 		},sizing),
 		// sizing: ({sizing, orientation}) => orientation === 'horizontal' ? sizing : 'fill',
 		imageComponentSizing: ({orientation, skin}) => orientation === 'horizontal' && skin === 'silicon' ? 'none' : 'fill'

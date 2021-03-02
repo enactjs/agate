@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import {useState} from 'react';
 import {storiesOf} from '@storybook/react';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
@@ -43,7 +43,7 @@ const SecondPanel = kind({
 });
 
 const BasicPanels = () => {
-	const [index, setIndex] = React.useState(0);
+	const [index, setIndex] = useState(0);
 	const goNext = () => setIndex(clamp(0, 2, index + 1));
 	const goPrevious = () => setIndex(clamp(0, 2, index - 1));
 
@@ -57,7 +57,7 @@ const BasicPanels = () => {
 			orientation={select('orientation', ['horizontal', 'vertical'], Config)}
 		>
 			<FirstPanel onClick={goNext} />
-			<SecondPanel />
+			<SecondPanel onClick={goPrevious} />
 		</Panels>
 	);
 };
@@ -65,7 +65,13 @@ const BasicPanels = () => {
 storiesOf('Agate', module)
 	.add(
 		'Panels',
-		() => (<BasicPanels />),
+		() => (
+			<BasicPanels
+				noAnimation={boolean('noAnimation', Config, false)}
+				noCloseButton={boolean('noCloseButton', Config, false)}
+				onApplicationClose={action('onClose')}
+			/>
+		),
 		{
 			props: {
 				noScroller: true,

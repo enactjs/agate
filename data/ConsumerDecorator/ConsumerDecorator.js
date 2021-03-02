@@ -5,7 +5,7 @@
  */
 
 import hoc from '@enact/core/hoc';
-import React, {Component} from 'react';
+import {Component} from 'react';
 
 // data provider things
 import {AppContext} from '../ProviderDecorator';

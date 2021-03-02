@@ -7,34 +7,29 @@
 .imageItem {
 	position: relative;
 
-	&.vertical {
-		&.captionOverlay {
-			.caption {
-				overflow: hidden;
-				position: absolute;
-				box-sizing: border-box;
-			}
+  	&.horizontal {
+		.image {
+	  		margin: auto 0; // leaving this to align image with caption when orientation="horizontal"
+		}
+  	}
+
+	&.captionOverlay {
+		.caption {
+			overflow: hidden;
+			position: absolute;
+			box-sizing: border-box;
 		}
 	}
 
 	.applySkins({
 		border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
 
-		// &.vertical {
-		// 	border-width: 3px;
-		// 	.image {
-		// 		margin: @agate-imageitem-horizontal-image-margin;
-		// 		//width: @agate-imageitem-horizontal-image-width;
-		// 		height: @agate-imageitem-horizontal-image-height;
-		// 	}
-		// }
-
 		&.horizontal {
 			border: @agate-imageitem-horizontal-border;
 			height: @agate-imageitem-horizontal-height;
 
 			.image {
-				margin: @agate-imageitem-horizontal-image-margin;
+				.margin-start-end(@agate-imageitem-horizontal-image-margin);
 				width: @agate-imageitem-horizontal-image-width;
 			}
 
@@ -69,21 +64,19 @@
 			font-size: @agate-imageitem-caption-font-size;
 		}
 
-		&.vertical {
-			&.captionOverlay {
-				.caption {
-					width: 100%;
-					height: @agate-imageitem-caption-overlay-height;
-					color: @agate-imageitem-caption-overlay-text-color;
-					opacity: @agate-imageitem-caption-overlay-opacity;
-					padding: @agate-imageitem-caption-overlay-padding;
-					font-size: @agate-imageitem-caption-overlay-font-size;
-					line-height: @agate-imageitem-caption-overlay-line-height;
-					text-align: @agate-imageitem-caption-overlay-text-align;
-					bottom: @agate-imageitem-caption-position-bottom;
-					min-height: @agate-imageitem-caption-overlay-min-height;
-					max-height: @agate-imageitem-caption-overlay-max-height;
-				}
+		&.captionOverlay {
+			.caption {
+				width: 100%;
+				height: @agate-imageitem-caption-overlay-height;
+				color: @agate-imageitem-caption-overlay-text-color;
+				opacity: @agate-imageitem-caption-overlay-opacity;
+				padding: @agate-imageitem-caption-overlay-padding;
+				font-size: @agate-imageitem-caption-overlay-font-size;
+				line-height: @agate-imageitem-caption-overlay-line-height;
+				text-align: @agate-imageitem-caption-overlay-text-align;
+				bottom: @agate-imageitem-caption-position-bottom;
+				min-height: @agate-imageitem-caption-overlay-min-height;
+				max-height: @agate-imageitem-caption-overlay-max-height;
 			}
 		}
 

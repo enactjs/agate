@@ -45,10 +45,10 @@ class DropdownPage extends Page {
 			get: (target, name) => new DropdownInterface(name)
 		});
 		const dropdownDefault = new DropdownInterface('dropdownDefault');
-		const dropdownDirectionRight = new DropdownInterface('dropdownDirectionRight');
+		const dropdownDirectionAbove = new DropdownInterface('dropdownDirectionAbove');
 		const dropdownDisabled = new DropdownInterface('dropdownDisabled');
 		const dropdownSelected = new DropdownInterface('dropdownSelected');
-		this.components = {dropdownDefault, dropdownDirectionRight, dropdownDisabled, dropdownSelected};
+		this.components = {dropdownDefault, dropdownDirectionAbove, dropdownDisabled, dropdownSelected};
 	}
 
 	open (urlExtra) {
