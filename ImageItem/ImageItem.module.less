@@ -21,7 +21,7 @@
 		border: @agate-imageitem-border-width solid @agate-imageitem-border-color;
 
 		&.horizontal {
-			border: @agate-imageitem-horizontal-border;
+			border-width: @agate-imageitem-horizontal-border-width;
 			height: @agate-imageitem-horizontal-height;
 
 			.image {
@@ -34,15 +34,17 @@
 					height: @agate-imageitem-horizontal-image-sizing-fill-height;
 				}
 			}
+
 			&.fit {
 				.image {
-					margin: @agate-imageitem-horizontal-image-sizing-fit-margin;
+					.margin-start-end(@agate-imageitem-horizontal-image-sizing-fit-margin);
 					height: @agate-imageitem-horizontal-image-sizing-fit-height;
 				}
 			}
+
 			&.none {
 				.image {
-					margin: @agate-imageitem-horizontal-image-sizing-none-margin;
+					.margin-start-end(@agate-imageitem-horizontal-image-sizing-none-margin);
 					height: @agate-imageitem-horizontal-image-sizing-none-height;
 				}
 			}

@@ -116,21 +116,16 @@ const ImageItemBase = kind({
 	},
 
 	computed: {
-		className: ({captionPosition, styler, sizing}) => styler.append({
-			captionOverlay: captionPosition === 'overlay'
-
-		},sizing),
-		// sizing: ({sizing, orientation}) => orientation === 'horizontal' ? sizing : 'fill',
+		className: ({captionPosition, styler, sizing}) => styler.append({captionOverlay: captionPosition === 'overlay'}, sizing),
 		imageComponentSizing: ({orientation, skin}) => orientation === 'horizontal' && skin === 'silicon' ? 'none' : 'fill'
 	},
 
-	render: ({captionPosition, children, css, disabled, imageComponentSizing, orientation, skin, src, sizing, ...rest}) => {
+	render: ({captionPosition, children, css, disabled, imageComponentSizing, orientation, skin, src, ...rest}) => {
 		const [Component, marqueeProps] = (children && (orientation === 'horizontal' || captionPosition === 'below')) ? [MarqueeImageItem, {
 			alignment: skin === 'silicon' && orientation === 'horizontal' ? 'left' : 'center'
 		}] : [UiImageItem, null];
 
-		console.log(sizing)
-		console.log(imageComponentSizing)
+		delete rest.sizing;
 
 		return (
 			<Component
