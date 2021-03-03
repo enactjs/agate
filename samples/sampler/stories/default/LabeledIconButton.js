@@ -25,7 +25,7 @@ storiesOf('Agate', module)
 				size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}
 				tooltipText={text('tooltipText', Config, 'This is a Labeled Icon Button')}
 			>
-				{text('children', Config, 'Hello LabeledIconButton')}
+				{text('children', Config, 'Hello LabeledIconButton !')}
 			</LabeledIconButton>
 		),
 		{

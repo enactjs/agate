@@ -7,7 +7,6 @@
 * [ ] Documentation was verified or is not changed
 * [ ] UI test was passed or is not needed
 * [ ] Screenshot test was verified or is not needed
-
 * [ ] This is an API breaking change
 
 ### Issue Resolved / Feature Added

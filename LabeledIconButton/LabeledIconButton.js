@@ -40,7 +40,20 @@ const LabeledIconButtonBase = kind({
 	name: 'LabeledIconButton',
 
 	propTypes: /** @lends agate/LabeledIconButton.LabeledIconButtonBase.prototype */ {
+		/**
+		 * The background opacity of this button.
+		 *
+		 * Valid values are:
+		 * * `'opaque'`,
+		 * * `'lightOpaque'`, and
+		 * * `'transparent'`.
+		 *
+		 * @type {('opaque'|'lightOpaque'|'transparent')}
+		 * @default 'opaque'
+		 * @public
+		 */
 		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
+
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
@@ -94,7 +107,32 @@ const LabeledIconButtonBase = kind({
 		 */
 		iconOnly: PropTypes.bool,
 
-		// forwarded from Spottable
+		/**
+		 * The position of the label in relation to the icon element.
+		 *
+		 * Allowed values include:
+		 * * 'below' (default),
+		 * * 'above',
+		 * * 'left',
+		 * * 'right',
+		 * * 'before', and
+		 * * 'after'.
+		 *
+		 * The 'before' and 'after' values automatically swap sides when in an RTL locale context.
+		 *
+		 * @type {('above'|'after'|'before'|'below'|'left'|'right')}
+		 * @default 'below'
+		 * @public
+		 */
+		labelPosition: PropTypes.oneOf(['above', 'after', 'before', 'below', 'left', 'right']),
+
+		/**
+		 * Applies the `pressed` CSS class.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		pressed: PropTypes.bool,
 
 		/**
@@ -105,6 +143,15 @@ const LabeledIconButtonBase = kind({
 		 * [css]{@link agate/LabeledIconButton.LabeledIconButtonBase.css} prop.
 		 */
 		selected: PropTypes.bool,
+
+		/**
+		 * The size of the button.
+		 *
+		 * @type {('smallest'|'small'|'large'|'huge')}
+		 * @default 'large'
+		 * @public
+		 */
+		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
 		 * The amount of sprite "cells" in the src image.
@@ -120,6 +167,10 @@ const LabeledIconButtonBase = kind({
 		css: componentCss,
 		className: 'labeledIconButton',
 		publicClassNames: true
+	},
+
+	computed: {
+		className: ({labelPosition, size, styler}) => styler.append((labelPosition === 'above' || labelPosition === 'below') ? '' : size)
 	},
 
 	render: ({
