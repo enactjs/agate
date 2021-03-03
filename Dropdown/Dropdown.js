@@ -14,59 +14,108 @@
  * @exports DropdownBase
  * @exports DropdownDecorator
  */
-import {on, off} from '@enact/core/dispatcher';
-import {forKey, forward, forProp, handle} from '@enact/core/handle';
-import hoc from '@enact/core/hoc';
-import {add} from '@enact/core/keymap';
+import {forward, forProp, handle} from '@enact/core/handle';
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import {extractAriaProps} from '@enact/core/util';
-import Spotlight from '@enact/spotlight';
+import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
-import Group from '@enact/ui/Group';
+import ForwardRef from '@enact/ui/ForwardRef';
 import IdProvider from '@enact/ui/internal/IdProvider';
-import ri from '@enact/ui/resolution';
 import Toggleable from '@enact/ui/Toggleable';
-import Transition from '@enact/ui/Transition';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import not from 'ramda/src/not';
+import warning from 'warning';
 
 import Button from '../Button';
+import ContextualPopupDecorator from '../ContextualPopupDecorator';
 import Icon from '../Icon';
 import Item from '../Item';
-import RadioItem from '../RadioItem';
-import Scroller from '../Scroller';
 import Skinnable from '../Skinnable';
+
+import DropdownList, {isSelectedValid} from './DropdownList';
 
 import componentCss from './Dropdown.module.less';
 
-const oppositeDirection = {left: 'right', right: 'left', up: 'down', down: 'up'};
-const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
-const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
+/**
+ * A stateless Dropdown Button component.
+ *
+ * @class DropdownButtonBase
+ * @memberof agate/Dropdown
+ * @ui
+ * @public
+ */
+const DropdownButtonBase = kind({
+	name: 'DropdownButtonBase',
 
-const handleTransitionHide = (ev, {'data-spotlight-id': containerId}) => {
-	const containerSelector = `[data-spotlight-id='${containerId}']`;
-	const current = Spotlight.getCurrent();
+	propTypes: /** @lends agate/Dropdown.DropdownButtonBase.prototype */ {
+		/**
+		 * Forwards a reference to the this component.
+		 *
+		 * @type {Object|Function}
+		 * @private
+		 */
+		forwardRef: EnactPropTypes.ref,
 
-	if (!Spotlight.isPaused() && current && document.querySelector(`${containerSelector} .${componentCss.dropdownList}`).contains(current)) {
-		const focusResult = Spotlight.focus(`${containerSelector} .${componentCss.dropdown}`);
-		if (!focusResult && Spotlight.getPointerMode()) {
-			document.querySelector(`${containerSelector} .${componentCss.dropdown}`).focus();
-		}
+		/**
+		 * The icon displayed on the dropdown button.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		icon: PropTypes.string,
+
+		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		skin: PropTypes.string
+	},
+
+	render: ({children, forwardRef, icon, skin, ...rest}) => {
+		return (
+			(skin === 'silicon') ?
+				<Button
+					{...rest}
+					icon={icon}
+					iconPosition="after"
+					minWidth
+					ref={forwardRef}
+				>
+					{children}
+				</Button> :
+				<Item
+					{...rest}
+					ref={forwardRef}
+				>
+					{children}
+					<Icon slot="slotAfter" key="icon" size="small">{icon}</Icon>
+				</Item>
+		);
 	}
-};
+});
 
-// Add keymap for escape key
-add('cancel', 27);
+const DropdownButton = ContextualPopupDecorator(
+	{noArrow: true},
+	ForwardRef(
+		DropdownButtonBase
+	)
+);
+DropdownButton.displayName = 'DropdownButton';
 
 /**
  * A stateless Dropdown component.
  *
  * @class DropdownBase
- * @memberof agate/Dropdown
+ * @memeberof agate/Dropdown
+ * @extends agate/Button.Button
+ * @extends agate/ContextualPopupDecorator.ContextualPopupDecorator
+ * @omit popupComponent
  * @ui
  * @public
  */
@@ -75,12 +124,31 @@ const DropdownBase = kind({
 
 	propTypes: /** @lends agate/Dropdown.DropdownBase.prototype */ {
 		/**
-		 * The selections for Dropdown
+		 * The "aria-label" for the Dropdown.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		'aria-label': PropTypes.string,
+
+		/**
+		 * Items to be displayed in the `Dropdown` when `open`.
+		 *
+		 * Takes either an array of strings or an array of objects. When strings, the values will be
+		 * used in the generated components as the readable text. When objects, the properties will
+		 * be passed onto an `Item` component; `children` as well as a unique `key` properties are
+		 * required.
 		 *
 		 * @type {String[]|Array.<{key: (Number|String), children: (String|Component)}>}
 		 * @public
 		 */
-		children: PropTypes.array,
+		children: PropTypes.oneOfType([
+			PropTypes.arrayOf(PropTypes.string),
+			PropTypes.arrayOf(PropTypes.shape({
+				children: EnactPropTypes.renderable.isRequired,
+				key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+			}))
+		]),
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -92,22 +160,13 @@ const DropdownBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * This is passed onto the wrapped component to allow
-		 * it to customize the spotlight container for its use case.
+		 * Placement of the Dropdown.
 		 *
-		 * @type {String}
-		 * @private
-		 */
-		'data-spotlight-id': PropTypes.string,
-
-		/**
-		 * The direction where the dropdown list appears.
-		 *
-		 * @type {('left'|'right'|'down'|'up')}
-		 * @default 'down'
+		 * @type {('above'|'below')}
+		 * @default 'below'
 		 * @public
 		 */
-		direction: PropTypes.oneOf(['down', 'left', 'right', 'up']),
+		direction: PropTypes.oneOf(['above', 'below']),
 
 		/**
 		 * Disables Dropdown and becomes non-interactive.
@@ -116,6 +175,14 @@ const DropdownBase = kind({
 		 * @public
 		 */
 		disabled: PropTypes.bool,
+
+		/**
+		 * The `id` of Dropdown referred to when generating id for `'title'`.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		id: PropTypes.string,
 
 		/**
 		 * Called when the Dropdown is closing.
@@ -136,6 +203,10 @@ const DropdownBase = kind({
 		/**
 		 * Called when an item is selected.
 		 *
+		 * The event payload will be an object with the following members:
+		 * * `data` - The value for the option as received in the `children` prop
+		 * * `selected` - Number representing the selected option, 0 indexed
+		 *
 		 * @type {Function}
 		 * @public
 		 */
@@ -145,10 +216,17 @@ const DropdownBase = kind({
 		 * Displays the items.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
 		open: PropTypes.bool,
+
+		/**
+		 * Indicates the locale's text direction is right-to-left.
+		 *
+		 * @type {Boolean}
+		 * @private
+		 */
+		rtl: PropTypes.bool,
 
 		/**
 		 * Index of the selected item.
@@ -167,33 +245,40 @@ const DropdownBase = kind({
 		skin: PropTypes.string,
 
 		/**
-		 * The primary title text of Dropdown.
+		 * Text displayed in the Dropdown when nothing is selected.
 		 *
 		 * The title will be replaced with the selected item, if set.
 		 *
 		 * @type {String}
 		 * @public
 		 */
-		title: PropTypes.string
+		title: PropTypes.string,
+
+		/**
+		 * Width of the Dropdown.
+		 *
+		 * @type {('smallest'|'small'|'medium'|'large'|'x-large'|'huge')}
+		 * @default 'medium'
+		 * @public
+		 */
+		width: PropTypes.oneOf(['smallest', 'small', 'medium', 'large', 'x-large', 'huge'])
 	},
 
 	defaultProps: {
-		direction: 'down',
-		open: false
+		direction: 'below',
+		width: 'medium'
 	},
 
 	handlers: {
 		onSelect: handle(
 			forward('onSelect'),
-			forward('onClose'),
-			handleTransitionHide
+			forward('onClose')
 		),
 		onOpen: handle(
-			forProp('open', false),
+			forward('onClick'),
+			not(forProp('disabled', true)),
+			not(forProp('open', true)),
 			forward('onOpen')
-		),
-		onScrollerClick: handle(
-			(ev) => ev.stopPropagation()
 		)
 	},
 
@@ -204,48 +289,7 @@ const DropdownBase = kind({
 	},
 
 	computed: {
-		adjustedDirection: ({direction, 'data-spotlight-id': containerId}) => {
-			if (typeof window !== 'undefined') {
-				const calcOverflow = (container, client, wrapper) => {
-					const KEEPOUT = ri.scale(24); // keep out distance on the edge of the screen
-					const wrapperTop = (wrapper && wrapper.top) || 0;
-					const wrapperBottom = (wrapper && wrapper.bottom) || window.innerHeight;
-
-					const overflow = {
-						isOverTop: client.top - container.height - KEEPOUT < wrapperTop,
-						isOverBottom: client.bottom + container.height + KEEPOUT > wrapperBottom
-					};
-
-					return overflow;
-				};
-
-				const adjustDirection = (overflow) => {
-					let adjustedDirection = direction;
-					if (overflow.isOverTop && !overflow.isOverBottom && direction === 'up') {
-						adjustedDirection = 'down';
-					} else if (overflow.isOverBottom && !overflow.isOverTop && direction === 'down') {
-						adjustedDirection = 'up';
-					}
-
-					return adjustedDirection;
-				};
-
-				const containerSelector = `[data-spotlight-id='${containerId}']`;
-				const containerNode = document.querySelector(`${containerSelector} .${componentCss.dropdownList}`);
-				const clientNode = document.querySelector(`${containerSelector} .${componentCss.dropdown}`);
-				const wrapperNode = clientNode && clientNode.closest('div[style*=overflow]');
-
-				if (containerNode && clientNode) {
-					const containerNodeRect = containerNode.getBoundingClientRect();
-					const clientNodeRect = clientNode.getBoundingClientRect();
-					const wrapperNodeRect = wrapperNode && wrapperNode.getBoundingClientRect();
-					return adjustDirection(calcOverflow(containerNodeRect, clientNodeRect, wrapperNodeRect));
-				}
-			}
-
-			return direction;
-		},
-		buttonClassName: ({open, styler}) => styler.append({open}),
+		ariaLabelledBy: ({id, title}) => (title ? `${id}_title` : void 0),
 		children: ({children, selected}) => {
 			if (!Array.isArray(children)) return [];
 
@@ -254,6 +298,11 @@ const DropdownBase = kind({
 					role: 'checkbox',
 					'aria-checked': selected === i
 				};
+
+				warning(
+					child != null,
+					`Unsupported null or undefined child provided at index ${i} which will not be visible when rendered.`
+				);
 
 				if (typeof child === 'string') {
 					return {
@@ -269,7 +318,11 @@ const DropdownBase = kind({
 				};
 			});
 		},
-		dropdownListClassName: ({children, css, styler}) => styler.join(css.dropdownList, {dropdownListWithScroller: children.length > 4}),
+		className: ({css, direction, open, width, title, skin, styler}) => styler.append(`${width}Width`, {hasTitle: Boolean(title), open}, skin === 'silicon' ? classnames(css.dropdownButton, {[css.upDropdownButton]: direction === 'above'}) : {}),
+		direction: ({direction}) => `${direction} center`,
+		hasChildren: ({children}) => {
+			return children.length > 0;
+		},
 		title: ({children, selected, title}) => {
 			if (isSelectedValid({children, selected})) {
 				const child = children[selected];
@@ -277,139 +330,56 @@ const DropdownBase = kind({
 			}
 
 			return title;
-		},
-		hasChildren: ({children}) => {
-			return children.length > 0;
 		}
 	},
 
-	render: ({adjustedDirection, buttonClassName, children, css, dropdownListClassName, disabled, hasChildren, onClose, onOpen, onScrollerClick, onSelect, open, selected, skin, title, ...rest}) => {
-		const ariaProps = extractAriaProps(rest);
-		const dropdownButtonClassName = classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'up'});
-		const opened = !disabled && open;
-		const transitionContainerClassName = classnames(css.transitionContainer, {[css.openTransitionContainer]: open, [css.upTransitionContainer]: adjustedDirection === 'up'});
-		const [DropDownButton, dropDownButtonProps, wrapperProps, skinVariants, groupProps, iconComponent] = (skin === 'silicon') ? [
-			Button,
-			{icon: open ? 'arrowlargeup' : 'arrowlargedown', iconPosition: 'after', minWidth: true},
-			{className: dropdownButtonClassName},
-			{'night': false},
-			{childComponent: RadioItem, itemProps: {size: 'small', className: css.dropDownListItem, css}, selectedProp: 'selected'},
-			[]
-		] : [
-			Item,
-			{},
-			{},
-			{},
-			{childComponent: Item},
-			[<Icon slot="slotAfter" key="icon" className={css.icon} size="small">{open ? 'arrowlargeup' : 'arrowlargedown'}</Icon>]
+	render: ({'aria-label': ariaLabel, ariaLabelledBy, children, css, direction, disabled, hasChildren, onClose, onOpen, onSelect, open, selected, skin, title, width, ...rest}) => {
+		delete rest.rtl;
 
-		];
+		const ariaProps = extractAriaProps(rest);
+		const calcAriaProps = ariaLabel != null ? null : {role: 'region', 'aria-labelledby': ariaLabelledBy};
+
+		const popupProps = {'aria-live': null, children, direction, disabled, onSelect, open, selected, skin, skinVariants: skin === 'silicon' ? {'night': false} : {}, width, role: null};
+
+		// `ui/Group`/`ui/Repeater` will throw an error if empty so we disable the Dropdown and
+		// prevent Dropdown to open if there are no children.
+		const openDropdown = hasChildren && !disabled && open;
 
 		return (
-			<div {...rest}>
-				<div {...wrapperProps}>
-					<DropDownButton
-						role="button"
-						className={buttonClassName}
-						css={css}
-						disabled={hasChildren ? disabled : true}
-						onClick={opened ? onClose : onOpen}
-						{...dropDownButtonProps}
-						{...ariaProps}
-					>
-						{iconComponent}
-						{title}
-					</DropDownButton>
-					<Transition
-						className={transitionContainerClassName}
-						visible={opened}
-						direction={oppositeDirection[adjustedDirection]}
-					>
-						<ContainerDiv className={dropdownListClassName} spotlightDisabled={!open} spotlightRestrict="self-only">
-							<Scroller skinVariants={skinVariants} className={css.scroller} onClick={onScrollerClick}>
-								<Group
-									role={null}
-									className={css.group}
-									onSelect={onSelect}
-									selected={selected}
-									{...groupProps}
-								>
-									{children || []}
-								</Group>
-							</Scroller>
-						</ContainerDiv>
-					</Transition>
-				</div>
+			<div {...calcAriaProps} {...rest}>
+				<DropdownButton
+					aria-label={ariaLabel}
+					css={css}
+					direction={direction}
+					disabled={hasChildren ? disabled : true}
+					icon={openDropdown ? 'arrowlargeup' : 'arrowlargedown'}
+					onClick={onOpen}
+					onClose={onClose}
+					offset="none"
+					open={openDropdown}
+					popupComponent={DropdownList}
+					popupProps={popupProps}
+					role="button"
+					skin={skin}
+					spotlightRestrict="self-only"
+					{...ariaProps}
+				>
+					{title}
+				</DropdownButton>
 			</div>
 		);
 	}
 });
 
-const DropDownExtended = hoc((config, Wrapped) => {
-	return class extends React.Component {
-		static displayName = 'DropDownExtended';
-
-		static propTypes = {
-			open: PropTypes.bool
-		};
-
-		constructor (props) {
-			super(props);
-		}
-
-		componentDidMount () {
-			// eslint-disable-next-line react/no-find-dom-node
-			this.node = ReactDOM.findDOMNode(this);
-
-			if (this.props.open) {
-				on('click', this.handleClick);
-				on('keydown', this.handleKeyDown);
-			}
-		}
-
-		componentDidUpdate (prevProps) {
-			const {open} = this.props;
-
-			if (!prevProps.open && open) {
-				on('click', this.handleClick);
-				on('keydown', this.handleKeyDown);
-			} else if (prevProps.open && !open) {
-				off('click', this.handleClick);
-				off('keydown', this.handleKeyDown);
-			}
-		}
-
-		componentWillUnmount () {
-			off('click', this.handleClick);
-			off('keydown', this.handleKeyDown);
-		}
-
-		clickedOutsideDropdown = ({target}) => !this.node.contains(target);
-
-		// If a click happened outside the component area close the dropdown by forwarding the onClick from Toggleable.
-		handleClick = handle(
-			this.clickedOutsideDropdown,
-			forward('onClick')
-		).bindAs(this, 'handleClick');
-
-		handleKeyDown = handle(
-			forKey('cancel'),
-			forward('onClick')
-		).bindAs(this, 'handleKeyDown');
-
-		render () {
-			return (
-				<Wrapped {...this.props} />
-			);
-		}
-	};
-});
-
 /**
- * Applies Agate specific behaviors to [DropdownBase]{@link agate/Dropdown.DropdownBase}.
+ * Applies Agate specific behaviors and functionality to
+ * [DropdownBase]{@link agate/Dropdown.DropdownBase}.
  *
  * @hoc
  * @memberof agate/Dropdown
+ * @mixes ui/Changeable.Changeable
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes spotlight/SpotlightContainerDecorator.SpotlightContainerDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
@@ -418,13 +388,20 @@ const DropdownDecorator = compose(
 		enterTo: 'default-element',
 		preserveId: true
 	}),
+	I18nContextDecorator({
+		rtlProp: 'rtl'
+	}),
 	IdProvider({
 		generateProp: null,
 		prefix: 'd_'
 	}),
-	Toggleable({toggle: null, prop: 'open', activate: 'onOpen', deactivate: 'onClose', toggleProp: 'onClick'}),
 	Changeable({change: 'onSelect', prop: 'selected'}),
-	DropDownExtended,
+	Toggleable({
+		activate: 'onOpen',
+		deactivate: 'onClose',
+		prop: 'open',
+		toggle: null
+	}),
 	Skinnable({prop: 'skin'})
 );
 
