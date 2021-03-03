@@ -173,7 +173,7 @@ const RangePickerBase = kind({
 	},
 
 	defaultProps: {
-		step: 1,
+		step: 1
 	},
 
 	computed: {
