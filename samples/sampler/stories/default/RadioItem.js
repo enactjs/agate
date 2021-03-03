@@ -23,8 +23,8 @@ storiesOf('Agate', module)
 				<RadioItem
 					disabled={boolean('disabled', Config)}
 					icon={select('icon', ['', ...iconNames], Config)}
-					onToggle={action('onToggle')}
 					inline={boolean('inline', Config)}
+					onToggle={action('onToggle')}
 				>
 					{slotBefore}
 					{text('children', Config, 'Hello RadioItem')}
