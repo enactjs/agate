@@ -1,3 +1,5 @@
+import kind from '@enact/core/kind';
+import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, number, select, text} from '@enact/storybook-utils/addons/knobs';
 import PropTypes from 'prop-types';
 import {storiesOf} from '@storybook/react';
@@ -5,55 +7,64 @@ import {storiesOf} from '@storybook/react';
 import Marquee from '@enact/agate/Marquee';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 
-const I18nMarqueeBase = ({rtl}) => {
-	// fn to parse the padding value which is invoked later to keep the knob ordered
-	const spacing = () => {
-		const value = text('marqueeSpacing', Marquee, '50%');
-		if (value && value.indexOf('%') > 0) {
-			return value;
-		}
+Marquee.displayName = 'Marquee';
+const Config = mergeComponentMetadata('Marquee', Marquee);
 
-		return Number.parseInt(value);
-	};
+const I18nMarqueeBase = kind({
+	name: 'I18nMarquee',
 
-	const marqueeText = rtl ? 'قفز الثعلب البني السريع فوق الكلب الكسول. طائر الفاصوليا يطير عند غروب الشمس.' :
-		'The quick brown fox jumped over the lazy dog. The bean bird flies at sundown.';
+	propTypes: {
+		rtl: PropTypes.bool
+	},
 
-	const disabled = boolean('disabled', Marquee);
-
-	return (
-		<section>
+	render: ({rtl, ...rest}) => {
+		const marqueeText = rtl ? 'قفز الثعلب البني السريع فوق الكلب الكسول. طائر الفاصوليا يطير عند غروب الشمس.' : 'The quick brown fox jumped over the lazy dog. The bean bird flies at sundown.';
+		return (
 			<Marquee
-				alignment={select('alignment', [null, 'left', 'right', 'center'], Marquee)}
-				disabled={disabled}
-				forceDirection={select('forceDirection', [null, 'rtl', 'ltr'], Marquee)}
-				marqueeDelay={number('marqueeDelay', Marquee, 1000)}
-				marqueeDisabled={boolean('marqueeDisabled', Marquee)}
-				marqueeOn={select('marqueeOn', ['hover', 'render'], Marquee, 'render')}
-				marqueeOnRenderDelay={1000}
-				marqueeResetDelay={number('marqueeResetDelay', Marquee, 1000)}
-				marqueeSpacing={spacing()}
-				marqueeSpeed={number('marqueeSpeed', Marquee, 60)}
-				style={{width: '600px'}}
+				{...rest}
 			>
 				{marqueeText}
 			</Marquee>
-			{disabled ? <p style={{fontSize: '70%', fontStyle: 'italic'}}><sup>*</sup>Marquee does not visually respond to <code>disabled</code> state.</p> : <p />}
-		</section>
-	);
-};
-
-I18nMarqueeBase.propTypes = {
-	rtl: PropTypes.bool
-};
+		);
+	}
+});
 
 const I18nMarquee = I18nContextDecorator({rtlProp: 'rtl'}, I18nMarqueeBase);
 
 storiesOf('Agate', module)
 	.add(
 		'Marquee',
-		() => (<I18nMarquee />),
+		() => {
+			const spacing = () => {
+				const value = text('marqueeSpacing', Config, '50%');
+				if (value && value.indexOf('%') > 0) {
+					return value;
+				}
+
+				return Number.parseInt(value);
+			};
+
+			const disabled = boolean('disabled', Config);
+			return (
+				<section>
+					<I18nMarquee
+						alignment={select('alignment', [null, 'left', 'right', 'center'], Config)}
+						disabled={boolean('disabled', Config)}
+						forceDirection={select('forceDirection', [null, 'rtl', 'ltr'], Config)}
+						marqueeDelay={number('marqueeDelay', Config, 1000)}
+						marqueeDisabled={boolean('marqueeDisabled', Config)}
+						marqueeOn={select('marqueeOn', ['hover', 'render'], Config, 'render')}
+						marqueeOnRenderDelay={1000}
+						marqueeResetDelay={number('marqueeResetDelay', Config, 1000)}
+						marqueeSpacing={spacing(text('marqueeSpacing', Config, '50%'))}
+						marqueeSpeed={number('marqueeSpeed', Config, 60)}
+						style={{width: '600px'}}
+					/>
+					{disabled ? <p style={{fontSize: '70%', fontStyle: 'italic'}}><sup>*</sup>Marquee does not visually respond to <code>disabled</code> state.</p> : <p />}
+				</section>
+			);
+		},
 		{
-			text: 'The basic Marquee'
+			text: 'Basic usage of Marquee'
 		}
 	);
