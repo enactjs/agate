@@ -1,5 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, select, text, number} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import {LabeledIconBase as UiLabeledIconBase, LabeledIcon as UiLabeledIcon} from '@enact/ui/LabeledIcon';
 import {storiesOf} from '@storybook/react';
 
@@ -23,9 +23,9 @@ storiesOf('Agate', module)
 				labelPosition={select('labelPosition', ['above', 'after', 'before', 'below', 'left', 'right'], Config)}
 				selected={boolean('selected', Config)}
 				size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}
-				spriteCount={number('spriteCount', Config, {min: 1}, 1)}
+				tooltipText={text('tooltipText', Config, 'This is a Labeled Icon Button')}
 			>
-				{text('children', Config, 'Hello LabeledIconButton')}
+				{text('children', Config, 'Hello LabeledIconButton !')}
 			</LabeledIconButton>
 		),
 		{
