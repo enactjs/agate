@@ -12,6 +12,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/IncrementSlider` prop `activateOnFocus` to support slider activation when slider gets focused
 - `agate/IncrementSlider` prop `tooltip` to enable the built-in tooltip
 - `agate/Item` to have a `selected` publicClassname
+- `agate/RadioItem` prop `slotBefore`
 - `agate/ProgressBar` prop `tooltip`  to enable the built-in tooltip
 - `agate/ProgressBarTooltip` component
 - `agate/Slider` prop `tooltip` to enable the built-in tooltip
@@ -24,6 +25,8 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
+- `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
+- `agate/LabeledIconButton` styling to preserve behavior and look when props are missing
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
 - `agate/SliderButton` styling to visually show the focused state
 - `agate/TooltipDecorator` to position correctly on rtl locale
