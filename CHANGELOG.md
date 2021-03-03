@@ -6,18 +6,27 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
+- `agate/ContextualPopup` prop `css` to support customizations
+- `agate/ContextualPopupDecorator` prop `css` to support customizations
+- `agate/Dropdown` prop `width` to support multiple widths
+- `agate/Item` to have a `selected` publicClassname
 - `agate/Heading` prop `showBackButton`
+- `agate/RadioItem` prop `slotBefore`
 - `agate/Spinner` prop `children` to support the display of text below the icon
 
 ### Changed
 
+- `agate/Dropdown` to use `agate/ContextualPopup`
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
 
 ### Fixed
 
 - `agate/Heading` style to match latest design for Silicon skin
+- `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
+- `agate/LabeledIconButton` styling to preserve behavior and look when props are missing
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
 - `agate/SliderButton` styling to visually show the focused state
+- `agate/TooltipDecorator` to position correctly on rtl locale
 
 ## [2.0.0-alpha.1] - 2021-02-25
 
