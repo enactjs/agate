@@ -11,7 +11,8 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Dropdown` prop `width` to support multiple widths
 - `agate/Item` to have a `selected` publicClassname
 - `agate/Spinner` prop `children` to support the display of text below the icon
-- `agate/TooltipDecorator` prop `tooltipMarquee` to support marquee for long tooltip, prop `tooltipWidth` to set a width for tooltip text, and prop `marquee` to allow the tooltip to use Marquee
+- `agate/Tooltip` prop `marquee` to allow to marquee
+- `agate/TooltipDecorator` prop `tooltipMarquee` to support marquee for long tooltip and prop `tooltipWidth` to set a width for tooltip text
 
 ### Changed
 
@@ -57,7 +58,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Changed
 
 - `agate/Heading` to support marquee
-- `agate/TooltipDecorator` prop `tooltipMarquee` to support marquee for long tooltip and prop `tooltipWidth` to set a width for tooltip text
 
 ### Fixed
 
