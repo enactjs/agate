@@ -13,6 +13,7 @@ import classnames from 'classnames';
 import {adaptEvent, forward, handle} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
+import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import IdProvider from '@enact/ui/internal/IdProvider';
 import Touchable from '@enact/ui/Touchable';
@@ -25,8 +26,14 @@ import $L from '../$L';
 import Skinnable from '../../Skinnable';
 
 import css from './Picker.module.less';
+import Spotlight from "../../../enact/packages/spotlight";
 
-const PickerRoot = Touchable('div');
+const PickerRoot = Touchable(Spottable('div'));
+
+// Set-up event forwarding
+const forwardKeyDown = forward('onKeyDown'),
+	forwardKeyUp = forward('onKeyUp'),
+	forwardWheel = forward('onWheel');
 
 /**
  * The base component for {@link agate/internal/Picker.Picker}.
@@ -40,39 +47,6 @@ const PickerBase = class extends Component {
 	static displayName = 'Picker';
 
 	static propTypes = /** @lends agate/internal/Picker.Picker.prototype */ {
-		/**
-		 * Index for internal ViewManager
-		 *
-		 * @type {Number}
-		 * @required
-		 * @public
-		 */
-		index: PropTypes.number.isRequired,
-
-		/**
-		 * The maximum value selectable by the picker (inclusive).
-		 *
-		 * The range between `min` and `max` should be evenly divisible by
-		 * [step]{@link agate/internal/Picker.Picker.step}.
-		 *
-		 * @type {Number}
-		 * @required
-		 * @public
-		 */
-		max: PropTypes.number.isRequired,
-
-		/**
-		 * The minimum value selectable by the picker (inclusive).
-		 *
-		 * The range between `min` and `max` should be evenly divisible by
-		 * [step]{@link agate/internal/Picker.Picker.step}.
-		 *
-		 * @type {Number}
-		 * @required
-		 * @public
-		 */
-		min: PropTypes.number.isRequired,
-
 		/**
 		 * Accessibility hint
 		 *
@@ -202,17 +176,6 @@ const PickerBase = class extends Component {
 		 */
 		spotlightDisabled: PropTypes.bool,
 
-		/**
-		 * Allow the picker to only increment or decrement by a given value.
-		 *
-		 * A step of `2` would cause a picker to increment from 10 to 12 to 14, etc. It must evenly
-		 * divide into the range designated by `min` and `max`.
-		 *
-		 * @type {Number}
-		 * @default 1
-		 * @public
-		 */
-		step: PropTypes.number,
 
 		/**
 		 * The type of picker. It determines the aria-label for the next and previous buttons.
@@ -272,7 +235,6 @@ const PickerBase = class extends Component {
 	static defaultProps = {
 		accessibilityHint: '',
 		orientation: 'vertical',
-		step: 1,
 		type: 'string',
 		value: 0
 	};
@@ -287,10 +249,10 @@ const PickerBase = class extends Component {
 		const {value} = this.props;
 		let selectedValue;
 		if (value || value === 0) {
-			selectedValue = this.props.children[value].props.children;
-			console.log(selectedValue);
-		}  else {
-			selectedValue = this.props.children[0].props.children;
+			selectedValue = this.props.children.findIndex((element) => element.props.children === value);
+		}
+		if (selectedValue < 0 || !value) {
+			selectedValue = 0
 		}
 
 		this.state = {
@@ -326,6 +288,7 @@ const PickerBase = class extends Component {
 			this.onMove(evt.pageY);
 		});
 		rootRef.addEventListener('mouseup', this.onFinish);
+		rootRef.addEventListener('wheel', this.handleWheel);
 	}
 
 	componentWillUnmount () {
@@ -498,6 +461,92 @@ const PickerBase = class extends Component {
 		return valueText;
 	};
 
+	handleKeyDown = (ev) => {
+		const {
+			joined,
+			onSpotlightDown,
+			onSpotlightLeft,
+			onSpotlightRight,
+			onSpotlightUp,
+			orientation
+		} = this.props;
+		const {keyCode} = ev;
+		forwardKeyDown(ev, this.props);
+
+		if (joined && !this.props.disabled) {
+			const direction = getDirection(keyCode);
+
+			const directions = {
+				up: this.setIncPickerButtonPressed,
+				down: this.setDecPickerButtonPressed
+			};
+
+			const isVertical = orientation === 'vertical' && (isUp(keyCode) || isDown(keyCode));
+			const isHorizontal = orientation === 'horizontal' && isEnter(keyCode);
+
+			if (isVertical) {
+				directions[direction]();
+			} else if (isHorizontal) {
+				this.setIncPickerButtonPressed();
+			} else if (orientation === 'horizontal' && isDown(keyCode) && onSpotlightDown) {
+				onSpotlightDown(ev);
+			} else if (orientation === 'horizontal' && isUp(keyCode) && onSpotlightUp) {
+				onSpotlightUp(ev);
+			} else if (orientation === 'vertical' && isLeft(keyCode) && onSpotlightLeft) {
+				onSpotlightLeft(ev);
+			} else if (orientation === 'vertical' && isRight(keyCode) && onSpotlightRight) {
+				onSpotlightRight(ev);
+			}
+		}
+	};
+
+	handleKeyUp = (ev) => {
+		const {
+			joined,
+			orientation
+		} = this.props;
+		const {keyCode} = ev;
+		forwardKeyUp(ev, this.props);
+
+		if (joined && !this.props.disabled) {
+			const isVertical = orientation === 'vertical' && (isUp(keyCode) || isDown(keyCode));
+			const isHorizontal = orientation === 'horizontal' && (isEnter(keyCode));
+
+			if (isVertical || isHorizontal) {
+				this.pickerButtonPressed = 0;
+			}
+		}
+	};
+
+	handleWheel = (ev) => {
+		const {step} = this.props;
+		forwardWheel(ev, this.props);
+
+		const isContainerSpotted = this.containerRef === Spotlight.getCurrent();
+
+		if (isContainerSpotted) {
+			const dir = -Math.sign(ev.deltaY);
+
+			// We'll sometimes get a 0/-0 wheel event we need to ignore or the wheel event has reached
+			// the bounds of the picker
+			if (dir && !this.hasReachedBound(step * dir)) {
+				// fire the onChange event
+				if (dir > 0) {
+					this.throttleWheelInc.throttle();
+				} else if (dir < 0) {
+					this.throttleWheelDec.throttle();
+				}
+				// simulate mouse down
+				this.setPressedState(dir);
+				// set a timer to simulate the mouse up
+				this.emulateMouseUp.start();
+				// prevent the default scroll behavior to avoid bounce back
+				ev.preventDefault();
+				ev.stopPropagation();
+			}
+		}
+	};
+
 	valueId =  ({id}) => `${id}_value`;
 
 	initRef (prop) {
@@ -570,7 +619,12 @@ const PickerBase = class extends Component {
 					className={classnames(css.itemIncrement, css.item, className)}
 					disabled={disabled}
 				/>
-				<PickerRoot className={css.root} ref={this.initContentRef} >
+				<PickerRoot
+					className={css.root}
+					onKeyDown={this.handleKeyDown}
+					onKeyUp={this.handleKeyUp}
+					ref={this.initContentRef}
+				>
 					{items}
 				</PickerRoot>
 			</div>

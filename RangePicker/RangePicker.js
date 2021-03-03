@@ -172,6 +172,10 @@ const RangePickerBase = kind({
 		wrap: PropTypes.bool
 	},
 
+	defaultProps: {
+		step: 1,
+	},
+
 	computed: {
 		disabled: ({disabled, max, min}) => min >= max ? true : disabled,
 		value: ({min, max, value}) => {
