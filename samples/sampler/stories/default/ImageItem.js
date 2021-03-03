@@ -22,13 +22,13 @@ storiesOf('Agate', module)
 		() => (
 			<div style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}>
 				<ImageItem
+					captionPosition={select('captionPosition', ['below', 'overlay'], Config)}
+					disabled={boolean('disabled', Config)}
 					onError={action('onError')}
 					onLoad={action('onLoad')}
-					orientation={select('orientation', ['horizontal', 'vertical'], Config, 'horizontal')}
-					captionPosition={select('captionPosition', ['below', 'overlay'], Config)}
-					src={object('src', Config, src)}
+					orientation={select('orientation', ['horizontal', 'vertical'], Config)}
 					sizing={select('sizing', ['fill', 'fit', 'none'], Config, 'fill')}
-					disabled={boolean('disabled', Config)}
+					src={object('src', Config, src)}
 				>
 					{text('children', Config, 'caption')}
 				</ImageItem>

@@ -93,20 +93,35 @@ const ImageItemBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
+		 * Used to set the `background-size` of the image.
+		 *
+		 * @type {String}
+		 * @default 'fill'
+		 * @public
+		 */
+		sizing: PropTypes.oneOf(['fit', 'fill', 'none']),
+
+		/**
+		 * The current skin.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		skin: PropTypes.string,
+
+		/**
 		 * String value or Object of values used to determine which image will appear on a specific
 		 * screenSize.
 		 *
 		 * @type {String|Object}
 		 * @public
 		 */
-		src: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-		sizing: PropTypes.oneOf(['fit', 'fill', 'none']),
-		skin: PropTypes.string
+		src: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
 	},
 
 	defaultProps: {
-		orientation: 'vertical',
 		captionPosition: 'below',
+		orientation: 'vertical',
 		sizing: 'fill'
 	},
 
@@ -133,7 +148,7 @@ const ImageItemBase = kind({
 				aria-disabled={disabled}
 				css={css}
 				disabled={disabled}
-				imageComponent={<ImageBase/>}
+				imageComponent={<ImageBase />}
 				orientation={orientation}
 				src={src}
 			>
