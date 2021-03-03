@@ -139,7 +139,7 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * | `'right middle'` | Right of the component, contents middle aligned |
 			 * | `'right top'` | Right of the component, contents at the top |
 			 *
-			 * `TooltipDecorator attempts to choose the best direction to meet layout and language
+			 * `TooltipDecorator` attempts to choose the best direction to meet layout and language
 			 * requirements. Left and right directions will reverse for RTL languages. Additionally,
 			 * the tooltip will reverse direction if it will prevent overflowing off the viewport
 			 *

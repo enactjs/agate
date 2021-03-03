@@ -68,7 +68,7 @@ const TooltipBase = kind({
 		 * A value representing the amount to offset the label portion of the tooltip.
 		 *
 		 * In a "center" aligned tooltip, the label may be desirable to offset to one side or the
-		 * other. This prop accepts a value betwen -0.5 and 0.5 (representing 50% to the left or
+		 * other. This prop accepts a value between -0.5 and 0.5 (representing 50% to the left or
 		 * right). This defaults to 0 offset (centered). It also automatically caps the value so it
 		 * never positions the tooltip label past the anchored arrow. If the tooltip label or arrow
 		 * has non-rectangular geometry (rounded corners, a wide tail, etc), you'll need to manually
@@ -119,21 +119,27 @@ const TooltipBase = kind({
 		/**
 		 * Called when the tooltip mounts/unmounts, giving a reference to the DOM.
 		 *
-		 * @type {Function}
+		 * @type {Object|Function}
 		 * @public
 		 */
 		tooltipRef: EnactPropTypes.ref,
 
 		/**
-		 * The width of tooltip content in pixels (px).
+		 * The width of tooltip content.
 		 *
-		 * If the content goes over the given width, then it will automatically wrap. When `null`,
-		 * content does not wrap.
+		 * Value expects a number of pixels, which will be automatically scaled to the appropriate
+		 * size given the current screen resolution, or a string value containing a measurement and
+		 * a valid CSS unit included.
+		 * If the content goes over the given width, it will automatically wrap, or marquee if
+		 * `marquee` is enabled.
 		 *
-		 * @type {Number|null}
+		 * When `null`, content will auto-size and not wrap. If `marquee` is also enabled,
+		 * marqueeing will begin when the width is greater than the default (theme specified) width.
+		 *
+		 * @type {Number|String}
 		 * @public
 		 */
-		width: PropTypes.number
+		width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 	},
 
 	defaultProps: {
@@ -164,7 +170,6 @@ const TooltipBase = kind({
 	},
 
 	render: ({arrowAnchor, children, tooltipRef, width, labelOffset, marquee, ...rest}) => {
-		delete rest.arrowAnchor;
 		delete rest.labelOffset;
 		delete rest.direction;
 		delete rest.position;
