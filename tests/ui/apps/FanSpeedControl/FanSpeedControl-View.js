@@ -1,7 +1,6 @@
 import Heading from '../../../../Heading';
 import FanSpeedControl from '../../../../FanSpeedControl';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import React from 'react';
 import spotlight from '@enact/spotlight';
 
 import Section from '../../components/Section';

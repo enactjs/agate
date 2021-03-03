@@ -1,7 +1,6 @@
 import kind from '@enact/core/kind';
 import ForwardRef from '@enact/ui/ForwardRef';
 import PropTypes from 'prop-types';
-import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Button from '../Button';

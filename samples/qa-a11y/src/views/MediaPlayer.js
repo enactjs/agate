@@ -1,6 +1,5 @@
 import Heading from '@enact/agate/Heading';
 import MediaPlayer from '@enact/agate/MediaPlayer';
-import React from 'react';
 
 const audioFiles = [
 	'https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3',

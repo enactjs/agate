@@ -2,7 +2,6 @@ import ArcSlider from '../../../../ArcSlider';
 import Heading from '../../../../Heading';
 import Scroller from '../../../../Scroller';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import React from 'react';
 import spotlight from '@enact/spotlight';
 import {scaleToRem} from '@enact/ui/resolution';
 

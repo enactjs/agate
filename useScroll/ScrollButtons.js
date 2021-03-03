@@ -3,7 +3,7 @@ import {getTargetByDirectionFromElement} from '@enact/spotlight/src/target';
 import {is} from '@enact/core/keymap';
 import Spotlight, {getDirection} from '@enact/spotlight';
 import utilEvent from '@enact/ui/useScroll/utilEvent';
-import React, {useState, useEffect} from 'react';
+import {createRef, useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 
 const
@@ -40,8 +40,8 @@ const useScrollButtons = (props) => {
 	const [prevButtonDisabled, setPrevButtonDisabled] = useState(true);
 	const [nextButtonDisabled, setNextButtonDisabled] = useState(true);
 
-	const nextButtonRef = React.createRef();
-	const prevButtonRef = React.createRef();
+	const nextButtonRef = createRef();
+	const prevButtonRef = createRef();
 
 	useEffect(() => {
 		utilEvent('keydown').addEventListener(nextButtonRef, onKeyDownNext);

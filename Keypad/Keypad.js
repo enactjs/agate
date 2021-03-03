@@ -15,16 +15,22 @@
 import {adaptEvent, forward, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
+import {SpotlightContainerDecorator} from '@enact/spotlight/SpotlightContainerDecorator';
 import Layout, {Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
+import {Component} from 'react';
 
 import $L from '../internal/$L';
 import Button from '../Button';
 import Skinnable from '../Skinnable';
 
 import css from './Keypad.module.less';
+
+const SpotlightContainerLayout = SpotlightContainerDecorator(
+	{enterTo: 'default-element'},
+	Layout
+);
 
 const KEY_LIST = [
 	{text: '1'},
@@ -110,6 +116,7 @@ const Key = kind({
 					{...rest}
 					css={css}
 					icon={children}
+					marqueeDisabled
 					minWidth={false}
 					role={null}
 					size="large"
@@ -151,7 +158,15 @@ const KeypadBase = kind({
 		 * @param {Object} event
 		 * @public
 		 */
-		onKeyButtonClick: PropTypes.func
+		onKeyButtonClick: PropTypes.func,
+
+		/**
+		 * Disables 5-way spotlight from navigating into the component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		spotlightDisabled: PropTypes.bool
 	},
 
 	styles: {
@@ -159,9 +174,9 @@ const KeypadBase = kind({
 		className: 'keypad'
 	},
 
-	render: ({disabled, onKeyButtonClick, ...rest}) => {
+	render: ({disabled, onKeyButtonClick, spotlightDisabled, ...rest}) => {
 		return (
-			<Layout {...rest} align="center end" className={css.keypad} inline wrap>
+			<SpotlightContainerLayout {...rest} align="center end" className={css.keypad} inline spotlightDisabled={spotlightDisabled} wrap>
 				{KEY_LIST.map((keyText, rowIndex) => {
 					const {icon, text} = keyText;
 					const isIcon = icon === 'arrowuturn' || icon === 'phone';
@@ -188,7 +203,7 @@ const KeypadBase = kind({
 						</Cell>
 					);
 				})}
-			</Layout>
+			</SpotlightContainerLayout>
 		);
 	}
 });
@@ -202,7 +217,7 @@ const KeypadBase = kind({
  * @private
  */
 const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'KeypadBehaviorDecorator';
 
 		static propTypes = /** @lends agate/Keypad.KeypadBehaviorDecorator.prototype */ {

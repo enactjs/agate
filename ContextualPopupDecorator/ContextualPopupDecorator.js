@@ -19,12 +19,12 @@ import FloatingLayer from '@enact/ui/FloatingLayer';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
+import {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 import {ContextualPopup} from './ContextualPopup';
 
-import css from './ContextualPopupDecorator.module.less';
+import componentCss from './ContextualPopupDecorator.module.less';
 
 /**
  * Default config for {@link agate/ContextualPopupDecorator.ContextualPopupDecorator}
@@ -72,7 +72,7 @@ const ContextualPopupContainer = SpotlightContainerDecorator(
 const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {noArrow, noSkin, openProp} = config;
 
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'ContextualPopupDecorator';
 
 		static propTypes = /** @lends agate/ContextualPopupDecorator.ContextualPopupDecorator.prototype */ {
@@ -85,6 +85,15 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * @public
 			 */
 			popupComponent: EnactPropTypes.component.isRequired,
+
+			/**
+			 * Customizes the component by mapping the supplied collection of CSS class names to the
+			 * corresponding internal elements and states of this component.
+			 *
+			 * @type {Object}
+			 * @public
+			 */
+			css: PropTypes.object,
 
 			/**
 			 * Direction of popup with respect to the wrapped component.
@@ -152,6 +161,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * This is commonly used to set width and height of the popup.
 			 *
 			 * @type {String}
+			 * @deprecated Will be removed in 2.0.0. Use `publicClassNames` instead.
 			 * @public
 			 */
 			popupClassName: PropTypes.string,
@@ -674,7 +684,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			if (openProp) rest[openProp] = open;
 
 			return (
-				<div className={css.contextualPopupDecorator}>
+				<div className={componentCss.contextualPopupDecorator}>
 					<FloatingLayer
 						noAutoDismiss={noAutoDismiss}
 						onClose={this.handleClose}
@@ -686,6 +696,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 						<ContextualPopupContainer
 							{...ariaProps}
 							className={popupClassName}
+							css={rest.css}
 							onCloseButtonClick={onClose}
 							onKeyDown={this.handleContainerKeyDown}
 							direction={this.state.direction}

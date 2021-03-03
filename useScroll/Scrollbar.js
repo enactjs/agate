@@ -1,6 +1,6 @@
 import {useScrollbar as useScrollbarBase} from '@enact/ui/useScroll/Scrollbar';
 import PropTypes from 'prop-types';
-import React, {memo, useEffect} from 'react';
+import {memo, useEffect} from 'react';
 
 import ScrollButton from './ScrollButton';
 import useScrollButtons from './ScrollButtons';

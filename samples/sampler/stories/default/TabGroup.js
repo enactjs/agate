@@ -1,5 +1,4 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import React from 'react';
 import {select} from '@enact/storybook-utils/addons/knobs';
 import {storiesOf} from '@storybook/react';
 
