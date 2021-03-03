@@ -16,6 +16,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ProgressBar` prop `tooltip`  to enable the built-in tooltip
 - `agate/ProgressBarTooltip` component
 - `agate/Slider` prop `tooltip` to enable the built-in tooltip
+- `agate/SliderTooltip` component
 - `agate/Spinner` prop `children` to support the display of text below the icon
 
 ### Changed

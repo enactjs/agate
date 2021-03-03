@@ -7,6 +7,7 @@
  * @module agate/ProgressBar
  * @exports ProgressBar
  * @exports ProgressBarBase
+ * @exports ProgressBarDecorator
  * @exports ProgressBarTooltip
  */
 
@@ -20,8 +21,9 @@ import compose from 'ramda/src/compose';
 
 import Skinnable from '../Skinnable';
 
-import componentCss from './ProgressBar.module.less';
 import {ProgressBarTooltip} from './ProgressBarTooltip';
+
+import componentCss from './ProgressBar.module.less';
 
 /**
  * Renders an Agate-styled progress bar.

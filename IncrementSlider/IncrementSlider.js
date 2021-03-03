@@ -490,7 +490,8 @@ const IncrementSliderBase = kind({
 		tooltip: ({tooltip}) => tooltip === true ? ProgressBarTooltip : tooltip
 	},
 
-	render: ({activateOnFocus,
+	render: ({
+		activateOnFocus,
 		active,
 		'aria-hidden': ariaHidden,
 		backgroundProgress,
