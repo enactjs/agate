@@ -9,44 +9,24 @@
  * @private
  */
 
-import {adaptEvent, forEventProp, forward, handle, oneOf, stop, stopImmediate} from '@enact/core/handle';
+import classnames from 'classnames';
+import {adaptEvent, forward, handle} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
-import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import IdProvider from '@enact/ui/internal/IdProvider';
 import Touchable from '@enact/ui/Touchable';
-import {SlideLeftArranger, SlideTopArranger, ViewManager} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
-import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
 import {Children, Component} from 'react';
+import ReactDOM from 'react-dom';
 
 import $L from '../$L';
-import {PickerItem} from './Picker';
 import Skinnable from '../../Skinnable';
 
 import css from './Picker.module.less';
-import platform from '../../../enact/packages/core/platform';
-import {cap, Job, mergeClassNameMaps} from '../../../enact/packages/core/util';
-import Spotlight, {getDirection} from '../../../enact/packages/spotlight';
-import Layout, {Cell} from '../../../enact/packages/ui/Layout';
-import classnames from 'classnames';
-
-import ReactDOM from 'react-dom';
 
 const PickerRoot = Touchable('div');
-const PickerButtonItem = Spottable('div');
-
-const wrapRange = (min, max, value) => {
-	if (value > max) {
-		return min + (value - max - 1);
-	} else if (value < min) {
-		return max - (min - value - 1);
-	} else {
-		return value;
-	}
-};
 
 /**
  * The base component for {@link agate/internal/Picker.Picker}.
@@ -215,22 +195,6 @@ const PickerBase = class extends Component {
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
-		 * When it's `true` it changes the direction of the transition animation.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		reverseTransition: PropTypes.bool,
-
-		/**
-		 * The current skin for this component.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		skin: PropTypes.string,
-
-		/**
 		 * When `true`, the component cannot be navigated using spotlight.
 		 *
 		 * @type {Boolean}
@@ -320,21 +284,18 @@ const PickerBase = class extends Component {
 		this.initRootRef = this.initRef('rootRef');
 		this.initIndicatorRef = this.initRef('indicatorRef');
 
-		let selectedValueState;
-		const {value, defaultSelectedValue} = this.props;
-
-		if (value !== undefined) {
-			const children = Children.toArray(this.props.children);
-			selectedValueState = children[value];
-		} else if (defaultSelectedValue !== undefined) {
-			selectedValueState = defaultSelectedValue;
-		} else {
-			const children = Children.toArray(this.props.children);
-			selectedValueState = children && children[0] && children[0].value;
+		const {value} = this.props;
+		let selectedValue;
+		if (value || value === 0) {
+			selectedValue = this.props.children[value].props.children;
+			console.log(selectedValue);
+		}  else {
+			selectedValue = this.props.children[0].props.children;
 		}
+
 		this.state = {
 			itemHeight: 0,
-			selectedValue: selectedValueState,
+			selectedValue: selectedValue,
 			scrollY: -1,
 			lastY: 0,
 			startY: 0,
@@ -342,149 +303,134 @@ const PickerBase = class extends Component {
 		};
 	}
 
-	scrollHanders = (() => {
-
-		const setTransform = (nodeStyle, value) => {
-			nodeStyle.transform = value;
-			nodeStyle.webkitTransform = value;
-		};
-
-		const scrollTo = (y) => {
-			if (this.state.scrollY !== y) {
-				this.setState(() => {
-					return ({scrollY: y});
-				}, () => {
-					setTransform(this.contentRef.style, `translate(0,${-y}px)`);
-					this.scrollingComplete();
-				});
-			}
-		};
-
-		const onFinish = () => {
-			this.setState(() => {
-				return ({isMoving: false});
-			}, () => {
-				let targetY = this.state.scrollY;
-				const height = ((this.props.children).length - 1) * this.state.itemHeight;
-				if (targetY % this.state.itemHeight !== 0) {
-					targetY = Math.round(targetY / this.state.itemHeight) * this.state.itemHeight;
-				}
-
-				if (targetY < 0) {
-					targetY = 0;
-				} else if (targetY > height) {
-					targetY = height;
-				}
-
-				scrollTo(targetY);
-			});
-		};
-
-		const onStart = (y) => {
-			if (this.props.disabled) {
-				return;
-			}
-
-			this.setState({
-				isMoving: true,
-				startY: y,
-				lastY: this.state.scrollY
-			});
-		};
-
-		const onMove = (y) => {
-			if (this.props.disabled || !this.state.isMoving) {
-				return;
-			}
-
-			this.setState(() => {
-				return ({scrollY: this.state.lastY - y + this.state.startY});
-			}, () => {
-				setTransform(this.contentRef.style, `translate3d(0,${-this.state.scrollY}px,0)`);
-			});
-		};
-
-		return {
-			touchstart: (evt) => onStart(evt.touches[0].pageY),
-			mousedown: (evt) => onStart(evt.pageY),
-			touchmove: (evt) => {
-				evt.preventDefault();
-				onMove(evt.touches[0].pageY);
-			},
-			mousemove: (evt) => {
-				evt.preventDefault();
-				onMove(evt.pageY);
-			},
-			touchend: () => onFinish(),
-			touchcancel: () => onFinish(),
-			mouseup: () => onFinish(),
-			getValue: () => {
-				return this.state.scrollY;
-			},
-			scrollTo
-		};
-	})();
-
 	componentDidMount () {
 		// this.contentRef.addEventListener('wheel', this.handleWheel);
-		const {contentRef, rootRef, indicatorRef} = this;
-		const rootHeight =  rootRef.getBoundingClientRect().height;
-		const itemHeight = indicatorRef.getBoundingClientRect().height;
-		this.setState({itemHeight});
-		let num = Math.floor(rootHeight / itemHeight);
-		if (num % 2 === 0) {
-			num--;
-		}
-		num--;
-		num /= 2;
-
-		contentRef.style.padding = `${itemHeight * num}px 0`;
-		indicatorRef.style.top = `${itemHeight * num}px`;
-
-		this.select(this.state.selectedValue, itemHeight);
-
-		Object.keys(this.scrollHanders).forEach(key => {
-			if (key.indexOf('touch') === 0 || key.indexOf('mouse') === 0) {
-				(rootRef).addEventListener(key, this.scrollHanders[key] );
-			}
+		const {rootRef, indicatorRef} = this;
+		// eslint-disable-next-line react/no-did-mount-set-state
+		this.setState(() => {
+			return ({itemHeight: indicatorRef.getBoundingClientRect().height});
+		}, () => {
+			this.select(this.state.selectedValue);
 		});
+
+		rootRef.addEventListener('touchstart', (evt) => this.onStart(evt.touches[0].pageY));
+		rootRef.addEventListener('touchmove', (evt) => {
+			evt.preventDefault();
+			this.onMove(evt.touches[0].pageY);
+		});
+		rootRef.addEventListener('touchend', this.onFinish);
+		rootRef.addEventListener('touchcancel', this.onFinish);
+		rootRef.addEventListener('mousedown', (evt) => this.onStart(evt.pageY));
+		rootRef.addEventListener('mousemove', (evt) => {
+			evt.preventDefault();
+			this.onMove(evt.pageY);
+		});
+		rootRef.addEventListener('mouseup', this.onFinish);
 	}
 
-	// componentWillUnmount () {
-	// 	this.contentRef.removeEventListener('wheel', this.handleWheel);
-	// }
+	componentWillUnmount () {
+		const {rootRef} = this;
 
-	scrollTo = (top) => {
-		this.scrollHanders.scrollTo(top);
+		rootRef.removeEventListener('touchstart', (evt) => this.onStart(evt.touches[0].pageY));
+		rootRef.removeEventListener('touchmove', (evt) => {
+			evt.preventDefault();
+			this.onMove(evt.touches[0].pageY);
+		});
+		rootRef.removeEventListener('touchend', this.onFinish);
+		rootRef.removeEventListener('touchcancel', this.onFinish);
+		rootRef.removeEventListener('mousedown', (evt) => this.onStart(evt.pageY));
+		rootRef.removeEventListener('mousemove', (evt) => {
+			evt.preventDefault();
+			this.onMove(evt.pageY);
+		});
+		rootRef.removeEventListener('mouseup', this.onFinish);
+	}
+
+	setTransform = (nodeStyle, value) => {
+		nodeStyle.transform = value;
+		nodeStyle.webkitTransform = value;
 	};
 
-	select = (value, itemHeight) => {
-		if(!itemHeight) return;
+	scrollTo = (y) => {
+		if (this.state.scrollY !== y) {
+			this.setState(() => {
+				return ({scrollY: y});
+			}, () => {
+				this.setTransform(this.contentRef.style, `translate(0,${-y}px)`);
+				this.scrollingComplete();
+			});
+		}
+	};
 
-		const children = Children.toArray(this.props.children);
+	onStart = (y) => {
+		if (this.props.disabled) {
+			return;
+		}
+		this.setState(prevState => ({
+			isMoving: true,
+			startY: y,
+			lastY: prevState.scrollY}));
+	};
+
+	onMove = (top) => {
+		if (this.props.disabled || !this.state.isMoving) {
+			return;
+		}
+
+		this.setState(prevState => {
+			return ({scrollY: prevState.lastY - top + prevState.startY});
+		}, () => {
+			this.setTransform(this.contentRef.style, `translate3d(0,${-this.state.scrollY}px,0)`);
+		});
+	};
+
+	onFinish = () => {
+		this.setState(() => {
+			return ({isMoving: false});
+		}, () => {
+			let targetY = this.state.scrollY;
+			const height = ((this.props.children).length - 1) * this.state.itemHeight;
+			if (targetY % this.state.itemHeight !== 0) {
+				targetY = Math.round(targetY / this.state.itemHeight) * this.state.itemHeight;
+			}
+
+			if (targetY < 0) {
+				targetY = 0;
+			} else if (targetY > height) {
+				targetY = height;
+			}
+
+			this.scrollTo(targetY);
+		});
+	};
+
+	select = (value) => {
+		if (!this.state.itemHeight) return;
+
+		const {children} = this.props;
 		for (let i = 0, len = children.length; i < len; i++) {
-			if (children[i] === value) {
-				this.scrollTo(i * itemHeight);
+			if (children[i].props.children === value) {
+				this.scrollTo(i * this.state.itemHeight);
 				return;
 			}
 		}
-		this.scrollTo(0 * itemHeight);
+		this.scrollTo(0);
 	};
 
 	scrollingComplete = () => {
-		const top = this.scrollHanders.getValue();
+		const top = this.state.scrollY;
 		if (top >= 0) {
-			const children = Children.toArray(this.props.children);
-			const index = this.computeChildIndex(top, this.state.itemHeight, children.length);
-			const child = children[index];
+			const {children} = this.props;
+			const index = this.computeChildIndex(top, children.length);
+			const child = children[index].props.children;
 			if (child || child === 0) {
 				this.fireValueChange(child, index);
 			}
 		}
 	};
 
-	computeChildIndex (top, itemHeight, childrenLength) {
-		const index = Math.round(top / itemHeight);
+	computeChildIndex (top, childrenLength) {
+		const index = Math.round(top / this.state.itemHeight);
 		return Math.min(index, childrenLength - 1);
 	}
 
@@ -497,12 +443,6 @@ const PickerBase = class extends Component {
 			onChange({value: selectedValueIndex});
 		}
 	};
-
-	initRef (prop) {
-		return (ref) => {
-			this[prop] = ref && ReactDOM.findDOMNode(ref);
-		};
-	}
 
 	currentValueText = ({accessibilityHint, 'aria-valuetext': ariaValueText, children, value}) => {
 		if (ariaValueText != null) {
@@ -560,35 +500,27 @@ const PickerBase = class extends Component {
 
 	valueId =  ({id}) => `${id}_value`;
 
+	initRef (prop) {
+		return (ref) => {
+			// eslint-disable-next-line react/no-find-dom-node
+			this[prop] = ref && ReactDOM.findDOMNode(ref);
+		};
+	}
+
 	render ()  {
 		const {
 		// 'aria-label': ariaLabel,
 			children: values,
 			className,
-			currentValueText,
 			decrementAriaLabel: decAriaLabel,
 			disabled,
-			handleDecrement,
-			handleFlick,
-			handleIncrement,
 			incrementAriaLabel: incAriaLabel,
-			min,
-			max,
-			onSpotlightDisappear,
-			orientation,
-			reverseTransition,
-			skin,
-			spotlightDisabled,
-			step,
-			value,
-			valueId,
 			width,
-			wrap,
 			...rest
 		} = this.props;
 
-		const decrementAriaLabel = `${currentValueText} ${decAriaLabel}`;
-		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
+		const decrementAriaLabel = `${this.currentValueText} ${decAriaLabel}`;
+		const incrementAriaLabel = `${this.currentValueText} ${incAriaLabel}`;
 
 		let sizingPlaceholder = null;
 		if (typeof width === 'number' && width > 0) {
@@ -603,22 +535,23 @@ const PickerBase = class extends Component {
 		delete rest.onChange;
 		delete rest.orientation;
 		delete rest.wrap;
+		delete rest.spotlightDisabled;
 
-		const map = (item) => {
+		const mapItems = (item) => {
 			return (
-				<div className={this.state.selectedValue === item ? classnames(css.selected, css.item) : css.item}>
+				<div className={this.state.selectedValue === item.props.children ? classnames(css.selected, css.item) : css.item}>
 					{sizingPlaceholder}
 					{item}
 				</div>
 			);
 		};
 
-		const items = Children ? Children.map(values, map) : ([]).concat(values).map(map);
+		const items = Children ? Children.map(values, mapItems) : ([]).concat(values).map(mapItems);
 
 		return (
 			<div {...rest} className={classnames(className, css.picker)} ref={this.initRootRef}>
 				<div
-					aria-controls={valueId}
+					aria-controls={this.valueId}
 					aria-disabled={disabled}
 					aria-label={decrementAriaLabel}
 					className={classnames(css.itemDecrement, css.item, className)}
@@ -626,33 +559,24 @@ const PickerBase = class extends Component {
 				/>
 				<div
 					aria-label={this.calcAriaLabel}
-					aria-valuetext={currentValueText}
+					aria-valuetext={this.currentValueText}
 					className={classnames(css.indicator, css.item, className)}
-					ref={el => this.indicatorRef = el}
-					id={valueId}
+					ref={this.initIndicatorRef}
 				/>
 				<div
-					aria-controls={valueId}
+					aria-controls={this.valueId}
 					aria-disabled={disabled}
 					aria-label={incrementAriaLabel}
 					className={classnames(css.itemIncrement, css.item, className)}
 					disabled={disabled}
 				/>
-				<PickerRoot className={css.root} onFlick={handleFlick} ref={this.initContentRef} >
+				<PickerRoot className={css.root} ref={this.initContentRef} >
 					{items}
 				</PickerRoot>
 			</div>
 		);
 	}
 };
-
-const Picker = IdProvider(
-	{generateProp: null, prefix: 'p_'},
-	Skinnable(
-		PickerBase
-	)
-);
-
 
 /**
  * A higher-order component that filters the values returned by the onChange event on {@link agate/internal/Picker.Picker}
@@ -681,23 +605,22 @@ const ChangeAdapter = hoc((config, Wrapped) => {
 	});
 });
 
-// /**
-//  * Applies Agate specific behaviors to [Picker]{@link agate/Picker.Picker}.
-//  *
-//  * @hoc
-//  * @memberof agate/internal/Picker
-//  * @mixes ui/Changeable.Changeable
-//  * @mixes agate/Skinnable.Skinnable
-//  * @private
-//  */
-// const PickerDecorator = compose(
-// 	IdProvider({generateProp: null}),
-// 	Changeable,
-// 	Changeable({prop: 'reverseTransition'}),
-// 	Skinnable({prop: 'skin'})
-// );
-//
-// const Picker = PickerDecorator(PickerBase);
+/**
+ * Applies Agate specific behaviors to [Picker]{@link agate/Picker.Picker}.
+ *
+ * @hoc
+ * @memberof agate/internal/Picker
+ * @mixes ui/Changeable.Changeable
+ * @mixes agate/Skinnable.Skinnable
+ * @private
+ */
+const PickerDecorator = compose(
+	IdProvider({generateProp: null}),
+	Changeable,
+	Skinnable
+);
+
+const Picker = PickerDecorator(PickerBase);
 
 export default Picker;
 export {

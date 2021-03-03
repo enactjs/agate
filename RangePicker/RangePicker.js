@@ -19,6 +19,7 @@ import compose from 'ramda/src/compose';
 
 import PickerCore, {ChangeAdapter} from '../internal/Picker';
 import PickerItem from '../internal/Picker/PickerItem';
+import {Children} from 'react';
 
 /**
  * RangePicker base component.
@@ -176,17 +177,18 @@ const RangePickerBase = kind({
 		value: ({min, max, value}) => {
 			return clamp(min, max, value);
 		},
-		children: ({min, max, step}) => {
-			return Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step)) );
+		children: ({min, max, step, value}) => {
+			const childrenArray = Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step)) );
+			return (Children.map(childrenArray, (child) => (
+				<PickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{child}</PickerItem>
+			)));
 		}
 	},
 
 	render: ({value, children, ...rest}) => {
-		console.log(children);
 		return (
 			<PickerCore {...rest} index={0} type="number" value={value}>
 				{children}
-				{/* <PickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{value}</PickerItem>*/}
 			</PickerCore>
 		);
 	}
