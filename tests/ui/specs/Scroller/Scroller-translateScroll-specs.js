@@ -19,7 +19,6 @@ describe('Scroller', function () {
 			ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			ScrollerPage.spotlightSelect();
 			ScrollerPage.spotlightDown();
-			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightSelect();
 
 			// Focus on scroll up button.
@@ -35,13 +34,13 @@ describe('Scroller', function () {
 			ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			ScrollerPage.spotlightSelect();
 			ScrollerPage.spotlightDown();
-			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightSelect();
 
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightDown();
-			ScrollerPage.spotlightUp();
 			ScrollerPage.spotlightRight();
+			ScrollerPage.spotlightRight();
+			ScrollerPage.spotlightUp();
 
 			expect(ScrollerPage.button('scroll up').isFocused()).to.be.true();
 		});
@@ -50,7 +49,6 @@ describe('Scroller', function () {
 			// Set focusableScrollbar=true
 			ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			ScrollerPage.spotlightSelect();
-			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightSelect();
 
@@ -62,7 +60,7 @@ describe('Scroller', function () {
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightRight();
-			ScrollerPage.spotlightDown();
+			ScrollerPage.spotlightRight();
 
 			expect(ScrollerPage.button('scroll down').isFocused()).to.be.true();
 
@@ -87,7 +85,6 @@ describe('Scroller', function () {
 			ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			ScrollerPage.spotlightSelect();
 			ScrollerPage.spotlightDown();
-			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightSelect();
 
 			// Focus on the scroll left button.
@@ -103,10 +100,8 @@ describe('Scroller', function () {
 			ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			ScrollerPage.spotlightSelect();
 			ScrollerPage.spotlightDown();
-			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightSelect();
 
-			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightDown();
 
@@ -118,7 +113,6 @@ describe('Scroller', function () {
 			ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			ScrollerPage.spotlightSelect();
 			ScrollerPage.spotlightDown();
-			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightSelect();
 
 			// Verify if scroll thumb's position is at right=0 of the horizontalScrollbar track.
@@ -126,7 +120,6 @@ describe('Scroller', function () {
 			expect(initialVerticalScrollThumbPosition).to.equal('0');
 
 			// Focus on the Scroll left button in horizontalScrollbar.
-			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightDown();
 			ScrollerPage.spotlightLeft();
