@@ -451,7 +451,6 @@ const PickerBase = class extends Component {
 	};
 
 	handleKeyDown = (ev) => {
-		ev.stopPropagation();
 		const {orientation} = this.props;
 		const {keyCode} = ev;
 		forwardKeyDown(ev, this.props);
@@ -460,12 +459,16 @@ const PickerBase = class extends Component {
 			const itemHeight = this.indicatorRef.getBoundingClientRect().height;
 
 			if (orientation === 'horizontal' && isLeft(keyCode)) {
+				ev.stopPropagation();
 				// decrement
 			} else if (orientation === 'horizontal' && isRight(keyCode) ) {
+				ev.stopPropagation();
 				// increment
 			} else if (orientation === 'vertical' && isUp(keyCode)) {
+				ev.stopPropagation();
 				this.scrollTo(clamp(0, (this.props.children).length - 1, this.scrollY / itemHeight - 1), true);
 			} else if (orientation === 'vertical' && isDown(keyCode) ) {
+				ev.stopPropagation();
 				this.scrollTo(clamp(0, (this.props.children).length - 1, this.scrollY / itemHeight + 1), true);
 			}
 		}
