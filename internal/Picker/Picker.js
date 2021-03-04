@@ -340,7 +340,7 @@ const PickerBase = class extends Component {
 				const index = Math.min(y, children.length - 1);
 				const child = children[index].props.children;
 				if (child || child === 0) {
-					this.fireValueChange(child, index);
+					this.changeValue(child, index);
 				}
 			}
 		}
@@ -383,7 +383,7 @@ const PickerBase = class extends Component {
 		this.scrollTo(targetY / itemHeight, false);
 	};
 
-	fireValueChange = (selectedValue, selectedValueIndex) => {
+	changeValue = (selectedValue, selectedValueIndex) => {
 		const {onChange} = this.props;
 		if (selectedValue !== this.state.selectedValue) {
 			this.setState({
