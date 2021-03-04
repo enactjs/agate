@@ -163,6 +163,10 @@ const LabeledIconButtonBase = kind({
 		// TODO: spriteCount prop bleeds!  Is this cruft?
 	},
 
+	defaultProps: {
+		size: 'large'
+	},
+
 	styles: {
 		css: componentCss,
 		className: 'labeledIconButton',

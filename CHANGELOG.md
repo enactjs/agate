@@ -6,7 +6,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
-- `agate/BodyText` Scroller to apply a vertical scroll when contents are larger than the container
 - `agate/ContextualPopup` prop `css` to support customizations
 - `agate/ContextualPopupDecorator` prop `css` to support customizations
 - `agate/Dropdown` prop `width` to support multiple widths
@@ -22,6 +21,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/BodyText` to match latest design for Silicon skin
+- `agate/Button` to apply active styling only when it is not disabled
 - `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
 - `agate/LabeledIconButton` styling to preserve behavior and look when props are missing
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
