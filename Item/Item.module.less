@@ -46,6 +46,8 @@
 	.applySkins({
 		.agate-item-sizing();
 
+		width: @agate-item-width;
+		height: @agate-item-height;
 		line-height: @agate-item-line-height;
 		border-style: solid;
 		border-width: @agate-item-border-width;
@@ -108,7 +110,7 @@
 			max-width: @agate-item-inline-max-width;
 
 			.itemContent {
-				max-width: @agate-item-inline-content-max-width;
+				width: @agate-item-inline-content-width;
 			}
 
 			.itemContent,

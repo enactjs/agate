@@ -73,6 +73,14 @@ const SwitchItemBase = kind({
 		icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 
 		/**
+		 * Applies inline styles for SwitchItem.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		inline: PropTypes.bool,
+
+		/**
 		 * Sets the switch to the 'on' state.
 		 *
 		 * @type {Boolean}
@@ -121,7 +129,7 @@ const SwitchItemBase = kind({
 	},
 
 	computed: {
-		className: ({selected, styler}) => styler.append({selected}),
+		className: ({inline, selected, styler}) => styler.append({inline, selected}),
 		icon: ({css, icon}) => (icon ?
 			<Icon size="small" slot="slotBefore" className={css.icon}>
 				{icon}
