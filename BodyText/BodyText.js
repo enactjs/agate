@@ -13,10 +13,10 @@
 import kind from '@enact/core/kind';
 import UiBodyText from '@enact/ui/BodyText';
 import Pure from '@enact/ui/internal/Pure';
-import {MarqueeDecorator} from '@enact/ui/Marquee';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
+import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
 import componentCss from './BodyText.module.less';
