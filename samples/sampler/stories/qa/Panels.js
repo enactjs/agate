@@ -18,7 +18,7 @@ import {Panels, Panel, BreadcrumbPanels} from '@enact/agate/Panels';
 Panels.displayName = 'Panels';
 const Config = mergeComponentMetadata('Panels', Panels);
 
-const BasicPanels = () => {
+const BasicPanels = (props) => {
 	const [index, setIndex] = React.useState(0);
 	const goNext = () => setIndex(clamp(0, 2, index + 1));
 	const goPrevious = () => setIndex(clamp(0, 2, index - 1));
@@ -28,9 +28,7 @@ const BasicPanels = () => {
 	return (
 		<Panels
 			index={index}
-			noAnimation={boolean('noAnimation', Config, true)}
-			noCloseButton={boolean('noCloseButton', Config, true)}
-			orientation={select('orientation', ['horizontal', 'vertical'], Config)}
+			{...props}
 		>
 			<Panel>
 				<Header title="First Panel" />
@@ -75,7 +73,7 @@ const MenuItemBase = kind({
 		)
 	},
 
-	render: ({css, iconBefore, ...rest}) => {
+	render: ({css, ...rest}) => {
 		return (
 			<Item
 				css={css}
@@ -132,7 +130,7 @@ const BreadcrumbPanelsBase  = kind({
 	},
 	render: ({onNavigate, ...rest}) => {
 		return (
-			<BreadcrumbPanels {...rest} noCloseButton={true} onSelectBreadcrumb={onNavigate} />
+			<BreadcrumbPanels {...rest} noCloseButton onSelectBreadcrumb={onNavigate} />
 		);
 	}
 });
@@ -172,7 +170,13 @@ const RoutablePanelsApp = class extends React.Component {
 storiesOf('Panels', module)
 	.add(
 		'preserve focus',
-		() => (<BasicPanels />)
+		() => (
+			<BasicPanels
+				noAnimation={boolean('noAnimation', Config, true)}
+				noCloseButton={boolean('noCloseButton', Config, true)}
+				orientation={select('orientation', ['horizontal', 'vertical'], Config)}
+			/>
+		)
 	)
 	.add(
 		'preserve route focus',
