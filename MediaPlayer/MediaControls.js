@@ -32,7 +32,7 @@ const MediaControls = kind({
 
 	propTypes: /** @lends agate/MediaPlayer.MediaControls.prototype */ {
 		/**
-		 * Removes interactive capability from buttons inside this component.
+		 * Disables MediaControls and makes it non-interactive.
 		 *
 		 * @type {Boolean}
 		 * @public
