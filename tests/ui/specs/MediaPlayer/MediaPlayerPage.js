@@ -1,6 +1,6 @@
 'use strict';
 const {Page} = require('@enact/ui-test-utils/utils');
-const {element, getComponent, getText} = require('@enact/ui-test-utils/utils');
+const {getComponent, getText} = require('@enact/ui-test-utils/utils');
 
 class MediaPlayerInterface {
 	constructor (id) {
