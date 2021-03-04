@@ -28,17 +28,16 @@ import componentCss from './ProgressBar.module.less';
 /**
  * Renders an Agate-styled progress bar.
  *
- * @class ProgressBar
+ * @class ProgressBarBase
  * @memberof agate/ProgressBar
  * @extends ui/ProgressBar.ProgressBar
- * @mixes agate/Skinnable.Skinnable
  * @ui
  * @public
  */
 const ProgressBarBase = kind({
 	name: 'ProgressBar',
 
-	propTypes: /** @lends agate/ProgressBar.ProgressBar.prototype */ {
+	propTypes: /** @lends agate/ProgressBar.ProgressBarBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
