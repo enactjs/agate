@@ -265,7 +265,7 @@ const MediaPlayerBase = kind({
 		sourceIndex: PropTypes.number,
 
 		/**
-		 * Disables 5-way spotlight from navigating into the component.
+		 * Disables 5-way spotlight navigation from navigating into the component.
 		 *
 		 * @type {Boolean}
 		 * @public
