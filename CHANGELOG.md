@@ -21,6 +21,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
+- `agate/Button` to apply active styling only when it is not disabled
 - `agate/Heading` style to match latest design for Silicon skin
 - `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
 - `agate/LabeledIconButton` styling to preserve behavior and look when props are missing

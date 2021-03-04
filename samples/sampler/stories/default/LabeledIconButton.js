@@ -3,11 +3,11 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import {LabeledIconBase as UiLabeledIconBase, LabeledIcon as UiLabeledIcon} from '@enact/ui/LabeledIcon';
 import {storiesOf} from '@storybook/react';
 
-import LabeledIconButton from '@enact/agate/LabeledIconButton';
+import {LabeledIconButtonBase, LabeledIconButton} from '@enact/agate/LabeledIconButton';
 
 import iconNames from './icons';
 
-const Config = mergeComponentMetadata('LabeledIconButton', UiLabeledIconBase, UiLabeledIcon, LabeledIconButton);
+const Config = mergeComponentMetadata('LabeledIconButton', UiLabeledIconBase, UiLabeledIcon, LabeledIconButtonBase, LabeledIconButton);
 Config.displayName = 'LabeledIconButton';
 
 storiesOf('Agate', module)
