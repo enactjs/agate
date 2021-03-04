@@ -6,122 +6,223 @@ describe('MediaPlayer', function () {
 		Page.open();
 	});
 
-	describe('default', function () {
-		const mediaPlayer = Page.components.mediaPlayerDefault;
+	const {
+		mediaPlayerDefault,
+		mediaPlayerDisabled,
+		mediaPlayerSpotlightDisabled
+	} = Page.components;
 
+	describe('default', function () {
 		it('should have the slider knob focused', function () {
-			expect(mediaPlayer.slider.isFocused()).to.be.true();
+			expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
 		});
 
 		it('should play media on playButton click', function () {
-			expect(mediaPlayer.knob.getCSSProperty('left').value).to.equal('0px');
+			expect(mediaPlayerDefault.knob.getCSSProperty('left').value).to.equal('0px');
 
-			mediaPlayer.playButton.click();
-			Page.waitForPlayMedia(mediaPlayer);
+			mediaPlayerDefault.playButton.click();
+			Page.waitForPlayMedia(mediaPlayerDefault);
 
-			expect(mediaPlayer.knob.getCSSProperty('left').value).to.not.equal('0px');
+			expect(mediaPlayerDefault.knob.getCSSProperty('left').value).to.not.equal('0px');
 		});
 
 		it('should play next media on nextButton click', function () {
-			expect(mediaPlayer.source).to.equal('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
+			expect(mediaPlayerDefault.source).to.equal('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
 
-			mediaPlayer.nextButton.click();
-			Page.waitForPlayMedia(mediaPlayer);
+			mediaPlayerDefault.nextButton.click();
+			Page.waitForPlayMedia(mediaPlayerDefault);
 
-			expect(mediaPlayer.source).to.equal('https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3');
+			expect(mediaPlayerDefault.source).to.equal('https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3');
 		});
 
 		it('should repeat current media on nextButton click when repeatButton is active', function () {
-			expect(mediaPlayer.source).to.equal('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
+			expect(mediaPlayerDefault.source).to.equal('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
 
-			mediaPlayer.repeatButton.click();
+			mediaPlayerDefault.repeatButton.click();
 			// Check if "repeat one" is active
-			expect(mediaPlayer.repeatStatus).to.equal('1');
+			expect(mediaPlayerDefault.repeatStatus).to.equal('1');
 
-			mediaPlayer.nextButton.click();
-			Page.waitForPlayMedia(mediaPlayer);
+			mediaPlayerDefault.nextButton.click();
+			Page.waitForPlayMedia(mediaPlayerDefault);
 
-			expect(mediaPlayer.source).to.equal('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
+			expect(mediaPlayerDefault.source).to.equal('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
 		});
 
 		describe('5-way', function () {
 			it('should focus `play` button on 5-way down', function () {
-				expect(mediaPlayer.slider.isFocused()).to.be.true();
+				expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
 
 				Page.spotlightDown();
 
-				expect(mediaPlayer.playButton.isFocused()).to.be.true();
+				expect(mediaPlayerDefault.playButton.isFocused()).to.be.true();
 			});
 
 			it('should focus `previous` button on 5-way down, then left', function () {
-				expect(mediaPlayer.slider.isFocused()).to.be.true();
+				expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
 
 				Page.spotlightDown();
 				Page.spotlightLeft();
 
-				expect(mediaPlayer.previousButton.isFocused()).to.be.true();
+				expect(mediaPlayerDefault.previousButton.isFocused()).to.be.true();
 			});
 
 			it('should focus back `play` button when navigating back to media controls ', function () {
-				expect(mediaPlayer.slider.isFocused()).to.be.true();
+				expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
 
 				Page.spotlightDown();
 				Page.spotlightLeft();
-				expect(mediaPlayer.previousButton.isFocused()).to.be.true();
+				expect(mediaPlayerDefault.previousButton.isFocused()).to.be.true();
 				Page.spotlightLeft();
-				expect(mediaPlayer.shuffleButton.isFocused()).to.be.true();
+				expect(mediaPlayerDefault.shuffleButton.isFocused()).to.be.true();
 				Page.spotlightLeft();
-				expect(mediaPlayer.repeatButton.isFocused()).to.be.true();
+				expect(mediaPlayerDefault.repeatButton.isFocused()).to.be.true();
 				Page.spotlightUp();
 				Page.spotlightDown();
 
-				expect(mediaPlayer.playButton.isFocused()).to.be.true();
+				expect(mediaPlayerDefault.playButton.isFocused()).to.be.true();
 			});
 		});
 
 		describe('using pointer', function () {
 			it('should focus `next` button on hover', function () {
-				mediaPlayer.hover('Next');
+				mediaPlayerDefault.hover('Next');
 
-				expect(mediaPlayer.nextButton.isFocused()).to.be.true();
+				expect(mediaPlayerDefault.nextButton.isFocused()).to.be.true();
 			});
 
 			it('should focus `menu` button on hover', function () {
-				mediaPlayer.hover('Menu');
+				mediaPlayerDefault.hover('Menu');
 
-				expect(mediaPlayer.menuButton.isFocused()).to.be.true();
+				expect(mediaPlayerDefault.menuButton.isFocused()).to.be.true();
+			});
+		});
+	});
+
+	describe('disabled', function () {
+		it('should have the slider knob focused', function () {
+			expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
+			Page.spotlightDown();
+			Page.spotlightDown();
+
+			expect(mediaPlayerDisabled.slider.isFocused()).to.be.true();
+		});
+
+		it('should not play media on playButton click', function () {
+			expect(mediaPlayerDisabled.knob.getCSSProperty('left').value).to.equal('0px');
+
+			mediaPlayerDisabled.playButton.click();
+			Page.delay(1000);
+
+			expect(mediaPlayerDisabled.knob.getCSSProperty('left').value).to.equal('0px');
+		});
+
+		it('should not play next media on nextButton click', function () {
+			expect(mediaPlayerDisabled.source).to.equal('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
+
+			mediaPlayerDisabled.nextButton.click();
+			Page.delay(1000);
+
+			expect(mediaPlayerDisabled.source).to.not.equal('https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3');
+		});
+
+		describe('5-way', function () {
+			it('should focus `play` button on 5-way down', function () {
+				expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
+				Page.spotlightDown();
+				Page.spotlightDown();
+
+				expect(mediaPlayerDisabled.slider.isFocused()).to.be.true();
+
+				Page.spotlightDown();
+
+				expect(mediaPlayerDisabled.playButton.isFocused()).to.be.true();
+			});
+
+			it('should focus `previous` button on 5-way down, then left', function () {
+				expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
+				Page.spotlightDown();
+				Page.spotlightDown();
+
+				expect(mediaPlayerDisabled.slider.isFocused()).to.be.true();
+
+				Page.spotlightDown();
+				Page.spotlightLeft();
+
+				expect(mediaPlayerDisabled.previousButton.isFocused()).to.be.true();
+			});
+
+			it('should focus back `play` button when navigating back to media controls ', function () {
+				expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
+				Page.spotlightDown();
+				Page.spotlightDown();
+
+				expect(mediaPlayerDisabled.slider.isFocused()).to.be.true();
+
+				Page.spotlightDown();
+				Page.spotlightLeft();
+				expect(mediaPlayerDisabled.previousButton.isFocused()).to.be.true();
+				Page.spotlightLeft();
+				expect(mediaPlayerDisabled.shuffleButton.isFocused()).to.be.true();
+				Page.spotlightLeft();
+				expect(mediaPlayerDisabled.repeatButton.isFocused()).to.be.true();
+				Page.spotlightUp();
+				Page.spotlightDown();
+
+				expect(mediaPlayerDisabled.playButton.isFocused()).to.be.true();
+			});
+		});
+
+		describe('using pointer', function () {
+			it('should focus `next` button on hover', function () {
+				mediaPlayerDisabled.hover('Next');
+
+				expect(mediaPlayerDisabled.nextButton.isFocused()).to.be.true();
+			});
+
+			it('should focus `menu` button on hover', function () {
+				mediaPlayerDisabled.hover('Menu');
+
+				expect(mediaPlayerDisabled.menuButton.isFocused()).to.be.true();
 			});
 		});
 	});
 
 	describe('spotlightDisabled', function () {
-		const mediaPlayer = Page.components.mediaPlayerSpotlightDisabled;
 
 		it('should not have the slider knob focused', function () {
-			expect(mediaPlayer.slider.isFocused()).to.not.be.true();
+			expect(mediaPlayerSpotlightDisabled.slider.isFocused()).to.not.be.true();
+		});
+
+		it('should play next media on nextButton click', function () {
+			expect(mediaPlayerSpotlightDisabled.source).to.equal('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
+
+			mediaPlayerSpotlightDisabled.nextButton.click();
+			Page.waitForPlayMedia(mediaPlayerSpotlightDisabled);
+
+			expect(mediaPlayerSpotlightDisabled.source).to.equal('https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3');
 		});
 
 		describe('5-way', function () {
 			it('should not focus `play` button on 5-way down', function () {
-				expect(mediaPlayer.slider.isFocused()).to.not.be.true();
+				expect(mediaPlayerSpotlightDisabled.slider.isFocused()).to.not.be.true();
 
 				Page.spotlightDown();
 
-				expect(mediaPlayer.playButton.isFocused()).to.not.be.true();
+				expect(mediaPlayerSpotlightDisabled.playButton.isFocused()).to.not.be.true();
 			});
 		});
 
 		describe('using pointer', function () {
 			it('should not focus `next` button on hover', function () {
-				mediaPlayer.hover('Next');
+				mediaPlayerSpotlightDisabled.hover('Next');
 
-				expect(mediaPlayer.nextButton.isFocused()).to.not.be.true();
+				expect(mediaPlayerSpotlightDisabled.nextButton.isFocused()).to.not.be.true();
 			});
 
 			it('should not focus `menu` button on hover', function () {
-				mediaPlayer.hover('Menu');
+				mediaPlayerSpotlightDisabled.hover('Menu');
 
-				expect(mediaPlayer.menuButton.isFocused()).to.not.be.true();
+				expect(mediaPlayerSpotlightDisabled.menuButton.isFocused()).to.not.be.true();
 			});
 		});
 	});

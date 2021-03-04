@@ -37,7 +37,7 @@ class MediaPlayerInterface {
 	}
 
 	get playButton () {
-		return element('.MediaPlayer_MediaControls_playPauseButton', this.self);
+		return $(this.selector + '>div>div>div>div.MediaPlayer_MediaControls_playPauseButton');
 	}
 
 	get previousButton () {
@@ -74,8 +74,9 @@ class MediaPlayerPage extends Page {
 		super();
 		this.title = 'MediaPlayer Test';
 		const mediaPlayerDefault = new MediaPlayerInterface('mediaPlayerDefault');
+		const mediaPlayerDisabled = new MediaPlayerInterface('mediaPlayerDisabled');
 		const mediaPlayerSpotlightDisabled = new MediaPlayerInterface('mediaPlayerSpotlightDisabled');
-		this.components = {mediaPlayerDefault, mediaPlayerSpotlightDisabled};
+		this.components = {mediaPlayerDefault, mediaPlayerDisabled, mediaPlayerSpotlightDisabled};
 	}
 
 	waitForPlayMedia (mediaPlayer, timeout) {
