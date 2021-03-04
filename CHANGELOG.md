@@ -6,17 +6,27 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
+- `agate/ContextualPopup` prop `css` to support customizations
+- `agate/ContextualPopupDecorator` prop `css` to support customizations
+- `agate/Dropdown` prop `width` to support multiple widths
+- `agate/Item` to have a `selected` publicClassname
 - `agate/MediaPlayer` prop `spotlightDisabled` to disable 5-way navigation
+- `agate/RadioItem` prop `slotBefore`
 - `agate/Spinner` prop `children` to support the display of text below the icon
 
 ### Changed
 
+- `agate/Dropdown` to use `agate/ContextualPopup`
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
 
 ### Fixed
 
+- `agate/Button` to apply active styling only when it is not disabled
+- `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
+- `agate/LabeledIconButton` styling to preserve behavior and look when props are missing
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
 - `agate/SliderButton` styling to visually show the focused state
+- `agate/TooltipDecorator` to position correctly on rtl locale
 
 ## [2.0.0-alpha.1] - 2021-02-25
 
@@ -42,6 +52,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Input` prop `invalidMessage` to customize the tooltip message when `invalid` prop is true
 - `agate/Input` prop `size` to change the size of both input and icons (default large)
 - `agate/Item` prop `centered`, `disabled`, `inline`, `marqueeOn`, and `size`
+- `agate/Keypad` prop `spotlightDisabled` to disable 5-way navigation
 - `agate/Popup` content padding and margin with `closeButton`
 - `agate/Popup` `bottom`, `fullscreen`, `left`, and `right` values to `position` prop
 - `agate/Popup` `duration` and `type` props
