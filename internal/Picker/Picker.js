@@ -261,12 +261,13 @@ const PickerBase = class extends Component {
 		}
 
 		this.state = {
-			selectedValue: selectedValue,
-			scrollY: -1,
-			lastY: 0,
-			startY: 0,
-			isMoving: false
+			selectedValue: selectedValue
 		};
+
+		this.scrollY = -1;
+		this.lastY = 0;
+		this.startY = 0;
+		this.isMoving = false;
 	}
 
 	componentDidMount () {
@@ -326,24 +327,22 @@ const PickerBase = class extends Component {
 
 	scrollTo = (y, isAnimated) => {
 		const itemHeight = this.indicatorRef.getBoundingClientRect().height;
-		if (this.state.scrollY !== y * itemHeight) {
-			this.setState(() => {
-				return ({scrollY: y * itemHeight});
-			}, () => {
-				if (isAnimated) {
-					this.setTransition(this.contentRef.style, 'transform 300ms');
-				}
-				this.setTransform(this.contentRef.style, `translate(0,${-((y + 1) * itemHeight)}px)`);
+		if (this.scrollY !== y * itemHeight) {
+			this.scrollY = y * itemHeight;
 
-				if (this.state.scrollY >= 0) {
-					const {children} = this.props;
-					const index = Math.min(y, children.length - 1);
-					const child = children[index].props.children;
-					if (child || child === 0) {
-						this.fireValueChange(child, index);
-					}
+			if (isAnimated) {
+				this.setTransition(this.contentRef.style, 'transform 300ms');
+			}
+			this.setTransform(this.contentRef.style, `translate(0,${-((y + 1) * itemHeight)}px)`);
+
+			if (this.scrollY >= 0) {
+				const {children} = this.props;
+				const index = Math.min(y, children.length - 1);
+				const child = children[index].props.children;
+				if (child || child === 0) {
+					this.fireValueChange(child, index);
 				}
-			});
+			}
 		}
 	};
 
@@ -351,46 +350,37 @@ const PickerBase = class extends Component {
 		if (this.props.disabled) {
 			return;
 		}
-		this.setState(prevState => ({
-			isMoving: true,
-			startY: y,
-			lastY: prevState.scrollY
-		}));
+		this.isMoving = true;
+		this.startY = y;
+		this.lastY = this.scrollY;
 	};
 
 	onMove = (y) => {
 		const itemHeight = this.indicatorRef.getBoundingClientRect().height;
 
-		if (this.props.disabled || !this.state.isMoving) {
+		if (this.props.disabled || !this.isMoving) {
 			return;
 		}
-
-		this.setState(prevState => {
-			return ({scrollY: prevState.lastY - y + prevState.startY});
-		}, () => {
-
-			this.setTransform(this.contentRef.style, `translate(0,${-this.state.scrollY - itemHeight}px)`);
-		});
+		this.scrollY = this.lastY - y + this.startY;
+		this.setTransform(this.contentRef.style, `translate(0,${-this.scrollY - itemHeight}px)`);
 	};
 
 	onFinish = () => {
 		const itemHeight = this.indicatorRef.getBoundingClientRect().height;
-		this.setState(() => {
-			return ({isMoving: false});
-		}, () => {
-			let targetY = this.state.scrollY;
-			const height = ((this.props.children).length - 1) * itemHeight;
-			if (targetY % itemHeight !== 0) {
-				targetY = Math.round(targetY / itemHeight) * itemHeight;
-			}
 
-			if (targetY < 0) {
-				targetY = 0;
-			} else if (targetY > height) {
-				targetY = height;
-			}
-			this.scrollTo(targetY / itemHeight, false);
-		});
+		this.isMoving = false;
+		let targetY = this.scrollY;
+		const height = ((this.props.children).length - 1) * itemHeight;
+		if (targetY % itemHeight !== 0) {
+			targetY = Math.round(targetY / itemHeight) * itemHeight;
+		}
+
+		if (targetY < 0) {
+			targetY = 0;
+		} else if (targetY > height) {
+			targetY = height;
+		}
+		this.scrollTo(targetY / itemHeight, false);
 	};
 
 	fireValueChange = (selectedValue, selectedValueIndex) => {
@@ -474,9 +464,9 @@ const PickerBase = class extends Component {
 			} else if (orientation === 'horizontal' && isRight(keyCode) ) {
 				// increment
 			} else if (orientation === 'vertical' && isUp(keyCode)) {
-				this.scrollTo(clamp(0, (this.props.children).length - 1, this.state.scrollY / itemHeight - 1), true);
+				this.scrollTo(clamp(0, (this.props.children).length - 1, this.scrollY / itemHeight - 1), true);
 			} else if (orientation === 'vertical' && isDown(keyCode) ) {
-				this.scrollTo(clamp(0, (this.props.children).length - 1, this.state.scrollY / itemHeight + 1), true);
+				this.scrollTo(clamp(0, (this.props.children).length - 1, this.scrollY / itemHeight + 1), true);
 			}
 		}
 	};
