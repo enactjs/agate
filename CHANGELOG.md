@@ -16,7 +16,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Changed
 
 - `agate/Dropdown` to use `agate/ContextualPopup`
-- `agate/ThemeDecorator` config `rootId` to specify React DOM tree root for global event handlers
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
 
 ### Fixed
