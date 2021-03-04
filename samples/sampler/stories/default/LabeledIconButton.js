@@ -2,11 +2,12 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import {LabeledIconBase as UiLabeledIconBase, LabeledIcon as UiLabeledIcon} from '@enact/ui/LabeledIcon';
 
-import LabeledIconButton from '@enact/agate/LabeledIconButton';
+import {LabeledIconButtonBase, LabeledIconButton} from '@enact/agate/LabeledIconButton';
 
 import {iconList} from './icons';
 
-const Config = mergeComponentMetadata('LabeledIconButton', UiLabeledIconBase, UiLabeledIcon, LabeledIconButton);
+const Config = mergeComponentMetadata('LabeledIconButton', UiLabeledIconBase, UiLabeledIcon, LabeledIconButtonBase, LabeledIconButton);
+Config.displayName = 'LabeledIconButton';
 
 export default {
 	title: 'Agate/LabeledIconButton',
@@ -23,6 +24,7 @@ export const _LabeledIconButton = () => (
 		labelPosition={select('labelPosition', ['above', 'after', 'before', 'below', 'left', 'right'], Config)}
 		selected={boolean('selected', Config)}
 		size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}
+		tooltipText={text('tooltipText', Config, 'This is a Labeled Icon Button')}
 	>
 		{text('children', Config, 'Hello LabeledIconButton')}
 	</LabeledIconButton>
