@@ -32,7 +32,7 @@
 		//padding: @agate-picker-padding;
 
 		.root {
-			padding: @agate-button-height 0;
+			padding: calc(2* @agate-button-height) 0;
 		}
 
 		.sizingPlaceholder {
@@ -67,10 +67,10 @@
 			&.indicator {
 				background-color: @agate-picker-active-bg-color;
 				background-image: @agate-picker-active-bg-image;
-				height: 84px;
+				height: @agate-button-height;
 				position: absolute;
 				left: 0;
-				top: 84px;
+				top: @agate-button-height;
 				z-index: -1;
 				//padding: @agate-picker-padding;
 			}
@@ -94,18 +94,18 @@
 
 		.itemDecrement {
 			background-image: @agate-picker-item-decrement-bg-image;
-			height: 84px;
+			height: @agate-button-height;
 			left: 0;
-			top: 0px;
+			top: 0;
 			z-index: -1;
 			position: absolute;
 		}
 
 		.itemIncrement {
 			background-image: @agate-picker-item-increment-bg-image;
-			height: 84px;
+			height: @agate-button-height;
 			left: 0;
-			top: 168px;
+			top: calc(2* @agate-button-height);
 			z-index: -1;
 			position: absolute;
 		}

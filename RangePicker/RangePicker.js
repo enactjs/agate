@@ -190,8 +190,12 @@ const RangePickerBase = kind({
 	},
 
 	render: ({value, children, ...rest}) => {
+		delete rest.max;
+		delete rest.min;
+		delete rest.step;
+
 		return (
-			<PickerCore {...rest} index={0} type="number" value={value}>
+			<PickerCore {...rest} type="number" value={value}>
 				{children}
 			</PickerCore>
 		);

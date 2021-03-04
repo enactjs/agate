@@ -11,6 +11,7 @@
 
 import classnames from 'classnames';
 import {adaptEvent, forward, handle} from '@enact/core/handle';
+import {is} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
 import Spottable from '@enact/spotlight/Spottable';
@@ -26,14 +27,17 @@ import $L from '../$L';
 import Skinnable from '../../Skinnable';
 
 import css from './Picker.module.less';
-import Spotlight from '../../../enact/packages/spotlight';
+import {clamp} from '../../../enact/packages/core/util';
 
 const PickerRoot = Touchable(Spottable('div'));
 
 // Set-up event forwarding
-const forwardKeyDown = forward('onKeyDown'),
-	forwardKeyUp = forward('onKeyUp'),
-	forwardWheel = forward('onWheel');
+const forwardKeyDown = forward('onKeyDown');
+
+const isDown = is('down');
+const isLeft = is('left');
+const isRight = is('right');
+const isUp = is('up');
 
 /**
  * The base component for {@link agate/internal/Picker.Picker}.
@@ -251,12 +255,12 @@ const PickerBase = class extends Component {
 		if (value || value === 0) {
 			selectedValue = this.props.children.findIndex((element) => element.props.children === value);
 		}
-		if (selectedValue < 0 || !value) {
+
+		if (selectedValue < 0 ) {
 			selectedValue = 0;
 		}
 
 		this.state = {
-			itemHeight: 0,
 			selectedValue: selectedValue,
 			scrollY: -1,
 			lastY: 0,
@@ -266,14 +270,8 @@ const PickerBase = class extends Component {
 	}
 
 	componentDidMount () {
-		// this.contentRef.addEventListener('wheel', this.handleWheel);
-		const {rootRef, indicatorRef} = this;
-		// eslint-disable-next-line react/no-did-mount-set-state
-		this.setState(() => {
-			return ({itemHeight: indicatorRef.getBoundingClientRect().height});
-		}, () => {
-			this.select(this.state.selectedValue);
-		});
+		const {rootRef} = this;
+		const {children} = this.props;
 
 		rootRef.addEventListener('touchstart', (evt) => this.onStart(evt.touches[0].pageY));
 		rootRef.addEventListener('touchmove', (evt) => {
@@ -288,7 +286,14 @@ const PickerBase = class extends Component {
 			this.onMove(evt.pageY);
 		});
 		rootRef.addEventListener('mouseup', this.onFinish);
-		rootRef.addEventListener('wheel', this.handleWheel);
+
+		for (let i = 0, length = children.length; i < length; i++) {
+			if (children[i].props.children === this.state.selectedValue) {
+				this.scrollTo(i, false);
+				return;
+			}
+		}
+		this.scrollTo(0, false);
 	}
 
 	componentWillUnmount () {
@@ -314,13 +319,30 @@ const PickerBase = class extends Component {
 		nodeStyle.webkitTransform = value;
 	};
 
-	scrollTo = (y) => {
-		if (this.state.scrollY !== y) {
+	setTransition= (nodeStyle, value) => {
+		nodeStyle.transition = value;
+		nodeStyle.webkitTransition = value;
+	};
+
+	scrollTo = (y, isAnimated) => {
+		const itemHeight = this.indicatorRef.getBoundingClientRect().height;
+		if (this.state.scrollY !== y * itemHeight) {
 			this.setState(() => {
-				return ({scrollY: y});
+				return ({scrollY: y * itemHeight});
 			}, () => {
-				this.setTransform(this.contentRef.style, `translate(0,${-y}px)`);
-				this.scrollingComplete();
+				if (isAnimated) {
+					this.setTransition(this.contentRef.style, 'transform 300ms');
+				}
+				this.setTransform(this.contentRef.style, `translate(0,${-((y + 1) * itemHeight)}px)`);
+
+				if (this.state.scrollY >= 0) {
+					const {children} = this.props;
+					const index = Math.min(y, children.length - 1);
+					const child = children[index].props.children;
+					if (child || child === 0) {
+						this.fireValueChange(child, index);
+					}
+				}
 			});
 		}
 	};
@@ -332,29 +354,34 @@ const PickerBase = class extends Component {
 		this.setState(prevState => ({
 			isMoving: true,
 			startY: y,
-			lastY: prevState.scrollY}));
+			lastY: prevState.scrollY
+		}));
 	};
 
-	onMove = (top) => {
+	onMove = (y) => {
+		const itemHeight = this.indicatorRef.getBoundingClientRect().height;
+
 		if (this.props.disabled || !this.state.isMoving) {
 			return;
 		}
 
 		this.setState(prevState => {
-			return ({scrollY: prevState.lastY - top + prevState.startY});
+			return ({scrollY: prevState.lastY - y + prevState.startY});
 		}, () => {
-			this.setTransform(this.contentRef.style, `translate3d(0,${-this.state.scrollY}px,0)`);
+
+			this.setTransform(this.contentRef.style, `translate(0,${-this.state.scrollY - itemHeight}px)`);
 		});
 	};
 
 	onFinish = () => {
+		const itemHeight = this.indicatorRef.getBoundingClientRect().height;
 		this.setState(() => {
 			return ({isMoving: false});
 		}, () => {
 			let targetY = this.state.scrollY;
-			const height = ((this.props.children).length - 1) * this.state.itemHeight;
-			if (targetY % this.state.itemHeight !== 0) {
-				targetY = Math.round(targetY / this.state.itemHeight) * this.state.itemHeight;
+			const height = ((this.props.children).length - 1) * itemHeight;
+			if (targetY % itemHeight !== 0) {
+				targetY = Math.round(targetY / itemHeight) * itemHeight;
 			}
 
 			if (targetY < 0) {
@@ -362,40 +389,9 @@ const PickerBase = class extends Component {
 			} else if (targetY > height) {
 				targetY = height;
 			}
-
-			this.scrollTo(targetY);
+			this.scrollTo(targetY / itemHeight, false);
 		});
 	};
-
-	select = (value) => {
-		if (!this.state.itemHeight) return;
-
-		const {children} = this.props;
-		for (let i = 0, len = children.length; i < len; i++) {
-			if (children[i].props.children === value) {
-				this.scrollTo(i * this.state.itemHeight);
-				return;
-			}
-		}
-		this.scrollTo(0);
-	};
-
-	scrollingComplete = () => {
-		const top = this.state.scrollY;
-		if (top >= 0) {
-			const {children} = this.props;
-			const index = this.computeChildIndex(top, children.length);
-			const child = children[index].props.children;
-			if (child || child === 0) {
-				this.fireValueChange(child, index);
-			}
-		}
-	};
-
-	computeChildIndex (top, childrenLength) {
-		const index = Math.round(top / this.state.itemHeight);
-		return Math.min(index, childrenLength - 1);
-	}
 
 	fireValueChange = (selectedValue, selectedValueIndex) => {
 		const {onChange} = this.props;
@@ -407,7 +403,8 @@ const PickerBase = class extends Component {
 		}
 	};
 
-	currentValueText = ({accessibilityHint, 'aria-valuetext': ariaValueText, children, value}) => {
+	currentValueText = () => {
+		const {accessibilityHint, 'aria-valuetext': ariaValueText, children, value} = this.props;
 		if (ariaValueText != null) {
 			return ariaValueText;
 		}
@@ -429,7 +426,8 @@ const PickerBase = class extends Component {
 		return valueText;
 	};
 
-	decrementAriaLabel = ({decrementAriaLabel, type}) => {
+	decrementAriaLabel = () => {
+		const {decrementAriaLabel, type} = this.props;
 		if (decrementAriaLabel != null) {
 			return decrementAriaLabel;
 		}
@@ -441,7 +439,8 @@ const PickerBase = class extends Component {
 		}
 	};
 
-	incrementAriaLabel= ({incrementAriaLabel, type}) => {
+	incrementAriaLabel= () => {
+		const {incrementAriaLabel, type} = this.props;
 		if (incrementAriaLabel != null) {
 			return incrementAriaLabel;
 		}
@@ -453,99 +452,34 @@ const PickerBase = class extends Component {
 		}
 	};
 
-	calcAriaLabel = ({'aria-label': ariaLabel, 'aria-valuetext': valueText}) => {
+	calcAriaLabel = () => {
+		const {'aria-label': ariaLabel} = this.props;
 		if (ariaLabel != null) {
 			return ariaLabel;
 		}
-
-		return valueText;
+		return this.currentValueText();
 	};
 
-	// handleKeyDown = (ev) => {
-	// 	const {
-	// 		joined,
-	// 		onSpotlightDown,
-	// 		onSpotlightLeft,
-	// 		onSpotlightRight,
-	// 		onSpotlightUp,
-	// 		orientation
-	// 	} = this.props;
-	// 	const {keyCode} = ev;
-	// 	forwardKeyDown(ev, this.props);
-	//
-	// 	if (joined && !this.props.disabled) {
-	// 		const direction = getDirection(keyCode);
-	//
-	// 		const directions = {
-	// 			up: this.setIncPickerButtonPressed,
-	// 			down: this.setDecPickerButtonPressed
-	// 		};
-	//
-	// 		const isVertical = orientation === 'vertical' && (isUp(keyCode) || isDown(keyCode));
-	// 		const isHorizontal = orientation === 'horizontal' && isEnter(keyCode);
-	//
-	// 		if (isVertical) {
-	// 			directions[direction]();
-	// 		} else if (isHorizontal) {
-	// 			this.setIncPickerButtonPressed();
-	// 		} else if (orientation === 'horizontal' && isDown(keyCode) && onSpotlightDown) {
-	// 			onSpotlightDown(ev);
-	// 		} else if (orientation === 'horizontal' && isUp(keyCode) && onSpotlightUp) {
-	// 			onSpotlightUp(ev);
-	// 		} else if (orientation === 'vertical' && isLeft(keyCode) && onSpotlightLeft) {
-	// 			onSpotlightLeft(ev);
-	// 		} else if (orientation === 'vertical' && isRight(keyCode) && onSpotlightRight) {
-	// 			onSpotlightRight(ev);
-	// 		}
-	// 	}
-	// };
-	//
-	// handleKeyUp = (ev) => {
-	// 	const {
-	// 		joined,
-	// 		orientation
-	// 	} = this.props;
-	// 	const {keyCode} = ev;
-	// 	forwardKeyUp(ev, this.props);
-	//
-	// 	if (joined && !this.props.disabled) {
-	// 		const isVertical = orientation === 'vertical' && (isUp(keyCode) || isDown(keyCode));
-	// 		const isHorizontal = orientation === 'horizontal' && (isEnter(keyCode));
-	//
-	// 		if (isVertical || isHorizontal) {
-	// 			this.pickerButtonPressed = 0;
-	// 		}
-	// 	}
-	// };
-	//
-	// handleWheel = (ev) => {
-	// 	const {step} = this.props;
-	// 	forwardWheel(ev, this.props);
-	//
-	// 	const isContainerSpotted = this.containerRef === Spotlight.getCurrent();
-	//
-	// 	if (isContainerSpotted) {
-	// 		const dir = -Math.sign(ev.deltaY);
-	//
-	// 		// We'll sometimes get a 0/-0 wheel event we need to ignore or the wheel event has reached
-	// 		// the bounds of the picker
-	// 		if (dir && !this.hasReachedBound(step * dir)) {
-	// 			// fire the onChange event
-	// 			if (dir > 0) {
-	// 				this.throttleWheelInc.throttle();
-	// 			} else if (dir < 0) {
-	// 				this.throttleWheelDec.throttle();
-	// 			}
-	// 			// simulate mouse down
-	// 			this.setPressedState(dir);
-	// 			// set a timer to simulate the mouse up
-	// 			this.emulateMouseUp.start();
-	// 			// prevent the default scroll behavior to avoid bounce back
-	// 			ev.preventDefault();
-	// 			ev.stopPropagation();
-	// 		}
-	// 	}
-	// };
+	handleKeyDown = (ev) => {
+		ev.stopPropagation();
+		const {orientation} = this.props;
+		const {keyCode} = ev;
+		forwardKeyDown(ev, this.props);
+
+		if (!this.props.disabled) {
+			const itemHeight = this.indicatorRef.getBoundingClientRect().height;
+
+			if (orientation === 'horizontal' && isLeft(keyCode)) {
+				// decrement
+			} else if (orientation === 'horizontal' && isRight(keyCode) ) {
+				// increment
+			} else if (orientation === 'vertical' && isUp(keyCode)) {
+				this.scrollTo(clamp(0, (this.props.children).length - 1, this.state.scrollY / itemHeight - 1), true);
+			} else if (orientation === 'vertical' && isDown(keyCode) ) {
+				this.scrollTo(clamp(0, (this.props.children).length - 1, this.state.scrollY / itemHeight + 1), true);
+			}
+		}
+	};
 
 	valueId =  ({id}) => `${id}_value`;
 
@@ -558,18 +492,19 @@ const PickerBase = class extends Component {
 
 	render ()  {
 		const {
-		// 'aria-label': ariaLabel,
 			children: values,
 			className,
-			decrementAriaLabel: decAriaLabel,
 			disabled,
-			incrementAriaLabel: incAriaLabel,
 			width,
 			...rest
 		} = this.props;
 
-		const decrementAriaLabel = `${this.currentValueText} ${decAriaLabel}`;
-		const incrementAriaLabel = `${this.currentValueText} ${incAriaLabel}`;
+		const currentValueText = this.currentValueText();
+		const decAriaLabel = this.decrementAriaLabel();
+		const incAriaLabel = this.incrementAriaLabel();
+		const decrementAriaLabel = `${currentValueText} ${decAriaLabel}`;
+		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
+		const indicatorAriaLabel = this.calcAriaLabel();
 
 		let sizingPlaceholder = null;
 		if (typeof width === 'number' && width > 0) {
@@ -583,6 +518,8 @@ const PickerBase = class extends Component {
 		delete rest.noAnimation;
 		delete rest.onChange;
 		delete rest.orientation;
+		delete rest.type;
+		delete rest.value;
 		delete rest.wrap;
 		delete rest.spotlightDisabled;
 
@@ -607,8 +544,8 @@ const PickerBase = class extends Component {
 					disabled={disabled}
 				/>
 				<div
-					aria-label={this.calcAriaLabel}
-					aria-valuetext={this.currentValueText}
+					aria-label={indicatorAriaLabel}
+					aria-valuetext={currentValueText}
 					className={classnames(css.indicator, css.item, className)}
 					ref={this.initIndicatorRef}
 				/>
@@ -621,8 +558,8 @@ const PickerBase = class extends Component {
 				/>
 				<PickerRoot
 					className={css.root}
+					onDown={this.handleDown}
 					onKeyDown={this.handleKeyDown}
-					onKeyUp={this.handleKeyUp}
 					ref={this.initContentRef}
 				>
 					{items}
