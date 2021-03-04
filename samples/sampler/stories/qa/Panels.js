@@ -22,8 +22,6 @@ const BasicPanels = (props) => {
 	const [index, setIndex] = React.useState(0);
 	const goNext = () => setIndex(clamp(0, 2, index + 1));
 	const goPrevious = () => setIndex(clamp(0, 2, index - 1));
-	const goFirst = () => setIndex(0);
-	const goThird = () => setIndex(2);
 
 	return (
 		<Panels
@@ -33,16 +31,14 @@ const BasicPanels = (props) => {
 			<Panel>
 				<Header title="First Panel" />
 				<Item onClick={goNext}>Next</Item>
-				<Item onClick={goThird}>Previous</Item>
 			</Panel>
 			<Panel>
 				<Header title="Second Panel" />
-				<Item onClick={goNext}>Next</Item>
 				<Item onClick={goPrevious}>Previous</Item>
+				<Item onClick={goNext}>Next</Item>
 			</Panel>
 			<Panel>
 				<Header title="Third Panel" />
-				<Item onClick={goFirst}>Next</Item>
 				<Item onClick={goPrevious}>Previous</Item>
 			</Panel>
 		</Panels>
