@@ -20,7 +20,6 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
 import Arc from '../Arc';
-import {Marquee, MarqueeController} from '../Marquee';
 import Skinnable from '../Skinnable';
 import {ThemeContext} from '../ThemeDecorator';
 
@@ -97,14 +96,6 @@ const ArcPickerBase = kind({
 		isFocused: PropTypes.bool,
 
 		/**
-		 * Determines what triggers the marquee to start its animation.
-		 *
-		 * @type {('focus'|'hover'|'render')}
-		 * @public
-		 */
-		marqueeOn: PropTypes.oneOf(['focus', 'hover', 'render']),
-
-		/**
 		 * Called when the path area is clicked.
 		 *
 		 * @type {Function}
@@ -171,7 +162,6 @@ const ArcPickerBase = kind({
 		backgroundColor: '#eeeeee',
 		endAngle: 310,
 		foregroundColor: '#444444',
-		marqueeOn: 'render',
 		radius: 150,
 		startAngle: 50,
 		strokeWidth: 6
@@ -219,7 +209,7 @@ const ArcPickerBase = kind({
 		}
 	},
 
-	render: ({arcSegments, disabled, marqueeOn, slotCenter, value, ...rest}) => {
+	render: ({arcSegments, disabled, slotCenter, value, ...rest}) => {
 		delete rest.backgroundColor;
 		delete rest.children;
 		delete rest.endAngle;
@@ -233,7 +223,9 @@ const ArcPickerBase = kind({
 			// eslint-disable-next-line jsx-a11y/role-has-required-aria-props
 			<div aria-disabled={disabled} aria-valuetext={value} role="slider" {...rest} disabled={disabled}>
 				{arcSegments}
-				<Marquee className={css.valueDisplay} marqueeOn={marqueeOn} alignment="center">{slotCenter}</Marquee>
+				<div className={css.valueDisplay}>
+					{slotCenter}
+				</div>
 			</div>
 		);
 	}
