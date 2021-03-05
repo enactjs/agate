@@ -26,6 +26,7 @@ storiesOf('Agate', module)
 			return (
 				<Slider
 					activateOnFocus={boolean('activateOnFocus', Config)}
+					backgroundProgress={number('backgroundProgress', Config, {range: true, min: 0, max: 1, step: 0.01}, 0.5)}
 					disabled={disabled}
 					knobStep={number('knobStep', Config)}
 					max={number('max', Config)}

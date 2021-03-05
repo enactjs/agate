@@ -39,6 +39,17 @@ const ProgressBarBase = kind({
 
 	propTypes: /** @lends agate/ProgressBar.ProgressBarBase.prototype */ {
 		/**
+		 * The proportion of the loaded portion of the progress bar.
+		 *
+		 * * Valid values are between `0` and `1`.
+		 *
+		 * @type {Number}
+		 * @default 0
+		 * @public
+		 */
+		backgroundProgress: PropTypes.number,
+
+		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
 		 *
@@ -50,6 +61,14 @@ const ProgressBarBase = kind({
 		 * @public
 		 */
 		css: PropTypes.object,
+
+		/**
+		 * Highlights the filled portion.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		highlighted: PropTypes.bool,
 
 		/**
 		 * Sets the orientation of the progress bar.
@@ -119,6 +138,7 @@ const ProgressBarBase = kind({
 	},
 
 	defaultProps: {
+		backgroundProgress: 0,
 		orientation: 'horizontal',
 		progress: 0,
 		size: 'large'
@@ -130,11 +150,12 @@ const ProgressBarBase = kind({
 	},
 
 	computed: {
-		className: ({size, styler}) => styler.append(size),
+		className: ({highlighted, size, styler}) => styler.append({highlighted}, size),
 		tooltip: ({tooltip}) => tooltip === true ? ProgressBarTooltip : tooltip
 	},
 
 	render: ({css, orientation, progress, tooltip, ...rest}) => {
+		delete rest.highlighted;
 		delete rest.tooltip;
 		delete rest.size;
 

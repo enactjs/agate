@@ -74,6 +74,15 @@ const SliderBase = kind({
 		 */
 		active: PropTypes.bool,
 
+		// /**
+		//  * Background progress, as a proportion between `0` and `1`.
+		//  *
+		//  * @type {Number}
+		//  * @default 0
+		//  * @public
+		//  */
+		// backgroundProgress: PropTypes.number,
+
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
