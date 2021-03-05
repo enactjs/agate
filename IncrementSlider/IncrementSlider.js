@@ -627,6 +627,18 @@ const IncrementSliderDecorator = compose(
  */
 const IncrementSlider = IncrementSliderDecorator(IncrementSliderBase);
 
+/**
+ * A [Tooltip]{@link agate/TooltipDecorator.Tooltip} specifically adapted for use with
+ * [ProgressBar]{@link agate/ProgressBar.ProgressBar} or
+ * [IncrementSlider]{@link agate/IncrementSlider.IncrementSlider}.
+ *
+ * @see {@link agate/ProgressBar.ProgressBarTooltip}
+ * @class IncrementSliderTooltip
+ * @memberof agate/Slider
+ * @ui
+ * @public
+ */
+
 export default IncrementSlider;
 export {
 	IncrementSlider,
