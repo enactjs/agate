@@ -27,7 +27,7 @@ storiesOf('Agate', module)
 					onError={action('onError')}
 					onLoad={action('onLoad')}
 					orientation={select('orientation', ['horizontal', 'vertical'], Config)}
-					sizing={select('sizing', ['fill', 'fit', 'none'], Config, 'fill')}
+					sizing={select('sizing', ['fill', 'fit', 'none'], Config)}
 					src={object('src', Config, src)}
 				>
 					{text('children', Config, 'caption')}
