@@ -265,7 +265,6 @@ const ArcSliderBase = kind({
 const ArcSliderDecorator = compose(
 	Pure,
 	ArcSliderBehaviorDecorator,
-	MarqueeController({marqueeOnFocus: true}),
 	Touchable,
 	Spottable,
 	Skinnable
