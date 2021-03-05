@@ -6,14 +6,17 @@
  */
 
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
+import {ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
+import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
-import {ButtonBase, ButtonDecorator} from '../Button';
+import {ButtonBase, IconButtonDecorator} from '../Button';
 import Skinnable from '../Skinnable';
+import TooltipDecorator from '../TooltipDecorator';
 
 import componentCss from './SwatchButton.module.less';
-
 
 /**
  * A swatch component which sets-up the component's structure.
@@ -36,10 +39,10 @@ const SwatchButtonBase = kind({
 		 *
 		 * The value should take the format of a HEX color. Ex: `#ffcc00` or `#3467af`
 		 *
-		 * @type {Object}
+		 * @type {String}
 		 * @public
 		 */
-		children: PropTypes.object,
+		children: PropTypes.string,
 
 		/**
 		 * The color of the swatch.
@@ -112,7 +115,11 @@ const SwatchButtonBase = kind({
  * @public
  */
 const SwatchButtonDecorator = compose(
-	ButtonDecorator,
+	Pure,
+	UiButtonDecorator,
+	IconButtonDecorator,
+	TooltipDecorator({tooltipDestinationProp: 'decoration'}),
+	Spottable,
 	Skinnable
 );
 
