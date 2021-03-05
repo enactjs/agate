@@ -634,7 +634,7 @@ const IncrementSlider = IncrementSliderDecorator(IncrementSliderBase);
  *
  * @see {@link agate/ProgressBar.ProgressBarTooltip}
  * @class IncrementSliderTooltip
- * @memberof agate/Slider
+ * @memberof agate/IncrementSlider
  * @ui
  * @public
  */

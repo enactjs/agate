@@ -112,7 +112,7 @@ DropdownButton.displayName = 'DropdownButton';
  * A stateless Dropdown component.
  *
  * @class DropdownBase
- * @memeberof agate/Dropdown
+ * @memberof agate/Dropdown
  * @extends agate/Button.Button
  * @extends agate/ContextualPopupDecorator.ContextualPopupDecorator
  * @omit popupComponent
