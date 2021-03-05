@@ -10,6 +10,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ContextualPopupDecorator` prop `css` to support customizations
 - `agate/Dropdown` prop `width` to support multiple widths
 - `agate/Item` to have a `selected` publicClassname
+- `agate/RadioItem` prop `slotBefore`
 - `agate/Spinner` prop `children` to support the display of text below the icon
 
 ### Changed
@@ -20,7 +21,9 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/ArcSlider` to display correctly when `min` prop equals `max` prop or when `min` is greater than `max`
+- `agate/Button` to apply active styling only when it is not disabled
 - `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
+- `agate/LabeledIconButton` styling to preserve behavior and look when props are missing
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
 - `agate/SliderButton` styling to visually show the focused state
 - `agate/TooltipDecorator` to position correctly on rtl locale
