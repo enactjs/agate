@@ -30,7 +30,8 @@ const BasicPanels = (props) => {
 		>
 			<Panel>
 				<Header title="First Panel" />
-				<Item onClick={goNext}>Next</Item>
+				<Item onClick={goNext}>Next1</Item>
+				<Item onClick={goNext}>Next2</Item>
 			</Panel>
 			<Panel>
 				<Header title="Second Panel" />
@@ -49,17 +50,7 @@ const MenuItemBase = kind({
 	name: 'MenuItem',
 
 	propTypes: {
-		css: PropTypes.object,
-		icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 		path: PropTypes.string
-	},
-
-	defaultProps: {
-		disabled: false
-	},
-
-	styles: {
-		className: 'menuItem'
 	},
 
 	handlers: {
@@ -69,10 +60,9 @@ const MenuItemBase = kind({
 		)
 	},
 
-	render: ({css, ...rest}) => {
+	render: ({...rest}) => {
 		return (
 			<Item
-				css={css}
 				{...rest}
 				slotAfter={
 					<Icon size="small">arrowlargeright</Icon>
@@ -88,7 +78,7 @@ const MainPanel = kind({
 	name: 'MainPanel',
 
 	render: (props) => (
-		<Panel spotlightId="main-panel-container" {...props}>
+		<Panel spotlightId="main-panel-container" {...props}> {/* Set a unique ID to preserve last focus */}
 			<MenuItem path="./page1">Pages</MenuItem>
 			<MenuItem path="./page2">General</MenuItem>
 		</Panel>
@@ -96,10 +86,10 @@ const MainPanel = kind({
 });
 
 const Page1 = kind({
-	name: 'Page',
+	name: 'Page1',
 
 	render: (props) => (
-		<Panel spotlightId="page1-container" {...props}>
+		<Panel spotlightId="page1-container" {...props}> {/* Set a unique ID to preserve last focus */}
 			<MenuItem path="./endPage">Page1</MenuItem>
 			<MenuItem path="./endPage">Page2</MenuItem>
 		</Panel>
@@ -107,10 +97,10 @@ const Page1 = kind({
 });
 
 const Page2 = kind({
-	name: 'Page',
+	name: 'Page2',
 
 	render: (props) => (
-		<Panel spotlightId="page2-container" {...props}>
+		<Panel spotlightId="page2-container" {...props}> {/* Set a unique ID to preserve last focus */}
 			<MenuItem path="./endPage">General1</MenuItem>
 			<MenuItem path="./endPage">General2</MenuItem>
 		</Panel>
@@ -168,11 +158,16 @@ storiesOf('Panels', module)
 		'preserve focus',
 		() => (
 			<BasicPanels
-				noAnimation={boolean('noAnimation', Config, true)}
-				noCloseButton={boolean('noCloseButton', Config, true)}
+				noAnimation={boolean('noAnimation', Config)}
+				noCloseButton={boolean('noCloseButton', Config)}
 				orientation={select('orientation', ['horizontal', 'vertical'], Config)}
 			/>
-		)
+		),
+		{
+			props: {
+				noPanels: true
+			}
+		}
 	)
 	.add(
 		'preserve route focus',
