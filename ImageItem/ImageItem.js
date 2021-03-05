@@ -148,7 +148,7 @@ const ImageItemBase = kind({
 				aria-disabled={disabled}
 				css={css}
 				disabled={disabled}
-				imageComponent={<ImageBase />}
+				imageComponent={ImageBase}
 				orientation={orientation}
 				src={src}
 			>
