@@ -38,7 +38,7 @@ const DropdownListBase = kind({
 	name: 'DropdownListBase',
 
 	propTypes: {
-		/**
+		/*
 		 * The selections for Dropdown
 		 *
 		 * @type {String[]|Array.<{key: (Number|String), children: (String|Component)}>}
@@ -51,35 +51,35 @@ const DropdownListBase = kind({
 			}))
 		]),
 
-		/**
+		/*
 		 * Placement of the Dropdown List.
 		 *
 		 * @type {String}
 		 */
 		direction: PropTypes.string,
 
-		/**
+		/*
 		 * Called when an item is selected.
 		 *
 		 * @type {Function}
 		 */
 		onSelect: PropTypes.func,
 
-		/**
+		/*
 		 * Callback function that will receive the scroller's scrollTo() method
 		 *
 		 * @type {Function}
 		 */
 		scrollTo: PropTypes.func,
 
-		/**
+		/*
 		 * Index of the selected item.
 		 *
 		 * @type {Number}
 		 */
 		selected: PropTypes.number,
 
-		/**
+		/*
 		 * The current skin for this component.
 		 *
 		 * @type {String}
@@ -87,7 +87,7 @@ const DropdownListBase = kind({
 		 */
 		skin: PropTypes.string,
 
-		/**
+		/*
 		 * The width of DropdownList.
 		 *
 		 * @type {('smallest'|'small'|'medium'|'large'|'x-large'|'huge')}
