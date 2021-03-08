@@ -5,7 +5,7 @@ import {storiesOf} from '@storybook/react';
 
 import ProgressBar, {ProgressBarBase, ProgressBarTooltip} from '@enact/agate/ProgressBar';
 
-const ProgressBarConfig = mergeComponentMetadata('ProgressBar', ProgressBarBase, ProgressBar, UiProgressBar );
+const ProgressBarConfig = mergeComponentMetadata('ProgressBar', ProgressBarBase, ProgressBar, UiProgressBar);
 const ProgressBarTooltipConfig = mergeComponentMetadata('ProgressBarTooltip', ProgressBarTooltip);
 
 ProgressBar.displayName = 'ProgressBar';
