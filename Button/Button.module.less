@@ -483,24 +483,26 @@
 			}
 		});
 
-		.active({
-			.bg {
-				background-color: @agate-button-active-bg-color;
-				background-image: @agate-button-active-bg-image;
-				border: @agate-button-border-width solid @agate-button-border-color;
-				opacity: @agate-button-active-opacity;
-			}
-
-			&,
-			.client {
-				color: @agate-button-active-color;
-			}
-
-			&.highlighted {
+		&:not([disabled]) {
+			.active({
 				.bg {
-					opacity: 1;
+					background-color: @agate-button-active-bg-color;
+					background-image: @agate-button-active-bg-image;
+					border: @agate-button-border-width solid @agate-button-border-color;
+					opacity: @agate-button-active-opacity;
 				}
-			}
-		});
+
+				&,
+				.client {
+					color: @agate-button-active-color;
+				}
+
+				&.highlighted {
+					.bg {
+						opacity: 1;
+					}
+				}
+			});
+		}
 	});
 }

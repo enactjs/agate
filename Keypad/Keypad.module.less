@@ -97,20 +97,22 @@
 			}
 		});
 
-		.active({
-			.bg {
-				background-color: @agate-keypad-button-active-bg-color;
-				border-color: @agate-keypad-button-active-border-color;
-			}
-
-			.client {
-				color: @agate-keypad-button-active-color;
-
-				.label {
-					color: @agate-keypad-button-active-color;
+		&:not([disabled]) {
+			.active({
+				.bg {
+					background-color: @agate-keypad-button-active-bg-color;
+					border-color: @agate-keypad-button-active-border-color;
 				}
-			}
-		});
+
+				.client {
+					color: @agate-keypad-button-active-color;
+
+					.label {
+						color: @agate-keypad-button-active-color;
+					}
+				}
+			});
+		}
 	});
 }
 

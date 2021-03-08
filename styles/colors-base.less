@@ -160,7 +160,6 @@
 @agate-dropdown-button-open-border-color: inherit;
 @agate-dropdown-up-button-open-border-bottom-color: inherit;
 @agate-dropdown-list-bg-color: @agate-white;
-@agate-dropdown-selected-color: inherit;
 @agate-dropdown-item-border-color: inherit;
 @agate-dropdown-item-color: inherit;
 @agate-dropdown-item-focus-bg-color: inherit;
@@ -318,10 +317,12 @@
 
 // ProgressBar
 // ---------------------------------------
+@agate-progressbar-highlighted-fill-bg-color: @agate-highlight;
 @agate-progressbar-track-bg-color: inherit;
 @agate-progressbar-track-bg-image: @agate-slider-track-bg-image;
 @agate-progressbar-fill-bg-color: inherit;
 @agate-progressbar-fill-bg-image: @agate-slider-fill-bg-image;
+@agate-progressbar-load-bg-color: fade(@agate-white, 50%);
 @agate-progressbar-vertical-fill-bg-image: @agate-progressbar-fill-bg-image;
 
 // RadioItem
@@ -359,6 +360,7 @@
 @agate-slider-knob-focus-bg-image: @agate-slider-knob-bg-image;
 @agate-slider-knob-shadow:    inherit;
 @agate-slider-knob-focus-shadow: inherit;
+@agate-slider-load-bg-color: @agate-progressbar-load-bg-color;
 
 // IncrementSlider
 // ---------------------------------------
@@ -454,6 +456,6 @@
 
 // Tooltip
 // ---------------------------------------
-@agate-tooltip-bg-color:               inherit;
-@agate-tooltip-text-color:             inherit;
-@agate-tooltip-border-color:           inherit;
+@agate-tooltip-bg-color:               @agate-darker-gray;
+@agate-tooltip-text-color:             @agate-white;
+@agate-tooltip-border-color:           @agate-dark-gray;

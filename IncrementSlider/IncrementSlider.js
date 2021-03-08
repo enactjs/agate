@@ -16,6 +16,7 @@
  * @exports IncrementSlider
  * @exports IncrementSliderBase
  * @exports IncrementSliderDecorator
+ * @exports IncrementSliderTooltip
  */
 
 import {forward} from '@enact/core/handle';
@@ -31,6 +32,7 @@ import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
 import $L from '../internal/$L';
+import {ProgressBarTooltip} from '../ProgressBar';
 import Skinnable from '../Skinnable';
 import {SliderBase} from '../Slider';
 import {emitChange} from '../Slider/utils';
@@ -62,6 +64,15 @@ const IncrementSliderBase = kind({
 	name: 'IncrementSlider',
 
 	propTypes: /** @lends agate/IncrementSlider.IncrementSliderBase.prototype */ {
+		/**
+		 * Activates the slider knob when focused so that it may be manipulated via the directional
+		 * input keys.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		activateOnFocus: PropTypes.bool,
+
 		/**
 		 * Sets the knob to selected state and allows it to move via 5-way controls.
 		 *
@@ -362,6 +373,43 @@ const IncrementSliderBase = kind({
 		 */
 		step: PropTypes.number,
 
+
+		/**
+		 * Enables the built-in tooltip
+		 *
+		 * To customize the tooltip, pass either a custom tooltip component or an instance of
+		 * [IncrementSliderTooltip]{@link agate/IncrementSlider.IncrementSliderTooltip} with additional props configured.
+		 *
+		 * ```
+		 * <IncrementSlider
+		 *   tooltip={
+		 *     <IncrementSliderTooltip percent side="after" />
+		 *   }
+		 * />
+		 * ```
+		 *
+		 * The tooltip may also be passed as a child via the `"tooltip"` slot. See
+		 * [Slottable]{@link ui/Slottable} for more information on how slots can be used.
+		 *
+		 * ```
+		 * <IncrementSlider>
+		 *   <IncrementSliderTooltip percent side="after" />
+		 * </IncrementSlider>
+		 * ```
+		 *
+		 * If a custom tooltip is provided, it will receive the following props:
+		 *
+		 * * `children` - The `value` prop from the slider
+		 * * `visible` - `true` if the tooltip should be displayed
+		 * * `orientation` - The value of the `orientation` prop from the slider
+		 * * `proportion` - A number between 0 and 1 representing the proportion of the `value` in
+		 *   terms of `min` and `max`
+		 *
+		 * @type {Boolean|Element|Function}
+		 * @public
+		 */
+		tooltip: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
+
 		/**
 		 * The value of the increment slider.
 		 *
@@ -439,10 +487,13 @@ const IncrementSliderBase = kind({
 			}
 
 			return `${valueText != null ? valueText : value} ${incrementAriaLabel}`;
-		}
+		},
+		tooltip: ({tooltip}) => tooltip === true ? ProgressBarTooltip : tooltip
 	},
 
-	render: ({active,
+	render: ({
+		activateOnFocus,
+		active,
 		'aria-hidden': ariaHidden,
 		backgroundProgress,
 		css,
@@ -473,6 +524,7 @@ const IncrementSliderBase = kind({
 		size,
 		spotlightDisabled,
 		step,
+		tooltip,
 		value,
 		...rest
 	}) => {
@@ -499,6 +551,7 @@ const IncrementSliderBase = kind({
 				/>
 				<Slider
 					{...ariaProps}
+					activateOnFocus={activateOnFocus}
 					active={active}
 					backgroundProgress={backgroundProgress}
 					css={css}
@@ -518,6 +571,7 @@ const IncrementSliderBase = kind({
 					spotlightDisabled={spotlightDisabled}
 					progressAnchor={progressAnchor}
 					step={step}
+					tooltip={tooltip}
 					value={value}
 				/>
 				<IncrementSliderButton
@@ -553,7 +607,7 @@ const IncrementSliderDecorator = compose(
 	IdProvider({generateProp: null, prefix: 's_'}),
 	SliderBehaviorDecorator({emitSpotlightEvents: 'onSpotlightDirection'}),
 	Skinnable,
-	Slottable({slots: ['knob']})
+	Slottable({slots: ['knob', 'tooltip']})
 );
 
 /**
@@ -574,9 +628,22 @@ const IncrementSliderDecorator = compose(
  */
 const IncrementSlider = IncrementSliderDecorator(IncrementSliderBase);
 
+/**
+ * A [Tooltip]{@link agate/TooltipDecorator.Tooltip} specifically adapted for use with
+ * [ProgressBar]{@link agate/ProgressBar.ProgressBar} or
+ * [IncrementSlider]{@link agate/IncrementSlider.IncrementSlider}.
+ *
+ * @see {@link agate/ProgressBar.ProgressBarTooltip}
+ * @class IncrementSliderTooltip
+ * @memberof agate/IncrementSlider
+ * @ui
+ * @public
+ */
+
 export default IncrementSlider;
 export {
 	IncrementSlider,
 	IncrementSliderBase,
-	IncrementSliderDecorator
+	IncrementSliderDecorator,
+	ProgressBarTooltip as IncrementSliderTooltip
 };
