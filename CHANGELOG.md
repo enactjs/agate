@@ -17,11 +17,12 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/Dropdown` to use `agate/ContextualPopup`
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
-- `agate/ArcPicker` to use `Marquee` for slotCenter
-- `agate/ArcSlider` to use `Marquee` for slotCenter
+- `agate/ArcPicker` to have a max-width for valueDisplay
+- `agate/ArcSlider` to have a max-width for valueDisplay
 
 ### Fixed
 
+- `agate/ArcSlider` and `agate/TemperatureControl` broken layout when `min` prop is not smaller than `max` prop
 - `agate/Button` to apply active styling only when it is not disabled
 - `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
 - `agate/LabeledIconButton` styling to preserve behavior and look when props are missing
