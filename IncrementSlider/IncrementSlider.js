@@ -16,6 +16,7 @@
  * @exports IncrementSlider
  * @exports IncrementSliderBase
  * @exports IncrementSliderDecorator
+ * @exports IncrementSliderTooltip
  */
 
 import {forward} from '@enact/core/handle';

@@ -13,6 +13,7 @@
  * @exports Slider
  * @exports SliderBase
  * @exports SliderDecorator
+ * @exports SliderTooltip
  */
 
 // TODO: Add 'activated' styling for slider (If 5-way is needed)
