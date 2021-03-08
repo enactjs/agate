@@ -1,5 +1,5 @@
 import Heading from '../../../../Heading';
-import IncrementSlider from '../../../../IncrementSlider';
+import IncrementSlider, {IncrementSliderTooltip} from '../../../../IncrementSlider';
 import ThemeDecorator from '../../../../ThemeDecorator';
 
 const app = (props) => <div {...props}>
@@ -8,6 +8,10 @@ const app = (props) => <div {...props}>
 		<IncrementSlider className="incrementSliderDefault" />
 		<Heading>IncrementSlider custom progressAnchor</Heading>
 		<IncrementSlider className="incrementSliderCustomProgressAnchor" progressAnchor={0.7} />
+		<Heading>IncrementSlider with tooltip</Heading>
+		<IncrementSlider className="incrementSliderWithTooltip">
+			<IncrementSliderTooltip />
+		</IncrementSlider>
 		<Heading>IncrementSlider vertical</Heading>
 		<IncrementSlider className="incrementSliderVertical" max={10} orientation="vertical" />
 		<Heading>IncrementSlider disabled</Heading>
