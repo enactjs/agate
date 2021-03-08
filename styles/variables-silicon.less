@@ -37,17 +37,39 @@
 @agate-button-border-radius: (@agate-button-height / 2);
 @agate-button-background-origin: border-box;
 @agate-button-client-animation-offset: (@agate-button-animation-duration * 0.4);
+@agate-button-client-padding: 0;
 @agate-button-badge-animation-offset: (@agate-button-animation-duration * 0.8);
 @agate-button-badge-position: -3px 0 auto auto;
 @agate-button-badge-position-rtl: -3px auto auto 0;
+@agate-button-font-size: 27px;
 @agate-button-font-weight: 300;
-@agate-button-height: 75px;
+@agate-button-h-padding: 30px;
+@agate-button-height: 60px;
 @agate-button-line-height: 1.17em;
+@agate-button-max-width: 420px;
+@agate-button-min-width: 180px;
+@agate-button-icon-margin-end: 9px;
+@agate-button-icon-margin-start: 0;
 @agate-button-huge-border-width: @agate-button-border-width;
+@agate-button-huge-font-size: 33px;
+@agate-button-huge-h-padding: @agate-button-h-padding;
+@agate-button-huge-height: 180px;
+@agate-button-huge-max-width: 360px;
+@agate-button-huge-min-width: 180px;
 @agate-button-small-border-radius: (@agate-button-small-height / 2);
-@agate-button-small-font-size: 28px;
-@agate-button-smallest-height: 39px;
-@agate-button-smallest-font-size: 18px;
+@agate-button-small-font-size: 25px;
+@agate-button-small-h-padding: 21px;
+@agate-button-small-height: 42px;
+@agate-button-small-max-width: 252px;
+@agate-button-small-min-width: 126px;
+@agate-button-smallest-border-radius: (@agate-button-smallest-height / 2);
+@agate-button-smallest-font-size: 10px;
+@agate-button-smallest-h-padding: 12px;
+@agate-button-smallest-height: 28px;
+@agate-button-smallest-font-size: 10px;
+@agate-button-smallest-max-width: 108px;
+@agate-button-smallest-min-width: 48px;
+@agate-button-smallest-icon-margin-end: 6px;
 
 // Checkbox
 // ---------------------------------------
@@ -132,8 +154,11 @@
 
 // Icon Sizes
 // ---------------------------------------
-@agate-icon-small-size: 30px;
-@agate-icon-smallest-size: 18px;
+@agate-icon-size: 33px;
+@agate-icon-huge-size: 90px;
+@agate-icon-huge-font-size: (@agate-icon-huge-size * 2);
+@agate-icon-small-size: 24px;
+@agate-icon-smallest-size: 16px;
 
 // ImageItem
 // ---------------------------------------
@@ -251,7 +276,7 @@
 @agate-panel-h-padding: extract(@agate-panels-panel-padding, 2);
 @agate-panels-partial-width: 888px;
 @agate-panels-breadcrumb-width: 105px;
-@agate-panels-controls-top: (extract(@agate-panels-panel-padding, 1) - 15px);
+@agate-panels-controls-top: (extract(@agate-panels-panel-padding, 1) + 21px);
 @agate-panels-controls-padding-start: 18px;
 @agate-panels-panel-header-padding: 0;
 @agate-panels-panel-body-padding: 0;
@@ -264,6 +289,7 @@
 @agate-picker-font-size: 27px;
 @agate-picker-font-weight: normal;
 @agate-picker-active-font-weight: bold;
+@agate-picker-item-height: 75px;
 
 // Popup
 // ---------------------------------------
@@ -338,6 +364,7 @@
 @agate-sliderbutton-border-radius: 3px;
 @agate-sliderbutton-border-width: 12px;
 @agate-sliderbutton-bg-clip: padding-box;
+@agate-sliderbutton-height: 75px;
 @agate-sliderbutton-knob-border-radius: 6px;
 @agate-sliderbutton-knob-border-width: 3px;
 @agate-sliderbutton-knob-transform: scale(1.07, 1.4);
