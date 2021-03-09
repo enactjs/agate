@@ -32,23 +32,6 @@ const SpotlightContainerLayout = SpotlightContainerDecorator(
 	Layout
 );
 
-const KEY_LIST = [
-	{text: '1'},
-	{text: '2', label: 'abc'},
-	{text: '3', label: 'def'},
-	{text: '4', label: 'ghi'},
-	{text: '5', label: 'jkl'},
-	{text: '6', label: 'mno'},
-	{text: '7', label: 'pqrs'},
-	{text: '8', label: 'tuv'},
-	{text: '9', label: 'wxyz'},
-	{text: '*'},
-	{text: '0'},
-	{text: '#'},
-	{icon: 'phone'},
-	{icon: 'arrowuturn'}
-];
-
 /**
  * Renders an Agate-styled Key button.
  *
@@ -152,6 +135,15 @@ const KeypadBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
+		 * Renders different icons depending on whether there is an active call or not.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		isCallActive: PropTypes.bool,
+
+		/**
 		 * Called when a button is clicked. Includes the 'key' key in its event payload, updates the state and the input value accordingly.
 		 *
 		 * @type {Function}
@@ -159,6 +151,14 @@ const KeypadBase = kind({
 		 * @public
 		 */
 		onKeyButtonClick: PropTypes.func,
+
+		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		skin: PropTypes.string,
 
 		/**
 		 * Disables 5-way spotlight from navigating into the component.
@@ -174,32 +174,53 @@ const KeypadBase = kind({
 		className: 'keypad'
 	},
 
-	render: ({disabled, onKeyButtonClick, spotlightDisabled, ...rest}) => {
+	computed: {
+		keys: ({isCallActive, skin}) => [
+			{text: '1'},
+			{text: '2', label: 'abc'},
+			{text: '3', label: 'def'},
+			{text: '4', label: 'ghi'},
+			{text: '5', label: 'jkl'},
+			{text: '6', label: 'mno'},
+			{text: '7', label: 'pqrs'},
+			{text: '8', label: 'tuv'},
+			{text: '9', label: 'wxyz'},
+			{text: '*'},
+			{text: '0'},
+			{text: '#'},
+			{text: skin === 'gallium' ? 'phone' : (isCallActive ? 'calldecline' : 'callaccept'), isIcon: true},
+			{text: skin === 'gallium' ? 'arrowuturn' : (isCallActive ? 'keypad' : 'backspace'), isIcon: true}
+		]
+	},
+
+	render: ({disabled, keys, onKeyButtonClick, spotlightDisabled, ...rest}) => {
+		delete rest.isCallActive;
+
 		return (
 			<SpotlightContainerLayout {...rest} align="center end" className={css.keypad} inline spotlightDisabled={spotlightDisabled} wrap>
-				{KEY_LIST.map((keyText, rowIndex) => {
-					const {icon, text} = keyText;
-					const isIcon = icon === 'arrowuturn' || icon === 'phone';
+				{keys.map((keyText, rowIndex) => {
+					const {className, isIcon, text} = keyText;
 
 					let ariaLabel = text;
-					if (icon === 'arrowuturn') {
+					if (text === 'arrowuturn') {
 						ariaLabel = $L('backspace');
-					} else if (icon === 'phone') {
+					} else if (text === 'phone') {
 						ariaLabel = $L('call');
 					}
 
 					return (
 						<Cell
 							aria-label={ariaLabel}
+							className={className}
 							component={Key}
 							disabled={disabled}
 							key={`key${rowIndex}-${text}`}
-							onKeyButtonClick={() => onKeyButtonClick(isIcon ? icon : text)}
+							onKeyButtonClick={() => onKeyButtonClick(text)}
 							shrink
 							label={keyText.label}
 							text={isIcon ? null : text}
 						>
-							{isIcon ? icon : null}
+							{isIcon ? text : null}
 						</Cell>
 					);
 				})}
@@ -346,7 +367,7 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
  */
 const KeypadDecorator = compose(
 	KeypadBehaviorDecorator,
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 /**

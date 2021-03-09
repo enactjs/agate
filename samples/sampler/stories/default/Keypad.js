@@ -14,6 +14,7 @@ storiesOf('Agate', module)
 			return (
 				<Keypad
 					disabled={boolean('disabled', Config)}
+					isCallActive={boolean('isCallActive', Config)}
 					onChange={action('onChange')}
 					spotlightDisabled={boolean('spotlightDisabled', Config)}
 				/>
