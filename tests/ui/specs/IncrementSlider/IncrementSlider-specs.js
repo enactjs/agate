@@ -72,6 +72,15 @@ describe('IncrementSlider', function () {
 			});
 		});
 
+		describe('with tooltip', function () {
+			const incrementSlider = Page.components.incrementSliderWithTooltip;
+
+			it('should display a tooltip on focus', function () {
+				incrementSlider.focusSlider();
+				expect(incrementSlider.tooltip.isExisting()).to.be.true();
+			});
+		});
+
 		describe('vertical incrementSlider', function () {
 			const incrementSlider = Page.components.incrementSliderVertical;
 
