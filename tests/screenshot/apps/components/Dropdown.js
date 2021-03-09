@@ -47,15 +47,15 @@ const DropdownTests = [
 	// RTL
 	{
 		locale: 'ar-SA',
-		component:<Dropdown title="Select your option" style={{marginRight: '12px'}}>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
+		component:<Dropdown title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
 	},
 	{
 		locale: 'ar-SA',
-		component:<Dropdown defaultSelected={1} style={{marginRight: '12px'}}>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
+		component:<Dropdown defaultSelected={1}>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
 	},
 	{
 		locale: 'ar-SA',
-		component:<Dropdown disabled title="Select your option" style={{marginRight: '12px'}}>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
+		component:<Dropdown disabled title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
 	},
 
 	// Dropdown Open
