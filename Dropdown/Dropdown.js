@@ -14,6 +14,7 @@
  * @exports DropdownBase
  * @exports DropdownDecorator
  */
+
 import {forward, forProp, handle} from '@enact/core/handle';
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';

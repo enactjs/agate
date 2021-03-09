@@ -169,14 +169,14 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 		static displayName = 'DropdownListSpotlightDecorator';
 
 		static propTypes = {
-			/**
+			/*
 			 * Called when an item receives focus.
 			 *
 			 * @type {Function}
 			 */
 			onFocus: PropTypes.func,
 
-			/**
+			/*
 			 * Index of the selected item.
 			 *
 			 * @type {Number}
