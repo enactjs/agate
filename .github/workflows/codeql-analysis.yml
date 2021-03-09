@@ -17,9 +17,11 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ develop ]
+    paths-ignore: 
+      - '*.md'
     
   schedule:
-    - cron: '17 1 * * 1'
+    - cron: '17 1 * * 3'
 
 jobs:
   analyze:
@@ -37,6 +39,9 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        ref: develop
+        fetch-depth: 0
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
