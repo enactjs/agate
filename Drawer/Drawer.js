@@ -41,20 +41,13 @@ const DrawerBase = kind({
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
 		 *
-		 * The following classes are supported:
-		 *
-		 * * `drawer` - The root component class
-		 *
 		 * @type {Object}
 		 * @public
 		 */
 		css: PropTypes.object,
 
 		/**
-		 * Footer for the drawer.
-		 *
-		 * This is usually passed by the [Slottable]{@link ui/Slottable.Slottable} API by using a
-		 * [BodyText]{@link agate/BodyText} component inside of a [footer] slot as a child of the Drawer.
+		 * Components to be included under the primary content.
 		 *
 		 * @type {Node}
 		 * @public
@@ -64,16 +57,13 @@ const DrawerBase = kind({
 		/**
 		 * Header for the drawer.
 		 *
-		 * This is usually passed by the [Slottable]{@link ui/Slottable.Slottable} API by using a
-		 * [Heading]{@link agate/Heading} component inside of a [header] slot as a child of the Drawer.
-		 *
 		 * @type {Node}
 		 * @public
 		 */
 		header: PropTypes.node,
 
 		/**
-		 * Disables transition animation.
+		 * Disables drawer transition animation.
 		 *
 		 * @type {Boolean}
 		 * @default false
@@ -94,7 +84,7 @@ const DrawerBase = kind({
 		// onClose: PropTypes.func,
 
 		/**
-		 * Called after the drawer's "hide" transition finishes.
+		 * Called after the transition to hide the drawer has finished.
 		 *
 		 * @type {Function}
 		 * @public
@@ -110,15 +100,22 @@ const DrawerBase = kind({
 		onShow: PropTypes.func,
 
 		/**
-		 * Controls the visibility of the Drawer.
-		 *
-		 * By default, the Drawer and its contents are not rendered until `open`.
+		 * Displays the drawer.
 		 *
 		 * @type {Boolean}
 		 * @default false
 		 * @public
 		 */
 		open: PropTypes.bool,
+
+		/**
+		 * Orientation of the drawer.
+		 *
+		 * @type {('horizontal'|'vertical')}
+		 * @default 'vertical'
+		 * @private
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
 		 * The container id for {@link spotlight/Spotlight}.
