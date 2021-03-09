@@ -132,8 +132,7 @@
 		border-radius: @agate-dropdown-list-border-radius;
 		background-color: @agate-dropdown-list-bg-color;
 		max-height: @agate-dropdown-list-height;
-		padding-top: @agate-dropdown-list-padding-top;
-		padding-bottom: @agate-dropdown-list-padding-bottom;
+		.padding-start-end(@agate-dropdown-list-padding);
 		overflow: hidden;
 
 		.item {
@@ -158,8 +157,7 @@
 			&.radioItem {
 				border-color: @agate-dropdown-radioitem-border-color;
 				border-width: @agate-dropdown-item-border-width;
-				padding-left: @agate-dropdown-radioitem-padding;
-				padding-right: @agate-dropdown-radioitem-padding;
+				.padding-start-end(0, @agate-dropdown-radioitem-padding-right);
 
 				.icon {
 					.margin-start-end(@agate-dropdown-radioitem-icon-margin);
@@ -167,6 +165,12 @@
 
 				&.selected {
 					background-color: @agate-dropdown-radioitem-selected-bg-color;
+
+					.focus({
+						.icon {
+							color: @agate-dropdown-radioitem-selected-focus-color;
+						}
+					})
 				}
 
 				.focus({
@@ -210,19 +214,6 @@
 
 		&.dropdownListWithCustomizedScroller {
 			// FIXME:
-			[role="button"] {
-				.focus({
-					& > div {
-						background-image: none;
-					}
-				});
-			}
-
-			[role="button"] > div {
-				border-color: transparent;
-				color: black;
-			}
-
 			[role="button"] + div::before {
 				background-color: black;
 			}
