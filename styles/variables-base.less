@@ -104,7 +104,7 @@
 @agate-button-badge-letter-spacing: @agate-button-letter-spacing;
 @agate-button-badge-text-indent: inherit;
 @agate-button-badge-transform: none;
-@agate-button-huge-height: 250px;
+@agate-button-huge-height: 249px;
 @agate-button-huge-font-size: 45px;
 @agate-button-huge-line-height: (@agate-button-huge-height - (2 * @agate-button-border-width));
 @agate-button-huge-h-padding: 36px;
@@ -196,23 +196,33 @@
 @agate-dropdown-button-icon-font-size: inherit;
 @agate-dropdown-button-icon-margin-right: inherit;
 @agate-dropdown-button-icon-width: inherit;
-@agate-dropdown-button-list-border-radius: inherit;
+@agate-dropdown-button-max-width: inherit;
+@agate-dropdown-list-border-radius: initial;
 @agate-dropdown-button-open-border-radius: inherit;
 @agate-dropdown-button-padding: inherit;
-@agate-dropdown-button-transition-delay: inherit;
-@agate-dropdown-button-marquee-margin-right: inherit;
-@agate-dropdown-up-button-list-border-radius: inherit;
+@agate-dropdown-up-button-list-border-radius: initial;
 @agate-dropdown-up-button-open-border-radius: inherit;
 @agate-dropdown-button-height: inherit;
-@agate-dropdown-button-width: inherit;
-@agate-dropdown-item-border-width: 0;
+@agate-dropdown-item-border-width: @agate-item-border-width;
 @agate-dropdown-item-font-size: inherit;
 @agate-dropdown-item-font-weight: inherit;
 @agate-dropdown-item-line-height: @agate-item-line-height;
 @agate-dropdown-item-padding: inherit;
+@agate-dropdown-item-focus-border-color: @agate-item-focus-border-color;
 @agate-dropdown-list-height:  @agate-item-height * 4;
-@agate-dropdown-list-padding: inherit;
-@agate-dropdown-transitionContainer-width: inherit;
+@agate-dropdown-list-padding: initial;
+@agate-dropdown-smallest-width: 321px;
+@agate-dropdown-small-width: 400px;
+@agate-dropdown-medium-width: 522px;
+@agate-dropdown-large-width: 681px;
+@agate-dropdown-x-large-width: 921px;
+@agate-dropdown-huge-width: 1200px;
+@agate-dropdown-list-smallest-width: @agate-dropdown-smallest-width;
+@agate-dropdown-list-small-width: @agate-dropdown-small-width;
+@agate-dropdown-list-medium-width: @agate-dropdown-medium-width;
+@agate-dropdown-list-large-width: @agate-dropdown-large-width;
+@agate-dropdown-list-x-large-width: @agate-dropdown-x-large-width;
+@agate-dropdown-list-huge-width: @agate-dropdown-huge-width;
 
 // Drawer
 // ---------------------------------------
@@ -370,6 +380,9 @@
 @agate-imageitem-caption-overlay-line-height: inherit;
 @agate-imageitem-caption-overlay-text-align: inherit;
 @agate-imageitem-caption-position-bottom: 6px;
+@agate-imageitem-horizontal-image-margin: 0 6px 0 0;
+@agate-imageitem-horizontal-image-width: 90px;
+@agate-imageitem-horizontal-image-height: @agate-imageitem-horizontal-image-width;
 
 // Item
 // ---------------------------------------
@@ -391,6 +404,8 @@
 @agate-item-line-height:              @agate-item-height - (@agate-item-vertical-padding * 2);
 @agate-item-line-height-large:        @agate-item-height-large - (@agate-item-vertical-padding * 2);
 @agate-item-side-outset:              @agate-component-spacing;
+@agate-item-slotafter-spacing:        @agate-component-spacing;
+@agate-item-slotbefore-spacing:       @agate-component-spacing;
 @agate-item-sub-text-size:            inherit;
 @agate-item-vertical-padding:         3px;
 @agate-item-small-font-size:          inherit;
@@ -418,9 +433,10 @@
 
 // LabeledIconButton
 // ---------------------------------------
-@agate-labelediconbutton-label-font-size: 38px;
+@agate-labelediconbutton-label-font-size:   38px;
 @agate-labelediconbutton-label-font-weight: 500;
-@agate-labelediconbutton-label-margin: 20px;
+@agate-labelediconbutton-label-margin:      20px;
+@agate-labelediconbutton-max-width:         291px;
 
 // MediaPlayer
 // ---------------------------------------
@@ -527,7 +543,8 @@
 
 // PopupMenu
 // ---------------------------------------
-@agate-popupmenu-title-margin: inherit;
+@agate-popupmenu-body-margin-bottom: inherit;
+@agate-popupmenu-title-margin:       inherit;
 
 // ProgressBar
 // ---------------------------------------
@@ -538,6 +555,11 @@
 @agate-progressbar-border-radius: @agate-slider-border-radius;
 @agate-progressbar-track-transform: @agate-slider-track-transform;
 @agate-progressbar-vertical-track-transform: none;
+@agate-progressbar-tooltip-offset: 12px;
+@agate-progressbar-tooltip-above-offset: @agate-progressbar-tooltip-offset;
+@agate-progressbar-tooltip-below-offset: @agate-progressbar-tooltip-offset;
+@agate-progressbar-tooltip-before-offset: @agate-progressbar-tooltip-offset;
+@agate-progressbar-tooltip-after-offset: @agate-progressbar-tooltip-offset;
 
 // Slider
 // ---------------------------------------
@@ -567,6 +589,10 @@
 @agate-slider-track-width: @agate-slider-track-height;
 @agate-slider-bg-transform: none;
 @agate-slider-track-transform: none;
+@agate-slider-tooltip-above-offset: (@agate-progressbar-height / 2);
+@agate-slider-tooltip-below-offset: (@agate-progressbar-height / -2);
+@agate-slider-tooltip-before-offset: (@agate-progressbar-height / 2);
+@agate-slider-tooltip-after-offset: (@agate-progressbar-height / -2);
 
 // IncrementSlider
 // ---------------------------------------

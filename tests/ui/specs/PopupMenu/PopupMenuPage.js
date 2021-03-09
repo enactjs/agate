@@ -56,7 +56,7 @@ class PopupMenuInterface {
 	get buttonClose () {
 		return element(`#${this.id} .LabeledIconButton_LabeledIconButton_labeledIconButton`, browser);
 	}
-	get PopupMenu () {
+	get popupMenu () {
 		return element(`#${this.id}`, browser);
 	}
 	get title () {
@@ -102,6 +102,12 @@ class PopupMenuPage extends Page {
 		if (typeof selector !== 'string') selector = `#${selector.id}`;
 
 		$(selector).waitForExist({timeout, reverse: true});
+	}
+
+	waitForFocused (node, timeout, timeoutMsg = 'timed out waiting for focus', interval = 250) {
+		browser.waitUntil(function () {
+			return node.isFocused();
+		}, {timeout, timeoutMsg, interval});
 	}
 }
 

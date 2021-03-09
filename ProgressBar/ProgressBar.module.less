@@ -14,8 +14,17 @@
 		border-radius: @agate-progressbar-border-radius;
 		transform: @agate-progressbar-track-transform;
 
+
+		&.large {
+			/* Defined to prevent global export */
+		}
+
 		&.small {
 			height: @agate-progressbar-small-height;
+		}
+
+		&.horizontal {
+			/* Defined to prevent global export */
 		}
 
 		&.vertical {
@@ -30,6 +39,18 @@
 			.fill {
 				background-image: @agate-progressbar-vertical-fill-bg-image;
 			}
+		}
+
+		&.highlighted {
+			.fill {
+				background-color: @agate-progressbar-highlighted-fill-bg-color;
+				border-radius: @agate-progressbar-border-radius;
+			}
+		}
+
+		.load {
+			background-color: @agate-progressbar-load-bg-color;
+			border-radius: @agate-progressbar-border-radius;
 		}
 
 		.fill {

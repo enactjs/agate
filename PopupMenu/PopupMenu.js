@@ -8,6 +8,7 @@
  */
 
 import kind from '@enact/core/kind';
+import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Layout, {Cell} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 import Transition from '@enact/ui/Transition';
@@ -24,6 +25,11 @@ import PopupState from '../Popup/PopupState';
 
 import componentCss from './PopupMenu.module.less';
 
+const TransitionContainer = SpotlightContainerDecorator(
+	{enterTo: 'default-element', preserveId: true},
+	Transition
+);
+
 /**
  * The base popup menu component.
  *
@@ -36,7 +42,7 @@ const PopupMenuBase = kind({
 	name: 'PopupMenu',
 	propTypes: /** @lends agate/PopupMenu.PopupMenuBase.prototype */ {
 		/**
-		 * Omits the close button.
+		 * When true, popup displays a close button.
 		 *
 		 * @type {Boolean}
 		 * @default false
@@ -48,7 +54,6 @@ const PopupMenuBase = kind({
 		 * The label for the close button.
 		 *
 		 * @type {String}
-		 * @default 'Cancel'
 		 * @public
 		 */
 		closeButtonLabel: PropTypes.string,
@@ -57,13 +62,20 @@ const PopupMenuBase = kind({
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
 		 *
+		 * The following classes are supported:
+		 *
+		 * * `popupMenu` - The root class name
+		 * * `body` - Applied to the body content container
+		 * * `popupTransitionContainer` - Applied to the PopupMenu's outermost container. Sizing can be
+		 *                                applied here for percentage-of-screen values.
+		 *
 		 * @type {Object}
 		 * @public
 		 */
 		css: PropTypes.object,
 
 		/**
-		 * Disables popup menu transition animation.
+		 * Disables transition animation.
 		 *
 		 * @type {Boolean}
 		 * @default false
@@ -72,7 +84,7 @@ const PopupMenuBase = kind({
 		noAnimation: PropTypes.bool,
 
 		/**
-		 * Called when the user has attempted to close the popup menu.
+		 * Called when the popupMenu is closed.
 		 *
 		 * @type {Function}
 		 * @public
@@ -80,7 +92,7 @@ const PopupMenuBase = kind({
 		onClose: PropTypes.func,
 
 		/**
-		 * Called after the transition to hide the popup menu has finished.
+		 * Called after the popupMenu's "hide" transition finishes.
 		 *
 		 * @type {Function}
 		 * @public
@@ -88,7 +100,17 @@ const PopupMenuBase = kind({
 		onHide: PropTypes.func,
 
 		/**
-		 * Displays the popup menu.
+		 * Called after the popup's "show" transition finishes.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onShow: PropTypes.func,
+
+		/**
+		 * Controls the visibility of the PopupMenu.
+		 *
+		 * By default, the PopupMenu and its contents are not rendered until `open`.
 		 *
 		 * @type {Boolean}
 		 * @default false
@@ -97,7 +119,7 @@ const PopupMenuBase = kind({
 		open: PropTypes.bool,
 
 		/**
-		 * The layout orientation of the component
+		 * The layout orientation of the component.
 		 *
 		 * @type {('horizontal')}
 		 * @default 'horizontal'
@@ -106,7 +128,16 @@ const PopupMenuBase = kind({
 		orientation: PropTypes.oneOf(['horizontal']),
 
 		/**
-		 * The primary title text of the popup menu.
+		 * The container id for {@link spotlight/Spotlight}.
+		 *
+		 * @type {String}
+		 * @default null
+		 * @public
+		 */
+		spotlightId: PropTypes.string,
+
+		/**
+		 * The primary text of the popupMenu.
 		 *
 		 * @type {String}
 		 * @public
@@ -124,44 +155,48 @@ const PopupMenuBase = kind({
 
 	styles: {
 		css: componentCss,
-		className: 'popupMenu'
+		className: 'popupMenu',
+		publicClassNames: true
 	},
 
 	computed: {
 		className: ({orientation, styler}) => styler.append(orientation)
 	},
 
-	render: ({children, closeButton, closeButtonLabel, css, noAnimation, onClose, onHide, open, orientation, title, ...rest}) => {
+	render: ({children, closeButton, closeButtonLabel, css, noAnimation, onClose, onHide, onShow, open, orientation, spotlightId, title, ...rest}) => {
 		return (
-			<Transition
-				noAnimation={noAnimation}
-				visible={open}
+			<TransitionContainer
+				className={css.popupTransitionContainer}
+				css={css}
 				direction="down"
 				duration="short"
-				type="fade"
-				className={css.popupTransitionContainer}
+				noAnimation={noAnimation}
 				onHide={onHide}
-				css={css}
+				onShow={onShow}
+				spotlightId={spotlightId}
+				type="fade"
+				visible={open}
 			>
 				<Layout orientation="vertical" align="center center" role="alert" {...rest}>
-					<Cell className={css.title} shrink>
+					<Cell className={css.popupMenuTitle} shrink>
 						<Heading css={css} size="title">{title}</Heading>
 					</Cell>
 					<Cell shrink className={css.body} align="stretch">
 						<Scroller direction={orientation} horizontalScrollbar="hidden" verticalScrollbar="hidden">
 							{children}
 							{closeButton ? <LabeledIconButton
-								inline
-								icon="cancel"
-								onClick={onClose}
-								className={css.closeButton}
-								size="huge"
 								backgroundOpacity="lightOpaque"
+								className={css.closeButton}
+								css={css}
+								icon="cancel"
+								inline
+								onClick={onClose}
+								size="huge"
 							>{closeButtonLabel}</LabeledIconButton> : null}
 						</Scroller>
 					</Cell>
 				</Layout>
-			</Transition>
+			</TransitionContainer>
 		);
 	}
 });
