@@ -33,6 +33,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Button` to apply active styling only when it is not disabled
 - `agate/Button` to apply active styling on enter key press
 - `agate/Button` style to match latest design for Silicon skin
+- `agate/Dropdown` style to match latest design for Silicon skin
 - `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
 - `agate/LabeledIconButton` styling to preserve behavior and look when props are missing
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
