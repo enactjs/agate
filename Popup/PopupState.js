@@ -47,7 +47,7 @@ const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-v
 	return class extends Component {
 		static displayName = 'PopupState';
 
-		static propTypes = {
+		static propTypes = /** @lends agate/Popup.PopupState.prototype */ {
 			/**
 			 * Hint string read when focusing the popup close button.
 			 *
