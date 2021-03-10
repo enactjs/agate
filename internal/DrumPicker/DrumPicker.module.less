@@ -26,12 +26,15 @@
 		font-size: @agate-picker-font-size;
 		border-radius: @agate-picker-border-radius;
 		transform: @agate-picker-transform;
-		margin: @agate-picker-margin;
-		height: calc(3* @agate-button-height);
-		//padding: @agate-picker-padding;
+		height: @agate-drumPicker-height;
 
 		.root {
-			padding: calc(2* @agate-button-height) 0;
+			padding: @agate-drumPicker-root-padding;
+
+			.focus({
+				background-color: transparent;
+				background-image: @agate-drumPicker-focus-bg-image;
+			});
 		}
 
 		.sizingPlaceholder {
@@ -40,110 +43,62 @@
 			padding-left: .extract(@agate-picker-padding, left)[];
 			padding-right: .extract(@agate-picker-padding, right)[];
 			line-height: 0;
+			font-size: @agate-picker-active-font-size;
+			font-weight: @agate-picker-active-font-weight;
 		}
 
-		.label {
-			transform: @agate-picker-label-transform;
-		}
-
-		.item,
-		.itemDecrement,
-		.itemIncrement,
-		.secondaryItemIncrement,
-		.secondaryItemDecrement {
-			margin: 0;
-			color: inherit;
+		.item {
 			width: 100%;
-			text-align: center;
-			height: @agate-button-height;
-			line-height: @agate-button-height;
+			height: @agate-drumPicker-item-height;
+			line-height: @agate-drumPicker-item-height;
 
-			.sizingPlaceholder {
-				font-size: @agate-picker-active-font-size;
-				font-weight: @agate-picker-active-font-weight;
-			}
-
-			&.indicator {
-				background-color: @agate-picker-active-bg-color;
-				background-image: @agate-picker-active-bg-image;
-				height: @agate-button-height;
-				position: absolute;
-				left: 0;
-				top: @agate-button-height;
-				z-index: -1;
-				//padding: @agate-picker-padding;
-			}
-
-			&.selected {
+			&.selectedItem {
 				color: @agate-picker-active-color;
 				font-size: @agate-picker-active-font-size;
 				font-weight: @agate-picker-active-font-weight;
 			}
 
-			&[disabled] {
-				.vendor-opacity(@agate-disabled-opacity);
-			}
-
 			.focus({
 				color: @agate-picker-item-focus-color;
-				background-color: transparent;
-				background-image: @agate-picker-item-focus-bg-image;
 			});
+
 		}
 
-		.itemDecrement {
-			background-image: @agate-picker-item-decrement-bg-image;
-			height: @agate-button-height;
-			left: 0;
-			top: 0;
-			z-index: -1;
+		.indicator {
+			background-color: @agate-picker-active-bg-color;
+			background-image: @agate-picker-active-bg-image;
+			height: @agate-drumPicker-item-height;
 			position: absolute;
-		}
-
-		.itemIncrement {
-			background-image: @agate-picker-item-increment-bg-image;
-			height: @agate-button-height;
 			left: 0;
-			top: calc(2* @agate-button-height);
+			top: @agate-drumPicker-item-height;
 			z-index: -1;
-			position: absolute;
 		}
 
 		.itemDecrement,
 		.itemIncrement {
 			color: @agate-picker-item-color;
 			background-color: @agate-picker-item-bg-color;
+			background-image: @agate-picker-item-decrement-bg-image;
+			left: 0;
+			position: absolute;
+			z-index: -1;
 		}
 
-		.secondaryItemIncrement,
-		.secondaryItemDecrement {
-			color: @agate-picker-secondary-item-color;
+		.itemDecrement {
+			top: 0;
+		}
+
+		.itemIncrement {
+			top: @agate-drumPicker-itemIncrement-top;
 		}
 
 		&.horizontal {
 			.item,
 			.itemDecrement,
-			.itemIncrement,
-			.secondaryItemIncrement,
-			.secondaryItemDecrement {
+			.itemIncrement {
 				width: @agate-picker-horizontal-item-width;
 			}
 		}
 	});
-
-	.viewManager {
-		overflow: hidden;
-		height: 100%;
-
-		.item {
-			position: relative;
-		}
-
-		> .item:nth-child(2) {
-			// the second element in the ViewManager should be offset by the container height
-			// so the transition can position two relative views next to each other safely.
-			top: -100%;
-		}
-	}
 
 }

@@ -11,9 +11,10 @@
 
 import classnames from 'classnames';
 import {adaptEvent, forward, handle} from '@enact/core/handle';
+import hoc from '@enact/core/hoc';
 import {is} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
-import hoc from '@enact/core/hoc';
+import {clamp} from '@enact/core/util';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import IdProvider from '@enact/ui/internal/IdProvider';
@@ -26,8 +27,9 @@ import ReactDOM from 'react-dom';
 import $L from '../$L';
 import Skinnable from '../../Skinnable';
 
+import DrumPickerItem from './DrumPickerItem';
+
 import css from './DrumPicker.module.less';
-import {clamp} from '../../../enact/packages/core/util';
 
 const DrumPickerRoot = Touchable(Spottable('div'));
 
@@ -51,6 +53,30 @@ const DrumPickerBase = class extends Component {
 	static displayName = 'DrumPicker';
 
 	static propTypes = /** @lends agate/internal/DrumPicker.DrumPicker.prototype */ {
+		/**
+		 * The maximum value selectable by the picker (inclusive).
+		 *
+		 * The range between `min` and `max` should be evenly divisible by
+		 * [step]{@link agate/internal/Picker.Picker.step}.
+		 *
+		 * @type {Number}
+		 * @required
+		 * @public
+		 */
+		max: PropTypes.number.isRequired,
+
+		/**
+		 * The minimum value selectable by the picker (inclusive).
+		 *
+		 * The range between `min` and `max` should be evenly divisible by
+		 * [step]{@link agate/internal/Picker.Picker.step}.
+		 *
+		 * @type {Number}
+		 * @required
+		 * @public
+		 */
+		min: PropTypes.number.isRequired,
+
 		/**
 		 * Accessibility hint
 		 *
@@ -180,6 +206,18 @@ const DrumPickerBase = class extends Component {
 		 */
 		spotlightDisabled: PropTypes.bool,
 
+		/**
+		 * Allow the picker to only increment or decrement by a given value.
+		 *
+		 * A step of `2` would cause a picker to increment from 10 to 12 to 14, etc. It must evenly
+		 * divide into the range designated by `min` and `max`.
+		 *
+		 * @type {Number}
+		 * @default 1
+		 * @public
+		 */
+		step: PropTypes.number,
+
 
 		/**
 		 * The type of picker. It determines the aria-label for the next and previous buttons.
@@ -239,6 +277,7 @@ const DrumPickerBase = class extends Component {
 	static defaultProps = {
 		accessibilityHint: '',
 		orientation: 'vertical',
+		step: 1,
 		type: 'string',
 		value: 0
 	};
@@ -250,10 +289,12 @@ const DrumPickerBase = class extends Component {
 		this.initRootRef = this.initRef('rootRef');
 		this.initIndicatorRef = this.initRef('indicatorRef');
 
-		const {value} = this.props;
+		const {min, max, step, value} = this.props;
+		this.children = this.calculateChildren(min, max, step, value);
+
 		let selectedValue;
 		if (value || value === 0) {
-			selectedValue = this.props.children.findIndex((element) => element.props.children === value);
+			selectedValue = this.children.findIndex((element) => element.props.children === value);
 		}
 
 		if (selectedValue < 0 ) {
@@ -271,22 +312,7 @@ const DrumPickerBase = class extends Component {
 	}
 
 	componentDidMount () {
-		const {rootRef} = this;
-		const {children} = this.props;
-
-		rootRef.addEventListener('touchstart', (evt) => this.onStart(evt.touches[0].pageY));
-		rootRef.addEventListener('touchmove', (evt) => {
-			evt.preventDefault();
-			this.onMove(evt.touches[0].pageY);
-		});
-		rootRef.addEventListener('touchend', this.onFinish);
-		rootRef.addEventListener('touchcancel', this.onFinish);
-		rootRef.addEventListener('mousedown', (evt) => this.onStart(evt.pageY));
-		rootRef.addEventListener('mousemove', (evt) => {
-			evt.preventDefault();
-			this.onMove(evt.pageY);
-		});
-		rootRef.addEventListener('mouseup', this.onFinish);
+		const {children} = this;
 
 		for (let i = 0, length = children.length; i < length; i++) {
 			if (children[i].props.children === this.state.selectedValue) {
@@ -297,32 +323,22 @@ const DrumPickerBase = class extends Component {
 		this.scrollTo(0, false);
 	}
 
-	componentWillUnmount () {
-		const {rootRef} = this;
-
-		rootRef.removeEventListener('touchstart', (evt) => this.onStart(evt.touches[0].pageY));
-		rootRef.removeEventListener('touchmove', (evt) => {
-			evt.preventDefault();
-			this.onMove(evt.touches[0].pageY);
-		});
-		rootRef.removeEventListener('touchend', this.onFinish);
-		rootRef.removeEventListener('touchcancel', this.onFinish);
-		rootRef.removeEventListener('mousedown', (evt) => this.onStart(evt.pageY));
-		rootRef.removeEventListener('mousemove', (evt) => {
-			evt.preventDefault();
-			this.onMove(evt.pageY);
-		});
-		rootRef.removeEventListener('mouseup', this.onFinish);
-	}
-
 	setTransform = (nodeStyle, value) => {
 		nodeStyle.transform = value;
-		nodeStyle.webkitTransform = value;
 	};
 
 	setTransition= (nodeStyle, value) => {
 		nodeStyle.transition = value;
-		nodeStyle.webkitTransition = value;
+	};
+
+	calculateChildren= (min, max, step, value) => {
+		if (this.props.type === 'number') {
+			const childrenArray = Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step)) );
+			return (Children.map(childrenArray, (child) => (
+				<DrumPickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{child}</DrumPickerItem>
+			)));
+		} else return this.props.children;
+
 	};
 
 	scrollTo = (y, isAnimated) => {
@@ -336,7 +352,7 @@ const DrumPickerBase = class extends Component {
 			this.setTransform(this.contentRef.style, `translate(0,${-((y + 1) * itemHeight)}px)`);
 
 			if (this.scrollY >= 0) {
-				const {children} = this.props;
+				const {children} = this;
 				const index = Math.min(y, children.length - 1);
 				const child = children[index].props.children;
 				if (child || child === 0) {
@@ -370,7 +386,7 @@ const DrumPickerBase = class extends Component {
 
 		this.isMoving = false;
 		let targetY = this.scrollY;
-		const height = ((this.props.children).length - 1) * itemHeight;
+		const height = ((this.children).length - 1) * itemHeight;
 		if (targetY % itemHeight !== 0) {
 			targetY = Math.round(targetY / itemHeight) * itemHeight;
 		}
@@ -466,10 +482,10 @@ const DrumPickerBase = class extends Component {
 				// increment
 			} else if (orientation === 'vertical' && isUp(keyCode)) {
 				ev.stopPropagation();
-				this.scrollTo(clamp(0, (this.props.children).length - 1, this.scrollY / itemHeight - 1), true);
+				this.scrollTo(clamp(0, (this.children).length - 1, this.scrollY / itemHeight - 1), true);
 			} else if (orientation === 'vertical' && isDown(keyCode) ) {
 				ev.stopPropagation();
-				this.scrollTo(clamp(0, (this.props.children).length - 1, this.scrollY / itemHeight + 1), true);
+				this.scrollTo(clamp(0, (this.children).length - 1, this.scrollY / itemHeight + 1), true);
 			}
 		}
 	};
@@ -485,13 +501,15 @@ const DrumPickerBase = class extends Component {
 
 	render ()  {
 		const {
-			children: values,
+			// children: values,
 			className,
 			disabled,
 			onSpotlightDisappear,
 			width,
 			...rest
 		} = this.props;
+
+		const {children: values} = this;
 
 		const currentValueText = this.currentValueText();
 		const decAriaLabel = this.decrementAriaLabel();
@@ -520,7 +538,7 @@ const DrumPickerBase = class extends Component {
 
 		const mapItems = (item) => {
 			return (
-				<div className={this.state.selectedValue === item.props.children ? classnames(css.selected, css.item) : css.item}>
+				<div className={this.state.selectedValue === item.props.children ? classnames(css.selectedItem, css.item) : css.item}>
 					{sizingPlaceholder}
 					{item}
 				</div>
@@ -543,6 +561,7 @@ const DrumPickerBase = class extends Component {
 					aria-valuetext={currentValueText}
 					className={classnames(css.indicator, css.item, className)}
 					ref={this.initIndicatorRef}
+					disabled={disabled}
 				/>
 				<div
 					aria-controls={this.valueId}
@@ -553,9 +572,20 @@ const DrumPickerBase = class extends Component {
 				/>
 				<DrumPickerRoot
 					className={css.root}
-					onDown={this.handleDown}
+					disabled={disabled}
 					onKeyDown={this.handleKeyDown}
+					onMouseDown={(evt) => this.onStart(evt.pageY)}
+					onMouseMove={(evt) => {
+						evt.preventDefault(); this.onMove(evt.pageY);
+					}}
+					onMouseUp={this.onFinish}
 					onSpotlightDisappear={onSpotlightDisappear}
+					onTouchCancel={this.onFinish}
+					onTouchEnd={this.onFinish}
+					onTouchMove={(evt) => {
+						evt.preventDefault(); this.onMove(evt.touches[0].pageY);
+					}}
+					onTouchStart={(evt) => this.onStart(evt.touches[0].pageY)}
 					ref={this.initContentRef}
 				>
 					{items}

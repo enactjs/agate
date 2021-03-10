@@ -19,7 +19,6 @@ import compose from 'ramda/src/compose';
 
 import PickerCore, {ChangeAdapter} from '../internal/DrumPicker';
 import DrumPickerItem from '../internal/DrumPicker/DrumPickerItem';
-import {Children} from 'react';
 
 /**
  * RangePicker base component.
@@ -172,31 +171,22 @@ const RangePickerBase = kind({
 		wrap: PropTypes.bool
 	},
 
-	defaultProps: {
-		step: 1
-	},
+	// defaultProps: {
+	// 	step: 1
+	// },
 
 	computed: {
 		disabled: ({disabled, max, min}) => min >= max ? true : disabled,
 		value: ({min, max, value}) => {
 			return clamp(min, max, value);
-		},
-		children: ({min, max, step, value}) => {
-			const childrenArray = Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step)) );
-			return (Children.map(childrenArray, (child) => (
-				<DrumPickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{child}</DrumPickerItem>
-			)));
 		}
 	},
 
-	render: ({value, children, ...rest}) => {
-		delete rest.max;
-		delete rest.min;
-		delete rest.step;
-
+	render: ({value, ...rest}) => {
 		return (
-			<PickerCore {...rest} type="number" value={value}>
-				{children}
+			<PickerCore {...rest} index={0} type="number" value={value}>
+				<DrumPickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{value}</DrumPickerItem>
+				{/* {children}*/}
 			</PickerCore>
 		);
 	}
