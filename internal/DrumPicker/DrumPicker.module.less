@@ -5,9 +5,13 @@
 @import "../../styles/skin.less";
 
 .picker {
-	display: flex;
-	flex-direction: column;
 	overflow: hidden;
+
+	.root {
+		display: flex;
+		flex-direction: column;
+		z-index: 1;
+	}
 
 	&.horizontal {
 		flex-direction: row;
@@ -23,7 +27,12 @@
 		border-radius: @agate-picker-border-radius;
 		transform: @agate-picker-transform;
 		margin: @agate-picker-margin;
-		padding: @agate-picker-padding;
+		height: calc(3* @agate-button-height);
+		//padding: @agate-picker-padding;
+
+		.root {
+			padding: calc(2* @agate-button-height) 0;
+		}
 
 		.sizingPlaceholder {
 			height: 0;
@@ -54,10 +63,19 @@
 				font-weight: @agate-picker-active-font-weight;
 			}
 
-			&.active {
-				color: @agate-picker-active-color;
+			&.indicator {
 				background-color: @agate-picker-active-bg-color;
 				background-image: @agate-picker-active-bg-image;
+				height: @agate-button-height;
+				position: absolute;
+				left: 0;
+				top: @agate-button-height;
+				z-index: -1;
+				//padding: @agate-picker-padding;
+			}
+
+			&.selected {
+				color: @agate-picker-active-color;
 				font-size: @agate-picker-active-font-size;
 				font-weight: @agate-picker-active-font-weight;
 			}
@@ -75,10 +93,20 @@
 
 		.itemDecrement {
 			background-image: @agate-picker-item-decrement-bg-image;
+			height: @agate-button-height;
+			left: 0;
+			top: 0;
+			z-index: -1;
+			position: absolute;
 		}
 
 		.itemIncrement {
 			background-image: @agate-picker-item-increment-bg-image;
+			height: @agate-button-height;
+			left: 0;
+			top: calc(2* @agate-button-height);
+			z-index: -1;
+			position: absolute;
 		}
 
 		.itemDecrement,

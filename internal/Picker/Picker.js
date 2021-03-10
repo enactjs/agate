@@ -9,35 +9,49 @@
  * @private
  */
 
-import classnames from 'classnames';
-import {adaptEvent, forward, handle} from '@enact/core/handle';
-import {is} from '@enact/core/keymap';
+import {adaptEvent, forEventProp, forward, handle, oneOf} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import IdProvider from '@enact/ui/internal/IdProvider';
 import Touchable from '@enact/ui/Touchable';
+import {SlideLeftArranger, SlideTopArranger, ViewManager} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
+import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
-import {Children, Component} from 'react';
-import ReactDOM from 'react-dom';
 
 import $L from '../$L';
+import {PickerItem} from './Picker';
 import Skinnable from '../../Skinnable';
 
 import css from './Picker.module.less';
-import {clamp} from '../../../enact/packages/core/util';
 
-const PickerRoot = Touchable(Spottable('div'));
+const PickerRoot = Touchable('div');
+const PickerButtonItem = Spottable('div');
 
-// Set-up event forwarding
-const forwardKeyDown = forward('onKeyDown');
+const wrapRange = (min, max, value) => {
+	if (value > max) {
+		return min + (value - max - 1);
+	} else if (value < min) {
+		return max - (min - value - 1);
+	} else {
+		return value;
+	}
+};
 
-const isDown = is('down');
-const isLeft = is('left');
-const isRight = is('right');
-const isUp = is('up');
+const handleChange = direction => handle(
+	adaptEvent(
+		(ev, {min, max, step, value, wrap}) => ({
+			value: wrap ? wrapRange(min, max, value + (direction * step)) :  clamp(min, max, value + (direction * step)),
+			reverseTransition: direction < 0
+		}),
+		forward('onChange')
+	)
+);
+
+const increment = handleChange(1);
+const decrement = handleChange(-1);
 
 /**
  * The base component for {@link agate/internal/Picker.Picker}.
@@ -47,10 +61,43 @@ const isUp = is('up');
  * @ui
  * @private
  */
-const PickerBase = class extends Component {
-	static displayName = 'Picker';
+const PickerBase = kind({
+	name: 'Picker',
 
-	static propTypes = /** @lends agate/internal/Picker.Picker.prototype */ {
+	propTypes: /** @lends agate/internal/Picker.Picker.prototype */ {
+		/**
+		 * Index for internal ViewManager
+		 *
+		 * @type {Number}
+		 * @required
+		 * @public
+		 */
+		index: PropTypes.number.isRequired,
+
+		/**
+		 * The maximum value selectable by the picker (inclusive).
+		 *
+		 * The range between `min` and `max` should be evenly divisible by
+		 * [step]{@link agate/internal/Picker.Picker.step}.
+		 *
+		 * @type {Number}
+		 * @required
+		 * @public
+		 */
+		max: PropTypes.number.isRequired,
+
+		/**
+		 * The minimum value selectable by the picker (inclusive).
+		 *
+		 * The range between `min` and `max` should be evenly divisible by
+		 * [step]{@link agate/internal/Picker.Picker.step}.
+		 *
+		 * @type {Number}
+		 * @required
+		 * @public
+		 */
+		min: PropTypes.number.isRequired,
+
 		/**
 		 * Accessibility hint
 		 *
@@ -144,6 +191,16 @@ const PickerBase = class extends Component {
 		incrementAriaLabel: PropTypes.string,
 
 		/**
+		 * By default, the picker will animate transitions between items if it has a defined
+		 * `width`. Specifying `noAnimation` will prevent any transition animation for the
+		 * component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		noAnimation: PropTypes.bool,
+
+		/**
 		 * A function to run when the control should increment or decrement.
 		 *
 		 * @type {Function}
@@ -173,6 +230,22 @@ const PickerBase = class extends Component {
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
+		 * When it's `true` it changes the direction of the transition animation.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		reverseTransition: PropTypes.bool,
+
+		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		skin: PropTypes.string,
+
+		/**
 		 * When `true`, the component cannot be navigated using spotlight.
 		 *
 		 * @type {Boolean}
@@ -180,6 +253,17 @@ const PickerBase = class extends Component {
 		 */
 		spotlightDisabled: PropTypes.bool,
 
+		/**
+		 * Allow the picker to only increment or decrement by a given value.
+		 *
+		 * A step of `2` would cause a picker to increment from 10 to 12 to 14, etc. It must evenly
+		 * divide into the range designated by `min` and `max`.
+		 *
+		 * @type {Number}
+		 * @default 1
+		 * @public
+		 */
+		step: PropTypes.number,
 
 		/**
 		 * The type of picker. It determines the aria-label for the next and previous buttons.
@@ -234,275 +318,220 @@ const PickerBase = class extends Component {
 		 * @public
 		 */
 		wrap: PropTypes.bool
-	};
+	},
 
-	static defaultProps = {
+	defaultProps: {
 		accessibilityHint: '',
 		orientation: 'vertical',
+		step: 1,
 		type: 'string',
 		value: 0
-	};
+	},
 
-	constructor (props) {
-		super(props);
+	styles: {
+		css,
+		className: 'picker',
+		publicClassNames: true
+	},
 
-		this.initContentRef = this.initRef('contentRef');
-		this.initRootRef = this.initRef('rootRef');
-		this.initIndicatorRef = this.initRef('indicatorRef');
+	handlers: {
+		handleDecrement: decrement,
+		handleFlick: handle(
+			forEventProp('direction', 'vertical'),
+			// ignore "slow" flicks by filtering out velocity below a threshold
+			oneOf(
+				[({velocityY}) => velocityY < 0, increment],
+				[({velocityY}) => velocityY > 0, decrement]
+			)
+		),
+		handleIncrement: increment
+	},
 
-		const {value} = this.props;
-		let selectedValue;
-		if (value || value === 0) {
-			selectedValue = this.props.children.findIndex((element) => element.props.children === value);
-		}
-
-		if (selectedValue < 0 ) {
-			selectedValue = 0;
-		}
-
-		this.state = {
-			selectedValue: selectedValue
-		};
-
-		this.scrollY = -1;
-		this.lastY = 0;
-		this.startY = 0;
-		this.isMoving = false;
-	}
-
-	componentDidMount () {
-		const {rootRef} = this;
-		const {children} = this.props;
-
-		rootRef.addEventListener('touchstart', (evt) => this.onStart(evt.touches[0].pageY));
-		rootRef.addEventListener('touchmove', (evt) => {
-			evt.preventDefault();
-			this.onMove(evt.touches[0].pageY);
-		});
-		rootRef.addEventListener('touchend', this.onFinish);
-		rootRef.addEventListener('touchcancel', this.onFinish);
-		rootRef.addEventListener('mousedown', (evt) => this.onStart(evt.pageY));
-		rootRef.addEventListener('mousemove', (evt) => {
-			evt.preventDefault();
-			this.onMove(evt.pageY);
-		});
-		rootRef.addEventListener('mouseup', this.onFinish);
-
-		for (let i = 0, length = children.length; i < length; i++) {
-			if (children[i].props.children === this.state.selectedValue) {
-				this.scrollTo(i, false);
-				return;
+	computed: {
+		activeClassName: ({styler}) => styler.join('active', 'item'),
+		'aria-label': ({'aria-label': ariaLabel, 'aria-valuetext': valueText}) => {
+			if (ariaLabel != null) {
+				return ariaLabel;
 			}
-		}
-		this.scrollTo(0, false);
-	}
 
-	componentWillUnmount () {
-		const {rootRef} = this;
-
-		rootRef.removeEventListener('touchstart', (evt) => this.onStart(evt.touches[0].pageY));
-		rootRef.removeEventListener('touchmove', (evt) => {
-			evt.preventDefault();
-			this.onMove(evt.touches[0].pageY);
-		});
-		rootRef.removeEventListener('touchend', this.onFinish);
-		rootRef.removeEventListener('touchcancel', this.onFinish);
-		rootRef.removeEventListener('mousedown', (evt) => this.onStart(evt.pageY));
-		rootRef.removeEventListener('mousemove', (evt) => {
-			evt.preventDefault();
-			this.onMove(evt.pageY);
-		});
-		rootRef.removeEventListener('mouseup', this.onFinish);
-	}
-
-	setTransform = (nodeStyle, value) => {
-		nodeStyle.transform = value;
-		nodeStyle.webkitTransform = value;
-	};
-
-	setTransition= (nodeStyle, value) => {
-		nodeStyle.transition = value;
-		nodeStyle.webkitTransition = value;
-	};
-
-	scrollTo = (y, isAnimated) => {
-		const itemHeight = this.indicatorRef.getBoundingClientRect().height;
-		if (this.scrollY !== y * itemHeight) {
-			this.scrollY = y * itemHeight;
-
-			if (isAnimated) {
-				this.setTransition(this.contentRef.style, 'transform 300ms');
+			return valueText;
+		},
+		className: ({orientation, styler}) => styler.append(orientation),
+		currentItemIndex: ({children: values, index, max, min, wrap}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index);
+				} else return index;
+			} else return 0;
+		},
+		currentValueText: ({accessibilityHint, 'aria-valuetext': ariaValueText, children, value}) => {
+			if (ariaValueText != null) {
+				return ariaValueText;
 			}
-			this.setTransform(this.contentRef.style, `translate(0,${-((y + 1) * itemHeight)}px)`);
 
-			if (this.scrollY >= 0) {
-				const {children} = this.props;
-				const index = Math.min(y, children.length - 1);
-				const child = children[index].props.children;
-				if (child || child === 0) {
-					this.changeValue(child, index);
+			let valueText = value;
+
+			if (children && Array.isArray(children)) {
+				if (children[value] && children[value].props) {
+					valueText = children[value].props.children;
+				} else {
+					valueText = children[value];
 				}
 			}
-		}
-	};
 
-	onStart = (y) => {
-		if (this.props.disabled) {
-			return;
-		}
-		this.isMoving = true;
-		this.startY = y;
-		this.lastY = this.scrollY;
-	};
+			if (accessibilityHint) {
+				valueText = `${valueText} ${accessibilityHint}`;
+			}
 
-	onMove = (y) => {
-		const itemHeight = this.indicatorRef.getBoundingClientRect().height;
+			return valueText;
+		},
+		decrementAriaLabel: ({decrementAriaLabel, type}) => {
+			if (decrementAriaLabel != null) {
+				return decrementAriaLabel;
+			}
 
-		if (this.props.disabled || !this.isMoving) {
-			return;
-		}
-		this.scrollY = this.lastY - y + this.startY;
-		this.setTransform(this.contentRef.style, `translate(0,${-this.scrollY - itemHeight}px)`);
-	};
-
-	onFinish = () => {
-		const itemHeight = this.indicatorRef.getBoundingClientRect().height;
-
-		this.isMoving = false;
-		let targetY = this.scrollY;
-		const height = ((this.props.children).length - 1) * itemHeight;
-		if (targetY % itemHeight !== 0) {
-			targetY = Math.round(targetY / itemHeight) * itemHeight;
-		}
-
-		if (targetY < 0) {
-			targetY = 0;
-		} else if (targetY > height) {
-			targetY = height;
-		}
-		this.scrollTo(targetY / itemHeight, false);
-	};
-
-	changeValue = (selectedValue, selectedValueIndex) => {
-		const {onChange} = this.props;
-		if (selectedValue !== this.state.selectedValue) {
-			this.setState({
-				selectedValue
-			});
-			onChange({value: selectedValueIndex});
-		}
-	};
-
-	currentValueText = () => {
-		const {accessibilityHint, 'aria-valuetext': ariaValueText, children, value} = this.props;
-		if (ariaValueText != null) {
-			return ariaValueText;
-		}
-
-		let valueText = value;
-
-		if (children && Array.isArray(children)) {
-			if (children[value] && children[value].props) {
-				valueText = children[value].props.children;
+			if (type === 'number') {
+				return `${$L('decrease the value')}`;
 			} else {
-				valueText = children[value];
+				return `${$L('previous item')}`;
 			}
-		}
-
-		if (accessibilityHint) {
-			valueText = `${valueText} ${accessibilityHint}`;
-		}
-
-		return valueText;
-	};
-
-	decrementAriaLabel = () => {
-		const {decrementAriaLabel, type} = this.props;
-		if (decrementAriaLabel != null) {
-			return decrementAriaLabel;
-		}
-
-		if (type === 'number') {
-			return `${$L('decrease the value')}`;
-		} else {
-			return `${$L('previous item')}`;
-		}
-	};
-
-	incrementAriaLabel= () => {
-		const {incrementAriaLabel, type} = this.props;
-		if (incrementAriaLabel != null) {
-			return incrementAriaLabel;
-		}
-
-		if (type === 'number') {
-			return `${$L('increase the value')}`;
-		} else {
-			return `${$L('next item')}`;
-		}
-	};
-
-	calcAriaLabel = () => {
-		const {'aria-label': ariaLabel} = this.props;
-		if (ariaLabel != null) {
-			return ariaLabel;
-		}
-		return this.currentValueText();
-	};
-
-	handleKeyDown = (ev) => {
-		const {orientation} = this.props;
-		const {keyCode} = ev;
-		forwardKeyDown(ev, this.props);
-
-		if (!this.props.disabled) {
-			const itemHeight = this.indicatorRef.getBoundingClientRect().height;
-
-			if (orientation === 'horizontal' && isLeft(keyCode)) {
-				ev.stopPropagation();
-				// decrement
-			} else if (orientation === 'horizontal' && isRight(keyCode) ) {
-				ev.stopPropagation();
-				// increment
-			} else if (orientation === 'vertical' && isUp(keyCode)) {
-				ev.stopPropagation();
-				this.scrollTo(clamp(0, (this.props.children).length - 1, this.scrollY / itemHeight - 1), true);
-			} else if (orientation === 'vertical' && isDown(keyCode) ) {
-				ev.stopPropagation();
-				this.scrollTo(clamp(0, (this.props.children).length - 1, this.scrollY / itemHeight + 1), true);
+		},
+		decrementItemIndex: ({children: values, index, max, min, wrap}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index - 1);
+				} else return index - 1;
+			} else return 0;
+		},
+		incrementAriaLabel: ({incrementAriaLabel, type}) => {
+			if (incrementAriaLabel != null) {
+				return incrementAriaLabel;
 			}
-		}
-	};
 
-	valueId =  ({id}) => `${id}_value`;
+			if (type === 'number') {
+				return `${$L('increase the value')}`;
+			} else {
+				return `${$L('next item')}`;
+			}
+		},
+		incrementItemIndex: ({children: values, index, max, min, wrap}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index + 1);
+				} else return index + 1;
+			} else return 0;
+		},
+		secondaryDecrementItemIndex: ({children: values, index, max, min, wrap}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index - 2);
+				} else return index - 2;
+			} else return 0;
+		},
+		secondaryIncrementItemIndex: ({children: values, index, max, min, wrap}) => {
+			if (Array.isArray(values)) {
+				if (wrap) {
+					return wrapRange(min, max, index + 2);
+				} else return index + 2;
+			} else return 0;
+		},
+		valueId: ({id}) => `${id}_value`
+	},
 
-	initRef (prop) {
-		return (ref) => {
-			// eslint-disable-next-line react/no-find-dom-node
-			this[prop] = ref && ReactDOM.findDOMNode(ref);
-		};
-	}
-
-	render ()  {
+	render: (props) => {
 		const {
+			activeClassName,
+			'aria-label': ariaLabel,
 			children: values,
-			className,
+			currentItemIndex,
+			currentValueText,
+			decrementAriaLabel: decAriaLabel,
+			decrementItemIndex,
 			disabled,
+			handleDecrement,
+			handleFlick,
+			handleIncrement,
+			incrementAriaLabel: incAriaLabel,
+			incrementItemIndex,
+			min,
+			max,
+			noAnimation,
+			onSpotlightDisappear,
+			orientation,
+			reverseTransition,
+			secondaryDecrementItemIndex,
+			secondaryIncrementItemIndex,
+			skin,
+			spotlightDisabled,
+			step,
+			value,
+			valueId,
 			width,
+			wrap,
 			...rest
-		} = this.props;
+		} = props;
 
-		const currentValueText = this.currentValueText();
-		const decAriaLabel = this.decrementAriaLabel();
-		const incAriaLabel = this.incrementAriaLabel();
+		const isFirst = value <= min;
+		const isLast = value >= max;
+		const isSecond = value <= min + step;
+		const isPenultimate = value >= max - step;
 		const decrementAriaLabel = `${currentValueText} ${decAriaLabel}`;
 		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
-		const indicatorAriaLabel = this.calcAriaLabel();
+		const transitionDuration = 150;
+
+		const decrementValue = () => {
+			const clampledValue = min < max ? clamp(min, max, value - step) : min;
+			const restrictedDecrementValue = wrap ? wrapRange(min, max, value - step) : clampledValue;
+			if (isFirst && !wrap) {
+				return '';
+			} else if (Array.isArray(values)) {
+				return values;
+			} else {
+				return (<PickerItem key={restrictedDecrementValue} style={{direction: 'ltr'}}>{restrictedDecrementValue}</PickerItem>);
+			}
+		};
+
+		const incrementValue = () => {
+			const clampledValue = min < max ? clamp(min, max, value + step) : max;
+			const restrictedIncrementValue = wrap ? wrapRange(min, max, value + step) : clampledValue;
+			if (isLast && !wrap) {
+				return '';
+			} else if (Array.isArray(values)) {
+				return values;
+			} else {
+				return (<PickerItem key={restrictedIncrementValue} style={{direction: 'ltr'}}>{restrictedIncrementValue}</PickerItem>);
+			}
+		};
+
+		const secondaryDecrementValue = () => {
+			const restrictedSecondaryDecrementValue = wrap ? wrapRange(min, max, value - (2 * step)) : clamp(min, max, value - (2 * step));
+			if (isSecond && !wrap) {
+				return '';
+			} else if (Array.isArray(values)) {
+				return values;
+			} else {
+				return (<PickerItem key={restrictedSecondaryDecrementValue} style={{direction: 'ltr'}}>{restrictedSecondaryDecrementValue}</PickerItem>);
+			}
+		};
+
+		const secondaryIncrementValue = () => {
+			const restrictedSecondaryIncrementValue = wrap ? wrapRange(min, max, value + (2 * step)) : clamp(min, max, value + (2 * step));
+			if (isPenultimate && !wrap) {
+				return '';
+			} else if (Array.isArray(values)) {
+				return values;
+			} else {
+				return (<PickerItem key={restrictedSecondaryIncrementValue} style={{direction: 'ltr'}}>{restrictedSecondaryIncrementValue}</PickerItem>);
+			}
+		};
 
 		let sizingPlaceholder = null;
 		if (typeof width === 'number' && width > 0) {
 			sizingPlaceholder = <div aria-hidden className={css.sizingPlaceholder}>{'0'.repeat(width)}</div>;
 		}
+
+		const horizontal = orientation === 'horizontal';
+		const arranger = horizontal ? SlideLeftArranger : SlideTopArranger;
 
 		delete rest['aria-valuetext'];
 		delete rest.accessibilityHint;
@@ -511,56 +540,130 @@ const PickerBase = class extends Component {
 		delete rest.noAnimation;
 		delete rest.onChange;
 		delete rest.orientation;
-		delete rest.type;
-		delete rest.value;
 		delete rest.wrap;
-		delete rest.spotlightDisabled;
-
-		const mapItems = (item) => {
-			return (
-				<div className={this.state.selectedValue === item.props.children ? classnames(css.selected, css.item) : css.item}>
-					{sizingPlaceholder}
-					{item}
-				</div>
-			);
-		};
-
-		const items = Children ? Children.map(values, mapItems) : ([]).concat(values).map(mapItems);
 
 		return (
-			<div {...rest} className={classnames(className, css.picker)} ref={this.initRootRef}>
-				<div
-					aria-controls={this.valueId}
-					aria-disabled={disabled}
+			<PickerRoot {...rest} onFlick={handleFlick}>
+				{skin === 'silicon'  &&
+				<PickerButtonItem
+					aria-controls={valueId}
+					aria-disabled={isSecond}
 					aria-label={decrementAriaLabel}
-					className={classnames(css.itemDecrement, css.item, className)}
-					disabled={disabled}
-				/>
-				<div
-					aria-label={indicatorAriaLabel}
-					aria-valuetext={currentValueText}
-					className={classnames(css.indicator, css.item, className)}
-					ref={this.initIndicatorRef}
-				/>
-				<div
-					aria-controls={this.valueId}
-					aria-disabled={disabled}
-					aria-label={incrementAriaLabel}
-					className={classnames(css.itemIncrement, css.item, className)}
-					disabled={disabled}
-				/>
-				<PickerRoot
-					className={css.root}
-					onDown={this.handleDown}
-					onKeyDown={this.handleKeyDown}
-					ref={this.initContentRef}
+					className={css.secondaryItemDecrement}
+					disabled={disabled || isSecond}
+					onClick={secondaryDecrementValue() === '' ? () => {} : () => {
+						handleDecrement(); setTimeout(() => handleDecrement(), transitionDuration);
+					}}
+					onSpotlightDisappear={onSpotlightDisappear}
+					spotlightDisabled={spotlightDisabled || secondaryDecrementValue() === ''}
 				>
-					{items}
-				</PickerRoot>
-			</div>
+					<ViewManager
+						aria-hidden
+						arranger={arranger}
+						className={css.viewManager}
+						duration={transitionDuration}
+						index={secondaryDecrementItemIndex}
+						noAnimation={noAnimation || disabled}
+						reverseTransition={reverseTransition}
+					>
+						{secondaryDecrementValue()}
+					</ViewManager>
+				</PickerButtonItem>
+				}
+				<PickerButtonItem
+					aria-controls={valueId}
+					aria-disabled={disabled || isFirst}
+					aria-label={decrementAriaLabel}
+					className={css.itemDecrement}
+					disabled={disabled || isFirst}
+					onClick={decrementValue() === '' ? () => {} : handleDecrement}
+					onSpotlightDisappear={onSpotlightDisappear}
+					spotlightDisabled={spotlightDisabled || decrementValue() === ''}
+				>
+					<ViewManager
+						aria-hidden
+						arranger={arranger}
+						className={css.viewManager}
+						duration={transitionDuration}
+						index={decrementItemIndex}
+						noAnimation={noAnimation || disabled}
+						reverseTransition={reverseTransition}
+					>
+						{decrementValue()}
+					</ViewManager>
+				</PickerButtonItem>
+				<div
+					aria-label={ariaLabel}
+					aria-valuetext={currentValueText}
+					className={activeClassName}
+					id={valueId}
+					role="spinbutton"
+				>
+					{sizingPlaceholder}
+					<ViewManager
+						aria-hidden
+						arranger={arranger}
+						className={css.viewManager}
+						duration={transitionDuration}
+						index={currentItemIndex}
+						noAnimation={noAnimation || disabled}
+						reverseTransition={reverseTransition}
+					>
+						{values}
+					</ViewManager>
+				</div>
+				<PickerButtonItem
+					aria-controls={valueId}
+					aria-disabled={disabled || isLast}
+					aria-label={incrementAriaLabel}
+					className={css.itemIncrement}
+					disabled={disabled || isLast}
+					onClick={incrementValue() === '' ? () => {} : handleIncrement}
+					onSpotlightDisappear={onSpotlightDisappear}
+					spotlightDisabled={spotlightDisabled || incrementValue() === ''}
+				>
+					<ViewManager
+						aria-hidden
+						arranger={arranger}
+						className={css.viewManager}
+						duration={transitionDuration}
+						index={incrementItemIndex}
+						noAnimation={noAnimation || disabled}
+						reverseTransition={reverseTransition}
+					>
+						{incrementValue()}
+					</ViewManager>
+				</PickerButtonItem>
+				{skin === 'silicon' &&
+				<PickerButtonItem
+					aria-controls={valueId}
+					aria-disabled={isPenultimate}
+					aria-label={incrementAriaLabel}
+					className={css.secondaryItemIncrement}
+					disabled={disabled || isPenultimate}
+					onClick={secondaryIncrementValue() === '' ? () => {} : () => {
+						handleIncrement(); setTimeout(() => handleIncrement(), transitionDuration);
+					}}
+					onSpotlightDisappear={onSpotlightDisappear}
+					spotlightDisabled={spotlightDisabled || secondaryIncrementValue() === ''}
+				>
+					<ViewManager
+						aria-hidden
+						arranger={arranger}
+						className={css.viewManager}
+						duration={transitionDuration}
+						index={secondaryIncrementItemIndex}
+						noAnimation={noAnimation || disabled}
+						reverseTransition={reverseTransition}
+					>
+						{secondaryIncrementValue()}
+					</ViewManager>
+				</PickerButtonItem>
+				}
+			</PickerRoot>
 		);
 	}
-};
+});
 
 /**
  * A higher-order component that filters the values returned by the onChange event on {@link agate/internal/Picker.Picker}
@@ -577,9 +680,9 @@ const ChangeAdapter = hoc((config, Wrapped) => {
 		handlers: {
 			onChange: handle(
 				adaptEvent(({value}) => {
-					return ({value});
-				},
-				forward('onChange'))
+						return ({value});
+					},
+					forward('onChange'))
 			)
 		},
 
@@ -601,7 +704,8 @@ const ChangeAdapter = hoc((config, Wrapped) => {
 const PickerDecorator = compose(
 	IdProvider({generateProp: null}),
 	Changeable,
-	Skinnable
+	Changeable({prop: 'reverseTransition'}),
+	Skinnable({prop: 'skin'})
 );
 
 const Picker = PickerDecorator(PickerBase);
@@ -610,6 +714,7 @@ export default Picker;
 export {
 	ChangeAdapter,
 	Picker,
-	PickerBase
+	PickerBase,
+	PickerDecorator
 };
 export PickerItem from './PickerItem';
