@@ -19,7 +19,7 @@ import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
 import {Children} from 'react';
 
-import PickerCore, {ChangeAdapter, PickerItem} from '../internal/Picker';
+import PickerCore, {ChangeAdapter, DrumPickerItem} from '../internal/DrumPicker';
 
 /**
  * The base `Picker` component.
@@ -135,7 +135,7 @@ const PickerBase = kind({
 
 	computed: {
 		children: ({children}) => Children.map(children, (child) => (
-			<PickerItem>{child}</PickerItem>
+			<DrumPickerItem>{child}</DrumPickerItem>
 		)),
 		disabled: ({children, disabled}) => Children.count(children) > 1 ? disabled : true,
 		max: ({children}) => children && children.length ? children.length - 1 : 0,

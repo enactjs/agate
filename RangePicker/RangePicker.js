@@ -17,8 +17,8 @@ import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
-import PickerCore, {ChangeAdapter} from '../internal/Picker';
-import PickerItem from '../internal/Picker/PickerItem';
+import PickerCore, {ChangeAdapter} from '../internal/DrumPicker';
+import DrumPickerItem from '../internal/DrumPicker/DrumPickerItem';
 import {Children} from 'react';
 
 /**
@@ -184,7 +184,7 @@ const RangePickerBase = kind({
 		children: ({min, max, step, value}) => {
 			const childrenArray = Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step)) );
 			return (Children.map(childrenArray, (child) => (
-				<PickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{child}</PickerItem>
+				<DrumPickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{child}</DrumPickerItem>
 			)));
 		}
 	},

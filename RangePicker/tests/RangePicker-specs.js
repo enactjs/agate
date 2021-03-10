@@ -2,7 +2,7 @@ import {mount} from 'enzyme';
 
 import {RangePicker, RangePickerBase} from '../RangePicker';
 
-import css from '../../internal/Picker/Picker.module.less';
+import css from '../../internal/DrumPicker/DrumPicker.module.less';
 
 const decrement = (picker) => picker.find(`.${css.itemDecrement}`).first().simulate('click');
 const increment = (picker) => picker.find(`.${css.itemIncrement}`).first().simulate('click');

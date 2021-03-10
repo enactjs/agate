@@ -3,7 +3,7 @@ import {mount} from 'enzyme';
 import {Picker, PickerBase} from '../Picker';
 
 describe('Picker Specs', () => {
-	test('should render selected child wrapped with <PickerItem/>', () => {
+	test('should render selected child wrapped with <DrumPickerItem/>', () => {
 		const picker = mount(
 			<Picker value={1}>
 				{[1, 2, 3, 4]}

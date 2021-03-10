@@ -3,10 +3,10 @@ import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
 import {storiesOf} from '@storybook/react';
 
-import {PickerBase} from '@enact/agate/internal/Picker';
+import {DrumPickerBase} from '@enact/agate/internal/DrumPicker';
 import RangePicker from '@enact/agate/RangePicker';
 
-const Config = mergeComponentMetadata('RangePicker', RangePicker, PickerBase);
+const Config = mergeComponentMetadata('RangePicker', RangePicker, DrumPickerBase);
 
 storiesOf('Agate', module)
 	.add(

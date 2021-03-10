@@ -488,6 +488,7 @@ const DrumPickerBase = class extends Component {
 			children: values,
 			className,
 			disabled,
+			onSpotlightDisappear,
 			width,
 			...rest
 		} = this.props;
@@ -511,10 +512,11 @@ const DrumPickerBase = class extends Component {
 		delete rest.noAnimation;
 		delete rest.onChange;
 		delete rest.orientation;
+		delete rest.reverseTransition;
+		delete rest.spotlightDisabled;
 		delete rest.type;
 		delete rest.value;
 		delete rest.wrap;
-		delete rest.spotlightDisabled;
 
 		const mapItems = (item) => {
 			return (
@@ -553,6 +555,7 @@ const DrumPickerBase = class extends Component {
 					className={css.root}
 					onDown={this.handleDown}
 					onKeyDown={this.handleKeyDown}
+					onSpotlightDisappear={onSpotlightDisappear}
 					ref={this.initContentRef}
 				>
 					{items}

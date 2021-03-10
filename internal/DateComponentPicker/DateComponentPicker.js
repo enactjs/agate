@@ -4,13 +4,13 @@ import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
 import {Children} from 'react';
 
-import PickerCore, {PickerItem} from '../Picker';
+import PickerCore, {DrumPickerItem} from '../DrumPicker';
 
 import css from './DateComponentPicker.module.less';
 
 /**
  * {@link agate/internal/DataComponentPicker.DateComponentPickerBase} allows the selection of one
- * part of the date or time using a {@link agate/internal/Picker.Picker}.
+ * part of the date or time using a {@link agate/internal/DrumPicker.DrumPicker}.
  *
  * @class DateComponentPickerBase
  * @memberof agate/internal/DateComponentPicker
@@ -72,7 +72,7 @@ const DateComponentPickerBase = kind({
 
 	computed: {
 		children: ({children}) => mapAndFilterChildren(children, (child) => (
-			<PickerItem>{child}</PickerItem>
+			<DrumPickerItem>{child}</DrumPickerItem>
 		)),
 		max: ({children}) => children ? Children.count(children) - 1 : 0
 	},
