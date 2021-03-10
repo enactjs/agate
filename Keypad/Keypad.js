@@ -188,8 +188,8 @@ const KeypadBase = kind({
 			{text: '*'},
 			{text: '0'},
 			{text: '#'},
-			{text: skin === 'gallium' ? 'phone' : (isCallActive ? 'calldecline' : 'callaccept'), isIcon: true},
-			{text: skin === 'gallium' ? 'arrowuturn' : (isCallActive ? 'keypad' : 'backspace'), isIcon: true}
+			{text: skin !== 'silicon' ? 'phone' : (isCallActive ? 'calldecline' : 'callaccept'), isIcon: true},
+			{text: skin !== 'silicon' ? 'arrowuturn' : (isCallActive ? 'keypad' : 'backspace'), isIcon: true}
 		]
 	},
 
