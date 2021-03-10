@@ -55,19 +55,29 @@
 				background-color: @agate-button-disabled-bg-color;
 			}
 
-			.client {
-				color: @agate-button-disabled-color;
-			}
-
 			.focus({
 				.bg {
 					background-color: @agate-button-disabled-bg-color;
+					background-image: @agate-button-disabled-focus-bg-image;
 				}
 
 				.client {
 					color: @agate-button-disabled-focus-color;
 				}
-			})
+			});
+
+			&.selected {
+				.bg {
+					background-color: @agate-button-selected-disabled-bg-color;
+					border-color: @agate-button-selected-disabled-border-color;
+				}
+
+				.focus({
+					.bg {
+						border-color: @agate-button-selected-disabled-focus-border-color;
+					}
+				})
+			}
 
 		});
 
@@ -452,12 +462,6 @@
 					color: @agate-button-transparent-selected-color;
 				}
 			}
-
-			.disabled({
-				.client {
-					color: @agate-button-disabled-color;
-				}
-			})
 		}
 
 		// override Marquee's alignment.
@@ -506,7 +510,6 @@
 					background-color: @agate-button-active-bg-color;
 					background-image: @agate-button-active-bg-image;
 					border: @agate-button-border-width solid @agate-button-border-color;
-					opacity: @agate-button-active-opacity;
 				}
 
 				&,
