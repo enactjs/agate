@@ -545,30 +545,30 @@ const PickerBase = kind({
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
 				{skin === 'silicon'  &&
-				<PickerButtonItem
-					aria-controls={valueId}
-					aria-disabled={isSecond}
-					aria-label={decrementAriaLabel}
-					className={css.secondaryItemDecrement}
-					disabled={disabled || isSecond}
-					onClick={secondaryDecrementValue() === '' ? () => {} : () => {
-						handleDecrement(); setTimeout(() => handleDecrement(), transitionDuration);
-					}}
-					onSpotlightDisappear={onSpotlightDisappear}
-					spotlightDisabled={spotlightDisabled || secondaryDecrementValue() === ''}
-				>
-					<ViewManager
-						aria-hidden
-						arranger={arranger}
-						className={css.viewManager}
-						duration={transitionDuration}
-						index={secondaryDecrementItemIndex}
-						noAnimation={noAnimation || disabled}
-						reverseTransition={reverseTransition}
+					<PickerButtonItem
+						aria-controls={valueId}
+						aria-disabled={isSecond}
+						aria-label={decrementAriaLabel}
+						className={css.secondaryItemDecrement}
+						disabled={disabled || isSecond}
+						onClick={secondaryDecrementValue() === '' ? () => {} : () => {
+							handleDecrement(); setTimeout(() => handleDecrement(), transitionDuration);
+						}}
+						onSpotlightDisappear={onSpotlightDisappear}
+						spotlightDisabled={spotlightDisabled || secondaryDecrementValue() === ''}
 					>
-						{secondaryDecrementValue()}
-					</ViewManager>
-				</PickerButtonItem>
+						<ViewManager
+							aria-hidden
+							arranger={arranger}
+							className={css.viewManager}
+							duration={transitionDuration}
+							index={secondaryDecrementItemIndex}
+							noAnimation={noAnimation || disabled}
+							reverseTransition={reverseTransition}
+						>
+							{secondaryDecrementValue()}
+						</ViewManager>
+					</PickerButtonItem>
 				}
 				<PickerButtonItem
 					aria-controls={valueId}
@@ -635,30 +635,30 @@ const PickerBase = kind({
 					</ViewManager>
 				</PickerButtonItem>
 				{skin === 'silicon' &&
-				<PickerButtonItem
-					aria-controls={valueId}
-					aria-disabled={isPenultimate}
-					aria-label={incrementAriaLabel}
-					className={css.secondaryItemIncrement}
-					disabled={disabled || isPenultimate}
-					onClick={secondaryIncrementValue() === '' ? () => {} : () => {
-						handleIncrement(); setTimeout(() => handleIncrement(), transitionDuration);
-					}}
-					onSpotlightDisappear={onSpotlightDisappear}
-					spotlightDisabled={spotlightDisabled || secondaryIncrementValue() === ''}
-				>
-					<ViewManager
-						aria-hidden
-						arranger={arranger}
-						className={css.viewManager}
-						duration={transitionDuration}
-						index={secondaryIncrementItemIndex}
-						noAnimation={noAnimation || disabled}
-						reverseTransition={reverseTransition}
+					<PickerButtonItem
+						aria-controls={valueId}
+						aria-disabled={isPenultimate}
+						aria-label={incrementAriaLabel}
+						className={css.secondaryItemIncrement}
+						disabled={disabled || isPenultimate}
+						onClick={secondaryIncrementValue() === '' ? () => {} : () => {
+							handleIncrement(); setTimeout(() => handleIncrement(), transitionDuration);
+						}}
+						onSpotlightDisappear={onSpotlightDisappear}
+						spotlightDisabled={spotlightDisabled || secondaryIncrementValue() === ''}
 					>
-						{secondaryIncrementValue()}
-					</ViewManager>
-				</PickerButtonItem>
+						<ViewManager
+							aria-hidden
+							arranger={arranger}
+							className={css.viewManager}
+							duration={transitionDuration}
+							index={secondaryIncrementItemIndex}
+							noAnimation={noAnimation || disabled}
+							reverseTransition={reverseTransition}
+						>
+							{secondaryIncrementValue()}
+						</ViewManager>
+					</PickerButtonItem>
 				}
 			</PickerRoot>
 		);
@@ -680,9 +680,9 @@ const ChangeAdapter = hoc((config, Wrapped) => {
 		handlers: {
 			onChange: handle(
 				adaptEvent(({value}) => {
-						return ({value});
-					},
-					forward('onChange'))
+					return ({value});
+				},
+				forward('onChange'))
 			)
 		},
 
