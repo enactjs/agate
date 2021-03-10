@@ -180,21 +180,22 @@ const KeypadBase = kind({
 			const editStatus = isCallActive ? 'keypad' : 'backspace';
 
 			return [
-			{text: '1'},
-			{text: '2', label: 'abc'},
-			{text: '3', label: 'def'},
-			{text: '4', label: 'ghi'},
-			{text: '5', label: 'jkl'},
-			{text: '6', label: 'mno'},
-			{text: '7', label: 'pqrs'},
-			{text: '8', label: 'tuv'},
-			{text: '9', label: 'wxyz'},
-			{text: '*'},
-			{text: '0'},
-			{text: '#'},
-			{text: skin !== 'silicon' ? 'phone' : callStatus, isIcon: true},
-			{text: skin !== 'silicon' ? 'arrowuturn' : editStatus, isIcon: true}
-		]}
+				{text: '1'},
+				{text: '2', label: 'abc'},
+				{text: '3', label: 'def'},
+				{text: '4', label: 'ghi'},
+				{text: '5', label: 'jkl'},
+				{text: '6', label: 'mno'},
+				{text: '7', label: 'pqrs'},
+				{text: '8', label: 'tuv'},
+				{text: '9', label: 'wxyz'},
+				{text: '*'},
+				{text: '0'},
+				{text: '#'},
+				{text: skin !== 'silicon' ? 'phone' : callStatus, isIcon: true},
+				{text: skin !== 'silicon' ? 'arrowuturn' : editStatus, isIcon: true}
+			];
+		}
 	},
 
 	render: ({disabled, keys, onKeyButtonClick, spotlightDisabled, ...rest}) => {
