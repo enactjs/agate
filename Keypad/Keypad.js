@@ -175,7 +175,11 @@ const KeypadBase = kind({
 	},
 
 	computed: {
-		keys: ({isCallActive, skin}) => [
+		keys: ({isCallActive, skin}) => {
+			const callStatus = isCallActive ? 'calldecline' : 'callaccept';
+			const editStatus = isCallActive ? 'keypad' : 'backspace';
+
+			return [
 			{text: '1'},
 			{text: '2', label: 'abc'},
 			{text: '3', label: 'def'},
@@ -188,9 +192,9 @@ const KeypadBase = kind({
 			{text: '*'},
 			{text: '0'},
 			{text: '#'},
-			{text: skin !== 'silicon' ? 'phone' : (isCallActive ? 'calldecline' : 'callaccept'), isIcon: true},
-			{text: skin !== 'silicon' ? 'arrowuturn' : (isCallActive ? 'keypad' : 'backspace'), isIcon: true}
-		]
+			{text: skin !== 'silicon' ? 'phone' : callStatus, isIcon: true},
+			{text: skin !== 'silicon' ? 'arrowuturn' : editStatus, isIcon: true}
+		]}
 	},
 
 	render: ({disabled, keys, onKeyButtonClick, spotlightDisabled, ...rest}) => {
