@@ -12,6 +12,8 @@
 		box-shadow: 0 0 0 @agate-input-decorator-border-width @agate-input-decorator-border-color;
 		box-sizing: border-box;
 		vertical-align: middle;
+		max-width: @agate-input-max-width;
+		min-width: @agate-input-min-width;
 
 		.input {
 			padding: @agate-input-padding-top-bottom @agate-input-padding-right @agate-input-padding-top-bottom @agate-input-padding-left;
@@ -121,6 +123,25 @@
 				margin-left: @agate-input-icon-before-margin;
 				padding: @agate-input-icon-before-padding-top-bottom @agate-input-icon-before-padding-right @agate-input-icon-before-padding-top-bottom @agate-input-icon-before-padding-left;
 				.padding-start-end(@agate-input-icon-before-padding-left, @agate-input-icon-before-padding-right);
+			}
+		}
+
+		&.large {
+
+			.icon {
+				font-size: @agate-input-large-icon-font-size;
+				height: @agate-input-large-icon-height;
+				line-height: @agate-input-large-icon-height;
+
+				&.iconAfter {
+					padding: @agate-input-large-icon-after-padding-top @agate-input-icon-after-padding-right @agate-input-large-icon-after-padding-bottom @agate-input-large-icon-after-padding-left;
+					.padding-start-end(@agate-input-large-icon-after-padding-left, @agate-input-icon-after-padding-right);
+				}
+
+				&.iconBefore {
+					padding: @agate-input-large-icon-before-padding-top @agate-input-large-icon-before-padding-right @agate-input-large-icon-before-padding-bottom @agate-input-icon-before-padding-left;
+					.padding-start-end(@agate-input-icon-before-padding-left, @agate-input-large-icon-before-padding-right);
+				}
 			}
 		}
 
