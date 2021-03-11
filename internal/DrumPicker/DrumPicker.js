@@ -294,8 +294,9 @@ const DrumPickerBase = class extends Component {
 		this.children = this.calculateChildren(min, max, step, value);
 
 		let selectedValue;
+
 		if (value || value === 0) {
-			selectedValue = this.children.findIndex((element) => element.props.children === value);
+			selectedValue = this.children.findIndex((element, index) => index === value);
 		}
 
 		if (selectedValue < 0 ) {
@@ -309,6 +310,9 @@ const DrumPickerBase = class extends Component {
 		this.scrollY = -1;
 		this.lastY = 0;
 		this.startY = 0;
+		this.scrollX = -1;
+		this.lastX = 0;
+		this.startX = 0;
 		this.isMoving = false;
 	}
 
@@ -323,6 +327,19 @@ const DrumPickerBase = class extends Component {
 		}
 	}
 
+	componentDidUpdate (prevProps, prevState) {
+		const {children} = this;
+
+		if (prevState.selectedValue === this.state.selectedValue) {
+			for (let i = 0; i < children.length; i++) {
+				if (i === this.state.selectedValue) {
+					this.scrollTo(i);
+					return;
+				}
+			}
+		}
+	}
+
 	calculateChildren= (min, max, step, value) => {
 		if (this.props.type === 'number') {
 			const childrenArray = Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step)) );
@@ -333,61 +350,121 @@ const DrumPickerBase = class extends Component {
 
 	};
 
-	scrollTo = (y) => {
-		const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
+	scrollTo = (val) => {
+		const {orientation} = this.props;
 
-		if (this.scrollY !== y * itemHeight) {
-			this.scrollY = y * itemHeight;
+		if (orientation === 'vertical') {
+			const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
 
-			this.contentRef.style.transform = `translate(0,${-((y + 1) * itemHeight)}rem)`;
+			if (this.scrollY !== val * itemHeight) {
+				this.scrollY = val * itemHeight;
 
-			if (this.scrollY >= 0) {
-				const {children} = this;
-				const index = Math.min(y, children.length - 1);
-				const child = children[index].props.children;
-				if (child || child === 0) {
-					this.changeValue(index);
+				this.contentRef.style.transform = `translate(0,${-((val + 1) * itemHeight)}rem)`;
+
+				if (this.scrollY >= 0) {
+					const {children} = this;
+					const index = Math.min(val, children.length - 1);
+					const child = children[index].props.children;
+					if (child || child === 0) {
+						this.changeValue(index);
+					}
+				}
+			}
+		} else {
+			const itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
+
+			if (this.scrollX !== val * itemWidth) {
+				this.scrollX = val * itemWidth;
+
+				this.contentRef.style.transform = `translate(${-((val + 1) * itemWidth)}rem,0)`;
+
+				if (this.scrollX >= 0) {
+					const {children} = this;
+					const index = Math.min(val, children.length - 1);
+					const child = children[index].props.children;
+					if (child || child === 0) {
+						this.changeValue(index);
+					}
 				}
 			}
 		}
 	};
 
-	onStart = (y) => {
+	onStart = (position) => {
 		if (this.props.disabled) {
 			return;
 		}
 		this.isMoving = true;
-		this.startY = y / ri.unitToPixelFactors['rem'];
-		this.lastY = this.scrollY;
+
+		const {orientation} = this.props;
+
+		if (orientation === 'vertical') {
+			this.startY = position.pageY / ri.unitToPixelFactors['rem'];
+			this.lastY = this.scrollY;
+		} else {
+			this.startX = position.pageX / ri.unitToPixelFactors['rem'];
+			this.lastX = this.scrollX;
+		}
+
 	};
 
-	onMove = (y) => {
-		const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
+	onMove = (position) => {
+		const {orientation} = this.props;
 		const unitToPixelFactor = ri.unitToPixelFactors['rem'];
 
 		if (this.props.disabled || !this.isMoving) {
 			return;
 		}
-		this.scrollY = (this.lastY - (y / unitToPixelFactor) + this.startY);
-		this.contentRef.style.transform = `translate(0,${-this.scrollY - itemHeight}rem)`;
+
+		if (orientation === 'vertical') {
+			const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
+			this.scrollY = (this.lastY - ( position.pageY / unitToPixelFactor) + this.startY);
+			this.contentRef.style.transform = `translate(0,${-this.scrollY - itemHeight}rem)`;
+		} else {
+			const itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
+			this.scrollX = (this.lastX - (position.pageX / unitToPixelFactor) + this.startX);
+			this.contentRef.style.transform = `translate(${-this.scrollX - itemWidth}rem, 0)`;
+		}
+
+
 	};
 
 	onFinish = () => {
-		const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
-
 		this.isMoving = false;
-		let targetY = this.scrollY;
-		const height = ((this.children).length - 1) * itemHeight;
-		if (targetY % (itemHeight) !== 0) {
-			targetY = Math.round(targetY / itemHeight) * itemHeight;
+		const {orientation} = this.props;
+
+		if (orientation === 'vertical') {
+			const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
+
+
+			let targetY = this.scrollY;
+			const height = (this.children.length - 1) * itemHeight;
+			if (targetY % itemHeight !== 0) {
+				targetY = Math.round(targetY / itemHeight) * itemHeight;
+			}
+			if (targetY < 0) {
+				targetY = 0;
+			} else if (targetY > height) {
+				targetY = height;
+			}
+			this.scrollTo(targetY / itemHeight);
+		} else {
+			const itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
+
+			let targetX = this.scrollX;
+			const height = (this.children.length - 1) * itemWidth;
+			if (targetX % itemWidth !== 0) {
+				targetX = Math.round(targetX / itemWidth) * itemWidth;
+			}
+			if (targetX < 0) {
+				targetX = 0;
+			} else if (targetX > height) {
+				targetX = height;
+			}
+			this.scrollTo(targetX / itemWidth);
 		}
 
-		if (targetY < 0) {
-			targetY = 0;
-		} else if (targetY > height) {
-			targetY = height;
-		}
-		this.scrollTo(targetY / itemHeight);
+
 	};
 
 	changeValue = (index) => {
@@ -501,6 +578,7 @@ const DrumPickerBase = class extends Component {
 			className,
 			disabled,
 			onSpotlightDisappear,
+			orientation,
 			width,
 			...rest
 		} = this.props;
@@ -525,7 +603,6 @@ const DrumPickerBase = class extends Component {
 		delete rest.incrementAriaLabel;
 		delete rest.noAnimation;
 		delete rest.onChange;
-		delete rest.orientation;
 		delete rest.reverseTransition;
 		delete rest.spotlightDisabled;
 		delete rest.type;
@@ -534,7 +611,7 @@ const DrumPickerBase = class extends Component {
 
 		values = values.map((value, index) => {
 			return (
-				<div className={this.state.selectedValue === index ? classnames(css.selectedItem, css.item) : css.item}>
+				<div className={this.state.selectedValue === index ? classnames(css.selectedItem, css.item) : css.item} key={index}>
 					{sizingPlaceholder}
 					{value}
 				</div>
@@ -542,7 +619,7 @@ const DrumPickerBase = class extends Component {
 		});
 
 		return (
-			<div {...rest} className={classnames(className, css.drumPicker)} ref={this.initRootRef}>
+			<div {...rest} className={classnames(className, css.drumPicker, css[orientation])} ref={this.initRootRef}>
 				<div
 					aria-controls={this.valueId}
 					aria-disabled={disabled}
@@ -568,18 +645,18 @@ const DrumPickerBase = class extends Component {
 					className={css.root}
 					disabled={disabled}
 					onKeyDown={this.handleKeyDown}
-					onMouseDown={(evt) => this.onStart(evt.pageY)}
+					onMouseDown={(evt) => this.onStart(evt)}
 					onMouseMove={(evt) => {
-						evt.preventDefault(); this.onMove(evt.pageY);
+						evt.preventDefault(); this.onMove(evt);
 					}}
 					onMouseUp={this.onFinish}
 					onSpotlightDisappear={onSpotlightDisappear}
 					onTouchCancel={this.onFinish}
 					onTouchEnd={this.onFinish}
 					onTouchMove={(evt) => {
-						evt.preventDefault(); this.onMove(evt.touches[0].pageY);
+						evt.preventDefault(); this.onMove(evt.touches[0]);
 					}}
-					onTouchStart={(evt) => this.onStart(evt.touches[0].pageY)}
+					onTouchStart={(evt) => this.onStart(evt.touches[0])}
 					ref={this.initContentRef}
 				>
 					{values}
