@@ -30,6 +30,7 @@ import Skinnable from '../../Skinnable';
 import DrumPickerItem from './DrumPickerItem';
 
 import css from './DrumPicker.module.less';
+import * as ri from '@enact/ui/resolution';
 
 const DrumPickerRoot = Touchable(Spottable('div'));
 
@@ -314,22 +315,13 @@ const DrumPickerBase = class extends Component {
 	componentDidMount () {
 		const {children} = this;
 
-		for (let i = 0, length = children.length; i < length; i++) {
-			if (children[i].props.children === this.state.selectedValue) {
-				this.scrollTo(i, false);
+		for (let i = 0; i < children.length; i++) {
+			if (i === this.state.selectedValue) {
+				this.scrollTo(i);
 				return;
 			}
 		}
-		this.scrollTo(0, false);
 	}
-
-	setTransform = (nodeStyle, value) => {
-		nodeStyle.transform = value;
-	};
-
-	setTransition= (nodeStyle, value) => {
-		nodeStyle.transition = value;
-	};
 
 	calculateChildren= (min, max, step, value) => {
 		if (this.props.type === 'number') {
@@ -341,22 +333,20 @@ const DrumPickerBase = class extends Component {
 
 	};
 
-	scrollTo = (y, isAnimated) => {
-		const itemHeight = this.indicatorRef.getBoundingClientRect().height;
+	scrollTo = (y) => {
+		const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
+
 		if (this.scrollY !== y * itemHeight) {
 			this.scrollY = y * itemHeight;
 
-			if (isAnimated) {
-				this.setTransition(this.contentRef.style, 'transform 300ms');
-			}
-			this.setTransform(this.contentRef.style, `translate(0,${-((y + 1) * itemHeight)}px)`);
+			this.contentRef.style.transform = `translate(0,${-((y + 1) * itemHeight)}rem)`;
 
 			if (this.scrollY >= 0) {
 				const {children} = this;
 				const index = Math.min(y, children.length - 1);
 				const child = children[index].props.children;
 				if (child || child === 0) {
-					this.changeValue(child, index);
+					this.changeValue(index);
 				}
 			}
 		}
@@ -367,27 +357,28 @@ const DrumPickerBase = class extends Component {
 			return;
 		}
 		this.isMoving = true;
-		this.startY = y;
+		this.startY = y / ri.unitToPixelFactors['rem'];
 		this.lastY = this.scrollY;
 	};
 
 	onMove = (y) => {
-		const itemHeight = this.indicatorRef.getBoundingClientRect().height;
+		const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
+		const unitToPixelFactor = ri.unitToPixelFactors['rem'];
 
 		if (this.props.disabled || !this.isMoving) {
 			return;
 		}
-		this.scrollY = this.lastY - y + this.startY;
-		this.setTransform(this.contentRef.style, `translate(0,${-this.scrollY - itemHeight}px)`);
+		this.scrollY = (this.lastY - (y / unitToPixelFactor) + this.startY);
+		this.contentRef.style.transform = `translate(0,${-this.scrollY - itemHeight}rem)`;
 	};
 
 	onFinish = () => {
-		const itemHeight = this.indicatorRef.getBoundingClientRect().height;
+		const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
 
 		this.isMoving = false;
 		let targetY = this.scrollY;
 		const height = ((this.children).length - 1) * itemHeight;
-		if (targetY % itemHeight !== 0) {
+		if (targetY % (itemHeight) !== 0) {
 			targetY = Math.round(targetY / itemHeight) * itemHeight;
 		}
 
@@ -396,16 +387,16 @@ const DrumPickerBase = class extends Component {
 		} else if (targetY > height) {
 			targetY = height;
 		}
-		this.scrollTo(targetY / itemHeight, false);
+		this.scrollTo(targetY / itemHeight);
 	};
 
-	changeValue = (selectedValue, selectedValueIndex) => {
+	changeValue = (index) => {
 		const {onChange} = this.props;
-		if (selectedValue !== this.state.selectedValue) {
+		if (index !== this.state.selectedValue) {
 			this.setState({
-				selectedValue
+				selectedValue: index
 			});
-			onChange({value: selectedValueIndex});
+			onChange({value: index});
 		}
 	};
 
@@ -472,7 +463,9 @@ const DrumPickerBase = class extends Component {
 		forwardKeyDown(ev, this.props);
 
 		if (!this.props.disabled) {
-			const itemHeight = this.indicatorRef.getBoundingClientRect().height;
+			const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
+
+			this.contentRef.style.transition = 'transform 300ms';
 
 			if (orientation === 'horizontal' && isLeft(keyCode)) {
 				ev.stopPropagation();
@@ -482,11 +475,15 @@ const DrumPickerBase = class extends Component {
 				// increment
 			} else if (orientation === 'vertical' && isUp(keyCode)) {
 				ev.stopPropagation();
-				this.scrollTo(clamp(0, (this.children).length - 1, this.scrollY / itemHeight - 1), true);
+				this.scrollTo(clamp(0, this.children.length - 1, this.scrollY / itemHeight - 1));
 			} else if (orientation === 'vertical' && isDown(keyCode) ) {
 				ev.stopPropagation();
-				this.scrollTo(clamp(0, (this.children).length - 1, this.scrollY / itemHeight + 1), true);
+				this.scrollTo(clamp(0, this.children.length - 1, this.scrollY / itemHeight + 1));
 			}
+			// remove transition for further touch related changes
+			setTimeout(() => {
+				this.contentRef.style.transition = 'none';
+			}, 300);
 		}
 	};
 
@@ -501,7 +498,6 @@ const DrumPickerBase = class extends Component {
 
 	render ()  {
 		const {
-			// children: values,
 			className,
 			disabled,
 			onSpotlightDisappear,
@@ -509,7 +505,7 @@ const DrumPickerBase = class extends Component {
 			...rest
 		} = this.props;
 
-		const {children: values} = this;
+		let {children: values} = this;
 
 		const currentValueText = this.currentValueText();
 		const decAriaLabel = this.decrementAriaLabel();
@@ -536,16 +532,14 @@ const DrumPickerBase = class extends Component {
 		delete rest.value;
 		delete rest.wrap;
 
-		const mapItems = (item) => {
+		values = values.map((value, index) => {
 			return (
-				<div className={this.state.selectedValue === item.props.children ? classnames(css.selectedItem, css.item) : css.item}>
+				<div className={this.state.selectedValue === index ? classnames(css.selectedItem, css.item) : css.item}>
 					{sizingPlaceholder}
-					{item}
+					{value}
 				</div>
 			);
-		};
-
-		const items = Children ? Children.map(values, mapItems) : ([]).concat(values).map(mapItems);
+		});
 
 		return (
 			<div {...rest} className={classnames(className, css.drumPicker)} ref={this.initRootRef}>
@@ -588,7 +582,7 @@ const DrumPickerBase = class extends Component {
 					onTouchStart={(evt) => this.onStart(evt.touches[0].pageY)}
 					ref={this.initContentRef}
 				>
-					{items}
+					{values}
 				</DrumPickerRoot>
 			</div>
 		);
