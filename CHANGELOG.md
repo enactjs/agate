@@ -17,8 +17,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/Dropdown` to use `agate/ContextualPopup`
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
-- `agate/ArcPicker` to have a max-width for valueDisplay
-- `agate/ArcSlider` to have a max-width for valueDisplay
+- `agate/ArcPicker` and `agate/ArcSlider` to have a max-width for `slotCenter`
 
 ### Fixed
 
