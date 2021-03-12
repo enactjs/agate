@@ -36,6 +36,7 @@
 @silicon-very-light-gray: #cccccc;
 @silicon-gradient: linear-gradient(to right, @silicon-vibrant-purple, @silicon-red-pink);
 @silicon-gradient-disabled: linear-gradient(to right, #943bb4, #c62742);
+@silicon-gradient-active: linear-gradient(to right, #6d2886, #af1b33);
 
 // Abstracted Colors
 @agate-accent: var(--agate-accent-color, @silicon-accent);
@@ -86,9 +87,12 @@
 @agate-button-bg-color:       @silicon-gray;
 @agate-button-bg-image:       none;
 @agate-button-border-color:   transparent;
+@agate-button-opacity:        1;
 @agate-button-shadow:         none;
 @agate-button-active-color:   @agate-button-color;
 @agate-button-active-bg-color: @silicon-darker-gray;
+@agate-button-active-bg-image: none;
+@agate-button-active-focus-bg-image: @silicon-gradient-active;
 @agate-button-disabled-bg-color: @silicon-charcoal;
 @agate-button-disabled-focus-bg-image: @silicon-gradient-disabled;
 @agate-button-disabled-focus-color: fade(@agate-button-focus-color, 40%);

@@ -27,6 +27,7 @@
 		margin: 0 @agate-component-spacing;
 		box-sizing: border-box;
 		font-size: @agate-button-font-size;
+		opacity: @agate-button-opacity;
 		vertical-align: middle;
 
 		.bg {
@@ -522,6 +523,17 @@
 						opacity: 1;
 					}
 				}
+
+				.focus({
+					.bg {
+						background-image: @agate-button-active-focus-bg-image;
+					}
+
+					&,
+					.client {
+						color: @agate-button-focus-color;
+					}
+				})
 			});
 		}
 	});
