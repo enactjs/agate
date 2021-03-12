@@ -171,10 +171,6 @@ const RangePickerBase = kind({
 		wrap: PropTypes.bool
 	},
 
-	// defaultProps: {
-	// 	step: 1
-	// },
-
 	computed: {
 		disabled: ({disabled, max, min}) => min >= max ? true : disabled,
 		value: ({min, max, value}) => {
@@ -186,7 +182,6 @@ const RangePickerBase = kind({
 		return (
 			<PickerCore {...rest} index={0} type="number" value={value}>
 				<DrumPickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{value}</DrumPickerItem>
-				{/* {children}*/}
 			</PickerCore>
 		);
 	}

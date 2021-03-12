@@ -292,15 +292,13 @@ const DrumPickerBase = class extends Component {
 
 		const {min, max, step, value} = this.props;
 		this.children = this.calculateChildren(min, max, step, value);
-
-		let selectedValue;
-
+		let selectedIndex;
 		if (value || value === 0) {
-			selectedValue = clamp(0, this.children.length - 1, this.children.findIndex((element, index) => index === value));
+			selectedIndex = clamp(0, this.children.length - 1, this.children.findIndex((element, index) => element.props.children === value));
 		}
 
 		this.state = {
-			selectedValue: selectedValue
+			selectedIndex: selectedIndex
 		};
 
 		this.scrollY = -1;
@@ -316,7 +314,7 @@ const DrumPickerBase = class extends Component {
 		const {children} = this;
 
 		for (let i = 0; i < children.length; i++) {
-			if (i === this.state.selectedValue) {
+			if (i === this.state.selectedIndex) {
 				this.scrollTo(i);
 				return;
 			}
@@ -326,9 +324,9 @@ const DrumPickerBase = class extends Component {
 	componentDidUpdate (prevProps, prevState) {
 		const {children} = this;
 
-		if (prevState.selectedValue === this.state.selectedValue) {
+		if (prevState.selectedIndex === this.state.selectedIndex) {
 			for (let i = 0; i < children.length; i++) {
-				if (i === this.state.selectedValue) {
+				if (i === this.state.selectedIndex) {
 					this.scrollTo(i);
 					return;
 				}
@@ -337,20 +335,25 @@ const DrumPickerBase = class extends Component {
 	}
 
 	calculateChildren= (min, max, step, value) => {
-		if (this.props.type === 'number') {
+		if (!Array.isArray(this.props.children)) {
 			const childrenArray = Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step)) );
 			return (Children.map(childrenArray, (child) => (
 				<DrumPickerItem key={value} marqueeDisabled>{child}</DrumPickerItem>
 			)));
-		} else return this.props.children;
+		} else if (this.props.children) {
+			return this.props.children;
+		} else return [];
+
 
 	};
 
 	scrollTo = (val) => {
 		const {orientation} = this.props;
-
 		const {children} = this;
-		const index = Math.min(val, children.length - 1);
+		if (!children || children.length === 0) return;
+
+		const index = clamp(0, children.length,  Math.min(val, children.length - 1));
+		console.log(children.length, index, val);
 		const child = children[index].props.children;
 
 		if (orientation === 'vertical') {
@@ -362,7 +365,7 @@ const DrumPickerBase = class extends Component {
 				this.contentRef.style.transform = `translate(0,${-((val + 1) * itemHeight)}rem)`;
 
 				if (this.scrollY >= 0 && (child || child === 0)) {
-					this.changeValue(index);
+					this.changeValue(index, child);
 				}
 			}
 		} else {
@@ -374,14 +377,14 @@ const DrumPickerBase = class extends Component {
 				this.contentRef.style.transform = `translate(${-((val + 1) * itemWidth)}rem,0)`;
 
 				if (this.scrollX >= 0 && (child || child === 0)) {
-					this.changeValue(index);
+					this.changeValue(index, child);
 				}
 			}
 		}
 	};
 
 	onStart = (position) => {
-		if (this.props.disabled) {
+		if (this.props.disabled || this.children.length === 0) {
 			return;
 		}
 		this.isMoving = true;
@@ -397,7 +400,7 @@ const DrumPickerBase = class extends Component {
 	};
 
 	onMove = (position) => {
-		if (this.props.disabled || !this.isMoving) {
+		if (this.props.disabled || this.children.length === 0 || !this.isMoving) {
 			return;
 		}
 
@@ -448,13 +451,18 @@ const DrumPickerBase = class extends Component {
 		}
 	};
 
-	changeValue = (index) => {
+	changeValue = (index, value) => {
 		const {onChange} = this.props;
-		if (index !== this.state.selectedValue) {
+		if (index !== this.state.selectedIndex) {
 			this.setState({
-				selectedValue: index
+				selectedIndex: index
 			});
-			onChange({value: index});
+			if (Array.isArray(this.props.children)) {
+				onChange({value: index});
+			} else {
+				onChange({value});
+			}
+
 		}
 	};
 
@@ -487,7 +495,7 @@ const DrumPickerBase = class extends Component {
 			return decrementAriaLabel;
 		}
 
-		if (type === 'number') {
+		if (!Array.isArray(this.props.children)) {
 			return `${$L('decrease the value')}`;
 		} else {
 			return `${$L('previous item')}`;
@@ -500,7 +508,7 @@ const DrumPickerBase = class extends Component {
 			return incrementAriaLabel;
 		}
 
-		if (type === 'number') {
+		if (!Array.isArray(this.props.children)) {
 			return `${$L('increase the value')}`;
 		} else {
 			return `${$L('next item')}`;
@@ -520,12 +528,20 @@ const DrumPickerBase = class extends Component {
 		const {keyCode} = ev;
 		forwardKeyDown(ev, this.props);
 
-		if (!this.props.disabled) {
-			const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
-			const itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
+		if (!this.props.disabled || this.children.length > 0) {
+			let itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
+			let itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
 
-			this.contentRef.style.transition = 'transform 300ms';
+			if (itemHeight === 0) {
+				itemHeight = 1;
+			}
+			if (itemWidth === 0) {
+				itemWidth = 1;
+			}
 
+			if (!this.props.noAnimation) {
+				this.contentRef.style.transition = 'transform 300ms';
+			}
 			if (orientation === 'horizontal' && isLeft(keyCode)) {
 				ev.stopPropagation();
 				this.scrollTo(clamp(0, this.children.length - 1, this.scrollX / itemWidth - 1));
@@ -593,7 +609,7 @@ const DrumPickerBase = class extends Component {
 
 		values = values.map((value, index) => {
 			return (
-				<div className={this.state.selectedValue === index ? classnames(css.selectedItem, css.item) : css.item} key={index}>
+				<div className={this.state.selectedIndex === index ? classnames(css.selectedItem, css.item) : css.item} key={index}>
 					{sizingPlaceholder}
 					{value}
 				</div>
