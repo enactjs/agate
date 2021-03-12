@@ -71,7 +71,7 @@
 			});
 
 			&.marquee {
-				max-width: var(--sand-tooltip-label-width, 600px); // If using a marquee, use the preferred width, and if none is provided, fall back to our default variable.
+				max-width: var(--sand-tooltip-label-width,  @agate-tooltip-marquee-width); // If using a marquee, use the preferred width, and if none is provided, fall back to our default variable.
 			}
 
 			&.multi {
@@ -273,12 +273,16 @@
 		&.absolute {
 			width: 0;
 			height: 0;
+			top: var(--tooltip-position-top);
+			left: var(--tooltip-position-left);
 
 			.tooltipAnchor {
 				position: absolute;
 			}
 
 			&.below {
+				top: ~"calc(var(--tooltip-position-top) + " @agate-tooltip-offset ~")";
+
 				&.leftArrow .tooltipAnchor {
 					transform: translateX(-100%);
 				}
@@ -292,6 +296,8 @@
 			}
 
 			&.above {
+				top: ~"calc(var(--tooltip-position-top) - " @agate-tooltip-offset ~")";
+
 				&.leftArrow .tooltipAnchor {
 					transform: translate(-100%, -100%);
 				}
@@ -306,6 +312,8 @@
 			}
 
 			&.left {
+				left: ~"calc(var(--tooltip-position-left) - " @agate-tooltip-offset ~")";
+
 				&.topArrow .tooltipAnchor {
 					transform: translate(-100%, -100%);
 				}
@@ -320,6 +328,8 @@
 			}
 
 			&.right {
+				left: ~"calc(var(--tooltip-position-left) + " @agate-tooltip-offset ~")";
+
 				&.topArrow .tooltipAnchor {
 					transform: translate(0, -100%);
 				}

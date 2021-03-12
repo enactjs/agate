@@ -39,7 +39,7 @@ const defaultConfig = {
 	 * resolution.
 	 *
 	 * @type {Number}
-	 * @default 24
+	 * @default 12
 	 * @memberof agate/TooltipDecorator.TooltipDecorator.defaultConfig
 	 */
 	screenEdgeKeepout: (12 + 12),
@@ -432,6 +432,12 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		 */
 		renderTooltip () {
 			const {children, tooltipMarquee, tooltipProps, tooltipRelative, tooltipText, tooltipWidth} = this.props;
+			const {top, left} = this.state.position;
+			const tooltipStyle = {
+				// Moving the position to CSS variables where there are additional offset calculations
+				'--tooltip-position-top': tooltipRelative ? null : ri.unit(top, 'rem'),
+				'--tooltip-position-left': tooltipRelative ? null : ri.unit(left, 'rem')
+			};
 
 			if (tooltipText) {
 				let renderedTooltip = (
@@ -445,7 +451,7 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 						marquee={tooltipMarquee}
 						position={tooltipRelative ? null : this.state.position}
 						relative={tooltipRelative}
-						style={{display: ((tooltipRelative && !this.state.showing) ? 'none' : null)}}
+						style={tooltipStyle}
 						tooltipRef={this.getTooltipRef}
 						width={tooltipWidth}
 					>
