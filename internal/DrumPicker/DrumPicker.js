@@ -296,11 +296,7 @@ const DrumPickerBase = class extends Component {
 		let selectedValue;
 
 		if (value || value === 0) {
-			selectedValue = this.children.findIndex((element, index) => index === value);
-		}
-
-		if (selectedValue < 0 ) {
-			selectedValue = 0;
+			selectedValue = clamp(0, this.children.length - 1, this.children.findIndex((element, index) => index === value));
 		}
 
 		this.state = {
@@ -344,7 +340,7 @@ const DrumPickerBase = class extends Component {
 		if (this.props.type === 'number') {
 			const childrenArray = Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step)) );
 			return (Children.map(childrenArray, (child) => (
-				<DrumPickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{child}</DrumPickerItem>
+				<DrumPickerItem key={value} marqueeDisabled>{child}</DrumPickerItem>
 			)));
 		} else return this.props.children;
 
@@ -352,6 +348,10 @@ const DrumPickerBase = class extends Component {
 
 	scrollTo = (val) => {
 		const {orientation} = this.props;
+
+		const {children} = this;
+		const index = Math.min(val, children.length - 1);
+		const child = children[index].props.children;
 
 		if (orientation === 'vertical') {
 			const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
@@ -361,13 +361,8 @@ const DrumPickerBase = class extends Component {
 
 				this.contentRef.style.transform = `translate(0,${-((val + 1) * itemHeight)}rem)`;
 
-				if (this.scrollY >= 0) {
-					const {children} = this;
-					const index = Math.min(val, children.length - 1);
-					const child = children[index].props.children;
-					if (child || child === 0) {
-						this.changeValue(index);
-					}
+				if (this.scrollY >= 0 && (child || child === 0)) {
+					this.changeValue(index);
 				}
 			}
 		} else {
@@ -378,13 +373,8 @@ const DrumPickerBase = class extends Component {
 
 				this.contentRef.style.transform = `translate(${-((val + 1) * itemWidth)}rem,0)`;
 
-				if (this.scrollX >= 0) {
-					const {children} = this;
-					const index = Math.min(val, children.length - 1);
-					const child = children[index].props.children;
-					if (child || child === 0) {
-						this.changeValue(index);
-					}
+				if (this.scrollX >= 0 && (child || child === 0)) {
+					this.changeValue(index);
 				}
 			}
 		}
@@ -396,9 +386,7 @@ const DrumPickerBase = class extends Component {
 		}
 		this.isMoving = true;
 
-		const {orientation} = this.props;
-
-		if (orientation === 'vertical') {
+		if (this.props.orientation === 'vertical') {
 			this.startY = position.pageY / ri.unitToPixelFactors['rem'];
 			this.lastY = this.scrollY;
 		} else {
@@ -409,14 +397,13 @@ const DrumPickerBase = class extends Component {
 	};
 
 	onMove = (position) => {
-		const {orientation} = this.props;
-		const unitToPixelFactor = ri.unitToPixelFactors['rem'];
-
 		if (this.props.disabled || !this.isMoving) {
 			return;
 		}
 
-		if (orientation === 'vertical') {
+		const unitToPixelFactor = ri.unitToPixelFactors['rem'];
+
+		if (this.props.orientation === 'vertical') {
 			const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
 			this.scrollY = (this.lastY - ( position.pageY / unitToPixelFactor) + this.startY);
 			this.contentRef.style.transform = `translate(0,${-this.scrollY - itemHeight}rem)`;
@@ -425,17 +412,13 @@ const DrumPickerBase = class extends Component {
 			this.scrollX = (this.lastX - (position.pageX / unitToPixelFactor) + this.startX);
 			this.contentRef.style.transform = `translate(${-this.scrollX - itemWidth}rem, 0)`;
 		}
-
-
 	};
 
 	onFinish = () => {
 		this.isMoving = false;
-		const {orientation} = this.props;
 
-		if (orientation === 'vertical') {
+		if (this.props.orientation === 'vertical') {
 			const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
-
 
 			let targetY = this.scrollY;
 			const height = (this.children.length - 1) * itemHeight;
@@ -463,8 +446,6 @@ const DrumPickerBase = class extends Component {
 			}
 			this.scrollTo(targetX / itemWidth);
 		}
-
-
 	};
 
 	changeValue = (index) => {
