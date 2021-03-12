@@ -522,15 +522,16 @@ const DrumPickerBase = class extends Component {
 
 		if (!this.props.disabled) {
 			const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
+			const itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
 
 			this.contentRef.style.transition = 'transform 300ms';
 
 			if (orientation === 'horizontal' && isLeft(keyCode)) {
 				ev.stopPropagation();
-				// decrement
+				this.scrollTo(clamp(0, this.children.length - 1, this.scrollX / itemWidth - 1));
 			} else if (orientation === 'horizontal' && isRight(keyCode) ) {
 				ev.stopPropagation();
-				// increment
+				this.scrollTo(clamp(0, this.children.length - 1, this.scrollX / itemWidth + 1));
 			} else if (orientation === 'vertical' && isUp(keyCode)) {
 				ev.stopPropagation();
 				this.scrollTo(clamp(0, this.children.length - 1, this.scrollY / itemHeight - 1));

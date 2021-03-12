@@ -5,6 +5,9 @@
 @import "../../styles/skin.less";
 
 .drumPicker {
+	align-items: center;
+	justify-content: center;
+	min-width: 72px;
 	overflow: hidden;
 	position: relative;
 
@@ -16,9 +19,6 @@
 	}
 
 	&.horizontal {
-		//flex-direction: row;
-		//display: inline-flex;
-
 		.root {
 			display: inline-flex;
 			flex-direction: row;
@@ -26,9 +26,6 @@
 	}
 
 	.applySkins({
-		align-items: center;
-		justify-content: center;
-		min-width: 72px;
 		font-weight: @agate-picker-font-weight;
 		font-size: @agate-picker-font-size;
 		border-radius: @agate-picker-border-radius;
@@ -40,25 +37,26 @@
 			padding: @agate-drumPicker-root-padding;
 
 			.focus({
-				background-color: transparent;
+				background-color: @agate-drumPicker-focus-bg-color;
 				background-image: @agate-drumPicker-focus-bg-image;
 			});
 		}
 
 		.sizingPlaceholder {
-			height: 0;
-			visibility: hidden;
-			padding-left: .extract(@agate-picker-padding, left)[];
-			padding-right: .extract(@agate-picker-padding, right)[];
-			line-height: 0;
 			font-size: @agate-picker-active-font-size;
 			font-weight: @agate-picker-active-font-weight;
+			height: 0;
+			line-height: 0;
+			padding-left: .extract(@agate-picker-padding, left)[];
+			padding-right: .extract(@agate-picker-padding, right)[];
+			visibility: hidden;
 		}
 
 		.item {
-			width: auto;
 			height: @agate-drumPicker-item-height;
 			line-height: @agate-drumPicker-item-height;
+			width: auto;
+
 
 			&.selectedItem {
 				color: @agate-picker-active-color;
@@ -72,28 +70,28 @@
 
 		}
 
-		.indicator {
-			background-color: @agate-picker-active-bg-color;
-			background-image: @agate-picker-active-bg-image;
-			height: @agate-drumPicker-item-height;
+		.indicator,
+		.itemDecrement,
+		.itemIncrement {
 			left: 0;
 			margin: @agate-drumPicker-margin;
 			position: absolute;
-			top: @agate-drumPicker-item-height;
 			right: 0;
 			z-index: -1;
 		}
 
+		.indicator {
+			background-color: @agate-picker-active-bg-color;
+			background-image: @agate-picker-active-bg-image;
+			height: @agate-drumPicker-item-height;
+			top: @agate-drumPicker-item-height;
+		}
+
 		.itemDecrement,
 		.itemIncrement {
-			color: @agate-picker-item-color;
 			background-color: @agate-picker-item-bg-color;
 			background-image: @agate-picker-item-decrement-bg-image;
-			left: 0;
-			margin: @agate-drumPicker-margin;
-			position: absolute;
-			right: 0;
-			z-index: -1;
+			color: @agate-picker-item-color;
 		}
 
 		.itemDecrement {
@@ -116,11 +114,10 @@
 			.item,
 			.itemDecrement,
 			.itemIncrement {
-				width: @agate-picker-horizontal-item-width;
-				top: 0;
 				bottom: 0;
 				margin: @agate-drumPicker-horizontal-margin;
-
+				top: 0;
+				width: @agate-picker-horizontal-item-width;
 			}
 
 			.itemDecrement {
@@ -132,11 +129,10 @@
 			}
 
 			.indicator {
-				top: 0;
-				left: @agate-picker-horizontal-item-width;
 				bottom: 0;
+				left: @agate-picker-horizontal-item-width;
+				top: 0;
 			}
 		}
 	});
-
 }
