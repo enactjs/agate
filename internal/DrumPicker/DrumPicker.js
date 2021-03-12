@@ -606,13 +606,13 @@ const DrumPickerBase = class extends Component {
 					aria-controls={this.valueId}
 					aria-disabled={disabled}
 					aria-label={decrementAriaLabel}
-					className={classnames(css.itemDecrement, css.item, className)}
+					className={classnames(css.itemDecrement, css.item)}
 					disabled={disabled}
 				/>
 				<div
 					aria-label={indicatorAriaLabel}
 					aria-valuetext={currentValueText}
-					className={classnames(css.indicator, css.item, className)}
+					className={classnames(css.indicator, css.item)}
 					ref={this.initIndicatorRef}
 					disabled={disabled}
 				/>
@@ -620,7 +620,7 @@ const DrumPickerBase = class extends Component {
 					aria-controls={this.valueId}
 					aria-disabled={disabled}
 					aria-label={incrementAriaLabel}
-					className={classnames(css.itemIncrement, css.item, className)}
+					className={classnames(css.itemIncrement, css.item)}
 					disabled={disabled}
 				/>
 				<DrumPickerRoot
