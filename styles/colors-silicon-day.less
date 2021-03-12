@@ -35,8 +35,8 @@
 @silicon-night-rider-gray: #333333;
 @silicon-very-light-gray: #cccccc;
 @silicon-gradient: linear-gradient(to right, @silicon-vibrant-purple, @silicon-red-pink);
-@silicon-gradient-disabled: linear-gradient(to right, #943bb4, #c62742);
 @silicon-gradient-active: linear-gradient(to right, #6d2886, #af1b33);
+@silicon-gradient-disabled: linear-gradient(to right, #943bb4, #c62742);
 
 // Abstracted Colors
 @agate-accent: var(--agate-accent-color, @silicon-accent);
@@ -96,8 +96,6 @@
 @agate-button-disabled-bg-color: @silicon-charcoal;
 @agate-button-disabled-focus-bg-image: @silicon-gradient-disabled;
 @agate-button-disabled-focus-color: fade(@agate-button-focus-color, 40%);
-@agate-button-selected-disabled-bg-color: @silicon-charcoal;
-@agate-button-selected-disabled-border-color: fade(@silicon-accent, 40%);
 @agate-button-focus-color:    @agate-spotlight-color;
 @agate-button-focus-bg-color: transparent;
 @agate-button-focus-bg-image: @silicon-gradient;
@@ -112,6 +110,8 @@
 @agate-button-selected-color: @agate-button-color;
 @agate-button-selected-bg-color: @agate-button-bg-color;
 @agate-button-selected-border-color: @agate-accent;
+@agate-button-selected-disabled-bg-color: @silicon-charcoal;
+@agate-button-selected-disabled-border-color: fade(@silicon-accent, 40%);
 @agate-button-selected-disabled-focus-border-color: fade(@agate-white, 30%);
 @agate-button-badge-bg-color: @agate-accent;
 
