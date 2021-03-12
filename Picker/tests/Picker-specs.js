@@ -11,7 +11,7 @@ describe('Picker Specs', () => {
 		);
 
 		const expected = '2';
-		const actual = picker.find('PickerItem').at(1).text();
+		const actual = picker.find('DrumPickerItem').at(1).text();
 
 		expect(actual).toBe(expected);
 	});
@@ -25,7 +25,7 @@ describe('Picker Specs', () => {
 			);
 
 			const expected = 3;
-			const actual = picker.find('Picker').last().prop('max');
+			const actual = picker.find('DrumPicker').last().prop('max');
 
 			expect(actual).toBe(expected);
 		}
@@ -38,7 +38,7 @@ describe('Picker Specs', () => {
 			</PickerBase>
 		);
 
-		const actual = picker.find('Picker').last().prop('disabled');
+		const actual = picker.find('DrumPicker').last().prop('disabled');
 
 		expect(actual).toBe(true);
 	});

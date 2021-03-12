@@ -25,6 +25,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Changed
 
 - `agate/Dropdown` to use `agate/ContextualPopup`
+- `agate/Picker` and `agate/RangePicker` to use the new DrumPicker component
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
 
 ### Fixed
