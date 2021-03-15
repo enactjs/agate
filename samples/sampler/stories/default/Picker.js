@@ -27,7 +27,6 @@ storiesOf('Agate', module)
 					{['LO', '16\xB0', '17\xB0', '18\xB0', '19\xB0', 'HI']}
 				</Picker>
 			</div>
-
 		),
 		{
 			text: 'Basic usage of Picker'

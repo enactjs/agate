@@ -1,4 +1,4 @@
-import {mount} from 'enzyme';
+import {mount, shallow} from 'enzyme';
 
 import {DatePicker} from '../DatePicker';
 import css from '../DatePicker.module.less';
@@ -32,6 +32,7 @@ describe('DatePicker', () => {
 			<DatePicker value={new Date(2000, 0, 1)} locale="en-US" />
 		);
 
+		console.log(subject.debug());
 		const yearPicker = subject.find(`DateComponentRangePicker.${css.year}`);
 
 		const expected = 2000;

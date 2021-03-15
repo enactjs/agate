@@ -10,13 +10,10 @@
  */
 
 import classnames from 'classnames';
-import {adaptEvent, forward, handle} from '@enact/core/handle';
-import hoc from '@enact/core/hoc';
+import {forward} from '@enact/core/handle';
 import {is} from '@enact/core/keymap';
-import kind from '@enact/core/kind';
 import {clamp} from '@enact/core/util';
 import Spottable from '@enact/spotlight/Spottable';
-import Changeable from '@enact/ui/Changeable';
 import IdProvider from '@enact/ui/internal/IdProvider';
 import Touchable from '@enact/ui/Touchable';
 import PropTypes from 'prop-types';
@@ -58,7 +55,7 @@ const DrumPickerBase = class extends Component {
 		 * The maximum value selectable by the picker (inclusive).
 		 *
 		 * The range between `min` and `max` should be evenly divisible by
-		 * [step]{@link agate/internal/Picker.Picker.step}.
+		 * [step]{@link agate/internal/DrumPicker.DrumPicker.step}.
 		 *
 		 * @type {Number}
 		 * @required
@@ -70,7 +67,7 @@ const DrumPickerBase = class extends Component {
 		 * The minimum value selectable by the picker (inclusive).
 		 *
 		 * The range between `min` and `max` should be evenly divisible by
-		 * [step]{@link agate/internal/Picker.Picker.step}.
+		 * [step]{@link agate/internal/DrumPicker.DrumPicker.step}.
 		 *
 		 * @type {Number}
 		 * @required
@@ -171,6 +168,16 @@ const DrumPickerBase = class extends Component {
 		incrementAriaLabel: PropTypes.string,
 
 		/**
+		 * By default, the picker will animate transitions between items.
+		 * Specifying `noAnimation` will prevent any transition animation for the
+		 * component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		noAnimation: PropTypes.bool,
+
+		/**
 		 * A function to run when the control should increment or decrement.
 		 *
 		 * @type {Function}
@@ -219,7 +226,6 @@ const DrumPickerBase = class extends Component {
 		 */
 		step: PropTypes.number,
 
-
 		/**
 		 * The type of picker. It determines the aria-label for the next and previous buttons.
 		 *
@@ -263,16 +269,7 @@ const DrumPickerBase = class extends Component {
 		width: PropTypes.oneOfType([
 			PropTypes.oneOf([null, 'small', 'medium', 'large']),
 			PropTypes.number
-		]),
-
-		/**
-		 * Should the picker stop incrementing when the picker reaches the last element? Set `wrap`
-		 * to `true` to allow the picker to continue from the opposite end of the list of options.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		wrap: PropTypes.bool
+		])
 	};
 
 	static defaultProps = {
@@ -294,7 +291,7 @@ const DrumPickerBase = class extends Component {
 		this.children = this.calculateChildren(min, max, step, value);
 		let selectedIndex;
 		if (value || value === 0) {
-			selectedIndex = clamp(0, this.children.length - 1, this.children.findIndex((element, index) => element.props.children === value));
+			selectedIndex = clamp(0, this.children.length - 1, this.children.findIndex((element) => element.props.children === value));
 		}
 
 		this.state = {
@@ -329,7 +326,7 @@ const DrumPickerBase = class extends Component {
 			this.children = this.calculateChildren(min, max, step, value);
 			let selectedIndex;
 			if (value || value === 0) {
-				selectedIndex = clamp(0, this.children.length - 1, this.children.findIndex((element, index) => element.props.children === value));
+				selectedIndex = clamp(0, this.children.length - 1, this.children.findIndex((element) => element.props.children === value));
 			}
 
 			for (let i = 0; i < children.length; i++) {
@@ -494,7 +491,7 @@ const DrumPickerBase = class extends Component {
 	};
 
 	decrementAriaLabel = () => {
-		const {decrementAriaLabel, type} = this.props;
+		const {decrementAriaLabel} = this.props;
 		if (decrementAriaLabel != null) {
 			return decrementAriaLabel;
 		}
@@ -507,7 +504,7 @@ const DrumPickerBase = class extends Component {
 	};
 
 	incrementAriaLabel= () => {
-		const {incrementAriaLabel, type} = this.props;
+		const {incrementAriaLabel} = this.props;
 		if (incrementAriaLabel != null) {
 			return incrementAriaLabel;
 		}
@@ -641,7 +638,7 @@ const DrumPickerBase = class extends Component {
 					aria-disabled={disabled}
 					aria-label={incrementAriaLabel}
 					className={classnames(css.itemIncrement, css.item)}
-					disabled={disabled || this.state.selectedIndex === values.length-1 }
+					disabled={disabled || this.state.selectedIndex === values.length - 1}
 				/>
 				<DrumPickerRoot
 					className={css.root}
@@ -669,44 +666,15 @@ const DrumPickerBase = class extends Component {
 };
 
 /**
- * A higher-order component that filters the values returned by the onChange event on {@link agate/internal/DrumPicker.DrumPicker}
- *
- * @class ChangeAdapter
- * @hoc
- * @memberof agate/internal/DrumPicker
- * @private
- */
-const ChangeAdapter = hoc((config, Wrapped) => {
-	return kind({
-		name: 'ChangeAdapter',
-
-		handlers: {
-			onChange: handle(
-				adaptEvent(({value}) => {
-					return ({value});
-				},
-				forward('onChange'))
-			)
-		},
-
-		render: (props) => {
-			return <Wrapped {...props} />;
-		}
-	});
-});
-
-/**
  * Applies Agate specific behaviors to [DrumPicker]{@link agate/DrumPicker.DrumPicker}.
  *
  * @hoc
  * @memberof agate/internal/DrumPicker
- * @mixes ui/Changeable.Changeable
  * @mixes agate/Skinnable.Skinnable
  * @private
  */
 const DrumPickerDecorator = compose(
 	IdProvider({generateProp: null}),
-	Changeable,
 	Skinnable
 );
 
@@ -714,7 +682,6 @@ const DrumPicker = DrumPickerDecorator(DrumPickerBase);
 
 export default DrumPicker;
 export {
-	ChangeAdapter,
 	DrumPicker,
 	DrumPickerBase
 };

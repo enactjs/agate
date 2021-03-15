@@ -19,7 +19,7 @@ import clamp from 'ramda/src/clamp';
 import compose from 'ramda/src/compose';
 import {Children} from 'react';
 
-import PickerCore, {ChangeAdapter, DrumPickerItem} from '../internal/DrumPicker';
+import PickerCore, {DrumPickerItem} from '../internal/DrumPicker';
 
 /**
  * The base `Picker` component.
@@ -172,8 +172,7 @@ const PickerBase = kind({
  */
 const PickerDecorator = compose(
 	Pure,
-	Changeable,
-	ChangeAdapter
+	Changeable
 );
 
 /**
