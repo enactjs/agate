@@ -1,5 +1,5 @@
 'use strict';
-const {element, getText, Page} = require('@enact/ui-test-utils/utils');
+const {element, getComponent, getText, Page} = require('@enact/ui-test-utils/utils');
 
 class PopupCommon {
 
@@ -59,14 +59,14 @@ class PopupInterface {
 	get buttonCancel () {
 		return element(`#${this.id} #buttonCancel`, browser);
 	}
-	get closeSymbol () {
-		return getText(element(`#${this.id} .Icon_Icon_icon`, browser));
+	get buttonClose () {
+		return getComponent({component: 'Popup', child: 'closeButton'}, this.self);
 	}
 	get popup () {
 		return element(`#${this.id}`, browser);
 	}
 	get title () {
-		return getText(element(`#${this.id}>div>div>div`, browser));
+		return getText(element('.Popup_Popup_content > div', browser));
 	}
 	get isOpen () {
 		return $(`.enact_ui_Transition_Transition_shown #${this.id}`).isExisting();
@@ -111,6 +111,12 @@ class PopupPage extends Page {
 		if (typeof selector !== 'string') selector = `#${selector.id}`;
 
 		$(selector).waitForExist({timeout, reverse: true});
+	}
+
+	waitForFocused (node, timeout, timeoutMsg = 'timed out waiting for focus', interval = 250) {
+		browser.waitUntil(function () {
+			return node.isFocused();
+		}, {timeout, timeoutMsg, interval});
 	}
 }
 

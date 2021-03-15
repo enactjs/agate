@@ -1,0 +1,53 @@
+// ProgressBarTooltip.module.less
+//
+@import "../styles/mixins.less";
+@import "../styles/skin.less";
+
+.tooltip {
+	--tooltip-progress-proportion: 0;
+	--tooltip-progress-percent: ~"calc(var(--tooltip-progress-proportion) * 100%)";
+
+	.before (@ruleset) {
+		&.left,
+		&.before,
+		:global(.enact-locale-right-to-left) &.after {
+			@ruleset();
+		}
+	}
+
+	.after (@ruleset) {
+		&.right,
+		&.after,
+		:global(.enact-locale-right-to-left) &.before {
+			@ruleset();
+		}
+	}
+
+	.applySkins({
+		&.horizontal {
+			left: var(--tooltip-progress-percent);
+
+			&.above {
+				bottom: @agate-progressbar-tooltip-above-offset;
+			}
+
+			&.below {
+				top: @agate-progressbar-tooltip-below-offset;
+			}
+		}
+
+		&.vertical {
+			bottom: var(--tooltip-progress-percent);
+
+			// Left side
+			.before({
+				right: @agate-progressbar-tooltip-before-offset;
+			});
+
+			// Right side
+			.after({
+				left: @agate-progressbar-tooltip-after-offset;
+			});
+		}
+	})
+}
