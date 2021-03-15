@@ -39,7 +39,7 @@ const defaultConfig = {
 	 * resolution.
 	 *
 	 * @type {Number}
-	 * @default 12
+	 * @default 24
 	 * @memberof agate/TooltipDecorator.TooltipDecorator.defaultConfig
 	 */
 	screenEdgeKeepout: (12 + 12),
