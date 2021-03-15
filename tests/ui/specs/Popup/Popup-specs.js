@@ -36,7 +36,8 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
+
+				Page.waitForFocused(popup.buttonOK);
 				expect(popup.buttonOK.isFocused()).to.be.true();
 			});
 
@@ -46,9 +47,10 @@ describe('Popup', function () {
 
 				expectOpen(popupCommon);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
+				Page.waitForFocused(popup.buttonOK);
 				Page.spotlightRight();
 
+				Page.waitForFocused(popup.buttonCancel);
 				expect(popup.buttonCancel.isFocused()).to.be.true();
 			});
 
@@ -58,7 +60,7 @@ describe('Popup', function () {
 
 				expectOpen(popupCommon);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
+				Page.waitForFocused(popup.buttonOK);
 				Page.spotlightRight();
 				Page.spotlightLeft();
 
@@ -70,13 +72,12 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
 				Page.spotlightSelect();
 				Page.waitForClose(popup);
 
 				expectClosed(popupCommon);
-				Page.spotlightDown(); // Popup button must have focus after Popup closes. This should be fixed and this line removed.
 				expect(popupCommon.buttonPopup1.isFocused()).to.be.true();
 			});
 
@@ -172,8 +173,23 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
-				expect(popup.buttonOK.isFocused()).to.be.true();
+
+				Page.waitForFocused(popup.buttonClose);
+				expect(popup.buttonClose.isFocused()).to.be.true();
+			});
+
+			it('should dismiss the popup on 5-way select close button', function () {
+				Page.spotlightRight();
+				Page.spotlightSelect();
+				Page.waitForOpen(popup);
+
+				expectOpen(popupCommon);
+
+				Page.waitForFocused(popup.buttonClose);
+				Page.spotlightSelect();
+				Page.waitForClose(popup);
+
+				expectClosed(popupCommon);
 			});
 
 			it('should not dismiss the popup and should not move spotlight from the popup container', function () {
@@ -185,8 +201,7 @@ describe('Popup', function () {
 				Page.backKey();
 				browser.pause(300);  // Wait for delay in case of transition (shouldn't happen)
 				expectOpen(popupCommon);
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
-				expect(popup.buttonOK.isFocused()).to.be.true();
+				expect(popup.buttonClose.isFocused()).to.be.true();
 			});
 		});
 
@@ -311,8 +326,10 @@ describe('Popup', function () {
 				Page.spotlightDown();
 				Page.spotlightSelect();
 				browser.pause(100); // needed to pass instead of waitTransitionEnd
+
 				expectOpen(popupCommon);
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
+
+				Page.waitForFocused(popup.buttonOK);
 				expect(popup.buttonOK.isFocused()).to.be.true();
 			});
 
@@ -320,9 +337,11 @@ describe('Popup', function () {
 				Page.spotlightDown();
 				Page.spotlightSelect();
 				browser.pause(100); // needed to pass instead of waitTransitionEnd
+
 				expectOpen(popupCommon);
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
+
 				Page.spotlightRight();
+				Page.waitForFocused(popup.buttonCancel);
 				expect(popup.buttonCancel.isFocused()).to.be.true();
 			});
 
@@ -331,7 +350,6 @@ describe('Popup', function () {
 				Page.spotlightSelect();
 				browser.pause(100); // needed to pass instead of waitTransitionEnd
 				expectOpen(popupCommon);
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
 				Page.spotlightRight();
 				Page.spotlightLeft();
 				expect(popup.buttonOK.isFocused()).to.be.true();
@@ -342,12 +360,9 @@ describe('Popup', function () {
 				Page.spotlightSelect();
 				browser.pause(100); // needed to pass instead of waitTransitionEnd
 				expectOpen(popupCommon);
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
 				Page.spotlightSelect();
 				browser.pause(100); // needed to pass instead of waitTransitionEnd
 				expectClosed(popupCommon);
-				Page.spotlightDown(); // Popup button must have focus after Popup closes. This should be fixed and this line removed.
-				Page.spotlightDown(); // Popup button must have focus after Popup closes. This should be fixed and this line removed.
 				expect(popupCommon.buttonPopup4.isFocused()).to.be.true();
 			});
 
@@ -429,7 +444,8 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
+
+				Page.waitForFocused(popup.buttonOK);
 				expect(popup.buttonOK.isFocused()).to.be.true();
 			});
 
@@ -440,14 +456,12 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
 				Page.spotlightRight();
-
+				Page.waitForFocused(popup.buttonCancel);
 				expect(popup.buttonCancel.isFocused()).to.be.true();
 			});
-
-
 
 			it('should close the popup on spotlight select on cancel in the popup', function () {
 				Page.spotlightRight();
@@ -456,8 +470,8 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
 				Page.spotlightRight();
 				Page.spotlightSelect();
 				Page.waitForClose(popup);
@@ -525,8 +539,7 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
-				Page.spotlightLeft(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
+				Page.waitForFocused(popup.buttonOK);
 				expect(popup.buttonOK.isFocused()).to.be.true();
 			});
 
@@ -538,9 +551,10 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line replace with `Page.spotlightRight();`.
-
+				Page.spotlightRight();
+				Page.waitForFocused(popup.buttonCancel);
 				expect(popup.buttonCancel.isFocused()).to.be.true();
 			});
 
@@ -552,8 +566,9 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line replace with `Page.spotlightRight();`.
+				Page.spotlightRight();
 				Page.spotlightLeft();
 
 				expect(popup.buttonOK.isFocused()).to.be.true();
@@ -567,8 +582,10 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line replace with `Page.spotlightRight();`.
+				Page.spotlightRight();
+				Page.waitForFocused(popup.buttonCancel);
 				Page.spotlightDown();
 
 				expect(popup.buttonCancel.isFocused()).to.be.true();
@@ -631,7 +648,7 @@ describe('Popup', function () {
 				expect(popup.buttonCancel.isFocused()).to.be.true();
 
 				// 5-way Up (step 5)
-				Page.spotlightDown(); // Focus should remain on Close button. This should be fixed and this line replace with `Page.spotlightUp();`.
+				Page.spotlightUp();
 
 				// Spotlight remains on the Close button inside the popup (verify step 5)
 				expect(popup.buttonCancel.isFocused()).to.be.true();
@@ -690,7 +707,8 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
+
+				Page.waitForFocused(popup.buttonOK);
 				expect(popup.buttonOK.isFocused()).to.be.true();
 			});
 
@@ -701,10 +719,10 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
 				Page.spotlightRight();
-
+				Page.waitForFocused(popup.buttonCancel);
 				expect(popup.buttonCancel.isFocused()).to.be.true();
 			});
 
@@ -716,26 +734,28 @@ describe('Popup', function () {
 
 				expectOpen(popupCommon);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
+				Page.waitForFocused(popup.buttonOK);
 				Page.spotlightRight();
 				Page.spotlightLeft();
 
 				expect(popup.buttonOK.isFocused()).to.be.true();
 			});
 
-			it('should spot the cancel button on 5-way down, right then down in popup container', function () {
+			it('should spot the popup button on 5-way down, right then down in popup container', function () {
 				Page.spotlightDown();
 				Page.spotlightDown();
 				Page.spotlightSelect();
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
 				Page.spotlightRight();
+				Page.waitForFocused(popup.buttonCancel);
 				Page.spotlightDown();
+				Page.waitForFocused(popupCommon.buttonPopup7);
 
-				expect(popup.buttonCancel.isFocused()).to.be.true();
+				expect(popupCommon.buttonPopup7.isFocused()).to.be.true();
 			});
 
 			it('should spot back the popup button on auto dismiss the popup', function () {
@@ -787,12 +807,11 @@ describe('Popup', function () {
 				Page.showPointerByKeycode();
 				// Position the pointer inside popup to the right of the Cancel button (step 4)
 				$('#buttonCancel').moveTo({xOffset: 200, yOffset: 200});
-				// 5-way to the OK button (step 5)
-				Page.spotlightLeft(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
+				// 5-way to the Cancel button (step 5)
 				Page.spotlightLeft();
 
-				// Spotlight is on OK button (verify step 5)
-				expect(popup.buttonOK.isFocused()).to.be.true();
+				// Spotlight is on Cancel button (verify step 5)
+				expect(popup.buttonCancel.isFocused()).to.be.true();
 			});
 		});
 	});
@@ -819,7 +838,8 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
+
+				Page.waitForFocused(popup.buttonOK);
 				expect(popup.buttonOK.isFocused()).to.be.true();
 			});
 
@@ -831,10 +851,10 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
 				Page.spotlightRight();
-
+				Page.waitForFocused(popup.buttonCancel);
 				expect(popup.buttonCancel.isFocused()).to.be.true();
 			});
 
@@ -847,14 +867,13 @@ describe('Popup', function () {
 
 				expectOpen(popupCommon);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
 				Page.spotlightRight();
 				Page.spotlightLeft();
 
 				expect(popup.buttonOK.isFocused()).to.be.true();
 			});
 
-			it('should spot the cancel button on 5-way right then down in popup container', function () {
+			it('should spot the popup button on 5-way right then down in popup container', function () {
 				Page.spotlightRight();
 				Page.spotlightDown();
 				Page.spotlightDown();
@@ -862,12 +881,14 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
 				Page.spotlightRight();
+				Page.waitForFocused(popup.buttonCancel);
 				Page.spotlightDown();
+				Page.waitForFocused(popupCommon.buttonPopup8);
 
-				expect(popup.buttonCancel.isFocused()).to.be.true();
+				expect(popupCommon.buttonPopup8.isFocused()).to.be.true();
 			});
 
 			it('should spot back the popup button on auto dismiss the popup', function () {
@@ -899,7 +920,6 @@ describe('Popup', function () {
 				Page.waitForClose(popup);
 
 				expectClosed(popupCommon);
-				expect(popupCommon.buttonPopup8.isFocused()).to.be.true();
 			});
 
 			it('should dismiss the popup on click on outside the popup', function () {
@@ -970,8 +990,8 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectNoneScrimOpen(popupCommon);
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
-				Page.spotlightLeft(); // OK button must have focus after Popup opens. This should be fixed and this line removed.
+
+				Page.waitForFocused(popup.buttonOK);
 				expect(popup.buttonOK.isFocused()).to.be.true();
 			});
 
@@ -984,9 +1004,10 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectNoneScrimOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line replace with `Page.spotlightRight();`.
-
+				Page.spotlightRight();
+				Page.waitForFocused(popup.buttonCancel);
 				expect(popup.buttonCancel.isFocused()).to.be.true();
 			});
 
@@ -999,14 +1020,15 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectNoneScrimOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line replace with `Page.spotlightRight();`.
+				Page.spotlightRight();
 				Page.spotlightLeft();
 
 				expect(popup.buttonOK.isFocused()).to.be.true();
 			});
 
-			it('should spot the cancel button on 5-way right then down in popup container', function () {
+			it('should spot the popup button on 5-way right then down in popup container', function () {
 				Page.spotlightRight();
 				Page.spotlightRight();
 				Page.spotlightDown();
@@ -1015,11 +1037,14 @@ describe('Popup', function () {
 				Page.waitForOpen(popup);
 
 				expectNoneScrimOpen(popupCommon);
+				Page.waitForFocused(popup.buttonOK);
 
-				Page.spotlightDown(); // OK button must have focus after Popup opens. This should be fixed and this line replace with `Page.spotlightRight();`.
+				Page.spotlightRight();
+				Page.waitForFocused(popup.buttonCancel);
 				Page.spotlightDown();
+				Page.waitForFocused(popupCommon.buttonPopup9);
 
-				expect(popup.buttonCancel.isFocused()).to.be.true();
+				expect(popupCommon.buttonPopup9.isFocused()).to.be.true();
 			});
 
 			it('should spot back the popup button on auto dismiss the popup', function () {
