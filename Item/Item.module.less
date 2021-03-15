@@ -8,6 +8,8 @@
 	display: flex;
 	position: relative;
 
+	max-width: 700px;
+
 	&.hasLabel {
 		.itemContent {
 			&.labelAfter,
@@ -72,12 +74,12 @@
 			.labelAfter,
 			.labelBefore {
 				.content {
-					box-sizing: border-box;
+					//box-sizing: border-box;
 					min-width: @agate-item-content-width;
 				}
 
 				.label {
-					box-sizing: border-box;
+					//box-sizing: border-box;
 					max-width: @agate-item-label-max-width;
 				}
 			}
@@ -105,10 +107,12 @@
 		&.inline {
 			// overriding ui/Item's inline-block
 			display: inline-flex;
-			max-width: @agate-item-inline-max-width;
+			//max-width: @agate-item-inline-max-width;
+			min-width: 480px;
 
 			.itemContent {
-				max-width: @agate-item-inline-content-max-width;
+				//max-width: @agate-item-inline-content-max-width;
+				max-width: 420px;
 			}
 
 			.itemContent,
@@ -118,9 +122,32 @@
 			}
 
 			&.hasLabel {
-				.slotAfter {
-					.padding-start-end(@agate-item-slotafter-padding-left, 0);
+				.itemContent {
+					max-width: 420px;
+
+					//.content {
+					//	width: auto;
+					//}
+					//
+					//.label {
+					//	width: auto;
+					//}
+
+					&.labelAfter,
+					&.labelBefore {
+						.content {
+							color: red;
+							min-width: 200px;
+						}
+						.label {
+							min-width: 150px;
+						}
+					}
 				}
+
+				//.slotAfter {
+				//	.padding-start-end(@agate-item-slotafter-padding-left, 0);
+				//}
 			}
 		}
 
@@ -134,10 +161,11 @@
 			}
 		}
 
-		&.large { /* Needed to prevent global class being added in the DOM */ }
+		&.large { height: 120px;}
 
 		// TODO: needs to be modified when new requirements for small item is available
 		&.small {
+			height: 100px;
 			font-size: @agate-item-small-font-size;
 			line-height: @agate-item-small-line-height;
 
@@ -159,11 +187,18 @@
 		.focus({
 			border-color: @agate-item-focus-border-color;
 			background-color: @agate-item-focus-bg-color;
+			background-image: @agate-item-focus-bg-image;
 			color: @agate-item-focus-color;
 
 			.itemContent {
 				.label {
 					color: @agate-item-label-color;
+				}
+			}
+
+			&.selected {
+				&::before {
+					background-color: white;
 				}
 			}
 		});
