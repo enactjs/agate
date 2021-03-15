@@ -6,6 +6,8 @@ import {storiesOf} from '@storybook/react';
 
 import Image, {ImageBase, ImageDecorator} from '@enact/agate/Image';
 
+import css from './Image.module.less';
+
 const src = {
 	'hd':  'http://via.placeholder.com/200x200',
 	'fhd': 'http://via.placeholder.com/300x300',
@@ -20,6 +22,7 @@ storiesOf('Agate', module)
 		'Image',
 		() => (
 			<Image
+				className={css.image}
 				onError={action('onError')}
 				onLoad={action('onLoad')}
 				sizing={select('sizing', ['fill', 'fit', 'none'], Config, 'fill')}
