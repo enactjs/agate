@@ -15,7 +15,6 @@ import {is} from '@enact/core/keymap';
 import {clamp} from '@enact/core/util';
 import Spottable from '@enact/spotlight/Spottable';
 import IdProvider from '@enact/ui/internal/IdProvider';
-import Touchable from '@enact/ui/Touchable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import {Children, Component} from 'react';
@@ -29,7 +28,7 @@ import DrumPickerItem from './DrumPickerItem';
 import css from './DrumPicker.module.less';
 import * as ri from '@enact/ui/resolution';
 
-const DrumPickerRoot = Touchable(Spottable('div'));
+const Div = Spottable('div');
 
 // Set-up event forwarding
 const forwardKeyDown = forward('onKeyDown');
@@ -600,10 +599,14 @@ const DrumPickerBase = class extends Component {
 		delete rest.accessibilityHint;
 		delete rest.decrementAriaLabel;
 		delete rest.incrementAriaLabel;
+		delete rest.index;
+		delete rest.max;
+		delete rest.min;
 		delete rest.noAnimation;
 		delete rest.onChange;
 		delete rest.reverseTransition;
 		delete rest.spotlightDisabled;
+		delete rest.step;
 		delete rest.type;
 		delete rest.value;
 		delete rest.wrap;
@@ -640,7 +643,7 @@ const DrumPickerBase = class extends Component {
 					className={classnames(css.itemIncrement, css.item)}
 					disabled={disabled || this.state.selectedIndex === values.length - 1}
 				/>
-				<DrumPickerRoot
+				<Div
 					className={css.root}
 					disabled={disabled}
 					onKeyDown={this.handleKeyDown}
@@ -659,7 +662,7 @@ const DrumPickerBase = class extends Component {
 					ref={this.initContentRef}
 				>
 					{values}
-				</DrumPickerRoot>
+				</Div>
 			</div>
 		);
 	}

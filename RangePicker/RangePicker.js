@@ -17,7 +17,7 @@ import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
-import PickerCore, {ChangeAdapter} from '../internal/DrumPicker';
+import PickerCore from '../internal/DrumPicker';
 import DrumPickerItem from '../internal/DrumPicker/DrumPickerItem';
 
 /**
@@ -197,8 +197,7 @@ const RangePickerBase = kind({
  */
 const RangePickerDecorator = compose(
 	Pure,
-	Changeable,
-	ChangeAdapter
+	Changeable
 );
 
 /**
