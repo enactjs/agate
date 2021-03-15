@@ -1,8 +1,8 @@
 import hoc from '@enact/core/hoc';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {createContext, Component} from 'react';
 
-const SharedState = React.createContext(null);
+const SharedState = createContext(null);
 
 const defaultConfig = {
 	idProp: 'id',
@@ -34,6 +34,7 @@ const defaultConfig = {
  * `updateOnMount` config member which will initiate an update cycle within React once the data is
  * available from an upstream shared state.
  *
+ * @class SharedStateDecorator
  * @hoc
  * @memberof agate/Panels
  * @private
@@ -41,7 +42,7 @@ const defaultConfig = {
 const SharedStateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {idProp, updateOnMount} = config;
 
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'SharedStateDecorator';
 
 		static contextType = SharedState;

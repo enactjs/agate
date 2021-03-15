@@ -3,17 +3,15 @@ import BodyText from '@enact/ui/BodyText';
 import {boolean, number, select, text} from '@enact/storybook-utils/addons/knobs';
 import convert from 'color-convert';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Drawer, {DrawerBase} from '@enact/agate/Drawer';
-import Heading, {HeadingBase} from '@enact/agate/Heading';
+import Heading from '@enact/agate/Heading';
 
 import css from './Drawer.module.less';
 
 Drawer.displayName = 'Drawer';
 const Config = mergeComponentMetadata('Drawer', Drawer, DrawerBase);
-const HeadingConfig = mergeComponentMetadata('Heading', Heading, HeadingBase);
 
 const StoryOptions = {
 	groupId: 'Story Options'
@@ -68,12 +66,7 @@ storiesOf('Agate', module)
 						style={drawerStyle}
 					>
 						<header>
-							<Heading
-								color={select('color', headingValues.colors, HeadingConfig, '')}
-								showLine={boolean('showLine', HeadingConfig)}
-								size={select('size', headingValues.sizes, HeadingConfig, '')}
-								spacing={select('spacing', headingValues.spacings, HeadingConfig, '')}
-							>
+							<Heading>
 								{text('header', Config, '[insert witty header text]')}
 							</Heading>
 						</header>

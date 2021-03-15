@@ -6,10 +6,8 @@
  */
 
 import kind from '@enact/core/kind';
-
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import {ButtonBase, ButtonDecorator} from '../Button';
 import Skinnable from '../Skinnable';
@@ -25,6 +23,7 @@ import componentCss from './SwatchButton.module.less';
  *
  * @class SwatchButtonBase
  * @memberof agate/ColorPicker
+ * @extends agate/Button.ButtonBase
  * @ui
  * @public
  */
@@ -37,10 +36,10 @@ const SwatchButtonBase = kind({
 		 *
 		 * The value should take the format of a HEX color. Ex: `#ffcc00` or `#3467af`
 		 *
-		 * @type {String}
+		 * @type {Object}
 		 * @public
 		 */
-		children: PropTypes.string,
+		children: PropTypes.object,
 
 		/**
 		 * The color of the swatch.
@@ -96,7 +95,7 @@ const SwatchButtonBase = kind({
 
 	render: ({colorSwatchStyle, css, ...rest}) => {
 		return (
-			<ButtonBase {...rest} css={css} minWidth={false}>
+			<ButtonBase aria-label={colorSwatchStyle.backgroundColor} {...rest} css={css} minWidth={false}>
 				<div className={css.colorSwatch} style={colorSwatchStyle} />
 			</ButtonBase>
 		);
@@ -104,7 +103,7 @@ const SwatchButtonBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [SwatchButton]{@link agate/ColorPicker.SwatchButtonBase}.
+ * Applies Agate specific behaviors to [SwatchButtonBase]{@link agate/ColorPicker.SwatchButtonBase}.
  *
  * @hoc
  * @memberof agate/ColorPicker

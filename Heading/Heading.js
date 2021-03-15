@@ -3,10 +3,10 @@
  *
  * @example
  * <Heading
- *   size="large"
- *   spacing="small"
+ * 	size="large"
+ * 	spacing="small"
  * >
- *   A Content Section Heading
+ * 	A Content Section Heading
  * </Heading>
  *
  * @module agate/Heading
@@ -16,11 +16,14 @@
  */
 
 import kind from '@enact/core/kind';
+import {HeadingBase as UiHeadingBase} from '@enact/ui/Heading';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import {HeadingBase as UiHeadingBase} from '@enact/ui/Heading';
+import defaultProps from 'recompose/defaultProps';
+import setPropTypes from 'recompose/setPropTypes';
 
+import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Heading.module.less';
@@ -33,6 +36,7 @@ import componentCss from './Heading.module.less';
  *
  * @class HeadingBase
  * @memberof agate/Heading
+ * @extends ui/Heading.Heading
  * @ui
  * @public
  */
@@ -49,6 +53,13 @@ const HeadingBase = kind({
 		 */
 		color: PropTypes.string,
 
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
 
 		/**
@@ -83,7 +94,8 @@ const HeadingBase = kind({
 
 	styles: {
 		css: componentCss,
-		className: 'heading'
+		className: 'heading',
+		publicClassNames: true
 	},
 
 	computed: {
@@ -106,11 +118,19 @@ const HeadingBase = kind({
  *
  * @hoc
  * @memberof agate/Heading
+ * @mixes agate/Marquee.MarqueeDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const HeadingDecorator = compose(
+	setPropTypes({
+		marqueeOn: PropTypes.oneOf(['hover', 'render'])
+	}),
+	defaultProps({
+		marqueeOn: 'render'
+	}),
 	Pure,
+	MarqueeDecorator,
 	Skinnable
 );
 
@@ -138,6 +158,21 @@ const HeadingDecorator = compose(
  * @public
  */
 const Heading = HeadingDecorator(HeadingBase);
+
+/**
+ * Marquee animation trigger.
+ *
+ * Allowed values include:
+ * * `'hover'` - Marquee begins when the pointer enters the component
+ * * `'render'` - Marquee begins when the component is rendered
+ *
+ * @name marqueeOn
+ * @type {('hover'|'render')}
+ * @default 'render'
+ * @memberof agate/Heading.Heading.prototype
+ * @see {@link agate/Marquee.Marquee}
+ * @public
+ */
 
 export default Heading;
 export {

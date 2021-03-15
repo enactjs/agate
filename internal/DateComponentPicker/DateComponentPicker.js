@@ -1,10 +1,10 @@
 import kind from '@enact/core/kind';
 import {mapAndFilterChildren} from '@enact/core/util';
 import Changeable from '@enact/ui/Changeable';
-import React from 'react';
 import PropTypes from 'prop-types';
+import {Children} from 'react';
 
-import Picker from '../Picker';
+import PickerCore, {PickerItem} from '../Picker';
 
 import css from './DateComponentPicker.module.less';
 
@@ -37,7 +37,32 @@ const DateComponentPickerBase = kind({
 		 * @required
 		 * @public
 		 */
-		value: PropTypes.number.isRequired
+		value: PropTypes.number.isRequired,
+
+		/**
+		 * Sets the hint string read when focusing the picker.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		accessibilityHint: PropTypes.string,
+
+		/**
+		 * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
+		 * to the current selected child and accessibilityHint text.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		'aria-valuetext': PropTypes.string,
+
+		/**
+		 * When `true`, allow the picker to continue from the opposite end of the list of options.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		wrap: PropTypes.bool
 	},
 
 	styles: {
@@ -47,23 +72,26 @@ const DateComponentPickerBase = kind({
 
 	computed: {
 		children: ({children}) => mapAndFilterChildren(children, (child) => (
-			<div>{child}</div>
+			<PickerItem>{child}</PickerItem>
 		)),
-		max: ({children}) => React.Children.count(children) - 1
+		max: ({children}) => children ? Children.count(children) - 1 : 0
 	},
 
-	render: ({children, max, value, ...rest}) => (
-		<Picker
+	render: ({accessibilityHint, 'aria-valuetext': ariaValuetext, children, max, value, wrap, ...rest}) => (
+		<PickerCore
 			{...rest}
+			accessibilityHint={accessibilityHint}
+			aria-valuetext={(accessibilityHint == null) ? ariaValuetext : null}
+			css={css}
 			index={value}
 			max={max}
 			min={0}
 			orientation="vertical"
-			step={1}
 			value={value}
+			wrap={wrap}
 		>
 			{children}
-		</Picker>
+		</PickerCore>
 	)
 });
 

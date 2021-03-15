@@ -1,28 +1,31 @@
-import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
+import {boolean, select} from '@enact/storybook-utils/addons/knobs';
+import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {storiesOf} from '@storybook/react';
 
-import Checkbox from '@enact/agate/Checkbox';
+import Checkbox, {CheckboxBase} from '@enact/agate/Checkbox';
+
+import iconNames from './icons';
 
 Checkbox.displayName = 'Checkbox';
-const Config = mergeComponentMetadata('Checkbox', Checkbox);
+const Config = mergeComponentMetadata('Checkbox', CheckboxBase, Checkbox);
 
 storiesOf('Agate', module)
 	.add(
 		'Checkbox',
-		() => (
-			<Checkbox
-				disabled={boolean('disabled', Config)}
-				label={text('label', Config, '')}
-				labelPosition={select('labelPosition', ['', 'above', 'after', 'before', 'below'], Config, '')}
-				onToggle={action('onToggle')}
-			/>
-		),
+		() => {
+			return (
+				<Checkbox
+					disabled={boolean('disabled', Config)}
+					indeterminate={boolean('indeterminate', Config)}
+					indeterminateIcon={select('indeterminateIcon', ['', ...iconNames], Config)}
+					onToggle={action('onToggle')}
+				>
+					{select('children', ['', ...iconNames], Config)}
+				</Checkbox>
+			);
+		},
 		{
-			info: {
-				text: 'Basic usage of Checkbox'
-			}
+			text: 'The basic Checkbox'
 		}
 	);

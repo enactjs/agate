@@ -1,35 +1,97 @@
 /**
  * Provides an Agate-themed tab group.
  *
+ * @example
+ * <TabGroup tabPosition={'before'} tabs={[{title: 'Home'},{title: 'Settings'}]} />
+ *
  * @module agate/TabGroup
  * @exports TabGroup
  * @exports TabGroupBase
+ * @exports TabGroupDecorator
  */
 
-import {cap} from '@enact/core/util';
-import {Cell, Layout} from '@enact/ui/Layout';
-import Group from '@enact/ui/Group';
 import kind from '@enact/core/kind';
-import ToggleButton from '../ToggleButton';
-import LabeledIcon from '../LabeledIcon';
-import PropTypes from 'prop-types';
-import React from 'react';
+import {cap} from '@enact/core/util';
+import Group from '@enact/ui/Group';
+import {Cell, Layout} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
 import Spottable from '@enact/spotlight/Spottable';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 
+import LabeledIcon from '../LabeledIcon';
 import Skinnable from '../Skinnable';
+import ToggleButton from '../ToggleButton';
 
 import componentCss from './TabGroup.module.less';
 
+/**
+ * A Tab component.
+ *
+ * @class TabBase
+ * @memberof agate/TabGroup
+ * @ui
+ * @private
+ */
 const TabBase = kind({
 	name: 'Tab',
 
-	propTypes: {
+	propTypes: /** @lends agate/TabGroup.TabBase.prototype */ {
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `tab` - The root class name
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * The icon displayed on the tab.
+		 *
+		 * @type {String}
+		 * @default 'star'
+		 * @public
+		 */
 		icon: PropTypes.string,
+
+		/**
+		 * The position of the label on the tab.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		labelPosition: PropTypes.string,
+
+		/**
+		 * Called when the tab is clicked.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
 		onClick: PropTypes.func,
-		orientation: PropTypes.string,
+
+		/**
+		 * Orientation of the tab.
+		 *
+		 * * Values: `'horizontal'`, `'vertical'`
+		 *
+		 * @type {('horizontal'|'vertical')}
+		 * @public
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+
+		/**
+		 * Provides a way to call special interface attention to the tab. It will be "featured"
+		 * in some way by the theme's visual rules.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
 		selected: PropTypes.bool
 	},
 
@@ -52,7 +114,7 @@ const TabBase = kind({
 
 			if (className.includes('copper') || className.includes('cobalt')) {
 				return (
-					<div className={css.labeledIcon}>
+					<div aria-label={children} className={css.labeledIcon} role="region">
 						<ToggleButton
 							icon={icon}
 							selected={selected}
@@ -92,24 +154,80 @@ const TabBase = kind({
 const Tab = Skinnable(Spottable(TabBase));
 
 /**
- * TBD.
+ * A Tab Group component.
  *
- * @class TabGroup
+ * @class TabGroupBase
  * @memberof agate/TabGroup
- * @mixes agate/Skinnable.Skinnable
  * @ui
  * @public
  */
 const TabGroupBase = kind({
 	name: 'TabGroup',
 
-	propTypes: /** @lends agate/TabGroup.TabGroup.prototype */ {
+	propTypes: /** @lends agate/TabGroup.TabGroupBase.prototype */ {
+		/**
+		 * The position of the TabGroup related to the tab contents.
+		 *
+		 * @type {String}
+		 * @required
+		 * @public
+		 */
 		tabPosition: PropTypes.string.isRequired,
+
+		/**
+		 * The provided list of tabs.
+		 *
+		 * @type {Array}
+		 * @required
+		 * @public
+		 */
 		tabs: PropTypes.array.isRequired,
+
+		/**
+		 * Nodes to be inserted after the tabs.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
 		afterTabs: PropTypes.node,
+
+		/**
+		 * Nodes to be inserted before the tabs.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
 		beforeTabs: PropTypes.node,
+
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `tabBar` - The root class name
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
-		orientation: PropTypes.string,
+
+		/**
+		 * Orientation of the tabs.
+		 *
+		 * * Values: `'horizontal'`, `'vertical'`
+		 *
+		 * @type {('horizontal'|'vertical')}
+		 * @public
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+
+		/**
+		 * Index of the selected tab.
+		 *
+		 * @type {Number}
+		 * @required
+		 */
 		selectedIndex: PropTypes.number
 	},
 
@@ -179,11 +297,47 @@ const TabGroupBase = kind({
 
 TabGroupBase.defaultSlot = 'tabs';
 
-// Only documenting TabGroup since base is not useful for extension as-is
-const TabGroup = Skinnable(Slottable({slots: ['tabs', 'afterTabs', 'beforeTabs']}, TabGroupBase));
+/**
+ * Applies Agate specific behaviors to [TabGroup]{@link agate/TabGroup.TabGroupBase} components.
+ *
+ * @hoc
+ * @memberof agate/TabGroup
+ * @mixes agate/Skinnable.Skinnable
+ * @mixes ui/Slottable.Slottable
+ * @public
+ */
+const TabGroupDecorator = compose(
+	Skinnable,
+	Slottable({slots: ['tabs', 'afterTabs', 'beforeTabs']})
+);
+
+/**
+ * An Tab Group component, ready to use in Agate applications.
+ *
+ * Usage:
+ * ```
+ * <TabGroup
+ *   tabPosition={'before'}
+ *   tabs={[
+ *     {title: 'Home', icon: 'home'},
+ *     {title: 'Settings', icon: 'setting'},
+ *     {title: 'Theme', icon: 'display'}
+ *   ]}
+ * />
+ * ```
+ *
+ * @class TabGroup
+ * @memberof agate/TabGroup
+ * @extends agate/TabGroup.TabGroupBase
+ * @mixes agate/TabGroup.TabGroupDecorator
+ * @ui
+ * @public
+ */
+const TabGroup = TabGroupDecorator(TabGroupBase);
 
 export default TabGroup;
 export {
 	TabGroup,
-	TabGroupBase
+	TabGroupBase,
+	TabGroupDecorator
 };

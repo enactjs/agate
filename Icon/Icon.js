@@ -2,13 +2,14 @@
  * Provides Agate styled icon components and behaviors.
  *
  * @example
- * <Icon>flag</Icon>
+ * <Icon>closex</Icon>
  *
  * @module agate/Icon
  * @exports Icon
  * @exports IconBase
  * @exports IconDecorator
  * @exports icons
+ * @exports iconsSilicon
  */
 
 import kind from '@enact/core/kind';
@@ -35,7 +36,7 @@ import componentCss from './Icon.module.less';
 const IconBase = kind({
 	name: 'Icon',
 
-	propTypes: /** @lends agate/Icon.Icon.prototype */ {
+	propTypes: /** @lends agate/Icon.IconBase.prototype */ {
 		/**
 		 * The icon content.
 		 *

@@ -3,7 +3,7 @@
  *
  * @example
  * <Scroller>
- * 	<div style={{height: '300px'}}>
+ * 	<div style={{height: '100%'}}>
  * 		<p>San Francisco</p>
  * 		<p>Seoul</p>
  * 		<p>Bangalore</p>
@@ -21,7 +21,6 @@ import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDeco
 import {ResizeContext} from '@enact/ui/Resizable';
 import {ScrollerBasic as UiScrollerBasic} from '@enact/ui/Scroller';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import useScroll from '../useScroll';
 import Scrollbar from '../useScroll/Scrollbar';
@@ -194,7 +193,7 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	 *
 	 * @type {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
 	noScrollByWheel: PropTypes.bool,
 

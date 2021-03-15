@@ -1,7 +1,6 @@
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import React from 'react';
 import ri from '@enact/ui/resolution';
 import {ScrollerBasic as UiScrollerBasic} from '@enact/ui/Scroller';
 import {storiesOf} from '@storybook/react';
@@ -26,7 +25,6 @@ storiesOf('Agate', module)
 				focusableScrollbar={boolean('focusableScrollbar', ScrollerConfig)}
 				horizontalScrollbar={select('horizontalScrollbar', prop.scrollbarOption, ScrollerConfig)}
 				key={select('scrollMode', prop.scrollModeOption, ScrollerConfig)}
-				noScrollByWheel={boolean('noScrollByWheel', ScrollerConfig)}
 				onScrollStart={action('onScrollStart')}
 				onScrollStop={action('onScrollStop')}
 				scrollMode={select('scrollMode', prop.scrollModeOption, ScrollerConfig)}

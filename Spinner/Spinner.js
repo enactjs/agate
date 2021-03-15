@@ -4,7 +4,7 @@
  * Used for indicating to the user that something is busy and interaction is temporarily suspended.
  *
  * @example
- * <Spinner color="light" size="small" type="searching" />
+ * <Spinner color="dark" size="small" type="searching">Loading message...</Spinner>
  *
  * @module agate/Spinner
  * @exports Spinner
@@ -12,19 +12,19 @@
  * @exports SpinnerDecorator
  */
 import kind from '@enact/core/kind';
-import PropTypes from 'prop-types';
 import Pure from '@enact/ui/internal/Pure';
-import compose from 'ramda/src/compose';
-import React from 'react';
 import UiSpinnerBase from '@enact/ui/Spinner';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 
 import $L from '../internal/$L';
+import Marquee from '../Marquee';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Spinner.module.less';
 
 /**
- * A component that shows spinning fan. Or bouncing 🏀🎾🏐⚽️.
+ * A component that shows spinning fan. Or bouncing 🏀🎾🏐⚽ , with optional text as children.
  *
  * @class SpinnerCore
  * @memberof agate/Spinner
@@ -43,6 +43,13 @@ const SpinnerCore = kind({
 		 */
 		'aria-label': PropTypes.string,
 
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
 
 		/**
@@ -52,7 +59,7 @@ const SpinnerCore = kind({
 		 * @default 'searching'
 		 * @public
 		 */
-		type: PropTypes.string
+		type: PropTypes.oneOf(['loading', 'searching'])
 	},
 
 	defaultProps: {
@@ -76,7 +83,7 @@ const SpinnerCore = kind({
 		}
 	},
 
-	render: ({css, spinnerNodes, ...rest}) => {
+	render: ({children, css, spinnerNodes, ...rest}) => {
 		delete rest.type;
 
 		return (
@@ -84,6 +91,12 @@ const SpinnerCore = kind({
 				<div className={css.bg}>
 					{spinnerNodes}
 				</div>
+				{children ?
+					<Marquee className={css.client} marqueeOn="render" alignment="center">
+						{children}
+					</Marquee> :
+					null
+				}
 			</div>
 		);
 	}
@@ -126,6 +139,15 @@ const SpinnerBase = kind({
 		css: PropTypes.object,
 
 		/**
+		 * Pauses the animation of the spinner
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		paused: PropTypes.bool,
+
+		/**
 		 * The size of the component.
 		 *
 		 * Recommended usage is "large" (default) for standalone and popup scenarios, while "small"
@@ -149,6 +171,7 @@ const SpinnerBase = kind({
 
 	defaultProps: {
 		color: 'light',
+		paused: false,
 		size: 'large',
 		transparent: false
 	},
@@ -159,14 +182,17 @@ const SpinnerBase = kind({
 	},
 
 	computed: {
-		className: ({children, color, size, transparent, styler}) => styler.append(
+		className: ({children, color, paused, size, styler, transparent}) => styler.append(
 			color,
 			size,
-			{content: !!children, transparent}
+			{content: !!children, transparent},
+			{pausedAnimation: paused},
+			{transparentBackground: transparent}
 		)
 	},
 
-	render: ({css, ...rest}) => {
+	render: ({children, css, ...rest}) => {
+		delete rest.paused;
 		delete rest.transparent;
 
 		return (
@@ -174,7 +200,9 @@ const SpinnerBase = kind({
 				{...rest}
 				css={css}
 				component={SpinnerCore}
-			/>
+			>
+				{children}
+			</UiSpinnerBase>
 		);
 	}
 });

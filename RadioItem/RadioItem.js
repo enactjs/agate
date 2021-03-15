@@ -1,17 +1,23 @@
 /**
  * Provides Agate-themed Item component and interactive radio toggle icon.
  *
+ * @example
+ * <RadioItem>Item</RadioItem>
+ *
  * @module agate/RadioItem
  * @exports RadioItem
+ * @exports RadioItemBase
+ * @exports RadioItemDecorator
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import compose from 'ramda/src/compose';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
+import Pure from '@enact/ui/internal/Pure';
+import Slottable from '@enact/ui/Slottable';
 import Toggleable from '@enact/ui/Toggleable';
 import Touchable from '@enact/ui/Touchable';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 
 import Icon from '../Icon';
 import Item from '../Item';
@@ -22,20 +28,16 @@ import componentCss from './RadioItem.module.less';
 /**
  * Renders an `Item` with a radio-dot component. Useful to show a selected state on an Item.
  *
- * @class RadioItem
+ * @class RadioItemBase
  * @memberof agate/RadioItem
  * @extends agate/Item.Item
- * @mixes spotlight/Spottable.Spottable
- * @mixes ui/Toggleable.Toggleable
- * @mixes ui/Touchable.Touchable
- * @mixes agate/Skinnable.Skinnable
  * @ui
  * @public
  */
 const RadioItemBase = kind({
 	name: 'RadioItemBase',
 
-	propTypes: /** @lends agate/RadioItem.RadioItem.prototype */ {
+	propTypes: /** @lends agate/RadioItem.RadioItemBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
@@ -55,6 +57,7 @@ const RadioItemBase = kind({
 		 *
 		 * @type {String}
 		 * @see {@link agate/Icon.Icon}
+		 * @default 'circle'
 		 */
 		icon: PropTypes.string,
 
@@ -65,7 +68,15 @@ const RadioItemBase = kind({
 		 * @default false
 		 * @public
 		 */
-		selected: PropTypes.bool
+		selected: PropTypes.bool,
+
+		/**
+		 * Nodes to be inserted after the radio button and before `children`.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
+		slotBefore: PropTypes.node
 	},
 
 	defaultProps: {
@@ -83,29 +94,62 @@ const RadioItemBase = kind({
 		className: ({css, selected, styler}) => styler.append(selected && css.selected)
 	},
 
-	render: ({children, css, icon, ...rest}) => {
-		delete rest.selected;
-
+	render: ({children, css, icon, selected, slotBefore, ...rest}) => {
 		return (
-			<Item {...rest} css={css}>
-				<Icon slot="slotBefore" className={css.icon} size="small">{icon}</Icon>
+			<Item
+				aria-checked={selected}
+				role="checkbox"
+				{...rest}
+				css={css}
+			>
+				<slotBefore>
+					<Icon className={css.icon} size="small">{icon}</Icon>
+					{slotBefore}
+				</slotBefore>
 				{children}
 			</Item>
 		);
 	}
 });
 
-// Decorator is not exported so not documented
+/**
+ * Applies Agate specific behaviors to [RadioItem]{@link agate/RadioItem.RadioItem} components.
+ *
+ * @hoc
+ * @memberof agate/RadioItem
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes ui/Touchable.Touchable
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const RadioItemDecorator = compose(
 	Toggleable({toggleProp: 'onTap'}),
 	Touchable,
+	Slottable({slots: ['label', 'slotAfter', 'slotBefore']}),
 	Spottable,
 	Skinnable
 );
 
-const RadioItem = RadioItemDecorator(RadioItemBase);
+/**
+ * An Agate-styled RadioItem.
+ *
+ * @class RadioItem
+ * @memberof agate/RadioItem
+ * @extends agate/RadioItem.RadioItemBase
+ * @mixes agate/RadioItem.RadioItemDecorator
+ * @ui
+ * @public
+ */
+const RadioItem = Pure(
+	RadioItemDecorator(
+		RadioItemBase
+	)
+);
 
 export default RadioItem;
 export {
-	RadioItem
+	RadioItem,
+	RadioItemBase,
+	RadioItemDecorator
 };

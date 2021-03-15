@@ -1,5 +1,11 @@
+/**
+ * @module agate/ConsumerDecorator
+ * @exports ConsumerDecorator
+ * @private
+ */
+
 import hoc from '@enact/core/hoc';
-import React, {Component} from 'react';
+import {Component} from 'react';
 
 // data provider things
 import {AppContext} from '../ProviderDecorator';
@@ -83,4 +89,6 @@ const ConsumerDecorator = hoc(defaultConfig, (config, Wrapped) => {
 });
 
 export default ConsumerDecorator;
-export {ConsumerDecorator};
+export {
+	ConsumerDecorator
+};

@@ -1,6 +1,7 @@
-import React from 'react';
 import {mount} from 'enzyme';
 import {IconBase as Icon} from '../Icon';
+
+import css from '../Icon.module.less';
 
 describe('Icon Specs', () => {
 
@@ -57,5 +58,49 @@ describe('Icon Specs', () => {
 		const actual = icon.text().codePointAt();
 
 		expect(actual).toBe(expected);
+	});
+
+	test('should support preset size "smallest"', () => {
+		const icon = mount(
+			<Icon size="smallest">wifi</Icon>
+		);
+
+		const expected = 'smallest';
+		const actual = icon.find(`div.${css.icon}`).prop('className');
+
+		expect(actual).toContain(expected);
+	});
+
+	test('should support preset size "small"', () => {
+		const icon = mount(
+			<Icon size="small">wifi</Icon>
+		);
+
+		const expected = 'small';
+		const actual = icon.find(`div.${css.icon}`).prop('className');
+
+		expect(actual).toContain(expected);
+	});
+
+	test('should support preset size "large" by default', () => {
+		const icon = mount(
+			<Icon>wifi</Icon>
+		);
+
+		const expected = 'large';
+		const actual = icon.find(`div.${css.icon}`).prop('className');
+
+		expect(actual).toContain(expected);
+	});
+
+	test('should support preset size "huge"', () => {
+		const icon = mount(
+			<Icon size="huge">wifi</Icon>
+		);
+
+		const expected = 'huge';
+		const actual = icon.find(`div.${css.icon}`).prop('className');
+
+		expect(actual).toContain(expected);
 	});
 });

@@ -5,11 +5,41 @@
 
 .dateTimePicker {
 	position: relative;
+	width: fit-content;
+
+	&::before {
+		content: "";
+		position: absolute;
+		width: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
+.datePicker {
+	.applySkins({
+		&::before {
+			content: none;
+		}
+	})
+}
+
+.timePicker {
+	.applySkins({
+		&::before {
+			content: none;
+		}
+	})
 }
 
 .applySkins({
 	.dateTimePicker {
 		font-size: @agate-picker-font-size;
-		width: @agate-datetimepicker-width;
+
+		&::before {
+			height: @agate-button-height;
+			background-image: @agate-datetimepicker-active-container-bg-image;
+			background-color: @agate-datetimepicker-active-container-bg-color;
+		}
 	}
 });

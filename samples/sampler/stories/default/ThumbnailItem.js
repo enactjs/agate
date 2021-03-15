@@ -1,13 +1,12 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {text, select, boolean} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import ThumbnailItem from '@enact/agate/ThumbnailItem';
+import ThumbnailItem, {ThumbnailItemBase} from '@enact/agate/ThumbnailItem';
 
 ThumbnailItem.displayName = 'ThumbnailItem';
 
-const Config = mergeComponentMetadata('ThumbnailItem', ThumbnailItem);
+const Config = mergeComponentMetadata('ThumbnailItem', ThumbnailItem, ThumbnailItemBase);
 
 storiesOf('Agate', module)
 	.add(

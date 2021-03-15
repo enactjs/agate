@@ -7,36 +7,20 @@ import {icons, iconsSilicon} from '@enact/agate/Icon';
 
 const decrementIcons = [
 	'minus',
+	'minusbold',
 	'arrowlargedown',
 	'arrowlargeleft',
-	'arrowsmalldown',
-	'arrowsmallleft',
-	'arrowhookright',
-	'backward',
-	'skipbackward',
-	'pausebackward',
-	'pausejumpbackward',
-	'jumpbackward',
-	'rollbackward',
-	'arrowshrink',
-	'back15'
+	'arrowleftturn',
+	'previoustrack'
 ];
 
 const incrementIcons = [
 	'plus',
+	'plusbold',
 	'arrowlargeup',
 	'arrowlargeright',
-	'arrowsmallup',
-	'arrowsmallright',
-	'arrowhookleft',
-	'forward',
-	'skipforward',
-	'pauseforward',
-	'pausejumpforward',
-	'jumpforward',
-	'rollforward',
-	'arrowextend',
-	'forward15'
+	'arrowrightturn',
+	'nexttrack'
 ];
 
 const listIcons = [

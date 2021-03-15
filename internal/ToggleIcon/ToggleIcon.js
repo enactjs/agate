@@ -8,15 +8,15 @@
  * @exports ToggleIcon
  * @exports ToggleIconBase
  * @exports ToggleIconDecorator
+ * @deprecated Will be removed in 2.0.0.
  * @private
  */
 
 import kind from '@enact/core/kind';
-import React from 'react';
-import compose from 'ramda/src/compose';
-
+import deprecate from '@enact/core/internal/deprecate';
 import Pure from '@enact/ui/internal/Pure';
 import UiToggleIcon from '@enact/ui/ToggleIcon';
+import compose from 'ramda/src/compose';
 
 import Icon from '../../Icon/Icon';
 import Skinnable from '../../Skinnable/Skinnable';
@@ -33,11 +33,14 @@ import Skinnable from '../../Skinnable/Skinnable';
 const ToggleIconBase = kind({
 	name: 'ToggleIcon',
 
-	render: (props) => {
+	render: deprecate((props) => {
 		return (
 			<UiToggleIcon {...props} iconComponent={Icon} />
 		);
-	}
+	}, {
+		name: 'agate/internal/ToggleIcon',
+		until: '2.0.0'
+	})
 });
 
 /**
@@ -61,6 +64,7 @@ const ToggleIconDecorator = compose(
  * @memberof agate/ToggleIcon
  * @extends agate/ToggleIcon.ToggleIconBase
  * @mixes agate/ToggleIcon.ToggleIconDecorator
+ * @ui
  * @private
  */
 const ToggleIcon = ToggleIconDecorator(ToggleIconBase);

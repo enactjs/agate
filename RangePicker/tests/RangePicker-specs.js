@@ -1,5 +1,4 @@
 import {mount} from 'enzyme';
-import React from 'react';
 
 import {RangePicker, RangePickerBase} from '../RangePicker';
 
@@ -22,7 +21,7 @@ describe('RangePicker Specs', () => {
 
 	test('should increase by step amount on increment press', () => {
 		const picker = mount(
-			<RangePicker min={0} max={100} defaultValue={10} step={1} />
+			<RangePicker defaultValue={10} min={0} max={100} noAnimation step={1} />
 		);
 
 		increment(picker);
@@ -35,7 +34,7 @@ describe('RangePicker Specs', () => {
 
 	test('should decrease by step amount on decrement press', () => {
 		const picker = mount(
-			<RangePicker min={0} max={100} defaultValue={10} step={1} />
+			<RangePicker defaultValue={10} min={0} max={100} noAnimation step={1} />
 		);
 
 		decrement(picker);

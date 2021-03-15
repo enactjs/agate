@@ -5,7 +5,7 @@ import Spotlight from '@enact/spotlight';
 import ViewManager from '@enact/ui/ViewManager';
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {Children, isValidElement, cloneElement, createElement} from 'react';
 
 import Skinnable from '../Skinnable';
 
@@ -59,10 +59,9 @@ const defaultConfig = {
  * A higher-order component that adds breadcrumbs to a Panels component
  *
  * @class BreadcrumbDecorator
- * @type {Function}
+ * @memberof agate/Panels
  * @hoc
  * @private
- * @memberof agate/Panels
  */
 const BreadcrumbDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {max, panelArranger, className: cfgClassName} = config;
@@ -172,21 +171,21 @@ const BreadcrumbDecorator = hoc(defaultConfig, (config, Wrapped) => {
 				if (Array.isArray(breadcrumbs)) {
 					// limit the number of breadcrumbs based on the index and config.max
 					const start = Math.max(index - x, 0);
-					const children = React.Children.toArray(breadcrumbs).slice(start, start + x);
+					const children = Children.toArray(breadcrumbs).slice(start, start + x);
 
 					// map over the children to either clone it with the appropriate props or to
 					// create a Breadcrumb if passed an array of renderable primitives
-					return React.Children.map(children, (child, i) => {
+					return Children.map(children, (child, i) => {
 						const props = {
 							id: `${id}_bc_${i}`,
 							index: i,
 							onSelect: onSelectBreadcrumb
 						};
 
-						if (React.isValidElement(child)) {
-							return React.cloneElement(child, props);
+						if (isValidElement(child)) {
+							return cloneElement(child, props);
 						} else {
-							return React.createElement(Breadcrumb, props, child);
+							return createElement(Breadcrumb, props, child);
 						}
 					});
 				} else {
@@ -218,7 +217,7 @@ const BreadcrumbDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		render: ({breadcrumbs, childProps, children, className, generateId, handleBreadcrumbWillTransition, id, index, noAnimation, ...rest}) => {
 			delete rest.onSelectBreadcrumb;
 
-			const count = React.Children.count(children);
+			const count = Children.count(children);
 			invariant(
 				index === 0 && count === 0 || index < count,
 				`Panels index, ${index}, is invalid for number of children, ${count}`

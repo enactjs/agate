@@ -1,0 +1,71 @@
+@import "../styles/mixins.less";
+@import "../styles/variables.less";
+@import "../styles/skin.less";
+
+.controlsFrame {
+	position: relative;
+	display: block;
+	text-align: center;
+	direction: ltr;
+	white-space: nowrap;
+	bottom: 42px;
+
+	> *:first-child {
+		margin-inline-start: 0;
+	}
+}
+
+.applySkins({
+	.button {
+		height: @agate-mediacontrols-button-height;
+		min-width: @agate-mediacontrols-button-min-width;
+		margin: @agate-mediacontrols-button-margin;
+
+		.bg {
+			border: @agate-mediacontrols-button-bg-border;
+			height: @agate-mediacontrols-button-bg-height;
+			width:  @agate-mediacontrols-button-bg-width;
+		}
+
+		&,
+		.client {
+			width: @agate-mediacontrols-button-client-width;
+		}
+
+		.icon {
+			padding: @agate-mediacontrols-button-icon-padding;
+		}
+
+		&.playPauseButton {
+			height: @agate-mediacontrols-playpause-button-height;
+			padding: @agate-mediacontrols-playpause-button-padding;
+
+			.bg {
+				height: @agate-mediacontrols-playpause-button-bg-height;
+				width: @agate-mediacontrols-playpause-button-bg-width;
+				border-radius: @agate-mediacontrols-playpause-button-bg-border-radius;
+			}
+
+			&,
+			.client {
+				width: @agate-mediacontrols-playpause-button-client-width;
+
+				.playPauseIcon {
+					font-size: @agate-mediacontrols-playpause-icon-font-size
+				}
+			}
+		}
+
+		&.repeat {
+			.bg {
+				background-color: @agate-accent;
+			}
+		}
+	}
+});
+
+.icon {
+	.applySkins({
+		font-size: @agate-mediacontrols-icon-font-size;
+	})
+}

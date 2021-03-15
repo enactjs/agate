@@ -10,6 +10,7 @@
 // ---------------------------------------
 @agate-button-border-radius: 9999px;
 @agate-button-badge-position: auto auto -18% 50%;
+@agate-button-badge-position-rtl: @agate-button-badge-position;
 @agate-button-badge-transform: @agate-translate-center;
 
 // ColorPicker
@@ -32,9 +33,6 @@
 
 // Heading
 // ---------------------------------------
-@agate-heading-spacing-large: 24px;
-@agate-heading-spacing-medium: 24px;
-@agate-heading-spacing-small: 12px;
 @agate-heading-title-padding: @agate-heading-padding 50px;
 @agate-heading-title-decoration-height: 28px;
 @agate-heading-title-decoration-width: auto;
@@ -42,6 +40,20 @@
 @agate-heading-title-decoration-border-radius: 3px;
 @agate-heading-title-decoration-opacity: 0.8;
 @agate-heading-title-decoration-transform: skew(-10deg);
+
+// Keypad
+// ---------------------------------------
+@agate-keypad-button-height:        99px;
+@agate-keypad-height:               510px;
+@agate-keypad-input-border-bottom:  none;
+@agate-keypad-input-font-size:      60px;
+@agate-keypad-keycontainer-width:   159px;
+@agate-keypad-label-bottom:         9px;
+@agate-keypad-label-font-size:      12px;
+@agate-keypad-label-line-height:    18px;
+@agate-keypad-text-font-size:       42px;
+@agate-keypad-text-line-height:     57px;
+@agate-keypad-width:                480px;
 
 // Panels
 // ---------------------------------------
@@ -53,6 +65,10 @@
 // Picker
 // ---------------------------------------
 @agate-picker-font-weight: 500;
+
+// ProgressBar
+// ---------------------------------------
+@agate-progressbar-tooltip-offset: 33px;
 
 // Slider
 // ---------------------------------------
@@ -68,6 +84,8 @@
 // Switch
 // ---------------------------------------
 @agate-switch-icon-scale: 2.8;
+@agate-switch-icon-position-left: -9px;
+@agate-switch-selected-icon-position-left: ((@agate-switch-width - @agate-switch-height) + @agate-switch-icon-position-left);
 
 // ToggleButton
 // ---------------------------------------

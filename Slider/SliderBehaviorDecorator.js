@@ -1,8 +1,10 @@
 import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
+import platform from '@enact/core/platform';
 import Pause from '@enact/spotlight/Pause';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {Component} from 'react';
+import {findDOMNode} from 'react-dom';
 
 import $L from '../internal/$L';
 
@@ -44,7 +46,7 @@ const defaultConfig = {
 const SliderBehaviorDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {emitSpotlightEvents} = config;
 
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'SliderBehaviorDecorator';
 
 		static propTypes = {
@@ -114,6 +116,14 @@ const SliderBehaviorDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			return value;
 		}
 
+		focusSlider () {
+			let slider = findDOMNode(this); // eslint-disable-line react/no-find-dom-node
+			if (slider.getAttribute('role') !== 'slider') {
+				slider = slider.querySelector('[role="slider"]');
+			}
+			slider.focus();
+		}
+
 		handleActivate () {
 			forward('onActivate', {type: 'onActivate'}, this.props);
 			this.setState(toggleActive);
@@ -126,6 +136,10 @@ const SliderBehaviorDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		}
 
 		handleDragStart () {
+			// on platforms with a touchscreen, we want to focus slider when dragging begins
+			if (platform.touchscreen) {
+				this.focusSlider();
+			}
 			this.paused.pause();
 			this.setState({dragging: true});
 		}

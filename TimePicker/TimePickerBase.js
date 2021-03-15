@@ -1,7 +1,8 @@
 import kind from '@enact/core/kind';
-import React from 'react';
+import {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 
+import $L from '../internal/$L';
 import {DateComponentPicker, DateComponentRangePicker} from '../internal/DateComponentPicker';
 import DateTime from '../internal/DateTime';
 
@@ -27,7 +28,7 @@ const hours12 = [
  * @ui
  * @private
  */
-class HourPicker extends React.Component {
+class HourPicker extends Component {
 	static propTypes = {
 		hasMeridiem: PropTypes.bool,
 		value: PropTypes.number
@@ -37,13 +38,17 @@ class HourPicker extends React.Component {
 		super(props);
 
 		this.state = {
+			noAnimation: false,
 			prevValue: props.value
 		};
 	}
 
 	static getDerivedStateFromProps (props, state) {
 		if (state.prevValue !== props.value) {
+			const hours = props.hasMeridiem ? hours12 : hours24;
+
 			return {
+				noAnimation: hours[state.prevValue] === hours[props.value],
 				prevValue: props.value
 			};
 		}
@@ -56,7 +61,7 @@ class HourPicker extends React.Component {
 		const hours = hasMeridiem ? hours12 : hours24;
 
 		return (
-			<DateComponentPicker {...rest}>
+			<DateComponentPicker {...rest} noAnimation={this.state.noAnimation}>
 				{hours}
 			</DateComponentPicker>
 		);
@@ -64,15 +69,15 @@ class HourPicker extends React.Component {
 }
 
 /**
-* {@link agate/TimePicker.TimePickerBase} is the stateless functional time picker
-* component. Should not be used directly but may be composed within another component as it is
-* within {@link agate/TimePicker.TimePicker}.
-*
-* @class TimePickerBase
-* @memberof agate/TimePicker
-* @ui
-* @public
-*/
+ * {@link agate/TimePicker.TimePickerBase} is the stateless functional time picker
+ * component. Should not be used directly but may be composed within another component as it is
+ * within {@link agate/TimePicker.TimePicker}.
+ *
+ * @class TimePickerBase
+ * @memberof agate/TimePicker
+ * @ui
+ * @public
+ */
 const TimePickerBase = kind({
 	name: 'TimePickerBase',
 
@@ -119,6 +124,7 @@ const TimePickerBase = kind({
 		 * Disables the `TimePicker`.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		disabled: PropTypes.bool,
@@ -171,7 +177,7 @@ const TimePickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onChangeHour: PropTypes.func,
+		onHourChange: PropTypes.func,
 
 		/**
 		 * Called on changes in the `meridiem` component of the time.
@@ -179,7 +185,7 @@ const TimePickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onChangeMeridiem: PropTypes.func,
+		onMeridiemChange: PropTypes.func,
 
 		/**
 		 * Called on changes in the `minute` component of the time.
@@ -187,7 +193,16 @@ const TimePickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onChangeMinute: PropTypes.func,
+		onMinuteChange: PropTypes.func,
+
+		/**
+		 * Called when the component is removed while retaining focus.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightDisappear: PropTypes.func,
 
 		/**
 		 * Set content to RTL.
@@ -195,7 +210,15 @@ const TimePickerBase = kind({
 		 * @type {Boolean}
 		 * @private
 		 */
-		rtl: PropTypes.bool
+		rtl: PropTypes.bool,
+
+		/**
+		 * Disables 5-way spotlight from navigating into the component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		spotlightDisabled: PropTypes.bool
 	},
 
 	defaultProps: {
@@ -204,12 +227,13 @@ const TimePickerBase = kind({
 
 	styles: {
 		css,
-		className: 'timePicker'
+		className: 'timePicker',
+		publicClassNames: true
 	},
 
 	computed: {
-		hasMeridiem: ({order}) => order.indexOf('a') >= 0,
-		meridiemPickerWidth: ({meridiem, meridiems}) => meridiems[meridiem].length * 2
+		hasMeridiem: ({order}) => order && order.indexOf('a') >= 0,
+		meridiemPickerWidth: ({meridiem, meridiems}) => meridiems && meridiems[meridiem].length * 1.5
 	},
 
 	render: ({
@@ -223,46 +247,58 @@ const TimePickerBase = kind({
 		meridiems,
 		minute,
 		minuteAriaLabel,
-		onChangeHour,
-		onChangeMeridiem,
-		onChangeMinute,
+		onHourChange,
+		onMeridiemChange,
+		onMinuteChange,
+		onSpotlightDisappear,
 		order,
+		spotlightDisabled,
 		...rest
 	}) => {
+		const hourAccessibilityHint = $L('hour');
+		const minuteAccessibilityHint = $L('minute');
 
 		delete rest.rtl;
 
 		return (
 			<DateTime {...rest} css={css}>
-				{order.map((picker) => {
+				{order && order.map((picker) => {
 					switch (picker) {
 						case 'h':
 						case 'k':
 							return (
-								<React.Fragment key="hour-picker">
+								<Fragment key="hour-picker">
 									<HourPicker
+										accessibilityHint={hourAccessibilityHint}
 										aria-label={hourAriaLabel}
 										className={css.hourPicker}
 										disabled={disabled}
 										hasMeridiem={hasMeridiem}
-										onChange={onChangeHour}
+										onChange={onHourChange}
+										onSpotlightDisappear={onSpotlightDisappear}
+										spotlightDisabled={spotlightDisabled}
 										value={hour}
-										width={4}
+										width={2}
+										wrap
 									/>
-								</React.Fragment>
+								</Fragment>
 							);
 						case 'm':
 							return (
 								<DateComponentRangePicker
+									accessibilityHint={minuteAccessibilityHint}
 									aria-label={minuteAriaLabel}
 									className={css.minutePicker}
 									disabled={disabled}
 									key="minute-picker"
 									max={59}
 									min={0}
-									onChange={onChangeMinute}
+									onChange={onMinuteChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									spotlightDisabled={spotlightDisabled}
 									value={minute}
-									width={4}
+									width={2}
+									wrap
 								/>
 							);
 						case 'a':
@@ -273,9 +309,12 @@ const TimePickerBase = kind({
 									className={css.meridiemPicker}
 									disabled={disabled}
 									key="meridiem-picker"
-									onChange={onChangeMeridiem}
+									onChange={onMeridiemChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									spotlightDisabled={spotlightDisabled}
 									value={meridiem}
 									width={meridiemPickerWidth}
+									reverseTransition={null}
 								>
 									{meridiems}
 								</DateComponentPicker>
@@ -290,4 +329,6 @@ const TimePickerBase = kind({
 });
 
 export default TimePickerBase;
-export {TimePickerBase};
+export {
+	TimePickerBase
+};

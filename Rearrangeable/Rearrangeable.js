@@ -1,14 +1,13 @@
 /**
- * Provides behaviors for rearrangeable UIs
+ * Provides behaviors for rearrangeable UIs.
  *
  * @module agate/Rearrangeable
  * @exports Rearrangeable
- * @public
+ * @private
  */
 
 import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
-import React from 'react';
 
 const propRemapper = (arrangementProp, slotNames, props) => {
 	if (!props[arrangementProp]) return props;
@@ -29,7 +28,7 @@ const propRemapper = (arrangementProp, slotNames, props) => {
  *
  * @memberof agate/Rearrangeable.Rearrangeable
  * @hocconfig
- * @public
+ * @private
  */
 const defaultConfig = /** @lends agate/Rearrangeable.Rearrangeable.defaultConfig */ {
 	/**
@@ -80,9 +79,9 @@ const defaultConfig = /** @lends agate/Rearrangeable.Rearrangeable.defaultConfig
  * // <Component dayOne="hiking" dayTwo="swimming" />
  * ```
  *
- * @memberof agate/Rearrangeable
  * @hoc
- * @public
+ * @memberof agate/Rearrangeable
+ * @private
  */
 const Rearrangeable = hoc(defaultConfig, (config, Wrapped) => kind({
 	name: 'Rearrangeable',

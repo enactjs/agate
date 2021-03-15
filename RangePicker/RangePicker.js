@@ -2,11 +2,12 @@
  * A component for selecting a number from a range of numbers.
  *
  * @example
- * <RangePicker defaultValue={70} min={0} max={100}></RangePicker>
+ * <RangePicker defaultValue={70} min={0} max={100} />
  *
  * @module agate/RangePicker
  * @exports RangePicker
  * @exports RangePickerBase
+ * @exports RangePickerDecorator
  */
 
 import kind from '@enact/core/kind';
@@ -14,9 +15,10 @@ import {clamp} from '@enact/core/util';
 import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
-import React from 'react';
+import compose from 'ramda/src/compose';
 
-import PickerCore from '../internal/Picker';
+import PickerCore, {ChangeAdapter} from '../internal/Picker';
+import PickerItem from '../internal/Picker/PickerItem';
 
 /**
  * RangePicker base component.
@@ -64,6 +66,16 @@ const RangePickerBase = kind({
 		value: PropTypes.number.isRequired,
 
 		/**
+		 * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
+		 * to the current value. This should only be used when the parent controls the value of
+		 * the picker directly through the props.
+		 *
+		 * @type {String|Number}
+		 * @public
+		 */
+		'aria-valuetext': PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+		/**
 		 * Children from which to pick.
 		 *
 		 * @type {Node}
@@ -80,6 +92,15 @@ const RangePickerBase = kind({
 		className: PropTypes.string,
 
 		/**
+		 * Sets the hint string read when focusing the decrement button.
+		 *
+		 * @default 'decrease the value'
+		 * @type {String}
+		 * @public
+		 */
+		decrementAriaLabel: PropTypes.string,
+
+		/**
 		 * Disables the picker.
 		 *
 		 * @type {Boolean}
@@ -88,12 +109,45 @@ const RangePickerBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
+		 * Sets the hint string read when focusing the increment button.
+		 *
+		 * @default 'increase the value'
+		 * @type {String}
+		 * @public
+		 */
+		incrementAriaLabel: PropTypes.string,
+
+		/**
+		 * Disables animation.
+		 *
+		 * By default, the picker will animate transitions between items, provided a `width` is
+		 * defined.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		noAnimation: PropTypes.bool,
+
+		/**
 		 * Called when `value` changes.
 		 *
 		 * @type {Function}
 		 * @public
 		 */
 		onChange: PropTypes.func,
+
+		/**
+		 * Orientation of the picker.
+		 *
+		 * Controls whether the buttons are arranged horizontally or vertically around the value.
+		 *
+		 * * Values: `'horizontal'`, `'vertical'`
+		 *
+		 * @type {String}
+		 * @default 'vertical'
+		 * @public
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
 		 * The smallest value change allowed for the picker.
@@ -105,7 +159,16 @@ const RangePickerBase = kind({
 		 * @default 1
 		 * @public
 		 */
-		step: PropTypes.number
+		step: PropTypes.number,
+
+		/**
+		 * Allows picker to continue from the start of the list after it reaches the end and
+		 * vice-versa.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		wrap: PropTypes.bool
 	},
 
 	computed: {
@@ -117,57 +180,26 @@ const RangePickerBase = kind({
 
 	render: ({value, ...rest}) => {
 		return (
-			<PickerCore {...rest} value={value}>
-				{value}
+			<PickerCore {...rest} index={0} type="number" value={value}>
+				<PickerItem key={value} marqueeDisabled style={{direction: 'ltr'}}>{value}</PickerItem>
 			</PickerCore>
 		);
 	}
 });
 
 /**
- * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
- * to the current value. This should only be used when the parent controls the value of
- * the picker directly through the props.
+ * Applies Agate specific behaviors to [RangePickerBase]{@link agate/RangePicker.RangePickerBase} components.
  *
- * @name aria-valuetext
- * @type {String|Number}
- * @memberof agate/RangePicker.RangePicker.prototype
+ * @hoc
+ * @memberof agate/RangePicker
+ * @mixes ui/Changeable.Changeable
  * @public
  */
-
-/**
- * Sets the hint string read when focusing the decrement button.
- *
- * @name decrementAriaLabel
- * @memberof agate/RangePicker.RangePicker.prototype
- * @default 'previous item'
- * @type {String}
- * @public
- */
-
-/**
- * Sets the hint string read when focusing the increment button.
- *
- * @name incrementAriaLabel
- * @memberof agate/RangePicker.RangePicker.prototype
- * @default 'next item'
- * @type {String}
- * @public
- */
-
-/**
- * Orientation of the picker.
- *
- * Controls whether the buttons are arranged horizontally or vertically around the value.
- *
- * * Values: `'horizontal'`, `'vertical'`
- *
- * @name orientation
- * @memberof agate/RangePicker.RangePicker.prototype
- * @type {String}
- * @default 'vertical'
- * @public
- */
+const RangePickerDecorator = compose(
+	Pure,
+	Changeable,
+	ChangeAdapter
+);
 
 /**
  * A component that lets the user select a number from a range of numbers.
@@ -178,15 +210,12 @@ const RangePickerBase = kind({
  *
  * @class RangePicker
  * @memberof agate/RangePicker
- * @mixes ui/Changeable.Changeable
+ * @extends agate/RangePicker.RangePickerBase
+ * @mixes agate/RangePicker.RangePickerDecorator
  * @ui
  * @public
  */
-const RangePicker = Pure(
-	Changeable(
-		RangePickerBase
-	)
-);
+const RangePicker = RangePickerDecorator(RangePickerBase);
 
 /**
  * Default value
@@ -198,4 +227,8 @@ const RangePicker = Pure(
  */
 
 export default RangePicker;
-export {RangePicker, RangePickerBase};
+export {
+	RangePicker,
+	RangePickerBase,
+	RangePickerDecorator
+};

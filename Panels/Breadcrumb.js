@@ -2,7 +2,6 @@ import {handle, forward, adaptEvent} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import $L from '../internal/$L';
 
@@ -18,8 +17,8 @@ const SpottableDiv = Spottable('div');
  *
  * @type {Number}
  * @default 105;
- * @private
  * @memberof agate/Panels
+ * @private
  */
 export const breadcrumbWidth = 105;
 
@@ -48,8 +47,8 @@ const BreadcrumbBase = kind({
 		/**
 		 * Called when the breadcrumb is clicked.
 		 *
-		 * @private
 		 * @type {Function}
+		 * @private
 		 */
 		onClick: PropTypes.func,
 

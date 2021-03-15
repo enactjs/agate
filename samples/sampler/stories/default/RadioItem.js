@@ -1,28 +1,35 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
+import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
 
-import RadioItem from '@enact/agate/RadioItem';
+import Icon from '@enact/agate/Icon';
+import Item, {ItemBase} from '@enact/agate/Item';
+import RadioItem, {RadioItemBase} from '@enact/agate/RadioItem';
 
 import iconNames from './icons';
 
-const Config = mergeComponentMetadata('RadioItem', RadioItem);
+const Config = mergeComponentMetadata('RadioItem', ItemBase, Item, RadioItemBase, RadioItem);
 RadioItem.displayName = 'RadioItem';
 
 storiesOf('Agate', module)
 	.add(
 		'RadioItem',
-		() => (
-			<div>
+		() => {
+			const slotBeforeSelection = select('slotBefore', ['', ...iconNames], Config);
+			const slotBefore = slotBeforeSelection ? (<Icon size="small" slot="slotBefore">{slotBeforeSelection}</Icon>) : null;
+
+			return (
 				<RadioItem
 					disabled={boolean('disabled', Config)}
 					icon={select('icon', ['', ...iconNames], Config)}
+					onToggle={action('onToggle')}
 				>
-					{text('children', Config, 'Sound')}
+					{slotBefore}
+					{text('children', Config, 'Hello RadioItem')}
 				</RadioItem>
-			</div>
-		),
+			);
+		},
 		{
 			text: 'The basic RadioItem'
 		}

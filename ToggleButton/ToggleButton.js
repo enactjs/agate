@@ -7,13 +7,14 @@
  * @module agate/ToggleButton
  * @exports ToggleButton
  * @exports ToggleButtonBase
+ * @exports ToggleButtonDecorator
  */
 
 import kind from '@enact/core/kind';
 import Pure from '@enact/ui/internal/Pure';
 import Toggleable from '@enact/ui/Toggleable';
 import PropTypes from 'prop-types';
-import React from 'react';
+import compose from 'ramda/src/compose';
 
 import Button from '../Button';
 import Skinnable from '../Skinnable';
@@ -160,10 +161,26 @@ const ToggleButtonBase = kind({
 				{...props}
 				aria-pressed={props.selected}
 				css={css}
+				minWidth={false}
 			/>
 		);
 	}
 });
+
+/**
+ * Applies Agate specific behaviors to [ToggleButtonBase]{@link agate/ToggleButton.ToggleButtonBase} components.
+ *
+ * @hoc
+ * @memberof agate/ToggleButton
+ * @mixes ui/Toggleable.Toggleable
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
+const ToggleButtonDecorator = compose(
+	Pure,
+	Toggleable({prop: 'selected', toggleProp: 'onTap'}),
+	Skinnable
+);
 
 /**
  * A toggleable button.
@@ -176,22 +193,15 @@ const ToggleButtonBase = kind({
  * @class ToggleButton
  * @memberof agate/ToggleButton
  * @extends agate/ToggleButton.ToggleButtonBase
- * @mixes ui/Toggleable.Toggleable
- * @mixes agate/Skinnable.Skinnable
+ * @mixes agate/ToggleButton.ToggleButtonDecorator
  * @ui
  * @public
  */
-const ToggleButton = Pure(
-	Toggleable(
-		{prop: 'selected', toggleProp: 'onTap'},
-		Skinnable(
-			ToggleButtonBase
-		)
-	)
-);
+const ToggleButton = ToggleButtonDecorator(ToggleButtonBase);
 
 export default ToggleButton;
 export {
 	ToggleButton,
-	ToggleButtonBase
+	ToggleButtonBase,
+	ToggleButtonDecorator
 };

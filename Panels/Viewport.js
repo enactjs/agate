@@ -1,11 +1,11 @@
-import classnames from 'classnames';
 import {forward, handle} from '@enact/core/handle';
 import Spotlight from '@enact/spotlight';
 import Pause from '@enact/spotlight/Pause';
 import ViewManager, {shape, SlideBottomArranger as VerticalArranger, SlideRightArranger as HorizontalArranger} from '@enact/ui/ViewManager';
+import classnames from 'classnames';
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {Children, cloneElement, Component} from 'react';
 import ReactDOM from 'react-dom';
 
 import SharedStateDecorator, {SharedState} from './SharedStateDecorator';
@@ -17,9 +17,10 @@ import css from './Panels.module.less';
  *
  * @class Viewport
  * @memberof agate/Panels
+ * @ui
  * @private
  */
-const ViewportBase = class extends React.Component {
+const ViewportBase = class extends Component {
 	static displayName = 'Viewport';
 
 	static contextType = SharedState;
@@ -162,7 +163,7 @@ const ViewportBase = class extends React.Component {
 		this.pause
 	);
 
-	mapChildren = (children, generateId) => React.Children.map(children, (child, index) => {
+	mapChildren = (children, generateId) => Children.map(children, (child, index) => {
 		if (child) {
 			const {spotlightId = generateId(index, 'panel-container', Spotlight.remove)} = child.props;
 			const props = {
@@ -174,7 +175,7 @@ const ViewportBase = class extends React.Component {
 				props.autoFocus = 'default-element';
 			}
 
-			return React.cloneElement(child, props);
+			return cloneElement(child, props);
 		} else {
 			return null;
 		}
@@ -197,7 +198,7 @@ const ViewportBase = class extends React.Component {
 		const mappedChildren = this.mapChildren(children, generateId);
 		const className = classnames(css.viewport, rest.className);
 
-		const count = React.Children.count(mappedChildren);
+		const count = Children.count(mappedChildren);
 		invariant(
 			index === 0 && count === 0 || index < count,
 			`Panels index, ${index}, is invalid for number of children, ${count}`

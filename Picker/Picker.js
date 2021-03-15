@@ -9,15 +9,17 @@
  * @module agate/Picker
  * @exports Picker
  * @exports PickerBase
- * @exports PickerDecorator
  */
 
 import kind from '@enact/core/kind';
+import Changeable from '@enact/ui/Changeable';
+import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import clamp from 'ramda/src/clamp';
-import React from 'react';
+import compose from 'ramda/src/compose';
+import {Children} from 'react';
 
-import PickerCore, {PickerDecorator} from '../internal/Picker';
+import PickerCore, {ChangeAdapter, PickerItem} from '../internal/Picker';
 
 /**
  * The base `Picker` component.
@@ -43,12 +45,48 @@ const PickerBase = kind({
 		children: PropTypes.array.isRequired,
 
 		/**
+		 * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
+		 * to the current value. This should only be used when the parent controls the value of
+		 * the picker directly through the props.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		'aria-label': PropTypes.string,
+
+		/**
+		 * Sets the hint string read when focusing the decrement button.
+		 *
+		 * @default 'previous item'
+		 * @type {String}
+		 * @public
+		 */
+		decrementAriaLabel: PropTypes.string,
+
+		/**
 		 * Disables the picker.
 		 *
 		 * @type {Boolean}
 		 * @public
 		 */
 		disabled: PropTypes.bool,
+
+		/**
+		 * Sets the hint string read when focusing the increment button.
+		 *
+		 * @default 'next item'
+		 * @type {String}
+		 * @public
+		 */
+		incrementAriaLabel: PropTypes.string,
+
+		/**
+		 * Disables transition animation.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		noAnimation: PropTypes.bool,
 
 		/**
 		 * Called when the `value` changes.
@@ -59,21 +97,47 @@ const PickerBase = kind({
 		onChange: PropTypes.func,
 
 		/**
+		 * Orientation of the picker.
+		 *
+		 * Controls whether the buttons are arranged horizontally or vertically around the value.
+		 *
+		 * * Values: `'horizontal'`, `'vertical'`
+		 *
+		 * @type {String}
+		 * @default 'vertical'
+		 * @public
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+
+		/**
 		 * Index of the selected child.
 		 *
 		 * @type {Number}
 		 * @default 0
 		 * @public
 		 */
-		value: PropTypes.number
+		value: PropTypes.number,
+
+		/**
+		 * Allows picker to continue from the start of the list after it reaches the end and
+		 * vice-versa.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		wrap: PropTypes.bool
 	},
 
 	defaultProps: {
+		orientation: 'vertical',
 		value: 0
 	},
 
 	computed: {
-		disabled: ({children, disabled}) => React.Children.count(children) > 1 ? disabled : true,
+		children: ({children}) => Children.map(children, (child) => (
+			<PickerItem>{child}</PickerItem>
+		)),
+		disabled: ({children, disabled}) => Children.count(children) > 1 ? disabled : true,
 		max: ({children}) => children && children.length ? children.length - 1 : 0,
 		value: ({value, children}) => {
 			const max = children && children.length ? children.length - 1 : 0;
@@ -85,7 +149,13 @@ const PickerBase = kind({
 		const {children, max, value, ...rest} = props;
 
 		return (
-			<PickerCore {...rest} min={0} max={max} step={1} value={value}>
+			<PickerCore
+				{...rest}
+				index={value}
+				min={0}
+				max={max}
+				value={value}
+			>
 				{children}
 			</PickerCore>
 		);
@@ -93,49 +163,18 @@ const PickerBase = kind({
 });
 
 /**
- * Overrides the `aria-valuetext` for the picker. By default, `aria-valuetext` is set
- * to the current value. This should only be used when the parent controls the value of
- * the picker directly through the props.
+ * Applies Agate specific behaviors to [PickerBase]{@link agate/Picker.PickerBase} components.
  *
- * @name aria-valuetext
- * @type {String|Number}
- * @memberof agate/Picker.Picker.prototype
+ * @hoc
+ * @memberof agate/Picker
+ * @mixes ui/Changeable.Changeable
  * @public
  */
-
-/**
- * Sets the hint string read when focusing the decrement button.
- *
- * @name decrementAriaLabel
- * @memberof agate/Picker.Picker.prototype
- * @default 'previous item'
- * @type {String}
- * @public
- */
-
-/**
- * Sets the hint string read when focusing the increment button.
- *
- * @name incrementAriaLabel
- * @memberof agate/Picker.Picker.prototype
- * @default 'next item'
- * @type {String}
- * @public
- */
-
-/**
- * Orientation of the picker.
- *
- * Controls whether the buttons are arranged horizontally or vertically around the value.
- *
- * * Values: `'horizontal'`, `'vertical'`
- *
- * @name orientation
- * @memberof agate/Picker.Picker.prototype
- * @type {String}
- * @default 'vertical'
- * @public
- */
+const PickerDecorator = compose(
+	Pure,
+	Changeable,
+	ChangeAdapter
+);
 
 /**
  * A Picker component that allows selecting values from a list of values.
@@ -147,7 +186,6 @@ const PickerBase = kind({
  * @class Picker
  * @memberof agate/Picker
  * @extends agate/Picker.PickerBase
- * @mixes agate/internal/Picker.PickerDecorator
  * @ui
  * @public
  */

@@ -12,13 +12,16 @@
 
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
+import {ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
+import Pure from '@enact/ui/internal/Pure';
 import {LabeledIconBase as UiLabeledIconBase, LabeledIconDecorator as UiLabeledIconDecorator} from '@enact/ui/LabeledIcon';
-import compose from 'ramda/src/compose';
 import PropTypes from 'prop-types';
-import React from 'react';
+import compose from 'ramda/src/compose';
 
-import {ButtonBase, ButtonDecorator} from '../Button';
+import {ButtonBase} from '../Button';
 import Skinnable from '../Skinnable';
+import TooltipDecorator from '../TooltipDecorator';
 
 import componentCss from './LabeledIconButton.module.less';
 
@@ -37,7 +40,20 @@ const LabeledIconButtonBase = kind({
 	name: 'LabeledIconButton',
 
 	propTypes: /** @lends agate/LabeledIconButton.LabeledIconButtonBase.prototype */ {
+		/**
+		 * The background opacity of this button.
+		 *
+		 * Valid values are:
+		 * * `'opaque'`,
+		 * * `'lightOpaque'`, and
+		 * * `'transparent'`.
+		 *
+		 * @type {('opaque'|'lightOpaque'|'transparent')}
+		 * @default 'opaque'
+		 * @public
+		 */
 		backgroundOpacity: PropTypes.oneOf(['opaque', 'lightOpaque', 'transparent']),
+
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
@@ -83,7 +99,40 @@ const LabeledIconButtonBase = kind({
 		 */
 		iconComponent: EnactPropTypes.component,
 
-		// forwarded from Spottable
+		/**
+		 * True if button is an icon only button.
+		 *
+		 * @type {Boolean}
+		 * @private
+		 */
+		iconOnly: PropTypes.bool,
+
+		/**
+		 * The position of the label in relation to the icon element.
+		 *
+		 * Allowed values include:
+		 * * 'below' (default),
+		 * * 'above',
+		 * * 'left',
+		 * * 'right',
+		 * * 'before', and
+		 * * 'after'.
+		 *
+		 * The 'before' and 'after' values automatically swap sides when in an RTL locale context.
+		 *
+		 * @type {('above'|'after'|'before'|'below'|'left'|'right')}
+		 * @default 'below'
+		 * @public
+		 */
+		labelPosition: PropTypes.oneOf(['above', 'after', 'before', 'below', 'left', 'right']),
+
+		/**
+		 * Applies the `pressed` CSS class.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		pressed: PropTypes.bool,
 
 		/**
@@ -96,6 +145,15 @@ const LabeledIconButtonBase = kind({
 		selected: PropTypes.bool,
 
 		/**
+		 * The size of the button.
+		 *
+		 * @type {('smallest'|'small'|'large'|'huge')}
+		 * @default 'large'
+		 * @public
+		 */
+		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
+
+		/**
 		 * The amount of sprite "cells" in the src image.
 		 *
 		 * @type {Number}
@@ -105,10 +163,18 @@ const LabeledIconButtonBase = kind({
 		// TODO: spriteCount prop bleeds!  Is this cruft?
 	},
 
+	defaultProps: {
+		size: 'large'
+	},
+
 	styles: {
 		css: componentCss,
 		className: 'labeledIconButton',
 		publicClassNames: true
+	},
+
+	computed: {
+		className: ({labelPosition, size, styler}) => styler.append((labelPosition === 'above' || labelPosition === 'below') ? '' : size)
 	},
 
 	render: ({
@@ -122,13 +188,17 @@ const LabeledIconButtonBase = kind({
 		spriteCount,
 		...rest
 	}) => {
+		delete rest.iconOnly;
+
 		return UiLabeledIconBase.inline({
+			role: 'button',
 			...rest,
 			icon: (
 				<Button
 					backgroundOpacity={backgroundOpacity}
 					icon={icon}
 					iconComponent={iconComponent}
+					iconOnly
 					highlighted={highlighted}
 					pressed={pressed}
 					selected={selected}
@@ -143,15 +213,22 @@ const LabeledIconButtonBase = kind({
 /**
  * Adds Agate specific behaviors to [LabeledIconButtonBase]{@link agate/LabeledIconButton.LabeledIconButtonBase}.
  *
- * @hoc
  * @memberof agate/LabeledIconButton
- * @mixes agate/Button.ButtonDecorator
- * @mixes agate/LabeledIcon.LabeledIconDecorator
+ * @hoc
+ * @mixes ui/Button.ButtonDecorator
+ * @mixes ui/LabeledIcon.LabeledIconDecorator
+ * @mixes spotlight/Spottable.Spottable
+ * @mixes agate/Skinnable.Skinnable
+ * @mixes agate/TooltipDecorator.TooltipDecorator
  * @public
  */
 const LabeledIconButtonDecorator = compose(
+	Pure,
+	UiButtonDecorator,
 	UiLabeledIconDecorator,
-	ButtonDecorator
+	TooltipDecorator,
+	Spottable,
+	Skinnable
 );
 
 /**

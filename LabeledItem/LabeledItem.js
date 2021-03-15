@@ -6,11 +6,12 @@
  *
  * @module agate/LabeledItem
  * @exports LabeledItem
- * @deprecated
+ * @exports LabeledItemBase
+ * @deprecated Will be removed in 2.0.0. Use {@link agate/Item} instead.
+ * @private
  */
 
 import deprecate from '@enact/core/internal/deprecate';
-import React from 'react';
 
 import Icon from '../Icon';
 import Item from '../Item';
@@ -22,8 +23,7 @@ import Item from '../Item';
  * @memberof agate/LabeledItem
  * @extends agate/Item.Item
  * @ui
- * @deprecated
- * @public
+ * @private
  */
 const LabeledItemBase = deprecate(
 	({children, titleIcon, ...rest}) => (
@@ -35,8 +35,9 @@ const LabeledItemBase = deprecate(
 		</Item>
 	),
 	{
-		name: 'LabeledItem',
-		replacedBy: 'Item'
+		name: 'agate/LabeledItem',
+		replacedBy: 'agate/Item',
+		until: '2.0.0'
 	}
 );
 

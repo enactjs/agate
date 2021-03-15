@@ -4,7 +4,6 @@
 @import "../../styles/variables.less";
 @import "../../styles/skin.less";
 
-
 .picker {
 	display: flex;
 	flex-direction: column;
@@ -24,6 +23,15 @@
 		border-radius: @agate-picker-border-radius;
 		transform: @agate-picker-transform;
 		margin: @agate-picker-margin;
+		padding: @agate-picker-padding;
+
+		.sizingPlaceholder {
+			height: 0;
+			visibility: hidden;
+			padding-left: .extract(@agate-picker-padding, left)[];
+			padding-right: .extract(@agate-picker-padding, right)[];
+			line-height: 0;
+		}
 
 		.label {
 			transform: @agate-picker-label-transform;
@@ -31,13 +39,20 @@
 
 		.item,
 		.itemDecrement,
-		.itemIncrement {
+		.itemIncrement,
+		.secondaryItemIncrement,
+		.secondaryItemDecrement {
 			margin: 0;
 			color: inherit;
 			width: 100%;
 			text-align: center;
 			height: @agate-button-height;
 			line-height: @agate-button-height;
+
+			.sizingPlaceholder {
+				font-size: @agate-picker-active-font-size;
+				font-weight: @agate-picker-active-font-weight;
+			}
 
 			&.active {
 				color: @agate-picker-active-color;
@@ -53,7 +68,7 @@
 
 			.focus({
 				color: @agate-picker-item-focus-color;
-				background-color: @agate-picker-item-focus-bg-color;
+				background-color: transparent;
 				background-image: @agate-picker-item-focus-bg-image;
 			});
 		}
@@ -72,12 +87,35 @@
 			background-color: @agate-picker-item-bg-color;
 		}
 
+		.secondaryItemIncrement,
+		.secondaryItemDecrement {
+			color: @agate-picker-secondary-item-color;
+		}
+
 		&.horizontal {
 			.item,
 			.itemDecrement,
-			.itemIncrement {
+			.itemIncrement,
+			.secondaryItemIncrement,
+			.secondaryItemDecrement {
 				width: @agate-picker-horizontal-item-width;
 			}
 		}
 	});
+
+	.viewManager {
+		overflow: hidden;
+		height: 100%;
+
+		.item {
+			position: relative;
+		}
+
+		> .item:nth-child(2) {
+			// the second element in the ViewManager should be offset by the container height
+			// so the transition can position two relative views next to each other safely.
+			top: -100%;
+		}
+	}
+
 }

@@ -11,11 +11,10 @@
  */
 
 import kind from '@enact/core/kind';
-import React from 'react';
-import PropTypes from 'prop-types';
-import compose from 'ramda/src/compose';
 import UiBodyText from '@enact/ui/BodyText';
 import Pure from '@enact/ui/internal/Pure';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 
 import {MarqueeDecorator} from '@enact/ui/Marquee';
 import Skinnable from '../Skinnable';
@@ -128,7 +127,7 @@ const BodyTextBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [BodyText]{@link agate/BodyText.BodyTextBase}.
+ * Applies Agate specific behaviors to [BodyTextBase]{@link agate/BodyText.BodyTextBase}.
  *
  * @hoc
  * @memberof agate/BodyText
@@ -149,7 +148,7 @@ const BodyTextDecorator = compose(
  * Usage:
  * ```
  * <BodyText>
- *  I have a Ham radio. There are many like it, but this one is mine.
+ *   I have a Ham radio. There are many like it, but this one is mine.
  * </BodyText>
  * ```
  *

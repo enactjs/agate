@@ -73,17 +73,32 @@
 }
 
 .spinner {
-	line-height: 0;
-
 	.applySkins({
 		.bg {
-			display: inline-block;
+			background-color: @agate-spinner-bg-color;
+			border-radius: 50%;
 			width: @agate-spinner-size;
 			height: @agate-spinner-size;
 			position: relative;
 			white-space: nowrap;
 			margin: @agate-spinner-bg-margin;
 			padding: @agate-spinner-bg-padding;
+		}
+
+		&.transparentBackground {
+			.bg {
+				background-color: @agate-spinner-transparent-bg-color;
+			}
+		}
+
+		.client {
+			.agate-body-text();
+			margin-top: @agate-spotlight-outset;
+			max-width: 198px;
+		}
+
+		&.large {
+			/* Defined to prevent global export */
 		}
 
 		&.huge {
@@ -123,6 +138,10 @@
 			.node {
 				background-color: @agate-spinner-light-color;
 			}
+		}
+
+		&.content {
+			padding: @agate-spinner-content-padding;
 		}
 
 		// Searching css
@@ -180,12 +199,6 @@
 				height: @agate-spinner-loading-height;
 				border-radius: @agate-spinner-loading-border-radius;
 
-				--node-index: 1;
-				--node-width: @agate-spinner-loading-width;
-				--node-proportion-offset: calc((~"var(--node-index)" - 1) / (@loading-nodes - 1));
-				--node-even-spacing: calc(~"var(--node-proportion-offset)" * 100%);
-				--node-relative-offset: calc((~"var(--node-index)" - 1) * ~"var(--node-width)");
-
 				// These nodes are relatively positioned so we can use the width of the parent node
 				// in our carculations. The math below works as follows:
 				//    1. Evenly distribute the nodes across the parent's width.
@@ -195,11 +208,19 @@
 				//       ever increasing amount of pixels off of each node progressively until the
 				//       last one, where we end up subtracting its entire width, so it fits neatly
 				//       inside the parent.
-				left: calc(
-					var(--node-even-spacing) -
-					var(--node-relative-offset) -
-					(var(--node-proportion-offset) * @agate-spinner-loading-width)
-				);
+				--node-index: 1;
+				--node-width: @agate-spinner-loading-width;
+				--node-proportion-offset: calc((~"var(--node-index)" - 1) / (@loading-nodes - 1));
+				--node-even-spacing: calc(~"var(--node-proportion-offset)" * 100%);
+				--node-relative-offset: calc((~"var(--node-index)" - 1) * ~"var(--node-width)");
+				--node-position: calc(var(--node-even-spacing) - var(--node-relative-offset) - (var(--node-proportion-offset) * @agate-spinner-loading-width));
+
+				left: var(--node-position);
+
+				.enact-locale-rtl({
+					right: var(--node-position);
+					left: initial;
+				});
 			}
 
 			.bounce-loop(@loading-nodes);
@@ -217,6 +238,15 @@
 					width: @agate-spinner-small-loading-width;
 					height: @agate-spinner-small-loading-height;
 					--node-width: @agate-spinner-small-loading-width;
+				}
+			}
+		}
+
+		&.searching,
+		&.loading {
+			&.pausedAnimation {
+				.node {
+					animation-play-state: paused;
 				}
 			}
 		}

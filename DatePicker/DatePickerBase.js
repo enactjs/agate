@@ -1,7 +1,7 @@
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
-import React from 'react';
 
+import $L from '../internal/$L';
 import {DateComponentRangePicker} from '../internal/DateComponentPicker';
 import DateTime from '../internal/DateTime';
 
@@ -94,9 +94,18 @@ const DatePickerBase = kind({
 		dayAriaLabel: PropTypes.string,
 
 		/**
+		 * When it's `true`, it changes the direction of the transition animation for the day.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		dayReverseTransition: PropTypes.bool,
+
+		/**
 		 * Disables the `DatePicker`.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		disabled: PropTypes.bool,
@@ -136,7 +145,7 @@ const DatePickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onChangeDate: PropTypes.func,
+		onDateChange: PropTypes.func,
 
 		/**
 		 * Called when the `month` component of the Date changes.
@@ -144,7 +153,16 @@ const DatePickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onChangeMonth: PropTypes.func,
+		onMonthChange: PropTypes.func,
+
+		/**
+		 * Called when the component is removed when it had focus.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onSpotlightDisappear: PropTypes.func,
 
 		/**
 		 * Called when the `year` component of the Date changes.
@@ -152,7 +170,7 @@ const DatePickerBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onChangeYear: PropTypes.func,
+		onYearChange: PropTypes.func,
 
 		/**
 		 * Indicates the content's text direction is right-to-left.
@@ -161,6 +179,14 @@ const DatePickerBase = kind({
 		 * @private
 		 */
 		rtl: PropTypes.bool,
+
+		/**
+		 * Disables 5-way spotlight from navigating into the component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		spotlightDisabled: PropTypes.bool,
 
 		/**
 		 * The "aria-label" for the year picker.
@@ -182,74 +208,93 @@ const DatePickerBase = kind({
 
 	styles: {
 		css,
-		className: 'datePicker'
+		className: 'datePicker',
+		publicClassNames: true
 	},
 
 	render: ({
 		disabled,
 		day,
 		dayAriaLabel,
+		dayReverseTransition,
 		maxDays,
 		maxMonths,
 		maxYear,
 		minYear,
 		month,
 		monthAriaLabel,
-		onChangeDate,
-		onChangeMonth,
-		onChangeYear,
+		onDateChange,
+		onMonthChange,
+		onYearChange,
+		onSpotlightDisappear,
 		order,
+		spotlightDisabled,
 		year,
 		yearAriaLabel,
 		...rest
 	}) => {
-
+		const dayAccessibilityHint = $L('day');
+		const monthAccessibilityHint = $L('month');
+		const yearAccessibilityHint = $L('year');
 		delete rest.rtl;
 
 		return (
 			<DateTime {...rest}>
-				{order.map((picker) => {
+				{order && order.map((picker) => {
 					switch (picker) {
 						case 'd':
 							return (
 								<DateComponentRangePicker
+									accessibilityHint={dayAccessibilityHint}
 									aria-label={dayAriaLabel}
 									className={css.day}
 									disabled={disabled}
 									key="day-picker"
 									max={maxDays}
 									min={1}
-									onChange={onChangeDate}
+									onChange={onDateChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									reverseTransition={dayReverseTransition}
+									spotlightDisabled={spotlightDisabled}
 									value={day}
-									width={4}
+									width={2}
+									wrap
 								/>
 							);
 						case 'm':
 							return (
 								<DateComponentRangePicker
+									accessibilityHint={monthAccessibilityHint}
 									aria-label={monthAriaLabel}
 									className={css.month}
 									disabled={disabled}
 									key="month-picker"
 									max={maxMonths}
 									min={1}
-									onChange={onChangeMonth}
+									onChange={onMonthChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									spotlightDisabled={spotlightDisabled}
 									value={month}
-									width={4}
+									width={2}
+									wrap
 								/>
 							);
 						case 'y':
 							return (
 								<DateComponentRangePicker
+									accessibilityHint={yearAccessibilityHint}
 									aria-label={yearAriaLabel}
 									className={css.year}
 									disabled={disabled}
 									key="year-picker"
 									max={maxYear}
 									min={minYear}
-									onChange={onChangeYear}
+									onChange={onYearChange}
+									onSpotlightDisappear={onSpotlightDisappear}
+									spotlightDisabled={spotlightDisabled}
 									value={year}
 									width={4}
+									wrap
 								/>
 							);
 					}

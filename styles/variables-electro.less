@@ -19,6 +19,7 @@
 @agate-button-border-radius: @electro-border-radius;
 @agate-button-icon-border-radius: @agate-button-border-radius;
 @agate-button-badge-position: auto -3px -6px auto;
+@agate-button-badge-position-rtl: auto auto -6px -3px;
 @agate-button-badge-border-radius: 3px;
 @agate-button-badge-padding: 0 6px;
 
@@ -53,9 +54,6 @@
 
 // Heading
 // ---------------------------------------
-@agate-heading-spacing-large: 24px;
-@agate-heading-spacing-medium: 24px;
-@agate-heading-spacing-small: 12px;
 @agate-heading-title-padding: @agate-heading-padding 50px;
 @agate-heading-title-decoration-height: 28px;
 @agate-heading-title-decoration-width: auto;
@@ -65,8 +63,23 @@
 @agate-heading-title-decoration-transform: skew(-10deg);
 @agate-heading-text-transform: uppercase;
 
+// Keypad
+// ---------------------------------------
+@agate-keypad-button-height:        99px;
+@agate-keypad-height:               510px;
+@agate-keypad-input-border-bottom:  none;
+@agate-keypad-input-font-size:      60px;
+@agate-keypad-keycontainer-width:   159px;
+@agate-keypad-label-bottom:         9px;
+@agate-keypad-label-font-size:      12px;
+@agate-keypad-label-line-height:    18px;
+@agate-keypad-text-font-size:       42px;
+@agate-keypad-text-line-height:     57px;
+@agate-keypad-width:                480px;
+
 // Panels
 // ---------------------------------------
+@agate-panels-controls-top: (@agate-component-spacing + 21px);
 @agate-panels-panel-padding: @agate-component-spacing;
 @agate-panels-tab-bar-margin: 0;
 @agate-panels-tab-bg-position: 0;
@@ -97,6 +110,7 @@
 @agate-picker-font-size: 21px;
 @agate-picker-active-font-size: 27px;
 @agate-picker-margin: @agate-component-spacing;
+@agate-picker-padding: 0;
 
 // Popup
 // ---------------------------------------
@@ -112,6 +126,7 @@
 @agate-progressbar-height: (@agate-slider-height / 2);
 @agate-progressbar-vertical-width: @agate-progressbar-height;
 @agate-progressbar-track-transform: @agate-slider-bg-transform;
+@agate-progressbar-tooltip-offset: 39px;
 
 // Spotlight
 // ---------------------------------------
@@ -166,6 +181,8 @@
 // Switch
 // ---------------------------------------
 @agate-switch-icon-scale: 2.8;
+@agate-switch-icon-position-left: -9px;
+@agate-switch-selected-icon-position-left: ((@agate-switch-width - @agate-switch-height) + @agate-switch-icon-position-left);
 
 // ToggleButton
 // ---------------------------------------

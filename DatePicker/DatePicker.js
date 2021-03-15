@@ -7,12 +7,14 @@
  * @module agate/DatePicker
  * @exports DatePicker
  * @exports DatePickerBase
+ * @exports DatePickerDecorator
  * @exports dateToLocaleString
  */
 
 import Pure from '@enact/ui/internal/Pure';
 import DateFactory from 'ilib/lib/DateFactory';
 import DateFmt from 'ilib/lib/DateFmt';
+import compose from 'ramda/src/compose';
 
 import {DateTimeDecorator} from '../internal/DateTime';
 import Skinnable from '../Skinnable';
@@ -27,13 +29,14 @@ const getLabelFormatter = () => new DateFmt({
 });
 
 const dateTimeConfig = {
-	customProps: function (i18n, value, props) {
+	customProps: function (i18n, value, dayReverseTransition, props) {
 		const values = {
 			maxMonths: 12,
 			maxDays: 31,
 			year: 1900,
 			month: 1,
-			day: 1
+			day: 1,
+			dayReverseTransition: false
 		};
 
 		if (value && i18n) {
@@ -46,21 +49,25 @@ const dateTimeConfig = {
 			values.minYear = i18n.toLocalYear(props.minYear || DatePickerBase.defaultProps.minYear);
 		}
 
+		if (dayReverseTransition) {
+			values.dayReverseTransition = dayReverseTransition;
+		}
+
 		return values;
 	},
 	defaultOrder: ['d', 'm', 'y'],
 	handlers: {
-		onChangeDate: (ev, value) => {
+		onDateChange: (ev, value) => {
 			value.day = ev.value;
 			return value;
 		},
 
-		onChangeMonth: (ev, value) => {
+		onMonthChange: (ev, value) => {
 			value.month = ev.value;
 			return value;
 		},
 
-		onChangeYear: (ev, value) => {
+		onYearChange: (ev, value) => {
 			value.year = ev.value;
 			return value;
 		}
@@ -96,6 +103,19 @@ const dateTimeConfig = {
 };
 
 /**
+ * Applies Agate specific behaviors to [DatePickerBase]{@link agate/DatePicker.DatePickerBase} components.
+ *
+ * @hoc
+ * @memberof agate/DatePicker
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
+const DatePickerDecorator = compose(
+	Pure,
+	Skinnable
+);
+
+/**
  * A date selection component, ready to use in Agate applications.
  *
  * `DatePicker` may be used to select the year, month, and day. It uses a standard `Date` object for
@@ -110,15 +130,15 @@ const dateTimeConfig = {
  * Usage:
  * ```
  * <DatePicker
- *  defaultValue={selectedDate}
- *  onChange={handleChange}
+ *   defaultValue={selectedDate}
+ *   onChange={handleChange}
  * />
  * ```
  *
  * @class DatePicker
  * @memberof agate/DatePicker
  * @extends agate/DatePicker.DatePickerBase
- * @mixes ui/Changeable.Changeable
+ * @mixes agate/DatePicker.DatePickerDecorator
  * @omit day
  * @omit maxDays
  * @omit maxMonths
@@ -128,12 +148,10 @@ const dateTimeConfig = {
  * @ui
  * @public
  */
-const DatePicker = Pure(
-	Skinnable(
-		DateTimeDecorator(
-			dateTimeConfig,
-			DatePickerBase
-		)
+const DatePicker = DatePickerDecorator(
+	DateTimeDecorator(
+		dateTimeConfig,
+		DatePickerBase
 	)
 );
 
@@ -175,5 +193,6 @@ export default DatePicker;
 export {
 	DatePicker,
 	DatePickerBase,
+	DatePickerDecorator,
 	dateToLocaleString
 };

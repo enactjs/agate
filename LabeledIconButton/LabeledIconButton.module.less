@@ -15,7 +15,32 @@
 		/* Public Class Names */
 	}
 
+	.label {
+		text-overflow: ellipsis;
+		overflow: hidden;
+		width: 100%;
+		white-space: nowrap;
+	}
+
 	.applySkins({
+		max-width: @agate-labelediconbutton-max-width;
+
+		&.smallest {
+			max-width: calc(@agate-labelediconbutton-max-width + @agate-button-smallest-height);
+		}
+
+		&.small {
+			max-width: calc(@agate-labelediconbutton-max-width + @agate-button-small-height);
+		}
+
+		&.large {
+			max-width: calc(@agate-labelediconbutton-max-width + @agate-button-height);
+		}
+
+		&.huge {
+			max-width: calc(@agate-labelediconbutton-max-width + @agate-button-huge-height);
+		}
+
 		.label {
 			margin-top: @agate-labelediconbutton-label-margin;
 			color: @agate-labelediconbutton-label-color;

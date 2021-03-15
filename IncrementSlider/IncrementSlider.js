@@ -3,19 +3,20 @@
  *
  * @example
  * <IncrementSlider
- *   decrementIcon="minus"
- *   defaultValue={-25}
- *   incrementIcon="plus"
- *   knobStep={25}
- *   max={100}
- *   min={-100}
- *   step={5}
+ * 	decrementIcon="minus"
+ * 	defaultValue={-25}
+ * 	incrementIcon="plus"
+ * 	knobStep={25}
+ * 	max={100}
+ * 	min={-100}
+ * 	step={5}
  * />
  *
  * @module agate/IncrementSlider
  * @exports IncrementSlider
  * @exports IncrementSliderBase
  * @exports IncrementSliderDecorator
+ * @exports IncrementSliderTooltip
  */
 
 import {forward} from '@enact/core/handle';
@@ -25,13 +26,13 @@ import {extractAriaProps} from '@enact/core/util';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
 import IdProvider from '@enact/ui/internal/IdProvider';
-import Slottable from '@enact/ui/Slottable';
 import Pure from '@enact/ui/internal/Pure';
+import Slottable from '@enact/ui/Slottable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import $L from '../internal/$L';
+import {ProgressBarTooltip} from '../ProgressBar';
 import Skinnable from '../Skinnable';
 import {SliderBase} from '../Slider';
 import {emitChange} from '../Slider/utils';
@@ -56,8 +57,6 @@ const forwardWithType = (type, props) => forward(type, {type}, props);
  * @class IncrementSliderBase
  * @memberof agate/IncrementSlider
  * @extends agate/Slider.SliderBase
- * @mixes agate/Skinnable.Skinnable
- * @mixes spotlight/Spottable.Spottable
  * @ui
  * @public
  */
@@ -65,6 +64,15 @@ const IncrementSliderBase = kind({
 	name: 'IncrementSlider',
 
 	propTypes: /** @lends agate/IncrementSlider.IncrementSliderBase.prototype */ {
+		/**
+		 * Activates the slider knob when focused so that it may be manipulated via the directional
+		 * input keys.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		activateOnFocus: PropTypes.bool,
+
 		/**
 		 * Sets the knob to selected state and allows it to move via 5-way controls.
 		 *
@@ -78,7 +86,6 @@ const IncrementSliderBase = kind({
 		 * buttons.
 		 *
 		 * @type {Boolean}
-		 * @memberof agate/IncrementSlider.IncrementSliderBase.prototype
 		 * @public
 		 */
 		'aria-hidden': PropTypes.bool,
@@ -89,7 +96,6 @@ const IncrementSliderBase = kind({
 		 * the slider directly through the props.
 		 *
 		 * @type {String|Number}
-		 * @memberof agate/IncrementSlider.IncrementSliderBase.prototype
 		 * @public
 		 */
 		'aria-valuetext': PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -113,19 +119,10 @@ const IncrementSliderBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * The `data-webos-voice-group-label` for the IconButton of IncrementSlider.
-		 *
-		 * @type {String}
-		 * @memberof agate/IncrementSlider.IncrementSliderBase.prototype
-		 * @public
-		 */
-		'data-webos-voice-group-label': PropTypes.string,
-
-		/**
 		* Sets the hint string read when focusing the decrement button.
 		*
-		* @default 'press button to decrease the value'
 		* @type {String}
+		* @default 'press button to decrease the value'
 		* @public
 		*/
 		decrementAriaLabel: PropTypes.string,
@@ -136,6 +133,7 @@ const IncrementSliderBase = kind({
 		 * [vertical]{@link agate/IncrementSlider.IncrementSlider#vertical} is changed.
 		 *
 		 * @type {String}
+		 * @default 'minus'
 		 * @public
 		 */
 		decrementIcon: PropTypes.string,
@@ -178,6 +176,7 @@ const IncrementSliderBase = kind({
 		 * [vertical]{@link agate/IncrementSlider.IncrementSlider#vertical} is changed.
 		 *
 		 * @type {String}
+		 * @default 'plus'
 		 * @public
 		 */
 		incrementIcon: PropTypes.string,
@@ -214,6 +213,7 @@ const IncrementSliderBase = kind({
 		 * Hides the slider bar fill and prevents highlight when spotted.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		noFill: PropTypes.bool,
@@ -359,6 +359,7 @@ const IncrementSliderBase = kind({
 		 * Disables spotlight navigation into the component.
 		 *
 		 * @type {Boolean}
+		 * @default false
 		 * @public
 		 */
 		spotlightDisabled: PropTypes.bool,
@@ -371,6 +372,43 @@ const IncrementSliderBase = kind({
 		 * @public
 		 */
 		step: PropTypes.number,
+
+
+		/**
+		 * Enables the built-in tooltip
+		 *
+		 * To customize the tooltip, pass either a custom tooltip component or an instance of
+		 * [IncrementSliderTooltip]{@link agate/IncrementSlider.IncrementSliderTooltip} with additional props configured.
+		 *
+		 * ```
+		 * <IncrementSlider
+		 *   tooltip={
+		 *     <IncrementSliderTooltip percent side="after" />
+		 *   }
+		 * />
+		 * ```
+		 *
+		 * The tooltip may also be passed as a child via the `"tooltip"` slot. See
+		 * [Slottable]{@link ui/Slottable} for more information on how slots can be used.
+		 *
+		 * ```
+		 * <IncrementSlider>
+		 *   <IncrementSliderTooltip percent side="after" />
+		 * </IncrementSlider>
+		 * ```
+		 *
+		 * If a custom tooltip is provided, it will receive the following props:
+		 *
+		 * * `children` - The `value` prop from the slider
+		 * * `visible` - `true` if the tooltip should be displayed
+		 * * `orientation` - The value of the `orientation` prop from the slider
+		 * * `proportion` - A number between 0 and 1 representing the proportion of the `value` in
+		 *   terms of `min` and `max`
+		 *
+		 * @type {Boolean|Element|Function}
+		 * @public
+		 */
+		tooltip: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
 
 		/**
 		 * The value of the increment slider.
@@ -449,12 +487,14 @@ const IncrementSliderBase = kind({
 			}
 
 			return `${valueText != null ? valueText : value} ${incrementAriaLabel}`;
-		}
+		},
+		tooltip: ({tooltip}) => tooltip === true ? ProgressBarTooltip : tooltip
 	},
 
-	render: ({active,
+	render: ({
+		activateOnFocus,
+		active,
 		'aria-hidden': ariaHidden,
-		'data-webos-voice-group-label': voiceGroupLabel,
 		backgroundProgress,
 		css,
 		decrementAriaLabel,
@@ -484,6 +524,7 @@ const IncrementSliderBase = kind({
 		size,
 		spotlightDisabled,
 		step,
+		tooltip,
 		value,
 		...rest
 	}) => {
@@ -500,7 +541,6 @@ const IncrementSliderBase = kind({
 					aria-controls={!incrementDisabled ? id : null}
 					aria-label={decrementAriaLabel}
 					className={css.decrementButton}
-					data-webos-voice-group-label={voiceGroupLabel}
 					disabled={decrementDisabled}
 					icon={decrementIcon}
 					onTap={onDecrement}
@@ -511,6 +551,7 @@ const IncrementSliderBase = kind({
 				/>
 				<Slider
 					{...ariaProps}
+					activateOnFocus={activateOnFocus}
 					active={active}
 					backgroundProgress={backgroundProgress}
 					css={css}
@@ -530,13 +571,13 @@ const IncrementSliderBase = kind({
 					spotlightDisabled={spotlightDisabled}
 					progressAnchor={progressAnchor}
 					step={step}
+					tooltip={tooltip}
 					value={value}
 				/>
 				<IncrementSliderButton
 					aria-controls={!decrementDisabled ? id : null}
 					aria-label={incrementAriaLabel}
 					className={css.incrementButton}
-					data-webos-voice-group-label={voiceGroupLabel}
 					disabled={incrementDisabled}
 					icon={incrementIcon}
 					onSpotlightDisappear={onIncrementSpotlightDisappear}
@@ -550,13 +591,23 @@ const IncrementSliderBase = kind({
 	}
 });
 
+/**
+ * Applies Agate specific behaviors to [IncrementSliderBase]{@link agate/IncrementSlider.IncrementSliderBase}
+ *
+ * @hoc
+ * @memberof agate/IncrementSlider
+ * @mixes ui/Changeable.Changeable
+ * @mixes agate/Skinnable.Skinnable
+ * @mixes ui/Slottable.Slottable
+ * @public
+ */
 const IncrementSliderDecorator = compose(
 	Pure,
 	Changeable,
 	IdProvider({generateProp: null, prefix: 's_'}),
 	SliderBehaviorDecorator({emitSpotlightEvents: 'onSpotlightDirection'}),
 	Skinnable,
-	Slottable({slots: ['knob']})
+	Slottable({slots: ['knob', 'tooltip']})
 );
 
 /**
@@ -571,14 +622,28 @@ const IncrementSliderDecorator = compose(
  * @class IncrementSlider
  * @memberof agate/IncrementSlider
  * @extends agate/IncrementSlider.IncrementSliderBase
+ * @mixes agate/IncrementSlider.IncrementSliderDecorator
  * @ui
  * @public
  */
 const IncrementSlider = IncrementSliderDecorator(IncrementSliderBase);
 
+/**
+ * A [Tooltip]{@link agate/TooltipDecorator.Tooltip} specifically adapted for use with
+ * [ProgressBar]{@link agate/ProgressBar.ProgressBar} or
+ * [IncrementSlider]{@link agate/IncrementSlider.IncrementSlider}.
+ *
+ * @see {@link agate/ProgressBar.ProgressBarTooltip}
+ * @class IncrementSliderTooltip
+ * @memberof agate/IncrementSlider
+ * @ui
+ * @public
+ */
+
 export default IncrementSlider;
 export {
 	IncrementSlider,
 	IncrementSliderBase,
-	IncrementSliderDecorator
+	IncrementSliderDecorator,
+	ProgressBarTooltip as IncrementSliderTooltip
 };

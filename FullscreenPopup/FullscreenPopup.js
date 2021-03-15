@@ -4,13 +4,15 @@
  * @module agate/FullscreenPopup
  * @exports FullscreenPopup
  * @exports FullscreenPopupBase
+ * @exports FullscreenPopupDecorator
+ * @deprecated Will be removed in 2.0.0. Use {@link agate/Popup} with position="fullscreen" instead.
  */
 
-import compose from 'ramda/src/compose';
+import deprecate from '@enact/core/internal/deprecate';
 import kind from '@enact/core/kind';
-import PropTypes from 'prop-types';
-import React from 'react';
 import Transition from '@enact/ui/Transition';
+import PropTypes from 'prop-types';
+import compose from 'ramda/src/compose';
 
 import PopupState from '../Popup/PopupState';
 import Skinnable from '../Skinnable';
@@ -18,23 +20,87 @@ import Skinnable from '../Skinnable';
 import componentCss from './FullscreenPopup.module.less';
 
 /**
- * TBD.
+ * Full screen popup component.
+ *
+ * Usage:
+ * ```
+ * <FullscreenPopup open>
+ *   Hello Fullscreen Popup
+ * </FullscreenPopup>
+ * ```
  *
  * @class FullscreenPopupBase
  * @memberof agate/FullscreenPopup
+ * @extends ui/Transition.Transition
  * @ui
  * @public
  */
 const FullscreenPopupBase = kind({
 	name: 'FullscreenPopup',
 	propTypes: /** @lends agate/FullscreenPopup.FullscreenPopupBase.prototype */ {
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * The animation direction of the popup.
+		 *
+		 * @type {String}
+		 * @default 'down'
+		 * @public
+		 */
 		direction: PropTypes.string,
-		duration: PropTypes.string,
+
+		/**
+		 * The transition duration of the popup.
+		 *
+		 * @type {Number|String}
+		 * @default 'short'
+		 * @public
+		 */
+		duration: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+		/**
+		 * Disable popup transitions.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		noAnimation: PropTypes.bool,
+
+		/**
+		 * Called after the transition to hide the popup has finished.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
 		onHide: PropTypes.func,
+
+		/**
+		 * Displays the popup.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		open: PropTypes.bool,
-		type: PropTypes.string
+
+		/**
+		 * Type of popup.
+		 *
+		 * * Supported types are: `'slide'`, `'clip'`, and `'fade'`.
+		 *
+		 * @type {('slide'|'clip'|'fade')}
+		 * @default 'slide'
+		 * @public
+		 */
+		type: PropTypes.oneOf(['slide', 'clip', 'fade'])
 	},
 
 	defaultProps: {
@@ -54,7 +120,7 @@ const FullscreenPopupBase = kind({
 		className: ({styler}) => styler.append('enact-fit')
 	},
 
-	render: ({children, className, css, direction, duration, noAnimation, onHide, open, type, ...rest}) => {
+	render: deprecate(({children, className, css, direction, duration, noAnimation, onHide, open, type, ...rest}) => {
 
 		return (
 			<Transition
@@ -74,24 +140,41 @@ const FullscreenPopupBase = kind({
 				</div>
 			</Transition>
 		);
-	}
+	}, {
+		name: 'agate/FullscreenPopup',
+		replacedBy: 'agate/Popup',
+		until: '2.0.0'
+	})
 });
 
+/**
+ * Applies Agate specific behaviors to [FullscreenPopupBase]{@link agate/FullscreenPopup.FullscreenPopupBase}.
+ *
+ * @hoc
+ * @memberof agate/FullscreenPopup
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const FullscreenPopupDecorator = compose(
 	Skinnable({prop: 'skin'}),
 	PopupState
 );
 
 /**
- * TBD.
+ * Full screen popup component, ready to use in Agate applications.
  *
  * @class FullscreenPopup
  * @memberof agate/FullscreenPopup
- * @mixes agate/Skinnable.Skinnable
+ * @extends agate/FullscreenPopup.FullscreenPopupBase
+ * @mixes agate/FullscreenPopup.FullscreenPopupDecorator
  * @ui
  * @public
  */
 const FullscreenPopup = FullscreenPopupDecorator(FullscreenPopupBase);
 
 export default FullscreenPopup;
-export {FullscreenPopup, FullscreenPopupBase};
+export {
+	FullscreenPopup,
+	FullscreenPopupBase,
+	FullscreenPopupDecorator
+};

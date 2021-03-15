@@ -5,6 +5,10 @@
 
 // Public
 .radioItem {
+	.icon {
+		margin: 0;
+	}
+
 	.applySkins({
 		.icon {
 			border-color: @agate-radioitem-icon-border-color;
@@ -31,6 +35,11 @@
 				background-color: @agate-radioitem-icon-selected-bg-color;
 				opacity: @agate-radioitem-icon-selected-opacity;
 			}
+			.focus({
+				.icon {
+					color: @agate-radioitem-icon-selected-color;
+				}
+			})
 		}
 	});
 }

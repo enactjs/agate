@@ -1,6 +1,12 @@
 /**
  * Agate styled ImageItem.
  *
+ * @example
+ * <ImageItem
+ * 	src="https://dummyimage.com/64/e048e0/0011ff"
+ * 	style={{height: 64, width: 64}}
+ * />
+ *
  * @module agate/ImageItem
  * @exports ImageItem
  * @exports ImageItemBase
@@ -8,12 +14,11 @@
  */
 
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
 import {ImageItem as UiImageItem} from '@enact/ui/ImageItem';
 import {MarqueeDecorator, MarqueeController} from '@enact/ui/Marquee';
-import Spottable from '@enact/spotlight/Spottable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import ImageBase from '../Image';
 import Skinnable from '../Skinnable';
@@ -37,7 +42,7 @@ const ImageItemBase = kind({
 	propTypes: /** @lends agate/ImageItem.ImageItemBase.prototype */ {
 		/**
 		 * Sets the position for caption.
-		 * Available positions: 'below' (default) and 'overlay'.
+		 * This props is only valid when `orientation` is `vertical`.
 		 *
 		 * @type {('below'|'overlay')}
 		 * @default 'below'
@@ -69,6 +74,14 @@ const ImageItemBase = kind({
 		 * @public
 		 */
 		css: PropTypes.object,
+
+		/**
+		 * Disables the `ImageItem`.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
 
 		/**
 		 * The layout orientation of the component.
@@ -105,8 +118,8 @@ const ImageItemBase = kind({
 		})
 	},
 
-	render: ({captionPosition, children, css,  src, ...rest}) => {
-		const [Component, marqueeProps] = (children && (captionPosition === 'below')) ? [MarqueeImageItem, {
+	render: ({captionPosition, children, css, disabled, orientation, src, ...rest}) => {
+		const [Component, marqueeProps] = (children && (orientation === 'horizontal' || captionPosition === 'below')) ? [MarqueeImageItem, {
 			alignment: 'center'
 		}] : [UiImageItem, null];
 
@@ -114,8 +127,11 @@ const ImageItemBase = kind({
 			<Component
 				{...rest}
 				{...marqueeProps}
+				aria-disabled={disabled}
 				css={css}
+				disabled={disabled}
 				imageComponent={ImageBase}
+				orientation={orientation}
 				src={src}
 			>
 				{children}
@@ -147,6 +163,7 @@ const ImageItemDecorator = compose(
  * @memberof agate/ImageItem
  * @extends agate/ImageItem.ImageItemBase
  * @mixes agate/ImageItem.ImageItemDecorator
+ * @ui
  * @public
  */
 const ImageItem = ImageItemDecorator(ImageItemBase);

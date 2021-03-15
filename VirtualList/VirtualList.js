@@ -11,7 +11,6 @@ import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDeco
 import {ResizeContext} from '@enact/ui/Resizable';
 import {gridListItemSizeShape, itemSizesShape, VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
 import PropTypes from 'prop-types';
-import React from 'react';
 import warning from 'warning';
 
 import useScroll from '../useScroll';
@@ -234,7 +233,7 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	 *
 	 * @type {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
 	noScrollByWheel: PropTypes.bool,
 
@@ -530,10 +529,10 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	 * Usage:
 	 * ```
 	 * <VirtualGridList
-	 * 	itemSize={{
-	 * 		minWidth: ri.scale(360),
-	 * 		minHeight: ri.scale(540)
-	 * 	}}
+	 *   itemSize={{
+	 *     minWidth: ri.scale(360),
+	 *     minHeight: ri.scale(540)
+	 *   }}
 	 * />
 	 * ```
 	 *
@@ -663,7 +662,7 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	 *
 	 * @type {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
 	noScrollByWheel: PropTypes.bool,
 
