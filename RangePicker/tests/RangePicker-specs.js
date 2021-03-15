@@ -4,13 +4,8 @@ import {RangePicker, RangePickerBase} from '../RangePicker';
 
 import css from '../../internal/DrumPicker/DrumPicker.module.less';
 
-const decrement = (picker) => picker.find(`.${css.itemDecrement}`).first().simulate('click');
-const increment = (picker) => picker.find(`.${css.itemIncrement}`).first().simulate('click');
-
 const keyDown = (keyCode) => (picker) => picker.find(`.${css.root}`).first().simulate('keydown', {keyCode});
 
-const leftKeyDown = keyDown(37);
-const rightKeyDown = keyDown(39);
 const upKeyDown = keyDown(38);
 const downKeyDown = keyDown(40);
 
@@ -44,7 +39,7 @@ describe('RangePicker Specs', () => {
 	// 		<RangePicker defaultValue={10} min={0} max={20} noAnimation step={1} />
 	// 	);
 	//
-	// 	decrement(picker);
+	// 	upKeyDown(picker);
 	//
 	// 	const expected = '9';
 	// 	const actual = picker.find('.selectedItem').first().text();

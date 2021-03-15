@@ -325,8 +325,15 @@ const DrumPickerBase = class extends Component {
 		const {children} = this;
 
 		if (prevState.selectedIndex === this.state.selectedIndex) {
+			const {min, max, step, value} = this.props;
+			this.children = this.calculateChildren(min, max, step, value);
+			let selectedIndex;
+			if (value || value === 0) {
+				selectedIndex = clamp(0, this.children.length - 1, this.children.findIndex((element, index) => element.props.children === value));
+			}
+
 			for (let i = 0; i < children.length; i++) {
-				if (i === this.state.selectedIndex) {
+				if (i === selectedIndex) {
 					this.scrollTo(i);
 					return;
 				}
@@ -343,8 +350,6 @@ const DrumPickerBase = class extends Component {
 		} else if (this.props.children) {
 			return this.props.children;
 		} else return [];
-
-
 	};
 
 	scrollTo = (val) => {
@@ -353,7 +358,6 @@ const DrumPickerBase = class extends Component {
 		if (!children || children.length === 0) return;
 
 		const index = clamp(0, children.length,  Math.min(val, children.length - 1));
-		console.log(children.length, index, val);
 		const child = children[index].props.children;
 
 		if (orientation === 'vertical') {
@@ -623,7 +627,7 @@ const DrumPickerBase = class extends Component {
 					aria-disabled={disabled}
 					aria-label={decrementAriaLabel}
 					className={classnames(css.itemDecrement, css.item)}
-					disabled={disabled}
+					disabled={disabled || this.state.selectedIndex === 0}
 				/>
 				<div
 					aria-label={indicatorAriaLabel}
@@ -637,7 +641,7 @@ const DrumPickerBase = class extends Component {
 					aria-disabled={disabled}
 					aria-label={incrementAriaLabel}
 					className={classnames(css.itemIncrement, css.item)}
-					disabled={disabled}
+					disabled={disabled || this.state.selectedIndex === values.length-1 }
 				/>
 				<DrumPickerRoot
 					className={css.root}

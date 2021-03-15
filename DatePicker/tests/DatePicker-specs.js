@@ -1,6 +1,6 @@
 import {mount} from 'enzyme';
 
-import DatePicker from '../DatePicker';
+import {DatePicker} from '../DatePicker';
 import css from '../DatePicker.module.less';
 
 // Note: Tests pass 'locale' because there's no I18nDecorator to provide a value via context and
@@ -27,18 +27,18 @@ describe('DatePicker', () => {
 	// 	}
 	// );
 
-	// test('should accept a JavaScript Date for its value prop', () => {
-	// 	const subject = mount(
-	// 		<DatePicker value={new Date(2000, 0, 1)} locale="en-US" />
-	// 	);
-	//
-	// 	const yearPicker = subject.find(`DateComponentRangePicker.${css.year}`);
-	//
-	// 	const expected = 2000;
-	// 	const actual = yearPicker.prop('value');
-	//
-	// 	expect(actual).toBe(expected);
-	// });
+	test('should accept a JavaScript Date for its value prop', () => {
+		const subject = mount(
+			<DatePicker value={new Date(2000, 0, 1)} locale="en-US" />
+		);
+
+		const yearPicker = subject.find(`DateComponentRangePicker.${css.year}`);
+
+		const expected = 2000;
+		const actual = yearPicker.prop('value');
+
+		expect(actual).toBe(expected);
+	});
 	//
 	// test('should set "dayAriaLabel" to day picker', () => {
 	// 	const label = 'custom day aria-label';
