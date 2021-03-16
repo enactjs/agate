@@ -46,8 +46,7 @@
 	.applySkins({
 		.agate-item-sizing();
 
-		width: @agate-item-width;
-		height: @agate-item-height;
+		max-width: @agate-item-max-width;
 		line-height: @agate-item-line-height;
 		border-style: solid;
 		border-width: @agate-item-border-width;
@@ -74,12 +73,10 @@
 			.labelAfter,
 			.labelBefore {
 				.content {
-					box-sizing: border-box;
 					min-width: @agate-item-content-width;
 				}
 
 				.label {
-					box-sizing: border-box;
 					max-width: @agate-item-label-max-width;
 				}
 			}
@@ -107,10 +104,10 @@
 		&.inline {
 			// overriding ui/Item's inline-block
 			display: inline-flex;
-			max-width: @agate-item-inline-max-width;
+			min-width: @agate-item-inline-min-width;
 
 			.itemContent {
-				width: @agate-item-inline-content-width;
+				max-width: @agate-item-inline-content-max-width;
 			}
 
 			.itemContent,
@@ -120,8 +117,18 @@
 			}
 
 			&.hasLabel {
-				.slotAfter {
-					.padding-start-end(@agate-item-slotafter-padding-left, 0);
+				.itemContent {
+					max-width: 420px;
+
+					&.labelAfter,
+					&.labelBefore {
+						.content {
+							min-width: @agate-item-labelafterbefore-content-min-width;
+						}
+						.label {
+							max-width: @agate-item-labelafterbefore-label-max-width;
+						}
+					}
 				}
 			}
 		}
@@ -136,10 +143,11 @@
 			}
 		}
 
-		&.large { /* Needed to prevent global class being added in the DOM */ }
+		&.large { height: 120px;}
 
 		// TODO: needs to be modified when new requirements for small item is available
 		&.small {
+			height: 100px;
 			font-size: @agate-item-small-font-size;
 			line-height: @agate-item-small-line-height;
 
@@ -169,6 +177,12 @@
 					color: @agate-item-label-color;
 				}
 			}
+
+			&.selected {
+				&::before {
+					background-color: @agate-indicator-focus-bg-color;
+				}
+			}
 		});
 
 		&.selected {
@@ -179,7 +193,7 @@
 			&::before {
 				content: "";
 				height: @agate-indicator-height;
-				width: @agate-indicator-height;
+				min-width: @agate-indicator-height; // `min-width` is used to ensure that the indicator has a correct width with default item
 				background-color: @agate-indicator-bg-color;
 				border-radius: @agate-indicator-border-radius;
 				align-self: @agate-indicator-align-self;
