@@ -16,19 +16,19 @@ class PickerInterface {
 	}
 
 	get picker () {
-		return element('.internal_Picker_Picker_picker', this.self);
+		return element('..internal_DrumPicker_DrumPicker_drumPicker', this.self);
 	}
 
 	decrementer (picker) {
-		return element('.internal_Picker_Picker_itemDecrement', picker);
+		return element('.internal_DrumPicker_DrumPicker_itemDecrement', picker);
 	}
 
 	incrementer (picker) {
-		return element('.internal_Picker_Picker_itemIncrement', picker);
+		return element('.internal_DrumPicker_DrumPicker_itemIncrement', picker);
 	}
 
-	active (picker) {
-		return element('.internal_Picker_Picker_active', picker);
+	selectedItem (rangePicker) {
+		return element('.internal_DrumPicker_DrumPicker_selectedItem', rangePicker);
 	}
 }
 

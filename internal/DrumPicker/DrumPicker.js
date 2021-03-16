@@ -268,7 +268,16 @@ const DrumPickerBase = class extends Component {
 		width: PropTypes.oneOfType([
 			PropTypes.oneOf([null, 'small', 'medium', 'large']),
 			PropTypes.number
-		])
+		]),
+
+		/**
+		 * Should the picker stop incrementing when the picker reaches the last element? Set `wrap`
+		 * to `true` to allow the picker to continue from the opposite end of the list of options.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		wrap: PropTypes.bool
 	};
 
 	static defaultProps = {
@@ -288,9 +297,12 @@ const DrumPickerBase = class extends Component {
 
 		const {min, max, step, value} = this.props;
 		this.children = this.calculateChildren(min, max, step, value);
+
 		let selectedIndex;
-		if (value || value === 0) {
+		if (!Array.isArray(this.props.children) && (value || value === 0)) {
 			selectedIndex = clamp(0, this.children.length - 1, this.children.findIndex((element) => element.props.children === value));
+		} else {
+			selectedIndex = value;
 		}
 
 		this.state = {
@@ -322,10 +334,13 @@ const DrumPickerBase = class extends Component {
 
 		if (prevState.selectedIndex === this.state.selectedIndex) {
 			const {min, max, step, value} = this.props;
+
 			this.children = this.calculateChildren(min, max, step, value);
 			let selectedIndex;
-			if (value || value === 0) {
+			if (!Array.isArray(this.props.children) && (value || value === 0)) {
 				selectedIndex = clamp(0, this.children.length - 1, this.children.findIndex((element) => element.props.children === value));
+			} else {
+				selectedIndex = value;
 			}
 
 			for (let i = 0; i < children.length; i++) {
@@ -353,7 +368,7 @@ const DrumPickerBase = class extends Component {
 		const {children} = this;
 		if (!children || children.length === 0) return;
 
-		const index = clamp(0, children.length,  Math.min(val, children.length - 1));
+		const index = clamp(0, children.length, Math.min(val, children.length - 1));
 		const child = children[index].props.children;
 
 		if (orientation === 'vertical') {
@@ -466,6 +481,16 @@ const DrumPickerBase = class extends Component {
 		}
 	};
 
+	wrapRange = (min, max, value) => {
+		if (value > max) {
+			return min + (value - max - 1);
+		} else if (value < min) {
+			return max - (min - value - 1);
+		} else {
+			return value;
+		}
+	};
+
 	currentValueText = () => {
 		const {accessibilityHint, 'aria-valuetext': ariaValueText, children, value} = this.props;
 		if (ariaValueText != null) {
@@ -524,11 +549,11 @@ const DrumPickerBase = class extends Component {
 	};
 
 	handleKeyDown = (ev) => {
-		const {orientation} = this.props;
+		const {orientation, wrap} = this.props;
 		const {keyCode} = ev;
 		forwardKeyDown(ev, this.props);
 
-		if (!this.props.disabled || this.children.length > 0) {
+		if (!this.props.disabled && this.children.length > 0) {
 			let itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
 			let itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
 
@@ -544,16 +569,16 @@ const DrumPickerBase = class extends Component {
 			}
 			if (orientation === 'horizontal' && isLeft(keyCode)) {
 				ev.stopPropagation();
-				this.scrollTo(clamp(0, this.children.length - 1, this.scrollX / itemWidth - 1));
+				this.scrollTo(wrap ? this.wrapRange(0, this.children.length - 1, this.scrollX / itemWidth - 1) : clamp(0, this.children.length - 1, this.scrollX / itemWidth - 1));
 			} else if (orientation === 'horizontal' && isRight(keyCode) ) {
 				ev.stopPropagation();
-				this.scrollTo(clamp(0, this.children.length - 1, this.scrollX / itemWidth + 1));
+				this.scrollTo(wrap ? this.wrapRange(0, this.children.length - 1, this.scrollX / itemWidth + 1) : clamp(0, this.children.length - 1, this.scrollX / itemWidth + 1));
 			} else if (orientation === 'vertical' && isUp(keyCode)) {
 				ev.stopPropagation();
-				this.scrollTo(clamp(0, this.children.length - 1, this.scrollY / itemHeight - 1));
+				this.scrollTo(wrap ? this.wrapRange(0, this.children.length - 1, this.scrollY / itemHeight - 1) : clamp(0, this.children.length - 1, this.scrollY / itemHeight - 1));
 			} else if (orientation === 'vertical' && isDown(keyCode) ) {
 				ev.stopPropagation();
-				this.scrollTo(clamp(0, this.children.length - 1, this.scrollY / itemHeight + 1));
+				this.scrollTo(wrap ? this.wrapRange(0, this.children.length - 1, this.scrollY / itemHeight + 1) : clamp(0, this.children.length - 1, this.scrollY / itemHeight + 1));
 			}
 			// remove transition for further touch related changes
 			setTimeout(() => {
@@ -577,6 +602,7 @@ const DrumPickerBase = class extends Component {
 			disabled,
 			onSpotlightDisappear,
 			orientation,
+			spotlightDisabled,
 			width,
 			...rest
 		} = this.props;
@@ -605,7 +631,6 @@ const DrumPickerBase = class extends Component {
 		delete rest.noAnimation;
 		delete rest.onChange;
 		delete rest.reverseTransition;
-		delete rest.spotlightDisabled;
 		delete rest.step;
 		delete rest.type;
 		delete rest.value;
@@ -621,7 +646,26 @@ const DrumPickerBase = class extends Component {
 		});
 
 		return (
-			<div {...rest} className={classnames(className, css.drumPicker, css[orientation])} ref={this.initRootRef}>
+			<Div
+				{...rest}
+				className={classnames(className, css.drumPicker, css[orientation])}
+				disabled={disabled}
+				onKeyDown={this.handleKeyDown}
+				onMouseDown={(evt) => this.onStart(evt)}
+				onMouseMove={(evt) => {
+					evt.preventDefault(); this.onMove(evt);
+				}}
+				onMouseUp={this.onFinish}
+				onSpotlightDisappear={onSpotlightDisappear}
+				onTouchCancel={this.onFinish}
+				onTouchEnd={this.onFinish}
+				onTouchMove={(evt) => {
+					evt.preventDefault(); this.onMove(evt.touches[0]);
+				}}
+				onTouchStart={(evt) => this.onStart(evt.touches[0])}
+				ref={this.initRootRef}
+				spotlightDisabled={spotlightDisabled}
+			>
 				<div
 					aria-controls={this.valueId}
 					aria-disabled={disabled}
@@ -634,7 +678,6 @@ const DrumPickerBase = class extends Component {
 					aria-valuetext={currentValueText}
 					className={classnames(css.indicator, css.item)}
 					ref={this.initIndicatorRef}
-					disabled={disabled}
 				/>
 				<div
 					aria-controls={this.valueId}
@@ -643,27 +686,13 @@ const DrumPickerBase = class extends Component {
 					className={classnames(css.itemIncrement, css.item)}
 					disabled={disabled || this.state.selectedIndex === values.length - 1}
 				/>
-				<Div
+				<div
 					className={css.root}
-					disabled={disabled}
-					onKeyDown={this.handleKeyDown}
-					onMouseDown={(evt) => this.onStart(evt)}
-					onMouseMove={(evt) => {
-						evt.preventDefault(); this.onMove(evt);
-					}}
-					onMouseUp={this.onFinish}
-					onSpotlightDisappear={onSpotlightDisappear}
-					onTouchCancel={this.onFinish}
-					onTouchEnd={this.onFinish}
-					onTouchMove={(evt) => {
-						evt.preventDefault(); this.onMove(evt.touches[0]);
-					}}
-					onTouchStart={(evt) => this.onStart(evt.touches[0])}
 					ref={this.initContentRef}
 				>
 					{values}
-				</Div>
-			</div>
+				</div>
+			</Div>
 		);
 	}
 };
