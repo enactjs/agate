@@ -20,7 +20,7 @@
 	z-index: 1;
 	pointer-events: none;
 	.applySkins({
-		// You'll notice tiny adjustments to the position: 0.5px, 3px, 7px, etc. in the following code.
+		// You'll notice tiny adjustments to the position: 0.5px, 3px, etc. in the following code.
 		// These are to account for sub-pixel rendering on scaled or "imperfect" rendering scenarios
 		// where hairline gaps can be seen between the tail and the body.
 
@@ -185,7 +185,7 @@
 			}
 
 			.tooltipLabel {
-				margin-right: (@agate-tooltip-point-width + 7px);
+				margin-right: (@agate-tooltip-point-width + 3px);
 			}
 
 			&.topArrow {
@@ -338,7 +338,8 @@
 					transform: translate(0, -50%);
 				}
 
-				&.bottomArrow .tooltipAnchor { /* transform: translate(0, 0); */
+				&.bottomArrow .tooltipAnchor {
+					/* transform: translate(0, 0); */
 				}
 			}
 		}

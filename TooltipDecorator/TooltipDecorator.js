@@ -449,7 +449,6 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 						arrowAnchor={this.state.arrowAnchor}
 						direction={this.state.tooltipDirection}
 						marquee={tooltipMarquee}
-						position={tooltipRelative ? null : this.state.position}
 						relative={tooltipRelative}
 						style={tooltipStyle}
 						tooltipRef={this.getTooltipRef}
