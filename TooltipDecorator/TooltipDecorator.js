@@ -451,6 +451,7 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 						marquee={tooltipMarquee}
 						relative={tooltipRelative}
 						style={tooltipStyle}
+						// style={{display: 'block'}}
 						tooltipRef={this.getTooltipRef}
 						width={tooltipWidth}
 					>
@@ -461,7 +462,8 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 				if (!tooltipRelative) {
 					renderedTooltip = (
-						<FloatingLayerBase open={this.state.showing} noAutoDismiss onDismiss={this.hideTooltip} scrimType="none" key="tooltipFloatingLayer">
+                        //*<FloatingLayerBase open={this.state.showing} noAutoDismiss onDismiss={this.hideTooltip} scrimType="none" key="tooltipFloatingLayer">*/
+                        <FloatingLayerBase open noAutoDismiss onDismiss={this.hideTooltip} scrimType="none" key="tooltipFloatingLayer">
 							{renderedTooltip}
 						</FloatingLayerBase>
 					);

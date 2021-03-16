@@ -19,6 +19,11 @@
 	position: absolute;
 	z-index: 1;
 	pointer-events: none;
+
+  .tooltipLabel {
+    text-align: center;
+  }
+
 	.applySkins({
 		// You'll notice tiny adjustments to the position: 0.5px, 3px, etc. in the following code.
 		// These are to account for sub-pixel rendering on scaled or "imperfect" rendering scenarios
@@ -61,13 +66,14 @@
 			font-size: @agate-tooltip-label-font-size;
 			font-weight: @agate-tooltip-label-font-weight;
 			line-height: @agate-tooltip-label-height;
+			min-width: @agate-tooltip-min-width;
 			white-space: nowrap;
 			width: var(--agate-tooltip-label-width); // assign a width if necessary, but without a width, "auto" is just fine.
 			padding: @agate-tooltip-padding;
 			border-radius: @agate-tooltip-border-radius;
 
 			.enact-locale-rtl({
-				text-align: right;
+				//text-align: right;
 			});
 
 			&.marquee {
@@ -101,7 +107,7 @@
 				}
 
 				.tooltipLabel {
-					text-align: right;
+					//text-align: right;
 					border-top-right-radius: 0;
 				}
 			}
@@ -152,7 +158,7 @@
 				}
 
 				.tooltipLabel {
-					text-align: right;
+					//text-align: right;
 					border-bottom-right-radius: 0;
 				}
 			}
