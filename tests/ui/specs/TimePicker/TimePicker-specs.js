@@ -136,25 +136,23 @@ describe('TimePicker', function () {
 					expect(value).to.equal(expected);
 				});
 
-				// it('should change the meridiem on hour boundaries', function () {
-				// 	const {meridiem} = extractValues(timePicker);
-				// 	console.log(meridiem);
-				// 	if (meridiem === 'AM') {
-				// 		// 12 hours ought to change the value text if meridiem changes
-				// 		for (let i = 12; i; i -= 1) {
-				// 			timePicker.incrementer(timePicker.hour).click();
-				// 		}
-				// 	} else {
-				// 		// 12 hours ought to change the value text if meridiem changes
-				// 		for (let i = 12; i; i -= 1) {
-				// 			console.log(i);
-				// 			timePicker.decrementer(timePicker.hour).click();
-				// 		}
-				// 	}
-				//
-				// 	const {meridiem: value} = extractValues(timePicker);
-				// 	expect(value !== meridiem).to.be.true();
-				// });
+				it('should change the meridiem on hour boundaries', function () {
+					const {meridiem} = extractValues(timePicker);
+					if (meridiem === 'AM') {
+						// 12 hours ought to change the value text if meridiem changes
+						for (let i = 12; i; i -= 1) {
+							timePicker.incrementer(timePicker.hour).click();
+						}
+					} else {
+						// 12 hours ought to change the value text if meridiem changes
+						for (let i = 12; i; i -= 1) {
+							timePicker.decrementer(timePicker.hour).click();
+						}
+					}
+
+					const {meridiem: value} = extractValues(timePicker);
+					expect(value !== meridiem).to.be.true();
+				});
 			});
 		});
 

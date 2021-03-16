@@ -60,23 +60,23 @@ describe('DateTimePicker', function () {
 					expect(value).to.equal(expected);
 				});
 
-				// it('should change the meridiem on hour boundaries', function () {
-				// 	const {meridiem} = extractValues(dateTimePicker);
-				// 	if (meridiem === 'AM') {
-				// 		// 12 hours ought to change the value text if meridiem changes
-				// 		for (let i = 12; i; i -= 1) {
-				// 			dateTimePicker.incrementer(dateTimePicker.hour).click();
-				// 		}
-				// 	} else {
-				// 		// 12 hours ought to change the value text if meridiem changes
-				// 		for (let i = 12; i; i -= 1) {
-				// 			dateTimePicker.decrementer(dateTimePicker.hour).click();
-				// 		}
-				// 	}
-				//
-				// 	const {meridiem: value} = extractValues(dateTimePicker);
-				// 	expect(value !== meridiem).to.be.true();
-				// });
+				it('should change the meridiem on hour boundaries', function () {
+					const {meridiem} = extractValues(dateTimePicker);
+					if (meridiem === 'AM') {
+						// 12 hours ought to change the value text if meridiem changes
+						for (let i = 12; i; i -= 1) {
+							dateTimePicker.incrementer(dateTimePicker.hour).click();
+						}
+					} else {
+						// 12 hours ought to change the value text if meridiem changes
+						for (let i = 12; i; i -= 1) {
+							dateTimePicker.decrementer(dateTimePicker.hour).click();
+						}
+					}
+
+					const {meridiem: value} = extractValues(dateTimePicker);
+					expect(value !== meridiem).to.be.true();
+				});
 
 				it('should increase the month when incrementing the picker', function () {
 					const {month} = extractValues(dateTimePicker);
