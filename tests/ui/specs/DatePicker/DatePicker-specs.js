@@ -84,63 +84,63 @@ describe('DatePicker', function () {
 				});
 			});
 
-			// describe('pointer', function () {
-			// 	it('should increase the month when incrementing the picker', function () {
-			// 		const {month} = extractValues(datePicker);
-			// 		datePicker.incrementer(datePicker.month).click();
-			// 		expect(datePicker.incrementer(datePicker.month).isFocused()).to.be.true();
-			// 		const {month: value} = extractValues(datePicker);
-			// 		const expected = month < 12 ? month + 1 : 1;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			//
-			// 	it('should decrease the month when decrementing the picker', function () {
-			// 		const {month} = extractValues(datePicker);
-			// 		datePicker.decrementer(datePicker.month).click();
-			// 		expect(datePicker.decrementer(datePicker.month).isFocused()).to.be.true();
-			// 		const {month: value} = extractValues(datePicker);
-			// 		const expected = month > 1 ? month - 1 : 12;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			//
-			// 	it('should increase the day when incrementing the picker', function () {
-			// 		const {day, month, year} = extractValues(datePicker);
-			// 		const numDays = daysInMonth({month, year});
-			// 		datePicker.incrementer(datePicker.day).click();
-			// 		expect(datePicker.incrementer(datePicker.day).isFocused()).to.be.true();
-			// 		const {day: value} = extractValues(datePicker);
-			// 		const expected = day !== numDays ? day + 1 : 1;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			//
-			// 	it('should decrease the day when decrementing the picker', function () {
-			// 		const {day, month, year} = extractValues(datePicker);
-			// 		const numDays = daysInMonth({month, year});
-			// 		datePicker.decrementer(datePicker.day).click();
-			// 		expect(datePicker.decrementer(datePicker.day).isFocused()).to.be.true();
-			// 		const {day: value} = extractValues(datePicker);
-			// 		const expected = day !== 1 ? day - 1 : numDays;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			//
-			// 	it('should increase the year when incrementing the picker', function () {
-			// 		const {year} = extractValues(datePicker);
-			// 		datePicker.incrementer(datePicker.year).click();
-			// 		expect(datePicker.incrementer(datePicker.year).isFocused()).to.be.true();
-			// 		const {year: value} = extractValues(datePicker);
-			// 		const expected = year + 1;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			//
-			// 	it('should decrease the year when decrementing the picker', function () {
-			// 		const {year} = extractValues(datePicker);
-			// 		datePicker.decrementer(datePicker.year).click();
-			// 		expect(datePicker.decrementer(datePicker.year).isFocused()).to.be.true();
-			// 		const {year: value} = extractValues(datePicker);
-			// 		const expected = year - 1;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			// });
+			describe('pointer', function () {
+				it('should increase the month when incrementing the picker', function () {
+					const {month} = extractValues(datePicker);
+					datePicker.incrementer(datePicker.month).click();
+					expect(datePicker.month.isFocused()).to.be.true();
+					const {month: value} = extractValues(datePicker);
+					const expected = month < 12 ? month + 1 : 1;
+					expect(value).to.equal(expected);
+				});
+
+				it('should decrease the month when decrementing the picker', function () {
+					const {month} = extractValues(datePicker);
+					datePicker.decrementer(datePicker.month).click();
+					expect(datePicker.month.isFocused()).to.be.true();
+					const {month: value} = extractValues(datePicker);
+					const expected = month > 1 ? month - 1 : 12;
+					expect(value).to.equal(expected);
+				});
+
+				it('should increase the day when incrementing the picker', function () {
+					const {day, month, year} = extractValues(datePicker);
+					const numDays = daysInMonth({month, year});
+					datePicker.incrementer(datePicker.day).click();
+					expect(datePicker.day.isFocused()).to.be.true();
+					const {day: value} = extractValues(datePicker);
+					const expected = day !== numDays ? day + 1 : 1;
+					expect(value).to.equal(expected);
+				});
+
+				it('should decrease the day when decrementing the picker', function () {
+					const {day, month, year} = extractValues(datePicker);
+					const numDays = daysInMonth({month, year});
+					datePicker.decrementer(datePicker.day).click();
+					expect(datePicker.day.isFocused()).to.be.true();
+					const {day: value} = extractValues(datePicker);
+					const expected = day !== 1 ? day - 1 : numDays;
+					expect(value).to.equal(expected);
+				});
+
+				it('should increase the year when incrementing the picker', function () {
+					const {year} = extractValues(datePicker);
+					datePicker.incrementer(datePicker.year).click();
+					expect(datePicker.year.isFocused()).to.be.true();
+					const {year: value} = extractValues(datePicker);
+					const expected = year + 1;
+					expect(value).to.equal(expected);
+				});
+
+				it('should decrease the year when decrementing the picker', function () {
+					const {year} = extractValues(datePicker);
+					datePicker.decrementer(datePicker.year).click();
+					expect(datePicker.year.isFocused()).to.be.true();
+					const {year: value} = extractValues(datePicker);
+					const expected = year - 1;
+					expect(value).to.equal(expected);
+				});
+			});
 		});
 
 		describe('with \'defaultValue\'', function () {

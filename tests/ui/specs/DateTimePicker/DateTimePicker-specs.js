@@ -25,115 +25,115 @@ describe('DateTimePicker', function () {
 				expect(dateTimePicker.year.isFocused(), 'Year').to.be.true();
 			});
 
-			// describe('pointer', function () {
-			// 	it('should increase the hour when incrementing the picker', function () {
-			// 		const {hour} = extractValues(dateTimePicker);
-			// 		dateTimePicker.incrementer(dateTimePicker.hour).click();
-			// 		const {hour: value} = extractValues(dateTimePicker);
-			// 		const expected = hour < 12 ? hour + 1 : 1;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			//
-			// 	it('should decrease the hour when decrementing the picker', function () {
-			// 		const {hour} = extractValues(dateTimePicker);
-			// 		dateTimePicker.decrementer(dateTimePicker.hour).click();
-			// 		const {hour: value} = extractValues(dateTimePicker);
-			// 		const expected = hour > 1 ? hour - 1 : 12;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			//
-			// 	it('should increase the minute when incrementing the picker', function () {
-			// 		const {minute} = extractValues(dateTimePicker);
-			// 		dateTimePicker.incrementer(dateTimePicker.minute).click();
-			// 		browser.waitUntil(() => dateTimePicker.incrementer(dateTimePicker.minute).isFocused(), {timeout: 1500,  interval: 100});
-			// 		const {minute: value} = extractValues(dateTimePicker);
-			// 		const expected = minute !== 59 ? minute + 1 : 0;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			//
-			// 	it('should decrease the minute when decrementing the picker', function () {
-			// 		const {minute} = extractValues(dateTimePicker);
-			// 		dateTimePicker.decrementer(dateTimePicker.minute).click();
-			// 		browser.waitUntil(() => dateTimePicker.decrementer(dateTimePicker.minute).isFocused(), {timeout: 1500,  interval: 100});
-			// 		const {minute: value} = extractValues(dateTimePicker);
-			// 		const expected = minute !== 0 ? minute - 1 : 59;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			//
-			// 	it('should change the meridiem on hour boundaries', function () {
-			// 		const {meridiem} = extractValues(dateTimePicker);
-			// 		if (meridiem === 'AM') {
-			// 			// 12 hours ought to change the value text if meridiem changes
-			// 			for (let i = 12; i; i -= 1) {
-			// 				dateTimePicker.incrementer(dateTimePicker.hour).click();
-			// 			}
-			// 		} else {
-			// 			// 12 hours ought to change the value text if meridiem changes
-			// 			for (let i = 12; i; i -= 1) {
-			// 				dateTimePicker.decrementer(dateTimePicker.hour).click();
-			// 			}
-			// 		}
-			//
-			// 		const {meridiem: value} = extractValues(dateTimePicker);
-			// 		expect(value !== meridiem).to.be.true();
-			// 	});
-			//
-			// 	it('should increase the month when incrementing the picker', function () {
-			// 		const {month} = extractValues(dateTimePicker);
-			// 		dateTimePicker.incrementer(dateTimePicker.month).click();
-			// 		expect(dateTimePicker.incrementer(dateTimePicker.month).isFocused()).to.be.true();
-			// 		const {month: value} = extractValues(dateTimePicker);
-			// 		const expected = month < 12 ? month + 1 : 1;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			//
-			// 	it('should decrease the month when decrementing the picker', function () {
-			// 		const {month} = extractValues(dateTimePicker);
-			// 		dateTimePicker.decrementer(dateTimePicker.month).click();
-			// 		expect(dateTimePicker.decrementer(dateTimePicker.month).isFocused()).to.be.true();
-			// 		const {month: value} = extractValues(dateTimePicker);
-			// 		const expected = month > 1 ? month - 1 : 12;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			//
-			// 	it('should increase the day when incrementing the picker', function () {
-			// 		const {day, month, year} = extractValues(dateTimePicker);
-			// 		const numDays = daysInMonth({month, year});
-			// 		dateTimePicker.incrementer(dateTimePicker.day).click();
-			// 		expect(dateTimePicker.incrementer(dateTimePicker.day).isFocused()).to.be.true();
-			// 		const {day: value} = extractValues(dateTimePicker);
-			// 		const expected = day !== numDays ? day + 1 : 1;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			//
-			// 	it('should decrease the day when decrementing the picker', function () {
-			// 		const {day, month, year} = extractValues(dateTimePicker);
-			// 		const numDays = daysInMonth({month, year});
-			// 		dateTimePicker.decrementer(dateTimePicker.day).click();
-			// 		expect(dateTimePicker.decrementer(dateTimePicker.day).isFocused()).to.be.true();
-			// 		const {day: value} = extractValues(dateTimePicker);
-			// 		const expected = day !== 1 ? day - 1 : numDays;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			//
-			// 	it('should increase the year when incrementing the picker', function () {
-			// 		const {year} = extractValues(dateTimePicker);
-			// 		dateTimePicker.incrementer(dateTimePicker.year).click();
-			// 		expect(dateTimePicker.incrementer(dateTimePicker.year).isFocused()).to.be.true();
-			// 		const {year: value} = extractValues(dateTimePicker);
-			// 		const expected = year + 1;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			//
-			// 	it('should decrease the year when decrementing the picker', function () {
-			// 		const {year} = extractValues(dateTimePicker);
-			// 		dateTimePicker.decrementer(dateTimePicker.year).click();
-			// 		expect(dateTimePicker.decrementer(dateTimePicker.year).isFocused()).to.be.true();
-			// 		const {year: value} = extractValues(dateTimePicker);
-			// 		const expected = year - 1;
-			// 		expect(value).to.equal(expected);
-			// 	});
-			// });
+			describe('pointer', function () {
+				it('should increase the hour when incrementing the picker', function () {
+					const {hour} = extractValues(dateTimePicker);
+					dateTimePicker.incrementer(dateTimePicker.hour).click();
+					const {hour: value} = extractValues(dateTimePicker);
+					const expected = hour < 12 ? hour + 1 : 1;
+					expect(value).to.equal(expected);
+				});
+
+				it('should decrease the hour when decrementing the picker', function () {
+					const {hour} = extractValues(dateTimePicker);
+					dateTimePicker.decrementer(dateTimePicker.hour).click();
+					const {hour: value} = extractValues(dateTimePicker);
+					const expected = hour > 1 ? hour - 1 : 12;
+					expect(value).to.equal(expected);
+				});
+
+				it('should increase the minute when incrementing the picker', function () {
+					const {minute} = extractValues(dateTimePicker);
+					dateTimePicker.incrementer(dateTimePicker.minute).click();
+					browser.waitUntil(() => dateTimePicker.minute.isFocused(), {timeout: 1500,  interval: 100});
+					const {minute: value} = extractValues(dateTimePicker);
+					const expected = minute !== 59 ? minute + 1 : 0;
+					expect(value).to.equal(expected);
+				});
+
+				it('should decrease the minute when decrementing the picker', function () {
+					const {minute} = extractValues(dateTimePicker);
+					dateTimePicker.decrementer(dateTimePicker.minute).click();
+					browser.waitUntil(() => dateTimePicker.minute.isFocused(), {timeout: 1500,  interval: 100});
+					const {minute: value} = extractValues(dateTimePicker);
+					const expected = minute !== 0 ? minute - 1 : 59;
+					expect(value).to.equal(expected);
+				});
+
+				// it('should change the meridiem on hour boundaries', function () {
+				// 	const {meridiem} = extractValues(dateTimePicker);
+				// 	if (meridiem === 'AM') {
+				// 		// 12 hours ought to change the value text if meridiem changes
+				// 		for (let i = 12; i; i -= 1) {
+				// 			dateTimePicker.incrementer(dateTimePicker.hour).click();
+				// 		}
+				// 	} else {
+				// 		// 12 hours ought to change the value text if meridiem changes
+				// 		for (let i = 12; i; i -= 1) {
+				// 			dateTimePicker.decrementer(dateTimePicker.hour).click();
+				// 		}
+				// 	}
+				//
+				// 	const {meridiem: value} = extractValues(dateTimePicker);
+				// 	expect(value !== meridiem).to.be.true();
+				// });
+
+				it('should increase the month when incrementing the picker', function () {
+					const {month} = extractValues(dateTimePicker);
+					dateTimePicker.incrementer(dateTimePicker.month).click();
+					expect(dateTimePicker.month.isFocused()).to.be.true();
+					const {month: value} = extractValues(dateTimePicker);
+					const expected = month < 12 ? month + 1 : 1;
+					expect(value).to.equal(expected);
+				});
+
+				it('should decrease the month when decrementing the picker', function () {
+					const {month} = extractValues(dateTimePicker);
+					dateTimePicker.decrementer(dateTimePicker.month).click();
+					expect(dateTimePicker.month.isFocused()).to.be.true();
+					const {month: value} = extractValues(dateTimePicker);
+					const expected = month > 1 ? month - 1 : 12;
+					expect(value).to.equal(expected);
+				});
+
+				it('should increase the day when incrementing the picker', function () {
+					const {day, month, year} = extractValues(dateTimePicker);
+					const numDays = daysInMonth({month, year});
+					dateTimePicker.incrementer(dateTimePicker.day).click();
+					expect(dateTimePicker.day.isFocused()).to.be.true();
+					const {day: value} = extractValues(dateTimePicker);
+					const expected = day !== numDays ? day + 1 : 1;
+					expect(value).to.equal(expected);
+				});
+
+				it('should decrease the day when decrementing the picker', function () {
+					const {day, month, year} = extractValues(dateTimePicker);
+					const numDays = daysInMonth({month, year});
+					dateTimePicker.decrementer(dateTimePicker.day).click();
+					expect(dateTimePicker.day.isFocused()).to.be.true();
+					const {day: value} = extractValues(dateTimePicker);
+					const expected = day !== 1 ? day - 1 : numDays;
+					expect(value).to.equal(expected);
+				});
+
+				it('should increase the year when incrementing the picker', function () {
+					const {year} = extractValues(dateTimePicker);
+					dateTimePicker.incrementer(dateTimePicker.year).click();
+					expect(dateTimePicker.year.isFocused()).to.be.true();
+					const {year: value} = extractValues(dateTimePicker);
+					const expected = year + 1;
+					expect(value).to.equal(expected);
+				});
+
+				it('should decrease the year when decrementing the picker', function () {
+					const {year} = extractValues(dateTimePicker);
+					dateTimePicker.decrementer(dateTimePicker.year).click();
+					expect(dateTimePicker.year.isFocused()).to.be.true();
+					const {year: value} = extractValues(dateTimePicker);
+					const expected = year - 1;
+					expect(value).to.equal(expected);
+				});
+			});
 		});
 
 		describe('with \'defaultValue\'', function () {
