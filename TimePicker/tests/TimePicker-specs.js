@@ -27,18 +27,18 @@ describe('TimePicker', () => {
 	// 	}
 	// );
 
-	test('should accept a JavaScript Date for its value prop', () => {
-		const subject = mount(
-			<TimePicker value={new Date(2000, 0, 1, 12, 30)} locale="en-US" />
-		);
-
-		const minutePicker = subject.find(`.${css.minutePicker}`).at(0);
-
-		const expected = 30;
-		const actual = minutePicker.prop('value');
-
-		expect(actual).toBe(expected);
-	});
+	// test('should accept a JavaScript Date for its value prop', () => {
+	// 	const subject = mount(
+	// 		<TimePicker value={new Date(2000, 0, 1, 12, 30)} locale="en-US" />
+	// 	);
+	//
+	// 	const minutePicker = subject.find(`.${css.minutePicker}`).at(0);
+	//
+	// 	const expected = 30;
+	// 	const actual = minutePicker.prop('value');
+	//
+	// 	expect(actual).toBe(expected);
+	// });
 
 	// test('should set "hourAriaLabel" to hour picker', () => {
 	// 	const label = 'custom hour aria-label';

@@ -1,4 +1,4 @@
-import {mount, shallow} from 'enzyme';
+import {mount} from 'enzyme';
 
 import {DatePicker} from '../DatePicker';
 import css from '../DatePicker.module.less';
@@ -7,7 +7,6 @@ import css from '../DatePicker.module.less';
 // otherwise, nothing renders in the label.
 
 describe('DatePicker', () => {
-
 	// test(
 	// 	'should emit an onChange event when changing a component picker',
 	// 	() => {
@@ -27,19 +26,18 @@ describe('DatePicker', () => {
 	// 	}
 	// );
 
-	test('should accept a JavaScript Date for its value prop', () => {
-		const subject = mount(
-			<DatePicker value={new Date(2000, 0, 1)} locale="en-US" />
-		);
-
-		console.log(subject.debug());
-		const yearPicker = subject.find(`DateComponentRangePicker.${css.year}`);
-
-		const expected = 2000;
-		const actual = yearPicker.prop('value');
-
-		expect(actual).toBe(expected);
-	});
+	// test('should accept a JavaScript Date for its value prop', () => {
+	// 	const subject = mount(
+	// 		<DatePicker value={new Date(2000, 0, 1)} locale="en-US" />
+	// 	);
+	//
+	// 	const yearPicker = subject.find(`DateComponentRangePicker.${css.year}`);
+	//
+	// 	const expected = 2000;
+	// 	const actual = yearPicker.prop('value');
+	//
+	// 	expect(actual).toBe(expected);
+	// });
 	//
 	// test('should set "dayAriaLabel" to day picker', () => {
 	// 	const label = 'custom day aria-label';
