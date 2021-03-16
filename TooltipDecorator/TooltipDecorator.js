@@ -461,7 +461,7 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 				if (!tooltipRelative) {
 					renderedTooltip = (
-                        <FloatingLayerBase open={this.state.showing} noAutoDismiss onDismiss={this.hideTooltip} scrimType="none" key="tooltipFloatingLayer">
+						<FloatingLayerBase open={this.state.showing} noAutoDismiss onDismiss={this.hideTooltip} scrimType="none" key="tooltipFloatingLayer">
 							{renderedTooltip}
 						</FloatingLayerBase>
 					);
