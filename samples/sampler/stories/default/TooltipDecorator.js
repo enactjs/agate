@@ -38,7 +38,7 @@ storiesOf('Agate', module)
 	.add(
 		'TooltipDecorator',
 		() => (
-			<div style={{textAlign: 'center'}}>
+			<div style={{marginTop: '100px', textAlign: 'center'}}>
 				<TooltipButton
 					backgroundOpacity={select('backgroundOpacity', ['opaque', 'lightOpaque', 'transparent'], Config)}
 					disabled={boolean('disabled', Config)}

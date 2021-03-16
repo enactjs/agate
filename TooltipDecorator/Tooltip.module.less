@@ -42,6 +42,7 @@
 				height: 100%;
 			}
 		}
+
 		&.rightArrow,
 		&.leftArrow {
 			.tooltipArrow {
@@ -49,11 +50,13 @@
 				height: @agate-tooltip-point-height;
 			}
 		}
+
 		&.centerArrow .tooltipArrow {
 			width: @agate-tooltip-point-width;
 			height: @agate-tooltip-point-height;
 			left: 50%;
 		}
+
 		&.middleArrow .tooltipArrow {
 			width: @agate-tooltip-point-width;
 			height: @agate-tooltip-point-height;
@@ -72,12 +75,8 @@
 			padding: @agate-tooltip-padding;
 			border-radius: @agate-tooltip-border-radius;
 
-			.enact-locale-rtl({
-				//text-align: right;
-			});
-
 			&.marquee {
-				max-width: var(--sand-tooltip-label-width,  @agate-tooltip-marquee-width); // If using a marquee, use the preferred width, and if none is provided, fall back to our default variable.
+				max-width: var(--agate-tooltip-label-width,  @agate-tooltip-marquee-width); // If using a marquee, use the preferred width, and if none is provided, fall back to our default variable.
 			}
 
 			&.multi {
@@ -89,7 +88,7 @@
 		// Positioning for the arrow and label
 		&.below {
 			.tooltipArrow {
-				top: (@agate-tooltip-offset + 3px);
+				top: (@agate-tooltip-offset + 4px);
 			}
 
 			.tooltipLabel {
@@ -107,7 +106,6 @@
 				}
 
 				.tooltipLabel {
-					//text-align: right;
 					border-top-right-radius: 0;
 				}
 			}
@@ -140,7 +138,7 @@
 
 		&.above {
 			.tooltipArrow {
-				bottom: (@agate-tooltip-offset + 3px);
+				bottom: (@agate-tooltip-offset + 4px);
 			}
 
 			.tooltipLabel {
@@ -158,7 +156,6 @@
 				}
 
 				.tooltipLabel {
-					//text-align: right;
 					border-bottom-right-radius: 0;
 				}
 			}
@@ -187,7 +184,7 @@
 
 		&.left {
 			.tooltipArrow {
-				right: (@agate-tooltip-offset + 3px);
+				right: (@agate-tooltip-offset + 4px);
 			}
 
 			.tooltipLabel {
@@ -232,7 +229,7 @@
 
 		&.right {
 			.tooltipArrow {
-				left: (@agate-tooltip-offset + 3px);
+				left: (@agate-tooltip-offset + 4px);
 			}
 
 			.tooltipLabel {
