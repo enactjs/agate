@@ -3,16 +3,17 @@ const {Page} = require('@enact/ui-test-utils/utils');
 const {element} = require('@enact/ui-test-utils/utils');
 
 class RangePickerInterface {
-	constructor (id) {
-		this.id = id;
+	constructor (className) {
+		this.className = className;
+		this.selector = `.${this.className}`;
 	}
 
 	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}>div`));
+		return browser.execute((el) => el.focus(), $(`.${this.className}>div`));
 	}
 
 	get self () {
-		return $(`#${this.id}`, browser);
+		return $(this.selector);
 	}
 
 	get rangePicker () {

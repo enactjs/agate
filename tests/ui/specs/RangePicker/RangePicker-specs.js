@@ -17,7 +17,7 @@ describe('RangePicker', function () {
 					Page.spotlightDown();
 					browser.pause(500);
 					const newValue = extractValue(rangePicker);
-					expect(newValue).to.equal(5);
+					expect(newValue).to.equal(10);
 				});
 
 				it('should change the value backward when decrementing the rangePicker', function () {
@@ -30,21 +30,21 @@ describe('RangePicker', function () {
 			});
 
 			describe('pointer', function () {
-				// it('should increase the value when incrementing the rangePicker', function () {
-				// 	rangePicker.incrementer(rangePicker.self).click();
-				// 	browser.pause(500);
-				// 	const newValue = extractValue(rangePicker);
-				// 	expect(newValue).to.equal(5);
-				// });
-				//
-				// it('should decrease the value when decrementing the rangePicker', function () {
-				// 	rangePicker.incrementer(rangePicker.self).click();
-				// 	expect(rangePicker.incrementer(rangePicker.self).isFocused()).to.be.true();
-				// 	rangePicker.decrementer(rangePicker.self).click();
-				// 	browser.pause(500);
-				// 	const newValue = extractValue(rangePicker);
-				// 	expect(newValue).to.equal(0);
-				// });
+				it('should increase the value when incrementing the rangePicker', function () {
+					rangePicker.incrementer(rangePicker.self).click();
+					expect(rangePicker.self.isFocused()).to.be.true();
+					browser.pause(500);
+					const newValue = extractValue(rangePicker);
+					expect(newValue).to.equal(10);
+				});
+
+				it('should decrease the value when decrementing the rangePicker', function () {
+					rangePicker.decrementer(rangePicker.self).click();
+					expect(rangePicker.self.isFocused()).to.be.true();
+					browser.pause(500);
+					const newValue = extractValue(rangePicker);
+					expect(newValue).to.equal(0);
+				});
 			});
 		});
 
@@ -73,23 +73,23 @@ describe('RangePicker', function () {
 				});
 			});
 
-			// describe('pointer', function () {
-			// 	it('should not increase the value when clicking the incrementer', function () {
-			// 		const oldValue = extractValue(rangePicker);
-			// 		rangePicker.incrementer(rangePicker.self).click();
-			// 		browser.pause(500);
-			// 		const newValue = extractValue(rangePicker);
-			// 		expect(newValue).to.equal(oldValue);
-			// 	});
-			//
-			// 	it('should not decrease the value when clicking the decrementer', function () {
-			// 		const oldValue = extractValue(rangePicker);
-			// 		rangePicker.decrementer(rangePicker.self).click();
-			// 		browser.pause(500);
-			// 		const newValue = extractValue(rangePicker);
-			// 		expect(newValue).to.equal(oldValue);
-			// 	});
-			// });
+			describe('pointer', function () {
+				it('should not increase the value when clicking the incrementer', function () {
+					const oldValue = extractValue(rangePicker);
+					rangePicker.incrementer(rangePicker.self).click();
+					browser.pause(500);
+					const newValue = extractValue(rangePicker);
+					expect(newValue).to.equal(oldValue);
+				});
+
+				it('should not decrease the value when clicking the decrementer', function () {
+					const oldValue = extractValue(rangePicker);
+					rangePicker.decrementer(rangePicker.self).click();
+					browser.pause(500);
+					const newValue = extractValue(rangePicker);
+					expect(newValue).to.equal(oldValue);
+				});
+			});
 		});
 
 		describe('with \'negativeValues\'', function () {

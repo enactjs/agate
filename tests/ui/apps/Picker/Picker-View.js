@@ -10,13 +10,13 @@ const pickerList = [
 
 const app = (props) => <div {...props}>
 	<div style={{display:'inline-block', width: '30%'}}>
-		<Picker id="pickerDefault">{pickerList}</Picker>
+		<Picker className="pickerDefault">{pickerList}</Picker>
 	</div>
 	<div style={{display:'inline-block', width: '30%'}}>
-		<Picker defaultValue={1} disabled id="pickerDisabled">{pickerList}</Picker>
+		<Picker defaultValue={1} disabled className="pickerDisabled">{pickerList}</Picker>
 	</div>
 	<div style={{display:'inline-block', width: '30%'}}>
-		<Picker defaultValue={1} id="pickerWithDefaultValue">{pickerList}</Picker>
+		<Picker defaultValue={1} className="pickerWithDefaultValue">{pickerList}</Picker>
 	</div>
 </div>;
 

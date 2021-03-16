@@ -588,14 +588,12 @@ const DrumPickerBase = class extends Component {
 	};
 
 	handleDecrement = () => {
-		console.log("decremeneting")
 		this.handleClick(-1);
-	}
+	};
 
 	handleIncrement = () => {
-		console.log("incrementing")
 		this.handleClick(1);
-	}
+	};
 
 	handleClick = (direction) => {
 		const {orientation, wrap} = this.props;
@@ -681,36 +679,36 @@ const DrumPickerBase = class extends Component {
 			'aria-disabled':disabled,
 			'aria-label':decrementAriaLabel,
 			className: classnames(css.itemDecrement, css.item)
-		}
+		};
 
 		const itemIncrementProps = {
 			'aria-controls': this.valueId(id),
 			'aria-disabled':disabled,
 			'aria-label':incrementAriaLabel,
 			className: classnames(css.itemIncrement, css.item)
-		}
+		};
 
 		const selectedItemProps = {
 			className: classnames(css.selectedItem, css.item)
-		}
+		};
 
 		const otherItemProps = {
 			className: css.item
-		}
+		};
 
 		values = values.map((value, index) => {
 			let itemProps;
 			let onClickEvent;
-			if (this.state.selectedIndex === index+1) {
+			if (this.state.selectedIndex === index + 1) {
 				itemProps = itemDecrementProps;
 				onClickEvent = this.handleDecrement;
-			} else if (this.state.selectedIndex === index-1) {
+			} else if (this.state.selectedIndex === index - 1) {
 				itemProps = itemIncrementProps;
 				onClickEvent = this.handleIncrement;
 			} else if (this.state.selectedIndex === index) {
-				itemProps = selectedItemProps
+				itemProps = selectedItemProps;
 			} else {
-				itemProps = otherItemProps
+				itemProps = otherItemProps;
 			}
 			return (
 				<div

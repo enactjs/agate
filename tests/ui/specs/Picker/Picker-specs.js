@@ -30,21 +30,24 @@ describe('Picker', function () {
 			});
 
 			describe('pointer', function () {
-				// it('should increase the value when incrementing the picker', function () {
-				// 	picker.self.click();
-				// 	browser.pause(500);
-				// 	const newValue = extractValue(picker);
-				// 	expect(newValue).to.equal('Banana');
-				// });
-				//
-				// it('should decrease the value when decrementing the picker', function () {
-				// 	picker.self.click();
-				// 	expect(picker.self.isFocused()).to.be.true();
-				// 	picker.self.click();
-				// 	browser.pause(500);
-				// 	const newValue = extractValue(picker);
-				// 	expect(newValue).to.equal('Apple');
-				// });
+				it('should increase the value when incrementing the picker', function () {
+					picker.incrementer(picker.self).click();
+					expect(picker.self.isFocused()).to.be.true();
+					browser.pause(500);
+					const newValue = extractValue(picker);
+					expect(newValue).to.equal('Banana');
+				});
+
+				it('should decrease the value when decrementing the picker', function () {
+					// first increment to second option the decrement back to first option
+					picker.incrementer(picker.self).click();
+					picker.decrementer(picker.self).click();
+					expect(picker.self.isFocused()).to.be.true();
+					picker.self.click();
+					browser.pause(500);
+					const newValue = extractValue(picker);
+					expect(newValue).to.equal('Apple');
+				});
 			});
 		});
 
@@ -84,21 +87,21 @@ describe('Picker', function () {
 			});
 
 			describe('pointer', function () {
-				// it('should not increase the value when clicking the incrementer', function () {
-				// 	const oldValue = extractValue(picker);
-				// 	picker.self.click();
-				// 	browser.pause(500);
-				// 	const newValue = extractValue(picker);
-				// 	expect(newValue).to.equal(oldValue);
-				// });
-				//
-				// it('should not decrease the value when clicking the decrementer', function () {
-				// 	const oldValue = extractValue(picker);
-				// 	picker.self.click();
-				// 	browser.pause(500);
-				// 	const newValue = extractValue(picker);
-				// 	expect(newValue).to.equal(oldValue);
-				// });
+				it('should not increase the value when clicking the incrementer', function () {
+					const oldValue = extractValue(picker);
+					picker.incrementer(picker.self).click();
+					browser.pause(500);
+					const newValue = extractValue(picker);
+					expect(newValue).to.equal(oldValue);
+				});
+
+				it('should not decrease the value when clicking the decrementer', function () {
+					const oldValue = extractValue(picker);
+					picker.decrementer(picker.self).click();
+					browser.pause(500);
+					const newValue = extractValue(picker);
+					expect(newValue).to.equal(oldValue);
+				});
 			});
 		});
 	});
