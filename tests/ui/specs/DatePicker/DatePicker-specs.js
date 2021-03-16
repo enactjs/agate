@@ -254,15 +254,7 @@ describe('DatePicker', function () {
 		});
 
 		it('should have day-month-year order', function () {
-			Page.spotlightRight();
-			Page.spotlightRight();
-			Page.spotlightRight();
-			Page.spotlightRight();
-			Page.spotlightRight();
-			Page.spotlightRight();
-			Page.spotlightRight();
-			Page.spotlightRight();
-			Page.spotlightRight();
+			datePicker.focus()
 			Page.spotlightRight();
 			Page.spotlightRight();
 

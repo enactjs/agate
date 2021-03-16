@@ -587,7 +587,46 @@ const DrumPickerBase = class extends Component {
 		}
 	};
 
-	valueId =  ({id}) => `${id}_value`;
+	handleDecrement = () => {
+		console.log("decremeneting")
+		this.handleClick(-1);
+	}
+
+	handleIncrement = () => {
+		console.log("incrementing")
+		this.handleClick(1);
+	}
+
+	handleClick = (direction) => {
+		const {orientation, wrap} = this.props;
+
+		if (!this.props.disabled && this.children.length > 0) {
+			let itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
+			let itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
+
+			if (itemHeight === 0) {
+				itemHeight = 1;
+			}
+			if (itemWidth === 0) {
+				itemWidth = 1;
+			}
+
+			if (!this.props.noAnimation) {
+				this.contentRef.style.transition = 'transform 300ms';
+			}
+			if (orientation === 'horizontal') {
+				this.scrollTo(wrap ? this.wrapRange(0, this.children.length - 1, this.scrollX / itemWidth + direction) : clamp(0, this.children.length - 1, this.scrollX / itemWidth + direction));
+			} else if (orientation === 'vertical') {
+				this.scrollTo(wrap ? this.wrapRange(0, this.children.length - 1, this.scrollY / itemHeight + direction) : clamp(0, this.children.length - 1, this.scrollY / itemHeight + direction));
+			}
+			// remove transition for further touch related changes
+			setTimeout(() => {
+				this.contentRef.style.transition = 'none';
+			}, 300);
+		}
+	};
+
+	valueId =  (id) => `${id}_value`;
 
 	initRef (prop) {
 		return (ref) => {
@@ -600,6 +639,7 @@ const DrumPickerBase = class extends Component {
 		const {
 			className,
 			disabled,
+			id,
 			onSpotlightDisappear,
 			orientation,
 			spotlightDisabled,
@@ -636,9 +676,48 @@ const DrumPickerBase = class extends Component {
 		delete rest.value;
 		delete rest.wrap;
 
+		const itemDecrementProps = {
+			'aria-controls': this.valueId(id),
+			'aria-disabled':disabled,
+			'aria-label':decrementAriaLabel,
+			className: classnames(css.itemDecrement, css.item)
+		}
+
+		const itemIncrementProps = {
+			'aria-controls': this.valueId(id),
+			'aria-disabled':disabled,
+			'aria-label':incrementAriaLabel,
+			className: classnames(css.itemIncrement, css.item)
+		}
+
+		const selectedItemProps = {
+			className: classnames(css.selectedItem, css.item)
+		}
+
+		const otherItemProps = {
+			className: css.item
+		}
+
 		values = values.map((value, index) => {
+			let itemProps;
+			let onClickEvent;
+			if (this.state.selectedIndex === index+1) {
+				itemProps = itemDecrementProps;
+				onClickEvent = this.handleDecrement;
+			} else if (this.state.selectedIndex === index-1) {
+				itemProps = itemIncrementProps;
+				onClickEvent = this.handleIncrement;
+			} else if (this.state.selectedIndex === index) {
+				itemProps = selectedItemProps
+			} else {
+				itemProps = otherItemProps
+			}
 			return (
-				<div className={this.state.selectedIndex === index ? classnames(css.selectedItem, css.item) : css.item} key={index}>
+				<div
+					key={index}
+					{...itemProps}
+					onClick={onClickEvent}
+				>
 					{sizingPlaceholder}
 					{value}
 				</div>
@@ -667,24 +746,10 @@ const DrumPickerBase = class extends Component {
 				spotlightDisabled={spotlightDisabled}
 			>
 				<div
-					aria-controls={this.valueId}
-					aria-disabled={disabled}
-					aria-label={decrementAriaLabel}
-					className={classnames(css.itemDecrement, css.item)}
-					disabled={disabled || this.state.selectedIndex === 0}
-				/>
-				<div
 					aria-label={indicatorAriaLabel}
 					aria-valuetext={currentValueText}
 					className={classnames(css.indicator, css.item)}
 					ref={this.initIndicatorRef}
-				/>
-				<div
-					aria-controls={this.valueId}
-					aria-disabled={disabled}
-					aria-label={incrementAriaLabel}
-					className={classnames(css.itemIncrement, css.item)}
-					disabled={disabled || this.state.selectedIndex === values.length - 1}
 				/>
 				<div
 					className={css.root}
