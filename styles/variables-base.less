@@ -56,11 +56,13 @@
 // ArcPicker
 // ---------------------------------------
 @agate-arcpicker-value-display-height: inherit;
+@agate-arcpicker-value-display-max-width: 80%;
 @agate-arcpicker-font-size: inherit;
 @agate-arcpicker-font-weight: inherit;
 
 // ArcSlider
 // -------------------------------------------------
+@agate-arcslider-value-display-max-width: 80%;
 @agate-arcslider-font-size: inherit;
 @agate-arcslider-font-weight: inherit;
 
@@ -567,7 +569,7 @@
 @agate-progressbar-border-radius: @agate-slider-border-radius;
 @agate-progressbar-track-transform: @agate-slider-track-transform;
 @agate-progressbar-vertical-track-transform: none;
-@agate-progressbar-tooltip-offset: 12px;
+@agate-progressbar-tooltip-offset: 6px;
 @agate-progressbar-tooltip-above-offset: @agate-progressbar-tooltip-offset;
 @agate-progressbar-tooltip-below-offset: @agate-progressbar-tooltip-offset;
 @agate-progressbar-tooltip-before-offset: @agate-progressbar-tooltip-offset;
@@ -588,7 +590,6 @@
 @agate-slider-knob-border-width: 0;
 @agate-slider-knob-resting-state-scale: 1;
 @agate-slider-knob-transform: @agate-translate-center;
-@agate-slider-knob-height: @agate-slider-height;
 @agate-slider-knob-width: @agate-slider-knob-height;
 @agate-slider-border-radius: @agate-slider-height;
 @agate-slider-horizontal-margin: 0 @agate-component-spacing;
@@ -601,10 +602,10 @@
 @agate-slider-track-width: @agate-slider-track-height;
 @agate-slider-bg-transform: none;
 @agate-slider-track-transform: none;
-@agate-slider-tooltip-above-offset: (@agate-progressbar-height / 2);
-@agate-slider-tooltip-below-offset: (@agate-progressbar-height / -2);
-@agate-slider-tooltip-before-offset: (@agate-progressbar-height / 2);
-@agate-slider-tooltip-after-offset: (@agate-progressbar-height / -2);
+@agate-slider-tooltip-above-offset: (@agate-slider-knob-height / -3);
+@agate-slider-tooltip-below-offset: (@agate-slider-knob-height / 3);
+@agate-slider-tooltip-before-offset: (@agate-slider-knob-height / -3);
+@agate-slider-tooltip-after-offset: (@agate-slider-knob-height / 3);
 
 // IncrementSlider
 // ---------------------------------------
@@ -730,7 +731,7 @@
 // Tooltip
 // ---------------------------------------
 @agate-tooltip-label-font-size: inherit;
-@agate-tooltip-offset: 9px;
+@agate-tooltip-offset: 3px;
 @agate-tooltip-point-width: 12px;
 @agate-tooltip-point-height: 12px;
 @agate-tooltip-border-width: 1px;
@@ -738,6 +739,7 @@
 @agate-tooltip-label-height: 45px;
 @agate-tooltip-label-font-weight: @agate-button-font-weight;
 @agate-tooltip-padding: 3px 18px;
+@agate-tooltip-marquee-width: 600px;
 
 // WindDirectionControl
 // ---------------------------------------
