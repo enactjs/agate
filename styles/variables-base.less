@@ -320,8 +320,8 @@
 // ---------------------------------------
 @agate-indicator-align-self:    inherit;
 @agate-indicator-border-radius: inherit;
-@agate-indicator-display:       inherit;
-@agate-indicator-height:        inherit;
+@agate-indicator-display:       0;
+@agate-indicator-height:        0;
 @agate-indicator-margin-right:  inherit;
 
 // Input
@@ -394,15 +394,19 @@
 @agate-item-height:                   60px;
 @agate-item-height-large:             72px;
 @agate-item-indent:                   36px;
-@agate-item-inline-content-max-width: 240px;
+@agate-item-inline-content-max-width: 420px;
 @agate-item-itemcontent-line-height:  inherit;
 @agate-item-inline-max-width:         400px;
+@agate-item-inline-min-width:         480px;
+@agate-item-labelafterbefore-content-min-width: 201px;
+@agate-item-labelafterbefore-label-max-width: 150px;
 @agate-item-label-font-size:          inherit;
 @agate-item-label-line-height:        inherit;
 @agate-item-label-max-width:          40%;
 @agate-item-label-padding:            10px;
 @agate-item-line-height:              @agate-item-height - (@agate-item-vertical-padding * 2);
 @agate-item-line-height-large:        @agate-item-height-large - (@agate-item-vertical-padding * 2);
+@agate-item-max-width:                auto;
 @agate-item-side-outset:              @agate-component-spacing;
 @agate-item-slotafter-spacing:        @agate-component-spacing;
 @agate-item-slotbefore-spacing:       @agate-component-spacing;
@@ -415,7 +419,6 @@
 @agate-item-small-label-font-size:    inherit;
 @agate-item-small-label-line-height:  inherit;
 @agate-item-small-haslabel-padding:   12px 0;
-@agate-item-slotafter-padding-left:   inherit;
 
 // Keypad
 // ---------------------------------------
