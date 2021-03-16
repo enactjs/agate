@@ -16,12 +16,12 @@
  */
 
 import kind from '@enact/core/kind';
+import {HeadingBase as UiHeadingBase} from '@enact/ui/Heading';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import defaultProps from 'recompose/defaultProps';
 import setPropTypes from 'recompose/setPropTypes';
-import UiHeading from '@enact/ui/Heading';
 
 import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
@@ -109,7 +109,7 @@ const HeadingBase = kind({
 	render: ({css, ...rest}) => {
 		delete rest.color;
 		delete rest.showLine;
-		return UiHeading.inline({css, ...rest});
+		return UiHeadingBase.inline({css, ...rest});
 	}
 });
 
