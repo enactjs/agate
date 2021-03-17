@@ -262,10 +262,7 @@ const InputBase = kind({
 			return calcAriaLabel(title, type, value);
 		},
 		className: ({focused, iconBefore, iconAfter, invalid, size, styler, value}) =>
-			styler.append(
-				{emptyValue: !value, focused, invalid, hasIconBefore: iconBefore, hasIconAfter: iconAfter},
-				size
-			),
+			styler.append({emptyValue: !value, focused, invalid, hasIconBefore: iconBefore, hasIconAfter: iconAfter}, size),
 		dir: ({value, placeholder}) => isRtlText(value || placeholder) ? 'rtl' : 'ltr',
 		invalidTooltip: ({css, invalid, invalidMessage = $L('Please enter a valid value.')}) => {
 			if (invalid && invalidMessage) {
