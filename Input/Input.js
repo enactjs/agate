@@ -265,7 +265,7 @@ const InputBase = kind({
 			styler.append(
 				{focused, invalid, hasIconBefore: iconBefore, hasIconAfter: iconAfter},
 				size,
-				value === '' || value === undefined ? 'emptyValue' : ''
+				!value ? 'emptyValue' : ''
 			),
 		dir: ({value, placeholder}) => isRtlText(value || placeholder) ? 'rtl' : 'ltr',
 		invalidTooltip: ({css, invalid, invalidMessage = $L('Please enter a valid value.')}) => {
