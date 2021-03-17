@@ -161,7 +161,7 @@ describe('TimePicker', function () {
 			const timePicker = Page.components.timePickerWithDefaultValue;
 
 			describe('5-way', function () {
-				it('should not update on when incrementing the picker', function () {
+				it('should not update when incrementing the picker', function () {
 					timePicker.focus();
 					Page.spotlightDown();
 					Page.spotlightRight();
@@ -174,7 +174,7 @@ describe('TimePicker', function () {
 					expect(meridiem).to.equal('AM');
 				});
 
-				it('should not update on when decrementing the picker', function () {
+				it('should not update when decrementing the picker', function () {
 					timePicker.focus();
 					Page.spotlightDown();
 					Page.spotlightRight();

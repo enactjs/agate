@@ -1,8 +1,9 @@
 import {mount} from 'enzyme';
 
 import DrumPicker from '../DrumPicker';
-import css from '../DrumPicker.module.less';
 import DrumPickerItem from '../DrumPickerItem';
+
+import css from '../DrumPicker.module.less';
 
 const keyDown = (keyCode) => (picker) => picker.find(`.${css.root}`).first().simulate('keydown', {keyCode});
 

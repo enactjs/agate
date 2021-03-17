@@ -148,7 +148,7 @@ describe('DatePicker', function () {
 			const datePicker = Page.components.datePickerWithDefaultValue;
 
 			describe('5-way', function () {
-				it('should not update on when incrementing the picker', function () {
+				it('should not update when incrementing the picker', function () {
 					datePicker.focus();
 					Page.spotlightRight();
 					Page.spotlightDown();
@@ -160,7 +160,7 @@ describe('DatePicker', function () {
 					expect(year).to.equal(2020);
 				});
 
-				it('should not update on when decrementing the picker', function () {
+				it('should not update when decrementing the picker', function () {
 					datePicker.focus();
 					Page.spotlightRight();
 					Page.spotlightUp();
