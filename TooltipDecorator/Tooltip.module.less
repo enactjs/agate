@@ -4,21 +4,23 @@
 @import "../styles/mixins.less";
 @import "../styles/skin.less";
 
-
-.tail (@edge, @point) {
-	background-image: linear-gradient(to @edge, @agate-tooltip-border-color @agate-tooltip-border-width, transparent @agate-tooltip-border-width), // Edge line
-	linear-gradient(to @point @edge, @agate-tooltip-bg-color 50%, @agate-tooltip-border-color 50%, @agate-tooltip-border-color ~"calc(50% + 1px)", transparent ~"calc(50% + 1px)"); // Diagonal line + fill
+.tail (@origin, @rotate, @skewX, @skewY) {
+	left: 0;
+	transform-origin: @origin;
+	transform: rotate(@rotate) skew(@skewX, @skewY);
 }
 
-.centerTail (@edge, @point) {
-	background-image: linear-gradient(to @point @edge, @agate-tooltip-bg-color 50%, @agate-tooltip-border-color 50%, @agate-tooltip-border-color ~"calc(50% + 1px)", transparent ~"calc(50% + 1px)"); // Diagonal line + fill
+.centerTail (@origin, @rotate, @skew) {
+	transform-origin: @origin;
+	transform: rotate(@rotate) skew(@skew, @skew);
 }
 
 .tooltip {
 	position: absolute;
 	z-index: 1;
+	pointer-events: none;
 	.applySkins({
-		// You'll notice tiny adjustments to the position: 0.5px, 1px, 4px, etc. in the following code.
+		// You'll notice tiny adjustments to the position: 0.5px, 3px, etc. in the following code.
 		// These are to account for sub-pixel rendering on scaled or "imperfect" rendering scenarios
 		// where hairline gaps can be seen between the tail and the body.
 
@@ -27,57 +29,49 @@
 			width: @agate-tooltip-point-width;
 			height: @agate-tooltip-point-height;
 			z-index: 1;
-		}
 
-		&.rightArrow,
-		&.leftArrow {
-			.tooltipArrow {
-				width: @agate-tooltip-point-height;
-				height: 12px;
-			}
-		}
-
-		&.centerArrow,
-		&.middleArrow {
-			.tooltipArrow::after {
+			&::after {
 				content: "";
 				position: absolute;
 				width: 100%;
 				height: 100%;
 			}
 		}
-
-		&.centerArrow .tooltipArrow {
-			width: ((@agate-tooltip-point-height / 2) + 3px);
-			height: @agate-tooltip-point-width;
-			left: 50%;
-
-			&::after {
-				right: ((@agate-tooltip-point-height / 2) + 1px);
+		&.rightArrow,
+		&.leftArrow {
+			.tooltipArrow {
+				width: @agate-tooltip-point-width;
+				height: @agate-tooltip-point-height;
 			}
 		}
-
+		&.centerArrow .tooltipArrow {
+			width: @agate-tooltip-point-width;
+			height: @agate-tooltip-point-height;
+			left: 50%;
+		}
 		&.middleArrow .tooltipArrow {
 			width: @agate-tooltip-point-width;
-			height: ((@agate-tooltip-point-height / 2) + 2px);
+			height: @agate-tooltip-point-height;
 			top: 50%;
-
-			&::after {
-				bottom: 99%;
-				left: 0;
-			}
 		}
 
 		.tooltipLabel {
+			--agate-tooltip-label-width: auto;
+
 			font-size: @agate-tooltip-label-font-size;
 			font-weight: @agate-tooltip-label-font-weight;
 			line-height: @agate-tooltip-label-height;
 			white-space: nowrap;
+			width: var(--agate-tooltip-label-width); // assign a width if necessary, but without a width, "auto" is just fine.
 			padding: @agate-tooltip-padding;
 			border-radius: @agate-tooltip-border-radius;
 
-			:global(.enact-locale-right-to-left) & {
+			.enact-locale-rtl({
 				text-align: right;
+			});
+
+			&.marquee {
+				max-width: var(--sand-tooltip-label-width,  @agate-tooltip-marquee-width); // If using a marquee, use the preferred width, and if none is provided, fall back to our default variable.
 			}
 
 			&.multi {
@@ -89,7 +83,7 @@
 		// Positioning for the arrow and label
 		&.below {
 			.tooltipArrow {
-				top: (1px + @agate-tooltip-offset);
+				top: (@agate-tooltip-offset + 3px);
 			}
 
 			.tooltipLabel {
@@ -99,6 +93,11 @@
 			&.leftArrow {
 				.tooltipArrow {
 					right: 0;
+					overflow: hidden;
+
+					&::after {
+						.tail(top right; -45deg; -45deg; -5deg);
+					}
 				}
 
 				.tooltipLabel {
@@ -110,12 +109,21 @@
 			&.centerArrow {
 				.tooltipArrow {
 					left: 50%;
+
+					&::after {
+						.centerTail(top left; 45deg; 5deg);
+					}
 				}
 			}
 
 			&.rightArrow {
 				.tooltipArrow {
 					left: 0;
+					overflow: hidden;
+
+					&::after {
+						.tail(top left; 45deg; 45deg; 5deg);
+					}
 				}
 
 				.tooltipLabel {
@@ -126,7 +134,7 @@
 
 		&.above {
 			.tooltipArrow {
-				bottom: (1.5px + @agate-tooltip-offset);
+				bottom: (@agate-tooltip-offset + 3px);
 			}
 
 			.tooltipLabel {
@@ -136,6 +144,11 @@
 			&.leftArrow {
 				.tooltipArrow {
 					right: 0;
+					overflow: hidden;
+
+					&::after {
+						.tail(bottom right; 45deg; 45deg; 5deg);
+					}
 				}
 
 				.tooltipLabel {
@@ -144,16 +157,20 @@
 				}
 			}
 
-			// Commented out because it isn't necessary to specify anything for this case at this time
-			// but kept in the code here in case we need to in the future.
-			// &.centerArrow {
-			// 	.tooltipArrow {
-			// 	}
-			// }
+			&.centerArrow {
+				.tooltipArrow::after {
+					.centerTail(bottom left; -45deg; -5deg);
+				}
+			}
 
 			&.rightArrow {
 				.tooltipArrow {
 					left: 0;
+					overflow: hidden;
+
+					&::after {
+						.tail(bottom left; -45deg; -45deg; -5deg);
+					}
 				}
 
 				.tooltipLabel {
@@ -164,16 +181,21 @@
 
 		&.left {
 			.tooltipArrow {
-				right: (1px + @agate-tooltip-offset);
+				right: (@agate-tooltip-offset + 3px);
 			}
 
 			.tooltipLabel {
-				margin-right: (@agate-tooltip-point-width + @agate-tooltip-offset);
+				margin-right: (@agate-tooltip-point-width + 3px);
 			}
 
 			&.topArrow {
 				.tooltipArrow {
 					bottom: 0;
+					overflow: hidden;
+
+					&::after {
+						.tail(bottom right; -45deg; 5deg; 45deg);
+					}
 				}
 
 				.tooltipLabel {
@@ -182,12 +204,20 @@
 			}
 
 			&.middleArrow {
-				.tooltipArrow {
-					right: (1.5px + @agate-tooltip-offset);
+				.tooltipArrow::after {
+					.centerTail(top right; 45deg; -5deg);
 				}
 			}
 
 			&.bottomArrow {
+				.tooltipArrow {
+					overflow: hidden;
+
+					&::after {
+						.tail(top right; 45deg; 5deg; -45deg);
+					}
+				}
+
 				.tooltipLabel {
 					border-top-right-radius: 0;
 				}
@@ -196,16 +226,21 @@
 
 		&.right {
 			.tooltipArrow {
-				left: (1px + @agate-tooltip-offset);
+				left: (@agate-tooltip-offset + 3px);
 			}
 
 			.tooltipLabel {
-				margin-left: (@agate-tooltip-point-width + @agate-tooltip-offset);
+				margin-left: (@agate-tooltip-point-height + @agate-tooltip-offset);
 			}
 
 			&.topArrow {
 				.tooltipArrow {
 					bottom: 0;
+					overflow: hidden;
+
+					&::after {
+						.tail(bottom left; 45deg; -5deg; -45deg);
+					}
 				}
 
 				.tooltipLabel {
@@ -214,12 +249,20 @@
 			}
 
 			&.middleArrow {
-				.tooltipArrow {
-					left: (1.5px + @agate-tooltip-offset);
+				.tooltipArrow::after {
+					.centerTail(top left; -45deg; 5deg);
 				}
 			}
 
 			&.bottomArrow {
+				.tooltipArrow {
+					overflow: hidden;
+
+					&::after {
+						.tail(top left; -45deg; 5deg; 45deg);
+					}
+				}
+
 				.tooltipLabel {
 					border-top-left-radius: 0;
 				}
@@ -230,12 +273,16 @@
 		&.absolute {
 			width: 0;
 			height: 0;
+			top: var(--tooltip-position-top);
+			left: var(--tooltip-position-left);
 
 			.tooltipAnchor {
 				position: absolute;
 			}
 
 			&.below {
+				top: ~"calc(var(--tooltip-position-top) + " @agate-tooltip-offset ~")";
+
 				&.leftArrow .tooltipAnchor {
 					transform: translateX(-100%);
 				}
@@ -249,6 +296,8 @@
 			}
 
 			&.above {
+				top: ~"calc(var(--tooltip-position-top) - " @agate-tooltip-offset ~")";
+
 				&.leftArrow .tooltipAnchor {
 					transform: translate(-100%, -100%);
 				}
@@ -263,6 +312,8 @@
 			}
 
 			&.left {
+				left: ~"calc(var(--tooltip-position-left) - " @agate-tooltip-offset ~")";
+
 				&.topArrow .tooltipAnchor {
 					transform: translate(-100%, -100%);
 				}
@@ -277,6 +328,8 @@
 			}
 
 			&.right {
+				left: ~"calc(var(--tooltip-position-left) + " @agate-tooltip-offset ~")";
+
 				&.topArrow .tooltipAnchor {
 					transform: translate(0, -100%);
 				}
@@ -285,7 +338,8 @@
 					transform: translate(0, -50%);
 				}
 
-				&.bottomArrow .tooltipAnchor { /* transform: translate(0, 0); */
+				&.bottomArrow .tooltipAnchor {
+					/* transform: translate(0, 0); */
 				}
 			}
 		}
@@ -293,7 +347,11 @@
 		// Relative positioning mode - position rules
 		&.relative {
 			&.below {
-				top: 100%;
+				top: ~"calc(100% + " @agate-tooltip-offset ~")";
+
+				&.transparent {
+					top: ~"calc(100% + " @agate-tooltip-offset ~")";
+				}
 
 				&.leftArrow {
 					right: 50%;
@@ -310,7 +368,11 @@
 			}
 
 			&.above {
-				bottom: 100%;
+				bottom: ~"calc(100% + " @agate-tooltip-offset ~")";
+
+				&.transparent {
+					bottom: ~"calc(100% + " @agate-tooltip-offset ~")";
+				}
 
 				&.leftArrow {
 					right: 50%;
@@ -327,7 +389,11 @@
 			}
 
 			&.left {
-				right: 100%;
+				right: ~"calc(100% + " @agate-tooltip-offset ~")";
+
+				&.transparent {
+					right: ~"calc(100% + " @agate-tooltip-offset ~")";
+				}
 
 				&.topArrow {
 					bottom: 50%;
@@ -344,7 +410,11 @@
 			}
 
 			&.right {
-				left: 100%;
+				left: ~"calc(100% + " @agate-tooltip-offset ~")";
+
+				&.transparent {
+					left: ~"calc(100% + " @agate-tooltip-offset ~")";
+				}
 
 				&.topArrow {
 					bottom: 50%;
@@ -361,115 +431,21 @@
 			}
 		}
 
-		:global(.enact-locale-right-to-left) & {
+		.enact-locale-rtl({
 			direction: ltr;
 
 			.tooltipAnchor {
 				direction: rtl;
 			}
-		}
+		});
 
-		// Drawing the arc/arrow shape using the mixin from above
-		&.below {
-			&.leftArrow {
-				.tooltipArrow {
-					.tail(left; top);
-				}
-			}
-
-			&.centerArrow {
-				.tooltipArrow {
-					.centerTail(right; top);
-				}
-
-				.tooltipArrow::after {
-					.centerTail(left; top);
-				}
-			}
-
-			&.rightArrow {
-				.tooltipArrow {
-					.tail(right; top);
-				}
-			}
-		}
-
-		&.above {
-			&.leftArrow {
-				.tooltipArrow {
-					.tail(left; bottom);
-				}
-			}
-
-			&.centerArrow {
-				.tooltipArrow {
-					.centerTail(right; bottom);
-				}
-
-				.tooltipArrow::after {
-					.centerTail(left; bottom);
-				}
-			}
-
-			&.rightArrow {
-				.tooltipArrow {
-					.tail(right; bottom);
-				}
-			}
-		}
-
-		&.left {
-			&.topArrow {
-				.tooltipArrow {
-					.tail(top; right);
-				}
-			}
-
-			&.middleArrow {
-				.tooltipArrow {
-					.centerTail(right; bottom);
-				}
-
-				.tooltipArrow::after {
-					.centerTail(right; top);
-				}
-			}
-
-			&.bottomArrow {
-				.tooltipArrow {
-					.tail(bottom; right);
-				}
-			}
-		}
-
-		&.right {
-			&.topArrow {
-				.tooltipArrow {
-					.tail(top; left);
-				}
-			}
-
-			&.middleArrow {
-				.tooltipArrow {
-					.centerTail(left; bottom);
-				}
-
-				.tooltipArrow::after {
-					.centerTail(left; top);
-				}
-			}
-
-			&.bottomArrow {
-				.tooltipArrow {
-					.tail(bottom; left);
-				}
-			}
+		.tooltipArrow::after {
+			background: @agate-tooltip-bg-color;
 		}
 
 		.tooltipLabel {
 			color: @agate-tooltip-text-color;
 			background-color: @agate-tooltip-bg-color;
-			border: @agate-tooltip-border-width solid @agate-tooltip-border-color;
 		}
 	});
 }
