@@ -81,6 +81,15 @@ describe('Slider', function () {
 			});
 		});
 
+		describe('with tooltip', function () {
+			const slider = Page.components.sliderWithTooltip;
+
+			it('should display a tooltip on focus', function () {
+				slider.focus();
+				expect(slider.tooltip.isExisting()).to.be.true();
+			});
+		});
+
 		describe('vertical slider', function () {
 			const slider = Page.components.sliderVertical;
 

@@ -2,7 +2,7 @@ import {scaleToRem} from '@enact/ui/resolution';
 
 import Heading from '../../../../Heading';
 import Scroller from '../../../../Scroller';
-import Slider from '../../../../Slider';
+import Slider, {SliderTooltip} from '../../../../Slider';
 import ThemeDecorator from '../../../../ThemeDecorator';
 
 const app = (props) => <div {...props}>
@@ -14,6 +14,10 @@ const app = (props) => <div {...props}>
 			<Slider activateOnFocus id="sliderActivateOnFocus"  />
 			<Heading>Slider custom progressAnchor</Heading>
 			<Slider activateOnFocus id="sliderCustomProgressAnchor" progressAnchor={0.7} />
+			<Heading>Slider with tooltip</Heading>
+			<Slider id="sliderWithTooltip">
+				<SliderTooltip />
+			</Slider>
 			<Heading>Slider vertical</Heading>
 			<Slider id="sliderVertical" max={10} orientation="vertical" />
 			<Heading>Slider disabled</Heading>
