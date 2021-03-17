@@ -111,27 +111,27 @@ describe('Picker Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should disable the increment button when there is no value to increment',
+	test('should have no increment button when there is no value to increment',
 		() => {
 			const picker = mount(
 				<DrumPicker max={2} min={0} value={2} />
 			);
 
-			const expected = true;
-			const actual = picker.find(`.${css.itemIncrement}`).first().prop('disabled');
+			const expected = false;
+			const actual = picker.find(`.${css.itemIncrement}`).exists();
 
 			expect(actual).toBe(expected);
 		}
 	);
 
-	test('should disable the decrement button when there is no value to decrement',
+	test('should have no decrement button when there is no value to decrement',
 		() => {
 			const picker = mount(
 				<DrumPicker max={2} min={0} value={0} />
 			);
 
-			const expected = true;
-			const actual = picker.find(`.${css.itemDecrement}`).first().prop('disabled');
+			const expected = false;
+			const actual = picker.find(`.${css.itemDecrement}`).exists();
 
 			expect(actual).toBe(expected);
 		}
