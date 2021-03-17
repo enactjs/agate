@@ -15,6 +15,7 @@ import {is} from '@enact/core/keymap';
 import {clamp} from '@enact/core/util';
 import Spottable from '@enact/spotlight/Spottable';
 import IdProvider from '@enact/ui/internal/IdProvider';
+import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import {Children, Component} from 'react';
@@ -26,7 +27,6 @@ import Skinnable from '../../Skinnable';
 import DrumPickerItem from './DrumPickerItem';
 
 import css from './DrumPicker.module.less';
-import * as ri from '@enact/ui/resolution';
 
 const Div = Spottable('div');
 
@@ -109,7 +109,7 @@ const DrumPickerBase = class extends Component {
 		'aria-valuetext': PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
 		/**
-		 * Children from which to pick
+		 * Children from which to pick.
 		 *
 		 * @type {Node}
 		 * @public
@@ -125,7 +125,8 @@ const DrumPickerBase = class extends Component {
 		className: PropTypes.string,
 
 		/**
-		 * Customize component style
+		 * Customizes the component by mapping the supplied collection of CSS class names
+		 * to the corresponding internal elements and states of this component.
 		 *
 		 * @type {Object}
 		 * @private
@@ -271,8 +272,7 @@ const DrumPickerBase = class extends Component {
 		]),
 
 		/**
-		 * Should the picker stop incrementing when the picker reaches the last element? Set `wrap`
-		 * to `true` to allow the picker to continue from the opposite end of the list of options.
+		 * Allows picker to continue from the start of the list after it reaches the end and vice-versa.
 		 *
 		 * @type {Boolean}
 		 * @public
@@ -352,7 +352,7 @@ const DrumPickerBase = class extends Component {
 		}
 	}
 
-	calculateChildren= (min, max, step, value) => {
+	calculateChildren = (min, max, step, value) => {
 		if (!Array.isArray(this.props.children)) {
 			const childrenArray = Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step)) );
 			return (Children.map(childrenArray, (child) => (
@@ -377,7 +377,7 @@ const DrumPickerBase = class extends Component {
 			if (this.scrollY !== val * itemHeight) {
 				this.scrollY = val * itemHeight;
 
-				this.contentRef.style.transform = `translate(0,${-((val + 1) * itemHeight)}rem)`;
+				this.contentRef.style.transform = `translate(0, ${-((val + 1) * itemHeight)}rem)`;
 
 				if (this.scrollY >= 0 && (child || child === 0)) {
 					this.changeValue(index, child);
@@ -389,7 +389,7 @@ const DrumPickerBase = class extends Component {
 			if (this.scrollX !== val * itemWidth) {
 				this.scrollX = val * itemWidth;
 
-				this.contentRef.style.transform = `translate(${-((val + 1) * itemWidth)}rem,0)`;
+				this.contentRef.style.transform = `translate(${-((val + 1) * itemWidth)}rem, 0)`;
 
 				if (this.scrollX >= 0 && (child || child === 0)) {
 					this.changeValue(index, child);
@@ -424,7 +424,7 @@ const DrumPickerBase = class extends Component {
 		if (this.props.orientation === 'vertical') {
 			const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
 			this.scrollY = (this.lastY - ( position.pageY / unitToPixelFactor) + this.startY);
-			this.contentRef.style.transform = `translate(0,${-this.scrollY - itemHeight}rem)`;
+			this.contentRef.style.transform = `translate(0, ${-this.scrollY - itemHeight}rem)`;
 		} else {
 			const itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
 			this.scrollX = (this.lastX - (position.pageX / unitToPixelFactor) + this.startX);
@@ -477,7 +477,6 @@ const DrumPickerBase = class extends Component {
 			} else {
 				onChange({value});
 			}
-
 		}
 	};
 
