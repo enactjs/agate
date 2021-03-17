@@ -14,6 +14,8 @@
 		vertical-align: middle;
 		max-width: @agate-input-max-width;
 		min-width: @agate-input-min-width;
+		border-bottom: @agate-input-decorator-border-bottom-width solid @agate-input-border-color;
+		opacity: @agate-input-decorator-opacity;
 
 		.input {
 			padding: @agate-input-padding-top-bottom @agate-input-padding-right @agate-input-padding-top-bottom @agate-input-padding-left;
@@ -127,7 +129,6 @@
 		}
 
 		&.large {
-
 			.icon {
 				font-size: @agate-input-large-icon-font-size;
 				height: @agate-input-large-icon-height;
@@ -161,6 +162,24 @@
 			}
 		}
 
+		&:not(.emptyValue) {
+			opacity: @agate-input-decorator-has-value-opacity;
+
+			input {
+				opacity: @agate-input-has-value-opacity;
+			}
+
+			.icon {
+				&.iconAfter {
+					opacity: @agate-input-has-value-opacity;
+				}
+
+				&.iconBefore {
+					opacity: @agate-input-has-value-opacity;
+				}
+			}
+		}
+
 		// Spotlight Colors
 
 		// an Input that isn't spottable is behaviorly disabled but not visually
@@ -173,6 +192,34 @@
 			background-color: @agate-input-focused-background-color;
 			background-image: @agate-input-focused-background-image;
 			box-shadow: 0 0 0 @agate-input-decorator-focus-border-width @agate-input-decorator-focused-border-color;
+			border-color: @agate-input-active-border-color;
+			border-width: 0 0 @agate-input-decorator-border-bottom-width;
+			opacity: 1;
+
+
+			&.emptyValue {
+				.icon {
+					&.iconAfter {
+						 opacity: @agate-input-icon-empty-value-focused-opacity;
+					}
+
+					&.iconBefore {
+						 opacity: @agate-input-icon-empty-value-focused-opacity;
+					}
+				}
+			}
+
+			&:not(.emptyValue) {
+				.icon {
+					&.iconAfter {
+						opacity: @agate-input-focused-opacity;
+					}
+
+					&.iconBefore {
+						opacity: @agate-input-focused-opacity;
+					}
+				}
+			}
 
 			.input {
 				caret-color: @agate-input-caret-color;
@@ -182,7 +229,7 @@
 				opacity: @agate-input-focused-opacity;
 
 				&::placeholder {
-					opacity: @agate-input-opacity;
+					opacity: @agate-input-placeholder-focused-opacity;
 				}
 			}
 
@@ -204,5 +251,11 @@
 				color: @agate-red;
 			}
 		}
+
+		&[disabled] {
+			.vendor-opacity(@agate-disabled-opacity);
+		}
 	});
+
+	
 }

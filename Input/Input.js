@@ -261,7 +261,12 @@ const InputBase = kind({
 			const title = (value == null || value === '') ? placeholder : '';
 			return calcAriaLabel(title, type, value);
 		},
-		className: ({focused, iconBefore, iconAfter, invalid, size, styler}) => styler.append({focused, invalid, hasIconBefore: iconBefore, hasIconAfter: iconAfter}, size),
+		className: ({focused, iconBefore, iconAfter, invalid, size, styler, value}) =>
+			styler.append(
+				{focused, invalid, hasIconBefore: iconBefore, hasIconAfter: iconAfter},
+				size,
+				value === '' || value === undefined ? 'emptyValue' : ''
+			),
 		dir: ({value, placeholder}) => isRtlText(value || placeholder) ? 'rtl' : 'ltr',
 		invalidTooltip: ({css, invalid, invalidMessage = $L('Please enter a valid value.')}) => {
 			if (invalid && invalidMessage) {
