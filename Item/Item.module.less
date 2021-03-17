@@ -61,10 +61,12 @@
 
 				&.labelBefore .label {
 					.padding-start-end(0, @agate-item-label-padding);
+					align-self: center;
 				}
 
 				&.labelAfter .label {
 					.padding-start-end(@agate-item-label-padding, 0);
+					align-self: center;
 				}
 			}
 		}
@@ -145,7 +147,8 @@
 
 		&.large {
 			height: @agate-item-large-height;
-			line-height: @agate-item-line-height-large;
+
+			&:not(&.hasLabel) { height: @agate-item-small-height; }
 		}
 
 		// TODO: needs to be modified when new requirements for small item is available
@@ -168,6 +171,12 @@
 				}
 			}
 		}
+
+		.disabled({
+			opacity: @agate-item-disabled-opacity;
+			color: @agate-item-disabled-color;
+			border-color: @agate-item-disabled-border-color;
+		});
 
 		.focus({
 			border-color: @agate-item-focus-border-color;
@@ -192,6 +201,7 @@
 			background-color: @agate-item-selected-bg-color;
 			border-color: @agate-item-selected-border-color;
 			color: @agate-item-focus-color;
+			padding: @agate-item-selected-padding;
 
 			&::before {
 				content: "";
@@ -202,6 +212,15 @@
 				align-self: @agate-indicator-align-self;
 				margin-right: @agate-indicator-margin-right;
 			}
+
+			.enact-locale-rtl({
+				padding: @agate-item-selected-rtl-padding;
+
+				&::before {
+					margin-left: @agate-indicator-rtl-margin-left;
+					margin-right: @agate-indicator-rtl-margin-right;
+				}
+			});
 
 			// Selected+Focus colors use both sets of colors
 			.focus({
