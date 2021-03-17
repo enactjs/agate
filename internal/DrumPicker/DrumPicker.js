@@ -729,6 +729,7 @@ const DrumPickerBase = class extends Component {
 				disabled={disabled}
 				onKeyDown={this.handleKeyDown}
 				onMouseDown={(evt) => this.onStart(evt)}
+				onMouseLeave={this.onFinish}
 				onMouseMove={(evt) => {
 					evt.preventDefault(); this.onMove(evt);
 				}}
