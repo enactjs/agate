@@ -39,7 +39,7 @@ const
 const useScrollButtons = (props) => {
 	const [prevButtonDisabled, setPrevButtonDisabled] = useState(true);
 	const [nextButtonDisabled, setNextButtonDisabled] = useState(true);
-	const [focusableScrollButtons] = useState(true);
+	const [focusableScrollButtons, setFocusableScrollButtons] = useState(true);
 
 	const nextButtonRef = createRef();
 	const prevButtonRef = createRef();
@@ -72,6 +72,7 @@ const useScrollButtons = (props) => {
 		if (updateNextButton) {
 			setNextButtonDisabled(shouldDisableNextButton);
 		}
+		setFocusableScrollButtons(props.focusableScrollButtons);
 	};
 
 	function isOneOfScrollButtonsFocused () {
