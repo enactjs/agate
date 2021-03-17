@@ -23,7 +23,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Spinner` prop `children` to support the display of text below the icon
 - `agate/Tooltip` prop `marquee` to allow to marquee
 - `agate/TooltipDecorator` prop `tooltipMarquee` to support marquee for long tooltip and prop `tooltipWidth` to set a width for tooltip text
-- `agate/WindDirectionControl` style to match latest design for Silicon skin
 
 ### Changed
 
@@ -40,6 +39,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
 - `agate/SliderButton` styling to visually show the focused state
 - `agate/TooltipDecorator` to position correctly on rtl locale
+- `agate/WindDirectionControl` style to match latest design for Silicon skin
 
 ## [2.0.0-alpha.1] - 2021-02-25
 
