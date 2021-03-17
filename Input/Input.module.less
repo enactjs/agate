@@ -165,18 +165,9 @@
 		&:not(.emptyValue) {
 			opacity: @agate-input-decorator-has-value-opacity;
 
-			input {
-				opacity: @agate-input-has-value-opacity;
-			}
-
+			input,
 			.icon {
-				&.iconAfter {
-					opacity: @agate-input-has-value-opacity;
-				}
-
-				&.iconBefore {
-					opacity: @agate-input-has-value-opacity;
-				}
+				opacity: @agate-input-has-value-opacity;
 			}
 		}
 
@@ -199,25 +190,13 @@
 
 			&.emptyValue {
 				.icon {
-					&.iconAfter {
-						 opacity: @agate-input-icon-empty-value-focused-opacity;
-					}
-
-					&.iconBefore {
-						 opacity: @agate-input-icon-empty-value-focused-opacity;
-					}
+					opacity: @agate-input-icon-empty-value-focused-opacity;
 				}
 			}
 
 			&:not(.emptyValue) {
 				.icon {
-					&.iconAfter {
-						opacity: @agate-input-focused-opacity;
-					}
-
-					&.iconBefore {
-						opacity: @agate-input-focused-opacity;
-					}
+					opacity: @agate-input-focused-opacity;
 				}
 			}
 
