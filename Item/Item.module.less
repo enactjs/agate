@@ -47,7 +47,6 @@
 		.agate-item-sizing();
 
 		max-width: @agate-item-max-width;
-		line-height: @agate-item-line-height;
 		border-style: solid;
 		border-width: @agate-item-border-width;
 		border-color: @agate-item-border-color;
@@ -118,7 +117,7 @@
 
 			&.hasLabel {
 				.itemContent {
-					max-width: 420px;
+					max-width: @agate-item-inline-content-max-width;
 
 					&.labelAfter,
 					&.labelBefore {
@@ -143,11 +142,13 @@
 			}
 		}
 
-		&.large { height: 120px;}
+		&.large {
+			height: @agate-item-large-height;
+		}
 
 		// TODO: needs to be modified when new requirements for small item is available
 		&.small {
-			height: 100px;
+			height: @agate-item-small-height;
 			font-size: @agate-item-small-font-size;
 			line-height: @agate-item-small-line-height;
 
