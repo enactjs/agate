@@ -21,11 +21,14 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Slider` prop `backgroundProgress`
 - `agate/SliderTooltip` component
 - `agate/Spinner` prop `children` to support the display of text below the icon
+- `agate/Tooltip` prop `marquee` to allow to marquee
+- `agate/TooltipDecorator` prop `tooltipMarquee` to support marquee for long tooltip and prop `tooltipWidth` to set a width for tooltip text
 
 ### Changed
 
 - `agate/Dropdown` to use `agate/ContextualPopup`
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
+- `agate/ArcPicker` and `agate/ArcSlider` to have a max-width for `slotCenter`
 
 ### Fixed
 
