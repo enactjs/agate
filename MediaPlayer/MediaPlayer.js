@@ -296,40 +296,38 @@ const MediaPlayerBase = kind({
 
 	render: ({currentTime, disabled, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, spotlightDisabled, total, ...rest}) => {
 		return (
-			<div {...rest}>
-				<Container spotlightDisabled={spotlightDisabled}>
-					<Media
-						loop={loop}
-						mediaComponent={mediaComponent}
-						onEnded={onEnded}
-						onUpdate={onUpdate}
-						ref={mediaRef}
-						source={playlist ? playlist[sourceIndex] : null}
-					/>
-					<MediaSlider
-						disabled={disabled}
-						onChange={onChange}
-						value={proportionPlayed}
-					/>
-					<Times
-						current={currentTime}
-						formatter={durFmt}
-						total={total}
-					/>
-					<MediaControls
-						disabled={disabled}
-						onNext={onNext}
-						onPause={onPause}
-						onPlay={onPlay}
-						onPrevious={onPrevious}
-						onRepeat={onRepeat}
-						onShuffle={onShuffle}
-						paused={paused}
-						repeat={repeat}
-						shuffle={shuffle}
-					/>
-				</Container>
-			</div>
+			<Container {...rest} spotlightDisabled={spotlightDisabled}>
+				<Media
+					loop={loop}
+					mediaComponent={mediaComponent}
+					onEnded={onEnded}
+					onUpdate={onUpdate}
+					ref={mediaRef}
+					source={playlist ? playlist[sourceIndex] : null}
+				/>
+				<MediaSlider
+					disabled={disabled}
+					onChange={onChange}
+					value={proportionPlayed}
+				/>
+				<Times
+					current={currentTime}
+					formatter={durFmt}
+					total={total}
+				/>
+				<MediaControls
+					disabled={disabled}
+					onNext={onNext}
+					onPause={onPause}
+					onPlay={onPlay}
+					onPrevious={onPrevious}
+					onRepeat={onRepeat}
+					onShuffle={onShuffle}
+					paused={paused}
+					repeat={repeat}
+					shuffle={shuffle}
+				/>
+			</Container>
 		);
 	}
 });

@@ -13,7 +13,7 @@ class MediaPlayerInterface {
 	}
 
 	hover (ariaLabel) {
-		return $(this.selector + `>div>div>div>div[aria-label=${ariaLabel}]`).moveTo({xOffset: 0, yOffset: 0});
+		return $(this.selector + `>div>div>div[aria-label=${ariaLabel}]`).moveTo({xOffset: 0, yOffset: 0});
 	}
 
 	get self () {
@@ -37,35 +37,35 @@ class MediaPlayerInterface {
 	}
 
 	get playButton () {
-		return $(this.selector + '>div>div>div>div.MediaPlayer_MediaControls_playPauseButton');
+		return $(this.selector + '>div>div>div.MediaPlayer_MediaControls_playPauseButton');
 	}
 
 	get previousButton () {
-		return $(this.selector + '>div>div>div>div[aria-label=Previous]');
+		return $(this.selector + '>div>div>div[aria-label=Previous]');
 	}
 
 	get nextButton () {
-		return $(this.selector + '>div>div>div>div[aria-label=Next]');
+		return $(this.selector + '>div>div>div[aria-label=Next]');
 	}
 
 	get shuffleButton () {
-		return $(this.selector + '>div>div>div>div[aria-label=Shuffle]');
+		return $(this.selector + '>div>div>div[aria-label=Shuffle]');
 	}
 
 	get repeatButton () {
-		return $(this.selector + '>div>div>div>div[aria-label=Repeat]');
+		return $(this.selector + '>div>div>div[aria-label=Repeat]');
 	}
 
 	get repeatStatus () {
-		return getText($(this.selector + '>div>div>div>div[aria-label=Repeat]' + '> .enact_ui_Button_Button_decoration > .Button_Button_badge'));
+		return getText($(this.selector + '>div>div>div[aria-label=Repeat]' + '> .enact_ui_Button_Button_decoration > .Button_Button_badge'));
 	}
 
 	get menuButton () {
-		return $(this.selector + '>div>div>div>div[aria-label=Menu]');
+		return $(this.selector + '>div>div>div[aria-label=Menu]');
 	}
 
 	get source () {
-		return $(this.selector + '>div>audio>source').getAttribute('src');
+		return $(this.selector + '>audio>source').getAttribute('src');
 	}
 }
 

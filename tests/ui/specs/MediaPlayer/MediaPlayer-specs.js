@@ -122,7 +122,7 @@ describe('MediaPlayer', function () {
 			mediaPlayerDisabled.nextButton.click();
 			Page.delay(1000);
 
-			expect(mediaPlayerDisabled.source).to.not.equal('https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3');
+			expect(mediaPlayerDisabled.source).to.equal('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
 		});
 
 		describe('5-way', function () {
