@@ -327,20 +327,16 @@
 // Input
 // ---------------------------------------
 @agate-input-border-width: 1px;
+@agate-input-decorator-border-bottom-width: 0;
 @agate-input-decorator-border-width: 1px;
 @agate-input-decorator-focus-border-width: 4px;
-@agate-input-decorator-height: inherit;
-
-@agate-input-decorator-border-bottom-width: 0;
-@agate-input-decorator-opacity: 1;
-@agate-input-placeholder-focused-opacity: @agate-input-opacity;
-@agate-input-icon-empty-value-focused-opacity: @agate-input-focused-opacity;
 @agate-input-decorator-has-value-opacity: @agate-input-decorator-opacity;
-@agate-input-has-value-opacity: @agate-input-opacity;
-
+@agate-input-decorator-height: inherit;
+@agate-input-decorator-opacity: 1;
 @agate-input-focused-opacity: inherit;
 @agate-input-font-size: 30px;
 @agate-input-font-weight: @agate-base-font-weight;
+@agate-input-has-value-opacity: @agate-input-opacity;
 @agate-input-hasiconafter-padding-right: inherit;
 @agate-input-hasiconbefore-padding-left: inherit;
 @agate-input-height: (@agate-icon-size - ((@agate-input-border-width * 2) + (extract(@agate-input-padding, 2) * 2)));
@@ -354,6 +350,7 @@
 @agate-input-icon-before-padding-right: 15px;
 @agate-input-icon-before-padding-top-bottom: inherit;
 @agate-input-icon-display: inherit;
+@agate-input-icon-empty-value-focused-opacity: @agate-input-focused-opacity;
 @agate-input-large-icon-after-padding-bottom: @agate-input-icon-after-padding-top-bottom;
 @agate-input-large-icon-after-padding-left: @agate-input-icon-after-padding-left;
 @agate-input-large-icon-after-padding-top: @agate-input-icon-after-padding-top-bottom;
@@ -370,6 +367,7 @@
 @agate-input-padding-right: 32px;
 @agate-input-padding-top-bottom: 21px;
 @agate-input-padding: 21px 32px;
+@agate-input-placeholder-focused-opacity: @agate-input-opacity;
 @agate-input-small-font-size: 24px;
 @agate-input-small-font-size: 24px;
 @agate-input-small-height: (@agate-button-small-height - (@agate-input-border-width * 2));
