@@ -294,9 +294,9 @@ const MediaPlayerBase = kind({
 		durFmt: ({locale}) => getDurFmt(locale)
 	},
 
-	render: ({currentTime, disabled, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, spotlightDisabled, total, ...rest}) => {
+	render: ({currentTime, disabled, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, total, ...rest}) => {
 		return (
-			<Container {...rest} spotlightDisabled={spotlightDisabled}>
+			<Container {...rest}>
 				<Media
 					loop={loop}
 					mediaComponent={mediaComponent}
