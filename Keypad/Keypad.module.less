@@ -44,6 +44,8 @@
 			}
 
 			.disabled({
+				opacity: @agate-keypad-button-disabled-opacity;
+
 				.bg {
 					background-color: @agate-keypad-button-bg-color;
 				}
@@ -55,6 +57,8 @@
 		}
 
 		.disabled({
+			opacity: @agate-keypad-button-disabled-opacity;
+
 			.bg {
 				background-color: @agate-keypad-button-bg-color;
 			}
@@ -62,6 +66,30 @@
 			.client {
 				color: @agate-keypad-button-color;
 			}
+
+			.focus({
+				.client {
+					color: @agate-keypad-button-focus-color;
+
+					.label {
+						color: @agate-keypad-button-focus-color;
+					}
+				}
+			});
+
+			.active({
+				.bg {
+					background-color: @agate-keypad-button-active-bg-color;
+				}
+
+				.client {
+					color: @agate-keypad-button-active-color;
+
+					.label {
+						color: @agate-keypad-button-active-color;
+					}
+				}
+			});
 		});
 
 		.bg {
@@ -75,6 +103,7 @@
 
 			.text {
 				font-size: @agate-keypad-text-font-size;
+				font-weight: @agate-keypad-text-font-weight;
 				line-height: @agate-keypad-text-line-height;
 			}
 
@@ -94,7 +123,13 @@
 		}
 
 		.focus({
+			.bg {
+				background-color: @agate-keypad-button-focus-bg-color;
+			}
+
 			.client {
+				color: @agate-keypad-button-focus-color;
+
 				.label {
 					color: @agate-keypad-button-focus-color;
 				}
@@ -114,22 +149,49 @@
 						color: @agate-keypad-button-active-color;
 					}
 				}
+
+				.focus({
+					.client {
+						color: @agate-keypad-button-focus-color;
+					}
+				});
 			});
 		}
 
 		// 'accept' and 'decline' classes are set for design requirements accuracy
+		&.accept,
+		&.decline {
+			.focus({
+				.client {
+					color: @agate-keypad-button-focus-color;
+				}
+			});
+
+			.active({
+				.focus({
+					.client {
+						color: @agate-keypad-button-focus-color;
+					}
+				});
+			});
+		}
+
 		&.accept {
 			.client {
 				color: #4cd964;
 			}
 
-			&:not([disabled]) {
-				.active({
-					.client {
-						color: #4cd964;
-					}
-				});
-			}
+			.active({
+				.client {
+					color: #4cd964;
+				}
+			});
+
+			.disabled({
+				.client {
+					color: #4cd964;
+				}
+			});
 		}
 
 		&.decline {
@@ -137,13 +199,17 @@
 				color: #f24949;
 			}
 
-			&:not([disabled]) {
-				.active({
-					.client {
-						color: #f24949;
-					}
-				});
-			}
+			.active({
+				.client {
+					color: #f24949;
+				}
+			});
+
+			.disabled({
+				.client {
+					color: #f24949;
+				}
+			});
 		}
 	});
 }
