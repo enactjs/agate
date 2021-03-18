@@ -24,7 +24,7 @@
 
 .active(@rules; @target) when (isruleset(@rules)) and (@target = parent) {
 	.spottable({
-		&:active {
+		&.pressed, &:active {
 			@rules();
 		}
 	}, @target);
@@ -32,7 +32,7 @@
 
 .active(@rules) when (isruleset(@rules)) {
 	.spottable({
-		&:active {
+		&.pressed, &:active {
 			@rules();
 		}
 	});
