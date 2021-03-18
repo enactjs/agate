@@ -22,6 +22,7 @@ storiesOf('Agate', module)
 			return (
 				<MediaPlayer
 					disabled={boolean('disabled', Config)}
+					spotlightDisabled={boolean('spotlightDisabled', Config)}
 				>
 					{
 						audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
