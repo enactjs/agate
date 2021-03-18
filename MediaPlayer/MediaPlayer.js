@@ -13,6 +13,7 @@ import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import {memoize} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
+import {SpotlightContainerDecorator} from '@enact/spotlight/SpotlightContainerDecorator';
 import {useAnnounce} from '@enact/ui/AnnounceDecorator';
 import Pure from '@enact/ui/internal/Pure';
 import Media from '@enact/ui/Media';
@@ -31,6 +32,10 @@ import Times from './Times';
 import {secondsToTime} from './util';
 
 import css from './MediaPlayer.module.less';
+
+const Container = SpotlightContainerDecorator({
+	enterTo: 'default-element'
+}, 'div');
 
 const forwardWithState = (type) => adaptEvent(call('addStateToEvent'), forwardWithPrevent(type));
 
@@ -79,6 +84,14 @@ const MediaPlayerBase = kind({
 		currentTime: PropTypes.number,
 
 		/**
+		 * Removes interactive capability from this component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		disabled: PropTypes.bool,
+
+		/**
 		 * The current locale as a
 		 * {@link https://tools.ietf.org/html/rfc5646|BCP 47 language tag}.
 		 *
@@ -98,11 +111,23 @@ const MediaPlayerBase = kind({
 		/**
 		 * Media component to use.
 		 *
-		 * The default (`'video'`) renders an `HTMLVideoElement`. Custom media components must have
+		 * The default (`'audio'`) renders an `HTMLMediaElement`. Custom media components must have
 		 * a similar API structure, exposing the following APIs:
 		 *
+		 * Properties:
+		 * * `currentTime` {Number} - Playback index of the media in seconds
+		 * * `duration` {Number} - Media's entire duration in seconds
+		 * * `loop` {Boolean} - Indicates whether the media element should start over when it reaches the end
+		 * * `paused` {Boolean} - Playing vs paused state. `true` means the media is paused
+		 * * `proportionPlayed` {Number} - A value between `0` and `1` representing the
+		 *	proportion of the media that has already been played
+		 *
 		 * Methods:
+		 * * `play()` - play media
+		 * * `pause()` - pause media
 		 * * `load()` - load media
+		 *
+		 * The [`source`] property is passed to the media component as a child node.
 		 *
 		 * @type {String|Component}
 		 * @default 'audio'
@@ -240,6 +265,14 @@ const MediaPlayerBase = kind({
 		sourceIndex: PropTypes.number,
 
 		/**
+		 * Disables 5-way spotlight navigation from navigating into the component.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		spotlightDisabled: PropTypes.bool,
+
+		/**
 		 * The total time (duration) in seconds of the loaded media source.
 		 *
 		 * @type {Number}
@@ -261,9 +294,11 @@ const MediaPlayerBase = kind({
 		durFmt: ({locale}) => getDurFmt(locale)
 	},
 
-	render: ({currentTime, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, total, ...rest}) => {
+	render: ({currentTime, disabled, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, total, ...rest}) => {
+		delete rest.source;
+
 		return (
-			<div {...rest}>
+			<Container {...rest}>
 				<Media
 					loop={loop}
 					mediaComponent={mediaComponent}
@@ -273,6 +308,7 @@ const MediaPlayerBase = kind({
 					source={playlist ? playlist[sourceIndex] : null}
 				/>
 				<MediaSlider
+					disabled={disabled}
 					onChange={onChange}
 					value={proportionPlayed}
 				/>
@@ -282,6 +318,7 @@ const MediaPlayerBase = kind({
 					total={total}
 				/>
 				<MediaControls
+					disabled={disabled}
 					onNext={onNext}
 					onPause={onPause}
 					onPlay={onPlay}
@@ -292,7 +329,7 @@ const MediaPlayerBase = kind({
 					repeat={repeat}
 					shuffle={shuffle}
 				/>
-			</div>
+			</Container>
 		);
 	}
 });
