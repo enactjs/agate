@@ -68,8 +68,6 @@
 
 // Button
 // ---------------------------------------
-@agate-button-active-bg-image: inherit;
-@agate-button-active-opacity: inherit;
 @agate-button-border-width: 3px;
 @agate-button-border-radius: inherit;
 @agate-button-background-origin: inherit;
@@ -84,10 +82,9 @@
 @agate-button-icon-border-radius: @agate-border-radius;
 @agate-button-icon-margin-end: @agate-component-spacing;
 @agate-button-icon-margin-start: 0;
-@agate-button-icon-padding: 0 ((@agate-button-height - @agate-icon-size) / 2);
 @agate-button-icon-position-after-margin-end: @agate-button-icon-margin-start;
 @agate-button-icon-position-after-margin-start: @agate-button-icon-margin-end;
-@agate-button-icon-small-padding: 0 ((@agate-button-small-height - @agate-icon-small-size) / 2);
+@agate-button-icon-width: @agate-icon-size;
 @agate-button-height: 84px;
 @agate-button-max-width: 900px;
 @agate-button-min-width: 240px;
@@ -96,6 +93,7 @@
 @agate-button-h-padding: 27px;
 @agate-button-animation-duration: 500ms;
 @agate-button-client-animation-offset: 0;
+@agate-button-client-padding: @agate-button-border-width;
 @agate-button-badge-animation-offset: 0;
 @agate-button-badge-position: 0 0 auto auto;
 @agate-button-badge-position-rtl: 0 auto auto 0;
@@ -111,8 +109,19 @@
 @agate-button-huge-line-height: (@agate-button-huge-height - (2 * @agate-button-border-width));
 @agate-button-huge-h-padding: 36px;
 @agate-button-huge-border-width: 10px;
+@agate-button-huge-icon-margin-end: @agate-button-icon-margin-end;
+@agate-button-huge-icon-margin-start: @agate-button-icon-margin-start;
+@agate-button-huge-icon-position-after-margin-end: @agate-button-huge-icon-margin-start;
+@agate-button-huge-icon-position-after-margin-start: @agate-button-huge-icon-margin-end;
+@agate-button-huge-max-width: @agate-button-max-width;
+@agate-button-huge-min-width: @agate-button-min-width;
 @agate-button-small-border-radius: inherit;
 @agate-button-small-height: 60px;
+@agate-button-small-icon-margin-end: @agate-button-icon-margin-end;
+@agate-button-small-icon-margin-start: @agate-button-icon-margin-start;
+@agate-button-small-icon-position-after-margin-end: @agate-button-small-icon-margin-start;
+@agate-button-small-icon-position-after-margin-start: @agate-button-small-icon-margin-end;
+@agate-button-small-max-width: @agate-button-max-width;
 @agate-button-small-min-width: 180px;
 @agate-button-small-font-size: 30px;
 @agate-button-small-line-height: (@agate-button-small-height - (2 * @agate-button-border-width));
@@ -126,8 +135,14 @@
 @agate-button-small-badge-letter-spacing: @agate-button-badge-letter-spacing;
 @agate-button-small-badge-text-indent: @agate-button-badge-text-indent;
 @agate-button-small-badge-transform: @agate-button-badge-transform;
+@agate-button-smallest-border-radius: @agate-button-border-radius;
 @agate-button-smallest-height: 48px;
 @agate-button-smallest-font-size: 15px;
+@agate-button-smallest-icon-margin-end: @agate-button-icon-margin-end;
+@agate-button-smallest-icon-margin-start: @agate-button-icon-margin-start;
+@agate-button-smallest-icon-position-after-margin-end: @agate-button-smallest-icon-margin-start;
+@agate-button-smallest-icon-position-after-margin-start: @agate-button-smallest-icon-margin-end;
+@agate-button-smallest-max-width: @agate-button-max-width;
 @agate-button-smallest-line-height: (@agate-button-smallest-height - (2 * @agate-button-border-width));
 @agate-button-smallest-h-padding: 15px;
 @agate-button-smallest-badge-position: @agate-button-small-badge-position;
@@ -139,6 +154,7 @@
 @agate-button-smallest-badge-letter-spacing: @agate-button-small-badge-letter-spacing;
 @agate-button-smallest-badge-text-indent: @agate-button-small-badge-text-indent;
 @agate-button-smallest-badge-transform: @agate-button-badge-transform;
+@agate-button-smallest-min-width: @agate-button-min-width;
 
 // Body
 // ----------------------------------
@@ -528,6 +544,7 @@
 @agate-picker-active-font-weight: @agate-base-font-weight;
 @agate-picker-margin: 0;
 @agate-picker-padding: 6px;
+@agate-picker-item-height: @agate-button-height;
 
 // Popup
 // ---------------------------------------
@@ -651,6 +668,7 @@
 @agate-sliderbutton-bg-transform: @agate-slider-bg-transform;
 @agate-sliderbutton-bg-clip: initial;
 @agate-sliderbutton-client-transform: @agate-slider-track-transform;
+@agate-sliderbutton-height: @agate-button-height;
 @agate-sliderbutton-knob-border-radius: @agate-sliderbutton-border-radius;
 @agate-sliderbutton-knob-border-width: 0;
 @agate-sliderbutton-knob-transform: none;
