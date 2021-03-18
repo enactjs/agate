@@ -12,6 +12,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/IncrementSlider` prop `activateOnFocus` to support slider activation when slider gets focused
 - `agate/IncrementSlider`, `agate/ProgressBar`, and `agate/Slider` prop `tooltip` to enable the built-in tooltip
 - `agate/Item` to have a `selected` publicClassname
+- `agate/MediaPlayer` prop `spotlightDisabled` to disable 5-way navigation
 - `agate/Popup` `aria-live` and `role` props to support accessibility
 - `agate/Popup` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
 - `agate/PopupMenu` `onShow` and `spotlightId` props to handle focus with 5-way navigation
@@ -21,11 +22,14 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Slider` prop `backgroundProgress`
 - `agate/SliderTooltip` component
 - `agate/Spinner` prop `children` to support the display of text below the icon
+- `agate/Tooltip` prop `marquee` to allow to marquee
+- `agate/TooltipDecorator` prop `tooltipMarquee` to support marquee for long tooltip and prop `tooltipWidth` to set a width for tooltip text
 
 ### Changed
 
 - `agate/Dropdown` to use `agate/ContextualPopup`
 - `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
+- `agate/ArcPicker` and `agate/ArcSlider` to have a max-width for `slotCenter`
 
 ### Fixed
 
