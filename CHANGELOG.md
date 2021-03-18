@@ -12,6 +12,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/IncrementSlider` prop `activateOnFocus` to support slider activation when slider gets focused
 - `agate/IncrementSlider`, `agate/ProgressBar`, and `agate/Slider` prop `tooltip` to enable the built-in tooltip
 - `agate/Item` to have a `selected` publicClassname
+- `agate/MediaPlayer` prop `spotlightDisabled` to disable 5-way navigation
 - `agate/Popup` `aria-live` and `role` props to support accessibility
 - `agate/Popup` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
 - `agate/PopupMenu` `onShow` and `spotlightId` props to handle focus with 5-way navigation

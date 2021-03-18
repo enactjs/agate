@@ -1,6 +1,6 @@
 'use strict';
 const {Page} = require('@enact/ui-test-utils/utils');
-const {element, getComponent, getText} = require('@enact/ui-test-utils/utils');
+const {getComponent, getText} = require('@enact/ui-test-utils/utils');
 
 class MediaPlayerInterface {
 	constructor (id) {
@@ -13,7 +13,7 @@ class MediaPlayerInterface {
 	}
 
 	hover (ariaLabel) {
-		return $(this.selector + `>div>div>div[aria-label=${ariaLabel}]`).moveTo({xOffset: 0, yOffset: 0});
+		return $(this.selector + `>div>div[aria-label=${ariaLabel}]`).moveTo({xOffset: 0, yOffset: 0});
 	}
 
 	get self () {
@@ -37,31 +37,31 @@ class MediaPlayerInterface {
 	}
 
 	get playButton () {
-		return element('.MediaPlayer_MediaControls_playPauseButton', this.self);
+		return $(this.selector + '>div>div.MediaPlayer_MediaControls_playPauseButton');
 	}
 
 	get previousButton () {
-		return $(this.selector + '>div>div>div[aria-label=Previous]');
+		return $(this.selector + '>div>div[aria-label=Previous]');
 	}
 
 	get nextButton () {
-		return $(this.selector + '>div>div>div[aria-label=Next]');
+		return $(this.selector + '>div>div[aria-label=Next]');
 	}
 
 	get shuffleButton () {
-		return $(this.selector + '>div>div>div[aria-label=Shuffle]');
+		return $(this.selector + '>div>div[aria-label=Shuffle]');
 	}
 
 	get repeatButton () {
-		return $(this.selector + '>div>div>div[aria-label=Repeat]');
+		return $(this.selector + '>div>div[aria-label=Repeat]');
 	}
 
 	get repeatStatus () {
-		return getText($(this.selector + '>div>div>div[aria-label=Repeat]' + '> .enact_ui_Button_Button_decoration > .Button_Button_badge'));
+		return getText($(this.selector + '>div>div[aria-label=Repeat]' + '> .enact_ui_Button_Button_decoration > .Button_Button_badge'));
 	}
 
 	get menuButton () {
-		return $(this.selector + '>div>div>div[aria-label=Menu]');
+		return $(this.selector + '>div>div[aria-label=Menu]');
 	}
 
 	get source () {
@@ -74,7 +74,9 @@ class MediaPlayerPage extends Page {
 		super();
 		this.title = 'MediaPlayer Test';
 		const mediaPlayerDefault = new MediaPlayerInterface('mediaPlayerDefault');
-		this.components = {mediaPlayerDefault};
+		const mediaPlayerDisabled = new MediaPlayerInterface('mediaPlayerDisabled');
+		const mediaPlayerSpotlightDisabled = new MediaPlayerInterface('mediaPlayerSpotlightDisabled');
+		this.components = {mediaPlayerDefault, mediaPlayerDisabled, mediaPlayerSpotlightDisabled};
 	}
 
 	waitForPlayMedia (mediaPlayer, timeout) {
