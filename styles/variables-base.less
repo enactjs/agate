@@ -356,7 +356,6 @@
 @agate-input-hasiconbefore-padding-left: inherit;
 @agate-input-hasiconafter-padding-right: inherit;
 @agate-input-height: (@agate-icon-size - ((@agate-input-border-width * 2) + (extract(@agate-input-padding, 2) * 2)));
-@agate-item-selected-rtl-padding: 0 12px;
 @agate-input-small-height: (@agate-button-small-height - (@agate-input-border-width * 2));
 @agate-input-text-align: inherit;
 @agate-input-small-font-size: 24px;
@@ -410,7 +409,8 @@
 @agate-item-large-height:             150px;
 @agate-item-line-height:              @agate-item-height - (@agate-item-vertical-padding * 2);
 @agate-item-max-width:                auto;
-@agate-item-selected-padding:         0 12px;
+@agate-item-selected-padding:         0 @agate-item-side-outset;
+@agate-item-selected-rtl-padding:     0 @agate-item-side-outset;
 @agate-item-side-outset:              @agate-component-spacing;
 @agate-item-slotafter-spacing:        @agate-component-spacing;
 @agate-item-slotbefore-spacing:       @agate-component-spacing;
