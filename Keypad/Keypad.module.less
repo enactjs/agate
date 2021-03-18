@@ -50,6 +50,36 @@
 			width: @agate-keypad-button-height;
 		}
 
+		&.iconOnly {
+			.bg {
+				background-color: @agate-keypad-button-bg-color;
+			}
+
+			.client {
+				color: @agate-keypad-button-color;
+			}
+
+			.disabled({
+				.bg {
+					background-color: @agate-keypad-button-bg-color;
+				}
+
+				.client {
+					color: @agate-keypad-button-color;
+				}
+			});
+		}
+
+		.disabled({
+			.bg {
+				background-color: @agate-keypad-button-bg-color;
+			}
+
+			.client {
+				color: @agate-keypad-button-color;
+			}
+		});
+
 		.bg {
 			background-color: @agate-keypad-button-bg-color;
 			border: none;

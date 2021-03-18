@@ -117,6 +117,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			 * The ready-state to indicate that the contents are allowed to be rearranged
 			 *
 			 * @type {Boolean}
+			 * @default false
 			 * @public
 			 */
 			arrangeable: PropTypes.bool,
