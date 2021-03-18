@@ -12,6 +12,7 @@
  * @exports KeypadDecorator
  */
 
+import classNames from 'classnames';
 import {adaptEvent, forward, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
@@ -213,16 +214,23 @@ const KeypadBase = kind({
 						ariaLabel = $L('call');
 					}
 
+					let color = '';
+					if (text === 'callaccept') {
+						color = 'accept';
+					} else if (text === 'calldecline') {
+						color = 'decline';
+					}
+
 					return (
 						<Cell
 							aria-label={ariaLabel}
-							className={className}
+							className={classNames(className, css[`${color}`])}
 							component={Key}
 							disabled={disabled}
 							key={`key${rowIndex}-${text}`}
+							label={keyText.label}
 							onKeyButtonClick={() => onKeyButtonClick(text)}
 							shrink
-							label={keyText.label}
 							text={isIcon ? null : text}
 						>
 							{isIcon ? text : null}
