@@ -15,7 +15,6 @@
 		max-width: @agate-input-max-width;
 		min-width: @agate-input-min-width;
 		border-bottom: @agate-input-decorator-border-bottom-width solid @agate-input-border-color;
-		opacity: @agate-input-decorator-opacity;
 
 		.input {
 			padding: @agate-input-padding-top-bottom @agate-input-padding-right @agate-input-padding-top-bottom @agate-input-padding-left;
@@ -30,7 +29,6 @@
 			font-weight: @agate-input-font-weight;
 			opacity: @agate-input-opacity;
 			border: none;
-			border-bottom: @agate-input-border-width solid @agate-input-border-color;
 			background: transparent;
 			color: @agate-text-color;
 			text-align: @agate-input-text-align;
@@ -111,8 +109,7 @@
 			&.iconBefore {
 				display: @agate-input-icon-display;
 				align-self: @agate-input-icon-align;
-				opacity: @agate-input-opacity;
-				border-bottom: @agate-input-border-width solid @agate-input-border-color;
+				opacity: @agate-input-icon-opacity;
 			}
 
 			&.iconAfter {
@@ -163,9 +160,10 @@
 		}
 
 		&:not(.emptyValue) {
-			opacity: @agate-input-decorator-has-value-opacity;
+			input {
+				opacity: @agate-input-decorator-has-value-opacity
+			}
 
-			input,
 			.icon {
 				opacity: @agate-input-has-value-opacity;
 			}
@@ -187,7 +185,6 @@
 			border-width: 0 0 @agate-input-decorator-border-bottom-width;
 			opacity: 1;
 
-
 			&.emptyValue {
 				.icon {
 					opacity: @agate-input-icon-empty-value-focused-opacity;
@@ -204,24 +201,14 @@
 				caret-color: @agate-input-caret-color;
 				color: @agate-input-focused-text-color;
 				border-color: @agate-input-active-border-color;
-				border-width: 0 0 @agate-input-border-width;
 				opacity: @agate-input-focused-opacity;
-
-				&::placeholder {
-					opacity: @agate-input-placeholder-focused-opacity;
-				}
 			}
 
 			.icon {
 				color: @agate-input-focused-text-color;
 
-				&.iconAfter {
-					opacity: @agate-input-focused-opacity;
-					border-color: @agate-input-active-border-color;
-				}
-
+				&.iconAfter,
 				&.iconBefore {
-					opacity: @agate-input-focused-opacity;
 					border-color: @agate-input-active-border-color;
 				}
 			}
@@ -231,8 +218,8 @@
 			}
 		}
 
-		&[disabled] {
-			.vendor-opacity(@agate-disabled-opacity);
-		}
+		.disabled({
+			opacity: @agate-input-disabled-opacity;
+		});
 	});
 }
