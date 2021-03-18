@@ -295,6 +295,8 @@ const MediaPlayerBase = kind({
 	},
 
 	render: ({currentTime, disabled, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, total, ...rest}) => {
+		delete rest.source;
+
 		return (
 			<Container {...rest}>
 				<Media
