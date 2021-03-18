@@ -127,6 +127,7 @@ const FanSpeedControlBase = kind({
 
 	render: ({backgroundColor, children, disabled, foregroundColor, icon, max, min, onChange, value, ...rest}) => {
 		const ariaProps = extractAriaProps(rest);
+
 		delete rest.skinVariants;
 
 		return (
