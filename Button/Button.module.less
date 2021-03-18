@@ -51,13 +51,35 @@
 		}
 
 		.disabled({
+			opacity: @agate-button-disabled-opacity;
+
 			.bg {
 				background-color: @agate-button-disabled-bg-color;
 			}
 
-			.client {
-				color: @agate-button-disabled-color;
+			.focus({
+				.bg {
+					background-image: @agate-button-disabled-focus-bg-image;
+				}
+
+				.client {
+					color: @agate-button-disabled-focus-color;
+				}
+			});
+
+			&.selected {
+				.bg {
+					background-color: @agate-button-selected-disabled-bg-color;
+					border-color: @agate-button-selected-disabled-border-color;
+				}
+
+				.focus({
+					.bg {
+						border-color: @agate-button-selected-disabled-focus-border-color;
+					}
+				})
 			}
+
 		});
 
 		.badge {
@@ -334,16 +356,13 @@
 		}
 
 		&.smallest {
+			border-radius: @agate-button-smallest-border-radius;
 			height: @agate-button-smallest-height;
 			max-width: @agate-button-smallest-max-width;
 			min-width: @agate-button-smallest-height;
 			line-height: @agate-button-smallest-line-height;
 			font-size: @agate-button-smallest-font-size;
 			padding: 0 @agate-button-smallest-h-padding;
-
-			.bg {
-				border-radius: @agate-button-smallest-border-radius;
-			}
 
 			.client {
 				.icon {
@@ -441,12 +460,6 @@
 					color: @agate-button-transparent-selected-color;
 				}
 			}
-
-			.disabled({
-				.client {
-					color: @agate-button-disabled-color;
-				}
-			})
 		}
 
 		// override Marquee's alignment.
@@ -495,7 +508,6 @@
 					background-color: @agate-button-active-bg-color;
 					background-image: @agate-button-active-bg-image;
 					border: @agate-button-border-width solid @agate-button-border-color;
-					opacity: @agate-button-active-opacity;
 				}
 
 				&,
@@ -508,6 +520,17 @@
 						opacity: 1;
 					}
 				}
+
+				.focus({
+					.bg {
+						background-image: @agate-button-active-focus-bg-image;
+					}
+
+					&,
+					.client {
+						color: @agate-button-active-focus-color;
+					}
+				})
 			});
 		}
 	});

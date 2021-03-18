@@ -34,11 +34,19 @@ const indexFromKey = (children, key) => {
 	return index;
 };
 
+/**
+ * A stateless DropdownList component.
+ *
+ * @class DropdownListBase
+ * @memberof agate/Dropdown
+ * @ui
+ * @public
+ */
 const DropdownListBase = kind({
 	name: 'DropdownListBase',
 
-	propTypes: {
-		/*
+	propTypes: /** @lends agate/Dropdown.DropdownListBase.prototype */ {
+		/**
 		 * The selections for Dropdown
 		 *
 		 * @type {String[]|Array.<{key: (Number|String), children: (String|Component)}>}
@@ -51,35 +59,35 @@ const DropdownListBase = kind({
 			}))
 		]),
 
-		/*
+		/**
 		 * Placement of the Dropdown List.
 		 *
 		 * @type {String}
 		 */
 		direction: PropTypes.string,
 
-		/*
+		/**
 		 * Called when an item is selected.
 		 *
 		 * @type {Function}
 		 */
 		onSelect: PropTypes.func,
 
-		/*
+		/**
 		 * Callback function that will receive the scroller's scrollTo() method
 		 *
 		 * @type {Function}
 		 */
 		scrollTo: PropTypes.func,
 
-		/*
+		/**
 		 * Index of the selected item.
 		 *
 		 * @type {Number}
 		 */
 		selected: PropTypes.number,
 
-		/*
+		/**
 		 * The current skin for this component.
 		 *
 		 * @type {String}
@@ -87,7 +95,7 @@ const DropdownListBase = kind({
 		 */
 		skin: PropTypes.string,
 
-		/*
+		/**
 		 * The width of DropdownList.
 		 *
 		 * @type {('smallest'|'small'|'medium'|'large'|'x-large'|'huge')}
@@ -164,19 +172,27 @@ const ReadyState = {
 	DONE: 2
 };
 
+/**
+ * Adds spotlight behaviors to DropdownList.
+ *
+ * @class DropdownListSpotlightDecorator
+ * @hoc
+ * @memberof agate/Dropdown
+ * @private
+ */
 const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 	return class extends Component {
 		static displayName = 'DropdownListSpotlightDecorator';
 
-		static propTypes = {
-			/*
+		static propTypes = /** @lends agate/Dropdown.DropdownListSpotlightDecorator.prototype */ {
+			/**
 			 * Called when an item receives focus.
 			 *
 			 * @type {Function}
 			 */
 			onFocus: PropTypes.func,
 
-			/*
+			/**
 			 * Index of the selected item.
 			 *
 			 * @type {Number}
