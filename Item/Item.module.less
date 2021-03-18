@@ -149,7 +149,9 @@
 		&.large {
 			height: @agate-item-large-height;
 
-			&:not(&.hasLabel) { height: @agate-item-small-height; }
+			&.hasLabel {
+				height: @agate-item-large-haslabel-height;
+			}
 		}
 
 		// TODO: needs to be modified when new requirements for small item is available
@@ -159,6 +161,8 @@
 			line-height: @agate-item-small-line-height;
 
 			&.hasLabel {
+				height: @agate-item-small-haslabel-height;
+
 				.itemContent {
 					padding: @agate-item-small-haslabel-padding;
 				}
@@ -174,9 +178,12 @@
 		}
 
 		.disabled({
-			opacity: @agate-item-disabled-opacity;
 			color: @agate-item-disabled-color;
 			border-color: @agate-item-disabled-border-color;
+
+			.focus({
+				opacity: @agate-item-disabled-opacity;
+			})
 		});
 
 		.focus({
