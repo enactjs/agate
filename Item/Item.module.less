@@ -107,6 +107,7 @@
 			// overriding ui/Item's inline-block
 			display: inline-flex;
 			min-width: @agate-item-inline-min-width;
+			max-width: @agate-item-inline-max-width;
 
 			.itemContent {
 				max-width: @agate-item-inline-content-max-width;
@@ -201,7 +202,7 @@
 			background-color: @agate-item-selected-bg-color;
 			border-color: @agate-item-selected-border-color;
 			color: @agate-item-focus-color;
-			padding: @agate-item-selected-padding;
+			.padding-start-end(@agate-item-selected-padding);
 
 			&::before {
 				content: "";
@@ -210,17 +211,8 @@
 				background-color: @agate-indicator-bg-color;
 				border-radius: @agate-indicator-border-radius;
 				align-self: @agate-indicator-align-self;
-				margin-right: @agate-indicator-margin-right;
+				.margin-start-end(0, @agate-indicator-margin-right)
 			}
-
-			.enact-locale-rtl({
-				padding: @agate-item-selected-rtl-padding;
-
-				&::before {
-					margin-left: @agate-indicator-rtl-margin-left;
-					margin-right: @agate-indicator-rtl-margin-right;
-				}
-			});
 
 			// Selected+Focus colors use both sets of colors
 			.focus({
