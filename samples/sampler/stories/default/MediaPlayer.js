@@ -26,7 +26,7 @@ export const _MediaPlayer = () => (
 		spotlightDisabled={boolean('spotlightDisabled', Config)}
 	>
 		{
-			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3"/>))
+			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 		}
 	</MediaPlayer>
 );
