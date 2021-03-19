@@ -121,6 +121,7 @@ const TemperatureControlBase =  kind({
 					foregroundColor={value < min + (max - min) / 2 ? '#007aff' : '#f24949'}
 					max={max}
 					min={min}
+					noFocusColor
 					onChange={onChange}
 					slotCenter={
 						<span>{currentTemperatureString}</span>

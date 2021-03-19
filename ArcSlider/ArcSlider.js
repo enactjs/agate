@@ -126,6 +126,14 @@ const ArcSliderBase = kind({
 		min: PropTypes.number,
 
 		/**
+		 * Disable the knob accent color on focus.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		noFocusColor: PropTypes.bool,
+
+		/**
 		 * The radius of the arc circle.
 		 *
 		 * @type {Number}
@@ -133,6 +141,14 @@ const ArcSliderBase = kind({
 		 * @public
 		 */
 		radius: PropTypes.number,
+
+		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		skin: PropTypes.string,
 
 		/**
 		 * Nodes to be inserted in the center of the ArcSlider.
@@ -188,6 +204,7 @@ const ArcSliderBase = kind({
 		foregroundColor: '#0000ff',
 		max: 100,
 		min: 0,
+		noFocusColor: false,
 		radius: 150,
 		startAngle: 30,
 		step: 1,
@@ -206,10 +223,11 @@ const ArcSliderBase = kind({
 		style: ({radius, style}) => {
 			const size = ri.scaleToRem(radius * 2);
 			return {...style, height: size, width: size};
-		}
+		},
+		circleRadius: ({skin, isFocused}) => skin === 'silicon' && isFocused ? 20 : 15
 	},
 
-	render: ({'aria-valuetext': ariaValuetext, backgroundColor, componentRef, disabled, endAngle, foregroundColor, isFocused, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}, context) => {
+	render: ({'aria-valuetext': ariaValuetext, backgroundColor, componentRef, circleRadius, disabled, endAngle, foregroundColor, isFocused, max, min, noFocusColor, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}, context) => {
 		const {accent: accentColor} = context || {};
 		const valueAngle = valueToAngle(clamp(min, max, value), min, Math.max(min, max), startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
@@ -240,8 +258,8 @@ const ArcSliderBase = kind({
 					<circle
 						cx={knobPosition.x}
 						cy={knobPosition.y}
-						fill={isFocused ? accentColor : foregroundColor}
-						r={ri.scaleToRem(15)}
+						fill={!noFocusColor && isFocused ? accentColor : foregroundColor}
+						r={ri.scaleToRem(circleRadius)}
 					/>
 				</Arc>
 				<div className={css.valueDisplay}>
@@ -267,7 +285,7 @@ const ArcSliderDecorator = compose(
 	ArcSliderBehaviorDecorator,
 	Touchable,
 	Spottable,
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 /**
