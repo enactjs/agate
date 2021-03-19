@@ -1,6 +1,7 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, number} from '@enact/storybook-utils/addons/knobs';
+import ri from '@enact/ui/resolution';
 import {storiesOf} from '@storybook/react';
 
 import IncrementSlider, {IncrementSliderBase, IncrementSliderTooltip} from '@enact/agate/IncrementSlider';
@@ -18,6 +19,9 @@ storiesOf('Agate', module)
 	.add(
 		'IncrementSlider',
 		() => {
+			// added here to add conditioned styling to vertical Slider so that the tooltip is visible when positioned "left"
+			const orientation = select('orientation', ['horizontal', 'vertical'], Config);
+
 			// added here to force Storybook to put the Slider tab first
 			const disabled = boolean('disabled', Config);
 
@@ -40,10 +44,11 @@ storiesOf('Agate', module)
 					onChange={action('onChange')}
 					onDragEnd={action('onDragEnd')}
 					onDragStart={action('onDragStart')}
-					orientation={select('orientation', ['horizontal', 'vertical'], Config)}
+					orientation={orientation}
 					progressAnchor={number('progressAnchor', Config, {range: true, min: 0, max: 1, step: 0.1}, 0)}
 					size={select('size', ['small', 'large'], Config)}
 					step={number('step', Config)}
+					style={orientation === 'vertical' ? {marginLeft: ri.scaleToRem(99)} : null}
 				>
 					{tooltip ? (
 						<IncrementSliderTooltip
