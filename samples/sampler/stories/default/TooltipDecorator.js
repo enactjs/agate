@@ -4,8 +4,9 @@ import {boolean, number, select, text} from '@enact/storybook-utils/addons/knobs
 import Button from '@enact/agate/Button';
 import TooltipDecorator, {Tooltip, TooltipBase} from '@enact/agate/TooltipDecorator';
 
-import iconNames from './icons';
+import {iconList} from './icons';
 
+TooltipDecorator.displayName = 'TooltipDecorator';
 const Config = mergeComponentMetadata('TooltipDecorator', TooltipDecorator, Tooltip, TooltipBase);
 const TooltipButton = TooltipDecorator(
 	{tooltipDestinationProp: 'decoration'},
@@ -13,7 +14,7 @@ const TooltipButton = TooltipDecorator(
 );
 
 const prop = {
-	icons: ['', ...iconNames],
+	icons: ['', ...iconList],
 	tooltipPosition: [
 		'above',
 		'above center',
@@ -42,7 +43,7 @@ export const _TooltipButton = () => (
 		<TooltipButton
 			backgroundOpacity={select('backgroundOpacity', ['opaque', 'lightOpaque', 'transparent'], Config)}
 			disabled={boolean('disabled', Config)}
-			icon={select('icon', prop.icons, Config)}
+			icon={select('icon', ['', ...iconList], Config)}
 			onClick={action('onClick')}
 			selected={boolean('selected', Config)}
 			size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}

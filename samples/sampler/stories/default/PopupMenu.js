@@ -9,6 +9,7 @@ import PopupMenu from '@enact/agate/PopupMenu';
 
 import css from './PopupMenu.module.less';
 
+PopupMenu.displayname = 'PopupMenu';
 const Config = mergeComponentMetadata('PopupMenu', PopupMenu);
 
 const Story = ({children: {props, type: Component}, ...rest}) => {

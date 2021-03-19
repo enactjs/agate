@@ -5,6 +5,7 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import {PickerBase} from '@enact/agate/internal/Picker';
 import Picker from '@enact/agate/Picker';
 
+Picker.displayName = 'Picker';
 const Config = mergeComponentMetadata('Picker', Picker, PickerBase);
 
 export default {

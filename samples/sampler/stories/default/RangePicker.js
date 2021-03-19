@@ -5,6 +5,7 @@ import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
 import {PickerBase} from '@enact/agate/internal/Picker';
 import RangePicker from '@enact/agate/RangePicker';
 
+RangePicker.displayName = 'RangePicker';
 const Config = mergeComponentMetadata('RangePicker', RangePicker, PickerBase);
 
 export default {

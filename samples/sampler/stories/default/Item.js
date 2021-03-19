@@ -5,6 +5,7 @@ import UiItem, {ItemBase as UiItemBase} from '@enact/ui/Item';
 import Icon from '@enact/agate/Icon';
 import Item, {ItemBase} from '@enact/agate/Item';
 
+Item.displayName = 'Item';
 const Config = mergeComponentMetadata('Item', UiItemBase, UiItem, ItemBase, Item);
 
 export default {

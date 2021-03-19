@@ -4,6 +4,7 @@ import {select} from '@enact/storybook-utils/addons/knobs';
 import Button from '@enact/agate/Button';
 import TabGroup from '@enact/agate/TabGroup';
 
+TabGroup.displayName = 'TabGroup';
 const Config = mergeComponentMetadata('TabGroup', TabGroup);
 
 export default {

@@ -11,6 +11,7 @@ const src = {
 	'uhd': 'http://via.placeholder.com/600x600/9037ab/ffffff&text=Image0'
 };
 
+ImageItem.displayName = 'ImageItem';
 const Config = mergeComponentMetadata('ImageItem', ImageItem, ImageItemBase);
 
 export default {

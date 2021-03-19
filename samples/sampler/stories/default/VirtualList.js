@@ -50,6 +50,7 @@ const updateDataSize = (dataSize) => {
 
 updateDataSize(defaultDataSize);
 
+VirtualList.displayName = 'VirtualList';
 const VirtualListConfig = mergeComponentMetadata('VirtualList', UiVirtualListBasic, VirtualList);
 
 export default {

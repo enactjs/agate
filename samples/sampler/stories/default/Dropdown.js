@@ -6,6 +6,7 @@ import Dropdown, {DropdownBase} from '@enact/agate/Dropdown';
 
 import css from './Dropdown.module.less';
 
+Dropdown.displayName = 'Dropdown';
 const Config = mergeComponentMetadata('Dropdown', Dropdown, DropdownBase);
 
 export default {

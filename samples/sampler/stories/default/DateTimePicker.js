@@ -4,6 +4,7 @@ import {boolean} from '@enact/storybook-utils/addons/knobs';
 
 import DateTimePicker from '@enact/agate/DateTimePicker';
 
+DateTimePicker.displayName = 'DateTimePicker';
 const Config = mergeComponentMetadata('DateTimePicker', DateTimePicker);
 removeProps(Config, 'year defaultOpen day maxDays maxMonths month onDateChange onMonthChange onYearChange order');
 

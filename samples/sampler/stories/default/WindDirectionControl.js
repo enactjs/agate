@@ -4,6 +4,7 @@ import {boolean} from '@enact/storybook-utils/addons/knobs';
 
 import WindDirectionControl, {WindDirectionControlBase} from '@enact/agate/WindDirectionControl';
 
+WindDirectionControl.displayName = 'WindDirectionControl';
 const Config = mergeComponentMetadata('WindDirectionControl', WindDirectionControlBase, WindDirectionControl);
 
 export default {

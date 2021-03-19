@@ -5,6 +5,7 @@ import Button from '@enact/agate/Button';
 import Header from '@enact/agate/Header';
 import {Panel} from '@enact/agate/Panels';
 
+Panel.displayName = 'Panel';
 const HeaderConfig = mergeComponentMetadata('Header', Header);
 
 export default {

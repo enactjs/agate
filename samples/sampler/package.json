@@ -31,10 +31,10 @@
     "react": "^17.0.1"
   },
   "devDependencies": {
-    "@enact/storybook-utils": "enactjs/storybook-utils#feature/react17",
-    "@storybook/addons": "6.1.15",
-    "@storybook/react": "6.1.15",
-    "@storybook/theming": "6.1.15",
+    "@enact/storybook-utils": "^4.0.0",
+    "@storybook/addons": "^6.1.21",
+    "@storybook/react": "^6.1.21",
+    "@storybook/theming": "^6.1.21",
     "babel-loader": "^8.2.2",
     "core-js": "^3.8.1"
   }

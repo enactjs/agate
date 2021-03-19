@@ -12,6 +12,7 @@ import {Panels, Panel} from '@enact/agate/Panels';
 import kind from '@enact/core/kind';
 import {clamp} from '@enact/core/util';
 
+Panels.displayNames = 'Panels';
 const Config = mergeComponentMetadata('Panels', Panels);
 
 const FirstPanel = kind({

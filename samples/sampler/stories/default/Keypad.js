@@ -4,6 +4,7 @@ import {boolean} from '@enact/storybook-utils/addons/knobs';
 
 import Keypad from '@enact/agate/Keypad';
 
+Keypad.displayName = 'Keypad';
 const Config = mergeComponentMetadata('Keypad', Keypad);
 
 export default {

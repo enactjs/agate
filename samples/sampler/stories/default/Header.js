@@ -5,6 +5,7 @@ import {Fragment} from 'react';
 import Button from '@enact/agate/Button';
 import {Header, HeaderBase} from '@enact/agate/Header';
 
+Header.displayName = 'Header';
 const Config = mergeComponentMetadata('Header', HeaderBase, Header);
 
 // Set up some defaults for children knob

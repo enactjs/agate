@@ -6,6 +6,7 @@ import Heading, {HeadingBase} from '@enact/agate/Heading';
 
 import css from './Heading.module.less';
 
+Heading.displayName = 'Heading';
 const Config = mergeComponentMetadata('Heading', Heading, HeadingBase);
 
 const prop = {

@@ -4,6 +4,7 @@ import {boolean, text} from '@enact/storybook-utils/addons/knobs';
 
 import DatePicker, {DatePickerBase} from '@enact/agate/DatePicker';
 
+DatePicker.displayName = 'DatePicker';
 const Config = mergeComponentMetadata('DatePicker', DatePicker, DatePickerBase);
 
 export default {

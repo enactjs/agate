@@ -6,6 +6,7 @@ import FanSpeedControl from '@enact/agate/FanSpeedControl';
 
 import {iconList} from './icons';
 
+FanSpeedControl.displayName = 'FanSpeedControl';
 const Config = mergeComponentMetadata('FanSpeedControl', FanSpeedControl);
 
 export default {

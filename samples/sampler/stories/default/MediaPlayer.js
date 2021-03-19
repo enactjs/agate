@@ -3,6 +3,7 @@ import {boolean} from '@enact/storybook-utils/addons/knobs';
 
 import MediaPlayer from '@enact/agate/MediaPlayer';
 
+MediaPlayer.displayname = 'MediaPlayer';
 const Config = mergeComponentMetadata('MediaPlayer', MediaPlayer);
 
 const audioFiles = [

@@ -3,6 +3,7 @@ import {text, select, boolean} from '@enact/storybook-utils/addons/knobs';
 
 import ThumbnailItem, {ThumbnailItemBase} from '@enact/agate/ThumbnailItem';
 
+ThumbnailItem.displayName = 'ThumbnailItem';
 const Config = mergeComponentMetadata('ThumbnailItem', ThumbnailItem, ThumbnailItemBase);
 
 export default {

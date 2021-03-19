@@ -11,6 +11,7 @@ const src = {
 	'uhd': 'http://via.placeholder.com/600x600'
 };
 
+Image.displayName = 'Image';
 const Config = mergeComponentMetadata('Image', Image, ImageBase, ImageDecorator);
 
 export default {

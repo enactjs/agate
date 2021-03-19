@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import Skinnable from '@enact/agate/Skinnable';
 import Spinner, {SpinnerBase} from '@enact/agate/Spinner';
 
+Spinner.displayName = 'Spinner';
 const Config = mergeComponentMetadata('Spinner', UiSpinnerBase, UiSpinner, SpinnerBase, Spinner);
 
 const SkinnedSpinnerBase = kind({

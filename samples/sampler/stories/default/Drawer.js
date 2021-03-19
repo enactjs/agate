@@ -9,6 +9,7 @@ import Heading from '@enact/agate/Heading';
 
 import css from './Drawer.module.less';
 
+Drawer.displayName = 'Drawer';
 const Config = mergeComponentMetadata('Drawer', Drawer, DrawerBase);
 
 const StoryOptions = {

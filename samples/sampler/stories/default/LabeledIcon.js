@@ -8,6 +8,7 @@ import LabeledIcon from '@enact/agate/LabeledIcon';
 
 import {iconList} from './icons';
 
+LabeledIcon.displayName = 'LabeledIcon';
 const Config = mergeComponentMetadata('LabeledIcon', UiLabeledIconBase, UiLabeledIcon, UiIcon, IconBase, Icon, LabeledIcon);
 
 export default {

@@ -9,6 +9,7 @@ import Item, {ItemBase} from '@enact/agate/Item';
 
 import {iconList} from './icons';
 
+CheckboxItem.displayName = 'CheckboxItem';
 const Config = mergeComponentMetadata('CheckboxItem', ItemBase, Item, CheckboxBase, Checkbox, CheckboxItemBase, CheckboxItem);
 Config.defaultProps.icon = CheckboxBase.defaultProps.children;
 

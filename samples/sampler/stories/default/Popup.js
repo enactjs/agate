@@ -5,6 +5,7 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import {Button} from '@enact/agate/Button';
 import {Popup, PopupBase} from '@enact/agate/Popup';
 
+Popup.displayName = 'Popup';
 const Config = mergeComponentMetadata('Popup', PopupBase);
 
 const prop = {

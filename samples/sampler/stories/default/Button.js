@@ -10,6 +10,7 @@ import Skinnable from '@enact/agate/Skinnable';
 
 import {iconList, iconListSilicon} from './icons';
 
+Button.displayName = 'Button';
 const Config = mergeComponentMetadata('Button', UiButton, ButtonBase, Button);
 
 // Set up some defaults for info and knobs

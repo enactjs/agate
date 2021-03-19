@@ -233,7 +233,7 @@ const StorybookDecorator = (story, config) => {
 
 	return (
 		<Theme
-			title={`${config.kind}`.replaceAll('/', ' ').trim()}
+			title={`${config.kind}`.replace(/\//g, ' ').trim()}
 			description={hasInfoText ? config.parameters.info.text : null}
 			locale={locale}
 			{...skinKnobs}

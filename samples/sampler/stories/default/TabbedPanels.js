@@ -13,6 +13,7 @@ import {TabbedPanelsBase} from '@enact/agate/Panels/TabbedPanels';
 import $L from '@enact/i18n/$L';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 
+TabbedPanels.displayName = 'TabbedPanels';
 const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase);
 // `paddingBottom: '56.25%'` is a trick to impose 16:9 aspect ratio on the component, since padding percentage is based on the width, not the height.
 

@@ -8,6 +8,7 @@ import {iconList} from './icons';
 
 const iconNames = ['', ...iconList];
 
+Input.displayName = 'Input';
 const Config = mergeComponentMetadata('Input', InputBase, Input);
 const prop = {
 	type: ['text', 'password', 'number']

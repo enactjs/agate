@@ -4,6 +4,7 @@ import {boolean, text} from '@enact/storybook-utils/addons/knobs';
 
 import TimePicker, {TimePickerBase} from '@enact/agate/TimePicker';
 
+TimePicker.displayName = 'TimePicker';
 const Config = mergeComponentMetadata('TimePicker', TimePicker, TimePickerBase);
 
 export default {

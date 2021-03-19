@@ -15,6 +15,7 @@ import docs from '../../images/icon-enact-docs.png';
 import factory from '../../images/icon-enact-factory.svg';
 import logo from '../../images/icon-enact-logo.svg';
 
+Icon.displayName = 'Icon';
 const Config = mergeComponentMetadata('Icon', UiIcon, IconBase, Icon);
 
 const SkinnedIconBase = kind({

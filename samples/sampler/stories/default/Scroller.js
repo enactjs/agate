@@ -13,6 +13,7 @@ const prop = {
 	scrollModeOption: ['native', 'translate']
 };
 
+Scroller.displayName = 'Scroller';
 const ScrollerConfig = mergeComponentMetadata('Scroller', UiScrollerBasic, Scroller);
 
 export default {

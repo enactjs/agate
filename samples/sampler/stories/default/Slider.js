@@ -7,6 +7,7 @@ import Slider, {SliderBase, SliderTooltip} from '@enact/agate/Slider';
 const Config = mergeComponentMetadata('Slider', SliderBase, Slider);
 const SliderTooltipConfig = mergeComponentMetadata('SliderTooltip', SliderTooltip);
 
+Slider.displayName = 'Slider';
 SliderTooltip.displayName = 'SliderTooltip';
 
 export default {
