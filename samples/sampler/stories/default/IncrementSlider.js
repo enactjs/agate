@@ -48,7 +48,7 @@ storiesOf('Agate', module)
 					progressAnchor={number('progressAnchor', Config, {range: true, min: 0, max: 1, step: 0.1}, 0)}
 					size={select('size', ['small', 'large'], Config)}
 					step={number('step', Config)}
-					style={orientation === 'vertical' ? {marginLeft: ri.scaleToRem(99)} : null}
+					style={orientation === 'vertical' ? {marginLeft: ri.scaleToRem(30)} : null}
 				>
 					{tooltip ? (
 						<IncrementSliderTooltip
