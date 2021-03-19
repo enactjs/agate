@@ -1,13 +1,36 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-import UiButton from '@enact/ui/Button';
+import {boolean, number, select, text} from '@enact/storybook-utils/addons/knobs';
+import Button from '@enact/agate/Button';
+import TooltipDecorator, {Tooltip, TooltipBase} from '@enact/agate/TooltipDecorator';
 
-import Button, {ButtonBase} from '@enact/agate/Button';
-import TooltipDecorator from '@enact/agate/TooltipDecorator';
+import iconNames from './icons';
 
-const Config = mergeComponentMetadata('TooltipDecorator', UiButton, ButtonBase, Button);
-const TooltipButton = TooltipDecorator({tooltipDestinationProp: 'decoration'}, Button);
+const Config = mergeComponentMetadata('TooltipDecorator', TooltipDecorator, Tooltip, TooltipBase);
+const TooltipButton = TooltipDecorator(
+	{tooltipDestinationProp: 'decoration'},
+	Button
+);
+
+const prop = {
+	icons: ['', ...iconNames],
+	tooltipPosition: [
+		'above',
+		'above center',
+		'above left',
+		'above right',
+		'below',
+		'below center',
+		'below left',
+		'below right',
+		'left bottom',
+		'left middle',
+		'left top',
+		'right bottom',
+		'right middle',
+		'right top'
+	]
+};
 
 export default {
 	title: 'Agate/TooltipDecorator',
@@ -15,16 +38,24 @@ export default {
 };
 
 export const _TooltipButton = () => (
-	<TooltipButton
-		backgroundOpacity={select('backgroundOpacity', ['opaque', 'lightOpaque', 'transparent'], Config)}
-		disabled={boolean('disabled', Config)}
-		onClick={action('onClick')}
-		selected={boolean('selected', Config)}
-		size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}
-		tooltipText={text('tooltip', Config, 'Tooltip')}
-	>
-		{text('children', Config, 'Click me')}
-	</TooltipButton>
+	<div style={{textAlign: 'center'}}>
+		<TooltipButton
+			backgroundOpacity={select('backgroundOpacity', ['opaque', 'lightOpaque', 'transparent'], Config)}
+			disabled={boolean('disabled', Config)}
+			icon={select('icon', prop.icons, Config)}
+			onClick={action('onClick')}
+			selected={boolean('selected', Config)}
+			size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}
+			tooltipDelay={number('tooltipDelay', Config, 500)}
+			tooltipMarquee={boolean('tooltipMarquee', Config)}
+			tooltipPosition={select('tooltipPosition', prop.tooltipPosition, Config)}
+			tooltipRelative={boolean('tooltipRelative', Config)}
+			tooltipText={text('tooltip', Config, 'Tooltip')}
+			tooltipWidth={number('tooltipWidth', Config)}
+		>
+			{text('children', Config, 'Click me')}
+		</TooltipButton>
+	</div>
 );
 
 _TooltipButton.storyName = 'TooltipDecorator';

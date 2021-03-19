@@ -22,12 +22,14 @@ export default {
 export const _MediaPlayer = () => (
 	<MediaPlayer
 		disabled={boolean('disabled', Config)}
+		spotlightDisabled={boolean('spotlightDisabled', Config)}
 	>
 		{
-			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
+			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3"/>))
 		}
 	</MediaPlayer>
 );
+
 
 _MediaPlayer.storyName = 'MediaPlayer';
 _MediaPlayer.parameters = {

@@ -24,24 +24,79 @@ import componentCss from './Drawer.module.less';
  *
  * @class DrawerBase
  * @memberof agate/Drawer
+ * @extends ui/Transition.Transition
  * @ui
  * @public
  */
 const DrawerBase = kind({
 	name: 'Drawer',
 
-	propTypes: {
+	propTypes: /** @lends agate/Drawer.DrawerBase.prototype */ {
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		* Components to be included under the primary content.
+		*
+		* @type {Node}
+		* @public
+		*/
 		footer: PropTypes.node,
+
+		/**
+		 * Header for the drawer.
+		 *
+		 * @type {Node}
+		 * @public
+		 */
 		header: PropTypes.node,
+
+		/**
+		 * Disables drawer transition animation.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		noAnimation: PropTypes.bool,
+
 		// `onClose` is here for the future scenario where we'll want to have a local (to Drawer)
 		// control that closes the Drawer; similar to how the old Moonstone Drawer worked with its
 		// close-tab that was positioned on the edge of the drawer. This prop, the close icon below
 		// and the .closeButton CSS in the LESS file all relate to this functionality.
 		// onClose: PropTypes.func,
+
+		/**
+		 * Called after the transition to hide the drawer has finished.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
 		onHide: PropTypes.func,
-		open: PropTypes.bool
+
+		/**
+		 * Displays the drawer.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		open: PropTypes.bool,
+
+		/**
+		 * Orientation of the drawer.
+		 *
+		 * @type {('horizontal'|'vertical')}
+		 * @default 'vertical'
+		 * @private
+		 */
+		orientation: PropTypes.oneOf(['horizontal', 'vertical'])
 	},
 
 	defaultProps: {

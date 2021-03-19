@@ -3,6 +3,9 @@ import IncrementSlider from '../IncrementSlider';
 
 import css from '../IncrementSlider.module.less';
 
+const getNode = (slider) => slider.find(`div.${css.slider}`);
+const focus = (slider) => getNode(slider).simulate('focus');
+
 const tap = (node) => {
 	node.simulate('mousedown');
 	node.simulate('mouseup');
@@ -220,4 +223,28 @@ describe('IncrementSlider Specs', () => {
 			expect(actual).toBe(expected);
 		}
 	);
+
+	test('should set the tooltip to visible when focused', () => {
+		const subject = mount(
+			<IncrementSlider tooltip />
+		);
+
+		focus(subject);
+
+		const expected = 'visible';
+		const actual = subject.find('ProgressBarTooltip').prop('visible') ? 'visible' : 'not visible';
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should set the tooltip to not visible when unfocused', () => {
+		const subject = mount(
+			<IncrementSlider tooltip />
+		);
+
+		const expected = 'not visible';
+		const actual = subject.find('ProgressBarTooltip').prop('visible') ? 'visible' : 'not visible';
+
+		expect(actual).toBe(expected);
+	});
 });
