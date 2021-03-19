@@ -325,20 +325,22 @@
 
 // Slider
 // ---------------------------------------
-@agate-slider-width: @agate-slider-knob-height;
-@agate-slider-knob-height: 30px;
-@agate-slider-horizontal-anchorpoint-width: (@agate-slider-knob-height * @agate-slider-knob-resting-state-scale - 1px); // just a touch under the resting state scale, to avoid subpixel rendering overflow
-@agate-slider-vertical-anchorpoint-height: (@agate-slider-knob-height * @agate-slider-knob-resting-state-scale - 1px); // just a touch under the resting state scale, to avoid subpixel rendering overflow
-@agate-slider-knob-border-radius: (@agate-slider-knob-height / 2);
-@agate-slider-knob-resting-state-scale: 0.9;
-@agate-slider-active-knob-height: 60px;
 @agate-slider-active-knob-border-radius: (@agate-slider-active-knob-height / 2);
+@agate-slider-active-knob-height: 60px;
 @agate-slider-active-knob-transform: @agate-translate-center scale(@agate-slider-knob-resting-state-scale);
 @agate-slider-border-radius: 0;
+@agate-slider-horizontal-anchorpoint-width: (@agate-slider-knob-height * @agate-slider-knob-resting-state-scale - 1px); // just a touch under the resting state scale, to avoid subpixel rendering overflow
+@agate-slider-horizontal-min-width: 420px;
 @agate-slider-horizontal-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (@agate-slider-active-knob-height / 2);
-@agate-slider-vertical-margin: 6px;
-@agate-slider-vertical-padding: (@agate-slider-active-knob-height / 2) ((@agate-slider-height - @agate-slider-track-height) / 2);
+@agate-slider-knob-border-radius: (@agate-slider-knob-height / 2);
+@agate-slider-knob-height: 30px;
+@agate-slider-knob-resting-state-scale: 0.9;
 @agate-slider-track-height: 6px;
+@agate-slider-vertical-anchorpoint-height: (@agate-slider-knob-height * @agate-slider-knob-resting-state-scale - 1px); // just a touch under the resting state scale, to avoid subpixel rendering overflow
+@agate-slider-vertical-margin: 6px;
+@agate-slider-vertical-min-height: @agate-slider-horizontal-min-width;
+@agate-slider-vertical-padding: (@agate-slider-active-knob-height / 2) ((@agate-slider-height - @agate-slider-track-height) / 2);
+@agate-slider-width: @agate-slider-knob-height;
 
 // IncrementSlider
 // ---------------------------------------

@@ -582,35 +582,37 @@
 
 // Slider
 // ---------------------------------------
+@agate-slider-active-knob-border-radius: @agate-slider-knob-border-radius;
+@agate-slider-active-knob-height: @agate-slider-knob-height;
+@agate-slider-active-knob-transform: @agate-slider-knob-transform;
+@agate-slider-active-knob-width: @agate-slider-active-knob-height;
+@agate-slider-bg-transform: none;
+@agate-slider-border-radius: @agate-slider-height;
+@agate-slider-height: @agate-button-height;
 @agate-slider-horizontal-anchorpoint-height: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
 @agate-slider-horizontal-anchorpoint-width: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
-@agate-slider-vertical-anchorpoint-height: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
-@agate-slider-vertical-anchorpoint-width: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
-@agate-slider-knob-height: @agate-slider-height;
-@agate-slider-active-knob-height: @agate-slider-knob-height;
-@agate-slider-active-knob-width: @agate-slider-active-knob-height;
-@agate-slider-active-knob-border-radius: @agate-slider-knob-border-radius;
-@agate-slider-active-knob-transform: @agate-slider-knob-transform;
+@agate-slider-horizontal-margin: 0 @agate-component-spacing;
+@agate-slider-horizontal-min-width: auto;
+@agate-slider-horizontal-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (@agate-slider-height / 2);
 @agate-slider-knob-border-radius: @agate-slider-knob-height;
 @agate-slider-knob-border-width: 0;
+@agate-slider-knob-height: @agate-slider-height;
 @agate-slider-knob-resting-state-scale: 1;
 @agate-slider-knob-transform: @agate-translate-center;
 @agate-slider-knob-width: @agate-slider-knob-height;
-@agate-slider-border-radius: @agate-slider-height;
-@agate-slider-horizontal-margin: 0 @agate-component-spacing;
-@agate-slider-horizontal-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (@agate-slider-height / 2);
-@agate-slider-vertical-margin: 0 @agate-component-spacing;
-@agate-slider-vertical-padding: (@agate-slider-height / 2) ((@agate-slider-height - @agate-slider-track-height) / 2);
-@agate-slider-height: @agate-button-height;
-@agate-slider-width: @agate-slider-height;
-@agate-slider-track-height: 12px;
-@agate-slider-track-width: @agate-slider-track-height;
-@agate-slider-bg-transform: none;
-@agate-slider-track-transform: none;
 @agate-slider-tooltip-above-offset: (@agate-slider-knob-height / -3);
-@agate-slider-tooltip-below-offset: (@agate-slider-knob-height / 3);
-@agate-slider-tooltip-before-offset: (@agate-slider-knob-height / -3);
 @agate-slider-tooltip-after-offset: (@agate-slider-knob-height / 3);
+@agate-slider-tooltip-before-offset: (@agate-slider-knob-height / -3);
+@agate-slider-tooltip-below-offset: (@agate-slider-knob-height / 3);
+@agate-slider-track-height: 12px;
+@agate-slider-track-transform: none;
+@agate-slider-track-width: @agate-slider-track-height;
+@agate-slider-vertical-anchorpoint-height: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
+@agate-slider-vertical-anchorpoint-width: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
+@agate-slider-vertical-margin: 0 @agate-component-spacing;
+@agate-slider-vertical-min-height: 120px;
+@agate-slider-vertical-padding: (@agate-slider-height / 2) ((@agate-slider-height - @agate-slider-track-height) / 2);
+@agate-slider-width: @agate-slider-height;
 
 // IncrementSlider
 // ---------------------------------------
