@@ -8,7 +8,6 @@
 	text-align: center;
 	direction: ltr;
 	white-space: nowrap;
-	bottom: 42px;
 
 	> *:first-child {
 		margin-inline-start: 0;
@@ -16,6 +15,10 @@
 }
 
 .applySkins({
+	.controlsFrame {
+		bottom: @agate-mediacontrols-bottom;
+	}
+
 	.button {
 		height: @agate-mediacontrols-button-height;
 		min-width: @agate-mediacontrols-button-min-width;
@@ -66,6 +69,6 @@
 
 .icon {
 	.applySkins({
-		font-size: @agate-mediacontrols-icon-font-size;
+		//font-size: @agate-mediacontrols-icon-font-size;
 	})
 }
