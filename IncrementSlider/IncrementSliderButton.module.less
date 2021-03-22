@@ -6,12 +6,24 @@
 
 .button {
 	.applySkins({
-		.client {
-			color: @agate-incrementslider-button-color;
-		}
+		&.horizontal, &.vertical {
+			.client {
+				color: @agate-incrementslider-button-color;
+			}
 
-		.bg {
-			background-color: @agate-incrementslider-button-bg-color;
+			.bg {
+				background-color: @agate-incrementslider-button-bg-color;
+			}
+
+			.disabled({
+				.bg {
+					background-color: @agate-incrementslider-button-bg-color;
+				}
+
+				.client {
+					color: @agate-incrementslider-button-color;
+				}
+			})
 		}
 
 		&.horizontal {
