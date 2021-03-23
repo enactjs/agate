@@ -91,6 +91,46 @@ storiesOf('Item', module)
 				<Item inline label="label below" labelPosition="below" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Item</Item>
 				<Item inline label="label before" labelPosition="before" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Item</Item>
 				<Item inline label="label after" labelPosition="after" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Item</Item>
+				<Heading showLine>Item with sizes, labels, slot after, slot before</Heading>
+				<Item size="large">Large Default Item</Item>
+				<Item size="small">Small Default Item</Item>
+				<Item inline size="large" label="label below" labelPosition="below" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Large Item</Item>
+				<Item inline size="large" label="label above" labelPosition="above" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Large Item</Item>
+				<Item inline size="large" label="label before" labelPosition="before" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Large Item</Item>
+				<Item inline size="large" label="label after" labelPosition="after" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Large Item</Item>
+				<Item inline size="small" label="label below" labelPosition="below" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Small Item</Item>
+				<Item inline size="small" label="label above" labelPosition="above" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Small Item</Item>
+				<Item inline size="small" label="label before" labelPosition="before" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Small Item</Item>
+				<Item inline size="small" label="label after" labelPosition="after" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Small Item</Item>
+				<Heading showLine>Item centered, labels and sizes</Heading>
+				<Item centered size="large">Large Item</Item>
+				<Item centered size="small">Small Item</Item>
+				<Item centered inline label="label below" labelPosition="below" size="large">Large Item</Item>
+				<Item centered inline label="label above" labelPosition="above" size="large">Large Item</Item>
+				<Item centered inline label="label before" labelPosition="before" size="large">Large Item</Item>
+				<Item centered inline label="label after" labelPosition="after" size="large">Large Item</Item>
+				<Item centered inline label="label below" labelPosition="below" size="small">Small Item</Item>
+				<Item centered inline label="label above" labelPosition="above" size="small">Small Item</Item>
+				<Item centered inline label="label before" labelPosition="before" size="small">Small Item</Item>
+				<Item centered inline label="label after" labelPosition="after" size="small">Small Item</Item>
+				<Heading showLine>Item selected with labels and sizes</Heading>
+				<Item selected size="large">Large Item</Item>
+				<Item selected size="small">Small Item</Item>
+				<Item selected inline label="label below" labelPosition="below" size="large">Large Item</Item>
+				<Item selected inline label="label above" labelPosition="above" size="large">Large Item</Item>
+				<Item selected inline label="label before" labelPosition="before" size="large">Large Item</Item>
+				<Item selected inline label="label after" labelPosition="after" size="large">Large Item</Item>
+				<Item selected inline label="label below" labelPosition="below" size="small">Small Item</Item>
+				<Item selected inline label="label above" labelPosition="above" size="small">Small Item</Item>
+				<Item selected inline label="label before" labelPosition="before" size="small">Small Item</Item>
+				<Item selected inline label="label after" labelPosition="after" size="small">Small Item</Item>
+				<Heading showLine>Item disabled with labels</Heading>
+				<Item disabled>Default Item</Item>
+				<Item disabled selected>Default Selected Item</Item>
+				<Item disabled selected inline label="label below" labelPosition="below">Item</Item>
+				<Item disabled selected inline label="label above" labelPosition="above">Item</Item>
+				<Item disabled selected inline label="label before" labelPosition="before">Item</Item>
+				<Item disabled selected inline label="label after" labelPosition="after">Item</Item>
 			</Scroller>
 		),
 		{

@@ -99,10 +99,6 @@
 			margin-inline-end: @agate-item-slotbefore-spacing;
 		}
 
-		&.selected {
-			color: @agate-item-selected-color;
-		}
-
 		&.inline {
 			// overriding ui/Item's inline-block
 			display: inline-flex;
@@ -180,10 +176,7 @@
 		.disabled({
 			color: @agate-item-disabled-color;
 			border-color: @agate-item-disabled-border-color;
-
-			.focus({
-				opacity: @agate-item-disabled-opacity;
-			})
+			opacity: @agate-item-disabled-opacity;
 		});
 
 		.focus({
