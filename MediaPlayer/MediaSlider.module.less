@@ -21,21 +21,21 @@
 
 			.bar {
 				background-color: @agate-mediaslider-bar-color;
-				height: 6px;
 			}
 
 			.fill {
 				background-image: @agate-mediaslider-fill-bg-image;
-				height: 6px;
+			}
+
+			&.paused {
+				.fill {
+					background-image: @agate-mediaslider-paused-bg-image;
+				}
 			}
 		}
 
 		.focus({
 			&.slider {
-				.bar {
-					background-color: @agate-mediaslider-focused-bar-color;
-				}
-
 				.fill {
 					background-image: @agate-mediaslider-focused-fill-bg-image;
 				}

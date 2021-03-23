@@ -22,39 +22,29 @@
 	.button {
 		height: @agate-mediacontrols-button-height;
 		min-width: @agate-mediacontrols-button-min-width;
-		margin: @agate-mediacontrols-button-margin;
+		.margin-start-end(@agate-mediacontrols-button-margin);
+		width:  @agate-mediacontrols-button-bg-width;
 
 		.bg {
 			border: @agate-mediacontrols-button-bg-border;
-			height: @agate-mediacontrols-button-bg-height;
-			width:  @agate-mediacontrols-button-bg-width;
-		}
-
-		&,
-		.client {
-			width: @agate-mediacontrols-button-client-width;
-		}
-
-		.icon {
-			padding: @agate-mediacontrols-button-icon-padding;
 		}
 
 		&.playPauseButton {
 			height: @agate-mediacontrols-playpause-button-height;
-			padding: @agate-mediacontrols-playpause-button-padding;
+			width: @agate-mediacontrols-playpause-button-height;
+			.margin-start-end(@agate-mediacontrols-playpause-button-margin);
 
 			.bg {
-				height: @agate-mediacontrols-playpause-button-bg-height;
-				width: @agate-mediacontrols-playpause-button-bg-width;
 				border-radius: @agate-mediacontrols-playpause-button-bg-border-radius;
 			}
 
 			&,
 			.client {
-				width: @agate-mediacontrols-playpause-button-client-width;
-
-				.playPauseIcon {
-					font-size: @agate-mediacontrols-playpause-icon-font-size
+				.icon {
+					font-size: @agate-mediacontrols-playpause-icon-font-size;
+					height: @agate-mediacontrols-playpause-icon-height;
+					line-height: @agate-mediacontrols-playpause-icon-height;
+					width: @agate-mediacontrols-playpause-icon-height;
 				}
 			}
 		}
@@ -69,6 +59,9 @@
 
 .icon {
 	.applySkins({
-		//font-size: @agate-mediacontrols-icon-font-size;
+		font-size: @agate-mediacontrols-icon-font-size;
+		height: @agate-mediacontrols-icon-height;
+		line-height: @agate-mediacontrols-icon-height;
+		width: @agate-mediacontrols-icon-height;
 	})
 }

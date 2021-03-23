@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import $L from '../internal/$L';
 import Button from '../Button';
-import Icon from '../Icon';
 
 import css from './MediaControls.module.less';
 
@@ -230,7 +229,6 @@ const MediaControls = kind({
 					disabled={disabled}
 					icon={shuffleIcon}
 					onClick={onShuffle}
-					size="large"
 				/>
 				<Button
 					aria-label={$L('Previous')}
@@ -247,12 +245,10 @@ const MediaControls = kind({
 					className={classnames(css.playPauseButton, spotlightDefaultClass)}
 					css={css}
 					disabled={disabled}
+					icon={paused ? playIcon : pauseIcon}
 					minWidth={false}
 					onClick={paused ? onPlay : onPause}
-					size="large"
-				>
-					<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
-				</Button>
+				/>
 				<Button
 					aria-label={$L('Next')}
 					backgroundOpacity="transparent"
@@ -260,7 +256,6 @@ const MediaControls = kind({
 					disabled={disabled}
 					icon={nextTrackIcon}
 					onClick={onNext}
-					size="large"
 				/>
 				<Button
 					aria-label={$L('Menu')}
@@ -268,7 +263,6 @@ const MediaControls = kind({
 					css={css}
 					disabled={disabled}
 					icon={menuIcon}
-					size="large"
 				/>
 			</Container>
 		);

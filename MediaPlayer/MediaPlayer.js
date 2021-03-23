@@ -310,6 +310,7 @@ const MediaPlayerBase = kind({
 				<MediaSlider
 					disabled={disabled}
 					onChange={onChange}
+					paused={paused}
 					value={proportionPlayed}
 				/>
 				<Times
