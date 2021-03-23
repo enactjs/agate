@@ -29,6 +29,21 @@ const MediaPlayerTests = [
 		{
 			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 		}
+	</MediaPlayer>,
+	<MediaPlayer type="light">
+		{
+			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
+		}
+	</MediaPlayer>,
+	<MediaPlayer disabled type="light">
+		{
+			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
+		}
+	</MediaPlayer>,
+	<MediaPlayer paused type="light">
+		{
+			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
+		}
 	</MediaPlayer>
 ];
 
