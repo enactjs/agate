@@ -43,6 +43,8 @@ const MediaSlider = kind({
 	},
 
 	render: ({...rest}) => {
+		delete rest.paused;
+
 		return (
 			<Slider
 				{...rest}
