@@ -40,6 +40,22 @@
 					background-image: @agate-mediaslider-focused-fill-bg-image;
 				}
 			}
-		})
+		});
+
+		&.full {
+				/* Available for export */
+		}
+
+		&.light {
+			&.slider {
+				height: @agate-mediaslider-light-height;
+				padding: @agate-mediaslider-light-padding;
+
+				.bar,
+				.fill {
+					height: @agate-mediaslider-light-bar-height;
+				}
+			}
+		}
 	});
 }

@@ -44,7 +44,16 @@ const Times = kind({
 		 * @default 0
 		 * @public
 		 */
-		total: PropTypes.number
+		total: PropTypes.number,
+
+		/**
+		 * Specifies what kind of layout the MediaPlayer should have.
+		 *
+		 * @type {('full'|'light')}
+		 * @default 'full'
+		 * @public
+		 */
+		type: PropTypes.oneOf(['full', 'light'])
 	},
 
 	defaultProps: {
@@ -58,6 +67,7 @@ const Times = kind({
 	},
 
 	computed: {
+		className: ({type, styler}) => styler.append(type),
 		currentPeriod: ({current}) => secondsToPeriod(current),
 		currentReadable: ({current, formatter}) => secondsToTime(current, formatter),
 		remainingPeriod: ({current, total}) => secondsToPeriod(total - current),
@@ -68,6 +78,7 @@ const Times = kind({
 		delete rest.current;
 		delete rest.formatter;
 		delete rest.total;
+		delete rest.type;
 
 		return (
 			<div {...rest}>

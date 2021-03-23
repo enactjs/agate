@@ -17,56 +17,90 @@
 .applySkins({
 	.controlsFrame {
 		bottom: @agate-mediacontrols-bottom;
-	}
 
-	.button {
-		height: @agate-mediacontrols-button-height;
-		min-width: @agate-mediacontrols-button-min-width;
-		.margin-start-end(@agate-mediacontrols-button-margin);
-		width:  @agate-mediacontrols-button-bg-width;
-
-		.bg {
-			border: @agate-mediacontrols-button-bg-border;
-		}
-
-		.icon {
-			padding: @agate-mediacontrols-button-icon-padding;
-		}
-
-		&.playPauseButton {
-			height: @agate-mediacontrols-playpause-button-height;
-			width: @agate-mediacontrols-playpause-button-height;
+		.button {
+			height: @agate-mediacontrols-button-height;
+			min-width: @agate-mediacontrols-button-min-width;
+			.margin-start-end(@agate-mediacontrols-button-margin);
+			width: @agate-mediacontrols-button-bg-width;
 
 			.bg {
-				border-radius: @agate-mediacontrols-playpause-button-bg-border-radius;
+				border: @agate-mediacontrols-button-bg-border;
 			}
 
-			&,
-			.client {
-				.icon {
-					font-size: @agate-mediacontrols-playpause-icon-font-size;
-					height: @agate-mediacontrols-playpause-icon-height;
-					line-height: @agate-mediacontrols-playpause-icon-height;
-					.margin-start-end(@agate-mediacontrols-playpause-button-margin);
-					padding: @agate-mediacontrols-playpause-icon-padding;
-					width: @agate-mediacontrols-playpause-icon-height;
+			.icon {
+				font-size: @agate-mediacontrols-icon-font-size;
+				height: @agate-mediacontrols-icon-height;
+				line-height: @agate-mediacontrols-icon-height;
+				padding: @agate-mediacontrols-button-icon-padding;
+				width: @agate-mediacontrols-icon-height;
+			}
+
+			&.playPauseButton {
+				height: @agate-mediacontrols-playpause-button-height;
+				.margin-start-end(@agate-mediacontrols-playpause-button-margin);
+				width: @agate-mediacontrols-playpause-button-height;
+
+				.bg {
+					border-radius: @agate-mediacontrols-playpause-button-bg-border-radius;
+				}
+
+				&,
+				.client {
+					.icon {
+						font-size: @agate-mediacontrols-playpause-icon-font-size;
+						height: @agate-mediacontrols-playpause-icon-height;
+						line-height: @agate-mediacontrols-playpause-icon-height;
+						padding: @agate-mediacontrols-playpause-icon-padding;
+						width: @agate-mediacontrols-playpause-icon-height;
+					}
+				}
+			}
+
+			&.repeat {
+				.bg {
+					background-color: @agate-accent;
 				}
 			}
 		}
 
-		&.repeat {
-			.bg {
-				background-color: @agate-accent;
+		&.full {
+			/* Available for export */
+		}
+
+		&.light {
+			bottom: @agate-mediacontrols-light-bottom;
+
+			.button {
+				height: @agate-mediacontrols-light-button-height;
+				.margin-start-end(@agate-mediacontrols-light-button-margin);
+				min-width: @agate-mediacontrols-light-button-height;
+				width: @agate-mediacontrols-light-button-height;
+
+				.icon {
+					font-size: @agate-mediacontrols-light-icon-font-size;
+					height: @agate-mediacontrols-light-icon-height;
+					line-height: @agate-mediacontrols-light-icon-height;
+					width: @agate-mediacontrols-light-icon-height;
+				}
+
+				&.playPauseButton {
+					height: @agate-mediacontrols-light-playpause-button-height;
+					.margin-start-end(@agate-mediacontrols-light-playpause-button-margin);
+					min-width: @agate-mediacontrols-light-playpause-button-height;
+					width: @agate-mediacontrols-light-playpause-button-height;
+
+					&,
+					.client {
+						.icon {
+							font-size: @agate-mediacontrols-light-playpause-icon-font-size;
+							height: @agate-mediacontrols-light-playpause-icon-height;
+							line-height: @agate-mediacontrols-light-playpause-icon-height;
+							width: @agate-mediacontrols-light-playpause-icon-height;
+						}
+					}
+				}
 			}
 		}
 	}
 });
-
-.icon {
-	.applySkins({
-		font-size: @agate-mediacontrols-icon-font-size;
-		height: @agate-mediacontrols-icon-height;
-		line-height: @agate-mediacontrols-icon-height;
-		width: @agate-mediacontrols-icon-height;
-	})
-}

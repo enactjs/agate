@@ -278,11 +278,21 @@ const MediaPlayerBase = kind({
 		 * @type {Number}
 		 * @public
 		 */
-		total: PropTypes.number
+		total: PropTypes.number,
+
+		/**
+		 * Specifies what kind of layout the MediaPlayer should have.
+		 *
+		 * @type {('full'|'light')}
+		 * @default 'full'
+		 * @public
+		 */
+		type: PropTypes.oneOf(['full', 'light'])
 	},
 
 	defaultProps: {
-		mediaComponent: 'audio'
+		mediaComponent: 'audio',
+		type: 'full'
 	},
 
 	styles: {
@@ -291,10 +301,11 @@ const MediaPlayerBase = kind({
 	},
 
 	computed: {
+		className: ({type, styler}) => styler.append(type),
 		durFmt: ({locale}) => getDurFmt(locale)
 	},
 
-	render: ({currentTime, disabled, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, total, ...rest}) => {
+	render: ({currentTime, disabled, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, total, type, ...rest}) => {
 		delete rest.source;
 
 		return (
@@ -312,11 +323,13 @@ const MediaPlayerBase = kind({
 					onChange={onChange}
 					paused={paused}
 					value={proportionPlayed}
+					type={type}
 				/>
 				<Times
 					current={currentTime}
 					formatter={durFmt}
 					total={total}
+					type={type}
 				/>
 				<MediaControls
 					disabled={disabled}
@@ -329,6 +342,7 @@ const MediaPlayerBase = kind({
 					paused={paused}
 					repeat={repeat}
 					shuffle={shuffle}
+					type={type}
 				/>
 			</Container>
 		);

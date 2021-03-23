@@ -26,7 +26,16 @@ const MediaSlider = kind({
 		 * @default true
 		 * @public
 		 */
-		paused: PropTypes.bool
+		paused: PropTypes.bool,
+
+		/**
+		 * Specifies what kind of layout the MediaPlayer should have.
+		 *
+		 * @type {('full'|'light')}
+		 * @default 'full'
+		 * @public
+		 */
+		type: PropTypes.oneOf(['full', 'light'])
 	},
 
 	defaultProps: {
@@ -39,11 +48,12 @@ const MediaSlider = kind({
 	},
 
 	computed: {
-		className: ({paused, styler}) => styler.append({paused})
+		className: ({paused, type, styler}) => styler.append(type, {paused})
 	},
 
 	render: ({...rest}) => {
 		delete rest.paused;
+		delete rest.type;
 
 		return (
 			<Slider
