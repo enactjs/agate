@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import UiItem, {ItemBase as UiItemBase} from '@enact/ui/Item';
-
 import Icon from '@enact/agate/Icon';
 import Item, {ItemBase} from '@enact/agate/Item';
 

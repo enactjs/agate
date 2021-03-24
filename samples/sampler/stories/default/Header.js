@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import {Fragment} from 'react';
-
 import Button from '@enact/agate/Button';
 import {Header, HeaderBase} from '@enact/agate/Header';
 

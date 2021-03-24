@@ -4,7 +4,6 @@ import {boolean} from '@enact/storybook-utils/addons/knobs';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 
-
 import BodyText from '@enact/agate/BodyText';
 import Button from '@enact/agate/Button';
 import Icon from '@enact/agate/Icon';
@@ -78,14 +77,14 @@ export const ATourOfSampler = () => (
 			Click me
 		</Button>
 		<HintDialog
-			style={{top: 36, right: 48}}
-			length={24}
+			style={{top: 6, left: 90}}
+			length={102}
 			pointerPosition="above"
 		>
-			Click <b>Show Info</b> to see the live source code for the sample
+			Click <b>Docs</b> to see the live source code for the sample
 		</HintDialog>
 		<HintDialog
-			style={riSafe({position: 'relative', top: 60, left: 0})}
+			style={riSafe({position: 'relative', top: 25, left: 0})}
 			length={30}
 			pointerPosition="left"
 		>

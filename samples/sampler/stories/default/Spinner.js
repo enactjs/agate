@@ -4,7 +4,6 @@ import kind from '@enact/core/kind';
 import UiSpinner, {SpinnerBase as UiSpinnerBase} from '@enact/ui/Spinner';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
-
 import Skinnable from '@enact/agate/Skinnable';
 import Spinner, {SpinnerBase} from '@enact/agate/Spinner';
 

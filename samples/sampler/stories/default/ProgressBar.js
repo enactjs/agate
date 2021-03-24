@@ -1,13 +1,13 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, number} from '@enact/storybook-utils/addons/knobs';
 import UiProgressBar from '@enact/ui/ProgressBar';
-
 import ProgressBar, {ProgressBarBase, ProgressBarTooltip} from '@enact/agate/ProgressBar';
 
+ProgressBar.displayName = 'ProgressBar';
+ProgressBarTooltip.displayName = 'ProgressBarTooltip';
 const ProgressBarConfig = mergeComponentMetadata('ProgressBar', ProgressBarBase, ProgressBar, UiProgressBar);
 const ProgressBarTooltipConfig = mergeComponentMetadata('ProgressBarTooltip', ProgressBarTooltip);
 
-ProgressBarTooltip.displayName = 'ProgressBarTooltip';
 
 export default {
 	title: 'Agate/ProgressBar',

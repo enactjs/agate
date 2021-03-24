@@ -5,14 +5,13 @@ import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import PropTypes from 'prop-types';
 import {useState} from 'react';
-
 import Button from '@enact/agate/Button';
 import Header from '@enact/agate/Header';
 import {Panels, Panel} from '@enact/agate/Panels';
 import kind from '@enact/core/kind';
 import {clamp} from '@enact/core/util';
 
-Panels.displayNames = 'Panels';
+Panels.displayName = 'Panels';
 const Config = mergeComponentMetadata('Panels', Panels);
 
 const FirstPanel = kind({
@@ -74,6 +73,10 @@ export const _Panels = () => (
 
 _Panels.storyName = 'Panels';
 _Panels.parameters = {
+	props: {
+		noScroller: true,
+		noPanels: true
+	},
 	info: {
 		text: 'The basic Panels'
 	}

@@ -3,7 +3,6 @@ import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
 import ri from '@enact/ui/resolution';
 import {VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
-
 import Item from '@enact/agate/Item';
 import VirtualList from '@enact/agate/VirtualList';
 

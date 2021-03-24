@@ -3,12 +3,11 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {number, select, text} from '@enact/storybook-utils/addons/knobs';
 import UiIcon from '@enact/ui/Icon';
 import PropTypes from 'prop-types';
-
-import {iconList, iconListSilicon} from './icons';
-
 import Skinnable from '@enact/agate/Skinnable';
 import Icon, {IconBase} from '@enact/agate/Icon';
 import Heading from '@enact/agate/Heading';
+
+import {iconList, iconListSilicon} from './icons';
 
 // import icons
 import docs from '../../images/icon-enact-docs.png';

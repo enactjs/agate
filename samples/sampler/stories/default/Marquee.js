@@ -2,10 +2,10 @@ import kind from '@enact/core/kind';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, number, select, text} from '@enact/storybook-utils/addons/knobs';
 import PropTypes from 'prop-types';
-
 import Marquee from '@enact/agate/Marquee';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 
+Marquee.displayName = 'Marquee';
 const Config = mergeComponentMetadata('Marquee', Marquee);
 
 const I18nMarqueeBase = kind({

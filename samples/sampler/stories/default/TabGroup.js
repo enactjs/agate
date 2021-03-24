@@ -1,6 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {select} from '@enact/storybook-utils/addons/knobs';
-
 import Button from '@enact/agate/Button';
 import TabGroup from '@enact/agate/TabGroup';
 

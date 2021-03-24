@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-
 import Icon from '@enact/agate/Icon';
 import Item, {ItemBase} from '@enact/agate/Item';
 import RadioItem, {RadioItemBase} from '@enact/agate/RadioItem';

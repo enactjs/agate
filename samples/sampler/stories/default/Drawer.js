@@ -3,7 +3,6 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, number, select, text} from '@enact/storybook-utils/addons/knobs';
 import BodyText from '@enact/ui/BodyText';
-
 import Drawer, {DrawerBase} from '@enact/agate/Drawer';
 import Heading from '@enact/agate/Heading';
 

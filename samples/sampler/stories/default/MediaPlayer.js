@@ -1,6 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean} from '@enact/storybook-utils/addons/knobs';
-
 import MediaPlayer from '@enact/agate/MediaPlayer';
 
 MediaPlayer.displayname = 'MediaPlayer';
@@ -30,7 +29,6 @@ export const _MediaPlayer = () => (
 		}
 	</MediaPlayer>
 );
-
 
 _MediaPlayer.storyName = 'MediaPlayer';
 _MediaPlayer.parameters = {

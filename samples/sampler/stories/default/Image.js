@@ -2,7 +2,6 @@ import {action} from '@enact/storybook-utils/addons/actions';
 import {object, select} from '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import ri from '@enact/ui/resolution';
-
 import Image, {ImageBase, ImageDecorator} from '@enact/agate/Image';
 
 const src = {
@@ -52,5 +51,7 @@ export const _Image = () => (
 
 _Image.storyname = 'Image';
 _Image.parameters = {
-	text: 'The basic Image'
+	info: {
+		text: 'The basic Image'
+	}
 };

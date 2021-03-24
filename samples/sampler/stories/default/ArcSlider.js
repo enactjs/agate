@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, number} from '@enact/storybook-utils/addons/knobs';
-
 import ArcSlider, {ArcSliderBase} from '@enact/agate/ArcSlider';
 
 ArcSlider.displayName = 'ArcSlider';
@@ -34,6 +33,7 @@ export const _ArcSlider = () => (
 		radius={select('radius', prop.radius, Config)}
 		startAngle={number('startAngle', Config, {range: true, min: 0, max: 360})}
 		step={number('step', Config)}
+		strokeWidth={number('strokeWidth', Config)}
 	/>
 );
 

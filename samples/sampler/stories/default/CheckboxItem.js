@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-
 import Checkbox, {CheckboxBase} from '@enact/agate/Checkbox';
 import CheckboxItem, {CheckboxItemBase} from '@enact/agate/CheckboxItem';
 import Icon from '@enact/agate/Icon';

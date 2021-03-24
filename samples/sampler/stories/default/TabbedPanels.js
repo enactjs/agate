@@ -3,7 +3,6 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
 import {useState} from 'react';
 import PropTypes from 'prop-types';
-
 import Button from '@enact/agate/Button';
 import Icon from '@enact/agate/Icon';
 import Item from '@enact/agate/Item';

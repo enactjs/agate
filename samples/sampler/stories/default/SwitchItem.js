@@ -1,6 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-
 import SwitchItem from '@enact/agate/SwitchItem';
 
 import {iconList} from './icons';

@@ -1,13 +1,12 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import {LabeledIconBase as UiLabeledIconBase, LabeledIcon as UiLabeledIcon} from '@enact/ui/LabeledIcon';
-
 import {LabeledIconButtonBase, LabeledIconButton} from '@enact/agate/LabeledIconButton';
 
 import {iconList} from './icons';
 
+LabeledIconButton.displayName = 'LabeledIconButton';
 const Config = mergeComponentMetadata('LabeledIconButton', UiLabeledIconBase, UiLabeledIcon, LabeledIconButtonBase, LabeledIconButton);
-Config.displayName = 'LabeledIconButton';
 
 export default {
 	title: 'Agate/LabeledIconButton',

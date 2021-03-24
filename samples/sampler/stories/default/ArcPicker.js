@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
-
 import ArcPicker, {ArcPickerBase} from '@enact/agate/ArcPicker';
 
 ArcPicker.displayName = 'ArcPicker';
@@ -39,6 +38,6 @@ export const _ArcPicker = () => {
 _ArcPicker.storyName = 'ArcPicker';
 _ArcPicker.parameters = {
 	info: {
-		text: 'Basic usage of ArcPicker'
+		text: 'The basic ArcPicker'
 	}
 };

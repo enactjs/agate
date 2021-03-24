@@ -1,6 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {text} from '@enact/storybook-utils/addons/knobs';
-
 import Button from '@enact/agate/Button';
 import Header from '@enact/agate/Header';
 import {Panel} from '@enact/agate/Panels';
@@ -29,5 +28,7 @@ _Panel.parameters = {
 		noScroller: true,
 		noPanel: true
 	},
-	text: 'The basic Panel'
+	info: {
+		text: 'The basic Panel'
+	}
 };

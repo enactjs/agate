@@ -1,6 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-
 import BodyText from '@enact/ui/BodyText';
 import Heading, {HeadingBase} from '@enact/agate/Heading';
 

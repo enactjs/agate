@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-
 import {PickerBase} from '@enact/agate/internal/Picker';
 import Picker from '@enact/agate/Picker';
 

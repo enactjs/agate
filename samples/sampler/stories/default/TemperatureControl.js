@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
-
 import TemperatureControl, {TemperatureControlBase} from '@enact/agate/TemperatureControl';
 
 const prop = {
