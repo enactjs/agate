@@ -91,13 +91,6 @@ const FanSpeedControlBase = kind({
 		onClick: PropTypes.func,
 
 		/**
-		 * State of possible skin variants.
-		 *
-		 * @type {Object}
-		 */
-		skinVariants: PropTypes.object,
-
-		/**
 		 * Value of FanSpeedControl.
 		 *
 		 * @type {Number}
@@ -119,25 +112,19 @@ const FanSpeedControlBase = kind({
 	},
 
 	computed: {
-		backgroundColor:({skinVariants}) => skinVariants.night ? '#444444' : '#eeeeee',
 		children: ({min, max}) => range(min, max + 1),
-		className: ({icon, styler}) => styler.append({noIcon: !icon}),
-		foregroundColor:({skinVariants}) => skinVariants.night ? '#eeeeee' : '#444444'
+		className: ({icon, styler}) => styler.append({noIcon: !icon})
 	},
 
-	render: ({backgroundColor, children, disabled, foregroundColor, icon, max, min, onChange, value, ...rest}) => {
+	render: ({children, disabled, icon, max, min, onChange, value, ...rest}) => {
 		const ariaProps = extractAriaProps(rest);
-
-		delete rest.skinVariants;
 
 		return (
 			<div {...rest}>
 				<ArcPicker
 					{...ariaProps}
-					backgroundColor={backgroundColor}
 					disabled={disabled}
 					endAngle={312}
-					foregroundColor={foregroundColor}
 					max={max}
 					min={min}
 					onChange={onChange}
@@ -166,7 +153,7 @@ const FanSpeedControlBase = kind({
  */
 const FanSpeedControlDecorator = compose(
 	Changeable,
-	Skinnable({variantsProp: 'skinVariants'})
+	Skinnable
 );
 
 /**
