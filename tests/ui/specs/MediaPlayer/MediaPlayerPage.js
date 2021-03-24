@@ -76,7 +76,8 @@ class MediaPlayerPage extends Page {
 		const mediaPlayerDefault = new MediaPlayerInterface('mediaPlayerDefault');
 		const mediaPlayerDisabled = new MediaPlayerInterface('mediaPlayerDisabled');
 		const mediaPlayerSpotlightDisabled = new MediaPlayerInterface('mediaPlayerSpotlightDisabled');
-		this.components = {mediaPlayerDefault, mediaPlayerDisabled, mediaPlayerSpotlightDisabled};
+		const mediaPlayerLight = new MediaPlayerInterface('mediaPlayerLight');
+		this.components = {mediaPlayerDefault, mediaPlayerDisabled, mediaPlayerSpotlightDisabled, mediaPlayerLight};
 	}
 
 	waitForPlayMedia (mediaPlayer, timeout) {
