@@ -18,42 +18,39 @@ const audioFiles = [
 	'https://sampleswap.org/mp3/artist/47067/DJ-Masque_Dont-Forget-To-Be-Yourself-160.mp3'
 ];
 
-const app = (props) =>
-	<Scroller style={{height: scaleToRem(900)}}>
-		<div {...props}>
-			<div style={{marginTop: '40px'}}>
-				<Heading>Media Player Default</Heading>
-				<MediaPlayer id="mediaPlayerDefault">
-					{
-						audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
-					}
-				</MediaPlayer>
-			</div>
-			<div style={{marginTop: '80px'}}>
-				<Heading>Media Player Disabled</Heading>
-				<MediaPlayer id="mediaPlayerDisabled" disabled>
-					{
-						audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
-					}
-				</MediaPlayer>
-			</div>
-			<div style={{marginTop: '80px'}}>
-				<Heading>Media Player SpotlightDisabled</Heading>
-				<MediaPlayer id="mediaPlayerSpotlightDisabled" spotlightDisabled>
-					{
-						audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
-					}
-				</MediaPlayer>
-			</div>
-			<div style={{marginTop: '80px'}}>
-				<Heading>Media Player Light</Heading>
-				<MediaPlayer id="mediaPlayerLight">
-					{
-						audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
-					}
-				</MediaPlayer>
-			</div>
-		</div>;
-	</Scroller>;
+const app = (props) => <div {...props}>
+	<div style={{display: "inline-block", marginTop: '40px', width: '50%'}}>
+		<Heading size="tiny">Media Player Default</Heading>
+		<MediaPlayer id="mediaPlayerDefault">
+			{
+				audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
+			}
+		</MediaPlayer>
+	</div>
+	<div style={{display: "inline-block", marginTop: '40px', width: '50%'}}>
+		<Heading size="tiny">Media Player Disabled</Heading>
+		<MediaPlayer id="mediaPlayerDisabled" disabled>
+			{
+				audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
+			}
+		</MediaPlayer>
+	</div>
+	<div style={{display: "inline-block", marginTop: '80px', width: '50%'}}>
+		<Heading size="tiny">Media Player SpotlightDisabled</Heading>
+		<MediaPlayer id="mediaPlayerSpotlightDisabled" spotlightDisabled>
+			{
+				audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
+			}
+		</MediaPlayer>
+	</div>
+	<div style={{display: "inline-block", marginTop: '80px', width: '50%'}}>
+		<Heading size="tiny">Media Player Light</Heading>
+		<MediaPlayer id="mediaPlayerLight" type="light">
+			{
+				audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
+			}
+		</MediaPlayer>
+	</div>
+</div>;
 
 export default ThemeDecorator(app);

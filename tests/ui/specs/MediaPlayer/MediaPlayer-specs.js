@@ -102,8 +102,7 @@ describe('MediaPlayer', function () {
 	describe('disabled', function () {
 		it('should have the slider knob focused', function () {
 			expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
-			Page.spotlightDown();
-			Page.spotlightDown();
+			Page.spotlightRight();
 
 			expect(mediaPlayerDisabled.slider.isFocused()).to.be.true();
 		});
@@ -129,8 +128,7 @@ describe('MediaPlayer', function () {
 		describe('5-way', function () {
 			it('should focus `play` button on 5-way down', function () {
 				expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
-				Page.spotlightDown();
-				Page.spotlightDown();
+				Page.spotlightRight();
 
 				expect(mediaPlayerDisabled.slider.isFocused()).to.be.true();
 
@@ -141,8 +139,7 @@ describe('MediaPlayer', function () {
 
 			it('should focus `previous` button on 5-way down, then left', function () {
 				expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
-				Page.spotlightDown();
-				Page.spotlightDown();
+				Page.spotlightRight();
 
 				expect(mediaPlayerDisabled.slider.isFocused()).to.be.true();
 
@@ -154,8 +151,7 @@ describe('MediaPlayer', function () {
 
 			it('should focus back `play` button when navigating back to media controls ', function () {
 				expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
-				Page.spotlightDown();
-				Page.spotlightDown();
+				Page.spotlightRight();
 
 				expect(mediaPlayerDisabled.slider.isFocused()).to.be.true();
 
@@ -232,6 +228,8 @@ describe('MediaPlayer', function () {
 		it('should play media on playButton click', function () {
 			mediaPlayerLight.focus();
 			expect(mediaPlayerLight.knob.getCSSProperty('left').value).to.equal('0px');
+			browser.pause(2000)
+			Page.spotlightDown();
 
 			mediaPlayerLight.playButton.click();
 			Page.waitForPlayMedia(mediaPlayerLight);
@@ -248,7 +246,6 @@ describe('MediaPlayer', function () {
 
 			expect(mediaPlayerLight.source).to.equal('https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3');
 		});
-
 
 		describe('5-way', function () {
 			it('should focus `play` button on 5-way down', function () {
@@ -277,10 +274,6 @@ describe('MediaPlayer', function () {
 				Page.spotlightDown();
 				Page.spotlightLeft();
 				expect(mediaPlayerLight.previousButton.isFocused()).to.be.true();
-				Page.spotlightLeft();
-				expect(mediaPlayerLight.shuffleButton.isFocused()).to.be.true();
-				Page.spotlightLeft();
-				expect(mediaPlayerLight.repeatButton.isFocused()).to.be.true();
 				Page.spotlightUp();
 				Page.spotlightDown();
 
