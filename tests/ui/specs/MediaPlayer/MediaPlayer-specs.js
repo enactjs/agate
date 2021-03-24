@@ -228,7 +228,7 @@ describe('MediaPlayer', function () {
 		it('should play media on playButton click', function () {
 			mediaPlayerLight.focus();
 			expect(mediaPlayerLight.knob.getCSSProperty('left').value).to.equal('0px');
-			browser.pause(2000)
+
 			Page.spotlightDown();
 
 			mediaPlayerLight.playButton.click();

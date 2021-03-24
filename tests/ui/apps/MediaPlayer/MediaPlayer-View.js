@@ -1,9 +1,7 @@
 import Heading from '../../../../Heading';
 import MediaPlayer from '../../../../MediaPlayer';
-import Scroller from '../../../../Scroller';
 import ThemeDecorator from '../../../../ThemeDecorator';
 import spotlight from '@enact/spotlight';
-import {scaleToRem} from '@enact/ui/resolution';
 
 // NOTE: Forcing pointer mode off so we can be sure that regardless of webOS pointer mode the app
 // runs the same way
@@ -19,7 +17,7 @@ const audioFiles = [
 ];
 
 const app = (props) => <div {...props}>
-	<div style={{display: "inline-block", marginTop: '40px', width: '50%'}}>
+	<div style={{display: 'inline-block', marginTop: '40px', width: '50%'}}>
 		<Heading size="tiny">Media Player Default</Heading>
 		<MediaPlayer id="mediaPlayerDefault">
 			{
@@ -27,7 +25,7 @@ const app = (props) => <div {...props}>
 			}
 		</MediaPlayer>
 	</div>
-	<div style={{display: "inline-block", marginTop: '40px', width: '50%'}}>
+	<div style={{display: 'inline-block', marginTop: '40px', width: '50%'}}>
 		<Heading size="tiny">Media Player Disabled</Heading>
 		<MediaPlayer id="mediaPlayerDisabled" disabled>
 			{
@@ -35,7 +33,7 @@ const app = (props) => <div {...props}>
 			}
 		</MediaPlayer>
 	</div>
-	<div style={{display: "inline-block", marginTop: '80px', width: '50%'}}>
+	<div style={{display: 'inline-block', marginTop: '80px', width: '50%'}}>
 		<Heading size="tiny">Media Player SpotlightDisabled</Heading>
 		<MediaPlayer id="mediaPlayerSpotlightDisabled" spotlightDisabled>
 			{
@@ -43,7 +41,7 @@ const app = (props) => <div {...props}>
 			}
 		</MediaPlayer>
 	</div>
-	<div style={{display: "inline-block", marginTop: '80px', width: '50%'}}>
+	<div style={{display: 'inline-block', marginTop: '80px', width: '50%'}}>
 		<Heading size="tiny">Media Player Light</Heading>
 		<MediaPlayer id="mediaPlayerLight" type="light">
 			{
