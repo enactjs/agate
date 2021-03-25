@@ -1,5 +1,4 @@
 import ri from '@enact/ui/resolution';
-
 import ImageItem from '@enact/agate/ImageItem';
 
 ImageItem.displayName = 'ImageItem';

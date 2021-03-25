@@ -1,9 +1,9 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {number, select} from '@enact/storybook-utils/addons/knobs';
-
 import Arc, {ArcBase} from '@enact/agate/Arc';
 
+Arc.displayName = 'Arc';
 const Config = mergeComponentMetadata('Arc', ArcBase, Arc);
 
 // Set up some defaults for info and knobs

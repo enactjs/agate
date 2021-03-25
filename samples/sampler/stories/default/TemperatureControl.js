@@ -7,7 +7,7 @@ const prop = {
 	unit: ['Celsius', 'Fahrenheit']
 };
 
-TemperatureControl.displayname = 'TemperatureControl';
+TemperatureControl.displayName = 'TemperatureControl';
 const Config = mergeComponentMetadata('TemperatureControl', TemperatureControlBase, TemperatureControl);
 
 export default {

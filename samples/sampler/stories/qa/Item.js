@@ -1,14 +1,13 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import UiItem, {ItemBase as UiItemBase} from '@enact/ui/Item';
-
 import Heading from '@enact/agate/Heading';
 import Icon, {icons} from '@enact/agate/Icon';
 import Item, {ItemBase} from '@enact/agate/Item';
 import Scroller from '@enact/agate/Scroller';
 
-const Config = mergeComponentMetadata('Item', UiItemBase, UiItem, ItemBase, Item);
 Item.displayName = 'Item';
+const Config = mergeComponentMetadata('Item', UiItemBase, UiItem, ItemBase, Item);
 
 const iconList = [null, ...Object.keys(icons)];
 
@@ -93,4 +92,9 @@ export const kitchenSink = () => (
 	</Scroller>
 );
 
-kitchenSink.storyName = 'Item Kitchen Sink';
+kitchenSink.storyName = 'Kitchen Sink';
+kitchenSink.parameters = {
+	info: {
+		text: 'Item Kitchen Sink'
+	}
+};
