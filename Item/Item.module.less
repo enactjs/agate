@@ -113,6 +113,12 @@
 				max-width: @agate-item-inline-content-max-width;
 			}
 
+			&:not(.centered) {
+				.itemContent {
+					min-width: @agate-item-inline-notcentered-itemcontent-min-width;
+				}
+			}
+
 			.itemContent,
 			.content {
 				flex-shrink: 1;

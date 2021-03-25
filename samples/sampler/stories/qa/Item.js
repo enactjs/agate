@@ -102,17 +102,27 @@ storiesOf('Item', module)
 				<Item inline size="small" label="label above" labelPosition="above" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Small Item</Item>
 				<Item inline size="small" label="label before" labelPosition="before" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Small Item</Item>
 				<Item inline size="small" label="label after" labelPosition="after" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Small Item</Item>
-				<Heading showLine>Item centered, labels and sizes</Heading>
+				<Heading showLine>Item centered, with labels, slot before, slot after, and sizes</Heading>
 				<Item centered size="large">Large Item</Item>
+				<Item centered size="large" label="label below" labelPosition="below" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Large Item</Item>
 				<Item centered size="small">Small Item</Item>
+				<Item centered size="small" label="label below" labelPosition="below" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Small Item</Item>
 				<Item centered inline label="label below" labelPosition="below" size="large">Large Item</Item>
 				<Item centered inline label="label above" labelPosition="above" size="large">Large Item</Item>
 				<Item centered inline label="label before" labelPosition="before" size="large">Large Item</Item>
 				<Item centered inline label="label after" labelPosition="after" size="large">Large Item</Item>
+				<Item centered inline label="label below" labelPosition="below" size="large" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Large Item</Item>
+				<Item centered inline label="label above" labelPosition="above" size="large" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Large Item</Item>
+				<Item centered inline label="label before" labelPosition="before" size="large" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Large Item</Item>
+				<Item centered inline label="label after" labelPosition="after" size="large" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Large Item</Item>
 				<Item centered inline label="label below" labelPosition="below" size="small">Small Item</Item>
 				<Item centered inline label="label above" labelPosition="above" size="small">Small Item</Item>
 				<Item centered inline label="label before" labelPosition="before" size="small">Small Item</Item>
 				<Item centered inline label="label after" labelPosition="after" size="small">Small Item</Item>
+				<Item centered inline label="label below" labelPosition="below" size="small" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Small Item</Item>
+				<Item centered inline label="label above" labelPosition="above" size="small" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Small Item</Item>
+				<Item centered inline label="label before" labelPosition="before" size="small" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Small Item</Item>
+				<Item centered inline label="label after" labelPosition="after" size="small" slotAfter={<Icon>home</Icon>} slotBefore={<Icon>home</Icon>}>Small Item</Item>
 				<Heading showLine>Item selected with labels and sizes</Heading>
 				<Item selected size="large">Large Item</Item>
 				<Item selected size="small">Small Item</Item>
