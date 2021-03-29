@@ -75,11 +75,11 @@
 			.labelAfter,
 			.labelBefore {
 				.content {
-					min-width: @agate-item-content-width;
+					max-width: @agate-item-content-width;
 				}
 
 				.label {
-					max-width: @agate-item-label-max-width;
+					max-width: @agate-item-label-width;
 				}
 			}
 		}
@@ -124,31 +124,60 @@
 				flex-shrink: 1;
 				overflow: auto;
 			}
+		}
 
-			&.hasLabel {
-				.itemContent {
-					max-width: @agate-item-inline-content-max-width;
+		&.centered {
+			// override Marquee's alignment.
+			.marquee {
+				text-align: center;
+			}
 
-					&.labelAfter,
-					&.labelBefore {
-						.content {
-							min-width: @agate-item-labelafterbefore-content-min-width;
+			.itemContent {
+				max-width: 100%;
+
+				&.labelAfter,
+				&.labelBefore {
+					.content {
+						width: @agate-item-content-width;
+					}
+					.label {
+						width: @agate-item-label-width;
+					}
+				}
+
+				&.labelAfter {
+					.content {
+						.marquee {
+							text-align: right;
 						}
-						.label {
-							max-width: @agate-item-labelafterbefore-label-max-width;
+					}
+					.label {
+						.marquee {
+							text-align: left;
+						}
+					}
+				}
+
+				&.labelBefore {
+					.content {
+						.marquee {
+							text-align: left;
+						}
+					}
+					.label {
+						.marquee {
+							text-align: right;
 						}
 					}
 				}
 			}
-		}
-
-		&.centered {
-			.itemContent {
-				max-width: fit-content;
-			}
 
 			&.inline {
 				max-width: @agate-item-inline-max-width;
+
+				.itemContent {
+					width: 100%;
+				}
 			}
 		}
 
