@@ -25,7 +25,7 @@ import Skinnable from '../Skinnable';
 
 import componentCss from './Item.module.less';
 
-const Marquee = MarqueeDecorator({className: componentCss.marquee}, MarqueeBase)
+const Marquee = MarqueeDecorator({className: componentCss.marquee}, MarqueeBase);
 
 /**
  * Renders the Item content.
