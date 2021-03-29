@@ -155,7 +155,7 @@ describe('Item Specs', () => {
 		const subject = mount(<ItemBase>Hello מצב תמונה</ItemBase>);
 
 		const expected = 'rtl';
-		const actual = subject.find('.text').prop('style');
+		const actual = subject.find('.text').at(1).prop('style');
 
 		expect(actual).toHaveProperty('direction', expected);
 	});
