@@ -5,9 +5,7 @@ import {useState} from 'react';
 import {storiesOf} from '@storybook/react';
 
 import Button from '@enact/agate/Button';
-import CheckboxItem from '@enact/agate/CheckboxItem';
-import Input from '@enact/agate/Input';
-import Picker from '@enact/agate/Picker';
+import LabeledIconButton from '@enact/agate/LabeledIconButton';
 import PopupMenu from '@enact/agate/PopupMenu';
 
 import css from './PopupMenu.module.less';
@@ -60,13 +58,24 @@ storiesOf('Agate', module).add(
 						<h2 className={css.cannotClose}>
 							Warning! With <code>closeButton=false</code> and <code>noAutoDismiss=true</code> it will be impossible to close this menu.
 						</h2>)}
-					<Picker>
-						{['Crunchy', 'Smooth']}
-					</Picker>
-					<Input placeholder="How many?" type="number" />
-					<CheckboxItem>
-						Rush delivery
-					</CheckboxItem>
+					<LabeledIconButton
+						css={css}
+						inline
+						icon="home"
+						size="huge"
+						backgroundOpacity="lightOpaque"
+					>
+						Home
+					</LabeledIconButton>
+					<LabeledIconButton
+						css={css}
+						inline
+						icon="user"
+						size="huge"
+						backgroundOpacity="lightOpaque"
+					>
+						User
+					</LabeledIconButton>
 				</PopupMenu>
 			</Story>
 		);
