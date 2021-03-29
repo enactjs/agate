@@ -107,7 +107,7 @@ const ThumbnailItemBase = kind({
 
 	render: ({css, children, src, slotBefore, ...rest}) => {
 		return (
-			<Item {...rest} css={css} size="small">
+			<Item {...rest} css={css}>
 				<slotBefore>
 					<Image
 						className={css.thumbnail}
