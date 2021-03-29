@@ -47,6 +47,7 @@
 		.agate-item-sizing();
 
 		line-height: @agate-item-line-height;
+		max-width: @agate-item-max-width;
 		border-style: solid;
 		border-width: @agate-item-border-width;
 		border-color: @agate-item-border-color;
@@ -60,10 +61,12 @@
 
 				&.labelBefore .label {
 					.padding-start-end(0, @agate-item-label-padding);
+					align-self: center;
 				}
 
 				&.labelAfter .label {
 					.padding-start-end(@agate-item-label-padding, 0);
+					align-self: center;
 				}
 			}
 		}
@@ -72,12 +75,10 @@
 			.labelAfter,
 			.labelBefore {
 				.content {
-					box-sizing: border-box;
 					min-width: @agate-item-content-width;
 				}
 
 				.label {
-					box-sizing: border-box;
 					max-width: @agate-item-label-max-width;
 				}
 			}
@@ -105,10 +106,17 @@
 		&.inline {
 			// overriding ui/Item's inline-block
 			display: inline-flex;
+			min-width: @agate-item-inline-min-width;
 			max-width: @agate-item-inline-max-width;
 
 			.itemContent {
 				max-width: @agate-item-inline-content-max-width;
+			}
+
+			&:not(.centered) {
+				.itemContent {
+					min-width: @agate-item-inline-notcentered-itemcontent-min-width;
+				}
 			}
 
 			.itemContent,
@@ -118,8 +126,18 @@
 			}
 
 			&.hasLabel {
-				.slotAfter {
-					.padding-start-end(@agate-item-slotafter-padding-left, 0);
+				.itemContent {
+					max-width: @agate-item-inline-content-max-width;
+
+					&.labelAfter,
+					&.labelBefore {
+						.content {
+							min-width: @agate-item-labelafterbefore-content-min-width;
+						}
+						.label {
+							max-width: @agate-item-labelafterbefore-label-max-width;
+						}
+					}
 				}
 			}
 		}
@@ -134,14 +152,23 @@
 			}
 		}
 
-		&.large { /* Needed to prevent global class being added in the DOM */ }
+		&.large {
+			height: @agate-item-large-height;
+
+			&.hasLabel {
+				height: @agate-item-large-haslabel-height;
+			}
+		}
 
 		// TODO: needs to be modified when new requirements for small item is available
 		&.small {
+			height: @agate-item-small-height;
 			font-size: @agate-item-small-font-size;
 			line-height: @agate-item-small-line-height;
 
 			&.hasLabel {
+				height: @agate-item-small-haslabel-height;
+
 				.itemContent {
 					padding: @agate-item-small-haslabel-padding;
 				}
@@ -156,14 +183,27 @@
 			}
 		}
 
+		.disabled({
+			color: @agate-item-disabled-color;
+			border-color: @agate-item-disabled-border-color;
+			opacity: @agate-item-disabled-opacity;
+		});
+
 		.focus({
 			border-color: @agate-item-focus-border-color;
 			background-color: @agate-item-focus-bg-color;
+			background-image: @agate-item-focus-bg-image;
 			color: @agate-item-focus-color;
 
 			.itemContent {
 				.label {
 					color: @agate-item-label-color;
+				}
+			}
+
+			&.selected {
+				&::before {
+					background-color: @agate-indicator-focus-bg-color;
 				}
 			}
 		});
@@ -172,21 +212,16 @@
 			background-color: @agate-item-selected-bg-color;
 			border-color: @agate-item-selected-border-color;
 			color: @agate-item-focus-color;
+			.padding-start-end(@agate-item-selected-padding);
 
 			&::before {
 				content: "";
 				height: @agate-indicator-height;
-				width: @agate-indicator-height;
+				min-width: @agate-indicator-height; // `min-width` is used to ensure that the indicator has a correct width with default item
 				background-color: @agate-indicator-bg-color;
 				border-radius: @agate-indicator-border-radius;
 				align-self: @agate-indicator-align-self;
-				margin-right: @agate-indicator-margin-right;
-			}
-
-			.itemContent {
-				.label {
-					color: @agate-item-selected-label-color;
-				}
+				.margin-start-end(0, @agate-indicator-margin-right)
 			}
 
 			// Selected+Focus colors use both sets of colors
@@ -197,7 +232,7 @@
 
 				.itemContent {
 					.label {
-						color: @agate-item-focus-color;
+						color: @agate-item-label-focus-selected-color;
 					}
 				}
 			});

@@ -188,6 +188,7 @@
 // Indicator
 // ---------------------------------------
 @agate-indicator-bg-color: @agate-accent;
+@agate-indicator-focus-bg-color: @agate-white;
 
 // Input
 // ---------------------------------------
@@ -206,13 +207,17 @@
 // ---------------------------------------
 @agate-item-border-color:                 fade(@agate-black, 40%);
 @agate-item-color:                        @agate-text-color;
-@agate-item-label-color:                  @agate-noble-gray;
-@agate-item-focus-bg-color:               fade(@agate-black, 15%);
+@agate-item-disabled-border-color:        fade(@agate-foreground, 40%);
+@agate-item-disabled-color:               @agate-foreground;
+@agate-item-disabled-opacity:             0.3;
+@agate-item-label-color:                  fade(@agate-foreground, 70%);
+@agate-item-label-focus-selected-color:   fade(@agate-foreground, 70%);
+@agate-item-focus-bg-color:               transparent;
+@agate-item-focus-bg-image:               @agate-gradient;
 @agate-item-focus-border-color:           @agate-item-border-color;
 @agate-item-focus-color:                  @agate-item-color;
 @agate-item-selected-border-color:        @agate-accent;
 @agate-item-selected-color:               @agate-item-label-color;
-@agate-item-selected-label-color:         @agate-foreground;
 
 // Keypad
 // ---------------------------------------
