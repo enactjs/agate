@@ -40,6 +40,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Button` style to match latest design for Silicon skin
 - `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
 - `agate/IncrementSlider` to match latest design for Silicon skin
+- `agate/LabeledIcon` to match latest design for Silicon skin
 - `agate/LabeledIconButton` styling to preserve behavior and look when props are missing
 - `agate/MediaPlayer` style to match latest design for Silicon skin
 - `agate/Slider` to match latest design for Silicon skin
