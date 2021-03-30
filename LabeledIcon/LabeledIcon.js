@@ -46,13 +46,26 @@ const LabeledIconBase = kind({
 		 * @type {Object}
 		 * @public
 		 */
-		css: PropTypes.object
+		css: PropTypes.object,
+
+		/**
+		 * The size of the icon.
+		 *
+		 * @type {('smallest'|'small'|'large'|'huge')}
+		 * @default 'large'
+		 * @public
+		 */
+		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge'])
 	},
 
 	styles: {
 		css: componentCss,
 		className: 'labeledIcon',
 		publicClassNames: true
+	},
+
+	computed: {
+		className: ({size, styler}) => styler.append(size)
 	},
 
 	render: (props) => UiLabeledIconBase.inline({
