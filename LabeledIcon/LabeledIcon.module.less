@@ -1,39 +1,18 @@
 // LabeledIcon.module.less
 //
+@import "../styles/mixins.less";
 @import "../styles/skin.less";
 
 .labeledIcon {
 	.applySkins({
-		min-width: 96px;
-		max-width: 300px;
 		margin: @agate-component-spacing;
 		padding: 0 @agate-component-spacing;
 
-		// The following rules adjust the margin of icon so it behaves in a predictable way for users of
-		// this component, when applying their own styling/layout rules.
-		&.below .icon {
-			margin-top: 0;
-			margin-bottom: @agate-component-spacing;
-		}
-		&.above .icon {
-			margin-top: @agate-component-spacing;
-			margin-bottom: 0;
-		}
-		&.after,
-		&.before,
-		&.left,
-		&.right {
-			.icon {
-				margin-top: 0;
-				margin-bottom: 0;
-			}
-		}
-
 		.label {
-			// text-overflow: ellipsis;
-			// overflow: hidden;
+			text-overflow: ellipsis;
+			overflow: hidden;
 			width: 100%;
-			// white-space: nowrap;
+			white-space: nowrap;
 		}
 
 		&.above,
@@ -41,7 +20,7 @@
 			text-align: center;
 		}
 
-		// Allow the lable to collapse to smaller than its content
+		// Allow the label to collapse to smaller than its content
 		&.after,
 		&.before,
 		&.left,
@@ -62,6 +41,263 @@
 
 		&.right {
 			text-align: left;
+		}
+
+		&.smallest,
+		&.small,
+		&.large,
+		&.huge {
+			&.above {
+				.icon {
+					margin: @agate-labeledicon-margin-vertical-above;
+				}
+			}
+
+			&.below {
+				.icon {
+					margin: @agate-labeledicon-margin-vertical-below;
+				}
+			}
+
+			&.after,
+			&.before,
+			&.left,
+			&.right {
+				padding: @agate-labeledicon-horizontal-padding;
+			}
+
+			.icon {
+				margin: @agate-labeledicon-margin-horizontal;
+			}
+		}
+
+		&.smallest,
+		&.small {
+			padding: @agate-labeledicon-small-padding;
+
+			&.after,
+			&.right {
+				.icon {
+					padding: @agate-labeledicon-padding @agate-labeledicon-padding-smallest @agate-labeledicon-padding @agate-labeledicon-padding-small;
+				}
+			}
+
+			&.after,
+			&.left {
+				.icon {
+					.enact-locale-rtl({
+						padding: @agate-labeledicon-padding @agate-labeledicon-padding-small @agate-labeledicon-padding @agate-labeledicon-padding-smallest;
+					});
+				}
+			}
+
+			&.before,
+			&.left {
+				.icon {
+					padding: @agate-labeledicon-padding @agate-labeledicon-padding-small @agate-labeledicon-padding @agate-labeledicon-padding-smallest;
+				}
+			}
+
+			&.before,
+			&.right {
+				.icon {
+					.enact-locale-rtl({
+						padding: @agate-labeledicon-padding @agate-labeledicon-padding-smallest @agate-labeledicon-padding @agate-labeledicon-padding-small;
+					});
+				}
+			}
+
+			.label {
+				height: @agate-labeledicon-label-height-small;
+				line-height: @agate-labeledicon-label-height-small;
+			}
+		}
+
+		&.smallest {
+			.label {
+				font-size: @agate-labeledicon-smallest-font-size;
+			}
+
+			&.above,
+			&.below {
+				min-width: @agate-labeledicon-smallest-vertical-min-width;
+				max-width: @agate-labeledicon-smallest-vertical-max-width;
+			}
+
+			&.after,
+			&.before,
+			&.left,
+			&.right {
+				min-width: @agate-labeledicon-smallest-horizontal-min-width;
+				max-width: @agate-labeledicon-smallest-horizontal-max-width;
+			}
+
+			.icon {
+				height: @agate-labeledicon-smallest-icon-height;
+				width: @agate-labeledicon-smallest-icon-height;
+				font-size: @agate-labeledicon-smallest-icon-font-size;
+				line-height: @agate-labeledicon-smallest-icon-height;
+			}
+		}
+
+		&.small {
+			.label {
+				font-size: @agate-labeledicon-small-font-size;
+			}
+
+			&.above,
+			&.below {
+				min-width: @agate-labeledicon-small-vertical-min-width;
+				max-width: @agate-labeledicon-small-vertical-max-width;
+			}
+
+			&.after,
+			&.before,
+			&.left,
+			&.right {
+				min-width: @agate-labeledicon-small-horizontal-min-width;
+				max-width: @agate-labeledicon-small-horizontal-max-width;
+			}
+
+			.icon {
+				height: @agate-labeledicon-small-icon-height;
+				width: @agate-labeledicon-small-icon-height;
+				font-size: @agate-labeledicon-small-icon-font-size;
+				line-height: @agate-labeledicon-small-icon-height;
+			}
+		}
+
+		&.large,
+		&.huge {
+			&.above,
+			&.below {
+				max-width: @agate-labeledicon-large-vertical-max-width;
+			}
+
+			.label {
+				height: @agate-labeledicon-label-height-large;
+				line-height: @agate-labeledicon-label-height-large;
+			}
+		}
+
+		&.large {
+			padding: @agate-labeledicon-large-padding;
+
+			.label {
+				font-size: @agate-labeledicon-large-font-size;
+			}
+
+			&.above,
+			&.below {
+				min-width: @agate-labeledicon-large-vertical-min-width;
+			}
+
+			&.after,
+			&.before,
+			&.left,
+			&.right {
+				min-width: @agate-labeledicon-large-horizontal-min-width;
+				max-width: @agate-labeledicon-large-horizontal-max-width;
+			}
+
+			&.after,
+			&.right {
+				.icon {
+					padding: @agate-labeledicon-padding @agate-labeledicon-padding-small @agate-labeledicon-padding @agate-labeledicon-padding-large;
+				}
+			}
+
+			&.after,
+			&.left {
+				.icon {
+					.enact-locale-rtl({
+						padding: @agate-labeledicon-padding @agate-labeledicon-padding-large @agate-labeledicon-padding @agate-labeledicon-padding-small;
+					});
+				}
+			}
+
+			&.before,
+			&.left {
+				.icon {
+					padding: @agate-labeledicon-padding @agate-labeledicon-padding-large @agate-labeledicon-padding @agate-labeledicon-padding-small;
+				}
+			}
+
+			&.before,
+			&.right {
+				.icon {
+					.enact-locale-rtl({
+						padding: @agate-labeledicon-padding @agate-labeledicon-padding-small @agate-labeledicon-padding @agate-labeledicon-padding-large;
+					});
+				}
+			}
+
+			.icon {
+				height: @agate-labeledicon-large-icon-height;
+				width: @agate-labeledicon-large-icon-height;
+				font-size: @agate-labeledicon-large-icon-font-size;
+				line-height: @agate-labeledicon-large-icon-height;
+			}
+		}
+
+		&.huge {
+			padding: @agate-labeledicon-huge-padding;
+
+			.label {
+				font-size: @agate-labeledicon-huge-font-size;
+			}
+
+			&.above,
+			&.below {
+				min-width: @agate-labeledicon-huge-vertical-min-width;
+			}
+
+			&.after,
+			&.before,
+			&.left,
+			&.right {
+				min-width: @agate-labeledicon-huge-horizontal-min-width;
+				max-width: @agate-labeledicon-huge-horizontal-max-width;
+			}
+
+			&.after,
+			&.right {
+				.icon {
+					padding: @agate-labeledicon-padding @agate-labeledicon-padding-medium @agate-labeledicon-padding @agate-labeledicon-padding-huge;
+				}
+			}
+
+			&.after,
+			&.left {
+				.icon {
+					.enact-locale-rtl({
+						padding: @agate-labeledicon-padding @agate-labeledicon-padding-huge @agate-labeledicon-padding @agate-labeledicon-padding-medium;
+					});
+				}
+			}
+
+			&.before,
+			&.left {
+				.icon {
+					padding: @agate-labeledicon-padding @agate-labeledicon-padding-huge @agate-labeledicon-padding @agate-labeledicon-padding-medium;
+				}
+			}
+
+			&.before,
+			&.right {
+				.icon {
+					.enact-locale-rtl({
+						padding: @agate-labeledicon-padding @agate-labeledicon-padding-medium @agate-labeledicon-padding @agate-labeledicon-padding-huge;
+					});
+				}
+			}
+
+			.icon {
+				height: @agate-labeledicon-huge-icon-height;
+				width: @agate-labeledicon-huge-icon-height;
+				font-size: @agate-labeledicon-huge-icon-font-size;
+				line-height: @agate-labeledicon-huge-icon-height;
+			}
 		}
 	});
 }

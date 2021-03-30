@@ -452,6 +452,52 @@
 @agate-keypad-text-line-height:     inherit;
 @agate-keypad-width:                inherit;
 
+// LabeledIcon
+// ---------------------------------------
+@agate-labeledicon-horizontal-padding: 0 @agate-component-spacing;
+@agate-labeledicon-huge-font-size: @agate-base-font-size;
+@agate-labeledicon-huge-horizontal-max-width: @agate-labeledicon-large-horizontal-max-width;
+@agate-labeledicon-huge-horizontal-min-width: @agate-labeledicon-large-horizontal-min-width;
+@agate-labeledicon-huge-icon-font-size: @agate-icon-huge-font-size;
+@agate-labeledicon-huge-icon-height: @agate-icon-huge-size;
+@agate-labeledicon-huge-padding: 0 @agate-component-spacing;
+@agate-labeledicon-huge-vertical-min-width: inherit;
+@agate-labeledicon-label-height-small: inherit;
+@agate-labeledicon-label-height-large: inherit;
+@agate-labeledicon-large-font-size: @agate-base-font-size;
+@agate-labeledicon-large-horizontal-max-width: 300px;
+@agate-labeledicon-large-horizontal-min-width: 96px;
+@agate-labeledicon-large-icon-font-size: @agate-icon-font-size;
+@agate-labeledicon-large-icon-height: @agate-icon-size;
+@agate-labeledicon-large-padding: 0 @agate-component-spacing;
+@agate-labeledicon-large-vertical-max-width: @agate-labeledicon-large-horizontal-max-width;
+@agate-labeledicon-large-vertical-min-width: @agate-labeledicon-large-horizontal-min-width;
+@agate-labeledicon-margin: @agate-component-spacing;
+@agate-labeledicon-margin-horizontal: 0 @agate-component-spacing;
+@agate-labeledicon-margin-vertical-above: @agate-component-spacing @agate-component-spacing 0;
+@agate-labeledicon-margin-vertical-below: 0 @agate-component-spacing @agate-component-spacing;
+@agate-labeledicon-padding: inherit;
+@agate-labeledicon-padding-huge: inherit;
+@agate-labeledicon-padding-large: inherit;
+@agate-labeledicon-padding-medium: inherit;
+@agate-labeledicon-padding-small: inherit;
+@agate-labeledicon-padding-smallest: inherit;
+@agate-labeledicon-small-font-size: @agate-base-font-size;
+@agate-labeledicon-small-horizontal-max-width: @agate-labeledicon-large-horizontal-max-width;
+@agate-labeledicon-small-horizontal-min-width: @agate-labeledicon-large-horizontal-min-width;
+@agate-labeledicon-small-icon-font-size: @agate-icon-small-font-size;
+@agate-labeledicon-small-icon-height: @agate-icon-small-size;
+@agate-labeledicon-small-padding: 0 @agate-component-spacing;
+@agate-labeledicon-small-vertical-max-width: @agate-labeledicon-large-horizontal-max-width;
+@agate-labeledicon-small-vertical-min-width: @agate-labeledicon-large-horizontal-min-width;
+@agate-labeledicon-smallest-font-size: @agate-base-font-size;
+@agate-labeledicon-smallest-horizontal-max-width: @agate-labeledicon-large-horizontal-max-width;
+@agate-labeledicon-smallest-horizontal-min-width: @agate-labeledicon-large-horizontal-min-width;
+@agate-labeledicon-smallest-icon-font-size: @agate-icon-smallest-font-size;
+@agate-labeledicon-smallest-icon-height: @agate-icon-smallest-size;
+@agate-labeledicon-smallest-vertical-max-width: @agate-labeledicon-large-horizontal-max-width;
+@agate-labeledicon-smallest-vertical-min-width: @agate-labeledicon-large-horizontal-min-width;
+
 // LabeledIconButton
 // ---------------------------------------
 @agate-labelediconbutton-label-font-size:   38px;
@@ -585,56 +631,60 @@
 
 // Slider
 // ---------------------------------------
+@agate-slider-active-knob-border-radius: @agate-slider-knob-border-radius;
+@agate-slider-active-knob-height: @agate-slider-knob-height;
+@agate-slider-active-knob-transform: @agate-slider-knob-transform;
+@agate-slider-active-knob-width: @agate-slider-active-knob-height;
+@agate-slider-bg-transform: none;
+@agate-slider-border-radius: @agate-slider-height;
+@agate-slider-height: @agate-button-height;
 @agate-slider-horizontal-anchorpoint-height: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
 @agate-slider-horizontal-anchorpoint-width: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
-@agate-slider-vertical-anchorpoint-height: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
-@agate-slider-vertical-anchorpoint-width: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
-@agate-slider-knob-height: @agate-slider-height;
-@agate-slider-active-knob-height: @agate-slider-knob-height;
-@agate-slider-active-knob-width: @agate-slider-active-knob-height;
-@agate-slider-active-knob-border-radius: @agate-slider-knob-border-radius;
-@agate-slider-active-knob-transform: @agate-slider-knob-transform;
+@agate-slider-horizontal-margin: 0 @agate-component-spacing;
+@agate-slider-horizontal-min-width: auto;
+@agate-slider-horizontal-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (@agate-slider-height / 2);
 @agate-slider-knob-border-radius: @agate-slider-knob-height;
 @agate-slider-knob-border-width: 0;
+@agate-slider-knob-height: @agate-slider-height;
 @agate-slider-knob-resting-state-scale: 1;
 @agate-slider-knob-transform: @agate-translate-center;
 @agate-slider-knob-width: @agate-slider-knob-height;
-@agate-slider-border-radius: @agate-slider-height;
-@agate-slider-horizontal-margin: 0 @agate-component-spacing;
-@agate-slider-horizontal-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (@agate-slider-height / 2);
-@agate-slider-vertical-margin: 0 @agate-component-spacing;
-@agate-slider-vertical-padding: (@agate-slider-height / 2) ((@agate-slider-height - @agate-slider-track-height) / 2);
-@agate-slider-height: @agate-button-height;
-@agate-slider-width: @agate-slider-height;
-@agate-slider-track-height: 12px;
-@agate-slider-track-width: @agate-slider-track-height;
-@agate-slider-bg-transform: none;
-@agate-slider-track-transform: none;
 @agate-slider-tooltip-above-offset: (@agate-slider-knob-height / -3);
-@agate-slider-tooltip-below-offset: (@agate-slider-knob-height / 3);
-@agate-slider-tooltip-before-offset: (@agate-slider-knob-height / -3);
 @agate-slider-tooltip-after-offset: (@agate-slider-knob-height / 3);
+@agate-slider-tooltip-before-offset: (@agate-slider-knob-height / -3);
+@agate-slider-tooltip-below-offset: (@agate-slider-knob-height / 3);
+@agate-slider-track-height: 12px;
+@agate-slider-track-transform: none;
+@agate-slider-track-width: @agate-slider-track-height;
+@agate-slider-vertical-anchorpoint-height: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
+@agate-slider-vertical-anchorpoint-width: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
+@agate-slider-vertical-margin: 0 @agate-component-spacing;
+@agate-slider-vertical-min-height: 120px;
+@agate-slider-vertical-padding: (@agate-slider-height / 2) ((@agate-slider-height - @agate-slider-track-height) / 2);
+@agate-slider-width: @agate-slider-height;
 
 // IncrementSlider
 // ---------------------------------------
 @agate-incrementslider-border-radius: 0;
-@agate-incrementslider-horizontal-margin: @agate-slider-horizontal-margin;
-@agate-incrementslider-horizontal-slider-margin: 0;
-@agate-incrementslider-horizontal-slider-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale) + 3px);
-@agate-incrementslider-horizontal-button-margin: 0;
 @agate-incrementslider-horizontal-button-decrement-border-radius: @agate-slider-height 0 0 @agate-slider-height;
 @agate-incrementslider-horizontal-button-decrement-border-width: 0;
 @agate-incrementslider-horizontal-button-increment-border-radius: 0 @agate-slider-height @agate-slider-height 0;
 @agate-incrementslider-horizontal-button-increment-border-width: 0;
+@agate-incrementslider-horizontal-button-margin: 0;
+@agate-incrementslider-horizontal-margin: @agate-slider-horizontal-margin;
+@agate-incrementslider-horizontal-min-width: auto;
+@agate-incrementslider-horizontal-slider-margin: 0;
+@agate-incrementslider-horizontal-slider-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale) + 3px);
 @agate-incrementslider-horizontal-small-slider-padding: ((@agate-button-small-height - @agate-slider-track-height) / 2) (((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale) + 3px);
-@agate-incrementslider-vertical-margin: @agate-slider-vertical-margin;
-@agate-incrementslider-vertical-slider-margin: 0;
-@agate-incrementslider-vertical-slider-padding: 0;
-@agate-incrementslider-vertical-button-margin: 0;
 @agate-incrementslider-vertical-button-decrement-border-radius: 0;
 @agate-incrementslider-vertical-button-decrement-border-width: 0;
 @agate-incrementslider-vertical-button-increment-border-radius: 0;
 @agate-incrementslider-vertical-button-increment-border-width: 0;
+@agate-incrementslider-vertical-button-margin: 0;
+@agate-incrementslider-vertical-margin: @agate-slider-vertical-margin;
+@agate-incrementslider-vertical-min-height: auto;
+@agate-incrementslider-vertical-slider-margin: 0;
+@agate-incrementslider-vertical-slider-padding: 0;
 @agate-incrementslider-vertical-small-slider-padding: (((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale) + 3px) ((@agate-button-small-height - @agate-slider-track-height) / 2);
 
 // RadioItem
