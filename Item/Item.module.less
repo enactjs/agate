@@ -138,10 +138,10 @@
 				&.labelAfter,
 				&.labelBefore {
 					.content {
-						width: @agate-item-content-width;
+						min-width: @agate-item-content-width;
 					}
 					.label {
-						width: @agate-item-label-width;
+						max-width: @agate-item-label-width;
 					}
 				}
 
@@ -173,7 +173,7 @@
 			}
 
 			&.inline {
-				max-width: @agate-item-inline-max-width;
+				max-width: @agate-item-centered-inline-max-width;
 
 				.itemContent {
 					width: 100%;
