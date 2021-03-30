@@ -139,8 +139,6 @@ const ImageItemBase = kind({
 			alignment: skin === 'silicon' && orientation === 'horizontal' ? 'left' : 'center'
 		}] : [UiImageItem, null];
 
-		delete rest.sizing;
-
 		return (
 			<Component
 				{...rest}
