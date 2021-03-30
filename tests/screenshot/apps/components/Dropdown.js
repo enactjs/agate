@@ -13,36 +13,20 @@ const DropdownTests = [
 	<Dropdown title="Select your option" width="huge">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
 
 	// Dropdown Open
-	<div>
-		<Dropdown open title="Select your option" style={{marginLeft: '12px'}}>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
-	</div>,
+	<Dropdown open title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
 	<div style={{'height': '700px'}}>
-		<Dropdown direction="above" open style={{marginLeft: '12px', marginTop: '300px'}} title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
+		<Dropdown direction="above" open style={{'margin-top': '300px'}} title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
 	</div>,
-	<div>
-		<Dropdown defaultSelected={1} open style={{marginLeft: '12px'}}>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
-	</div>,
-	<div>
-		<Dropdown disabled open title="Select your option" style={{marginLeft: '12px'}}>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
-	</div>,
+	<Dropdown defaultSelected={1} open>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
+	<Dropdown disabled open title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
 	// long options text
-	<div>
-		<Dropdown open title="Select your option" width="smallest" style={{marginLeft: '12px'}}>{['Option 1234567890123457', 'Option 2345678902345678', 'Option 345678903456789034567890']}</Dropdown>,
-	</div>,
+	<Dropdown open title="Select your option" width="smallest">{['Option 1234567890123457', 'Option 2345678902345678', 'Option 345678903456789034567890']}</Dropdown>,
 
 	// Open with different widths
-	<div>
-		<Dropdown open title="Select your option" width="small" style={{marginLeft: '12px'}}>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
-	</div>,
-	<div>
-		<Dropdown open title="Select your option" width="large" style={{marginLeft: '12px'}}>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
-	</div>,
-	<div>
-		<Dropdown open title="Select your option" width="x-large" style={{marginLeft: '12px'}}>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
-	</div>,
-	<div>
-		<Dropdown open title="Select your option" width="huge" style={{marginLeft: '12px'}}>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
-	</div>,
+	<Dropdown open title="Select your option" width="small">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
+	<Dropdown open title="Select your option" width="large">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
+	<Dropdown open title="Select your option" width="x-large">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
+	<Dropdown open title="Select your option" width="huge">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
 
 	// RTL
 	{
@@ -61,31 +45,21 @@ const DropdownTests = [
 	// Dropdown Open
 	{
 		locale: 'ar-SA',
-		component:
-	<div>
-		<Dropdown open title="Select your option" style={{marginRight: '12px'}}>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
-	</div>
+		component:<Dropdown open title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
 	},
 	{
 		locale: 'ar-SA',
-		component:
-	<div>
-		<Dropdown direction="above" open style={{marginRight: '12px', marginTop: '300px'}} title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
-	</div>
+		component:<div style={{'height': '700px'}}>
+			<Dropdown direction="above" open style={{'margin-top': '300px'}} title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
+		</div>
 	},
 	{
 		locale: 'ar-SA',
-		component:
-	<div>
-		<Dropdown defaultSelected={1} open style={{marginRight: '12px'}}>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
-	</div>
+		component:<Dropdown defaultSelected={1} open>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
 	},
 	{
 		locale: 'ar-SA',
-		component:
-	<div>
-		<Dropdown disabled open title="Select your option" style={{marginRight: '12px'}}>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
-	</div>
+		component:<Dropdown disabled open title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
 	}
 ];
 
