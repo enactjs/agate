@@ -25,6 +25,7 @@ storiesOf('Agate', module)
 				foregroundColor={select('foregroundColor', prop.colors, Config)}
 				max={number('max', Config)}
 				min={number('min', Config)}
+				noFocusColor={boolean('noFocusColor', Config)}
 				onChange={action('onChange')}
 				onDown={action('onDown')}
 				onDrag={action('onDrag')}

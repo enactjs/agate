@@ -199,12 +199,12 @@ const ArcSliderBase = kind({
 	},
 
 	defaultProps: {
-		backgroundColor: '#000000',
+		backgroundColor: '#444444',
 		endAngle: 250,
-		foregroundColor: '#0000ff',
+		foregroundColor: '#ffffff',
 		max: 100,
 		min: 0,
-		noFocusColor: false,
+		noFocusColor: true,
 		radius: 150,
 		startAngle: 30,
 		step: 1,
@@ -224,7 +224,7 @@ const ArcSliderBase = kind({
 			const size = ri.scaleToRem(radius * 2);
 			return {...style, height: size, width: size};
 		},
-		circleRadius: ({skin, isFocused}) => skin === 'silicon' && isFocused ? 20 : 15
+		circleRadius: ({isFocused}) => isFocused ? 20 : 15
 	},
 
 	render: ({'aria-valuetext': ariaValuetext, backgroundColor, componentRef, circleRadius, disabled, endAngle, foregroundColor, isFocused, max, min, noFocusColor, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}, context) => {
