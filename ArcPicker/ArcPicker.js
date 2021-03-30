@@ -159,9 +159,9 @@ const ArcPickerBase = kind({
 	},
 
 	defaultProps: {
-		backgroundColor: '#eeeeee',
+		backgroundColor: '#444444',
 		endAngle: 310,
-		foregroundColor: '#444444',
+		foregroundColor: '#ffffff',
 		radius: 150,
 		startAngle: 50,
 		strokeWidth: 6
