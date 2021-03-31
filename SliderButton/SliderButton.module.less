@@ -51,7 +51,7 @@
 
 	.applySkins({
 		margin: @agate-sliderbutton-margin;
-		height: @agate-button-height;
+		height: @agate-sliderbutton-height;
 		border: @agate-sliderbutton-border-width solid @agate-sliderbutton-border-color;
 		border-radius: @agate-sliderbutton-border-radius;
 		background-color: @agate-sliderbutton-bg-color;
@@ -80,6 +80,8 @@
 			background-image: @agate-sliderbutton-focus-bg-image;
 
 			.knob {
+				background-color: @agate-sliderbutton-knob-focus-bg-color;
+				border-color: @agate-sliderbutton-knob-focus-border-color;
 				box-shadow: @agate-sliderbutton-knob-focus-shadow;
 			}
 		});

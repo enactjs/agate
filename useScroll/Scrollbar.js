@@ -1,6 +1,6 @@
 import {useScrollbar as useScrollbarBase} from '@enact/ui/useScroll/Scrollbar';
 import PropTypes from 'prop-types';
-import React, {memo, useEffect} from 'react';
+import {memo, useEffect} from 'react';
 
 import ScrollButton from './ScrollButton';
 import useScrollButtons from './ScrollButtons';
@@ -106,7 +106,7 @@ const ScrollbarBase = memo((props) => {
 				data-spotlight-overflow="ignore"
 				disabled={disabled || prevButtonDisabled}
 				onClick={onClickPrev}
-				onHoldPulse={onClickPrev}
+				onHold={onClickPrev}
 				ref={prevButtonRef}
 				icon={prevIcon}
 			/>
@@ -118,7 +118,7 @@ const ScrollbarBase = memo((props) => {
 				data-spotlight-overflow="ignore"
 				disabled={disabled || nextButtonDisabled}
 				onClick={onClickNext}
-				onHoldPulse={onClickNext}
+				onHold={onClickNext}
 				ref={nextButtonRef}
 				icon={nextIcon}
 			/>

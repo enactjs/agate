@@ -34,6 +34,36 @@
 			width: @agate-keypad-button-height;
 		}
 
+		&.iconOnly {
+			.bg {
+				background-color: @agate-keypad-button-bg-color;
+			}
+
+			.client {
+				color: @agate-keypad-button-color;
+			}
+
+			.disabled({
+				.bg {
+					background-color: @agate-keypad-button-bg-color;
+				}
+
+				.client {
+					color: @agate-keypad-button-color;
+				}
+			});
+		}
+
+		.disabled({
+			.bg {
+				background-color: @agate-keypad-button-bg-color;
+			}
+
+			.client {
+				color: @agate-keypad-button-color;
+			}
+		});
+
 		.bg {
 			background-color: @agate-keypad-button-bg-color;
 			border: none;
@@ -67,20 +97,22 @@
 			}
 		});
 
-		.active({
-			.bg {
-				background-color: @agate-keypad-button-active-bg-color;
-				border-color: @agate-keypad-button-active-border-color;
-			}
-
-			.client {
-				color: @agate-keypad-button-active-color;
-
-				.label {
-					color: @agate-keypad-button-active-color;
+		&:not([disabled]) {
+			.active({
+				.bg {
+					background-color: @agate-keypad-button-active-bg-color;
+					border-color: @agate-keypad-button-active-border-color;
 				}
-			}
-		});
+
+				.client {
+					color: @agate-keypad-button-active-color;
+
+					.label {
+						color: @agate-keypad-button-active-color;
+					}
+				}
+			});
+		}
 	});
 }
 

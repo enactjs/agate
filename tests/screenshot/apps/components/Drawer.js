@@ -1,5 +1,4 @@
 import Drawer from '../../../../Drawer';
-import React from 'react';
 
 const DrawerTests = [
 	<Drawer noAnimation>{[]}</Drawer>,

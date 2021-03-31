@@ -84,6 +84,18 @@
 @agate-button-shadow:         inherit;
 @agate-button-active-color:   inherit;
 @agate-button-active-bg-color: inherit;
+@agate-button-active-bg-image: inherit;
+@agate-button-active-focus-bg-image: @agate-button-active-bg-image;
+@agate-button-active-focus-color: @agate-button-active-color;
+@agate-button-disabled-bg-color: @agate-button-bg-color;
+@agate-button-disabled-focus-bg-image: inherit;
+@agate-button-disabled-focus-color: @agate-button-focus-color;
+@agate-button-disabled-opacity: @agate-disabled-opacity;
+@agate-button-iconOnly-border-color: @agate-button-border-color;
+@agate-button-iconOnly-bg-color: @agate-button-bg-color;
+@agate-button-iconOnly-color: @agate-button-color;
+@agate-button-iconOnly-disabled-color: @agate-button-iconOnly-color;
+@agate-button-iconOnly-selected-border-color: @agate-button-selected-border-color;
 @agate-button-focus-border-color:   @agate-button-border-color;
 @agate-button-focus-color:    inherit;
 @agate-button-focus-bg-color: inherit;
@@ -94,6 +106,10 @@
 @agate-button-selected-color: inherit;
 @agate-button-selected-bg-color: inherit;
 @agate-button-selected-border-color: transparent;
+@agate-button-selected-disabled-bg-color: @agate-button-selected-bg-color;
+@agate-button-selected-disabled-border-color: @agate-button-selected-border-color;
+@agate-button-selected-disabled-focus-border-color: @agate-button-selected-focus-border-color;
+@agate-button-selected-focus-border-color: transparent;
 @agate-button-lightOpaque-color: @agate-foreground;
 @agate-button-lightOpaque-bg-color: @agate-background;
 @agate-button-lightOpaque-highlighted-color: @agate-button-lightOpaque-color;
@@ -152,7 +168,6 @@
 @agate-dropdown-button-open-border-color: inherit;
 @agate-dropdown-up-button-open-border-bottom-color: inherit;
 @agate-dropdown-list-bg-color: @agate-white;
-@agate-dropdown-selected-color: inherit;
 @agate-dropdown-item-border-color: inherit;
 @agate-dropdown-item-color: inherit;
 @agate-dropdown-item-focus-bg-color: inherit;
@@ -310,10 +325,12 @@
 
 // ProgressBar
 // ---------------------------------------
+@agate-progressbar-highlighted-fill-bg-color: @agate-highlight;
 @agate-progressbar-track-bg-color: inherit;
 @agate-progressbar-track-bg-image: @agate-slider-track-bg-image;
 @agate-progressbar-fill-bg-color: inherit;
 @agate-progressbar-fill-bg-image: @agate-slider-fill-bg-image;
+@agate-progressbar-load-bg-color: fade(@agate-white, 50%);
 @agate-progressbar-vertical-fill-bg-image: @agate-progressbar-fill-bg-image;
 
 // RadioItem
@@ -351,6 +368,7 @@
 @agate-slider-knob-focus-bg-image: @agate-slider-knob-bg-image;
 @agate-slider-knob-shadow:    inherit;
 @agate-slider-knob-focus-shadow: inherit;
+@agate-slider-load-bg-color: @agate-progressbar-load-bg-color;
 
 // IncrementSlider
 // ---------------------------------------
@@ -393,7 +411,9 @@
 @agate-sliderbutton-focus-bg-image: @agate-sliderbutton-bg-image;
 @agate-sliderbutton-knob-bg-color:  @agate-slider-knob-bg-color;
 @agate-sliderbutton-knob-bg-image:  @agate-slider-knob-bg-image;
-@agate-sliderbutton-knob-border-color: transparent;
+@agate-sliderbutton-knob-border-color: @agate-slider-knob-bg-color;
+@agate-sliderbutton-knob-focus-bg-color: @agate-sliderbutton-knob-bg-color;
+@agate-sliderbutton-knob-focus-border-color: @agate-slider-knob-focus-bg-color;
 @agate-sliderbutton-knob-shadow:    @agate-slider-knob-shadow;
 @agate-sliderbutton-knob-focus-shadow: @agate-slider-knob-focus-shadow;
 
@@ -444,6 +464,6 @@
 
 // Tooltip
 // ---------------------------------------
-@agate-tooltip-bg-color:               inherit;
-@agate-tooltip-text-color:             inherit;
-@agate-tooltip-border-color:           inherit;
+@agate-tooltip-bg-color:               @agate-darker-gray;
+@agate-tooltip-text-color:             @agate-white;
+@agate-tooltip-border-color:           @agate-dark-gray;

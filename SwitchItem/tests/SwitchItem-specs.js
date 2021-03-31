@@ -1,5 +1,4 @@
 import {mount} from 'enzyme';
-import React from 'react';
 import {SwitchItemBase} from '../SwitchItem';
 
 describe('SwitchItem specs', () => {

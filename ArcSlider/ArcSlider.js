@@ -12,13 +12,13 @@
 
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
+import {clamp} from '@enact/core/util';
 import Spottable from '@enact/spotlight/Spottable';
 import Pure from '@enact/ui/internal/Pure';
 import ri from '@enact/ui/resolution';
 import Touchable from '@enact/ui/Touchable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import Arc from '../Arc';
 import {angleToPosition} from '../Arc/utils';
@@ -211,7 +211,7 @@ const ArcSliderBase = kind({
 
 	render: ({'aria-valuetext': ariaValuetext, backgroundColor, componentRef, disabled, endAngle, foregroundColor, isFocused, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}, context) => {
 		const {accent: accentColor} = context || {};
-		const valueAngle = valueToAngle(value, min, max, startAngle, endAngle);
+		const valueAngle = valueToAngle(clamp(min, max, value), min, Math.max(min, max), startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
 		delete rest.step;

@@ -12,12 +12,12 @@
 
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
+import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
 import compose from 'ramda/src/compose';
 import {Cell, Row} from '@enact/ui/Layout';
 import UiSlider from '@enact/ui/Slider';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Skinnable from '../Skinnable';
 
@@ -25,10 +25,32 @@ import SliderButtonBehaviorDecorator from './SliderButtonBehaviorDecorator';
 
 import componentCss from './SliderButton.module.less';
 
+/**
+ * Renders the slider knob.
+ *
+ * @class SliderKnob
+ * @memberof agate/SliderButton
+ * @ui
+ * @private
+ */
 const SliderKnob = kind({
 	name: 'SliderKnob',
-	propTypes: {
+	propTypes: /** @lends agate/SliderButton.SliderKnob.prototype */ {
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * Value of SliderButton.
+		 *
+		 * @type {Number}
+		 * @public
+		 */
 		value: PropTypes.number
 	},
 	styles: {
@@ -57,10 +79,32 @@ const SliderKnob = kind({
 	}
 });
 
+/**
+ * Renders the slider progress.
+ *
+ * @class SliderProgress
+ * @memberof agate/SliderButton
+ * @ui
+ * @private
+ */
 const SliderProgress = kind({
 	name: 'SliderProgress',
-	propTypes: {
+	propTypes: /** @lends agate/SliderButton.SliderProgress.prototype */ {
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
+
+		/**
+		 * Value of SliderProgress.
+		 *
+		 * @type {String[]}
+		 * @public
+		 */
 		values: PropTypes.arrayOf(PropTypes.string)
 	},
 	styles: {
@@ -96,8 +140,23 @@ const SliderProgress = kind({
  */
 const SliderButtonBase = kind({
 	name: 'SliderButton',
-	propTypes: {
+	propTypes: /** @lends agate/SliderButton.SliderButtonBase.prototype */ {
+		/**
+		 * The value options of SliderButtonBase.
+		 *
+		 * @type {Array}
+		 * @required
+		 * @public
+		 */
 		children: PropTypes.array.isRequired,
+
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object
 	},
 	styles: {
@@ -138,12 +197,14 @@ const SliderButtonBase = kind({
  *
  * @hoc
  * @memberof agate/SliderButton
+ * @mixes ui/Changeable.Changeable
  * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const SliderButtonDecorator = compose(
 	Pure,
+	Changeable,
 	SliderButtonBehaviorDecorator,
 	Spottable,
 	Skinnable

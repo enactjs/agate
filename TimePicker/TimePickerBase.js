@@ -1,5 +1,5 @@
 import kind from '@enact/core/kind';
-import React from 'react';
+import {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 
 import $L from '../internal/$L';
@@ -28,7 +28,7 @@ const hours12 = [
  * @ui
  * @private
  */
-class HourPicker extends React.Component {
+class HourPicker extends Component {
 	static propTypes = {
 		hasMeridiem: PropTypes.bool,
 		value: PropTypes.number
@@ -267,7 +267,7 @@ const TimePickerBase = kind({
 						case 'h':
 						case 'k':
 							return (
-								<React.Fragment key="hour-picker">
+								<Fragment key="hour-picker">
 									<HourPicker
 										accessibilityHint={hourAccessibilityHint}
 										aria-label={hourAriaLabel}
@@ -281,7 +281,7 @@ const TimePickerBase = kind({
 										width={2}
 										wrap
 									/>
-								</React.Fragment>
+								</Fragment>
 							);
 						case 'm':
 							return (

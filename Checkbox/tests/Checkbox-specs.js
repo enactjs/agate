@@ -1,4 +1,3 @@
-import React from 'react';
 import {mount, shallow} from 'enzyme';
 import {Checkbox, CheckboxBase} from '../Checkbox';
 import css from '../Checkbox.module.less';

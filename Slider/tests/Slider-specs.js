@@ -1,4 +1,3 @@
-import React from 'react';
 import {mount} from 'enzyme';
 
 import Slider from '../Slider';
@@ -429,4 +428,27 @@ describe('Slider', () => {
 		expect(actual).toBe(expected);
 	});
 
+	test('should set the tooltip to visible when focused', () => {
+		const subject = mount(
+			<Slider tooltip />
+		);
+
+		focus(subject);
+
+		const expected = 'visible';
+		const actual = subject.find('ProgressBarTooltip').prop('visible') ? 'visible' : 'not visible';
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should set the tooltip to not visible when unfocused', () => {
+		const subject = mount(
+			<Slider tooltip />
+		);
+
+		const expected = 'not visible';
+		const actual = subject.find('ProgressBarTooltip').prop('visible') ? 'visible' : 'not visible';
+
+		expect(actual).toBe(expected);
+	});
 });

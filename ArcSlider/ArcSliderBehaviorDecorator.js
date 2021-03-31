@@ -1,9 +1,10 @@
 import {forward} from '@enact/core/handle';
 import {is} from '@enact/core/keymap';
 import hoc from '@enact/core/hoc';
+import {clamp} from '@enact/core/util';
 import {validateRangeOnce, validateSteppedOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {createRef, Component} from 'react';
 
 import {positionToAngle} from '../Arc/utils';
 
@@ -26,7 +27,7 @@ const validateStepMax = validateSteppedOnce((props) => props, {'component': 'Arc
  * @public
  */
 const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
-	return class extends React.Component {
+	return class extends Component {
 		static displayName = 'ArcSliderBehaviorDecorator';
 
 		static propTypes = /** @lends agate/ArcSlider.ArcSliderBehaviorDecorator.prototype */ {
@@ -137,12 +138,18 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 		constructor (props) {
 			super(props);
 
-			this.componentRef = React.createRef();
+			this.componentRef = createRef();
 
 			this.state = {
 				isFocused: false,
 				value: props.value ? props.value : props.min
 			};
+		}
+
+		componentDidUpdate (prevProps) {
+			if ( this.props.max !== prevProps.max || this.props.min !== prevProps.min) {
+				this.handleChange(null, clamp(this.props.min, this.props.max, this.state.value));
+			}
 		}
 
 		handleDown = ({clientX, clientY}) => {
@@ -180,7 +187,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 
 			const angle = positionToAngle(coordsInSvg, radius * 2 - strokeWidth);
 			// get the value based on the angle, min and max
-			let value = angleToValue(angle, min, max, startAngle, endAngle);
+			let value = angleToValue(angle, min, Math.max(min, max), startAngle, endAngle);
 
 			// adjust value based on the step
 			if (step) {
@@ -208,7 +215,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 				);
 			}
 
-			if (ev.stopPropagation) {
+			if (ev && ev.stopPropagation) {
 				ev.stopPropagation();
 			}
 		};
@@ -239,7 +246,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 		render () {
 			if (__DEV__) {
 				const {endAngle, max, min, startAngle, step} = this.props;
-				const valueProps = {min, value: this.state.value || min, max, step};
+				const valueProps = {min, value: this.state.value, max, step};
 				const angleProps = {startAngle, endAngle};
 
 				validateValueRange(valueProps);

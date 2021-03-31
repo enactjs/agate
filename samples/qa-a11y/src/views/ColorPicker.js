@@ -1,5 +1,4 @@
 import ColorPicker from '@enact/agate/ColorPicker';
-import React from 'react';
 
 import Section from '../components/Section';
 

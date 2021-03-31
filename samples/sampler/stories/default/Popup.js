@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
 import {storiesOf} from '@storybook/react';
 
 import {Button} from '@enact/agate/Button';
@@ -36,6 +35,7 @@ storiesOf('Agate', module)
 						noAutoDismiss={boolean('noAutoDismiss', Config)}
 						onClose={action('onClose')}
 						onHide={action('onHide')}
+						onShow={action('onShow')}
 						open={boolean('open', Config)}
 						position={select('position', ['bottom', 'center', 'fullscreen', 'left', 'right', 'top'], Config)}
 						scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}

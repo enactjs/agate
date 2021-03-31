@@ -16,7 +16,7 @@ import Slottable from '@enact/ui/Slottable';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import {mergeDeepRight} from 'ramda';
-import React from 'react';
+import {createContext, Component} from 'react';
 import {setDisplayName} from 'recompose';
 
 import Rearrangeable from '../Rearrangeable';
@@ -96,7 +96,7 @@ const defaultConfig = {
 const fallbackArrangementProp = 'arrangement';
 
 
-const DropManagerContext = React.createContext(defaultContainerShape);
+const DropManagerContext = createContext(defaultContainerShape);
 
 /**
  * TBD.
@@ -109,7 +109,7 @@ const DropManagerContext = React.createContext(defaultContainerShape);
 const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 	const ArrangementState = Changeable({prop: configHoc.arrangementProp || fallbackArrangementProp});
 
-	const DropManagerBase = class extends React.Component {
+	const DropManagerBase = class extends Component {
 		static displayName = 'DropManager';
 
 		static propTypes = /** @lends agate/DropManager.DropManager.prototype */ {
@@ -117,6 +117,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			 * The ready-state to indicate that the contents are allowed to be rearranged
 			 *
 			 * @type {Boolean}
+			 * @default false
 			 * @public
 			 */
 			arrangeable: PropTypes.bool,
@@ -305,7 +306,7 @@ const logicallyPopulateContainerShape = (cs) => {
 };
 
 
-const DraggableContainerContext = React.createContext(null);
+const DraggableContainerContext = createContext(null);
 
 /**
  * TBD.
