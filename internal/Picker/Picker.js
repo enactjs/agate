@@ -127,7 +127,6 @@ const PickerBase = kind({
 		 * the picker directly through the props.
 		 *
 		 * @type {String|Number}
-		 * @memberof agate/internal/Picker.Picker.prototype
 		 * @public
 		 */
 		'aria-valuetext': PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
