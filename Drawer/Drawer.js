@@ -116,7 +116,7 @@ const DrawerBase = kind({
 		 * @default 'vertical'
 		 * @private
 		 */
-		orientation: PropTypes.oneOf(['horizontal', 'vertical'])
+		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
         /**
          * The container id for {@link spotlight/Spotlight}.
