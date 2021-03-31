@@ -15,7 +15,7 @@ const DrawerView = () => {
 				<Button alt="Normal" onClick={handleOpen(0, true)}>Open 0</Button>
 				<Button alt="Disabled Drawer" onClick={handleOpen(1, true)}>Open 1</Button>
 
-				<Drawer open={open[0]}>
+				<Drawer open={open[0]} onClose={handleOpen(0, false)}>
 					Text 0
 					<Button onClick={handleOpen(0, false)}>Close</Button>
 				</Drawer>
