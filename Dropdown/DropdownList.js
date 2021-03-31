@@ -34,10 +34,18 @@ const indexFromKey = (children, key) => {
 	return index;
 };
 
+/**
+ * A stateless DropdownList component.
+ *
+ * @class DropdownListBase
+ * @memberof agate/Dropdown
+ * @ui
+ * @public
+ */
 const DropdownListBase = kind({
 	name: 'DropdownListBase',
 
-	propTypes: {
+	propTypes: /** @lends agate/Dropdown.DropdownListBase.prototype */ {
 		/**
 		 * The selections for Dropdown
 		 *
@@ -163,11 +171,19 @@ const ReadyState = {
 	DONE: 2
 };
 
+/**
+ * Adds spotlight behaviors to DropdownList.
+ *
+ * @class DropdownListSpotlightDecorator
+ * @hoc
+ * @memberof agate/Dropdown
+ * @private
+ */
 const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 	return class extends Component {
 		static displayName = 'DropdownListSpotlightDecorator';
 
-		static propTypes = {
+		static propTypes = /** @lends agate/Dropdown.DropdownListSpotlightDecorator.prototype */ {
 			/**
 			 * Called when an item receives focus.
 			 *

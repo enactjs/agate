@@ -30,13 +30,14 @@ const TransitionContainer = SpotlightContainerDecorator(
  *
  * @class DrawerBase
  * @memberof agate/Drawer
+ * @extends ui/Transition.Transition
  * @ui
  * @public
  */
 const DrawerBase = kind({
 	name: 'Drawer',
 
-	propTypes: {
+	propTypes: /** @lends agate/Drawer.DrawerBase.prototype */ {
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
@@ -47,11 +48,11 @@ const DrawerBase = kind({
 		css: PropTypes.object,
 
 		/**
-		 * Components to be included under the primary content.
-		 *
-		 * @type {Node}
-		 * @public
-		 */
+		* Components to be included under the primary content.
+		*
+		* @type {Node}
+		* @public
+		*/
 		footer: PropTypes.node,
 
 		/**
@@ -91,13 +92,13 @@ const DrawerBase = kind({
 		 */
 		onHide: PropTypes.func,
 
-		/**
-		 * Called after the drawer's "show" transition finishes.
-		 *
-		 * @type {Function}
-		 * @public
-		 */
-		onShow: PropTypes.func,
+        /**
+         * Called after the drawer's "show" transition finishes.
+         *
+         * @type {Function}
+         * @public
+         */
+        onShow: PropTypes.func,
 
 		/**
 		 * Displays the drawer.
@@ -115,32 +116,32 @@ const DrawerBase = kind({
 		 * @default 'vertical'
 		 * @private
 		 */
-		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+		orientation: PropTypes.oneOf(['horizontal', 'vertical'])
 
-		/**
-		 * The container id for {@link spotlight/Spotlight}.
-		 *
-		 * @type {String}
-		 * @default null
-		 * @public
-		 */
-		spotlightId: PropTypes.string,
+        /**
+         * The container id for {@link spotlight/Spotlight}.
+         *
+         * @type {String}
+         * @default null
+         * @public
+         */
+        spotlightId: PropTypes.string,
 
-		/**
-		 * Restricts or prioritizes spotlight navigation.
-		 *
-		 * Allowed values are:
-		 * * `'none'` - Spotlight can move freely within and beyond the drawer
-		 * * `'self-first'` - Spotlight should prefer components within the drawer over
-		 *   components beyond the drawer, or
-		 * * `'self-only'` - Spotlight can only be set within the drawer
-		 *
-		 * @type {('none'|'self-first'|'self-only')}
-		 * @default 'self-first'
-		 * @public
-		 */
-		spotlightRestrict: PropTypes.oneOf(['none', 'self-first', 'self-only'])
-	},
+        /**
+         * Restricts or prioritizes spotlight navigation.
+         *
+         * Allowed values are:
+         * * `'none'` - Spotlight can move freely within and beyond the drawer
+         * * `'self-first'` - Spotlight should prefer components within the drawer over
+         *   components beyond the drawer, or
+         * * `'self-only'` - Spotlight can only be set within the drawer
+         *
+         * @type {('none'|'self-first'|'self-only')}
+         * @default 'self-first'
+         * @public
+         */
+        spotlightRestrict: PropTypes.oneOf(['none', 'self-first', 'self-only'])
+    },
 
 	defaultProps: {
 		noAnimation: false,
