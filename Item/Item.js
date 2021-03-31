@@ -20,12 +20,12 @@ import Slottable from '@enact/ui/Slottable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
-import {MarqueeBase, MarqueeController, MarqueeDecorator} from '../Marquee';
+import {MarqueeController, MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
 import componentCss from './Item.module.less';
 
-const Marquee = MarqueeDecorator({className: componentCss.marquee}, MarqueeBase);
+const Marquee = MarqueeDecorator({className: componentCss.marquee}, 'div');
 
 /**
  * Renders the Item content.
@@ -118,7 +118,7 @@ const ItemContent = kind({
 	},
 
 	// eslint-disable-next-line enact/prop-types
-	render: ({centered, content, css, marqueeOn, label, orientation, styler, ...rest}) => {
+	render: ({centered, content, css, marqueeOn, label, labelPosition, orientation, styler, ...rest}) => {
 		delete rest.labelPosition;
 
 		if (!label) {
@@ -130,7 +130,7 @@ const ItemContent = kind({
 		} else {
 			return (
 				<Cell {...rest}>
-					<Layout orientation={orientation}>
+					<Layout align={labelPosition === 'before' || labelPosition === 'after' ? 'center' : null} orientation={orientation}>
 						<Cell component={Marquee} className={css.content} marqueeOn={marqueeOn} shrink={orientation === 'vertical' || centered}>
 							{content}
 						</Cell>

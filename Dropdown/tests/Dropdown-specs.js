@@ -13,7 +13,7 @@ describe('Dropdown', () => {
 		);
 
 		const expected = title;
-		const actual = dropDown.find('.text').at(1).text();
+		const actual = dropDown.find('.text').text();
 
 		expect(actual).toBe(expected);
 	});
@@ -28,7 +28,7 @@ describe('Dropdown', () => {
 		);
 
 		const expected = children[selectedIndex];
-		const actual = dropDown.find('.text').at(1).text();
+		const actual = dropDown.find('.text').text();
 
 		expect(actual).toBe(expected);
 	});
