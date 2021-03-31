@@ -92,13 +92,13 @@ const DrawerBase = kind({
 		 */
 		onHide: PropTypes.func,
 
-        /**
+		/**
          * Called after the drawer's "show" transition finishes.
          *
          * @type {Function}
          * @public
          */
-        onShow: PropTypes.func,
+		onShow: PropTypes.func,
 
 		/**
 		 * Displays the drawer.
@@ -118,16 +118,16 @@ const DrawerBase = kind({
 		 */
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
-        /**
+		/**
          * The container id for {@link spotlight/Spotlight}.
          *
          * @type {String}
          * @default null
          * @public
          */
-        spotlightId: PropTypes.string,
+		spotlightId: PropTypes.string,
 
-        /**
+		/**
          * Restricts or prioritizes spotlight navigation.
          *
          * Allowed values are:
@@ -140,8 +140,8 @@ const DrawerBase = kind({
          * @default 'self-first'
          * @public
          */
-        spotlightRestrict: PropTypes.oneOf(['none', 'self-first', 'self-only'])
-    },
+		spotlightRestrict: PropTypes.oneOf(['none', 'self-first', 'self-only'])
+	},
 
 	defaultProps: {
 		noAnimation: false,
