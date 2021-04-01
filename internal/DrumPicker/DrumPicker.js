@@ -18,13 +18,12 @@ import IdProvider from '@enact/ui/internal/IdProvider';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import {Children, Component} from 'react';
+import {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 import $L from '../$L';
 import Skinnable from '../../Skinnable';
-
-import DrumPickerItem from './DrumPickerItem';
+;
 
 import css from './DrumPicker.module.less';
 
@@ -295,18 +294,20 @@ const DrumPickerBase = class extends Component {
 		this.initRootRef = this.initRef('rootRef');
 		this.initIndicatorRef = this.initRef('indicatorRef');
 
-		const {min, max, step, value} = this.props;
-		this.children = this.calculateChildren(min, max, step, value);
+		const {type, value} = this.props;
+		let selectedIndex, selectedValue;
 
-		let selectedIndex;
-		if (!Array.isArray(this.props.children) && (value || value === 0)) {
-			selectedIndex = clamp(0, this.children.length - 1, this.children.findIndex((element) => element.props.children === value));
+		if (type === 'number') {
+			selectedIndex = clamp(0, this.props.children.length - 1, this.props.children.findIndex((element) => element.props.children === value));
+			selectedValue = value;
 		} else {
 			selectedIndex = value;
+			selectedValue = this.props.children[value].props.children;
 		}
 
 		this.state = {
-			selectedIndex: selectedIndex
+			selectedIndex: selectedIndex,
+			value: selectedValue
 		};
 
 		this.scrollY = -1;
@@ -318,8 +319,18 @@ const DrumPickerBase = class extends Component {
 		this.isMoving = false;
 	}
 
+	static getDerivedStateFromProps (props, state) {
+		if (props.type !== 'number' && props.value === state.value) {
+			return {
+				value: props.value,
+				selectedIndex: props.value
+			};
+		}
+		return null;
+	}
+
 	componentDidMount () {
-		const {children} = this;
+		const {children} = this.props;
 
 		for (let i = 0; i < children.length; i++) {
 			if (i === this.state.selectedIndex) {
@@ -330,18 +341,19 @@ const DrumPickerBase = class extends Component {
 	}
 
 	componentDidUpdate (prevProps, prevState) {
-		const {children} = this;
+		const {children, type, value} = this.props;
+		console.log(prevState.selectedIndex, this.state.selectedIndex, prevState.value, this.state.value);
+		if (prevState.selectedIndex !== this.state.selectedIndex && type === 'number') {
+			const selectedIndex = clamp(0, children.length - 1, children.findIndex((element) => element.props.children === value));
 
-		if (prevState.selectedIndex === this.state.selectedIndex) {
-			const {min, max, step, value} = this.props;
-
-			this.children = this.calculateChildren(min, max, step, value);
-			let selectedIndex;
-			if (!Array.isArray(this.props.children) && (value || value === 0)) {
-				selectedIndex = clamp(0, this.children.length - 1, this.children.findIndex((element) => element.props.children === value));
-			} else {
-				selectedIndex = value;
+			for (let i = 0; i < children.length; i++) {
+				if (i === selectedIndex) {
+					this.scrollTo(i);
+					return;
+				}
 			}
+		} else if (prevState.value !== this.state.value && type !== 'number') {
+			const selectedIndex = clamp(0, children.length - 1, children.findIndex((element) => element.props.children === this.state.value));
 
 			for (let i = 0; i < children.length; i++) {
 				if (i === selectedIndex) {
@@ -352,20 +364,8 @@ const DrumPickerBase = class extends Component {
 		}
 	}
 
-	calculateChildren = (min, max, step, value) => {
-		if (!Array.isArray(this.props.children)) {
-			const childrenArray = Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step)) );
-			return (Children.map(childrenArray, (child) => (
-				<DrumPickerItem key={value} marqueeDisabled>{child}</DrumPickerItem>
-			)));
-		} else if (this.props.children) {
-			return this.props.children;
-		} else return [];
-	};
-
 	scrollTo = (val) => {
-		const {orientation} = this.props;
-		const {children} = this;
+		const {children, orientation} = this.props;
 		if (!children || children.length === 0) return;
 
 		const index = clamp(0, children.length, Math.min(val, children.length - 1));
@@ -399,7 +399,7 @@ const DrumPickerBase = class extends Component {
 	};
 
 	onStart = (position) => {
-		if (this.props.disabled || this.children.length === 0) {
+		if (this.props.disabled || this.props.children.length === 0) {
 			return;
 		}
 		this.isMoving = true;
@@ -415,7 +415,7 @@ const DrumPickerBase = class extends Component {
 	};
 
 	onMove = (position) => {
-		if (this.props.disabled || this.children.length === 0 || !this.isMoving) {
+		if (this.props.disabled || this.props.children.length === 0 || !this.isMoving) {
 			return;
 		}
 
@@ -439,7 +439,7 @@ const DrumPickerBase = class extends Component {
 			const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
 
 			let targetY = this.scrollY;
-			const height = (this.children.length - 1) * itemHeight;
+			const height = (this.props.children.length - 1) * itemHeight;
 			if (targetY % itemHeight !== 0) {
 				targetY = Math.round(targetY / itemHeight) * itemHeight;
 			}
@@ -453,7 +453,7 @@ const DrumPickerBase = class extends Component {
 			const itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
 
 			let targetX = this.scrollX;
-			const height = (this.children.length - 1) * itemWidth;
+			const height = (this.props.children.length - 1) * itemWidth;
 			if (targetX % itemWidth !== 0) {
 				targetX = Math.round(targetX / itemWidth) * itemWidth;
 			}
@@ -467,15 +467,18 @@ const DrumPickerBase = class extends Component {
 	};
 
 	changeValue = (index, value) => {
-		const {onChange} = this.props;
+		const {type, onChange} = this.props;
 		if (index !== this.state.selectedIndex) {
 			this.setState({
-				selectedIndex: index
+				selectedIndex: index,
+				value: value
 			});
-			if (Array.isArray(this.props.children)) {
-				onChange({value: index});
-			} else {
-				onChange({value});
+			if (value !== this.state.value) {
+				if (type === 'number') {
+					onChange({value});
+				} else {
+					onChange({value: index});
+				}
 			}
 		}
 	};
@@ -552,10 +555,10 @@ const DrumPickerBase = class extends Component {
 		const {keyCode} = ev;
 		forwardKeyDown(ev, this.props);
 
-		if (!this.props.disabled && this.children.length > 0) {
+		if (!this.props.disabled && this.props.children.length > 0) {
 			let itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
 			let itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
-
+			// this is to avoid division by 0
 			if (itemHeight === 0) {
 				itemHeight = 1;
 			}
@@ -563,26 +566,19 @@ const DrumPickerBase = class extends Component {
 				itemWidth = 1;
 			}
 
-			if (!this.props.noAnimation) {
-				this.contentRef.style.transition = 'transform 300ms';
-			}
 			if (orientation === 'horizontal' && isLeft(keyCode)) {
 				ev.stopPropagation();
-				this.scrollTo(wrap ? this.wrapRange(0, this.children.length - 1, this.scrollX / itemWidth - 1) : clamp(0, this.children.length - 1, this.scrollX / itemWidth - 1));
+				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollX / itemWidth - 1) : clamp(0, this.props.children.length - 1, this.scrollX / itemWidth - 1));
 			} else if (orientation === 'horizontal' && isRight(keyCode) ) {
 				ev.stopPropagation();
-				this.scrollTo(wrap ? this.wrapRange(0, this.children.length - 1, this.scrollX / itemWidth + 1) : clamp(0, this.children.length - 1, this.scrollX / itemWidth + 1));
+				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollX / itemWidth + 1) : clamp(0, this.props.children.length - 1, this.scrollX / itemWidth + 1));
 			} else if (orientation === 'vertical' && isUp(keyCode)) {
 				ev.stopPropagation();
-				this.scrollTo(wrap ? this.wrapRange(0, this.children.length - 1, this.scrollY / itemHeight - 1) : clamp(0, this.children.length - 1, this.scrollY / itemHeight - 1));
+				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollY / itemHeight - 1) : clamp(0, this.props.children.length - 1, this.scrollY / itemHeight - 1));
 			} else if (orientation === 'vertical' && isDown(keyCode) ) {
 				ev.stopPropagation();
-				this.scrollTo(wrap ? this.wrapRange(0, this.children.length - 1, this.scrollY / itemHeight + 1) : clamp(0, this.children.length - 1, this.scrollY / itemHeight + 1));
+				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollY / itemHeight + 1) : clamp(0, this.props.children.length - 1, this.scrollY / itemHeight + 1));
 			}
-			// remove transition for further touch related changes
-			setTimeout(() => {
-				this.contentRef.style.transition = 'none';
-			}, 300);
 		}
 	};
 
@@ -597,10 +593,10 @@ const DrumPickerBase = class extends Component {
 	handleClick = (direction) => {
 		const {orientation, wrap} = this.props;
 
-		if (!this.props.disabled && this.children.length > 0) {
+		if (!this.props.disabled && this.props.children.length > 0) {
 			let itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
 			let itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
-
+			// this is to avoid division by 0
 			if (itemHeight === 0) {
 				itemHeight = 1;
 			}
@@ -608,18 +604,11 @@ const DrumPickerBase = class extends Component {
 				itemWidth = 1;
 			}
 
-			if (!this.props.noAnimation) {
-				this.contentRef.style.transition = 'transform 300ms';
-			}
 			if (orientation === 'horizontal') {
-				this.scrollTo(wrap ? this.wrapRange(0, this.children.length - 1, this.scrollX / itemWidth + direction) : clamp(0, this.children.length - 1, this.scrollX / itemWidth + direction));
+				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollX / itemWidth + direction) : clamp(0, this.props.children.length - 1, this.scrollX / itemWidth + direction));
 			} else if (orientation === 'vertical') {
-				this.scrollTo(wrap ? this.wrapRange(0, this.children.length - 1, this.scrollY / itemHeight + direction) : clamp(0, this.children.length - 1, this.scrollY / itemHeight + direction));
+				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollY / itemHeight + direction) : clamp(0, this.props.children.length - 1, this.scrollY / itemHeight + direction));
 			}
-			// remove transition for further touch related changes
-			setTimeout(() => {
-				this.contentRef.style.transition = 'none';
-			}, 300);
 		}
 	};
 
@@ -644,7 +633,7 @@ const DrumPickerBase = class extends Component {
 			...rest
 		} = this.props;
 
-		let {children: values} = this;
+		let {children: values} = this.props;
 
 		const currentValueText = this.currentValueText();
 		const decAriaLabel = this.decrementAriaLabel();
