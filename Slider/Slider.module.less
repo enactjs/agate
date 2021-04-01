@@ -37,6 +37,11 @@
 			transform: @agate-slider-track-transform;
 		}
 
+		.load {
+			background-color: @agate-slider-load-bg-color;
+			border-radius: @agate-slider-border-radius;
+		}
+
 		.fill {
 			background-color: @agate-slider-fill-bg-color;
 			background-image: @agate-slider-fill-bg-image;
@@ -85,6 +90,7 @@
 		}
 
 		&.horizontal {
+			min-width: @agate-slider-horizontal-min-width;
 			width: auto;
 			margin: @agate-slider-horizontal-margin;
 			padding: @agate-slider-horizontal-padding;
@@ -108,7 +114,7 @@
 		&.vertical {
 			padding: @agate-slider-vertical-padding;
 			margin: @agate-slider-vertical-margin;
-			min-height: 120px;
+			min-height: @agate-slider-vertical-min-height;
 			display: inline-block;
 			vertical-align: top;
 
@@ -191,5 +197,34 @@
 				}
 			}
 		});
+	});
+}
+
+.tooltip {
+	.applySkins({
+		// Offset tooltip origin because `.knob` centered tooltip within the progressbar (when tooltip original origin is at the edge of `.progressbar`).
+		&.horizontal {
+			&.above {
+				transform: translateY(@agate-slider-tooltip-above-offset);
+			}
+
+			&.below {
+				transform: translateY(@agate-slider-tooltip-below-offset);
+			}
+		}
+
+		&.vertical {
+			&.left,
+			&.before,
+			:global(.enact-locale-right-to-left) &.after {
+				transform: translateX(@agate-slider-tooltip-before-offset);
+			}
+
+			&.right,
+			&.after,
+			:global(.enact-locale-right-to-left) &.before {
+				transform: translateX(@agate-slider-tooltip-after-offset);
+			}
+		}
 	});
 }

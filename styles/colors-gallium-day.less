@@ -94,10 +94,6 @@
 @agate-datetimepicker-divider-bg-color: @agate-white;
 @agate-datetimepicker-divider-opacity: 0.4;
 
-// Dropdown
-// ---------------------------------------
-@agate-dropdown-selected-color: @agate-accent;
-
 // Drawer
 // ---------------------------------------
 @agate-drawer-bg-image: @agate-popup-bg-image;
@@ -180,6 +176,7 @@
 @agate-picker-active-bg-color: @agate-accent;
 @agate-picker-active-bg-image: @agate-gradient;
 @agate-picker-item-bg-color: transparent;
+@agate-picker-item-color: fade(@agate-foreground, 50%);
 @agate-picker-item-decrement-bg-image: none;
 @agate-picker-item-increment-bg-image: none;
 @agate-picker-item-focus-bg-image: inherit;
@@ -206,6 +203,7 @@
 @agate-progressbar-track-bg-color: @agate-slider-track-bg-color;
 @agate-progressbar-fill-bg-color: @agate-slider-fill-bg-color;
 @agate-progressbar-fill-bg-image: linear-gradient(to right, transparent, fade(@agate-white, 75%));
+@agate-progressbar-load-bg-color: fade(@agate-progressbar-fill-bg-color, 30%);
 @agate-progressbar-vertical-fill-bg-image: linear-gradient(to top, transparent, fade(@agate-white, 75%));
 
 // RadioItem
