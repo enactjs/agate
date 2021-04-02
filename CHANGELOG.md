@@ -2,6 +2,12 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Fixed
+
+- `agate/Checkbox` style to match latest design for Silicon skin
+
 ## [2.0.0-alpha.2] - 2021-04-02
 
 ### Added
@@ -32,7 +38,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
-- `agate/Checkbox` style to match latest design for Silicon skin
 - `agate/ArcSlider` and `agate/TemperatureControl` broken layout when `min` prop is not smaller than `max` prop
 - `agate/BodyText`, `agate/Button`, `agate/IncrementSlider`, `agate/LabeledIcon`, and `agate/Slider` to match latest design for Silicon skin
 - `agate/Button` to apply active styling only when it is not disabled
