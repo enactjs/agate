@@ -2,12 +2,11 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
-## [unreleased]
+## [2.0.0-alpha.2] - 2021-04-02
 
 ### Added
 
-- `agate/ContextualPopup` prop `css` to support customizations
-- `agate/ContextualPopupDecorator` prop `css` to support customizations
+- `agate/ContextualPopup` and `agate/ContextualPopupDecorator` prop `css` to support customizations
 - `agate/Dropdown` prop `width` to support multiple widths
 - `agate/IncrementSlider` prop `activateOnFocus` to support slider activation when slider gets focused
 - `agate/IncrementSlider`, `agate/ProgressBar`, and `agate/Slider` prop `tooltip` to enable the built-in tooltip
@@ -34,16 +33,12 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/ArcSlider` and `agate/TemperatureControl` broken layout when `min` prop is not smaller than `max` prop
-- `agate/BodyText` to match latest design for Silicon skin
+- `agate/BodyText`, `agate/Button`, `agate/IncrementSlider`, `agate/LabeledIcon`, and `agate/Slider` to match latest design for Silicon skin
 - `agate/Button` to apply active styling only when it is not disabled
 - `agate/Button` to apply active styling on enter key press
-- `agate/Button` style to match latest design for Silicon skin
 - `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
-- `agate/IncrementSlider` to match latest design for Silicon skin
 - `agate/Item` to match the latest design for Silicon skin
-- `agate/LabeledIcon` to match latest design for Silicon skin
 - `agate/LabeledIconButton` styling to preserve behavior and look when props are missing
-- `agate/Slider` to match latest design for Silicon skin
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
 - `agate/SliderButton` styling to visually show the focused state
 - `agate/TooltipDecorator` to position correctly on rtl locale
