@@ -94,10 +94,10 @@ const DrawerBase = kind({
 
 		/**
 		 * Called after the drawer's "show" transition finishes.
-         *
-         * @type {Function}
-         * @public
-         */
+		 *
+		 * @type {Function}
+		 * @public
+		 */
 		onShow: PropTypes.func,
 
 		/**
@@ -137,7 +137,6 @@ const DrawerBase = kind({
          * * `'self-only'` - Spotlight can only be set within the drawer
          *
          * @type {('none'|'self-first'|'self-only')}
-         * @default 'self-first'
          * @public
          */
 		spotlightRestrict: PropTypes.oneOf(['none', 'self-first', 'self-only'])
