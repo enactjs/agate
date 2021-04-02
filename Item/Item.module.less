@@ -124,50 +124,49 @@
 		}
 
 		&.centered {
-			// override Marquee's alignment.
-			.marquee {
-				text-align: center;
-			}
-
 			.itemContent {
-				max-width: 100%;
+				max-width: fit-content;
 
 				&.labelAfter,
 				&.labelBefore {
+					max-width: 100%;
 					.content {
-						min-width: @agate-item-content-width;
 						max-width: @agate-item-content-width;
 					}
+
 					.label {
 						max-width: @agate-item-label-max-width;
 					}
 				}
 
-				&.labelAfter {
+				&.labelAbove,
+				&.labelBelow {
 					.content {
-						.marquee {
-							text-align: right;
-						}
+						max-width: 100%;
 					}
-					.label {
-						.marquee {
-							text-align: left;
-						}
-					}
-				}
 
-				&.labelBefore {
-					.content {
-						.marquee {
-							text-align: left;
-						}
-					}
 					.label {
-						.marquee {
-							text-align: right;
-						}
+						max-width: 100%;
 					}
 				}
+			}
+
+			&.slotAfter {
+				padding-right: @agate-item-slotafter-padding-right;
+			}
+
+			&.slotBefore {
+				padding-left: @agate-item-slotbefore-padding-left;
+			}
+
+			.slotAfter {
+				position: absolute;
+				.position-start-end(auto, @agate-item-side-outset);
+			}
+
+			.slotBefore {
+				position: absolute;
+				.position-start-end(@agate-item-side-outset, auto);
 			}
 
 			&.inline {
@@ -205,12 +204,6 @@
 				}
 			}
 		}
-
-		.disabled({
-			color: @agate-item-disabled-color;
-			border-color: @agate-item-disabled-border-color;
-			opacity: @agate-item-disabled-opacity;
-		});
 
 		.focus({
 			border-color: @agate-item-focus-border-color;
