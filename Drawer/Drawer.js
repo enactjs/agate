@@ -119,26 +119,26 @@ const DrawerBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
-         * The container id for {@link spotlight/Spotlight}.
-         *
-         * @type {String}
-         * @default null
-         * @public
-         */
+		 * The container id for {@link spotlight/Spotlight}.
+		 *
+		 * @type {String}
+		 * @default null
+		 * @public
+		 */
 		spotlightId: PropTypes.string,
 
 		/**
-         * Restricts or prioritizes spotlight navigation.
-         *
-         * Allowed values are:
-         * * `'none'` - Spotlight can move freely within and beyond the drawer
-         * * `'self-first'` - Spotlight should prefer components within the drawer over
-         *   components beyond the drawer, or
-         * * `'self-only'` - Spotlight can only be set within the drawer
-         *
-         * @type {('none'|'self-first'|'self-only')}
-         * @public
-         */
+		 * Restricts or prioritizes spotlight navigation.
+		 *
+		 * Allowed values are:
+		 * * `'none'` - Spotlight can move freely within and beyond the drawer
+		 * * `'self-first'` - Spotlight should prefer components within the drawer over
+		 *   components beyond the drawer, or
+		 * * `'self-only'` - Spotlight can only be set within the drawer
+		 *
+		 * @type {('none'|'self-first'|'self-only')}
+		 * @public
+		 */
 		spotlightRestrict: PropTypes.oneOf(['none', 'self-first', 'self-only'])
 	},
 
