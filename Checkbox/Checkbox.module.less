@@ -12,17 +12,15 @@
 
 		width: @size;
 		height: @size;
-		border-radius: @agate-checkbox-border-radius;
 		color: @agate-checkbox-text-color;
-		background-color: @agate-checkbox-bg-color;
 
 		.bg {
 			position: absolute;
+			.position(@agate-checkbox-container-position);
 			width: @agate-checkbox-bg-height-width;
 			height: @agate-checkbox-bg-height-width;
-			border-radius: 50%;
-			.position(@agate-checkbox-container-position);
-			z-index: -1;
+			border-radius:  @agate-checkbox-border-radius;
+			background-color: @agate-checkbox-bg-color;
 		}
 
 		.icon {
@@ -38,6 +36,7 @@
 
 		.focus({
 			background-color: @agate-checkbox-focus-bg-color;
+			border-radius: @agate-checkbox-border-radius;
 
 			.bg {
 				background-image: @agate-checkbox-focus-bg-image;
