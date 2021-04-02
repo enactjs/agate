@@ -21,6 +21,10 @@
 			&::before {
 				content: none; // Overwrite the selected styles for Item
 			}
+
+          .focus({
+            border-color: @agate-checkboxitem-focus-border-color;
+          });
 		}
 
 		&.item {
@@ -40,6 +44,11 @@
 			align-items: center;
 			-webkit-margin-start: 0;
 			-webkit-margin-end: @agate-checkboxitem-icon-margin;
+
+          .checkbox {
+            height: @agate-checkboxitem-checkbox-size;
+            width: @agate-checkboxitem-checkbox-size;
+          }
 		}
 
 		.focus({
