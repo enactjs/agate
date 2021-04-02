@@ -93,7 +93,7 @@ const DrawerBase = kind({
 		onHide: PropTypes.func,
 
 		/**
-         * Called after the drawer's "show" transition finishes.
+		 * Called after the drawer's "show" transition finishes.
          *
          * @type {Function}
          * @public
