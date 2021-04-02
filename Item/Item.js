@@ -282,7 +282,7 @@ const ItemBase = kind({
 	},
 
 	computed: {
-		className: ({centered, label, selected, size, slotAfter, slotBefore,  styler}) => styler.append(
+		className: ({centered, label, selected, size, slotAfter, slotBefore, styler}) => styler.append(
 			{
 				hasLabel: label != null,
 				selected,
