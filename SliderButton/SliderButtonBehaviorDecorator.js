@@ -1,8 +1,12 @@
 import {forward} from '@enact/core/handle';
+import {is} from '@enact/core/keymap';
 import platform from '@enact/core/platform';
 import PropTypes from 'prop-types';
 import {useState, useRef} from 'react';
 import {findDOMNode} from 'react-dom';
+
+const isLeft = is('left');
+const isRight = is('right');
 
 /**
  * SliderButtonBehaviorDecorator passes props to support a11y feature in SliderButton
@@ -33,6 +37,14 @@ const SliderButtonBehaviorDecorator = (Wrapped) => {
 			}
 		}
 
+		function handleKeyDown (ev) {
+			if (isLeft(ev.keyCode)) {
+				handleChange({value: Math.max(children.indexOf(valueText) - 1, 0)});
+			} else if (isRight(ev.keyCode)) {
+				handleChange({value: Math.min(children.indexOf(valueText) + 1, children.length - 1)});
+			}
+		}
+
 		return (
 			<Wrapped
 				aria-valuetext={valueText}
@@ -41,6 +53,7 @@ const SliderButtonBehaviorDecorator = (Wrapped) => {
 				{...props}
 				onChange={handleChange}
 				onDragStart={handleDragStart}
+				onKeyDown={handleKeyDown}
 			/>
 		);
 	}
