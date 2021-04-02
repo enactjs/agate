@@ -7,6 +7,7 @@
 	align-items: center;
 
 	.applySkins({
+        height: @agate-checkboxitem-height;
 		padding-left: @agate-checkboxitem-padding-left;
 		padding-right: @agate-checkboxitem-padding-right;
 		border-color: @agate-checkboxitem-border-color;
@@ -14,8 +15,18 @@
 
 		&.selected {
 			border-color: @agate-checkboxitem-selected-border-color;
+			padding-left: @agate-checkboxitem-padding-left;
+			padding-right: @agate-checkboxitem-padding-right;
+
 			&::before {
 				content: none; // Overwrite the selected styles for Item
+			}
+		}
+
+		&.item {
+			&.inline {
+				padding-left: @agate-checkboxitem-inline-padding-left;
+				padding-right: @agate-checkboxitem-inline-padding-right;
 			}
 		}
 
