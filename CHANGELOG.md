@@ -2,6 +2,16 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Added
+
+- `agate/MediaPlayer` prop `type` to have a `light` mediaPlayer
+
+### Fixed
+
+- `agate/MediaPlayer` style to match latest design for Silicon skin
+
 ## [2.0.0-alpha.2] - 2021-04-02
 
 ### Added
