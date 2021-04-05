@@ -66,10 +66,6 @@
 	// nameMultipleWeightStyleRepeat:	local("name") 100 900 italic, local("name2") 200 800 normal;
 };
 
-// "MuseoSans" becomes a composite font, laying down the "Noto Sans" font as the base and layreing
-// "Museo Sans" on top of it. All Museo Sans glyphs will replace any Noto Sans equivelents and any
-// non-overridden Noto Sans glyphs will still be accessible and displayed.
-
 // Generate @font-face Rules
 .buildFontFace(@font-family-base-name; @font-system-src-agate-400);
 .buildFontFace(@font-family-base-name; @font-system-src-agate-100;   100);
@@ -82,7 +78,7 @@
 .buildFontFace(@font-family-base-name; @font-system-src-agate-800;   800);
 .buildFontFace(@font-family-base-name; @font-system-src-agate-900;   900);
 
-/* ----- Generated Sandstone Locale Fonts (Stacking onto "Sandstone") ------ */
+/* ----- Generated Agate Locale Fonts (Stacking onto "Agate") ------ */
 .buildLocaleFonts(@font-family-base-name; @fonts);
 
 //
