@@ -25,17 +25,23 @@
 
 // Define local LESS variable for font paths
 @font-system-src-agate-100:    local("NotoSans-Thin"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Thin.ttf) format("truetype");
+@font-system-src-agate-100-i:  local("NotoSans-ThinItalic"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Thin.ttf) format("truetype");
 @font-system-src-agate-200:    local("NotoSans-ExtraLight"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Thin.ttf) format("truetype");
+@font-system-src-agate-200-i:  local("NotoSans-ExtraLightItalic"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Thin.ttf) format("truetype");
 @font-system-src-agate-300:    local("NotoSans-Light"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Light.ttf) format("truetype");
+@font-system-src-agate-300-i:  local("NotoSans-LightItalic"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Light.ttf) format("truetype");
 @font-system-src-agate-400:    local("NotoSans-Regular"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Light.ttf) format("truetype");
+@font-system-src-agate-400-i:  local("NotoSans-Italic"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Light.ttf) format("truetype");
 @font-system-src-agate-500:    local("NotoSans-Medium"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Medium.ttf) format("truetype");
-@font-system-src-agate-500-i:  local("NotoSans-Medium"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-MediumItalic.ttf) format("truetype");
+@font-system-src-agate-500-i:  local("NotoSans-MediumItalic"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-MediumItalic.ttf) format("truetype");
 @font-system-src-agate-600:    local("NotoSans-SemiBold"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Medium.ttf) format("truetype");
+@font-system-src-agate-600-i:  local("NotoSans-SemiBoldItalic"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Medium.ttf) format("truetype");
 @font-system-src-agate-700:    local("NotoSans-Bold"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Bold.ttf) format("truetype");
-@font-system-src-agate-700-i:  local("NotoSans-Bold"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-BoldItalic.ttf) format("truetype");
+@font-system-src-agate-700-i:  local("NotoSans-BoldItalic"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-BoldItalic.ttf) format("truetype");
 @font-system-src-agate-800:    local("NotoSans-ExtraBold"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Medium.ttf) format("truetype");
+@font-system-src-agate-800-i:  local("NotoSans-ExtraBoldItalic"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Medium.ttf) format("truetype");
 @font-system-src-agate-900:    local("NotoSans-Black"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Black.ttf) format("truetype");
-@font-system-src-agate-900-i:  local("NotoSans-Black"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-BlackItalic.ttf) format("truetype");
+@font-system-src-agate-900-i:  local("NotoSans-BlackItalic"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-BlackItalic.ttf) format("truetype");
 
 // Localized fonts
 // Order correlates with load and priority order. Later fonts are stacked on top of earlier fonts.
@@ -69,14 +75,23 @@
 // Generate @font-face Rules
 .buildFontFace(@font-family-base-name; @font-system-src-agate-400);
 .buildFontFace(@font-family-base-name; @font-system-src-agate-100;   100);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-100-i; 100; italic);
 .buildFontFace(@font-family-base-name; @font-system-src-agate-200;   200);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-200-i; 200; italic);
 .buildFontFace(@font-family-base-name; @font-system-src-agate-300;   300);
-.buildFontFace(@font-family-base-name; @font-system-src-agate-300;   400);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-300-i; 300; italic);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-400;   400);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-400-i; 400; italic);
 .buildFontFace(@font-family-base-name; @font-system-src-agate-500;   500);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-500-i; 500; italic);
 .buildFontFace(@font-family-base-name; @font-system-src-agate-600;   600);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-600-i; 600; italic);
 .buildFontFace(@font-family-base-name; @font-system-src-agate-700;   700);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-700-i; 700; italic);
 .buildFontFace(@font-family-base-name; @font-system-src-agate-800;   800);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-800-i; 800; italic);
 .buildFontFace(@font-family-base-name; @font-system-src-agate-900;   900);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-900-i; 900; italic);
 
 /* ----- Generated Agate Locale Fonts (Stacking onto "Agate") ------ */
 .buildLocaleFonts(@font-family-base-name; @fonts);
