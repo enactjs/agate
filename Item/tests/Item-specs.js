@@ -58,13 +58,13 @@ describe('Item Specs', () => {
 	test('should support `slotBefore`', () => {
 		const expected = 'slot before';
 
-		const subject = mount(
-			<ItemBase slotBefore={expected}>
+		const item = mount(
+			<Item slotBefore={expected}>
 				Hello Item
-			</ItemBase>
+			</Item>
 		);
 
-		const actual = subject.find(`.${css.slotBefore}`).last().text();
+		const actual = item.find(`.${css.slotBefore}`).last().text();
 
 		expect(actual).toBe(expected);
 	});
@@ -72,13 +72,13 @@ describe('Item Specs', () => {
 	test('should support `slotAfter`', () => {
 		const expected = 'slot after';
 
-		const subject = mount(
-			<ItemBase slotAfter={expected}>
+		const item = mount(
+			<Item slotAfter={expected}>
 				Hello Item
-			</ItemBase>
+			</Item>
 		);
 
-		const actual = subject.find(`.${css.slotAfter}`).last().text();
+		const actual = item.find(`.${css.slotAfter}`).last().text();
 
 		expect(actual).toBe(expected);
 	});
