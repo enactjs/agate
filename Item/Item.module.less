@@ -104,21 +104,20 @@
 		&.inline {
 			// overriding ui/Item's inline-block
 			display: inline-flex;
-			min-width: @agate-item-inline-min-width;
+			max-width: @agate-item-inline-max-width;
 
 			.itemContent {
 				max-width: @agate-item-inline-content-max-width;
 			}
 
-			&:not(.centered) {
-				.itemContent {
-					min-width: @agate-item-inline-notcentered-itemcontent-min-width;
-				}
+			&:not(.centered) .itemContent {
+				min-width: @agate-item-inline-notcentered-itemcontent-min-width;
 			}
 
-			.itemContent,
-			.content {
+			.content,
+			.itemContent {
 				flex-shrink: 1;
+				overflow: auto;
 			}
 		}
 
@@ -224,7 +223,6 @@
 			background-color: @agate-item-selected-bg-color;
 			border-color: @agate-item-selected-border-color;
 			color: @agate-item-focus-color;
-			.padding-start-end(@agate-item-selected-padding);
 
 			&::before {
 				content: "";
@@ -233,7 +231,8 @@
 				background-color: @agate-indicator-bg-color;
 				border-radius: @agate-indicator-border-radius;
 				align-self: @agate-indicator-align-self;
-				.margin-start-end(0, @agate-indicator-margin-right)
+				position: absolute;
+				.position-start-end(@agate-item-selected-padding, initial);
 			}
 
 			// Selected+Focus colors use both sets of colors

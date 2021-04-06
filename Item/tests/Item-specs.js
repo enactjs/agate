@@ -56,27 +56,31 @@ describe('Item Specs', () => {
 	});
 
 	test('should support `slotBefore`', () => {
-		const item = mount(
-			<Item slotBefore="slot before">
+		const expected = 'slot before';
+
+		const subject = mount(
+			<ItemBase slotBefore={expected}>
 				Hello Item
-			</Item>
+			</ItemBase>
 		);
 
-		const actual = item.find(`div.${css.item}`).hasClass(css.slotBefore);
+		const actual = subject.find(`.${css.slotBefore}`).last().text();
 
-		expect(actual).toBe(true);
+		expect(actual).toBe(expected);
 	});
 
 	test('should support `slotAfter`', () => {
-		const item = mount(
-			<Item slotAfter="slot after">
+		const expected = 'slot after';
+
+		const subject = mount(
+			<ItemBase slotAfter={expected}>
 				Hello Item
-			</Item>
+			</ItemBase>
 		);
 
-		const actual = item.find(`div.${css.item}`).hasClass(css.slotAfter);
+		const actual = subject.find(`.${css.slotAfter}`).last().text();
 
-		expect(actual).toBe(true);
+		expect(actual).toBe(expected);
 	});
 
 	test('should support repositioning of the label', () => {
