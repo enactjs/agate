@@ -12,7 +12,6 @@
  * @exports KeypadDecorator
  */
 
-import classNames from 'classnames';
 import {adaptEvent, forward, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
@@ -193,8 +192,8 @@ const KeypadBase = kind({
 				{text: '*'},
 				{text: '0'},
 				{text: '#'},
-				{text: skin !== 'silicon' ? 'phone' : callStatus, isIcon: true},
-				{text: skin !== 'silicon' ? 'arrowuturn' : editStatus, isIcon: true}
+				{icon: skin !== 'silicon' ? 'phone' : callStatus},
+				{icon: skin !== 'silicon' ? 'arrowuturn' : editStatus}
 			];
 		}
 	},
@@ -205,35 +204,35 @@ const KeypadBase = kind({
 		return (
 			<SpotlightContainerLayout {...rest} align="center end" className={css.keypad} inline spotlightDisabled={spotlightDisabled} wrap>
 				{keys.map((keyText, rowIndex) => {
-					const {className, isIcon, text} = keyText;
+					const {icon, text} = keyText;
 
-					let ariaLabel = text;
-					if (text === 'arrowuturn') {
+					let ariaLabel = icon;
+					if (icon === 'arrowuturn') {
 						ariaLabel = $L('backspace');
-					} else if (text === 'phone') {
+					} else if (icon === 'phone') {
 						ariaLabel = $L('call');
 					}
 
 					let color = '';
-					if (text === 'callaccept') {
+					if (icon === 'callaccept') {
 						color = 'accept';
-					} else if (text === 'calldecline') {
+					} else if (icon === 'calldecline') {
 						color = 'decline';
 					}
 
 					return (
 						<Cell
 							aria-label={ariaLabel}
-							className={classNames(className, css[`${color}`])}
+							className={css[`${color}`]}
 							component={Key}
 							disabled={disabled}
 							key={`key${rowIndex}-${text}`}
 							label={keyText.label}
 							onKeyButtonClick={() => onKeyButtonClick(text)}
 							shrink
-							text={isIcon ? null : text}
+							text={icon ? null : text}
 						>
-							{isIcon ? text : null}
+							{icon ? icon : null}
 						</Cell>
 					);
 				})}

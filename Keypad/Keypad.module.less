@@ -159,55 +159,38 @@
 		}
 
 		// 'accept' and 'decline' classes are set for design requirements accuracy
-		&.accept,
-		&.decline {
-			.focus({
-				.client {
-					color: @agate-keypad-button-focus-color;
-				}
-			});
-
-			.active({
-				.focus({
-					.client {
-						color: @agate-keypad-button-focus-color;
-					}
-				});
-			});
-		}
-
 		&.accept {
 			.client {
-				color: #4cd964;
+				color: @agate-keypad-button-accept-color;
 			}
 
 			.active({
 				.client {
-					color: #4cd964;
+					color: @agate-keypad-button-accept-color;
 				}
 			});
 
 			.disabled({
 				.client {
-					color: #4cd964;
+					color: @agate-keypad-button-accept-color;
 				}
 			});
 		}
 
 		&.decline {
 			.client {
-				color: #f24949;
+				color: @agate-keypad-button-decline-color;
 			}
 
 			.active({
 				.client {
-					color: #f24949;
+					color: @agate-keypad-button-decline-color;
 				}
 			});
 
 			.disabled({
 				.client {
-					color: #f24949;
+					color: @agate-keypad-button-decline-color;
 				}
 			});
 		}
