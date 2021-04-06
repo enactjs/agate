@@ -61,52 +61,52 @@ const ButtonTests = [
 
 	// Focused
 	...withConfig({focus: true}, [
-		<Button>Click me</Button>,
-		<Button icon="home" iconPosition="after" selected>Click me</Button>,
-		<Button highlighted size="small">Not Selected. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
-		<Button badge={10} badgeColor="#FDC902">Not Selected. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
+		<Button>Focused Click me</Button>,
+		<Button icon="home" iconPosition="after" selected>Focused Click me</Button>,
+		<Button highlighted size="small">Focused Not Selected. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
+		<Button badge={10} badgeColor="#FDC902">Focused Not Selected. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
 
-		<Button>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
-		<Button disabled>click me</Button>,
+		<Button>Focused Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
+		<Button disabled>Focused click me</Button>,
 
-		<Button> ฟิ้  ไั  ஒ  து</Button>,
-		<Button>ÃÑÕÂÊÎÔÛÄËÏÖÜŸ</Button>,
-		<Button>Bản văn</Button>,
-		<Button>តន្ត្រី</Button>,
+		<Button>Focused  ฟิ้  ไั  ஒ  து</Button>,
+		<Button>Focused ÃÑÕÂÊÎÔÛÄËÏÖÜŸ</Button>,
+		<Button>Focused Bản văn</Button>,
+		<Button>Focused តន្ត្រី</Button>,
 
-		<Button size="smallest">click me</Button>,
-		<Button size="small">click me</Button>,
-		<Button size="huge">click me</Button>,
+		<Button size="smallest">Focused click me</Button>,
+		<Button size="small">Focused click me</Button>,
+		<Button size="huge">Focused click me</Button>,
 
 		// iconPosition = before (Default) + icon + iconPosition + different sizes
-		<Button icon="minus" iconPosition="after">click me</Button>,
-		<Button icon="minus" iconPosition="after" size="smallest">click me</Button>,
-		<Button icon="minus" iconPosition="after" size="small">click me</Button>,
-		<Button icon="minus" iconPosition="after" size="huge">click me</Button>,
-		<Button icon="plus" iconPosition="before">click me</Button>,
-		<Button icon="plus" iconPosition="after" size="smallest">click me</Button>,
-		<Button icon="plus" iconPosition="after" size="small">click me</Button>,
-		<Button icon="plus" iconPosition="after" size="huge">click me</Button>,
+		<Button icon="minus" iconPosition="after">Focused click me</Button>,
+		<Button icon="minus" iconPosition="after" size="smallest">Focused click me</Button>,
+		<Button icon="minus" iconPosition="after" size="small">Focused click me</Button>,
+		<Button icon="minus" iconPosition="after" size="huge">Focused click me</Button>,
+		<Button icon="plus" iconPosition="before">Focused click me</Button>,
+		<Button icon="plus" iconPosition="after" size="smallest">Focused click me</Button>,
+		<Button icon="plus" iconPosition="after" size="small">Focused click me</Button>,
+		<Button icon="plus" iconPosition="after" size="huge">Focused click me</Button>,
 
 		// Icon only, iconPosition = before (Default) + icon + iconPosition + + different sizes
-		<Button icon="minus" iconPosition="after" />,
-		<Button icon="minus" iconPosition="after" size="smallest" />,
-		<Button icon="minus" iconPosition="after" size="small" />,
-		<Button icon="minus" iconPosition="after" size="huge" />,
-		<Button icon="plus" iconPosition="before" />,
-		<Button icon="plus" iconPosition="before" size="smallest" />,
-		<Button icon="plus" iconPosition="before" size="small" />,
-		<Button icon="plus" iconPosition="before" size="huge" />,
+		<Button icon="home" iconPosition="after" />,
+		<Button icon="home" iconPosition="after" size="smallest" />,
+		<Button icon="home" iconPosition="after" size="small" />,
+		<Button icon="home" iconPosition="after" size="huge" />,
+		<Button icon="home" iconPosition="before" />,
+		<Button icon="home" iconPosition="before" size="smallest" />,
+		<Button icon="home" iconPosition="before" size="small" />,
+		<Button icon="home" iconPosition="before" size="huge" />,
 
 		// iconPosition = before (Default) + backgroundOpacity
-		<Button icon="plus" backgroundOpacity="transparent">click me</Button>,
-		<Button backgroundOpacity="opaque">click me</Button>,
+		<Button icon="plus" backgroundOpacity="transparent">Focused click me</Button>,
+		<Button backgroundOpacity="opaque">Focused click me</Button>,
 		// Selected buttons
-		<Button selected>click me</Button>,
-		<Button selected icon="plus" />,
-		<Button selected backgroundOpacity="transparent">click me</Button>,
-		<Button selected backgroundOpacity="transparent" icon="plus" />,
-		<Button selected backgroundOpacity="opaque">click me</Button>
+		<Button selected>Focused click me</Button>,
+		<Button selected icon="home" />,
+		<Button selected backgroundOpacity="transparent">Focused click me</Button>,
+		<Button selected backgroundOpacity="transparent" icon="home" />,
+		<Button selected backgroundOpacity="opaque">Focused click me</Button>
 	]),
 
 
