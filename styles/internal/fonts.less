@@ -63,8 +63,8 @@
 	// nameRepeat:						local("name"), local("name2");
 	// nameWeight:						local("name") 100;
 	// nameMultipleWeight:				local("name") 100 900;
-	// nameWeightStyle:				local("name") 100 italic;
-	// nameMultipleWeightStyle:		local("name") 100 900 italic;
+	// nameWeightStyle:					local("name") 100 italic;
+	// nameMultipleWeightStyle:			local("name") 100 900 italic;
 	// nameWeightRepeat:				local("name") 100, local("name2") 200;
 	// nameWeightRepeat2ndWeight:		local("name"), local("name2") 200;
 	// nameMultipleWeightRepeat:		local("name") 100 900, local("name2") 200 800;
@@ -95,12 +95,3 @@
 
 /* ----- Generated Agate Locale Fonts (Stacking onto "Agate") ------ */
 .buildLocaleFonts(@font-family-base-name; @fonts);
-
-//
-// ----- DISABLED - PLAT-92904 -----
-// Until such time that a solution for can be found for pre-downloading or pre-fetching external
-// font resources, all external fonts must be disabled. Current webOS policy states that system
-// apps, specifically, may not use external fonts that delay or impede the initial render.
-//
-// @import "./font-worksans.less";
-// @import "./font-sourcesanspro.less";
