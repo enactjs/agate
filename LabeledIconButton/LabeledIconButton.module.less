@@ -23,22 +23,169 @@
 	}
 
 	.applySkins({
-		max-width: @agate-labelediconbutton-max-width;
+		//max-width: @agate-labelediconbutton-max-width;
+
+		&.labeledIcon {
+			padding-bottom: @agate-labelediconbutton-padding-bottom;
+		}
 
 		&.smallest {
-			max-width: calc(@agate-labelediconbutton-max-width + @agate-button-smallest-height);
+			max-width: @agate-labelediconbutton-smallest-max-width;
+			min-width: @agate-labelediconbutton-smallest-min-width;
+			//padding-bottom: 0;//to overwrite LabeledIcon styles
+
+
+			.label {
+				font-size: @agate-labelediconbutton-smallest-label-font-size;
+				line-height: @agate-labelediconbutton-smallest-label-height;
+				height: @agate-labelediconbutton-smallest-label-height;
+			}
 		}
 
 		&.small {
-			max-width: calc(@agate-labelediconbutton-max-width + @agate-button-small-height);
+			max-width: @agate-labelediconbutton-small-max-width;
+			min-width: @agate-labelediconbutton-small-min-width;
+
+			.label {
+				font-size: @agate-labelediconbutton-small-label-font-size;
+				line-height: @agate-labelediconbutton-small-label-height;
+				height: @agate-labelediconbutton-small-label-height;
+			}
 		}
 
 		&.large {
-			max-width: calc(@agate-labelediconbutton-max-width + @agate-button-height);
+			max-width: @agate-labelediconbutton-large-max-width;
+			min-width: @agate-labelediconbutton-large-min-width;
+
+			.label {
+				font-size: @agate-labelediconbutton-large-label-font-size;
+				line-height: @agate-labelediconbutton-large-label-height;
+				height: @agate-labelediconbutton-large-label-height;
+			}
 		}
 
 		&.huge {
-			max-width: calc(@agate-labelediconbutton-max-width + @agate-button-huge-height);
+			max-width: @agate-labelediconbutton-large-max-width;
+			min-width: @agate-labelediconbutton-large-min-width;
+
+			.label {
+				font-size: @agate-labelediconbutton-huge-label-font-size;
+				line-height: @agate-labelediconbutton-huge-label-height;
+				height: @agate-labelediconbutton-huge-label-height;
+			}
+		}
+
+		//label margin top based on labelPosition
+		&.below {
+			&.smallest {
+				.label {
+					margin: @agate-labelediconbutton-below-smallest-label-margin;
+				}
+			}
+
+			&.small {
+				.label {
+					margin: @agate-labelediconbutton-below-small-label-margin;
+				}
+			}
+
+			&.large {
+				.label {
+					margin: @agate-labelediconbutton-below-large-label-margin;
+				}
+			}
+
+			&.huge {
+				.label {
+					margin: @agate-labelediconbutton-below-huge-label-margin;
+				}
+			}
+		}
+
+		&.above {
+			&.smallest {
+				.label {
+					margin: @agate-labelediconbutton-above-smallest-label-margin;
+				}
+			}
+
+			&.small {
+				.label {
+					margin: @agate-labelediconbutton-above-small-label-margin;
+				}
+			}
+
+			&.large {
+				.label {
+					margin: @agate-labelediconbutton-above-large-label-margin;
+				}
+			}
+
+			&.huge {
+				.label {
+					margin: @agate-labelediconbutton-above-huge-label-margin;
+				}
+			}
+
+			.noChildren {
+
+			}
+		}
+
+		&.after, &.right {
+			&.smallest {
+				.label {
+					margin: @agate-labelediconbutton-right-smallest-label-margin;
+				}
+			}
+
+			&.small {
+				.label {
+					margin: @agate-labelediconbutton-right-small-label-margin;
+				}
+			}
+
+			&.large {
+				.label {
+					margin: @agate-labelediconbutton-right-large-label-margin;
+				}
+			}
+
+			&.huge {
+				.label {
+					margin: @agate-labelediconbutton-right-huge-label-margin;
+				}
+			}
+		}
+
+		&.before, &.left {
+			&.smallest {
+				.label {
+					margin: @agate-labelediconbutton-left-smallest-label-margin;
+				}
+			}
+
+			&.small {
+				.label {
+					margin: @agate-labelediconbutton-left-small-label-margin;
+				}
+			}
+
+			&.large {
+				.label {
+					margin: @agate-labelediconbutton-left-large-label-margin;
+				}
+			}
+
+			&.huge {
+				.label {
+					margin: @agate-labelediconbutton-left-huge-label-margin;
+				}
+			}
+
+			.noChildren {
+
+			}
 		}
 
 		.label {
@@ -67,4 +214,47 @@
 			}, parent);
 		});
 	});
+}
+
+.labeledIcon {
+	.applySkins({
+		&.smallest {
+			.icon {
+				font-size: @agate-labelediconbutton-smallest-icon-font-size;
+			}
+		}
+		&.small {
+			.icon {
+				font-size: @agate-labelediconbutton-small-icon-font-size;
+			}
+		}
+		&.large {
+			.icon {
+				font-size: @agate-labelediconbutton-large-icon-font-size;
+			}
+		}
+		&.huge {
+			.icon {
+				font-size: @agate-labelediconbutton-huge-icon-font-size;
+			}
+		}
+
+		&.smallest,
+		&.small,
+		&.large,
+		&.huge {
+			&.left, 
+			&.right, 
+			&.before, 
+			&.after {
+				.button {
+					padding: 0;
+				}
+
+				.client .icon {
+					padding: 0;
+				}
+			}
+		}
+	})
 }

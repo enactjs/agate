@@ -159,8 +159,14 @@ const LabeledIconButtonBase = kind({
 		 * @type {Number}
 		 * @public
 		 */
-		spriteCount: PropTypes.number
+		spriteCount: PropTypes.number,
 		// TODO: spriteCount prop bleeds!  Is this cruft?
+
+
+
+
+
+		skin: PropTypes.string
 	},
 
 	defaultProps: {
@@ -174,7 +180,14 @@ const LabeledIconButtonBase = kind({
 	},
 
 	computed: {
-		className: ({labelPosition, size, styler}) => styler.append((labelPosition === 'above' || labelPosition === 'below') ? '' : size)
+		className: ({labelPosition, size, styler, children}) => 
+
+		
+			styler.append(
+			size, 
+			!children[0] && 'noChildren'
+			// skin !== 'silicon' && (labelPosition === 'above' || labelPosition === 'below') ? '' : size
+			)
 	},
 
 	render: ({
@@ -203,6 +216,7 @@ const LabeledIconButtonBase = kind({
 					pressed={pressed}
 					selected={selected}
 					spriteCount={spriteCount}
+					css={css}
 				/>
 			),
 			css
@@ -228,7 +242,7 @@ const LabeledIconButtonDecorator = compose(
 	UiLabeledIconDecorator,
 	TooltipDecorator,
 	Spottable,
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 /**
