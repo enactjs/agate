@@ -142,13 +142,15 @@ const ArcSliderBase = kind({
 		 */
 		radius: PropTypes.number,
 
-		/**
-		 * The current skin for this component.
+		/*
+		 * State of possible skin variants.
 		 *
-		 * @type {String}
-		 * @public
+		 * Used to set backgroundColor and foregroundColor.
+		 *
+		 * @type {Object}
+		 * @private
 		 */
-		skin: PropTypes.string,
+		skinVariants: PropTypes.object,
 
 		/**
 		 * Nodes to be inserted in the center of the ArcSlider.
@@ -199,9 +201,7 @@ const ArcSliderBase = kind({
 	},
 
 	defaultProps: {
-		backgroundColor: '#444444',
 		endAngle: 250,
-		foregroundColor: '#ffffff',
 		max: 100,
 		min: 0,
 		noFocusColor: true,
@@ -224,7 +224,9 @@ const ArcSliderBase = kind({
 			const size = ri.scaleToRem(radius * 2);
 			return {...style, height: size, width: size};
 		},
-		circleRadius: ({isFocused}) => isFocused ? 20 : 15
+		circleRadius: ({isFocused}) => isFocused ? 20 : 15,
+		backgroundColor: ({backgroundColor, skinVariants}) => backgroundColor || (skinVariants.night ? '#444444' : '#888888'),
+		foregroundColor: ({foregroundColor, skinVariants}) => foregroundColor || (skinVariants.night ? '#ffffff' : '#000000')
 	},
 
 	render: ({'aria-valuetext': ariaValuetext, backgroundColor, componentRef, circleRadius, disabled, endAngle, foregroundColor, isFocused, max, min, noFocusColor, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}, context) => {
@@ -232,6 +234,7 @@ const ArcSliderBase = kind({
 		const valueAngle = valueToAngle(clamp(min, max, value), min, Math.max(min, max), startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
+		delete rest.skinVariants;
 		delete rest.step;
 
 		return (
@@ -285,7 +288,7 @@ const ArcSliderDecorator = compose(
 	ArcSliderBehaviorDecorator,
 	Touchable,
 	Spottable,
-	Skinnable({prop: 'skin'})
+	Skinnable({variantsProp: 'skinVariants'})
 );
 
 /**
