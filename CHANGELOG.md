@@ -7,6 +7,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/Checkbox` style to match latest design for Silicon skin
+- `agate/Drawer` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
 
 ## [2.0.0-alpha.2] - 2021-04-02
 
@@ -43,6 +44,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Button` to apply active styling only when it is not disabled
 - `agate/Button` to apply active styling on enter key press
 - `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
+- `agate/Item` to match the latest design for Silicon skin
 - `agate/LabeledIconButton` styling to preserve behavior and look when props are missing
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
 - `agate/SliderButton` styling to visually show the focused state
