@@ -5,7 +5,7 @@ import Icon from '@enact/agate/Icon';
 import Item, {ItemBase} from '@enact/agate/Item';
 import RadioItem, {RadioItemBase} from '@enact/agate/RadioItem';
 
-import {iconList} from './icons';
+import {iconList} from './util/icons';
 
 const Config = mergeComponentMetadata('RadioItem', ItemBase, Item, RadioItemBase, RadioItem);
 RadioItem.displayName = 'RadioItem';

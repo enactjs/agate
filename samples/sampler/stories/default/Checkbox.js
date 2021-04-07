@@ -3,7 +3,7 @@ import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import Checkbox, {CheckboxBase} from '@enact/agate/Checkbox';
 
-import {iconList} from './icons';
+import {iconList} from './util/icons';
 
 Checkbox.displayName = 'Checkbox';
 const Config = mergeComponentMetadata('Checkbox', CheckboxBase, Checkbox);

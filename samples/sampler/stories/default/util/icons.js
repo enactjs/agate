@@ -85,3 +85,5 @@ export const starIcons = [
 
 export const iconList = Object.keys(icons).sort();
 export const iconListSilicon = Object.keys(iconsSilicon).sort();
+
+export default iconList;

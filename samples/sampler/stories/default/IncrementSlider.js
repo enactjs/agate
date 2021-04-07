@@ -4,7 +4,7 @@ import {boolean, select, number} from '@enact/storybook-utils/addons/knobs';
 import ri from '@enact/ui/resolution';
 import IncrementSlider, {IncrementSliderBase, IncrementSliderTooltip} from '@enact/agate/IncrementSlider';
 
-import {decrementIcons, incrementIcons} from './icons';
+import {decrementIcons, incrementIcons} from './util/icons';
 
 const Config = mergeComponentMetadata('IncrementSlider', IncrementSliderBase, IncrementSlider);
 const IncrementSliderTooltipConfig = mergeComponentMetadata('IncrementSliderTooltip', IncrementSliderTooltip);

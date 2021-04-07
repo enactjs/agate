@@ -7,7 +7,7 @@ import Skinnable from '@enact/agate/Skinnable';
 import Icon, {IconBase} from '@enact/agate/Icon';
 import Heading from '@enact/agate/Heading';
 
-import {iconList, iconListSilicon} from './icons';
+import {iconList, iconListSilicon} from './util/icons';
 
 // import icons
 import docs from '../../images/icon-enact-docs.png';

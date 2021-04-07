@@ -3,7 +3,7 @@ import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import {Input, InputBase} from '@enact/agate/Input';
 
-import {iconList} from './icons';
+import {iconList} from './util/icons';
 
 const iconNames = ['', ...iconList];
 

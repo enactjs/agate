@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Button, {ButtonBase} from '@enact/agate/Button';
 import Skinnable from '@enact/agate/Skinnable';
 
-import {iconList, iconListSilicon} from './icons';
+import {iconList, iconListSilicon} from './util/icons';
 
 Button.displayName = 'Button';
 const Config = mergeComponentMetadata('Button', UiButton, ButtonBase, Button);

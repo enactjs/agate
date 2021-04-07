@@ -6,7 +6,7 @@ import CheckboxItem, {CheckboxItemBase} from '@enact/agate/CheckboxItem';
 import Icon from '@enact/agate/Icon';
 import Item, {ItemBase} from '@enact/agate/Item';
 
-import {iconList} from './icons';
+import {iconList} from './util/icons';
 
 CheckboxItem.displayName = 'CheckboxItem';
 const Config = mergeComponentMetadata('CheckboxItem', ItemBase, Item, CheckboxBase, Checkbox, CheckboxItemBase, CheckboxItem);

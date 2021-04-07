@@ -3,7 +3,7 @@ import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
 import FanSpeedControl from '@enact/agate/FanSpeedControl';
 
-import {iconList} from './icons';
+import {iconList} from './util/icons';
 
 FanSpeedControl.displayName = 'FanSpeedControl';
 const Config = mergeComponentMetadata('FanSpeedControl', FanSpeedControl);

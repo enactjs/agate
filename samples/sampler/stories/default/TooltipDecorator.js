@@ -4,7 +4,7 @@ import {boolean, number, select, text} from '@enact/storybook-utils/addons/knobs
 import Button from '@enact/agate/Button';
 import TooltipDecorator, {Tooltip, TooltipBase} from '@enact/agate/TooltipDecorator';
 
-import {iconList} from './icons';
+import {iconList} from './util/icons';
 
 const Config = mergeComponentMetadata('TooltipDecorator', TooltipDecorator, Tooltip, TooltipBase);
 const TooltipButton = TooltipDecorator(

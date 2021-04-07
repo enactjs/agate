@@ -5,7 +5,7 @@ import UiIcon from '@enact/ui/Icon';
 import Icon, {IconBase} from '@enact/agate/Icon';
 import LabeledIcon from '@enact/agate/LabeledIcon';
 
-import {iconList} from './icons';
+import {iconList} from './util/icons';
 
 LabeledIcon.displayName = 'LabeledIcon';
 const Config = mergeComponentMetadata('LabeledIcon', UiLabeledIconBase, UiLabeledIcon, UiIcon, IconBase, Icon, LabeledIcon);

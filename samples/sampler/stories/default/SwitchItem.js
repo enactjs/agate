@@ -2,7 +2,7 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
 import SwitchItem from '@enact/agate/SwitchItem';
 
-import {iconList} from './icons';
+import {iconList} from './util/icons';
 
 const Config = mergeComponentMetadata('SwitchItem', SwitchItem);
 SwitchItem.displayName = 'SwitchItem';
