@@ -120,10 +120,15 @@
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-text-color: @agate-foreground;
 @agate-checkbox-bg-color: transparent;
-@agate-checkbox-border-color: fade(@agate-foreground, 50%);
+@agate-checkbox-border-color: @agate-foreground;
+@agate-checkbox-focus-bg-image: @silicon-gradient;
+@agate-checkbox-focus-bg-color: transparent;
+@agate-checkbox-focus-icon-border-color: @agate-white;
+@agate-checkbox-focus-icon-color: @agate-white;
 @agate-checkbox-selected-border-color: @agate-foreground;
+@agate-checkbox-selected-color: @agate-foreground;
+@agate-checkbox-text-color: @agate-foreground;
 
 // CheckboxItem
 // ---------------------------------------
@@ -187,10 +192,6 @@
 @agate-imageitem-caption-overlay-text-color: @agate-white;
 @agate-imageitem-caption-overlay-opacity: 0.5;
 
-// Indicator
-// ---------------------------------------
-@agate-indicator-bg-color: @agate-accent;
-
 // Input
 // ---------------------------------------
 @agate-input-active-border-color:             @agate-accent;
@@ -208,13 +209,16 @@
 // ---------------------------------------
 @agate-item-border-color:                 fade(@agate-black, 40%);
 @agate-item-color:                        @agate-text-color;
-@agate-item-label-color:                  @agate-noble-gray;
-@agate-item-focus-bg-color:               fade(@agate-black, 15%);
+@agate-item-label-color:                  #b3b3b3;
+@agate-item-label-focus-selected-color:   @agate-item-label-color;
+@agate-item-focus-bg-color:               transparent;
+@agate-item-focus-bg-image:               @agate-gradient;
 @agate-item-focus-border-color:           @agate-item-border-color;
 @agate-item-focus-color:                  @agate-item-color;
 @agate-item-selected-border-color:        @agate-accent;
 @agate-item-selected-color:               @agate-item-label-color;
-@agate-item-selected-label-color:         @agate-foreground;
+@agate-item-indicator-bg-color:           @agate-accent;
+@agate-item-indicator-focus-bg-color:     @agate-white;
 
 // Keypad
 // ---------------------------------------

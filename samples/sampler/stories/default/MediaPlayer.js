@@ -1,9 +1,8 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
-import {storiesOf} from '@storybook/react';
-
 import MediaPlayer from '@enact/agate/MediaPlayer';
 
+MediaPlayer.displayname = 'MediaPlayer';
 const Config = mergeComponentMetadata('MediaPlayer', MediaPlayer);
 
 const audioFiles = [
@@ -15,25 +14,26 @@ const audioFiles = [
 	'https://sampleswap.org/mp3/artist/47067/DJ-Masque_Dont-Forget-To-Be-Yourself-160.mp3'
 ];
 
-storiesOf('Agate', module)
-	.add(
-		'MediaPlayer',
-		() => {
-			return (
-				<MediaPlayer
-					disabled={boolean('disabled', Config)}
-					spotlightDisabled={boolean('spotlightDisabled', Config)}
-					type={select('type', ['full', 'light'], Config)}
-				>
-					{
-						audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
-					}
-				</MediaPlayer>
-			);
-		},
+export default {
+	title: 'Agate/MediaPlayer',
+	component: 'MediaPlayer'
+};
+
+export const _MediaPlayer = () => (
+	<MediaPlayer
+		disabled={boolean('disabled', Config)}
+		spotlightDisabled={boolean('spotlightDisabled', Config)}
+		type={select('type', ['full', 'light'], Config)}
+	>
 		{
-			info: {
-				text: 'The basic MediaPlayer'
-			}
+			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 		}
-	);
+	</MediaPlayer>
+);
+
+_MediaPlayer.storyName = 'MediaPlayer';
+_MediaPlayer.parameters = {
+	info: {
+		text: 'The basic MediaPlayer'
+	}
+};

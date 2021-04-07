@@ -15,11 +15,11 @@ const DrawerView = () => {
 				<Button alt="Normal" onClick={handleOpen(0, true)}>Open 0</Button>
 				<Button alt="Disabled Drawer" onClick={handleOpen(1, true)}>Open 1</Button>
 
-				<Drawer open={open[0]}>
+				<Drawer open={open[0]} onClose={handleOpen(0, false)}>
 					Text 0
 					<Button onClick={handleOpen(0, false)}>Close</Button>
 				</Drawer>
-				<Drawer alt="Disabled" disabled open={open[1]}>
+				<Drawer alt="Disabled" disabled open={open[1]} onClose={handleOpen(1, false)}>
 					Text 1
 					<Button onClick={handleOpen(1, false)}>Close</Button>
 				</Drawer>
@@ -29,11 +29,11 @@ const DrawerView = () => {
 				<Button alt="Aria-labelled" onClick={handleOpen(2, true)}>Open 0</Button>
 				<Button alt="Aria-labelled and Disabled" onClick={handleOpen(3, true)}>Open 1</Button>
 
-				<Drawer aria-label="This is a Label 2." open={open[2]}>
+				<Drawer aria-label="This is a Label 2." open={open[2]} onClose={handleOpen(2, false)}>
 					Text 2
 					<Button onClick={handleOpen(2, false)}>Close</Button>
 				</Drawer>
-				<Drawer aria-label="This is a Label 3." disabled open={open[3]}>
+				<Drawer aria-label="This is a Label 3." disabled open={open[3]} onClose={handleOpen(3, false)}>
 					Text 3
 					<Button onClick={handleOpen(3, false)}>Close</Button>
 				</Drawer>
