@@ -206,29 +206,22 @@ const KeypadBase = kind({
 				{keys.map((keyText, rowIndex) => {
 					const {icon, text} = keyText;
 
-					let ariaLabel;
+					let ariaLabel = text;
 					if (icon === 'arrowuturn') {
 						ariaLabel = $L('backspace');
 					} else if (icon === 'phone') {
 						ariaLabel = $L('call');
 					}
 
-					let color = '';
-					if (icon === 'callaccept') {
-						color = 'accept';
-					} else if (icon === 'calldecline') {
-						color = 'decline';
-					}
-
 					return (
 						<Cell
-							aria-label={text ? text : ariaLabel}
-							className={css[`${color}`]}
+							aria-label={ariaLabel}
+							className={css[icon]}
 							component={Key}
 							disabled={disabled}
 							key={`key${rowIndex}-${text}`}
 							label={keyText.label}
-							onKeyButtonClick={() => onKeyButtonClick(text ? text : icon)}
+							onKeyButtonClick={() => onKeyButtonClick(text || icon)}
 							shrink
 							text={icon ? null : text}
 						>
@@ -305,7 +298,8 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 			let newCharIndex;
 
 			switch (keyValue) {
-				case 'arrowuturn' || 'backspace':
+				case 'arrowuturn':
+				case 'backspace':
 				case 'Backspace':
 					newCharIndex = charIndex;
 					newKeypadInput = newKeypadInput.substring(0, charIndex - 1) + newKeypadInput.substring(charIndex, newKeypadInput.length);
@@ -335,7 +329,8 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 					// do nothing;
 					break;
 
-				case 'phone' || 'callaccept':
+				case 'phone':
+				case 'callaccept':
 					// method to call dialed number (keypadInput);
 
 					newCharIndex = 0;
