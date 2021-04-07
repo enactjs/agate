@@ -7,9 +7,7 @@ import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import Routable, {Route, Linkable} from '@enact/ui/Routable';
 import PropTypes from 'prop-types';
-import React from 'react';
-import {storiesOf} from '@storybook/react';
-
+import {Component, useState} from 'react';
 import Header from '@enact/agate/Header';
 import Icon from '@enact/agate/Icon';
 import Item from '@enact/agate/Item';
@@ -19,7 +17,7 @@ Panels.displayName = 'Panels';
 const Config = mergeComponentMetadata('Panels', Panels);
 
 const BasicPanels = (props) => {
-	const [index, setIndex] = React.useState(0);
+	const [index, setIndex] = useState(0);
 	const goNext = () => setIndex(clamp(0, 2, index + 1));
 	const goPrevious = () => setIndex(clamp(0, 2, index - 1));
 
@@ -123,7 +121,7 @@ const BreadcrumbPanelsBase  = kind({
 
 const RoutablePanels = Routable({navigate: 'onNavigate'}, BreadcrumbPanelsBase);
 
-const RoutablePanelsApp = class extends React.Component {
+const RoutablePanelsApp = class extends Component {
 	static displayName = 'RoutablePanelsApp';
 
 	constructor (props) {
@@ -153,23 +151,26 @@ const RoutablePanelsApp = class extends React.Component {
 	}
 };
 
-storiesOf('Panels', module)
-	.add(
-		'preserve focus',
-		() => (
-			<BasicPanels
-				noAnimation={boolean('noAnimation', Config)}
-				noCloseButton={boolean('noCloseButton', Config)}
-				orientation={select('orientation', ['horizontal', 'vertical'], Config)}
-			/>
-		),
-		{
-			props: {
-				noPanels: true
-			}
-		}
-	)
-	.add(
-		'preserve route focus',
-		() => (<RoutablePanelsApp />)
-	);
+export default {
+	title: 'Agate/Panels',
+	component: 'Panels'
+};
+
+export const PreserveFocus = () => (
+	<BasicPanels
+		noAnimation={boolean('noAnimation', Config)}
+		noCloseButton={boolean('noCloseButton', Config)}
+		orientation={select('orientation', ['horizontal', 'vertical'], Config)}
+	/>
+);
+
+PreserveFocus.storyName = 'preserve focus';
+PreserveFocus.parameters = {
+	props: {
+		noPanels: true
+	}
+};
+
+export const PreserveRouteFocus = () => <RoutablePanelsApp />;
+
+PreserveRouteFocus.storyName = 'preserve route focus';
