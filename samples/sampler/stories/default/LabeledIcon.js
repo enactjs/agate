@@ -22,7 +22,7 @@ export const _LabeledIcon = () => (
 		icon={select('icon', ['', ...iconList], Config, 'temperature')}
 		inline={boolean('inline', Config)}
 		labelPosition={select('labelPosition', ['above', 'after', 'before', 'below', 'left', 'right'], Config)}
-		size={select('size', ['small', 'large'], Config)}
+		size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}
 	>
 		{text('children', Config, 'Hello LabeledIcon')}
 	</LabeledIcon>
