@@ -6,7 +6,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
+- `agate/Checkbox` style to match latest design for Silicon skin
+- `agate/Drawer` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
 - `agate/Dropdown` style to match latest design for Silicon skin
+- `agate/Item` to match the latest design for Silicon skin
 
 ## [2.0.0-alpha.2] - 2021-04-02
 

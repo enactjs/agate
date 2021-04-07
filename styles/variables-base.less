@@ -165,10 +165,12 @@
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-size: 46px;
-@agate-checkbox-border-width: inherit;
+@agate-checkbox-bg-size: inherit;
 @agate-checkbox-border-radius: inherit;
+@agate-checkbox-border-width: inherit;
+@agate-checkbox-container-position: inherit;
 @agate-checkbox-icon-font-size: inherit;
+@agate-checkbox-size: 46px;
 
 // CheckboxItem
 // ---------------------------------------
@@ -333,14 +335,6 @@
 @agate-icon-smallest-font-size: (@agate-icon-smallest-size * 2);
 @agate-icon-sprite-smallest-size: @agate-icon-smallest-size;
 
-// Indicator
-// ---------------------------------------
-@agate-indicator-align-self:    inherit;
-@agate-indicator-border-radius: inherit;
-@agate-indicator-display:       inherit;
-@agate-indicator-height:        inherit;
-@agate-indicator-margin-right:  inherit;
-
 // Input
 // ---------------------------------------
 @agate-input-font-size: 30px;
@@ -405,34 +399,40 @@
 // ---------------------------------------
 @agate-item-border-width:             inherit;
 @agate-item-content-width:            60%;
+@agate-item-centered-inline-max-width: @agate-item-inline-max-width;
 @agate-item-font-size:                30px;
 @agate-item-font-weight:              @agate-base-font-weight;
 @agate-item-haslabel-padding:         21px 0;
 @agate-item-height:                   60px;
-@agate-item-height-large:             72px;
-@agate-item-indent:                   36px;
-@agate-item-inline-content-max-width: 240px;
+@agate-item-inline-content-max-width: 420px;
 @agate-item-itemcontent-line-height:  inherit;
+@agate-item-inline-notcentered-itemcontent-min-width: initial;
 @agate-item-inline-max-width:         400px;
+@agate-item-inline-min-width:         initial;
 @agate-item-label-font-size:          inherit;
 @agate-item-label-line-height:        inherit;
-@agate-item-label-max-width:          40%;
+@agate-item-label-max-width:          30%;
 @agate-item-label-padding:            10px;
+@agate-item-large-height:             initial;
 @agate-item-line-height:              @agate-item-height - (@agate-item-vertical-padding * 2);
-@agate-item-line-height-large:        @agate-item-height-large - (@agate-item-vertical-padding * 2);
+@agate-item-selected-padding:         @agate-component-spacing;
 @agate-item-side-outset:              @agate-component-spacing;
 @agate-item-slotafter-spacing:        @agate-component-spacing;
 @agate-item-slotbefore-spacing:       @agate-component-spacing;
 @agate-item-sub-text-size:            inherit;
 @agate-item-vertical-padding:         3px;
+@agate-item-slotafter-padding-right:  @agate-item-side-outset + @agate-icon-size / 2 + 16px;
+@agate-item-slotbefore-padding-left:  @agate-item-side-outset + @agate-icon-size / 2 + 16px;
+@agate-item-small-haslabel-height:    initial;
 @agate-item-small-font-size:          inherit;
-@agate-item-small-height:             54px;
+@agate-item-small-height:             48px;
 @agate-item-small-itemcontent-line-height: inherit;
 @agate-item-small-line-height:        @agate-item-small-height - (@agate-item-vertical-padding * 2);
 @agate-item-small-label-font-size:    inherit;
-@agate-item-small-label-line-height:  inherit;
 @agate-item-small-haslabel-padding:   12px 0;
-@agate-item-slotafter-padding-left:   inherit;
+@agate-item-indicator-align-self:     inherit;
+@agate-item-indicator-border-radius:  inherit;
+@agate-item-indicator-height:         0;
 
 // Keypad
 // ---------------------------------------
