@@ -7,20 +7,21 @@ import {color} from '@storybook/addon-knobs';
 import {Row, Column, Cell} from '@enact/ui/Layout';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 
-import ThemeDecorator from '@enact/agate/ThemeDecorator';
 import Heading from '@enact/agate/Heading';
 import {Panels, Panel} from '@enact/agate/Panels';
-import Skinnable from '@enact/agate/Skinnable';
 import Scroller from '@enact/agate/Scroller';
+import Skinnable from '@enact/agate/Skinnable';
+
+import ThemeDecorator from '@enact/agate/ThemeDecorator';
 
 import css from './ThemeEnvironment.module.less';
 
 const globalGroup = 'Global Knobs';
 
-// const reloadPage = () => {
-// 	const {protocol, host, pathname} = window.parent.location;
-// 	window.parent.location.href = protocol + '//' + host + pathname;
-// };
+const reloadPage = () => {
+	const {protocol, host, pathname} = window.parent.location;
+	window.parent.location.href = protocol + '//' + host + pathname;
+};
 
 const SkinFrame = Skinnable(kind({
 	name: 'SkinFrame',
@@ -55,11 +56,6 @@ const SkinFrame = Skinnable(kind({
 		return (<Row {...props} />);
 	}
 }));
-
-const reloadPage = () => {
-	const {protocol, host, pathname} = window.parent.location;
-	window.parent.location.href = protocol + '//' + host + pathname;
-};
 
 const PanelsBase = kind({
 	name: 'ThemeEnvironment',
@@ -230,20 +226,21 @@ const StorybookDecorator = (story, config) => {
 		skinKnobs.skin = select('skin', skins, Config, currentSkin);
 	}
 	const {accent, highlight} = !allSkins && boolean('default skin styles', Config) ? defaultColors[skinKnobs.skin] : {};
-	if (config.parameters && config.parameters.props) {
-		config.props = config.parameters.props;
-	}
+
+	// NOTE: 'config' object is not extensible
+	const hasInfoText = config.parameters && config.parameters.info && config.parameters.info.text;
+	const hasProps = config.parameters && config.parameters.props;
 
 	return (
 		<Theme
-			title={`${config.kind} ${config.story}`.trim()}
-			description={config.description}
+			title={`${config.kind}`.replace(/\//g, ' ').trim()}
+			description={hasInfoText ? config.parameters.info.text : null}
 			locale={locale}
 			{...skinKnobs}
 			skinVariants={boolean('night mode', Config) && 'night'}
 			accent={accent || color('accent', (!newSkin && accentFromURL ? accentFromURL : defaultColors[currentSkin].accent), Config.groupId)}
 			highlight={highlight || color('highlight', (!newSkin && highlightFromURL ? highlightFromURL : defaultColors[currentSkin].highlight), Config.groupId)}
-			{...config.props}
+			{...hasProps ? config.parameters.props : null}
 		>
 			{allSkins ? Object.keys(skins).map(skin => (
 				<SkinFrame skin={skins[skin]} key={skin}>
