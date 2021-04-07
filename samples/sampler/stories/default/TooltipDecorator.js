@@ -6,12 +6,12 @@ import TooltipDecorator, {Tooltip, TooltipBase} from '@enact/agate/TooltipDecora
 
 import {iconList} from './icons';
 
-TooltipDecorator.displayName = 'TooltipDecorator';
 const Config = mergeComponentMetadata('TooltipDecorator', TooltipDecorator, Tooltip, TooltipBase);
 const TooltipButton = TooltipDecorator(
 	{tooltipDestinationProp: 'decoration'},
 	Button
 );
+TooltipButton.displayName = 'TooltipButton';
 
 const prop = {
 	icons: ['', ...iconList],

@@ -12,7 +12,7 @@ export default {
 	component: 'SwitchItem'
 };
 
-export const _SliderButton = () => (
+export const _SwitchItem = () => (
 	<div>
 		<SwitchItem
 			disabled={boolean('disabled', Config)}
@@ -25,8 +25,8 @@ export const _SliderButton = () => (
 	</div>
 );
 
-_SliderButton.storyName = 'SwitchItem';
-_SliderButton.parameters = {
+_SwitchItem.storyName = 'SwitchItem';
+_SwitchItem.parameters = {
 	info: {
 		text: 'The basic SwitchItem'
 	}
