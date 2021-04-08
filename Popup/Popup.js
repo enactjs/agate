@@ -307,6 +307,7 @@ const PopupBase = kind({
 				>
 					{closeButton ? <Button
 						className={componentCss.closeButton}
+						css={css}
 						icon="closex"
 						onTap={onClose}
 						size="small"
