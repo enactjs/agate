@@ -48,6 +48,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/LabeledIconButton` styling to preserve behavior and look when props are missing
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
 - `agate/SliderButton` styling to visually show the focused state
+- `agate/TooltipDecorator` to to match latest design for Silicon skin
 - `agate/TooltipDecorator` to position correctly on rtl locale
 
 ## [2.0.0-alpha.1] - 2021-02-25
