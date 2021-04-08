@@ -7,7 +7,8 @@
   	align-items: center;
 
 	.thumbnail {
-	  	vertical-align: middle;
+		box-sizing: border-box;
+		vertical-align: middle;
 	}
 
 	.content {
@@ -44,23 +45,7 @@
 
 		.content {
 			padding: 0 @agate-component-spacing;
-			font-size: @agate-thumbnailitem-content-font-size
-		}
-
-	  	.focus({
-			&.item {
-				.label {
-					color: @agate-thumbnailitem-label-focus-text-color;
-				}
-			}
-		});
-
-		&.selected {
-			&.item {
-				.label {
-					color: @agate-thumbnailitem-label-selected-text-color;
-				}
-			}
+			font-size: @agate-thumbnailitem-content-font-size;
 		}
 	});
 }
