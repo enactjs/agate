@@ -8,21 +8,10 @@
 
 	.applySkins({
         height: @agate-checkboxitem-height;
-		padding-left: @agate-checkboxitem-padding-left;
-		padding-right: @agate-checkboxitem-padding-right;
-		border-color: @agate-checkboxitem-border-color;
 		font-size: @agate-checkboxitem-font-size;
 
 		&.selected {
 			border-color: @agate-checkboxitem-selected-border-color;
-			padding-left: @agate-checkboxitem-padding-left;
-			padding-right: @agate-checkboxitem-padding-right;
-
-			.enact-locale-rtl({
-				padding-left: @agate-checkboxitem-padding-left;
-				padding-right: @agate-checkboxitem-padding-right;
-
-			});
 
 			&::before {
 				content: none; // Overwrite the selected styles for Item
@@ -31,13 +20,6 @@
           .focus({
             border-color: @agate-checkboxitem-focus-border-color;
           });
-		}
-
-		&.item {
-			&.inline {
-				padding-left: @agate-checkboxitem-inline-padding-left;
-				padding-right: @agate-checkboxitem-inline-padding-right;
-			}
 		}
 
 		.slotAfter {
