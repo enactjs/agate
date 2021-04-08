@@ -50,7 +50,7 @@ export const _Heading = () => {
 						<strong>Note</strong>: The <code>color</code> prop only applies when the <code>size</code> prop is &quot;title&quot;.
 					</span>
 				)}
-			</BodyText> 
+			</BodyText>
 		</>
 	);
 };
