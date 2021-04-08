@@ -369,5 +369,6 @@ export default Button;
 export {
 	Button,
 	ButtonBase,
-	ButtonDecorator
+	ButtonDecorator,
+	IconButtonDecorator
 };

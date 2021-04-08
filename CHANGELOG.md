@@ -7,6 +7,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/Checkbox` style to match latest design for Silicon skin
+- `agate/ColorPicker/SwatchButton` to not show console error in sampler
 - `agate/Drawer` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
 - `agate/Item` to match the latest design for Silicon skin
 
