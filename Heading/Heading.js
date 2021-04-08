@@ -21,7 +21,6 @@ import Pure from '@enact/ui/internal/Pure';
 import Layout, {Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 import defaultProps from 'recompose/defaultProps';
 import setPropTypes from 'recompose/setPropTypes';
 
