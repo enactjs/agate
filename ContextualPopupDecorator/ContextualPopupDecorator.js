@@ -265,7 +265,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			this.MARGIN = noArrow ? 0 : ri.scale(9);
 			this.ARROW_WIDTH = noArrow ? 0 : ri.scale(30); // svg arrow width. used for arrow positioning
 			this.ARROW_OFFSET = noArrow ? 0 : ri.scale(18); // actual distance of the svg arrow displayed to offset overlaps with the container. Offset is when `noArrow` is false.
-			this.KEEPOUT = ri.scale(0); // keep out distance on the edge of the screen
+			this.KEEPOUT = ri.scale(12); // keep out distance on the edge of the screen
 
 			if (props.setApiProvider) {
 				props.setApiProvider(this);
@@ -504,8 +504,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 					client.right + this.KEEPOUT > window.innerWidth :
 					client.right + containerWidth + this.ARROW_OFFSET + this.MARGIN + this.KEEPOUT > window.innerWidth
 			};
-
-			console.log(client.left, containerWidth, this.ARROW_OFFSET, this.MARGIN, this.KEEPOUT)
 		}
 
 		adjustDirection () {
