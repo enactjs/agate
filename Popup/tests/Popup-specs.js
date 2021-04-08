@@ -1,4 +1,3 @@
-import React from 'react';
 import {mount, shallow} from 'enzyme';
 
 import {Popup, PopupBase} from '../Popup';

@@ -18,7 +18,6 @@ import Slottable from '@enact/ui/Slottable';
 import Spottable from '@enact/spotlight/Spottable';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import LabeledIcon from '../LabeledIcon';
 import Skinnable from '../Skinnable';

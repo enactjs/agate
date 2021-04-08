@@ -16,7 +16,7 @@
  */
 
 import kind from '@enact/core/kind';
-import UiHeading from '@enact/ui/Heading';
+import {HeadingBase as UiHeadingBase} from '@enact/ui/Heading';
 import Pure from '@enact/ui/internal/Pure';
 import Layout, {Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
@@ -56,6 +56,13 @@ const HeadingBase = kind({
 		 */
 		color: PropTypes.string,
 
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
 
 		/**
@@ -124,7 +131,7 @@ const HeadingBase = kind({
 		delete rest.showLine;
 
 		return (
-			<UiHeading css={css} {...rest}>
+			<UiHeadingBase css={css} {...rest}>
 				<Layout>
 					{showBackButton ?
 						<Cell className={css.backButton} shrink>
@@ -135,7 +142,7 @@ const HeadingBase = kind({
 						{children}
 					</Cell>
 				</Layout>
-			</UiHeading>
+			</UiHeadingBase>
 		);
 	}
 });

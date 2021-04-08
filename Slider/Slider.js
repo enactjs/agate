@@ -13,6 +13,7 @@
  * @exports Slider
  * @exports SliderBase
  * @exports SliderDecorator
+ * @exports SliderTooltip
  */
 
 // TODO: Add 'activated' styling for slider (If 5-way is needed)
@@ -21,6 +22,7 @@ import {forKey, forProp, forward, forwardWithPrevent, handle} from '@enact/core/
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
+import ComponentOverride from '@enact/ui/ComponentOverride';
 import ProgressBar from '@enact/ui/ProgressBar';
 import Pure from '@enact/ui/internal/Pure';
 import Slottable from '@enact/ui/Slottable';
@@ -28,8 +30,8 @@ import UiSlider from '@enact/ui/Slider';
 import PropTypes from 'prop-types';
 import anyPass from 'ramda/src/anyPass';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
+import {ProgressBarTooltip} from '../ProgressBar';
 import Skinnable from '../Skinnable';
 
 import SliderBehaviorDecorator from './SliderBehaviorDecorator';
@@ -72,6 +74,15 @@ const SliderBase = kind({
 		 * @public
 		 */
 		active: PropTypes.bool,
+
+		/**
+		 * Background progress, as a proportion between `0` and `1`.
+		 *
+		 * @type {Number}
+		 * @default 0
+		 * @public
+		 */
+		backgroundProgress: PropTypes.number,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -191,6 +202,42 @@ const SliderBase = kind({
 		step: PropTypes.number,
 
 		/**
+		 * Enables the built-in tooltip
+		 *
+		 * To customize the tooltip, pass either a custom tooltip component or an instance of
+		 * [SliderTooltip]{@link agate/Slider.SliderTooltip} with additional props configured.
+		 *
+		 * ```
+		 * <Slider
+		 *   tooltip={
+		 *     <SliderTooltip percent side="after" />
+		 *   }
+		 * />
+		 * ```
+		 *
+		 * The tooltip may also be passed as a child via the `"tooltip"` slot. See
+		 * [Slottable]{@link ui/Slottable} for more information on how slots can be used.
+		 *
+		 * ```
+		 * <Slider>
+		 *   <SliderTooltip percent side="after" />
+		 * </Slider>
+		 * ```
+		 *
+		 * If a custom tooltip is provided, it will receive the following props:
+		 *
+		 * * `children` - The `value` prop from the slider
+		 * * `visible` - `true` if the tooltip should be displayed
+		 * * `orientation` - The value of the `orientation` prop from the slider
+		 * * `proportion` - A number between 0 and 1 representing the proportion of the `value` in
+		 *   terms of `min` and `max`
+		 *
+		 * @type {Boolean|Element|Function}
+		 * @public
+		 */
+		tooltip: PropTypes.oneOfType([PropTypes.bool, PropTypes.object, PropTypes.func]),
+
+		/**
 		 * The value of the slider.
 		 *
 		 * Defaults to the value of `min`.
@@ -224,6 +271,7 @@ const SliderBase = kind({
 			forward('onActivate')
 		),
 		onKeyDown: handle(
+			forProp('disabled', false),
 			forwardWithPrevent('onKeyDown'),
 			anyPass([
 				handleIncrement,
@@ -231,6 +279,7 @@ const SliderBase = kind({
 			])
 		),
 		onKeyUp: handle(
+			forProp('disabled', false),
 			forwardWithPrevent('onKeyUp'),
 			forProp('activateOnFocus', false),
 			forKey('enter'),
@@ -242,13 +291,13 @@ const SliderBase = kind({
 		className: ({activateOnFocus, active, styler}) => styler.append({
 			activateOnFocus,
 			active
-		})
+		}),
+		tooltip: ({tooltip}) => tooltip === true ? ProgressBarTooltip : tooltip
 	},
 
-	render: ({css, disabled, ...rest}) => {
+	render: ({css, disabled, focused, tooltip, ...rest}) => {
 		delete rest.activateOnFocus;
 		delete rest.active;
-		delete rest.focused;
 		delete rest.knobStep;
 		delete rest.onActivate;
 
@@ -260,6 +309,13 @@ const SliderBase = kind({
 				disabled={disabled}
 				progressBarComponent={
 					<ProgressBar css={css} />
+				}
+				tooltipComponent={
+					<ComponentOverride
+						component={tooltip}
+						css={css}
+						visible={focused}
+					/>
 				}
 			/>
 		);
@@ -282,7 +338,7 @@ const SliderDecorator = compose(
 	Changeable,
 	SliderBehaviorDecorator,
 	Spottable,
-	Slottable({slots: ['knob']}),
+	Slottable({slots: ['knob', 'tooltip']}),
 	Skinnable
 );
 
@@ -316,9 +372,22 @@ const Slider = SliderDecorator(SliderBase);
  * @public
  */
 
+/**
+ * A [Tooltip]{@link agate/TooltipDecorator.Tooltip} specifically adapted for use with
+ * [ProgressBar]{@link agate/ProgressBar.ProgressBar} or
+ * [Slider]{@link agate/Slider.Slider}.
+ *
+ * @see {@link agate/ProgressBar.ProgressBarTooltip}
+ * @class SliderTooltip
+ * @memberof agate/Slider
+ * @ui
+ * @public
+ */
+
 export default Slider;
 export {
 	Slider,
 	SliderBase,
-	SliderDecorator
+	SliderDecorator,
+	ProgressBarTooltip as SliderTooltip
 };

@@ -7,15 +7,61 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Added
 
 - `agate/Heading` prop `showBackButton`
-- `agate/Spinner` prop `children` to support the display of text below the icon
-
-### Changed
-
-- `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
 
 ### Fixed
 
+- `agate/Checkbox` style to match latest design for Silicon skin
+- `agate/Drawer` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
 - `agate/Heading` style to match latest design for Silicon skin
+- `agate/Item` to match the latest design for Silicon skin
+
+## [2.0.0-alpha.2] - 2021-04-02
+
+### Added
+
+- `agate/ContextualPopup` and `agate/ContextualPopupDecorator` prop `css` to support customizations
+- `agate/Dropdown` prop `width` to support multiple widths
+- `agate/IncrementSlider` prop `activateOnFocus` to support slider activation when slider gets focused
+- `agate/IncrementSlider`, `agate/ProgressBar`, and `agate/Slider` prop `tooltip` to enable the built-in tooltip
+- `agate/Item` to have a `selected` publicClassname
+- `agate/MediaPlayer` prop `spotlightDisabled` to disable 5-way navigation
+- `agate/Popup` `aria-live` and `role` props to support accessibility
+- `agate/Popup` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
+- `agate/PopupMenu` `onShow` and `spotlightId` props to handle focus with 5-way navigation
+- `agate/RadioItem` prop `slotBefore`
+- `agate/ProgressBar` props `highlighted` and `backgroundProgress`
+- `agate/ProgressBarTooltip` component
+- `agate/Slider` prop `backgroundProgress`
+- `agate/SliderTooltip` component
+- `agate/Spinner` prop `children` to support the display of text below the icon
+- `agate/Tooltip` prop `marquee` to allow to marquee
+- `agate/TooltipDecorator` prop `tooltipMarquee` to support marquee for long tooltip and prop `tooltipWidth` to set a width for tooltip text
+
+### Changed
+
+- `agate/Dropdown` to use `agate/ContextualPopup`
+- `agate/ThemeDecorator` to exclude `enact-fit` className when `disableFullscreen` is true
+- `agate/ArcPicker` and `agate/ArcSlider` to have a max-width for `slotCenter`
+
+### Fixed
+
+- `agate/ArcSlider` and `agate/TemperatureControl` broken layout when `min` prop is not smaller than `max` prop
+- `agate/BodyText`, `agate/Button`, `agate/IncrementSlider`, `agate/LabeledIcon`, and `agate/Slider` to match latest design for Silicon skin
+- `agate/Button` to apply active styling only when it is not disabled
+- `agate/Button` to apply active styling on enter key press
+- `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
+- `agate/LabeledIconButton` styling to preserve behavior and look when props are missing
+- `agate/SliderButton` 5-way navigation functionality to change value via direction keys
+- `agate/SliderButton` styling to visually show the focused state
+- `agate/TooltipDecorator` to position correctly on rtl locale
+
+## [2.0.0-alpha.1] - 2021-02-25
+
+-  The framework was updated to support React 17.0.1
+
+### Added
+
+- `agate/ThemeDecorator` config `rootId` to specify React DOM tree root for global event handlers
 
 ## [1.1.2] - 2021-02-05
 

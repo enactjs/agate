@@ -1,8 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-import React from 'react';
-import {storiesOf} from '@storybook/react';
-
+import {Fragment} from 'react';
 import Button from '@enact/agate/Button';
 import {Header, HeaderBase} from '@enact/agate/Header';
 
@@ -15,34 +13,38 @@ const prop = {
 		'no buttons': null,
 		'1 button': <Button icon="home" />,
 		'2 buttons': (
-			<React.Fragment>
+			<Fragment>
 				<Button>A Button</Button>
 				<Button icon="home" />
-			</React.Fragment>
+			</Fragment>
 		)
 	}
 };
 
-storiesOf('Agate', module)
-	.add(
-		'Header',
-		() => {
-			const childrenSelection = select('children', ['no buttons', '1 button', '2 buttons'], Config);
-			const children = prop.children[childrenSelection];
+export default {
+	title: 'Agate/Header',
+	component: 'Header'
+};
 
-			const story = (
-				<Header
-					hideLine={boolean('hideLine', Config)}
-					subtitle={text('subtitle', Config, 'Sub Title')}
-					title={text('title', Config, 'Main Title')}
-					titleAbove={text('titleAbove', Config, '')}
-				>
-					{children}
-				</Header>
-			);
-			return story;
-		},
-		{
-			text: 'A block to use as a screen\'s title and description. Supports additional buttons, subtitle and title above.'
-		}
+export const _Header = () => {
+	const childrenSelection = select('children', ['no buttons', '1 button', '2 buttons'], Config);
+	const children = prop.children[childrenSelection];
+
+	return (
+		<Header
+			hideLine={boolean('hideLine', Config)}
+			subtitle={text('subtitle', Config, 'Sub Title')}
+			title={text('title', Config, 'Main Title')}
+			titleAbove={text('titleAbove', Config, '')}
+		>
+			{children}
+		</Header>
 	);
+};
+
+_Header.storyName = 'Header';
+_Header.parameters = {
+	info: {
+		text: 'A block to use as a screen\'s title and description. Supports additional buttons, subtitle and title above.'
+	}
+};

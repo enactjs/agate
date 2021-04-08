@@ -16,7 +16,6 @@ import Pure from '@enact/ui/internal/Pure';
 import UiSpinnerBase from '@enact/ui/Spinner';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import $L from '../internal/$L';
 import Marquee from '../Marquee';
@@ -44,6 +43,13 @@ const SpinnerCore = kind({
 		 */
 		'aria-label': PropTypes.string,
 
+		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		css: PropTypes.object,
 
 		/**

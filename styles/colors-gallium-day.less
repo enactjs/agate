@@ -67,8 +67,10 @@
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-text-color: @agate-white;
 @agate-checkbox-bg-color: @agate-accent;
+@agate-checkbox-focus-bg-color: @agate-accent;
+@agate-checkbox-selected-color: @agate-checkbox-text-color;
+@agate-checkbox-text-color: @agate-white;
 
 // CheckboxItem
 // ---------------------------------------
@@ -91,10 +93,6 @@
 @agate-datetimepicker-active-container-bg-image: none;
 @agate-datetimepicker-divider-bg-color: @agate-white;
 @agate-datetimepicker-divider-opacity: 0.4;
-
-// Dropdown
-// ---------------------------------------
-@agate-dropdown-selected-color: @agate-accent;
 
 // Drawer
 // ---------------------------------------
@@ -131,6 +129,7 @@
 @agate-item-color:                        @agate-text-color;
 @agate-item-label-color:                  @agate-text-color;
 @agate-item-focus-color:                  @agate-item-color;
+@agate-item-label-focus-selected-color:   @agate-item-color;
 @agate-item-focus-bg-color:               transparent;
 @agate-item-focus-border-color:           @agate-accent;
 @agate-item-selected-border-color:        @agate-accent;
@@ -178,6 +177,7 @@
 @agate-picker-active-bg-color: @agate-accent;
 @agate-picker-active-bg-image: @agate-gradient;
 @agate-picker-item-bg-color: transparent;
+@agate-picker-item-color: fade(@agate-foreground, 50%);
 @agate-picker-item-decrement-bg-image: none;
 @agate-picker-item-increment-bg-image: none;
 @agate-picker-item-focus-bg-image: inherit;
@@ -204,6 +204,7 @@
 @agate-progressbar-track-bg-color: @agate-slider-track-bg-color;
 @agate-progressbar-fill-bg-color: @agate-slider-fill-bg-color;
 @agate-progressbar-fill-bg-image: linear-gradient(to right, transparent, fade(@agate-white, 75%));
+@agate-progressbar-load-bg-color: fade(@agate-progressbar-fill-bg-color, 30%);
 @agate-progressbar-vertical-fill-bg-image: linear-gradient(to top, transparent, fade(@agate-white, 75%));
 
 // RadioItem
@@ -246,7 +247,6 @@
 @agate-sliderbutton-focus-bg-image: @agate-slider-track-focus-bg-image;
 @agate-sliderbutton-knob-bg-color:  transparent;
 @agate-sliderbutton-knob-bg-image:  none;
-@agate-sliderbutton-knob-border-color: @agate-accent;
 @agate-sliderbutton-knob-shadow:    @agate-slider-knob-shadow;
 @agate-sliderbutton-knob-focus-shadow: @agate-slider-knob-focus-shadow;
 

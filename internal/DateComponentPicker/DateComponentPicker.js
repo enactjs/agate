@@ -2,7 +2,7 @@ import kind from '@enact/core/kind';
 import {mapAndFilterChildren} from '@enact/core/util';
 import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
-import React from 'react';
+import {Children} from 'react';
 
 import PickerCore, {PickerItem} from '../Picker';
 
@@ -74,7 +74,7 @@ const DateComponentPickerBase = kind({
 		children: ({children}) => mapAndFilterChildren(children, (child) => (
 			<PickerItem>{child}</PickerItem>
 		)),
-		max: ({children}) => children ? React.Children.count(children) - 1 : 0
+		max: ({children}) => children ? Children.count(children) - 1 : 0
 	},
 
 	render: ({accessibilityHint, 'aria-valuetext': ariaValuetext, children, max, value, wrap, ...rest}) => (
