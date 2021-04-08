@@ -34,11 +34,11 @@
 		}
 	}
 
-	:global(.enact-locale-right-to-left) & {
+	.enact-locale-rtl ({
 		.container {
 			direction: rtl;
 		}
-	}
+	});
 
 	.arrow {
 		position: absolute;
@@ -62,14 +62,17 @@
 		.container {
 			background-color: @agate-contextual-popup-bg-color;
 			color: @agate-contextual-popup-color;
-			border-color: @agate-contextual-popup-border-color;
 			border-radius: @agate-contextual-popup-border-radius;
 			font-size: @agate-contextual-popup-font-size;
+			font-weight: @agate-contextual-popup-font-weight;
 			padding: @agate-contextual-popup-padding;
 
 			.closeButton {
 				right: @agate-spotlight-outset;
 				top: @agate-spotlight-outset;
+				height: @agate-contextual-popup-close-button-height;
+				max-width: @agate-contextual-popup-close-button-height;
+				min-width: @agate-contextual-popup-close-button-height;
 
 				.bg {
 					border-color: @agate-contextual-popup-close-button-border-color;
@@ -87,17 +90,19 @@
 			}
 
 			&.reserveClose {
-				.padding-start-end(@agate-contextual-popup-padding-horizontal, @agate-button-small-height * 1.5);
+				.padding-start-end(@agate-contextual-popup-padding-horizontal, @agate-contextual-popup-close-button-height * 1.5);
 			}
 
 			&.above {
 				&.overlap { margin-top: @agate-contextual-popup-offset-overlap; }
 				&.small { margin-top: -@agate-contextual-popup-offset-small; }
 			}
+
 			&.below {
 				&.overlap { margin-top: -@agate-contextual-popup-offset-overlap; }
 				&.small { margin-top: @agate-contextual-popup-offset-small; }
 			}
+
 			&.right {
 				&.top,
 				&.middle,
@@ -106,6 +111,7 @@
 					&.small { margin-left: @agate-contextual-popup-offset-small; }
 				}
 			}
+			
 			&.left  {
 				&.top,
 				&.middle,
@@ -116,10 +122,10 @@
 			}
 		}
 
-		:global(.enact-locale-right-to-left) & {
+		.enact-locale-rtl ({
 			.container {
 				&.reserveClose {
-					.padding-start-end(@agate-button-small-height * 1.5, @agate-contextual-popup-padding-horizontal);
+					.padding-start-end(@agate-contextual-popup-close-button-height * 1.5, @agate-contextual-popup-padding-horizontal);
 				}
 			}
 
@@ -127,7 +133,7 @@
 				left: @agate-spotlight-outset;
 				right: auto;
 			}
-		}
+		});
 
 		.arrow {
 			height: @agate-contextual-popup-arrow-height;
