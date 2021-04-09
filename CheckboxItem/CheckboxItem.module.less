@@ -18,25 +18,20 @@
 			}
 
           .focus({
-            border-color: @agate-checkboxitem-focus-border-color;
+			  border-color: @agate-checkboxitem-focus-border-color;
           });
 		}
 
 		.slotAfter {
-			-webkit-margin-start: @agate-checkboxitem-icon-margin;
-			-webkit-margin-end: 0;
+			-webkit-margin-start: @agate-checkboxitem-icon-margin-end;
+			-webkit-margin-end: @agate-checkboxitem-icon-margin-start;
 		}
 
 		.slotBefore {
 			display: flex;
 			align-items: center;
-			-webkit-margin-start: 0;
-			-webkit-margin-end: @agate-checkboxitem-icon-margin;
-
-          .checkbox {
-            height: @agate-checkboxitem-checkbox-size;
-            width: @agate-checkboxitem-checkbox-size;
-          }
+			-webkit-margin-start: @agate-checkboxitem-icon-margin-start;
+			-webkit-margin-end: @agate-checkboxitem-icon-margin-end;
 		}
 
 		.focus({
