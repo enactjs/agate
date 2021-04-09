@@ -3,8 +3,6 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
 import {useState} from 'react';
 import PropTypes from 'prop-types';
-import {storiesOf} from '@storybook/react';
-
 import Button from '@enact/agate/Button';
 import Icon from '@enact/agate/Icon';
 import Item from '@enact/agate/Item';
@@ -14,6 +12,7 @@ import {TabbedPanelsBase} from '@enact/agate/Panels/TabbedPanels';
 import $L from '@enact/i18n/$L';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 
+TabbedPanels.displayName = 'TabbedPanels';
 const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase);
 // `paddingBottom: '56.25%'` is a trick to impose 16:9 aspect ratio on the component, since padding percentage is based on the width, not the height.
 
@@ -93,17 +92,22 @@ I18nTabbedPanelsBase.propTypes = {
 
 const I18nTabbedPanels = I18nContextDecorator({rtlProp: 'rtl'}, I18nTabbedPanelsBase);
 
-storiesOf('Agate', module)
-	.add(
-		'TabbedPanels',
-		() => (
-			<I18nTabbedPanels
-				duration={number('duration', Config, 500)}
-				onClick={action('onClick')}
-				noCloseButton={boolean('noCloseButton', Config)}
-			/>
-		),
-		{
-			text: 'The basic TabbedPanels'
-		}
-	);
+export default {
+	title: 'Agate/TabbedPanels',
+	component: 'TabbedPanels'
+};
+
+export const _TabbedPanels = () => (
+	<I18nTabbedPanels
+		duration={number('duration', Config, 500)}
+		onClick={action('onClick')}
+		noCloseButton={boolean('noCloseButton', Config)}
+	/>
+);
+
+_TabbedPanels.storyName = 'TabbedPanels';
+_TabbedPanels.parameters = {
+	info: {
+		text: 'The basic TabbedPanels'
+	}
+};
