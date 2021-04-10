@@ -33,7 +33,37 @@ const InputTests = [
 	// Small input
 	<Input value="Simple value" size="small" />,
 	<Input value="Simple value" iconBefore="happyface" size="small" />,
-	<Input value="Simple value" iconAfter="happyface" size="small" />
+	<Input value="Simple value" iconAfter="happyface" size="small" />,
+
+	// Focus
+	{
+		component: <Input placeholder="Placeholder Input focused" />,
+		focus: true
+	},
+	{
+		component: <Input placeholder="Placeholder Input focused" disabled />,
+		focus: true
+	},
+	{
+		component: <Input value="Simple value focused" />,
+		focus: true
+	},
+	{
+		component: <Input value="Simple value focused" disabled />,
+		focus: true
+	},
+	{
+		component: <Input invalid invalidMessage="Custom invalid message focused"/>,
+		focus: true
+	},
+	{
+		component: <Input value="Simple value focused" iconAfter="happyface" iconBefore="happyface" />,
+		focus: true
+	},
+	{
+		component: <Input value="Simple value focused" iconAfter="happyface" iconBefore="happyface" size="small" />,
+		focus: true
+	},
 ];
 
 export default InputTests;
