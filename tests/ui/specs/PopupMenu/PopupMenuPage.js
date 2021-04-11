@@ -90,6 +90,7 @@ class PopupMenuPage extends Page {
 
 	open (urlExtra) {
 		super.open('PopupMenu-View', urlExtra);
+		this.delay(500);
 	}
 
 	waitForOpen (selector, timeout) {

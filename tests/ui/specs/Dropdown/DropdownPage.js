@@ -53,6 +53,7 @@ class DropdownPage extends Page {
 
 	open (urlExtra) {
 		super.open('Dropdown-View', urlExtra);
+		this.delay(500);
 	}
 }
 

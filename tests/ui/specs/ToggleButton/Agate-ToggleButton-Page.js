@@ -37,6 +37,7 @@ class AgateToggleButtonPage extends Page {
 
 	open (urlExtra) {
 		super.open('Agate-ToggleButton-View', urlExtra);
+		this.delay(500);
 	}
 }
 

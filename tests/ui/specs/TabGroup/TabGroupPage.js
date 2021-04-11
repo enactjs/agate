@@ -48,6 +48,7 @@ class TabGroupPage extends Page {
 
 	open (urlExtra) {
 		super.open('TabGroup-View', urlExtra);
+		this.delay(500);
 	}
 }
 

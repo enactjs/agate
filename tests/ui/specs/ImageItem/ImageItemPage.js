@@ -48,6 +48,7 @@ class ImageItemPage extends Page {
 
 	open (urlExtra) {
 		super.open('ImageItem-View', urlExtra);
+		this.delay(500);
 	}
 }
 

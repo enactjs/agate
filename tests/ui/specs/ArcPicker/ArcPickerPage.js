@@ -28,6 +28,7 @@ class ArcPickerPage extends Page {
 
 	open (urlExtra) {
 		super.open('ArcPicker-View', urlExtra);
+		this.delay(500);
 	}
 }
 

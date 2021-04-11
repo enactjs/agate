@@ -44,6 +44,7 @@ class RangePickerPage extends Page {
 
 	open (urlExtra) {
 		super.open('RangePicker-View', urlExtra);
+		this.delay(500);
 	}
 }
 

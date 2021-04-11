@@ -70,6 +70,7 @@ class CheckboxItemPage extends Page {
 
 	open (urlExtra) {
 		super.open('CheckboxItem-View', urlExtra);
+		this.delay(500);
 	}
 }
 

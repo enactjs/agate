@@ -37,6 +37,7 @@ class ItemPage extends Page {
 
 	open (urlExtra) {
 		super.open('Item-View', urlExtra);
+		this.delay(500);
 	}
 }
 

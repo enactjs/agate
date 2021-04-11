@@ -87,6 +87,7 @@ class MediaPlayerPage extends Page {
 
 	open (urlExtra) {
 		super.open('MediaPlayer-View', urlExtra);
+		this.delay(500);
 	}
 }
 

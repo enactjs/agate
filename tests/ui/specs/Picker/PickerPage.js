@@ -44,6 +44,7 @@ class PickerPage extends Page {
 
 	open (urlExtra) {
 		super.open('Picker-View', urlExtra);
+		this.delay(500);
 	}
 }
 

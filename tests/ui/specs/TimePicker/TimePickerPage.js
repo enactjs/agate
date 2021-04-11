@@ -48,6 +48,7 @@ class TimePickerPage extends Page {
 
 	open (urlExtra) {
 		super.open('TimePicker-View', urlExtra);
+		this.delay(500);
 	}
 }
 

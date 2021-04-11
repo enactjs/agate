@@ -12,6 +12,7 @@ class ScrollerPage extends Page {
 
 	open (layout = '', urlExtra) {
 		super.open(`Scroller${layout}-View`, urlExtra);
+		this.delay(500);
 	}
 
 	// button api

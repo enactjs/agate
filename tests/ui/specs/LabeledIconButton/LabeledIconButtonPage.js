@@ -75,6 +75,7 @@ class LabeledIconButtonPage extends Page {
 
 	open (urlExtra) {
 		super.open('LabeledIconButton-View', urlExtra);
+		this.delay(500);
 	}
 }
 
