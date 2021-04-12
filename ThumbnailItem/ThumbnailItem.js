@@ -28,7 +28,7 @@ import componentCss from './ThumbnailItem.module.less';
  * @ui
  * @public
  */
-const ThumbnailItemBase = kind({ 
+const ThumbnailItemBase = kind({
 	name: 'ThumbnailItem',
 
 	propTypes: /** @lends agate/ThumbnailItem.ThumbnailItemBase.prototype */ {
