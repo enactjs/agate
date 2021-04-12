@@ -84,6 +84,18 @@
 @agate-button-shadow:         inherit;
 @agate-button-active-color:   inherit;
 @agate-button-active-bg-color: inherit;
+@agate-button-active-bg-image: inherit;
+@agate-button-active-focus-bg-image: @agate-button-active-bg-image;
+@agate-button-active-focus-color: @agate-button-active-color;
+@agate-button-disabled-bg-color: @agate-button-bg-color;
+@agate-button-disabled-focus-bg-image: inherit;
+@agate-button-disabled-focus-color: @agate-button-focus-color;
+@agate-button-disabled-opacity: @agate-disabled-opacity;
+@agate-button-iconOnly-border-color: @agate-button-border-color;
+@agate-button-iconOnly-bg-color: @agate-button-bg-color;
+@agate-button-iconOnly-color: @agate-button-color;
+@agate-button-iconOnly-disabled-color: @agate-button-iconOnly-color;
+@agate-button-iconOnly-selected-border-color: @agate-button-selected-border-color;
 @agate-button-focus-border-color:   @agate-button-border-color;
 @agate-button-focus-color:    inherit;
 @agate-button-focus-bg-color: inherit;
@@ -94,6 +106,10 @@
 @agate-button-selected-color: inherit;
 @agate-button-selected-bg-color: inherit;
 @agate-button-selected-border-color: transparent;
+@agate-button-selected-disabled-bg-color: @agate-button-selected-bg-color;
+@agate-button-selected-disabled-border-color: @agate-button-selected-border-color;
+@agate-button-selected-disabled-focus-border-color: @agate-button-selected-focus-border-color;
+@agate-button-selected-focus-border-color: transparent;
 @agate-button-lightOpaque-color: @agate-foreground;
 @agate-button-lightOpaque-bg-color: @agate-background;
 @agate-button-lightOpaque-highlighted-color: @agate-button-lightOpaque-color;
@@ -109,10 +125,15 @@
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-text-color: inherit;
 @agate-checkbox-bg-color: inherit;
 @agate-checkbox-border-color: inherit;
+@agate-checkbox-focus-bg-color: inherit;
+@agate-checkbox-focus-bg-image: none;
+@agate-checkbox-focus-icon-border-color: inherit;
+@agate-checkbox-focus-icon-color: inherit;
 @agate-checkbox-selected-border-color: inherit;
+@agate-checkbox-selected-color: inherit;
+@agate-checkbox-text-color: inherit;
 
 // CheckboxItem
 // ---------------------------------------
@@ -195,10 +216,6 @@
 @agate-imageitem-caption-overlay-text-color: inherit;
 @agate-imageitem-caption-overlay-opacity: inherit;
 
-// Indicator
-// ---------------------------------------
-@agate-indicator-bg-color: inherit;
-
 // Input
 // ---------------------------------------
 @agate-input-active-border-color:             inherit;
@@ -219,13 +236,16 @@
 @agate-item-border-color:                 transparent;
 @agate-item-color:                        @agate-foreground;
 @agate-item-label-color:                  @agate-item-color;
+@agate-item-label-focus-selected-color:   @agate-spotlight-color;
 @agate-item-focus-bg-color:               @agate-background-focus;
+@agate-item-focus-bg-image:               none;
 @agate-item-focus-border-color:           transparent;
 @agate-item-focus-color:                  @agate-foreground-focus;
 @agate-item-selected-bg-color:            @agate-item-bg-color;
 @agate-item-selected-border-color:        @agate-item-border-color;
 @agate-item-selected-color:               @agate-item-color;
-@agate-item-selected-label-color:         inherit;
+@agate-item-indicator-bg-color:           inherit;
+@agate-item-indicator-focus-bg-color:     inherit;
 
 // Keypad
 // ---------------------------------------
