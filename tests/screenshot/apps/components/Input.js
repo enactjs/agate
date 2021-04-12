@@ -1,6 +1,7 @@
 import Input from '../../../../Input';
 const LoremString = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ac tellus in velit ornare commodo. Nam dignissim fringilla nulla, sit amet hendrerit sapien laoreet quis. Praesent quis tellus non diam viverra feugiat.';
 
+import {withConfig} from './utils';
 
 const InputTests = [
 	<Input />,
@@ -36,34 +37,15 @@ const InputTests = [
 	<Input value="Simple value" iconAfter="happyface" size="small" />,
 
 	// Focus
-	{
-		component: <Input placeholder="Placeholder Input focused" />,
-		focus: true
-	},
-	{
-		component: <Input placeholder="Placeholder Input focused" disabled />,
-		focus: true
-	},
-	{
-		component: <Input value="Simple value focused" />,
-		focus: true
-	},
-	{
-		component: <Input value="Simple value focused" disabled />,
-		focus: true
-	},
-	{
-		component: <Input invalid invalidMessage="Custom invalid message focused"/>,
-		focus: true
-	},
-	{
-		component: <Input value="Simple value focused" iconAfter="happyface" iconBefore="happyface" />,
-		focus: true
-	},
-	{
-		component: <Input value="Simple value focused" iconAfter="happyface" iconBefore="happyface" size="small" />,
-		focus: true
-	},
+	...withConfig({focus: true}, [
+		<Input placeholder="Placeholder Input focused" style={{marginLeft: '3px'}} />,
+		<Input placeholder="Placeholder Input focused" disabled style={{marginLeft: '3px'}} />,
+		<Input value="Simple value focused" style={{marginLeft: '3px'}} />,
+		<Input value="Simple value focused" disabled style={{marginLeft: '3px'}} />,
+		<Input invalid invalidMessage="Custom invalid message focused" style={{marginLeft: '3px'}} />,
+		<Input value="Simple value focused" iconAfter="happyface" iconBefore="happyface" style={{marginLeft: '3px'}} />,
+		<Input value="Simple value focused" iconAfter="happyface" iconBefore="happyface" size="small" style={{marginLeft: '3px'}} />
+	])
 ];
 
 export default InputTests;
