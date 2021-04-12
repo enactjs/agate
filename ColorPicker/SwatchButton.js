@@ -4,6 +4,11 @@
  * @example
  * <SwatchButton color="#ffcc00" onClick={handleClick} />
  *
+ * @module agate/ColorPicker
+ * @exports SwatchButton
+ * @exports SwatchButtonBase
+ * @exports SwatchButtonDecorator
+ * @private
  */
 
 import kind from '@enact/core/kind';
@@ -112,7 +117,7 @@ const SwatchButtonBase = kind({
  * @memberof agate/ColorPicker
  * @mixes ui/Button.ButtonDecorator
  * @mixes agate/Skinnable.Skinnable
- * @public
+ * @private
  */
 const SwatchButtonDecorator = compose(
 	Pure,
