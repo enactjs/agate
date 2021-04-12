@@ -1,8 +1,14 @@
-/*
+/**
  * Agate component to allow the user to choose a color.
  *
  * @example
  * <SwatchButton color="#ffcc00" onClick={handleClick} />
+ *
+ * @module agate/ColorPicker
+ * @exports SwatchButton
+ * @exports SwatchButtonBase
+ * @exports SwatchButtonDecorator
+ * @private
  */
 
 import kind from '@enact/core/kind';
@@ -12,9 +18,8 @@ import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
-import {ButtonBase, IconButtonDecorator} from '../Button';
+import {ButtonBase} from '../Button';
 import Skinnable from '../Skinnable';
-import TooltipDecorator from '../TooltipDecorator';
 
 import componentCss from './SwatchButton.module.less';
 
@@ -28,7 +33,7 @@ import componentCss from './SwatchButton.module.less';
  * @memberof agate/ColorPicker
  * @extends agate/Button.ButtonBase
  * @ui
- * @public
+ * @private
  */
 const SwatchButtonBase = kind({
 	name: 'SwatchButton',
@@ -98,7 +103,7 @@ const SwatchButtonBase = kind({
 
 	render: ({colorSwatchStyle, css, ...rest}) => {
 		return (
-			<ButtonBase aria-label={colorSwatchStyle.backgroundColor} {...rest} css={css} minWidth={false}>
+			<ButtonBase aria-label={colorSwatchStyle.backgroundColor} {...rest} css={css} iconOnly minWidth={false}>
 				<div className={css.colorSwatch} style={colorSwatchStyle} />
 			</ButtonBase>
 		);
@@ -110,15 +115,13 @@ const SwatchButtonBase = kind({
  *
  * @hoc
  * @memberof agate/ColorPicker
- * @mixes agate/Button.ButtonDecorator
+ * @mixes ui/Button.ButtonDecorator
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const SwatchButtonDecorator = compose(
 	Pure,
 	UiButtonDecorator,
-	IconButtonDecorator,
-	TooltipDecorator({tooltipDestinationProp: 'decoration'}),
 	Spottable,
 	Skinnable
 );
@@ -126,12 +129,17 @@ const SwatchButtonDecorator = compose(
 /**
  * A color picker swatch button component.
  *
+ * Usage:
+ * ```
+ * <SwatchButton color="#ffcc00" onClick={handleClick} />
+ * ```
+ *
  * @class SwatchButton
  * @memberof agate/ColorPicker
  * @extends agate/ColorPicker.SwatchButtonBase
  * @mixes agate/ColorPicker.SwatchButtonDecorator
  * @ui
- * @public
+ * @private
  */
 const SwatchButton = SwatchButtonDecorator(SwatchButtonBase);
 
