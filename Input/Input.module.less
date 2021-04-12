@@ -17,8 +17,7 @@
 		border-bottom: @agate-input-decorator-border-bottom-width solid @agate-input-border-color;
 
 		.input {
-			padding: .extract(@agate-input-padding, top)[] .extract(@agate-input-padding, right)[] .extract(@agate-input-padding, bottom)[] .extract(@agate-input-padding, left)[];
-			.padding-start-end(.extract(@agate-input-padding, left)[], .extract(@agate-input-padding, right)[]);
+			.padding-start-end(@agate-input-padding);
 			cursor: pointer;
 			white-space: nowrap;
 			overflow: hidden;
@@ -68,8 +67,7 @@
 			height: @agate-input-small-height;
 
 			.input {
-				padding: .extract(@agate-input-small-padding, top)[] .extract(@agate-input-small-padding, right)[] .extract(@agate-input-small-padding, bottom)[] .extract(@agate-input-small-padding, left)[];
-				.padding-start-end(.extract(@agate-input-small-padding, left)[], .extract(@agate-input-small-padding, right)[]);
+				.padding-start-end(@agate-input-small-padding);
 				font-size: @agate-input-small-font-size;
 			}
 
@@ -81,13 +79,11 @@
 				}
 
 				&.iconAfter {
-					padding: .extract(@agate-input-small-icon-after-padding, top)[] .extract(@agate-input-small-icon-after-padding, right)[] .extract(@agate-input-small-icon-after-padding, bottom)[] .extract(@agate-input-small-icon-after-padding, left)[];
-					.padding-start-end(.extract(@agate-input-small-icon-after-padding, left)[], .extract(@agate-input-small-icon-after-padding, right)[]);
+					.padding-start-end(@agate-input-small-icon-after-padding);
 				}
 
 				&.iconBefore {
-					padding: .extract(@agate-input-small-icon-before-padding, top)[] .extract(@agate-input-small-icon-before-padding, right)[] .extract(@agate-input-small-icon-before-padding, bottom)[] .extract(@agate-input-small-icon-before-padding, left)[];
-					.padding-start-end(.extract(@agate-input-small-icon-before-padding, left)[],  .extract(@agate-input-small-icon-before-padding, right)[]);
+					.padding-start-end(@agate-input-small-icon-before-padding);
 				}
 			}
 		}
@@ -113,14 +109,12 @@
 
 			&.iconAfter {
 				margin-right: @agate-input-icon-after-margin;
-				padding: .extract(@agate-input-icon-after-padding, top)[] .extract(@agate-input-icon-after-padding, right)[] .extract(@agate-input-icon-after-padding, bottom)[] .extract(@agate-input-icon-after-padding, left)[];
-				.padding-start-end(.extract(@agate-input-icon-after-padding, left)[], .extract(@agate-input-icon-after-padding, right)[]);
+				.padding-start-end(@agate-input-icon-after-padding);
 			}
 
 			&.iconBefore {
 				margin-left: @agate-input-icon-before-margin;
-				padding: .extract(@agate-input-icon-before-padding, top)[] .extract(@agate-input-icon-before-padding, right)[] .extract(@agate-input-icon-before-padding, bottom)[] .extract(@agate-input-icon-before-padding, left)[];
-				.padding-start-end(.extract(@agate-input-icon-before-padding, left)[], .extract(@agate-input-icon-before-padding, right)[]);
+				.padding-start-end(@agate-input-icon-before-padding);
 			}
 		}
 
@@ -129,14 +123,6 @@
 				font-size: @agate-input-large-icon-font-size;
 				height: @agate-input-large-icon-height;
 				line-height: @agate-input-large-icon-height;
-
-				&.iconAfter {
-					.padding-start-end(.extract(@agate-input-icon-after-padding, left)[], .extract(@agate-input-icon-after-padding, right)[]);
-				}
-
-				&.iconBefore {
-					.padding-start-end(.extract(@agate-input-icon-before-padding, left)[], .extract(@agate-input-icon-before-padding, right)[]);
-				}
 			}
 		}
 
