@@ -4,11 +4,6 @@
  * @example
  * <SwatchButton color="#ffcc00" onClick={handleClick} />
  *
- * @module agate/ColorPicker
- * @exports SwatchButton
- * @exports SwatchButtonBase
- * @exports SwatchButtonDecorator
- * @private
  */
 
 import kind from '@enact/core/kind';
