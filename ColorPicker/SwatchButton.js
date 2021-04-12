@@ -112,7 +112,7 @@ const SwatchButtonBase = kind({
  * @mixes ui/Button.ButtonDecorator
  * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
- * @private
+ * @public
  */
 const SwatchButtonDecorator = compose(
 	Pure,
