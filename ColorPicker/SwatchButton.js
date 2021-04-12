@@ -134,7 +134,7 @@ const SwatchButtonDecorator = compose(
  * @extends agate/ColorPicker.SwatchButtonBase
  * @mixes agate/ColorPicker.SwatchButtonDecorator
  * @ui
- * @private
+ * @public
  */
 const SwatchButton = SwatchButtonDecorator(SwatchButtonBase);
 
