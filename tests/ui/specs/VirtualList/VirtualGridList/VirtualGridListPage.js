@@ -13,7 +13,6 @@ class VirtualGridListPage extends Page {
 
 	open (layout = '', urlExtra) {
 		super.open(`VirtualGridList${layout}-View`, urlExtra);
-		this.delay(1000);
 	}
 
 	get buttonHideScrollbar () {

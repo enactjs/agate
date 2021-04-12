@@ -43,7 +43,6 @@ class TemperatureControlPage extends Page {
 
 	open (urlExtra) {
 		super.open('TemperatureControl-View', urlExtra);
-		this.delay(1000);
 	}
 }
 

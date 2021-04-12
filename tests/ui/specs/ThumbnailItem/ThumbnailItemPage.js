@@ -53,7 +53,6 @@ class ThumbnailItemPage extends Page {
 
 	open (urlExtra) {
 		super.open('ThumbnailItem-View', urlExtra);
-		this.delay(1000);
 	}
 }
 
