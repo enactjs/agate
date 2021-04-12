@@ -71,7 +71,7 @@ class DrawerPage extends Page {
 
 	open (urlExtra) {
 		super.open('Drawer-View', urlExtra);
-		this.delay(500);
+		this.delay(1000);
 	}
 
 	clickPopupFloatLayer () {

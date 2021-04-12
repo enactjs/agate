@@ -45,7 +45,7 @@ class ColorPickerPage extends Page {
 
 	open (urlExtra) {
 		super.open('ColorPicker-View', urlExtra);
-		this.delay(500);
+		this.delay(1000);
 	}
 }
 

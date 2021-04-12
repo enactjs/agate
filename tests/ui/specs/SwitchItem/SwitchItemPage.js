@@ -39,7 +39,7 @@ class SwitchItemPage extends Page {
 
 	open (urlExtra) {
 		super.open('SwitchItem-View', urlExtra);
-		this.delay(500);
+		this.delay(1000);
 	}
 }
 

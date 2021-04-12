@@ -39,7 +39,7 @@ class WindDirectionControlPage extends Page {
 
 	open (urlExtra) {
 		super.open('WindDirectionControl-View', urlExtra);
-		this.delay(500);
+		this.delay(1000);
 	}
 }
 

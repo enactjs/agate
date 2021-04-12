@@ -95,7 +95,7 @@ class PopupPage extends Page {
 
 	open (urlExtra) {
 		super.open('Popup-View', urlExtra);
-		this.delay(500);
+		this.delay(1000);
 	}
 
 	clickPopupFloatLayer () {

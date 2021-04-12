@@ -33,7 +33,7 @@ class SliderButtonPage extends Page {
 
 	open (urlExtra) {
 		super.open('SliderButton-View', urlExtra);
-		this.delay(500);
+		this.delay(1000);
 	}
 }
 

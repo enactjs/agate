@@ -62,7 +62,7 @@ class DateTimePickerPage extends Page {
 
 	open (urlExtra) {
 		super.open('DateTimePicker-View', urlExtra);
-		this.delay(500);
+		this.delay(1000);
 	}
 }
 

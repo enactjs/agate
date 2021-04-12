@@ -92,7 +92,7 @@ class ButtonPage extends Page {
 
 	open (urlExtra) {
 		super.open('Button-View', urlExtra);
-		this.delay(500);
+		this.delay(1000);
 	}
 }
 

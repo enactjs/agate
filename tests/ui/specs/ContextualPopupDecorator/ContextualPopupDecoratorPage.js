@@ -32,7 +32,7 @@ class ContextualPopupDecoratorPage extends Page {
 
 	open (urlExtra) {
 		super.open('ContextualPopupDecorator-View', urlExtra);
-		this.delay(500);
+		this.delay(1000);
 	}
 }
 
