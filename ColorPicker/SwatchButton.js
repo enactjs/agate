@@ -116,6 +116,7 @@ const SwatchButtonBase = kind({
  * @hoc
  * @memberof agate/ColorPicker
  * @mixes ui/Button.ButtonDecorator
+ * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
  * @private
  */
