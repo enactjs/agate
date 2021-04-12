@@ -7,6 +7,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/Checkbox` style to match latest design for Silicon skin
+- `agate/FanSpeedControl` style to match latest design for Silicon skin
 - `agate/Drawer` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
 - `agate/Item` to match the latest design for Silicon skin
 
@@ -16,7 +17,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/ContextualPopup` and `agate/ContextualPopupDecorator` prop `css` to support customizations
 - `agate/Dropdown` prop `width` to support multiple widths
-- `agate/FanSpeedControl` style to match latest design for Silicon skin
 - `agate/IncrementSlider` prop `activateOnFocus` to support slider activation when slider gets focused
 - `agate/IncrementSlider`, `agate/ProgressBar`, and `agate/Slider` prop `tooltip` to enable the built-in tooltip
 - `agate/Item` to have a `selected` publicClassname
