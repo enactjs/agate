@@ -35,7 +35,6 @@ class KeypadPage extends Page {
 
 	open (urlExtra) {
 		super.open('Keypad-View', urlExtra);
-		this.delay(1000);
 	}
 }
 

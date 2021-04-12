@@ -13,6 +13,7 @@ describe('RangePicker', function () {
 
 			describe('5-way', function () {
 				it('should change the value forward when incrementing the rangePicker', function () {
+					Page.delay(1000);
 					expect(rangePicker.incrementer(rangePicker.self).isFocused()).to.be.true();
 					Page.spotlightSelect();
 					browser.pause(500);

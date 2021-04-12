@@ -59,7 +59,6 @@ class IncrementSliderPage extends Page {
 
 	open (urlExtra) {
 		super.open('IncrementSlider-View', urlExtra);
-		this.delay(1000);
 	}
 }
 

@@ -9,7 +9,6 @@ class InputPage extends Page {
 
 	open (urlExtra) {
 		super.open('Input-View', urlExtra);
-		this.delay(1000);
 	}
 
 	get input1 () {

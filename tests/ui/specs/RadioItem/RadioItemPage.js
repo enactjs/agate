@@ -41,7 +41,6 @@ class RadioItemPage extends Page {
 
 	open (urlExtra) {
 		super.open('RadioItem-View', urlExtra);
-		this.delay(1000);
 	}
 }
 

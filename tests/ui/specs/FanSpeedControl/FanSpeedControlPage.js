@@ -37,7 +37,6 @@ class FanSpeedControlPage extends Page {
 
 	open (urlExtra) {
 		super.open('FanSpeedControl-View', urlExtra);
-		this.delay(1000);
 	}
 }
 

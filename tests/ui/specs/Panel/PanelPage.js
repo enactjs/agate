@@ -54,7 +54,6 @@ class PanelPage extends Page {
 
 	open (urlExtra) {
 		super.open('Panel-View', urlExtra);
-		this.delay(1000);
 	}
 
 	waitForExist (selector, timeout) {

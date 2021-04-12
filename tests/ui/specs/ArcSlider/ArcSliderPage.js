@@ -39,7 +39,6 @@ class ArcSliderPage extends Page {
 
 	open (urlExtra) {
 		super.open('ArcSlider-View', urlExtra);
-		this.delay(1000);
 	}
 }
 

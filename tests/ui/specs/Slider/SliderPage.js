@@ -52,7 +52,6 @@ class SliderPage extends Page {
 
 	open (urlExtra) {
 		super.open('Slider-View', urlExtra);
-		this.delay(1000);
 	}
 }
 

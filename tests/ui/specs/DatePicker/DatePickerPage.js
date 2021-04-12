@@ -52,7 +52,6 @@ class DatePickerPage extends Page {
 
 	open (urlExtra) {
 		super.open('DatePicker-View', urlExtra);
-		this.delay(1000);
 	}
 }
 
