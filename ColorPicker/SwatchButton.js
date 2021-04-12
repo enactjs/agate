@@ -4,7 +4,7 @@
  * @example
  * <SwatchButton color="#ffcc00" onClick={handleClick} />
  *
- * @module agate/ColorPicker
+ * @module agate/ColorPicker.SwatchButton
  * @exports SwatchButton
  * @exports SwatchButtonBase
  * @exports SwatchButtonDecorator
