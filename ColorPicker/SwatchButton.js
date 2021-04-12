@@ -27,7 +27,7 @@ import componentCss from './SwatchButton.module.less';
  * @memberof agate/ColorPicker
  * @extends agate/Button.ButtonBase
  * @ui
- * @private
+ * @public
  */
 const SwatchButtonBase = kind({
 	name: 'SwatchButton',
@@ -123,11 +123,6 @@ const SwatchButtonDecorator = compose(
 
 /**
  * A color picker swatch button component.
- *
- * Usage:
- * ```
- * <SwatchButton color="#ffcc00" onClick={handleClick} />
- * ```
  *
  * @class SwatchButton
  * @memberof agate/ColorPicker
