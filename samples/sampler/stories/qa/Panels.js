@@ -8,8 +8,6 @@ import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import Routable, {Route, Linkable} from '@enact/ui/Routable';
 import PropTypes from 'prop-types';
 import {Component, useState} from 'react';
-import {storiesOf} from '@storybook/react';
-
 import Header from '@enact/agate/Header';
 import Icon from '@enact/agate/Icon';
 import Item from '@enact/agate/Item';
@@ -153,23 +151,26 @@ const RoutablePanelsApp = class extends Component {
 	}
 };
 
-storiesOf('Panels', module)
-	.add(
-		'preserve focus',
-		() => (
-			<BasicPanels
-				noAnimation={boolean('noAnimation', Config)}
-				noCloseButton={boolean('noCloseButton', Config)}
-				orientation={select('orientation', ['horizontal', 'vertical'], Config)}
-			/>
-		),
-		{
-			props: {
-				noPanels: true
-			}
-		}
-	)
-	.add(
-		'preserve route focus',
-		() => (<RoutablePanelsApp />)
-	);
+export default {
+	title: 'Agate/Panels',
+	component: 'Panels'
+};
+
+export const PreserveFocus = () => (
+	<BasicPanels
+		noAnimation={boolean('noAnimation', Config)}
+		noCloseButton={boolean('noCloseButton', Config)}
+		orientation={select('orientation', ['horizontal', 'vertical'], Config)}
+	/>
+);
+
+PreserveFocus.storyName = 'preserve focus';
+PreserveFocus.parameters = {
+	props: {
+		noPanels: true
+	}
+};
+
+export const PreserveRouteFocus = () => <RoutablePanelsApp />;
+
+PreserveRouteFocus.storyName = 'preserve route focus';

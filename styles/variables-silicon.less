@@ -71,10 +71,12 @@
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-size: 27px;
+@agate-checkbox-bg-size: 60px;
+@agate-checkbox-border-radius: 50%;
 @agate-checkbox-border-width: 3px;
-@agate-checkbox-border-radius: 0;
+@agate-checkbox-container-position: ((@agate-checkbox-size + (@agate-checkbox-border-width * 2) - 60px) / 2); // Container's total dimensions should be `60px` defined in the GUI spec
 @agate-checkbox-icon-font-size: 49px;
+@agate-checkbox-size: 24px;
 
 // CheckboxItem
 // ---------------------------------------
@@ -116,6 +118,7 @@
 @agate-dropdown-button-height: 60px;
 @agate-dropdown-button-padding: 0 15px;
 @agate-dropdown-item-border-width: 0;
+@agate-dropdown-item-height: 60px;
 @agate-dropdown-item-font-size: @agate-dropdown-button-font-size;
 @agate-dropdown-item-font-weight: 300;
 @agate-dropdown-item-line-height: @agate-button-small-height;
@@ -180,14 +183,6 @@
 @agate-imageitem-horizontal-image-sizing-none-height: 81px;
 @agate-imageitem-horizontal-image-sizing-none-margin: 9px 21px 0 30px;
 
-// Indicator
-// ---------------------------------------
-@agate-indicator-align-self:    center;
-@agate-indicator-border-radius: @agate-indicator-height / 2;
-@agate-indicator-display:       flex;
-@agate-indicator-height:        9px;
-@agate-indicator-margin-right:  21px;
-
 // Input
 // ---------------------------------------
 @agate-input-border-width: 3px;
@@ -227,19 +222,28 @@
 // Item
 // ---------------------------------------
 @agate-item-border-width:     0 0 3px 0;
+@agate-item-centered-inline-max-width: 480px;
 @agate-item-font-size:        33px;
 @agate-item-font-weight:      normal;
 @agate-item-height:           102px;
-@agate-item-height-large:     120px;
 @agate-item-side-outset:      30px;
 @agate-item-sub-text-size:    24px;
 @agate-item-itemcontent-line-height:  42px;
+@agate-item-large-height:             120px;
 @agate-item-label-font-size:          24px;
 @agate-item-label-line-height:        33px;
+@agate-item-small-haslabel-height:    99px;
 @agate-item-small-font-size:          33px;
+@agate-item-small-height:             99px;
 @agate-item-small-label-font-size:    24px;
-@agate-item-small-label-line-height:  33px;
+@agate-item-small-line-height:        60px;
 @agate-item-small-itemcontent-line-height: 42px;
+@agate-item-inline-max-width:         699px;
+@agate-item-inline-min-width:         480px;
+@agate-item-inline-notcentered-itemcontent-min-width: 420px;
+@agate-item-indicator-align-self:     center;
+@agate-item-indicator-border-radius:  @agate-item-indicator-height / 2;
+@agate-item-indicator-height:         9px;
 
 // Keypad
 // ---------------------------------------
