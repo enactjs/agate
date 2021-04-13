@@ -9,7 +9,13 @@
 	}
 
 	.applySkins({
-		min-width: @agate-switchitem-min-width;
+		height: @agate-switchitem-height;
+		padding: @agate-switchitem-padding;
+
+		.switchIcon {
+			pointer-events: none;
+			.margin-start-end(@agate-switch-icon-margin, 0);
+		}
 
 		.icon {
 			padding: @agate-switchitem-icon-padding;
@@ -41,16 +47,5 @@
 				}
 			}
 		});
-
-		.switchIcon {
-			pointer-events: none;
-			.margin-start-end(@agate-switch-icon-margin, 0);
-		}
 	});
 }
-
-.item {
-	.applySkins({
-		padding: @agate-switchitem-padding;
-	})
-};
