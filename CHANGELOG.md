@@ -3,6 +3,7 @@
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
 ## [unreleased]
+
 ### Added
 
 - `agate/ImageItem` prop `sizing` to support image sizing
