@@ -6,7 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
-- `agate/Checkbox` style to match latest design for Silicon skin
+- `agate/ArcSlider`, `agate/Checkbox` and `agate/TemperatureControl` style to match latest design for Silicon skin
 - `agate/Drawer` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
 - `agate/Item` to match the latest design for Silicon skin
 
@@ -41,7 +41,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/ArcSlider` and `agate/TemperatureControl` broken layout when `min` prop is not smaller than `max` prop
-- `agate/ArcSlider`, `agate/TemperatureControl`, `agate/BodyText`, `agate/Button`, `agate/IncrementSlider`, `agate/LabeledIcon` and `agate/Slider` to match latest design for Silicon skin
+- `agate/BodyText`, `agate/Button`, `agate/IncrementSlider`, `agate/LabeledIcon` and `agate/Slider` to match latest design for Silicon skin
 - `agate/Button` to apply active styling only when it is not disabled
 - `agate/Button` to apply active styling on enter key press
 - `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
