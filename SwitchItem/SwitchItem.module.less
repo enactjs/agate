@@ -25,7 +25,7 @@
 		}
 
 		.slotBefore {
-			margin-right: @agate-switchitem-slotbefore-margin-right;
+			.margin-start-end(0, @agate-switchitem-slotbefore-margin-right);
 		}
 
 		.label {
@@ -42,18 +42,12 @@
 
 		.focus({
 			&.selected {
-				border-color: @agate-switchitem-focused-selected-border-color;
+				border-color: @agate-switchitem-selected-border-color;
 
 				.label {
-					color: @agate-switchitem-label-focus-selected-color;
+					color:  @agate-switchitem-label-selected-color;
 				}
 			}
 		});
-
-		.enact-locale-rtl({
-			.slotBefore {
-				.margin-start-end(@agate-switchitem-slotbefore-margin-right, 0);
-			}
-		})
 	});
 }
