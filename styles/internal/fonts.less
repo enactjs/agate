@@ -24,30 +24,30 @@
 @font-family-base-name: "Agate";
 
 // Define local LESS variable for font paths
-@font-system-src-agate-100:    local("Noto Sans Thin"), local("Noto Sans"), url(../../fonts/MuseoSans/MuseoSans-Thin.ttf) format("truetype");
-@font-system-src-agate-200:    local("Noto Sans ExtraLight"), local("Noto Sans"), url(../../fonts/MuseoSans/MuseoSans-Thin.ttf) format("truetype");
-@font-system-src-agate-300:    local("Noto Sans Light"), local("Noto Sans"), url(../../fonts/MuseoSans/MuseoSans-Light.ttf) format("truetype");
-@font-system-src-agate-400:    local("Noto Sans Regular"), local("Noto Sans"), url(../../fonts/MuseoSans/MuseoSans-Light.ttf) format("truetype");
-@font-system-src-agate-500:    local("Noto Sans Medium"), local("Noto Sans"), url(../../fonts/MuseoSans/MuseoSans-Medium.ttf) format("truetype");
-@font-system-src-agate-600:    local("Noto Sans SemiBold"), local("Noto Sans"), url(../../fonts/MuseoSans/MuseoSans-Medium.ttf) format("truetype");
-@font-system-src-agate-700:    local("Noto Sans Bold"),  local("Noto Sans"), url(../../fonts/MuseoSans/MuseoSans-Bold.ttf) format("truetype");
-@font-system-src-agate-800:    local("Noto Sans ExtraBold"), local("Noto Sans"), url(../../fonts/MuseoSans/MuseoSans-Medium.ttf) format("truetype");
-@font-system-src-agate-900:    local("Noto Sans Black"), local("Noto Sans"), url(../../fonts/MuseoSans/MuseoSans-Black.ttf) format("truetype");
+@font-system-src-agate-100: local("Noto Sans Thin"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Thin.ttf) format("truetype");
+@font-system-src-agate-200: local("Noto Sans ExtraLight"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Thin.ttf) format("truetype");
+@font-system-src-agate-300: local("Noto Sans Light"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Light.ttf) format("truetype");
+@font-system-src-agate-400: local("Noto Sans Regular"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Light.ttf) format("truetype");
+@font-system-src-agate-500: local("Noto Sans Medium"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Medium.ttf) format("truetype");
+@font-system-src-agate-600: local("Noto Sans SemiBold"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Medium.ttf) format("truetype");
+@font-system-src-agate-700: local("Noto Sans Bold"),  local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Bold.ttf) format("truetype");
+@font-system-src-agate-800: local("Noto Sans ExtraBold"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Medium.ttf) format("truetype");
+@font-system-src-agate-900: local("Noto Sans Black"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Black.ttf) format("truetype");
 
 // Localized fonts
 // Order correlates with load and priority order. Later fonts are stacked on top of earlier fonts.
 // In the case of glyphs existing in two fonts, the later glyphs will be used.
 @fonts: {
 	am: local("Noto Sans Ethiopic Regular") normal 300, local("Noto Sans Ethiopic Bold") 600 700;
-	ar: local("Noto Sans Arabic Regular") normal 300, local("Noto Sans Arabic Bold")  600 700;
-	ur: local("Noto Sans Arabic Regular") normal 300, local("Noto Sans Arabic Bold")  600 700;
-	ja: local("Noto Sans CJK KR Regular") normal 300, local("Noto Sans CJK KR Bold")  600 700;
-	ko: local("Noto Sans CJK KR Regular") normal 300, local("Noto Sans CJK KR Bold")  600 700;
-	ta: local("Noto Sans Tamil Regular") normal 300, local("Noto Sans Tamil Bold")  600 700;
-	th: local("Noto Sans Thai Regular") normal 300, local("Noto Sans Thai Bold")  600 700;
-	zh-HK: local("Noto Sans CJK KR Regular") normal 300, local("Noto Sans CJK KR Bold")  600 700;
-	zh-TW: local("Noto Sans CJK KR Regular") normal 300, local("Noto Sans CJK KR Bold")  600 700;
-	si: local("Noto Sans Sinhala Regular") normal 300, local("Noto Sans Sinhala Bold")  600 700;
+	ar: local("Noto Sans Arabic Regular") normal 300, local("Noto Sans Arabic Bold") 600 700;
+	ur: local("Noto Sans Arabic Regular") normal 300, local("Noto Sans Arabic Bold") 600 700;
+	ja: local("Noto Sans CJK KR Regular") normal 300, local("Noto Sans CJK KR Bold") 600 700;
+	ko: local("Noto Sans CJK KR Regular") normal 300, local("Noto Sans CJK KR Bold") 600 700;
+	ta: local("Noto Sans Tamil Regular") normal 300, local("Noto Sans Tamil Bold") 600 700;
+	th: local("Noto Sans Thai Regular") normal 300, local("Noto Sans Thai Bold") 600 700;
+	zh-HK: local("Noto Sans CJK KR Regular") normal, local("Noto Sans CJK KR Bold") 300 600 700;
+	zh-TW: local("Noto Sans CJK KR Regular") normal, local("Noto Sans CJK KR Bold") 300 600 700;
+	si: local("Noto Sans Sinhala Regular") normal, local("Noto Sans Sinhala Bold") 300 600 700;
 
 	// DEV NOTE: This is the closest proximity to a collection of unit tests that we have to test this system.
 	// name:							local("name");
