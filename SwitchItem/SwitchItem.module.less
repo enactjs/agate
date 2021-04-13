@@ -8,18 +8,20 @@
 		vertical-align: middle;
 	}
 
+	.switchIcon {
+		pointer-events: none;
+	}
+
 	.applySkins({
 		height: @agate-switchitem-height;
-		padding: @agate-switchitem-padding;
+		.padding-start-end(@agate-switchitem-padding);
 
 		.switchIcon {
-			pointer-events: none;
 			.margin-start-end(@agate-switch-icon-margin, 0);
 		}
 
 		.icon {
 			padding: @agate-switchitem-icon-padding;
-			margin: @agate-switchitem-icon-margin;
 		}
 
 		.slotBefore {
@@ -47,5 +49,11 @@
 				}
 			}
 		});
+
+		.enact-locale-rtl({
+			.slotBefore {
+				.margin-start-end(@agate-switchitem-slotbefore-margin-right, 0);
+			}
+		})
 	});
 }
