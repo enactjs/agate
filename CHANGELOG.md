@@ -41,7 +41,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/ArcSlider` and `agate/TemperatureControl` broken layout when `min` prop is not smaller than `max` prop
-- `agate/BodyText`, `agate/Button`, `agate/IncrementSlider`, `agate/LabeledIcon` and `agate/Slider` to match latest design for Silicon skin
+- `agate/BodyText`, `agate/Button`, `agate/IncrementSlider`, `agate/LabeledIcon`, and `agate/Slider` to match latest design for Silicon skin
 - `agate/Button` to apply active styling only when it is not disabled
 - `agate/Button` to apply active styling on enter key press
 - `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
