@@ -126,14 +126,6 @@ const ArcSliderBase = kind({
 		min: PropTypes.number,
 
 		/**
-		 * Disable the knob accent color on focus.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		noFocusColor: PropTypes.bool,
-
-		/**
 		 * The radius of the arc circle.
 		 *
 		 * @type {Number}
@@ -204,7 +196,6 @@ const ArcSliderBase = kind({
 		endAngle: 250,
 		max: 100,
 		min: 0,
-		noFocusColor: true,
 		radius: 150,
 		startAngle: 30,
 		step: 1,
@@ -229,8 +220,7 @@ const ArcSliderBase = kind({
 		foregroundColor: ({foregroundColor, skinVariants}) => foregroundColor || (skinVariants.night ? '#ffffff' : '#000000')
 	},
 
-	render: ({'aria-valuetext': ariaValuetext, backgroundColor, componentRef, circleRadius, disabled, endAngle, foregroundColor, isFocused, max, min, noFocusColor, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}, context) => {
-		const {accent: accentColor} = context || {};
+	render: ({'aria-valuetext': ariaValuetext, backgroundColor, componentRef, circleRadius, disabled, endAngle, foregroundColor, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}) => {
 		const valueAngle = valueToAngle(clamp(min, max, value), min, Math.max(min, max), startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
@@ -261,7 +251,7 @@ const ArcSliderBase = kind({
 					<circle
 						cx={knobPosition.x}
 						cy={knobPosition.y}
-						fill={!noFocusColor && isFocused ? accentColor : foregroundColor}
+						fill={foregroundColor}
 						r={ri.scaleToRem(circleRadius)}
 					/>
 				</Arc>
