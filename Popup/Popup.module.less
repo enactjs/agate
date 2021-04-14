@@ -148,12 +148,8 @@
 			height: @agate-popup-title-height;
 			color: @agate-popup-text-color;
 			font-size: @agate-popup-title-font-size;
-			padding: @agate-popup-title-padding;
+			.padding-start-end(@agate-popup-title-padding);
 			margin: @agate-popup-title-margin;
-
-			.enact-locale-rtl({
-				padding: @agate-popup-title-padding-rtl;
-			});
 		}
 
 		&:not(.withTitle) {
@@ -164,7 +160,7 @@
 		}
 
 		&.withTitle {
-			padding: @agate-popup-withTitle-padding;
+			padding: @agate-popup-with-title-padding;
 
 			.body {
 				padding: @agate-popup-body-padding;
@@ -208,22 +204,11 @@
 			height: @agate-popup-closebutton-height;
 			width: @agate-popup-closebutton-height;
 
-			.position(@agate-popup-closebutton-position-top, @agate-popup-closebutton-position-right, @agate-popup-closebutton-position-bottom, @agate-popup-closebutton-position-left);
+			.position-start-end(@agate-popup-closebutton-position);
 			margin: @agate-popup-closebutton-margin;
-
-			.enact-locale-rtl({
-				.position(@agate-popup-closebutton-position-top, @agate-popup-closebutton-position-left, @agate-popup-closebutton-position-bottom, @agate-popup-closebutton-position-right);
-			});
 
 			.client {
 				color: @agate-popup-closebutton-icon-color;
-			}
-
-			.icon {
-				font-size: @agate-popup-closebutton-icon-font-size;
-				line-height: @agate-popup-closebutton-icon-line-height;
-				height: @agate-popup-closebutton-icon-height;
-				width: @agate-popup-closebutton-icon-height;
 			}
 		}
 	});
