@@ -56,7 +56,7 @@
 			&.before,
 			&.after {
 				.icon {
-					padding: 0;
+					.padding-start-end(0);
 				}
 			}
 		}
@@ -195,19 +195,19 @@
 			&.smallest,
 			&.small {
 				.label {
-					margin-left: @agate-labelediconbutton-small-label-margin;
+					.margin-start-end(@agate-labelediconbutton-small-label-margin, 0);
 				}
 			}
 
 			&.large {
 				.label {
-					margin-left: @agate-labelediconbutton-large-label-margin;
+					.margin-start-end(@agate-labelediconbutton-large-label-margin, 0);
 				}
 			}
 
 			&.huge {
 				.label {
-					margin-left: @agate-labelediconbutton-huge-label-margin;
+					.margin-start-end(@agate-labelediconbutton-huge-label-margin, 0);
 				}
 			}
 		}
@@ -216,24 +216,33 @@
 			&.smallest,
 			&.small {
 				.label {
-					margin-right: @agate-labelediconbutton-small-label-margin;
+					.margin-start-end(0, @agate-labelediconbutton-small-label-margin);
 				}
 			}
 
 			&.large {
 				.label {
-					margin-right: @agate-labelediconbutton-large-label-margin;
+					.margin-start-end(0, @agate-labelediconbutton-large-label-margin);
 				}
 			}
 
 			&.huge {
 				.label {
-					margin-right: @agate-labelediconbutton-huge-label-margin;
+					.margin-start-end(0, @agate-labelediconbutton-huge-label-margin);
 				}
 			}
 
 			.noChildren {
 
+			}
+		}
+
+		&.after,
+		&.right,
+		&.before,
+		&.left {
+			.label {
+				text-align: @agate-labelediconbutton-label-text-align;
 			}
 		}
 
