@@ -154,6 +154,14 @@ const LabeledIconButtonBase = kind({
 		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		skin: PropTypes.string,
+
+		/**
 		 * The amount of sprite "cells" in the src image.
 		 *
 		 * @type {Number}
@@ -161,12 +169,6 @@ const LabeledIconButtonBase = kind({
 		 */
 		spriteCount: PropTypes.number,
 		// TODO: spriteCount prop bleeds!  Is this cruft?
-
-
-
-
-
-		skin: PropTypes.string
 	},
 
 	defaultProps: {
@@ -180,13 +182,12 @@ const LabeledIconButtonBase = kind({
 	},
 
 	computed: {
-		className: ({labelPosition, size, styler, children}) => 
-
-		
+		className: ({labelPosition, selected, size, styler, children}) =>
 			styler.append(
-			size, 
-			!children[0] && 'noChildren'
-			// skin !== 'silicon' && (labelPosition === 'above' || labelPosition === 'below') ? '' : size
+				{selected},
+				size,
+				!children[0] && 'noChildren'
+				// skin !== 'silicon' && (labelPosition === 'above' || labelPosition === 'below') ? '' : size
 			)
 	},
 

@@ -462,6 +462,7 @@
 @agate-labeledicon-huge-vertical-min-width: inherit;
 @agate-labeledicon-label-height-small: inherit;
 @agate-labeledicon-label-height-large: inherit;
+@agate-labeledicon-label-height-huge: inherit;
 @agate-labeledicon-large-font-size: @agate-base-font-size;
 @agate-labeledicon-large-horizontal-max-width: 300px;
 @agate-labeledicon-large-horizontal-min-width: 96px;
@@ -498,58 +499,36 @@
 
 // LabeledIconButton
 // ---------------------------------------
-@agate-labelediconbutton-label-font-size:   38px;
 @agate-labelediconbutton-label-font-weight: 500;
 @agate-labelediconbutton-label-margin:      20px;
-@agate-labelediconbutton-max-width:         291px;
 
 @agate-labelediconbutton-padding-bottom: 0;
 
-@agate-labelediconbutton-smallest-icon-font-size: 36px;
+@agate-labelediconbutton-smallest-icon-font-size: @agate-labeledicon-smallest-icon-font-size;
 @agate-labelediconbutton-smallest-label-font-size: 38px;
 @agate-labelediconbutton-smallest-label-height: 36px;
-@agate-labelediconbutton-smallest-max-width: 291px;
-@agate-labelediconbutton-smallest-min-width: 150px;
+@agate-labelediconbutton-smallest-max-width: @agate-labeledicon-smallest-vertical-max-width;
+@agate-labelediconbutton-smallest-min-width: @agate-labeledicon-smallest-vertical-min-width;
 
-@agate-labelediconbutton-small-icon-font-size: 56px;
+@agate-labelediconbutton-small-icon-font-size: @agate-labeledicon-small-icon-font-size;
 @agate-labelediconbutton-small-label-font-size: 38px;
 @agate-labelediconbutton-small-label-height: 39px;
-@agate-labelediconbutton-small-max-width: 291px;
-@agate-labelediconbutton-small-min-width: 180px;
+@agate-labelediconbutton-small-max-width: @agate-labeledicon-small-vertical-max-width;
+@agate-labelediconbutton-small-min-width: @agate-labeledicon-small-vertical-min-width;
 
-@agate-labelediconbutton-large-icon-font-size: 96px;
-@agate-labelediconbutton-large-label-font-size: 38px;
-@agate-labelediconbutton-large-label-height: 66px;
-@agate-labelediconbutton-large-max-width: 291px;
-@agate-labelediconbutton-large-min-width: 240px;
+@agate-labelediconbutton-large-icon-font-size: @agate-labeledicon-large-icon-font-size;
+@agate-labelediconbutton-large-max-width: @agate-labeledicon-large-vertical-max-width;
+@agate-labelediconbutton-large-min-width: @agate-labeledicon-large-vertical-min-width;
 
-@agate-labelediconbutton-huge-icon-font-size: 320px;
-@agate-labelediconbutton-huge-label-font-size: 38px;
-@agate-labelediconbutton-huge-label-height: 81px;
-@agate-labelediconbutton-large-max-width: 291px;
-@agate-labelediconbutton-large-min-width: 240px;
+@agate-labelediconbutton-huge-icon-font-size: @agate-labeledicon-huge-icon-font-size;
+@agate-labelediconbutton-huge-max-width: @agate-labeledicon-large-vertical-max-width;
+@agate-labelediconbutton-huge-min-width: @agate-labeledicon-huge-vertical-min-width;
 
 @agate-labelediconbutton-label-default-margin: 20px 0 0 0;
 
-@agate-labelediconbutton-below-smallest-label-margin: @agate-labelediconbutton-label-default-margin;
-@agate-labelediconbutton-below-small-label-margin: @agate-labelediconbutton-label-default-margin;
-@agate-labelediconbutton-below-large-label-margin: @agate-labelediconbutton-label-default-margin;
-@agate-labelediconbutton-below-huge-label-margin: @agate-labelediconbutton-label-default-margin;
-
-@agate-labelediconbutton-above-smallest-label-margin: @agate-labelediconbutton-label-default-margin;
-@agate-labelediconbutton-above-small-label-margin: @agate-labelediconbutton-label-default-margin;
-@agate-labelediconbutton-above-large-label-margin: @agate-labelediconbutton-label-default-margin;
-@agate-labelediconbutton-above-huge-label-margin: @agate-labelediconbutton-label-default-margin;
-
-@agate-labelediconbutton-right-smallest-label-margin: @agate-labelediconbutton-label-default-margin;
-@agate-labelediconbutton-right-small-label-margin: @agate-labelediconbutton-label-default-margin;
-@agate-labelediconbutton-right-large-label-margin: @agate-labelediconbutton-label-default-margin;
-@agate-labelediconbutton-right-huge-label-margin: @agate-labelediconbutton-label-default-margin;
-
-@agate-labelediconbutton-left-smallest-label-margin: @agate-labelediconbutton-label-default-margin;
-@agate-labelediconbutton-left-small-label-margin: @agate-labelediconbutton-label-default-margin;
-@agate-labelediconbutton-left-large-label-margin: @agate-labelediconbutton-label-default-margin;
-@agate-labelediconbutton-left-huge-label-margin: @agate-labelediconbutton-label-default-margin;
+@agate-labelediconbutton-small-label-margin: @agate-labelediconbutton-label-default-margin;
+@agate-labelediconbutton-large-label-margin: @agate-labelediconbutton-label-default-margin;
+@agate-labelediconbutton-huge-label-margin: @agate-labelediconbutton-label-default-margin;
 
 //temp
 @agate-labelediconbutton-button-border: 15px;

@@ -23,107 +23,166 @@
 	}
 
 	.applySkins({
-		//max-width: @agate-labelediconbutton-max-width;
-
 		&.labeledIcon {
 			padding-bottom: @agate-labelediconbutton-padding-bottom;
 		}
 
-		&.smallest {
-			max-width: @agate-labelediconbutton-smallest-max-width;
-			min-width: @agate-labelediconbutton-smallest-min-width;
-			//padding-bottom: 0;//to overwrite LabeledIcon styles
+		.opaque {
+			.bg {
+				background-color: @agate-labelediconbutton-opaque-bg-color;
+			}
 
+			.client {
+				color: @agate-labelediconbutton-opaque-color;
+			}
+		}
+
+		.lightOpaque {
+			.bg {
+				background-color: @agate-labelediconbutton-lightopaque-bg-color;
+			}
+
+			.client {
+				color: @agate-labelediconbutton-lightopaque-color;
+			}
+		}
+
+		&.smallest,
+		&.small,
+		&.large,
+		&.huge {
+			&.left,
+			&.right,
+			&.before,
+			&.after {
+				.icon {
+					padding: 0;
+				}
+			}
+		}
+
+		&.smallest {
+			&.above,
+			&.below,
+			&.after,
+			&.right,
+			&.before,
+			&.left {
+				max-width: @agate-labelediconbutton-smallest-max-width;
+				min-width: @agate-labelediconbutton-smallest-min-width;
+			}
 
 			.label {
 				font-size: @agate-labelediconbutton-smallest-label-font-size;
 				line-height: @agate-labelediconbutton-smallest-label-height;
 				height: @agate-labelediconbutton-smallest-label-height;
 			}
+
+			.button {
+				.icon {
+					font-size: @agate-labelediconbutton-smallest-icon-font-size;
+				}
+			}
 		}
 
 		&.small {
-			max-width: @agate-labelediconbutton-small-max-width;
-			min-width: @agate-labelediconbutton-small-min-width;
+			&.above,
+			&.below,
+			&.after,
+			&.right,
+			&.before,
+			&.left {
+				max-width: @agate-labelediconbutton-small-max-width;
+				min-width: @agate-labelediconbutton-small-min-width;
+			}
 
 			.label {
 				font-size: @agate-labelediconbutton-small-label-font-size;
 				line-height: @agate-labelediconbutton-small-label-height;
 				height: @agate-labelediconbutton-small-label-height;
 			}
+
+			.button {
+				.icon {
+					font-size: @agate-labelediconbutton-small-icon-font-size;
+				}
+			}
 		}
 
 		&.large {
-			max-width: @agate-labelediconbutton-large-max-width;
-			min-width: @agate-labelediconbutton-large-min-width;
+			&.above,
+			&.below,
+			&.after,
+			&.right,
+			&.before,
+			&.left {
+				max-width: @agate-labelediconbutton-large-max-width;
+				min-width: @agate-labelediconbutton-large-min-width;
+			}
 
-			.label {
-				font-size: @agate-labelediconbutton-large-label-font-size;
-				line-height: @agate-labelediconbutton-large-label-height;
-				height: @agate-labelediconbutton-large-label-height;
+			.button {
+				.icon {
+					font-size: @agate-labelediconbutton-large-icon-font-size;
+				}
 			}
 		}
 
 		&.huge {
-			max-width: @agate-labelediconbutton-large-max-width;
-			min-width: @agate-labelediconbutton-large-min-width;
+			&.above,
+			&.below,
+			&.after,
+			&.right,
+			&.before,
+			&.left {
+				max-width: @agate-labelediconbutton-huge-max-width;
+				min-width: @agate-labelediconbutton-huge-min-width;
+			}
 
-			.label {
-				font-size: @agate-labelediconbutton-huge-label-font-size;
-				line-height: @agate-labelediconbutton-huge-label-height;
-				height: @agate-labelediconbutton-huge-label-height;
+			.button {
+				.icon {
+					font-size: @agate-labelediconbutton-huge-icon-font-size;
+				}
 			}
 		}
 
-		//label margin top based on labelPosition
 		&.below {
-			&.smallest {
-				.label {
-					margin: @agate-labelediconbutton-below-smallest-label-margin;
-				}
-			}
-
+			&.smallest,
 			&.small {
 				.label {
-					margin: @agate-labelediconbutton-below-small-label-margin;
+					margin-top: @agate-labelediconbutton-small-label-margin;
 				}
 			}
 
 			&.large {
 				.label {
-					margin: @agate-labelediconbutton-below-large-label-margin;
+					margin-top: @agate-labelediconbutton-large-label-margin;
 				}
 			}
 
 			&.huge {
 				.label {
-					margin: @agate-labelediconbutton-below-huge-label-margin;
+					margin-top: @agate-labelediconbutton-huge-label-margin;
 				}
 			}
 		}
 
 		&.above {
-			&.smallest {
-				.label {
-					margin: @agate-labelediconbutton-above-smallest-label-margin;
-				}
-			}
-
+			&.smallest,
 			&.small {
 				.label {
-					margin: @agate-labelediconbutton-above-small-label-margin;
+					margin-bottom: @agate-labelediconbutton-small-label-margin;
 				}
 			}
 
 			&.large {
 				.label {
-					margin: @agate-labelediconbutton-above-large-label-margin;
+					margin-bottom: @agate-labelediconbutton-large-label-margin;
 				}
 			}
 
 			&.huge {
 				.label {
-					margin: @agate-labelediconbutton-above-huge-label-margin;
+					margin-bottom: @agate-labelediconbutton-huge-label-margin;
 				}
 			}
 
@@ -133,53 +192,43 @@
 		}
 
 		&.after, &.right {
-			&.smallest {
-				.label {
-					margin: @agate-labelediconbutton-right-smallest-label-margin;
-				}
-			}
-
+			&.smallest,
 			&.small {
 				.label {
-					margin: @agate-labelediconbutton-right-small-label-margin;
+					margin-left: @agate-labelediconbutton-small-label-margin;
 				}
 			}
 
 			&.large {
 				.label {
-					margin: @agate-labelediconbutton-right-large-label-margin;
+					margin-left: @agate-labelediconbutton-large-label-margin;
 				}
 			}
 
 			&.huge {
 				.label {
-					margin: @agate-labelediconbutton-right-huge-label-margin;
+					margin-left: @agate-labelediconbutton-huge-label-margin;
 				}
 			}
 		}
 
 		&.before, &.left {
-			&.smallest {
-				.label {
-					margin: @agate-labelediconbutton-left-smallest-label-margin;
-				}
-			}
-
+			&.smallest,
 			&.small {
 				.label {
-					margin: @agate-labelediconbutton-left-small-label-margin;
+					margin-right: @agate-labelediconbutton-small-label-margin;
 				}
 			}
 
 			&.large {
 				.label {
-					margin: @agate-labelediconbutton-left-large-label-margin;
+					margin-right: @agate-labelediconbutton-large-label-margin;
 				}
 			}
 
 			&.huge {
 				.label {
-					margin: @agate-labelediconbutton-left-huge-label-margin;
+					margin-right: @agate-labelediconbutton-huge-label-margin;
 				}
 			}
 
@@ -189,9 +238,7 @@
 		}
 
 		.label {
-			margin-top: @agate-labelediconbutton-label-margin;
 			color: @agate-labelediconbutton-label-color;
-			font-size: @agate-labelediconbutton-label-font-size;
 			font-weight: @agate-labelediconbutton-label-font-weight;
 		}
 
@@ -203,6 +250,36 @@
 			}
 		});
 
+		&.selected {
+			.button {
+				outline: 4px solid orange;
+			}
+
+			.label {
+				color: @agate-labelediconbutton-label-selected-color;
+			}
+
+			.opaque {
+				.bg {
+					background-color: @agate-labelediconbutton-opaque-bg-color;
+				}
+
+				.client {
+					color: @agate-labelediconbutton-opaque-color;
+				}
+			}
+
+			.lightOpaque {
+				.bg {
+					background-color: @agate-labelediconbutton-lightopaque-bg-color;
+				}
+
+				.client {
+					color: @agate-labelediconbutton-lightopaque-color;
+				}
+			}
+		};
+
 		.disabled({
 			.vendor-opacity(@agate-disabled-opacity);
 
@@ -212,74 +289,39 @@
 			.disabled({
 				.vendor-opacity(1);
 			}, parent);
+
+			.opaque {
+				.bg {
+					background-color: @agate-labelediconbutton-opaque-bg-color;
+				}
+
+				.client {
+					color: @agate-labelediconbutton-opaque-color;
+				}
+			}
+
+			.lightOpaque {
+				.bg {
+					background-color: @agate-labelediconbutton-lightopaque-bg-color;
+				}
+
+				.client {
+					color: @agate-labelediconbutton-lightopaque-color;
+				}
+			}
 		});
-	});
-}
-
-.labeledIcon {
-	.applySkins({
-		&.smallest {
-			.icon {
-				font-size: @agate-labelediconbutton-smallest-icon-font-size;
-			}
-		}
-		&.small {
-			.icon {
-				font-size: @agate-labelediconbutton-small-icon-font-size;
-			}
-		}
-		&.large {
-			.icon {
-				font-size: @agate-labelediconbutton-large-icon-font-size;
-			}
-		}
-		&.huge {
-			.icon {
-				font-size: @agate-labelediconbutton-huge-icon-font-size;
-			}
-		}
-
-		&.smallest,
-		&.small,
-		&.large,
-		&.huge {
-			&.left, 
-			&.right, 
-			&.before, 
-			&.after {
-				.button {
-					padding: 0;
-				}
-
-				.client .icon {
-					padding: 0;
-				}
-			}
-		}
-
-		.opaque {
-			.bg {
-				background-color: #333333;
-			}
-		}
-
-		.lightOpaque {
-			.bg {
-				background-color: #ffffff;
-			}
-		}
 
 		.button {
-			width: 300px;
-			height: 80px;
-			border: double 4px transparent;
-			border-radius: 80px;
-			//background-image: linear-gradient(white, white), radial-gradient(circle at top left, #f00,#3020ff);
-			background-image: @agate-gradient, radial-gradient(circle at top left, #f00,#3020ff);
-			background-origin: border-box;
-			background-clip: content-box, border-box;
-			//background-clip: padding-box, border-box;
-			padding: 10px;
+			//width: 300px;
+			//height: 80px;
+			//border: double 4px transparent;
+			//border-radius: 80px;
+			////background-image: linear-gradient(white, white), radial-gradient(circle at top left, #f00,#3020ff);
+			//background-image: @agate-gradient, radial-gradient(circle at top left, #f00,#3020ff);
+			//background-origin: border-box;
+			//background-clip: content-box, border-box;
+			////background-clip: padding-box, border-box;
+			//padding: 10px;
 
 
 			//background-clip: padding-box;
@@ -299,19 +341,5 @@
 			//	background: @agate-gradient;
 			//}
 		}
-
-		.focus({
-
-			.label {
-				color: @agate-labelediconbutton-label-focus-color;
-			}
-		});
-
-		.button {
-			&.selected {
-				outline: 4px solid orange;
-
-			}
-		}
-	})
+	});
 }
