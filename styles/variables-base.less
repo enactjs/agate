@@ -409,7 +409,7 @@
 
 // Item
 // ---------------------------------------
-@agate-item-border-width:             inherit;
+@agate-item-border-width:             0;
 @agate-item-content-width:            60%;
 @agate-item-centered-inline-max-width: @agate-item-inline-min-width;
 @agate-item-font-size:                30px;
@@ -435,7 +435,7 @@
 @agate-item-vertical-padding:         3px;
 @agate-item-slotafter-padding-right:  @agate-item-side-outset + @agate-icon-size / 2 + 16px;
 @agate-item-slotbefore-padding-left:  @agate-item-side-outset + @agate-icon-size / 2 + 16px;
-@agate-item-small-haslabel-height:    84px;
+@agate-item-small-haslabel-height:    @agate-item-height - (@agate-item-border-width * 2);
 @agate-item-small-font-size:          inherit;
 @agate-item-small-height:             48px;
 @agate-item-small-itemcontent-line-height: inherit;
