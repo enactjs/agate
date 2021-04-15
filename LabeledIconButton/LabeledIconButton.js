@@ -167,7 +167,7 @@ const LabeledIconButtonBase = kind({
 		 * @type {Number}
 		 * @public
 		 */
-		spriteCount: PropTypes.number,
+		spriteCount: PropTypes.number
 		// TODO: spriteCount prop bleeds!  Is this cruft?
 	},
 
