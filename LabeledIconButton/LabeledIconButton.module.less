@@ -257,56 +257,61 @@
 			}
 		}
 
-		//.opaque {
-		//	.bg {
-		//		background-color: #333333;
-		//	}
-		//}
-		//
-		//.lightOpaque {
-		//	.bg {
-		//		background-color: #ffffff;
-		//	}
-		//}
-		//
-		//.button {
-		//	//background-image: @silicon-gradient;
-		//
-		//	border: 20px double pink !important;
-		//	border-image: -webkit-linear-gradient(45deg,orange,yellow) 20 stretch !important;
-		//}
-		//
-		//.button {
-		//	position: relative;
-		//	border: 4px solid transparent;
-		//	border-radius: 16px;
-		//	background: linear-gradient(orange, violet);
-		//	background-clip: padding-box;
-		//	padding: 10px;
-		//	/* just to show box-shadow still works fine */
-		//	box-shadow: 0 3px 9px black, inset 0 0 9px white;
-		//}
-		//.button::after {
-		//	position: absolute;
-		//	top: -4px; bottom: -4px;
-		//	left: -4px; right: -4px;
-		//	background: linear-gradient(red, blue);
-		//	content: '';
-		//	z-index: -1;
-		//	border-radius: 16px;
-		//}
-		//
-		//.focus({
-		//	//.button {
-		//	//	//background-image: @silicon-gradient;
-		//	//
-		//	//	border: 20px double pink !important;
-		//	//	border-image: -webkit-linear-gradient(45deg,orange,yellow) 20 stretch !important;
-		//	//}
-		//
-		//	.label {
-		//		color: @agate-labelediconbutton-label-focus-color;
-		//	}
-		//});
+		.opaque {
+			.bg {
+				background-color: #333333;
+			}
+		}
+
+		.lightOpaque {
+			.bg {
+				background-color: #ffffff;
+			}
+		}
+
+		.button {
+			width: 300px;
+			height: 80px;
+			border: double 4px transparent;
+			border-radius: 80px;
+			//background-image: linear-gradient(white, white), radial-gradient(circle at top left, #f00,#3020ff);
+			background-image: @agate-gradient, radial-gradient(circle at top left, #f00,#3020ff);
+			background-origin: border-box;
+			background-clip: content-box, border-box;
+			//background-clip: padding-box, border-box;
+			padding: 10px;
+
+
+			//background-clip: padding-box;
+			//border: solid @agate-labelediconbutton-button-border transparent;
+			//border-radius: 1em;
+			//
+			//&:before {
+			//	content: '';
+			//	position: absolute;
+			//	top: 0;
+			//	right: 0;
+			//	bottom: 0;
+			//	left: 0;
+			//	z-index: -1;
+			//	margin: -@agate-labelediconbutton-button-border;
+			//	border-radius: inherit;
+			//	background: @agate-gradient;
+			//}
+		}
+
+		.focus({
+
+			.label {
+				color: @agate-labelediconbutton-label-focus-color;
+			}
+		});
+
+		.button {
+			&.selected {
+				outline: 4px solid orange;
+
+			}
+		}
 	})
 }
