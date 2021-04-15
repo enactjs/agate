@@ -47,6 +47,18 @@
 			}
 		}
 
+		.button {
+			&:before {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				z-index: -1;
+				border-radius: @agate-button-icon-border-radius;
+			}
+		}
+
 		&.smallest,
 		&.small,
 		&.large,
@@ -82,6 +94,10 @@
 				.icon {
 					font-size: @agate-labelediconbutton-smallest-icon-font-size;
 				}
+
+				&:before {
+					margin: @agate-labelediconbutton-before-small-margin;
+				}
 			}
 		}
 
@@ -106,6 +122,10 @@
 				.icon {
 					font-size: @agate-labelediconbutton-small-icon-font-size;
 				}
+
+				&:before {
+					margin: @agate-labelediconbutton-before-small-margin;
+				}
 			}
 		}
 
@@ -124,6 +144,10 @@
 				.icon {
 					font-size: @agate-labelediconbutton-large-icon-font-size;
 				}
+
+				&:before {
+					margin: @agate-labelediconbutton-before-large-margin;
+				}
 			}
 		}
 
@@ -141,6 +165,10 @@
 			.button {
 				.icon {
 					font-size: @agate-labelediconbutton-huge-icon-font-size;
+				}
+
+				&:before {
+					margin: @agate-labelediconbutton-before-huge-margin;
 				}
 			}
 		}
@@ -261,14 +289,16 @@
 			.button {
 				&:before {
 					content: @agate-labelediconbutton-before-content;
-					position: absolute;
-					top: 0;
-					right: 0;
-					bottom: 0;
-					left: 0;
-					z-index: -1;
-					border-radius: @agate-button-icon-border-radius;
 					background: @agate-gradient;
+				}
+			}
+		});
+
+		&.selected {
+			.button {
+				&:before {
+					content: @agate-labelediconbutton-before-content;
+					background: transparent;
 				}
 			}
 
@@ -276,31 +306,18 @@
 			&.small {
 				.button {
 					&:before {
-						margin: @agate-labelediconbutton-before-small-margin;
+						border: 6px solid @agate-accent;
 					}
 				}
 			}
 
-			&.large {
-				.button {
-					&:before {
-						margin: @agate-labelediconbutton-before-large-margin;
-					}
-				}
-			}
-
+			&.large,
 			&.huge {
 				.button {
 					&:before {
-						margin: @agate-labelediconbutton-before-huge-margin;
+						border: 6px solid @agate-accent;
 					}
 				}
-			}
-		});
-
-		&.selected {
-			.button {
-				outline: 4px solid orange;
 			}
 
 			.label {
