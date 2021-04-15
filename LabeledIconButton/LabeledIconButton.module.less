@@ -257,6 +257,45 @@
 			.label {
 				color: @agate-labelediconbutton-label-focus-color;
 			}
+
+			.button {
+				&:before {
+					content: @agate-labelediconbutton-before-content;
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left: 0;
+					z-index: -1;
+					border-radius: @agate-button-icon-border-radius;
+					background: @agate-gradient;
+				}
+			}
+
+			&.smallest,
+			&.small {
+				.button {
+					&:before {
+						margin: @agate-labelediconbutton-before-small-margin;
+					}
+				}
+			}
+
+			&.large {
+				.button {
+					&:before {
+						margin: @agate-labelediconbutton-before-large-margin;
+					}
+				}
+			}
+
+			&.huge {
+				.button {
+					&:before {
+						margin: @agate-labelediconbutton-before-huge-margin;
+					}
+				}
+			}
 		});
 
 		&.selected {
@@ -319,36 +358,5 @@
 				}
 			}
 		});
-
-		.button {
-			//width: 300px;
-			//height: 80px;
-			//border: double 4px transparent;
-			//border-radius: 80px;
-			////background-image: linear-gradient(white, white), radial-gradient(circle at top left, #f00,#3020ff);
-			//background-image: @agate-gradient, radial-gradient(circle at top left, #f00,#3020ff);
-			//background-origin: border-box;
-			//background-clip: content-box, border-box;
-			////background-clip: padding-box, border-box;
-			//padding: 10px;
-
-
-			//background-clip: padding-box;
-			//border: solid @agate-labelediconbutton-button-border transparent;
-			//border-radius: 1em;
-			//
-			//&:before {
-			//	content: '';
-			//	position: absolute;
-			//	top: 0;
-			//	right: 0;
-			//	bottom: 0;
-			//	left: 0;
-			//	z-index: -1;
-			//	margin: -@agate-labelediconbutton-button-border;
-			//	border-radius: inherit;
-			//	background: @agate-gradient;
-			//}
-		}
 	});
 }
