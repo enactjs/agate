@@ -306,7 +306,7 @@
 			&.small {
 				.button {
 					&:before {
-						border: 6px solid @agate-accent;
+						border: @agate-labelediconbutton-small-selected-before-border-width solid @agate-accent;
 					}
 				}
 			}
@@ -315,10 +315,18 @@
 			&.huge {
 				.button {
 					&:before {
-						border: 6px solid @agate-accent;
+						border: @agate-labelediconbutton-large-selected-before-border-width solid @agate-accent;
 					}
 				}
 			}
+
+			.focus({
+				.button {
+					&:before {
+						border-width: 0;
+					}
+				}
+			});
 
 			.label {
 				color: @agate-labelediconbutton-label-selected-color;
