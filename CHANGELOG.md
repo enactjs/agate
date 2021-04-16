@@ -4,10 +4,16 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Added
+
+- `agate/ImageItem` prop `sizing` to support image sizing
+- `agate/Drawer` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
+
 ### Fixed
 
 - `agate/Checkbox` style to match latest design for Silicon skin
-- `agate/Drawer` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
+- `agate/FanSpeedControl` style to match latest design for Silicon skin
+- `agate/ImageItem` style to match latest design for Silicon skin
 - `agate/Item` to match the latest design for Silicon skin
 - `agate/WindDirectionControl` style to match latest design for Silicon skin
 
