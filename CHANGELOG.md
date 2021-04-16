@@ -15,6 +15,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/FanSpeedControl` style to match latest design for Silicon skin
 - `agate/ImageItem` style to match latest design for Silicon skin
 - `agate/Item` to match the latest design for Silicon skin
+- `agate/Item` for inline with label and labelPosition "after" or "before" on Gallium skin to not change item width on hover
 
 ## [2.0.0-alpha.2] - 2021-04-02
 
