@@ -154,14 +154,6 @@ const LabeledIconButtonBase = kind({
 		size: PropTypes.oneOf(['smallest', 'small', 'large', 'huge']),
 
 		/**
-		 * The current skin for this component.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		skin: PropTypes.string,
-
-		/**
 		 * The amount of sprite "cells" in the src image.
 		 *
 		 * @type {Number}
@@ -182,13 +174,7 @@ const LabeledIconButtonBase = kind({
 	},
 
 	computed: {
-		className: ({labelPosition, selected, size, styler, children}) =>
-			styler.append(
-				{selected},
-				size,
-				!children[0] && 'noChildren'
-				// skin !== 'silicon' && (labelPosition === 'above' || labelPosition === 'below') ? '' : size
-			)
+		className: ({selected, size, styler}) => styler.append({selected}, size)
 	},
 
 	render: ({
@@ -243,7 +229,7 @@ const LabeledIconButtonDecorator = compose(
 	UiLabeledIconDecorator,
 	TooltipDecorator,
 	Spottable,
-	Skinnable({prop: 'skin'})
+	Skinnable
 );
 
 /**
