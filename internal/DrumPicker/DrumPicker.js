@@ -566,6 +566,8 @@ const DrumPickerBase = class extends Component {
 				itemWidth = 1;
 			}
 
+			this.contentRef.style.transition = 'transform 300ms';
+
 			if (orientation === 'horizontal' && isLeft(keyCode)) {
 				ev.stopPropagation();
 				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollX / itemWidth - 1) : clamp(0, this.props.children.length - 1, this.scrollX / itemWidth - 1));
@@ -579,6 +581,11 @@ const DrumPickerBase = class extends Component {
 				ev.stopPropagation();
 				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollY / itemHeight + 1) : clamp(0, this.props.children.length - 1, this.scrollY / itemHeight + 1));
 			}
+
+			// remove transition for further touch related changes
+			setTimeout(() => {
+				this.contentRef.style.transition = 'none';
+			}, 300);
 		}
 	};
 
