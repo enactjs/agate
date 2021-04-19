@@ -4,6 +4,8 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import ri from '@enact/ui/resolution';
 import Image, {ImageBase, ImageDecorator} from '@enact/agate/Image';
 
+import css from './Image.module.less';
+
 const src = {
 	'hd':  'http://via.placeholder.com/200x200',
 	'fhd': 'http://via.placeholder.com/300x300',
@@ -20,6 +22,7 @@ export default {
 
 export const _Image = () => (
 	<Image
+		className={css.image}
 		onError={action('onError')}
 		onLoad={action('onLoad')}
 		sizing={select('sizing', ['fill', 'fit', 'none'], Config, 'fill')}
