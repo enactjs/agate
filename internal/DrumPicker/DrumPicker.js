@@ -10,12 +10,13 @@
  */
 
 import classnames from 'classnames';
-import {forward} from '@enact/core/handle';
+import {forEventProp, forward, handle, oneOf} from '@enact/core/handle';
 import {is} from '@enact/core/keymap';
 import {clamp} from '@enact/core/util';
 import Spottable from '@enact/spotlight/Spottable';
 import IdProvider from '@enact/ui/internal/IdProvider';
 import ri from '@enact/ui/resolution';
+import Touchable from "@enact/ui/Touchable";
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import {Component} from 'react';
@@ -23,11 +24,10 @@ import ReactDOM from 'react-dom';
 
 import $L from '../$L';
 import Skinnable from '../../Skinnable';
-;
 
 import css from './DrumPicker.module.less';
 
-const Div = Spottable('div');
+const Div = Touchable(Spottable('div'));
 
 // Set-up event forwarding
 const forwardKeyDown = forward('onKeyDown');
@@ -604,13 +604,30 @@ const DrumPickerBase = class extends Component {
 				itemWidth = 1;
 			}
 
+			this.contentRef.style.transition = 'transform 300ms';
+
 			if (orientation === 'horizontal') {
 				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollX / itemWidth + direction) : clamp(0, this.props.children.length - 1, this.scrollX / itemWidth + direction));
 			} else if (orientation === 'vertical') {
 				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollY / itemHeight + direction) : clamp(0, this.props.children.length - 1, this.scrollY / itemHeight + direction));
 			}
+			// remove transition for further touch related changes
+			setTimeout(() => {
+				this.contentRef.style.transition = 'none';
+			}, 300);
 		}
 	};
+
+	handle = handle.bind(this);
+
+	handleFlick = this.handle(
+			forEventProp('direction', 'vertical'),
+			// ignore "slow" flicks by filtering out velocity below a threshold
+			oneOf(
+				[({velocityY}) => velocityY < 0, this.handleIncrement],
+				[({velocityY}) => velocityY > 0, this.handleDecrement]
+			)
+		);
 
 	valueId =  (id) => `${id}_value`;
 
@@ -715,6 +732,7 @@ const DrumPickerBase = class extends Component {
 				{...rest}
 				className={classnames(className, css.drumPicker, css[orientation])}
 				disabled={disabled}
+				onFlick={this.handleFlick}
 				onKeyDown={this.handleKeyDown}
 				onMouseDown={(evt) => this.onStart(evt)}
 				onMouseLeave={this.onFinish}
