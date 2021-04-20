@@ -12,6 +12,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/Checkbox` style to match latest design for Silicon skin
+- `agate/Dropdown` misalignment of `Button` and `ContextualPopup` on the edge of screen
 - `agate/FanSpeedControl` style to match latest design for Silicon skin
 - `agate/ImageItem` style to match latest design for Silicon skin
 - `agate/Item` to match the latest design for Silicon skin
