@@ -1,7 +1,7 @@
 const Page = require('./FanSpeedControlPage');
 const accentColor = 'rgb(139,126,254)'; // selected and focused
-const selectedColor = 'rgb(68,68,68)';
-const unselectedColor = 'rgb(238,238,238)';
+const selectedColor = 'rgb(0,0,0)';
+const unselectedColor = 'rgb(136,136,136)';
 
 describe('FanSpeedControl', function () {
 	beforeEach(function () {
