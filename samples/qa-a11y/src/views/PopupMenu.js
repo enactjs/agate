@@ -1,7 +1,6 @@
 import BodyText from '@enact/agate/BodyText';
 import Button from '@enact/agate/Button';
 import PopupMenu from '@enact/agate/PopupMenu';
-import React from 'react';
 
 import Section from '../components/Section';
 import useBoolArray from '../components/useBoolArray';

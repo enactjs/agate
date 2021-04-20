@@ -27,6 +27,10 @@ class IncrementSliderInterface {
 		return $(this.selector + ' .IncrementSlider_IncrementSlider_incrementButton');
 	}
 
+	get tooltip () {
+		return $(this.selector + ' .ProgressBar_ProgressBarTooltip_tooltip');
+	}
+
 	get knobPositionHorizontal () {
 		return parseInt(this.knob.getCSSProperty('left').value);
 	}
@@ -47,9 +51,10 @@ class IncrementSliderPage extends Page {
 		const incrementSliderDefault = new IncrementSliderInterface('incrementSliderDefault');
 		const incrementSliderDisabled = new IncrementSliderInterface('incrementSliderDisabled');
 		const incrementSliderCustomProgressAnchor = new IncrementSliderInterface('incrementSliderCustomProgressAnchor');
+		const incrementSliderWithTooltip = new IncrementSliderInterface('incrementSliderWithTooltip');
 		const incrementSliderVertical = new IncrementSliderInterface('incrementSliderVertical');
 		const incrementSliderVerticalDisabled = new IncrementSliderInterface('incrementSliderVerticalDisabled');
-		this.components = {incrementSliderDefault, incrementSliderDisabled, incrementSliderCustomProgressAnchor, incrementSliderVertical, incrementSliderVerticalDisabled};
+		this.components = {incrementSliderDefault, incrementSliderDisabled, incrementSliderCustomProgressAnchor, incrementSliderWithTooltip, incrementSliderVertical, incrementSliderVerticalDisabled};
 	}
 
 	open (urlExtra) {

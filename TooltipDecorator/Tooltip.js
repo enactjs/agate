@@ -1,6 +1,6 @@
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import Skinnable from '../Skinnable';
 
@@ -42,6 +42,20 @@ const TooltipBase = kind({
 		arrowAnchor: PropTypes.oneOf(['left', 'center', 'right', 'top', 'middle', 'bottom']),
 
 		/**
+		 * Customizes the component by mapping the supplied collection of CSS class names to the
+		 * corresponding internal elements and states of this component.
+		 *
+		 * The following classes are supported:
+		 *
+		 * * `tooltip` - The root component class
+		 * * `tooltipLabel` - Applied the label node
+		 *
+		 * @type {Object}
+		 * @public
+		 */
+		css: PropTypes.object,
+
+		/**
 		 * Direction of label in relation to the activator.
 		 *
 		 * @type {('above'|'below'|'left'|'right')}
@@ -54,7 +68,7 @@ const TooltipBase = kind({
 		 * A value representing the amount to offset the label portion of the tooltip.
 		 *
 		 * In a "center" aligned tooltip, the label may be desirable to offset to one side or the
-		 * other. This prop accepts a value betwen -0.5 and 0.5 (representing 50% to the left or
+		 * other. This prop accepts a value between -0.5 and 0.5 (representing 50% to the left or
 		 * right). This defaults to 0 offset (centered). It also automatically caps the value so it
 		 * never positions the tooltip label past the anchored arrow. If the tooltip label or arrow
 		 * has non-rectangular geometry (rounded corners, a wide tail, etc), you'll need to manually
@@ -65,6 +79,17 @@ const TooltipBase = kind({
 		 * @public
 		 */
 		labelOffset: PropTypes.number,
+
+		/**
+		 * Allows the tooltip to marquee.
+		 *
+		 * Specifying a [`width`]{@link agate/TooltipDecorator.TooltipBase#width} restricts
+		 * the marquee to that size.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		marquee: PropTypes.bool,
 
 		/**
 		 * Style object for tooltip position.
@@ -94,21 +119,27 @@ const TooltipBase = kind({
 		/**
 		 * Called when the tooltip mounts/unmounts, giving a reference to the DOM.
 		 *
-		 * @type {Function}
+		 * @type {Object|Function}
 		 * @public
 		 */
-		tooltipRef: PropTypes.func,
+		tooltipRef: EnactPropTypes.ref,
 
 		/**
-		 * The width of tooltip content in pixels (px).
+		 * The width of tooltip content.
 		 *
-		 * If the content goes over the given width, then it will automatically wrap. When `null`,
-		 * content does not wrap.
+		 * Value expects a number of pixels, which will be automatically scaled to the appropriate
+		 * size given the current screen resolution, or a string value containing a measurement and
+		 * a valid CSS unit included.
+		 * If the content goes over the given width, it will automatically wrap, or marquee if
+		 * `marquee` is enabled.
 		 *
-		 * @type {Number|null}
+		 * When `null`, content will auto-size and not wrap. If `marquee` is also enabled,
+		 * marqueeing will begin when the width is greater than the default (theme specified) width.
+		 *
+		 * @type {Number|String}
 		 * @public
 		 */
-		width: PropTypes.number
+		width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 	},
 
 	defaultProps: {
@@ -138,8 +169,7 @@ const TooltipBase = kind({
 		}
 	},
 
-	render: ({children, tooltipRef, width, labelOffset, ...rest}) => {
-		delete rest.arrowAnchor;
+	render: ({arrowAnchor, children, tooltipRef, width, labelOffset, marquee, ...rest}) => {
 		delete rest.labelOffset;
 		delete rest.direction;
 		delete rest.position;
@@ -149,7 +179,7 @@ const TooltipBase = kind({
 			<div {...rest}>
 				<div className={css.tooltipAnchor} ref={tooltipRef} >
 					<div className={css.tooltipArrow} />
-					<TooltipLabel width={width} style={labelOffset}>
+					<TooltipLabel className={css.tooltipLabel} centered={arrowAnchor === 'center'} marquee={marquee} width={width} style={labelOffset}>
 						{children}
 					</TooltipLabel>
 				</div>

@@ -2,7 +2,7 @@
  * Agate styled fan speed control components and behaviors.
  *
  * @example
- * <FanSpeedControl icon="fan" max={5} min={1} />
+ * <FanSpeedControl max={5} min={1} />
  *
  * @module agate/FanSpeedControl
  * @exports FanSpeedControl
@@ -15,7 +15,6 @@ import {extractAriaProps} from '@enact/core/util';
 import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
 import {compose, range} from 'ramda';
-import React from 'react';
 
 import ArcPicker from '../ArcPicker';
 import Icon from '../Icon';
@@ -70,6 +69,7 @@ const FanSpeedControlBase = kind({
 		 * FanSpeedControl icon.
 		 *
 		 * @type {String}
+		 * @default 'fan'
 		 * @public
 		 */
 		icon: PropTypes.string,
@@ -102,6 +102,7 @@ const FanSpeedControlBase = kind({
 	},
 
 	defaultProps: {
+		icon: 'fan',
 		max: 10,
 		min: 1,
 		value: 1
@@ -164,7 +165,6 @@ const FanSpeedControlDecorator = compose(
  * Usage:
  * ```
  * <FanSpeedControl
- *   icon="fan"
  *   max={10}
  *   min={1}
  *   value={4}

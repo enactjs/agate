@@ -1,5 +1,4 @@
 import Item from '../../../../Item';
-import React from 'react';
 import Icon from '../../../../Icon';
 
 const slotBeforeIcon = <Icon>circlelarge</Icon>;
@@ -39,6 +38,13 @@ const ItemTests = [
 	<Item inline slotAfter={slotAfterIcon}>Hello Item</Item>,
 	<Item selected slotAfter={slotAfterIcon}>Hello Item</Item>,
 	<Item inline selected slotAfter={slotAfterIcon}>Hello Item</Item>,
+
+	// Centered slotBefore and slotAfter
+	<Item centered slotBefore={slotBeforeIcon} slotAfter={slotAfterIcon}>Hello Item</Item>,
+	<Item centered label="label below" labelPosition="below" slotBefore={slotBeforeIcon} slotAfter={slotAfterIcon}>Hello Item</Item>,
+	<Item centered label="label above" labelPosition="above" slotBefore={slotBeforeIcon} slotAfter={slotAfterIcon}>Hello Item</Item>,
+	<Item centered label="label before" labelPosition="before" slotBefore={slotBeforeIcon} slotAfter={slotAfterIcon}>Hello Item</Item>,
+	<Item centered label="label after" labelPosition="after" slotBefore={slotBeforeIcon} slotAfter={slotAfterIcon}>Hello Item</Item>,
 
 	// *************************************************************
 	// locale = 'ar-SA'

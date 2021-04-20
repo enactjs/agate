@@ -20,7 +20,7 @@ import ComponentOverride from '@enact/ui/ComponentOverride';
 import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
+import {Children, Fragment} from 'react';
 import warning from 'warning';
 
 import Icon from '../Icon';
@@ -253,10 +253,10 @@ const ButtonBase = kind({
 		decoration: ({badge, css, decoration}) => {
 			if (!badge) return decoration;
 			return (
-				<React.Fragment>
+				<Fragment>
 					<div className={css.badge}>{badge}</div>
 					{decoration}
-				</React.Fragment>
+				</Fragment>
 			);
 		},
 		iconComponent: ({iconComponent, spriteCount}) => {
@@ -313,7 +313,7 @@ const IconButtonDecorator = hoc((config, Wrapped) => {
 		name: 'IconButtonDecorator',
 
 		computed: {
-			iconOnly: ({children}) => (React.Children.toArray(children).filter(Boolean).length === 0)
+			iconOnly: ({children}) => (Children.toArray(children).filter(Boolean).length === 0)
 		},
 
 		render: (props) => {

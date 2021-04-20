@@ -19,7 +19,6 @@ import {ImageItem as UiImageItem} from '@enact/ui/ImageItem';
 import {MarqueeDecorator, MarqueeController} from '@enact/ui/Marquee';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import ImageBase from '../Image';
 import Skinnable from '../Skinnable';
@@ -43,7 +42,7 @@ const ImageItemBase = kind({
 	propTypes: /** @lends agate/ImageItem.ImageItemBase.prototype */ {
 		/**
 		 * Sets the position for caption.
-		 * Available positions: 'below' (default) and 'overlay'.
+		 * This props is only valid when `orientation` is `vertical`.
 		 *
 		 * @type {('below'|'overlay')}
 		 * @default 'below'
@@ -94,6 +93,23 @@ const ImageItemBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
+		 * Used to set the `background-size` of the image.
+		 *
+		 * @type {String}
+		 * @default 'fill'
+		 * @public
+		 */
+		sizing: PropTypes.oneOf(['fit', 'fill', 'none']),
+
+		/**
+		 * The current skin.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		skin: PropTypes.string,
+
+		/**
 		 * String value or Object of values used to determine which image will appear on a specific
 		 * screenSize.
 		 *
@@ -104,8 +120,9 @@ const ImageItemBase = kind({
 	},
 
 	defaultProps: {
+		captionPosition: 'below',
 		orientation: 'vertical',
-		captionPosition: 'below'
+		sizing: 'fill'
 	},
 
 	styles: {
@@ -114,14 +131,12 @@ const ImageItemBase = kind({
 	},
 
 	computed: {
-		className: ({captionPosition, styler}) => styler.append({
-			captionOverlay: captionPosition === 'overlay'
-		})
+		className: ({captionPosition, styler, sizing}) => styler.append({captionOverlay: captionPosition === 'overlay'}, sizing)
 	},
 
-	render: ({captionPosition, children, css, disabled, src, ...rest}) => {
-		const [Component, marqueeProps] = (children && (captionPosition === 'below')) ? [MarqueeImageItem, {
-			alignment: 'center'
+	render: ({captionPosition, children, css, disabled, orientation, skin, src, ...rest}) => {
+		const [Component, marqueeProps] = (children && (orientation === 'horizontal' || captionPosition === 'below')) ? [MarqueeImageItem, {
+			alignment: skin === 'silicon' && orientation === 'horizontal' ? 'left' : 'center'
 		}] : [UiImageItem, null];
 
 		return (
@@ -132,6 +147,7 @@ const ImageItemBase = kind({
 				css={css}
 				disabled={disabled}
 				imageComponent={ImageBase}
+				orientation={orientation}
 				src={src}
 			>
 				{children}
@@ -152,7 +168,7 @@ const ImageItemBase = kind({
  */
 const ImageItemDecorator = compose(
 	MarqueeController({marqueeOnFocus: true}),
-	Skinnable,
+	Skinnable({prop: 'skin'}),
 	Spottable
 );
 

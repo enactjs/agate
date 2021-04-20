@@ -4,11 +4,11 @@ import CheckboxItem from '@enact/agate/CheckboxItem';
 import Header from '@enact/agate/Header';
 import Scroller from '@enact/agate/Scroller';
 import ri from '@enact/ui/resolution';
-import React from 'react';
+import {useState} from 'react';
 
 const ScrollerView = () => {
-	const [native, setNative] = React.useState(true);
-	const [customAriaLabel, setCustomAriaLabel] = React.useState(false);
+	const [native, setNative] = useState(true);
+	const [customAriaLabel, setCustomAriaLabel] = useState(false);
 	const scrollMode = native ? 'native' : 'translate';
 
 	const handleChangeJSNativeButton = () => setNative(!native);

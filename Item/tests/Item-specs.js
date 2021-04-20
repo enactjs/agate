@@ -1,5 +1,4 @@
 import {mount, shallow} from 'enzyme';
-import React from 'react';
 
 import {Item, ItemBase} from '../Item';
 
@@ -65,7 +64,7 @@ describe('Item Specs', () => {
 			</Item>
 		);
 
-		const actual = item.find(`.${css.slotBefore}`).first().text();
+		const actual = item.find(`.${css.slotBefore}`).last().text();
 
 		expect(actual).toBe(expected);
 	});
@@ -79,7 +78,7 @@ describe('Item Specs', () => {
 			</Item>
 		);
 
-		const actual = item.find(`.${css.slotAfter}`).first().text();
+		const actual = item.find(`.${css.slotAfter}`).last().text();
 
 		expect(actual).toBe(expected);
 	});

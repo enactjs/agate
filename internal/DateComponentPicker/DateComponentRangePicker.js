@@ -1,7 +1,6 @@
 import kind from '@enact/core/kind';
 import Changeable from '@enact/ui/Changeable';
 import PropTypes from 'prop-types';
-import React from 'react';
 
 import {RangePickerBase} from '../../RangePicker';
 

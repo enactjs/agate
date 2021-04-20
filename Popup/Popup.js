@@ -17,7 +17,6 @@ import Slottable from '@enact/ui/Slottable';
 import Transition from '@enact/ui/Transition';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import React from 'react';
 
 import Button from '../Button';
 import Heading from '../Heading';
@@ -26,7 +25,6 @@ import Skinnable from '../Skinnable';
 import PopupState from './PopupState';
 
 import componentCss from './Popup.module.less';
-
 
 const TransitionContainer = SpotlightContainerDecorator(
 	{enterTo: 'default-element', preserveId: true},
@@ -51,8 +49,20 @@ const transitionDirection = {
  * @public
  */
 const PopupBase = kind({
-	name: 'Popup',
+	name: 'PopupBase',
+
 	propTypes: /** @lends agate/Popup.PopupBase.prototype */ {
+		/**
+		 * Set the priority with which screen reader should treat updates to live regions for the Popup.
+		 *
+		 * @type {String|Object}
+		 * @public
+		 */
+		'aria-live': PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.object
+		]),
+
 		/**
 		 * Buttons to be included within the Popup component.
 		 *
@@ -116,6 +126,17 @@ const PopupBase = kind({
 		duration: PropTypes.string,
 
 		/**
+		 * Support accessibility options.
+		 *
+		 * If true, the aria-live and role in Popup are `null`.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @private
+		 */
+		noAlertRole: PropTypes.bool,
+
+		/**
 		 * Disables transition animation.
 		 *
 		 * @type {Boolean}
@@ -141,6 +162,14 @@ const PopupBase = kind({
 		onHide: PropTypes.func,
 
 		/**
+		 * Called after the popup's "show" transition finishes.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onShow: PropTypes.func,
+
+		/**
 		 * Controls the visibility of the Popup.
 		 *
 		 * By default, the Popup and its contents are not rendered until `open`.
@@ -161,12 +190,46 @@ const PopupBase = kind({
 		position: PropTypes.oneOf(['bottom', 'center', 'fullscreen', 'left', 'right', 'top']),
 
 		/**
+		 * The ARIA role for the Popup.
+		 *
+		 * @type {String|Object}
+		 * @public
+		 */
+		role: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.object
+		]),
+
+		/**
 		 * The current skin.
 		 *
 		 * @type {String}
 		 * @private
 		 */
 		skin: PropTypes.string,
+
+		/**
+		 * The container id for {@link spotlight/Spotlight}.
+		 *
+		 * @type {String}
+		 * @default null
+		 * @public
+		 */
+		spotlightId: PropTypes.string,
+
+		/**
+		 * Restricts or prioritizes navigation when focus attempts to leave the popup.
+		 *
+		 * It can be either `'none'`, `'self-first'`, or `'self-only'`.
+		 *
+		 * Note: The ready-to-use [Popup]{@link agate/Popup.Popup} component only supports
+		 * `'self-first'` and `'self-only'`.
+		 *
+		 * @type {('none'|'self-first'|'self-only')}
+		 * @default 'self-only'
+		 * @public
+		 */
+		spotlightRestrict: PropTypes.oneOf(['none', 'self-first', 'self-only']),
 
 		/**
 		 * The primary text of the popup.
@@ -190,9 +253,11 @@ const PopupBase = kind({
 		centered: false,
 		closeButton: false,
 		duration: 'short',
+		noAlertRole: false,
 		noAnimation: false,
 		open: false,
-		position: 'center'
+		position: 'center',
+		spotlightRestrict: 'self-only'
 	},
 	styles: {
 		css: componentCss,
@@ -200,40 +265,53 @@ const PopupBase = kind({
 		publicClassNames: ['popup', 'body', 'popupTransitionContainer', 'top', 'right', 'bottom', 'left']
 	},
 	computed: {
+		// When passing `aria-live` prop to the Popup, the prop should work first.
+		// If `noAlertRole` is true, alert role and aria-live will be removed. Contents of the popup won't be read automatically when opened.
+		// Otherwise, `aria-live` will be usually `off`.
+		'aria-live': ({'aria-live': live, noAlertRole}) => ((typeof live !== 'undefined') ? live : (!noAlertRole && 'off' || null)),
 		className: ({centered, closeButton, position, styler, title}) => styler.append(position, {withCloseButton: closeButton, withTitle: title, centered}),
+		direction: ({position}) => transitionDirection[position],
+		// When passing `role` prop to the Popup, the prop should work first.
+		// If `noAlertRole` is true, alert role and aria-live will be removed. Contents of the popup won't be read automatically when opened.
+		// Otherwise, `role` will be usually `alert`.
+		role: ({noAlertRole, role}) => ((typeof role !== 'undefined') ? role : (!noAlertRole && 'alert' || null)),
+		transitionContainerClassName: ({css, position, styler}) => styler.join(css.popupTransitionContainer, position),
 		transitionType: ({position, type}) => {
 			const setTransitionType = position === 'center' ? 'fade' : 'slide';
 
 			return type ? type : setTransitionType;
-		},
-		direction: ({position}) => transitionDirection[position]
+		}
 	},
-	render: ({buttons, children, closeButton, css, direction, duration, noAnimation, onClose, onHide, open, skin, title, transitionType, ...rest}) => {
+	render: ({buttons, children, closeButton, css, direction, duration, noAnimation, onClose, onHide, onShow, open, skin, spotlightId, spotlightRestrict, title, transitionContainerClassName, transitionType, ...rest}) => {
 		const wideLayout = (skin === 'carbon');
 		delete rest.centered;
+		delete rest.noAlertRole;
 
 		return (
 			<TransitionContainer
-				noAnimation={noAnimation}
-				visible={open}
+				className={transitionContainerClassName}
+				css={css}
 				direction={direction}
 				duration={duration}
-				type={transitionType}
-				className={css.popupTransitionContainer}
+				noAnimation={noAnimation}
 				onHide={onHide}
-				css={css}
+				onShow={onShow}
+				spotlightId={spotlightId}
+				spotlightRestrict={spotlightRestrict}
+				type={transitionType}
+				visible={open}
 			>
 				<div
 					role="alert"
 					{...rest}
 				>
 					{closeButton ? <Button
+						className={componentCss.closeButton}
 						icon="closex"
 						onTap={onClose}
-						className={componentCss.closeButton}
 						size="small"
 					/> : null}
-					{title ? <Heading className={css.title}>{title}</Heading> : null}
+					{title ? <Heading className={css.title} marqueeDisabled>{title}</Heading> : null}
 					<Layout orientation={wideLayout ? 'horizontal' : 'vertical'} className={css.body}>
 						<Cell shrink={!wideLayout} className={css.content}>
 							{children}

@@ -29,10 +29,14 @@
 @silicon-dark-two: #2a2742;
 @silicon-light-gray: #f2f2f2;
 @silicon-gray: #eeeeee;
+@silicon-darker-gray: #808080;
+@silicon-charcoal: #444444;
 @silicon-dark-gray: #777777;
 @silicon-night-rider-gray: #333333;
 @silicon-very-light-gray: #cccccc;
-@silicon-gradient: linear-gradient(to right, @silicon-vibrant-purple, @silicon-magenta, @silicon-red-pink);
+@silicon-gradient: linear-gradient(to right, @silicon-vibrant-purple, @silicon-red-pink);
+@silicon-gradient-active: linear-gradient(to right, #6d2886, #af1b33);
+@silicon-gradient-disabled: linear-gradient(to right, #943bb4, #c62742);
 
 // Abstracted Colors
 @agate-accent: var(--agate-accent-color, @silicon-accent);
@@ -80,29 +84,49 @@
 // Button
 // ---------------------------------------
 @agate-button-color:          @agate-black;
-@agate-button-bg-color:       @agate-white;
+@agate-button-bg-color:       @silicon-gray;
 @agate-button-bg-image:       none;
-@agate-button-border-color:   fade(@agate-black, 50%);
+@agate-button-border-color:   transparent;
 @agate-button-shadow:         none;
 @agate-button-active-color:   @agate-button-color;
-@agate-button-active-bg-color: @silicon-light-gray;
+@agate-button-active-bg-color: @silicon-darker-gray;
+@agate-button-active-bg-image: none;
+@agate-button-active-focus-bg-image: @silicon-gradient-active;
+@agate-button-active-focus-color: @agate-button-focus-color;
+@agate-button-disabled-bg-color: @silicon-charcoal;
+@agate-button-disabled-focus-bg-image: @silicon-gradient-disabled;
+@agate-button-disabled-focus-color: fade(@agate-button-focus-color, 40%);
+@agate-button-disabled-opacity: 1;
 @agate-button-focus-color:    @agate-spotlight-color;
 @agate-button-focus-bg-color: transparent;
 @agate-button-focus-bg-image: @silicon-gradient;
 @agate-button-highlighted-color: @agate-white;
 @agate-button-highlighted-bg-color: @agate-highlight;
 @agate-button-highlighted-bg-image: @agate-button-bg-image;
+@agate-button-iconOnly-bg-color: @agate-button-transparent-bg-color;
+@agate-button-iconOnly-border-color: transparent;
+@agate-button-iconOnly-color: @agate-button-transparent-color;
+@agate-button-iconOnly-disabled-color: fade(@agate-button-iconOnly-color, 30%);
+@agate-button-iconOnly-selected-border-color: @agate-button-iconOnly-color;
 @agate-button-selected-color: @agate-button-color;
 @agate-button-selected-bg-color: @agate-button-bg-color;
-@agate-button-selected-border-color: @agate-button-border-color;
+@agate-button-selected-border-color: @agate-accent;
+@agate-button-selected-disabled-bg-color: @silicon-charcoal;
+@agate-button-selected-disabled-border-color: fade(@silicon-accent, 40%);
+@agate-button-selected-disabled-focus-border-color: fade(@agate-white, 30%);
 @agate-button-badge-bg-color: @agate-accent;
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-text-color: @agate-foreground;
 @agate-checkbox-bg-color: transparent;
-@agate-checkbox-border-color: fade(@agate-foreground, 50%);
+@agate-checkbox-border-color: @agate-foreground;
+@agate-checkbox-focus-bg-image: @silicon-gradient;
+@agate-checkbox-focus-bg-color: transparent;
+@agate-checkbox-focus-icon-border-color: @agate-white;
+@agate-checkbox-focus-icon-color: @agate-white;
 @agate-checkbox-selected-border-color: @agate-foreground;
+@agate-checkbox-selected-color: @agate-foreground;
+@agate-checkbox-text-color: @agate-foreground;
 
 // CheckboxItem
 // ---------------------------------------
@@ -134,10 +158,10 @@
 @agate-dropdown-button-icon-focus-color: @agate-accent;
 @agate-dropdown-button-open-border-color: fade(@agate-black, 25%);
 @agate-dropdown-up-button-open-border-bottom-color: transparent;
-@agate-dropdown-selected-color: @agate-black;
 @agate-dropdown-item-border-color: transparent;
 @agate-dropdown-item-color: @agate-black;
 @agate-dropdown-item-focus-bg-color: fade(@agate-black, 5%);
+@agate-dropdown-list-bg-color: @agate-dropdown-button-bg-color;
 
 // Drawer
 // ---------------------------------------
@@ -161,14 +185,11 @@
 // ImageItem
 // ---------------------------------------
 @agate-imageitem-border-color: transparent;
-@agate-imageitem-focus-border-color: @agate-accent;
-@agate-imageitem-focus-bg-color: @agate-background-focus;
 @agate-imageitem-caption-overlay-text-color: @agate-white;
 @agate-imageitem-caption-overlay-opacity: 0.5;
-
-// Indicator
-// ---------------------------------------
-@agate-indicator-bg-color: @agate-accent;
+@agate-imageitem-caption-background-image: @agate-gradient;
+@agate-imageitem-focus-bg-color: @agate-gradient;
+@agate-imageitem-focus-border-color: @agate-accent;
 
 // Input
 // ---------------------------------------
@@ -187,13 +208,16 @@
 // ---------------------------------------
 @agate-item-border-color:                 fade(@agate-black, 40%);
 @agate-item-color:                        @agate-text-color;
-@agate-item-label-color:                  @agate-noble-gray;
-@agate-item-focus-bg-color:               fade(@agate-black, 15%);
+@agate-item-label-color:                  #b3b3b3;
+@agate-item-label-focus-selected-color:   @agate-item-label-color;
+@agate-item-focus-bg-color:               transparent;
+@agate-item-focus-bg-image:               @agate-gradient;
 @agate-item-focus-border-color:           @agate-item-border-color;
 @agate-item-focus-color:                  @agate-item-color;
 @agate-item-selected-border-color:        @agate-accent;
 @agate-item-selected-color:               @agate-item-label-color;
-@agate-item-selected-label-color:         @agate-foreground;
+@agate-item-indicator-bg-color:           @agate-accent;
+@agate-item-indicator-focus-bg-color:     @agate-white;
 
 // Keypad
 // ---------------------------------------
@@ -266,6 +290,7 @@
 @agate-progressbar-track-bg-color: @agate-slider-track-bg-color;
 @agate-progressbar-fill-bg-color: @agate-slider-fill-bg-color;
 @agate-progressbar-fill-bg-image: linear-gradient(to right, transparent, fade(@agate-white, 75%));
+@agate-progressbar-load-bg-color: fade(@agate-progressbar-fill-bg-color, 30%);
 @agate-progressbar-vertical-fill-bg-image: linear-gradient(to top, transparent, fade(@agate-white, 75%));
 
 // RadioItem
@@ -310,7 +335,6 @@
 @agate-sliderbutton-focus-bg-image: @agate-slider-track-focus-bg-image;
 @agate-sliderbutton-knob-bg-color:  transparent;
 @agate-sliderbutton-knob-bg-image:  none;
-@agate-sliderbutton-knob-border-color: @agate-accent;
 @agate-sliderbutton-knob-shadow:    @agate-slider-knob-shadow;
 @agate-sliderbutton-knob-focus-shadow: @agate-slider-knob-focus-shadow;
 

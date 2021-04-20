@@ -5,7 +5,7 @@ import Header from '@enact/agate/Header';
 import Item from '@enact/agate/Item';
 import {VirtualList} from '@enact/agate/VirtualList';
 import ri from '@enact/ui/resolution';
-import React from 'react';
+import {useState} from 'react';
 
 const items = [];
 // eslint-disable-next-line enact/prop-types, enact/display-name
@@ -20,8 +20,8 @@ for (let i = 0; i < 100; i++) {
 }
 
 const VirtualListView = () => {
-	const [native, setNative] = React.useState(true);
-	const [customAriaLabel, setCustomAriaLabel] = React.useState(false);
+	const [native, setNative] = useState(true);
+	const [customAriaLabel, setCustomAriaLabel] = useState(false);
 	const scrollMode = native ? 'native' : 'translate';
 
 	const handleToggleScrollMode = () => setNative(!native);
