@@ -16,19 +16,17 @@ export const _Dropdown = () => {
 	const items = (new Array(itemCount)).fill().map((i, index) => `Option ${index + 1}`);
 
 	return (
-		<div>
-			<Dropdown
-				direction={select('direction', ['above', 'below'], Config)}
-				disabled={boolean('disabled', Config)}
-				onClose={action('onClose')}
-				onOpen={action('onOpen')}
-				onSelect={action('onSelect')}
-				title={text('title', Config, 'Please select')}
-				width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
-			>
-				{items}
-			</Dropdown>
-		</div>
+		<Dropdown
+			direction={select('direction', ['above', 'below'], Config)}
+			disabled={boolean('disabled', Config)}
+			onClose={action('onClose')}
+			onOpen={action('onOpen')}
+			onSelect={action('onSelect')}
+			title={text('title', Config, 'Please select')}
+			width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+		>
+			{items}
+		</Dropdown>
 	);
 };
 
