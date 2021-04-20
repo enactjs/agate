@@ -282,7 +282,7 @@ const PopupBase = kind({
 			return type ? type : setTransitionType;
 		}
 	},
-	render: ({buttons, children, closeButton, css, direction, duration, noAnimation, onClose, onHide, onShow, open, skin, spotlightId, spotlightRestrict, title, transitionContainerClassName, transitionType, ...rest}) => {
+	render: ({buttons, centered, children, closeButton, css, direction, duration, noAnimation, onClose, onHide, onShow, open, skin, spotlightId, spotlightRestrict, title, transitionContainerClassName, transitionType, ...rest}) => {
 		const closeButtonSize = skin === 'silicon' ? 'large' : 'small';
 		const wideLayout = (skin === 'carbon');
 		delete rest.centered;
@@ -313,7 +313,7 @@ const PopupBase = kind({
 						onTap={onClose}
 						size={closeButtonSize}
 					/> : null}
-					{title ? <Heading className={css.title} marqueeDisabled>{title}</Heading> : null}
+					{title ? <Heading className={css.title} alignment={centered ? 'center' : null}>{title}</Heading> : null}
 					<Layout orientation={wideLayout ? 'horizontal' : 'vertical'} className={css.body}>
 						<Cell shrink={!wideLayout} className={css.content}>
 							{children}
