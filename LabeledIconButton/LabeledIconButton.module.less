@@ -281,7 +281,7 @@
 			.button {
 				&:before {
 					content: @agate-labelediconbutton-before-content;
-					background: @agate-labelediconbutton-focus-bg;
+					background: @agate-gradient;
 				}
 			}
 		});
@@ -298,7 +298,7 @@
 			&.small {
 				.button {
 					&:before {
-						border: @agate-labelediconbutton-small-selected-before-border-width solid @agate-labelediconbutton-selected-before-border-color;
+						border: @agate-labelediconbutton-small-selected-before-border-width solid @agate-accent;
 					}
 				}
 			}
@@ -307,7 +307,7 @@
 			&.huge {
 				.button {
 					&:before {
-						border: @agate-labelediconbutton-large-selected-before-border-width solid @agate-labelediconbutton-selected-before-border-color;
+						border: @agate-labelediconbutton-large-selected-before-border-width solid @agate-accent;
 					}
 				}
 			}
@@ -317,10 +317,6 @@
 					&:before {
 						border-width: 0;
 					}
-				}
-
-				.label {
-					color: @agate-labelediconbutton-label-selected-color;
 				}
 			});
 
