@@ -16,7 +16,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/FanSpeedControl` style to match latest design for Silicon skin
 - `agate/ImageItem` style to match latest design for Silicon skin
 - `agate/Item` to match the latest design for Silicon skin
-- `agate/LabeledIconButton` to have circle shaped button on all skins
 - `agate/LabeledIconButton` to match the latest design for Silicon skin
 - `agate/WindDirectionControl` style to match latest design for Silicon skin
 
