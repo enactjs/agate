@@ -302,7 +302,7 @@ const DrumPickerBase = class extends Component {
 			selectedValue = value;
 		} else {
 			selectedIndex = value;
-			selectedValue = this.props.children[value].props.children;
+			selectedValue = value; //this.props.children[value].props.children;
 		}
 
 		this.state = {
@@ -320,7 +320,7 @@ const DrumPickerBase = class extends Component {
 	}
 
 	static getDerivedStateFromProps (props, state) {
-		if (props.type !== 'number' && props.value === state.value) {
+		if (props.type !== 'number' && props.value !== state.value) {
 			return {
 				value: props.value,
 				selectedIndex: props.value
@@ -352,9 +352,9 @@ const DrumPickerBase = class extends Component {
 					return;
 				}
 			}
-		} else if (prevState.value !== this.state.value && type !== 'number') {
-			const selectedIndex = clamp(0, children.length - 1, children.findIndex((element) => element.props.children === this.state.value));
-
+		} else if (prevState.selectedIndex !== this.state.selectedIndex && type !== 'number') {
+			const selectedIndex = clamp(0, children.length, children.findIndex((element, index) => index === this.state.selectedIndex));
+			console.log(selectedIndex);
 			for (let i = 0; i < children.length; i++) {
 				if (i === selectedIndex) {
 					this.scrollTo(i);
@@ -365,11 +365,17 @@ const DrumPickerBase = class extends Component {
 	}
 
 	scrollTo = (val) => {
-		const {children, orientation} = this.props;
+		const {children, orientation, type} = this.props;
 		if (!children || children.length === 0) return;
 
 		const index = clamp(0, children.length, Math.min(val, children.length - 1));
-		const child = children[index].props.children;
+
+		let child;
+		if (type === 'number') {
+			child = children[index].props.children;
+		} else {
+			child = index;
+		}
 
 		if (orientation === 'vertical') {
 			const itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));

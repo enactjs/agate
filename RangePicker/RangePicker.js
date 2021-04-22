@@ -177,8 +177,8 @@ const RangePickerBase = kind({
 
 	computed: {
 		children: ({min, max, step, value}) => {
-			// send to internal/DrumPicker only 5 children. Current selected +/-2
-			const childrenArray = Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step))).filter(child => child >= value - (step * 2) && child <= value + (step * 2));
+			// send to internal/DrumPicker only 15 children. Current selected +/-7
+			const childrenArray = Array(Math.floor((max - min) / step) + 1).fill(min).map( ((x, i) => (x + i * step))).filter(child => child >= value - (step * 7) && child <= value + (step * 7));
 			return (mapAndFilterChildren(childrenArray, (child) => (
 				<DrumPickerItem key={value} marqueeDisabled>{child}</DrumPickerItem>
 			)));
