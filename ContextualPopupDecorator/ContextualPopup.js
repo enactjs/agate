@@ -177,7 +177,7 @@ const ContextualPopupBase = kind({
 		 * @type {String}
 		 * @public
 		 */
-		skin: PropTypes.string,
+		skin: PropTypes.string
 	},
 
 	defaultProps: {
