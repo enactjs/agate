@@ -196,8 +196,10 @@ const ContextualPopupBase = kind({
 			{reserveClose: showCloseButton},
 			offset
 		),
-		closeButton: ({css, showCloseButton, onCloseButtonClick}) => {
+		closeButton: ({css, showCloseButton, skin, onCloseButtonClick}) => {
 			if (showCloseButton) {
+				const closeButtonSize = skin === 'silicon' ? 'smallest' : 'small';
+
 				return (
 					<Button
 						aria-label={$L('Close')}
@@ -206,7 +208,7 @@ const ContextualPopupBase = kind({
 						css={css}
 						icon="closex"
 						onTap={onCloseButtonClick}
-						size="small"
+						size={closeButtonSize}
 					/>
 				);
 			}
