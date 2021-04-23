@@ -196,6 +196,7 @@ const LabeledIconButtonBase = kind({
 			icon: (
 				<Button
 					backgroundOpacity={backgroundOpacity}
+					css={css}
 					icon={icon}
 					iconComponent={iconComponent}
 					iconOnly
@@ -203,7 +204,6 @@ const LabeledIconButtonBase = kind({
 					pressed={pressed}
 					selected={selected}
 					spriteCount={spriteCount}
-					css={css}
 				/>
 			),
 			css
