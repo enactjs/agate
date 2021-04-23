@@ -168,7 +168,16 @@ const ContextualPopupBase = kind({
 		 * @default false
 		 * @public
 		 */
-		showCloseButton: PropTypes.bool
+		showCloseButton: PropTypes.bool,
+
+		/**
+		 * The current skin for this component.
+		 *
+		 * @see {@link agate/Skinnable.Skinnable.skin}
+		 * @type {String}
+		 * @public
+		 */
+		skin: PropTypes.string,
 	},
 
 	defaultProps: {
