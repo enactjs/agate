@@ -8,11 +8,17 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `Noto Sans` font as the default font
 
+## [2.0.0-alpha.3] - 2021-04-26
+
+### Added
+
+- `agate/ImageItem` prop `sizing` to support image sizing
+- `agate/Drawer` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
+
 ### Fixed
 
-- `agate/Checkbox` style to match latest design for Silicon skin
-- `agate/Drawer` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
-- `agate/Item` to match the latest design for Silicon skin
+- `agate/Checkbox`, `agate/FanSpeedControl`, `agate/ImageItem`, `agate/Item`, and `agate/WindDirectionControl` to match latest design for Silicon skin
+- `agate/Dropdown` misalignment of `Button` and `ContextualPopup` on the edge of screen
 
 ## [2.0.0-alpha.2] - 2021-04-02
 
