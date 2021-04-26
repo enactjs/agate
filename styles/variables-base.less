@@ -55,10 +55,10 @@
 
 // ArcPicker
 // ---------------------------------------
-@agate-arcpicker-value-display-height: inherit;
+@agate-arcpicker-value-display-height: 120px;
 @agate-arcpicker-value-display-max-width: 80%;
-@agate-arcpicker-font-size: inherit;
-@agate-arcpicker-font-weight: inherit;
+@agate-arcpicker-font-size: 72px;
+@agate-arcpicker-font-weight: 300;
 
 // ArcSlider
 // -------------------------------------------------
@@ -165,10 +165,12 @@
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-size: 46px;
-@agate-checkbox-border-width: inherit;
+@agate-checkbox-bg-size: inherit;
 @agate-checkbox-border-radius: inherit;
+@agate-checkbox-border-width: inherit;
+@agate-checkbox-container-position: inherit;
 @agate-checkbox-icon-font-size: inherit;
+@agate-checkbox-size: 46px;
 
 // CheckboxItem
 // ---------------------------------------
@@ -224,11 +226,13 @@
 @agate-dropdown-item-border-width: @agate-item-border-width;
 @agate-dropdown-item-font-size: inherit;
 @agate-dropdown-item-font-weight: inherit;
+@agate-dropdown-item-height: inherit;
 @agate-dropdown-item-line-height: @agate-item-line-height;
 @agate-dropdown-item-padding: inherit;
 @agate-dropdown-item-focus-border-color: @agate-item-focus-border-color;
 @agate-dropdown-list-height:  @agate-item-height * 4;
 @agate-dropdown-list-padding: initial;
+@agate-dropdown-margin: 0 @agate-component-spacing;
 @agate-dropdown-smallest-width: 321px;
 @agate-dropdown-small-width: 400px;
 @agate-dropdown-medium-width: 522px;
@@ -251,9 +255,12 @@
 
 // FanSpeedControl
 // ---------------------------------------
-@agate-fanspeedcontrol-icon-font-size:   inherit;
-@agate-fanspeedcontrol-icon-height:      inherit;
-@agate-fanspeedcontrol-value-width:      inherit;
+@agate-fanspeedcontrol-icon-font-size: 120px;
+@agate-fanspeedcontrol-icon-height: 60px;
+@agate-fanspeedcontrol-icon-padding-left: 0;
+@agate-fanspeedcontrol-value-padding-left: 0;
+@agate-fanspeedcontrol-value-text-align: center;
+@agate-fanspeedcontrol-value-width: 90px;
 
 // GridListImageItem
 // ---------------------------------------
@@ -334,14 +341,6 @@
 @agate-icon-smallest-font-size: (@agate-icon-smallest-size * 2);
 @agate-icon-sprite-smallest-size: @agate-icon-smallest-size;
 
-// Indicator
-// ---------------------------------------
-@agate-indicator-align-self:    inherit;
-@agate-indicator-border-radius: inherit;
-@agate-indicator-display:       inherit;
-@agate-indicator-height:        inherit;
-@agate-indicator-margin-right:  inherit;
-
 // Input
 // ---------------------------------------
 @agate-input-font-size: 30px;
@@ -388,52 +387,68 @@
 
 // ImageItem
 // ---------------------------------------
-@agate-imageitem-caption-height: 48px;
 @agate-imageitem-border-width: inherit;
+@agate-imageitem-caption-font-size: inherit;
+@agate-imageitem-caption-height: 48px;
+@agate-imageitem-caption-overlay-font-size: inherit;
 @agate-imageitem-caption-overlay-height: initial;
+@agate-imageitem-caption-overlay-line-height: inherit;
 @agate-imageitem-caption-overlay-max-height: 96px;
 @agate-imageitem-caption-overlay-min-height: 33px;
 @agate-imageitem-caption-overlay-padding: inherit;
-@agate-imageitem-caption-overlay-font-size: inherit;
-@agate-imageitem-caption-overlay-line-height: inherit;
 @agate-imageitem-caption-overlay-text-align: inherit;
 @agate-imageitem-caption-position-bottom: 6px;
+@agate-imageitem-horizontal-border-width: @agate-imageitem-border-width;
+@agate-imageitem-horizontal-height: auto;
+@agate-imageitem-horizontal-caption-margin: 0;
+@agate-imageitem-horizontal-caption-width: auto;
+@agate-imageitem-horizontal-image-height: @agate-imageitem-horizontal-image-width;
 @agate-imageitem-horizontal-image-margin: 0 6px 0 0;
 @agate-imageitem-horizontal-image-width: 90px;
-@agate-imageitem-horizontal-image-height: @agate-imageitem-horizontal-image-width;
+@agate-imageitem-horizontal-image-sizing-fill-height: @agate-imageitem-horizontal-image-width;
+@agate-imageitem-horizontal-image-sizing-fit-height: @agate-imageitem-horizontal-image-width;
+@agate-imageitem-horizontal-image-sizing-fit-margin: @agate-imageitem-horizontal-image-margin;
+@agate-imageitem-horizontal-image-sizing-none-height: @agate-imageitem-horizontal-image-width;
+@agate-imageitem-horizontal-image-sizing-none-margin: @agate-imageitem-horizontal-image-margin;
 
 // Item
 // ---------------------------------------
 @agate-item-border-width:             inherit;
 @agate-item-content-width:            60%;
+@agate-item-centered-inline-max-width: @agate-item-inline-max-width;
 @agate-item-font-size:                30px;
 @agate-item-font-weight:              @agate-base-font-weight;
 @agate-item-haslabel-padding:         21px 0;
 @agate-item-height:                   60px;
-@agate-item-height-large:             72px;
-@agate-item-indent:                   36px;
-@agate-item-inline-content-max-width: 240px;
+@agate-item-inline-content-max-width: 420px;
 @agate-item-itemcontent-line-height:  inherit;
+@agate-item-inline-notcentered-itemcontent-min-width: initial;
 @agate-item-inline-max-width:         400px;
+@agate-item-inline-min-width:         initial;
 @agate-item-label-font-size:          inherit;
 @agate-item-label-line-height:        inherit;
-@agate-item-label-max-width:          40%;
+@agate-item-label-max-width:          30%;
 @agate-item-label-padding:            10px;
+@agate-item-large-height:             initial;
 @agate-item-line-height:              @agate-item-height - (@agate-item-vertical-padding * 2);
-@agate-item-line-height-large:        @agate-item-height-large - (@agate-item-vertical-padding * 2);
+@agate-item-selected-padding:         @agate-component-spacing;
 @agate-item-side-outset:              @agate-component-spacing;
 @agate-item-slotafter-spacing:        @agate-component-spacing;
 @agate-item-slotbefore-spacing:       @agate-component-spacing;
 @agate-item-sub-text-size:            inherit;
 @agate-item-vertical-padding:         3px;
+@agate-item-slotafter-padding-right:  @agate-item-side-outset + @agate-icon-size / 2 + 16px;
+@agate-item-slotbefore-padding-left:  @agate-item-side-outset + @agate-icon-size / 2 + 16px;
+@agate-item-small-haslabel-height:    initial;
 @agate-item-small-font-size:          inherit;
-@agate-item-small-height:             54px;
+@agate-item-small-height:             48px;
 @agate-item-small-itemcontent-line-height: inherit;
 @agate-item-small-line-height:        @agate-item-small-height - (@agate-item-vertical-padding * 2);
 @agate-item-small-label-font-size:    inherit;
-@agate-item-small-label-line-height:  inherit;
 @agate-item-small-haslabel-padding:   12px 0;
-@agate-item-slotafter-padding-left:   inherit;
+@agate-item-indicator-align-self:     inherit;
+@agate-item-indicator-border-radius:  inherit;
+@agate-item-indicator-height:         0;
 
 // Keypad
 // ---------------------------------------
