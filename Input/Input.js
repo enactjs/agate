@@ -262,10 +262,10 @@ const InputBase = kind({
 
 
 			forward('onChange'),
-			// (ev) => {
-			// 	ev.persist();
-			// 	return true;
-			// },
+			(ev) => {
+				ev.persist();
+				return true;
+			},
 			// forward("onChange")
 			// forwardWithPrevent('onChange')
 			// adaptEvent(
@@ -282,8 +282,27 @@ const InputBase = kind({
 			// })),
 			// (ev, props) => log('log', ev, props)
 		),
-		onClick: handle(
-			forward('onClick')
+		// onClick: handle(
+		// 	forward('onClick'),
+		// 	// forward('onChange', ev, ),
+		//
+		// 	// forwardCustom('onChange', ev => ({
+		// 	// 	// stopPropagation: () => ev.stopPropagation(),
+		// 	// 	value: ''
+		// 	// }))
+		// )
+		clearInput: handle(
+			forward('onClick'),
+			(ev, props) => {       // custom event handler -- in this case, logging some text
+				// since it doesn't return `true`, no further input functions would be called after this one
+				console.log('handle');
+				console.log(ev);
+			}
+			// forwardCustom('onChange', ev => ({
+			// 	// stopPropagation: () => ev.stopPropagation(),
+			// 	value: '',
+			// 	clearInput: true
+			// }))
 		)
 	},
 
@@ -307,7 +326,7 @@ const InputBase = kind({
 		value: ({value}) => typeof value === 'number' ? value : (value || '')
 	},
 
-	render: ({clearInputButton, css, dir, disabled, iconAfter, iconBefore, invalidTooltip, onChange, onClick, placeholder, size, type, value, ...rest}) => {
+	render: ({clearInputButton, css, dir, disabled, iconAfter, iconBefore, invalidTooltip, clearInput, onChange, onClick, placeholder, size, type, value, ...rest}) => {
 		const inputProps = extractInputProps(rest);
 		delete rest.dismissOnEnter;
 		delete rest.focused;
@@ -335,12 +354,18 @@ const InputBase = kind({
 					value={value}
 				/>
 				{/* {clearInputButton ?  */}
-				{value?.length > 1 ? 
+				{value?.length >= 1 ?
 					<Button 
 						className={css.clearInputButton} 
-						onClick={onClick} 
+						// onClick={onClick}
+						onClick={clearInput}
+						// onClick={console.log('button onclick')}
+						// onMouseDown={onClick}
 						icon="closex" 
-						size="smallest"/> : 
+						size="smallest"
+						// key={'aaasdgasdgasdgasdga'}
+						// tabIndex={-1}
+					/> :
 						null}
 				<InputDecoratorIcon position="after" size={size}>
 					{iconAfter}
