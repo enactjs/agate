@@ -6,18 +6,23 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
+- `Noto Sans` font as the default font
+
+### Fixed
+
+- `agate/ContextualPopupDecorator` style to match latest design for Silicon skin
+
+## [2.0.0-alpha.3] - 2021-04-26
+
+### Added
+
 - `agate/ImageItem` prop `sizing` to support image sizing
 - `agate/Drawer` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
 
 ### Fixed
 
-- `agate/Checkbox` style to match latest design for Silicon skin
-- `agate/ContextualPopupDecorator` style to match latest design for Silicon skin
+- `agate/Checkbox`, `agate/FanSpeedControl`, `agate/ImageItem`, `agate/Item`, and `agate/WindDirectionControl` to match latest design for Silicon skin
 - `agate/Dropdown` misalignment of `Button` and `ContextualPopup` on the edge of screen
-- `agate/FanSpeedControl` style to match latest design for Silicon skin
-- `agate/ImageItem` style to match latest design for Silicon skin
-- `agate/Item` to match the latest design for Silicon skin
-- `agate/WindDirectionControl` style to match latest design for Silicon skin
 
 ## [2.0.0-alpha.2] - 2021-04-02
 
@@ -79,7 +84,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
-- `agate/Input` prop `invalid` to display a tooltip with a message when `invalid` prop is true 
+- `agate/Input` prop `invalid` to display a tooltip with a message when `invalid` prop is true
 - `agate/Input` prop `invalidMessage` to customize the tooltip message when `invalid` prop is true
 - `agate/Input` prop `size` to change the size of both input and icons (default large)
 - `agate/Item` prop `centered`, `disabled`, `inline`, `marqueeOn`, and `size`

@@ -175,7 +175,7 @@ const ContextualPopupBase = kind({
 		 *
 		 * @see {@link agate/Skinnable.Skinnable.skin}
 		 * @type {String}
-		 * @public
+		 * @private
 		 */
 		skin: PropTypes.string
 	},
