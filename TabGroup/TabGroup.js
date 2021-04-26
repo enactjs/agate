@@ -116,6 +116,7 @@ const TabBase = kind({
 				return (
 					<div aria-label={children} className={css.labeledIcon} role="region">
 						<ToggleButton
+							className={css.button}
 							icon={icon}
 							selected={selected}
 						/>
