@@ -10,7 +10,7 @@ export default {
 };
 
 export const WithNonLatinCharacters = () => (
-	<Scroller style={{height: ri.scaleToRem(510)}}>
+	<Scroller>
 		<Header
 			style={{marginTop: ri.scaleToRem(24)}}
 			subtitle="نص العنوان"
