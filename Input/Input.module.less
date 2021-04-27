@@ -203,6 +203,22 @@
 
 		.disabled({
 			opacity: @agate-input-decorator-disabled-opacity;
+
+			.input {
+				opacity: @agate-input-disabled-opacity;
+
+				&::placeholder {
+					color: @agate-input-disabled-placeholder-color;
+				}
+			}
+
+			.icon {
+				&.iconAfter,
+				&.iconBefore {
+					opacity: @agate-input-disabled-icon-opacity;
+				}
+
+			}
 		});
 	});
 }
