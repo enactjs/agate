@@ -11,7 +11,7 @@
  */
 
 import kind from '@enact/core/kind';
-import {adaptEvent, forward, forwardCustom, forwardWithPrevent, handle, log} from '@enact/core/handle';
+import {adaptEvent, forwardCustom, forwardWithPrevent, handle} from '@enact/core/handle';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import {isRtlText} from '@enact/i18n/util';
 import Changeable from '@enact/ui/Changeable';
@@ -24,7 +24,6 @@ import Skinnable from '../Skinnable';
 import Tooltip from '../TooltipDecorator/Tooltip';
 import Button from '../Button';
 
-import InputBehaviorDecorator from './InputBehaviorDecorator';
 import InputDecoratorIcon from './InputDecoratorIcon';
 import InputSpotlightDecorator from './InputSpotlightDecorator';
 import {calcAriaLabel, extractInputProps} from './util';
@@ -43,6 +42,14 @@ const InputBase = kind({
 	name: 'Input',
 
 	propTypes: /** @lends agate/Input.InputBase.prototype */ {
+		/**
+		 * Shows the clear input button.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		clearInputButton: PropTypes.bool,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -224,19 +231,17 @@ const InputBase = kind({
 		 * @type {String|Number}
 		 * @public
 		 */
-		value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-		clearInputButton: PropTypes.bool
+		value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 	},
 
 	defaultProps: {
+		clearInputButton: false,
 		disabled: false,
 		dismissOnEnter: false,
 		invalid: false,
 		placeholder: '',
 		size: 'large',
-		type: 'text',
-		clearInputButton: true
+		type: 'text'
 	},
 
 	styles: {
@@ -254,55 +259,17 @@ const InputBase = kind({
 				}),
 				forwardWithPrevent('onBeforeChange')
 			),
-			// forwardCustom('onChange', ev => ({
-			// 	stopPropagation: () => ev.stopPropagation(),
-			// 	value: ev.target.value
-			// }))
-
-
-
-			forward('onChange'),
-			(ev) => {
-				ev.persist();
-				return true;
-			},
-			// forward("onChange")
-			// forwardWithPrevent('onChange')
-			// adaptEvent(
-			// 	ev => ({
-			// 		type: 'onChange',
-			// 		value: ev.target.value
-			// 	}),
-			// 	forwardWithPrevent('onChange')
-			// ),
-			// forwardCustom('onChange', ev => ({
-			// 	// stopPropagation: () => ev.stopPropagation(),
-			// 	value: ev.target.value
-			// 	// value: ev
-			// })),
-			// (ev, props) => log('log', ev, props)
+			forwardCustom('onChange', ev => ({
+				stopPropagation: () => ev.stopPropagation(),
+				value: ev.target.value
+			}))
 		),
-		// onClick: handle(
-		// 	forward('onClick'),
-		// 	// forward('onChange', ev, ),
-		//
-		// 	// forwardCustom('onChange', ev => ({
-		// 	// 	// stopPropagation: () => ev.stopPropagation(),
-		// 	// 	value: ''
-		// 	// }))
-		// )
+
 		clearInput: handle(
-			forward('onClick'),
-			(ev, props) => {       // custom event handler -- in this case, logging some text
-				// since it doesn't return `true`, no further input functions would be called after this one
-				console.log('handle');
-				console.log(ev);
-			}
-			// forwardCustom('onChange', ev => ({
-			// 	// stopPropagation: () => ev.stopPropagation(),
-			// 	value: '',
-			// 	clearInput: true
-			// }))
+			forwardCustom('onChange', ev => ({
+				stopPropagation: () => ev.stopPropagation(),
+				value: ''
+			}))
 		)
 	},
 
@@ -326,7 +293,7 @@ const InputBase = kind({
 		value: ({value}) => typeof value === 'number' ? value : (value || '')
 	},
 
-	render: ({clearInputButton, css, dir, disabled, iconAfter, iconBefore, invalidTooltip, clearInput, onChange, onClick, placeholder, size, type, value, ...rest}) => {
+	render: ({clearInput, clearInputButton, css, dir, disabled, iconAfter, iconBefore, invalidTooltip, onChange, placeholder, size, type, value, ...rest}) => {
 		const inputProps = extractInputProps(rest);
 		delete rest.dismissOnEnter;
 		delete rest.focused;
@@ -353,24 +320,19 @@ const InputBase = kind({
 					type={type}
 					value={value}
 				/>
-				{/* {clearInputButton ?  */}
-				{value?.length >= 1 ?
-					<Button 
-						className={css.clearInputButton} 
-						// onClick={onClick}
-						onClick={clearInput}
-						// onClick={console.log('button onclick')}
-						// onMouseDown={onClick}
-						icon="closex" 
-						size="smallest"
-						// key={'aaasdgasdgasdgasdga'}
-						// tabIndex={-1}
-					/> :
-						null}
+
 				<InputDecoratorIcon position="after" size={size}>
 					{iconAfter}
 				</InputDecoratorIcon>
 				{invalidTooltip}
+				{clearInputButton && value?.length >= 1 ?
+					<Button
+						className={css.clearInputButton}
+						onClick={clearInput}
+						icon="closex"
+						size="small"
+					/> :
+					null}
 			</div>
 		);
 	}
@@ -388,9 +350,9 @@ const InputBase = kind({
  */
 const InputDecorator = compose(
 	Pure,
-	InputBehaviorDecorator,
+	// InputBehaviorDecorator,
 	I18nContextDecorator({rtlProp: 'rtl'}),
-	// Changeable,
+	Changeable,
 	InputSpotlightDecorator,
 	Skinnable
 );

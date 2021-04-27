@@ -21,6 +21,7 @@ export default {
 export const _Input = () => (
 	<Input
 		autoFocus={boolean('autoFocus', Config)}
+		clearInputButton={boolean('clearInputButton', Config)}
 		disabled={boolean('disabled', Config)}
 		dismissOnEnter={boolean('dismissOnEnter', Config)}
 		iconAfter={select('iconAfter', iconNames, Config)}
@@ -34,7 +35,6 @@ export const _Input = () => (
 		placeholder={text('placeholder', Config, 'Input text here')}
 		size={select('size', ['small', 'large'], Config, 'large')}
 		type={select('type', prop.type, Config)}
-		clearInputButton={boolean('clearButton', Config)}
 	/>
 );
 

@@ -155,7 +155,7 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 					onSpotlightDisappear();
 				}
 
-				if (!noLockPointer) {
+				if (!noLockPointer && !this.props.clearInputButton) {
 					releasePointer(this.state.node);
 				}
 			}
@@ -172,13 +172,13 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			if (focusChanged) {
 				if (this.state.focused === 'input') {
 					forward('onActivate', {type: 'onActivate'}, this.props);
-					if (!noLockPointer) {
+					if (!noLockPointer && !this.props.clearInputButton) {
 						lockPointer(this.state.node);
 					}
 					this.paused.pause();
 				} else if (prevState.focused === 'input') {
 					forward('onDeactivate', {type: 'onDeactivate'}, this.props);
-					if (!noLockPointer) {
+					if (!noLockPointer && !this.props.clearInputButton) {
 						releasePointer(prevState.node);
 					}
 					this.paused.resume();
