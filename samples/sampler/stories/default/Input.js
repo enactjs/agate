@@ -22,6 +22,7 @@ export const _Input = () => (
 	<Input
 		autoFocus={boolean('autoFocus', Config)}
 		clearInputButton={boolean('clearInputButton', Config)}
+		clearInputIcon={select('clearInputIcon', iconNames, Config)}
 		disabled={boolean('disabled', Config)}
 		dismissOnEnter={boolean('dismissOnEnter', Config)}
 		iconAfter={select('iconAfter', iconNames, Config)}

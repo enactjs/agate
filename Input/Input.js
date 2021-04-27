@@ -52,6 +52,15 @@ const InputBase = kind({
 		clearInputButton: PropTypes.bool,
 
 		/**
+		 * The icon to be placed in the clear input button.
+		 *
+		 * @see {@link agate/Icon.Icon}
+		 * @type {String}
+		 * @public
+		 */
+		clearInputIcon: PropTypes.string,
+
+		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
 		 * corresponding internal elements and states of this component.
 		 *
@@ -293,7 +302,7 @@ const InputBase = kind({
 		value: ({value}) => typeof value === 'number' ? value : (value || '')
 	},
 
-	render: ({clearInput, clearInputButton, css, dir, disabled, iconAfter, iconBefore, invalidTooltip, onChange, placeholder, size, type, value, ...rest}) => {
+	render: ({clearInput, clearInputButton, clearInputIcon, css, dir, disabled, iconAfter, iconBefore, invalidTooltip, onChange, placeholder, size, type, value, ...rest}) => {
 		const inputProps = extractInputProps(rest);
 		delete rest.dismissOnEnter;
 		delete rest.focused;
@@ -320,18 +329,18 @@ const InputBase = kind({
 					type={type}
 					value={value}
 				/>
-				<InputDecoratorIcon position="after" size={size}>
-					{iconAfter}
-				</InputDecoratorIcon>
-				{invalidTooltip}
 				{clearInputButton && value?.length >= 1 ?
 					<Button
 						className={css.clearInputButton}
 						onClick={clearInput}
-						icon="closex"
+						icon={clearInputIcon}
 						size="small"
 					/> :
 					null}
+				<InputDecoratorIcon position="after" size={size}>
+					{iconAfter}
+				</InputDecoratorIcon>
+				{invalidTooltip}
 			</div>
 		);
 	}
