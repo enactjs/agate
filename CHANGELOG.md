@@ -10,7 +10,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
-- `agate/Checkbox` icon font-size for Carbon, Cobalt, Copper, Electro, and Titanium skins
+- `agate/Checkbox` icon font-size and focus color for Carbon, Cobalt, Copper, Electro, and Titanium skins
 
 ## [2.0.0-alpha.3] - 2021-04-26
 
