@@ -216,8 +216,8 @@ const ArcSliderBase = kind({
 			return {...style, height: size, width: size};
 		},
 		circleRadius: ({isFocused}) => isFocused ? 20 : 15,
-		backgroundColor: ({backgroundColor, skinVariants}) => backgroundColor || (skinVariants.night ? '#444444' : '#888888'),
-		foregroundColor: ({foregroundColor, skinVariants}) => foregroundColor || (skinVariants.night ? '#ffffff' : '#000000')
+		backgroundColor: ({backgroundColor, skinVariants}) => backgroundColor || (skinVariants && skinVariants.night ? '#444444' : '#888888'),
+		foregroundColor: ({foregroundColor, skinVariants}) => foregroundColor || (skinVariants && skinVariants.night ? '#ffffff' : '#000000')
 	},
 
 	render: ({'aria-valuetext': ariaValuetext, backgroundColor, componentRef, circleRadius, disabled, endAngle, foregroundColor, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}) => {

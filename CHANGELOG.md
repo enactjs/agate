@@ -10,7 +10,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
-- `agate/ArcSlider`, `agate/Checkbox`, and `agate/TemperatureControl` style to match latest design for Silicon skin
+- `agate/ArcSlider`, and `agate/TemperatureControl` style to match latest design for Silicon skin
 
 ## [2.0.0-alpha.3] - 2021-04-26
 
