@@ -320,7 +320,6 @@ const InputBase = kind({
 					type={type}
 					value={value}
 				/>
-
 				<InputDecoratorIcon position="after" size={size}>
 					{iconAfter}
 				</InputDecoratorIcon>
@@ -350,7 +349,6 @@ const InputBase = kind({
  */
 const InputDecorator = compose(
 	Pure,
-	// InputBehaviorDecorator,
 	I18nContextDecorator({rtlProp: 'rtl'}),
 	Changeable,
 	InputSpotlightDecorator,
