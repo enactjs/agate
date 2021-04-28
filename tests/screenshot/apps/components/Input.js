@@ -38,13 +38,13 @@ const InputTests = [
 
 	// Focus
 	...withConfig({focus: true}, [
-		<Input placeholder="Placeholder Input focused" style={{marginLeft: '3px'}} />,
-		<Input placeholder="Placeholder Input focused" disabled style={{marginLeft: '3px'}} />,
-		<Input value="Simple value focused" style={{marginLeft: '3px'}} />,
-		<Input value="Simple value focused" disabled style={{marginLeft: '3px'}} />,
-		<Input invalid invalidMessage="Custom invalid message focused" style={{marginLeft: '3px'}} />,
-		<Input value="Simple value focused" iconAfter="happyface" iconBefore="happyface" style={{marginLeft: '3px'}} />,
-		<Input value="Simple value focused" iconAfter="happyface" iconBefore="happyface" size="small" style={{marginLeft: '3px'}} />
+		<Input placeholder="Focused placeholder Input" />,
+		<Input placeholder="Focused placeholder Input" disabled />,
+		<Input value="Focused simple value" />,
+		<Input value="Focused simple value" disabled />,
+		<Input invalid invalidMessage="Focused custom invalid message" />,
+		<Input value="Focused simple value" iconAfter="happyface" iconBefore="happyface" />,
+		<Input value="Focused simple value" iconAfter="happyface" iconBefore="happyface" size="small" />
 	])
 ];
 
