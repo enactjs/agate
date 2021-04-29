@@ -8,6 +8,9 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `Noto Sans` font as the default font
 
+### Fixed
+- `agate/PopupMenu` closeButton label color for Gallium and Silicon skins, to be the same as the other label colors in PopupMenu
+
 ## [2.0.0-alpha.3] - 2021-04-26
 
 ### Added
