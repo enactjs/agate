@@ -334,7 +334,7 @@ const DrumPickerBase = class extends Component {
 
 		for (let i = 0; i < children.length; i++) {
 			if (i === this.state.selectedIndex) {
-				this.scrollTo(i);
+				this.scrollTo(i, false);
 				return;
 			}
 		}
@@ -344,27 +344,35 @@ const DrumPickerBase = class extends Component {
 		const {children, type, value} = this.props;
 		console.log(prevState.selectedIndex, this.state.selectedIndex, prevState.value, this.state.value);
 		if (prevState.selectedIndex !== this.state.selectedIndex && type === 'number') {
-			const selectedIndex = clamp(0, children.length - 1, children.findIndex((element) => element.props.children === value));
+			setTimeout( () => {
+				const selectedIndex = clamp(0, children.length - 1, children.findIndex((element) => element.props.children === value));
+				for (let i = 0; i < children.length; i++) {
+					if (i === selectedIndex) {
+						this.scrollTo(i, false);
+						return;
+					}
+				}
+			}, 0)
+		} else if (prevState.selectedIndex !== this.state.selectedIndex && type !== 'number') {
+			const selectedIndex = clamp(0, children.length, children.findIndex((element, index) => index === this.state.selectedIndex));
 
 			for (let i = 0; i < children.length; i++) {
 				if (i === selectedIndex) {
-					this.scrollTo(i);
-					return;
-				}
-			}
-		} else if (prevState.selectedIndex !== this.state.selectedIndex && type !== 'number') {
-			const selectedIndex = clamp(0, children.length, children.findIndex((element, index) => index === this.state.selectedIndex));
-			console.log(selectedIndex);
-			for (let i = 0; i < children.length; i++) {
-				if (i === selectedIndex) {
-					this.scrollTo(i);
+					this.scrollTo(i, false);
 					return;
 				}
 			}
 		}
 	}
 
-	scrollTo = (val) => {
+	shouldComponentUpdate (nextProps, nextState) {
+		if ( nextState.selectedIndex === this.state.selectedIndex && nextState.value === this.state.value) {
+			return false;
+		}
+		return true;
+	}
+
+	scrollTo = (val, transition) => {
 		const {children, orientation, type} = this.props;
 		if (!children || children.length === 0) return;
 
@@ -386,8 +394,11 @@ const DrumPickerBase = class extends Component {
 				this.contentRef.style.transform = `translate(0, ${-((val + 1) * itemHeight)}rem)`;
 
 				if (this.scrollY >= 0 && (child || child === 0)) {
-					this.changeValue(index, child);
+					setTimeout(() => {
+						this.changeValue(index, child);
+					}, transition? 300 : 0)
 				}
+
 			}
 		} else {
 			const itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
@@ -398,9 +409,67 @@ const DrumPickerBase = class extends Component {
 				this.contentRef.style.transform = `translate(${-((val + 1) * itemWidth)}rem, 0)`;
 
 				if (this.scrollX >= 0 && (child || child === 0)) {
-					this.changeValue(index, child);
+					setTimeout(() => {
+						this.changeValue(index, child);
+					}, transition? 300 : 0)
 				}
 			}
+		}
+	};
+
+	changeValue = (index, value) => {
+		const {type, onChange} = this.props;
+		const oldValue = this.state.value;
+		if (index !== this.state.selectedIndex) {
+			this.setState({
+				selectedIndex: index,
+				value: value
+			}, () => {
+				if (value !== oldValue) {
+					if (type === 'number') {
+						onChange({value});
+					} else {
+						onChange({value: index});
+					}
+				}
+			});
+
+		}
+	};
+
+	handleDecrement = () => {
+		this.handleClick(-1);
+	};
+
+	handleIncrement = () => {
+		this.handleClick(1);
+	};
+
+	handleClick = (direction) => {
+		const {orientation, wrap} = this.props;
+
+		if (!this.props.disabled && this.props.children.length > 0) {
+			let itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
+			let itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
+			// this is to avoid division by 0
+			if (itemHeight === 0) {
+				itemHeight = 1;
+			}
+			if (itemWidth === 0) {
+				itemWidth = 1;
+			}
+
+			this.contentRef.style.transition = 'transform 300ms';
+
+			if (orientation === 'horizontal') {
+				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollX / itemWidth + direction) : clamp(0, this.props.children.length - 1, this.scrollX / itemWidth + direction), true);
+			} else if (orientation === 'vertical') {
+				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollY / itemHeight + direction) : clamp(0, this.props.children.length - 1, this.scrollY / itemHeight + direction), true);
+			}
+			// remove transition for further touch related changes
+			setTimeout(() => {
+				this.contentRef.style.transition = 'none';
+			}, 300);
 		}
 	};
 
@@ -454,7 +523,7 @@ const DrumPickerBase = class extends Component {
 			} else if (targetY > height) {
 				targetY = height;
 			}
-			this.scrollTo(targetY / itemHeight);
+			this.scrollTo(targetY / itemHeight, false);
 		} else {
 			const itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
 
@@ -468,26 +537,10 @@ const DrumPickerBase = class extends Component {
 			} else if (targetX > height) {
 				targetX = height;
 			}
-			this.scrollTo(targetX / itemWidth);
+			this.scrollTo(targetX / itemWidth, false);
 		}
 	};
 
-	changeValue = (index, value) => {
-		const {type, onChange} = this.props;
-		if (index !== this.state.selectedIndex) {
-			this.setState({
-				selectedIndex: index,
-				value: value
-			});
-			if (value !== this.state.value) {
-				if (type === 'number') {
-					onChange({value});
-				} else {
-					onChange({value: index});
-				}
-			}
-		}
-	};
 
 	wrapRange = (min, max, value) => {
 		if (value > max) {
@@ -576,54 +629,18 @@ const DrumPickerBase = class extends Component {
 
 			if (orientation === 'horizontal' && isLeft(keyCode)) {
 				ev.stopPropagation();
-				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollX / itemWidth - 1) : clamp(0, this.props.children.length - 1, this.scrollX / itemWidth - 1));
+				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollX / itemWidth - 1) : clamp(0, this.props.children.length - 1, this.scrollX / itemWidth - 1), true);
 			} else if (orientation === 'horizontal' && isRight(keyCode) ) {
 				ev.stopPropagation();
-				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollX / itemWidth + 1) : clamp(0, this.props.children.length - 1, this.scrollX / itemWidth + 1));
+				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollX / itemWidth + 1) : clamp(0, this.props.children.length - 1, this.scrollX / itemWidth + 1), true);
 			} else if (orientation === 'vertical' && isUp(keyCode)) {
 				ev.stopPropagation();
-				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollY / itemHeight - 1) : clamp(0, this.props.children.length - 1, this.scrollY / itemHeight - 1));
+				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollY / itemHeight - 1) : clamp(0, this.props.children.length - 1, this.scrollY / itemHeight - 1), true);
 			} else if (orientation === 'vertical' && isDown(keyCode) ) {
 				ev.stopPropagation();
-				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollY / itemHeight + 1) : clamp(0, this.props.children.length - 1, this.scrollY / itemHeight + 1));
+				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollY / itemHeight + 1) : clamp(0, this.props.children.length - 1, this.scrollY / itemHeight + 1), true);
 			}
 
-			// remove transition for further touch related changes
-			setTimeout(() => {
-				this.contentRef.style.transition = 'none';
-			}, 300);
-		}
-	};
-
-	handleDecrement = () => {
-		this.handleClick(-1);
-	};
-
-	handleIncrement = () => {
-		this.handleClick(1);
-	};
-
-	handleClick = (direction) => {
-		const {orientation, wrap} = this.props;
-
-		if (!this.props.disabled && this.props.children.length > 0) {
-			let itemHeight = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().height, 'rem').slice(0, -3));
-			let itemWidth = parseFloat(ri.unit(this.indicatorRef.getBoundingClientRect().width, 'rem').slice(0, -3));
-			// this is to avoid division by 0
-			if (itemHeight === 0) {
-				itemHeight = 1;
-			}
-			if (itemWidth === 0) {
-				itemWidth = 1;
-			}
-
-			this.contentRef.style.transition = 'transform 300ms';
-
-			if (orientation === 'horizontal') {
-				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollX / itemWidth + direction) : clamp(0, this.props.children.length - 1, this.scrollX / itemWidth + direction));
-			} else if (orientation === 'vertical') {
-				this.scrollTo(wrap ? this.wrapRange(0, this.props.children.length - 1, this.scrollY / itemHeight + direction) : clamp(0, this.props.children.length - 1, this.scrollY / itemHeight + direction));
-			}
 			// remove transition for further touch related changes
 			setTimeout(() => {
 				this.contentRef.style.transition = 'none';
