@@ -8,6 +8,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `Noto Sans` font as the default font
 
+### Fixed
+
+- `agate/Heading` position of underline when size="tile" on Carbon, Cobalt, Copper, Electro, Titanium
+
 ## [2.0.0-alpha.3] - 2021-04-26
 
 ### Added
