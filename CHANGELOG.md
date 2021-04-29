@@ -11,6 +11,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/ContextualPopupDecorator` style to match latest design for Silicon skin
+- `agate/ContextualPopupDecorator` layout for Carbon, Cobalt, Copper, Electro, Titanium skins
 
 ## [2.0.0-alpha.3] - 2021-04-26
 
