@@ -10,6 +10,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
+- `agate/ArcSlider` text size be the same on all skins
 - `agate/ArcSlider` style to match latest design for Silicon skin
 
 ## [2.0.0-alpha.3] - 2021-04-26
