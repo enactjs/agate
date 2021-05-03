@@ -8,6 +8,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `Noto Sans` font as the default font
 
+### Fixed
+
+- `agate/Input` to match latest design for Silicon skin
+
 ## [2.0.0-alpha.3] - 2021-04-26
 
 ### Added
@@ -17,7 +21,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
-- `agate/Checkbox`, `agate/FanSpeedControl`, `agate/ImageItem`, `agate/Input`, `agate/Item`, and `agate/WindDirectionControl` to match latest design for Silicon skin
+- `agate/Checkbox`, `agate/FanSpeedControl`, `agate/ImageItem`, `agate/Item`, and `agate/WindDirectionControl` to match latest design for Silicon skin
 - `agate/Dropdown` misalignment of `Button` and `ContextualPopup` on the edge of screen
 
 ## [2.0.0-alpha.2] - 2021-04-02
