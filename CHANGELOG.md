@@ -28,6 +28,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/Checkbox`, `agate/FanSpeedControl`, `agate/ImageItem`, `agate/Item`, and `agate/WindDirectionControl` to match latest design for Silicon skin
 - `agate/Dropdown` misalignment of `Button` and `ContextualPopup` on the edge of screen
+- `agate/Popup` to apply marquee for long title
 
 ## [2.0.0-alpha.2] - 2021-04-02
 
