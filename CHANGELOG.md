@@ -10,6 +10,9 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
+- `agate/ArcSlider` text size be the same on all skins
+- `agate/ArcSlider` style to match latest design for Silicon skin
+- `agate/RadioItem` icon border-color to be visible when item is focused in Carbon skin
 - `agate/Popup` to have the same background-color for body and buttons section for all skins except Silicon
 
 ## [2.0.0-alpha.3] - 2021-04-26
