@@ -1,4 +1,5 @@
 import Popup from '../../../../Popup';
+import {Button} from '../../../../Button';
 
 const PopupTests = [
 	<Popup open>Popup!</Popup>,
@@ -11,7 +12,49 @@ const PopupTests = [
 	<Popup open position="fullscreen">Popup!</Popup>,
 	<Popup open position="left">Popup!</Popup>,
 	<Popup open position="right">Popup!</Popup>,
-	<Popup open position="top">Popup!</Popup>
+	<Popup open position="top">Popup!</Popup>,
+	<Popup open>
+		Popup!
+		<buttons>
+			<Button>OK</Button>
+			<Button>Cancel</Button>
+		</buttons>
+	</Popup>,
+	<Popup open position="bottom">
+		Popup!
+		<buttons>
+			<Button>OK</Button>
+			<Button>Cancel</Button>
+		</buttons>
+	</Popup>,
+	<Popup open position="fullscreen">
+		Popup!
+		<buttons>
+			<Button>OK</Button>
+			<Button>Cancel</Button>
+		</buttons>
+	</Popup>,
+	<Popup open position="left">
+		Popup!
+		<buttons>
+			<Button>OK</Button>
+			<Button>Cancel</Button>
+		</buttons>
+	</Popup>,
+	<Popup open position="right">
+		Popup!
+		<buttons>
+			<Button>OK</Button>
+			<Button>Cancel</Button>
+		</buttons>
+	</Popup>,
+	<Popup open position="top">
+		Popup!
+		<buttons>
+			<Button>OK</Button>
+			<Button>Cancel</Button>
+		</buttons>
+	</Popup>
 ];
 
 export default PopupTests;
