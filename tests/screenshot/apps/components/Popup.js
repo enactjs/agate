@@ -19,6 +19,41 @@ const PopupTests = [
 			<Button>OK</Button>
 			<Button>Cancel</Button>
 		</buttons>
+	</Popup>,
+	<Popup open position="bottom">
+		Popup!
+		<buttons>
+			<Button>OK</Button>
+			<Button>Cancel</Button>
+		</buttons>
+	</Popup>,
+	<Popup open position="fullscreen">
+		Popup!
+		<buttons>
+			<Button>OK</Button>
+			<Button>Cancel</Button>
+		</buttons>
+	</Popup>,
+	<Popup open position="left">
+		Popup!
+		<buttons>
+			<Button>OK</Button>
+			<Button>Cancel</Button>
+		</buttons>
+	</Popup>,
+	<Popup open position="right">
+		Popup!
+		<buttons>
+			<Button>OK</Button>
+			<Button>Cancel</Button>
+		</buttons>
+	</Popup>,
+	<Popup open position="top">
+		Popup!
+		<buttons>
+			<Button>OK</Button>
+			<Button>Cancel</Button>
+		</buttons>
 	</Popup>
 ];
 
