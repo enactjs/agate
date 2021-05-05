@@ -7,6 +7,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Added
 
 - `Noto Sans` font as the default font
+- `agate/Header` Marquee for title, subtitle, and titleAbove
 
 ### Fixed
 
