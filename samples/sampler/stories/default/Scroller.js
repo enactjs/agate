@@ -17,7 +17,7 @@ const ScrollerConfig = mergeComponentMetadata('Scroller', UiScrollerBasic, Scrol
 
 export default {
 	title: 'Agate/Scroller',
-	component: 'Scroller' 
+	component: 'Scroller'
 };
 
 export const _Scroller = () => (
