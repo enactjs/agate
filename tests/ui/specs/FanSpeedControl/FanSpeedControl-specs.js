@@ -8,8 +8,8 @@ describe('FanSpeedControl', function () {
 		Page.open();
 	});
 
-	describe('default', function () {
-		const fanSpeedControl = Page.components.fanSpeedControlDefault;
+	describe('without icon', function () {
+		const fanSpeedControl = Page.components.fanSpeedControlWithoutIcon;
 
 		it('should have the first arc selected by default', function () {
 			Page.spotlightSelect();
@@ -26,8 +26,8 @@ describe('FanSpeedControl', function () {
 			expect(fanSpeedControl.coloredPath(4).getCSSProperty('stroke').value).to.equal(unselectedColor);
 		});
 
-		it('should display `fan` icon', function () {
-			expect(fanSpeedControl.iconValue()).to.equal(983227); // decimal converted charCode of Unicode 'fan' character
+		it('should not display an icon', function () {
+			expect(fanSpeedControl.iconValue()).to.equal(undefined); // eslint-disable-line
 		});
 
 		it('should display value `1` by default', function () {
@@ -41,11 +41,11 @@ describe('FanSpeedControl', function () {
 		});
 	});
 
-	describe('custom', function () {
-		const fanSpeedControl = Page.components.fanSpeedControlCustom;
+	describe('with icon', function () {
+		const fanSpeedControl = Page.components.fanSpeedControlWithIcon;
 
-		it('should display custom icon', function () {
-			expect(fanSpeedControl.iconValue()).to.equal(983060); // decimal converted charCode of Unicode 'happyface' character
+		it('should display an icon', function () {
+			expect(fanSpeedControl.iconValue()).to.equal(983227); // decimal converted charCode of Unicode 'fan' character
 		});
 	});
 

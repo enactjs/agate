@@ -102,7 +102,6 @@ const FanSpeedControlBase = kind({
 	},
 
 	defaultProps: {
-		icon: 'fan',
 		max: 10,
 		min: 1,
 		value: 1

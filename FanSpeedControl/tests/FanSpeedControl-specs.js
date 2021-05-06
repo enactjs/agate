@@ -50,4 +50,24 @@ describe('FanSpeedControl Specs', () => {
 		const actual = handleChange.mock.calls.length;
 		expect(actual).toBe(expected);
 	});
+
+	test('should display an icon when "icon" prop is passed to component', () => {
+		const fanSpeedControl = mount(
+			<FanSpeedControl icon="fan" />
+		);
+
+		const expected = 983227; // decimal converted charCode of Unicode 'fan' character
+		const actual = fanSpeedControl.find('Icon').text().codePointAt();
+		expect(actual).toBe(expected);
+	});
+
+	test('should not display an icon when "icon" props is not passed to component', () => {
+		const fanSpeedControl = mount(
+			<FanSpeedControl />
+		);
+
+		const expected = undefined; // eslint-disable-line
+		const actual = fanSpeedControl.find('Icon').text().codePointAt();
+		expect(actual).toBe(expected);
+	});
 });

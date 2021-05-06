@@ -12,18 +12,18 @@ spotlight.setPointerMode(false);
 const app = (props) => <div {...props}>
 	<div>
 		<Section>
-			<Heading>FanSpeedControl Default</Heading>
+			<Heading>FanSpeedControl without icon</Heading>
 			<FanSpeedControl
-				id="fanSpeedControlDefault"
+				id="fanSpeedControlWithoutIcon"
 				max={10}
 				min={1}
 			/>
 		</Section>
 		<Section>
-			<Heading>FanSpeedControl Custom</Heading>
+			<Heading>FanSpeedControl with icon</Heading>
 			<FanSpeedControl
-				id="fanSpeedControlCustom"
-				icon="happyface"
+				id="fanSpeedControlWithIcon"
+				icon="fan"
 				max={10}
 				min={1}
 			/>
@@ -32,6 +32,7 @@ const app = (props) => <div {...props}>
 			<Heading>FanSpeedControl Disabled</Heading>
 			<FanSpeedControl
 				id="fanSpeedControlDisabled"
+				icon="fan"
 				disabled
 				max={10}
 				min={1}
