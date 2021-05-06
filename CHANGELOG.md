@@ -27,7 +27,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/Checkbox`, `agate/FanSpeedControl`, `agate/ImageItem`, `agate/Item`, and `agate/WindDirectionControl` to match latest design for Silicon skin
-- `agate/DateTimePicker` active bar background color
+- `agate/DateTimePicker` active bar background color for Carbon, Copper, Cobalt and Titanium skins
 - `agate/Dropdown` misalignment of `Button` and `ContextualPopup` on the edge of screen
 
 ## [2.0.0-alpha.2] - 2021-04-02
