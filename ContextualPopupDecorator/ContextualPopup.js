@@ -52,7 +52,6 @@ const ContextualPopupArrow = kind({
 
 const ContextualPopupRoot = Skinnable('div');
 
-
 /**
  * A popup component used by
  * [ContextualPopupDecorator]{@link agate/ContextualPopupDecorator.ContextualPopupDecorator} to
