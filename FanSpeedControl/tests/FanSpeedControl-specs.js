@@ -61,7 +61,7 @@ describe('FanSpeedControl Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should not display an icon when "icon" props is not passed to component', () => {
+	test('should not display an icon when "icon" prop is not passed to component', () => {
 		const fanSpeedControl = mount(
 			<FanSpeedControl />
 		);
