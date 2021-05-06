@@ -168,15 +168,7 @@ const ContextualPopupBase = kind({
 		 * @default false
 		 * @public
 		 */
-		showCloseButton: PropTypes.bool,
-
-		/**
-		 * The current skin for this component.
-		 *
-		 * @type {String}
-		 * @private
-		 */
-		skin: PropTypes.string
+		showCloseButton: PropTypes.bool
 	},
 
 	defaultProps: {
@@ -204,10 +196,8 @@ const ContextualPopupBase = kind({
 			{reserveClose: showCloseButton},
 			offset
 		),
-		closeButton: ({css, showCloseButton, skin, onCloseButtonClick}) => {
+		closeButton: ({css, showCloseButton, onCloseButtonClick}) => {
 			if (showCloseButton) {
-				const closeButtonSize = skin === 'silicon' ? 'smallest' : 'small';
-
 				return (
 					<Button
 						aria-label={$L('Close')}
@@ -216,7 +206,7 @@ const ContextualPopupBase = kind({
 						css={css}
 						icon="closex"
 						onTap={onCloseButtonClick}
-						size={closeButtonSize}
+						size="small"
 					/>
 				);
 			}
