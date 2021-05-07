@@ -16,6 +16,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Popup` to have the same background-color for body and buttons section for all skins except Silicon
 - `agate/Popup` to match latest design for Silicon skin
 - `agate/Scroller` to be more visible on Carbon, Cobalt, Copper, Electro, Titanium skins
+- `agate/Slider` to have a more visible background-color on Cobalt skin
 - `agate/SliderButton` button text color to be more visible on Carbon skin
 
 ## [2.0.0-alpha.3] - 2021-04-26
