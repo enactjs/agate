@@ -12,6 +12,8 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/ArcSlider` text size be the same on all skins
 - `agate/ArcSlider` style to match latest design for Silicon skin
+- `agate/Button` to use `agate/Marquee` for the badge
+- `agate/Button` badge background color for Cobalt and Copper skins
 - `agate/RadioItem` icon border-color to be visible when item is focused in Carbon skin
 - `agate/Popup` to have the same background-color for body and buttons section for all skins except Silicon
 - `agate/Popup` to match latest design for Silicon skin
