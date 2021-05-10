@@ -340,7 +340,7 @@ const ButtonDecorator = compose(
 	Pure,
 	IconButtonDecorator,
 	MarqueeDecorator({className: componentCss.marquee}),
-	TooltipDecorator({tooltipDestinationProp: 'decoration'}, {tooltipMarquee: true}),
+	TooltipDecorator({tooltipDestinationProp: 'decoration'}),
 	UiButtonDecorator,
 	Spottable,
 	Skinnable

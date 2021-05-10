@@ -7,6 +7,7 @@ const ButtonTests = [
 	<Button icon="home" iconPosition="after" selected>Click me</Button>,
 	<Button highlighted size="small">Not Selected. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
 	<Button badge={10} badgeColor="#FDC902">Not Selected. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
+	<Button badge="This is a very long badge This is a very long badge  This is a very long badge">Not Selected</Button>,
 
 	<Button>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
 	<Button disabled>click me</Button>,
@@ -65,6 +66,7 @@ const ButtonTests = [
 		<Button icon="home" iconPosition="after" selected>Focused Click me</Button>,
 		<Button highlighted size="small">Focused Not Selected. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
 		<Button badge={10} badgeColor="#FDC902">Focused Not Selected. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
+		<Button badge="This is a very long badge This is a very long badge  This is a very long badge">Not Selected</Button>,
 
 		<Button>Focused Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
 		<Button disabled>Focused click me</Button>,
@@ -154,6 +156,7 @@ const ButtonTests = [
 		<Button icon="home" iconPosition="after" selected>Click me</Button>,
 		<Button highlighted size="small">Not Selected. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
 		<Button badge={10} badgeColor="#FDC902">Not Selected. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
+		<Button badge="This is a very long badge This is a very long badge  This is a very long badge">Not Selected</Button>,
 
 		<Button>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
 		<Button disabled>click me</Button>,
