@@ -297,7 +297,7 @@ const ButtonBase = kind({
 
 		return UiButtonBase.inline({
 			...rest,
-			css,
+			css
 		});
 	}
 });
