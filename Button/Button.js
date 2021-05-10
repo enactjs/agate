@@ -30,6 +30,8 @@ import TooltipDecorator from '../TooltipDecorator';
 
 import componentCss from './Button.module.less';
 
+const MarqueeDiv = MarqueeDecorator('div');
+
 /**
  * A button component.
  *
@@ -254,7 +256,7 @@ const ButtonBase = kind({
 			if (!badge) return decoration;
 			return (
 				<Fragment>
-					<div className={css.badge}>{badge}</div>
+					<MarqueeDiv className={css.badge} marqueeOn="render">{badge}</MarqueeDiv>
 					{decoration}
 				</Fragment>
 			);
@@ -295,7 +297,7 @@ const ButtonBase = kind({
 
 		return UiButtonBase.inline({
 			...rest,
-			css
+			css,
 		});
 	}
 });
@@ -338,7 +340,7 @@ const ButtonDecorator = compose(
 	Pure,
 	IconButtonDecorator,
 	MarqueeDecorator({className: componentCss.marquee}),
-	TooltipDecorator({tooltipDestinationProp: 'decoration'}),
+	TooltipDecorator({tooltipDestinationProp: 'decoration'}, {tooltipMarquee: true}),
 	UiButtonDecorator,
 	Spottable,
 	Skinnable
