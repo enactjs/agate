@@ -121,6 +121,14 @@ const ArcPickerBase = kind({
 		 */
 		selectionType: PropTypes.oneOf(['cumulative', 'single']),
 
+		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @public
+		 */
+		skin: PropTypes.string,
+
 		/*
 		 * State of possible skin variants.
 		 *
@@ -185,8 +193,8 @@ const ArcPickerBase = kind({
 	computed: {
 		arcSegments: (props, context) => {
 			const {accent: accentColor} = context || {};
-			const {children, endAngle, isFocused, onClick, radius, selectionType, skinVariants, startAngle, strokeWidth, value} = props;
-			const backgroundColor = props.backgroundColor || (skinVariants && skinVariants.night ? '#444444' : '#888888');
+			const {children, endAngle, isFocused, onClick, radius, selectionType, skin, skinVariants, startAngle, strokeWidth, value} = props;
+			const backgroundColor = props.backgroundColor || (skinVariants && skinVariants.night ?  '#444444' : skin === 'titanium'? '#fff' : '#888888');
 			const foregroundColor = props.foregroundColor || (skinVariants && skinVariants.night ? '#ffffff' : '#000000');
 
 			if (!Array.isArray(children)) return [];
@@ -255,7 +263,10 @@ const ArcPickerDecorator = compose(
 	Changeable,
 	ArcPickerBehaviorDecorator,
 	Spottable,
-	Skinnable({variantsProp: 'skinVariants'})
+	Skinnable({
+		prop: 'skin',
+		variantsProp: 'skinVariants'
+	})
 );
 
 /**
