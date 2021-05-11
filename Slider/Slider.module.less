@@ -94,6 +94,10 @@
 			margin: @agate-slider-horizontal-margin;
 			padding: @agate-slider-horizontal-padding;
 
+			&::before {
+				transform: @agate-slider-bg-transform;
+			}
+
 			.bar {
 				left: ((@agate-slider-horizontal-anchorpoint-width / 2) * -1);
 				width: ~"calc(100% + " @agate-slider-horizontal-anchorpoint-width ~")";
