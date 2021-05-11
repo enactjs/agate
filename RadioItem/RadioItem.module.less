@@ -5,6 +5,17 @@
 
 // Public
 .radioItem {
+	.slotBefore {
+		display: flex;
+
+		.icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			align-self: center;
+		}
+	}
+
 	.applySkins({
 		height: @agate-radioitem-height;
 
@@ -17,9 +28,9 @@
 			color: transparent;
 			opacity: @agate-radioitem-icon-opacity;
 			margin: @agate-radioitem-icon-margin;
-			display: flex;
-			align-items: center;
-			justify-content: center;
+			box-sizing: border-box;
+			width: @agate-radioitem-icon-width;
+			height: @agate-radioitem-icon-height;
 		}
 
 		&.inline {
