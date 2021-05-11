@@ -194,7 +194,9 @@ const ArcPickerBase = kind({
 		arcSegments: (props, context) => {
 			const {accent: accentColor} = context || {};
 			const {children, endAngle, isFocused, onClick, radius, selectionType, skin, skinVariants, startAngle, strokeWidth, value} = props;
-			const backgroundColor = props.backgroundColor || (skinVariants && skinVariants.night ?  '#444444' : skin === 'titanium'? '#fff' : '#888888');
+
+			const backgroundColorNight = skin === 'titanium' ? '#fff' : '#888888';
+			const backgroundColor = props.backgroundColor || (skinVariants && skinVariants.night ?  '#444444' : backgroundColorNight);
 			const foregroundColor = props.foregroundColor || (skinVariants && skinVariants.night ? '#ffffff' : '#000000');
 
 			if (!Array.isArray(children)) return [];
