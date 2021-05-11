@@ -10,6 +10,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
+- `agate/ArcPicker` default background color for Titanium skin
 - `agate/ArcSlider` text size be the same on all skins
 - `agate/ArcSlider` style to match latest design for Silicon skin
 - `agate/RadioItem` icon border-color to be visible when item is focused in Carbon skin
