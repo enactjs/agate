@@ -251,7 +251,7 @@ const MediaControls = kind({
 					onClick={paused ? onPlay : onPause}
 					size="large"
 				>
-					<Icon className = {css.playPauseIcon} css={css}>{paused ? playIcon : pauseIcon}</Icon>
+					<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
 				</Button>
 				<Button
 					aria-label={$L('Next')}
