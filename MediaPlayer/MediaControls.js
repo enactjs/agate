@@ -247,6 +247,7 @@ const MediaControls = kind({
 					className={classnames(css.playPauseButton, spotlightDefaultClass)}
 					css={css}
 					disabled={disabled}
+					// icon={paused ? playIcon : pauseIcon}
 					minWidth={false}
 					onClick={paused ? onPlay : onPause}
 					size="large"
