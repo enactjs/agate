@@ -68,8 +68,15 @@
 
 			&.small {
 				.slider {
-					height: @agate-slider-small-height;
+					height: @agate-incrementslider-small-height;
 					padding: @agate-incrementslider-horizontal-small-slider-padding;
+
+					.knob {
+						&::before {
+							height: @agate-incrementslider-small-knob-height;
+							width: @agate-incrementslider-small-knob-width;
+						}
+					}
 				}
 			}
 		}
@@ -108,6 +115,14 @@
 			&.small {
 				.slider {
 					padding: @agate-incrementslider-vertical-small-slider-padding;
+					width: @agate-button-small-height;
+
+					.knob {
+						&::before {
+							height: @agate-incrementslider-small-knob-height;
+							width: @agate-incrementslider-small-knob-width;
+						}
+					}
 				}
 			}
 		}

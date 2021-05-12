@@ -663,7 +663,6 @@
 @agate-slider-bg-transform: none;
 @agate-slider-border-radius: @agate-slider-height;
 @agate-slider-height: @agate-button-height;
-@agate-slider-small-height: @agate-button-small-height;
 @agate-slider-horizontal-anchorpoint-height: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
 @agate-slider-horizontal-anchorpoint-width: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
 @agate-slider-horizontal-margin: 0 @agate-component-spacing;
@@ -702,17 +701,20 @@
 @agate-incrementslider-horizontal-min-width: auto;
 @agate-incrementslider-horizontal-slider-margin: 0;
 @agate-incrementslider-horizontal-slider-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale) + 3px);
-@agate-incrementslider-horizontal-small-slider-padding: ((@agate-button-small-height - @agate-slider-track-height) / 2) (((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale) + 3px);
+@agate-incrementslider-horizontal-small-slider-padding: ((@agate-button-small-height - @agate-slider-track-height) / 2) (((@agate-incrementslider-small-knob-width / 2) * @agate-slider-knob-resting-state-scale) + 3px);
+@agate-incrementslider-small-height: @agate-button-small-height;
+@agate-incrementslider-small-knob-height: @agate-button-small-height;
+@agate-incrementslider-small-knob-width: @agate-incrementslider-small-knob-height;
 @agate-incrementslider-vertical-button-decrement-border-radius: 0;
 @agate-incrementslider-vertical-button-decrement-border-width: 0;
 @agate-incrementslider-vertical-button-increment-border-radius: 0;
 @agate-incrementslider-vertical-button-increment-border-width: 0;
-@agate-incrementslider-vertical-button-margin: 0;
+@agate-incrementslider-vertical-button-margin: 0 auto;
 @agate-incrementslider-vertical-margin: @agate-slider-vertical-margin;
 @agate-incrementslider-vertical-min-height: auto;
 @agate-incrementslider-vertical-slider-margin: 0;
 @agate-incrementslider-vertical-slider-padding: (((@agate-slider-knob-width / 2) * @agate-slider-knob-resting-state-scale) + 3px) ((@agate-slider-height - @agate-slider-track-height) / 2);
-@agate-incrementslider-vertical-small-slider-padding: @agate-incrementslider-vertical-slider-padding;
+@agate-incrementslider-vertical-small-slider-padding: (((@agate-incrementslider-small-knob-width / 2) * @agate-slider-knob-resting-state-scale) + 3px) ((@agate-button-small-height - @agate-slider-track-height) / 2);
 
 // RadioItem
 // ---------------------------------------
