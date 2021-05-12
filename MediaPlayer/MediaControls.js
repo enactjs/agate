@@ -247,12 +247,11 @@ const MediaControls = kind({
 					className={classnames(css.playPauseButton, spotlightDefaultClass)}
 					css={css}
 					disabled={disabled}
-					// icon={paused ? playIcon : pauseIcon}
 					minWidth={false}
 					onClick={paused ? onPlay : onPause}
 					size="large"
 				>
-					<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
+					<Icon className = {css.playPauseIcon} css={css}>{paused ? playIcon : pauseIcon}</Icon>
 				</Button>
 				<Button
 					aria-label={$L('Next')}
