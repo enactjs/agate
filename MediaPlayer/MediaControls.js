@@ -185,15 +185,7 @@ const MediaControls = kind({
 		 * @default 'shuffle'
 		 * @public
 		 */
-		shuffleIcon: PropTypes.string,
-
-		/**
-		 * The current skin for this component.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		skin: PropTypes.string
+		shuffleIcon: PropTypes.string
 	},
 
 	defaultProps: {
@@ -217,11 +209,7 @@ const MediaControls = kind({
 		badge: ({repeat}) => badges[repeat]
 	},
 
-	render: ({badge, disabled, menuIcon, nextTrackIcon, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffle, shuffleIcon, skin, ...rest}) => {
-
-		const isProblematic = skin === 'cobalt' || skin === 'copper' ? css.exception : css.repeat;
-		const shuffleButtonClassName = shuffle ? isProblematic : '';
-
+	render: ({badge, disabled, menuIcon, nextTrackIcon, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffle, shuffleIcon, ...rest}) => {
 		return (
 			<Container {...rest}>
 				<Button
@@ -237,7 +225,7 @@ const MediaControls = kind({
 				<Button
 					aria-label={$L('Shuffle')}
 					backgroundOpacity="transparent"
-					className={shuffleButtonClassName}
+					className={shuffle ? css.repeat : ''}
 					css={css}
 					disabled={disabled}
 					icon={shuffleIcon}

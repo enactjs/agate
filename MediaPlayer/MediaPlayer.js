@@ -257,14 +257,6 @@ const MediaPlayerBase = kind({
 		shuffle: PropTypes.bool,
 
 		/**
-		 * The current skin for this component.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		skin: PropTypes.string,
-
-		/**
 		 * The index of the current played media.
 		 *
 		 * @type {Number}
@@ -302,7 +294,7 @@ const MediaPlayerBase = kind({
 		durFmt: ({locale}) => getDurFmt(locale)
 	},
 
-	render: ({currentTime, disabled, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, skin, total, ...rest}) => {
+	render: ({currentTime, disabled, durFmt, loop, mediaComponent, mediaRef, onChange, onEnded, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, onUpdate, paused, playlist, proportionPlayed, repeat, shuffle, sourceIndex, total, ...rest}) => {
 		delete rest.source;
 
 		return (
@@ -336,7 +328,6 @@ const MediaPlayerBase = kind({
 					paused={paused}
 					repeat={repeat}
 					shuffle={shuffle}
-					skin={skin}
 				/>
 			</Container>
 		);
@@ -764,7 +755,7 @@ const MediaPlayerDecorator = compose(
 	MediaPlayerBehaviorDecorator,
 	Pure,
 	Slottable({slots: ['source']}),
-	Skinnable({prop: 'skin'}),
+	Skinnable,
 	I18nContextDecorator({localeProp: 'locale'})
 );
 
