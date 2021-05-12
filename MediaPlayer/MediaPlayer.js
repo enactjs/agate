@@ -701,6 +701,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disabl
 			} = this.props;
 
 			delete rest.announce;
+
 			return (
 				<Wrapped
 					{...rest}
