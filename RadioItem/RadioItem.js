@@ -79,6 +79,14 @@ const RadioItemBase = kind({
 		selected: PropTypes.bool,
 
 		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @pub
+		 */
+		skin: PropTypes.string,
+
+		/**
 		 * Nodes to be inserted after the radio button and before `children`.
 		 *
 		 * @type {Node}
@@ -102,13 +110,16 @@ const RadioItemBase = kind({
 		className: ({css, inline, selected, styler}) => styler.append(selected && css.selected, {inline})
 	},
 
-	render: ({children, css, icon, selected, slotBefore, ...rest}) => {
+	render: ({children, css, icon, selected, skin, slotBefore, ...rest}) => {
+		const itemSize = skin === 'silicon' ? 'small' : 'large';
+
 		return (
 			<Item
 				aria-checked={selected}
 				role="checkbox"
 				{...rest}
 				css={css}
+				size={itemSize}
 			>
 				<slotBefore>
 					<Icon className={css.icon} size="small">{icon}</Icon>
@@ -136,7 +147,7 @@ const RadioItemDecorator = compose(
 	Touchable,
 	Slottable({slots: ['label', 'slotAfter', 'slotBefore']}),
 	Spottable,
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 /**
