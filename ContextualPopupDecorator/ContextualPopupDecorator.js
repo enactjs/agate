@@ -23,7 +23,6 @@ import {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 import {ContextualPopup} from './ContextualPopup';
-import Skinnable from '../Skinnable';
 
 import componentCss from './ContextualPopupDecorator.module.less';
 
@@ -748,7 +747,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 const ContextualPopupDecorator = compose(
 	ApiDecorator({api: ['positionContextualPopup']}),
 	I18nContextDecorator({rtlProp: 'rtl'}),
-	Skinnable({prop: 'skin'}),
 	Decorator
 );
 

@@ -63,7 +63,6 @@
 			.closeButton {
 				right: @agate-spotlight-outset;
 				top: @agate-spotlight-outset;
-				height: @agate-contextual-popup-close-button-height;
 
 				.bg {
 					border-color: @agate-contextual-popup-close-button-border-color;
@@ -72,7 +71,6 @@
 				.focus({
 					.bg {
 						border-color: @agate-contextual-popup-close-button-border-color;
-						background-color: @agate-contextual-popup-close-button-focus-bg-color;
 					}
 				});
 
@@ -82,7 +80,7 @@
 			}
 
 			&.reserveClose {
-				.padding-start-end(@agate-contextual-popup-padding-horizontal, @agate-contextual-popup-close-button-height * 1.5);
+				.padding-start-end(@agate-contextual-popup-padding-horizontal, @agate-button-small-height * 1.5);
 			}
 
 			&.above {
@@ -117,7 +115,7 @@
 		.enact-locale-rtl ({
 			.container {
 				&.reserveClose {
-					.padding-start-end(@agate-contextual-popup-close-button-height * 1.5, @agate-contextual-popup-padding-horizontal);
+					.padding-start-end(@agate-button-small-height * 1.5, @agate-contextual-popup-padding-horizontal);
 				}
 			}
 
