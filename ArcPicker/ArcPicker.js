@@ -121,6 +121,16 @@ const ArcPickerBase = kind({
 		 */
 		selectionType: PropTypes.oneOf(['cumulative', 'single']),
 
+		/*
+		 * State of possible skin variants.
+		 *
+		 * Used to set backgroundColor and foregroundColor.
+		 *
+		 * @type {Object}
+		 * @private
+		 */
+		skinVariants: PropTypes.object,
+
 		/**
 		 * Nodes to be inserted in the center of the ArcPicker.
 		 *
@@ -159,9 +169,7 @@ const ArcPickerBase = kind({
 	},
 
 	defaultProps: {
-		backgroundColor: '#eeeeee',
 		endAngle: 310,
-		foregroundColor: '#444444',
 		radius: 150,
 		startAngle: 50,
 		strokeWidth: 6
@@ -177,7 +185,9 @@ const ArcPickerBase = kind({
 	computed: {
 		arcSegments: (props, context) => {
 			const {accent: accentColor} = context || {};
-			const {backgroundColor, children, endAngle, foregroundColor, isFocused, onClick, radius, selectionType, startAngle, strokeWidth, value} = props;
+			const {children, endAngle, isFocused, onClick, radius, selectionType, skinVariants, startAngle, strokeWidth, value} = props;
+			const backgroundColor = props.backgroundColor || (skinVariants && skinVariants.night ? '#444444' : '#888888');
+			const foregroundColor = props.foregroundColor || (skinVariants && skinVariants.night ? '#ffffff' : '#000000');
 
 			if (!Array.isArray(children)) return [];
 			return (
@@ -218,6 +228,7 @@ const ArcPickerBase = kind({
 		delete rest.onClick;
 		delete rest.selectionType;
 		delete rest.startAngle;
+		delete rest.skinVariants;
 
 		return (
 			// eslint-disable-next-line jsx-a11y/role-has-required-aria-props
@@ -244,7 +255,7 @@ const ArcPickerDecorator = compose(
 	Changeable,
 	ArcPickerBehaviorDecorator,
 	Spottable,
-	Skinnable
+	Skinnable({variantsProp: 'skinVariants'})
 );
 
 /**
