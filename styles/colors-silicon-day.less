@@ -138,10 +138,9 @@
 
 // ContextualPopup
 // ---------------------------------------
-@agate-contextual-popup-bg-color:                   @silicon-light-gray;
-@agate-contextual-popup-border-color:               @silicon-gray;
+@agate-contextual-popup-bg-color:                   @silicon-dark-gray;
 @agate-contextual-popup-close-button-border-color:  transparent;
-@agate-contextual-popup-color:                      @agate-black;
+@agate-contextual-popup-color:                      @silicon-white;
 
 // DateTimePicker
 // ---------------------------------------
@@ -185,10 +184,11 @@
 // ImageItem
 // ---------------------------------------
 @agate-imageitem-border-color: transparent;
-@agate-imageitem-focus-border-color: @agate-accent;
-@agate-imageitem-focus-bg-color: @agate-background-focus;
 @agate-imageitem-caption-overlay-text-color: @agate-white;
 @agate-imageitem-caption-overlay-opacity: 0.5;
+@agate-imageitem-caption-background-image: @agate-gradient;
+@agate-imageitem-focus-bg-color: @agate-gradient;
+@agate-imageitem-focus-border-color: @agate-accent;
 
 // Input
 // ---------------------------------------
@@ -270,14 +270,15 @@
 // Popup
 // ---------------------------------------
 @agate-popup-plain-body-color: @agate-foreground;
-@agate-popup-bg-color: fade(@silicon-gray, 95%);
+@agate-popup-bg-color: fade(@silicon-very-light-gray, 95%);
 @agate-popup-bg-image: none;
 @agate-popup-shadow: none;
 @agate-popup-body-border: none;
 @agate-popup-body-border-color: @agate-highlight transparent;
 @agate-popup-body-bg-color: transparent;
 @agate-popup-body-bg-image: none;
-@agate-popup-buttons-bg-color: @silicon-very-light-gray;
+@agate-popup-buttons-bg-color: @agate-noble-gray;
+@agate-popup-closebutton-icon-color: @silicon-black;
 
 // PopupMenu
 // ---------------------------------------
@@ -312,7 +313,7 @@
 
 // Scroller
 // ---------------------------------------
-@agate-scroller-scrollbar-thumb-bg-color: @agate-black;
+@agate-scroller-scrollbar-thumb-bg-color: @agate-foreground;
 
 // IncrementSlider
 // ---------------------------------------
