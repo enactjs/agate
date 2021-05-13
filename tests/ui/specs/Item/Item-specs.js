@@ -6,6 +6,7 @@ describe('Item', function () {
 	const item3WithLabel = Page.components.item3WithLabel;
 	const item4Inline = Page.components.item4Inline;
 	const item5InlineDisabled = Page.components.item5InlineDisabled;
+	const item6Inline = Page.components.item6Inline;
 	const item7Inline = Page.components.item7Inline;
 
 	describe('LTR locale', function () {
@@ -40,9 +41,9 @@ describe('Item', function () {
 				});
 
 				it('should focus an inline item with 5-way Right', function () {
-					item7Inline.focus();
+					item6Inline.focus();
 					Page.spotlightRight();
-					expect(Page.components.item8Inline.self.isFocused()).to.be.true();
+					expect(Page.components.item7Inline.self.isFocused()).to.be.true();
 				});
 			});
 
@@ -111,9 +112,9 @@ describe('Item', function () {
 				});
 
 				it('should focus an inline item with 5-way Left', function () {
-					item7Inline.focus();
+					item6Inline.focus();
 					Page.spotlightLeft();
-					expect(Page.components.item8Inline.self.isFocused()).to.be.true();
+					expect(Page.components.item7Inline.self.isFocused()).to.be.true();
 				});
 			});
 		});
