@@ -84,10 +84,11 @@
 
 // ContextualPopup
 // ---------------------------------------
-@agate-contextual-popup-border-radius:      30px;
-@agate-contextual-popup-padding-vertical:   24px;
-@agate-contextual-popup-padding-horizontal: 36px;
-@agate-contextual-popup-font-size:          27px;
+@agate-contextual-popup-border-radius:       9px;
+@agate-contextual-popup-font-size:           27px;
+@agate-contextual-popup-font-weight:         300;
+@agate-contextual-popup-padding-horizontal:  24px;
+@agate-contextual-popup-padding-vertical:    15px;
 
 // DateTimePicker
 // ---------------------------------------
@@ -351,20 +352,34 @@
 @agate-popup-border-width: 1px 0;
 @agate-popup-border-radius: 39px;
 @agate-popup-fullscreen-border-radius: 0;
+@agate-popup-fullscreen-buttons-border-radius: @agate-popup-fullscreen-border-radius;
 @agate-popup-border: none;
-@agate-popup-padding: (@agate-component-spacing * 2) 0 0 0;
-@agate-popup-closebutton-title-padding: 0 (@agate-button-small-height) 0 @agate-component-spacing;
-@agate-popup-closebutton-content-padding: @agate-popup-closebutton-title-padding;
-@agate-popup-content-margin: 0 12px;
-@agate-popup-title-padding: 0 @agate-component-spacing;
+@agate-popup-padding: 99px 0 0 0;
+@agate-popup-closebutton-margin: 0;
+@agate-popup-closebutton-position: 30px 30px 9px auto;
+@agate-popup-closebutton-title-padding: @agate-popup-title-padding;
+@agate-popup-content-margin: 0 81px;
+@agate-popup-content-min-height: 183px;
+@agate-popup-content-width: 681px;
+@agate-popup-content-padding: 0 0 39px 0;
+@agate-popup-title-font-size: 33px;
+@agate-popup-title-height: 60px;
+@agate-popup-title-margin: 0;
+@agate-popup-title-padding: 30px 111px 9px 81px;
+@agate-popup-title-width: 651px;
 @agate-popup-body-padding: 0;
 @agate-popup-body-border-radius: 0 0 @agate-popup-border-radius @agate-popup-border-radius;
+@agate-popup-body-height: 100%;
 @agate-popup-buttons-border-radius: @agate-popup-body-border-radius;
-@agate-popup-buttons-padding: @agate-component-spacing 0;
-@agate-popup-content-padding: @agate-component-spacing @agate-component-spacing (3 * @agate-component-spacing) @agate-component-spacing;
-@agate-popup-closebutton-position-left: auto;
-@agate-popup-closebutton-position-right: 0;
+@agate-popup-buttons-height: 60px;
+@agate-popup-buttons-padding: 39px 0;
+@agate-popup-font-size: 27px;
+@agate-popup-justify-content: space-between;
+@agate-popup-bottom-buttons-border-radius: 0;
+@agate-popup-left-buttons-border-radius: 0 0 @agate-popup-border-radius 0;
+@agate-popup-right-buttons-border-radius: 0 0 0 @agate-popup-border-radius;
 @agate-popup-top-border-radius: 0 0 @agate-popup-border-radius @agate-popup-border-radius;
+@agate-popup-with-title-padding: 0;
 
 // PopupMenu
 // ---------------------------------------
