@@ -254,7 +254,7 @@ const ButtonBase = kind({
 			if (!badge) return decoration;
 			return (
 				<Fragment>
-					<div className={css.badge} marqueeOn="render">{badge}</div>
+					<div className={css.badge}>{badge}</div>
 					{decoration}
 				</Fragment>
 			);
