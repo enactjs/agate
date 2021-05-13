@@ -30,8 +30,6 @@ import TooltipDecorator from '../TooltipDecorator';
 
 import componentCss from './Button.module.less';
 
-const MarqueeDiv = MarqueeDecorator('div');
-
 /**
  * A button component.
  *
@@ -256,7 +254,7 @@ const ButtonBase = kind({
 			if (!badge) return decoration;
 			return (
 				<Fragment>
-					<MarqueeDiv className={css.badge} marqueeOn="render">{badge}</MarqueeDiv>
+					<div className={css.badge} marqueeOn="render">{badge}</div>
 					{decoration}
 				</Fragment>
 			);
