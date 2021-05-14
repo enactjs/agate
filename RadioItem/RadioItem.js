@@ -117,7 +117,7 @@ const RadioItemBase = kind({
 				role="checkbox"
 				{...rest}
 				css={css}
-				size={skin === 'silicon' ? 'small' : 'large'}
+				{...(skin === 'silicon') ? {size: 'small'} : {}}
 			>
 				<slotBefore>
 					<Icon className={css.icon} size="small">{icon}</Icon>
