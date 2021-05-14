@@ -82,7 +82,7 @@ const RadioItemBase = kind({
 		 * The current skin for this component.
 		 *
 		 * @type {String}
-		 * @pub
+		 * @private
 		 */
 		skin: PropTypes.string,
 
@@ -111,15 +111,13 @@ const RadioItemBase = kind({
 	},
 
 	render: ({children, css, icon, selected, skin, slotBefore, ...rest}) => {
-		const itemSize = skin === 'silicon' ? 'small' : 'large';
-
 		return (
 			<Item
 				aria-checked={selected}
 				role="checkbox"
 				{...rest}
 				css={css}
-				size={itemSize}
+				size={skin === 'silicon' ? 'small' : 'large'}
 			>
 				<slotBefore>
 					<Icon className={css.icon} size="small">{icon}</Icon>
