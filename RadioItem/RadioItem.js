@@ -62,14 +62,6 @@ const RadioItemBase = kind({
 		icon: PropTypes.string,
 
 		/**
-		 * Applies inline styles for RadioItem.
-		 *
-		 * @type {Boolean}
-		 * @public
-		 */
-		inline: PropTypes.bool,
-
-		/**
 		 * Sets the RadioItem to its 'on' state.
 		 *
 		 * @type {Boolean}
@@ -107,7 +99,7 @@ const RadioItemBase = kind({
 	},
 
 	computed: {
-		className: ({css, inline, selected, styler}) => styler.append(selected && css.selected, {inline})
+		className: ({css, selected, styler}) => styler.append(selected && css.selected)
 	},
 
 	render: ({children, css, icon, selected, skin, slotBefore, ...rest}) => {

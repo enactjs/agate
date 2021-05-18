@@ -21,7 +21,7 @@ class RadioItemInterface {
 		return hasClass('RadioItem_RadioItem_selected', this.self);
 	}
 	get isInline () {
-		return $(`#${this.id}.RadioItem_RadioItem_inline`).isExisting();
+		return $(`#${this.id}.Item_Item_inline`).isExisting();
 	}
 }
 
