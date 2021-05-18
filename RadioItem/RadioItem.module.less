@@ -5,20 +5,7 @@
 
 // Public
 .radioItem {
-	.slotBefore {
-		display: flex;
-
-		.icon {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			align-self: center;
-		}
-	}
-
 	.applySkins({
-		height: @agate-radioitem-height;
-
 		.icon {
 			border-color: @agate-radioitem-icon-border-color;
 			border-style: solid;
@@ -28,21 +15,9 @@
 			color: transparent;
 			opacity: @agate-radioitem-icon-opacity;
 			margin: @agate-radioitem-icon-margin;
-			box-sizing: border-box;
-			width: @agate-radioitem-icon-width;
-			height: @agate-radioitem-icon-height;
-		}
-
-		&.inline {
-			&.item {
-				padding: @agate-radioitem-inline-padding;
-			}
 		}
 
 		.slotBefore {
-			padding: @agate-radioitem-slotbefore-padding;
-			display: flex;
-			align-items: center;
 			margin-inline-end: @agate-radioitem-slotbefore-margin-end;
 		}
 
