@@ -120,7 +120,6 @@ const RadioItemBase = kind({
 				{...(skin === 'silicon') ? {size: 'small'} : {}}
 			>
 				<slotBefore>
-					{/*<Icon className={css.icon} size="small">{icon}</Icon>*/}
 					<Icon className={css.icon} size={icon === 'circle' ? "small" : "smallest"}>{icon}</Icon>
 					{slotBefore}
 				</slotBefore>
