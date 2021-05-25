@@ -40,6 +40,28 @@
 			width: calc(100% - @agate-button-height - 2* @agate-component-spacing);
 		}
 
+		.sliders {
+			color: @agate-colorpicker-sliders-font-color;
+
+			.slider {
+				.bar {
+					background-color: @agate-colorpicker-slider-bar-bg-color;
+				}
+				.fill {
+					background-color: @agate-colorpicker-slider-fill-bg-color;
+				}
+				.knob::before {
+					background-color: @agate-colorpicker-slider-knob-bg-color;
+				}
+
+				.focus({
+					.bar {
+						background-color: @agate-colorpicker-focus-slider-bar-bg-color;
+					}
+				})
+			}
+		}
+
 		.palette {
 			background-color: @agate-colorpicker-bg-color;
 			border-radius: @agate-colorpicker-palette-border-radius;
@@ -52,6 +74,12 @@
 
 				.bg {
 					border-color: @agate-button-bg-color;
+				}
+
+				.client {
+					.icon {
+						color: @agate-colorpicker-swatch-icon-color;
+					}
 				}
 			}
 
