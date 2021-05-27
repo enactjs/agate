@@ -25,6 +25,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Slider` to apply focus styling while dragging by touch
 - `agate/SliderButton` button text color to be more visible on Carbon skin
 - `agate/ThumbnailItem` to match latest design for Silicon skin
+- `agate/ThumbnailItem` to display thumbnail image properly in all skins
 
 ## [2.0.0-alpha.3] - 2021-04-26
 
