@@ -219,26 +219,26 @@ const ColorPickerBase = kind({
 						>
 							{children}
 						</Group>
-						<Button aria-label={$L('More')} icon="ellipsis" size="small" onTap={onToggleExtended} className={css.swatch} />
+						<Button aria-label={$L('More')} css={css} icon="ellipsis" size="small" onTap={onToggleExtended} className={css.swatch} />
 						<div className={css.sliders}>
 							<Row align="center">
 								<Cell aria-label={$L('Hue')} role="region">
 									<label>{$L('Hue')}</label>
-									<Slider aria-label={$L('Degree')} value={sliderValues.hsl[0]} min={0} max={360} onChange={onHueChange} />
+									<Slider aria-label={$L('Degree')} css={css} value={sliderValues.hsl[0]} min={0} max={360} onChange={onHueChange} />
 								</Cell>
 								<Cell component="label" size="5ex">{sliderValues.hsl[0] + '˚'}</Cell>
 							</Row>
 							<Row align="center">
 								<Cell aria-label={$L('Saturation')} role="region">
 									<label>{$L('Saturation')}</label>
-									<Slider aria-label={$L('Percent')} value={sliderValues.hsl[1]} min={0} max={100} onChange={onSaturationChange} />
+									<Slider aria-label={$L('Percent')} css={css} value={sliderValues.hsl[1]} min={0} max={100} onChange={onSaturationChange} />
 								</Cell>
 								<Cell component="label" size="5ex">{sliderValues.hsl[1] + '%'}</Cell>
 							</Row>
 							<Row align="center">
 								<Cell aria-label={$L('Lightness')} role="region">
 									<label>{$L('Lightness')}</label>
-									<Slider aria-label={$L('Percent')} value={sliderValues.hsl[2]} min={0} max={100} onChange={onLightnessChange} />
+									<Slider aria-label={$L('Percent')} css={css} value={sliderValues.hsl[2]} min={0} max={100} onChange={onLightnessChange} />
 								</Cell>
 								<Cell component="label" size="5ex">{sliderValues.hsl[2] + '%'}</Cell>
 							</Row>
