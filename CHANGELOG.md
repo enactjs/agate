@@ -13,6 +13,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ArcSlider` text size be the same on all skins
 - `agate/ArcSlider` style to match latest design for Silicon skin
 - `agate/Button` badge background color for Cobalt and Copper skins
+- `agate/Checkbox` icon font-size and focus color for Carbon, Cobalt, Copper, Electro, and Titanium skins
 - `agate/CheckboxItem` style to match latest design for Silicon skin
 - `agate/ContextualPopupDecorator` style to match latest design for Silicon skin
 - `agate/ColorPicker` layout for Carbon, Electro, Gallium, Silicon skins
