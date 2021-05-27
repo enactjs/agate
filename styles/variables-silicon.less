@@ -66,17 +66,20 @@
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-bg-size: 60px;
-@agate-checkbox-border-radius: 50%;
-@agate-checkbox-border-width: 3px;
-@agate-checkbox-container-position: ((@agate-checkbox-size + (@agate-checkbox-border-width * 2) - 60px) / 2); // Container's total dimensions should be `60px` defined in the GUI spec
-@agate-checkbox-icon-font-size: 49px;
-@agate-checkbox-size: 24px;
+@agate-checkbox-bg-size:            60px;
+@agate-checkbox-border-radius:      50%;
+@agate-checkbox-border-width:       3px;
+@agate-checkbox-container-position: ((@agate-checkbox-size - 60px) / 2); // Container's total dimensions should be `60px` defined in the GUI spec
+@agate-checkbox-icon-font-size:     49px;
+@agate-checkbox-icon-size:          (@agate-checkbox-size - 2 * @agate-checkbox-border-width);
+@agate-checkbox-size:               30px;
 
 // CheckboxItem
 // ---------------------------------------
-@agate-checkboxitem-icon-margin: 9px;
-@agate-checkboxitem-font-size: @agate-item-font-size;
+@agate-checkboxitem-font-size:         @agate-item-font-size;
+@agate-checkboxitem-height:            99px;
+@agate-checkboxitem-icon-margin-end:   36px;
+@agate-checkboxitem-icon-margin-start: 15px;
 
 // ColorPicker
 // ---------------------------------------
