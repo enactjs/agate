@@ -167,15 +167,11 @@ const getPropFromURL = (propName, fallbackValue) => {
 	return fallbackValue;
 };
 
-const memory = {
-	skin: null
-};
-
 const StorybookDecorator = (story, config) => {
 	const sample = story();
 
 	const {globals} = config;
-	
+
 	const Config = {
 		defaultProps: {
 			locale: 'en-US',
@@ -186,6 +182,7 @@ const StorybookDecorator = (story, config) => {
 		},
 		groupId: globalGroup
 	};
+
 	const defaultColors = {
 		carbon: {
 			accent: '#8fd43a',
@@ -216,26 +213,27 @@ const StorybookDecorator = (story, config) => {
 			highlight: '#2a48ca'
 		}
 	};
+
 	const skinFromURL = getPropFromURL('skin');
-	const currentSkin = skinFromURL ? skinFromURL : Config.defaultProps.skin;
-	const newSkin = (memory.skin !== currentSkin);
-	memory.skin = currentSkin;  // Remember the skin for the next time we load.
 	const accentFromURL = getPropFromURL('accent');
 	const highlightFromURL = getPropFromURL('highlight');
 	const localeFromURL = getPropFromURL('locale');
 
 	globals.locale = select('locale', locales, Config, localeFromURL || globals.locale);
 	globals.allSkins = boolean('show all skins', Config, globals.allSkins);
-	globals.defaultSkinStyles = boolean('default skin styles', Config, globals.defaultSkinStyles);
 	globals.nightMode = boolean('night mode', Config, globals.nightMode);
 
-	const skinKnobs = {};
+	let skinKnobs = {};
+	let {accent, highlight} = {};
 	if (!globals.allSkins) {
 		globals.skin = select('skin', skins, Config, skinFromURL || globals.skin);
 		skinKnobs.skin = globals.skin;
+		globals.defaultSkinStyles = boolean('default skin styles', Config, globals.defaultSkinStyles);
+		if (globals.defaultSkinStyles) {
+			accent = defaultColors[globals.skin].accent;
+			highlight = defaultColors[globals.skin].highlight;
+		}
 	}
-
-	const {accent, highlight} = !globals.allSkins && globals.defaultSkinStyles ? defaultColors[skinKnobs.skin] : {};
 
 	// NOTE: 'config' object is not extensible
 	const hasInfoText = config.parameters && config.parameters.info && config.parameters.info.text;
@@ -248,8 +246,8 @@ const StorybookDecorator = (story, config) => {
 			locale={globals.locale}
 			{...skinKnobs}
 			skinVariants={globals.nightMode && 'night'}
-			accent={accent || color('accent', (!newSkin && accentFromURL ? accentFromURL : defaultColors[currentSkin].accent), Config.groupId)}
-			highlight={highlight || color('highlight', (!newSkin && highlightFromURL ? highlightFromURL : defaultColors[currentSkin].highlight), Config.groupId)}
+			accent={accent || color('accent', (accentFromURL || defaultColors[globals.skin].accent), Config.groupId)}
+			highlight={highlight || color('highlight', (highlightFromURL || defaultColors[globals.skin].highlight), Config.groupId)}
 			{...hasProps ? config.parameters.props : null}
 		>
 			{globals.allSkins ? Object.keys(skins).map(skin => (
