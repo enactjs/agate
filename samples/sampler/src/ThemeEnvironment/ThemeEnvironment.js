@@ -172,17 +172,6 @@ const StorybookDecorator = (story, config) => {
 
 	const {globals} = config;
 
-	const Config = {
-		defaultProps: {
-			locale: 'en-US',
-			'show all skins': false,
-			skin: 'gallium',
-			'default skin styles': false,
-			'night mode': false
-		},
-		groupId: globalGroup
-	};
-
 	const defaultColors = {
 		carbon: {
 			accent: '#8fd43a',
@@ -214,6 +203,19 @@ const StorybookDecorator = (story, config) => {
 		}
 	};
 
+	const Config = {
+		defaultProps: {
+			locale: 'en-US',
+			'show all skins': false,
+			skin: 'gallium',
+			'default skin styles': false,
+			'night mode': false,
+			accent: defaultColors['gallium'].accent,
+			highlight: defaultColors['gallium'].highlight,
+		},
+		groupId: globalGroup
+	};
+
 	const skinFromURL = getPropFromURL('skin');
 	const accentFromURL = getPropFromURL('accent');
 	const highlightFromURL = getPropFromURL('highlight');
@@ -224,15 +226,32 @@ const StorybookDecorator = (story, config) => {
 	globals.nightMode = boolean('night mode', Config, globals.nightMode);
 
 	let skinKnobs = {};
-	let {accent, highlight} = {};
+	let isSkinChanged = false;
+
 	if (!globals.allSkins) {
-		globals.skin = select('skin', skins, Config, skinFromURL || globals.skin);
-		skinKnobs.skin = globals.skin;
-		globals.defaultSkinStyles = boolean('default skin styles', Config, globals.defaultSkinStyles);
-		if (globals.defaultSkinStyles) {
-			accent = defaultColors[globals.skin].accent;
-			highlight = defaultColors[globals.skin].highlight;
+		skinKnobs.skin = select('skin', skins, Config, skinFromURL || globals.skin);
+		if (skinKnobs.skin !== globals.skin) {
+			isSkinChanged = true;
 		}
+		globals.skin = skinKnobs.skin;
+		globals.defaultSkinStyles = boolean('default skin styles', Config, globals.defaultSkinStyles);
+	}
+
+	if (globals.defaultSkinStyles || isSkinChanged) {
+		globals.accent = defaultColors[globals.skin].accent;
+		globals.highlight = defaultColors[globals.skin].highlight;
+	}
+
+	if (!globals.defaultSkinStyles) {
+		// NOTE: 'color' function has a bug. It doesn't return a changed value when the value (2nd parameter) is changed. It seems it doesn't reload new value.
+		globals.accent = color('accent', accentFromURL || globals.accent || Config.defaultProps.accent, Config.groupId);
+		globals.highlight = color('highlight', highlightFromURL || globals.highlight || Config.defaultProps.accent, Config.groupId);
+	}
+
+	// NOTE: This is a workaround to handle 'color' function.
+	if (globals.defaultSkinStyles || isSkinChanged) {
+		globals.accent = defaultColors[globals.skin].accent;
+		globals.highlight = defaultColors[globals.skin].highlight;
 	}
 
 	// NOTE: 'config' object is not extensible
@@ -246,8 +265,8 @@ const StorybookDecorator = (story, config) => {
 			locale={globals.locale}
 			{...skinKnobs}
 			skinVariants={globals.nightMode && 'night'}
-			accent={accent || color('accent', (accentFromURL || defaultColors[globals.skin].accent), Config.groupId)}
-			highlight={highlight || color('highlight', (highlightFromURL || defaultColors[globals.skin].highlight), Config.groupId)}
+			accent={globals.accent}
+			highlight={globals.highlight}
 			{...hasProps ? config.parameters.props : null}
 		>
 			{globals.allSkins ? Object.keys(skins).map(skin => (
