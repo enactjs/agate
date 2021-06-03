@@ -211,7 +211,7 @@ const StorybookDecorator = (story, config) => {
 			'default skin styles': false,
 			'night mode': false,
 			accent: defaultColors['gallium'].accent,
-			highlight: defaultColors['gallium'].highlight,
+			highlight: defaultColors['gallium'].highlight
 		},
 		groupId: globalGroup
 	};
