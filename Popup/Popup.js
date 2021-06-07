@@ -282,7 +282,7 @@ const PopupBase = kind({
 			return type ? type : setTransitionType;
 		}
 	},
-	render: ({buttons, centered, children, closeButton, css, direction, duration, noAnimation, onClose, onHide, onShow, open, skin, spotlightId, spotlightRestrict, title, transitionContainerClassName, transitionType, ...rest}) => {
+	render: ({buttons, children, closeButton, css, direction, duration, noAnimation, onClose, onHide, onShow, open, skin, spotlightId, spotlightRestrict, title, transitionContainerClassName, transitionType, ...rest}) => {
 		const closeButtonSize = skin === 'silicon' ? 'large' : 'small';
 		const wideLayout = (skin === 'carbon');
 		delete rest.centered;
