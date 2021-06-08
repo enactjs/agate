@@ -1,6 +1,6 @@
 {
   "name": "@enact/agate",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0-beta.1",
   "description": "A theme library for Enact, containing a variety of UI components.",
   "repository": "https://github.com/enactjs/agate",
   "main": "index.js",
