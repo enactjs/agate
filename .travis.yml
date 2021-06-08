@@ -17,7 +17,7 @@ install:
     - npm install
     - enact link
 script:
-    - npm run lint -- -- --max-warnings 0 .
+    - npm run lint -- -- --report-unused-disable-directives --max-warnings 0 .
     - npm run test
     - echo -e "\x1b\x5b35;1m*** Starting docs validation...\x1b\x5b0m"
     - npm run validate-docs
