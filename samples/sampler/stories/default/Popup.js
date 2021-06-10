@@ -10,6 +10,9 @@ const Config = mergeComponentMetadata('Popup', PopupBase);
 const prop = {
 	buttons: {
 		'no buttons': null,
+		'1 button': <buttons>
+			<Button>OK</Button>
+		</buttons>,
 		'2 buttons': <buttons>
 			<Button>OK</Button>
 			<Button>Cancel</Button>
@@ -23,7 +26,7 @@ export default {
 };
 
 export const _Popup = () => {
-	const buttonsSelection = select('buttons', ['no buttons', '2 buttons'], Config, 'no');
+	const buttonsSelection = select('buttons', ['no buttons', '1 button', '2 buttons'], Config, 'no');
 	const buttons = prop.buttons[buttonsSelection];
 
 	return (
