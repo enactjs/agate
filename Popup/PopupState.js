@@ -43,7 +43,7 @@ const forwardShow = forward('onShow');
  * @ui
  * @public
  */
-const PopupState = hoc((config, Wrapped) => {	// eslint-disable-line no-unused-vars
+const PopupState = hoc((config, Wrapped) => {
 	return class extends Component {
 		static displayName = 'PopupState';
 

@@ -2,7 +2,7 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
-## [unreleased]
+## [2.0.0-beta.3] - 2021-06-06
 
 ### Added
 
@@ -13,6 +13,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ArcSlider` text size be the same on all skins
 - `agate/ArcSlider` style to match latest design for Silicon skin
 - `agate/Button` badge background color for Cobalt and Copper skins
+- `agate/Button` to center icon when iconOnly prop is true, for Cobalt and Copper skins, RTL
 - `agate/Checkbox` icon font-size and focus color for Carbon, Cobalt, Copper, Electro, and Titanium skins
 - `agate/CheckboxItem` style to match latest design for Silicon skin
 - `agate/ContextualPopupDecorator` style to match latest design for Silicon skin
@@ -43,6 +44,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/Checkbox`, `agate/FanSpeedControl`, `agate/ImageItem`, `agate/Item`, and `agate/WindDirectionControl` to match latest design for Silicon skin
 - `agate/Dropdown` misalignment of `Button` and `ContextualPopup` on the edge of screen
+- `agate/Popup` to apply marquee for long title
 
 ## [2.0.0-alpha.2] - 2021-04-02
 
