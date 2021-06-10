@@ -11,7 +11,6 @@ import Heading from '@enact/agate/Heading';
 import {Panels, Panel} from '@enact/agate/Panels';
 import Scroller from '@enact/agate/Scroller';
 import Skinnable from '@enact/agate/Skinnable';
-
 import ThemeDecorator from '@enact/agate/ThemeDecorator';
 
 import css from './ThemeEnvironment.module.less';
