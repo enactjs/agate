@@ -223,8 +223,8 @@ const StorybookDecorator = (story, config) => {
 	globals.allSkins = boolean('show all skins', Config, globals.allSkins);
 	globals.nightMode = boolean('night mode', Config, globals.nightMode);
 
-	let skinKnobs = {};
-	let {accent, highlight} = {};
+	let skinKnobs = {}, accent, highlight;
+
 	if (!globals.allSkins) {
 		globals.skin = select('skin', skins, Config, skinFromURL || globals.skin);
 		skinKnobs.skin = globals.skin;
