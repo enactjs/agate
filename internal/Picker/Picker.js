@@ -543,6 +543,7 @@ const PickerBase = kind({
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
+				<div className={css.focusBackground} />
 				{skin === 'silicon'  &&
 					<PickerButtonItem
 						aria-controls={valueId}
