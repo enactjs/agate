@@ -8,11 +8,9 @@
 	.backButton {
 		align-items: center;
 		display: flex;
-		justify-content: center;
 	}
 
 	.applySkins({
-		width: @agate-heading-width;
 		height: @agate-heading-height;
 		border-bottom: @agate-heading-border-width solid transparent;
 		margin: @agate-heading-margin;
@@ -22,17 +20,6 @@
 		color: @agate-heading-text-color;
 		text-transform: @agate-heading-text-transform;
 		font-variant-ligatures: @agate-heading-font-ligatures;
-
-		.backButton {
-			.bg {
-				border: none;
-				background-color: transparent;
-			}
-
-			.client {
-				color: @agate-heading-text-color
-			}
-		}
 
 		&.showLine {
 			border-bottom-color: @agate-heading-border-color;

@@ -134,7 +134,7 @@ const HeadingBase = kind({
 				<Layout>
 					{showBackButton ?
 						<Cell className={css.backButton} shrink>
-							<Button css={css} icon={icon} size="small" />
+							<Button backgroundOpacity="transparent" css={css} icon={icon} size="small" />
 						</Cell> : null
 					}
 					<Cell>
