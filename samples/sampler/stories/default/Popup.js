@@ -55,7 +55,6 @@ export const _Popup = () => {
 	);
 };
 
-
 _Popup.storyName = 'Popup';
 _Popup.parameters = {
 	info: {
