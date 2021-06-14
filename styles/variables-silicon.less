@@ -66,17 +66,19 @@
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-bg-size: 60px;
-@agate-checkbox-border-radius: 50%;
-@agate-checkbox-border-width: 3px;
-@agate-checkbox-container-position: ((@agate-checkbox-size + (@agate-checkbox-border-width * 2) - 60px) / 2); // Container's total dimensions should be `60px` defined in the GUI spec
-@agate-checkbox-icon-font-size: 49px;
-@agate-checkbox-size: 24px;
+@agate-checkbox-bg-size:            60px;
+@agate-checkbox-border-radius:      50%;
+@agate-checkbox-border-width:       3px;
+@agate-checkbox-container-position: ((@agate-checkbox-size - 60px) / 2); // Container's total dimensions should be `60px` defined in the GUI spec
+@agate-checkbox-icon-size:          (@agate-checkbox-size - 2 * @agate-checkbox-border-width);
+@agate-checkbox-size:               30px;
 
 // CheckboxItem
 // ---------------------------------------
-@agate-checkboxitem-icon-margin: 9px;
-@agate-checkboxitem-font-size: @agate-item-font-size;
+@agate-checkboxitem-font-size:         @agate-item-font-size;
+@agate-checkboxitem-height:            99px;
+@agate-checkboxitem-icon-margin-end:   36px;
+@agate-checkboxitem-icon-margin-start: 15px;
 
 // ColorPicker
 // ---------------------------------------
@@ -442,6 +444,8 @@
 // RadioItem
 // ---------------------------------------
 @agate-radioitem-icon-border-width: 3px;
+@agate-radioitem-icon-margin: 15px;
+@agate-radioitem-slotbefore-margin-end: 21px;
 
 // SliderButton
 // ---------------------------------------
@@ -471,14 +475,13 @@
 
 // ThumbnailItem
 // ---------------------------------------
-@agate-thumbnailitem-line-height: 39px;
-@agate-thumbnailitem-height: 120px;
-@agate-thumbnailitem-content-font-size: 27px;
-@agate-thumbnailitem-label-font-size: 24px;
-@agate-thumbnailitem-thumbnail-height: 60px;
-@agate-thumbnailitem-thumbnail-width: 60px;
+@agate-roundthumbnailitem-border-width:   3px;
+@agate-thumbnailitem-height:              99px;
+@agate-thumbnailitem-label-font-size:     21px;
+@agate-thumbnailitem-line-height:         39px;
 @agate-thumbnailitem-round-border-radius: 50%;
-@agate-roundthumbnailitem-border-width: 3px;
+@agate-thumbnailitem-thumbnail-height:    60px;
+@agate-thumbnailitem-thumbnail-margin:    21px;
 
 // ToggleButton
 // ---------------------------------------
