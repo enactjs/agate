@@ -4,6 +4,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Added
+
+- `agate/Heading` prop `showBackButton`
+
 ### Fixed
 
 - `agate/Heading` style to match latest design for Silicon skin
@@ -12,7 +16,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
-- `agate/Heading` prop `showBackButton`
 - `Noto Sans` font as the default font
 
 ### Fixed
