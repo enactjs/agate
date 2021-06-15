@@ -18,7 +18,7 @@
 import kind from '@enact/core/kind';
 import {HeadingBase as UiHeadingBase} from '@enact/ui/Heading';
 import Pure from '@enact/ui/internal/Pure';
-import Layout, {Cell} from '@enact/ui/Layout';
+import {Row, Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import defaultProps from 'recompose/defaultProps';
@@ -117,6 +117,21 @@ const HeadingBase = kind({
 	},
 
 	computed: {
+		children: ({children, showBackButton, skin}) => {
+			const icon = skin === 'silicon' ? 'arrowleft' : 'arrowlargeleft';
+
+			return showBackButton ?
+				(
+					<Row align="center">
+						<Cell shrink>
+							<Button backgroundOpacity="transparent" icon={icon} size="small" />
+						</Cell>
+						<Cell shrink>
+							{children}
+						</Cell>
+					</Row>
+				) : children;
+		},
 		className: ({showLine, styler}) => styler.append({showLine}),
 		style: ({color, style}) => ({
 			...style,
@@ -124,23 +139,16 @@ const HeadingBase = kind({
 		})
 	},
 
-	render: ({children, css, showBackButton, skin, ...rest}) => {
-		const icon = skin === 'silicon' ? 'arrowleft' : 'arrowlargeleft';
+	render: ({children, css, ...rest}) => {
+
 		delete rest.color;
+		delete rest.showBackButton;
 		delete rest.showLine;
+		delete rest.skin;
 
 		return (
 			<UiHeadingBase css={css} {...rest}>
-				<Layout>
-					{showBackButton ?
-						<Cell className={css.backButton} shrink>
-							<Button backgroundOpacity="transparent" css={css} icon={icon} size="small" />
-						</Cell> : null
-					}
-					<Cell>
-						{children}
-					</Cell>
-				</Layout>
+				{children}
 			</UiHeadingBase>
 		);
 	}
