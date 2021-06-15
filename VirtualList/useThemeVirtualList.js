@@ -122,8 +122,7 @@ const useSpottable = (props, instances) => {
 
 	useEffect(() => {
 		return () => {
-			// TODO: Fix eslint
-			pause.resume(); // eslint-disable-line react-hooks/exhaustive-deps
+			pause.resume();
 			SpotlightAccelerator.reset();
 
 			setContainerDisabled(false);

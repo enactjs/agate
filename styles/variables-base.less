@@ -86,6 +86,7 @@
 @agate-button-icon-position-after-margin-end: @agate-button-icon-margin-start;
 @agate-button-icon-position-after-margin-start: @agate-button-icon-margin-end;
 @agate-button-icon-width: @agate-icon-size;
+@agate-button-iconOnly-letter-spacing: normal;
 @agate-button-height: 84px;
 @agate-button-max-width: 900px;
 @agate-button-min-width: 240px;
@@ -166,19 +167,20 @@
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-bg-size: inherit;
-@agate-checkbox-border-radius: inherit;
-@agate-checkbox-border-width: inherit;
+@agate-checkbox-bg-size:            inherit;
+@agate-checkbox-border-radius:      inherit;
+@agate-checkbox-border-width:       inherit;
 @agate-checkbox-container-position: inherit;
-@agate-checkbox-icon-font-size: inherit;
-@agate-checkbox-size: 46px;
+@agate-checkbox-icon-font-size:     48px;
+@agate-checkbox-icon-size:          @agate-checkbox-size;
+@agate-checkbox-size:               45px;
 
 // CheckboxItem
 // ---------------------------------------
-@agate-checkboxitem-padding-left: @agate-item-side-outset;
-@agate-checkboxitem-padding-right: @agate-item-side-outset;
-@agate-checkboxitem-icon-margin: @agate-component-spacing;
-@agate-checkboxitem-font-size: inherit;
+@agate-checkboxitem-font-size:         inherit;
+@agate-checkboxitem-height:            @agate-item-large-height;
+@agate-checkboxitem-icon-margin-end:   @agate-component-spacing;
+@agate-checkboxitem-icon-margin-start: 0;
 
 // ColorPicker
 // ---------------------------------------
@@ -190,6 +192,8 @@
 @agate-colorpicker-palette-swatch-margin: 12px;
 @agate-colorpicker-palette-margin: 0;
 @agate-colorpicker-palette-sliders-padding: @agate-colorpicker-palette-swatch-margin @agate-colorpicker-palette-swatch-margin (@agate-colorpicker-palette-swatch-margin * 2) @agate-colorpicker-palette-swatch-margin;
+@agate-colorpicker-palette-padding-start: 21px;
+@agate-colorpicker-palette-padding-end: 12px;
 
 // ContextualPopup
 // ---------------------------------------
@@ -716,6 +720,8 @@
 @agate-radioitem-icon-border-radius: @agate-border-radius;
 @agate-radioitem-icon-opacity: inherit;
 @agate-radioitem-icon-selected-opacity: inherit;
+@agate-radioitem-slotbefore-margin-end: 12px;
+@agate-radioitem-icon-margin: 0;
 
 // Scrollbar
 // ---------------------------------------
@@ -786,14 +792,15 @@
 
 // ThumbnailItem
 // ---------------------------------------
-@agate-thumbnailitem-line-height: inherit;
-@agate-thumbnailitem-height: inherit;
-@agate-thumbnailitem-content-font-size: inherit;
-@agate-thumbnailitem-label-font-size: inherit;
-@agate-thumbnailitem-thumbnail-height: inherit;
-@agate-thumbnailitem-thumbnail-width: inherit;
+@agate-thumbnailitem-content-font-size:   inherit;
+@agate-thumbnailitem-line-height:         inherit;
+@agate-thumbnailitem-height:              120px;
+@agate-thumbnailitem-label-font-size:     inherit;
+@agate-thumbnailitem-thumbnail-height:    60px;
+@agate-thumbnailitem-thumbnail-margin:    24px;
+@agate-thumbnailitem-thumbnail-width:     @agate-thumbnailitem-thumbnail-height;
 @agate-thumbnailitem-round-border-radius: inherit;
-@agate-roundthumbnailitem-border-width: inherit;
+@agate-roundthumbnailitem-border-width:   inherit;
 
 // ToggleButton
 // ---------------------------------------

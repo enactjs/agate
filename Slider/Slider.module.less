@@ -196,6 +196,27 @@
 					border-radius: @agate-slider-active-knob-border-radius;
 				}
 			}
+
+			:global(.spotlight-input-touch) &.pressed {
+				&::before {
+					background-color: @agate-slider-focus-bg-color;
+					background-image: @agate-slider-focus-bg-image;
+				}
+
+				.bar {
+					background-color: @agate-slider-track-focus-bg-color;
+					background-image: @agate-slider-track-focus-bg-image;
+				}
+
+				.fill {
+					background-color: @agate-slider-focus-fill-bg-color;
+				}
+
+				.knob::before {
+					background-color: @agate-slider-knob-focus-bg-color;
+					border-color: @agate-slider-knob-focus-bg-image;
+				}
+			}
 		});
 	});
 }
