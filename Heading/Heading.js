@@ -18,11 +18,13 @@
 import kind from '@enact/core/kind';
 import {HeadingBase as UiHeadingBase} from '@enact/ui/Heading';
 import Pure from '@enact/ui/internal/Pure';
+import {Row, Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 import defaultProps from 'recompose/defaultProps';
 import setPropTypes from 'recompose/setPropTypes';
 
+import Button from '../Button';
 import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
@@ -63,12 +65,28 @@ const HeadingBase = kind({
 		css: PropTypes.object,
 
 		/**
+		 * Shows the back button.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		showBackButton: PropTypes.bool,
+
+		/**
 		 * Adds a horizontal-rule (line) under the component
 		 *
 		 * @type {Boolean}
 		 * @public
 		 */
 		showLine: PropTypes.bool,
+
+		/**
+		 * The current skin.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		skin: PropTypes.string,
 
 		/**
 		 * The size of the spacing around the Heading.
@@ -99,6 +117,21 @@ const HeadingBase = kind({
 	},
 
 	computed: {
+		children: ({children, showBackButton, skin}) => {
+			const icon = skin === 'silicon' ? 'arrowleft' : 'arrowlargeleft';
+
+			return showBackButton ?
+				(
+					<Row align="center">
+						<Cell shrink>
+							<Button backgroundOpacity="transparent" icon={icon} size="small" />
+						</Cell>
+						<Cell shrink>
+							{children}
+						</Cell>
+					</Row>
+				) : children;
+		},
 		className: ({showLine, styler}) => styler.append({showLine}),
 		style: ({color, style}) => ({
 			...style,
@@ -106,10 +139,18 @@ const HeadingBase = kind({
 		})
 	},
 
-	render: ({css, ...rest}) => {
+	render: ({children, css, ...rest}) => {
+
 		delete rest.color;
+		delete rest.showBackButton;
 		delete rest.showLine;
-		return UiHeadingBase.inline({css, ...rest});
+		delete rest.skin;
+
+		return (
+			<UiHeadingBase css={css} {...rest}>
+				{children}
+			</UiHeadingBase>
+		);
 	}
 });
 
@@ -131,7 +172,7 @@ const HeadingDecorator = compose(
 	}),
 	Pure,
 	MarqueeDecorator,
-	Skinnable
+	Skinnable({prop: 'skin'})
 );
 
 /**

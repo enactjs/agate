@@ -1,4 +1,3 @@
-/* eslint-disable no-undefined */
 const Page = require('./DropdownInScrollerPage');
 
 describe('DropdownInScroller', function () {

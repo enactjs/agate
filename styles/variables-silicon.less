@@ -18,11 +18,6 @@
 @agate-arcpicker-font-size: 72px;
 @agate-arcpicker-font-weight: 300;
 
-// ArcSlider
-// -------------------------------------------------
-@agate-arcslider-font-size: 72px;
-@agate-arcslider-font-weight: 300;
-
 // Body
 // ----------------------------------
 @agate-body-small-font-size: 21px;
@@ -71,17 +66,19 @@
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-bg-size: 60px;
-@agate-checkbox-border-radius: 50%;
-@agate-checkbox-border-width: 3px;
-@agate-checkbox-container-position: ((@agate-checkbox-size + (@agate-checkbox-border-width * 2) - 60px) / 2); // Container's total dimensions should be `60px` defined in the GUI spec
-@agate-checkbox-icon-font-size: 49px;
-@agate-checkbox-size: 24px;
+@agate-checkbox-bg-size:            60px;
+@agate-checkbox-border-radius:      50%;
+@agate-checkbox-border-width:       3px;
+@agate-checkbox-container-position: ((@agate-checkbox-size - 60px) / 2); // Container's total dimensions should be `60px` defined in the GUI spec
+@agate-checkbox-icon-size:          (@agate-checkbox-size - 2 * @agate-checkbox-border-width);
+@agate-checkbox-size:               30px;
 
 // CheckboxItem
 // ---------------------------------------
-@agate-checkboxitem-icon-margin: 9px;
-@agate-checkboxitem-font-size: @agate-item-font-size;
+@agate-checkboxitem-font-size:         @agate-item-font-size;
+@agate-checkboxitem-height:            99px;
+@agate-checkboxitem-icon-margin-end:   36px;
+@agate-checkboxitem-icon-margin-start: 15px;
 
 // ColorPicker
 // ---------------------------------------
@@ -89,10 +86,11 @@
 
 // ContextualPopup
 // ---------------------------------------
-@agate-contextual-popup-border-radius:      30px;
-@agate-contextual-popup-padding-vertical:   24px;
-@agate-contextual-popup-padding-horizontal: 36px;
-@agate-contextual-popup-font-size:          27px;
+@agate-contextual-popup-border-radius:       9px;
+@agate-contextual-popup-font-size:           27px;
+@agate-contextual-popup-font-weight:         300;
+@agate-contextual-popup-padding-horizontal:  24px;
+@agate-contextual-popup-padding-vertical:    15px;
 
 // DateTimePicker
 // ---------------------------------------
@@ -143,7 +141,10 @@
 
 // Heading
 // ---------------------------------------
-@agate-heading-padding: 3px 0;
+@agate-heading-height: 60px;
+@agate-heading-margin: 0;
+@agate-heading-padding: 0 30px 0 9px;
+@agate-heading-line-height: @agate-heading-height;
 @agate-heading-medium-font-size: 30px;
 @agate-heading-title-padding: @agate-heading-padding 25px;
 @agate-heading-title-decoration-height: 28px;
@@ -152,6 +153,8 @@
 @agate-heading-title-decoration-border-radius: 3px;
 @agate-heading-title-decoration-opacity: 0.8;
 @agate-heading-title-decoration-transform: skew(-10deg);
+@agate-heading-spacing-medium: (@agate-component-spacing + 9px);
+@agate-heading-spacing-large: (@agate-component-spacing + 27px);
 
 // Icon Sizes
 // ---------------------------------------
@@ -358,20 +361,34 @@
 @agate-popup-border-width: 1px 0;
 @agate-popup-border-radius: 39px;
 @agate-popup-fullscreen-border-radius: 0;
+@agate-popup-fullscreen-buttons-border-radius: @agate-popup-fullscreen-border-radius;
 @agate-popup-border: none;
-@agate-popup-padding: (@agate-component-spacing * 2) 0 0 0;
-@agate-popup-closebutton-title-padding: 0 (@agate-button-small-height) 0 @agate-component-spacing;
-@agate-popup-closebutton-content-padding: @agate-popup-closebutton-title-padding;
-@agate-popup-content-margin: 0 12px;
-@agate-popup-title-padding: 0 @agate-component-spacing;
+@agate-popup-padding: 99px 0 0 0;
+@agate-popup-closebutton-margin: 0;
+@agate-popup-closebutton-position: 30px 30px 9px auto;
+@agate-popup-closebutton-title-padding: @agate-popup-title-padding;
+@agate-popup-content-margin: 0 81px;
+@agate-popup-content-min-height: 183px;
+@agate-popup-content-width: 681px;
+@agate-popup-content-padding: 0 0 39px 0;
+@agate-popup-title-font-size: 33px;
+@agate-popup-title-height: 60px;
+@agate-popup-title-margin: 0;
+@agate-popup-title-padding: 30px 111px 9px 81px;
+@agate-popup-title-width: 651px;
 @agate-popup-body-padding: 0;
 @agate-popup-body-border-radius: 0 0 @agate-popup-border-radius @agate-popup-border-radius;
+@agate-popup-body-height: 100%;
 @agate-popup-buttons-border-radius: @agate-popup-body-border-radius;
-@agate-popup-buttons-padding: @agate-component-spacing 0;
-@agate-popup-content-padding: @agate-component-spacing @agate-component-spacing (3 * @agate-component-spacing) @agate-component-spacing;
-@agate-popup-closebutton-position-left: auto;
-@agate-popup-closebutton-position-right: 0;
+@agate-popup-buttons-height: 60px;
+@agate-popup-buttons-padding: 39px 0;
+@agate-popup-font-size: 27px;
+@agate-popup-justify-content: space-between;
+@agate-popup-bottom-buttons-border-radius: 0;
+@agate-popup-left-buttons-border-radius: 0 0 @agate-popup-border-radius 0;
+@agate-popup-right-buttons-border-radius: 0 0 0 @agate-popup-border-radius;
 @agate-popup-top-border-radius: 0 0 @agate-popup-border-radius @agate-popup-border-radius;
+@agate-popup-with-title-padding: 0;
 
 // PopupMenu
 // ---------------------------------------
@@ -426,6 +443,8 @@
 // RadioItem
 // ---------------------------------------
 @agate-radioitem-icon-border-width: 3px;
+@agate-radioitem-icon-margin: 15px;
+@agate-radioitem-slotbefore-margin-end: 21px;
 
 // SliderButton
 // ---------------------------------------
@@ -455,14 +474,13 @@
 
 // ThumbnailItem
 // ---------------------------------------
-@agate-thumbnailitem-line-height: 39px;
-@agate-thumbnailitem-height: 120px;
-@agate-thumbnailitem-content-font-size: 27px;
-@agate-thumbnailitem-label-font-size: 24px;
-@agate-thumbnailitem-thumbnail-height: 60px;
-@agate-thumbnailitem-thumbnail-width: 60px;
+@agate-roundthumbnailitem-border-width:   3px;
+@agate-thumbnailitem-height:              99px;
+@agate-thumbnailitem-label-font-size:     21px;
+@agate-thumbnailitem-line-height:         39px;
 @agate-thumbnailitem-round-border-radius: 50%;
-@agate-roundthumbnailitem-border-width: 3px;
+@agate-thumbnailitem-thumbnail-height:    60px;
+@agate-thumbnailitem-thumbnail-margin:    21px;
 
 // ToggleButton
 // ---------------------------------------
