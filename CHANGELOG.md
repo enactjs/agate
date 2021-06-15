@@ -4,8 +4,13 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Added
+
+- `agate/Heading` prop `showBackButton`
+
 ### Fixed
 
+- `agate/Heading` style to match latest design for Silicon skin
 - `agate/Picker` and `agate/RangePicker` to match latest design for Silicon skin
 
 ## [2.0.0-beta.3] - 2021-06-06
