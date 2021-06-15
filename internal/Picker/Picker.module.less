@@ -34,7 +34,7 @@
 		padding: @agate-picker-padding;
 
 		.focusBackground {
-			height: calc(100% - 2*@agate-picker-padding);
+			height: calc(100% - 2 * @agate-picker-padding);
 			background-color: @agate-picker-focus-bg-color;
 			background-image: @agate-picker-focus-bg-image;
 		}
@@ -87,8 +87,8 @@
 		.itemIncrement,
 		.secondaryItemIncrement,
 		.secondaryItemDecrement {
-			color: @agate-picker-item-color;
 			background-color: @agate-picker-item-bg-color;
+			color: @agate-picker-item-color;
 			height: @agate-picker-item-height;
 			line-height: @agate-picker-item-height;
 			z-index: 2;
@@ -107,13 +107,13 @@
 
 			&::before {
 				content: "";
+				background-color: @agate-picker-active-bg-color;
+				background-image: @agate-picker-active-bg-image;
 				position: absolute;
+				height: @agate-picker-active-height;
 				width: calc(100% - 2* @agate-picker-padding);
 				left: 50%;
 				transform: translateX(-50%);
-				height: @agate-picker-active-height;
-				background-color: @agate-picker-active-bg-color;
-				background-image: @agate-picker-active-bg-image;
 			}
 		}
 
@@ -128,9 +128,11 @@
 		}
 
 		&.horizontal {
+			padding: @agate-picker-horizontal-padding;
+
 			.focusBackground {
 				background-image: @agate-picker-horizontal-focus-bg-image;
-				height: @agate-picker-horizontal-focus-height;
+				height: calc(100% - 60px);
 				width: calc(100% - 2 * @agate-picker-padding);
 			}
 
@@ -155,7 +157,7 @@
 
 				&::before {
 					width: @agate-picker-horizontal-active-width;
-					height: calc(100% - 2*@agate-picker-padding) ;
+					height: @agate-picker-horizontal-item-height;
 				}
 			}
 		}
