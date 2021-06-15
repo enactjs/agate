@@ -8,6 +8,7 @@
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
+	position: relative;
 
 	&.horizontal {
 		flex-direction: row;
@@ -15,11 +16,10 @@
 	}
 
 	.focusBackground {
+		display: none;
 		position: absolute;
-		width: 90%;
-		left: 50%;
-		transform: translateX(-50%);
-		z-index: -1;
+		width: calc(100% - 90px);
+		z-index: 1;
 	}
 
 	.applySkins({
@@ -33,13 +33,16 @@
 		margin: @agate-picker-margin;
 		padding: @agate-picker-padding;
 
+		.focusBackground {
+			height: calc(100% - 2*@agate-picker-padding);
+			background-color: @agate-picker-focus-bg-color;
+			background-image: @agate-picker-focus-bg-image;
+		}
+
 		&:focus-within,
 		&:hover {
 			.focusBackground {
-				height: 400px;
-				background-color: @agate-picker-focus-bg-color;
-				background-image: @agate-picker-focus-bg-image;
-
+				display: block;
 			}
 		}
 
@@ -76,7 +79,7 @@
 			.focus({
 				color: @agate-picker-item-focus-color;
 				background-color: transparent;
-				//background-image: @agate-picker-item-focus-bg-image;
+				background-image: @agate-picker-item-focus-bg-image;
 			});
 		}
 
@@ -88,6 +91,7 @@
 			background-color: @agate-picker-item-bg-color;
 			height: @agate-picker-item-height;
 			line-height: @agate-picker-item-height;
+			z-index: 2;
 		}
 
 		.active {
@@ -97,13 +101,16 @@
 			height: @agate-picker-active-height;
 			line-height: @agate-picker-active-height;
 
+			.item {
+				z-index: 2;
+			}
+
 			&::before {
 				content: "";
 				position: absolute;
-				width: 100%;
+				width: calc(100% - 2* @agate-picker-padding);
 				left: 50%;
 				transform: translateX(-50%);
-				z-index: -2;
 				height: @agate-picker-active-height;
 				background-color: @agate-picker-active-bg-color;
 				background-image: @agate-picker-active-bg-image;
@@ -113,23 +120,43 @@
 		.itemDecrement,
 		.secondaryItemDecrement {
 			background-image: @agate-picker-item-decrement-bg-image;
-			padding: @agate-picker-item-decrement-padding;
 		}
 
 		.itemIncrement,
 		.secondaryItemIncrement {
 			background-image: @agate-picker-item-increment-bg-image;
-			padding: @agate-picker-item-increment-padding;
 		}
 
 		&.horizontal {
+			.focusBackground {
+				background-image: @agate-picker-horizontal-focus-bg-image;
+				height: @agate-picker-horizontal-focus-height;
+				width: calc(100% - 2 * @agate-picker-padding);
+			}
+
 			.item,
 			.itemDecrement,
 			.itemIncrement,
 			.secondaryItemIncrement,
 			.secondaryItemDecrement {
+				height: @agate-picker-horizontal-item-height;
+				line-height: @agate-picker-horizontal-item-height;
+			}
+
+			.itemDecrement,
+			.itemIncrement,
+			.secondaryItemIncrement,
+			.secondaryItemDecrement {
 				width: @agate-picker-horizontal-item-width;
-				height: @agate-picker-item-height;
+			}
+
+			.active {
+				width: @agate-picker-horizontal-active-width;
+
+				&::before {
+					width: @agate-picker-horizontal-active-width;
+					height: calc(100% - 2*@agate-picker-padding) ;
+				}
 			}
 		}
 	});

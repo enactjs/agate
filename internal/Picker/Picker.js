@@ -348,6 +348,7 @@ const PickerBase = kind({
 
 	computed: {
 		activeClassName: ({styler}) => styler.join('active', 'item'),
+		backgroundFocusClassName: ({styler}) => styler.join('focusBackground'),
 		'aria-label': ({'aria-label': ariaLabel, 'aria-valuetext': valueText}) => {
 			if (ariaLabel != null) {
 				return ariaLabel;
@@ -440,6 +441,7 @@ const PickerBase = kind({
 	render: (props) => {
 		const {
 			activeClassName,
+			backgroundFocusClassName,
 			'aria-label': ariaLabel,
 			children: values,
 			currentItemIndex,
@@ -543,7 +545,7 @@ const PickerBase = kind({
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
-				<div className={css.focusBackground} />
+				<div className={backgroundFocusClassName} />
 				{skin === 'silicon'  &&
 					<PickerButtonItem
 						aria-controls={valueId}
