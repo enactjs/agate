@@ -33,7 +33,25 @@ const InputTests = [
 	// Small input
 	<Input value="Simple value" size="small" />,
 	<Input value="Simple value" iconBefore="happyface" size="small" />,
-	<Input value="Simple value" iconAfter="happyface" size="small" />
+	<Input value="Simple value" iconAfter="happyface" size="small" />,
+
+	// Input with clear input button
+	<Input value="Simple value" clearInputButton />,
+	<Input value="Simple value" clearInputButton disabled />,
+	<Input value="Simple value" clearInputButton size="small" />,
+	<Input value="Simple value" clearInputButton size="small" disabled />,
+	<Input value="Simple value" clearInputButton iconBefore="happyface" />,
+	<Input value="Simple value" clearInputButton iconBefore="happyface" disabled />,
+	<Input value="Simple value" clearInputButton iconAfter="happyface" />,
+	<Input value="Simple value" clearInputButton iconAfter="happyface" disabled />,
+	<Input value="Simple value" clearInputButton iconBefore="happyface" size="small" />,
+	<Input value="Simple value" clearInputButton iconBefore="happyface" size="small" disabled />,
+	<Input value="Simple value" clearInputButton iconAfter="happyface" size="small" />,
+	<Input value="Simple value" clearInputButton iconAfter="happyface" size="small" disabled />,
+	<Input value="Simple value" clearInputButton iconBefore="happyface" iconAfter="happyface" />,
+	<Input value="Simple value" clearInputButton iconBefore="happyface" iconAfter="happyface" disabled />,
+	<Input value="Simple value" clearInputButton iconBefore="happyface" iconAfter="happyface" size="small" />,
+	<Input value="Simple value" clearInputButton iconBefore="happyface" iconAfter="happyface" size="small" disabled />
 ];
 
 export default InputTests;

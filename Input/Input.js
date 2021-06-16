@@ -16,13 +16,13 @@ import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import {isRtlText} from '@enact/i18n/util';
 import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
 import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
 import Tooltip from '../TooltipDecorator/Tooltip';
-import Button from '../Button';
 
 import InputDecoratorIcon from './InputDecoratorIcon';
 import InputSpotlightDecorator from './InputSpotlightDecorator';
@@ -245,6 +245,7 @@ const InputBase = kind({
 
 	defaultProps: {
 		clearInputButton: false,
+		clearInputIcon: 'cancel',
 		disabled: false,
 		dismissOnEnter: false,
 		invalid: false,
@@ -329,14 +330,16 @@ const InputBase = kind({
 					type={type}
 					value={value}
 				/>
-				{clearInputButton && value?.length >= 1 ?
-					<Button
-						className={css.clearInputButton}
+				{clearInputButton ? (
+					<InputDecoratorIcon
+						className={classNames({[css.hideIcon]: !(value?.length >= 1)})}
+						position="after"
+						size={size}
 						onClick={clearInput}
-						icon={clearInputIcon}
-						size="small"
-					/> :
-					null}
+					>
+						{clearInputIcon}
+					</InputDecoratorIcon>
+				) : null}
 				<InputDecoratorIcon position="after" size={size}>
 					{iconAfter}
 				</InputDecoratorIcon>

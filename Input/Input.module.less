@@ -74,12 +74,6 @@
 			}
 
 			.icon {
-				&.iconAfter,
-				&.iconBefore {
-					display: flex;
-					align-self: @agate-input-small-icon-align-self;
-				}
-
 				&.iconAfter {
 					padding: @agate-input-small-icon-after-padding-top-bottom @agate-input-small-icon-after-padding-right @agate-input-small-icon-after-padding-top-bottom @agate-input-small-icon-after-padding-left;
 					.padding-start-end( @agate-input-small-icon-after-padding-left, @agate-input-small-icon-after-padding-right);
@@ -111,6 +105,9 @@
 				align-self: @agate-input-icon-align;
 				opacity: @agate-input-opacity;
 				border-bottom: @agate-input-border-width solid @agate-input-border-color;
+				&.hideIcon {
+					color: transparent;
+				}
 			}
 
 			&.iconAfter {
