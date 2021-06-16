@@ -7,11 +7,13 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Added
 
 - `agate/Heading` prop `showBackButton`
+- `agate/Keypad` prop `activeCall` to render different icons depending on whether there is an active call or not
 
 ### Fixed
 
 - `agate/Heading` style to match latest design for Silicon skin
 - `agate/Input` to match latest design for Silicon skin
+- `agate/Keypad` to match latest design for Silicon skin
 
 ## [2.0.0-beta.3] - 2021-06-06
 
@@ -66,7 +68,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/IncrementSlider` prop `activateOnFocus` to support slider activation when slider gets focused
 - `agate/IncrementSlider`, `agate/ProgressBar`, and `agate/Slider` prop `tooltip` to enable the built-in tooltip
 - `agate/Item` to have a `selected` publicClassname
-- `agate/Keypad` prop `activeCall` to render different icons depending on whether there is an active call or not
 - `agate/MediaPlayer` prop `spotlightDisabled` to disable 5-way navigation
 - `agate/Popup` `aria-live` and `role` props to support accessibility
 - `agate/Popup` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
@@ -93,8 +94,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Button` to apply active styling only when it is not disabled
 - `agate/Button` to apply active styling on enter key press
 - `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
-- `agate/Item` to match the latest design for Silicon skin
-- `agate/Keypad` to match latest design for Silicon skin
 - `agate/LabeledIconButton` styling to preserve behavior and look when props are missing
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
 - `agate/SliderButton` styling to visually show the focused state
