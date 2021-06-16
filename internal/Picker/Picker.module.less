@@ -19,7 +19,6 @@
 		display: none;
 		position: absolute;
 		width: calc(100% - 90px);
-		z-index: 1;
 	}
 
 	.applySkins({
@@ -91,7 +90,6 @@
 			color: @agate-picker-item-color;
 			height: @agate-picker-item-height;
 			line-height: @agate-picker-item-height;
-			z-index: 2;
 		}
 
 		.active {
@@ -100,10 +98,6 @@
 			font-weight: @agate-picker-active-font-weight;
 			height: @agate-picker-active-height;
 			line-height: @agate-picker-active-height;
-
-			.item {
-				z-index: 2;
-			}
 
 			&::before {
 				content: "";
@@ -114,6 +108,7 @@
 				width: calc(100% - 2* @agate-picker-padding);
 				left: 50%;
 				transform: translateX(-50%);
+				z-index: -1;
 			}
 		}
 
