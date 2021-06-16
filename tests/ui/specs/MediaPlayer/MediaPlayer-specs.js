@@ -10,7 +10,7 @@ describe('MediaPlayer', function () {
 		mediaPlayerDefault,
 		mediaPlayerDisabled,
 		mediaPlayerSpotlightDisabled,
-		mediaPlayerLight
+		mediaPlayerTiny
 	} = Page.components;
 
 	describe('default', function () {
@@ -224,68 +224,68 @@ describe('MediaPlayer', function () {
 		});
 	});
 
-	describe('light', function () {
+	describe('tiny', function () {
 		it('should play media on playButton click', function () {
-			mediaPlayerLight.focus();
-			expect(mediaPlayerLight.knob.getCSSProperty('left').value).to.equal('0px');
+			mediaPlayerTiny.focus();
+			expect(mediaPlayerTiny.knob.getCSSProperty('left').value).to.equal('0px');
 
 			Page.spotlightDown();
 
-			mediaPlayerLight.playButton.click();
-			Page.waitForPlayMedia(mediaPlayerLight);
+			mediaPlayerTiny.playButton.click();
+			Page.waitForPlayMedia(mediaPlayerTiny);
 
-			expect(mediaPlayerLight.knob.getCSSProperty('left').value).to.not.equal('0px');
+			expect(mediaPlayerTiny.knob.getCSSProperty('left').value).to.not.equal('0px');
 		});
 
 		it('should play next media on nextButton click', function () {
-			mediaPlayerLight.focus();
-			expect(mediaPlayerLight.source).to.equal('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
+			mediaPlayerTiny.focus();
+			expect(mediaPlayerTiny.source).to.equal('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
 
-			mediaPlayerLight.nextButton.click();
-			Page.waitForPlayMedia(mediaPlayerLight);
+			mediaPlayerTiny.nextButton.click();
+			Page.waitForPlayMedia(mediaPlayerTiny);
 
-			expect(mediaPlayerLight.source).to.equal('https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3');
+			expect(mediaPlayerTiny.source).to.equal('https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3');
 		});
 
 		describe('5-way', function () {
 			it('should focus `play` button on 5-way down', function () {
-				mediaPlayerLight.focus();
-				expect(mediaPlayerLight.slider.isFocused()).to.be.true();
+				mediaPlayerTiny.focus();
+				expect(mediaPlayerTiny.slider.isFocused()).to.be.true();
 
 				Page.spotlightDown();
 
-				expect(mediaPlayerLight.playButton.isFocused()).to.be.true();
+				expect(mediaPlayerTiny.playButton.isFocused()).to.be.true();
 			});
 
 			it('should focus `previous` button on 5-way down, then left', function () {
-				mediaPlayerLight.focus();
-				expect(mediaPlayerLight.slider.isFocused()).to.be.true();
+				mediaPlayerTiny.focus();
+				expect(mediaPlayerTiny.slider.isFocused()).to.be.true();
 
 				Page.spotlightDown();
 				Page.spotlightLeft();
 
-				expect(mediaPlayerLight.previousButton.isFocused()).to.be.true();
+				expect(mediaPlayerTiny.previousButton.isFocused()).to.be.true();
 			});
 
 			it('should focus back `play` button when navigating back to media controls ', function () {
-				mediaPlayerLight.focus();
-				expect(mediaPlayerLight.slider.isFocused()).to.be.true();
+				mediaPlayerTiny.focus();
+				expect(mediaPlayerTiny.slider.isFocused()).to.be.true();
 
 				Page.spotlightDown();
 				Page.spotlightLeft();
-				expect(mediaPlayerLight.previousButton.isFocused()).to.be.true();
+				expect(mediaPlayerTiny.previousButton.isFocused()).to.be.true();
 				Page.spotlightUp();
 				Page.spotlightDown();
 
-				expect(mediaPlayerLight.playButton.isFocused()).to.be.true();
+				expect(mediaPlayerTiny.playButton.isFocused()).to.be.true();
 			});
 		});
 
 		describe('using pointer', function () {
 			it('should focus `next` button on hover', function () {
-				mediaPlayerLight.hover('Next');
+				mediaPlayerTiny.hover('Next');
 
-				expect(mediaPlayerLight.nextButton.isFocused()).to.be.true();
+				expect(mediaPlayerTiny.nextButton.isFocused()).to.be.true();
 			});
 		});
 	});
