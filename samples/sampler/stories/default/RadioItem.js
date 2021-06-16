@@ -23,6 +23,7 @@ export const _RadioItem = () => {
 		<RadioItem
 			disabled={boolean('disabled', Config)}
 			icon={select('icon', ['', ...iconList], Config)}
+			inline={boolean('inline', Config)}
 			onToggle={action('onToggle')}
 		>
 			{slotBefore}
