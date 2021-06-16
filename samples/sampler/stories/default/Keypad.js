@@ -14,7 +14,7 @@ export default {
 export const _Keypad = () => (
 	<Keypad
 		disabled={boolean('disabled', Config)}
-		isCallActive={boolean('isCallActive', Config)}
+		activeCall={boolean('activeCall', Config)}
 		onChange={action('onChange')}
 		spotlightDisabled={boolean('spotlightDisabled', Config)}
 	/>

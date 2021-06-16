@@ -4,7 +4,7 @@ const KeypadTests = [
 	<Keypad />,
 	<Keypad disabled />,
 	<Keypad spotlightDisabled />,
-	<Keypad isCallActive />
+	<Keypad activeCall />
 ];
 
 export default KeypadTests;

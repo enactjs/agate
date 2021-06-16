@@ -141,7 +141,7 @@ const KeypadBase = kind({
 		 * @default false
 		 * @public
 		 */
-		isCallActive: PropTypes.bool,
+		activeCall: PropTypes.bool,
 
 		/**
 		 * Called when a button is clicked. Includes the 'key' key in its event payload, updates the state and the input value accordingly.
@@ -175,9 +175,9 @@ const KeypadBase = kind({
 	},
 
 	computed: {
-		keys: ({isCallActive, skin}) => {
-			const callStatus = isCallActive ? 'calldecline' : 'callaccept';
-			const editStatus = isCallActive ? 'keypad' : 'backspace';
+		keys: ({activeCall, skin}) => {
+			const callStatus = activeCall ? 'calldecline' : 'callaccept';
+			const editStatus = activeCall ? 'keypad' : 'backspace';
 
 			return [
 				{text: '1'},
@@ -199,7 +199,7 @@ const KeypadBase = kind({
 	},
 
 	render: ({disabled, keys, onKeyButtonClick, spotlightDisabled, ...rest}) => {
-		delete rest.isCallActive;
+		delete rest.activeCall;
 
 		return (
 			<SpotlightContainerLayout {...rest} align="center end" className={css.keypad} inline spotlightDisabled={spotlightDisabled} wrap>
