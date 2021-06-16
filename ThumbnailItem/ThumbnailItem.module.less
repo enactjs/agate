@@ -7,7 +7,8 @@
   	align-items: center;
 
 	.thumbnail {
-	  	vertical-align: middle;
+		box-sizing: border-box;
+		vertical-align: middle;
 	}
 
 	.content {
@@ -22,6 +23,16 @@
 	  	line-height: @agate-thumbnailitem-line-height;
 	  	height: @agate-thumbnailitem-height;
 
+		.focus({
+			border-color: @agate-thumbnailitem-focus-border-color;
+		});
+
+		&.selected {
+			.focus({
+				border-color: @agate-thumbnailitem-focus-border-color;
+			});
+		}
+
 		.thumbnail {
 			height: @agate-thumbnailitem-thumbnail-height;
 			width:@agate-thumbnailitem-thumbnail-width;
@@ -35,32 +46,18 @@
 		}
 
 		&.item {
+			.slotBefore {
+				margin-inline-end: @agate-thumbnailitem-thumbnail-margin;
+			}
+
 			.label {
-				padding: 0 @agate-component-spacing;
 				font-size: @agate-thumbnailitem-label-font-size;
 				color: @agate-thumbnailitem-label-text-color;
 			}
 		}
 
 		.content {
-			padding: 0 @agate-component-spacing;
-			font-size: @agate-thumbnailitem-content-font-size
-		}
-
-	  	.focus({
-			&.item {
-				.label {
-					color: @agate-thumbnailitem-label-focus-text-color;
-				}
-			}
-		});
-
-		&.selected {
-			&.item {
-				.label {
-					color: @agate-thumbnailitem-label-selected-text-color;
-				}
-			}
+			font-size: @agate-thumbnailitem-content-font-size;
 		}
 	});
 }

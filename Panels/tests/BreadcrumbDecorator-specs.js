@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
-
 import PropTypes from 'prop-types';
 import kind from '@enact/core/kind';
 import {mount} from 'enzyme';
@@ -16,7 +14,7 @@ describe('BreadcrumbDecorator', () => {
 			onSelect: PropTypes.func
 		},
 
-		render: ({index, onSelect}) => {	// eslint-disable-line enact/prop-types
+		render: ({index, onSelect}) => {
 			const handleSelect = () => onSelect({index});
 			return <span onClick={handleSelect}>{index}</span>;
 		}
