@@ -407,7 +407,7 @@ describe('Input Specs', () => {
 	test('should not clear input value when disabled', () => {
 		const value = 'Hello Input';
 		const subject = mount(
-			<Input value={value} clearInputButton />
+			<Input value={value} clearInputButton disabled />
 		);
 
 		const clearButton = subject.find('InputDecoratorIcon').at(1);
