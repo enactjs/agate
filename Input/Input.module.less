@@ -74,6 +74,12 @@
 			}
 
 			.icon {
+				&.iconAfter,
+				&.iconBefore {
+					display: flex;
+					align-self: @agate-input-small-icon-align-self;
+				}
+
 				&.iconAfter {
 					.padding-start-end(@agate-input-small-icon-after-padding);
 				}
