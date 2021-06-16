@@ -57,7 +57,7 @@ const InputTests = [
 	<Input value="Simple value" clearInputButton iconBefore="happyface" iconAfter="happyface" />,
 	<Input value="Simple value" clearInputButton iconBefore="happyface" iconAfter="happyface" disabled />,
 	<Input value="Simple value" clearInputButton iconBefore="happyface" iconAfter="happyface" size="small" />,
-	<Input value="Simple value" clearInputButton iconBefore="happyface" iconAfter="happyface" size="small" disabled />
+	<Input value="Simple value" clearInputButton iconBefore="happyface" iconAfter="happyface" size="small" disabled />,
 	<Input value="Simple value" iconAfter="happyface" size="small" />,
 
 	// Focus

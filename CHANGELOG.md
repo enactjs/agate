@@ -7,6 +7,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Added
 
 - `agate/Heading` prop `showBackButton`
+- `agate/Input` prop `clearInputButton` and `clearInputIcon`
 
 ### Fixed
 
