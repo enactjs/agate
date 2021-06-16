@@ -23,7 +23,9 @@ export default {
 export const _Heading = () => {
 	const knobProps = {
 		color: select('color', prop.colors, Config),
+		disabled: boolean('disabled', Config),
 		marqueeOn: select('marqueeOn', prop.marqueeOn, Config),
+		showBackButton: boolean('showBackButton', Config),
 		showLine: boolean('showLine', Config),
 		size: select('size', prop.sizes, Config),
 		spacing: select('spacing', prop.spacings, Config)
