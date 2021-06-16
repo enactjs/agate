@@ -348,7 +348,6 @@ const PickerBase = kind({
 
 	computed: {
 		activeClassName: ({styler}) => styler.join('active', 'item'),
-		backgroundFocusClassName: ({styler}) => styler.join('focusBackground'),
 		'aria-label': ({'aria-label': ariaLabel, 'aria-valuetext': valueText}) => {
 			if (ariaLabel != null) {
 				return ariaLabel;
@@ -403,6 +402,7 @@ const PickerBase = kind({
 				} else return index - 1;
 			} else return 0;
 		},
+		focusBackgroundClassName: ({styler}) => styler.join('focusBackground'),
 		incrementAriaLabel: ({incrementAriaLabel, type}) => {
 			if (incrementAriaLabel != null) {
 				return incrementAriaLabel;
@@ -441,7 +441,6 @@ const PickerBase = kind({
 	render: (props) => {
 		const {
 			activeClassName,
-			backgroundFocusClassName,
 			'aria-label': ariaLabel,
 			children: values,
 			currentItemIndex,
@@ -449,6 +448,7 @@ const PickerBase = kind({
 			decrementAriaLabel: decAriaLabel,
 			decrementItemIndex,
 			disabled,
+			focusBackgroundClassName,
 			handleDecrement,
 			handleFlick,
 			handleIncrement,
@@ -545,7 +545,7 @@ const PickerBase = kind({
 
 		return (
 			<PickerRoot {...rest} onFlick={handleFlick}>
-				<div className={backgroundFocusClassName} />
+				<div className={focusBackgroundClassName} />
 				{skin === 'silicon'  &&
 					<PickerButtonItem
 						aria-controls={valueId}
