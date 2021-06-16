@@ -2,7 +2,7 @@ import TimePicker from '../../../../TimePicker';
 
 const TimePickerTests = [
 	<TimePicker value={new Date(2021, 6, 15, 1, 12, 30)} />,
-	<TimePicker disabled value={new Date()} />,
+	<TimePicker disabled value={new Date(2021, 6, 15, 1, 12, 30)} />,
 	// RTL
 	{
 		locale: 'ar-SA',
