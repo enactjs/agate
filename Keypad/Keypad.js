@@ -126,15 +126,6 @@ const KeypadBase = kind({
 
 	propTypes: /** @lends agate/Keypad.KeypadBase.prototype */{
 		/**
-		 * Applies a disabled style and the control becomes non-interactive.
-		 *
-		 * @type {Boolean}
-		 * @default false
-		 * @public
-		 */
-		disabled: PropTypes.bool,
-
-		/**
 		 * Renders different icons depending on whether there is an active call or not.
 		 *
 		 * @type {Boolean}
@@ -142,6 +133,15 @@ const KeypadBase = kind({
 		 * @public
 		 */
 		activeCall: PropTypes.bool,
+
+		/**
+		 * Applies a disabled style and the control becomes non-interactive.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
+		disabled: PropTypes.bool,
 
 		/**
 		 * Called when a button is clicked. Includes the 'key' key in its event payload, updates the state and the input value accordingly.
