@@ -30,17 +30,17 @@ const MediaPlayerTests = [
 			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 		}
 	</MediaPlayer>,
-	<MediaPlayer type="light">
+	<MediaPlayer type="tiny">
 		{
 			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 		}
 	</MediaPlayer>,
-	<MediaPlayer disabled type="light">
+	<MediaPlayer disabled type="tiny">
 		{
 			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 		}
 	</MediaPlayer>,
-	<MediaPlayer paused type="light">
+	<MediaPlayer paused type="tiny">
 		{
 			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 		}

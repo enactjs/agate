@@ -283,11 +283,11 @@ const MediaPlayerBase = kind({
 		/**
 		 * Specifies what kind of layout the MediaPlayer should have.
 		 *
-		 * @type {('full'|'light')}
+		 * @type {('full'|'tiny')}
 		 * @default 'full'
 		 * @public
 		 */
-		type: PropTypes.oneOf(['full', 'light'])
+		type: PropTypes.oneOf(['full', 'tiny'])
 	},
 
 	defaultProps: {

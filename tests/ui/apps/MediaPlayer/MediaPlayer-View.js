@@ -43,7 +43,7 @@ const app = (props) => <div {...props}>
 	</div>
 	<div style={{display: 'inline-block', marginTop: '80px', width: '50%'}}>
 		<Heading size="tiny">Media Player Light</Heading>
-		<MediaPlayer id="mediaPlayerLight" type="light">
+		<MediaPlayer id="mediaPlayerLight" type="tiny">
 			{
 				audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 			}

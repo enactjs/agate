@@ -189,11 +189,11 @@ const MediaControls = kind({
 		/**
 		 * Specifies what kind of layout the MediaPlayer should have.
 		 *
-		 * @type {('full'|'light')}
+		 * @type {('full'|'tiny')}
 		 * @default 'full'
 		 * @public
 		 */
-		type: PropTypes.oneOf(['full', 'light'])
+		type: PropTypes.oneOf(['full', 'tiny'])
 	},
 
 	defaultProps: {
@@ -221,7 +221,7 @@ const MediaControls = kind({
 	render: ({badge, disabled, menuIcon, nextTrackIcon, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffle, shuffleIcon, type, ...rest}) => {
 		return (
 			<Container {...rest}>
-				{type === 'full' &&
+				{type === 'full' ?
 					<Button
 						aria-label={$L('Repeat')}
 						backgroundOpacity="transparent"
@@ -230,9 +230,7 @@ const MediaControls = kind({
 						disabled={disabled}
 						icon={repeatIcon}
 						onClick={onRepeat}
-						size="large"
-					/>
-				}
+					/> : null}
 				{type === 'full' &&
 					<Button
 						aria-label={$L('Shuffle')}
@@ -251,7 +249,6 @@ const MediaControls = kind({
 					disabled={disabled}
 					icon={previousTrackIcon}
 					onClick={onPrevious}
-					size="large"
 				/>
 				<Button
 					aria-label={paused ? $L('Play') : $L('Pause')}
