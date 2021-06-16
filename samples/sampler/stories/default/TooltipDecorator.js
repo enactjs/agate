@@ -1,7 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, number, select, text} from '@enact/storybook-utils/addons/knobs';
-import ri from '@enact/ui/resolution';
 import Button from '@enact/agate/Button';
 import TooltipDecorator, {Tooltip, TooltipBase} from '@enact/agate/TooltipDecorator';
 
@@ -40,7 +39,7 @@ export default {
 };
 
 export const _TooltipButton = () => (
-	<div style={{marginTop: ri.scaleToRem(99), textAlign: 'center'}}>
+	<div style={{textAlign: 'center'}}>
 		<TooltipButton
 			backgroundOpacity={select('backgroundOpacity', ['opaque', 'lightOpaque', 'transparent'], Config)}
 			disabled={boolean('disabled', Config)}
