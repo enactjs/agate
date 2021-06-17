@@ -5,6 +5,8 @@
 @import "../styles/variables.less";
 
 .decorator {
+	align-items: center;
+
 	.applySkins({
 		display: inline-flex;
 		position: relative;
@@ -105,6 +107,10 @@
 			&.iconBefore {
 				align-self: @agate-input-icon-align;
 				opacity: @agate-input-icon-opacity;
+
+				&.hideIcon {
+					color: transparent;
+				}
 			}
 
 			&.iconAfter {
