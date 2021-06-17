@@ -7,28 +7,31 @@
 	align-items: center;
 
 	.applySkins({
-		padding-left: @agate-checkboxitem-padding-left;
-		padding-right: @agate-checkboxitem-padding-right;
-		border-color: @agate-checkboxitem-border-color;
+		height: @agate-checkboxitem-height;
 		font-size: @agate-checkboxitem-font-size;
 
 		&.selected {
 			border-color: @agate-checkboxitem-selected-border-color;
+
 			&::before {
 				content: none; // Overwrite the selected styles for Item
 			}
+
+			.focus({
+				border-color: @agate-checkboxitem-focus-border-color;
+			});
 		}
 
 		.slotAfter {
-			-webkit-margin-start: @agate-checkboxitem-icon-margin;
-			-webkit-margin-end: 0;
+			-webkit-margin-start: @agate-checkboxitem-icon-margin-end;
+			-webkit-margin-end: @agate-checkboxitem-icon-margin-start;
 		}
 
 		.slotBefore {
 			display: flex;
 			align-items: center;
-			-webkit-margin-start: 0;
-			-webkit-margin-end: @agate-checkboxitem-icon-margin;
+			-webkit-margin-start: @agate-checkboxitem-icon-margin-start;
+			-webkit-margin-end: @agate-checkboxitem-icon-margin-end;
 		}
 
 		.focus({
