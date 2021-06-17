@@ -41,6 +41,25 @@ const InputTests = [
 	<Input value="Simple value" iconBefore="happyface" size="small" />,
 	<Input value="Simple value" iconAfter="happyface" size="small" />,
 
+	// Input with clear input button
+	<Input value="Simple value" clearButton />,
+	<Input value="Simple value" clearButton disabled />,
+	<Input value="Simple value" clearButton size="small" />,
+	<Input value="Simple value" clearButton size="small" disabled />,
+	<Input value="Simple value" clearButton iconBefore="happyface" />,
+	<Input value="Simple value" clearButton iconBefore="happyface" disabled />,
+	<Input value="Simple value" clearButton iconAfter="happyface" />,
+	<Input value="Simple value" clearButton iconAfter="happyface" disabled />,
+	<Input value="Simple value" clearButton iconBefore="happyface" size="small" />,
+	<Input value="Simple value" clearButton iconBefore="happyface" size="small" disabled />,
+	<Input value="Simple value" clearButton iconAfter="happyface" size="small" />,
+	<Input value="Simple value" clearButton iconAfter="happyface" size="small" disabled />,
+	<Input value="Simple value" clearButton iconBefore="happyface" iconAfter="happyface" />,
+	<Input value="Simple value" clearButton iconBefore="happyface" iconAfter="happyface" disabled />,
+	<Input value="Simple value" clearButton iconBefore="happyface" iconAfter="happyface" size="small" />,
+	<Input value="Simple value" clearButton iconBefore="happyface" iconAfter="happyface" size="small" disabled />,
+	<Input value="Simple value" iconAfter="happyface" size="small" />,
+
 	// Focus
 	...withConfig({focus: true}, [
 		<Input placeholder="Focused placeholder Input" />,
