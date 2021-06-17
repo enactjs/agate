@@ -58,7 +58,8 @@ const Times = kind({
 
 	defaultProps: {
 		current: 0,
-		total: 0
+		total: 0,
+		type: 'full'
 	},
 
 	styles: {

@@ -205,7 +205,8 @@ const MediaControls = kind({
 		previousTrackIcon: 'previoustrack',
 		repeat: 'none',
 		repeatIcon: 'repeat',
-		shuffleIcon: 'shuffle'
+		shuffleIcon: 'shuffle',
+		type: 'full'
 	},
 
 	styles: {
@@ -231,7 +232,7 @@ const MediaControls = kind({
 						icon={repeatIcon}
 						onClick={onRepeat}
 					/> : null}
-				{type === 'full' &&
+				{type === 'full' ?
 					<Button
 						aria-label={$L('Shuffle')}
 						backgroundOpacity="transparent"
@@ -240,8 +241,7 @@ const MediaControls = kind({
 						disabled={disabled}
 						icon={shuffleIcon}
 						onClick={onShuffle}
-					/>
-				}
+					/> : null}
 				<Button
 					aria-label={$L('Previous')}
 					backgroundOpacity="transparent"
@@ -268,15 +268,14 @@ const MediaControls = kind({
 					icon={nextTrackIcon}
 					onClick={onNext}
 				/>
-				{type === 'full' &&
+				{type === 'full' ?
 					<Button
 						aria-label={$L('Menu')}
 						backgroundOpacity="transparent"
 						css={css}
 						disabled={disabled}
 						icon={menuIcon}
-					/>
-				}
+					/> : null}
 			</Container>
 		);
 	}

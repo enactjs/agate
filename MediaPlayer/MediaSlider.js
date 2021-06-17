@@ -39,7 +39,8 @@ const MediaSlider = kind({
 	},
 
 	defaultProps: {
-		paused: true
+		paused: true,
+		type: 'full'
 	},
 
 	styles: {
