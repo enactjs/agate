@@ -342,7 +342,7 @@ const MediaPlayerBase = kind({
  * @memberof agate/MediaPlayer
  * @private
  */
-const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => { // eslint-disable-line no-unused-vars
+const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => {
 	return class extends Component {
 		static displayName = 'MediaPlayerBehaviorDecorator';
 
