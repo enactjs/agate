@@ -16,7 +16,7 @@ import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
-import {MarqueeDecorator} from '@enact/ui/Marquee';
+import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
 import componentCss from './BodyText.module.less';

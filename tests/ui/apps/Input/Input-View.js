@@ -42,6 +42,19 @@ const app = (props) => <div {...props}>
 				defaultValue="Input field small"
 			/>
 		</div>
+		<div>
+			<Input
+				id="input7"
+				clearButton
+				defaultValue="Input with clearButton"
+			/>
+			<Input
+				id="input8"
+				clearButton
+				clearIcon="closex"
+				defaultValue="Input with custom clearButton"
+			/>
+		</div>
 	</div>
 </div>;
 

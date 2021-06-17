@@ -27,7 +27,7 @@ describe('ArcSlider', function () {
 		it('should have default foregroundColor', function () {
 			arcSlider.self.click({x: 5, y: -10});
 			// second slider has the foreground color
-			expect(arcSlider.coloredPath(2).getCSSProperty('stroke').value).to.equal('rgb(0,0,255)');
+			expect(arcSlider.coloredPath(2).getCSSProperty('stroke').value).to.equal('rgb(0,0,0)');
 		});
 	});
 

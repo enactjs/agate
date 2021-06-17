@@ -2,13 +2,12 @@ import kind from '@enact/core/kind';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {number, select, text} from '@enact/storybook-utils/addons/knobs';
 import UiIcon from '@enact/ui/Icon';
-import {iconList, iconListSilicon} from './icons';
 import PropTypes from 'prop-types';
-import {storiesOf} from '@storybook/react';
-
 import Skinnable from '@enact/agate/Skinnable';
 import Icon, {IconBase} from '@enact/agate/Icon';
 import Heading from '@enact/agate/Heading';
+
+import {iconList, iconListSilicon} from './util/icons';
 
 // import icons
 import docs from '../../images/icon-enact-docs.png';
@@ -30,7 +29,7 @@ const SkinnedIconBase = kind({
 		const size = select('size', ['smallest', 'small', 'large', 'huge'], Config, 'large');
 
 		switch (skin) {
-			case 'silicon':  {
+			case 'silicon': {
 				iconNames = iconListSilicon; break;
 			}
 			default: {
@@ -42,7 +41,7 @@ const SkinnedIconBase = kind({
 		let children;
 
 		switch (iconType) {
-			case 'glyph': children = select('icon', ['', ...iconNames], Icon, 'home'); break;
+			case 'glyph': children = select('icon', ['', ...iconNames], Config, 'home'); break;
 			case 'url src': children = select('src', ['', docs, factory, logo], Config, logo); break;
 			default: children = text('custom icon', Config);
 		}
@@ -67,20 +66,26 @@ const SkinnedIconBase = kind({
 const SkinnedIcon = Skinnable({prop: 'skin'}, SkinnedIconBase);
 SkinnedIcon.displayName = 'Icon';
 
-storiesOf('Agate', module)
-	.add(
-		'Icon',
-		() => {
-			const flip = select('flip', ['', 'both', 'horizontal', 'vertical'], Config, '');
-			const spriteCount = number('spriteCount', Config, {min: 1}, 1);
-			return (
-				<SkinnedIcon
-					flip={flip}
-					spriteCount={spriteCount}
-				/>
-			);
-		},
-		{
-			text: 'Basic usage of Icon'
-		}
+export default {
+	title: 'Agate/Icon',
+	component: 'Icon'
+};
+
+export const _Icon = () => {
+	const flip = select('flip', ['', 'both', 'horizontal', 'vertical'], Config, '');
+	const spriteCount = number('spriteCount', Config, {min: 1}, 1);
+
+	return (
+		<SkinnedIcon
+			flip={flip}
+			spriteCount={spriteCount}
+		/>
 	);
+};
+
+_Icon.storyName = 'Icon';
+_Icon.parameters = {
+	info: {
+		text: 'Basic usage of Icon'
+	}
+};

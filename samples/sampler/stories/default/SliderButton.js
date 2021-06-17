@@ -1,8 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
-import {storiesOf} from '@storybook/react';
-
 import SliderButton, {SliderButtonBase} from '@enact/agate/SliderButton';
 import {icons} from '@enact/agate/Icon';
 
@@ -26,18 +24,23 @@ const prop = {
 	]
 };
 
-storiesOf('Agate', module)
-	.add(
-		'SliderButton',
-		() => (
-			<SliderButton
-				onChange={action('onChange')}
-				disabled={boolean('disabled', Config)}
-			>
-				{prop[select('options', [3, 5], Config, '3')]}
-			</SliderButton>
-		),
-		{
-			text: 'The basic SliderButton'
-		}
-	);
+export default {
+	title: 'Agate/SliderButton',
+	component: 'SliderButton'
+};
+
+export const _SliderButton = () => (
+	<SliderButton
+		onChange={action('onChange')}
+		disabled={boolean('disabled', Config)}
+	>
+		{prop[select('options', [3, 5], Config, '3')]}
+	</SliderButton>
+);
+
+_SliderButton.storyName = 'SliderButton';
+_SliderButton.parameters = {
+	info: {
+		text: 'The basic SliderButton'
+	}
+};

@@ -6,14 +6,16 @@
  */
 
 import kind from '@enact/core/kind';
+import Spottable from '@enact/spotlight/Spottable';
+import {ButtonDecorator as UiButtonDecorator} from '@enact/ui/Button';
+import Pure from '@enact/ui/internal/Pure';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
-import {ButtonBase, ButtonDecorator} from '../Button';
+import {ButtonBase} from '../Button';
 import Skinnable from '../Skinnable';
 
 import componentCss from './SwatchButton.module.less';
-
 
 /**
  * A swatch component which sets-up the component's structure.
@@ -36,10 +38,10 @@ const SwatchButtonBase = kind({
 		 *
 		 * The value should take the format of a HEX color. Ex: `#ffcc00` or `#3467af`
 		 *
-		 * @type {Object}
+		 * @type {String}
 		 * @public
 		 */
-		children: PropTypes.object,
+		children: PropTypes.string,
 
 		/**
 		 * The color of the swatch.
@@ -95,7 +97,7 @@ const SwatchButtonBase = kind({
 
 	render: ({colorSwatchStyle, css, ...rest}) => {
 		return (
-			<ButtonBase aria-label={colorSwatchStyle.backgroundColor} {...rest} css={css} minWidth={false}>
+			<ButtonBase aria-label={colorSwatchStyle.backgroundColor} {...rest} css={css} iconOnly minWidth={false}>
 				<div className={css.colorSwatch} style={colorSwatchStyle} />
 			</ButtonBase>
 		);
@@ -107,12 +109,15 @@ const SwatchButtonBase = kind({
  *
  * @hoc
  * @memberof agate/ColorPicker
- * @mixes agate/Button.ButtonDecorator
+ * @mixes ui/Button.ButtonDecorator
+ * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
 const SwatchButtonDecorator = compose(
-	ButtonDecorator,
+	Pure,
+	UiButtonDecorator,
+	Spottable,
 	Skinnable
 );
 

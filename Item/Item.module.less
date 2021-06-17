@@ -52,6 +52,7 @@
 		border-color: @agate-item-border-color;
 		color: @agate-item-color;
 		background-color: @agate-item-bg-color;
+		height: @agate-item-large-height;
 
 		&.hasLabel {
 			.itemContent {
@@ -72,12 +73,10 @@
 			.labelAfter,
 			.labelBefore {
 				.content {
-					box-sizing: border-box;
 					min-width: @agate-item-content-width;
 				}
 
 				.label {
-					box-sizing: border-box;
 					max-width: @agate-item-label-max-width;
 				}
 			}
@@ -111,37 +110,82 @@
 				max-width: @agate-item-inline-content-max-width;
 			}
 
-			.itemContent,
-			.content {
-				flex-shrink: 1;
-				overflow: auto;
+			&:not(.centered) .itemContent {
+				min-width: @agate-item-inline-notcentered-itemcontent-min-width;
 			}
 
-			&.hasLabel {
-				.slotAfter {
-					.padding-start-end(@agate-item-slotafter-padding-left, 0);
-				}
+			.content,
+			.itemContent {
+				flex-shrink: 1;
+				overflow: auto;
 			}
 		}
 
 		&.centered {
 			.itemContent {
 				max-width: fit-content;
+
+				&.labelAfter,
+				&.labelBefore {
+					max-width: 100%;
+					.content {
+						max-width: @agate-item-content-width;
+					}
+
+					.label {
+						max-width: @agate-item-label-max-width;
+					}
+				}
+
+				&.labelAbove,
+				&.labelBelow {
+					.content,
+					.label {
+						max-width: 100%;
+					}
+				}
+			}
+
+			&.slotAfter {
+				padding-right: @agate-item-slotafter-padding-right;
+			}
+
+			&.slotBefore {
+				padding-left: @agate-item-slotbefore-padding-left;
+			}
+
+			.slotAfter {
+				position: absolute;
+				.position-start-end(auto, @agate-item-side-outset);
+			}
+
+			.slotBefore {
+				position: absolute;
+				.position-start-end(@agate-item-side-outset, auto);
 			}
 
 			&.inline {
-				max-width: @agate-item-inline-max-width;
+				max-width: @agate-item-centered-inline-max-width;
+
+				.itemContent {
+					width: 100%;
+				}
 			}
 		}
 
-		&.large { /* Needed to prevent global class being added in the DOM */ }
+		&.large {
+			/* Available for export */
+		}
 
 		// TODO: needs to be modified when new requirements for small item is available
 		&.small {
+			height: @agate-item-small-height;
 			font-size: @agate-item-small-font-size;
 			line-height: @agate-item-small-line-height;
 
 			&.hasLabel {
+				height: @agate-item-small-haslabel-height;
+
 				.itemContent {
 					padding: @agate-item-small-haslabel-padding;
 				}
@@ -159,11 +203,18 @@
 		.focus({
 			border-color: @agate-item-focus-border-color;
 			background-color: @agate-item-focus-bg-color;
+			background-image: @agate-item-focus-bg-image;
 			color: @agate-item-focus-color;
 
 			.itemContent {
 				.label {
 					color: @agate-item-label-color;
+				}
+			}
+
+			&.selected {
+				&::before {
+					background-color: @agate-item-indicator-focus-bg-color;
 				}
 			}
 		});
@@ -175,18 +226,13 @@
 
 			&::before {
 				content: "";
-				height: @agate-indicator-height;
-				width: @agate-indicator-height;
-				background-color: @agate-indicator-bg-color;
-				border-radius: @agate-indicator-border-radius;
-				align-self: @agate-indicator-align-self;
-				margin-right: @agate-indicator-margin-right;
-			}
-
-			.itemContent {
-				.label {
-					color: @agate-item-selected-label-color;
-				}
+				height: @agate-item-indicator-height;
+				min-width: @agate-item-indicator-height; // `min-width` is used to ensure that the indicator has a correct width with default item
+				background-color: @agate-item-indicator-bg-color;
+				border-radius: @agate-item-indicator-border-radius;
+				align-self: '@agate-item-indicator-align-self';
+				position: absolute;
+				.position-start-end(@agate-item-selected-padding, initial);
 			}
 
 			// Selected+Focus colors use both sets of colors
@@ -197,7 +243,7 @@
 
 				.itemContent {
 					.label {
-						color: @agate-item-focus-color;
+						color: @agate-item-label-focus-selected-color;
 					}
 				}
 			});

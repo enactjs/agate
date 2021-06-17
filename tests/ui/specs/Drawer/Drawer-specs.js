@@ -55,7 +55,9 @@ describe('Drawer', function () {
 
 				expectOpen(drawerCommon);
 
-				Page.spotlightDown();
+				// Add delay for Jenkins fail that cancel button is clicked before drawer is fully opened.
+				Page.delay(300);
+				Page.spotlightRight();
 				Page.spotlightSelect();
 
 				Page.waitForClose(drawer);
@@ -77,7 +79,7 @@ describe('Drawer', function () {
 
 				expectOpen(drawerCommon);
 
-				// Add delay for Jenkins fail that cancle button is clicked before drawer is fully opened.
+				// Add delay for Jenkins fail that cancel button is clicked before drawer is fully opened.
 				Page.delay(300);
 				drawer.buttonCancel.click();
 				Page.waitForClose(drawer);
@@ -116,7 +118,9 @@ describe('Drawer', function () {
 
 				expectOpen(drawerCommon);
 
-				Page.spotlightDown();
+				// Add delay for Jenkins fail that cancel button is clicked before drawer is fully opened.
+				Page.delay(300);
+				Page.spotlightRight();
 				Page.spotlightSelect();
 
 				browser.pause(100); // needed to pass instead of waitTransitionEnd
@@ -179,7 +183,9 @@ describe('Drawer', function () {
 
 				expectOpen(drawerCommon);
 
-				Page.spotlightDown();
+				// Add delay for Jenkins fail that cancel button is clicked before drawer is fully opened.
+				Page.delay(300);
+				Page.spotlightRight();
 				Page.spotlightSelect();
 
 				Page.waitForClose(drawer);
@@ -202,7 +208,7 @@ describe('Drawer', function () {
 
 				expectOpen(drawerCommon);
 
-				// Add delay for Jenkins fail that cancle button is clicked before drawer is fully opened.
+				// Add delay for Jenkins fail that cancel button is clicked before drawer is fully opened.
 				Page.delay(300);
 				drawer.buttonCancel.click();
 				Page.waitForClose(drawer);
@@ -246,7 +252,9 @@ describe('Drawer', function () {
 
 				expectNoneScrimOpen(drawerCommon);
 
-				Page.spotlightDown();
+				// Add delay for Jenkins fail that cancel button is clicked before drawer is fully opened.
+				Page.delay(300);
+				Page.spotlightRight();
 				Page.spotlightSelect();
 
 				Page.waitForClose(drawer);

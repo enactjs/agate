@@ -6,8 +6,66 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
-- `agate/ContextualPopup` prop `css` to support customizations
-- `agate/ContextualPopupDecorator` prop `css` to support customizations
+- `agate/Heading` prop `showBackButton`
+- `agate/Input` prop `clearButton` and `clearIcon`
+- `agate/Keypad` prop `activeCall` to render different icons depending on whether there is an active call or not
+
+### Fixed
+
+- `agate/Heading` style to match latest design for Silicon skin
+- `agate/Input` to match latest design for Silicon skin
+- `agate/LabeledIconButton` to match the latest design for Silicon skin
+- `agate/Keypad` to match latest design for Silicon skin
+
+## [2.0.0-beta.3] - 2021-06-06
+
+### Added
+
+- `Noto Sans` font as the default font
+
+### Fixed
+
+- `agate/ArcSlider` text size be the same on all skins
+- `agate/ArcSlider` style to match latest design for Silicon skin
+- `agate/Button` badge background color for Cobalt and Copper skins
+- `agate/Button` to center icon when iconOnly prop is true, for Cobalt and Copper skins, RTL
+- `agate/Checkbox` icon font-size and focus color for Carbon, Cobalt, Copper, Electro, and Titanium skins
+- `agate/CheckboxItem` style to match latest design for Silicon skin
+- `agate/ContextualPopupDecorator` style to match latest design for Silicon skin
+- `agate/ColorPicker` layout for Carbon, Electro, Gallium, Silicon skins
+- `agate/Popup` to have the same background-color for body and buttons section for all skins except Silicon
+- `agate/Popup` to match latest design for Silicon skin
+- `agate/RadioItem` style to match latest design for Silicon skin
+- `agate/RadioItem` icon border-color to be visible when item is focused in Carbon skin
+- `agate/Scroller` to be more visible on Carbon, Cobalt, Copper, Electro, Titanium skins
+- `agate/Slider` to have a more visible background-color on Cobalt skin
+- `agate/Slider` to apply focus styling while dragging by touch
+- `agate/SliderButton` button text color to be more visible on Carbon skin
+- `agate/ThumbnailItem` to match latest design for Silicon skin
+- `agate/ThumbnailItem` to display thumbnail image properly in all skins
+
+## [2.0.0-alpha.3] - 2021-04-26
+
+### Added
+
+- `agate/ImageItem` prop `sizing` to support image sizing
+- `agate/Drawer` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
+
+### Changed
+
+- `Copper` skin to use lighter color for text in order to be more visible
+
+### Fixed
+
+- `agate/Checkbox`, `agate/FanSpeedControl`, `agate/ImageItem`, `agate/Item`, and `agate/WindDirectionControl` to match latest design for Silicon skin
+- `agate/Dropdown` misalignment of `Button` and `ContextualPopup` on the edge of screen
+- `agate/Popup` to apply marquee for long title
+
+## [2.0.0-alpha.2] - 2021-04-02
+
+### Added
+
+- `agate/ContextualPopup` and `agate/ContextualPopupDecorator` prop `css` to support customizations
 - `agate/Dropdown` prop `width` to support multiple widths
 - `agate/IncrementSlider` prop `activateOnFocus` to support slider activation when slider gets focused
 - `agate/IncrementSlider`, `agate/ProgressBar`, and `agate/Slider` prop `tooltip` to enable the built-in tooltip
@@ -34,7 +92,9 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/ArcSlider` and `agate/TemperatureControl` broken layout when `min` prop is not smaller than `max` prop
+- `agate/BodyText`, `agate/Button`, `agate/IncrementSlider`, `agate/LabeledIcon`, and `agate/Slider` to match latest design for Silicon skin
 - `agate/Button` to apply active styling only when it is not disabled
+- `agate/Button` to apply active styling on enter key press
 - `agate/ImageItem` width/height proportion when `orientation` is `horizontal`
 - `agate/LabeledIconButton` styling to preserve behavior and look when props are missing
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
@@ -62,7 +122,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ArcSlider` prop `aria-valuetext` to override `aria-valuetext` for it
 - `agate/DateTimePicker` prop `dayAriaLabel`, `hourAriaLabel`, `meridiemAriaLabel`, `minuteAriaLabel`, `monthAriaLabel`, and `yearAriaLabel`
 - `agate/Heading` prop `marqueOn` to determine when marquee begins
-- `agate/Input` prop `invalid` to display a tooltip with a message when `invalid` prop is true 
+- `agate/Input` prop `invalid` to display a tooltip with a message when `invalid` prop is true
 - `agate/Input` prop `invalidMessage` to customize the tooltip message when `invalid` prop is true
 - `agate/Input` prop `size` to change the size of both input and icons (default large)
 - `agate/Item` prop `centered`, `disabled`, `inline`, `marqueeOn`, and `size`

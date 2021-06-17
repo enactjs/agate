@@ -15,14 +15,66 @@
 // concerns like more JavaScript skin dependency and more places to update when changes occur, and
 // a render delay or hiccup when a switch is preformed if the font hasn't been downloaded yet.
 
+@import "~@enact/ui/styles/mixins.less";
 @import "./font-agateicons.less";
 @import "./font-siliconicons.less";
-@import "./font-museosans.less";
+
+// Local theme font variables (not to be used externally)
 //
-// ----- DISABLED - PLAT-92904 -----
-// Until such time that a solution for can be found for pre-downloading or pre-fetching external
-// font resources, all external fonts must be disabled. Current webOS policy states that system
-// apps, specifically, may not use external fonts that delay or impede the initial render.
-//
-// @import "./font-worksans.less";
-// @import "./font-sourcesanspro.less";
+@font-family-base-name: "Agate";
+
+// Define local LESS variable for font paths
+@font-system-src-agate-100: local("Noto Sans Thin"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Thin.ttf) format("truetype");
+@font-system-src-agate-200: local("Noto Sans ExtraLight"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Thin.ttf) format("truetype");
+@font-system-src-agate-300: local("Noto Sans Light"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Light.ttf) format("truetype");
+@font-system-src-agate-400: local("Noto Sans Regular"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Light.ttf) format("truetype");
+@font-system-src-agate-500: local("Noto Sans Medium"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Medium.ttf) format("truetype");
+@font-system-src-agate-600: local("Noto Sans SemiBold"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Medium.ttf) format("truetype");
+@font-system-src-agate-700: local("Noto Sans Bold"),  local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Bold.ttf) format("truetype");
+@font-system-src-agate-800: local("Noto Sans ExtraBold"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Medium.ttf) format("truetype");
+@font-system-src-agate-900: local("Noto Sans Black"), local("Noto Sans"), local("Museo Sans"), url(../../fonts/MuseoSans/MuseoSans-Black.ttf) format("truetype");
+
+// Localized fonts
+// Order correlates with load and priority order. Later fonts are stacked on top of earlier fonts.
+// In the case of glyphs existing in two fonts, the later glyphs will be used.
+@fonts: {
+	am: local("Noto Sans Ethiopic Regular") normal 300, local("Noto Sans Ethiopic Bold") 600 700;
+	ar: local("Noto Sans Arabic Regular") normal 300, local("Noto Sans Arabic Bold") 600 700;
+	ur: local("Noto Sans Arabic Regular") normal 300, local("Noto Sans Arabic Bold") 600 700;
+	ja: local("Noto Sans CJK KR Regular") normal 300, local("Noto Sans CJK KR Bold") 600 700;
+	ko: local("Noto Sans CJK KR Regular") normal 300, local("Noto Sans CJK KR Bold") 600 700;
+	ta: local("Noto Sans Tamil Regular") normal 300, local("Noto Sans Tamil Bold") 600 700;
+	th: local("Noto Sans Thai Regular") normal 300, local("Noto Sans Thai Bold") 600 700;
+	zh-HK: local("Noto Sans CJK KR Regular") normal 300, local("Noto Sans CJK KR Bold") 600 700;
+	zh-TW: local("Noto Sans CJK KR Regular") normal 300, local("Noto Sans CJK KR Bold") 600 700;
+	si: local("Noto Sans Sinhala Regular") normal 300, local("Noto Sans Sinhala Bold") 600 700;
+
+	// DEV NOTE: This is the closest proximity to a collection of unit tests that we have to test this system.
+	// name:							local("name");
+	// nameRepeat:						local("name"), local("name2");
+	// nameWeight:						local("name") 100;
+	// nameMultipleWeight:				local("name") 100 900;
+	// nameWeightStyle:					local("name") 100 italic;
+	// nameMultipleWeightStyle:			local("name") 100 900 italic;
+	// nameWeightRepeat:				local("name") 100, local("name2") 200;
+	// nameWeightRepeat2ndWeight:		local("name"), local("name2") 200;
+	// nameMultipleWeightRepeat:		local("name") 100 900, local("name2") 200 800;
+	// nameWeightStyleRepeat:			local("name") 100 italic, local("name2") 200 normal;
+	// nameMultipleWeightStyleRepeat:	local("name") 100 900 italic, local("name2") 200 800 normal;
+};
+
+/* ----- Generated Agate Locale Fonts (Stacking onto "Agate") ------ */
+.buildLocaleFonts(@font-family-base-name; @fonts);
+
+// Generate @font-face Rules
+.buildFontFace(@font-family-base-name; @font-system-src-agate-400);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-100;   100);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-200;   200);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-300;   300);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-400;   400);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-500;   500);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-600;   600);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-700;   700);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-800;   800);
+.buildFontFace(@font-family-base-name; @font-system-src-agate-900;   900);
+

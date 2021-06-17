@@ -93,6 +93,23 @@ const ImageItemBase = kind({
 		orientation: PropTypes.oneOf(['horizontal', 'vertical']),
 
 		/**
+		 * Used to set the `background-size` of the image.
+		 *
+		 * @type {String}
+		 * @default 'fill'
+		 * @public
+		 */
+		sizing: PropTypes.oneOf(['fit', 'fill', 'none']),
+
+		/**
+		 * The current skin.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		skin: PropTypes.string,
+
+		/**
 		 * String value or Object of values used to determine which image will appear on a specific
 		 * screenSize.
 		 *
@@ -103,8 +120,9 @@ const ImageItemBase = kind({
 	},
 
 	defaultProps: {
+		captionPosition: 'below',
 		orientation: 'vertical',
-		captionPosition: 'below'
+		sizing: 'fill'
 	},
 
 	styles: {
@@ -113,14 +131,12 @@ const ImageItemBase = kind({
 	},
 
 	computed: {
-		className: ({captionPosition, styler}) => styler.append({
-			captionOverlay: captionPosition === 'overlay'
-		})
+		className: ({captionPosition, styler, sizing}) => styler.append({captionOverlay: captionPosition === 'overlay'}, sizing)
 	},
 
-	render: ({captionPosition, children, css, disabled, orientation, src, ...rest}) => {
+	render: ({captionPosition, children, css, disabled, orientation, skin, src, ...rest}) => {
 		const [Component, marqueeProps] = (children && (orientation === 'horizontal' || captionPosition === 'below')) ? [MarqueeImageItem, {
-			alignment: 'center'
+			alignment: skin === 'silicon' && orientation === 'horizontal' ? 'left' : 'center'
 		}] : [UiImageItem, null];
 
 		return (
@@ -152,7 +168,7 @@ const ImageItemBase = kind({
  */
 const ImageItemDecorator = compose(
 	MarqueeController({marqueeOnFocus: true}),
-	Skinnable,
+	Skinnable({prop: 'skin'}),
 	Spottable
 );
 

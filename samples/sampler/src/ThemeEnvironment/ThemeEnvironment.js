@@ -7,20 +7,20 @@ import {color} from '@storybook/addon-knobs';
 import {Row, Column, Cell} from '@enact/ui/Layout';
 import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 
-import ThemeDecorator from '@enact/agate/ThemeDecorator';
 import Heading from '@enact/agate/Heading';
 import {Panels, Panel} from '@enact/agate/Panels';
-import Skinnable from '@enact/agate/Skinnable';
 import Scroller from '@enact/agate/Scroller';
+import Skinnable from '@enact/agate/Skinnable';
+import ThemeDecorator from '@enact/agate/ThemeDecorator';
 
 import css from './ThemeEnvironment.module.less';
 
 const globalGroup = 'Global Knobs';
 
-// const reloadPage = () => {
-// 	const {protocol, host, pathname} = window.parent.location;
-// 	window.parent.location.href = protocol + '//' + host + pathname;
-// };
+const reloadPage = () => {
+	const {protocol, host, pathname} = window.parent.location;
+	window.parent.location.href = protocol + '//' + host + pathname;
+};
 
 const SkinFrame = Skinnable(kind({
 	name: 'SkinFrame',
@@ -55,11 +55,6 @@ const SkinFrame = Skinnable(kind({
 		return (<Row {...props} />);
 	}
 }));
-
-const reloadPage = () => {
-	const {protocol, host, pathname} = window.parent.location;
-	window.parent.location.href = protocol + '//' + host + pathname;
-};
 
 const PanelsBase = kind({
 	name: 'ThemeEnvironment',
@@ -171,20 +166,22 @@ const getPropFromURL = (propName, fallbackValue) => {
 	return fallbackValue;
 };
 
-const memory = {
-	skin: null
-};
-
 const StorybookDecorator = (story, config) => {
 	const sample = story();
+
+	const {globals} = config;
+
 	const Config = {
 		defaultProps: {
 			locale: 'en-US',
-			'night mode': false,
-			skin: 'gallium'
+			'show all skins': false,
+			skin: 'gallium',
+			'default skin styles': false,
+			'night mode': false
 		},
 		groupId: globalGroup
 	};
+
 	const defaultColors = {
 		carbon: {
 			accent: '#8fd43a',
@@ -215,37 +212,44 @@ const StorybookDecorator = (story, config) => {
 			highlight: '#2a48ca'
 		}
 	};
+
 	const skinFromURL = getPropFromURL('skin');
-	const currentSkin = skinFromURL ? skinFromURL : Config.defaultProps.skin;
-	const newSkin = (memory.skin !== currentSkin);
-	memory.skin = currentSkin;  // Remember the skin for the next time we load.
 	const accentFromURL = getPropFromURL('accent');
 	const highlightFromURL = getPropFromURL('highlight');
 	const localeFromURL = getPropFromURL('locale');
-	const currentLocale = localeFromURL ? localeFromURL : Config.defaultProps.locale;
-	const locale = select('locale', locales, Config, currentLocale);
-	const allSkins = boolean('show all skins', Config);
-	const skinKnobs = {};
-	if (!allSkins) {
-		skinKnobs.skin = select('skin', skins, Config, currentSkin);
+
+	globals.locale = select('locale', locales, Config, localeFromURL || globals.locale);
+	globals.allSkins = boolean('show all skins', Config, globals.allSkins);
+	globals.nightMode = boolean('night mode', Config, globals.nightMode);
+
+	let skinKnobs = {}, accent, highlight;
+
+	if (!globals.allSkins) {
+		globals.skin = select('skin', skins, Config, skinFromURL || globals.skin);
+		skinKnobs.skin = globals.skin;
+		globals.defaultSkinStyles = boolean('default skin styles', Config, globals.defaultSkinStyles);
+		if (globals.defaultSkinStyles) {
+			accent = defaultColors[globals.skin].accent;
+			highlight = defaultColors[globals.skin].highlight;
+		}
 	}
-	const {accent, highlight} = !allSkins && boolean('default skin styles', Config) ? defaultColors[skinKnobs.skin] : {};
-	if (config.parameters && config.parameters.props) {
-		config.props = config.parameters.props;
-	}
+
+	// NOTE: 'config' object is not extensible
+	const hasInfoText = config.parameters && config.parameters.info && config.parameters.info.text;
+	const hasProps = config.parameters && config.parameters.props;
 
 	return (
 		<Theme
-			title={`${config.kind} ${config.story}`.trim()}
-			description={config.description}
-			locale={locale}
+			title={`${config.kind}`.replace(/\//g, ' ').trim()}
+			description={hasInfoText ? config.parameters.info.text : null}
+			locale={globals.locale}
 			{...skinKnobs}
-			skinVariants={boolean('night mode', Config) && 'night'}
-			accent={accent || color('accent', (!newSkin && accentFromURL ? accentFromURL : defaultColors[currentSkin].accent), Config.groupId)}
-			highlight={highlight || color('highlight', (!newSkin && highlightFromURL ? highlightFromURL : defaultColors[currentSkin].highlight), Config.groupId)}
-			{...config.props}
+			skinVariants={globals.nightMode && 'night'}
+			accent={accent || color('accent', (accentFromURL || defaultColors[globals.skin].accent), Config.groupId)}
+			highlight={highlight || color('highlight', (highlightFromURL || defaultColors[globals.skin].highlight), Config.groupId)}
+			{...hasProps ? config.parameters.props : null}
 		>
-			{allSkins ? Object.keys(skins).map(skin => (
+			{globals.allSkins ? Object.keys(skins).map(skin => (
 				<SkinFrame skin={skins[skin]} key={skin}>
 					<Cell size="20%" component={Heading}>{skin}</Cell>
 					<Cell>{sample}</Cell>

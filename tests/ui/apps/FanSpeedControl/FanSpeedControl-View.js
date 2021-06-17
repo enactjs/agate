@@ -15,7 +15,6 @@ const app = (props) => <div {...props}>
 			<Heading>FanSpeedControl Default</Heading>
 			<FanSpeedControl
 				id="fanSpeedControlDefault"
-				icon="fan"
 				max={10}
 				min={1}
 			/>
@@ -34,7 +33,6 @@ const app = (props) => <div {...props}>
 			<FanSpeedControl
 				id="fanSpeedControlDisabled"
 				disabled
-				icon="fan"
 				max={10}
 				min={1}
 			/>
