@@ -45,14 +45,14 @@ const app = (props) => <div {...props}>
 		<div>
 			<Input
 				id="input7"
-				clearInputButton
-				defaultValue="Input with clearInputButton"
+				clearButton
+				defaultValue="Input with clearButton"
 			/>
 			<Input
 				id="input8"
-				clearInputButton
-				clearInputIcon="closex"
-				defaultValue="Input with custom clearInputButton"
+				clearButton
+				clearIcon="closex"
+				defaultValue="Input with custom clearButton"
 			/>
 		</div>
 	</div>

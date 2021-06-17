@@ -368,9 +368,9 @@ describe('Input Specs', () => {
 		expect(subject.find('Tooltip')).toHaveLength(0);
 	});
 
-	test('should support clearInputButton', () => {
+	test('should support clearButton', () => {
 		const subject = mount(
-			<Input clearInputButton />
+			<Input clearButton />
 		);
 
 		const expected = 'cancel';
@@ -379,10 +379,10 @@ describe('Input Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should support custom icon for clearInputButton', () => {
+	test('should support custom icon for clearButton', () => {
 		const expected = 'happyface';
 		const subject = mount(
-			<Input clearInputButton clearInputIcon={expected} />
+			<Input clearButton clearIcon={expected} />
 		);
 
 		const actual = subject.find('Icon').prop('children');
@@ -392,7 +392,7 @@ describe('Input Specs', () => {
 
 	test('should clear input value when clearButton is clicked', () => {
 		const subject = mount(
-			<Input value="Hello Input" clearInputButton />
+			<Input value="Hello Input" clearButton />
 		);
 
 		const clearButton = subject.find('InputDecoratorIcon').at(1);
@@ -407,7 +407,7 @@ describe('Input Specs', () => {
 	test('should not clear input value when disabled', () => {
 		const value = 'Hello Input';
 		const subject = mount(
-			<Input value={value} clearInputButton disabled />
+			<Input value={value} clearButton disabled />
 		);
 
 		const clearButton = subject.find('InputDecoratorIcon').at(1);

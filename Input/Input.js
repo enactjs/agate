@@ -43,22 +43,22 @@ const InputBase = kind({
 
 	propTypes: /** @lends agate/Input.InputBase.prototype */ {
 		/**
-		 * Shows the clear input button.
+		 * Shows the clear button.
 		 *
 		 * @type {Boolean}
-		 * @default false
 		 * @public
 		 */
-		clearInputButton: PropTypes.bool,
+		clearButton: PropTypes.bool,
 
 		/**
-		 * The icon to be placed in the clear input button.
+		 * The icon to be placed in the clear button.
 		 *
 		 * @see {@link agate/Icon.Icon}
 		 * @type {String}
+		 * @default 'cancel'
 		 * @public
 		 */
-		clearInputIcon: PropTypes.string,
+		clearIcon: PropTypes.string,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -244,8 +244,7 @@ const InputBase = kind({
 	},
 
 	defaultProps: {
-		clearInputButton: false,
-		clearInputIcon: 'cancel',
+		clearIcon: 'cancel',
 		disabled: false,
 		dismissOnEnter: false,
 		invalid: false,
@@ -274,8 +273,7 @@ const InputBase = kind({
 				value: ev.target.value
 			}))
 		),
-
-		clearInput: handle(
+		handleClear: handle(
 			forwardCustom('onChange', ev => ({
 				stopPropagation: () => ev.stopPropagation(),
 				value: ''
@@ -303,7 +301,7 @@ const InputBase = kind({
 		value: ({value}) => typeof value === 'number' ? value : (value || '')
 	},
 
-	render: ({clearInput, clearInputButton, clearInputIcon, css, dir, disabled, iconAfter, iconBefore, invalidTooltip, onChange, placeholder, size, type, value, ...rest}) => {
+	render: ({clearButton, clearIcon, css, dir, disabled, handleClear, iconAfter, iconBefore, invalidTooltip, onChange, placeholder, size, type, value, ...rest}) => {
 		const inputProps = extractInputProps(rest);
 		delete rest.dismissOnEnter;
 		delete rest.focused;
@@ -330,14 +328,14 @@ const InputBase = kind({
 					type={type}
 					value={value}
 				/>
-				{clearInputButton ? (
+				{clearButton ? (
 					<InputDecoratorIcon
 						className={classNames({[css.hideIcon]: !(value?.length >= 1)})}
 						position="after"
 						size={size}
-						onClick={clearInput}
+						onClick={handleClear}
 					>
-						{clearInputIcon}
+						{clearIcon}
 					</InputDecoratorIcon>
 				) : null}
 				<InputDecoratorIcon position="after" size={size}>

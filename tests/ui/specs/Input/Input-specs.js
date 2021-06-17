@@ -49,7 +49,7 @@ describe('Input', function () {
 			expect(Page.inputWithClearButton.isFocused()).to.be.true();
 		});
 
-		it('should have a clearInputButton', function () {
+		it('should have a clearButton', function () {
 			Page.open();
 			expect(Page.inputWithClearButtonElement).to.be.true();
 		});
@@ -70,7 +70,7 @@ describe('Input', function () {
 			expect(Page.inputWithCustomClearButton.isFocused()).to.be.true();
 		});
 
-		it('should have a custom clearInputButton', function () {
+		it('should have a custom clearButton', function () {
 			Page.open();
 			expect(Page.inputWithCustomClearButtonElement).to.be.true();
 		});
