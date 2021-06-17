@@ -16,6 +16,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Input` to match latest design for Silicon skin
 - `agate/LabeledIconButton` to match the latest design for Silicon skin
 - `agate/Keypad` to match latest design for Silicon skin
+- `agate/VirtualList` 5-way navigation between scroll buttons
 
 ## [2.0.0-beta.3] - 2021-06-06
 
@@ -100,7 +101,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/SliderButton` 5-way navigation functionality to change value via direction keys
 - `agate/SliderButton` styling to visually show the focused state
 - `agate/TooltipDecorator` to position correctly on rtl locale
-- `agate/VirtualList` 5-way navigation between scroll buttons
 
 ## [2.0.0-alpha.1] - 2021-02-25
 
