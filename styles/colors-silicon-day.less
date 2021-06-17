@@ -228,19 +228,25 @@
 
 // Keypad
 // ---------------------------------------
-@agate-keypad-button-active-bg-color:     transparent;
-@agate-keypad-button-active-border-color: @agate-accent;
-@agate-keypad-button-active-color:        @agate-keypad-button-active-border-color;
+@agate-keypad-button-accept-color:        #4cd964;
+@agate-keypad-button-active-bg-color:     fade(@agate-foreground, 20%);
+@agate-keypad-button-active-color:        @silicon-white;
 @agate-keypad-button-bg-color:            transparent;
 @agate-keypad-button-color:               @agate-foreground;
-@agate-keypad-button-focus-color:         @agate-white;
+@agate-keypad-button-decline-color:       #f24949;
+@agate-keypad-button-focus-color:         @silicon-white;
 @agate-keypad-button-label-color:         @silicon-dark-gray;
 @agate-keypad-input-decorator-box-shadow: none;
 @agate-keypad-input-opacity:              1;
 
 // LabeledIconButton
 // ---------------------------------------
-@agate-labelediconbutton-label-focus-color: @agate-accent;
+@agate-labelediconbutton-label-focus-color: @agate-labelediconbutton-label-color;
+@agate-labelediconbutton-label-selected-color: @agate-foreground;
+@agate-labelediconbutton-lightopaque-bg-color: @silicon-night-rider-gray;
+@agate-labelediconbutton-lightopaque-color: @agate-white;
+@agate-labelediconbutton-opaque-color: @agate-background;
+@agate-labelediconbutton-opaque-bg-color: @agate-foreground;
 
 // MediaPlayer
 // ---------------------------------------

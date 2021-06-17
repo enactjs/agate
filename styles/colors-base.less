@@ -258,11 +258,13 @@
 
 // Keypad
 // ---------------------------------------
-@agate-keypad-button-active-bg-color:     transparent;
-@agate-keypad-button-active-border-color: @agate-accent;
-@agate-keypad-button-active-color:        @agate-keypad-button-active-border-color;
+@agate-keypad-button-accept-color:        inherit;
+@agate-keypad-button-active-bg-color:     fade(@agate-white, 20%);
+@agate-keypad-button-active-color:        inherit;
 @agate-keypad-button-bg-color:            transparent;
 @agate-keypad-button-color:               inherit;
+@agate-keypad-button-decline-color:       inherit;
+@agate-keypad-button-focus-bg-color:      inherit;
 @agate-keypad-button-focus-color:         inherit;
 @agate-keypad-button-label-color:         inherit;
 @agate-keypad-input-decorator-box-shadow: inherit;
@@ -270,8 +272,15 @@
 
 // LabeledIconButton
 // ---------------------------------------
+@agate-labelediconbutton-selected-before-border-color: @agate-accent;
+@agate-labelediconbutton-focus-bg: @agate-gradient;
 @agate-labelediconbutton-label-color: @agate-text-color;
 @agate-labelediconbutton-label-focus-color: inherit;
+@agate-labelediconbutton-label-selected-color: @agate-labelediconbutton-label-color;
+@agate-labelediconbutton-lightopaque-bg-color: @agate-button-lightOpaque-bg-color;
+@agate-labelediconbutton-lightopaque-color: @agate-button-lightOpaque-color;
+@agate-labelediconbutton-opaque-bg-color: @agate-button-bg-color;
+@agate-labelediconbutton-opaque-color: @agate-button-color;
 
 // LabeledItem
 // ---------------------------------------
