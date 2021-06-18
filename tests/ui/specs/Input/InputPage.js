@@ -1,14 +1,10 @@
 'use strict';
-const {Page} = require('@enact/ui-test-utils/utils');
+const {getText, Page} = require('@enact/ui-test-utils/utils');
 
 class InputPage extends Page {
 	constructor () {
 		super();
 		this.title = 'Agate Input Test';
-	}
-
-	open (urlExtra) {
-		super.open('Input-View', urlExtra);
 	}
 
 	get input1 () {
@@ -31,6 +27,28 @@ class InputPage extends Page {
 	}
 	get inputElement1 () {
 		return $('#input1 input');
+	}
+	get inputWithClearButton () {
+		return $('#input7');
+	}
+	get inputWithCustomClearButton () {
+		return $('#input8');
+	}
+	get inputWithClearButtonElement () {
+		return $('#input7 .Input_Input_icon').isExisting();
+	}
+	get inputWithCustomClearButtonElement () {
+		return $('#input8 .Input_Input_icon').isExisting();
+	}
+	get inputWithClearButtonIconValue () {
+		return getText($('#input7 .Input_Input_icon')).codePointAt();
+	}
+	get inputWithCustomClearButtonIconValue () {
+		return getText($('#input8 .Input_Input_icon')).codePointAt();
+	}
+
+	open (urlExtra) {
+		super.open('Input-View', urlExtra);
 	}
 }
 
