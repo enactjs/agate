@@ -104,25 +104,23 @@
 // Dropdown
 // ---------------------------------------
 @agate-dropdown-border-width: 0;
-@agate-dropdown-button-bg-image: none;
-@agate-dropdown-button-font-size: 27px;
 @agate-dropdown-button-icon-font-size: 36px;
-@agate-dropdown-button-icon-margin-right: 9px;
-@agate-dropdown-button-icon-width: 24px;
+@agate-dropdown-button-icon-margin: 9px;
+@agate-dropdown-button-padding-left: 30px;
+@agate-dropdown-button-padding-right: 30px;
+@agate-dropdown-button-icon-size: 30px;
 @agate-dropdown-list-border-radius: 0 0 @agate-button-border-radius @agate-button-border-radius;
 @agate-dropdown-button-open-border-radius: @agate-button-border-radius @agate-button-border-radius 0 0;
 @agate-dropdown-up-button-list-border-radius: @agate-dropdown-button-open-border-radius;
 @agate-dropdown-up-button-open-border-radius: @agate-dropdown-list-border-radius;
-@agate-dropdown-button-height: 60px;
-@agate-dropdown-button-padding: 0 15px;
 @agate-dropdown-item-border-width: 0;
-@agate-dropdown-item-height: 60px;
-@agate-dropdown-item-font-size: @agate-dropdown-button-font-size;
 @agate-dropdown-item-font-weight: 300;
-@agate-dropdown-item-line-height: @agate-button-small-height;
-@agate-dropdown-item-padding: 15px;
-@agate-dropdown-list-height: @agate-button-small-height * 4;
-@agate-dropdown-list-padding: 15px 0 3px 0;
+@agate-dropdown-item-line-height: @agate-button-height;
+@agate-dropdown-list-padding: 9px 15px 15px 0;
+@agate-dropdown-list-height: @agate-button-height * 4 + 24px;
+@agate-dropdown-radioitem-icon-margin: 0 9px 0 15px;
+@agate-dropdown-radioitem-padding-left: 15px;
+@agate-dropdown-small-width: 420px;
 @agate-dropdown-smallest-width: 300px;
 
 // FanSpeedControl
@@ -342,29 +340,42 @@
 
 // MediaPlayer
 // ---------------------------------------
+@agate-mediacontrols-bottom: 15px;
 @agate-mediacontrols-button-bg-border: transparent;
-@agate-mediacontrols-button-bg-height: 60px;
-@agate-mediacontrols-button-bg-width: 60px;
-@agate-mediacontrols-button-client-width: 60px;
-@agate-mediacontrols-button-height: 60px;
-@agate-mediacontrols-button-icon-padding: 0 30px 0 30px;
-@agate-mediacontrols-button-margin: 0 30px 0 30px;
-@agate-mediacontrols-button-min-width: 60px;
-@agate-mediacontrols-icon-font-size: 90px;
+@agate-mediacontrols-button-bg-height: 90px;
+@agate-mediacontrols-button-icon-padding: 0;
+@agate-mediacontrols-button-margin: 0 21px 0 18px;
+@agate-mediacontrols-button-min-width: 90px;
+@agate-mediacontrols-button-size: 90px;
+@agate-mediacontrols-icon-font-size: (@agate-mediacontrols-icon-height * 2);
+@agate-mediacontrols-icon-height: 69px;
 @agate-mediacontrols-icon-margin: 0;
 @agate-mediacontrols-icon-padding: 0 30px 0 30px;
-@agate-mediacontrols-playpause-button-bg-border-radius: 90px;
-@agate-mediacontrols-playpause-button-bg-height: 90px;
-@agate-mediacontrols-playpause-button-bg-width: 90px;
-@agate-mediacontrols-playpause-button-client-width: 90px;
-@agate-mediacontrols-playpause-button-height: 90px;
-@agate-mediacontrols-playpause-button-padding: 0;
-@agate-mediacontrols-playpause-icon-font-size: 120px;
-@agate-mediaplayer-height: 132px;
-@agate-mediaplayer-times-font-size: 27px;
-@agate-mediaplayer-times-line-height: 36px;
-@agate-mediaplayer-times-margin: 0 9px 0 9px;
-@agate-mediaplayer-times-padding: 0 21px 0 21px;
+@agate-mediacontrols-tiny-bottom: 24px;
+@agate-mediacontrols-tiny-button-margin: 0 12px 0 18px;
+@agate-mediacontrols-tiny-button-size: 54px;
+@agate-mediacontrols-tiny-playpause-button-height: 75px;
+@agate-mediacontrols-tiny-playpause-button-margin: 0 18px 0 24px;
+@agate-mediacontrols-tiny-icon-font-size: (@agate-mediacontrols-tiny-icon-height * 2);
+@agate-mediacontrols-tiny-icon-height: 39px;
+@agate-mediacontrols-tiny-playpause-icon-font-size: (@agate-mediacontrols-tiny-playpause-icon-height * 2);
+@agate-mediacontrols-tiny-playpause-icon-height: 60px;
+@agate-mediacontrols-playpause-button-bg-border-radius: 111px;
+@agate-mediacontrols-playpause-button-height: 111px;
+@agate-mediacontrols-playpause-icon-height: 102px;
+@agate-mediacontrols-playpause-button-margin: 0 36px 0 24px;
+@agate-mediaplayer-height: 279px;
+@agate-mediaplayer-tiny-height: 141px;
+@agate-mediaplayer-tiny-times-font-size: 24px;
+@agate-mediaplayer-min-width: 450px;
+@agate-mediaplayer-times-font-size: 33px;
+@agate-mediaplayer-times-line-height: 48px;
+@agate-mediaplayer-times-margin: 0;
+@agate-mediaplayer-tiny-times-padding: 0 45px;
+@agate-mediaslider-padding: 45px 3px;
+@agate-mediaslider-tiny-bar-height: 3px;
+@agate-mediaslider-tiny-height: 36px;
+@agate-mediaslider-tiny-padding: 15px 45px;
 
 // Panels
 // ---------------------------------------
@@ -504,6 +515,12 @@
 @agate-switch-icon-position-left: -9px;
 @agate-switch-selected-icon-position-left: ((@agate-switch-width - @agate-switch-height) + @agate-switch-icon-position-left);
 
+// SwitchItem
+// ---------------------------------------
+@agate-switchitem-icon-padding: 18px;
+@agate-switchitem-slotbefore-margin-right: 9px;
+@agate-switchitem-padding: 0 30px 0 21px;
+
 // ThumbnailItem
 // ---------------------------------------
 @agate-roundthumbnailitem-border-width:   3px;
@@ -530,7 +547,13 @@
 
 // Tooltip
 // ---------------------------------------
-@agate-tooltip-label-font-size: 30px;
+@agate-tooltip-border-radius:   9px;
+@agate-tooltip-label-font-size: 27px;
+@agate-tooltip-label-height:    39px;
+@agate-tooltip-offset:          6px;
+@agate-tooltip-padding:         15px 21px;
+@agate-tooltip-point-height:    15px;
+@agate-tooltip-point-width:     15px;
 
 // WindDirectionControl
 // ---------------------------------------
