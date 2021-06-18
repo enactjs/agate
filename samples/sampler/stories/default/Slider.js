@@ -1,6 +1,7 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, number} from '@enact/storybook-utils/addons/knobs';
+import ri from '@enact/ui/resolution';
 import Slider, {SliderBase, SliderTooltip} from '@enact/agate/Slider';
 
 const Config = mergeComponentMetadata('Slider', SliderBase, Slider);
@@ -38,7 +39,7 @@ export const _Slider = () => {
 			orientation={orientation}
 			progressAnchor={number('progressAnchor', Config, {range: true, min: 0, max: 1, step: 0.1}, 0)}
 			step={number('step', Config)}
-			style={orientation === 'vertical' ? {marginLeft: '45px'} : null}
+			style={orientation === 'vertical' ? {marginLeft: ri.scaleToRem(45)} : null}
 		>
 			{tooltip ? (
 				<SliderTooltip
