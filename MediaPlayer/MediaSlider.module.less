@@ -17,14 +17,20 @@
 
 	.applySkins({
 		&.slider {
+			padding: @agate-mediaslider-padding;
+
 			.bar {
 				background-color: @agate-mediaslider-bar-color;
-				height: 6px;
 			}
 
 			.fill {
 				background-image: @agate-mediaslider-fill-bg-image;
-				height: 6px;
+			}
+
+			&.paused {
+				.fill {
+					background-image: @agate-mediaslider-paused-bg-image;
+				}
 			}
 		}
 
@@ -38,6 +44,18 @@
 					background-image: @agate-mediaslider-focused-fill-bg-image;
 				}
 			}
-		})
+		});
+
+		&.tiny {
+			&.slider {
+				height: @agate-mediaslider-tiny-height;
+				padding: @agate-mediaslider-tiny-padding;
+
+				.bar,
+				.fill {
+					height: @agate-mediaslider-tiny-bar-height;
+				}
+			}
+		}
 	});
 }
