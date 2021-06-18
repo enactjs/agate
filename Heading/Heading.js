@@ -171,7 +171,7 @@ const HeadingDecorator = compose(
 		marqueeOn: 'render'
 	}),
 	Pure,
-	MarqueeDecorator,
+	MarqueeDecorator({className: componentCss.marquee}),
 	Skinnable({prop: 'skin'})
 );
 
