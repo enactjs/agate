@@ -217,25 +217,23 @@
 // ---------------------------------------
 @agate-dropdown-border-style: solid;
 @agate-dropdown-border-width: 1px;
-@agate-dropdown-button-bg-image: inherit;
-@agate-dropdown-button-font-size: inherit;
 @agate-dropdown-button-icon-font-size: inherit;
-@agate-dropdown-button-icon-margin-right: inherit;
-@agate-dropdown-button-icon-width: inherit;
-@agate-dropdown-button-max-width: inherit;
-@agate-dropdown-list-border-radius: initial;
+@agate-dropdown-button-icon-margin: inherit;
 @agate-dropdown-button-open-border-radius: inherit;
-@agate-dropdown-button-padding: inherit;
+@agate-dropdown-button-icon-size: @agate-icon-size;
+@agate-dropdown-button-padding-left: inherit;
+@agate-dropdown-button-padding-right: inherit;
 @agate-dropdown-up-button-list-border-radius: initial;
 @agate-dropdown-up-button-open-border-radius: inherit;
-@agate-dropdown-button-height: inherit;
 @agate-dropdown-item-border-width: @agate-item-border-width;
 @agate-dropdown-item-font-size: inherit;
 @agate-dropdown-item-font-weight: inherit;
-@agate-dropdown-item-height: inherit;
+@agate-dropdown-item-height: @agate-dropdown-item-line-height;
 @agate-dropdown-item-line-height: @agate-item-line-height;
-@agate-dropdown-item-padding: inherit;
-@agate-dropdown-item-focus-border-color: @agate-item-focus-border-color;
+@agate-dropdown-radioitem-icon-margin: inherit;
+@agate-dropdown-radioitem-padding-left: inherit;
+@agate-dropdown-radioitem-padding-right: @agate-dropdown-radioitem-padding-left;
+@agate-dropdown-list-border-radius: initial;
 @agate-dropdown-list-height:  @agate-item-height * 4;
 @agate-dropdown-list-padding: initial;
 @agate-dropdown-margin: 0 @agate-component-spacing;
@@ -735,7 +733,7 @@
 @agate-slider-vertical-anchorpoint-height: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
 @agate-slider-vertical-anchorpoint-width: 0px;  // This is used in `calc` which means it needs the unit specified to work correctly
 @agate-slider-vertical-margin: 0 @agate-component-spacing;
-@agate-slider-vertical-min-height: 120px;
+@agate-slider-vertical-min-height: 210px;
 @agate-slider-vertical-padding: (@agate-slider-height / 2) ((@agate-slider-height - @agate-slider-track-height) / 2);
 @agate-slider-width: @agate-slider-height;
 

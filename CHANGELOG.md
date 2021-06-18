@@ -13,11 +13,13 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
+- `agate/Dropdown` style to match latest design for Silicon skin
 - `agate/Heading` style to match latest design for Silicon skin
 - `agate/Input` to match latest design for Silicon skin
 - `agate/Keypad` to match latest design for Silicon skin
 - `agate/LabeledIconButton` to match the latest design for Silicon skin
 - `agate/MediaPlayer` style to match latest design for Silicon skin
+- `agate/Slider` height when `orientation="vertical"` on Carbon, Cobalt, Copper, Electro, Titanium skins
 - `agate/SwitchItem` style to match latest design for Silicon skin
 - `agate/TooltipDecorator` to to match latest design for Silicon skin
 
