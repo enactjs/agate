@@ -28,10 +28,11 @@ import componentCss from './SwitchItem.module.less';
 const Switch = Skinnable({prop: 'skin'}, SwitchBase);
 
 /**
- * Renders an `Item` with a radio-dot component. Useful to show a selected state on an Item.
+ * Renders an `Item` with a [Switch]{@link agate/Switch}.
  *
  * @class SwitchItemBase
  * @memberof agate/SwitchItem
+ * @extends agate/Item.Item
  * @ui
  * @public
  */
@@ -171,7 +172,10 @@ const SwitchItemDecorator = compose(
 );
 
 /**
- * Renders an `Item` with a radio-dot component. Useful to show a selected state on an Item.
+ * An Agate-styled item with a switch component.
+ *
+ * `SwitchItem` will manage its `selected` state via [Toggleable]{@link ui/Toggleable} unless set
+ * directly.
  *
  * @class SwitchItem
  * @memberof agate/SwitchItem
