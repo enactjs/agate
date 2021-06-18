@@ -28,7 +28,7 @@ import componentCss from './SwitchItem.module.less';
 const Switch = Skinnable({prop: 'skin'}, SwitchBase);
 
 /**
- * Renders an `Item` with a [Switch]{@link agate/Switch}.
+ * Renders an `Item` with a switch component.
  *
  * @class SwitchItemBase
  * @memberof agate/SwitchItem
