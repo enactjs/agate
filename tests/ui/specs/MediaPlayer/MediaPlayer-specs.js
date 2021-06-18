@@ -9,7 +9,8 @@ describe('MediaPlayer', function () {
 	const {
 		mediaPlayerDefault,
 		mediaPlayerDisabled,
-		mediaPlayerSpotlightDisabled
+		mediaPlayerSpotlightDisabled,
+		mediaPlayerTiny
 	} = Page.components;
 
 	describe('default', function () {
@@ -101,8 +102,7 @@ describe('MediaPlayer', function () {
 	describe('disabled', function () {
 		it('should have the slider knob focused', function () {
 			expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
-			Page.spotlightDown();
-			Page.spotlightDown();
+			Page.spotlightRight();
 
 			expect(mediaPlayerDisabled.slider.isFocused()).to.be.true();
 		});
@@ -128,8 +128,7 @@ describe('MediaPlayer', function () {
 		describe('5-way', function () {
 			it('should focus `play` button on 5-way down', function () {
 				expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
-				Page.spotlightDown();
-				Page.spotlightDown();
+				Page.spotlightRight();
 
 				expect(mediaPlayerDisabled.slider.isFocused()).to.be.true();
 
@@ -140,8 +139,7 @@ describe('MediaPlayer', function () {
 
 			it('should focus `previous` button on 5-way down, then left', function () {
 				expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
-				Page.spotlightDown();
-				Page.spotlightDown();
+				Page.spotlightRight();
 
 				expect(mediaPlayerDisabled.slider.isFocused()).to.be.true();
 
@@ -153,8 +151,7 @@ describe('MediaPlayer', function () {
 
 			it('should focus back `play` button when navigating back to media controls ', function () {
 				expect(mediaPlayerDefault.slider.isFocused()).to.be.true();
-				Page.spotlightDown();
-				Page.spotlightDown();
+				Page.spotlightRight();
 
 				expect(mediaPlayerDisabled.slider.isFocused()).to.be.true();
 
@@ -223,6 +220,72 @@ describe('MediaPlayer', function () {
 				mediaPlayerSpotlightDisabled.hover('Menu');
 
 				expect(mediaPlayerSpotlightDisabled.menuButton.isFocused()).to.not.be.true();
+			});
+		});
+	});
+
+	describe('tiny', function () {
+		it('should play media on playButton click', function () {
+			mediaPlayerTiny.focus();
+			expect(mediaPlayerTiny.knob.getCSSProperty('left').value).to.equal('0px');
+
+			Page.spotlightDown();
+
+			mediaPlayerTiny.playButton.click();
+			Page.waitForPlayMedia(mediaPlayerTiny);
+
+			expect(mediaPlayerTiny.knob.getCSSProperty('left').value).to.not.equal('0px');
+		});
+
+		it('should play next media on nextButton click', function () {
+			mediaPlayerTiny.focus();
+			expect(mediaPlayerTiny.source).to.equal('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
+
+			mediaPlayerTiny.nextButton.click();
+			Page.waitForPlayMedia(mediaPlayerTiny);
+
+			expect(mediaPlayerTiny.source).to.equal('https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3');
+		});
+
+		describe('5-way', function () {
+			it('should focus `play` button on 5-way down', function () {
+				mediaPlayerTiny.focus();
+				expect(mediaPlayerTiny.slider.isFocused()).to.be.true();
+
+				Page.spotlightDown();
+
+				expect(mediaPlayerTiny.playButton.isFocused()).to.be.true();
+			});
+
+			it('should focus `previous` button on 5-way down, then left', function () {
+				mediaPlayerTiny.focus();
+				expect(mediaPlayerTiny.slider.isFocused()).to.be.true();
+
+				Page.spotlightDown();
+				Page.spotlightLeft();
+
+				expect(mediaPlayerTiny.previousButton.isFocused()).to.be.true();
+			});
+
+			it('should focus back `play` button when navigating back to media controls ', function () {
+				mediaPlayerTiny.focus();
+				expect(mediaPlayerTiny.slider.isFocused()).to.be.true();
+
+				Page.spotlightDown();
+				Page.spotlightLeft();
+				expect(mediaPlayerTiny.previousButton.isFocused()).to.be.true();
+				Page.spotlightUp();
+				Page.spotlightDown();
+
+				expect(mediaPlayerTiny.playButton.isFocused()).to.be.true();
+			});
+		});
+
+		describe('using pointer', function () {
+			it('should focus `next` button on hover', function () {
+				mediaPlayerTiny.hover('Next');
+
+				expect(mediaPlayerTiny.nextButton.isFocused()).to.be.true();
 			});
 		});
 	});
