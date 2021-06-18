@@ -12,6 +12,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
+- `agate/Dropdown` style to match latest design for Silicon skin
 - `agate/Heading` style to match latest design for Silicon skin
 - `agate/Input` to match latest design for Silicon skin
 - `agate/LabeledIconButton` to match the latest design for Silicon skin
