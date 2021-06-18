@@ -21,7 +21,6 @@
 			background-color: @agate-slider-bg-color;
 			background-image: @agate-slider-bg-image;
 			border-radius: @agate-slider-border-radius;
-			transform: @agate-slider-bg-transform;
 		}
 
 		.progressBar {
@@ -95,6 +94,10 @@
 			margin: @agate-slider-horizontal-margin;
 			padding: @agate-slider-horizontal-padding;
 
+			&::before {
+				transform: @agate-slider-bg-transform;
+			}
+
 			.bar {
 				left: ((@agate-slider-horizontal-anchorpoint-width / 2) * -1);
 				width: ~"calc(100% + " @agate-slider-horizontal-anchorpoint-width ~")";
@@ -117,6 +120,7 @@
 			min-height: @agate-slider-vertical-min-height;
 			display: inline-block;
 			vertical-align: top;
+			transform: @agate-slider-bg-transform;
 
 			.bar {
 				bottom: ((@agate-slider-vertical-anchorpoint-height / 2) * -1);
@@ -194,6 +198,27 @@
 					height: @agate-slider-active-knob-height;
 					width: @agate-slider-active-knob-width;
 					border-radius: @agate-slider-active-knob-border-radius;
+				}
+			}
+
+			:global(.spotlight-input-touch) &.pressed {
+				&::before {
+					background-color: @agate-slider-focus-bg-color;
+					background-image: @agate-slider-focus-bg-image;
+				}
+
+				.bar {
+					background-color: @agate-slider-track-focus-bg-color;
+					background-image: @agate-slider-track-focus-bg-image;
+				}
+
+				.fill {
+					background-color: @agate-slider-focus-fill-bg-color;
+				}
+
+				.knob::before {
+					background-color: @agate-slider-knob-focus-bg-color;
+					border-color: @agate-slider-knob-focus-bg-image;
 				}
 			}
 		});
