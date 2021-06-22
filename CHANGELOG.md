@@ -15,6 +15,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/Dropdown` style to match latest design for Silicon skin
 - `agate/Heading` style to match latest design for Silicon skin
+- `agate/Heading` position of underline when size="tile" on Carbon, Cobalt, Copper, Electro, Titanium skins
 - `agate/Input` to match latest design for Silicon skin
 - `agate/Keypad` to match latest design for Silicon skin
 - `agate/LabeledIconButton` to match the latest design for Silicon skin
@@ -24,7 +25,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/TooltipDecorator` to to match latest design for Silicon skin
 - `agate/VirtualList` 5-way navigation between scroll buttons
 
-## [2.0.0-beta.3] - 2021-06-06
+## [2.0.0-beta.1] - 2021-06-06
 
 ### Added
 
