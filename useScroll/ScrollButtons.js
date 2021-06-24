@@ -3,7 +3,7 @@ import {getTargetByDirectionFromElement} from '@enact/spotlight/src/target';
 import {is} from '@enact/core/keymap';
 import Spotlight, {getDirection} from '@enact/spotlight';
 import utilEvent from '@enact/ui/useScroll/utilEvent';
-import {createRef, useState, useEffect} from 'react';
+import {createRef, useRef, useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 
 const
@@ -39,10 +39,15 @@ const
 const useScrollButtons = (props) => {
 	const [prevButtonDisabled, setPrevButtonDisabled] = useState(true);
 	const [nextButtonDisabled, setNextButtonDisabled] = useState(true);
-	const [focusableScrollButtons, setFocusableScrollButtons] = useState(true);
 
 	const nextButtonRef = createRef();
 	const prevButtonRef = createRef();
+
+	const propsRef = useRef(props);
+
+	useEffect(() => {
+		propsRef.current = props;
+	});
 
 	useEffect(() => {
 		utilEvent('keydown').addEventListener(nextButtonRef, onKeyDownNext);
@@ -72,7 +77,6 @@ const useScrollButtons = (props) => {
 		if (updateNextButton) {
 			setNextButtonDisabled(shouldDisableNextButton);
 		}
-		setFocusableScrollButtons(props.focusableScrollButtons);
 	};
 
 	function isOneOfScrollButtonsFocused () {
@@ -104,7 +108,7 @@ const useScrollButtons = (props) => {
 
 	function onKeyDownButton (ev, position) {
 		const
-			{vertical, preventBubblingOnKeyDown} = props,
+			{focusableScrollButtons, vertical, preventBubblingOnKeyDown} = propsRef.current,
 			{keyCode} = ev,
 			direction = getDirection(ev.keyCode),
 			preventBubbling = preventBubblingOnKeyDown === 'programmatic',
