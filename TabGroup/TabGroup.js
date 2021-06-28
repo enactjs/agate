@@ -120,7 +120,9 @@ const TabBase = kind({
 							icon={icon}
 							selected={selected}
 						/>
-						{children}
+						<div className={css.tabLabel}>
+							{children}
+						</div>
 					</div>
 				);
 			} else {
