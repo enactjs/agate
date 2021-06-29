@@ -3,7 +3,7 @@ import {getTargetByDirectionFromElement} from '@enact/spotlight/src/target';
 import {is} from '@enact/core/keymap';
 import Spotlight, {getDirection} from '@enact/spotlight';
 import utilEvent from '@enact/ui/useScroll/utilEvent';
-import {createRef, useState, useEffect} from 'react';
+import {useRef, useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 
 const
@@ -40,18 +40,21 @@ const useScrollButtons = (props) => {
 	const [prevButtonDisabled, setPrevButtonDisabled] = useState(true);
 	const [nextButtonDisabled, setNextButtonDisabled] = useState(true);
 
-	const nextButtonRef = createRef();
-	const prevButtonRef = createRef();
+	const nextButtonRef = useRef();
+	const prevButtonRef = useRef();
 
 	useEffect(() => {
-		utilEvent('keydown').addEventListener(nextButtonRef, onKeyDownNext);
-		utilEvent('keydown').addEventListener(prevButtonRef, onKeyDownPrev);
+		const nextRef = nextButtonRef.current;
+		const prevRef = prevButtonRef.current;
+
+		utilEvent('keydown').addEventListener(nextRef, onKeyDownNext);
+		utilEvent('keydown').addEventListener(prevRef, onKeyDownPrev);
 
 		return () => {
-			utilEvent('keydown').removeEventListener(nextButtonRef, onKeyDownNext);
-			utilEvent('keydown').removeEventListener(prevButtonRef, onKeyDownPrev);
+			utilEvent('keydown').removeEventListener(nextRef, onKeyDownNext);
+			utilEvent('keydown').removeEventListener(prevRef, onKeyDownPrev);
 		};
-	}, []);	// eslint-disable-line react-hooks/exhaustive-deps
+	});
 
 	const updateButtons = (bounds) => {
 		const
