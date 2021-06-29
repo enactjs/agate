@@ -4,9 +4,58 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Fixed
+
+- `agate/VirtualList` 5-way navigation between scroll buttons when `focusableScrollbar`
+
+## [2.0.0-beta.2] - 2021-06-24
+
+### Added
+
+- `agate/Heading` prop `showBackButton`
+- `agate/Input` prop `clearButton` and `clearIcon`
+- `agate/Keypad` prop `activeCall` to render different icons depending on whether there is an active call or not
+- `agate/MediaPlayer` prop `type`
+
+### Fixed
+
+- `agate/Dropdown` style to match latest design for Silicon skin
+- `agate/Heading` style to match latest design for Silicon skin
+- `agate/Heading` position of underline when size="tile" on Carbon, Cobalt, Copper, Electro, Titanium skins
+- `agate/Input` to match latest design for Silicon skin
+- `agate/Keypad` to match latest design for Silicon skin
+- `agate/LabeledIconButton` to match the latest design for Silicon skin
+- `agate/MediaPlayer` style to match latest design for Silicon skin
+- `agate/Slider` height when `orientation="vertical"` on Carbon, Cobalt, Copper, Electro, Titanium skins
+- `agate/SwitchItem` style to match latest design for Silicon skin
+- `agate/TooltipDecorator` to to match latest design for Silicon skin
+
+## [2.0.0-beta.1] - 2021-06-06
+
 ### Added
 
 - `Noto Sans` font as the default font
+
+### Fixed
+
+- `agate/ArcSlider` text size be the same on all skins
+- `agate/ArcSlider` style to match latest design for Silicon skin
+- `agate/Button` badge background color for Cobalt and Copper skins
+- `agate/Button` to center icon when iconOnly prop is true, for Cobalt and Copper skins, RTL
+- `agate/Checkbox` icon font-size and focus color for Carbon, Cobalt, Copper, Electro, and Titanium skins
+- `agate/CheckboxItem` style to match latest design for Silicon skin
+- `agate/ContextualPopupDecorator` style to match latest design for Silicon skin
+- `agate/ColorPicker` layout for Carbon, Electro, Gallium, Silicon skins
+- `agate/Popup` to have the same background-color for body and buttons section for all skins except Silicon
+- `agate/Popup` to match latest design for Silicon skin
+- `agate/RadioItem` style to match latest design for Silicon skin
+- `agate/RadioItem` icon border-color to be visible when item is focused in Carbon skin
+- `agate/Scroller` to be more visible on Carbon, Cobalt, Copper, Electro, Titanium skins
+- `agate/Slider` to have a more visible background-color on Cobalt skin
+- `agate/Slider` to apply focus styling while dragging by touch
+- `agate/SliderButton` button text color to be more visible on Carbon skin
+- `agate/ThumbnailItem` to match latest design for Silicon skin
+- `agate/ThumbnailItem` to display thumbnail image properly in all skins
 
 ## [2.0.0-alpha.3] - 2021-04-26
 
@@ -15,10 +64,15 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ImageItem` prop `sizing` to support image sizing
 - `agate/Drawer` `onShow`, `spotlightId`, and `spotlightRestrict` props to handle focus with 5-way navigation
 
+### Changed
+
+- `Copper` skin to use lighter color for text in order to be more visible
+
 ### Fixed
 
 - `agate/Checkbox`, `agate/FanSpeedControl`, `agate/ImageItem`, `agate/Item`, and `agate/WindDirectionControl` to match latest design for Silicon skin
 - `agate/Dropdown` misalignment of `Button` and `ContextualPopup` on the edge of screen
+- `agate/Popup` to apply marquee for long title
 
 ## [2.0.0-alpha.2] - 2021-04-02
 

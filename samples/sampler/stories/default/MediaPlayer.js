@@ -1,5 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 import MediaPlayer from '@enact/agate/MediaPlayer';
 
 MediaPlayer.displayname = 'MediaPlayer';
@@ -23,6 +23,7 @@ export const _MediaPlayer = () => (
 	<MediaPlayer
 		disabled={boolean('disabled', Config)}
 		spotlightDisabled={boolean('spotlightDisabled', Config)}
+		type={select('type', ['full', 'tiny'], Config)}
 	>
 		{
 			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))

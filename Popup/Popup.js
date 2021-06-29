@@ -283,6 +283,7 @@ const PopupBase = kind({
 		}
 	},
 	render: ({buttons, children, closeButton, css, direction, duration, noAnimation, onClose, onHide, onShow, open, skin, spotlightId, spotlightRestrict, title, transitionContainerClassName, transitionType, ...rest}) => {
+		const closeButtonSize = skin === 'silicon' ? 'large' : 'small';
 		const wideLayout = (skin === 'carbon');
 		delete rest.centered;
 		delete rest.noAlertRole;
@@ -307,11 +308,12 @@ const PopupBase = kind({
 				>
 					{closeButton ? <Button
 						className={componentCss.closeButton}
+						css={css}
 						icon="closex"
 						onTap={onClose}
-						size="small"
+						size={closeButtonSize}
 					/> : null}
-					{title ? <Heading className={css.title} marqueeDisabled>{title}</Heading> : null}
+					{title ? <Heading className={css.title}>{title}</Heading> : null}
 					<Layout orientation={wideLayout ? 'horizontal' : 'vertical'} className={css.body}>
 						<Cell shrink={!wideLayout} className={css.content}>
 							{children}

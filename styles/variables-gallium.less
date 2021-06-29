@@ -7,11 +7,6 @@
 @agate-arcpicker-font-size: 72px;
 @agate-arcpicker-font-weight: 300;
 
-// ArcSlider
-// -------------------------------------------------
-@agate-arcslider-font-size: 72px;
-@agate-arcslider-font-weight: 300;
-
 // Button
 // ---------------------------------------
 @agate-button-border-radius: 6px;
@@ -28,12 +23,11 @@
 // ---------------------------------------
 @agate-checkbox-border-width: 0;
 @agate-checkbox-border-radius: 6px;
-@agate-checkbox-icon-font-size: 49px;
 
 // CheckboxItem
 // ---------------------------------------
-@agate-checkboxitem-icon-margin: 9px;
-@agate-checkboxitem-font-size: 30px;
+@agate-checkboxitem-icon-margin-end: 9px;
+@agate-checkboxitem-font-size:       30px;
 
 // ColorPicker
 // ---------------------------------------
@@ -42,9 +36,9 @@
 // ContextualPopup
 // ---------------------------------------
 @agate-contextual-popup-border-radius:      36px;
-@agate-contextual-popup-padding-vertical:   18px;
-@agate-contextual-popup-padding-horizontal: 30px;
 @agate-contextual-popup-font-size:          30px;
+@agate-contextual-popup-padding-horizontal: 30px;
+@agate-contextual-popup-padding-vertical:   18px;
 
 // DateTimePicker
 // ---------------------------------------
@@ -91,7 +85,6 @@
 
 // Input
 // ---------------------------------------
-@agate-input-icon-display: flex;
 @agate-input-icon-align: center;
 @agate-input-hasiconbefore-padding-left: 0;
 @agate-input-hasiconafter-padding-right: 0;
@@ -136,23 +129,18 @@
 // ---------------------------------------
 @agate-mediacontrols-button-bg-border: transparent;
 @agate-mediacontrols-button-bg-height: 60px;
-@agate-mediacontrols-button-bg-width: 60px;
-@agate-mediacontrols-button-client-width: 60px;
-@agate-mediacontrols-button-height: 60px;
-@agate-mediacontrols-button-icon-padding: 0 30px 0 30px;
+@agate-mediacontrols-button-icon-padding: 0;
 @agate-mediacontrols-button-margin: 0 30px 0 30px;
 @agate-mediacontrols-button-min-width: 60px;
-@agate-mediacontrols-icon-font-size: 60px;
+@agate-mediacontrols-button-size: 60px;
+@agate-mediacontrols-icon-font-size: (@agate-mediacontrols-icon-height * 2);
+@agate-mediacontrols-icon-height: 30px;
 @agate-mediacontrols-icon-margin: 0;
 @agate-mediacontrols-icon-padding: 0 30px 0 30px;
+@agate-mediacontrols-tiny-icon-font-size: (@agate-mediacontrols-tiny-icon-height * 2);
 @agate-mediacontrols-playpause-button-bg-border-radius: 90px;
-@agate-mediacontrols-playpause-button-bg-height: 90px;
-@agate-mediacontrols-playpause-button-bg-width: 90px;
-@agate-mediacontrols-playpause-button-client-width: 90px;
 @agate-mediacontrols-playpause-button-height: 90px;
-@agate-mediacontrols-playpause-button-padding: 0;
-@agate-mediacontrols-playpause-icon-font-size: 90px;
-@agate-mediaplayer-height: 132px;
+@agate-mediacontrols-playpause-button-margin: 0 30px;
 @agate-mediaplayer-times-font-size: 27px;
 @agate-mediaplayer-times-line-height: 36px;
 @agate-mediaplayer-times-margin: 0 12px 0 12px;
@@ -189,8 +177,7 @@
 @agate-popup-body-margin: -@agate-component-spacing;  // Extend to the edge
 @agate-popup-body-border-radius: 0;
 @agate-popup-buttons-padding: (2 * @agate-component-spacing) 0 0 0;
-@agate-popup-closebutton-position-left: auto;
-@agate-popup-closebutton-position-right: 0;
+@agate-popup-closebutton-position: 0 0 auto auto;
 @agate-popup-body-font-weight: bold;
 
 // PopupMenu
@@ -217,6 +204,7 @@
 @agate-slider-border-radius: 3px;
 @agate-slider-horizontal-padding: ((@agate-slider-height - @agate-slider-track-height) / 2) (@agate-slider-knob-height / 2);
 @agate-slider-vertical-margin: 6px;
+@agate-slider-vertical-min-height: 120px;
 @agate-slider-vertical-padding: (@agate-slider-knob-height / 2) ((@agate-slider-knob-height - @agate-slider-track-height) / 2);
 @agate-slider-track-height: 6px;
 
@@ -266,12 +254,11 @@
 
 // ThumbnailItem
 // ---------------------------------------
-@agate-thumbnailitem-line-height: 39px;
-@agate-thumbnailitem-height: 120px;
 @agate-thumbnailitem-content-font-size: 27px;
-@agate-thumbnailitem-label-font-size: 24px;
+@agate-thumbnailitem-line-height:      39px;
+@agate-thumbnailitem-height:           120px;
+@agate-thumbnailitem-label-font-size:  24px;
 @agate-thumbnailitem-thumbnail-height: 60px;
-@agate-thumbnailitem-thumbnail-width: 60px;
 
 // ToggleButton
 // ---------------------------------------
