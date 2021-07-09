@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import $L from '../internal/$L';
 import Button from '../Button';
-import Icon from '../Icon';
 
 import css from './MediaControls.module.less';
 
@@ -185,7 +184,16 @@ const MediaControls = kind({
 		 * @default 'shuffle'
 		 * @public
 		 */
-		shuffleIcon: PropTypes.string
+		shuffleIcon: PropTypes.string,
+
+		/**
+		 * Specifies what kind of layout the MediaPlayer should have.
+		 *
+		 * @type {('full'|'tiny')}
+		 * @default 'full'
+		 * @public
+		 */
+		type: PropTypes.oneOf(['full', 'tiny'])
 	},
 
 	defaultProps: {
@@ -197,7 +205,8 @@ const MediaControls = kind({
 		previousTrackIcon: 'previoustrack',
 		repeat: 'none',
 		repeatIcon: 'repeat',
-		shuffleIcon: 'shuffle'
+		shuffleIcon: 'shuffle',
+		type: 'full'
 	},
 
 	styles: {
@@ -206,32 +215,33 @@ const MediaControls = kind({
 	},
 
 	computed: {
-		badge: ({repeat}) => badges[repeat]
+		badge: ({repeat}) => badges[repeat],
+		className: ({type, styler}) => styler.append(type)
 	},
 
-	render: ({badge, disabled, menuIcon, nextTrackIcon, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffle, shuffleIcon, ...rest}) => {
+	render: ({badge, disabled, menuIcon, nextTrackIcon, onNext, onPause, onPlay, onPrevious, onRepeat, onShuffle, paused, pauseIcon, playIcon, previousTrackIcon, repeatIcon, shuffle, shuffleIcon, type, ...rest}) => {
 		return (
 			<Container {...rest}>
-				<Button
-					aria-label={$L('Repeat')}
-					backgroundOpacity="transparent"
-					badge={badge}
-					css={css}
-					disabled={disabled}
-					icon={repeatIcon}
-					onClick={onRepeat}
-					size="large"
-				/>
-				<Button
-					aria-label={$L('Shuffle')}
-					backgroundOpacity="transparent"
-					className={shuffle ? css.repeat : ''}
-					css={css}
-					disabled={disabled}
-					icon={shuffleIcon}
-					onClick={onShuffle}
-					size="large"
-				/>
+				{type === 'full' ?
+					<Button
+						aria-label={$L('Repeat')}
+						backgroundOpacity="transparent"
+						badge={badge}
+						css={css}
+						disabled={disabled}
+						icon={repeatIcon}
+						onClick={onRepeat}
+					/> : null}
+				{type === 'full' ?
+					<Button
+						aria-label={$L('Shuffle')}
+						backgroundOpacity="transparent"
+						className={shuffle ? css.repeat : ''}
+						css={css}
+						disabled={disabled}
+						icon={shuffleIcon}
+						onClick={onShuffle}
+					/> : null}
 				<Button
 					aria-label={$L('Previous')}
 					backgroundOpacity="transparent"
@@ -239,7 +249,6 @@ const MediaControls = kind({
 					disabled={disabled}
 					icon={previousTrackIcon}
 					onClick={onPrevious}
-					size="large"
 				/>
 				<Button
 					aria-label={paused ? $L('Play') : $L('Pause')}
@@ -247,12 +256,10 @@ const MediaControls = kind({
 					className={classnames(css.playPauseButton, spotlightDefaultClass)}
 					css={css}
 					disabled={disabled}
+					icon={paused ? playIcon : pauseIcon}
 					minWidth={false}
 					onClick={paused ? onPlay : onPause}
-					size="large"
-				>
-					<Icon css={css}>{paused ? playIcon : pauseIcon}</Icon>
-				</Button>
+				/>
 				<Button
 					aria-label={$L('Next')}
 					backgroundOpacity="transparent"
@@ -260,16 +267,15 @@ const MediaControls = kind({
 					disabled={disabled}
 					icon={nextTrackIcon}
 					onClick={onNext}
-					size="large"
 				/>
-				<Button
-					aria-label={$L('Menu')}
-					backgroundOpacity="transparent"
-					css={css}
-					disabled={disabled}
-					icon={menuIcon}
-					size="large"
-				/>
+				{type === 'full' ?
+					<Button
+						aria-label={$L('Menu')}
+						backgroundOpacity="transparent"
+						css={css}
+						disabled={disabled}
+						icon={menuIcon}
+					/> : null}
 			</Container>
 		);
 	}

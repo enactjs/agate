@@ -6,9 +6,43 @@
 .switchItem {
 	.switchIcon {
 		pointer-events: none;
-
-		.applySkins({
-			.margin-start-end(@agate-switch-icon-margin, 0);
-		});
 	}
+
+	.applySkins({
+		.padding-start-end(@agate-switchitem-padding);
+
+		.switchIcon {
+			.margin-start-end(@agate-switch-icon-margin, 0);
+		}
+
+		.icon {
+			padding: @agate-switchitem-icon-padding;
+		}
+
+		.slotBefore {
+			.margin-start-end(0, @agate-switchitem-slotbefore-margin-right);
+		}
+
+		.label {
+			color: @agate-switchitem-label-color;
+		}
+
+		&.selected {
+			border-color: @agate-switchitem-selected-border-color;
+
+			.label {
+				color: @agate-switchitem-label-selected-color;
+			}
+		}
+
+		.focus({
+			&.selected {
+				border-color: @agate-switchitem-selected-border-color;
+
+				.label {
+					color:  @agate-switchitem-label-selected-color;
+				}
+			}
+		});
+	});
 }

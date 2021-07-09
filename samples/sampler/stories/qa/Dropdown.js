@@ -92,7 +92,7 @@ export const With2OptionsForTestingDirection = () => (
 		onSelect={action('onSelect')}
 		style={{position: 'absolute', top: 'calc(50% - 4rem)'}}
 		title={text('title', Config, 'Dropdown')}
-		width={select('width', ['tiny', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+		width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
 	>
 		{['Option 1', 'Option 2']}
 	</Dropdown>
@@ -109,7 +109,7 @@ export const WithDefaultSelectedIn30Options = () => (
 		onOpen={action('onOpen')}
 		onSelect={action('onSelect')}
 		title={text('title', Config, 'Dropdown')}
-		width={select('width', ['tiny', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+		width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
 	>
 		{items(30)}
 	</Dropdown>
@@ -125,7 +125,7 @@ export const WithLongText = () => (
 		onOpen={action('onOpen')}
 		onSelect={action('onSelect')}
 		title={text('title', Config, 'Dropdown')}
-		width={select('width', ['tiny', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+		width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
 	>
 		{items(10, 'Looooooooooooooooooooooong')}
 	</Dropdown>
@@ -142,7 +142,7 @@ export const WithMultipleDropdowns = () => (
 			onOpen={action('onOpen')}
 			onSelect={action('onSelect')}
 			title={text('title', Config, 'Dropdown')}
-			width={select('width', ['tiny', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+			width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
 		>
 			{items(5)}
 		</Dropdown>
@@ -153,7 +153,7 @@ export const WithMultipleDropdowns = () => (
 			onOpen={action('onOpen')}
 			onSelect={action('onSelect')}
 			title={text('title', Config, 'Dropdown')}
-			width={select('width', ['tiny', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+			width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
 		>
 			{items(5)}
 		</Dropdown>
@@ -172,7 +172,7 @@ export const WithArrayOfChildrenObjects = () => (
 			onSelect={action('onSelect')}
 			style={{position: 'absolute', top: 'calc(50% - 4rem)'}}
 			title={text('title', Config, 'Dropdown')}
-			width={select('width', ['tiny', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+			width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
 		>
 			{list}
 		</Dropdown>
