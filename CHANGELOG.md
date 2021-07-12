@@ -7,6 +7,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/ContextualPopupDecorator` layout for Carbon, Cobalt, Copper, Electro, Titanium skins
+- `agate/TabGroup` button padding for Cobalt and Copper skins
 - `agate/VirtualList` 5-way navigation between scroll buttons when `focusableScrollbar`
 
 ## [2.0.0-beta.2] - 2021-06-24
@@ -55,7 +56,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Slider` to have a more visible background-color on Cobalt skin
 - `agate/Slider` to apply focus styling while dragging by touch
 - `agate/SliderButton` button text color to be more visible on Carbon skin
-- `agate/TabGroup` button padding for Cobalt and Copper skins
 - `agate/ThumbnailItem` to match latest design for Silicon skin
 - `agate/ThumbnailItem` to display thumbnail image properly in all skins
 
