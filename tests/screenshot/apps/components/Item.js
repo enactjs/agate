@@ -17,6 +17,8 @@ const ItemTests = [
 	<Item selected>Hello Item</Item>,
 	<Item size="small">Hello Item</Item>,
 	<Item inline>Hello Item</Item>,
+	<Item inline label="label text" labelPosition="after">Hello Item</Item>,
+	<Item inline label="label text" labelPosition="before">Hello Item</Item>,
 
 	// Selected - disabled
 	<Item selected disabled>Hello Item</Item>,
@@ -26,6 +28,8 @@ const ItemTests = [
 
 	// Selected - inline
 	<Item selected inline>Hello Item</Item>,
+	<Item selected inline label="label text" labelPosition="after">Hello Item</Item>,
+	<Item selected inline label="label text" labelPosition="before">Hello Item</Item>,
 
 	// Icon slotBefore
 	<Item slotBefore={slotBeforeIcon}>Hello Item</Item>,

@@ -1,13 +1,14 @@
 const Page = require('./ItemPage');
 
 describe('Item', function () {
-	const item1 = Page.components.item1;
-	const item2Disabled = Page.components.item2Disabled;
-	const item3WithLabel = Page.components.item3WithLabel;
-	const item4Inline = Page.components.item4Inline;
-	const item5InlineDisabled = Page.components.item5InlineDisabled;
-	const item6Inline = Page.components.item6Inline;
-	const item7Inline = Page.components.item7Inline;
+	const {
+		item1,
+		item2Disabled,
+		item3WithLabel,
+		item4Inline,
+		item5InlineDisabled,
+		item8Inline
+	} = Page.components;
 
 	describe('LTR locale', function () {
 		beforeEach(function () {
@@ -35,15 +36,15 @@ describe('Item', function () {
 
 				// Validating that the items are in fact inline and can be navigated between via 5-way
 				it('should focus an inline item with 5-way Left', function () {
-					item7Inline.focus();
+					item8Inline.focus();
 					Page.spotlightLeft();
-					expect(Page.components.item6Inline.self.isFocused()).to.be.true();
+					expect(Page.components.item7Inline.self.isFocused()).to.be.true();
 				});
 
 				it('should focus an inline item with 5-way Right', function () {
-					item6Inline.focus();
+					item5InlineDisabled.focus();
 					Page.spotlightRight();
-					expect(Page.components.item7Inline.self.isFocused()).to.be.true();
+					expect(Page.components.item6Inline.self.isFocused()).to.be.true();
 				});
 			});
 
@@ -106,15 +107,15 @@ describe('Item', function () {
 			describe('5-way', function () {
 				// Validating that the items are in fact inline and can be navigated between via 5-way
 				it('should focus an inline item with 5-way Right', function () {
-					item7Inline.focus();
+					item8Inline.focus();
 					Page.spotlightRight();
-					expect(Page.components.item6Inline.self.isFocused()).to.be.true();
+					expect(Page.components.item7Inline.self.isFocused()).to.be.true();
 				});
 
 				it('should focus an inline item with 5-way Left', function () {
-					item6Inline.focus();
+					item5InlineDisabled.focus();
 					Page.spotlightLeft();
-					expect(Page.components.item7Inline.self.isFocused()).to.be.true();
+					expect(Page.components.item6Inline.self.isFocused()).to.be.true();
 				});
 			});
 		});

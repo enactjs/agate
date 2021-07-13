@@ -25,6 +25,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Heading` style to match latest design for Silicon skin
 - `agate/Heading` position of underline when size="tile" on Carbon, Cobalt, Copper, Electro, Titanium skins
 - `agate/Input` to match latest design for Silicon skin
+- `agate/Item` for inline with label and labelPosition "after" or "before" on Gallium skin to not change item width on hover
 - `agate/Keypad` to match latest design for Silicon skin
 - `agate/LabeledIconButton` to match the latest design for Silicon skin
 - `agate/MediaPlayer` style to match latest design for Silicon skin
