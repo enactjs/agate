@@ -21,10 +21,10 @@
   },
   "dependencies": {
     "@enact/agate": "../../",
-    "@enact/core": "^4.0.2",
-    "@enact/ui": "^4.0.2",
-    "@enact/i18n": "^4.0.2",
-    "@enact/spotlight": "^4.0.2",
+    "@enact/core": "^4.0.3",
+    "@enact/ui": "^4.0.3",
+    "@enact/i18n": "^4.0.3",
+    "@enact/spotlight": "^4.0.3",
     "dotenv": "^8.2.0",
     "ilib": "^14.4.0",
     "prop-types": "^15.7.2",
@@ -32,9 +32,9 @@
   },
   "devDependencies": {
     "@enact/storybook-utils": "^4.0.0",
-    "@storybook/addons": "^6.1.21",
-    "@storybook/react": "^6.1.21",
-    "@storybook/theming": "^6.1.21",
+    "@storybook/addons": "6.2.9",
+    "@storybook/react": "6.2.9",
+    "@storybook/theming": "6.2.9",
     "babel-loader": "^8.2.2",
     "core-js": "^3.8.1"
   }
