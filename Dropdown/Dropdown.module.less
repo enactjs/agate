@@ -17,6 +17,7 @@
 			.button,
 			.item {
 				width: @agate-dropdown-smallest-width;
+				max-width: @agate-dropdown-smallest-width;
 			}
 		}
 
@@ -24,6 +25,7 @@
 			.button,
 			.item {
 				width: @agate-dropdown-small-width;
+				max-width: @agate-dropdown-small-width;
 			}
 		}
 
@@ -31,6 +33,7 @@
 			.button,
 			.item {
 				width: @agate-dropdown-medium-width;
+				max-width: @agate-dropdown-medium-width;
 			}
 		}
 
@@ -38,6 +41,7 @@
 			.button,
 			.item {
 				width: @agate-dropdown-large-width;
+				max-width: @agate-dropdown-large-width;
 			}
 		}
 
@@ -45,6 +49,7 @@
 			.button,
 			.item {
 				width: @agate-dropdown-x-large-width;
+				max-width: @agate-dropdown-x-large-width;
 			}
 		}
 
@@ -52,6 +57,7 @@
 			.button,
 			.item {
 				width: @agate-dropdown-huge-width;
+				max-width: @agate-dropdown-huge-width;
 			}
 		}
 
@@ -67,46 +73,23 @@
 		&.dropdownButton {
 			.button {
 				margin: 0;
-				height: @agate-dropdown-button-height;
-				font-size: @agate-dropdown-button-font-size;
-				max-width: @agate-dropdown-button-max-width;
-				padding: @agate-dropdown-button-padding;
+				.padding-start-end(@agate-dropdown-button-padding-left, @agate-dropdown-button-padding-right);
 
 				.bg {
-					background-color: @agate-dropdown-button-bg-color;
 					border-color: @agate-dropdown-button-border-color;
-					background-image: @agate-dropdown-button-bg-image;
 				}
 
 				&,
 				.client {
-					color: @agate-dropdown-button-client-color;
 					flex-direction: row-reverse;
 				}
 
 				.icon {
-					color: @agate-dropdown-button-icon-color;
 					font-size: @agate-dropdown-button-icon-font-size;
-					width: @agate-dropdown-button-icon-width;
-					.margin-start-end(@agate-button-icon-position-after-margin-start, @agate-dropdown-button-icon-margin-right);
+					margin : @agate-dropdown-button-icon-margin;
+					width: @agate-dropdown-button-icon-size;
+					height: @agate-dropdown-button-icon-size;
 				}
-
-				.focus({
-					.bg {
-						background-color: @agate-dropdown-button-bg-color;
-						border-color: @agate-dropdown-button-border-color;
-						background-image: @agate-dropdown-button-bg-image;
-					}
-
-					&,
-					.client {
-						color: @agate-dropdown-button-client-color;
-					}
-
-					.icon {
-						color: @agate-dropdown-button-icon-focus-color;
-					}
-				});
 			}
 
 			&.open {
@@ -114,7 +97,6 @@
 					.bg {
 						border-radius: @agate-dropdown-button-open-border-radius;
 						border-bottom-color: @agate-dropdown-button-open-border-color;
-						transition: none;
 					}
 
 					.focus({
@@ -152,6 +134,7 @@
 		border-radius: @agate-dropdown-list-border-radius;
 		background-color: @agate-dropdown-list-bg-color;
 		max-height: @agate-dropdown-list-height;
+		.padding-start-end(@agate-dropdown-list-padding);
 		overflow: hidden;
 
 		.item {
@@ -170,17 +153,33 @@
 		.dropDownListItem {
 			font-size: @agate-dropdown-item-font-size;
 			font-weight: @agate-dropdown-item-font-weight;
+			height: @agate-dropdown-item-height;
 			line-height: @agate-dropdown-item-line-height;
 
 			&.radioItem {
-				border-color: @agate-dropdown-item-border-color;
 				border-width: @agate-dropdown-item-border-width;
-				padding-left: @agate-dropdown-item-padding;
-				padding-right: @agate-dropdown-item-padding;
-				height: @agate-dropdown-item-height;
+				.padding-start-end(@agate-dropdown-radioitem-padding-left, @agate-dropdown-radioitem-padding-right);
+
+				.icon {
+					.margin-start-end(@agate-dropdown-radioitem-icon-margin);
+				}
+
+				&.selected {
+					background-color: @agate-dropdown-radioitem-selected-bg-color;
+
+					.focus({
+						.icon {
+							color: @agate-dropdown-radioitem-selected-focus-color;
+						}
+					})
+				}
 
 				.focus({
-					background-color: @agate-dropdown-item-focus-bg-color;
+					color: @agate-dropdown-radioitem-focus-color;
+
+					.icon {
+						border-color: @agate-dropdown-radioitem-focus-color;
+					}
 				});
 			}
 		}
@@ -215,21 +214,8 @@
 
 		&.dropdownListWithCustomizedScroller {
 			// FIXME:
-			[role="button"] {
-				.focus({
-					& > div {
-						background-image: none;
-					}
-				});
-			}
-
-			[role="button"] > div {
-				border-color: transparent;
-				color: black;
-			}
-
 			[role="button"] + div::before {
-				background-color: black;
+				background-color: #666666;
 			}
 		}
 	});

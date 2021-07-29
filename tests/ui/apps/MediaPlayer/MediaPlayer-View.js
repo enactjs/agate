@@ -17,25 +17,33 @@ const audioFiles = [
 ];
 
 const app = (props) => <div {...props}>
-	<div style={{marginTop: '40px'}}>
-		<Heading>Media Player Default</Heading>
+	<div style={{display: 'inline-block', marginTop: '40px', width: '50%'}}>
+		<Heading size="tiny">Media Player Default</Heading>
 		<MediaPlayer id="mediaPlayerDefault">
 			{
 				audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 			}
 		</MediaPlayer>
 	</div>
-	<div style={{marginTop: '80px'}}>
-		<Heading>Media Player Disabled</Heading>
+	<div style={{display: 'inline-block', marginTop: '40px', width: '50%'}}>
+		<Heading size="tiny">Media Player Disabled</Heading>
 		<MediaPlayer id="mediaPlayerDisabled" disabled>
 			{
 				audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 			}
 		</MediaPlayer>
 	</div>
-	<div style={{marginTop: '80px'}}>
-		<Heading>Media Player SpotlightDisabled</Heading>
+	<div style={{display: 'inline-block', marginTop: '80px', width: '50%'}}>
+		<Heading size="tiny">Media Player SpotlightDisabled</Heading>
 		<MediaPlayer id="mediaPlayerSpotlightDisabled" spotlightDisabled>
+			{
+				audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
+			}
+		</MediaPlayer>
+	</div>
+	<div style={{display: 'inline-block', marginTop: '80px', width: '50%'}}>
+		<Heading size="tiny">Media Player Tiny</Heading>
+		<MediaPlayer id="mediaPlayerTiny" type="tiny">
 			{
 				audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 			}
