@@ -114,6 +114,7 @@
 @agate-button-selected-disabled-bg-color: @silicon-charcoal;
 @agate-button-selected-disabled-border-color: fade(@silicon-accent, 40%);
 @agate-button-selected-disabled-focus-border-color: fade(@agate-white, 30%);
+@agate-button-transparent-disabled-color: fade(@agate-button-transparent-color, 30%);;
 @agate-button-badge-bg-color: @agate-accent;
 
 // Checkbox
@@ -130,11 +131,18 @@
 
 // CheckboxItem
 // ---------------------------------------
+@agate-checkboxitem-focus-border-color:    transparent;
 @agate-checkboxitem-selected-border-color: @agate-accent;
 
 // ColorPicker
 // ---------------------------------------
-@agate-colorpicker-bg-color: fade(@agate-black, 50%);
+@agate-colorpicker-bg-color: @agate-popup-bg-color;
+@agate-colorpicker-sliders-font-color: @agate-black;
+@agate-colorpicker-slider-bar-bg-color: fade(@agate-black, 50%);
+@agate-colorpicker-slider-fill-bg-color: @agate-black;
+@agate-colorpicker-slider-knob-bg-color: @agate-black;
+@agate-colorpicker-focus-slider-bar-bg-color: fade(@agate-black, 50%);
+@agate-colorpicker-swatch-icon-color: @agate-black;
 
 // ContextualPopup
 // ---------------------------------------
@@ -151,16 +159,13 @@
 
 // Dropdown
 // ---------------------------------------
-@agate-dropdown-button-bg-color: @silicon-gray;
 @agate-dropdown-button-border-color: transparent;
-@agate-dropdown-button-client-color: @agate-black;
-@agate-dropdown-button-icon-focus-color: @agate-accent;
 @agate-dropdown-button-open-border-color: fade(@agate-black, 25%);
+@agate-dropdown-list-bg-color: @agate-button-bg-color;
+@agate-dropdown-radioitem-focus-color: @agate-white;
+@agate-dropdown-radioitem-selected-bg-color: fade(@agate-black, 20%);
+@agate-dropdown-radioitem-selected-focus-color: @agate-dropdown-radioitem-focus-color;
 @agate-dropdown-up-button-open-border-bottom-color: transparent;
-@agate-dropdown-item-border-color: transparent;
-@agate-dropdown-item-color: @agate-black;
-@agate-dropdown-item-focus-bg-color: fade(@agate-black, 5%);
-@agate-dropdown-list-bg-color: @agate-dropdown-button-bg-color;
 
 // Drawer
 // ---------------------------------------
@@ -193,14 +198,14 @@
 // Input
 // ---------------------------------------
 @agate-input-active-border-color:             @agate-accent;
-@agate-input-border-color:                    @agate-foreground;
+@agate-input-border-color:                    fade(@agate-foreground, 40%);
 @agate-input-caret-color:                     @agate-accent;
 @agate-input-decorator-border-color:          transparent;
 @agate-input-decorator-focused-border-color:  transparent;
 @agate-input-focused-background-image:        none;
 @agate-input-focused-border-color:            transparent;
 @agate-input-focused-text-color:              @agate-foreground;
-@agate-input-placeholder-color:               @agate-foreground;
+@agate-input-placeholder-color:               fade(@agate-foreground, 30%);
 @agate-input-text-color:                      @agate-text-color;
 
 // Item
@@ -220,25 +225,32 @@
 
 // Keypad
 // ---------------------------------------
-@agate-keypad-button-active-bg-color:     transparent;
-@agate-keypad-button-active-border-color: @agate-accent;
-@agate-keypad-button-active-color:        @agate-keypad-button-active-border-color;
+@agate-keypad-button-accept-color:        #4cd964;
+@agate-keypad-button-active-bg-color:     fade(@agate-foreground, 20%);
+@agate-keypad-button-active-color:        @silicon-white;
 @agate-keypad-button-bg-color:            transparent;
 @agate-keypad-button-color:               @agate-foreground;
-@agate-keypad-button-focus-color:         @agate-white;
+@agate-keypad-button-decline-color:       #f24949;
+@agate-keypad-button-focus-color:         @silicon-white;
 @agate-keypad-button-label-color:         @silicon-dark-gray;
 @agate-keypad-input-decorator-box-shadow: none;
 @agate-keypad-input-opacity:              1;
 
 // LabeledIconButton
 // ---------------------------------------
-@agate-labelediconbutton-label-focus-color: @agate-accent;
+@agate-labelediconbutton-label-focus-color: @agate-labelediconbutton-label-color;
+@agate-labelediconbutton-label-selected-color: @agate-foreground;
+@agate-labelediconbutton-lightopaque-bg-color: @silicon-night-rider-gray;
+@agate-labelediconbutton-lightopaque-color: @agate-white;
+@agate-labelediconbutton-opaque-color: @agate-background;
+@agate-labelediconbutton-opaque-bg-color: @agate-foreground;
 
 // MediaPlayer
 // ---------------------------------------
+@agate-mediacontrols-button-disabled-opacity: 0.3;
 @agate-mediaslider-bar-color: fade(@agate-foreground, 50%);
-@agate-mediaslider-fill-bg-image: @silicon-gradient;
 @agate-mediaslider-focused-bar-color: fade(@agate-foreground, 50%);
+@agate-mediaslider-fill-bg-image: @silicon-gradient;
 @agate-mediaslider-focused-fill-bg-image: @silicon-gradient;
 
 // Panels
@@ -346,21 +358,24 @@
 
 // Switch
 // ---------------------------------------
-@agate-switch-bg-color: @agate-darker-gray;
-@agate-switch-selected-bg-color: @agate-accent;
-@agate-switch-selected-focus-bg-color: @agate-switch-selected-bg-color;
-@agate-switch-color: @agate-dark-gray;
-@agate-switch-selected-color: @agate-title-text-color;
+@agate-switch-bg-color: @agate-foreground;
+@agate-switch-selected-bg-color: @agate-foreground;
+@agate-switch-selected-focus-bg-color: @agate-foreground;
+@agate-switch-color: @agate-noble-gray;
+@agate-switch-selected-color: @agate-accent;
 @agate-switch-focus-bg-color: @agate-text-color;
 @agate-switch-focus-color: @agate-black;
 @agate-switch-label-color: @agate-accent;
 
+// SwitchItem
+// ---------------------------------------
+@agate-switchitem-label-color: fade(@agate-foreground, 30%);
+
 // ThumbnailItem
 // ---------------------------------------
-@agate-thumbnailitem-label-text-color: @agate-noble-gray;
-@agate-thumbnailitem-label-focus-text-color: @agate-noble-gray;
-@agate-thumbnailitem-label-selected-text-color: @agate-foreground;
-@agate-roundthumbnailitem-border-color: @agate-foreground;
+@agate-roundthumbnailitem-border-color:  @agate-foreground;
+@agate-thumbnailitem-focus-border-color: transparent;
+@agate-thumbnailitem-label-text-color:   @agate-item-label-color;
 
 // Toggle Colors
 // ---------------------------------------
@@ -383,6 +398,6 @@
 
 // Tooltip
 // ---------------------------------------
-@agate-tooltip-bg-color:               @agate-darker-gray;
-@agate-tooltip-text-color:             @agate-white;
-@agate-tooltip-border-color:           @silicon-dark-gray;
+@agate-tooltip-bg-color:     @silicon-dark-gray;
+@agate-tooltip-border-color: @silicon-dark-gray;
+@agate-tooltip-text-color:   @agate-white;

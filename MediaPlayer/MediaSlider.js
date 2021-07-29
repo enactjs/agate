@@ -1,4 +1,5 @@
 import kind from '@enact/core/kind';
+import PropTypes from 'prop-types';
 
 import Slider from '../Slider';
 
@@ -17,12 +18,44 @@ import css from './MediaSlider.module.less';
 const MediaSlider = kind({
 	name: 'MediaSlider',
 
+	propTypes: /** @lends agate/MediaPlayer.MediaSlider.prototype */ {
+		/**
+		 * `true` when the media is paused.
+		 *
+		 * @type {Boolean}
+		 * @default true
+		 * @public
+		 */
+		paused: PropTypes.bool,
+
+		/**
+		 * Specifies what kind of layout the MediaPlayer should have.
+		 *
+		 * @type {('full'|'tiny')}
+		 * @default 'full'
+		 * @public
+		 */
+		type: PropTypes.oneOf(['full', 'tiny'])
+	},
+
+	defaultProps: {
+		paused: true,
+		type: 'full'
+	},
+
 	styles: {
 		css,
 		className: 'mediaSlider'
 	},
 
+	computed: {
+		className: ({paused, type, styler}) => styler.append(type, {paused})
+	},
+
 	render: ({...rest}) => {
+		delete rest.paused;
+		delete rest.type;
+
 		return (
 			<Slider
 				{...rest}

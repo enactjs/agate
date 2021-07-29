@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
-
 import ArcPicker from '@enact/agate/ArcPicker';
 import Button from '@enact/agate/Button';
 import Marquee from '@enact/agate/Marquee';
