@@ -174,7 +174,7 @@ const LabeledIconButtonBase = kind({
 	},
 
 	computed: {
-		className: ({labelPosition, size, styler}) => styler.append((labelPosition === 'above' || labelPosition === 'below') ? '' : size)
+		className: ({selected, size, styler}) => styler.append({selected}, size)
 	},
 
 	render: ({
@@ -196,6 +196,7 @@ const LabeledIconButtonBase = kind({
 			icon: (
 				<Button
 					backgroundOpacity={backgroundOpacity}
+					css={css}
 					icon={icon}
 					iconComponent={iconComponent}
 					iconOnly

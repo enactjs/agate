@@ -17,10 +17,12 @@ describe('TooltipDecorator', function () {
 			expect(tooltipButtonDefault.self.isFocused()).to.be.true();
 		});
 
-		it('should focus the first button and show tooltipDefault after 500ms on start', function () {
+		it('should focus the first button and show tooltipDefault after 500ms on hover', function () {
 			expect(tooltipButtonDefault.self.isFocused()).to.be.true();
 
+			tooltipButtonDefault.hover();
 			Page.delay(500);
+
 			expect(tooltipButtonDefault.isTooltipShowing).to.be.true();
 		});
 
