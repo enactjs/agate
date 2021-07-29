@@ -7,6 +7,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/ContextualPopupDecorator` layout for Carbon, Cobalt, Copper, Electro, Titanium skins
+- `agate/Input` to position correctly `iconBefore` and `iconAfter` on Carbon, Cobalt, Copper, Electro, and Titanium skins
 - `agate/TabGroup` button padding for Cobalt and Copper skins
 - `agate/VirtualList` 5-way navigation between scroll buttons when `focusableScrollbar`
 
@@ -25,7 +26,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Heading` style to match latest design for Silicon skin
 - `agate/Heading` position of underline when size="tile" on Carbon, Cobalt, Copper, Electro, Titanium skins
 - `agate/Input` to match latest design for Silicon skin
-- `agate/Input` to position correctly `iconBefore` and `iconAfter` on Carbon, Cobalt, Copper, Electro, and Titanium skins
 - `agate/Item` for inline with label and labelPosition "after" or "before" on Gallium skin to not change item width on hover
 - `agate/Keypad` to match latest design for Silicon skin
 - `agate/LabeledIconButton` to match the latest design for Silicon skin
