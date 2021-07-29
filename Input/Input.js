@@ -16,6 +16,7 @@ import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import {isRtlText} from '@enact/i18n/util';
 import Changeable from '@enact/ui/Changeable';
 import Pure from '@enact/ui/internal/Pure';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 
@@ -41,6 +42,23 @@ const InputBase = kind({
 	name: 'Input',
 
 	propTypes: /** @lends agate/Input.InputBase.prototype */ {
+		/**
+		 * Shows the clear button.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		clearButton: PropTypes.bool,
+
+		/**
+		 * The icon to be placed in the clear button.
+		 *
+		 * @see {@link agate/Icon.Icon}
+		 * @type {String}
+		 * @default 'cancel'
+		 * @public
+		 */
+		clearIcon: PropTypes.string,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -226,6 +244,7 @@ const InputBase = kind({
 	},
 
 	defaultProps: {
+		clearIcon: 'cancel',
 		disabled: false,
 		dismissOnEnter: false,
 		invalid: false,
@@ -253,6 +272,12 @@ const InputBase = kind({
 				stopPropagation: () => ev.stopPropagation(),
 				value: ev.target.value
 			}))
+		),
+		handleClear: handle(
+			forwardCustom('onChange', ev => ({
+				stopPropagation: () => ev.stopPropagation(),
+				value: ''
+			}))
 		)
 	},
 
@@ -261,7 +286,7 @@ const InputBase = kind({
 			const title = (value == null || value === '') ? placeholder : '';
 			return calcAriaLabel(title, type, value);
 		},
-		className: ({focused, iconBefore, iconAfter, invalid, size, styler}) => styler.append({focused, invalid, hasIconBefore: iconBefore, hasIconAfter: iconAfter}, size),
+		className: ({focused, iconBefore, iconAfter, invalid, size, styler, value}) => styler.append({emptyValue: !value, focused, invalid, hasIconBefore: iconBefore, hasIconAfter: iconAfter}, size),
 		dir: ({value, placeholder}) => isRtlText(value || placeholder) ? 'rtl' : 'ltr',
 		invalidTooltip: ({css, invalid, invalidMessage = $L('Please enter a valid value.')}) => {
 			if (invalid && invalidMessage) {
@@ -276,7 +301,7 @@ const InputBase = kind({
 		value: ({value}) => typeof value === 'number' ? value : (value || '')
 	},
 
-	render: ({css, dir, disabled, iconAfter, iconBefore, invalidTooltip, onChange, placeholder, size, type, value, ...rest}) => {
+	render: ({clearButton, clearIcon, css, dir, disabled, handleClear, iconAfter, iconBefore, invalidTooltip, onChange, placeholder, size, type, value, ...rest}) => {
 		const inputProps = extractInputProps(rest);
 		delete rest.dismissOnEnter;
 		delete rest.focused;
@@ -303,6 +328,16 @@ const InputBase = kind({
 					type={type}
 					value={value}
 				/>
+				{clearButton ? (
+					<InputDecoratorIcon
+						className={classNames({[css.hideIcon]: !(value?.length >= 1)})}
+						position="after"
+						size={size}
+						onClick={handleClear}
+					>
+						{clearIcon}
+					</InputDecoratorIcon>
+				) : null}
 				<InputDecoratorIcon position="after" size={size}>
 					{iconAfter}
 				</InputDecoratorIcon>

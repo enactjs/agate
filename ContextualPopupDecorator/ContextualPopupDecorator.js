@@ -676,6 +676,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 				rest.skin = skin;
 			}
 
+			delete rest.direction;
 			delete rest.onOpen;
 			delete rest.popupSpotlightId;
 			delete rest.rtl;
