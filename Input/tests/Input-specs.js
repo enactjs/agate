@@ -367,4 +367,55 @@ describe('Input Specs', () => {
 
 		expect(subject.find('Tooltip')).toHaveLength(0);
 	});
+
+	test('should support clearButton', () => {
+		const subject = mount(
+			<Input clearButton />
+		);
+
+		const expected = 'cancel';
+		const actual = subject.find('Icon').prop('children');
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should support custom icon for clearButton', () => {
+		const expected = 'happyface';
+		const subject = mount(
+			<Input clearButton clearIcon={expected} />
+		);
+
+		const actual = subject.find('Icon').prop('children');
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should clear input value when clearButton is clicked', () => {
+		const subject = mount(
+			<Input value="Hello Input" clearButton />
+		);
+
+		const clearButton = subject.find('InputDecoratorIcon').at(1);
+		const actualValue = subject.find('input').prop('value');
+
+		clearButton.simulate('click');
+		const expectedValue = '';
+
+		setTimeout(() => expect(actualValue).toBe(expectedValue), 100); // setTimeout is used here to give input some time to clear its value
+	});
+
+	test('should not clear input value when disabled', () => {
+		const value = 'Hello Input';
+		const subject = mount(
+			<Input value={value} clearButton disabled />
+		);
+
+		const clearButton = subject.find('InputDecoratorIcon').at(1);
+		const actualValue = subject.find('input').prop('value');
+
+		clearButton.simulate('click');
+		const expectedValue = value;
+
+		setTimeout(() => expect(actualValue).toBe(expectedValue), 100); // setTimeout is used here to give input some time to clear its value
+	});
 });
