@@ -12,10 +12,12 @@ export default {
 
 export const _ThumbnailItem = () => (
 	<ThumbnailItem
-		src="https://dummyimage.com/64/e048e0/0011ff"
+		disabled={boolean('disabled', Config)}
+		inline={boolean('inline', Config)}
 		label={text('label', Config, 'Sub Content')}
-		type={select('type', ['normal', 'styled'], Config)}
 		selected={boolean('selected', Config)}
+		src="https://dummyimage.com/64/e048e0/0011ff"
+		type={select('type', ['normal', 'styled'], Config)}
 	>
 		{text('children', Config, 'Main Content')}
 	</ThumbnailItem>

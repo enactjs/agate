@@ -23,7 +23,7 @@ class ThumbnailItemInterface {
 		return getText(element('.Item_Item_label', this.self));
 	}
 	get isSelected () {
-		return hasClass('.ThumbnailItem_ThumbnailItem_selected', this.self);
+		return hasClass('.Item_Item_selected', this.self);
 	}
 	get image () {
 		return $(`#${this.id} .ThumbnailItem_ThumbnailItem_thumbnail`).isExisting();

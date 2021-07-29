@@ -1,7 +1,7 @@
 import classnames from 'classnames/bind';
 import spotlight from '@enact/spotlight';
 import {urlParamsToObject} from '@enact/ui-test-utils/utils';
-import {cloneElement, Component as ReactComponent} from 'react';
+import {cloneElement, Component as ReactComponent, useEffect} from 'react';
 
 import ThemeDecorator from '../../../ThemeDecorator';
 
@@ -143,6 +143,10 @@ const ExportedAgateApp = (props) => {
 	}
 
 	const WrappedAgateApp = ThemeDecorator({noAutoFocus}, App);
+
+	useEffect(() => {
+		document.querySelector('#root > div').classList.add('spotlight-input-key');
+	}, []);
 
 	return (
 		<WrappedAgateApp {...props} skin={skin} skinVariants={skinVariants} locale={locale} />
