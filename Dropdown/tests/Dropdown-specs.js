@@ -165,12 +165,12 @@ describe('Dropdown', () => {
 		render(
 			<FloatingLayerController>
 				<Dropdown open title={title}>
-						{[{
-							children: 'child',
-							disabled: true,
-							key: 'item-0'
-						}]}
-					</Dropdown>
+					{[{
+						children: 'child',
+						disabled: true,
+						key: 'item-0'
+					}]}
+				</Dropdown>
 			</FloatingLayerController>
 		);
 		const dropdownItem = screen.getByRole('checkbox');
