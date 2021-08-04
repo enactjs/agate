@@ -9,6 +9,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ContextualPopupDecorator` layout for Carbon, Cobalt, Copper, Electro, Titanium skins
 - `agate/TabGroup` button padding for Cobalt and Copper skins
 - `agate/VirtualList` 5-way navigation between scroll buttons when `focusableScrollbar`
+- `agate/VirtualList` 5-way navigation between items properly when item's content is updated
 
 ## [2.0.0-beta.2] - 2021-06-24
 
