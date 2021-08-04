@@ -1,45 +1,35 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {fireEvent, render, screen} from '@testing-library/react';
+
 import ArcPicker from '../ArcPicker';
 
 describe('ArcPicker Specs', () => {
-	test(
-		'should change value when clicking on a certain arc segment',
-		() => {
-			const handleChange = jest.fn();
-			const arcPicker = mount(
-				<ArcPicker onChange={handleChange}>{[1, 2, 3, 4]}</ArcPicker>
-			);
-			// find second Arc and click on the second <path> element inside of it
-			arcPicker.find('Arc').at(1).find('path').at(1).simulate('click');
+	test('should change value when navigating to a certain arc segment', () => {
+		const handleChange = jest.fn();
+		render(<ArcPicker onChange={handleChange}>{[1, 2, 3, 4]}</ArcPicker>);
+		const arcPicker = screen.getByRole('slider');
 
-			const expected = 2;
-			const actual = handleChange.mock.calls[0][0].value;
-			expect(actual).toBe(expected);
+		fireEvent.keyDown(arcPicker.children.item(1).children.item(0), {keyCode: 38});
 
-			// find fourth Arc and click on the second <path> element inside of it
-			arcPicker.find('Arc').at(3).find('path').at(1).simulate('click');
+		const expected = 2;
+		const actual = handleChange.mock.calls[0][0].value;
+		expect(actual).toBe(expected);
 
-			const secondExpected = 4;
-			const secondActual = handleChange.mock.calls[1][0].value;
-			expect(secondActual).toBe(secondExpected);
-		}
-	);
+		fireEvent.keyDown(arcPicker.children.item(1).children.item(0), {keyCode: 38});
+		fireEvent.keyDown(arcPicker.children.item(1).children.item(0), {keyCode: 38});
 
-	test(
-		'should not run the onChange handler when disabled',
-		() => {
-			const handleChange = jest.fn();
-			const arcPicker = mount(
-				<ArcPicker disabled onChange={handleChange}>{[1, 2, 3, 4]}</ArcPicker>
-			);
+		const secondExpected = 4;
+		const secondActual = handleChange.mock.calls[2][0].value;
+		expect(secondActual).toBe(secondExpected);
+	});
 
-			// find second Arc and click on the second <path> element inside of it
-			arcPicker.find('Arc').at(1).find('path').at(1).simulate('click');
+	test('should not run the onChange handler when disabled', () => {
+		const handleChange = jest.fn();
+		render(<ArcPicker disabled onChange={handleChange}>{[1, 2, 3, 4]}</ArcPicker>);
+		const arcPicker = screen.getByRole('slider');
 
-			const expected = 0;
-			const actual = handleChange.mock.calls.length;
+		fireEvent.keyDown(arcPicker.children.item(1).children.item(0), {keyCode: 38});
 
-			expect(actual).toBe(expected);
-		}
-	);
+		expect(handleChange).not.toHaveBeenCalled();
+	});
 });
