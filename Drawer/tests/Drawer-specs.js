@@ -1,53 +1,63 @@
-import {mount} from 'enzyme';
+import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
 
 import {Drawer, DrawerBase} from '../Drawer';
 
+const FloatingLayerController = FloatingLayerDecorator('div');
+
 describe('Drawer specs', () => {
 	test('should be rendered opened if open is set to true', () => {
-		const drawer = mount(
-			<Drawer open>
-				Hello!
-			</Drawer>
+		render(
+			<FloatingLayerController>
+				<Drawer open>
+					Hello!
+				</Drawer>
+			</FloatingLayerController>
 		);
+		const drawer = screen.getByText('Hello!');
 
-		const expected = true;
-		const actual = drawer.prop('open');
-
-		expect(actual).toBe(expected);
+		expect(drawer).toBeInTheDocument();
 	});
 
 	test('should not be rendered if open is set to false', () => {
-		const drawer = mount(
-			<Drawer open={false}>
-				Hello!
-			</Drawer>
+		render(
+			<FloatingLayerController>
+				<Drawer open={false}>
+					Hello!
+				</Drawer>
+			</FloatingLayerController>
 		);
+		const drawer = screen.queryByRole('Hello!');
 
-		const expected = false;
-		const actual = drawer.prop('open');
-
-		expect(actual).toBe(expected);
+		expect(drawer).toBeNull();
 	});
 
-	test('should apply \'shown\' class when visible', () => {
-		const subject = mount(
-			<DrawerBase open />
+	test('should apply `shown` class when visible', () => {
+		render(
+			<FloatingLayerController>
+				<DrawerBase open />
+			</FloatingLayerController>
 		);
+		const drawerBase = screen.getByRole('alert').parentElement.parentElement;
 
 		const expected = 'shown';
-		const actual = subject.find('div').at(0).prop('className');
+		screen.debug();
 
-		expect(actual).toContain(expected);
+		expect(drawerBase).toHaveClass(expected);
 	});
 
-	test('should apply \'ease-in-out\' class when noAnimation is false', () => {
-		const subject = mount(
-			<DrawerBase open noAnimation={false} />
+	test('should apply `ease-in-out` class when noAnimation is false', () => {
+		render(
+			<FloatingLayerController>
+				<DrawerBase noAnimation={false} open />
+			</FloatingLayerController>
 		);
+		const drawerBase = screen.getByRole('alert').parentElement.parentElement;
 
 		const expected = 'ease-in-out';
-		const actual = subject.find('div').at(0).prop('className');
+		screen.debug();
 
-		expect(actual).toContain(expected);
+		expect(drawerBase).toHaveClass(expected);
 	});
 });
