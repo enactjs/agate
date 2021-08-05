@@ -10,11 +10,11 @@ describe('ThemeDecorator', () => {
 	test('should add base gallium classes to wrapped component', () => {
 		const config = {ri: false, i18n: false, spotlight: false, float: false, overlay: false};
 		const App = ThemeDecorator(config, AppRoot);
-		render(<App data-testid="themeDecorator"/>);
+		render(<App data-testid="themeDecorator" />);
 
 		Spotlight.terminate();
 
-		const expected = 'gallium'
+		const expected = 'gallium';
 		const appRoot = screen.getByTestId('themeDecorator');
 
 		expect(appRoot).toHaveClass(expected);
@@ -23,7 +23,7 @@ describe('ThemeDecorator', () => {
 	test('should add author classes to wrapped component', () => {
 		const config = {ri: false, i18n: false, spotlight: false, float: false, overlay: false};
 		const App = ThemeDecorator(config, AppRoot);
-		render(<App className="author-class" data-testid="themeDecorator"/>);
+		render(<App className="author-class" data-testid="themeDecorator" />);
 
 		Spotlight.terminate();
 
@@ -36,7 +36,7 @@ describe('ThemeDecorator', () => {
 	test('should not add .agate class to wrapped component when float is enabled', () => {
 		const config = {ri: false, i18n: false, spotlight: false, float: true, overlay: false};
 		const App = ThemeDecorator(config, AppRoot);
-		render(<App data-testid="themeDecorator"/>);
+		render(<App data-testid="themeDecorator" />);
 
 		Spotlight.terminate();
 
@@ -49,7 +49,7 @@ describe('ThemeDecorator', () => {
 	test('should not add .bg class to wrapped component when overlay is enabled', () => {
 		const config = {ri: false, i18n: false, spotlight: false, float: false, overlay: true};
 		const App = ThemeDecorator(config, AppRoot);
-		render(<App data-testid="themeDecorator"/>);
+		render(<App data-testid="themeDecorator" />);
 
 		Spotlight.terminate();
 
