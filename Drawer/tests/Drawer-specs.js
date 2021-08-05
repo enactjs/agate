@@ -42,7 +42,6 @@ describe('Drawer specs', () => {
 		const drawerBase = screen.getByRole('alert').parentElement.parentElement;
 
 		const expected = 'shown';
-		screen.debug();
 
 		expect(drawerBase).toHaveClass(expected);
 	});
@@ -56,7 +55,6 @@ describe('Drawer specs', () => {
 		const drawerBase = screen.getByRole('alert').parentElement.parentElement;
 
 		const expected = 'ease-in-out';
-		screen.debug();
 
 		expect(drawerBase).toHaveClass(expected);
 	});

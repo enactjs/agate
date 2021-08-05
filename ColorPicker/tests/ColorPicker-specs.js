@@ -29,6 +29,7 @@ describe('ColorPicker', () => {
 
 		const expected = 'blue';
 		const actual = handleChange.mock.calls[0][0].value;
+
 		expect(actual).toBe(expected);
 	});
 
