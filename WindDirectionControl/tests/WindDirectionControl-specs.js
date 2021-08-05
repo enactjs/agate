@@ -13,6 +13,7 @@ describe('WindDirectionControl Specs', () => {
 
 		const expected = 'airRight';
 		const actual = handleChange.mock.calls[0][0].value;
+
 		expect(actual).toBe(expected);
 	});
 
@@ -26,6 +27,7 @@ describe('WindDirectionControl Specs', () => {
 
 		const expected = 'airUp';
 		const actual = handleChange.mock.calls[1][0].value;
+
 		expect(actual).toBe(expected);
 	});
 
@@ -39,6 +41,7 @@ describe('WindDirectionControl Specs', () => {
 
 		const expected = 'airDown';
 		const actual = handleChange.mock.calls[0][0].value;
+
 		expect(actual).toBe(expected);
 	});
 

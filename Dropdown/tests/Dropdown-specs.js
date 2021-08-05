@@ -47,9 +47,9 @@ describe('Dropdown', () => {
 		expect(actual).toBeInTheDocument();
 	});
 
+	// 'id' is a prop that is not rendered in the DOM
+	//	so we can't test it right now using Testing Library
 	test.skip('should apply id to dropdown', () => {
-		// 'id' is a prop that is not rendered in the DOM
-		//	so we can't test it right now using Testing Library
 		render(
 			<DropdownBase id="drop">
 				{children}
