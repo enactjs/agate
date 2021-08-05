@@ -1,4 +1,5 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
 
 import Button from '../../Button';
 import Header from '../../Header';
@@ -6,149 +7,127 @@ import Panel from '../Panel';
 import Panels, {PanelsBase} from '../Panels';
 
 describe('Panels Specs', () => {
-	test(
-		'should set {autoFocus} on child to "default-element" on first render',
-		() => {
-			const DivPanel = ({autoFocus, id}) => <div id={id}>{autoFocus}</div>;
-			const panels = mount(
-				<Panels index={0}>
-					<DivPanel />
-				</Panels>
-			);
-
-			const expected = 'default-element';
-			const actual = panels.find('DivPanel').prop('autoFocus');
-
-			expect(actual).toBe(expected);
-		}
-	);
-
-	test(
-		'should set {autoFocus} on child to "default-element" when navigating to a higher index',
-		() => {
-			const DivPanel = ({autoFocus, id}) => <div id={id}>{autoFocus}</div>;
-			const panels = mount(
-				<Panels index={0}>
-					<DivPanel />
-					<DivPanel id="p2" />
-				</Panels>
-			);
-
-			panels.setProps({
-				index: 1
-			});
-
-			const expected = 'default-element';
-			const actual = panels.find('DivPanel#p2').prop('autoFocus');
-
-			expect(actual).toBe(expected);
-		}
-	);
-
-	test(
-		'should not set {autoFocus} on child when navigating to a higher index when it has an autoFocus prop set',
-		() => {
-			const DivPanel = ({autoFocus, id}) => <div id={id}>{autoFocus}</div>;
-			const panels = mount(
-				<Panels index={0}>
-					<DivPanel />
-					<DivPanel id="p2" autoFocus="last-focused" />
-				</Panels>
-			);
-
-			panels.setProps({
-				index: 1
-			});
-
-			const expected = 'last-focused';
-			const actual = panels.find('DivPanel#p2').prop('autoFocus');
-
-			expect(actual).toBe(expected);
-		}
-	);
-
-	describe('with Panel and Header', () => {
-		test(
-			'should render close button',
-			() => {
-				const panels = mount(
-					<Panels index={0}>
-						<Panel>
-							<Header title="Panel Title" />
-						</Panel>
-					</Panels>
-				);
-
-				const closeButton = panels.find('Controls').find('Button');
-				const expected = 1;
-				const actual = closeButton.length;
-
-				expect(actual).toBe(expected);
-			}
+	test('should set {autoFocus} on child to "default-element" on first render', () => {
+		const DivPanel = ({autoFocus, id}) => <div data-testid="panel" id={id}>{autoFocus}</div>;
+		render(
+			<Panels index={0}>
+				<DivPanel />
+			</Panels>
 		);
 
-		test(
-			'should not render close button when \'noCloseButton\' is set to true',
-			() => {
-				const panels = mount(
-					<Panels index={0} noCloseButton>
-						<Panel>
-							<Header title="Panel Title" />
-						</Panel>
-					</Panels>
-				);
+		const expected = 'default-element';
+		const actual = screen.getByTestId('panel').textContent;
 
-				const backButton = panels.find('Controls').find('Button');
-				const expected = 0;
-				const actual = backButton.length;
-
-				expect(actual).toBe(expected);
-			}
-		);
-
-		test(
-			'should set close button "aria-label" to closeButtonAriaLabel',
-			() => {
-				const label = 'custom close button label';
-				const panels = mount(
-					<Panels closeButtonAriaLabel={label} index={0}>
-						<Panel>
-							<Header title="Panel Title" />
-						</Panel>
-					</Panels>
-				);
-
-				const expected = label;
-				const actual = panels.find('Controls').find('Button').prop('aria-label');
-
-				expect(actual).toBe(expected);
-			}
-		);
-
-		test(
-			'should insert additional Panels-level buttons into the global-navigation area when declaring controls prop',
-			() => {
-				const panels = mount(
-					<Panels
-						controls={<Button id="controlButtonTest">Control button</Button>}
-						index={0}
-					>
-						<Panel>
-							<Header title="Panel Title" />
-						</Panel>
-					</Panels>
-				);
-
-				const controlButton = panels.find('Controls').find('Button#controlButtonTest');
-
-				const expected = 1;
-				const actual = controlButton.length;
-
-				expect(actual).toBe(expected);
-			}
-		);
+		expect(actual).toBe(expected);
 	});
 
+	test('should set {autoFocus} on child to "default-element" when navigating to a higher index', () => {
+		const DivPanel = ({autoFocus, id}) => <div data-testid="panel" id={id}>{autoFocus}</div>;
+		const {rerender} = render(
+			<Panels index={0}>
+				<DivPanel />
+				<DivPanel id="p2" />
+			</Panels>
+		);
+
+		rerender(
+			<Panels index={1}>
+				<DivPanel />
+				<DivPanel id="p2" />
+			</Panels>
+		);
+
+		const expected = 'default-element';
+		const actual = screen.getAllByTestId('panel')[0].textContent;
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should not set {autoFocus} on child when navigating to a higher index when it has an autoFocus prop set', () => {
+		const DivPanel = ({autoFocus, id}) => <div data-testid="panel" id={id}>{autoFocus}</div>;
+		const {rerender} = render(
+			<Panels index={0}>
+				<DivPanel />
+				<DivPanel autoFocus="last-focused" id="p2" />
+			</Panels>
+		);
+
+		rerender(
+			<Panels index={1}>
+				<DivPanel />
+				<DivPanel autoFocus="last-focused" id="p2" />
+			</Panels>
+		);
+
+		const expected = 'last-focused';
+		const panel = screen.getAllByTestId('panel')[0];
+
+		expect(panel.textContent).toBe(expected);
+		expect(panel.id).toBe('p2');
+	});
+
+	describe('with Panel and Header', () => {
+		test('should render close button', () => {
+			render(
+				<Panels index={0}>
+					<Panel>
+						<Header title="Panel Title" />
+					</Panel>
+				</Panels>
+			);
+
+			const closeButton = screen.getByRole('button');
+
+			expect(closeButton).toBeInTheDocument();
+		});
+
+		test('should not render close button when \'noCloseButton\' is set to true', () => {
+			render(
+				<Panels index={0} noCloseButton>
+					<Panel>
+						<Header title="Panel Title" />
+					</Panel>
+				</Panels>
+			);
+
+			const closeButton = screen.queryByRole('button');
+
+			expect(closeButton).toBeNull();
+		});
+
+		test('should set close button "aria-label" to closeButtonAriaLabel', () => {
+			const label = 'custom close button label';
+			render(
+				<Panels closeButtonAriaLabel={label} index={0}>
+					<Panel>
+						<Header title="Panel Title" />
+					</Panel>
+				</Panels>
+			);
+
+			const expected = label;
+			const actual = screen.getByRole('button');
+
+			expect(actual).toHaveAttribute('aria-label', expected);
+		});
+
+		test('should insert additional Panels-level buttons into the global-navigation area when declaring controls prop', () => {
+			render(
+				<Panels
+					controls={<Button data-testid="controlButtonTest">Control button</Button>}
+					index={0}
+				>
+					<Panel>
+						<Header title="Panel Title" />
+					</Panel>
+				</Panels>
+			);
+
+			const controlButton = screen.getByTestId('controlButtonTest');
+
+			expect(controlButton).toBeInTheDocument();
+		});
+	});
 
 	describe('childProps', () => {
 		test('should not add aria-owns when noCloseButton is true and no controls', () => {
