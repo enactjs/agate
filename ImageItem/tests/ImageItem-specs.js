@@ -3,7 +3,6 @@ import {render, screen} from '@testing-library/react';
 
 import {ImageItem} from '../ImageItem';
 
-
 describe('ImageItem', () => {
 	const children = 'caption';
 
