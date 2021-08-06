@@ -1,18 +1,12 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {fireEvent, render, screen} from '@testing-library/react';
 
 import MediaPlayer from '../MediaPlayer';
-import css from '../../Slider/Slider.module.less';
 
-const getNode = (slider) => slider.find(`div.${css.slider}`);
-
-const blur = (slider) => getNode(slider).simulate('blur');
-const activate = (slider) => getNode(slider).simulate('keyup', {keyCode: 13});
+const blur = (slider) => fireEvent.blur(slider);
+const activate = (slider) => fireEvent.keyUp(slider, {keyCode: 13});
 
 describe('MediaPlayer', () => {
-	function getSourceNode (wrapper) {
-		return wrapper.find('Media').instance().media;
-	}
-
 	const audioFiles = [
 		'https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3',
 		'https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3',
@@ -23,104 +17,100 @@ describe('MediaPlayer', () => {
 	];
 
 	describe('changing sources', () => {
-
 		test('should use the same node when changing the `source`', () => {
-			const subject = mount(
-				<MediaPlayer>
+			const {rerender} = render(
+				<MediaPlayer data-testid="media-player">
 					{
 						audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 					}
 				</MediaPlayer>
 			);
+			const expected = screen.getByTestId('media-player');
 
-			const expected = getSourceNode(subject);
+			rerender(
+				<MediaPlayer data-testid="media-player" source="abc.mp3" />
+			);
 
-			subject.setProps({
-				source: ['abc.mp3']
-			});
-
-			const actual = getSourceNode(subject);
+			const actual = screen.getByTestId('media-player');
 
 			expect(actual).toBe(expected);
 		});
 
 		test('should use same `source` when removing `source`', () => {
-			const subject = mount(
-				<MediaPlayer>
+			const {rerender} = render(
+				<MediaPlayer data-testid="media-player">
 					{
 						audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 					}
 				</MediaPlayer>
 			);
+			const expected = screen.getByTestId('media-player');
 
-			const expected = getSourceNode(subject);
+			rerender(
+				<MediaPlayer data-testid="media-player" source="no source" />
+			);
 
-			subject.setProps({
-				source: undefined // eslint-disable-line no-undefined
-			});
-
-			const actual = getSourceNode(subject);
+			const actual = screen.getByTestId('media-player');
 
 			expect(actual).toBe(expected);
 		});
 
 		test('should reuse source node over two changes', () => {
-			const subject = mount(
-				<MediaPlayer>
+			const {rerender} = render(
+				<MediaPlayer data-testid="media-player">
 					{
 						audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 					}
 				</MediaPlayer>
 			);
+			const expected = screen.getByTestId('media-player');
 
-			const source = getSourceNode(subject);
+			rerender(
+				<MediaPlayer data-testid="media-player" source="abc.mp3" />
+			);
 
-			subject.setProps({
-				source: ['abc.mp3']
-			});
+			const actual = screen.getByTestId('media-player');
 
-			expect(getSourceNode(subject)).toBe(source);
+			expect(actual).toBe(expected);
 
-			subject.setProps({
-				source: ['def.mp3']
-			});
+			rerender(
+				<MediaPlayer data-testid="media-player" source="def.mp3" />
+			);
 
-			expect(getSourceNode(subject)).toBe(source);
+			const last = screen.getByTestId('media-player');
+
+			expect(last).toBe(expected);
 		});
 
 		test('should activate the mediaPlayer slider on enter keyup', () => {
-			const subject = mount(
-				<MediaPlayer>
+			render(
+				<MediaPlayer data-testid="media-player">
 					{
 						audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 					}
 				</MediaPlayer>
 			);
+			const mediaPlayer = screen.getByTestId('media-player').children[1];
 
-			activate(subject);
+			activate(mediaPlayer);
 
-			const expected = 'active';
-			const actual = subject.find('Slider').prop('active') ? 'active' : 'not active';
-
-			expect(actual).toBe(expected);
+			expect(mediaPlayer).toHaveClass('active');
 		});
 
 		test('should deactivate the mediaPlayer slider on blur', () => {
-			const subject = mount(
-				<MediaPlayer>
+			render(
+				<MediaPlayer data-testid="media-player">
 					{
 						audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 					}
 				</MediaPlayer>
 			);
+			const mediaPlayer = screen.getByTestId('media-player').children[1];
 
-			activate(subject);
-			blur(subject);
+			activate(mediaPlayer);
+			blur(mediaPlayer);
 
-			const expected = 'not active';
-			const actual = subject.find('Slider').prop('active') ? 'active' : 'not active';
-
-			expect(actual).toBe(expected);
+			expect(mediaPlayer).not.toHaveClass('active');
 		});
 	});
 });
