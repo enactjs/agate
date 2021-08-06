@@ -27,9 +27,7 @@ describe('MediaPlayer', () => {
 			);
 			const expected = screen.getByTestId('media-player');
 
-			rerender(
-				<MediaPlayer data-testid="media-player" source="abc.mp3" />
-			);
+			rerender(<MediaPlayer data-testid="media-player" source="abc.mp3" />);
 
 			const actual = screen.getByTestId('media-player');
 
@@ -46,9 +44,7 @@ describe('MediaPlayer', () => {
 			);
 			const expected = screen.getByTestId('media-player');
 
-			rerender(
-				<MediaPlayer data-testid="media-player" source="no source" />
-			);
+			rerender(<MediaPlayer data-testid="media-player" source="no source" />);
 
 			const actual = screen.getByTestId('media-player');
 
@@ -65,17 +61,13 @@ describe('MediaPlayer', () => {
 			);
 			const expected = screen.getByTestId('media-player');
 
-			rerender(
-				<MediaPlayer data-testid="media-player" source="abc.mp3" />
-			);
+			rerender(<MediaPlayer data-testid="media-player" source="abc.mp3" />);
 
 			const actual = screen.getByTestId('media-player');
 
 			expect(actual).toBe(expected);
 
-			rerender(
-				<MediaPlayer data-testid="media-player" source="def.mp3" />
-			);
+			rerender(<MediaPlayer data-testid="media-player" source="def.mp3" />);
 
 			const last = screen.getByTestId('media-player');
 

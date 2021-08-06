@@ -3,7 +3,6 @@ import {render, screen} from '@testing-library/react';
 
 import Spinner from '../Spinner';
 
-
 describe('Spinner Specs', () => {
 	test('should have transparentBackground class when transparent prop equals true', () => {
 		render(<Spinner transparent />);
