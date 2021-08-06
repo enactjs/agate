@@ -1,75 +1,90 @@
-import {mount} from 'enzyme';
+import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
 
-import {PopupMenu, PopupMenuBase} from '../PopupMenu';
+import {PopupMenu} from '../PopupMenu';
+
+const FloatingLayerController = FloatingLayerDecorator('div');
 
 describe('PopupMenu specs', () => {
 	test('should be rendered opened if open is set to true', () => {
-		const popupMenu = mount(
-			<PopupMenu open>
-				<div>popupMenu</div>
-			</PopupMenu>
+		render(
+			<FloatingLayerController>
+				<PopupMenu open><div>popupMenu</div></PopupMenu>
+			</FloatingLayerController>
 		);
 
-		const expected = true;
-		const actual = popupMenu.prop('open');
+		const popupMenu = screen.getByText('popupMenu');
 
-		expect(actual).toBe(expected);
+		expect(popupMenu).toBeInTheDocument();
 	});
 
 	test('should not be rendered if open is set to false', () => {
-		const popupMenu = mount(
-			<PopupMenu open={false}>
-				<div>popupMenu</div>
-			</PopupMenu>
+		render(
+			<FloatingLayerController>
+				<PopupMenu open={false}><div>popupMenu</div></PopupMenu>
+			</FloatingLayerController>
 		);
 
-		const expected = false;
-		const actual = popupMenu.prop('open');
+		const popup = screen.queryByText('popupMenu');
 
-		expect(actual).toBe(expected);
+		expect(popup).toBeNull();
 	});
 
 	test('should display correct title', () => {
-		const popupMenu = mount(
-			<PopupMenu title="This is a Popupmenu title" />
+		const title = 'This is a Popupmenu title';
+		render(
+			<FloatingLayerController>
+				<PopupMenu open title={title} />
+			</FloatingLayerController>
 		);
 
-		const expected = 'This is a Popupmenu title';
-		const actual = popupMenu.prop('title');
+		const popupMenuTitle = screen.getByText(title);
 
-		expect(actual).toBe(expected);
+		expect(popupMenuTitle).toBeInTheDocument();
+
+		const expected = 'popupMenuTitle';
+		const popupMenuTitleElement = screen.getByRole('alert').children.item(0);
+
+		expect(popupMenuTitleElement).toHaveClass(expected);
 	});
 
 	test('should apply \'shown\' class when visible with noAnimation', () => {
-		const popupMenu = mount(
-			<PopupMenuBase noAnimation open />
+		render(
+			<FloatingLayerController>
+				<PopupMenu data-testid="popupMenu" noAnimation open />
+			</FloatingLayerController>
 		);
 
 		const expected = 'shown';
-		const actual = popupMenu.find('div').at(0).prop('className');
+		const actual = screen.getByTestId('popupMenu').parentElement.parentElement;
 
-		expect(actual).toContain(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should apply \'ease-in-out\' class when noAnimation is false', () => {
-		const popupMenu = mount(
-			<PopupMenuBase open noAnimation={false} />
+		render(
+			<FloatingLayerController>
+				<PopupMenu data-testid="popupMenu" open noAnimation={false} />
+			</FloatingLayerController>
 		);
 
 		const expected = 'ease-in-out';
-		const actual = popupMenu.find('div').at(0).prop('className');
+		const actual = screen.getByTestId('popupMenu').parentElement.parentElement;
 
-		expect(actual).toContain(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should have orientation=horizontal when no orientation is specified', () => {
-		const popupMenu = mount(
-			<PopupMenuBase />
+		render(
+			<FloatingLayerController>
+				<PopupMenu open />
+			</FloatingLayerController>
 		);
 
 		const expected = 'horizontal';
-		const actual = popupMenu.prop('orientation');
+		const popupMenu = screen.getByRole('alert');
 
-		expect(actual).toBe(expected);
+		expect(popupMenu).toHaveClass(expected);
 	});
 });
