@@ -210,5 +210,4 @@ describe('Panels Specs', () => {
 			expect(actual).toBe(expected);
 		});
 	});
-
 });

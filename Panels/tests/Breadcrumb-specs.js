@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import Breadcrumb from '../Breadcrumb';
 
 describe('Breadcrumb', () => {
-
 	test('should include {index} in the payload of {onSelect}', () => {
 		const handleSelect = jest.fn();
 		render(<Breadcrumb index={3} onSelect={handleSelect} />);
