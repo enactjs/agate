@@ -3,8 +3,8 @@ import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import {ContextualPopupDecorator} from '../ContextualPopupDecorator';
 import Button from '../../Button';
+import {ContextualPopupDecorator} from '../ContextualPopupDecorator';
 
 const ContextualButton = ContextualPopupDecorator(Button);
 

@@ -14,10 +14,7 @@ describe('ColorPicker', () => {
 	test('should change value when selecting a different color', () => {
 		const handleChange = jest.fn();
 		render(
-			<ColorPicker
-				onChange={handleChange}
-				value="pink"
-			>
+			<ColorPicker onChange={handleChange} value="pink">
 				{['red', 'blue', 'yellow', 'pink']}
 			</ColorPicker>
 		);
@@ -36,10 +33,7 @@ describe('ColorPicker', () => {
 	test('should emit an onChange event when changing hue', () => {
 		const handleChange = jest.fn();
 		render(
-			<ColorPicker
-				onChange={handleChange}
-				value="pink"
-			>
+			<ColorPicker onChange={handleChange} value="pink">
 				{['red', 'blue', 'yellow', 'pink']}
 			</ColorPicker>
 		);
@@ -60,10 +54,7 @@ describe('ColorPicker', () => {
 	test('should emit an onChange event when changing saturation', () => {
 		const handleChange = jest.fn();
 		render(
-			<ColorPicker
-				onChange={handleChange}
-				value="pink"
-			>
+			<ColorPicker onChange={handleChange} value="pink">
 				{['red', 'blue', 'yellow', 'pink']}
 			</ColorPicker>
 		);
@@ -84,10 +75,7 @@ describe('ColorPicker', () => {
 	test('should emit an onChange event when changing lightness', () => {
 		const handleChange = jest.fn();
 		render(
-			<ColorPicker
-				onChange={handleChange}
-				value="pink"
-			>
+			<ColorPicker onChange={handleChange} value="pink">
 				{['red', 'blue', 'yellow', 'pink']}
 			</ColorPicker>
 		);
@@ -108,11 +96,7 @@ describe('ColorPicker', () => {
 	test('should not extend palette when disabled', () => {
 		const handleChange = jest.fn();
 		render(
-			<ColorPicker
-				disabled
-				onChange={handleChange}
-				value="pink"
-			>
+			<ColorPicker disabled onChange={handleChange} value="pink">
 				{['red', 'blue', 'yellow', 'pink']}
 			</ColorPicker>
 		);
