@@ -1,6 +1,6 @@
 import Spotlight from '@enact/spotlight';
 import '@testing-library/jest-dom';
-import {fireEvent, render, screen} from '@testing-library/react';
+import {fireEvent, render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Input from '../Input';
@@ -332,31 +332,37 @@ describe('Input Specs', () => {
 	});
 
 	test('should clear input value when clearButton is clicked', async () => {
-		render(<Input clearButton value="Hello Input" />);
-
+		const handleChange = jest.fn();
+		render(<Input clearButton onChange={handleChange} value="Hello Input" />);
 		const clearButton = screen.getByLabelText('Hello Input Input field').children[1];
-		const input = screen.getByLabelText('Hello Input Input field').children[0];
 
 		userEvent.click(clearButton);
 
 		const expectedValue = '';
 
-		setTimeout(() => expect(input).toHaveAttribute('value', expectedValue), 100);
-		// setTimeout is used here to give input some time to clear its value
+		await waitFor(() => {
+			const actual = handleChange.mock.calls[0][0].value;
+
+			expect(actual).toBe(expectedValue);
+		});
+		// waitFor is used here to give input some time to call onChange
 	});
 
-	test('should not clear input value when disabled', () => {
+	test('should not call onChange when clearButton is disabled', async () => {
+		const handleChange = jest.fn();
 		const value = 'Hello Input';
-		render(<Input clearButton disabled value={value} />);
-
+		render(<Input clearButton disabled onChange={handleChange} value={value} />);
 		const clearButton = screen.getByLabelText('Hello Input Input field').children[1];
-		const input = screen.getByLabelText('Hello Input Input field').children[0];
 
 		userEvent.click(clearButton);
 
-		const expectedValue = value;
+		const expectedValue = 0;
 
-		setTimeout(() => expect(input).toHaveAttribute('value', expectedValue), 100);
-		// setTimeout is used here to give input some time to clear its value
+		await waitFor(() => {
+			const actual = handleChange.mock.calls.length;
+
+			expect(actual).toBe(expectedValue);
+		});
+		// waitFor is used here to give input some time to call onChange
 	});
 });
