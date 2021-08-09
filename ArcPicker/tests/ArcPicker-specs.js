@@ -13,6 +13,7 @@ describe('ArcPicker Specs', () => {
 
 		const expected = 2;
 		const actual = handleChange.mock.calls[0][0].value;
+
 		expect(actual).toBe(expected);
 
 		fireEvent.keyDown(arcPicker.children.item(1).children.item(0), {keyCode: 38});
