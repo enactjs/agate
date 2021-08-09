@@ -127,29 +127,6 @@ describe('Popup specs', () => {
 		});
 	});
 
-	// TODO: duplicate tests
-	// test('should have `center` class when position prop is set to `center` (default)', () => {
-	// 	const popup = shallow(
-	// 		<PopupBase position="center" />
-	// 	);
-	//
-	// 	const expected = 'center';
-	// 	const actual = popup.find(`.${css.popup}`).prop('className');
-	//
-	// 	expect(actual).toContain(expected);
-	// });
-	//
-	// test('should have `top` class when position prop is set to `top`', () => {
-	// 	const popup = shallow(
-	// 		<PopupBase position="top" />
-	// 	);
-	//
-	// 	const expected = 'top';
-	// 	const actual = popup.find(`.${css.popup}`).prop('className');
-	//
-	// 	expect(actual).toContain(expected);
-	// });
-
 	test('should have `bottom` class when position prop is set to `bottom`', () => {
 		render(
 			<FloatingLayerController>
