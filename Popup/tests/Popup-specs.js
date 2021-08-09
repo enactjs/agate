@@ -110,7 +110,7 @@ describe('Popup specs', () => {
 			);
 
 			const firstExpected = 'top';
-			const initialPopup = screen.getByRole('alert')
+			const initialPopup = screen.getByRole('alert');
 
 			expect(initialPopup).toHaveClass(firstExpected);
 
