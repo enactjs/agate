@@ -47,15 +47,13 @@ describe('Dropdown', () => {
 		expect(actual).toBeInTheDocument();
 	});
 
-	// 'id' is a prop that is not rendered in the DOM
-	//	so we can't test it right now using Testing Library
-	test.skip('should apply id to dropdown', () => {
+	test('should apply id to dropdown', () => {
 		render(
 			<DropdownBase id="drop">
 				{children}
 			</DropdownBase>
 		);
-		const dropdown = screen.getByRole('button');
+		const dropdown = screen.getByRole('region');
 
 		const expectedAttribute = 'id';
 		const expectedValue = 'drop';

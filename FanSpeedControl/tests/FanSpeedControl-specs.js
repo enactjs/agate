@@ -13,6 +13,7 @@ describe('FanSpeedControl Specs', () => {
 
 		const expected = 3;
 		const actual = handleChange.mock.calls[1][0].value;
+
 		expect(actual).toBe(expected);
 
 		fireEvent.keyDown(arcPicker.children.item(1).children.item(0), {keyCode: 38});
@@ -21,6 +22,7 @@ describe('FanSpeedControl Specs', () => {
 
 		const secondExpected = 6;
 		const secondActual = handleChange.mock.calls[4][0].value;
+
 		expect(secondActual).toBe(secondExpected);
 	});
 

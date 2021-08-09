@@ -20,6 +20,7 @@ describe('ArcPicker Specs', () => {
 
 		const secondExpected = 4;
 		const secondActual = handleChange.mock.calls[2][0].value;
+
 		expect(secondActual).toBe(secondExpected);
 	});
 
