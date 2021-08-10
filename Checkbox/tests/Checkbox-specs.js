@@ -22,7 +22,6 @@ describe('Checkbox Specs', () => {
 		expect(checkbox).toHaveTextContent(expected);
 	});
 
-	// Extra test cases
 	test('should not include the indeterminate class when not indeterminate', () => {
 		render(<CheckboxBase />);
 		const checkbox = screen.getByRole('checkbox');
@@ -42,7 +41,7 @@ describe('Checkbox Specs', () => {
 	});
 
 	test('should prioritize indeterminate over selected', () => {
-		render(<CheckboxBase indeterminate selected indeterminateIcon="minus">Sel</CheckboxBase>);
+		render(<CheckboxBase indeterminate indeterminateIcon="minus" selected>Sel</CheckboxBase>);
 		const checkbox = screen.getByRole('checkbox');
 
 		const expected = '-';
