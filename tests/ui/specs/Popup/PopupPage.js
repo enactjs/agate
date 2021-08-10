@@ -98,7 +98,7 @@ class PopupPage extends Page {
 	}
 
 	clickPopupFloatLayer () {
-		$('#floatLayer>div').click();
+		$('#floatLayer>div').click({y: -400});
 	}
 
 	waitForOpen (selector, timeout) {
