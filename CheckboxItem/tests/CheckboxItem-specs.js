@@ -1,56 +1,42 @@
-import {mount, shallow} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
+
 import {CheckboxItemBase} from '../CheckboxItem';
-import css from '../../Checkbox/Checkbox.module.less';
 
 describe('CheckboxItem Specs', () => {
 	test('should support a custom icon', () => {
-		const expected = 'star';
+		render(<CheckboxItemBase icon="star">Hello CheckboxItem</CheckboxItemBase>);
 
-		const subject = shallow(
-			<CheckboxItemBase icon={expected}>
-				Hello CheckboxItem
-			</CheckboxItemBase>
-		);
-
-		const actual = subject.find('Checkbox').prop('children');
+		const expected = 983272;
+		const actual = screen.getAllByRole('checkbox')[1].textContent.codePointAt();
 
 		expect(actual).toBe(expected);
 	});
 
 	test('should render correct icon when selected', () => {
-		const subject = mount(
-			<CheckboxItemBase selected />
-		);
+		render(<CheckboxItemBase selected />);
+		const checkbox = screen.getAllByRole('checkbox')[1];
 
-		const expected = 1;
-		const actual =  subject.find('Checkbox').find(`.${css.selected}`).length;
+		const expected = '✓';
 
-		expect(actual).toBe(expected);
+		expect(checkbox).toHaveTextContent(expected);
 	});
 
 	test('should include the indeterminate class when indeterminate', () => {
-		const subject = mount(
-			<CheckboxItemBase indeterminate>
-				Hello CheckboxItem
-			</CheckboxItemBase>
-		);
+		render(<CheckboxItemBase indeterminate>Hello CheckboxItem</CheckboxItemBase>);
+		const checkbox = screen.getAllByRole('checkbox')[1];
 
-		const expected = 1;
-		const actual = subject.find('Checkbox').find(`.${css.indeterminate}`).length;
+		const expected = 'indeterminate';
 
-		expect(actual).toBe(expected);
+		expect(checkbox).toHaveClass(expected);
 	});
 
 	test('should not include the indeterminate class when not indeterminate', () => {
-		const subject = mount(
-			<CheckboxItemBase>
-				Hello CheckboxItem
-			</CheckboxItemBase>
-		);
+		render(<CheckboxItemBase>Hello CheckboxItem</CheckboxItemBase>);
+		const checkbox = screen.getAllByRole('checkbox')[1];
 
-		const expected = css.indeterminate;
-		const actual = subject.find('Checkbox').find(`.${css.indeterminate}`);
+		const notExpected = 'indeterminate';
 
-		expect(actual).not.toContain(expected);
+		expect(checkbox).not.toHaveClass(notExpected);
 	});
 });

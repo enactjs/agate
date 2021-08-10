@@ -1,63 +1,52 @@
-import {mount, shallow} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
+
 import {Checkbox, CheckboxBase} from '../Checkbox';
-import css from '../Checkbox.module.less';
 
 describe('Checkbox Specs', () => {
 	test('should render correct icon when not selected', () => {
+		render(<Checkbox />);
+		const checkbox = screen.getByRole('checkbox');
 
-		const checkbox = mount(
-			<Checkbox />
-		);
+		const expected = '✓';
 
-		const expected = 0;
-		const actual =  checkbox.find(`.${css.selected}`).length;
-
-		expect(actual).toBe(expected);
+		expect(checkbox).toHaveTextContent(expected);
 	});
 
 	test('should render correct icon when selected', () => {
+		render(<Checkbox selected />);
+		const checkbox = screen.getByRole('checkbox');
 
-		const checkbox = mount(
-			<Checkbox selected />
-		);
+		const expected = '✓';
 
-		const expected = 1;
-		const actual =  checkbox.find(`.${css.selected}`).length;
-
-		expect(actual).toBe(expected);
+		expect(checkbox).toHaveTextContent(expected);
 	});
 
 	// Extra test cases
 	test('should not include the indeterminate class when not indeterminate', () => {
-		const checkbox = shallow(
-			<CheckboxBase />
-		);
+		render(<CheckboxBase />);
+		const checkbox = screen.getByRole('checkbox');
 
-		const expected = css.indeterminate;
-		const actual = checkbox.prop('className');
+		const notExpected = 'indeterminate';
 
-		expect(actual).not.toContain(expected);
+		expect(checkbox).not.toHaveClass(notExpected);
 	});
 
 	test('should add the indeterminate class when given the indeterminate prop', () => {
-		const checkbox = shallow(
-			<CheckboxBase indeterminate />
-		);
+		render(<CheckboxBase indeterminate />);
+		const checkbox = screen.getByRole('checkbox');
 
-		const expected = css.indeterminate;
-		const actual = checkbox.prop('className');
+		const expected = 'indeterminate';
 
-		expect(actual).toContain(expected);
+		expect(checkbox).toHaveClass(expected);
 	});
 
 	test('should prioritize indeterminate over selected', () => {
-		const checkbox = shallow(
-			<CheckboxBase indeterminate selected indeterminateIcon="minus">Sel</CheckboxBase>
-		);
+		render(<CheckboxBase indeterminate selected indeterminateIcon="minus">Sel</CheckboxBase>);
+		const checkbox = screen.getByRole('checkbox');
 
-		const expected = 'minus';
-		const actual = checkbox.find('.icon').prop('children');
+		const expected = '-';
 
-		expect(actual).toBe(expected);
+		expect(checkbox).toHaveTextContent(expected);
 	});
 });
