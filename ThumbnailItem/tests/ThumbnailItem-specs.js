@@ -1,87 +1,68 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
 
-import ThumbnailItem from '../ThumbnailItem';
-
-import css from '../ThumbnailItem.module.less';
+import {ThumbnailItemBase} from '../ThumbnailItem';
 
 describe('ThumbnailItem Specs', () => {
+	const children = 'Main content';
+
 	test('should render a thumbnail item with content', () => {
-		const children = 'Main content';
-		const subject = mount(
-			<ThumbnailItem
-				src="https://dummyimage.com/64/e048e0/0011ff"
-			>
+		render(
+			<ThumbnailItemBase src="https://dummyimage.com/64/e048e0/0011ff">
 				{children}
-			</ThumbnailItem>
+			</ThumbnailItemBase>
 		);
 
-		const expected = 'Main content';
-		const actual = subject.prop('children');
+		const actual = screen.getByText(children);
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveTextContent(children);
 	});
 
 	test('should render a label when `label` prop is set', () => {
-		const subject = mount(
-			<ThumbnailItem
-				label="label"
-				src="https://dummyimage.com/64/e048e0/0011ff"
-			/>
-		);
+		render(<ThumbnailItemBase label="label" src="https://dummyimage.com/64/e048e0/0011ff" />);
 
 		const expected = 'label';
-		const actual = subject.prop('label');
+		const actual = screen.getByText('label').parentElement.parentElement;
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should display an image when given a `src` prop', () => {
-		const children = 'Main content';
-		const subject = mount(
-			<ThumbnailItem
-				src="https://dummyimage.com/64/e048e0/0011ff"
-			>
+		render(
+			<ThumbnailItemBase src="https://dummyimage.com/64/e048e0/0011ff">
 				{children}
-			</ThumbnailItem>
+			</ThumbnailItemBase>
 		);
 
 		const expected = 'thumbnail';
-		const actual = subject.find(`.${css.thumbnail}`).at(1).prop('className');
+		const actual = screen.getAllByRole('img')[0];
 
-		expect(actual).toContain(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should apply selected style when `selected=true`', () => {
-		const children = 'Main content';
-		const subject = mount(
-			<ThumbnailItem
-				selected
-				src="https://dummyimage.com/64/e048e0/0011ff"
-			>
+		render(
+			<ThumbnailItemBase selected src="https://dummyimage.com/64/e048e0/0011ff">
 				{children}
-			</ThumbnailItem>
+			</ThumbnailItemBase>
 		);
 
 		const expected = 'selected';
-		const actual = subject.find(`.${css.selected}`).at(1).prop('className');
+		const actual = screen.getAllByRole('img')[0].parentElement.parentElement;
 
-		expect(actual).toContain(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should apply `styled` className when `type=styled`', () => {
-		const children = 'Main children';
-		const subject = mount(
-			<ThumbnailItem
-				src="https://dummyimage.com/64/e048e0/0011ff"
-				type="styled"
-			>
+		render(
+			<ThumbnailItemBase src="https://dummyimage.com/64/e048e0/0011ff" type="styled">
 				{children}
-			</ThumbnailItem>
+			</ThumbnailItemBase>
 		);
 
 		const expected = 'styled';
-		const actual = subject.find(`.${css.styled}`).at(1).prop('className');
+		const actual = screen.getAllByRole('img')[0].parentElement.parentElement;
 
-		expect(actual).toContain(expected);
+		expect(actual).toHaveClass(expected);
 	});
 });
