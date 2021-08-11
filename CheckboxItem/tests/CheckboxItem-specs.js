@@ -7,7 +7,7 @@ describe('CheckboxItem Specs', () => {
 	test('should support a custom icon', () => {
 		render(<CheckboxItemBase icon="star">Hello CheckboxItem</CheckboxItemBase>);
 
-		const expected = 983272;
+		const expected = 983272; // decimal converted charCode of Unicode 'star' character used by agate
 		const actual = screen.getAllByRole('checkbox')[1].textContent.codePointAt();
 
 		expect(actual).toBe(expected);

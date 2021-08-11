@@ -17,7 +17,7 @@ describe('RadioItem', () => {
 	test('should render correct icon when not selected', () => {
 		render(<RadioItem>Hello RadioItem</RadioItem>);
 
-		const expected = 983071;
+		const expected = 983071; // decimal converted charCode of Unicode 'circle' character used by agate
 		const actual = screen.getByRole('checkbox').firstElementChild.textContent.codePointAt();
 
 		expect(actual).toBe(expected);
@@ -26,7 +26,7 @@ describe('RadioItem', () => {
 	test('should render correct icon when selected', () => {
 		render(<RadioItem selected>Hello RadioItem</RadioItem>);
 
-		const expected = 983071;
+		const expected = 983071; // decimal converted charCode of Unicode 'circle' character used by agate
 		const actual = screen.getByRole('checkbox').firstElementChild.textContent.codePointAt();
 
 		expect(actual).toBe(expected);
