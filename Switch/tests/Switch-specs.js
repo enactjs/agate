@@ -1,38 +1,33 @@
-import {mount, shallow} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
 
 import Switch, {SwitchBase} from '../Switch';
 
 describe('Switch Specs', () => {
 	test('should have `selected` if selected prop is true', () => {
-		const subject = mount(
-			<Switch selected />
-		);
+		render(<Switch selected />);
+		const switchButton = screen.getByRole('button');
 
-		const expected = true;
-		const actual = subject.find('Switch').prop('selected');
+		const expected = 'selected';
 
-		expect(actual).toBe(expected);
+		expect(switchButton).toHaveClass(expected);
 	});
 
 	test('should have animated class by default', () => {
-		const subject = shallow(
-			<SwitchBase />
-		);
+		render(<SwitchBase />);
+		const switchButton = screen.getByRole('button');
 
-		const expected = true;
-		const actual = subject.hasClass('animated');
+		const expected = 'animated';
 
-		expect(actual).toBe(expected);
+		expect(switchButton).toHaveClass(expected);
 	});
 
 	test('should not have animated class when noAnimation prop is true', () => {
-		const subject = shallow(
-			<SwitchBase noAnimation />
-		);
+		render(<SwitchBase noAnimation />);
+		const switchButton = screen.getByRole('button');
 
-		const expected = false;
-		const actual = subject.hasClass('animated');
+		const expected = 'animated';
 
-		expect(actual).toBe(expected);
+		expect(switchButton).not.toHaveClass(expected);
 	});
 });

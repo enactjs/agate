@@ -1,56 +1,52 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import {RangePicker, RangePickerBase} from '../RangePicker';
 
-import css from '../../internal/Picker/Picker.module.less';
-
-const decrement = (picker) => picker.find(`.${css.itemDecrement}`).first().simulate('click');
-const increment = (picker) => picker.find(`.${css.itemIncrement}`).first().simulate('click');
+const decrement = (value) => userEvent.click(screen.getByLabelText(`${value} decrease the value`));
+const increment = (value) => userEvent.click(screen.getByLabelText(`${value} increase the value`));
 
 describe('RangePicker Specs', () => {
 	test('should render a single child with the current value', () => {
-		const picker = mount(
-			<RangePicker min={-10} max={20} value={10} />
-		);
+		render(<RangePicker max={20} min={-10} value={10} />);
+		const pickerValue =	screen.getByRole('spinbutton');
 
 		const expected = '10';
-		const actual = picker.find('.active').first().text();
 
-		expect(actual).toBe(expected);
+		expect(pickerValue).toHaveTextContent(expected);
 	});
 
 	test('should increase by step amount on increment press', () => {
-		const picker = mount(
-			<RangePicker defaultValue={10} min={0} max={100} noAnimation step={1} />
-		);
+		render(<RangePicker defaultValue={10} max={100} min={0} noAnimation step={1} />);
 
-		increment(picker);
+		increment(10);
 
 		const expected = '11';
-		const actual = picker.find('.active').first().text();
+		const actual =	screen.getByRole('spinbutton');
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveTextContent(expected);
 	});
 
 	test('should decrease by step amount on decrement press', () => {
-		const picker = mount(
-			<RangePicker defaultValue={10} min={0} max={100} noAnimation step={1} />
-		);
+		render(<RangePicker defaultValue={10} max={100} min={0} noAnimation step={1} />);
 
-		decrement(picker);
+		decrement(10);
 
 		const expected = '9';
-		const actual = picker.find('.active').first().text();
+		const actual =	screen.getByRole('spinbutton');
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveTextContent(expected);
 	});
 
 	test('should be disabled when limited to a single value', () => {
-		const picker = mount(
-			<RangePickerBase min={0} max={0} value={0} />
-		);
+		render(<RangePickerBase max={0} min={0} value={0} />);
+		const pickerPreviousValue = screen.getByLabelText('0 decrease the value');
+		const pickerNextValue = screen.getByLabelText('0 increase the value');
 
-		const actual = picker.find('Picker').last().prop('disabled');
-		expect(actual).toBe(true);
+		const expectedAttribute = 'disabled';
+
+		expect(pickerPreviousValue).toHaveAttribute(expectedAttribute);
+		expect(pickerNextValue).toHaveAttribute(expectedAttribute);
 	});
 });
