@@ -48,10 +48,7 @@ describe('Picker Specs', () => {
 
 		increment(0);
 
-		const expected = 0;
-		const actual = handleChange.mock.calls.length;
-
-		expect(actual).toBe(expected);
+		expect(handleChange).not.toHaveBeenCalled();
 	});
 
 	test('should increment by `step` value', () => {
