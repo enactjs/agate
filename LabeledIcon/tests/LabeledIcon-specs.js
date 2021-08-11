@@ -43,7 +43,7 @@ describe('LabeledIcon Specs', () => {
 	test('should support custom icon', () => {
 		render(<LabeledIcon icon="0x0F0014">Hello LabeledIcon</LabeledIcon>);
 
-		const expected = 983060; // // decimal converted charCode of character
+		const expected = 983060; // decimal converted charCode of 'happyface' character
 		const actual = screen.getByText('Hello LabeledIcon').previousElementSibling.children[0].textContent.codePointAt();
 
 		expect(actual).toBe(expected);
