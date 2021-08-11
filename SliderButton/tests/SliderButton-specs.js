@@ -67,10 +67,7 @@ describe('SliderButton Specs', () => {
 		activate(sliderButton);
 		rightKeyDown(sliderButton);
 
-		const expected = 0;
-		const actual = handleChange.mock.calls.length;
-
-		expect(actual).toBe(expected);
+		expect(handleChange).not.toHaveBeenCalled();
 	});
 
 	test('should change value on arrow right key press', () => {
