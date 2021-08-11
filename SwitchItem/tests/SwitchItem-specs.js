@@ -1,43 +1,33 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
+
 import {SwitchItemBase} from '../SwitchItem';
 
 describe('SwitchItem specs', () => {
 	test('should contain a Switch', () => {
-		const subject = mount(
-			<SwitchItemBase>
-				SwitchItem
-			</SwitchItemBase>
-		);
+		render(<SwitchItemBase>SwitchItem</SwitchItemBase>);
+		const switchButton = screen.getAllByRole('button')[1];
 
-		const expected = 1;
-		const actual = subject.find('Switch').length;
+		const expected = 'switch';
 
-		expect(actual).toBe(expected);
+		expect(switchButton).toHaveClass(expected);
 	});
 
 	test('should pass selected to Switch element', () => {
-		const subject = mount(
-			<SwitchItemBase selected>
-				SwitchItem
-			</SwitchItemBase>
-		);
+		render(<SwitchItemBase selected>SwitchItem</SwitchItemBase>);
+		const switchButton = screen.getAllByRole('button')[1];
 
-		const expected = true;
-		const actual = subject.find('Switch').prop('selected');
+		const expected = 'selected';
 
-		expect(actual).toBe(expected);
+		expect(switchButton).toHaveClass(expected);
 	});
 
 	test('should apply disabled when `disabled` prop is true', () => {
-		const subject = mount(
-			<SwitchItemBase disabled>
-				SwitchItem
-			</SwitchItemBase>
-		);
+		render(<SwitchItemBase disabled>SwitchItem</SwitchItemBase>);
+		const switchButton = screen.getAllByRole('button')[0];
 
-		const expected = true;
-		const actual = subject.prop('disabled');
+		const expected = 'disabled';
 
-		expect(actual).toBe(expected);
+		expect(switchButton).toHaveAttribute(expected);
 	});
 });
