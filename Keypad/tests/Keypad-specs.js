@@ -43,10 +43,7 @@ describe('Keypad Specs', () => {
 			userEvent.click(screen.getByLabelText('5'));
 			userEvent.click(screen.getByLabelText('7'));
 
-			const expected = 0;
-			const actual = handleChange.mock.calls.length;
-
-			expect(actual).toBe(expected);
+			expect(handleChange).not.toHaveBeenCalled();
 		});
 	});
 });

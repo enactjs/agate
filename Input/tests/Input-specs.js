@@ -48,7 +48,7 @@ describe('Input Specs', () => {
 	test('should support iconAfter', () => {
 		render(<Input iconAfter="0x0F0014" />);
 
-		const expected = 983060; // // decimal converted charCode of `happyface` character
+		const expected = 983060; // decimal converted charCode of `happyface` character
 		const actual = screen.getByLabelText('Input field').children[1].textContent.codePointAt();
 
 		expect(actual).toBe(expected);
@@ -57,7 +57,7 @@ describe('Input Specs', () => {
 	test('should support iconBefore', () => {
 		render(<Input iconBefore="0x0F0014" />);
 
-		const expected = 983060; // // decimal converted charCode of `happyface` character
+		const expected = 983060; // decimal converted charCode of `happyface` character
 		const actual = screen.getByLabelText('Input field').children[0].textContent.codePointAt();
 
 		expect(actual).toBe(expected);
@@ -340,12 +340,12 @@ describe('Input Specs', () => {
 
 		const expectedValue = '';
 
+		// waitFor is used here to give input some time to call onChange
 		await waitFor(() => {
 			const actual = handleChange.mock.calls[0][0].value;
 
 			expect(actual).toBe(expectedValue);
 		});
-		// waitFor is used here to give input some time to call onChange
 	});
 
 	test('should not call onChange when clearButton is disabled', async () => {
@@ -358,11 +358,11 @@ describe('Input Specs', () => {
 
 		const expectedValue = 0;
 
+		// waitFor is used here to give input some time to call onChange
 		await waitFor(() => {
 			const actual = handleChange.mock.calls.length;
 
 			expect(actual).toBe(expectedValue);
 		});
-		// waitFor is used here to give input some time to call onChange
 	});
 });
