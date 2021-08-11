@@ -196,7 +196,7 @@ describe('Slider', () => {
 	// these tests validate behavior relating to `value` defaulting to `min`
 	test('should not emit onChange when decrementing at the lower bound when value is unset', () => {
 		const handleChange = jest.fn();
-		render(<Slider active min={0} max={10} onChange={handleChange} />);
+		render(<Slider active max={10} min={0} onChange={handleChange} />);
 		const slider = screen.getByRole('slider');
 
 		activate(slider);
@@ -207,7 +207,7 @@ describe('Slider', () => {
 
 	test('should increment from the lower bound when value is unset', () => {
 		const handleChange = jest.fn();
-		render(<Slider active min={0} max={10} onChange={handleChange} />);
+		render(<Slider active max={10} min={0} onChange={handleChange} />);
 		const slider = screen.getByRole('slider');
 
 		activate(slider);
@@ -234,7 +234,7 @@ describe('Slider', () => {
 
 	test('should call onSpotlightLeft on vertical slider at any value', () => {
 		const handleSpotlight = jest.fn();
-		render(<Slider defaultValue={50} orientation="vertical" onSpotlightLeft={handleSpotlight} />);
+		render(<Slider defaultValue={50} onSpotlightLeft={handleSpotlight} orientation="vertical" />);
 		const slider = screen.getByRole('slider');
 
 		focus(slider);
@@ -258,7 +258,7 @@ describe('Slider', () => {
 
 	test('should call onSpotlightDown on vertical slider at min value', () => {
 		const handleSpotlight = jest.fn();
-		render(<Slider defaultValue={0} orientation="vertical" onSpotlightDown={handleSpotlight} />);
+		render(<Slider defaultValue={0} onSpotlightDown={handleSpotlight} orientation="vertical" />);
 		const slider = screen.getByRole('slider');
 
 		focus(slider);
@@ -284,7 +284,7 @@ describe('Slider', () => {
 
 	test('should not call onSpotlightDown on vertical slider at greater than min value', () => {
 		const handleSpotlight = jest.fn();
-		render(<Slider defaultValue={1} orientation="vertical" onSpotlightDown={handleSpotlight} />);
+		render(<Slider defaultValue={1} onSpotlightDown={handleSpotlight} orientation="vertical" />);
 		const slider = screen.getByRole('slider');
 
 		focus(slider);
@@ -308,7 +308,7 @@ describe('Slider', () => {
 
 	test('should call onSpotlightRight on vertical slider at any value', () => {
 		const handleSpotlight = jest.fn();
-		render(<Slider defaultValue={50} orientation="vertical" onSpotlightRight={handleSpotlight} />);
+		render(<Slider defaultValue={50} onSpotlightRight={handleSpotlight} orientation="vertical" />);
 		const slider = screen.getByRole('slider');
 
 		focus(slider);
@@ -332,7 +332,7 @@ describe('Slider', () => {
 
 	test('should call onSpotlightUp on vertical slider at max value', () => {
 		const handleSpotlight = jest.fn();
-		render(<Slider defaultValue={100} max={100} orientation="vertical" onSpotlightUp={handleSpotlight} />);
+		render(<Slider defaultValue={100} max={100} onSpotlightUp={handleSpotlight} orientation="vertical" />);
 		const slider = screen.getByRole('slider');
 
 		focus(slider);
@@ -358,7 +358,7 @@ describe('Slider', () => {
 
 	test('should not call onSpotlightUp on vertical slider at less than max value', () => {
 		const handleSpotlight = jest.fn();
-		render(<Slider defaultValue={99} orientation="vertical" onSpotlightUp={handleSpotlight} />);
+		render(<Slider defaultValue={99} onSpotlightUp={handleSpotlight} orientation="vertical" />);
 		const slider = screen.getByRole('slider');
 
 		focus(slider);

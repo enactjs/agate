@@ -100,8 +100,7 @@ describe('IncrementSlider Specs', () => {
 		expect(actual).toHaveTextContent(expected);
 	});
 
-	test(
-		'should set decrementButton "aria-label" to value and hint string',
+	test('should set decrementButton "aria-label" to value and hint string',
 		() => {
 			render(<IncrementSlider value={10} />);
 
@@ -109,11 +108,9 @@ describe('IncrementSlider Specs', () => {
 			const actual = screen.getAllByRole('button')[0];
 
 			expect(actual).toHaveAttribute('aria-label', expected);
-		}
-	);
+		});
 
-	test(
-		'should set decrementButton "aria-label" to decrementAriaLabel',
+	test('should set decrementButton "aria-label" to decrementAriaLabel',
 		() => {
 			const label = 'decrement aria label';
 			render(<IncrementSlider decrementAriaLabel={label} value={10} />);
@@ -122,57 +119,44 @@ describe('IncrementSlider Specs', () => {
 			const actual = screen.getAllByRole('button')[0];
 
 			expect(actual).toHaveAttribute('aria-label', expected);
-		}
-	);
+		});
 
-	test(
-		'should set decrementButton "aria-label" when decrementButton is disabled',
-		() => {
-			render(<IncrementSlider disabled value={10} />);
+	test('should set decrementButton "aria-label" when decrementButton is disabled', () => {
+		render(<IncrementSlider disabled value={10} />);
 
-			const expected = '10 press button to decrease the value';
-			const actual = screen.getAllByRole('button')[0];
+		const expected = '10 press button to decrease the value';
+		const actual = screen.getAllByRole('button')[0];
 
-			expect(actual).toHaveAttribute('aria-label', expected);
-		}
-	);
+		expect(actual).toHaveAttribute('aria-label', expected);
+	});
 
-	test(
-		'should set incrementButton "aria-label" to value and hint string',
-		() => {
-			render(<IncrementSlider value={10} />);
+	test('should set incrementButton "aria-label" to value and hint string', () => {
+		render(<IncrementSlider value={10} />);
 
-			const expected = '10 press button to increase the value';
-			const actual = screen.getAllByRole('button')[1];
+		const expected = '10 press button to increase the value';
+		const actual = screen.getAllByRole('button')[1];
 
-			expect(actual).toHaveAttribute('aria-label', expected);
-		}
-	);
+		expect(actual).toHaveAttribute('aria-label', expected);
+	});
 
-	test(
-		'should set incrementButton "aria-label" to incrementAriaLabel',
-		() => {
-			const label = 'increment aria label';
-			render(<IncrementSlider incrementAriaLabel={label} value={10} />);
+	test('should set incrementButton "aria-label" to incrementAriaLabel', () => {
+		const label = 'increment aria label';
+		render(<IncrementSlider incrementAriaLabel={label} value={10} />);
 
-			const expected = `10 ${label}`;
-			const actual = screen.getAllByRole('button')[1];
+		const expected = `10 ${label}`;
+		const actual = screen.getAllByRole('button')[1];
 
-			expect(actual).toHaveAttribute('aria-label', expected);
-		}
-	);
+		expect(actual).toHaveAttribute('aria-label', expected);
+	});
 
-	test(
-		'should set incrementButton "aria-label" when incrementButton is disabled',
-		() => {
-			render(<IncrementSlider disabled value={10} />);
+	test('should set incrementButton "aria-label" when incrementButton is disabled', () => {
+		render(<IncrementSlider disabled value={10} />);
 
-			const expected = '10 press button to increase the value';
-			const actual = screen.getAllByRole('button')[1];
+		const expected = '10 press button to increase the value';
+		const actual = screen.getAllByRole('button')[1];
 
-			expect(actual).toHaveAttribute('aria-label', expected);
-		}
-	);
+		expect(actual).toHaveAttribute('aria-label', expected);
+	});
 
 	test('should set the tooltip to visible when focused', () => {
 		render(<IncrementSlider tooltip />);
