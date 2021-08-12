@@ -120,11 +120,38 @@ describe('Popup specs', () => {
 				</FloatingLayerController>
 			);
 
+			// Checking if position changed from `top` to `center`
 			const secondExpected = 'center';
 			const popup = screen.getByRole('alert');
 
 			expect(popup).toHaveClass(secondExpected);
 		});
+	});
+
+	test('should have `center` class when position prop is set to `center` (default)', () => {
+		render(
+			<FloatingLayerController>
+				<Popup open position="center" />
+			</FloatingLayerController>
+		);
+
+		const expected = 'center';
+		const popup = screen.getByRole('alert');
+
+		expect(popup).toHaveClass(expected);
+	});
+
+	test('should have `top` class when position prop is set to `top`', () => {
+		render(
+			<FloatingLayerController>
+				<Popup open position="top" />
+			</FloatingLayerController>
+		);
+
+		const expected = 'top';
+		const popup = screen.getByRole('alert');
+
+		expect(popup).toHaveClass(expected);
 	});
 
 	test('should have `bottom` class when position prop is set to `bottom`', () => {

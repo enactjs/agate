@@ -65,7 +65,7 @@ describe('PopupMenu specs', () => {
 	test('should apply \'ease-in-out\' class when noAnimation is false', () => {
 		render(
 			<FloatingLayerController>
-				<PopupMenu data-testid="popupMenu" open noAnimation={false} />
+				<PopupMenu data-testid="popupMenu" noAnimation={false} open />
 			</FloatingLayerController>
 		);
 
