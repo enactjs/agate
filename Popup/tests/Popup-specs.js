@@ -109,10 +109,10 @@ describe('Popup specs', () => {
 				</FloatingLayerController>
 			);
 
-			const firstExpected = 'top';
+			const expected = 'top';
 			const initialPopup = screen.getByRole('alert');
 
-			expect(initialPopup).toHaveClass(firstExpected);
+			expect(initialPopup).toHaveClass(expected);
 
 			rerender(
 				<FloatingLayerController>
@@ -120,11 +120,9 @@ describe('Popup specs', () => {
 				</FloatingLayerController>
 			);
 
-			// Checking if position changed from `top` to `center`
-			const secondExpected = 'center';
 			const popup = screen.getByRole('alert');
 
-			expect(popup).toHaveClass(secondExpected);
+			expect(popup).not.toHaveClass(expected);
 		});
 	});
 
