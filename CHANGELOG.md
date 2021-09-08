@@ -7,6 +7,9 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/ContextualPopupDecorator` layout for Carbon, Cobalt, Copper, Electro, Titanium skins
+- `agate/IncrementSlider` style to have a proper layout for every skin
+- `agate/Panel` and `agate/TabGroup` padding for RTL locales
+- `agate/PopupMenu` title to marquee for long text
 - `agate/TabGroup` button padding for Cobalt and Copper skins
 - `agate/VirtualList` 5-way navigation between scroll buttons when `focusableScrollbar`
 
