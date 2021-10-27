@@ -234,13 +234,15 @@ const StorybookDecorator = (story, config) => {
 		}
 	}
 
+	const componentName = config.kind.replace(/^([^/]+)\//, '');
+
 	// NOTE: 'config' object is not extensible
 	const hasInfoText = config.parameters && config.parameters.info && config.parameters.info.text;
 	const hasProps = config.parameters && config.parameters.props;
 
 	return (
 		<Theme
-			title={`${config.kind}`.replace(/\//g, ' ').trim()}
+			title={componentName === config.name ? `${config.kind}`.replace(/\//g, ' ').trim() : `${componentName} ${config.name}`}
 			description={hasInfoText ? config.parameters.info.text : null}
 			locale={globals.locale}
 			{...skinKnobs}

@@ -17,6 +17,8 @@ export const _SwitchItem = () => (
 		<SwitchItem
 			disabled={boolean('disabled', Config)}
 			icon={select('icon', ['', ...iconList], Config, 'music')}
+			inline={boolean('inline', Config)}
+			size={select('size', ['small', 'large'], Config, 'large')}
 			switchOffLabel={text('switchOffLabel', Config)}
 			switchOnLabel={text('switchOnLabel', Config)}
 		>

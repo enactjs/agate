@@ -155,6 +155,7 @@ const DropdownListBase = kind({
 				{...rest}
 				cbScrollTo={scrollTo}
 				dataSize={dataSize}
+				focusableScrollbar
 				itemRenderer={itemRenderer}
 				itemSize={itemSize}
 			/>
