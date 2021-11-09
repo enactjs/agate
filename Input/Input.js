@@ -288,7 +288,16 @@ const InputBase = kind({
 		},
 		className: ({focused, iconBefore, iconAfter, invalid, size, styler, value}) => styler.append({emptyValue: !value, focused, invalid, hasIconBefore: iconBefore, hasIconAfter: iconAfter}, size),
 		dir: ({value, placeholder}) => isRtlText(value || placeholder) ? 'rtl' : 'ltr',
-		invalidTooltip: ({css, invalid, invalidMessage = $L('Please enter a valid value.')}) => {
+		inputMode: ({type}) => {
+			// eslint-disable-next-line
+			const samsung = navigator.userAgent.includes('SM-');
+			return type === 'number' && samsung ? 'numeric' : '';
+		},
+		inputType: ({type}) => {
+			// eslint-disable-next-line
+			const samsung = navigator.userAgent.includes('SM-');
+			return type === 'number' && samsung ? 'text' : type;
+		},invalidTooltip: ({css, invalid, invalidMessage = $L('Please enter a valid value.')}) => {
 			if (invalid && invalidMessage) {
 				return (
 					<Tooltip css={css} relative>
@@ -301,7 +310,7 @@ const InputBase = kind({
 		value: ({value}) => typeof value === 'number' ? value : (value || '')
 	},
 
-	render: ({clearButton, clearIcon, css, dir, disabled, handleClear, iconAfter, iconBefore, invalidTooltip, onChange, placeholder, size, type, value, ...rest}) => {
+	render: ({clearButton, clearIcon, css, dir, disabled, handleClear, iconAfter, iconBefore, inputMode, inputType, invalidTooltip, onChange, placeholder, size, value, ...rest}) => {
 		const inputProps = extractInputProps(rest);
 		delete rest.dismissOnEnter;
 		delete rest.focused;
@@ -309,6 +318,7 @@ const InputBase = kind({
 		delete rest.invalidMessage;
 		delete rest.onBeforeChange;
 		delete rest.rtl;
+		delete rest.type;
 
 		return (
 			<div {...rest} aria-disabled={disabled} disabled={disabled}>
@@ -321,11 +331,12 @@ const InputBase = kind({
 					className={css.input}
 					dir={dir}
 					disabled={disabled}
+					inputMode={inputMode}
 					onChange={onChange}
 					placeholder={placeholder}
 					size={size}
 					tabIndex={-1}
-					type={type}
+					type={inputType}
 					value={value}
 				/>
 				{clearButton ? (
