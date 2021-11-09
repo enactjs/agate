@@ -297,7 +297,8 @@ const InputBase = kind({
 			// eslint-disable-next-line
 			const samsung = navigator.userAgent.includes('SM-');
 			return type === 'number' && samsung ? 'text' : type;
-		},invalidTooltip: ({css, invalid, invalidMessage = $L('Please enter a valid value.')}) => {
+		},
+		invalidTooltip: ({css, invalid, invalidMessage = $L('Please enter a valid value.')}) => {
 			if (invalid && invalidMessage) {
 				return (
 					<Tooltip css={css} relative>
