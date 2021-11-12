@@ -5,6 +5,7 @@ import ri from '@enact/ui/resolution';
 import {ScrollerBasic as UiScrollerBasic} from '@enact/ui/Scroller';
 import BodyText from '@enact/agate/BodyText';
 import Scroller from '@enact/agate/Scroller';
+import Input from "@enact/agate/Input";
 
 const prop = {
 	direction: ['both', 'horizontal', 'vertical'],
@@ -32,6 +33,7 @@ export const _Scroller = () => (
 		spotlightDisabled={boolean('spotlightDisabled', ScrollerConfig, false)}
 		verticalScrollbar={select('verticalScrollbar', prop.scrollbarOption, ScrollerConfig)}
 	>
+		<Input type="number" />
 		<div
 			style={{
 				height: ri.scaleToRem(2004),
