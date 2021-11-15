@@ -33,7 +33,6 @@ export const _Scroller = () => (
 		spotlightDisabled={boolean('spotlightDisabled', ScrollerConfig, false)}
 		verticalScrollbar={select('verticalScrollbar', prop.scrollbarOption, ScrollerConfig)}
 	>
-		<Input type="number" />
 		<div
 			style={{
 				height: ri.scaleToRem(2004),
