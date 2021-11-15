@@ -198,7 +198,7 @@ const useThemeScroll = (props, instances) => {
 	function handleResizeWindow () {
 		const focusedItem = Spotlight.getCurrent();
 
-		if (focusedItem && !platform.androidChrome && focusedItem.nodeName === 'INPUT') {
+		if (focusedItem && focusedItem.nodeName !== 'INPUT') {
 			focusedItem.blur();
 		}
 	}
