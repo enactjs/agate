@@ -4,6 +4,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Changed
+
+- `agate/useScroll` handleResizeWindow method to not blur the focused item if its type is input
+
 ### Fixed
 
 - `agate/ContextualPopupDecorator` layout for Carbon, Cobalt, Copper, Electro, Titanium skins
