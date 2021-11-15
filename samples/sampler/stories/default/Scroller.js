@@ -5,7 +5,6 @@ import ri from '@enact/ui/resolution';
 import {ScrollerBasic as UiScrollerBasic} from '@enact/ui/Scroller';
 import BodyText from '@enact/agate/BodyText';
 import Scroller from '@enact/agate/Scroller';
-import Input from "@enact/agate/Input";
 
 const prop = {
 	direction: ['both', 'horizontal', 'vertical'],
