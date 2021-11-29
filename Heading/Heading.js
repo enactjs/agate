@@ -21,8 +21,6 @@ import Pure from '@enact/ui/internal/Pure';
 import {Row, Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import defaultProps from 'recompose/defaultProps';
-import setPropTypes from 'recompose/setPropTypes';
 
 import Button from '../Button';
 import {MarqueeDecorator} from '../Marquee';
@@ -164,12 +162,6 @@ const HeadingBase = kind({
  * @public
  */
 const HeadingDecorator = compose(
-	setPropTypes({
-		marqueeOn: PropTypes.oneOf(['hover', 'render'])
-	}),
-	defaultProps({
-		marqueeOn: 'render'
-	}),
 	Pure,
 	MarqueeDecorator,
 	Skinnable({prop: 'skin'})
@@ -214,6 +206,10 @@ const Heading = HeadingDecorator(HeadingBase);
  * @see {@link agate/Marquee.Marquee}
  * @public
  */
+
+ Heading.defaultProps = {
+	marqueeOn: 'render'
+};
 
 export default Heading;
 export {

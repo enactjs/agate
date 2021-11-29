@@ -1,8 +1,8 @@
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
-import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
 
 import Icon from '../Icon';
+import {onlyUpdateForProps} from '../internal/util';
 
 import css from './Input.module.less';
 
@@ -76,7 +76,7 @@ const InputDecoratorIconBase = kind({
  * @ui
  * @private
  */
-const InputDecoratorIcon = onlyUpdateForKeys(['children', 'className', 'size'])(InputDecoratorIconBase);
+const InputDecoratorIcon = onlyUpdateForProps(InputDecoratorIconBase, ['children','className', 'size']);
 
 export default InputDecoratorIcon;
 export {
