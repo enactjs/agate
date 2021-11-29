@@ -76,7 +76,7 @@ const InputDecoratorIconBase = kind({
  * @ui
  * @private
  */
-const InputDecoratorIcon = onlyUpdateForProps(InputDecoratorIconBase, ['children','className', 'size']);
+const InputDecoratorIcon = onlyUpdateForProps(InputDecoratorIconBase, ['children', 'className', 'size']);
 
 export default InputDecoratorIcon;
 export {

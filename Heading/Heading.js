@@ -207,7 +207,7 @@ const Heading = HeadingDecorator(HeadingBase);
  * @public
  */
 
- Heading.defaultProps = {
+Heading.defaultProps = {
 	marqueeOn: 'render'
 };
 

@@ -365,18 +365,16 @@ const Draggable = (Wrapped) => kind({
  * @private
  */
 const ResponsiveBox = (Wrapped) => {
-	const Decorator = (props) => {
-		return (
-			<DraggableContainerContext.Consumer>
-				{(ctx) => {
-					const containerShape = ctx ? ctx.containerShape : defaultContainerShape;
-					return (
-						<Wrapped containerShape={containerShape} {...props} />
-					);
-				}}
-			</DraggableContainerContext.Consumer>
-		);
-	}
+	const Decorator = (props) => (
+		<DraggableContainerContext.Consumer>
+			{(ctx) => {
+				const containerShape = ctx ? ctx.containerShape : defaultContainerShape;
+				return (
+					<Wrapped containerShape={containerShape} {...props} />
+				);
+			}}
+		</DraggableContainerContext.Consumer>
+	);
 	Decorator.displayName = 'ResponsiveBox';
 	return Decorator;
 };
