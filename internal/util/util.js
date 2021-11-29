@@ -38,7 +38,7 @@ const compareChildren = (a, b) => {
 *  @param   {Array}  propKeys   Prop keys to compare
  *
  * @returns {any}               Conditionally memoized component
- * @memberof sandstone/internal/util
+ * @memberof agate/internal/util
  * @private
  */
 const onlyUpdateForProps = (wrapped, propKeys) => memo(wrapped, (prevProps, nextProps) => {
