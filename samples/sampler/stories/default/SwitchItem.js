@@ -1,35 +1,35 @@
-import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-import SwitchItem from '@enact/agate/SwitchItem';
+// import {mergeComponentMetadata} from '@enact/storybook-utils';
+// import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
+// import SwitchItem from '@enact/agate/SwitchItem';
 
-import {iconList} from './util/icons';
+// import {iconList} from './util/icons';
 
-const Config = mergeComponentMetadata('SwitchItem', SwitchItem);
-SwitchItem.displayName = 'SwitchItem';
+// const Config = mergeComponentMetadata('SwitchItem', SwitchItem);
+// SwitchItem.displayName = 'SwitchItem';
 
-export default {
-	title: 'Agate/SwitchItem',
-	component: 'SwitchItem'
-};
+// export default {
+// 	title: 'Agate/SwitchItem',
+// 	component: 'SwitchItem'
+// };
 
-export const _SwitchItem = () => (
-	<div>
-		<SwitchItem
-			disabled={boolean('disabled', Config)}
-			icon={select('icon', ['', ...iconList], Config, 'music')}
-			inline={boolean('inline', Config)}
-			size={select('size', ['small', 'large'], Config, 'large')}
-			switchOffLabel={text('switchOffLabel', Config)}
-			switchOnLabel={text('switchOnLabel', Config)}
-		>
-			{text('children', Config, 'Sound')}
-		</SwitchItem>
-	</div>
-);
+// export const _SwitchItem = () => (
+// 	<div>
+// 		<SwitchItem
+// 			disabled={boolean('disabled', Config)}
+// 			icon={select('icon', ['', ...iconList], Config, 'music')}
+// 			inline={boolean('inline', Config)}
+// 			size={select('size', ['small', 'large'], Config, 'large')}
+// 			switchOffLabel={text('switchOffLabel', Config)}
+// 			switchOnLabel={text('switchOnLabel', Config)}
+// 		>
+// 			{text('children', Config, 'Sound')}
+// 		</SwitchItem>
+// 	</div>
+// );
 
-_SwitchItem.storyName = 'SwitchItem';
-_SwitchItem.parameters = {
-	info: {
-		text: 'The basic SwitchItem'
-	}
-};
+// _SwitchItem.storyName = 'SwitchItem';
+// _SwitchItem.parameters = {
+// 	info: {
+// 		text: 'The basic SwitchItem'
+// 	}
+// };

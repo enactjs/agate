@@ -1,11 +1,10 @@
 // Agate Environment
 
 import kind from '@enact/core/kind';
-import {cap} from '@enact/core/util';
+// import {cap} from '@enact/core/util';
 import PropTypes from 'prop-types';
-import {color} from '@storybook/addon-knobs';
+// import {color} from '@storybook/addon-knobs';
 import {Row, Column, Cell} from '@enact/ui/Layout';
-import {boolean, select} from '@enact/storybook-utils/addons/knobs';
 
 import Heading from '@enact/agate/Heading';
 import {Panels, Panel} from '@enact/agate/Panels';
@@ -15,7 +14,6 @@ import ThemeDecorator from '@enact/agate/ThemeDecorator';
 
 import css from './ThemeEnvironment.module.less';
 
-const globalGroup = 'Global Knobs';
 
 const reloadPage = () => {
 	const {protocol, host, pathname} = window.parent.location;
@@ -102,141 +100,142 @@ const PanelsBase = kind({
 	}
 });
 
-const FullscreenBase = kind({
-	name: 'ThemeEnvironment',
+// const FullscreenBase = kind({
+// 	name: 'ThemeEnvironment',
 
-	render: (props) => (
-		<div {...props} />
-	)
-});
+// 	render: (props) => (
+// 		<div {...props} />
+// 	)
+// });
 
 const Theme = ThemeDecorator({overlay: false}, PanelsBase);
-const ThemeFullscreen = ThemeDecorator({overlay: false}, FullscreenBase);
+// const ThemeFullscreen = ThemeDecorator({overlay: false}, FullscreenBase);
 
-const locales = {
-	'local': '',
-	'en-US - US English': 'en-US',
-	'ko-KR - Korean': 'ko-KR',
-	'es-ES - Spanish, with alternate weekends': 'es-ES',
-	'am-ET - Amharic, 5 meridiems': 'am-ET',
-	'th-TH - Thai, with tall characters': 'th-TH',
-	'ar-SA - Arabic, RTL and standard font': 'ar-SA',
-	'ur-PK - Urdu, RTL and custom Urdu font': 'ur-PK',
-	'zh-Hans-HK - Simplified Chinese, custom Hans font': 'zh-Hans-HK',
-	'zh-Hant-HK - Traditional Chinese, custom Hant font': 'zh-Hant-HK',
-	'vi-VN - Vietnamese, Special non-latin font handling': 'vi-VN',
-	'ta-IN - Tamil, custom Indian font': 'ta-IN',
-	'ja-JP - Japanese, custom Japanese font': 'ja-JP',
-	'en-JP - English, custom Japanese font': 'en-JP',
-	'si-LK - Sinhala, external font family with different line metrics': 'si-LK'
-};
+// const locales = {
+// 	'local': '',
+// 	'en-US - US English': 'en-US',
+// 	'ko-KR - Korean': 'ko-KR',
+// 	'es-ES - Spanish, with alternate weekends': 'es-ES',
+// 	'am-ET - Amharic, 5 meridiems': 'am-ET',
+// 	'th-TH - Thai, with tall characters': 'th-TH',
+// 	'ar-SA - Arabic, RTL and standard font': 'ar-SA',
+// 	'ur-PK - Urdu, RTL and custom Urdu font': 'ur-PK',
+// 	'zh-Hans-HK - Simplified Chinese, custom Hans font': 'zh-Hans-HK',
+// 	'zh-Hant-HK - Traditional Chinese, custom Hant font': 'zh-Hant-HK',
+// 	'vi-VN - Vietnamese, Special non-latin font handling': 'vi-VN',
+// 	'ta-IN - Tamil, custom Indian font': 'ta-IN',
+// 	'ja-JP - Japanese, custom Japanese font': 'ja-JP',
+// 	'en-JP - English, custom Japanese font': 'en-JP',
+// 	'si-LK - Sinhala, external font family with different line metrics': 'si-LK'
+// };
 
-const skins = {
-	'Carbon': 'carbon',
-	'Cobalt': 'cobalt',
-	'Copper': 'copper',
-	'Electro': 'electro',
-	'Gallium': 'gallium',
-	'Titanium': 'titanium'
-};
+// const skins = {
+// 	'Carbon': 'carbon',
+// 	'Cobalt': 'cobalt',
+// 	'Copper': 'copper',
+// 	'Electro': 'electro',
+// 	'Gallium': 'gallium',
+// 	'Titanium': 'titanium'
+// };
 
-if (process.env.SKINS) {
-	JSON.parse(process.env.SKINS).forEach(skin => {
-		skins[cap(skin)] = skin;
-	});
-}
+// if (process.env.SKINS) {
+// 	JSON.parse(process.env.SKINS).forEach(skin => {
+// 		skins[cap(skin)] = skin;
+// 	});
+// }
 
 // NOTE: Knobs cannot set locale in fullscreen mode. This allows any knob to be taken from the URL.
-const getPropFromURL = (propName, fallbackValue) => {
-	propName = encodeURI(propName);
-	const locationParams = window.parent.location.search;
+// const getPropFromURL = (propName, fallbackValue) => {
+// 	propName = encodeURI(propName);
+// 	const locationParams = window.parent.location.search;
 
-	const startIndex = locationParams.indexOf('knob-' + propName);
-	if (startIndex > -1) {
-		const keyIndex = locationParams.indexOf('=', startIndex);
+// 	const startIndex = locationParams.indexOf('knob-' + propName);
+// 	if (startIndex > -1) {
+// 		const keyIndex = locationParams.indexOf('=', startIndex);
 
-		if (locationParams.indexOf('&', keyIndex) > -1) {
-			const valueIndex = locationParams.indexOf('&', keyIndex);
-			return decodeURIComponent(locationParams.substring(keyIndex + 1, valueIndex));
-		} else {
-			return decodeURIComponent(locationParams.substring(keyIndex + 1, locationParams.length));
-		}
-	}
+// 		if (locationParams.indexOf('&', keyIndex) > -1) {
+// 			const valueIndex = locationParams.indexOf('&', keyIndex);
+// 			return decodeURIComponent(locationParams.substring(keyIndex + 1, valueIndex));
+// 		} else {
+// 			return decodeURIComponent(locationParams.substring(keyIndex + 1, locationParams.length));
+// 		}
+// 	}
 
-	return fallbackValue;
-};
+// 	return fallbackValue;
+// };
 
 const StorybookDecorator = (story, config) => {
 	const sample = story();
 
 	const {globals} = config;
+	console.log(config)
 
-	const Config = {
-		defaultProps: {
-			locale: 'en-US',
-			'show all skins': false,
-			skin: 'gallium',
-			'default skin styles': false,
-			'night mode': false
-		},
-		groupId: globalGroup
-	};
+	// const Config = {
+	// 	defaultProps: {
+	// 		locale: 'en-US',
+	// 		'show all skins': false,
+	// 		skin: 'gallium',
+	// 		'default skin styles': false,
+	// 		'night mode': false
+	// 	},
+	// 	groupId: globalGroup
+	// };
 
-	const defaultColors = {
-		carbon: {
-			accent: '#8fd43a',
-			highlight: '#6abe0b'
-		},
-		cobalt: {
-			accent: '#8c81ff',
-			highlight: '#ffffff'
-		},
-		copper: {
-			accent: '#a47d66',
-			highlight: '#ffffff'
-		},
-		electro: {
-			accent: '#0359f0',
-			highlight: '#ff8100'
-		},
-		gallium: {
-			accent: '#8b7efe',
-			highlight: '#e16253'
-		},
-		silicon: {
-			accent: '#f1304f',
-			highlight: '#9e00d8'
-		},
-		titanium: {
-			accent: '#a6a6a6',
-			highlight: '#2a48ca'
-		}
-	};
+	// const defaultColors = {
+	// 	carbon: {
+	// 		accent: '#8fd43a',
+	// 		highlight: '#6abe0b'
+	// 	},
+	// 	cobalt: {
+	// 		accent: '#8c81ff',
+	// 		highlight: '#ffffff'
+	// 	},
+	// 	copper: {
+	// 		accent: '#a47d66',
+	// 		highlight: '#ffffff'
+	// 	},
+	// 	electro: {
+	// 		accent: '#0359f0',
+	// 		highlight: '#ff8100'
+	// 	},
+	// 	gallium: {
+	// 		accent: '#8b7efe',
+	// 		highlight: '#e16253'
+	// 	},
+	// 	silicon: {
+	// 		accent: '#f1304f',
+	// 		highlight: '#9e00d8'
+	// 	},
+	// 	titanium: {
+	// 		accent: '#a6a6a6',
+	// 		highlight: '#2a48ca'
+	// 	}
+	// };
 
-	const skinFromURL = getPropFromURL('skin');
-	const accentFromURL = getPropFromURL('accent');
-	const highlightFromURL = getPropFromURL('highlight');
-	const localeFromURL = getPropFromURL('locale');
+	// const skinFromURL = getPropFromURL('skin');
+	// const accentFromURL = getPropFromURL('accent');
+	// const highlightFromURL = getPropFromURL('highlight');
+	// const localeFromURL = getPropFromURL('locale');
 
-	globals.locale = select('locale', locales, Config, localeFromURL || globals.locale);
-	globals.allSkins = boolean('show all skins', Config, globals.allSkins);
-	globals.nightMode = boolean('night mode', Config, globals.nightMode);
+	// globals.locale = select('locale', locales, Config, localeFromURL || globals.locale);
+	// globals.allSkins = boolean('show all skins', Config, globals.allSkins);
+	// globals.nightMode = boolean('night mode', Config, globals.nightMode);
 
-	let skinKnobs = {}, accent, highlight;
+	// let skinKnobs = {}, accent, highlight;
 
-	if (!globals.allSkins) {
-		globals.skin = select('skin', skins, Config, skinFromURL || globals.skin);
-		skinKnobs.skin = globals.skin;
-		globals.defaultSkinStyles = boolean('default skin styles', Config, globals.defaultSkinStyles);
-		if (globals.defaultSkinStyles) {
-			accent = defaultColors[globals.skin].accent;
-			highlight = defaultColors[globals.skin].highlight;
-		}
-	}
+	// if (!globals.allSkins) {
+	// 	globals.skin = select('skin', skins, Config, skinFromURL || globals.skin);
+	// 	skinKnobs.skin = globals.skin;
+	// 	globals.defaultSkinStyles = boolean('default skin styles', Config, globals.defaultSkinStyles);
+	// 	if (globals.defaultSkinStyles) {
+	// 		accent = defaultColors[globals.skin].accent;
+	// 		highlight = defaultColors[globals.skin].highlight;
+	// 	}
+	// }
 
 	const componentName = config.kind.replace(/^([^/]+)\//, '');
 
-	// NOTE: 'config' object is not extensible
+	// // NOTE: 'config' object is not extensible
 	const hasInfoText = config.parameters && config.parameters.info && config.parameters.info.text;
 	const hasProps = config.parameters && config.parameters.props;
 
@@ -245,34 +244,38 @@ const StorybookDecorator = (story, config) => {
 			title={componentName === config.name ? `${config.kind}`.replace(/\//g, ' ').trim() : `${componentName} ${config.name}`}
 			description={hasInfoText ? config.parameters.info.text : null}
 			locale={globals.locale}
-			{...skinKnobs}
+			// {...skinKnobs}
+			skin={globals.skins}
 			skinVariants={globals.nightMode && 'night'}
-			accent={accent || color('accent', (accentFromURL || defaultColors[globals.skin].accent), Config.groupId)}
-			highlight={highlight || color('highlight', (highlightFromURL || defaultColors[globals.skin].highlight), Config.groupId)}
+			accent={globals.accent}
+			highlight={globals.highlight}
+			// accent={accent || color('accent', (accentFromURL || defaultColors[globals.skin].accent), Config.groupId)}
+			// highlight={highlight || color('highlight', (highlightFromURL || defaultColors[globals.skin].highlight), Config.groupId)}
 			{...hasProps ? config.parameters.props : null}
 		>
-			{globals.allSkins ? Object.keys(skins).map(skin => (
+			{/* {globals.allSkins ? Object.keys(skins).map(skin => (
 				<SkinFrame skin={skins[skin]} key={skin}>
 					<Cell size="20%" component={Heading}>{skin}</Cell>
 					<Cell>{sample}</Cell>
 				</SkinFrame>
-			)) : sample}
+			)) : sample} */}
+			{sample}
 		</Theme>
 	);
 };
 
-const FullscreenStorybookDecorator = (story, config) => {
-	const sample = story();
-	return (
-		<ThemeFullscreen
-			title={`${config.kind} ${config.story}`.trim()}
-			description={config.description}
-			skin={select('skin', skins, getPropFromURL('skin'))}
-		>
-			{sample}
-		</ThemeFullscreen>
-	);
-};
+// const FullscreenStorybookDecorator = (story, config) => {
+// 	const sample = story();
+// 	return (
+// 		<ThemeFullscreen
+// 			title={`${config.kind} ${config.story}`.trim()}
+// 			description={config.description}
+// 			skin={select('skin', skins, getPropFromURL('skin'))}
+// 		>
+// 			{sample}
+// 		</ThemeFullscreen>
+// 	);
+// };
 
 export default StorybookDecorator;
-export {StorybookDecorator as Theme, FullscreenStorybookDecorator as ThemeFullscreen};
+export {StorybookDecorator as Theme};
