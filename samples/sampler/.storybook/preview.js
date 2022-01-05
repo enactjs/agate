@@ -78,9 +78,10 @@ export const globalTypes = {
 	'locale': getObjectType('locale', 'en-US', locales),
 	'show all skins': getBooleanType('show all skins'),
 	'night mode': getBooleanType('night mode'),
-	'skin': getObjectType('skin', 'gallium', skins),
+	'skins': getObjectType('skins', 'gallium', skins),
 	'default skin styles': getBooleanType('default skin styles'),
 	'accent': getObjectType('accent', '8b7efe', accent),
-	'highlight': getObjectType('highlight', 'e16253', highlight)
+	'highlight': getObjectType('highlight', 'e16253', highlight),
+	
 };
 export const decorators = [ThemeEnvironment];
