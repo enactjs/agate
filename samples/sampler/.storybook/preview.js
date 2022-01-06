@@ -35,26 +35,7 @@ const locales = {
 	  'Gallium': 'gallium',
 	  'Titanium': 'titanium'
   };
-  
-  const highlight = {
-	  'carbon': '#6abe0b',
-	  'cobalt': '#ffffff',
-	  'copper': '#ffffff',
-	  'electro': '#ff8100',
-	  'gallium': '#e16253',
-	  'silicon': '#9e00d8',
-	  'titanium': '#2a48ca'
-  }
-  
-  const accent = {
-	  'carbon':  '#8fd43a',
-	  'cobalt': '#8c81ff',
-	  'copper': '#a47d66',
-	  'electro': '#0359f0',
-	  'gallium': '#8b7efe',
-	  'silicon': '#f1304f',
-	  'titanium':  '#a6a6a6',
-  }
+
 
 configureActions();
 
@@ -79,9 +60,14 @@ export const globalTypes = {
 	'show all skins': getBooleanType('show all skins'),
 	'night mode': getBooleanType('night mode'),
 	'skins': getObjectType('skins', 'gallium', skins),
-	'default skin styles': getBooleanType('default skin styles'),
-	'accent': getObjectType('accent', '8b7efe', accent),
-	'highlight': getObjectType('highlight', 'e16253', highlight),
+	// TODO - add 'default skin styles' toolbar item to dinamically show/hide accent and highlight toolbar item
+	// 'default skin styles': getBooleanType('default skin styles'), 
+	
+	// TODO - add 'accent' toolbar color picker item
+	// 'accent': getObjectType('accent', '8b7efe', accent), 
+	
+	// TODO - add 'highlight' toolbar color picker item
+	// 'highlight': getObjectType('highlight', 'e16253', highlight) 
 	
 };
 export const decorators = [ThemeEnvironment];
