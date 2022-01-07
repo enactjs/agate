@@ -18,9 +18,7 @@ export default {
 };
 
 export const _CheckboxItem = (args) => {
-	// const slotBeforeSelection = select('slotBefore', ['', ...iconList], Config);
 	const slotBefore = args['slotBefore'] ? (<Icon slot="slotBefore">{args['slotBefore']}</Icon>) : null;
-
 	return (
 		<CheckboxItem
 			disabled={args['disabled']}
