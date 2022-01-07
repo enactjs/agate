@@ -27,7 +27,7 @@ export const _BodyText = (args) => (
 
 boolean('centered', _BodyText, Config);
 boolean('noWrap', _BodyText, Config);
-select('size', _BodyText, ['', 'large', 'small'], Config);
+select('size', _BodyText, prop.sizes, Config);
 text('children', _BodyText, Config, 'This is Body Text');
 
 _BodyText.storyName = 'BodyText';

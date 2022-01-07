@@ -1,8 +1,6 @@
+import {cap} from '@enact/core/util'
 import {configureActions} from '@enact/storybook-utils/addons/actions';
-import {
-	getBooleanType,
-	getObjectType,
-  } from '@enact/storybook-utils/addons/controls';
+import {getBooleanType, getObjectType} from '@enact/storybook-utils/addons/controls';
 import {DocsPage, DocsContainer} from '@enact/storybook-utils/addons/docs';
 import {themes} from '@storybook/theming';
 
@@ -28,7 +26,7 @@ const locales = {
 	'si-LK - Sinhala, external font family with tallglyph characters': 'si-LK',
 	'km-KH - Cambodian Khmer, with tallglyph characters': 'km-KH',
   };
-  
+
   const skins = {
 	  'Carbon': 'carbon',
 	  'Cobalt': 'cobalt',
@@ -37,7 +35,13 @@ const locales = {
 	  'Gallium': 'gallium',
 	  'Titanium': 'titanium'
   };
-  
+
+if (process.env.SKINS) {
+	JSON.parse(process.env.SKINS).forEach(skin => {
+		skins[cap(skin)] = skin;
+	});
+}
+
 export const parameters = {
 	docs: {
 		container: DocsContainer,
@@ -57,12 +61,12 @@ export const globalTypes = {
 	'night mode': getBooleanType('night mode'),
 	'skin': getObjectType('skin', 'gallium', skins),
 	// TODO - add 'default skin styles' toolbar item to dinamically show/hide accent and highlight toolbar item
-	// 'default skin styles': getBooleanType('default skin styles'), 
-	
+	// 'default skin styles': getBooleanType('default skin styles'),
+
 	// TODO - add 'accent' toolbar color picker item
-	// 'accent': getObjectType('accent', '8b7efe', accent), 
-	
+	// 'accent': getObjectType('accent', '8b7efe', accent),
+
 	// TODO - add 'highlight' toolbar color picker item
-	// 'highlight': getObjectType('highlight', 'e16253', highlight) 
+	// 'highlight': getObjectType('highlight', 'e16253', highlight)
 };
 export const decorators = [ThemeEnvironment];

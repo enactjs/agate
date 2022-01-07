@@ -66,8 +66,8 @@ const SkinnedButtonBase = kind({
 	},
 
 	render: ({skin, args, ...rest}) => {
-		let icons =
-      skin === 'silicon' ? ['', ...iconListSilicon] : ['', ...iconList];
+		let icons = skin === 'silicon' ? ['', ...iconListSilicon] : ['', ...iconList];
+
 		return (
 			<Button
 				{...rest}

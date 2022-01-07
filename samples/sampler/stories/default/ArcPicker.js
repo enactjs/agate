@@ -17,8 +17,6 @@ export default {
 };
 
 export const _ArcPicker = (args) => {
-	console.log('from _ArcPicker');
-	console.log(args['selectionType']);
 	const itemCount = args['items'];
 	const items = (new Array(itemCount)).fill().map((i, index) => index + 1);
 

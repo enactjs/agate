@@ -9,7 +9,6 @@ module.exports = {
 	stories: ['./../stories/qa/*.js'],
 	addons: [
 		'@enact/storybook-utils/addons/actions/register',
-		// '@enact/storybook-utils/addons/knobs/register',
 		'@enact/storybook-utils/addons/controls/register',
 		'@enact/storybook-utils/addons/docs/register',
 		'@enact/storybook-utils/addons/toolbars/register'
