@@ -17,9 +17,9 @@ export default {
 };
 
 export const _ArcPicker = (args) => {
-    console.log('from _ArcPicker')
-    console.log(args['selectionType'])
-	const itemCount = args['items']
+	console.log('from _ArcPicker');
+	console.log(args['selectionType']);
+	const itemCount = args['items'];
 	const items = (new Array(itemCount)).fill().map((i, index) => index + 1);
 
 	return (
@@ -37,11 +37,11 @@ export const _ArcPicker = (args) => {
 	);
 };
 
-range('items', _ArcPicker,Config,  {range: true, min: 0, max: 40}, 8);
+range('items', _ArcPicker, Config,  {range: true, min: 0, max: 40}, 8);
 select('backgroundColor', _ArcPicker, prop.colors, Config);
-boolean('disabled',_ArcPicker, Config);
+boolean('disabled', _ArcPicker, Config);
 range('endAngle', _ArcPicker, Config, {range: true, min: 0, max: 360});
-select('foregroundColor',_ArcPicker, prop.colors, Config);
+select('foregroundColor', _ArcPicker, prop.colors, Config);
 select('selectionType', _ArcPicker, ['cumulative', 'single'], Config, 'cumulative');
 range('startAngle', _ArcPicker, Config, {range: true, min: 0, max: 360});
 _ArcPicker.storyName = 'ArcPicker';

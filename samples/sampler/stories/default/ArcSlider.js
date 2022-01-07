@@ -39,14 +39,14 @@ export const _ArcSlider = (args) => (
 
 select('backgroundColor', _ArcSlider, prop.colors, Config);
 boolean('disabled', _ArcSlider, Config);
-range('endAngle', _ArcSlider,Config, {range: true, min: 0, max: 360});
-select('foregroundColor',_ArcSlider,  prop.colors, Config);
+range('endAngle', _ArcSlider, Config, {range: true, min: 0, max: 360});
+select('foregroundColor', _ArcSlider,  prop.colors, Config);
 number('max', _ArcSlider, Config);
 number('min', _ArcSlider, Config);
-select('radius', _ArcSlider,prop.radius, Config);
+select('radius', _ArcSlider, prop.radius, Config);
 range('startAngle', _ArcSlider, Config, {range: true, min: 0, max: 360});
 number('step', _ArcSlider, Config);
-number('strokeWidth', _ArcSlider, Config)
+number('strokeWidth', _ArcSlider, Config);
 _ArcSlider.storyName = 'ArcSlider';
 _ArcSlider.parameters = {
 	info: {

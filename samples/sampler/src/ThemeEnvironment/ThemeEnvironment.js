@@ -157,6 +157,12 @@ const defaultColors = {
 const StorybookDecorator = (story, config) => {
 	const sample = story();
 
+	// TODO: get knobs from url, as it was done previosly
+	// const skinFromURL = getPropFromURL('skin');
+	// const accentFromURL = getPropFromURL('accent');
+	// const highlightFromURL = getPropFromURL('highlight');
+	// const localeFromURL = getPropFromURL('locale');
+
 	let {globals} = config;
 	const showAllSkins = JSON.parse(globals['show all skins']);
 	const componentName = config.kind.replace(/^([^/]+)\//, '');
@@ -167,25 +173,27 @@ const StorybookDecorator = (story, config) => {
 
 	return (
 		<Theme
-			title={componentName === config.name ?`${config.kind}`.replace(/\//g, ' ').trim() : `${componentName} ${config.name}`}
+			title={componentName === config.name ? `${config.kind}`.replace(/\//g, ' ').trim() : `${componentName} ${config.name}`}
 			description={hasInfoText ? config.parameters.info.text : null}
 			locale={globals.locale}
 			skin={showAllSkins ? skins['Gallium'] : globals.skin}
 			skinVariants={JSON.parse(globals['night mode']) ? 'night' : null}
-			accent={defaultColors[globals['skin']].accent}
-			highlight={defaultColors[globals['skin']].highlight}
+			// accent={defaultColors[globals['skin']].accent}
+			// highlight={defaultColors[globals['skin']].highlight}
 			{...(hasProps ? config.parameters.props : null)}
 		>
-			{showAllSkins ?
-				Object.keys(skins).map((skin) => (
-					<SkinFrame skin={skins[skin]} key={skin}>
-						<Cell size="20%" component={Heading}>
-							{skin}
-						</Cell>
-						<Cell>{sample}</Cell>
-					</SkinFrame>
-				)) :
-				sample}
+			{
+				// showAllSkins ?
+				// Object.keys(skins).map((skin) => (
+				// 	<SkinFrame skin={skins[skin]} key={skin}>
+				// 		<Cell size="20%" component={Heading}>
+				// 			{skin}
+				// 		</Cell>
+				// 		<Cell>{sample}</Cell>
+				// 	</SkinFrame>
+				// )) :
+				sample
+			}
 		</Theme>
 	);
 };

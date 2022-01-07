@@ -35,7 +35,7 @@ export const _ContextualPopupDecorator = (args) => (
 			noAutoDismiss={args['noAutoDismiss']}
 			onClose={action('onClose')}
 			open={args['open']}
-			popupComponent={() =><div>{args['popup string']}</div>}
+			popupComponent={() => <div>{args['popup string']}</div>}
 			showCloseButton={args['showCloseButton']}
 			spotlightRestrict={args['spotlightRestrict']}
 		>
@@ -44,13 +44,13 @@ export const _ContextualPopupDecorator = (args) => (
 		<BodyText centered>Use CONTROLS to interact with the ContextualPopup.</BodyText>
 	</div>
 );
-select('direction', _ContextualPopupDecorator, ['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config)
-boolean('noAutoDismiss', _ContextualPopupDecorator, Config)
-boolean('showCloseButton', _ContextualPopupDecorator,Config)
-select('spotlightRestrict', _ContextualPopupDecorator, ['none', 'self-first', 'self-only'], Config)
-text('popup string', _ContextualPopupDecorator,{groupId: 'Popup'}, 'Hello Contextual Popup');
+select('direction', _ContextualPopupDecorator, ['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config);
+boolean('noAutoDismiss', _ContextualPopupDecorator, Config);
+boolean('showCloseButton', _ContextualPopupDecorator, Config);
+select('spotlightRestrict', _ContextualPopupDecorator, ['none', 'self-first', 'self-only'], Config);
+text('popup string', _ContextualPopupDecorator, {groupId: 'Popup'}, 'Hello Contextual Popup');
 boolean('open', _ContextualPopupDecorator, Config);
-text('button string', _ContextualPopupDecorator, Config, 'Hello Contextual Button')
+text('button string', _ContextualPopupDecorator, Config, 'Hello Contextual Button');
 _ContextualPopupDecorator.storyName = 'ContextualPopupDecorator';
 _ContextualPopupDecorator.parameters = {
 	info: {

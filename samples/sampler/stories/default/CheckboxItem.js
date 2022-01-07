@@ -35,15 +35,15 @@ export const _CheckboxItem = (args) => {
 		</CheckboxItem>
 	);
 };
-boolean('disabled', _CheckboxItem,Config);
+boolean('disabled', _CheckboxItem, Config);
 select('icon', _CheckboxItem, iconList, Config);
 boolean('indeterminate', _CheckboxItem, Config);
 select('indeterminateIcon', _CheckboxItem, iconList, Config);
-boolean('inline', _CheckboxItem, Config)
+boolean('inline', _CheckboxItem, Config);
 text('label', _CheckboxItem, Config);
-select('labelPosition', _CheckboxItem, ['above', 'after', 'before', 'below'], Config)
-text('children', _CheckboxItem, Config, 'Hello CheckboxItem')
-select('slotBefore', _CheckboxItem,  ['', ...iconList], Config)
+select('labelPosition', _CheckboxItem, ['above', 'after', 'before', 'below'], Config);
+text('children', _CheckboxItem, Config, 'Hello CheckboxItem');
+select('slotBefore', _CheckboxItem,  ['', ...iconList], Config);
 _CheckboxItem.storyName = 'CheckboxItem';
 _CheckboxItem.parameters = {
 	info: {

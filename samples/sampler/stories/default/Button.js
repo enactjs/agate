@@ -1,17 +1,17 @@
 import kind from '@enact/core/kind';
-import { mergeComponentMetadata } from '@enact/storybook-utils';
-import { action } from '@enact/storybook-utils/addons/actions';
+import {mergeComponentMetadata} from '@enact/storybook-utils';
+import {action} from '@enact/storybook-utils/addons/actions';
 import {
-  boolean,
-  select,
-  text,
-  number,
+	boolean,
+	select,
+	text,
+	number
 } from '@enact/storybook-utils/addons/controls';
 import UiButton from '@enact/ui/Button';
 import PropTypes from 'prop-types';
-import Button, { ButtonBase } from '@enact/agate/Button';
+import Button, {ButtonBase} from '@enact/agate/Button';
 import Skinnable from '@enact/agate/Skinnable';
-import { iconList, iconListSilicon } from './util/icons';
+import {iconList, iconListSilicon} from './util/icons';
 
 Button.displayName = 'Button';
 const Config = mergeComponentMetadata('Button', UiButton, ButtonBase, Button);
@@ -21,102 +21,102 @@ const Config = mergeComponentMetadata('Button', UiButton, ButtonBase, Button);
 
 // Set up some defaults for info and controls
 const prop = {
-  casing: ['preserve', 'sentence', 'word', 'upper'],
-  colors: [
-    '',
-    '#E6444B',
-    '#FDC902',
-    '#986AAD',
-    '#4E75E1',
-    '#30CC83',
-    '#44C8D5',
-    '#47439B',
-    '#2D32A6',
-    '#4E75E1',
-  ],
-  iconFlip: ['', 'auto', 'both', 'horizontal', 'vertical'],
-  iconPosition: ['', 'before', 'after'],
-  joinedPosition: ['', 'left', 'center', 'right'],
-  minWidth: {
-    'undefined/null (automatic)': '',
-    'true (enforce)': true,
-    'false (ignore)': 'false',
-  },
+	casing: ['preserve', 'sentence', 'word', 'upper'],
+	colors: [
+		'',
+		'#E6444B',
+		'#FDC902',
+		'#986AAD',
+		'#4E75E1',
+		'#30CC83',
+		'#44C8D5',
+		'#47439B',
+		'#2D32A6',
+		'#4E75E1'
+	],
+	iconFlip: ['', 'auto', 'both', 'horizontal', 'vertical'],
+	iconPosition: ['', 'before', 'after'],
+	joinedPosition: ['', 'left', 'center', 'right'],
+	minWidth: {
+		'undefined/null (automatic)': '',
+		'true (enforce)': true,
+		'false (ignore)': 'false'
+	}
 };
 
 // The following is needed to allow us to disambiguate between minWidth=false and minWidth=undefined
 const threeWayBoolean = (value) => {
-  switch (value) {
-    case 'true':
-      return true;
-    case 'false':
-      return false;
-    case '':
-      return null;
-    default:
-      return value;
-  }
+	switch (value) {
+		case 'true':
+			return true;
+		case 'false':
+			return false;
+		case '':
+			return null;
+		default:
+			return value;
+	}
 };
 
 const SkinnedButtonBase = kind({
-  name: 'SkinnedButton',
+	name: 'SkinnedButton',
 
-  propTypes: {
-    skin: PropTypes.string,
-  },
+	propTypes: {
+		skin: PropTypes.string
+	},
 
-  render: ({ skin, args, ...rest }) => {
-    let icons =
+	render: ({skin, args, ...rest}) => {
+		let icons =
       skin === 'silicon' ? ['', ...iconListSilicon] : ['', ...iconList];
-    return (
-      <Button
-        {...rest}
-        icon={rest['icon']}
-        iconFlip={rest['iconFlip']}
-        iconPosition={rest['iconPosition']}
-      />
-    );
-  },
+		return (
+			<Button
+				{...rest}
+				icon={rest['icon']}
+				iconFlip={rest['iconFlip']}
+				iconPosition={rest['iconPosition']}
+			/>
+		);
+	}
 });
 
-const SkinnedButton = Skinnable({ prop: 'skin' }, SkinnedButtonBase);
+const SkinnedButton = Skinnable({prop: 'skin'}, SkinnedButtonBase);
 
 export default {
-  title: 'Agate/Button',
-  component: 'Button',
+	title: 'Agate/Button',
+	component: 'Button'
 };
 
 export const _Button = (args) => (
-  <SkinnedButton
-    animateOnRender={args['animateOnRender']}
-    animationDelay={args['animationDelay']}
-    backgroundOpacity={args['backgroundOpacity']}
-    badge={args['badge']}
-    badgeColor={args['badgeColor']}
-    disabled={args['disabled']}
-    highlighted={args['highlighted']}
-    joinedPosition={args['joinedPosition']}
-    minWidth={threeWayBoolean(args['minWidth'])}
-    onClick={action('onClick')}
-    selected={args['selected']}
-    size={args['size']}
-    tooltipText={args['tooltipText']}
-    type={args['type']}
-    icon={args['icon']}
-    iconFlip={args['iconFlip']}
-    iconPosition={args['iconPosition']}
-  >
-    {args['children']}
-  </SkinnedButton>
+	<SkinnedButton
+		animateOnRender={args['animateOnRender']}
+		animationDelay={args['animationDelay']}
+		backgroundOpacity={args['backgroundOpacity']}
+		badge={args['badge']}
+		badgeColor={args['badgeColor']}
+		disabled={args['disabled']}
+		highlighted={args['highlighted']}
+		joinedPosition={args['joinedPosition']}
+		minWidth={threeWayBoolean(args['minWidth'])}
+		onClick={action('onClick')}
+		selected={args['selected']}
+		size={args['size']}
+		tooltipText={args['tooltipText']}
+		type={args['type']}
+		icon={args['icon']}
+		iconFlip={args['iconFlip']}
+		iconPosition={args['iconPosition']}
+	>
+		{args['children']}
+	</SkinnedButton>
 );
 
 boolean('animateOnRender', _Button, Config);
 number('animationDelay', _Button, Config);
 select(
-  'backgroundOpacity',
-  _Button,
-  ['opaque', 'lightOpaque', 'transparent'],
-  Config
+	'backgroundOpacity',
+	_Button,
+	['opaque', 'lightOpaque', 'transparent'],
+	Config
 );
 text('badge', _Button, Config);
 select('badgeColor', _Button, prop.colors, Config);
@@ -134,7 +134,7 @@ select('iconFlip', _Button, prop.iconFlip, Config);
 select('iconPosition', _Button, prop.iconPosition, Config);
 _Button.storyName = 'Button';
 _Button.parameters = {
-  info: {
-    text: 'The basic Button',
-  },
+	info: {
+		text: 'The basic Button'
+	}
 };
