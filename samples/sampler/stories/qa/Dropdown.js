@@ -1,6 +1,6 @@
 import Group from '@enact/ui/Group';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, number, select, text} from  '@enact/storybook-utils/addons/knobs';
+import {boolean, range, select, text} from  '@enact/storybook-utils/addons/controls';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {Component} from 'react';
 import Button from '@enact/agate/Button';
@@ -83,102 +83,118 @@ export default {
 	component: 'Dropdown'
 };
 
-export const With2OptionsForTestingDirection = () => (
+export const With2OptionsForTestingDirection = (args) => (
 	<Dropdown
-		direction={select('direction', ['above', 'below'], Config)}
-		disabled={boolean('disabled', Config)}
+		direction={args['direction']}
+		disabled={args['disabled']}
 		onClose={action('onClose')}
 		onOpen={action('onOpen')}
 		onSelect={action('onSelect')}
 		style={{position: 'absolute', top: 'calc(50% - 4rem)'}}
-		title={text('title', Config, 'Dropdown')}
-		width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+		title={args['title']}
+		width={args['width']}
 	>
 		{['Option 1', 'Option 2']}
 	</Dropdown>
 );
-
+select('direction', With2OptionsForTestingDirection, ['above', 'below'], Config);
+boolean('disabled', With2OptionsForTestingDirection, Config);
+text('title', With2OptionsForTestingDirection, Config, 'Dropdown');
+select('width', With2OptionsForTestingDirection, ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config);
 With2OptionsForTestingDirection.storyName = 'with 2 options for testing direction';
 
-export const WithDefaultSelectedIn30Options = () => (
+export const WithDefaultSelectedIn30Options = (args) => (
 	<Dropdown
 		defaultSelected={10}
-		direction={select('direction', ['above', 'below'], Config)}
-		disabled={boolean('disabled', Config)}
+		direction={args['direction']}
+		disabled={args['disabled']}
 		onClose={action('onClose')}
 		onOpen={action('onOpen')}
 		onSelect={action('onSelect')}
-		title={text('title', Config, 'Dropdown')}
-		width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+		title={args['title']}
+		width={args['width']}
 	>
 		{items(30)}
 	</Dropdown>
 );
-
+select('direction', WithDefaultSelectedIn30Options, ['above', 'below'], Config);
+boolean('disabled', WithDefaultSelectedIn30Options, Config);
+text('title', WithDefaultSelectedIn30Options, Config, 'Dropdown');
+select('width', WithDefaultSelectedIn30Options, ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config);
 WithDefaultSelectedIn30Options.storyName = 'with defaultSelected in 30 options';
 
-export const WithLongText = () => (
+export const WithLongText = (args) => (
 	<Dropdown
-		direction={select('direction', ['above', 'below'], Config)}
-		disabled={boolean('disabled', Config)}
+		direction={args['direction']}
+		disabled={args['disabled']}
 		onClose={action('onClose')}
 		onOpen={action('onOpen')}
 		onSelect={action('onSelect')}
-		title={text('title', Config, 'Dropdown')}
-		width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+		title={args['title']}
+		width={args['width']}
 	>
 		{items(10, 'Looooooooooooooooooooooong')}
 	</Dropdown>
 );
 
+select('direction', WithLongText, ['above', 'below'], Config);
+boolean('disabled', WithLongText, Config);
+text('title', WithLongText, Config, 'Dropdown');
+select('width', WithLongText, ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config);
 WithLongText.storyName = 'with long text';
 
-export const WithMultipleDropdowns = () => (
+export const WithMultipleDropdowns = (args) => (
 	<div>
 		<Dropdown
-			direction={select('direction', ['above', 'below'], Config)}
-			disabled={boolean('disabled', Config)}
+			direction={args['direction']}
+			disabled={args['disabled']}
 			onClose={action('onClose')}
 			onOpen={action('onOpen')}
 			onSelect={action('onSelect')}
-			title={text('title', Config, 'Dropdown')}
-			width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+			title={args['title']}
+			width={args['width']}
 		>
 			{items(5)}
 		</Dropdown>
 		<Dropdown
-			direction={select('direction', ['above', 'below'], Config)}
-			disabled={boolean('disabled', Config)}
+			direction={args['direction']}
+			disabled={args['disabled']}
 			onClose={action('onClose')}
 			onOpen={action('onOpen')}
 			onSelect={action('onSelect')}
-			title={text('title', Config, 'Dropdown')}
-			width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+			title={args['title']}
+			width={args['width']}
 		>
 			{items(5)}
 		</Dropdown>
 	</div>
 );
-
+select('direction', WithMultipleDropdowns, ['above', 'below'], Config);
+boolean('disabled', WithMultipleDropdowns, Config);
+text('title', WithMultipleDropdowns, Config, 'Dropdown');
+select('width', WithMultipleDropdowns, ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config);
 WithMultipleDropdowns.storyName = 'with multiple dropdowns';
 
-export const WithArrayOfChildrenObjects = () => (
+export const WithArrayOfChildrenObjects = (args) => (
 	<div>
 		<Dropdown
-			direction={select('direction', ['above', 'below'], Config)}
-			disabled={boolean('disabled', Config)}
+			direction={args['direction']}
+			disabled={args['disabled']}
 			onClose={action('onClose')}
 			onOpen={action('onOpen')}
 			onSelect={action('onSelect')}
 			style={{position: 'absolute', top: 'calc(50% - 4rem)'}}
-			title={text('title', Config, 'Dropdown')}
-			width={select('width', ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config)}
+			title={args['title']}
+			width={args['width']}
 		>
 			{list}
 		</Dropdown>
 	</div>
 );
-
+select('direction', WithArrayOfChildrenObjects, ['above', 'below'], Config);
+boolean('disabled', WithArrayOfChildrenObjects, Config);
+text('title', WithArrayOfChildrenObjects, Config, 'Dropdown');
+select('width', WithArrayOfChildrenObjects, ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config);
 WithArrayOfChildrenObjects.storyName = 'with array of children objects';
 
 export const WithAutoDismiss = () => <AutoDismissDropdown />;
@@ -189,13 +205,13 @@ export const WithDisabled = () => <DisabledDropdown />;
 
 WithDisabled.storyName = 'with disabled';
 
-export const WithGroupInScroller = () => {
-	const itemCount = number('items', Config, {range: true, min: 0, max: 50}, 5);
+export const WithGroupInScroller = (args) => {
+	const itemCount = args['items'];
 	const itemList = (new Array(itemCount)).fill().map((i, index) => `Option ${index + 1}`);
 	const dropdowns = [];
 
 	for (let i = 0; i < 30; i++) {
-		dropdowns.push({children: itemList, title: text('title', Config, 'Please select'), key: i});
+		dropdowns.push({children: itemList, title: args['title'], key: i});
 	}
 
 	return (
@@ -210,5 +226,6 @@ export const WithGroupInScroller = () => {
 		</Scroller>
 	);
 };
-
+range('items', WithGroupInScroller, Config, {range: true, min: 0, max: 50}, 5);
+text('title', WithGroupInScroller, Config, 'Please select');
 WithGroupInScroller.storyName = 'with group in Scroller';

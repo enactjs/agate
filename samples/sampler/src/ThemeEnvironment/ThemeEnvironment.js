@@ -123,36 +123,36 @@ const skins = {
 	'Titanium': 'titanium'
 };
 
-const defaultColors = {
-	carbon: {
-		accent: '#8fd43a',
-		highlight: '#6abe0b'
-	},
-	cobalt: {
-		accent: '#8c81ff',
-		highlight: '#ffffff'
-	},
-	copper: {
-		accent: '#a47d66',
-		highlight: '#ffffff'
-	},
-	electro: {
-		accent: '#0359f0',
-		highlight: '#ff8100'
-	},
-	gallium: {
-		accent: '#8b7efe',
-		highlight: '#e16253'
-	},
-	silicon: {
-		accent: '#f1304f',
-		highlight: '#9e00d8'
-	},
-	titanium: {
-		accent: '#a6a6a6',
-		highlight: '#2a48ca'
-	}
-};
+// const defaultColors = {
+// 	carbon: {
+// 		accent: '#8fd43a',
+// 		highlight: '#6abe0b'
+// 	},
+// 	cobalt: {
+// 		accent: '#8c81ff',
+// 		highlight: '#ffffff'
+// 	},
+// 	copper: {
+// 		accent: '#a47d66',
+// 		highlight: '#ffffff'
+// 	},
+// 	electro: {
+// 		accent: '#0359f0',
+// 		highlight: '#ff8100'
+// 	},
+// 	gallium: {
+// 		accent: '#8b7efe',
+// 		highlight: '#e16253'
+// 	},
+// 	silicon: {
+// 		accent: '#f1304f',
+// 		highlight: '#9e00d8'
+// 	},
+// 	titanium: {
+// 		accent: '#a6a6a6',
+// 		highlight: '#2a48ca'
+// 	}
+// };
 
 const StorybookDecorator = (story, config) => {
 	const sample = story();

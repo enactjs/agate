@@ -19,31 +19,34 @@ Config.defaultProps = {
 	spotlightRestrict: 'self-first'
 };
 
-const renderPopup = (popupString) => (
-	<div>{popupString}</div>
-);
 
 export default {
 	title: 'Agate/ContextualPopupDecorator',
 	component: 'ContextualPopupDecorator'
 };
 
-export const _ContextualPopupDecorator = (args) => (
-	<div style={{textAlign: 'center', marginTop: ri.scaleToRem(99)}}>
-		<ContextualButton
-			direction={args['direction']}
-			noAutoDismiss={args['noAutoDismiss']}
-			onClose={action('onClose')}
-			open={args['open']}
-			popupComponent={() => <div>{args['popup string']}</div>}
-			showCloseButton={args['showCloseButton']}
-			spotlightRestrict={args['spotlightRestrict']}
-		>
-			{args['button string'] || null}
-		</ContextualButton>
-		<BodyText centered>Use CONTROLS to interact with the ContextualPopup.</BodyText>
-	</div>
-);
+export const _ContextualPopupDecorator = (args) => {
+
+	const renderPopup = () => (
+		<div>{args['popup string']}</div>
+	);
+	return (
+		<div style={{textAlign: 'center', marginTop: ri.scaleToRem(99)}}>
+			<ContextualButton
+				direction={args['direction']}
+				noAutoDismiss={args['noAutoDismiss']}
+				onClose={action('onClose')}
+				open={args['open']}
+				popupComponent={renderPopup}
+				showCloseButton={args['showCloseButton']}
+				spotlightRestrict={args['spotlightRestrict']}
+			>
+				{args['button string'] || null}
+			</ContextualButton>
+			<BodyText centered>Use CONTROLS to interact with the ContextualPopup.</BodyText>
+		</div>
+	);
+};
 select('direction', _ContextualPopupDecorator, ['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config);
 boolean('noAutoDismiss', _ContextualPopupDecorator, Config);
 boolean('showCloseButton', _ContextualPopupDecorator, Config);

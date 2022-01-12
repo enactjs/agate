@@ -65,8 +65,9 @@ const SkinnedButtonBase = kind({
 		skin: PropTypes.string
 	},
 
-	render: ({skin, args, ...rest}) => {
-		let icons = skin === 'silicon' ? ['', ...iconListSilicon] : ['', ...iconList];
+	render: ({skin, ...rest}) => {
+		// let icons =
+		//   skin === 'silicon' ? ['', ...iconListSilicon] : ['', ...iconList];
 
 		return (
 			<Button
@@ -86,29 +87,32 @@ export default {
 	component: 'Button'
 };
 
-export const _Button = (args) => (
-	<SkinnedButton
-		animateOnRender={args['animateOnRender']}
-		animationDelay={args['animationDelay']}
-		backgroundOpacity={args['backgroundOpacity']}
-		badge={args['badge']}
-		badgeColor={args['badgeColor']}
-		disabled={args['disabled']}
-		highlighted={args['highlighted']}
-		joinedPosition={args['joinedPosition']}
-		minWidth={threeWayBoolean(args['minWidth'])}
-		onClick={action('onClick')}
-		selected={args['selected']}
-		size={args['size']}
-		tooltipText={args['tooltipText']}
-		type={args['type']}
-		icon={args['icon']}
-		iconFlip={args['iconFlip']}
-		iconPosition={args['iconPosition']}
-	>
-		{args['children']}
-	</SkinnedButton>
-);
+export const _Button = (args) => {
+
+	return (
+		<SkinnedButton
+			animateOnRender={args['animateOnRender']}
+			animationDelay={args['animationDelay']}
+			backgroundOpacity={args['backgroundOpacity']}
+			badge={args['badge']}
+			badgeColor={args['badgeColor']}
+			disabled={args['disabled']}
+			highlighted={args['highlighted']}
+			joinedPosition={args['joinedPosition']}
+			minWidth={threeWayBoolean(args['minWidth'])}
+			onClick={action('onClick')}
+			selected={args['selected']}
+			size={args['size']}
+			tooltipText={args['tooltipText']}
+			type={args['type']}
+			icon={args['icon']}
+			iconFlip={args['iconFlip']}
+			iconPosition={args['iconPosition']}
+		>
+			{args['children']}
+		</SkinnedButton>
+	);
+};
 
 boolean('animateOnRender', _Button, Config);
 number('animationDelay', _Button, Config);
@@ -129,7 +133,7 @@ select('size', _Button, ['smallest', 'small', 'large', 'huge'], Config);
 text('tooltipText', _Button, Config, 'This is a Button');
 select('type', _Button, ['standard', 'grid'], Config);
 text('children', _Button, Config, 'Click me');
-select('icon', _Button, ['', ...iconList], Config, '');
+select('icon', _Button, ['', ...iconList], Config, ''); // Here we should select icons based on the skin(special icons for silicon skin)
 select('iconFlip', _Button, prop.iconFlip, Config);
 select('iconPosition', _Button, prop.iconPosition, Config);
 _Button.storyName = 'Button';

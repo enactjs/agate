@@ -4,7 +4,7 @@ import kind from '@enact/core/kind';
 import {clamp} from '@enact/core/util';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select} from '@enact/storybook-utils/addons/controls';
 import Routable, {Route, Linkable} from '@enact/ui/Routable';
 import PropTypes from 'prop-types';
 import {Component, useState} from 'react';
@@ -156,14 +156,16 @@ export default {
 	component: 'Panels'
 };
 
-export const PreserveFocus = () => (
+export const PreserveFocus = (args) => (
 	<BasicPanels
-		noAnimation={boolean('noAnimation', Config)}
-		noCloseButton={boolean('noCloseButton', Config)}
-		orientation={select('orientation', ['horizontal', 'vertical'], Config)}
+		noAnimation={args['noAnimation']}
+		noCloseButton={args['noCloseButton']}
+		orientation={args['orientation']}
 	/>
 );
-
+boolean('noAnimation', PreserveFocus, Config);
+boolean('noCloseButton', PreserveFocus, Config);
+select('orientation', PreserveFocus, ['horizontal', 'vertical'], Config);
 PreserveFocus.storyName = 'preserve focus';
 PreserveFocus.parameters = {
 	props: {
