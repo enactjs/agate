@@ -53,7 +53,7 @@ export const parameters = {
 		storySort: {
 			method: 'alphabetical'
 		}
-	}
+	},
 };
 export const globalTypes = {
 	'locale': getObjectType('locale', 'en-US', locales),
