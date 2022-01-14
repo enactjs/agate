@@ -48,7 +48,7 @@ export const withoutAnArrow = (args) => {
 	);
 };
 
-select('direction', withoutAnArrow,['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config);
+select('direction', withoutAnArrow, ['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config);
 boolean('noAutoDismiss', withoutAnArrow, Config);
 select('offset', withoutAnArrow, ['none', 'overlap', 'small'], Config, 'small');
 boolean('open', withoutAnArrow, Config);

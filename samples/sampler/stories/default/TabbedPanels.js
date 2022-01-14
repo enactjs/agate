@@ -86,7 +86,9 @@ const I18nTabbedPanelsBase = ({orientation, rtl, tabPosition, ...rest}) => {
 };
 
 I18nTabbedPanelsBase.propTypes = {
-	rtl: PropTypes.bool
+	orientation: PropTypes.string,
+	rtl: PropTypes.bool,
+	tabPosition: PropTypes.string
 };
 
 const I18nTabbedPanels = I18nContextDecorator({rtlProp: 'rtl'}, I18nTabbedPanelsBase);

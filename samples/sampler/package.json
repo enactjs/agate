@@ -25,12 +25,10 @@
     "@enact/i18n": "^4.0.3",
     "@enact/spotlight": "^4.0.3",
     "@enact/ui": "^4.0.3",
-    "copy-to-clipboard": "^3.3.1",
     "dotenv": "^8.2.0",
     "ilib": "^14.4.0",
     "prop-types": "^15.7.2",
-    "react": "^17.0.1",
-    "storybook-color-picker": "^2.3.0"
+    "react": "^17.0.1"
   },
   "devDependencies": {
     "@enact/storybook-utils": "^4.1.0",
