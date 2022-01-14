@@ -140,14 +140,33 @@ const skins = {
 // 	}
 // };
 
+// NOTE: Knobs cannot set locale in fullscreen mode. This allows any knob to be taken from the URL.
+const getPropFromURL = (propName, fallbackValue) => {
+	propName = encodeURI(propName);
+	const locationParams = window.parent.location.search;
+
+	const startIndex = locationParams.indexOf('knob-' + propName);
+	if (startIndex > -1) {
+		const keyIndex = locationParams.indexOf('=', startIndex);
+
+		if (locationParams.indexOf('&', keyIndex) > -1) {
+			const valueIndex = locationParams.indexOf('&', keyIndex);
+			return decodeURIComponent(locationParams.substring(keyIndex + 1, valueIndex));
+		} else {
+			return decodeURIComponent(locationParams.substring(keyIndex + 1, locationParams.length));
+		}
+	}
+
+	return fallbackValue;
+};
+
 const StorybookDecorator = (story, config) => {
 	const sample = story();
 
-	// TODO: get knobs from url, as it was done previosly
-	// const skinFromURL = getPropFromURL('skin');
+	const skinFromURL = getPropFromURL('skin');
 	// const accentFromURL = getPropFromURL('accent');
 	// const highlightFromURL = getPropFromURL('highlight');
-	// const localeFromURL = getPropFromURL('locale');
+	const localeFromURL = getPropFromURL('locale');
 
 	let {globals} = config;
 	const showAllSkins = JSON.parse(globals['show all skins']);
@@ -161,11 +180,11 @@ const StorybookDecorator = (story, config) => {
 		<Theme
 			title={componentName === config.name ? `${config.kind}`.replace(/\//g, ' ').trim() : `${componentName} ${config.name}`}
 			description={hasInfoText ? config.parameters.info.text : null}
-			locale={globals.locale}
-			skin={showAllSkins ? skins['Gallium'] : globals.skin}
+			locale={localeFromURL || globals.locale}
+			skin={showAllSkins ? skins['Gallium'] : skinFromURL || globals.skin}
 			skinVariants={JSON.parse(globals['night mode']) ? 'night' : null}
-			// accent={defaultColors[globals['skin']].accent}
-			// highlight={defaultColors[globals['skin']].highlight}
+			// accent={accentFromURL || defaultColors[globals['skin']].accent}
+			// highlight={highlightFromURL || defaultColors[globals['skin']].highlight}
 			{...(hasProps ? config.parameters.props : null)}
 		>
 			{showAllSkins ? Object.keys(skins).map((skin) => (
