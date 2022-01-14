@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select, text} from '@enact/storybook-utils/addons/controls';
 import {Button} from '@enact/agate/Button';
 import {Popup, PopupBase} from '@enact/agate/Popup';
 
@@ -25,35 +25,49 @@ export default {
 	component: 'Popup'
 };
 
-export const _Popup = () => {
-	const buttonsSelection = select('buttons', ['no buttons', '1 button', '2 buttons'], Config, 'no');
+export const _Popup = (args) => {
+	const buttonsSelection = args['buttons'];
 	const buttons = prop.buttons[buttonsSelection];
 
 	return (
 		<div>
 			<Popup
-				centered={boolean('centered', Config)}
-				closeButton={boolean('closeButton', Config)}
-				duration={select('duration', ['short', 'medium', 'long'], Config)}
-				noAnimation={boolean('noAnimation', Config)}
-				noAutoDismiss={boolean('noAutoDismiss', Config)}
+				centered={args['centered']}
+				closeButton={args['closeButton']}
+				duration={args['duration']}
+				noAnimation={args['noAnimation']}
+				noAutoDismiss={args['noAutoDismiss']}
 				onClose={action('onClose')}
 				onHide={action('onHide')}
 				onShow={action('onShow')}
-				open={boolean('open', Config)}
-				position={select('position', ['bottom', 'center', 'fullscreen', 'left', 'right', 'top'], Config)}
-				scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
-				spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
-				title={text('title', Config, 'Title')}
-				type={select('type', [null, 'fade', 'slide'], Config)}
+				open={args['open']}
+				position={args['position']}
+				scrimType={args['scrimType']}
+				spotlightRestrict={args['spotlightRestrict']}
+				title={args['title']}
+				type={args['type']}
 			>
-				<div>{text('children', Config, 'Hello Popup')}</div>
+				<div>{args['children']}</div>
 				{buttons}
 			</Popup>
-			Use KNOBS to interact with Popup.
+			Use CONTROLS to interact with Popup.
 		</div>
 	);
 };
+
+select('buttons', _Popup, ['no buttons', '1 button', '2 buttons'], Config, 'no');
+boolean('centered', _Popup, Config);
+boolean('closeButton', _Popup, Config);
+select('duration', _Popup, ['short', 'medium', 'long'], Config);
+boolean('noAnimation', _Popup, Config);
+boolean('noAutoDismiss', _Popup, Config);
+boolean('open', _Popup, Config);
+select('position', _Popup, ['bottom', 'center', 'fullscreen', 'left', 'right', 'top'], Config);
+select('scrimType', _Popup, ['none', 'translucent', 'transparent'], Config, 'translucent');
+select('spotlightRestrict', _Popup, ['self-first', 'self-only'], Config, 'self-only');
+text('title', _Popup, Config, 'Title');
+select('type', _Popup, [null, 'fade', 'slide'], Config);
+text('children', _Popup, Config, 'Hello Popup');
 
 _Popup.storyName = 'Popup';
 _Popup.parameters = {

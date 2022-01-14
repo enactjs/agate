@@ -1,13 +1,13 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select} from '@enact/storybook-utils/addons/controls';
 import SliderButton, {SliderButtonBase} from '@enact/agate/SliderButton';
 import {icons} from '@enact/agate/Icon';
 
 SliderButton.displayName = 'SliderButton';
 const Config = mergeComponentMetadata('SliderButton', SliderButtonBase, SliderButton);
 
-// Set up some defaults for info and knobs
+// Set up some defaults for info and controls
 const prop = {
 	icons: ['', ...Object.keys(icons)],
 	3: [
@@ -29,14 +29,17 @@ export default {
 	component: 'SliderButton'
 };
 
-export const _SliderButton = () => (
+export const _SliderButton = (args) => (
 	<SliderButton
 		onChange={action('onChange')}
-		disabled={boolean('disabled', Config)}
+		disabled={args['disabled']}
 	>
-		{prop[select('options', [3, 5], Config, '3')]}
+		{prop[args['options']]}
 	</SliderButton>
 );
+
+boolean('disabled', _SliderButton, Config);
+select('options', _SliderButton, [3, 5], Config, 3);
 
 _SliderButton.storyName = 'SliderButton';
 _SliderButton.parameters = {

@@ -1,10 +1,10 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select} from '@enact/storybook-utils/addons/controls';
 import ColorPicker, {ColorPickerBase} from '@enact/agate/ColorPicker';
 
 ColorPicker.displayName = 'ColorPicker';
-const Config = mergeComponentMetadata('ColorPicker', ColorPicker, ColorPickerBase);
+const Config = mergeComponentMetadata('ColorPicker', ColorPickerBase, ColorPicker );
 
 const prop = {
 	direction: ['up', 'right', 'down', 'left'],
@@ -23,16 +23,15 @@ export default {
 	component: 'ColorPicker'
 };
 
-export const _ColorPicker = () => {
-	const direction = select('direction', prop.direction, Config, 'right'); // moved out of component to force order of knobs in the story
+export const _ColorPicker = (args) => {
+	const direction = args['direction'];
 	const colors = prop.presets[
-		select('color palette', Object.keys(prop.presets), StoryOptions, 'Default')
+		args['color palette'] || 'Default'
 	];
-
 	return (
 		<ColorPicker
 			direction={direction}
-			disabled={boolean('disabled', Config)}
+			disabled={args['disabled']}
 			onChange={action('onChange')}
 			defaultValue={colors[0]}
 		>
@@ -40,6 +39,10 @@ export const _ColorPicker = () => {
 		</ColorPicker>
 	);
 };
+
+select('direction', _ColorPicker, prop.direction, Config, 'right');
+boolean('disabled', _ColorPicker, Config);
+select('color palette', _ColorPicker, Object.keys(prop.presets), StoryOptions, prop.presets['Default']);
 
 _ColorPicker.storyName = 'ColorPicker';
 _ColorPicker.parameters = {
