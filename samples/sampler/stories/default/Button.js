@@ -57,6 +57,9 @@ const SkinnedButtonBase = kind({
 	name: 'SkinnedButton',
 
 	propTypes: {
+		icon: PropTypes.string,
+		iconFlip: PropTypes.string,
+		iconPosition: PropTypes.string,
 		skin: PropTypes.string
 	},
 

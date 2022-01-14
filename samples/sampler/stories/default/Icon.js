@@ -21,7 +21,12 @@ const SkinnedIconBase = kind({
 	name: 'SkinnedIcon',
 
 	propTypes: {
-		skin: PropTypes.string
+		customIcon: PropTypes.string,
+		icon: PropTypes.string,
+		iconType: PropTypes.string,
+		size: PropTypes.string,
+		skin: PropTypes.string,
+		src: PropTypes.string
 	},
 
 	render: ({customIcon, icon, iconType, size, skin, src, ...rest}) => {
@@ -58,9 +63,9 @@ const SkinnedIconBase = kind({
 				<br />
 				<br />
 				<Heading>All Icons</Heading>
-				{iconNames.map((icon, index) => (
-					<Icon key={index} size={size} title={icon}>
-						{icon}
+				{iconNames.map((iconName, index) => (
+					<Icon key={index} size={size} title={iconName}>
+						{iconName}
 					</Icon>
 				))}
 			</>

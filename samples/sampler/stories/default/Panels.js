@@ -58,6 +58,10 @@ const BasicPanels = ({orientation, ...rest}) => {
 	);
 };
 
+BasicPanels.propTypes = {
+	orientation: PropTypes.string
+};
+
 export default {
 	title: 'Agate/Panels',
 	component: 'Panels'
