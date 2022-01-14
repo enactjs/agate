@@ -32,6 +32,7 @@ export const _ToggleButton = (args) => (
 		{args['children']}
 	</ToggleButton>
 );
+
 select('backgroundOpacity', _ToggleButton, ['opaque', 'lightOpaque', 'transparent'], Config);
 boolean('defaultSelected', _ToggleButton, Config, true);
 boolean('disabled', _ToggleButton, Config);
@@ -42,6 +43,7 @@ text('toggleOnLabel', _ToggleButton, Config, 'On');
 select('type', _ToggleButton, ['grid', 'standard'], Config, 'standard');
 boolean('underline', _ToggleButton, Config, true);
 text('children', _ToggleButton, Config, 'Click me');
+
 _ToggleButton.storyName = 'ToggleButton';
 _ToggleButton.parameters = {
 	info: {

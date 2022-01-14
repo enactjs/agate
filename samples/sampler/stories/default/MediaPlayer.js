@@ -30,9 +30,11 @@ export const _MediaPlayer = (args) => (
 		}
 	</MediaPlayer>
 );
+
 boolean('disabled', _MediaPlayer, Config);
 boolean('spotlightDisabled', _MediaPlayer, Config);
 select('type', _MediaPlayer, ['full', 'tiny'], Config);
+
 _MediaPlayer.storyName = 'MediaPlayer';
 _MediaPlayer.parameters = {
 	info: {

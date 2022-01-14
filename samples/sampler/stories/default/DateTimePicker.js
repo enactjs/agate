@@ -21,8 +21,10 @@ export const _DateTimePicker = (args) => {
 		/>
 	);
 };
+
 boolean('disabled', _DateTimePicker, Config);
 boolean('spotlightDisabled', _DateTimePicker, Config);
+
 _DateTimePicker.storyName = 'DateTimePicker';
 _DateTimePicker.parameters = {
 	info: {

@@ -26,9 +26,11 @@ export const ArcBasic = (args) => (
 		strokeWidth={args['strokeWidth']}
 	/>
 );
+
 select('color', ArcBasic, arcProp.colors, Config);
 range('endAngle', ArcBasic, Config, {range: true, min: 0, max: 360});
 number('radius', ArcBasic, Config);
 range('startAngle', ArcBasic, Config, {range: true, min: 0, max: 360});
 number('strokeWidth', ArcBasic, Config);
+
 ArcBasic.storyName = 'Arc';

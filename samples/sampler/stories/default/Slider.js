@@ -50,6 +50,7 @@ export const _Slider = (args) => {
 		</Slider>
 	);
 };
+
 boolean('disabled', _Slider, Config);
 boolean('tooltip', _Slider, SliderTooltipConfig);
 boolean('percent', _Slider, SliderTooltipConfig);
@@ -62,6 +63,7 @@ number('max', _Slider, Config);
 number('min', _Slider, Config);
 range('progressAnchor', _Slider, Config, {range: true, min: 0, max: 1, step: 0.1}, 0);
 number('step', _Slider, Config);
+
 _Slider.storyName = 'Slider';
 _Slider.parameters = {
 	info: {

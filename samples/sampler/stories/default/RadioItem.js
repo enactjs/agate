@@ -31,11 +31,13 @@ export const _RadioItem = (args) => {
 		</RadioItem>
 	);
 };
+
 select('slotBefore', _RadioItem, ['', ...iconList], Config);
 boolean('disabled', _RadioItem, Config);
 select('icon', _RadioItem, ['', ...iconList], Config);
 boolean('inline', _RadioItem, Config);
 text('children', _RadioItem, Config, 'Hello RadioItem');
+
 _RadioItem.storyName = 'RadioItem';
 _RadioItem.parameters = {
 	info: {

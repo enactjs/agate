@@ -17,41 +17,39 @@ const reloadPage = () => {
 	window.parent.location.href = protocol + '//' + host + pathname;
 };
 
-const SkinFrame = Skinnable(
-	kind({
-		name: 'SkinFrame',
+const SkinFrame = Skinnable(kind({
+	name: 'SkinFrame',
 
-		propTypes: {
-			/**
-       * Hides the Panel's body components.
-       *
-       * @type {Boolean}
-       * @public
-       */
-			hideChildren: PropTypes.bool,
+	propTypes: {
+		/**
+		 * Hides the Panel's body components.
+		 *
+		 * @type {Boolean}
+		 * @public
+		 */
+		hideChildren: PropTypes.bool,
 
-			/**
-       * Spotlight Id.
-       *
-       * @type {String}
-       * @private
-       */
-			spotlightId: PropTypes.string
-		},
+		/**
+		 * Spotlight Id.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		spotlightId: PropTypes.string
+	},
 
-		styles: {
-			css,
-			className: 'skinFrame'
-		},
+	styles: {
+		css,
+		className: 'skinFrame'
+	},
 
-		render: (props) => {
-			delete props.hideChildren;
-			delete props.spotlightId;
+	render: (props) => {
+		delete props.hideChildren;
+		delete props.spotlightId;
 
-			return <Row {...props} />;
-		}
-	})
-);
+		return (<Row {...props} />);
+	}
+}));
 
 const PanelsBase = kind({
 	name: 'ThemeEnvironment',
@@ -70,43 +68,31 @@ const PanelsBase = kind({
 		className: 'themeEnvironment'
 	},
 
-	render: ({
-		children,
-		description,
-		noScroller,
-		noPanel,
-		noPanels,
-		title,
-		...rest
-	}) => {
+	render: ({children, description, noScroller, noPanel, noPanels, title, ...rest}) => {
 		const Wrapper = noScroller ? 'div' : Scroller;
 
 		delete rest.spotlightId;
 
-		return !noPanels ? (
-			<Wrapper {...rest}>
+		return (
+			!noPanels ? <Wrapper {...rest}>
 				<Panels onApplicationClose={reloadPage}>
-					{!noPanel ? (
-						<Panel className={css.panel}>
-							<Column>
-								<Cell shrink>
-									<Heading showLine>{title}</Heading>
-									{description ? (
-										<div className={css.description}>
-											<p>{description}</p>
-										</div>
-									) : null}
-								</Cell>
-								<Cell className={css.storyBody}>{children}</Cell>
-							</Column>
-						</Panel>
-					) : (
-						children
-					)}
+					{!noPanel ? <Panel className={css.panel}>
+						<Column>
+							<Cell shrink>
+								<Heading showLine>{title}</Heading>
+								{description ? (
+									<div className={css.description}>
+										<p>{description}</p>
+									</div>
+								) : null}
+							</Cell>
+							<Cell className={css.storyBody}>
+								{children}
+							</Cell>
+						</Column>
+					</Panel> : children}
 				</Panels>
-			</Wrapper>
-		) : (
-			<Wrapper {...rest}>{children}</Wrapper>
+			</Wrapper> : <Wrapper {...rest}>{children}</Wrapper>
 		);
 	}
 });
@@ -182,16 +168,12 @@ const StorybookDecorator = (story, config) => {
 			// highlight={defaultColors[globals['skin']].highlight}
 			{...(hasProps ? config.parameters.props : null)}
 		>
-			{showAllSkins ?
-				Object.keys(skins).map((skin) => (
+			{showAllSkins ? Object.keys(skins).map((skin) => (
 					<SkinFrame skin={skins[skin]} key={skin}>
-						<Cell size="20%" component={Heading}>
-							{skin}
-						</Cell>
+						<Cell size="20%" component={Heading}>{skin}</Cell>
 						<Cell>{sample}</Cell>
 					</SkinFrame>
-				)) :
-				sample}
+				)) : sample}
 		</Theme>
 	);
 };

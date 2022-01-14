@@ -40,8 +40,10 @@ export const _TabGroup = (args) => {
 		</TabGroup>
 	);
 };
+
 select('orientation', _TabGroup, ['vertical', 'horizontal'], Config, 'horizontal');
 select('tabPosition', _TabGroup, ['before', 'after'], Config, 'before');
+
 _TabGroup.storyName = 'TabGroup';
 _TabGroup.parameters = {
 	info: {

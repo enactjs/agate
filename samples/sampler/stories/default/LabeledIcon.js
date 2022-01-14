@@ -27,6 +27,7 @@ export const _LabeledIcon = (args) => (
 		{args['children']}
 	</LabeledIcon>
 );
+
 boolean('disabled', _LabeledIcon, Config);
 select('flip', _LabeledIcon, ['', 'both', 'horizontal', 'vertical'], Config, '');
 select('icon', _LabeledIcon, ['', ...iconList], Config, 'temperature');
@@ -34,6 +35,7 @@ boolean('inline', _LabeledIcon, Config);
 select('labelPosition', _LabeledIcon, ['above', 'after', 'before', 'below', 'left', 'right'], Config);
 select('size', _LabeledIcon, ['smallest', 'small', 'large', 'huge'], Config);
 text('children', _LabeledIcon, Config, 'Hello LabeledIcon');
+
 _LabeledIcon.storyName = 'LabeledIcon';
 _LabeledIcon.parameters = {
 	info: {

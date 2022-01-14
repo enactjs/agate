@@ -54,6 +54,7 @@ export const _Popup = (args) => {
 		</div>
 	);
 };
+
 select('buttons', _Popup, ['no buttons', '1 button', '2 buttons'], Config, 'no');
 boolean('centered', _Popup, Config);
 boolean('closeButton', _Popup, Config);
@@ -67,6 +68,7 @@ select('spotlightRestrict', _Popup, ['self-first', 'self-only'], Config, 'self-o
 text('title', _Popup, Config, 'Title');
 select('type', _Popup, [null, 'fade', 'slide'], Config);
 text('children', _Popup, Config, 'Hello Popup');
+
 _Popup.storyName = 'Popup';
 _Popup.parameters = {
 	info: {

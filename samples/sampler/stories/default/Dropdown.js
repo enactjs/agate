@@ -29,11 +29,13 @@ export const _Dropdown = (args) => {
 		</Dropdown>
 	);
 };
+
 range('items', _Dropdown, Config, {range: true, min: 0, max: 50}, 5);
 select('direction', _Dropdown, ['above', 'below'], Config);
 boolean('disabled', _Dropdown, Config);
 text('title', _Dropdown, Config, 'Please select');
 select('width', _Dropdown, ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config);
+
 _Dropdown.storyName = 'Dropdown';
 _Dropdown.parameters = {
 	info: {

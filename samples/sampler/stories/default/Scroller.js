@@ -54,12 +54,14 @@ export const _Scroller = (args) => (
 		</div>
 	</Scroller>
 );
+
 select('direction', _Scroller, prop.direction, ScrollerConfig);
 boolean('focusableScrollbar', _Scroller, ScrollerConfig);
 select('horizontalScrollbar', _Scroller, prop.scrollbarOption, ScrollerConfig);
 select('scrollMode', _Scroller, prop.scrollModeOption, ScrollerConfig);
 boolean('spotlightDisabled', _Scroller, ScrollerConfig, false);
 select('verticalScrollbar', _Scroller, prop.scrollbarOption, ScrollerConfig);
+
 _Scroller.storyName = 'Scroller';
 _Scroller.parameters = {
 	info: {

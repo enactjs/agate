@@ -24,10 +24,12 @@ export const _TemperatureControl = (args) => (
 		unit={args['unit']}
 	/>
 );
+
 boolean('disabled', _TemperatureControl, Config);
 number('max', _TemperatureControl, Config);
 number('min', _TemperatureControl, Config);
 select('unit', _TemperatureControl, prop.unit, Config);
+
 _TemperatureControl.storyName = 'TemperatureControl';
 _TemperatureControl.parameters = {
 	info: {

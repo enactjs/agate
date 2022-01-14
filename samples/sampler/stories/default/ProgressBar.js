@@ -45,6 +45,7 @@ export const _ProgressBar = (args) => {
 		</ProgressBar>
 	);
 };
+
 boolean('disabled', _ProgressBar, ProgressBarConfig);
 select('orientation', _ProgressBar, ['horizontal', 'vertical'], ProgressBarConfig);
 boolean('tooltip', _ProgressBar, ProgressBarTooltipConfig);
@@ -54,6 +55,7 @@ boolean('highlighted', _ProgressBar, ProgressBarConfig);
 range('progress', _ProgressBar, ProgressBarConfig, {range: true, min: 0, max: 1, step: 0.01}, 0.4);
 range('progressAnchor', _ProgressBar, ProgressBarConfig, {range: true, min: 0, max: 1, step: 0.01}, 0);
 select('size', _ProgressBar, ['small', 'large'], ProgressBarConfig);
+
 _ProgressBar.storyName = 'ProgressBar';
 _ProgressBar.parameters = {
 	info: {

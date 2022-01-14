@@ -89,6 +89,7 @@ export const _Spinner = (args) => (
 		</div>
 	</div>
 );
+
 select('blockClickOn', _Spinner, [null, 'container', 'screen'], Config);
 boolean('centered', _Spinner, Config);
 boolean('paused', _Spinner, Config);
@@ -97,6 +98,7 @@ select('size', _Spinner, ['huge', 'large', 'small', 'smallest'], Config);
 select('type', _Spinner, ['loading', 'searching'], Config, 'searching');
 boolean('transparent', _Spinner, Config);
 text('content', _Spinner, Config, '');
+
 _Spinner.storyName = 'Spinner';
 _Spinner.parameters = {
 	info: {

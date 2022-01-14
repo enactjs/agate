@@ -12,7 +12,7 @@ module.exports = {
 		'@enact/storybook-utils/addons/controls/register',
 		'@enact/storybook-utils/addons/docs/register',
 		'@enact/storybook-utils/addons/toolbars/register',
-		,'storybook-color-picker'
+		'storybook-color-picker'
 	],
 	webpackFinal: async (config, {configType}) => {
 		return webpack(config, configType, __dirname);

@@ -29,6 +29,7 @@ export const _Picker = (args) => (
 		</Picker>
 	</div>
 );
+
 text('aria-label', _Picker, Config, '');
 text('decrementAriaLabel', _Picker, Config, '');
 boolean('disabled', _Picker, Config);
@@ -37,6 +38,7 @@ boolean('noAnimation', _Picker, Config);
 select('orientation', _Picker, ['vertical', 'horizontal'], Config);
 boolean('spotlightDisabled', _Picker, Config);
 boolean('wrap', _Picker, Config);
+
 _Picker.storyname = 'Picker';
 _Picker.parameters = {
 	info: {

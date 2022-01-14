@@ -38,6 +38,7 @@ export const _Input = (args) => (
 		type={args['type']}
 	/>
 );
+
 boolean('autoFocus', _Input, Config);
 boolean('clearButton', _Input, Config);
 select('clearIcon', _Input, iconNames, Config);
@@ -50,6 +51,7 @@ text('invalidMessage', _Input, Config);
 text('placeholder', _Input, Config, 'Input text here');
 select('size', _Input, ['small', 'large'], Config, 'large');
 select('type', _Input, prop.type, Config);
+
 _Input.storyName = 'Input';
 _Input.parameters = {
 	info: {

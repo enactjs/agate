@@ -26,6 +26,7 @@ export const _RangePicker = (args) => (
 		wrap={args['wrap']}
 	/>
 );
+
 boolean('disabled', _RangePicker, Config);
 number('max', _RangePicker, Config, 20);
 number('min', _RangePicker, Config, 0);
@@ -34,6 +35,7 @@ select('orientation', _RangePicker, ['vertical', 'horizontal'], Config);
 boolean('spotlightDisabled', _RangePicker, Config);
 number('step', _RangePicker, Config);
 boolean('wrap', _RangePicker, Config);
+
 _RangePicker.storyName = 'RangePicker';
 _RangePicker.parameters = {
 	info: {

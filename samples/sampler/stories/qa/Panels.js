@@ -163,9 +163,11 @@ export const PreserveFocus = (args) => (
 		orientation={args['orientation']}
 	/>
 );
+
 boolean('noAnimation', PreserveFocus, Config);
 boolean('noCloseButton', PreserveFocus, Config);
 select('orientation', PreserveFocus, ['horizontal', 'vertical'], Config);
+
 PreserveFocus.storyName = 'preserve focus';
 PreserveFocus.parameters = {
 	props: {

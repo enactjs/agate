@@ -57,8 +57,8 @@ export const parameters = {
 };
 export const globalTypes = {
 	'locale': getObjectType('locale', 'en-US', locales),
-	'show all skins': getBooleanType('show all skins'),
 	'night mode': getBooleanType('night mode'),
+	'show all skins': getBooleanType('show all skins'),
 	'skin': getObjectType('skins', 'gallium', skins),
 	// TODO - add 'default skin styles' toolbar item to dynamically show/hide accent and highlight toolbar item
 	// 'default skin styles': getBooleanType('default skin styles'),

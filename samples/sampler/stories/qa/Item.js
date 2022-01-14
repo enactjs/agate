@@ -42,6 +42,7 @@ export const withIconsAndSlotAfter = (args) => {
 		</Item>
 	);
 };
+
 select('slotAfter Icon 1', withIconsAndSlotAfter, iconList, Config);
 select('slotAfter Icon 2', withIconsAndSlotAfter, iconList, Config);
 text('slotAfter Text', withIconsAndSlotAfter, Config, 'Sub Text');
@@ -51,6 +52,7 @@ text('label', withIconsAndSlotAfter, Config);
 select('labelPosition', withIconsAndSlotAfter, ['above', 'after', 'before', 'below'], Config, 'below');
 boolean('selected', withIconsAndSlotAfter, Config);
 text('children', withIconsAndSlotAfter, Config, 'Hello Item');
+
 withIconsAndSlotAfter.storyName = 'with icons and a text in slotAfter';
 
 export const kitchenSink = () => (

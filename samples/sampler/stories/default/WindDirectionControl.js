@@ -17,7 +17,9 @@ export const _WindDirectionControl = (args) => (
 		onChange={action('onChange')}
 	/>
 );
+
 boolean('disabled', _WindDirectionControl, Config);
+
 _WindDirectionControl.storyName = 'WindDirectionControl';
 _WindDirectionControl.parameters = {
 	info: {

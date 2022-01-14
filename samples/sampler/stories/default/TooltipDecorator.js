@@ -58,6 +58,7 @@ export const _TooltipButton = (args) => (
 		</TooltipButton>
 	</div>
 );
+
 select('backgroundOpacity', _TooltipButton, ['opaque', 'lightOpaque', 'transparent'], Config);
 boolean('disabled', _TooltipButton, Config);
 select('icon', _TooltipButton, ['', ...iconList], Config);
@@ -70,6 +71,7 @@ boolean('tooltipRelative', _TooltipButton, Config);
 text('tooltip', _TooltipButton, Config, 'Tooltip');
 number('tooltipWidth', _TooltipButton, Config);
 text('children', _TooltipButton, Config, 'Click me');
+
 _TooltipButton.storyName = 'TooltipDecorator';
 _TooltipButton.parameters = {
 	info: {

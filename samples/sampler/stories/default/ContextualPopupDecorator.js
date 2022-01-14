@@ -44,6 +44,7 @@ export const _ContextualPopupDecorator = (args) => {
 		</div>
 	);
 };
+
 select('direction', _ContextualPopupDecorator, ['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config);
 boolean('noAutoDismiss', _ContextualPopupDecorator, Config);
 boolean('showCloseButton', _ContextualPopupDecorator, Config);
@@ -51,6 +52,7 @@ select('spotlightRestrict', _ContextualPopupDecorator, ['none', 'self-first', 's
 text('popup string', _ContextualPopupDecorator, {groupId: 'Popup'}, 'Hello Contextual Popup');
 boolean('open', _ContextualPopupDecorator, Config);
 text('button string', _ContextualPopupDecorator, Config, 'Hello Contextual Button');
+
 _ContextualPopupDecorator.storyName = 'ContextualPopupDecorator';
 _ContextualPopupDecorator.parameters = {
 	info: {

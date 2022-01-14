@@ -21,11 +21,13 @@ export const _DatePicker = (args) => (
 		yearAriaLabel={args['yearAriaLabel']}
 	/>
 );
+
 text('dayAriaLabel', _DatePicker, Config);
 boolean('disabled', _DatePicker, Config);
 text('monthAriaLabel', _DatePicker, Config);
 boolean('spotlightDisabled', _DatePicker, Config);
 text('yearAriaLabel', _DatePicker, Config);
+
 _DatePicker.storyName = 'DatePicker';
 _DatePicker.parameters = {
 	info: {

@@ -16,7 +16,7 @@ TabbedPanels.displayName = 'TabbedPanels';
 const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase);
 // `paddingBottom: '56.25%'` is a trick to impose 16:9 aspect ratio on the component, since padding percentage is based on the width, not the height.
 
-const I18nTabbedPanelsBase = ({rtl, ...rest}) => {
+const I18nTabbedPanelsBase = ({orientation, rtl, tabPosition, ...rest}) => {
 	const [panelIndex, setIndex] = useState(Config.defaultProps.index || 0);
 	const onSelect = (e) => {
 		setIndex(e.index);
@@ -28,7 +28,6 @@ const I18nTabbedPanelsBase = ({rtl, ...rest}) => {
 	const onAfterTabs = () => {
 		setIndex(Math.min(panelIndex + 1, 2));
 	};
-	const orientation = rest['orientation'];
 
 	return (
 		<div style={{paddingBottom: '56.25%'}}>
@@ -37,7 +36,7 @@ const I18nTabbedPanelsBase = ({rtl, ...rest}) => {
 				index={panelIndex}
 				onSelect={onSelect} // eslint-disable-line react/jsx-no-bind
 				orientation={orientation}
-				tabPosition={rest['tabPosition']}
+				tabPosition={tabPosition}
 				tabs={[
 					{title: 'Button', icon: 'netbook'},
 					{title: 'Item', icon: 'aircirculation'},
@@ -106,10 +105,12 @@ export const _TabbedPanels = (args) => (
 		tabPosition={args['tabPosition']}
 	/>
 );
+
 select('orientation', _TabbedPanels, ['vertical', 'horizontal'], Config, 'vertical');
 select('tabPosition', _TabbedPanels, ['before', 'after'], Config, 'before');
 number('duration', _TabbedPanels, Config, 500);
 boolean('noCloseButton', _TabbedPanels, Config);
+
 _TabbedPanels.storyName = 'TabbedPanels';
 _TabbedPanels.parameters = {
 	info: {

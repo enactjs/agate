@@ -77,6 +77,7 @@ export const _VirtualList = (args) => {
 		/>
 	);
 };
+
 number('dataSize', _VirtualList, VirtualListConfig, defaultDataSize);
 boolean('focusableScrollbar', _VirtualList, VirtualListConfig);
 select('horizontalScrollbar', _VirtualList, prop.scrollbarOption, VirtualListConfig);
@@ -86,6 +87,7 @@ number('spacing', _VirtualList, VirtualListConfig);
 boolean('spotlightDisabled', _VirtualList, VirtualListConfig, false);
 select('verticalScrollbar', _VirtualList, prop.scrollbarOption, VirtualListConfig);
 select('wrap', _VirtualList, ['false', 'true', '"noAnimation"'], VirtualListConfig);
+
 _VirtualList.storyName = 'VirtualList';
 _VirtualList.parameters = {
 	info: {

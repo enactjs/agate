@@ -21,11 +21,13 @@ export const _TimePicker = (args) => (
 		spotlightDisabled={args['spotlightDisabled']}
 	/>
 );
+
 boolean('disabled', _TimePicker, Config);
 text('hourAriaLabel', _TimePicker, Config, '');
 text('meridiemAriaLabel', _TimePicker, Config, '');
 text('minuteAriaLabel', _TimePicker, Config, '');
 boolean('spotlightDisabled', _TimePicker, Config);
+
 _TimePicker.storyName = 'TimePicker';
 _TimePicker.parameters = {
 	info: {

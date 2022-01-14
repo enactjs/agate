@@ -22,12 +22,14 @@ export const _ThumbnailItem = (args) => (
 		{args['children']}
 	</ThumbnailItem>
 );
+
 boolean('disabled', _ThumbnailItem, Config);
 boolean('inline', _ThumbnailItem, Config);
 text('label', _ThumbnailItem, Config, 'Sub Content');
 boolean('selected', _ThumbnailItem, Config);
 select('type', _ThumbnailItem, ['normal', 'styled'], Config);
 text('children', _ThumbnailItem, Config, 'Main Content');
+
 _ThumbnailItem.storyName = 'ThumbnailItem';
 _ThumbnailItem.parameters = {
 	info: {

@@ -22,10 +22,12 @@ export const _FanSpeedControl = (args) => (
 		onChange={action('onChange')}
 	/>
 );
+
 boolean('disabled', _FanSpeedControl, Config);
 select('icon', _FanSpeedControl, ['', ...iconList], Config.defaultProps['icon'], 'FanSpeedControl');
 range('max', _FanSpeedControl, Config, {max: 40, min: 1, range: true, step: 1}, 10);
 range('min', _FanSpeedControl, Config, {max: 40, min: 1, range: true, step: 1}, 1);
+
 _FanSpeedControl.storyName = 'FanSpeedControl';
 _FanSpeedControl.parameters = {
 	info: {

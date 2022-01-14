@@ -86,6 +86,7 @@ export const _VirtualGridList = (args) => {
 		/>
 	);
 };
+
 number('dataSize', _VirtualGridList, VirtualGridListConfig, defaultDataSize);
 select('direction', _VirtualGridList, prop.direction, VirtualGridListConfig);
 boolean('focusableScrollbar', _VirtualGridList, VirtualGridListConfig);
@@ -96,6 +97,7 @@ number('spacing', _VirtualGridList, VirtualGridListConfig, 20);
 boolean('spotlightDisabled', _VirtualGridList, VirtualGridListConfig, false);
 select('verticalScrollBar', _VirtualGridList, prop.scrollBarOption, VirtualGridListConfig);
 select('wrap', _VirtualGridList, ['false', 'true', '"noAnimation"'], VirtualGridListConfig);
+
 _VirtualGridList.storyName = 'VirtualList.VirtualGridList';
 _VirtualGridList.parameters = {
 	info: {

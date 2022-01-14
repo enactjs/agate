@@ -83,12 +83,14 @@ export const _Drawer = (args) => {
 		</BodyText>
 	);
 };
+
 boolean('noAnimation', _Drawer, Config);
 select('Drawer background color', _Drawer, drawerColors, StoryOptions);
 range('Drawer background opacity', _Drawer, StoryOptions, opacityRange, 0.85);
 boolean('open', _Drawer, Config);
 text('header', _Drawer, Config, '[insert witty header text]');
 text('footer', _Drawer, Config, '');
+
 _Drawer.storyName = 'Drawer';
 _Drawer.parameters = {
 	info: {

@@ -21,8 +21,10 @@ export const _Panel = (args) => (
 		<Button>Click me</Button>
 	</Panel>
 );
+
 text('subtitle', _Panel, HeaderConfig, 'Header Subtitle');
 text('title', _Panel, HeaderConfig, 'Header Title');
+
 _Panel.storyName = 'Panel';
 _Panel.parameters = {
 	props: {

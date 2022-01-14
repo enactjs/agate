@@ -82,6 +82,7 @@ export const _PopupMenu = (args) => {
 		</Story>
 	);
 };
+
 boolean('closeButton', _PopupMenu, Config);
 boolean('noAutoDismiss', _PopupMenu, Config);
 text('closeButtonLabel', _PopupMenu, Config);
@@ -89,6 +90,7 @@ boolean('noAnimation', _PopupMenu, Config);
 select('scrimType', _PopupMenu, ['none', 'translucent', 'transparent'], Config, 'translucent');
 select('spotlightRestrict', _PopupMenu, ['self-first', 'self-only'], Config, 'self-only');
 text('title', _PopupMenu, Config, 'Title');
+
 _PopupMenu.storyName = 'PopupMenu';
 _PopupMenu.parameters = {
 	info: {

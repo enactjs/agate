@@ -51,9 +51,11 @@ export const WithLongContent = (args) => (
 		</div>
 	</div>
 );
+
 select('blockClickOn', WithLongContent, [null, 'container', 'screen'], Spinner);
 boolean('centered', WithLongContent, Spinner, false);
 boolean('scrim', WithLongContent, Spinner, true);
 boolean('transparent', WithLongContent, Spinner, false);
 text('content', WithLongContent, Spinner, prop.longText);
+
 WithLongContent.storyName = 'with long content';

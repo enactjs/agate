@@ -58,6 +58,7 @@ export const _IncrementSlider = (args) => {
 		</IncrementSlider>
 	);
 };
+
 select('orientation', _IncrementSlider, ['horizontal', 'vertical'], Config);
 boolean('disabled', _IncrementSlider, Config);
 boolean('tooltip', _IncrementSlider, IncrementSliderTooltipConfig);
@@ -73,6 +74,7 @@ boolean('noFill', _IncrementSlider, Config);
 range('progressAnchor', _IncrementSlider, Config, {range: true, min: 0, max: 1, step: 0.1}, 0);
 select('size', _IncrementSlider, ['small', 'large'], Config);
 number('step', _IncrementSlider, Config);
+
 _IncrementSlider.storyName = 'IncrementSlider';
 _IncrementSlider.parameters = {
 	info: {

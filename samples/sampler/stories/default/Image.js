@@ -51,8 +51,10 @@ export const _Image = (args) => (
 		</label>
 	</Image>
 );
+
 select('sizing', _Image, ['fill', 'fit', 'none'], Config, 'fill');
 object('src', _Image, Config, src);
+
 _Image.storyname = 'Image';
 _Image.parameters = {
 	info: {

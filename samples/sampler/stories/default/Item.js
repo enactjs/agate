@@ -27,6 +27,7 @@ export const _Item = (args) => (
 		{args['children']}
 	</Item>
 );
+
 boolean('centered', _Item, Config);
 boolean('disabled', _Item, Config);
 boolean('inline', _Item, Config);
@@ -37,6 +38,7 @@ select('size', _Item, ['small', 'large'], Config);
 select('slotBefore', _Item, {'': '', '<Icon />' : 'icon'}, Config);
 select('slotAfter', _Item, {'': '', '<Icon />' : 'icon'}, Config);
 text('children', _Item, Config, 'Hello Item');
+
 _Item.storyName = 'Item';
 _Item.parameters = {
 	info: {

@@ -41,11 +41,13 @@ export const _Header = (args) => {
 		</Header>
 	);
 };
+
 select('children', _Header, ['no buttons', '1 button', '2 buttons'], Config);
 boolean('hideLine', _Header, Config);
 text('subtitle', _Header, Config, 'Sub Title');
 text('title', _Header, Config, 'Main Title');
 text('titleAbove', _Header, Config, '');
+
 _Header.storyName = 'Header';
 _Header.parameters = {
 	info: {

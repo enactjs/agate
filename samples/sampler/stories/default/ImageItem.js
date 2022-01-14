@@ -33,12 +33,14 @@ export const _ImageItem = (args) => (
 		</ImageItem>
 	</div>
 );
+
 select('captionPosition', _ImageItem, ['below', 'overlay'], Config);
 boolean('disabled', _ImageItem, Config);
 select('orientation', _ImageItem, ['horizontal', 'vertical'], Config);
 select('sizing', _ImageItem, ['fill', 'fit', 'none'], Config);
 object('src', _ImageItem, Config, src);
 text('children', _ImageItem, Config, 'caption');
+
 _ImageItem.storyName = 'ImageItem';
 _ImageItem.parameters = {
 	info: {

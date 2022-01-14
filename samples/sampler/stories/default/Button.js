@@ -1,12 +1,7 @@
 import kind from '@enact/core/kind';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {
-	boolean,
-	select,
-	text,
-	number
-} from '@enact/storybook-utils/addons/controls';
+import {boolean, select, text, number} from '@enact/storybook-utils/addons/controls';
 import UiButton from '@enact/ui/Button';
 import PropTypes from 'prop-types';
 import Button, {ButtonBase} from '@enact/agate/Button';
@@ -65,16 +60,16 @@ const SkinnedButtonBase = kind({
 		skin: PropTypes.string
 	},
 
-	render: ({...rest}) => {
+	render: ({icon, iconFlip, iconPosition, ...rest}) => {
 		// let icons =
 		//   skin === 'silicon' ? ['', ...iconListSilicon] : ['', ...iconList];
 
 		return (
 			<Button
 				{...rest}
-				icon={rest['icon']}
-				iconFlip={rest['iconFlip']}
-				iconPosition={rest['iconPosition']}
+				icon={icon}
+				iconFlip={iconFlip}
+				iconPosition={iconPosition}
 			/>
 		);
 	}
@@ -116,12 +111,7 @@ export const _Button = (args) => {
 
 boolean('animateOnRender', _Button, Config);
 number('animationDelay', _Button, Config);
-select(
-	'backgroundOpacity',
-	_Button,
-	['opaque', 'lightOpaque', 'transparent'],
-	Config
-);
+select('backgroundOpacity', _Button, ['opaque', 'lightOpaque', 'transparent'], Config);
 text('badge', _Button, Config);
 select('badgeColor', _Button, prop.colors, Config);
 boolean('disabled', _Button, Config);
@@ -136,6 +126,7 @@ text('children', _Button, Config, 'Click me');
 select('icon', _Button, ['', ...iconList], Config, ''); // Here we should select icons based on the skin(special icons for silicon skin)
 select('iconFlip', _Button, prop.iconFlip, Config);
 select('iconPosition', _Button, prop.iconPosition, Config);
+
 _Button.storyName = 'Button';
 _Button.parameters = {
 	info: {

@@ -26,6 +26,7 @@ export const _SwitchItem = (args) => (
 		</SwitchItem>
 	</div>
 );
+
 boolean('disabled', _SwitchItem, Config);
 select('icon', _SwitchItem, ['', ...iconList], Config, 'music');
 boolean('inline', _SwitchItem, Config);
@@ -33,6 +34,7 @@ select('size', _SwitchItem, ['small', 'large'], Config, 'large');
 text('switchOffLabel', _SwitchItem, Config);
 text('switchOnLabel', _SwitchItem, Config);
 text('children', _SwitchItem, Config, 'Sound');
+
 _SwitchItem.storyName = 'SwitchItem';
 _SwitchItem.parameters = {
 	info: {

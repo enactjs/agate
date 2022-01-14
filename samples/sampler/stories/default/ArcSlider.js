@@ -47,6 +47,7 @@ select('radius', _ArcSlider, prop.radius, Config);
 range('startAngle', _ArcSlider, Config, {range: true, min: 0, max: 360});
 number('step', _ArcSlider, Config);
 number('strokeWidth', _ArcSlider, Config);
+
 _ArcSlider.storyName = 'ArcSlider';
 _ArcSlider.parameters = {
 	info: {

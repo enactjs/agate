@@ -63,6 +63,7 @@ export const _Marquee = (args) => {
 		</section>
 	);
 };
+
 text('marqueeSpacing', _Marquee, Config, '50%');
 boolean('disabled', _Marquee, Config);
 select('alignment', _Marquee, [null, 'left', 'right', 'center'], Config);
@@ -73,6 +74,7 @@ boolean('marqueeDisabled', _Marquee, Config);
 select('marqueeOn', _Marquee, ['hover', 'render'], Config, 'render');
 number('marqueeResetDelay', _Marquee, Config, 1000);
 number('marqueeSpeed', _Marquee, Config, 60);
+
 _Marquee.storyName = 'Marquee';
 _Marquee.parameters = {
 	info: {

@@ -39,9 +39,11 @@ export const _ColorPicker = (args) => {
 		</ColorPicker>
 	);
 };
+
 select('direction', _ColorPicker, prop.direction, Config, 'right');
 boolean('disabled', _ColorPicker, Config);
 select('color palette', _ColorPicker, Object.keys(prop.presets), StoryOptions, prop.presets['Default']);
+
 _ColorPicker.storyName = 'ColorPicker';
 _ColorPicker.parameters = {
 	info: {

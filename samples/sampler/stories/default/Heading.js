@@ -54,6 +54,7 @@ export const _Heading = (args) => {
 		</>
 	);
 };
+
 select('color', _Heading, prop.colors, Config);
 boolean('disabled', _Heading, Config);
 select('marqueeOn', _Heading, prop.marqueeOn, Config);
@@ -62,6 +63,7 @@ boolean('showLine', _Heading, Config);
 select('size', _Heading, prop.sizes, Config);
 select('spacing', _Heading, prop.spacings, Config);
 text('children', _Heading, Config, 'Heading Text');
+
 _Heading.storyName = 'Heading';
 _Heading.parameters = {
 	info: {

@@ -97,10 +97,12 @@ export const With2OptionsForTestingDirection = (args) => (
 		{['Option 1', 'Option 2']}
 	</Dropdown>
 );
+
 select('direction', With2OptionsForTestingDirection, ['above', 'below'], Config);
 boolean('disabled', With2OptionsForTestingDirection, Config);
 text('title', With2OptionsForTestingDirection, Config, 'Dropdown');
 select('width', With2OptionsForTestingDirection, ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config);
+
 With2OptionsForTestingDirection.storyName = 'with 2 options for testing direction';
 
 export const WithDefaultSelectedIn30Options = (args) => (
@@ -117,10 +119,12 @@ export const WithDefaultSelectedIn30Options = (args) => (
 		{items(30)}
 	</Dropdown>
 );
+
 select('direction', WithDefaultSelectedIn30Options, ['above', 'below'], Config);
 boolean('disabled', WithDefaultSelectedIn30Options, Config);
 text('title', WithDefaultSelectedIn30Options, Config, 'Dropdown');
 select('width', WithDefaultSelectedIn30Options, ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config);
+
 WithDefaultSelectedIn30Options.storyName = 'with defaultSelected in 30 options';
 
 export const WithLongText = (args) => (
@@ -141,6 +145,7 @@ select('direction', WithLongText, ['above', 'below'], Config);
 boolean('disabled', WithLongText, Config);
 text('title', WithLongText, Config, 'Dropdown');
 select('width', WithLongText, ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config);
+
 WithLongText.storyName = 'with long text';
 
 export const WithMultipleDropdowns = (args) => (
@@ -169,10 +174,12 @@ export const WithMultipleDropdowns = (args) => (
 		</Dropdown>
 	</div>
 );
+
 select('direction', WithMultipleDropdowns, ['above', 'below'], Config);
 boolean('disabled', WithMultipleDropdowns, Config);
 text('title', WithMultipleDropdowns, Config, 'Dropdown');
 select('width', WithMultipleDropdowns, ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config);
+
 WithMultipleDropdowns.storyName = 'with multiple dropdowns';
 
 export const WithArrayOfChildrenObjects = (args) => (
@@ -191,10 +198,12 @@ export const WithArrayOfChildrenObjects = (args) => (
 		</Dropdown>
 	</div>
 );
+
 select('direction', WithArrayOfChildrenObjects, ['above', 'below'], Config);
 boolean('disabled', WithArrayOfChildrenObjects, Config);
 text('title', WithArrayOfChildrenObjects, Config, 'Dropdown');
 select('width', WithArrayOfChildrenObjects, ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config);
+
 WithArrayOfChildrenObjects.storyName = 'with array of children objects';
 
 export const WithAutoDismiss = () => <AutoDismissDropdown />;
@@ -226,6 +235,8 @@ export const WithGroupInScroller = (args) => {
 		</Scroller>
 	);
 };
+
 range('items', WithGroupInScroller, Config, {range: true, min: 0, max: 50}, 5);
 text('title', WithGroupInScroller, Config, 'Please select');
+
 WithGroupInScroller.storyName = 'with group in Scroller';

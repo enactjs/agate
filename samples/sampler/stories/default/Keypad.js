@@ -19,9 +19,11 @@ export const _Keypad = (args) => (
 		spotlightDisabled={args['spotlightDisabled']}
 	/>
 );
+
 boolean('disabled', _Keypad, Config);
 boolean('activeCall', _Keypad, Config);
 boolean('spotlightDisabled', _Keypad, Config);
+
 _Keypad.storyName = 'Keypad';
 _Keypad.parameters = {
 	info: {

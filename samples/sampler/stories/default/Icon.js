@@ -24,9 +24,8 @@ const SkinnedIconBase = kind({
 		skin: PropTypes.string
 	},
 
-	render: ({skin, ...rest}) => {
+	render: ({customIcon, icon, iconType, size, skin, src, ...rest}) => {
 		let iconNames;
-		const size = rest['size'];
 
 		switch (skin) {
 			case 'silicon': {
@@ -38,18 +37,17 @@ const SkinnedIconBase = kind({
 			}
 		}
 
-		const iconType = rest['iconType'];
 		let children;
 
 		switch (iconType) {
 			case 'glyph':
-				children = rest['icon'];
+				children = icon;
 				break;
 			case 'url src':
-				children = rest['src'];
+				children = src;
 				break;
 			default:
-				children = rest['customIcon'];
+				children = customIcon;
 		}
 
 		return (
@@ -94,13 +92,15 @@ export const _Icon = (args) => {
 		/>
 	);
 };
+
 select('flip', _Icon, ['', 'both', 'horizontal', 'vertical'], Config, '');
-number('spriteCount', _Icon, Config, {min: 1}, 1);
+number('spriteCount', _Icon, Config, 1);
 select('size', _Icon, ['smallest', 'small', 'large', 'huge'], Config, 'large');
 select('icon type', _Icon, ['glyph', 'url src', 'custom'], Config, 'glyph');
 select('icon', _Icon, ['', ...iconList], Config, 'home');
 select('src', _Icon, ['', docs, factory, logo], Config, logo);
 text('custom icon', _Icon, Config);
+
 _Icon.storyName = 'Icon';
 _Icon.parameters = {
 	info: {

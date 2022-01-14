@@ -6,17 +6,10 @@ import BodyText from '@enact/agate/BodyText';
 import Button from '@enact/agate/Button';
 import {ContextualPopupDecorator} from '@enact/agate/ContextualPopupDecorator';
 
-const ContextualButtonWithoutArrow = ContextualPopupDecorator(
-	{noArrow: true},
-	Button
-);
+const ContextualButtonWithoutArrow = ContextualPopupDecorator({noArrow: true}, Button);
 ContextualButtonWithoutArrow.displayName = 'ContextualButtonWithoutArrow';
 
-const Config = mergeComponentMetadata(
-	'ContextualPopupDecorator',
-	Button,
-	ContextualButtonWithoutArrow
-);
+const Config = mergeComponentMetadata('ContextualPopupDecorator', Button, ContextualButtonWithoutArrow);
 
 // NOTE: Something about the HOC is inhibiting accessing its defaultProps, so we're adding them here
 // manually. This can (should) be revisited later to find out why and a solution.
@@ -30,6 +23,7 @@ export default {
 	title: 'Agate/ContextualPopupDecorator',
 	component: 'ContextualPopupDecorator'
 };
+
 export const withoutAnArrow = (args) => {
 	const renderPopup = () => <div>{args['popup string']}</div>;
 
@@ -53,48 +47,19 @@ export const withoutAnArrow = (args) => {
 		</div>
 	);
 };
-select(
-	'direction',
-	withoutAnArrow,
-	[
-		'above',
-		'above center',
-		'above left',
-		'above right',
-		'below',
-		'below center',
-		'below left',
-		'below right',
-		'left middle',
-		'left top',
-		'left bottom',
-		'right middle',
-		'right top',
-		'right bottom'
-	],
-	Config
-);
+
+select('direction', withoutAnArrow,['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config);
 boolean('noAutoDismiss', withoutAnArrow, Config);
 select('offset', withoutAnArrow, ['none', 'overlap', 'small'], Config, 'small');
 boolean('open', withoutAnArrow, Config);
 boolean('showCloseButton', withoutAnArrow, Config);
-select(
-	'spotlightRestrict',
-	withoutAnArrow,
-	['none', 'self-first', 'self-only'],
-	Config
-);
+select('spotlightRestrict', withoutAnArrow, ['none', 'self-first', 'self-only'], Config);
 text('button string', withoutAnArrow, Config, 'Hello Contextual Button');
-text(
-	'popup string',
-	withoutAnArrow,
-	{groupId: 'Popup'},
-	'Hello Contextual Popup'
-);
+text('popup string', withoutAnArrow, {groupId: 'Popup'}, 'Hello Contextual Popup');
+
 withoutAnArrow.storyName = 'without an arrow';
 withoutAnArrow.parameters = {
 	info: {
-		text:
-      'ContextualPopupDecorator without an arrow by setting {noArrow: true} in config'
+		text: 'ContextualPopupDecorator without an arrow by setting {noArrow: true} in config'
 	}
 };

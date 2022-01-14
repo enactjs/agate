@@ -42,6 +42,7 @@ range('endAngle', _ArcPicker, Config, {range: true, min: 0, max: 360});
 select('foregroundColor', _ArcPicker, prop.colors, Config);
 select('selectionType', _ArcPicker, ['cumulative', 'single'], Config, 'cumulative');
 range('startAngle', _ArcPicker, Config, {range: true, min: 0, max: 360});
+
 _ArcPicker.storyName = 'ArcPicker';
 _ArcPicker.parameters = {
 	info: {

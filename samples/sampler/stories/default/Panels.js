@@ -40,7 +40,7 @@ const SecondPanel = kind({
 	)
 });
 
-const BasicPanels = ({...rest}) => {
+const BasicPanels = ({orientation, ...rest}) => {
 	const [index, setIndex] = useState(0);
 	const goNext = () => setIndex(clamp(0, 2, index + 1));
 	const goPrevious = () => setIndex(clamp(0, 2, index - 1));
@@ -50,7 +50,7 @@ const BasicPanels = ({...rest}) => {
 			{...rest}
 			index={index}
 			onBack={goPrevious}
-			orientation={rest['orientation']}
+			orientation={orientation}
 		>
 			<FirstPanel onClick={goNext} />
 			<SecondPanel onClick={goPrevious} />
@@ -71,9 +71,11 @@ export const _Panels = (args) => (
 		orientation={args['orientation']}
 	/>
 );
+
 boolean('noAnimation', _Panels, Config, false);
 boolean('noCloseButton', _Panels, Config, false);
 select('orientation', _Panels, ['horizontal', 'vertical'], Config);
+
 _Panels.storyName = 'Panels';
 _Panels.parameters = {
 	props: {

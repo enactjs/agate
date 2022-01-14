@@ -37,8 +37,10 @@ export const _SliderButton = (args) => (
 		{prop[args['options']]}
 	</SliderButton>
 );
+
 boolean('disabled', _SliderButton, Config);
 select('options', _SliderButton, [3, 5], Config, 3);
+
 _SliderButton.storyName = 'SliderButton';
 _SliderButton.parameters = {
 	info: {

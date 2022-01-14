@@ -28,6 +28,7 @@ export const _LabeledIconButton = (args) => (
 		{args['children']}
 	</LabeledIconButton>
 );
+
 select('backgroundOpacity', _LabeledIconButton, ['', 'opaque', 'lightOpaque', 'transparent'], Config, '');
 boolean('disabled', _LabeledIconButton, Config);
 boolean('highlighted', _LabeledIconButton, Config);
@@ -38,6 +39,7 @@ boolean('selected', _LabeledIconButton, Config);
 select('size', _LabeledIconButton, ['smallest', 'small', 'large', 'huge'], Config);
 text('tooltipText', _LabeledIconButton, Config, 'This is a Labeled Icon Button');
 text('children', _LabeledIconButton, Config, 'Hello LabeledIconButton');
+
 _LabeledIconButton.storyName = 'LabeledIconButton';
 _LabeledIconButton.parameters = {
 	info: {

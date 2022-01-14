@@ -23,10 +23,12 @@ export const _Checkbox = (args) => (
 		{args['children']}
 	</Checkbox>
 );
+
 boolean('disabled', _Checkbox, Config);
 boolean('indeterminate', _Checkbox, Config);
 select('indeterminateIcon', _Checkbox, ['', ...iconList], Config);
 select('children', _Checkbox, ['', ...iconList], Config);
+
 _Checkbox.storyName = 'Checkbox';
 _Checkbox.parameters = {
 	info: {
