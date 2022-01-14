@@ -1,10 +1,10 @@
-import {cap} from '@enact/core/util'
+import {cap} from '@enact/core/util';
 import {configureActions} from '@enact/storybook-utils/addons/actions';
 import {getBooleanType, getObjectType} from '@enact/storybook-utils/addons/controls';
 import {DocsPage, DocsContainer} from '@enact/storybook-utils/addons/docs';
 import {themes} from '@storybook/theming';
 
-import ThemeEnvironment from '../src/ThemeEnvironment'
+import ThemeEnvironment from '../src/ThemeEnvironment';
 
 const locales = {
 	'local': '',
@@ -22,7 +22,7 @@ const locales = {
 	'ja-JP - Japanese, custom Japanese font': 'ja-JP',
 	'en-JP - English, custom Japanese font': 'en-JP',
 	'si-LK - Sinhala, external font family with tallglyph characters': 'si-LK',
-	'km-KH - Cambodian Khmer, with tallglyph characters': 'km-KH',
+	'km-KH - Cambodian Khmer, with tallglyph characters': 'km-KH'
   };
 
   const skins = {
