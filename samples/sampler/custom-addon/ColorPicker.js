@@ -2,7 +2,7 @@ import {useGlobals} from '@storybook/api';
 import PropTypes from 'prop-types';
 import React, {useEffect} from 'react'; // eslint-disable-line
 
-import { ACCENT_DEFAULT_VALUE, ACCENT_PARAM_KEY, HIGHLIGHT_DEFAULT_VALUE } from './constants';
+import {ACCENT_DEFAULT_VALUE, ACCENT_PARAM_KEY, HIGHLIGHT_DEFAULT_VALUE} from './constants';
 
 const getDefaultColor = (colorPickerType) => {
 	if (colorPickerType === ACCENT_PARAM_KEY) return ACCENT_DEFAULT_VALUE;
