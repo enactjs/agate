@@ -55,21 +55,6 @@ export const parameters = {
 		}
 	},
 };
-export const globalTypes = {
-	'locale': getObjectType('locale', 'en-US', locales),
-	'night mode': getBooleanType('night mode'),
-	'show all skins': getBooleanType('show all skins'),
-	'skin': getObjectType('skins', 'gallium', skins),
-	// TODO - add 'default skin styles' toolbar item to dynamically show/hide accent and highlight toolbar item
-	// 'default skin styles': getBooleanType('default skin styles'),
-
-	// TODO - add 'accent' toolbar color picker item
-	// 'accent': getObjectType('accent', '8b7efe', accent),
-
-	// TODO - add 'highlight' toolbar color picker item
-	// 'highlight': getObjectType('highlight', 'e16253', highlight)
-
-};
 
 export const globalTypes = {
 	'locale': getObjectType('locale', 'en-US', locales),

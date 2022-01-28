@@ -177,7 +177,7 @@ const StorybookDecorator = (story, config) => {
 	const hasInfoText = config.parameters && config.parameters.info && config.parameters.info.text;
 	const hasProps = config.parameters && config.parameters.props;
 
-	if (globals['show default skins']) {
+	if (globals['default skin styles']) {
 		accent = defaultColors[globals.skin].accent;
 		highlight = defaultColors[globals.skin].highlight;
 	}

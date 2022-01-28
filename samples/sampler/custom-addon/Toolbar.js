@@ -45,7 +45,7 @@ const getToolbarComponent = (isColorPicker, defaultSkins, toolbarParamKey) => {
 const Toolbar = memo(({isColorPicker, param}) => {
 	const [globals] = useGlobals();
 
-	return getToolbarComponent(isColorPicker, globals['show default skins'], param);
+	return getToolbarComponent(isColorPicker, globals['default skin styles'], param);
 });
 
 export default Toolbar;
