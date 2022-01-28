@@ -1,9 +1,9 @@
 import React, {memo} from 'react';
 import {WithTooltip, TooltipLinkList} from '@storybook/components';
 import {useGlobals} from '@storybook/api';
-import {ColorPicker} from './ColorPicker';
-import {ToolbarTab} from './ToolbarTab';
-import {DefaultSkinToolbarTab} from './DefaultSkinToolbarTab';
+import ColorPicker from './ColorPicker';
+import ToolbarTab from './ToolbarTab';
+import DefaultSkinToolbarTab from './DefaultSkinToolbarTab';
 
 const getToolTipLink = (isColorPicker, colorPickerType) => {
 	if (isColorPicker) {
@@ -18,45 +18,34 @@ const getToolTipLink = (isColorPicker, colorPickerType) => {
 	}
 };
 
-const getColorPickerTab = (isColorPicker, toolbarParamKey) => {
+const getColorPickerTab = (isColorPicker, defaultSkins, toolbarParamKey) => {
 	const toolTipLink = [getToolTipLink(isColorPicker, toolbarParamKey)];
-	const [globals, updateGlobals] = useGlobals();
 
-	if (globals['show default skins']) return null;
+	if (defaultSkins) return null;
 	return (
 		<WithTooltip
 			placement="top"
 			trigger="click"
 			closeOnClick
-			tooltip={() => <TooltipLinkList links={toolTipLink} />}
+			tooltip={() => <TooltipLinkList links={toolTipLink} />} // eslint-disable-line react/jsx-no-bind
 		>
 			<ToolbarTab toolbarParamKey={toolbarParamKey} />
 		</WithTooltip>
 	);
 };
 
-const getToolbarComponent = (isColorPicker, toolbarParamKey) => {
-	// const toolTipLink = [getToolTipLink(isColorPicker, toolbarParamKey)];
-	// const [globals, updateGlobals] = useGlobals();
-
+const getToolbarComponent = (isColorPicker, defaultSkins, toolbarParamKey) => {
 	if (isColorPicker) {
-		// if (globals['show default skins']) return null;
-		// return (
-		//   <WithTooltip
-		//     placement="top"
-		//     trigger="click"
-		//     closeOnClick
-		//     tooltip={() => <TooltipLinkList links={toolTipLink} />}
-		//   >
-		//     <ToolbarTab toolbarParamKey={toolbarParamKey} />
-		//   </WithTooltip>
-		// );
-		return getColorPickerTab(isColorPicker, toolbarParamKey);
+		return getColorPickerTab(isColorPicker, defaultSkins, toolbarParamKey);
 	}
 
 	return <DefaultSkinToolbarTab toolbarParamKey={toolbarParamKey} />;
 };
 
-export const Toolbar = memo(({isColorPicker, param}) => {
-	return getToolbarComponent(isColorPicker, param);
+const Toolbar = memo(({isColorPicker, param}) => {
+	const [globals] = useGlobals();
+
+	return getToolbarComponent(isColorPicker, globals['show default skins'], param);
 });
+
+export default Toolbar;

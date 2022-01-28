@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Icons, IconButton} from '@storybook/components';
 
-export const ToolbarTab = ({toolbarParamKey, isActive, toggleState}) => {
+const ToolbarTab = ({toolbarParamKey, isActive, toggleState}) => {
 	return (
 		<IconButton
 			key={toolbarParamKey}
@@ -12,3 +13,11 @@ export const ToolbarTab = ({toolbarParamKey, isActive, toggleState}) => {
 		</IconButton>
 	);
 };
+
+ToolbarTab.propTypes = {
+	isActive: PropTypes.bool,
+	toggleState: PropTypes.func,
+	toolbarParamKey: PropTypes.string
+};
+
+export default ToolbarTab;

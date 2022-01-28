@@ -20,6 +20,13 @@
     "theme": "agate"
   },
   "dependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.16.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.16.7",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
     "@enact/agate": "../../",
     "@enact/core": "^4.0.3",
     "@enact/i18n": "^4.0.3",
@@ -31,11 +38,18 @@
     "react": "^17.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.16.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.16.7",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
     "@enact/storybook-utils": "^4.1.0",
     "@storybook/addons": "6.3.12",
     "@storybook/react": "6.3.12",
     "@storybook/theming": "6.3.12",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.2.3",
     "core-js": "^3.8.1"
   }
 }

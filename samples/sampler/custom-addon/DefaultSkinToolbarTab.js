@@ -1,19 +1,28 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {useGlobals} from '@storybook/api';
-import {ToolbarTab} from './ToolbarTab';
+import ToolbarTab from './ToolbarTab';
+import PropTypes from 'prop-types';
 
-export const DefaultSkinToolbarTab = ({toolbarParamKey}) => {
-
+const DefaultSkinToolbarTab = ({toolbarParamKey}) => {
 	const [globals, updateGlobals] = useGlobals();
 	const isActive = globals[toolbarParamKey] || false;
 
-	const toggleState = useCallback(
-		() =>
-			updateGlobals({
-				[toolbarParamKey]: !isActive
-			}),
-		[isActive]
+	const toggleState = () => {
+		updateGlobals({
+			[toolbarParamKey]: !isActive
+		});
+	};
+	return (
+		<ToolbarTab
+			toggleState={toggleState} // eslint-disable-line react/jsx-no-bind
+			isActive={isActive}
+			toolbarParamKey={toolbarParamKey}
+		/>
 	);
-
-	return <ToolbarTab toggleState={toggleState} isActive={isActive} toolbarParamKey={toolbarParamKey} />;
 };
+
+DefaultSkinToolbarTab.propTypes = {
+	toolbarParamKey: PropTypes.string
+};
+
+export default DefaultSkinToolbarTab;
