@@ -1,7 +1,8 @@
-import React from 'react'; // eslint-disable-line
 import {useGlobals} from '@storybook/api';
-import ToolbarTab from './ToolbarTab';
 import PropTypes from 'prop-types';
+import React from 'react'; // eslint-disable-line
+
+import ToolbarTab from './ToolbarTab';
 
 const DefaultSkinToolbarTab = ({toolbarParamKey}) => {
 	const [globals, updateGlobals] = useGlobals();

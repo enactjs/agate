@@ -1,9 +1,10 @@
-import React, {memo} from 'react'; // eslint-disable-line
-import {WithTooltip, TooltipLinkList} from '@storybook/components';
 import {useGlobals} from '@storybook/api';
+import {WithTooltip, TooltipLinkList} from '@storybook/components';
+import React, {memo} from 'react'; // eslint-disable-line
+
 import ColorPicker from './ColorPicker';
-import ToolbarTab from './ToolbarTab';
 import DefaultSkinToolbarTab from './DefaultSkinToolbarTab';
+import ToolbarTab from './ToolbarTab';
 
 const getToolTipLink = (isColorPicker, colorPickerType) => {
 	if (isColorPicker) {
