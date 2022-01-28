@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo} from 'react'; // eslint-disable-line
 import {WithTooltip, TooltipLinkList} from '@storybook/components';
 import {useGlobals} from '@storybook/api';
 import ColorPicker from './ColorPicker';

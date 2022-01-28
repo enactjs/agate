@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; // eslint-disable-line
 import PropTypes from 'prop-types';
 import {Icons, IconButton} from '@storybook/components';
 

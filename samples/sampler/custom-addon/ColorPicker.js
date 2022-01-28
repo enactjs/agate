@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect} from 'react'; // eslint-disable-line
 import {useGlobals} from '@storybook/api';
 import PropTypes from 'prop-types';
 import {
