@@ -13,10 +13,11 @@ const DefaultSkinToolbarTab = ({toolbarParamKey}) => {
 			[toolbarParamKey]: !isActive
 		});
 	};
+
 	return (
 		<ToolbarTab
-			toggleState={toggleState} // eslint-disable-line react/jsx-no-bind
 			isActive={isActive}
+			toggleState={toggleState} // eslint-disable-line react/jsx-no-bind
 			toolbarParamKey={toolbarParamKey}
 		/>
 	);

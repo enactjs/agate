@@ -2,11 +2,11 @@ import {Icons, IconButton} from '@storybook/components';
 import PropTypes from 'prop-types';
 import React from 'react'; // eslint-disable-line
 
-const ToolbarTab = ({toolbarParamKey, isActive, toggleState}) => {
+const ToolbarTab = ({isActive, toggleState, toolbarParamKey}) => {
 	return (
 		<IconButton
-			key={toolbarParamKey}
 			active={isActive}
+			key={toolbarParamKey}
 			onClick={toggleState ? toggleState : null}
 		>
 			<Icons /> {toolbarParamKey}
