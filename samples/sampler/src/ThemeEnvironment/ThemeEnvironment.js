@@ -109,36 +109,36 @@ const skins = {
 	'Titanium': 'titanium'
 };
 
-// const defaultColors = {
-// 	carbon: {
-// 		accent: '#8fd43a',
-// 		highlight: '#6abe0b'
-// 	},
-// 	cobalt: {
-// 		accent: '#8c81ff',
-// 		highlight: '#ffffff'
-// 	},
-// 	copper: {
-// 		accent: '#a47d66',
-// 		highlight: '#ffffff'
-// 	},
-// 	electro: {
-// 		accent: '#0359f0',
-// 		highlight: '#ff8100'
-// 	},
-// 	gallium: {
-// 		accent: '#8b7efe',
-// 		highlight: '#e16253'
-// 	},
-// 	silicon: {
-// 		accent: '#f1304f',
-// 		highlight: '#9e00d8'
-// 	},
-// 	titanium: {
-// 		accent: '#a6a6a6',
-// 		highlight: '#2a48ca'
-// 	}
-// };
+const defaultColors = {
+	carbon: {
+		accent: '#8fd43a',
+		highlight: '#6abe0b'
+	},
+	cobalt: {
+		accent: '#8c81ff',
+		highlight: '#ffffff'
+	},
+	copper: {
+		accent: '#a47d66',
+		highlight: '#ffffff'
+	},
+	electro: {
+		accent: '#0359f0',
+		highlight: '#ff8100'
+	},
+	gallium: {
+		accent: '#8b7efe',
+		highlight: '#e16253'
+	},
+	silicon: {
+		accent: '#f1304f',
+		highlight: '#9e00d8'
+	},
+	titanium: {
+		accent: '#a6a6a6',
+		highlight: '#2a48ca'
+	}
+};
 
 // NOTE: Knobs cannot set locale in fullscreen mode. This allows any knob to be taken from the URL.
 const getPropFromURL = (propName, fallbackValue) => {
@@ -164,17 +164,23 @@ const StorybookDecorator = (story, config) => {
 	const sample = story();
 
 	const skinFromURL = getPropFromURL('skin');
-	// const accentFromURL = getPropFromURL('accent');
-	// const highlightFromURL = getPropFromURL('highlight');
+	const accentFromURL = getPropFromURL('accent');
+	const highlightFromURL = getPropFromURL('highlight');
 	const localeFromURL = getPropFromURL('locale');
 
 	let {globals} = config;
+	let accent = globals.accent, highlight = globals.highlight;
 	const showAllSkins = JSON.parse(globals['show all skins']);
 	const componentName = config.kind.replace(/^([^/]+)\//, '');
 
 	// NOTE: 'config' object is not extensible
 	const hasInfoText = config.parameters && config.parameters.info && config.parameters.info.text;
 	const hasProps = config.parameters && config.parameters.props;
+
+	if (globals['default skin styles']) {
+		accent = defaultColors[globals.skin].accent;
+		highlight = defaultColors[globals.skin].highlight;
+	}
 
 	return (
 		<Theme
@@ -183,8 +189,8 @@ const StorybookDecorator = (story, config) => {
 			locale={localeFromURL || globals.locale}
 			skin={showAllSkins ? skins['Gallium'] : skinFromURL || globals.skin}
 			skinVariants={JSON.parse(globals['night mode']) ? 'night' : null}
-			// accent={accentFromURL || defaultColors[globals['skin']].accent}
-			// highlight={highlightFromURL || defaultColors[globals['skin']].highlight}
+			accent={accentFromURL || (accent || defaultColors['gallium'].accent)}
+			highlight={highlightFromURL || (highlight || defaultColors['gallium'].highlight)}
 			{...(hasProps ? config.parameters.props : null)}
 		>
 			{showAllSkins ? Object.keys(skins).map((skin) => (
