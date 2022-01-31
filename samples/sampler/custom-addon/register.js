@@ -24,7 +24,7 @@ addons.register(ACCENT_ADDON_ID, () => {
 		render: renderHighlightColorPickerTab,
 		paramKey: HIGHLIGHT_PARAM_KEY
 	});
-	
+
 	addons.add(DEFAULTSKINS_ADDON_ID, {
 		title: 'Default skins tab',
 		type: types.TOOL,
