@@ -16,11 +16,11 @@ const Story = ({children: {props, type: Component}, ...rest}) => {
 
 	const onClose = useCallback(() => {
 		setMenuOpen(false);
-	}, [setMenuOpen]);
+	}, []);
 
 	const onOpen = useCallback(() => {
 		setMenuOpen(true);
-	}, [setMenuOpen]);
+	}, []);
 
 	return (
 		<div {...rest}>

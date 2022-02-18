@@ -28,7 +28,7 @@ const SliderButtonBehaviorDecorator = (Wrapped) => {
 				type: 'onChange',
 				value
 			}, props);
-		}, [children, props, setValueText]);
+		}, [children, props]);
 
 		const handleDragStart = useCallback(() => {
 			// on platforms with a touchscreen, we want to focus slider when dragging begins
