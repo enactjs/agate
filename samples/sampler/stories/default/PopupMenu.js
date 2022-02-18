@@ -1,7 +1,7 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import Button from '@enact/agate/Button';
 import LabeledIconButton from '@enact/agate/LabeledIconButton';
 import PopupMenu from '@enact/agate/PopupMenu';
@@ -14,13 +14,13 @@ const Config = mergeComponentMetadata('PopupMenu', PopupMenu);
 const Story = ({children: {props, type: Component}, ...rest}) => {
 	const [menuOpen, setMenuOpen] = useState(false);
 
-	function onClose () {
+	const onClose = useCallback(() => {
 		setMenuOpen(false);
-	}
+	}, [setMenuOpen]);
 
-	function onOpen () {
+	const onOpen = useCallback(() => {
 		setMenuOpen(true);
-	}
+	}, [setMenuOpen]);
 
 	return (
 		<div {...rest}>
