@@ -7,8 +7,8 @@ class KeypadInterface {
 		this.id = id;
 	}
 
-	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}>div>div`));
+	async focus () {
+		return browser.execute((el) => el.focus(), await $(`#${this.id}>div>div`));
 	}
 
 	button (index) {
@@ -33,8 +33,8 @@ class KeypadPage extends Page {
 		this.components = {keypadDefault, keypadDisabled, keypadSpotlightDisabled};
 	}
 
-	open (urlExtra) {
-		super.open('Keypad-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('Keypad-View', urlExtra);
 	}
 }
 
