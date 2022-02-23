@@ -69,8 +69,8 @@ class DrawerPage extends Page {
 		this.components.drawer4 = new DrawerInterface('drawer4');
 	}
 
-	open (urlExtra) {
-		super.open('Drawer-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('Drawer-View', urlExtra);
 	}
 
 	clickPopupFloatLayer () {
