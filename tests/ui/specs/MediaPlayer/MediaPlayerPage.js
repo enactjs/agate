@@ -8,12 +8,12 @@ class MediaPlayerInterface {
 		this.selector = `#${this.id}`;
 	}
 
-	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}>div`));
+	async focus () {
+		return browser.execute((el) => el.focus(), await $(`#${this.id}>div`));
 	}
 
-	hover (ariaLabel) {
-		return $(this.selector + `>div>div[aria-label=${ariaLabel}]`).moveTo({xOffset: 0, yOffset: 0});
+	async hover (ariaLabel) {
+		return (await $(this.selector + `>div>div[aria-label=${ariaLabel}]`)).moveTo({xOffset: 0, yOffset: 0});
 	}
 
 	get self () {
@@ -64,8 +64,8 @@ class MediaPlayerInterface {
 		return $(this.selector + '>div>div[aria-label=Menu]');
 	}
 
-	get source () {
-		return $(this.selector + '>audio>source').getAttribute('src');
+	async source () {
+		return (await $(this.selector + '>audio>source')).getAttribute('src');
 	}
 }
 
@@ -86,8 +86,8 @@ class MediaPlayerPage extends Page {
 		}, {timeout});
 	}
 
-	open (urlExtra) {
-		super.open('MediaPlayer-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('MediaPlayer-View', urlExtra);
 	}
 }
 
