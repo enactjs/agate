@@ -7,8 +7,8 @@ class ButtonInterface {
 		this.selector = `#${this.id}`;
 	}
 
-	focus () {
-		return browser.execute((el) => el.focus(), $(this.selector));
+	async focus () {
+		return browser.execute((el) => el.focus(), await $(this.selector));
 	}
 
 	get self () {
@@ -30,8 +30,8 @@ class ContextualPopupDecoratorPage extends Page {
 		this.components = {button1, button2};
 	}
 
-	open (urlExtra) {
-		super.open('ContextualPopupDecorator-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('ContextualPopupDecorator-View', urlExtra);
 	}
 }
 
