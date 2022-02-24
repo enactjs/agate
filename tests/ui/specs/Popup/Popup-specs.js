@@ -221,7 +221,7 @@ describe('Popup', function () {
 				await popupCommon.buttonPopup2.click();
 				await Page.waitForOpen(popup);
 
-				await xpectOpen(popupCommon);
+				await expectOpen(popupCommon);
 			});
 
 			it('should close the popup and scrim on ok click in popup container', async function () {

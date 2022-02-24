@@ -101,21 +101,21 @@ class PopupPage extends Page {
 		$('#floatLayer > div').click({y: -400});
 	}
 
-	waitForOpen (selector, timeout) {
+	async waitForOpen (selector, timeout) {
 		if (typeof selector !== 'string') selector = `#${selector.id}`;
 
-		$(selector).waitForExist({timeout});
+		await $(selector).waitForExist({timeout});
 	}
 
-	waitForClose (selector, timeout) {
+	async waitForClose (selector, timeout) {
 		if (typeof selector !== 'string') selector = `#${selector.id}`;
 
-		$(selector).waitForExist({timeout, reverse: true});
+		await $(selector).waitForExist({timeout, reverse: true});
 	}
 
-	waitForFocused (node, timeout, timeoutMsg = 'timed out waiting for focus', interval = 250) {
-		browser.waitUntil(async function () {
-			return await node.isFocused();
+	async waitForFocused (node, timeout, timeoutMsg = 'timed out waiting for focus', interval = 250) {
+		await browser.waitUntil(function () {
+			return node.isFocused();
 		}, {timeout, timeoutMsg, interval});
 	}
 }
