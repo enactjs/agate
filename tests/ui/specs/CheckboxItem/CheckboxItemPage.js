@@ -10,7 +10,7 @@ class CheckboxItemInterface {
 	}
 
 	async focus () {
-		 return browser.execute((el) => el.focus(), await $(`#${this.id}`));
+		return browser.execute((el) => el.focus(), await $(`#${this.id}`));
 	}
 
 	get self () {
