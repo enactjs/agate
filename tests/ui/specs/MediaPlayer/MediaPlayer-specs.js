@@ -22,9 +22,9 @@ describe('MediaPlayer', function () {
 			expect((await mediaPlayerDefault.knob.getCSSProperty('left')).value).to.equal('0px');
 
 			await mediaPlayerDefault.playButton.click();
-			await browser.pause(1000);
+			await Page.waitForPlayMedia(mediaPlayerDefault);
 
-			await expect((await mediaPlayerDefault.knob.getCSSProperty('left')).value).to.not.equal('0px');
+			expect((await mediaPlayerDefault.knob.getCSSProperty('left')).value).to.not.equal('0px');
 		});
 
 		it('should play next media on nextButton click', async function () {

@@ -80,9 +80,9 @@ class MediaPlayerPage extends Page {
 		this.components = {mediaPlayerDefault, mediaPlayerDisabled, mediaPlayerSpotlightDisabled, mediaPlayerTiny};
 	}
 
-	waitForPlayMedia (mediaPlayer, timeout) {
-		browser.waitUntil(function () {
-			return mediaPlayer.knob.getCSSProperty('left').value !== '0px';
+	async waitForPlayMedia (mediaPlayer, timeout) {
+		await browser.waitUntil(async function () {
+			return (await mediaPlayer.knob.getCSSProperty('left')).value !== '0px';
 		}, {timeout});
 	}
 
