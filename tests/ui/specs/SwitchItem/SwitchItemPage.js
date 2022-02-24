@@ -6,8 +6,8 @@ class SwitchItemInterface {
 		this.id = id;
 	}
 
-	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}`));
+	async focus () {
+		return browser.execute((el) => el.focus(), await $(`#${this.id}`));
 	}
 
 	get self () {
@@ -37,8 +37,8 @@ class SwitchItemPage extends Page {
 		this.components = {switchItemDefault, switchItemDefaultSelected, switchItemInline, switchItemDisabled, switchItemInlineDisabled};
 	}
 
-	open (urlExtra) {
-		super.open('SwitchItem-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('SwitchItem-View', urlExtra);
 	}
 }
 

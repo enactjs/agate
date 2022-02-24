@@ -93,8 +93,8 @@ class PopupPage extends Page {
 		this.components.popup10 = new PopupInterface('popup10');
 	}
 
-	open (urlExtra) {
-		super.open('Popup-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('Popup-View', urlExtra);
 	}
 
 	clickPopupFloatLayer () {
@@ -114,8 +114,8 @@ class PopupPage extends Page {
 	}
 
 	waitForFocused (node, timeout, timeoutMsg = 'timed out waiting for focus', interval = 250) {
-		browser.waitUntil(function () {
-			return node.isFocused();
+		browser.waitUntil(async function () {
+			return await node.isFocused();
 		}, {timeout, timeoutMsg, interval});
 	}
 }

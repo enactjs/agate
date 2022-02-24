@@ -41,8 +41,8 @@ class TemperatureControlPage extends Page {
 		this.components = {temperatureControlDefault, temperatureControlCustom, temperatureControlDisabled};
 	}
 
-	open (urlExtra) {
-		super.open('TemperatureControl-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('TemperatureControl-View', urlExtra);
 	}
 }
 

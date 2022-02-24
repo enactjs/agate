@@ -2,8 +2,8 @@ const Page = require('./TooltipDecoratorPage');
 
 describe('TooltipDecorator', function () {
 
-	beforeEach(function () {
-		Page.open();
+	beforeEach(async function () {
+		await Page.open();
 	});
 
 	const {
@@ -13,40 +13,40 @@ describe('TooltipDecorator', function () {
 	} = Page.components;
 
 	describe('focus management', function () {
-		it('should focus the first button on start', function () {
-			expect(tooltipButtonDefault.self.isFocused()).to.be.true();
+		it('should focus the first button on start', async function () {
+			expect(await tooltipButtonDefault.self.isFocused()).to.be.true();
 		});
 
-		it('should focus the first button and show tooltipDefault after 500ms on hover', function () {
-			expect(tooltipButtonDefault.self.isFocused()).to.be.true();
+		it('should focus the first button and show tooltipDefault after 500ms on hover', async function () {
+			expect(await tooltipButtonDefault.self.isFocused()).to.be.true();
 
-			tooltipButtonDefault.hover();
-			Page.delay(500);
+			await tooltipButtonDefault.hover();
+			await Page.delay(500);
 
-			expect(tooltipButtonDefault.isTooltipShowing).to.be.true();
+			expect(await tooltipButtonDefault.isTooltipShowing).to.be.true();
 		});
 
-		it('should focus the disabled button when hovered', function () {
-			tooltipButtonDisabled.hover();
-			expect(tooltipButtonDisabled.self.isFocused()).to.be.true();
+		it('should focus the disabled button when hovered', async function () {
+			await tooltipButtonDisabled.hover();
+			expect(await tooltipButtonDisabled.self.isFocused()).to.be.true();
 		});
 	});
 
 	describe('using 5-way', function () {
-		it('should focus second button on 5-way right', function () {
-			expect(tooltipButtonDefault.self.isFocused()).to.be.true();
+		it('should focus second button on 5-way right', async function () {
+			expect(await tooltipButtonDefault.self.isFocused()).to.be.true();
 
-			Page.spotlightRight();
-			expect(tooltipButtonDelayed.self.isFocused()).to.be.true();
+			await Page.spotlightRight();
+			expect(await tooltipButtonDelayed.self.isFocused()).to.be.true();
 		});
 	});
 
 	describe('pointer', function () {
-		it('should focus second button and display correct tooltipText after 1000ms delay on hover', function () {
-			tooltipButtonDelayed.hover();
-			Page.delay(1000);
+		it('should focus second button and display correct tooltipText after 1000ms delay on hover', async function () {
+			await tooltipButtonDelayed.hover();
+			await Page.delay(1000);
 
-			expect(tooltipButtonDelayed.tooltipText).to.equal('Hello Tooltip Button Delayed');
+			expect(await tooltipButtonDelayed.tooltipText).to.equal('Hello Tooltip Button Delayed');
 		});
 	});
 });

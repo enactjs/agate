@@ -88,8 +88,8 @@ class PopupMenuPage extends Page {
 		this.components.popupMenu8 = new PopupMenuInterface('popupMenu8');
 	}
 
-	open (urlExtra) {
-		super.open('PopupMenu-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('PopupMenu-View', urlExtra);
 	}
 
 	waitForOpen (selector, timeout) {
@@ -105,8 +105,8 @@ class PopupMenuPage extends Page {
 	}
 
 	waitForFocused (node, timeout, timeoutMsg = 'timed out waiting for focus', interval = 250) {
-		browser.waitUntil(function () {
-			return node.isFocused();
+		browser.waitUntil(async function () {
+			return await node.isFocused();
 		}, {timeout, timeoutMsg, interval});
 	}
 }
