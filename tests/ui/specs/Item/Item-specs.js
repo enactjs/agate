@@ -11,8 +11,8 @@ describe('Item', function () {
 	} = Page.components;
 
 	describe('LTR locale', function () {
-		beforeEach(function () {
-			Page.open();
+		beforeEach(async function () {
+			await Page.open();
 		});
 
 		it('should have focus on first item at start', async function () {
@@ -23,14 +23,12 @@ describe('Item', function () {
 
 			describe('5-way', function () {
 				it('should focus the first item with 5-way Up', async function () {
-					await browser.pause(500);
 					await item2Disabled.focus();
 					await Page.spotlightUp();
 					expect(await item1.self.isFocused()).to.be.true();
 				});
 
 				it('should focus an item with label with 5-way Down', async function () {
-					await browser.pause(500);
 					await item2Disabled.focus();
 					await Page.spotlightDown();
 					expect(await item3WithLabel.self.isFocused()).to.be.true();
@@ -38,14 +36,12 @@ describe('Item', function () {
 
 				// Validating that the items are in fact inline and can be navigated between via 5-way
 				it('should focus an inline item with 5-way Left', async function () {
-					await browser.pause(500);
 					await item8Inline.focus();
 					await Page.spotlightLeft();
 					expect(await Page.components.item7Inline.self.isFocused()).to.be.true();
 				});
 
 				it('should focus an inline item with 5-way Right', async function () {
-					await browser.pause(500);
 					await item5InlineDisabled.focus();
 					await Page.spotlightRight();
 					expect(await Page.components.item6Inline.self.isFocused()).to.be.true();
@@ -70,21 +66,18 @@ describe('Item', function () {
 
 			describe('5-way', function () {
 				it('should focus a disabled item with 5-way Up', async function () {
-					await browser.pause(500);
 					await item3WithLabel.focus();
 					await Page.spotlightUp();
 					expect(await item2Disabled.self.isFocused()).to.be.true();
 				});
 
 				it('should focus a disabled item with 5-way Down', async function () {
-					await browser.pause(500);
 					await item1.focus();
 					await Page.spotlightDown();
 					expect(await item2Disabled.self.isFocused()).to.be.true();
 				});
 
 				it('should focus an inline disabled item with 5-way Right', async function () {
-					await browser.pause(500);
 					await item4Inline.focus();
 					await Page.spotlightRight();
 					expect(await item5InlineDisabled.self.isFocused()).to.be.true();
@@ -114,14 +107,12 @@ describe('Item', function () {
 			describe('5-way', function () {
 				// Validating that the items are in fact inline and can be navigated between via 5-way
 				it('should focus an inline item with 5-way Right', async function () {
-					browser.pause(500);
 					await item8Inline.focus();
 					await Page.spotlightRight();
 					expect(await Page.components.item7Inline.self.isFocused()).to.be.true();
 				});
 
 				it('should focus an inline item with 5-way Left', async function () {
-					browser.pause(500);
 					await item5InlineDisabled.focus();
 					await Page.spotlightLeft();
 					expect(await Page.components.item6Inline.self.isFocused()).to.be.true();

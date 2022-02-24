@@ -2,8 +2,8 @@ const Page = require('./KeypadPage');
 
 describe('Keypad', function () {
 
-	beforeEach(function () {
-		Page.open();
+	beforeEach(async function () {
+		await Page.open();
 	});
 
 	describe('5-way', function () {
@@ -30,7 +30,6 @@ describe('Keypad', function () {
 		const keypad = Page.components.keypadDisabled;
 
 		it('buttons are focusable when navigating down/left/right/up', async function () {
-			await browser.pause(500);
 			await keypad.focus();
 			expect(await (await keypad.button(1)).isFocused()).to.be.true();
 			await Page.spotlightDown();
@@ -48,7 +47,6 @@ describe('Keypad', function () {
 		const keypad = Page.components.keypadSpotlightDisabled;
 
 		it('buttons are not focusable when navigating down/left/right/up', async function () {
-			await browser.pause(500);
 			await keypad.focus();
 			expect(await (await keypad.button(1)).isFocused()).to.not.be.true();
 			await Page.spotlightDown();

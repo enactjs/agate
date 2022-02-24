@@ -1,8 +1,8 @@
 const Page = require('./LabeledIconButtonPage');
 
 describe('LabeledIconButton', function () {
-	beforeEach(function () {
-		Page.open();
+	beforeEach(async function () {
+		await Page.open();
 	});
 
 	it('should have focus on first labeled icon button at start', async function () {
@@ -22,7 +22,6 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Up', async function () {
-				await browser.pause(500);
 				await Page.components.LabeledIconButtonCustom.focus();
 				await Page.spotlightLeft();
 
@@ -51,7 +50,6 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', async function () {
-				await browser.pause();
 				await Page.components.LabeledIconButtonDefault.focus();
 				await Page.spotlightRight();
 
@@ -84,7 +82,6 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', async function () {
-				await browser.pause(500);
 				await Page.components.LabeledIconButtonCustom.focus();
 				await Page.spotlightRight();
 
@@ -117,7 +114,6 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', async function () {
-				await browser.pause(500);
 				await Page.components.LabeledIconButtonDefault.focus();
 				await Page.spotlightDown();
 
@@ -150,7 +146,6 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', async function () {
-				await browser.pause(500);
 				await Page.components.LabeledIconButtonCustom.focus();
 				await Page.spotlightDown();
 
@@ -183,7 +178,6 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', async function () {
-				await browser.pause(500);
 				await Page.components.LabeledIconButtonSelected.focus();
 				await Page.spotlightDown();
 
@@ -216,7 +210,6 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', async function () {
-				await browser.pause(500);
 				await Page.components.LabeledIconButtonHighlighted.focus();
 				await Page.spotlightDown();
 
@@ -249,7 +242,6 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', async function () {
-				await browser.pause(500);
 				await Page.components.LabeledIconButtonTransparent.focus();
 				await Page.spotlightDown();
 
@@ -282,7 +274,6 @@ describe('LabeledIconButton', function () {
 
 		describe('5-way', function () {
 			it('should focus the labeled icon button with 5-way Down', async function () {
-				await browser.pause(500);
 				await Page.components.LabeledIconButtonSmallest.focus();
 				await Page.spotlightDown();
 

@@ -2,8 +2,8 @@ const Page = require('./MediaPlayerPage');
 
 describe('MediaPlayer', function () {
 
-	beforeEach(function () {
-		Page.open();
+	beforeEach(async function () {
+		await Page.open();
 	});
 
 	const {
