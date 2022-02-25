@@ -10,29 +10,29 @@ describe('TemperatureControl', function () {
 		const temperatureControl = Page.components.temperatureControlDefault;
 
 		it('should change the position of the slider knob on each different click position', async function () {
-			const {cx: originalCx, cy: originalCy} = temperatureControl.knobPosition;
+			const {cx: originalCx, cy: originalCy} = await temperatureControl.knobPosition();
 
 			await temperatureControl.self.click({x: 0, y: -10});
-			const {cx: cx1, cy: cy1} = temperatureControl.knobPosition;
-			expect(await (cx1 !== originalCx)).to.be.true();
-			expect(await (cy1 !== originalCy)).to.be.true();
+			const {cx: cx1, cy: cy1} = await temperatureControl.knobPosition();
+			expect(cx1 !== originalCx).to.be.true();
+			expect(cy1 !== originalCy).to.be.true();
 
 			await temperatureControl.self.click({x: -15, y: -20});
-			const {cx: cx2, cy: cy2} = temperatureControl.knobPosition;
-			expect(await (cx2 !== cx1)).to.be.true();
-			expect(await (cy2 !== cy1)).to.be.true();
+			const {cx: cx2, cy: cy2} = await temperatureControl.knobPosition();
+			expect(cx2 !== cx1).to.be.true();
+			expect(cy2 !== cy1).to.be.true();
 		});
 
 		it('should change value of the temperature on  different click position', async function () {
 			const originalValue = temperatureControl.valueText;
 
 			await temperatureControl.self.click({x: 0, y: -10});
-			const value1 = temperatureControl.valueText;
-			expect(await value1 !== originalValue).to.be.true();
+			const value1 = await temperatureControl.valueText;
+			expect(value1 !== originalValue).to.be.true();
 
 			await temperatureControl.self.click({x: -15, y: -20});
-			const value2 = temperatureControl.valueText;
-			expect(await value2 !== value1).to.be.true();
+			const value2 = await temperatureControl.valueText;
+			expect(value2 !== value1).to.be.true();
 		});
 
 		it('should have blue foregroundColor if value < half of the scale', async function () {
@@ -56,41 +56,41 @@ describe('TemperatureControl', function () {
 		const temperatureControl = Page.components.temperatureControlCustom;
 
 		it('should not change the position of the slider knob on click on the bottom-left part of the circle', async function () {
-			const {cx: originalCx, cy: originalCy} = temperatureControl.knobPosition;
+			const {cx: originalCx, cy: originalCy} = await temperatureControl.knobPosition();
 			// bottom-left part means negative x and positive y
 			await temperatureControl.self.click({x: -5, y: 5});
 
-			const {cx, cy} = temperatureControl.knobPosition;
+			const {cx, cy} = await temperatureControl.knobPosition();
 
-			expect(await (cx === originalCx)).to.be.true();
-			expect(await (cy === originalCy)).to.be.true();
+			expect(cx === originalCx).to.be.true();
+			expect(cy === originalCy).to.be.true();
 		});
 
 		it('should change the position of the slider knob on click on the top part of the circle', async function () {
-			const {cx: originalCx, cy: originalCy} = temperatureControl.knobPosition;
+			const {cx: originalCx, cy: originalCy} = await temperatureControl.knobPosition();
 			// top part means any value x and negative value for y
 			await temperatureControl.self.click({x: 10, y: -10});
 
-			const {cx, cy} = temperatureControl.knobPosition;
+			const {cx, cy} = await temperatureControl.knobPosition();
 
-			expect(await (cx !== originalCx)).to.be.true();
-			expect(await (cy !== originalCy)).to.be.true();
+			expect(cx !== originalCx).to.be.true();
+			expect(cy !== originalCy).to.be.true();
 		});
 
 		it('should not change value of the temperature on click on the bottom-left part of the circle', async function () {
-			const originalValue = temperatureControl.valueText;
+			const originalValue = await temperatureControl.valueText;
 
 			await temperatureControl.self.click({x: -5, y: 5});
-			const newValue = temperatureControl.valueText;
-			expect(await newValue === originalValue).to.be.true();
+			const newValue = await temperatureControl.valueText;
+			expect(newValue === originalValue).to.be.true();
 		});
 
 		it('should change value of the temperature on click on the top part of the circle', async function () {
-			const originalValue = temperatureControl.valueText;
+			const originalValue = await temperatureControl.valueText;
 
 			await temperatureControl.self.click({x: 10, y: -10});
-			const newValue = temperatureControl.valueText;
-			expect(await newValue !== originalValue).to.be.true();
+			const newValue = await temperatureControl.valueText;
+			expect(newValue !== originalValue).to.be.true();
 		});
 
 	});
@@ -99,13 +99,13 @@ describe('TemperatureControl', function () {
 		const temperatureControl = Page.components.temperatureControlDisabled;
 
 		it('should not change the position of the slider knob on click', async function () {
-			const {cx: originalCx, cy: originalCy} = temperatureControl.knobPosition;
+			const {cx: originalCx, cy: originalCy} = await temperatureControl.knobPosition();
 
 			await temperatureControl.self.click({x: -5, y: 0});
 
-			const {cx, cy} = temperatureControl.knobPosition;
-			expect(await (cx === originalCx)).to.be.true();
-			expect(await (cy === originalCy)).to.be.true();
+			const {cx, cy} = await temperatureControl.knobPosition();
+			expect(cx === originalCx).to.be.true();
+			expect(cy === originalCy).to.be.true();
 		});
 	});
 

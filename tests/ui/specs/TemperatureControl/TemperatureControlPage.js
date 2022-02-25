@@ -23,9 +23,9 @@ class TemperatureControlInterface {
 		return $(this.selector + ' .TemperatureControl_TemperatureControl_slider');
 	}
 
-	get knobPosition () {
-		const cx = parseInt(this.circle.getCSSProperty('cx').value);
-		const cy = parseInt(this.circle.getCSSProperty('cy').value);
+	async knobPosition () {
+		const cx = parseInt((await this.circle.getCSSProperty('cx')).value);
+		const cy = parseInt((await this.circle.getCSSProperty('cy')).value);
 
 		return {cx, cy};
 	}
