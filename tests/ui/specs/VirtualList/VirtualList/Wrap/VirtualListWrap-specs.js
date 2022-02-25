@@ -8,10 +8,10 @@ describe('Wrap', function () {
 
 	it('should wrap when moving from first item to last item with 5-way navigation', async function () {
 		// Set wrap to true
-		await (await Page.buttonWrap).moveTo();
+		await Page.buttonWrap.moveTo();
 		await Page.spotlightSelect();
 		// 5-way Spot the first item.
-		await (await Page.buttonLeft).moveTo();
+		await Page.buttonLeft.moveTo();
 		await Page.spotlightRight();
 		await expectFocusedItem(0, 'focus first item');
 		// 5-Way Up to move focus to the last item in the list.

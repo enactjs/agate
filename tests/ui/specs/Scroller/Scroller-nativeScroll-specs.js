@@ -14,7 +14,7 @@ describe('Scroller', function () {
 
 		it('should focus on scroll up button with focusableScrollbar `true`', async function () {
 			// Set focusableScrollbar=true
-			await (await ScrollerPage.dropdownFocusableScrollbar).moveTo();
+			await ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			await ScrollerPage.spotlightSelect();
 			await ScrollerPage.spotlightDown();
 			await ScrollerPage.spotlightSelect();
@@ -29,7 +29,7 @@ describe('Scroller', function () {
 
 		it('should focus on scroll up button with 5-way key and focusableScrollbar `true`', async function () {
 			// Set focusableScrollbar=true
-			await (await ScrollerPage.dropdownFocusableScrollbar).moveTo();
+			await ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			await ScrollerPage.spotlightSelect();
 			await ScrollerPage.spotlightDown();
 			await ScrollerPage.spotlightSelect();
@@ -45,7 +45,7 @@ describe('Scroller', function () {
 
 		it('should Scrolling via 5-way Key with Spotlight on the scroll down button', async function () {
 			// Set focusableScrollbar=true
-			await (await ScrollerPage.dropdownFocusableScrollbar).moveTo();
+			await ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			await ScrollerPage.spotlightSelect();
 			await ScrollerPage.spotlightDown();
 			await ScrollerPage.spotlightSelect();
@@ -78,7 +78,7 @@ describe('Scroller', function () {
 
 		it('should focus on scroll left button with focusableScrollbar `true`', async function () {
 			// Set focusableScrollbar=true
-			await (await ScrollerPage.dropdownFocusableScrollbar).moveTo();
+			await ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			await ScrollerPage.spotlightSelect();
 			await ScrollerPage.spotlightDown();
 			await ScrollerPage.spotlightSelect();
@@ -93,7 +93,7 @@ describe('Scroller', function () {
 
 		it('should focus not on scroll right button with 5-way key and focusableScrollbar `false`', async function () {
 			// Set focusableScrollbar=false
-			await (await ScrollerPage.dropdownFocusableScrollbar).moveTo();
+			await ScrollerPage.dropdownFocusableScrollbar.moveTo();
 
 			await ScrollerPage.spotlightDown();
 			await ScrollerPage.spotlightDown();
@@ -104,14 +104,14 @@ describe('Scroller', function () {
 
 		it('should Scrolling via 5-way Key with Spotlight on the scroll left button', async function () {
 			// Set focusableScrollbar=true
-			await (await ScrollerPage.dropdownFocusableScrollbar).moveTo();
+			await ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			await ScrollerPage.spotlightSelect();
 			await ScrollerPage.spotlightDown();
 			await ScrollerPage.spotlightDown();
 			await ScrollerPage.spotlightSelect();
 
 			// Verify if scroll thumb's position is at right=0 of the horizontalScrollbar track.
-			const initialHorizontalScrollThumbPosition = await (await ScrollerPage.getScrollThumbPosition()).horizontal;
+			const initialHorizontalScrollThumbPosition = (await ScrollerPage.getScrollThumbPosition()).horizontal;
 			expect(initialHorizontalScrollThumbPosition).to.equal('0');
 
 			// Focus on the Scroll left button in horizontalScrollbar.

@@ -23,7 +23,7 @@ describe('VirtualList', function () {
 
 		it('should position Scroll thumb on top/bottom when reaching to the edge with 5-way and Page Down', async function () {
 			// set dataSize to 30
-			await (await Page.inputfieldNumItems).moveTo();
+			await Page.inputfieldNumItems.moveTo();
 			await Page.spotlightSelect();
 			await Page.backSpace();
 			await Page.backSpace();
@@ -33,7 +33,7 @@ describe('VirtualList', function () {
 			await Page.backKey();
 			await Page.spotlightDown();
 			// Move focus to the first item ('Item 00').
-			await (await Page.buttonLeft).moveTo();
+			await Page.buttonLeft.moveTo();
 			await Page.spotlightRight();
 			// Verify Spotlight displays on the first item.
 			await expectFocusedItem(0, 'focus Item 0');
@@ -80,7 +80,7 @@ describe('VirtualList', function () {
 
 		it('should Items Animate via 5-way Up and Down on Last Item on the page - vertical', async function () {
 			let bottomId;
-			await (await Page.buttonLeft).moveTo();
+			await Page.buttonLeft.moveTo();
 			await Page.spotlightRight(); // needed to focus Item 00 and get into that container
 			// Position the pointer on the last item in a current page.
 			bottomId = await Page.bottomVisibleItemId();
@@ -109,7 +109,7 @@ describe('VirtualList', function () {
 
 		it('shoud navigate between inside and outside of a list', async function () {
 			// 5-way Down to the 10th item.
-			await (await Page.buttonLeft).moveTo();
+			await Page.buttonLeft.moveTo();
 			await Page.spotlightRight();
 			await Page.fiveWayToItem(10);
 			// 5-way Spot Item 00.
@@ -123,18 +123,18 @@ describe('VirtualList', function () {
 
 		it('should focus last item when entering from outside after scrolling via 5way', async function () {
 			// Move focus to the first item ('Item 00').
-			await (await Page.buttonLeft).moveTo();
+			await Page.buttonLeft.moveTo();
 			await Page.spotlightRight();
 
 			// 5-way Down to the 21st item ('Item 20').
 			await Page.fiveWayToItem(20);
 
 			// Position the pointer on 'JumpToItem' button and select
-			await (await Page.buttonTop).moveTo();
+			await Page.buttonTop.moveTo();
 			await Page.spotlightSelect();
 
 			// Move focus to the list
-			await (await Page.buttonLeft).moveTo();
+			await Page.buttonLeft.moveTo();
 			await Page.spotlightRight();
 
 			// Verify Spotlight displays on the 21st item ('Item 20');
@@ -143,7 +143,7 @@ describe('VirtualList', function () {
 
 		it('should  display childProps', async function () {
 			// Verify: The first item shows 'Item 00'.
-			await (await Page.buttonLeft).moveTo();
+			await Page.buttonLeft.moveTo();
 			await Page.spotlightRight();
 			await expectFocusedItem(0);
 			expect(await Page.textContent()).to.equal('Item 00');
@@ -152,7 +152,7 @@ describe('VirtualList', function () {
 			await expectFocusedItem(1);
 			expect(await Page.textContent()).to.equal('Item 01');
 			// 5-way Spot and Select 'Child Props' toggle button.
-			await (await Page.buttonChildProps).click();
+			await Page.buttonChildProps.click();
 			// Verify: The first item shows 'Item 000 child props'.
 			await (await Page.item(0)).moveTo();
 			await expectFocusedItem(0);
@@ -171,7 +171,7 @@ describe('VirtualList', function () {
 			const defaultSpotlightSize = await Page.spotlightSize();
 			expect(defaultSpotlightSize).to.equal(94);
 			// Set item size to 150
-			await (await Page.inputfieldItemSize).moveTo();
+			await Page.inputfieldItemSize.moveTo();
 			await Page.spotlightSelect();
 			await Page.backSpace();
 			await Page.backSpace();
@@ -191,7 +191,7 @@ describe('VirtualList', function () {
 			// spotLight size is ItemSize - 2*border-witdth
 			expect(curSpotlightSize).to.equal(144);
 			// Set item size to 50
-			await (await Page.inputfieldItemSize).moveTo();
+			await Page.inputfieldItemSize.moveTo();
 			await Page.spotlightSelect();
 			await Page.backSpace();
 			await Page.backSpace();
