@@ -23,8 +23,8 @@ class PanelInterface {
 		return $(`#prev${this.index}`);
 	}
 
-	waitForEnter () {
-		this.body.waitForExist();
+	async waitForEnter () {
+		await this.body.waitForExist();
 	}
 }
 
@@ -42,7 +42,7 @@ class PanelPage extends Page {
 	}
 
 	async focus (el) {
-		await browser.execute(e => e.focus(), el);
+		return browser.execute(e => e.focus(), await el);
 	}
 
 	get focusedText () {
