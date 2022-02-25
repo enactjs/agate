@@ -97,8 +97,8 @@ class PopupPage extends Page {
 		await super.open('Popup-View', urlExtra);
 	}
 
-	clickPopupFloatLayer () {
-		$('#floatLayer > div').click({y: -400});
+	async clickPopupFloatLayer () {
+		await $('#floatLayer > div').click({y: -400});
 	}
 
 	async waitForOpen (selector, timeout) {

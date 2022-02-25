@@ -645,7 +645,7 @@ describe('Popup', function () {
 				await Page.spotlightLeft();
 
 				// Spotlight is on Cancel button (verify step 4)
-				await expect(popup.buttonCancel.isFocused()).to.be.true();
+				expect(await popup.buttonCancel.isFocused()).to.be.true();
 
 				// 5-way Up (step 5)
 				await Page.spotlightUp();
