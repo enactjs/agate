@@ -36,7 +36,7 @@ class ToggleButtonPage extends Page {
 	}
 
 	async open (urlExtra) {
-		await super.open('Agate-ToggleButton-View', urlExtra);
+		await super.open('ToggleButton-View', urlExtra);
 	}
 }
 
