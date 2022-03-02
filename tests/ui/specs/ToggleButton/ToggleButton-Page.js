@@ -24,11 +24,10 @@ class AgateToggleButtonInterface {
 	}
 }
 
-
 class ToggleButtonPage extends Page {
 	constructor () {
 		super();
-		this.title = 'Agate ToggleButton Test';
+		this.title = 'ToggleButton Test';
 		const toggleDefault = new AgateToggleButtonInterface('toggleButton1');
 		const toggleWithLabels = new AgateToggleButtonInterface('toggleButton3');
 
@@ -36,7 +35,7 @@ class ToggleButtonPage extends Page {
 	}
 
 	async open (urlExtra) {
-		await super.open('Agate-ToggleButton-View', urlExtra);
+		await super.open('ToggleButton-View', urlExtra);
 	}
 }
 
