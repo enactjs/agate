@@ -1,7 +1,7 @@
 // Utility methods for testing
 
-const extractValue = (rangePicker) => {
-	return parseInt(rangePicker.active(rangePicker.self).getText());
+const extractValue = async (rangePicker) => {
+	return parseInt(await rangePicker.active(rangePicker.self).getText());
 };
 
 module.exports = {
