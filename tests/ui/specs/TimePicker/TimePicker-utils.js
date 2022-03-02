@@ -1,8 +1,8 @@
 // Utility methods for testing
-const extractValues = (picker) => {
-	const hour = parseInt(picker.active(picker.hour).getText());
-	const minute = parseInt(picker.active(picker.minute).getText());
-	const meridiem = picker.meridiem.isExisting() ? picker.active(picker.meridiem).getText() : null;
+const extractValues = async (picker) => {
+	const hour = parseInt(await picker.active(picker.hour).getText());
+	const minute = parseInt(await picker.active(picker.minute).getText());
+	const meridiem = await picker.meridiem.isExisting() ? await picker.active(picker.meridiem).getText() : null;
 
 	return {hour, minute, meridiem};
 };
