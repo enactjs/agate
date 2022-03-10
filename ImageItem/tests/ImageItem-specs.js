@@ -9,7 +9,7 @@ describe('ImageItem', () => {
 		const children = 'caption';
 
 		const subject = mount(
-			<ImageItem src="http://placehold.it/300x400/9037ab/ffffff&text=Image0">
+			<ImageItem src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0">
 				{children}
 			</ImageItem>
 		);
@@ -22,7 +22,7 @@ describe('ImageItem', () => {
 
 	test('should omit caption node when `children` is unset', () => {
 		const subject = mount(
-			<ImageItem src="http://placehold.it/300x400/9037ab/ffffff&text=Image0" />
+			<ImageItem src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0" />
 		);
 
 		const actual = subject.find(`.${css.caption}`);
@@ -35,7 +35,7 @@ describe('ImageItem', () => {
 
 		const subject = mount(
 			<ImageItem
-				src="http://placehold.it/300x400/9037ab/ffffff&text=Image0"
+				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
 				captionPosition="overlay"
 			>
 				{children}
@@ -53,7 +53,7 @@ describe('ImageItem', () => {
 
 		const subject = mount(
 			<ImageItem
-				src="http://placehold.it/300x400/9037ab/ffffff&text=Image0"
+				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
 				orientation="horizontal"
 			>
 				{children}
@@ -71,7 +71,7 @@ describe('ImageItem', () => {
 
 		const subject = mount(
 			<ImageItem
-				src="http://placehold.it/300x400/9037ab/ffffff&text=Image0"
+				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
 			>
 				{children}
 			</ImageItem>
