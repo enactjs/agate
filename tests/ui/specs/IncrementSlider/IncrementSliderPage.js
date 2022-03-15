@@ -7,8 +7,8 @@ class IncrementSliderInterface {
 		this.selector = `.${this.className}`;
 	}
 
-	focusSlider () {
-		return browser.execute((el) => el.focus(), $(`.${this.className}` + ' .IncrementSlider_IncrementSlider_slider'));
+	async focusSlider () {
+		return browser.execute((el) => el.focus(), await $(`.${this.className}` + ' .IncrementSlider_IncrementSlider_slider'));
 	}
 
 	get self () {
@@ -31,16 +31,16 @@ class IncrementSliderInterface {
 		return $(this.selector + ' .ProgressBar_ProgressBarTooltip_tooltip');
 	}
 
-	get knobPositionHorizontal () {
-		return parseInt(this.knob.getCSSProperty('left').value);
+	async knobPositionHorizontal () {
+		return parseInt((await this.knob.getCSSProperty('left')).value);
 	}
 
-	get knobPositionVertical () {
-		return parseInt(this.knob.getCSSProperty('bottom').value);
+	async knobPositionVertical () {
+		return parseInt((await this.knob.getCSSProperty('bottom')).value);
 	}
 
-	get incrementSliderFillWidth () {
-		return parseInt($(this.selector + ' .Slider_Slider_fill').getCSSProperty('width').value);
+	async incrementSliderFillWidth () {
+		return parseInt((await $(this.selector + ' .Slider_Slider_fill').getCSSProperty('width')).value);
 	}
 }
 
@@ -57,8 +57,8 @@ class IncrementSliderPage extends Page {
 		this.components = {incrementSliderDefault, incrementSliderDisabled, incrementSliderCustomProgressAnchor, incrementSliderWithTooltip, incrementSliderVertical, incrementSliderVerticalDisabled};
 	}
 
-	open (urlExtra) {
-		super.open('IncrementSlider-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('IncrementSlider-View', urlExtra);
 	}
 }
 

@@ -11,29 +11,29 @@ class VirtualGridListPage extends Page {
 		this.title = 'VirtualGridList Test';
 	}
 
-	open (layout = '', urlExtra) {
-		super.open(`VirtualGridList${layout}-View`, urlExtra);
+	async open (layout = '', urlExtra) {
+		await super.open(`VirtualGridList${layout}-View`, urlExtra);
 	}
 
 	get buttonHideScrollbar () {
 		return element('#hideScrollbar', browser);
 	}
 
-	scrollThumbPosition () {
-		return browser.execute(function (_scrollbarSelector) {
+	async scrollThumbPosition () {
+		return await browser.execute(async function (_scrollbarSelector) {
 			const scrollbar = document.querySelector(_scrollbarSelector);
 			return scrollbar.style.getPropertyValue('--scrollbar-thumb-progress-ratio');
 		}, scrollbarSelector);
 	}
 
-	item (id) {
-		return element(`#${typeof id === 'number' ? `item${id}` : id}`, browser);
+	async item (id) {
+		return await element(`#${typeof id === 'number' ? `item${id}` : id}`, await browser);
 	}
 
-	topLeftVisibleItemId () {
-		return browser.execute(function (_scrollableSelector) {
+	async topLeftVisibleItemId () {
+		return await browser.execute(async function (_scrollableSelector) {
 			const scroller = document.querySelector(_scrollableSelector),
-				{top, left} = scroller.getBoundingClientRect();
+				{top, left} = await scroller.getBoundingClientRect();
 			let currentY = top + 1;
 			for (let i = 0; i < 10; i++) {
 				let el = document.elementFromPoint(left + 10, currentY + i);
@@ -51,16 +51,16 @@ class VirtualGridListPage extends Page {
 		}, scrollableSelector);
 	}
 
-	checkScrollbyPagekey (way) {
-		const initialThumbPosition = this.scrollThumbPosition();
+	async checkScrollbyPagekey (way) {
+		const initialThumbPosition = await this.scrollThumbPosition();
 		if (way === 'down') {
-			this.pageDown();
-			this.delay(1000);
-			expect((this.scrollThumbPosition() > initialThumbPosition)).to.be.true();
+			await this.pageDown();
+			await browser.pause(1000);
+			expect((await this.scrollThumbPosition() > initialThumbPosition)).to.be.true();
 		} else {
-			this.pageUp();
-			this.delay(1000);
-			expect((initialThumbPosition > this.scrollThumbPosition())).to.be.true();
+			await this.pageUp();
+			await browser.pause(1000);
+			expect((initialThumbPosition > await this.scrollThumbPosition())).to.be.true();
 		}
 	}
 }

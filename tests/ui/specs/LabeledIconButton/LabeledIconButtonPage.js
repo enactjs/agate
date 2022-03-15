@@ -7,40 +7,50 @@ class LabeledIconButtonInterface {
 		this.selector = `#${this.id}`;
 	}
 
-	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}`));
+	async focus () {
+		return browser.execute((el) => el.focus(), await $(`#${this.id}`));
 	}
-	hover () {
-		return $(this.selector).moveTo({xOffset: 10, yOffset: 10});
+
+	async hover () {
+		return await $(this.selector).moveTo({xOffset: 10, yOffset: 10});
 	}
 
 	get self () {
 		return $(this.selector);
 	}
+
 	get valueText () {
 		return getText($(this.selector + ' label'));
 	}
-	iconValue () {
-		return getText($(this.selector + ' .Icon_Icon_icon')).codePointAt();
+
+	async iconValue () {
+		return (await getText($(this.selector + ' .Icon_Icon_icon'))).codePointAt();
 	}
+
 	isSelected () {
 		return $(this.selector + ' .Button_Button_selected').isExisting();
 	}
+
 	isHighlighted () {
 		return $(this.selector + ' .Button_Button_highlighted').isExisting();
 	}
+
 	isTransparent () {
 		return $(this.selector + ' .Button_Button_transparent').isExisting();
 	}
+
 	isSmallest () {
 		return $(this.selector + ' .Button_Button_smallest').isExisting();
 	}
+
 	isSmall () {
 		return $(this.selector + ' .Button_Button_small').isExisting();
 	}
+
 	isHuge () {
 		return $(this.selector + ' .Button_Button_huge').isExisting();
 	}
+
 	isDisabled () {
 		return $(this.selector + ' .Button_Button_button').getAttribute('aria-disabled');
 	}
@@ -73,8 +83,8 @@ class LabeledIconButtonPage extends Page {
 		};
 	}
 
-	open (urlExtra) {
-		super.open('LabeledIconButton-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('LabeledIconButton-View', urlExtra);
 	}
 }
 

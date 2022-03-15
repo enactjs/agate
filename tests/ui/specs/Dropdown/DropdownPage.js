@@ -51,8 +51,8 @@ class DropdownPage extends Page {
 		this.components = {dropdownDefault, dropdownDirectionAbove, dropdownDisabled, dropdownSelected};
 	}
 
-	open (urlExtra) {
-		super.open('Dropdown-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('Dropdown-View', urlExtra);
 	}
 }
 
