@@ -59,21 +59,21 @@ export const _IncrementSlider = (args) => {
 	);
 };
 
-select('orientation', _IncrementSlider, ['horizontal', 'vertical'], Config);
-boolean('disabled', _IncrementSlider, Config);
-boolean('tooltip', _IncrementSlider, IncrementSliderTooltipConfig);
-boolean('percent', _IncrementSlider, IncrementSliderTooltipConfig);
-select('position', _IncrementSlider, ['', 'above', 'above left', 'above center', 'above right', 'above before', 'above after', 'before', 'left', 'right', 'after', 'below', 'below left', 'below center', 'below right', 'below before', 'below after'], IncrementSliderTooltipConfig, '');
 boolean('activateOnFocus', _IncrementSlider, Config);
 select('decrementIcon', _IncrementSlider, decrementIcons, Config);
+boolean('disabled', _IncrementSlider, Config);
 select('incrementIcon', _IncrementSlider, incrementIcons, Config);
 number('knobStep', _IncrementSlider, Config);
 number('max', _IncrementSlider, Config);
 number('min', _IncrementSlider, Config);
 boolean('noFill', _IncrementSlider, Config);
+select('orientation', _IncrementSlider, ['horizontal', 'vertical'], Config);
+boolean('percent', _IncrementSlider, IncrementSliderTooltipConfig);
+select('position', _IncrementSlider, ['', 'above', 'above left', 'above center', 'above right', 'above before', 'above after', 'before', 'left', 'right', 'after', 'below', 'below left', 'below center', 'below right', 'below before', 'below after'], IncrementSliderTooltipConfig, '');
 range('progressAnchor', _IncrementSlider, Config, {range: true, min: 0, max: 1, step: 0.1}, 0);
 select('size', _IncrementSlider, ['small', 'large'], Config);
 number('step', _IncrementSlider, Config);
+boolean('tooltip', _IncrementSlider, IncrementSliderTooltipConfig);
 
 _IncrementSlider.storyName = 'IncrementSlider';
 _IncrementSlider.parameters = {

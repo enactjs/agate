@@ -55,7 +55,7 @@ export const _Popup = (args) => {
 	);
 };
 
-select('buttons', _Popup, ['no buttons', '1 button', '2 buttons'], Config, 'no');
+select('buttons', _Popup, ['no buttons', '1 button', '2 buttons'], Config, 'no buttons');
 boolean('centered', _Popup, Config);
 boolean('closeButton', _Popup, Config);
 select('duration', _Popup, ['short', 'medium', 'long'], Config);

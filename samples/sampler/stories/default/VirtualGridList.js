@@ -50,7 +50,7 @@ const updateDataSize = (dataSize) => {
 			count = (headingZeros + i).slice(-itemNumberDigits),
 			text = `Item ${count}${shouldAddLongContent({index: i, modIndex: 2})}`,
 			color = Math.floor((Math.random() * (0x1000000 - 0x101010)) + 0x101010).toString(16),
-			src = `http://placehold.it/300x300/${color}/ffffff&text=Image ${i}`;
+			src = `http://via.placeholder.com/300x300/${color}/ffffff&text=Image ${i}`;
 
 		items.push({text, src});
 	}

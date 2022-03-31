@@ -24,13 +24,12 @@ export default {
 };
 
 export const _ColorPicker = (args) => {
-	const direction = args['direction'];
 	const colors = prop.presets[
 		args['color palette'] || 'Default'
 	];
 	return (
 		<ColorPicker
-			direction={direction}
+			direction={args['direction']}
 			disabled={args['disabled']}
 			onChange={action('onChange')}
 			defaultValue={colors[0]}
@@ -42,7 +41,7 @@ export const _ColorPicker = (args) => {
 
 select('direction', _ColorPicker, prop.direction, Config, 'right');
 boolean('disabled', _ColorPicker, Config);
-select('color palette', _ColorPicker, Object.keys(prop.presets), StoryOptions, prop.presets['Default']);
+select('color palette', _ColorPicker, Object.keys(prop.presets), StoryOptions, 'Default');
 
 _ColorPicker.storyName = 'ColorPicker';
 _ColorPicker.parameters = {

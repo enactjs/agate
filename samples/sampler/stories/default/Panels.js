@@ -40,7 +40,7 @@ const SecondPanel = kind({
 	)
 });
 
-const BasicPanels = ({orientation, ...rest}) => {
+const BasicPanels = ({...rest}) => {
 	const [index, setIndex] = useState(0);
 	const goNext = () => setIndex(clamp(0, 2, index + 1));
 	const goPrevious = () => setIndex(clamp(0, 2, index - 1));
@@ -50,7 +50,6 @@ const BasicPanels = ({orientation, ...rest}) => {
 			{...rest}
 			index={index}
 			onBack={goPrevious}
-			orientation={orientation}
 		>
 			<FirstPanel onClick={goNext} />
 			<SecondPanel onClick={goPrevious} />

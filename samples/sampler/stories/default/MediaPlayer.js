@@ -1,9 +1,9 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, select} from '@enact/storybook-utils/addons/controls';
-import MediaPlayer from '@enact/agate/MediaPlayer';
+import {MediaPlayer, MediaPlayerBase} from '@enact/agate/MediaPlayer';
 
 MediaPlayer.displayname = 'MediaPlayer';
-const Config = mergeComponentMetadata('MediaPlayer', MediaPlayer);
+const Config = mergeComponentMetadata('MediaPlayer', MediaPlayerBase, MediaPlayer);
 
 const audioFiles = [
 	'https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3',
