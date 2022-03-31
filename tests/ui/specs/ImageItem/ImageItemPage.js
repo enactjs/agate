@@ -9,8 +9,8 @@ class ImageItemInterface {
 		this.selector = `#${this.id}`;
 	}
 
-	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}`));
+	async focus () {
+		return browser.execute((el) => el.focus(), await $(`#${this.id}`));
 	}
 	get self () {
 		return $(`#${this.id}`);
@@ -46,8 +46,8 @@ class ImageItemPage extends Page {
 		};
 	}
 
-	open (urlExtra) {
-		super.open('ImageItem-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('ImageItem-View', urlExtra);
 	}
 }
 

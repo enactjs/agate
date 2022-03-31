@@ -7,8 +7,8 @@ class AgatePage extends Page {
 		this.title = 'Agate Test';
 	}
 
-	open (urlExtra) {
-		super.open('Agate-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('Agate-View', urlExtra);
 	}
 
 	get component () {

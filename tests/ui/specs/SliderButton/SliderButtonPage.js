@@ -31,8 +31,8 @@ class SliderButtonPage extends Page {
 		this.components = {sliderButtonThreeItems, sliderButtonFiveItems, sliderButtonDisabled};
 	}
 
-	open (urlExtra) {
-		super.open('SliderButton-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('SliderButton-View', urlExtra);
 	}
 }
 

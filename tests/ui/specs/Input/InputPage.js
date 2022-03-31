@@ -40,15 +40,15 @@ class InputPage extends Page {
 	get inputWithCustomClearButtonElement () {
 		return $('#input8 .Input_Input_icon').isExisting();
 	}
-	get inputWithClearButtonIconValue () {
-		return getText($('#input7 .Input_Input_icon')).codePointAt();
+	async inputWithClearButtonIconValue () {
+		return (await getText($('#input7 .Input_Input_icon'))).codePointAt();
 	}
-	get inputWithCustomClearButtonIconValue () {
-		return getText($('#input8 .Input_Input_icon')).codePointAt();
+	async inputWithCustomClearButtonIconValue () {
+		return (await getText($('#input8 .Input_Input_icon'))).codePointAt();
 	}
 
-	open (urlExtra) {
-		super.open('Input-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('Input-View', urlExtra);
 	}
 }
 
