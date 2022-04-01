@@ -1,5 +1,5 @@
 import {action} from '@enact/storybook-utils/addons/actions';
-import {object, select} from '@enact/storybook-utils/addons/knobs';
+import {object, select} from '@enact/storybook-utils/addons/controls';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import ri from '@enact/ui/resolution';
 import Image, {ImageBase, ImageDecorator} from '@enact/agate/Image';
@@ -20,13 +20,13 @@ export default {
 	component: 'Image'
 };
 
-export const _Image = () => (
+export const _Image = (args) => (
 	<Image
 		className={css.image}
 		onError={action('onError')}
 		onLoad={action('onLoad')}
-		sizing={select('sizing', ['fill', 'fit', 'none'], Config, 'fill')}
-		src={object('src', Config, src)}
+		sizing={args['sizing']}
+		src={args['src']}
 		style={{
 			border: '#ffa500 dashed 1px',
 			marginTop: ri.scaleToRem(50)
@@ -51,6 +51,9 @@ export const _Image = () => (
 		</label>
 	</Image>
 );
+
+select('sizing', _Image, ['fill', 'fit', 'none'], Config, 'fill');
+object('src', _Image, Config, src);
 
 _Image.storyname = 'Image';
 _Image.parameters = {

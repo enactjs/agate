@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select, text} from '@enact/storybook-utils/addons/controls';
 import ri from '@enact/ui/resolution';
 import BodyText from '@enact/agate/BodyText';
 import Button from '@enact/agate/Button';
@@ -19,32 +19,43 @@ Config.defaultProps = {
 	spotlightRestrict: 'self-first'
 };
 
-const renderPopup = () => (
-	<div>{text('popup string', {groupId: 'Popup'}, 'Hello Contextual Popup')}</div>
-);
-
 export default {
 	title: 'Agate/ContextualPopupDecorator',
 	component: 'ContextualPopupDecorator'
 };
 
-export const withoutAnArrow = () => (
-	<div style={{textAlign: 'center', marginTop: ri.scaleToRem(99)}}>
-		<ContextualButtonWithoutArrow
-			direction={select('direction', ['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config)}
-			noAutoDismiss={boolean('noAutoDismiss', Config)}
-			offset={select('offset', ['none', 'overlap', 'small'], Config, 'small')}
-			onClose={action('onClose')}
-			open={boolean('open', Config)}
-			popupComponent={renderPopup}
-			showCloseButton={boolean('showCloseButton', Config)}
-			spotlightRestrict={select('spotlightRestrict', ['none', 'self-first', 'self-only'], Config)}
-		>
-			{text('button string', Config, 'Hello Contextual Button')}
-		</ContextualButtonWithoutArrow>
-		<BodyText centered>Use KNOBS to interact with the ContextualPopup.</BodyText>
-	</div>
-);
+export const withoutAnArrow = (args) => {
+	const renderPopup = () => <div>{args['popup string']}</div>;
+
+	return (
+		<div style={{textAlign: 'center', marginTop: ri.scaleToRem(99)}}>
+			<ContextualButtonWithoutArrow
+				direction={args['direction']}
+				noAutoDismiss={args['noAutoDismiss']}
+				offset={args['offset']}
+				onClose={action('onClose')}
+				open={args['open']}
+				popupComponent={renderPopup} // eslint-disable-line react/jsx-no-bind
+				showCloseButton={args['showCloseButton']}
+				spotlightRestrict={args['spotlightRestrict']}
+			>
+				{args['button string']}
+			</ContextualButtonWithoutArrow>
+			<BodyText centered>
+				Use CONTROLS to interact with the ContextualPopup.
+			</BodyText>
+		</div>
+	);
+};
+
+select('direction', withoutAnArrow, ['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config);
+boolean('noAutoDismiss', withoutAnArrow, Config);
+select('offset', withoutAnArrow, ['none', 'overlap', 'small'], Config, 'small');
+boolean('open', withoutAnArrow, Config);
+boolean('showCloseButton', withoutAnArrow, Config);
+select('spotlightRestrict', withoutAnArrow, ['none', 'self-first', 'self-only'], Config);
+text('button string', withoutAnArrow, Config, 'Hello Contextual Button');
+text('popup string', withoutAnArrow, {groupId: 'Popup'}, 'Hello Contextual Popup');
 
 withoutAnArrow.storyName = 'without an arrow';
 withoutAnArrow.parameters = {

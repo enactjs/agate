@@ -1,12 +1,12 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {number, select} from '@enact/storybook-utils/addons/knobs';
+import {number, range, select} from '@enact/storybook-utils/addons/controls';
 import Arc, {ArcBase} from '@enact/agate/Arc';
 
 Arc.displayName = 'Arc';
 const Config = mergeComponentMetadata('Arc', ArcBase, Arc);
 
-// Set up some defaults for info and knobs
+// Set up some defaults for info and controls
 const arcProp = {
 	colors: ['', '#000000', '#FDC902', '#986AAD']
 };
@@ -16,15 +16,21 @@ export default {
 	component: 'Arc'
 };
 
-export const ArcBasic = () => (
+export const ArcBasic = (args) => (
 	<Arc
-		color={select('color', arcProp.colors, Config)}
-		endAngle={number('endAngle', Config, {range: true, min: 0, max: 360})}
+		color={args['color']}
+		endAngle={args['endAngle']}
 		onClick={action('onClick')}
-		radius={number('radius', Config)}
-		startAngle={number('startAngle', Config, {range: true, min: 0, max: 360})}
-		strokeWidth={number('strokeWidth', Config)}
+		radius={args['radius']}
+		startAngle={args['startAngle']}
+		strokeWidth={args['strokeWidth']}
 	/>
 );
+
+select('color', ArcBasic, arcProp.colors, Config);
+range('endAngle', ArcBasic, Config, {range: true, min: 0, max: 360});
+number('radius', ArcBasic, Config);
+range('startAngle', ArcBasic, Config, {range: true, min: 0, max: 360});
+number('strokeWidth', ArcBasic, Config);
 
 ArcBasic.storyName = 'Arc';

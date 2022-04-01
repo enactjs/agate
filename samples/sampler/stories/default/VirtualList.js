@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, number, select} from '@enact/storybook-utils/addons/controls';
 import ri from '@enact/ui/resolution';
 import {VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
 import Item from '@enact/agate/Item';
@@ -57,26 +57,36 @@ export default {
 	component: 'VirtualList'
 };
 
-export const _VirtualList = () => {
+export const _VirtualList = (args) => {
 	return (
 		<VirtualList
 			className={css.virtualList}
-			dataSize={updateDataSize(number('dataSize', VirtualListConfig, defaultDataSize))}
-			focusableScrollbar={boolean('focusableScrollbar', VirtualListConfig)}
-			horizontalScrollbar={select('horizontalScrollbar', prop.scrollbarOption, VirtualListConfig)}
-			itemRenderer={renderItem(ri.scale(number('itemSize', VirtualListConfig, 144)))}
-			itemSize={ri.scale(number('itemSize', VirtualListConfig, 144))}
-			key={select('scrollMode', prop.scrollModeOption, VirtualListConfig)}
+			dataSize={updateDataSize(args['dataSize'])}
+			focusableScrollbar={args['focusableScrollbar']}
+			horizontalScrollbar={args['horizontalScrollbar']}
+			itemRenderer={renderItem(ri.scale(args['itemSize']))}
+			itemSize={ri.scale(args['itemSize'])}
+			key={args['scrollMode']}
 			onScrollStart={action('onScrollStart')}
 			onScrollStop={action('onScrollStop')}
-			scrollMode={select('scrollMode', prop.scrollModeOption, VirtualListConfig)}
-			spacing={ri.scale(number('spacing', VirtualListConfig))}
-			spotlightDisabled={boolean('spotlightDisabled', VirtualListConfig, false)}
-			verticalScrollbar={select('verticalScrollbar', prop.scrollbarOption, VirtualListConfig)}
-			wrap={wrapOption[select('wrap', ['false', 'true', '"noAnimation"'], VirtualListConfig)]}
+			scrollMode={args['scrollMode']}
+			spacing={ri.scale(args['spacing'])}
+			spotlightDisabled={args['spotlightDisabled']}
+			verticalScrollbar={args['verticalScrollbar']}
+			wrap={wrapOption[args['wrap']]}
 		/>
 	);
 };
+
+number('dataSize', _VirtualList, VirtualListConfig, defaultDataSize);
+boolean('focusableScrollbar', _VirtualList, VirtualListConfig);
+select('horizontalScrollbar', _VirtualList, prop.scrollbarOption, VirtualListConfig);
+number('itemSize', _VirtualList, VirtualListConfig, 144);
+select('scrollMode', _VirtualList, prop.scrollModeOption, VirtualListConfig);
+number('spacing', _VirtualList, VirtualListConfig);
+boolean('spotlightDisabled', _VirtualList, VirtualListConfig, false);
+select('verticalScrollbar', _VirtualList, prop.scrollbarOption, VirtualListConfig);
+select('wrap', _VirtualList, ['false', 'true', '"noAnimation"'], VirtualListConfig);
 
 _VirtualList.storyName = 'VirtualList';
 _VirtualList.parameters = {

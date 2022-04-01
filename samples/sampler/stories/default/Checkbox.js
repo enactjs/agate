@@ -1,5 +1,5 @@
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select} from '@enact/storybook-utils/addons/controls';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import Checkbox, {CheckboxBase} from '@enact/agate/Checkbox';
 
@@ -13,16 +13,21 @@ export default {
 	component: 'Checkbox'
 };
 
-export const _Checkbox = () => (
+export const _Checkbox = (args) => (
 	<Checkbox
-		disabled={boolean('disabled', Config)}
-		indeterminate={boolean('indeterminate', Config)}
-		indeterminateIcon={select('indeterminateIcon', ['', ...iconList], Config)}
+		disabled={args['disabled']}
+		indeterminate={args['indeterminate']}
+		indeterminateIcon={args['indeterminateIcon']}
 		onToggle={action('onToggle')}
 	>
-		{select('children', ['', ...iconList], Config)}
+		{args['children']}
 	</Checkbox>
 );
+
+boolean('disabled', _Checkbox, Config);
+boolean('indeterminate', _Checkbox, Config);
+select('indeterminateIcon', _Checkbox, ['', ...iconList], Config);
+select('children', _Checkbox, ['', ...iconList], Config);
 
 _Checkbox.storyName = 'Checkbox';
 _Checkbox.parameters = {

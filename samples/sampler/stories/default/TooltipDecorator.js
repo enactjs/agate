@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, number, select, text} from '@enact/storybook-utils/addons/knobs';
+import {boolean, number, select, text} from '@enact/storybook-utils/addons/controls';
 import Button from '@enact/agate/Button';
 import TooltipDecorator, {Tooltip, TooltipBase} from '@enact/agate/TooltipDecorator';
 
@@ -38,26 +38,39 @@ export default {
 	component: 'TooltipDecorator'
 };
 
-export const _TooltipButton = () => (
+export const _TooltipButton = (args) => (
 	<div style={{textAlign: 'center'}}>
 		<TooltipButton
-			backgroundOpacity={select('backgroundOpacity', ['opaque', 'lightOpaque', 'transparent'], Config)}
-			disabled={boolean('disabled', Config)}
-			icon={select('icon', ['', ...iconList], Config)}
+			backgroundOpacity={args['backgroundOpacity']}
+			disabled={args['disabled']}
+			icon={args['icon']}
 			onClick={action('onClick')}
-			selected={boolean('selected', Config)}
-			size={select('size', ['smallest', 'small', 'large', 'huge'], Config)}
-			tooltipDelay={number('tooltipDelay', Config, 500)}
-			tooltipMarquee={boolean('tooltipMarquee', Config)}
-			tooltipPosition={select('tooltipPosition', prop.tooltipPosition, Config)}
-			tooltipRelative={boolean('tooltipRelative', Config)}
-			tooltipText={text('tooltip', Config, 'Tooltip')}
-			tooltipWidth={number('tooltipWidth', Config)}
+			selected={args['selected']}
+			size={args['size']}
+			tooltipDelay={args['tooltipDelay']}
+			tooltipMarquee={args['tooltipMarquee']}
+			tooltipPosition={args['tooltipPosition']}
+			tooltipRelative={args['tooltipRelative']}
+			tooltipText={args['tooltip']}
+			tooltipWidth={args['tooltipWidth']}
 		>
-			{text('children', Config, 'Click me')}
+			{args['children']}
 		</TooltipButton>
 	</div>
 );
+
+select('backgroundOpacity', _TooltipButton, ['opaque', 'lightOpaque', 'transparent'], Config);
+boolean('disabled', _TooltipButton, Config);
+select('icon', _TooltipButton, ['', ...iconList], Config);
+boolean('selected', _TooltipButton, Config);
+select('size', _TooltipButton, ['smallest', 'small', 'large', 'huge'], Config);
+number('tooltipDelay', _TooltipButton, Config, 500);
+boolean('tooltipMarquee', _TooltipButton, Config);
+select('tooltipPosition', _TooltipButton, prop.tooltipPosition, Config);
+boolean('tooltipRelative', _TooltipButton, Config);
+text('tooltip', _TooltipButton, Config, 'Tooltip');
+number('tooltipWidth', _TooltipButton, Config);
+text('children', _TooltipButton, Config, 'Click me');
 
 _TooltipButton.storyName = 'TooltipDecorator';
 _TooltipButton.parameters = {
