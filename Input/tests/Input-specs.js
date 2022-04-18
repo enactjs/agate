@@ -99,7 +99,7 @@ describe('Input Specs', () => {
 		const handleChange = jest.fn();
 		const value = 'blah';
 		const evt = {
-			target: {value: value},
+			target: {value},
 			stopPropagation: jest.fn()
 		};
 

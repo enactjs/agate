@@ -53,7 +53,7 @@ describe('LabeledIcon Specs', () => {
 		render(<LabeledIcon inline>Hello LabeledIcon</LabeledIcon>);
 
 		const expected = 'inline';
-		const actual = screen.getByText('Hello LabeledIcon').previousElementSibling.parentElement;
+		const actual = screen.getByText('Hello LabeledIcon').parentElement;
 
 		expect(actual).toHaveClass(expected);
 	});
@@ -62,7 +62,7 @@ describe('LabeledIcon Specs', () => {
 		render(<LabeledIcon labelPosition="above">Hello LabeledIcon</LabeledIcon>);
 
 		const expected = 'above';
-		const actual = screen.getByText('Hello LabeledIcon').previousElementSibling.parentElement;
+		const actual = screen.getByText('Hello LabeledIcon').parentElement;
 
 		expect(actual).toHaveClass(expected);
 	});
@@ -71,7 +71,7 @@ describe('LabeledIcon Specs', () => {
 		render(<LabeledIcon>Hello LabeledIcon</LabeledIcon>);
 
 		const expected = 'below';
-		const actual = screen.getByText('Hello LabeledIcon').previousElementSibling.parentElement;
+		const actual = screen.getByText('Hello LabeledIcon').parentElement;
 
 		expect(actual).toHaveClass(expected);
 	});
@@ -80,7 +80,7 @@ describe('LabeledIcon Specs', () => {
 		render(<LabeledIcon labelPosition="before">Hello LabeledIcon</LabeledIcon>);
 
 		const expected = 'before';
-		const actual = screen.getByText('Hello LabeledIcon').previousElementSibling.parentElement;
+		const actual = screen.getByText('Hello LabeledIcon').parentElement;
 
 		expect(actual).toHaveClass(expected);
 	});
@@ -89,7 +89,7 @@ describe('LabeledIcon Specs', () => {
 		render(<LabeledIcon labelPosition="after">Hello LabeledIcon</LabeledIcon>);
 
 		const expected = 'after';
-		const actual = screen.getByText('Hello LabeledIcon').previousElementSibling.parentElement;
+		const actual = screen.getByText('Hello LabeledIcon').parentElement;
 
 		expect(actual).toHaveClass(expected);
 	});
@@ -98,7 +98,7 @@ describe('LabeledIcon Specs', () => {
 		render(<LabeledIcon labelPosition="left">Hello LabeledIcon</LabeledIcon>);
 
 		const expected = 'left';
-		const actual = screen.getByText('Hello LabeledIcon').previousElementSibling.parentElement;
+		const actual = screen.getByText('Hello LabeledIcon').parentElement;
 
 		expect(actual).toHaveClass(expected);
 	});
@@ -107,7 +107,7 @@ describe('LabeledIcon Specs', () => {
 		render(<LabeledIcon labelPosition="right">Hello LabeledIcon</LabeledIcon>);
 
 		const expected = 'right';
-		const actual = screen.getByText('Hello LabeledIcon').previousElementSibling.parentElement;
+		const actual = screen.getByText('Hello LabeledIcon').parentElement;
 
 		expect(actual).toHaveClass(expected);
 	});
@@ -116,7 +116,7 @@ describe('LabeledIcon Specs', () => {
 		render(<LabeledIcon size="small">Hello LabeledIcon</LabeledIcon>);
 
 		const expected = 'small';
-		const actual = screen.getByText('Hello LabeledIcon').previousElementSibling.parentElement;
+		const actual = screen.getByText('Hello LabeledIcon').parentElement;
 
 		expect(actual).toHaveClass(expected);
 	});

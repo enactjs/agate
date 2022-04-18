@@ -4,8 +4,6 @@ import userEvent from '@testing-library/user-event';
 
 import Button, {ButtonBase} from '../Button';
 
-import css from '../Button.module.less';
-
 describe('Button Specs', () => {
 	test('should have \'disabled\' HTML attribute when \'disabled\' prop is provided', () => {
 		render(<Button disabled>I am a disabled Button</Button>);
@@ -18,7 +16,7 @@ describe('Button Specs', () => {
 		render(<ButtonBase />);
 		const button = screen.getByRole('button');
 
-		const expected = css.minWidth;
+		const expected = 'minWidth';
 
 		expect(button).toHaveClass(expected);
 	});
@@ -27,7 +25,7 @@ describe('Button Specs', () => {
 		render(<ButtonBase />);
 		const button = screen.getByRole('button');
 
-		const expected = css.large;
+		const expected = 'large';
 
 		expect(button).toHaveClass(expected);
 	});
@@ -37,7 +35,7 @@ describe('Button Specs', () => {
 			render(<ButtonBase minWidth={false} />);
 			const button = screen.getByRole('button');
 
-			const expected = css.minWidth;
+			const expected = 'minWidth';
 
 			expect(button).not.toHaveClass(expected);
 		});
@@ -48,7 +46,7 @@ describe('Button Specs', () => {
 			render(<ButtonBase backgroundOpacity="transparent" />);
 			const button = screen.getByRole('button');
 
-			const expected = css.transparent;
+			const expected = 'transparent';
 
 			expect(button).toHaveClass(expected);
 		});
@@ -67,7 +65,7 @@ describe('Button Specs', () => {
 			render(<Button icon="check" iconPosition="after">text</Button>);
 			const button = screen.getByRole('button');
 
-			const expected = css.iconAfter;
+			const expected = 'iconAfter';
 
 			expect(button).toHaveClass(expected);
 		});
@@ -76,7 +74,7 @@ describe('Button Specs', () => {
 			render(<Button icon="check" iconPosition="before">text</Button>);
 			const button = screen.getByRole('button');
 
-			const expected = css.iconBefore;
+			const expected = 'iconBefore';
 
 			expect(button).toHaveClass(expected);
 		});

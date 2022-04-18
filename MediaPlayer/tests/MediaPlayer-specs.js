@@ -76,33 +76,33 @@ describe('MediaPlayer', () => {
 
 		test('should activate the mediaPlayer slider on enter keyup', () => {
 			render(
-				<MediaPlayer data-testid="media-player">
+				<MediaPlayer>
 					{
 						audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 					}
 				</MediaPlayer>
 			);
-			const mediaPlayer = screen.getByTestId('media-player').children[1];
+			const mediaSlider = screen.getByRole('slider', {hidden: true});
 
-			activate(mediaPlayer);
+			activate(mediaSlider);
 
-			expect(mediaPlayer).toHaveClass('active');
+			expect(mediaSlider).toHaveClass('active');
 		});
 
 		test('should deactivate the mediaPlayer slider on blur', () => {
 			render(
-				<MediaPlayer data-testid="media-player">
+				<MediaPlayer>
 					{
 						audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 					}
 				</MediaPlayer>
 			);
-			const mediaPlayer = screen.getByTestId('media-player').children[1];
+			const mediaSlider = screen.getByRole('slider', {hidden: true});
 
-			activate(mediaPlayer);
-			blur(mediaPlayer);
+			activate(mediaSlider);
+			blur(mediaSlider);
 
-			expect(mediaPlayer).not.toHaveClass('active');
+			expect(mediaSlider).not.toHaveClass('active');
 		});
 	});
 });

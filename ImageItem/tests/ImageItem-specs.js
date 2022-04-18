@@ -20,7 +20,7 @@ describe('ImageItem', () => {
 
 	test('should omit caption node when `children` is unset', () => {
 		render(
-			<ImageItem src="http://placehold.it/300x400/9037ab/ffffff&text=Image0" />
+			<ImageItem src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0" />
 		);
 
 		const actual = screen.getAllByRole('img')[0];
