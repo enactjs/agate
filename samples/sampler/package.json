@@ -28,7 +28,7 @@
     "dotenv": "^8.2.0",
     "ilib": "^14.4.0",
     "prop-types": "^15.7.2",
-    "react": "^17.0.1"
+    "react": "^18.0.0"
   },
   "devDependencies": {
     "@enact/storybook-utils": "^4.1.0",
