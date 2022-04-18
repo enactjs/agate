@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, number, select} from '@enact/storybook-utils/addons/controls';
 import TemperatureControl, {TemperatureControlBase} from '@enact/agate/TemperatureControl';
 
 const prop = {
@@ -15,15 +15,20 @@ export default {
 	component: 'TemperatureControl'
 };
 
-export const _TemperatureControl = () => (
+export const _TemperatureControl = (args) => (
 	<TemperatureControl
-		disabled={boolean('disabled', Config)}
-		max={number('max', Config)}
-		min={number('min', Config)}
+		disabled={args['disabled']}
+		max={args['max']}
+		min={args['min']}
 		onChange={action('onChange')}
-		unit={select('unit', prop.unit, Config)}
+		unit={args['unit']}
 	/>
 );
+
+boolean('disabled', _TemperatureControl, Config);
+number('max', _TemperatureControl, Config);
+number('min', _TemperatureControl, Config);
+select('unit', _TemperatureControl, prop.unit, Config);
 
 _TemperatureControl.storyName = 'TemperatureControl';
 _TemperatureControl.parameters = {

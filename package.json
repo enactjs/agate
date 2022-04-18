@@ -37,10 +37,10 @@
     "extends": "enact-proxy/strict"
   },
   "dependencies": {
-    "@enact/core": "^4.0.3",
-    "@enact/i18n": "^4.0.3",
-    "@enact/spotlight": "^4.0.3",
-    "@enact/ui": "^4.0.3",
+    "@enact/core": "^4.1.0",
+    "@enact/i18n": "^4.1.0",
+    "@enact/spotlight": "^4.1.0",
+    "@enact/ui": "^4.1.0",
     "classnames": "^2.2.6",
     "color-convert": "^1.9.3",
     "deep-freeze": "0.0.1",
@@ -50,7 +50,6 @@
     "ramda": "^0.25.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "recompose": "^0.30.0",
     "warning": "^3.0.0",
     "ilib": "^14.4.0"
   },
@@ -59,7 +58,7 @@
   },
   "devDependencies": {
     "@enact/docs-utils": "^0.3.3",
-    "@enact/ui-test-utils": "^0.6.0",
+    "@enact/ui-test-utils": "^0.7.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",

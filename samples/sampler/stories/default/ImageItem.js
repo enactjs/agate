@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, object, text, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, object, text, select} from '@enact/storybook-utils/addons/controls';
 import ri from '@enact/ui/resolution';
 import ImageItem, {ImageItemBase} from '@enact/agate/ImageItem';
 
@@ -18,21 +18,28 @@ export default {
 	component: 'ImageItem'
 };
 
-export const _ImageItem = () => (
+export const _ImageItem = (args) => (
 	<div style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}>
 		<ImageItem
-			captionPosition={select('captionPosition', ['below', 'overlay'], Config)}
-			disabled={boolean('disabled', Config)}
+			captionPosition={args['captionPosition']}
+			disabled={args['disabled']}
 			onError={action('onError')}
 			onLoad={action('onLoad')}
-			orientation={select('orientation', ['horizontal', 'vertical'], Config)}
-			sizing={select('sizing', ['fill', 'fit', 'none'], Config)}
-			src={object('src', Config, src)}
+			orientation={args['orientation']}
+			sizing={args['sizing']}
+			src={args['src']}
 		>
-			{text('children', Config, 'caption')}
+			{args['children']}
 		</ImageItem>
 	</div>
 );
+
+select('captionPosition', _ImageItem, ['below', 'overlay'], Config);
+boolean('disabled', _ImageItem, Config);
+select('orientation', _ImageItem, ['horizontal', 'vertical'], Config);
+select('sizing', _ImageItem, ['fill', 'fit', 'none'], Config);
+object('src', _ImageItem, Config, src);
+text('children', _ImageItem, Config, 'caption');
 
 _ImageItem.storyName = 'ImageItem';
 _ImageItem.parameters = {

@@ -7,8 +7,8 @@ class SliderInterface {
 		this.selector = `#${this.id}`;
 	}
 
-	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}`));
+	async focus () {
+		return browser.execute((el) => el.focus(), await $(`#${this.id}`));
 	}
 
 	get self () {
@@ -23,16 +23,16 @@ class SliderInterface {
 		return $(this.selector + ' .ProgressBar_ProgressBarTooltip_tooltip');
 	}
 
-	get knobPositionHorizontal () {
-		return parseInt(this.knob.getCSSProperty('left').value);
+	async knobPositionHorizontal () {
+		return parseInt(await (await this.knob.getCSSProperty('left')).value);
 	}
 
-	get knobPositionVertical () {
-		return parseInt(this.knob.getCSSProperty('bottom').value);
+	async knobPositionVertical () {
+		return parseInt(await (await this.knob.getCSSProperty('bottom')).value);
 	}
 
-	get sliderFillWidth () {
-		return parseInt($(this.selector + ' .Slider_Slider_fill').getCSSProperty('width').value);
+	async sliderFillWidth () {
+		return parseInt(await (await $(this.selector + ' .Slider_Slider_fill').getCSSProperty('width')).value);
 	}
 }
 
@@ -50,8 +50,8 @@ class SliderPage extends Page {
 		this.components = {sliderDefault, sliderDisabled, sliderCustomProgressAnchor, sliderVertical, sliderWithTooltip, sliderVerticalDisabled, sliderActivateOnFocus};
 	}
 
-	open (urlExtra) {
-		super.open('Slider-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('Slider-View', urlExtra);
 	}
 }
 

@@ -10,11 +10,11 @@ class ThumbnailItemInterface {
 	get self () {
 		return $(this.selector);
 	}
-	focus () {
-		return browser.execute((el) => el.focus(), $(this.selector));
+	async focus () {
+		return browser.execute((el) => el.focus(), await $(this.selector));
 	}
-	hover () {
-		return $(this.selector).moveTo({xOffset: 0, yOffset: 0});
+	async hover () {
+		return await $(this.selector).moveTo({xOffset: 0, yOffset: 0});
 	}
 	get textContent () {
 		return getText(element('.Item_Item_content', this.self));
@@ -51,8 +51,8 @@ class ThumbnailItemPage extends Page {
 		};
 	}
 
-	open (urlExtra) {
-		super.open('ThumbnailItem-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('ThumbnailItem-View', urlExtra);
 	}
 }
 
