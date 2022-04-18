@@ -29,8 +29,6 @@ describe('ImageItem', () => {
 	});
 
 	test('should apply `captionOverlay` className when given `captionPosition=captionOverlay`', () => {
-		const children = 'caption';
-
 		render(
 			<ImageItem
 				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
@@ -47,8 +45,6 @@ describe('ImageItem', () => {
 	});
 
 	test('should apply horizontal className when given `orientation=horizontal`', () => {
-		const children = 'caption';
-
 		render(
 			<ImageItem
 				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
@@ -65,8 +61,6 @@ describe('ImageItem', () => {
 	});
 
 	test('should display an image when given `src` prop', () => {
-		const children = 'caption';
-
 		render(
 			<ImageItem
 				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
