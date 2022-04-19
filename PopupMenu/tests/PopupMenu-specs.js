@@ -52,12 +52,12 @@ describe('PopupMenu specs', () => {
 	test('should apply \'shown\' class when visible with noAnimation', () => {
 		render(
 			<FloatingLayerController>
-				<PopupMenu data-testid="popupMenu" noAnimation open />
+				<PopupMenu noAnimation open />
 			</FloatingLayerController>
 		);
 
 		const expected = 'shown';
-		const actual = screen.getByTestId('popupMenu').parentElement.parentElement;
+		const actual = screen.getByRole('alert').parentElement.parentElement;
 
 		expect(actual).toHaveClass(expected);
 	});
@@ -65,12 +65,12 @@ describe('PopupMenu specs', () => {
 	test('should apply \'ease-in-out\' class when noAnimation is false', () => {
 		render(
 			<FloatingLayerController>
-				<PopupMenu data-testid="popupMenu" noAnimation={false} open />
+				<PopupMenu noAnimation={false} open />
 			</FloatingLayerController>
 		);
 
 		const expected = 'ease-in-out';
-		const actual = screen.getByTestId('popupMenu').parentElement.parentElement;
+		const actual = screen.getByRole('alert').parentElement.parentElement;
 
 		expect(actual).toHaveClass(expected);
 	});

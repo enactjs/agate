@@ -10,7 +10,7 @@ const increment = (value) => userEvent.click(screen.getByLabelText(`${value} inc
 describe('RangePicker Specs', () => {
 	test('should render a single child with the current value', () => {
 		render(<RangePicker max={20} min={-10} value={10} />);
-		const pickerValue =	screen.getByRole('spinbutton');
+		const pickerValue = screen.getByRole('spinbutton');
 
 		const expected = '10';
 
@@ -23,7 +23,7 @@ describe('RangePicker Specs', () => {
 		increment(10);
 
 		const expected = '11';
-		const actual =	screen.getByRole('spinbutton');
+		const actual = screen.getByRole('spinbutton');
 
 		expect(actual).toHaveTextContent(expected);
 	});
@@ -34,7 +34,7 @@ describe('RangePicker Specs', () => {
 		decrement(10);
 
 		const expected = '9';
-		const actual =	screen.getByRole('spinbutton');
+		const actual = screen.getByRole('spinbutton');
 
 		expect(actual).toHaveTextContent(expected);
 	});

@@ -22,7 +22,7 @@ describe('Switch Specs', () => {
 		expect(switchButton).toHaveClass(expected);
 	});
 
-	test('should not have animated class when noAnimation prop is true', () => {
+	test('should not have animated class when `noAnimation` prop is true', () => {
 		render(<SwitchBase noAnimation />);
 		const switchButton = screen.getByRole('button');
 

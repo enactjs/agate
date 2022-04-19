@@ -69,7 +69,7 @@ describe('TooltipDecorator Specs', () => {
 		expect(actual).not.toHaveStyle({'text-align': expected});
 	});
 
-	test('should have above class when `direction=above`', () => {
+	test('should have `above` class when `direction=above`', () => {
 		const tooltipText = 'This is a tooltip';
 		render(
 			<Root>
@@ -87,7 +87,7 @@ describe('TooltipDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have below class when `direction=below`', () => {
+	test('should have `below` class when `direction=below`', () => {
 		const tooltipText = 'This is a tooltip';
 		render(
 			<Root>
@@ -105,7 +105,7 @@ describe('TooltipDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have left class when `direction=left`', () => {
+	test('should have `left` class when `direction=left`', () => {
 		const tooltipText = 'This is a tooltip';
 		render(
 			<Root>
@@ -123,7 +123,7 @@ describe('TooltipDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have right class when `direction=right`', () => {
+	test('should have `right` class when `direction=right`', () => {
 		const tooltipText = 'This is a tooltip';
 		render(
 			<Root>

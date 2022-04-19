@@ -10,20 +10,18 @@ describe('ToggleButton', () => {
 
 	test('should use \'toggleOffLabel\' if toggled off and label provided', () => {
 		render(<ToggleButton toggleOffLabel={toggleOffLabel}>{textChild}</ToggleButton>);
-		const button = screen.getByRole('button');
 
 		const expected = toggleOffLabel;
-		const actual = button.children.item(1).children.item(0).children.item(0);
+		const actual = screen.getByRole('button');
 
 		expect(actual).toHaveTextContent(expected);
 	});
 
 	test('should use \'toggleOnLabel\' if toggled on and label provided', () => {
 		render(<ToggleButton selected toggleOnLabel={toggleOnLabel}>{textChild}</ToggleButton>);
-		const button = screen.getByRole('button');
 
 		const expected = toggleOnLabel;
-		const actual = button.children.item(1).children.item(0).children.item(0);
+		const actual = screen.getByRole('button');
 
 		expect(actual).toHaveTextContent(expected);
 	});

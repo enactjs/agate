@@ -17,17 +17,13 @@ describe('TabGroup Specs', () => {
 			/>
 		);
 
-		const expected = 'tab';
-		const homeTab = screen.getByText('Home');
-		const settingsTab = screen.getByText('Settings');
-		const themeTab = screen.getByText('Theme');
+		const expectedClass = 'tabGroup';
 
-		expect(homeTab).toBeInTheDocument();
-		expect(homeTab.parentElement.parentElement).toHaveClass(expected);
-		expect(settingsTab).toBeInTheDocument();
-		expect(settingsTab.parentElement.parentElement).toHaveClass(expected);
-		expect(themeTab).toBeInTheDocument();
-		expect(themeTab.parentElement.parentElement).toHaveClass(expected);
+		const expectedTabNumber = 3;
+		const tabGroup = screen.getByRole('group');
+
+		expect(tabGroup).toHaveClass(expectedClass);
+		expect(tabGroup.children).toHaveLength(expectedTabNumber);
 	});
 
 	test('should have positionAfter when given `tabPosition=after`', () => {
