@@ -1,45 +1,35 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
 
 import {Picker, PickerBase} from '../Picker';
 
 describe('Picker Specs', () => {
 	test('should render selected child wrapped with <PickerItem/>', () => {
-		const picker = mount(
-			<Picker value={1}>
-				{[1, 2, 3, 4]}
-			</Picker>
-		);
+		render(<Picker value={1}>{[1, 2, 3, 4]}</Picker>);
+		const pickerValue = screen.getByRole('spinbutton');
 
 		const expected = '2';
-		const actual = picker.find('PickerItem').at(1).text();
 
-		expect(actual).toBe(expected);
+		expect(pickerValue).toHaveTextContent(expected);
 	});
 
-	test('should set the max of <Picker> to be one less than the number of children',
-		() => {
-			const picker = mount(
-				<Picker value={1}>
-					{[1, 2, 3, 4]}
-				</Picker>
-			);
+	test('should set the max of <Picker> to be one less than the number of children', () => {
+		render(<Picker value={3}>{[1, 2, 3, 4]}</Picker>);
+		const pickerValue = screen.getByLabelText('4 next item');
 
-			const expected = 3;
-			const actual = picker.find('Picker').last().prop('max');
+		const expectedAttribute = 'disabled';
 
-			expect(actual).toBe(expected);
-		}
-	);
+		expect(pickerValue).toHaveAttribute(expectedAttribute);
+	});
 
 	test('should be disabled when empty', () => {
-		const picker = mount(
-			<PickerBase>
-				{[]}
-			</PickerBase>
-		);
+		render(<PickerBase>{[]}</PickerBase>);
+		const pickerPreviousValue = screen.getByLabelText('undefined previous item');
+		const pickerNextValue = screen.getByLabelText('undefined next item');
 
-		const actual = picker.find('Picker').last().prop('disabled');
+		const expectedAttribute = 'disabled';
 
-		expect(actual).toBe(true);
+		expect(pickerPreviousValue).toHaveAttribute(expectedAttribute);
+		expect(pickerNextValue).toHaveAttribute(expectedAttribute);
 	});
 });

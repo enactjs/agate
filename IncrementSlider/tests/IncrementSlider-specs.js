@@ -1,30 +1,24 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {fireEvent, render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import IncrementSlider from '../IncrementSlider';
 
-import css from '../IncrementSlider.module.less';
-
-const getNode = (slider) => slider.find(`div.${css.slider}`);
-const focus = (slider) => getNode(slider).simulate('focus');
-
+const decrement = () => userEvent.click(screen.getAllByRole('button')[0]);
+const focus = (slider) => fireEvent.focus(slider);
+const increment = () => userEvent.click(screen.getAllByRole('button')[1]);
 const tap = (node) => {
-	node.simulate('mousedown');
-	node.simulate('mouseup');
+	fireEvent.mouseDown(node);
+	fireEvent.mouseUp(node);
 };
-const decrement = (slider) => tap(slider.find(`IncrementSliderButton.${css.decrementButton}`));
-const increment = (slider) => tap(slider.find(`IncrementSliderButton.${css.incrementButton}`));
 
 describe('IncrementSlider Specs', () => {
 	test('should decrement value', () => {
 		const handleChange = jest.fn();
 		const value = 50;
-		const incrementSlider = mount(
-			<IncrementSlider
-				onChange={handleChange}
-				value={value}
-			/>
-		);
+		render(<IncrementSlider onChange={handleChange} value={value} />);
 
-		decrement(incrementSlider);
+		decrement();
 
 		const expected = value - 1;
 		const actual = handleChange.mock.calls[0][0].value;
@@ -35,14 +29,9 @@ describe('IncrementSlider Specs', () => {
 	test('should increment value', () => {
 		const handleChange = jest.fn();
 		const value = 50;
-		const incrementSlider = mount(
-			<IncrementSlider
-				onChange={handleChange}
-				value={value}
-			/>
-		);
+		render(<IncrementSlider onChange={handleChange} value={value} />);
 
-		increment(incrementSlider);
+		increment();
 
 		const expected = value + 1;
 		const actual = handleChange.mock.calls[0][0].value;
@@ -53,198 +42,139 @@ describe('IncrementSlider Specs', () => {
 	test('should only call onChange once', () => {
 		const handleChange = jest.fn();
 		const value = 50;
-		const incrementSlider = mount(
-			<IncrementSlider
-				onChange={handleChange}
-				value={value}
-			/>
-		);
+		render(<IncrementSlider onChange={handleChange} value={value} />);
+		const incrementButton = screen.getAllByRole('button')[1];
 
-		increment(incrementSlider);
+		tap(incrementButton);
 
 		const expected = 1;
-		const actual = handleChange.mock.calls.length;
 
-		expect(actual).toBe(expected);
+		expect(handleChange).toHaveBeenCalledTimes(expected);
 	});
 
 	test('should not call onChange on prop change', () => {
 		const handleChange = jest.fn();
 		const value = 50;
-		const incrementSlider = mount(
-			<IncrementSlider
-				onChange={handleChange}
-				value={value}
-			/>
-		);
+		const {rerender} = render(<IncrementSlider onChange={handleChange} value={value} />);
 
-		incrementSlider.setProps({onChange: handleChange, value: value + 1});
+		rerender(<IncrementSlider onChange={handleChange} value={value + 1} />);
 
-		const expected = 0;
-		const actual = handleChange.mock.calls.length;
-
-		expect(actual).toBe(expected);
+		expect(handleChange).not.toHaveBeenCalled();
 	});
 
 	test('should disable decrement button when value === min', () => {
-		const incrementSlider = mount(
-			<IncrementSlider
-				value={0}
-				min={0}
-			/>
-		);
+		render(<IncrementSlider min={0} value={0} />);
 
-		const expected = true;
-		const actual = incrementSlider.find(`IncrementSliderButton.${css.decrementButton}`).prop('disabled');
+		const expected = 'disabled';
+		const actual = screen.getAllByRole('button')[0];
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveAttribute(expected);
 	});
 
 	test('should disable increment button when value === max', () => {
-		const incrementSlider = mount(
-			<IncrementSlider
-				value={10}
-				max={10}
-			/>
-		);
+		render(<IncrementSlider max={10} value={10} />);
 
-		const expected = true;
-		const actual = incrementSlider.find(`IncrementSliderButton.${css.incrementButton}`).prop('disabled');
+		const expected = 'disabled';
+		const actual = screen.getAllByRole('button')[1];
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveAttribute(expected);
 	});
 
 	test('should use custom incrementIcon', () => {
 		const icon = 'plus';
-		const incrementSlider = mount(
-			<IncrementSlider incrementIcon={icon} />
-		);
+		render(<IncrementSlider incrementIcon={icon} />);
 
-		const expected = icon;
-		const actual = incrementSlider.find(`.${css.incrementButton} Icon`).prop('children');
+		const expected = '+';
+		const actual = screen.getAllByRole('button')[1];
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveTextContent(expected);
 	});
 
 	test('should use custom decrementIcon', () => {
 		const icon = 'minus';
-		const incrementSlider = mount(
-			<IncrementSlider decrementIcon={icon} />
-		);
+		render(<IncrementSlider decrementIcon={icon} />);
 
-		const expected = icon;
-		const actual = incrementSlider.find(`.${css.decrementButton} Icon`).prop('children');
+		const expected = '-';
+		const actual = screen.getAllByRole('button')[0];
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveTextContent(expected);
 	});
 
-	test(
-		'should set decrementButton "aria-label" to value and hint string',
+	test('should set decrementButton "aria-label" to value and hint string',
 		() => {
-			const incrementSlider = mount(
-				<IncrementSlider value={10} />
-			);
+			render(<IncrementSlider value={10} />);
 
 			const expected = '10 press button to decrease the value';
-			const actual = incrementSlider.find(`IncrementSliderButton.${css.decrementButton}`).prop('aria-label');
+			const actual = screen.getAllByRole('button')[0];
 
-			expect(actual).toBe(expected);
-		}
-	);
+			expect(actual).toHaveAttribute('aria-label', expected);
+		});
 
-	test(
-		'should set decrementButton "aria-label" to decrementAriaLabel',
+	test('should set decrementButton "aria-label" to decrementAriaLabel',
 		() => {
 			const label = 'decrement aria label';
-			const incrementSlider = mount(
-				<IncrementSlider value={10} decrementAriaLabel={label} />
-			);
+			render(<IncrementSlider decrementAriaLabel={label} value={10} />);
 
 			const expected = `10 ${label}`;
-			const actual = incrementSlider.find(`IncrementSliderButton.${css.decrementButton}`).prop('aria-label');
+			const actual = screen.getAllByRole('button')[0];
 
-			expect(actual).toBe(expected);
-		}
-	);
+			expect(actual).toHaveAttribute('aria-label', expected);
+		});
 
-	test(
-		'should set decrementButton "aria-label" when decrementButton is disabled',
-		() => {
-			const incrementSlider = mount(
-				<IncrementSlider disabled value={10} />
-			);
+	test('should set decrementButton "aria-label" when decrementButton is disabled', () => {
+		render(<IncrementSlider disabled value={10} />);
 
-			const expected = '10 press button to decrease the value';
-			const actual = incrementSlider.find(`IncrementSliderButton.${css.decrementButton}`).prop('aria-label');
+		const expected = '10 press button to decrease the value';
+		const actual = screen.getAllByRole('button')[0];
 
-			expect(actual).toBe(expected);
-		}
-	);
+		expect(actual).toHaveAttribute('aria-label', expected);
+	});
 
-	test(
-		'should set incrementButton "aria-label" to value and hint string',
-		() => {
-			const incrementSlider = mount(
-				<IncrementSlider value={10} />
-			);
+	test('should set incrementButton "aria-label" to value and hint string', () => {
+		render(<IncrementSlider value={10} />);
 
-			const expected = '10 press button to increase the value';
-			const actual = incrementSlider.find(`IncrementSliderButton.${css.incrementButton}`).prop('aria-label');
+		const expected = '10 press button to increase the value';
+		const actual = screen.getAllByRole('button')[1];
 
-			expect(actual).toBe(expected);
-		}
-	);
+		expect(actual).toHaveAttribute('aria-label', expected);
+	});
 
-	test(
-		'should set incrementButton "aria-label" to incrementAriaLabel',
-		() => {
-			const label = 'increment aria label';
-			const incrementSlider = mount(
-				<IncrementSlider value={10} incrementAriaLabel={label} />
-			);
+	test('should set incrementButton "aria-label" to incrementAriaLabel', () => {
+		const label = 'increment aria label';
+		render(<IncrementSlider incrementAriaLabel={label} value={10} />);
 
-			const expected = `10 ${label}`;
-			const actual = incrementSlider.find(`IncrementSliderButton.${css.incrementButton}`).prop('aria-label');
+		const expected = `10 ${label}`;
+		const actual = screen.getAllByRole('button')[1];
 
-			expect(actual).toBe(expected);
-		}
-	);
+		expect(actual).toHaveAttribute('aria-label', expected);
+	});
 
-	test(
-		'should set incrementButton "aria-label" when incrementButton is disabled',
-		() => {
-			const incrementSlider = mount(
-				<IncrementSlider disabled value={10} />
-			);
+	test('should set incrementButton "aria-label" when incrementButton is disabled', () => {
+		render(<IncrementSlider disabled value={10} />);
 
-			const expected = '10 press button to increase the value';
-			const actual = incrementSlider.find(`IncrementSliderButton.${css.incrementButton}`).prop('aria-label');
+		const expected = '10 press button to increase the value';
+		const actual = screen.getAllByRole('button')[1];
 
-			expect(actual).toBe(expected);
-		}
-	);
+		expect(actual).toHaveAttribute('aria-label', expected);
+	});
 
 	test('should set the tooltip to visible when focused', () => {
-		const subject = mount(
-			<IncrementSlider tooltip />
-		);
+		render(<IncrementSlider tooltip />);
+		const slider = screen.getByRole('slider');
 
-		focus(subject);
+		focus(slider);
 
-		const expected = 'visible';
-		const actual = subject.find('ProgressBarTooltip').prop('visible') ? 'visible' : 'not visible';
+		const actual = screen.getByText('0');
+		const expected = 'tooltipLabel';
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should set the tooltip to not visible when unfocused', () => {
-		const subject = mount(
-			<IncrementSlider tooltip />
-		);
+		render(<IncrementSlider tooltip />);
 
-		const expected = 'not visible';
-		const actual = subject.find('ProgressBarTooltip').prop('visible') ? 'visible' : 'not visible';
+		const tooltip = screen.queryByText('0');
 
-		expect(actual).toBe(expected);
+		expect(tooltip).toBeNull();
 	});
 });
