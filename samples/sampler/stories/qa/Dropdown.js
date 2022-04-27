@@ -1,12 +1,13 @@
-import Group from '@enact/ui/Group';
-import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, range, select, text} from  '@enact/storybook-utils/addons/controls';
-import {action} from '@enact/storybook-utils/addons/actions';
-import {Component} from 'react';
+/* eslint-disable react/jsx-no-bind */
 import Button from '@enact/agate/Button';
 import Dropdown, {DropdownBase} from '@enact/agate/Dropdown';
 import Heading from '@enact/agate/Heading';
 import Scroller from '@enact/agate/Scroller';
+import {mergeComponentMetadata} from '@enact/storybook-utils';
+import {action} from '@enact/storybook-utils/addons/actions';
+import {boolean, range, select, text} from '@enact/storybook-utils/addons/controls';
+import Group from '@enact/ui/Group';
+import {useState} from 'react';
 
 Dropdown.displayName = 'Dropdown';
 const Config = mergeComponentMetadata('Dropdown', Dropdown, DropdownBase);
@@ -18,65 +19,51 @@ const list = [
 	{children: 'hello 3', 'key': 'key3', 'aria-label': 'aria 3'}
 ];
 
-class AutoDismissDropdown extends Component {
-	constructor (props) {
-		super(props);
-		this.state = {
-			open: true
-		};
-	}
+const AutoDismissDropdown = () => {
+	const [open, setOpen] = useState(true);
 
-	handleClose = () => {
-		this.setState({open: false});
+	const handleClose = () => {
+		setOpen(false);
 	};
 
-	handleOpen = () => {
-		this.setState({open: true});
+	const handleOpen = () => {
+		setOpen(true);
 	};
 
-	render () {
-		return (
-			<div>
-				<Heading>Click in the blank area of the viewport to dismiss the Dropdown</Heading>
-				<Dropdown
-					onClose={this.handleClose}
-					onOpen={this.handleOpen}
-					open={this.state.open} // initial value is true
-				>
-					{['test1', 'test2', 'test3']}
-				</Dropdown>
-			</div>
-		);
-	}
-}
+	return (
+		<div>
+			<Heading>Click in the blank area of the viewport to dismiss the Dropdown</Heading>
+			<Dropdown
+				onClose={handleClose}
+				onOpen={handleOpen}
+				open={open} // initial value is true
+			>
+				{['test1', 'test2', 'test3']}
+			</Dropdown>
+		</div>
+	);
+};
 
-class DisabledDropdown extends Component {
-	constructor (props) {
-		super(props);
-		this.state = {
-			isDisabled: true
-		};
-	}
+const DisabledDropdown = () => {
+	const [isDisabled, setIsDisabled] = useState(true);
 
-	handleClick = () => {
-		if (this.state.isDisabled) {
-			this.setState({isDisabled: false});
+	const handleClick = () => {
+		if (isDisabled) {
+			setIsDisabled(false);
 		} else {
-			this.setState({isDisabled: true});
+			setIsDisabled(true);
 		}
 	};
 
-	render () {
-		return (
-			<div>
-				<Button onClick={this.handleClick}>{this.state.isDisabled ? 'Enable dropdown' : 'Disable dropdown'}</Button>
-				<Dropdown title="hello" disabled={this.state.isDisabled} onFocus={this.handleFocus}>
-					{['a', 'b', 'c']}
-				</Dropdown>
-			</div>
-		);
-	}
-}
+	return (
+		<div>
+			<Button onClick={handleClick}>{isDisabled ? 'Enable dropdown' : 'Disable dropdown'}</Button>
+			<Dropdown title="hello" disabled={isDisabled}>
+				{['a', 'b', 'c']}
+			</Dropdown>
+		</div>
+	);
+};
 
 export default {
 	title: 'Agate/Dropdown',
