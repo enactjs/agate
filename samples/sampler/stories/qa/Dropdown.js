@@ -58,7 +58,7 @@ const DisabledDropdown = () => {
 	return (
 		<div>
 			<Button onClick={handleClick}>{isDisabled ? 'Enable dropdown' : 'Disable dropdown'}</Button>
-			<Dropdown title="hello" disabled={isDisabled}>
+			<Dropdown disabled={isDisabled} title="hello">
 				{['a', 'b', 'c']}
 			</Dropdown>
 		</div>

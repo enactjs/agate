@@ -194,48 +194,6 @@ AppBase.propTypes = {
 	updateLocale: PropTypes.func
 };
 
-// class AppBase extends Component {
-//
-// 	render () {
-// 		const {className, ...rest} = this.props;
-// 		const {isDebugMode, jumpToView, selected} = this.state;
-// 		const debugAriaClass = isDebugMode ? 'aria debug' : null;
-// 		const menu = views.map((view, i) => (
-// 			<Item
-// 				aria-label={view.title}
-// 				className={appCss.navItem}
-// 				data-menu={i}
-// 				key={i}
-// 				onClick={this.handleChangeView(i)}
-// 				slotBefore={('00' + i).slice(-2)}
-// 			>
-// 				{view.title}
-// 			</Item>
-// 		));
-//
-// 		delete rest.rtl;
-// 		delete rest.updateLocale;
-//
-// 		return (
-// 			<div className={classnames(className, debugAriaClass, appCss.app)}>
-// 				<Layout {...rest} className={appCss.layout}>
-// 					<Cell component={Menu} id="menu" size="20%" spotlightId="menu">
-// 						<div className={appCss.jumpToView}>Jump To View: {jumpToView}</div>
-// 						<Scroller className={appCss.scroller}>
-// 							{menu}
-// 						</Scroller>
-// 					</Cell>
-// 					<Cell component={ViewManager} index={selected}>
-// 						{views.map((view, i) => (
-// 							<View {...view} handleDebug={this.handleDebug} isDebugMode={isDebugMode} key={i} />
-// 						))}
-// 					</Cell>
-// 				</Layout>
-// 			</div>
-// 		);
-// 	}
-// }
-
 const AppDecorator = compose(
 	ThemeDecorator,
 	I18nContextDecorator({rtlProp: 'rtl', updateLocaleProp: 'updateLocale'})
