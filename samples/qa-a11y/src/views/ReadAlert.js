@@ -62,7 +62,6 @@ const ReadAlertView = () => {
 					Audio guidance
 				</CheckboxItem>
 			</Section>
-
 			<Section className={appCss.marginTop} title="readAlert">
 				<Button alt="Clear of true" onClick={onClick1}>readAlert test(clear true)</Button>
 				<Button alt="Clear of false" onClick={onClick2}>readAlert test(clear false)</Button>
