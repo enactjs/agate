@@ -75,6 +75,15 @@ const ArcBase = kind({
 		onClick: PropTypes.func,
 
 		/**
+		 * Called when the path area is tapped.
+		 *
+		 * @type {Function}
+		 * @param {Object} event
+		 * @public
+		 */
+		onPointerDown: PropTypes.func,
+
+		/**
 		 * The radius of the arc.
 		 *
 		 * @type {Number}

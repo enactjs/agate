@@ -96,7 +96,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 				this.setState({isFocused: true}, () => {
 					setTimeout(() => {
 						this.setState({isFocused: false});
-					}, 200)
+					}, 200);
 				});
 			}
 
