@@ -122,7 +122,7 @@ const ArcBase = kind({
 		width: ({radius}) => ri.scaleToRem(radius * 2)
 	},
 
-	render: ({children, color, componentRef, endAngle, onClick, radius, size, startAngle, strokeWidth, ...rest}) => {
+	render: ({children, color, componentRef, endAngle, onClick, onPointerDown, radius, size, startAngle, strokeWidth, ...rest}) => {
 		const halfStrokeWidth = strokeWidth / 2;
 		const viewBox = `-${halfStrokeWidth} -${halfStrokeWidth} ${radius * 2}  ${radius * 2}`;
 
@@ -140,6 +140,7 @@ const ArcBase = kind({
 					d={arcPath(startAngle, endAngle, radius - halfStrokeWidth, size)}
 					fill="none"
 					onClick={onClick}
+					onPointerDown={onPointerDown}
 					pointerEvents="auto"
 					stroke="transparent"
 					strokeWidth={radius}

@@ -1,6 +1,7 @@
 import {forward} from '@enact/core/handle';
 import {is} from '@enact/core/keymap';
 import hoc from '@enact/core/hoc';
+import platform from '@enact/core/platform';
 import {validateRangeOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
 import {Component} from 'react';
@@ -91,16 +92,40 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 		}
 
 		handleClick = (value) => (ev) => {
+			if (platform.touchscreen) {
+				this.setState({isFocused: true}, () => {
+					setTimeout(() => {
+						this.setState({isFocused: false});
+					}, 200)
+				});
+			}
+
 			forward('onChange', {value}, this.props);
 			ev.stopPropagation();
+		};
+
+		handlePointerDown = (value) => (ev) => {
+			if (platform.touchscreen) {
+				this.setState({isFocused: true});
+				forward('onChange', {value}, this.props);
+				ev.stopPropagation();
+			}
 		};
 
 		handleBlur = () => {
 			this.setState({isFocused: false});
 		};
 
+		handlePointerUp = () => {
+			if (platform.touchscreen) {
+				this.setState({isFocused: false});
+			}
+		};
+
 		handleFocus = () => {
-			this.setState({isFocused: true});
+			if (!platform.touchscreen) {
+				this.setState({isFocused: true});
+			}
 		};
 
 		handleKeyDown = (ev, props) => {
@@ -139,6 +164,8 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 					onClick={this.handleClick}
 					onFocus={this.handleFocus}
 					onKeyDown={this.handleKeyDown}
+					onPointerDown={this.handlePointerDown}
+					onPointerUp={this.handlePointerUp}
 					value={value}
 				>
 					{children}
