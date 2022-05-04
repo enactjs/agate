@@ -30,7 +30,7 @@ describe('Button Specs', () => {
 		expect(button).toHaveClass(expected);
 	});
 
-	describe('with no `minWidth`', function () {
+	describe('with no `minWidth`', () => {
 		test('should not have \'minWidth\' class', () => {
 			render(<ButtonBase minWidth={false} />);
 			const button = screen.getByRole('button');
@@ -52,7 +52,7 @@ describe('Button Specs', () => {
 		});
 	});
 
-	describe('with icon', function () {
+	describe('with icon', () => {
 		test('should have \'check\' icon when specified', () => {
 			render(<Button icon="check">abc</Button>);
 			const icon = screen.getByText('✓');

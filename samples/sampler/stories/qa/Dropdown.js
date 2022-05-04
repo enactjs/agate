@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 import Button from '@enact/agate/Button';
 import Dropdown, {DropdownBase} from '@enact/agate/Dropdown';
 import Heading from '@enact/agate/Heading';
@@ -7,7 +6,7 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, range, select, text} from '@enact/storybook-utils/addons/controls';
 import Group from '@enact/ui/Group';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 
 Dropdown.displayName = 'Dropdown';
 const Config = mergeComponentMetadata('Dropdown', Dropdown, DropdownBase);
@@ -22,13 +21,13 @@ const list = [
 const AutoDismissDropdown = () => {
 	const [open, setOpen] = useState(true);
 
-	const handleClose = () => {
+	const handleClose = useCallback(() => {
 		setOpen(false);
-	};
+	}, []);
 
-	const handleOpen = () => {
+	const handleOpen = useCallback(() => {
 		setOpen(true);
-	};
+	}, []);
 
 	return (
 		<div>
@@ -47,13 +46,9 @@ const AutoDismissDropdown = () => {
 const DisabledDropdown = () => {
 	const [isDisabled, setIsDisabled] = useState(true);
 
-	const handleClick = () => {
-		if (isDisabled) {
-			setIsDisabled(false);
-		} else {
-			setIsDisabled(true);
-		}
-	};
+	const handleClick = useCallback(() => {
+		setIsDisabled(!isDisabled);
+	}, [isDisabled]);
 
 	return (
 		<div>

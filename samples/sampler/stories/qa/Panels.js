@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 import Header from '@enact/agate/Header';
 import Icon from '@enact/agate/Icon';
 import Item from '@enact/agate/Item';
@@ -11,15 +10,15 @@ import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select} from '@enact/storybook-utils/addons/controls';
 import Routable, {Route, Linkable} from '@enact/ui/Routable';
 import PropTypes from 'prop-types';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 
 Panels.displayName = 'Panels';
 const Config = mergeComponentMetadata('Panels', Panels);
 
 const BasicPanels = (props) => {
 	const [index, setIndex] = useState(0);
-	const goNext = () => setIndex(clamp(0, 2, index + 1));
-	const goPrevious = () => setIndex(clamp(0, 2, index - 1));
+	const goNext = useCallback(() => setIndex(clamp(0, 2, index + 1)), [index]);
+	const goPrevious = useCallback(() => setIndex(clamp(0, 2, index - 1)), [index]);
 
 	return (
 		<Panels
@@ -124,9 +123,9 @@ const RoutablePanels = Routable({navigate: 'onNavigate'}, BreadcrumbPanelsBase);
 const RoutablePanelsApp = (props) => {
 	const [appPath, setAppPath] = useState('/settings');
 
-	const onNavigate = ({path}) => {
+	const onNavigate = useCallback(({path}) => {
 		setAppPath(path);
-	};
+	}, []);
 
 	return (
 		<div {...props}>
