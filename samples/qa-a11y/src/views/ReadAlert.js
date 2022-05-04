@@ -34,7 +34,7 @@ const ReadAlertView = () => {
 	const onClick1 = onClick(true);
 	const onClick2 = onClick(false);
 
-	const onToggle = useCallback( () => {
+	const onToggle = useCallback(() => {
 		if (window.PalmServiceBridge) {
 			setAudioGuidance(guidance => setAudioGuidance(!guidance));
 			new LS2Request().send({
