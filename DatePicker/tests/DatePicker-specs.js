@@ -1,112 +1,58 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import DatePicker from '../DatePicker';
-import css from '../DatePicker.module.less';
 
 // Note: Tests pass 'locale' because there's no I18nDecorator to provide a value via context and
 // otherwise, nothing renders in the label.
 
 describe('DatePicker', () => {
+	test('should emit an onChange event when changing a component picker', () => {
+		const handleChange = jest.fn();
+		render(<DatePicker locale="en-US" onChange={handleChange} value={new Date(2000, 6, 15)} />);
 
-	test(
-		'should emit an onChange event when changing a component picker',
-		() => {
-			const handleChange = jest.fn();
-			const subject = mount(
-				<DatePicker onChange={handleChange} value={new Date(2000, 6, 15)} locale="en-US" />
-			);
+		userEvent.click(screen.getByLabelText('15 day decrease the value'));
 
-			const base = subject.find('DateComponentRangePicker').first();
-
-			base.prop('onChange')({value: 0});
-
-			const expected = 1;
-			const actual = handleChange.mock.calls.length;
-
-			expect(actual).toBe(expected);
-		}
-	);
+		expect(handleChange).toHaveBeenCalled();
+	});
 
 	test('should accept a JavaScript Date for its value prop', () => {
-		const subject = mount(
-			<DatePicker value={new Date(2000, 0, 1)} locale="en-US" />
-		);
+		render(<DatePicker locale="en-US" value={new Date(2000, 0, 1)} />);
+		const year = screen.getAllByRole('spinbutton')[2];
 
-		const yearPicker = subject.find(`DateComponentRangePicker.${css.year}`);
+		const expected = '2000';
 
-		const expected = 2000;
-		const actual = yearPicker.prop('value');
-
-		expect(actual).toBe(expected);
+		expect(year).toHaveTextContent(expected);
 	});
 
 	test('should set "dayAriaLabel" to day picker', () => {
 		const label = 'custom day aria-label';
-		const subject = mount(
-			<DatePicker dayAriaLabel={label} value={new Date(2000, 0, 1)} />
-		);
+		render(<DatePicker dayAriaLabel={label} locale="en-US" value={new Date(2000, 0, 1)} />);
+		const dayPicker = screen.getByLabelText(label);
 
-		const dayPicker = subject.find(`DateComponentRangePicker.${css.day}`);
+		const expected = '1';
 
-		const expected = label;
-		const actual = dayPicker.prop('aria-label');
-
-		expect(actual).toBe(expected);
+		expect(dayPicker).toHaveTextContent(expected);
 	});
 
 	test('should set "monthAriaLabel" to month picker', () => {
 		const label = 'custom month aria-label';
-		const subject = mount(
-			<DatePicker monthAriaLabel={label} value={new Date(2000, 0, 1)} />
-		);
+		render(<DatePicker locale="en-US" monthAriaLabel={label} value={new Date(2000, 0, 1)} />);
+		const monthPicker = screen.getByLabelText(label);
 
-		const monthPicker = subject.find(`DateComponentRangePicker.${css.month}`);
+		const expected = '1';
 
-		const expected = label;
-		const actual = monthPicker.prop('aria-label');
-
-		expect(actual).toBe(expected);
+		expect(monthPicker).toHaveTextContent(expected);
 	});
 
 	test('should set "yearAriaLabel" to year picker', () => {
 		const label = 'custom year aria-label';
-		const subject = mount(
-			<DatePicker value={new Date(2000, 0, 1)} yearAriaLabel={label} />
-		);
+		render(<DatePicker locale="en-US" value={new Date(2000, 0, 1)} yearAriaLabel={label} />);
+		const yearPicker = screen.getByLabelText(label);
 
-		const yearPicker = subject.find(`DateComponentRangePicker.${css.year}`);
+		const expected = '2000';
 
-		const expected = label;
-		const actual = yearPicker.prop('aria-label');
-
-		expect(actual).toBe(expected);
-	});
-
-	test('should set "monthAriaLabel" to month picker', () => {
-		const label = 'custom month label';
-		const subject = mount(
-			<DatePicker monthAriaLabel={label} value={new Date(2000, 0, 1)} />
-		);
-
-		const monthPicker = subject.find(`DateComponentRangePicker.${css.month}`);
-
-		const expected = label;
-		const actual = monthPicker.prop('aria-label');
-
-		expect(actual).toBe(expected);
-	});
-
-	test('should set "yearAriaLabel" to year picker', () => {
-		const label = 'custom year label';
-		const subject = mount(
-			<DatePicker value={new Date(2000, 0, 1)} yearAriaLabel={label} />
-		);
-
-		const yearPicker = subject.find(`DateComponentRangePicker.${css.year}`);
-
-		const expected = label;
-		const actual = yearPicker.prop('aria-label');
-
-		expect(actual).toBe(expected);
+		expect(yearPicker).toHaveTextContent(expected);
 	});
 });

@@ -1,44 +1,36 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
 
 import {Header} from '../Header';
 
 describe('Header', () => {
 	test('should render a title when `title` prop is set', () => {
-		const subject = mount(
-			<Header title="title" />
-		);
+		render(<Header title="title" />);
 
 		const expected = 'title';
-		const actual = subject.prop('title');
+		const actual = screen.getByText('title');
 
-		expect(actual).toBe(expected);
+		expect(actual).toBeInTheDocument();
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should render a subtitle when `subtitle` prop is set', () => {
-		const subject = mount(
-			<Header
-				title="title"
-				subtitle="subtitle"
-			/>
-		);
+		render(<Header subtitle="subtitle" title="title" />);
 
 		const expected = 'subtitle';
-		const actual = subject.prop('subtitle');
+		const actual = screen.getByText('subtitle');
 
-		expect(actual).toBe(expected);
+		expect(actual).toBeInTheDocument();
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should render a title above when `titleAbove` prop is set', () => {
-		const subject = mount(
-			<Header
-				title="title"
-				titleAbove="title above"
-			/>
-		);
+		render(<Header title="title" titleAbove="title above" />);
 
-		const expected = 'title above';
-		const actual = subject.prop('titleAbove');
+		const expected = 'titleAbove';
+		const actual = screen.getByText('title above');
 
-		expect(actual).toBe(expected);
+		expect(actual).toBeInTheDocument();
+		expect(actual).toHaveClass(expected);
 	});
 });

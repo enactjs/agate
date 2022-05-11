@@ -1,134 +1,139 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import DateTimePicker from '../DateTimePicker';
-import dateCss from '../../DatePicker/DatePicker.module.less';
-import timeCss from '../../TimePicker/TimePicker.module.less';
 
 // Note: Tests pass 'locale' because there's no I18nDecorator to provide a value via context and
 // otherwise, nothing renders in the label.
 
 describe('DateTimePicker', () => {
+	test('should emit an onChange event when changing a component picker', () => {
+		const handleChange = jest.fn();
+		render(
+			<DateTimePicker
+				locale="en-US"
+				onChange={handleChange}
+				value={new Date(2000, 0, 15, 12, 30)}
+			/>
+		);
 
-	test(
-		'should emit an onChange event when changing a component picker',
-		() => {
-			const handleChange = jest.fn();
-			const subject = mount(
-				<DateTimePicker onChange={handleChange} value={new Date(2000, 0, 1, 12, 30)} locale="en-US" />
-			);
+		userEvent.click(screen.getByLabelText('15 day decrease the value'));
 
-			const base = subject.find('DateComponentRangePicker').first();
+		expect(handleChange).toHaveBeenCalled();
 
-			base.prop('onChange')({value: 0});
+		userEvent.click(screen.getByLabelText('12 hour next item'));
 
-			const expected = 1;
-			const actual = handleChange.mock.calls.length;
+		const expected = 2;
 
-			expect(actual).toBe(expected);
-		}
-	);
+		expect(handleChange).toHaveBeenCalledTimes(expected);
+	});
 
 	test('should accept a JavaScript Date for its value prop', () => {
-		const subject = mount(
-			<DateTimePicker value={new Date(2000, 0, 1, 12, 30)} locale="en-US" />
-		);
+		render(<DateTimePicker locale="en-US" value={new Date(2000, 0, 1, 12, 30)} />);
+		const year = screen.getAllByRole('spinbutton')[5];
+		const minute = screen.getAllByRole('spinbutton')[1];
 
-		const yearPicker = subject.find(`DateComponentRangePicker.${dateCss.year}`);
+		const expectedYear = '2000';
+		const expectedMinute = '30';
 
-		const expectedYear = 2000;
-		const actualYear = yearPicker.prop('value');
-
-		expect(actualYear).toBe(expectedYear);
-
-		const minutePicker = subject.find(`.${timeCss.minutePicker}`).at(0);
-
-		const expectedMinute = 30;
-		const actualMinute = minutePicker.prop('value');
-
-		expect(actualMinute).toBe(expectedMinute);
+		expect(year).toHaveTextContent(expectedYear);
+		expect(minute).toHaveTextContent(expectedMinute);
 	});
 
-	test('should set "dayAriaLabel" to day picker', () => {
+	test('should set `dayAriaLabel` to day picker', () => {
 		const label = 'custom day aria-label';
-		const subject = mount(
-			<DateTimePicker dayAriaLabel={label} value={new Date(2000, 0, 1, 12, 0)} />
+		render(
+			<DateTimePicker
+				dayAriaLabel={label}
+				locale="en-US"
+				value={new Date(2000, 0, 1, 12, 0)}
+			/>
 		);
+		const dayPicker = screen.getByLabelText(label);
 
-		const dayPicker = subject.find(`DateComponentRangePicker.${dateCss.day}`);
+		const expected = '1';
 
-		const expected = label;
-		const actual = dayPicker.prop('aria-label');
-
-		expect(actual).toBe(expected);
+		expect(dayPicker).toHaveTextContent(expected);
 	});
 
-	test('should set "monthAriaLabel" to month picker', () => {
+	test('should set `monthAriaLabel` to month picker', () => {
 		const label = 'custom month aria-label';
-		const subject = mount(
-			<DateTimePicker monthAriaLabel={label} value={new Date(2000, 0, 1, 12, 0)} />
+		render(
+			<DateTimePicker
+				locale="en-US"
+				monthAriaLabel={label}
+				value={new Date(2000, 0, 1, 12, 0)}
+			/>
 		);
+		const monthPicker = screen.getByLabelText(label);
 
-		const monthPicker = subject.find(`DateComponentRangePicker.${dateCss.month}`);
+		const expected = '1';
 
-		const expected = label;
-		const actual = monthPicker.prop('aria-label');
-
-		expect(actual).toBe(expected);
+		expect(monthPicker).toHaveTextContent(expected);
 	});
 
-	test('should set "yearAriaLabel" to year picker', () => {
+	test('should set `yearAriaLabel` to year picker', () => {
 		const label = 'custom year aria-label';
-		const subject = mount(
-			<DateTimePicker value={new Date(2000, 0, 1, 12, 0)} yearAriaLabel={label} />
+		render(
+			<DateTimePicker
+				locale="en-US"
+				value={new Date(2000, 0, 1, 12, 0)}
+				yearAriaLabel={label}
+			/>
 		);
+		const yearPicker = screen.getByLabelText(label);
 
-		const yearPicker = subject.find(`DateComponentRangePicker.${dateCss.year}`);
+		const expected = '2000';
 
-		const expected = label;
-		const actual = yearPicker.prop('aria-label');
-
-		expect(actual).toBe(expected);
+		expect(yearPicker).toHaveTextContent(expected);
 	});
 
-	test('should set "hourAriaLabel" to hour picker', () => {
+	test('should set `hourAriaLabel` to hour picker', () => {
 		const label = 'custom hour aria-label';
-		const subject = mount(
-			<DateTimePicker hourAriaLabel={label} value={new Date(2000, 0, 1, 12, 30)} />
+		render(
+			<DateTimePicker
+				hourAriaLabel={label}
+				locale="en-US"
+				value={new Date(2000, 0, 1, 12, 30)}
+			/>
 		);
+		const hourPicker = screen.getByLabelText(label);
 
-		const hourPicker = subject.find(`.${timeCss.hourPicker}`).at(0);
+		const expected = '12';
 
-		const expected = label;
-		const actual = hourPicker.prop('aria-label');
-
-		expect(actual).toBe(expected);
+		expect(hourPicker).toHaveTextContent(expected);
 	});
 
-	test('should set "meridiemAriaLabel" to meridiem picker', () => {
+	test('should set `meridiemAriaLabel` to meridiem picker', () => {
 		const label = 'custom meridiem aria-label';
-		const subject = mount(
-			<DateTimePicker meridiemAriaLabel={label} value={new Date(2000, 0, 1, 12, 30)} />
+		render(
+			<DateTimePicker
+				locale="en-US"
+				meridiemAriaLabel={label}
+				value={new Date(2000, 0, 1, 12, 30)}
+			/>
 		);
+		const meridiemPicker = screen.getByLabelText(label);
 
-		const meridiemPicker = subject.find(`.${timeCss.meridiemPicker}`).at(0);
+		const expected = 'PM';
 
-		const expected = label;
-		const actual = meridiemPicker.prop('aria-label');
-
-		expect(actual).toBe(expected);
+		expect(meridiemPicker).toHaveTextContent(expected);
 	});
 
-	test('should set "minuteAriaLabel" to minute picker', () => {
+	test('should set `minuteAriaLabel` to minute picker', () => {
 		const label = 'custom minute aria-label';
-		const subject = mount(
-			<DateTimePicker minuteAriaLabel={label} value={new Date(2000, 0, 1, 12, 30)} />
+		render(
+			<DateTimePicker
+				locale="en-US"
+				minuteAriaLabel={label}
+				value={new Date(2000, 0, 1, 12, 30)}
+			/>
 		);
+		const minutePicker = screen.getByLabelText(label);
 
-		const minutePicker = subject.find(`.${timeCss.minutePicker}`).at(0);
+		const expected = '30';
 
-		const expected = label;
-		const actual = minutePicker.prop('aria-label');
-
-		expect(actual).toBe(expected);
+		expect(minutePicker).toHaveTextContent(expected);
 	});
 });

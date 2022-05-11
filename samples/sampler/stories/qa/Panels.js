@@ -1,4 +1,7 @@
-/* eslint-disable react/jsx-no-bind */
+import Header from '@enact/agate/Header';
+import Icon from '@enact/agate/Icon';
+import Item from '@enact/agate/Item';
+import {BreadcrumbPanels, Panel, Panels} from '@enact/agate/Panels';
 import {handle, forward} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import {clamp} from '@enact/core/util';
@@ -7,19 +10,15 @@ import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select} from '@enact/storybook-utils/addons/controls';
 import Routable, {Route, Linkable} from '@enact/ui/Routable';
 import PropTypes from 'prop-types';
-import {Component, useState} from 'react';
-import Header from '@enact/agate/Header';
-import Icon from '@enact/agate/Icon';
-import Item from '@enact/agate/Item';
-import {Panels, Panel, BreadcrumbPanels} from '@enact/agate/Panels';
+import {useCallback, useState} from 'react';
 
 Panels.displayName = 'Panels';
 const Config = mergeComponentMetadata('Panels', Panels);
 
 const BasicPanels = (props) => {
 	const [index, setIndex] = useState(0);
-	const goNext = () => setIndex(clamp(0, 2, index + 1));
-	const goPrevious = () => setIndex(clamp(0, 2, index - 1));
+	const goNext = useCallback(() => setIndex(clamp(0, 2, index + 1)), [index]);
+	const goPrevious = useCallback(() => setIndex(clamp(0, 2, index - 1)), [index]);
 
 	return (
 		<Panels
@@ -121,35 +120,30 @@ const BreadcrumbPanelsBase  = kind({
 
 const RoutablePanels = Routable({navigate: 'onNavigate'}, BreadcrumbPanelsBase);
 
-const RoutablePanelsApp = class extends Component {
-	static displayName = 'RoutablePanelsApp';
+const RoutablePanelsApp = (props) => {
+	const [appPath, setAppPath] = useState('/settings');
 
-	constructor (props) {
-		super(props);
-		this.state = {appPath: '/settings'};
-	}
+	const onNavigate = useCallback(({path}) => {
+		setAppPath(path);
+	}, []);
 
-	onNavigate = ({path}) => {
-		this.setState({appPath: path});
-	};
-
-	render () {
-		return (
-			<div {...this.props}>
-				<RoutablePanels path={this.state.appPath} onNavigate={this.onNavigate} cover="partial">
-					<Route path="settings" component={MainPanel}>
-						<Route path="page1" component={Page1}>
-							<Route path="endPage" component={EndPage} />
-						</Route>
-						<Route path="page2" component={Page2}>
-							<Route path="endPage" component={EndPage} />
-						</Route>
+	return (
+		<div {...props}>
+			<RoutablePanels path={appPath} onNavigate={onNavigate} cover="partial">
+				<Route component={MainPanel} path="settings">
+					<Route component={Page1} path="page1">
+						<Route component={EndPage} path="endPage" />
 					</Route>
-				</RoutablePanels>
-			</div>
-		);
-	}
+					<Route component={Page2} path="page2">
+						<Route component={EndPage} path="endPage" />
+					</Route>
+				</Route>
+			</RoutablePanels>
+		</div>
+	);
 };
+
+RoutablePanelsApp.displayName = 'RoutablePanelsApp';
 
 export default {
 	title: 'Agate/Panels',

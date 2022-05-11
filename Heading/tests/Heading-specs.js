@@ -1,51 +1,68 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
+
 import Heading from '../Heading';
 
-import css from '../Heading.module.less';
-
 describe('Heading Specs', () => {
+	const content = 'Hello Heading!';
 
 	test('should render a Heading with content', () => {
-		const content = 'Hello Heading!';
+		render(<Heading>{content}</Heading>);
+		const heading = screen.getByText(content);
 
-		const heading = mount(
-			<Heading>{content}</Heading>
-		);
-
-		const expected = content;
-		const actual = heading.text();
-
-		expect(actual).toBe(expected);
+		expect(heading).toBeInTheDocument();
 	});
 
 	test('should add the showLine class', () => {
-		const content = 'Hello Heading!';
+		render(<Heading showLine>{content}</Heading>);
+		const heading = screen.getByText(content).parentElement.parentElement;
 
-		const heading = mount(
-			<Heading showLine>
-				{content}
-			</Heading>
-		);
+		const expected = 'showLine';
 
-		const expected = true;
-		const actual = heading.find(`.${css.heading}`).at(0).hasClass(css.showLine);
+		expect(heading).toHaveClass(expected);
+	});
 
-		expect(actual).toBe(expected);
+	test('should render a Heading with spacing large', () => {
+		render(<Heading spacing="large">{content}</Heading>);
+		const heading = screen.getByText(content).parentElement.parentElement;
+
+		const expected = 'largeSpacing';
+
+		expect(heading).toHaveClass(expected);
+	});
+
+	test('should render a Heading with spacing medium', () => {
+		render(<Heading>{content}</Heading>);
+		const heading = screen.getByText(content).parentElement.parentElement;
+
+		const expected = 'mediumSpacing';
+
+		expect(heading).toHaveClass(expected);
+	});
+
+	test('should render a Heading with spacing small', () => {
+		render(<Heading spacing="small">{content}</Heading>);
+		const heading = screen.getByText(content).parentElement.parentElement;
+
+		const expected = 'smallSpacing';
+
+		expect(heading).toHaveClass(expected);
+	});
+
+	test('should render a Heading with spacing none', () => {
+		render(<Heading spacing="none">{content}</Heading>);
+		const heading = screen.getByText(content).parentElement.parentElement;
+
+		const expected = 'noneSpacing';
+
+		expect(heading).toHaveClass(expected);
 	});
 
 	test('should show back button', () => {
-		const content = 'Hello Heading!';
+		render(<Heading showBackButton>{content}</Heading>);
 
-		const heading = mount(
-			<Heading showBackButton>
-				{content}
-			</Heading>
-		);
+		const actual = screen.getByRole('button');
 
-		const backButton = heading.find('Button');
-		const expected = 1;
-		const actual = backButton.length;
-
-		expect(actual).toBe(expected);
+		expect(actual).toBeInTheDocument();
 	});
 });
