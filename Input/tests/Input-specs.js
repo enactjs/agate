@@ -1,6 +1,6 @@
 import Spotlight from '@enact/spotlight';
 import '@testing-library/jest-dom';
-import {act, fireEvent, render, screen, waitFor} from '@testing-library/react';
+import {fireEvent, render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Input from '../Input';
@@ -127,9 +127,7 @@ describe('Input Specs', () => {
 		);
 		const inputText = screen.getByLabelText('Input field').children[0];
 
-		act(() => {
-			userEvent.type(inputText, value);
-		});
+		userEvent.type(inputText, value);
 
 		expect(handleChange).not.toHaveBeenCalled();
 	});
@@ -162,6 +160,7 @@ describe('Input Specs', () => {
 		render(<Input onBlur={handleChange} dismissOnEnter />);
 		const inputText = screen.getByLabelText('Input field').children[0];
 
+		// Fix act(... error here
 		fireEvent.mouseDown(inputText);
 		fireEvent.keyUp(inputText, {which: 13, keyCode: 13, code: 13});
 

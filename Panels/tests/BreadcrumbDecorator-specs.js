@@ -119,7 +119,7 @@ describe('BreadcrumbDecorator', () => {
 			max: 1
 		}, Panels);
 
-		const {container} = render(
+		render(
 			<ThreeBreadcrumbPanels id="test" index={3} noCloseButton>
 				<Panel />
 				<Panel />
@@ -130,9 +130,9 @@ describe('BreadcrumbDecorator', () => {
 
 		// tests for truncated {config.max} aria-owns entries in the format ${id}_bc_{$index}
 		const expected = 'test_bc_2';
-		const actual = container.children.item(0).children.item(0).children.item(0);
+		const newActual = screen.getByLabelText('GO TO PREVIOUS');
 
 		// aria-owns is not visible in the DOM, so the id is used instead
-		expect(actual).toHaveAttribute('id', expected);
+		expect(newActual).toHaveAttribute('id', expected);
 	});
 });
