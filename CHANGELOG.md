@@ -4,10 +4,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
-### Added
-
-- `agate/Arc` prop `onPointerDown` to handle tap event on touch devices
-
 ### Fixed
 
 - `agate/ContextualPopupDecorator` layout for Carbon, Cobalt, Copper, Electro, Titanium skins
