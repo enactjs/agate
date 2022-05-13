@@ -155,8 +155,7 @@ describe('Input Specs', () => {
 		expect(handleChange).not.toHaveBeenCalled();
 	});
 
-	// Fix act(...) error here
-	test.skip('should blur input on enter if dismissOnEnter', () => {
+	test('should blur input on enter if dismissOnEnter', () => {
 		const handleChange = jest.fn();
 		render(<Input onBlur={handleChange} dismissOnEnter />);
 		const inputText = screen.getByLabelText('Input field').children[0];
