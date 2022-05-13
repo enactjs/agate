@@ -224,6 +224,7 @@ const ArcSliderBase = kind({
 		const valueAngle = valueToAngle(clamp(min, max, value), min, Math.max(min, max), startAngle, endAngle);
 		const knobPosition = angleToPosition(valueAngle, radius - (strokeWidth / 2), size);
 
+		delete rest.isFocused;
 		delete rest.skinVariants;
 		delete rest.step;
 
