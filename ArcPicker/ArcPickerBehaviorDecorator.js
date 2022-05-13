@@ -104,22 +104,8 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			ev.stopPropagation();
 		};
 
-		handlePointerDown = (value) => (ev) => {
-			if (platform.touchscreen) {
-				this.setState({isFocused: true});
-				forward('onChange', {value}, this.props);
-				ev.stopPropagation();
-			}
-		};
-
 		handleBlur = () => {
 			this.setState({isFocused: false});
-		};
-
-		handlePointerUp = () => {
-			if (platform.touchscreen) {
-				this.setState({isFocused: false});
-			}
 		};
 
 		handleFocus = () => {
@@ -164,8 +150,6 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 					onClick={this.handleClick}
 					onFocus={this.handleFocus}
 					onKeyDown={this.handleKeyDown}
-					onPointerDown={this.handlePointerDown}
-					onPointerUp={this.handlePointerUp}
 					value={value}
 				>
 					{children}

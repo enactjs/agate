@@ -105,15 +105,6 @@ const ArcPickerBase = kind({
 		onClick: PropTypes.func,
 
 		/**
-		 * Called when the path area is tapped.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onPointerDown: PropTypes.func,
-
-		/**
 		 * The radius of the arc circle.
 		 *
 		 * @type {Number}
@@ -194,7 +185,7 @@ const ArcPickerBase = kind({
 	computed: {
 		arcSegments: (props, context) => {
 			const {accent: accentColor} = context || {};
-			const {children, endAngle, isFocused, onClick, onPointerDown, radius, selectionType, skinVariants, startAngle, strokeWidth, value} = props;
+			const {children, endAngle, isFocused, onClick, radius, selectionType, skinVariants, startAngle, strokeWidth, value} = props;
 			const backgroundColor = props.backgroundColor || (skinVariants && skinVariants.night ? '#444444' : '#888888');
 			const foregroundColor = props.foregroundColor || (skinVariants && skinVariants.night ? '#ffffff' : '#000000');
 
@@ -215,7 +206,6 @@ const ArcPickerBase = kind({
 							endAngle={arcEndAngle}
 							key={index}
 							onClick={onClick(option)}
-							onPointerDown={onPointerDown(option)}
 							radius={radius}
 							startAngle={arcStartAngle}
 							strokeWidth={strokeWidth}
