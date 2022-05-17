@@ -130,9 +130,9 @@ describe('BreadcrumbDecorator', () => {
 
 		// tests for truncated {config.max} aria-owns entries in the format ${id}_bc_{$index}
 		const expected = 'test_bc_2';
-		const newActual = screen.getByLabelText('GO TO PREVIOUS');
+		const actual = screen.getByLabelText('GO TO PREVIOUS');
 
 		// aria-owns is not visible in the DOM, so the id is used instead
-		expect(newActual).toHaveAttribute('id', expected);
+		expect(actual).toHaveAttribute('id', expected);
 	});
 });
