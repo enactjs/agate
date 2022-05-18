@@ -46,6 +46,7 @@
     "deep-freeze": "0.0.1",
     "eases": "^1.0.8",
     "immer": "^9.0.12",
+    "invariant": "^2.2.4",
     "prop-types": "^15.8.1",
     "ramda": "^0.28.0",
     "react": "^18.0.0",
