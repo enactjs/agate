@@ -6,7 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Deprecated
 
-- `agate/GridListImageItem` to be removed in 2.0.0, use `agate/ImageItem` instead
+- `agate/GridListImageItem`, to be removed in 2.0.0. Use `agate/ImageItem` instead.
 
 ### Fixed
 
