@@ -1,71 +1,52 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import RadioItem from '../RadioItem';
 
-import css from '../RadioItem.module.less';
-
 describe('RadioItem', () => {
 	test('should support adding text as children', () => {
-		const radioItem = mount(
-			<RadioItem>
-				Hello RadioItem
-			</RadioItem>
-		);
+		render(<RadioItem>Hello RadioItem</RadioItem>);
+		const textField = screen.getByRole('checkbox').lastElementChild;
 
 		const expected = 'Hello RadioItem';
-		const actual = radioItem.find('ItemContent').text();
 
-		expect(actual).toBe(expected);
+		expect(textField).toHaveTextContent(expected);
 	});
 
 	test('should render correct icon when not selected', () => {
-		const radioItem = mount(
-			<RadioItem>
-				Hello RadioItem
-			</RadioItem>
-		);
+		render(<RadioItem>Hello RadioItem</RadioItem>);
 
-		const expected = 0;
-		const actual = radioItem.find(`.${css.selected}`).length;
+		const expected = 983071; // decimal converted charCode of Unicode 'circle' character used by agate
+		const actual = screen.getByRole('checkbox').firstElementChild.textContent.codePointAt();
 
 		expect(actual).toBe(expected);
 	});
 
 	test('should render correct icon when selected', () => {
-		const radioItem = mount(
-			<RadioItem selected>
-				Hello RadioItem
-			</RadioItem>
-		);
+		render(<RadioItem selected>Hello RadioItem</RadioItem>);
 
-		const expected = 1;
-		const actual = radioItem.find(`.${css.selected}`).first().length;
+		const expected = 983071; // decimal converted charCode of Unicode 'circle' character used by agate
+		const actual = screen.getByRole('checkbox').firstElementChild.textContent.codePointAt();
 
 		expect(actual).toBe(expected);
 	});
 
 	test('should support custom icon', () => {
-		const radioItem = mount(
-			<RadioItem icon="check">
-				Hello RadioItem
-			</RadioItem>
-		);
+		render(<RadioItem icon="check">Hello RadioItem</RadioItem>);
+		const checkbox = screen.getByRole('checkbox').firstElementChild;
 
-		const expected = 'check';
-		const actual = radioItem.find('Icon').prop('children');
+		const expected = '✓';
 
-		expect(actual).toBe(expected);
+		expect(checkbox).toHaveTextContent(expected);
 	});
 
 	test('should toggle selected prop when clicked', () => {
 		const handleToggle = jest.fn();
-		const radioItem = mount(
-			<RadioItem onToggle={handleToggle}>
-				Hello RadioItem
-			</RadioItem>
-		);
+		render(<RadioItem onToggle={handleToggle}>Hello RadioItem</RadioItem>);
+		const checkbox = screen.getByRole('checkbox').firstElementChild;
 
-		radioItem.find('RadioItemBase').simulate('click');
+		userEvent.click(checkbox);
 
 		const expected = true;
 		const actual = handleToggle.mock.calls[0][0].selected;
@@ -75,16 +56,10 @@ describe('RadioItem', () => {
 
 	test('should toggle selected prop to false when initiated as selected', () => {
 		const handleToggle = jest.fn();
-		const radioItem = mount(
-			<RadioItem
-				onToggle={handleToggle}
-				selected
-			>
-				Hello RadioItem
-			</RadioItem>
-		);
+		render(<RadioItem onToggle={handleToggle} selected>Hello RadioItem</RadioItem>);
+		const checkbox = screen.getByRole('checkbox').firstElementChild;
 
-		radioItem.find('RadioItemBase').simulate('click');
+		userEvent.click(checkbox);
 
 		const expected = false;
 		const actual = handleToggle.mock.calls[0][0].selected;
@@ -94,20 +69,11 @@ describe('RadioItem', () => {
 
 	test('should not toggle selected prop when initiated as disabled', () => {
 		const handleToggle = jest.fn();
-		const radioItem = mount(
-			<RadioItem
-				disabled
-				onToggle={handleToggle}
-			>
-				Hello RadioItem
-			</RadioItem>
-		);
+		render(<RadioItem disabled onToggle={handleToggle}>Hello RadioItem</RadioItem>);
+		const checkbox = screen.getByRole('checkbox').firstElementChild;
 
-		radioItem.find('RadioItemBase').simulate('click');
+		userEvent.click(checkbox);
 
-		const expected = 0;
-		const actual = handleToggle.mock.calls.length;
-
-		expect(actual).toBe(expected);
+		expect(handleToggle).not.toHaveBeenCalled();
 	});
 });

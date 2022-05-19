@@ -1,11 +1,12 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
 
 import Button from '../../Button';
 import TabGroup from '../TabGroup';
 
 describe('TabGroup Specs', () => {
 	test('should render three tabs when given three objects in `tabs` prop', () => {
-		const subject = mount(
+		render(
 			<TabGroup
 				tabPosition="before"
 				tabs={[
@@ -16,14 +17,17 @@ describe('TabGroup Specs', () => {
 			/>
 		);
 
-		const expected = 3;
-		const actual = subject.find('Tab').length;
+		const expectedClass = 'tabGroup';
 
-		expect(actual).toBe(expected);
+		const expectedTabNumber = 3;
+		const tabGroup = screen.getByRole('group');
+
+		expect(tabGroup).toHaveClass(expectedClass);
+		expect(tabGroup.children).toHaveLength(expectedTabNumber);
 	});
 
 	test('should have positionAfter when given `tabPosition=after`', () => {
-		const subject = mount(
+		render(
 			<TabGroup
 				tabPosition="after"
 				tabs={[
@@ -34,14 +38,14 @@ describe('TabGroup Specs', () => {
 			/>
 		);
 
-		const expected = 'after';
-		const actual = subject.find('TabGroup').prop('tabPosition');
+		const expected = 'positionAfter';
+		const actual = screen.getByRole('group').parentElement.parentElement;
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should render two buttons when given children', () => {
-		const subject = mount(
+		render(
 			<TabGroup
 				tabPosition="before"
 				tabs={[
@@ -67,19 +71,14 @@ describe('TabGroup Specs', () => {
 			</TabGroup>
 		);
 
-		const expected = 'arrowlargeleft';
-		const actual = subject.find('Button').at(0).prop('icon');
+		const expected = 2;
+		const actual = screen.getAllByRole('button');
 
-		expect(actual).toBe(expected);
-
-		const secondExpected = 'arrowlargeright';
-		const secondActual = subject.find('Button').at(1).prop('icon');
-
-		expect(secondActual).toBe(secondExpected);
+		expect(actual).toHaveLength(expected);
 	});
 
 	test('should apply `vertical` when `orientation=vertical`', () => {
-		const subject = mount(
+		render(
 			<TabGroup
 				orientation="vertical"
 				tabPosition="before"
@@ -92,8 +91,8 @@ describe('TabGroup Specs', () => {
 		);
 
 		const expected = 'vertical';
-		const actual = subject.find('TabGroup').prop('orientation');
+		const actual = screen.getByRole('group').parentElement.parentElement;
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveClass(expected);
 	});
 });

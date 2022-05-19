@@ -1,180 +1,206 @@
-import {mount, shallow} from 'enzyme';
+import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
 
-import {Popup, PopupBase} from '../Popup';
-import css from '../Popup.module.less';
+import {Popup} from '../Popup';
+
+const FloatingLayerController = FloatingLayerDecorator('div');
 
 describe('Popup specs', () => {
 	test('should set role to alert by default', () => {
-		const popup = shallow(
-			<PopupBase>
-				<div>popup</div>
-			</PopupBase>
+		render(
+			<FloatingLayerController>
+				<Popup open><div>popup</div></Popup>
+			</FloatingLayerController>
 		);
 
-		const expected = 'alert';
-		const actual = popup.find(`.${css.popup}`).prop('role');
+		const popup = screen.getByRole('alert');
 
-		expect(actual).toBe(expected);
+		expect(popup).toBeInTheDocument();
 	});
 
 	test('should be rendered opened if open is set to true', () => {
-		const popup = mount(
-			<Popup open>
-				<div>popup</div>
-			</Popup>
+		render(
+			<FloatingLayerController>
+				<Popup open><div>popup</div></Popup>
+			</FloatingLayerController>
 		);
 
-		const expected = true;
-		const actual = popup.prop('open');
+		const popup = screen.getByText('popup');
 
-		expect(actual).toBe(expected);
+		expect(popup).toBeInTheDocument();
 	});
 
 	test('should not be rendered if open is set to false', () => {
-		const popup = mount(
-			<Popup open={false}>
-				<div>popup</div>
-			</Popup>
+		render(
+			<FloatingLayerController>
+				<Popup><div>popup</div></Popup>
+			</FloatingLayerController>
 		);
 
-		const expected = false;
-		const actual = popup.prop('open');
+		const popup = screen.queryByText('popup');
 
-		expect(actual).toBe(expected);
+		expect(popup).toBeNull();
 	});
 
 	describe('with centered content', function () {
 		test('should be rendered with centered content if centered is set to true', () => {
-			const popup = mount(
-				<Popup centered />
+			render(
+				<FloatingLayerController>
+					<Popup centered open />
+				</FloatingLayerController>
 			);
 
-			const expected = true;
-			const actual = popup.prop('centered');
+			const expected = 'centered';
+			const popup = screen.getByRole('alert');
 
-			expect(actual).toBe(expected);
+			expect(popup).toHaveClass(expected);
 		});
 
 		test('should not be rendered with centered content if centered is set to false', () => {
-			const popup = mount(
-				<Popup centered={false} />
+			render(
+				<FloatingLayerController>
+					<Popup open />
+				</FloatingLayerController>
 			);
 
-			const expected = false;
-			const actual = popup.prop('centered');
+			const expected = 'centered';
+			const popup = screen.getByRole('alert');
 
-			expect(actual).toBe(expected);
+			expect(popup).not.toHaveClass(expected);
 		});
 	});
 
 	describe('with position center', function () {
 		test('should have position=center when no position is specified', () => {
-			const popup = mount(
-				<PopupBase />
+			render(
+				<FloatingLayerController>
+					<Popup open />
+				</FloatingLayerController>
 			);
 
 			const expected = 'center';
-			const actual = popup.prop('position');
+			const popup = screen.getByRole('alert');
 
-			expect(actual).toBe(expected);
+			expect(popup).toHaveClass(expected);
 		});
 	});
 
 	describe('with position top', function () {
 		test('should have top class', () => {
-			const popup = shallow(
-				<PopupBase open position="top">
-					<div>popup</div>
-				</PopupBase>
+			render(
+				<FloatingLayerController>
+					<Popup open position="top"><div>popup</div></Popup>
+				</FloatingLayerController>
 			);
 
-			expect(popup.find(`.${css.popup}`).prop('className').split(' ')).toContain('top');
+			const expected = 'top';
+			const popup = screen.getByRole('alert');
+
+			expect(popup).toHaveClass(expected);
 		});
 	});
 
 	describe('with position changes dynamically', function () {
 		test('should not have top class when position change from top to any other position', () => {
-			const firstPosition = 'top';
-			const popup = shallow(
-				<PopupBase open position={firstPosition}>
-					<div>popup</div>
-				</PopupBase>
+			const {rerender} = render(
+				<FloatingLayerController>
+					<Popup open position="top"><div>popup</div></Popup>
+				</FloatingLayerController>
 			);
 
-			expect(popup.find(`.${css.popup}`).prop('className').split(' ')).toContain(firstPosition);
-			expect(popup.find(`.${css.popup}`).prop('className').split(' ')).not.toContain('center');
-			expect(popup.prop('className').split(' ')).not.toContain('center');
+			const expected = 'top';
+			const initialPopup = screen.getByRole('alert');
 
-			popup.setProps({position: 'center'});
+			expect(initialPopup).toHaveClass(expected);
 
-			expect(popup.find(`.${css.popup}`).prop('className').split(' ')).not.toContain(firstPosition);
-			expect(popup.prop('className').split(' ')).not.toContain(firstPosition);
+			rerender(
+				<FloatingLayerController>
+					<Popup open position="center"><div>popup</div></Popup>
+				</FloatingLayerController>
+			);
+
+			const popup = screen.getByRole('alert');
+
+			expect(popup).not.toHaveClass(expected);
 		});
 	});
 
 	test('should have `center` class when position prop is set to `center` (default)', () => {
-		const popup = shallow(
-			<PopupBase position="center" />
+		render(
+			<FloatingLayerController>
+				<Popup open position="center" />
+			</FloatingLayerController>
 		);
 
 		const expected = 'center';
-		const actual = popup.find(`.${css.popup}`).prop('className');
+		const popup = screen.getByRole('alert');
 
-		expect(actual).toContain(expected);
+		expect(popup).toHaveClass(expected);
 	});
 
 	test('should have `top` class when position prop is set to `top`', () => {
-		const popup = shallow(
-			<PopupBase position="top" />
+		render(
+			<FloatingLayerController>
+				<Popup open position="top" />
+			</FloatingLayerController>
 		);
 
 		const expected = 'top';
-		const actual = popup.find(`.${css.popup}`).prop('className');
+		const popup = screen.getByRole('alert');
 
-		expect(actual).toContain(expected);
+		expect(popup).toHaveClass(expected);
 	});
 
 	test('should have `bottom` class when position prop is set to `bottom`', () => {
-		const popup = shallow(
-			<PopupBase position="bottom" />
+		render(
+			<FloatingLayerController>
+				<Popup open position="bottom" />
+			</FloatingLayerController>
 		);
 
 		const expected = 'bottom';
-		const actual = popup.find(`.${css.popup}`).prop('className');
+		const popup = screen.getByRole('alert');
 
-		expect(actual).toContain(expected);
+		expect(popup).toHaveClass(expected);
 	});
 
 	test('should have `left` class when position prop is set to `left`', () => {
-		const popup = shallow(
-			<PopupBase position="left" />
+		render(
+			<FloatingLayerController>
+				<Popup open position="left" />
+			</FloatingLayerController>
 		);
 
 		const expected = 'left';
-		const actual = popup.find(`.${css.popup}`).prop('className');
+		const popup = screen.getByRole('alert');
 
-		expect(actual).toContain(expected);
+		expect(popup).toHaveClass(expected);
 	});
 
 	test('should have `right` class when position prop is set to `right`', () => {
-		const popup = shallow(
-			<PopupBase position="right" />
+		render(
+			<FloatingLayerController>
+				<Popup open position="right" />
+			</FloatingLayerController>
 		);
 
 		const expected = 'right';
-		const actual = popup.find(`.${css.popup}`).prop('className');
+		const popup = screen.getByRole('alert');
 
-		expect(actual).toContain(expected);
+		expect(popup).toHaveClass(expected);
 	});
 
 	test('should have `fullscreen` class when position prop is set to `fullscreen`', () => {
-		const popup = shallow(
-			<PopupBase position="fullscreen" />
+		render(
+			<FloatingLayerController>
+				<Popup open position="fullscreen" />
+			</FloatingLayerController>
 		);
 
 		const expected = 'fullscreen';
-		const actual = popup.find(`.${css.popup}`).prop('className');
+		const popup = screen.getByRole('alert');
 
-		expect(actual).toContain(expected);
+		expect(popup).toHaveClass(expected);
 	});
 });

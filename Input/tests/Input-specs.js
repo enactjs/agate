@@ -1,332 +1,276 @@
-import {mount} from 'enzyme';
+import Spotlight from '@enact/spotlight';
+import '@testing-library/jest-dom';
+import {fireEvent, render, screen, waitFor} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import Input from '../Input';
-import {Spotlight} from '@enact/spotlight';
 
 const isPaused = () => Spotlight.isPaused() ? 'paused' : 'not paused';
 
 describe('Input Specs', () => {
 	test('should have an input element', () => {
-		const subject = mount(
-			<Input />
-		);
-		expect(subject.find('input')).toHaveLength(1);
+		render(<Input />);
+
+		const expected = 'INPUT';
+		const actual = screen.getByLabelText('Input field').lastElementChild.tagName;
+
+		expect(actual).toBe(expected);
 	});
 
 	test('should include a placeholder if specified', () => {
-		const subject = mount(
-			<Input placeholder="hello" />
-		);
+		const placeholder = 'hello';
+		render(<Input placeholder={placeholder} />);
 
-		expect(subject.find('input').prop('placeholder')).toBe('hello');
+		const expected = 'placeholder';
+		const actual = screen.getByLabelText('hello Input field').children[0];
+
+		expect(actual).toHaveAttribute(expected, placeholder);
 	});
 
 	test('should have size large by default', () => {
-		const subject = mount(
-			<Input />
-		);
+		render(<Input />);
 
 		const expected = 'large';
-		const actual = subject.find('input').prop('size');
+		const actual = screen.getByLabelText('Input field');
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should have size small when size prop equals "small"', () => {
-		const subject = mount(
-			<Input size="small" />
-		);
+		render(<Input size="small" />);
 
 		const expected = 'small';
-		const actual = subject.find('input').prop('size');
+		const actual = screen.getByLabelText('Input field');
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should support iconAfter', () => {
-		const expected = 'happyface';
-		const subject = mount(
-			<Input iconAfter={expected} />
-		);
+		render(<Input iconAfter="0x0F0014" />);
 
-		const actual = subject.find('Icon').prop('children');
+		const expected = 983060; // decimal converted charCode of `happyface` character
+		const actual = screen.getByLabelText('Input field').children[1].textContent.codePointAt();
 
 		expect(actual).toBe(expected);
 	});
 
 	test('should support iconBefore', () => {
-		const expected = 'happyface';
-		const subject = mount(
-			<Input iconBefore={expected} />
-		);
+		render(<Input iconBefore="0x0F0014" />);
 
-		const actual = subject.find('Icon').prop('children');
+		const expected = 983060; // decimal converted charCode of `happyface` character
+		const actual = screen.getByLabelText('Input field').children[0].textContent.codePointAt();
 
 		expect(actual).toBe(expected);
 	});
 
 	test('should have icon size large by default', () => {
-		const subject = mount(
-			<Input iconAfter="happyface" />
-		);
+		render(<Input iconAfter="happyface" />);
 
 		const expected = 'large';
-		const actual = subject.find('Icon').prop('size');
+		const actual = screen.getByLabelText('Input field').children[1];
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should set icon size to small when size equals small', () => {
-		const subject = mount(
-			<Input iconAfter="happyface" size="small" />
-		);
+		render(<Input iconAfter="happyface" size="small" />);
 
 		const expected = 'small';
-		const actual = subject.find('Icon').prop('size');
+		const actual = screen.getByLabelText('Input field').children[1];
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should callback onChange when the text changes', () => {
 		const handleChange = jest.fn();
 		const value = 'blah';
 		const evt = {target: {value: value}};
-		const subject = mount(
-			<Input onChange={handleChange} />
-		);
+		render(<Input onChange={handleChange} />);
+		const input = screen.getByLabelText('Input field').lastElementChild;
 
-		subject.find('input').simulate('change', evt);
+		fireEvent.change(input, evt);
 
-		const expected = value;
 		const actual = handleChange.mock.calls[0][0].value;
 
-		expect(actual).toBe(expected);
+		expect(actual).toBe(value);
 	});
 
 	test('should forward an event with a stopPropagation method from onChange handler', () => {
 		const handleChange = jest.fn();
+		const value = 'blah';
 		const evt = {
+			target: {value},
 			stopPropagation: jest.fn()
 		};
 
-		const subject = mount(
-			<Input onChange={handleChange} />
-		);
+		render(<Input onChange={handleChange} />);
+		const inputField = screen.getByLabelText('Input field').children[0];
 
-		subject.find('input').simulate('change', evt);
+		fireEvent.change(inputField, evt);
 
-		const expected = true;
 		const actual = typeof handleChange.mock.calls[0][0].stopPropagation === 'function';
 
-		expect(actual).toBe(expected);
+		expect(actual).toBeTruthy();
 	});
 
 	test('should not bubble the native event when stopPropagation from onChange is called', () => {
 		const handleChange = jest.fn();
+		const value = 'smt';
 		function stop (ev) {
 			ev.stopPropagation();
 		}
 
-		const subject = mount(
+		render(
 			<div onChange={handleChange}>
 				<Input onChange={stop} />
 			</div>
 		);
+		const inputText = screen.getByLabelText('Input field').children[0];
 
-		subject.find('input').simulate('change', {});
+		userEvent.type(inputText, value);
 
-		const expected = 0;
-		const actual = handleChange;
-
-		expect(actual).toHaveBeenCalledTimes(expected);
+		expect(handleChange).not.toHaveBeenCalled();
 	});
 
 	test('should callback onBeforeChange before the text changes', () => {
 		const handleBeforeChange = jest.fn();
 		const value = 'blah';
-		const evt = {target: {value: value}};
-		const subject = mount(
-			<Input onBeforeChange={handleBeforeChange} />
-		);
+		render(<Input onBeforeChange={handleBeforeChange} />);
+		const inputText = screen.getByLabelText('Input field').children[0];
 
-		subject.find('input').simulate('change', evt);
+		userEvent.type(inputText, value);
 
-		const expected = value;
-		const actual = handleBeforeChange.mock.calls[0][0].value;
-
-		expect(actual).toBe(expected);
+		expect(handleBeforeChange).toHaveBeenCalled();
 	});
 
 	test('should prevent onChange if onBeforeChange prevents', () => {
 		const handleBeforeChange = jest.fn(ev => ev.preventDefault());
 		const handleChange = jest.fn();
 		const value = 'blah';
-		const evt = {target: {value: value}};
-		const subject = mount(
-			<Input onBeforeChange={handleBeforeChange} onChange={handleChange} />
-		);
+		render(<Input onBeforeChange={handleBeforeChange} onChange={handleChange} />);
+		const inputText = screen.getByLabelText('Input field').children[0];
 
-		subject.find('input').simulate('change', evt);
+		userEvent.type(inputText, value);
 
-		const expected = 0;
-		const actual = handleChange.mock.calls.length;
-
-		expect(actual).toBe(expected);
+		expect(handleChange).not.toHaveBeenCalled();
 	});
 
 	test('should blur input on enter if dismissOnEnter', () => {
-		const node = document.body.appendChild(document.createElement('div'));
 		const handleChange = jest.fn();
+		render(<Input onBlur={handleChange} dismissOnEnter />);
+		const inputText = screen.getByLabelText('Input field').children[0];
 
-		const subject = mount(
-			<Input onBlur={handleChange} dismissOnEnter />,
-			{attachTo: node}
-		);
-		const input = subject.find('input');
+		fireEvent.mouseDown(inputText);
+		fireEvent.keyUp(inputText, {which: 13, keyCode: 13, code: 13});
 
-		input.simulate('mouseDown');
-		input.simulate('keyUp', {which: 13, keyCode: 13, code: 13});
-		node.remove();
-
-		const expected = 1;
-		const actual = handleChange.mock.calls.length;
-
-		expect(actual).toBe(expected);
+		expect(handleChange).toHaveBeenCalled();
 	});
 
 	test('should activate input on enter', () => {
-		const node = document.body.appendChild(document.createElement('div'));
 		const handleChange = jest.fn();
+		render(<Input onActivate={handleChange} />);
+		const inputText = screen.getByLabelText('Input field').children[0];
 
-		const subject = mount(
-			<Input onActivate={handleChange} />,
-			{attachTo: node}
-		);
-		const input = subject.find('input');
+		fireEvent.keyDown(inputText, {which: 13, keyCode: 13, code: 13});
+		fireEvent.keyUp(inputText, {which: 13, keyCode: 13, code: 13});
 
-		input.simulate('keyDown', {which: 13, keyCode: 13, code: 13});
-		input.simulate('keyUp', {which: 13, keyCode: 13, code: 13});
-		node.remove();
-
-		const expected = 1;
-		const actual = handleChange.mock.calls.length;
-
-		expect(actual).toBe(expected);
+		expect(handleChange).toHaveBeenCalled();
 	});
 
 	test('should not activate input on enter when disabled', () => {
-		const node = document.body.appendChild(document.createElement('div'));
 		const handleChange = jest.fn();
+		render(<Input disabled onActivate={handleChange} />);
+		const inputText = screen.getByLabelText('Input field').children[0];
 
-		const subject = mount(
-			<Input disabled onActivate={handleChange} />,
-			{attachTo: node}
-		);
-		const input = subject.find('input');
+		fireEvent.keyDown(inputText, {which: 13, keyCode: 13, code: 13});
+		fireEvent.keyUp(inputText, {which: 13, keyCode: 13, code: 13});
 
-		input.simulate('keyDown', {which: 13, keyCode: 13, code: 13});
-		input.simulate('keyUp', {which: 13, keyCode: 13, code: 13});
-		node.remove();
-
-		const expected = 0;
-		const actual = handleChange.mock.calls.length;
-
-		expect(actual).toBe(expected);
+		expect(handleChange).not.toHaveBeenCalled();
 	});
 
 	test('should be able to be disabled', () => {
-		const subject = mount(
-			<Input disabled />
-		);
+		render(<Input disabled />);
 
-		expect(subject.find('input').prop('disabled')).toBe(true);
+		const actual = screen.getByLabelText('Input field');
+		const expected = 'disabled';
+
+		expect(actual).toHaveAttribute(expected);
 	});
 
 	test('should reflect the value if specified', () => {
-		const subject = mount(
-			<Input value="hello" />
-		);
+		render(<Input value="hello" />);
 
-		expect(subject.find('input').prop('value')).toBe('hello');
+		const actual = screen.getByLabelText('hello Input field').children[0];
+		const expected = 'hello';
+
+		expect(actual).toHaveAttribute('value', expected);
 	});
 
 	test('should have dir equal to rtl when there is rtl text', () => {
-		const subject = mount(
-			<Input value="שועל החום הזריז קפץ מעל הכלב העצלן.ציפור עפה השעועית עם שקי" />
-		);
+		render(<Input value="שועל החום הזריז קפץ מעל הכלב העצלן.ציפור עפה השעועית עם שקי" />);
+		const inputField = screen.getByLabelText( 'שועל החום הזריז קפץ מעל הכלב העצלן.ציפור עפה השעועית עם שקי' + ' Input field').children[0];
 
-		const expected = 'rtl';
-		const actual = subject.find('input').prop('dir');
+		const expectedAttribute = 'dir';
+		const expectedValue = 'rtl';
 
-		expect(actual).toBe(expected);
+		expect(inputField).toHaveAttribute(expectedAttribute, expectedValue);
 	});
 
 	test('should have dir equal to ltr when there is ltr text', () => {
-		const subject = mount(
-			<Input value="content" />
-		);
+		render(<Input value="content" />);
+		const inputField = screen.getByLabelText('content Input field').children[0];
 
-		const expected = 'ltr';
-		const actual = subject.find('input').prop('dir');
+		const expectedAttribute = 'dir';
+		const expectedValue = 'ltr';
 
-		expect(actual).toBe(expected);
+		expect(inputField).toHaveAttribute(expectedAttribute, expectedValue);
 	});
 
 	test('should have dir equal to rtl when there is rtl text in the placeholder', () => {
-		const subject = mount(
-			<Input placeholder="שועל החום הזריז קפץ מעל הכלב העצלן.ציפור עפה השעועית עם שקי" />
-		);
+		render(<Input placeholder="שועל החום הזריז קפץ מעל הכלב העצלן.ציפור עפה השעועית עם שקי" />);
+		const inputField = screen.getByLabelText('שועל החום הזריז קפץ מעל הכלב העצלן.ציפור עפה השעועית עם שקי' + ' Input field').children[0];
 
-		const expected = 'rtl';
-		const actual = subject.find('input').prop('dir');
+		const expectedAttribute = 'dir';
+		const expectedValue = 'rtl';
 
-		expect(actual).toBe(expected);
+		expect(inputField).toHaveAttribute(expectedAttribute, expectedValue);
 	});
 
 	test('should have dir equal to ltr when there is ltr text in the placeholder', () => {
-		const subject = mount(
-			<Input placeholder="content" />
-		);
+		render(<Input placeholder="content" />);
+		const inputField = screen.getByLabelText('content Input field').children[0];
 
-		const expected = 'ltr';
-		const actual = subject.find('input').prop('dir');
+		const expectedAttribute = 'dir';
+		const expectedValue = 'ltr';
 
-		expect(actual).toBe(expected);
+		expect(inputField).toHaveAttribute(expectedAttribute, expectedValue);
 	});
 
 	test('should have dir equal to rtl when there is ltr text in the placeholder, but rtl text in value', () => {
-		const subject = mount(
-			<Input
-				placeholder="content"
-				value="שועל החום הזריז קפץ מעל הכלב העצלן.ציפור עפה השעועית עם שקי"
-			/>
-		);
+		render(<Input placeholder="content" value="שועל החום הזריז קפץ מעל הכלב העצלן.ציפור עפה השעועית עם שקי" />);
+		const inputField = screen.getByLabelText('שועל החום הזריז קפץ מעל הכלב העצלן.ציפור עפה השעועית עם שקי' + ' Input field').children[0];
 
-		const expected = 'rtl';
-		const actual = subject.find('input').prop('dir');
+		const expectedAttribute = 'dir';
+		const expectedValue = 'rtl';
 
-		expect(actual).toBe(expected);
+		expect(inputField).toHaveAttribute(expectedAttribute, expectedValue);
 	});
 
 	test('should have dir equal to ltr when there is rtl text in the placeholder, but ltr text in value', () => {
-		const subject = mount(
-			<Input
-				placeholder="שועל החום הזריז קפץ מעל הכלב העצלן.ציפור עפה השעועית עם שקי"
-				value="content"
-			/>
-		);
+		render(<Input placeholder="שועל החום הזריז קפץ מעל הכלב העצלן.ציפור עפה השעועית עם שקי" value="content" />);
+		const inputField = screen.getByLabelText('content Input field').children[0];
 
-		const expected = 'ltr';
-		const actual = subject.find('input').prop('dir');
+		const expectedAttribute = 'dir';
+		const expectedValue = 'ltr';
 
-		expect(actual).toBe(expected);
+		expect(inputField).toHaveAttribute(expectedAttribute, expectedValue);
 	});
 
 	test('should pause spotlight when input has focus', () => {
-		const subject = mount(
-			<Input />
-		);
+		render(<Input />);
+		const inputField = screen.getByLabelText('Input field').children[0];
 
-		subject.simulate('mouseDown');
+		fireEvent.mouseDown(inputField);
 
 		const expected = 'paused';
 		const actual = isPaused();
@@ -337,12 +281,12 @@ describe('Input Specs', () => {
 	});
 
 	test('should resume spotlight on unmount', () => {
-		const subject = mount(
-			<Input />
-		);
+		const {unmount} = render(<Input />);
+		const inputField = screen.getByLabelText('Input field').children[0];
 
-		subject.simulate('mouseDown');
-		subject.unmount();
+		fireEvent.mouseDown(inputField);
+
+		unmount();
 
 		const expected = 'not paused';
 		const actual = isPaused();
@@ -353,69 +297,72 @@ describe('Input Specs', () => {
 	});
 
 	test('should display invalid message if it invalid and invalid message exists', () => {
-		const subject = mount(
-			<Input invalid invalidMessage="invalid message" />
-		);
+		render(<Input invalid invalidMessage="invalid message" />);
+		const actual = screen.getByText('invalid message');
 
-		expect(subject.find('Tooltip').prop('children')).toBe('invalid message');
+		const expected = 'tooltipLabel';
+
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should not display invalid message if it is valid', () => {
-		const subject = mount(
-			<Input invalidMessage="invalid message" />
-		);
+		render(<Input invalidMessage="invalid message" />);
 
-		expect(subject.find('Tooltip')).toHaveLength(0);
+		const actual = screen.queryByText('invalid message');
+
+		expect(actual).toBeNull();
 	});
 
 	test('should support clearButton', () => {
-		const subject = mount(
-			<Input clearButton />
-		);
+		render(<Input clearButton />);
 
-		const expected = 'cancel';
-		const actual = subject.find('Icon').prop('children');
+		const expected = 983097; // decimal converted charCode of character
+		const actual = screen.getByLabelText('Input field').children[1].textContent.codePointAt();
 
 		expect(actual).toBe(expected);
 	});
 
 	test('should support custom icon for clearButton', () => {
-		const expected = 'happyface';
-		const subject = mount(
-			<Input clearButton clearIcon={expected} />
-		);
+		render(<Input clearButton clearIcon="0x0F0014" />);
 
-		const actual = subject.find('Icon').prop('children');
+		const expected = 983060; // decimal converted charCode of character
+		const actual = screen.getByLabelText('Input field').children[1].textContent.codePointAt();
 
 		expect(actual).toBe(expected);
 	});
 
-	test('should clear input value when clearButton is clicked', () => {
-		const subject = mount(
-			<Input value="Hello Input" clearButton />
-		);
+	test('should clear input value when clearButton is clicked', async () => {
+		const handleChange = jest.fn();
+		render(<Input clearButton onChange={handleChange} value="Hello Input" />);
+		const clearButton = screen.getByLabelText('Hello Input Input field').children[1];
 
-		const clearButton = subject.find('InputDecoratorIcon').at(1);
-		const actualValue = subject.find('input').prop('value');
+		userEvent.click(clearButton);
 
-		clearButton.simulate('click');
 		const expectedValue = '';
 
-		setTimeout(() => expect(actualValue).toBe(expectedValue), 100); // setTimeout is used here to give input some time to clear its value
+		// waitFor is used here to give input some time to call onChange
+		await waitFor(() => {
+			const actual = handleChange.mock.calls[0][0].value;
+
+			expect(actual).toBe(expectedValue);
+		});
 	});
 
-	test('should not clear input value when disabled', () => {
+	test('should not call onChange when clearButton is disabled', async () => {
+		const handleChange = jest.fn();
 		const value = 'Hello Input';
-		const subject = mount(
-			<Input value={value} clearButton disabled />
-		);
+		render(<Input clearButton disabled onChange={handleChange} value={value} />);
+		const clearButton = screen.getByLabelText('Hello Input Input field').children[1];
 
-		const clearButton = subject.find('InputDecoratorIcon').at(1);
-		const actualValue = subject.find('input').prop('value');
+		userEvent.click(clearButton);
 
-		clearButton.simulate('click');
-		const expectedValue = value;
+		const expectedValue = 0;
 
-		setTimeout(() => expect(actualValue).toBe(expectedValue), 100); // setTimeout is used here to give input some time to clear its value
+		// waitFor is used here to give input some time to call onChange
+		await waitFor(() => {
+			const actual = handleChange.mock.calls.length;
+
+			expect(actual).toBe(expectedValue);
+		});
 	});
 });
