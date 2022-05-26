@@ -87,7 +87,7 @@ const BodyTextBase = kind({
 	},
 
 	defaultProps: {
-		centered: false,
+		centered: 4,
 		noWrap: false,
 		size: 'large'
 	},
