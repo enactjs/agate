@@ -121,6 +121,7 @@ const BodyTextBase = kind({
 				{...rest}
 				centered={centered}
 				css={css}
+				inline={inline}
 			/>
 		);
 	}
