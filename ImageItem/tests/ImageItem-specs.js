@@ -1,41 +1,37 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
 
 import {ImageItem} from '../ImageItem';
 
-import css from '../ImageItem.module.less';
-
 describe('ImageItem', () => {
-	test('should render ImageItem with children', () => {
-		const children = 'caption';
+	const children = 'caption';
 
-		const subject = mount(
-			<ImageItem src="http://placehold.it/300x400/9037ab/ffffff&text=Image0">
+	test('should render ImageItem with children', () => {
+		render(
+			<ImageItem src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0">
 				{children}
 			</ImageItem>
 		);
 
-		const expected = children;
-		const actual = subject.text();
+		const actual = screen.getByText(children);
 
-		expect(actual).toBe(expected);
+		expect(actual).toBeInTheDocument();
 	});
 
 	test('should omit caption node when `children` is unset', () => {
-		const subject = mount(
-			<ImageItem src="http://placehold.it/300x400/9037ab/ffffff&text=Image0" />
+		render(
+			<ImageItem src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0" />
 		);
 
-		const actual = subject.find(`.${css.caption}`);
+		const actual = screen.getAllByRole('img')[0];
 
-		expect(actual).toHaveLength(0);
+		expect(actual.nextElementSibling).toBeNull();
 	});
 
 	test('should apply `captionOverlay` className when given `captionPosition=captionOverlay`', () => {
-		const children = 'caption';
-
-		const subject = mount(
+		render(
 			<ImageItem
-				src="http://placehold.it/300x400/9037ab/ffffff&text=Image0"
+				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
 				captionPosition="overlay"
 			>
 				{children}
@@ -43,17 +39,15 @@ describe('ImageItem', () => {
 		);
 
 		const expected = 'captionOverlay';
-		const actual = subject.find(`.${css.captionOverlay}`).at(1).prop('className');
+		const actual = screen.getByText('caption').parentElement;
 
-		expect(actual).toContain(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should apply horizontal className when given `orientation=horizontal`', () => {
-		const children = 'caption';
-
-		const subject = mount(
+		render(
 			<ImageItem
-				src="http://placehold.it/300x400/9037ab/ffffff&text=Image0"
+				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
 				orientation="horizontal"
 			>
 				{children}
@@ -61,25 +55,23 @@ describe('ImageItem', () => {
 		);
 
 		const expected = 'horizontal';
-		const actual = subject.find(`.${css.horizontal}`).at(1).prop('className');
+		const actual = screen.getAllByRole('img')[0].parentElement;
 
-		expect(actual).toContain(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should display an image when given `src` prop', () => {
-		const children = 'caption';
-
-		const subject = mount(
+		render(
 			<ImageItem
-				src="http://placehold.it/300x400/9037ab/ffffff&text=Image0"
+				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
 			>
 				{children}
 			</ImageItem>
 		);
 
 		const expected = 'image';
-		const actual = subject.find(`.${css.image}`).at(1).prop('className');
+		const actual = screen.getAllByRole('img')[0];
 
-		expect(actual).toContain(expected);
+		expect(actual).toHaveClass(expected);
 	});
 });

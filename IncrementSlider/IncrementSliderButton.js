@@ -1,8 +1,8 @@
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
-import onlyUpdateForKeys from 'recompose/onlyUpdateForKeys';
 
 import Button from '../Button';
+import {onlyUpdateForProps} from '../internal/util';
 
 import componentCss from './IncrementSliderButton.module.less';
 
@@ -99,8 +99,7 @@ const IncrementSliderButtonBase = kind({
 	}
 });
 
-const OnlyUpdate = onlyUpdateForKeys(['aria-label', 'children', 'disabled', 'icon', 'size', 'spotlightDisabled']);
-const IncrementSliderButton = OnlyUpdate(IncrementSliderButtonBase);
+const IncrementSliderButton = onlyUpdateForProps(IncrementSliderButtonBase, ['aria-label', 'children', 'disabled', 'icon', 'size', 'spotlightDisabled']);
 
 export default IncrementSliderButton;
 export {

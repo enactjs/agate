@@ -23,9 +23,9 @@ class TemperatureControlInterface {
 		return $(this.selector + ' .TemperatureControl_TemperatureControl_slider');
 	}
 
-	get knobPosition () {
-		const cx = parseInt(this.circle.getCSSProperty('cx').value);
-		const cy = parseInt(this.circle.getCSSProperty('cy').value);
+	async knobPosition () {
+		const cx = parseInt((await this.circle.getCSSProperty('cx')).value);
+		const cy = parseInt((await this.circle.getCSSProperty('cy')).value);
 
 		return {cx, cy};
 	}
@@ -41,8 +41,8 @@ class TemperatureControlPage extends Page {
 		this.components = {temperatureControlDefault, temperatureControlCustom, temperatureControlDisabled};
 	}
 
-	open (urlExtra) {
-		super.open('TemperatureControl-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('TemperatureControl-View', urlExtra);
 	}
 }
 

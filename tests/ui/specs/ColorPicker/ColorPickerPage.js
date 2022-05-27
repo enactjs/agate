@@ -43,8 +43,8 @@ class ColorPickerPage extends Page {
 		this.components = {colorPickerDefault, colorPickerDisabled, colorPickerDirectionUp, colorPickerOpen};
 	}
 
-	open (urlExtra) {
-		super.open('ColorPicker-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('ColorPicker-View', urlExtra);
 	}
 }
 

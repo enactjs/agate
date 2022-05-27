@@ -7,8 +7,8 @@ class TabGroupInterface {
 		this.selector = `.${this.className}`;
 	}
 
-	focusTab (index) {
-		return browser.execute((el) => el.focus(), this.focusableTabs(index));
+	async focusTab (index) {
+		return browser.execute((el) => el.focus(), await this.focusableTabs(index));
 	}
 
 	get self () {
@@ -17,8 +17,8 @@ class TabGroupInterface {
 	focusableTabs (index) {
 		return $(this.selector + ` .TabGroup_TabGroup_tab:nth-child(${index})`);
 	}
-	iconValue (index) {
-		return getText($(this.selector + ` .TabGroup_TabGroup_tab:nth-child(${index}) .Icon_Icon_icon`)).codePointAt();
+	async iconValue (index) {
+		return (await getText($(this.selector + ` .TabGroup_TabGroup_tab:nth-child(${index}) .Icon_Icon_icon`))).codePointAt();
 	}
 	get previousButton () {
 		return $(this.selector + ' .previousButton').isExisting();
@@ -46,8 +46,8 @@ class TabGroupPage extends Page {
 		this.components = {tabGroupDefault, tabGroupSlotBeforeAfter, tabGroupTabAfter, tabGroupVertical};
 	}
 
-	open (urlExtra) {
-		super.open('TabGroup-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('TabGroup-View', urlExtra);
 	}
 }
 

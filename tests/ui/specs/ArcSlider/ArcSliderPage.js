@@ -19,9 +19,9 @@ class ArcSliderInterface {
 		return $(this.selector);
 	}
 
-	get knobPosition () {
-		const cx = parseInt(this.circle.getCSSProperty('cx').value);
-		const cy = parseInt(this.circle.getCSSProperty('cy').value);
+	async knobPosition () {
+		const cx = parseInt((await this.circle.getCSSProperty('cx')).value);
+		const cy = parseInt((await this.circle.getCSSProperty('cy')).value);
 
 		return {cx, cy};
 	}
@@ -37,8 +37,8 @@ class ArcSliderPage extends Page {
 		this.components = {arcSliderDefault, arcSliderCustom, arcSliderDisabled};
 	}
 
-	open (urlExtra) {
-		super.open('ArcSlider-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('ArcSlider-View', urlExtra);
 	}
 }
 

@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select, text} from '@enact/storybook-utils/addons/controls';
 import Checkbox, {CheckboxBase} from '@enact/agate/Checkbox';
 import CheckboxItem, {CheckboxItemBase} from '@enact/agate/CheckboxItem';
 import Icon from '@enact/agate/Icon';
@@ -17,26 +17,34 @@ export default {
 	component: 'CheckboxItem'
 };
 
-export const _CheckboxItem = () => {
-	const slotBeforeSelection = select('slotBefore', ['', ...iconList], Config);
-	const slotBefore = slotBeforeSelection ? (<Icon slot="slotBefore">{slotBeforeSelection}</Icon>) : null;
-
+export const _CheckboxItem = (args) => {
+	const slotBefore = args['slotBefore'] ? (<Icon slot="slotBefore">{args['slotBefore']}</Icon>) : null;
 	return (
 		<CheckboxItem
-			disabled={boolean('disabled', Config)}
-			icon={select('icon', iconList, Config)}
-			indeterminate={boolean('indeterminate', Config)}
-			indeterminateIcon={select('indeterminateIcon', iconList, Config)}
-			inline={boolean('inline', Config)}
-			label={text('label', Config)}
-			labelPosition={select('labelPosition', ['above', 'after', 'before', 'below'], Config)}
+			disabled={args['disabled']}
+			icon={args['icon']}
+			indeterminate={args['indeterminate']}
+			indeterminateIcon={args['indeterminateIcon']}
+			inline={args['inline']}
+			label={args['label']}
+			labelPosition={args['labelPosition']}
 			onToggle={action('onToggle')}
 		>
 			{slotBefore}
-			{text('children', Config, 'Hello CheckboxItem')}
+			{args['children']}
 		</CheckboxItem>
 	);
 };
+
+boolean('disabled', _CheckboxItem, Config);
+select('icon', _CheckboxItem, iconList, Config);
+boolean('indeterminate', _CheckboxItem, Config);
+select('indeterminateIcon', _CheckboxItem, iconList, Config);
+boolean('inline', _CheckboxItem, Config);
+text('label', _CheckboxItem, Config);
+select('labelPosition', _CheckboxItem, ['above', 'after', 'before', 'below'], Config);
+text('children', _CheckboxItem, Config, 'Hello CheckboxItem');
+select('slotBefore', _CheckboxItem,  ['', ...iconList], Config);
 
 _CheckboxItem.storyName = 'CheckboxItem';
 _CheckboxItem.parameters = {
