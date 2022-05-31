@@ -4,6 +4,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Deprecated
+
+- `agate/GridListImageItem`, to be removed in 2.0.0. Use `agate/ImageItem` instead
+
 ### Fixed
 
 - `agate/ContextualPopupDecorator` layout for Carbon, Cobalt, Copper, Electro, Titanium skins
