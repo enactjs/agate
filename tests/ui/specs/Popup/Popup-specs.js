@@ -132,6 +132,7 @@ describe('Popup', function () {
 				await Page.waitForOpen(popup);
 
 				await expectOpen(popupCommon);
+				await Page.delay(300);
 
 				await popup.buttonOK.click();
 				await Page.waitForClose(popup);
@@ -144,6 +145,7 @@ describe('Popup', function () {
 				await Page.waitForOpen(popup);
 
 				await expectOpen(popupCommon);
+				await Page.delay(300);
 
 				await popup.buttonCancel.click();
 				await Page.waitForClose(popup);
@@ -212,6 +214,7 @@ describe('Popup', function () {
 				await Page.waitForOpen(popup);
 
 				await expectOpen(popupCommon);
+				await Page.delay(300);
 				await Page.clickPopupFloatLayer();
 				browser.pause(300);  // needed to pass instead of waitTransitionEnd
 				await expectOpen(popupCommon);
@@ -229,6 +232,7 @@ describe('Popup', function () {
 				await Page.waitForOpen(popup);
 
 				await expectOpen(popupCommon);
+				await Page.delay(300);
 				await popup.buttonOK.click();
 				await Page.waitForClose(popup);
 
@@ -294,6 +298,7 @@ describe('Popup', function () {
 				await Page.waitForOpen(popup);
 
 				await expectOpen(popupCommon);
+				await Page.delay(300);
 				await Page.clickPopupFloatLayer();
 				await Page.waitForClose(popup);
 
@@ -509,6 +514,7 @@ describe('Popup', function () {
 				await Page.waitForOpen(popup);
 
 				await expectOpen(popupCommon);
+				await Page.delay(300);
 
 				await popup.buttonOK.click();
 				await Page.waitForClose(popup);
@@ -622,6 +628,7 @@ describe('Popup', function () {
 				await Page.waitForOpen(popup);
 
 				await expectOpen(popupCommon);
+				await Page.delay(300);
 
 				await popup.buttonOK.click();
 				await Page.waitForClose(popup);
@@ -788,6 +795,7 @@ describe('Popup', function () {
 				await Page.waitForOpen(popup);
 
 				await expectOpen(popupCommon);
+				await Page.delay(300);
 
 				await popup.buttonOK.click();
 				await Page.waitForClose(popup);
@@ -927,6 +935,7 @@ describe('Popup', function () {
 				await Page.waitForOpen(popup);
 
 				await expectOpen(popupCommon);
+				await Page.delay(300);
 
 				await Page.clickPopupFloatLayer();
 				await Page.waitForClose(popup);
@@ -946,6 +955,7 @@ describe('Popup', function () {
 				await Page.waitForOpen(popup);
 
 				await expectOpen(popupCommon);
+				await Page.delay(300);
 
 				await popup.buttonOK.click();
 				await Page.waitForClose(popup);
@@ -958,6 +968,7 @@ describe('Popup', function () {
 				await Page.waitForOpen(popup);
 
 				await expectOpen(popupCommon);
+				await Page.delay(300);
 
 				await popup.buttonCancel.click();
 				await Page.waitForClose(popup);
@@ -1091,6 +1102,7 @@ describe('Popup', function () {
 				await expectNoneScrimOpen(popupCommon);
 
 				await Page.waitForOpen(popup);
+				await Page.delay(300);
 				await popup.buttonOK.click();
 				await Page.waitForClose(popup);
 
@@ -1103,6 +1115,7 @@ describe('Popup', function () {
 				await expectNoneScrimOpen(popupCommon);
 
 				await Page.waitForOpen(popup);
+				await Page.delay(300);
 				await popup.buttonCancel.click();
 				await Page.waitForClose(popup);
 
