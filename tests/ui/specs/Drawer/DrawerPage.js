@@ -83,6 +83,7 @@ class DrawerPage extends Page {
 		}
 
 		$(selector).waitForExist({timeout});
+		this.delay(300);
 	}
 
 	waitForClose (selector, timeout) {

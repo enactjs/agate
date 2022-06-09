@@ -79,8 +79,6 @@ describe('Drawer', function () {
 
 				await expectOpen(drawerCommon);
 
-				// Add delay for Jenkins fail that cancel button is clicked before drawer is fully opened.
-				await browser.pause(300);
 				await drawer.buttonCancel.click();
 				await Page.waitForClose(drawer);
 				await browser.pause(400);
@@ -208,8 +206,6 @@ describe('Drawer', function () {
 
 				await expectOpen(drawerCommon);
 
-				// Add delay for Jenkins fail that cancel button is clicked before drawer is fully opened.
-				await browser.pause(300);
 				await drawer.buttonCancel.click();
 				await Page.waitForClose(drawer);
 				await browser.pause(400);
