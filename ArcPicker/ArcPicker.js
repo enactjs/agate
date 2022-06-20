@@ -232,7 +232,7 @@ const ArcPickerBase = kind({
 
 		return (
 			// eslint-disable-next-line jsx-a11y/role-has-required-aria-props
-			<div aria-disabled={disabled} aria-valuetext={value} role="slider" {...rest} disabled={disabled}>
+			<div {...rest} aria-disabled={disabled} aria-valuetext={value} disabled={disabled} role="slider">
 				{arcSegments}
 				<div className={css.valueDisplay}>
 					{slotCenter}
