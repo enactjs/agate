@@ -8,7 +8,7 @@ describe('Header', () => {
 		render(<Header title="title" />);
 
 		const expected = 'title';
-		const actual = screen.getByText('title');
+		const actual = screen.getByText('title').parentElement.parentElement;
 
 		expect(actual).toBeInTheDocument();
 		expect(actual).toHaveClass(expected);
@@ -18,7 +18,7 @@ describe('Header', () => {
 		render(<Header subtitle="subtitle" title="title" />);
 
 		const expected = 'subtitle';
-		const actual = screen.getByText('subtitle');
+		const actual = screen.getByText('subtitle').parentElement.parentElement;
 
 		expect(actual).toBeInTheDocument();
 		expect(actual).toHaveClass(expected);
@@ -28,7 +28,7 @@ describe('Header', () => {
 		render(<Header title="title" titleAbove="title above" />);
 
 		const expected = 'titleAbove';
-		const actual = screen.getByText('title above');
+		const actual = screen.getByText('title above').parentElement.parentElement;
 
 		expect(actual).toBeInTheDocument();
 		expect(actual).toHaveClass(expected);

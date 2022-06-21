@@ -4,6 +4,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Added
+
+- `agate/Header` Marquee for title, subtitle, and titleAbove
+
 ### Deprecated
 
 - `agate/GridListImageItem`, to be removed in 2.0.0. Use `agate/ImageItem` instead

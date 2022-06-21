@@ -33,6 +33,7 @@ export const _Header = (args) => {
 	return (
 		<Header
 			hideLine={args['hideLine']}
+			marqueeOn={args['marqueeOn']}
 			subtitle={args['subtitle']}
 			title={args['title']}
 			titleAbove={args['titleAbove']}
@@ -44,6 +45,7 @@ export const _Header = (args) => {
 
 select('children', _Header, ['no buttons', '1 button', '2 buttons'], Config);
 boolean('hideLine', _Header, Config);
+select('marqueeOn', _Header, ['hover', 'render'], Config);
 text('subtitle', _Header, Config, 'Sub Title');
 text('title', _Header, Config, 'Main Title');
 text('titleAbove', _Header, Config, '');
