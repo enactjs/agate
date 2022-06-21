@@ -1,5 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {select} from '@enact/storybook-utils/addons/knobs';
+import {select} from '@enact/storybook-utils/addons/controls';
 import Button from '@enact/agate/Button';
 import TabGroup from '@enact/agate/TabGroup';
 
@@ -11,12 +11,12 @@ export default {
 	component: 'TabGroup'
 };
 
-export const _TabGroup = () => {
-	const orientation = select('orientation', ['vertical', 'horizontal'], Config, 'horizontal');
+export const _TabGroup = (args) => {
+	const orientation = args['orientation'];
 	return (
 		<TabGroup
 			orientation={orientation}
-			tabPosition={select('tabPosition', ['before', 'after'], Config, 'before')}
+			tabPosition={args['tabPosition']}
 			tabs={[
 				{title: 'Home', icon: 'home'},
 				{title: 'Settings', icon: 'setting'},
@@ -40,6 +40,9 @@ export const _TabGroup = () => {
 		</TabGroup>
 	);
 };
+
+select('orientation', _TabGroup, ['vertical', 'horizontal'], Config, 'horizontal');
+select('tabPosition', _TabGroup, ['before', 'after'], Config, 'before');
 
 _TabGroup.storyName = 'TabGroup';
 _TabGroup.parameters = {

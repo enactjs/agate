@@ -6,8 +6,8 @@ class DateTimePickerInterface {
 		this.id = id;
 	}
 
-	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}>div`));
+	async focus () {
+		return browser.execute((el) => el.focus(), await $(`#${this.id}>div`));
 	}
 
 	get self () {
@@ -60,8 +60,8 @@ class DateTimePickerPage extends Page {
 		this.components.dateTimePickerDisabledWithDefaultValue = new DateTimePickerInterface('dateTimePickerDisabledWithDefaultValue');
 	}
 
-	open (urlExtra) {
-		super.open('DateTimePicker-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('DateTimePicker-View', urlExtra);
 	}
 }
 

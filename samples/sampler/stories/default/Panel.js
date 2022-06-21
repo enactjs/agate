@@ -1,5 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {text} from '@enact/storybook-utils/addons/knobs';
+import {text} from '@enact/storybook-utils/addons/controls';
 import Button from '@enact/agate/Button';
 import Header from '@enact/agate/Header';
 import {Panel} from '@enact/agate/Panels';
@@ -12,15 +12,18 @@ export default {
 	component: 'Panel'
 };
 
-export const _Panel = () => (
+export const _Panel = (args) => (
 	<Panel>
 		<Header
-			subtitle={text('subtitle', HeaderConfig, 'Header Subtitle')}
-			title={text('title', HeaderConfig, 'Header Title')}
+			subtitle={args['subtitle']}
+			title={args['title']}
 		/>
 		<Button>Click me</Button>
 	</Panel>
 );
+
+text('subtitle', _Panel, HeaderConfig, 'Header Subtitle');
+text('title', _Panel, HeaderConfig, 'Header Title');
 
 _Panel.storyName = 'Panel';
 _Panel.parameters = {

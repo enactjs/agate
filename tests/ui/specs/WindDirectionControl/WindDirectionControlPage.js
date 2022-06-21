@@ -15,8 +15,8 @@ class WindDirectionControlInterface {
 		return $(this.selector + ' .ArcPicker_ArcPicker_arc:nth-child(' + index + ') path:nth-child(2)');
 	}
 
-	iconValue () {
-		return  getText($(this.selector + ' .ArcPicker_ArcPicker_valueDisplay>div')).codePointAt();
+	async iconValue () {
+		return (await getText($(this.selector + ' .ArcPicker_ArcPicker_valueDisplay>div'))).codePointAt();
 	}
 }
 
@@ -37,8 +37,8 @@ class WindDirectionControlPage extends Page {
 		};
 	}
 
-	open (urlExtra) {
-		super.open('WindDirectionControl-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('WindDirectionControl-View', urlExtra);
 	}
 }
 

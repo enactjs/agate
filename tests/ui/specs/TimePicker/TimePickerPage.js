@@ -6,8 +6,8 @@ class PickerInterface {
 		this.id = id;
 	}
 
-	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}>div`));
+	async focus () {
+		return browser.execute((el) => el.focus(), await $(`#${this.id}>div`));
 	}
 
 	get self () {
@@ -46,8 +46,8 @@ class TimePickerPage extends Page {
 		this.components.timePickerDisabledWithDefaultValue = new PickerInterface('timePickerDisabledWithDefaultValue');
 	}
 
-	open (urlExtra) {
-		super.open('TimePicker-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('TimePicker-View', urlExtra);
 	}
 }
 

@@ -1,6 +1,6 @@
 import kind from '@enact/core/kind';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean} from '@enact/storybook-utils/addons/knobs';
+import {boolean} from '@enact/storybook-utils/addons/controls';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 
@@ -11,6 +11,8 @@ import Icon from '@enact/agate/Icon';
 import css from './About.module.less';
 
 const edgeDotKeepout = 6;
+BodyText.displayName = 'BodyText';
+Button.displayName = 'Button';
 
 const riSafe = (style) => {
 	switch (typeof style) {
@@ -66,14 +68,14 @@ export default {
 	title: 'About/A Tour of Sampler'
 };
 
-export const ATourOfSampler = () => (
+export const ATourOfSampler = (args) => (
 	<div style={{overflow: 'hidden', height: '100%'}}>
 		<BodyText
-			centered={boolean('text centered', BodyText)}
+			centered={args['text centered']}
 		>
 			Welcome to the Agate sampler! Explore Agate components.
 		</BodyText>
-		<Button onClick={action('onClick')} selected={boolean('button selected', Button)}>
+		<Button onClick={action('onClick')} selected={args['button selected']}>
 			Click me
 		</Button>
 		<HintDialog
@@ -103,9 +105,12 @@ export const ATourOfSampler = () => (
 			style={{bottom: riSafe(edgeDotKeepout), left: 114}}
 			length={30}
 		>
-			<b>Knobs</b> tab lets you adjust component properties
+			<b>Controls</b> tab lets you adjust component properties
 		</HintDialog>
 	</div>
 );
+
+boolean('text centered', ATourOfSampler, BodyText);
+boolean('button selected', ATourOfSampler, Button);
 
 ATourOfSampler.storyName = 'A Tour of Sampler';

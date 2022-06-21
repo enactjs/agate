@@ -7,8 +7,8 @@ class AgateToggleButtonInterface {
 		this.id = id;
 	}
 
-	focus () {
-		return browser.execute((el) => el.focus(), `#${this.id}`);
+	async focus () {
+		return browser.execute((el) => el.focus(), await `#${this.id}`);
 	}
 	get self () {
 		return $(`#${this.id}`);
@@ -24,20 +24,19 @@ class AgateToggleButtonInterface {
 	}
 }
 
-
-class AgateToggleButtonPage extends Page {
+class ToggleButtonPage extends Page {
 	constructor () {
 		super();
-		this.title = 'Agate ToggleButton Test';
+		this.title = 'ToggleButton Test';
 		const toggleDefault = new AgateToggleButtonInterface('toggleButton1');
 		const toggleWithLabels = new AgateToggleButtonInterface('toggleButton3');
 
 		this.components = {toggleDefault, toggleWithLabels};
 	}
 
-	open (urlExtra) {
-		super.open('Agate-ToggleButton-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('ToggleButton-View', urlExtra);
 	}
 }
 
-module.exports = new AgateToggleButtonPage();
+module.exports = new ToggleButtonPage();
