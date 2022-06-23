@@ -24,8 +24,10 @@ import Transition from '@enact/ui/Transition';
 import convert from 'color-convert';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import {Component} from 'react';
+import {Component, createRef} from 'react';
 import ReactDOM from 'react-dom';
+// import EnactPropTypes from '@enact/core/internal/prop-types';
+// import ForwardRef from '@enact/ui/ForwardRef';
 
 import $L from '../internal/$L';
 import Skinnable from '../Skinnable';
@@ -34,6 +36,14 @@ import Slider from '../Slider';
 import SwatchButton from './SwatchButton';
 
 import componentCss from './ColorPicker.module.less';
+
+// const DivComponent = ({colorPickerRef, ...rest}) => (<div ref={colorPickerRef} {...rest} />);
+//
+// DivComponent.propTypes = {
+// 	colorPickerRef: EnactPropTypes.ref
+// }
+//
+// const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, DivComponent);
 
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 
@@ -56,6 +66,7 @@ const ColorPickerBase = kind({
 
 	propTypes: /** @lends agate/ColorPicker.ColorPickerBase.prototype */ {
 		children: PropTypes.array,
+		// colorPickerRef: EnactPropTypes.ref,
 
 		/**
 		 * Customizes the component by mapping the supplied collection of CSS class names to the
@@ -199,7 +210,7 @@ const ColorPickerBase = kind({
 		}
 	},
 
-	render: ({children, css, disabled, onChange, onClick, onHueChange, onSaturationChange, onLightnessChange, onToggleExtended, open, sliderValues, transitionContainerClassname, transitionDirection, value, ...rest}) => {
+	render: ({colorPickerRef, children, css, disabled, onChange, onClick, onHueChange, onSaturationChange, onLightnessChange, onToggleExtended, open, sliderValues, transitionContainerClassname, transitionDirection, value, ...rest}) => {
 		delete rest.extended;
 		return (
 			<div {...rest}>
@@ -209,7 +220,7 @@ const ColorPickerBase = kind({
 					visible={open}
 					direction={transitionDirection}
 				>
-					<ContainerDiv className={css.palette} spotlightDisabled={!open} spotlightRestrict="self-only">
+					<ContainerDiv className={css.palette} colorPickerRef={colorPickerRef} spotlightDisabled={!open} spotlightRestrict="self-only">
 						<Group
 							childComponent={SwatchButton}
 							childProp="color"
@@ -264,6 +275,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 		constructor (props) {
 			super(props);
 			this.hsl = props.value ? convertToHSL(props.value) : [0, 0, 0];
+			// this.colorPickerRef = createRef();
 			this.state = {
 				extended: props.defaultExtended || false
 			};
@@ -273,6 +285,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 			// TODO: change to using ref/forwardRef/something else?
 			// eslint-disable-next-line react/no-find-dom-node
 			this.node = ReactDOM.findDOMNode(this);
+			// this.node = this.colorPickerRef;
 
 			if (this.props.open) {
 				on('click', this.handleClick);
@@ -344,6 +357,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 					onHueChange={this.handleSlider('h')}
 					onSaturationChange={this.handleSlider('s')}
 					onLightnessChange={this.handleSlider('l')}
+					// colorPickerRef={this.colorPickerRef}
 				/>
 			);
 		}
