@@ -3,7 +3,6 @@ import {is} from '@enact/core/keymap';
 import platform from '@enact/core/platform';
 import PropTypes from 'prop-types';
 import {useCallback, useState, useRef} from 'react';
-// import {findDOMNode} from 'react-dom';
 
 const isLeft = is('left');
 const isRight = is('right');
@@ -33,8 +32,6 @@ const SliderButtonBehaviorDecorator = (Wrapped) => {
 		const handleDragStart = useCallback(() => {
 			// on platforms with a touchscreen, we want to focus slider when dragging begins
 			if (platform.touchscreen) {
-				// console.log('1', ref.current.node);
-				// console.log('2', findDOMNode(ref.current));
 				ref.current.node.focus(); // eslint-disable-line react/no-find-dom-node
 			}
 		}, []);
