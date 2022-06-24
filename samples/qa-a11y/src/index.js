@@ -9,8 +9,8 @@ const appElement = (<App />);
 if (typeof window !== 'undefined') {
 	const container = document.getElementById('root');
 
-	if(ENACT_PACK_ISOMORPHIC) {
-		hydrateRoot(container, appElement)
+	if (ENACT_PACK_ISOMORPHIC) {
+		hydrateRoot(container, appElement);
 	} else {
 		createRoot(container).render(appElement);
 	}
