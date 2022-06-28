@@ -10,8 +10,8 @@ class ScrollerPage extends Page {
 		this.title = 'Scroller Test';
 	}
 
-	open (layout = '', urlExtra) {
-		super.open(`Scroller${layout}-View`, urlExtra);
+	async open (layout = '', urlExtra) {
+		await super.open(`Scroller${layout}-View`, urlExtra);
 	}
 
 	// button api
@@ -39,10 +39,10 @@ class ScrollerPage extends Page {
 		return element('#nativeScroll', browser);
 	}
 
-	button (text) {
-		return element(
+	async button (text) {
+		return await element(
 			`${componentSelector({component: 'Button'})}[aria-label="${text}"]`,
-			browser
+			await browser
 		);
 	}
 
@@ -51,8 +51,8 @@ class ScrollerPage extends Page {
 		return element('#focusableScrollbarKnobs', browser);
 	}
 
-	getScrollThumbPosition () {
-		return browser.execute(function (_scrollbarSelector) {
+	async getScrollThumbPosition () {
+		return await browser.execute(function (_scrollbarSelector) {
 			const scrollbar = document.querySelectorAll(_scrollbarSelector);
 			return {
 				vertical: scrollbar[0].style.getPropertyValue('--scrollbar-thumb-progress-ratio'),

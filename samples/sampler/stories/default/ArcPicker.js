@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, range, select} from '@enact/storybook-utils/addons/controls';
 import ArcPicker, {ArcPickerBase} from '@enact/agate/ArcPicker';
 
 ArcPicker.displayName = 'ArcPicker';
@@ -16,24 +16,32 @@ export default {
 	component: 'ArcPicker'
 };
 
-export const _ArcPicker = () => {
-	const itemCount = number('items', Config, {range: true, min: 0, max: 40}, 8);
+export const _ArcPicker = (args) => {
+	const itemCount = args['items'];
 	const items = (new Array(itemCount)).fill().map((i, index) => index + 1);
 
 	return (
 		<ArcPicker
-			backgroundColor={select('backgroundColor', prop.colors, Config)}
-			disabled={boolean('disabled', Config)}
-			endAngle={number('endAngle', Config, {range: true, min: 0, max: 360})}
-			foregroundColor={select('foregroundColor', prop.colors, Config)}
+			backgroundColor={args['backgroundColor']}
+			disabled={args['disabled']}
+			endAngle={args['endAngle']}
+			foregroundColor={args['foregroundColor']}
 			onChange={action('onChange')}
-			selectionType={select('selectionType', ['cumulative', 'single'], Config, 'cumulative')}
-			startAngle={number('startAngle', Config, {range: true, min: 0, max: 360})}
+			selectionType={args['selectionType']}
+			startAngle={args['startAngle']}
 		>
 			{items}
 		</ArcPicker>
 	);
 };
+
+range('items', _ArcPicker, Config,  {range: true, min: 0, max: 40}, 8);
+select('backgroundColor', _ArcPicker, prop.colors, Config);
+boolean('disabled', _ArcPicker, Config);
+range('endAngle', _ArcPicker, Config, {range: true, min: 0, max: 360});
+select('foregroundColor', _ArcPicker, prop.colors, Config);
+select('selectionType', _ArcPicker, ['cumulative', 'single'], Config, 'cumulative');
+range('startAngle', _ArcPicker, Config, {range: true, min: 0, max: 360});
 
 _ArcPicker.storyName = 'ArcPicker';
 _ArcPicker.parameters = {

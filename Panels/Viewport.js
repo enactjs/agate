@@ -5,8 +5,7 @@ import ViewManager, {shape, SlideBottomArranger as VerticalArranger, SlideRightA
 import classnames from 'classnames';
 import invariant from 'invariant';
 import PropTypes from 'prop-types';
-import {Children, cloneElement, Component} from 'react';
-import ReactDOM from 'react-dom';
+import {Children, cloneElement, Component, createRef} from 'react';
 
 import SharedStateDecorator, {SharedState} from './SharedStateDecorator';
 
@@ -100,6 +99,7 @@ const ViewportBase = class extends Component {
 	constructor () {
 		super();
 
+		this.nodeRef = createRef();
 		this.paused = new Pause('Viewport');
 		this.state = {
 			prevIndex: -1,
@@ -115,8 +115,7 @@ const ViewportBase = class extends Component {
 	}
 
 	componentDidMount () {
-		// eslint-disable-next-line react/no-find-dom-node
-		this.node = ReactDOM.findDOMNode(this);
+		this.node = this.nodeRef.current;
 	}
 
 	componentDidUpdate (prevProps) {
@@ -220,6 +219,7 @@ const ViewportBase = class extends Component {
 				noAnimation={noAnimation}
 				onTransition={this.handleTransition}
 				onWillTransition={this.handleWillTransition}
+				ref={this.nodeRef}
 			>
 				{mappedChildren}
 			</ViewManager>

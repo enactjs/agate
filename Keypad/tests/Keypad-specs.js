@@ -1,21 +1,17 @@
-import {mount} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import Keypad from '../Keypad';
-
-import css from '../Keypad.module.less';
-
-const click = (key, value) => key.find(`.${css.button}[aria-label="${value}"]`).simulate('click');
 
 describe('Keypad Specs', () => {
 	test('should add new digits on every digit click', () => {
 		const handleChange = jest.fn();
+		render(<Keypad onChange={handleChange} />);
 
-		const keypad = mount(
-			<Keypad onChange={handleChange} />
-		);
-
-		click(keypad, 2);
-		click(keypad, 5);
-		click(keypad, 7);
+		userEvent.click(screen.getByLabelText('2'));
+		userEvent.click(screen.getByLabelText('5'));
+		userEvent.click(screen.getByLabelText('7'));
 
 		const expected = '257';
 		const actual = handleChange.mock.calls[2][0].value;
@@ -25,15 +21,12 @@ describe('Keypad Specs', () => {
 
 	test('should remove digits on every backspace button click', () => {
 		const handleChange = jest.fn();
+		render(<Keypad onChange={handleChange} />);
 
-		const keypad = mount(
-			<Keypad onChange={handleChange} />
-		);
-
-		click(keypad, 2);
-		click(keypad, 5);
-		click(keypad, 7);
-		click(keypad, 'backspace');
+		userEvent.click(screen.getByLabelText('2'));
+		userEvent.click(screen.getByLabelText('5'));
+		userEvent.click(screen.getByLabelText('7'));
+		userEvent.click(screen.getByLabelText('backspace'));
 
 		const expected = '25';
 		const actual = handleChange.mock.calls[3][0].value;
@@ -44,18 +37,13 @@ describe('Keypad Specs', () => {
 	describe('Disabled Keypad', () => {
 		test('should not run the onChange handler when disabled', () => {
 			const handleChange = jest.fn();
-			const keypad = mount(
-				<Keypad disabled onChange={handleChange} />
-			);
+			render(<Keypad disabled onChange={handleChange} />);
 
-			click(keypad, 2);
-			click(keypad, 5);
-			click(keypad, 7);
+			userEvent.click(screen.getByLabelText('2'));
+			userEvent.click(screen.getByLabelText('5'));
+			userEvent.click(screen.getByLabelText('7'));
 
-			const expected = 0;
-			const actual = handleChange.mock.calls.length;
-
-			expect(actual).toBe(expected);
+			expect(handleChange).not.toHaveBeenCalled();
 		});
 	});
 });

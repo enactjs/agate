@@ -17,7 +17,6 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import {mergeDeepRight} from 'ramda';
 import {createContext, Component} from 'react';
-import {setDisplayName} from 'recompose';
 
 import Rearrangeable from '../Rearrangeable';
 
@@ -365,21 +364,20 @@ const Draggable = (Wrapped) => kind({
  * @ui
  * @private
  */
-const ResponsiveBox = (Wrapped) => setDisplayName('ResponsiveBox')(
-	(props) => {
-		return (
-			<DraggableContainerContext.Consumer>
-				{(ctx) => {
-					const containerShape = ctx ? ctx.containerShape : defaultContainerShape;
-					return (
-						<Wrapped containerShape={containerShape} {...props} />
-					);
-				}}
-			</DraggableContainerContext.Consumer>
-		);
-	}
-);
-
+const ResponsiveBox = (Wrapped) => {
+	const Decorator = (props) => (
+		<DraggableContainerContext.Consumer>
+			{(ctx) => {
+				const containerShape = ctx ? ctx.containerShape : defaultContainerShape;
+				return (
+					<Wrapped containerShape={containerShape} {...props} />
+				);
+			}}
+		</DraggableContainerContext.Consumer>
+	);
+	Decorator.displayName = 'ResponsiveBox';
+	return Decorator;
+};
 
 //
 //

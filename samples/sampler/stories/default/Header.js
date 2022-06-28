@@ -1,5 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select, text} from '@enact/storybook-utils/addons/controls';
 import {Fragment} from 'react';
 import Button from '@enact/agate/Button';
 import {Header, HeaderBase} from '@enact/agate/Header';
@@ -7,7 +7,7 @@ import {Header, HeaderBase} from '@enact/agate/Header';
 Header.displayName = 'Header';
 const Config = mergeComponentMetadata('Header', HeaderBase, Header);
 
-// Set up some defaults for children knob
+// Set up some defaults for children controls
 const prop = {
 	children: {
 		'no buttons': null,
@@ -26,21 +26,29 @@ export default {
 	component: 'Header'
 };
 
-export const _Header = () => {
-	const childrenSelection = select('children', ['no buttons', '1 button', '2 buttons'], Config);
+export const _Header = (args) => {
+	const childrenSelection = args['children'];
 	const children = prop.children[childrenSelection];
 
 	return (
 		<Header
-			hideLine={boolean('hideLine', Config)}
-			subtitle={text('subtitle', Config, 'Sub Title')}
-			title={text('title', Config, 'Main Title')}
-			titleAbove={text('titleAbove', Config, '')}
+			hideLine={args['hideLine']}
+			marqueeOn={args['marqueeOn']}
+			subtitle={args['subtitle']}
+			title={args['title']}
+			titleAbove={args['titleAbove']}
 		>
 			{children}
 		</Header>
 	);
 };
+
+select('children', _Header, ['no buttons', '1 button', '2 buttons'], Config);
+boolean('hideLine', _Header, Config);
+select('marqueeOn', _Header, ['hover', 'render'], Config);
+text('subtitle', _Header, Config, 'Sub Title');
+text('title', _Header, Config, 'Main Title');
+text('titleAbove', _Header, Config, '');
 
 _Header.storyName = 'Header';
 _Header.parameters = {

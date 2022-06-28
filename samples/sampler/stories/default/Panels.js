@@ -2,7 +2,7 @@
 
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select} from '@enact/storybook-utils/addons/controls';
 import PropTypes from 'prop-types';
 import {useState} from 'react';
 import Button from '@enact/agate/Button';
@@ -50,7 +50,6 @@ const BasicPanels = ({...rest}) => {
 			{...rest}
 			index={index}
 			onBack={goPrevious}
-			orientation={select('orientation', ['horizontal', 'vertical'], Config)}
 		>
 			<FirstPanel onClick={goNext} />
 			<SecondPanel onClick={goPrevious} />
@@ -58,18 +57,27 @@ const BasicPanels = ({...rest}) => {
 	);
 };
 
+BasicPanels.propTypes = {
+	orientation: PropTypes.string
+};
+
 export default {
 	title: 'Agate/Panels',
 	component: 'Panels'
 };
 
-export const _Panels = () => (
+export const _Panels = (args) => (
 	<BasicPanels
-		noAnimation={boolean('noAnimation', Config, false)}
-		noCloseButton={boolean('noCloseButton', Config, false)}
+		noAnimation={args['noAnimation']}
+		noCloseButton={args['noCloseButton']}
 		onApplicationClose={action('onClose')}
+		orientation={args['orientation']}
 	/>
 );
+
+boolean('noAnimation', _Panels, Config, false);
+boolean('noCloseButton', _Panels, Config, false);
+select('orientation', _Panels, ['horizontal', 'vertical'], Config);
 
 _Panels.storyName = 'Panels';
 _Panels.parameters = {

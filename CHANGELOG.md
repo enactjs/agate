@@ -4,9 +4,22 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Added
+
+- `agate/Header` Marquee for title, subtitle, and titleAbove
+
+### Deprecated
+
+- `agate/GridListImageItem`, to be removed in 2.0.0. Use `agate/ImageItem` instead
+
 ### Fixed
 
 - `agate/ContextualPopupDecorator` layout for Carbon, Cobalt, Copper, Electro, Titanium skins
+- `agate/IncrementSlider` style to have a proper layout for every skin
+- `agate/MediaPlayer` layout issues for Cobalt, Carbon, Copper, Electro, Titanium skins
+- `agate/MediaPlayer` shuffle button color for Cobalt, and Copper skins
+- `agate/Panel` and `agate/TabGroup` padding for RTL locales
+- `agate/PopupMenu` title to marquee for long text
 - `agate/RadioItem` icons to not be bigger than icon container
 - `agate/TabGroup` button padding for Cobalt and Copper skins
 - `agate/VirtualList` 5-way navigation between scroll buttons when `focusableScrollbar`

@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select, text} from '@enact/storybook-utils/addons/controls';
 import ri from '@enact/ui/resolution';
 import BodyText from '@enact/agate/BodyText';
 import Button from '@enact/agate/Button';
@@ -19,31 +19,39 @@ Config.defaultProps = {
 	spotlightRestrict: 'self-first'
 };
 
-const renderPopup = () => (
-	<div>{text('popup string', {groupId: 'Popup'}, 'Hello Contextual Popup')}</div>
-);
 
 export default {
 	title: 'Agate/ContextualPopupDecorator',
 	component: 'ContextualPopupDecorator'
 };
 
-export const _ContextualPopupDecorator = () => (
-	<div style={{textAlign: 'center', marginTop: ri.scaleToRem(99)}}>
-		<ContextualButton
-			direction={select('direction', ['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config)}
-			noAutoDismiss={boolean('noAutoDismiss', Config)}
-			onClose={action('onClose')}
-			open={boolean('open', Config)}
-			popupComponent={renderPopup}
-			showCloseButton={boolean('showCloseButton', Config)}
-			spotlightRestrict={select('spotlightRestrict', ['none', 'self-first', 'self-only'], Config)}
-		>
-			{text('button string', Config, 'Hello Contextual Button')}
-		</ContextualButton>
-		<BodyText centered>Use KNOBS to interact with the ContextualPopup.</BodyText>
-	</div>
-);
+export const _ContextualPopupDecorator = (args) => {
+	const renderPopup = () => <div>{args['popup string']}</div>;
+	return (
+		<div style={{textAlign: 'center', marginTop: ri.scaleToRem(99)}}>
+			<ContextualButton
+				direction={args['direction']}
+				noAutoDismiss={args['noAutoDismiss']}
+				onClose={action('onClose')}
+				open={args['open']}
+				popupComponent={renderPopup} // eslint-disable-line react/jsx-no-bind
+				showCloseButton={args['showCloseButton']}
+				spotlightRestrict={args['spotlightRestrict']}
+			>
+				{args['button string'] || null}
+			</ContextualButton>
+			<BodyText centered>Use CONTROLS to interact with the ContextualPopup.</BodyText>
+		</div>
+	);
+};
+
+select('direction', _ContextualPopupDecorator, ['above', 'above center', 'above left', 'above right', 'below', 'below center', 'below left', 'below right', 'left middle', 'left top', 'left bottom', 'right middle', 'right top', 'right bottom'], Config);
+boolean('noAutoDismiss', _ContextualPopupDecorator, Config);
+boolean('showCloseButton', _ContextualPopupDecorator, Config);
+select('spotlightRestrict', _ContextualPopupDecorator, ['none', 'self-first', 'self-only'], Config);
+text('popup string', _ContextualPopupDecorator, {groupId: 'Popup'}, 'Hello Contextual Popup');
+boolean('open', _ContextualPopupDecorator, Config);
+text('button string', _ContextualPopupDecorator, Config, 'Hello Contextual Button');
 
 _ContextualPopupDecorator.storyName = 'ContextualPopupDecorator';
 _ContextualPopupDecorator.parameters = {

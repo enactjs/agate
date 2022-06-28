@@ -1,5 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select, text} from '@enact/storybook-utils/addons/controls';
 import SwitchItem from '@enact/agate/SwitchItem';
 
 import {iconList} from './util/icons';
@@ -12,20 +12,28 @@ export default {
 	component: 'SwitchItem'
 };
 
-export const _SwitchItem = () => (
+export const _SwitchItem = (args) => (
 	<div>
 		<SwitchItem
-			disabled={boolean('disabled', Config)}
-			icon={select('icon', ['', ...iconList], Config, 'music')}
-			inline={boolean('inline', Config)}
-			size={select('size', ['small', 'large'], Config, 'large')}
-			switchOffLabel={text('switchOffLabel', Config)}
-			switchOnLabel={text('switchOnLabel', Config)}
+			disabled={args['disabled']}
+			icon={args['icon']}
+			inline={args['inline']}
+			size={args['size']}
+			switchOffLabel={args['switchOffLabel']}
+			switchOnLabel={args['switchOnLabel']}
 		>
-			{text('children', Config, 'Sound')}
+			{args['children']}
 		</SwitchItem>
 	</div>
 );
+
+boolean('disabled', _SwitchItem, Config);
+select('icon', _SwitchItem, ['', ...iconList], Config, 'music');
+boolean('inline', _SwitchItem, Config);
+select('size', _SwitchItem, ['small', 'large'], Config, 'large');
+text('switchOffLabel', _SwitchItem, Config);
+text('switchOnLabel', _SwitchItem, Config);
+text('children', _SwitchItem, Config, 'Sound');
 
 _SwitchItem.storyName = 'SwitchItem';
 _SwitchItem.parameters = {
