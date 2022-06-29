@@ -123,6 +123,7 @@ describe('Scroller', function () {
 			await ScrollerPage.spotlightDown();
 			await ScrollerPage.spotlightDown();
 			await ScrollerPage.spotlightLeft();
+			await browser.pause(500);
 
 			expect(await (await ScrollerPage.button('scroll left')).isFocused()).to.be.true();
 

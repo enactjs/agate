@@ -59,7 +59,7 @@ describe('Scroller', function () {
 			await ScrollerPage.spotlightDown();
 			await ScrollerPage.spotlightRight();
 			await ScrollerPage.spotlightRight();
-
+			await browser.pause(500);
 			expect(await (await ScrollerPage.button('scroll down')).isFocused()).to.be.true();
 
 			// 5-Way Select.

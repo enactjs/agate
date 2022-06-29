@@ -78,6 +78,7 @@ describe('Drawer', function () {
 				await Page.waitForOpen(drawer);
 
 				await expectOpen(drawerCommon);
+				await browser.pause(400);
 
 				await drawer.buttonCancel.click();
 				await Page.waitForClose(drawer);
