@@ -43,7 +43,7 @@ describe('Scroller', function () {
 			expect(await (await ScrollerPage.button('scroll up')).isFocused()).to.be.true();
 		});
 
-		it('should Scrolling via 5-way Key with Spotlight on the scroll down button', async function () {
+		it.skip('should Scrolling via 5-way Key with Spotlight on the scroll down button', async function () {
 			// Set focusableScrollbar=true
 			await ScrollerPage.dropdownFocusableScrollbar.moveTo();
 			await ScrollerPage.spotlightSelect();
@@ -59,7 +59,6 @@ describe('Scroller', function () {
 			await ScrollerPage.spotlightDown();
 			await ScrollerPage.spotlightRight();
 			await ScrollerPage.spotlightRight();
-			await browser.pause(500);
 			expect(await (await ScrollerPage.button('scroll down')).isFocused()).to.be.true();
 
 			// 5-Way Select.
