@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean} from '@enact/storybook-utils/addons/knobs';
+import {boolean} from '@enact/storybook-utils/addons/controls';
 import Keypad from '@enact/agate/Keypad';
 
 Keypad.displayName = 'Keypad';
@@ -11,14 +11,18 @@ export default {
 	component: 'Keypad'
 };
 
-export const _Keypad = () => (
+export const _Keypad = (args) => (
 	<Keypad
-		disabled={boolean('disabled', Config)}
-		activeCall={boolean('activeCall', Config)}
+		disabled={args['disabled']}
+		activeCall={args['activeCall']}
 		onChange={action('onChange')}
-		spotlightDisabled={boolean('spotlightDisabled', Config)}
+		spotlightDisabled={args['spotlightDisabled']}
 	/>
 );
+
+boolean('disabled', _Keypad, Config);
+boolean('activeCall', _Keypad, Config);
+boolean('spotlightDisabled', _Keypad, Config);
 
 _Keypad.storyName = 'Keypad';
 _Keypad.parameters = {

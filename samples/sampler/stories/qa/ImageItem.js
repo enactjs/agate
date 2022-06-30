@@ -11,7 +11,7 @@ export default {
 export const withoutChildren = () => (
 	<div style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}>
 		<ImageItem
-			src="http://placehold.it/300x400/9037ab/ffffff&text=Image0"
+			src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
 		/>
 	</div>
 );

@@ -7,8 +7,8 @@ class RadioItemInterface {
 		this.id = id;
 	}
 
-	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}`));
+	async focus () {
+		return browser.execute((el) => el.focus(), await $(`#${this.id}`));
 	}
 
 	get self () {
@@ -39,8 +39,8 @@ class RadioItemPage extends Page {
 		this.components = {radioDefault, radioDefaultSelected, radioInline, radioDisabled, radioInlineDisabled};
 	}
 
-	open (urlExtra) {
-		super.open('RadioItem-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('RadioItem-View', urlExtra);
 	}
 }
 

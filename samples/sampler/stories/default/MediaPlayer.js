@@ -1,9 +1,9 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean} from '@enact/storybook-utils/addons/knobs';
-import MediaPlayer from '@enact/agate/MediaPlayer';
+import {boolean, select} from '@enact/storybook-utils/addons/controls';
+import {MediaPlayer, MediaPlayerBase} from '@enact/agate/MediaPlayer';
 
 MediaPlayer.displayname = 'MediaPlayer';
-const Config = mergeComponentMetadata('MediaPlayer', MediaPlayer);
+const Config = mergeComponentMetadata('MediaPlayer', MediaPlayerBase, MediaPlayer);
 
 const audioFiles = [
 	'https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3',
@@ -19,16 +19,21 @@ export default {
 	component: 'MediaPlayer'
 };
 
-export const _MediaPlayer = () => (
+export const _MediaPlayer = (args) => (
 	<MediaPlayer
-		disabled={boolean('disabled', Config)}
-		spotlightDisabled={boolean('spotlightDisabled', Config)}
+		disabled={args['disabled']}
+		spotlightDisabled={args['spotlightDisabled']}
+		type={args['type']}
 	>
 		{
 			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
 		}
 	</MediaPlayer>
 );
+
+boolean('disabled', _MediaPlayer, Config);
+boolean('spotlightDisabled', _MediaPlayer, Config);
+select('type', _MediaPlayer, ['full', 'tiny'], Config);
 
 _MediaPlayer.storyName = 'MediaPlayer';
 _MediaPlayer.parameters = {

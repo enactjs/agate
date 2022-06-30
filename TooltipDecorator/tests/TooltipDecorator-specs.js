@@ -1,24 +1,18 @@
-import {mount, shallow} from 'enzyme';
 import {FloatingLayerBase, FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
 
-import Button from '../../Button';
-import {Tooltip} from '../Tooltip';
-import TooltipDecorator from '../TooltipDecorator';
+import Tooltip from '../Tooltip';
 import TooltipLabel from '../TooltipLabel';
 
-const TooltipButton = TooltipDecorator(
-	{tooltipDestinationProp: 'decoration'},
-	Button
-);
+const Root = FloatingLayerDecorator('div');
 
 describe('TooltipDecorator Specs', () => {
 	test('should render component into FloatingLayer if open', () => {
-		const Root = FloatingLayerDecorator('div');
 		const tooltipText = 'This is a tooltip';
-
-		const subject = mount(
+		render(
 			<Root>
-				<FloatingLayerBase open>
+				<FloatingLayerBase data-testid="floatingLayer" open>
 					<Tooltip>
 						{tooltipText}
 					</Tooltip>
@@ -27,18 +21,16 @@ describe('TooltipDecorator Specs', () => {
 		);
 
 		const expected = tooltipText;
-		const actual = subject.find('FloatingLayer').text();
+		const actual = screen.getByTestId('floatingLayer');
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveTextContent(expected);
 	});
 
 	test('should not render component into FloatingLayer if not open', () => {
-		const Root = FloatingLayerDecorator('div');
 		const tooltipText = 'This is a tooltip';
-
-		const subject = mount(
+		render(
 			<Root>
-				<FloatingLayerBase>
+				<FloatingLayerBase data-testid="floatingLayer">
 					<Tooltip>
 						{tooltipText}
 					</Tooltip>
@@ -46,92 +38,106 @@ describe('TooltipDecorator Specs', () => {
 			</Root>
 		);
 
-		const expected = '';
-		const actual = subject.find('FloatingLayer').text();
+		const actual = screen.queryByText(tooltipText);
 
-		expect(actual).toBe(expected);
+		expect(actual).toBeNull();
 	});
 
-	test('should apply alignment when `centered` and `marquee`', () => {
-		const subject = shallow(
+	test('should apply `text-align: center` style when `centered=true` and marquee=true', () => {
+		render(
 			<TooltipLabel centered marquee>
 				Label
 			</TooltipLabel>
 		);
 
 		const expected = 'center';
-		const actual = subject.prop('alignment');
+		const actual = screen.getByText('Label');
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveStyle({'text-align': expected});
 	});
 
-	test('should not apply alignment when `centered` but not `marquee`', () => {
-		const subject = shallow(
-			<TooltipLabel centered>
+	test('should not apply `text-align: center` style when `centered=false`', () => {
+		render(
+			<TooltipLabel centered={false}>
 				Label
 			</TooltipLabel>
 		);
 
-		expect(subject).not.toHaveProperty('alignment');
+		const expected = 'center';
+		const actual = screen.getByText('Label');
+
+		expect(actual).not.toHaveStyle({'text-align': expected});
 	});
 
-	test('should position Tooltip above when tooltipPosition equals "above"', () => {
+	test('should have `above` class when `direction=above`', () => {
 		const tooltipText = 'This is a tooltip';
-
-		const subject = mount(
-			<TooltipButton tooltipPosition="above">
-				{tooltipText}
-			</TooltipButton>
+		render(
+			<Root>
+				<FloatingLayerBase open>
+					<Tooltip data-testid="tooltip" direction="above">
+						{tooltipText}
+					</Tooltip>
+				</FloatingLayerBase>
+			</Root>
 		);
 
 		const expected = 'above';
-		const actual = subject.find('TooltipDecorator').first().prop('tooltipPosition');
+		const actual = screen.getByTestId('tooltip');
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
-	test('should position Tooltip below when tooltipPosition equals "below"', () => {
+	test('should have `below` class when `direction=below`', () => {
 		const tooltipText = 'This is a tooltip';
-
-		const subject = mount(
-			<TooltipButton tooltipPosition="below">
-				{tooltipText}
-			</TooltipButton>
+		render(
+			<Root>
+				<FloatingLayerBase open>
+					<Tooltip data-testid="tooltip" direction="below">
+						{tooltipText}
+					</Tooltip>
+				</FloatingLayerBase>
+			</Root>
 		);
 
 		const expected = 'below';
-		const actual = subject.find('TooltipDecorator').first().prop('tooltipPosition');
+		const actual = screen.getByTestId('tooltip');
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
-	test('should position Tooltip on left when tooltipPosition equals "left middle"', () => {
+	test('should have `left` class when `direction=left`', () => {
 		const tooltipText = 'This is a tooltip';
-
-		const subject = mount(
-			<TooltipButton tooltipPosition="left middle">
-				{tooltipText}
-			</TooltipButton>
+		render(
+			<Root>
+				<FloatingLayerBase open>
+					<Tooltip data-testid="tooltip" direction="left">
+						{tooltipText}
+					</Tooltip>
+				</FloatingLayerBase>
+			</Root>
 		);
 
-		const expected = 'left middle';
-		const actual = subject.find('TooltipDecorator').first().prop('tooltipPosition');
+		const expected = 'left';
+		const actual = screen.getByTestId('tooltip');
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
-	test('should position Tooltip on right when tooltipPosition equals "right middle"', () => {
+	test('should have `right` class when `direction=right`', () => {
 		const tooltipText = 'This is a tooltip';
-
-		const subject = mount(
-			<TooltipButton tooltipPosition="right middle">
-				{tooltipText}
-			</TooltipButton>
+		render(
+			<Root>
+				<FloatingLayerBase open>
+					<Tooltip data-testid="tooltip" direction="right">
+						{tooltipText}
+					</Tooltip>
+				</FloatingLayerBase>
+			</Root>
 		);
 
-		const expected = 'right middle';
-		const actual = subject.find('TooltipDecorator').first().prop('tooltipPosition');
+		const expected = 'right';
+		const actual = screen.getByTestId('tooltip');
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveClass(expected);
 	});
 });

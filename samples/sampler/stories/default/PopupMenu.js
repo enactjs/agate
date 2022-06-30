@@ -1,7 +1,7 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
-import {useState} from 'react';
+import {boolean, select, text} from '@enact/storybook-utils/addons/controls';
+import {useCallback, useState} from 'react';
 import Button from '@enact/agate/Button';
 import LabeledIconButton from '@enact/agate/LabeledIconButton';
 import PopupMenu from '@enact/agate/PopupMenu';
@@ -14,13 +14,13 @@ const Config = mergeComponentMetadata('PopupMenu', PopupMenu);
 const Story = ({children: {props, type: Component}, ...rest}) => {
 	const [menuOpen, setMenuOpen] = useState(false);
 
-	function onClose () {
+	const onClose = useCallback(() => {
 		setMenuOpen(false);
-	}
+	}, []);
 
-	function onOpen () {
+	const onOpen = useCallback(() => {
 		setMenuOpen(true);
-	}
+	}, []);
 
 	return (
 		<div {...rest}>
@@ -39,22 +39,22 @@ export default {
 	component: 'PopupMenu'
 };
 
-export const _PopupMenu = () => {
-	const closeButton = boolean('closeButton', Config);
-	const noAutoDismiss = boolean('noAutoDismiss', Config);
+export const _PopupMenu = (args) => {
+	const closeButton = args['closeButton'];
+	const noAutoDismiss = args['noAutoDismiss'];
 
 	return (
 		<Story>
 			<PopupMenu
 				closeButton={closeButton}
-				closeButtonLabel={text('closeButtonLabel', Config)}
-				noAnimation={boolean('noAnimation', Config)}
+				closeButtonLabel={args['closeButtonLabel']}
+				noAnimation={args['noAnimation']}
 				noAutoDismiss={noAutoDismiss}
 				onClose={action('onClose')}
 				onHide={action('onHide')}
-				scrimType={select('scrimType', ['none', 'translucent', 'transparent'], Config, 'translucent')}
-				spotlightRestrict={select('spotlightRestrict', ['self-first', 'self-only'], Config, 'self-only')}
-				title={text('title', Config, 'Title')}
+				scrimType={args['scrimType']}
+				spotlightRestrict={args['spotlightRestrict']}
+				title={args['title']}
 			>
 				{!(noAutoDismiss && !closeButton) ? null : (
 					<h2 className={css.cannotClose}>
@@ -82,6 +82,14 @@ export const _PopupMenu = () => {
 		</Story>
 	);
 };
+
+boolean('closeButton', _PopupMenu, Config);
+boolean('noAutoDismiss', _PopupMenu, Config);
+text('closeButtonLabel', _PopupMenu, Config);
+boolean('noAnimation', _PopupMenu, Config);
+select('scrimType', _PopupMenu, ['none', 'translucent', 'transparent'], Config, 'translucent');
+select('spotlightRestrict', _PopupMenu, ['self-first', 'self-only'], Config, 'self-only');
+text('title', _PopupMenu, Config, 'Title');
 
 _PopupMenu.storyName = 'PopupMenu';
 _PopupMenu.parameters = {

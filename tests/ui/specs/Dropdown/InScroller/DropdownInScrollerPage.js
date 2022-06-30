@@ -44,8 +44,8 @@ class DropdownPage extends Page {
 		this.components = {dropdown1, dropdown2, dropdown3};
 	}
 
-	open (urlExtra) {
-		super.open('DropdownInScroller-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('DropdownInScroller-View', urlExtra);
 	}
 }
 

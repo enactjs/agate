@@ -15,8 +15,8 @@ class FanSpeedControlInterface {
 		return $(this.selector + ' .ArcPicker_ArcPicker_arc:nth-child(' + index + ') path:nth-child(2)');
 	}
 
-	iconValue () {
-		return  getText($(this.selector + ' .ArcPicker_ArcPicker_valueDisplay>div')).codePointAt();
+	async iconValue () {
+		return (await getText($(this.selector + ' .ArcPicker_ArcPicker_valueDisplay>div'))).codePointAt();
 	}
 
 	fanValue () {
@@ -35,8 +35,8 @@ class FanSpeedControlPage extends Page {
 		this.components = {fanSpeedControlDefault, fanSpeedControlCustom, fanSpeedControlDisabled};
 	}
 
-	open (urlExtra) {
-		super.open('FanSpeedControl-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('FanSpeedControl-View', urlExtra);
 	}
 }
 

@@ -1,6 +1,6 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select} from '@enact/storybook-utils/addons/controls';
 import ri from '@enact/ui/resolution';
 import {ScrollerBasic as UiScrollerBasic} from '@enact/ui/Scroller';
 import BodyText from '@enact/agate/BodyText';
@@ -20,17 +20,17 @@ export default {
 	component: 'Scroller'
 };
 
-export const _Scroller = () => (
+export const _Scroller = (args) => (
 	<Scroller
-		direction={select('direction', prop.direction, ScrollerConfig)}
-		focusableScrollbar={boolean('focusableScrollbar', ScrollerConfig)}
-		horizontalScrollbar={select('horizontalScrollbar', prop.scrollbarOption, ScrollerConfig)}
-		key={select('scrollMode', prop.scrollModeOption, ScrollerConfig)}
+		direction={args['direction']}
+		focusableScrollbar={args['focusableScrollbar']}
+		horizontalScrollbar={args['horizontalScrollbar']}
+		key={args['scrollMode']}
 		onScrollStart={action('onScrollStart')}
 		onScrollStop={action('onScrollStop')}
-		scrollMode={select('scrollMode', prop.scrollModeOption, ScrollerConfig)}
-		spotlightDisabled={boolean('spotlightDisabled', ScrollerConfig, false)}
-		verticalScrollbar={select('verticalScrollbar', prop.scrollbarOption, ScrollerConfig)}
+		scrollMode={args['scrollMode']}
+		spotlightDisabled={args['spotlightDisabled']}
+		verticalScrollbar={args['verticalScrollbar']}
 	>
 		<div
 			style={{
@@ -54,6 +54,13 @@ export const _Scroller = () => (
 		</div>
 	</Scroller>
 );
+
+select('direction', _Scroller, prop.direction, ScrollerConfig);
+boolean('focusableScrollbar', _Scroller, ScrollerConfig);
+select('horizontalScrollbar', _Scroller, prop.scrollbarOption, ScrollerConfig);
+select('scrollMode', _Scroller, prop.scrollModeOption, ScrollerConfig);
+boolean('spotlightDisabled', _Scroller, ScrollerConfig, false);
+select('verticalScrollbar', _Scroller, prop.scrollbarOption, ScrollerConfig);
 
 _Scroller.storyName = 'Scroller';
 _Scroller.parameters = {

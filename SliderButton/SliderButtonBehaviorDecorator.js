@@ -2,8 +2,7 @@ import {forward} from '@enact/core/handle';
 import {is} from '@enact/core/keymap';
 import platform from '@enact/core/platform';
 import PropTypes from 'prop-types';
-import {useState, useRef} from 'react';
-import {findDOMNode} from 'react-dom';
+import {useCallback, useState, useRef} from 'react';
 
 const isLeft = is('left');
 const isRight = is('right');
@@ -22,28 +21,28 @@ const SliderButtonBehaviorDecorator = (Wrapped) => {
 		const [valueText, setValueText] = useState(children ? children[0] : null);
 		const ref = useRef();
 
-		function handleChange ({value}) {
+		const handleChange = useCallback(({value}) => {
 			setValueText(children[value]);
 			forward('onChange', {
 				type: 'onChange',
 				value
 			}, props);
-		}
+		}, [children, props]);
 
-		function handleDragStart () {
+		const handleDragStart = useCallback(() => {
 			// on platforms with a touchscreen, we want to focus slider when dragging begins
 			if (platform.touchscreen) {
-				findDOMNode(ref.current).focus(); // eslint-disable-line react/no-find-dom-node
+				ref.current.node.focus();
 			}
-		}
+		}, []);
 
-		function handleKeyDown (ev) {
+		const handleKeyDown = useCallback((ev) => {
 			if (isLeft(ev.keyCode)) {
 				handleChange({value: Math.max(children.indexOf(valueText) - 1, 0)});
 			} else if (isRight(ev.keyCode)) {
 				handleChange({value: Math.min(children.indexOf(valueText) + 1, children.length - 1)});
 			}
-		}
+		}, [children, handleChange, valueText]);
 
 		return (
 			<Wrapped
