@@ -21,6 +21,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/MediaPlayer` layout issues for Cobalt, Carbon, Copper, Electro, Titanium skins
 - `agate/MediaPlayer` shuffle button color for Cobalt, and Copper skins
 - `agate/Panel` and `agate/TabGroup` padding for RTL locales
+- `agate/Picker` and `agate/RangePicker` to match latest design for Silicon skin
 - `agate/PopupMenu` title to marquee for long text
 - `agate/RadioItem` icons to not be bigger than icon container
 - `agate/TabGroup` button padding for Cobalt and Copper skins
