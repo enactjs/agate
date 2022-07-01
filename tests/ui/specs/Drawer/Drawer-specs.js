@@ -55,7 +55,6 @@ describe('Drawer', function () {
 
 				await expectOpen(drawerCommon);
 
-				// Add delay for Jenkins fail that cancel button is clicked before drawer is fully opened.
 				await Page.spotlightRight();
 				await Page.spotlightSelect();
 
@@ -79,8 +78,8 @@ describe('Drawer', function () {
 				await Page.waitForOpen(drawer);
 
 				await expectOpen(drawerCommon);
+				await browser.pause(400);
 
-				// Add delay for Jenkins fail that cancel button is clicked before drawer is fully opened.
 				await drawer.buttonCancel.click();
 				await Page.waitForClose(drawer);
 				await browser.pause(400);
@@ -118,7 +117,6 @@ describe('Drawer', function () {
 
 				await expectOpen(drawerCommon);
 
-				// Add delay for Jenkins fail that cancel button is clicked before drawer is fully opened.
 				await Page.spotlightRight();
 				await Page.spotlightSelect();
 				await Page.waitForClose(drawer);
@@ -184,7 +182,6 @@ describe('Drawer', function () {
 
 				await expectOpen(drawerCommon);
 
-				// Add delay for Jenkins fail that cancel button is clicked before drawer is fully opened.
 				await Page.spotlightRight();
 				await Page.spotlightSelect();
 
@@ -210,7 +207,6 @@ describe('Drawer', function () {
 
 				await expectOpen(drawerCommon);
 
-				// Add delay for Jenkins fail that cancel button is clicked before drawer is fully opened.
 				await drawer.buttonCancel.click();
 				await Page.waitForClose(drawer);
 				await browser.pause(400);
@@ -255,7 +251,6 @@ describe('Drawer', function () {
 
 				await expectNoneScrimOpen(drawerCommon);
 
-				// Add delay for Jenkins fail that cancel button is clicked before drawer is fully opened.
 				await Page.spotlightRight();
 				await Page.spotlightSelect();
 				await Page.waitForClose(drawer);

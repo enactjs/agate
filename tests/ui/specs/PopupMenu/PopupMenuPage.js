@@ -96,6 +96,7 @@ class PopupMenuPage extends Page {
 		if (typeof selector !== 'string') selector = `#${selector.id}`;
 
 		await $(selector).waitForExist({timeout});
+		await this.delay(300);
 	}
 
 	async waitForClose (selector, timeout) {
