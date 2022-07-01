@@ -20,6 +20,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/MediaPlayer` shuffle button color for Cobalt, and Copper skins
 - `agate/Panel` and `agate/TabGroup` padding for RTL locales
 - `agate/PopupMenu` title to marquee for long text
+- `agate/RadioItem` icons to not be bigger than icon container
 - `agate/TabGroup` button padding for Cobalt and Copper skins
 - `agate/VirtualList` 5-way navigation between scroll buttons when `focusableScrollbar`
 
