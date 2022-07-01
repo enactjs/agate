@@ -7,12 +7,12 @@ class TooltipButtonInterface {
 		this.selector = `#${this.id}`;
 	}
 
-	focus () {
-		return browser.execute((el) => el.focus(), $(this.selector));
+	async focus () {
+		return browser.execute((el) => el.focus(), await $(this.selector));
 	}
 
-	hover () {
-		return $(this.selector).moveTo({xOffset: 0, yOffset: 0});
+	async hover () {
+		return await $(this.selector).moveTo({xOffset: 0, yOffset: 0});
 	}
 
 	get self () {
@@ -51,8 +51,8 @@ class TooltipDecoratorPage extends Page {
 		this.components = {tooltipButtonDefault, tooltipButtonDelayed, tooltipButtonDisabled};
 	}
 
-	open (urlExtra) {
-		super.open('TooltipDecorator-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('TooltipDecorator-View', urlExtra);
 	}
 }
 

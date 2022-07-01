@@ -1,6 +1,6 @@
 import {action} from '@enact/storybook-utils/addons/actions';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, number, select} from '@enact/storybook-utils/addons/controls';
 import {useState} from 'react';
 import PropTypes from 'prop-types';
 import Button from '@enact/agate/Button';
@@ -16,7 +16,7 @@ TabbedPanels.displayName = 'TabbedPanels';
 const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase);
 // `paddingBottom: '56.25%'` is a trick to impose 16:9 aspect ratio on the component, since padding percentage is based on the width, not the height.
 
-const I18nTabbedPanelsBase = ({rtl, ...rest}) => {
+const I18nTabbedPanelsBase = ({orientation, rtl, ...rest}) => {
 	const [panelIndex, setIndex] = useState(Config.defaultProps.index || 0);
 	const onSelect = (e) => {
 		setIndex(e.index);
@@ -28,7 +28,6 @@ const I18nTabbedPanelsBase = ({rtl, ...rest}) => {
 	const onAfterTabs = () => {
 		setIndex(Math.min(panelIndex + 1, 2));
 	};
-	const orientation = select('orientation', ['vertical', 'horizontal'], Config, 'vertical');
 
 	return (
 		<div style={{paddingBottom: '56.25%'}}>
@@ -37,7 +36,6 @@ const I18nTabbedPanelsBase = ({rtl, ...rest}) => {
 				index={panelIndex}
 				onSelect={onSelect} // eslint-disable-line react/jsx-no-bind
 				orientation={orientation}
-				tabPosition={select('tabPosition', ['before', 'after'], Config, 'before')}
 				tabs={[
 					{title: 'Button', icon: 'netbook'},
 					{title: 'Item', icon: 'aircirculation'},
@@ -87,7 +85,9 @@ const I18nTabbedPanelsBase = ({rtl, ...rest}) => {
 };
 
 I18nTabbedPanelsBase.propTypes = {
-	rtl: PropTypes.bool
+	orientation: PropTypes.string,
+	rtl: PropTypes.bool,
+	tabPosition: PropTypes.string
 };
 
 const I18nTabbedPanels = I18nContextDecorator({rtlProp: 'rtl'}, I18nTabbedPanelsBase);
@@ -97,13 +97,20 @@ export default {
 	component: 'TabbedPanels'
 };
 
-export const _TabbedPanels = () => (
+export const _TabbedPanels = (args) => (
 	<I18nTabbedPanels
-		duration={number('duration', Config, 500)}
+		duration={args['duration']}
 		onClick={action('onClick')}
-		noCloseButton={boolean('noCloseButton', Config)}
+		noCloseButton={args['noCloseButton']}
+		orientation={args['orientation']}
+		tabPosition={args['tabPosition']}
 	/>
 );
+
+select('orientation', _TabbedPanels, ['vertical', 'horizontal'], Config, 'vertical');
+select('tabPosition', _TabbedPanels, ['before', 'after'], Config, 'before');
+number('duration', _TabbedPanels, Config, 500);
+boolean('noCloseButton', _TabbedPanels, Config);
 
 _TabbedPanels.storyName = 'TabbedPanels';
 _TabbedPanels.parameters = {

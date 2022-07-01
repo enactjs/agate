@@ -26,8 +26,8 @@ class ArcPickerPage extends Page {
 		this.components = {arcPickerDefault, arcPickerCumulative, arcPickerDisabled};
 	}
 
-	open (urlExtra) {
-		super.open('ArcPicker-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('ArcPicker-View', urlExtra);
 	}
 }
 

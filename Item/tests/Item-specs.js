@@ -1,161 +1,123 @@
-import {mount, shallow} from 'enzyme';
+import '@testing-library/jest-dom';
+import {render, screen} from '@testing-library/react';
 
-import {Item, ItemBase} from '../Item';
-
-import css from '../Item.module.less';
+import {ItemBase} from '../Item';
 
 describe('Item Specs', () => {
 	test('should render an Item with content', () => {
-		const content = 'Hello Item';
+		const expected = 'Hello Item';
+		render(<ItemBase>{expected}</ItemBase>);
 
-		const item = mount(
-			<Item>{content}</Item>
-		);
+		const actual = screen.getByText(expected);
 
-		const expected = content;
-		const actual = item.text();
-
-		expect(actual).toBe(expected);
+		expect(actual).toHaveTextContent(expected);
 	});
 
 	test('should support adding a `label`', () => {
-		const expected = 'Item Label';
+		const expected = 'Example Label';
+		render(<ItemBase label={expected}>Hello Item</ItemBase>);
 
-		const item = mount(
-			<Item label={expected}>Hello Item</Item>
-		);
+		const label = screen.getByText('Hello Item');
 
-		const actual = item.find(`.${css.label}`).first().text();
-
-		expect(actual).toBe(expected);
+		expect(label).toBeInTheDocument();
 	});
 
 	test('should support label with 0', () => {
-		const item = mount(
-			<Item label={0}>Hello Item</Item>
-		);
-
 		const expected = '0';
-		const actual = item.find(`.${css.label}`).first().text();
+		render(<ItemBase label={expected}>Hello Item</ItemBase>);
 
-		expect(actual).toBe(expected);
+		const label = screen.getByText(expected);
+
+		expect(label).toBeInTheDocument();
 	});
 
 	test('should support adding text as a child when a label is also set', () => {
 		const expected = 'Hello Item';
+		render(<ItemBase label="Example Label">{expected}</ItemBase>);
 
-		const item = mount(
-			<Item label="Item label">
-				{expected}
-			</Item>
-		);
+		const actual = screen.getByText(expected);
 
-		const actual = item.find(`.${css.content}`).first().text();
-
-		expect(actual).toBe(expected);
+		expect(actual).toBeInTheDocument();
 	});
 
 	test('should support `slotBefore`', () => {
 		const expected = 'slot before';
+		render(<ItemBase slotBefore={expected}>Hello Item</ItemBase>);
 
-		const item = mount(
-			<Item slotBefore={expected}>
-				Hello Item
-			</Item>
-		);
+		const actual = screen.getByText(expected);
 
-		const actual = item.find(`.${css.slotBefore}`).last().text();
-
-		expect(actual).toBe(expected);
+		expect(actual).toBeInTheDocument();
 	});
 
 	test('should support `slotAfter`', () => {
 		const expected = 'slot after';
+		render(<ItemBase slotAfter={expected}>Hello Item</ItemBase>);
 
-		const item = mount(
-			<Item slotAfter={expected}>
-				Hello Item
-			</Item>
-		);
+		const actual = screen.getByText(expected);
 
-		const actual = item.find(`.${css.slotAfter}`).last().text();
-
-		expect(actual).toBe(expected);
+		expect(actual).toBeInTheDocument();
 	});
 
 	test('should support repositioning of the label', () => {
-		const item = mount(
-			<Item labelPosition="above" label="Item label">
-				Hello Item
-			</Item>
-		);
+		render(<ItemBase data-testid="item" label="my label" labelPosition="above">Hello Item</ItemBase>);
 
-		const expected = css.labelAbove;
-		const actual = item.find(`.${css.itemContent}`).first().prop('className');
+		const expected = 'labelAbove';
+		const actual = screen.getByTestId('item').children[0];
 
-		expect(actual).toContain(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should not include the selected class when not selected', () => {
-		const item = mount(
-			<Item>Hello Item</Item>
-		);
+		render(<ItemBase data-testid="item">Hello Item</ItemBase>);
 
 		const expected = 'selected';
-		const actual = item.find(`div.${css.item}`).prop('className');
+		const actual = screen.getByTestId('item');
 
-		expect(actual).not.toContain(expected);
+		expect(actual).not.toHaveClass(expected);
 	});
 
 	test('should add the selected class when given the selected prop', () => {
-		const item = mount(
-			<Item selected>Hello Item</Item>
-		);
+		render(<ItemBase data-testid="item" selected>Hello Item</ItemBase>);
 
 		const expected = 'selected';
-		const actual = item.find(`div.${css.item}`).prop('className');
+		const actual = screen.getByTestId('item');
 
-		expect(actual).toContain(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should apply small class when size prop is `small`', () => {
-		const item = shallow(
-			<ItemBase size="small">Hello Item</ItemBase>
-		);
+		render(<ItemBase data-testid="item" size="small" />);
 
 		const expected = 'small';
-		const actual = item.first().prop('className');
+		const actual = screen.getByTestId('item');
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should apply large class by default', () => {
-		const item = shallow(
-			<ItemBase>Hello Item</ItemBase>
-		);
+		render(<ItemBase data-testid="item" />);
 
 		const expected = 'large';
-		const actual = item.first().prop('className');
+		const actual = screen.getByTestId('item');
 
-		expect(actual).toBe(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should apply centered class when centered prop is true', () => {
-		const item = shallow(
-			<ItemBase centered>Hello Item</ItemBase>
-		);
+		render(<ItemBase centered data-testid="item" />);
 
 		const expected = 'centered';
-		const actual = item.first().prop('className');
+		const actual = screen.getByTestId('item');
 
-		expect(actual).toContain(expected);
+		expect(actual).toHaveClass(expected);
 	});
 
 	test('should support RTL text', () => {
-		const subject = mount(<ItemBase>Hello מצב תמונה</ItemBase>);
+		const text = 'Hello מצב תמונה';
+		render(<ItemBase>{text}</ItemBase>);
 
 		const expected = 'rtl';
-		const actual = subject.find('.text').prop('style');
+		const actual = screen.getByText(text).style;
 
 		expect(actual).toHaveProperty('direction', expected);
 	});

@@ -7,8 +7,8 @@ class RangePickerInterface {
 		this.id = id;
 	}
 
-	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}>div`));
+	async focus () {
+		return browser.execute((el) => el.focus(), await $(`#${this.id}>div`));
 	}
 
 	get self () {
@@ -42,8 +42,8 @@ class RangePickerPage extends Page {
 		this.components = {rangePickerDefault, rangePickerDisabled, rangePickerWithNegativeValues};
 	}
 
-	open (urlExtra) {
-		super.open('RangePicker-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('RangePicker-View', urlExtra);
 	}
 }
 

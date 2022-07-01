@@ -1,5 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select, text} from '@enact/storybook-utils/addons/controls';
 import BodyText from '@enact/ui/BodyText';
 import Heading, {HeadingBase} from '@enact/agate/Heading';
 
@@ -20,20 +20,20 @@ export default {
 	component: 'Heading'
 };
 
-export const _Heading = () => {
-	const knobProps = {
-		color: select('color', prop.colors, Config),
-		disabled: boolean('disabled', Config),
-		marqueeOn: select('marqueeOn', prop.marqueeOn, Config),
-		showBackButton: boolean('showBackButton', Config),
-		showLine: boolean('showLine', Config),
-		size: select('size', prop.sizes, Config),
-		spacing: select('spacing', prop.spacings, Config)
+export const _Heading = (args) => {
+	const actionProps = {
+		color: args['color'],
+		disabled: args['disabled'],
+		marqueeOn: args['marqueeOn'],
+		showBackButton: args['showBackButton'],
+		showLine: args['showLine'],
+		size: args['size'],
+		spacing: args['spacing']
 	};
 	return (
 		<>
-			<Heading {...knobProps}>
-				{text('children', Config, 'Heading Text')}
+			<Heading {...actionProps}>
+				{args['children']}
 			</Heading>
 			<BodyText
 				centered
@@ -44,7 +44,7 @@ export const _Heading = () => {
 				<span className={css.spacingNote}>
 					Choose a different skin from the Global Knobs to see!
 				</span>
-				{(knobProps.size === 'title' || typeof knobProps.color === 'undefined') ? null : (
+				{(actionProps.size === 'title' || typeof actionProps.color === 'undefined') ? null : (
 					<span>
 						<br />
 						<strong>Note</strong>: The <code>color</code> prop only applies when the <code>size</code> prop is &quot;title&quot;.
@@ -54,6 +54,15 @@ export const _Heading = () => {
 		</>
 	);
 };
+
+select('color', _Heading, prop.colors, Config);
+boolean('disabled', _Heading, Config);
+select('marqueeOn', _Heading, prop.marqueeOn, Config);
+boolean('showBackButton', _Heading, Config);
+boolean('showLine', _Heading, Config);
+select('size', _Heading, prop.sizes, Config);
+select('spacing', _Heading, prop.spacings, Config);
+text('children', _Heading, Config, 'Heading Text');
 
 _Heading.storyName = 'Heading';
 _Heading.parameters = {

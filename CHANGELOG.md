@@ -2,6 +2,29 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [2.0.0] - 2022-07-01
+
+- Update dependencies including React 18.0.0
+
+### Added
+
+- `agate/Header` Marquee for title, subtitle, and titleAbove
+
+### Deprecated
+
+- `agate/GridListImageItem`, to be removed in 2.0.0. Use `agate/ImageItem` instead
+
+### Fixed
+
+- `agate/ContextualPopupDecorator` layout for Carbon, Cobalt, Copper, Electro, Titanium skins
+- `agate/IncrementSlider` style to have a proper layout for every skin
+- `agate/MediaPlayer` layout issues for Cobalt, Carbon, Copper, Electro, Titanium skins
+- `agate/MediaPlayer` shuffle button color for Cobalt, and Copper skins
+- `agate/Panel` and `agate/TabGroup` padding for RTL locales
+- `agate/PopupMenu` title to marquee for long text
+- `agate/TabGroup` button padding for Cobalt and Copper skins
+- `agate/VirtualList` 5-way navigation between scroll buttons when `focusableScrollbar`
+
 ## [2.0.0-beta.2] - 2021-06-24
 
 ### Added
@@ -17,6 +40,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Heading` style to match latest design for Silicon skin
 - `agate/Heading` position of underline when size="tile" on Carbon, Cobalt, Copper, Electro, Titanium skins
 - `agate/Input` to match latest design for Silicon skin
+- `agate/Item` for inline with label and labelPosition "after" or "before" on Gallium skin to not change item width on hover
 - `agate/Keypad` to match latest design for Silicon skin
 - `agate/LabeledIconButton` to match the latest design for Silicon skin
 - `agate/MediaPlayer` style to match latest design for Silicon skin

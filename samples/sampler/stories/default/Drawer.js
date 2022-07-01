@@ -1,7 +1,7 @@
 import convert from 'color-convert';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, number, select, text} from '@enact/storybook-utils/addons/knobs';
+import {boolean, range, select, text} from '@enact/storybook-utils/addons/controls';
 import BodyText from '@enact/ui/BodyText';
 import Drawer, {DrawerBase} from '@enact/agate/Drawer';
 import Heading from '@enact/agate/Heading';
@@ -37,10 +37,10 @@ export default {
 	component: 'Drawer'
 };
 
-export const _Drawer = () => {
-	const noDrawerAnimation = boolean('noAnimation', Config); // moved out of component to force order of knobs in the story
-	const drawerBackgroundColor = select('Drawer background color', drawerColors, StoryOptions);
-	const drawerBackgroundOpacity = number('Drawer background opacity', StoryOptions, opacityRange, 0.85);
+export const _Drawer = (args) => {
+	const noDrawerAnimation = args['noAnimation'];
+	const drawerBackgroundColor = args['Drawer background color'];
+	const drawerBackgroundOpacity = args['Drawer background opacity'];
 	const drawerStyle = {};
 
 	if (drawerBackgroundColor && drawerBackgroundOpacity) {
@@ -57,17 +57,17 @@ export const _Drawer = () => {
 				may be difficult to see the contents clearly.<br />
 				<br />
 				You can override the background color for the Drawer in the Story Options or
-				choose a different skin (or night mode🌛) from the Global Knobs to see!
+				choose a different skin (or night mode🌛) from the Global Controls to see!
 			</span>
 			<Drawer
 				noAnimation={noDrawerAnimation}
 				onHide={action('onHide')}
-				open={boolean('open', Config)}
+				open={args['open']}
 				style={drawerStyle}
 			>
 				<header>
 					<Heading>
-						{text('header', Config, '[insert witty header text]')}
+						{args['header']}
 					</Heading>
 				</header>
 				<BodyText>
@@ -77,12 +77,19 @@ export const _Drawer = () => {
 					The Heading props can be adjusted in Story Options.
 				</BodyText>
 				<footer>
-					{text('footer', Config, '')}
+					{args['footer']}
 				</footer>
 			</Drawer>
 		</BodyText>
 	);
 };
+
+boolean('noAnimation', _Drawer, Config);
+select('Drawer background color', _Drawer, drawerColors, StoryOptions);
+range('Drawer background opacity', _Drawer, StoryOptions, opacityRange, 0.85);
+boolean('open', _Drawer, Config);
+text('header', _Drawer, Config, '[insert witty header text]');
+text('footer', _Drawer, Config, '');
 
 _Drawer.storyName = 'Drawer';
 _Drawer.parameters = {

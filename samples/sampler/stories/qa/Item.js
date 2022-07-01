@@ -1,5 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select, text} from '@enact/storybook-utils/addons/controls';
 import UiItem, {ItemBase as UiItemBase} from '@enact/ui/Item';
 import Heading from '@enact/agate/Heading';
 import Icon, {icons} from '@enact/agate/Icon';
@@ -16,32 +16,42 @@ export default {
 	component: 'Item'
 };
 
-export const withIconsAndSlotAfter = () => {
+export const withIconsAndSlotAfter = (args) => {
 	const slotBeforeIcon = select('slotBefore Icon', iconList, Config);
 	const slotAfter = [
-		select('slotAfter Icon 1', iconList, Config),
-		select('slotAfter Icon 2', iconList, Config),
-		text('slotAfter Text', Config, 'Sub Text')
+		args['slotAfter Icon 1'],
+		args['slotAfter Icon 2'],
+		args['slotAfter Text']
 	].filter(subText => !!subText).map(subText => (iconList.indexOf(subText) > 0 ? <Icon key={subText}>{subText}</Icon> : subText));
 
 	return (
 		<Item
-			disabled={boolean('disabled', Config)}
-			inline={boolean('inline', Config)}
-			label={text('label', Config)}
-			labelPosition={select('labelPosition', ['above', 'after', 'before', 'below'], Config, 'below')}
-			selected={boolean('selected', Config)}
+			disabled={args['disabled']}
+			inline={args['inline']}
+			label={args['label']}
+			labelPosition={args['labelPosition']}
+			selected={args['selected']}
 		>
 			{slotBeforeIcon ? <slotBefore>
 				<Icon>{slotBeforeIcon}</Icon>
 			</slotBefore> : null}
-			{text('children', Config, 'Hello Item')}
+			{args['children']}
 			{slotAfter.length > 0 ? <slotAfter>
 				{slotAfter}
 			</slotAfter> : null}
 		</Item>
 	);
 };
+
+select('slotAfter Icon 1', withIconsAndSlotAfter, iconList, Config);
+select('slotAfter Icon 2', withIconsAndSlotAfter, iconList, Config);
+text('slotAfter Text', withIconsAndSlotAfter, Config, 'Sub Text');
+boolean('disabled', withIconsAndSlotAfter, Config);
+boolean('inline', withIconsAndSlotAfter, Config);
+text('label', withIconsAndSlotAfter, Config);
+select('labelPosition', withIconsAndSlotAfter, ['above', 'after', 'before', 'below'], Config, 'below');
+boolean('selected', withIconsAndSlotAfter, Config);
+text('children', withIconsAndSlotAfter, Config, 'Hello Item');
 
 withIconsAndSlotAfter.storyName = 'with icons and a text in slotAfter';
 

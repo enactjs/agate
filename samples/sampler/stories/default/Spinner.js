@@ -1,5 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
-import {boolean, select, text} from '@enact/storybook-utils/addons/knobs';
+import {boolean, select, text} from '@enact/storybook-utils/addons/controls';
 import kind from '@enact/core/kind';
 import UiSpinner, {SpinnerBase as UiSpinnerBase} from '@enact/ui/Spinner';
 import ri from '@enact/ui/resolution';
@@ -29,7 +29,7 @@ export default {
 	component: 'Spinner'
 };
 
-export const _Spinner = () => (
+export const _Spinner = (args) => (
 	<div
 		style={{
 			outline: 'teal dashed 1px',
@@ -76,19 +76,28 @@ export const _Spinner = () => (
 				}}
 			/>
 			<SkinnedSpinner
-				blockClickOn={select('blockClickOn', [null, 'container', 'screen'], Config)}
-				centered={boolean('centered', Config)}
-				paused={boolean('paused', Config)}
-				scrim={boolean('scrim', Config)}
-				size={select('size', ['huge', 'large', 'small', 'smallest'], Config)}
-				type={select('type', ['loading', 'searching'], Config, 'searching')}
-				transparent={boolean('transparent', Config)}
+				blockClickOn={args['blockClickOn']}
+				centered={args['centered']}
+				paused={args['paused']}
+				scrim={args['scrim']}
+				size={args['size']}
+				type={args['type']}
+				transparent={args['transparent']}
 			>
-				{text('content', Config, '')}
+				{args['content']}
 			</SkinnedSpinner>
 		</div>
 	</div>
 );
+
+select('blockClickOn', _Spinner, [null, 'container', 'screen'], Config);
+boolean('centered', _Spinner, Config);
+boolean('paused', _Spinner, Config);
+boolean('scrim', _Spinner, Config);
+select('size', _Spinner, ['huge', 'large', 'small', 'smallest'], Config);
+select('type', _Spinner, ['loading', 'searching'], Config, 'searching');
+boolean('transparent', _Spinner, Config);
+text('content', _Spinner, Config, '');
 
 _Spinner.storyName = 'Spinner';
 _Spinner.parameters = {

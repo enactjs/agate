@@ -1,22 +1,22 @@
 const Page = require('../VirtualListPage');
 
 describe('RTL locale', function () {
-	beforeEach(function () {
-		Page.open('', '?locale=ar-SA');
+	beforeEach(async function () {
+		await Page.open('', '?locale=ar-SA');
 	});
 
-	it('should position Scrollbar Track on left side in RTL', function () {
-		expect(Page.getListRect().left > Page.getVerticalScrollbarRect().left).to.be.true();
+	it('should position Scrollbar Track on left side in RTL', async function () {
+		expect((await Page.getListRect()).left > (await Page.getVerticalScrollbarRect()).left).to.be.true();
 	});
 
-	it('should Verify RTL functionality', function () {
+	it('should Verify RTL functionality', async function () {
 		// Check that the button's position is Right-> Left.(in case RTL, button position is 'Right' - 'Left')
-		Page.buttonLeft.moveTo();
-		expect(Page.buttonLeft.isFocused(), 'focus left');
-		Page.spotlightLeft();
-		Page.spotlightLeft();
-		expect(Page.buttonRight.isFocused(), 'focus Right');
+		await (Page.buttonLeft).moveTo();
+		expect(await Page.buttonLeft.isFocused(), 'focus left');
+		await Page.spotlightLeft();
+		await Page.spotlightLeft();
+		expect(await Page.buttonRight.isFocused(), 'focus Right');
 		// Verify Vertical Scrollbar displays on the left side.
-		expect(Page.getListRect().left > Page.getVerticalScrollbarRect().left).to.be.true();
+		expect((await Page.getListRect()).left > (await Page.getVerticalScrollbarRect()).left).to.be.true();
 	});
 });

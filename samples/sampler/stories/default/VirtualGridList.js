@@ -1,5 +1,5 @@
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, number, select} from '@enact/storybook-utils/addons/knobs';
+import {boolean, number, select} from '@enact/storybook-utils/addons/controls';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import ri from '@enact/ui/resolution';
 import {VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
@@ -50,7 +50,7 @@ const updateDataSize = (dataSize) => {
 			count = (headingZeros + i).slice(-itemNumberDigits),
 			text = `Item ${count}${shouldAddLongContent({index: i, modIndex: 2})}`,
 			color = Math.floor((Math.random() * (0x1000000 - 0x101010)) + 0x101010).toString(16),
-			src = `http://placehold.it/300x300/${color}/ffffff&text=Image ${i}`;
+			src = `http://via.placeholder.com/300x300/${color}/ffffff/png?text=Image+${i}`;
 
 		items.push({text, src});
 	}
@@ -65,27 +65,38 @@ export default {
 	component: 'VirtualList.VirtualGridList'
 };
 
-export const _VirtualGridList = () => {
+export const _VirtualGridList = (args) => {
 	return (
 		<VirtualGridList
-			dataSize={updateDataSize(number('dataSize', VirtualGridListConfig, defaultDataSize))}
-			direction={select('direction', prop.direction, VirtualGridListConfig)}
-			focusableScrollbar={boolean('focusableScrollbar', VirtualGridListConfig)}
-			horizontalScrollbar={select('horizontalScrollBar', prop.scrollBarOption, VirtualGridListConfig)}
+			dataSize={updateDataSize(args['dataSize'])}
+			direction={args['direction']}
+			focusableScrollbar={args['focusableScrollbar']}
+			horizontalScrollbar={args['horizontalScrollBar']}
 			itemRenderer={renderItem}
 			itemSize={{
-				minWidth: ri.scale(number('minWidth', VirtualGridListConfig, 180)),
-				minHeight: ri.scale(number('minHeight', VirtualGridListConfig, 270))
+				minWidth: ri.scale(args['minWidth']),
+				minHeight: ri.scale(args['minHeight'])
 			}}
 			onScrollStart={action('onScrollStart')}
 			onScrollStop={action('onScrollStop')}
-			spacing={ri.scale(number('spacing', VirtualGridListConfig, 20))}
-			spotlightDisabled={boolean('spotlightDisabled', VirtualGridListConfig, false)}
-			verticalScrollbar={select('verticalScrollBar', prop.scrollBarOption, VirtualGridListConfig)}
-			wrap={wrapOption[select('wrap', ['false', 'true', '"noAnimation"'], VirtualGridListConfig)]}
+			spacing={ri.scale(args['spacing'])}
+			spotlightDisabled={args['spotlightDisabled']}
+			verticalScrollbar={args['verticalScrollBar']}
+			wrap={wrapOption[args['wrap']]}
 		/>
 	);
 };
+
+number('dataSize', _VirtualGridList, VirtualGridListConfig, defaultDataSize);
+select('direction', _VirtualGridList, prop.direction, VirtualGridListConfig);
+boolean('focusableScrollbar', _VirtualGridList, VirtualGridListConfig);
+select('horizontalScrollBar', _VirtualGridList, prop.scrollBarOption, VirtualGridListConfig);
+number('minWidth', _VirtualGridList, VirtualGridListConfig, 180);
+number('minHeight', _VirtualGridList, VirtualGridListConfig, 270);
+number('spacing', _VirtualGridList, VirtualGridListConfig, 20);
+boolean('spotlightDisabled', _VirtualGridList, VirtualGridListConfig, false);
+select('verticalScrollBar', _VirtualGridList, prop.scrollBarOption, VirtualGridListConfig);
+select('wrap', _VirtualGridList, ['false', 'true', '"noAnimation"'], VirtualGridListConfig);
 
 _VirtualGridList.storyName = 'VirtualList.VirtualGridList';
 _VirtualGridList.parameters = {

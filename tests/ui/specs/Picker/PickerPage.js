@@ -7,8 +7,8 @@ class PickerInterface {
 		this.id = id;
 	}
 
-	focus () {
-		return browser.execute((el) => el.focus(), $(`#${this.id}>div`));
+	async focus () {
+		return browser.execute((el) => el.focus(), await $(`#${this.id}>div`));
 	}
 
 	get self () {
@@ -42,8 +42,8 @@ class PickerPage extends Page {
 		this.components = {pickerDefault, pickerDisabled, pickerWithDefaultValue};
 	}
 
-	open (urlExtra) {
-		super.open('Picker-View', urlExtra);
+	async open (urlExtra) {
+		await super.open('Picker-View', urlExtra);
 	}
 }
 
