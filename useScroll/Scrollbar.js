@@ -1,6 +1,6 @@
 import {useScrollbar as useScrollbarBase} from '@enact/ui/useScroll/Scrollbar';
 import PropTypes from 'prop-types';
-import {memo, useEffect} from 'react';
+import {memo, useLayoutEffect} from 'react';
 
 import ScrollButton from './ScrollButton';
 import useScrollButtons from './ScrollButtons';
@@ -86,7 +86,7 @@ const ScrollbarBase = memo((props) => {
 
 	const {disabled, nextButtonAriaLabel, previousButtonAriaLabel, rtl, vertical} = scrollbarButtonsProps;
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const {scrollbarHandle} = props;
 		const {update: uiUpdate} = scrollbarHandle.current;
 
@@ -132,7 +132,7 @@ ScrollbarBase.propTypes = /** @lends agate/useScroll.Scrollbar.prototype */ {
 	/**
 	 * If `true`, add the corner between vertical and horizontal scrollbars.
 	 *
-	 * @type {Booelan}
+	 * @type {Boolean}
 	 * @default false
 	 * @public
 	 */
