@@ -6,10 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Removed
 
-- `agate/AgateDecorator` component
-- `agate/FullscreenPopup` component 
-- `agate/GridListImageItem` component 
-- `agate/LabeledItem` component
+- `agate/AgateDecorator`, `agate/FullscreenPopup`, `agate/GridListImageItem` and `agate/LabeledItem` component
 
 ## [2.0.0] - 2022-07-01
 
