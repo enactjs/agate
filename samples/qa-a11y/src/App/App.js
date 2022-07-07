@@ -23,7 +23,6 @@ import DateTimePicker from '../views/DateTimePicker';
 import Drawer from '../views/Drawer';
 import Dropdown from '../views/Dropdown';
 import FanSpeedControl from '../views/FanSpeedControl';
-import FullscreenPopup from '../views/FullscreenPopup';
 import Header from '../views/Header';
 import Heading from '../views/Heading';
 import ImageItem from '../views/ImageItem';
@@ -79,7 +78,6 @@ const views = [
 	{title: 'Drawer', view: Drawer},
 	{title: 'Dropdown', view: Dropdown},
 	{title: 'FanSpeedControl', view: FanSpeedControl},
-	{title: 'FullscreenPopup', view: FullscreenPopup},
 	{isHeader: false, title: 'Header', view: Header},
 	{title: 'Heading', view: Heading},
 	{title: 'ImageItem', view: ImageItem},
