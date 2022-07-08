@@ -19,7 +19,15 @@
 		}
 
 		.focusBackground {
-			height: 0;
+			width: calc(100% - 2 * (@agate-picker-padding + @agate-datetimepicker-divider-width));
+			z-index: 0;
+		}
+
+		&:focus-within,
+		&:hover {
+			.focusBackground {
+				display: block;
+			}
 		}
 
 		&::before {

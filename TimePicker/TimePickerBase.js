@@ -261,7 +261,7 @@ const TimePickerBase = kind({
 		delete rest.rtl;
 
 		return (
-			<DateTime {...rest} css={css}>
+			<DateTime {...rest} css={css} disabled={disabled}>
 				{order && order.map((picker) => {
 					switch (picker) {
 						case 'h':
