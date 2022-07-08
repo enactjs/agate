@@ -2,6 +2,12 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Removed
+
+- `agate/AgateDecorator`, `agate/FullscreenPopup`, `agate/GridListImageItem` and `agate/LabeledItem` component
+
 ## [2.0.0] - 2022-07-01
 
 - Update dependencies including React 18.0.0
