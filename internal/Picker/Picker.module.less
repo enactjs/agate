@@ -32,17 +32,16 @@
 		transform: @agate-picker-transform;
 		margin: @agate-picker-margin;
 		padding: @agate-picker-padding;
-		padding-left: 9px;
 
 		.focusBackground {
-			height: calc(100% - 2 * @agate-picker-padding);
+			height: ~"calc(100% - 2 *" (.extract(@agate-picker-padding, top)[]) ~")";
 			background-color: @agate-picker-focus-bg-color;
 			background-image: @agate-picker-focus-bg-image;
 		}
 
-		&[disabled] {
-			opacity: @agate-disabled-opacity;
-		}
+		.disabled({
+			opacity: @agate-picker-disabled-opacity;
+		});
 
 		&:focus-within,
 		&:hover {
