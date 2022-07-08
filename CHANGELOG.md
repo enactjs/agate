@@ -6,7 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
-- `agate/MediaPlayer` layout issues for Cobalt, Carbon, Copper, Titanium skins
+- `agate/MediaPlayer` layout issues for Cobalt, Carbon, Copper, Electro, Titanium skins
 - `agate/Picker` and `agate/RangePicker` to match latest design for Silicon skin
 
 ### Removed
