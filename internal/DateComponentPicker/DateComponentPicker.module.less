@@ -23,12 +23,11 @@
 			z-index: 0;
 		}
 
-		&:focus-within,
-		&:hover {
+		.focus({
 			.focusBackground {
 				display: block;
 			}
-		}
+		});
 
 		&::before {
 			position: absolute;
