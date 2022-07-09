@@ -19,7 +19,7 @@
 		}
 
 		.focusBackground {
-			width: calc(100% - 2 * (@agate-picker-padding + @agate-datetimepicker-divider-width));
+			width: ~"calc(100% - 2 *" (.extract(@agate-picker-padding, top)[] + @agate-datetimepicker-divider-width)~ ")";
 			z-index: 0;
 		}
 

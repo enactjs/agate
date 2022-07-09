@@ -31,7 +31,7 @@
 		border-radius: @agate-picker-border-radius;
 		transform: @agate-picker-transform;
 		margin: @agate-picker-margin;
-		padding: @agate-picker-padding;
+		.padding-start-end(@agate-picker-padding);
 
 		.focusBackground {
 			height: ~"calc(100% - 2 *" (.extract(@agate-picker-padding, top)[]) ~")";
