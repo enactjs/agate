@@ -6,6 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
+- `agate/DatePicker`, `agate/DateTimePicker`, and `agate/TimePicker` to match latest design for Silicon skin
 - `agate/MediaPlayer` layout issues for Cobalt, Carbon, Copper, Electro, Titanium skins
 - `agate/Picker` and `agate/RangePicker` to match latest design for Silicon skin
 
