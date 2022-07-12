@@ -32,10 +32,14 @@ const FirstPanel = kind({
 const SecondPanel = kind({
 	name: 'SecondPanel',
 
-	render: (props) => (
-		<Panel {...props}>
+	propTypes: {
+		onClick: PropTypes.func
+	},
+
+	render: ({onClick, ...rest}) => (
+		<Panel {...rest}>
 			<Header title="Second Panel" />
-			<Button>Click me</Button>
+			<Button onClick={onClick}>Click me</Button>
 		</Panel>
 	)
 });
