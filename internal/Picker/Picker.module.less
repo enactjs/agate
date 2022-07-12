@@ -122,7 +122,7 @@
 				background-image: @agate-picker-active-bg-image;
 				position: absolute;
 				height: @agate-picker-active-height;
-				width: calc(100% - 2 * @agate-picker-padding);
+				width: ~"calc(100% - 2 *" (.extract(@agate-picker-padding, top)[])~ ")";
 				left: 50%;
 				transform: translateX(-50%);
 			}
