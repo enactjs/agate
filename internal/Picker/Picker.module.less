@@ -31,13 +31,17 @@
 		border-radius: @agate-picker-border-radius;
 		transform: @agate-picker-transform;
 		margin: @agate-picker-margin;
-		padding: @agate-picker-padding;
+		.padding-start-end(@agate-picker-padding);
 
 		.focusBackground {
-			height: calc(100% - 2 * @agate-picker-padding);
+			height: ~"calc(100% - 2 *" (.extract(@agate-picker-padding, top)[]) ~")";
 			background-color: @agate-picker-focus-bg-color;
 			background-image: @agate-picker-focus-bg-image;
 		}
+
+		.disabled({
+			opacity: @agate-picker-disabled-opacity;
+		});
 
 		&:focus-within,
 		&:hover {
@@ -118,7 +122,7 @@
 				background-image: @agate-picker-active-bg-image;
 				position: absolute;
 				height: @agate-picker-active-height;
-				width: calc(100% - 2 * @agate-picker-padding);
+				width: ~"calc(100% - 2 *" (.extract(@agate-picker-padding, top)[])~ ")";
 				left: 50%;
 				transform: translateX(-50%);
 			}

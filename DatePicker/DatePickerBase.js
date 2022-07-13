@@ -239,7 +239,7 @@ const DatePickerBase = kind({
 		delete rest.rtl;
 
 		return (
-			<DateTime {...rest}>
+			<DateTime {...rest} disabled={disabled}>
 				{order && order.map((picker) => {
 					switch (picker) {
 						case 'd':

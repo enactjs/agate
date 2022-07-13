@@ -149,7 +149,7 @@ const DateTimePickerBase = kind({
 	render ({dayAriaLabel, disabled, hourAriaLabel, meridiemAriaLabel, minuteAriaLabel, monthAriaLabel, onChange, onSpotlightDisappear, spotlightDisabled, value, yearAriaLabel, ...rest}) {
 
 		return (
-			<Row {...rest} className={css.dateTimePicker} align="center center">
+			<Row {...rest} className={css.dateTimePicker} disabled={disabled} align="center center">
 				<Row align="center center">
 					<TimePicker {...rest} css={css} disabled={disabled} hourAriaLabel={hourAriaLabel} meridiemAriaLabel={meridiemAriaLabel} minuteAriaLabel={minuteAriaLabel} onChange={onChange} onSpotlightDisappear={onSpotlightDisappear} spotlightDisabled={spotlightDisabled} value={value} />
 				</Row>
