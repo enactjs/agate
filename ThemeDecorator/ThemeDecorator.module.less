@@ -72,17 +72,20 @@
 		font-variant-ligatures: @agate-base-font-ligatures;
 		color: @agate-text-color;
 
-		&.bg {
-			background-color: @agate-bg-color;
-			background-image: @agate-bg-image;
-
-			&::before {
-				content: "";
-				display: block;
-				background-image: @agate-bg-image2;
-				position: absolute;
-				.position(0);
-			}
+		&.bg ::before {
+			content: "";
+			display: block;
+			background-image: @agate-bg-image2;
+			position: absolute;
+			.position(0);
 		}
 	});
 }
+
+.applySkins({
+	&.bg,
+	> .bg {
+		background-color: @agate-bg-color;
+		background-image: @agate-bg-image;
+	}
+});
