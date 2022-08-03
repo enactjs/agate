@@ -10,7 +10,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/MediaPlayer` layout issues for Cobalt, Carbon, Copper, Electro, Titanium skins
 - `agate/Picker` and `agate/RangePicker` to match latest design for Silicon skin
 - `agate/Scroller` to update scrollButtons state on initial render
-- `agate/ThemeDecorator` fixed a problem with background color and image
+- `agate/ThemeDecorator` so `bg` class works only at the apps' root node not at a child node of the app's root node
 
 ### Removed
 
