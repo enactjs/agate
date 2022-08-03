@@ -9,7 +9,7 @@ const useSpotlightConfig = (props, instances) => {
 		function handleLeaveContainer ({direction, target}) {
 			// ensure we only scroll to boundary from the contents and not a scroll button which
 			// lie outside of scrollContentRef but within the spotlight container
-			if (scrollContentRef.current.contains(target) && scrollContentRef.current) {
+			if (scrollContentRef.current && scrollContentRef.current.contains(target)) {
 				const
 					{scrollBounds: {maxLeft, maxTop}, scrollPos: {left, top}} = scrollContentHandle.current,
 					isVerticalDirection = (direction === 'up' || direction === 'down'),
