@@ -50,14 +50,16 @@ const BasicPanels = ({...rest}) => {
 	const goPrevious = () => setIndex(clamp(0, 2, index - 1));
 
 	return (
-		<Panels
-			{...rest}
-			index={index}
-			onBack={goPrevious}
-		>
-			<FirstPanel onClick={goNext} />
-			<SecondPanel onClick={goPrevious} />
-		</Panels>
+		<div style={{minHeight: '400px'}}>
+			<Panels
+				{...rest}
+				index={index}
+				onBack={goPrevious}
+			>
+				<FirstPanel onClick={goNext} />
+				<SecondPanel onClick={goPrevious} />
+			</Panels>
+		</div>
 	);
 };
 

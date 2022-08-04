@@ -21,6 +21,7 @@ const BasicPanels = (props) => {
 	const goPrevious = useCallback(() => setIndex(clamp(0, 2, index - 1)), [index]);
 
 	return (
+	<div style={{minHeight: '400px'}}>
 		<Panels
 			index={index}
 			{...props}
@@ -40,6 +41,7 @@ const BasicPanels = (props) => {
 				<Item onClick={goPrevious}>Previous</Item>
 			</Panel>
 		</Panels>
+	</div>
 	);
 };
 
@@ -128,7 +130,7 @@ const RoutablePanelsApp = (props) => {
 	}, []);
 
 	return (
-		<div {...props}>
+		<div style={{minHeight: '400px'}} {...props}>
 			<RoutablePanels path={appPath} onNavigate={onNavigate} cover="partial">
 				<Route component={MainPanel} path="settings">
 					<Route component={Page1} path="page1">

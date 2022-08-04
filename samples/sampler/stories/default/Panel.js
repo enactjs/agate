@@ -13,13 +13,15 @@ export default {
 };
 
 export const _Panel = (args) => (
-	<Panel>
-		<Header
-			subtitle={args['subtitle']}
-			title={args['title']}
-		/>
-		<Button>Click me</Button>
-	</Panel>
+	<div style={{minHeight: '400px'}}>
+		<Panel>
+			<Header
+				subtitle={args['subtitle']}
+				title={args['title']}
+			/>
+			<Button>Click me</Button>
+		</Panel>
+	</div>
 );
 
 text('subtitle', _Panel, HeaderConfig, 'Header Subtitle');
