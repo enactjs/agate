@@ -68,17 +68,17 @@ export default {
 export const With2OptionsForTestingDirection = (args) => (
 	<div style={{minHeight: '500px'}}>
 		<Dropdown
-		direction={args['direction']}
-		disabled={args['disabled']}
-		onClose={action('onClose')}
-		onOpen={action('onOpen')}
-		onSelect={action('onSelect')}
-		style={{position: 'absolute', top: 'calc(50% - 4rem)'}}
-		title={args['title']}
-		width={args['width']}
-	>
-		{['Option 1', 'Option 2']}
-	</Dropdown>
+			direction={args['direction']}
+			disabled={args['disabled']}
+			onClose={action('onClose')}
+			onOpen={action('onOpen')}
+			onSelect={action('onSelect')}
+			style={{position: 'absolute', top: 'calc(50% - 4rem)'}}
+			title={args['title']}
+			width={args['width']}
+		>
+			{['Option 1', 'Option 2']}
+		</Dropdown>
 	</div>
 );
 

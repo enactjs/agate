@@ -21,27 +21,27 @@ const BasicPanels = (props) => {
 	const goPrevious = useCallback(() => setIndex(clamp(0, 2, index - 1)), [index]);
 
 	return (
-	<div style={{minHeight: '400px'}}>
-		<Panels
-			index={index}
-			{...props}
-		>
-			<Panel>
-				<Header title="First Panel" />
-				<Item onClick={goNext}>Next1</Item>
-				<Item onClick={goNext}>Next2</Item>
-			</Panel>
-			<Panel>
-				<Header title="Second Panel" />
-				<Item onClick={goPrevious}>Previous</Item>
-				<Item onClick={goNext}>Next</Item>
-			</Panel>
-			<Panel>
-				<Header title="Third Panel" />
-				<Item onClick={goPrevious}>Previous</Item>
-			</Panel>
-		</Panels>
-	</div>
+		<div style={{minHeight: '400px'}}>
+			<Panels
+				index={index}
+				{...props}
+			>
+				<Panel>
+					<Header title="First Panel" />
+					<Item onClick={goNext}>Next1</Item>
+					<Item onClick={goNext}>Next2</Item>
+				</Panel>
+				<Panel>
+					<Header title="Second Panel" />
+					<Item onClick={goPrevious}>Previous</Item>
+					<Item onClick={goNext}>Next</Item>
+				</Panel>
+				<Panel>
+					<Header title="Third Panel" />
+					<Item onClick={goPrevious}>Previous</Item>
+				</Panel>
+			</Panels>
+		</div>
 	);
 };
 
