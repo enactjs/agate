@@ -66,7 +66,8 @@ export default {
 };
 
 export const With2OptionsForTestingDirection = (args) => (
-	<Dropdown
+	<div style={{minHeight: '500px'}}>
+		<Dropdown
 		direction={args['direction']}
 		disabled={args['disabled']}
 		onClose={action('onClose')}
@@ -78,6 +79,7 @@ export const With2OptionsForTestingDirection = (args) => (
 	>
 		{['Option 1', 'Option 2']}
 	</Dropdown>
+	</div>
 );
 
 select('direction', With2OptionsForTestingDirection, ['above', 'below'], Config);
@@ -165,7 +167,7 @@ select('width', WithMultipleDropdowns, ['smallest', 'small', 'medium', 'large', 
 WithMultipleDropdowns.storyName = 'with multiple dropdowns';
 
 export const WithArrayOfChildrenObjects = (args) => (
-	<div>
+	<div style={{minHeight: '500px'}}>
 		<Dropdown
 			direction={args['direction']}
 			disabled={args['disabled']}
