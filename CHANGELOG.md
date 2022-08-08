@@ -11,6 +11,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Picker` and `agate/RangePicker` to match latest design for Silicon skin
 - `agate/Scroller` to update scrollButtons state on initial render
 - `agate/Scroller` should not scroll when focus moves from a scroll button to another
+- `agate/ThemeDecorator` to apply the background color and background image properly
 
 ### Removed
 
