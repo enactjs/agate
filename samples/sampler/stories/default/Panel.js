@@ -3,6 +3,7 @@ import {text} from '@enact/storybook-utils/addons/controls';
 import Button from '@enact/agate/Button';
 import Header from '@enact/agate/Header';
 import {Panel} from '@enact/agate/Panels';
+import ri from '@enact/ui/resolution';
 
 Panel.displayName = 'Panel';
 const HeaderConfig = mergeComponentMetadata('Header', Header);
@@ -13,7 +14,7 @@ export default {
 };
 
 export const _Panel = (args) => (
-	<div style={{minHeight: '400px'}}>
+	<div style={{minHeight: ri.scaleToRem(399)}}>
 		<Panel>
 			<Header
 				subtitle={args['subtitle']}

@@ -6,6 +6,8 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, range, select, text} from '@enact/storybook-utils/addons/controls';
 import Group from '@enact/ui/Group';
+import ri from '@enact/ui/resolution';
+
 import {useCallback, useState} from 'react';
 
 Dropdown.displayName = 'Dropdown';
@@ -66,7 +68,7 @@ export default {
 };
 
 export const With2OptionsForTestingDirection = (args) => (
-	<div style={{minHeight: '500px'}}>
+	<div style={{minHeight: ri.scaleToRem(501)}}>
 		<Dropdown
 			direction={args['direction']}
 			disabled={args['disabled']}
@@ -167,7 +169,7 @@ select('width', WithMultipleDropdowns, ['smallest', 'small', 'medium', 'large', 
 WithMultipleDropdowns.storyName = 'with multiple dropdowns';
 
 export const WithArrayOfChildrenObjects = (args) => (
-	<div style={{minHeight: '500px'}}>
+	<div style={{minHeight: ri.scaleToRem(501)}}>
 		<Dropdown
 			direction={args['direction']}
 			disabled={args['disabled']}
