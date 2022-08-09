@@ -8,6 +8,7 @@ import {clamp} from '@enact/core/util';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select} from '@enact/storybook-utils/addons/controls';
+import ri from '@enact/ui/resolution';
 import Routable, {Route, Linkable} from '@enact/ui/Routable';
 import PropTypes from 'prop-types';
 import {useCallback, useState} from 'react';
@@ -21,25 +22,27 @@ const BasicPanels = (props) => {
 	const goPrevious = useCallback(() => setIndex(clamp(0, 2, index - 1)), [index]);
 
 	return (
-		<Panels
-			index={index}
-			{...props}
-		>
-			<Panel>
-				<Header title="First Panel" />
-				<Item onClick={goNext}>Next1</Item>
-				<Item onClick={goNext}>Next2</Item>
-			</Panel>
-			<Panel>
-				<Header title="Second Panel" />
-				<Item onClick={goPrevious}>Previous</Item>
-				<Item onClick={goNext}>Next</Item>
-			</Panel>
-			<Panel>
-				<Header title="Third Panel" />
-				<Item onClick={goPrevious}>Previous</Item>
-			</Panel>
-		</Panels>
+		<div style={{minHeight: ri.scaleToRem(399)}}>
+			<Panels
+				index={index}
+				{...props}
+			>
+				<Panel>
+					<Header title="First Panel" />
+					<Item onClick={goNext}>Next1</Item>
+					<Item onClick={goNext}>Next2</Item>
+				</Panel>
+				<Panel>
+					<Header title="Second Panel" />
+					<Item onClick={goPrevious}>Previous</Item>
+					<Item onClick={goNext}>Next</Item>
+				</Panel>
+				<Panel>
+					<Header title="Third Panel" />
+					<Item onClick={goPrevious}>Previous</Item>
+				</Panel>
+			</Panels>
+		</div>
 	);
 };
 
@@ -128,7 +131,7 @@ const RoutablePanelsApp = (props) => {
 	}, []);
 
 	return (
-		<div {...props}>
+		<div style={{minHeight: ri.scaleToRem(399)}} {...props}>
 			<RoutablePanels path={appPath} onNavigate={onNavigate} cover="partial">
 				<Route component={MainPanel} path="settings">
 					<Route component={Page1} path="page1">

@@ -10,6 +10,7 @@ import Header from '@enact/agate/Header';
 import {Panels, Panel} from '@enact/agate/Panels';
 import kind from '@enact/core/kind';
 import {clamp} from '@enact/core/util';
+import ri from '@enact/ui/resolution';
 
 Panels.displayName = 'Panels';
 const Config = mergeComponentMetadata('Panels', Panels);
@@ -50,14 +51,16 @@ const BasicPanels = ({...rest}) => {
 	const goPrevious = () => setIndex(clamp(0, 2, index - 1));
 
 	return (
-		<Panels
-			{...rest}
-			index={index}
-			onBack={goPrevious}
-		>
-			<FirstPanel onClick={goNext} />
-			<SecondPanel onClick={goPrevious} />
-		</Panels>
+		<div style={{minHeight: ri.scaleToRem(399)}}>
+			<Panels
+				{...rest}
+				index={index}
+				onBack={goPrevious}
+			>
+				<FirstPanel onClick={goNext} />
+				<SecondPanel onClick={goPrevious} />
+			</Panels>
+		</div>
 	);
 };
 
