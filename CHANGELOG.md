@@ -40,6 +40,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/PopupMenu` title to marquee for long text
 - `agate/RadioItem` icons to not be bigger than icon container
 - `agate/TabGroup` button padding for Cobalt and Copper skins
+- `agate/TemperatureControl` to have text inline for Spanish locale
 - `agate/VirtualList` 5-way navigation between scroll buttons when `focusableScrollbar`
 
 ## [2.0.0-beta.2] - 2021-06-24

@@ -123,7 +123,7 @@ const TemperatureControlBase =  kind({
 					min={min}
 					onChange={onChange}
 					slotCenter={
-						<span>{currentTemperatureString}</span>
+						<span className={css.textContainer}>{currentTemperatureString}</span>
 					}
 					startAngle={50}
 					value={value}
