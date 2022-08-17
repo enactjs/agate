@@ -6,7 +6,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
+- `agate/ArcPicker`, `agate/FanSpeedControl` segments color to be visible on Carbon skin
+- `agate/ArcSlider` progress and knob color to be visible on Carbon skin
 - `agate/DatePicker`, `agate/DateTimePicker`, and `agate/TimePicker` to match latest design for Silicon skin
+- `agate/DatePicker`, `agate/RangePicker`, and `agate/TimePicker` text color to be visible on Carbon skin
 - `agate/MediaPlayer` layout issues for Cobalt, Carbon, Copper, Electro, Titanium skins
 - `agate/Picker` and `agate/RangePicker` to match latest design for Silicon skin
 - `agate/Scroller` to update scrollButtons state on initial render
