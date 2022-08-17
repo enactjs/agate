@@ -11,6 +11,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Picker` and `agate/RangePicker` to match latest design for Silicon skin
 - `agate/Scroller` to update scrollButtons state on initial render
 - `agate/Scroller` should not scroll when focus moves from a scroll button to another
+- `agate/TemperatureControl` to have text inline for Spanish locale
 - `agate/ThemeDecorator` to apply the background color and background image properly
 
 ### Removed
@@ -40,7 +41,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/PopupMenu` title to marquee for long text
 - `agate/RadioItem` icons to not be bigger than icon container
 - `agate/TabGroup` button padding for Cobalt and Copper skins
-- `agate/TemperatureControl` to have text inline for Spanish locale
 - `agate/VirtualList` 5-way navigation between scroll buttons when `focusableScrollbar`
 
 ## [2.0.0-beta.2] - 2021-06-24
