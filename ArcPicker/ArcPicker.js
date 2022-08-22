@@ -121,7 +121,15 @@ const ArcPickerBase = kind({
 		 */
 		selectionType: PropTypes.oneOf(['cumulative', 'single']),
 
-		/*
+		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		skin: PropTypes.string,
+
+		/**
 		 * State of possible skin variants.
 		 *
 		 * Used to set backgroundColor and foregroundColor.
@@ -185,9 +193,18 @@ const ArcPickerBase = kind({
 	computed: {
 		arcSegments: (props, context) => {
 			const {accent: accentColor} = context || {};
-			const {children, endAngle, isFocused, onClick, radius, selectionType, skinVariants, startAngle, strokeWidth, value} = props;
+			const {children, endAngle, isFocused, onClick, radius, selectionType, skin, skinVariants, startAngle, strokeWidth, value} = props;
 			const backgroundColor = props.backgroundColor || (skinVariants && skinVariants.night ? '#444444' : '#888888');
-			const foregroundColor = props.foregroundColor || (skinVariants && skinVariants.night ? '#ffffff' : '#343434');
+			let foregroundColor;
+			if (props.foregroundColor) {
+				foregroundColor = props.foregroundColor;
+			} else if (skinVariants && skinVariants.night ) {
+				foregroundColor = '#ffffff';
+			} else if ( skin === 'carbon') {
+				foregroundColor = '#343434';
+			} else {
+				foregroundColor = '#000000';
+			}
 
 			if (!Array.isArray(children)) return [];
 			return (
@@ -255,7 +272,7 @@ const ArcPickerDecorator = compose(
 	Changeable,
 	ArcPickerBehaviorDecorator,
 	Spottable,
-	Skinnable({variantsProp: 'skinVariants'})
+	Skinnable({prop: 'skin', variantsProp: 'skinVariants'})
 );
 
 /**
