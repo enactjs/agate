@@ -198,9 +198,9 @@ const ArcPickerBase = kind({
 			let foregroundColor;
 			if (props.foregroundColor) {
 				foregroundColor = props.foregroundColor;
-			} else if (skinVariants && skinVariants.night ) {
+			} else if (skinVariants && skinVariants.night) {
 				foregroundColor = '#ffffff';
-			} else if ( skin === 'carbon') {
+			} else if (skin === 'carbon') {
 				foregroundColor = '#343434';
 			} else {
 				foregroundColor = '#000000';

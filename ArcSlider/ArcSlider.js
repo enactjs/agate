@@ -228,9 +228,9 @@ const ArcSliderBase = kind({
 		foregroundColor: ({foregroundColor, skin,  skinVariants}) => {
 			if (foregroundColor) {
 				return foregroundColor;
-			} else if (skinVariants && skinVariants.night ) {
+			} else if (skinVariants && skinVariants.night) {
 				return '#ffffff';
-			} else if ( skin === 'carbon') {
+			} else if (skin === 'carbon') {
 				return '#343434';
 			} else {
 				return '#000000';
