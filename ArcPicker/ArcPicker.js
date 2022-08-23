@@ -196,6 +196,7 @@ const ArcPickerBase = kind({
 			const {children, endAngle, isFocused, onClick, radius, selectionType, skin, skinVariants, startAngle, strokeWidth, value} = props;
 			const backgroundColor = props.backgroundColor || (skinVariants && skinVariants.night ? '#444444' : '#888888');
 			let foregroundColor;
+
 			if (props.foregroundColor) {
 				foregroundColor = props.foregroundColor;
 			} else if (skinVariants && skinVariants.night) {
