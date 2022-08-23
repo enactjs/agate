@@ -135,6 +135,14 @@ const ArcSliderBase = kind({
 		radius: PropTypes.number,
 
 		/**
+		 * The current skin for this component.
+		 *
+		 * @type {String}
+		 * @private
+		 */
+		skin: PropTypes.string,
+
+		/**
 		 * State of possible skin variants.
 		 *
 		 * Used to set backgroundColor and foregroundColor.
@@ -217,7 +225,17 @@ const ArcSliderBase = kind({
 		},
 		circleRadius: ({isFocused}) => isFocused ? 20 : 15,
 		backgroundColor: ({backgroundColor, skinVariants}) => backgroundColor || (skinVariants && skinVariants.night ? '#444444' : '#888888'),
-		foregroundColor: ({foregroundColor, skinVariants}) => foregroundColor || (skinVariants && skinVariants.night ? '#ffffff' : '#343434')
+		foregroundColor: ({foregroundColor, skin,  skinVariants}) => {
+			if (foregroundColor) {
+				return foregroundColor;
+			} else if (skinVariants && skinVariants.night) {
+				return '#ffffff';
+			} else if (skin === 'carbon') {
+				return '#343434';
+			} else {
+				return '#000000';
+			}
+		}
 	},
 
 	render: ({'aria-valuetext': ariaValuetext, backgroundColor, componentRef, circleRadius, disabled, endAngle, foregroundColor, max, min, radius, size, slotCenter, startAngle, strokeWidth, value, ...rest}) => {
@@ -279,7 +297,7 @@ const ArcSliderDecorator = compose(
 	ArcSliderBehaviorDecorator,
 	Touchable,
 	Spottable,
-	Skinnable({variantsProp: 'skinVariants'})
+	Skinnable({prop: 'skin', variantsProp: 'skinVariants'})
 );
 
 /**
