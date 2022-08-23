@@ -1,5 +1,5 @@
 import {action} from '@enact/storybook-utils/addons/actions';
-import {object, select} from '@enact/storybook-utils/addons/controls';
+import {select} from '@enact/storybook-utils/addons/controls';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import ri from '@enact/ui/resolution';
 import Image, {ImageBase, ImageDecorator} from '@enact/agate/Image';
@@ -7,9 +7,9 @@ import Image, {ImageBase, ImageDecorator} from '@enact/agate/Image';
 import css from './Image.module.less';
 
 const src = {
-	'hd':  'http://via.placeholder.com/200x200',
-	'fhd': 'http://via.placeholder.com/300x300',
-	'uhd': 'http://via.placeholder.com/600x600'
+	hd:  'http://via.placeholder.com/200x200/9037ab',
+	fhd: 'http://via.placeholder.com/300x300/9037ab',
+	uhd: 'http://via.placeholder.com/600x600/9037ab'
 };
 
 Image.displayName = 'Image';
@@ -53,7 +53,7 @@ export const _Image = (args) => (
 );
 
 select('sizing', _Image, ['fill', 'fit', 'none'], Config, 'fill');
-object('src', _Image, Config, src);
+select('src', _Image, src, Config, src.hd);
 
 _Image.storyname = 'Image';
 _Image.parameters = {

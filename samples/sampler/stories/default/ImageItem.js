@@ -1,13 +1,14 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
-import {boolean, object, text, select} from '@enact/storybook-utils/addons/controls';
+import {boolean, text, select} from '@enact/storybook-utils/addons/controls';
 import ri from '@enact/ui/resolution';
 import ImageItem, {ImageItemBase} from '@enact/agate/ImageItem';
 
 const src = {
-	'hd':  'http://via.placeholder.com/200x200/9037ab/ffffff&text=Image0',
-	'fhd': 'http://via.placeholder.com/300x300/9037ab/ffffff&text=Image0',
-	'uhd': 'http://via.placeholder.com/600x600/9037ab/ffffff&text=Image0'
+	hd:  'http://via.placeholder.com/200x200/9037ab/ffffff&text=Image0',
+	fhd: 'http://via.placeholder.com/300x300/9037ab/ffffff&text=Image0',
+	uhd: 'http://via.placeholder.com/600x600/9037ab/ffffff&text=Image0',
+	invalidUrl: 'ttp://via.placeholder.com/300x300/9037ab/ffffff&text=Image0'
 };
 
 ImageItem.displayName = 'ImageItem';
@@ -38,7 +39,7 @@ select('captionPosition', _ImageItem, ['below', 'overlay'], Config);
 boolean('disabled', _ImageItem, Config);
 select('orientation', _ImageItem, ['horizontal', 'vertical'], Config);
 select('sizing', _ImageItem, ['fill', 'fit', 'none'], Config);
-object('src', _ImageItem, Config, src);
+select('src', _ImageItem, src, Config, src.hd);
 text('children', _ImageItem, Config, 'caption');
 
 _ImageItem.storyName = 'ImageItem';
