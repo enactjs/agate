@@ -7,9 +7,7 @@ import Image, {ImageBase, ImageDecorator} from '@enact/agate/Image';
 import css from './Image.module.less';
 
 const src = {
-	hd:  'http://via.placeholder.com/200x200/9037ab',
-	fhd: 'http://via.placeholder.com/300x300/9037ab',
-	uhd: 'http://via.placeholder.com/600x600/9037ab'
+	hd:  '../../resources/300x300.png'
 };
 
 Image.displayName = 'Image';

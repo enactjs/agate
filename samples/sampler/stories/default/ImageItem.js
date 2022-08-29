@@ -5,9 +5,7 @@ import ri from '@enact/ui/resolution';
 import ImageItem, {ImageItemBase} from '@enact/agate/ImageItem';
 
 const src = {
-	hd:  'http://via.placeholder.com/200x200/9037ab/ffffff&text=Image0',
-	fhd: 'http://via.placeholder.com/300x300/9037ab/ffffff&text=Image0',
-	uhd: 'http://via.placeholder.com/600x600/9037ab/ffffff&text=Image0',
+	hd: '../../resources/300x300.png',
 	invalidUrl: 'ttp://via.placeholder.com/300x300/9037ab/ffffff&text=Image0'
 };
 
