@@ -14,6 +14,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Dropdown` layout issues for Carbon, Cobalt, Copper, Titanium skins
 - `agate/MediaPlayer` layout issues for Cobalt, Carbon, Copper, Electro, Titanium skins
 - `agate/Picker` and `agate/RangePicker` to match latest design for Silicon skin
+- `agate/RangePicker` text color for Copper skin
 - `agate/Scroller` to update scrollButtons state on initial render
 - `agate/Scroller` should not scroll when focus moves from a scroll button to another
 - `agate/TemperatureControl` to have text inline for Spanish locale
@@ -157,7 +158,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [2.0.0-alpha.1] - 2021-02-25
 
--  The framework was updated to support React 17.0.1
+- The framework was updated to support React 17.0.1
 
 ### Added
 
