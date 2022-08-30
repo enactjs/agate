@@ -44,6 +44,7 @@ const SkinFrame = Skinnable(kind({
 	},
 
 	render: (props) => {
+		console.log(props)
 		delete props.hideChildren;
 		delete props.spotlightId;
 
@@ -183,29 +184,36 @@ const StorybookDecorator = (story, config) => {
 	}
 
 	return (
-		<Theme
-			title={componentName === config.name ? `${config.kind}`.replace(/\//g, ' ').trim() : `${componentName} ${config.name}`}
-			description={hasInfoText ? config.parameters.info.text : null}
-			locale={localeFromURL || globals.locale}
-			skin={showAllSkins ? skins['Gallium'] : skinFromURL || globals.skin}
-			skinVariants={JSON.parse(globals['night mode']) ? 'night' : null}
-			accent={accentFromURL || (accent || defaultColors['gallium'].accent)}
-			highlight={highlightFromURL || (highlight || defaultColors['gallium'].highlight)}
-			{...(hasProps ? config.parameters.props : null)}
-		>
-			{showAllSkins ?
-				<Scroller>
-					{Object.keys(skins).map((skin) => (
-						<SkinFrame skin={skins[skin]} key={skin}>
-							<Cell size="20%" component={Heading}>{skin}</Cell>
-							<Cell>{sample}</Cell>
-						</SkinFrame>
-					))}
-				</Scroller> : sample}
-		</Theme>
+		!showAllSkins ?
+			<Theme
+				title={componentName === config.name ? `${config.kind}`.replace(/\//g, ' ').trim() : `${componentName} ${config.name}`}
+				description={hasInfoText ? config.parameters.info.text : null}
+				locale={localeFromURL || globals.locale}
+				skin={showAllSkins ? skins['Gallium'] : skinFromURL || globals.skin}
+				skinVariants={JSON.parse(globals['night mode']) ? 'night' : null}
+				accent={accentFromURL || (accent || defaultColors['gallium'].accent)}
+				highlight={highlightFromURL || (highlight || defaultColors['gallium'].highlight)}
+				{...(hasProps ? config.parameters.props : null)}
+			>
+				{sample}
+			</Theme> :
+			<>
+				{Object.keys(skins).map((skin) => (
+					<SkinFrame
+						key={skin}
+						locale={localeFromURL || globals.locale}
+						skin={skins[skin]}
+						skinVariants={JSON.parse(globals['night mode']) ? 'night' : null}
+						accent={defaultColors[skins[skin]].accent}
+						highlight={defaultColors[skins[skin]].highlight}
+					>
+						<Cell size="20%" component={Heading}>{skin}</Cell>
+						<Cell>{sample}</Cell>
+					</SkinFrame>
+				))}
+			</>
 	);
 };
-
 
 export default StorybookDecorator;
 export {StorybookDecorator as Theme};
