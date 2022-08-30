@@ -9,6 +9,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ArcPicker`, `agate/ArcSlider` foreground color for all skins except Carbon
 - `agate/ArcPicker`, `agate/FanSpeedControl` segments color to be visible on Carbon skin
 - `agate/ArcSlider` progress and knob color to be visible on Carbon skin
+- `agate/DatePicker` padding issue on the Electro skin
 - `agate/DatePicker`, `agate/DateTimePicker`, and `agate/TimePicker` to match latest design for Silicon skin
 - `agate/DatePicker`, `agate/RangePicker`, and `agate/TimePicker` text color to be visible on Carbon skin
 - `agate/Dropdown` layout issues for Carbon, Cobalt, Copper, Titanium skins
@@ -157,7 +158,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [2.0.0-alpha.1] - 2021-02-25
 
--  The framework was updated to support React 17.0.1
+- The framework was updated to support React 17.0.1
 
 ### Added
 
