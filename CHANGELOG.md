@@ -13,6 +13,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/ArcPicker`, `agate/ArcSlider` foreground color for all skins except Carbon
 - `agate/ArcPicker`, `agate/FanSpeedControl` segments color to be visible on Carbon skin
 - `agate/ArcSlider` progress and knob color to be visible on Carbon skin
+- `agate/DatePicker`, `agate/DateTimePicker`, `agate/Picker`, `agate/RangePicker`, and `agate/TimePicker` text color for Copper skin
 - `agate/DatePicker`, `agate/DateTimePicker`, and `agate/TimePicker` to match latest design for Silicon skin
 - `agate/DatePicker`, `agate/RangePicker`, and `agate/TimePicker` text color to be visible on Carbon skin
 - `agate/Dropdown` layout issues for Carbon, Cobalt, Copper, Titanium skins
