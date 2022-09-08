@@ -51,7 +51,6 @@ const SkinFrame = Skinnable(kind({
 	}
 }));
 
-
 const PanelsBase = kind({
 	name: 'ThemeEnvironment',
 
