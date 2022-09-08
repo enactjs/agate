@@ -158,7 +158,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [2.0.0-alpha.1] - 2021-02-25
 
-- The framework was updated to support React 17.0.1
+-  The framework was updated to support React 17.0.1
 
 ### Added
 

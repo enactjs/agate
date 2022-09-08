@@ -28,7 +28,6 @@ import PickerItem from '../internal/Picker/PickerItem';
  * @ui
  * @public
  */
-
 const RangePickerBase = kind({
 	name: 'RangePicker',
 
