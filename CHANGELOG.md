@@ -4,6 +4,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
+### Changed
+
+- `agate/Panels` padding to show correctly all Picker samples for Electro skin
+
 ### Fixed
 
 - `agate/ArcPicker`, `agate/ArcSlider` foreground color for all skins except Carbon
