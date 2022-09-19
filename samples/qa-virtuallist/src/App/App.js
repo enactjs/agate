@@ -8,7 +8,7 @@ const App = kind({
 	name: 'App',
 
 	render: (props) => (
-		<Panels {...props}>
+		<Panels {...props} noCloseButton>
 			<MainPanel />
 		</Panels>
 	)

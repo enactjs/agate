@@ -5,7 +5,7 @@ import MainPanel from '../views/MainPanel';
 
 const App = (props) => {
 	return (
-		<Panels {...props}>
+		<Panels noCloseButton {...props}>
 			<MainPanel />
 		</Panels>
 	);
