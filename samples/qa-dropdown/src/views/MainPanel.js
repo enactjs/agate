@@ -10,8 +10,9 @@ const MainPanel = () => {
 	const handleClose = useCallback(() => setOpen(false), []);
 
 	return (
-		<Panels>
+		<Panels noCloseButton>
 			<Panel title="QA Sample - Dropdown">
+				<Header	hideLine title="QA Sample - Dropdown" />
 				<Dropdown onClose={handleClose} onOpen={handleOpen} open={open} size="large" title="language">
 					{['English', 'Korean', 'Spanish', 'Amharic', 'Thai', 'Arabic', 'Urdu', 'Simplified Chinese', 'Traditional Chinese', 'Vietnamese']}
 				</Dropdown>
