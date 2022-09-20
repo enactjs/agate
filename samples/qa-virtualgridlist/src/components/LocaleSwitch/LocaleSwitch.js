@@ -9,7 +9,7 @@ const LocaleSwitch = (props) => {
 	}, [rtl, updateLocale]);
 
 	return (
-		<CheckboxItem {...props} onClick={onClick}>RTL</CheckboxItem>
+		<CheckboxItem {...props} onClick={onClick} size="small">RTL</CheckboxItem>
 	);
 };
 

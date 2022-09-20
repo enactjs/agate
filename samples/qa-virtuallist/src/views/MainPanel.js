@@ -78,10 +78,10 @@ const MainPanel = ({...rest}) => {
 							<Button onClick={onChangeDataSize} size="small">Set DataSize</Button>
 						</Cell>
 						<Cell>
-							<CheckboxItem onClick={onToggleDisabled}>Disabled Items</CheckboxItem>
+							<CheckboxItem onClick={onToggleDisabled} size="small">Disabled Items</CheckboxItem>
 						</Cell>
 						<Cell>
-							<CheckboxItem onClick={onToggleChildProps}>Child Props</CheckboxItem>
+							<CheckboxItem onClick={onToggleChildProps} size="small">Child Props</CheckboxItem>
 						</Cell>
 						<Cell>
 							<ScrollModeSwitch defaultSelected={nativeScroll} onToggle={onChangeScrollMode} />

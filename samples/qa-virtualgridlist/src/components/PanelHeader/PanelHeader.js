@@ -88,7 +88,7 @@ const PanelHeader = kind({
 		},
 		changeDirectionButton: ({onChangeDirection, showOverlay}) => {
 			if (!showOverlay) {
-				return (<CheckboxItem onClick={onChangeDirection}>Horizontal</CheckboxItem>);
+				return (<CheckboxItem onClick={onChangeDirection} size="small">Horizontal</CheckboxItem>);
 			}
 		},
 		changeListProps: ({changeMinHeight, changeMinWidth, changeSpacing, data, setData, showOverlay}) => {
