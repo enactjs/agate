@@ -34,8 +34,7 @@ const VirtualListSample = (props) => {
 			<Dropdown
 				direction="below"
 				onSelect={onSelect}
-				size="large"
-				placeholder={viewNames[defaultViewIndex]}
+				title={viewNames[defaultViewIndex]}
 				width="huge"
 			>
 				{viewNames}
