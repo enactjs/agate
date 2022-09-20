@@ -42,7 +42,7 @@ const VirtualGridListNativeSample = (props) => {
 			cbScrollTo={getScrollTo}
 			dataSize={items.length}
 			itemRenderer={renderItem}
-			itemSize={{minWidth: ri.scale(624), minHeight: ri.scale(600)}} // FHD: 312 x 300, UHD: 624 x 600
+			itemSize={{minWidth: ri.scale(312), minHeight: ri.scale(300)}} // FHD: 312 x 300, UHD: 624 x 600
 		/>
 	);
 };

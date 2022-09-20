@@ -46,7 +46,7 @@ const VirtualListNativeSample = (props) => {
 			cbScrollTo={getScrollTo}
 			dataSize={items.length}
 			itemRenderer={renderItem}
-			itemSize={ri.scale(156)}
+			itemSize={ri.scale(78)}
 		/>
 	);
 };

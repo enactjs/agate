@@ -1,19 +1,15 @@
 .eventGroup {
 	display: flex;
+	flex-wrap: wrap;
+
 	.pickerItem {
 		display: inline-flex;
-		margin-bottom: 30px;
+		margin-bottom: 15px;
 		align-items: center;
 	}
-	.switchItem {
-		font-size: 48px;
-		max-width: 840px;
-	}
-}
 
-// Allow items to wrap onto multiple lines on mobile devices
-@media (max-width: 1284px) {
-	.eventGroup {
-		flex-wrap: wrap;
+	.switchItem {
+		font-size: 24px;
+		max-width: 420px;
 	}
 }

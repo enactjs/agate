@@ -18,11 +18,11 @@ const
 		'Suomi - Suomi'
 	],
 	numOfItems = 100,
-	fontSize = `${ri.scale(30)}px`,
-	oneLineSize = ri.scale(60),
+	fontSize = `${ri.scale(15)}px`,
+	oneLineSize = ri.scale(30),
 	lineHeight = `${oneLineSize}px`,
-	spacing = 60,
-	paddingSize = ri.scale(48);
+	spacing = 30,
+	paddingSize = ri.scale(24);
 
 const itemStyleDefault = {
 	height: '100%',
@@ -94,7 +94,7 @@ const HorizontalDifferenctWidthItemList = (props) => {
 				size: itemSize
 			}}
 			spacing={spacing}
-			style={{height: '600px', paddingBottom: `${ri.scale(72)}px`}}
+			style={{height: '300px', paddingBottom: `${ri.scale(36)}px`}}
 		/>
 	);
 

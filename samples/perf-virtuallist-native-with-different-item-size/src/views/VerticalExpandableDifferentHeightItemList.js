@@ -19,11 +19,11 @@ const
 		'Suomi - Suomi'
 	],
 	numOfItems = 100,
-	fontSize = `${ri.scale(30)}px`,
-	oneLineSize = ri.scale(60),
+	fontSize = `${ri.scale(15)}px`,
+	oneLineSize = ri.scale(30),
 	lineHeight = `${oneLineSize}px`,
-	padding = `0 ${ri.scale(60)}px`,
-	spacing = 60;
+	padding = `0 ${ri.scale(30)}px`,
+	spacing = 30;
 
 const itemStyleDefault = {
 	position: 'absolute',
@@ -196,7 +196,7 @@ const VerticalExpandableDifferentHeightItemList = (props) => {
 				size: itemSize
 			}}
 			spacing={spacing}
-			style={{height: '600px', paddingRight: `${ri.scale(36)}px`}}
+			style={{height: '300px', paddingRight: `${ri.scale(18)}px`}}
 		/>
 	);
 };
