@@ -98,7 +98,7 @@ const MainPanel = ({...rest}) => {
 				childProps={hasChildProps ? childProps : null}
 				dataSize={listItems.length}
 				itemRenderer={renderItem}
-				itemSize={ri.scale(156)}
+				itemSize={ri.scale(78)}
 				key={nativeScroll ? 'native' : 'translate'}
 				scrollMode={nativeScroll ? 'native' : 'translate'}
 			/>

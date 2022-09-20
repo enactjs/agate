@@ -29,8 +29,8 @@ const SampleVirtualGridList = ({index, onClick, ...rest}) => {
 			id={id}
 			itemRenderer={renderItem}
 			itemSize={{
-				minWidth: ri.scale(378),
-				minHeight: ri.scale(378)
+				minWidth: ri.scale(339),
+				minHeight: ri.scale(339)
 			}}
 			spacing={ri.scale(10)}
 			spotlightId={id}

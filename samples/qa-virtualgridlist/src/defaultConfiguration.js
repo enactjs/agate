@@ -13,12 +13,12 @@ export const RECORD_COUNT = 100;
 /**
  * minimum height for items when list is in vertical orientation
  */
-export const MIN_HEIGHT = 570;
+export const MIN_HEIGHT = 285;
 
 /**
  * minimum width for items when list is in horizontal orientation
  */
-export const MIN_WIDTH = 688;
+export const MIN_WIDTH = 344;
 
 /**
  * every nth item will change its caption/subCaption

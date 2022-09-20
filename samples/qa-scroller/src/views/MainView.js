@@ -34,9 +34,9 @@ for (let i = 0; i < 50; i++) {
 
 const MainView = () => {
 	const [focusableScrollbar, setFocusableScrollbar] = useState(false);
-	const [height, setHeight] = useState(4000);
+	const [height, setHeight] = useState(2000);
 	const [nativeScroll, setNativeScroll] = useState(true);
-	const [width, setWidth] = useState(2000);
+	const [width, setWidth] = useState(1000);
 
 	const getScaledSize = (size) => ri.scale(parseInt(size) || 0);
 
