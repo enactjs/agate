@@ -67,7 +67,7 @@ const ExpandableDifferentHeightItem = forwardRef(({index, 'data-index': dataInde
 				<Button data-index={dataIndex} style={buttonStyleDefault} onClick={() => updateItemStatus(index, true)/* eslint-disable-line react/jsx-no-bind */}>
 					Open<Icon>arrowdown</Icon>
 				</Button>
-				<Button data-index={dataIndex} icon="closex" style={iconButtonStyleDefault} />
+				<Button data-index={dataIndex} icon="closex" size="small" style={iconButtonStyleDefault} />
 			</div>
 		);
 
@@ -81,7 +81,7 @@ const ExpandableDifferentHeightItem = forwardRef(({index, 'data-index': dataInde
 				<Button data-index={dataIndex} style={buttonStyleDefault} onClick={() => updateItemStatus(index, false)/* eslint-disable-line react/jsx-no-bind */}>
 					Close<Icon>arrowup</Icon>
 				</Button>
-				<Button data-index={dataIndex} icon="closex" style={iconButtonStyleDefault} />
+				<Button data-index={dataIndex} icon="closex" size="small" style={iconButtonStyleDefault} />
 			</div>
 		);
 
@@ -92,7 +92,7 @@ const ExpandableDifferentHeightItem = forwardRef(({index, 'data-index': dataInde
 				<div style={{height: oneLineSize * numOfLines}}>
 					{children}
 				</div>
-				<Button data-index={dataIndex} icon="closex" style={iconButtonStyleDefault} />
+				<Button data-index={dataIndex} icon="closex" size="small" style={iconButtonStyleDefault} />
 			</div>
 		);
 	}
