@@ -6,6 +6,8 @@ import {VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
 import ImageItem from '@enact/agate/ImageItem';
 import VirtualList, {VirtualGridList} from '@enact/agate/VirtualList';
 
+import {svgGenerator} from '../helper/svg';
+
 const VirtualGridListConfig = mergeComponentMetadata('VirtualGridList', UiVirtualListBasic, VirtualGridList, VirtualList);
 
 const
@@ -50,7 +52,7 @@ const updateDataSize = (dataSize) => {
 			count = (headingZeros + i).slice(-itemNumberDigits),
 			text = `Item ${count}${shouldAddLongContent({index: i, modIndex: 2})}`,
 			color = Math.floor((Math.random() * (0x1000000 - 0x101010)) + 0x101010).toString(16),
-			src = `http://via.placeholder.com/300x300/${color}/ffffff/png?text=Image+${i}`;
+			src = svgGenerator(300, 300, color, 'ffffff', `Image ${i}`);
 
 		items.push({text, src});
 	}

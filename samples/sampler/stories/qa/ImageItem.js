@@ -1,6 +1,8 @@
 import ri from '@enact/ui/resolution';
 import ImageItem from '@enact/agate/ImageItem';
 
+import {svgGenerator} from '../helper/svg';
+
 ImageItem.displayName = 'ImageItem';
 
 export default {
@@ -11,7 +13,7 @@ export default {
 export const withoutChildren = () => (
 	<div style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}>
 		<ImageItem
-			src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
+			src={svgGenerator(300, 400, '9037ab', 'ffffff', 'Image0')}
 		/>
 	</div>
 );
