@@ -13,21 +13,19 @@ export default {
 };
 
 export const _Picker = (args) => (
-	<div style={{padding: '0 20%'}}>
-		<Picker
-			aria-label={args['aria-label']}
-			decrementAriaLabel={args['decrementAriaLabel']}
-			disabled={args['disabled']}
-			incrementAriaLabel={args['incrementAriaLabel']}
-			noAnimation={args['noAnimation']}
-			onChange={action('onChange')}
-			orientation={args['orientation']}
-			spotlightDisabled={args['spotlightDisabled']}
-			wrap={args['wrap']}
-		>
-			{['LO', '16\xB0', '17\xB0', '18\xB0', '19\xB0', 'HI']}
-		</Picker>
-	</div>
+	<Picker
+		aria-label={args['aria-label']}
+		decrementAriaLabel={args['decrementAriaLabel']}
+		disabled={args['disabled']}
+		incrementAriaLabel={args['incrementAriaLabel']}
+		noAnimation={args['noAnimation']}
+		onChange={action('onChange')}
+		orientation={args['orientation']}
+		spotlightDisabled={args['spotlightDisabled']}
+		wrap={args['wrap']}
+	>
+		{['LO', '16\xB0', '17\xB0', '18\xB0', '19\xB0', 'HI']}
+	</Picker>
 );
 
 text('aria-label', _Picker, Config, '');

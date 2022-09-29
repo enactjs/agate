@@ -76,10 +76,15 @@
 @agate-keypad-text-line-height:     57px;
 @agate-keypad-width:                480px;
 
+// MediaPlayer
+// ---------------------------------------
+@agate-mediacontrols-playpause-button-bg-border-radius: 10px;
+@agate-mediaplayer-times-margin: 18px 12px 0;
+
 // Panels
 // ---------------------------------------
 @agate-panels-controls-top: (@agate-component-spacing + 21px);
-@agate-panels-panel-padding: @agate-component-spacing;
+@agate-panels-panel-padding: 24px;
 @agate-panels-tab-bar-margin: 0;
 @agate-panels-tab-bg-position: 0;
 @agate-panels-tab-bg-transform: skewX(@electro-skew);
@@ -109,7 +114,7 @@
 @agate-picker-font-size: 21px;
 @agate-picker-active-font-size: 27px;
 @agate-picker-margin: @agate-component-spacing;
-@agate-picker-padding: 0;
+@agate-picker-padding: 0px; // This is used in `calc` which means it needs the unit specified to work correctly
 
 // Popup
 // ---------------------------------------

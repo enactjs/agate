@@ -1,9 +1,11 @@
 import Image from '../../../../Image';
 
+import hd from '../../images/200x200.png';
+
 const ImageTests = [
 	<Image />,
-	<Image src="http://via.placeholder.com/200x200" />,
-	<Image sizing="fit" src="http://via.placeholder.com/200x200" />
+	<Image src={hd} />,
+	<Image sizing="fit" src={hd} />
 ];
 
 export default ImageTests;

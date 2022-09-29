@@ -1,6 +1,6 @@
 {
   "name": "@enact/agate",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A theme library for Enact, containing a variety of UI components.",
   "repository": "https://github.com/enactjs/agate",
   "main": "index.js",
@@ -37,30 +37,30 @@
     "extends": "enact-proxy/strict"
   },
   "dependencies": {
-    "@enact/core": "^4.5.0-alpha.1",
-    "@enact/i18n": "^4.5.0-alpha.1",
-    "@enact/spotlight": "^4.5.0-alpha.1",
-    "@enact/ui": "^4.5.0-alpha.1",
+    "@enact/core": "^4.5.0",
+    "@enact/i18n": "^4.5.0",
+    "@enact/spotlight": "^4.5.0",
+    "@enact/ui": "^4.5.0",
     "classnames": "^2.3.1",
-    "color-convert": "^1.9.3",
+    "color-convert": "^2.0.1",
     "deep-freeze": "0.0.1",
     "eases": "^1.0.8",
-    "immer": "^9.0.12",
+    "immer": "^9.0.15",
     "invariant": "^2.2.4",
     "prop-types": "^15.8.1",
     "ramda": "^0.28.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "warning": "^4.0.3",
-    "ilib": "^14.14.0"
+    "ilib": "14.14.0"
   },
   "peerDependencies": {
-    "ilib": "^14.14.0 || ^14.14.0-webos1"
+    "ilib": "14.14.0 || ^14.14.0-webos1"
   },
   "devDependencies": {
-    "@enact/docs-utils": "^0.3.6",
-    "@enact/ui-test-utils": "^1.0.0-alpha.1",
-    "eslint-config-enact-proxy": "^1.0.4",
-    "ilib": "^14.14.0"
+    "@enact/docs-utils": "0.3.6",
+    "@enact/ui-test-utils": "^1.0.0",
+    "eslint-config-enact-proxy": "^1.0.5",
+    "ilib": "14.14.0"
   }
 }

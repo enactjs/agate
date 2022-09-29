@@ -193,12 +193,15 @@ const StorybookDecorator = (story, config) => {
 			highlight={highlightFromURL || (highlight || defaultColors['gallium'].highlight)}
 			{...(hasProps ? config.parameters.props : null)}
 		>
-			{showAllSkins ? Object.keys(skins).map((skin) => (
-				<SkinFrame skin={skins[skin]} key={skin}>
-					<Cell size="20%" component={Heading}>{skin}</Cell>
-					<Cell>{sample}</Cell>
-				</SkinFrame>
-			)) : sample}
+			{showAllSkins ?
+				<Scroller>
+					{Object.keys(skins).map((skin) => (
+						<SkinFrame skin={skins[skin]} key={skin}>
+							<Cell size="20%" component={Heading}>{skin}</Cell>
+							<Cell>{sample}</Cell>
+						</SkinFrame>
+					))}
+				</Scroller> : sample}
 		</Theme>
 	);
 };

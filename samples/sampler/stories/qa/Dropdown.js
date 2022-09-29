@@ -6,6 +6,8 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, range, select, text} from '@enact/storybook-utils/addons/controls';
 import Group from '@enact/ui/Group';
+import ri from '@enact/ui/resolution';
+
 import {useCallback, useState} from 'react';
 
 Dropdown.displayName = 'Dropdown';
@@ -66,18 +68,20 @@ export default {
 };
 
 export const With2OptionsForTestingDirection = (args) => (
-	<Dropdown
-		direction={args['direction']}
-		disabled={args['disabled']}
-		onClose={action('onClose')}
-		onOpen={action('onOpen')}
-		onSelect={action('onSelect')}
-		style={{position: 'absolute', top: 'calc(50% - 4rem)'}}
-		title={args['title']}
-		width={args['width']}
-	>
-		{['Option 1', 'Option 2']}
-	</Dropdown>
+	<div style={{minHeight: ri.scaleToRem(501)}}>
+		<Dropdown
+			direction={args['direction']}
+			disabled={args['disabled']}
+			onClose={action('onClose')}
+			onOpen={action('onOpen')}
+			onSelect={action('onSelect')}
+			style={{position: 'absolute', top: 'calc(50% - 4rem)'}}
+			title={args['title']}
+			width={args['width']}
+		>
+			{['Option 1', 'Option 2']}
+		</Dropdown>
+	</div>
 );
 
 select('direction', With2OptionsForTestingDirection, ['above', 'below'], Config);
@@ -165,7 +169,7 @@ select('width', WithMultipleDropdowns, ['smallest', 'small', 'medium', 'large', 
 WithMultipleDropdowns.storyName = 'with multiple dropdowns';
 
 export const WithArrayOfChildrenObjects = (args) => (
-	<div>
+	<div style={{minHeight: ri.scaleToRem(501)}}>
 		<Dropdown
 			direction={args['direction']}
 			disabled={args['disabled']}

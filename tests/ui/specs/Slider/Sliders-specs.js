@@ -158,6 +158,8 @@ describe('Slider', function () {
 
 			describe('pointer', function () {
 				it('should not change the value of horizontal disabled slider on slider click at position', async function () {
+					await Page.pageDown();
+					await Page.delay(500);
 					await slider.focus();
 					const originalValue = await slider.knobPositionHorizontal();
 					await slider.self.click();
@@ -197,6 +199,8 @@ describe('Slider', function () {
 
 			describe('pointer', function () {
 				it('should not change the value of vertical disabled slider on slider click at position', async function () {
+					await Page.pageDown();
+					await Page.delay(500);
 					await slider.focus();
 					const originalValue = await slider.knobPositionVertical();
 					await slider.self.click();

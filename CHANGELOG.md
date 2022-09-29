@@ -2,6 +2,33 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [2.0.1] - 2022-09-29
+
+### Changed
+
+- `agate/Panels` padding to show correctly all Picker samples for Electro skin
+
+### Fixed
+
+- `agate/ArcPicker`, `agate/ArcSlider` foreground color for all skins except Carbon
+- `agate/ArcPicker`, `agate/FanSpeedControl` segments color to be visible on Carbon skin
+- `agate/ArcSlider` progress and knob color to be visible on Carbon skin
+- `agate/DatePicker`, `agate/DateTimePicker`, `agate/Picker`, `agate/RangePicker`, and `agate/TimePicker` text color for Copper skin
+- `agate/DatePicker`, `agate/DateTimePicker`, and `agate/TimePicker` to match latest design for Silicon skin
+- `agate/DatePicker`, `agate/RangePicker`, and `agate/TimePicker` text color to be visible on Carbon skin
+- `agate/Dropdown` layout issues for Carbon, Cobalt, Copper, Titanium skins
+- `agate/Input` to be selectable via double tap
+- `agate/MediaPlayer` layout issues for Cobalt, Carbon, Copper, Electro, Titanium skins
+- `agate/Picker` and `agate/RangePicker` to match latest design for Silicon skin
+- `agate/Scroller` to update scrollButtons state on initial render
+- `agate/Scroller` should not scroll when focus moves from a scroll button to another
+- `agate/TemperatureControl` to have text inline for Spanish locale
+- `agate/ThemeDecorator` to apply the background color and background image properly
+
+### Removed
+
+- `agate/AgateDecorator`, `agate/FullscreenPopup`, `agate/GridListImageItem` and `agate/LabeledItem` component
+
 ## [2.0.0] - 2022-07-01
 
 - Update dependencies including React 18.0.0
@@ -21,7 +48,9 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/MediaPlayer` layout issues for Cobalt, Carbon, Copper, Electro, Titanium skins
 - `agate/MediaPlayer` shuffle button color for Cobalt, and Copper skins
 - `agate/Panel` and `agate/TabGroup` padding for RTL locales
+- `agate/Picker` and `agate/RangePicker` to match latest design for Silicon skin
 - `agate/PopupMenu` title to marquee for long text
+- `agate/RadioItem` icons to not be bigger than icon container
 - `agate/TabGroup` button padding for Cobalt and Copper skins
 - `agate/VirtualList` 5-way navigation between scroll buttons when `focusableScrollbar`
 

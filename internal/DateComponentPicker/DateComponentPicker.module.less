@@ -11,14 +11,23 @@
 	position: relative;
 
 	.applySkins({
-		.item,
-		.itemDecrement,
-		.itemIncrement {
-			&.active {
+		.active {
+			&::before {
 				background-color: transparent;
 				background-image: none;
 			}
 		}
+
+		.focusBackground {
+			width: ~"calc(100% - 2 *" (.extract(@agate-picker-padding, top)[] + @agate-datetimepicker-divider-width)~ ")";
+			z-index: 0;
+		}
+
+		.focus({
+			.focusBackground {
+				display: block;
+			}
+		});
 
 		&::before {
 			position: absolute;

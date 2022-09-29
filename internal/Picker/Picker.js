@@ -43,7 +43,7 @@ const wrapRange = (min, max, value) => {
 const handleChange = direction => handle(
 	adaptEvent(
 		(ev, {min, max, step, value, wrap}) => ({
-			value: wrap ? wrapRange(min, max, value + (direction * step)) :  clamp(min, max, value + (direction * step)),
+			value: wrap ? wrapRange(min, max, value + (direction * step)) : clamp(min, max, value + (direction * step)),
 			reverseTransition: direction < 0
 		}),
 		forward('onChange')
@@ -237,14 +237,6 @@ const PickerBase = kind({
 		reverseTransition: PropTypes.bool,
 
 		/**
-		 * The current skin for this component.
-		 *
-		 * @type {String}
-		 * @public
-		 */
-		skin: PropTypes.string,
-
-		/**
 		 * When `true`, the component cannot be navigated using spotlight.
 		 *
 		 * @type {Boolean}
@@ -402,6 +394,7 @@ const PickerBase = kind({
 				} else return index - 1;
 			} else return 0;
 		},
+		focusBackgroundClassName: ({styler}) => styler.join('focusBackground'),
 		incrementAriaLabel: ({incrementAriaLabel, type}) => {
 			if (incrementAriaLabel != null) {
 				return incrementAriaLabel;
@@ -420,20 +413,6 @@ const PickerBase = kind({
 				} else return index + 1;
 			} else return 0;
 		},
-		secondaryDecrementItemIndex: ({children: values, index, max, min, wrap}) => {
-			if (Array.isArray(values)) {
-				if (wrap) {
-					return wrapRange(min, max, index - 2);
-				} else return index - 2;
-			} else return 0;
-		},
-		secondaryIncrementItemIndex: ({children: values, index, max, min, wrap}) => {
-			if (Array.isArray(values)) {
-				if (wrap) {
-					return wrapRange(min, max, index + 2);
-				} else return index + 2;
-			} else return 0;
-		},
 		valueId: ({id}) => `${id}_value`
 	},
 
@@ -447,6 +426,7 @@ const PickerBase = kind({
 			decrementAriaLabel: decAriaLabel,
 			decrementItemIndex,
 			disabled,
+			focusBackgroundClassName,
 			handleDecrement,
 			handleFlick,
 			handleIncrement,
@@ -458,9 +438,6 @@ const PickerBase = kind({
 			onSpotlightDisappear,
 			orientation,
 			reverseTransition,
-			secondaryDecrementItemIndex,
-			secondaryIncrementItemIndex,
-			skin,
 			spotlightDisabled,
 			step,
 			value,
@@ -472,8 +449,6 @@ const PickerBase = kind({
 
 		const isFirst = value <= min;
 		const isLast = value >= max;
-		const isSecond = value <= min + step;
-		const isPenultimate = value >= max - step;
 		const decrementAriaLabel = `${currentValueText} ${decAriaLabel}`;
 		const incrementAriaLabel = `${currentValueText} ${incAriaLabel}`;
 		const transitionDuration = 150;
@@ -502,27 +477,7 @@ const PickerBase = kind({
 			}
 		};
 
-		const secondaryDecrementValue = () => {
-			const restrictedSecondaryDecrementValue = wrap ? wrapRange(min, max, value - (2 * step)) : clamp(min, max, value - (2 * step));
-			if (isSecond && !wrap) {
-				return '';
-			} else if (Array.isArray(values)) {
-				return values;
-			} else {
-				return (<PickerItem key={restrictedSecondaryDecrementValue} style={{direction: 'ltr'}}>{restrictedSecondaryDecrementValue}</PickerItem>);
-			}
-		};
 
-		const secondaryIncrementValue = () => {
-			const restrictedSecondaryIncrementValue = wrap ? wrapRange(min, max, value + (2 * step)) : clamp(min, max, value + (2 * step));
-			if (isPenultimate && !wrap) {
-				return '';
-			} else if (Array.isArray(values)) {
-				return values;
-			} else {
-				return (<PickerItem key={restrictedSecondaryIncrementValue} style={{direction: 'ltr'}}>{restrictedSecondaryIncrementValue}</PickerItem>);
-			}
-		};
 
 		let sizingPlaceholder = null;
 		if (typeof width === 'number' && width > 0) {
@@ -542,33 +497,8 @@ const PickerBase = kind({
 		delete rest.wrap;
 
 		return (
-			<PickerRoot {...rest} onFlick={handleFlick}>
-				{skin === 'silicon'  &&
-					<PickerButtonItem
-						aria-controls={valueId}
-						aria-disabled={isSecond}
-						aria-label={decrementAriaLabel}
-						className={css.secondaryItemDecrement}
-						disabled={disabled || isSecond}
-						onClick={secondaryDecrementValue() === '' ? () => {} : () => {
-							handleDecrement(); setTimeout(() => handleDecrement(), transitionDuration);
-						}}
-						onSpotlightDisappear={onSpotlightDisappear}
-						spotlightDisabled={spotlightDisabled || secondaryDecrementValue() === ''}
-					>
-						<ViewManager
-							aria-hidden
-							arranger={arranger}
-							className={css.viewManager}
-							duration={transitionDuration}
-							index={secondaryDecrementItemIndex}
-							noAnimation={noAnimation || disabled}
-							reverseTransition={reverseTransition}
-						>
-							{secondaryDecrementValue()}
-						</ViewManager>
-					</PickerButtonItem>
-				}
+			<PickerRoot {...rest} disabled={disabled} onFlick={handleFlick} >
+				<div className={focusBackgroundClassName} />
 				<PickerButtonItem
 					aria-controls={valueId}
 					aria-disabled={disabled || isFirst}
@@ -603,6 +533,7 @@ const PickerBase = kind({
 						aria-hidden
 						arranger={arranger}
 						className={css.viewManager}
+						disabled={disabled}
 						duration={transitionDuration}
 						index={currentItemIndex}
 						noAnimation={noAnimation || disabled}
@@ -633,32 +564,6 @@ const PickerBase = kind({
 						{incrementValue()}
 					</ViewManager>
 				</PickerButtonItem>
-				{skin === 'silicon' &&
-					<PickerButtonItem
-						aria-controls={valueId}
-						aria-disabled={isPenultimate}
-						aria-label={incrementAriaLabel}
-						className={css.secondaryItemIncrement}
-						disabled={disabled || isPenultimate}
-						onClick={secondaryIncrementValue() === '' ? () => {} : () => {
-							handleIncrement(); setTimeout(() => handleIncrement(), transitionDuration);
-						}}
-						onSpotlightDisappear={onSpotlightDisappear}
-						spotlightDisabled={spotlightDisabled || secondaryIncrementValue() === ''}
-					>
-						<ViewManager
-							aria-hidden
-							arranger={arranger}
-							className={css.viewManager}
-							duration={transitionDuration}
-							index={secondaryIncrementItemIndex}
-							noAnimation={noAnimation || disabled}
-							reverseTransition={reverseTransition}
-						>
-							{secondaryIncrementValue()}
-						</ViewManager>
-					</PickerButtonItem>
-				}
 			</PickerRoot>
 		);
 	}

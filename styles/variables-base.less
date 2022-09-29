@@ -211,7 +211,7 @@
 // DateTimePicker
 // ---------------------------------------
 @agate-datetimepicker-divider-height: inherit;
-@agate-datetimepicker-divider-width: inherit;
+@agate-datetimepicker-divider-width: 0px; // This is used in `calc` which means it needs the unit specified to work correctly
 
 // Dropdown
 // ---------------------------------------
@@ -265,12 +265,6 @@
 @agate-fanspeedcontrol-value-padding-left: 0;
 @agate-fanspeedcontrol-value-text-align: center;
 @agate-fanspeedcontrol-value-width: 90px;
-
-// GridListImageItem
-// ---------------------------------------
-@agate-gridlistimageitem-caption-weight: @agate-base-font-weight;
-@agate-gridlistimageitem-caption-height: 48px;
-@agate-gridlistimageitem-subcaption-height: 48px;
 
 // Header
 // ---------------------------------------
@@ -631,13 +625,18 @@
 // Picker
 // ---------------------------------------
 @agate-picker-border-radius: 0;
+@agate-picker-disabled-opacity: 1;
+@agate-picker-horizontal-active-width: @agate-picker-horizontal-item-width;
+@agate-picker-horizontal-item-height: @agate-picker-item-height;
 @agate-picker-horizontal-item-width: 120px;
+@agate-picker-horizontal-padding: @agate-picker-padding;
 @agate-picker-transform: none;
 @agate-picker-label-transform: none;
 @agate-picker-font-weight: @agate-base-font-weight;
 @agate-picker-font-size: 24px;
 @agate-picker-active-font-size: 36px;
 @agate-picker-active-font-weight: @agate-base-font-weight;
+@agate-picker-active-height: @agate-picker-item-height;
 @agate-picker-margin: 0;
 @agate-picker-padding: 6px;
 @agate-picker-item-height: @agate-button-height;
@@ -775,6 +774,8 @@
 @agate-radioitem-icon-selected-opacity: inherit;
 @agate-radioitem-slotbefore-margin-end: 12px;
 @agate-radioitem-icon-margin: 0;
+@agate-radioitem-icon-height: 42px;
+@agate-radioitem-icon-width: 42px;
 
 // Scrollbar
 // ---------------------------------------

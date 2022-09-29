@@ -1,5 +1,6 @@
 // DateTimePicker.module.less
 //
+@import "../styles/mixins.less";
 @import "../styles/skin.less";
 @import "../styles/variables.less";
 
@@ -38,8 +39,13 @@
 
 		&::before {
 			height: @agate-picker-item-height;
-			background-image: @agate-datetimepicker-active-container-bg-image;
 			background-color: @agate-datetimepicker-active-container-bg-color;
 		}
+
+		.disabled({
+			&::before {
+				opacity: @agate-picker-disabled-opacity;
+			}
+		})
 	}
 });
