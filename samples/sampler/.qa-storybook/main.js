@@ -19,7 +19,7 @@ module.exports = {
 		'@enact/storybook-utils/addons/controls',
 		'@enact/storybook-utils/addons/docs',
 		'@enact/storybook-utils/addons/toolbars',
-		'../custom-addon/register.js'
+		'../custom-addon'
 	],
 	webpackFinal: async (config, {configType}) => {
 		return webpack(config, configType, __dirname);
