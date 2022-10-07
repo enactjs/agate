@@ -4,7 +4,9 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
-- `agate/Input` added spellCheck attribute 'false' for input type password
+### Added
+
+- `agate/Input` spellCheck attribute 'false' for input type password
 
 ## [2.0.1] - 2022-09-29
 
