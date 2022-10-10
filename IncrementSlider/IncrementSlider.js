@@ -606,6 +606,7 @@ const IncrementSliderDecorator = compose(
 	Changeable,
 	IdProvider({generateProp: null, prefix: 's_'}),
 	SliderBehaviorDecorator({emitSpotlightEvents: 'onSpotlightDirection'}),
+	Spottable,
 	Skinnable,
 	Slottable({slots: ['knob', 'tooltip']})
 );

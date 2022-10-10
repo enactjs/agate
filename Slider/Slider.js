@@ -97,7 +97,6 @@ const SliderBase = kind({
 		 */
 		css: PropTypes.object,
 
-
 		/**
 		 * Disables component and does not generate events.
 		 *
