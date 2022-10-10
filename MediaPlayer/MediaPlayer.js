@@ -350,7 +350,7 @@ const MediaPlayerBase = kind({
 });
 
 /**
- * Media player behaviors to apply to [MediaPlayerBase]{@link agate/MediaPlayer.MediaPlayerBase}.
+ * Media player behaviors to apply to {@link agate/MediaPlayer.MediaPlayerBase|MediaPlayerBase}.
  *
  * @class MediaPlayerBehaviorDecorator
  * @hoc

@@ -128,9 +128,9 @@ const IncrementSliderBase = kind({
 		decrementAriaLabel: PropTypes.string,
 
 		/**
-		 * Assign a custom icon for the decrementer. All strings supported by [Icon]{@link agate/Icon.Icon} are
+		 * Assign a custom icon for the decrementer. All strings supported by {@link agate/Icon.Icon|Icon} are
 		 * supported. Without a custom icon, the default is used, and is automatically changed when
-		 * [vertical]{@link agate/IncrementSlider.IncrementSlider#vertical} is changed.
+		 * {@link agate/IncrementSlider.IncrementSlider#vertical|vertical} is changed.
 		 *
 		 * @type {String}
 		 * @default 'minus'
@@ -171,9 +171,9 @@ const IncrementSliderBase = kind({
 		incrementAriaLabel: PropTypes.string,
 
 		/**
-		 * Assign a custom icon for the incrementer. All strings supported by [Icon]{@link agate/Icon.Icon} are
+		 * Assign a custom icon for the incrementer. All strings supported by {@link agate/Icon.Icon|Icon} are
 		 * supported. Without a custom icon, the default is used, and is automatically changed when
-		 * [vertical]{@link agate/IncrementSlider.IncrementSlider#vertical} is changed.
+		 * {@link agate/IncrementSlider.IncrementSlider#vertical|vertical} is changed.
 		 *
 		 * @type {String}
 		 * @default 'plus'
@@ -378,7 +378,7 @@ const IncrementSliderBase = kind({
 		 * Enables the built-in tooltip
 		 *
 		 * To customize the tooltip, pass either a custom tooltip component or an instance of
-		 * [IncrementSliderTooltip]{@link agate/IncrementSlider.IncrementSliderTooltip} with additional props configured.
+		 * {@link agate/IncrementSlider.IncrementSliderTooltip|IncrementSliderTooltip} with additional props configured.
 		 *
 		 * ```
 		 * <IncrementSlider
@@ -389,7 +389,7 @@ const IncrementSliderBase = kind({
 		 * ```
 		 *
 		 * The tooltip may also be passed as a child via the `"tooltip"` slot. See
-		 * [Slottable]{@link ui/Slottable} for more information on how slots can be used.
+		 * {@link ui/Slottable|Slottable} for more information on how slots can be used.
 		 *
 		 * ```
 		 * <IncrementSlider>
@@ -592,7 +592,7 @@ const IncrementSliderBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [IncrementSliderBase]{@link agate/IncrementSlider.IncrementSliderBase}
+ * Applies Agate specific behaviors to {@link agate/IncrementSlider.IncrementSliderBase|IncrementSliderBase}
  *
  * @hoc
  * @memberof agate/IncrementSlider
@@ -629,9 +629,9 @@ const IncrementSliderDecorator = compose(
 const IncrementSlider = IncrementSliderDecorator(IncrementSliderBase);
 
 /**
- * A [Tooltip]{@link agate/TooltipDecorator.Tooltip} specifically adapted for use with
- * [ProgressBar]{@link agate/ProgressBar.ProgressBar} or
- * [IncrementSlider]{@link agate/IncrementSlider.IncrementSlider}.
+ * A {@link agate/TooltipDecorator.Tooltip|Tooltip} specifically adapted for use with
+ * {@link agate/ProgressBar.ProgressBar|ProgressBar} or
+ * {@link agate/IncrementSlider.IncrementSlider|IncrementSlider}.
  *
  * @see {@link agate/ProgressBar.ProgressBarTooltip}
  * @class IncrementSliderTooltip

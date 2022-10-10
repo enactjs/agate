@@ -26,7 +26,7 @@ import {arcPath} from './utils';
  * An arc component.
  *
  * This component is most often not used directly but may be composed within another component as it
- * is within [Arc]{@link agate/Arc.Arc}.
+ * is within {@link agate/Arc.Arc|Arc}.
  *
  * @class ArcBase
  * @memberof agate/Arc
@@ -151,7 +151,7 @@ const ArcBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [ArcBase]{@link agate/Arc.ArcBase} components.
+ * Applies Agate specific behaviors to {@link agate/Arc.ArcBase|ArcBase} components.
  *
  * @hoc
  * @memberof agate/Arc

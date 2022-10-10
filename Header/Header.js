@@ -41,7 +41,7 @@ const HeaderBase = kind({
 		/**
 		 * Title of the header.
 		 *
-		 * This is a [`slot`]{@link ui/Slottable.Slottable}, so it can be used as a tag-name inside
+		 * This is a {@link ui/Slottable.Slottable|slot}, so it can be used as a tag-name inside
 		 * this component.
 		 *
 		 * Example:
@@ -102,7 +102,7 @@ const HeaderBase = kind({
 		/**
 		 * Text displayed below the title.
 		 *
-		 * This is a [`slot`]{@link ui/Slottable.Slottable}, so it can be used as a tag-name inside
+		 * This is a {@link ui/Slottable.Slottable|slot}, so it can be used as a tag-name inside
 		 * this component.
 		 *
 		 * @type {String}
@@ -112,7 +112,7 @@ const HeaderBase = kind({
 		/**
 		 * Text displayed above the title.
 		 *
-		 * This is a [`slot`]{@link ui/Slottable.Slottable}, so it can be used as a tag-name inside
+		 * This is a {@link ui/Slottable.Slottable|slot}, so it can be used as a tag-name inside
 		 * this component.
 		 *
 		 * @type {String}
@@ -164,7 +164,7 @@ const HeaderBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [Header]{@link agate/Header.Header} components.
+ * Applies Agate specific behaviors to {@link agate/Header.Header|Header} components.
  *
  * @hoc
  * @memberof agate/Header

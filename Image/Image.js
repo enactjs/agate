@@ -137,7 +137,7 @@ const ResponsiveImageDecorator = hoc((config, Wrapped) => {
 });
 
 /**
- * agate-specific behaviors to apply to [Image]{@link agate/Image.ImageBase}.
+ * agate-specific behaviors to apply to {@link agate/Image.ImageBase|Image}.
  *
  * @hoc
  * @memberof agate/Image

@@ -374,7 +374,7 @@ const DropdownBase = kind({
 
 /**
  * Applies Agate specific behaviors and functionality to
- * [DropdownBase]{@link agate/Dropdown.DropdownBase}.
+ * {@link agate/Dropdown.DropdownBase|DropdownBase}.
  *
  * @hoc
  * @memberof agate/Dropdown

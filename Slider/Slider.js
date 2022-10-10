@@ -205,7 +205,7 @@ const SliderBase = kind({
 		 * Enables the built-in tooltip
 		 *
 		 * To customize the tooltip, pass either a custom tooltip component or an instance of
-		 * [SliderTooltip]{@link agate/Slider.SliderTooltip} with additional props configured.
+		 * {@link agate/Slider.SliderTooltip|SliderTooltip} with additional props configured.
 		 *
 		 * ```
 		 * <Slider
@@ -216,7 +216,7 @@ const SliderBase = kind({
 		 * ```
 		 *
 		 * The tooltip may also be passed as a child via the `"tooltip"` slot. See
-		 * [Slottable]{@link ui/Slottable} for more information on how slots can be used.
+		 * {@link ui/Slottable|Slottable} for more information on how slots can be used.
 		 *
 		 * ```
 		 * <Slider>
@@ -323,7 +323,7 @@ const SliderBase = kind({
 });
 
 /**
- * Agate-specific slider behaviors to apply to [SliderBase]{@link agate/Slider.SliderBase}.
+ * Agate-specific slider behaviors to apply to {@link agate/Slider.SliderBase|SliderBase}.
  *
  * @hoc
  * @memberof agate/Slider
@@ -343,8 +343,8 @@ const SliderDecorator = compose(
 );
 
 /**
- * Slider input with Agate styling, [`Spottable`]{@link spotlight/Spottable.Spottable},
- * [Touchable]{@link ui/Touchable} and [`SliderDecorator`]{@link agate/Slider.SliderDecorator}
+ * Slider input with Agate styling, {@link spotlight/Spottable.Spottable|Spottable},
+ * {@link ui/Touchable|Touchable} and {@link agate/Slider.SliderDecorator|SliderDecorator}
  * applied.
  *
  * By default, `Slider` maintains the state of its `value` property. Supply the `defaultValue`
@@ -373,9 +373,9 @@ const Slider = SliderDecorator(SliderBase);
  */
 
 /**
- * A [Tooltip]{@link agate/TooltipDecorator.Tooltip} specifically adapted for use with
- * [ProgressBar]{@link agate/ProgressBar.ProgressBar} or
- * [Slider]{@link agate/Slider.Slider}.
+ * A {@link agate/TooltipDecorator.Tooltip|Tooltip} specifically adapted for use with
+ * {@link agate/ProgressBar.ProgressBar|ProgressBar} or
+ * {@link agate/Slider.Slider|Slider}.
  *
  * @see {@link agate/ProgressBar.ProgressBarTooltip}
  * @class SliderTooltip

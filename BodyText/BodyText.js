@@ -28,7 +28,7 @@ const MarqueeBodyText = MarqueeDecorator(UiBodyText);
  * A simple text block component.
  *
  * This component is most often not used directly but may be composed within another component as it
- * is within [BodyText]{@link agate/BodyText.BodyText}.
+ * is within {@link agate/BodyText.BodyText|BodyText}.
  *
  * @class BodyTextBase
  * @memberof agate/BodyText
@@ -44,7 +44,7 @@ const BodyTextBase = kind({
 		 * Centers the contents.
 		 *
 		 * Applies the `centered` CSS class which can be customized by
-		 * [theming]{@link /docs/developer-guide/theming/}.
+		 * {@link /docs/developer-guide/theming/|theming}.
 		 *
 		 * @type {Boolean}
 		 * @default false
@@ -127,7 +127,7 @@ const BodyTextBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [BodyTextBase]{@link agate/BodyText.BodyTextBase}.
+ * Applies Agate specific behaviors to {@link agate/BodyText.BodyTextBase|BodyTextBase}.
  *
  * @hoc
  * @memberof agate/BodyText

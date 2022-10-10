@@ -12,8 +12,8 @@ import componentCss from './Panel.module.less';
 let panelId = 0;
 
 /**
- * A Panel is the standard view container used inside a [Panels]{@link agate/Panels.Panels} view
- * manager instance. [Panels]{@link agate/Panels.Panels} will typically contain several
+ * A Panel is the standard view container used inside a {@link agate/Panels.Panels|Panels} view
+ * manager instance. {@link agate/Panels.Panels|Panels} will typically contain several
  * instances of these and transition between them.
  *
  * @class Panel
@@ -27,7 +27,7 @@ const PanelBase = kind({
 
 	propTypes: /** @lends agate/Panels.Panel.prototype */ {
 		/**
-		 * By default, the panel will be labeled by its [Header]{@link agate/Header.Header}.
+		 * By default, the panel will be labeled by its {@link agate/Header.Header|Header}.
 		 * When `aria-label` is set, it will be used instead to provide an accessibility label for
 		 * the panel.
 		 *
@@ -70,8 +70,8 @@ const PanelBase = kind({
 		/**
 		 * Header for the panel.
 		 *
-		 * This is usually passed by the [Slottable]{@link ui/Slottable.Slottable} API by using a
-		 * [Header]{@link agate/Header.Header} component as a child of the Panel.
+		 * This is usually passed by the {@link ui/Slottable.Slottable|Slottable} API by using a
+		 * {@link agate/Header.Header|Header} component as a child of the Panel.
 		 *
 		 * @type {Node}
 		 * @public
@@ -81,9 +81,9 @@ const PanelBase = kind({
 		/**
 		 * Hides the body components.
 		 *
-		 * When a Panel is used within [`Panels`]{@link agate/Panels.Panels},
-		 * [`BreadcrumbPanels`]{@link agate/Panels.BreadcrumbPanels}, or
-		 * [`TabbedPanels`]{@link agate/Panels.TabbedPanels},
+		 * When a Panel is used within {@link agate/Panels.Panels|Panels},
+		 * {@link agate/Panels.BreadcrumbPanels|BreadcrumbPanels}, or
+		 * {@link agate/Panels.TabbedPanels|TabbedPanels},
 		 * this property will be set automatically to `true` on render and `false` after animating
 		 * into view.
 		 *

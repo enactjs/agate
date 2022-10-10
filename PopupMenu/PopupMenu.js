@@ -202,7 +202,7 @@ const PopupMenuBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [PopupMenuBase]{@link agate/PopupMenu.PopupMenuBase}.
+ * Applies Agate specific behaviors to {@link agate/PopupMenu.PopupMenuBase|PopupMenuBase}.
  *
  * @hoc
  * @memberof agate/PopupMenu

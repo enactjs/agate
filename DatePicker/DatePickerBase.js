@@ -11,7 +11,7 @@ import css from './DatePicker.module.less';
  * A date selection component.
  *
  * This component is most often not used directly but may be composed within another component as it
- * is within [DatePicker]{@link agate/DatePicker.DatePicker}.
+ * is within {@link agate/DatePicker.DatePicker|DatePicker}.
  *
  * @class DatePickerBase
  * @memberof agate/DatePicker
