@@ -1,5 +1,5 @@
 /**
- * Exports the {@link agate/Skinnable.Skinnable} Higher-order Component (HOC).
+ * Exports the {@link agate/Skinnable.Skinnable|Skinnable} Higher-order Component (HOC).
  *
  * @module agate/Skinnable
  * @exports Skinnable

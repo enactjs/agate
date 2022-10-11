@@ -54,7 +54,7 @@ const getDurFmt = (locale) => {
 };
 
 /**
- * A player for media {@link agate/MediaPlayer.MediaPlayer}.
+ * A player for media {@link agate/MediaPlayer.MediaPlayer|MediaPlayer}.
  *
  * @class MediaPlayerBase
  * @memberof agate/MediaPlayer

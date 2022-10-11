@@ -240,7 +240,7 @@ const CustomizableSkinStyle = kind({
 });
 
 /**
- * {@link agate/ThemeDecorator.ThemeDecorator} is a Higher-order Component that applies
+ * {@link agate/ThemeDecorator.ThemeDecorator|ThemeDecorator} is a Higher-order Component that applies
  * Agate theming to an application. It also applies
  * {@link ui/FloatingLayer.FloatingLayerDecorator|floating layer},
  * {@link ui/resolution.ResolutionDecorator|resolution independence},

@@ -52,7 +52,7 @@ const forwardWithType = (type, props) => forward(type, {type}, props);
 
 /**
  * A stateless Slider with IconButtons to increment and decrement the value. In most circumstances,
- * you will want to use the stateful version: {@link agate/IncrementSlider.IncrementSlider}.
+ * you will want to use the stateful version: {@link agate/IncrementSlider.IncrementSlider|IncrementSlider}.
  *
  * @class IncrementSliderBase
  * @memberof agate/IncrementSlider
