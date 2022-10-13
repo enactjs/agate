@@ -120,12 +120,12 @@ const IncrementSliderBase = kind({
 		css: PropTypes.object,
 
 		/**
-		* Sets the hint string read when focusing the decrement button.
-		*
-		* @type {String}
-		* @default 'press button to decrease the value'
-		* @public
-		*/
+		 * Sets the hint string read when focusing the decrement button.
+		 *
+		 * @type {String}
+		 * @default 'press button to decrease the value'
+		 * @public
+		 */
 		decrementAriaLabel: PropTypes.string,
 
 		/**
@@ -163,12 +163,12 @@ const IncrementSliderBase = kind({
 		id: PropTypes.string,
 
 		/**
-		* Sets the hint string read when focusing the increment button.
-		*
-		* @default 'press button to increase the value'
-		* @type {String}
-		* @public
-		*/
+		 * Sets the hint string read when focusing the increment button.
+		 *
+		 * @default 'press button to increase the value'
+		 * @type {String}
+		 * @public
+		 */
 		incrementAriaLabel: PropTypes.string,
 
 		/**
@@ -500,43 +500,43 @@ const IncrementSliderBase = kind({
 	},
 
 	render: ({
-		activateOnFocus,
-		active,
-		'aria-hidden': ariaHidden,
-		backgroundProgress,
-		css,
-		decrementAriaLabel,
-		decrementDisabled,
-		decrementIcon,
-		disabled,
-		focused,
-		id,
-		incrementAriaLabel,
-		incrementDisabled,
-		incrementIcon,
-		knobStep,
-		max,
-		min,
-		noFill,
-		onActivate,
-		onChange,
-		onDecrement,
-		onDecrementSpotlightDisappear,
-		onDragEnd,
-		onDragStart,
-		onIncrement,
-		onIncrementSpotlightDisappear,
-		onSpotlightDisappear,
-		orientation,
-		progressAnchor,
-		size,
-	    sliderRef,
-		spotlightDisabled,
-		step,
-		tooltip,
-		value,
-		...rest
-	}) => {
+		 activateOnFocus,
+		 active,
+		 'aria-hidden': ariaHidden,
+		 backgroundProgress,
+		 css,
+		 decrementAriaLabel,
+		 decrementDisabled,
+		 decrementIcon,
+		 disabled,
+		 focused,
+		 id,
+		 incrementAriaLabel,
+		 incrementDisabled,
+		 incrementIcon,
+		 knobStep,
+		 max,
+		 min,
+		 noFill,
+		 onActivate,
+		 onChange,
+		 onDecrement,
+		 onDecrementSpotlightDisappear,
+		 onDragEnd,
+		 onDragStart,
+		 onIncrement,
+		 onIncrementSpotlightDisappear,
+		 onSpotlightDisappear,
+		 orientation,
+		 progressAnchor,
+		 size,
+		 sliderRef,
+		 spotlightDisabled,
+		 step,
+		 tooltip,
+		 value,
+		 ...rest
+	 }) => {
 		const ariaProps = extractAriaProps(rest);
 		delete rest.onSpotlightDirection;
 		delete rest.onSpotlightDown;
