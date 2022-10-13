@@ -590,10 +590,19 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		};
 
 		handleClose = () => {
+			console.log("handleClose");
 			this.updateLeaveFor(null);
 			this.setState({
 				activator: null
 			});
+		};
+
+		handleDismiss = (ev) => {
+			console.log("handleDismiss");
+			console.log(this.props.onClose);
+			this.props.onClose(ev);
+
+			// forwardCustom('onClose')({}, this.props);
 		};
 
 		handleDirectionalKey (ev) {
@@ -684,12 +693,15 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 
 			if (openProp) rest[openProp] = open;
 
+			console.log("onClose=");
+			console.log(onClose);
+
 			return (
 				<div className={componentCss.contextualPopupDecorator}>
 					<FloatingLayer
 						noAutoDismiss={noAutoDismiss}
 						onClose={this.handleClose}
-						onDismiss={onClose}
+						onDismiss={this.handleDismiss}
 						onOpen={this.handleOpen}
 						open={open}
 						scrimType={scrimType}
