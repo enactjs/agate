@@ -193,7 +193,7 @@ const SliderBase = kind({
 		progressAnchor: PropTypes.number,
 
 		/**
-		 * Called with the reference to the uiSlider node.
+		 * Called with the reference to the Slider node.
 		 *
 		 * @type {Object|Function}
 		 * @public
