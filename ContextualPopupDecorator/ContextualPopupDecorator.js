@@ -590,7 +590,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		};
 
 		handleClose = () => {
-			console.log("handleClose");
+			console.log("ContextualPopupDecorator handleClose");
 			this.updateLeaveFor(null);
 			this.setState({
 				activator: null
@@ -598,7 +598,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		};
 
 		handleDismiss = (ev) => {
-			console.log("handleDismiss");
+			console.log("ContextualPopupDecorator handleDismiss");
 			console.log(this.props.onClose);
 			this.props.onClose(ev);
 
@@ -693,8 +693,10 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 
 			if (openProp) rest[openProp] = open;
 
-			console.log("onClose=");
+			console.log("ContextualPopupDecorator render onClose=");
 			console.log(onClose);
+			console.log("ContextualPopupDecorator render scrimType=");
+			console.log(scrimType);
 
 			return (
 				<div className={componentCss.contextualPopupDecorator}>
