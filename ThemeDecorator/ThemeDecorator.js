@@ -286,6 +286,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	});
 
 	// set the DOM node ID of the React DOM tree root
+	console.log("ThemeDecorator setDefaultTargetById rootId = " + rootId);
 	setDefaultTargetById(rootId);
 
 	const Decorator = class extends Component {
@@ -317,6 +318,16 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			 */
 			skin: PropTypes.string
 		};
+
+		componentDidMount () {
+			// set the DOM node ID of the React DOM tree root
+			console.log("ThemeDecorator componentDidMount setDefaultTargetById rootId = " + rootId);
+			setDefaultTargetById(rootId);
+		}
+
+		componentDidUpdate () {
+			console.log("ThemeDecorator componentDidMount rootId = " + rootId);
+		}
 
 		render () {
 			const currentSkin = this.props.skin || defaultSkin;
