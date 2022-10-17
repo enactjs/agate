@@ -320,9 +320,8 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		};
 
 		componentDidMount () {
-			// set the DOM node ID of the React DOM tree root
-			console.log("ThemeDecorator componentDidMount setDefaultTargetById rootId = " + rootId);
-			setDefaultTargetById(rootId);
+			console.log("ThemeDecorator componentDidMount rootId = " + rootId);
+			// setDefaultTargetById(rootId);
 		}
 
 		componentDidUpdate () {
