@@ -189,7 +189,7 @@ const SliderBehaviorDecorator = hoc(defaultConfig, (config, Wrapped) => {
 					onDragStart={this.handleDragStart}
 					onDragEnd={this.handleDragEnd}
 					onFocus={this.handleFocus}
-					sliderRef={this.sliderRef}
+					ref={this.sliderRef}
 				/>
 			);
 		}
