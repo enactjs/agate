@@ -189,7 +189,7 @@ const dateTimeConfig = {
 };
 
 /**
- * Applies Agate specific behaviors to [TimePickerBase]{@link agate/TimePicker.TimePickerBase} components.
+ * Applies Agate specific behaviors to {@link agate/TimePicker.TimePickerBase|TimePickerBase} components.
  *
  * @hoc
  * @memberof agate/TimePicker
@@ -204,8 +204,8 @@ const TimePickerDecorator = compose(
 /**
  * A component that allows displaying or selecting time.
  *
- * Set the [value]{@link agate/TimePicker.TimePicker#value} property to a standard JavaScript
- * [Date] {@link /docs/developer-guide/glossary/#date} object to initialize the picker.
+ * Set the {@link agate/TimePicker.TimePicker#value|value} property to a standard JavaScript
+ *  {@link /docs/developer-guide/glossary/#date|Date} object to initialize the picker.
  *
  * By default, `TimePicker` maintains the state of its `value` property. Supply the
  * `defaultValue` property to control its initial value. If you wish to directly control updates

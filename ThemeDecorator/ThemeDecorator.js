@@ -240,15 +240,15 @@ const CustomizableSkinStyle = kind({
 });
 
 /**
- * {@link agate/ThemeDecorator.ThemeDecorator} is a Higher-order Component that applies
+ * {@link agate/ThemeDecorator.ThemeDecorator|ThemeDecorator} is a Higher-order Component that applies
  * Agate theming to an application. It also applies
- * [floating layer]{@link ui/FloatingLayer.FloatingLayerDecorator},
- * [resolution independence]{@link ui/resolution.ResolutionDecorator},
- * [skin support]{@link ui/Skinnable}, [spotlight]{@link spotlight.SpotlightRootDecorator}, and
- * [internationalization support]{@link i18n/I18nDecorator.I18nDecorator}. It is meant to be applied to
+ * {@link ui/FloatingLayer.FloatingLayerDecorator|floating layer},
+ * {@link ui/resolution.ResolutionDecorator|resolution independence},
+ * {@link ui/Skinnable|skin support}, {@link spotlight.SpotlightRootDecorator|spotlight}, and
+ * {@link i18n/I18nDecorator.I18nDecorator|internationalization support}. It is meant to be applied to
  * the root element of an app.
  *
- * [Skins]{@link ui/Skinnable} provide a way to change the coloration of your app. The currently
+ * {@link ui/Skinnable|Skins} provide a way to change the coloration of your app. The currently
  * supported skins for Agate are "agate" (the default, dark skin) and "agate-light".
  * Use the `skin` property to assign a skin. Ex: `<DecoratedApp skin="light" />`
  *

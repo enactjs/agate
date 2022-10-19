@@ -7,7 +7,7 @@ import css from './MediaSlider.module.less';
 
 /**
  * A customized slider suitable for use within media player components such as
- * [MediaPlayer]{@link agate/MediaPlayer.MediaPlayer}.
+ * {@link agate/MediaPlayer.MediaPlayer|MediaPlayer}.
  *
  * @class MediaSlider
  * @memberof agate/MediaPlayer

@@ -101,7 +101,7 @@ const ProgressBarBase = kind({
 		 * Enables the built-in tooltip.
 		 *
 		 * To customize the tooltip, pass either a custom tooltip component or an instance of
-		 * [ProgressBarTooltip]{@link agate/ProgressBar.ProgressBarTooltip} with additional
+		 * {@link agate/ProgressBar.ProgressBarTooltip|ProgressBarTooltip} with additional
 		 * props configured.
 		 *
 		 * The provided component will receive the following props from `ProgressBar`:
@@ -122,7 +122,7 @@ const ProgressBarBase = kind({
 		 * ```
 		 *
 		 * The tooltip may also be passed as a child via the `"tooltip"` slot. See
-		 * [Slottable]{@link ui/Slottable} for more information on how slots can be used.
+		 * {@link ui/Slottable|Slottable} for more information on how slots can be used.
 		 *
 		 * Usage:
 		 * ```
@@ -179,7 +179,7 @@ const ProgressBarBase = kind({
 });
 
 /**
- * Agate-specific behaviors to apply to [ProgressBar]{@link agate/ProgressBar.ProgressBarBase}.
+ * Agate-specific behaviors to apply to {@link agate/ProgressBar.ProgressBarBase|ProgressBar}.
  *
  * @hoc
  * @memberof agate/ProgressBar
