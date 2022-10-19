@@ -7,8 +7,8 @@ import {onlyUpdateForProps} from '../internal/util';
 import componentCss from './IncrementSliderButton.module.less';
 
 /**
- * A [Button]{@link agate/Button.Button} customized for
- * [IncrementSlider]{@link agate/IncrementSlider.IncrementSlider}. It is optimized to only
+ * A {@link agate/Button.Button|Button} customized for
+ * {@link agate/IncrementSlider.IncrementSlider|IncrementSlider}. It is optimized to only
  * update when `disabled` is changed to minimize unnecessary render cycles.
  *
  * @class IncrementSliderButton

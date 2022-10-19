@@ -24,7 +24,7 @@ import PickerCore, {ChangeAdapter, PickerItem} from '../internal/Picker';
 /**
  * The base `Picker` component.
  *
- * This version is not [`spottable`]{@link spotlight/Spottable.Spottable}.
+ * This version is not {@link spotlight/Spottable.Spottable|spottable}.
  *
  * @class PickerBase
  * @memberof agate/Picker
@@ -163,7 +163,7 @@ const PickerBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [PickerBase]{@link agate/Picker.PickerBase} components.
+ * Applies Agate specific behaviors to {@link agate/Picker.PickerBase|PickerBase} components.
  *
  * @hoc
  * @memberof agate/Picker

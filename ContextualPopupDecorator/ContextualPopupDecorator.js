@@ -78,7 +78,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		static propTypes = /** @lends agate/ContextualPopupDecorator.ContextualPopupDecorator.prototype */ {
 			/**
 			 * The component rendered within the
-			 * [ContextualPopup]{@link agate/ContextualPopupDecorator.ContextualPopup}.
+			 * {@link agate/ContextualPopupDecorator.ContextualPopup|ContextualPopup}.
 			 *
 			 * @type {Component}
 			 * @required
@@ -156,7 +156,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 
 			/**
 			 * CSS class name to pass to the
-			 * [ContextualPopup]{@link agate/ContextualPopupDecorator.ContextualPopup}.
+			 * {@link agate/ContextualPopupDecorator.ContextualPopup|ContextualPopup}.
 			 *
 			 * This is commonly used to set width and height of the popup.
 			 *
@@ -195,8 +195,8 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			rtl: PropTypes.bool,
 
 			/**
-			 * Registers the ContextualPopupDecorator component with an [ApiDecorator]
-			 * {@link core/internal/ApiDecorator.ApiDecorator}.
+			 * Registers the ContextualPopupDecorator component with an
+			 * {@link core/internal/ApiDecorator.ApiDecorator|ApiDecorator}.
 			 *
 			 * @type {Function}
 			 * @private
@@ -216,7 +216,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * The current skin for this component.
 			 *
 			 * When `noSkin` is set on the config object, `skin` will only be applied to the
-			 * [ContextualPopup]{@link agate/ContextualPopupDecorator.ContextualPopup} and not
+			 * {@link agate/ContextualPopupDecorator.ContextualPopup|ContextualPopup} and not
 			 * to the popup's activator component.
 			 *
 			 * @see {@link agate/Skinnable.Skinnable.skin}
@@ -723,7 +723,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 
 /**
  * Adds support for positioning a
- * [ContextualPopup]{@link agate/ContextualPopupDecorator.ContextualPopup} relative to the
+ * {@link agate/ContextualPopupDecorator.ContextualPopup|ContextualPopup} relative to the
  * wrapped component.
  *
  * `ContextualPopupDecorator` may be used to show additional settings or actions rendered within a

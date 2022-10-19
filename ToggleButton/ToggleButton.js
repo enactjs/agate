@@ -22,7 +22,7 @@ import Skinnable from '../Skinnable';
 import css from './ToggleButton.module.less';
 
 /**
- * A stateless [Button]{@link agate/Button.Button} that can be toggled by changing its
+ * A stateless {@link agate/Button.Button|Button} that can be toggled by changing its
  * `selected` property.
  *
  * @class ToggleButtonBase
@@ -168,7 +168,7 @@ const ToggleButtonBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [ToggleButtonBase]{@link agate/ToggleButton.ToggleButtonBase} components.
+ * Applies Agate specific behaviors to {@link agate/ToggleButton.ToggleButtonBase|ToggleButtonBase} components.
  *
  * @hoc
  * @memberof agate/ToggleButton

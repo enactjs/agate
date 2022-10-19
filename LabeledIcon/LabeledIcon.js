@@ -76,7 +76,7 @@ const LabeledIconBase = kind({
 });
 
 /**
- * Adds Agate specific behaviors to [LabeledIconBase]{@link agate/LabeledIcon.LabeledIconBase}.
+ * Adds Agate specific behaviors to {@link agate/LabeledIcon.LabeledIconBase|LabeledIconBase}.
  *
  * @hoc
  * @memberof agate/LabeledIcon

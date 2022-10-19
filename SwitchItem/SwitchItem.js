@@ -155,7 +155,7 @@ const SwitchItemBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [SwitchItemBase]{@link agate/SwitchItem.SwitchItemBase} components.
+ * Applies Agate specific behaviors to {@link agate/SwitchItem.SwitchItemBase|SwitchItemBase} components.
  *
  * @hoc
  * @memberof agate/SwitchItem
@@ -174,7 +174,7 @@ const SwitchItemDecorator = compose(
 /**
  * An Agate-styled item with a switch component.
  *
- * `SwitchItem` will manage its `selected` state via [Toggleable]{@link ui/Toggleable} unless set
+ * `SwitchItem` will manage its `selected` state via {@link ui/Toggleable|Toggleable} unless set
  * directly.
  *
  * @class SwitchItem

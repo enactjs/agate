@@ -44,7 +44,7 @@ const convertToHSL = (value) => convert[value.charAt(0) === '#' ? 'hex' : 'keywo
  * The color picker base component which sets-up the component's structure.
  *
  * This component is most often not used directly but may be composed within another component as it
- * is within [ColorPicker]{@link agate/ColorPicker.ColorPicker}.
+ * is within {@link agate/ColorPicker.ColorPicker|ColorPicker}.
  *
  * @class ColorPickerBase
  * @memberof agate/ColorPicker
@@ -114,7 +114,7 @@ const ColorPickerBase = kind({
 		onChange: PropTypes.func,
 
 		/**
-		 * Callback method passed to the [SwatchButton]{@link agate/ColorPicker.SwatchButton} component with a payload containing the `value` that was just selected.
+		 * Callback method passed to the {@link agate/ColorPicker.SwatchButton|SwatchButton} component with a payload containing the `value` that was just selected.
 		 *
 		 * @type {Function}
 		 * @public
@@ -146,7 +146,7 @@ const ColorPickerBase = kind({
 		onSaturationChange: PropTypes.func,
 
 		/**
-		 * Callback method passed to the [Button]{@link agate/Button.Button} component as `onTap`. This is used to toggle the visibility of the H/S/L sliders.
+		 * Callback method passed to the {@link agate/Button.Button|Button} component as `onTap`. This is used to toggle the visibility of the H/S/L sliders.
 		 *
 		 * @type {Function}
 		 * @public
@@ -357,7 +357,7 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 });
 
 /**
- * Applies Agate specific behaviors to [ColorPickerBase]{@link agate/ColorPicker.ColorPickerBase}.
+ * Applies Agate specific behaviors to {@link agate/ColorPicker.ColorPickerBase|ColorPickerBase}.
  *
  * @hoc
  * @memberof agate/ColorPicker

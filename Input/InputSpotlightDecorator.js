@@ -28,7 +28,7 @@ const handleKeyDown = handle(
 );
 
 /**
- * Default config for [InputSpotlightDecorator]{@link agate/Input.InputSpotlightDecorator}.
+ * Default config for {@link agate/Input.InputSpotlightDecorator|InputSpotlightDecorator}.
  *
  * @memberof agate/Input/InputSpotlightDecorator.InputSpotlightDecorator
  * @hocconfig

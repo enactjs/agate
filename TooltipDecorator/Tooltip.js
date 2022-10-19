@@ -83,7 +83,7 @@ const TooltipBase = kind({
 		/**
 		 * Allows the tooltip to marquee.
 		 *
-		 * Specifying a [`width`]{@link agate/TooltipDecorator.TooltipBase#width} restricts
+		 * Specifying a {@link agate/TooltipDecorator.TooltipBase#width|width} restricts
 		 * the marquee to that size.
 		 *
 		 * @type {Boolean}

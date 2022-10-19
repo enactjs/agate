@@ -101,7 +101,7 @@ const WindDirectionControlBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [WindDirectionControlBase]{@link agate/WindDirectionControl.WindDirectionControlBase}.
+ * Applies Agate specific behaviors to {@link agate/WindDirectionControl.WindDirectionControlBase|WindDirectionControlBase}.
  *
  * @hoc
  * @memberof agate/WindDirectionControl
@@ -116,7 +116,7 @@ const WindDirectionControlDecorator = compose(
 
 /**
  * WindDirectionControl with Agate styling and
- * [WindDirectionControlDecorator]{@link agate/WindDirectionControl.WindDirectionControlDecorator} applied.
+ * {@link agate/WindDirectionControl.WindDirectionControlDecorator|WindDirectionControlDecorator} applied.
  *
  * Usage:
  * ```

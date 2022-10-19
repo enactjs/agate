@@ -34,7 +34,7 @@ import componentCss from './Button.module.less';
  * A button component.
  *
  * This component is most often not used directly but may be composed within another component as it
- * is within [Button]{@link agate/Button.Button}.
+ * is within {@link agate/Button.Button|Button}.
  *
  * @class ButtonBase
  * @memberof agate/Button
@@ -325,7 +325,7 @@ const IconButtonDecorator = hoc((config, Wrapped) => {
 });
 
 /**
- * Applies Agate specific behaviors to [ButtonBase]{@link agate/Button.ButtonBase} components.
+ * Applies Agate specific behaviors to {@link agate/Button.ButtonBase|ButtonBase} components.
  *
  * @hoc
  * @memberof agate/Button

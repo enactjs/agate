@@ -222,7 +222,7 @@ const PopupBase = kind({
 		 *
 		 * It can be either `'none'`, `'self-first'`, or `'self-only'`.
 		 *
-		 * Note: The ready-to-use [Popup]{@link agate/Popup.Popup} component only supports
+		 * Note: The ready-to-use {@link agate/Popup.Popup|Popup} component only supports
 		 * `'self-first'` and `'self-only'`.
 		 *
 		 * @type {('none'|'self-first'|'self-only')}
@@ -329,7 +329,7 @@ const PopupBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [PopupBase]{@link agate/Popup.PopupBase}.
+ * Applies Agate specific behaviors to {@link agate/Popup.PopupBase|PopupBase}.
  *
  * @hoc
  * @memberof agate/Popup
@@ -345,7 +345,7 @@ const PopupDecorator = compose(
 
 /**
  * A stateful component that renders a popup in a
- * [FloatingLayer]{@link ui/FloatingLayer.FloatingLayer}.
+ * {@link ui/FloatingLayer.FloatingLayer|FloatingLayer}.
  *
  * @class Popup
  * @memberof agate/Popup

@@ -134,7 +134,7 @@ const TemperatureControlBase =  kind({
 });
 
 /**
- * Applies Agate specific behaviors to [TemperatureControlBase]{@link agate/TemperatureControl.TemperatureControlBase}.
+ * Applies Agate specific behaviors to {@link agate/TemperatureControl.TemperatureControlBase|TemperatureControlBase}.
  *
  * @hoc
  * @memberof agate/TemperatureControl
@@ -150,7 +150,7 @@ const TemperatureControlDecorator = compose(
 
 /**
  * TemperatureControl with Agate styling
- * and [`TemperatureControlDecorator`]{@link agate/TemperatureControl.TemperatureControlDecorator}
+ * and {@link agate/TemperatureControl.TemperatureControlDecorator|TemperatureControlDecorator}
  * applied.
  *
  * Usage:
