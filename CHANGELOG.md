@@ -2,6 +2,12 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Fixed
+
+- `agate/Picker` and `agate/RangePicker` width and height of the focused background
+
 ## [2.0.1] - 2022-09-29
 
 ### Changed
