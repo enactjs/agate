@@ -2,7 +2,7 @@
 
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
-import {Row, Column, Cell} from '@enact/ui/Layout';
+import {Cell, Column, Row} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 
 import Header from '@enact/agate/Header';
