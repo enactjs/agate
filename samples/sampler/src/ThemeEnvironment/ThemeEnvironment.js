@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import {Cell, Column, Row} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 
-import Header from '@enact/agate/Header';
 import Heading from '@enact/agate/Heading';
 import {Panel, Panels} from '@enact/agate/Panels';
 import Scroller from '@enact/agate/Scroller';
@@ -213,7 +212,6 @@ const StorybookDecorator = (story, config) => {
 		</Theme>
 	);
 };
-
 
 export default StorybookDecorator;
 export {StorybookDecorator as Theme};
