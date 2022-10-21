@@ -7,7 +7,7 @@ import ri from '@enact/ui/resolution';
 
 import Header from '@enact/agate/Header';
 import Heading from '@enact/agate/Heading';
-import {Panels, Panel} from '@enact/agate/Panels';
+import {Panel, Panels} from '@enact/agate/Panels';
 import Scroller from '@enact/agate/Scroller';
 import Skinnable from '@enact/agate/Skinnable';
 import ThemeDecorator from '@enact/agate/ThemeDecorator';
