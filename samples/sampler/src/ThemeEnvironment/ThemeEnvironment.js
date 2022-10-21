@@ -184,22 +184,19 @@ const StorybookDecorator = (story, config) => {
 		highlight = defaultColors[globals.skin].highlight;
 	}
 
-	const allSkinsSample = sample.type.displayName === 'Panel' ? (
-		<Panel>
-			<Header title="Panel show all skins" />
-			<Scroller>{Object.keys(skins).map((skin) => (
+	const panelSample = (sample.type.displayName === 'Panel');
+
+	const allSkinsSample =
+		<Scroller>
+			{Object.keys(skins).map((skin) => (
 				<SkinFrame skin={skins[skin]} key={skin}>
 					<Cell size="20%" component={Heading}>{skin}</Cell>
-					<Cell><div style={{minHeight: ri.scaleToRem(399)}}>{sample}</div></Cell>
-				</SkinFrame>))}
-			</Scroller>
-		</Panel>) :
-		(<Scroller>{Object.keys(skins).map((skin) => (
-			<SkinFrame skin={skins[skin]} key={skin}>
-				<Cell size="20%" component={Heading}>{skin}</Cell>
-				<Cell>{sample}</Cell>
-			</SkinFrame>))}
-		</Scroller>);
+					<Cell style={{minHeight: panelSample ? ri.scaleToRem(300) : ''}}>{sample}</Cell>
+				</SkinFrame>
+			))}
+		</Scroller>;
+
+	const showAllSkinsSample = panelSample ? <Panel>{allSkinsSample}</Panel> : allSkinsSample;
 
 	return (
 		<Theme
