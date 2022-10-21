@@ -209,7 +209,7 @@ const StorybookDecorator = (story, config) => {
 			highlight={highlightFromURL || (highlight || defaultColors['gallium'].highlight)}
 			{...(hasProps ? config.parameters.props : null)}
 		>
-			{showAllSkins ? allSkinsSample : sample}
+			{showAllSkins ? showAllSkinsSample : sample}
 		</Theme>
 	);
 };
