@@ -195,7 +195,7 @@ const StorybookDecorator = (story, config) => {
 			))}
 		</Scroller>;
 
-	const showAllSkinsSample = panelSample ? <Panel>{allSkinsSample}</Panel> : allSkinsSample;
+	const showAllSkinsSample = panelSample ? <Panel style={{padding: 0}}>{allSkinsSample}</Panel> : allSkinsSample;
 
 	return (
 		<Theme
