@@ -19,7 +19,6 @@
 // TODO: Add 'activated' styling for slider (If 5-way is needed)
 
 import {forKey, forProp, forward, forwardWithPrevent, handle} from '@enact/core/handle';
-import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
 import Spottable from '@enact/spotlight/Spottable';
 import Changeable from '@enact/ui/Changeable';
@@ -97,6 +96,7 @@ const SliderBase = kind({
 		 * @public
 		 */
 		css: PropTypes.object,
+
 
 		/**
 		 * Disables component and does not generate events.
@@ -191,14 +191,6 @@ const SliderBase = kind({
 		 * @public
 		 */
 		progressAnchor: PropTypes.number,
-
-		/**
-		 * Called with the reference to the Slider node.
-		 *
-		 * @type {Object|Function}
-		 * @public
-		 */
-		sliderRef: EnactPropTypes.ref,
 
 		/**
 		 * The amount to increment or decrement the value.
@@ -303,7 +295,7 @@ const SliderBase = kind({
 		tooltip: ({tooltip}) => tooltip === true ? ProgressBarTooltip : tooltip
 	},
 
-	render: ({css, disabled, focused, sliderRef, tooltip, ...rest}) => {
+	render: ({css, disabled, focused, tooltip, ...rest}) => {
 		delete rest.activateOnFocus;
 		delete rest.active;
 		delete rest.knobStep;
@@ -318,7 +310,6 @@ const SliderBase = kind({
 				progressBarComponent={
 					<ProgressBar css={css} />
 				}
-				ref={sliderRef}
 				tooltipComponent={
 					<ComponentOverride
 						component={tooltip}
