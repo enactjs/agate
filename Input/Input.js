@@ -120,8 +120,8 @@ const InputBase = kind({
 		iconBefore: PropTypes.string,
 
 		/**
-		 * Indicates [value]{@link agate/Input.InputBase.value} is invalid and shows
-		 * [invalidMessage]{@link agate/Input.InputBase.invalidMessage}, if set.
+		 * Indicates {@link agate/Input.InputBase.value|value} is invalid and shows
+		 * {@link agate/Input.InputBase.invalidMessage|invalidMessage}, if set.
 		 *
 		 * @type {Boolean}
 		 * @default false
@@ -131,7 +131,7 @@ const InputBase = kind({
 
 		/**
 		 * The tooltip text to be displayed when the input is
-		 * [invalid]{@link agate/Input.InputBase.invalid}.
+		 * {@link agate/Input.InputBase.invalid|invalid}.
 		 *
 		 * If this value is *falsy*, the tooltip will not be shown.
 		 *
@@ -197,7 +197,7 @@ const InputBase = kind({
 		onKeyDown: PropTypes.func,
 
 		/**
-		 * Text to display when [value]{@link agate/Input.InputBase.value} is not set.
+		 * Text to display when {@link agate/Input.InputBase.value|value} is not set.
 		 *
 		 * @type {String}
 		 * @default ''
@@ -228,7 +228,7 @@ const InputBase = kind({
 		 * Accepted values correspond to the standard HTML5 input types.
 		 *
 		 * @type {String}
-		 * @see [MDN input types doc]{@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types}
+		 * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types|MDN input types doc}
 		 * @default 'text'
 		 * @public
 		 */
@@ -348,7 +348,7 @@ const InputBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [InputBase]{@link agate/Input.InputBase} components.
+ * Applies Agate specific behaviors to {@link agate/Input.InputBase|InputBase} components.
  *
  * @class InputDecorator
  * @hoc

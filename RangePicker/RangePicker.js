@@ -36,7 +36,7 @@ const RangePickerBase = kind({
 		 * The maximum value selectable by the picker (inclusive).
 		 *
 		 * The range between `min` and `max` should be evenly divisible by
-		 * [step]{@link agate/RangePicker.RangePickerBase.step}.
+		 * {@link agate/RangePicker.RangePickerBase.step|step}.
 		 *
 		 * @type {Number}
 		 * @required
@@ -48,7 +48,7 @@ const RangePickerBase = kind({
 		 * The minimum value selectable by the picker (inclusive).
 		 *
 		 * The range between `min` and `max` should be evenly divisible by
-		 * [step]{@link agate/RangePicker.RangePickerBase.step}.
+		 * {@link agate/RangePicker.RangePickerBase.step|step}.
 		 *
 		 * @type {Number}
 		 * @required
@@ -188,7 +188,7 @@ const RangePickerBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [RangePickerBase]{@link agate/RangePicker.RangePickerBase} components.
+ * Applies Agate specific behaviors to {@link agate/RangePicker.RangePickerBase|RangePickerBase} components.
  *
  * @hoc
  * @memberof agate/RangePicker

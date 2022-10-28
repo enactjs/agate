@@ -179,7 +179,7 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	/**
 	 * Unique identifier for the component.
 	 *
-	 * When defined and when the `Scroller` is within a [Panel]{@link agate/Panels.Panel}, the
+	 * When defined and when the `Scroller` is within a {@link agate/Panels.Panel|Panel}, the
 	 * `Scroller` will store its scroll position and restore that position when returning to the
 	 * `Panel`.
 	 *

@@ -32,7 +32,7 @@ import componentCss from './Heading.module.less';
  * A labeled Heading component.
  *
  * This component is most often not used directly but may be composed within another component as it
- * is within [Heading]{@link agate/Heading.Heading}.
+ * is within {@link agate/Heading.Heading|Heading}.
  *
  * @class HeadingBase
  * @memberof agate/Heading
@@ -153,7 +153,7 @@ const HeadingBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [HeadingBase]{@link agate/Heading.HeadingBase}.
+ * Applies Agate specific behaviors to {@link agate/Heading.HeadingBase|HeadingBase}.
  *
  * @hoc
  * @memberof agate/Heading

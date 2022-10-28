@@ -157,7 +157,7 @@ const ImageItemBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [ImageItemBase]{@link agate/ImageItem.ImageItemBase}
+ * Applies Agate specific behaviors to {@link agate/ImageItem.ImageItemBase|ImageItemBase}
  *
  * @hoc
  * @memberof agate/ImageItem

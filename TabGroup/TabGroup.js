@@ -298,7 +298,7 @@ const TabGroupBase = kind({
 TabGroupBase.defaultSlot = 'tabs';
 
 /**
- * Applies Agate specific behaviors to [TabGroup]{@link agate/TabGroup.TabGroupBase} components.
+ * Applies Agate specific behaviors to {@link agate/TabGroup.TabGroupBase|TabGroup} components.
  *
  * @hoc
  * @memberof agate/TabGroup

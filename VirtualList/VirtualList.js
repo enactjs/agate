@@ -195,7 +195,7 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	/**
 	 * Unique identifier for the component.
 	 *
-	 * When defined and when the `VirtualList` is within a [Panel]{@link agate/Panels.Panel},
+	 * When defined and when the `VirtualList` is within a {@link agate/Panels.Panel|Panel},
 	 * the `VirtualList` will store its scroll position and restore that position when returning to
 	 * the `Panel`.
 	 *
@@ -632,7 +632,7 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	/**
 	 * Unique identifier for the component.
 	 *
-	 * When defined and when the `VirtualGridList` is within a [Panel]{@link agate/Panels.Panel},
+	 * When defined and when the `VirtualGridList` is within a {@link agate/Panels.Panel|Panel},
 	 * the `VirtualGridList` will store its scroll position and restore that position when returning to
 	 * the `Panel`.
 	 *

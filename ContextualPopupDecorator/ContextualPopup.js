@@ -54,8 +54,8 @@ const ContextualPopupRoot = Skinnable('div');
 
 /**
  * A popup component used by
- * [ContextualPopupDecorator]{@link agate/ContextualPopupDecorator.ContextualPopupDecorator} to
- * wrap its [popupComponent]{@link agate/ContextualPopupDecorator.ContextualPopupDecorator.popupComponent}.
+ * {@link agate/ContextualPopupDecorator.ContextualPopupDecorator|ContextualPopupDecorator} to
+ * wrap its {@link agate/ContextualPopupDecorator.ContextualPopupDecorator.popupComponent|popupComponent}.
  *
  * `ContextualPopup` is usually not used directly but is made available for unique application use
  * cases.

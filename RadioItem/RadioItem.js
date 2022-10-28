@@ -122,7 +122,7 @@ const RadioItemBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [RadioItem]{@link agate/RadioItem.RadioItem} components.
+ * Applies Agate specific behaviors to {@link agate/RadioItem.RadioItem|RadioItem} components.
  *
  * @hoc
  * @memberof agate/RadioItem

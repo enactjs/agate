@@ -34,7 +34,7 @@ Checkbox.displayName = 'Checkbox';
  * An item with a checkbox component, ready to use in Agate applications.
  *
  * `CheckboxItem` may be used to allow the user to select a single option or used as part of a
- * [Group]{@link ui/Group} when multiple [selections]{@link ui/Group.Group.select} are possible.
+ * {@link ui/Group|Group} when multiple {@link ui/Group.Group.select|selections} are possible.
  *
  * Usage:
  * ```
@@ -75,7 +75,7 @@ const CheckboxItemBase = kind({
 		 *
 		 * May be specified as either:
 		 *
-		 * * A string that represents an icon from the [iconList]{@link ui/Icon.Icon.iconList},
+		 * * A string that represents an icon from the {@link ui/Icon.Icon.iconList|iconList},
 		 * * An HTML entity string, Unicode reference or hex value (in the form '0x...'),
 		 * * A URL specifying path to an icon image, or
 		 * * An object representing a resolution independent resource (See {@link ui/resolution})
@@ -104,7 +104,7 @@ const CheckboxItemBase = kind({
 		 *
 		 * May be specified as either:
 		 *
-		 * * A string that represents an icon from the [iconList]{@link agate/Icon.Icon.iconList},
+		 * * A string that represents an icon from the {@link agate/Icon.Icon.iconList|iconList},
 		 * * An HTML entity string, Unicode reference or hex value (in the form '0x...'),
 		 * * A URL specifying path to an icon image, or
 		 * * An object representing a resolution independent resource (See {@link ui/resolution})
@@ -166,7 +166,7 @@ const CheckboxItemBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [CheckboxItem]{@link agate/CheckboxItem.CheckboxItem} components.
+ * Applies Agate specific behaviors to {@link agate/CheckboxItem.CheckboxItem|CheckboxItem} components.
  *
  * @hoc
  * @memberof agate/CheckboxItem
@@ -182,7 +182,7 @@ const CheckboxItemDecorator = compose(
 /**
  * An Agate-styled item with a checkbox component.
  *
- * `CheckboxItem` will manage its `selected` state via [Toggleable]{@link ui/Toggleable} unless set
+ * `CheckboxItem` will manage its `selected` state via {@link ui/Toggleable|Toggleable} unless set
  * directly.
  *
  * @class CheckboxItem

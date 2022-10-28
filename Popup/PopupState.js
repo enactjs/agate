@@ -36,7 +36,7 @@ const forwardShow = forward('onShow');
 
 /**
  * A hoc component that renders a popup in a
- * [FloatingLayer]{@link ui/FloatingLayer.FloatingLayer}.
+ * {@link ui/FloatingLayer.FloatingLayer|FloatingLayer}.
  *
  * @hoc PopupState
  * @memberof agate/Popup
@@ -119,7 +119,7 @@ const PopupState = hoc((config, Wrapped) => {
 			 * Called after show transition has completed, and immediately with no transition.
 			 *
 			 * Note: The function does not run if Popup is initially opened and
-			 * [noAnimation]{@link agate/Popup.PopupBase#noAnimation} is `true`.
+			 * {@link agate/Popup.PopupBase#noAnimation|noAnimation} is `true`.
 			 *
 			 * @type {Function}
 			 * @public

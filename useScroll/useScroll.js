@@ -38,8 +38,8 @@ const
 
 /**
  * The name of a custom attribute which indicates the index of an item in
- * [VirtualList]{@link agate/VirtualList.VirtualList} or
- * [VirtualGridList]{@link agate/VirtualList.VirtualGridList}.
+ * {@link agate/VirtualList.VirtualList|VirtualList} or
+ * {@link agate/VirtualList.VirtualGridList|VirtualGridList}.
  *
  * @constant dataIndexAttribute
  * @memberof agate/useScroll

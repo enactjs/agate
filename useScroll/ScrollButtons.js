@@ -29,7 +29,7 @@ const
 	};
 
 /**
- * A custom hook that returns Agate-themed scroll buttons behavior. It is used in [Scrollbar]{@link agate/useScroll.Scrollbar}.
+ * A custom hook that returns Agate-themed scroll buttons behavior. It is used in {@link agate/useScroll.Scrollbar|Scrollbar}.
  *
  * @function useScrollButtons
  * @memberof agate/useScroll
