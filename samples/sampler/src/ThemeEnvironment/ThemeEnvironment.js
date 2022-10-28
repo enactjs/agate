@@ -3,7 +3,6 @@
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 import {Cell, Column, Row} from '@enact/ui/Layout';
-import ri from '@enact/ui/resolution';
 
 import Heading from '@enact/agate/Heading';
 import {Panel, Panels} from '@enact/agate/Panels';
@@ -183,20 +182,6 @@ const StorybookDecorator = (story, config) => {
 		highlight = defaultColors[globals.skin].highlight;
 	}
 
-	const panelSample = (sample.type.displayName === 'Panel');
-
-	const allSkinsSample =
-		<Scroller>
-			{Object.keys(skins).map((skin) => (
-				<SkinFrame skin={skins[skin]} key={skin}>
-					<Cell size="20%" component={Heading}>{skin}</Cell>
-					<Cell style={{minHeight: panelSample ? ri.scaleToRem(300) : ''}}>{sample}</Cell>
-				</SkinFrame>
-			))}
-		</Scroller>;
-
-	const showAllSkinsSample = panelSample ? <Panel style={{padding: 0}}>{allSkinsSample}</Panel> : allSkinsSample;
-
 	return (
 		<Theme
 			title={componentName === config.name ? `${config.kind}`.replace(/\//g, ' ').trim() : `${componentName} ${config.name}`}
@@ -208,7 +193,15 @@ const StorybookDecorator = (story, config) => {
 			highlight={highlightFromURL || (highlight || defaultColors['gallium'].highlight)}
 			{...(hasProps ? config.parameters.props : null)}
 		>
-			{showAllSkins ? showAllSkinsSample : sample}
+			{showAllSkins ?
+				<Scroller>
+					{Object.keys(skins).map((skin) => (
+						<SkinFrame skin={skins[skin]} key={skin}>
+							<Cell size="20%" component={Heading}>{skin}</Cell>
+							<Cell>{sample}</Cell>
+						</SkinFrame>
+					))}
+				</Scroller> : sample}
 		</Theme>
 	);
 };
