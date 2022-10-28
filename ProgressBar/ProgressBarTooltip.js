@@ -103,9 +103,9 @@ const getSide = (orientation, position) => {
 };
 
 /**
- * A [Tooltip]{@link agate/TooltipDecorator.Tooltip} specifically adapted for use with
- * [ProgressBar]{@link agate/ProgressBar.ProgressBar},
- * [Slider]{@link agate/Slider.Slider} or [IncrementSlider]{@link agate/IncrementSlider.IncrementSlider}.
+ * A {@link agate/TooltipDecorator.Tooltip|Tooltip} specifically adapted for use with
+ * {@link agate/ProgressBar.ProgressBar|ProgressBar},
+ * {@link agate/Slider.Slider|Slider} or {@link agate/IncrementSlider.IncrementSlider|IncrementSlider}.
  *
  * @class ProgressBarTooltip
  * @memberof agate/ProgressBar

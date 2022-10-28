@@ -24,7 +24,7 @@ ScrollbarTrack.displayName = 'ScrollbarTrack';
 
 ScrollbarTrack.propTypes = /** @lends agate/useScroll.ScrollbarTrack.prototype */ {
 	/**
-	 * Called when [ScrollbarTrack]{@link agate/useScroll.ScrollbarTrack} is updated.
+	 * Called when {@link agate/useScroll.ScrollbarTrack|ScrollbarTrack} is updated.
 	 *
 	 * @type {Function}
 	 * @private

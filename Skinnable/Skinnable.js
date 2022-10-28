@@ -1,5 +1,5 @@
 /**
- * Exports the {@link agate/Skinnable.Skinnable} Higher-order Component (HOC).
+ * Exports the {@link agate/Skinnable.Skinnable|Skinnable} Higher-order Component (HOC).
  *
  * @module agate/Skinnable
  * @exports Skinnable
@@ -24,7 +24,7 @@ const defaultConfig = {
 };
 
 /**
- * This Higher-order Component is based on [ui/Skinnable]{@link ui/Skinnable.Skinnable} and comes
+ * This Higher-order Component is based on {@link ui/Skinnable.Skinnable|ui/Skinnable} and comes
  * pre-configured for Agate's supported skins: 'carbon', 'cobalt', 'copper', 'electro', 'gallium',
  * 'silicon', and 'titanium'. It is used to apply the relevant skinning classes to each component
  * and has been used to pre-select specific skins for some components.

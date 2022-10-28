@@ -332,7 +332,7 @@ const ItemBase = kind({
 });
 
 /**
- * Agate specific behaviors to apply to [Item]{@link agate/Item.ItemBase}.
+ * Agate specific behaviors to apply to {@link agate/Item.ItemBase|Item}.
  *
  * @class ItemDecorator
  * @hoc

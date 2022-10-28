@@ -35,10 +35,12 @@ const getColorPickerTab = (defaultSkins, isColorPicker, toolbarParamKey) => {
 	);
 };
 
-const getToolbarComponent = (defaultSkins, isColorPicker, toolbarParamKey) => {
+const getToolbarComponent = (globals, isColorPicker, toolbarParamKey) => {
 	if (isColorPicker) {
-		return getColorPickerTab(defaultSkins, isColorPicker, toolbarParamKey);
+		return getColorPickerTab(globals['default skin styles'], isColorPicker, toolbarParamKey);
 	}
+
+	if (globals['show all skins'] === "true") return null;
 
 	return <DefaultSkinToolbarTab toolbarParamKey={toolbarParamKey} />;
 };
@@ -46,7 +48,7 @@ const getToolbarComponent = (defaultSkins, isColorPicker, toolbarParamKey) => {
 const Toolbar = memo(({isColorPicker, param}) => {
 	const [globals] = useGlobals();
 
-	return getToolbarComponent(globals['default skin styles'], isColorPicker, param);
+	return getToolbarComponent(globals, isColorPicker, param);
 });
 
 export default Toolbar;

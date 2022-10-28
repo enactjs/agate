@@ -25,7 +25,7 @@ import css from './FanSpeedControl.module.less';
 /**
  * An Agate component for displaying fan speed.
  * This component is most often not used directly but may be composed within another component as it
- * is within [FanSpeedControl]{@link agate/FanSpeedControl.FanSpeedControl}.
+ * is within {@link agate/FanSpeedControl.FanSpeedControl|FanSpeedControl}.
  *
  * @class FanSpeedControlBase
  * @memberof agate/FanSpeedControl
@@ -145,7 +145,7 @@ const FanSpeedControlBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [FanSpeedControlBase]{@link agate/FanSpeedControl.FanSpeedControlBase} components.
+ * Applies Agate specific behaviors to {@link agate/FanSpeedControl.FanSpeedControlBase|FanSpeedControlBase} components.
  *
  * @hoc
  * @memberof agate/FanSpeedControl
@@ -160,7 +160,7 @@ const FanSpeedControlDecorator = compose(
 
 /**
  * FanSpeedControl with Agate styling and
- * [`FanSpeedControlDecorator`]{@link agate/FanSpeedControl.FanSpeedControlDecorator} applied.
+ * {@link agate/FanSpeedControl.FanSpeedControlDecorator|FanSpeedControlDecorator} applied.
  *
  * Usage:
  * ```

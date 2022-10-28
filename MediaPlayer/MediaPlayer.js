@@ -54,7 +54,7 @@ const getDurFmt = (locale) => {
 };
 
 /**
- * A player for media {@link agate/MediaPlayer.MediaPlayer}.
+ * A player for media {@link agate/MediaPlayer.MediaPlayer|MediaPlayer}.
  *
  * @class MediaPlayerBase
  * @memberof agate/MediaPlayer
@@ -350,7 +350,7 @@ const MediaPlayerBase = kind({
 });
 
 /**
- * Media player behaviors to apply to [MediaPlayerBase]{@link agate/MediaPlayer.MediaPlayerBase}.
+ * Media player behaviors to apply to {@link agate/MediaPlayer.MediaPlayerBase|MediaPlayerBase}.
  *
  * @class MediaPlayerBehaviorDecorator
  * @hoc

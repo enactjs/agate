@@ -78,7 +78,7 @@ const PickerBase = kind({
 		 * The maximum value selectable by the picker (inclusive).
 		 *
 		 * The range between `min` and `max` should be evenly divisible by
-		 * [step]{@link agate/internal/Picker.Picker.step}.
+		 * {@link agate/internal/Picker.Picker.step|step}.
 		 *
 		 * @type {Number}
 		 * @required
@@ -90,7 +90,7 @@ const PickerBase = kind({
 		 * The minimum value selectable by the picker (inclusive).
 		 *
 		 * The range between `min` and `max` should be evenly divisible by
-		 * [step]{@link agate/internal/Picker.Picker.step}.
+		 * {@link agate/internal/Picker.Picker.step|step}.
 		 *
 		 * @type {Number}
 		 * @required
@@ -597,7 +597,7 @@ const ChangeAdapter = hoc((config, Wrapped) => {
 });
 
 /**
- * Applies Agate specific behaviors to [Picker]{@link agate/Picker.Picker}.
+ * Applies Agate specific behaviors to {@link agate/Picker.Picker|Picker}.
  *
  * @hoc
  * @memberof agate/internal/Picker

@@ -57,7 +57,7 @@ const ToggleIconDecorator = compose(
 );
 
 /**
- * A customizable Agate starting point [Icon]{@link agate/Icon.Icon} that responds to the
+ * A customizable Agate starting point {@link agate/Icon.Icon|Icon} that responds to the
  * `selected` prop.
  *
  * @class ToggleIcon

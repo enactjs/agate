@@ -193,7 +193,7 @@ const SliderButtonBase = kind({
 });
 
 /**
- * Agate specific behaviors to apply to [SliderButton]{@link agate/SliderButton.SliderButtonBase}.
+ * Agate specific behaviors to apply to {@link agate/SliderButton.SliderButtonBase|SliderButton}.
  *
  * @hoc
  * @memberof agate/SliderButton

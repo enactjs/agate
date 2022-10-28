@@ -117,9 +117,9 @@ const MediaControls = kind({
 
 		/**
 		 * A string which is sent to the `pause` icon of the player controls. This can be
-		 * anything that is accepted by [Icon]{@link agate/Icon.Icon}. This will be temporarily replaced by
-		 * the [playIcon]{@link agate/MediaPlayer.MediaControls.playIcon} when the
-		 * [paused]{@link agate/MediaPlayer.MediaControls.paused} boolean is `false`.
+		 * anything that is accepted by {@link agate/Icon.Icon|Icon}. This will be temporarily replaced by
+		 * the {@link agate/MediaPlayer.MediaControls.playIcon|playIcon} when the
+		 * {@link agate/MediaPlayer.MediaControls.paused|paused} boolean is `false`.
 		 *
 		 * @type {String}
 		 * @default 'pause'
@@ -130,8 +130,8 @@ const MediaControls = kind({
 		/**
 		 * A string which is sent to the `play` icon of the player controls. This can be
 		 * anything that is accepted by {@link agate/Icon.Icon}. This will be temporarily replaced by
-		 * the [pauseIcon]{@link agate/MediaPlayer.MediaControls.pauseIcon} when the
-		 * [paused]{@link agate/MediaPlayer.MediaControls.paused} boolean is `true`.
+		 * the {@link agate/MediaPlayer.MediaControls.pauseIcon|pauseIcon} when the
+		 * {@link agate/MediaPlayer.MediaControls.paused|paused} boolean is `true`.
 		 *
 		 * @type {String}
 		 * @default 'play'
