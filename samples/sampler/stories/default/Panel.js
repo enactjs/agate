@@ -32,7 +32,8 @@ _Panel.storyName = 'Panel';
 _Panel.parameters = {
 	props: {
 		noScroller: true,
-		noPanel: true
+		noPanel: true,
+		noPanels: true
 	},
 	info: {
 		text: 'The basic Panel'

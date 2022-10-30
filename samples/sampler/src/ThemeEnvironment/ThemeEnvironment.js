@@ -2,10 +2,10 @@
 
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
-import {Row, Column, Cell} from '@enact/ui/Layout';
+import {Cell, Column, Row} from '@enact/ui/Layout';
 
 import Heading from '@enact/agate/Heading';
-import {Panels, Panel} from '@enact/agate/Panels';
+import {Panel, Panels} from '@enact/agate/Panels';
 import Scroller from '@enact/agate/Scroller';
 import Skinnable from '@enact/agate/Skinnable';
 import ThemeDecorator from '@enact/agate/ThemeDecorator';
@@ -205,7 +205,6 @@ const StorybookDecorator = (story, config) => {
 		</Theme>
 	);
 };
-
 
 export default StorybookDecorator;
 export {StorybookDecorator as Theme};
