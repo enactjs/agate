@@ -57,7 +57,7 @@ const MainPanel = ({...rest}) => {
 		);
 	}, [listItems]);
 
-	const rowWidth = typeof window !== 'undefined' ? `${ri.scale(window.innerWidth)}px` : `${ri.unit(ri.scale(1920), 'rem')}`;
+	const rowWidth = typeof window !== 'undefined' ? `${ri.scaleToRem(window.innerWidth)}` : `${ri.scaleToRem(1920)}`;
 
 	return (
 		<Panel {...rest}>
