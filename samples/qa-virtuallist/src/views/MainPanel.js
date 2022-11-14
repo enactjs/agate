@@ -57,12 +57,14 @@ const MainPanel = ({...rest}) => {
 		);
 	}, [listItems]);
 
+	const rowWidth = typeof window !== 'undefined' ? `${ri.scaleToRem(window.innerWidth)}` : `${ri.scaleToRem(1920)}`;
+
 	return (
 		<Panel {...rest}>
-			<Header hideLine>
+			<Header hideLine title="">
 				<Column>
 					<h1>Virtual List</h1>
-					<Row style={{width: `${ri.scale(window.innerWidth)}px`}}>
+					<Row style={{width: rowWidth}}>
 						<Cell shrink>
 							<label>DataSize:</label>
 							<Input
