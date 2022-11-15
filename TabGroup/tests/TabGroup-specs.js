@@ -3,6 +3,7 @@ import {render, screen} from '@testing-library/react';
 
 import Button from '../../Button';
 import TabGroup from '../TabGroup';
+import ThemeDecorator from '../../ThemeDecorator';
 
 describe('TabGroup Specs', () => {
 	test('should render three tabs when given three objects in `tabs` prop', () => {
@@ -77,7 +78,7 @@ describe('TabGroup Specs', () => {
 		expect(actual).toHaveLength(expected);
 	});
 
-	test('should apply `vertical` when `orientation=vertical`', () => {
+	test('should apply className `vertical` when `orientation=vertical`', () => {
 		render(
 			<TabGroup
 				orientation="vertical"
@@ -92,6 +93,86 @@ describe('TabGroup Specs', () => {
 
 		const expected = 'vertical';
 		const actual = screen.getByRole('group').parentElement.parentElement;
+
+		expect(actual).toHaveClass(expected);
+	});
+
+	test('should apply className `horizontal` when `orientation=horizontal`', () => {
+		render(
+			<TabGroup
+				orientation="horizontal"
+				tabPosition="before"
+				tabs={[
+					{title: 'Home', icon: 'home'},
+					{title: 'Settings', icon: 'setting'},
+					{title: 'Theme', icon: 'display'}
+				]}
+			/>
+		);
+
+		const expected = 'horizontal';
+		const actual = screen.getByRole('group').parentElement.parentElement;
+
+		expect(actual).toHaveClass(expected);
+	});
+
+	test('should apply className `after` to the label when `orientation=vertical` and `tabPosition=before`', () => {
+		render(
+			<TabGroup
+				orientation="vertical"
+				tabPosition="before"
+				tabs={[
+					{title: 'Home', icon: 'home'},
+					{title: 'Settings', icon: 'setting'},
+					{title: 'Theme', icon: 'display'}
+				]}
+			/>
+		);
+
+		const expected = 'after';
+		const actual = screen.getByRole('group').children.item(0).children.item(0);
+
+		expect(actual).toHaveClass(expected);
+	});
+
+	test('should apply className `before` to the label when `orientation=vertical` and `tabPosition=after`', () => {
+		render(
+			<TabGroup
+				orientation="vertical"
+				tabPosition="after"
+				tabs={[
+					{title: 'Home', icon: 'home'},
+					{title: 'Settings', icon: 'setting'},
+					{title: 'Theme', icon: 'display'}
+				]}
+			/>
+		);
+
+		const expected = 'before';
+		const actual = screen.getByRole('group').children.item(0).children.item(0);
+
+		expect(actual).toHaveClass(expected);
+	});
+
+	test('should include a ToggleButton inside TabLabel when the skin is `copper`', () => {
+		const TabGroupComponent = () =>
+			<TabGroup
+				orientation="vertical"
+				tabPosition="after"
+				tabs={[
+					{title: 'Home', icon: 'home'},
+					{title: 'Settings', icon: 'setting'},
+					{title: 'Theme', icon: 'display'}
+				]}
+			/>;
+
+		const App = ThemeDecorator(TabGroupComponent);
+
+		render(<App skin="copper" />);
+
+		const tabLabel = screen.getByLabelText('Home');
+		const expected = 'toggleButton';
+		const actual = tabLabel.children.item(0);
 
 		expect(actual).toHaveClass(expected);
 	});
