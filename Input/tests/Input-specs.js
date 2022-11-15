@@ -82,7 +82,7 @@ describe('Input Specs', () => {
 	});
 
 	test('should set `spellcheck=false` attribute when type is `password`', () => {
-		render(<Input type="password" value="passwordValue" minLength={8} />);
+		render(<Input minLength={8} type="password" value="passwordValue" />);
 		const input = screen.getByLabelText('13 characters Input field').children[0];
 
 		const expectedAttribute = 'spellcheck';
@@ -144,7 +144,7 @@ describe('Input Specs', () => {
 
 	test('should blur input on enter if dismissOnEnter', () => {
 		const handleChange = jest.fn();
-		render(<Input onBlur={handleChange} dismissOnEnter />);
+		render(<Input dismissOnEnter onBlur={handleChange} />);
 		const inputText = screen.getByLabelText('Input field').children[0];
 
 		fireEvent.mouseDown(inputText);
@@ -155,7 +155,7 @@ describe('Input Specs', () => {
 
 	test('should not call onBlur event on enter if dismissOnEnter and autofocus', () => {
 		const handleChange = jest.fn();
-		render(<Input autoFocus onBlur={handleChange} dismissOnEnter />);
+		render(<Input autoFocus dismissOnEnter onBlur={handleChange} />);
 		const inputText = screen.getByLabelText('Input field').children[0];
 
 		fireEvent.mouseDown(inputText);
