@@ -140,7 +140,7 @@ const LabeledIconButtonBase = kind({
 		 *
 		 * Setting `selected` may be useful when the component represents a toggleable option. The
 		 * visual effect may be customized using the
-		 * [css]{@link agate/LabeledIconButton.LabeledIconButtonBase.css} prop.
+		 * {@link agate/LabeledIconButton.LabeledIconButtonBase.css|css} prop.
 		 */
 		selected: PropTypes.bool,
 
@@ -212,7 +212,7 @@ const LabeledIconButtonBase = kind({
 });
 
 /**
- * Adds Agate specific behaviors to [LabeledIconButtonBase]{@link agate/LabeledIconButton.LabeledIconButtonBase}.
+ * Adds Agate specific behaviors to {@link agate/LabeledIconButton.LabeledIconButtonBase|LabeledIconButtonBase}.
  *
  * @memberof agate/LabeledIconButton
  * @hoc

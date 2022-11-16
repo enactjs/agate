@@ -17,7 +17,7 @@ import componentCss from './Panels.module.less';
 const getControlsId = (id) => id && `${id}-controls`;
 
 /**
- * Basic Panels component without breadcrumbs or default [arranger]{@link ui/ViewManager.Arranger}
+ * Basic Panels component without breadcrumbs or default {@link ui/ViewManager.Arranger|arranger}
  *
  * @class PanelsBase
  * @memberof agate/Panels
@@ -112,7 +112,7 @@ const PanelsBase = kind({
 		 *
 		 * When defined, `Panels` will manage the presentation state of `Panel` instances in order
 		 * to restore it when returning to the `Panel`. See
-		 * [noSharedState]{@link agate/Panels.Panels.noSharedState} for more details on shared
+		 * {@link agate/Panels.Panels.noSharedState|noSharedState} for more details on shared
 		 * state.
 		 *
 		 * @type {String}
@@ -299,7 +299,7 @@ const PanelsBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [Panels]{@link agate/Panels.Panels} components.
+ * Applies Agate specific behaviors to {@link agate/Panels.Panels|Panels} components.
  *
  * @hoc
  * @memberof agate/Panels

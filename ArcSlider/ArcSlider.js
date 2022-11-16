@@ -34,7 +34,7 @@ import css from './ArcSlider.module.less';
  * An arc slider component.
  *
  * This component is most often not used directly but may be composed within another component as it
- * is within [ArcSlider]{@link agate/ArcSlider.ArcSlider}.
+ * is within {@link agate/ArcSlider.ArcSlider|ArcSlider}.
  *
  * @class ArcSliderBase
  * @memberof agate/ArcSlider
@@ -283,7 +283,7 @@ const ArcSliderBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [ArcSliderBase]{@link agate/ArcSlider.ArcSliderBase} components.
+ * Applies Agate specific behaviors to {@link agate/ArcSlider.ArcSliderBase|ArcSliderBase} components.
  *
  * @hoc
  * @memberof agate/ArcSlider

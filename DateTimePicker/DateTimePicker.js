@@ -162,7 +162,7 @@ const DateTimePickerBase = kind({
 });
 
 /**
- * Applies Agate specific behaviors to [DateTimePickerBase]{@link agate/DateTimePicker.DateTimePickerBase} components.
+ * Applies Agate specific behaviors to {@link agate/DateTimePicker.DateTimePickerBase|DateTimePickerBase} components.
  *
  * @hoc
  * @memberof agate/DateTimePicker

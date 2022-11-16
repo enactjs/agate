@@ -9,9 +9,10 @@ import ScrollModeSwitch from '../ScrollModeSwitch';
 
 const Controls = ({handleFocusableScrollbar, handleHeight, handleScrollMode, handleWidth, height, nativeScroll, width}) => {
 	const inputWidth = {width: '5em'};
+	const rowWidth = typeof window !== 'undefined' ? `${ri.scaleToRem(window.innerWidth)}` : `${ri.scaleToRem(1920)}`;
 
 	return (
-		<Row style={{width: `${ri.scale(window.innerWidth)}px`}}>
+		<Row style={{width: rowWidth}}>
 			<Cell>
 				<label>height:</label>
 				<Input onChange={handleHeight} size="small" style={inputWidth} type="number" value={height} />

@@ -8,8 +8,8 @@ import Button from '../Button';
 import css from './Scrollbar.module.less';
 
 /**
- * A [Button]{@link agate/Button.Button} used within
- * a [Scrollbar]{@link agate/useScroll.Scrollbar}.
+ * A {@link agate/Button.Button|Button} used within
+ * a {@link agate/useScroll.Scrollbar|Scrollbar}.
  *
  * @class ScrollButton
  * @memberof agate/useScroll

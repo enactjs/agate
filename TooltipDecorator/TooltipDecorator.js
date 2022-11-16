@@ -24,7 +24,7 @@ import {adjustDirection, adjustAnchor, calcOverflow, getLabelOffset, getPosition
 let currentTooltip; // needed to know whether or not we should stop a showing job when unmounting
 
 /**
- * Default config for [TooltipDecorator]{@link agate/TooltipDecorator.TooltipDecorator}
+ * Default config for {@link agate/TooltipDecorator.TooltipDecorator|TooltipDecorator}
  *
  * @memberof agate/TooltipDecorator.TooltipDecorator
  * @hocconfig
@@ -35,7 +35,7 @@ const defaultConfig = {
 	 * flipping to an alternate orientation or adjusting its offset to remain on screen.
 	 * The default of 24 is derived from a standard 12px screen-keepout size plus the standard
 	 * Spotlight-outset (12px) margin/padding value which keeps elements and text aligned inside a
-	 * [Panel]{@link agate/Panels.Panel}. Note: This value will be scaled according to the
+	 * {@link agate/Panels.Panel|Panel}. Note: This value will be scaled according to the
 	 * resolution.
 	 *
 	 * @type {Number}
@@ -59,7 +59,7 @@ const defaultConfig = {
 };
 
 /**
- * A higher-order component which positions [Tooltip]{@link agate/TooltipDecorator.Tooltip} in
+ * A higher-order component which positions {@link agate/TooltipDecorator.Tooltip|Tooltip} in
  * relation to the wrapped component.
  *
  * The tooltip is automatically displayed when the decorated component is focused after a set
@@ -111,7 +111,7 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			/**
 			 * Allows the tooltip to marquee.
 			 *
-			 * Specifying a [`tooltipWidth`]{@link agate/TooltipDecorator.TooltipDecorator#tooltipWidth}
+			 * Specifying a {@link agate/TooltipDecorator.TooltipDecorator#tooltipWidth|tooltipWidth}
 			 * restricts the marquee to that size.
 			 *
 			 * @type {Boolean}

@@ -47,7 +47,7 @@ const MainView = () => {
 
 	return (
 		<Panel>
-			<Header hideLine>
+			<Header hideLine title="">
 				<Column>
 					<h1>Scroller</h1>
 					<Controls

@@ -42,7 +42,7 @@ const IconBase = kind({
 		 *
 		 * May be specified as either:
 		 *
-		 * * A string that represents an icon from the [iconList]{@link ui/Icon.Icon.iconList},
+		 * * A string that represents an icon from the {@link ui/Icon.Icon.iconList|iconList},
 		 * * An HTML entity string, Unicode reference or hex value (in the form '0x...'),
 		 * * A URL specifying path to an icon image, or
 		 * * An object representing a resolution independent resource (See {@link ui/resolution}).
@@ -132,7 +132,7 @@ const IconBase = kind({
 // Let's find a way to import this list directly, and bonus feature, render our icons in the docs
 // next to their names.
 /**
- * An object whose keys can be used as the child of an [Icon]{@link agate/Icon.Icon} component.
+ * An object whose keys can be used as the child of an {@link agate/Icon.Icon|Icon} component.
  *
  * List of Icons:
  * ```
@@ -290,7 +290,7 @@ const IconBase = kind({
  */
 
 /**
- * Agate-specific behaviors to apply to [IconBase]{@link agate/Icon.IconBase}.
+ * Agate-specific behaviors to apply to {@link agate/Icon.IconBase|IconBase}.
  *
  * @hoc
  * @memberof agate/Icon
