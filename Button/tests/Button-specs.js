@@ -30,6 +30,24 @@ describe('Button Specs', () => {
 		expect(button).toHaveClass(expected);
 	});
 
+	test('should have \'joinedCenter\' class', () => {
+		render(<ButtonBase joinedPosition="center" />);
+		const button = screen.getByRole('button');
+
+		const expected = 'joinedCenter';
+
+		expect(button).toHaveClass(expected);
+	});
+
+	test('should have \'grid\' class', () => {
+		render(<ButtonBase type="grid" />);
+		const button = screen.getByRole('button');
+
+		const expected = 'grid';
+
+		expect(button).toHaveClass(expected);
+	});
+
 	describe('with no `minWidth`', () => {
 		test('should not have \'minWidth\' class', () => {
 			render(<ButtonBase minWidth={false} />);
@@ -61,6 +79,13 @@ describe('Button Specs', () => {
 			expect(icon).toHaveClass('icon');
 		});
 
+		test('should have \'iconOnly\' class', () => {
+			render(<Button icon="check" />);
+			const button = screen.getByRole('button');
+
+			expect(button).toHaveClass('iconOnly');
+		});
+
 		test('should have \'iconAfter\' class with text and icon', () => {
 			render(<Button icon="check" iconPosition="after">text</Button>);
 			const button = screen.getByRole('button');
@@ -77,6 +102,19 @@ describe('Button Specs', () => {
 			const expected = 'iconBefore';
 
 			expect(button).toHaveClass(expected);
+		});
+	});
+
+	describe('with badge', () => {
+		test('should have \'badge\' with text="1"', () => {
+			render(<Button badge="1" badgeColor="#986AAD">text</Button>);
+			const badge = screen.getByRole('button').children[0].children[0];
+			const badgeText = screen.getByText('1');
+
+			const expected = 'badge';
+
+			expect(badge).toHaveClass(expected);
+			expect(badgeText).toBeInTheDocument();
 		});
 	});
 
