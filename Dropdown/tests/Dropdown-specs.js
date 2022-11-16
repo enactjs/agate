@@ -1,13 +1,18 @@
 import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 import '@testing-library/jest-dom';
-import {render, screen} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import Dropdown, {DropdownBase} from '../Dropdown';
+import DropdownList from "../DropdownList";
 
 const FloatingLayerController = FloatingLayerDecorator('div');
 
 const children = ['option1', 'option2', 'option3'];
 const title = 'Dropdown select';
+const keyDown = (keyCode) => (picker) => fireEvent.keyDown(picker, {keyCode});
+
+const pressEnterKey = keyDown(13);
 
 describe('Dropdown', () => {
 	test('should have `title`', () => {
@@ -93,6 +98,11 @@ describe('Dropdown', () => {
 				</Dropdown>
 			</FloatingLayerController>
 		);
+
+		const firstItem = screen.getAllByRole('checkbox')[0];
+
+		pressEnterKey(firstItem);
+		// fireEvent.focus(firstItem);
 
 		const expected = 3;
 		const actual = screen.getByRole('list').children;
@@ -250,5 +260,24 @@ describe('Dropdown', () => {
 		const expected = 'hugeWidth';
 
 		expect(dropdown).toHaveClass(expected);
+	});
+
+	describe('DropdownList', () => {
+		test('should include `data` and `selected` in `onSelect` callback', () => {
+			const handler = jest.fn();
+			render(
+				<DropdownList onSelect={handler}>
+					{children}
+				</DropdownList>
+			);
+			const firstItem = screen.getByRole('list').children[0].children[0];
+
+			userEvent.click(firstItem);
+
+			const expected = {data: 'option1', selected: 0};
+			const actual = handler.mock.calls[0][0];
+
+			expect(actual).toEqual(expected);
+		});
 	});
 });

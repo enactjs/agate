@@ -1,8 +1,9 @@
+import ilib from 'ilib';
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import TimePicker from '../TimePicker';
+import TimePicker, {timeToLocaleString} from '../TimePicker';
 
 // Note: Tests pass 'locale' because there's no I18nDecorator to provide a value via context and
 // otherwise, nothing renders in the label.
@@ -10,7 +11,7 @@ import TimePicker from '../TimePicker';
 describe('TimePicker', () => {
 	// Suite-wide setup
 
-	test('should emit an onChange event when changing a component picker', () => {
+	test('should emit an onChange event when changing the hour', () => {
 		const handleChange = jest.fn();
 		render(
 			<TimePicker
@@ -27,7 +28,60 @@ describe('TimePicker', () => {
 		expect(handleChange).toHaveBeenCalledTimes(expected);
 	});
 
+	test('should emit an onChange event when changing the minute', () => {
+		const handleChange = jest.fn();
+		render(
+			<TimePicker
+				locale="en-US"
+				onChange={handleChange}
+				value={new Date(2000, 6, 15, 12, 30)}
+			/>
+		);
+
+		userEvent.click(screen.getByLabelText('30 minute increase the value'));
+
+		const expected = 1;
+
+		expect(handleChange).toHaveBeenCalledTimes(expected);
+	});
+
+	test('should emit an onChange event when changing the meridiem', () => {
+		const handleChange = jest.fn();
+		render(
+			<TimePicker
+				locale="en-US"
+				onChange={handleChange}
+				value={new Date(2000, 6, 15, 12, 30)}
+			/>
+		);
+
+		userEvent.click(screen.getByLabelText('PM previous item'));
+
+		const expected = 1;
+
+		expect(handleChange).toHaveBeenCalledTimes(expected);
+	});
+
+	test('should emit an onChange event when changing the meridiem on a 5 meridiem locale', () => {
+		ilib.setLocale('am-ET');
+		const handleChange = jest.fn();
+		render(
+			<TimePicker
+				locale="am-ET"
+				onChange={handleChange}
+				value={new Date(2000, 6, 15, 12, 30)}
+			/>
+		);
+
+		userEvent.click(screen.getByLabelText('ከሰዓት previous item'));
+
+		const expected = 1;
+
+		expect(handleChange).toHaveBeenCalledTimes(expected);
+	});
+
 	test('should accept a JavaScript Date for its value prop', () => {
+		ilib.setLocale('en-US');
 		render(<TimePicker locale="en-US" value={new Date(2000, 0, 1, 12, 30)} />);
 		const minute = screen.getAllByRole('spinbutton')[1];
 
@@ -82,5 +136,41 @@ describe('TimePicker', () => {
 		const expected = '30';
 
 		expect(minutePicker).toHaveTextContent(expected);
+	});
+
+	test('check that the meridiem is displayed correctly for cases of more than 2 meridiems', () => {
+		ilib.setLocale('am-ET');
+		const time = new Date(2000, 0, 1, 12, 30);
+		const secondTime = new Date(2000, 0, 1, 11, 30);
+		const {rerender} = render(
+			<TimePicker locale="am-ET" value={time} />
+		);
+
+		const firstMeridiemDisplayed = screen.queryByText('ከሰዓት');
+
+		rerender(
+			<TimePicker locale="am-ET" value={secondTime} />
+		);
+		const secondMeridiemDisplayed = screen.queryByText('ጥዋት');
+
+		expect(firstMeridiemDisplayed).not.toBeNull();
+		expect(secondMeridiemDisplayed).not.toBeNull();
+	});
+
+	describe('#timeToLocaleString', () => {
+		test('method should convert time to a localized string', () => {
+			ilib.setLocale('en-US');
+			const date = new Date(2000, 0, 1);
+			const expected = '12:00 AM';
+			const actual = timeToLocaleString(date);
+
+			expect(actual).toBe(expected);
+		});
+
+		test('method should return \'null\' for an invalid time', () => {
+			const time = timeToLocaleString(null);
+
+			expect(time).toBeNull();
+		});
 	});
 });
