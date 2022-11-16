@@ -7,6 +7,13 @@ import Input from '../Input';
 
 const isPaused = () => Spotlight.isPaused() ? 'paused' : 'not paused';
 
+const keyDownUp = (keyCode) => (elm) => {
+	fireEvent.keyDown(elm, {keyCode}); return fireEvent.keyUp(elm, {keyCode});
+};
+const pressEnterKey = keyDownUp(13);
+const pressArrowLeftKey = keyDownUp(37);
+const pressArrowRightKey = keyDownUp(39);
+
 describe('Input Specs', () => {
 	test('should have an input element', () => {
 		render(<Input />);
@@ -148,7 +155,7 @@ describe('Input Specs', () => {
 		const inputText = screen.getByLabelText('Input field').children[0];
 
 		fireEvent.mouseDown(inputText);
-		fireEvent.keyUp(inputText, {which: 13, keyCode: 13, code: 13});
+		pressEnterKey(inputText);
 
 		expect(handleChange).toHaveBeenCalled();
 	});
@@ -159,7 +166,7 @@ describe('Input Specs', () => {
 		const inputText = screen.getByLabelText('Input field').children[0];
 
 		fireEvent.mouseDown(inputText);
-		fireEvent.keyUp(inputText, {which: 13, keyCode: 13, code: 13});
+		pressEnterKey(inputText);
 
 		expect(handleChange).not.toHaveBeenCalled();
 	});
@@ -172,7 +179,7 @@ describe('Input Specs', () => {
 
 		userEvent.type(inputText, value);
 		// bluring input onSpotlightLeft for code coverage purposes
-		fireEvent.keyDown(inputText, {which: 39, keyCode: 39, code: 39});
+		pressArrowLeftKey(inputText);
 
 		expect(handleBeforeChange).toHaveBeenCalled();
 	});
@@ -186,12 +193,12 @@ describe('Input Specs', () => {
 
 		userEvent.type(inputText, value);
 		// bluring input onSpotlightLeft for code coverage purposes
-		fireEvent.keyDown(inputText, {which: 37, keyCode: 37, code: 37});
-		fireEvent.keyDown(inputText, {which: 37, keyCode: 37, code: 37});
-		fireEvent.keyDown(inputText, {which: 37, keyCode: 37, code: 37});
-		fireEvent.keyDown(inputText, {which: 37, keyCode: 37, code: 37});
-		fireEvent.keyDown(inputText, {which: 37, keyCode: 37, code: 37});
-		fireEvent.keyDown(inputText, {which: 37, keyCode: 37, code: 37});
+		pressArrowRightKey(inputText);
+		pressArrowRightKey(inputText);
+		pressArrowRightKey(inputText);
+		pressArrowRightKey(inputText);
+		pressArrowRightKey(inputText);
+		pressArrowRightKey(inputText);
 
 		expect(handleChange).not.toHaveBeenCalled();
 	});
@@ -201,8 +208,7 @@ describe('Input Specs', () => {
 		render(<Input onActivate={handleChange} />);
 		const inputText = screen.getByLabelText('Input field').children[0];
 
-		fireEvent.keyDown(inputText, {which: 13, keyCode: 13, code: 13});
-		fireEvent.keyUp(inputText, {which: 13, keyCode: 13, code: 13});
+		pressEnterKey(inputText);
 
 		expect(handleChange).toHaveBeenCalled();
 	});
@@ -212,8 +218,7 @@ describe('Input Specs', () => {
 		render(<Input disabled onActivate={handleChange} />);
 		const inputText = screen.getByLabelText('Input field').children[0];
 
-		fireEvent.keyDown(inputText, {which: 13, keyCode: 13, code: 13});
-		fireEvent.keyUp(inputText, {which: 13, keyCode: 13, code: 13});
+		pressEnterKey(inputText);
 
 		expect(handleChange).not.toHaveBeenCalled();
 	});
