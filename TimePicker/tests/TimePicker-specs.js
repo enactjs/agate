@@ -138,19 +138,15 @@ describe('TimePicker', () => {
 		expect(minutePicker).toHaveTextContent(expected);
 	});
 
-	test('check that the meridiem is displayed correctly for cases of more than 2 meridiems', () => {
+	test('should display the correct meridiem for cases of more than 2 meridiems', () => {
 		ilib.setLocale('am-ET');
 		const time = new Date(2000, 0, 1, 12, 30);
 		const secondTime = new Date(2000, 0, 1, 11, 30);
-		const {rerender} = render(
-			<TimePicker locale="am-ET" value={time} />
-		);
 
+		const {rerender} = render(<TimePicker locale="am-ET" value={time} />);
 		const firstMeridiemDisplayed = screen.queryByText('ከሰዓት');
 
-		rerender(
-			<TimePicker locale="am-ET" value={secondTime} />
-		);
+		rerender(<TimePicker locale="am-ET" value={secondTime} />);
 		const secondMeridiemDisplayed = screen.queryByText('ጥዋት');
 
 		expect(firstMeridiemDisplayed).not.toBeNull();

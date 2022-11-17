@@ -1,6 +1,6 @@
 import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 import '@testing-library/jest-dom';
-import {fireEvent, render, screen} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Dropdown, {DropdownBase} from '../Dropdown';
@@ -10,9 +10,6 @@ const FloatingLayerController = FloatingLayerDecorator('div');
 
 const children = ['option1', 'option2', 'option3'];
 const title = 'Dropdown select';
-const keyDown = (keyCode) => (picker) => fireEvent.keyDown(picker, {keyCode});
-
-const pressEnterKey = keyDown(13);
 
 describe('Dropdown', () => {
 	test('should have `title`', () => {
@@ -98,11 +95,6 @@ describe('Dropdown', () => {
 				</Dropdown>
 			</FloatingLayerController>
 		);
-
-		const firstItem = screen.getAllByRole('checkbox')[0];
-
-		pressEnterKey(firstItem);
-		// fireEvent.focus(firstItem);
 
 		const expected = 3;
 		const actual = screen.getByRole('list').children;
