@@ -8,7 +8,8 @@ import Input from '../Input';
 const isPaused = () => Spotlight.isPaused() ? 'paused' : 'not paused';
 
 const keyDownUp = (keyCode) => (elm) => {
-	fireEvent.keyDown(elm, {keyCode}); return fireEvent.keyUp(elm, {keyCode});
+	fireEvent.keyDown(elm, {keyCode});
+	return fireEvent.keyUp(elm, {keyCode});
 };
 const pressEnterKey = keyDownUp(13);
 const pressLeftKey = keyDownUp(37);
