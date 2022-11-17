@@ -197,7 +197,7 @@ describe('MediaPlayer', () => {
 			userEvent.click(playButton);
 			userEvent.click(nextButton);
 
-			const expected = 'https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3'; // second audion media from audioFiles
+			const expected = 'https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3'; // second audio media from audioFiles
 
 			expect(audioSource).not.toHaveProperty('src', expected);
 		});
@@ -309,27 +309,5 @@ describe('MediaPlayer', () => {
 
 			expect(mediaPlayer).toHaveAttribute('locale', expected);
 		});
-
-		// setting repeat="all" and shuffle=true for code coverage purposes
-		// test('should reshuffle media list when `repeat="all"` and `shuffle="true"` on pressing `Next` button', () => {
-		// 	const handleNext = jest.fn();
-		// 	render(
-		// 		<MediaPlayer onNext={handleNext}>
-		// 			{audioFiles.map((audioFile, index) => (<source key={index} src={audioFiles[0]} type="audio/mp3" />))}
-		// 		</MediaPlayer>
-		// 	);
-		// 	const shuffleButton = screen.getByLabelText('Shuffle');
-		// 	const repeatButton = screen.getByLabelText('Repeat');
-		// 	const nextButton = screen.getByLabelText('Next');
-		//
-		// 	userEvent.click(repeatButton);
-		// 	userEvent.click(repeatButton);
-		// 	userEvent.click(shuffleButton);
-		//
-		// 	waitFor(() => {
-		// 		userEvent.click(nextButton);
-		// 		expect(handleNext).toHaveBeenCalled();
-		// 	});
-		// });
 	});
 });
