@@ -11,8 +11,8 @@ const keyDownUp = (keyCode) => (elm) => {
 	fireEvent.keyDown(elm, {keyCode}); return fireEvent.keyUp(elm, {keyCode});
 };
 const pressEnterKey = keyDownUp(13);
-const pressArrowLeftKey = keyDownUp(37);
-const pressArrowRightKey = keyDownUp(39);
+const pressLeftKey = keyDownUp(37);
+const pressRightKey = keyDownUp(39);
 
 describe('Input Specs', () => {
 	test('should have an input element', () => {
@@ -179,7 +179,7 @@ describe('Input Specs', () => {
 
 		userEvent.type(inputText, value);
 		// bluring input onSpotlightLeft for code coverage purposes
-		pressArrowLeftKey(inputText);
+		pressLeftKey(inputText);
 
 		expect(handleBeforeChange).toHaveBeenCalled();
 	});
@@ -193,12 +193,12 @@ describe('Input Specs', () => {
 
 		userEvent.type(inputText, value);
 		// bluring input onSpotlightLeft for code coverage purposes
-		pressArrowRightKey(inputText);
-		pressArrowRightKey(inputText);
-		pressArrowRightKey(inputText);
-		pressArrowRightKey(inputText);
-		pressArrowRightKey(inputText);
-		pressArrowRightKey(inputText);
+		pressRightKey(inputText);
+		pressRightKey(inputText);
+		pressRightKey(inputText);
+		pressRightKey(inputText);
+		pressRightKey(inputText);
+		pressRightKey(inputText);
 
 		expect(handleChange).not.toHaveBeenCalled();
 	});
