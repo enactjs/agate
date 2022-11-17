@@ -34,7 +34,7 @@ describe('Keypad Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should reset the digits after pressing \'phone\' key', () => {
+	test('should reset the digits after pressing `phone` key', () => {
 		const handleChange = jest.fn();
 		render(<Keypad onChange={handleChange} />);
 

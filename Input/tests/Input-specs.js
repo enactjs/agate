@@ -150,7 +150,7 @@ describe('Input Specs', () => {
 		expect(handleChange).not.toHaveBeenCalled();
 	});
 
-	test('should blur input on enter if dismissOnEnter', () => {
+	test('should blur input on enter if `dismissOnEnter`', () => {
 		const handleChange = jest.fn();
 		render(<Input dismissOnEnter onBlur={handleChange} />);
 		const inputText = screen.getByLabelText('Input field').children[0];
@@ -161,7 +161,7 @@ describe('Input Specs', () => {
 		expect(handleChange).toHaveBeenCalled();
 	});
 
-	test('should not call onBlur event on enter if dismissOnEnter and autofocus', () => {
+	test('should not call onBlur event on enter if `dismissOnEnter` and `autofocus`', () => {
 		const handleChange = jest.fn();
 		render(<Input autoFocus dismissOnEnter onBlur={handleChange} />);
 		const inputText = screen.getByLabelText('Input field').children[0];
