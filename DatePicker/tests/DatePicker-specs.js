@@ -8,6 +8,23 @@ import DatePicker, {dateToLocaleString} from '../DatePicker';
 // otherwise, nothing renders in the label.
 
 describe('DatePicker', () => {
+	test('should set the value to the current date when no value is provided', () => {
+		render(<DatePicker locale="en-US" />);
+
+		const currentDate = new Date();
+		const currentYear = currentDate.getFullYear();
+		const currentMonth = currentDate.getMonth() + 1;
+		const currentDay = currentDate.getDate();
+
+		const datePickerYear = screen.getAllByRole('spinbutton')[2].children.item(1);
+		const datePickerMonth = screen.getAllByRole('spinbutton')[0].children.item(1);
+		const datePickerDay = screen.getAllByRole('spinbutton')[1].children.item(1);
+
+		expect(datePickerYear).toHaveTextContent(currentYear);
+		expect(datePickerMonth).toHaveTextContent(currentMonth);
+		expect(datePickerDay).toHaveTextContent(currentDay);
+	});
+
 	test('should emit an onChange event when changing the day', () => {
 		const handleChange = jest.fn();
 		render(<DatePicker locale="en-US" onChange={handleChange} value={new Date(2000, 6, 15)} />);
