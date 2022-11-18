@@ -2,6 +2,13 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## Unreleased
+
+### Added
+
+- `agate/IncrementSlider` `sliderRef` prop to pass reference to the slider node
+- `agate/Slider` `sliderRef` prop to pass reference to the slider node
+
 ## [2.0.2] - 2022-10-28
 
 ### Fixed
