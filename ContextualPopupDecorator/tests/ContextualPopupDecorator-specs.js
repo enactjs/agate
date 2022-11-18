@@ -135,12 +135,11 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	test('should have \'below\' className when direction is set to \'below\'', () => {
-		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
 			<Root>
-				<ContextualButton direction="below" onClose={handleClose} open popupComponent={() => message}>
+				<ContextualButton direction="below" open popupComponent={() => message}>
 					Hello
 				</ContextualButton>
 			</Root>
@@ -154,12 +153,11 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	test('should have \'below center\' className when direction is set to \'below center\'', () => {
-		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
 			<Root>
-				<ContextualButton direction="below center" onClose={handleClose} open popupComponent={() => message}>
+				<ContextualButton direction="below center" open popupComponent={() => message}>
 					Hello
 				</ContextualButton>
 			</Root>
@@ -173,12 +171,11 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	test('should have \'below left\' className when direction is set to \'below left\'', () => {
-		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
 			<Root>
-				<ContextualButton direction="below left" onClose={handleClose} open popupComponent={() => message}>
+				<ContextualButton direction="below left" open popupComponent={() => message}>
 					Hello
 				</ContextualButton>
 			</Root>
@@ -192,12 +189,11 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	test('should have \'below right\' className when direction is set to \'below right\'', () => {
-		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
 			<Root>
-				<ContextualButton direction="below right" onClose={handleClose} open popupComponent={() => message}>
+				<ContextualButton direction="below right" open popupComponent={() => message}>
 					Hello
 				</ContextualButton>
 			</Root>
@@ -211,12 +207,11 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	test('should have \'right bottom\' className when direction is set to \'right bottom\'', () => {
-		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
 			<Root>
-				<ContextualButton direction="right bottom" onClose={handleClose} open popupComponent={() => message}>
+				<ContextualButton direction="right bottom" open popupComponent={() => message}>
 					Hello
 				</ContextualButton>
 			</Root>
@@ -230,12 +225,11 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	test('should have \'right middle\' className when direction is set to \'right middle\'', () => {
-		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
 			<Root>
-				<ContextualButton direction="right middle" onClose={handleClose} open popupComponent={() => message}>
+				<ContextualButton direction="right middle" open popupComponent={() => message}>
 					Hello
 				</ContextualButton>
 			</Root>
@@ -249,12 +243,11 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	test('should have \'right top\' className when direction is set to \'right top\'', () => {
-		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
 			<Root>
-				<ContextualButton direction="right top" onClose={handleClose} open popupComponent={() => message}>
+				<ContextualButton direction="right top" open popupComponent={() => message}>
 					Hello
 				</ContextualButton>
 			</Root>
@@ -268,12 +261,11 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	test('should have \'above\' className when direction is set to \'above\'', () => {
-		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
 			<Root>
-				<ContextualButton direction="above" onClose={handleClose} open popupComponent={() => message}>
+				<ContextualButton direction="above" open popupComponent={() => message}>
 					Hello
 				</ContextualButton>
 			</Root>
@@ -287,12 +279,11 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	test('should have \'above center\' className when direction is set to \'above center\'', () => {
-		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
 			<Root>
-				<ContextualButton direction="above center" onClose={handleClose} open popupComponent={() => message}>
+				<ContextualButton direction="above center" open popupComponent={() => message}>
 					Hello
 				</ContextualButton>
 			</Root>
@@ -306,12 +297,11 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	test('should have \'above left\' className when direction is set to \'above left\'', () => {
-		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
 			<Root>
-				<ContextualButton direction="above left" onClose={handleClose} open popupComponent={() => message}>
+				<ContextualButton direction="above left" open popupComponent={() => message}>
 					Hello
 				</ContextualButton>
 			</Root>
@@ -325,12 +315,11 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	test('should have \'above right\' className when direction is set to \'above right\'', () => {
-		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
 			<Root>
-				<ContextualButton direction="above right" onClose={handleClose} open popupComponent={() => message}>
+				<ContextualButton direction="above right" open popupComponent={() => message}>
 					Hello
 				</ContextualButton>
 			</Root>
@@ -344,12 +333,11 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	test('should have \'left bottom\' className when direction is set to \'left bottom\'', () => {
-		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
 			<Root>
-				<ContextualButton direction="left bottom" onClose={handleClose} open popupComponent={() => message}>
+				<ContextualButton direction="left bottom" open popupComponent={() => message}>
 					Hello
 				</ContextualButton>
 			</Root>
@@ -363,12 +351,11 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	test('should have \'left middle\' className when direction is set to \'left middle\'', () => {
-		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
 			<Root>
-				<ContextualButton direction="left middle" onClose={handleClose} open popupComponent={() => message}>
+				<ContextualButton direction="left middle" open popupComponent={() => message}>
 					Hello
 				</ContextualButton>
 			</Root>
@@ -382,12 +369,11 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	test('should have \'left top\' className when direction is set to \'left top\'', () => {
-		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
 			<Root>
-				<ContextualButton direction="left top" onClose={handleClose} open popupComponent={() => message}>
+				<ContextualButton direction="left top" open popupComponent={() => message}>
 					Hello
 				</ContextualButton>
 			</Root>
