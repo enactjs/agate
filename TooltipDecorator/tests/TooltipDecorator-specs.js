@@ -12,141 +12,8 @@ const FloatingLayerController = FloatingLayerDecorator('div');
 const TooltipButton = TooltipDecorator(Button);
 
 describe('TooltipDecorator Specs', () => {
-	test('should render component into FloatingLayer if open', () => {
-		const tooltipText = 'This is a tooltip';
-		render(
-			<FloatingLayerController>
-				<FloatingLayerBase data-testid="floatingLayer" open>
-					<Tooltip>
-						{tooltipText}
-					</Tooltip>
-				</FloatingLayerBase>
-			</FloatingLayerController>
-		);
-
-		const expected = tooltipText;
-		const actual = screen.getByTestId('floatingLayer');
-
-		expect(actual).toHaveTextContent(expected);
-	});
-
-	test('should not render component into FloatingLayer if not open', () => {
-		const tooltipText = 'This is a tooltip';
-		render(
-			<FloatingLayerController>
-				<FloatingLayerBase data-testid="floatingLayer">
-					<Tooltip>
-						{tooltipText}
-					</Tooltip>
-				</FloatingLayerBase>
-			</FloatingLayerController>
-		);
-
-		const actual = screen.queryByText(tooltipText);
-
-		expect(actual).toBeNull();
-	});
-
-	test('should apply \'text-align: center\' style when \'centered=true\' and \'marquee=true\'', () => {
-		render(
-			<TooltipLabel centered marquee>
-				Label
-			</TooltipLabel>
-		);
-
-		const expected = 'center';
-		const actual = screen.getByText('Label');
-
-		expect(actual).toHaveStyle({'text-align': expected});
-	});
-
-	test('should not apply \'text-align: center\' style when \'centered=false\'', () => {
-		render(
-			<TooltipLabel centered={false}>
-				Label
-			</TooltipLabel>
-		);
-
-		const expected = 'center';
-		const actual = screen.getByText('Label');
-
-		expect(actual).not.toHaveStyle({'text-align': expected});
-	});
-
-	test('should have \'above\' class when \'direction=above\'', () => {
-		const tooltipText = 'This is a tooltip';
-		render(
-			<FloatingLayerController>
-				<FloatingLayerBase open>
-					<Tooltip data-testid="tooltip" direction="above">
-						{tooltipText}
-					</Tooltip>
-				</FloatingLayerBase>
-			</FloatingLayerController>
-		);
-
-		const expected = 'above';
-		const actual = screen.getByTestId('tooltip');
-
-		expect(actual).toHaveClass(expected);
-	});
-
-	test('should have \'below\' class when \'direction=below\'', () => {
-		const tooltipText = 'This is a tooltip';
-		render(
-			<FloatingLayerController>
-				<FloatingLayerBase open>
-					<Tooltip data-testid="tooltip" direction="below">
-						{tooltipText}
-					</Tooltip>
-				</FloatingLayerBase>
-			</FloatingLayerController>
-		);
-
-		const expected = 'below';
-		const actual = screen.getByTestId('tooltip');
-
-		expect(actual).toHaveClass(expected);
-	});
-
-	test('should have \'left\' class when \'direction=left\'', () => {
-		const tooltipText = 'This is a tooltip';
-		render(
-			<FloatingLayerController>
-				<FloatingLayerBase open>
-					<Tooltip data-testid="tooltip" direction="left">
-						{tooltipText}
-					</Tooltip>
-				</FloatingLayerBase>
-			</FloatingLayerController>
-		);
-
-		const expected = 'left';
-		const actual = screen.getByTestId('tooltip');
-
-		expect(actual).toHaveClass(expected);
-	});
-
-	test('should have \'right\' class when \'direction=right\'', () => {
-		const tooltipText = 'This is a tooltip';
-		render(
-			<FloatingLayerController>
-				<FloatingLayerBase open>
-					<Tooltip data-testid="tooltip" direction="right">
-						{tooltipText}
-					</Tooltip>
-				</FloatingLayerBase>
-			</FloatingLayerController>
-		);
-
-		const expected = 'right';
-		const actual = screen.getByTestId('tooltip');
-
-		expect(actual).toHaveClass(expected);
-	});
-
 	describe('TooltipLabel', () => {
-		test('should apply alignment when \'centered\' and \'marquee\'', () => {
+		test('should apply alignment when `centered` and `marquee`', () => {
 			render(<TooltipLabel centered marquee>Label</TooltipLabel>);
 
 			const expected = 'center';
@@ -155,7 +22,7 @@ describe('TooltipDecorator Specs', () => {
 			expect(tooltip).toHaveStyle({'text-align': expected});
 		});
 
-		test('should not apply alignment when \'centered\' but not \'marquee\'', () => {
+		test('should not apply alignment when `centered` but not `marquee`', () => {
 			render(<TooltipLabel centered>Label</TooltipLabel>);
 
 			const unexpected = 'center';
@@ -177,6 +44,139 @@ describe('TooltipDecorator Specs', () => {
 					right: 0
 				};
 			});
+		});
+
+		test('should render component into FloatingLayer if open', () => {
+			const tooltipText = 'This is a tooltip';
+			render(
+				<FloatingLayerController>
+					<FloatingLayerBase data-testid="floatingLayer" open>
+						<Tooltip>
+							{tooltipText}
+						</Tooltip>
+					</FloatingLayerBase>
+				</FloatingLayerController>
+			);
+
+			const expected = tooltipText;
+			const actual = screen.getByTestId('floatingLayer');
+
+			expect(actual).toHaveTextContent(expected);
+		});
+
+		test('should not render component into FloatingLayer if not open', () => {
+			const tooltipText = 'This is a tooltip';
+			render(
+				<FloatingLayerController>
+					<FloatingLayerBase data-testid="floatingLayer">
+						<Tooltip>
+							{tooltipText}
+						</Tooltip>
+					</FloatingLayerBase>
+				</FloatingLayerController>
+			);
+
+			const actual = screen.queryByText(tooltipText);
+
+			expect(actual).toBeNull();
+		});
+
+		test('should apply `text-align: center` style when `centered=true` and `marquee=true`', () => {
+			render(
+				<TooltipLabel centered marquee>
+					Label
+				</TooltipLabel>
+			);
+
+			const expected = 'center';
+			const actual = screen.getByText('Label');
+
+			expect(actual).toHaveStyle({'text-align': expected});
+		});
+
+		test('should not apply `text-align: center` style when `centered=false`', () => {
+			render(
+				<TooltipLabel centered={false}>
+					Label
+				</TooltipLabel>
+			);
+
+			const expected = 'center';
+			const actual = screen.getByText('Label');
+
+			expect(actual).not.toHaveStyle({'text-align': expected});
+		});
+
+		test('should have `above` class when `direction=above`', () => {
+			const tooltipText = 'This is a tooltip';
+			render(
+				<FloatingLayerController>
+					<FloatingLayerBase open>
+						<Tooltip data-testid="tooltip" direction="above">
+							{tooltipText}
+						</Tooltip>
+					</FloatingLayerBase>
+				</FloatingLayerController>
+			);
+
+			const expected = 'above';
+			const actual = screen.getByTestId('tooltip');
+
+			expect(actual).toHaveClass(expected);
+		});
+
+		test('should have `below` class when `direction=below`', () => {
+			const tooltipText = 'This is a tooltip';
+			render(
+				<FloatingLayerController>
+					<FloatingLayerBase open>
+						<Tooltip data-testid="tooltip" direction="below">
+							{tooltipText}
+						</Tooltip>
+					</FloatingLayerBase>
+				</FloatingLayerController>
+			);
+
+			const expected = 'below';
+			const actual = screen.getByTestId('tooltip');
+
+			expect(actual).toHaveClass(expected);
+		});
+
+		test('should have `left` class when `direction=left`', () => {
+			const tooltipText = 'This is a tooltip';
+			render(
+				<FloatingLayerController>
+					<FloatingLayerBase open>
+						<Tooltip data-testid="tooltip" direction="left">
+							{tooltipText}
+						</Tooltip>
+					</FloatingLayerBase>
+				</FloatingLayerController>
+			);
+
+			const expected = 'left';
+			const actual = screen.getByTestId('tooltip');
+
+			expect(actual).toHaveClass(expected);
+		});
+
+		test('should have `right` class when `direction=right`', () => {
+			const tooltipText = 'This is a tooltip';
+			render(
+				<FloatingLayerController>
+					<FloatingLayerBase open>
+						<Tooltip data-testid="tooltip" direction="right">
+							{tooltipText}
+						</Tooltip>
+					</FloatingLayerBase>
+				</FloatingLayerController>
+			);
+
+			const expected = 'right';
+			const actual = screen.getByTestId('tooltip');
+
+			expect(actual).toHaveClass(expected);
 		});
 
 		test('should render a tooltip if hovered', async () => {
@@ -220,7 +220,7 @@ describe('TooltipDecorator Specs', () => {
 			});
 		});
 
-		test('should render a tooltip if hovered for \'tooltipRelative\'', async () => {
+		test('should render a tooltip if hovered for `tooltipRelative`', async () => {
 			console.error = jest.fn();	// eslint-disable-line no-console
 			const tooltipText = 'Tooltip';
 			render(
@@ -239,7 +239,7 @@ describe('TooltipDecorator Specs', () => {
 		});
 
 		describe('Tooltip position', () => {
-			test('should have \'above\' className when tooltipPosition is set to \'above\'', async () => {
+			test('should have `above` className when tooltipPosition is set to `above`', async () => {
 				const tooltipText = 'Tooltip';
 				render(
 					<FloatingLayerController>
@@ -271,7 +271,7 @@ describe('TooltipDecorator Specs', () => {
 				});
 			});
 
-			test('should have \'below\' className when tooltipPosition is set to \'below\'', async () => {
+			test('should have `below` className when tooltipPosition is set to `below`', async () => {
 				const tooltipText = 'Tooltip';
 				render(
 					<FloatingLayerController>
@@ -304,7 +304,7 @@ describe('TooltipDecorator Specs', () => {
 				});
 			});
 
-			test('should have \'left middle\' className when tooltipPosition is set to \'left middle\'', async () => {
+			test('should have `left middle` className when tooltipPosition is set to `left middle`', async () => {
 				const tooltipText = 'Tooltip';
 				render(
 					<FloatingLayerController>
@@ -324,7 +324,7 @@ describe('TooltipDecorator Specs', () => {
 				});
 			});
 
-			test('should have \'right middle\' className when tooltipPosition is set to \'right middle\'', async () => {
+			test('should have `right middle` className when tooltipPosition is set to `right middle`', async () => {
 				const tooltipText = 'Tooltip';
 				render(
 					<FloatingLayerController>
@@ -339,6 +339,38 @@ describe('TooltipDecorator Specs', () => {
 				await waitFor(() => {
 					const tooltipArrow = screen.getByText('Tooltip').parentElement.parentElement;
 					const expected = 'tooltip right middleArrow';
+
+					expect(tooltipArrow).toHaveClass(expected);
+				});
+			});
+
+			test('should have `above centerArrow` className when tooltipPosition is set to `left`', async () => {
+				const tooltipText = 'Tooltip';
+				render(
+					<FloatingLayerController>
+						<TooltipButton tooltipDelay={0} tooltipPosition="left" tooltipText={tooltipText}>Label</TooltipButton>
+					</FloatingLayerController>
+				);
+
+				const button = screen.getByRole('button');
+
+				button.getBoundingClientRect = jest.fn(() => {
+					return {
+						width: 300,
+						height: 300,
+						top: 600,
+						left: 600,
+						bottom: 0,
+						right: 0
+					};
+				});
+
+				act(() => button.focus());
+				fireEvent.mouseOver(button);
+
+				await waitFor(() => {
+					const tooltipArrow = screen.getByText('Tooltip').parentElement.parentElement;
+					const expected = 'tooltip above centerArrow';
 
 					expect(tooltipArrow).toHaveClass(expected);
 				});
