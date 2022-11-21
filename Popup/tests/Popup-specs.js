@@ -14,8 +14,8 @@ const escapeKeyUp = keyUp(27);
 describe('Popup specs', () => {
 	test('should render content on open', () => {
 		const {rerender} = render(
-			<FloatingLayerController>
-				<Popup noAnimation><div>popup</div></Popup>
+			<FloatingLayerController data-testid="floatLayer">
+				<Popup noAnimation spotlightRestrict="self-only"><div>popup</div></Popup>
 			</FloatingLayerController>
 		);
 
@@ -24,13 +24,15 @@ describe('Popup specs', () => {
 		expect(popup).toBeNull();
 
 		rerender(
-			<FloatingLayerController>
+			<FloatingLayerController data-testid="floatLayer">
 				<Popup noAnimation open><div>popup</div></Popup>
 			</FloatingLayerController>
 		);
 
+		const floatingLayerOpen = screen.getByTestId('floatLayer').nextSibling.children[0];
 		const popupOpen = screen.getByText('popup');
 
+		expect(floatingLayerOpen).toHaveClass('floatingLayer');
 		expect(popupOpen).toBeInTheDocument();
 	});
 
@@ -220,7 +222,7 @@ describe('Popup specs', () => {
 
 			expect(transitionContainer).toHaveClass(expected);
 		});
-	})
+	});
 
 	describe('with position right', function () {
 		test('should have \'right\' class', () => {
