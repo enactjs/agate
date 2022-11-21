@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import {fireEvent, render, screen} from '@testing-library/react';
+import {act, fireEvent, render, screen} from '@testing-library/react';
 
 import Slider from '../Slider';
 
@@ -13,7 +13,39 @@ const rightKeyDown = keyDown(39);
 const upKeyDown = keyDown(38);
 const downKeyDown = keyDown(40);
 
+const getElementClientCenter = (element) => {
+	const {left, top, width, height} = element.getBoundingClientRect();
+	return {x: left + width / 2, y: top + height / 2};
+};
+
+const drag = async (element, {delta, steps = 1}) => {
+	const from = getElementClientCenter(element);
+	const to = {x: from.x + delta.x, y: from.y + delta.y};
+	const step = {x: (to.x - from.x) / steps, y: (to.y - from.y) / steps};
+	const current = {clientX: from.x, clientY: from.y};
+
+	fireEvent.mouseEnter(element, current);
+	fireEvent.mouseOver(element, current);
+	fireEvent.mouseMove(element, current);
+	fireEvent.mouseDown(element, current);
+	for (let i = 0; i < steps; i++) {
+		current.clientX += step.x;
+		current.clientY += step.y;
+		act(() => jest.advanceTimersByTime(1000 / steps));
+		fireEvent.mouseMove(element, current);
+	}
+	fireEvent.mouseUp(element, current);
+};
+
 describe('Slider', () => {
+	beforeEach(() => {
+		jest.useFakeTimers();
+	});
+
+	afterEach(() => {
+		jest.useRealTimers();
+	});
+
 	test('should set "aria-valuetext" to hint string when knob is active and vertical is false', () => {
 		render(<Slider />);
 		const slider = screen.getByRole('slider');
@@ -60,6 +92,19 @@ describe('Slider', () => {
 		const expected = 'active';
 
 		expect(slider).toHaveClass(expected);
+	});
+
+	test('should change value of slider on drag', async () => {
+		render(<Slider active defaultValue={50} />);
+		const slider = screen.getByRole('slider');
+
+		activate(slider);
+		await drag(slider, {delta: {x: 50, y: 0}});
+
+		const expectedAttribute = 'aria-valuetext';
+		const unexpectedValue = '50 change a value with left right button';
+
+		expect(slider).not.toHaveAttribute(expectedAttribute, unexpectedValue);
 	});
 
 	test('should deactivate the slider on blur', () => {
