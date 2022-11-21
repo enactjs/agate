@@ -1,7 +1,10 @@
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
 
-import {SwitchItemBase} from '../SwitchItem';
+import SwitchItem, {SwitchItemBase} from '../SwitchItem';
+import ThemeDecorator from '../../ThemeDecorator';
+
+const ThemedSwitchItem = ThemeDecorator(SwitchItem);
 
 describe('SwitchItem specs', () => {
 	test('should contain a Switch', () => {
@@ -29,5 +32,15 @@ describe('SwitchItem specs', () => {
 		const expected = 'disabled';
 
 		expect(switchButton).toHaveAttribute(expected);
+	});
+
+	test('should show Switch with icon `squarelarge` for Carbon skin', () => {
+		render(<ThemedSwitchItem skin="carbon" />);
+
+		// decimal converted charCode of Unicode 'squarelarge' character
+		const expectedCode = 11035;
+		const actualCode = screen.getAllByRole('button')[1].children[0].textContent.codePointAt();
+
+		expect(actualCode).toBe(expectedCode);
 	});
 });
