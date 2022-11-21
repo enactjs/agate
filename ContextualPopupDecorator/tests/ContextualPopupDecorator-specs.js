@@ -386,6 +386,58 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
+	describe('with overflow', () => {
+		beforeEach(() => {
+			global.Element.prototype.getBoundingClientRect = jest.fn(() => {
+				return {
+					width: 501,
+					height: 501,
+					top: 0,
+					left: 99,
+					bottom: 0,
+					right: 0
+				};
+			});
+		});
+
+		test('should have \'below\' className when direction is set to \'above\' but popup overflows', () => {
+			const Root = FloatingLayerDecorator('div');
+			const message = 'goodbye';
+			render(
+				<Root>
+					<ContextualButton direction="above" open popupComponent={() => message}>
+						Hello
+					</ContextualButton>
+				</Root>
+			);
+			const contextualPopup = screen.getByRole('alert');
+
+			const expected = 'below';
+			const actual = contextualPopup.children.item(0);
+
+			expect(actual).toHaveClass(expected);
+		});
+	});
+
+	describe('with rtl', () => {
+		test('should have \'right\' style when \'rtl\' prop is true', () => {
+			const Root = FloatingLayerDecorator('div');
+			const message = 'goodbye';
+			render(
+				<Root>
+					<ContextualButton direction="above left" open popupComponent={() => message} rtl>
+						Hello
+					</ContextualButton>
+				</Root>
+			);
+
+			const expected = {'right': '480px'};
+			const actual = screen.getByRole('alert').children[0];
+
+			expect(actual).toHaveStyle(expected);
+		});
+	});
+
 	test('should set pointerMode to be false when directional key is pressed', () => {
 		const Root = FloatingLayerDecorator('div');
 		render(
