@@ -130,8 +130,6 @@ describe('MediaPlayer', () => {
 			const actual = audioMedia.tagName;
 
 			expect(actual).toBe(expected);
-
-			expect (audioMedia).toBeInTheDocument();
 		});
 
 		test('should play next audio media when `Next` button is clicked', () => {
