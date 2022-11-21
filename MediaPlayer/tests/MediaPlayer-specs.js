@@ -1,3 +1,4 @@
+import ilib from 'ilib';
 import '@testing-library/jest-dom';
 import {fireEvent, render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -125,6 +126,11 @@ describe('MediaPlayer', () => {
 
 			const audioMedia = screen.getByTestId('media-player').children.item(0);
 
+			const expected = 'AUDIO';
+			const actual = audioMedia.tagName;
+
+			expect(actual).toBe(expected);
+
 			expect (audioMedia).toBeInTheDocument();
 		});
 
@@ -181,6 +187,59 @@ describe('MediaPlayer', () => {
 			expect(audioSource).toHaveProperty('src', expected);
 		});
 
+		test('should play last audio media in the playlist when `Previous` button is clicked and first media in playlist is playing and `repeat=all`', () => {
+			const handlePrevious = jest.fn();
+			// `onPrevious` added for code coverage purposes
+			render(
+				<MediaPlayer data-testid="media-player" onPrevious={handlePrevious}>
+					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))}
+				</MediaPlayer>
+			);
+
+			const previousButton = screen.getByLabelText('Previous');
+
+			const repeatButton = screen.getByLabelText('Repeat');
+
+			userEvent.click(repeatButton);
+			userEvent.click(repeatButton);
+
+			userEvent.click(previousButton); // go back to last audio media - audioFiles[5]
+
+			const audioSource = screen.getByTestId('media-player').children.item(0).children.item(0);
+			const expected = 'https://sampleswap.org/mp3/artist/47067/DJ-Masque_Dont-Forget-To-Be-Yourself-160.mp3';
+
+			expect(audioSource).toHaveProperty('src', expected);
+		});
+
+		test('should restart the playlist when `Next` button is clicked and last media in playlist is playing and `repeat=all`', () => {
+			const handleNext = jest.fn();
+			// `onNext` added for code coverage purposes
+			render(
+				<MediaPlayer data-testid="media-player" onNext={handleNext}>
+					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))}
+				</MediaPlayer>
+			);
+
+			const nextButton = screen.getByLabelText('Next');
+
+			const repeatButton = screen.getByLabelText('Repeat');
+
+			userEvent.click(repeatButton);
+			userEvent.click(repeatButton);
+
+			userEvent.click(nextButton);
+			userEvent.click(nextButton);
+			userEvent.click(nextButton);
+			userEvent.click(nextButton);
+			userEvent.click(nextButton);
+			userEvent.click(nextButton); // go back to first audio media - audioFiles[0]
+
+			const audioSource = screen.getByTestId('media-player').children.item(0).children.item(0);
+			const expected = 'https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3';
+
+			expect(audioSource).toHaveProperty('src', expected);
+		});
+
 		test('should not play audio media in order when `Shuffle` button is clicked', () => {
 			const handleShuffle = jest.fn();
 			render(
@@ -231,6 +290,22 @@ describe('MediaPlayer', () => {
 			userEvent.click(repeatButton);
 
 			expect(controlsFrame).toHaveAttribute('repeat', 'all');
+		});
+
+		test('should update `repeat` value of controls frame to back to `none` when `repeat` button is clicked 3 times', () => {
+			render(
+				<MediaPlayer data-testid="media-player">
+					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))}
+				</MediaPlayer>
+			);
+			const repeatButton = screen.getByLabelText('Repeat');
+			const controlsFrame = screen.getByTestId('media-player').children.item(3);
+
+			userEvent.click(repeatButton);
+			userEvent.click(repeatButton);
+			userEvent.click(repeatButton);
+
+			expect(controlsFrame).toHaveAttribute('repeat', 'none');
 		});
 
 		test('should have `disabled` attribute when `disabled` is defined', () => {
@@ -297,17 +372,17 @@ describe('MediaPlayer', () => {
 			expect(mediaPlayer).toHaveClass(expected);
 		});
 
-		test('should have a `locale` attribute when given one', () => {
+		test('should change the format of the displayed time based on the current `locale`', () => {
+			ilib.setLocale('si-LK');
 			render(
-				<MediaPlayer data-testid="media-player" locale="ar-SA">
+				<MediaPlayer locale="si-LK">
 					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFiles[0]} type="audio/mp3" />))}
 				</MediaPlayer>
 			);
-			const mediaPlayer = screen.getByTestId('media-player');
 
-			const expected = 'ar-SA';
+			const currentTime = screen.getByText('00.00');
 
-			expect(mediaPlayer).toHaveAttribute('locale', expected);
+			expect(currentTime).toBeInTheDocument();
 		});
 	});
 });
