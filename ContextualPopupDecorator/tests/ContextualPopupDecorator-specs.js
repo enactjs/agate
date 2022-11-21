@@ -420,7 +420,7 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	describe('with rtl', () => {
-		test('should have \'right\' style when \'rtl\' prop is true', () => {
+		test('should have \'right\' style when \'rtl\' prop is true and direction is \'above left\'', () => {
 			const Root = FloatingLayerDecorator('div');
 			const message = 'goodbye';
 			render(
