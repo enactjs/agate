@@ -10,7 +10,6 @@ import DatePicker, {dateToLocaleString} from '../DatePicker';
 describe('DatePicker', () => {
 	test('should set the value to the current date when no value is provided', () => {
 		render(<DatePicker locale="en-US" />);
-
 		const currentDate = new Date();
 		const currentYear = currentDate.getFullYear();
 		const currentMonth = currentDate.getMonth() + 1;
@@ -94,6 +93,7 @@ describe('DatePicker', () => {
 	describe('#dateToLocaleString', () => {
 		test('method should convert date to a localized string', () => {
 			const date = new Date(2000, 0, 1);
+
 			const expected = 'Saturday, January 1, 2000';
 			const actual = dateToLocaleString(date);
 

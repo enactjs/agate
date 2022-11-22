@@ -4,7 +4,7 @@ import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Dropdown, {DropdownBase} from '../Dropdown';
-import DropdownList from "../DropdownList";
+import DropdownList from '../DropdownList';
 
 const FloatingLayerController = FloatingLayerDecorator('div');
 
