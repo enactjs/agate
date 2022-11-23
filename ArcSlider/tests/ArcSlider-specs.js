@@ -3,7 +3,6 @@ import {act, fireEvent, render, screen} from '@testing-library/react';
 
 import ArcSlider from '../ArcSlider';
 import {createRef} from "react";
-import ThemeDecorator from '../../ThemeDecorator';
 import {valueToAngle, angleToValue} from '../utils';
 
 const focus = (arcSlider) => fireEvent.focus(arcSlider);
@@ -34,8 +33,6 @@ const upKeyDown = keyDown(38);
 // 	}
 // 	fireEvent.mouseUp(element, current);
 // };
-
-const ThemedArcSlider = ThemeDecorator(ArcSlider);
 
 describe('ArcSlider', () => {
 	// test('debug', () => {
@@ -180,10 +177,19 @@ describe('ArcSlider', () => {
 	});
 
 	test('should have `#343434` foreground color with `carbon` skin', () => {
-		render(<ThemedArcSlider skin="carbon" />);
+		render(<ArcSlider skin="carbon" />);
 		const foregroundColor = screen.getByRole('slider').children.item(1).children.item(0);
 
 		const expected = '#343434';
+
+		expect(foregroundColor).toHaveAttribute('stroke', expected);
+	});
+
+	test('should have `#ffffff` foreground color with night mode', () => {
+		render(<ArcSlider skinVariants={{night: true}} />);
+		const foregroundColor = screen.getByRole('slider').children.item(1).children.item(0);
+
+		const expected = '#ffffff';
 
 		expect(foregroundColor).toHaveAttribute('stroke', expected);
 	});
