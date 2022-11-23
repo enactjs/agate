@@ -12,30 +12,6 @@ const keyUp = (keyCode) => (elm) => fireEvent.keyUp(elm, {keyCode});
 const escapeKeyUp = keyUp(27);
 
 describe('Popup specs', () => {
-	test('should render content on open', () => {
-		const {rerender} = render(
-			<FloatingLayerController data-testid="floatLayer">
-				<Popup noAnimation spotlightRestrict="self-only"><div>popup</div></Popup>
-			</FloatingLayerController>
-		);
-
-		const popup = screen.queryByText('popup');
-
-		expect(popup).toBeNull();
-
-		rerender(
-			<FloatingLayerController data-testid="floatLayer">
-				<Popup noAnimation open><div>popup</div></Popup>
-			</FloatingLayerController>
-		);
-
-		const floatingLayerOpen = screen.getByTestId('floatLayer').nextSibling.children[0];
-		const popupOpen = screen.getByText('popup');
-
-		expect(floatingLayerOpen).toHaveClass('floatingLayer');
-		expect(popupOpen).toBeInTheDocument();
-	});
-
 	test('should set role to \'alert\' by default', () => {
 		render(
 			<FloatingLayerController>

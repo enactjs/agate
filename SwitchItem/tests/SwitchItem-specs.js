@@ -1,10 +1,7 @@
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
 
-import SwitchItem, {SwitchItemBase} from '../SwitchItem';
-import ThemeDecorator from '../../ThemeDecorator';
-
-const ThemedSwitchItem = ThemeDecorator(SwitchItem);
+import {SwitchItemBase} from '../SwitchItem';
 
 describe('SwitchItem specs', () => {
 	test('should contain a Switch', () => {
@@ -35,7 +32,7 @@ describe('SwitchItem specs', () => {
 	});
 
 	test('should show Switch with icon `squarelarge` for Carbon skin', () => {
-		render(<ThemedSwitchItem skin="carbon" />);
+		render(<SwitchItemBase skin="carbon" />);
 
 		// decimal converted charCode of Unicode 'squarelarge' character
 		const expectedCode = 11035;
