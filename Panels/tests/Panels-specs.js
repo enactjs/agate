@@ -88,7 +88,7 @@ describe('Panels Specs', () => {
 				<Panel>First</Panel>
 				<Panel>Second</Panel>
 			</Panels>
-		)
+		);
 
 		const panels = screen.getByTestId('panels');
 
@@ -106,10 +106,10 @@ describe('Panels Specs', () => {
 				<Panel data-testid="panel">First</Panel>
 				<Panel>Second</Panel>
 			</Panels>
-		)
+		);
 
 		const panel = screen.getByTestId('panel');
-		fireEvent.scroll(panel, { target: { scrollY: 100 } });
+		fireEvent.scroll(panel, {target:{scrollY: 100}});
 
 		expect(spy).not.toHaveBeenCalled();
 	});

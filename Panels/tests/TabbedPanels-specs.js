@@ -9,15 +9,15 @@ describe('TabbedPanels Specs', () => {
 	test('should render tabs properly', () => {
 		render(
 			<TabbedPanels
-    			orientation={'vertical'}
-		   		tabs={[
-		   			{title: 'Panel1', icon: 'netbook'},
+				orientation={'vertical'}
+				tabs={[
+					{title: 'Panel1', icon: 'netbook'},
 					{title: 'Panel2', icon: 'aircirculation'}
 				]}
-	 		>
-	   			<Panel>Hello Panel 1</Panel>
-		   		<Panel>Hello Panel 2</Panel>
-		 	</TabbedPanels>
+			>
+				<Panel>Hello Panel 1</Panel>
+				<Panel>Hello Panel 2</Panel>
+			</TabbedPanels>
 		);
 
 		const firstTab = screen.getByText('Panel1');
