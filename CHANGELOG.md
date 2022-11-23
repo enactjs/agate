@@ -4,6 +4,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## Unreleased
 
+### Fixed
+
+- `agate/Panels` function to delete useless props after use
+
 ### Added
 
 - `agate/IncrementSlider` `sliderRef` prop to pass reference to the slider node
