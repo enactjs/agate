@@ -182,7 +182,12 @@ const TabbedPanelsBase = kind({
 			if (tabs) {
 				return tabs.map((tab, index) => {
 					const {view: View, viewProps} = tab;
-					return <View key={index} {...viewProps} />;
+					const tabView = <View key={index} {...viewProps} />;
+
+					delete tab.view;
+					delete tab.viewProps;
+
+					return tabView;
 				});
 			}
 		},

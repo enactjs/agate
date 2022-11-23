@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import {render, screen} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 
 import Button from '../../Button';
 import Header from '../../Header';
@@ -7,7 +7,7 @@ import Panel from '../Panel';
 import Panels, {PanelsBase} from '../Panels';
 
 describe('Panels Specs', () => {
-	test('should set {autoFocus} on child to "default-element" on first render', () => {
+	test('should set {autoFocus} on child to \'default-element\' on first render', () => {
 		const DivPanel = ({autoFocus, id}) => <div data-testid="panel" id={id}>{autoFocus}</div>;
 		render(
 			<Panels index={0}>
@@ -21,7 +21,7 @@ describe('Panels Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should set {autoFocus} on child to "default-element" when navigating to a higher index', () => {
+	test('should set {autoFocus} on child to \'default-element\' when navigating to a higher index', () => {
 		const DivPanel = ({autoFocus, id}) => <div data-testid="panel" id={id}>{autoFocus}</div>;
 		const {rerender} = render(
 			<Panels index={0}>
@@ -66,6 +66,54 @@ describe('Panels Specs', () => {
 		expect(panel.id).toBe('p2');
 	});
 
+	test('should set custom autoFocus on child panels', () => {
+		const DivPanel = ({autoFocus, id}) => <Panel autoFocus={autoFocus} data-testid="panel" id={id}>{autoFocus}</Panel>;
+		render(
+			<Panels index={0}>
+				<DivPanel autoFocus="focus-here" id="p2" />
+			</Panels>
+		);
+
+		const expected = 'focus-here';
+		const panel = screen.getByTestId('panel');
+
+		expect(panel.textContent).toBe(expected);
+		expect(panel.id).toBe('p2');
+	});
+
+	test('should call \'onBack\' for \'escape\' key if not on first panel', () => {
+		const spy = jest.fn();
+		render(
+			<Panels onBack={spy} data-testid="panels" index={1}>
+				<Panel>First</Panel>
+				<Panel>Second</Panel>
+			</Panels>
+		)
+
+		const panels = screen.getByTestId('panels');
+
+		fireEvent.keyDown(panels, {keyCode: 27});
+		fireEvent.keyUp(panels, {keyCode: 27});
+
+		expect(spy).toHaveBeenCalled();
+	});
+
+	test('should not call \'onScroll\' for a scroll event applied to a child', () => {
+		const spy = jest.fn();
+
+		render(
+			<Panels onScroll={spy} index={0}>
+				<Panel data-testid="panel">First</Panel>
+				<Panel>Second</Panel>
+			</Panels>
+		)
+
+		const panel = screen.getByTestId('panel');
+		fireEvent.scroll(panel, { target: { scrollY: 100 } });
+
+		expect(spy).not.toHaveBeenCalled();
+	});
+
 	describe('with Panel and Header', () => {
 		test('should render close button', () => {
 			render(
@@ -95,7 +143,7 @@ describe('Panels Specs', () => {
 			expect(closeButton).toBeNull();
 		});
 
-		test('should set close button "aria-label" to closeButtonAriaLabel', () => {
+		test('should set close button \'aria-label\' to closeButtonAriaLabel', () => {
 			const label = 'custom close button label';
 			render(
 				<Panels closeButtonAriaLabel={label} index={0}>
