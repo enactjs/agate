@@ -36,7 +36,7 @@ import $L from '../internal/$L';
 import {ProgressBarTooltip} from '../ProgressBar';
 import Skinnable from '../Skinnable';
 import {SliderBase} from '../Slider';
-import {emitChange} from '../Slider/utils';
+import {emitChange} from './utils';
 import SliderBehaviorDecorator from '../Slider/SliderBehaviorDecorator';
 
 import IncrementSliderButton from './IncrementSliderButton';

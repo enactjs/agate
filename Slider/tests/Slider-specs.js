@@ -3,15 +3,15 @@ import {act, fireEvent, render, screen} from '@testing-library/react';
 
 import Slider from '../Slider';
 
-const focus = (slider) => fireEvent.focus(slider);
-const blur = (slider) => fireEvent.blur(slider);
 const activate = (slider) => fireEvent.keyUp(slider, {keyCode: 13});
+const blur = (slider) => fireEvent.blur(slider);
+const focus = (slider) => fireEvent.focus(slider);
 const keyDown = (keyCode) => (slider) => fireEvent.keyDown(slider, {keyCode});
 
+const downKeyDown = keyDown(40);
 const leftKeyDown = keyDown(37);
 const rightKeyDown = keyDown(39);
 const upKeyDown = keyDown(38);
-const downKeyDown = keyDown(40);
 
 const getElementClientCenter = (element) => {
 	const {left, top, width, height} = element.getBoundingClientRect();
@@ -46,7 +46,7 @@ describe('Slider', () => {
 		jest.useRealTimers();
 	});
 
-	test('should set "aria-valuetext" to hint string when knob is active and vertical is false', () => {
+	test('should set `aria-valuetext` to hint string when knob is active and vertical is false', () => {
 		render(<Slider />);
 		const slider = screen.getByRole('slider');
 
@@ -58,7 +58,7 @@ describe('Slider', () => {
 		expect(slider).toHaveAttribute(expectedAttribute, expectedValue);
 	});
 
-	test('should set "aria-valuetext" to hint string when knob is active and vertical is true', () => {
+	test('should set `aria-valuetext` to hint string when knob is active and vertical is true', () => {
 		render(<Slider orientation="vertical" />);
 		const slider = screen.getByRole('slider');
 
@@ -70,7 +70,7 @@ describe('Slider', () => {
 		expect(slider).toHaveAttribute(expectedAttribute, expectedValue);
 	});
 
-	test('should set "aria-valuetext" to value when value is changed', () => {
+	test('should set `aria-valuetext` to value when value is changed', () => {
 		render(<Slider activateOnFocus defaultValue={10} />);
 		const slider = screen.getByRole('slider');
 
@@ -236,6 +236,21 @@ describe('Slider', () => {
 		const expectedValue = '51';
 
 		expect(slider).toHaveAttribute(expectedAttribute, expectedValue);
+	});
+
+	test('should increment value by `knobStep`', () => {
+		const spy = jest.fn();
+		render(<Slider onChange={spy} active defaultValue={50} knobStep={2} />);
+
+		const slider = screen.getByRole('slider');
+
+		activate(slider);
+		rightKeyDown(slider);
+
+		const expected = 52;
+		const actual = spy.mock.calls[0][0].value;
+
+		expect(actual).toBe(expected);
 	});
 
 	// these tests validate behavior relating to `value` defaulting to `min`
