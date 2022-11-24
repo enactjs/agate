@@ -6,6 +6,13 @@ import Header from '../../Header';
 import Panel from '../Panel';
 import Panels, {PanelsBase} from '../Panels';
 
+const keyDown = (keyCode) => (elm) => fireEvent.keyDown(elm, {keyCode});
+const keyUp = (keyCode) => (elm) => fireEvent.keyUp(elm, {keyCode});
+
+
+const escapeKeyUp = keyUp(27);
+const escapeKeyDown = keyDown(27);
+
 describe('Panels Specs', () => {
 	test('should display the correct panel based on \'index\' prop', () => {
 		let firstButton, secondButton;
@@ -120,7 +127,7 @@ describe('Panels Specs', () => {
 		expect(panel.id).toBe('p2');
 	});
 
-	test('should set custom autoFocus on child panels', () => {
+	test('should set custom {autoFocus} on child panels', () => {
 		const AutoFocusPanel = ({autoFocus, id}) => <Panel autoFocus={autoFocus} data-testid="panel" id={id}>{autoFocus}</Panel>;
 		render(
 			<Panels index={0}>
@@ -145,16 +152,14 @@ describe('Panels Specs', () => {
 		);
 
 		const panels = screen.getByTestId('panels');
-
-		fireEvent.keyDown(panels, {keyCode: 27});
-		fireEvent.keyUp(panels, {keyCode: 27});
+		escapeKeyDown(panels);
+		escapeKeyUp(panels);
 
 		expect(spy).toHaveBeenCalled();
 	});
 
 	test('should not call \'onScroll\' for a scroll event applied to a child', () => {
 		const spy = jest.fn();
-
 		render(
 			<Panels index={0} onScroll={spy}>
 				<Panel data-testid="panel">First</Panel>

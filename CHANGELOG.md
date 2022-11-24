@@ -6,7 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
-- `agate/Panels` function to delete useless props after use
+- `agate/Panels` function to delete unnecessary props after use
 
 ### Added
 
