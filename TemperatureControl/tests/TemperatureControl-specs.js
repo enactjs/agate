@@ -11,7 +11,6 @@ const downKeyDown = keyDown(40);
 const upKeyDown = keyDown(38);
 
 describe('TemperatureControl', () => {
-
 	test('should reflect disabled state to `aria-disabled`', () => {
 		render(<TemperatureControl disabled />);
 		const temperatureControl = screen.getByRole('slider');

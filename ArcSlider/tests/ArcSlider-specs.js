@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom';
-import {act, fireEvent, render, screen} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 
 import ArcSlider from '../ArcSlider';
-import {createRef} from "react";
 import {valueToAngle, angleToValue} from '../utils';
 
 const focus = (arcSlider) => fireEvent.focus(arcSlider);
@@ -11,53 +10,7 @@ const keyDown = (keyCode) => (arcSlider) => fireEvent.keyDown(arcSlider, {keyCod
 const downKeyDown = keyDown(40);
 const upKeyDown = keyDown(38);
 
-// const getElementClientCenter = (element) => {
-// 	const {left, top, width, height} = element.getBoundingClientRect();
-// 	return {x: left + width / 2, y: top + height / 2};
-// };
-// const drag = (element, {delta, steps = 1}) => {
-// 	const from = getElementClientCenter(element);
-// 	const to = {x: from.x + delta.x, y: from.y + delta.y};
-// 	const step = {x: (to.x - from.x) / steps, y: (to.y - from.y) / steps};
-// 	const current = {clientX: from.x, clientY: from.y};
-//
-// 	fireEvent.mouseEnter(element, current);
-// 	fireEvent.mouseOver(element, current);
-// 	fireEvent.mouseMove(element, current);
-// 	fireEvent.mouseDown(element, current);
-// 	for (let i = 0; i < steps; i++) {
-// 		current.clientX += step.x;
-// 		current.clientY += step.y;
-// 		act(() => jest.advanceTimersByTime(1000 / steps));
-// 		fireEvent.mouseMove(element, current);
-// 	}
-// 	fireEvent.mouseUp(element, current);
-// };
-
 describe('ArcSlider', () => {
-	// test('debug', () => {
-	// 	render(<ArcSlider data-testid="arcSlider" strokeWidth={10}/>);
-	// 	screen.debug();
-	// });
-	// beforeEach(() => {
-	// 	jest.useFakeTimers();
-	// });
-	//
-	// afterEach(() => {
-	// 	jest.useRealTimers();
-	// });
-
-	// test('drag', async () => {
-	// 	// const ref = jest.fn();
-	// 	const ref = createRef();
-	// 	render(<ArcSlider componentRef={ref} />);
-	// 	const arcSlider = screen.getByRole('slider');
-	//
-	// 	focus(arcSlider);
-	// 	await drag(arcSlider, {delta: {x: 37, y: 272}});
-	// 	// screen.debug();
-	// });
-
 	test('should have `aria-valuetext` equal to value', () => {
 		render(<ArcSlider value={25} />);
 		const arcSlider = screen.getByRole('slider');
@@ -95,7 +48,7 @@ describe('ArcSlider', () => {
 	});
 
 	test('should display a node in the center', () => {
-		const node = <span>Hello</span>
+		const node = <span>Hello</span>;
 		render(<ArcSlider slotCenter={node} />);
 		const slotCenter = screen.getByRole('slider').children.item(2).children.item(0);
 
@@ -213,7 +166,7 @@ describe('ArcSlider', () => {
 			const actual = typeof value;
 			const expected = 'number';
 
-			expect(actual).toBe(expected)
+			expect(actual).toBe(expected);
 		});
 
 		test('should return min if `angle` is less than `startAngle`', () => {

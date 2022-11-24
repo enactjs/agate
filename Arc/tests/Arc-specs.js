@@ -43,7 +43,7 @@ describe('Arc', () => {
 		userEvent.click(clickablePath);
 
 		const expected = {type: 'click'};
-		const actual = handleClick.mock.calls.length && handleClick.mock.calls[0][0]
+		const actual = handleClick.mock.calls.length && handleClick.mock.calls[0][0];
 
 		expect(actual).toMatchObject(expected);
 	});
