@@ -9,7 +9,6 @@ import Panels, {PanelsBase} from '../Panels';
 const keyDown = (keyCode) => (elm) => fireEvent.keyDown(elm, {keyCode});
 const keyUp = (keyCode) => (elm) => fireEvent.keyUp(elm, {keyCode});
 
-
 const escapeKeyUp = keyUp(27);
 const escapeKeyDown = keyDown(27);
 
