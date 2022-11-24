@@ -10,7 +10,7 @@ describe('Panels Specs', () => {
 	test('should display the correct panel based on \'index\' prop', () => {
 		let firstButton, secondButton;
 		const {rerender} = render(
-			<Panels noAnimation index={0}>
+			<Panels index={0} noAnimation>
 				<Panel>
 					<Button>One</Button>
 				</Panel>
@@ -27,7 +27,7 @@ describe('Panels Specs', () => {
 		expect(secondButton).not.toBeInTheDocument();
 
 		rerender(
-			<Panels noAnimation index={1}>
+			<Panels index={1} noAnimation>
 				<Panel>
 					<Button>One</Button>
 				</Panel>
@@ -44,7 +44,7 @@ describe('Panels Specs', () => {
 		expect(secondButton).toBeInTheDocument();
 
 		rerender(
-			<Panels noAnimation index={0}>
+			<Panels index={0} noAnimation>
 				<Panel>
 					<Button>One</Button>
 				</Panel>
@@ -138,7 +138,7 @@ describe('Panels Specs', () => {
 	test('should call \'onBack\' for \'escape\' key if not on first panel', () => {
 		const spy = jest.fn();
 		render(
-			<Panels onBack={spy} data-testid="panels" index={1}>
+			<Panels data-testid="panels" index={1} onBack={spy}>
 				<Panel>First</Panel>
 				<Panel>Second</Panel>
 			</Panels>
@@ -156,7 +156,7 @@ describe('Panels Specs', () => {
 		const spy = jest.fn();
 
 		render(
-			<Panels onScroll={spy} index={0}>
+			<Panels index={0} onScroll={spy}>
 				<Panel data-testid="panel">First</Panel>
 			</Panels>
 		);
