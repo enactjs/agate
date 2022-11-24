@@ -7,6 +7,60 @@ import Panel from '../Panel';
 import Panels, {PanelsBase} from '../Panels';
 
 describe('Panels Specs', () => {
+	test('should display the correct panel based on \'index\' prop', () => {
+		let firstButton, secondButton;
+		const {rerender} = render(
+			<Panels noAnimation index={0}>
+				<Panel>
+					<Button>One</Button>
+				</Panel>
+				<Panel>
+					<Button>Two</Button>
+				</Panel>
+			</Panels>
+		);
+
+		firstButton = screen.getByText('One');
+		secondButton = screen.queryByText('Two');
+
+		expect(firstButton).toBeInTheDocument();
+		expect(secondButton).not.toBeInTheDocument();
+
+		rerender(
+			<Panels noAnimation index={1}>
+				<Panel>
+					<Button>One</Button>
+				</Panel>
+				<Panel>
+					<Button>Two</Button>
+				</Panel>
+			</Panels>
+		);
+
+		firstButton = screen.queryByText('One');
+		secondButton = screen.getByText('Two');
+
+		expect(firstButton).not.toBeInTheDocument();
+		expect(secondButton).toBeInTheDocument();
+
+		rerender(
+			<Panels noAnimation index={0}>
+				<Panel>
+					<Button>One</Button>
+				</Panel>
+				<Panel>
+					<Button>Two</Button>
+				</Panel>
+			</Panels>
+		);
+
+		firstButton = screen.getByText('One');
+		secondButton = screen.queryByText('Two');
+
+		expect(firstButton).toBeInTheDocument();
+		expect(secondButton).not.toBeInTheDocument();
+	});
+
 	test('should set {autoFocus} on child to \'default-element\' on first render', () => {
 		const DivPanel = ({autoFocus, id}) => <div data-testid="panel" id={id}>{autoFocus}</div>;
 		render(
@@ -67,10 +121,10 @@ describe('Panels Specs', () => {
 	});
 
 	test('should set custom autoFocus on child panels', () => {
-		const DivPanel = ({autoFocus, id}) => <Panel autoFocus={autoFocus} data-testid="panel" id={id}>{autoFocus}</Panel>;
+		const AutoFocusPanel = ({autoFocus, id}) => <Panel autoFocus={autoFocus} data-testid="panel" id={id}>{autoFocus}</Panel>;
 		render(
 			<Panels index={0}>
-				<DivPanel autoFocus="focus-here" id="p2" />
+				<AutoFocusPanel autoFocus="focus-here" id="p2" />
 			</Panels>
 		);
 
@@ -104,7 +158,6 @@ describe('Panels Specs', () => {
 		render(
 			<Panels onScroll={spy} index={0}>
 				<Panel data-testid="panel">First</Panel>
-				<Panel>Second</Panel>
 			</Panels>
 		);
 
