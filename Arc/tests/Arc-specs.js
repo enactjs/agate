@@ -26,8 +26,7 @@ describe('Arc', () => {
 	});
 
 	test('should change path color when `color` prop is defined', () => {
-		render(<Arc data-testid="arc" color="#00FF00" />);
-
+		render(<Arc color="#00FF00" data-testid="arc" />);
 		const svgPath = screen.getByTestId('arc').children.item(0);
 
 		const expected = '#00FF00';

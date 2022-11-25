@@ -90,7 +90,6 @@ describe('TemperatureControl', () => {
 		test('should convert unit to `Celsius` with `ko-KR` locale', () => {
 			ilib.setLocale('ko-KR');
 			render(<TemperatureControl />);
-
 			const temperatureControl = screen.getByRole('slider').children.item(2).children.item(0);
 
 			const expected = '15°C';

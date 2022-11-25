@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import {fireEvent, render, screen} from '@testing-library/react';
 
 import ArcSlider from '../ArcSlider';
-import {valueToAngle, angleToValue} from '../utils';
+import {angleToValue, valueToAngle} from '../utils';
 
 const focus = (arcSlider) => fireEvent.focus(arcSlider);
 const keyDown = (keyCode) => (arcSlider) => fireEvent.keyDown(arcSlider, {keyCode});
