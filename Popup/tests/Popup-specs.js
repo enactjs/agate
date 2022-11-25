@@ -299,7 +299,7 @@ describe('Popup specs', () => {
 	test('should apply \'ease-in-out\' class to transition container when noAnimation is false', () => {
 		render(
 			<FloatingLayerController>
-				<Popup noAnimation={false} open />
+				<Popup open />
 			</FloatingLayerController>
 		);
 

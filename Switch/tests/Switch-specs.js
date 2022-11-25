@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
 
-import Switch, {SwitchBase} from '../Switch';
+import {SwitchBase} from '../Switch';
 
 describe('Switch Specs', () => {
 	test('should not have `selected` className', () => {
@@ -14,7 +14,7 @@ describe('Switch Specs', () => {
 	});
 
 	test('should have `selected` if selected prop is true', () => {
-		render(<Switch selected />);
+		render(<SwitchBase selected />);
 
 		const actual = screen.getByRole('button');
 		const expected = 'selected';
@@ -41,10 +41,20 @@ describe('Switch Specs', () => {
 	});
 
 	test('should show default icon `circle`', () => {
-		render(<Switch />);
+		render(<SwitchBase />);
 
 		// decimal converted charCode of Unicode 'circle' character
 		const expectedCode = 983071;
+		const actualCode = screen.getByRole('button').children[0].textContent.codePointAt();
+
+		expect(actualCode).toBe(expectedCode);
+	});
+
+	test('should show `squarelarge` icon for Carbon skin', () => {
+		render(<SwitchBase skin="carbon" />);
+
+		// decimal converted charCode of Unicode 'squarelarge' character
+		const expectedCode = 11035;
 		const actualCode = screen.getByRole('button').children[0].textContent.codePointAt();
 
 		expect(actualCode).toBe(expectedCode);
