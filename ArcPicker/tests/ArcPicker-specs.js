@@ -64,7 +64,7 @@ describe('ArcPicker Specs', () => {
 		expect(foregroundColor).toHaveAttribute('stroke', expected);
 	});
 
-	test('should set `#343434` foreground color with `carbon` skin', async () => {
+	test('should have `#343434` foreground color with `carbon` skin', async () => {
 		render(<ArcPicker skin="carbon">{[1, 2, 3, 4]}</ArcPicker>);
 		const arcPicker = screen.getByRole('slider');
 		const foregroundColor = screen.getByRole('slider').children.item(0).children.item(0);

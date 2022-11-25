@@ -1,6 +1,6 @@
-import ilib from 'ilib';
 import '@testing-library/jest-dom';
 import {fireEvent, render, screen} from '@testing-library/react';
+import ilib from 'ilib';
 
 import TemperatureControl from '../TemperatureControl';
 
