@@ -1,8 +1,10 @@
 import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 import '@testing-library/jest-dom';
-import {fireEvent, render, screen, waitFor} from '@testing-library/react';
+import {act, fireEvent, render, screen, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {useState} from 'react';
 
+import Button from '../../Button';
 import {Popup} from '../Popup';
 
 const FloatingLayerController = FloatingLayerDecorator('div');
@@ -348,6 +350,34 @@ describe('Popup specs', () => {
 				<Popup noAnimation onShow={handleShow} open />
 			</FloatingLayerController>
 		);
+
+		expect(handleShow).toHaveBeenCalled();
+	});
+
+	test('should handle onShow', () => {
+		const handleShow = jest.fn();
+		const PopupView = () => {
+			const [openState, handleOpen] = useState(false);
+			return (
+				<>
+					<Button alt="Normal" onClick={() => handleOpen(true)}>Open 0</Button>
+					<FloatingLayerController>
+						<Popup
+							noAnimation
+							onShow={handleShow}
+							open={openState}
+						>
+							<span>Content</span>
+						</Popup>
+					</FloatingLayerController>
+				</>
+			);
+		};
+
+		render(<PopupView />);
+		const button = screen.getByRole('button');
+
+		userEvent.click(button);
 
 		expect(handleShow).toHaveBeenCalled();
 	});
