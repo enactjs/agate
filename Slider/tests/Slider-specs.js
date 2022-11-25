@@ -240,7 +240,7 @@ describe('Slider', () => {
 
 	test('should increment value by `knobStep`', () => {
 		const spy = jest.fn();
-		render(<Slider onChange={spy} active defaultValue={50} knobStep={2} />);
+		render(<Slider active knobStep={2} onChange={spy} defaultValue={50} />);
 
 		const slider = screen.getByRole('slider');
 

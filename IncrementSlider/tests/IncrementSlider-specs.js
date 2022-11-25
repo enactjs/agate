@@ -14,10 +14,10 @@ const focus = (slider) => fireEvent.focus(slider);
 const increment = () => userEvent.click(screen.getAllByRole('button')[1]);
 const keyDown = (keyCode) => (slider) => fireEvent.keyDown(slider, {keyCode});
 
+const downKeyDown = keyDown(40);
 const leftKeyDown = keyDown(37);
 const rightKeyDown = keyDown(39);
 const upKeyDown = keyDown(38);
-const downKeyDown = keyDown(40);
 
 describe('IncrementSlider Specs', () => {
 	test('should decrement value', () => {
@@ -107,26 +107,24 @@ describe('IncrementSlider Specs', () => {
 		expect(actual).toHaveTextContent(expected);
 	});
 
-	test('should set decrementButton `aria-label` to value and hint string',
-		() => {
-			render(<IncrementSlider value={10} />);
+	test('should set decrementButton `aria-label` to value and hint string', () => {
+		render(<IncrementSlider value={10} />);
 
-			const expected = '10 press button to decrease the value';
-			const actual = screen.getAllByRole('button')[0];
+		const expected = '10 press button to decrease the value';
+		const actual = screen.getAllByRole('button')[0];
 
-			expect(actual).toHaveAttribute('aria-label', expected);
-		});
+		expect(actual).toHaveAttribute('aria-label', expected);
+	});
 
-	test('should set decrementButton `aria-label` to decrementAriaLabel',
-		() => {
-			const label = 'decrement aria label';
-			render(<IncrementSlider decrementAriaLabel={label} value={10} />);
+	test('should set decrementButton `aria-label` to decrementAriaLabel', () => {
+		const label = 'decrement aria label';
+		render(<IncrementSlider decrementAriaLabel={label} value={10} />);
 
-			const expected = `10 ${label}`;
-			const actual = screen.getAllByRole('button')[0];
+		const expected = `10 ${label}`;
+		const actual = screen.getAllByRole('button')[0];
 
-			expect(actual).toHaveAttribute('aria-label', expected);
-		});
+		expect(actual).toHaveAttribute('aria-label', expected);
+	});
 
 	test('should set decrementButton `aria-label` when decrementButton is disabled', () => {
 		render(<IncrementSlider disabled value={10} />);
@@ -185,7 +183,7 @@ describe('IncrementSlider Specs', () => {
 		expect(tooltip).toBeNull();
 	});
 
-	describe('test directional events from IncrementSliderButtons', () => {
+	describe('directional events from IncrementSliderButtons', () => {
 		test('should call onSpotlightLeft from the decrement button of horizontal IncrementSlider', () => {
 			const handleSpotlight = jest.fn();
 			render(<IncrementSlider onSpotlightLeft={handleSpotlight} />);
@@ -319,7 +317,7 @@ describe('IncrementSlider Specs', () => {
 		});
 	});
 
-	describe('test directional events at bounds of slider', () => {
+	describe('directional events at bounds of slider', () => {
 		test('should call onSpotlightLeft from slider of horizontal IncrementSlider when value is at min', () => {
 			const handleSpotlight = jest.fn();
 			render(<IncrementSlider min={0} onSpotlightLeft={handleSpotlight} value={0} />);
@@ -366,7 +364,7 @@ describe('IncrementSlider Specs', () => {
 
 		test('should increment value by knobStep', () => {
 			const spy = jest.fn();
-			render(<IncrementSlider onChange={spy} active defaultValue={50} knobStep={2} />);
+			render(<IncrementSlider active defaultValue={50} knobStep={2} onChange={spy} />);
 
 			increment();
 
