@@ -173,11 +173,11 @@ describe('VirtualGridList with native \'scrollMode\'', () => {
 			const verticalScrollbar = VirtualGridListRoot.children.item(0).children.item(1);
 			const horizontalScrollbar = VirtualGridListRoot.children.item(1);
 
-			expect(verticalScrollbar).toHaveClass("scrollbar vertical");
-			expect(horizontalScrollbar).toHaveClass("scrollbar horizontal");
+			expect(verticalScrollbar).toHaveClass('scrollbar vertical');
+			expect(horizontalScrollbar).toHaveClass('scrollbar horizontal');
 		});
 
-		test('should render only vertical scrollbar when \'verticalScrollbar\' is "visible" and \'horizontalScrollbar\' is "hidden"', () => {
+		test('should render only vertical scrollbar when \'verticalScrollbar\' is `visible` and \'horizontalScrollbar\' is `hidden`', () => {
 			render(
 				<VirtualGridList
 					clientSize={clientSize}
@@ -193,11 +193,11 @@ describe('VirtualGridList with native \'scrollMode\'', () => {
 			const horizontalScrollbar = VirtualGridListRoot.children.item(1);
 
 			expect(verticalScrollbar).toBeInTheDocument();
-			expect(verticalScrollbar).toHaveClass("scrollbar vertical");
+			expect(verticalScrollbar).toHaveClass('scrollbar vertical');
 			expect(horizontalScrollbar).toBeNull();
 		});
 
-		test('should not render any scrollbar when when \'horizontalScrollbar\' and \'verticalScrollbar\' are "hidden"', () => {
+		test('should not render any scrollbar when when \'horizontalScrollbar\' and \'verticalScrollbar\' are `hidden`', () => {
 			render(
 				<VirtualGridList
 					clientSize={clientSize}
