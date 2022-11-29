@@ -4,7 +4,7 @@ import {act, render, screen} from '@testing-library/react';
 import ImageItem from '../../ImageItem';
 import {VirtualGridList} from '../VirtualList';
 
-describe('VirtualGridList', () => {
+describe('VirtualGridList with native \'scrollMode\'', () => {
 	let
 		clientSize,
 		dataSize,
@@ -64,6 +64,7 @@ describe('VirtualGridList', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="native"
 			/>
 		);
 
@@ -79,6 +80,7 @@ describe('VirtualGridList', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="native"
 			/>
 		);
 
@@ -95,6 +97,7 @@ describe('VirtualGridList', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="native"
 			/>
 		);
 
@@ -111,6 +114,7 @@ describe('VirtualGridList', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="native"
 			/>
 		);
 
@@ -122,6 +126,7 @@ describe('VirtualGridList', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="native"
 			/>
 		);
 
@@ -139,6 +144,7 @@ describe('VirtualGridList', () => {
 				direction="horizontal"
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="native"
 			/>
 		);
 
@@ -158,6 +164,7 @@ describe('VirtualGridList', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					horizontalScrollbar="visible"
+					scrollMode="native"
 					verticalScrollbar="visible"
 				/>
 			);
@@ -177,6 +184,7 @@ describe('VirtualGridList', () => {
 					dataSize={dataSize}
 					itemRenderer={renderItem}
 					itemSize={itemSize}
+					scrollMode="native"
 				/>
 			);
 
@@ -198,6 +206,7 @@ describe('VirtualGridList', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					horizontalScrollbar="hidden"
+					scrollMode="native"
 					verticalScrollbar="hidden"
 				/>
 			);
@@ -228,6 +237,7 @@ describe('VirtualGridList', () => {
 					dataSize={itemArray.length}
 					itemRenderer={renderItemArray}
 					itemSize={itemSize}
+					scrollMode="native"
 				/>
 			);
 
@@ -237,6 +247,7 @@ describe('VirtualGridList', () => {
 				dataSize={itemArray.length}
 				itemRenderer={renderItemArray}
 				itemSize={itemSize}
+				scrollMode="native"
 			/>);
 
 			jest.useFakeTimers();
