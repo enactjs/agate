@@ -31,6 +31,14 @@ describe('SwitchItem specs', () => {
 		expect(switchButton).toHaveAttribute(expected);
 	});
 
+	test('should have `check` icon when specified', () => {
+		render(<SwitchItemBase icon="check">SwitchItem</SwitchItemBase>);
+		const icon = screen.getByText('✓');
+
+		expect(icon).toBeInTheDocument();
+		expect(icon).toHaveClass('icon');
+	});
+
 	test('should show Switch with icon `squarelarge` for Carbon skin', () => {
 		render(<SwitchItemBase skin="carbon" />);
 

@@ -13,7 +13,7 @@ const keyUp = (keyCode) => (elm) => fireEvent.keyUp(elm, {keyCode});
 
 const escapeKeyUp = keyUp(27);
 
-describe('Popup specs', () => {
+describe('Popup Specs', () => {
 	test('should set role to \'alert\' by default', () => {
 		render(
 			<FloatingLayerController>
