@@ -3,7 +3,7 @@ import {render, screen} from '@testing-library/react';
 
 import {SwitchItemBase} from '../SwitchItem';
 
-describe('SwitchItem specs', () => {
+describe('SwitchItem Specs', () => {
 	test('should contain a Switch', () => {
 		render(<SwitchItemBase>SwitchItem</SwitchItemBase>);
 		const switchButton = screen.getAllByRole('button')[1];
