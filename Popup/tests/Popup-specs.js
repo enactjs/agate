@@ -14,7 +14,7 @@ const keyUp = (keyCode) => (elm) => fireEvent.keyUp(elm, {keyCode});
 const escapeKeyUp = keyUp(27);
 
 describe('Popup Specs', () => {
-	test('should set role to \'alert\' by default', () => {
+	test('should set role to `alert` by default', () => {
 		render(
 			<FloatingLayerController>
 				<Popup open><div>popup</div></Popup>
@@ -63,7 +63,7 @@ describe('Popup Specs', () => {
 	});
 
 	describe('with centered content', function () {
-		test('should be rendered with centered content if \'centered\' is set to true', () => {
+		test('should be rendered with centered content if `centered` is set to true', () => {
 			render(
 				<FloatingLayerController>
 					<Popup centered open />
@@ -76,7 +76,7 @@ describe('Popup Specs', () => {
 			expect(popup).toHaveClass(expected);
 		});
 
-		test('should not be rendered with centered content if \'centered\' is set to false', () => {
+		test('should not be rendered with centered content if `centered` is set to false', () => {
 			render(
 				<FloatingLayerController>
 					<Popup open />
@@ -91,7 +91,7 @@ describe('Popup Specs', () => {
 	});
 
 	describe('with position center', function () {
-		test('should have \'center\' class when no position is specified', () => {
+		test('should have `center` class when no position is specified', () => {
 			render(
 				<FloatingLayerController>
 					<Popup open />
@@ -104,7 +104,7 @@ describe('Popup Specs', () => {
 			expect(popup).toHaveClass(expected);
 		});
 
-		test('should have popup transition container with \'center\' class', () => {
+		test('should have popup transition container with `center` class', () => {
 			render(
 				<FloatingLayerController>
 					<Popup open position="center" />
@@ -119,7 +119,7 @@ describe('Popup Specs', () => {
 	});
 
 	describe('with position top', function () {
-		test('should have \'top\' class', () => {
+		test('should have `top` class', () => {
 			render(
 				<FloatingLayerController>
 					<Popup open position="top" />
@@ -132,7 +132,7 @@ describe('Popup Specs', () => {
 			expect(popup).toHaveClass(expected);
 		});
 
-		test('should have popup transition container with \'top\' class', () => {
+		test('should have popup transition container with `top` class', () => {
 			render(
 				<FloatingLayerController>
 					<Popup open position="top" />
@@ -147,7 +147,7 @@ describe('Popup Specs', () => {
 	});
 
 	describe('with position bottom', function () {
-		test('should have \'bottom\' class', () => {
+		test('should have `bottom` class', () => {
 			render(
 				<FloatingLayerController>
 					<Popup open position="bottom" />
@@ -160,7 +160,7 @@ describe('Popup Specs', () => {
 			expect(popup).toHaveClass(expected);
 		});
 
-		test('should have popup transition container with \'bottom\' class', () => {
+		test('should have popup transition container with `bottom` class', () => {
 			render(
 				<FloatingLayerController>
 					<Popup open position="bottom" />
@@ -175,7 +175,7 @@ describe('Popup Specs', () => {
 	});
 
 	describe('with position left', function () {
-		test('should have \'left\' class', () => {
+		test('should have `left` class', () => {
 			render(
 				<FloatingLayerController>
 					<Popup open position="left" />
@@ -188,7 +188,7 @@ describe('Popup Specs', () => {
 			expect(popup).toHaveClass(expected);
 		});
 
-		test('should have popup transition container with \'left\' class', () => {
+		test('should have popup transition container with `left` class', () => {
 			render(
 				<FloatingLayerController>
 					<Popup open position="left" />
@@ -203,7 +203,7 @@ describe('Popup Specs', () => {
 	});
 
 	describe('with position right', function () {
-		test('should have \'right\' class', () => {
+		test('should have `right` class', () => {
 			render(
 				<FloatingLayerController>
 					<Popup open position="right"><div>popup</div></Popup>
@@ -216,7 +216,7 @@ describe('Popup Specs', () => {
 			expect(popup).toHaveClass(expected);
 		});
 
-		test('should have popup transition container with \'right\' class', () => {
+		test('should have popup transition container with `right` class', () => {
 			render(
 				<FloatingLayerController>
 					<Popup open position="right"><div>popup</div></Popup>
@@ -231,7 +231,7 @@ describe('Popup Specs', () => {
 	});
 
 	describe('with position fullscreen', function () {
-		test('should have \'fullscreen\' class', () => {
+		test('should have `fullscreen` class', () => {
 			render(
 				<FloatingLayerController>
 					<Popup open position="fullscreen" />
@@ -244,7 +244,7 @@ describe('Popup Specs', () => {
 			expect(popup).toHaveClass(expected);
 		});
 
-		test('should have popup transition container with \'fullscreen\' class', () => {
+		test('should have popup transition container with `fullscreen` class', () => {
 			render(
 				<FloatingLayerController>
 					<Popup open position="fullscreen" />
@@ -259,7 +259,7 @@ describe('Popup Specs', () => {
 	});
 
 	describe('with position changes dynamically', function () {
-		test('should not have \'top\' class when position change from top to any other position', () => {
+		test('should not have `top` class when position change from top to any other position', () => {
 			const {rerender} = render(
 				<FloatingLayerController>
 					<Popup open position="top" />
@@ -298,7 +298,7 @@ describe('Popup Specs', () => {
 		});
 	});
 
-	test('should apply \'ease-in-out\' class to transition container when noAnimation is false', () => {
+	test('should apply `ease-in-out` class to transition container when noAnimation is false', () => {
 		render(
 			<FloatingLayerController>
 				<Popup open />
@@ -311,7 +311,7 @@ describe('Popup Specs', () => {
 		expect(transitionContainer).toHaveClass(expected);
 	});
 
-	test('should apply \'shown\' class when visible with noAnimation', () => {
+	test('should apply `shown` class when visible with noAnimation', () => {
 		render(
 			<FloatingLayerController>
 				<Popup noAnimation open />
@@ -324,7 +324,7 @@ describe('Popup Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should show close button if \'closeButton\' is set to true', () => {
+	test('should show close button if `closeButton` is set to true', () => {
 		render(
 			<FloatingLayerController>
 				<Popup closeButton noAnimation open />
@@ -399,7 +399,7 @@ describe('Popup Specs', () => {
 		expect(handleHide).toHaveBeenCalled();
 	});
 
-	test('should apply \'hidden\' class when popup closes', () => {
+	test('should apply `hidden` class when popup closes', () => {
 		const {rerender} = render(
 			<FloatingLayerController>
 				<Popup open />
@@ -436,7 +436,7 @@ describe('Popup Specs', () => {
 		expect(actual).toMatchObject(expectedType);
 	});
 
-	test('should call onClose on \'closeButton\' click', () => {
+	test('should call onClose on `closeButton` click', () => {
 		const handleClose = jest.fn();
 		render(
 			<FloatingLayerController>

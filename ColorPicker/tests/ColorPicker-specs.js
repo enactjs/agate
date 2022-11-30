@@ -11,7 +11,7 @@ const leftKeyDown = keyDown(37);
 const rightKeyDown = keyDown(39);
 
 describe('ColorPicker', () => {
-	test('should have transitionContainer with \'right\' class when `direction` is set to  \'left\'', () => {
+	test('should have transitionContainer with `right` class when `direction` is set to  `left`', () => {
 		render(
 			<ColorPicker direction="left" open>
 				{[]}
@@ -24,7 +24,7 @@ describe('ColorPicker', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have transitionContainer with \'down\' class when `direction` is set to  \'up\'', () => {
+	test('should have transitionContainer with `down` class when `direction` is set to  `up`', () => {
 		render(
 			<ColorPicker direction="up" open>
 				{[]}
@@ -37,7 +37,7 @@ describe('ColorPicker', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have transitionContainer with \'up\' class when `direction` is set to  \'down\'', () => {
+	test('should have transitionContainer with `up` class when `direction` is set to  `down`', () => {
 		render(
 			<ColorPicker direction="down" open>
 				{[]}

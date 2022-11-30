@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import Button, {ButtonBase} from '../Button';
 
 describe('Button Specs', () => {
-	test('should have \'disabled\' HTML attribute when \'disabled\' prop is provided', () => {
+	test('should have `disabled` HTML attribute when `disabled` prop is provided', () => {
 		render(<Button disabled>I am a disabled Button</Button>);
 		const button = screen.getByRole('button');
 
@@ -21,7 +21,7 @@ describe('Button Specs', () => {
 		expect(button).toHaveClass(expected);
 	});
 
-	test('should have default `size` \'large\'', () => {
+	test('should have default `size` `large`', () => {
 		render(<ButtonBase />);
 		const button = screen.getByRole('button');
 
@@ -30,7 +30,7 @@ describe('Button Specs', () => {
 		expect(button).toHaveClass(expected);
 	});
 
-	test('should have \'joinedCenter\' class', () => {
+	test('should have `joinedCenter` class', () => {
 		render(<ButtonBase joinedPosition="center" />);
 		const button = screen.getByRole('button');
 
@@ -39,7 +39,7 @@ describe('Button Specs', () => {
 		expect(button).toHaveClass(expected);
 	});
 
-	test('should have \'grid\' class', () => {
+	test('should have `grid` class', () => {
 		render(<ButtonBase type="grid" />);
 		const button = screen.getByRole('button');
 
@@ -49,7 +49,7 @@ describe('Button Specs', () => {
 	});
 
 	describe('with no `minWidth`', () => {
-		test('should not have \'minWidth\' class', () => {
+		test('should not have `minWidth` class', () => {
 			render(<ButtonBase minWidth={false} />);
 			const button = screen.getByRole('button');
 
@@ -59,8 +59,8 @@ describe('Button Specs', () => {
 		});
 	});
 
-	describe('with \'transparent\' `backgroundOpacity`', () => {
-		test('should have \'transparent\' class', () => {
+	describe('with `transparent` `backgroundOpacity`', () => {
+		test('should have `transparent` class', () => {
 			render(<ButtonBase backgroundOpacity="transparent" />);
 			const button = screen.getByRole('button');
 
@@ -71,7 +71,7 @@ describe('Button Specs', () => {
 	});
 
 	describe('with icon', () => {
-		test('should have \'check\' icon when specified', () => {
+		test('should have `check` icon when specified', () => {
 			render(<Button icon="check">abc</Button>);
 			const icon = screen.getByText('✓');
 
@@ -79,14 +79,14 @@ describe('Button Specs', () => {
 			expect(icon).toHaveClass('icon');
 		});
 
-		test('should have \'iconOnly\' class', () => {
+		test('should have `iconOnly` class', () => {
 			render(<Button icon="check" />);
 			const button = screen.getByRole('button');
 
 			expect(button).toHaveClass('iconOnly');
 		});
 
-		test('should have \'iconAfter\' class with text and icon', () => {
+		test('should have `iconAfter` class with text and icon', () => {
 			render(<Button icon="check" iconPosition="after">text</Button>);
 			const button = screen.getByRole('button');
 
@@ -95,7 +95,7 @@ describe('Button Specs', () => {
 			expect(button).toHaveClass(expected);
 		});
 
-		test('should have \'iconBefore\' class with text and icon', () => {
+		test('should have `iconBefore` class with text and icon', () => {
 			render(<Button icon="check" iconPosition="before">text</Button>);
 			const button = screen.getByRole('button');
 
@@ -106,7 +106,7 @@ describe('Button Specs', () => {
 	});
 
 	describe('with badge', () => {
-		test('should have \'badge\' with text="1"', () => {
+		test('should have `badge` with text="1"', () => {
 			render(<Button badge="1" badgeColor="#986AAD">text</Button>);
 			const badge = screen.getByRole('button').children[0].children[0];
 			const badgeText = screen.getByText('1');

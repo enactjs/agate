@@ -99,7 +99,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(popup).toBeNull();
 	});
 
-	test('should show close button if \'showCloseButton\' is set to true', () => {
+	test('should show close button if `showCloseButton` is set to true', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -134,7 +134,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(handleClose).not.toHaveBeenCalled();
 	});
 
-	test('should have \'below\' className when direction is set to \'below\'', () => {
+	test('should have `below` className when direction is set to `below`', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -152,7 +152,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have \'below center\' className when direction is set to \'below center\'', () => {
+	test('should have `below center` className when direction is set to `below center`', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -170,7 +170,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have \'below left\' className when direction is set to \'below left\'', () => {
+	test('should have `below left` className when direction is set to `below left`', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -188,7 +188,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have \'below right\' className when direction is set to \'below right\'', () => {
+	test('should have `below right` className when direction is set to `below right`', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -206,7 +206,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have \'right bottom\' className when direction is set to \'right bottom\'', () => {
+	test('should have `right bottom` className when direction is set to `right bottom`', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -224,7 +224,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have \'right middle\' className when direction is set to \'right middle\'', () => {
+	test('should have `right middle` className when direction is set to `right middle`', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -242,7 +242,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have \'right top\' className when direction is set to \'right top\'', () => {
+	test('should have `right top` className when direction is set to `right top`', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -260,7 +260,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have \'above\' className when direction is set to \'above\'', () => {
+	test('should have `above` className when direction is set to `above`', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -278,7 +278,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have \'above center\' className when direction is set to \'above center\'', () => {
+	test('should have `above center` className when direction is set to `above center`', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -296,7 +296,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have \'above left\' className when direction is set to \'above left\'', () => {
+	test('should have `above left` className when direction is set to `above left`', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -314,7 +314,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have \'above right\' className when direction is set to \'above right\'', () => {
+	test('should have `above right` className when direction is set to `above right`', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -332,7 +332,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have \'left bottom\' className when direction is set to \'left bottom\'', () => {
+	test('should have `left bottom` className when direction is set to `left bottom`', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -350,7 +350,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have \'left middle\' className when direction is set to \'left middle\'', () => {
+	test('should have `left middle` className when direction is set to `left middle`', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -368,7 +368,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should have \'left top\' className when direction is set to \'left top\'', () => {
+	test('should have `left top` className when direction is set to `left top`', () => {
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -400,7 +400,7 @@ describe('ContextualPopupDecorator Specs', () => {
 			});
 		});
 
-		test('should have \'below\' className when direction is set to \'above\' but popup overflows', () => {
+		test('should have `below` className when direction is set to `above` but popup overflows', () => {
 			const Root = FloatingLayerDecorator('div');
 			const message = 'goodbye';
 			render(
@@ -420,7 +420,7 @@ describe('ContextualPopupDecorator Specs', () => {
 	});
 
 	describe('with rtl', () => {
-		test('should have \'right\' style when \'rtl\' prop is true and direction is \'above left\'', () => {
+		test('should have `right` style when `rtl` prop is true and direction is `above left`', () => {
 			const Root = FloatingLayerDecorator('div');
 			const message = 'goodbye';
 			render(
@@ -457,7 +457,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(pointerMode).toBe(expected);
 	});
 
-	test('should close popup if prop \'open\' is omitted on rerender', () => {
+	test('should close popup if prop `open` is omitted on rerender', () => {
 		const Root = FloatingLayerDecorator('div');
 		const {rerender} = render(
 			<Root>
@@ -483,7 +483,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(secondRender).toBe(expectedSecond);
 	});
 
-	test('should open popup if prop \'open\' is added on rerender', () => {
+	test('should open popup if prop `open` is added on rerender', () => {
 		const Root = FloatingLayerDecorator('div');
 		const {rerender} = render(
 			<Root>
@@ -509,7 +509,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(secondRender).toBe(expectedSecond);
 	});
 
-	test('should capture \'onKeyDown\' event from outside of popup', () => {
+	test('should capture `onKeyDown` event from outside of popup', () => {
 		const handleOnKeyDown = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		render(
