@@ -64,7 +64,7 @@ const getSide = (orientation, position) => {
 				// invalid values for horizontal so use defaults
 				return ['auto', 'above'];
 		}
-	} else if (orientation === 'vertical') {
+	} else {
 		switch (position) {
 			case 'after':
 			case 'before':
