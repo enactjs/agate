@@ -173,13 +173,13 @@ describe('MediaPlayer', () => {
 					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))}
 				</MediaPlayer>
 			);
-			const audioSource = screen.getByTestId('media-player').children.item(0).children.item(0);
 			const nextButton = screen.getByLabelText('Next');
 			const previousButton = screen.getByLabelText('Previous');
 
 			userEvent.click(nextButton); // go to next audio media - audioFiles[1]
 			userEvent.click(previousButton); // go back to first audio media - audioFiles[0]
 
+			const audioSource = screen.getByTestId('media-player').children.item(0).children.item(0);
 			const expected = 'https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3';
 
 			expect(audioSource).toHaveProperty('src', expected);
@@ -238,25 +238,27 @@ describe('MediaPlayer', () => {
 			expect(audioSource).toHaveProperty('src', expected);
 		});
 
-		test('should not play audio media in order when `Shuffle` button is clicked', () => {
+		test('should play audio media in order when `Shuffle` button is clicked twice', () => {
 			const handleShuffle = jest.fn();
 			render(
 				<MediaPlayer data-testid="media-player" onShuffle={handleShuffle}>
 					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))}
 				</MediaPlayer>
 			);
-			const audioSource = screen.getByTestId('media-player').children.item(0).children.item(0);
+
 			const nextButton = screen.getByLabelText('Next');
 			const playButton = screen.getByLabelText('Play');
 			const shuffleButton = screen.getByLabelText('Shuffle');
 
 			userEvent.click(shuffleButton);
+			userEvent.click(shuffleButton);
 			userEvent.click(playButton);
 			userEvent.click(nextButton);
 
+			const audioSource = screen.getByTestId('media-player').children.item(0).children.item(0);
 			const expected = 'https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3'; // second audio media from audioFiles
 
-			expect(audioSource).not.toHaveProperty('src', expected);
+			expect(audioSource).toHaveProperty('src', expected);
 		});
 
 		test('should update `repeat` value of controls frame to `one` when `repeat` button is clicked once', () => {
@@ -336,7 +338,7 @@ describe('MediaPlayer', () => {
 		test('should have `paused` class on render', () => {
 			render(
 				<MediaPlayer data-testid="media-player">
-					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFiles[0]} type="audio/mp3" />))}
+					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))}
 				</MediaPlayer>
 			);
 			const mediaSlider = screen.getByRole('slider', {hidden: true});
@@ -347,7 +349,7 @@ describe('MediaPlayer', () => {
 		test('should have `full` class name when `type` is not specified', () => {
 			render(
 				<MediaPlayer data-testid="media-player">
-					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFiles[0]} type="audio/mp3" />))}
+					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))}
 				</MediaPlayer>
 			);
 			const mediaPlayer = screen.getByTestId('media-player');
@@ -360,7 +362,7 @@ describe('MediaPlayer', () => {
 		test('should have `tiny` class name when `type="tiny"`', () => {
 			render(
 				<MediaPlayer data-testid="media-player" type="tiny">
-					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFiles[0]} type="audio/mp3" />))}
+					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))}
 				</MediaPlayer>
 			);
 			const mediaPlayer = screen.getByTestId('media-player');
@@ -374,7 +376,7 @@ describe('MediaPlayer', () => {
 			ilib.setLocale('si-LK');
 			render(
 				<MediaPlayer locale="si-LK">
-					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFiles[0]} type="audio/mp3" />))}
+					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))}
 				</MediaPlayer>
 			);
 
