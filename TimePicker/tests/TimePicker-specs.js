@@ -164,7 +164,7 @@ describe('TimePicker', () => {
 			expect(actual).toBe(expected);
 		});
 
-		test('method should return \'null\' for an invalid time', () => {
+		test('method should return `null` for an invalid time', () => {
 			const time = timeToLocaleString(null);
 
 			expect(time).toBeNull();

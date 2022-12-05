@@ -100,7 +100,7 @@ describe('DatePicker', () => {
 			expect(actual).toBe(expected);
 		});
 
-		test('method should return \'null\' for an invalid date', () => {
+		test('method should return `null` for an invalid date', () => {
 			const actual = dateToLocaleString(null);
 
 			expect(actual).toBeNull();
