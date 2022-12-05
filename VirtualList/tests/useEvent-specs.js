@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import {fireEvent, render, screen} from '@testing-library/react';
+import {act, fireEvent, render, screen} from '@testing-library/react';
 
 import {ImageItem} from '../../ImageItem';
 import Item from '../../Item';
@@ -117,6 +117,58 @@ describe('VirtualList useEvent', () => {
 
 		pressUpKey(item2);
 		expect(currentFocusIndex).toBe(1);
+	});
+
+	test('should navigate focus from first item to last using arrow-up key when `wrap` is true', () => {
+		render(
+			<VirtualList
+				clientSize={clientSize}
+				dataSize={5}
+				itemRenderer={renderItem}
+				itemSize={itemSize}
+				wrap
+			/>
+		);
+
+		jest.useFakeTimers();
+		const list = screen.getByRole('list');
+		const item0 = list.children.item(0).children.item(0);
+
+		focus(item0);
+		expect(currentFocusIndex).toBe(0);
+
+		act(() => jest.advanceTimersByTime(1500));
+
+		pressUpKey(item0);
+		expect(currentFocusIndex).toBe(4);
+
+		jest.useRealTimers();
+	});
+
+	test('should navigate focus from last item to first using arrow-down key when `wrap` is true', () => {
+		render(
+			<VirtualList
+				clientSize={clientSize}
+				dataSize={5}
+				itemRenderer={renderItem}
+				itemSize={itemSize}
+				wrap
+			/>
+		);
+
+		jest.useFakeTimers();
+		const list = screen.getByRole('list');
+		const item4 = list.children.item(4).children.item(0);
+
+		focus(item4);
+		expect(currentFocusIndex).toBe(4);
+
+		act(() => jest.advanceTimersByTime(1500));
+
+		pressDownKey(item4);
+		expect(currentFocusIndex).toBe(0);
+
+		jest.useRealTimers();
 	});
 
 	test('should not navigate focus using arrow-up/down key when `direction` is horizontal', () => {
