@@ -4,7 +4,7 @@ import Header from '@enact/agate/Header';
 import Input from '@enact/agate/Input';
 import {Panel} from '@enact/agate/Panels';
 import VirtualList from '@enact/agate/VirtualList';
-import {Cell, Column, Row} from '@enact/ui/Layout';
+import {Cell, Layout, Row} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import {useCallback, useEffect, useState} from 'react';
@@ -61,39 +61,29 @@ const MainPanel = ({...rest}) => {
 
 	return (
 		<Panel {...rest}>
-			<Header hideLine title="">
-				<Column>
-					<h1>Virtual List</h1>
-					<Row style={{width: rowWidth}}>
-						<Cell shrink>
-							<label>DataSize:</label>
-							<Input
-								onChange={handleChange}
-								placeholder={`${listItems.length}`}
-								size="small"
-								style={{width: '5em'}}
-								type="number"
-								value={value}
-							/>
-						</Cell>
-						<Cell shrink>
-							<Button onClick={onChangeDataSize} size="small">Set DataSize</Button>
-						</Cell>
-						<Cell>
-							<CheckboxItem onClick={onToggleDisabled} size="small">Disabled Items</CheckboxItem>
-						</Cell>
-						<Cell>
-							<CheckboxItem onClick={onToggleChildProps} size="small">Child Props</CheckboxItem>
-						</Cell>
-						<Cell>
-							<ScrollModeSwitch defaultSelected={nativeScroll} onToggle={onChangeScrollMode} />
-						</Cell>
-						<Cell>
-							<LocaleSwitch />
-						</Cell>
-					</Row>
-				</Column>
-			</Header>
+			<Header hideLine title="Virtual List" />
+			<Layout>
+				<Row style={{width: rowWidth}} wrap>
+					<Cell align="center" shrink>
+						<label>DataSize:</label>
+						<Input
+							onChange={handleChange}
+							placeholder={`${listItems.length}`}
+							size="small"
+							style={{width: '5em'}}
+							type="number"
+							value={value}
+						/>
+					</Cell>
+					<Cell align="center" shrink>
+						<Button onClick={onChangeDataSize} size="small">Set DataSize</Button>
+					</Cell>
+					<CheckboxItem onClick={onToggleDisabled} size="small" style={{height: '2em', minWidth: '8em'}}>Disabled Items</CheckboxItem>
+					<CheckboxItem onClick={onToggleChildProps} size="small" style={{height: '2em', minWidth: '8em'}}>Child Props</CheckboxItem>
+					<ScrollModeSwitch defaultSelected={nativeScroll} onToggle={onChangeScrollMode} style={{height: '2em', minWidth: '8em'}} />
+					<LocaleSwitch style={{height: '2em', minWidth: '8em'}} />
+				</Row>
+			</Layout>
 			<hr />
 			<VirtualList
 				className={css.verticalPadding}

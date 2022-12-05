@@ -2,7 +2,7 @@
  * Agate styled Header.
  *
  * @example
- * <Header title="Profile" titleAbove="Settings" noLine>
+ * <Header hideLine title="Profile" titleAbove="Settings">
  * 	<Button>Close</Button>
  * </Header>
  *
