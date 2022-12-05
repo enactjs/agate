@@ -22,4 +22,31 @@ describe('Image', () => {
 
 		expect(actual).toBe(expected);
 	});
+
+	test('should render image with sizing `fill`', () => {
+		render(<Image src={src} />);
+		const image = screen.getAllByRole('img')[0];
+
+		const expected = "image fill";
+
+		expect(image).toHaveClass(expected);
+	});
+
+	test('should render image with sizing `fit`', () => {
+		render(<Image sizing="fit" src={src} />);
+		const image = screen.getAllByRole('img')[0];
+
+		const expected = "image fit";
+
+		expect(image).toHaveClass(expected);
+	});
+
+	test('should render image with sizing `none`', () => {
+		render(<Image sizing="none" src={src} />);
+		const image = screen.getAllByRole('img')[0];
+
+		const expected = "image";
+
+		expect(image).toHaveClass(expected);
+	});
 });

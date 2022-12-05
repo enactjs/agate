@@ -193,7 +193,7 @@ describe('Input Specs', () => {
 		const inputText = screen.getByLabelText('Input field').children[0];
 
 		userEvent.type(inputText, value);
-		// bluring input onSpotlightLeft for code coverage purposes
+		// bluring input onSpotlightRight for code coverage purposes
 		pressRightKey(inputText);
 		pressRightKey(inputText);
 		pressRightKey(inputText);

@@ -27,6 +27,29 @@ describe('TabGroup Specs', () => {
 		expect(tabGroup.children).toHaveLength(expectedTabNumber);
 	});
 
+	test('should render icons', () => {
+		render(
+			<TabGroup
+				tabPosition="before"
+				tabs={[
+					{title: 'Home', icon: 'home', 'data-testid': 'homeIcon'},
+					{title: 'Settings', icon: 'setting', 'data-testid': 'settingIcon'},
+					{title: 'Theme', icon: 'display', 'data-testid': 'displayIcon'}
+				]}
+			/>
+		);
+		const actualHomeIcon = screen.getByTestId('homeIcon').textContent.codePointAt();
+		const expectedHomeIcon = 983231; // decimal converted charCode of Unicode 'home' character
+		const actualSettingsIcon = screen.getByTestId('settingIcon').textContent.codePointAt();
+		const expectedSettingsIcon = 983083; // decimal converted charCode of Unicode 'setting' character
+		const actualDisplayIcon = screen.getByTestId('displayIcon').textContent.codePointAt();
+		const expectedDisplayIcon = 983244; // decimal converted charCode of Unicode 'display' character
+
+		expect(actualHomeIcon).toBe(expectedHomeIcon);
+		expect(actualSettingsIcon).toBe(expectedSettingsIcon);
+		expect(actualDisplayIcon).toBe(expectedDisplayIcon);
+	});
+
 	test('should have positionAfter when given `tabPosition=after`', () => {
 		render(
 			<TabGroup
