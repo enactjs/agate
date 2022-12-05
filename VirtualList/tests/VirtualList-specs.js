@@ -85,7 +85,7 @@ describe('VirtualList', () => {
 		startScrollTop = null;
 	});
 
-	test('should render a list of \'items\'', () => {
+	test('should render a list of `items`', () => {
 		render(
 			<VirtualList
 				clientSize={clientSize}
@@ -101,7 +101,7 @@ describe('VirtualList', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should render overhang items when \'clientSize\' and outer DOM size are not specified', () => {
+	test('should render overhang items when `clientSize` and outer DOM size are not specified', () => {
 		render(
 			<VirtualList
 				dataSize={dataSize}
@@ -132,7 +132,7 @@ describe('VirtualList', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should re-render (clientHeight / itemHeight + overhang) items after changing \'clientSize\'', () => {
+	test('should re-render (clientHeight / itemHeight + overhang) items after changing `clientSize`', () => {
 		const {rerender} = render(
 			<VirtualList
 				clientSize={clientSize}
@@ -177,7 +177,7 @@ describe('VirtualList', () => {
 	});
 
 	describe('Scrollbar visibility', () => {
-		test('should render both horizontal and vertical scrollbars when \'horizontalScrollbar\' and \'verticalScrollbar\' are `visible`', () => {
+		test('should render both horizontal and vertical scrollbars when `horizontalScrollbar` and `verticalScrollbar` are `visible`', () => {
 			render(
 				<VirtualList
 					clientSize={clientSize}
@@ -198,7 +198,7 @@ describe('VirtualList', () => {
 			expect(horizontalScrollbar).toHaveClass('scrollbar horizontal');
 		});
 
-		test('should render only vertical scrollbar when \'verticalScrollbar\' is "visible" and \'horizontalScrollbar\' is `hidden`', () => {
+		test('should render only vertical scrollbar when `verticalScrollbar` is "visible" and `horizontalScrollbar` is `hidden`', () => {
 			render(
 				<VirtualList
 					clientSize={clientSize}
@@ -217,7 +217,7 @@ describe('VirtualList', () => {
 			expect(horizontalScrollbar).toBeNull();
 		});
 
-		test('should not render any scrollbar when when \'horizontalScrollbar\' and \'verticalScrollbar\' are `hidden`', () => {
+		test('should not render any scrollbar when when `horizontalScrollbar` and `verticalScrollbar` are `hidden`', () => {
 			render(
 				<VirtualList
 					clientSize={clientSize}
@@ -262,7 +262,7 @@ describe('VirtualList', () => {
 			act(() => myScrollTo({index: 10, animate: false}));
 		});
 
-		test('should scroll to the given \'x\' position with scrollTo', (done) => {
+		test('should scroll to the given `x` position with scrollTo', (done) => {
 			const onScrollStop = handlerOnScrollStop(done, () => {
 				const expected = 200;
 
@@ -284,7 +284,7 @@ describe('VirtualList', () => {
 			act(() => myScrollTo({position: {x: 200}, animate: false}));
 		});
 
-		test('should scroll to the given \'y\' position with scrollTo', (done) => {
+		test('should scroll to the given `y` position with scrollTo', (done) => {
 			const onScrollStop = handlerOnScrollStop(done, () => {
 				const expected = 200;
 
@@ -405,7 +405,7 @@ describe('VirtualList', () => {
 			expect(fn).toBeCalled();
 		});
 
-		test('should not scroll by wheel when \'noScrollByWheel\' prop is true', (done) => {
+		test('should not scroll by wheel when `noScrollByWheel` prop is true', (done) => {
 			const fn = jest.fn();
 
 			render(
@@ -432,7 +432,7 @@ describe('VirtualList', () => {
 	});
 
 	describe('Adding an item', () => {
-		test('should render an added item named \'Password 0\' as the first item', (done) => {
+		test('should render an added item named `Password 0` as the first item', (done) => {
 			const itemArray = [{name: 'A'}, {name: 'B'}, {name: 'C'}];
 			const renderItemArray = ({index, ...rest}) => {
 				return (

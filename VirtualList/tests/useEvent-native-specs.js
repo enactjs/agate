@@ -17,7 +17,7 @@ const pressUpKey = keyDownUp(38);
 const pressDownKey = keyDownUp(40);
 const pressPageDownKey = keyDownUp(34);
 
-describe('VirtualList useEvent with native \'scrollMode\'', () => {
+describe('VirtualList useEvent with native `scrollMode`', () => {
 	let
 		clientSize,
 		currentFocusIndex,
@@ -143,7 +143,7 @@ describe('VirtualList useEvent with native \'scrollMode\'', () => {
 		jest.useRealTimers();
 	});
 
-	test('should not navigate focus using arrow-up/down key when \'direction\'is `horizontal`', () => {
+	test('should not navigate focus using arrow-up/down key when `direction` is `horizontal`', () => {
 		render(
 			<VirtualList
 				direction="horizontal"
@@ -168,7 +168,7 @@ describe('VirtualList useEvent with native \'scrollMode\'', () => {
 		expect(currentFocusIndex).toBe(0);
 	});
 
-	test('should navigate focus using arrow-left/right key when \'direction\'is `horizontal`', () => {
+	test('should navigate focus using arrow-left/right key when `direction` is `horizontal`', () => {
 		render(
 			<VirtualList
 				direction="horizontal"

@@ -4,7 +4,7 @@ import {act, fireEvent, render, screen} from '@testing-library/react';
 import ImageItem from '../../ImageItem';
 import {VirtualGridList} from '../VirtualList';
 
-describe('VirtualGridList with translate \'scrollMode\'', () => {
+describe('VirtualGridList with translate `scrollMode`', () => {
 	let
 		clientSize,
 		dataSize,
@@ -105,7 +105,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 		svgGenerator = null;
 	});
 
-	test('should render a list of \'items\'', () => {
+	test('should render a list of `items`', () => {
 		render(
 			<VirtualGridList
 				clientSize={clientSize}
@@ -121,7 +121,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('cannot render items when \'clientSize\' and outer DOM size are not specified', () => {
+	test('cannot render items when `clientSize` and outer DOM size are not specified', () => {
 		render(
 			<VirtualGridList
 				dataSize={dataSize}
@@ -152,7 +152,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should re-render (clientHeight / itemHeight + overhang) items after changing \'clientSize\'', () => {
+	test('should re-render (clientHeight / itemHeight + overhang) items after changing `clientSize`', () => {
 		const {rerender} = render(
 			<VirtualGridList
 				clientSize={clientSize}
@@ -197,7 +197,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 	});
 
 	describe('Scrollbar visibility', () => {
-		test('should render both horizontal and vertical scrollbars when \'horizontalScrollbar\' and \'verticalScrollbar\' are `visible`', () => {
+		test('should render both horizontal and vertical scrollbars when `horizontalScrollbar` and `verticalScrollbar` are `visible`', () => {
 			render(
 				<VirtualGridList
 					clientSize={clientSize}
@@ -218,7 +218,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 			expect(horizontalScrollbar).toHaveClass('scrollbar horizontal');
 		});
 
-		test('should render only vertical scrollbar when \'verticalScrollbar\' is `visible` and \'horizontalScrollbar\' is `hidden`', () => {
+		test('should render only vertical scrollbar when `verticalScrollbar` is `visible` and `horizontalScrollbar` is `hidden`', () => {
 			render(
 				<VirtualGridList
 					clientSize={clientSize}
@@ -237,7 +237,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 			expect(horizontalScrollbar).toBeNull();
 		});
 
-		test('should not render any scrollbar when when \'horizontalScrollbar\' and \'verticalScrollbar\' are `hidden`', () => {
+		test('should not render any scrollbar when when `horizontalScrollbar` and `verticalScrollbar` are `hidden`', () => {
 			render(
 				<VirtualGridList
 					clientSize={clientSize}
@@ -260,7 +260,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 	});
 
 	describe('ScrollTo', () => {
-		test('should scroll to the specific item of a given \'index\' with scrollTo', (done) => {
+		test('should scroll to the specific item of a given `index` with scrollTo', (done) => {
 			const onScrollStop = handlerOnScrollStop(done, () => {
 				const expected = (240 + 16) * 2;
 
@@ -281,7 +281,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 			act(() => myScrollTo({index: 9, animate: false}));
 		});
 
-		test('should scroll to the given \'x\' position with scrollTo', (done) => {
+		test('should scroll to the given `x` position with scrollTo', (done) => {
 			const onScrollStop = handlerOnScrollStop(done, () => {
 				const expected = 200;
 
@@ -303,7 +303,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 			act(() => myScrollTo({position: {x: 200}, animate: false}));
 		});
 
-		test('should scroll to the given \'y\' position with scrollTo', (done) => {
+		test('should scroll to the given `y` position with scrollTo', (done) => {
 			const onScrollStop = handlerOnScrollStop(done, () => {
 				const expected = 200;
 
@@ -324,7 +324,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 			act(() => myScrollTo({position: {y: 200}, animate: false}));
 		});
 
-		test('should scroll to the given \'align\' with scrollTo', (done) => {
+		test('should scroll to the given `align` with scrollTo', (done) => {
 			const onScrollStop = handlerOnScrollStop(done, () => {
 				const expected = Math.ceil(dataSize / 4) * (itemSize.minHeight + 16) - clientSize.clientHeight;
 				const actual = resultScrollTop;
@@ -346,7 +346,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 			act(() => myScrollTo({align: 'bottom', animate: false}));
 		});
 
-		test('should scroll to the given \'align\' with scrollTo after changing \'dataSize\'', (done) => {
+		test('should scroll to the given `align` with scrollTo after changing `dataSize`', (done) => {
 			const newDataSize = 50;
 
 			const onScrollStop = handlerOnScrollStop(done, () => {
@@ -381,7 +381,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 			act(() => myScrollTo({align: 'bottom', animate: false}));
 		});
 
-		test('should scroll to the given \'align\' with scrollTo after changing \'itemSize\'', (done) => {
+		test('should scroll to the given `align` with scrollTo after changing `itemSize`', (done) => {
 			const newItemSize = {minWidth: 300, minHeight: 270};
 
 			const onScrollStop = handlerOnScrollStop(done, () => {
@@ -416,7 +416,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 			act(() => myScrollTo({align: 'bottom', animate: false}));
 		});
 
-		test('should scroll to the given \'align\' with scrollTo after changing \'spacing\'', (done) => {
+		test('should scroll to the given `align` with scrollTo after changing `spacing`', (done) => {
 			const newSpacing = 6;
 
 			const onScrollStop = handlerOnScrollStop(done, () => {
@@ -552,7 +552,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 			expect(fn).toBeCalled();
 		});
 
-		test('should not scroll by wheel when \'noScrollByWheel\' prop is true', (done) => {
+		test('should not scroll by wheel when `noScrollByWheel` prop is true', (done) => {
 			const fn = jest.fn();
 
 			render(
@@ -579,7 +579,7 @@ describe('VirtualGridList with translate \'scrollMode\'', () => {
 	});
 
 	describe('Adding an item', () => {
-		test('should render an added item named \'Password 0\' as the first item', (done) => {
+		test('should render an added item named `Password 0` as the first item', (done) => {
 			const itemArray = [{name: 'A'}, {name: 'B'}, {name: 'C'}];
 			const renderItemArray = ({index, ...rest}) => {
 				return (

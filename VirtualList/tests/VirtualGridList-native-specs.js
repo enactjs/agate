@@ -4,7 +4,7 @@ import {act, render, screen} from '@testing-library/react';
 import ImageItem from '../../ImageItem';
 import {VirtualGridList} from '../VirtualList';
 
-describe('VirtualGridList with native \'scrollMode\'', () => {
+describe('VirtualGridList with native `scrollMode`', () => {
 	let
 		clientSize,
 		dataSize,
@@ -57,7 +57,7 @@ describe('VirtualGridList with native \'scrollMode\'', () => {
 		renderItem = null;
 	});
 
-	test('should render a list of \'items\'', () => {
+	test('should render a list of `items`', () => {
 		render(
 			<VirtualGridList
 				clientSize={clientSize}
@@ -74,7 +74,7 @@ describe('VirtualGridList with native \'scrollMode\'', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('cannot render items when \'clientSize\' and outer DOM size are not specified', () => {
+	test('cannot render items when `clientSize` and outer DOM size are not specified', () => {
 		render(
 			<VirtualGridList
 				dataSize={dataSize}
@@ -107,7 +107,7 @@ describe('VirtualGridList with native \'scrollMode\'', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should re-render (clientHeight / itemHeight + overhang) items after changing \'clientSize\'', () => {
+	test('should re-render (clientHeight / itemHeight + overhang) items after changing `clientSize`', () => {
 		const {rerender} = render(
 			<VirtualGridList
 				clientSize={clientSize}
@@ -155,7 +155,7 @@ describe('VirtualGridList with native \'scrollMode\'', () => {
 	});
 
 	describe('Scrollbar visibility', () => {
-		test('should render both horizontal and vertical scrollbars when \'horizontalScrollbar\' and \'verticalScrollbar\' are `visible`', () => {
+		test('should render both horizontal and vertical scrollbars when `horizontalScrollbar` and `verticalScrollbar` are `visible`', () => {
 			render(
 				<VirtualGridList
 					clientSize={clientSize}
@@ -177,7 +177,7 @@ describe('VirtualGridList with native \'scrollMode\'', () => {
 			expect(horizontalScrollbar).toHaveClass('scrollbar horizontal');
 		});
 
-		test('should render only vertical scrollbar when \'verticalScrollbar\' is `visible` and \'horizontalScrollbar\' is `hidden`', () => {
+		test('should render only vertical scrollbar when `verticalScrollbar` is `visible` and `horizontalScrollbar` is `hidden`', () => {
 			render(
 				<VirtualGridList
 					clientSize={clientSize}
@@ -197,7 +197,7 @@ describe('VirtualGridList with native \'scrollMode\'', () => {
 			expect(horizontalScrollbar).toBeNull();
 		});
 
-		test('should not render any scrollbar when when \'horizontalScrollbar\' and \'verticalScrollbar\' are `hidden`', () => {
+		test('should not render any scrollbar when when `horizontalScrollbar` and `verticalScrollbar` are `hidden`', () => {
 			render(
 				<VirtualGridList
 					clientSize={clientSize}
@@ -221,7 +221,7 @@ describe('VirtualGridList with native \'scrollMode\'', () => {
 	});
 
 	describe('Adding an item', () => {
-		test('should render an added item named \'Password 0\' as the first item', (done) => {
+		test('should render an added item named `Password 0` as the first item', (done) => {
 			const itemArray = [{name: 'A'}, {name: 'B'}, {name: 'C'}];
 			const renderItemArray = ({index, ...rest}) => {
 				return (
