@@ -17,18 +17,27 @@ describe('TooltipDecorator Specs', () => {
 			render(<TooltipLabel centered marquee>Label</TooltipLabel>);
 
 			const expected = 'center';
-			const tooltip = screen.getByText('Label');
+			const actual = screen.getByText('Label');
 
-			expect(tooltip).toHaveStyle({'text-align': expected});
+			expect(actual).toHaveStyle({'text-align': expected});
 		});
 
 		test('should not apply alignment when `centered` but not `marquee`', () => {
 			render(<TooltipLabel centered>Label</TooltipLabel>);
 
 			const unexpected = 'center';
-			const tooltip = screen.getByText('Label');
+			const actual = screen.getByText('Label');
 
-			expect(tooltip).not.toHaveStyle({'text-align': unexpected});
+			expect(actual).not.toHaveStyle({'text-align': unexpected});
+		});
+
+		test('should not apply `text-align: center` style when `centered=false`', () => {
+			render(<TooltipLabel centered={false}>Label</TooltipLabel>);
+
+			const expected = 'center';
+			const actual = screen.getByText('Label');
+
+			expect(actual).not.toHaveStyle({'text-align': expected});
 		});
 	});
 
@@ -79,32 +88,6 @@ describe('TooltipDecorator Specs', () => {
 			const actual = screen.queryByText(tooltipText);
 
 			expect(actual).toBeNull();
-		});
-
-		test('should apply `text-align: center` style when `centered=true` and `marquee=true`', () => {
-			render(
-				<TooltipLabel centered marquee>
-					Label
-				</TooltipLabel>
-			);
-
-			const expected = 'center';
-			const actual = screen.getByText('Label');
-
-			expect(actual).toHaveStyle({'text-align': expected});
-		});
-
-		test('should not apply `text-align: center` style when `centered=false`', () => {
-			render(
-				<TooltipLabel centered={false}>
-					Label
-				</TooltipLabel>
-			);
-
-			const expected = 'center';
-			const actual = screen.getByText('Label');
-
-			expect(actual).not.toHaveStyle({'text-align': expected});
 		});
 
 		test('should have `above` class when `direction=above`', () => {
