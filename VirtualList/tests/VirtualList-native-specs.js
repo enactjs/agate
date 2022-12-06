@@ -143,9 +143,9 @@ describe('VirtualList with native `scrollMode`', () => {
 					clientSize={clientSize}
 					dataSize={dataSize}
 					direction="horizontal"
+					horizontalScrollbar="visible"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
-					horizontalScrollbar="visible"
 					scrollMode="native"
 					verticalScrollbar="visible"
 				/>
@@ -185,9 +185,9 @@ describe('VirtualList with native `scrollMode`', () => {
 					clientSize={clientSize}
 					dataSize={dataSize}
 					direction="horizontal"
+					horizontalScrollbar="hidden"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
-					horizontalScrollbar="hidden"
 					scrollMode="native"
 					verticalScrollbar="hidden"
 				/>

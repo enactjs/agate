@@ -203,9 +203,9 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 					clientSize={clientSize}
 					dataSize={dataSize}
 					direction="horizontal"
+					horizontalScrollbar="visible"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
-					horizontalScrollbar="visible"
 					verticalScrollbar="visible"
 				/>
 			);
@@ -243,9 +243,9 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 					clientSize={clientSize}
 					dataSize={dataSize}
 					direction="horizontal"
+					horizontalScrollbar="hidden"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
-					horizontalScrollbar="hidden"
 					verticalScrollbar="hidden"
 				/>
 			);

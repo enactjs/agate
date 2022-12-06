@@ -183,9 +183,9 @@ describe('VirtualList', () => {
 					clientSize={clientSize}
 					dataSize={dataSize}
 					direction="horizontal"
+					horizontalScrollbar="visible"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
-					horizontalScrollbar="visible"
 					verticalScrollbar="visible"
 				/>
 			);
@@ -223,9 +223,9 @@ describe('VirtualList', () => {
 					clientSize={clientSize}
 					dataSize={dataSize}
 					direction="horizontal"
+					horizontalScrollbar="hidden"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
-					horizontalScrollbar="hidden"
 					verticalScrollbar="hidden"
 				/>
 			);
@@ -255,7 +255,6 @@ describe('VirtualList', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					onScrollStop={onScrollStop}
-					scrollMode="translate"
 				/>
 			);
 

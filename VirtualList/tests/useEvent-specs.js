@@ -311,9 +311,9 @@ describe('VirtualList useEvent', () => {
 		test('should navigate focus using arrow-up/down key when `direction` is horizontal', () => {
 			render(
 				<VirtualGridList
-					direction="horizontal"
 					clientSize={clientSize}
 					dataSize={dataSize}
+					direction="horizontal"
 					itemRenderer={renderImageItem}
 					itemSize={imageItemSize}
 				/>
@@ -336,9 +336,9 @@ describe('VirtualList useEvent', () => {
 		test('should navigate focus using arrow-left/right key when `direction` is horizontal', () => {
 			render(
 				<VirtualGridList
-					direction="horizontal"
 					clientSize={clientSize}
 					dataSize={dataSize}
+					direction="horizontal"
 					itemRenderer={renderImageItem}
 					itemSize={imageItemSize}
 				/>
