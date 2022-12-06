@@ -237,7 +237,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 			expect(horizontalScrollbar).toBeNull();
 		});
 
-		test('should not render any scrollbar when when `horizontalScrollbar` and `verticalScrollbar` are `hidden`', () => {
+		test('should not render any scrollbar when `horizontalScrollbar` and `verticalScrollbar` are `hidden`', () => {
 			render(
 				<VirtualGridList
 					clientSize={clientSize}
