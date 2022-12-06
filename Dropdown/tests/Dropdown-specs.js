@@ -1,8 +1,10 @@
 import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import Dropdown, {DropdownBase} from '../Dropdown';
+import DropdownList from '../DropdownList';
 
 const FloatingLayerController = FloatingLayerDecorator('div');
 
@@ -250,5 +252,24 @@ describe('Dropdown', () => {
 		const expected = 'hugeWidth';
 
 		expect(dropdown).toHaveClass(expected);
+	});
+
+	describe('DropdownList', () => {
+		test('should include `data` and `selected` in `onSelect` callback', () => {
+			const handler = jest.fn();
+			render(
+				<DropdownList onSelect={handler}>
+					{children}
+				</DropdownList>
+			);
+			const firstItem = screen.getByRole('list').children[0].children[0];
+
+			userEvent.click(firstItem);
+
+			const expected = {data: 'option1', selected: 0};
+			const actual = handler.mock.calls[0][0];
+
+			expect(actual).toEqual(expected);
+		});
 	});
 });
