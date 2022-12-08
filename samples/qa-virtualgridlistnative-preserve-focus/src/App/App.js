@@ -26,7 +26,7 @@ const App = kind({
 				<MainPanel onClick={pushPanel} title="First" />
 				<MainPanel onBack={popPanel} onClick={pushPanel} title="Second" />
 				<MainPanel onBack={popPanel} onClick={pushPanel} title="Third" />
-				<MainPanel title="Fourth" onBack={popPanel} />
+				<MainPanel onBack={popPanel} title="Fourth" />
 			</Panels>
 		);
 	}
