@@ -1,16 +1,42 @@
+import ri from '@enact/ui/resolution';
 import '@testing-library/jest-dom';
-import {render, screen} from '@testing-library/react';
+import {act, fireEvent, render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import Scroller from '../Scroller';
+
+const keyDown = (keyCode) => (button) => fireEvent.keyDown(button, {keyCode});
+const keyUp = (keyCode) => (button) => fireEvent.keyUp(button, {keyCode});
+
+const enterKeyDown = keyDown(13);
+const enterKeyUp = keyUp(13);
+const arrowDownKeyDown = keyDown(40);
+const arrowDownKeyUp = keyUp(40);
 
 describe('Scroller', () => {
 	let contents;
 
 	beforeEach(() => {
 		contents = (
-			<div>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
-				Aenean id blandit nunc. Donec lacinia nisi vitae mi dictum, eget pulvinar nunc tincidunt. Integer vehicula tempus rutrum. Sed efficitur neque in arcu dignissim cursus.
+			<div
+				style={{
+					height: ri.scaleToRem(2004),
+					width: ri.scaleToRem(4002)
+				}}
+			>
+				<div>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
+					Aenean id blandit nunc. Donec lacinia nisi vitae mi dictum, eget pulvinar nunc tincidunt. Integer vehicula tempus rutrum. Sed efficitur neque in arcu dignissim cursus.
+				</div>
+				<div
+					style={{
+						marginTop: ri.scaleToRem(1602)
+					}}
+				>
+					<div>
+						Mauris blandit sollicitudin mattis. Fusce commodo arcu vitae risus consectetur sollicitudin. Aliquam eget posuere orci. Cras pellentesque lobortis sapien non lacinia.
+					</div>
+				</div>
 			</div>
 		);
 	});
@@ -254,6 +280,82 @@ describe('Scroller', () => {
 			const expectedAttribute = 'aria-label';
 
 			expect(rightButton).toHaveAttribute(expectedAttribute, label);
+		});
+	});
+
+	describe('Scroller buttons', () => {
+		// Does not work
+		test('should scroll on `enter`', () => {
+			jest.useFakeTimers();
+			const spy = jest.fn();
+			render(
+				<Scroller
+					focusableScrollbar
+					horizontalScrollbar="visible"
+					verticalScrollbar="visible"
+					onScrollStart={spy}
+				>
+					{contents}
+				</Scroller>
+			);
+
+			const buttons = screen.getAllByRole('button');
+			enterKeyUp(buttons[1]);
+			act(() => jest.advanceTimersByTime(1500));
+
+			enterKeyDown(buttons[1]);
+			act(() => jest.advanceTimersByTime(1500));
+			enterKeyUp(buttons[1]);
+			act(() => jest.advanceTimersByTime(1500));
+
+			jest.useRealTimers();
+			console.log(spy.mock.calls);
+		});
+
+		// Does not work
+		test('should scroll on click', () => {
+			jest.useFakeTimers();
+			const spy = jest.fn();
+			render(
+				<Scroller
+					focusableScrollbar
+					horizontalScrollbar="visible"
+					verticalScrollbar="visible"
+					onScrollStart={spy}
+				>
+					{contents}
+				</Scroller>
+			);
+			const buttons = screen.getAllByRole('button');
+
+			userEvent.click(buttons[1]);
+			act(() => jest.advanceTimersByTime(1500));
+
+			jest.useRealTimers();
+			console.log(spy.mock.calls);
+		});
+
+		test('should change focus on arrow key if `focusableScrollbar`', () => {
+			jest.useFakeTimers();
+			const spy = jest.fn();
+			render(
+				<Scroller
+					focusableScrollbar
+					horizontalScrollbar="visible"
+					verticalScrollbar="visible"
+					onScrollStart={spy}
+				>
+					{contents}
+				</Scroller>
+			);
+
+			const buttons = screen.getAllByRole('button');
+
+			act(() => buttons[0].focus());
+			arrowDownKeyDown(buttons[0]);
+			arrowDownKeyUp(buttons[0]);
+
+			expect(document.activeElement).toBe(buttons[1]);
 		});
 	});
 });
