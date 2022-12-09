@@ -8,7 +8,7 @@ const focus = (elm) => fireEvent.focus(elm);
 
 const keyDownUp = (keyCode) => (elm) => {
 	fireEvent.keyDown(elm, {keyCode});
-	return fireEvent.keyUp(elm, {keyCode});
+	fireEvent.keyUp(elm, {keyCode});
 };
 
 const pressLeftKey = keyDownUp(37);
@@ -146,9 +146,9 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 	test('should not navigate focus using arrow-up/down key when `direction` is `horizontal`', () => {
 		render(
 			<VirtualList
-				direction="horizontal"
 				clientSize={clientSize}
 				dataSize={dataSize}
+				direction="horizontal"
 				itemRenderer={renderItem}
 				itemSize={itemSize}
 				scrollMode="native"
@@ -171,9 +171,9 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 	test('should navigate focus using arrow-left/right key when `direction` is `horizontal`', () => {
 		render(
 			<VirtualList
-				direction="horizontal"
 				clientSize={clientSize}
 				dataSize={dataSize}
+				direction="horizontal"
 				itemRenderer={renderItem}
 				itemSize={itemSize}
 				scrollMode="native"

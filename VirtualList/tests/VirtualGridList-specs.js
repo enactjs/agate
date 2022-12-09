@@ -56,7 +56,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 		};
 
 		renderItem = ({index, ...rest}) => { // eslint-disable-line enact/display-name
-			const {text, subText, source} = items[index];
+			const {source, subText, text} = items[index];
 
 			return (
 				<ImageItem {...rest} label={subText} src={source}>
@@ -210,9 +210,9 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 				/>
 			);
 
-			const VirtualGridListRoot =  screen.getByRole('list').parentElement.parentElement.parentElement.parentElement;
-			const verticalScrollbar = VirtualGridListRoot.children.item(0).children.item(1);
-			const horizontalScrollbar = VirtualGridListRoot.children.item(1);
+			const virtualGridListRoot =  screen.getByRole('list').parentElement.parentElement.parentElement.parentElement;
+			const verticalScrollbar = virtualGridListRoot.children.item(0).children.item(1);
+			const horizontalScrollbar = virtualGridListRoot.children.item(1);
 
 			expect(verticalScrollbar).toHaveClass('scrollbar vertical');
 			expect(horizontalScrollbar).toHaveClass('scrollbar horizontal');
@@ -228,9 +228,9 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 				/>
 			);
 
-			const VirtualGridListRoot =  screen.getByRole('list').parentElement.parentElement.parentElement.parentElement;
-			const verticalScrollbar = VirtualGridListRoot.children.item(0).children.item(1);
-			const horizontalScrollbar = VirtualGridListRoot.children.item(1);
+			const virtualGridListRoot =  screen.getByRole('list').parentElement.parentElement.parentElement.parentElement;
+			const verticalScrollbar = virtualGridListRoot.children.item(0).children.item(1);
+			const horizontalScrollbar = virtualGridListRoot.children.item(1);
 
 			expect(verticalScrollbar).toBeInTheDocument();
 			expect(verticalScrollbar).toHaveClass('scrollbar vertical');
@@ -250,9 +250,9 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 				/>
 			);
 
-			const VirtualGridListRoot =  screen.getByRole('list').parentElement.parentElement.parentElement.parentElement;
-			const verticalScrollbar = VirtualGridListRoot.children.item(0).children.item(1);
-			const horizontalScrollbar = VirtualGridListRoot.children.item(1);
+			const virtualGridListRoot =  screen.getByRole('list').parentElement.parentElement.parentElement.parentElement;
+			const verticalScrollbar = virtualGridListRoot.children.item(0).children.item(1);
+			const horizontalScrollbar = virtualGridListRoot.children.item(1);
 
 			expect(verticalScrollbar).toBeNull();
 			expect(horizontalScrollbar).toBeNull();
@@ -539,8 +539,8 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 					dataSize={dataSize}
 					itemRenderer={renderItem}
 					itemSize={itemSize}
-					onScrollStop={onScrollStop}
 					onScrollStart={handlerOnScrollStart}
+					onScrollStop={onScrollStop}
 				/>
 			);
 
@@ -562,8 +562,8 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					noScrollByWheel
-					onScrollStop={fn}
 					onScrollStart={handlerOnScrollStart}
+					onScrollStop={fn}
 				/>
 			);
 

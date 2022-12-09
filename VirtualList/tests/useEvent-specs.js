@@ -9,7 +9,7 @@ const focus = (elm) => fireEvent.focus(elm);
 
 const keyDownUp = (keyCode) => (elm) => {
 	fireEvent.keyDown(elm, {keyCode});
-	return fireEvent.keyUp(elm, {keyCode});
+	fireEvent.keyUp(elm, {keyCode});
 };
 
 const pressLeftKey = keyDownUp(37);
@@ -44,10 +44,10 @@ describe('VirtualList useEvent', () => {
 		};
 
 		renderImageItem = ({index, ...rest}) => { // eslint-disable-line enact/display-name
-			const {name, subText, source} = items[index];
+			const {name, source, subText} = items[index];
 
 			return (
-				<ImageItem {...rest} label={subText} src={source} onFocus={handlerOnFocus(index)}>
+				<ImageItem {...rest} label={subText} onFocus={handlerOnFocus(index)} src={source}>
 					{name}
 				</ImageItem>
 			);
@@ -174,9 +174,9 @@ describe('VirtualList useEvent', () => {
 	test('should not navigate focus using arrow-up/down key when `direction` is horizontal', () => {
 		render(
 			<VirtualList
-				direction="horizontal"
 				clientSize={clientSize}
 				dataSize={dataSize}
+				direction="horizontal"
 				itemRenderer={renderItem}
 				itemSize={itemSize}
 			/>
@@ -198,9 +198,9 @@ describe('VirtualList useEvent', () => {
 	test('should navigate focus using arrow-left/right key when `direction` is horizontal', () => {
 		render(
 			<VirtualList
-				direction="horizontal"
 				clientSize={clientSize}
 				dataSize={dataSize}
+				direction="horizontal"
 				itemRenderer={renderItem}
 				itemSize={itemSize}
 			/>
@@ -282,8 +282,8 @@ describe('VirtualList useEvent', () => {
 			render(
 				<VirtualGridList
 					clientSize={clientSize}
-					direction="vertical"
 					dataSize={dataSize}
+					direction="vertical"
 					itemRenderer={renderImageItem}
 					itemSize={imageItemSize}
 				/>

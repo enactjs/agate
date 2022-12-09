@@ -391,8 +391,8 @@ describe('VirtualList', () => {
 					dataSize={dataSize}
 					itemRenderer={renderItem}
 					itemSize={itemSize}
-					onScrollStop={onScrollStop}
 					onScrollStart={handlerOnScrollStart}
+					onScrollStop={onScrollStop}
 				/>
 			);
 
@@ -414,8 +414,8 @@ describe('VirtualList', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					noScrollByWheel
-					onScrollStop={fn}
 					onScrollStart={handlerOnScrollStart}
+					onScrollStop={fn}
 				/>
 			);
 
