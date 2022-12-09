@@ -74,7 +74,7 @@ describe('VirtualGridList with native `scrollMode`', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('cannot render items when `clientSize` and outer DOM size are not specified', () => {
+	test('should not render items when `clientSize` and outer DOM size are not specified', () => {
 		render(
 			<VirtualGridList
 				dataSize={dataSize}

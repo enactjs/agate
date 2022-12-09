@@ -121,7 +121,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('cannot render items when `clientSize` and outer DOM size are not specified', () => {
+	test('should not render items when `clientSize` and outer DOM size are not specified', () => {
 		render(
 			<VirtualGridList
 				dataSize={dataSize}
@@ -453,7 +453,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 		});
 
 		describe('scroll events', () => {
-			test('should call onScrollStart once', () => {
+			test('should call `onScrollStart` once', () => {
 				render(
 					<VirtualGridList
 						cbScrollTo={getScrollTo}
@@ -472,7 +472,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 				expect(onScrollStartCount).toBe(expected);
 			});
 
-			test('should call onScroll once', () => {
+			test('should call `onScroll` once', () => {
 				render(
 					<VirtualGridList
 						cbScrollTo={getScrollTo}
@@ -491,7 +491,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 				expect(onScrollCount).toBe(expected);
 			});
 
-			test('should call onScrollStop once', (done) => {
+			test('should call `onScrollStop` once', (done) => {
 				const onScrollStop = handlerOnScrollStop(done, () => {
 					const expected = 1;
 
