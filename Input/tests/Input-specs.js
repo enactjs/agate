@@ -7,6 +7,14 @@ import Input from '../Input';
 
 const isPaused = () => Spotlight.isPaused() ? 'paused' : 'not paused';
 
+const keyDownUp = (keyCode) => (elm) => {
+	fireEvent.keyDown(elm, {keyCode});
+	return fireEvent.keyUp(elm, {keyCode});
+};
+const pressEnterKey = keyDownUp(13);
+const pressLeftKey = keyDownUp(37);
+const pressRightKey = keyDownUp(39);
+
 describe('Input Specs', () => {
 	test('should have an input element', () => {
 		render(<Input />);
@@ -81,6 +89,16 @@ describe('Input Specs', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
+	test('should set `spellcheck=false` attribute when type is `password`', () => {
+		render(<Input minLength={8} type="password" value="passwordValue" />);
+		const input = screen.getByLabelText('13 characters Input field').children[0];
+
+		const expectedAttribute = 'spellcheck';
+		const expectedValue = 'false';
+
+		expect(input).toHaveAttribute(expectedAttribute, expectedValue);
+	});
+
 	test('should callback onChange when the text changes', () => {
 		const handleChange = jest.fn();
 		const value = 'blah';
@@ -132,6 +150,28 @@ describe('Input Specs', () => {
 		expect(handleChange).not.toHaveBeenCalled();
 	});
 
+	test('should blur input on enter if `dismissOnEnter`', () => {
+		const handleChange = jest.fn();
+		render(<Input dismissOnEnter onBlur={handleChange} />);
+		const inputText = screen.getByLabelText('Input field').children[0];
+
+		fireEvent.mouseDown(inputText);
+		pressEnterKey(inputText);
+
+		expect(handleChange).toHaveBeenCalled();
+	});
+
+	test('should not call onBlur event on enter if `dismissOnEnter` and `autofocus`', () => {
+		const handleChange = jest.fn();
+		render(<Input autoFocus dismissOnEnter onBlur={handleChange} />);
+		const inputText = screen.getByLabelText('Input field').children[0];
+
+		fireEvent.mouseDown(inputText);
+		pressEnterKey(inputText);
+
+		expect(handleChange).not.toHaveBeenCalled();
+	});
+
 	test('should callback onBeforeChange before the text changes', () => {
 		const handleBeforeChange = jest.fn();
 		const value = 'blah';
@@ -139,6 +179,8 @@ describe('Input Specs', () => {
 		const inputText = screen.getByLabelText('Input field').children[0];
 
 		userEvent.type(inputText, value);
+		// bluring input onSpotlightLeft for code coverage purposes
+		pressLeftKey(inputText);
 
 		expect(handleBeforeChange).toHaveBeenCalled();
 	});
@@ -151,19 +193,15 @@ describe('Input Specs', () => {
 		const inputText = screen.getByLabelText('Input field').children[0];
 
 		userEvent.type(inputText, value);
+		// bluring input onSpotlightRight for code coverage purposes
+		pressRightKey(inputText);
+		pressRightKey(inputText);
+		pressRightKey(inputText);
+		pressRightKey(inputText);
+		pressRightKey(inputText);
+		pressRightKey(inputText);
 
 		expect(handleChange).not.toHaveBeenCalled();
-	});
-
-	test('should blur input on enter if dismissOnEnter', () => {
-		const handleChange = jest.fn();
-		render(<Input onBlur={handleChange} dismissOnEnter />);
-		const inputText = screen.getByLabelText('Input field').children[0];
-
-		fireEvent.mouseDown(inputText);
-		fireEvent.keyUp(inputText, {which: 13, keyCode: 13, code: 13});
-
-		expect(handleChange).toHaveBeenCalled();
 	});
 
 	test('should activate input on enter', () => {
@@ -171,8 +209,7 @@ describe('Input Specs', () => {
 		render(<Input onActivate={handleChange} />);
 		const inputText = screen.getByLabelText('Input field').children[0];
 
-		fireEvent.keyDown(inputText, {which: 13, keyCode: 13, code: 13});
-		fireEvent.keyUp(inputText, {which: 13, keyCode: 13, code: 13});
+		pressEnterKey(inputText);
 
 		expect(handleChange).toHaveBeenCalled();
 	});
@@ -182,8 +219,7 @@ describe('Input Specs', () => {
 		render(<Input disabled onActivate={handleChange} />);
 		const inputText = screen.getByLabelText('Input field').children[0];
 
-		fireEvent.keyDown(inputText, {which: 13, keyCode: 13, code: 13});
-		fireEvent.keyUp(inputText, {which: 13, keyCode: 13, code: 13});
+		pressEnterKey(inputText);
 
 		expect(handleChange).not.toHaveBeenCalled();
 	});

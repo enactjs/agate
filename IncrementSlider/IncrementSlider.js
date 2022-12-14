@@ -36,10 +36,11 @@ import $L from '../internal/$L';
 import {ProgressBarTooltip} from '../ProgressBar';
 import Skinnable from '../Skinnable';
 import {SliderBase} from '../Slider';
-import {emitChange} from '../Slider/utils';
 import SliderBehaviorDecorator from '../Slider/SliderBehaviorDecorator';
 
 import IncrementSliderButton from './IncrementSliderButton';
+import {emitChange} from './utils';
+
 import componentCss from './IncrementSlider.module.less';
 
 const isDown = is('down');

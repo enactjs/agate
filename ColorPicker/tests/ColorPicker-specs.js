@@ -11,6 +11,45 @@ const leftKeyDown = keyDown(37);
 const rightKeyDown = keyDown(39);
 
 describe('ColorPicker', () => {
+	test('should have transitionContainer with `right` class when `direction` is set to  `left`', () => {
+		render(
+			<ColorPicker direction="left" open>
+				{[]}
+			</ColorPicker>
+		);
+
+		const actual = screen.getAllByRole('button')[0].nextElementSibling;
+		const expected = 'right';
+
+		expect(actual).toHaveClass(expected);
+	});
+
+	test('should have transitionContainer with `down` class when `direction` is set to  `up`', () => {
+		render(
+			<ColorPicker direction="up" open>
+				{[]}
+			</ColorPicker>
+		);
+
+		const actual = screen.getAllByRole('button')[0].nextElementSibling;
+		const expected = 'down';
+
+		expect(actual).toHaveClass(expected);
+	});
+
+	test('should have transitionContainer with `up` class when `direction` is set to  `down`', () => {
+		render(
+			<ColorPicker direction="down" open>
+				{[]}
+			</ColorPicker>
+		);
+
+		const actual = screen.getAllByRole('button')[0].nextElementSibling;
+		const expected = 'up';
+
+		expect(actual).toHaveClass(expected);
+	});
+
 	test('should change value when selecting a different color', () => {
 		const handleChange = jest.fn();
 		render(
@@ -28,6 +67,25 @@ describe('ColorPicker', () => {
 		const actual = handleChange.mock.calls[0][0].value;
 
 		expect(actual).toBe(expected);
+	});
+
+	test('should change backgroundColor of swatchButton when selecting a different color', () => {
+		render(
+			<ColorPicker>
+				{['red', 'blue', 'yellow', 'pink']}
+			</ColorPicker>
+		);
+
+		// First extend color picker
+		userEvent.click(screen.getAllByRole('button')[0]);
+		// Now click on blue color
+		userEvent.click(screen.getByLabelText('blue'));
+
+		const expected = 'blue';
+		const actual = screen.getAllByRole('button')[0].children[1].children[0];
+
+		expect(actual).toHaveClass('colorSwatch');
+		expect(actual).toHaveStyle({'background-color': expected});
 	});
 
 	test('should emit an onChange event when changing hue', () => {
@@ -91,6 +149,28 @@ describe('ColorPicker', () => {
 		const expected = 1;
 
 		expect(handleChange).toHaveBeenCalledTimes(expected);
+	});
+
+	test('should close palette on second click on primary swatchButton', () => {
+		const handleChange = jest.fn();
+		render(
+			<ColorPicker onChange={handleChange} value="pink">
+				{['red', 'blue', 'yellow', 'pink']}
+			</ColorPicker>
+		);
+
+		// Extend color picker
+		userEvent.click(screen.getAllByRole('button')[0]);
+
+		const actual = screen.getAllByRole('button')[0].nextElementSibling;
+		const expected = 'shown';
+
+		expect(actual).toHaveClass(expected);
+
+		// Hide color picker
+		userEvent.click(screen.getAllByRole('button')[0]);
+
+		expect(actual).not.toHaveClass(expected);
 	});
 
 	test('should not extend palette when disabled', () => {
