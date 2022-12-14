@@ -6,7 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
-- `agate/Panels` function to delete unnecessary props after use
+- `agate/Panels/TabbedPanels` to not show console error when there is no children
 
 ### Added
 
