@@ -14,7 +14,7 @@ describe('ProgressBar Specs', () => {
 	});
 
 	test('should have tooltip show progress as percentage', () => {
-		render(<ProgressBar tooltip progress={0.6} />);
+		render(<ProgressBar progress={0.6} tooltip />);
 
 		const actual = screen.getByRole('progressbar').textContent;
 		const expected = '60%';
@@ -23,7 +23,7 @@ describe('ProgressBar Specs', () => {
 	});
 
 	describe('ProgressBar with horizontal orientation', () => {
-		test('should have default orientation of horizontal', () => {
+		test('should have default orientation of `horizontal`', () => {
 			render(<ProgressBar />);
 
 			const actual = screen.getByRole('progressbar');
@@ -32,7 +32,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip `above after`', () => {
+		test('should have tooltip with `above after` className when position is set to `above after`', () => {
 			render(
 				<ProgressBar>
 					<ProgressBarTooltip position="above after" />
@@ -45,7 +45,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip `above before`', () => {
+		test('should have tooltip with `above before` className when position is set to `above before`', () => {
 			render(
 				<ProgressBar>
 					<ProgressBarTooltip position="above before" />
@@ -58,7 +58,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip `above center`', () => {
+		test('should have tooltip with `above center` className when position is set to `above center`', () => {
 			render(
 				<ProgressBar>
 					<ProgressBarTooltip position="above center" />
@@ -71,7 +71,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip `above left`', () => {
+		test('should have tooltip with `above left` className when position is set to `above left`', () => {
 			render(
 				<ProgressBar>
 					<ProgressBarTooltip position="above left" />
@@ -84,7 +84,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip `above right`', () => {
+		test('should have tooltip with `above right` className when position is set to `above right`', () => {
 			render(
 				<ProgressBar>
 					<ProgressBarTooltip position="above right" />
@@ -97,7 +97,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip `below after`', () => {
+		test('should have tooltip with `below after` className when position is set to `below after`', () => {
 			render(
 				<ProgressBar>
 					<ProgressBarTooltip position="below after" />
@@ -110,7 +110,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip `below before`', () => {
+		test('should have tooltip with `below before` className when position is set to `below before`', () => {
 			render(
 				<ProgressBar>
 					<ProgressBarTooltip position="below before" />
@@ -123,7 +123,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip `below center`', () => {
+		test('should have tooltip with `below center` className when position is set to `below center`', () => {
 			render(
 				<ProgressBar>
 					<ProgressBarTooltip position="below center" />
@@ -136,7 +136,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip `below left`', () => {
+		test('should have tooltip with `below left` className when position is set to `below left`', () => {
 			render(
 				<ProgressBar>
 					<ProgressBarTooltip position="below left" />
@@ -149,7 +149,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip `below right`', () => {
+		test('should have tooltip with `below right` className when position is set to `below right`', () => {
 			render(
 				<ProgressBar>
 					<ProgressBarTooltip position="below right" />
@@ -162,7 +162,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip in default position (above)', () => {
+		test('should have tooltip with default `above` className when no position is set', () => {
 			render(
 				<ProgressBar>
 					<ProgressBarTooltip />
@@ -186,7 +186,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip `after`', () => {
+		test('should have tooltip with `after` className when position is set to `after`', () => {
 			render(
 				<ProgressBar orientation="vertical">
 					<ProgressBarTooltip position="after" />
@@ -199,7 +199,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip `before`', () => {
+		test('should have tooltip with `before` className when position is set to `before`', () => {
 			render(
 				<ProgressBar orientation="vertical">
 					<ProgressBarTooltip position="before" />
@@ -212,7 +212,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip `left`', () => {
+		test('should have tooltip with `left` className when position is set to `left`', () => {
 			render(
 				<ProgressBar orientation="vertical">
 					<ProgressBarTooltip position="left" />
@@ -225,7 +225,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip `right`', () => {
+		test('should have tooltip with `right` className when position is set to `right`', () => {
 			render(
 				<ProgressBar orientation="vertical">
 					<ProgressBarTooltip position="right" />
@@ -238,7 +238,7 @@ describe('ProgressBar Specs', () => {
 			expect(actual).toHaveClass(expected);
 		});
 
-		test('should have tooltip in default position (after)', () => {
+		test('should have tooltip with default `after` className when no position is set', () => {
 			render(
 				<ProgressBar orientation="vertical">
 					<ProgressBarTooltip />

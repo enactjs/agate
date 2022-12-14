@@ -46,6 +46,18 @@ describe('IncrementSlider Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
+	test('should increment value by knobStep', () => {
+		const spy = jest.fn();
+		render(<IncrementSlider active defaultValue={50} knobStep={2} onChange={spy} />);
+
+		increment();
+
+		const expected = 52;
+		const actual = spy.mock.calls[0][0].value;
+
+		expect(actual).toBe(expected);
+	});
+
 	test('should only call onChange once', () => {
 		const handleChange = jest.fn();
 		const value = 50;
@@ -183,7 +195,7 @@ describe('IncrementSlider Specs', () => {
 		expect(tooltip).toBeNull();
 	});
 
-	describe('directional events from IncrementSliderButtons', () => {
+	describe('Directional events from IncrementSliderButtons', () => {
 		test('should call onSpotlightLeft from the decrement button of horizontal IncrementSlider', () => {
 			const handleSpotlight = jest.fn();
 			render(<IncrementSlider onSpotlightLeft={handleSpotlight} />);
@@ -317,7 +329,7 @@ describe('IncrementSlider Specs', () => {
 		});
 	});
 
-	describe('directional events at bounds of slider', () => {
+	describe('Directional events at bounds of slider', () => {
 		test('should call onSpotlightLeft from slider of horizontal IncrementSlider when value is at min', () => {
 			const handleSpotlight = jest.fn();
 			render(<IncrementSlider min={0} onSpotlightLeft={handleSpotlight} value={0} />);
@@ -351,7 +363,7 @@ describe('IncrementSlider Specs', () => {
 			expect(handleSpotlight).toBeCalledTimes(expected);
 		});
 
-		test('should call onSpotlightUp from slider of horizontal IncrementSlider when value is at max', () => {
+		test('should call onSpotlightUp from slider of vertical IncrementSlider when value is at max', () => {
 			const handleSpotlight = jest.fn();
 			render(<IncrementSlider max={100} onSpotlightUp={handleSpotlight} orientation="vertical" value={100} />);
 
@@ -360,18 +372,6 @@ describe('IncrementSlider Specs', () => {
 			const expected = 1;
 
 			expect(handleSpotlight).toBeCalledTimes(expected);
-		});
-
-		test('should increment value by knobStep', () => {
-			const spy = jest.fn();
-			render(<IncrementSlider active defaultValue={50} knobStep={2} onChange={spy} />);
-
-			increment();
-
-			const expected = 52;
-			const actual = spy.mock.calls[0][0].value;
-
-			expect(actual).toBe(expected);
 		});
 	});
 });
