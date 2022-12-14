@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import {fireEvent, render, screen} from '@testing-library/react';
+import {act, fireEvent, render, screen} from '@testing-library/react';
 
 import ArcSlider from '../ArcSlider';
 import {angleToValue, valueToAngle} from '../utils';
@@ -10,7 +10,66 @@ const keyDown = (keyCode) => (arcSlider) => fireEvent.keyDown(arcSlider, {keyCod
 const downKeyDown = keyDown(40);
 const upKeyDown = keyDown(38);
 
+const getElementClientCenter = (element) => {
+	const {left, top, width, height} = element.getBoundingClientRect();
+	return {x: left + width / 2, y: top + height / 2};
+};
+const drag = (element, {delta, steps = 1}) => {
+	const from = getElementClientCenter(element);
+	const to = {x: from.x + delta.x, y: from.y + delta.y};
+	const step = {x: (to.x - from.x) / steps, y: (to.y - from.y) / steps};
+	const current = {clientX: from.x, clientY: from.y};
+
+	fireEvent.mouseEnter(element, current);
+	fireEvent.mouseOver(element, current);
+	fireEvent.mouseMove(element, current);
+	fireEvent.mouseDown(element, current);
+	for (let i = 0; i < steps; i++) {
+		current.clientX += step.x;
+		current.clientY += step.y;
+		act(() => jest.advanceTimersByTime(1000 / steps));
+		fireEvent.mouseMove(element, current);
+	}
+};
+
 describe('ArcSlider', () => {
+	beforeEach(() => {
+		Object.defineProperty(global.SVGSVGElement.prototype, 'createSVGPoint', {
+			writable: true,
+			value: jest.fn().mockImplementation(() => ({
+				x: 0,
+				y: 0,
+				matrixTransform: jest.fn().mockImplementation(() => ({
+					x: 0,
+					y: 0
+				}))
+			}))
+		});
+
+		Object.defineProperty(global.SVGSVGElement.prototype, 'getScreenCTM', {
+			writable: true,
+			value: jest.fn().mockImplementation(() => ({
+				angle: 0,
+				matrix: {
+					a: 0.6666666666666666,
+					b: 0,
+					c: 0,
+					d: 0.6666666666666666,
+					e: 28,
+					f: 139,
+					multiply: jest.fn()
+				},
+				inverse: jest.fn().mockImplementation(() => global.SVGSVGElement)
+			}))
+		});
+
+		jest.useFakeTimers();
+	});
+
+	afterEach(() => {
+		jest.useRealTimers();
+	});
+
 	test('should have `aria-valuetext` equal to value', () => {
 		render(<ArcSlider value={25} />);
 		const arcSlider = screen.getByRole('slider');
@@ -20,7 +79,7 @@ describe('ArcSlider', () => {
 		expect(arcSlider).toHaveAttribute('aria-valuetext', expected);
 	});
 
-	test('should change background color', () => {
+	test('should support custom background color', () => {
 		render(<ArcSlider backgroundColor="#FF0000" />);
 		const backgroundColor = screen.getByRole('slider').children.item(0).children.item(0);
 
@@ -29,7 +88,7 @@ describe('ArcSlider', () => {
 		expect(backgroundColor).toHaveAttribute('stroke', expected);
 	});
 
-	test('should change foreground color', () => {
+	test('should support custom foreground color', () => {
 		render(<ArcSlider foregroundColor="#00FF00" />);
 		const foregroundColor = screen.getByRole('slider').children.item(1).children.item(0);
 
@@ -129,6 +188,33 @@ describe('ArcSlider', () => {
 		expect(originalCy).not.toBe(actualCy);
 	});
 
+	test('should change value on mouse down', () => {
+		render(<ArcSlider />);
+		const arcSlider = screen.getByRole('slider');
+
+		focus(arcSlider);
+
+		const initialExpected = '0';
+
+		expect(arcSlider).toHaveAttribute('aria-valuetext', initialExpected);
+
+		fireEvent.mouseDown(arcSlider, {clientX: 10, clientY: 10});
+		const expected = '48';
+
+		expect(arcSlider).toHaveAttribute('aria-valuetext', expected);
+	});
+
+	test('should call onDragStart when dragging', async () => {
+		const handleDragStart = jest.fn();
+		render(<ArcSlider onDragStart={handleDragStart} />);
+		const arcSlider = screen.getByRole('slider');
+
+		focus(arcSlider);
+		await drag(arcSlider, {delta: {x: 0, y: 100}});
+
+		expect(handleDragStart).toHaveBeenCalled();
+	});
+
 	test('should have `#343434` foreground color with `carbon` skin', () => {
 		render(<ArcSlider skin="carbon" />);
 		const foregroundColor = screen.getByRole('slider').children.item(1).children.item(0);
@@ -147,24 +233,21 @@ describe('ArcSlider', () => {
 		expect(foregroundColor).toHaveAttribute('stroke', expected);
 	});
 
-	// test utils for code coverage purposes
 	describe('utils', () => {
-		test('should return an angle based on a given value', () => {
+		test('should convert a given value to a corresponding angle', () => {
 			const value = 25;
-			const angle = valueToAngle(value, 0, 100, 30, 250);
 
-			const actual = typeof angle;
-			const expected = 'number';
+			const expected = 85;
+			const actual = valueToAngle(value, 0, 100, 30, 250);
 
 			expect(actual).toBe(expected);
 		});
 
-		test('should return a value based on a given angle', () => {
-			const angle = 80;
-			const value = angleToValue(angle, 0, 100, 30, 250);
+		test('should convert a given angle to a corresponding value', () => {
+			const angle = 85;
 
-			const actual = typeof value;
-			const expected = 'number';
+			const expected = 25;
+			const actual = angleToValue(angle, 0, 100, 30, 250);
 
 			expect(actual).toBe(expected);
 		});

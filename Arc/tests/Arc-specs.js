@@ -65,7 +65,6 @@ describe('Arc', () => {
 		expect(svgPath).toHaveAttribute('stroke-width', expected);
 	});
 
-	// test utils for code coverage purposes
 	describe('utils', () => {
 		test('positionToAngle should return a positive number if `x>0` and `y>0`', () => {
 			const angle = positionToAngle({x: 75, y: 200}, 294);
