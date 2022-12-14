@@ -2,11 +2,13 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
-## [2.0.3] - 2022-12-14
+## Unreleased
 
 ### Fixed
 
 - `agate/Panels/TabbedPanels` to not show console error when there is no children
+
+## [2.0.3] - 2022-12-14
 
 ### Added
 
