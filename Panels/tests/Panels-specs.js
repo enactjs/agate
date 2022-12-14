@@ -26,7 +26,7 @@ describe('Panels Specs', () => {
 			</Panels>
 		);
 
-		firstButton = screen.getByText('One');
+		firstButton = screen.queryByText('One');
 		secondButton = screen.queryByText('Two');
 
 		expect(firstButton).toBeInTheDocument();
@@ -44,7 +44,7 @@ describe('Panels Specs', () => {
 		);
 
 		firstButton = screen.queryByText('One');
-		secondButton = screen.getByText('Two');
+		secondButton = screen.queryByText('Two');
 
 		expect(firstButton).not.toBeInTheDocument();
 		expect(secondButton).toBeInTheDocument();
@@ -60,7 +60,7 @@ describe('Panels Specs', () => {
 			</Panels>
 		);
 
-		firstButton = screen.getByText('One');
+		firstButton = screen.queryByText('One');
 		secondButton = screen.queryByText('Two');
 
 		expect(firstButton).toBeInTheDocument();
