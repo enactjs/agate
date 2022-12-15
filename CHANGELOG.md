@@ -15,10 +15,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/IncrementSlider` `sliderRef` prop to pass reference to the slider node
 - `agate/Slider` `sliderRef` prop to pass reference to the slider node
 
-### Removed
-
-- `agate/ProgressBarTooltip` unused code block referring to a third orientation option
-
 ## [2.0.2] - 2022-10-28
 
 ### Fixed
