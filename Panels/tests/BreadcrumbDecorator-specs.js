@@ -4,7 +4,7 @@ import {render, screen} from '@testing-library/react';
 import BreadcrumbDecorator from '../BreadcrumbDecorator';
 import Panels from '../Panels';
 
-describe('BreadcrumbDecorator', () => {
+describe('BreadcrumbDecorator Specs', () => {
 	const Panel = () => <div />;
 
 	test('should wrap primitive breadcrumbs with Breadcrumb', () => {

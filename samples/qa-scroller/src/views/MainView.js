@@ -8,7 +8,7 @@ import RadioItem from '@enact/agate/RadioItem';
 import Scroller from '@enact/agate/Scroller';
 import TimePicker from '@enact/agate/TimePicker';
 import Group from '@enact/ui/Group';
-import {Column} from '@enact/ui/Layout';
+import {Layout} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 import {useCallback, useState} from 'react';
 
@@ -47,20 +47,18 @@ const MainView = () => {
 
 	return (
 		<Panel>
-			<Header hideLine title="">
-				<Column>
-					<h1>Scroller</h1>
-					<Controls
-						handleFocusableScrollbar={handleFocusableScrollbar}
-						handleHeight={handleHeight}
-						handleScrollMode={handleScrollMode}
-						handleWidth={handleWidth}
-						height={height}
-						nativeScroll={nativeScroll}
-						width={width}
-					/>
-				</Column>
-			</Header>
+			<Header hideLine title="Scroller" />
+			<Layout>
+				<Controls
+					handleFocusableScrollbar={handleFocusableScrollbar}
+					handleHeight={handleHeight}
+					handleScrollMode={handleScrollMode}
+					handleWidth={handleWidth}
+					height={height}
+					nativeScroll={nativeScroll}
+					width={width}
+				/>
+			</Layout>
 			<hr />
 			<Scroller
 				focusableScrollbar={focusableScrollbar}
