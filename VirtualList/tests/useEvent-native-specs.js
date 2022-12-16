@@ -59,7 +59,7 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 		renderItem = null;
 	});
 
-	test('should navigate focus using arrow-up/down key', () => {
+	test('should navigate focus using Arrow Up/Down key', () => {
 		render(
 			<VirtualList
 				clientSize={clientSize}
@@ -88,7 +88,7 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 		expect(currentFocusIndex).toBe(1);
 	});
 
-	test('should navigate focus from first item to last using arrow-up key when `wrap` is true', () => {
+	test('should navigate focus from first item to last using Arrow Up key when `wrap` is true', () => {
 		render(
 			<VirtualList
 				clientSize={clientSize}
@@ -115,7 +115,7 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 		jest.useRealTimers();
 	});
 
-	test('should navigate focus from last item to first using arrow-down key when `wrap` is true', () => {
+	test('should navigate focus from last item to first using Arrow Down key when `wrap` is true', () => {
 		render(
 			<VirtualList
 				clientSize={clientSize}
@@ -142,7 +142,7 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 		jest.useRealTimers();
 	});
 
-	test('should not navigate focus using arrow-up/down key when `direction` is `horizontal`', () => {
+	test('should not navigate focus using Arrow Up/Down key when `direction` is `horizontal`', () => {
 		render(
 			<VirtualList
 				clientSize={clientSize}
@@ -167,7 +167,7 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 		expect(currentFocusIndex).toBe(0);
 	});
 
-	test('should navigate focus using arrow-left/right key when `direction` is `horizontal`', () => {
+	test('should navigate focus using Arrow Left/Right key when `direction` is `horizontal`', () => {
 		render(
 			<VirtualList
 				clientSize={clientSize}
@@ -197,7 +197,7 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 		expect(currentFocusIndex).toBe(1);
 	});
 
-	test('should scroll by focus navigation using arrow-down key', () => {
+	test('should scroll by focus navigation using Arrow Down key', () => {
 		const spy = jest.fn(() => {});
 		const scrollToFn = global.Element.prototype.scrollTo;
 		global.Element.prototype.scrollTo = spy;
