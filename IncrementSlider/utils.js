@@ -15,6 +15,7 @@ const calcStep = (knobStep, step) => {
 	// otherwise, increment/decrement would be no-ops
 	return s || 1;
 };
+
 export const emitChange = (direction) =>  adaptEvent(
 	(ev, {knobStep, max, min, step, value = min}) => {
 		const newValue = clamp(min, max, value + (calcStep(knobStep, step) * direction));
