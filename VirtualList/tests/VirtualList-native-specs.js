@@ -83,7 +83,7 @@ describe('VirtualList with native `scrollMode`', () => {
 			/>
 		);
 
-		const expected = 15; // 720 / 60 + 3    // clientHeight/ItemHeight + overhangValue
+		const expected = 15; // 720 / 60 + 3    // clientHeight/itemHeight + overhangValue
 		const actual = screen.getByRole('list').children.length;
 
 		expect(actual).toBe(expected);
@@ -112,7 +112,7 @@ describe('VirtualList with native `scrollMode`', () => {
 			/>
 		);
 
-		const expected = 9; // 360 / 60 + 3    // clientHeight/ItemHeight + overhangValue
+		const expected = 9; // 360 / 60 + 3    // clientHeight/itemHeight + overhangValue
 		const actual = screen.getByRole('list').children.length;
 
 		expect(actual).toBe(expected);

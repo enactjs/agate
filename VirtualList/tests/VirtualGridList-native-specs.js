@@ -102,7 +102,7 @@ describe('VirtualGridList with native `scrollMode`', () => {
 			/>
 		);
 
-		const expected = 24; // (4 * (720 / 240)) + 4 * 3    // (4 columns * (clientHeight/ItemHeight)) + 4 columns * overhangValue
+		const expected = 24; // (4 * (720 / 240)) + 4 * 3    // (4 columns * (clientHeight/itemHeight)) + 4 columns * overhangValue
 		const actual = screen.getByRole('list').children.length;
 
 		expect(actual).toBe(expected);
@@ -131,7 +131,7 @@ describe('VirtualGridList with native `scrollMode`', () => {
 			/>
 		);
 
-		const expected = 20; // (4 * (360 / 240)) + 4 * 3    // (4 columns * (clientHeight/ItemHeight)) + 4 columns * overhangValue
+		const expected = 20; // (4 * (360 / 240)) + 4 * 3    // (4 columns * (clientHeight/itemHeight)) + 4 columns * overhangValue
 		const actual = screen.getByRole('list').children.length;
 
 		expect(actual).toBe(expected);
