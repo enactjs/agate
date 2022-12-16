@@ -39,7 +39,7 @@ describe('VirtualList with native `scrollMode`', () => {
 		renderItem = null;
 	});
 
-	test('should render a list of `items`', () => {
+	test('should render a list of items', () => {
 		render(
 			<VirtualList
 				clientSize={clientSize}
@@ -83,7 +83,7 @@ describe('VirtualList with native `scrollMode`', () => {
 			/>
 		);
 
-		const expected = 15; // 720 / 60 + 3
+		const expected = 15; // 720 / 60 + 3    // clientHeight/ItemHeight + overhangValue
 		const actual = screen.getByRole('list').children.length;
 
 		expect(actual).toBe(expected);
@@ -112,13 +112,13 @@ describe('VirtualList with native `scrollMode`', () => {
 			/>
 		);
 
-		const expected = 9; // 360 / 60 + 3
+		const expected = 9; // 360 / 60 + 3    // clientHeight/ItemHeight + overhangValue
 		const actual = screen.getByRole('list').children.length;
 
 		expect(actual).toBe(expected);
 	});
 
-	test('should render only one scrollbar', () => {
+	test('should render only one scrollbar when `direction` is `horizontal`', () => {
 		render(
 			<VirtualList
 				clientSize={clientSize}
@@ -159,14 +159,16 @@ describe('VirtualList with native `scrollMode`', () => {
 			expect(horizontalScrollbar).toHaveClass('scrollbar horizontal');
 		});
 
-		test('should render only vertical scrollbar when `verticalScrollbar` is "visible" and `horizontalScrollbar` is `hidden`', () => {
+		test('should render only vertical scrollbar when `verticalScrollbar` is `visible` and `horizontalScrollbar` is `hidden`', () => {
 			render(
 				<VirtualList
 					clientSize={clientSize}
 					dataSize={dataSize}
+					horizontalScrollbar="hidden"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					scrollMode="native"
+					verticalScrollbar="visible"
 				/>
 			);
 
@@ -224,6 +226,7 @@ describe('VirtualList with native `scrollMode`', () => {
 			);
 
 			itemArray.unshift({name: 'Password 0'});
+
 			rerender(<VirtualList
 				clientSize={clientSize}
 				dataSize={itemArray.length}
@@ -235,6 +238,7 @@ describe('VirtualList with native `scrollMode`', () => {
 			jest.useFakeTimers();
 
 			act(() => jest.advanceTimersByTime(0));
+
 			const expected = itemArray[0].name;
 			const actual = screen.getByRole('list').children.item(0).textContent;
 

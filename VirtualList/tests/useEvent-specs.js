@@ -249,7 +249,7 @@ describe('VirtualList useEvent', () => {
 		expect(spy).toHaveBeenCalled();
 	});
 
-	test('should scroll by page-down key', () => {
+	test('should scroll by Page Down key', () => {
 		const spy = jest.fn(() => {});
 
 		render(
@@ -387,7 +387,7 @@ describe('VirtualList useEvent', () => {
 			expect(spy).toHaveBeenCalled();
 		});
 
-		test('should scroll by page-down key', () => {
+		test('should scroll by Page Down key', () => {
 			const spy = jest.fn(() => {});
 
 			render(
@@ -411,7 +411,6 @@ describe('VirtualList useEvent', () => {
 			expect(currentFocusIndex).toBe(13);
 
 			pressPageDownKey(item10);
-
 			expect(spy).toHaveBeenCalled();
 		});
 	});

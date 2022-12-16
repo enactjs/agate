@@ -85,7 +85,7 @@ describe('VirtualList', () => {
 		startScrollTop = null;
 	});
 
-	test('should render a list of `items`', () => {
+	test('should render a list of items', () => {
 		render(
 			<VirtualList
 				clientSize={clientSize}
@@ -159,7 +159,7 @@ describe('VirtualList', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should render only one scrollbar', () => {
+	test('should render only one scrollbar when `direction` is `horizontal`', () => {
 		render(
 			<VirtualList
 				clientSize={clientSize}
@@ -170,8 +170,8 @@ describe('VirtualList', () => {
 			/>
 		);
 
-		const expected = 1;
-		const actual = screen.getByRole('list').parentElement.parentElement.children.length;
+		const expected = 2; // One for the list and another for the horizontal scrollbar
+		const actual = screen.getByRole('list').parentElement.parentElement.parentElement.parentElement.children.length;
 
 		expect(actual).toBe(expected);
 	});
@@ -198,13 +198,15 @@ describe('VirtualList', () => {
 			expect(horizontalScrollbar).toHaveClass('scrollbar horizontal');
 		});
 
-		test('should render only vertical scrollbar when `verticalScrollbar` is "visible" and `horizontalScrollbar` is `hidden`', () => {
+		test('should render only vertical scrollbar when `verticalScrollbar` is `visible` and `horizontalScrollbar` is `hidden`', () => {
 			render(
 				<VirtualList
 					clientSize={clientSize}
 					dataSize={dataSize}
+					horizontalScrollbar="hidden"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
+					verticalScrollbar="visible"
 				/>
 			);
 
@@ -304,7 +306,7 @@ describe('VirtualList', () => {
 			act(() => myScrollTo({position: {y: 200}, animate: false}));
 		});
 
-		describe('scroll events', () => {
+		describe('Scroll events', () => {
 			test('should call onScrollStart once', () => {
 				render(
 					<VirtualList
@@ -451,6 +453,7 @@ describe('VirtualList', () => {
 			);
 
 			itemArray.unshift({name: 'Password 0'});
+
 			rerender(<VirtualList
 				clientSize={clientSize}
 				dataSize={itemArray.length}

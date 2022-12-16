@@ -56,7 +56,6 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 		dataSize = null;
 		items = [];
 		itemSize = 60;
-		items = null;
 		renderItem = null;
 	});
 
@@ -227,7 +226,7 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 		global.Element.prototype.scrollTo = scrollToFn;
 	});
 
-	test('should scroll by page-down key', () => {
+	test('should scroll by Page Down key', () => {
 		const spy = jest.fn(() => {});
 		const scrollToFn = global.Element.prototype.scrollTo;
 		global.Element.prototype.scrollTo = spy;
@@ -253,7 +252,6 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 		expect(currentFocusIndex).toBe(10);
 
 		pressPageDownKey(item10);
-
 		expect(spy).toHaveBeenCalled();
 
 		global.Element.prototype.scrollTo = scrollToFn;

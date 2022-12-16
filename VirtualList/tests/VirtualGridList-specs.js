@@ -75,7 +75,8 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 		const headingZeros = Array(itemNumberDigits).join('0');
 
 		for (let i = 0; i < dataSize; i++) {
-			const count = (headingZeros + i).slice(-itemNumberDigits),
+			const
+				count = (headingZeros + i).slice(-itemNumberDigits),
 				text = `Item ${count}`,
 				subText = `SubItem ${count}`,
 				color = Math.floor(Math.random() * (0x1000000 - 0x101010) + 0x101010).toString(16),
@@ -105,7 +106,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 		svgGenerator = null;
 	});
 
-	test('should render a list of `items`', () => {
+	test('should render a list of items', () => {
 		render(
 			<VirtualGridList
 				clientSize={clientSize}
@@ -146,7 +147,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 			/>
 		);
 
-		const expected = 24; // (4 * (720 / 240)) + 4 * 3
+		const expected = 24; // (4 * (720 / 240)) + 4 * 3    // (4 columns * (clientHeight/ItemHeight)) + 4 columns * overhangValue
 		const actual = screen.getByRole('list').children.length;
 
 		expect(actual).toBe(expected);
@@ -173,13 +174,13 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 			/>
 		);
 
-		const expected = 20; // (4 * (360 / 240)) + 4 * 3
+		const expected = 20; // (4 * (360 / 240)) + 4 * 3    // (4 columns * (clientHeight/ItemHeight)) + 4 columns * overhangValue
 		const actual = screen.getByRole('list').children.length;
 
 		expect(actual).toBe(expected);
 	});
 
-	test('should render only one scrollbar', () => {
+	test('should render only one scrollbar when `direction` is `horizontal`', () => {
 		render(
 			<VirtualGridList
 				clientSize={clientSize}
@@ -223,8 +224,10 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 				<VirtualGridList
 					clientSize={clientSize}
 					dataSize={dataSize}
+					horizontalScrollbar="hidden"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
+					verticalScrollbar="visible"
 				/>
 			);
 
@@ -452,7 +455,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 			act(() => myScrollTo({align: 'bottom', animate: false}));
 		});
 
-		describe('scroll events', () => {
+		describe('Scroll events', () => {
 			test('should call `onScrollStart` once', () => {
 				render(
 					<VirtualGridList
@@ -599,6 +602,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 			);
 
 			itemArray.unshift({name: 'Password 0'});
+
 			rerender(<VirtualGridList
 				clientSize={clientSize}
 				dataSize={itemArray.length}
@@ -609,6 +613,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 			jest.useFakeTimers();
 
 			act(() => jest.advanceTimersByTime(0));
+
 			const expected = itemArray[0].name;
 			const actual = screen.getByRole('list').children.item(0).textContent;
 

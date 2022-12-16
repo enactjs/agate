@@ -17,7 +17,7 @@ describe('VirtualGridList with native `scrollMode`', () => {
 		clientSize = {clientWidth: 1280, clientHeight: 720};
 		dataSize = 200;
 		items = [];
-		itemSize = {minWidth: 300, minHeight:240};
+		itemSize = {minWidth: 300, minHeight: 240};
 
 		renderItem = ({index, ...rest}) => { // eslint-disable-line enact/display-name
 			const {source, subText, text} = items[index];
@@ -39,7 +39,8 @@ describe('VirtualGridList with native `scrollMode`', () => {
 		const headingZeros = Array(itemNumberDigits).join('0');
 
 		for (let i = 0; i < dataSize; i++) {
-			const count = (headingZeros + i).slice(-itemNumberDigits),
+			const
+				count = (headingZeros + i).slice(-itemNumberDigits),
 				text = `Item ${count}`,
 				subText = `SubItem ${count}`,
 				color = Math.floor(Math.random() * (0x1000000 - 0x101010) + 0x101010).toString(16),
@@ -57,7 +58,7 @@ describe('VirtualGridList with native `scrollMode`', () => {
 		renderItem = null;
 	});
 
-	test('should render a list of `items`', () => {
+	test('should render a list of items', () => {
 		render(
 			<VirtualGridList
 				clientSize={clientSize}
@@ -101,7 +102,7 @@ describe('VirtualGridList with native `scrollMode`', () => {
 			/>
 		);
 
-		const expected = 24; // (4 * (720 / 240)) + 4 * 3
+		const expected = 24; // (4 * (720 / 240)) + 4 * 3    // (4 columns * (clientHeight/ItemHeight)) + 4 columns * overhangValue
 		const actual = screen.getByRole('list').children.length;
 
 		expect(actual).toBe(expected);
@@ -130,13 +131,13 @@ describe('VirtualGridList with native `scrollMode`', () => {
 			/>
 		);
 
-		const expected = 20; // (4 * (360 / 240)) + 4 * 3
+		const expected = 20; // (4 * (360 / 240)) + 4 * 3    // (4 columns * (clientHeight/ItemHeight)) + 4 columns * overhangValue
 		const actual = screen.getByRole('list').children.length;
 
 		expect(actual).toBe(expected);
 	});
 
-	test('should render only one scrollbar', () => {
+	test('should render only one scrollbar when `direction` is `horizontal`', () => {
 		render(
 			<VirtualGridList
 				clientSize={clientSize}
@@ -182,9 +183,11 @@ describe('VirtualGridList with native `scrollMode`', () => {
 				<VirtualGridList
 					clientSize={clientSize}
 					dataSize={dataSize}
+					horizontalScrollbar="hidden"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					scrollMode="native"
+					verticalScrollbar="visible"
 				/>
 			);
 
@@ -242,6 +245,7 @@ describe('VirtualGridList with native `scrollMode`', () => {
 			);
 
 			itemArray.unshift({name: 'Password 0'});
+
 			rerender(<VirtualGridList
 				clientSize={clientSize}
 				dataSize={itemArray.length}
