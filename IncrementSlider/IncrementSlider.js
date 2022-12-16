@@ -20,6 +20,7 @@
  */
 
 import {forward} from '@enact/core/handle';
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import {is} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
 import {extractAriaProps} from '@enact/core/util';
@@ -35,10 +36,11 @@ import $L from '../internal/$L';
 import {ProgressBarTooltip} from '../ProgressBar';
 import Skinnable from '../Skinnable';
 import {SliderBase} from '../Slider';
-import {emitChange} from '../Slider/utils';
 import SliderBehaviorDecorator from '../Slider/SliderBehaviorDecorator';
 
 import IncrementSliderButton from './IncrementSliderButton';
+import {emitChange} from './utils';
+
 import componentCss from './IncrementSlider.module.less';
 
 const isDown = is('down');
@@ -356,6 +358,14 @@ const IncrementSliderBase = kind({
 		size: PropTypes.oneOf(['small', 'large']),
 
 		/**
+		 * Called with the reference to the Slider node.
+		 *
+		 * @type {Object|Function}
+		 * @public
+		 */
+		sliderRef: EnactPropTypes.ref,
+
+		/**
 		 * Disables spotlight navigation into the component.
 		 *
 		 * @type {Boolean}
@@ -372,7 +382,6 @@ const IncrementSliderBase = kind({
 		 * @public
 		 */
 		step: PropTypes.number,
-
 
 		/**
 		 * Enables the built-in tooltip
@@ -522,6 +531,7 @@ const IncrementSliderBase = kind({
 		orientation,
 		progressAnchor,
 		size,
+		sliderRef,
 		spotlightDisabled,
 		step,
 		tooltip,
@@ -568,6 +578,7 @@ const IncrementSliderBase = kind({
 					onDragStart={onDragStart}
 					onSpotlightDisappear={onSpotlightDisappear}
 					orientation={orientation}
+					sliderRef={sliderRef}
 					spotlightDisabled={spotlightDisabled}
 					progressAnchor={progressAnchor}
 					step={step}

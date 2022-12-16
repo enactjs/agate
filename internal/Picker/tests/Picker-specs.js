@@ -92,4 +92,18 @@ describe('Picker Specs', () => {
 
 		expect(picker).toHaveAttribute(expected);
 	});
+
+	test('should set custom decrement aria label', () => {
+		render(<Picker decrementAriaLabel="Custom decrement aria label" index={0} max={2} min={0} value={0} />);
+		const itemDecrement = screen.queryByLabelText('0 Custom decrement aria label');
+
+		expect(itemDecrement).toBeInTheDocument();
+	});
+
+	test('should set custom increment aria label', () => {
+		render(<Picker incrementAriaLabel="Custom increment aria label" index={0} max={2} min={0} value={0} />);
+		const itemIncrement = screen.queryByLabelText('0 Custom increment aria label');
+
+		expect(itemIncrement).toBeInTheDocument();
+	});
 });
