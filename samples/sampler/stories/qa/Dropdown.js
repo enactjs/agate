@@ -198,6 +198,7 @@ WithArrayOfChildrenObjects.parameters = {
 		}
 	}
 };
+
 export const WithAutoDismiss = () => <AutoDismissDropdown />;
 
 WithAutoDismiss.storyName = 'with auto dismiss';
