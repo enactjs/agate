@@ -11,7 +11,7 @@ loadConfig();
 
 let configObject;
 const loadConfig = async () => {
-	const configObject = await import('@enact/ui-test-utils/ui/wdio.conf.js');
+	configObject = await import('@enact/ui-test-utils/ui/wdio.conf.js');
 	return configObject;
 }
 module.exports = loadConfig();
