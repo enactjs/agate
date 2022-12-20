@@ -4,6 +4,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## Unreleased
 
+### Changed
+
+- `agate/Kepad` `handleInputValue` switch cases by removing unused ones and adding others that were not covered
+
 ### Fixed
 
 - `agate/Panels/TabbedPanels` to not show console error when there is no children
@@ -14,10 +18,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/IncrementSlider` `sliderRef` prop to pass reference to the slider node
 - `agate/Slider` `sliderRef` prop to pass reference to the slider node
-
-### Changed
-
-- `agate/Kepad` `handleInputValue` switch cases by removing unused ones and adding others that were not covered
 
 ## [2.0.2] - 2022-10-28
 
