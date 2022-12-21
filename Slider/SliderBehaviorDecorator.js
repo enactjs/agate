@@ -117,7 +117,7 @@ const SliderBehaviorDecorator = hoc(defaultConfig, (config, Wrapped) => {
 		}
 
 		focusSlider () {
-			let slider = this.sliderRef.current.node;
+			let slider = this.sliderRef.current;
 			if (slider.getAttribute('role') !== 'slider') {
 				slider = slider.querySelector('[role="slider"]');
 			}
@@ -189,7 +189,7 @@ const SliderBehaviorDecorator = hoc(defaultConfig, (config, Wrapped) => {
 					onDragStart={this.handleDragStart}
 					onDragEnd={this.handleDragEnd}
 					onFocus={this.handleFocus}
-					ref={this.sliderRef}
+					sliderRef={this.sliderRef}
 				/>
 			);
 		}
