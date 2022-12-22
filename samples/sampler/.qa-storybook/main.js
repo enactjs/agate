@@ -3,18 +3,27 @@
 const webpack = require('@enact/storybook-utils/configs/webpack');
 
 module.exports = {
-	features: {
-		postcss: false
+	core: {
+		builder: 'webpack5',
+		disableTelemetry: true
 	},
+	features: {
+		postcss: false,
+		warnOnLegacyHierarchySeparator: false
+	},
+	framework: '@storybook/react',
 	stories: ['./../stories/qa/*.js'],
 	addons: [
-		'@enact/storybook-utils/addons/actions/register',
-		'@enact/storybook-utils/addons/controls/register',
-		'@enact/storybook-utils/addons/docs/register',
-		'@enact/storybook-utils/addons/toolbars/register',
-		'../custom-addon/register.js'
+		'@enact/storybook-utils/addons/actions',
+		'@enact/storybook-utils/addons/controls',
+		'@enact/storybook-utils/addons/docs',
+		'@enact/storybook-utils/addons/toolbars',
+		'../custom-addon/manager.js'
 	],
 	webpackFinal: async (config, {configType}) => {
 		return webpack(config, configType, __dirname);
+	},
+	typescript: {
+		reactDocgen: false
 	}
-}
+};
