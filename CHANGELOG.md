@@ -4,10 +4,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## Unreleased
 
-### Changed
-
-- `agate/Kepad` `handleInputValue` switch cases by removing unused ones and adding others that were not covered
-
 ### Fixed
 
 - `agate/Panels/TabbedPanels` to not show console error when there is no children
