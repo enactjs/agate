@@ -11,7 +11,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/Panels/TabbedPanels` to not show console error when there is no children
-- `agate/TabGroup` to pass onSelect to `ui/Group`
+- `agate/TabGroup` to pass `onSelect` to `ui/Group`
 
 ## [2.0.3] - 2022-12-14
 
