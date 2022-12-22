@@ -235,7 +235,7 @@ const KeypadBase = kind({
 });
 
 /**
- * A Keypad component with an Input to display the outcome.
+ * A Keypad component with specific functionality.
  *
  * @class KeypadBehaviorDecorator
  * @hoc
@@ -300,39 +300,15 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 			switch (keyValue) {
 				case 'arrowuturn':
 				case 'backspace':
-				case 'Backspace':
 					newCharIndex = charIndex;
 					newKeypadInput = newKeypadInput.substring(0, charIndex - 1) + newKeypadInput.substring(charIndex, newKeypadInput.length);
 					newCharIndex = newCharIndex - 1;
 					break;
 
-				case 'ArrowLeft':
-					if (charIndex >= 0) {
-						newCharIndex = charIndex;
-						newCharIndex = newCharIndex - 1;
-					}
-					break;
-
-				case 'ArrowRight':
-					newCharIndex = charIndex;
-					newCharIndex = newCharIndex + 1;
-					break;
-
-				case 'Delete':
-					newCharIndex = charIndex;
-					newKeypadInput = newKeypadInput.substring(0, charIndex) + newKeypadInput.substring(charIndex + 1, newKeypadInput.length);
-					newCharIndex = newCharIndex - 1;
-					break;
-
-				case 'ArrowUp':
-				case 'ArrowDown':
-					// do nothing;
-					break;
-
 				case 'phone':
 				case 'callaccept':
-					// method to call dialed number (keypadInput);
-
+				case 'calldecline':
+				case 'keypad':
 					newCharIndex = 0;
 					newKeypadInput = '';
 					break;
