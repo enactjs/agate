@@ -1,4 +1,5 @@
-const Page = require('./WindDirectionControlPage');
+// const Page = require('./WindDirectionControlPage');
+import Page from './WindDirectionControlPage.js';
 const accentColor = 'rgb(139,126,254)'; // selected and focused
 const selectedColor = 'rgb(0,0,0)';
 const unselectedColor = 'rgb(136,136,136)';

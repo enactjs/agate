@@ -1,5 +1,6 @@
 'use strict';
-const {getText, Page} = require('@enact/ui-test-utils/utils');
+// const {getText, Page} = require('@enact/ui-test-utils/utils');
+import {getText, Page} from '@enact/ui-test-utils/utils';
 
 class WindDirectionControlInterface {
 	constructor (id) {
@@ -42,4 +43,5 @@ class WindDirectionControlPage extends Page {
 	}
 }
 
-module.exports = new WindDirectionControlPage();
+// module.exports = new WindDirectionControlPage();
+export default new WindDirectionControlPage();
