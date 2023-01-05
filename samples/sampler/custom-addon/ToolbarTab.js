@@ -8,6 +8,7 @@ const ToolbarTab = ({isActive, toggleState, toolbarParamKey}) => {
 			active={isActive}
 			key={toolbarParamKey}
 			onClick={toggleState ? toggleState : null}
+			style={{display:'flex', flexDirection:'column'}}
 		>
 			<Icons /> {toolbarParamKey}
 		</IconButton>
