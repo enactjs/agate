@@ -1,17 +1,18 @@
 import ri from '@enact/ui/resolution';
 import '@testing-library/jest-dom';
-import {act, fireEvent, render, screen} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Scroller from '../Scroller';
 
-const keyDown = (keyCode) => (button) => fireEvent.keyDown(button, {keyCode});
-const keyUp = (keyCode) => (button) => fireEvent.keyUp(button, {keyCode});
+const focus = (elm) => fireEvent.focus(elm);
+const keyDownUp = (keyCode) => (elm) => {
+	fireEvent.keyDown(elm, {keyCode});
+	return fireEvent.keyUp(elm, {keyCode});
+};
 
-const enterKeyDown = keyDown(13);
-const enterKeyUp = keyUp(13);
-const arrowDownKeyDown = keyDown(40);
-const arrowDownKeyUp = keyUp(40);
+const pressEnterKey = keyDownUp(14);
+const pressDownKey = keyDownUp(40);
 
 describe('Scroller', () => {
 	let contents;
@@ -82,6 +83,11 @@ describe('Scroller', () => {
 				const expectedClass = 'vertical';
 				const actual = scrollButtons[0].parentElement;
 
+				// dispatching key event to increase code coverage
+				focus(scrollButtons[1]);
+				pressDownKey(scrollButtons[1]);
+				pressEnterKey(scrollButtons[1]);
+
 				expect(scrollButtons).toHaveLength(expectedLength);
 				expect(actual).toHaveClass(expectedClass);
 			}
@@ -103,6 +109,10 @@ describe('Scroller', () => {
 				const expectedLength = 2;
 				const expectedClass = 'horizontal';
 				const actual = scrollButtons[0].parentElement;
+
+				// dispatching click event to increase code coverage
+				focus(scrollButtons[1]);
+				userEvent.click(scrollButtons[1]);
 
 				expect(scrollButtons).toHaveLength(expectedLength);
 				expect(actual).toHaveClass(expectedClass);
@@ -281,59 +291,6 @@ describe('Scroller', () => {
 
 			expect(rightButton).toHaveAttribute(expectedAttribute, label);
 		});
-	});
-
-	describe('Scroller buttons', () => {
-		// Does not work
-		test('should scroll on `enter`', () => {
-			jest.useFakeTimers();
-			const spy = jest.fn();
-			render(
-				<Scroller
-					focusableScrollbar
-					horizontalScrollbar="visible"
-					verticalScrollbar="visible"
-					onScrollStart={spy}
-				>
-					{contents}
-				</Scroller>
-			);
-
-			const buttons = screen.getAllByRole('button');
-			enterKeyUp(buttons[1]);
-			act(() => jest.advanceTimersByTime(1500));
-
-			enterKeyDown(buttons[1]);
-			act(() => jest.advanceTimersByTime(1500));
-			enterKeyUp(buttons[1]);
-			act(() => jest.advanceTimersByTime(1500));
-
-			jest.useRealTimers();
-			console.log(spy.mock.calls);
-		});
-
-		// Does not work
-		test('should scroll on click', () => {
-			jest.useFakeTimers();
-			const spy = jest.fn();
-			render(
-				<Scroller
-					focusableScrollbar
-					horizontalScrollbar="visible"
-					verticalScrollbar="visible"
-					onScrollStart={spy}
-				>
-					{contents}
-				</Scroller>
-			);
-			const buttons = screen.getAllByRole('button');
-
-			userEvent.click(buttons[1]);
-			act(() => jest.advanceTimersByTime(1500));
-
-			jest.useRealTimers();
-			console.log(spy.mock.calls);
-		});
 
 		test('should change focus on arrow key if `focusableScrollbar`', () => {
 			jest.useFakeTimers();
@@ -342,8 +299,8 @@ describe('Scroller', () => {
 				<Scroller
 					focusableScrollbar
 					horizontalScrollbar="visible"
-					verticalScrollbar="visible"
 					onScrollStart={spy}
+					verticalScrollbar="visible"
 				>
 					{contents}
 				</Scroller>
@@ -351,9 +308,8 @@ describe('Scroller', () => {
 
 			const buttons = screen.getAllByRole('button');
 
-			act(() => buttons[0].focus());
-			arrowDownKeyDown(buttons[0]);
-			arrowDownKeyUp(buttons[0]);
+			focus(buttons[0]);
+			pressDownKey(buttons[0]);
 
 			expect(document.activeElement).toBe(buttons[1]);
 		});

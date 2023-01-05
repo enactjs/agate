@@ -4,6 +4,14 @@ import {act, render, renderHook, screen} from '@testing-library/react';
 import {ScrollButton} from '../ScrollButton';
 import useScrollButtons from '../ScrollButtons';
 
+const props = {
+	vertical: 'false',
+	focusableScrollButtons: 'false',
+	nop: () => {},
+	preventBubblingOnKeyDown: 'false',
+	rtl: 'false'
+};
+
 describe('ScrollButton specs', () => {
 	test('should accept a function as `forwardRef` prop', () => {
 		render(<ScrollButton icon="circle" ref={() => {}} />);
@@ -14,15 +22,6 @@ describe('ScrollButton specs', () => {
 	});
 });
 
-const props = {
-	vertical: 'false',
-	focusableScrollButtons: 'false',
-	nop: () => {},
-	preventBubblingOnKeyDown: 'false',
-	rtl: 'false'
-};
-
-// props vertical, nop, focusableScrollButtons, preventBubblingOnKeyDown, rtl
 describe('ScrollButtons specs', () => {
 	test('should run `updateButtons`', () => {
 		const functions = renderHook(() => useScrollButtons(props)).result.current;
@@ -62,4 +61,3 @@ describe('ScrollButtons specs', () => {
 		});
 	});
 });
-
