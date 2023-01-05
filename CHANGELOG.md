@@ -4,6 +4,11 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## Unreleased
 
+### Added
+
+- `agate/ImageITem` to have `imageItem`, `caption` and `image` publicClassnames
+- `agate/Popup` to have a `content` publicClassname
+
 ### Fixed
 
 - `agate/Panels/TabbedPanels` to not show console error when there is no children
