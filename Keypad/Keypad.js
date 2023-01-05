@@ -285,7 +285,9 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 				case 'backspace':
 					newCharIndex = charIndex;
 					newKeypadValue = newKeypadValue.substring(0, charIndex - 1) + newKeypadValue.substring(charIndex, newKeypadValue.length);
-					newCharIndex = newCharIndex - 1;
+					if (newCharIndex !== 0) {
+						newCharIndex = newCharIndex - 1;
+					}
 					break;
 
 				case 'phone':
