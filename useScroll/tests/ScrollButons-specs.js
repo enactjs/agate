@@ -23,49 +23,19 @@ describe('ScrollButton specs', () => {
 });
 
 describe('ScrollButtons specs', () => {
-	test('should run `updateButtons`', () => {
-		const functions = renderHook(() => useScrollButtons(props)).result.current;
-		act(() => {
-			functions.updateButtons({scrollLeft: 1, maxLeft: 0});
-		});
-
-		expect(true).toBe(true);
-	});
-
 	test('should return `true` for `isOneOfScrollButtonsFocused`', () => {
 		const functions = renderHook(() => useScrollButtons(props)).result.current;
 		let aux;
 		act(() => {
 			aux = functions.isOneOfScrollButtonsFocused();
+
+			// functions called in order to increase code coverage
+			functions.focusOnButton();
+			functions.onClickNext();
+			functions.onClickPrev();
+			functions.updateButtons({scrollLeft: 1, maxLeft: 0});
 		});
 
 		expect(aux).toBe(true);
-	});
-
-	test('should run `onClickPrev`', () => {
-		const functions = renderHook(() => useScrollButtons(props)).result.current;
-		act(() => {
-			functions.onClickPrev();
-		});
-
-		expect(true).toBe(true);
-	});
-
-	test('should run `onClickNext`', () => {
-		const functions = renderHook(() => useScrollButtons(props)).result.current;
-		act(() => {
-			functions.onClickNext();
-		});
-
-		expect(true).toBe(true);
-	});
-
-	test('should run `focusOnButton`', () => {
-		const functions = renderHook(() => useScrollButtons(props)).result.current;
-		act(() => {
-			functions.focusOnButton();
-		});
-
-		expect(true).toBe(true);
 	});
 });
