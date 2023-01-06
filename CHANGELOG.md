@@ -6,7 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
-- `agate/TabGroup` prop `onTabClick` to handle `onClick` event on it
+- `agate/TabGroup` prop `onSelect` to handle `onClick` event on it
 
 ### Fixed
 
