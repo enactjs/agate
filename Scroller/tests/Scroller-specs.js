@@ -11,7 +11,7 @@ const keyDownUp = (keyCode) => (elm) => {
 	return fireEvent.keyUp(elm, {keyCode});
 };
 
-const pressEnterKey = keyDownUp(14);
+const pressEnterKey = keyDownUp(13);
 const pressDownKey = keyDownUp(40);
 
 describe('Scroller', () => {
