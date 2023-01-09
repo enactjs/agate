@@ -6,7 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Added
 
-- `agate/ImageITem` to have `imageItem`, `caption` and `image` publicClassnames
+- `agate/ImageItem` to have `imageItem`, `caption` and `image` publicClassnames
 - `agate/Popup` to have a `content` publicClassname
 
 ### Fixed
