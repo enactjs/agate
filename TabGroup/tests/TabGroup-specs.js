@@ -1,11 +1,30 @@
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import Button from '../../Button';
 import TabGroup from '../TabGroup';
 import ThemeDecorator from '../../ThemeDecorator';
 
 describe('TabGroup Specs', () => {
+	test('should fire `onTabClick` with `onTabClick` type when a tab is clicked', () => {
+		const handleTabClick = jest.fn();
+		render(
+			<TabGroup
+				tabPosition="before"
+				tabs={[
+					{title: 'Home', icon: 'home', onTabClick: handleTabClick},
+					{title: 'Settings', icon: 'setting'},
+					{title: 'Theme', icon: 'display'}
+				]}
+			/>
+		);
+
+		userEvent.click(screen.getByRole('group').children[0]); // clicking tab
+
+		expect(handleTabClick).toHaveBeenCalled();
+	});
+
 	test('should render three tabs when given three objects in `tabs` prop', () => {
 		render(
 			<TabGroup
