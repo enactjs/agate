@@ -45,7 +45,7 @@
     "color-convert": "^2.0.1",
     "deep-freeze": "0.0.1",
     "eases": "^1.0.8",
-    "immer": "^9.0.16",
+    "immer": "^9.0.17",
     "invariant": "^2.2.4",
     "prop-types": "^15.8.1",
     "ramda": "^0.28.0",
@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "@enact/docs-utils": "^0.4.0",
-    "@enact/ui-test-utils": "^1.0.1",
+    "@enact/ui-test-utils": "^1.0.2",
     "eslint-config-enact-proxy": "^1.0.5",
     "ilib": "^14.15.1"
   }
