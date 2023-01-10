@@ -223,6 +223,7 @@ describe('Drawer', function () {
 		it('should have correct heading', async function () {
 			await drawerCommon.buttonDrawer4.click();
 			await Page.waitForOpen(drawer);
+			await browser.pause(400);
 
 			await expectNoneScrimOpen(drawerCommon);
 			await validateTitle(drawer, 'Drawer without scrim');
