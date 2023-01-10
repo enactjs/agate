@@ -293,6 +293,7 @@ describe('TimePicker', function () {
 			// go to 23 first
 			(await timePicker.decrementer(timePicker.hour)).click();
 			expect((await extractValues(timePicker)).hour).to.equal(23);
+			await browser.pause(500);
 			// now increment
 			(await timePicker.incrementer(timePicker.hour)).click();
 			expect((await extractValues(timePicker)).hour).to.equal(0);
