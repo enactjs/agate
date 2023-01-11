@@ -31,7 +31,6 @@ describe('Drawer', function () {
 
 		it('should not have a line under the heading text', async function () {
 			await drawerCommon.buttonDrawer1.click();
-
 			await Page.waitForOpen(drawer);
 
 			await expectOpen(drawerCommon);
@@ -50,7 +49,7 @@ describe('Drawer', function () {
 			it('should close drawer with cancel button on 5-way right in drawer container', async function () {
 				await Page.spotlightSelect();
 				await Page.waitForOpen(drawer);
-				await browser.pause(400);
+				// await browser.pause(400);
 
 				await expectOpen(drawerCommon);
 
@@ -58,7 +57,7 @@ describe('Drawer', function () {
 				await Page.spotlightSelect();
 
 				await Page.waitForClose(drawer);
-				await browser.pause(400);
+				// await browser.pause(400);
 
 				await expectClosed(drawerCommon);
 			});
@@ -77,11 +76,11 @@ describe('Drawer', function () {
 				await Page.waitForOpen(drawer);
 
 				await expectOpen(drawerCommon);
-				await browser.pause(400);
+				// await browser.pause(400);
 
 				await drawer.buttonCancel.click();
 				await Page.waitForClose(drawer);
-				await browser.pause(400);
+				// await browser.pause(400);
 
 				await expectClosed(drawerCommon);
 			});
@@ -121,7 +120,7 @@ describe('Drawer', function () {
 				await Page.spotlightSelect();
 				await Page.waitForClose(drawer);
 
-				await browser.pause(400);
+				// await browser.pause(400);
 				await expectClosed(drawerCommon);
 			});
 		});
@@ -178,7 +177,7 @@ describe('Drawer', function () {
 				await Page.spotlightRight();
 				await Page.spotlightSelect();
 				await Page.waitForOpen(drawer);
-				await browser.pause(400);
+				// await browser.pause(400);
 
 				await expectOpen(drawerCommon);
 
@@ -186,7 +185,7 @@ describe('Drawer', function () {
 				await Page.spotlightSelect();
 
 				await Page.waitForClose(drawer);
-				await browser.pause(400);
+				// await browser.pause(400);
 
 				await expectClosed(drawerCommon);
 			});
@@ -209,7 +208,7 @@ describe('Drawer', function () {
 
 				await drawer.buttonCancel.click();
 				await Page.waitForClose(drawer);
-				await browser.pause(400);
+				// await browser.pause(400);
 
 				await expectClosed(drawerCommon);
 			});
@@ -247,14 +246,14 @@ describe('Drawer', function () {
 				await Page.spotlightRight();
 				await Page.spotlightSelect();
 				await Page.waitForOpen(drawer);
-				await browser.pause(400);
+				// await browser.pause(400);
 
 				await expectNoneScrimOpen(drawerCommon);
 
 				await Page.spotlightRight();
 				await Page.spotlightSelect();
 				await Page.waitForClose(drawer);
-				await browser.pause(400);
+				// await browser.pause(400);
 
 				await expectClosed(drawerCommon);
 			});
@@ -271,13 +270,13 @@ describe('Drawer', function () {
 			it('should close the popup on click in drawer container', async function () {
 				drawerCommon.buttonDrawer4.click();
 				await Page.waitForOpen(drawer);
-				await browser.pause(400);
+				// await browser.pause(400);
 
 				await expectNoneScrimOpen(drawerCommon);
 
 				await drawer.buttonOK.click();
 				await Page.waitForClose(drawer);
-				await browser.pause(400);
+				// await browser.pause(400);
 
 				await expectClosed(drawerCommon);
 			});
@@ -290,7 +289,7 @@ describe('Drawer', function () {
 
 				await drawer.buttonCancel.click();
 				await Page.waitForClose(drawer);
-				await browser.pause(400);
+				// await browser.pause(400);
 
 				await expectClosed(drawerCommon);
 			});
