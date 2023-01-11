@@ -89,7 +89,6 @@ describe('Drawer', function () {
 
 		it('should have correct heading', async function () {
 			await drawerCommon.buttonDrawer2.click();
-			// await browser.pause(300); // needed to pass instead of waitTransitionEnd
 
 			await expectOpen(drawerCommon);
 			await validateTitle(drawer, 'Drawer without animation');
@@ -100,7 +99,6 @@ describe('Drawer', function () {
 			it('should open drawer', async function () {
 				await Page.spotlightRight();
 				await Page.spotlightSelect();
-				// await browser.pause(400); // needed to pass instead of waitTransitionEnd
 
 				await expectOpen(drawerCommon);
 				expect(await drawer.isOpen).to.be.true();
@@ -124,19 +122,15 @@ describe('Drawer', function () {
 
 			it('should open the drawer with scrim on click', async function () {
 				await drawerCommon.buttonDrawer2.click();
-				// await browser.pause(400); // needed to pass instead of waitTransitionEnd
 
 				await expectOpen(drawerCommon);
 			});
 
 			it('should close the drawer and scrim on cancel click in drawer container', async function () {
 				await drawerCommon.buttonDrawer2.click();
-				// await browser.pause(400); // needed to pass instead of waitTransitionEnd
-
 				await expectOpen(drawerCommon);
 
 				await drawer.buttonCancel.click();
-				// await browser.pause(400); // needed to pass instead of waitTransitionEnd
 
 				await expectClosed(drawerCommon);
 			});
