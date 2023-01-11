@@ -23,11 +23,9 @@ describe('Drawer', function () {
 
 		it('should have correct heading', async function () {
 			await drawerCommon.buttonDrawer1.click();
-			await browser.pause(400);
 			await Page.waitForOpen(drawer);
 
 			await expectOpen(drawerCommon);
-			await browser.pause(400);
 			await validateTitle(drawer, 'Drawer with no line');
 		});
 
@@ -157,11 +155,9 @@ describe('Drawer', function () {
 
 		it('should have correct heading', async function () {
 			await drawerCommon.buttonDrawer3.click();
-			await browser.pause(400);
 			await Page.waitForOpen(drawer);
 
 			await expectOpen(drawerCommon);
-			await browser.pause(400);
 			await validateTitle(drawer, 'Drawer with transparent scrim');
 		});
 
@@ -207,11 +203,9 @@ describe('Drawer', function () {
 
 			it('should close the drawer and scrim on cancel click in drawer container', async function () {
 				await drawerCommon.buttonDrawer3.click();
-				await browser.pause(400);
 				await Page.waitForOpen(drawer);
 
 				await expectOpen(drawerCommon);
-				await browser.pause(400);
 
 				await drawer.buttonCancel.click();
 				await Page.waitForClose(drawer);
@@ -228,11 +222,9 @@ describe('Drawer', function () {
 
 		it('should have correct heading', async function () {
 			await drawerCommon.buttonDrawer4.click();
-			await browser.pause(400);
 			await Page.waitForOpen(drawer);
 
 			await expectNoneScrimOpen(drawerCommon);
-			await browser.pause(400);
 			await validateTitle(drawer, 'Drawer without scrim');
 		});
 
