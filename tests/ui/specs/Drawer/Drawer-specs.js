@@ -207,9 +207,11 @@ describe('Drawer', function () {
 
 			it('should close the drawer and scrim on cancel click in drawer container', async function () {
 				await drawerCommon.buttonDrawer3.click();
+				await browser.pause(400);
 				await Page.waitForOpen(drawer);
 
 				await expectOpen(drawerCommon);
+				await browser.pause(400);
 
 				await drawer.buttonCancel.click();
 				await Page.waitForClose(drawer);
