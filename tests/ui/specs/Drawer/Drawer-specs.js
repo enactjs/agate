@@ -104,7 +104,7 @@ describe('Drawer', function () {
 				expect(await drawer.isOpen).to.be.true();
 			});
 
-			it('should close drawer with cancel button on 5-way right in drawer container', async function () {
+			it('should close drawer with cancel button on 5-way right in drawer container', async function () {
 				await Page.spotlightRight();
 				await Page.spotlightSelect();
 
@@ -161,7 +161,7 @@ describe('Drawer', function () {
 				expect(await drawer.isOpen).to.be.true();
 			});
 
-			it('should close drawer with cancel button on 5-way right in drawer container', async function () {
+			it('should close drawer with cancel button on 5-way right in drawer container', async function () {
 				await Page.spotlightRight();
 				await Page.spotlightRight();
 				await Page.spotlightSelect();
@@ -226,7 +226,7 @@ describe('Drawer', function () {
 				expect(await drawer.isOpen).to.be.true();
 			});
 
-			it('should close drawer with cancel button on 5-way right in drawer container', async function () {
+			it('should close drawer with cancel button on 5-way right in drawer container', async function () {
 				await Page.spotlightRight();
 				await Page.spotlightRight();
 				await Page.spotlightRight();
