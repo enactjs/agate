@@ -79,7 +79,6 @@ describe('SwitchItem', function () {
 			it('should re-select the item when selected twice', async function () {
 				await switchItem.focus();
 				await Page.spotlightSelect();
-				await switchItem.focus();
 				await Page.spotlightSelect();
 				expect(await switchItem.isSelected).to.be.true();
 			});
