@@ -1,4 +1,5 @@
 import {mergeComponentMetadata} from '@enact/storybook-utils';
+import {action} from '@enact/storybook-utils/addons/actions';
 import {select} from '@enact/storybook-utils/addons/controls';
 import Button from '@enact/agate/Button';
 import TabGroup from '@enact/agate/TabGroup';
@@ -13,8 +14,10 @@ export default {
 
 export const _TabGroup = (args) => {
 	const orientation = args['orientation'];
+
 	return (
 		<TabGroup
+			onSelect={action('onSelect')}
 			orientation={orientation}
 			tabPosition={args['tabPosition']}
 			tabs={[
