@@ -42,6 +42,30 @@ describe('Picker Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
+	test('should wrap to the beginning of the value range if \'wrap\' is true', () => {
+		const handleChange = jest.fn();
+		render(<Picker index={0} max={0} min={-1} onChange={handleChange} value={0} wrap />);
+
+		increment(0);
+
+		const expected = -1;
+		const actual = handleChange.mock.calls[0][0].value;
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should wrap to the end of the value range if \'wrap\' is true', () => {
+		const handleChange = jest.fn();
+		render(<Picker index={0} max={1} min={0} onChange={handleChange} value={0} wrap />);
+
+		decrement(0);
+
+		const expected = 1;
+		const actual = handleChange.mock.calls[0][0].value;
+
+		expect(actual).toBe(expected);
+	});
+
 	test('should not run the onChange handler when disabled', () => {
 		const handleChange = jest.fn();
 		render(<Picker disabled index={0} max={0} min={0} onChange={handleChange} value={0} />);
