@@ -1,16 +1,43 @@
+import ri from '@enact/ui/resolution';
 import '@testing-library/jest-dom';
-import {render, screen} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import Scroller from '../Scroller';
+
+const focus = (elm) => fireEvent.focus(elm);
+const keyDownUp = (keyCode) => (elm) => {
+	fireEvent.keyDown(elm, {keyCode});
+	return fireEvent.keyUp(elm, {keyCode});
+};
+
+const pressEnterKey = keyDownUp(13);
+const pressDownKey = keyDownUp(40);
 
 describe('Scroller', () => {
 	let contents;
 
 	beforeEach(() => {
 		contents = (
-			<div>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
-				Aenean id blandit nunc. Donec lacinia nisi vitae mi dictum, eget pulvinar nunc tincidunt. Integer vehicula tempus rutrum. Sed efficitur neque in arcu dignissim cursus.
+			<div
+				style={{
+					height: ri.scaleToRem(2004),
+					width: ri.scaleToRem(4002)
+				}}
+			>
+				<div>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />
+					Aenean id blandit nunc. Donec lacinia nisi vitae mi dictum, eget pulvinar nunc tincidunt. Integer vehicula tempus rutrum. Sed efficitur neque in arcu dignissim cursus.
+				</div>
+				<div
+					style={{
+						marginTop: ri.scaleToRem(1602)
+					}}
+				>
+					<div>
+						Mauris blandit sollicitudin mattis. Fusce commodo arcu vitae risus consectetur sollicitudin. Aliquam eget posuere orci. Cras pellentesque lobortis sapien non lacinia.
+					</div>
+				</div>
 			</div>
 		);
 	});
@@ -56,6 +83,11 @@ describe('Scroller', () => {
 				const expectedClass = 'vertical';
 				const actual = scrollButtons[0].parentElement;
 
+				// dispatching key event to increase code coverage
+				focus(scrollButtons[1]);
+				pressDownKey(scrollButtons[1]);
+				pressEnterKey(scrollButtons[1]);
+
 				expect(scrollButtons).toHaveLength(expectedLength);
 				expect(actual).toHaveClass(expectedClass);
 			}
@@ -77,6 +109,10 @@ describe('Scroller', () => {
 				const expectedLength = 2;
 				const expectedClass = 'horizontal';
 				const actual = scrollButtons[0].parentElement;
+
+				// dispatching click event to increase code coverage
+				focus(scrollButtons[1]);
+				userEvent.click(scrollButtons[1]);
 
 				expect(scrollButtons).toHaveLength(expectedLength);
 				expect(actual).toHaveClass(expectedClass);
@@ -254,6 +290,28 @@ describe('Scroller', () => {
 			const expectedAttribute = 'aria-label';
 
 			expect(rightButton).toHaveAttribute(expectedAttribute, label);
+		});
+
+		test('should change focus on arrow key if `focusableScrollbar`', () => {
+			jest.useFakeTimers();
+			const spy = jest.fn();
+			render(
+				<Scroller
+					focusableScrollbar
+					horizontalScrollbar="visible"
+					onScrollStart={spy}
+					verticalScrollbar="visible"
+				>
+					{contents}
+				</Scroller>
+			);
+
+			const buttons = screen.getAllByRole('button');
+
+			focus(buttons[0]);
+			pressDownKey(buttons[0]);
+
+			expect(document.activeElement).toBe(buttons[1]);
 		});
 	});
 });
