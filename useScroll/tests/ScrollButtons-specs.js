@@ -13,7 +13,8 @@ const props = {
 };
 
 describe('ScrollButton specs', () => {
-	test('should accept a function as `forwardRef` prop', () => {
+	// ref property can't be accessed with react testing library. This test is only for increasing code coverage - [feature/WRP-3081]
+	test('should accept a function as `ref` prop', () => {
 		render(<ScrollButton icon="circle" ref={() => {}} />);
 
 		const button = screen.getByRole('button');
