@@ -45,7 +45,7 @@
     "color-convert": "^2.0.1",
     "deep-freeze": "0.0.1",
     "eases": "^1.0.8",
-    "immer": "^9.0.17",
+    "immer": "^9.0.18",
     "invariant": "^2.2.4",
     "prop-types": "^15.8.1",
     "ramda": "^0.28.0",
