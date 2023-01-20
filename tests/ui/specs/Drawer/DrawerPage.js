@@ -77,21 +77,21 @@ class DrawerPage extends Page {
 		$('#floatLayer').click();
 	}
 
-	waitForOpen (selector, timeout) {
+	async waitForOpen (selector, timeout) {
 		if (typeof selector !== 'string') {
 			selector = `#${selector.id}`;
 		}
 
-		$(selector).waitForExist({timeout});
-		this.delay(2000);
+		await $(selector).waitForExist({timeout});
+		await this.delay(2000);
 	}
 
-	waitForClose (selector, timeout) {
+	async waitForClose (selector, timeout) {
 		if (typeof selector !== 'string') {
 			selector = `#${selector.id}`;
 		}
 
-		$(selector).waitForExist({timeout, reverse: true});
+		await $(selector).waitForExist({timeout, reverse: true});
 	}
 }
 
