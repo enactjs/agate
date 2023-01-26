@@ -6,7 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
-- `agate/Keypad` to input correct value `onChange`
+- `agate/Keypad` to fire `onChange` event with a correct value payload
 - `agate/Panels/TabbedPanels` to not show console error when there is no children
 
 ## [2.0.3] - 2022-12-14
