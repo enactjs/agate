@@ -2,12 +2,22 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
-## Unreleased
+## [unreleased]
+
+### Added
+
+- `agate/TabGroup` prop `onSelect` to handle `onClick` event on it
+
+### Added
+
+- `agate/ImageItem` to have `imageItem`, `caption` and `image` publicClassnames
+- `agate/Popup` to have a `content` publicClassname
 
 ### Fixed
 
 - `agate/Keypad` to fire `onChange` event with a correct value payload
 - `agate/Panels/TabbedPanels` to not show console error when there is no children
+- `agate/TabGroup` to pass `onSelect` to `ui/Group`
 
 ## [2.0.3] - 2022-12-14
 

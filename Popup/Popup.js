@@ -262,7 +262,7 @@ const PopupBase = kind({
 	styles: {
 		css: componentCss,
 		className: 'popup',
-		publicClassNames: ['popup', 'body', 'popupTransitionContainer', 'top', 'right', 'bottom', 'left']
+		publicClassNames: ['popup', 'body', 'content', 'popupTransitionContainer', 'top', 'right', 'bottom', 'left']
 	},
 	computed: {
 		// When passing `aria-live` prop to the Popup, the prop should work first.
