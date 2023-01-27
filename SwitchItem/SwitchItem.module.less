@@ -37,6 +37,12 @@
 
 		.focus({
 			border-color: @agate-switchitem-focus-border-color;
+
+			&.selected {
+				.label {
+					color: @agate-switchitem-label-selected-color;
+				}
+			}
 		});
 	});
 }
