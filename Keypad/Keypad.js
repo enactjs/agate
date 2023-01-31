@@ -144,15 +144,6 @@ const KeypadBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
-		 * Called when the value is changed.
-		 *
-		 * @type {Function}
-		 * @param {Object} event
-		 * @public
-		 */
-		onChange: PropTypes.func,
-
-		/**
 		 * Called when a button is clicked. Includes the 'key' key in its event payload and updates the state.
 		 *
 		 * @type {Function}
@@ -348,6 +339,16 @@ const KeypadDecorator = compose(
  * @ui
  */
 const Keypad = KeypadDecorator(KeypadBase);
+
+/**
+ * Called when the input value is changed.
+ *
+ * @name onChange
+ * @memberof agate/Keypad.KeypadDecorator
+ * @type {Function}
+ * @param {Object} event
+ * @public
+ */
 
 export default Keypad;
 export {
