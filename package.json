@@ -45,22 +45,22 @@
     "color-convert": "^2.0.1",
     "deep-freeze": "0.0.1",
     "eases": "^1.0.8",
-    "immer": "^9.0.18",
+    "immer": "^9.0.19",
     "invariant": "^2.2.4",
     "prop-types": "^15.8.1",
     "ramda": "^0.28.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "warning": "^4.0.3",
-    "ilib": "^14.15.1"
+    "ilib": "^14.16.0"
   },
   "peerDependencies": {
-    "ilib": "^14.15.1 || ^14.15.1-webos1"
+    "ilib": "^14.16.0 || ^14.16.0-webos1"
   },
   "devDependencies": {
     "@enact/docs-utils": "^0.4.0",
     "@enact/ui-test-utils": "^1.0.2",
     "eslint-config-enact-proxy": "^1.0.5",
-    "ilib": "^14.15.1"
+    "ilib": "^14.16.0"
   }
 }
