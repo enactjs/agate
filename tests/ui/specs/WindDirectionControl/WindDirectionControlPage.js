@@ -1,6 +1,6 @@
 'use strict';
 // const {getText, Page} = require('@enact/ui-test-utils/utils');
-import {getText, Page} from '@enact/ui-test-utils/utils';
+import {getText, Page} from '@enact/ui-test-utils/utils/index.js';
 
 class WindDirectionControlInterface {
 	constructor (id) {
