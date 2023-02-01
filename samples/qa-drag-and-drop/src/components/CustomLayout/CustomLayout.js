@@ -34,23 +34,21 @@ const CustomLayoutBase = kind({
 	render: ({arranging, bottom, center, top, ...rest}) => {
 		return (
 			<Layout {...rest} orientation="vertical">
-				<Layout {...rest} orientation="vertical">
-					<Cell shrink>
-						<Layout>
-							{top || arranging ? <DraggableCell containerShape={containerShapes.top} name="top">{top}</DraggableCell> : null}
-						</Layout>
-					</Cell>
-					<Cell shrink>
-						<Layout>
-							{center || arranging ? <DraggableCell containerShape={containerShapes.center} name="center">{center}</DraggableCell> : null}
-						</Layout>
-					</Cell>
-					<Cell shrink>
-						<Layout>
-							{bottom || arranging ? <DraggableCell containerShape={containerShapes.bottom} name="bottom">{bottom}</DraggableCell> : null}
-						</Layout>
-					</Cell>
-				</Layout>
+				<Cell shrink>
+					<Layout>
+						{top || arranging ? <DraggableCell containerShape={containerShapes.top} name="top">{top}</DraggableCell> : null}
+					</Layout>
+				</Cell>
+				<Cell shrink>
+					<Layout>
+						{center || arranging ? <DraggableCell containerShape={containerShapes.center} name="center">{center}</DraggableCell> : null}
+					</Layout>
+				</Cell>
+				<Cell shrink>
+					<Layout>
+						{bottom || arranging ? <DraggableCell containerShape={containerShapes.bottom} name="bottom">{bottom}</DraggableCell> : null}
+					</Layout>
+				</Cell>
 			</Layout>
 		);
 	}
