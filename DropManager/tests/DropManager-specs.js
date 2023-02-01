@@ -2,8 +2,7 @@ import {Layout, Cell} from '@enact/ui/Layout';
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
 
-import {Draggable} from '../DropManager';
-import Droppable from "../DropManager";
+import Droppable, {Draggable} from '../DropManager';
 
 describe('DropManager Specs', () => {
 	const allSlotNames = ['bottom', 'center', 'top'];
@@ -44,5 +43,27 @@ describe('DropManager Specs', () => {
 		expect(topSlot).toBeInTheDocument();
 		expect(centerSlot).toBeInTheDocument();
 		expect(bottomSlot).toBeInTheDocument();
+	});
+
+	test('should change `data-slot` value when changing `arrangement`', () => {
+		const {rerender} = render(
+			<Component arrangeable arrangement={{bottom: "bottom", center: "center", top: "top"}}>
+				<top />
+				<center />
+				<bottom />
+			</Component>
+		);
+
+		rerender(
+			<Component arrangeable arrangement={{bottom: "center", center: "top", top: "bottom"}}>
+				<top />
+				<center />
+				<bottom />
+			</Component>
+		);
+
+		const topSlot = screen.getByText('top');
+
+		expect(topSlot).toHaveAttribute('data-slot', 'bottom');
 	});
 });
