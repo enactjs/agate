@@ -340,16 +340,6 @@ const KeypadDecorator = compose(
  */
 const Keypad = KeypadDecorator(KeypadBase);
 
-/**
- * Called when the input value is changed.
- *
- * @name onChange
- * @memberof agate/Keypad.KeypadDecorator
- * @type {Function}
- * @param {Object} event
- * @public
- */
-
 export default Keypad;
 export {
 	Keypad,
