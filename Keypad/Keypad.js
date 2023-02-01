@@ -144,7 +144,7 @@ const KeypadBase = kind({
 		disabled: PropTypes.bool,
 
 		/**
-		 * Called when a button is clicked. Includes the 'key' key in its event payload, updates the state and the input value accordingly.
+		 * Called when a button is clicked. Includes the 'key' key in its event payload and updates the state.
 		 *
 		 * @type {Function}
 		 * @param {Object} event
@@ -248,39 +248,13 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 
 		static propTypes = /** @lends agate/Keypad.KeypadBehaviorDecorator.prototype */ {
 			/**
-			 * Applies a disabled style and the control becomes non-interactive.
-			 *
-			 * @type {Boolean}
-			 * @default false
-			 * @public
-			 */
-			disabled: PropTypes.bool,
-
-			/**
-			 * Called when a button is clicked. Includes the 'key' key in its event payload, updates the state and the input value accordingly.
+			 * Called when the value is changed.
 			 *
 			 * @type {Function}
 			 * @param {Object} event
 			 * @public
 			 */
-			handleInputValue: PropTypes.func,
-
-			/**
-			 * Called when the input value is changed.
-			 *
-			 * @type {Function}
-			 * @param {Object} event
-			 * @public
-			 */
-			onChange: PropTypes.func,
-
-			/**
-			 * The value of the input.
-			 *
-			 * @type {String}
-			 * @public
-			 */
-			value: PropTypes.string
+			onChange: PropTypes.func
 		};
 
 		constructor (props) {
@@ -288,21 +262,23 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 
 			this.state = {
 				charIndex: 0,
-				keypadInput: ''
+				keypadValue: ''
 			};
 		}
 
-		handleInputValue = (keyValue) => {
-			const {charIndex, keypadInput} = this.state;
-			let newKeypadInput = keypadInput;
+		handleKeypadValue = (keyValue) => {
+			const {charIndex, keypadValue} = this.state;
+			let newKeypadValue = keypadValue;
 			let newCharIndex;
 
 			switch (keyValue) {
 				case 'arrowuturn':
 				case 'backspace':
 					newCharIndex = charIndex;
-					newKeypadInput = newKeypadInput.substring(0, charIndex - 1) + newKeypadInput.substring(charIndex, newKeypadInput.length);
-					newCharIndex = newCharIndex - 1;
+					newKeypadValue = newKeypadValue.substring(0, charIndex - 1) + newKeypadValue.substring(charIndex, newKeypadValue.length);
+					if (newCharIndex !== 0) {
+						newCharIndex = newCharIndex - 1;
+					}
 					break;
 
 				case 'phone':
@@ -310,31 +286,31 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 				case 'calldecline':
 				case 'keypad':
 					newCharIndex = 0;
-					newKeypadInput = '';
+					newKeypadValue = '';
 					break;
 
 				default:
 					newCharIndex = charIndex;
-					newKeypadInput = newKeypadInput.substring(0, charIndex) + keyValue + newKeypadInput.substring(charIndex);
+					newKeypadValue = newKeypadValue.substring(0, charIndex) + keyValue + newKeypadValue.substring(charIndex);
 					newCharIndex = newCharIndex + 1;
 					break;
 			}
 
-			if (keypadInput !== newKeypadInput) {
+			if (keypadValue !== newKeypadValue) {
 				forward('onChange', {
-					value: newKeypadInput
+					value: newKeypadValue
 				}, this.props);
 			}
 
 			this.setState({
 				charIndex: newCharIndex,
-				keypadInput: newKeypadInput
+				keypadValue: newKeypadValue
 			});
 		};
 
 		render () {
 			return (
-				<Wrapped {...this.props} onKeyButtonClick={this.handleInputValue} />
+				<Wrapped {...this.props} onKeyButtonClick={this.handleKeypadValue} />
 			);
 		}
 	};
@@ -359,7 +335,6 @@ const KeypadDecorator = compose(
  * @class Keypad
  * @memberof agate/Keypad
  * @extends agate/Keypad.KeypadBase
- * @mixes agate/Keypad.KeypadDecorator
  * @public
  * @ui
  */
