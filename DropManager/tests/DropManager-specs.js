@@ -2,7 +2,8 @@ import {Layout, Cell} from '@enact/ui/Layout';
 import '@testing-library/jest-dom';
 import {render, screen} from '@testing-library/react';
 
-import Droppable, {Draggable} from '../DropManager';
+import Button from '../../Button';
+import Droppable, {Draggable, ResponsiveBox} from '../DropManager';
 
 describe('DropManager Specs', () => {
 	const allSlotNames = ['bottom', 'center', 'top'];
@@ -13,11 +14,25 @@ describe('DropManager Specs', () => {
 		top:    {orientation: 'landscape', edges: {top: true}}
 	};
 
+	const ResponsiveLayout = ResponsiveBox(({containerShape, ...rest}) => {
+		const orientation = (containerShape.orientation === 'portrait') ? 'vertical' : 'horizontal';
+		const {right, left} = containerShape.edges;
+		let axisAlign = 'space-evenly';
+		if (left) axisAlign = 'start';
+		else if (right) axisAlign = 'end';
+
+		return (
+			<Layout align={'center ' + axisAlign} orientation={orientation} {...rest} />
+		);
+	});
+
 	const CustomLayoutBase = () => {
 		return (
 			<Layout orientation="vertical">
 				<DraggableCell containerShape={containerShapes.top} name="top">top</DraggableCell>
-				<DraggableCell containerShape={containerShapes.center} name="center">center</DraggableCell>
+				<ResponsiveLayout>
+					<DraggableCell containerShape={containerShapes.center} name="center">center</DraggableCell>
+				</ResponsiveLayout>
 				<DraggableCell containerShape={containerShapes.bottom} name="bottom">bottom</DraggableCell>
 			</Layout>
 		);
@@ -65,5 +80,28 @@ describe('DropManager Specs', () => {
 		const topSlot = screen.getByText('top');
 
 		expect(topSlot).toHaveAttribute('data-slot', 'bottom');
+	});
+
+	test('should have `responsive layout` with `align-items: center` and `justify-content: space-evenly` style', () => {
+		render(
+			<Component arrangeable arrangement={{bottom: "bottom", center: "center", top: "top"}}>
+				<top />
+				<center>
+					<ResponsiveLayout>
+						<Cell shrink>
+							<Button>1</Button>
+						</Cell>
+						<Cell shrink>
+							<Button>2</Button>
+						</Cell>
+					</ResponsiveLayout>
+				</center>
+				<bottom />
+			</Component>
+		);
+
+		const responsiveLayout = screen.getByText('center').parentElement;
+
+		expect(responsiveLayout).toHaveStyle({'align-items': 'center', 'justify-content': 'space-evenly'});
 	});
 });
