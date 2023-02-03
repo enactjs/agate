@@ -38,9 +38,7 @@ describe('DropManager Specs', () => {
 		);
 	};
 
-	const Component = Droppable({arrangingProp: 'arranging', slots: allSlotNames},
-		CustomLayoutBase
-	);
+	const Component = Droppable({slots: allSlotNames}, CustomLayoutBase);
 
 	test('should render `top`, `center` and `bottom` slots', () => {
 		console.error = jest.fn(); // eslint-disable-line no-console
