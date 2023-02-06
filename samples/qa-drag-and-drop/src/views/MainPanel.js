@@ -44,7 +44,7 @@ const MainPanel = (props) => {
 			</Heading>
 			<CustomLayout arrangeable={editLayout} arrangement={arrangement} onArrange={handleArrangement}>
 				<top>
-					<Item className={css.firstItem}>Drag me</Item>
+					<Item className={css.firstItem} css={css}>Drag me</Item>
 				</top>
 				<center>
 					<ResponsiveLayout style={{height: '201px'}}>
@@ -53,7 +53,7 @@ const MainPanel = (props) => {
 					</ResponsiveLayout>
 				</center>
 				<bottom>
-					<Item className={css.secondItem}>Drag me too</Item>
+					<Item className={css.secondItem} css={css}>Drag me too</Item>
 				</bottom>
 			</CustomLayout>
 			<Button onClick={handleEditing}>{!editLayout ? 'Edit Layout' : 'Done Editing'}</Button>

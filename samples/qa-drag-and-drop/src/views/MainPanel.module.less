@@ -1,5 +1,7 @@
 // MainPanel.module.less
 //
+@import '~@enact/agate/styles/mixins.less';
+@import '~@enact/agate/styles/skin.less';
 
 .mainPanel {
     .firstItem, .secondItem {
@@ -13,4 +15,19 @@
     .secondItem {
         background-color: #aba534;
     }
+}
+.item {
+    .applySkins({
+        &.firstItem {
+            .focus({
+                border-color: #d95000;
+            })
+        }
+
+        &.secondItem {
+            .focus({
+                border-color: #aba534;
+            })
+        }
+    });
 }
