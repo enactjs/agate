@@ -22,7 +22,6 @@ const CustomLayoutBase = kind({
 		arranging: PropTypes.bool,
 		bottom: PropTypes.node,
 		center: PropTypes.node,
-		children: PropTypes.node,
 		top: PropTypes.node
 	},
 
