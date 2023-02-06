@@ -93,6 +93,7 @@ const HorizontalDifferenctWidthItemList = (props) => {
 				minSize: oneLineSize,
 				size: itemSize
 			}}
+			scrollMode="native"
 			spacing={spacing}
 			style={{height: '300px', paddingBottom: `${ri.scale(36)}px`}}
 		/>
