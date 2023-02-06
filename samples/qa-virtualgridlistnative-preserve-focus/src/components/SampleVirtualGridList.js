@@ -32,6 +32,7 @@ const SampleVirtualGridList = ({index, onClick, ...rest}) => {
 				minWidth: ri.scale(339),
 				minHeight: ri.scale(339)
 			}}
+			scrollMode="native"
 			spacing={ri.scale(10)}
 			spotlightId={id}
 		/>
