@@ -61,7 +61,7 @@ describe('DropManager Specs', () => {
 
 	test('should change `data-slot` value when changing `arrangement`', () => {
 		const {rerender} = render(
-			<Component arrangeable arrangement={{bottom: "bottom", center: "center", top: "top"}} data-testid="dropManager">
+			<Component arrangeable arrangement={{bottom: 'bottom', center: 'center', top: 'top'}} data-testid="dropManager">
 				<top />
 				<center />
 				<bottom />
@@ -73,7 +73,7 @@ describe('DropManager Specs', () => {
 		expect(topSlot).toHaveAttribute('data-slot', 'top');
 
 		rerender(
-			<Component arrangeable arrangement={{bottom: "center", center: "top", top: "bottom"}} data-testid="dropManager">
+			<Component arrangeable arrangement={{bottom: 'center', center: 'top', top: 'bottom'}} data-testid="dropManager">
 				<top />
 				<center />
 				<bottom />
@@ -105,6 +105,6 @@ describe('DropManager Specs', () => {
 
 		const responsiveLayout = screen.getByTestId('center').parentElement.parentElement;
 
-		expect(responsiveLayout).toHaveStyle({'align-items': 'center', 'justify-content': 'space-evenly'});
+		expect(responsiveLayout).toHaveStyle({alignItems: 'center', justifyContent: 'space-evenly'});
 	});
 });
