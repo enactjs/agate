@@ -8,6 +8,7 @@ import Heading from '@enact/agate/Heading';
 import Item from '@enact/agate/Item';
 import {Panel} from '@enact/agate/Panels';
 import Layout, {Cell} from '@enact/ui/Layout';
+import {scaleToRem} from '@enact/ui/resolution';
 
 import CustomLayout from '../components/CustomLayout';
 
@@ -42,12 +43,12 @@ const MainPanel = (props) => {
 			<Heading showLine>
 				Agate Drag & Drop
 			</Heading>
-			<CustomLayout arrangeable={editLayout} arrangement={arrangement} onArrange={handleArrangement}>
+			<CustomLayout arrangeable={editLayout} arrangement={arrangement} onArrange={handleArrangement} style={{maxHeight: scaleToRem(300)}}>
 				<top>
 					<Item className={css.firstItem} css={css}>Drag me</Item>
 				</top>
 				<center>
-					<ResponsiveLayout style={{height: '201px'}}>
+					<ResponsiveLayout style={{height: scaleToRem(150)}}>
 						<Cell component={Button} shrink>1</Cell>
 						<Cell component={Button} shrink>2</Cell>
 					</ResponsiveLayout>
