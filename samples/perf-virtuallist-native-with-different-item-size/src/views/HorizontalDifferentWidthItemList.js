@@ -98,7 +98,6 @@ const HorizontalDifferenctWidthItemList = (props) => {
 			style={{height: '300px', paddingBottom: `${ri.scale(36)}px`}}
 		/>
 	);
-
 };
 
 export default HorizontalDifferenctWidthItemList;
