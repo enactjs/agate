@@ -296,6 +296,7 @@ describe('TimePicker', function () {
 			await browser.pause(500);
 			// now increment
 			(await timePicker.incrementer(timePicker.hour)).click();
+			await browser.pause(500);
 			expect((await extractValues(timePicker)).hour).to.equal(0);
 		});
 
