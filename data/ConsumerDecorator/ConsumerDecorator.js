@@ -80,7 +80,6 @@ const ConsumerDecorator = hoc(defaultConfig, (config, Wrapped) => {
 				...mapper(this.context.state, this.props),
 				...this.handlers
 			};
-			console.log(props);
 
 			return (
 				<Wrapped {...props} />

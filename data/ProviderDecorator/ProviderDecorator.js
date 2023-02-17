@@ -81,7 +81,6 @@ const ProviderDecorator = hoc(defaultConfig, (config, Wrapped) => {
 				state: this.getState(this.state),
 				updateAppState: this.updateAppState
 			};
-			console.log(context);
 
 			return (
 				<Context.Provider value={context}>
