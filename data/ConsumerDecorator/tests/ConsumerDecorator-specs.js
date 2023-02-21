@@ -1,48 +1,100 @@
-import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
+import {render} from '@testing-library/react';
 import compose from 'ramda/src/compose';
 
 import ConsumerDecorator from '../ConsumerDecorator';
 import {AppContext, ProviderDecorator} from '../../ProviderDecorator';
 
-let data = [];
+let componentAProps = [];
+let componentBProps = [];
 
 const componentAState = {
-	firstState: 'firstState',
-	secondState: 'secondState'
+	componentAState: 'componentAState'
+};
+const componentBState = {
+	componentBState: 'componentBState'
 };
 
 const BaseComponentA = (props) => {
+	componentAProps = props;
 
-	data = props;
-	console.log(data);
-	console.log(typeof data.secondhandler);
-
-	return <AppContext.Provider value="test"><div {...props} /></AppContext.Provider>;
-};
+	return <AppContext.Provider value="defaultValue"><div /></AppContext.Provider>;
+}
 
 const ComponentDecorator = compose(
 	ProviderDecorator({
 		state: componentAState
 	}),
 	ConsumerDecorator({
-		mapStateToProps: function () {
-			return {
-				firsthandler: () => {
-					return {
-						firstHandler: 'firstHandler'
-					};
-				},
-				secondhandler: 'secondHandler'
-			};
-		}
+		handlers: {
+			defaultHandler: jest.fn()
+		},
+		// added for code coverage purposes. `mount` is not accessible through props
+		mount: () => {
+			return jest.fn();
+		},
+		mapStateToProps: () => ({
+			defaultState: componentAState.componentAState
+		})
 	})
 );
 
 const ComponentA = ComponentDecorator(BaseComponentA);
 
+// ComponentB created for testing `mapStateToProps` defined as an object
+const ComponentBBase = (props) => {
+	componentBProps = props;
+
+	return <AppContext.Provider value="test"><div /></AppContext.Provider>;
+};
+
+const ComponentDecoratorB = compose(
+	ProviderDecorator({
+		state: componentBState
+	}),
+	ConsumerDecorator({
+		mapStateToProps: {
+			stringProp: 'stringProp',
+			functionProp: jest.fn(() => 'functionProp')
+		}
+	})
+);
+
+const ComponentB = ComponentDecoratorB(ComponentBBase);
+
 describe('ConsumerDecorator specs', () => {
-	test('initial test', () => {
+	test('should pass a handler to the wrapped component', () => {
 		render(<ComponentA />);
+
+		const expected = 'function';
+		const actual = typeof componentAProps.defaultHandler;
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should pass the `componentAState` state to props to the wrapped component', () => {
+		render(<ComponentA />);
+
+		const expected = 'componentAState';
+		const actual = componentAProps.defaultState;
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should pass the state to props if the type is function', () => {
+		render(<ComponentB />);
+
+		const actual = componentBProps.functionProp;
+
+		expect(actual).not.toBe(null);
+	});
+
+	test('should not pass the state to props if the type is not function', () => {
+		render(<ComponentB />);
+
+		const actual = componentBProps.stringProp;
+
+		// eslint-disable-next-line no-undefined
+		expect(actual).toBe(undefined);
 	});
 });
