@@ -11,7 +11,7 @@ const DraggableCell = Draggable(Cell);
 
 const containerShapes = {
 	bottom: {orientation: 'landscape', edges: {bottom: true}},
-	center: {orientation: 'portrait', edges: {top: false, bottom: false}},
+	center: {orientation: 'portrait',  edges: {top: false, bottom: false}},
 	top:    {orientation: 'landscape', edges: {top: true}}
 };
 

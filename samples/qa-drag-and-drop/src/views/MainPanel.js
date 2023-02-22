@@ -1,7 +1,5 @@
 /* eslint-disable react/jsx-no-bind */
 
-import {useState} from 'react';
-
 import Button from '@enact/agate/Button';
 import {ResponsiveBox} from '@enact/agate/DropManager';
 import Heading from '@enact/agate/Heading';
@@ -9,6 +7,7 @@ import Item from '@enact/agate/Item';
 import {Panel} from '@enact/agate/Panels';
 import Layout, {Cell} from '@enact/ui/Layout';
 import {scaleToRem} from '@enact/ui/resolution';
+import {useState} from 'react';
 
 import CustomLayout from '../components/CustomLayout';
 
@@ -30,8 +29,8 @@ const MainPanel = (props) => {
 	const [arrangement, setArrangement] = useState({bottom: "bottom", center: "center", top: "top"});
 	const [editLayout, setEditLayout] = useState(false);
 
-	const handleArrangement = () => {
-		setArrangement(arrangement);
+	const handleArrangement = (ev) => {
+		setArrangement(ev.arrangement);
 	};
 
 	const handleEditing = () => {
@@ -43,12 +42,12 @@ const MainPanel = (props) => {
 			<Heading showLine>
 				Agate Drag & Drop
 			</Heading>
-			<CustomLayout arrangeable={editLayout} arrangement={arrangement} onArrange={handleArrangement} style={{maxHeight: scaleToRem(300)}}>
+			<CustomLayout arrangeable={editLayout} arrangement={arrangement} onArrange={handleArrangement} style={{height: scaleToRem(690)}}>
 				<top>
 					<Item className={css.firstItem} css={css}>Drag me</Item>
 				</top>
 				<center>
-					<ResponsiveLayout style={{height: scaleToRem(150)}}>
+					<ResponsiveLayout style={{height: scaleToRem(300)}}>
 						<Cell component={Button} shrink>1</Cell>
 						<Cell component={Button} shrink>2</Cell>
 					</ResponsiveLayout>
