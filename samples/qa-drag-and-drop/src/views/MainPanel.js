@@ -15,10 +15,7 @@ import css from './MainPanel.module.less';
 
 const ResponsiveLayout = ResponsiveBox(({containerShape, ...rest}) => {
 	const orientation = (containerShape.orientation === 'portrait') ? 'vertical' : 'horizontal';
-	const {right, left} = containerShape.edges;
 	let axisAlign = 'space-evenly';
-	if (left) axisAlign = 'start';
-	else if (right) axisAlign = 'end';
 
 	return (
 		<Layout align={'center ' + axisAlign} orientation={orientation} {...rest} />
