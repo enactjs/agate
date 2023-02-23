@@ -21,7 +21,7 @@ const BaseComponentA = (props) => {
 	return <AppContext.Provider value="defaultValue"><div /></AppContext.Provider>;
 }
 
-const ComponentDecorator = compose(
+const ComponentADecorator = compose(
 	ProviderDecorator({
 		state: componentAState
 	}),
@@ -30,25 +30,23 @@ const ComponentDecorator = compose(
 			defaultHandler: jest.fn()
 		},
 		// added for code coverage purposes. `mount` is not accessible through props
-		mount: () => {
-			return jest.fn();
-		},
+		mount: () => {},
 		mapStateToProps: () => ({
 			defaultState: componentAState.componentAState
 		})
 	})
 );
 
-const ComponentA = ComponentDecorator(BaseComponentA);
+const ComponentA = ComponentADecorator(BaseComponentA);
 
 // ComponentB created for testing `mapStateToProps` defined as an object
-const ComponentBBase = (props) => {
+const BaseComponentB = (props) => {
 	componentBProps = props;
 
 	return <AppContext.Provider value="test"><div /></AppContext.Provider>;
 };
 
-const ComponentDecoratorB = compose(
+const ComponentBDecorator = compose(
 	ProviderDecorator({
 		state: componentBState
 	}),
@@ -60,7 +58,7 @@ const ComponentDecoratorB = compose(
 	})
 );
 
-const ComponentB = ComponentDecoratorB(ComponentBBase);
+const ComponentB = ComponentBDecorator(BaseComponentB);
 
 describe('ConsumerDecorator specs', () => {
 	test('should pass a handler to the wrapped component', () => {
