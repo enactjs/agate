@@ -2,6 +2,21 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [2.0.4] - 2023-02-24
+
+### Added
+
+- `agate/ImageItem` to have `imageItem`, `caption` and `image` publicClassnames
+- `agate/Popup` to have a `content` publicClassname
+- `agate/TabGroup` prop `onSelect` to handle `onClick` event on it
+
+### Fixed
+
+- `agate/Keypad` to fire `onChange` event with a correct value payload
+- `agate/Panels/TabbedPanels` to not show console error when there is no children
+- `agate/SwitchItem` border color for Gallium skin when selected and focused
+- `agate/TabGroup` to pass `onSelect` to `ui/Group`
+
 ## [2.0.3] - 2022-12-14
 
 ### Added

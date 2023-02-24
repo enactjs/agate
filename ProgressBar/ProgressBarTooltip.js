@@ -64,7 +64,7 @@ const getSide = (orientation, position) => {
 				// invalid values for horizontal so use defaults
 				return ['auto', 'above'];
 		}
-	} else if (orientation === 'vertical') {
+	} else {
 		switch (position) {
 			case 'after':
 			case 'before':
@@ -74,30 +74,6 @@ const getSide = (orientation, position) => {
 			default:
 				// invalid values for horizontal so use defaults
 				return ['after', 'auto'];
-		}
-	} else {
-		switch (position) {
-			case 'above':
-			case 'below':
-				return ['auto', position];
-			case 'above after':
-			case 'above before':
-			case 'above center':
-			case 'above left':
-			case 'above right':
-			case 'below after':
-			case 'below before':
-			case 'below center':
-			case 'below left':
-			case 'below right':
-				return position.split(' ').reverse();
-			case 'after':
-			case 'before':
-			case 'left':
-			case 'right':
-				return [position, 'above'];
-			default:
-				return ['auto', 'above'];
 		}
 	}
 };

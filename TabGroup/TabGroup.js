@@ -10,6 +10,7 @@
  * @exports TabGroupDecorator
  */
 
+import handle, {forward, forwardCustom} from '@enact/core/handle';
 import kind from '@enact/core/kind';
 import {cap} from '@enact/core/util';
 import Group from '@enact/ui/Group';
@@ -73,7 +74,7 @@ const TabBase = kind({
 		 * @type {Function}
 		 * @public
 		 */
-		onClick: PropTypes.func,
+		onTabClick: PropTypes.func,
 
 		/**
 		 * Orientation of the tab.
@@ -102,6 +103,13 @@ const TabBase = kind({
 	styles: {
 		css: componentCss,
 		className: 'tab'
+	},
+
+	handlers: {
+		onClick: handle(
+			forward('onClick'),
+			forwardCustom('onTabClick', (ev, {index}) => ({selected: index}))
+		)
 	},
 
 	computed: {
@@ -137,15 +145,16 @@ const TabBase = kind({
 		}
 	},
 
-	render: ({onClick, orientation, style = {}, tabLabel, ...rest}) => {
+	render: ({orientation, style = {}, tabLabel, ...rest}) => {
 		delete rest.labelPosition;
+		delete rest.onTabClick;
 		delete rest.selected;
 
 		if (orientation === 'horizontal') {
 			style.textAlign = 'center';
 		}
 		return (
-			<Cell {...rest} style={style} onClick={onClick}>
+			<Cell {...rest} style={style}>
 				{tabLabel}
 			</Cell>
 		);
@@ -213,6 +222,18 @@ const TabGroupBase = kind({
 		css: PropTypes.object,
 
 		/**
+		 * Called when an item is selected.
+		 *
+		 * The event payload will be an object with the following members:
+		 * * `data` - The value for the option as received in the `children` prop
+		 * * `selected` - Number representing the selected option, 0 indexed
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onSelect: PropTypes.func,
+
+		/**
 		 * Orientation of the tabs.
 		 *
 		 * * Values: `'horizontal'`, `'vertical'`
@@ -260,7 +281,7 @@ const TabGroupBase = kind({
 		})
 	},
 
-	render: ({afterTabs, beforeTabs, className, css, labelPosition, orientation, selectedIndex, style, ...rest}) => {
+	render: ({afterTabs, beforeTabs, className, css, labelPosition, onSelect, orientation, selectedIndex, style, ...rest}) => {
 		delete rest.tabPosition;
 		delete rest.tabs;
 
@@ -281,6 +302,7 @@ const TabGroupBase = kind({
 							orientation,
 							shrink: (orientation === 'vertical')
 						}}
+						onSelect={onSelect}
 						orientation={orientation}
 						select="radio"
 						selected={selectedIndex}
