@@ -48,6 +48,24 @@
 			}
 		});
 
+		.spottable({
+			&.tiny {
+				.knob::before {
+					height: @agate-slider-tiny-knob-height;
+					width: @agate-slider-tiny-knob-width;
+				}
+
+				&.pressed,
+				&:focus.activateOnFocus,
+				&:focus.active {
+					.knob::before {
+						height: @agate-slider-active-tiny-knob-height;
+						width: @agate-slider-active-tiny-knob-width;
+					}
+				}
+			}
+		});
+
 		&.tiny {
 			&.slider {
 				height: @agate-mediaslider-tiny-height;
