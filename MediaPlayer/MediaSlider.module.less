@@ -50,11 +50,6 @@
 
 		.spottable({
 			&.tiny {
-				.knob::before {
-					height: @agate-slider-tiny-knob-height;
-					width: @agate-slider-tiny-knob-width;
-				}
-
 				&.pressed,
 				&:focus.activateOnFocus,
 				&:focus.active {
@@ -67,12 +62,22 @@
 		});
 
 		&.tiny {
+			.knob::before {
+				height: @agate-slider-tiny-knob-height;
+				width: @agate-slider-tiny-knob-width;
+			}
 			&.slider {
 				height: @agate-mediaslider-tiny-height;
 				padding: @agate-mediaslider-tiny-padding;
 
-				.bar,
-				.fill {
+				.bar {
+					left: ((@agate-slider-tiny-horizontal-anchorpoint-width / 2) * -1);
+					width: ~"calc(100% + " @agate-slider-tiny-horizontal-anchorpoint-width ~")";
+				}
+
+				.progressBar,
+				.fill,
+				.load {
 					height: @agate-mediaslider-tiny-bar-height;
 				}
 			}
