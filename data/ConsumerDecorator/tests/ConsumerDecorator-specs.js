@@ -48,6 +48,7 @@ const BaseComponentB = (props) => {
 
 const ComponentBDecorator = compose(
 	ProviderDecorator({
+		pauseOnBlur: true,
 		state: componentBState
 	}),
 	ConsumerDecorator({
