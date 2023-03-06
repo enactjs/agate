@@ -19,7 +19,7 @@ const BaseComponentA = (props) => {
 	componentAProps = props;
 
 	return <AppContext.Provider value="defaultValue"><div /></AppContext.Provider>;
-}
+};
 
 const ComponentADecorator = compose(
 	ProviderDecorator({
