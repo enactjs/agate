@@ -158,7 +158,7 @@ describe('TimePicker', () => {
 			ilib.setLocale('en-US');
 			const date = new Date(2000, 0, 1);
 
-			const expected = '12:00 AM';
+			const expected = '12:00 AM';
 			const actual = timeToLocaleString(date);
 
 			expect(actual).toBe(expected);
