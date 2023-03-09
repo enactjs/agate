@@ -2,6 +2,12 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Fixed
+
+- `agate/MediaPlayer` active knob size to not overlay the text on Silicon and Carbon skins when `type` is `tiny`
+
 ## [2.0.4] - 2023-02-24
 
 ### Added
@@ -13,7 +19,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/Keypad` to fire `onChange` event with a correct value payload
-- `agate/MediaPlayer` active knob size to not overlay the text when `type` is `tiny`
 - `agate/Panels/TabbedPanels` to not show console error when there is no children
 - `agate/SwitchItem` border color for Gallium skin when selected and focused
 - `agate/TabGroup` to pass `onSelect` to `ui/Group`
