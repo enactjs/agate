@@ -131,25 +131,6 @@ describe('Input Specs', () => {
 		expect(actual).toBeTruthy();
 	});
 
-	test('should not bubble the native event when stopPropagation from onChange is called', () => {
-		const handleChange = jest.fn();
-		const value = 'smt';
-		function stop (ev) {
-			ev.stopPropagation();
-		}
-
-		render(
-			<div onChange={handleChange}>
-				<Input onChange={stop} />
-			</div>
-		);
-		const inputText = screen.getByLabelText('Input field').children[0];
-
-		userEvent.type(inputText, value);
-
-		expect(handleChange).not.toHaveBeenCalled();
-	});
-
 	test('should blur input on enter if `dismissOnEnter`', () => {
 		const handleChange = jest.fn();
 		render(<Input dismissOnEnter onBlur={handleChange} />);
@@ -172,19 +153,6 @@ describe('Input Specs', () => {
 		expect(handleChange).not.toHaveBeenCalled();
 	});
 
-	test('should callback onBeforeChange before the text changes', () => {
-		const handleBeforeChange = jest.fn();
-		const value = 'blah';
-		render(<Input onBeforeChange={handleBeforeChange} />);
-		const inputText = screen.getByLabelText('Input field').children[0];
-
-		userEvent.type(inputText, value);
-		// bluring input onSpotlightLeft for code coverage purposes
-		pressLeftKey(inputText);
-
-		expect(handleBeforeChange).toHaveBeenCalled();
-	});
-
 	test('should prevent onChange if onBeforeChange prevents', () => {
 		const handleBeforeChange = jest.fn(ev => ev.preventDefault());
 		const handleChange = jest.fn();
@@ -202,6 +170,38 @@ describe('Input Specs', () => {
 		pressRightKey(inputText);
 
 		expect(handleChange).not.toHaveBeenCalled();
+	});
+
+	test('should not bubble the native event when stopPropagation from onChange is called', () => {
+		const handleChange = jest.fn();
+		const value = 'smt';
+		function stop (ev) {
+			ev.stopPropagation();
+		}
+
+		render(
+			<div onChange={handleChange}>
+				<Input onChange={stop} />
+			</div>
+		);
+		const inputText = screen.getByLabelText('Input field').children[0];
+
+		userEvent.type(inputText, value);
+
+		expect(handleChange).not.toHaveBeenCalled();
+	});
+
+	test('should callback onBeforeChange before the text changes', () => {
+		const handleBeforeChange = jest.fn();
+		const value = 'blah';
+		render(<Input onBeforeChange={handleBeforeChange} />);
+		const inputText = screen.getByLabelText('Input field').children[0];
+
+		userEvent.type(inputText, value);
+		// bluring input onSpotlightLeft for code coverage purposes
+		pressLeftKey(inputText);
+
+		expect(handleBeforeChange).toHaveBeenCalled();
 	});
 
 	test('should activate input on enter', () => {
