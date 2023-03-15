@@ -191,6 +191,13 @@ text('title', WithArrayOfChildrenObjects, Config, 'Dropdown');
 select('width', WithArrayOfChildrenObjects, ['smallest', 'small', 'medium', 'large', 'x-large', 'huge'], Config);
 
 WithArrayOfChildrenObjects.storyName = 'with array of children objects';
+WithArrayOfChildrenObjects.parameters = {
+	docs: {
+		source: {
+			code: '() => <WithArrayOfChildrenObjects />'
+		}
+	}
+};
 
 export const WithAutoDismiss = () => <AutoDismissDropdown />;
 
@@ -226,3 +233,10 @@ range('items', WithGroupInScroller, Config, {range: true, min: 0, max: 50}, 5);
 text('title', WithGroupInScroller, Config, 'Please select');
 
 WithGroupInScroller.storyName = 'with group in Scroller';
+WithGroupInScroller.parameters = {
+	docs: {
+		source: {
+			code: '() => <WithGroupInScroller />'
+		}
+	}
+};

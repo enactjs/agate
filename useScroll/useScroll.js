@@ -279,33 +279,33 @@ const useScroll = (props) => {
 
 	const [themeScrollContentHandle, setThemeScrollContentHandle] = useThemeScrollContentHandle();
 
-	const scrollContainerHandle = useRef({
-		animator: null,
-		bounds: null,
-		calculateDistanceByWheel: null,
-		canScrollHorizontally: null,
-		canScrollVertically: null,
-		getScrollBounds: null,
-		isDragging: null,
-		isFlicked: null,
-		isScrollAnimationTargetAccumulated: null,
-		lastInputType: null,
-		rtl: null,
-		scrollBounds: null,
-		scrollHeight: null,
-		scrolling: null,
-		scrollLeft: null,
-		scrollPos: null,
-		scrollTo: null,
-		scrollToAccumulatedTarget: null,
-		scrollToInfo: null,
-		scrollTop: null,
-		showScrollbarTrack: null,
-		start: null,
-		startHidingScrollbarTrack: null,
-		stop: null,
-		wheelDirection: null
-	});
+	const scrollContainerHandle = useRef({}); // To prevent referencing errors before calling `setScrollContainerHandle`, an empty object is provided as a default.
+	/* Properties in `scrollContainerHandle` provided by `setScrollContainerHandle`
+		animator
+		bounds
+		calculateDistanceByWheel
+		canScrollHorizontally
+		canScrollVertically
+		getScrollBounds
+		isDragging
+		isFlicked
+		isScrollAnimationTargetAccumulated
+		lastInputType
+		rtl
+		scrollBounds
+		scrollHeight
+		scrolling
+		scrollLeft
+		scrollTo
+		scrollToAccumulatedTarget
+		scrollToInfo
+		scrollTop
+		showScrollbarTrack
+		start
+		startHidingScrollbarTrack
+		stop
+		wheelDirection
+	*/
 
 	const setScrollContainerHandle = (handle) => {
 		scrollContainerHandle.current = handle;

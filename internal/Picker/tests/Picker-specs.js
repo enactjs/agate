@@ -42,6 +42,30 @@ describe('Picker Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
+	test('should wrap to the beginning of the value range if \'wrap\' is true', () => {
+		const handleChange = jest.fn();
+		render(<Picker index={0} max={0} min={-1} onChange={handleChange} value={0} wrap />);
+
+		increment(0);
+
+		const expected = -1;
+		const actual = handleChange.mock.calls[0][0].value;
+
+		expect(actual).toBe(expected);
+	});
+
+	test('should wrap to the end of the value range if \'wrap\' is true', () => {
+		const handleChange = jest.fn();
+		render(<Picker index={0} max={1} min={0} onChange={handleChange} value={0} wrap />);
+
+		decrement(0);
+
+		const expected = 1;
+		const actual = handleChange.mock.calls[0][0].value;
+
+		expect(actual).toBe(expected);
+	});
+
 	test('should not run the onChange handler when disabled', () => {
 		const handleChange = jest.fn();
 		render(<Picker disabled index={0} max={0} min={0} onChange={handleChange} value={0} />);
@@ -91,5 +115,19 @@ describe('Picker Specs', () => {
 		const expected = 'disabled';
 
 		expect(picker).toHaveAttribute(expected);
+	});
+
+	test('should set custom decrement aria label', () => {
+		render(<Picker decrementAriaLabel="Custom decrement aria label" index={0} max={2} min={0} value={0} />);
+		const itemDecrement = screen.queryByLabelText('0 Custom decrement aria label');
+
+		expect(itemDecrement).toBeInTheDocument();
+	});
+
+	test('should set custom increment aria label', () => {
+		render(<Picker incrementAriaLabel="Custom increment aria label" index={0} max={2} min={0} value={0} />);
+		const itemIncrement = screen.queryByLabelText('0 Custom increment aria label');
+
+		expect(itemIncrement).toBeInTheDocument();
 	});
 });

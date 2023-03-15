@@ -1,7 +1,8 @@
 import {cap} from '@enact/core/util';
 import {configureActions} from '@enact/storybook-utils/addons/actions';
 import {getBooleanType, getObjectType} from '@enact/storybook-utils/addons/controls';
-import {DocsPage, DocsContainer} from '@enact/storybook-utils/addons/docs';
+import {DocsContainer, Primary, Stories, Title} from '@enact/storybook-utils/addons/docs';
+import ri from '@enact/ui/resolution';
 import {themes} from '@storybook/theming';
 
 import ThemeEnvironment from '../src/ThemeEnvironment';
@@ -45,8 +46,15 @@ if (process.env.SKINS) {
 export const parameters = {
 	docs: {
 		container: DocsContainer,
-		page: DocsPage,
-		iframeHeight: 360,
+		inlineStories: false,
+		iframeHeight: ri.scaleToRem(300),
+		page: () => (
+			<>
+				<Title />
+				<Primary />
+				<Stories />
+			</>
+		),
 		theme: themes.light
 	},
 	options: {
@@ -62,4 +70,5 @@ export const globalTypes = {
 	'show all skins': getBooleanType('show all skins'),
 	'skin': getObjectType('skins', 'gallium', skins)
 };
+
 export const decorators = [ThemeEnvironment];

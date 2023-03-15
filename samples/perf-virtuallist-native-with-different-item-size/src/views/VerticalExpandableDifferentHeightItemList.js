@@ -195,6 +195,7 @@ const VerticalExpandableDifferentHeightItemList = (props) => {
 				minSize: oneLineSize,
 				size: itemSize
 			}}
+			scrollMode="native"
 			spacing={spacing}
 			style={{height: '300px', paddingRight: `${ri.scale(18)}px`}}
 		/>
