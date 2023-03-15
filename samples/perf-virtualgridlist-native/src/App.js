@@ -43,6 +43,7 @@ const VirtualGridListNativeSample = (props) => {
 			dataSize={items.length}
 			itemRenderer={renderItem}
 			itemSize={{minWidth: ri.scale(312), minHeight: ri.scale(300)}}
+			scrollMode="native"
 		/>
 	);
 };
