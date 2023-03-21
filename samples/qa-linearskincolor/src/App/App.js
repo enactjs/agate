@@ -1,5 +1,6 @@
 // import LinearSkinColor HOC
 import kind from '@enact/core/kind';
+import ThemeDecorator from '@enact/agate/ThemeDecorator';
 
 import MainPanel from '../views/MainPanel';
 
@@ -13,5 +14,4 @@ const App = kind({
 	)
 });
 
-// TODO: Wrap App in LinearSkinColor HOC
-export default App;
+export default ThemeDecorator(App);

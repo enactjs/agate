@@ -1,9 +1,9 @@
 /* global ENACT_PACK_ISOMORPHIC */
 import {createRoot, hydrateRoot} from 'react-dom/client';
 
-import App from './App';
+import ThemedApp from './ThemedApp';
 
-const appElement = (<App />);
+const appElement = (<ThemedApp />);
 
 // In a browser environment, render instead of exporting
 if (typeof window !== 'undefined') {
