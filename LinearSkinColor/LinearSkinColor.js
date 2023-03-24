@@ -1,38 +1,89 @@
 // HOC that receives 2 colors (accent and highlight) and returns 2 different colors
-import {useCallback, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 
-const useLinearSkinColor = (accentColor, highlightColor) => {
+import {generateColorsDayMode, generateColorsNightMode, generateTimestamps, getIndex} from './utils';
+
+const useLinearSkinColor = (accentColor, highlightColor, skinVariants) => {
 	const [linearAccentColor, setLinearAccentColor] = useState(accentColor);
 	const [linearHighlightColor, setLinearHighlightColor] = useState(highlightColor);
+	const [linearSkinVariants, setLinearSkinVariants] = useState(skinVariants);
 
-	const generateNewColor = useCallback((hexColor) => {
-		// Convert the HEX color to RGB
-		const r = parseInt(hexColor.substring(1, 3), 16);
-		const g = parseInt(hexColor.substring(3, 5), 16);
-		const b = parseInt(hexColor.substring(5, 7), 16);
+	const accentColors = {};
+	const highlightColors = {};
 
-		// Generate a random number between -50 and 50 for each RGB component
-		const randomR = Math.floor(Math.random() * 101) - 50;
-		const randomG = Math.floor(Math.random() * 101) - 50;
-		const randomB = Math.floor(Math.random() * 101) - 50;
+	const timestamps = generateTimestamps(5);
 
-		// Apply the random values to the RGB components and ensure they are within the valid range (0-255)
-		const newR = Math.min(255, Math.max(0, r + randomR));
-		const newG = Math.min(255, Math.max(0, g + randomG));
-		const newB = Math.min(255, Math.max(0, b + randomB));
+	const accentColorsArray = () => {
+		const dayColorsArray = generateColorsDayMode(accentColor, 72);
+		const nightColorsArray = generateColorsNightMode(accentColor, 72);
+		const array = [...nightColorsArray.reverse(), ...dayColorsArray, ...dayColorsArray.reverse(), ...nightColorsArray.reverse()];
+		const offset = array.splice(0, 12);
 
-		// Convert the RGB color back to HEX format and return it
-		return `#${newR.toString(16)}${newG.toString(16)}${newB.toString(16)}`;
-	}, [])
+		return [...array, ...offset];
+	};
+
+	const highlightColorsArray = () => {
+		const dayColorsArray = generateColorsDayMode(highlightColor, 72);
+		const nightColorsArray = generateColorsNightMode(highlightColor, 72)
+		const array = [...dayColorsArray.reverse(), ...nightColorsArray, ...nightColorsArray.reverse(), ...dayColorsArray.reverse()];
+		const offset = array.splice(0, 12);
+
+		return [...array, ...offset];
+	}
+
+	timestamps.forEach((element, index) => {
+		accentColors[element] = accentColorsArray()[index];
+	});
+
+	timestamps.forEach((element, index) => {
+		highlightColors[element] = highlightColorsArray()[index];
+	});
 
 	useEffect(() => {
-		const newAccentColor = generateNewColor(accentColor);
-		const newHighlightColor = generateNewColor(highlightColor);
-		setLinearAccentColor(newAccentColor);
-		setLinearHighlightColor(newHighlightColor);
+		let fakeIndex = 0
+		const realTime = false;
+		let changeColor = setInterval(() => {
+			if (realTime) {
+				const index = getIndex();
+				let skinVariant;
+				if (index >= '06:00' && index < '18:00') {
+					skinVariant = '';
+					setLinearSkinVariants(skinVariant);
+				} else {
+					skinVariant = 'night';
+					setLinearSkinVariants(skinVariant);
+				}
+
+				setLinearAccentColor(accentColors[index]);
+				setLinearHighlightColor(highlightColors[index]);
+			} else {
+				let skinVariant;
+				if (60 <= fakeIndex && fakeIndex <= 203) {
+					skinVariant = '';
+					setLinearSkinVariants(skinVariant);
+				} else {
+					skinVariant = 'night';
+					setLinearSkinVariants(skinVariant);
+				}
+
+				setLinearAccentColor(accentColorsArray()[fakeIndex]);
+				setLinearHighlightColor(highlightColorsArray()[fakeIndex]);
+
+				if (fakeIndex < 287) {
+					fakeIndex++;
+				} else {
+					fakeIndex = 0;
+				}
+			}
+		}, realTime ? 30 * 1000 : 100)
+
+		return () => {
+			clearInterval(changeColor);
+			fakeIndex = 0;
+		};
 	}, []);
 
-	return [linearAccentColor, linearHighlightColor];
+	return [linearAccentColor, linearHighlightColor, linearSkinVariants];
 };
 
 export default useLinearSkinColor;
