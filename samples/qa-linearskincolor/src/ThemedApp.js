@@ -1,5 +1,5 @@
 import ThemeDecorator from '@enact/agate/ThemeDecorator';
-import useLinearSkinColor from '@enact/agate/LinearSkinColor';
+import useLinearSkinColor from '@enact/agate/useLinearSkinColor';
 import {createContext, useState} from 'react';
 
 import App from './App';
