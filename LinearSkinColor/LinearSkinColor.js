@@ -3,10 +3,14 @@ import {useEffect, useState} from 'react';
 
 import {generateColorsDayMode, generateColorsNightMode, generateTimestamps, getIndex} from './utils';
 
-const useLinearSkinColor = (accentColor, highlightColor, skinVariants) => {
+// In case of using fake times, use this index to generate new colors
+let fakeIndex = 0
+
+const useLinearSkinColor = (accentColor, highlightColor, skinVariants, realTimeBoolean) => {
 	const [linearAccentColor, setLinearAccentColor] = useState(accentColor);
 	const [linearHighlightColor, setLinearHighlightColor] = useState(highlightColor);
 	const [linearSkinVariants, setLinearSkinVariants] = useState(skinVariants);
+	const [linearRealTime, setLinearRealTime] = useState(realTimeBoolean);
 
 	const accentColors = {};
 	const highlightColors = {};
@@ -40,10 +44,27 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants) => {
 	});
 
 	useEffect(() => {
-		let fakeIndex = 0
-		const realTime = false;
+		setLinearRealTime(!realTimeBoolean);
+
+		if (linearRealTime) {
+			const index = getIndex();
+			let skinVariant;
+			if (index >= '06:00' && index < '18:00') {
+				skinVariant = '';
+				setLinearSkinVariants(skinVariant);
+			} else {
+				skinVariant = 'night';
+				setLinearSkinVariants(skinVariant);
+			}
+
+			setLinearAccentColor(accentColors[index]);
+			setLinearHighlightColor(highlightColors[index]);
+		}
+	}, [realTimeBoolean]);
+
+	useEffect(() => {
 		let changeColor = setInterval(() => {
-			if (realTime) {
+			if (linearRealTime) {
 				const index = getIndex();
 				let skinVariant;
 				if (index >= '06:00' && index < '18:00') {
@@ -75,13 +96,13 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants) => {
 					fakeIndex = 0;
 				}
 			}
-		}, realTime ? 30 * 1000 : 100)
+		}, realTimeBoolean ? 30 * 1000 : 100)
 
 		return () => {
 			clearInterval(changeColor);
 			fakeIndex = 0;
 		};
-	}, []);
+	}, [realTimeBoolean]);
 
 	return [linearAccentColor, linearHighlightColor, linearSkinVariants];
 };
