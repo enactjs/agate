@@ -7,20 +7,20 @@ import App from './App';
 export const AppContext = createContext();
 
 const config = {
-	accent: '#68da58',
-	highlight: '#ce40d3',
 	skinVariants: ''
 }
 
 const ThemedAppBase = () => {
+	const [accent, setAccent] = useState('#8b7efe'); // default gallium accent color
+	const [highlight, setHighlight] = useState('#c6c0fe'); // default gallium highlight color
 	const [realTime, setRealTime] = useState(true);
-	const [skin, setSkin] = useState(null);
+	const [skin, setSkin] = useState('gallium');
 
-	const {accent, highlight, skinVariants} = config;
+	const {skinVariants} = config;
 	const [newAccent, newHighlight, newSkinVariants] = useLinearSkinColor(accent, highlight, skinVariants, realTime);
 
 	return (
-		<AppContext.Provider value={{realTime, setRealTime, setSkin}}>
+		<AppContext.Provider value={{realTime, setAccent, setHighlight, setRealTime, setSkin}}>
 			<App accent={newAccent} highlight={newHighlight} skinVariants={newSkinVariants} skin={skin} />
 		</AppContext.Provider>
 	)
