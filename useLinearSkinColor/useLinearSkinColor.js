@@ -11,15 +11,14 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants, realTimeB
 	const [linearHighlightColor, setLinearHighlightColor] = useState(highlightColor);
 	const [linearSkinVariants, setLinearSkinVariants] = useState(skinVariants);
 	const [linearRealTime, setLinearRealTime] = useState(realTimeBoolean);
-
-	const accentColors = {};
-	const highlightColors = {};
+	const [accentColors] = useState({});
+	const [highlightColors] = useState({});
 
 	const timestamps = generateTimestamps(5);
 
 	const accentColorsArray = () => {
-		const dayColorsArray = generateColorsDayMode(accentColor, 72);
-		const nightColorsArray = generateColorsNightMode(accentColor, 72);
+		const dayColorsArray = generateColorsDayMode(linearAccentColor, 72);
+		const nightColorsArray = generateColorsNightMode(linearAccentColor, 72);
 		const array = [...nightColorsArray.reverse(), ...dayColorsArray, ...dayColorsArray.reverse(), ...nightColorsArray.reverse()];
 		const offset = array.splice(0, 12);
 
@@ -27,8 +26,8 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants, realTimeB
 	};
 
 	const highlightColorsArray = () => {
-		const dayColorsArray = generateColorsDayMode(highlightColor, 72);
-		const nightColorsArray = generateColorsNightMode(highlightColor, 72)
+		const dayColorsArray = generateColorsDayMode(linearHighlightColor, 72);
+		const nightColorsArray = generateColorsNightMode(linearHighlightColor, 72)
 		const array = [...dayColorsArray.reverse(), ...nightColorsArray, ...nightColorsArray.reverse(), ...dayColorsArray.reverse()];
 		const offset = array.splice(0, 12);
 
@@ -42,6 +41,14 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants, realTimeB
 	timestamps.forEach((element, index) => {
 		highlightColors[element] = highlightColorsArray()[index];
 	});
+
+	useEffect(() => {
+		setLinearAccentColor(accentColor);
+	}, [accentColor]);
+
+	useEffect(() => {
+		setLinearHighlightColor(highlightColor);
+	}, [highlightColor]);
 
 	useEffect(() => {
 		setLinearRealTime(!realTimeBoolean);

@@ -3,8 +3,7 @@ import ThemeDecorator from '@enact/agate/ThemeDecorator';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 
 import MainPanel from '../views/MainPanel';
-import SecondView from '../views/SecondView';
-import ThirdView from '../views/ThirdView';
+import SecondPanel from '../views/SecondPanel';
 
 const router = createBrowserRouter([
 	{
@@ -13,12 +12,8 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/secondView",
-		element: <SecondView />
-	},
-	{
-		path: "/thirdView",
-		element: <ThirdView />
-	},
+		element: <SecondPanel />
+	}
 ]);
 
 const App = kind({

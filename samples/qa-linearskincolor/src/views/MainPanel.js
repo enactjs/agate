@@ -42,10 +42,10 @@ const MainPanel = () => {
 				<div className={css.header}>
 					<Heading className={css.heading}>Main Panel</Heading>
 					<Link to="/secondView">
-						<Button icon="arrowlargeright" size="small"/>
+						<Button icon="arrowlargeright" size="small" />
 					</Link>
 				</div>
-				<BodyText className={css.description} size="small">
+				<BodyText size="small">
 					This sample showcases the functionality of `useLinearSkinColor` hook. By providing an `accent` and a
 					`highlight` color, this hook returns new generated colors
 					by increasing/decreasing their luminosity or saturation values, depending on the time of the day. It
@@ -53,7 +53,7 @@ const MainPanel = () => {
 					6:00AM and sets the night mode with a dark background at 18:00PM.
 				</BodyText>
 				<div className={css.settings}>
-					<CheckboxItem label="User real time" inline onToggle={handleToggle} selected={realTime}/>
+					<CheckboxItem label="User real time" inline onToggle={handleToggle} selected={realTime} />
 					<Dropdown onSelect={handleSelect} title="Select a skin" width="small">
 						{['Carbon', 'Cobalt', 'Copper', 'Electro', 'Gallium', 'Titanium', 'Silicon']}
 					</Dropdown>
@@ -76,15 +76,14 @@ const MainPanel = () => {
 							<Button size="small">Selected</Button>
 							<Button disabled selected size="small">Disabled</Button>
 						</div>
-						<SwitchItem className={css.previewSwitchItem} label="label"
-									size="small">SwitchItem</SwitchItem>
+						<SwitchItem className={css.previewSwitchItem} label="label" size="small">SwitchItem</SwitchItem>
 						<DateTimePicker />
-						<Slider/>
+						<Slider />
 					</div>
 				</div>
 			</div>
 		</Scroller>
-	)
-}
+	);
+};
 
 export default MainPanel;
