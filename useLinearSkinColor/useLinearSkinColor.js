@@ -5,14 +5,13 @@ import {generateColorsDayMode, generateColorsNightMode, generateTimestamps, getI
 
 // In case of using fake times, use this index to generate new colors
 let fakeIndex = 0
+let accentColors = {};
+let highlightColors = {};
 
-const useLinearSkinColor = (accentColor, highlightColor, skinVariants, fakeTimeBoolean) => {
+const useLinearSkinColor = (accentColor, highlightColor, skinVariants, fakeTimeBoolean = false) => {
 	const [linearAccentColor, setLinearAccentColor] = useState(accentColor);
 	const [linearHighlightColor, setLinearHighlightColor] = useState(highlightColor);
 	const [linearSkinVariants, setLinearSkinVariants] = useState(skinVariants);
-	const [linearFakeTime, setLinearFakeTime] = useState(fakeTimeBoolean);
-	const [accentColors] = useState({});
-	const [highlightColors] = useState({});
 
 	const timestamps = generateTimestamps(5);
 
@@ -51,9 +50,7 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants, fakeTimeB
 	}, [highlightColor]);
 
 	useEffect(() => {
-		setLinearFakeTime(!fakeTimeBoolean);
-
-		if (!linearFakeTime) {
+		if (!fakeTimeBoolean) {
 			const index = getIndex();
 			let skinVariant;
 			if (index >= '06:00' && index < '18:00') {
@@ -71,7 +68,7 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants, fakeTimeB
 
 	useEffect(() => {
 		let changeColor = setInterval(() => {
-			if (!linearFakeTime) {
+			if (!fakeTimeBoolean) {
 				const index = getIndex();
 				let skinVariant;
 				if (index >= '06:00' && index < '18:00') {
@@ -109,7 +106,7 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants, fakeTimeB
 			clearInterval(changeColor);
 			fakeIndex = 0;
 		};
-	}, [fakeTimeBoolean]);
+	}, [fakeTimeBoolean]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return [linearAccentColor, linearHighlightColor, linearSkinVariants];
 };

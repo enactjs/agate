@@ -53,7 +53,7 @@ const MainPanel = () => {
 					6:00AM and sets the night mode with a dark background at 18:00PM.
 				</BodyText>
 				<div className={css.settings}>
-					<CheckboxItem label="User real time" inline onToggle={handleToggle} selected={fakeTime} />
+					<CheckboxItem label="Use fake time" inline onToggle={handleToggle} selected={fakeTime} />
 					<Dropdown onSelect={handleSelect} title="Select a skin" width="small">
 						{['Carbon', 'Cobalt', 'Copper', 'Electro', 'Gallium', 'Titanium', 'Silicon']}
 					</Dropdown>
