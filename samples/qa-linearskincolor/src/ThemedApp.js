@@ -8,7 +8,7 @@ export const AppContext = createContext();
 
 const config = {
 	skinVariants: ''
-}
+};
 
 const ThemedAppBase = () => {
 	const [accent, setAccent] = useState('#8b7efe'); // default gallium accent color
@@ -23,7 +23,7 @@ const ThemedAppBase = () => {
 		<AppContext.Provider value={{realTime, setAccent, setHighlight, setRealTime, setSkin}}>
 			<App accent={newAccent} highlight={newHighlight} skinVariants={newSkinVariants} skin={skin} />
 		</AppContext.Provider>
-	)
+	);
 };
 
 const ThemedApp = ThemeDecorator(ThemedAppBase);
