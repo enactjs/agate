@@ -4,11 +4,11 @@ import {useEffect, useState} from 'react';
 import {generateColorsDayMode, generateColorsNightMode, generateTimestamps, getIndex} from './utils';
 
 // In case of using fake times, use this index to generate new colors
-let fakeIndex = 0
+let fakeIndex = 0;
 let accentColors = {};
 let highlightColors = {};
 
-const useLinearSkinColor = (accentColor, highlightColor, skinVariants, fakeTimeBoolean = false) => {
+const useLinearSkinColor = (accentColor, highlightColor, skinVariants, useFakeTime = false) => {
 	const [linearAccentColor, setLinearAccentColor] = useState(accentColor);
 	const [linearHighlightColor, setLinearHighlightColor] = useState(highlightColor);
 	const [linearSkinVariants, setLinearSkinVariants] = useState(skinVariants);
@@ -26,12 +26,12 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants, fakeTimeB
 
 	const highlightColorsArray = () => {
 		const dayColorsArray = generateColorsDayMode(linearHighlightColor, 72);
-		const nightColorsArray = generateColorsNightMode(linearHighlightColor, 72)
+		const nightColorsArray = generateColorsNightMode(linearHighlightColor, 72);
 		const array = [...dayColorsArray.reverse(), ...nightColorsArray, ...nightColorsArray.reverse(), ...dayColorsArray.reverse()];
 		const offset = array.splice(0, 12);
 
 		return [...array, ...offset];
-	}
+	};
 
 	timestamps.forEach((element, index) => {
 		accentColors[element] = accentColorsArray()[index];
@@ -50,7 +50,7 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants, fakeTimeB
 	}, [highlightColor]);
 
 	useEffect(() => {
-		if (!fakeTimeBoolean) {
+		if (!useFakeTime) {
 			const index = getIndex();
 			let skinVariant;
 			if (index >= '06:00' && index < '18:00') {
@@ -60,15 +60,12 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants, fakeTimeB
 				skinVariant = 'night';
 				setLinearSkinVariants(skinVariant);
 			}
-
-			setLinearAccentColor(accentColors[index]);
-			setLinearHighlightColor(highlightColors[index]);
 		}
-	}, [fakeTimeBoolean]);
+	}, [useFakeTime]);
 
 	useEffect(() => {
 		let changeColor = setInterval(() => {
-			if (!fakeTimeBoolean) {
+			if (!useFakeTime) {
 				const index = getIndex();
 				let skinVariant;
 				if (index >= '06:00' && index < '18:00') {
@@ -100,13 +97,13 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants, fakeTimeB
 					fakeIndex = 0;
 				}
 			}
-		}, fakeTimeBoolean ? 100 : 30 * 1000)
+		}, useFakeTime ? 100 : 30 * 1000);
 
 		return () => {
 			clearInterval(changeColor);
 			fakeIndex = 0;
 		};
-	}, [fakeTimeBoolean]); // eslint-disable-line react-hooks/exhaustive-deps
+	}, [useFakeTime]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return [linearAccentColor, linearHighlightColor, linearSkinVariants];
 };

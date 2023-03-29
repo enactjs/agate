@@ -191,7 +191,7 @@ export const generateColorsNightMode = (baseColor, numColors) => {
 	}
 
 	return colors;
-}
+};
 
 // Time when the colors are changing
 export const getIndex = () => {
