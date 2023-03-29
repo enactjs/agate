@@ -52,9 +52,9 @@ describe('SwitchItem', function () {
 			});
 
 			it('should re-unselect the item when clicked twice', async function () {
-				switchItem.self.click();
+				await switchItem.self.click();
 				await browser.pause(500);
-				switchItem.self.click();
+				await switchItem.self.click();
 				expect(await switchItem.isSelected).to.be.false();
 			});
 		});
@@ -94,9 +94,9 @@ describe('SwitchItem', function () {
 			});
 
 			it('should re-select the item when clicked twice', async function () {
-				switchItem.self.click();
+				await switchItem.self.click();
 				await browser.pause(500);
-				switchItem.self.click();
+				await switchItem.self.click();
 				expect(await switchItem.isSelected).to.be.true();
 			});
 		});
@@ -140,9 +140,9 @@ describe('SwitchItem', function () {
 			});
 
 			it('should re-select the item when clicked twice', async function () {
-				switchItem.self.click();
+				await switchItem.self.click();
 				await browser.pause(500);
-				switchItem.self.click();
+				await switchItem.self.click();
 				expect(await switchItem.isSelected).to.be.true();
 			});
 		});
