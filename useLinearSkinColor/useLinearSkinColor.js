@@ -11,8 +11,8 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants, fakeTimeB
 	const [linearHighlightColor, setLinearHighlightColor] = useState(highlightColor);
 	const [linearSkinVariants, setLinearSkinVariants] = useState(skinVariants);
 	const [linearFakeTime, setLinearFakeTime] = useState(fakeTimeBoolean);
-	const accentColors = {};
-	const highlightColors = {};
+	const [accentColors] = useState({});
+	const [highlightColors] = useState({});
 
 	const timestamps = generateTimestamps(5);
 
@@ -53,7 +53,7 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants, fakeTimeB
 	useEffect(() => {
 		setLinearFakeTime(!fakeTimeBoolean);
 
-		if (linearFakeTime) {
+		if (!linearFakeTime) {
 			const index = getIndex();
 			let skinVariant;
 			if (index >= '06:00' && index < '18:00') {

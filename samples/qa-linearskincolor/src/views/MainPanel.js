@@ -18,11 +18,11 @@ import {AppContext} from '../ThemedApp';
 import css from './MainPanel.module.less';
 
 const MainPanel = () => {
-	const {realTime, setAccent, setHighlight, setRealTime, setSkin} = useContext(AppContext);
+	const {fakeTime, setAccent, setHighlight, setFakeTime, setSkin} = useContext(AppContext);
 
 	const handleToggle = useCallback((e) => {
-		setRealTime(e.selected);
-	}, [setRealTime]);
+		setFakeTime(e.selected);
+	}, [setFakeTime]);
 
 	const handleSelect = useCallback((e) => {
 		setSkin(e.data.toLowerCase());
@@ -53,7 +53,7 @@ const MainPanel = () => {
 					6:00AM and sets the night mode with a dark background at 18:00PM.
 				</BodyText>
 				<div className={css.settings}>
-					<CheckboxItem label="User real time" inline onToggle={handleToggle} selected={realTime} />
+					<CheckboxItem label="User real time" inline onToggle={handleToggle} selected={fakeTime} />
 					<Dropdown onSelect={handleSelect} title="Select a skin" width="small">
 						{['Carbon', 'Cobalt', 'Copper', 'Electro', 'Gallium', 'Titanium', 'Silicon']}
 					</Dropdown>

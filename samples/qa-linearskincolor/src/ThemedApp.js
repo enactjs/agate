@@ -13,14 +13,14 @@ const config = {
 const ThemedAppBase = () => {
 	const [accent, setAccent] = useState('#8b7efe'); // default gallium accent color
 	const [highlight, setHighlight] = useState('#c6c0fe'); // default gallium highlight color
-	const [realTime, setRealTime] = useState(true);
+	const [fakeTime, setFakeTime] = useState(false);
 	const [skin, setSkin] = useState('gallium');
 
 	const {skinVariants} = config;
-	const [newAccent, newHighlight, newSkinVariants] = useLinearSkinColor(accent, highlight, skinVariants, realTime);
+	const [newAccent, newHighlight, newSkinVariants] = useLinearSkinColor(accent, highlight, skinVariants, fakeTime);
 
 	return (
-		<AppContext.Provider value={{realTime, setAccent, setHighlight, setRealTime, setSkin}}>
+		<AppContext.Provider value={{fakeTime, setAccent, setHighlight, setFakeTime, setSkin}}>
 			<App accent={newAccent} highlight={newHighlight} skinVariants={newSkinVariants} skin={skin} />
 		</AppContext.Provider>
 	);
