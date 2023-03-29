@@ -28,6 +28,7 @@ describe('SwitchItem', function () {
 
 			it('should re-unselect the item when selected twice', async function () {
 				await Page.spotlightSelect();
+				await browser.pause(500);
 				await Page.spotlightSelect();
 				expect(await switchItem.isSelected).to.be.false();
 			});
@@ -80,6 +81,7 @@ describe('SwitchItem', function () {
 			it('should re-select the item when selected twice', async function () {
 				await switchItem.focus();
 				await Page.spotlightSelect();
+				await browser.pause(500);
 				await Page.spotlightSelect();
 				expect(await switchItem.isSelected).to.be.true();
 			});
@@ -125,6 +127,7 @@ describe('SwitchItem', function () {
 			it('should re-select the item when selected twice', async function () {
 				await switchItem.focus();
 				await Page.spotlightSelect();
+				await browser.pause(500);
 				await Page.spotlightSelect();
 				expect(await switchItem.isSelected).to.be.true();
 			});
