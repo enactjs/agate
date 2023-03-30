@@ -89,7 +89,7 @@ describe('SwitchItem', function () {
 
 		describe('pointer', function () {
 			it('should unselect the item when clicked', async function () {
-				switchItem.self.click();
+				await switchItem.self.click();
 				expect(await switchItem.isSelected).to.be.false();
 			});
 
@@ -135,7 +135,7 @@ describe('SwitchItem', function () {
 
 		describe('pointer', function () {
 			it('should unselect the item when clicked', async function () {
-				switchItem.self.click();
+				await switchItem.self.click();
 				expect(await switchItem.isSelected).to.be.false();
 			});
 
@@ -173,7 +173,7 @@ describe('SwitchItem', function () {
 
 		describe('pointer', function () {
 			it('should not unselect the item when clicked', async function () {
-				switchItem.self.click();
+				await switchItem.self.click();
 				expect(await switchItem.isSelected).to.be.true();
 			});
 		});
@@ -214,7 +214,7 @@ describe('SwitchItem', function () {
 
 		describe('pointer', function () {
 			it('should not unselect the item when clicked', async function () {
-				switchItem.self.click();
+				await switchItem.self.click();
 				expect(await switchItem.isSelected).to.be.true();
 			});
 		});
