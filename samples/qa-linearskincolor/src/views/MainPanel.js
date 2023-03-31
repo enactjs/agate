@@ -61,11 +61,11 @@ const MainPanel = () => {
 				<div className={css.demo}>
 					<div className={css.colorPickers}>
 						<span>Accent</span>
-						<ColorPicker onChange={handleAccentColorPickerChange} style={{marginBottom: '42px'}}>
+						<ColorPicker disabled={fakeTime} onChange={handleAccentColorPickerChange} style={{marginBottom: '42px'}}>
 							{['#8fd43a', '#8c81ff', '#a47d66', '#0359f0', '#8b7efe', '#f1304f', '#a6a6a6']}
 						</ColorPicker>
 						<span>Highlight</span>
-						<ColorPicker onChange={handleHighlightColorPickerChange}>
+						<ColorPicker disabled={fakeTime} onChange={handleHighlightColorPickerChange}>
 							{['#6abe0b', '#ffffff', '#ffffff', '#ff8100', '#e16253', '#9e00d8', '#2a48ca']}
 						</ColorPicker>
 					</div>

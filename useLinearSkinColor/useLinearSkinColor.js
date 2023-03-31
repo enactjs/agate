@@ -7,6 +7,7 @@ import {generateColorsDayMode, generateColorsNightMode, generateTimestamps, getI
 let fakeIndex = 0;
 let accentColors = {};
 let highlightColors = {};
+const index = getIndex();
 
 const useLinearSkinColor = (accentColor, highlightColor, skinVariants, useFakeTime = false) => {
 	const [linearAccentColor, setLinearAccentColor] = useState(accentColor);
@@ -50,8 +51,12 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants, useFakeTi
 	}, [highlightColor]);
 
 	useEffect(() => {
+		setLinearAccentColor(accentColors[index]);
+		setLinearHighlightColor(highlightColors[index]);
+	}, []);
+
+	useEffect(() => {
 		if (!useFakeTime) {
-			const index = getIndex();
 			let skinVariant;
 			if (index >= '06:00' && index < '18:00') {
 				skinVariant = '';
@@ -66,7 +71,6 @@ const useLinearSkinColor = (accentColor, highlightColor, skinVariants, useFakeTi
 	useEffect(() => {
 		let changeColor = setInterval(() => {
 			if (!useFakeTime) {
-				const index = getIndex();
 				let skinVariant;
 				if (index >= '06:00' && index < '18:00') {
 					skinVariant = '';
