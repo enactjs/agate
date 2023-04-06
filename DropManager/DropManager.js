@@ -94,6 +94,7 @@ const defaultConfig = {
 // prop, so we can send an arrangement to Rearrangeable, exclusively.
 const fallbackArrangementProp = 'arrangement';
 
+let item = 'test';
 
 const DropManagerContext = createContext(defaultContainerShape);
 
@@ -164,6 +165,38 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			this.setState({dragging: true});
 		};
 
+		handleTouchStart = (e) => {
+			item = e.target;
+			forward('onDragStart', e, this.props);
+
+			this.dragOriginNode = e.target;
+			this.setState({dragging: true});
+
+
+// 			let itemDragContainer = document.createElement("div");
+// 			itemDragContainer.style.backgroundColor = window.getComputedStyle(item).backgroundColor;
+// 			itemDragContainer.style.borderRadius = window.getComputedStyle(item).borderRadius;
+// 			itemDragContainer.style.height = item.clientHeight + 'px';
+// 			itemDragContainer.style.width = item.clientWidth + 'px';
+// 			itemDragContainer.textContent =  item.textContent;
+// console.log(itemDragContainer)
+// 			// itemDragContainer.style.bottom = "0px";
+// 			// itemDragContainer.style.left = "0px";
+// 			// itemDragContainer.style.zIndex = '-100';
+//
+//
+// 			// position the image to the touch, can be improve to detect the position of touch inside the image
+// 			let left = e.touches[0].pageX;
+// 			let top = e.touches[0].pageY;
+// 			itemDragContainer.style.position = 'absolute'
+// 			itemDragContainer.style.left = left + 'px';
+// 			itemDragContainer.style.top = top + 'px';
+// 			itemDragContainer.style.opacity = 0.5;
+//
+//
+// 			document.body.appendChild(itemDragContainer);
+		};
+
 		handleDragEnter = (ev) => {
 			this.addDropTarget(ev.target);
 		};
@@ -176,6 +209,11 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			ev.preventDefault();
 			// Set the dropEffect to move
 			ev.dataTransfer.dropEffect = 'move';
+		};
+
+		handleTouchMove = (ev) => {
+			//console.log("mouseOver");
+			//ev.preventDefault();
 		};
 
 		handleDrop = (ev) => {
@@ -196,6 +234,73 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			// If we dropped directly on an element with a slot defined, just use that directly
 			if (ev.target.dataset.slot) {
 				dragDropNode = ev.target;
+			} else {
+				// If we dropped on a child of a slotted element (like an icon or a div or other
+				// nested component), find the closest ancestor with a slot and use that as the drop element.
+				const closestSlot = ev.target.closest('[data-slot]');
+				if (closestSlot && closestSlot.dataset.slot) {
+					dragDropNode = closestSlot;
+				} else {
+					// We didn't actually find anything, just bail out. The component was dropped in
+					// a place that is unknown.
+					this.setState({dragging: false});
+					return;
+				}
+			}
+
+			this.removeDropTarget(dragDropNode);
+
+			// Get the destination element's slot value, or find its ancestor that has one (in case we drop this on a child or grandchild of the slotted item).
+			// const dragDestination = ev.target.dataset.slot || (ev.target.closest('[data-slot]') && ev.target.closest('[data-slot]').dataset.slot);
+			const dragDestination = dragDropNode.dataset.slot;
+
+			// If the dragged element was dropped back on itself, do nothing and exit.
+			if (dragDestination === dragOrigin) {
+				this.setState({dragging: false});
+				return;
+			}
+
+			this.dragOriginNode.dataset.slot = dragDestination;
+			dragDropNode.dataset.slot = dragOrigin;
+
+			// console.log('from:', dragOrigin, 'to:', dragDestination);
+
+			// We successfully completed the drag, blank-out the node.
+			this.dragOriginNode = null;
+
+			const {arrangement, onArrange} = this.props;
+			const oldD = getKeyByValue(arrangement, dragDestination);
+			const oldO = getKeyByValue(arrangement, dragOrigin);
+
+			arrangement[oldD || dragDestination] = dragOrigin;
+			arrangement[oldO || dragOrigin] = dragDestination;
+
+			if (onArrange) {
+				onArrange({arrangement});
+			}
+
+			this.setState({dragging: false});
+		};
+
+		handleTouchEnd = (ev) => {
+			ev.preventDefault();
+
+			// Bail early if the drag started from some unknown location.
+			if (!this.dragOriginNode) {
+				this.setState({dragging: false});
+				return;
+			}
+
+			// Get the id of the target and add the moved element to the target's DOM
+			// const dragOrigin = ev.dataTransfer.getData('text/plain');
+			const dragOrigin = this.dragOriginNode.dataset.slot;
+
+			let touchEndOverElem = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
+
+			let dragDropNode;
+			// If we dropped directly on an element with a slot defined, just use that directly
+			if (touchEndOverElem.dataset.slot) {
+				dragDropNode = touchEndOverElem;
 			} else {
 				// If we dropped on a child of a slotted element (like an icon or a div or other
 				// nested component), find the closest ancestor with a slot and use that as the drop element.
@@ -265,6 +370,9 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 				rest.onDragLeave = this.handleDragLeave;
 				rest.onDragOver = this.handleDragOver;
 				rest.onDrop = this.handleDrop;
+				rest.onTouchStart = this.handleTouchStart;
+				rest.onTouchEnd = this.handleTouchEnd;
+				rest.onTouchMove = this.handleTouchMove;
 				// rest.onDragEnd = this.handleDragEnd;
 			}
 
