@@ -94,8 +94,6 @@ const defaultConfig = {
 // prop, so we can send an arrangement to Rearrangeable, exclusively.
 const fallbackArrangementProp = 'arrangement';
 
-let item = 'test';
-
 const DropManagerContext = createContext(defaultContainerShape);
 
 /**
@@ -147,7 +145,8 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 		};
 
 		state = {
-			dragging: false
+			dragging: false,
+			touchOverElement: null
 		};
 
 		addDropTarget = (target) => {
@@ -166,35 +165,8 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 		};
 
 		handleTouchStart = (e) => {
-			item = e.target;
-			forward('onDragStart', e, this.props);
-
 			this.dragOriginNode = e.target;
 			this.setState({dragging: true});
-
-
-// 			let itemDragContainer = document.createElement("div");
-// 			itemDragContainer.style.backgroundColor = window.getComputedStyle(item).backgroundColor;
-// 			itemDragContainer.style.borderRadius = window.getComputedStyle(item).borderRadius;
-// 			itemDragContainer.style.height = item.clientHeight + 'px';
-// 			itemDragContainer.style.width = item.clientWidth + 'px';
-// 			itemDragContainer.textContent =  item.textContent;
-// console.log(itemDragContainer)
-// 			// itemDragContainer.style.bottom = "0px";
-// 			// itemDragContainer.style.left = "0px";
-// 			// itemDragContainer.style.zIndex = '-100';
-//
-//
-// 			// position the image to the touch, can be improve to detect the position of touch inside the image
-// 			let left = e.touches[0].pageX;
-// 			let top = e.touches[0].pageY;
-// 			itemDragContainer.style.position = 'absolute'
-// 			itemDragContainer.style.left = left + 'px';
-// 			itemDragContainer.style.top = top + 'px';
-// 			itemDragContainer.style.opacity = 0.5;
-//
-//
-// 			document.body.appendChild(itemDragContainer);
 		};
 
 		handleDragEnter = (ev) => {
@@ -212,8 +184,16 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 		};
 
 		handleTouchMove = (ev) => {
-			//console.log("mouseOver");
-			//ev.preventDefault();
+			let touchMoveOverElem = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
+
+			if (this.state.touchOverElement && this.state.touchOverElement !== touchMoveOverElem) {
+				this.removeDropTarget(this.state.touchOverElement);
+				this.addDropTarget(touchMoveOverElem);
+				this.setState(() => ({touchOverElement: touchMoveOverElem}));
+			} else {
+				this.addDropTarget(touchMoveOverElem);
+				this.setState(() => ({touchOverElement: touchMoveOverElem}));
+			}
 		};
 
 		handleDrop = (ev) => {
@@ -285,6 +265,10 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 		handleTouchEnd = (ev) => {
 			ev.preventDefault();
 
+			if (this.state.touchOverElement) {
+				this.removeDropTarget(this.state.touchOverElement);
+			}
+
 			// Bail early if the drag started from some unknown location.
 			if (!this.dragOriginNode) {
 				this.setState({dragging: false});
@@ -314,8 +298,6 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 					return;
 				}
 			}
-
-			this.removeDropTarget(dragDropNode);
 
 			// Get the destination element's slot value, or find its ancestor that has one (in case we drop this on a child or grandchild of the slotted item).
 			// const dragDestination = ev.target.dataset.slot || (ev.target.closest('[data-slot]') && ev.target.closest('[data-slot]').dataset.slot);
