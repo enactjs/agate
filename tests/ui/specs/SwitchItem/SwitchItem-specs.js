@@ -28,6 +28,7 @@ describe('SwitchItem', function () {
 
 			it('should re-unselect the item when selected twice', async function () {
 				await Page.spotlightSelect();
+				await browser.pause(500);
 				await Page.spotlightSelect();
 				expect(await switchItem.isSelected).to.be.false();
 			});
@@ -51,9 +52,9 @@ describe('SwitchItem', function () {
 			});
 
 			it('should re-unselect the item when clicked twice', async function () {
-				switchItem.self.click();
+				await switchItem.self.click();
 				await browser.pause(500);
-				switchItem.self.click();
+				await switchItem.self.click();
 				expect(await switchItem.isSelected).to.be.false();
 			});
 		});
@@ -80,6 +81,7 @@ describe('SwitchItem', function () {
 			it('should re-select the item when selected twice', async function () {
 				await switchItem.focus();
 				await Page.spotlightSelect();
+				await browser.pause(500);
 				await Page.spotlightSelect();
 				expect(await switchItem.isSelected).to.be.true();
 			});
@@ -87,14 +89,14 @@ describe('SwitchItem', function () {
 
 		describe('pointer', function () {
 			it('should unselect the item when clicked', async function () {
-				switchItem.self.click();
+				await switchItem.self.click();
 				expect(await switchItem.isSelected).to.be.false();
 			});
 
 			it('should re-select the item when clicked twice', async function () {
-				switchItem.self.click();
+				await switchItem.self.click();
 				await browser.pause(500);
-				switchItem.self.click();
+				await switchItem.self.click();
 				expect(await switchItem.isSelected).to.be.true();
 			});
 		});
@@ -125,6 +127,7 @@ describe('SwitchItem', function () {
 			it('should re-select the item when selected twice', async function () {
 				await switchItem.focus();
 				await Page.spotlightSelect();
+				await browser.pause(500);
 				await Page.spotlightSelect();
 				expect(await switchItem.isSelected).to.be.true();
 			});
@@ -132,14 +135,14 @@ describe('SwitchItem', function () {
 
 		describe('pointer', function () {
 			it('should unselect the item when clicked', async function () {
-				switchItem.self.click();
+				await switchItem.self.click();
 				expect(await switchItem.isSelected).to.be.false();
 			});
 
 			it('should re-select the item when clicked twice', async function () {
-				switchItem.self.click();
+				await switchItem.self.click();
 				await browser.pause(500);
-				switchItem.self.click();
+				await switchItem.self.click();
 				expect(await switchItem.isSelected).to.be.true();
 			});
 		});
@@ -170,7 +173,7 @@ describe('SwitchItem', function () {
 
 		describe('pointer', function () {
 			it('should not unselect the item when clicked', async function () {
-				switchItem.self.click();
+				await switchItem.self.click();
 				expect(await switchItem.isSelected).to.be.true();
 			});
 		});
@@ -211,7 +214,7 @@ describe('SwitchItem', function () {
 
 		describe('pointer', function () {
 			it('should not unselect the item when clicked', async function () {
-				switchItem.self.click();
+				await switchItem.self.click();
 				expect(await switchItem.isSelected).to.be.true();
 			});
 		});
