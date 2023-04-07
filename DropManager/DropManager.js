@@ -164,11 +164,6 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			this.setState({dragging: true});
 		};
 
-		handleTouchStart = (e) => {
-			this.dragOriginNode = e.target;
-			this.setState({dragging: true});
-		};
-
 		handleDragEnter = (ev) => {
 			this.addDropTarget(ev.target);
 		};
@@ -181,19 +176,6 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			ev.preventDefault();
 			// Set the dropEffect to move
 			ev.dataTransfer.dropEffect = 'move';
-		};
-
-		handleTouchMove = (ev) => {
-			let touchMoveOverElem = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
-
-			if (this.state.touchOverElement && this.state.touchOverElement !== touchMoveOverElem) {
-				this.removeDropTarget(this.state.touchOverElement);
-				this.addDropTarget(touchMoveOverElem);
-				this.setState(() => ({touchOverElement: touchMoveOverElem}));
-			} else {
-				this.addDropTarget(touchMoveOverElem);
-				this.setState(() => ({touchOverElement: touchMoveOverElem}));
-			}
 		};
 
 		handleDrop = (ev) => {
@@ -262,12 +244,26 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			this.setState({dragging: false});
 		};
 
+		handleTouchStart = (ev) => {
+			this.dragOriginNode = ev.target;
+			this.setState({dragging: true});
+		};
+
+		handleTouchMove = (ev) => {
+			let touchMoveOverElem = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
+
+			if (this.state.touchOverElement && this.state.touchOverElement !== touchMoveOverElem) {
+				this.removeDropTarget(this.state.touchOverElement);
+				this.addDropTarget(touchMoveOverElem);
+				this.setState(() => ({touchOverElement: touchMoveOverElem}));
+			} else {
+				this.addDropTarget(touchMoveOverElem);
+				this.setState(() => ({touchOverElement: touchMoveOverElem}));
+			}
+		};
+
 		handleTouchEnd = (ev) => {
 			ev.preventDefault();
-
-			if (this.state.touchOverElement) {
-				this.removeDropTarget(this.state.touchOverElement);
-			}
 
 			// Bail early if the drag started from some unknown location.
 			if (!this.dragOriginNode) {
@@ -275,16 +271,19 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 				return;
 			}
 
+			if (this.state.touchOverElement) {
+				this.removeDropTarget(this.state.touchOverElement);
+			}
+
 			// Get the id of the target and add the moved element to the target's DOM
-			// const dragOrigin = ev.dataTransfer.getData('text/plain');
 			const dragOrigin = this.dragOriginNode.dataset.slot;
 
-			let touchEndOverElem = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
+			let dropOverElem = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
 
 			let dragDropNode;
 			// If we dropped directly on an element with a slot defined, just use that directly
-			if (touchEndOverElem.dataset.slot) {
-				dragDropNode = touchEndOverElem;
+			if (dropOverElem.dataset.slot) {
+				dragDropNode = dropOverElem;
 			} else {
 				// If we dropped on a child of a slotted element (like an icon or a div or other
 				// nested component), find the closest ancestor with a slot and use that as the drop element.
@@ -311,8 +310,6 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 
 			this.dragOriginNode.dataset.slot = dragDestination;
 			dragDropNode.dataset.slot = dragOrigin;
-
-			// console.log('from:', dragOrigin, 'to:', dragDestination);
 
 			// We successfully completed the drag, blank-out the node.
 			this.dragOriginNode = null;
@@ -353,8 +350,8 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 				rest.onDragOver = this.handleDragOver;
 				rest.onDrop = this.handleDrop;
 				rest.onTouchStart = this.handleTouchStart;
-				rest.onTouchEnd = this.handleTouchEnd;
 				rest.onTouchMove = this.handleTouchMove;
+				rest.onTouchEnd = this.handleTouchEnd;
 				// rest.onDragEnd = this.handleDragEnd;
 			}
 
