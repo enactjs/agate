@@ -51,7 +51,7 @@ describe('DropManager Specs', () => {
 	};
 
 	const ResponsiveComponent = Droppable({slots: allSlotNames}, CustomResponsiveLayoutBase);
-	const BasicComponent = Droppable({slots: allSlotNames}, CustomLayoutBase);
+	const Component = Droppable({slots: allSlotNames}, CustomLayoutBase);
 
 	test('should render `top`, `center` and `bottom` slots', () => {
 		console.error = jest.fn(); // eslint-disable-line no-console
@@ -121,29 +121,26 @@ describe('DropManager Specs', () => {
 		expect(responsiveLayout).toHaveStyle({alignItems: 'center', justifyContent: 'space-evenly'});
 	});
 
-	test('should should rearrange items on touch', () => {
-		const arrangement = {bottom: "bottom", center: "center", top: "top"};
+	test('should rearrange items on touch', () => {
+		const arrangement = {bottom: 'bottom', center: 'center', top: 'top'};
 
 		render(
-			<BasicComponent arrangeable arrangement={arrangement}>
-				<top data-testid="top" is="custom">
+			<Component arrangeable arrangement={arrangement} data-testid="dropManager">
+				<top is="custom">
 					<div>Drag me top</div>
 				</top>
-				<center data-testid="center" is="custom">
+				<center is="custom">
 					<div>Drag me center</div>
 				</center>
-				<bottom data-testid="bottom" is="custom">
+				<bottom is="custom">
 					<div>Drag me bottom</div>
 				</bottom>
-			</BasicComponent>
+			</Component>
 		);
 
-		const topSlot = screen.getByTestId('top').parentElement;
-		const centerSlot = screen.getByTestId('center').parentElement;
-
-		document.elementFromPoint = jest.fn(() => {
-			return centerSlot;
-		});
+		const topSlot = screen.getByTestId('dropManager').children[0];
+		const centerSlot = screen.getByTestId('dropManager').children[1];
+		const bottomSlot = screen.getByTestId('dropManager').children[2];
 
 		topSlot.getBoundingClientRect = jest.fn(() => {
 			return {
@@ -159,7 +156,7 @@ describe('DropManager Specs', () => {
 		centerSlot.getBoundingClientRect = jest.fn(() => {
 			return {
 				width: 501,
-				height: 150,
+				height: 100,
 				top: 101,
 				left: 0,
 				bottom: 0,
@@ -167,24 +164,124 @@ describe('DropManager Specs', () => {
 			};
 		});
 
-		const delta = {x: 0, y: 150};
+		bottomSlot.getBoundingClientRect = jest.fn(() => {
+			return {
+				width: 501,
+				height: 100,
+				top: 202,
+				left: 0,
+				bottom: 0,
+				right: 0
+			};
+		});
+
+		const delta = {x: 0, y: 160};
 		const from = getElementClientCenter(topSlot);
 		const to = {x: from.x + delta.x, y: from.y + delta.y};
 		const step = {x: (to.x - from.x), y: (to.y - from.y)};
 		const current = {clientX: from.x, clientY: from.y};
 
 		fireEvent.touchStart(topSlot, {touches: [current]});
+
+		document.elementFromPoint = jest.fn(() => {
+			return centerSlot;
+		});
 		current.clientX += step.x;
 		current.clientY += step.y;
-
 		fireEvent.touchMove(topSlot, {changedTouches: [current]});
+
+		document.elementFromPoint = jest.fn(() => {
+			return bottomSlot;
+		});
+		current.clientX += step.x;
+		current.clientY += step.y;
+		fireEvent.touchMove(topSlot, {changedTouches: [current]});
+
 		fireEvent.touchEnd(topSlot, {changedTouches: [current]});
 
-		const dropManager = screen.getByTestId('top').parentElement.parentElement;
-		const firstChild = dropManager.children.item(0);
-		const secondChild = dropManager.children.item(1);
+		const firstChild = screen.getByTestId('dropManager').children.item(0);
+		const thirdChild = screen.getByTestId('dropManager').children.item(2);
 
-		expect(firstChild).toHaveAttribute('data-slot', 'center');
-		expect(secondChild).toHaveAttribute('data-slot', 'top');
+		expect(firstChild).toHaveAttribute('data-slot', 'bottom');
+		expect(thirdChild).toHaveAttribute('data-slot', 'top');
+	});
+
+	test('should not rearrange items on touch when drop node is the same as the drag node', () => {
+		const arrangement = {bottom: 'bottom', center: 'center', top: 'top'};
+
+		render(
+			<Component arrangeable arrangement={arrangement} data-testid="dropManager">
+				<top is="custom">
+					<div>Drag me top</div>
+				</top>
+				<center is="custom">
+					<div>Drag me center</div>
+				</center>
+				<bottom is="custom">
+					<div>Drag me bottom</div>
+				</bottom>
+			</Component>
+		);
+
+		const topSlot = screen.getByTestId('dropManager').children[0];
+		const centerSlot = screen.getByTestId('dropManager').children[1];
+		const bottomSlot = screen.getByTestId('dropManager').children[2];
+
+		topSlot.getBoundingClientRect = jest.fn(() => {
+			return {
+				width: 501,
+				height: 100,
+				top: 0,
+				left: 0,
+				bottom: 0,
+				right: 0
+			};
+		});
+
+		centerSlot.getBoundingClientRect = jest.fn(() => {
+			return {
+				width: 501,
+				height: 100,
+				top: 101,
+				left: 0,
+				bottom: 0,
+				right: 0
+			};
+		});
+
+		bottomSlot.getBoundingClientRect = jest.fn(() => {
+			return {
+				width: 501,
+				height: 100,
+				top: 202,
+				left: 0,
+				bottom: 0,
+				right: 0
+			};
+		});
+
+		const delta = {x: 0, y: 20};
+		const from = getElementClientCenter(topSlot);
+		const to = {x: from.x + delta.x, y: from.y + delta.y};
+		const step = {x: (to.x - from.x), y: (to.y - from.y)};
+		const current = {clientX: from.x, clientY: from.y};
+
+		fireEvent.touchStart(topSlot, {touches: [current]});
+
+		document.elementFromPoint = jest.fn(() => {
+			// returning child of slotted element for code coverage purposes
+			return topSlot.children[0];
+		});
+		current.clientX += step.x;
+		current.clientY += step.y;
+		fireEvent.touchMove(topSlot, {changedTouches: [current]});
+
+		fireEvent.touchEnd(topSlot, {changedTouches: [current]});
+
+		const firstChild = screen.getByTestId('dropManager').children.item(0);
+		const secondChild = screen.getByTestId('dropManager').children.item(1);
+
+		expect(firstChild).toHaveAttribute('data-slot', 'top');
+		expect(secondChild).toHaveAttribute('data-slot', 'center');
 	});
 });
