@@ -27,6 +27,7 @@ install:
     - enact link
     - ls -al node_modules/@enact/docs-utils/
     - ls -al node_modules/.bin/
+    - chmod -R 777 node_modules/@enact/docs-utils
 script:
     - echo -e "\x1b\x5b35;1m*** Starting tests...\x1b\x5b0m"
     - npm test -- --runInBand --coverage
