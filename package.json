@@ -45,20 +45,20 @@
     "color-convert": "^2.0.1",
     "deep-freeze": "0.0.1",
     "eases": "^1.0.8",
+    "ilib": "^14.15.1 || ^14.15.1-webos1",
     "immer": "^9.0.19",
     "invariant": "^2.2.4",
     "prop-types": "^15.8.1",
     "ramda": "^0.28.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "warning": "^4.0.3",
-    "ilib": "^14.17.0"
+    "warning": "^4.0.3"
   },
   "peerDependencies": {
     "ilib": "^14.15.1 || ^14.15.1-webos1"
   },
   "devDependencies": {
-    "@enact/docs-utils": "^0.4.1",
+    "@enact/docs-utils": "github:enactjs/docs-utils#release/0.4.2",
     "@enact/ui-test-utils": "^1.0.2",
     "eslint-config-enact-proxy": "^1.0.5",
     "ilib": "^14.17.0"
