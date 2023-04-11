@@ -126,13 +126,13 @@ describe('DropManager Specs', () => {
 
 		render(
 			<Component arrangeable arrangement={arrangement} data-testid="dropManager">
-				<top is="custom">
+				<top>
 					<div>Drag me top</div>
 				</top>
-				<center is="custom">
+				<center>
 					<div>Drag me center</div>
 				</center>
-				<bottom is="custom">
+				<bottom>
 					<div>Drag me bottom</div>
 				</bottom>
 			</Component>
@@ -211,13 +211,13 @@ describe('DropManager Specs', () => {
 
 		render(
 			<Component arrangeable arrangement={arrangement} data-testid="dropManager">
-				<top is="custom">
+				<top>
 					<div>Drag me top</div>
 				</top>
-				<center is="custom">
+				<center>
 					<div>Drag me center</div>
 				</center>
-				<bottom is="custom">
+				<bottom>
 					<div>Drag me bottom</div>
 				</bottom>
 			</Component>
