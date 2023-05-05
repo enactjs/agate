@@ -157,176 +157,204 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			target.classList.remove('dropTarget');
 		};
 
-		handleDragStart = (ev) => {
-			ev.dataTransfer.setData('text/plain', ev.target.dataset.slot);
-			ev.dataTransfer.effectAllowed = 'move';
-			this.dragOriginNode = ev.target;
-			this.setState({dragging: true});
+		// handleDragStart = (ev) => {
+		// 	ev.dataTransfer.setData('text/plain', ev.target.dataset.slot);
+		// 	ev.dataTransfer.effectAllowed = 'move';
+		// 	this.dragOriginNode = ev.target;
+		// 	this.setState({dragging: true});
+		// };
+		//
+		// handleDragEnter = (ev) => {
+		// 	this.addDropTarget(ev.target);
+		// };
+		//
+		// handleDragLeave = (ev) => {
+		// 	this.removeDropTarget(ev.target);
+		// };
+		//
+		// handleDragOver = (ev) => {
+		// 	ev.preventDefault();
+		// 	// Set the dropEffect to move
+		// 	ev.dataTransfer.dropEffect = 'move';
+		// };
+		//
+		// handleDrop = (ev) => {
+		// 	ev.preventDefault();
+		// 	ev.dataTransfer.clearData();
+		//
+		// 	// Bail early if the drag started from some unknown location.
+		// 	if (!this.dragOriginNode) {
+		// 		this.setState({dragging: false});
+		// 		return;
+		// 	}
+		//
+		// 	// Get the id of the target and add the moved element to the target's DOM
+		// 	// const dragOrigin = ev.dataTransfer.getData('text/plain');
+		// 	const dragOrigin = this.dragOriginNode.dataset.slot;
+		//
+		// 	let dragDropNode;
+		// 	// If we dropped directly on an element with a slot defined, just use that directly
+		// 	if (ev.target.dataset.slot) {
+		// 		dragDropNode = ev.target;
+		// 	} else {
+		// 		// If we dropped on a child of a slotted element (like an icon or a div or other
+		// 		// nested component), find the closest ancestor with a slot and use that as the drop element.
+		// 		const closestSlot = ev.target.closest('[data-slot]');
+		// 		if (closestSlot && closestSlot.dataset.slot) {
+		// 			dragDropNode = closestSlot;
+		// 		} else {
+		// 			// We didn't actually find anything, just bail out. The component was dropped in
+		// 			// a place that is unknown.
+		// 			this.setState({dragging: false});
+		// 			return;
+		// 		}
+		// 	}
+		//
+		// 	this.removeDropTarget(dragDropNode);
+		//
+		// 	// Get the destination element's slot value, or find its ancestor that has one (in case we drop this on a child or grandchild of the slotted item).
+		// 	// const dragDestination = ev.target.dataset.slot || (ev.target.closest('[data-slot]') && ev.target.closest('[data-slot]').dataset.slot);
+		// 	const dragDestination = dragDropNode.dataset.slot;
+		//
+		// 	// If the dragged element was dropped back on itself, do nothing and exit.
+		// 	if (dragDestination === dragOrigin) {
+		// 		this.setState({dragging: false});
+		// 		return;
+		// 	}
+		//
+		// 	this.dragOriginNode.dataset.slot = dragDestination;
+		// 	dragDropNode.dataset.slot = dragOrigin;
+		//
+		// 	// console.log('from:', dragOrigin, 'to:', dragDestination);
+		//
+		// 	// We successfully completed the drag, blank-out the node.
+		// 	this.dragOriginNode = null;
+		//
+		// 	const {arrangement, onArrange} = this.props;
+		// 	const oldD = getKeyByValue(arrangement, dragDestination);
+		// 	const oldO = getKeyByValue(arrangement, dragOrigin);
+		//
+		// 	arrangement[oldD || dragDestination] = dragOrigin;
+		// 	arrangement[oldO || dragOrigin] = dragDestination;
+		//
+		// 	if (onArrange) {
+		// 		onArrange({arrangement});
+		// 	}
+		//
+		// 	this.setState({dragging: false});
+		// };
+
+		handlePointerDown = (ev) => {
+			console.log("pointer down", ev.target);
 		};
 
-		handleDragEnter = (ev) => {
+		handlePointerEnter = (ev) => {
+			console.log("pointerEnter", ev.target);
+			ev.preventDefault();
+			ev.stopPropagation();
 			this.addDropTarget(ev.target);
 		};
 
-		handleDragLeave = (ev) => {
+		handlePointerLeave = (ev) => {
+			console.log("pointer leave", ev.target)
+			ev.preventDefault();
+			ev.stopPropagation();
 			this.removeDropTarget(ev.target);
 		};
 
-		handleDragOver = (ev) => {
+		handlePointerMove = (ev) => {
+			//console.log("pointer move", ev.target)
 			ev.preventDefault();
-			// Set the dropEffect to move
-			ev.dataTransfer.dropEffect = 'move';
+			ev.stopPropagation();
 		};
 
-		handleDrop = (ev) => {
-			ev.preventDefault();
-			ev.dataTransfer.clearData();
-
-			// Bail early if the drag started from some unknown location.
-			if (!this.dragOriginNode) {
-				this.setState({dragging: false});
-				return;
-			}
-
-			// Get the id of the target and add the moved element to the target's DOM
-			// const dragOrigin = ev.dataTransfer.getData('text/plain');
-			const dragOrigin = this.dragOriginNode.dataset.slot;
-
-			let dragDropNode;
-			// If we dropped directly on an element with a slot defined, just use that directly
-			if (ev.target.dataset.slot) {
-				dragDropNode = ev.target;
-			} else {
-				// If we dropped on a child of a slotted element (like an icon or a div or other
-				// nested component), find the closest ancestor with a slot and use that as the drop element.
-				const closestSlot = ev.target.closest('[data-slot]');
-				if (closestSlot && closestSlot.dataset.slot) {
-					dragDropNode = closestSlot;
-				} else {
-					// We didn't actually find anything, just bail out. The component was dropped in
-					// a place that is unknown.
-					this.setState({dragging: false});
-					return;
-				}
-			}
-
-			this.removeDropTarget(dragDropNode);
-
-			// Get the destination element's slot value, or find its ancestor that has one (in case we drop this on a child or grandchild of the slotted item).
-			// const dragDestination = ev.target.dataset.slot || (ev.target.closest('[data-slot]') && ev.target.closest('[data-slot]').dataset.slot);
-			const dragDestination = dragDropNode.dataset.slot;
-
-			// If the dragged element was dropped back on itself, do nothing and exit.
-			if (dragDestination === dragOrigin) {
-				this.setState({dragging: false});
-				return;
-			}
-
-			this.dragOriginNode.dataset.slot = dragDestination;
-			dragDropNode.dataset.slot = dragOrigin;
-
-			// console.log('from:', dragOrigin, 'to:', dragDestination);
-
-			// We successfully completed the drag, blank-out the node.
-			this.dragOriginNode = null;
-
-			const {arrangement, onArrange} = this.props;
-			const oldD = getKeyByValue(arrangement, dragDestination);
-			const oldO = getKeyByValue(arrangement, dragOrigin);
-
-			arrangement[oldD || dragDestination] = dragOrigin;
-			arrangement[oldO || dragOrigin] = dragDestination;
-
-			if (onArrange) {
-				onArrange({arrangement});
-			}
-
-			this.setState({dragging: false});
+		handlePointerUp = (ev) => {
+			console.log("pointer up", ev.target)
 		};
 
-		handleTouchStart = (ev) => {
-			this.dragOriginNode = ev.target;
-			this.setState({dragging: true});
-		};
-
-		handleTouchMove = (ev) => {
-			let touchMoveOverElem = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
-
-			if (this.state.touchOverElement && this.state.touchOverElement !== touchMoveOverElem) {
-				this.removeDropTarget(this.state.touchOverElement);
-				this.addDropTarget(touchMoveOverElem);
-				this.setState(() => ({touchOverElement: touchMoveOverElem}));
-			} else {
-				this.addDropTarget(touchMoveOverElem);
-				this.setState(() => ({touchOverElement: touchMoveOverElem}));
-			}
-		};
-
-		handleTouchEnd = (ev) => {
-			ev.preventDefault();
-
-			// Bail early if the drag started from some unknown location.
-			if (!this.dragOriginNode) {
-				this.setState({dragging: false});
-				return;
-			}
-
-			if (this.state.touchOverElement) {
-				this.removeDropTarget(this.state.touchOverElement);
-			}
-
-			// Get the id of the target and add the moved element to the target's DOM
-			const dragOrigin = this.dragOriginNode.dataset.slot;
-
-			let dropOverElem = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
-
-			let dragDropNode;
-			// If we dropped directly on an element with a slot defined, just use that directly
-			if (dropOverElem.dataset.slot) {
-				dragDropNode = dropOverElem;
-			} else {
-				// If we dropped on a child of a slotted element (like an icon or a div or other
-				// nested component), find the closest ancestor with a slot and use that as the drop element.
-				const closestSlot = ev.target.closest('[data-slot]');
-				if (closestSlot && closestSlot.dataset.slot) {
-					dragDropNode = closestSlot;
-				} else {
-					// We didn't actually find anything, just bail out. The component was dropped in
-					// a place that is unknown.
-					this.setState({dragging: false});
-					return;
-				}
-			}
-
-			// Get the destination element's slot value, or find its ancestor that has one (in case we drop this on a child or grandchild of the slotted item).
-			// const dragDestination = ev.target.dataset.slot || (ev.target.closest('[data-slot]') && ev.target.closest('[data-slot]').dataset.slot);
-			const dragDestination = dragDropNode.dataset.slot;
-
-			// If the dragged element was dropped back on itself, do nothing and exit.
-			if (dragDestination === dragOrigin) {
-				this.setState({dragging: false});
-				return;
-			}
-
-			this.dragOriginNode.dataset.slot = dragDestination;
-			dragDropNode.dataset.slot = dragOrigin;
-
-			// We successfully completed the drag, blank-out the node.
-			this.dragOriginNode = null;
-
-			const {arrangement, onArrange} = this.props;
-			const oldD = getKeyByValue(arrangement, dragDestination);
-			const oldO = getKeyByValue(arrangement, dragOrigin);
-
-			arrangement[oldD || dragDestination] = dragOrigin;
-			arrangement[oldO || dragOrigin] = dragDestination;
-
-			if (onArrange) {
-				onArrange({arrangement});
-			}
-
-			this.setState({dragging: false});
-		};
+		// handleTouchStart = (ev) => {
+		// 	this.dragOriginNode = ev.target;
+		// 	this.setState({dragging: true});
+		// };
+		//
+		// handleTouchMove = (ev) => {
+		// 	let touchMoveOverElem = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
+		//
+		// 	if (this.state.touchOverElement && this.state.touchOverElement !== touchMoveOverElem) {
+		// 		this.removeDropTarget(this.state.touchOverElement);
+		// 		this.addDropTarget(touchMoveOverElem);
+		// 		this.setState(() => ({touchOverElement: touchMoveOverElem}));
+		// 	} else {
+		// 		this.addDropTarget(touchMoveOverElem);
+		// 		this.setState(() => ({touchOverElement: touchMoveOverElem}));
+		// 	}
+		// };
+		//
+		// handleTouchEnd = (ev) => {
+		// 	ev.preventDefault();
+		//
+		// 	// Bail early if the drag started from some unknown location.
+		// 	if (!this.dragOriginNode) {
+		// 		this.setState({dragging: false});
+		// 		return;
+		// 	}
+		//
+		// 	if (this.state.touchOverElement) {
+		// 		this.removeDropTarget(this.state.touchOverElement);
+		// 	}
+		//
+		// 	// Get the id of the target and add the moved element to the target's DOM
+		// 	const dragOrigin = this.dragOriginNode.dataset.slot;
+		//
+		// 	let dropOverElem = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
+		//
+		// 	let dragDropNode;
+		// 	// If we dropped directly on an element with a slot defined, just use that directly
+		// 	if (dropOverElem.dataset.slot) {
+		// 		dragDropNode = dropOverElem;
+		// 	} else {
+		// 		// If we dropped on a child of a slotted element (like an icon or a div or other
+		// 		// nested component), find the closest ancestor with a slot and use that as the drop element.
+		// 		const closestSlot = ev.target.closest('[data-slot]');
+		// 		if (closestSlot && closestSlot.dataset.slot) {
+		// 			dragDropNode = closestSlot;
+		// 		} else {
+		// 			// We didn't actually find anything, just bail out. The component was dropped in
+		// 			// a place that is unknown.
+		// 			this.setState({dragging: false});
+		// 			return;
+		// 		}
+		// 	}
+		//
+		// 	// Get the destination element's slot value, or find its ancestor that has one (in case we drop this on a child or grandchild of the slotted item).
+		// 	// const dragDestination = ev.target.dataset.slot || (ev.target.closest('[data-slot]') && ev.target.closest('[data-slot]').dataset.slot);
+		// 	const dragDestination = dragDropNode.dataset.slot;
+		//
+		// 	// If the dragged element was dropped back on itself, do nothing and exit.
+		// 	if (dragDestination === dragOrigin) {
+		// 		this.setState({dragging: false});
+		// 		return;
+		// 	}
+		//
+		// 	this.dragOriginNode.dataset.slot = dragDestination;
+		// 	dragDropNode.dataset.slot = dragOrigin;
+		//
+		// 	// We successfully completed the drag, blank-out the node.
+		// 	this.dragOriginNode = null;
+		//
+		// 	const {arrangement, onArrange} = this.props;
+		// 	const oldD = getKeyByValue(arrangement, dragDestination);
+		// 	const oldO = getKeyByValue(arrangement, dragOrigin);
+		//
+		// 	arrangement[oldD || dragDestination] = dragOrigin;
+		// 	arrangement[oldO || dragOrigin] = dragDestination;
+		//
+		// 	if (onArrange) {
+		// 		onArrange({arrangement});
+		// 	}
+		//
+		// 	this.setState({dragging: false});
+		// };
 
 		// handleDragEnd = () => {
 		// 	if (this.props.onArrange) {
@@ -349,6 +377,11 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 				rest.onDragLeave = this.handleDragLeave;
 				rest.onDragOver = this.handleDragOver;
 				rest.onDrop = this.handleDrop;
+				rest.onPointerDown = this.handlePointerDown;
+				rest.onPointerEnter = this.handlePointerEnter;
+				rest.onPointerLeave = this.handlePointerLeave;
+				rest.onPointerMove = this.handlePointerMove;
+				rest.onPointerUp = this.handlePointerUp;
 				rest.onTouchStart = this.handleTouchStart;
 				rest.onTouchMove = this.handleTouchMove;
 				rest.onTouchEnd = this.handleTouchEnd;
