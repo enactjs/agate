@@ -47,6 +47,7 @@ const VirtualListNativeSample = (props) => {
 			dataSize={items.length}
 			itemRenderer={renderItem}
 			itemSize={ri.scale(78)}
+			scrollMode="native"
 		/>
 	);
 };

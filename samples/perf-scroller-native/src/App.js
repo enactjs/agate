@@ -29,7 +29,7 @@ for (let i = 0; i < 100; i++) {
 
 const ScrollerSample = (props) => {
 	return (
-		<Scroller {...props}>
+		<Scroller {...props} scrollMode="native">
 			{items}
 		</Scroller>
 	);

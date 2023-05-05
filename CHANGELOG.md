@@ -2,6 +2,13 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Fixed
+
+- `agate/DropManager` to work on touchscreen devices
+- `agate/MediaPlayer` active knob size to not overlay the text on Silicon and Carbon skins when `type` is `tiny`
+
 ## [2.0.4] - 2023-02-24
 
 ### Added

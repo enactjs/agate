@@ -19,6 +19,10 @@
 		}
 
 		&.underline {
+			.client {
+				padding-left: @agate-togglebutton-client-padding-left;
+			}
+
 			&::after {
 				content: "";
 			}
@@ -71,7 +75,6 @@
 
 		.client {
 			color: @agate-togglebutton-color;
-			padding-left: @agate-togglebutton-client-padding-left;
 		}
 
 		&.selected {

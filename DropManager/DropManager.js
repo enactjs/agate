@@ -94,7 +94,6 @@ const defaultConfig = {
 // prop, so we can send an arrangement to Rearrangeable, exclusively.
 const fallbackArrangementProp = 'arrangement';
 
-
 const DropManagerContext = createContext(defaultContainerShape);
 
 /**
@@ -146,7 +145,8 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 		};
 
 		state = {
-			dragging: false
+			dragging: false,
+			touchOverElement: null
 		};
 
 		addDropTarget = (target) => {
@@ -244,6 +244,90 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			this.setState({dragging: false});
 		};
 
+		handleTouchStart = (ev) => {
+			this.dragOriginNode = ev.target;
+			this.setState({dragging: true});
+		};
+
+		handleTouchMove = (ev) => {
+			let touchMoveOverElem = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
+
+			if (this.state.touchOverElement && this.state.touchOverElement !== touchMoveOverElem) {
+				this.removeDropTarget(this.state.touchOverElement);
+				this.addDropTarget(touchMoveOverElem);
+				this.setState(() => ({touchOverElement: touchMoveOverElem}));
+			} else {
+				this.addDropTarget(touchMoveOverElem);
+				this.setState(() => ({touchOverElement: touchMoveOverElem}));
+			}
+		};
+
+		handleTouchEnd = (ev) => {
+			ev.preventDefault();
+
+			// Bail early if the drag started from some unknown location.
+			if (!this.dragOriginNode) {
+				this.setState({dragging: false});
+				return;
+			}
+
+			if (this.state.touchOverElement) {
+				this.removeDropTarget(this.state.touchOverElement);
+			}
+
+			// Get the id of the target and add the moved element to the target's DOM
+			const dragOrigin = this.dragOriginNode.dataset.slot;
+
+			let dropOverElem = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
+
+			let dragDropNode;
+			// If we dropped directly on an element with a slot defined, just use that directly
+			if (dropOverElem.dataset.slot) {
+				dragDropNode = dropOverElem;
+			} else {
+				// If we dropped on a child of a slotted element (like an icon or a div or other
+				// nested component), find the closest ancestor with a slot and use that as the drop element.
+				const closestSlot = ev.target.closest('[data-slot]');
+				if (closestSlot && closestSlot.dataset.slot) {
+					dragDropNode = closestSlot;
+				} else {
+					// We didn't actually find anything, just bail out. The component was dropped in
+					// a place that is unknown.
+					this.setState({dragging: false});
+					return;
+				}
+			}
+
+			// Get the destination element's slot value, or find its ancestor that has one (in case we drop this on a child or grandchild of the slotted item).
+			// const dragDestination = ev.target.dataset.slot || (ev.target.closest('[data-slot]') && ev.target.closest('[data-slot]').dataset.slot);
+			const dragDestination = dragDropNode.dataset.slot;
+
+			// If the dragged element was dropped back on itself, do nothing and exit.
+			if (dragDestination === dragOrigin) {
+				this.setState({dragging: false});
+				return;
+			}
+
+			this.dragOriginNode.dataset.slot = dragDestination;
+			dragDropNode.dataset.slot = dragOrigin;
+
+			// We successfully completed the drag, blank-out the node.
+			this.dragOriginNode = null;
+
+			const {arrangement, onArrange} = this.props;
+			const oldD = getKeyByValue(arrangement, dragDestination);
+			const oldO = getKeyByValue(arrangement, dragOrigin);
+
+			arrangement[oldD || dragDestination] = dragOrigin;
+			arrangement[oldO || dragOrigin] = dragDestination;
+
+			if (onArrange) {
+				onArrange({arrangement});
+			}
+
+			this.setState({dragging: false});
+		};
+
 		// handleDragEnd = () => {
 		// 	if (this.props.onArrange) {
 		// 		this.props.onArrange({arrangement: this.state.arrangement});
@@ -265,6 +349,9 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 				rest.onDragLeave = this.handleDragLeave;
 				rest.onDragOver = this.handleDragOver;
 				rest.onDrop = this.handleDrop;
+				rest.onTouchStart = this.handleTouchStart;
+				rest.onTouchMove = this.handleTouchMove;
+				rest.onTouchEnd = this.handleTouchEnd;
 				// rest.onDragEnd = this.handleDragEnd;
 			}
 
