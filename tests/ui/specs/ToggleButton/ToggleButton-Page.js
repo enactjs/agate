@@ -40,4 +40,5 @@ class ToggleButtonPage extends Page {
 	}
 }
 
-module.exports = new ToggleButtonPage();
+//module.exports = new ToggleButtonPage();
+export default new ToggleButtonPage();
