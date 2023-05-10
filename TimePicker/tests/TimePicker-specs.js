@@ -11,8 +11,9 @@ import TimePicker, {timeToLocaleString} from '../TimePicker';
 describe('TimePicker', () => {
 	// Suite-wide setup
 
-	test('should emit an onChange event when changing the hour', () => {
+	test('should emit an onChange event when changing the hour', async () => {
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		render(
 			<TimePicker
 				locale="en-US"
@@ -21,15 +22,16 @@ describe('TimePicker', () => {
 			/>
 		);
 
-		userEvent.click(screen.getByLabelText('12 hour next item'));
+		await user.click(screen.getByLabelText('12 hour next item'));
 
 		const expected = 1;
 
 		expect(handleChange).toHaveBeenCalledTimes(expected);
 	});
 
-	test('should emit an onChange event when changing the minute', () => {
+	test('should emit an onChange event when changing the minute', async () => {
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		render(
 			<TimePicker
 				locale="en-US"
@@ -38,15 +40,16 @@ describe('TimePicker', () => {
 			/>
 		);
 
-		userEvent.click(screen.getByLabelText('30 minute increase the value'));
+		await user.click(screen.getByLabelText('30 minute increase the value'));
 
 		const expected = 1;
 
 		expect(handleChange).toHaveBeenCalledTimes(expected);
 	});
 
-	test('should emit an onChange event when changing the meridiem', () => {
+	test('should emit an onChange event when changing the meridiem', async () => {
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		render(
 			<TimePicker
 				locale="en-US"
@@ -55,16 +58,17 @@ describe('TimePicker', () => {
 			/>
 		);
 
-		userEvent.click(screen.getByLabelText('PM previous item'));
+		await user.click(screen.getByLabelText('PM previous item'));
 
 		const expected = 1;
 
 		expect(handleChange).toHaveBeenCalledTimes(expected);
 	});
 
-	test('should emit an onChange event when changing the meridiem on a 5 meridiem locale', () => {
+	test('should emit an onChange event when changing the meridiem on a 5 meridiem locale', async () => {
 		ilib.setLocale('am-ET');
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		render(
 			<TimePicker
 				locale="am-ET"
@@ -73,7 +77,7 @@ describe('TimePicker', () => {
 			/>
 		);
 
-		userEvent.click(screen.getByLabelText('ከሰዓት previous item'));
+		await user.click(screen.getByLabelText('ከሰዓት previous item'));
 
 		const expected = 1;
 

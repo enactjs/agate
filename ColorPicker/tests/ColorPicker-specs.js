@@ -50,8 +50,9 @@ describe('ColorPicker', () => {
 		expect(actual).toHaveClass(expected);
 	});
 
-	test('should change value when selecting a different color', () => {
+	test('should change value when selecting a different color', async () => {
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		render(
 			<ColorPicker onChange={handleChange} value="pink">
 				{['red', 'blue', 'yellow', 'pink']}
@@ -59,9 +60,9 @@ describe('ColorPicker', () => {
 		);
 
 		// First extend color picker
-		userEvent.click(screen.getAllByRole('button')[0]);
+		await user.click(screen.getAllByRole('button')[0]);
 		// Now click on blue color
-		userEvent.click(screen.getByLabelText('blue'));
+		await user.click(screen.getByLabelText('blue'));
 
 		const expected = 'blue';
 		const actual = handleChange.mock.calls[0][0].value;
@@ -69,7 +70,8 @@ describe('ColorPicker', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should change backgroundColor of swatchButton when selecting a different color', () => {
+	test('should change backgroundColor of swatchButton when selecting a different color', async () => {
+		const user = userEvent.setup();
 		render(
 			<ColorPicker>
 				{['red', 'blue', 'yellow', 'pink']}
@@ -77,9 +79,9 @@ describe('ColorPicker', () => {
 		);
 
 		// First extend color picker
-		userEvent.click(screen.getAllByRole('button')[0]);
+		await user.click(screen.getAllByRole('button')[0]);
 		// Now click on blue color
-		userEvent.click(screen.getByLabelText('blue'));
+		await user.click(screen.getByLabelText('blue'));
 
 		const expected = 'blue';
 		const actual = screen.getAllByRole('button')[0].children[1].children[0];
@@ -88,8 +90,9 @@ describe('ColorPicker', () => {
 		expect(actual).toHaveStyle({'background-color': expected});
 	});
 
-	test('should emit an onChange event when changing hue', () => {
+	test('should emit an onChange event when changing hue', async () => {
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		render(
 			<ColorPicker onChange={handleChange} value="pink">
 				{['red', 'blue', 'yellow', 'pink']}
@@ -97,9 +100,9 @@ describe('ColorPicker', () => {
 		);
 
 		// First extend color picker
-		userEvent.click(screen.getAllByRole('button')[0]);
+		await user.click(screen.getAllByRole('button')[0]);
 		// Click on the "More" button
-		userEvent.click(screen.getByLabelText('More'));
+		await user.click(screen.getByLabelText('More'));
 		// Focus slider and move it with right key
 		activate(screen.getAllByRole('slider')[0]);
 		rightKeyDown(screen.getAllByRole('slider')[0]);
@@ -109,8 +112,9 @@ describe('ColorPicker', () => {
 		expect(handleChange).toHaveBeenCalledTimes(expected);
 	});
 
-	test('should emit an onChange event when changing saturation', () => {
+	test('should emit an onChange event when changing saturation', async () => {
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		render(
 			<ColorPicker onChange={handleChange} value="pink">
 				{['red', 'blue', 'yellow', 'pink']}
@@ -118,9 +122,9 @@ describe('ColorPicker', () => {
 		);
 
 		// First extend color picker
-		userEvent.click(screen.getAllByRole('button')[0]);
+		await user.click(screen.getAllByRole('button')[0]);
 		// Click on the "More" button
-		userEvent.click(screen.getByLabelText('More'));
+		await user.click(screen.getByLabelText('More'));
 		// Focus slider and move it with left key
 		activate(screen.getAllByRole('slider')[1]);
 		leftKeyDown(screen.getAllByRole('slider')[1]);
@@ -130,8 +134,9 @@ describe('ColorPicker', () => {
 		expect(handleChange).toHaveBeenCalledTimes(expected);
 	});
 
-	test('should emit an onChange event when changing lightness', () => {
+	test('should emit an onChange event when changing lightness', async () => {
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		render(
 			<ColorPicker onChange={handleChange} value="pink">
 				{['red', 'blue', 'yellow', 'pink']}
@@ -139,9 +144,9 @@ describe('ColorPicker', () => {
 		);
 
 		// First extend color picker
-		userEvent.click(screen.getAllByRole('button')[0]);
+		await user.click(screen.getAllByRole('button')[0]);
 		// Click on the "More" button
-		userEvent.click(screen.getByLabelText('More'));
+		await user.click(screen.getByLabelText('More'));
 		// Focus slider and move it with right key
 		activate(screen.getAllByRole('slider')[2]);
 		rightKeyDown(screen.getAllByRole('slider')[2]);
@@ -151,8 +156,9 @@ describe('ColorPicker', () => {
 		expect(handleChange).toHaveBeenCalledTimes(expected);
 	});
 
-	test('should close palette on second click on primary swatchButton', () => {
+	test('should close palette on second click on primary swatchButton', async () => {
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		render(
 			<ColorPicker onChange={handleChange} value="pink">
 				{['red', 'blue', 'yellow', 'pink']}
@@ -160,7 +166,7 @@ describe('ColorPicker', () => {
 		);
 
 		// Extend color picker
-		userEvent.click(screen.getAllByRole('button')[0]);
+		await user.click(screen.getAllByRole('button')[0]);
 
 		const actual = screen.getAllByRole('button')[0].nextElementSibling;
 		const expected = 'shown';
@@ -168,7 +174,7 @@ describe('ColorPicker', () => {
 		expect(actual).toHaveClass(expected);
 
 		// Hide color picker
-		userEvent.click(screen.getAllByRole('button')[0]);
+		await user.click(screen.getAllByRole('button')[0]);
 
 		expect(actual).not.toHaveClass(expected);
 	});

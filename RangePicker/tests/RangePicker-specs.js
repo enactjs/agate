@@ -4,9 +4,6 @@ import userEvent from '@testing-library/user-event';
 
 import {RangePicker, RangePickerBase} from '../RangePicker';
 
-const decrement = (value) => userEvent.click(screen.getByLabelText(`${value} decrease the value`));
-const increment = (value) => userEvent.click(screen.getByLabelText(`${value} increase the value`));
-
 describe('RangePicker Specs', () => {
 	test('should render a single child with the current value', () => {
 		render(<RangePicker max={20} min={-10} value={10} />);
@@ -17,10 +14,11 @@ describe('RangePicker Specs', () => {
 		expect(pickerValue).toHaveTextContent(expected);
 	});
 
-	test('should increase by step amount on increment press', () => {
+	test('should increase by step amount on increment press', async () => {
+		const user = userEvent.setup();
 		render(<RangePicker defaultValue={10} max={100} min={0} noAnimation step={1} />);
 
-		increment(10);
+		await user.click(screen.getByLabelText(`${10} increase the value`));
 
 		const expected = '11';
 		const actual = screen.getByRole('spinbutton');
@@ -28,10 +26,11 @@ describe('RangePicker Specs', () => {
 		expect(actual).toHaveTextContent(expected);
 	});
 
-	test('should decrease by step amount on decrement press', () => {
+	test('should decrease by step amount on decrement press', async () => {
+		const user = userEvent.setup();
 		render(<RangePicker defaultValue={10} max={100} min={0} noAnimation step={1} />);
 
-		decrement(10);
+		await user.click(screen.getByLabelText(`${10} decrease the value`));
 
 		const expected = '9';
 		const actual = screen.getByRole('spinbutton');
