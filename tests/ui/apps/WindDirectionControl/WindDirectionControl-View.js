@@ -1,6 +1,6 @@
-import Heading from '../../../../Heading';
-import ThemeDecorator from '../../../../ThemeDecorator';
-import WindDirectionControl from '../../../../WindDirectionControl';
+import Heading from '../../../../Heading.js';
+import ThemeDecorator from '../../../../ThemeDecorator.js';
+import WindDirectionControl from '../../../../WindDirectionControl.js';
 import spotlight from '@enact/spotlight';
 
 import Section from '../../components/Section.js';
