@@ -266,7 +266,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			ev.preventDefault();
 
 			// Bail early if the drag started from some unknown location.
-			if (!this.dragOriginNode) {
+			if (!this.dragOriginNode || !this.dragOriginNode.dataset.slot) {
 				this.setState({dragging: false});
 				return;
 			}
