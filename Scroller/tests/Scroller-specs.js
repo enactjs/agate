@@ -95,7 +95,8 @@ describe('Scroller', () => {
 
 		test(
 			'should render only vertical scrollbar when `verticalScrollbar` is `hidden` and `horizontalScrollbar` is `visible`',
-			() => {
+			async () => {
+				const user = userEvent.setup();
 				render(
 					<Scroller
 						horizontalScrollbar="visible"
@@ -112,7 +113,7 @@ describe('Scroller', () => {
 
 				// dispatching click event to increase code coverage
 				focus(scrollButtons[1]);
-				userEvent.click(scrollButtons[1]);
+				await user.click(scrollButtons[1]);
 
 				expect(scrollButtons).toHaveLength(expectedLength);
 				expect(actual).toHaveClass(expectedClass);
