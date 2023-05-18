@@ -1,9 +1,9 @@
-import Heading from '../../../../Heading.js';
-import ThemeDecorator from '../../../../ThemeDecorator.js';
-import WindDirectionControl from '../../../../WindDirectionControl.js';
+import Heading from '../../../../Heading';
+import ThemeDecorator from '../../../../ThemeDecorator';
+import WindDirectionControl from '../../../../WindDirectionControl';
 import spotlight from '@enact/spotlight';
 
-import Section from '../../components/Section.js';
+import Section from '../../components/Section';
 
 // NOTE: Forcing pointer mode off so we can be sure that regardless of webOS pointer mode the app
 // runs the same way
