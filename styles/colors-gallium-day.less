@@ -30,6 +30,7 @@
 
 // Component color assignments
 @agate-bg-color: @agate-background;
+@agate-bg-color-custom: var(--agate-background-color, @agate-white);
 @agate-bg-image: none;
 @agate-bg-image2: none;
 @agate-text-color: @agate-foreground;
@@ -152,7 +153,7 @@
 
 // Panels
 // ---------------------------------------
-@agate-panels-bg-color:               @agate-white;
+@agate-panels-bg-color:               @agate-bg-color-custom;
 @agate-panels-breadcrumb-bg-color:    @agate-light-gray;
 @agate-panels-tab-separator-border-color: @gallium-night-rider-gray;
 @agate-panels-tab-color:              @agate-foreground;

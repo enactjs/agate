@@ -10,6 +10,7 @@
 
 // Component color assignments
 @agate-bg-color: @agate-black;
+@agate-bg-color-custom: var(--agate-background-color, @agate-background);
 @agate-text-color: @agate-foreground;
 @agate-title-text-color: @agate-foreground;
 
@@ -42,7 +43,7 @@
 
 // Panels
 // ---------------------------------------
-@agate-panels-bg-color:               @agate-background;
+@agate-panels-bg-color:               @agate-bg-color-custom;
 @agate-panels-partial-bg-color:       @agate-background;
 @agate-panels-breadcrumb-bg-color:    @agate-bg-color;
 

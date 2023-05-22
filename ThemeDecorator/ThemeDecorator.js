@@ -193,6 +193,15 @@ const CustomizableSkinStyle = kind({
 		 */
 		accent: PropTypes.string,
 		/**
+		 * A custom background color, as a hex string.
+		 *
+		 * @memberof agate/ThemeDecorator.CustomizableSkinStyle.prototype
+		 * @type {String}
+		 * @default null
+		 * @private
+		 */
+		background: PropTypes.string,
+		/**
 		 * A custom highlight color, as a hex string.
 		 *
 		 * @memberof agate/ThemeDecorator.CustomizableSkinStyle.prototype
@@ -206,11 +215,12 @@ const CustomizableSkinStyle = kind({
 	// TODO: Consider allowing `null` and dropping this override completely
 	defaultProps: {
 		accent: '#8b7efe',
+		background: null,
 		highlight: '#c6c0fe'
 	},
 
 	computed: {
-		cssRules: ({className, accent, highlight}) => {
+		cssRules: ({className, accent, background, highlight}) => {
 			const accentObj = convert.hex.hsl(accent);
 			const highlightObj = convert.hex.hsl(highlight);
 
@@ -219,6 +229,7 @@ const CustomizableSkinStyle = kind({
 				'--agate-accent-h': accentObj[0],
 				'--agate-accent-s': accentObj[1] + '%',
 				'--agate-accent-l': accentObj[2] + '%',
+				'--agate-background-color': background,
 				'--agate-highlight-color': highlight,
 				'--agate-highlight-h': highlightObj[0],
 				'--agate-highlight-s': highlightObj[1] + '%',
@@ -300,6 +311,16 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * @public
 			 */
 			accent: PropTypes.string,
+
+			/**
+			 * A custom background color, as a hex string.
+			 *
+			 * @memberof agate/ThemeDecorator.ThemeDecorator.prototype
+			 * @type {String}
+			 * @public
+			 */
+			background: PropTypes.string,
+
 			/**
 			 * A custom highlight color, as a hex string.
 			 *
@@ -320,7 +341,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 		render () {
 			const currentSkin = this.props.skin || defaultSkin;
-			const {accent = defaultColors[currentSkin].accent, className, highlight = defaultColors[currentSkin].highlight, ...rest} = this.props;
+			const {accent = defaultColors[currentSkin].accent, background = null, className, highlight = defaultColors[currentSkin].highlight, ...rest} = this.props;
 			const customizableSkinClassName = 'agate-customized-skin';
 
 			const allClassNames = classnames(
@@ -335,9 +356,9 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			);
 
 			return (
-				<ThemeContext.Provider value={{accent, highlight}}>
-					{customSkin ? <CustomizableSkinStyle className={customizableSkinClassName} accent={accent} highlight={highlight} /> : null}
-					<App {...rest} accent={accent} highlight={highlight} className={allClassNames} />
+				<ThemeContext.Provider value={{accent, background, highlight}}>
+					{customSkin ? <CustomizableSkinStyle className={customizableSkinClassName} accent={accent} background={background} highlight={highlight} /> : null}
+					<App {...rest} accent={accent} background={background} highlight={highlight} className={allClassNames} />
 				</ThemeContext.Provider>
 			);
 		}

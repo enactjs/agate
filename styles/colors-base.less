@@ -58,6 +58,7 @@
 
 // Component color assignments
 @agate-bg-color: inherit;
+@agate-bg-color-custom: var(--agate-background-color, @agate-bg-color);
 @agate-bg-image: inherit;
 @agate-bg-image2: inherit;
 @agate-text-color: inherit;
@@ -290,7 +291,7 @@
 
 // Panels
 // ---------------------------------------
-@agate-panels-bg-color:               inherit;
+@agate-panels-bg-color:               @agate-bg-color-custom;
 @agate-panels-partial-bg-color:       inherit;
 @agate-panels-partial-bg-image:       inherit;
 @agate-panels-breadcrumb-bg-color:    inherit;
