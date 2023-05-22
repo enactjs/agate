@@ -1,4 +1,4 @@
-import ArcPicker from '../../../../ArcPicker.js';
+import ArcPicker from '../../../../ArcPicker/ArcPicker.js';
 
 const ArcPickerTests = [
 	<ArcPicker>{[1, 2, 3, 4]}</ArcPicker>,
