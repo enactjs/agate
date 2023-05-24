@@ -131,25 +131,6 @@ describe('Input Specs', () => {
 		expect(actual).toBeTruthy();
 	});
 
-	test('should not bubble the native event when stopPropagation from onChange is called', () => {
-		const handleChange = jest.fn();
-		const value = 'smt';
-		function stop (ev) {
-			ev.stopPropagation();
-		}
-
-		render(
-			<div onChange={handleChange}>
-				<Input onChange={stop} />
-			</div>
-		);
-		const inputText = screen.getByLabelText('Input field').children[0];
-
-		userEvent.type(inputText, value);
-
-		expect(handleChange).not.toHaveBeenCalled();
-	});
-
 	test('should blur input on enter if `dismissOnEnter`', () => {
 		const handleChange = jest.fn();
 		render(<Input dismissOnEnter onBlur={handleChange} />);
@@ -172,27 +153,15 @@ describe('Input Specs', () => {
 		expect(handleChange).not.toHaveBeenCalled();
 	});
 
-	test('should callback onBeforeChange before the text changes', () => {
-		const handleBeforeChange = jest.fn();
-		const value = 'blah';
-		render(<Input onBeforeChange={handleBeforeChange} />);
-		const inputText = screen.getByLabelText('Input field').children[0];
-
-		userEvent.type(inputText, value);
-		// bluring input onSpotlightLeft for code coverage purposes
-		pressLeftKey(inputText);
-
-		expect(handleBeforeChange).toHaveBeenCalled();
-	});
-
-	test('should prevent onChange if onBeforeChange prevents', () => {
+	test('should prevent onChange if onBeforeChange prevents', async () => {
 		const handleBeforeChange = jest.fn(ev => ev.preventDefault());
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		const value = 'blah';
 		render(<Input onBeforeChange={handleBeforeChange} onChange={handleChange} />);
 		const inputText = screen.getByLabelText('Input field').children[0];
 
-		userEvent.type(inputText, value);
+		await user.type(inputText, value);
 		// bluring input onSpotlightRight for code coverage purposes
 		pressRightKey(inputText);
 		pressRightKey(inputText);
@@ -202,6 +171,40 @@ describe('Input Specs', () => {
 		pressRightKey(inputText);
 
 		expect(handleChange).not.toHaveBeenCalled();
+	});
+
+	test('should not bubble the native event when stopPropagation from onChange is called', async () => {
+		const handleChange = jest.fn();
+		const user = userEvent.setup();
+		const value = 'smt';
+		function stop (ev) {
+			ev.stopPropagation();
+		}
+
+		render(
+			<div onChange={handleChange}>
+				<Input onChange={stop} />
+			</div>
+		);
+		const inputText = screen.getByLabelText('Input field').children[0];
+
+		await user.type(inputText, value);
+
+		expect(handleChange).not.toHaveBeenCalled();
+	});
+
+	test('should callback onBeforeChange before the text changes', async () => {
+		const handleBeforeChange = jest.fn();
+		const user = userEvent.setup();
+		const value = 'blah';
+		render(<Input onBeforeChange={handleBeforeChange} />);
+		const inputText = screen.getByLabelText('Input field').children[0];
+
+		await user.type(inputText, value);
+		// bluring input onSpotlightLeft for code coverage purposes
+		pressLeftKey(inputText);
+
+		expect(handleBeforeChange).toHaveBeenCalled();
 	});
 
 	test('should activate input on enter', () => {
@@ -369,10 +372,11 @@ describe('Input Specs', () => {
 
 	test('should clear input value when clearButton is clicked', async () => {
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		render(<Input clearButton onChange={handleChange} value="Hello Input" />);
 		const clearButton = screen.getByLabelText('Hello Input Input field').children[1];
 
-		userEvent.click(clearButton);
+		await user.click(clearButton);
 
 		const expectedValue = '';
 
@@ -386,11 +390,12 @@ describe('Input Specs', () => {
 
 	test('should not call onChange when clearButton is disabled', async () => {
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		const value = 'Hello Input';
 		render(<Input clearButton disabled onChange={handleChange} value={value} />);
 		const clearButton = screen.getByLabelText('Hello Input Input field').children[1];
 
-		userEvent.click(clearButton);
+		await user.click(clearButton);
 
 		const expectedValue = 0;
 

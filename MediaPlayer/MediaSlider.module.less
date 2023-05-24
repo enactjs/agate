@@ -48,14 +48,43 @@
 			}
 		});
 
+		.spottable({
+			&.tiny {
+				&.pressed,
+				&:focus.activateOnFocus,
+				&:focus.active {
+					.knob::before {
+						height: @agate-slider-active-tiny-knob-height;
+						width: @agate-slider-active-tiny-knob-width;
+					}
+				}
+			}
+
+		});
+
 		&.tiny {
 			&.slider {
 				height: @agate-mediaslider-tiny-height;
 				padding: @agate-mediaslider-tiny-padding;
 
 				.bar,
-				.fill {
+				.fill,
+				.progressBar {
 					height: @agate-mediaslider-tiny-bar-height;
+				}
+
+				&.horizontal {
+					margin: @agate-slider-horizontal-tiny-margin;
+
+					.bar {
+						left: ((@agate-slider-horizontal-tiny-anchorpoint-width / 2) * -1);
+						width: ~"calc(100% + " @agate-slider-horizontal-tiny-anchorpoint-width ~")";
+					}
+				}
+
+				.knob::before {
+					height: @agate-slider-tiny-knob-height;
+					width: @agate-slider-tiny-knob-width;
 				}
 			}
 		}

@@ -27,8 +27,9 @@ describe('TabbedPanels Specs', () => {
 		expect(secondTab).toBeInTheDocument();
 	});
 
-	test('should call \'onSelect\' when selecting another tab', () => {
+	test('should call \'onSelect\' when selecting another tab', async () => {
 		const spy = jest.fn();
+		const user = userEvent.setup();
 		render(
 			<TabbedPanels
 				onSelect={spy}
@@ -44,7 +45,7 @@ describe('TabbedPanels Specs', () => {
 		);
 
 		const secondTab = screen.getByText('Panel2');
-		userEvent.click(secondTab);
+		await user.click(secondTab);
 
 		expect(spy).toHaveBeenCalled();
 	});

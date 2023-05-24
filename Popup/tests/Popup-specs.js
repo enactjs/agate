@@ -287,11 +287,13 @@ describe('Popup Specs', () => {
 		const handleClose = jest.fn();
 		render(
 			<FloatingLayerController>
-				<Popup onClose={handleClose} open />
+				<Popup open onClose={handleClose}>
+					<div>popup</div>
+				</Popup>
 			</FloatingLayerController>
 		);
 
-		userEvent.keyboard('{esc}');
+		fireEvent.keyUp(screen.getByText('popup'), {keyCode: 27});
 
 		await waitFor(() => {
 			expect(handleClose).toHaveBeenCalled();
@@ -354,8 +356,9 @@ describe('Popup Specs', () => {
 		expect(handleShow).toHaveBeenCalled();
 	});
 
-	test('should handle onShow', () => {
+	test('should handle onShow', async () => {
 		const handleShow = jest.fn();
+		const user = userEvent.setup();
 		const PopupView = () => {
 			const [openState, handleOpen] = useState(false);
 			return (
@@ -377,7 +380,7 @@ describe('Popup Specs', () => {
 		render(<PopupView />);
 		const button = screen.getByRole('button');
 
-		userEvent.click(button);
+		await user.click(button);
 
 		expect(handleShow).toHaveBeenCalled();
 	});
@@ -436,8 +439,9 @@ describe('Popup Specs', () => {
 		expect(actual).toMatchObject(expectedType);
 	});
 
-	test('should call onClose on `closeButton` click', () => {
+	test('should call onClose on `closeButton` click', async () => {
 		const handleClose = jest.fn();
+		const user = userEvent.setup();
 		render(
 			<FloatingLayerController>
 				<Popup closeButton noAnimation onClose={handleClose} open />
@@ -446,7 +450,7 @@ describe('Popup Specs', () => {
 
 		const button = screen.getByRole('button');
 
-		userEvent.click(button);
+		await user.click(button);
 
 		expect(handleClose).toHaveBeenCalled();
 	});

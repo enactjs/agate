@@ -7,8 +7,9 @@ import TabGroup from '../TabGroup';
 import ThemeDecorator from '../../ThemeDecorator';
 
 describe('TabGroup Specs', () => {
-	test('should fire `onTabClick` with `onTabClick` type when a tab is clicked', () => {
+	test('should fire `onTabClick` with `onTabClick` type when a tab is clicked', async () => {
 		const handleTabClick = jest.fn();
+		const user = userEvent.setup();
 		render(
 			<TabGroup
 				tabPosition="before"
@@ -20,7 +21,7 @@ describe('TabGroup Specs', () => {
 			/>
 		);
 
-		userEvent.click(screen.getByRole('group').children[0]); // clicking tab
+		await user.click(screen.getByRole('group').children[0]); // clicking tab
 
 		expect(handleTabClick).toHaveBeenCalled();
 	});

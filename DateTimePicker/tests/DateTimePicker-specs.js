@@ -8,8 +8,9 @@ import DateTimePicker from '../DateTimePicker';
 // otherwise, nothing renders in the label.
 
 describe('DateTimePicker', () => {
-	test('should emit an onChange event when changing a component picker', () => {
+	test('should emit an onChange event when changing a component picker', async () => {
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		render(
 			<DateTimePicker
 				locale="en-US"
@@ -18,11 +19,11 @@ describe('DateTimePicker', () => {
 			/>
 		);
 
-		userEvent.click(screen.getByLabelText('15 day decrease the value'));
+		await user.click(screen.getByLabelText('15 day decrease the value'));
 
 		expect(handleChange).toHaveBeenCalled();
 
-		userEvent.click(screen.getByLabelText('12 hour next item'));
+		await user.click(screen.getByLabelText('12 hour next item'));
 
 		const expected = 2;
 
