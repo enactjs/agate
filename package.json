@@ -1,6 +1,6 @@
 {
   "name": "@enact/agate",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "A theme library for Enact, containing a variety of UI components.",
   "repository": "https://github.com/enactjs/agate",
   "main": "index.js",
@@ -37,10 +37,10 @@
     "extends": "enact-proxy/strict"
   },
   "dependencies": {
-    "@enact/core": "^4.6.2",
-    "@enact/i18n": "^4.6.2",
-    "@enact/spotlight": "^4.6.2",
-    "@enact/ui": "^4.6.2",
+    "@enact/core": "^4.7.0",
+    "@enact/i18n": "^4.7.0",
+    "@enact/spotlight": "^4.7.0",
+    "@enact/ui": "^4.7.0",
     "classnames": "^2.3.2",
     "color-convert": "^2.0.1",
     "deep-freeze": "0.0.1",
