@@ -132,8 +132,9 @@ describe('MediaPlayer', () => {
 			expect(actual).toBe(expected);
 		});
 
-		test('should play next audio media when `Next` button is clicked', () => {
+		test('should play next audio media when `Next` button is clicked', async () => {
 			const handleNext = jest.fn();
+			const user = userEvent.setup();
 			// onNext added for code coverage purposes
 			render(
 				<MediaPlayer data-testid="media-player" onNext={handleNext}>
@@ -142,7 +143,7 @@ describe('MediaPlayer', () => {
 			);
 			const nextButton = screen.getByLabelText('Next');
 
-			userEvent.click(nextButton);
+			await user.click(nextButton);
 			const audioSource = screen.getByTestId('media-player').children.item(0).children.item(0);
 
 			const expected = 'https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3'; // second mp3 file from audioFiles
@@ -151,6 +152,7 @@ describe('MediaPlayer', () => {
 
 		test('should call `onPlay` when `Play` button is clicked', async () => {
 			const handlePlay = jest.fn();
+			const user = userEvent.setup();
 			render(
 				<MediaPlayer onPlay={handlePlay}>
 					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))}
@@ -158,15 +160,16 @@ describe('MediaPlayer', () => {
 			);
 			const playButton = screen.getByLabelText('Play');
 
-			userEvent.click(playButton);
+			await user.click(playButton);
 
 			await waitFor(() => {
 				expect(handlePlay).toHaveBeenCalled();
 			});
 		});
 
-		test('should play previous audio media when `Previous` button is clicked', () => {
+		test('should play previous audio media when `Previous` button is clicked', async () => {
 			const handlePrevious = jest.fn();
+			const user = userEvent.setup();
 			// `onPrevious` added for code coverage purposes
 			render(
 				<MediaPlayer data-testid="media-player" onPrevious={handlePrevious}>
@@ -176,8 +179,8 @@ describe('MediaPlayer', () => {
 			const nextButton = screen.getByLabelText('Next');
 			const previousButton = screen.getByLabelText('Previous');
 
-			userEvent.click(nextButton); // go to next audio media - audioFiles[1]
-			userEvent.click(previousButton); // go back to first audio media - audioFiles[0]
+			await user.click(nextButton); // go to next audio media - audioFiles[1]
+			await user.click(previousButton); // go back to first audio media - audioFiles[0]
 
 			const audioSource = screen.getByTestId('media-player').children.item(0).children.item(0);
 			const expected = 'https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3';
@@ -185,8 +188,9 @@ describe('MediaPlayer', () => {
 			expect(audioSource).toHaveProperty('src', expected);
 		});
 
-		test('should play last audio media in the playlist when `Previous` button is clicked and first media in playlist is playing and `repeat=all`', () => {
+		test('should play last audio media in the playlist when `Previous` button is clicked and first media in playlist is playing and `repeat=all`', async () => {
 			const handlePrevious = jest.fn();
+			const user = userEvent.setup();
 			// `onPrevious` added for code coverage purposes
 			render(
 				<MediaPlayer data-testid="media-player" onPrevious={handlePrevious}>
@@ -198,10 +202,10 @@ describe('MediaPlayer', () => {
 
 			const repeatButton = screen.getByLabelText('Repeat');
 
-			userEvent.click(repeatButton);
-			userEvent.click(repeatButton);
+			await user.click(repeatButton);
+			await user.click(repeatButton);
 
-			userEvent.click(previousButton); // go back to last audio media - audioFiles[5]
+			await user.click(previousButton); // go back to last audio media - audioFiles[5]
 
 			const audioSource = screen.getByTestId('media-player').children.item(0).children.item(0);
 			const expected = 'https://sampleswap.org/mp3/artist/47067/DJ-Masque_Dont-Forget-To-Be-Yourself-160.mp3';
@@ -209,8 +213,9 @@ describe('MediaPlayer', () => {
 			expect(audioSource).toHaveProperty('src', expected);
 		});
 
-		test('should restart the playlist when `Next` button is clicked and last media in playlist is playing and `repeat=all`', () => {
+		test('should restart the playlist when `Next` button is clicked and last media in playlist is playing and `repeat=all`', async () => {
 			const handleNext = jest.fn();
+			const user = userEvent.setup();
 			// `onNext` added for code coverage purposes
 			render(
 				<MediaPlayer data-testid="media-player" onNext={handleNext}>
@@ -222,15 +227,15 @@ describe('MediaPlayer', () => {
 
 			const repeatButton = screen.getByLabelText('Repeat');
 
-			userEvent.click(repeatButton);
-			userEvent.click(repeatButton);
+			await user.click(repeatButton);
+			await user.click(repeatButton);
 
-			userEvent.click(nextButton);
-			userEvent.click(nextButton);
-			userEvent.click(nextButton);
-			userEvent.click(nextButton);
-			userEvent.click(nextButton);
-			userEvent.click(nextButton); // go back to first audio media - audioFiles[0]
+			await user.click(nextButton);
+			await user.click(nextButton);
+			await user.click(nextButton);
+			await user.click(nextButton);
+			await user.click(nextButton);
+			await user.click(nextButton); // go back to first audio media - audioFiles[0]
 
 			const audioSource = screen.getByTestId('media-player').children.item(0).children.item(0);
 			const expected = 'https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3';
@@ -238,8 +243,9 @@ describe('MediaPlayer', () => {
 			expect(audioSource).toHaveProperty('src', expected);
 		});
 
-		test('should play audio media in order when `Shuffle` button is clicked twice', () => {
+		test('should play audio media in order when `Shuffle` button is clicked twice', async () => {
 			const handleShuffle = jest.fn();
+			const user = userEvent.setup();
 			render(
 				<MediaPlayer data-testid="media-player" onShuffle={handleShuffle}>
 					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))}
@@ -250,10 +256,10 @@ describe('MediaPlayer', () => {
 			const playButton = screen.getByLabelText('Play');
 			const shuffleButton = screen.getByLabelText('Shuffle');
 
-			userEvent.click(shuffleButton);
-			userEvent.click(shuffleButton);
-			userEvent.click(playButton);
-			userEvent.click(nextButton);
+			await user.click(shuffleButton);
+			await user.click(shuffleButton);
+			await user.click(playButton);
+			await user.click(nextButton);
 
 			const audioSource = screen.getByTestId('media-player').children.item(0).children.item(0);
 			const expected = 'https://sampleswap.org/mp3/artist/78152/HiatusManJBanner_Show-Stopper-160.mp3'; // second audio media from audioFiles
@@ -261,8 +267,9 @@ describe('MediaPlayer', () => {
 			expect(audioSource).toHaveProperty('src', expected);
 		});
 
-		test('should update `repeat` value of controls frame to `one` when `repeat` button is clicked once', () => {
+		test('should update `repeat` value of controls frame to `one` when `repeat` button is clicked once', async () => {
 			const handleRepeat = jest.fn();
+			const user = userEvent.setup();
 			// `onRepeat` added for code coverage purposes
 			render(
 				<MediaPlayer data-testid="media-player" onRepeat={handleRepeat}>
@@ -272,12 +279,13 @@ describe('MediaPlayer', () => {
 			const repeatButton = screen.getByLabelText('Repeat');
 			const controlsFrame = screen.getByTestId('media-player').children.item(3);
 
-			userEvent.click(repeatButton);
+			await user.click(repeatButton);
 
 			expect(controlsFrame).toHaveAttribute('repeat', 'one');
 		});
 
-		test('should update `repeat` value of controls frame to `all` when `repeat` button is clicked twice', () => {
+		test('should update `repeat` value of controls frame to `all` when `repeat` button is clicked twice', async () => {
+			const user = userEvent.setup();
 			render(
 				<MediaPlayer data-testid="media-player">
 					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))}
@@ -286,13 +294,14 @@ describe('MediaPlayer', () => {
 			const repeatButton = screen.getByLabelText('Repeat');
 			const controlsFrame = screen.getByTestId('media-player').children.item(3);
 
-			userEvent.click(repeatButton);
-			userEvent.click(repeatButton);
+			await user.click(repeatButton);
+			await user.click(repeatButton);
 
 			expect(controlsFrame).toHaveAttribute('repeat', 'all');
 		});
 
-		test('should update `repeat` value of controls frame to back to `none` when `repeat` button is clicked 3 times', () => {
+		test('should update `repeat` value of controls frame to back to `none` when `repeat` button is clicked 3 times', async () => {
+			const user = userEvent.setup();
 			render(
 				<MediaPlayer data-testid="media-player">
 					{audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))}
@@ -301,9 +310,9 @@ describe('MediaPlayer', () => {
 			const repeatButton = screen.getByLabelText('Repeat');
 			const controlsFrame = screen.getByTestId('media-player').children.item(3);
 
-			userEvent.click(repeatButton);
-			userEvent.click(repeatButton);
-			userEvent.click(repeatButton);
+			await user.click(repeatButton);
+			await user.click(repeatButton);
+			await user.click(repeatButton);
 
 			expect(controlsFrame).toHaveAttribute('repeat', 'none');
 		});

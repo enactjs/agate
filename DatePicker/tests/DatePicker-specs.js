@@ -24,29 +24,32 @@ describe('DatePicker', () => {
 		expect(datePickerDay).toHaveTextContent(currentDay);
 	});
 
-	test('should emit an onChange event when changing the day', () => {
+	test('should emit an onChange event when changing the day', async () => {
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		render(<DatePicker locale="en-US" onChange={handleChange} value={new Date(2000, 6, 15)} />);
 
-		userEvent.click(screen.getByLabelText('15 day decrease the value'));
+		await user.click(screen.getByLabelText('15 day decrease the value'));
 
 		expect(handleChange).toHaveBeenCalled();
 	});
 
-	test('should emit an onChange event when changing the month', () => {
+	test('should emit an onChange event when changing the month', async () => {
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		render(<DatePicker locale="en-US" onChange={handleChange} value={new Date(2000, 6, 15)} />);
 
-		userEvent.click(screen.getByLabelText('7 month decrease the value'));
+		await user.click(screen.getByLabelText('7 month decrease the value'));
 
 		expect(handleChange).toHaveBeenCalled();
 	});
 
-	test('should emit an onChange event when changing the year', () => {
+	test('should emit an onChange event when changing the year', async () => {
 		const handleChange = jest.fn();
+		const user = userEvent.setup();
 		render(<DatePicker locale="en-US" onChange={handleChange} value={new Date(2000, 6, 15)} />);
 
-		userEvent.click(screen.getByLabelText('2000 year decrease the value'));
+		await user.click(screen.getByLabelText('2000 year decrease the value'));
 
 		expect(handleChange).toHaveBeenCalled();
 	});

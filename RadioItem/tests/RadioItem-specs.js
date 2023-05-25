@@ -41,12 +41,13 @@ describe('RadioItem', () => {
 		expect(checkbox).toHaveTextContent(expected);
 	});
 
-	test('should toggle selected prop when clicked', () => {
+	test('should toggle selected prop when clicked', async () => {
 		const handleToggle = jest.fn();
+		const user = userEvent.setup();
 		render(<RadioItem onToggle={handleToggle}>Hello RadioItem</RadioItem>);
 		const checkbox = screen.getByRole('checkbox').firstElementChild;
 
-		userEvent.click(checkbox);
+		await user.click(checkbox);
 
 		const expected = true;
 		const actual = handleToggle.mock.calls[0][0].selected;
@@ -54,12 +55,13 @@ describe('RadioItem', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should toggle selected prop to false when initiated as selected', () => {
+	test('should toggle selected prop to false when initiated as selected', async () => {
 		const handleToggle = jest.fn();
+		const user = userEvent.setup();
 		render(<RadioItem onToggle={handleToggle} selected>Hello RadioItem</RadioItem>);
 		const checkbox = screen.getByRole('checkbox').firstElementChild;
 
-		userEvent.click(checkbox);
+		await user.click(checkbox);
 
 		const expected = false;
 		const actual = handleToggle.mock.calls[0][0].selected;
@@ -67,12 +69,13 @@ describe('RadioItem', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should not toggle selected prop when initiated as disabled', () => {
+	test('should not toggle selected prop when initiated as disabled', async () => {
 		const handleToggle = jest.fn();
+		const user = userEvent.setup();
 		render(<RadioItem disabled onToggle={handleToggle}>Hello RadioItem</RadioItem>);
 		const checkbox = screen.getByRole('checkbox').firstElementChild;
 
-		userEvent.click(checkbox);
+		await user.click(checkbox);
 
 		expect(handleToggle).not.toHaveBeenCalled();
 	});

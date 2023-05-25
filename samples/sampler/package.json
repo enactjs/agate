@@ -1,6 +1,6 @@
 {
   "name": "agate-sampler",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Component and QA samples for Agate",
   "private": true,
   "main": "index.js",
@@ -21,10 +21,10 @@
   },
   "dependencies": {
     "@enact/agate": "../../",
-    "@enact/core": "^4.6.0",
-    "@enact/i18n": "^4.6.0",
-    "@enact/spotlight": "^4.6.0",
-    "@enact/ui": "^4.6.0",
+    "@enact/core": "^4.7.0",
+    "@enact/i18n": "^4.7.0",
+    "@enact/spotlight": "^4.7.0",
+    "@enact/ui": "^4.7.0",
     "dotenv": "^16.0.3",
     "ilib": "^14.17.0",
     "prop-types": "^15.8.1",
@@ -32,13 +32,13 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@enact/storybook-utils": "^5.0.2",
+    "@enact/storybook-utils": "^5.0.3",
     "@storybook/addons": "^6.5.16",
     "@storybook/builder-webpack5": "^6.5.16",
     "@storybook/manager-webpack5": "^6.5.16",
     "@storybook/react": "^6.5.16",
     "@storybook/theming": "^6.5.16",
     "babel-loader": "^8.3.0",
-    "core-js": "^3.27.2"
+    "core-js": "^3.30.0"
   }
 }

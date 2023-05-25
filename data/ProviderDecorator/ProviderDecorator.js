@@ -39,7 +39,7 @@ const ProviderDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			}
 		}
 
-		componentWillUnount () {
+		componentWillUnmount () {
 			if (pauseOnBlur) {
 				off('blur', this.handleBlur, window);
 				off('focus', this.handleFocus, window);
