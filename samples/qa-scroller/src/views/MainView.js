@@ -65,6 +65,7 @@ const MainView = () => {
 				horizontalScrollbar="visible"
 				key={nativeScroll ? 'native' : 'translate'}
 				scrollMode={nativeScroll ? 'native' : 'translate'}
+				style={{height: '90%'}}
 			>
 				<div style={{height: `${getScaledSize(height)}px`, width: `${getScaledSize(width)}px`}}>
 					<Input
