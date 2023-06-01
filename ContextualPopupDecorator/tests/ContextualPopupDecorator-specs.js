@@ -47,8 +47,9 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(actual).toMatchObject(expectedType);
 	});
 
-	test('should emit onClose event when clicking on contextual button', () => {
+	test('should emit onClose event when clicking on contextual button', async () => {
 		const handleClose = jest.fn();
+		const user = userEvent.setup();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
 		render(
@@ -60,7 +61,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		);
 		const contextualButton = screen.getByRole('button');
 
-		userEvent.click(contextualButton);
+		await user.click(contextualButton);
 
 		expect(handleClose).toHaveBeenCalled();
 	});
@@ -116,10 +117,11 @@ describe('ContextualPopupDecorator Specs', () => {
 		expect(button).toHaveClass(expected);
 	});
 
-	test('should not close popup when clicking outside if noAutoDismiss is true', () => {
+	test('should not close popup when clicking outside if noAutoDismiss is true', async () => {
 		const handleClose = jest.fn();
 		const Root = FloatingLayerDecorator('div');
 		const message = 'goodbye';
+		const user = userEvent.setup();
 		render(
 			<Root data-testid="outsideArea">
 				<ContextualButton noAutoDismiss onClose={handleClose} open popupComponent={() => message}>
@@ -129,7 +131,7 @@ describe('ContextualPopupDecorator Specs', () => {
 		);
 		const outsideArea = screen.getByTestId('outsideArea');
 
-		userEvent.click(outsideArea);
+		await user.click(outsideArea);
 
 		expect(handleClose).not.toHaveBeenCalled();
 	});

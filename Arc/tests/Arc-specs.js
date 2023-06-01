@@ -34,12 +34,13 @@ describe('Arc', () => {
 		expect(svgPath).toHaveAttribute('stroke', expected);
 	});
 
-	test('should call `onClick` when path is clicked', () => {
+	test('should call `onClick` when path is clicked', async () => {
 		const handleClick = jest.fn();
+		const user = userEvent.setup();
 		render(<Arc data-testid="arc" onClick={handleClick} />);
 		const clickablePath = screen.getByTestId('arc').children.item(1);
 
-		userEvent.click(clickablePath);
+		await user.click(clickablePath);
 
 		const expected = {type: 'click'};
 		const actual = handleClick.mock.calls.length && handleClick.mock.calls[0][0];
