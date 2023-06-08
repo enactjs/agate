@@ -93,6 +93,7 @@ const MainPanel = ({...rest}) => {
 				itemSize={ri.scale(78)}
 				key={nativeScroll ? 'native' : 'translate'}
 				scrollMode={nativeScroll ? 'native' : 'translate'}
+				style={{height: '90%'}}
 			/>
 		</Panel>
 	);

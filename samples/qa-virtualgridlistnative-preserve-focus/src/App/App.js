@@ -24,9 +24,9 @@ const App = kind({
 		return (
 			<Panels {...rest} index={index} onBack={popPanel} noCloseButton>
 				<MainPanel onClick={pushPanel} title="First" />
-				<MainPanel onClick={pushPanel} title="Second" />
-				<MainPanel onClick={pushPanel} title="Third" />
-				<MainPanel title="Fourth" />
+				<MainPanel onBack={popPanel} onClick={pushPanel} title="Second" />
+				<MainPanel onBack={popPanel} onClick={pushPanel} title="Third" />
+				<MainPanel onBack={popPanel} title="Fourth" />
 			</Panels>
 		);
 	}

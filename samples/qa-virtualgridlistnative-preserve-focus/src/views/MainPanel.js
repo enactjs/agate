@@ -14,6 +14,12 @@ const MainPanel = kind({
 		 * A function to run on click event
 		 * @type {Function}
 		 */
+		onBack: PropTypes.func,
+
+		/**
+		 * A function to run on click event
+		 * @type {Function}
+		 */
 		onClick: PropTypes.func,
 
 		/**
@@ -23,10 +29,11 @@ const MainPanel = kind({
 		title: PropTypes.string
 	},
 
-	render: ({onClick, title, ...rest}) => (
+	render: ({onBack, onClick, title, ...rest}) => (
 		<Panel {...rest}>
 			<Header title={title}>
 				<Button onClick={onClick}>Click me</Button>
+				<Button onClick={onBack}>Back</Button>
 			</Header>
 			<SampleVirtualGridList index={rest['data-index']} onClick={onClick} />
 		</Panel>
