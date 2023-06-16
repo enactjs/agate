@@ -38,12 +38,14 @@
 // Button
 // ---------------------------------------
 @agate-button-active-color:   @agate-button-color;
+@agate-button-iconOnly-disabled-color: fade(@agate-white, 30%);
 @agate-button-focus-border-color: transparent;
 @agate-button-focus-color:    @agate-white;
 @agate-button-highlighted-color: @agate-black;
 @agate-button-selected-focus-border-color: @agate-white;
 @agate-button-lightOpaque-color: @agate-button-color;
 @agate-button-lightOpaque-bg-color: @agate-light-gray;
+@agate-button-transparent-disabled-color: fade(@agate-white, 30%);;
 
 // Dropdown
 // ---------------------------------------
@@ -51,22 +53,41 @@
 
 // Input
 // ---------------------------------------
-@agate-input-decorator-border-color:          fade(@agate-foreground, 30%);
+@agate-input-border-color:                    fade(@agate-white, 40%);
+@agate-input-decorator-border-color:          fade(@agate-white, 30%);
+@agate-input-placeholder-color:               fade(@agate-white, 30%);
 
 // Item
 // ---------------------------------------
 @agate-item-border-color:         fade(@agate-white, 40%);
 @agate-item-focus-bg-color:       fade(@agate-white, 15%);
 
+// Keypad
+// ---------------------------------------
+@agate-keypad-button-active-bg-color:     fade(@agate-white, 20%);
+
 // LabeledIconButton
 // ---------------------------------------
 @agate-labelediconbutton-label-color: @agate-gray;
+
+// MediaPlayer
+// ---------------------------------------
+@agate-mediaslider-bar-color: fade(@agate-white, 50%);
+@agate-mediaslider-focused-bar-color: fade(@agate-white, 50%);
 
 // Panels
 // ---------------------------------------
 @agate-panels-bg-color:               @agate-background;
 @agate-panels-partial-bg-color:       @agate-background;
 @agate-panels-breadcrumb-bg-color:    @agate-bg-color;
+
+// Picker
+// ---------------------------------------
+@agate-picker-item-color: fade(@agate-white, 35%);
+
+// ProgressBar
+// ---------------------------------------
+@agate-progressbar-load-bg-color: fade(@agate-white, 30%);
 
 // Popup
 // ---------------------------------------
@@ -78,3 +99,7 @@
 @agate-slider-fill-bg-color:  @agate-white;
 @agate-slider-knob-bg-color:  @agate-white;
 @agate-slider-track-bg-color: fade(@agate-white, 50%);
+
+// SwitchItem
+// ---------------------------------------
+@agate-switchitem-label-color: fade(@agate-white, 30%);
