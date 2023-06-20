@@ -1,7 +1,7 @@
 import {generateTestData} from '@enact/ui-test-utils/utils/index.js';
 
 import ArcPicker from './components/ArcPicker.js';
-// import ArcSlider from './components/ArcSlider';
+import ArcSlider from './components/ArcSlider.js';
 // import BodyText from './components/BodyText';
 // import Button from './components/Button';
 // import Checkbox from './components/Checkbox';
@@ -49,7 +49,7 @@ import ArcPicker from './components/ArcPicker.js';
 
 const agateComponents = {
 	ArcPicker,
-	// ArcSlider,
+	ArcSlider
 	// BodyText,
 	// Button,
 	// Checkbox,

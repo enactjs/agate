@@ -1,5 +1,5 @@
 import ArcPicker from '../../../ArcPicker/ArcPicker.js';
-// import ArcSlider from '../../../ArcSlider';
+import ArcSlider from '../../../ArcSlider/ArcSlider.js';
 // import BodyText from '../../../BodyText';
 // import Button from '../../../Button';
 // import Checkbox from '../../../Checkbox';
@@ -48,7 +48,7 @@ import ArcPicker from '../../../ArcPicker/ArcPicker.js';
 const AgateExports = {
 
 	ArcPicker,
-	// ArcSlider,
+	ArcSlider
 	// BodyText,
 	// Button,
 	// ColorPicker,
