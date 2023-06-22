@@ -234,7 +234,7 @@ describe('VirtualList useEvent', () => {
 				itemRenderer={renderItem}
 				itemSize={itemSize}
 				onScrollStart={spy}
-				scrollMode='translate'
+				scrollMode="translate"
 			/>
 		);
 
@@ -260,7 +260,7 @@ describe('VirtualList useEvent', () => {
 				itemRenderer={renderItem}
 				itemSize={itemSize}
 				onScrollStart={spy}
-				scrollMode='translate'
+				scrollMode="translate"
 			/>
 		);
 
@@ -374,7 +374,7 @@ describe('VirtualList useEvent', () => {
 					itemRenderer={renderImageItem}
 					itemSize={imageItemSize}
 					onScrollStart={spy}
-					scrollMode='translate'
+					scrollMode="translate"
 				/>
 			);
 
@@ -400,7 +400,7 @@ describe('VirtualList useEvent', () => {
 					itemRenderer={renderImageItem}
 					itemSize={imageItemSize}
 					onScrollStart={spy}
-					scrollMode='translate'
+					scrollMode="translate"
 				/>
 			);
 

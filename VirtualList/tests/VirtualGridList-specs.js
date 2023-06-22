@@ -278,7 +278,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					onScrollStop={onScrollStop}
-					scrollMode='translate'
+					scrollMode="translate"
 				/>
 			);
 
@@ -301,7 +301,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					onScrollStop={onScrollStop}
-					scrollMode='translate'
+					scrollMode="translate"
 				/>
 			);
 
@@ -323,7 +323,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					onScrollStop={onScrollStop}
-					scrollMode='translate'
+					scrollMode="translate"
 				/>
 			);
 
@@ -346,7 +346,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					onScrollStop={onScrollStop}
-					scrollMode='translate'
+					scrollMode="translate"
 				/>
 			);
 
@@ -371,7 +371,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					onScrollStop={onScrollStop}
-					scrollMode='translate'
+					scrollMode="translate"
 				/>
 			);
 
@@ -407,7 +407,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					onScrollStop={onScrollStop}
-					scrollMode='translate'
+					scrollMode="translate"
 				/>
 			);
 
@@ -443,7 +443,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					onScrollStop={onScrollStop}
-					scrollMode='translate'
+					scrollMode="translate"
 				/>
 			);
 
@@ -472,7 +472,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 						itemRenderer={renderItem}
 						itemSize={itemSize}
 						onScrollStart={handlerOnScrollStart}
-						scrollMode='translate'
+						scrollMode="translate"
 					/>
 				);
 
@@ -492,7 +492,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 						itemRenderer={renderItem}
 						itemSize={itemSize}
 						onScroll={handlerOnScroll}
-						scrollMode='translate'
+						scrollMode="translate"
 					/>
 				);
 
@@ -518,7 +518,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 						itemRenderer={renderItem}
 						itemSize={itemSize}
 						onScrollStop={onScrollStop}
-						scrollMode='translate'
+						scrollMode="translate"
 					/>
 				);
 
@@ -554,7 +554,7 @@ describe('VirtualGridList with translate `scrollMode`', () => {
 					itemSize={itemSize}
 					onScrollStart={handlerOnScrollStart}
 					onScrollStop={onScrollStop}
-					scrollMode='translate'
+					scrollMode="translate"
 				/>
 			);
 
