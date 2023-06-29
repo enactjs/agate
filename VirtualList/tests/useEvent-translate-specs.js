@@ -18,7 +18,7 @@ const pressUpKey = keyDownUp(38);
 const pressDownKey = keyDownUp(40);
 const pressPageDownKey = keyDownUp(34);
 
-describe('VirtualList useEvent', () => {
+describe('VirtualList useEvent with translate `scrollMode`', () => {
 	let
 		clientSize,
 		currentFocusIndex,
@@ -98,6 +98,7 @@ describe('VirtualList useEvent', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="translate"
 			/>
 		);
 
@@ -126,6 +127,7 @@ describe('VirtualList useEvent', () => {
 				dataSize={5}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="translate"
 				wrap
 			/>
 		);
@@ -152,6 +154,7 @@ describe('VirtualList useEvent', () => {
 				dataSize={5}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="translate"
 				wrap
 			/>
 		);
@@ -179,6 +182,7 @@ describe('VirtualList useEvent', () => {
 				direction="horizontal"
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="translate"
 			/>
 		);
 
@@ -203,6 +207,7 @@ describe('VirtualList useEvent', () => {
 				direction="horizontal"
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="translate"
 			/>
 		);
 
@@ -288,6 +293,7 @@ describe('VirtualList useEvent', () => {
 					direction="vertical"
 					itemRenderer={renderImageItem}
 					itemSize={imageItemSize}
+					scrollMode="translate"
 				/>
 			);
 
@@ -318,6 +324,7 @@ describe('VirtualList useEvent', () => {
 					direction="horizontal"
 					itemRenderer={renderImageItem}
 					itemSize={imageItemSize}
+					scrollMode="translate"
 				/>
 			);
 
@@ -343,6 +350,7 @@ describe('VirtualList useEvent', () => {
 					direction="horizontal"
 					itemRenderer={renderImageItem}
 					itemSize={imageItemSize}
+					scrollMode="translate"
 				/>
 			);
 
