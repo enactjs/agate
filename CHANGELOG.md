@@ -4,9 +4,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
-### Changed
-
-- `agate/Scroller`, `agate/VirtualList` and `agate/VirtualGridList` default value for `scrollMode` to `native`.
+Changed `scrollMode` default value as `native` on the following components: `Scroller`, `VirtualList` and `VirtualGridList`.
 
 ## [2.0.6] - 2023-06-08
 
