@@ -19,9 +19,12 @@
 @agate-white:       #fff;
 
 // Component color assignments
-@agate-bg-color: black;
+@agate-bg-color: var(--agate-bg-color, #000000);
 @agate-bg-image: none;
 @agate-bg-image2: none;
+@agate-component-bg-color: var(--agate-component-bg-color, transparent);
+@agate-component-text-color: var(--agate-component-text-color, #ffffff);
+//@agate-text-color: var(--agate-text-color, #4d4d4d);
 @agate-text-color: @agate-foreground;
 @agate-title-text-color: white;
 
@@ -39,8 +42,8 @@
 
 // Button
 // ---------------------------------------
-@agate-button-color:          @agate-foreground;
-@agate-button-bg-color:       @agate-background;
+@agate-button-color:          @agate-component-text-color;
+@agate-button-bg-color:       @agate-component-bg-color;
 @agate-button-bg-image:       linear-gradient(to bottom left, transparent, #333);
 @agate-button-border-color:   @agate-accent;
 @agate-button-shadow:         none;

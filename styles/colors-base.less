@@ -57,10 +57,12 @@
 @agate-red:         #f00;
 
 // Component color assignments
-@agate-bg-color: inherit;
+@agate-bg-color: var(--agate-bg-color, inherit);
 @agate-bg-image: inherit;
 @agate-bg-image2: inherit;
-@agate-text-color: inherit;
+@agate-component-bg-color: var(--agate-component-bg-color, inherit);
+@agate-component-text-color: var(--agate-component-text-color, inherit);
+@agate-text-color: var(--agate-text-color, inherit);
 @agate-title-text-color: inherit;
 
 // Disabled Opacity
@@ -81,8 +83,8 @@
 
 // Button
 // ---------------------------------------
-@agate-button-color:          inherit;
-@agate-button-bg-color:       inherit;
+@agate-button-color:          @agate-component-text-color;
+@agate-button-bg-color:       @agate-component-bg-color;
 @agate-button-bg-image:       inherit;
 @agate-button-border-color:   inherit;
 @agate-button-shadow:         inherit;

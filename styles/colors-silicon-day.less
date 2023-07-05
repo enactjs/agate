@@ -64,10 +64,12 @@
 @agate-noble-gray:	#999999;
 
 // Component color assignments
-@agate-bg-color: @agate-background;
+@agate-bg-color: var(--agate-bg-color, #ffffff);
 @agate-bg-image: none;
 @agate-bg-image2: none;
-@agate-text-color: @agate-foreground;
+@agate-component-bg-color: var(--agate-component-bg-color, #eeeeee);
+@agate-component-text-color: var(--agate-component-text-color, #000000);
+@agate-text-color: var(--agate-text-color, #000000);
 @agate-title-text-color: @agate-foreground;
 
 // Disabled Opacity
@@ -84,8 +86,8 @@
 
 // Button
 // ---------------------------------------
-@agate-button-color:          @agate-black;
-@agate-button-bg-color:       @silicon-gray;
+@agate-button-color:          @agate-component-text-color;
+@agate-button-bg-color:       @agate-component-bg-color;
 @agate-button-bg-image:       none;
 @agate-button-border-color:   transparent;
 @agate-button-shadow:         none;

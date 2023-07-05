@@ -22,10 +22,12 @@
 @agate-white:       #fff;
 
 // Component color assignments
-@agate-bg-color: #1c0d3f;
+@agate-bg-color: var(--agate-bg-color, #1c0d3f);
 @agate-bg-image: none;
 @agate-bg-image2: none;
-@agate-text-color: white;
+@agate-component-bg-color: var(--agate-component-bg-color, #1c0d3f);
+@agate-component-text-color: var(--agate-component-text-color, #ffffff);
+@agate-text-color: var(--agate-text-color, #ffffff);
 @agate-title-text-color: white;
 
 // Local Electro variables
@@ -51,7 +53,7 @@
 
 // Button
 // ---------------------------------------
-@agate-button-color:          white;
+@agate-button-color:          @agate-component-text-color;
 @agate-button-bg-color:       @agate-accent;
 @agate-button-bg-image:       @electro-overlay-light-gradient;
 @agate-button-border-color:   transparent;
