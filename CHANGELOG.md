@@ -5,8 +5,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ## unreleased
 
 - Updated dependencies including `immer` to version `^10.0.2`.
-- Updated `babel-loader` version to `^9.1.2` for sampler.
-- Updated the minimum version of Node to `14.15.0`for sampler.
 
 ## [2.0.6] - 2023-06-08
 

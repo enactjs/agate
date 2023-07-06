@@ -16,9 +16,6 @@
     "serve-qa": "start-storybook -p 8080 -c .qa-storybook --ci"
   },
   "license": "Apache-2.0",
-  "engines": {
-    "node": ">=14.15.0"
-  },
   "enact": {
     "theme": "agate"
   },
