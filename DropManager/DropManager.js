@@ -6,7 +6,7 @@
  * @exports DropManager
  * @exports Draggable
  * @exports ResponsiveBox
- * @private
+ * @public
  */
 
 import hoc from '@enact/core/hoc';
@@ -22,27 +22,69 @@ import Rearrangeable from '../Rearrangeable';
 
 import css from './DropManager.module.less';
 
-// https://stackoverflow.com/questions/9907419/how-to-get-a-key-in-a-javascript-object-by-its-value
-// By: ZER0 - Mar 28 '12 at 12:51
 const getKeyByValue = (obj, value) =>
 	Object.keys(obj).find(key => obj[key] === value);
 
 // Establish the base container shape, to be shared with all components as a consistent starting point.
 const containerShapePropTypes = PropTypes.shape({
+	/**
+	 * When true it means that the draggable container takes all the available space up to the edge of the screen.
+	 *
+	 * @type {Boolean}
+	 * @default false
+	 * @public
+	 */
 	edge: PropTypes.bool,
+
+	/**
+	 * Defines the position of the draggable container relative to screen edges.
+	 *
+	 * @type {Object}
+	 * @public
+	 */
 	edges: PropTypes.shape({
 		bottom: PropTypes.bool,
 		left: PropTypes.bool,
 		right: PropTypes.bool,
 		top: PropTypes.bool
 	}),
+
+	/**
+	 * When true it means that the draggable container takes all the available space between the horizontal screen edges.
+	 *
+	 * @type {Boolean}
+	 * @default false
+	 * @public
+	 */
 	horizontalEdge: PropTypes.bool,
+
+	/**
+	 * The layout orientation of the components inside a draggable container.
+	 *
+	 * @type {String}
+	 * @public
+	 */
 	orientation: PropTypes.string,
+
+	/**
+	 * The size of the draggable container relative to the screen.
+	 *
+	 * @type {Object}
+	 * @public
+	 */
 	size: PropTypes.shape({
 		relative: PropTypes.string  // Relative size: small, medium, large, full
 		// proposed - height: PropTypes.number,
 		// proposed - width: PropTypes.number
 	}),
+
+	/**
+	 * When true it means that the draggable container takes all the available space between the vertical screen edges.
+	 *
+	 * @type {Boolean}
+	 * @default false
+	 * @public
+	 */
 	verticalEdge: PropTypes.bool
 });
 
@@ -97,12 +139,12 @@ const fallbackArrangementProp = 'arrangement';
 const DropManagerContext = createContext(defaultContainerShape);
 
 /**
- * TBD.
+ * Applies Agate specific behaviors to {@link agate/DropManager.DropManagerBase|DropManagerBase} components.
  *
  * @class DropManager
  * @hoc
  * @memberof agate/DropManager
- * @private
+ * @public
  */
 const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 	const ArrangementState = Changeable({prop: configHoc.arrangementProp || fallbackArrangementProp});
@@ -112,7 +154,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 
 		static propTypes = /** @lends agate/DropManager.DropManager.prototype */ {
 			/**
-			 * The ready-state to indicate that the contents are allowed to be rearranged
+			 * The ready-state to indicate that the contents are allowed to be rearranged.
 			 *
 			 * @type {Boolean}
 			 * @default false
@@ -225,8 +267,6 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			this.dragOriginNode.dataset.slot = dragDestination;
 			dragDropNode.dataset.slot = dragOrigin;
 
-			// console.log('from:', dragOrigin, 'to:', dragDestination);
-
 			// We successfully completed the drag, blank-out the node.
 			this.dragOriginNode = null;
 
@@ -328,12 +368,6 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			this.setState({dragging: false});
 		};
 
-		// handleDragEnd = () => {
-		// 	if (this.props.onArrange) {
-		// 		this.props.onArrange({arrangement: this.state.arrangement});
-		// 	}
-		// };
-
 		render () {
 			const {arrangement, arrangeable, className, ...rest} = {...this.props};
 			delete rest.onArrange;
@@ -343,7 +377,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			if (configHoc.arrangingProp) rest[configHoc.arrangingProp] = this.state.dragging;
 
 			if (arrangeable) {
-				// Add all of the necessary events, but only if we're in edit mode
+				// Add all the necessary events, but only if we're in edit mode
 				rest.onDragStart = this.handleDragStart;
 				rest.onDragEnter = this.handleDragEnter;
 				rest.onDragLeave = this.handleDragLeave;
@@ -352,7 +386,6 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 				rest.onTouchStart = this.handleTouchStart;
 				rest.onTouchMove = this.handleTouchMove;
 				rest.onTouchEnd = this.handleTouchEnd;
-				// rest.onDragEnd = this.handleDragEnd;
 			}
 
 			return (
@@ -376,7 +409,6 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 	return ArrangementState(DropManagerBase);
 });
 
-
 // Draw conclusions from supplied shape information and auto-set some values based on logical
 // conclusions to save time and improve consistency for consumers.
 const logicallyPopulateContainerShape = (cs) => {
@@ -391,24 +423,51 @@ const logicallyPopulateContainerShape = (cs) => {
 	// return cs;
 };
 
-
 const DraggableContainerContext = createContext(null);
 
 /**
- * TBD.
+ * Draggable passes props to support the dragging feature in DropManager.
  *
  * @class Draggable
  * @memberof agate/DropManager
  * @ui
- * @private
+ * @public
  */
 const Draggable = (Wrapped) => kind({
 	name: 'Draggable',
 
 	propTypes: /** @lends agate/DropManager.Draggable.prototype */ {
+		/**
+		 * Defines the shape of the draggable container relative to the screen edges.
+		 *
+		 * @type {Object}
+		 * @public
+		 */
 		containerShape: containerShapePropTypes,
+
+		/**
+		 * Allows a container to be dragged.
+		 *
+		 * @type {Boolean}
+		 * @default false
+		 * @public
+		 */
 		draggable: PropTypes.bool,
+
+		/**
+		 * The draggable container's name.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		name: PropTypes.string,
+
+		/**
+		 * A slot to insert the draggable container.
+		 *
+		 * @type {String}
+		 * @public
+		 */
 		slot: PropTypes.string
 	},
 
@@ -444,12 +503,12 @@ const Draggable = (Wrapped) => kind({
 });
 
 /**
- * TBD.
+ * ResponsiveBox passes props to support the responsive layout feature in DropManager..
  *
  * @class ResponsiveBox
  * @memberof agate/DropManager
  * @ui
- * @private
+ * @public
  */
 const ResponsiveBox = (Wrapped) => {
 	const Decorator = (props) => (
@@ -466,24 +525,16 @@ const ResponsiveBox = (Wrapped) => {
 	return Decorator;
 };
 
-//
-//
-// DEV TO-DO LATER:
-//
-// Simplify draggable usage, maybe include a "hide with no content" prop
-//
-// Relocate data-slot junk to context child->parent relay of child identification information
-//
-//
-
 // Consolidate usage pattern into a simple reusable piece
 /**
- * TBD.
+ * Applies Agate specific behaviors to {@link agate/DropManager.DropManager|DropManager} components.
  *
  * @class Droppable
  * @hoc
  * @memberof agate/DropManager
- * @private
+ * @mixes agate/Rearrangeable.Rearrangeable
+ * @mixes ui/Slottable.Slottable
+ * @public
  */
 const Droppable = hoc((configHoc, Wrapped) => {
 	const {arrangementProp, slots, ...rest} = configHoc;
