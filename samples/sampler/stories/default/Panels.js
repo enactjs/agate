@@ -65,6 +65,7 @@ const BasicPanels = ({...rest}) => {
 };
 
 BasicPanels.propTypes = {
+	cover: PropTypes.string,
 	orientation: PropTypes.string
 };
 
@@ -75,6 +76,7 @@ export default {
 
 export const _Panels = (args) => (
 	<BasicPanels
+		cover={args['cover']}
 		noAnimation={args['noAnimation']}
 		noCloseButton={args['noCloseButton']}
 		onApplicationClose={action('onClose')}
@@ -82,6 +84,7 @@ export const _Panels = (args) => (
 	/>
 );
 
+select('cover', _Panels, ['full', 'partial'], Config, ['full']);
 boolean('noAnimation', _Panels, Config, false);
 boolean('noCloseButton', _Panels, Config, false);
 select('orientation', _Panels, ['horizontal', 'vertical'], Config);

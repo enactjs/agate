@@ -158,12 +158,14 @@ export const PreserveFocus = (args) => (
 		noAnimation={args['noAnimation']}
 		noCloseButton={args['noCloseButton']}
 		orientation={args['orientation']}
+		cover={args['cover']}
 	/>
 );
 
 boolean('noAnimation', PreserveFocus, Config);
 boolean('noCloseButton', PreserveFocus, Config);
 select('orientation', PreserveFocus, ['horizontal', 'vertical'], Config);
+select('cover', PreserveFocus, ['full', 'partial'], Config);
 
 PreserveFocus.storyName = 'preserve focus';
 PreserveFocus.parameters = {
