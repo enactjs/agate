@@ -2,10 +2,6 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
-## [unreleased]
-
-- Updated dependencies including `immer` to version `^10.0.2`.
-
 ## [2.0.6] - 2023-06-08
 
 No significant changes.
