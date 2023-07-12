@@ -84,7 +84,7 @@ export const _Panels = (args) => (
 	/>
 );
 
-select('cover', _Panels, ['full', 'partial'], Config, ['full']);
+select('cover', _Panels, ['full', 'partial'], Config);
 boolean('noAnimation', _Panels, Config, false);
 boolean('noCloseButton', _Panels, Config, false);
 select('orientation', _Panels, ['horizontal', 'vertical'], Config);
