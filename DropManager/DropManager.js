@@ -32,7 +32,7 @@ const containerShapePropTypes = PropTypes.shape({
 	 *
 	 * @type {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
 	edge: PropTypes.bool,
 
@@ -40,7 +40,7 @@ const containerShapePropTypes = PropTypes.shape({
 	 * Defines the position of the draggable container relative to screen edges.
 	 *
 	 * @type {Object}
-	 * @public
+	 * @private
 	 */
 	edges: PropTypes.shape({
 		bottom: PropTypes.bool,
@@ -54,7 +54,7 @@ const containerShapePropTypes = PropTypes.shape({
 	 *
 	 * @type {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
 	horizontalEdge: PropTypes.bool,
 
@@ -62,7 +62,7 @@ const containerShapePropTypes = PropTypes.shape({
 	 * The layout orientation of the components inside a draggable container.
 	 *
 	 * @type {String}
-	 * @public
+	 * @private
 	 */
 	orientation: PropTypes.string,
 
@@ -70,7 +70,7 @@ const containerShapePropTypes = PropTypes.shape({
 	 * The size of the draggable container relative to the screen.
 	 *
 	 * @type {Object}
-	 * @public
+	 * @private
 	 */
 	size: PropTypes.shape({
 		relative: PropTypes.string  // Relative size: small, medium, large, full
@@ -83,7 +83,7 @@ const containerShapePropTypes = PropTypes.shape({
 	 *
 	 * @type {Boolean}
 	 * @default false
-	 * @public
+	 * @private
 	 */
 	verticalEdge: PropTypes.bool
 });
