@@ -28,7 +28,7 @@ const getKeyByValue = (obj, value) =>
 // Establish the base container shape, to be shared with all components as a consistent starting point.
 const containerShapePropTypes = PropTypes.shape({
 	/**
-	 * When true it means that the draggable container takes all the available space up to all the edges of the screen.
+	 * Specifies if the draggable container takes all the available space up to all the edges of the screen.
 	 *
 	 * @type {Boolean}
 	 * @default false
