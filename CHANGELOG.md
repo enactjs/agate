@@ -2,6 +2,12 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Added
+
+- `agate/DropManager` component
+
 ## [2.0.6] - 2023-06-08
 
 No significant changes.
