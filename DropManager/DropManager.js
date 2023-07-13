@@ -463,9 +463,9 @@ const Draggable = (Wrapped) => kind({
 		name: PropTypes.string,
 
 		/**
-		 * A slot to insert the draggable container.
+		 * Nodes to be inserted in a draggable container.
 		 *
-		 * @type {String}
+		 * @type {Node}
 		 * @public
 		 */
 		slot: PropTypes.string
