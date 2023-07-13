@@ -79,7 +79,7 @@ const containerShapePropTypes = PropTypes.shape({
 	}),
 
 	/**
-	 * When true it means that the draggable container takes all the available space between the vertical screen edges.
+	 * Specifies if the draggable container takes all the available space between the vertical screen edges.
 	 *
 	 * @type {Boolean}
 	 * @default false
