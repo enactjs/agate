@@ -532,8 +532,8 @@ const ResponsiveBox = (Wrapped) => {
  * @class Droppable
  * @hoc
  * @memberof agate/DropManager
- * @mixes agate/Rearrangeable.Rearrangeable
  * @mixes ui/Slottable.Slottable
+ * @mixes agate/Rearrangeable.Rearrangeable
  * @public
  */
 const Droppable = hoc((configHoc, Wrapped) => {
