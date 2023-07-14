@@ -25,11 +25,13 @@
 @agate-white:       #fff;
 
 // Component color assignments
-@agate-bg-color: @cobalt-bg-color2;
+@agate-bg-color: var(--agate-bg-color, #44559f);
 @agate-bg-image: radial-gradient(~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0%), var(--agate-accent-l, 0%), 0.2)", transparent 60%), linear-gradient(to bottom, @cobalt-bg-color2 43%, @cobalt-bg-color2 90%);
 @agate-bg-image2: none;
-@agate-text-color: @cobalt-accent2;
-@agate-title-text-color: @agate-white;
+@agate-component-bg-color: var(--agate-component-bg-color, #7482bf);
+@agate-component-text-color: var(--agate-component-text-color, @agate-highlight);
+@agate-text-color: var(--agate-text-color, #7482bf);
+@agate-title-text-color: var(--agate-title-text-color, #ffffff);
 
 // Local cobalt variables
 @cobalt-accent2-h: ~"calc(" @agate-accent-h ~" + 0)"; // hsl(22, 25%, 52%) -> hsl(22, 27%, 43%)
@@ -55,8 +57,8 @@
 
 // Button
 // ---------------------------------------
-@agate-button-color:          @agate-highlight;
-@agate-button-bg-color:       @cobalt-accent2;
+@agate-button-color:          @agate-component-text-color;
+@agate-button-bg-color:       @agate-component-bg-color;
 @agate-button-bg-image:       none;
 @agate-button-border-color:   transparent;
 @agate-button-shadow:         none;

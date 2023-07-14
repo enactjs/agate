@@ -22,11 +22,13 @@
 @agate-white:       #fff;
 
 // Component color assignments
-@agate-bg-color: @agate-light-gray;
+@agate-bg-color: var(--agate-bg-color, #ededed);
 @agate-bg-image: radial-gradient(~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.2)", transparent 60%), linear-gradient(to bottom, @agate-bg-color 43%, @agate-white 90%);
 @agate-bg-image2: url(../assets/noise-black.png);
-@agate-text-color: @agate-gray;
-@agate-title-text-color: @agate-dark-gray;
+@agate-component-bg-color: var(--agate-component-bg-color, @agate-highlight);
+@agate-component-text-color: var(--agate-component-text-color, @agate-text-color);
+@agate-text-color: var(--agate-text-color, #d8d8d8);  ;
+@agate-title-text-color: var(--agate-title-text-color, #424242);
 
 // Local copper variables
 @copper-accent2-h: ~"calc(" @agate-accent-h ~" + 0)"; // hsl(22, 25%, 52%) -> hsl(22, 27%, 43%)
@@ -49,9 +51,9 @@
 
 // Button
 // ---------------------------------------
-@agate-button-color:          @agate-text-color;
+@agate-button-color:          @agate-component-text-color;
 @agate-button-badge-bg-color: @agate-accent;
-@agate-button-bg-color:       @agate-highlight;
+@agate-button-bg-color:       @agate-component-bg-color;
 @agate-button-bg-image:       none;
 @agate-button-border-color:   transparent;
 @agate-button-shadow:         none;
