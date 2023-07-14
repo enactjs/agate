@@ -6,6 +6,7 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {boolean, select} from '@enact/storybook-utils/addons/controls';
 import {Cell, Layout} from '@enact/ui/Layout';
+import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 
 DropManager.displayName = 'DropManager';
@@ -21,9 +22,9 @@ const prop = {
 const DraggableCell = Draggable(Cell);
 
 const styles = {
-	top: {backgroundColor: 'pink', borderRadius: '6px', marginBottom: '9px', padding: '9px'},
-	center: {backgroundColor: 'wheat', borderRadius: '6px', marginBottom: '9px', padding: '9px'},
-	bottom: {backgroundColor: 'lightblue', borderRadius: '6px', marginBottom: '9px', padding: '9px'},
+	top: {backgroundColor: 'pink', borderRadius: ri.scaleToRem(6), marginBottom: ri.scaleToRem(9), padding: ri.scaleToRem(9)},
+	center: {backgroundColor: 'wheat', borderRadius: ri.scaleToRem(6), marginBottom: ri.scaleToRem(9), padding: ri.scaleToRem(9)},
+	bottom: {backgroundColor: 'lightblue', borderRadius: ri.scaleToRem(6), marginBottom: ri.scaleToRem(9), padding: ri.scaleToRem(9)},
 	text: {fontWeight: 'bold', marginBottom: 0}
 };
 
