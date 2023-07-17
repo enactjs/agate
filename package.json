@@ -45,7 +45,7 @@
     "color-convert": "^2.0.1",
     "deep-freeze": "0.0.1",
     "eases": "^1.0.8",
-    "immer": "^9.0.21",
+    "immer": "^10.0.2",
     "invariant": "^2.2.4",
     "prop-types": "^15.8.1",
     "ramda": "^0.29.0",
@@ -58,8 +58,8 @@
     "ilib": "^14.17.0 || ^14.17.0-webos1"
   },
   "devDependencies": {
-    "@enact/docs-utils": "^0.4.2",
-    "@enact/ui-test-utils": "^1.0.3",
+    "@enact/docs-utils": "^0.4.3",
+    "@enact/ui-test-utils": "^1.0.4",
     "eslint-config-enact-proxy": "^1.0.5",
     "ilib": "^14.17.0"
   }
