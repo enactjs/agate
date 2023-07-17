@@ -25,7 +25,7 @@
 @agate-bg-color: var(--agate-bg-color, #1c0d3f);
 @agate-bg-image: none;
 @agate-bg-image2: none;
-@agate-component-bg-color: var(--agate-component-bg-color, #1c0d3f);
+@agate-component-bg-color: var(--agate-component-bg-color, @agate-accent);
 @agate-component-text-color: var(--agate-component-text-color, #ffffff);
 @agate-text-color: var(--agate-text-color, #ffffff);
 @agate-title-text-color: var(--agate-title-text-color, #ffffff);
@@ -54,7 +54,7 @@
 // Button
 // ---------------------------------------
 @agate-button-color:          @agate-component-text-color;
-@agate-button-bg-color:       @agate-accent;
+@agate-button-bg-color:       @agate-component-bg-color;
 @agate-button-bg-image:       @electro-overlay-light-gradient;
 @agate-button-border-color:   transparent;
 @agate-button-shadow:         none;
@@ -190,7 +190,7 @@
 @agate-slider-focus-color:    @agate-text-color;
 @agate-slider-focus-bg-color: @agate-foreground;
 @agate-slider-focus-bg-image: @agate-slider-bg-image;
-@agate-slider-knob-bg-color:  @agate-accent;
+@agate-slider-knob-bg-color:  @agate-component-bg-color;
 @agate-slider-knob-bg-image:  @agate-gradient;
 @agate-slider-knob-focus-bg-color: @agate-highlight;
 @agate-slider-knob-focus-bg-image: @agate-slider-knob-bg-image;
