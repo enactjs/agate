@@ -27,7 +27,10 @@
 @agate-bg-image2: none;
 @agate-component-bg-color: var(--agate-component-bg-color, @agate-accent);
 @agate-component-text-color: var(--agate-component-text-color, #ffffff);
+@agate-focus-bg-color: var(--agate-focus-bg-color, ~"hsla(" @electro-accent2-h, @electro-accent2-s, @electro-accent2-l ~", 0.7)");
+@agate-focus-color: var(--agate-focus-color, @agate-text-color);
 @agate-text-color: var(--agate-text-color, #ffffff);
+@agate-text-sub-color: var(--agate-text-sub-color, @agate-accent);
 @agate-title-text-color: var(--agate-title-text-color, #ffffff);
 
 // Local Electro variables
@@ -111,7 +114,7 @@
 // Item
 // ---------------------------------------
 @agate-item-color:       @agate-text-color;
-@agate-item-label-color: @agate-accent;
+@agate-item-label-color: @agate-text-sub-color;
 @agate-item-focus-bg-color: @agate-spotlight-bg-color;
 @agate-item-focus-color: @agate-spotlight-color;
 @agate-item-selected-color: @agate-item-label-color;

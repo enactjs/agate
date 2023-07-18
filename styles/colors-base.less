@@ -62,6 +62,8 @@
 @agate-bg-image2: inherit;
 @agate-component-bg-color: var(--agate-component-bg-color, inherit);
 @agate-component-text-color: var(--agate-component-text-color, inherit);
+@agate-focus-bg-color: var(--agate-focus-bg-color, inherit);
+@agate-focus-color: var(--agate-focus-color, inherit);
 @agate-text-color: var(--agate-text-color, inherit);
 @agate-text-sub-color: var(--agate-text-sub-color, inherit);
 @agate-title-text-color: var(--agate-title-text-color, inherit);
@@ -104,8 +106,8 @@
 @agate-button-iconOnly-disabled-color: @agate-button-iconOnly-color;
 @agate-button-iconOnly-selected-border-color: @agate-button-selected-border-color;
 @agate-button-focus-border-color:   @agate-button-border-color;
-@agate-button-focus-color:    inherit;
-@agate-button-focus-bg-color: inherit;
+@agate-button-focus-color:    @agate-focus-color;
+@agate-button-focus-bg-color: @agate-focus-bg-color;
 @agate-button-focus-bg-image: inherit;
 @agate-button-highlighted-color: @agate-button-selected-color;
 @agate-button-highlighted-bg-color: inherit;
@@ -242,7 +244,7 @@
 @agate-item-bg-color:                     transparent;
 @agate-item-border-color:                 transparent;
 @agate-item-color:                        @agate-foreground;
-@agate-item-label-color:                  @agate-item-color;
+@agate-item-label-color:                  @agate-text-sub-color;
 @agate-item-label-focus-selected-color:   @agate-spotlight-color;
 @agate-item-focus-bg-color:               @agate-background-focus;
 @agate-item-focus-bg-image:               none;

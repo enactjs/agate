@@ -30,7 +30,10 @@
 @agate-bg-image2: url(../assets/noise-white.png);
 @agate-component-bg-color: var(--agate-component-bg-color, #424242);
 @agate-component-text-color: var(--agate-component-text-color, @agate-accent);
+@agate-focus-bg-color: var(--agate-focus-bg-color, @agate-highlight);
+@agate-focus-color: var(--agate-focus-color, #373739);
 @agate-text-color: var(--agate-text-color, @agate-accent);
+@agate-text-sub-color: var(--agate-text-sub-color, @agate-accent);
 @agate-title-text-color: var(--agate-title-text-color, #ffffff);
 
 // Local copper variables
@@ -59,8 +62,8 @@
 @agate-button-bg-image:       none;
 @agate-button-border-color:   transparent;
 @agate-button-shadow:         none;
-@agate-button-focus-color:    @agate-darker-gray;
-@agate-button-focus-bg-color: @agate-background-focus;
+@agate-button-focus-color:    @agate-focus-color;
+@agate-button-focus-bg-color: @agate-focus-bg-color;
 @agate-button-focus-bg-image: none;
 @agate-button-highlighted-color: @agate-button-selected-color;
 @agate-button-highlighted-bg-color: @agate-accent;
@@ -108,8 +111,8 @@
 
 // Item
 // ---------------------------------------
-@agate-item-color: @agate-accent;
-@agate-item-label-color: @agate-accent;
+@agate-item-color: @agate-text-color;
+@agate-item-label-color: @agate-text-sub-color;
 @agate-item-focus-bg-color: ~"hsla(var(--agate-highlight-h, 0), var(--agate-highlight-s, 0%), var(--agate-highlight-l, 0%), 0.1)";
 @agate-item-focus-color: @agate-item-color;
 @agate-item-label-focus-selected-color: @agate-item-color;
