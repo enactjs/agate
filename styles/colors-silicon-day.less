@@ -69,11 +69,15 @@
 @agate-bg-image2: none;
 @agate-component-bg-color: var(--agate-component-bg-color, #eeeeee);
 @agate-component-text-color: var(--agate-component-text-color, #000000);
-@agate-focus-bg-color: var(--agate-focus-bg-color, transparent);
+@agate-focus-bg-color: var(--agate-focus-bg-color, @agate-accent);
 @agate-focus-color: var(--agate-focus-color, #ffffff);
 @agate-text-color: var(--agate-text-color, #000000);
 @agate-text-sub-color: var(--agate-text-sub-color, #b3b3b3);
 @agate-title-text-color: var(--agate-title-text-color, #000000);
+@agate-toggle-off-color: var(--agate-toggle-off-color, #999999);
+@agate-toggle-on-color: var(--agate-toggle-on-color, @agate-accent);
+@agate-toggle-off-bg-color: var(--agate-toggle-off-bg-color, #000000);
+@agate-toggle-on-bg-color: var(--agate-toggle-on-bg-color, #000000);
 
 // Disabled Opacity
 // ---------------------------------------
@@ -321,12 +325,11 @@
 
 // Slider
 // ---------------------------------------
-@agate-slider-color:          @agate-accent;
 @agate-slider-track-bg-color: fade(@agate-black, 50%);
 @agate-slider-fill-bg-color:  @agate-black;
-@agate-slider-focus-fill-bg-color: @agate-accent;
+@agate-slider-focus-fill-bg-color: @agate-focus-bg-color;
 @agate-slider-knob-bg-color:  @agate-black;
-@agate-slider-knob-focus-bg-color: @agate-accent;
+@agate-slider-knob-focus-bg-color: @agate-focus-bg-color;
 @agate-slider-knob-shadow:    0;
 @agate-slider-knob-focus-shadow: @agate-slider-knob-shadow;
 
@@ -349,7 +352,7 @@
 @agate-sliderbutton-bg-color:       @agate-slider-track-bg-color;
 @agate-sliderbutton-bg-image:       @agate-slider-track-bg-image;
 @agate-sliderbutton-border-color:   transparent;
-@agate-sliderbutton-focus-color:    @agate-slider-focus-color;
+@agate-sliderbutton-focus-color:    @agate-focus-bg-color;
 @agate-sliderbutton-focus-bg-color: @agate-slider-track-focus-bg-color;
 @agate-sliderbutton-focus-bg-image: @agate-slider-track-focus-bg-image;
 @agate-sliderbutton-knob-bg-color:  transparent;
@@ -364,11 +367,11 @@
 
 // Switch
 // ---------------------------------------
-@agate-switch-bg-color: @agate-foreground;
-@agate-switch-selected-bg-color: @agate-foreground;
+@agate-switch-bg-color: @agate-toggle-off-bg-color;
+@agate-switch-selected-bg-color: @agate-toggle-on-bg-color;
 @agate-switch-selected-focus-bg-color: @agate-foreground;
-@agate-switch-color: @agate-noble-gray;
-@agate-switch-selected-color: @agate-accent;
+@agate-switch-color: @agate-toggle-off-color;
+@agate-switch-selected-color: @agate-toggle-on-color;
 @agate-switch-focus-bg-color: @agate-text-color;
 @agate-switch-focus-color: @agate-black;
 @agate-switch-label-color: @agate-accent;
