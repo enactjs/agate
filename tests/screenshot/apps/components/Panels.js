@@ -17,6 +17,11 @@ const PanelsTests = [
 		title: 'no close button',
 		component: <Panels noCloseButton>{PanelComponents}</Panels>,
 		wrapper: {full: true}
+	},
+	{
+		title: 'cover partial',
+		component: <Panels cover="partial">{PanelComponents}</Panels>,
+		wrapper: {full: true}
 	}
 ];
 
