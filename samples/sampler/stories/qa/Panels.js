@@ -155,12 +155,14 @@ export default {
 
 export const PreserveFocus = (args) => (
 	<BasicPanels
+		cover={args['cover']}
 		noAnimation={args['noAnimation']}
 		noCloseButton={args['noCloseButton']}
 		orientation={args['orientation']}
 	/>
 );
 
+select('cover', PreserveFocus, ['full', 'partial'], Config);
 boolean('noAnimation', PreserveFocus, Config);
 boolean('noCloseButton', PreserveFocus, Config);
 select('orientation', PreserveFocus, ['horizontal', 'vertical'], Config);
