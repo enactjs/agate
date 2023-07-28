@@ -29,11 +29,20 @@
 @gallium-night-rider-gray: #333333;
 
 // Component color assignments
-@agate-bg-color: @agate-white;
+@agate-bg-color: var(--agate-bg-color, #ffffff);
 @agate-bg-image: none;
 @agate-bg-image2: none;
-@agate-text-color: @agate-black;
-@agate-title-text-color: @agate-black;
+@agate-component-bg-color: var(--agate-component-bg-color, #5e5e5e);
+@agate-component-text-color: var(--agate-component-text-color, #ffffff);
+@agate-focus-bg-color: var(--agate-focus-bg-color, @agate-accent);
+@agate-focus-color: var(--agate-focus-color, #ffffff);
+@agate-text-color: var(--agate-text-color, #000000);
+@agate-text-sub-color: var(--agate-text-sub-color, #000000);
+@agate-title-text-color: var(--agate-title-text-color, #000000);
+@agate-toggle-off-color: var(--agate-toggle-off-color, #5e5e5e);
+@agate-toggle-on-color: var(--agate-toggle-on-color, @agate-title-text-color);
+@agate-toggle-off-bg-color: var(--agate-toggle-off-bg-color, #373737);
+@agate-toggle-on-bg-color: var(--agate-toggle-on-bg-color, @agate-accent);
 
 // Disabled Opacity
 // ---------------------------------------
@@ -49,13 +58,13 @@
 
 // Button
 // ---------------------------------------
-@agate-button-color:          @agate-white;
-@agate-button-bg-color:       @agate-dark-gray;
+@agate-button-color:          @agate-component-text-color;
+@agate-button-bg-color:       @agate-component-bg-color;
 @agate-button-bg-image:       none;
 @agate-button-border-color:   transparent;
 @agate-button-shadow:         none;
-@agate-button-focus-color:    @agate-spotlight-color;
-@agate-button-focus-bg-color: @agate-background-focus;
+@agate-button-focus-color:    @agate-focus-color;
+@agate-button-focus-bg-color: @agate-focus-bg-color;
 @agate-button-focus-bg-image: @agate-button-bg-image;
 @agate-button-highlighted-color: @agate-white;
 @agate-button-highlighted-bg-color: @agate-highlight;
@@ -121,7 +130,7 @@
 // Item
 // ---------------------------------------
 @agate-item-color:                        @agate-text-color;
-@agate-item-label-color:                  @agate-text-color;
+@agate-item-label-color:                  @agate-text-sub-color;
 @agate-item-focus-color:                  @agate-item-color;
 @agate-item-label-focus-selected-color:   @agate-item-color;
 @agate-item-focus-bg-color:               transparent;
@@ -217,11 +226,10 @@
 
 // Slider
 // ---------------------------------------
-@agate-slider-color:          @agate-accent;
 @agate-slider-track-bg-color: fade(@agate-black, 10%);
 @agate-slider-fill-bg-color:  @agate-black;
-@agate-slider-knob-bg-color:  @agate-dark-gray;
-@agate-slider-knob-focus-bg-color: @agate-accent;
+@agate-slider-knob-bg-color:  @agate-component-bg-color;
+@agate-slider-knob-focus-bg-color: @agate-focus-bg-color;
 @agate-slider-knob-shadow:    0 3px 9px 3px fade(@agate-black, 30%);
 @agate-slider-knob-focus-shadow: @agate-slider-knob-shadow;
 
@@ -237,7 +245,7 @@
 @agate-sliderbutton-color:          @agate-text-color;
 @agate-sliderbutton-bg-color:       @agate-slider-track-bg-color;
 @agate-sliderbutton-bg-image:       @agate-slider-track-bg-image;
-@agate-sliderbutton-focus-color:    @agate-slider-focus-color;
+@agate-sliderbutton-focus-color:    @agate-focus-bg-color;
 @agate-sliderbutton-focus-bg-color: @agate-slider-track-focus-bg-color;
 @agate-sliderbutton-focus-bg-image: @agate-slider-track-focus-bg-image;
 @agate-sliderbutton-knob-bg-color:  transparent;
@@ -252,11 +260,11 @@
 
 // Switch
 // ---------------------------------------
-@agate-switch-bg-color: @agate-darker-gray;
-@agate-switch-selected-bg-color: @agate-accent;
+@agate-switch-bg-color: @agate-toggle-off-bg-color;
+@agate-switch-selected-bg-color: @agate-toggle-on-bg-color;
 @agate-switch-selected-focus-bg-color: @agate-switch-selected-bg-color;
-@agate-switch-color: @agate-dark-gray;
-@agate-switch-selected-color: @agate-title-text-color;
+@agate-switch-color: @agate-toggle-off-color;
+@agate-switch-selected-color: @agate-toggle-on-color;
 @agate-switch-focus-bg-color: @agate-text-color;
 @agate-switch-focus-color: @agate-black;
 @agate-switch-label-color: @agate-accent;

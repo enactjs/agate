@@ -16,8 +16,20 @@
 @agate-dim-gray: #6c6c6c;
 
 // Component color assignments
+@agate-bg-color: var(--agate-bg-color, #000000);
 @agate-bg-image: none;
 @agate-bg-image2: none;
+@agate-component-bg-color: var(--agate-component-bg-color, #eeeeee);
+@agate-component-text-color: var(--agate-component-text-color, #000000);
+@agate-focus-bg-color: var(--agate-focus-bg-color, @agate-accent);
+@agate-focus-color: var(--agate-focus-color, #ffffff);
+@agate-text-color: var(--agate-text-color, #ffffff);
+@agate-text-sub-color: var(--agate-text-sub-color, #b3b3b3);
+@agate-title-text-color: var(--agate-title-text-color, #ffffff);
+@agate-toggle-off-color: var(--agate-toggle-off-color, #999999);
+@agate-toggle-on-color: var(--agate-toggle-on-color, @agate-accent);
+@agate-toggle-off-bg-color: var(--agate-toggle-off-bg-color, #ffffff);
+@agate-toggle-on-bg-color: var(--agate-toggle-on-bg-color, #ffffff);
 
 // Disabled Opacity
 // ---------------------------------------
@@ -40,7 +52,7 @@
 @agate-button-active-color:   @agate-button-color;
 @agate-button-iconOnly-disabled-color: fade(@agate-white, 30%);
 @agate-button-focus-border-color: transparent;
-@agate-button-focus-color:    @agate-white;
+@agate-button-focus-color:    @agate-focus-color;
 @agate-button-highlighted-color: @agate-black;
 @agate-button-selected-focus-border-color: @agate-white;
 @agate-button-lightOpaque-color: @agate-button-color;

@@ -22,11 +22,20 @@
 @agate-white:       #fff;
 
 // Component color assignments
-@agate-bg-color: #1c0d3f;
+@agate-bg-color: var(--agate-bg-color, #1c0d3f);
 @agate-bg-image: none;
 @agate-bg-image2: none;
-@agate-text-color: white;
-@agate-title-text-color: white;
+@agate-component-bg-color: var(--agate-component-bg-color, @agate-accent);
+@agate-component-text-color: var(--agate-component-text-color, #ffffff);
+@agate-focus-bg-color: var(--agate-focus-bg-color, ~"hsla(" @electro-accent2-h, @electro-accent2-s, @electro-accent2-l ~", 0.7)");
+@agate-focus-color: var(--agate-focus-color, @agate-text-color);
+@agate-text-color: var(--agate-text-color, #ffffff);
+@agate-text-sub-color: var(--agate-text-sub-color, @agate-accent);
+@agate-title-text-color: var(--agate-title-text-color, #ffffff);
+@agate-toggle-off-color: var(--agate-toggle-off-color, @agate-title-text-color);
+@agate-toggle-on-color: var(--agate-toggle-on-color, @agate-title-text-color);
+@agate-toggle-off-bg-color: var(--agate-toggle-off-bg-color, ~"hsla(var(--agate-accent-h, 0), var(--agate-accent-s, 0), var(--agate-accent-l, 0), 0.8)");
+@agate-toggle-on-bg-color: var(--agate-toggle-on-bg-color, @agate-highlight);
 
 // Local Electro variables
 @electro-accent2-h: ~"calc(" @agate-accent-h ~" - 27)"; //, hsl(191, 97%, 65%)
@@ -51,8 +60,8 @@
 
 // Button
 // ---------------------------------------
-@agate-button-color:          white;
-@agate-button-bg-color:       @agate-accent;
+@agate-button-color:          @agate-component-text-color;
+@agate-button-bg-color:       @agate-component-bg-color;
 @agate-button-bg-image:       @electro-overlay-light-gradient;
 @agate-button-border-color:   transparent;
 @agate-button-shadow:         none;
@@ -109,7 +118,7 @@
 // Item
 // ---------------------------------------
 @agate-item-color:       @agate-text-color;
-@agate-item-label-color: @agate-accent;
+@agate-item-label-color: @agate-text-sub-color;
 @agate-item-focus-bg-color: @agate-spotlight-bg-color;
 @agate-item-focus-color: @agate-spotlight-color;
 @agate-item-selected-color: @agate-item-label-color;
@@ -176,7 +185,6 @@
 
 // Slider
 // ---------------------------------------
-@agate-slider-color:          @agate-text-color;
 @agate-slider-bg-color:       @agate-accent;
 @agate-slider-bg-image:       linear-gradient(to top, transparent, fade(black, 50%));
 @agate-slider-track-bg-color: transparent;
@@ -185,10 +193,9 @@
 @agate-slider-track-focus-bg-image: @agate-slider-track-bg-image;
 @agate-slider-fill-bg-color:  @agate-accent;
 @agate-slider-fill-bg-image:  none;
-@agate-slider-focus-color:    @agate-text-color;
 @agate-slider-focus-bg-color: @agate-foreground;
 @agate-slider-focus-bg-image: @agate-slider-bg-image;
-@agate-slider-knob-bg-color:  @agate-accent;
+@agate-slider-knob-bg-color:  @agate-component-bg-color;
 @agate-slider-knob-bg-image:  @agate-gradient;
 @agate-slider-knob-focus-bg-color: @agate-highlight;
 @agate-slider-knob-focus-bg-image: @agate-slider-knob-bg-image;
@@ -224,10 +231,10 @@
 
 // SliderButton
 // ---------------------------------------
-@agate-sliderbutton-color:          @agate-slider-color;
+@agate-sliderbutton-color:          @agate-text-color;
 @agate-sliderbutton-bg-color:       @agate-slider-bg-color;
 @agate-sliderbutton-bg-image:       @agate-slider-bg-image;
-@agate-sliderbutton-focus-color:    @agate-slider-focus-color;
+@agate-sliderbutton-focus-color:    @agate-text-color;
 @agate-sliderbutton-focus-bg-color: @agate-slider-focus-bg-color;
 @agate-sliderbutton-focus-bg-image: @agate-slider-focus-bg-image;
 @agate-sliderbutton-knob-bg-color:  @agate-slider-knob-bg-color;
@@ -243,11 +250,11 @@
 
 // Switch
 // ---------------------------------------
-@agate-switch-bg-color: @agate-foreground;
-@agate-switch-selected-bg-color: @agate-highlight;
+@agate-switch-bg-color: @agate-toggle-off-bg-color;
+@agate-switch-selected-bg-color: @agate-toggle-on-bg-color;
 @agate-switch-selected-focus-bg-color: @agate-switch-selected-bg-color;
-@agate-switch-color: @agate-title-text-color;
-@agate-switch-selected-color: @agate-title-text-color;
+@agate-switch-color: @agate-toggle-off-color;
+@agate-switch-selected-color: @agate-toggle-on-color;
 @agate-switch-focus-bg-color: @agate-foreground;
 @agate-switch-focus-color: @agate-text-color;
 @agate-switch-label-color: @agate-text-color;
