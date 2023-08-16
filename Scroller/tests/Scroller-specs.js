@@ -94,11 +94,12 @@ describe('Scroller', () => {
 		);
 
 		test(
-			'should render only vertical scrollbar when `verticalScrollbar` is `hidden` and `horizontalScrollbar` is `visible`',
+			'should render only horizontal scrollbar when `verticalScrollbar` is `hidden` and `horizontalScrollbar` is `visible`',
 			async () => {
 				const user = userEvent.setup();
 				render(
 					<Scroller
+						scrollMode="translate"
 						horizontalScrollbar="visible"
 						verticalScrollbar="hidden"
 					>

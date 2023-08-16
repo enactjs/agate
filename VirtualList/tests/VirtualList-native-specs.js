@@ -46,7 +46,6 @@ describe('VirtualList with native `scrollMode`', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
-				scrollMode="native"
 			/>
 		);
 
@@ -62,7 +61,6 @@ describe('VirtualList with native `scrollMode`', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
-				scrollMode="native"
 			/>
 		);
 
@@ -79,7 +77,6 @@ describe('VirtualList with native `scrollMode`', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
-				scrollMode="native"
 			/>
 		);
 
@@ -96,7 +93,6 @@ describe('VirtualList with native `scrollMode`', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
-				scrollMode="native"
 			/>
 		);
 
@@ -108,7 +104,6 @@ describe('VirtualList with native `scrollMode`', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
-				scrollMode="native"
 			/>
 		);
 
@@ -126,7 +121,6 @@ describe('VirtualList with native `scrollMode`', () => {
 				direction="horizontal"
 				itemRenderer={renderItem}
 				itemSize={itemSize}
-				scrollMode="native"
 			/>
 		);
 
@@ -146,7 +140,6 @@ describe('VirtualList with native `scrollMode`', () => {
 					horizontalScrollbar="visible"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
-					scrollMode="native"
 					verticalScrollbar="visible"
 				/>
 			);
@@ -167,7 +160,6 @@ describe('VirtualList with native `scrollMode`', () => {
 					horizontalScrollbar="hidden"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
-					scrollMode="native"
 					verticalScrollbar="visible"
 				/>
 			);
@@ -190,7 +182,6 @@ describe('VirtualList with native `scrollMode`', () => {
 					horizontalScrollbar="hidden"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
-					scrollMode="native"
 					verticalScrollbar="hidden"
 				/>
 			);
@@ -221,7 +212,6 @@ describe('VirtualList with native `scrollMode`', () => {
 					dataSize={itemArray.length}
 					itemRenderer={renderItemArray}
 					itemSize={itemSize}
-					scrollMode="native"
 				/>
 			);
 
@@ -232,7 +222,6 @@ describe('VirtualList with native `scrollMode`', () => {
 				dataSize={itemArray.length}
 				itemRenderer={renderItemArray}
 				itemSize={itemSize}
-				scrollMode="native"
 			/>);
 
 			jest.useFakeTimers();
