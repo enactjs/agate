@@ -4,7 +4,7 @@ import {act, fireEvent, render, screen} from '@testing-library/react';
 import Item from '../../Item';
 import VirtualList from '../VirtualList';
 
-describe('VirtualList', () => {
+describe('VirtualList with translate `scrollMode`', () => {
 	let
 		clientSize,
 		dataSize,
@@ -92,6 +92,7 @@ describe('VirtualList', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="translate"
 			/>
 		);
 
@@ -107,6 +108,7 @@ describe('VirtualList', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="translate"
 			/>
 		);
 
@@ -123,6 +125,7 @@ describe('VirtualList', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="translate"
 			/>
 		);
 
@@ -139,6 +142,7 @@ describe('VirtualList', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="translate"
 			/>
 		);
 
@@ -150,6 +154,7 @@ describe('VirtualList', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="translate"
 			/>
 		);
 
@@ -167,6 +172,7 @@ describe('VirtualList', () => {
 				direction="horizontal"
 				itemRenderer={renderItem}
 				itemSize={itemSize}
+				scrollMode="translate"
 			/>
 		);
 
@@ -186,6 +192,7 @@ describe('VirtualList', () => {
 					horizontalScrollbar="visible"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
+					scrollMode="translate"
 					verticalScrollbar="visible"
 				/>
 			);
@@ -206,6 +213,7 @@ describe('VirtualList', () => {
 					horizontalScrollbar="hidden"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
+					scrollMode="translate"
 					verticalScrollbar="visible"
 				/>
 			);
@@ -228,6 +236,7 @@ describe('VirtualList', () => {
 					horizontalScrollbar="hidden"
 					itemRenderer={renderItem}
 					itemSize={itemSize}
+					scrollMode="translate"
 					verticalScrollbar="hidden"
 				/>
 			);
@@ -257,6 +266,7 @@ describe('VirtualList', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					onScrollStop={onScrollStop}
+					scrollMode="translate"
 				/>
 			);
 
@@ -279,6 +289,7 @@ describe('VirtualList', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					onScrollStop={onScrollStop}
+					scrollMode="translate"
 				/>
 			);
 
@@ -300,6 +311,7 @@ describe('VirtualList', () => {
 					itemRenderer={renderItem}
 					itemSize={itemSize}
 					onScrollStop={onScrollStop}
+					scrollMode="translate"
 				/>
 			);
 
@@ -316,6 +328,7 @@ describe('VirtualList', () => {
 						itemRenderer={renderItem}
 						itemSize={30}
 						onScrollStart={handlerOnScrollStart}
+						scrollMode="translate"
 					/>
 				);
 
@@ -335,6 +348,7 @@ describe('VirtualList', () => {
 						itemRenderer={renderItem}
 						itemSize={30}
 						onScroll={handlerOnScroll}
+						scrollMode="translate"
 					/>
 				);
 
@@ -360,6 +374,7 @@ describe('VirtualList', () => {
 						itemRenderer={renderItem}
 						itemSize={30}
 						onScrollStop={onScrollStop}
+						scrollMode="translate"
 					/>
 				);
 
@@ -395,6 +410,7 @@ describe('VirtualList', () => {
 					itemSize={itemSize}
 					onScrollStart={handlerOnScrollStart}
 					onScrollStop={onScrollStop}
+					scrollMode="translate"
 				/>
 			);
 
@@ -418,6 +434,7 @@ describe('VirtualList', () => {
 					noScrollByWheel
 					onScrollStart={handlerOnScrollStart}
 					onScrollStop={fn}
+					scrollMode="translate"
 				/>
 			);
 
@@ -449,6 +466,7 @@ describe('VirtualList', () => {
 					dataSize={itemArray.length}
 					itemRenderer={renderItemArray}
 					itemSize={itemSize}
+					scrollMode="translate"
 				/>
 			);
 
@@ -459,6 +477,7 @@ describe('VirtualList', () => {
 				dataSize={itemArray.length}
 				itemRenderer={renderItemArray}
 				itemSize={itemSize}
+				scrollMode="translate"
 			/>);
 
 			setTimeout(() => {
@@ -482,6 +501,7 @@ describe('VirtualList', () => {
 					itemRenderer={renderItem}
 					itemSize={30}
 					scrollLeftAriaLabel={label}
+					scrollMode="translate"
 				/>
 			);
 
@@ -502,6 +522,7 @@ describe('VirtualList', () => {
 					direction="horizontal"
 					itemRenderer={renderItem}
 					itemSize={30}
+					scrollMode="translate"
 					scrollRightAriaLabel={label}
 				/>
 			);
@@ -523,6 +544,7 @@ describe('VirtualList', () => {
 					direction="vertical"
 					itemRenderer={renderItem}
 					itemSize={30}
+					scrollMode="translate"
 					scrollUpAriaLabel={label}
 				/>
 			);
@@ -545,6 +567,7 @@ describe('VirtualList', () => {
 					itemRenderer={renderItem}
 					itemSize={30}
 					scrollDownAriaLabel={label}
+					scrollMode="translate"
 				/>
 			);
 
