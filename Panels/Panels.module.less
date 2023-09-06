@@ -6,7 +6,7 @@
 
 .panels {
 	&,
-	& .viewport {
+	.viewport {
 		position: absolute;
 		.position(0);
 	}
@@ -62,6 +62,13 @@
 			.remove-margin-on-edge-children();
 		}
 
+		.viewport {
+			&.transitioning {
+				-webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+				clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+			}
+		}
+
 		&.partial {
 			background-color: @agate-panels-partial-bg-color;
 			background-image: @agate-panels-partial-bg-image;
@@ -80,17 +87,6 @@
 					height: @agate-panels-breadcrumb-height;
 					width: @agate-panels-breadcrumb-width;
 					font-family: @agate-base-font-family;
-				}
-			}
-
-			.viewport {
-				&.transitioning {
-					-webkit-clip-path: polygon(@agate-panels-breadcrumb-width 0, 100% 0, 100% 100%, @agate-panels-breadcrumb-width 100%);
-					clip-path: polygon(@agate-panels-breadcrumb-width 0, 100% 0, 100% 100%, @agate-panels-breadcrumb-width 100%);
-				}
-
-				> :not([data-index="0"]) {
-					width: calc(~"100% - " @agate-panels-breadcrumb-width);
 				}
 			}
 		}
