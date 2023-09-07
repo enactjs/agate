@@ -139,8 +139,8 @@ const ViewportBase = class extends Component {
 	removeTransitioningClass = () => {
 		if (this.node) {
 			setTimeout(() => {
-				this.node.classList.remove(css.transitioning)
-			}, 100)
+				this.node.classList.remove(css.transitioning);
+			}, 100);
 		}
 
 		return true;
