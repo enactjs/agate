@@ -9,6 +9,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 - `agate/Scroller`, `agate/VirtualList` and `agate/VirtualGridList` default value for `scrollMode` to `native`
 
 ### Fixed
+
 - `agate/Panels` partial transition on horizontal
 
 ## [2.0.6] - 2023-06-08
