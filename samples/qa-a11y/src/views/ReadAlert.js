@@ -36,14 +36,14 @@ const ReadAlertView = () => {
 
 	const onToggle = useCallback(() => {
 		if (window.WebOSServiceBridge ?? window.PalmServiceBridge) {
-			setAudioGuidance(guidance => setAudioGuidance(!guidance));
+			setAudioGuidance(prevAudioGuidance => !prevAudioGuidance);
 			new LS2Request().send({
 				service: 'luna://com.webos.settingsservice/',
 				method: 'setSystemSettings',
 				parameters: {
 					category: 'option',
 					settings: {
-						audioGuidance: audioGuidance ? 'on' : 'off'
+						audioGuidance: audioGuidance ? 'off' : 'on'
 					}
 				}
 			});
