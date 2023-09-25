@@ -54,7 +54,7 @@ describe('Focus after calling scrollTo()', function () {
 			await waitUntilFocused(i * 4);
 			await waitUntilVisible(i * 4);
 		}
-		// await browser.pause(500);
+		await browser.pause(500);
 		// Press 5-way OK.
 		await Page.spotlightSelect();
 

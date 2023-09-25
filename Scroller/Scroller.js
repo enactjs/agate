@@ -371,7 +371,7 @@ Scroller.defaultProps = {
 	onScrollStart: nop,
 	onScrollStop: nop,
 	preventBubblingOnKeyDown: 'none',
-	scrollMode: 'translate',
+	scrollMode: 'native',
 	verticalScrollbar: 'auto'
 };
 

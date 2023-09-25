@@ -466,7 +466,7 @@ VirtualList.defaultProps = {
 	pageScroll: false,
 	preventBubblingOnKeyDown: 'programmatic',
 	role: 'list',
-	scrollMode: 'translate',
+	scrollMode: 'native',
 	verticalScrollbar: 'auto',
 	wrap: false
 };
@@ -896,7 +896,7 @@ VirtualGridList.defaultProps = {
 	pageScroll: false,
 	preventBubblingOnKeyDown: 'programmatic',
 	role: 'list',
-	scrollMode: 'translate',
+	scrollMode: 'native',
 	verticalScrollbar: 'auto',
 	wrap: false
 };

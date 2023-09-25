@@ -13,7 +13,7 @@ const ReadAlertView = () => {
 	const [toggleDisabled, setToggleDisabled] = useState(true);
 
 	useEffect(() => {
-		if (window.PalmServiceBridge) {
+		if (window.WebOSServiceBridge ?? window.PalmServiceBridge) {
 			new LS2Request().send({
 				service: 'luna://com.webos.settingsservice/',
 				method: 'getSystemSettings',
@@ -35,7 +35,7 @@ const ReadAlertView = () => {
 	const onClick2 = onClick(false);
 
 	const onToggle = useCallback(() => {
-		if (window.PalmServiceBridge) {
+		if (window.WebOSServiceBridge ?? window.PalmServiceBridge) {
 			setAudioGuidance(guidance => setAudioGuidance(!guidance));
 			new LS2Request().send({
 				service: 'luna://com.webos.settingsservice/',
