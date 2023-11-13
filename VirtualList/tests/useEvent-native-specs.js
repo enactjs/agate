@@ -66,7 +66,6 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
-				scrollMode="native"
 			/>
 		);
 
@@ -95,7 +94,6 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 				dataSize={5}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
-				scrollMode="native"
 				wrap
 			/>
 		);
@@ -122,7 +120,6 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 				dataSize={5}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
-				scrollMode="native"
 				wrap
 			/>
 		);
@@ -150,7 +147,6 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 				direction="horizontal"
 				itemRenderer={renderItem}
 				itemSize={itemSize}
-				scrollMode="native"
 			/>
 		);
 
@@ -175,7 +171,6 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 				direction="horizontal"
 				itemRenderer={renderItem}
 				itemSize={itemSize}
-				scrollMode="native"
 			/>
 		);
 
@@ -208,7 +203,6 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
-				scrollMode="native"
 			/>
 		);
 
@@ -237,7 +231,6 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 				dataSize={dataSize}
 				itemRenderer={renderItem}
 				itemSize={itemSize}
-				scrollMode="native"
 			/>
 		);
 
