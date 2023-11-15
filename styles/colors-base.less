@@ -64,6 +64,7 @@
 @agate-component-text-color: var(--agate-component-text-color, inherit);
 @agate-focus-bg-color: var(--agate-focus-bg-color, inherit);
 @agate-focus-color: var(--agate-focus-color, inherit);
+@agate-selected-bg-color: var(--agate-selected-bg-color, inherit);
 @agate-selected-color: var(--agate-selected-color, inherit);
 @agate-text-color: var(--agate-text-color, inherit);
 @agate-text-sub-color: var(--agate-text-sub-color, inherit);
@@ -119,7 +120,7 @@
 @agate-button-highlighted-bg-color: inherit;
 @agate-button-highlighted-bg-image: inherit;
 @agate-button-selected-color: @agate-selected-color;
-@agate-button-selected-bg-color: inherit;
+@agate-button-selected-bg-color: @agate-selected-bg-color;
 @agate-button-selected-border-color: transparent;
 @agate-button-selected-disabled-bg-color: @agate-button-selected-bg-color;
 @agate-button-selected-disabled-border-color: @agate-button-selected-border-color;
@@ -141,9 +142,9 @@
 
 // Checkbox
 // ---------------------------------------
-@agate-checkbox-bg-color: inherit;
+@agate-checkbox-bg-color: @agate-component-bg-color;;
 @agate-checkbox-border-color: inherit;
-@agate-checkbox-focus-bg-color: inherit;
+@agate-checkbox-focus-bg-color: @agate-focus-bg-color;
 @agate-checkbox-focus-bg-image: none;
 @agate-checkbox-focus-icon-border-color: inherit;
 @agate-checkbox-focus-icon-color: inherit;
