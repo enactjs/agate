@@ -32,8 +32,7 @@ const locales = {
 	  'Copper': 'copper',
 	  'Electro': 'electro',
 	  'Gallium': 'gallium',
-	  'Titanium': 'titanium',
-	  'Silicon': 'silicon'
+	  'Titanium': 'titanium'
   };
 
 if (process.env.SKINS) {
