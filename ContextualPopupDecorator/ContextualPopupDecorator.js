@@ -553,7 +553,9 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 
 				this.calcOverflow(containerNode, clientNode);
 				this.adjustDirection();
-				this.props.onAdjustDirection({adjustedDirection: this.adjustedDirection.split(' ')[0] === 'below' ? 'below' : 'above'});
+				if (this.props.onAdjustDirection) {
+					this.props.onAdjustDirection({adjustedDirection: this.adjustedDirection.split(' ')[0] === 'below' ? 'below' : 'above'});
+				}
 
 				this.setState({
 					direction: this.adjustedDirection,
