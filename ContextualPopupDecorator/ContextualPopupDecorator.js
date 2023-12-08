@@ -125,6 +125,8 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 */
 			offset: PropTypes.oneOf(['none', 'overlap', 'small']),
 
+			onAdjustDirection: PropTypes.func,
+
 			/**
 			 * Called when the user has attempted to close the popup.
 			 *
@@ -551,6 +553,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 
 				this.calcOverflow(containerNode, clientNode);
 				this.adjustDirection();
+				this.props.onAdjustDirection({adjustedDirection: this.adjustedDirection.split(' ')[0] === 'below' ? 'below' : 'above'});
 
 				this.setState({
 					direction: this.adjustedDirection,
