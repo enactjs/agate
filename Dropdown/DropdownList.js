@@ -46,7 +46,7 @@ const DropdownListBase = kind({
 	name: 'DropdownListBase',
 
 	propTypes: /** @lends agate/Dropdown.DropdownListBase.prototype */ {
-		adjustedDirection: PropTypes.string,
+		adjusteddirection: PropTypes.string,
 
 		/**
 		 * The selections for Dropdown
@@ -141,8 +141,8 @@ const DropdownListBase = kind({
 	},
 
 	computed: {
-		className: ({adjustedDirection, direction, skin, width, styler}) => {
-			direction = adjustedDirection ? adjustedDirection : direction;
+		className: ({adjusteddirection, direction, skin, width, styler}) => {
+			direction = adjusteddirection ? adjusteddirection : direction;
 			return styler.append(direction.substr(0, direction.indexOf(' ')), width, {dropdownListWithCustomizedScroller: skin === 'silicon'});
 		},
 		dataSize: ({children}) => children ? children.length : 0,

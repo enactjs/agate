@@ -554,7 +554,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 				this.calcOverflow(containerNode, clientNode);
 				this.adjustDirection();
 				if (this.props.onAdjustDirection) {
-					this.props.onAdjustDirection({adjustedDirection: this.adjustedDirection.split(' ')[0] === 'below' ? 'below' : 'above'});
+					this.props.onAdjustDirection({adjusteddirection: this.adjustedDirection.split(' ')[0] === 'below' ? 'below' : 'above'});
 				}
 
 				this.setState({
@@ -682,6 +682,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			}
 
 			delete rest.direction;
+			delete rest.onAdjustDirection;
 			delete rest.onOpen;
 			delete rest.popupSpotlightId;
 			delete rest.rtl;
