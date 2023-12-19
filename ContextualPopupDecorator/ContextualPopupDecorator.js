@@ -125,6 +125,15 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 */
 			offset: PropTypes.oneOf(['none', 'overlap', 'small']),
 
+			/**
+			 * Called when the direction is adjusted.
+			 *
+			 * This prop is from Dropdown component.
+			 * After adjusting direction, this function passes the adjusted direction to Dropdown.
+			 *
+			 * @type {Function}
+			 * @public
+			 */
 			onAdjustDirection: PropTypes.func,
 
 			/**
@@ -554,7 +563,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 				this.calcOverflow(containerNode, clientNode);
 				this.adjustDirection();
 				if (this.props.onAdjustDirection) {
-					this.props.onAdjustDirection({adjusteddirection: this.adjustedDirection.split(' ')[0] === 'below' ? 'below' : 'above'});
+					this.props.onAdjustDirection({adjustedDirection: this.adjustedDirection.split(' ')[0] === 'below' ? 'below' : 'above'});
 				}
 
 				this.setState({

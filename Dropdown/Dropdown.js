@@ -124,7 +124,14 @@ const DropdownBase = kind({
 	name: 'Dropdown',
 
 	propTypes: /** @lends agate/Dropdown.DropdownBase.prototype */ {
-		adjusteddirection: PropTypes.oneOf(['above', 'below']),
+		/**
+		 * The direction which is adjusted if original direction is not appropriate. 
+		 *
+		 * @type {('above'|'below')}
+		 * @default 'below'
+		 * @public
+		 */
+		adjustedDirection: PropTypes.oneOf(['above', 'below']),
 
 		/**
 		 * The "aria-label" for the Dropdown.
@@ -188,14 +195,19 @@ const DropdownBase = kind({
 		id: PropTypes.string,
 
 		/**
+		 * Called when the direction is adjusted.
+		 *
+		 * @type {Function}
+		 * @public
+		 */
+		onAdjustDirection: PropTypes.func,
+
+		/**
 		 * Called when the Dropdown is closing.
 		 *
 		 * @type {Function}
 		 * @public
 		 */
-
-		onAdjustDirection: PropTypes.func,
-
 		onClose: PropTypes.func,
 
 		/**
@@ -271,6 +283,7 @@ const DropdownBase = kind({
 	},
 
 	defaultProps: {
+		adjustedDirection: 'below',
 		direction: 'below',
 		width: 'medium'
 	},
@@ -324,11 +337,8 @@ const DropdownBase = kind({
 				};
 			});
 		},
-		className: ({adjusteddirection, css, direction, open, width, title, skin, styler}) => {
-			direction = adjusteddirection ? adjusteddirection : direction;
-			return styler.append(`${width}Width`, {hasTitle: Boolean(title), open}, skin === 'silicon' ? classnames(css.dropdownButton, {[css.upDropdownButton]: direction === 'above'}) : {});
-		},
-		adjusteddirection: ({adjusteddirection}) => `${adjusteddirection} center`,
+		className: ({adjustedDirection, css, open, width, title, skin, styler}) => styler.append(`${width}Width`, {hasTitle: Boolean(title), open}, skin === 'silicon' ? classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'above'}) : {}),
+		adjustedDirection: ({adjustedDirection}) => `${adjustedDirection} center`,
 		direction: ({direction}) => `${direction} center`,
 		hasChildren: ({children}) => {
 			return children.length > 0;
@@ -343,13 +353,13 @@ const DropdownBase = kind({
 		}
 	},
 
-	render: ({adjusteddirection, 'aria-label': ariaLabel, ariaLabelledBy, children, css, direction, disabled, hasChildren, onAdjustDirection, onClose, onOpen, onSelect, open, selected, skin, title, width, ...rest}) => {
+	render: ({adjustedDirection, 'aria-label': ariaLabel, ariaLabelledBy, children, css, direction, disabled, hasChildren, onAdjustDirection, onClose, onOpen, onSelect, open, selected, skin, title, width, ...rest}) => {
 		delete rest.rtl;
 
 		const ariaProps = extractAriaProps(rest);
 		const calcAriaProps = ariaLabel != null ? null : {role: 'region', 'aria-labelledby': ariaLabelledBy};
 
-		const popupProps = {adjusteddirection, 'aria-live': null, children, direction, disabled, onSelect, open, selected, skin, skinVariants: skin === 'silicon' ? {'night': false} : {}, width, role: null};
+		const popupProps = {'aria-live': null, children, direction: adjustedDirection, disabled, onSelect, open, selected, skin, skinVariants: skin === 'silicon' ? {'night': false} : {}, width, role: null};
 
 		// `ui/Group`/`ui/Repeater` will throw an error if empty so we disable the Dropdown and
 		// prevent Dropdown to open if there are no children.
@@ -406,7 +416,7 @@ const DropdownDecorator = compose(
 		generateProp: null,
 		prefix: 'd_'
 	}),
-	Changeable({change: 'onAdjustDirection', prop: 'adjusteddirection'}),
+	Changeable({change: 'onAdjustDirection', prop: 'adjustedDirection'}),
 	Changeable({change: 'onSelect', prop: 'selected'}),
 	Toggleable({
 		activate: 'onOpen',
