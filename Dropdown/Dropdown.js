@@ -125,7 +125,7 @@ const DropdownBase = kind({
 
 	propTypes: /** @lends agate/Dropdown.DropdownBase.prototype */ {
 		/**
-		 * The direction which is adjusted if original direction is not appropriate. 
+		 * The direction which is adjusted if original direction is not appropriate.
 		 *
 		 * @type {('above'|'below')}
 		 * @default 'below'
