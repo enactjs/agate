@@ -17,6 +17,7 @@ const DropdownTests = [
 	<div style={{'height': '700px'}}>
 		<Dropdown direction="above" open style={{'margin-top': '300px'}} title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
 	</div>,
+	<Dropdown direction="above" open title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
 	<Dropdown defaultSelected={1} open>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
 	<Dropdown disabled open title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
 	// long options text
