@@ -338,7 +338,6 @@ const DropdownBase = kind({
 			});
 		},
 		className: ({adjustedDirection, css, open, width, title, skin, styler}) => styler.append(`${width}Width`, {hasTitle: Boolean(title), open}, skin === 'silicon' ? classnames(css.dropdownButton, {[css.upDropdownButton]: adjustedDirection === 'above'}) : {}),
-		adjustedDirection: ({adjustedDirection}) => `${adjustedDirection} center`,
 		direction: ({direction}) => `${direction} center`,
 		hasChildren: ({children}) => {
 			return children.length > 0;
@@ -359,7 +358,7 @@ const DropdownBase = kind({
 		const ariaProps = extractAriaProps(rest);
 		const calcAriaProps = ariaLabel != null ? null : {role: 'region', 'aria-labelledby': ariaLabelledBy};
 
-		const popupProps = {'aria-live': null, children, direction: adjustedDirection, disabled, onSelect, open, selected, skin, skinVariants: skin === 'silicon' ? {'night': false} : {}, width, role: null};
+		const popupProps = {'aria-live': null, children, direction: `${adjustedDirection} center`, disabled, onSelect, open, selected, skin, skinVariants: skin === 'silicon' ? {'night': false} : {}, width, role: null};
 
 		// `ui/Group`/`ui/Repeater` will throw an error if empty so we disable the Dropdown and
 		// prevent Dropdown to open if there are no children.
