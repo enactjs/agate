@@ -132,7 +132,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			 * After adjusting direction, this function passes the adjusted direction to Dropdown.
 			 *
 			 * @type {Function}
-			 * @public
+			 * @private
 			 */
 			onAdjustDirection: PropTypes.func,
 

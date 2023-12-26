@@ -129,7 +129,7 @@ const DropdownBase = kind({
 		 *
 		 * @type {('above'|'below')}
 		 * @default 'below'
-		 * @public
+		 * @private
 		 */
 		adjustedDirection: PropTypes.oneOf(['above', 'below']),
 
@@ -198,7 +198,7 @@ const DropdownBase = kind({
 		 * Called when the direction is adjusted.
 		 *
 		 * @type {Function}
-		 * @public
+		 * @private
 		 */
 		onAdjustDirection: PropTypes.func,
 
