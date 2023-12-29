@@ -128,8 +128,8 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			/**
 			 * Called when the direction is adjusted.
 			 *
-			 * This prop is from Dropdown component.
-			 * After adjusting direction, this function passes the adjusted direction to Dropdown.
+			 * After the direction is adjusted, this function is invoked with the new direction as an argument,
+			 * which is then passed back to the Dropdown component.
 			 *
 			 * @type {Function}
 			 * @private
