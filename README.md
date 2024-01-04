@@ -2,7 +2,8 @@
 
 > An experimental Enact theme, implementing a new radical approach to what could be done with the existing skinning system.
 
-![Agate themes](http://enactjs.github.io/agate/images/agate-themes.jpg)
+![agate_console_theme](https://github.com/enactjs/agate/assets/4288375/2e88e740-599e-4328-9b29-f5c9ffec865b)
+
 
 ## What is a theme vs a skin
 
