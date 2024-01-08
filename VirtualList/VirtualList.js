@@ -373,7 +373,7 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	 * * `'native'`.
 	 *
 	 * @type {String}
-	 * @default 'translate'
+	 * @default 'native'
 	 * @public
 	 */
 	scrollMode: PropTypes.string,
@@ -802,7 +802,7 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	 * * `'native'`.
 	 *
 	 * @type {String}
-	 * @default 'translate'
+	 * @default 'native'
 	 * @public
 	 */
 	scrollMode: PropTypes.string,
