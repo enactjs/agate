@@ -308,7 +308,7 @@ Scroller.propTypes = /** @lends agate/Scroller.Scroller.prototype */ {
 	 * * `'native'`.
 	 *
 	 * @type {('native'|'translate')}
-	 * @default 'translate'
+	 * @default 'native'
 	 * @public
 	 */
 	scrollMode: PropTypes.oneOf(['native', 'translate']),
