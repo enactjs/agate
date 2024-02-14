@@ -69,6 +69,7 @@ let VirtualList = ({itemSize, role, ...rest}) => {
 		focusableScrollbar: rest.focusableScrollbar,
 		role
 	});
+	console.log('VirtualList AGATE render');
 
 	return (
 		<ResizeContext.Provider {...resizeContextProps}>

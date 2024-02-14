@@ -1,6 +1,6 @@
 import {ScrollbarTrack as UiScrollbarTrack} from '@enact/ui/useScroll/Scrollbar';
 import PropTypes from 'prop-types';
-import {forwardRef, useEffect} from 'react';
+import {forwardRef, useEffect, memo} from 'react';
 
 const nop = () => {};
 
@@ -16,6 +16,7 @@ const ScrollbarTrack = forwardRef(({cbAlertScrollbarTrack, ...rest}, ref) => {
 	useEffect (() => {
 		cbAlertScrollbarTrack();
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+	console.log('ScrollbarTrack AGATE render', rest);
 
 	return <UiScrollbarTrack {...rest} ref={ref} />;
 });
@@ -36,8 +37,10 @@ ScrollbarTrack.defaultProps = {
 	cbAlertScrollbarTrack: nop
 };
 
-export default ScrollbarTrack;
+const MemoizedScrollbarTrack = memo(ScrollbarTrack);
+
+export default MemoizedScrollbarTrack;
 export {
-	ScrollbarTrack,
-	ScrollbarTrack as ScrollbarTrackBase
+	MemoizedScrollbarTrack,
+	MemoizedScrollbarTrack as ScrollbarTrackBase
 };
