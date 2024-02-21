@@ -98,7 +98,6 @@ const ScrollbarBase = memo((props) => {
 		scrollbarHandle.current.focusOnButton = focusOnButton;
 		scrollbarHandle.current.isOneOfScrollButtonsFocused = isOneOfScrollButtonsFocused;
 	});
-	console.log('Scrollbar AGATE render')
 
 	return (
 		<div {...restProps} {...scrollbarProps}>

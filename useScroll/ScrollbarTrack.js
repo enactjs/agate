@@ -16,7 +16,6 @@ const ScrollbarTrack = forwardRef(({cbAlertScrollbarTrack, ...rest}, ref) => {
 	useEffect (() => {
 		cbAlertScrollbarTrack();
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
-	console.log('ScrollbarTrack AGATE render', rest);
 
 	return <UiScrollbarTrack {...rest} ref={ref} />;
 });

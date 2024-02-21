@@ -63,7 +63,6 @@ let Scroller = (props) => {
 	} = useScroll(props);
 
 	const themeScrollContentProps = useThemeScroller(scrollContentProps);
-	console.log('Scroller AGATE render');
 
 	// Render
 	return (
