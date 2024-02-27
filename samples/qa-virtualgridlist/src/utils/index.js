@@ -16,7 +16,7 @@ const createRecord = ({
 		subCaption,
 		selected: false,
 		showSelection,
-		src: `https://via.placeholder.com/300x300/${color}/ffffff/png?text=Image+${recordIndex}`
+		src: `https://placehold.co/300x300/${color}/ffffff/png?text=Image+${recordIndex}`
 	};
 };
 
