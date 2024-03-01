@@ -20,8 +20,6 @@ const ScrollbarTrack = forwardRef(({cbAlertScrollbarTrack, ...rest}, ref) => {
 	return <UiScrollbarTrack {...rest} ref={ref} />;
 });
 
-ScrollbarTrack.displayName = 'ScrollbarTrack';
-
 ScrollbarTrack.propTypes = /** @lends agate/useScroll.ScrollbarTrack.prototype */ {
 	/**
 	 * Called when {@link agate/useScroll.ScrollbarTrack|ScrollbarTrack} is updated.
@@ -37,6 +35,8 @@ ScrollbarTrack.defaultProps = {
 };
 
 const MemoizedScrollbarTrack = memo(ScrollbarTrack);
+
+MemoizedScrollbarTrack.displayName = 'ScrollbarTrack';
 
 export default MemoizedScrollbarTrack;
 export {
