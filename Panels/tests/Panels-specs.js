@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import {fireEvent, render, screen} from '@testing-library/react';
+import {act, fireEvent, render, screen} from '@testing-library/react';
 
 import Button from '../../Button';
 import Header from '../../Header';
@@ -13,6 +13,17 @@ const escapeKeyUp = keyUp(27);
 const escapeKeyDown = keyDown(27);
 
 describe('Panels Specs', () => {
+	beforeEach(() => {
+		jest.useFakeTimers();
+	});
+
+	afterEach(() => {
+		act(() => {
+			jest.runOnlyPendingTimers();
+		});
+		jest.useRealTimers();
+	});
+
 	test('should display the correct panel based on \'index\' prop', () => {
 		let firstButton, secondButton;
 		const {rerender} = render(

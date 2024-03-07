@@ -16,6 +16,10 @@ No significant changes.
 
 - `agate/Scroller`, `agate/VirtualList` and `agate/VirtualGridList` default value for `scrollMode` to `native`
 
+### Fixed
+
+- `agate/Panels` partial transition on horizontal
+
 ## [2.0.6] - 2023-06-08
 
 No significant changes.
