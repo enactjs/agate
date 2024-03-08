@@ -8,7 +8,7 @@ describe('ImageItem', () => {
 
 	test('should render ImageItem with children', () => {
 		render(
-			<ImageItem src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0">
+			<ImageItem src="https://placehold.co/300x400/9037ab/ffffff/png?text=Image0">
 				{children}
 			</ImageItem>
 		);
@@ -20,7 +20,7 @@ describe('ImageItem', () => {
 
 	test('should omit caption node when `children` is unset', () => {
 		render(
-			<ImageItem src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0" />
+			<ImageItem src="https://placehold.co/300x400/9037ab/ffffff/png?text=Image0" />
 		);
 
 		const actual = screen.getAllByRole('img')[0];
@@ -31,7 +31,7 @@ describe('ImageItem', () => {
 	test('should apply `captionOverlay` className when given `captionPosition=captionOverlay`', () => {
 		render(
 			<ImageItem
-				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
+				src="https://placehold.co/300x400/9037ab/ffffff/png?text=Image0"
 				captionPosition="overlay"
 			>
 				{children}
@@ -47,7 +47,7 @@ describe('ImageItem', () => {
 	test('should apply horizontal className when given `orientation=horizontal`', () => {
 		render(
 			<ImageItem
-				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
+				src="https://placehold.co/300x400/9037ab/ffffff/png?text=Image0"
 				orientation="horizontal"
 			>
 				{children}
@@ -63,7 +63,7 @@ describe('ImageItem', () => {
 	test('should display an image when given `src` prop', () => {
 		render(
 			<ImageItem
-				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
+				src="https://placehold.co/300x400/9037ab/ffffff/png?text=Image0"
 			>
 				{children}
 			</ImageItem>
