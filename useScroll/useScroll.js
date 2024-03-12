@@ -369,7 +369,7 @@ const useScroll = (props) => {
 		...rest,
 		...scrollProps,
 		assignProperties,
-		noScrollByDrag: !platform.touchScreen,
+		noScrollByDrag: !platform.touchscreen,
 		addEventListeners,
 		handleResizeWindow,
 		horizontalScrollbarHandle,
