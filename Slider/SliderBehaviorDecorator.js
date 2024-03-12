@@ -137,7 +137,7 @@ const SliderBehaviorDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 		handleDragStart () {
 			// on platforms with a touchscreen, we want to focus slider when dragging begins
-			if (platform.touchScreen) {
+			if (platform.touchscreen) {
 				this.focusSlider();
 			}
 			this.paused.pause();
