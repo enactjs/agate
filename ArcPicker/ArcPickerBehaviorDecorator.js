@@ -92,7 +92,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 		}
 
 		handleClick = (value) => (ev) => {
-			if (platform.touchScreen) {
+			if (platform.touchscreen) {
 				this.setState({isFocused: true}, () => {
 					setTimeout(() => {
 						this.setState({isFocused: false});
@@ -109,7 +109,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 		};
 
 		handleFocus = () => {
-			if (!platform.touchScreen) {
+			if (!platform.touchscreen) {
 				this.setState({isFocused: true});
 			}
 		};

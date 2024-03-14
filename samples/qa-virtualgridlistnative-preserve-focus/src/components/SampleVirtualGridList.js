@@ -10,7 +10,7 @@ const SampleVirtualGridList = ({index, onClick, ...rest}) => {
 	const renderItem = useCallback(({index, ...rest}) => { // eslint-disable-line no-shadow
 		const
 			color = Math.floor((Math.random() * (0x1000000 - 0x101010)) + 0x101010).toString(16),
-			source = `https://via.placeholder.com/300x300/${color}/ffffff/png?text=Image+${index}`;
+			source = `https://placehold.co/300x300/${color}/ffffff/png?text=Image+${index}`;
 
 		return (
 			<ImageItem {...rest} onClick={onClick} src={source}>

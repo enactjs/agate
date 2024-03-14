@@ -10,7 +10,7 @@ const src = {
 	hd: svgGenerator(200, 200, '7ed31d', 'ffffff', 'image0'),
 	fhd: svgGenerator(300, 300, '7ed31d', 'ffffff', 'image0'),
 	uhd: svgGenerator(600, 600, '7ed31d', 'ffffff', 'image0'),
-	invalidUrl: "ttp://via.placeholder.com/300x300/9037ab/ffffff&text=Image0"
+	invalidUrl: "ttps://placehold.co/300x300/9037ab/ffffff&text=Image0"
 };
 
 ImageItem.displayName = 'ImageItem';

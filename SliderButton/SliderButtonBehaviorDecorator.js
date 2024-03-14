@@ -31,7 +31,7 @@ const SliderButtonBehaviorDecorator = (Wrapped) => {
 
 		const handleDragStart = useCallback(() => {
 			// on platforms with a touchscreen, we want to focus slider when dragging begins
-			if (platform.touchScreen) {
+			if (platform.touchscreen) {
 				ref.current.node.focus();
 			}
 		}, []);
