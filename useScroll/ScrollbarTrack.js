@@ -1,6 +1,6 @@
 import {ScrollbarTrack as UiScrollbarTrack} from '@enact/ui/useScroll/Scrollbar';
 import PropTypes from 'prop-types';
-import {forwardRef, useEffect} from 'react';
+import {forwardRef, useEffect, memo} from 'react';
 
 const nop = () => {};
 
@@ -20,8 +20,6 @@ const ScrollbarTrack = forwardRef(({cbAlertScrollbarTrack, ...rest}, ref) => {
 	return <UiScrollbarTrack {...rest} ref={ref} />;
 });
 
-ScrollbarTrack.displayName = 'ScrollbarTrack';
-
 ScrollbarTrack.propTypes = /** @lends agate/useScroll.ScrollbarTrack.prototype */ {
 	/**
 	 * Called when {@link agate/useScroll.ScrollbarTrack|ScrollbarTrack} is updated.
@@ -36,8 +34,12 @@ ScrollbarTrack.defaultProps = {
 	cbAlertScrollbarTrack: nop
 };
 
-export default ScrollbarTrack;
+const MemoizedScrollbarTrack = memo(ScrollbarTrack);
+
+MemoizedScrollbarTrack.displayName = 'ScrollbarTrack';
+
+export default MemoizedScrollbarTrack;
 export {
-	ScrollbarTrack,
-	ScrollbarTrack as ScrollbarTrackBase
+	MemoizedScrollbarTrack,
+	MemoizedScrollbarTrack as ScrollbarTrackBase
 };
