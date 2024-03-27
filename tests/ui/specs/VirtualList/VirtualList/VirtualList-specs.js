@@ -107,7 +107,7 @@ describe('VirtualList', function () {
 			await expectFocusedItem(0, 'focus Item 00');  // to double check it is really top item
 		});
 
-		it('shoud navigate between inside and outside of a list', async function () {
+		it('should navigate between inside and outside of a list', async function () {
 			// 5-way Down to the 10th item.
 			await Page.buttonLeft.moveTo();
 			await Page.spotlightRight();
@@ -116,6 +116,7 @@ describe('VirtualList', function () {
 			await Page.fiveWayToItem(0);
 			// Verify: Spotlight displays on Item 00.
 			await expectFocusedItem(0);
+			await Page.delay(500);
 			// 5-way Up. Verify Spotlight displays on the Top button.
 			await Page.spotlightUp();
 			expect(await Page.buttonTop.isFocused()).to.be.true();

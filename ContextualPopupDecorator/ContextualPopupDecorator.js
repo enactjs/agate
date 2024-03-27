@@ -126,6 +126,17 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			offset: PropTypes.oneOf(['none', 'overlap', 'small']),
 
 			/**
+			 * Called when the direction is adjusted.
+			 *
+			 * After the direction is adjusted, this function is invoked with the new direction as an argument,
+			 * which is then passed back to the Dropdown component.
+			 *
+			 * @type {Function}
+			 * @private
+			 */
+			onAdjustDirection: PropTypes.func,
+
+			/**
 			 * Called when the user has attempted to close the popup.
 			 *
 			 * This may occur either when the close button is clicked or when spotlight focus
@@ -551,6 +562,9 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 
 				this.calcOverflow(containerNode, clientNode);
 				this.adjustDirection();
+				if (this.props.onAdjustDirection) {
+					this.props.onAdjustDirection({adjustedDirection: this.adjustedDirection.split(' ')[0]});
+				}
 
 				this.setState({
 					direction: this.adjustedDirection,
@@ -677,6 +691,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			}
 
 			delete rest.direction;
+			delete rest.onAdjustDirection;
 			delete rest.onOpen;
 			delete rest.popupSpotlightId;
 			delete rest.rtl;
