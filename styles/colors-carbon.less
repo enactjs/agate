@@ -26,6 +26,8 @@
 @agate-component-text-color: var(--agate-component-text-color, #ffffffbf);
 @agate-focus-bg-color: var(--agate-focus-bg-color, @agate-highlight);
 @agate-focus-color: var(--agate-focus-color, #000000);
+@agate-selected-bg-color: var(--agate-selected-bg-color, @agate-accent);
+@agate-selected-color: var(--agate-selected-color, #262626);
 @agate-text-color: var(--agate-text-color, #ffffffbf);
 @agate-text-sub-color: var(--agate-text-sub-color, @agate-accent);
 @agate-title-text-color: var(--agate-title-text-color, #ffffff);
@@ -59,8 +61,8 @@
 @agate-button-highlighted-color: @agate-button-selected-color;
 @agate-button-highlighted-bg-color: @agate-background-focus;
 @agate-button-highlighted-bg-image: @agate-gradient;
-@agate-button-selected-bg-color: @agate-accent;
-@agate-button-selected-color: @agate-foreground-active;
+@agate-button-selected-bg-color: @agate-selected-bg-color;
+@agate-button-selected-color: @agate-selected-color;
 
 // Checkbox
 // ---------------------------------------
@@ -138,7 +140,7 @@
 @agate-picker-active-color: inherit;
 @agate-picker-active-bg-color: @agate-accent;
 @agate-picker-active-bg-image: @agate-gradient;
-@agate-picker-item-bg-color: transparent;
+@agate-picker-item-bg-color: @agate-component-bg-color;
 @agate-picker-item-decrement-bg-image: none;
 @agate-picker-item-increment-bg-image: none;
 @agate-picker-item-focus-color: @agate-white;
