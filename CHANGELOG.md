@@ -2,6 +2,18 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [2.0.10] - 2024-03-18
+
+No significant changes.
+
+## [2.0.9] - 2024-01-09
+
+No significant changes.
+
+## [2.0.8] - 2023-11-22
+
+No significant changes.
+
 ## [2.0.7] - 2023-09-25
 
 ### Changed

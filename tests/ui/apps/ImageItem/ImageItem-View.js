@@ -15,7 +15,7 @@ const app = (props) => <div {...props}>
 			<Heading>Image Item Default</Heading>
 			<ImageItem
 				id="imageItem1"
-				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
+				src="https://placehold.co/300x400/9037ab/ffffff/png?text=Image0"
 				style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}
 			>
 				Image Item caption
@@ -23,7 +23,7 @@ const app = (props) => <div {...props}>
 			<Heading>Image Item with long caption</Heading>
 			<ImageItem
 				id="imageItem2"
-				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
+				src="https://placehold.co/300x400/9037ab/ffffff/png?text=Image0"
 				style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}
 			>
 				Image Item with longer caption has Marquee applied
@@ -31,7 +31,7 @@ const app = (props) => <div {...props}>
 			<Heading>Image Item caption overlay</Heading>
 			<ImageItem
 				id="imageItem3"
-				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
+				src="https://placehold.co/300x400/9037ab/ffffff/png?text=Image0"
 				captionPosition="overlay"
 				style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}
 			>
@@ -41,7 +41,7 @@ const app = (props) => <div {...props}>
 			<ImageItem
 				id="imageItem4"
 				disabled
-				src="http://via.placeholder.com/300x400/9037ab/ffffff/png?text=Image0"
+				src="https://placehold.co/300x400/9037ab/ffffff/png?text=Image0"
 				style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}
 			>
 				Image Item disabled
