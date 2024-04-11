@@ -6,7 +6,7 @@ describe('RTL locale', function () {
 	});
 
 	it('should position Scrollbar Track on left side in RTL', async function () {
-		expect((await Page.getListRect()).left > (await Page.getVerticalScrollbarRect()).left).to.be.true();
+		expect((await Page.getListRect()).left > (await Page.getVerticalScrollbarRect()).left).toBe(true);
 	});
 
 	it('should Verify RTL functionality', async function () {
@@ -17,6 +17,6 @@ describe('RTL locale', function () {
 		await Page.spotlightLeft();
 		expect(await Page.buttonRight.isFocused(), 'focus Right');
 		// Verify Vertical Scrollbar displays on the left side.
-		expect((await Page.getListRect()).left > (await Page.getVerticalScrollbarRect()).left).to.be.true();
+		expect((await Page.getListRect()).left > (await Page.getVerticalScrollbarRect()).left).toBe(true);
 	});
 });

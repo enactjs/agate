@@ -12,18 +12,18 @@ describe('IncrementSlider', function () {
 
 			describe('5-way', function () {
 				it('should increment the value of horizontal incrementSlider on right arrow key when active', async function () {
-					expect(await incrementSlider.decrementButton.isFocused()).to.be.true();
+					expect(await incrementSlider.decrementButton.isFocused()).toBe(true);
 					await Page.spotlightRight();
 					const originalValue = await incrementSlider.knobPositionHorizontal();
 					await Page.spotlightSelect();
 					await Page.spotlightRight();
 					// expect knob `left` css prop to be bigger than original one
 					const newValue = await incrementSlider.knobPositionHorizontal();
-					expect(newValue > originalValue).to.be.true();
+					expect(newValue > originalValue).toBe(true);
 				});
 
 				it('should decrement the value of horizontal incrementSlider on left arrow key when active', async function () {
-					expect(await incrementSlider.decrementButton.isFocused()).to.be.true();
+					expect(await incrementSlider.decrementButton.isFocused()).toBe(true);
 					await Page.spotlightRight();
 					await Page.spotlightSelect();
 					await Page.spotlightRight();
@@ -32,18 +32,18 @@ describe('IncrementSlider', function () {
 					await Page.spotlightLeft();
 					// expect knob `left` css prop to be smaller than original one
 					const newValue = await incrementSlider.knobPositionHorizontal();
-					expect(newValue < originalValue).to.be.true();
+					expect(newValue < originalValue).toBe(true);
 				});
 			});
 
 			describe('pointer', function () {
 				it('should change the value of horizontal incrementSlider on incrementSlider click at position', async function () {
-					expect(await incrementSlider.decrementButton.isFocused()).to.be.true();
+					expect(await incrementSlider.decrementButton.isFocused()).toBe(true);
 					const originalValue = await incrementSlider.knobPositionHorizontal();
 					await incrementSlider.self.click();
 					// expect knob `left` css prop to be bigger than original one
 					const newValue = await incrementSlider.knobPositionHorizontal();
-					expect(newValue > originalValue).to.be.true();
+					expect(newValue > originalValue).toBe(true);
 				});
 			});
 
@@ -54,12 +54,12 @@ describe('IncrementSlider', function () {
 					await incrementSlider.incrementButton.click();
 					// expect knob `left` css prop to be bigger than original one
 					const value1 = await incrementSlider.knobPositionHorizontal();
-					expect(value1 > originalValue).to.be.true();
+					expect(value1 > originalValue).toBe(true);
 
 					await incrementSlider.decrementButton.click();
 					// expect knob `left` css prop to be less than value1
 					const value2 = await incrementSlider.knobPositionHorizontal();
-					expect(value2 < value1).to.be.true();
+					expect(value2 < value1).toBe(true);
 				});
 			});
 		});
@@ -68,7 +68,7 @@ describe('IncrementSlider', function () {
 			const incrementSlider = Page.components.incrementSliderCustomProgressAnchor;
 
 			it('fill bar should be greater than 0 when value is at minimum', async function () {
-				expect(await incrementSlider.incrementSliderFillWidth() > 0).to.be.true();
+				expect((await incrementSlider.incrementSliderFillWidth()) > 0).toBe(true);
 			});
 		});
 
@@ -77,7 +77,7 @@ describe('IncrementSlider', function () {
 
 			it('should display a tooltip on focus', async function () {
 				await incrementSlider.focusSlider();
-				expect(await incrementSlider.tooltip.isExisting()).to.be.true();
+				expect(await incrementSlider.tooltip.isExisting()).toBe(true);
 			});
 		});
 
@@ -93,7 +93,7 @@ describe('IncrementSlider', function () {
 					await Page.spotlightUp();
 					// expect knob `bottom` css prop to be greater than original one
 					const newValue = await incrementSlider.knobPositionVertical();
-					expect(newValue > originalValue).to.be.true();
+					expect(newValue > originalValue).toBe(true);
 				});
 
 				it('should decrement the value of vertical incrementSlider on down arrow key when active', async function () {
@@ -104,7 +104,7 @@ describe('IncrementSlider', function () {
 					await Page.spotlightDown();
 					// expect knob `bottom` css prop to be less than original one
 					const newValue = await incrementSlider.knobPositionVertical();
-					expect(newValue < originalValue).to.be.true();
+					expect(newValue < originalValue).toBe(true);
 				});
 			});
 
@@ -114,7 +114,7 @@ describe('IncrementSlider', function () {
 					await incrementSlider.self.click();
 					// expect knob `left` css prop to be greater than original one
 					const newValue = await incrementSlider.knobPositionVertical();
-					expect(newValue > originalValue).to.be.true();
+					expect(newValue > originalValue).toBe(true);
 				});
 			});
 		});
@@ -130,7 +130,7 @@ describe('IncrementSlider', function () {
 					await Page.spotlightRight();
 					// expect knob `left` css prop to be equal to original one
 					const newValue = await incrementSlider.knobPositionHorizontal();
-					expect(newValue).to.equal(originalValue);
+					expect(newValue).toBe(originalValue);
 				});
 
 				it('should not decrement the value of horizontal incrementSlider on left arrow key when active', async function () {
@@ -142,7 +142,7 @@ describe('IncrementSlider', function () {
 					await Page.spotlightLeft();
 					// expect knob `left` css prop to be equal to original one
 					const newValue = await incrementSlider.knobPositionHorizontal();
-					expect(newValue === originalValue).to.be.true();
+					expect(newValue === originalValue).toBe(true);
 				});
 			});
 
@@ -152,7 +152,7 @@ describe('IncrementSlider', function () {
 					await incrementSlider.self.click();
 					// expect knob `left` css prop to be equal to original one
 					const newValue = await incrementSlider.knobPositionHorizontal();
-					expect(newValue === originalValue).to.be.true();
+					expect(newValue === originalValue).toBe(true);
 				});
 			});
 
@@ -163,12 +163,12 @@ describe('IncrementSlider', function () {
 					await incrementSlider.incrementButton.click();
 					// expect knob `left` css prop to be bigger than original one
 					const value1 = await incrementSlider.knobPositionHorizontal();
-					expect(value1).to.equal(originalValue);
+					expect(value1).toBe(originalValue);
 
 					await incrementSlider.decrementButton.click();
 					// expect knob `left` css prop to be less than value1
 					const value2 = await incrementSlider.knobPositionHorizontal();
-					expect(value2).to.equal(value1);
+					expect(value2).toBe(value1);
 				});
 			});
 		});
@@ -185,7 +185,7 @@ describe('IncrementSlider', function () {
 					await Page.spotlightUp();
 					// expect knob `bottom` css prop to be equal to original one
 					const newValue = await incrementSlider.knobPositionVertical();
-					expect(newValue === originalValue).to.be.true();
+					expect(newValue === originalValue).toBe(true);
 				});
 
 				it('should not decrement the value of vertical incrementSlider on down arrow key when active', async function () {
@@ -196,7 +196,7 @@ describe('IncrementSlider', function () {
 					await Page.spotlightDown();
 					// expect knob `bottom` css prop to be equal to original one
 					const newValue = await incrementSlider.knobPositionVertical();
-					expect(newValue === originalValue).to.be.true();
+					expect(newValue === originalValue).toBe(true);
 				});
 			});
 
@@ -207,7 +207,7 @@ describe('IncrementSlider', function () {
 					await incrementSlider.self.click();
 					// expect knob `left` css prop to be equal to original one
 					const newValue = await incrementSlider.knobPositionVertical();
-					expect(newValue === originalValue).to.be.true();
+					expect(newValue === originalValue).toBe(true);
 				});
 			});
 		});

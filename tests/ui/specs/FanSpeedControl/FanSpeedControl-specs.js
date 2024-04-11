@@ -14,30 +14,30 @@ describe('FanSpeedControl', function () {
 		it('should have the first arc selected by default', async function () {
 			await Page.spotlightSelect();
 
-			expect((await fanSpeedControl.coloredPath(1).getCSSProperty('stroke')).value).to.equal(accentColor);
+			expect((await fanSpeedControl.coloredPath(1).getCSSProperty('stroke')).value).toBe(accentColor);
 		});
 
 		it('should select all arcs up to the clicked arc', async function () {
 			await fanSpeedControl.clickablePath(3).click();
-			expect((await fanSpeedControl.coloredPath(1).getCSSProperty('stroke')).value).to.equal(accentColor);
-			expect((await fanSpeedControl.coloredPath(2).getCSSProperty('stroke')).value).to.equal(accentColor);
-			expect((await fanSpeedControl.coloredPath(3).getCSSProperty('stroke')).value).to.equal(accentColor);
+			expect((await fanSpeedControl.coloredPath(1).getCSSProperty('stroke')).value).toBe(accentColor);
+			expect((await fanSpeedControl.coloredPath(2).getCSSProperty('stroke')).value).toBe(accentColor);
+			expect((await fanSpeedControl.coloredPath(3).getCSSProperty('stroke')).value).toBe(accentColor);
 			// next one is unselected
-			expect((await fanSpeedControl.coloredPath(4).getCSSProperty('stroke')).value).to.equal(unselectedColor);
+			expect((await fanSpeedControl.coloredPath(4).getCSSProperty('stroke')).value).toBe(unselectedColor);
 		});
 
 		it('should display `fan` icon', async function () {
-			expect(await fanSpeedControl.iconValue()).to.equal(983227); // decimal converted charCode of Unicode 'fan' character
+			expect(await fanSpeedControl.iconValue()).toBe(983227); // decimal converted charCode of Unicode 'fan' character
 		});
 
 		it('should display value `1` by default', async function () {
-			expect(await fanSpeedControl.fanValue()).to.equal('1');
+			expect(await fanSpeedControl.fanValue()).toBe('1');
 		});
 
 		it('should display value `10` when selecting 10th arc', async function () {
 			await fanSpeedControl.clickablePath(10).click();
 
-			expect(await fanSpeedControl.fanValue()).to.equal('10');
+			expect(await fanSpeedControl.fanValue()).toBe('10');
 		});
 	});
 
@@ -45,7 +45,7 @@ describe('FanSpeedControl', function () {
 		const fanSpeedControl = Page.components.fanSpeedControlCustom;
 
 		it('should display custom icon', async function () {
-			expect(await fanSpeedControl.iconValue()).to.equal(983060); // decimal converted charCode of Unicode 'happyface' character
+			expect(await fanSpeedControl.iconValue()).toBe(983060); // decimal converted charCode of Unicode 'happyface' character
 		});
 	});
 
@@ -53,22 +53,22 @@ describe('FanSpeedControl', function () {
 		const fanSpeedControl = Page.components.fanSpeedControlDisabled;
 
 		it('should have the first arc selected by default', async function () {
-			expect((await fanSpeedControl.coloredPath(1).getCSSProperty('stroke')).value).to.equal(selectedColor);
+			expect((await fanSpeedControl.coloredPath(1).getCSSProperty('stroke')).value).toBe(selectedColor);
 		});
 
 		it('should display `fan` icon', async function () {
-			expect(await fanSpeedControl.iconValue()).to.equal(983227); // decimal converted charCode of Unicode 'fan' character
+			expect(await fanSpeedControl.iconValue()).toBe(983227); // decimal converted charCode of Unicode 'fan' character
 		});
 
 		it('should display value `1` by default', async function () {
-			expect(await fanSpeedControl.fanValue()).to.equal('1');
+			expect(await fanSpeedControl.fanValue()).toBe('1');
 		});
 
 		it('should not select the third arc when it is clicked', async function () {
 			await fanSpeedControl.clickablePath(3).click();
-			expect((await fanSpeedControl.coloredPath(3).getCSSProperty('stroke')).value).to.equal(unselectedColor);
+			expect((await fanSpeedControl.coloredPath(3).getCSSProperty('stroke')).value).toBe(unselectedColor);
 			// first arc should remain selected
-			expect((await fanSpeedControl.coloredPath(1).getCSSProperty('stroke')).value).to.equal(accentColor);
+			expect((await fanSpeedControl.coloredPath(1).getCSSProperty('stroke')).value).toBe(accentColor);
 		});
 	});
 });

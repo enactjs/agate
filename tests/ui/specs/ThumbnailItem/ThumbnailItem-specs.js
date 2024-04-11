@@ -6,18 +6,18 @@ describe('ThumbnailItem', function () {
 	});
 
 	it('should have focus on first item at start', async function () {
-		expect(await Page.components.thumbnailItemDefault.self.isFocused()).to.be.true();
+		expect(await Page.components.thumbnailItemDefault.self.isFocused()).toBe(true);
 	});
 
 	describe('default', function () {
 		const thumbnailItem = Page.components.thumbnailItemDefault;
 
 		it('should have correct text', async function () {
-			expect(await thumbnailItem.textContent).to.equal('Thumbnail Item default');
+			expect(await thumbnailItem.textContent).toBe('Thumbnail Item default');
 		});
 
 		it('should display an image', async function () {
-			expect(await thumbnailItem.image).to.be.true();
+			expect(await thumbnailItem.image).toBe(true);
 		});
 
 		describe('5-way', function () {
@@ -25,7 +25,7 @@ describe('ThumbnailItem', function () {
 				await Page.components.thumbnailItemLabel.focus();
 				await Page.spotlightUp();
 
-				expect(await thumbnailItem.self.isFocused()).to.be.true();
+				expect(await thumbnailItem.self.isFocused()).toBe(true);
 			});
 		});
 
@@ -33,7 +33,7 @@ describe('ThumbnailItem', function () {
 			it('should focus the thumbnail item when hovered', async function () {
 				await thumbnailItem.hover();
 
-				expect(await thumbnailItem.self.isFocused()).to.be.true();
+				expect(await thumbnailItem.self.isFocused()).toBe(true);
 			});
 		});
 	});
@@ -42,15 +42,15 @@ describe('ThumbnailItem', function () {
 		const thumbnailItem = Page.components.thumbnailItemLabel;
 
 		it('should have correct text', async function () {
-			expect(await thumbnailItem.textContent).to.equal('Thumbnail Item with label');
+			expect(await thumbnailItem.textContent).toBe('Thumbnail Item with label');
 		});
 
 		it('should have correct label', async function () {
-			expect(await thumbnailItem.labelContent).to.equal('label');
+			expect(await thumbnailItem.labelContent).toBe('label');
 		});
 
 		it('should display an image', async function () {
-			expect(await thumbnailItem.image).to.be.true();
+			expect(await thumbnailItem.image).toBe(true);
 		});
 
 		describe('5-way', function () {
@@ -58,14 +58,14 @@ describe('ThumbnailItem', function () {
 				await Page.components.thumbnailItemDefault.focus();
 				await Page.spotlightDown();
 
-				expect(await thumbnailItem.self.isFocused()).to.be.true();
+				expect(await thumbnailItem.self.isFocused()).toBe(true);
 			});
 
 			it('should focus the thumbnail item with 5-way Up', async function () {
 				await Page.components.thumbnailItemSelected.focus();
 				await Page.spotlightUp();
 
-				expect(await thumbnailItem.self.isFocused()).to.be.true();
+				expect(await thumbnailItem.self.isFocused()).toBe(true);
 			});
 		});
 
@@ -73,7 +73,7 @@ describe('ThumbnailItem', function () {
 			it('should focus the thumbnail item when hovered', async function () {
 				await thumbnailItem.hover();
 
-				expect(await thumbnailItem.self.isFocused()).to.be.true();
+				expect(await thumbnailItem.self.isFocused()).toBe(true);
 			});
 		});
 	});
@@ -82,15 +82,15 @@ describe('ThumbnailItem', function () {
 		const thumbnailItem = Page.components.thumbnailItemSelected;
 
 		it('should have correct text', async function () {
-			expect(await thumbnailItem.textContent).to.equal('Thumbnail Item selected');
+			expect(await thumbnailItem.textContent).toBe('Thumbnail Item selected');
 		});
 
 		it('should be selected', async function () {
-			expect(await thumbnailItem.isSelected).to.be.true();
+			expect(await thumbnailItem.isSelected).toBe(true);
 		});
 
 		it('should display an image', async function () {
-			expect(await thumbnailItem.image).to.be.true();
+			expect(await thumbnailItem.image).toBe(true);
 		});
 
 		describe('5-way', function () {
@@ -98,14 +98,14 @@ describe('ThumbnailItem', function () {
 				await Page.components.thumbnailItemLabel.focus();
 				await Page.spotlightDown();
 
-				expect(await thumbnailItem.self.isFocused()).to.be.true();
+				expect(await thumbnailItem.self.isFocused()).toBe(true);
 			});
 
 			it('should focus the thumbnail item with 5-way Up', async function () {
 				await Page.components.thumbnailItemInline.focus();
 				await Page.spotlightUp();
 
-				expect(await thumbnailItem.self.isFocused()).to.be.true();
+				expect(await thumbnailItem.self.isFocused()).toBe(true);
 			});
 		});
 
@@ -113,7 +113,7 @@ describe('ThumbnailItem', function () {
 			it('should focus the thumbnail item when hovered', async function () {
 				await thumbnailItem.hover();
 
-				expect(await thumbnailItem.self.isFocused()).to.be.true();
+				expect(await thumbnailItem.self.isFocused()).toBe(true);
 			});
 		});
 	});
@@ -122,11 +122,11 @@ describe('ThumbnailItem', function () {
 		const thumbnailItem = Page.components.thumbnailItemInline;
 
 		it('should have correct text', async function () {
-			expect(await thumbnailItem.textContent).to.equal('Thumbnail Item inline');
+			expect(await thumbnailItem.textContent).toBe('Thumbnail Item inline');
 		});
 
 		it('should display an image', async function () {
-			expect(await thumbnailItem.image).to.be.true();
+			expect(await thumbnailItem.image).toBe(true);
 		});
 
 		describe('5-way', function () {
@@ -134,7 +134,7 @@ describe('ThumbnailItem', function () {
 				await Page.components.thumbnailItemInlineDisabled.focus();
 				await Page.spotlightLeft();
 
-				expect(await thumbnailItem.self.isFocused()).to.be.true();
+				expect(await thumbnailItem.self.isFocused()).toBe(true);
 			});
 		});
 
@@ -142,7 +142,7 @@ describe('ThumbnailItem', function () {
 			it('should focus the thumbnail item when hovered', async function () {
 				await thumbnailItem.hover();
 
-				expect(await thumbnailItem.self.isFocused()).to.be.true();
+				expect(await thumbnailItem.self.isFocused()).toBe(true);
 			});
 		});
 	});
@@ -151,11 +151,11 @@ describe('ThumbnailItem', function () {
 		const thumbnailItem = Page.components.thumbnailItemInlineDisabled;
 
 		it('should have correct text', async function () {
-			expect(await thumbnailItem.textContent).to.equal('Thumbnail Item inline disabled');
+			expect(await thumbnailItem.textContent).toBe('Thumbnail Item inline disabled');
 		});
 
 		it('should display an image', async function () {
-			expect(await thumbnailItem.image).to.be.true();
+			expect(await thumbnailItem.image).toBe(true);
 		});
 
 		describe('5-way', function () {
@@ -163,7 +163,7 @@ describe('ThumbnailItem', function () {
 				await Page.components.thumbnailItemInline.focus();
 				await Page.spotlightRight();
 
-				expect(await thumbnailItem.self.isFocused()).to.be.true();
+				expect(await thumbnailItem.self.isFocused()).toBe(true);
 			});
 		});
 
@@ -171,7 +171,7 @@ describe('ThumbnailItem', function () {
 			it('should focus the thumbnail item when hovered', async function () {
 				await thumbnailItem.hover();
 
-				expect(await thumbnailItem.self.isFocused()).to.be.true();
+				expect(await thumbnailItem.self.isFocused()).toBe(true);
 			});
 		});
 	});
@@ -180,11 +180,11 @@ describe('ThumbnailItem', function () {
 		const thumbnailItem = Page.components.thumbnailItemDisabled;
 
 		it('should have correct text', async function () {
-			expect(await thumbnailItem.textContent).to.equal('Thumbnail Item disabled');
+			expect(await thumbnailItem.textContent).toBe('Thumbnail Item disabled');
 		});
 
 		it('should display an image', async function () {
-			expect(await thumbnailItem.image).to.be.true();
+			expect(await thumbnailItem.image).toBe(true);
 		});
 
 		describe('5-way', function () {
@@ -192,7 +192,7 @@ describe('ThumbnailItem', function () {
 				await Page.components.thumbnailItemInline.focus();
 				await Page.spotlightDown();
 
-				expect(await thumbnailItem.self.isFocused()).to.be.true();
+				expect(await thumbnailItem.self.isFocused()).toBe(true);
 			});
 		});
 
@@ -200,7 +200,7 @@ describe('ThumbnailItem', function () {
 			it('should focus the thumbnail item when hovered', async function () {
 				await thumbnailItem.hover();
 
-				expect(await thumbnailItem.self.isFocused()).to.be.true();
+				expect(await thumbnailItem.self.isFocused()).toBe(true);
 			});
 		});
 	});

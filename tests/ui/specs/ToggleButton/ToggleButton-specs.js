@@ -7,18 +7,18 @@ describe('ToggleButton', function () {
 	});
 
 	it('should have focus on first item at start', async function () {
-		expect(await Page.components.toggleDefault.self.isFocused()).to.be.true();
+		expect(await Page.components.toggleDefault.self.isFocused()).toBe(true);
 	});
 
 	describe('default', function () {
 		const toggleButton = Page.components.toggleDefault;
 
 		it('should have correct text', async function () {
-			expect((await toggleButton.textContent).toLowerCase()).to.equal('missing toggle label');
+			expect((await toggleButton.textContent).toLowerCase()).toBe('missing toggle label');
 		});
 
 		it('should be unselected', async function () {
-			expect(await toggleButton.isSelected).to.be.false();
+			expect(await toggleButton.isSelected).toBe(false);
 		});
 	});
 
@@ -26,11 +26,11 @@ describe('ToggleButton', function () {
 		const toggleButton = Page.components.toggleWithLabels;
 
 		it('should have correct text', async function () {
-			expect((await toggleButton.textContent).toLowerCase()).to.equal('off');
+			expect((await toggleButton.textContent).toLowerCase()).toBe('off');
 		});
 
 		it('should be unselected', async function () {
-			expect(await toggleButton.isSelected).to.be.false();
+			expect(await toggleButton.isSelected).toBe(false);
 		});
 	});
 
