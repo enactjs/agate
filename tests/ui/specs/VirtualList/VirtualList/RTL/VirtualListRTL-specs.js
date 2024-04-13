@@ -12,10 +12,10 @@ describe('RTL locale', function () {
 	it('should Verify RTL functionality', async function () {
 		// Check that the button's position is Right-> Left.(in case RTL, button position is 'Right' - 'Left')
 		await (Page.buttonLeft).moveTo();
-		expect(await Page.buttonLeft.isFocused(), 'focus left');
+		expect(await Page.buttonLeft.isFocused()).toBe(true);
 		await Page.spotlightLeft();
 		await Page.spotlightLeft();
-		expect(await Page.buttonRight.isFocused(), 'focus Right');
+		expect(await Page.buttonRight.isFocused()).toBe(true);
 		// Verify Vertical Scrollbar displays on the left side.
 		expect((await Page.getListRect()).left > (await Page.getVerticalScrollbarRect()).left).toBe(true);
 	});
