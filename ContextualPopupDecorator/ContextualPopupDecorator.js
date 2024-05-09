@@ -19,8 +19,7 @@ import FloatingLayer from '@enact/ui/FloatingLayer';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import {Component} from 'react';
-import ReactDOM from 'react-dom';
+import {Component, createRef} from 'react';
 
 import {ContextualPopup} from './ContextualPopup';
 
@@ -272,6 +271,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 
 			this.overflow = {};
 			this.adjustedDirection = this.props.direction;
+			this.clientNode = createRef();
 
 			this.MARGIN = noArrow ? 0 : ri.scale(9);
 			this.ARROW_WIDTH = noArrow ? 0 : ri.scale(30); // svg arrow width. used for arrow positioning
@@ -553,9 +553,9 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		 * @returns {undefined}
 		 */
 		positionContextualPopup = () => {
-			if (this.containerNode && this.clientNode) {
+			if (this.containerNode && this.clientNode.current) {
 				const containerNode = this.containerNode.getBoundingClientRect();
-				const {top, left, bottom, right, width, height} = this.clientNode.getBoundingClientRect();
+				const {top, left, bottom, right, width, height} = this.clientNode.current.getBoundingClientRect();
 				const clientNode = {top, left, bottom, right, width, height};
 				clientNode.left = this.props.rtl ? window.innerWidth - right : left;
 				clientNode.right = this.props.rtl ? window.innerWidth - left : right;
@@ -576,10 +576,6 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 
 		getContainerNode = (node) => {
 			this.containerNode = node;
-		};
-
-		getClientNode = (node) => {
-			this.clientNode = ReactDOM.findDOMNode(node); // eslint-disable-line react/no-find-dom-node
 		};
 
 		handle = handle.bind(this);
@@ -729,7 +725,9 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 							<PopupComponent {...popupPropsRef} />
 						</ContextualPopupContainer>
 					</FloatingLayer>
-					<Wrapped ref={this.getClientNode} {...rest} />
+					<div ref={this.clientNode}>
+						<Wrapped {...rest} />
+					</div>
 				</div>
 			);
 		}
