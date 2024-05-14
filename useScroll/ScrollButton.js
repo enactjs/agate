@@ -52,7 +52,6 @@ const ScrollButtonBase = ({active, 'aria-label': ariaLabel, className, forwardRe
 			<div style={{display: 'none'}} ref={clientSiblingRef} />
 		</>
 	);
-	// }
 };
 
 ScrollButtonBase.displayName = 'ScrollButton';
