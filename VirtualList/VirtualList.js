@@ -6,7 +6,6 @@
  * @exports VirtualList
  */
 
-import EnactPropTypes from '@enact/core/internal/prop-types';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {ResizeContext} from '@enact/ui/Resizable';
@@ -31,7 +30,7 @@ const nop = () => {};
  * @ui
  * @public
  */
-let VirtualList = ({itemSize, role, virtualListRef, ...rest}) => {
+let VirtualList = ({itemSize, role, ...rest}) => {
 	const props = itemSize && itemSize.minSize ?
 		{
 			itemSize: itemSize.minSize,
@@ -73,7 +72,7 @@ let VirtualList = ({itemSize, role, virtualListRef, ...rest}) => {
 
 	return (
 		<ResizeContext.Provider {...resizeContextProps}>
-			<div ref={virtualListRef} {...scrollContainerProps}>
+			<div {...scrollContainerProps}>
 				<div {...scrollInnerContainerProps}>
 					<ScrollContentWrapper {...scrollContentWrapperProps}>
 						<UiVirtualListBasic {...themeScrollContentProps} ref={scrollContentHandle} />
@@ -418,14 +417,6 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	 * @public
 	 */
 	verticalScrollbar: PropTypes.oneOf(['auto', 'visible', 'hidden']),
-
-	/**
-	 * Called with the reference to the virtualList node.
-	 *
-	 * @type {Object|Function}
-	 * @public
-	 */
-	virtualListRef: EnactPropTypes.ref,
 
 	/**
 	 * When it's `true` and the spotlight focus cannot move to the given direction anymore by 5-way keys,
