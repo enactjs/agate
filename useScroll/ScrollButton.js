@@ -41,11 +41,11 @@ const ScrollButtonBase = ({active, 'aria-label': ariaLabel, className, forwardRe
 	return (
 		<>
 			<Button
-				aria-label={calculateAriaLabel()}
-				css={css}
-				className={classnames(className, css.scrollButton)}
 				{...rest}
+				aria-label={calculateAriaLabel()}
 				backgroundOpacity="transparent"
+				className={classnames(className, css.scrollButton)}
+				css={css}
 				ref={forwardRef}
 				size="small"
 			/>
