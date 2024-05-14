@@ -166,7 +166,6 @@ const DropdownListBase = kind({
 					focusableScrollbar
 					itemRenderer={itemRenderer}
 					itemSize={itemSize}
-					virtualListRef={componentRef}
 				/>
 			</div>
 		);
@@ -225,7 +224,6 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 		}
 
 		componentDidMount () {
-			console.log(this.componentRef)
 			Spotlight.set(this.componentRef.current.dataset.spotlightId, {
 				defaultElement: '[data-selected="true"]',
 				enterTo: 'default-element'
