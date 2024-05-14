@@ -22,7 +22,7 @@ export default {
 
 export const _Scroller = (args) => (
 	<Scroller
-		direction="vertical"
+		direction={args['direction']}
 		focusableScrollbar={args['focusableScrollbar']}
 		horizontalScrollbar={args['horizontalScrollbar']}
 		key={args['scrollMode']}

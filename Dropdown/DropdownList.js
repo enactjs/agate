@@ -152,13 +152,13 @@ const DropdownListBase = kind({
 		itemSize: ({skin}) => (skin === 'gallium') ? ri.scale(90) : ri.scale(60)
 	},
 
-	render: ({componentRef, dataSize, itemRenderer, itemSize, scrollTo, ...rest}) => {
+	render: ({clientSiblingRef, dataSize, itemRenderer, itemSize, scrollTo, ...rest}) => {
 		delete rest.width;
 		delete rest.direction;
 		delete rest.skin;
 
 		return (
-			<div ref={componentRef}>
+			<>
 				<VirtualList
 					{...rest}
 					cbScrollTo={scrollTo}
@@ -167,7 +167,8 @@ const DropdownListBase = kind({
 					itemRenderer={itemRenderer}
 					itemSize={itemSize}
 				/>
-			</div>
+				<div style={{display: 'none'}} ref={clientSiblingRef}/>
+			</>
 		);
 	}
 });
@@ -224,7 +225,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 		}
 
 		componentDidMount () {
-			Spotlight.set(this.componentRef.current.dataset.spotlightId, {
+			Spotlight.set(this.componentRef.current.previousElementSibling.dataset.spotlightId, {
 				defaultElement: '[data-selected="true"]',
 				enterTo: 'default-element'
 			});
@@ -296,7 +297,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 		handleFocus = (ev) => {
 			const current = ev.target;
 			if (this.state.ready === ReadyState.DONE && !Spotlight.getPointerMode() &&
-				current.dataset['index'] != null && this.componentRef.current.contains(current)
+				current.dataset['index'] != null && this.componentRef.current.previousElementSibling.contains(current)
 			) {
 				const focusedIndex = Number(current.dataset['index']);
 				const lastFocusedKey = getKey({children: this.props.children, selected: focusedIndex});
@@ -312,7 +313,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 			return (
 				<Wrapped
 					{...this.props}
-					componentRef={this.componentRef}
+					clientSiblingRef={this.componentRef}
 					onFocus={this.handleFocus}
 					scrollTo={this.setScrollTo}
 				/>

@@ -271,7 +271,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 
 			this.overflow = {};
 			this.adjustedDirection = this.props.direction;
-			this.clientNode = createRef();
+			this.clientSiblingRef = createRef();
 
 			this.MARGIN = noArrow ? 0 : ri.scale(9);
 			this.ARROW_WIDTH = noArrow ? 0 : ri.scale(30); // svg arrow width. used for arrow positioning
@@ -553,9 +553,9 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		 * @returns {undefined}
 		 */
 		positionContextualPopup = () => {
-			if (this.containerNode && this.clientNode.current) {
+			if (this.containerNode && this.clientSiblingRef?.current?.previousElementSibling) {
 				const containerNode = this.containerNode.getBoundingClientRect();
-				const {top, left, bottom, right, width, height} = this.clientNode.current.getBoundingClientRect();
+				const {top, left, bottom, right, width, height} = this.clientSiblingRef.current.previousElementSibling.getBoundingClientRect();
 				const clientNode = {top, left, bottom, right, width, height};
 				clientNode.left = this.props.rtl ? window.innerWidth - right : left;
 				clientNode.right = this.props.rtl ? window.innerWidth - left : right;
@@ -725,9 +725,10 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 							<PopupComponent {...popupPropsRef} />
 						</ContextualPopupContainer>
 					</FloatingLayer>
-					<div ref={this.clientNode}>
+					<>
 						<Wrapped {...rest} />
-					</div>
+						<div style={{display: 'none'}} ref={this.clientSiblingRef} />
+					</>
 				</div>
 			);
 		}
