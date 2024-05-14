@@ -49,7 +49,7 @@ const ScrollButtonBase = ({active, 'aria-label': ariaLabel, className, forwardRe
 				ref={forwardRef}
 				size="small"
 			/>
-			<div style={{display: 'none'}} ref={clientSiblingRef}/>
+			<div style={{display: 'none'}} ref={clientSiblingRef} />
 		</>
 	);
 	// }

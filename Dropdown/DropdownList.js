@@ -64,7 +64,7 @@ const DropdownListBase = kind({
 		 * @type {Object|Function}
 		 * @public
 		 */
-		componentRef: EnactPropTypes.ref,
+		clientSiblingRef: EnactPropTypes.ref,
 
 		/**
 		 * Placement of the Dropdown List.
@@ -167,7 +167,7 @@ const DropdownListBase = kind({
 					itemRenderer={itemRenderer}
 					itemSize={itemSize}
 				/>
-				<div style={{display: 'none'}} ref={clientSiblingRef}/>
+				<div style={{display: 'none'}} ref={clientSiblingRef} />
 			</>
 		);
 	}
