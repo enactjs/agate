@@ -47,23 +47,37 @@ const nop = () => {};
 let Scroller = (props) => {
 	const {
 		'data-spotlight-container-disabled': spotlightContainerDisabled =  false,
-		cbScrollTo= nop,
-		direction= 'both',
-		focusableScrollbar= false,
-		horizontalScrollbar= 'auto',
-		noScrollByWheel= false,
-		onScroll= nop,
-		onScrollStart= nop,
-		onScrollStop= nop,
-		preventBubblingOnKeyDown= 'none',
-		scrollMode='native',
-		verticalScrollbar= 'auto',
+		cbScrollTo = nop,
+		direction = 'both',
+		focusableScrollbar = false,
+		horizontalScrollbar = 'auto',
+		noScrollByWheel = false,
+		onScroll = nop,
+		onScrollStart = nop,
+		onScrollStop = nop,
+		preventBubblingOnKeyDown = 'none',
+		scrollMode = 'native',
+		verticalScrollbar = 'auto',
 		...rest
 	} = props;
 
+	const scrollerProps = {
+		'data-spotlight-container-disabled': spotlightContainerDisabled,
+		cbScrollTo,
+		direction,
+		focusableScrollbar,
+		horizontalScrollbar,
+		noScrollByWheel,
+		onScroll,
+		onScrollStart,
+		onScrollStop,
+		preventBubblingOnKeyDown,
+		scrollMode,
+		verticalScrollbar,
+		...rest
+	};
 
 	// Hooks
-
 	const {
 		scrollContentWrapper: ScrollContentWrapper,
 		scrollContentHandle,
@@ -77,7 +91,7 @@ let Scroller = (props) => {
 		scrollContentProps,
 		verticalScrollbarProps,
 		horizontalScrollbarProps
-	} = useScroll(props);
+	} = useScroll(scrollerProps);
 
 	const themeScrollContentProps = useThemeScroller(scrollContentProps);
 

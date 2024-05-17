@@ -30,26 +30,26 @@ const nop = () => {};
  * @ui
  * @public
  */
-//let VirtualList = ({itemSize, role, ...rest}) => {
+// let VirtualList = ({itemSize, role, ...rest}) => {
 let VirtualList = (props) => {
 
 	const {
 		'data-spotlight-container-disabled': spotlightContainerDisabled =  false,
-		cbScrollTo= nop,
-		direction= 'vertical',
-		focusableScrollbar= false,
-		horizontalScrollbar= 'auto',
+		cbScrollTo = nop,
+		direction = 'vertical',
+		focusableScrollbar = false,
+		horizontalScrollbar = 'auto',
 		itemSize,
-		noScrollByWheel= false,
-		onScroll= nop,
-		onScrollStart= nop,
-		onScrollStop= nop,
-		pageScroll= false,
-		preventBubblingOnKeyDown= 'programmatic',
-		role= 'list',
-		scrollMode= 'native',
-		verticalScrollbar= 'auto',
-		wrap= false,
+		noScrollByWheel = false,
+		onScroll = nop,
+		onScrollStart = nop,
+		onScrollStop = nop,
+		pageScroll = false,
+		preventBubblingOnKeyDown = 'programmatic',
+		role = 'list',
+		scrollMode = 'native',
+		verticalScrollbar = 'auto',
+		wrap = false,
 		...rest
 	} = props;
 
@@ -504,24 +504,24 @@ VirtualList = Skinnable(
  * @ui
  * @public
  */
-//let VirtualGridList = ({role, ...rest}) => {
+// let VirtualGridList = ({role, ...rest}) => {
 let VirtualGridList = (props) => {
 	const {
 		'data-spotlight-container-disabled': spotlightContainerDisabled =  false,
-		cbScrollTo= nop,
-		direction= 'vertical',
-		focusableScrollbar= false,
-		horizontalScrollbar= 'auto',
-		noScrollByWheel= false,
-		onScroll= nop,
-		onScrollStart= nop,
-		onScrollStop= nop,
-		pageScroll= false,
-		preventBubblingOnKeyDown= 'programmatic',
-		role= 'list',
-		scrollMode= 'native',
-		verticalScrollbar= 'auto',
-		wrap= false,
+		cbScrollTo = nop,
+		direction = 'vertical',
+		focusableScrollbar = false,
+		horizontalScrollbar = 'auto',
+		noScrollByWheel = false,
+		onScroll = nop,
+		onScrollStart = nop,
+		onScrollStop = nop,
+		pageScroll = false,
+		preventBubblingOnKeyDown = 'programmatic',
+		role = 'list',
+		scrollMode = 'native',
+		verticalScrollbar = 'auto',
+		wrap = false,
 		...rest
 	} = props;
 

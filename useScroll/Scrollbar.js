@@ -62,7 +62,7 @@ const useThemeScrollbar = (props) => {
  * @ui
  * @private
  */
-const ScrollbarBase = memo(({css = componentCss, minThumbSize=18, vertical=true,  ...rest}) => {
+const ScrollbarBase = memo(({css = componentCss, minThumbSize = 18, vertical = true,  ...rest}) => {
 	const props = {
 		css,
 		minThumbSize,
