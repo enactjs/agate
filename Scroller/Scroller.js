@@ -45,6 +45,23 @@ const nop = () => {};
  * @public
  */
 let Scroller = (props) => {
+	const {
+		'data-spotlight-container-disabled': spotlightContainerDisabled =  false,
+		cbScrollTo= nop,
+		direction= 'both',
+		focusableScrollbar= false,
+		horizontalScrollbar= 'auto',
+		noScrollByWheel= false,
+		onScroll= nop,
+		onScrollStart= nop,
+		onScrollStop= nop,
+		preventBubblingOnKeyDown= 'none',
+		scrollMode='native',
+		verticalScrollbar= 'auto',
+		...rest
+	} = props;
+
+
 	// Hooks
 
 	const {
@@ -359,21 +376,6 @@ Scroller = Skinnable(
 		)
 	)
 );
-
-Scroller.defaultProps = {
-	'data-spotlight-container-disabled': false,
-	cbScrollTo: nop,
-	direction: 'both',
-	focusableScrollbar: false,
-	horizontalScrollbar: 'auto',
-	noScrollByWheel: false,
-	onScroll: nop,
-	onScrollStart: nop,
-	onScrollStop: nop,
-	preventBubblingOnKeyDown: 'none',
-	scrollMode: 'native',
-	verticalScrollbar: 'auto'
-};
 
 export default Scroller;
 export {
