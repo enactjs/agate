@@ -45,7 +45,7 @@ const useThemeScrollbar = (props) => {
 			preventBubblingOnKeyDown,
 			previousButtonAriaLabel,
 			rtl,
-			"verticalScrollbar": vertical
+			vertical
 		},
 		scrollbarTrackProps: {
 			...scrollbarTrackProps,
@@ -91,7 +91,7 @@ const ScrollbarBase = memo(({css = componentCss, minThumbSize = 18, vertical = t
 		updateButtons
 	} = useScrollButtons(scrollbarButtonsProps);
 
-	const {disabled, nextButtonAriaLabel, previousButtonAriaLabel, rtl, verticalScrollbar} = scrollbarButtonsProps;
+	const {disabled, nextButtonAriaLabel, previousButtonAriaLabel, rtl} = scrollbarButtonsProps;
 
 	useLayoutEffect(() => {
 		const {scrollbarHandle} = props;
@@ -109,7 +109,7 @@ const ScrollbarBase = memo(({css = componentCss, minThumbSize = 18, vertical = t
 	return (
 		<div {...restProps} {...scrollbarProps}>
 			<ScrollButton
-				aria-label={rtl && !verticalScrollbar ? nextButtonAriaLabel : previousButtonAriaLabel}
+				aria-label={rtl && !vertical ? nextButtonAriaLabel : previousButtonAriaLabel}
 				data-spotlight-overflow="ignore"
 				disabled={disabled || prevButtonDisabled}
 				onClick={onClickPrev}
