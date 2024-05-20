@@ -124,11 +124,13 @@ const DropdownListBase = kind({
 			const data = child.children;
 			const ItemComponent = (skin === 'silicon') ? RadioItem : Item;
 			const itemProps = (skin === 'silicon') ? {className: css.dropDownListItem, css, selected: isSelected, size: 'small'} : {css, selected: isSelected};
+			const {key, ...childRest} = {...child};
 
 			return (
 				<ItemComponent
+					key={key}
 					{...rest}
-					{...child}
+					{...childRest}
 					data-selected={isSelected}
 					// eslint-disable-next-line react/jsx-no-bind
 					onClick={() => forward('onSelect', {data, selected: index}, props)}
