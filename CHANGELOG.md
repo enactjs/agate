@@ -2,6 +2,10 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+- `agate/Marquee` to remove override function duplicated with the Enact
+
 ## [2.0.10] - 2024-03-18
 
 No significant changes.
