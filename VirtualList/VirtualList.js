@@ -30,7 +30,6 @@ const nop = () => {};
  * @ui
  * @public
  */
-// let VirtualList = ({itemSize, role, ...rest}) => {
 let VirtualList = (props) => {
 
 	const {
@@ -504,7 +503,6 @@ VirtualList = Skinnable(
  * @ui
  * @public
  */
-// let VirtualGridList = ({role, ...rest}) => {
 let VirtualGridList = (props) => {
 	const {
 		'data-spotlight-container-disabled': spotlightContainerDisabled =  false,
