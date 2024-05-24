@@ -23,7 +23,7 @@ import {ButtonBase} from '../Button';
 import Skinnable from '../Skinnable';
 import TooltipDecorator from '../TooltipDecorator';
 
-import componentCss from './LabeledIconButton.module.less';
+import * as componentCss from './LabeledIconButton.module.less';
 
 const Button = Skinnable(ButtonBase);
 

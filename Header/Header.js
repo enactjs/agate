@@ -21,7 +21,7 @@ import compose from 'ramda/src/compose';
 import {MarqueeController, MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
-import componentCss from './Header.module.less';
+import * as componentCss from './Header.module.less';
 
 const MarqueeH1 = MarqueeDecorator('h1');
 const MarqueeH2 = MarqueeDecorator('h2');

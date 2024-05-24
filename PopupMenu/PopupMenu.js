@@ -23,7 +23,7 @@ import Scroller from '../Scroller';
 
 import PopupState from '../Popup/PopupState';
 
-import componentCss from './PopupMenu.module.less';
+import * as componentCss from './PopupMenu.module.less';
 
 const TransitionContainer = SpotlightContainerDecorator(
 	{enterTo: 'default-element', preserveId: true},

@@ -7,7 +7,7 @@ import useScrollButtons from './ScrollButtons';
 import ScrollbarTrack from './ScrollbarTrack';
 import Skinnable from '../Skinnable';
 
-import componentCss from './Scrollbar.module.less';
+import * as componentCss from './Scrollbar.module.less';
 
 const useThemeScrollbar = (props) => {
 	const {

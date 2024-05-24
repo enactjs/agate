@@ -25,7 +25,7 @@ import {ThemeContext} from '../ThemeDecorator';
 
 import ArcPickerBehaviorDecorator from './ArcPickerBehaviorDecorator';
 
-import css from './ArcPicker.module.less';
+import * as css from './ArcPicker.module.less';
 
 /**
  * An Agate component for displaying an arc picker.

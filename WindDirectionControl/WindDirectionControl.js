@@ -20,7 +20,7 @@ import ArcPicker from '../ArcPicker';
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
-import css from './WindDirectionControl.module.less';
+import * as css from './WindDirectionControl.module.less';
 
 // Children supplied to ArcPicker/WindDirectionControl. The number of items in this array represents the number of
 // Arcs rendered on the screen.

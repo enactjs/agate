@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import $L from '../internal/$L';
 import Button from '../Button';
 
-import css from './MediaControls.module.less';
+import * as css from './MediaControls.module.less';
 
 const badges = {
 	none: '',

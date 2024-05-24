@@ -19,7 +19,7 @@ import compose from 'ramda/src/compose';
 import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
-import componentCss from './BodyText.module.less';
+import * as componentCss from './BodyText.module.less';
 
 // Create a Marquee using BodyText as the base
 const MarqueeBodyText = MarqueeDecorator(UiBodyText);

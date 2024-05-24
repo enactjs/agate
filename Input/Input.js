@@ -28,7 +28,7 @@ import InputDecoratorIcon from './InputDecoratorIcon';
 import InputSpotlightDecorator from './InputSpotlightDecorator';
 import {calcAriaLabel, extractInputProps} from './util';
 
-import componentCss from './Input.module.less';
+import * as componentCss from './Input.module.less';
 
 /**
  * An input component.

@@ -2,7 +2,7 @@ import Item from '@enact/agate/Item';
 import Scroller from '@enact/agate/Scroller';
 import ThemeDecorator from '@enact/agate/ThemeDecorator';
 
-import css from './App.module.less';
+import * as css from './App.module.less';
 
 const
 	items = [],

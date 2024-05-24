@@ -6,7 +6,7 @@ import Button from '@enact/agate/Button';
 import LabeledIconButton from '@enact/agate/LabeledIconButton';
 import PopupMenu from '@enact/agate/PopupMenu';
 
-import css from './PopupMenu.module.less';
+import * as css from './PopupMenu.module.less';
 
 PopupMenu.displayname = 'PopupMenu';
 const Config = mergeComponentMetadata('PopupMenu', PopupMenu);

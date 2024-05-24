@@ -6,7 +6,7 @@ import {VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
 import Item from '@enact/agate/Item';
 import VirtualList from '@enact/agate/VirtualList';
 
-import css from './VirtualList.module.less';
+import * as css from './VirtualList.module.less';
 
 const
 	wrapOption = {

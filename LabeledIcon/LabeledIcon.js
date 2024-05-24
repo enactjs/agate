@@ -19,7 +19,7 @@ import PropTypes from 'prop-types';
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
-import componentCss from './LabeledIcon.module.less';
+import * as componentCss from './LabeledIcon.module.less';
 
 /**
  * A basic LabeledIcon component structure without any behaviors applied to it.

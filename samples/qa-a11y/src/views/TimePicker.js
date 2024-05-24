@@ -2,7 +2,7 @@ import TimePicker from '@enact/agate/TimePicker';
 
 import Section from '../components/Section';
 
-import appCss from '../App/App.module.less';
+import * as appCss from '../App/App.module.less';
 
 const TimePickerView = () => (
 	<>

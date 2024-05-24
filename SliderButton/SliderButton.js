@@ -23,7 +23,7 @@ import Skinnable from '../Skinnable';
 
 import SliderButtonBehaviorDecorator from './SliderButtonBehaviorDecorator';
 
-import componentCss from './SliderButton.module.less';
+import * as componentCss from './SliderButton.module.less';
 
 /**
  * Renders the slider knob.

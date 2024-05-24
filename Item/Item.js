@@ -23,7 +23,7 @@ import compose from 'ramda/src/compose';
 import {Marquee, MarqueeController} from '../Marquee';
 import Skinnable from '../Skinnable';
 
-import componentCss from './Item.module.less';
+import * as componentCss from './Item.module.less';
 
 /**
  * Renders the Item content.

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {secondsToPeriod, secondsToTime} from './util';
 
-import css from './Times.module.less';
+import * as css from './Times.module.less';
 
 /**
  * Agate-styled formatted time component.

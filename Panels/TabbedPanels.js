@@ -11,7 +11,7 @@ import TabGroup from '../TabGroup';
 
 import Panels from './Panels';
 
-import componentCss from './TabbedPanels.module.less';
+import * as componentCss from './TabbedPanels.module.less';
 
 /**
  * Tabbed Panels component.

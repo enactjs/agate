@@ -24,7 +24,7 @@ import ReactDOM from 'react-dom';
 
 import {ContextualPopup} from './ContextualPopup';
 
-import componentCss from './ContextualPopupDecorator.module.less';
+import * as componentCss from './ContextualPopupDecorator.module.less';
 
 /**
  * Default config for {@link agate/ContextualPopupDecorator.ContextualPopupDecorator}

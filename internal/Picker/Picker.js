@@ -25,7 +25,7 @@ import $L from '../$L';
 import {PickerItem} from './Picker';
 import Skinnable from '../../Skinnable';
 
-import css from './Picker.module.less';
+import * as css from './Picker.module.less';
 
 const PickerRoot = Touchable('div');
 const PickerButtonItem = Spottable('div');

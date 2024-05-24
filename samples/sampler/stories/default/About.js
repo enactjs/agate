@@ -8,7 +8,7 @@ import BodyText from '@enact/agate/BodyText';
 import Button from '@enact/agate/Button';
 import Icon from '@enact/agate/Icon';
 
-import css from './About.module.less';
+import * as css from './About.module.less';
 
 const edgeDotKeepout = 6;
 BodyText.displayName = 'BodyText';

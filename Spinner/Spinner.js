@@ -21,7 +21,7 @@ import $L from '../internal/$L';
 import Marquee from '../Marquee';
 import Skinnable from '../Skinnable';
 
-import componentCss from './Spinner.module.less';
+import * as componentCss from './Spinner.module.less';
 
 /**
  * A component that shows spinning fan. Or bouncing 🏀🎾🏐⚽ , with optional text as children.

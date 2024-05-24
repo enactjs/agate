@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import {RangePickerBase} from '../../RangePicker';
 
-import css from './DateComponentPicker.module.less';
+import * as css from './DateComponentPicker.module.less';
 
 /**
  * {@link agate/internal/DataComponentPicker.DateComponentRangePicker} allows the selection of

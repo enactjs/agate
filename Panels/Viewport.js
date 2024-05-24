@@ -9,7 +9,7 @@ import {Children, cloneElement, Component, createRef} from 'react';
 
 import SharedStateDecorator, {SharedState} from './SharedStateDecorator';
 
-import css from './Panels.module.less';
+import * as css from './Panels.module.less';
 
 /**
  * The container for a set of Panels

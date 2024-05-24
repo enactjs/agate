@@ -16,7 +16,7 @@ import PropTypes from 'prop-types';
 import Image from '../Image';
 import Item from '../Item';
 
-import componentCss from './ThumbnailItem.module.less';
+import * as componentCss from './ThumbnailItem.module.less';
 
 /**
  * A stateless, unfocusable item that can display a thumbnail.

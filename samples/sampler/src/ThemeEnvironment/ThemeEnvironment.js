@@ -10,7 +10,7 @@ import Scroller from '@enact/agate/Scroller';
 import Skinnable from '@enact/agate/Skinnable';
 import ThemeDecorator from '@enact/agate/ThemeDecorator';
 
-import css from './ThemeEnvironment.module.less';
+import * as css from './ThemeEnvironment.module.less';
 
 const reloadPage = () => {
 	const {protocol, host, pathname} = window.parent.location;

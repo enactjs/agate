@@ -5,7 +5,7 @@ import Popup from '@enact/agate/Popup';
 import Section from '../components/Section';
 import useBoolArray from '../components/useBoolArray';
 
-import appCss from '../App/App.module.less';
+import * as appCss from '../App/App.module.less';
 
 const HeadingView = () => {
 	const [open, handleOpen] = useBoolArray(2);

@@ -19,7 +19,7 @@ import DatePicker from '../DatePicker';
 import Skinnable from '../Skinnable';
 import TimePicker from '../TimePicker';
 
-import css from './DateTimePicker.module.less';
+import * as css from './DateTimePicker.module.less';
 
 /**
  * A date/time Picker component.

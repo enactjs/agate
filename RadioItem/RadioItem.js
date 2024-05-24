@@ -23,7 +23,7 @@ import Icon from '../Icon';
 import Item from '../Item';
 import Skinnable from '../Skinnable';
 
-import componentCss from './RadioItem.module.less';
+import * as componentCss from './RadioItem.module.less';
 
 /**
  * Renders an `Item` with a radio-dot component. Useful to show a selected state on an Item.

@@ -4,7 +4,7 @@ import Drawer from '@enact/agate/Drawer';
 import Section from '../components/Section';
 import useBoolArray from '../components/useBoolArray';
 
-import appCss from '../App/App.module.less';
+import * as appCss from '../App/App.module.less';
 
 const DrawerView = () => {
 	const [open, handleOpen] = useBoolArray(4);

@@ -6,7 +6,7 @@ import Image, {ImageBase, ImageDecorator} from '@enact/agate/Image';
 
 import {svgGenerator} from '../helper/svg';
 
-import css from './Image.module.less';
+import * as css from './Image.module.less';
 
 const src = {
 	hd: svgGenerator(200, 200, '7ed31d', 'ffffff', '200 X 200'),

@@ -6,7 +6,7 @@ import Skinnable from '../Skinnable';
 
 import TooltipLabel from './TooltipLabel';
 
-import css from './Tooltip.module.less';
+import * as css from './Tooltip.module.less';
 
 /**
  * A stateless tooltip component with Agate styling applied.

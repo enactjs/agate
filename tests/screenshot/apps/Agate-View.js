@@ -9,7 +9,7 @@ import {agateComponents, agateTestMetadata} from './AgateComponents';
 
 import AgateImports from './importer';
 
-import css from './Agate-View.less';
+import * as css from './Agate-View.less';
 
 const url = new URL(window.location.href);
 

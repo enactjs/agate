@@ -19,7 +19,7 @@ import compose from 'ramda/src/compose';
 import Button from '../Button';
 import Skinnable from '../Skinnable';
 
-import css from './ToggleButton.module.less';
+import * as css from './ToggleButton.module.less';
 
 /**
  * A stateless {@link agate/Button.Button|Button} that can be toggled by changing its

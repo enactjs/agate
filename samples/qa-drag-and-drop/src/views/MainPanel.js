@@ -11,7 +11,7 @@ import {useState} from 'react';
 
 import CustomLayout from '../components/CustomLayout';
 
-import css from './MainPanel.module.less';
+import * as css from './MainPanel.module.less';
 
 const ResponsiveLayout = ResponsiveBox(({containerShape, ...rest}) => {
 	const orientation = (containerShape.orientation === 'portrait') ? 'vertical' : 'horizontal';
