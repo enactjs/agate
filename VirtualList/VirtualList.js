@@ -6,6 +6,7 @@
  * @exports VirtualList
  */
 
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {ResizeContext} from '@enact/ui/Resizable';
@@ -30,8 +31,52 @@ const nop = () => {};
  * @ui
  * @public
  */
-let VirtualList = ({itemSize, role, ...rest}) => {
-	const props = itemSize && itemSize.minSize ?
+// let VirtualList = ({itemSize, role, ...rest}) => {
+let VirtualList = (props) => {
+
+	const {
+		'data-spotlight-container-disabled': spotlightContainerDisabled =  false,
+		cbScrollTo = nop,
+		direction = 'vertical',
+		focusableScrollbar = false,
+		horizontalScrollbar = 'auto',
+		itemSize,
+		noScrollByWheel = false,
+		onScroll = nop,
+		onScrollStart = nop,
+		onScrollStop = nop,
+		pageScroll = false,
+		preventBubblingOnKeyDown = 'programmatic',
+		ref,
+		role = 'list',
+		scrollMode = 'native',
+		verticalScrollbar = 'auto',
+		wrap = false,
+		...rest
+	} = props;
+
+
+	const virtualListProps  = {
+		'data-spotlight-container-disabled': spotlightContainerDisabled,
+		cbScrollTo,
+		direction,
+		focusableScrollbar,
+		horizontalScrollbar,
+		noScrollByWheel,
+		onScroll,
+		onScrollStart,
+		onScrollStop,
+		pageScroll,
+		preventBubblingOnKeyDown,
+		ref,
+		role,
+		scrollMode,
+		verticalScrollbar,
+		wrap,
+		...rest
+	};
+
+	const itemSizeProps = itemSize && itemSize.minSize ?
 		{
 			itemSize: itemSize.minSize,
 			itemSizes: itemSize.size
@@ -41,7 +86,7 @@ let VirtualList = ({itemSize, role, ...rest}) => {
 		};
 
 	warning(
-		!rest.itemSizes || !rest.cbScrollTo,
+		!virtualListProps.itemSizes || !cbScrollTo,
 		'VirtualList with `minSize` in `itemSize` prop does not support `cbScrollTo` prop'
 	);
 
@@ -62,7 +107,7 @@ let VirtualList = ({itemSize, role, ...rest}) => {
 		scrollContentProps,
 		verticalScrollbarProps,
 		horizontalScrollbarProps
-	} = useScroll({...rest, ...props});
+	} = useScroll({...virtualListProps, ...itemSizeProps});
 
 	const themeScrollContentProps = useThemeVirtualList({
 		...scrollContentProps,
@@ -72,7 +117,7 @@ let VirtualList = ({itemSize, role, ...rest}) => {
 
 	return (
 		<ResizeContext.Provider {...resizeContextProps}>
-			<div {...scrollContainerProps}>
+			<div ref={ref} {...scrollContainerProps}>
 				<div {...scrollInnerContainerProps}>
 					<ScrollContentWrapper {...scrollContentWrapperProps}>
 						<UiVirtualListBasic {...themeScrollContentProps} ref={scrollContentHandle} />
@@ -339,6 +384,14 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	preventBubblingOnKeyDown: PropTypes.oneOf(['none', 'programmatic']),
 
 	/**
+	 * Returns a ref to the root node of the virtual list
+	 *
+	 * @type {Component}
+	 * @private
+	 */
+	ref: EnactPropTypes.component,
+
+	/**
 	 * The ARIA role for the list.
 	 *
 	 * @type {String}
@@ -453,24 +506,6 @@ VirtualList = Skinnable(
 	)
 );
 
-VirtualList.defaultProps = {
-	'data-spotlight-container-disabled': false,
-	cbScrollTo: nop,
-	direction: 'vertical',
-	focusableScrollbar: false,
-	horizontalScrollbar: 'auto',
-	noScrollByWheel: false,
-	onScroll: nop,
-	onScrollStart: nop,
-	onScrollStop: nop,
-	pageScroll: false,
-	preventBubblingOnKeyDown: 'programmatic',
-	role: 'list',
-	scrollMode: 'native',
-	verticalScrollbar: 'auto',
-	wrap: false
-};
-
 /**
  * An Agate-styled scrollable and spottable virtual grid list component.
  *
@@ -480,7 +515,45 @@ VirtualList.defaultProps = {
  * @ui
  * @public
  */
-let VirtualGridList = ({role, ...rest}) => {
+// let VirtualGridList = ({role, ...rest}) => {
+let VirtualGridList = (props) => {
+	const {
+		'data-spotlight-container-disabled': spotlightContainerDisabled =  false,
+		cbScrollTo = nop,
+		direction = 'vertical',
+		focusableScrollbar = false,
+		horizontalScrollbar = 'auto',
+		noScrollByWheel = false,
+		onScroll = nop,
+		onScrollStart = nop,
+		onScrollStop = nop,
+		pageScroll = false,
+		preventBubblingOnKeyDown = 'programmatic',
+		role = 'list',
+		scrollMode = 'native',
+		verticalScrollbar = 'auto',
+		wrap = false,
+		...rest
+	} = props;
+
+	const virtualGridListProps = {
+		'data-spotlight-container-disabled': spotlightContainerDisabled,
+		cbScrollTo,
+		direction,
+		focusableScrollbar,
+		horizontalScrollbar,
+		noScrollByWheel,
+		onScroll,
+		onScrollStart,
+		onScrollStop,
+		pageScroll,
+		preventBubblingOnKeyDown,
+		scrollMode,
+		verticalScrollbar,
+		wrap,
+		...rest
+	};
+
 	const {
 		// Variables
 		scrollContentWrapper: ScrollContentWrapper,
@@ -496,7 +569,7 @@ let VirtualGridList = ({role, ...rest}) => {
 		scrollContentProps,
 		verticalScrollbarProps,
 		horizontalScrollbarProps
-	} = useScroll(rest);
+	} = useScroll(virtualGridListProps);
 
 	const themeScrollContentProps = useThemeVirtualList({
 		...scrollContentProps,
@@ -882,24 +955,6 @@ VirtualGridList = Skinnable(
 		)
 	)
 );
-
-VirtualGridList.defaultProps = {
-	'data-spotlight-container-disabled': false,
-	cbScrollTo: nop,
-	direction: 'vertical',
-	focusableScrollbar: false,
-	horizontalScrollbar: 'auto',
-	noScrollByWheel: false,
-	onScroll: nop,
-	onScrollStart: nop,
-	onScrollStop: nop,
-	pageScroll: false,
-	preventBubblingOnKeyDown: 'programmatic',
-	role: 'list',
-	scrollMode: 'native',
-	verticalScrollbar: 'auto',
-	wrap: false
-};
 
 export default VirtualList;
 export {

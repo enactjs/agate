@@ -1,7 +1,6 @@
-import ForwardRef from '@enact/ui/ForwardRef';
+import EnactPropTypes from '@enact/core/internal/prop-types';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import {useEffect, useRef} from 'react';
 
 import Button from '../Button';
 
@@ -17,46 +16,27 @@ import css from './Scrollbar.module.less';
  * @ui
  * @private
  */
-const ScrollButtonBase = ({active, 'aria-label': ariaLabel, className, forwardRef, ...rest}) => {
-	const clientSiblingRef = useRef();
-
+const ScrollButton = ({active, 'aria-label': ariaLabel, className, ref, ...rest}) => {
 	const calculateAriaLabel = () => {
 		return (active ? null : ariaLabel);
 	};
 
-	useEffect(() => {
-		const current = clientSiblingRef?.current?.previousElementSibling;
-
-		// Safely handle old ref functions and new ref objects
-		switch (typeof forwardRef) {
-			case 'object':
-				forwardRef.current = current;
-				break;
-			case 'function':
-				forwardRef(current);
-				break;
-		}
-	}, [forwardRef]);
-
 	return (
-		<>
-			<Button
-				{...rest}
-				aria-label={calculateAriaLabel()}
-				backgroundOpacity="transparent"
-				className={classnames(className, css.scrollButton)}
-				css={css}
-				ref={forwardRef}
-				size="small"
-			/>
-			<div style={{display: 'none'}} ref={clientSiblingRef} />
-		</>
+		<Button
+			{...rest}
+			aria-label={calculateAriaLabel()}
+			backgroundOpacity="transparent"
+			className={classnames(className, css.scrollButton)}
+			css={css}
+			ref={ref}
+			size="small"
+		/>
 	);
 };
 
-ScrollButtonBase.displayName = 'ScrollButton';
+ScrollButton.displayName = 'ScrollButton';
 
-ScrollButtonBase.propTypes = /** @lends agate/useScroll.ScrollButton.prototype */ {
+ScrollButton.propTypes = /** @lends agate/useScroll.ScrollButton.prototype */ {
 	/**
 	 * Name of icon.
 	 *
@@ -93,20 +73,13 @@ ScrollButtonBase.propTypes = /** @lends agate/useScroll.ScrollButton.prototype *
 	disabled: PropTypes.bool,
 
 	/**
-	 * Returns a ref to the root node of the scroll button
+	 * Returns a ref to the root node of the component
 	 *
-	 * See: https://github.com/facebook/prop-types/issues/240
-	 *
-	 * @type {Function|Object}
+	 * @type {Component}
 	 * @private
 	 */
-	forwardRef: PropTypes.oneOfType([
-		PropTypes.func,
-		PropTypes.shape({current: PropTypes.any})
-	])
+	ref: EnactPropTypes.component
 };
-
-const ScrollButton = ForwardRef(ScrollButtonBase);
 
 export default ScrollButton;
 export {
