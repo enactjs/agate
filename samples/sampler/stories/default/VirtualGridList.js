@@ -4,11 +4,11 @@ import {mergeComponentMetadata} from '@enact/storybook-utils';
 import ri from '@enact/ui/resolution';
 import {VirtualListBasic as UiVirtualListBasic} from '@enact/ui/VirtualList';
 import ImageItem from '@enact/agate/ImageItem';
-import VirtualList, {VirtualGridList} from '@enact/agate/VirtualList';
+import {VirtualGridList} from '@enact/agate/VirtualList';
 
 import {svgGenerator} from '../helper/svg';
 
-const VirtualGridListConfig = mergeComponentMetadata('VirtualGridList', UiVirtualListBasic, VirtualGridList, VirtualList);
+const VirtualGridListConfig = mergeComponentMetadata('VirtualGridList', UiVirtualListBasic, VirtualGridList);
 
 const
 	wrapOption = {
