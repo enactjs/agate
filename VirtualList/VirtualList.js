@@ -36,7 +36,7 @@ const virtualListDefaultProps = {
 	role: 'list',
 	scrollMode: 'native',
 	verticalScrollbar: 'auto',
-	wrap: false,
+	wrap: false
 };
 
 /**
@@ -491,7 +491,7 @@ const virtualGridListDefaultProps = {
 	role: 'list',
 	scrollMode: 'native',
 	verticalScrollbar: 'auto',
-	wrap: false,
+	wrap: false
 };
 
 /**
