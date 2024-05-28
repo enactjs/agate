@@ -30,7 +30,7 @@
     "@enact/ui": "^4.8.0",
     "classnames": "^2.5.1",
     "ilib": "^14.20.0",
-    "react": "rc",
-    "react-dom": "rc"
+    "react": "^19.0.0-rc-81c5ff2e04-20240521",
+    "react-dom": "^19.0.0-rc-81c5ff2e04-20240521"
   }
 }
