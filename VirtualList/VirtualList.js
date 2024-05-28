@@ -49,7 +49,7 @@ const virtualListDefaultProps = {
  * @public
  */
 let VirtualList = (props) => {
-	const virtualListProps = Object.assign({}, props, virtualListDefaultProps);
+	const virtualListProps = Object.assign({}, virtualListDefaultProps, props);
 	const {itemSize, role, ...rest} = virtualListProps;
 
 	const itemSizeProps = itemSize && itemSize.minSize ?
@@ -504,7 +504,7 @@ const virtualGridListDefaultProps = {
  * @public
  */
 let VirtualGridList = (props) => {
-	const virtualGridListProps = Object.assign({}, props, virtualGridListDefaultProps);
+	const virtualGridListProps = Object.assign({}, virtualGridListDefaultProps, props);
 	const {role, ...rest} = virtualGridListProps;
 
 	const {
