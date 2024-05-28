@@ -21,6 +21,24 @@ import {useThemeVirtualList} from './useThemeVirtualList';
 
 const nop = () => {};
 
+const virtualListDefaultProps = {
+	'data-spotlight-container-disabled': false,
+	cbScrollTo: nop,
+	direction: 'vertical',
+	focusableScrollbar: false,
+	horizontalScrollbar: 'auto',
+	noScrollByWheel: false,
+	onScroll: nop,
+	onScrollStart: nop,
+	onScrollStop: nop,
+	pageScroll: false,
+	preventBubblingOnKeyDown: 'programmatic',
+	role: 'list',
+	scrollMode: 'native',
+	verticalScrollbar: 'auto',
+	wrap: false,
+};
+
 /**
  * An Agate-styled scrollable and spottable virtual list component.
  *
@@ -31,46 +49,8 @@ const nop = () => {};
  * @public
  */
 let VirtualList = (props) => {
-
-	const {
-		'data-spotlight-container-disabled': spotlightContainerDisabled =  false,
-		cbScrollTo = nop,
-		direction = 'vertical',
-		focusableScrollbar = false,
-		horizontalScrollbar = 'auto',
-		itemSize,
-		noScrollByWheel = false,
-		onScroll = nop,
-		onScrollStart = nop,
-		onScrollStop = nop,
-		pageScroll = false,
-		preventBubblingOnKeyDown = 'programmatic',
-		role = 'list',
-		scrollMode = 'native',
-		verticalScrollbar = 'auto',
-		wrap = false,
-		...rest
-	} = props;
-
-
-	const virtualListProps  = {
-		'data-spotlight-container-disabled': spotlightContainerDisabled,
-		cbScrollTo,
-		direction,
-		focusableScrollbar,
-		horizontalScrollbar,
-		noScrollByWheel,
-		onScroll,
-		onScrollStart,
-		onScrollStop,
-		pageScroll,
-		preventBubblingOnKeyDown,
-		role,
-		scrollMode,
-		verticalScrollbar,
-		wrap,
-		...rest
-	};
+	const virtualListProps = Object.assign({}, props, virtualListDefaultProps);
+	const {itemSize, role, ...rest} = virtualListProps;
 
 	const itemSizeProps = itemSize && itemSize.minSize ?
 		{
@@ -82,7 +62,7 @@ let VirtualList = (props) => {
 		};
 
 	warning(
-		!virtualListProps.itemSizes || !cbScrollTo,
+		!rest.itemSizes || !rest.cbScrollTo,
 		'VirtualList with `minSize` in `itemSize` prop does not support `cbScrollTo` prop'
 	);
 
@@ -103,7 +83,7 @@ let VirtualList = (props) => {
 		scrollContentProps,
 		verticalScrollbarProps,
 		horizontalScrollbarProps
-	} = useScroll({...virtualListProps, ...itemSizeProps});
+	} = useScroll({...rest, ...itemSizeProps});
 
 	const themeScrollContentProps = useThemeVirtualList({
 		...scrollContentProps,
@@ -494,6 +474,26 @@ VirtualList = Skinnable(
 	)
 );
 
+VirtualList.defaultPropValues = virtualListDefaultProps;
+
+const virtualGridListDefaultProps = {
+	'data-spotlight-container-disabled': false,
+	cbScrollTo: nop,
+	direction: 'vertical',
+	focusableScrollbar: false,
+	horizontalScrollbar: 'auto',
+	noScrollByWheel: false,
+	onScroll: nop,
+	onScrollStart: nop,
+	onScrollStop: nop,
+	pageScroll: false,
+	preventBubblingOnKeyDown: 'programmatic',
+	role: 'list',
+	scrollMode: 'native',
+	verticalScrollbar: 'auto',
+	wrap: false,
+};
+
 /**
  * An Agate-styled scrollable and spottable virtual grid list component.
  *
@@ -504,42 +504,8 @@ VirtualList = Skinnable(
  * @public
  */
 let VirtualGridList = (props) => {
-	const {
-		'data-spotlight-container-disabled': spotlightContainerDisabled =  false,
-		cbScrollTo = nop,
-		direction = 'vertical',
-		focusableScrollbar = false,
-		horizontalScrollbar = 'auto',
-		noScrollByWheel = false,
-		onScroll = nop,
-		onScrollStart = nop,
-		onScrollStop = nop,
-		pageScroll = false,
-		preventBubblingOnKeyDown = 'programmatic',
-		role = 'list',
-		scrollMode = 'native',
-		verticalScrollbar = 'auto',
-		wrap = false,
-		...rest
-	} = props;
-
-	const virtualGridListProps = {
-		'data-spotlight-container-disabled': spotlightContainerDisabled,
-		cbScrollTo,
-		direction,
-		focusableScrollbar,
-		horizontalScrollbar,
-		noScrollByWheel,
-		onScroll,
-		onScrollStart,
-		onScrollStop,
-		pageScroll,
-		preventBubblingOnKeyDown,
-		scrollMode,
-		verticalScrollbar,
-		wrap,
-		...rest
-	};
+	const virtualGridListProps = Object.assign({}, props, virtualGridListDefaultProps);
+	const {role, ...rest} = virtualGridListProps;
 
 	const {
 		// Variables
@@ -556,7 +522,7 @@ let VirtualGridList = (props) => {
 		scrollContentProps,
 		verticalScrollbarProps,
 		horizontalScrollbarProps
-	} = useScroll(virtualGridListProps);
+	} = useScroll(rest);
 
 	const themeScrollContentProps = useThemeVirtualList({
 		...scrollContentProps,
@@ -942,6 +908,8 @@ VirtualGridList = Skinnable(
 		)
 	)
 );
+
+VirtualGridList.defaultPropValues = virtualGridListDefaultProps;
 
 export default VirtualList;
 export {

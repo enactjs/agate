@@ -30,6 +30,21 @@ import useThemeScroller from './useThemeScroller';
 
 const nop = () => {};
 
+const scrollerDefaultProps = {
+	'data-spotlight-container-disabled': false,
+	cbScrollTo: nop,
+	direction: 'both',
+	focusableScrollbar: false,
+	horizontalScrollbar: 'auto',
+	noScrollByWheel: false,
+	onScroll: nop,
+	onScrollStart: nop,
+	onScrollStop: nop,
+	preventBubblingOnKeyDown: 'none',
+	scrollMode: 'native',
+	verticalScrollbar: 'auto'
+};
+
 /**
  * An Agate-styled Scroller, useScroll applied.
  *
@@ -45,37 +60,7 @@ const nop = () => {};
  * @public
  */
 let Scroller = (props) => {
-	const {
-		'data-spotlight-container-disabled': spotlightContainerDisabled =  false,
-		cbScrollTo = nop,
-		direction = 'both',
-		focusableScrollbar = false,
-		horizontalScrollbar = 'auto',
-		noScrollByWheel = false,
-		onScroll = nop,
-		onScrollStart = nop,
-		onScrollStop = nop,
-		preventBubblingOnKeyDown = 'none',
-		scrollMode = 'native',
-		verticalScrollbar = 'auto',
-		...rest
-	} = props;
-
-	const scrollerProps = {
-		'data-spotlight-container-disabled': spotlightContainerDisabled,
-		cbScrollTo,
-		direction,
-		focusableScrollbar,
-		horizontalScrollbar,
-		noScrollByWheel,
-		onScroll,
-		onScrollStart,
-		onScrollStop,
-		preventBubblingOnKeyDown,
-		scrollMode,
-		verticalScrollbar,
-		...rest
-	};
+	const scrollerProps = Object.assign({}, scrollerDefaultProps, props);
 
 	// Hooks
 	const {
@@ -390,6 +375,8 @@ Scroller = Skinnable(
 		)
 	)
 );
+
+Scroller.defaultPropValues = scrollerDefaultProps;
 
 export default Scroller;
 export {
