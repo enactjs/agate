@@ -30,6 +30,21 @@ import useThemeScroller from './useThemeScroller';
 
 const nop = () => {};
 
+const scrollerDefaultProps = {
+	'data-spotlight-container-disabled': false,
+	cbScrollTo: nop,
+	direction: 'both',
+	focusableScrollbar: false,
+	horizontalScrollbar: 'auto',
+	noScrollByWheel: false,
+	onScroll: nop,
+	onScrollStart: nop,
+	onScrollStop: nop,
+	preventBubblingOnKeyDown: 'none',
+	scrollMode: 'native',
+	verticalScrollbar: 'auto'
+};
+
 /**
  * An Agate-styled Scroller, useScroll applied.
  *
@@ -45,8 +60,9 @@ const nop = () => {};
  * @public
  */
 let Scroller = (props) => {
-	// Hooks
+	const scrollerProps = Object.assign({}, scrollerDefaultProps, props);
 
+	// Hooks
 	const {
 		scrollContentWrapper: ScrollContentWrapper,
 		scrollContentHandle,
@@ -60,7 +76,7 @@ let Scroller = (props) => {
 		scrollContentProps,
 		verticalScrollbarProps,
 		horizontalScrollbarProps
-	} = useScroll(props);
+	} = useScroll(scrollerProps);
 
 	const themeScrollContentProps = useThemeScroller(scrollContentProps);
 
@@ -360,20 +376,7 @@ Scroller = Skinnable(
 	)
 );
 
-Scroller.defaultProps = {
-	'data-spotlight-container-disabled': false,
-	cbScrollTo: nop,
-	direction: 'both',
-	focusableScrollbar: false,
-	horizontalScrollbar: 'auto',
-	noScrollByWheel: false,
-	onScroll: nop,
-	onScrollStart: nop,
-	onScrollStop: nop,
-	preventBubblingOnKeyDown: 'none',
-	scrollMode: 'native',
-	verticalScrollbar: 'auto'
-};
+Scroller.defaultPropValues = scrollerDefaultProps;
 
 export default Scroller;
 export {

@@ -21,6 +21,24 @@ import {useThemeVirtualList} from './useThemeVirtualList';
 
 const nop = () => {};
 
+const virtualListDefaultProps = {
+	'data-spotlight-container-disabled': false,
+	cbScrollTo: nop,
+	direction: 'vertical',
+	focusableScrollbar: false,
+	horizontalScrollbar: 'auto',
+	noScrollByWheel: false,
+	onScroll: nop,
+	onScrollStart: nop,
+	onScrollStop: nop,
+	pageScroll: false,
+	preventBubblingOnKeyDown: 'programmatic',
+	role: 'list',
+	scrollMode: 'native',
+	verticalScrollbar: 'auto',
+	wrap: false
+};
+
 /**
  * An Agate-styled scrollable and spottable virtual list component.
  *
@@ -30,8 +48,11 @@ const nop = () => {};
  * @ui
  * @public
  */
-let VirtualList = ({itemSize, role, ...rest}) => {
-	const props = itemSize && itemSize.minSize ?
+let VirtualList = (props) => {
+	const virtualListProps = Object.assign({}, virtualListDefaultProps, props);
+	const {itemSize, role, ...rest} = virtualListProps;
+
+	const itemSizeProps = itemSize && itemSize.minSize ?
 		{
 			itemSize: itemSize.minSize,
 			itemSizes: itemSize.size
@@ -62,7 +83,7 @@ let VirtualList = ({itemSize, role, ...rest}) => {
 		scrollContentProps,
 		verticalScrollbarProps,
 		horizontalScrollbarProps
-	} = useScroll({...rest, ...props});
+	} = useScroll({...rest, ...itemSizeProps});
 
 	const themeScrollContentProps = useThemeVirtualList({
 		...scrollContentProps,
@@ -453,7 +474,9 @@ VirtualList = Skinnable(
 	)
 );
 
-VirtualList.defaultProps = {
+VirtualList.defaultPropValues = virtualListDefaultProps;
+
+const virtualGridListDefaultProps = {
 	'data-spotlight-container-disabled': false,
 	cbScrollTo: nop,
 	direction: 'vertical',
@@ -480,7 +503,10 @@ VirtualList.defaultProps = {
  * @ui
  * @public
  */
-let VirtualGridList = ({role, ...rest}) => {
+let VirtualGridList = (props) => {
+	const virtualGridListProps = Object.assign({}, virtualGridListDefaultProps, props);
+	const {role, ...rest} = virtualGridListProps;
+
 	const {
 		// Variables
 		scrollContentWrapper: ScrollContentWrapper,
@@ -883,23 +909,7 @@ VirtualGridList = Skinnable(
 	)
 );
 
-VirtualGridList.defaultProps = {
-	'data-spotlight-container-disabled': false,
-	cbScrollTo: nop,
-	direction: 'vertical',
-	focusableScrollbar: false,
-	horizontalScrollbar: 'auto',
-	noScrollByWheel: false,
-	onScroll: nop,
-	onScrollStart: nop,
-	onScrollStop: nop,
-	pageScroll: false,
-	preventBubblingOnKeyDown: 'programmatic',
-	role: 'list',
-	scrollMode: 'native',
-	verticalScrollbar: 'auto',
-	wrap: false
-};
+VirtualGridList.defaultPropValues = virtualGridListDefaultProps;
 
 export default VirtualList;
 export {
