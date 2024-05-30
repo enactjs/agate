@@ -1,4 +1,4 @@
-import {useGlobals} from '@storybook/api';
+import {useGlobals} from '@storybook/manager-api';
 import PropTypes from 'prop-types';
 import React, {useCallback, useEffect} from 'react'; // eslint-disable-line
 
@@ -24,11 +24,14 @@ const ColorPicker = ({colorPickerType}) => {
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
-		<input
-			type="color"
-			value={globals[colorPickerType] || getDefaultColor(colorPickerType)}
-			onChange={handleChange}
-		/>
+		<div>
+			<span style={{color: 'white', paddingRight: '40px'}}>{colorPickerType}</span>
+			<input
+				type="color"
+				value={globals[colorPickerType] || getDefaultColor(colorPickerType)}
+				onChange={handleChange}
+			/>
+		</div>
 	);
 };
 
