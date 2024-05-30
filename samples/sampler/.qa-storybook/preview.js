@@ -1,7 +1,7 @@
 import {cap} from '@enact/core/util';
 import {configureActions} from '@enact/storybook-utils/addons/actions';
 import {getBooleanType, getObjectType} from '@enact/storybook-utils/addons/controls';
-import {DocsContainer, Primary, Stories, Title} from '@enact/storybook-utils/addons/docs';
+import {DocsContainer, Primary, Stories, Title} from '@storybook/addon-docs';
 import ri from '@enact/ui/resolution';
 import {themes} from '@storybook/theming';
 
@@ -46,8 +46,10 @@ if (process.env.SKINS) {
 export const parameters = {
 	docs: {
 		container: DocsContainer,
-		inlineStories: false,
-		iframeHeight: ri.scaleToRem(300),
+		story: {
+			inline: false,
+			iframeHeight: ri.scaleToRem(300)
+		},
 		page: () => (
 			<>
 				<Title />
