@@ -13,7 +13,7 @@
         "@enact/core": "^4.8.0",
         "@enact/i18n": "^4.8.0",
         "@enact/spotlight": "^4.8.0",
-        "@enact/storybook-utils": "^5.1.3",
+        "@enact/storybook-utils": "^5.1.4",
         "@enact/ui": "^4.8.0",
         "@storybook/addons": "^6.5.16",
         "@storybook/builder-webpack5": "^6.5.16",
@@ -24,8 +24,8 @@
         "dotenv": "^16.4.5",
         "ilib": "^14.20.0",
         "prop-types": "^15.8.1",
-        "react": "rc",
-        "react-dom": "rc"
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
       }
     },
     "../..": {
@@ -46,8 +46,8 @@
         "invariant": "^2.2.4",
         "prop-types": "^15.8.1",
         "ramda": "^0.29.1",
-        "react": "rc",
-        "react-dom": "rc",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
         "warning": "^4.0.3"
       },
       "devDependencies": {
@@ -70545,9 +70545,9 @@
       }
     },
     "node_modules/caniuse-lite": {
-      "version": "1.0.30001623",
-      "resolved": "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001623.tgz",
-      "integrity": "sha512-X/XhAVKlpIxWPpgRTnlgZssJrF0m6YtRA0QDWgsBNT12uZM6LPRydR7ip405Y3t1LamD8cP2TZFEDZFBf5ApcA==",
+      "version": "1.0.30001624",
+      "resolved": "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001624.tgz",
+      "integrity": "sha512-0dWnQG87UevOCPYaOR49CBcLBwoZLpws+k6W37nLjWUhumP1Isusj0p2u+3KhjNloRWK9OKMgjBBzPujQHw4nA==",
       "funding": [
         {
           "type": "opencollective",
