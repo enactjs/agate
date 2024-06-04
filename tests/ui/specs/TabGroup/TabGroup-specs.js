@@ -23,24 +23,24 @@ describe('TabGroup', function () {
 				await tabGroup.focusTab(1);
 				await Page.spotlightRight();
 
-				expect(await tabGroup.focusableTabs(2).isFocused()).to.be.true();
+				expect(await tabGroup.focusableTabs(3).isFocused()).to.be.true(); // there is a dummy sibling added by Spottable
 			});
 
 			it('should display `setting` icon', async function () {
-				expect(await tabGroup.iconValue(2)).to.equal(983083); // decimal converted charCode of Unicode 'setting' character
+				expect(await tabGroup.iconValue(3)).to.equal(983083); // decimal converted charCode of Unicode 'setting' character
 			});
 		});
 
 		describe('third tab', function () {
 			it('should be focused with 5-way Right', async function () {
-				await tabGroup.focusTab(2);
+				await tabGroup.focusTab(3);
 				await Page.spotlightRight();
 
-				expect(await tabGroup.focusableTabs(3).isFocused()).to.be.true();
+				expect(await tabGroup.focusableTabs(5).isFocused()).to.be.true(); // there is a dummy sibling added by Spottable
 			});
 
 			it('should display `display` icon', async function () {
-				expect(await tabGroup.iconValue(3)).to.equal(983244); // decimal converted charCode of Unicode 'display' character
+				expect(await tabGroup.iconValue(5)).to.equal(983244); // decimal converted charCode of Unicode 'display' character
 			});
 		});
 	});
@@ -75,21 +75,21 @@ describe('TabGroup', function () {
 		it('should focus the second item with 5-way Down', async function () {
 			await tabGroup.focusTab(1);
 			await Page.spotlightDown();
-			expect(await tabGroup.focusableTabs(2).isFocused()).to.be.true();
+			expect(await tabGroup.focusableTabs(3).isFocused()).to.be.true(); // there is a dummy sibling added by Spottable
 		});
 
 		it('should focus the third item with 5-way Down', async function () {
-			await tabGroup.focusTab(2);
+			await tabGroup.focusTab(3);
 			await Page.spotlightDown();
 
-			expect(await tabGroup.focusableTabs(3).isFocused()).to.be.true();
+			expect(await tabGroup.focusableTabs(5).isFocused()).to.be.true(); // there is a dummy sibling added by Spottable
 		});
 
 		it('should focus the first item with 5-way Up', async function () {
-			await tabGroup.focusTab(2);
+			await tabGroup.focusTab(3);
 			await Page.spotlightUp();
 
-			expect(await tabGroup.focusableTabs(1).isFocused()).to.be.true();
+			expect(await tabGroup.focusableTabs(1).isFocused()).to.be.true(); // there is a dummy sibling added by Spottable
 		});
 	});
 });
