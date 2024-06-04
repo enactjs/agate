@@ -71,7 +71,7 @@ const ContextualPopupContainer = SpotlightContainerDecorator(
 
 const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {noArrow, noSkin, openProp} = config;
-	const WrappedWithRef = WithRef(Wrapped)
+	const WrappedWithRef = WithRef(Wrapped);
 
 	return class extends Component {
 		static displayName = 'ContextualPopupDecorator';
