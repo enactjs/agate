@@ -25,7 +25,7 @@ const ScrollButtonBase = ({active, 'aria-label': ariaLabel, className, forwardRe
 	};
 
 	useEffect(() => {
-		const current = clientSiblingRef?.current?.previousElementSibling;
+		const current = clientSiblingRef.current?.previousElementSibling?.previousElementSibling;
 
 		// Safely handle old ref functions and new ref objects
 		switch (typeof forwardRef) {
