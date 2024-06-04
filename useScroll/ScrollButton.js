@@ -1,3 +1,4 @@
+import {WithRef} from '@enact/core/internal/WithRef';
 import ForwardRef from '@enact/ui/ForwardRef';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
@@ -19,13 +20,14 @@ import css from './Scrollbar.module.less';
  */
 const ScrollButtonBase = ({active, 'aria-label': ariaLabel, className, forwardRef, ...rest}) => {
 	const clientSiblingRef = useRef();
+	const ButtonWithRef = WithRef(Button);
 
 	const calculateAriaLabel = () => {
 		return (active ? null : ariaLabel);
 	};
 
 	useEffect(() => {
-		const current = clientSiblingRef.current?.previousElementSibling?.previousElementSibling;
+		const current = clientSiblingRef.current;
 
 		// Safely handle old ref functions and new ref objects
 		switch (typeof forwardRef) {
@@ -39,18 +41,17 @@ const ScrollButtonBase = ({active, 'aria-label': ariaLabel, className, forwardRe
 	}, [forwardRef]);
 
 	return (
-		<>
-			<Button
-				{...rest}
-				aria-label={calculateAriaLabel()}
-				backgroundOpacity="transparent"
-				className={classnames(className, css.scrollButton)}
-				css={css}
-				ref={forwardRef}
-				size="small"
-			/>
-			<div style={{display: 'none'}} ref={clientSiblingRef} />
-		</>
+		<ButtonWithRef
+			{...rest}
+			aria-label={calculateAriaLabel()}
+			backgroundOpacity="transparent"
+			className={classnames(className, css.scrollButton)}
+			css={css}
+			outermostRef={clientSiblingRef}
+			ref={forwardRef}
+			referrerName="Button"
+			size="small"
+		/>
 	);
 };
 
