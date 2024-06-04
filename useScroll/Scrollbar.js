@@ -62,7 +62,14 @@ const useThemeScrollbar = (props) => {
  * @ui
  * @private
  */
-const ScrollbarBase = memo((props) => {
+const ScrollbarBase = memo(({css = componentCss, minThumbSize = 18, vertical = true,  ...rest}) => {
+	const props = {
+		css,
+		minThumbSize,
+		vertical,
+		...rest
+	};
+
 	const {
 		restProps,
 		scrollbarProps,
@@ -84,7 +91,7 @@ const ScrollbarBase = memo((props) => {
 		updateButtons
 	} = useScrollButtons(scrollbarButtonsProps);
 
-	const {disabled, nextButtonAriaLabel, previousButtonAriaLabel, rtl, vertical} = scrollbarButtonsProps;
+	const {disabled, nextButtonAriaLabel, previousButtonAriaLabel, rtl} = scrollbarButtonsProps;
 
 	useLayoutEffect(() => {
 		const {scrollbarHandle} = props;
@@ -249,12 +256,6 @@ ScrollbarBase.propTypes = /** @lends agate/useScroll.Scrollbar.prototype */ {
 	 * @public
 	 */
 	vertical: PropTypes.bool
-};
-
-ScrollbarBase.defaultProps = {
-	css: componentCss,
-	minThumbSize: 18,
-	vertical: true
 };
 
 /**
