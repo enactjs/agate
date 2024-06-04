@@ -11,6 +11,7 @@ import {on, off} from '@enact/core/dispatcher';
 import {handle, forProp, forKey, forward, stop} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import EnactPropTypes from '@enact/core/internal/prop-types';
+import {WithRef} from '@enact/core/internal/WithRef';
 import {extractAriaProps} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import Spotlight, {getDirection} from '@enact/spotlight';
@@ -70,6 +71,7 @@ const ContextualPopupContainer = SpotlightContainerDecorator(
 
 const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {noArrow, noSkin, openProp} = config;
+	const WrappedWithRef = WithRef(Wrapped)
 
 	return class extends Component {
 		static displayName = 'ContextualPopupDecorator';
@@ -553,9 +555,9 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		 * @returns {undefined}
 		 */
 		positionContextualPopup = () => {
-			if (this.containerNode && this.clientSiblingRef?.current?.previousElementSibling) {
+			if (this.containerNode && this.clientSiblingRef?.current) {
 				const containerNode = this.containerNode.getBoundingClientRect();
-				const {top, left, bottom, right, width, height} = this.clientSiblingRef.current.previousElementSibling.getBoundingClientRect();
+				const {top, left, bottom, right, width, height} = this.clientSiblingRef.current.getBoundingClientRect();
 				const clientNode = {top, left, bottom, right, width, height};
 				clientNode.left = this.props.rtl ? window.innerWidth - right : left;
 				clientNode.right = this.props.rtl ? window.innerWidth - left : right;
@@ -725,10 +727,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 							<PopupComponent {...popupPropsRef} />
 						</ContextualPopupContainer>
 					</FloatingLayer>
-					<>
-						<Wrapped {...rest} />
-						<div style={{display: 'none'}} ref={this.clientSiblingRef} />
-					</>
+					<WrappedWithRef {...rest} outermostRef={this.clientSiblingRef} referrerName="ContextualPopup" />
 				</div>
 			);
 		}

@@ -2,6 +2,7 @@ import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import EnactPropTypes from '@enact/core/internal/prop-types';
+import {WithRef} from '@enact/core/internal/WithRef';
 import Spotlight from '@enact/spotlight';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
@@ -57,14 +58,6 @@ const DropdownListBase = kind({
 				key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 			}))
 		]),
-
-		/**
-		 * Called with the reference to the component node.
-		 *
-		 * @type {Object|Function}
-		 * @public
-		 */
-		clientSiblingRef: EnactPropTypes.ref,
 
 		/**
 		 * Placement of the Dropdown List.
@@ -154,23 +147,20 @@ const DropdownListBase = kind({
 		itemSize: ({skin}) => (skin === 'gallium') ? ri.scale(90) : ri.scale(60)
 	},
 
-	render: ({clientSiblingRef, dataSize, itemRenderer, itemSize, scrollTo, ...rest}) => {
+	render: ({dataSize, itemRenderer, itemSize, scrollTo, ...rest}) => {
 		delete rest.width;
 		delete rest.direction;
 		delete rest.skin;
 
 		return (
-			<>
-				<VirtualList
-					{...rest}
-					cbScrollTo={scrollTo}
-					dataSize={dataSize}
-					focusableScrollbar
-					itemRenderer={itemRenderer}
-					itemSize={itemSize}
-				/>
-				<div style={{display: 'none'}} ref={clientSiblingRef} />
-			</>
+			<VirtualList
+				{...rest}
+				cbScrollTo={scrollTo}
+				dataSize={dataSize}
+				focusableScrollbar
+				itemRenderer={itemRenderer}
+				itemSize={itemSize}
+			/>
 		);
 	}
 });
@@ -193,6 +183,8 @@ const ReadyState = {
  * @private
  */
 const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
+	const WrappedWithRef = WithRef(Wrapped);
+
 	return class extends Component {
 		static displayName = 'DropdownListSpotlightDecorator';
 
@@ -223,14 +215,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 				ready: isSelectedValid(props) ? ReadyState.INIT : ReadyState.DONE
 			};
 
-			this.componentRef = createRef();
-		}
-
-		componentDidMount () {
-			Spotlight.set(this.componentRef.current.previousElementSibling.dataset.spotlightId, {
-				defaultElement: '[data-selected="true"]',
-				enterTo: 'default-element'
-			});
+			this.clientSiblingRef = createRef(null);
 		}
 
 		componentDidUpdate () {
@@ -298,8 +283,10 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 
 		handleFocus = (ev) => {
 			const current = ev.target;
+			const dropdownListNode = this.clientSiblingRef?.current;
+
 			if (this.state.ready === ReadyState.DONE && !Spotlight.getPointerMode() &&
-				current.dataset['index'] != null && this.componentRef.current.previousElementSibling.contains(current)
+				current.dataset['index'] != null && dropdownListNode.contains(current)
 			) {
 				const focusedIndex = Number(current.dataset['index']);
 				const lastFocusedKey = getKey({children: this.props.children, selected: focusedIndex});
@@ -313,12 +300,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 
 		render () {
 			return (
-				<Wrapped
-					{...this.props}
-					clientSiblingRef={this.componentRef}
-					onFocus={this.handleFocus}
-					scrollTo={this.setScrollTo}
-				/>
+				<WrappedWithRef {...this.props} onFocus={this.handleFocus} outermostRef={this.clientSiblingRef} referrerName="DropdownList" scrollTo={this.setScrollTo} />
 			);
 		}
 	};
