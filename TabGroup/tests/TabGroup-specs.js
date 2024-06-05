@@ -40,7 +40,7 @@ describe('TabGroup Specs', () => {
 
 		const expectedClass = 'tabGroup';
 
-		const expectedTabNumber = 3;
+		const expectedTabNumber = 3 * 2; // each tab has two children due to a dummy sibling by Spottable
 		const tabGroup = screen.getByRole('group');
 
 		expect(tabGroup).toHaveClass(expectedClass);
