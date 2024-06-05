@@ -24,14 +24,14 @@ const ColorPicker = ({colorPickerType}) => {
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
-		<div>
+		<>
 			<span style={{color: 'white', paddingRight: '40px'}}>{colorPickerType}</span>
 			<input
 				type="color"
 				value={globals[colorPickerType] || getDefaultColor(colorPickerType)}
 				onChange={handleChange}
 			/>
-		</div>
+		</>
 	);
 };
 
