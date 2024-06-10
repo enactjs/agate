@@ -24,16 +24,16 @@ const locales = {
 	'en-JP - English, custom Japanese font': 'en-JP',
 	'si-LK - Sinhala, external font family with tallglyph characters': 'si-LK',
 	'km-KH - Cambodian Khmer, with tallglyph characters': 'km-KH'
-  };
+};
 
-  const skins = {
-	  'Carbon': 'carbon',
-	  'Cobalt': 'cobalt',
-	  'Copper': 'copper',
-	  'Electro': 'electro',
-	  'Gallium': 'gallium',
-	  'Titanium': 'titanium'
-  };
+const skins = {
+	'Carbon': 'carbon',
+	'Cobalt': 'cobalt',
+	'Copper': 'copper',
+	'Electro': 'electro',
+	'Gallium': 'gallium',
+	'Titanium': 'titanium'
+};
 
 if (process.env.SKINS) {
 	JSON.parse(process.env.SKINS).forEach(skin => {
@@ -62,7 +62,7 @@ export const parameters = {
 		storySort: {
 			method: 'alphabetical'
 		}
-	},
+	}
 };
 
 export const globalTypes = {
