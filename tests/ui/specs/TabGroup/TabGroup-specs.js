@@ -23,7 +23,7 @@ describe('TabGroup', function () {
 				await tabGroup.focusTab(1);
 				await Page.spotlightRight();
 
-				expect(await tabGroup.focusableTabs(3).isFocused()).toBe(true);
+				expect(await tabGroup.focusableTabs(3).isFocused()).toBe(true); // there is a dummy sibling added by Spottable
 			});
 
 			it('should display `setting` icon', async function () {
@@ -36,7 +36,7 @@ describe('TabGroup', function () {
 				await tabGroup.focusTab(3);
 				await Page.spotlightRight();
 
-				expect(await tabGroup.focusableTabs(5).isFocused()).toBe(true);
+				expect(await tabGroup.focusableTabs(5).isFocused()).toBe(true); // there is a dummy sibling added by Spottable
 			});
 
 			it('should display `display` icon', async function () {
@@ -75,21 +75,21 @@ describe('TabGroup', function () {
 		it('should focus the second item with 5-way Down', async function () {
 			await tabGroup.focusTab(1);
 			await Page.spotlightDown();
-			expect(await tabGroup.focusableTabs(3).isFocused()).toBe(true);
+			expect(await tabGroup.focusableTabs(3).isFocused()).toBe(true); // there is a dummy sibling added by Spottable
 		});
 
 		it('should focus the third item with 5-way Down', async function () {
 			await tabGroup.focusTab(3);
 			await Page.spotlightDown();
 
-			expect(await tabGroup.focusableTabs(5).isFocused()).toBe(true);
+			expect(await tabGroup.focusableTabs(5).isFocused()).toBe(true); // there is a dummy sibling added by Spottable
 		});
 
 		it('should focus the first item with 5-way Up', async function () {
 			await tabGroup.focusTab(3);
 			await Page.spotlightUp();
 
-			expect(await tabGroup.focusableTabs(1).isFocused()).toBe(true);
+			expect(await tabGroup.focusableTabs(1).isFocused()).toBe(true); // there is a dummy sibling added by Spottable
 		});
 	});
 });
