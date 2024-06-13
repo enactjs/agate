@@ -15,15 +15,15 @@ describe('ArcPicker', function () {
 		it('should have the first arc selected by default', async function () {
 			await Page.spotlightSelect();
 
-			expect((await arcPicker.coloredPath(1).getCSSProperty('stroke')).value).to.equal(accentColor);
+			expect((await arcPicker.coloredPath(1).getCSSProperty('stroke')).value).toBe(accentColor);
 		});
 
 		it('should select the third arc when it is clicked', async function () {
 			await arcPicker.clickablePath(3).click();
-			expect((await arcPicker.coloredPath(3).getCSSProperty('stroke')).value).to.equal(accentColor);
+			expect((await arcPicker.coloredPath(3).getCSSProperty('stroke')).value).toBe(accentColor);
 			// previous arcs should remain unselected
-			expect((await arcPicker.coloredPath(1).getCSSProperty('stroke')).value).to.equal(unselectedColor);
-			expect((await arcPicker.coloredPath(2).getCSSProperty('stroke')).value).to.equal(unselectedColor);
+			expect((await arcPicker.coloredPath(1).getCSSProperty('stroke')).value).toBe(unselectedColor);
+			expect((await arcPicker.coloredPath(2).getCSSProperty('stroke')).value).toBe(unselectedColor);
 		});
 	});
 
@@ -32,11 +32,11 @@ describe('ArcPicker', function () {
 
 		it('should select all arcs up to the clicked arc', async function () {
 			await arcPicker.clickablePath(3).click();
-			expect((await arcPicker.coloredPath(1).getCSSProperty('stroke')).value).to.equal(accentColor);
-			expect((await arcPicker.coloredPath(2).getCSSProperty('stroke')).value).to.equal(accentColor);
-			expect((await arcPicker.coloredPath(3).getCSSProperty('stroke')).value).to.equal(accentColor);
+			expect((await arcPicker.coloredPath(1).getCSSProperty('stroke')).value).toBe(accentColor);
+			expect((await arcPicker.coloredPath(2).getCSSProperty('stroke')).value).toBe(accentColor);
+			expect((await arcPicker.coloredPath(3).getCSSProperty('stroke')).value).toBe(accentColor);
 			// next one is unselected
-			expect((await arcPicker.coloredPath(4).getCSSProperty('stroke')).value).to.equal(unselectedColor);
+			expect((await arcPicker.coloredPath(4).getCSSProperty('stroke')).value).toBe(unselectedColor);
 		});
 	});
 
@@ -44,14 +44,14 @@ describe('ArcPicker', function () {
 		const arcPicker = Page.components.arcPickerDisabled;
 
 		it('should have the first arc selected by default', async function () {
-			expect((await arcPicker.coloredPath(1).getCSSProperty('stroke')).value).to.equal(selectedColor);
+			expect((await arcPicker.coloredPath(1).getCSSProperty('stroke')).value).toBe(selectedColor);
 		});
 
 		it('should not select the third arc when it is clicked', async function () {
 			await arcPicker.clickablePath(3).click();
-			expect((await arcPicker.coloredPath(3).getCSSProperty('stroke')).value).to.equal(unselectedColor);
+			expect((await arcPicker.coloredPath(3).getCSSProperty('stroke')).value).toBe(unselectedColor);
 			// first arc should remain selected
-			expect((await arcPicker.coloredPath(1).getCSSProperty('stroke')).value).to.equal(accentColor);
+			expect((await arcPicker.coloredPath(1).getCSSProperty('stroke')).value).toBe(accentColor);
 		});
 	});
 });

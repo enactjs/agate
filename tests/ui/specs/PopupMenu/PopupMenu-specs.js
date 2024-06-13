@@ -10,7 +10,7 @@ describe('PopupMenu', function () {
 	});
 
 	it('should focus the first button on start', async function () {
-		expect(await popupMenuCommon.buttonPopupMenu1.isFocused()).to.be.true();
+		expect(await popupMenuCommon.buttonPopupMenu1.isFocused()).toBe(true);
 	});
 
 	it('should not have the popupMenu on start', async function () {
@@ -30,7 +30,7 @@ describe('PopupMenu', function () {
 				await expectOpen(popupMenuCommon);
 
 				await Page.waitForFocused(popupMenu.buttonOK);
-				expect(await popupMenu.buttonOK.isFocused()).to.be.true();
+				expect(await popupMenu.buttonOK.isFocused()).toBe(true);
 			});
 
 			it('should spot cancel button on 5-way right in popup container', async function () {
@@ -43,7 +43,7 @@ describe('PopupMenu', function () {
 				await Page.spotlightRight();
 
 				await Page.waitForFocused(popupMenu.buttonCancel);
-				expect(await popupMenu.buttonCancel.isFocused()).to.be.true();
+				expect(await popupMenu.buttonCancel.isFocused()).toBe(true);
 			});
 
 			it('should dismiss the popupMenu on escape key', async function () {
@@ -69,7 +69,7 @@ describe('PopupMenu', function () {
 				await Page.waitForClose(popupMenu);
 
 				await expectClosed(popupMenuCommon);
-				expect(await popupMenuCommon.buttonPopupMenu1.isFocused()).to.be.true();
+				expect(await popupMenuCommon.buttonPopupMenu1.isFocused()).toBe(true);
 			});
 
 			it('should spot back the popupMenu button on auto dismiss the popupMenu', async function () {
@@ -82,7 +82,7 @@ describe('PopupMenu', function () {
 				await Page.waitForClose(popupMenu);
 
 				await expectClosed(popupMenuCommon);
-				expect(await popupMenuCommon.buttonPopupMenu1.isFocused()).to.be.true();
+				expect(await popupMenuCommon.buttonPopupMenu1.isFocused()).toBe(true);
 			});
 		});
 
@@ -147,7 +147,7 @@ describe('PopupMenu', function () {
 				await expectOpen(popupMenuCommon);
 
 				await Page.waitForFocused(popupMenu.buttonOK);
-				expect(await popupMenu.buttonOK.isFocused()).to.be.true();
+				expect(await popupMenu.buttonOK.isFocused()).toBe(true);
 			});
 
 			it('should not dismiss the popupMenu on escape key', async function () {
@@ -242,7 +242,7 @@ describe('PopupMenu', function () {
 				await Page.waitForClose(popupMenu);
 
 				await expectClosed(popupMenuCommon);
-				expect(await popupMenuCommon.buttonPopupMenu3.isFocused()).to.be.true();
+				expect(await popupMenuCommon.buttonPopupMenu3.isFocused()).toBe(true);
 			});
 		});
 
@@ -285,7 +285,7 @@ describe('PopupMenu', function () {
 				await expectOpen(popupMenuCommon);
 
 				await Page.waitForFocused(popupMenu.buttonOK);
-				expect(await popupMenu.buttonOK.isFocused()).to.be.true();
+				expect(await popupMenu.buttonOK.isFocused()).toBe(true);
 			});
 
 			it('should spot cancel button on 5-way down and right in popup container', async function () {
@@ -299,7 +299,7 @@ describe('PopupMenu', function () {
 
 				await Page.spotlightRight();
 				await Page.waitForFocused(popupMenu.buttonCancel);
-				expect(await popupMenu.buttonCancel.isFocused()).to.be.true();
+				expect(await popupMenu.buttonCancel.isFocused()).toBe(true);
 			});
 
 			it('should dismiss the popupMenu on escape key', async function () {
@@ -330,7 +330,7 @@ describe('PopupMenu', function () {
 				browser.pause(100); // needed to pass instead of waitTransitionEnd
 
 				await expectClosed(popupMenuCommon);
-				expect(await popupMenuCommon.buttonPopupMenu4.isFocused()).to.be.true();
+				expect(await popupMenuCommon.buttonPopupMenu4.isFocused()).toBe(true);
 			});
 		});
 
@@ -396,7 +396,7 @@ describe('PopupMenu', function () {
 				await expectOpen(popupMenuCommon);
 
 				await Page.waitForFocused(popupMenu.buttonClose);
-				expect(await popupMenu.buttonClose.isFocused()).to.be.true();
+				expect(await popupMenu.buttonClose.isFocused()).toBe(true);
 			});
 
 			it('should dismiss the popupMenu on escape key', async function () {
@@ -437,7 +437,7 @@ describe('PopupMenu', function () {
 				await Page.waitForClose(popupMenu);
 
 				await expectClosed(popupMenuCommon);
-				expect(await popupMenuCommon.buttonPopupMenu5.isFocused()).to.be.true();
+				expect(await popupMenuCommon.buttonPopupMenu5.isFocused()).toBe(true);
 			});
 		});
 
@@ -489,7 +489,7 @@ describe('PopupMenu', function () {
 
 				await Page.waitForFocused(popupMenu.buttonOK);
 				browser.pause(300);
-				expect(await popupMenu.buttonOK.isFocused()).to.be.true();
+				expect(await popupMenu.buttonOK.isFocused()).toBe(true);
 			});
 
 			it('should spot cancel button on 5-way right in popup container', async function () {
@@ -504,7 +504,7 @@ describe('PopupMenu', function () {
 				await Page.spotlightRight();
 
 				await Page.waitForFocused(popupMenu.buttonCancel);
-				expect(await popupMenu.buttonCancel.isFocused()).to.be.true();
+				expect(await popupMenu.buttonCancel.isFocused()).toBe(true);
 			});
 
 			it('should dismiss the popupMenu on escape key', async function () {
@@ -533,7 +533,7 @@ describe('PopupMenu', function () {
 				await Page.waitForClose(popupMenu);
 
 				await expectClosed(popupMenuCommon);
-				expect(await popupMenuCommon.buttonPopupMenu6.isFocused()).to.be.true();
+				expect(await popupMenuCommon.buttonPopupMenu6.isFocused()).toBe(true);
 			});
 		});
 
@@ -592,7 +592,7 @@ describe('PopupMenu', function () {
 			await Page.waitForOpen(popupMenu);
 
 			await expectOpen(popupMenuCommon);
-			expect(await popupMenu.label).to.equal('Click me!');
+			expect(await popupMenu.label).toBe('Click me!');
 		});
 
 		describe('using 5-way', function () {
@@ -624,7 +624,7 @@ describe('PopupMenu', function () {
 				await Page.waitForClose(popupMenu);
 
 				await expectClosed(popupMenuCommon);
-				expect(await popupMenuCommon.buttonPopupMenu7.isFocused()).to.be.true();
+				expect(await popupMenuCommon.buttonPopupMenu7.isFocused()).toBe(true);
 			});
 		});
 
@@ -669,7 +669,7 @@ describe('PopupMenu', function () {
 
 			await Page.delay(1000);
 
-			expect(await popupMenuCommon.buttonPopupMenu8.isFocused()).to.be.true();
+			expect(await popupMenuCommon.buttonPopupMenu8.isFocused()).toBe(true);
 		});
 	});
 });

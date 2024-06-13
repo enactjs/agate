@@ -7,7 +7,7 @@ describe('VirtualGridList', function () {
 	});
 
 	it('should meet initial conditions', async function () {
-		expect(await Page.buttonHideScrollbar.isFocused(), 'focus').to.be.true();
+		expect(await Page.buttonHideScrollbar.isFocused()).toBe(true);
 	});
 
 	describe('LTR locale', function () {
@@ -39,7 +39,7 @@ describe('Focus after calling scrollTo()', function () {
 		await (await Page.item(20)).click();
 		await browser.pause(500);
 		// Verify: list is scrolled to first item.
-		expect(await Page.topLeftVisibleItemId()).to.equal('item0');
+		expect(await Page.topLeftVisibleItemId()).toBe('item0');
 		// Verify: There is no spotlight on any item.
 		await expectNoFocusedItem();
 		// Press 5-way Left.
@@ -61,7 +61,7 @@ describe('Focus after calling scrollTo()', function () {
 		await browser.pause(1000);
 
 		// Verify: list is scrolled to first item.
-		expect(await Page.topLeftVisibleItemId()).to.equal('item0');
+		expect(await Page.topLeftVisibleItemId()).toBe('item0');
 		// Verify: Spotlight on item0.
 		await expectFocusedItem(0);
 	});
