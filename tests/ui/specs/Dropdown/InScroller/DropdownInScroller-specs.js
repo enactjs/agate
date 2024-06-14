@@ -15,7 +15,7 @@ describe('DropdownInScroller', function () {
 		}
 
 		it('should scroll into view when navigating dropdown via 5-way', async function () {
-			expect(await Page.components.dropdown1.childItem.isFocused()).to.be.true();
+			expect(await Page.components.dropdown1.childItem.isFocused()).toBe(true);
 
 			await Page.spotlightDown();
 			await browser.pause(1000);
@@ -24,7 +24,7 @@ describe('DropdownInScroller', function () {
 			expect(getDropdownOffset(
 				await Page.components.dropdown1.self,
 				await $('#scroller')
-			)).to.not.equal(0);
+			)).not.toBe(0);
 
 			await Page.spotlightUp();
 			await browser.pause(1000);
@@ -34,7 +34,7 @@ describe('DropdownInScroller', function () {
 				await Page.components.dropdown1.self,
 				await $('#scroller')
 			);
-			expect(actual).to.equal(expected);
+			expect(actual).toBe(expected);
 		});
 	});
 });

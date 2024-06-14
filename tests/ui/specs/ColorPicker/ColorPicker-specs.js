@@ -8,7 +8,7 @@ describe('ColorPicker', function () {
 
 	describe('focus management', function () {
 		it('should focus the `#colorPickerDefault` when page loads', async function () {
-			expect(await Page.components.colorPickerDefault.button.isFocused()).to.be.true();
+			expect(await Page.components.colorPickerDefault.button.isFocused()).toBe(true);
 		});
 	});
 
@@ -16,7 +16,7 @@ describe('ColorPicker', function () {
 		const colorPickerDefault = Page.components.colorPickerDefault;
 
 		it('should have correct value', async function () {
-			expect(await colorPickerDefault.colorSwatch).to.equal('#FF7FAE');
+			expect(await colorPickerDefault.colorSwatch).toBe('#FF7FAE');
 		});
 	});
 
@@ -24,8 +24,8 @@ describe('ColorPicker', function () {
 		it('should have correct color code after changing selected value', async function () {
 			const colorPickerDefault = Page.components.colorPickerDefault;
 
-			expect(await colorPickerDefault.button.isFocused()).to.be.true();
-			expect(await colorPickerDefault.colorSwatch).to.equal('#FF7FAE');
+			expect(await colorPickerDefault.button.isFocused()).toBe(true);
+			expect(await colorPickerDefault.colorSwatch).toBe('#FF7FAE');
 
 			await Page.spotlightSelect();
 			await browser.pause(1000);
@@ -33,33 +33,33 @@ describe('ColorPicker', function () {
 			await Page.spotlightSelect();
 			await browser.pause(200);
 
-			expect(await colorPickerDefault.colorSwatch).to.equal('#8333E9');
+			expect(await colorPickerDefault.colorSwatch).toBe('#8333E9');
 		});
 
 		it('should not open the `#colorPickerDisabled` when 5-way down and select', async function () {
 			const colorPickerDisabled = Page.components.colorPickerDisabled;
 
-			expect(await Page.components.colorPickerDefault.button.isFocused()).to.be.true();
+			expect(await Page.components.colorPickerDefault.button.isFocused()).toBe(true);
 
 			await Page.spotlightDown();
 			await Page.spotlightSelect();
-			expect(colorPickerDisabled.isOpen).to.not.be.true();
+			expect(colorPickerDisabled.isOpen).not.toBe(true);
 		});
 
 		it('should focus the `#colorPickerDirectionUp` when 5-way down, then down', async function () {
 			const colorPickerDirectionUp = Page.components.colorPickerDirectionUp;
 
-			expect(await Page.components.colorPickerDefault.button.isFocused()).to.be.true();
+			expect(await Page.components.colorPickerDefault.button.isFocused()).toBe(true);
 
 			await Page.spotlightDown();
 			await Page.spotlightDown();
-			expect(await colorPickerDirectionUp.button.isFocused()).to.be.true();
+			expect(await colorPickerDirectionUp.button.isFocused()).toBe(true);
 		});
 
 		it('should focus the first color item in `#colorPickerOpen` option list when 5-way right', async function () {
 			const colorPickerOpen = Page.components.colorPickerOpen;
 
-			expect(await Page.components.colorPickerDefault.button.isFocused()).to.be.true();
+			expect(await Page.components.colorPickerDefault.button.isFocused()).toBe(true);
 
 			await Page.spotlightDown();
 			await Page.spotlightDown();
@@ -67,7 +67,7 @@ describe('ColorPicker', function () {
 			await Page.spotlightSelect();
 			await Page.spotlightRight();
 
-			expect(await colorPickerOpen.item(1).isFocused()).to.be.true();
+			expect(await colorPickerOpen.item(1).isFocused()).toBe(true);
 		});
 	});
 
@@ -86,7 +86,7 @@ describe('ColorPicker', function () {
 
 			// Verify the selected color
 			const newColor = await colorPicker.colorSwatch;
-			expect(oldColor !== newColor).to.be.true();
+			expect(oldColor !== newColor).toBe(true);
 		});
 
 		it('should dismiss colorPicker when clicking outside', async function () {
@@ -104,7 +104,7 @@ describe('ColorPicker', function () {
 			await browser.pause(1000);
 
 			// Verify that the floating list no longer exists (ColorPicker is closed)
-			expect(colorPicker.isOpen).to.not.be.true();
+			expect(colorPicker.isOpen).not.toBe(true);
 		});
 	});
 });
