@@ -87,9 +87,10 @@ const ScrollButtonBase = kind({
 	render: ({forwardRef, ...rest}) => {
 		delete rest.active;
 
+		// eslint-disable-next-line react-hooks/rules-of-hooks
 		const clientSiblingRef = useRef();
 
-		let calculatedForwardRef= () => {
+		let calculatedForwardRef = () => {
 			// Safely handle old ref functions and new ref objects
 			switch (typeof forwardRef) {
 				case 'object':
@@ -99,7 +100,7 @@ const ScrollButtonBase = kind({
 					forwardRef(clientSiblingRef.current);
 					break;
 			}
-		}
+		};
 
 		return (
 			<ButtonWithRef
