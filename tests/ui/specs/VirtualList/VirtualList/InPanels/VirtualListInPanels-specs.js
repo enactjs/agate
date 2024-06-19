@@ -23,7 +23,7 @@ describe('VirtualList in Panels', function () {
 		await Page.spotlightSelect();
 		await browser.pause(1000);
 		// Verify: Spotlight is on Go Back.
-		expect(await Page.textContent()).to.equal('Go Back');
+		expect(await Page.textContent()).toBe('Go Back');
 		// 5-way Select Go Back.
 		await Page.spotlightSelect();
 		await browser.pause(1000);

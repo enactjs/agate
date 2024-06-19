@@ -1,4 +1,4 @@
-import {addons, types} from '@storybook/addons';
+import {addons, types} from '@storybook/manager-api';
 import React from 'react'; // eslint-disable-line
 
 import {ACCENT_ADDON_ID, ACCENT_PARAM_KEY, DEFAULTSKINS_ADDON_ID, DEFAULTSKINS_PARAM_KEY, HIGHLIGHT_ADDON_ID, HIGHLIGHT_PARAM_KEY} from './constants';

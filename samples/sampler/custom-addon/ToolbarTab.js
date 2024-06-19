@@ -1,4 +1,4 @@
-import {Icons, IconButton} from '@storybook/components';
+import {IconButton} from '@storybook/components';
 import PropTypes from 'prop-types';
 import React from 'react'; // eslint-disable-line
 
@@ -10,7 +10,7 @@ const ToolbarTab = ({isActive, toggleState, toolbarParamKey}) => {
 			onClick={toggleState ? toggleState : null}
 			style={{display:'flex', flexDirection:'column'}}
 		>
-			<Icons /> {toolbarParamKey}
+			{toolbarParamKey}
 		</IconButton>
 	);
 };

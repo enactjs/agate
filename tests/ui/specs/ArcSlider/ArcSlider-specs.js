@@ -15,20 +15,20 @@ describe('ArcSlider', function () {
 			await arcSlider.self.click({x: 5, y: -10});
 
 			const {cx: cx1, cy: cy1} = await arcSlider.knobPosition();
-			expect(cx1).to.be.above(originalCx);
-			expect(cy1).to.be.below(originalCy);
+			expect(cx1).toBeGreaterThan(originalCx);
+			expect(cy1).toBeLessThan(originalCy);
 
 			await arcSlider.self.click({x: -15, y: -20});
 
 			const {cx: cx2, cy: cy2} = await arcSlider.knobPosition();
-			expect(cx2).to.be.below(cx1);
-			expect(cy2).to.be.above(cy1);
+			expect(cx2).toBeLessThan(cx1);
+			expect(cy2).toBeGreaterThan(cy1);
 		});
 
 		it('should have default foregroundColor', async function () {
 			await arcSlider.self.click({x: 5, y: -10});
 			// second slider has the foreground color
-			expect((await arcSlider.coloredPath(2).getCSSProperty('stroke')).value).to.equal('rgb(0,0,0)');
+			expect((await arcSlider.coloredPath(2).getCSSProperty('stroke')).value).toBe('rgb(0,0,0)');
 		});
 	});
 
@@ -42,8 +42,8 @@ describe('ArcSlider', function () {
 			await arcSlider.self.click({x: -5, y: 5});
 
 			const {cx, cy} = await arcSlider.knobPosition();
-			expect(cx).to.equal(originalCx);
-			expect(cy).to.equal(originalCy);
+			expect(cx).toBe(originalCx);
+			expect(cy).toBe(originalCy);
 		});
 
 		it('should change the position of the slider knob on click on the top part of the circle', async function () {
@@ -53,14 +53,14 @@ describe('ArcSlider', function () {
 			await arcSlider.self.click({x: 10, y: -10});
 
 			const {cx, cy} = await arcSlider.knobPosition();
-			expect(cx).to.be.above(originalCx);
-			expect(cy).to.be.below(originalCy);
+			expect(cx).toBeGreaterThan(originalCx);
+			expect(cy).toBeLessThan(originalCy);
 		});
 
 		it('should have custom foregroundColor', async function () {
 			await arcSlider.self.click({x: 5, y: -10});
 			// second slider has the foreground color
-			expect((await arcSlider.coloredPath(2).getCSSProperty('stroke')).value).to.equal('rgb(253,201,2)');
+			expect((await arcSlider.coloredPath(2).getCSSProperty('stroke')).value).toBe('rgb(253,201,2)');
 		});
 	});
 
@@ -73,8 +73,8 @@ describe('ArcSlider', function () {
 			await arcSlider.self.click({x: -5, y: 0});
 
 			const {cx, cy} = await arcSlider.knobPosition();
-			expect(cx).to.equal(originalCx);
-			expect(cy).to.equal(originalCy);
+			expect(cx).toBe(originalCx);
+			expect(cy).toBe(originalCy);
 		});
 	});
 });

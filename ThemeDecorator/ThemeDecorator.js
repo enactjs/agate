@@ -275,7 +275,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	if (float) App = FloatingLayerDecorator({wrappedClassName: bgClassName}, App);
 	if (ri) App = ResolutionDecorator(ri, App);
 	if (i18n) App = I18nDecorator({sync: true}, App);
-	if (spotlight) App = SpotlightRootDecorator({noAutoFocus}, App);
+	if (spotlight) App = SpotlightRootDecorator({noAutoFocus, rootId}, App);
 	if (skin) App = Skinnable({defaultSkin}, App);
 
 	// add webOS-specific key maps
