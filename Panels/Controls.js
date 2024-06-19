@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import ApplicationCloseButton from './ApplicationCloseButton';
 
-import css from './Panels.module.less';
+import * as css from './Panels.module.less';
 
 /**
  * Group of controls shared across Panel instances

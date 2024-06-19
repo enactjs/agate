@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 
 import Button from '../Button';
 
-import css from './Scrollbar.module.less';
+import * as css from './Scrollbar.module.less';
 
 /**
  * A {@link agate/Button.Button|Button} used within

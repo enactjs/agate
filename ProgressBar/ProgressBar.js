@@ -23,7 +23,7 @@ import Skinnable from '../Skinnable';
 
 import {ProgressBarTooltip} from './ProgressBarTooltip';
 
-import componentCss from './ProgressBar.module.less';
+import * as componentCss from './ProgressBar.module.less';
 
 /**
  * Renders an Agate-styled progress bar.

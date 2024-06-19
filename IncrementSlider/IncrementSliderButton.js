@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Button from '../Button';
 import {onlyUpdateForProps} from '../internal/util';
 
-import componentCss from './IncrementSliderButton.module.less';
+import * as componentCss from './IncrementSliderButton.module.less';
 
 /**
  * A {@link agate/Button.Button|Button} customized for

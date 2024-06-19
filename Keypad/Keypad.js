@@ -25,7 +25,7 @@ import $L from '../internal/$L';
 import Button from '../Button';
 import Skinnable from '../Skinnable';
 
-import css from './Keypad.module.less';
+import * as css from './Keypad.module.less';
 
 const SpotlightContainerLayout = SpotlightContainerDecorator(
 	{enterTo: 'default-element'},

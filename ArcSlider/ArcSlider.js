@@ -28,7 +28,7 @@ import {ThemeContext} from '../ThemeDecorator';
 import ArcSliderBehaviorDecorator from './ArcSliderBehaviorDecorator';
 import {valueToAngle} from './utils';
 
-import css from './ArcSlider.module.less';
+import * as css from './ArcSlider.module.less';
 
 /**
  * An arc slider component.

@@ -31,7 +31,7 @@ import Skinnable from '../Skinnable';
 import Times from './Times';
 import {secondsToTime} from './util';
 
-import css from './MediaPlayer.module.less';
+import * as css from './MediaPlayer.module.less';
 
 const Container = SpotlightContainerDecorator({
 	enterTo: 'default-element'

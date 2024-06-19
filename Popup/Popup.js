@@ -24,7 +24,7 @@ import Skinnable from '../Skinnable';
 
 import PopupState from './PopupState';
 
-import componentCss from './Popup.module.less';
+import * as componentCss from './Popup.module.less';
 
 const TransitionContainer = SpotlightContainerDecorator(
 	{enterTo: 'default-element', preserveId: true},

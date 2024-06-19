@@ -3,7 +3,7 @@ import {boolean, select, text} from '@enact/storybook-utils/addons/controls';
 import BodyText from '@enact/ui/BodyText';
 import Heading, {HeadingBase} from '@enact/agate/Heading';
 
-import css from './Heading.module.less';
+import * as css from './Heading.module.less';
 
 Heading.displayName = 'Heading';
 const Config = mergeComponentMetadata('Heading', Heading, HeadingBase);

@@ -20,7 +20,7 @@ import {createContext, Component} from 'react';
 
 import Rearrangeable from '../Rearrangeable';
 
-import css from './DropManager.module.less';
+import * as css from './DropManager.module.less';
 
 // https://stackoverflow.com/questions/9907419/how-to-get-a-key-in-a-javascript-object-by-its-value
 // By: ZER0 - Mar 28 '12 at 12:51

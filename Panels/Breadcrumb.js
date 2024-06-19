@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import $L from '../internal/$L';
 
-import css from './Panels.module.less';
+import * as css from './Panels.module.less';
 
 // Since we expose `onSelect` to handle breadcrumb selection, we need that handler to be set on a
 // component that proxies mouse events for key events so we create a spottable div that will

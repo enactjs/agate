@@ -39,7 +39,7 @@ import Skinnable from '../Skinnable';
 
 import DropdownList, {isSelectedValid} from './DropdownList';
 
-import componentCss from './Dropdown.module.less';
+import * as componentCss from './Dropdown.module.less';
 
 /**
  * A stateless Dropdown Button component.

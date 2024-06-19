@@ -15,7 +15,7 @@ import compose from 'ramda/src/compose';
 import {ButtonBase} from '../Button';
 import Skinnable from '../Skinnable';
 
-import componentCss from './SwatchButton.module.less';
+import * as componentCss from './SwatchButton.module.less';
 
 /**
  * A swatch component which sets-up the component's structure.

@@ -2,7 +2,7 @@ import ImageItem from '@enact/agate/ImageItem';
 
 import Section from '../components/Section';
 
-import appCss from '../App/App.module.less';
+import * as appCss from '../App/App.module.less';
 
 const svgGenerator = (width, height, bgColor, textColor, customText) => (
 	`data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${width} ${height}' width='${width}' height='${height}'%3E` +

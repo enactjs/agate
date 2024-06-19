@@ -26,7 +26,7 @@ import Button from '../Button';
 import {MarqueeDecorator} from '../Marquee';
 import Skinnable from '../Skinnable';
 
-import componentCss from './Heading.module.less';
+import * as componentCss from './Heading.module.less';
 
 /**
  * A labeled Heading component.

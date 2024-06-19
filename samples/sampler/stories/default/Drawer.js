@@ -6,7 +6,7 @@ import BodyText from '@enact/ui/BodyText';
 import Drawer, {DrawerBase} from '@enact/agate/Drawer';
 import Heading from '@enact/agate/Heading';
 
-import css from './Drawer.module.less';
+import * as css from './Drawer.module.less';
 
 Drawer.displayName = 'Drawer';
 const Config = mergeComponentMetadata('Drawer', Drawer, DrawerBase);

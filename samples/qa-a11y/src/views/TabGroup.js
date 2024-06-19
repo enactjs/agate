@@ -2,7 +2,7 @@ import TabGroup from '@enact/agate/TabGroup';
 import {useCallback, useState} from 'react';
 
 import Section from '../components/Section';
-import appCss from '../App/App.module.less';
+import * as appCss from '../App/App.module.less';
 
 const tabs = [
 	{title: 'Home', icon: 'home'},

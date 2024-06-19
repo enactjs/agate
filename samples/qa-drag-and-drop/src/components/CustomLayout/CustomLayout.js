@@ -3,7 +3,7 @@ import kind from '@enact/core/kind';
 import {Layout, Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
 
-import css from './CustomLayout.module.less';
+import * as css from './CustomLayout.module.less';
 
 const allSlotNames = ['bottom', 'center', 'top'];
 

@@ -1,7 +1,7 @@
 import kind from '@enact/core/kind';
 import Marquee from '@enact/ui/Marquee';
 
-import css from './Picker.module.less';
+import * as css from './Picker.module.less';
 
 /**
  * Renders an Agate-styled Picker Item without any behavior.

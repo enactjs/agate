@@ -21,7 +21,7 @@ import compose from 'ramda/src/compose';
 import ArcSlider from '../ArcSlider';
 import Skinnable from '../Skinnable';
 
-import css from './TemperatureControl.module.less';
+import * as css from './TemperatureControl.module.less';
 
 /**
  * Temperature control base component.

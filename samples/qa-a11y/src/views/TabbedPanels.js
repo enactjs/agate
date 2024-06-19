@@ -5,7 +5,7 @@ import CheckboxItem from '@enact/agate/CheckboxItem';
 import {Panel, TabbedPanels} from '@enact/agate/Panels';
 import {useState} from 'react';
 
-import appCss from '../App/App.module.less';
+import * as appCss from '../App/App.module.less';
 
 const tabTitles = [
 	{title: 'A'},

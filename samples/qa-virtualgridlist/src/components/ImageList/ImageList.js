@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 
 import ImageItem from '../ImageItem';
 
-import css from './ImageList.module.less';
+import * as css from './ImageList.module.less';
 
 const ImageList = ({imageItems, minHeight, minWidth, spacing, selectedItems, ...rest}) => {
 	const calculateOfSize = (size) => ri.scale(parseInt(size) || 0);

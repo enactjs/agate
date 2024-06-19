@@ -4,7 +4,7 @@ import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import {useCallback} from 'react';
 
-import css from './SampleVirtualGridList.module.less';
+import * as css from './SampleVirtualGridList.module.less';
 
 const SampleVirtualGridList = ({index, onClick, ...rest}) => {
 	const renderItem = useCallback(({index, ...rest}) => { // eslint-disable-line no-shadow

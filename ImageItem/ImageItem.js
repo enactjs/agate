@@ -23,7 +23,7 @@ import compose from 'ramda/src/compose';
 import ImageBase from '../Image';
 import Skinnable from '../Skinnable';
 
-import componentCss from './ImageItem.module.less';
+import * as componentCss from './ImageItem.module.less';
 
 const MarqueeImageItem = MarqueeDecorator(UiImageItem);
 

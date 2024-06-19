@@ -6,7 +6,7 @@ import {Children} from 'react';
 
 import PickerCore, {PickerItem} from '../Picker';
 
-import css from './DateComponentPicker.module.less';
+import * as css from './DateComponentPicker.module.less';
 
 /**
  * {@link agate/internal/DataComponentPicker.DateComponentPickerBase} allows the selection of one

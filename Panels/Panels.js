@@ -12,7 +12,7 @@ import Controls from './Controls';
 import IdProvider from './IdProvider';
 import Viewport from './Viewport';
 
-import componentCss from './Panels.module.less';
+import * as componentCss from './Panels.module.less';
 
 const getControlsId = (id) => id && `${id}-controls`;
 

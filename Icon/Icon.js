@@ -22,7 +22,7 @@ import Skinnable from '../Skinnable';
 
 import iconList, {iconListSilicon} from './IconList.js';
 
-import componentCss from './Icon.module.less';
+import * as componentCss from './Icon.module.less';
 
 /**
  * Renders an Agate-styled icon without any behavior.

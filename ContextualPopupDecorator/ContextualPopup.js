@@ -6,7 +6,7 @@ import $L from '../internal/$L';
 import Button from '../Button';
 import Skinnable from '../Skinnable';
 
-import componentCss from './ContextualPopup.module.less';
+import * as componentCss from './ContextualPopup.module.less';
 
 /**
  * An SVG arrow for {@link agate/ContextualPopupDecorator.ContextualPopup}.

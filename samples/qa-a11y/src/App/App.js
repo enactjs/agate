@@ -57,7 +57,7 @@ import VirtualGridList from '../views/VirtualGridList';
 import VirtualList from '../views/VirtualList';
 import WindDirectionControl from '../views/WindDirectionControl';
 
-import appCss from './App.module.less';
+import * as appCss from './App.module.less';
 import Home from './Home';
 import View from './View';
 

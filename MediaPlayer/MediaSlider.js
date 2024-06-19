@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Slider from '../Slider';
 
-import css from './MediaSlider.module.less';
+import * as css from './MediaSlider.module.less';
 
 /**
  * A customized slider suitable for use within media player components such as

@@ -4,7 +4,7 @@ import {useContext, useEffect, useLayoutEffect} from 'react';
 
 import {SharedState} from '../Panels/SharedStateDecorator';
 
-import scrollbarCss from './Scrollbar.module.less';
+import * as scrollbarCss from './Scrollbar.module.less';
 
 const navigableFilter = (elem) => {
 	if (

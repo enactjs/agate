@@ -22,7 +22,7 @@ import {createContext, Component} from 'react';
 import Skinnable from '../Skinnable';
 
 import screenTypes from './screenTypes.json';
-import css from './ThemeDecorator.module.less';
+import * as css from './ThemeDecorator.module.less';
 
 const ThemeContext = createContext(null);
 

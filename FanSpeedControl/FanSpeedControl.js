@@ -20,7 +20,7 @@ import ArcPicker from '../ArcPicker';
 import Icon from '../Icon';
 import Skinnable from '../Skinnable';
 
-import css from './FanSpeedControl.module.less';
+import * as css from './FanSpeedControl.module.less';
 
 /**
  * An Agate component for displaying fan speed.

@@ -15,7 +15,7 @@ import RadioItem from '../RadioItem';
 import Skinnable from '../Skinnable';
 import VirtualList from '../VirtualList';
 
-import css from './Dropdown.module.less';
+import * as css from './Dropdown.module.less';
 
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
 

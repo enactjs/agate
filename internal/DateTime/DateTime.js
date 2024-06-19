@@ -1,7 +1,7 @@
 import kind from '@enact/core/kind';
 import PropTypes from 'prop-types';
 
-import componentCss from './DateTime.module.less';
+import * as componentCss from './DateTime.module.less';
 
 /**
  * {@link agate/internal/DateTime.DateTime} provides the surrounding

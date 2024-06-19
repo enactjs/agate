@@ -24,7 +24,7 @@ import LabeledIcon from '../LabeledIcon';
 import Skinnable from '../Skinnable';
 import ToggleButton from '../ToggleButton';
 
-import componentCss from './TabGroup.module.less';
+import * as componentCss from './TabGroup.module.less';
 
 /**
  * A Tab component.

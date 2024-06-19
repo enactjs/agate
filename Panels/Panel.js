@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 import Skinnable from '../Skinnable';
 
-import componentCss from './Panel.module.less';
+import * as componentCss from './Panel.module.less';
 
 let panelId = 0;
 

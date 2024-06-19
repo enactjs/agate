@@ -2,7 +2,7 @@ import ColorPicker from '@enact/agate/ColorPicker';
 
 import Section from '../components/Section';
 
-import appCss from '../App/App.module.less';
+import * as appCss from '../App/App.module.less';
 
 const colors = ['green', 'yellow', 'orange', 'red', 'black', 'gray', 'white', '#cc5500', 'maroon', 'brown'];
 
