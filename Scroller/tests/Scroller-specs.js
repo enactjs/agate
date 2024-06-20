@@ -13,6 +13,7 @@ const keyDownUp = (keyCode) => (elm) => {
 
 const pressEnterKey = keyDownUp(13);
 const pressDownKey = keyDownUp(40);
+const pressPageUpKey = keyDownUp(33);
 
 describe('Scroller', () => {
 	let contents;
@@ -295,10 +296,13 @@ describe('Scroller', () => {
 		});
 
 		test('should change focus on arrow key if `focusableScrollbar`', () => {
+			jest.useFakeTimers();
+			const spy = jest.fn();
 			const {rerender} = render(
 				<Scroller
 					focusableScrollbar
 					horizontalScrollbar="visible"
+					onScrollStart={spy}
 					verticalScrollbar="visible"
 				>
 					{contents}
@@ -310,6 +314,7 @@ describe('Scroller', () => {
 				<Scroller
 					focusableScrollbar
 					horizontalScrollbar="visible"
+					onScrollStart={spy}
 					verticalScrollbar="visible"
 				>
 					{contents}
@@ -322,6 +327,11 @@ describe('Scroller', () => {
 			pressDownKey(buttons[0]);
 
 			expect(document.activeElement).toBe(buttons[1]);
+
+			pressPageUpKey(buttons[1]);
+			pressPageUpKey(buttons[1]);
+
+			expect(document.activeElement).toBe(buttons[0]);
 		});
 	});
 });
