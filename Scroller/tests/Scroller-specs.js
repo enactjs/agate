@@ -328,6 +328,7 @@ describe('Scroller', () => {
 
 			expect(document.activeElement).toBe(buttons[1]);
 
+			// dispatching key event to increase code coverage
 			pressPageUpKey(buttons[1]);
 			pressPageUpKey(buttons[1]);
 
