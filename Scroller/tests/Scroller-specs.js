@@ -295,13 +295,21 @@ describe('Scroller', () => {
 		});
 
 		test('should change focus on arrow key if `focusableScrollbar`', () => {
-			jest.useFakeTimers();
-			const spy = jest.fn();
-			render(
+			const {rerender} = render(
 				<Scroller
 					focusableScrollbar
 					horizontalScrollbar="visible"
-					onScrollStart={spy}
+					verticalScrollbar="visible"
+				>
+					{contents}
+				</Scroller>
+			);
+
+			// we need to rerender in order to wait for the scrollButton refs to be populated.
+			rerender(
+				<Scroller
+					focusableScrollbar
+					horizontalScrollbar="visible"
 					verticalScrollbar="visible"
 				>
 					{contents}
