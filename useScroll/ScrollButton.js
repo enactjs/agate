@@ -2,7 +2,7 @@ import {WithRef} from '@enact/core/internal/WithRef';
 import kind from '@enact/core/kind';
 import ForwardRef from '@enact/ui/ForwardRef';
 import PropTypes from 'prop-types';
-import {useRef} from "react";
+import {useRef} from 'react';
 
 import Button from '../Button';
 
