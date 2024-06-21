@@ -39,7 +39,10 @@ class PickerPage extends Page {
 		const pickerDefault = new PickerInterface('pickerDefault');
 		const pickerDisabled = new PickerInterface('pickerDisabled');
 		const pickerWithDefaultValue = new PickerInterface('pickerWithDefaultValue');
-		this.components = {pickerDefault, pickerDisabled, pickerWithDefaultValue};
+		const pickerHorizontalDefault = new PickerInterface('pickerHorizontalDefault');
+		const pickerHorizontalDisabled = new PickerInterface('pickerHorizontalDisabled');
+		const pickerHorizontalWithDefaultValue = new PickerInterface('pickerHorizontalWithDefaultValue');
+		this.components = {pickerDefault, pickerDisabled, pickerWithDefaultValue, pickerHorizontalDefault, pickerHorizontalDisabled, pickerHorizontalWithDefaultValue};
 	}
 
 	async open (urlExtra) {
