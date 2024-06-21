@@ -158,7 +158,7 @@ describe('Picker', function () {
 					const newValue = await extractValue(picker);
 					expect(newValue).toBe('Banana');
 				});
-			})
+			});
 
 			describe('disabled', function () {
 				const picker = Page.components.pickerHorizontalDisabled;
@@ -282,7 +282,7 @@ describe('Picker', function () {
 				});
 			});
 
-			describe('pointer', function (){
+			describe('pointer', function () {
 				it('should increase the value when incrementing the picker', async function () {
 					await picker.incrementer(picker.self).click();
 					await browser.pause(500);
