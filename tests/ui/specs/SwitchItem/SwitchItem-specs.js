@@ -6,56 +6,56 @@ describe('SwitchItem', function () {
 	});
 
 	it('should have focus on first item at start', async function () {
-		expect(await Page.components.switchItemDefault.self.isFocused()).to.be.true();
+		expect(await Page.components.switchItemDefault.self.isFocused()).toBe(true);
 	});
 
 	describe('default', function () {
 		const switchItem = Page.components.switchItemDefault;
 
 		it('should have correct text', async function () {
-			expect(await switchItem.textContent).to.equal('Switch Item1');
+			expect(await switchItem.textContent).toBe('Switch Item1');
 		});
 
 		it('should not be selected', async function () {
-			expect(await switchItem.isSelected).to.be.false();
+			expect(await switchItem.isSelected).toBe(false);
 		});
 
 		describe('5-way', function () {
 			it('should select the item when selected', async function () {
 				await Page.spotlightSelect();
-				expect(await switchItem.isSelected).to.be.true();
+				expect(await switchItem.isSelected).toBe(true);
 			});
 
 			it('should re-unselect the item when selected twice', async function () {
 				await Page.spotlightSelect();
 				await browser.pause(500);
 				await Page.spotlightSelect();
-				expect(await switchItem.isSelected).to.be.false();
+				expect(await switchItem.isSelected).toBe(false);
 			});
 
 			it('should move focus down on SpotlightDown', async function () {
 				await Page.spotlightDown();
-				expect(await Page.components.switchItemDefaultSelected.self.isFocused()).to.be.true();
+				expect(await Page.components.switchItemDefaultSelected.self.isFocused()).toBe(true);
 			});
 
 			it('should move focus up on SpotlightUp', async function () {
 				await Page.components.switchItemDefaultSelected.focus();
 				await Page.spotlightUp();
-				expect(await switchItem.self.isFocused()).to.be.true();
+				expect(await switchItem.self.isFocused()).toBe(true);
 			});
 		});
 
 		describe('pointer', function () {
 			it('should select the item when clicked', async function () {
 				await switchItem.self.click();
-				expect(await switchItem.isSelected).to.be.true();
+				expect(await switchItem.isSelected).toBe(true);
 			});
 
 			it('should re-unselect the item when clicked twice', async function () {
 				await switchItem.self.click();
 				await browser.pause(500);
 				await switchItem.self.click();
-				expect(await switchItem.isSelected).to.be.false();
+				expect(await switchItem.isSelected).toBe(false);
 			});
 		});
 	});
@@ -64,18 +64,18 @@ describe('SwitchItem', function () {
 		const switchItem = Page.components.switchItemDefaultSelected;
 
 		it('should have correct text', async function () {
-			expect(await switchItem.textContent).to.equal('Switch Item selected');
+			expect(await switchItem.textContent).toBe('Switch Item selected');
 		});
 
 		it('should be selected', async function () {
-			expect(await switchItem.isSelected).to.be.true();
+			expect(await switchItem.isSelected).toBe(true);
 		});
 
 		describe('5-way', function () {
 			it('should unselect the item when selected', async function () {
 				await switchItem.focus();
 				await Page.spotlightSelect();
-				expect(await switchItem.isSelected).to.be.false();
+				expect(await switchItem.isSelected).toBe(false);
 			});
 
 			it('should re-select the item when selected twice', async function () {
@@ -83,21 +83,21 @@ describe('SwitchItem', function () {
 				await Page.spotlightSelect();
 				await browser.pause(500);
 				await Page.spotlightSelect();
-				expect(await switchItem.isSelected).to.be.true();
+				expect(await switchItem.isSelected).toBe(true);
 			});
 		});
 
 		describe('pointer', function () {
 			it('should unselect the item when clicked', async function () {
 				await switchItem.self.click();
-				expect(await switchItem.isSelected).to.be.false();
+				expect(await switchItem.isSelected).toBe(false);
 			});
 
 			it('should re-select the item when clicked twice', async function () {
 				await switchItem.self.click();
 				await browser.pause(500);
 				await switchItem.self.click();
-				expect(await switchItem.isSelected).to.be.true();
+				expect(await switchItem.isSelected).toBe(true);
 			});
 		});
 	});
@@ -106,22 +106,22 @@ describe('SwitchItem', function () {
 		const switchItem = Page.components.switchItemInline;
 
 		it('should have correct text', async function () {
-			expect(await switchItem.textContent).to.equal('Switch Item inline');
+			expect(await switchItem.textContent).toBe('Switch Item inline');
 		});
 
 		it('should be selected', async function () {
-			expect(await switchItem.isSelected).to.be.true();
+			expect(await switchItem.isSelected).toBe(true);
 		});
 
 		it('should display item inline', async function () {
-			expect(await switchItem.isInline).to.be.true();
+			expect(await switchItem.isInline).toBe(true);
 		});
 
 		describe('5-way', function () {
 			it('should unselect the item when selected', async function () {
 				await switchItem.focus();
 				await Page.spotlightSelect();
-				expect(await switchItem.isSelected).to.be.false();
+				expect(await switchItem.isSelected).toBe(false);
 			});
 
 			it('should re-select the item when selected twice', async function () {
@@ -129,21 +129,21 @@ describe('SwitchItem', function () {
 				await Page.spotlightSelect();
 				await browser.pause(500);
 				await Page.spotlightSelect();
-				expect(await switchItem.isSelected).to.be.true();
+				expect(await switchItem.isSelected).toBe(true);
 			});
 		});
 
 		describe('pointer', function () {
 			it('should unselect the item when clicked', async function () {
 				await switchItem.self.click();
-				expect(await switchItem.isSelected).to.be.false();
+				expect(await switchItem.isSelected).toBe(false);
 			});
 
 			it('should re-select the item when clicked twice', async function () {
 				await switchItem.self.click();
 				await browser.pause(500);
 				await switchItem.self.click();
-				expect(await switchItem.isSelected).to.be.true();
+				expect(await switchItem.isSelected).toBe(true);
 			});
 		});
 	});
@@ -156,25 +156,25 @@ describe('SwitchItem', function () {
 		const prevSwitchItem = Page.components.switchItemInline;
 
 		it('should have correct text', async function () {
-			expect(await switchItem.textContent).to.equal('Switch Item disabled');
+			expect(await switchItem.textContent).toBe('Switch Item disabled');
 		});
 
 		it('should be selected', async function () {
-			expect(await switchItem.isSelected).to.be.true();
+			expect(await switchItem.isSelected).toBe(true);
 		});
 
 		describe('5-way', function () {
 			it('should be able to focus the item', async function () {
 				await prevSwitchItem.focus();
 				await Page.spotlightDown();
-				expect(await switchItem.self.isFocused()).to.be.true();
+				expect(await switchItem.self.isFocused()).toBe(true);
 			});
 		});
 
 		describe('pointer', function () {
 			it('should not unselect the item when clicked', async function () {
 				await switchItem.self.click();
-				expect(await switchItem.isSelected).to.be.true();
+				expect(await switchItem.isSelected).toBe(true);
 			});
 		});
 	});
@@ -187,35 +187,35 @@ describe('SwitchItem', function () {
 		const prevSwitchItem = Page.components.switchItemDisabled;
 
 		it('should have correct text', async function () {
-			expect(await switchItem.textContent).to.equal('Switch Item inline disabled');
+			expect(await switchItem.textContent).toBe('Switch Item inline disabled');
 		});
 
 		it('should be selected', async function () {
-			expect(await switchItem.isSelected).to.be.true();
+			expect(await switchItem.isSelected).toBe(true);
 		});
 
 		it('should display item inline', async function () {
-			expect(await switchItem.isInline).to.be.true();
+			expect(await switchItem.isInline).toBe(true);
 		});
 
 		describe('5-way', function () {
 			it('should be able to focus the item', async function () {
 				await prevSwitchItem.focus();
 				await Page.spotlightDown();
-				expect(await switchItem.self.isFocused()).to.be.true();
+				expect(await switchItem.self.isFocused()).toBe(true);
 			});
 
 			it('should not unselect the item when selected', async function () {
 				await switchItem.focus();
 				await Page.spotlightSelect();
-				expect(await switchItem.isSelected).to.be.true();
+				expect(await switchItem.isSelected).toBe(true);
 			});
 		});
 
 		describe('pointer', function () {
 			it('should not unselect the item when clicked', async function () {
 				await switchItem.self.click();
-				expect(await switchItem.isSelected).to.be.true();
+				expect(await switchItem.isSelected).toBe(true);
 			});
 		});
 	});

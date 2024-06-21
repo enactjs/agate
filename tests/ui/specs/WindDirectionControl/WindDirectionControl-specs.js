@@ -14,11 +14,11 @@ describe('WindDirectionControl', function () {
 		it('should have the first arc selected by default', async function () {
 			await Page.spotlightSelect();
 
-			expect((await windDirectionControl.coloredPath(1).getCSSProperty('stroke')).value).to.equal(accentColor);
+			expect((await windDirectionControl.coloredPath(1).getCSSProperty('stroke')).value).toBe(accentColor);
 		});
 
 		it('should display `airdown` icon', async function () {
-			expect(await windDirectionControl.iconValue()).to.equal(983221); // decimal converted charCode of Unicode 'airdown' character
+			expect(await windDirectionControl.iconValue()).toBe(983221); // decimal converted charCode of Unicode 'airdown' character
 		});
 	});
 
@@ -26,11 +26,11 @@ describe('WindDirectionControl', function () {
 		const windDirectionControl = Page.components.winDirectionControlAirRight;
 
 		it('should have the second arc selected', async function () {
-			expect((await windDirectionControl.coloredPath(2).getCSSProperty('stroke')).value).to.equal(selectedColor);
+			expect((await windDirectionControl.coloredPath(2).getCSSProperty('stroke')).value).toBe(selectedColor);
 		});
 
 		it('should display `airright` icon', async function () {
-			expect(await windDirectionControl.iconValue()).to.equal(983223); // decimal converted charCode of Unicode 'airright' character
+			expect(await windDirectionControl.iconValue()).toBe(983223); // decimal converted charCode of Unicode 'airright' character
 		});
 	});
 
@@ -38,11 +38,11 @@ describe('WindDirectionControl', function () {
 		const windDirectionControl = Page.components.windDirectionControlAirUp;
 
 		it('should have the third arc selected', async function () {
-			expect((await windDirectionControl.coloredPath(3).getCSSProperty('stroke')).value).to.equal(selectedColor);
+			expect((await windDirectionControl.coloredPath(3).getCSSProperty('stroke')).value).toBe(selectedColor);
 		});
 
 		it('should display `airup` icon', async function () {
-			expect(await windDirectionControl.iconValue()).to.equal(983222); // decimal converted charCode of Unicode 'airup' character
+			expect(await windDirectionControl.iconValue()).toBe(983222); // decimal converted charCode of Unicode 'airup' character
 		});
 	});
 
@@ -50,18 +50,18 @@ describe('WindDirectionControl', function () {
 		const windDirectionControl = Page.components.windDirectionControlDisabled;
 
 		it('should have the first arc selected by default', async function () {
-			expect((await windDirectionControl.coloredPath(1).getCSSProperty('stroke')).value).to.equal(selectedColor);
+			expect((await windDirectionControl.coloredPath(1).getCSSProperty('stroke')).value).toBe(selectedColor);
 		});
 
 		it('should display `airdown` icon', async function () {
-			expect(await windDirectionControl.iconValue()).to.equal(983221); // decimal converted charCode of Unicode 'airdown' character
+			expect(await windDirectionControl.iconValue()).toBe(983221); // decimal converted charCode of Unicode 'airdown' character
 		});
 
 		it('should not select the third arc when clicked', async function () {
 			windDirectionControl.clickablePath(3).click();
-			expect((await windDirectionControl.coloredPath(3).getCSSProperty('stroke')).value).to.equal(unselectedColor);
+			expect((await windDirectionControl.coloredPath(3).getCSSProperty('stroke')).value).toBe(unselectedColor);
 			// first arc should remain selected
-			expect((await windDirectionControl.coloredPath(1).getCSSProperty('stroke')).value).to.equal(accentColor);
+			expect((await windDirectionControl.coloredPath(1).getCSSProperty('stroke')).value).toBe(accentColor);
 		});
 	});
 });

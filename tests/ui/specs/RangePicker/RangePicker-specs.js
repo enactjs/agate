@@ -13,22 +13,22 @@ describe('RangePicker', function () {
 
 			describe('5-way', function () {
 				it('should change the value forward when incrementing the rangePicker', async function () {
-					expect(await rangePicker.incrementer(rangePicker.self).isFocused()).to.be.true();
+					expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
 					await Page.spotlightSelect();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
-					expect(newValue).to.equal(5);
+					expect(newValue).toBe(5);
 				});
 
 				it('should change the value backward when decrementing the rangePicker', async function () {
-					expect(await rangePicker.incrementer(rangePicker.self).isFocused()).to.be.true();
+					expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
 					await Page.spotlightSelect();
 					await Page.spotlightUp();
-					expect(await rangePicker.decrementer(rangePicker.self).isFocused()).to.be.true();
+					expect(await rangePicker.decrementer(rangePicker.self).isFocused()).toBe(true);
 					await Page.spotlightSelect();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
-					expect(newValue).to.equal(0);
+					expect(newValue).toBe(0);
 				});
 			});
 
@@ -37,16 +37,16 @@ describe('RangePicker', function () {
 					await rangePicker.incrementer(rangePicker.self).click();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
-					expect(newValue).to.equal(5);
+					expect(newValue).toBe(5);
 				});
 
 				it('should decrease the value when decrementing the rangePicker', async function () {
 					await rangePicker.incrementer(rangePicker.self).click();
-					expect(await rangePicker.incrementer(rangePicker.self).isFocused()).to.be.true();
+					expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
 					await rangePicker.decrementer(rangePicker.self).click();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
-					expect(newValue).to.equal(0);
+					expect(newValue).toBe(0);
 				});
 			});
 		});
@@ -61,7 +61,7 @@ describe('RangePicker', function () {
 					await rangePicker.focus();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
-					expect(newValue).to.equal(oldValue);
+					expect(newValue).toBe(oldValue);
 				});
 			});
 
@@ -71,7 +71,7 @@ describe('RangePicker', function () {
 					await rangePicker.incrementer(rangePicker.self).click();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
-					expect(newValue).to.equal(oldValue);
+					expect(newValue).toBe(oldValue);
 				});
 
 				it('should not decrease the value when clicking the decrementer', async function () {
@@ -79,7 +79,7 @@ describe('RangePicker', function () {
 					await rangePicker.decrementer(rangePicker.self).click();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
-					expect(newValue).to.equal(oldValue);
+					expect(newValue).toBe(oldValue);
 				});
 			});
 		});
@@ -89,14 +89,14 @@ describe('RangePicker', function () {
 
 			it('should have the default value selected', async function () {
 				const newValue = await extractValue(rangePicker);
-				expect(newValue).to.equal(0);
+				expect(newValue).toBe(0);
 			});
 
 			it('should decrement to negative number', async function () {
 				await rangePicker.decrementer(rangePicker.self).click();
 				await browser.pause(500);
 				const newValue = await extractValue(rangePicker);
-				expect(newValue).to.equal(-1);
+				expect(newValue).toBe(-1);
 			});
 		});
 	});

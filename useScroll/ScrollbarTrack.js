@@ -12,7 +12,7 @@ const nop = () => {};
  * @ui
  * @private
  */
-const ScrollbarTrack = forwardRef(({cbAlertScrollbarTrack, ...rest}, ref) => {
+const ScrollbarTrack = forwardRef(({cbAlertScrollbarTrack = nop, ...rest}, ref) => {
 	useEffect (() => {
 		cbAlertScrollbarTrack();
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -28,10 +28,6 @@ ScrollbarTrack.propTypes = /** @lends agate/useScroll.ScrollbarTrack.prototype *
 	 * @private
 	 */
 	cbAlertScrollbarTrack: PropTypes.func
-};
-
-ScrollbarTrack.defaultProps = {
-	cbAlertScrollbarTrack: nop
 };
 
 const MemoizedScrollbarTrack = memo(ScrollbarTrack);

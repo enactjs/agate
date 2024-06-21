@@ -10,19 +10,19 @@ describe('Keypad', function () {
 		const keypad = Page.components.keypadDefault;
 
 		it('should have focus on first button at start', async function () {
-			expect(await (await keypad.button(1)).isFocused()).to.be.true();
+			expect(await (await keypad.button(1)).isFocused()).toBe(true);
 		});
 
 		it('can navigate down/left/right/up between keys', async function () {
-			expect(await (await keypad.button(1)).isFocused()).to.be.true();
+			expect(await (await keypad.button(1)).isFocused()).toBe(true);
 			await Page.spotlightDown();
-			expect(await (await keypad.button(4)).isFocused()).to.be.true();
+			expect(await (await keypad.button(4)).isFocused()).toBe(true);
 			await Page.spotlightRight();
-			expect(await (await keypad.button(5)).isFocused()).to.be.true();
+			expect(await (await keypad.button(5)).isFocused()).toBe(true);
 			await Page.spotlightUp();
-			expect(await (await keypad.button(2)).isFocused()).to.be.true();
+			expect(await (await keypad.button(2)).isFocused()).toBe(true);
 			await Page.spotlightLeft();
-			expect(await (await keypad.button(1)).isFocused()).to.be.true();
+			expect(await (await keypad.button(1)).isFocused()).toBe(true);
 		});
 	});
 
@@ -31,15 +31,15 @@ describe('Keypad', function () {
 
 		it('buttons are focusable when navigating down/left/right/up', async function () {
 			await keypad.focus();
-			expect(await (await keypad.button(1)).isFocused()).to.be.true();
+			expect(await (await keypad.button(1)).isFocused()).toBe(true);
 			await Page.spotlightDown();
-			expect(await (await keypad.button(4)).isFocused()).to.be.true();
+			expect(await (await keypad.button(4)).isFocused()).toBe(true);
 			await Page.spotlightRight();
-			expect(await (await keypad.button(5)).isFocused()).to.be.true();
+			expect(await (await keypad.button(5)).isFocused()).toBe(true);
 			await Page.spotlightUp();
-			expect(await (await keypad.button(2)).isFocused()).to.be.true();
+			expect(await (await keypad.button(2)).isFocused()).toBe(true);
 			await Page.spotlightLeft();
-			expect(await (await keypad.button(1)).isFocused()).to.be.true();
+			expect(await (await keypad.button(1)).isFocused()).toBe(true);
 		});
 	});
 
@@ -48,15 +48,15 @@ describe('Keypad', function () {
 
 		it('buttons are not focusable when navigating down/left/right/up', async function () {
 			await keypad.focus();
-			expect(await (await keypad.button(1)).isFocused()).to.not.be.true();
+			expect(await (await keypad.button(1)).isFocused()).not.toBe(true);
 			await Page.spotlightDown();
-			expect(await (await keypad.button(4)).isFocused()).to.not.be.true();
+			expect(await (await keypad.button(4)).isFocused()).not.toBe(true);
 			await Page.spotlightRight();
-			expect(await (await keypad.button(5)).isFocused()).to.not.be.true();
+			expect(await (await keypad.button(5)).isFocused()).not.toBe(true);
 			await Page.spotlightUp();
-			expect(await (await keypad.button(2)).isFocused()).to.not.be.true();
+			expect(await (await keypad.button(2)).isFocused()).not.toBe(true);
 			await Page.spotlightLeft();
-			expect(await (await keypad.button(1)).isFocused()).to.not.be.true();
+			expect(await (await keypad.button(1)).isFocused()).not.toBe(true);
 		});
 	});
 });
