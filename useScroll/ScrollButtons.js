@@ -4,7 +4,6 @@ import {is} from '@enact/core/keymap';
 import Spotlight, {getDirection} from '@enact/spotlight';
 import utilEvent from '@enact/ui/useScroll/utilEvent';
 import {useRef, useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
 
 const
 	nop = () => {},
@@ -135,7 +134,7 @@ const useScrollButtons = (props) => {
 				if (focusableScrollButtons && !Spotlight.getPointerMode()) {
 					consumeEvent(ev);
 					Spotlight.setPointerMode(false);
-					Spotlight.focus(ReactDOM.findDOMNode(oppositeButton.ref)); // eslint-disable-line react/no-find-dom-node
+					Spotlight.focus(oppositeButton.ref);
 				} else if (!oppositeButton.disabled) {
 					consumeEvent(ev);
 					oppositeButton.click(ev);
