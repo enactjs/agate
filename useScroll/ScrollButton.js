@@ -1,11 +1,14 @@
+import {WithRef} from '@enact/core/internal/WithRef';
 import kind from '@enact/core/kind';
 import ForwardRef from '@enact/ui/ForwardRef';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
+import {useRef} from 'react';
 
 import Button from '../Button';
 
 import css from './Scrollbar.module.less';
+
+const ButtonWithRef = WithRef(Button);
 
 /**
  * A {@link agate/Button.Button|Button} used within
@@ -70,27 +73,11 @@ const ScrollButtonBase = kind({
 		])
 	},
 
+	functional: true,
+
 	styles: {
 		css,
 		className: 'scrollButton'
-	},
-
-	handlers: {
-		forwardRef: (node, {forwardRef}) => {
-			// Allowing findDOMNode in the absence of a means to retrieve a node ref through Button
-			// eslint-disable-next-line react/no-find-dom-node
-			const current = ReactDOM.findDOMNode(node);
-
-			// Safely handle old ref functions and new ref objects
-			switch (typeof forwardRef) {
-				case 'object':
-					forwardRef.current = current;
-					break;
-				case 'function':
-					forwardRef(current);
-					break;
-			}
-		}
 	},
 
 	computed: {
@@ -100,11 +87,29 @@ const ScrollButtonBase = kind({
 	render: ({forwardRef, ...rest}) => {
 		delete rest.active;
 
+		// eslint-disable-next-line react-hooks/rules-of-hooks
+		const clientSiblingRef = useRef();
+
+		let calculatedForwardRef = () => {
+			// Safely handle old ref functions and new ref objects
+			switch (typeof forwardRef) {
+				case 'object':
+					forwardRef.current = clientSiblingRef.current;
+					break;
+				case 'function':
+					forwardRef(clientSiblingRef.current);
+					break;
+			}
+		};
+
 		return (
-			<Button
+			<ButtonWithRef
 				{...rest}
 				backgroundOpacity="transparent"
-				ref={forwardRef}
+				css={css}
+				outermostRef={clientSiblingRef}
+				ref={calculatedForwardRef}
+				referrerName="Button"
 				size="small"
 			/>
 		);
