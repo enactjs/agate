@@ -39,7 +39,22 @@ class RangePickerPage extends Page {
 		const rangePickerDefault = new RangePickerInterface('rangePickerDefault');
 		const rangePickerDisabled = new RangePickerInterface('rangePickerDisabled');
 		const rangePickerWithNegativeValues = new RangePickerInterface('rangePickerWithNegativeValues');
-		this.components = {rangePickerDefault, rangePickerDisabled, rangePickerWithNegativeValues};
+		const rangePickerWrap = new RangePickerInterface('rangePickerWrap');
+		const rangePickerHorizontalDefault = new RangePickerInterface('rangePickerHorizontalDefault');
+		const rangePickerHorizontalDisabled = new RangePickerInterface('rangePickerHorizontalDisabled');
+		const rangePickerHorizontalWithNegativeValues = new RangePickerInterface('rangePickerHorizontalWithNegativeValues');
+		const rangePickerHorizontalWrap = new RangePickerInterface('rangePickerHorizontalWrap');
+
+		this.components = {
+			rangePickerDefault,
+			rangePickerDisabled,
+			rangePickerWithNegativeValues,
+			rangePickerWrap,
+			rangePickerHorizontalDefault,
+			rangePickerHorizontalDisabled,
+			rangePickerHorizontalWithNegativeValues,
+			rangePickerHorizontalWrap
+		};
 	}
 
 	async open (urlExtra) {
