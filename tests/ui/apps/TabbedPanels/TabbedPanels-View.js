@@ -1,11 +1,9 @@
-import {useState} from 'react';
-import spotlight from '@enact/spotlight';
-
 import Button from '../../../../Button';
 import Item from '../../../../Item';
 import {Panel, TabbedPanels} from '../../../../Panels';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import $L from "../../../../../enact/packages/i18n/$L";
+import spotlight from '@enact/spotlight';
+import {useState} from 'react';
 
 // NOTE: Forcing pointer mode off so we can be sure that regardless of webOS pointer mode the app
 // runs the same way
@@ -27,7 +25,7 @@ const App = (props) => {
 				id="tabbedPanels"
 				index={panelIndex}
 				noCloseButton
-				onSelect={onSelect} // eslint-disable-line react/jsx-no-bind
+				onSelect={onSelect} // eslint-disable-line react/jsx-no-bindnpm
 				orientation="vertical"
 				tabs={[
 					{title: 'Button', icon: 'netbook'},
@@ -37,7 +35,6 @@ const App = (props) => {
 			>
 				<beforeTabs>
 					<Button
-						aria-label={$L('Previous Tab')}
 						className="previousButton"
 						icon="arrowlargeleft"
 						onClick={onBeforeTabs} // eslint-disable-line react/jsx-no-bind
@@ -47,7 +44,6 @@ const App = (props) => {
 				</beforeTabs>
 				<afterTabs>
 					<Button
-						aria-label={$L('Next Tab')}
 						className="nextButton"
 						icon="arrowlargeright"
 						onClick={onAfterTabs} // eslint-disable-line react/jsx-no-bind

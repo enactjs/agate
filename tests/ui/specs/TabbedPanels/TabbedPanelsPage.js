@@ -1,5 +1,5 @@
 'use strict'
-const {hasClass, Page, element, getText} = require('@enact/ui-test-utils/utils');
+const {Page, element} = require('@enact/ui-test-utils/utils');
 
 class TabbedPanelsInterface {
 	constructor (id) {
@@ -12,10 +12,18 @@ class TabbedPanelsInterface {
 	}
 
 	async focusTab (index) {
-		return browser.execute((el) => el.focus(), await this.item(index));
+		return browser.execute((el) => el.focus(), await this.tab(index));
 	}
 
-	item (index) {
+	async focusPrevButton () {
+		return browser.execute((el) => el.focus(), await this.previousButton());
+	}
+
+	async focusNextButton () {
+		return browser.execute((el) => el.focus(), await this.nextButton());
+	}
+
+	tab (index) {
 		return element(`.TabGroup_TabGroup_tab[data-index="${index}"]`, this.self);
 	}
 
@@ -23,15 +31,12 @@ class TabbedPanelsInterface {
 		return element(`.TabGroup_TabGroup_selected`, this.self);
 	}
 
-	textContent () {
-		return getText(element('.enact_ui_Marquee_Marquee_text', this.self));
+	previousButton () {
+		return $(this.selector + ' .previousButton');
 	}
 
-	isTabSelected (index) {
-		return hasClass(`.TabGroup_TabGroup_selected[data-index="${index}"]`, this.self);
-	}
-	async isSelectedTab (number) {
-		return await hasClass('selected', $$('.TabGroup_TabGroup_tab')[number]);
+	nextButton () {
+		return $(this.selector + ' .nextButton');
 	}
 }
 
