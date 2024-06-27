@@ -13,6 +13,7 @@ const keyDownUp = (keyCode) => (elm) => {
 
 const pressEnterKey = keyDownUp(13);
 const pressDownKey = keyDownUp(40);
+const pressPageUpKey = keyDownUp(33);
 
 describe('Scroller', () => {
 	let contents;
@@ -297,7 +298,19 @@ describe('Scroller', () => {
 		test('should change focus on arrow key if `focusableScrollbar`', () => {
 			jest.useFakeTimers();
 			const spy = jest.fn();
-			render(
+			const {rerender} = render(
+				<Scroller
+					focusableScrollbar
+					horizontalScrollbar="visible"
+					onScrollStart={spy}
+					verticalScrollbar="visible"
+				>
+					{contents}
+				</Scroller>
+			);
+
+			// we need to rerender in order to wait for the scrollButton refs to be populated.
+			rerender(
 				<Scroller
 					focusableScrollbar
 					horizontalScrollbar="visible"
@@ -314,6 +327,12 @@ describe('Scroller', () => {
 			pressDownKey(buttons[0]);
 
 			expect(document.activeElement).toBe(buttons[1]);
+
+			// dispatching key event to increase code coverage
+			pressPageUpKey(buttons[1]);
+			pressPageUpKey(buttons[1]);
+
+			expect(document.activeElement).toBe(buttons[0]);
 		});
 	});
 });

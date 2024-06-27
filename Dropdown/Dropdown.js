@@ -54,7 +54,7 @@ const DropdownButtonBase = kind({
 
 	propTypes: /** @lends agate/Dropdown.DropdownButtonBase.prototype */ {
 		/**
-		 * Forwards a reference to the this component.
+		 * Forwards a reference to this component.
 		 *
 		 * @type {Object|Function}
 		 * @private

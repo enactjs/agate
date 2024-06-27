@@ -2,6 +2,13 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Changed
+
+- `agate/ContextualPopupDecorator` and `agate/Dropdown` to have sibling DOM node as alternative to findDOMNode API which will be removed in React 19
+
+
 ## [2.0.10] - 2024-03-18
 
 No significant changes.
