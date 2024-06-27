@@ -14,13 +14,13 @@ describe('TemperatureControl', function () {
 
 			await temperatureControl.self.click({x: 0, y: -10});
 			const {cx: cx1, cy: cy1} = await temperatureControl.knobPosition();
-			expect(cx1 !== originalCx).to.be.true();
-			expect(cy1 !== originalCy).to.be.true();
+			expect(cx1 !== originalCx).toBe(true);
+			expect(cy1 !== originalCy).toBe(true);
 
 			await temperatureControl.self.click({x: -15, y: -20});
 			const {cx: cx2, cy: cy2} = await temperatureControl.knobPosition();
-			expect(cx2 !== cx1).to.be.true();
-			expect(cy2 !== cy1).to.be.true();
+			expect(cx2 !== cx1).toBe(true);
+			expect(cy2 !== cy1).toBe(true);
 		});
 
 		it('should change value of the temperature on  different click position', async function () {
@@ -28,25 +28,25 @@ describe('TemperatureControl', function () {
 
 			await temperatureControl.self.click({x: 0, y: -10});
 			const value1 = await temperatureControl.valueText;
-			expect(value1 !== originalValue).to.be.true();
+			expect(value1 !== originalValue).toBe(true);
 
 			await temperatureControl.self.click({x: -15, y: -20});
 			const value2 = await temperatureControl.valueText;
-			expect(value2 !== value1).to.be.true();
+			expect(value2 !== value1).toBe(true);
 		});
 
 		it('should have blue foregroundColor if value < half of the scale', async function () {
 			// click on the left side of the component
 			await temperatureControl.self.click({x: -5, y: -10});
 			// second slider has the foreground color
-			expect((await temperatureControl.coloredPath(2).getCSSProperty('stroke')).value).to.equal('rgb(0,122,255)');
+			expect((await temperatureControl.coloredPath(2).getCSSProperty('stroke')).value).toBe('rgb(0,122,255)');
 		});
 
 		it('should have red foregroundColor if value >= half of the scale', async function () {
 			// click on the right side of the component
 			await temperatureControl.self.click({x: 5, y: -10});
 			// second slider has the foreground color
-			expect((await temperatureControl.coloredPath(2).getCSSProperty('stroke')).value).to.equal('rgb(242,73,73)');
+			expect((await temperatureControl.coloredPath(2).getCSSProperty('stroke')).value).toBe('rgb(242,73,73)');
 		});
 
 	});
@@ -62,8 +62,8 @@ describe('TemperatureControl', function () {
 
 			const {cx, cy} = await temperatureControl.knobPosition();
 
-			expect(cx === originalCx).to.be.true();
-			expect(cy === originalCy).to.be.true();
+			expect(cx === originalCx).toBe(true);
+			expect(cy === originalCy).toBe(true);
 		});
 
 		it('should change the position of the slider knob on click on the top part of the circle', async function () {
@@ -73,8 +73,8 @@ describe('TemperatureControl', function () {
 
 			const {cx, cy} = await temperatureControl.knobPosition();
 
-			expect(cx !== originalCx).to.be.true();
-			expect(cy !== originalCy).to.be.true();
+			expect(cx !== originalCx).toBe(true);
+			expect(cy !== originalCy).toBe(true);
 		});
 
 		it('should not change value of the temperature on click on the bottom-left part of the circle', async function () {
@@ -82,7 +82,7 @@ describe('TemperatureControl', function () {
 
 			await temperatureControl.self.click({x: -5, y: 5});
 			const newValue = await temperatureControl.valueText;
-			expect(newValue === originalValue).to.be.true();
+			expect(newValue === originalValue).toBe(true);
 		});
 
 		it('should change value of the temperature on click on the top part of the circle', async function () {
@@ -90,7 +90,7 @@ describe('TemperatureControl', function () {
 
 			await temperatureControl.self.click({x: 10, y: -10});
 			const newValue = await temperatureControl.valueText;
-			expect(newValue !== originalValue).to.be.true();
+			expect(newValue !== originalValue).toBe(true);
 		});
 
 	});
@@ -104,8 +104,8 @@ describe('TemperatureControl', function () {
 			await temperatureControl.self.click({x: -5, y: 0});
 
 			const {cx, cy} = await temperatureControl.knobPosition();
-			expect(cx === originalCx).to.be.true();
-			expect(cy === originalCy).to.be.true();
+			expect(cx === originalCx).toBe(true);
+			expect(cy === originalCy).toBe(true);
 		});
 	});
 
@@ -117,12 +117,12 @@ describe('TemperatureControl', function () {
 		});
 
 		it('should have direction rtl', async function () {
-			expect((await temperatureControl.self.getCSSProperty('direction')).value === 'rtl').to.be.true();
+			expect((await temperatureControl.self.getCSSProperty('direction')).value === 'rtl').toBe(true);
 		});
 
 		it('value should have arabic characters', async function () {
 			// we test the character for temperature degrees
-			expect((await temperatureControl.valueText).includes('°م')).to.be.true();
+			expect((await temperatureControl.valueText).includes('°م')).toBe(true);
 		});
 	});
 });
