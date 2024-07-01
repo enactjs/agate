@@ -25,7 +25,7 @@ const App = (props) => {
 				id="tabbedPanels"
 				index={panelIndex}
 				noCloseButton
-				onSelect={onSelect} // eslint-disable-line react/jsx-no-bindnpm
+				onSelect={onSelect}
 				orientation="vertical"
 				tabs={[
 					{title: 'Button', icon: 'netbook'},
@@ -37,7 +37,7 @@ const App = (props) => {
 					<Button
 						className="previousButton"
 						icon="arrowlargeleft"
-						onClick={onBeforeTabs} // eslint-disable-line react/jsx-no-bind
+						onClick={onBeforeTabs}
 						size="small"
 						type="grid"
 					/>
@@ -46,7 +46,7 @@ const App = (props) => {
 					<Button
 						className="nextButton"
 						icon="arrowlargeright"
-						onClick={onAfterTabs} // eslint-disable-line react/jsx-no-bind
+						onClick={onAfterTabs}
 						size="small"
 						type="grid"
 					/>
@@ -62,7 +62,7 @@ const App = (props) => {
 				</Panel>
 			</TabbedPanels>
 		</div>
-	)
-}
+	);
+};
 
 export default ThemeDecorator(App);

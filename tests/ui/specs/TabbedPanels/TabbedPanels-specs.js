@@ -42,7 +42,7 @@ describe('TabbedPanels', function () {
 			const actual = await browser.execute(getFocusedTextContent);
 
 			expect(actual).toBe(expected);
-		})
+		});
 
 		it('should focus and select the third tab', async function () {
 			await tabbedPanels.focusTab(2);

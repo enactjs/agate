@@ -38,6 +38,7 @@ import Slider from './components/Slider';
 import SliderButton from './components/SliderButton';
 import Spinner from './components/Spinner';
 import SwitchItem from './components/SwitchItem';
+import TabbedPanels from './components/TabbedPanels';
 import TabGroup from './components/TabGroup';
 import TemperatureControl from './components/TemperatureControl';
 import TimePicker from './components/TimePicker';
@@ -86,6 +87,7 @@ const agateComponents = {
 	SliderButton,
 	Spinner,
 	SwitchItem,
+	TabbedPanels,
 	TabGroup,
 	TimePicker,
 	ToggleButton,

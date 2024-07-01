@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 const {Page, element} = require('@enact/ui-test-utils/utils');
 
 class TabbedPanelsInterface {
@@ -49,7 +49,7 @@ class TabbedPanelsPage extends Page {
 		this.components = {tabbedPanels};
 	}
 
-	async open(urlExtra) {
+	async open (urlExtra) {
 		await super.open('TabbedPanels-View', urlExtra);
 	}
 }
