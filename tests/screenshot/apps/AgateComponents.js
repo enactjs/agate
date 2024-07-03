@@ -45,6 +45,7 @@ import TimePicker from './components/TimePicker';
 import ThumbnailItem from './components/ThumbnailItem';
 import ToggleButton from './components/ToggleButton';
 import TooltipDecorator from './components/TooltipDecorator';
+import VirtualGridList from './components/VirtualGridList';
 import VirtualList from './components/VirtualList';
 import WindDirectionControl from './components/WindDirectionControl';
 
@@ -94,6 +95,7 @@ const agateComponents = {
 	TooltipDecorator,
 	TemperatureControl,
 	ThumbnailItem,
+	VirtualGridList,
 	VirtualList,
 	WindDirectionControl
 };
