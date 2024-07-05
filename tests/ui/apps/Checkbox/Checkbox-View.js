@@ -9,7 +9,7 @@ spotlight.setPointerMode(false);
 const app = (props) => <div {...props}>
 	<div style={{padding: '20px'}}>
 		<Checkbox
-			id="normalCheckbox"
+			id="defaultCheckbox"
 		/>
 	</div>
 	<div style={{padding: '20px'}}>

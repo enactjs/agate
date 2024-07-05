@@ -7,7 +7,7 @@ describe('Checkbox', function () {
 	});
 
 	const {
-		normalCheckbox,
+		defaultCheckbox,
 		selectedCheckbox,
 		indeterminateCheckbox,
 		disabledCheckbox
@@ -15,11 +15,11 @@ describe('Checkbox', function () {
 
 	describe('default', function () {
 		it('should focus on load', async function () {
-			expect(await normalCheckbox.self.isFocused()).toBe(true);
+			expect(await defaultCheckbox.self.isFocused()).toBe(true);
 		});
 
 		it('should not be checked', async function () {
-			expect(await normalCheckbox.isChecked).toBe(false);
+			expect(await defaultCheckbox.isChecked).toBe(false);
 		});
 
 		it('should be checked', async function () {
@@ -45,10 +45,10 @@ describe('Checkbox', function () {
 		it('should get checked', async function () {
 			await Page.spotlightSelect();
 
-			expect(await normalCheckbox.isChecked).toBe(true);
+			expect(await defaultCheckbox.isChecked).toBe(true);
 		});
 
-		it('should get checked (indeterminate)', async function () {
+		it('should get checked \'indeterminate\'', async function () {
 			await Page.spotlightDown();
 			await Page.spotlightDown();
 			await Page.spotlightSelect();
@@ -59,7 +59,7 @@ describe('Checkbox', function () {
 		it('should re-uncheck the item when selected twice', async function () {
 			await Page.spotlightSelect();
 			await Page.spotlightSelect();
-			expect(await normalCheckbox.isChecked).toBe(false);
+			expect(await defaultCheckbox.isChecked).toBe(false);
 		});
 
 		it('should not get checked', async function () {
@@ -81,22 +81,22 @@ describe('Checkbox', function () {
 
 	describe('pointer', function () {
 		it('should get checked', async function () {
-			await normalCheckbox.self.click();
+			await defaultCheckbox.self.click();
 
-			expect(await normalCheckbox.isChecked).toBe(true);
+			expect(await defaultCheckbox.isChecked).toBe(true);
 		});
 
-		it('should get checked (indeterminate)', async function () {
+		it('should get checked \'indeterminate\'', async function () {
 			await indeterminateCheckbox.self.click();
 
 			expect(await indeterminateCheckbox.isChecked).toBe(true);
 		});
 
 		it('should re-uncheck the item when selected twice', async function () {
-			await normalCheckbox.self.click();
-			await normalCheckbox.self.click();
+			await defaultCheckbox.self.click();
+			await defaultCheckbox.self.click();
 
-			expect(await normalCheckbox.isChecked).toBe(false);
+			expect(await defaultCheckbox.isChecked).toBe(false);
 		});
 
 		it('should not get checked', async function () {
