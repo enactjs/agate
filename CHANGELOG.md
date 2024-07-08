@@ -8,6 +8,9 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/ContextualPopupDecorator` and `agate/Dropdown` to have sibling DOM node as alternative to findDOMNode API which will be removed in React 19
 
+### Fixed
+
+- `agate/Panels` to animate properly when `cover` prop is `partial` horizontally
 
 ## [2.0.10] - 2024-03-18
 
@@ -26,10 +29,6 @@ No significant changes.
 ### Changed
 
 - `agate/Scroller`, `agate/VirtualList` and `agate/VirtualGridList` default value for `scrollMode` to `native`
-
-### Fixed
-
-- `agate/Panels` partial transition on horizontal
 
 ## [2.0.6] - 2023-06-08
 
