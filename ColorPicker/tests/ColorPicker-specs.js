@@ -18,7 +18,7 @@ describe('ColorPicker', () => {
 			</ColorPicker>
 		);
 
-		const actual = screen.getAllByRole('button')[0].nextElementSibling;
+		const actual = screen.getAllByRole('button')[0].nextElementSibling.nextElementSibling; // there is a dummy sibling by Spottable
 		const expected = 'right';
 
 		expect(actual).toHaveClass(expected);
@@ -31,7 +31,7 @@ describe('ColorPicker', () => {
 			</ColorPicker>
 		);
 
-		const actual = screen.getAllByRole('button')[0].nextElementSibling;
+		const actual = screen.getAllByRole('button')[0].nextElementSibling.nextElementSibling; // there is a dummy sibling by Spottable
 		const expected = 'down';
 
 		expect(actual).toHaveClass(expected);
@@ -44,7 +44,7 @@ describe('ColorPicker', () => {
 			</ColorPicker>
 		);
 
-		const actual = screen.getAllByRole('button')[0].nextElementSibling;
+		const actual = screen.getAllByRole('button')[0].nextElementSibling.nextElementSibling; // there is a dummy sibling by Spottable
 		const expected = 'up';
 
 		expect(actual).toHaveClass(expected);
@@ -168,7 +168,7 @@ describe('ColorPicker', () => {
 		// Extend color picker
 		await user.click(screen.getAllByRole('button')[0]);
 
-		const actual = screen.getAllByRole('button')[0].nextElementSibling;
+		const actual = screen.getAllByRole('button')[0].nextElementSibling.nextElementSibling; // there is a dummy sibling by Spottable
 		const expected = 'shown';
 
 		expect(actual).toHaveClass(expected);

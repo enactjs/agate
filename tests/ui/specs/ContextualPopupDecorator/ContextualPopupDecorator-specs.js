@@ -12,14 +12,14 @@ describe('ContextualPopupDecorator', function () {
 
 	describe('not using open', function () {
 		it('should focus the first button on start', async function () {
-			expect(await button1.self.isFocused()).to.be.true();
+			expect(await button1.self.isFocused()).toBe(true);
 		});
 
 		describe('using 5-way', function () {
 			it('should focus second button on 5-way right', async function () {
 				await button1.focus();
 				await Page.spotlightRight();
-				expect(await button2.self.isFocused()).to.be.true();
+				expect(await button2.self.isFocused()).toBe(true);
 			});
 		});
 	});
@@ -30,7 +30,7 @@ describe('ContextualPopupDecorator', function () {
 				let popupButton = $('#popupButton1');
 
 				await Page.spotlightSelect();
-				expect(await popupButton.isFocused()).to.be.true();
+				expect(await popupButton.isFocused()).toBe(true);
 			});
 
 			it('should have Spotlight on button when ContextualPopup2 opens', async function () {
@@ -38,20 +38,20 @@ describe('ContextualPopupDecorator', function () {
 
 				await button2.focus();
 				await Page.spotlightSelect();
-				expect(await popupButton.isFocused()).to.be.true();
+				expect(await popupButton.isFocused()).toBe(true);
 			});
 		});
 
 		describe('using pointer', function () {
 			it('should open when clicked', async function () {
 				await button1.self.click();
-				expect(await button1.isOpen).to.be.true();
+				expect(await button1.isOpen).toBe(true);
 			});
 
 			it('should close when clicking twice', async function () {
 				await button1.self.click();
 				await button1.self.click();
-				await expect(await button1.isOpen).to.be.false();
+				await expect(await button1.isOpen).toBe(false);
 			});
 
 			it('should close when clicking outside', async function () {
@@ -61,7 +61,7 @@ describe('ContextualPopupDecorator', function () {
 				const wrapper = $('.ThemeDecorator_ThemeDecorator_bg');
 				await wrapper.click({x: 0, y: 0});
 
-				expect(await button1.isOpen).to.be.false();
+				expect(await button1.isOpen).toBe(false);
 			});
 		});
 	});

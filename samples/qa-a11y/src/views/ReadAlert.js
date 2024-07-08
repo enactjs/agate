@@ -13,7 +13,7 @@ const ReadAlertView = () => {
 	const [toggleDisabled, setToggleDisabled] = useState(true);
 
 	useEffect(() => {
-		if (window.PalmServiceBridge) {
+		if (window.WebOSServiceBridge ?? window.PalmServiceBridge) {
 			new LS2Request().send({
 				service: 'luna://com.webos.settingsservice/',
 				method: 'getSystemSettings',
@@ -27,35 +27,35 @@ const ReadAlertView = () => {
 				}
 			});
 		}
-	});
+	}, []);
 
 	const onClick = (clear) => () => readAlert('Enact is a framework designed to be performant, customizable and well structured.', clear);
 
 	const onClick1 = onClick(true);
 	const onClick2 = onClick(false);
 
-	const onToggle = useCallback(() => {
-		if (window.PalmServiceBridge) {
-			setAudioGuidance(guidance => setAudioGuidance(!guidance));
+	const onToggle = useCallback(({selected}) => {
+		if (window.WebOSServiceBridge ?? window.PalmServiceBridge) {
+			setAudioGuidance(selected);
 			new LS2Request().send({
 				service: 'luna://com.webos.settingsservice/',
 				method: 'setSystemSettings',
 				parameters: {
 					category: 'option',
 					settings: {
-						audioGuidance: audioGuidance ? 'on' : 'off'
+						audioGuidance: selected ? 'on' : 'off'
 					}
 				}
 			});
 		}
-	}, [audioGuidance]);
+	}, []);
 
 	return (
 		<>
 			<Section title="AudioGuidance On or Off">
 				<CheckboxItem
 					alt="Toggle"
-					defaultSelected={audioGuidance}
+					selected={audioGuidance}
 					disabled={toggleDisabled}
 					onToggle={onToggle}
 				>

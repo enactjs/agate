@@ -59,7 +59,14 @@
 			top: @agate-panels-controls-top;
 			.position-start-end(auto, @agate-panel-h-padding);
 			.padding-start-end(@agate-panels-controls-padding-start, initial);
-			.remove-margin-on-edge-children();
+
+			> :first-child {
+				margin-inline-start: 0;
+			}
+
+			> :nth-last-child(2) {
+				margin-inline-end: 0;
+			}
 		}
 
 		.viewport {
@@ -92,7 +99,6 @@
 
 			.viewport {
 				&.transitioning {
-					-webkit-clip-path: polygon(@agate-panels-breadcrumb-width 0, 100% 0, 100% 100%, @agate-panels-breadcrumb-width 100%);
 					clip-path: polygon(@agate-panels-breadcrumb-width 0, 100% 0, 100% 100%, @agate-panels-breadcrumb-width 100%);
 				}
 

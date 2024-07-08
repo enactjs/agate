@@ -10,7 +10,7 @@ describe('Drawer', function () {
 	});
 
 	it('should focus the first button on start', async function () {
-		expect(await drawerCommon.buttonDrawer1.isFocused()).to.be.true();
+		expect(await drawerCommon.buttonDrawer1.isFocused()).toBe(true);
 	});
 
 	it('should not have the drawer on start', async function () {
@@ -34,7 +34,7 @@ describe('Drawer', function () {
 			await Page.waitForOpen(drawer);
 
 			await expectOpen(drawerCommon);
-			expect(await drawer.hasLine).to.not.be.true();
+			expect(await drawer.hasLine).not.toBe(true);
 		});
 
 		describe('using 5-way', function () {
@@ -43,7 +43,7 @@ describe('Drawer', function () {
 				await Page.waitForOpen(drawer);
 
 				await expectOpen(drawerCommon);
-				expect(await drawer.isOpen).to.be.true();
+				expect(await drawer.isOpen).toBe(true);
 			});
 
 			it('should close drawer with cancel button on 5-way right in drawer container', async function () {
@@ -102,7 +102,7 @@ describe('Drawer', function () {
 				await browser.pause(400); // needed to pass instead of waitTransitionEnd
 
 				await expectOpen(drawerCommon);
-				expect(await drawer.isOpen).to.be.true();
+				expect(await drawer.isOpen).toBe(true);
 			});
 
 			it('should close drawer with cancel button on 5-way right in drawer container', async function () {
@@ -163,7 +163,7 @@ describe('Drawer', function () {
 				await Page.waitForOpen(drawer);
 
 				await expectOpen(drawerCommon);
-				expect(await drawer.isOpen).to.be.true();
+				expect(await drawer.isOpen).toBe(true);
 			});
 
 			it('should close drawer with cancel button on 5-way right in drawer container', async function () {
@@ -228,7 +228,7 @@ describe('Drawer', function () {
 				await Page.waitForOpen(drawer);
 
 				await expectNoneScrimOpen(drawerCommon);
-				expect(await drawer.isOpen).to.be.true();
+				expect(await drawer.isOpen).toBe(true);
 			});
 
 			it('should close drawer with cancel button on 5-way right in drawer container', async function () {

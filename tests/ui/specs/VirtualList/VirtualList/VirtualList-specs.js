@@ -7,7 +7,7 @@ describe('VirtualList', function () {
 	});
 
 	it('should meet initial conditions', async function () {
-		expect(await Page.buttonHideScrollbar.isFocused()).to.be.true();
+		expect(await Page.buttonHideScrollbar.isFocused()).toBe(true);
 	});
 
 	describe('LTR locale', function () {
@@ -18,7 +18,7 @@ describe('VirtualList', function () {
 		});
 
 		it('should position Scrollbar Track on right side in LTR', async function () {
-			expect((await Page.getListRect()).right < (await Page.getVerticalScrollbarRect()).right).to.be.true();
+			expect((await Page.getListRect()).right < (await Page.getVerticalScrollbarRect()).right).toBe(true);
 		});
 
 		it('should position Scroll thumb on top/bottom when reaching to the edge with 5-way and Page Down', async function () {
@@ -38,7 +38,7 @@ describe('VirtualList', function () {
 			// Verify Spotlight displays on the first item.
 			await expectFocusedItem(0, 'focus Item 0');
 			// Verify Scroll thumb's position appears shortly at the top of the Scrollbar track.
-			expect(await Page.getScrollThumbPosition(), 'Up').to.be.equal('0');
+			expect(await Page.getScrollThumbPosition()).toBe('0');
 			// Press Page Down.
 			await Page.pageDown();
 			// Verify Spotlight hides.
@@ -57,7 +57,7 @@ describe('VirtualList', function () {
 			await waitUntilFocused(29, 'focus last Item');
 			await browser.pause(1000);
 			// Verify Scroll thumb's position appears shortly at the bottom of the Scrollbar track.
-			expect(await Page.getScrollThumbPosition(), 'Down').to.be.equal('1');
+			expect(await Page.getScrollThumbPosition()).toBe('1');
 			// 5-way Spot the first item.
 			await Page.pageUp();
 			await waitUntilFocused(25, 'focus Item 23');
@@ -75,7 +75,7 @@ describe('VirtualList', function () {
 			// Verify Spotlight displays on the first item.
 			await waitUntilFocused(0, 'focus Item 0');
 			// Verify Scroll thumb's position appears shortly at the top of the Scrollbar track.
-			expect(await Page.getScrollThumbPosition(), 'Up').to.be.equal('0');
+			expect(await Page.getScrollThumbPosition()).toBe('0');
 		});
 
 		it('should Items Animate via 5-way Up and Down on Last Item on the page - vertical', async function () {
@@ -97,7 +97,7 @@ describe('VirtualList', function () {
 			await Page.spotlightUp();
 			// Verify The list *does not* Scroll Down.
 			// Check the bottomVisibleItem is still the same as the one before 5-way Up to check the list did not scroll Down
-			expect(Number(bottomId.slice(4)) === ((Number(((await Page.bottomVisibleItemId()).slice(4))))) - 1).to.be.true();
+			expect(Number(bottomId.slice(4)) === ((Number(((await Page.bottomVisibleItemId()).slice(4))))) - 1).toBe(true);
 			// Verify  The Spotted item is placed above the item on the Bottom.
 			await expectFocusedItem(Number((bottomId.slice(4))), 'focus bottomId');
 			// 5-way Up to the first item ('*Item 000*').
@@ -107,7 +107,7 @@ describe('VirtualList', function () {
 			await expectFocusedItem(0, 'focus Item 00');  // to double check it is really top item
 		});
 
-		it('shoud navigate between inside and outside of a list', async function () {
+		it('should navigate between inside and outside of a list', async function () {
 			// 5-way Down to the 10th item.
 			await Page.buttonLeft.moveTo();
 			await Page.spotlightRight();
@@ -116,9 +116,10 @@ describe('VirtualList', function () {
 			await Page.fiveWayToItem(0);
 			// Verify: Spotlight displays on Item 00.
 			await expectFocusedItem(0);
+			await Page.delay(500);
 			// 5-way Up. Verify Spotlight displays on the Top button.
 			await Page.spotlightUp();
-			expect(await Page.buttonTop.isFocused()).to.be.true();
+			expect(await Page.buttonTop.isFocused()).toBe(true);
 		});
 
 		it('should focus last item when entering from outside after scrolling via 5way', async function () {
@@ -146,21 +147,21 @@ describe('VirtualList', function () {
 			await Page.buttonLeft.moveTo();
 			await Page.spotlightRight();
 			await expectFocusedItem(0);
-			expect(await Page.textContent()).to.equal('Item 00');
+			expect(await Page.textContent()).toBe('Item 00');
 			// Verify: The second item shows 'Item 01'.
 			await Page.spotlightDown();
 			await expectFocusedItem(1);
-			expect(await Page.textContent()).to.equal('Item 01');
+			expect(await Page.textContent()).toBe('Item 01');
 			// 5-way Spot and Select 'Child Props' toggle button.
 			await Page.buttonChildProps.click();
 			// Verify: The first item shows 'Item 000 child props'.
 			await (await Page.item(0)).moveTo();
 			await expectFocusedItem(0);
-			expect(await Page.textContent()).to.equal('Item 00 child props');
+			expect(await Page.textContent()).toBe('Item 00 child props');
 			// Verify The second item shows 'Item 001 child props'.
 			await Page.spotlightDown();
 			await expectFocusedItem(1);
-			expect(await Page.textContent()).to.equal('Item 01 child props');
+			expect(await Page.textContent()).toBe('Item 01 child props');
 		});
 
 		it('should change spotlight size when item`s size changing', async function () {
@@ -169,7 +170,7 @@ describe('VirtualList', function () {
 			await (await Page.buttonLeft).moveTo();
 			await Page.spotlightRight();
 			const defaultSpotlightSize = await Page.spotlightSize();
-			expect(defaultSpotlightSize).to.equal(94);
+			expect(defaultSpotlightSize).toBe(94);
 			// Set item size to 150
 			await Page.inputfieldItemSize.moveTo();
 			await Page.spotlightSelect();
@@ -182,14 +183,14 @@ describe('VirtualList', function () {
 			await Page.backKey();
 			// Verify item size
 			const curItemSize = await Page.getItemSize();
-			expect(curItemSize.height).to.equal(150);
-			expect(curItemSize.width).to.equal(defaultItemSize.width);
+			expect(curItemSize.height).toBe(150);
+			expect(curItemSize.width).toBe(defaultItemSize.width);
 			await Page.spotlightDown();
 			await (await Page.item(2)).moveTo();
 			await expectFocusedItem(2);
 			const curSpotlightSize = await Page.spotlightSize();
 			// spotLight size is ItemSize - 2*border-witdth
-			expect(curSpotlightSize).to.equal(144);
+			expect(curSpotlightSize).toBe(144);
 			// Set item size to 50
 			await Page.inputfieldItemSize.moveTo();
 			await Page.spotlightSelect();
@@ -201,24 +202,24 @@ describe('VirtualList', function () {
 			await Page.backKey();
 			// Verify item size
 			const newItemSize = await Page.getItemSize();
-			expect(newItemSize.height).to.equal(50);
-			expect(newItemSize.width).to.equal(defaultItemSize.width);
+			expect(newItemSize.height).toBe(50);
+			expect(newItemSize.width).toBe(defaultItemSize.width);
 			await Page.spotlightDown();
 			await (await Page.item(3)).moveTo();
 			await expectFocusedItem(3);
 			const newSpotlightSize = await Page.spotlightSize();
-			expect(newSpotlightSize).to.equal(44);
+			expect(newSpotlightSize).toBe(44);
 		});
 
 
 		it('should have 96px padding for the top and bottom of the scrollbarTrack', async function () {
 			// Verify: The scrollbar size fit to the size of the list.
-			expect((await Page.getListRect()).height).to.equal((await Page.getVerticalScrollbarRect()).height);
+			expect((await Page.getListRect()).height).toBe((await Page.getVerticalScrollbarRect()).height);
 			// There is a button with size=small at the top and bottom
 			// Check top
-			expect((await Page.getVerticalScrollbarTrackRect()).top - (await Page.getVerticalScrollbarRect()).top).to.equal(48);
+			expect((await Page.getVerticalScrollbarTrackRect()).top - (await Page.getVerticalScrollbarRect()).top).toBe(48);
 			// Check bottom
-			expect((await Page.getVerticalScrollbarRect()).bottom - (await Page.getVerticalScrollbarTrackRect()).bottom).to.equal(48);
+			expect((await Page.getVerticalScrollbarRect()).bottom - (await Page.getVerticalScrollbarTrackRect()).bottom).toBe(48);
 		});
 	});
 });
