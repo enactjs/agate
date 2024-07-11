@@ -71,13 +71,6 @@ const SliderTests = [
 		focus: true
 	},
 	{
-		component: <Slider tooltip={<SliderTooltip position="above" />} disabled value={40} backgroundProgress={0.5} />,
-		wrapper: {
-			padded: true
-		},
-		focus: true
-	},
-	{
 		component: <Slider tooltip={<SliderTooltip position="above left" />} value={40} backgroundProgress={0.5} />,
 		wrapper: {
 			padded: true
@@ -170,7 +163,14 @@ const SliderTests = [
 	},
 	// Vertical tooltip placement -- valid positions: before/after/left/right
 	{
-		component: <Slider orientation="vertical" tooltip value={40} backgroundProgress={0.5} />,
+		component: <Slider orientation="vertical" tooltip={<SliderTooltip position="before" />} value={40} backgroundProgress={0.5} />,
+		wrapper: {
+			padded: true
+		},
+		focus: true
+	},
+	{
+		component: <Slider orientation="vertical" tooltip={<SliderTooltip position="after" />} value={40} backgroundProgress={0.5} />,
 		wrapper: {
 			padded: true
 		},
@@ -184,28 +184,7 @@ const SliderTests = [
 		focus: true
 	},
 	{
-		component: <Slider orientation="vertical" tooltip={<SliderTooltip position="left" />} disabled value={40} backgroundProgress={0.5} />,
-		wrapper: {
-			padded: true
-		},
-		focus: true
-	},
-	{
 		component: <Slider orientation="vertical" tooltip={<SliderTooltip position="right" />} value={40} backgroundProgress={0.5} />,
-		wrapper: {
-			padded: true
-		},
-		focus: true
-	},
-	{
-		component: <Slider orientation="vertical" tooltip={<SliderTooltip position="before" />} value={40} backgroundProgress={0.5} />,
-		wrapper: {
-			padded: true
-		},
-		focus: true
-	},
-	{
-		component: <Slider orientation="vertical" tooltip={<SliderTooltip position="after" />} value={40} backgroundProgress={0.5} />,
 		wrapper: {
 			padded: true
 		},

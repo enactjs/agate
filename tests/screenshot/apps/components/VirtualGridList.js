@@ -1,7 +1,7 @@
 import ri from '@enact/ui/resolution';
 
-import img from '../../images/600x600.png';
 import ImageItem from '../../../../ImageItem';
+import img from '../../images/600x600.png';
 import {VirtualGridList} from '../../../../VirtualList';
 
 import {withConfig} from './utils';
@@ -42,7 +42,7 @@ const updateDataSize = (dataSize) => {
 updateDataSize(defaultDataSize);
 
 const VirtualGridListTests = [
-	// horizontal VGL with visible scrollBar
+	// horizontal VGL with visible horizontalScrollbar
 	<div>
 		<VirtualGridList
 			dataSize={items.length}
@@ -56,7 +56,7 @@ const VirtualGridListTests = [
 			style={{height: ri.scale(300)}}
 		/>
 	</div>,
-	// vertical VGL with visible scrollBar
+	// vertical VGL with visible verticalScrollbar
 	<div>
 		<VirtualGridList
 			dataSize={items.length}
@@ -69,7 +69,7 @@ const VirtualGridListTests = [
 			verticalScrollbar="visible"
 		/>
 	</div>,
-	// horizontal VGL with hidden scrollBar
+	// horizontal VGL with hidden horizontalScrollbar
 	<div>
 		<VirtualGridList
 			dataSize={items.length}
@@ -83,7 +83,7 @@ const VirtualGridListTests = [
 			style={{height: ri.scale(300)}}
 		/>
 	</div>,
-	// vertical VGL with hidden scrollBar
+	// vertical VGL with hidden verticalScrollbar
 	<div>
 		<VirtualGridList
 			dataSize={items.length}

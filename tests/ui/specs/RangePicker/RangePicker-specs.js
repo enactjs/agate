@@ -104,25 +104,26 @@ describe('RangePicker', function () {
 			describe('wrap', function () {
 				const rangePicker = Page.components.rangePickerWrap;
 
-				it('should increase the value when incrementing the range picker', async function () {
-					const oldValue = await extractValue(rangePicker);
-					expect(oldValue).toBe(0);
-					await rangePicker.incrementer(rangePicker.self).click();
-					await browser.pause(500);
-					const newValue = await extractValue(rangePicker);
-
-					expect(newValue).toBe(1);
-				});
-
-				it('should decrease the value when decrementing the range picker', async function () {
+				it('should decrease to max value', async function () {
 					const oldValue = await extractValue(rangePicker);
 					expect(oldValue).toBe(0);
 					await rangePicker.decrementer(rangePicker.self).click();
-					expect(await rangePicker.decrementer(rangePicker.self).isFocused()).toBe(true);
+					await browser.pause(500);
+					const newValue = await extractValue(rangePicker);
+					expect(newValue).toBe(10);
+				});
+
+				it('should increase to min value', async function () {
+					for (let i = 0; i < 10; i++) {
+						await rangePicker.incrementer(rangePicker.self).click();
+					}
+					const oldValue = await extractValue(rangePicker);
+					expect(oldValue).toBe(10);
+					await rangePicker.incrementer(rangePicker.self).click();
+					expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
 					await browser.pause(500);
 					const newValue = extractValue(rangePicker);
-
-					expect(await newValue).toBe(10);
+					expect(await newValue).toBe(0);
 				});
 			});
 		});
@@ -140,7 +141,6 @@ describe('RangePicker', function () {
 						await Page.spotlightSelect();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
-
 						expect(newValue).toBe(5);
 					});
 
@@ -155,7 +155,6 @@ describe('RangePicker', function () {
 						await Page.spotlightSelect();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
-
 						expect(newValue).toBe(0);
 					});
 				});
@@ -165,7 +164,6 @@ describe('RangePicker', function () {
 						await rangePicker.incrementer(rangePicker.self).click();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
-
 						expect(newValue).toBe(5);
 					});
 
@@ -174,9 +172,7 @@ describe('RangePicker', function () {
 						expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
 						await rangePicker.decrementer(rangePicker.self).click();
 						await browser.pause(500);
-
 						const newValue = await extractValue(rangePicker);
-
 						expect(newValue).toBe(0);
 					});
 				});
@@ -192,7 +188,6 @@ describe('RangePicker', function () {
 						await rangePicker.focus();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
-
 						expect(newValue).toBe(oldValue);
 					});
 				});
@@ -203,7 +198,6 @@ describe('RangePicker', function () {
 						await rangePicker.incrementer(rangePicker.self).click();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
-
 						expect(newValue).toBe(oldValue);
 					});
 
@@ -212,7 +206,6 @@ describe('RangePicker', function () {
 						await rangePicker.decrementer(rangePicker.self).click();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
-
 						expect(newValue).toBe(oldValue);
 					});
 				});
@@ -237,25 +230,26 @@ describe('RangePicker', function () {
 			describe('wrap', function () {
 				const rangePicker = Page.components.rangePickerHorizontalWrap;
 
-				it('should increase the value when incrementing the range picker', async function () {
-					const oldValue = await extractValue(rangePicker);
-					expect(oldValue).toBe(0);
-					await rangePicker.incrementer(rangePicker.self).click();
-					await browser.pause(500);
-					const newValue = await extractValue(rangePicker);
-
-					expect(newValue).toBe(1);
-				});
-
-				it('should decrease the value when decrementing the range picker', async function () {
+				it('should decrease to max value', async function () {
 					const oldValue = await extractValue(rangePicker);
 					expect(oldValue).toBe(0);
 					await rangePicker.decrementer(rangePicker.self).click();
-					expect(await rangePicker.decrementer(rangePicker.self).isFocused()).toBe(true);
+					await browser.pause(500);
+					const newValue = await extractValue(rangePicker);
+					expect(newValue).toBe(10);
+				});
+
+				it('should increase to min value', async function () {
+					for (let i = 0; i < 10; i++) {
+						await rangePicker.incrementer(rangePicker.self).click();
+					}
+					const oldValue = await extractValue(rangePicker);
+					expect(oldValue).toBe(10);
+					await rangePicker.incrementer(rangePicker.self).click();
+					expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
 					await browser.pause(500);
 					const newValue = extractValue(rangePicker);
-
-					expect(await newValue).toBe(10);
+					expect(await newValue).toBe(0);
 				});
 			});
 		});
@@ -321,7 +315,6 @@ describe('RangePicker', function () {
 					await Page.spotlightSelect();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
-
 					expect(newValue).toBe(5);
 				});
 
@@ -335,7 +328,6 @@ describe('RangePicker', function () {
 					await Page.spotlightSelect();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
-
 					expect(newValue).toBe(0);
 				});
 			});

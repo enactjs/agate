@@ -1,9 +1,10 @@
+import spotlight from '@enact/spotlight';
+import {useState} from 'react';
+
 import Button from '../../../../Button';
 import Item from '../../../../Item';
 import {Panel, TabbedPanels} from '../../../../Panels';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import spotlight from '@enact/spotlight';
-import {useState} from 'react';
 
 // NOTE: Forcing pointer mode off so we can be sure that regardless of webOS pointer mode the app
 // runs the same way

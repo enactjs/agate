@@ -1,6 +1,6 @@
 import RangePicker from '../../../../RangePicker';
-import ThemeDecorator from '../../../../ThemeDecorator';
 import Scroller from '../../../../Scroller';
+import ThemeDecorator from '../../../../ThemeDecorator';
 
 const app = (props) => <div {...props}>
 	<Scroller>

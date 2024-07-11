@@ -9,7 +9,6 @@ const PopupTests = [
 	<Popup noAnimation open>Popup!</Popup>,
 	<Popup open type="slide">Popup!</Popup>,
 	<Popup open scrimType="none">Popup!</Popup>,
-	<Popup open scrimType="translucent">Popup!</Popup>,
 	<Popup open scrimType="transparent">Popup!</Popup>,
 	<Popup open title="Title">Popup!</Popup>,
 	<Popup open position="bottom">Popup!</Popup>,

@@ -109,7 +109,6 @@ describe('Picker', function () {
 						await Page.spotlightSelect();
 						await browser.pause(500);
 						const newValue = await extractValue(picker);
-
 						expect(newValue).toBe('Banana');
 					});
 
@@ -124,7 +123,6 @@ describe('Picker', function () {
 						await Page.spotlightSelect();
 						await browser.pause(500);
 						const newValue = await extractValue(picker);
-
 						expect(newValue).toBe('Apple');
 					});
 				});
@@ -134,7 +132,6 @@ describe('Picker', function () {
 						await picker.incrementer(picker.self).click();
 						await browser.pause(500);
 						const newValue = await extractValue(picker);
-
 						expect(newValue).toBe('Banana');
 					});
 
@@ -144,7 +141,6 @@ describe('Picker', function () {
 						await picker.decrementer(picker.self).click();
 						await browser.pause(500);
 						const newValue = await extractValue(picker);
-
 						expect(newValue).toBe('Apple');
 					});
 				});
@@ -174,7 +170,6 @@ describe('Picker', function () {
 						await Page.spotlightRight();
 						await Page.spotlightSelect();
 						const newValue = await extractValue(picker);
-
 						expect(newValue).toBe(oldValue);
 					});
 				});
@@ -185,7 +180,6 @@ describe('Picker', function () {
 						await picker.incrementer(picker.self).click();
 						browser.pause(500);
 						const newValue = await extractValue(picker);
-
 						expect(newValue).toBe(oldValue);
 					});
 
@@ -194,7 +188,6 @@ describe('Picker', function () {
 						await picker.decrementer(picker.self).click();
 						await browser.pause(500);
 						const newValue = await extractValue(picker);
-
 						expect(newValue).toBe(oldValue);
 					});
 				});
@@ -262,7 +255,6 @@ describe('Picker', function () {
 					await Page.spotlightSelect();
 					await browser.pause(500);
 					const newValue = await extractValue(picker);
-
 					expect(newValue).toBe('Banana');
 				});
 
@@ -277,7 +269,6 @@ describe('Picker', function () {
 					await Page.spotlightSelect();
 					await browser.pause(500);
 					const newValue = await extractValue(picker);
-
 					expect(newValue).toBe('Apple');
 				});
 			});
@@ -287,7 +278,6 @@ describe('Picker', function () {
 					await picker.incrementer(picker.self).click();
 					await browser.pause(500);
 					const newValue = await extractValue(picker);
-
 					expect(newValue).toBe('Banana');
 				});
 
@@ -297,7 +287,6 @@ describe('Picker', function () {
 					await picker.decrementer(picker.self).click();
 					await browser.pause(500);
 					const newValue = await extractValue(picker);
-
 					expect(newValue).toBe('Apple');
 				});
 			});
