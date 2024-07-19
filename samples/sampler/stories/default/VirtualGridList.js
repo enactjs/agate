@@ -18,7 +18,7 @@ const
 	},
 	prop = {
 		direction: {horizontal: 'horizontal', vertical: 'vertical'},
-		scrollBarOption: ['auto', 'hidden', 'visible']
+		scrollbarOption: ['auto', 'hidden', 'visible']
 	},
 	items = [],
 	defaultDataSize = 1000,
@@ -92,12 +92,12 @@ export const _VirtualGridList = (args) => {
 number('dataSize', _VirtualGridList, VirtualGridListConfig, defaultDataSize);
 select('direction', _VirtualGridList, prop.direction, VirtualGridListConfig);
 boolean('focusableScrollbar', _VirtualGridList, VirtualGridListConfig);
-select('horizontalScrollbar', _VirtualGridList, prop.scrollBarOption, VirtualGridListConfig);
+select('horizontalScrollbar', _VirtualGridList, prop.scrollbarOption, VirtualGridListConfig);
 number('minWidth', _VirtualGridList, VirtualGridListConfig, 180);
 number('minHeight', _VirtualGridList, VirtualGridListConfig, 270);
 number('spacing', _VirtualGridList, VirtualGridListConfig, 20);
 boolean('spotlightDisabled', _VirtualGridList, VirtualGridListConfig, false);
-select('verticalScrollbar', _VirtualGridList, prop.scrollBarOption, VirtualGridListConfig);
+select('verticalScrollbar', _VirtualGridList, prop.scrollbarOption, VirtualGridListConfig);
 select('wrap', _VirtualGridList, ['false', 'true', '"noAnimation"'], VirtualGridListConfig);
 
 _VirtualGridList.storyName = 'VirtualList.VirtualGridList';
