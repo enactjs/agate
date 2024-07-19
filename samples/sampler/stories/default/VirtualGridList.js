@@ -73,7 +73,7 @@ export const _VirtualGridList = (args) => {
 			dataSize={updateDataSize(args['dataSize'])}
 			direction={args['direction']}
 			focusableScrollbar={args['focusableScrollbar']}
-			horizontalScrollbar={args['horizontalScrollBar']}
+			horizontalScrollbar={args['horizontalScrollbar']}
 			itemRenderer={renderItem}
 			itemSize={{
 				minWidth: ri.scale(args['minWidth']),
@@ -83,7 +83,7 @@ export const _VirtualGridList = (args) => {
 			onScrollStop={action('onScrollStop')}
 			spacing={ri.scale(args['spacing'])}
 			spotlightDisabled={args['spotlightDisabled']}
-			verticalScrollbar={args['verticalScrollBar']}
+			verticalScrollbar={args['verticalScrollbar']}
 			wrap={wrapOption[args['wrap']]}
 		/>
 	);
@@ -92,12 +92,12 @@ export const _VirtualGridList = (args) => {
 number('dataSize', _VirtualGridList, VirtualGridListConfig, defaultDataSize);
 select('direction', _VirtualGridList, prop.direction, VirtualGridListConfig);
 boolean('focusableScrollbar', _VirtualGridList, VirtualGridListConfig);
-select('horizontalScrollBar', _VirtualGridList, prop.scrollBarOption, VirtualGridListConfig);
+select('horizontalScrollbar', _VirtualGridList, prop.scrollBarOption, VirtualGridListConfig);
 number('minWidth', _VirtualGridList, VirtualGridListConfig, 180);
 number('minHeight', _VirtualGridList, VirtualGridListConfig, 270);
 number('spacing', _VirtualGridList, VirtualGridListConfig, 20);
 boolean('spotlightDisabled', _VirtualGridList, VirtualGridListConfig, false);
-select('verticalScrollBar', _VirtualGridList, prop.scrollBarOption, VirtualGridListConfig);
+select('verticalScrollbar', _VirtualGridList, prop.scrollBarOption, VirtualGridListConfig);
 select('wrap', _VirtualGridList, ['false', 'true', '"noAnimation"'], VirtualGridListConfig);
 
 _VirtualGridList.storyName = 'VirtualList.VirtualGridList';
