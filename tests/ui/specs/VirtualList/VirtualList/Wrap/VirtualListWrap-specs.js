@@ -46,7 +46,7 @@ describe('Wrap', function () {
 		// 5-way Up.
 		await Page.spotlightUp();
 		// Verify: The list *does not* Scroll to the Bottom. 2. Spotlight is on the buttonTop
-		expect(await Page.buttonTop.isFocused(), 'button top focus').to.be.true();
+		expect(await Page.buttonTop.isFocused()).toBe(true);
 		await Page.spotlightDown();
 		await expectFocusedItem(0);
 		await Page.pageDown();
@@ -63,6 +63,6 @@ describe('Wrap', function () {
 		await browser.pause(1000);
 		// Verify 1. The list *does not* Scroll to the Top. 2. Spotlight stays on the last item.
 		// Checking focus is on buttonBottom instead of last item since 5-way Down on last item using this app takes Spotlight to buttonBottom.
-		expect(await Page.buttonBottom.isFocused(), 'last item focus').to.be.true();
+		expect(await Page.buttonBottom.isFocused()).toBe(true);
 	});
 });

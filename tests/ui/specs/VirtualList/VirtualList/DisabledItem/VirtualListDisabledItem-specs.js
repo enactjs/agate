@@ -23,20 +23,20 @@ describe('Disabled item', function () {
 		let index = 1;
 		for (; index < 15; index++) {
 			await Page.fiveWayToItem(index);
-			expect(await Page.itemDisabled()).to.be.true();
+			expect(await Page.itemDisabled()).toBe(true);
 		}
 		await Page.fiveWayToItem(index);
-		expect(await Page.itemDisabled()).to.be.false();
+		expect(await Page.itemDisabled()).toBe(false);
 		// Spotlight displays on the next Enabled item.
 		await expectFocusedItem(15);
 		// 5-way Up several times to the previous enabled item.
 		// Spotlight displays on each Item (Disabled and Enabled) as the list scrolls down.
 		for (index = 14; index > 0; index--) {
 			await Page.fiveWayToItem(index);
-			expect(await Page.itemDisabled()).to.be.true();
+			expect(await Page.itemDisabled()).toBe(true);
 		}
 		await Page.fiveWayToItem(index);
-		expect(await Page.itemDisabled()).to.be.false();
+		expect(await Page.itemDisabled()).toBe(false);
 		// Spotlight displays on the previous Enabled item.
 		await expectFocusedItem(0);
 	});
@@ -53,19 +53,19 @@ describe('Disabled item', function () {
 		let index = 1;
 		for (; index < 15; index++) {
 			await Page.fiveWayToItem(index);
-			expect(await Page.itemDisabled()).to.be.true();
+			expect(await Page.itemDisabled()).toBe(true);
 		}
 		await Page.fiveWayToItem(index);
-		expect(await Page.itemDisabled()).to.be.false();
+		expect(await Page.itemDisabled()).toBe(false);
 		// Spotlight displays on the next Enabled item.
 		await expectFocusedItem(15);
 		// 5-way Up several times.
 		for (index = 14; index > 0; index--) {
 			await Page.fiveWayToItem(index);
-			expect(await Page.itemDisabled()).to.be.true();
+			expect(await Page.itemDisabled()).toBe(true);
 		}
 		await Page.fiveWayToItem(index);
-		expect(await Page.itemDisabled()).to.be.false();
+		expect(await Page.itemDisabled()).toBe(false);
 		// Spotlight displays on the previous Enabled item.
 		await expectFocusedItem(0);
 	});
