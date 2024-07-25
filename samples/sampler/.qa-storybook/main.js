@@ -13,8 +13,7 @@ module.exports = {
 		warnOnLegacyHierarchySeparator: false
 	},
 	framework: {
-		name: '@storybook/react-webpack5',
-		options: {}
+		name: '@storybook/react-webpack5'
 	},
 	experimental_indexers: (indexers) => { // eslint-disable-line camelcase
 		const createIndex = async (fileName, opts) => {
