@@ -1,9 +1,6 @@
 import {cap} from '@enact/core/util';
 import {configureActions} from '@enact/storybook-utils/addons/actions';
 import {getBooleanType, getObjectType} from '@enact/storybook-utils/addons/controls';
-import {DocsContainer, Primary, Title} from '@enact/storybook-utils/addons/docs';
-import ri from '@enact/ui/resolution';
-import {themes} from '@storybook/theming';
 
 import ThemeEnvironment from '../src/ThemeEnvironment';
 
@@ -24,16 +21,16 @@ const locales = {
 	'en-JP - English, custom Japanese font': 'en-JP',
 	'si-LK - Sinhala, external font family with tallglyph characters': 'si-LK',
 	'km-KH - Cambodian Khmer, with tallglyph characters': 'km-KH'
-  };
+};
 
-  const skins = {
-	  'Carbon': 'carbon',
-	  'Cobalt': 'cobalt',
-	  'Copper': 'copper',
-	  'Electro': 'electro',
-	  'Gallium': 'gallium',
-	  'Titanium': 'titanium'
-  };
+const skins = {
+	'Carbon': 'carbon',
+	'Cobalt': 'cobalt',
+	'Copper': 'copper',
+	'Electro': 'electro',
+	'Gallium': 'gallium',
+	'Titanium': 'titanium'
+};
 
 if (process.env.SKINS) {
 	JSON.parse(process.env.SKINS).forEach(skin => {
@@ -44,30 +41,21 @@ if (process.env.SKINS) {
 configureActions();
 
 export const parameters = {
-	docs: {
-		container: DocsContainer,
-		inlineStories: false,
-		iframeHeight: ri.scaleToRem(450),
-		page: () => (
-			<>
-				<Title />
-				<Primary />
-			</>
-		),
-		theme: themes.light
-	},
 	options: {
 		storySort: {
 			method: 'alphabetical'
 		}
-	},
+	}
 };
 
 export const globalTypes = {
 	'locale': getObjectType('locale', 'en-US', locales),
 	'night mode': getBooleanType('night mode'),
 	'show all skins': getBooleanType('show all skins'),
-	'skin': getObjectType('skins', 'gallium', skins)
+	'skin': getObjectType('skins', 'gallium', skins),
+	'accent': '#8B7EFE',
+	'highlight': '#E16253',
+	'default skin styles': false
 };
 
 export const decorators = [ThemeEnvironment];
