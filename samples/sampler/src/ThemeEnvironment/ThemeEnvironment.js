@@ -98,7 +98,7 @@ const PanelsBase = kind({
 });
 
 
-const Theme = ThemeDecorator({overlay: false}, PanelsBase);
+const Theme = ThemeDecorator({overlay: false, rootId: 'storybook-root'}, PanelsBase);
 
 const skins = {
 	'Carbon': 'carbon',
