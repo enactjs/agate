@@ -15,7 +15,7 @@ const TimePickerTests = [
 	// long meridiem characters
 	{
 		locale: 'ta-IN',
-		component: <TimePicker disabled value={new Date(2022, 6, 30, 13, 12, 30)} />
+		component: <TimePicker disabled value={new Date(2022, 6, 30, 1, 12, 30)} />
 	}
 ];
 

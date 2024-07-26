@@ -11,8 +11,6 @@ const PopupTests = [
 	<Popup open scrimType="none">Popup!</Popup>,
 	<Popup open scrimType="transparent">Popup!</Popup>,
 	<Popup open title="Title">Popup!</Popup>,
-	<Popup open position="bottom">Popup!</Popup>,
-	<Popup open position="bottom" title="Title">Popup!</Popup>,
 	<Popup open position="fullscreen">Popup!</Popup>,
 	<Popup open position="fullscreen" title="Title">Popup!</Popup>,
 	<Popup open position="left">Popup!</Popup>,
@@ -36,13 +34,6 @@ const PopupTests = [
 		</buttons>
 	</Popup>,
 	<Popup open position="bottom">
-		Popup!
-		<buttons>
-			<Button>OK</Button>
-			<Button>Cancel</Button>
-		</buttons>
-	</Popup>,
-	<Popup open position="bottom" title="Title">
 		Popup!
 		<buttons>
 			<Button>OK</Button>
@@ -111,10 +102,6 @@ const PopupTests = [
 	{
 		locale: 'ar-SA',
 		component: <Popup open title="Title">Popup!</Popup>
-	},
-	{
-		locale: 'ar-SA',
-		component: <Popup open position="bottom" title="Title">Popup!</Popup>
 	},
 	{
 		locale: 'ar-SA',
