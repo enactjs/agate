@@ -6,7 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Fixed
 
-- `agate/ToggleButton` underline position for sizes `huge`,`small` and `smallest`
+- `agate/ToggleButton` underline position for `huge`,`small` and `smallest` sizes
 
 ## [2.0.11] - 2024-07-22
 
