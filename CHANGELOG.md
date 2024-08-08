@@ -2,6 +2,12 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Fixed
+
+- `agate/Scroller`, `agate/VirtualList` and `agate/VirtualList.VirtualGridList` to set prop value to default when `undefined` is passed for the prop value
+
 ## [2.0.11] - 2024-07-22
 
 ### Changed
