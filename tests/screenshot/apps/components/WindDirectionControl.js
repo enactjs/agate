@@ -1,7 +1,8 @@
 import WindDirectionControl from '../../../../WindDirectionControl';
 
 const WindDirectionControlTests = [
-	<WindDirectionControl />
+	<WindDirectionControl />,
+	<WindDirectionControl disabled />
 ];
 
 export default WindDirectionControlTests;
