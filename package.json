@@ -64,6 +64,7 @@
     "ilib": "^14.20.0"
   },
   "overrides": {
-    "autolinker": "^4.0.0"
+    "autolinker": "^4.0.0",
+    "ws": "^8.18.0"
   }
 }
