@@ -126,6 +126,18 @@ const VirtualGridListTests = [
 
 	// RTL locale
 	...withConfig({locale: 'ar-SA'}, [
+		<div style={{padding: ri.scale(300)}}>
+			<VirtualGridList
+				dataSize={items.length}
+				direction="horizontal"
+				itemRenderer={renderItem}
+				itemSize={{
+					minWidth: ri.scale(180),
+					minHeight: ri.scale(270)
+				}}
+				style={{height: ri.scale(300)}}
+			/>
+		</div>,
 		<VirtualGridList
 			dataSize={items.length}
 			itemRenderer={renderItem}
