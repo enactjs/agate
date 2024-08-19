@@ -7,6 +7,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Fixed
 
 - `agate/Scroller`, `agate/VirtualList` and `agate/VirtualList.VirtualGridList` to set prop value to default when `undefined` is passed for the prop value
+- `agate/ToggleButton` underline position for `huge`,`small` and `smallest` sizes
 
 ## [2.0.11] - 2024-07-22
 
