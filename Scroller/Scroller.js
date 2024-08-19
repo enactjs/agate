@@ -16,6 +16,7 @@
  * @exports Scroller
  */
 
+import {setDefaultProps} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {ResizeContext} from '@enact/ui/Resizable';
@@ -60,13 +61,7 @@ const scrollerDefaultProps = {
  * @public
  */
 let Scroller = (props) => {
-	const scrollerProps = Object.assign({}, props);
-	for (const prop in scrollerDefaultProps) {
-		// eslint-disable-next-line no-undefined
-		if (scrollerProps[prop] === undefined) {
-			scrollerProps[prop] = scrollerDefaultProps[prop];
-		}
-	}
+	const scrollerProps = setDefaultProps(props, scrollerDefaultProps);
 
 	// Hooks
 	const {
