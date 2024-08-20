@@ -1,6 +1,6 @@
 {
   "name": "agate-sampler",
-  "version": "2.0.11",
+  "version": "3.0.0-alpha.1",
   "description": "Component and QA samples for Agate",
   "private": true,
   "main": "index.js",
