@@ -26,6 +26,13 @@ function getWrapperClasses ({wrapper}) {
 	return cx('wrapper', wrapper, parsed.skin);
 }
 
+function getWrapperStyle ({wrapper = {}}) {
+	const {padded} = wrapper;
+	if (padded && padded !== true) {
+		return {'--wrapper-padding': padded};
+	}
+}
+
 function prepareTest (componentName, testId) {
 	const ElementProps = {
 		'data-ui-test-id': 'test',
@@ -64,7 +71,8 @@ function prepareTest (componentName, testId) {
 
 	return {
 		testElement: cloneElement(component, ElementProps, children),
-		wrapperClasses: getWrapperClasses(agateComponents[componentName][testId])
+		wrapperClasses: getWrapperClasses(agateComponents[componentName][testId]),
+		wrapperStyle: getWrapperStyle(agateComponents[componentName][testId])
 	};
 }
 
@@ -83,7 +91,8 @@ function prepareFromUrl () {
 	}
 	return {
 		testElement: <Component {...componentProps} />,
-		wrapperClasses: getWrapperClasses({skin: parsed.skin, wrapper: wrapperProps})
+		wrapperClasses: getWrapperClasses({skin: parsed.skin, wrapper: wrapperProps}),
+		wrapperStyle: getWrapperStyle({skin: parsed.skin, wrapper: wrapperProps})
 	};
 }
 class App extends ReactComponent {
@@ -100,7 +109,7 @@ class App extends ReactComponent {
 	render () {
 		const {component, testId, locale, ...props} = this.props;
 		let testElement;
-		let wrapperClasses;
+		let wrapperClasses, wrapperStyle;
 
 		if (this.state.hasError) {
 			return (
@@ -113,14 +122,14 @@ class App extends ReactComponent {
 		}
 
 		if (testId >= 0) {
-			({testElement, wrapperClasses} = prepareTest(component, testId, locale));
+			({testElement, wrapperClasses, wrapperStyle} = prepareTest(component, testId, locale));
 		} else {
-			({testElement, wrapperClasses} = prepareFromUrl());
+			({testElement, wrapperClasses, wrapperStyle} = prepareFromUrl());
 		}
 
 		return (
 			<div {...props}>
-				<div className={wrapperClasses}>{testElement}</div>
+				<div className={wrapperClasses} style={wrapperStyle}>{testElement}</div>
 			</div>
 		);
 	}

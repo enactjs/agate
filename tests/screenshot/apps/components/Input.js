@@ -71,6 +71,20 @@ const InputTests = [
 		</div>,
 		<Input value="Focused simple value" iconAfter="happyface" iconBefore="happyface" />,
 		<Input value="Focused simple value" iconAfter="happyface" iconBefore="happyface" size="small" />
+	]),
+
+	// RTL
+	...withConfig({locale: 'ar-SA'}, [
+		<Input placeholder="ar-SA placeholder" />,
+		<Input placeholder="ar-SA placeholder" disabled />,
+		<Input value="ar-SA simple value" />,
+		<Input value="ar-SA simple value" disabled />,
+		<Input value="ar-SA simple value" clearButton />,
+		<div>
+			<Input invalid invalidMessage="ar-SA custom invalid message" style={{margin:'100px'}} />
+		</div>,
+		<Input value="ar-SA simple value" iconAfter="happyface" iconBefore="happyface" />,
+		<Input value="ar-SA simple value" iconAfter="happyface" iconBefore="happyface" size="small" />
 	])
 ];
 

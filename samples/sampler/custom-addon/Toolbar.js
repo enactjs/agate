@@ -1,4 +1,4 @@
-import {useGlobals} from '@storybook/api';
+import {useGlobals} from '@storybook/manager-api';
 import {WithTooltip, TooltipLinkList} from '@storybook/components';
 import React, {memo} from 'react'; // eslint-disable-line
 
@@ -12,7 +12,6 @@ const getToolTipLink = (colorPickerType, isColorPicker) => {
 			center: <ColorPicker colorPickerType={colorPickerType} />,
 			id: colorPickerType,
 			key: colorPickerType,
-			left: <span style={{color: 'white'}}>{colorPickerType}</span>,
 			name: colorPickerType,
 			title: true
 		};
@@ -25,7 +24,7 @@ const getColorPickerTab = (defaultSkins, isColorPicker, toolbarParamKey) => {
 	if (defaultSkins) return null;
 	return (
 		<WithTooltip
-			closeOnClick
+			closeOnOutsideClick
 			placement="top"
 			tooltip={() => <TooltipLinkList links={toolTipLink} />} // eslint-disable-line react/jsx-no-bind
 			trigger="click"
