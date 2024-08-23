@@ -1,6 +1,6 @@
 {
   "name": "@enact/agate",
-  "version": "2.0.11",
+  "version": "3.0.0-alpha.1",
   "description": "A theme library for Enact, containing a variety of UI components.",
   "repository": "https://github.com/enactjs/agate",
   "main": "index.js",
@@ -59,8 +59,11 @@
   },
   "devDependencies": {
     "@enact/docs-utils": "^0.4.10",
-    "@enact/ui-test-utils": "^1.0.8",
-    "eslint-config-enact-proxy": "^1.0.7",
+    "@enact/ui-test-utils": "^1.0.9",
+    "eslint-config-enact-proxy": "^1.0.8",
     "ilib": "^14.20.0"
+  },
+  "overrides": {
+    "autolinker": "^4.0.0"
   }
 }
