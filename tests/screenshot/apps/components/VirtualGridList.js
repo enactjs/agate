@@ -142,6 +142,7 @@ const VirtualGridListTests = [
 				minWidth: ri.scale(180),
 				minHeight: ri.scale(270)
 			}}
+			style={{height: ri.scale(300)}}
 		/>
 	])
 ];
