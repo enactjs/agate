@@ -126,24 +126,28 @@ const VirtualGridListTests = [
 
 	// RTL locale
 	...withConfig({locale: 'ar-SA'}, [
-		<VirtualGridList
-			dataSize={items.length}
-			itemRenderer={renderItem}
-			itemSize={{
-				minWidth: ri.scale(180),
-				minHeight: ri.scale(270)
-			}}
-		/>,
-		<VirtualGridList
-			dataSize={items.length}
-			direction="horizontal"
-			itemRenderer={renderItem}
-			itemSize={{
-				minWidth: ri.scale(180),
-				minHeight: ri.scale(270)
-			}}
-			style={{height: ri.scale(300)}}
-		/>
+		<div>
+			<VirtualGridList
+				dataSize={items.length}
+				itemRenderer={renderItem}
+				itemSize={{
+					minWidth: ri.scale(180),
+					minHeight: ri.scale(270)
+				}}
+			/>
+		</div>,
+		<div>
+			<VirtualGridList
+				dataSize={items.length}
+				direction="horizontal"
+				itemRenderer={renderItem}
+				itemSize={{
+					minWidth: ri.scale(180),
+					minHeight: ri.scale(270)
+				}}
+				style={{minHeight: ri.scale(300)}}
+			/>
+		</div>
 	])
 ];
 
