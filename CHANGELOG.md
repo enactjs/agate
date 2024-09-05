@@ -8,11 +8,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/Scroller` and `agate/VirtualList` to have default prop when `undefined` prop is passed
 
-### Removed
-
-- `agate/data/ConsumerDecorator` and `agate/data/ProviderDecorator`
-- `immer` dependency
-
 ## [3.0.0-alpha.1] - 2024-08-20
 
 ### Fixed
