@@ -64,6 +64,11 @@
     "ilib": "^14.20.0"
   },
   "overrides": {
+    "@enact/docs-utils": {
+      "documentation": {
+        "vue-template-compiler": "^1.0.28"
+      }
+    },
     "autolinker": "^4.0.0"
   }
 }
