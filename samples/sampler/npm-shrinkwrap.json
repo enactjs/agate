@@ -15,20 +15,20 @@
         "@enact/spotlight": "^5.0.0-alpha.1",
         "@enact/storybook-utils": "^6.0.0-rc.1",
         "@enact/ui": "^5.0.0-alpha.1",
-        "@storybook/addon-docs": "^8.3.1",
-        "@storybook/builder-webpack5": "^8.3.1",
-        "@storybook/csf-tools": "^8.3.1",
-        "@storybook/manager-api": "^8.3.1",
-        "@storybook/react": "^8.3.1",
-        "@storybook/react-webpack5": "^8.3.1",
-        "@storybook/theming": "^8.3.1",
+        "@storybook/addon-docs": "^8.3.4",
+        "@storybook/builder-webpack5": "^8.3.4",
+        "@storybook/csf-tools": "^8.3.4",
+        "@storybook/manager-api": "^8.3.4",
+        "@storybook/react": "^8.3.4",
+        "@storybook/react-webpack5": "^8.3.4",
+        "@storybook/theming": "^8.3.4",
         "babel-loader": "^9.1.3",
         "dotenv": "^16.4.5",
         "ilib": "^14.20.0",
         "prop-types": "^15.8.1",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "storybook": "^8.3.1"
+        "storybook": "^8.3.4"
       }
     },
     "../..": {
@@ -51753,16 +51753,16 @@
       }
     },
     "node_modules/@storybook/addon-docs": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/addon-docs/-/addon-docs-8.3.1.tgz",
-      "integrity": "sha512-8ES7ThajpKDoMheAthnDDg/lXUsIxzV+EdHuE4WnRoiw+25XfYr9WIEuEpytRz/drouJhunOgOJV0kCPxZ3XgQ==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/addon-docs/-/addon-docs-8.3.4.tgz",
+      "integrity": "sha512-TWauhqF/gJgfwPuWeM6KM3LwC+ErCOM+K2z16w3vgao9s67sij8lnrdAoQ0hjA+kw2/KAdCakFS6FyciG81qog==",
       "license": "MIT",
       "dependencies": {
         "@mdx-js/react": "^3.0.0",
-        "@storybook/blocks": "8.3.1",
-        "@storybook/csf-plugin": "8.3.1",
+        "@storybook/blocks": "8.3.4",
+        "@storybook/csf-plugin": "8.3.4",
         "@storybook/global": "^5.0.0",
-        "@storybook/react-dom-shim": "8.3.1",
+        "@storybook/react-dom-shim": "8.3.4",
         "@types/react": "^16.8.0 || ^17.0.0 || ^18.0.0",
         "fs-extra": "^11.1.0",
         "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
@@ -51776,13 +51776,13 @@
         "url": "https://opencollective.com/storybook"
       },
       "peerDependencies": {
-        "storybook": "^8.3.1"
+        "storybook": "^8.3.4"
       }
     },
     "node_modules/@storybook/blocks": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/blocks/-/blocks-8.3.1.tgz",
-      "integrity": "sha512-/wNLRVWR/edzHQAFvSW68VxHYmBcfXpL/XdO46I5Z1X/tXUd0rtgGZmliQ2jZ242FqxcT8guqqFGehbeYUns5w==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/blocks/-/blocks-8.3.4.tgz",
+      "integrity": "sha512-1g4aCrd5CcN+pVhF2ATu9ZRVvAIgBMb2yF9KkCuTpdvqKDuDNK3sGb0CxjS7jp3LOvyjJr9laTOQsz8v8MQc5A==",
       "license": "MIT",
       "dependencies": {
         "@storybook/csf": "^0.1.11",
@@ -51807,7 +51807,7 @@
       "peerDependencies": {
         "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta",
         "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta",
-        "storybook": "^8.3.1"
+        "storybook": "^8.3.4"
       },
       "peerDependenciesMeta": {
         "react": {
@@ -51819,12 +51819,12 @@
       }
     },
     "node_modules/@storybook/builder-webpack5": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/builder-webpack5/-/builder-webpack5-8.3.1.tgz",
-      "integrity": "sha512-H0KvdNCtsOuezcrqKmvjgNkwgIsT9TU+VWJkeRRXEARr+urN0A6cTYvka2ZXPVqdGfPa4XiCkjr3MX27Z8drZg==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/builder-webpack5/-/builder-webpack5-8.3.4.tgz",
+      "integrity": "sha512-EI6ULxRap5f4YSHf5xKUQqkoNGm4MVxJR/+GImx8K5fuZ+xYw2SdYdTu6dG8V+zTh1WZ4MDwmRb6aEbXvRcrFw==",
       "license": "MIT",
       "dependencies": {
-        "@storybook/core-webpack": "8.3.1",
+        "@storybook/core-webpack": "8.3.4",
         "@types/node": "^22.0.0",
         "@types/semver": "^7.3.4",
         "browser-assert": "^1.2.1",
@@ -51857,7 +51857,7 @@
         "url": "https://opencollective.com/storybook"
       },
       "peerDependencies": {
-        "storybook": "^8.3.1"
+        "storybook": "^8.3.4"
       },
       "peerDependenciesMeta": {
         "typescript": {
@@ -51877,22 +51877,22 @@
       }
     },
     "node_modules/@storybook/components": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/components/-/components-8.3.1.tgz",
-      "integrity": "sha512-/CMqX40CpNOKow58oLyO/OvMhHiHCIvOGf/65lXHk/D9qECMvchFfA2/MH8H7HiJUIqoSPit194miBENK5kqdw==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/components/-/components-8.3.4.tgz",
+      "integrity": "sha512-iQzLJd87uGbFBbYNqlrN/ABrnx3dUrL0tjPCarzglzshZoPCNOsllJeJx5TJwB9kCxSZ8zB9TTOgr7NXl+oyVA==",
       "license": "MIT",
       "funding": {
         "type": "opencollective",
         "url": "https://opencollective.com/storybook"
       },
       "peerDependencies": {
-        "storybook": "^8.3.1"
+        "storybook": "^8.3.4"
       }
     },
     "node_modules/@storybook/core": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/core/-/core-8.3.1.tgz",
-      "integrity": "sha512-L8YTtUipcBvl4F8jFNnXU3NM1hnLwZ3Ge2l+SRVKUGoAZzdf/I8O/0eOeZ+3LM3PvDn8bC9x+qjhNyDgtT+ieQ==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/core/-/core-8.3.4.tgz",
+      "integrity": "sha512-4PZB91JJpuKfcjeOR2LXj3ABaPLLSd2P/SfYOKNCygrDstsQa/yay3/yN5Z9yi1cIG84KRr6/sUW+0x8HsGLPg==",
       "license": "MIT",
       "dependencies": {
         "@storybook/csf": "^0.1.11",
@@ -51915,9 +51915,9 @@
       }
     },
     "node_modules/@storybook/core-webpack": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/core-webpack/-/core-webpack-8.3.1.tgz",
-      "integrity": "sha512-SrHycFCejWopqtxN/Smj9kI0aTkDo6vmtJWW0Rvgp+V8/83ikSJapN+TzRbq+zhSHhAfpvr5NmaFUwYzbwO/rw==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/core-webpack/-/core-webpack-8.3.4.tgz",
+      "integrity": "sha512-Ftsk/8RANt46roiHT0hTyqfMPUO2/jV7EvlOR5H2XKhSbssA9njK04O2ry+BbfgKItIDIx0LTiz/I575qBCCnQ==",
       "license": "MIT",
       "dependencies": {
         "@types/node": "^22.0.0",
@@ -51928,7 +51928,7 @@
         "url": "https://opencollective.com/storybook"
       },
       "peerDependencies": {
-        "storybook": "^8.3.1"
+        "storybook": "^8.3.4"
       }
     },
     "node_modules/@storybook/core/node_modules/semver": {
@@ -51953,9 +51953,9 @@
       }
     },
     "node_modules/@storybook/csf-plugin": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/csf-plugin/-/csf-plugin-8.3.1.tgz",
-      "integrity": "sha512-K3JWJf79+BkJAbOnAns5KGQ9h0NCqWht/1B05frj9LuAD/U+0sikpByiC2QvJ+qtX4fODhqjRYvrv2jgP8o3mA==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/csf-plugin/-/csf-plugin-8.3.4.tgz",
+      "integrity": "sha512-ZMFWYxeTN4GxCn8dyIH4roECyLDy29yv/QKM+pHM3AC5Ny2HWI35SohWao4fGBAFxPQFbR5hPN8xa6ofHPSSTg==",
       "license": "MIT",
       "dependencies": {
         "unplugin": "^1.3.1"
@@ -51965,20 +51965,20 @@
         "url": "https://opencollective.com/storybook"
       },
       "peerDependencies": {
-        "storybook": "^8.3.1"
+        "storybook": "^8.3.4"
       }
     },
     "node_modules/@storybook/csf-tools": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/csf-tools/-/csf-tools-8.3.1.tgz",
-      "integrity": "sha512-7VbL9vqH6dXGvUs7eH55tlG4QZViStZY614U10yBLbnolO8S3Gu62D1efaj/8Fpi9EvsrzCbozPnMDCdQz+L5g==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/csf-tools/-/csf-tools-8.3.4.tgz",
+      "integrity": "sha512-EkRnBW4o8PSWviHF9sewXh+4utMUdJzmef3VcLd+ZrVXVjgzRnepawqt5mMrVmOWzo4YVn4wmcAGC9EBVnaSzg==",
       "license": "MIT",
       "funding": {
         "type": "opencollective",
         "url": "https://opencollective.com/storybook"
       },
       "peerDependencies": {
-        "storybook": "^8.3.1"
+        "storybook": "^8.3.4"
       }
     },
     "node_modules/@storybook/global": {
@@ -51987,9 +51987,9 @@
       "integrity": "sha512-FcOqPAXACP0I3oJ/ws6/rrPT9WGhu915Cg8D02a9YxLo0DE9zI+a9A5gRGvmQ09fiWPukqI8ZAEoQEdWUKMQdQ=="
     },
     "node_modules/@storybook/icons": {
-      "version": "1.2.10",
-      "resolved": "https://registry.npmjs.org/@storybook/icons/-/icons-1.2.10.tgz",
-      "integrity": "sha512-310apKdDcjbbX2VSLWPwhEwAgjxTzVagrwucVZIdGPErwiAppX8KvBuWZgPo+rQLVrtH8S+pw1dbUwjcE6d7og==",
+      "version": "1.2.12",
+      "resolved": "https://registry.npmjs.org/@storybook/icons/-/icons-1.2.12.tgz",
+      "integrity": "sha512-UxgyK5W3/UV4VrI3dl6ajGfHM4aOqMAkFLWe2KibeQudLf6NJpDrDMSHwZj+3iKC4jFU7dkKbbtH2h/al4sW3Q==",
       "license": "MIT",
       "engines": {
         "node": ">=14.0.0"
@@ -52000,26 +52000,26 @@
       }
     },
     "node_modules/@storybook/manager-api": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/manager-api/-/manager-api-8.3.1.tgz",
-      "integrity": "sha512-GHJr1/nNAfkzNs4P8z31zBN8ZBucMfl+aSH6ciCy12jN3dOmEfb67mx3aes2PmBJjY3K8HG2lgsO9tNKIyDJXQ==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/manager-api/-/manager-api-8.3.4.tgz",
+      "integrity": "sha512-tBx7MBfPUrKSlD666zmVjtIvoNArwCciZiW/UJ8IWmomrTJRfFBnVvPVM2gp1lkDIzRHYmz5x9BHbYaEDNcZWQ==",
       "license": "MIT",
       "funding": {
         "type": "opencollective",
         "url": "https://opencollective.com/storybook"
       },
       "peerDependencies": {
-        "storybook": "^8.3.1"
+        "storybook": "^8.3.4"
       }
     },
     "node_modules/@storybook/preset-react-webpack": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/preset-react-webpack/-/preset-react-webpack-8.3.1.tgz",
-      "integrity": "sha512-XsnavmDMspA/c9b14d63JHUh1FGvP5veA1DUwz6kIR+XxcNGit5ukb/7oq0IoBGnuK2eto5uy9JtvQ1708phFA==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/preset-react-webpack/-/preset-react-webpack-8.3.4.tgz",
+      "integrity": "sha512-aNbozlcBhuX71anW5+2Ujj+vtXHPsYLf5RKOL82lMkCc1q2CzeMuhUB2BoSsU4R4GVnXVpgRPq+3+qLAQMwr6Q==",
       "license": "MIT",
       "dependencies": {
-        "@storybook/core-webpack": "8.3.1",
-        "@storybook/react": "8.3.1",
+        "@storybook/core-webpack": "8.3.4",
+        "@storybook/react": "8.3.4",
         "@storybook/react-docgen-typescript-plugin": "1.0.6--canary.9.0c3f3b7.0",
         "@types/node": "^22.0.0",
         "@types/semver": "^7.3.4",
@@ -52042,7 +52042,7 @@
       "peerDependencies": {
         "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta",
         "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta",
-        "storybook": "^8.3.1"
+        "storybook": "^8.3.4"
       },
       "peerDependenciesMeta": {
         "typescript": {
@@ -52063,30 +52063,30 @@
       }
     },
     "node_modules/@storybook/preview-api": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/preview-api/-/preview-api-8.3.1.tgz",
-      "integrity": "sha512-mpeeQi0DiK6lGiFEa/iAXNQykZB/wv9UiI5MYwxfgVTCCIh7skeBQsu/7Ye+C+KyXgrNmH5YAP3CjYfkFVimhQ==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/preview-api/-/preview-api-8.3.4.tgz",
+      "integrity": "sha512-/YKQ3QDVSHmtFXXCShf5w0XMlg8wkfTpdYxdGv1CKFV8DU24f3N7KWulAgeWWCWQwBzZClDa9kzxmroKlQqx3A==",
       "license": "MIT",
       "funding": {
         "type": "opencollective",
         "url": "https://opencollective.com/storybook"
       },
       "peerDependencies": {
-        "storybook": "^8.3.1"
+        "storybook": "^8.3.4"
       }
     },
     "node_modules/@storybook/react": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/react/-/react-8.3.1.tgz",
-      "integrity": "sha512-uxr5o5TzUHB1vFMgdayxatDTYUYWJxDse4hcpr+D2E5QMrMCKBk/KRYgJtnPhmEBASoT40lcZvYmEWnP973KWA==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/react/-/react-8.3.4.tgz",
+      "integrity": "sha512-PA7iQL4/9X2/iLrv+AUPNtlhTHJWhDao9gQIT1Hef39FtFk+TU9lZGbv+g29R1H9V3cHP5162nG2aTu395kmbA==",
       "license": "MIT",
       "dependencies": {
-        "@storybook/components": "^8.3.1",
+        "@storybook/components": "^8.3.4",
         "@storybook/global": "^5.0.0",
-        "@storybook/manager-api": "^8.3.1",
-        "@storybook/preview-api": "^8.3.1",
-        "@storybook/react-dom-shim": "8.3.1",
-        "@storybook/theming": "^8.3.1",
+        "@storybook/manager-api": "^8.3.4",
+        "@storybook/preview-api": "^8.3.4",
+        "@storybook/react-dom-shim": "8.3.4",
+        "@storybook/theming": "^8.3.4",
         "@types/escodegen": "^0.0.6",
         "@types/estree": "^0.0.51",
         "@types/node": "^22.0.0",
@@ -52110,10 +52110,10 @@
         "url": "https://opencollective.com/storybook"
       },
       "peerDependencies": {
-        "@storybook/test": "8.3.1",
+        "@storybook/test": "8.3.4",
         "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta",
         "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta",
-        "storybook": "^8.3.1",
+        "storybook": "^8.3.4",
         "typescript": ">= 4.2.x"
       },
       "peerDependenciesMeta": {
@@ -52145,9 +52145,9 @@
       }
     },
     "node_modules/@storybook/react-dom-shim": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/react-dom-shim/-/react-dom-shim-8.3.1.tgz",
-      "integrity": "sha512-nHMhXkt3FAm8c08QTTU70vpYhsAu65RpCv/uhYZ89H5OWvmLFHn36iJQPzlpWFtJHJ5+bAV/bfgNODR3BV1gRg==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/react-dom-shim/-/react-dom-shim-8.3.4.tgz",
+      "integrity": "sha512-L4llDvjaAzqPx6h4ddZMh36wPr75PrI2S8bXy+flLqAeVRYnRt4WNKGuxqH0t0U6MwId9+vlCZ13JBfFuY7eQQ==",
       "license": "MIT",
       "funding": {
         "type": "opencollective",
@@ -52156,18 +52156,18 @@
       "peerDependencies": {
         "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta",
         "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta",
-        "storybook": "^8.3.1"
+        "storybook": "^8.3.4"
       }
     },
     "node_modules/@storybook/react-webpack5": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/react-webpack5/-/react-webpack5-8.3.1.tgz",
-      "integrity": "sha512-ciyKa/RImHFk7o+GzX8RN59m7VE3BBCMc5cyjjRzOskkrZIg22s87Flji8eXGoYfGum9/Dwwp4tK//7fI2tcvw==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/react-webpack5/-/react-webpack5-8.3.4.tgz",
+      "integrity": "sha512-N8dAu9fBsWaa4cw5GTo7z6ANes+PA57oK020RLdt9KSAv5qO9zZYnysC2oq5o9q8W9D+L8wCOBpy6jEQPAyiTQ==",
       "license": "MIT",
       "dependencies": {
-        "@storybook/builder-webpack5": "8.3.1",
-        "@storybook/preset-react-webpack": "8.3.1",
-        "@storybook/react": "8.3.1",
+        "@storybook/builder-webpack5": "8.3.4",
+        "@storybook/preset-react-webpack": "8.3.4",
+        "@storybook/react": "8.3.4",
         "@types/node": "^22.0.0"
       },
       "engines": {
@@ -52180,7 +52180,7 @@
       "peerDependencies": {
         "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta",
         "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta",
-        "storybook": "^8.3.1",
+        "storybook": "^8.3.4",
         "typescript": ">= 4.2.x"
       },
       "peerDependenciesMeta": {
@@ -52201,16 +52201,16 @@
       }
     },
     "node_modules/@storybook/theming": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/@storybook/theming/-/theming-8.3.1.tgz",
-      "integrity": "sha512-R6YZnIdN9P9gTauVkZfVmob0/i6/yaAQxnwfMgRLCaFD0TFQ+UQ2pCz40zPAUp3BcNPwMD168GVxmheBb8cGag==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/@storybook/theming/-/theming-8.3.4.tgz",
+      "integrity": "sha512-D4XVsQgTtpHEHLhwkx59aGy1GBwOedVr/mNns7hFrH8FjEpxrrWCuZQASq1ZpCl8LXlh7uvmT5sM2rOdQbGuGg==",
       "license": "MIT",
       "funding": {
         "type": "opencollective",
         "url": "https://opencollective.com/storybook"
       },
       "peerDependencies": {
-        "storybook": "^8.3.1"
+        "storybook": "^8.3.4"
       }
     },
     "node_modules/@types/babel__core": {
@@ -52320,9 +52320,9 @@
       }
     },
     "node_modules/@types/express-serve-static-core": {
-      "version": "4.19.5",
-      "resolved": "https://registry.npmjs.org/@types/express-serve-static-core/-/express-serve-static-core-4.19.5.tgz",
-      "integrity": "sha512-y6W03tvrACO72aijJ5uF02FRq5cgDR9lUxddQ8vyF+GvmjJQqbzDcJngEjURc+ZsG31VI3hODNZJ2URj86pzmg==",
+      "version": "4.19.6",
+      "resolved": "https://registry.npmjs.org/@types/express-serve-static-core/-/express-serve-static-core-4.19.6.tgz",
+      "integrity": "sha512-N4LZ2xG7DatVqhCZzOGb1Yi5lMbXSZcmdLDe9EzSndPV2HpWYWzRbaerl2n27irrm94EPpprqa8KpskPT085+A==",
       "license": "MIT",
       "dependencies": {
         "@types/node": "*",
@@ -52356,9 +52356,9 @@
       "integrity": "sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA=="
     },
     "node_modules/@types/lodash": {
-      "version": "4.17.7",
-      "resolved": "https://registry.npmjs.org/@types/lodash/-/lodash-4.17.7.tgz",
-      "integrity": "sha512-8wTvZawATi/lsmNu10/j2hk1KEP0IvjubqPE3cu1Xz7xfXXt5oCq3SNUz4fMIP4XGF9Ky+Ue2tBA3hcS7LSBlA==",
+      "version": "4.17.9",
+      "resolved": "https://registry.npmjs.org/@types/lodash/-/lodash-4.17.9.tgz",
+      "integrity": "sha512-w9iWudx1XWOHW5lQRS9iKpK/XuRhnN+0T7HvdCCd802FYkT1AMTnxndJHGrNJwRoRHkslGr4S29tjm1cT7x/7w==",
       "license": "MIT"
     },
     "node_modules/@types/mdx": {
@@ -56036,12 +56036,12 @@
       }
     },
     "node_modules/storybook": {
-      "version": "8.3.1",
-      "resolved": "https://registry.npmjs.org/storybook/-/storybook-8.3.1.tgz",
-      "integrity": "sha512-CYqt5KOpaTgb8OczNo2+EtMi8YNDPi4vNVebVlLDOroWxyulb8I7MIOH9gALczcIOb+TZUArPztjoa8rkXTaDQ==",
+      "version": "8.3.4",
+      "resolved": "https://registry.npmjs.org/storybook/-/storybook-8.3.4.tgz",
+      "integrity": "sha512-nzvuK5TsEgJwcWGLGgafabBOxKn37lfJVv7ZoUVPgJIjk2mNRyJDFwYRJzUZaD37eiR/c/lQ6MoaeqlGwiXoxw==",
       "license": "MIT",
       "dependencies": {
-        "@storybook/core": "8.3.1"
+        "@storybook/core": "8.3.4"
       },
       "bin": {
         "getstorybook": "bin/index.cjs",
