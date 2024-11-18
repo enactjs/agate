@@ -19,16 +19,16 @@ class PickerInterface {
 		return element('.internal_Picker_Picker_picker', this.self);
 	}
 
-	decrementer (picker) {
-		return element('.internal_Picker_Picker_itemDecrement', picker);
+	decrementer () {
+		return $(`#${this.id} .internal_Picker_Picker_itemDecrement`);
 	}
 
-	incrementer (picker) {
-		return element('.internal_Picker_Picker_itemIncrement', picker);
+	incrementer () {
+		return $(`#${this.id} .internal_Picker_Picker_itemIncrement`);
 	}
 
-	active (picker) {
-		return element('.internal_Picker_Picker_active', picker);
+	active () {
+		return $(`#${this.id} .internal_Picker_Picker_active`);
 	}
 }
 

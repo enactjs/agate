@@ -1,6 +1,6 @@
 'use strict';
 const {Page} = require('@enact/ui-test-utils/utils');
-const {element, getText, hasClass} = require('@enact/ui-test-utils/utils');
+const {getText, hasClass} = require('@enact/ui-test-utils/utils');
 
 class RadioItemInterface {
 	constructor (id) {
@@ -15,7 +15,7 @@ class RadioItemInterface {
 		return $(`#${this.id}`);
 	}
 	get textContent () {
-		return getText(element('.Item_Item_content', this.self));
+		return getText($(`#${this.id} .Item_Item_content`));
 	}
 	get isSelected () {
 		return hasClass('RadioItem_RadioItem_selected', this.self);
