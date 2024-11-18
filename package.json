@@ -36,6 +36,7 @@
   "eslintConfig": {
     "extends": "enact-proxy/strict"
   },
+
   "dependencies": {
     "@enact/core": "^5.0.0-alpha.1",
     "@enact/i18n": "^5.0.0-alpha.1",
