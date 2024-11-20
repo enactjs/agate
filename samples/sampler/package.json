@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@enact/agate": "../../",
-    "@enact/core": "^4.8.0",
+    "@enact/core": "^4.9.0-beta.1",
     "@enact/i18n": "^4.8.0",
     "@enact/spotlight": "^4.8.0",
     "@enact/storybook-utils": "^5.1.4",
