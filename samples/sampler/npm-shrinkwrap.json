@@ -13,7 +13,7 @@
         "@enact/core": "^5.0.0-alpha.2",
         "@enact/i18n": "^5.0.0-alpha.2",
         "@enact/spotlight": "^5.0.0-alpha.2",
-        "@enact/storybook-utils": "^6.0.0-rc.1",
+        "@enact/storybook-utils": "^6.0.0-rc.2",
         "@enact/ui": "^5.0.0-alpha.2",
         "@storybook/addon-docs": "^8.2.9",
         "@storybook/builder-webpack5": "^8.2.9",
