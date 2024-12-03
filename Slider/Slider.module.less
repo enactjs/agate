@@ -136,7 +136,10 @@
 			.knob {
 				bottom: ~"calc(var(--ui-slider-proportion-end-knob) * 100%)";
 				top: auto;
-				transform: @agate-slider-knob-transform-vertical;
+
+				&::before {
+					transform: @agate-slider-knob-transform-vertical;
+				}
 			}
 		}
 
@@ -199,6 +202,12 @@
 					height: @agate-slider-active-knob-height;
 					width: @agate-slider-active-knob-width;
 					border-radius: @agate-slider-active-knob-border-radius;
+				}
+
+				&.vertical {
+					.knob::before {
+						transform: @agate-slider-active-knob-transform-vertical;
+					}
 				}
 			}
 
