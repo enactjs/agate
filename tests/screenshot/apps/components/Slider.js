@@ -25,78 +25,18 @@ const SliderTests = [
 		},
 		focus: true
 	},
-	{
-		component: <Slider orientation="vertical" />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <Slider orientation="vertical" value={60} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <Slider progressAnchor={0.7} orientation="vertical" value={60} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <Slider progressAnchor={0.4} orientation="vertical" value={60} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <Slider orientation="vertical" backgroundProgress={0.5} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <Slider orientation="vertical" backgroundProgress={1} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <Slider orientation="vertical" backgroundProgress={0.25} value={50} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <Slider orientation="vertical" disabled backgroundProgress={0.25} value={50} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <Slider orientation="vertical" backgroundProgress={0.5} value={25} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <Slider orientation="vertical" backgroundProgress={0.25} value={75} progressAnchor={0.5} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <Slider orientation="vertical" backgroundProgress={0.75} value={25} progressAnchor={0.5} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <Slider orientation="vertical" backgroundProgress={0.1} value={25} progressAnchor={0.2} />,
-		wrapper: {
-			padded: true
-		}
-	},
+	<Slider orientation="vertical" />,
+	<Slider orientation="vertical" value={60} />,
+	<Slider progressAnchor={0.7} orientation="vertical" value={60} />,
+	<Slider progressAnchor={0.4} orientation="vertical" value={60} />,
+	<Slider orientation="vertical" backgroundProgress={0.5} />,
+	<Slider orientation="vertical" backgroundProgress={1} />,
+	<Slider orientation="vertical" backgroundProgress={0.25} value={50} />,
+	<Slider orientation="vertical" disabled backgroundProgress={0.25} value={50} />,
+	<Slider orientation="vertical" backgroundProgress={0.5} value={25} />,
+	<Slider orientation="vertical" backgroundProgress={0.25} value={75} progressAnchor={0.5} />,
+	<Slider orientation="vertical" backgroundProgress={0.75} value={25} progressAnchor={0.5} />,
+	<Slider orientation="vertical" backgroundProgress={0.1} value={25} progressAnchor={0.2} />,
 	{
 		component: <Slider orientation="vertical" value={25} progressAnchor={0.5} tooltip />,
 		wrapper: {

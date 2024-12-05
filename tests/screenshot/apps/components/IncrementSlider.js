@@ -25,66 +25,16 @@ const IncrementSliderTests = [
 	<IncrementSlider backgroundProgress={0.25} value={75} progressAnchor={0.5} />,
 	<IncrementSlider backgroundProgress={0.75} value={25} progressAnchor={0.5} />,
 	<IncrementSlider backgroundProgress={0.1} value={25} progressAnchor={0.2} />,
-	{
-		component: <IncrementSlider orientation="vertical" />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <IncrementSlider orientation="vertical" value={60} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <IncrementSlider orientation="vertical" backgroundProgress={0.5} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <IncrementSlider orientation="vertical" backgroundProgress={1} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <IncrementSlider orientation="vertical" backgroundProgress={0.25} value={50} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <IncrementSlider orientation="vertical" disabled backgroundProgress={0.25} value={50} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <IncrementSlider orientation="vertical" backgroundProgress={0.5} value={25} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <IncrementSlider orientation="vertical" backgroundProgress={0.25} value={75} progressAnchor={0.5} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <IncrementSlider orientation="vertical" backgroundProgress={0.75} value={25} progressAnchor={0.5} />,
-		wrapper: {
-			padded: true
-		}
-	},
-	{
-		component: <IncrementSlider orientation="vertical" backgroundProgress={0.1} value={25} progressAnchor={0.2} />,
-		wrapper: {
-			padded: true
-		}
-	},
+	<IncrementSlider orientation="vertical" />,
+	<IncrementSlider orientation="vertical" value={60} />,
+	<IncrementSlider orientation="vertical" backgroundProgress={0.5} />,
+	<IncrementSlider orientation="vertical" backgroundProgress={1} />,
+	<IncrementSlider orientation="vertical" backgroundProgress={0.25} value={50} />,
+	<IncrementSlider orientation="vertical" disabled backgroundProgress={0.25} value={50} />,
+	<IncrementSlider orientation="vertical" backgroundProgress={0.5} value={25} />,
+	<IncrementSlider orientation="vertical" backgroundProgress={0.25} value={75} progressAnchor={0.5} />,
+	<IncrementSlider orientation="vertical" backgroundProgress={0.75} value={25} progressAnchor={0.5} />,
+	<IncrementSlider orientation="vertical" backgroundProgress={0.1} value={25} progressAnchor={0.2} />,
 	// RTL
 	{
 		locale: 'ar-SA',
