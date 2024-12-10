@@ -18,7 +18,7 @@ function getResBundle () {
 /**
  * Creates a new ilib.ResBundle for string translation
  *
- * @param  {ilib.Locale} locale Locale for ResBundle
+ * @param  {Object} options Options for ResBundle
  *
  * @returns {Promise|ResBundle} Resolves with a new ilib.ResBundle
  */
@@ -54,7 +54,7 @@ function clearResBundle () {
  * Set the locale for the strings that $L loads. This may reload the
  * string resources if necessary.
  *
- * @param {string} spec the locale specifier
+ * @param {ilib.ResBundle} bundle bundle for setResBundle
  * @returns {ilib.ResBundle} Current ResBundle
  */
 function setResBundle (bundle) {

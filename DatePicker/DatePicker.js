@@ -179,7 +179,7 @@ const DatePicker = DatePickerDecorator(
  * @function
  * @memberof agate/DatePicker
  * @param {Date} date `Date` to convert
- * @returns {String?} Converted date or `null` if `date` is invalid
+ * @returns {String|Null} Converted date or `null` if `date` is invalid
  */
 const dateToLocaleString = (date) => {
 	if (!date) {

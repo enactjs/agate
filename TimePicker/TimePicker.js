@@ -251,7 +251,7 @@ const TimePicker = TimePickerDecorator(
  * @function
  * @memberof agate/TimePicker
  * @param {Date} time `Date` to convert
- * @returns {String?} Converted date or `null` if `date` is invalid
+ * @returns {String|Null} Converted date or `null` if `date` is invalid
  */
 const timeToLocaleString = (time) => {
 	if (!time) {
