@@ -54,7 +54,7 @@ function clearResBundle () {
  * Set the locale for the strings that $L loads. This may reload the
  * string resources if necessary.
  *
- * @param {ilib.ResBundle} bundle bundle for setResBundle
+ * @param {ilib.ResBundle} bundle Bundle for setResBundle
  * @returns {ilib.ResBundle} Current ResBundle
  */
 function setResBundle (bundle) {
