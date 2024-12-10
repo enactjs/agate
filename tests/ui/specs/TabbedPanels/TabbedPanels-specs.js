@@ -13,7 +13,7 @@ describe('TabbedPanels', function () {
 
 	describe('5-way', function () {
 		it('should select first button at render', async function () {
-			expect(Number(tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(0);
+			expect(Number(await tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(0);
 		});
 
 		it('should focus first tab view', async function () {
@@ -28,7 +28,7 @@ describe('TabbedPanels', function () {
 			await Page.spotlightSelect();
 			await browser.pause(500);
 
-			expect(Number(tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(1);
+			expect(Number(await tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(1);
 		});
 
 		it('should focus second tab view on 5-way down', async function () {
@@ -49,7 +49,7 @@ describe('TabbedPanels', function () {
 			await Page.spotlightSelect();
 			await browser.pause(500);
 
-			expect(Number(tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(2);
+			expect(Number(await tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(2);
 		});
 
 		it('should focus third tab view on 5-way down', async function () {
@@ -96,28 +96,28 @@ describe('TabbedPanels', function () {
 
 	describe('pointer', function () {
 		it('should select the second tab', async function () {
-			expect(Number(tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(0);
+			expect(Number(await tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(0);
 			await tabbedPanels.tab(1).click();
-			expect(Number(tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(1);
+			expect(Number(await tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(1);
 		});
 
 		it('should select the third tab', async function () {
-			expect(Number(tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(0);
+			expect(Number(await tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(0);
 			await tabbedPanels.tab(2).click();
-			expect(Number(tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(2);
+			expect(Number(await tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(2);
 		});
 
 		it('should select the next tab when click on \'nextButton\'', async function () {
-			expect(Number(tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(0);
+			expect(Number(await tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(0);
 			await tabbedPanels.nextButton().click();
-			expect(Number(tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(1);
+			expect(Number(await tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(1);
 		});
 
 		it('should select the previous tab when click on \'prevButton\'', async function () {
 			await tabbedPanels.tab(1).click();
-			expect(Number(tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(1);
+			expect(Number(await tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(1);
 			await tabbedPanels.previousButton().click();
-			expect(Number(tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(0);
+			expect(Number(await tabbedPanels.selectedTab().getAttribute('data-index'))).toBe(0);
 		});
 	});
 });
