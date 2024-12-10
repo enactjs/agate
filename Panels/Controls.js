@@ -47,7 +47,7 @@ const ControlsBase = kind({
 		]),
 
 		/**
-		 * Indicates the close button will not be rendered on the top right corner.
+		 * Indicates the close button will not be rendered in the top right corner.
 		 *
 		 * @type {Boolean}
 		 * @public

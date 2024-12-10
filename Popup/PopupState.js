@@ -248,7 +248,7 @@ const PopupState = hoc((config, Wrapped) => {
 						// can occur when quickly toggling a Popup open and closed.
 						this.paused.resume();
 					} else {
-						// Otherwise, we pause spotlight so it is locked until the popup is ready
+						// Otherwise, we pause spotlight, so it is locked until the popup is ready
 						this.paused.pause();
 					}
 				} else if (this.props.open) {
@@ -362,7 +362,7 @@ const PopupState = hoc((config, Wrapped) => {
 
 			off('keydown', this.handleKeyDown);
 
-			// if there is no currently-spotted control or it is wrapped by the popup's container, we
+			// if there is no currently-spotted control, or it is wrapped by the popup's container, we
 			// know it's safe to change focus
 			if (!current || (containerNode && containerNode.contains(current))) {
 				// attempt to set focus to the activator, if available
@@ -385,7 +385,7 @@ const PopupState = hoc((config, Wrapped) => {
 			if (!Spotlight.isPaused() && !Spotlight.focus(containerId)) {
 				const current = Spotlight.getCurrent();
 
-				// In cases where the container contains no spottable controls or we're in pointer-mode, focus
+				// In cases where the container contains no spottable controls, or we're in pointer-mode, focus
 				// cannot inherently set the active container or blur the active control, so we must do that
 				// here.
 				if (current) {

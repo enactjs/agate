@@ -25,7 +25,7 @@ import TimePickerBase from './TimePickerBase';
 /*
  * Converts a string representation of time into minutes
  *
- * @param	{String}	time	Time in the format `HH:mm`
+ * @param	{String}	        Time in the format `HH:mm`
  *
  * @returns	{Number}			Time in minute
  * @private
@@ -113,7 +113,7 @@ const dateTimeConfig = {
 			value.hour = ev.value;
 
 			// In the case of navigating onto the skipped hour of DST, ilib will return the same
-			// value so we skip that hour and update the value again.
+			// value, so we skip that hour and update the value again.
 			const newTime = DateFactory(value).getTimeExtended();
 			if (newTime === currentTime) {
 				value.hour = ev.value * 2 - currentHour;
