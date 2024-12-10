@@ -208,7 +208,7 @@ const getPosition = function (clientNode, tooltipDirection) {
  * @private
  */
 const getLabelOffset = function (tooltipNode, tooltipDirection, tooltipPosition, overflow) {
-	// This method is irrelevent to left and right anchored tooltips, skip entirely.
+	// This method is irrelevant to left and right anchored tooltips, skip entirely.
 	if (tooltipDirection !== 'left' && tooltipDirection !== 'right') {
 		const tooltipWidth = tooltipNode.width;
 

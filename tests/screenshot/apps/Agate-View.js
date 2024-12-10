@@ -49,7 +49,7 @@ function prepareTest (componentName, testId) {
 
 	let component = agateComponents[componentName][testId];
 
-	// If test wants focus, set mode to 5-way so auto-focus works
+	// If test wants focus, set mode to 5-way so autofocus works
 	if (component.focus) {
 		spotlight.setPointerMode(false);
 	}

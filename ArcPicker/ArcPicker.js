@@ -60,7 +60,7 @@ const ArcPickerBase = kind({
 		backgroundColor: PropTypes.string,
 
 		/**
-		 * Whether or not the component is in a disabled state.
+		 * Whether the component is in a disabled state.
 		 *
 		 * @type {Boolean}
 		 * @public
@@ -88,7 +88,7 @@ const ArcPickerBase = kind({
 		foregroundColor: PropTypes.string,
 
 		/**
-		 * Whether or not the component is focused.
+		 * Whether the component is focused.
 		 *
 		 * @type {Boolean}
 		 * @private

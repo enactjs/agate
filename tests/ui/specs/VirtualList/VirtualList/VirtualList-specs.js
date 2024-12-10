@@ -104,7 +104,7 @@ describe('VirtualList', function () {
 			await Page.fiveWayToItem(0);
 			// Verify The list Scroll Down  and the spotted item is placed on the Top.
 			await expectFocusedItem(Number(((await Page.topVisibleItemId()).slice(4))), 'focus Item 00');
-			await expectFocusedItem(0, 'focus Item 00');  // to double check it is really top item
+			await expectFocusedItem(0, 'focus Item 00');  // to double-check it is really top item
 		});
 
 		it('should navigate between inside and outside of a list', async function () {
@@ -189,7 +189,7 @@ describe('VirtualList', function () {
 			await (await Page.item(2)).moveTo();
 			await expectFocusedItem(2);
 			const curSpotlightSize = await Page.spotlightSize();
-			// spotLight size is ItemSize - 2*border-witdth
+			// spotLight size is ItemSize - 2*border-width
 			expect(curSpotlightSize).toBe(144);
 			// Set item size to 50
 			await Page.inputfieldItemSize.moveTo();

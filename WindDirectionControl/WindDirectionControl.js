@@ -40,7 +40,7 @@ const WindDirectionControlBase = kind({
 
 	propTypes: /** @lends agate/WindDirectionControl.WindDirectionControlBase.prototype */ {
 		/**
-		 * Whether or not the component is in a disabled state.
+		 * Whether the component is in a disabled state.
 		 *
 		 * @type {Boolean}
 		 * @public

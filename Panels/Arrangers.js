@@ -6,7 +6,7 @@ import {breadcrumbWidth} from './Breadcrumb';
 const quadInOut = 'cubic-bezier(0.455, 0.030, 0.515, 0.955)';
 const animationOptions = {easing: quadInOut};
 
-// Actvity Arranger
+// Activity Arranger
 
 /*
  * Appends a transform that accounts for a single breadcrumb

@@ -22,7 +22,7 @@ export const _ProgressBar = (args) => {
 	// added here to add conditioned styling to vertical ProgressBar so that the tooltip is visible when positioned "left" on LTR or "right" on RTL
 	const orientation = args['orientation'];
 
-	// tooltip is first so it appears at the top of the tab. the rest are alphabetical
+	// tooltip is first, so it appears at the top of the tab. the rest are alphabetical
 	const tooltip = args['tooltip'];
 	const position = args['position'];
 

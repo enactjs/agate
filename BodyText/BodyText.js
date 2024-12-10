@@ -142,7 +142,7 @@ const BodyTextDecorator = compose(
 /**
  * A simple text block component, ready to use in Agate applications.
  *
- * `BodyText` may be used to display a block of text and is sized and spaced appropriately for a
+ * `BodyText` may be used to display a block of text and is sized and spaced appropriately for an
  * Agate application.
  *
  * Usage:

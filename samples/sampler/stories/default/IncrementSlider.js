@@ -24,7 +24,7 @@ export const _IncrementSlider = (args) => {
 	// added here to force Storybook to put the Slider tab first
 	const disabled = args['disabled'];
 
-	// tooltip is first so it appears at the top of the tab. the rest are alphabetical
+	// tooltip is first, so it appears at the top of the tab. the rest are alphabetical
 	const tooltip = args['tooltip'];
 	const percent = args['percent'];
 	const position = args['position'];

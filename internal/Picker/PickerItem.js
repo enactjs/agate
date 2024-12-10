@@ -27,7 +27,7 @@ const PickerItemBase = kind({
 });
 
 /**
- * An Agate styled PickerItem with built-in support for marqueed text.
+ * An Agate styled PickerItem with built-in support for marquee text.
  *
  * @class PickerItem
  * @memberof agate/PickerItem

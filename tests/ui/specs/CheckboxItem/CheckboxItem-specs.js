@@ -131,7 +131,7 @@ describe('CheckboxItem', function () {
 				expect(await checkboxItem.isIndeterminate).toBe(true);
 			});
 
-			it('should dislay an indeterminate icon', async function () {
+			it('should display an indeterminate icon', async function () {
 				expect(await checkboxItem.indeterminateIconSymbol).toBe('-');
 			});
 		});
