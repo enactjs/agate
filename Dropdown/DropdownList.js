@@ -141,7 +141,7 @@ const DropdownListBase = kind({
 	},
 
 	computed: {
-		className: ({direction, skin, width, styler}) => styler.append(direction.substr(0, direction.indexOf(' ')), width, {dropdownListWithCustomizedScroller: skin === 'silicon'}),
+		className: ({direction, skin, width, styler}) => styler.append(direction.substring(0, direction.indexOf(' ')), width, {dropdownListWithCustomizedScroller: skin === 'silicon'}),
 		dataSize: ({children}) => children ? children.length : 0,
 		// Note: Retaining this in case we need to support different item sizes for large text mode:
 		itemSize: ({skin}) => (skin === 'gallium') ? ri.scale(90) : ri.scale(60)
@@ -289,8 +289,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 				current.dataset['index'] != null && dropdownListNode.contains(current)
 			) {
 				const focusedIndex = Number(current.dataset['index']);
-				const lastFocusedKey = getKey({children: this.props.children, selected: focusedIndex});
-				this.lastFocusedKey = lastFocusedKey;
+				this.lastFocusedKey = getKey({children: this.props.children, selected: focusedIndex});
 			}
 
 			if (this.props.onFocus) {

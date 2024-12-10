@@ -5,7 +5,7 @@ export const timerIndexSlice = createSlice({
 	initialState: 0,
 	reducers: {
 		setTimerIndex: (state, action) => {
-			return (state = action.payload);
+			return (action.payload);
 		}
 	}
 });

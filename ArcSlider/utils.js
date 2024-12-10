@@ -3,8 +3,7 @@ const valueToAngle = (value, min, max, startAngle, endAngle) => {
 		max++;
 	}
 	const ratio = (value - min) / (max - min);
-	const angle = ratio * (endAngle - startAngle) + startAngle;
-	return angle;
+	return ratio * (endAngle - startAngle) + startAngle;
 };
 
 const angleToValue = (angle, min, max, startAngle, endAngle) => {

@@ -18,9 +18,8 @@ const indexSlice = createSlice({
 export const {increaseIndex, decreaseIndex} = indexSlice.actions;
 
 export default function configureAppStore (initialState) {
-	const store = configureStore({
+	return configureStore({
 		reducer: indexSlice.reducer,
 		initialState
 	});
-	return store;
 }

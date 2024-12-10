@@ -186,7 +186,6 @@ const InputBoard = ({className}) => {
 		// add/remove event
 		if (prevActiveEvents && prevActiveEvents !== activeEvents) {
 			const
-				prev = prevActiveEvents,
 				curr = activeEvents,
 				handlers = {};
 
@@ -200,7 +199,7 @@ const InputBoard = ({className}) => {
 				}
 
 				// manage DOM Event Listeners
-				if (curr[i] !== prev[i]) {
+				if (curr[i] !== prevActiveEvents[i]) {
 					if (curr[i]) {
 						registerEventHandlerForDOM(eventCategory[i], isCapturingEvent);
 					} else {

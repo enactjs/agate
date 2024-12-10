@@ -284,8 +284,8 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			const screenEdgeKeepout = ri.scale(config.screenEdgeKeepout);
 			const position = this.props.tooltipPosition;
 			const arr = position.split(' ');
-			let tooltipDirection = null;
-			let arrowAnchor = null;
+			let tooltipDirection;
+			let arrowAnchor;
 
 			if (arr.length === 2) {
 				[tooltipDirection, arrowAnchor] = arr;
