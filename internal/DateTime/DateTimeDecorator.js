@@ -139,6 +139,7 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 		 * Updates the internal value in state
 		 *
 		 * @param	{IDate}		value	ilib Date object
+		 * @param 	{Function}  reverseTransition function for reverse transition
 		 *
 		 * @returns {Number}			Updated internal value
 		 */

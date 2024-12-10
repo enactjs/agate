@@ -59,7 +59,8 @@ const PanelsArranger = {
 /**
  * Positions a breadcrumb based on its `data-index` and the current index, `to`
  *
- * @param  {Object} config  Arrangement configuration object
+ * @param  {Node} node  Node for breadcrumb
+ * @param  {Number} index  Index for breadcrumb
  * @returns {undefined}
  * @method
  * @private

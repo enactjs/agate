@@ -5,6 +5,7 @@ import Breadcrumb from './Breadcrumb';
 /**
  * Generates an array of at most `max` breadcrumbs
  *
+ * @param {String} id         Id for breadcrumbs
  * @param {Number} index      Index of active breadcrumb
  * @param {Number} max        Maximum number of breadcrumbs to dispaly
  * @param {Function} onSelect Handler for selecting a breadcrumb
