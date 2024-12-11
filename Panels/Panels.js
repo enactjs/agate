@@ -1,7 +1,7 @@
 import kind from '@enact/core/kind';
 import Measurable from '@enact/ui/Measurable';
 import Slottable from '@enact/ui/Slottable';
-import {shape} from '@enact/ui/ViewManager/Arranger';
+import {shape} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
 

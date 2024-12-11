@@ -3,7 +3,7 @@ import kind from '@enact/core/kind';
 import {Changeable} from '@enact/ui/Changeable';
 import {Cell, Layout} from '@enact/ui/Layout';
 import Slottable from '@enact/ui/Slottable';
-import {shape} from '@enact/ui/ViewManager/Arranger';
+import {shape} from '@enact/ui/ViewManager';
 import PropTypes from 'prop-types';
 
 import Skinnable from '../Skinnable';
