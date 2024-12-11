@@ -36,16 +36,25 @@ class DateTimePickerInterface {
 		return element('.TimePicker_TimePicker_minutePicker', this.self);
 	}
 
-	decrementer (picker) {
-		return element('.internal_Picker_Picker_itemDecrement', picker);
+	dateDecrementer (type) {
+		return $(`#${this.id} .DatePicker_DatePicker_${type} > .internal_Picker_Picker_itemDecrement`);
+	}
+	timeDecrementer (type) {
+		return $(`#${this.id} .TimePicker_TimePicker_${type}Picker > .internal_Picker_Picker_itemDecrement`);
 	}
 
-	incrementer (picker) {
-		return element('.internal_Picker_Picker_itemIncrement', picker);
+	dateIncrementer (type) {
+		return $(`#${this.id} .DatePicker_DatePicker_${type} > .internal_Picker_Picker_itemIncrement`);
+	}
+	timeIncrementer (type) {
+		return $(`#${this.id} .TimePicker_TimePicker_${type}Picker > .internal_Picker_Picker_itemIncrement`);
 	}
 
-	active (picker) {
-		return element('.internal_Picker_Picker_active', picker);
+	dateActive (type) {
+		return $(`#${this.id} .DatePicker_DatePicker_${type} > .internal_Picker_Picker_active`);
+	}
+	timeActive (type) {
+		return $(`#${this.id} .TimePicker_TimePicker_${type}Picker > .internal_Picker_Picker_active`);
 	}
 }
 
