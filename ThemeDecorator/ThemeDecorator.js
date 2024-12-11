@@ -17,7 +17,7 @@ import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 import classnames from 'classnames';
 import convert from 'color-convert';
 import PropTypes from 'prop-types';
-import {createContext, Component} from 'react';
+import {Component, createContext} from 'react';
 
 import Skinnable from '../Skinnable';
 
@@ -288,7 +288,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	// set the DOM node ID of the React DOM tree root
 	setDefaultTargetById(rootId);
 
-	const Decorator = class extends Component {
+	return class extends Component {
 		static displayName = 'ThemeDecorator';
 
 		static propTypes = /** @lends agate/ThemeDecorator.ThemeDecorator.prototype */ {
@@ -342,8 +342,6 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			);
 		}
 	};
-
-	return Decorator;
 });
 
 export default ThemeDecorator;

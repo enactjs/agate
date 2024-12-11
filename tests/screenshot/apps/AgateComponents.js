@@ -104,8 +104,7 @@ const agateTestMetadata = {};
 
 
 Object.keys(agateComponents).forEach((component) => {
-	let metaData = generateTestData(component, agateComponents[component]);
-	agateTestMetadata[component] = metaData;
+	agateTestMetadata[component] = generateTestData(component, agateComponents[component]);
 });
 
 export default agateComponents;

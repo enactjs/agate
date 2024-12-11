@@ -173,7 +173,7 @@ const useEventKey = (props, instances, context) => {
 				}
 			} else if (getDirection(keyCode) && (scrollMode === 'translate' || scrollMode === 'native' && !Spotlight.getPointerMode())) {
 				scrollContainerHandle.current.lastInputType = 'arrowKey';
-				direction = getDirection(keyCode);
+				getDirection(keyCode);
 			}
 		}
 	}
@@ -186,7 +186,7 @@ const useEventKey = (props, instances, context) => {
 			isUp = direction === 'up',
 			directionFactor = isUp ? -1 : 1,
 			pageDistance = directionFactor * bounds.clientHeight * paginationPageMultiplier;
-		let scrollPossible = false;
+		let scrollPossible;
 
 		if (scrollMode === 'translate') {
 			scrollPossible = isUp ? scrollTop > 0 : bounds.maxTop > scrollTop;
@@ -212,7 +212,7 @@ const useEventKey = (props, instances, context) => {
 						clientRect = focusedItem.getBoundingClientRect(),
 						yAdjust = isUp ? 1 : -1,
 						x = clamp(contentRect.left, contentRect.right, (clientRect.right + clientRect.left) / 2);
-					let y = 0;
+					let y;
 
 					if (scrollMode === 'translate') {
 						y = bounds.maxTop <= scrollTop + pageDistance || 0 >= scrollTop + pageDistance ?

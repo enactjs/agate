@@ -5,7 +5,7 @@ export const syntheticEventOnSlice = createSlice({
 	initialState: false,
 	reducers: {
 		isSyntheticEventOn: (state, action) => {
-			return (state = action.payload);
+			return (action.payload);
 		}
 	}
 });

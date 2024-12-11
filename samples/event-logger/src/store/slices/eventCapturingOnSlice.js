@@ -5,7 +5,7 @@ export const eventCapturingOnSlice = createSlice({
 	initialState: false,
 	reducers: {
 		setEventCapturing: (state, action) => {
-			return (state = action.payload);
+			return (action.payload);
 		}
 	}
 });
