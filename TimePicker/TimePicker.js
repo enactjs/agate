@@ -25,7 +25,7 @@ import TimePickerBase from './TimePickerBase';
 /*
  * Converts a string representation of time into minutes
  *
- * @param	{String}	        Time in the format `HH:mm`
+ * @param	{String}	time	Time in the format `HH:mm`
  *
  * @returns	{Number}			Time in minute
  * @private
