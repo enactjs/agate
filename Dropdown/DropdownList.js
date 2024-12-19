@@ -291,7 +291,6 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 				const focusedIndex = Number(current.dataset['index']);
 				const lastFocusedKey = getKey({children: this.props.children, selected: focusedIndex});
 				this.lastFocusedKey = lastFocusedKey;
-
 			}
 
 			if (this.props.onFocus) {

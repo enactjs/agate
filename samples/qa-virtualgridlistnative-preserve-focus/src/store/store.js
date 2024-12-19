@@ -21,6 +21,6 @@ export default function configureAppStore (initialState) {
 	const store = configureStore({
 		reducer: indexSlice.reducer,
 		initialState
-	})
+	});
 	return store;
 }
