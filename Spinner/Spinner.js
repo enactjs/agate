@@ -103,7 +103,7 @@ const SpinnerCore = kind({
 });
 
 /**
- * The base component, defining all of the properties.
+ * The base component, defining all the properties.
  *
  * @class SpinnerBase
  * @memberof agate/Spinner
