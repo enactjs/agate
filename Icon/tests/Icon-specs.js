@@ -7,7 +7,7 @@ describe('Icon Specs', () => {
 	test('should return the correct Unicode value for named icon \'wifi\'', function () {
 		render(<Icon data-testid="icon">wifi</Icon>);
 
-		const expected = 983059; // decimal converted charCode of Unicode 'wi-fi' character
+		const expected = 983059; // decimal converted charCode of Unicode 'wifi' character
 		const actual = screen.getByTestId('icon').textContent.codePointAt();
 
 		expect(actual).toBe(expected);
