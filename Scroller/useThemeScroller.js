@@ -156,7 +156,7 @@ const useSpottable = (props, instances) => {
 	/**
 	 * Calculates the new `scrollLeft`.
 	 *
-	 * @param {Node} focusedItem node
+	 * @param {Node} item node
 	 * @param {Number} scrollPosition last target position, passed when scroll animation is ongoing
 	 *
 	 * @returns {Number} Calculated `scrollLeft`
