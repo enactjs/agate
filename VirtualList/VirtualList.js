@@ -338,7 +338,7 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	onScrollStop: PropTypes.func,
 
 	/**
-	 * When `true`, the list will scroll by page. Otherwise the list will scroll by item.
+	 * When `true`, the list will scroll by page. Otherwise, the list will scroll by item.
 	 *
 	 * @type {Boolean}
 	 * @default false
@@ -772,7 +772,7 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	onScrollStop: PropTypes.func,
 
 	/**
-	 * When `true`, the list will scroll by page. Otherwise the list will scroll by item.
+	 * When `true`, the list will scroll by page. Otherwise, the list will scroll by item.
 	 *
 	 * @type {Boolean}
 	 * @default false

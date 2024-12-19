@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 
 /**
- * A internal Picker component.
+ * An internal Picker component.
  *
  * @module agate/internal/Picker
  * @exports Picker
