@@ -334,7 +334,7 @@ const TabGroupDecorator = compose(
 );
 
 /**
- * An Tab Group component, ready to use in Agate applications.
+ * A Tab Group component, ready to use in Agate applications.
  *
  * Usage:
  * ```

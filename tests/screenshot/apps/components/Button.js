@@ -17,7 +17,7 @@ const ButtonTests = [
 	<Button>តន្ត្រី</Button>,
 
 	// iconPosition = before (Default) + small (default) + large
-	// Leaving size small here as example but it is not required since it is the default.
+	// Leaving size small here as example, but it is not required since it is the default.
 	<Button size="smallest">click me</Button>,
 	<Button size="small">click me</Button>,
 	<Button size="huge">click me</Button>,
@@ -164,7 +164,7 @@ const ButtonTests = [
 		<Button>តន្ត្រី</Button>,
 
 		// iconPosition = before (Default) + small (default) + large
-		// Leaving size small here as example but it is not required since it is the default.
+		// Leaving size small here as example, but it is not required since it is the default.
 		<Button size="smallest">click me</Button>,
 		<Button size="small">click me</Button>,
 		<Button size="huge">click me</Button>,

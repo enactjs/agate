@@ -34,7 +34,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			children: PropTypes.array.isRequired,
 
 			/**
-			 * Whether or not the component is in a disabled state.
+			 * Whether the component is in a disabled state.
 			 *
 			 * @type {Boolean}
 			 * @public

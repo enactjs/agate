@@ -162,7 +162,7 @@ describe('Input Specs', () => {
 		const inputText = screen.getByLabelText('Input field').children[0];
 
 		await user.type(inputText, value);
-		// bluring input onSpotlightRight for code coverage purposes
+		// blurring input onSpotlightRight for code coverage purposes
 		pressRightKey(inputText);
 		pressRightKey(inputText);
 		pressRightKey(inputText);
@@ -201,7 +201,7 @@ describe('Input Specs', () => {
 		const inputText = screen.getByLabelText('Input field').children[0];
 
 		await user.type(inputText, value);
-		// bluring input onSpotlightLeft for code coverage purposes
+		// blurring input onSpotlightLeft for code coverage purposes
 		pressLeftKey(inputText);
 
 		expect(handleBeforeChange).toHaveBeenCalled();

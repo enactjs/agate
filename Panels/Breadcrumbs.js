@@ -6,7 +6,7 @@ import Breadcrumb from './Breadcrumb';
  * Generates an array of at most `max` breadcrumbs
  *
  * @param {Number} index      Index of active breadcrumb
- * @param {Number} max        Maximum number of breadcrumbs to dispaly
+ * @param {Number} max        Maximum number of breadcrumbs to display
  * @param {Function} onSelect Handler for selecting a breadcrumb
  * @returns {React.element[]} Array of breadcrumbs
  * @private
