@@ -1,7 +1,7 @@
 // Utility methods for testing
 
 const extractValue = async (picker) => {
-	return (await picker.active(picker.self)).getText();
+	return (await picker.active()).getText();
 };
 
 module.exports = {

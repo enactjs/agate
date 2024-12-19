@@ -15,24 +15,24 @@ describe('TimePicker', function () {
 				const {meridiem} =  await extractValues(timePicker);
 				if (meridiem === 'AM') {
 					await Page.spotlightDown();
-					await browser.waitUntil(async () => (await timePicker.incrementer(timePicker.hour)).isFocused(), {timeout: 1500,  timeoutMsg: 'hour focused'});
+					await browser.waitUntil(async () => (await timePicker.incrementer('hour')).isFocused(), {timeout: 1500,  timeoutMsg: 'hour focused'});
 					await Page.spotlightRight();
-					await browser.waitUntil(async () => (await timePicker.incrementer(timePicker.minute)).isFocused(), {timeout: 1500,  timeoutMsg: 'minute focused'});
+					await browser.waitUntil(async () => (await timePicker.incrementer('minute')).isFocused(), {timeout: 1500,  timeoutMsg: 'minute focused'});
 					await Page.spotlightRight();
-					await browser.waitUntil(async () => (await timePicker.incrementer(timePicker.meridiem)).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem focused'});
+					await browser.waitUntil(async () => (await timePicker.incrementer('meridiem')).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem focused'});
 				} else {
-					await browser.waitUntil(async () => (await timePicker.decrementer(timePicker.hour)).isFocused(), {timeout: 1500,  timeoutMsg: 'hour focused'});
+					await browser.waitUntil(async () => (await timePicker.decrementer('hour')).isFocused(), {timeout: 1500,  timeoutMsg: 'hour focused'});
 					await Page.spotlightRight();
-					await browser.waitUntil(async () => (await timePicker.decrementer(timePicker.minute)).isFocused(), {timeout: 1500,  timeoutMsg: 'minute focused'});
+					await browser.waitUntil(async () => (await timePicker.decrementer('minute')).isFocused(), {timeout: 1500,  timeoutMsg: 'minute focused'});
 					await Page.spotlightRight();
-					await browser.waitUntil(async () => (await timePicker.decrementer(timePicker.meridiem)).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem focused'});
+					await browser.waitUntil(async () => (await timePicker.decrementer('meridiem')).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem focused'});
 				}
 			});
 
 			describe('5-way', function () {
 				it('should decrease the hour when decrementing the picker', async function () {
 					const {hour} = await extractValues(timePicker);
-					await browser.waitUntil(async () => (await timePicker.decrementer(timePicker.hour)).isFocused(), {timeout: 1500,  interval: 100});
+					await browser.waitUntil(async () => (await timePicker.decrementer('hour')).isFocused(), {timeout: 1500,  interval: 100});
 					await Page.spotlightSelect();
 					const {hour: value} = await extractValues(timePicker);
 					const expected = hour > 1 ? hour - 1 : 12;
@@ -42,7 +42,7 @@ describe('TimePicker', function () {
 				it('should increase the hour when incrementing the picker', async function () {
 					const {hour} = await extractValues(timePicker);
 					await Page.spotlightDown();
-					await browser.waitUntil(async () => (await timePicker.incrementer(timePicker.hour)).isFocused(), {timeout: 1500,  interval: 100});
+					await browser.waitUntil(async () => (await timePicker.incrementer('hour')).isFocused(), {timeout: 1500,  interval: 100});
 					await Page.spotlightSelect();
 					const {hour: value} = await extractValues(timePicker);
 					const expected = hour < 12 ? hour + 1 : 1;
@@ -52,7 +52,7 @@ describe('TimePicker', function () {
 				it('should decrease the minute when decrementing the picker', async function () {
 					const {minute} = await extractValues(timePicker);
 					await Page.spotlightRight();
-					await browser.waitUntil(async () => (await timePicker.decrementer(timePicker.minute)).isFocused(), {timeout: 1500,  interval: 100});
+					await browser.waitUntil(async () => (await timePicker.decrementer('minute')).isFocused(), {timeout: 1500,  interval: 100});
 					await Page.spotlightSelect();
 					const {minute: value} = await extractValues(timePicker);
 					const expected = minute !== 0 ? minute - 1 : 59;
@@ -62,9 +62,9 @@ describe('TimePicker', function () {
 				it('should increase the minute when incrementing the picker', async function () {
 					const {minute} = await extractValues(timePicker);
 					await Page.spotlightRight();
-					await browser.waitUntil(async () => (await timePicker.decrementer(timePicker.minute)).isFocused(), {timeout: 1500,  interval: 100});
+					await browser.waitUntil(async () => (await timePicker.decrementer('minute')).isFocused(), {timeout: 1500,  interval: 100});
 					await Page.spotlightDown();
-					await browser.waitUntil(async () => (await timePicker.incrementer(timePicker.minute)).isFocused(), {timeout: 1500,  interval: 100});
+					await browser.waitUntil(async () => (await timePicker.incrementer('minute')).isFocused(), {timeout: 1500,  interval: 100});
 					await Page.spotlightSelect();
 					const {minute: value} = await extractValues(timePicker);
 					const expected = minute !== 59 ? minute + 1 : 0;
@@ -78,12 +78,12 @@ describe('TimePicker', function () {
 						await Page.spotlightDown();
 						await Page.spotlightRight();
 						await Page.spotlightRight();
-						await browser.waitUntil(async () => (await timePicker.incrementer(timePicker.meridiem)).isFocused(), {timeout: 1500,  interval: 100});
+						await browser.waitUntil(async () => (await timePicker.incrementer('meridiem')).isFocused(), {timeout: 1500,  interval: 100});
 					} else {
 						// change to AM
 						await Page.spotlightRight();
 						await Page.spotlightRight();
-						await browser.waitUntil(async () => (await timePicker.decrementer(timePicker.meridiem)).isFocused(), {timeout: 1500,  interval: 100});
+						await browser.waitUntil(async () => (await timePicker.decrementer('meridiem')).isFocused(), {timeout: 1500,  interval: 100});
 					}
 					await Page.spotlightSelect();
 
@@ -95,9 +95,9 @@ describe('TimePicker', function () {
 					const {meridiem} = await extractValues(timePicker);
 					if (meridiem === 'AM') {
 						await Page.spotlightDown();
-						await browser.waitUntil(async () => (await timePicker.incrementer(timePicker.hour)).isFocused(), {timeout: 1500,  interval: 100});
+						await browser.waitUntil(async () => (await timePicker.incrementer('hour')).isFocused(), {timeout: 1500,  interval: 100});
 					} else {
-						await browser.waitUntil(async () => (await timePicker.decrementer(timePicker.hour)).isFocused(), {timeout: 1500,  interval: 100});
+						await browser.waitUntil(async () => (await timePicker.decrementer('hour')).isFocused(), {timeout: 1500,  interval: 100});
 					}
 					// 12 hours ought to change the value text if meridiem changes
 					for (let i = 12; i; i -= 1) {
@@ -111,14 +111,14 @@ describe('TimePicker', function () {
 
 			describe('pointer', function () {
 				it('should select hour when opened', async function () {
-					(await timePicker.decrementer(timePicker.hour)).click();
-					await browser.waitUntil(async () => await timePicker.decrementer(timePicker.hour).isFocused(), {timeout: 1500,  interval: 100});
+					(await timePicker.decrementer('hour')).click();
+					await browser.waitUntil(async () => await timePicker.decrementer('hour').isFocused(), {timeout: 1500,  interval: 100});
 				});
 
 
 				it('should increase the hour when incrementing the picker', async function () {
 					const {hour} = await extractValues(timePicker);
-					(await timePicker.incrementer(timePicker.hour)).click();
+					(await timePicker.incrementer('hour')).click();
 					const {hour: value} = await extractValues(timePicker);
 					const expected = hour < 12 ? hour + 1 : 1;
 					expect(value).toBe(expected);
@@ -126,7 +126,7 @@ describe('TimePicker', function () {
 
 				it('should decrease the hour when decrementing the picker', async function () {
 					const {hour} = await extractValues(timePicker);
-					(await timePicker.decrementer(timePicker.hour)).click();
+					(await timePicker.decrementer('hour')).click();
 					const {hour: value} = await extractValues(timePicker);
 					const expected = hour > 1 ? hour - 1 : 12;
 					expect(value).toBe(expected);
@@ -134,8 +134,8 @@ describe('TimePicker', function () {
 
 				it('should increase the minute when incrementing the picker', async function () {
 					const {minute} = await extractValues(timePicker);
-					(await timePicker.incrementer(timePicker.minute)).click();
-					await browser.waitUntil( async () => (await timePicker.incrementer(timePicker.minute)).isFocused(), {timeout: 1500,  interval: 100});
+					(await timePicker.incrementer('minute')).click();
+					await browser.waitUntil( async () => (await timePicker.incrementer('minute')).isFocused(), {timeout: 1500,  interval: 100});
 					const {minute: value} = await extractValues(timePicker);
 					const expected = minute !== 59 ? minute + 1 : 0;
 					expect(value).toBe(expected);
@@ -143,8 +143,8 @@ describe('TimePicker', function () {
 
 				it('should decrease the minute when decrementing the picker', async function () {
 					const {minute} = await extractValues(timePicker);
-					(await timePicker.decrementer(timePicker.minute)).click();
-					await browser.waitUntil(async () => (await timePicker.decrementer(timePicker.minute)).isFocused(), {timeout: 1500,  interval: 100});
+					(await timePicker.decrementer('minute')).click();
+					await browser.waitUntil(async () => (await timePicker.decrementer('minute')).isFocused(), {timeout: 1500,  interval: 100});
 					const {minute: value} = await extractValues(timePicker);
 					const expected = minute !== 0 ? minute - 1 : 59;
 					expect(value).toBe(expected);
@@ -155,12 +155,12 @@ describe('TimePicker', function () {
 					if (meridiem === 'AM') {
 						// 12 hours ought to change the value text if meridiem changes
 						for (let i = 12; i; i -= 1) {
-							(await timePicker.incrementer(timePicker.hour)).click();
+							(await timePicker.incrementer('hour')).click();
 						}
 					} else {
 						// 12 hours ought to change the value text if meridiem changes
 						for (let i = 12; i; i -= 1) {
-							(await timePicker.decrementer(timePicker.hour)).click();
+							(await timePicker.decrementer('hour')).click();
 						}
 					}
 
@@ -201,8 +201,8 @@ describe('TimePicker', function () {
 			describe('pointer', function () {
 				it('should not update hour on click', async function () {
 					const {hour} = await extractValues(timePicker);
-					await timePicker.decrementer(timePicker.hour).click();
-					expect(await (await timePicker.decrementer(timePicker.hour)).isFocused()).toBe(true);
+					await timePicker.decrementer('hour').click();
+					expect(await (await timePicker.decrementer('hour')).isFocused()).toBe(true);
 					await browser.pause(500);
 					const {hour: value} = await extractValues(timePicker);
 					expect(value).toBe(hour);
@@ -215,18 +215,18 @@ describe('TimePicker', function () {
 			it('should not update \'defaultValue\' on click', async function () {
 				const {hour, minute, meridiem} = await extractValues(timePicker);
 
-				(await timePicker.decrementer(timePicker.minute)).click();
-				expect(await timePicker.decrementer(timePicker.minute).isFocused()).toBe(true);
+				(await timePicker.decrementer('minute')).click();
+				expect(await timePicker.decrementer('minute').isFocused()).toBe(true);
 
-				(await timePicker.decrementer(timePicker.hour)).click();
-				expect(await timePicker.decrementer(timePicker.hour).isFocused()).toBe(true);
+				(await timePicker.decrementer('hour')).click();
+				expect(await timePicker.decrementer('hour').isFocused()).toBe(true);
 
 				if (meridiem === 'AM') {
-					(await timePicker.incrementer(timePicker.meridiem)).click();
-					expect(await timePicker.incrementer(timePicker.meridiem).isFocused()).toBe(true);
+					(await timePicker.incrementer('meridiem')).click();
+					expect(await timePicker.incrementer('meridiem').isFocused()).toBe(true);
 				} else {
-					(await timePicker.decrementer(timePicker.meridiem)).click();
-					expect(await timePicker.decrementer(timePicker.meridiem).isFocused()).toBe(true);
+					(await timePicker.decrementer('meridiem')).click();
+					expect(await timePicker.decrementer('meridiem').isFocused()).toBe(true);
 				}
 
 				await browser.pause(500);
@@ -246,28 +246,28 @@ describe('TimePicker', function () {
 		});
 
 		it('should focus middle picker (hour) when selected', async function () {
-			await browser.waitUntil(async () => (await timePicker.decrementer(timePicker.hour)).isFocused(), {timeout: 1500,  interval: 100});
+			await browser.waitUntil(async () => (await timePicker.decrementer('hour')).isFocused(), {timeout: 1500,  interval: 100});
 		});
 
 		it('should have minute-hour-meridiem order', async function () {
 			const {meridiem} = await extractValues(timePicker);
 			if (meridiem === 'ص') {
 				await Page.spotlightDown();
-				await browser.waitUntil(async () => (await timePicker.incrementer(timePicker.hour)).isFocused(), {timeout: 1500,  timeoutMsg: 'initial', interval: 100});
+				await browser.waitUntil(async () => (await timePicker.incrementer('hour')).isFocused(), {timeout: 1500,  timeoutMsg: 'initial', interval: 100});
 				await Page.spotlightRight();
-				await browser.waitUntil(async () => (await timePicker.incrementer(timePicker.minute)).isFocused(), {timeout: 1500,  timeoutMsg: 'minute', interval: 100});
+				await browser.waitUntil(async () => (await timePicker.incrementer('minute')).isFocused(), {timeout: 1500,  timeoutMsg: 'minute', interval: 100});
 				await Page.spotlightLeft();
-				await browser.waitUntil(async () => (await timePicker.incrementer(timePicker.hour)).isFocused(), {timeout: 1500,  timeoutMsg: 'hour', interval: 100});
+				await browser.waitUntil(async () => (await timePicker.incrementer('hour')).isFocused(), {timeout: 1500,  timeoutMsg: 'hour', interval: 100});
 				await Page.spotlightLeft();
-				await browser.waitUntil(async () => (await timePicker.incrementer(timePicker.meridiem)).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem', interval: 100});
+				await browser.waitUntil(async () => (await timePicker.incrementer('meridiem')).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem', interval: 100});
 			} else {
-				await browser.waitUntil(async () => (await timePicker.decrementer(timePicker.hour)).isFocused(), {timeout: 1500,  timeoutMsg: 'initial', interval: 100});
+				await browser.waitUntil(async () => (await timePicker.decrementer('hour')).isFocused(), {timeout: 1500,  timeoutMsg: 'initial', interval: 100});
 				await Page.spotlightRight();
-				await browser.waitUntil(async () => (await timePicker.decrementer(timePicker.minute)).isFocused(), {timeout: 1500,  timeoutMsg: 'minute', interval: 100});
+				await browser.waitUntil(async () => (await timePicker.decrementer('minute')).isFocused(), {timeout: 1500,  timeoutMsg: 'minute', interval: 100});
 				await Page.spotlightLeft();
-				await browser.waitUntil(async () => (await timePicker.decrementer(timePicker.hour)).isFocused(), {timeout: 1500,  timeoutMsg: 'hour', interval: 100});
+				await browser.waitUntil(async () => (await timePicker.decrementer('hour')).isFocused(), {timeout: 1500,  timeoutMsg: 'hour', interval: 100});
 				await Page.spotlightLeft();
-				await browser.waitUntil(async () => (await timePicker.decrementer(timePicker.meridiem)).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem', interval: 100});
+				await browser.waitUntil(async () => (await timePicker.decrementer('meridiem')).isFocused(), {timeout: 1500,  timeoutMsg: 'meridiem', interval: 100});
 			}
 
 
@@ -291,16 +291,16 @@ describe('TimePicker', function () {
 
 		it('should increment hours from 23 to 0', async function () {
 			// go to 23 first
-			(await timePicker.decrementer(timePicker.hour)).click();
+			(await timePicker.decrementer('hour')).click();
 			expect((await extractValues(timePicker)).hour).toBe(23);
 			await browser.pause(500);
 			// now increment
-			(await timePicker.incrementer(timePicker.hour)).click();
+			(await timePicker.incrementer('hour')).click();
 			expect((await extractValues(timePicker)).hour).toBe(0);
 		});
 
 		it('should decrement hours from 0 to 23', async function () {
-			(await timePicker.decrementer(timePicker.hour)).click();
+			(await timePicker.decrementer('hour')).click();
 			expect((await extractValues(timePicker)).hour).toBe(23);
 		});
 	});

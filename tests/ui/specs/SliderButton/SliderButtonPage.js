@@ -16,7 +16,7 @@ class SliderButtonInterface {
 	clickableItem (index) {
 		const parent = $(this.selector + ' .SliderButton_SliderButton_track');
 
-		return parent.$$('.SliderButton_SliderButton_client')[index];
+		return parent.$$(`#${this.id} .SliderButton_SliderButton_client`)[index];
 	}
 }
 

@@ -1,5 +1,5 @@
 'use strict';
-const {element, getText, Page} = require('@enact/ui-test-utils/utils');
+const {getText, Page} = require('@enact/ui-test-utils/utils');
 
 class SwitchItemInterface {
 	constructor (id) {
@@ -14,10 +14,10 @@ class SwitchItemInterface {
 		return $(`#${this.id}`);
 	}
 	get textContent () {
-		return getText(element('.Item_Item_content', this.self));
+		return getText($(`#${this.id} .Item_Item_content`));
 	}
 	get isSelected () {
-		return element('.Switch_Switch_selected', this.self).isExisting();
+		return $(`#${this.id} .Switch_Switch_selected`).isExisting();
 	}
 	get isInline () {
 		return $(`#${this.id}.Item_Item_inline`).isExisting();

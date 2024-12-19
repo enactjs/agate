@@ -155,7 +155,7 @@ describe('Panel', function () {
 			await Page.panel2.self.waitForExist({reverse: true});
 
 			const expected = true;
-			const actual = await Page.panel1.self.isDisplayedInViewport();
+			const actual = await Page.panel1.self.isDisplayed([isWithinViewport = true]); // eslint-disable-line no-undef
 
 			expect(actual).toBe(expected);
 		});
