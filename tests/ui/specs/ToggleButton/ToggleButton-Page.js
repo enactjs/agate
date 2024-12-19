@@ -8,7 +8,7 @@ class AgateToggleButtonInterface {
 	}
 
 	async focus () {
-		return browser.execute((el) => el.focus(), await `#${this.id}`);
+		return browser.execute((el) => el.focus(), `#${this.id}`);
 	}
 	get self () {
 		return $(`#${this.id}`);
