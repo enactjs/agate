@@ -359,7 +359,7 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		getContainerAdjustedPosition = () => {
 			const position = this.adjustedDirection;
 			const arr = this.adjustedDirection.split(' ');
-			let direction;
+			let direction = null;
 			let anchor = null;
 
 			if (arr.length === 2) {

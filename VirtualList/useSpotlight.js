@@ -102,7 +102,11 @@ const useSpotlightRestore = (props, instances, context) => {
 	function isPlaceholderFocused () {
 		const current = Spotlight.getCurrent();
 
-		return !!(current && current.dataset.vlPlaceholder && utilDOM.containsDangerously(scrollContentRef.current, current));
+		if (current && current.dataset.vlPlaceholder && utilDOM.containsDangerously(scrollContentRef.current, current)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	function restoreFocus () {

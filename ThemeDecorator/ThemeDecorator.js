@@ -288,7 +288,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	// set the DOM node ID of the React DOM tree root
 	setDefaultTargetById(rootId);
 
-	return class extends Component {
+	const Decorator = class extends Component {
 		static displayName = 'ThemeDecorator';
 
 		static propTypes = /** @lends agate/ThemeDecorator.ThemeDecorator.prototype */ {
@@ -342,6 +342,8 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			);
 		}
 	};
+
+	return Decorator;
 });
 
 export default ThemeDecorator;

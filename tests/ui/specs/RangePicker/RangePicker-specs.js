@@ -116,7 +116,7 @@ describe('RangePicker', function () {
 				it('should increase to min value', async function () {
 					for (let i = 0; i < 10; i++) {
 						await rangePicker.incrementer(rangePicker.self).click();
-						await browser.pause(500);
+						await browser.pause(100);
 					}
 					const oldValue = await extractValue(rangePicker);
 					expect(oldValue).toBe(10);

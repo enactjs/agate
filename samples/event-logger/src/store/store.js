@@ -15,8 +15,10 @@ const rootReducer = combineReducers({
 });
 
 export default function configureAppStore (initialState) {
-	return configureStore({
+	const store = configureStore({
 		reducer: rootReducer,
 		initialState
 	});
+
+	return store;
 }

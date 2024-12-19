@@ -30,8 +30,9 @@ const listItemSlice = createSlice({
 export const {setData} = listItemSlice.actions;
 
 export default function configureAppStore (initialState) {
-	return configureStore({
+	const store = configureStore({
 		reducer: listItemSlice.reducer,
 		initialState
 	});
+	return store;
 }

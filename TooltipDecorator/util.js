@@ -21,7 +21,9 @@ const getLabelUnavailableSpace = function (tooltipWidth) {
 	const tooltipUnavailableEdge = ri.scale((54 / 2) + arrowWidth);
 
 	// cap the offset at 50% - that percentage
-	return 0.5 - (tooltipUnavailableEdge / tooltipWidth);
+	const tooltipUnavaliablePercentage = 0.5 - (tooltipUnavailableEdge / tooltipWidth);
+
+	return tooltipUnavaliablePercentage;
 };
 
 /**
@@ -227,7 +229,9 @@ const getLabelOffset = function (tooltipNode, tooltipDirection, tooltipPosition,
 
 			const percentageOffset = (pixelOffset / tooltipWidth) * -1;
 			const offsetBoundaryPercentage = getLabelUnavailableSpace(tooltipWidth);
-			return Math.max(offsetBoundaryPercentage * -1, Math.min(offsetBoundaryPercentage, percentageOffset));
+			const cappedPercentageOffset = Math.max(offsetBoundaryPercentage * -1, Math.min(offsetBoundaryPercentage, percentageOffset));
+
+			return cappedPercentageOffset;
 		}
 	}
 	return null;
