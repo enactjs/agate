@@ -32,7 +32,7 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 
 		static propTypes = /** @lends agate/ArcSlider.ArcSliderBehaviorDecorator.prototype */ {
 			/**
-			 * Whether or not the component is in a disabled state.
+			 * Whether the component is in a disabled state.
 			 *
 			 * @type {Boolean}
 			 * @public

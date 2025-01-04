@@ -21,7 +21,7 @@ import {Component} from 'react';
 import {Tooltip, TooltipBase} from './Tooltip';
 import {adjustDirection, adjustAnchor, calcOverflow, getLabelOffset, getPosition} from './util';
 
-let currentTooltip; // needed to know whether or not we should stop a showing job when unmounting
+let currentTooltip; // needed to know whether we should stop a showing job when unmounting
 
 /**
  * Default config for {@link agate/TooltipDecorator.TooltipDecorator|TooltipDecorator}

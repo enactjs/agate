@@ -8,7 +8,7 @@ const useSpotlightConfig = (props, instances) => {
 	useEffect(() => {
 		function handleLeaveContainer ({direction, target}) {
 			// ensure we only scroll to boundary from the contents and not a scroll button which
-			// lie outside of scrollContentRef but within the spotlight container
+			// lie outside scrollContentRef but within the spotlight container
 			if (scrollContentRef.current && scrollContentRef.current.contains(target)) {
 				const
 					{scrollBounds: {maxLeft, maxTop}, scrollPos: {left, top}} = scrollContentHandle.current,

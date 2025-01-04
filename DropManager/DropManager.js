@@ -343,7 +343,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			if (configHoc.arrangingProp) rest[configHoc.arrangingProp] = this.state.dragging;
 
 			if (arrangeable) {
-				// Add all of the necessary events, but only if we're in edit mode
+				// Add all the necessary events, but only if we're in edit mode
 				rest.onDragStart = this.handleDragStart;
 				rest.onDragEnter = this.handleDragEnter;
 				rest.onDragLeave = this.handleDragLeave;

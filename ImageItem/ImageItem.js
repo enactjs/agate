@@ -42,7 +42,7 @@ const ImageItemBase = kind({
 	propTypes: /** @lends agate/ImageItem.ImageItemBase.prototype */ {
 		/**
 		 * Sets the position for caption.
-		 * This props is only valid when `orientation` is `vertical`.
+		 * This prop is only valid when `orientation` is `vertical`.
 		 *
 		 * @type {('below'|'overlay')}
 		 * @default 'below'
@@ -174,7 +174,7 @@ const ImageItemDecorator = compose(
 );
 
 /**
- * An Agate styled ImageItem with built-in support for marqueed text, and Spotlight focus.
+ * An Agate styled ImageItem with built-in support for marquee text, and Spotlight focus.
  *
  * @class ImageItem
  * @memberof agate/ImageItem

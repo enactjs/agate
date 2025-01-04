@@ -482,7 +482,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => {
 				// More props from `ev` may be added here as needed, but a full copy via `...ev`
 				// overloads Storybook's Action Logger and likely has other perf fallout.
 				type: ev.type,
-				// Specific state variables are included in the outgoing calback payload, not all of them
+				// Specific state variables are included in the outgoing callback payload, not all of them
 				...this.getMediaState()
 			};
 		};
@@ -548,7 +548,7 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => {
 				playPromise.then(() => {
 					// Automatic playback started!
 				}).catch(() => {
-					// Auto-play was prevented
+					// Autoplay was prevented
 				});
 			}
 		};

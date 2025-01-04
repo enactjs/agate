@@ -111,7 +111,7 @@ describe('MediaPlayer', function () {
 			expect((await mediaPlayerDisabled.knob.getCSSProperty('left')).value).toBe('0px');
 
 			await mediaPlayerDisabled.playButton.click();
-			Page.delay(1000);
+			await Page.delay(1000);
 
 			expect((await mediaPlayerDisabled.knob.getCSSProperty('left')).value).toBe('0px');
 		});
@@ -120,7 +120,7 @@ describe('MediaPlayer', function () {
 			expect(await mediaPlayerDisabled.source()).toBe('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
 
 			mediaPlayerDisabled.nextButton.click();
-			Page.delay(1000);
+			await Page.delay(1000);
 
 			expect(await mediaPlayerDisabled.source()).toBe('https://sampleswap.org/mp3/artist/254731/BossPlayer_Your-Right-Here-160.mp3');
 		});

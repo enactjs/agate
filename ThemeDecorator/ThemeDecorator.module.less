@@ -44,13 +44,13 @@
 
 	// Disabled Components
 	.disabled({
-		.vendor-opacity(@agate-disabled-opacity);
+		opacity: @agate-disabled-opacity;
 
 		cursor: default;
 
 		// Disabled children of disabled components
 		.disabled({
-			.vendor-opacity(1);
+			opacity: 1;
 		}, parent);
 	});
 });

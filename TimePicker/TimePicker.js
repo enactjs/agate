@@ -113,7 +113,7 @@ const dateTimeConfig = {
 			value.hour = ev.value;
 
 			// In the case of navigating onto the skipped hour of DST, ilib will return the same
-			// value so we skip that hour and update the value again.
+			// value, so we skip that hour and update the value again.
 			const newTime = DateFactory(value).getTimeExtended();
 			if (newTime === currentTime) {
 				value.hour = ev.value * 2 - currentHour;
@@ -251,7 +251,7 @@ const TimePicker = TimePickerDecorator(
  * @function
  * @memberof agate/TimePicker
  * @param {Date} time `Date` to convert
- * @returns {String?} Converted date or `null` if `date` is invalid
+ * @returns {String|null} Converted date or `null` if `date` is invalid
  */
 const timeToLocaleString = (time) => {
 	if (!time) {

@@ -1,4 +1,4 @@
-// these values are used for app inititalization
+// these values are used for app initialization
 
 /**
  * the spacing between items

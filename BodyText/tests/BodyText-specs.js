@@ -27,7 +27,7 @@ describe('BodyText Specs', () => {
 		expect(actual).toBe(expected);
 	});
 
-	test('should support single-line marqueeing content when `noWrap` is true', () => {
+	test('should support single-line marquee content when `noWrap` is true', () => {
 		render(<BodyText noWrap>Hello!</BodyText>);
 		const bodyText = screen.getByText('Hello!').parentElement;
 

@@ -8,12 +8,12 @@ import $L from '../internal/$L';
 import css from './Panels.module.less';
 
 // Since we expose `onSelect` to handle breadcrumb selection, we need that handler to be set on a
-// component that proxies mouse events for key events so we create a spottable div that will
+// component that proxies mouse events for key events, so we create a spottable div that will
 // get the right classes as well as handle events correctly.
 const SpottableDiv = Spottable('div');
 
 /**
- * The width of a breadcrumb which may be used to allocate space for it in a panels layout.
+ * The width of a breadcrumb which may be used to allocate space for it in a panels' layout.
  *
  * @type {Number}
  * @default 105;

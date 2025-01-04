@@ -166,7 +166,7 @@ const useScrollButtons = (props) => {
 			} else {
 				const
 					// If it is vertical Scroller, move focus to the left for ltr or to the right for rtl
-					// If is is horizontal Scroller, move focus to the up
+					// If it is horizontal Scroller, move focus to the up
 					directionToContent = !vertical && 'up' || rtl && 'right' || 'left',
 					isLeavingDown = vertical && isNextButton && isDown,
 					isLeavingUp = vertical && isPrevButton && isUp,

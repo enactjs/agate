@@ -37,7 +37,7 @@ import componentCss from './ColorPicker.module.less';
 
 const ContainerDiv = SpotlightContainerDecorator({enterTo: 'last-focused'}, 'div');
 
-// helper function to convert color hex strings or kewords to hue, saturation, and lightness values
+// helper function to convert color hex strings or keywords to hue, saturation, and lightness values
 const convertToHSL = (value) => convert[value.charAt(0) === '#' ? 'hex' : 'keyword'].hsl(value);
 
 /**

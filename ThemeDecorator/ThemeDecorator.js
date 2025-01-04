@@ -17,7 +17,7 @@ import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
 import classnames from 'classnames';
 import convert from 'color-convert';
 import PropTypes from 'prop-types';
-import {createContext, Component} from 'react';
+import {Component, createContext} from 'react';
 
 import Skinnable from '../Skinnable';
 

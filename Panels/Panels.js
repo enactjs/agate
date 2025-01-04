@@ -48,7 +48,7 @@ const PanelsBase = kind({
 		arranger: shape,
 
 		/**
-		 * An object whose keys will used as props for each child
+		 * An object whose keys will be used as props for each child
 		 */
 		childProps: PropTypes.object,
 
@@ -139,7 +139,7 @@ const PanelsBase = kind({
 		noAnimation: PropTypes.bool,
 
 		/**
-		 * Indicates the close button will not be rendered on the top right corner.
+		 * Indicates the close button will not be rendered in the top right corner.
 		 *
 		 * @type {Boolean}
 		 * @default false
