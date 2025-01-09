@@ -43,19 +43,17 @@ updateDataSize(defaultDataSize);
 
 const VirtualGridListTests = [
 	// horizontal VGL with visible horizontalScrollbar
-	<div>
-		<VirtualGridList
-			dataSize={items.length}
-			direction="horizontal"
-			horizontalScrollbar="visible"
-			itemRenderer={renderItem}
-			itemSize={{
-				minWidth: ri.scale(180),
-				minHeight: ri.scale(270)
-			}}
-			style={{height: ri.scale(300)}}
-		/>
-	</div>,
+	<VirtualGridList
+		dataSize={items.length}
+		direction="horizontal"
+		horizontalScrollbar="visible"
+		itemRenderer={renderItem}
+		itemSize={{
+			minWidth: ri.scale(180),
+			minHeight: ri.scale(270)
+		}}
+		style={{height: ri.scale(300)}}
+	/>,
 	// vertical VGL with visible verticalScrollbar
 	<div>
 		<VirtualGridList
