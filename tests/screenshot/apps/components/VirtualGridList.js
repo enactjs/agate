@@ -31,8 +31,7 @@ const renderItemNoCaption = ({index, ...rest}) => {
 			{...rest}
 			label={label}
 			src={src}
-		>
-		</ImageItem>
+		/>
 	);
 };
 
