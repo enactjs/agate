@@ -65,7 +65,6 @@ const VirtualGridListTests = [
 				minWidth: ri.scale(180),
 				minHeight: ri.scale(270)
 			}}
-			spacing={ri.scale(30)}
 			style={{height: ri.scale(270)}}
 		/>
 	</div>,
