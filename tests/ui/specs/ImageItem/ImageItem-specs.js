@@ -6,18 +6,18 @@ describe('ImageItem', function () {
 	});
 
 	it('should have focus on first ImageItem at start', async function () {
-		expect(await Page.components.imageItemDefault.self.isFocused()).to.be.true();
+		expect(await Page.components.imageItemDefault.self.isFocused()).toBe(true);
 	});
 
 	describe('default', function () {
 		const imageItem = Page.components.imageItemDefault;
 
 		it('should have correct text', async function () {
-			expect(await imageItem.textContent).to.equal('Image Item caption');
+			expect(await imageItem.textContent).toBe('Image Item caption');
 		});
 
 		it('should display an image', async function () {
-			expect(await imageItem.image).to.be.true();
+			expect(await imageItem.image).toBe(true);
 		});
 
 		describe('5-way', function () {
@@ -25,7 +25,7 @@ describe('ImageItem', function () {
 				await Page.components.imageItemLongCaption.focus();
 				await Page.spotlightUp();
 
-				expect(await imageItem.self.isFocused()).to.be.true();
+				expect(await imageItem.self.isFocused()).toBe(true);
 			});
 		});
 	});
@@ -34,11 +34,11 @@ describe('ImageItem', function () {
 		const imageItem = Page.components.imageItemLongCaption;
 
 		it('should wrap caption with Marquee with long caption', async function () {
-			expect(await imageItem.valueText).to.equal('Image Item with longer caption has Marquee applied');
+			expect(await imageItem.valueText).toBe('Image Item with longer caption has Marquee applied');
 		});
 
 		it('should display an image', async function () {
-			expect(await imageItem.image).to.be.true();
+			expect(await imageItem.image).toBe(true);
 		});
 
 		describe('5-way', function () {
@@ -46,7 +46,7 @@ describe('ImageItem', function () {
 				await Page.components.imageItemDefault.focus();
 				await Page.spotlightDown();
 
-				expect(await imageItem.self.isFocused()).to.be.true();
+				expect(await imageItem.self.isFocused()).toBe(true);
 			});
 		});
 	});
@@ -55,15 +55,15 @@ describe('ImageItem', function () {
 		const imageItem = Page.components.imageItemCaptionOverlay;
 
 		it('should display correct text', async function () {
-			expect(await imageItem.textContent).to.equal('Image Item caption overlay');
+			expect(await imageItem.textContent).toBe('Image Item caption overlay');
 		});
 
 		it('should display caption overlay', async function () {
-			expect(await imageItem.isOverlay).to.be.true();
+			expect(await imageItem.isOverlay).toBe(true);
 		});
 
 		it('should display an image', async function () {
-			expect(await imageItem.image).to.be.true();
+			expect(await imageItem.image).toBe(true);
 		});
 
 		describe('5-way', function () {
@@ -71,7 +71,7 @@ describe('ImageItem', function () {
 				await Page.components.imageItemLongCaption.focus();
 				await Page.spotlightDown();
 
-				expect(await imageItem.self.isFocused()).to.be.true();
+				expect(await imageItem.self.isFocused()).toBe(true);
 			});
 		});
 	});
@@ -80,11 +80,11 @@ describe('ImageItem', function () {
 		const imageItem = Page.components.imageItemDisabled;
 
 		it('should display correct text', async function () {
-			expect(await imageItem.textContent).to.equal('Image Item disabled');
+			expect(await imageItem.textContent).toBe('Image Item disabled');
 		});
 
 		it('should display an image', async function () {
-			expect(await imageItem.image).to.be.true();
+			expect(await imageItem.image).toBe(true);
 		});
 
 		describe('5-way', function () {
@@ -92,7 +92,7 @@ describe('ImageItem', function () {
 				await Page.components.imageItemCaptionOverlay.focus();
 				await Page.spotlightDown();
 
-				expect(await imageItem.self.isFocused()).to.be.true();
+				expect(await imageItem.self.isFocused()).toBe(true);
 			});
 		});
 	});

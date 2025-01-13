@@ -59,7 +59,20 @@
 			top: @agate-panels-controls-top;
 			.position-start-end(auto, @agate-panel-h-padding);
 			.padding-start-end(@agate-panels-controls-padding-start, initial);
-			.remove-margin-on-edge-children();
+
+			> :first-child {
+				margin-inline-start: 0;
+			}
+
+			> :nth-last-child(2) {
+				margin-inline-end: 0;
+			}
+		}
+
+		.viewport {
+			&.transitioning {
+				clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+			}
 		}
 
 		&.partial {
@@ -67,6 +80,7 @@
 			background-image: @agate-panels-partial-bg-image;
 			height: @agate-panels-partial-height;
 			width: @agate-panels-partial-width;
+			overflow: hidden;
 		}
 
 		&.breadcrumbPanels {
@@ -85,7 +99,6 @@
 
 			.viewport {
 				&.transitioning {
-					-webkit-clip-path: polygon(@agate-panels-breadcrumb-width 0, 100% 0, 100% 100%, @agate-panels-breadcrumb-width 100%);
 					clip-path: polygon(@agate-panels-breadcrumb-width 0, 100% 0, 100% 100%, @agate-panels-breadcrumb-width 100%);
 				}
 

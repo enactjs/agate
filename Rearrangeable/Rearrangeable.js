@@ -61,7 +61,7 @@ const defaultConfig = /** @lends agate/Rearrangeable.Rearrangeable.defaultConfig
  * {slots: ['dayOne', 'dayTwo']}
  * ```
  *
- * Now the this HOC is configured, it can act on the `arrangement` prop supplied at runtime.
+ * Now the HOC is configured, it can act on the `arrangement` prop supplied at runtime.
  * Any slots provided in the config can be reassigned in the arrangement mapping. To extend our
  * above example, the incoming props being the following:
  *

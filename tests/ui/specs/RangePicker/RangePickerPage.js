@@ -1,6 +1,5 @@
 'use strict';
-const {Page} = require('@enact/ui-test-utils/utils');
-const {element} = require('@enact/ui-test-utils/utils');
+const {element, Page} = require('@enact/ui-test-utils/utils');
 
 class RangePickerInterface {
 	constructor (id) {
@@ -38,8 +37,23 @@ class RangePickerPage extends Page {
 		this.title = 'RangePicker Test';
 		const rangePickerDefault = new RangePickerInterface('rangePickerDefault');
 		const rangePickerDisabled = new RangePickerInterface('rangePickerDisabled');
+		const rangePickerHorizontalDefault = new RangePickerInterface('rangePickerHorizontalDefault');
+		const rangePickerHorizontalDisabled = new RangePickerInterface('rangePickerHorizontalDisabled');
+		const rangePickerHorizontalWithNegativeValues = new RangePickerInterface('rangePickerHorizontalWithNegativeValues');
+		const rangePickerHorizontalWrap = new RangePickerInterface('rangePickerHorizontalWrap');
 		const rangePickerWithNegativeValues = new RangePickerInterface('rangePickerWithNegativeValues');
-		this.components = {rangePickerDefault, rangePickerDisabled, rangePickerWithNegativeValues};
+		const rangePickerWrap = new RangePickerInterface('rangePickerWrap');
+
+		this.components = {
+			rangePickerDefault,
+			rangePickerDisabled,
+			rangePickerHorizontalDefault,
+			rangePickerHorizontalDisabled,
+			rangePickerHorizontalWithNegativeValues,
+			rangePickerHorizontalWrap,
+			rangePickerWithNegativeValues,
+			rangePickerWrap
+		};
 	}
 
 	async open (urlExtra) {

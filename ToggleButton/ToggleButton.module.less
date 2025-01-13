@@ -18,6 +18,27 @@
 			transform: @agate-togglebutton-indicator-transform;
 		}
 
+		&.huge {
+			&::after {
+				height: @agate-togglebutton-huge-indicator-height;
+				.position(@agate-togglebutton-huge-indicator-position);
+			}
+		}
+
+		&.small {
+			&::after {
+				height: @agate-togglebutton-small-indicator-height;
+				.position(@agate-togglebutton-small-indicator-position);
+			}
+		}
+
+		&.smallest {
+			&::after {
+				height: @agate-togglebutton-smallest-indicator-height;
+				.position(@agate-togglebutton-smallest-indicator-position);
+			}
+		}
+
 		&.underline {
 			.client {
 				padding-left: @agate-togglebutton-client-padding-left;

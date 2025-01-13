@@ -54,7 +54,7 @@ const DropdownButtonBase = kind({
 
 	propTypes: /** @lends agate/Dropdown.DropdownButtonBase.prototype */ {
 		/**
-		 * Forwards a reference to the this component.
+		 * Forwards a reference to this component.
 		 *
 		 * @type {Object|Function}
 		 * @private
@@ -361,7 +361,7 @@ const DropdownBase = kind({
 
 		const popupProps = {'aria-live': null, children, direction: `${adjustedDirection} center`, disabled, onSelect, open, selected, skin, skinVariants: skin === 'silicon' ? {'night': false} : {}, width, role: null};
 
-		// `ui/Group`/`ui/Repeater` will throw an error if empty so we disable the Dropdown and
+		// `ui/Group`/`ui/Repeater` will throw an error if empty, so we disable the Dropdown and
 		// prevent Dropdown to open if there are no children.
 		const openDropdown = hasChildren && !disabled && open;
 
