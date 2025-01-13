@@ -54,7 +54,7 @@ const updateDataSize = (dataSize) => {
 updateDataSize(defaultDataSize);
 
 const VirtualGridListTests = [
-	// horizontal VGL with visible horizontalScrollbar
+	// horizontal VGL with hidden horizontalScrollbar and items without captions
 	<div>
 		<VirtualGridList
 			dataSize={items.length}
