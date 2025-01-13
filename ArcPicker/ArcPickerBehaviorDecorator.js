@@ -34,7 +34,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			children: PropTypes.array.isRequired,
 
 			/**
-			 * Whether or not the component is in a disabled state.
+			 * Whether the component is in a disabled state.
 			 *
 			 * @type {Boolean}
 			 * @public
@@ -92,7 +92,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 		}
 
 		handleClick = (value) => (ev) => {
-			if (platform.touchscreen) {
+			if (platform.touchScreen) {
 				this.setState({isFocused: true}, () => {
 					setTimeout(() => {
 						this.setState({isFocused: false});
@@ -109,7 +109,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 		};
 
 		handleFocus = () => {
-			if (!platform.touchscreen) {
+			if (!platform.touchScreen) {
 				this.setState({isFocused: true});
 			}
 		};

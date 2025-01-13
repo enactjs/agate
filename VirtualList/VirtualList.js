@@ -6,6 +6,7 @@
  * @exports VirtualList
  */
 
+import {setDefaultProps} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {ResizeContext} from '@enact/ui/Resizable';
@@ -49,7 +50,7 @@ const virtualListDefaultProps = {
  * @public
  */
 let VirtualList = (props) => {
-	const virtualListProps = Object.assign({}, virtualListDefaultProps, props);
+	const virtualListProps = setDefaultProps(props, virtualListDefaultProps);
 	const {itemSize, role, ...rest} = virtualListProps;
 
 	const itemSizeProps = itemSize && itemSize.minSize ?
@@ -337,7 +338,7 @@ VirtualList.propTypes = /** @lends agate/VirtualList.VirtualList.prototype */ {
 	onScrollStop: PropTypes.func,
 
 	/**
-	 * When `true`, the list will scroll by page. Otherwise the list will scroll by item.
+	 * When `true`, the list will scroll by page. Otherwise, the list will scroll by item.
 	 *
 	 * @type {Boolean}
 	 * @default false
@@ -504,7 +505,7 @@ const virtualGridListDefaultProps = {
  * @public
  */
 let VirtualGridList = (props) => {
-	const virtualGridListProps = Object.assign({}, virtualGridListDefaultProps, props);
+	const virtualGridListProps = setDefaultProps(props, virtualGridListDefaultProps);
 	const {role, ...rest} = virtualGridListProps;
 
 	const {
@@ -771,7 +772,7 @@ VirtualGridList.propTypes = /** @lends agate/VirtualList.VirtualGridList.prototy
 	onScrollStop: PropTypes.func,
 
 	/**
-	 * When `true`, the list will scroll by page. Otherwise the list will scroll by item.
+	 * When `true`, the list will scroll by page. Otherwise, the list will scroll by item.
 	 *
 	 * @type {Boolean}
 	 * @default false

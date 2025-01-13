@@ -38,12 +38,14 @@ import Slider from './components/Slider';
 import SliderButton from './components/SliderButton';
 import Spinner from './components/Spinner';
 import SwitchItem from './components/SwitchItem';
+import TabbedPanels from './components/TabbedPanels';
 import TabGroup from './components/TabGroup';
 import TemperatureControl from './components/TemperatureControl';
 import TimePicker from './components/TimePicker';
 import ThumbnailItem from './components/ThumbnailItem';
 import ToggleButton from './components/ToggleButton';
 import TooltipDecorator from './components/TooltipDecorator';
+import VirtualGridList from './components/VirtualGridList';
 import VirtualList from './components/VirtualList';
 import WindDirectionControl from './components/WindDirectionControl';
 
@@ -86,12 +88,14 @@ const agateComponents = {
 	SliderButton,
 	Spinner,
 	SwitchItem,
+	TabbedPanels,
 	TabGroup,
 	TimePicker,
 	ToggleButton,
 	TooltipDecorator,
 	TemperatureControl,
 	ThumbnailItem,
+	VirtualGridList,
 	VirtualList,
 	WindDirectionControl
 };

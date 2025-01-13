@@ -2,12 +2,27 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
-## [unreleased]
+## [3.0.0-alpha.2] - 2024-11-21
+
+### Fixed
+
+- `agate/Scroller` and `agate/VirtualList` to have default prop when `undefined` prop is passed
+
+## [3.0.0-alpha.1] - 2024-08-20
+
+### Fixed
+
+- `agate/ToggleButton` underline position for `huge`,`small` and `smallest` sizes
+
+## [2.0.11] - 2024-07-22
 
 ### Changed
 
 - `agate/ContextualPopupDecorator` and `agate/Dropdown` to have sibling DOM node as alternative to findDOMNode API which will be removed in React 19
 
+### Fixed
+
+- `agate/Panels` to animate properly when `cover` prop is `partial` horizontally
 
 ## [2.0.10] - 2024-03-18
 
