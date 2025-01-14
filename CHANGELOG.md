@@ -4,10 +4,6 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [unreleased]
 
-### Added
-
-- `tsx` as a devDependency
-
 ### Changed
 
 - component selectors from ui-tests views to work with `webdriverio` version 9
