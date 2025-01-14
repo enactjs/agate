@@ -24,14 +24,14 @@ class PickerInterface {
 		return element('.TimePicker_TimePicker_minutePicker', this.self);
 	}
 
-	decrementer (picker) {
-		return element('.internal_Picker_Picker_itemDecrement', picker);
+	decrementer (type) {
+		return $(`#${this.id} .TimePicker_TimePicker_${type}Picker > .internal_Picker_Picker_itemDecrement`);
 	}
-	incrementer (picker) {
-		return element('.internal_Picker_Picker_itemIncrement', picker);
+	incrementer (type) {
+		return $(`#${this.id} .TimePicker_TimePicker_${type}Picker  > .internal_Picker_Picker_itemIncrement`);
 	}
-	active (picker) {
-		return element('.internal_Picker_Picker_active', picker);
+	active (type) {
+		return $(`#${this.id} .TimePicker_TimePicker_${type}Picker > .internal_Picker_Picker_active`);
 	}
 }
 

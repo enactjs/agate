@@ -1,6 +1,5 @@
 'use strict';
-const {Page} = require('@enact/ui-test-utils/utils');
-const {getComponent, getText} = require('@enact/ui-test-utils/utils');
+const {getText, Page} = require('@enact/ui-test-utils/utils');
 
 class MediaPlayerInterface {
 	constructor (id) {
@@ -16,24 +15,12 @@ class MediaPlayerInterface {
 		return (await $(this.selector + `>div>div[aria-label=${ariaLabel}]`)).moveTo({xOffset: 0, yOffset: 0});
 	}
 
-	get self () {
-		return $(this.selector);
-	}
-
 	get slider () {
-		return getComponent({component: 'Slider', child: 'slider'}, this.self);
+		return $(`#${this.id} .MediaPlayer_MediaSlider_slider`);
 	}
 
 	get knob () {
-		return getComponent({component: 'Slider', child: 'knob'}, this.self);
-	}
-
-	get button () {
-		return getComponent({component: 'Button', child: 'button'}, this.self);
-	}
-
-	get icon () {
-		return getComponent({component: 'Button', child: 'icon'}, this.self);
+		return $(`#${this.id} .MediaPlayer_MediaSlider_slider > div .MediaPlayer_MediaSlider_knob`);
 	}
 
 	get playButton () {

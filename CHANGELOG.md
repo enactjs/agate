@@ -2,6 +2,13 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+### Changed
+
+- component selectors from ui-tests views to work with `webdriverio` version 9
+- `isDisplayed` method to work with `webdriverio` version 9
+
 ## [3.0.0-alpha.2] - 2024-11-21
 
 ### Fixed
