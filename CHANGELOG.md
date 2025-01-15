@@ -2,6 +2,10 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+- Updated `React` dependency to version `19.0.0`
+
 ## [3.0.0-alpha.2] - 2024-11-21
 
 ### Fixed
