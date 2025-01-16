@@ -4,7 +4,6 @@ import {is} from '@enact/core/keymap';
 import Spotlight, {getDirection} from '@enact/spotlight';
 import utilEvent from '@enact/ui/useScroll/utilEvent';
 import {useRef, useState, useEffect} from 'react';
-import ReactDOM from 'react-dom';
 
 const
 	nop = () => {},
@@ -135,7 +134,7 @@ const useScrollButtons = (props) => {
 				if (focusableScrollButtons && !Spotlight.getPointerMode()) {
 					consumeEvent(ev);
 					Spotlight.setPointerMode(false);
-					Spotlight.focus(ReactDOM.findDOMNode(oppositeButton.ref)); // eslint-disable-line react/no-find-dom-node
+					Spotlight.focus(oppositeButton.ref);
 				} else if (!oppositeButton.disabled) {
 					consumeEvent(ev);
 					oppositeButton.click(ev);
@@ -167,7 +166,7 @@ const useScrollButtons = (props) => {
 			} else {
 				const
 					// If it is vertical Scroller, move focus to the left for ltr or to the right for rtl
-					// If is is horizontal Scroller, move focus to the up
+					// If it is horizontal Scroller, move focus to the up
 					directionToContent = !vertical && 'up' || rtl && 'right' || 'left',
 					isLeavingDown = vertical && isNextButton && isDown,
 					isLeavingUp = vertical && isPrevButton && isUp,

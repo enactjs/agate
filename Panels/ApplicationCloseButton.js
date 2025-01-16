@@ -6,7 +6,7 @@ import Button from '../Button';
 
 /**
  * An {@link agate/ApplicationCloseButton.ApplicationCloseButton} with `closex` icon. It is used in
- * {@link agate/Panels.Panels} positioned at the top right corner.
+ * {@link agate/Panels.Panels} positioned in the top right corner.
  * `onApplicationClose` callback function should be specified to close your app. The recommended
  * action to take with the event is `window.close()`, but you may also want to also do operations
  * like save user work or close database connections.

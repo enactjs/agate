@@ -195,7 +195,7 @@ const useSpottable = (props, instances) => {
 		let returnVal = false;
 
 		if (!itemNode && index >= 0 && index < props.dataSize) {
-			// Item is valid but since the the dom doesn't exist yet, we set the index to focus after the ongoing update
+			// Item is valid but since the dom doesn't exist yet, we set the index to focus after the ongoing update
 			setPreservedIndex(index, direction);
 		} else {
 			const
@@ -261,7 +261,7 @@ const useSpottable = (props, instances) => {
 			}
 
 			// Since the result is used as a target position to be scrolled,
-			// scrondaryPosition should be 0 here.
+			// secondaryPosition should be 0 here.
 			gridPosition.secondaryPosition = 0;
 
 			return scrollContentHandle.current.gridPositionToItemPosition(gridPosition);
@@ -376,7 +376,7 @@ function placeholderRenderer ({
 			data-index={0}
 			data-vl-placeholder
 			key="placeholder"
-			// a zero width/height element can't be focused by spotlight so we're giving
+			// a zero width/height element can't be focused by spotlight, so we're giving
 			// the placeholder a small size to ensure it is navigable
 			onFocus={handlePlaceholderFocus}
 			style={{width: 10}}

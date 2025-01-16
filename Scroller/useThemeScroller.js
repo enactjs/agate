@@ -156,7 +156,7 @@ const useSpottable = (props, instances) => {
 	/**
 	 * Calculates the new `scrollLeft`.
 	 *
-	 * @param {Node} focusedItem node
+	 * @param {Node} item node
 	 * @param {Number} scrollPosition last target position, passed when scroll animation is ongoing
 	 *
 	 * @returns {Number} Calculated `scrollLeft`
@@ -186,7 +186,7 @@ const useSpottable = (props, instances) => {
 			// `focusedItem` that has a width that is bigger than `scrollBounds.clientWidth`.
 			nextScrollLeft += rtlDirection * ((newItemLeft + itemWidth) - (clientWidth + currentScrollLeft));
 		} else if (newItemLeft < currentScrollLeft) {
-			// If focus is outside of the view area to the left, move scroller to the left accordingly.
+			// If focus is outside the view area to the left, move scroller to the left accordingly.
 			nextScrollLeft += rtlDirection * (newItemLeft - currentScrollLeft);
 		}
 
