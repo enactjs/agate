@@ -13,6 +13,7 @@ install:
     - npm config set prefer-offline false
     - npm install -g codecov
     - git clone --branch=master --depth 1 https://github.com/enactjs/cli ../cli
+    -
     - pushd ../cli
     - npm install
     - npm link
