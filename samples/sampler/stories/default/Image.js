@@ -49,7 +49,7 @@ export const _Image = (args) => (
 				transform: 'translateX(-1px) translateY(-100%)'
 			}}
 		>
-			Image Boundry
+			Image Boundary
 		</label>
 	</Image>
 );

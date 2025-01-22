@@ -87,13 +87,13 @@ const recordSlice = createSlice({
 			Object.assign(state, {selectedItems});
 		},
 		selectionEnable: (state) => {
-			const newdata = {};
+			const newData = {};
 
 			Object.keys(state.data).forEach((id) => {
-				newdata[id] = Object.assign({}, state.data[id], {showSelection: !state.data[id].showSelection});
+				newData[id] = Object.assign({}, state.data[id], {showSelection: !state.data[id].showSelection});
 			});
 
-			Object.assign(state, {data: newdata, showOverlay: !state.showOverlay});
+			Object.assign(state, {data: newData, showOverlay: !state.showOverlay});
 		},
 		setData: {
 			reducer: (state, action) => {
