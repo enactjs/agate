@@ -23,6 +23,18 @@ const renderItem = ({index, ...rest}) => {
 	);
 };
 
+const renderItemNoCaption = ({index, ...rest}) => {
+	const {label, src} = items[index];
+
+	return (
+		<ImageItem
+			{...rest}
+			label={label}
+			src={src}
+		/>
+	);
+};
+
 const updateDataSize = (dataSize) => {
 	items.length = 0;
 
@@ -42,6 +54,20 @@ const updateDataSize = (dataSize) => {
 updateDataSize(defaultDataSize);
 
 const VirtualGridListTests = [
+	// horizontal VGL with hidden horizontalScrollbar and items without captions
+	<div>
+		<VirtualGridList
+			dataSize={items.length}
+			direction="horizontal"
+			horizontalScrollbar="hidden"
+			itemRenderer={renderItemNoCaption}
+			itemSize={{
+				minWidth: ri.scale(180),
+				minHeight: ri.scale(270)
+			}}
+			style={{height: ri.scale(270)}}
+		/>
+	</div>,
 	// horizontal VGL with visible horizontalScrollbar
 	<div>
 		<VirtualGridList
@@ -138,12 +164,13 @@ const VirtualGridListTests = [
 			<VirtualGridList
 				dataSize={items.length}
 				direction="horizontal"
+				horizontalScrollbar="visible"
 				itemRenderer={renderItem}
 				itemSize={{
 					minWidth: ri.scale(180),
 					minHeight: ri.scale(270)
 				}}
-				style={{minHeight: ri.scale(300)}}
+				style={{height: ri.scale(300)}}
 			/>
 		</div>
 	])
