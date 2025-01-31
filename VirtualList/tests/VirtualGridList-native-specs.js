@@ -19,7 +19,7 @@ describe('VirtualGridList with native `scrollMode`', () => {
 		items = [];
 		itemSize = {minWidth: 300, minHeight: 240};
 
-		renderItem = ({index, ...rest}) => { // eslint-disable-line enact/display-name
+		renderItem = ({index, ...rest}) => {
 			const {source, subText, text} = items[index];
 
 			return (

@@ -26,7 +26,6 @@ const
 	shouldAddLongContent = ({index, modIndex}) => (
 		index % modIndex === 0 ? ` ${longContent}` : ''
 	),
-	// eslint-disable-next-line enact/prop-types
 	renderItem = ({index, ...rest}) => {
 		const {text, src} = items[index];
 

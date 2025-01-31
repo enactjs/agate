@@ -114,7 +114,6 @@ const ItemContent = kind({
 		}
 	},
 
-	// eslint-disable-next-line enact/prop-types
 	render: ({centered, content, css, marqueeOn, label, labelPosition, orientation, styler, ...rest}) => {
 
 		if (!label) {

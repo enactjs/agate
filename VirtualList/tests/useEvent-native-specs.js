@@ -38,7 +38,7 @@ describe('VirtualList useEvent with native `scrollMode`', () => {
 			currentFocusIndex = index;
 		};
 
-		renderItem = ({index, ...rest}) => { // eslint-disable-line enact/display-name
+		renderItem = ({index, ...rest}) => {
 			return (
 				<Item {...rest} onFocus={handlerOnFocus(index)}>
 					{items[index].name}

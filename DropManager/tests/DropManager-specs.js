@@ -54,7 +54,7 @@ describe('DropManager Specs', () => {
 	const Component = Droppable({slots: allSlotNames}, CustomLayoutBase);
 
 	test('should render `top`, `center` and `bottom` slots', () => {
-		console.error = jest.fn(); // eslint-disable-line no-console
+		console.error = jest.fn();
 		render(
 			<ResponsiveComponent arrangeable>
 				<top data-testid="top" />

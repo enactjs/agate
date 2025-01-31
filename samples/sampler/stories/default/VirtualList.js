@@ -20,7 +20,6 @@ const
 	},
 	items = [],
 	defaultDataSize = 1000,
-	// eslint-disable-next-line enact/prop-types, enact/display-name
 	renderItem = (size) => ({index, ...rest}) => {
 		const itemStyle = {
 			height: ri.unit(size, 'rem')
