@@ -38,7 +38,7 @@ const secondsToPeriod = (seconds) => {
  *
  * @param  {Number|String} seconds A duration of time represented in seconds
  * @param {DurationFmt} durfmt An instance of a {@link i18n/ilib/lib/DurationFmt.DurationFmt} object
- *                             from iLib confugured to display time used by the {@Link VideoPlayer}
+ *                             from iLib configured to display time used by the {@Link VideoPlayer}
  *                             component.
  * @param  {Object} config Additional configuration object that includes `includeHour`.
  *

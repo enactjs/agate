@@ -8,6 +8,10 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 - `agate/IncrementSlider` and `agate/Slider` vertical knob alignment in Electro skin.
 
+## [3.0.0-alpha.3] - 2025-01-22
+
+- Updated `React` dependency to version `19.0.0`
+
 ## [3.0.0-alpha.2] - 2024-11-21
 
 ### Fixed

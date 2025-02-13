@@ -15,7 +15,7 @@ const ListContainer = SpotlightContainerDecorator('div');
 const OptionsContainer = SpotlightContainerDecorator({leaveFor: {down: '#left'}}, 'div');
 const getScrollbarVisibility = (hidden) => hidden ? 'hidden' : 'visible';
 const childProps = {text: ' child props'};
-// NOTE: Forcing pointer mode off so we can be sure that regardless of webOS pointer mode the app
+// NOTE: Forcing pointer mode off, so we can be sure that regardless of webOS pointer mode the app
 // runs the same way
 spotlight.setPointerMode(false);
 
