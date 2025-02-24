@@ -244,6 +244,7 @@ describe('RangePicker', function () {
 					for (let i = 0; i < 10; i++) {
 						await rangePicker.incrementer().click();
 					}
+					await browser.pause(500);
 					const oldValue = await extractValue(rangePicker);
 					expect(oldValue).toBe(10);
 					await rangePicker.incrementer().click();
