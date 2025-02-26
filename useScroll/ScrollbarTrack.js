@@ -30,12 +30,12 @@ ScrollbarTrack.propTypes = /** @lends agate/useScroll.ScrollbarTrack.prototype *
 	cbAlertScrollbarTrack: PropTypes.func,
 
 	/**
-	 * Forwards a reference to this component.
+	 * Forwards a reference to the DOM element.
 	 *
 	 * @type {Object}
-	 * @private
+	 * @public
 	 */
-	ref: PropTypes.object
+	ref: PropTypes.shape({current: PropTypes.any})
 };
 
 const MemoizedScrollbarTrack = memo(ScrollbarTrack);
