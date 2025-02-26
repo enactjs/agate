@@ -33,7 +33,7 @@ ScrollbarTrack.propTypes = /** @lends agate/useScroll.ScrollbarTrack.prototype *
 	 * Forwards a reference to the DOM element.
 	 *
 	 * @type {Object}
-	 * @public
+	 * @private
 	 */
 	ref: PropTypes.shape({current: PropTypes.any})
 };
