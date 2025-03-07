@@ -1,5 +1,5 @@
 'use strict';
-const {element, hasClass, getText, Page} = require('@enact/ui-test-utils/utils');
+const {hasClass, getText, Page} = require('@enact/ui-test-utils/utils');
 
 class ThumbnailItemInterface {
 	constructor (id) {
@@ -17,10 +17,10 @@ class ThumbnailItemInterface {
 		return await $(this.selector).moveTo({xOffset: 0, yOffset: 0});
 	}
 	get textContent () {
-		return getText(element('.Item_Item_content', this.self));
+		return getText($(`#${this.id} .Item_Item_content`));
 	}
 	get labelContent () {
-		return getText(element('.Item_Item_label', this.self));
+		return getText($(`#${this.id} .Item_Item_label`));
 	}
 	get isSelected () {
 		return hasClass('.Item_Item_selected', this.self);

@@ -14,7 +14,7 @@ describe('Picker', function () {
 
 				describe('5-way', function () {
 					it('should change the value forward when incrementing the picker', async function () {
-						expect(await picker.incrementer(picker.self).isFocused()).toBe(true);
+						expect(await picker.incrementer().isFocused()).toBe(true);
 						await Page.spotlightSelect();
 						await browser.pause(500);
 						const newValue = await extractValue(picker);
@@ -22,10 +22,10 @@ describe('Picker', function () {
 					});
 
 					it('should change the value backward when decrementing the picker', async function () {
-						expect(await picker.incrementer(picker.self).isFocused()).toBe(true);
+						expect(await picker.incrementer().isFocused()).toBe(true);
 						await Page.spotlightSelect();
 						await Page.spotlightUp();
-						expect(await picker.decrementer(picker.self).isFocused()).toBe(true);
+						expect(await picker.decrementer().isFocused()).toBe(true);
 						await Page.spotlightSelect();
 						await browser.pause(500);
 						const newValue = await extractValue(picker);
@@ -35,16 +35,16 @@ describe('Picker', function () {
 
 				describe('pointer', function () {
 					it('should increase the value when incrementing the picker', async function () {
-						await picker.incrementer(picker.self).click();
+						await picker.incrementer().click();
 						await browser.pause(500);
 						const newValue = await extractValue(picker);
 						expect(newValue).toBe('Banana');
 					});
 
 					it('should decrease the value when decrementing the picker', async function () {
-						await picker.incrementer(picker.self).click();
-						expect(await picker.incrementer(picker.self).isFocused()).toBe(true);
-						await picker.decrementer(picker.self).click();
+						await picker.incrementer().click();
+						expect(await picker.incrementer().isFocused()).toBe(true);
+						await picker.decrementer().click();
 						await browser.pause(500);
 						const newValue = await extractValue(picker);
 						expect(newValue).toBe('Apple');
@@ -79,7 +79,7 @@ describe('Picker', function () {
 				describe('pointer', function () {
 					it('should not increase the value when clicking the incrementer', async function () {
 						const oldValue = await extractValue(picker);
-						await picker.incrementer(picker.self).click();
+						await picker.incrementer().click();
 						browser.pause(500);
 						const newValue = await extractValue(picker);
 						expect(newValue).toBe(oldValue);
@@ -87,7 +87,7 @@ describe('Picker', function () {
 
 					it('should not decrease the value when clicking the decrementer', async function () {
 						const oldValue = await extractValue(picker);
-						await picker.decrementer(picker.self).click();
+						await picker.decrementer().click();
 						await browser.pause(500);
 						const newValue = await extractValue(picker);
 						expect(newValue).toBe(oldValue);
@@ -129,16 +129,16 @@ describe('Picker', function () {
 
 				describe('pointer', function () {
 					it('should increase the value when incrementing the picker', async function () {
-						await picker.incrementer(picker.self).click();
+						await picker.incrementer().click();
 						await browser.pause(500);
 						const newValue = await extractValue(picker);
 						expect(newValue).toBe('Banana');
 					});
 
 					it('should decrease the value when decrementing the picker', async function () {
-						await picker.incrementer(picker.self).click();
-						expect(await picker.incrementer(picker.self).isFocused()).toBe(true);
-						await picker.decrementer(picker.self).click();
+						await picker.incrementer().click();
+						expect(await picker.incrementer().isFocused()).toBe(true);
+						await picker.decrementer().click();
 						await browser.pause(500);
 						const newValue = await extractValue(picker);
 						expect(newValue).toBe('Apple');
@@ -177,7 +177,7 @@ describe('Picker', function () {
 				describe('pointer', function () {
 					it('should not increase the value when clicking the incrementer', async function () {
 						const oldValue = await extractValue(picker);
-						await picker.incrementer(picker.self).click();
+						await picker.incrementer().click();
 						browser.pause(500);
 						const newValue = await extractValue(picker);
 						expect(newValue).toBe(oldValue);
@@ -185,7 +185,7 @@ describe('Picker', function () {
 
 					it('should not decrease the value when decrementing the picker', async function () {
 						const oldValue = await extractValue(picker);
-						await picker.decrementer(picker.self).click();
+						await picker.decrementer().click();
 						await browser.pause(500);
 						const newValue = await extractValue(picker);
 						expect(newValue).toBe(oldValue);
@@ -205,7 +205,7 @@ describe('Picker', function () {
 
 			describe('5-way', function () {
 				it('should change the value forward when incrementing the picker', async function () {
-					expect(await picker.incrementer(picker.self).isFocused()).toBe(true);
+					expect(await picker.incrementer().isFocused()).toBe(true);
 					await Page.spotlightSelect();
 					await browser.pause(500);
 					const newValue = await extractValue(picker);
@@ -213,10 +213,10 @@ describe('Picker', function () {
 				});
 
 				it('should change the value backward when decrementing the picker', async function () {
-					expect(await picker.incrementer(picker.self).isFocused()).toBe(true);
+					expect(await picker.incrementer().isFocused()).toBe(true);
 					await Page.spotlightSelect();
 					await Page.spotlightUp();
-					expect(await picker.decrementer(picker.self).isFocused()).toBe(true);
+					expect(await picker.decrementer().isFocused()).toBe(true);
 					await Page.spotlightSelect();
 					await browser.pause(500);
 					const newValue = await extractValue(picker);
@@ -226,16 +226,16 @@ describe('Picker', function () {
 
 			describe('pointer', function () {
 				it('should increase the value when incrementing the picker', async function () {
-					await picker.incrementer(picker.self).click();
+					await picker.incrementer().click();
 					await browser.pause(500);
 					const newValue = await extractValue(picker);
 					expect(newValue).toBe('Banana');
 				});
 
 				it('should decrease the value when decrementing the picker', async function () {
-					await picker.incrementer(picker.self).click();
-					expect(await picker.incrementer(picker.self).isFocused()).toBe(true);
-					await picker.decrementer(picker.self).click();
+					await picker.incrementer().click();
+					expect(await picker.incrementer().isFocused()).toBe(true);
+					await picker.decrementer().click();
 					await browser.pause(500);
 					const newValue = await extractValue(picker);
 					expect(newValue).toBe('Apple');
@@ -275,16 +275,16 @@ describe('Picker', function () {
 
 			describe('pointer', function () {
 				it('should increase the value when incrementing the picker', async function () {
-					await picker.incrementer(picker.self).click();
+					await picker.incrementer().click();
 					await browser.pause(500);
 					const newValue = await extractValue(picker);
 					expect(newValue).toBe('Banana');
 				});
 
 				it('should decrease the value when decrementing the picker', async function () {
-					await picker.incrementer(picker.self).click();
-					expect(await picker.incrementer(picker.self).isFocused()).toBe(true);
-					await picker.decrementer(picker.self).click();
+					await picker.incrementer().click();
+					expect(await picker.incrementer().isFocused()).toBe(true);
+					await picker.decrementer().click();
 					await browser.pause(500);
 					const newValue = await extractValue(picker);
 					expect(newValue).toBe('Apple');

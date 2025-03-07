@@ -4,6 +4,11 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ## [not released]
 
+### Changed
+
+- Component selectors from ui-tests views to work with `webdriverio` version 9
+- `isDisplayed` method to work with `webdriverio` version 9
+
 ### Fixed
 
 - `agate/IncrementSlider` and `agate/Slider` vertical knob alignment in Electro skin.
