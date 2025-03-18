@@ -4,12 +4,12 @@
 const daysInMonth = ({month, year}) => new Date(year, month, 0).getDate();
 
 const extractValues = async (picker) => {
-	const day = parseInt(await picker.active(picker.day).getText());
-	const month = parseInt(await picker.active(picker.month).getText());
-	const year = parseInt(await picker.active(picker.year).getText());
-	const hour = parseInt(await picker.active(picker.hour).getText());
-	const minute = parseInt(await picker.active(picker.minute).getText());
-	const meridiem = await picker.meridiem.isExisting() ? await picker.active(picker.meridiem).getText() : null;
+	const day = parseInt(await picker.dateActive('day').getText());
+	const month = parseInt(await picker.dateActive('month').getText());
+	const year = parseInt(await picker.dateActive('year').getText());
+	const hour = parseInt(await picker.timeActive('hour').getText());
+	const minute = parseInt(await picker.timeActive('minute').getText());
+	const meridiem = await picker.meridiem.isExisting() ? await picker.timeActive('meridiem').getText() : null;
 
 	return {day, month, year, hour, minute, meridiem};
 };

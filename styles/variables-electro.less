@@ -137,10 +137,12 @@
 
 // Slider
 // ---------------------------------------
+@agate-slider-active-knob-transform-vertical: @agate-translate-center scale(@agate-slider-knob-resting-state-scale) rotate(90deg);
 @agate-slider-active-knob-width: @agate-slider-knob-width;
 @agate-slider-knob-border-radius: @electro-border-radius;
 @agate-slider-knob-resting-state-scale: 0.8;
 @agate-slider-knob-transform: @agate-translate-center scale(@agate-slider-knob-resting-state-scale) skewX(@electro-skew);
+@agate-slider-knob-transform-vertical: @agate-translate-center scale(@agate-slider-knob-resting-state-scale) rotate(90deg);
 @agate-slider-knob-width: 30px;
 @agate-slider-border-radius: @electro-border-radius;
 @agate-slider-horizontal-margin: 3px 21px;
@@ -156,6 +158,7 @@
 // IncrementSlider
 // ---------------------------------------
 @agate-incrementslider-bg-transform: skewX(-@electro-skew);
+@agate-incrementslider-bg-transform-vertical: skewX(0);
 @electro-incrementslider-horizontal-slider-undertuck: 15px; // the amount the slider tucks underneath the side buttons
 @agate-incrementslider-horizontal-margin: 3px @agate-component-spacing;
 @agate-incrementslider-horizontal-slider-margin: 0 -@electro-incrementslider-horizontal-slider-undertuck;

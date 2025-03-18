@@ -141,7 +141,7 @@ const DropdownListBase = kind({
 	},
 
 	computed: {
-		className: ({direction, skin, width, styler}) => styler.append(direction.substr(0, direction.indexOf(' ')), width, {dropdownListWithCustomizedScroller: skin === 'silicon'}),
+		className: ({direction, skin, width, styler}) => styler.append(direction.substring(0, direction.indexOf(' ')), width, {dropdownListWithCustomizedScroller: skin === 'silicon'}),
 		dataSize: ({children}) => children ? children.length : 0,
 		// Note: Retaining this in case we need to support different item sizes for large text mode:
 		itemSize: ({skin}) => (skin === 'gallium') ? ri.scale(90) : ri.scale(60)
