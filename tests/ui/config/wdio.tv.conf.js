@@ -1,1 +1,3 @@
-module.exports = require('../ui-test-utils/ui/wdio.tv.conf.js');
+import {config} from '@enact/ui-test-utils/ui/wdio.tv.conf.js';
+
+export default config;
