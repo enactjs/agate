@@ -18,16 +18,16 @@ class RangePickerInterface {
 		return element('.internal_Picker_Picker_picker', this.self);
 	}
 
-	decrementer (rangePicker) {
-		return element('.internal_Picker_Picker_itemDecrement', rangePicker);
+	decrementer () {
+		return $(`#${this.id} .internal_Picker_Picker_itemDecrement`);
 	}
 
-	incrementer (rangePicker) {
-		return element('.internal_Picker_Picker_itemIncrement', rangePicker);
+	incrementer () {
+		return $(`#${this.id} .internal_Picker_Picker_itemIncrement`);
 	}
 
-	active (rangePicker) {
-		return element('.internal_Picker_Picker_active', rangePicker);
+	active () {
+		return $(`#${this.id} .internal_Picker_Picker_active`);
 	}
 }
 
