@@ -335,10 +335,10 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			);
 
 			return (
-				<ThemeContext value={{accent, highlight}}>
+				<ThemeContext.Provider value={{accent, highlight}}>
 					{customSkin ? <CustomizableSkinStyle className={customizableSkinClassName} accent={accent} highlight={highlight} /> : null}
 					<App {...rest} accent={accent} highlight={highlight} className={allClassNames} />
-				</ThemeContext>
+				</ThemeContext.Provider>
 			);
 		}
 	};
