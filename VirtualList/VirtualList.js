@@ -93,7 +93,7 @@ let VirtualList = (props) => {
 	});
 
 	return (
-		<ResizeContext {...resizeContextProps}>
+		<ResizeContext.Provider {...resizeContextProps}>
 			<div {...scrollContainerProps}>
 				<div {...scrollInnerContainerProps}>
 					<ScrollContentWrapper {...scrollContentWrapperProps}>
@@ -103,7 +103,7 @@ let VirtualList = (props) => {
 				</div>
 				{isHorizontalScrollbarVisible ? <Scrollbar {...horizontalScrollbarProps} /> : null}
 			</div>
-		</ResizeContext>
+		</ResizeContext.Provider>
 	);
 };
 
@@ -532,7 +532,7 @@ let VirtualGridList = (props) => {
 	});
 
 	return (
-		<ResizeContext {...resizeContextProps}>
+		<ResizeContext.Provider {...resizeContextProps}>
 			<div {...scrollContainerProps}>
 				<div {...scrollInnerContainerProps}>
 					<ScrollContentWrapper {...scrollContentWrapperProps}>
@@ -542,7 +542,7 @@ let VirtualGridList = (props) => {
 				</div>
 				{isHorizontalScrollbarVisible ? <Scrollbar {...horizontalScrollbarProps} /> : null}
 			</div>
-		</ResizeContext>
+		</ResizeContext.Provider>
 	);
 };
 
