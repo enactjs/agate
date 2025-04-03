@@ -29,7 +29,7 @@
     "@enact/ui": "^5.0.0-alpha.4",
     "ilib": "^14.20.0",
     "prop-types": "^15.8.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }
