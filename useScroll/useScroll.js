@@ -17,7 +17,7 @@ import {useScrollBase} from '@enact/ui/useScroll';
 import {assignPropertiesOf} from '@enact/ui/useScroll';
 import utilDOM from '@enact/ui/useScroll/utilDOM';
 import utilEvent from '@enact/ui/useScroll/utilEvent';
-import {useContext, useRef} from 'react';
+import {use, useRef} from 'react';
 
 import $L from '../internal/$L';
 import {SharedState} from '../Panels/SharedStateDecorator';
@@ -58,7 +58,7 @@ const getTargetInViewByDirectionFromPosition = (direction, position, container) 
 const useThemeScroll = (props, instances) => {
 	const {scrollMode} = props;
 	const {themeScrollContentHandle, scrollContentRef, scrollContainerHandle, scrollContainerRef} = instances;
-	const contextSharedState = useContext(SharedState);
+	const contextSharedState = use(SharedState);
 
 	// Mutable value
 
