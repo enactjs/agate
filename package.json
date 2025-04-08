@@ -51,7 +51,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "warning": "^4.0.3",
-    "ilib": "^14.20.0"
+    "ilib": "^14.21.0"
   },
   "peerDependencies": {
     "ilib": "^14.20.0 || ^14.20.0-webos1"
@@ -60,7 +60,7 @@
     "@enact/docs-utils": "^0.4.12",
     "@enact/ui-test-utils": "^2.0.0-alpha.2",
     "eslint-config-enact-proxy": "^1.0.9",
-    "ilib": "^14.20.0"
+    "ilib": "^14.21.0"
   },
   "overrides": {
     "autolinker": "^4.0.0"
