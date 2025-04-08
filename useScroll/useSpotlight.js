@@ -1,6 +1,6 @@
 import Spotlight from '@enact/spotlight';
 import utilDOM from '@enact/ui/useScroll/utilDOM';
-import {useContext, useEffect, useLayoutEffect} from 'react';
+import {use, useEffect, useLayoutEffect} from 'react';
 
 import {SharedState} from '../Panels/SharedStateDecorator';
 
@@ -33,7 +33,7 @@ const useSpotlightConfig = (props) => {
 
 const useSpotlightRestore = (props, instances) => {
 	const {scrollContainerHandle} = instances;
-	const context = useContext(SharedState);
+	const context = use(SharedState);
 
 	// Hooks
 
