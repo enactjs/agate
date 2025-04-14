@@ -1,6 +1,6 @@
 import {ScrollbarTrack as UiScrollbarTrack} from '@enact/ui/useScroll/Scrollbar';
 import PropTypes from 'prop-types';
-import {forwardRef, useEffect, memo} from 'react';
+import {useEffect, memo} from 'react';
 
 const nop = () => {};
 
@@ -12,13 +12,13 @@ const nop = () => {};
  * @ui
  * @private
  */
-const ScrollbarTrack = forwardRef(({cbAlertScrollbarTrack = nop, ...rest}, ref) => {
+const ScrollbarTrack = ({cbAlertScrollbarTrack = nop, ref, ...rest}) => {
 	useEffect (() => {
 		cbAlertScrollbarTrack();
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return <UiScrollbarTrack {...rest} ref={ref} />;
-});
+};
 
 ScrollbarTrack.propTypes = /** @lends agate/useScroll.ScrollbarTrack.prototype */ {
 	/**
@@ -27,7 +27,15 @@ ScrollbarTrack.propTypes = /** @lends agate/useScroll.ScrollbarTrack.prototype *
 	 * @type {Function}
 	 * @private
 	 */
-	cbAlertScrollbarTrack: PropTypes.func
+	cbAlertScrollbarTrack: PropTypes.func,
+
+	/**
+	 * Forwards a reference to the DOM element.
+	 *
+	 * @type {Object}
+	 * @private
+	 */
+	ref: PropTypes.shape({current: PropTypes.any})
 };
 
 const MemoizedScrollbarTrack = memo(ScrollbarTrack);
