@@ -14,28 +14,16 @@ class PickerInterface {
 		return element(`#${this.id}`, browser);
 	}
 
-	get day () {
-		return element('.DatePicker_DatePicker_day', this.self);
+	decrementer (type) {
+		return $(`#${this.id} .DatePicker_DatePicker_${type} > .internal_Picker_Picker_itemDecrement`);
 	}
 
-	get month () {
-		return element('.DatePicker_DatePicker_month', this.self);
+	incrementer (type) {
+		return $(`#${this.id} .DatePicker_DatePicker_${type} > .internal_Picker_Picker_itemIncrement`);
 	}
 
-	get year () {
-		return element('.DatePicker_DatePicker_year', this.self);
-	}
-
-	decrementer (picker) {
-		return element('.internal_Picker_Picker_itemDecrement', picker);
-	}
-
-	incrementer (picker) {
-		return element('.internal_Picker_Picker_itemIncrement', picker);
-	}
-
-	active (picker) {
-		return element('.internal_Picker_Picker_active', picker);
+	active (type) {
+		return $(`#${this.id} .DatePicker_DatePicker_${type} > .internal_Picker_Picker_active`);
 	}
 }
 

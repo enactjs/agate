@@ -1,6 +1,6 @@
 'use strict';
 const {Page} = require('@enact/ui-test-utils/utils');
-const {componentSelector, element} = require('@enact/ui-test-utils/utils');
+const {element} = require('@enact/ui-test-utils/utils');
 
 class KeypadInterface {
 	constructor (id) {
@@ -13,7 +13,7 @@ class KeypadInterface {
 
 	button (index) {
 		return element(
-			`${componentSelector({component: 'Button'})}[aria-label="${index}"]`,
+			`#${this.id} > div .Button_Button_button[aria-label="${index}"]`,
 			this.self
 		);
 	}

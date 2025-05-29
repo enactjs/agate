@@ -366,7 +366,6 @@ const useThemeVirtualList = (props) => {
 	};
 };
 
-/* eslint-disable enact/prop-types */
 function placeholderRenderer ({
 	handlePlaceholderFocus,
 	primary
@@ -383,7 +382,6 @@ function placeholderRenderer ({
 		/>
 	));
 }
-/* eslint-enable enact/prop-types */
 
 export default useThemeVirtualList;
 export {

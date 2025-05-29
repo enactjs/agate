@@ -14,7 +14,7 @@ describe('RangePicker', function () {
 
 				describe('5-way', function () {
 					it('should change the value forward when incrementing the rangePicker', async function () {
-						expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
+						expect(await rangePicker.incrementer().isFocused()).toBe(true);
 						await Page.spotlightSelect();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
@@ -22,10 +22,10 @@ describe('RangePicker', function () {
 					});
 
 					it('should change the value backward when decrementing the rangePicker', async function () {
-						expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
+						expect(await rangePicker.incrementer().isFocused()).toBe(true);
 						await Page.spotlightSelect();
 						await Page.spotlightUp();
-						expect(await rangePicker.decrementer(rangePicker.self).isFocused()).toBe(true);
+						expect(await rangePicker.decrementer().isFocused()).toBe(true);
 						await Page.spotlightSelect();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
@@ -35,16 +35,16 @@ describe('RangePicker', function () {
 
 				describe('pointer', function () {
 					it('should increase the value when incrementing the rangePicker', async function () {
-						await rangePicker.incrementer(rangePicker.self).click();
+						await rangePicker.incrementer().click();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
 						expect(newValue).toBe(5);
 					});
 
 					it('should decrease the value when decrementing the rangePicker', async function () {
-						await rangePicker.incrementer(rangePicker.self).click();
-						expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
-						await rangePicker.decrementer(rangePicker.self).click();
+						await rangePicker.incrementer().click();
+						expect(await rangePicker.incrementer().isFocused()).toBe(true);
+						await rangePicker.decrementer().click();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
 						expect(newValue).toBe(0);
@@ -69,7 +69,7 @@ describe('RangePicker', function () {
 				describe('pointer', function () {
 					it('should not increase the value when clicking the incrementer', async function () {
 						const oldValue = await extractValue(rangePicker);
-						await rangePicker.incrementer(rangePicker.self).click();
+						await rangePicker.incrementer().click();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
 						expect(newValue).toBe(oldValue);
@@ -77,7 +77,7 @@ describe('RangePicker', function () {
 
 					it('should not decrease the value when clicking the decrementer', async function () {
 						const oldValue = await extractValue(rangePicker);
-						await rangePicker.decrementer(rangePicker.self).click();
+						await rangePicker.decrementer().click();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
 						expect(newValue).toBe(oldValue);
@@ -94,7 +94,7 @@ describe('RangePicker', function () {
 				});
 
 				it('should decrement to negative number', async function () {
-					await rangePicker.decrementer(rangePicker.self).click();
+					await rangePicker.decrementer().click();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
 					expect(newValue).toBe(-1);
@@ -107,7 +107,7 @@ describe('RangePicker', function () {
 				it('should decrease to max value', async function () {
 					const oldValue = await extractValue(rangePicker);
 					expect(oldValue).toBe(0);
-					await rangePicker.decrementer(rangePicker.self).click();
+					await rangePicker.decrementer().click();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
 					expect(newValue).toBe(10);
@@ -115,13 +115,13 @@ describe('RangePicker', function () {
 
 				it('should increase to min value', async function () {
 					for (let i = 0; i < 10; i++) {
-						await rangePicker.incrementer(rangePicker.self).click();
+						await rangePicker.incrementer().click();
 						await browser.pause(100);
 					}
 					const oldValue = await extractValue(rangePicker);
 					expect(oldValue).toBe(10);
-					await rangePicker.incrementer(rangePicker.self).click();
-					expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
+					await rangePicker.incrementer().click();
+					expect(await rangePicker.incrementer().isFocused()).toBe(true);
 					await browser.pause(500);
 					const newValue = extractValue(rangePicker);
 					expect(await newValue).toBe(0);
@@ -162,16 +162,16 @@ describe('RangePicker', function () {
 
 				describe('pointer', function () {
 					it('should increase the value when incrementing the range picker', async function () {
-						await rangePicker.incrementer(rangePicker.self).click();
+						await rangePicker.incrementer().click();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
 						expect(newValue).toBe(5);
 					});
 
 					it('should decrease the value when decrementing the range picker', async function () {
-						await rangePicker.incrementer(rangePicker.self).click();
-						expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
-						await rangePicker.decrementer(rangePicker.self).click();
+						await rangePicker.incrementer().click();
+						expect(await rangePicker.incrementer().isFocused()).toBe(true);
+						await rangePicker.decrementer().click();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
 						expect(newValue).toBe(0);
@@ -196,7 +196,7 @@ describe('RangePicker', function () {
 				describe('pointer', function () {
 					it('should not increase the value when clicking the incrementer', async function () {
 						const oldValue = await extractValue(rangePicker);
-						await rangePicker.incrementer(rangePicker.self).click();
+						await rangePicker.incrementer().click();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
 						expect(newValue).toBe(oldValue);
@@ -204,7 +204,7 @@ describe('RangePicker', function () {
 
 					it('should not decrease the value when clicking the decrementer', async function () {
 						const oldValue = await extractValue(rangePicker);
-						await rangePicker.decrementer(rangePicker.self).click();
+						await rangePicker.decrementer().click();
 						await browser.pause(500);
 						const newValue = await extractValue(rangePicker);
 						expect(newValue).toBe(oldValue);
@@ -221,7 +221,7 @@ describe('RangePicker', function () {
 				});
 
 				it('should decrement to negative number', async function () {
-					await rangePicker.decrementer(rangePicker.self).click();
+					await rangePicker.decrementer().click();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
 					expect(newValue).toBe(-1);
@@ -234,7 +234,7 @@ describe('RangePicker', function () {
 				it('should decrease to max value', async function () {
 					const oldValue = await extractValue(rangePicker);
 					expect(oldValue).toBe(0);
-					await rangePicker.decrementer(rangePicker.self).click();
+					await rangePicker.decrementer().click();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
 					expect(newValue).toBe(10);
@@ -242,12 +242,13 @@ describe('RangePicker', function () {
 
 				it('should increase to min value', async function () {
 					for (let i = 0; i < 10; i++) {
-						await rangePicker.incrementer(rangePicker.self).click();
+						await rangePicker.incrementer().click();
 					}
+					await browser.pause(500);
 					const oldValue = await extractValue(rangePicker);
 					expect(oldValue).toBe(10);
-					await rangePicker.incrementer(rangePicker.self).click();
-					expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
+					await rangePicker.incrementer().click();
+					expect(await rangePicker.incrementer().isFocused()).toBe(true);
 					await browser.pause(500);
 					const newValue = extractValue(rangePicker);
 					expect(await newValue).toBe(0);
@@ -266,7 +267,7 @@ describe('RangePicker', function () {
 
 			describe('5-way', function () {
 				it('should change the value forward when incrementing the range picker', async function () {
-					expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
+					expect(await rangePicker.incrementer().isFocused()).toBe(true);
 					await Page.spotlightSelect();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
@@ -274,10 +275,10 @@ describe('RangePicker', function () {
 				});
 
 				it('should change the value backward when decrementing the range picker', async function () {
-					expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
+					expect(await rangePicker.incrementer().isFocused()).toBe(true);
 					await Page.spotlightSelect();
 					await Page.spotlightUp();
-					expect(await rangePicker.decrementer(rangePicker.self).isFocused()).toBe(true);
+					expect(await rangePicker.decrementer().isFocused()).toBe(true);
 					await Page.spotlightSelect();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
@@ -287,16 +288,16 @@ describe('RangePicker', function () {
 
 			describe('pointer', function () {
 				it('should increase the value when incrementing the range picker', async function () {
-					await rangePicker.incrementer(rangePicker.self).click();
+					await rangePicker.incrementer().click();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
 					expect(newValue).toBe(5);
 				});
 
 				it('should decrease the value when decrementing the range picker', async function () {
-					await rangePicker.incrementer(rangePicker.self).click();
-					expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
-					await rangePicker.decrementer(rangePicker.self).click();
+					await rangePicker.incrementer().click();
+					expect(await rangePicker.incrementer().isFocused()).toBe(true);
+					await rangePicker.decrementer().click();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
 					expect(newValue).toBe(0);
@@ -335,16 +336,16 @@ describe('RangePicker', function () {
 
 			describe('pointer', async function () {
 				it('should increase the value when incrementing the range picker', async function () {
-					await rangePicker.incrementer(rangePicker.self).click();
+					await rangePicker.incrementer().click();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
 					expect(newValue).toBe(5);
 				});
 
 				it('should decrease the value when decrementing the range picker', async function () {
-					await rangePicker.incrementer(rangePicker.self).click();
-					expect(await rangePicker.incrementer(rangePicker.self).isFocused()).toBe(true);
-					await rangePicker.decrementer(rangePicker.self).click();
+					await rangePicker.incrementer().click();
+					expect(await rangePicker.incrementer().isFocused()).toBe(true);
+					await rangePicker.decrementer().click();
 					await browser.pause(500);
 					const newValue = await extractValue(rangePicker);
 					expect(newValue).toBe(0);
