@@ -37,10 +37,10 @@
     "extends": "enact-proxy/strict"
   },
   "dependencies": {
-    "@enact/core": "^5.0.0-alpha.4",
-    "@enact/i18n": "^5.0.0-alpha.4",
-    "@enact/spotlight": "^5.0.0-alpha.4",
-    "@enact/ui": "^5.0.0-alpha.4",
+    "@enact/core": "^5.0.0-rc.1",
+    "@enact/i18n": "^5.0.0-rc.1",
+    "@enact/spotlight": "^5.0.0-rc.1",
+    "@enact/ui": "^5.0.0-rc.1",
     "classnames": "^2.5.1",
     "color-convert": "^2.0.1",
     "deep-freeze": "0.0.1",
@@ -57,8 +57,8 @@
     "ilib": "^14.20.0 || ^14.20.0-webos1"
   },
   "devDependencies": {
-    "@enact/docs-utils": "^0.4.12",
-    "@enact/ui-test-utils": "^2.0.0-alpha.2",
+    "@enact/docs-utils": "^0.4.13",
+    "@enact/ui-test-utils": "^2.0.0-rc.1",
     "eslint-config-enact-proxy": "^1.0.9"
   },
   "overrides": {
