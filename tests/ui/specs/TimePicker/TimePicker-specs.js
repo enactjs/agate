@@ -119,6 +119,7 @@ describe('TimePicker', function () {
 				it('should increase the hour when incrementing the picker', async function () {
 					const {hour} = await extractValues(timePicker);
 					(await timePicker.incrementer('hour')).click();
+					await browser.pause(500);
 					const {hour: value} = await extractValues(timePicker);
 					const expected = hour < 12 ? hour + 1 : 1;
 					expect(value).toBe(expected);
@@ -292,10 +293,11 @@ describe('TimePicker', function () {
 		it('should increment hours from 23 to 0', async function () {
 			// go to 23 first
 			(await timePicker.decrementer('hour')).click();
-			expect((await extractValues(timePicker)).hour).toBe(23);
 			await browser.pause(500);
+			expect((await extractValues(timePicker)).hour).toBe(23);
 			// now increment
 			(await timePicker.incrementer('hour')).click();
+			await browser.pause(500);
 			expect((await extractValues(timePicker)).hour).toBe(0);
 		});
 
