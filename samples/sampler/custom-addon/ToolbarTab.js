@@ -1,4 +1,4 @@
-import {IconButton} from '@storybook/components';
+import {IconButton} from 'storybook/internal/components';
 import PropTypes from 'prop-types';
 import React from 'react'; // eslint-disable-line
 
