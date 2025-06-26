@@ -38,7 +38,7 @@
         "@enact/spotlight": "^5.0.0",
         "@enact/ui": "^5.0.0",
         "classnames": "^2.5.1",
-        "color-convert": "^2.0.1",
+        "color-convert": "^3.1.0",
         "deep-freeze": "0.0.1",
         "eases": "^1.0.8",
         "ilib": "^14.21.0",
