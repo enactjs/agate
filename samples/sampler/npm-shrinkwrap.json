@@ -15,13 +15,13 @@
         "@enact/spotlight": "^5.0.0",
         "@enact/storybook-utils": "^6.0.0",
         "@enact/ui": "^5.0.0",
-        "@storybook/addon-docs": "^8.6.12",
-        "@storybook/csf-tools": "^8.6.12",
-        "@storybook/manager-api": "^8.6.12",
-        "@storybook/react-webpack5": "^8.6.12",
-        "@storybook/theming": "^8.6.12",
-        "dotenv": "^16.4.7",
-        "ilib": "^14.21.0",
+        "@storybook/addon-docs": "^8.6.14",
+        "@storybook/csf-tools": "^8.6.14",
+        "@storybook/manager-api": "^8.6.14",
+        "@storybook/react-webpack5": "^8.6.14",
+        "@storybook/theming": "^8.6.14",
+        "dotenv": "^16.5.0",
+        "ilib": "^14.21.1",
         "prop-types": "^15.8.1",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
@@ -41,7 +41,7 @@
         "color-convert": "^2.0.1",
         "deep-freeze": "0.0.1",
         "eases": "^1.0.8",
-        "ilib": "^14.21.0",
+        "ilib": "^14.21.1",
         "invariant": "^2.2.4",
         "prop-types": "^15.8.1",
         "ramda": "^0.30.1",
@@ -32735,9 +32735,9 @@
       "license": "MIT"
     },
     "node_modules/@types/node": {
-      "version": "24.0.1",
-      "resolved": "https://registry.npmjs.org/@types/node/-/node-24.0.1.tgz",
-      "integrity": "sha512-MX4Zioh39chHlDJbKmEgydJDS3tspMP/lnQC67G3SWsTnb9NeYVWOjkxpOSy4oMfPs4StcWHwBrvUb4ybfnuaw==",
+      "version": "24.0.3",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-24.0.3.tgz",
+      "integrity": "sha512-R4I/kzCYAdRLzfiCabn9hxWfbuHS573x+r0dJMkkzThEa7pbrcDWK+9zu3e7aBOouf+rQAciqPFMnxwr0aWgKg==",
       "license": "MIT",
       "dependencies": {
         "undici-types": "~7.8.0"
@@ -33249,9 +33249,9 @@
       }
     },
     "node_modules/caniuse-lite": {
-      "version": "1.0.30001722",
-      "resolved": "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001722.tgz",
-      "integrity": "sha512-DCQHBBZtiK6JVkAGw7drvAMK0Q0POD/xZvEmDp6baiMMP6QXXk9HpD6mNYBZWhOPG6LvIDb82ITqtWjhDckHCA==",
+      "version": "1.0.30001724",
+      "resolved": "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001724.tgz",
+      "integrity": "sha512-WqJo7p0TbHDOythNTqYujmaJTvtYRZrjpP8TCvH6Vb9CYJerJNKamKzIWOM4BkQatWj9H2lYulpdAQNBe7QhNA==",
       "funding": [
         {
           "type": "opencollective",
@@ -33681,9 +33681,9 @@
       }
     },
     "node_modules/electron-to-chromium": {
-      "version": "1.5.167",
-      "resolved": "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.5.167.tgz",
-      "integrity": "sha512-LxcRvnYO5ez2bMOFpbuuVuAI5QNeY1ncVytE/KXaL6ZNfzX1yPlAO0nSOyIHx2fVAuUprMqPs/TdVhUFZy7SIQ==",
+      "version": "1.5.171",
+      "resolved": "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.5.171.tgz",
+      "integrity": "sha512-scWpzXEJEMrGJa4Y6m/tVotb0WuvNmasv3wWVzUAeCgKU0ToFOhUW6Z+xWnRQANMYGxN4ngJXIThgBJOqzVPCQ==",
       "license": "ISC"
     },
     "node_modules/endent": {
@@ -35261,9 +35261,9 @@
       }
     },
     "node_modules/postcss": {
-      "version": "8.5.5",
-      "resolved": "https://registry.npmjs.org/postcss/-/postcss-8.5.5.tgz",
-      "integrity": "sha512-d/jtm+rdNT8tpXuHY5MMtcbJFBkhXE6593XVR9UoGCH8jSFGci7jGvMGH5RYd5PBJW+00NZQt6gf7CbagJCrhg==",
+      "version": "8.5.6",
+      "resolved": "https://registry.npmjs.org/postcss/-/postcss-8.5.6.tgz",
+      "integrity": "sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==",
       "funding": [
         {
           "type": "opencollective",
@@ -35926,9 +35926,9 @@
       }
     },
     "node_modules/terser": {
-      "version": "5.42.0",
-      "resolved": "https://registry.npmjs.org/terser/-/terser-5.42.0.tgz",
-      "integrity": "sha512-UYCvU9YQW2f/Vwl+P0GfhxJxbUGLwd+5QrrGgLajzWAtC/23AX0vcise32kkP7Eu0Wu9VlzzHAXkLObgjQfFlQ==",
+      "version": "5.43.1",
+      "resolved": "https://registry.npmjs.org/terser/-/terser-5.43.1.tgz",
+      "integrity": "sha512-+6erLbBm0+LROX2sPXlUYx/ux5PyE9K/a92Wrt6oA+WDAoFTdpHE5tCYCI5PNzq2y8df4rA+QgHLJuR4jNymsg==",
       "license": "BSD-2-Clause",
       "dependencies": {
         "@jridgewell/source-map": "^0.3.3",
