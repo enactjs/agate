@@ -3,7 +3,7 @@ import Icon from '@enact/agate/Icon';
 import {VirtualList} from '@enact/agate/VirtualList';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
-import {forwardRef, useCallback, useEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 
 const
 	languages = [
@@ -53,7 +53,7 @@ const iconButtonStyleDefault = {
 	right: 0
 };
 
-const ExpandableDifferentHeightItem = forwardRef(({index, 'data-index': dataIndex, items, style: itemStyleFromList, updateItemStatus, ...rest}, ref) => {
+const ExpandableDifferentHeightItem = ({index, 'data-index': dataIndex, items, ref, style: itemStyleFromList, updateItemStatus, ...rest}) => {
 	const {title: children, numOfLines, open} = items[index],
 		itemStyle = {...itemStyleDefault, ...itemStyleFromList};
 
@@ -96,12 +96,13 @@ const ExpandableDifferentHeightItem = forwardRef(({index, 'data-index': dataInde
 			</div>
 		);
 	}
-});
+};
 
 ExpandableDifferentHeightItem.propTypes = {
 	'data-index': PropTypes.number,
 	index: PropTypes.number,
 	items: PropTypes.array,
+	ref: PropTypes.object,
 	updateItemStatus: PropTypes.func
 };
 

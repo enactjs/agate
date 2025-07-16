@@ -356,7 +356,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			}
 
 			return (
-				<DropManagerContext.Provider
+				<DropManagerContext
 					value={{
 						arrangement,
 						arranging: this.state.dragging,
@@ -368,7 +368,7 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 						className={classnames(className, css.dropManager, (arrangeable ? css.arrangeable : ''), {dragging: this.state.dragging})}
 						// draggable="true"
 					/>
-				</DropManagerContext.Provider>
+				</DropManagerContext>
 			);
 		}
 	};
@@ -428,14 +428,14 @@ const Draggable = (Wrapped) => kind({
 			<DropManagerContext.Consumer>
 				{({arrangement, arrangeable}) => {
 					return (
-						<DraggableContainerContext.Provider value={{containerShape}}>
+						<DraggableContainerContext value={{containerShape}}>
 							<Wrapped
 								{...rest}
 								draggable={arrangeable && draggable}
 								data-slot={draggable ? (arrangement && (arrangement[name] || arrangement[slot]) || (name || slot)) : null}
 								data-slot-name={slot}
 							/>
-						</DraggableContainerContext.Provider>
+						</DraggableContainerContext>
 					);
 				}}
 			</DropManagerContext.Consumer>
