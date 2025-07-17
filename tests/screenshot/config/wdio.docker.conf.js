@@ -1,3 +1,3 @@
-import {config} from '@enact/ui-test-utils/screenshot/wdio.docker.conf.js';
+import {ssDockerConfig} from '@enact/ui-test-utils/screenshot/wdio.docker.conf.js';
 
-export default config;
+export default ssDockerConfig;
