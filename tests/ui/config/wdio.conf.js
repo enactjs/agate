@@ -1,3 +1,3 @@
-import {uiConfig} from '@enact/ui-test-utils/ui/wdio.conf.js';
+import config from '@enact/ui-test-utils/ui/wdio.conf.js';
 
-export default uiConfig;
+export default config;
