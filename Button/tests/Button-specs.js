@@ -127,7 +127,7 @@ describe('Button Specs', () => {
 
 			await user.click(button);
 
-			expect(handleClick).toBeCalled();
+			expect(handleClick).toHaveBeenCalled();
 		});
 
 		test('should not call onClick when disabled', async () => {
@@ -138,7 +138,7 @@ describe('Button Specs', () => {
 
 			await user.click(button);
 
-			expect(handleClick).not.toBeCalled();
+			expect(handleClick).not.toHaveBeenCalled();
 		});
 	});
 });

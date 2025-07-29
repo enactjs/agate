@@ -262,7 +262,7 @@ describe('Slider', () => {
 		activate(slider);
 		leftKeyDown(slider);
 
-		expect(handleChange).not.toBeCalled();
+		expect(handleChange).not.toHaveBeenCalled();
 	});
 
 	test('should increment from the lower bound when value is unset', () => {
@@ -289,7 +289,7 @@ describe('Slider', () => {
 
 		const expected = 1;
 
-		expect(handleSpotlight).toBeCalledTimes(expected);
+		expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 	});
 
 	test('should call onSpotlightLeft on vertical slider at any value', () => {
@@ -302,7 +302,7 @@ describe('Slider', () => {
 
 		const expected = 1;
 
-		expect(handleSpotlight).toBeCalledTimes(expected);
+		expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 	});
 
 	test('should not call onSpotlightLeft on horizontal slider at greater than min value', () => {
@@ -313,7 +313,7 @@ describe('Slider', () => {
 		focus(slider);
 		leftKeyDown(slider);
 
-		expect(handleSpotlight).not.toBeCalled();
+		expect(handleSpotlight).not.toHaveBeenCalled();
 	});
 
 	test('should call onSpotlightDown on vertical slider at min value', () => {
@@ -326,7 +326,7 @@ describe('Slider', () => {
 
 		const expected = 1;
 
-		expect(handleSpotlight).toBeCalledTimes(expected);
+		expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 	});
 
 	test('should call onSpotlightDown on horizontal slider at any value', () => {
@@ -339,7 +339,7 @@ describe('Slider', () => {
 
 		const expected = 1;
 
-		expect(handleSpotlight).toBeCalledTimes(expected);
+		expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 	});
 
 	test('should not call onSpotlightDown on vertical slider at greater than min value', () => {
@@ -350,7 +350,7 @@ describe('Slider', () => {
 		focus(slider);
 		downKeyDown(slider);
 
-		expect(handleSpotlight).not.toBeCalled();
+		expect(handleSpotlight).not.toHaveBeenCalled();
 	});
 
 	test('should call onSpotlightRight on horizontal slider at max value', () => {
@@ -363,7 +363,7 @@ describe('Slider', () => {
 
 		const expected = 1;
 
-		expect(handleSpotlight).toBeCalledTimes(expected);
+		expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 	});
 
 	test('should call onSpotlightRight on vertical slider at any value', () => {
@@ -376,7 +376,7 @@ describe('Slider', () => {
 
 		const expected = 1;
 
-		expect(handleSpotlight).toBeCalledTimes(expected);
+		expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 	});
 
 	test('should not call onSpotlightRight on horizontal slider at less than max value', () => {
@@ -387,7 +387,7 @@ describe('Slider', () => {
 		focus(slider);
 		rightKeyDown(slider);
 
-		expect(handleSpotlight).not.toBeCalled();
+		expect(handleSpotlight).not.toHaveBeenCalled();
 	});
 
 	test('should call onSpotlightUp on vertical slider at max value', () => {
@@ -400,7 +400,7 @@ describe('Slider', () => {
 
 		const expected = 1;
 
-		expect(handleSpotlight).toBeCalledTimes(expected);
+		expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 	});
 
 	test('should call onSpotlightUp on horizontal slider at any value', () => {
@@ -413,7 +413,7 @@ describe('Slider', () => {
 
 		const expected = 1;
 
-		expect(handleSpotlight).toBeCalledTimes(expected);
+		expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 	});
 
 	test('should not call onSpotlightUp on vertical slider at less than max value', () => {
@@ -424,7 +424,7 @@ describe('Slider', () => {
 		focus(slider);
 		upKeyDown(slider);
 
-		expect(handleSpotlight).not.toBeCalled();
+		expect(handleSpotlight).not.toHaveBeenCalled();
 	});
 
 	test('should set the tooltip to visible when focused', () => {
