@@ -2,6 +2,10 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [3.1.0] - 2025-08-08
+
+- Update dependencies including Storybook 9
+
 ## [3.0.0] - 2025-06-13
 
 No significant changes.
