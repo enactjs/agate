@@ -23,11 +23,11 @@
   },
   "dependencies": {
     "@enact/agate": "../../",
-    "@enact/core": "^5.0.0",
-    "@enact/i18n": "^5.0.0",
-    "@enact/spotlight": "^5.0.0",
-    "@enact/ui": "^5.0.0",
-    "ilib": "^14.21.0",
+    "@enact/core": "^5.2.0",
+    "@enact/i18n": "^5.2.0",
+    "@enact/spotlight": "^5.2.0",
+    "@enact/ui": "^5.2.0",
+    "ilib": "^14.21.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   }

@@ -205,7 +205,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 
 		test('should call onSpotlightLeft from the decrement button of vertical IncrementSlider', () => {
@@ -216,7 +216,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 
 		test('should call onSpotlightLeft from the increment button of vertical IncrementSlider', () => {
@@ -227,7 +227,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 
 		test('should call onSpotlightRight from the increment button of horizontal IncrementSlider', () => {
@@ -238,7 +238,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 
 		test('should call onSpotlightRight from the increment button of vertical IncrementSlider', () => {
@@ -249,7 +249,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 
 		test('should call onSpotlightRight from the decrement button of vertical IncrementSlider', () => {
@@ -260,7 +260,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 
 		test('should call onSpotlightUp from the decrement button of horizontal IncrementSlider', () => {
@@ -271,7 +271,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 
 		test('should call onSpotlightUp from the increment button of horizontal IncrementSlider', () => {
@@ -282,7 +282,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 
 		test('should call onSpotlightUp from the increment button of vertical IncrementSlider', () => {
@@ -293,7 +293,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 
 		test('should call onSpotlightDown from the increment button of horizontal IncrementSlider', () => {
@@ -304,7 +304,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 
 		test('should call onSpotlightDown from the decrement button of horizontal IncrementSlider', () => {
@@ -315,7 +315,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 
 		test('should call onSpotlightDown from the decrement button of vertical IncrementSlider', () => {
@@ -326,7 +326,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 	});
 
@@ -339,7 +339,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 
 		test('should call onSpotlightRight from slider of horizontal IncrementSlider when value is at max', () => {
@@ -350,7 +350,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 
 		test('should call onSpotlightDown from slider of vertical IncrementSlider when value is at min', () => {
@@ -361,7 +361,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 
 		test('should call onSpotlightUp from slider of vertical IncrementSlider when value is at max', () => {
@@ -372,7 +372,7 @@ describe('IncrementSlider Specs', () => {
 
 			const expected = 1;
 
-			expect(handleSpotlight).toBeCalledTimes(expected);
+			expect(handleSpotlight).toHaveBeenCalledTimes(expected);
 		});
 	});
 });

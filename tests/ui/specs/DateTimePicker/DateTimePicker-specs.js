@@ -322,9 +322,11 @@ describe('DateTimePicker', function () {
 			for (let i = 11; i; i -= 1) {
 				await dateTimePicker.timeIncrementer('hour').click();
 			}
+			await browser.pause(500);
 			expect((await extractValues(dateTimePicker)).hour).toBe(23);
 			// now increment
 			await dateTimePicker.timeIncrementer('hour').click();
+			await browser.pause(500);
 			expect((await extractValues(dateTimePicker)).hour).toBe(0);
 		});
 

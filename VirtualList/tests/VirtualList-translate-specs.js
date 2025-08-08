@@ -419,7 +419,7 @@ describe('VirtualList with translate `scrollMode`', () => {
 
 			act(() => jest.advanceTimersByTime(1000)); // Wait onScrollStop
 
-			expect(fn).toBeCalled();
+			expect(fn).toHaveBeenCalled();
 		});
 
 		test('should not scroll by wheel when `noScrollByWheel` prop is true', (done) => {
