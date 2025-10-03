@@ -9,13 +9,19 @@ import ri from '@enact/ui/resolution';
 // runs the same way
 spotlight.setPointerMode(false);
 
+const svgGenerator = (width, height, bgColor, textColor, customText) => (
+	`data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${width} ${height}' width='${width}' height='${height}'%3E` +
+	`%3Crect width='${width}' height='${height}' fill='%23${bgColor}'%3E%3C/rect%3E` +
+	`%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='36px' fill='%23${textColor}'%3E${customText}%3C/text%3E%3C/svg%3E`
+);
+
 const app = (props) => <div {...props}>
 	<div>
 		<Scroller style={{height: ri.scaleToRem(900)}}>
 			<Heading>Image Item Default</Heading>
 			<ImageItem
 				id="imageItem1"
-				src="https://placehold.co/300x400/9037ab/ffffff/png?text=Image0"
+				src={svgGenerator(300, 400, '#ffffff', 'Image0', 'Image 0')}
 				style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}
 			>
 				Image Item caption
@@ -23,7 +29,7 @@ const app = (props) => <div {...props}>
 			<Heading>Image Item with long caption</Heading>
 			<ImageItem
 				id="imageItem2"
-				src="https://placehold.co/300x400/9037ab/ffffff/png?text=Image0"
+				src={svgGenerator(300, 400, '#ffffff', 'Image1', 'Image 1')}
 				style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}
 			>
 				Image Item with longer caption has Marquee applied
@@ -31,7 +37,7 @@ const app = (props) => <div {...props}>
 			<Heading>Image Item caption overlay</Heading>
 			<ImageItem
 				id="imageItem3"
-				src="https://placehold.co/300x400/9037ab/ffffff/png?text=Image0"
+				src={svgGenerator(300, 400, '#ffffff', 'Image0', 'Image 0')}
 				captionPosition="overlay"
 				style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}
 			>
@@ -41,7 +47,7 @@ const app = (props) => <div {...props}>
 			<ImageItem
 				id="imageItem4"
 				disabled
-				src="https://placehold.co/300x400/9037ab/ffffff/png?text=Image0"
+				src={svgGenerator(300, 400, '#ffffff', 'Image0', 'Image 0')}
 				style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}
 			>
 				Image Item disabled
