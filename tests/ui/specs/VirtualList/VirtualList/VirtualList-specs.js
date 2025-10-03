@@ -1,9 +1,11 @@
 const Page = require('./VirtualListPage'),
 	{expectFocusedItem, expectNoFocusedItem, waitUntilFocused} = require('../VirtualList-utils');
+const ScrollerPage = require("../../Scroller/ScrollerPage");
 
 describe('VirtualList', function () {
 	beforeEach(async function () {
 		await Page.open();
+		await Page.delay(200);
 	});
 
 	it('should meet initial conditions', async function () {

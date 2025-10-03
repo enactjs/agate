@@ -4,6 +4,7 @@ describe('Scroller', function () {
 
 	it('should meet initial conditions', async function () {
 		await ScrollerPage.open();
+		await ScrollerPage.delay(200);
 		expect(await ScrollerPage.buttonHideScrollbar.isFocused()).toBe(true);
 	});
 
