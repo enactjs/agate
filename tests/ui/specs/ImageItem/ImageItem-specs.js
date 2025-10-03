@@ -3,10 +3,10 @@ const Page = require('./ImageItemPage');
 describe('ImageItem', function () {
 	beforeEach(async function () {
 		await Page.open();
-		await Page.delay(200);
 	});
 
 	it('should have focus on first ImageItem at start', async function () {
+		await Page.delay(200);
 		expect(await Page.components.imageItemDefault.self.isFocused()).toBe(true);
 	});
 

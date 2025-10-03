@@ -12,6 +12,7 @@ describe('Slider', function () {
 
 			describe('5-way', function () {
 				it('should increment the value of horizontal slider on arrow right key when active', async function () {
+					await Page.delay(200);
 					expect(await slider.self.isFocused()).toBe(true);
 					const originalValue = await slider.knobPositionHorizontal();
 					await Page.spotlightSelect();

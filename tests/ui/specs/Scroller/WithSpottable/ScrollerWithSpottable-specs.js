@@ -1,4 +1,5 @@
 const ScrollerPage = require('../ScrollerPage');
+const Page = require("../../VirtualList/VirtualGridList/VirtualGridListPage");
 
 describe('Scroller', function () {
 
@@ -9,6 +10,7 @@ describe('Scroller', function () {
 
 		it('should meet initial conditions', async function () {
 			await ScrollerPage.open('WithSpottable');
+			await Page.delay(200);
 			expect(await ScrollerPage.button1.isFocused()).toBe(true);
 		});
 

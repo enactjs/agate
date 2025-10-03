@@ -15,6 +15,7 @@ describe('MediaPlayer', function () {
 
 	describe('default', function () {
 		it('should have the slider knob focused', async function () {
+			await Page.delay(200);
 			expect(await mediaPlayerDefault.slider.isFocused()).toBe(true);
 		});
 

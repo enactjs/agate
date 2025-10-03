@@ -12,6 +12,7 @@ describe('DatePicker', function () {
 			const datePicker = Page.components.datePickerDefault;
 
 			it('should have month-day-year order', async function () {
+				await Page.delay(200);
 				expect(await datePicker.decrementer('month').isFocused()).toBe(true);
 				await Page.spotlightRight();
 				expect(await datePicker.decrementer('day').isFocused()).toBe(true);

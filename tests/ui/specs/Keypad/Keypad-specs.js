@@ -11,10 +11,12 @@ describe('Keypad', function () {
 		const keypad = Page.components.keypadDefault;
 
 		it('should have focus on first button at start', async function () {
+			await Page.delay(200);
 			expect(await (await keypad.button(1)).isFocused()).toBe(true);
 		});
 
 		it('can navigate down/left/right/up between keys', async function () {
+			await Page.delay(200);
 			expect(await (await keypad.button(1)).isFocused()).toBe(true);
 			await Page.spotlightDown();
 			expect(await (await keypad.button(4)).isFocused()).toBe(true);

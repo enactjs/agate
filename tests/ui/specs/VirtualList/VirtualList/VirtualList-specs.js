@@ -5,10 +5,10 @@ const ScrollerPage = require("../../Scroller/ScrollerPage");
 describe('VirtualList', function () {
 	beforeEach(async function () {
 		await Page.open();
-		await Page.delay(200);
 	});
 
 	it('should meet initial conditions', async function () {
+		await Page.delay(200);
 		expect(await Page.buttonHideScrollbar.isFocused()).toBe(true);
 	});
 
