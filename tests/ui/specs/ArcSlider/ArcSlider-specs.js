@@ -13,6 +13,7 @@ describe('ArcSlider', function () {
 			const {cx: originalCx, cy: originalCy} = await arcSlider.knobPosition();
 
 			await arcSlider.self.click({x: 5, y: -10});
+			await Page.delay(200);
 
 			const {cx: cx1, cy: cy1} = await arcSlider.knobPosition();
 			expect(cx1).toBeGreaterThan(originalCx);
