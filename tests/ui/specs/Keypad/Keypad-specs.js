@@ -4,6 +4,7 @@ describe('Keypad', function () {
 
 	beforeEach(async function () {
 		await Page.open();
+		await Page.delay(200);
 	});
 
 	describe('5-way', function () {

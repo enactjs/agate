@@ -7,6 +7,7 @@ describe('VirtualGridList', function () {
 	});
 
 	it('should meet initial conditions', async function () {
+		await Page.delay(200);
 		expect(await Page.buttonHideScrollbar.isFocused()).toBe(true);
 	});
 
