@@ -29,7 +29,7 @@ const app = (props) => <div {...props}>
 			<Heading>Image Item with long caption</Heading>
 			<ImageItem
 				id="imageItem2"
-				src={svgGenerator(300, 400, '#ffffff', 'Image1', 'Image 1')}
+				src={svgGenerator(300, 400, Math.floor((Math.random() * (0x1000000 - 0x101010)) + 0x101010).toString(16), 'Image1', 'Image 1')}
 				style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}
 			>
 				Image Item with longer caption has Marquee applied
@@ -37,7 +37,7 @@ const app = (props) => <div {...props}>
 			<Heading>Image Item caption overlay</Heading>
 			<ImageItem
 				id="imageItem3"
-				src={svgGenerator(300, 400, '#ffffff', 'Image0', 'Image 0')}
+				src={svgGenerator(300, 400, Math.floor((Math.random() * (0x1000000 - 0x101010)) + 0x101010).toString(16), 'Image0', 'Image 0')}
 				captionPosition="overlay"
 				style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}
 			>
@@ -47,7 +47,7 @@ const app = (props) => <div {...props}>
 			<ImageItem
 				id="imageItem4"
 				disabled
-				src={svgGenerator(300, 400, '#ffffff', 'Image0', 'Image 0')}
+				src={svgGenerator(300, 400, Math.floor((Math.random() * (0x1000000 - 0x101010)) + 0x101010).toString(16), 'Image0', 'Image 0')}
 				style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}
 			>
 				Image Item disabled
