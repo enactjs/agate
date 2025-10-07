@@ -64,18 +64,6 @@ const app = (props) => <div {...props}>
 				]}
 			/>
 		</div>
-		<div style={{width: '50%'}}>
-			<Heading>TabGroup tabPosition after</Heading>
-			<TabGroup
-				className="tabGroupTabPositionAfter"
-				tabPosition="after"
-				tabs={[
-					{title: 'Home', icon: 'home'},
-					{title: 'Settings', icon: 'setting'},
-					{title: 'Theme', icon: 'display'}
-				]}
-			/>
-		</div>
 		<div style={{width: '100%'}}>
 			<Heading>TabGroup Vertical</Heading>
 			<div style={{width: scaleToRem(700), height: scaleToRem(400)}}>
