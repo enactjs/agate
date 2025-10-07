@@ -19,7 +19,6 @@ const app = (props) => <div {...props}>
 			<ImageItem
 				id="imageItem1"
 				src={svgGenerator(300, 400, Math.floor((Math.random() * (0x1000000 - 0x101010)) + 0x101010).toString(16), 'Image1', 'Image 1')}
-
 				style={{width: ri.scaleToRem(400), height: ri.scaleToRem(300)}}
 			>
 				Image Item Default

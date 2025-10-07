@@ -1,7 +1,5 @@
 import RangePicker from '../../../../RangePicker';
 import ThemeDecorator from '../../../../ThemeDecorator';
-import Heading from "../../../../Heading";
-import TemperatureControl from "../../../../TemperatureControl";
 
 const app = (props) => <div {...props}>
 	<div style={{display: 'flex', flexWrap: 'wrap'}}>

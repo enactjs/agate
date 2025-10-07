@@ -1,5 +1,3 @@
-import {scaleToRem} from '@enact/ui/resolution';
-
 import Heading from '../../../../Heading';
 import Slider, {SliderTooltip} from '../../../../Slider';
 import ThemeDecorator from '../../../../ThemeDecorator';
