@@ -1,6 +1,5 @@
 import Button from '../../../../Button';
 import Heading from '../../../../Heading';
-import Scroller from '../../../../Scroller';
 import TabGroup from '../../../../TabGroup';
 import ThemeDecorator from '../../../../ThemeDecorator';
 import {scaleToRem} from '@enact/ui/resolution';

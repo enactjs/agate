@@ -68,7 +68,7 @@ describe('MediaPlayer', function () {
 				expect(await mediaPlayerDefault.previousButton.isFocused()).toBe(true);
 			});
 
-			it('should focus back `play` button when navigating back to media controls ', async function () {
+			it('should focus back `play` button when navigating back to media controls', async function () {
 				expect(await mediaPlayerDefault.slider.isFocused()).toBe(true);
 
 				await Page.spotlightDown();
@@ -150,7 +150,7 @@ describe('MediaPlayer', function () {
 				expect(await mediaPlayerDisabled.previousButton.isFocused()).toBe(true);
 			});
 
-			it('should focus back `play` button when navigating back to media controls ', async function () {
+			it('should focus back `play` button when navigating back to media controls', async function () {
 				expect(await mediaPlayerDefault.slider.isFocused()).toBe(true);
 				await Page.spotlightRight();
 
@@ -267,7 +267,7 @@ describe('MediaPlayer', function () {
 				expect(await mediaPlayerTiny.previousButton.isFocused()).toBe(true);
 			});
 
-			it('should focus back `play` button when navigating back to media controls ', async function () {
+			it('should focus back `play` button when navigating back to media controls', async function () {
 				await browser.pause(500);
 				await mediaPlayerTiny.focus();
 				expect(await mediaPlayerTiny.slider.isFocused()).toBe(true);

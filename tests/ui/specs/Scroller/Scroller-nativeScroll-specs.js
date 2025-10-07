@@ -1,5 +1,4 @@
 const ScrollerPage = require('./ScrollerPage');
-const Page = require("../VirtualList/VirtualGridList/VirtualGridListPage");
 
 describe('Scroller', function () {
 
