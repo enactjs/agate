@@ -10,7 +10,7 @@ describe('Scroller', function () {
 
 		it('should meet initial conditions', async function () {
 			await ScrollerPage.open('WithSpottable');
-			await Page.delay(200);
+			await ScrollerPage.focus(await ScrollerPage.button1);
 			expect(await ScrollerPage.button1.isFocused()).toBe(true);
 		});
 

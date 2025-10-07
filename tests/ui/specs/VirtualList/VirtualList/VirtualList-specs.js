@@ -1,6 +1,5 @@
 const Page = require('./VirtualListPage'),
 	{expectFocusedItem, expectNoFocusedItem, waitUntilFocused} = require('../VirtualList-utils');
-const ScrollerPage = require("../../Scroller/ScrollerPage");
 
 describe('VirtualList', function () {
 	beforeEach(async function () {
@@ -8,7 +7,7 @@ describe('VirtualList', function () {
 	});
 
 	it('should meet initial conditions', async function () {
-		await Page.delay(200);
+		await Page.focus(Page.buttonHideScrollbar);
 		expect(await Page.buttonHideScrollbar.isFocused()).toBe(true);
 	});
 

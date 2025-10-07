@@ -14,7 +14,7 @@ describe('ImageItem', function () {
 		const imageItem = Page.components.imageItemDefault;
 
 		it('should have correct text', async function () {
-			expect(await imageItem.textContent).toBe('Image Item caption');
+			expect(await imageItem.textContent).toBe('Image Item Default');
 		});
 
 		it('should display an image', async function () {
@@ -24,7 +24,7 @@ describe('ImageItem', function () {
 		describe('5-way', function () {
 			it('should be able to focus the image item', async function () {
 				await Page.components.imageItemLongCaption.focus();
-				await Page.spotlightUp();
+				await Page.spotlightLeft();
 
 				expect(await imageItem.self.isFocused()).toBe(true);
 			});
@@ -45,7 +45,7 @@ describe('ImageItem', function () {
 		describe('5-way', function () {
 			it('should be able to focus the image item', async function () {
 				await Page.components.imageItemDefault.focus();
-				await Page.spotlightDown();
+				await Page.spotlightRight();
 
 				expect(await imageItem.self.isFocused()).toBe(true);
 			});
@@ -69,7 +69,7 @@ describe('ImageItem', function () {
 
 		describe('5-way', function () {
 			it('should be able to focus the image item', async function () {
-				await Page.components.imageItemLongCaption.focus();
+				await Page.components.imageItemDefault.focus();
 				await Page.spotlightDown();
 
 				expect(await imageItem.self.isFocused()).toBe(true);
@@ -91,7 +91,7 @@ describe('ImageItem', function () {
 		describe('5-way', function () {
 			it('should be able to focus the image item', async function () {
 				await Page.components.imageItemCaptionOverlay.focus();
-				await Page.spotlightDown();
+				await Page.spotlightRight();
 
 				expect(await imageItem.self.isFocused()).toBe(true);
 			});

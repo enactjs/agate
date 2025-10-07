@@ -10,15 +10,19 @@ import ri from '@enact/ui/resolution';
 spotlight.setPointerMode(false);
 
 const app = (props) => <div {...props}>
-	<div>
-		<Scroller style={{height: ri.scaleToRem(900)}}>
-			<Heading>TemperatureControl default</Heading>
+	<div style={{display: 'flex', flexWrap: 'wrap'}}>
+		<div style={{width: '50%'}}>
+			<Heading size="tiny">TemperatureControl default</Heading>
 			<TemperatureControl id="temperatureControlDefault" />
-			<Heading>TemperatureControl custom min, max, endAngle, startAngle</Heading>
+		</div>
+		<div style={{width: '50%'}}>
+			<Heading size="tiny">TemperatureControl custom min, max, endAngle, startAngle</Heading>
 			<TemperatureControl min={0} max={2} defaultValue={0} id="temperatureControlCustom" />
-			<Heading>TemperatureControl disabled</Heading>
+		</div>
+		<div style={{width: '50%'}}>
+			<Heading size="tiny">TemperatureControl disabled</Heading>
 			<TemperatureControl disabled id="temperatureControlDisabled" />
-		</Scroller>
+		</div>
 	</div>
 </div>;
 

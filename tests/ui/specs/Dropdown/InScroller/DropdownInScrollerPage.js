@@ -44,6 +44,10 @@ class DropdownPage extends Page {
 		this.components = {dropdown1, dropdown2, dropdown3};
 	}
 
+	async focus (element) {
+		return browser.execute((el) => el.focus(), await element);
+	}
+
 	async open (urlExtra) {
 		await super.open('DropdownInScroller-View', urlExtra);
 	}

@@ -15,6 +15,10 @@ class VirtualGridListPage extends Page {
 		await super.open(`VirtualGridList${layout}-View`, urlExtra);
 	}
 
+	async focus (element) {
+		return browser.execute((el) => el.focus(), await element);
+	}
+
 	get buttonHideScrollbar () {
 		return element('#hideScrollbar', browser);
 	}

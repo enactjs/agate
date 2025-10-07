@@ -6,25 +6,37 @@ import Slider, {SliderTooltip} from '../../../../Slider';
 import ThemeDecorator from '../../../../ThemeDecorator';
 
 const app = (props) => <div {...props}>
-	<div>
-		<Scroller style={{height: scaleToRem(900)}}>
-			<Heading>Slider default</Heading>
+	<div style={{display: 'flex', flexWrap: 'wrap'}}>
+		<div style={{width: '50%'}}>
+			<Heading size="tiny">Slider default</Heading>
 			<Slider defaultValue={0} id="sliderDefault"  />
-			<Heading>Slider activate on focus</Heading>
+		</div>
+		<div style={{width: '50%'}}>
+			<Heading size="tiny">Slider activate on focus</Heading>
 			<Slider activateOnFocus id="sliderActivateOnFocus"  />
-			<Heading>Slider custom progressAnchor</Heading>
+		</div>
+		<div style={{width: '50%'}}>
+			<Heading size="tiny">Slider custom progressAnchor</Heading>
 			<Slider activateOnFocus id="sliderCustomProgressAnchor" progressAnchor={0.7} />
-			<Heading>Slider with tooltip</Heading>
+		</div>
+		<div style={{width: '50%'}}>
+			<Heading size="tiny">Slider disabled</Heading>
+			<Slider disabled id="sliderDisabled" />
+		</div>
+		<div style={{width: '50%'}}>
+			<Heading size="tiny">Slider with tooltip</Heading>
 			<Slider id="sliderWithTooltip">
 				<SliderTooltip />
 			</Slider>
-			<Heading>Slider vertical</Heading>
+		</div>
+		<div style={{width: '50%'}}>
+			<Heading size="tiny">Slider vertical</Heading>
 			<Slider id="sliderVertical" max={10} orientation="vertical" />
-			<Heading>Slider disabled</Heading>
-			<Slider disabled id="sliderDisabled"  />
-			<Heading>Slider vertical disabled</Heading>
+		</div>
+		<div style={{width: '50%'}}>
+			<Heading size="tiny">Slider vertical disabled</Heading>
 			<Slider disabled id="sliderVerticalDisabled" max={10} orientation="vertical" />
-		</Scroller>
+		</div>
 	</div>
 </div>;
 

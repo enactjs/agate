@@ -10,9 +10,10 @@ describe('ArcSlider', function () {
 		const arcSlider = Page.components.arcSliderDefault;
 
 		it('should change the position of the slider knob on each different click position', async function () {
+			await Page.delay(500);
 			const {cx: originalCx, cy: originalCy} = await arcSlider.knobPosition();
 
-			await arcSlider.self.click({x: 10, y: -20});
+			await arcSlider.self.click({x: 50, y: -70});
 			await Page.delay(500);
 
 			const {cx: cx1, cy: cy1} = await arcSlider.knobPosition();

@@ -1,10 +1,11 @@
 const ScrollerPage = require('./ScrollerPage');
+const Page = require("../VirtualList/VirtualGridList/VirtualGridListPage");
 
 describe('Scroller', function () {
 
 	it('should meet initial conditions', async function () {
 		await ScrollerPage.open();
-		await ScrollerPage.delay(200);
+		await ScrollerPage.focus(await ScrollerPage.buttonHideScrollbar);
 		expect(await ScrollerPage.buttonHideScrollbar.isFocused()).toBe(true);
 	});
 
