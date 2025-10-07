@@ -44,8 +44,8 @@ class DropdownPage extends Page {
 		this.components = {dropdown1, dropdown2, dropdown3};
 	}
 
-	async focus (element) {
-		return browser.execute((el) => el.focus(), await element);
+	async focus (node) {
+		return browser.execute((el) => el.focus(), await node);
 	}
 
 	async open (urlExtra) {

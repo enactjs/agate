@@ -39,8 +39,8 @@ class ScrollerPage extends Page {
 		return element('#nativeScroll', browser);
 	}
 
-	async focus (element) {
-		return browser.execute((el) => el.focus(), await element);
+	async focus (node) {
+		return browser.execute((el) => el.focus(), await node);
 	}
 
 	async button (text) {
