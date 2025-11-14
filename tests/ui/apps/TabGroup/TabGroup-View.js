@@ -1,6 +1,5 @@
 import Button from '../../../../Button';
 import Heading from '../../../../Heading';
-import Scroller from '../../../../Scroller';
 import TabGroup from '../../../../TabGroup';
 import ThemeDecorator from '../../../../ThemeDecorator';
 import {scaleToRem} from '@enact/ui/resolution';
@@ -11,8 +10,8 @@ import spotlight from '@enact/spotlight';
 spotlight.setPointerMode(false);
 
 const app = (props) => <div {...props}>
-	<div>
-		<Scroller style={{height: scaleToRem(900)}}>
+	<div style={{display: 'flex', flexWrap: 'wrap'}}>
+		<div style={{width: '50%'}}>
 			<Heading>TabGroup default</Heading>
 			<TabGroup
 				className="tabGroupDefault"
@@ -23,6 +22,8 @@ const app = (props) => <div {...props}>
 					{title: 'Theme', icon: 'display'}
 				]}
 			/>
+		</div>
+		<div style={{width: '50%'}}>
 			<Heading>TabGroup with slotBefore/slotAfter</Heading>
 			<TabGroup
 				className="tabGroupSlotBeforeAfter"
@@ -50,6 +51,8 @@ const app = (props) => <div {...props}>
 					/>
 				</afterTabs>
 			</TabGroup>
+		</div>
+		<div style={{width: '50%'}}>
 			<Heading>TabGroup tabPosition after</Heading>
 			<TabGroup
 				className="tabGroupTabPositionAfter"
@@ -60,6 +63,8 @@ const app = (props) => <div {...props}>
 					{title: 'Theme', icon: 'display'}
 				]}
 			/>
+		</div>
+		<div style={{width: '100%'}}>
 			<Heading>TabGroup Vertical</Heading>
 			<div style={{width: scaleToRem(700), height: scaleToRem(400)}}>
 				<TabGroup
@@ -73,7 +78,7 @@ const app = (props) => <div {...props}>
 					]}
 				/>
 			</div>
-		</Scroller>
+		</div>
 	</div>
 </div>;
 

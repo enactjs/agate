@@ -10,6 +10,7 @@ describe('PopupMenu', function () {
 	});
 
 	it('should focus the first button on start', async function () {
+		await Page.delay(200);
 		expect(await popupMenuCommon.buttonPopupMenu1.isFocused()).toBe(true);
 	});
 

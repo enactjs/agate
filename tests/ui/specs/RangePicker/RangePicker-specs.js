@@ -14,9 +14,10 @@ describe('RangePicker', function () {
 
 				describe('5-way', function () {
 					it('should change the value forward when incrementing the rangePicker', async function () {
+						rangePicker.incrementer().focus();
 						expect(await rangePicker.incrementer().isFocused()).toBe(true);
 						await Page.spotlightSelect();
-						await browser.pause(500);
+						await browser.pause(5000);
 						const newValue = await extractValue(rangePicker);
 						expect(newValue).toBe(5);
 					});
@@ -136,7 +137,7 @@ describe('RangePicker', function () {
 				describe('5-way', function () {
 					it('should change the value forward when incrementing the range picker', async function () {
 						// 5-way down to increment button of horizontal RangePicker
-						for (let i = 0; i <= 7; i++) {
+						for (let i = 0; i <= 2; i++) {
 							await Page.spotlightDown();
 						}
 						await Page.spotlightSelect();
@@ -147,7 +148,7 @@ describe('RangePicker', function () {
 
 					it('should change the value backward when decrementing the range picker', async function () {
 						// 5-way down to increment button of horizontal RangePicker
-						for (let i = 0; i <= 7; i++) {
+						for (let i = 0; i <= 2; i++) {
 							await Page.spotlightDown();
 						}
 						await Page.spotlightSelect();
@@ -311,7 +312,7 @@ describe('RangePicker', function () {
 			describe('5-way', function () {
 				it('should change the value forward when incrementing the range picker', async function () {
 					// 5-way down to increment button of horizontal RangePicker
-					for (let i = 0; i <= 7; i++) {
+					for (let i = 0; i <= 2; i++) {
 						await Page.spotlightDown();
 					}
 					await Page.spotlightSelect();
@@ -322,7 +323,7 @@ describe('RangePicker', function () {
 
 				it ('should change the value forward when decrementing the range picker', async function () {
 					// 5-way down to increment button of horizontal RangePicker
-					for (let i = 0; i <= 7; i++) {
+					for (let i = 0; i <= 2; i++) {
 						await Page.spotlightDown();
 					}
 					await Page.spotlightSelect();

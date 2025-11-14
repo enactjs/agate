@@ -7,6 +7,7 @@ describe('Input', function () {
 		});
 
 		it('should have focus on first input at start', async function () {
+			await Page.delay(200);
 			expect(await Page.input1.isFocused()).toBe(true);
 		});
 

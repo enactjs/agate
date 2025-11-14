@@ -143,7 +143,7 @@ describe('CheckboxItem', function () {
 				expect(await checkboxItem.valueText).toBe('Checkbox Item slotBefore');
 			});
 
-			it('should have a node(icon) to the right of checkbox icon ', async function () {
+			it('should have a node(icon) to the right of checkbox icon', async function () {
 				expectOrdering(checkboxItem.checkboxIcon, checkboxItem.slotBeforeNode);
 			});
 

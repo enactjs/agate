@@ -57,11 +57,12 @@
     "ilib": "^14.20.0 || ^14.20.0-webos1"
   },
   "devDependencies": {
-    "@enact/docs-utils": "^0.4.14",
-    "@enact/ui-test-utils": "^3.0.0",
+    "@enact/docs-utils": "^0.4.15",
+    "@enact/ui-test-utils": "^4.0.0",
     "eslint-config-enact-proxy": "^1.0.9"
   },
   "overrides": {
-    "autolinker": "^4.0.0"
+    "autolinker": "^4.0.0",
+    "vue-template-compiler": "@vue/compiler-sfc@3.4.31"
   }
 }

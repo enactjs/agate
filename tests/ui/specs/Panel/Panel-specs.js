@@ -17,7 +17,7 @@ describe('Panel', function () {
 			expect(await Page.panel1.nextButton.isFocused()).toBe(true);
 		});
 
-		it('should focus the first button in the body when navigating forward and `autoFocus="last-focused"` ', async () => {
+		it('should focus the first button in the body when navigating forward and `autoFocus="last-focused"`', async () => {
 			await Page.focus(Page.panel1.nextButton);
 			await Page.spotlightSelect();
 
@@ -50,7 +50,7 @@ describe('Panel', function () {
 			await waitForFocused(Page.panel2.nextButton);
 		});
 
-		it('should focus `.spottable-default` within body when `autoFocus="default-element"` ', async () => {
+		it('should focus `.spottable-default` within body when `autoFocus="default-element"`', async () => {
 			await Page.focus(Page.panel1.nextButton);
 			await Page.spotlightSelect();
 
@@ -67,7 +67,7 @@ describe('Panel', function () {
 			expect(actual).toBe(expected);
 		});
 
-		it('should focus nothing when `autoFocus="none"` ', async () => {
+		it('should focus nothing when `autoFocus="none"`', async () => {
 			await Page.focus(Page.panel1.nextButton);
 			await Page.spotlightSelect();
 
@@ -89,7 +89,7 @@ describe('Panel', function () {
 			expect(actual).toBe(expected);
 		});
 
-		it('should focus the first button when `hideChildren=false` ', async () => {
+		it('should focus the first button when `hideChildren=false`', async () => {
 			await Page.open('?defaultIndex=3');
 
 			await Page.focus(Page.panel4.nextButton);

@@ -24,7 +24,7 @@
     "@enact/core": "^5.3.0",
     "@enact/i18n": "^5.3.0",
     "@enact/spotlight": "^5.3.0",
-    "@enact/storybook-utils": "^7.0.1",
+    "@enact/storybook-utils": "^7.0.2",
     "@enact/ui": "^5.3.0",
     "@storybook/addon-docs": "^9.1.9",
     "@storybook/react-webpack5": "^9.1.9",
