@@ -62,6 +62,7 @@
     "eslint-config-enact-proxy": "^1.0.9"
   },
   "overrides": {
-    "autolinker": "^4.0.0"
+    "autolinker": "^4.0.0",
+    "vue-template-compiler": "@vue/compiler-sfc@3.4.31"
   }
 }
