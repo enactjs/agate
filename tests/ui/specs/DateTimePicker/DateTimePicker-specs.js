@@ -116,6 +116,7 @@ describe('DateTimePicker', function () {
 					const {day, month, year} = await extractValues(dateTimePicker);
 					const numDays = daysInMonth({month, year});
 					await dateTimePicker.dateIncrementer('day').click();
+					await browser.pause(500);
 					expect(await dateTimePicker.dateIncrementer('day').isFocused()).toBe(true);
 					const {day: value} = await extractValues(dateTimePicker);
 					const expected = day !== numDays ? day + 1 : 1;

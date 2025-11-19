@@ -91,6 +91,7 @@ describe('DatePicker', function () {
 				it('should increase the month when incrementing the picker', async function () {
 					const {month} = await extractValues(datePicker);
 					await datePicker.incrementer('month').click();
+					await browser.pause(500);
 					expect(await datePicker.incrementer('month').isFocused()).toBe(true);
 					const {month: value} = await extractValues(datePicker);
 					const expected = month < 12 ? month + 1 : 1;
