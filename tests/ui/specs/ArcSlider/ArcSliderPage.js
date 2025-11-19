@@ -19,6 +19,10 @@ class ArcSliderInterface {
 		return $(this.selector);
 	}
 
+	async focus () {
+		return await browser.execute((el) => el.focus(), await $(this.selector));
+	}
+
 	async knobPosition () {
 		const cx = parseInt((await this.circle.getCSSProperty('cx')).value);
 		const cy = parseInt((await this.circle.getCSSProperty('cy')).value);

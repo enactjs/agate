@@ -11,6 +11,7 @@ describe('ArcSlider', function () {
 
 		it('should change the position of the slider knob on each different click position', async function () {
 			await Page.delay(500);
+			await arcSlider.focus();
 			const {cx: originalCx, cy: originalCy} = await arcSlider.knobPosition();
 
 			await arcSlider.self.click({x: 50, y: -70});
