@@ -10,6 +10,7 @@ describe('ArcSlider', function () {
 		const arcSlider = Page.components.arcSliderDefault;
 
 		it('should change the position of the slider knob on each different click position', async function () {
+			console.log(await browser.getWindowSize());
 			await Page.delay(500);
 			await arcSlider.focus();
 			const {cx: originalCx, cy: originalCy} = await arcSlider.knobPosition();
