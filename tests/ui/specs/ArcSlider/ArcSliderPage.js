@@ -23,6 +23,15 @@ class ArcSliderInterface {
 		return await browser.execute((el) => el.focus(), await $(this.selector));
 	}
 
+	async waitForClickable () {
+		try {
+			await $(this.selector).waitForClickable({timeout: 1000});
+		} catch (error) {
+			await browser.pause(500);
+			await this.focus();
+		}
+	}
+
 	async knobPosition () {
 		const cx = parseInt((await this.circle.getCSSProperty('cx')).value);
 		const cy = parseInt((await this.circle.getCSSProperty('cy')).value);
