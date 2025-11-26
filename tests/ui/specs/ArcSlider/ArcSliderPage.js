@@ -26,7 +26,7 @@ class ArcSliderInterface {
 	async waitForClickable () {
 		try {
 			await $(this.selector).waitForClickable({timeout: 1000});
-		} catch (error) {
+		} catch (_) {
 			await browser.pause(500);
 			await this.focus();
 		}

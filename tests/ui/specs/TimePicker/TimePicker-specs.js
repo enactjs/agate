@@ -165,6 +165,7 @@ describe('TimePicker', function () {
 						}
 					}
 
+					await browser.pause(500);
 					const {meridiem: value} = await extractValues(timePicker);
 					expect(value !== meridiem).toBe(true);
 				});
