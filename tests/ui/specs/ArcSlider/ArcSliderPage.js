@@ -27,10 +27,10 @@ class ArcSliderInterface {
 		try {
 			await $(this.selector).waitForClickable({timeout: 1000});
 		} catch (_) {
-			console.log('ArcSlider-UI-TEST')
+			await browser.refresh();
 			await browser.pause(500);
 			await this.focus();
-			await $(this.selector).click({x: 50, y: -70});
+			await $(this.selector).moveTo();
 		}
 	}
 

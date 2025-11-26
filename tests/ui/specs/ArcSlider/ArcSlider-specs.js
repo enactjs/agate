@@ -9,6 +9,14 @@ describe('ArcSlider', function () {
 	describe('default', function () {
 		const arcSlider = Page.components.arcSliderDefault;
 
+		it('should change the circle radius on focus', async function () {
+			await Page.delay(500);
+			const initialCircleRadius = parseFloat(await arcSlider.circle.getAttribute('r'));
+			await arcSlider.focus();
+			const focusedCircleRadius = parseFloat(await arcSlider.circle.getAttribute('r'));
+			expect(focusedCircleRadius).toBeGreaterThan(initialCircleRadius)
+		});
+
 		it('should change the position of the slider knob on each different click position', async function () {
 			await Page.delay(500);
 			await arcSlider.focus();
