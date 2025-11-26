@@ -19,6 +19,10 @@ class ArcSliderInterface {
 		return $(this.selector);
 	}
 
+	async blur () {
+		return await browser.execute((el) => el.blur(), await $(this.selector));
+	}
+
 	async focus () {
 		return await browser.execute((el) => el.focus(), await $(this.selector));
 	}
