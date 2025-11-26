@@ -10,7 +10,7 @@ describe('ArcSlider', function () {
 		const arcSlider = Page.components.arcSliderDefault;
 
 		it('should change the circle radius on focus', async function () {
-			await Page.delay(500);
+			await arcSlider.self.waitForDisplayed();
 			const initialCircleRadius = parseFloat(await arcSlider.circle.getAttribute('r'));
 			await arcSlider.focus();
 			const focusedCircleRadius = parseFloat(await arcSlider.circle.getAttribute('r'));
