@@ -253,7 +253,7 @@ describe('RangePicker', function () {
 					const oldValue = await extractValue(rangePicker);
 					expect(oldValue).toBe(10);
 					await rangePicker.incrementer().click();
-					await Page.delay(300);
+					await Page.delay(500);
 					expect(await rangePicker.incrementer().isFocused()).toBe(true);
 					const newValue = extractValue(rangePicker);
 					expect(await newValue).toBe(0);
@@ -322,7 +322,7 @@ describe('RangePicker', function () {
 						await Page.spotlightDown();
 					}
 					await Page.spotlightSelect();
-					await Page.delay(300);
+					await Page.delay(500);
 					const newValue = await extractValue(rangePicker);
 					expect(newValue).toBe(5);
 				});

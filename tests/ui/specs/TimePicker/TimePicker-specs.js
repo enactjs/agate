@@ -118,7 +118,7 @@ describe('TimePicker', function () {
 			describe('pointer', function () {
 				it('should select hour when opened', async function () {
 					(await timePicker.decrementer('hour')).click();
-					await Page.delay(500);
+					await Page.delay(300);
 					await browser.waitUntil(async () => await timePicker.decrementer('hour').isFocused(), {timeout: 1500,  interval: 100});
 				});
 
@@ -126,7 +126,7 @@ describe('TimePicker', function () {
 				it('should increase the hour when incrementing the picker', async function () {
 					const {hour} = await extractValues(timePicker);
 					(await timePicker.incrementer('hour')).click();
-					await Page.delay(300);
+					await Page.delay(500);
 					const {hour: value} = await extractValues(timePicker);
 					const expected = hour < 12 ? hour + 1 : 1;
 					expect(value).toBe(expected);

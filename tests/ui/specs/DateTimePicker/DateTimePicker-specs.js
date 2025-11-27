@@ -200,7 +200,7 @@ describe('DateTimePicker', function () {
 
 			it('should not decrease the day when decrementing disabled picker', async function () {
 				await dateTimePicker.dateDecrementer('day').click();
-				await Page.delay(300);
+				await Page.delay(500);
 				expect(await dateTimePicker.dateDecrementer('day').isFocused()).toBe(true);
 				const {day: value} = await extractValues(dateTimePicker);
 				expect(value).toBe(1);
@@ -209,7 +209,7 @@ describe('DateTimePicker', function () {
 			it('should not update hour on click', async function () {
 				const {hour} = await extractValues(dateTimePicker);
 				await dateTimePicker.timeDecrementer('hour').click();
-				await Page.delay(300);
+				await Page.delay(500);
 				expect(await dateTimePicker.timeDecrementer('hour').isFocused()).toBe(true);
 				const {hour: value} = await extractValues(dateTimePicker);
 				expect(value).toBe(hour);
