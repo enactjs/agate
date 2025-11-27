@@ -220,7 +220,7 @@ describe('Picker', function () {
 				it('should change the value backward when decrementing the picker', async function () {
 					expect(await picker.incrementer().isFocused()).toBe(true);
 					await Page.spotlightSelect();
-					await Page.delay(await browser.pause(500););
+					await Page.delay(300);
 					await Page.spotlightUp();
 					expect(await picker.decrementer().isFocused()).toBe(true);
 					await Page.spotlightSelect();
