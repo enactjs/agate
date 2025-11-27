@@ -137,6 +137,7 @@ describe('DateTimePicker', function () {
 					const {year} = await extractValues(dateTimePicker);
 					await dateTimePicker.dateIncrementer('year').click();
 					expect(await dateTimePicker.dateIncrementer('year').isFocused()).toBe(true);
+					await browser.pause(500);
 					const {year: value} = await extractValues(dateTimePicker);
 					const expected = year + 1;
 					expect(value).toBe(expected);
