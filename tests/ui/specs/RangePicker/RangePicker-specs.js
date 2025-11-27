@@ -14,7 +14,7 @@ describe('RangePicker', function () {
 
 				describe('5-way', function () {
 					it('should change the value forward when incrementing the rangePicker', async function () {
-						await rangePicker.incrementer().focus();
+						await rangePicker.focusIncrementer();
 						expect(await rangePicker.incrementer().isFocused()).toBe(true);
 						await Page.spotlightSelect();
 						await Page.delay(200);
