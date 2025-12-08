@@ -37,10 +37,10 @@
     "extends": "enact-proxy/strict"
   },
   "dependencies": {
-    "@enact/core": "^5.3.0",
-    "@enact/i18n": "^5.3.0",
-    "@enact/spotlight": "^5.3.0",
-    "@enact/ui": "^5.3.0",
+    "@enact/core": "^5.4.0",
+    "@enact/i18n": "^5.4.0",
+    "@enact/spotlight": "^5.4.0",
+    "@enact/ui": "^5.4.0",
     "classnames": "^2.5.1",
     "color-convert": "^2.0.1",
     "deep-freeze": "0.0.1",
@@ -48,10 +48,10 @@
     "invariant": "^2.2.4",
     "prop-types": "^15.8.1",
     "ramda": "^0.31.3",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
     "warning": "^4.0.3",
-    "ilib": "^14.21.1"
+    "ilib": "^14.21.2"
   },
   "peerDependencies": {
     "ilib": "^14.20.0 || ^14.20.0-webos1"
@@ -62,7 +62,7 @@
     "eslint-config-enact-proxy": "^1.0.9"
   },
   "overrides": {
-    "autolinker": "^4.0.0",
-    "vue-template-compiler": "@vue/compiler-sfc@3.4.31"
+    "autolinker": "^4.1.5",
+    "vue-template-compiler": "@vue/compiler-sfc@3.5.25"
   }
 }
