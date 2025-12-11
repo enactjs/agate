@@ -2,7 +2,7 @@ import {useGlobals} from 'storybook/manager-api';
 import PropTypes from 'prop-types';
 import React from 'react'; // eslint-disable-line
 
-import ToolbarTab from './ToolbarTab';
+import ToolbarTab from './ToolbarTab.js';
 
 const DefaultSkinToolbarTab = ({toolbarParamKey}) => {
 	const [globals, updateGlobals] = useGlobals();
@@ -14,13 +14,11 @@ const DefaultSkinToolbarTab = ({toolbarParamKey}) => {
 		});
 	};
 
-	return (
-		<ToolbarTab
-			isActive={isActive}
-			toggleState={toggleState} // eslint-disable-line react/jsx-no-bind
-			toolbarParamKey={toolbarParamKey}
-		/>
-	);
+	return React.createElement(ToolbarTab, {
+		isActive: isActive,
+		toggleState: toggleState,
+		toolbarParamKey: toolbarParamKey
+	});
 };
 
 DefaultSkinToolbarTab.propTypes = {
