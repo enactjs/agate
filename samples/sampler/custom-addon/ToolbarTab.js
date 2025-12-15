@@ -1,6 +1,6 @@
 import {IconButton} from 'storybook/internal/components';
 import PropTypes from 'prop-types';
-import React from 'react'; // eslint-disable-line
+import React from 'react';
 
 const ToolbarTab = ({isActive, toggleState, toolbarParamKey}) => {
 	return React.createElement(
