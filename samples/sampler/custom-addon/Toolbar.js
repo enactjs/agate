@@ -1,6 +1,6 @@
 import {useGlobals} from 'storybook/manager-api';
 import {WithTooltip, TooltipLinkList} from 'storybook/internal/components';
-import React, {memo} from 'react'; // eslint-disable-line
+import React, {memo} from 'react';
 
 import ColorPicker from './ColorPicker.js';
 import DefaultSkinToolbarTab from './DefaultSkinToolbarTab.js';
@@ -27,7 +27,7 @@ const getColorPickerTab = (defaultSkins, isColorPicker, toolbarParamKey) => {
 		{
 			closeOnOutsideClick: true,
 			placement: "top",
-			tooltip: () => React.createElement(TooltipLinkList, {links: toolTipLink}),
+			tooltip: () => React.createElement(TooltipLinkList, {links: toolTipLink}), //eslint-disable-line
 			trigger: "click"
 		},
 		React.createElement(ToolbarTab, {toolbarParamKey: toolbarParamKey})

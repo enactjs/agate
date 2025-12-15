@@ -2,7 +2,7 @@ import webpack from '@enact/storybook-utils/configs/webpack.js';
 import {loadCsf} from 'storybook/internal/csf-tools';
 import {readFileSync} from 'fs';
 import {fileURLToPath} from 'url';
-import {dirname, resolve} from 'path';
+import {dirname} from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

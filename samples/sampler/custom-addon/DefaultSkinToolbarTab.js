@@ -1,6 +1,6 @@
 import {useGlobals} from 'storybook/manager-api';
 import PropTypes from 'prop-types';
-import React from 'react'; // eslint-disable-line
+import React from 'react';
 
 import ToolbarTab from './ToolbarTab.js';
 
