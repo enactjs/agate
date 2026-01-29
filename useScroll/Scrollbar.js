@@ -97,7 +97,7 @@ const ScrollbarBase = memo(({css = componentCss, minThumbSize = 18, vertical = t
 		const {scrollbarHandle} = props;
 		const {update: uiUpdate} = scrollbarHandle.current;
 
-		scrollbarHandle.current.update = (bounds) => {
+		scrollbarHandle.current.update = (bounds) => {  // eslint-disable-line react-hooks/immutability
 			updateButtons(bounds);
 			uiUpdate(bounds);
 		};

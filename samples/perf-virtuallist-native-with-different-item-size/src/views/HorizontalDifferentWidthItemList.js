@@ -2,7 +2,7 @@ import Item from '@enact/agate/Item';
 import {VirtualList} from '@enact/agate/VirtualList';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useState} from 'react';
 
 const
 	languages = [
@@ -35,6 +35,24 @@ const innerItemStyleDefault = {
 	writingMode: 'vertical-rl'
 };
 
+const getArrayItems = () => {
+	let position = 0, arrayItemSize = [], arrayItems = [];
+	for (let i = 0; i < numOfItems; i++) {
+		const
+			numOfLines = Math.ceil(Math.random() * 6),
+			width = numOfLines * oneLineSize + paddingSize;
+
+		arrayItems.push({
+			title: (`${('00' + i).slice(-3)} | ${position}px | ${languages[i % 10]}\n`).repeat(numOfLines),
+			width
+		});
+		arrayItemSize.push(width);
+		position += (width + spacing);
+	}
+
+	return {arrayItemSize, arrayItems};
+};
+
 const DifferenctWidthItem = ({index, items, style: itemStyleFromList, ...rest}) => {
 	const
 		{title: children, width} = items[index],
@@ -55,26 +73,7 @@ DifferenctWidthItem.propTypes = {
 };
 
 const HorizontalDifferenctWidthItemList = (props) => {
-	const [items, setItems] = useState([]);
-	const [itemSize, setItemSize] = useState([]);
-
-	useEffect(() => {
-		let position = 0, arrayItemSize = [], arrayItems = [];
-		for (let i = 0; i < numOfItems; i++) {
-			const
-				numOfLines = Math.ceil(Math.random() * 6),
-				width = numOfLines * oneLineSize + paddingSize;
-
-			arrayItems.push({
-				title: (`${('00' + i).slice(-3)} | ${position}px | ${languages[i % 10]}\n`).repeat(numOfLines),
-				width
-			});
-			arrayItemSize.push(width);
-			position += (width + spacing);
-		}
-		setItems(arrayItems);
-		setItemSize(arrayItemSize);
-	}, []);
+	const [{arrayItems: items, arrayItemSize: itemSize}] = useState(() => getArrayItems());
 
 	const renderItem = useCallback((renderProps) => {
 		return <DifferenctWidthItem {...renderProps} />;

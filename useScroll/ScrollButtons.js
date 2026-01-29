@@ -42,42 +42,12 @@ const useScrollButtons = (props) => {
 	const nextButtonRef = useRef();
 	const prevButtonRef = useRef();
 
-	useEffect(() => {
-		const nextRef = nextButtonRef.current;
-		const prevRef = prevButtonRef.current;
+	function focusOnOppositeScrollButton (ev, direction) {
+		const buttonNode = (ev.target === nextButtonRef.current) ? prevButtonRef.current : nextButtonRef.current;
 
-		utilEvent('keydown').addEventListener(nextRef, onKeyDownNext);
-		utilEvent('keydown').addEventListener(prevRef, onKeyDownPrev);
-
-		return () => {
-			utilEvent('keydown').removeEventListener(nextRef, onKeyDownNext);
-			utilEvent('keydown').removeEventListener(prevRef, onKeyDownPrev);
-		};
-	});
-
-	const updateButtons = (bounds) => {
-		const
-			{vertical} = props,
-			currentPos = vertical ? bounds.scrollTop : bounds.scrollLeft,
-			maxPos = vertical ? bounds.maxTop : bounds.maxLeft,
-			shouldDisablePrevButton = currentPos <= 0,
-			/* If a scroll size or a client size is not integer,
-			   browser's max scroll position could be smaller than maxPos by 1 pixel.*/
-			shouldDisableNextButton = maxPos - currentPos <= 1,
-			updatePrevButton = (prevButtonDisabled !== shouldDisablePrevButton),
-			updateNextButton = (nextButtonDisabled !== shouldDisableNextButton);
-
-		if (updatePrevButton) {
-			setPrevButtonDisabled(shouldDisablePrevButton);
+		if (!Spotlight.focus(buttonNode)) {
+			Spotlight.move(direction);
 		}
-		if (updateNextButton) {
-			setNextButtonDisabled(shouldDisableNextButton);
-		}
-	};
-
-	function isOneOfScrollButtonsFocused () {
-		const current = Spotlight.getCurrent();
-		return current === prevButtonRef.current || current === nextButtonRef.current;
 	}
 
 	function onClickPrev (ev) {
@@ -88,18 +58,6 @@ const useScrollButtons = (props) => {
 	function onClickNext (ev) {
 		const {onNextScroll = nop, vertical} = props;
 		onNextScroll({...ev, isPreviousScrollButton: false, isVerticalScrollBar: vertical});
-	}
-
-	function focusOnButton (isPrev) {
-		Spotlight.focus(isPrev ? prevButtonRef.current : nextButtonRef.current);
-	}
-
-	function focusOnOppositeScrollButton (ev, direction) {
-		const buttonNode = (ev.target === nextButtonRef.current) ? prevButtonRef.current : nextButtonRef.current;
-
-		if (!Spotlight.focus(buttonNode)) {
-			Spotlight.move(direction);
-		}
 	}
 
 	function onKeyDownButton (ev, position) {
@@ -199,6 +157,48 @@ const useScrollButtons = (props) => {
 
 	function onKeyDownNext (ev) {
 		onKeyDownButton(ev, 'next');
+	}
+
+	useEffect(() => {
+		const nextRef = nextButtonRef.current;
+		const prevRef = prevButtonRef.current;
+
+		utilEvent('keydown').addEventListener(nextRef, onKeyDownNext);
+		utilEvent('keydown').addEventListener(prevRef, onKeyDownPrev);
+
+		return () => {
+			utilEvent('keydown').removeEventListener(nextRef, onKeyDownNext);
+			utilEvent('keydown').removeEventListener(prevRef, onKeyDownPrev);
+		};
+	});
+
+	const updateButtons = (bounds) => {
+		const
+			{vertical} = props,
+			currentPos = vertical ? bounds.scrollTop : bounds.scrollLeft,
+			maxPos = vertical ? bounds.maxTop : bounds.maxLeft,
+			shouldDisablePrevButton = currentPos <= 0,
+			/* If a scroll size or a client size is not integer,
+			   browser's max scroll position could be smaller than maxPos by 1 pixel.*/
+			shouldDisableNextButton = maxPos - currentPos <= 1,
+			updatePrevButton = (prevButtonDisabled !== shouldDisablePrevButton),
+			updateNextButton = (nextButtonDisabled !== shouldDisableNextButton);
+
+		if (updatePrevButton) {
+			setPrevButtonDisabled(shouldDisablePrevButton);
+		}
+		if (updateNextButton) {
+			setNextButtonDisabled(shouldDisableNextButton);
+		}
+	};
+
+	function isOneOfScrollButtonsFocused () {
+		const current = Spotlight.getCurrent();
+		return current === prevButtonRef.current || current === nextButtonRef.current;
+	}
+
+	function focusOnButton (isPrev) {
+		Spotlight.focus(isPrev ? prevButtonRef.current : nextButtonRef.current);
 	}
 
 	return {

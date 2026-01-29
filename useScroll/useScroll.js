@@ -192,7 +192,7 @@ const useThemeScroll = (props, instances) => {
 		// oddly, Scroller manages scrollContainerHandle.current.bounds so if we don't update it here (it is also
 		// updated in calculateAndScrollTo, but we might not have made it to that point), it will be
 		// out of date when we land back in this method next time.
-		scrollContainerHandle.current.bounds.scrollHeight = scrollContainerHandle.current.getScrollBounds().scrollHeight;
+		scrollContainerHandle.current.bounds.scrollHeight = scrollContainerHandle.current.getScrollBounds().scrollHeight;  // eslint-disable-line react-hooks/immutability
 	}
 
 	function handleResizeWindow () {
@@ -391,7 +391,7 @@ const useScroll = (props) => {
 		verticalScrollbarHandle
 	});
 
-	assignProperties('scrollContainerProps', {
+	assignProperties('scrollContainerProps', { // eslint-disable-line react-hooks/refs
 		'data-spotlight-container': spotlightContainer,
 		'data-spotlight-container-disabled': spotlightContainerDisabled,
 		'data-spotlight-id': spotlightId,
@@ -399,7 +399,7 @@ const useScroll = (props) => {
 		ref: scrollContainerRef
 	});
 
-	assignProperties('scrollContentProps', {
+	assignProperties('scrollContentProps', { // eslint-disable-line react-hooks/refs
 		...(props.itemRenderer ? {itemRefs} : {}),
 		onUpdate: handleScrollerUpdate,
 		scrollContainerRef,
@@ -411,7 +411,7 @@ const useScroll = (props) => {
 		scrollContentRef
 	});
 
-	assignProperties('verticalScrollbarProps', {
+	assignProperties('verticalScrollbarProps', { // eslint-disable-line react-hooks/refs
 		...scrollbarProps,
 		focusableScrollButtons: focusableScrollbar,
 		nextButtonAriaLabel: downButtonAriaLabel,
@@ -421,7 +421,7 @@ const useScroll = (props) => {
 		scrollbarHandle: verticalScrollbarHandle
 	});
 
-	assignProperties('horizontalScrollbarProps', {
+	assignProperties('horizontalScrollbarProps', { // eslint-disable-line react-hooks/refs
 		...scrollbarProps,
 		focusableScrollButtons: focusableScrollbar,
 		nextButtonAriaLabel: rightButtonAriaLabel,

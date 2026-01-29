@@ -124,7 +124,7 @@ const useSpotlightRestore = (props, instances, context) => {
 				mutableRef.current.restoreLastFocused = false;
 
 				// try to focus the last focused item
-				spottable.current.isScrolledByJump = true;
+				spottable.current.isScrolledByJump = true; // eslint-disable-line react-hooks/immutability
 				const foundLastFocused = focusByIndex(mutableRef.current.preservedIndex, mutableRef.current.lastSpotlightDirection);
 				spottable.current.isScrolledByJump = false;
 

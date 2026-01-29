@@ -22,7 +22,10 @@ const useSpottable = (props, instances) => {
 
 			if (bool) {
 				addGlobalKeyDownEventListener(() => {
-					setContainerDisabled(false);
+					if (scrollContainerRef.current) {
+						scrollContainerRef.current.dataset.spotlightContainerDisabled = bool;
+						removeGlobalKeyDownEventListener();
+					}
 				});
 			} else {
 				removeGlobalKeyDownEventListener();
@@ -215,7 +218,7 @@ const useSpottable = (props, instances) => {
 		const itemRect = getRect(item);
 
 		if (horizontal && !(itemRect.left >= containerRect.left && itemRect.right <= containerRect.right)) {
-			scrollContentHandle.current.scrollPos.left = calculateScrollLeft(item, scrollPosition);
+			scrollContentHandle.current.scrollPos.left = calculateScrollLeft(item, scrollPosition); // eslint-disable-line react-hooks/immutability
 		}
 
 		if (vertical && !(itemRect.top >= containerRect.top && itemRect.bottom <= containerRect.bottom)) {

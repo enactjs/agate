@@ -53,6 +53,24 @@ const iconButtonStyleDefault = {
 	right: 0
 };
 
+const getArrayItems = () => {
+	let position = 0, arrayItems = [];
+
+	for (let i = 0; i < numOfItems; i++) {
+		const
+			numOfLines = Math.ceil(Math.random() * 6),
+			height = numOfLines * oneLineSize;
+
+		arrayItems.push({
+			title: (`${('00' + i).slice(-3)} - ${position}px - ${languages[i % 10]}\n`).repeat(numOfLines),
+			numOfLines
+		});
+		position += (height + spacing);
+	}
+
+	return arrayItems;
+};
+
 const ExpandableDifferentHeightItem = ({index, 'data-index': dataIndex, items, ref, style: itemStyleFromList, updateItemStatus, ...rest}) => {
 	const {title: children, numOfLines, open} = items[index],
 		itemStyle = {...itemStyleDefault, ...itemStyleFromList};
@@ -119,7 +137,11 @@ const ResizableItem = ({updateItemSize, ...rest}) => {
 		}
 	};
 
-	indexRef.current = rest.index;
+	useEffect(() => {
+		if (indexRef.current !== rest.index) {
+			indexRef.current = rest.index;
+		}
+	}, [rest.index]);
 
 	useEffect(() => {
 		calculateMetrics();
@@ -139,25 +161,9 @@ ResizableItem.propTypes = {
 };
 
 const VerticalExpandableDifferentHeightItemList = (props) => {
-	const [items, setItems] = useState([]);
+	const [arrayItems] = useState(() => getArrayItems());
+	const [items, setItems] = useState(arrayItems);
 	const [itemSize, setItemSize] = useState([]);
-
-	useEffect(() => {
-		let position = 0, arrayItems = [];
-
-		for (let i = 0; i < numOfItems; i++) {
-			const
-				numOfLines = Math.ceil(Math.random() * 6),
-				height = numOfLines * oneLineSize;
-
-			arrayItems.push({
-				title: (`${('00' + i).slice(-3)} - ${position}px - ${languages[i % 10]}\n`).repeat(numOfLines),
-				numOfLines
-			});
-			position += (height + spacing);
-		}
-		setItems(arrayItems);
-	}, []);
 
 	const updateItemSize = (index, size) => {
 		if (itemSize[index] !== size) {
@@ -172,9 +178,9 @@ const VerticalExpandableDifferentHeightItemList = (props) => {
 			return [...arrayItemSize.slice(0, index)];
 		});
 
-		setItems((arrayItems) => {
-			const {title, numOfLines} = arrayItems[index];
-			return [...arrayItems.slice(0, index), {title, numOfLines, open}, ...arrayItems.slice(index + 1)];
+		setItems((updatedArrayItems) => {
+			const {title, numOfLines} = updatedArrayItems[index];
+			return [...updatedArrayItems.slice(0, index), {title, numOfLines, open}, ...updatedArrayItems.slice(index + 1)];
 		});
 	};
 
