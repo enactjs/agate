@@ -3,6 +3,7 @@ import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import {WithRef} from '@enact/core/internal/WithRef';
+import {checkPropTypes} from '@enact/core/util';
 import Spotlight from '@enact/spotlight';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
@@ -216,9 +217,11 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 			};
 
 			this.clientSiblingRef = createRef(null);
+
+			checkPropTypes(this, this.props);
 		}
 
-		componentDidUpdate () {
+		componentDidUpdate (prevProps) {
 			if (this.state.ready === ReadyState.INIT) {
 				this.scrollIntoView();
 			} else if (this.state.ready === ReadyState.SCROLLED) {
@@ -234,6 +237,8 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 					this.resetFocus(keysDiffer);
 				}
 			}
+
+			checkPropTypes(this, this.props, prevProps);
 		}
 
 		setScrollTo = (scrollTo) => {

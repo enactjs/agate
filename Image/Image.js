@@ -12,6 +12,7 @@
 
 import kind from '@enact/core/kind';
 import hoc from '@enact/core/hoc';
+import {checkPropTypes} from '@enact/core/util';
 import UiImage from '@enact/ui/Image';
 import Pure from '@enact/ui/internal/Pure';
 import {selectSrc} from '@enact/ui/resolution';
@@ -108,10 +109,16 @@ const ResponsiveImageDecorator = hoc((config, Wrapped) => {
 			this.state = {
 				src: selectSrc(this.props.src)
 			};
+
+			checkPropTypes(this, this.props);
 		}
 
 		componentDidMount () {
 			window.addEventListener('resize', this.handleResize);
+		}
+
+		componentDidUpdate(prevProps) {
+			checkPropTypes(this, this.props, prevProps);
 		}
 
 		componentWillUnmount () {

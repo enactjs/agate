@@ -1,3 +1,4 @@
+import {checkPropTypes} from '@enact/core/util';
 import {useGlobals} from 'storybook/manager-api';
 import PropTypes from 'prop-types';
 import React, {useCallback, useEffect} from 'react'; // eslint-disable-line
@@ -10,6 +11,7 @@ const getDefaultColor = (colorPickerType) => {
 };
 
 const ColorPicker = ({colorPickerType}) => {
+	checkPropTypes(ColorPicker, {colorPickerType})
 	const [globals, updateGlobals] = useGlobals();
 	const handleChange = useCallback((ev) => {
 		updateGlobals({[colorPickerType]: ev.target.value});

@@ -1,3 +1,4 @@
+import {checkPropTypes} from '@enact/core/util';
 import {ScrollbarTrack as UiScrollbarTrack} from '@enact/ui/useScroll/Scrollbar';
 import PropTypes from 'prop-types';
 import {useEffect, memo} from 'react';
@@ -12,7 +13,9 @@ const nop = () => {};
  * @ui
  * @private
  */
-const ScrollbarTrack = ({cbAlertScrollbarTrack = nop, ref, ...rest}) => {
+const ScrollbarTrack = (props) => {
+	checkPropTypes(ScrollbarTrack, props);
+	const {cbAlertScrollbarTrack = nop, ref, ...rest} = props;
 	useEffect (() => {
 		cbAlertScrollbarTrack();
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps

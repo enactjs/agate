@@ -1,3 +1,4 @@
+import {checkPropTypes} from '@enact/core/util';
 import {useScrollbar as useScrollbarBase} from '@enact/ui/useScroll/Scrollbar';
 import PropTypes from 'prop-types';
 import {memo, useLayoutEffect} from 'react';
@@ -69,6 +70,7 @@ const ScrollbarBase = memo(({css = componentCss, minThumbSize = 18, vertical = t
 		vertical,
 		...rest
 	};
+	checkPropTypes(ScrollbarBase, props);
 
 	const {
 		restProps,

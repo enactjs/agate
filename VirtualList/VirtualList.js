@@ -6,7 +6,7 @@
  * @exports VirtualList
  */
 
-import {setDefaultProps} from '@enact/core/util';
+import {checkPropTypes, setDefaultProps} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {ResizeContext} from '@enact/ui/Resizable';
@@ -50,6 +50,7 @@ const virtualListDefaultProps = {
  * @public
  */
 let VirtualList = (props) => {
+	checkPropTypes(VirtualList, props);
 	const virtualListProps = setDefaultProps(props, virtualListDefaultProps);
 	const {itemSize, role, ...rest} = virtualListProps;
 
@@ -505,6 +506,7 @@ const virtualGridListDefaultProps = {
  * @public
  */
 let VirtualGridList = (props) => {
+	checkPropTypes(VirtualGridList, props);
 	const virtualGridListProps = setDefaultProps(props, virtualGridListDefaultProps);
 	const {role, ...rest} = virtualGridListProps;
 

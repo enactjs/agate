@@ -4,6 +4,7 @@ import Header from '@enact/agate/Header';
 import Input from '@enact/agate/Input';
 import {Panel} from '@enact/agate/Panels';
 import VirtualList from '@enact/agate/VirtualList';
+import {checkPropTypes} from '@enact/core/util';
 import {Cell, Layout, Row} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
@@ -19,7 +20,9 @@ import css from './MainPanel.module.less';
 
 const childProps = {text: ' child props'};
 
-const MainPanel = ({...rest}) => {
+const MainPanel = (props) => {
+	checkPropTypes(MainPanel, props);
+	const {...rest} = props;
 	const dispatch = useDispatch();
 	const [hasChildProps, setHasChildProps] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(false);

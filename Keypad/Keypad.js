@@ -15,6 +15,7 @@
 import {adaptEvent, forward, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
+import {checkPropTypes} from '@enact/core/util';
 import {SpotlightContainerDecorator} from '@enact/spotlight/SpotlightContainerDecorator';
 import Layout, {Cell} from '@enact/ui/Layout';
 import PropTypes from 'prop-types';
@@ -264,6 +265,12 @@ const KeypadBehaviorDecorator = hoc((config, Wrapped) => {
 				charIndex: 0,
 				keypadValue: ''
 			};
+
+			checkPropTypes(this, this.props);
+		}
+
+		componentDidUpdate(prevProps) {
+			checkPropTypes(this, this.props, prevProps);
 		}
 
 		handleKeypadValue = (keyValue) => {

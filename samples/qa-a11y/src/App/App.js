@@ -1,3 +1,4 @@
+import {checkPropTypes} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import Item from '@enact/agate/Item';
 import Scroller from '@enact/agate/Scroller';
@@ -112,7 +113,9 @@ const views = [
 	{title: 'WindDirectionControl', view: WindDirectionControl}
 ];
 
-const AppBase = ({className, rtl, updateLocale, ...rest}) => {
+const AppBase = (props) => {
+	checkPropTypes(AppBase, props);
+	const {className, rtl, updateLocale, ...rest} = props;
 	const [isDebugMode, setIsDebugMode] = useState(false);
 	const [jumpToView, setJumpToView] = useState('');
 	const [selected, setSelected] = useState(0);

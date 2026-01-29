@@ -1,6 +1,7 @@
 import Button from '@enact/agate/Button';
 import Icon from '@enact/agate/Icon';
 import {VirtualList} from '@enact/agate/VirtualList';
+import {checkPropTypes} from '@enact/core/util';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import {useCallback, useEffect, useRef, useState} from 'react';
@@ -53,7 +54,9 @@ const iconButtonStyleDefault = {
 	right: 0
 };
 
-const ExpandableDifferentHeightItem = ({index, 'data-index': dataIndex, items, ref, style: itemStyleFromList, updateItemStatus, ...rest}) => {
+const ExpandableDifferentHeightItem = (props) => {
+	checkPropTypes(ExpandableDifferentHeightItem, props);
+	const {index, 'data-index': dataIndex, items, ref, style: itemStyleFromList, updateItemStatus, ...rest} = props;
 	const {title: children, numOfLines, open} = items[index],
 		itemStyle = {...itemStyleDefault, ...itemStyleFromList};
 
@@ -106,7 +109,9 @@ ExpandableDifferentHeightItem.propTypes = {
 	updateItemStatus: PropTypes.func
 };
 
-const ResizableItem = ({updateItemSize, ...rest}) => {
+const ResizableItem = (props) => {
+	checkPropTypes(ResizableItem, props);
+	const {updateItemSize, ...rest} = props;
 	const indexRef = useRef(0);
 	const domRef = useRef({});
 

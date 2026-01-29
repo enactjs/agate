@@ -11,6 +11,7 @@
 
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
+import {checkPropTypes} from '@enact/core/util';
 import Changeable from '@enact/ui/Changeable';
 import Slottable from '@enact/ui/Slottable';
 import classnames from 'classnames';
@@ -148,6 +149,16 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			dragging: false,
 			touchOverElement: null
 		};
+
+		constructor(props) {
+			super(props);
+
+			checkPropTypes(this, this.props);
+		}
+
+		componentDidUpdate(prevProps) {
+			checkPropTypes(this, this.props, prevProps);
+		}
 
 		addDropTarget = (target) => {
 			target.classList.add('dropTarget');

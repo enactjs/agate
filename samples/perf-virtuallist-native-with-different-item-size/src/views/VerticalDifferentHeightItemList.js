@@ -1,5 +1,6 @@
 import Item from '@enact/agate/Item';
 import {VirtualList} from '@enact/agate/VirtualList';
+import {checkPropTypes} from '@enact/core/util';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import {useCallback, useEffect, useState} from 'react';
@@ -28,7 +29,9 @@ const itemStyleDefault = {
 	lineHeight
 };
 
-const DifferenctHeightItem = ({index, items, style: itemStyleFromList, ...rest}) => {
+const DifferentHeightItem = (props) => {
+	checkPropTypes(DifferentHeightItem, props);
+	const {index, items, style: itemStyleFromList, ...rest} = props;
 	const {title: children, height} = items[index],
 		itemStyle = {...itemStyleDefault, ...itemStyleFromList, height};
 
@@ -39,7 +42,7 @@ const DifferenctHeightItem = ({index, items, style: itemStyleFromList, ...rest})
 	);
 };
 
-DifferenctHeightItem.propTypes = {
+DifferentHeightItem.propTypes = {
 	index: PropTypes.number,
 	items: PropTypes.array
 };
@@ -68,7 +71,7 @@ const VerticalDifferentHeightItemList = (props) => {
 	}, []);
 
 	const renderItem = useCallback((renderProps) => {
-		return <DifferenctHeightItem {...renderProps} />;
+		return <DifferentHeightItem {...renderProps} />;
 	}, []);
 
 	return (

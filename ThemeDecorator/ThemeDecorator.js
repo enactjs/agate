@@ -10,6 +10,7 @@ import {setDefaultTargetById} from '@enact/core/dispatcher';
 import hoc from '@enact/core/hoc';
 import {addAll} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
+import {checkPropTypes} from '@enact/core/util';
 import I18nDecorator from '@enact/i18n/I18nDecorator';
 import SpotlightRootDecorator from '@enact/spotlight/SpotlightRootDecorator';
 import {ResolutionDecorator} from '@enact/ui/resolution';
@@ -317,6 +318,16 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			 */
 			skin: PropTypes.string
 		};
+
+		constructor(props) {
+			super(props);
+
+			checkPropTypes(this, this.props);
+		}
+
+		componentDidUpdate(prevProps) {
+			checkPropTypes(this, this.props, prevProps);
+		}
 
 		render () {
 			const currentSkin = this.props.skin || defaultSkin;
