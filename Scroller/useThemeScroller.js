@@ -22,8 +22,10 @@ const useSpottable = (props, instances) => {
 
 			if (bool) {
 				addGlobalKeyDownEventListener(() => {
-					scrollContainerRef.current.dataset.spotlightContainerDisabled = false;
-					removeGlobalKeyDownEventListener();
+					if (scrollContainerRef.current) {
+						scrollContainerRef.current.dataset.spotlightContainerDisabled = false;
+						removeGlobalKeyDownEventListener();
+					}
 				});
 			} else {
 				removeGlobalKeyDownEventListener();
