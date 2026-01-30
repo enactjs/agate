@@ -94,7 +94,7 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			checkPropTypes(this, this.props);
 		}
 
-		componentDidUpdate(prevProps) {
+		componentDidUpdate (prevProps) {
 			checkPropTypes(this, this.props, prevProps);
 		}
 

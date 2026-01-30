@@ -59,7 +59,7 @@ class HourPicker extends Component {
 		return null;
 	}
 
-	componentDidUpdate(prevProps) {
+	componentDidUpdate (prevProps) {
 		checkPropTypes(this, this.props, prevProps);
 	}
 

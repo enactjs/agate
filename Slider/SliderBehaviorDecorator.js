@@ -97,7 +97,7 @@ const SliderBehaviorDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			return null;
 		}
 
-		componentDidUpdate(prevProps) {
+		componentDidUpdate (prevProps) {
 			checkPropTypes(this, this.props, prevProps);
 		}
 

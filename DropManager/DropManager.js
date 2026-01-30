@@ -145,18 +145,18 @@ const DropManager = hoc(defaultConfig, (configHoc, Wrapped) => {
 			arrangeable: false
 		};
 
-		state = {
-			dragging: false,
-			touchOverElement: null
-		};
-
-		constructor(props) {
+		constructor (props) {
 			super(props);
+
+			this.state = {
+				dragging: false,
+				touchOverElement: null
+			};
 
 			checkPropTypes(this, this.props);
 		}
 
-		componentDidUpdate(prevProps) {
+		componentDidUpdate (prevProps) {
 			checkPropTypes(this, this.props, prevProps);
 		}
 

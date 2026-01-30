@@ -117,7 +117,7 @@ const ResponsiveImageDecorator = hoc((config, Wrapped) => {
 			window.addEventListener('resize', this.handleResize);
 		}
 
-		componentDidUpdate(prevProps) {
+		componentDidUpdate (prevProps) {
 			checkPropTypes(this, this.props, prevProps);
 		}
 

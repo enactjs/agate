@@ -319,13 +319,13 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			skin: PropTypes.string
 		};
 
-		constructor(props) {
+		constructor (props) {
 			super(props);
 
 			checkPropTypes(this, this.props);
 		}
 
-		componentDidUpdate(prevProps) {
+		componentDidUpdate (prevProps) {
 			checkPropTypes(this, this.props, prevProps);
 		}
 

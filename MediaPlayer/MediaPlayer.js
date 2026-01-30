@@ -464,6 +464,10 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => {
 			checkPropTypes(this, this.props);
 		}
 
+		componentDidUpdate (prevProps) {
+			checkPropTypes(this, this.props, prevProps);
+		}
+
 		handle = handle.bind(this);
 
 		handlePlay = this.handle(
@@ -475,10 +479,6 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => {
 			forwardPause,
 			() => this.pause()
 		);
-
-		componentDidUpdate(prevProps) {
-			checkPropTypes(this, this.props, prevProps);
-		}
 
 		//
 		// Handled Media events

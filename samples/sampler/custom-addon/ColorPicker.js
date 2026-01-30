@@ -11,7 +11,7 @@ const getDefaultColor = (colorPickerType) => {
 };
 
 const ColorPicker = ({colorPickerType}) => {
-	checkPropTypes(ColorPicker, {colorPickerType})
+	checkPropTypes(ColorPicker, {colorPickerType});
 	const [globals, updateGlobals] = useGlobals();
 	const handleChange = useCallback((ev) => {
 		updateGlobals({[colorPickerType]: ev.target.value});
