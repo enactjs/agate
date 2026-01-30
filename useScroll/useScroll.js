@@ -57,7 +57,7 @@ const getTargetInViewByDirectionFromPosition = (direction, position, container) 
 
 const useThemeScroll = (props, instances) => {
 	const {scrollMode} = props;
-	const {themeScrollContentHandle, scrollContentRef, scrollContainerHandle, scrollContainerRef} = instances;
+	const {themeScrollContentHandle, scrollContentRef, scrollContainerHandle: scrollContainerHandleRef, scrollContainerRef} = instances;
 	const contextSharedState = use(SharedState);
 
 	// Mutable value
@@ -181,10 +181,10 @@ const useThemeScroll = (props, instances) => {
 
 	// Callback for scroller updates; calculate and, if needed, scroll to new position based on focused item.
 	function handleScrollerUpdate () {
-		if (scrollContainerHandle.current.scrollToInfo === null) {
-			const scrollHeight = scrollContainerHandle.current.getScrollBounds().scrollHeight;
+		if (scrollContainerHandleRef.current.scrollToInfo === null) {
+			const scrollHeight = scrollContainerHandleRef.current.getScrollBounds().scrollHeight;
 
-			if (scrollHeight !== scrollContainerHandle.current.bounds.scrollHeight) {
+			if (scrollHeight !== scrollContainerHandleRef.current.bounds.scrollHeight) {
 				calculateAndScrollTo();
 			}
 		}
@@ -192,7 +192,7 @@ const useThemeScroll = (props, instances) => {
 		// oddly, Scroller manages scrollContainerHandle.current.bounds so if we don't update it here (it is also
 		// updated in calculateAndScrollTo, but we might not have made it to that point), it will be
 		// out of date when we land back in this method next time.
-		scrollContainerHandle.current.bounds.scrollHeight = scrollContainerHandle.current.getScrollBounds().scrollHeight;  // eslint-disable-line react-hooks/immutability
+		scrollContainerHandleRef.current.bounds.scrollHeight = scrollContainerHandleRef.current.getScrollBounds().scrollHeight;
 	}
 
 	function handleResizeWindow () {

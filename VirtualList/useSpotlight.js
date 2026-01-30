@@ -68,7 +68,7 @@ const getNumberValue = (index) => {
 };
 
 const useSpotlightRestore = (props, instances, context) => {
-	const {scrollContentRef, spottable} = instances;
+	const {scrollContentRef, spottable: spottableRef} = instances;
 	const {focusByIndex, getItemNode} = context;
 
 	// Mutable value
@@ -124,9 +124,9 @@ const useSpotlightRestore = (props, instances, context) => {
 				mutableRef.current.restoreLastFocused = false;
 
 				// try to focus the last focused item
-				spottable.current.isScrolledByJump = true; // eslint-disable-line react-hooks/immutability
+				spottableRef.current.isScrolledByJump = true;
 				const foundLastFocused = focusByIndex(mutableRef.current.preservedIndex, mutableRef.current.lastSpotlightDirection);
-				spottable.current.isScrolledByJump = false;
+				spottableRef.current.isScrolledByJump = false;
 
 				// but if that fails (because it isn't found or is disabled), focus the container so
 				// spotlight isn't lost
