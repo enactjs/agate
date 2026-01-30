@@ -17,7 +17,7 @@ install:
     - npm install
     - npm link
     - popd
-    - git clone --branch=feature/NXT-9000 --depth 1 https://github.com/enactjs/enact ../enact
+    - git clone --branch=develop --depth 1 https://github.com/enactjs/enact ../enact
     - pushd ../enact
     - npm uninstall @enact/ui-test-utils --prefix packages/i18n
     - npm install
