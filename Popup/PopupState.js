@@ -2,6 +2,7 @@ import {on, off} from '@enact/core/dispatcher';
 import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import {is} from '@enact/core/keymap';
+import {checkPropTypes} from '@enact/core/util';
 import Spotlight, {getDirection} from '@enact/spotlight';
 import Pause from '@enact/spotlight/Pause';
 import FloatingLayer from '@enact/ui/FloatingLayer';
@@ -225,6 +226,8 @@ const PopupState = hoc((config, Wrapped) => {
 				activator: null
 			};
 			checkScrimNone(this.props);
+
+			checkPropTypes(this, this.props);
 		}
 
 		// Spot the content after it's mounted.
@@ -261,6 +264,8 @@ const PopupState = hoc((config, Wrapped) => {
 			}
 
 			checkScrimNone(this.props);
+
+			checkPropTypes(this, this.props, prevProps);
 		}
 
 		componentWillUnmount () {

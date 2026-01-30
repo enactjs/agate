@@ -63,6 +63,9 @@
   },
   "overrides": {
     "autolinker": "^4.1.5",
+    "prop-types": {
+      "react-is": "^19.2.3"
+    },
     "vue-template-compiler": "^3.0.0"
   }
 }

@@ -7,7 +7,7 @@
 
 import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
-import {memoize} from '@enact/core/util';
+import {checkPropTypes, memoize} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import Changeable from '@enact/ui/Changeable';
 import DateFactory from 'ilib/lib/DateFactory';
@@ -99,6 +99,8 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 					this.handlers[name] = this.handlePickerChange.bind(this, handlers[name]);
 				});
 			}
+
+			checkPropTypes(this, this.props);
 		}
 
 		static getDerivedStateFromProps (props, state) {
@@ -117,6 +119,10 @@ const DateTimeDecorator = hoc((config, Wrapped) => {
 			}
 
 			return null;
+		}
+
+		componentDidUpdate (prevProps) {
+			checkPropTypes(this, this.props, prevProps);
 		}
 
 		/**

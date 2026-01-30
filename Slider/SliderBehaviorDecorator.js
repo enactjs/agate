@@ -1,6 +1,7 @@
 import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import platform from '@enact/core/platform';
+import {checkPropTypes} from '@enact/core/util';
 import Pause from '@enact/spotlight/Pause';
 import PropTypes from 'prop-types';
 import {Component, createRef} from 'react';
@@ -82,6 +83,8 @@ const SliderBehaviorDecorator = hoc(defaultConfig, (config, Wrapped) => {
 				useHintText: false,
 				prevValue: props.value
 			};
+
+			checkPropTypes(this, this.props);
 		}
 
 		static getDerivedStateFromProps (props, state) {
@@ -92,6 +95,10 @@ const SliderBehaviorDecorator = hoc(defaultConfig, (config, Wrapped) => {
 				};
 			}
 			return null;
+		}
+
+		componentDidUpdate (prevProps) {
+			checkPropTypes(this, this.props, prevProps);
 		}
 
 		componentWillUnmount () {

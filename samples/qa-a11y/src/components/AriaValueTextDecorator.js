@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 
 import hoc from '@enact/core/hoc';
+import {checkPropTypes} from '@enact/core/util';
 import PropTypes from 'prop-types';
 import {useState} from 'react';
 
@@ -13,7 +14,9 @@ const AriaValueTextDecorator  = hoc((config, Wrapped) => {
 	}
 
 	// eslint-disable-next-line no-shadow
-	function AriaValueTextDecorator ({'aria-valuetext': ariaValueText, ...rest}) {
+	function AriaValueTextDecorator (props) {
+		checkPropTypes(AriaValueTextDecorator, props);
+		const {'aria-valuetext': ariaValueText, ...rest} = props;
 		const [value, setValue] = useState(defaultValue);
 		const valueText = `${ariaValueText} ${value}`;
 

@@ -1,5 +1,6 @@
 import Item from '@enact/agate/Item';
 import {VirtualList} from '@enact/agate/VirtualList';
+import {checkPropTypes} from '@enact/core/util';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import {useCallback, useEffect, useState} from 'react';
@@ -35,7 +36,9 @@ const innerItemStyleDefault = {
 	writingMode: 'vertical-rl'
 };
 
-const DifferenctWidthItem = ({index, items, style: itemStyleFromList, ...rest}) => {
+const DifferentWidthItem = (props) => {
+	checkPropTypes(DifferentWidthItem, props);
+	const {index, items, style: itemStyleFromList, ...rest} = props;
 	const
 		{title: children, width} = items[index],
 		itemStyle = {...itemStyleDefault, ...itemStyleFromList, width: width + 'px'};
@@ -49,12 +52,12 @@ const DifferenctWidthItem = ({index, items, style: itemStyleFromList, ...rest}) 
 	);
 };
 
-DifferenctWidthItem.propTypes = {
+DifferentWidthItem.propTypes = {
 	index: PropTypes.number,
 	items: PropTypes.array
 };
 
-const HorizontalDifferenctWidthItemList = (props) => {
+const HorizontalDifferentWidthItemList = (props) => {
 	const [items, setItems] = useState([]);
 	const [itemSize, setItemSize] = useState([]);
 
@@ -77,7 +80,7 @@ const HorizontalDifferenctWidthItemList = (props) => {
 	}, []);
 
 	const renderItem = useCallback((renderProps) => {
-		return <DifferenctWidthItem {...renderProps} />;
+		return <DifferentWidthItem {...renderProps} />;
 	}, []);
 
 	return (
@@ -100,4 +103,4 @@ const HorizontalDifferenctWidthItemList = (props) => {
 	);
 };
 
-export default HorizontalDifferenctWidthItemList;
+export default HorizontalDifferentWidthItemList;

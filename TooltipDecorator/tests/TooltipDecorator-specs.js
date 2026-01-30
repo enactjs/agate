@@ -327,11 +327,11 @@ describe('TooltipDecorator Specs', () => {
 				});
 			});
 
-			test('should have `above centerArrow` className when tooltipPosition is set to `left`', async () => {
+			test('should have `above centerArrow` className when tooltipPosition is not defined', async () => {
 				const tooltipText = 'Tooltip';
 				render(
 					<FloatingLayerController>
-						<TooltipButton tooltipDelay={0} tooltipPosition="left" tooltipText={tooltipText}>Label</TooltipButton>
+						<TooltipButton tooltipDelay={0} tooltipText={tooltipText}>Label</TooltipButton>
 					</FloatingLayerController>
 				);
 

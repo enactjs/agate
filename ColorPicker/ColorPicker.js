@@ -15,6 +15,7 @@ import {adaptEvent, forward, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
+import {checkPropTypes} from '@enact/core/util';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import Changeable from '@enact/ui/Changeable';
 import Group from '@enact/ui/Group';
@@ -276,6 +277,8 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 			this.state = {
 				extended: props.defaultExtended || false
 			};
+
+			checkPropTypes(this, this.props);
 		}
 
 		componentDidMount () {
@@ -295,6 +298,8 @@ const ColorPickerExtended = hoc((config, Wrapped) => {
 			} else if (prevProps.open && !open) {
 				off('click', this.handleClick);
 			}
+
+			checkPropTypes(this, this.props, prevProps);
 		}
 
 		componentWillUnmount () {

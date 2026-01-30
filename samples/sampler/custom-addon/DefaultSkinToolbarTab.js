@@ -1,3 +1,4 @@
+import {checkPropTypes} from '@enact/core/util';
 import {useGlobals} from 'storybook/manager-api';
 import PropTypes from 'prop-types';
 import React from 'react'; // eslint-disable-line
@@ -5,6 +6,7 @@ import React from 'react'; // eslint-disable-line
 import ToolbarTab from './ToolbarTab';
 
 const DefaultSkinToolbarTab = ({toolbarParamKey}) => {
+	checkPropTypes(DefaultSkinToolbarTab, {toolbarParamKey});
 	const [globals, updateGlobals] = useGlobals();
 	const isActive = globals[toolbarParamKey] || false;
 

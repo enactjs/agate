@@ -9,7 +9,7 @@ import Button from '@enact/agate/Button';
 import Header from '@enact/agate/Header';
 import {Panels, Panel} from '@enact/agate/Panels';
 import kind from '@enact/core/kind';
-import {clamp} from '@enact/core/util';
+import {checkPropTypes, clamp} from '@enact/core/util';
 import ri from '@enact/ui/resolution';
 
 Panels.displayName = 'Panels';
@@ -46,6 +46,7 @@ const SecondPanel = kind({
 });
 
 const BasicPanels = ({...rest}) => {
+	checkPropTypes(BasicPanels, rest);
 	const [index, setIndex] = useState(0);
 	const goNext = () => setIndex(clamp(0, 2, index + 1));
 	const goPrevious = () => setIndex(clamp(0, 2, index - 1));

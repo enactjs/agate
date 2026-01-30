@@ -1,4 +1,5 @@
 import hoc from '@enact/core/hoc';
+import {checkPropTypes} from '@enact/core/util';
 import PropTypes from 'prop-types';
 import {createContext, Component} from 'react';
 
@@ -66,6 +67,8 @@ const SharedStateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			this.state = {
 				updateOnMount: false
 			};
+
+			checkPropTypes(this, this.props);
 		}
 
 		componentDidMount () {
@@ -78,6 +81,8 @@ const SharedStateDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			} else if (prevProps.noSharedState && !this.props.noSharedState) {
 				this.loadFromContext();
 			}
+
+			checkPropTypes(this, this.props, prevProps);
 		}
 
 		isUpdateable () {

@@ -1,12 +1,15 @@
 import ImageItem from '@enact/agate/ImageItem';
 import {VirtualGridList} from '@enact/agate/VirtualList';
+import {checkPropTypes} from '@enact/core/util';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import {useCallback} from 'react';
 
 import css from './SampleVirtualGridList.module.less';
 
-const SampleVirtualGridList = ({index, onClick, ...rest}) => {
+const SampleVirtualGridList = (props) => {
+	checkPropTypes(SampleVirtualGridList, props);
+	const {index, onClick, ...rest} = props;
 	const renderItem = useCallback(({index, ...rest}) => { // eslint-disable-line no-shadow
 		const
 			color = Math.floor((Math.random() * (0x1000000 - 0x101010)) + 0x101010).toString(16),

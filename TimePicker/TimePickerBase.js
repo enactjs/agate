@@ -1,4 +1,5 @@
 import kind from '@enact/core/kind';
+import {checkPropTypes} from '@enact/core/util';
 import {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 
@@ -41,6 +42,8 @@ class HourPicker extends Component {
 			noAnimation: false,
 			prevValue: props.value
 		};
+
+		checkPropTypes(this, this.props);
 	}
 
 	static getDerivedStateFromProps (props, state) {
@@ -54,6 +57,10 @@ class HourPicker extends Component {
 		}
 
 		return null;
+	}
+
+	componentDidUpdate (prevProps) {
+		checkPropTypes(this, this.props, prevProps);
 	}
 
 	render () {
