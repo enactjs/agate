@@ -17,16 +17,14 @@ install:
     - npm install
     - npm link
     - popd
-    - git clone --branch=develop --depth 1 https://github.com/enactjs/enact ../enact
+    - git clone --branch=feature/NXT-9751 --depth 1 https://github.com/enactjs/enact ../enact
     - pushd ../enact
-    - npm uninstall @enact/ui-test-utils --prefix packages/i18n
     - npm install
     - npm run lerna exec -- --ignore enact-sampler --concurrency 1 -- npm --no-package-lock install
     - npm run lerna exec -- --ignore enact-sampler --concurrency 1 -- npm --no-package-lock link
     - npm run interlink
     - popd
     - rm -fr node_modules/@enact
-    - npm uninstall @enact/ui-test-utils
     - npm install
     - enact link
 script:
