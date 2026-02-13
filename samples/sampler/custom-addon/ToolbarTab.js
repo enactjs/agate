@@ -1,10 +1,8 @@
-import {checkPropTypes} from '@enact/core/util';
 import {IconButton} from 'storybook/internal/components';
 import PropTypes from 'prop-types';
 import React from 'react'; // eslint-disable-line
 
 const ToolbarTab = (props) => {
-	checkPropTypes(props);
 	const {isActive, toggleState, toolbarParamKey} = props;
 	return (
 		<IconButton
