@@ -1,4 +1,5 @@
 import {forward, handle} from '@enact/core/handle';
+import {checkPropTypes} from '@enact/core/util';
 import Spotlight from '@enact/spotlight';
 import Pause from '@enact/spotlight/Pause';
 import ViewManager, {shape, SlideBottomArranger as VerticalArranger, SlideRightArranger as HorizontalArranger} from '@enact/ui/ViewManager';
@@ -96,8 +97,8 @@ const ViewportBase = class extends Component {
 		noAnimation: false
 	};
 
-	constructor () {
-		super();
+	constructor (props) {
+		super(props);
 
 		this.nodeRef = createRef();
 		this.paused = new Pause('Viewport');
@@ -105,6 +106,8 @@ const ViewportBase = class extends Component {
 			prevIndex: -1,
 			direction: 'forward'
 		};
+
+		checkPropTypes(this, this.props);
 	}
 
 	static getDerivedStateFromProps (props, state) {
@@ -122,6 +125,8 @@ const ViewportBase = class extends Component {
 		for (let i = prevProps.index; this.context && i > this.props.index; i--) {
 			this.context.delete(i);
 		}
+
+		checkPropTypes(this, this.props, prevProps);
 	}
 
 	componentWillUnmount () {

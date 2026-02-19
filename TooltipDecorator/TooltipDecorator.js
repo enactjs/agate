@@ -11,7 +11,7 @@
 
 import {forward, handle, forProp} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
-import {Job} from '@enact/core/util';
+import {checkPropTypes, Job} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import {FloatingLayerBase} from '@enact/ui/FloatingLayer';
 import ri from '@enact/ui/resolution';
@@ -239,6 +239,8 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 				arrowAnchor: null,
 				position: {top: 0, left: 0}
 			};
+
+			checkPropTypes(this, this.props);
 		}
 
 		componentDidMount () {
@@ -259,6 +261,8 @@ const TooltipDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			)) {
 				this.setTooltipLayout();
 			}
+
+			checkPropTypes(this, this.props, prevProps);
 		}
 
 		componentWillUnmount () {

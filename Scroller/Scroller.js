@@ -16,7 +16,7 @@
  * @exports Scroller
  */
 
-import {setDefaultProps} from '@enact/core/util';
+import {checkPropTypes, setDefaultProps} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {ResizeContext} from '@enact/ui/Resizable';
@@ -62,6 +62,7 @@ const scrollerDefaultProps = {
  */
 let Scroller = (props) => {
 	const scrollerProps = setDefaultProps(props, scrollerDefaultProps);
+	checkPropTypes(Scroller, scrollerProps);
 
 	// Hooks
 	const {

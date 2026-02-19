@@ -1,3 +1,4 @@
+import {checkPropTypes} from '@enact/core/util';
 import {action} from '@enact/storybook-utils/addons/actions';
 import {mergeComponentMetadata} from '@enact/storybook-utils';
 import {boolean, number, select} from '@enact/storybook-utils/addons/controls';
@@ -16,7 +17,9 @@ TabbedPanels.displayName = 'TabbedPanels';
 const Config = mergeComponentMetadata('TabbedPanels', TabbedPanelsBase);
 // `paddingBottom: '56.25%'` is a trick to impose 16:9 aspect ratio on the component, since padding percentage is based on the width, not the height.
 
-const I18nTabbedPanelsBase = ({orientation, rtl, ...rest}) => {
+const I18nTabbedPanelsBase = (props) => {
+	checkPropTypes(I18nTabbedPanelsBase, props);
+	const {orientation, rtl, ...rest} = props;
 	const [panelIndex, setIndex] = useState(Config.defaultProps.index || 0);
 	const onSelect = (e) => {
 		setIndex(e.index);

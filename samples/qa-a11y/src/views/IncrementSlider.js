@@ -2,12 +2,15 @@
 
 import Button from '@enact/agate/Button';
 import IncrementSlider from '@enact/agate/IncrementSlider';
+import {checkPropTypes} from '@enact/core/util';
 import PropTypes from 'prop-types';
 import {useState} from 'react';
 
 import Section from '../components/Section';
 
-const CustomIncrementSlider = ({customText, ...rest}) => {
+const CustomIncrementSlider = (props) => {
+	checkPropTypes(CustomIncrementSlider, props);
+	const {customText, ...rest} = props;
 	const [value, setValue] = useState(0);
 	const valueText = `${customText} ${value}`;
 

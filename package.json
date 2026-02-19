@@ -47,9 +47,9 @@
     "eases": "^1.0.8",
     "invariant": "^2.2.4",
     "prop-types": "^15.8.1",
-    "ramda": "^0.31.3",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
+    "ramda": "^0.32.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "warning": "^4.0.3",
     "ilib": "^14.21.2"
   },
@@ -63,6 +63,9 @@
   },
   "overrides": {
     "autolinker": "^4.1.5",
+    "prop-types": {
+      "react-is": "^19.2.3"
+    },
     "vue-template-compiler": "^3.0.0"
   }
 }

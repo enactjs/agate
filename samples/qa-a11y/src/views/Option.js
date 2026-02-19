@@ -1,3 +1,4 @@
+import {checkPropTypes} from '@enact/core/util';
 import {useI18nContext} from '@enact/i18n/I18nDecorator';
 import Checkbox from '@enact/agate/CheckboxItem';
 import PropTypes from 'prop-types';
@@ -8,6 +9,7 @@ import Section from '../components/Section';
 import appCss from '../App/App.module.less';
 
 const Option = (props) => {
+	checkPropTypes(Option, props);
 	const {handleDebug, isDebugMode} = props;
 	const {rtl, updateLocale} = useI18nContext();
 	const handleClick = useCallback(() => {

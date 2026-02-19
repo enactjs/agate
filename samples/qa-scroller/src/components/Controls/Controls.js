@@ -1,5 +1,6 @@
 import CheckboxItem from '@enact/agate/CheckboxItem';
 import Input from '@enact/agate/Input';
+import {checkPropTypes} from '@enact/core/util';
 import {Cell, Row} from '@enact/ui/Layout';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
@@ -7,7 +8,9 @@ import PropTypes from 'prop-types';
 import LocaleSwitch from '../LocaleSwitch';
 import ScrollModeSwitch from '../ScrollModeSwitch';
 
-const Controls = ({handleFocusableScrollbar, handleHeight, handleScrollMode, handleWidth, height, nativeScroll, width}) => {
+const Controls = (props) => {
+	checkPropTypes(Controls, props);
+	const {handleFocusableScrollbar, handleHeight, handleScrollMode, handleWidth, height, nativeScroll, width} = props;
 	const inputWidth = {width: '5em'};
 	const rowWidth = typeof window !== 'undefined' ? `${ri.scaleToRem(window.innerWidth)}` : `${ri.scaleToRem(1920)}`;
 
