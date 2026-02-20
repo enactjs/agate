@@ -40,7 +40,7 @@ export default {
 	addons: [
 		'@enact/storybook-utils/addons/actions',
 		'@enact/storybook-utils/addons/controls',
-		'@storybook/addon-docs',
+		'@storybook/addon-docs'
 	],
 	managerEntries: [resolve(__dirname, '../custom-addon/manager.js')],
 	webpackFinal: async (config, {configType}) => {
