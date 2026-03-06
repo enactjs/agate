@@ -2,6 +2,12 @@
 
 The following is a curated list of changes in the Enact agate module, newest changes on the top.
 
+## [unreleased]
+
+- `@storybook/addon-docs` version to `^10.2.15`.
+- `@storybook/react-webpack5` version to `^10.2.15`.
+- `storybook` version to `^10.2.15`.
+
 ## [3.1.0] - 2025-08-08
 
 - Update dependencies including Storybook 9
