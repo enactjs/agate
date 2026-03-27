@@ -75,7 +75,7 @@ DifferentWidthItem.propTypes = {
 	items: PropTypes.array
 };
 
-const HorizontalDifferenctWidthItemList = (props) => {
+const HorizontalDifferentWidthItemList = (props) => {
 	const [{arrayItems: items, arrayItemSize: itemSize}] = useState(() => getArrayItems());
 
 	const renderItem = useCallback((renderProps) => {
