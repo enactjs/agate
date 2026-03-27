@@ -1,3 +1,4 @@
+import {checkPropTypes} from '@enact/core/util';
 import spotlight from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
 import {Row, Column, Cell} from '@enact/ui/Layout';
@@ -57,6 +58,7 @@ class StatefulSwitchItem extends Component {
 			prevIndex: props.index,
 			selected: items[props.index].selected
 		};
+		checkPropTypes(this, this.props);
 	}
 
 	static getDerivedStateFromProps (props, state) {
@@ -68,6 +70,10 @@ class StatefulSwitchItem extends Component {
 		}
 
 		return null;
+	}
+
+	componentDidUpdate (prevProps) {
+		checkPropTypes(this, this.props, prevProps);
 	}
 
 	onToggle = () => {

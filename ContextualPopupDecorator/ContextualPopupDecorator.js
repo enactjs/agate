@@ -12,7 +12,7 @@ import {handle, forProp, forKey, forward, stop} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import {WithRef} from '@enact/core/internal/WithRef';
-import {extractAriaProps} from '@enact/core/util';
+import {checkPropTypes, extractAriaProps} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import Spotlight, {getDirection} from '@enact/spotlight';
 import SpotlightContainerDecorator from '@enact/spotlight/SpotlightContainerDecorator';
@@ -283,6 +283,8 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 			if (props.setApiProvider) {
 				props.setApiProvider(this);
 			}
+
+			checkPropTypes(this, this.props);
 		}
 
 		componentDidMount () {
@@ -331,6 +333,8 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 					this.spotActivator(prevState.activator);
 				}
 			}
+
+			checkPropTypes(this, this.props, prevProps);
 		}
 
 		componentWillUnmount () {

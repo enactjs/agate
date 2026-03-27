@@ -1,4 +1,5 @@
 import {VirtualGridList} from '@enact/agate/VirtualList';
+import {checkPropTypes} from '@enact/core/util';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import {useCallback} from 'react';
@@ -8,7 +9,9 @@ import ImageItem from '../ImageItem';
 
 import css from './ImageList.module.less';
 
-const ImageList = ({imageItems, minHeight, minWidth, spacing, selectedItems, ...rest}) => {
+const ImageList = (props) => {
+	checkPropTypes(ImageList, props);
+	const {imageItems, minHeight, minWidth, spacing, selectedItems, ...rest} = props;
 	const calculateOfSize = (size) => ri.scale(parseInt(size) || 0);
 
 	const renderItem = useCallback(({...renderRest}) => {

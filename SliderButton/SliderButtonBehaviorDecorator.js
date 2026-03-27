@@ -1,6 +1,7 @@
 import {forward} from '@enact/core/handle';
 import {is} from '@enact/core/keymap';
 import platform from '@enact/core/platform';
+import {checkPropTypes} from '@enact/core/util';
 import PropTypes from 'prop-types';
 import {useCallback, useState, useRef} from 'react';
 
@@ -17,6 +18,7 @@ const isRight = is('right');
 const SliderButtonBehaviorDecorator = (Wrapped) => {
 	// eslint-disable-next-line no-shadow
 	function SliderButtonBehaviorDecorator (props) {
+		checkPropTypes(SliderButtonBehaviorDecorator, props);
 		const {children} = props;
 		const [valueText, setValueText] = useState(children ? children[0] : null);
 		const ref = useRef();

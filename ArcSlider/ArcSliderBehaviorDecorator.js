@@ -1,7 +1,7 @@
 import {forward} from '@enact/core/handle';
 import {is} from '@enact/core/keymap';
 import hoc from '@enact/core/hoc';
-import {clamp} from '@enact/core/util';
+import {checkPropTypes, clamp} from '@enact/core/util';
 import {validateRangeOnce, validateSteppedOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
 import {createRef, Component} from 'react';
@@ -144,12 +144,16 @@ const ArcSliderBehaviorDecorator = hoc((config, Wrapped) => {
 				isFocused: false,
 				value: props.value ? props.value : props.min
 			};
+
+			checkPropTypes(this, this.props);
 		}
 
 		componentDidUpdate (prevProps) {
 			if ( this.props.max !== prevProps.max || this.props.min !== prevProps.min) {
 				this.handleChange(null, clamp(this.props.min, this.props.max, this.state.value));
 			}
+
+			checkPropTypes(this, this.props, prevProps);
 		}
 
 		handleDown = ({clientX, clientY}) => {

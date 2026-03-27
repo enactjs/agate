@@ -2,6 +2,7 @@ import {forward} from '@enact/core/handle';
 import {is} from '@enact/core/keymap';
 import hoc from '@enact/core/hoc';
 import platform from '@enact/core/platform';
+import {checkPropTypes} from '@enact/core/util';
 import {validateRangeOnce} from '@enact/ui/internal/validators';
 import PropTypes from 'prop-types';
 import {Component} from 'react';
@@ -89,6 +90,12 @@ const ArcPickerBehaviorDecorator = hoc((config, Wrapped) => {
 			this.state = {
 				isFocused: false
 			};
+
+			checkPropTypes(this, this.props);
+		}
+
+		componentDidUpdate (prevProps) {
+			checkPropTypes(this, this.props, prevProps);
 		}
 
 		handleClick = (value) => (ev) => {
