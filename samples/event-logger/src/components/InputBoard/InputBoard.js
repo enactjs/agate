@@ -41,16 +41,6 @@ function findLastIndexOfMatchingEvent (array, eventName, isDOMElement, isCapturi
 	return nomatch;
 }
 
-function usePrevious (value) {
-	const ref = useRef();
-
-	useEffect(() => {
-		ref.current = value;
-	});
-
-	return ref.current;
-}
-
 const InputBoard = ({className}) => {
 	const isCapturingEvent = true;
 
@@ -60,7 +50,8 @@ const InputBoard = ({className}) => {
 	const eventCapturingOnRef = useRef();
 	const eventLogsRef = useRef();
 	const listenersRef = useRef({bubble: {}, capture: {}});
-	const reactHandlers = useRef();
+	const prevActiveEvents = useRef({});
+	const reactHandlersRef = useRef();
 	const syntheticEventOnRef = useRef();
 	const timerIndexRef = useRef();
 
@@ -74,9 +65,8 @@ const InputBoard = ({className}) => {
 	const onRemoveEventLog = useCallback((eventName, isDOMElement, isCapturing) => dispatch(removeEventLog(eventName, isDOMElement, isCapturing)), [dispatch]);
 	const onUpdateEventLog = useCallback((prevTimeoutId, postTimeoutId, eventObject) => dispatch(updateEventLog(prevTimeoutId, postTimeoutId, eventObject)), [dispatch]);
 
-	const prevActiveEvents = usePrevious(activeEvents);
-
 	const [showFilter, setShowFilter] = useState(true);
+	const [reactHandlers, setReactHandlers] = useState();
 
 	const sendEventLog = useCallback((ev, isDOMElement, eventObject, isCapturing) => {
 		const timergroup = [3000, 5000, 10000];
@@ -184,9 +174,9 @@ const InputBoard = ({className}) => {
 		timerIndexRef.current = timerIndex;
 		eventLogsRef.current = eventLogs;
 		// add/remove event
-		if (prevActiveEvents && prevActiveEvents !== activeEvents) {
+		if (prevActiveEvents.current && prevActiveEvents.current !== activeEvents) {
 			const
-				prev = prevActiveEvents,
+				prev = prevActiveEvents.current,
 				curr = activeEvents,
 				handlers = {};
 
@@ -208,9 +198,16 @@ const InputBoard = ({className}) => {
 					}
 				}
 			}
-			reactHandlers.current = handlers;
+			reactHandlersRef.current = handlers;
+			prevActiveEvents.current = activeEvents;
 		}
 	});
+
+	useEffect(() => {
+		if (reactHandlersRef.current !== reactHandlers) {
+			setReactHandlers(reactHandlersRef.current);
+		}
+	}, [reactHandlers]);
 
 	useEffect( () => {
 		return () => {
@@ -237,7 +234,7 @@ const InputBoard = ({className}) => {
 				className={className}
 				ref={divRef}
 				tabIndex="0"
-				{...reactHandlers.current}
+				{...reactHandlers}
 			>
 				{'You can trigger variable events here. For detecting keyboard event, mouse click is needed on it.'}
 			</div>
