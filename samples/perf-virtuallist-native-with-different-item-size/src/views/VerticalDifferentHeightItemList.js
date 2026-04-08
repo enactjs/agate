@@ -3,7 +3,7 @@ import {VirtualList} from '@enact/agate/VirtualList';
 import {checkPropTypes} from '@enact/core/util';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useState} from 'react';
 
 const
 	languages = [
@@ -29,6 +29,24 @@ const itemStyleDefault = {
 	lineHeight
 };
 
+const getArrayItems = () => {
+	let position = 0, arrayItemSize = [], arrayItems = [];
+	for (let i = 0; i < numOfItems; i++) {
+		const
+			numOfLines = Math.ceil(Math.random() * 6),
+			height = numOfLines * oneLineSize;
+
+		arrayItems.push({
+			title: (`${('00' + i).slice(-3)} - ${position}px - ${languages[i % 10]}\n`).repeat(numOfLines),
+			height
+		});
+		arrayItemSize.push(height);
+		position += (height + spacing);
+	}
+
+	return {arrayItemSize, arrayItems};
+};
+
 const DifferentHeightItem = (props) => {
 	checkPropTypes(DifferentHeightItem, props);
 	const {index, items, style: itemStyleFromList, ...rest} = props;
@@ -48,27 +66,7 @@ DifferentHeightItem.propTypes = {
 };
 
 const VerticalDifferentHeightItemList = (props) => {
-	const [items, setItems] = useState([]);
-	const [itemSize, setItemSize] = useState([]);
-
-	useEffect(() => {
-		let position = 0, arrayItemSize = [], arrayItems = [];
-		for (let i = 0; i < numOfItems; i++) {
-			const
-				numOfLines = Math.ceil(Math.random() * 6),
-				height = numOfLines * oneLineSize;
-
-			arrayItems.push({
-				title: (`${('00' + i).slice(-3)} - ${position}px - ${languages[i % 10]}\n`).repeat(numOfLines),
-				height
-			});
-			arrayItemSize.push(height);
-			position += (height + spacing);
-		}
-
-		setItems(arrayItems);
-		setItemSize(arrayItemSize);
-	}, []);
+	const [{arrayItems: items, arrayItemSize: itemSize}] = useState(() => getArrayItems());
 
 	const renderItem = useCallback((renderProps) => {
 		return <DifferentHeightItem {...renderProps} />;

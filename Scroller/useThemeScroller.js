@@ -16,13 +16,13 @@ const useSpottable = (props, instances) => {
 
 	const {addGlobalKeyDownEventListener, removeGlobalKeyDownEventListener} = useEventKey();
 
-	const setContainerDisabled = useCallback((bool) => {
+	const setContainerDisabled = useCallback(function self (bool) {
 		if (scrollContainerRef.current) {
 			scrollContainerRef.current.dataset.spotlightContainerDisabled = bool;
 
 			if (bool) {
 				addGlobalKeyDownEventListener(() => {
-					setContainerDisabled(false);
+					self(false);
 				});
 			} else {
 				removeGlobalKeyDownEventListener();
@@ -206,6 +206,7 @@ const useSpottable = (props, instances) => {
 		const containerNode = scrollContentRef.current;
 		const horizontal = scrollContentHandle.current.isHorizontal();
 		const vertical = scrollContentHandle.current.isVertical();
+		const scrollContentHandleRef = scrollContentHandle.current;
 
 		if (!vertical && !horizontal || !item || !utilDOM.containsDangerously(containerNode, item)) {
 			return;
@@ -215,14 +216,14 @@ const useSpottable = (props, instances) => {
 		const itemRect = getRect(item);
 
 		if (horizontal && !(itemRect.left >= containerRect.left && itemRect.right <= containerRect.right)) {
-			scrollContentHandle.current.scrollPos.left = calculateScrollLeft(item, scrollPosition);
+			scrollContentHandleRef.scrollPos.left = calculateScrollLeft(item, scrollPosition);
 		}
 
 		if (vertical && !(itemRect.top >= containerRect.top && itemRect.bottom <= containerRect.bottom)) {
-			scrollContentHandle.current.scrollPos.top = calculateScrollTop(item);
+			scrollContentHandleRef.scrollPos.top = calculateScrollTop(item);
 		}
 
-		return scrollContentHandle.current.scrollPos;
+		return scrollContentHandleRef.scrollPos;
 	}
 
 	function focusOnNode (node) {
