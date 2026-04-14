@@ -6,11 +6,11 @@ import {fileURLToPath} from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-		disableTelemetry: true,
-		allowedHosts: true
+
 export default {
 	core: {
-		disableTelemetry: true
+		disableTelemetry: true,
+		allowedHosts: true
 	},
 	features: {
 		backgrounds: false,
