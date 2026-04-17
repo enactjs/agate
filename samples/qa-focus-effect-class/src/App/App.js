@@ -5,7 +5,7 @@ import Header from '@enact/agate/Header';
 import {Panel, Panels} from '@enact/agate/Panels';
 import ThemeDecorator from '@enact/agate/ThemeDecorator';
 import {setFocusEffectClass} from '@enact/spotlight/SpotlightRootDecorator';
-import {Cell, Layout, Row} from '@enact/ui/Layout';
+import {Row} from '@enact/ui/Layout';
 import {useCallback, useState} from 'react';
 
 import css from './App.module.less';
@@ -27,16 +27,16 @@ const App = (props) => {
 					<title>QA Sample - Focus Effect Class</title>
 				</Header>
 
-						<CheckboxItem onClick={onToggleDisabled}>Enable focusEffectClass</CheckboxItem>
+				<CheckboxItem onClick={onToggleDisabled}>Enable focusEffectClass</CheckboxItem>
 
 
-				<Row>
+				<Row className={css.row}>
 					<Button className={css.button2}>
 						Button with general focus effect class
 					</Button>
 					<BodyText className={css.bodyText}>When focusEffectClass is active, this Button should have larger font size on focus</BodyText>
 				</Row>
-				<Row>
+				<Row className={css.row}>
 					<Button className={css.button1}>
 						Button with data-spotlight-focused attribute
 					</Button>
