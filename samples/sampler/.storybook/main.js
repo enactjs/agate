@@ -1,11 +1,15 @@
+/* eslint-disable no-shadow */
+
 import webpack from '@enact/storybook-utils/configs/webpack.js';
 import {readFileSync} from 'fs';
+import {createRequire} from 'module';
 import {dirname, resolve} from 'path';
 import {loadCsf} from 'storybook/internal/csf-tools';
 import {fileURLToPath} from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
 
 export default {
 	core: {
@@ -40,12 +44,24 @@ export default {
 	staticDirs: ['../public'],
 	addons: [
 		'@enact/storybook-utils/addons/actions',
-		'@enact/storybook-utils/addons/controls',
-		'@storybook/addon-docs'
+		'@enact/storybook-utils/addons/controls'
 	],
 	managerEntries: [resolve(__dirname, '../custom-addon/manager.js')],
 	webpackFinal: async (config, {configType}) => {
-		return webpack(config, configType, __dirname);
+		const webpackFinalConfig = await webpack(config, configType, __dirname);
+
+		// Force a single React copy. Limestone and other enact packages might have different patch versions of React,
+		// which causes "Cannot read properties of null (reading 'useEffect')"
+		const reactDir = dirname(require.resolve('react/package.json'));
+		const reactDomDir = dirname(require.resolve('react-dom/package.json'));
+		webpackFinalConfig.resolve = webpackFinalConfig.resolve || {};
+		webpackFinalConfig.resolve.alias = {
+			...(webpackFinalConfig.resolve.alias || {}),
+			react: reactDir,
+			'react-dom': reactDomDir
+		};
+
+		return webpackFinalConfig;
 	},
 	typescript: {
 		reactDocgen: false
