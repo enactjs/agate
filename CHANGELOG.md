@@ -7,6 +7,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Changed
 
 - Update minor dependencies
+- `agate/ThemeDecorator` config `focusEffectClass` to support customization for spottable components
 
 ## [3.1.0] - 2025-08-08
 
