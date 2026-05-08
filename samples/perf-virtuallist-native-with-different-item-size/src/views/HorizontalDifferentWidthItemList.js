@@ -1,8 +1,9 @@
 import Item from '@enact/agate/Item';
 import {VirtualList} from '@enact/agate/VirtualList';
+import {checkPropTypes} from '@enact/core/util';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useState} from 'react';
 
 const
 	languages = [
@@ -35,7 +36,27 @@ const innerItemStyleDefault = {
 	writingMode: 'vertical-rl'
 };
 
-const DifferenctWidthItem = ({index, items, style: itemStyleFromList, ...rest}) => {
+const getArrayItems = () => {
+	let position = 0, arrayItemSize = [], arrayItems = [];
+	for (let i = 0; i < numOfItems; i++) {
+		const
+			numOfLines = Math.ceil(Math.random() * 6),
+			width = numOfLines * oneLineSize + paddingSize;
+
+		arrayItems.push({
+			title: (`${('00' + i).slice(-3)} | ${position}px | ${languages[i % 10]}\n`).repeat(numOfLines),
+			width
+		});
+		arrayItemSize.push(width);
+		position += (width + spacing);
+	}
+
+	return {arrayItemSize, arrayItems};
+};
+
+const DifferentWidthItem = (props) => {
+	checkPropTypes(DifferentWidthItem, props);
+	const {index, items, style: itemStyleFromList, ...rest} = props;
 	const
 		{title: children, width} = items[index],
 		itemStyle = {...itemStyleDefault, ...itemStyleFromList, width: width + 'px'};
@@ -49,35 +70,16 @@ const DifferenctWidthItem = ({index, items, style: itemStyleFromList, ...rest}) 
 	);
 };
 
-DifferenctWidthItem.propTypes = {
+DifferentWidthItem.propTypes = {
 	index: PropTypes.number,
 	items: PropTypes.array
 };
 
-const HorizontalDifferenctWidthItemList = (props) => {
-	const [items, setItems] = useState([]);
-	const [itemSize, setItemSize] = useState([]);
-
-	useEffect(() => {
-		let position = 0, arrayItemSize = [], arrayItems = [];
-		for (let i = 0; i < numOfItems; i++) {
-			const
-				numOfLines = Math.ceil(Math.random() * 6),
-				width = numOfLines * oneLineSize + paddingSize;
-
-			arrayItems.push({
-				title: (`${('00' + i).slice(-3)} | ${position}px | ${languages[i % 10]}\n`).repeat(numOfLines),
-				width
-			});
-			arrayItemSize.push(width);
-			position += (width + spacing);
-		}
-		setItems(arrayItems);
-		setItemSize(arrayItemSize);
-	}, []);
+const HorizontalDifferentWidthItemList = (props) => {
+	const [{arrayItems: items, arrayItemSize: itemSize}] = useState(() => getArrayItems());
 
 	const renderItem = useCallback((renderProps) => {
-		return <DifferenctWidthItem {...renderProps} />;
+		return <DifferentWidthItem {...renderProps} />;
 	}, []);
 
 	return (
@@ -100,4 +102,4 @@ const HorizontalDifferenctWidthItemList = (props) => {
 	);
 };
 
-export default HorizontalDifferenctWidthItemList;
+export default HorizontalDifferentWidthItemList;

@@ -10,6 +10,7 @@ import {setDefaultTargetById} from '@enact/core/dispatcher';
 import hoc from '@enact/core/hoc';
 import {addAll} from '@enact/core/keymap';
 import kind from '@enact/core/kind';
+import {checkPropTypes} from '@enact/core/util';
 import I18nDecorator from '@enact/i18n/I18nDecorator';
 import SpotlightRootDecorator from '@enact/spotlight/SpotlightRootDecorator';
 import {ResolutionDecorator} from '@enact/ui/resolution';
@@ -83,6 +84,18 @@ const defaultConfig = /** @lends agate/ThemeDecorator.ThemeDecorator.defaultConf
 	 * @public
 	 */
 	disableFullscreen: false,
+
+	/**
+	 * A CSS class name to apply globally to every spottable component when it receives spotlight focus.
+	 *
+	 * This is the declarative equivalent of calling `setFocusEffectClass` imperatively. It acts as
+	 * an app-wide default.
+	 *
+	 * @type {String}
+	 * @default null
+	 * @public
+	 */
+	focusEffectClass: null,
 
 	/**
 	 * Enables a floating layer for popup components.
@@ -263,7 +276,7 @@ const CustomizableSkinStyle = kind({
  */
 const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	// TODO: Document props passable to hoc ()
-	const {customSkin, float, i18n, noAutoFocus, overlay, ri, skin, spotlight, disableFullscreen, rootId} = config;
+	const {customSkin, float, focusEffectClass, i18n, noAutoFocus, overlay, ri, skin, spotlight, disableFullscreen, rootId} = config;
 	const defaultSkin = 'gallium';
 
 	const bgClassName = classnames({
@@ -275,7 +288,7 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 	if (float) App = FloatingLayerDecorator({wrappedClassName: bgClassName}, App);
 	if (ri) App = ResolutionDecorator(ri, App);
 	if (i18n) App = I18nDecorator({sync: true}, App);
-	if (spotlight) App = SpotlightRootDecorator({noAutoFocus, rootId}, App);
+	if (spotlight) App = SpotlightRootDecorator({focusEffectClass, noAutoFocus, rootId}, App);
 	if (skin) App = Skinnable({defaultSkin}, App);
 
 	// add webOS-specific key maps
@@ -317,6 +330,16 @@ const ThemeDecorator = hoc(defaultConfig, (config, Wrapped) => {
 			 */
 			skin: PropTypes.string
 		};
+
+		constructor (props) {
+			super(props);
+
+			checkPropTypes(this, this.props);
+		}
+
+		componentDidUpdate (prevProps) {
+			checkPropTypes(this, this.props, prevProps);
+		}
 
 		render () {
 			const currentSkin = this.props.skin || defaultSkin;

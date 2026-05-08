@@ -1,13 +1,18 @@
 import {addons, types} from 'storybook/manager-api';
-import React from 'react'; // eslint-disable-line
+import React from 'react';
 
-import {ACCENT_ADDON_ID, ACCENT_PARAM_KEY, DEFAULTSKINS_ADDON_ID, DEFAULTSKINS_PARAM_KEY, HIGHLIGHT_ADDON_ID, HIGHLIGHT_PARAM_KEY} from './constants';
-import Toolbar from './Toolbar';
+import {ACCENT_ADDON_ID, ACCENT_PARAM_KEY, DEFAULTSKINS_ADDON_ID, DEFAULTSKINS_PARAM_KEY, HIGHLIGHT_ADDON_ID, HIGHLIGHT_PARAM_KEY} from './constants.js';
+import Toolbar from './Toolbar.js';
 
 addons.register(ACCENT_ADDON_ID, () => {
-	const renderAccentColorPickerTab = () => <Toolbar param={ACCENT_PARAM_KEY} isColorPicker />;
-	const renderHighlightColorPickerTab = () =>  <Toolbar param={HIGHLIGHT_PARAM_KEY} isColorPicker />;
-	const renderDefaultSkinsTab = () => <Toolbar param={DEFAULTSKINS_PARAM_KEY} isColorPicker={false} />;
+	const renderAccentColorPickerTab = () =>
+		React.createElement(Toolbar, {param: ACCENT_PARAM_KEY, isColorPicker: true});
+
+	const renderHighlightColorPickerTab = () =>
+		React.createElement(Toolbar, {param: HIGHLIGHT_PARAM_KEY, isColorPicker: true});
+
+	const renderDefaultSkinsTab = () =>
+		React.createElement(Toolbar, {param: DEFAULTSKINS_PARAM_KEY, isColorPicker: false});
 
 	addons.add(ACCENT_ADDON_ID, {
 		title: 'Accent tab',

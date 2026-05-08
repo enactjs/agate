@@ -15,6 +15,8 @@ describe('DropdownInScroller', function () {
 		}
 
 		it('should scroll into view when navigating dropdown via 5-way', async function () {
+			await Page.delay(200);
+			await Page.focus(await Page.components.dropdown1.childItem);
 			expect(await Page.components.dropdown1.childItem.isFocused()).toBe(true);
 
 			await Page.spotlightDown();
@@ -26,6 +28,7 @@ describe('DropdownInScroller', function () {
 				await $('#scroller')
 			)).not.toBe(0);
 
+			await Page.spotlightUp();
 			await Page.spotlightUp();
 			await browser.pause(1000);
 

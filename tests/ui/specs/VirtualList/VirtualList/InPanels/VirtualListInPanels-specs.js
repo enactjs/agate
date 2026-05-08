@@ -7,7 +7,7 @@ describe('VirtualList in Panels', function () {
 	});
 
 	it('should Spotlight returns on Item when List has only 1 Item', async function () {
-		await (Page.inputfieldNumItems).moveTo();
+		await Page.focus(await Page.inputfieldNumItems);
 		await Page.spotlightSelect();
 		await Page.backSpace();
 		await Page.backSpace();

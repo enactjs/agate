@@ -9,16 +9,30 @@ describe('ArcSlider', function () {
 	describe('default', function () {
 		const arcSlider = Page.components.arcSliderDefault;
 
+		it('should change the circle radius on focus', async function () {
+			await Page.delay(500);
+			await arcSlider.blur();
+			const initialCircleRadius = parseFloat(await arcSlider.circle.getAttribute('r'));
+			await arcSlider.focus();
+			const focusedCircleRadius = parseFloat(await arcSlider.circle.getAttribute('r'));
+			expect(focusedCircleRadius).toBeGreaterThan(initialCircleRadius);
+		});
+
 		it('should change the position of the slider knob on each different click position', async function () {
+			await Page.delay(500);
+			await arcSlider.focus();
 			const {cx: originalCx, cy: originalCy} = await arcSlider.knobPosition();
 
-			await arcSlider.self.click({x: 5, y: -10});
+			await arcSlider.waitForClickable();
+			await arcSlider.self.click({x: 50, y: -70});
+			await Page.delay(500);
 
 			const {cx: cx1, cy: cy1} = await arcSlider.knobPosition();
 			expect(cx1).toBeGreaterThan(originalCx);
 			expect(cy1).toBeLessThan(originalCy);
 
 			await arcSlider.self.click({x: -15, y: -20});
+			await Page.delay(500);
 
 			const {cx: cx2, cy: cy2} = await arcSlider.knobPosition();
 			expect(cx2).toBeLessThan(cx1);

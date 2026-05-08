@@ -1,0 +1,35 @@
+{
+  "name": "qa-focus-effect-class",
+  "version": "0.1.0",
+  "description": "A qa sample for testing focus effect class",
+  "author": "",
+  "main": "src/index.js",
+  "scripts": {
+    "serve": "enact serve",
+    "pack": "enact pack",
+    "pack-p": "enact pack -p",
+    "watch": "enact pack --watch",
+    "clean": "enact clean",
+    "lint": "enact lint --strict .",
+    "test": "enact test",
+    "test-watch": "enact test --watch"
+  },
+  "license": "Apache-2.0",
+  "private": true,
+  "repository": "",
+  "enact": {
+    "title": "QA Focus Effect Class",
+    "theme": "agate"
+  },
+  "dependencies": {
+    "@enact/agate": "../../",
+    "@enact/core": "^5.5.0",
+    "@enact/i18n": "^5.5.0",
+    "@enact/spotlight": "^5.5.0",
+    "@enact/ui": "^5.5.0",
+    "ilib": "^14.21.3",
+    "prop-types": "^15.8.1",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  }
+}

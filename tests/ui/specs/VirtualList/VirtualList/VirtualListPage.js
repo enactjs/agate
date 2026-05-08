@@ -22,6 +22,9 @@ class VirtualListPage extends Page {
 		await super.open(`VirtualList${layout}-View`, urlExtra);
 	}
 
+	async focus (node) {
+		return browser.execute((el) => el.focus(), await node);
+	}
 
 	get buttonHideScrollbar () {
 		return element('#hideScrollbar', browser);

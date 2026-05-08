@@ -1,3 +1,4 @@
+import {checkPropTypes} from '@enact/core/util';
 import {useScrollbar as useScrollbarBase} from '@enact/ui/useScroll/Scrollbar';
 import PropTypes from 'prop-types';
 import {memo, useLayoutEffect} from 'react';
@@ -69,6 +70,7 @@ const ScrollbarBase = memo(({css = componentCss, minThumbSize = 18, vertical = t
 		vertical,
 		...rest
 	};
+	checkPropTypes(ScrollbarBase, props);
 
 	const {
 		restProps,
@@ -94,16 +96,16 @@ const ScrollbarBase = memo(({css = componentCss, minThumbSize = 18, vertical = t
 	const {disabled, nextButtonAriaLabel, previousButtonAriaLabel, rtl} = scrollbarButtonsProps;
 
 	useLayoutEffect(() => {
-		const {scrollbarHandle} = props;
-		const {update: uiUpdate} = scrollbarHandle.current;
+		const {scrollbarHandle: scrollbarHandleRef} = props;
+		const {update: uiUpdate} = scrollbarHandleRef.current;
 
-		scrollbarHandle.current.update = (bounds) => {
+		scrollbarHandleRef.current.update = (bounds) => {
 			updateButtons(bounds);
 			uiUpdate(bounds);
 		};
 
-		scrollbarHandle.current.focusOnButton = focusOnButton;
-		scrollbarHandle.current.isOneOfScrollButtonsFocused = isOneOfScrollButtonsFocused;
+		scrollbarHandleRef.current.focusOnButton = focusOnButton;
+		scrollbarHandleRef.current.isOneOfScrollButtonsFocused = isOneOfScrollButtonsFocused;
 	});
 
 	return (

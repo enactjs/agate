@@ -19,6 +19,25 @@ class ArcSliderInterface {
 		return $(this.selector);
 	}
 
+	async blur () {
+		return await browser.execute((el) => el.blur(), await $(this.selector));
+	}
+
+	async focus () {
+		return await browser.execute((el) => el.focus(), await $(this.selector));
+	}
+
+	async waitForClickable () {
+		try {
+			await $(this.selector).waitForClickable({timeout: 1000});
+		} catch (_) {
+			await browser.refresh();
+			await browser.pause(500);
+			await this.focus();
+			await $(this.selector).moveTo();
+		}
+	}
+
 	async knobPosition () {
 		const cx = parseInt((await this.circle.getCSSProperty('cx')).value);
 		const cy = parseInt((await this.circle.getCSSProperty('cy')).value);

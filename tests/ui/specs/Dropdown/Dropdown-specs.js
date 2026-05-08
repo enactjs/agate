@@ -21,6 +21,7 @@ describe('Dropdown', function () {
 		});
 
 		it('should have correct text after changing selected value', async function () {
+			await Page.delay(200);
 			expect(await Page.components.dropdownDefault.childItem.isFocused()).toBe(true);
 
 			await Page.spotlightDown();
@@ -42,6 +43,7 @@ describe('Dropdown', function () {
 	describe('5-way', function () {
 
 		it('should focus the `#dropdownDirectionAbove` when 5-way right', async function () {
+			await Page.delay(200);
 			expect(await Page.components.dropdownDefault.childItem.isFocused()).toBe(true);
 
 			await Page.spotlightRight();

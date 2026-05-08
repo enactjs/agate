@@ -1,12 +1,16 @@
-/* global __dirname */
+import webpack from '@enact/storybook-utils/configs/webpack.js';
+import {readFileSync} from 'fs';
+import {dirname, resolve} from 'path';
+import {loadCsf} from 'storybook/internal/csf-tools';
+import {fileURLToPath} from 'url';
 
-const webpack = require('@enact/storybook-utils/configs/webpack');
-const {loadCsf} = require('storybook/internal/csf-tools');
-const {readFileSync}  = require('fs');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-module.exports = {
+export default {
 	core: {
-		disableTelemetry: true
+		disableTelemetry: true,
+		allowedHosts: true
 	},
 	features: {
 		backgrounds: false,
@@ -37,9 +41,9 @@ module.exports = {
 	addons: [
 		'@enact/storybook-utils/addons/actions',
 		'@enact/storybook-utils/addons/controls',
-		'@storybook/addon-docs',
-		'../custom-addon/manager.js'
+		'@storybook/addon-docs'
 	],
+	managerEntries: [resolve(__dirname, '../custom-addon/manager.js')],
 	webpackFinal: async (config, {configType}) => {
 		return webpack(config, configType, __dirname);
 	},

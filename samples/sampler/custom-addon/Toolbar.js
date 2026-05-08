@@ -1,15 +1,15 @@
 import {useGlobals} from 'storybook/manager-api';
 import {WithTooltip, TooltipLinkList} from 'storybook/internal/components';
-import React, {memo} from 'react'; // eslint-disable-line
+import React, {memo} from 'react';
 
-import ColorPicker from './ColorPicker';
-import DefaultSkinToolbarTab from './DefaultSkinToolbarTab';
-import ToolbarTab from './ToolbarTab';
+import ColorPicker from './ColorPicker.js';
+import DefaultSkinToolbarTab from './DefaultSkinToolbarTab.js';
+import ToolbarTab from './ToolbarTab.js';
 
 const getToolTipLink = (colorPickerType, isColorPicker) => {
 	if (isColorPicker) {
 		return {
-			center: <ColorPicker colorPickerType={colorPickerType} />,
+			center: React.createElement(ColorPicker, {colorPickerType: colorPickerType}),
 			id: colorPickerType,
 			key: colorPickerType,
 			name: colorPickerType,
@@ -22,15 +22,15 @@ const getColorPickerTab = (defaultSkins, isColorPicker, toolbarParamKey) => {
 	const toolTipLink = [getToolTipLink(toolbarParamKey, isColorPicker)];
 
 	if (defaultSkins) return null;
-	return (
-		<WithTooltip
-			closeOnOutsideClick
-			placement="top"
-			tooltip={() => <TooltipLinkList links={toolTipLink} />} // eslint-disable-line react/jsx-no-bind
-			trigger="click"
-		>
-			<ToolbarTab toolbarParamKey={toolbarParamKey} />
-		</WithTooltip>
+	return React.createElement(
+		WithTooltip,
+		{
+			closeOnOutsideClick: true,
+			placement: "top",
+			tooltip: () => React.createElement(TooltipLinkList, {links: toolTipLink}), //eslint-disable-line
+			trigger: "click"
+		},
+		React.createElement(ToolbarTab, {toolbarParamKey: toolbarParamKey})
 	);
 };
 
@@ -41,7 +41,7 @@ const getToolbarComponent = (globals, isColorPicker, toolbarParamKey) => {
 
 	if (globals['show all skins'] === "true") return null;
 
-	return <DefaultSkinToolbarTab toolbarParamKey={toolbarParamKey} />;
+	return React.createElement(DefaultSkinToolbarTab, {toolbarParamKey: toolbarParamKey});
 };
 
 const Toolbar = memo(({isColorPicker, param}) => {

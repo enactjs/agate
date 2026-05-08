@@ -11,7 +11,7 @@ import {adaptEvent, call, forwardWithPrevent, handle} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import kind from '@enact/core/kind';
-import {memoize} from '@enact/core/util';
+import {checkPropTypes, memoize} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import {SpotlightContainerDecorator} from '@enact/spotlight/SpotlightContainerDecorator';
 import {useAnnounce} from '@enact/ui/AnnounceDecorator';
@@ -460,6 +460,12 @@ const MediaPlayerBehaviorDecorator = hoc((config, Wrapped) => {
 				shuffle: false,
 				sourceIndex: 0
 			};
+
+			checkPropTypes(this, this.props);
+		}
+
+		componentDidUpdate (prevProps) {
+			checkPropTypes(this, this.props, prevProps);
 		}
 
 		handle = handle.bind(this);

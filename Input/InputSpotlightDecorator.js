@@ -1,6 +1,7 @@
 import {call, forward, forwardWithPrevent, handle, stopImmediate} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import {is} from '@enact/core/keymap';
+import {checkPropTypes} from '@enact/core/util';
 import {getDirection, Spotlight} from '@enact/spotlight';
 import Pause from '@enact/spotlight/Pause';
 import Spottable from '@enact/spotlight/Spottable';
@@ -139,10 +140,14 @@ const InputSpotlightDecorator = hoc(defaultConfig, (config, Wrapped) => {
 
 			this.paused = new Pause('InputSpotlightDecorator');
 			this.handleKeyDown = handleKeyDown.bind(this);
+
+			checkPropTypes(this, this.props);
 		}
 
-		componentDidUpdate (_, prevState) {
+		componentDidUpdate (prevProps, prevState) {
 			this.updateFocus(prevState);
+
+			checkPropTypes(this, this.props, prevProps);
 		}
 
 		componentWillUnmount () {

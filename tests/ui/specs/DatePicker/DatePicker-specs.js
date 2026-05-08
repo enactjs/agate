@@ -12,6 +12,7 @@ describe('DatePicker', function () {
 			const datePicker = Page.components.datePickerDefault;
 
 			it('should have month-day-year order', async function () {
+				await Page.delay(200);
 				expect(await datePicker.decrementer('month').isFocused()).toBe(true);
 				await Page.spotlightRight();
 				expect(await datePicker.decrementer('day').isFocused()).toBe(true);
@@ -25,6 +26,7 @@ describe('DatePicker', function () {
 					expect(await datePicker.decrementer('month').isFocused()).toBe(true);
 					await Page.spotlightDown();
 					await Page.spotlightSelect();
+					await Page.delay(300);
 					const {month: value} = await extractValues(datePicker);
 					const expected = month < 12 ? month + 1 : 1;
 					expect(value).toBe(expected);
@@ -34,6 +36,7 @@ describe('DatePicker', function () {
 					const {month} = await extractValues(datePicker);
 					expect(await datePicker.decrementer('month').isFocused()).toBe(true);
 					await Page.spotlightSelect();
+					await Page.delay(300);
 					const {month: value} = await extractValues(datePicker);
 					const expected = month > 1 ? month - 1 : 12;
 					expect(value).toBe(expected);
@@ -46,6 +49,7 @@ describe('DatePicker', function () {
 					expect(await datePicker.decrementer('day').isFocused()).toBe(true);
 					await Page.spotlightDown();
 					await Page.spotlightSelect();
+					await Page.delay(300);
 					const {day: value} = await extractValues(datePicker);
 					const expected = day !== numDays ? day + 1 : 1;
 					expect(value).toBe(expected);
@@ -57,6 +61,7 @@ describe('DatePicker', function () {
 					await Page.spotlightRight();
 					expect(await datePicker.decrementer('day').isFocused()).toBe(true);
 					await Page.spotlightSelect();
+					await Page.delay(300);
 					const {day: value} = await extractValues(datePicker);
 					const expected = day !== 1 ? day - 1 : numDays;
 					expect(value).toBe(expected);
@@ -69,6 +74,7 @@ describe('DatePicker', function () {
 					expect(await datePicker.decrementer('year').isFocused()).toBe(true);
 					await Page.spotlightDown();
 					await Page.spotlightSelect();
+					await Page.delay(300);
 					const {year: value} = await extractValues(datePicker);
 					const expected = year + 1;
 					expect(value).toBe(expected);
@@ -80,6 +86,7 @@ describe('DatePicker', function () {
 					await Page.spotlightRight();
 					expect(await datePicker.decrementer('year').isFocused()).toBe(true);
 					await Page.spotlightSelect();
+					await Page.delay(300);
 					const {year: value} = await extractValues(datePicker);
 					const expected = year - 1;
 					expect(value).toBe(expected);
@@ -90,6 +97,7 @@ describe('DatePicker', function () {
 				it('should increase the month when incrementing the picker', async function () {
 					const {month} = await extractValues(datePicker);
 					await datePicker.incrementer('month').click();
+					await Page.delay(500);
 					expect(await datePicker.incrementer('month').isFocused()).toBe(true);
 					const {month: value} = await extractValues(datePicker);
 					const expected = month < 12 ? month + 1 : 1;
@@ -99,6 +107,7 @@ describe('DatePicker', function () {
 				it('should decrease the month when decrementing the picker', async function () {
 					const {month} = await extractValues(datePicker);
 					await datePicker.decrementer('month').click();
+					await Page.delay(300);
 					expect(await datePicker.decrementer('month').isFocused()).toBe(true);
 					const {month: value} = await extractValues(datePicker);
 					const expected = month > 1 ? month - 1 : 12;
@@ -109,7 +118,7 @@ describe('DatePicker', function () {
 					const {day, month, year} = await extractValues(datePicker);
 					const numDays = daysInMonth({month, year});
 					await datePicker.incrementer('day').click();
-					await browser.pause(500);
+					await Page.delay(500);
 					expect(await datePicker.incrementer('day').isFocused()).toBe(true);
 					const {day: value} = await extractValues(datePicker);
 					const expected = day !== numDays ? day + 1 : 1;
@@ -120,6 +129,7 @@ describe('DatePicker', function () {
 					const {day, month, year} = await extractValues(datePicker);
 					const numDays = daysInMonth({month, year});
 					await datePicker.decrementer('day').click();
+					await Page.delay(300);
 					expect(await datePicker.decrementer('day').isFocused()).toBe(true);
 					const {day: value} = await extractValues(datePicker);
 					const expected = day !== 1 ? day - 1 : numDays;
@@ -129,6 +139,7 @@ describe('DatePicker', function () {
 				it('should increase the year when incrementing the picker', async function () {
 					const {year} = await extractValues(datePicker);
 					await datePicker.incrementer('year').click();
+					await Page.delay(300);
 					expect(await datePicker.incrementer('year').isFocused()).toBe(true);
 					const {year: value} = await extractValues(datePicker);
 					const expected = year + 1;
@@ -138,6 +149,7 @@ describe('DatePicker', function () {
 				it('should decrease the year when decrementing the picker', async function () {
 					const {year} = await extractValues(datePicker);
 					await datePicker.decrementer('year').click();
+					await Page.delay(300);
 					expect(await datePicker.decrementer('year').isFocused()).toBe(true);
 					const {year: value} = await extractValues(datePicker);
 					const expected = year - 1;
@@ -154,6 +166,7 @@ describe('DatePicker', function () {
 				it('should not update on select', async function () {
 					await datePicker.focus();
 					await Page.spotlightSelect();
+					await Page.delay(300);
 
 					const {day, month, year} = await extractValues(datePicker);
 
@@ -170,21 +183,22 @@ describe('DatePicker', function () {
 
 			it('should focus the disabled month picker', async function () {
 				await datePicker.decrementer('month').click();
+				await Page.delay(300);
 				expect(await datePicker.decrementer('month').isFocused()).toBe(true);
 			});
 
 			it('should not increase the day when incrementing disabled picker', async function () {
 				await datePicker.incrementer('day').click();
+				await Page.delay(500);
 				expect(await datePicker.incrementer('day').isFocused()).toBe(true);
-				await browser.pause(500);
 				const {day: value} = await extractValues(datePicker);
 				expect(value).toBe(1);
 			});
 
 			it('should not decrease the day when decrementing disabled picker', async function () {
 				await datePicker.decrementer('day').click();
+				await Page.delay(500);
 				expect(await datePicker.decrementer('day').isFocused()).toBe(true);
-				await browser.pause(500);
 				const {day: value} = await extractValues(datePicker);
 				expect(value).toBe(1);
 			});
@@ -205,15 +219,18 @@ describe('DatePicker', function () {
 			it('should not update \'defaultValue\' on decrementing disabled picker', async function () {
 				const {day, month, year} = await extractValues(datePicker);
 				await datePicker.decrementer('month').click();
+				await Page.delay(300);
 				expect(await datePicker.decrementer('month').isFocused()).toBe(true);
 
 				await datePicker.decrementer('day').click();
+				await Page.delay(300);
 				expect(await datePicker.decrementer('day').isFocused()).toBe(true);
 
 				await datePicker.decrementer('year').click();
+				await Page.delay(300);
 				expect(await datePicker.decrementer('year').isFocused()).toBe(true);
 
-				await browser.pause(500);
+				await Page.delay(500);
 
 				expect(day).toBe(6);
 				expect(month).toBe(6);
@@ -224,15 +241,18 @@ describe('DatePicker', function () {
 				const {day, month, year} = await extractValues(datePicker);
 
 				await datePicker.incrementer('month').click();
+				await Page.delay(300);
 				expect(await datePicker.incrementer('month').isFocused()).toBe(true);
 
 				await datePicker.incrementer('day').click();
+				await Page.delay(300);
 				expect(await datePicker.incrementer('day').isFocused()).toBe(true);
 
 				await datePicker.incrementer('day').click();
+				await Page.delay(300);
 				expect(await datePicker.incrementer('day').isFocused()).toBe(true);
 
-				await browser.pause(500);
+				await Page.delay(500);
 
 				expect(day).toBe(6);
 				expect(month).toBe(6);

@@ -10,6 +10,7 @@ describe('TabGroup', function () {
 
 		describe('first tab', function () {
 			it('should have focus on first tab on start', async function () {
+				await Page.delay(200);
 				expect(await tabGroup.focusableTabs(1).isFocused()).toBe(true);
 			});
 

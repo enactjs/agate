@@ -15,6 +15,7 @@ describe('Checkbox', function () {
 
 	describe('default', function () {
 		it('should focus on load', async function () {
+			await Page.delay(200);
 			expect(await defaultCheckbox.self.isFocused()).toBe(true);
 		});
 

@@ -39,6 +39,10 @@ class ScrollerPage extends Page {
 		return element('#nativeScroll', browser);
 	}
 
+	async focus (node) {
+		return browser.execute((el) => el.focus(), await node);
+	}
+
 	async button (text) {
 		return await element(
 			`${componentSelector({component: 'Button'})}[aria-label="${text}"]`,

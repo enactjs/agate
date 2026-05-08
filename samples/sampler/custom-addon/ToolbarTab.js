@@ -1,17 +1,17 @@
 import {IconButton} from 'storybook/internal/components';
 import PropTypes from 'prop-types';
-import React from 'react'; // eslint-disable-line
+import React from 'react';
 
 const ToolbarTab = ({isActive, toggleState, toolbarParamKey}) => {
-	return (
-		<IconButton
-			active={isActive}
-			key={toolbarParamKey}
-			onClick={toggleState ? toggleState : null}
-			style={{display:'flex', flexDirection:'column'}}
-		>
-			{toolbarParamKey}
-		</IconButton>
+	return React.createElement(
+		IconButton,
+		{
+			active: isActive,
+			key: toolbarParamKey,
+			onClick: toggleState ? toggleState : null,
+			style: {display:'flex', flexDirection:'column'}
+		},
+		toolbarParamKey
 	);
 };
 
