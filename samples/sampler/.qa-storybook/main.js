@@ -45,7 +45,7 @@ export default {
 	addons: [
 		'@enact/storybook-utils/addons/actions',
 		'@enact/storybook-utils/addons/controls',
-		'@github-ui/storybook-addon-performance-panel'
+		...(process.env.PERF_PANEL === 'true' ? ['@github-ui/storybook-addon-performance-panel'] : [])
 	],
 	managerEntries: [resolve(__dirname, '../custom-addon/manager.js')],
 	webpackFinal: async (config, {configType}) => {
