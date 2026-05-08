@@ -1,0 +1,54 @@
+# Agate Sampler
+
+> A sampler showing off Agate components
+
+It uses [React Storybook](https://getstorybook.io/). Component properties can be adjusted using the
+`Knobs` tab. Click the `?` in the upper right to see more information on each sample.
+
+## Usage
+
+To launch the sampler using its built-in web server (on http://localhost:8080/):
+```
+npm run serve
+```
+
+To package the sampler applications as a stand-alone app:
+```
+npm run pack
+```
+
+### Performance Panel addon
+
+The `@github-ui/storybook-addon-performance-panel` addon is disabled by default. To enable it, set the `PERF_PANEL` environment variable to `true` when launching or packaging the sampler. The flag applies to both `npm run serve` and `npm run pack`.
+
+PowerShell:
+```
+$env:PERF_PANEL='true'; npm run serve
+$env:PERF_PANEL='true'; npm run pack
+```
+
+Windows CMD:
+```
+set "PERF_PANEL=true" && npm run serve
+set "PERF_PANEL=true" && npm run pack
+```
+
+Bash:
+```
+PERF_PANEL=true npm run serve
+PERF_PANEL=true npm run pack
+```
+
+Without the flag, both commands run normally and the addon is excluded.
+
+## Copyright and License Information
+
+Unless otherwise specified, all content, including all source code files and documentation files in this repository are:
+
+Copyright (c) 2016-2026 LG Electronics
+
+Unless otherwise specified or set forth in the NOTICE file, all content, including all source code files and documentation files in this repository are: Licensed under the Apache License, Version 2.0 (the "License"); you may not use this content except in compliance with the License. You may obtain a copy of the License at
+
+https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
