@@ -1,7 +1,7 @@
 {
-  "name": "perf-virtuallist-native",
+  "name": "qa-focus-effect-class",
   "version": "0.1.0",
-  "description": "Perf VirtualList Native",
+  "description": "A qa sample for testing focus effect class",
   "author": "",
   "main": "src/index.js",
   "scripts": {
@@ -18,7 +18,7 @@
   "private": true,
   "repository": "",
   "enact": {
-    "title": "Perf VirtualList Native",
+    "title": "QA Focus Effect Class",
     "theme": "agate"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "@enact/spotlight": "^5.5.0",
     "@enact/ui": "^5.5.0",
     "ilib": "^14.21.3",
+    "prop-types": "^15.8.1",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   }
