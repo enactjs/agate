@@ -1,0 +1,75 @@
+name: CI Pipeline
+
+on:
+  workflow_call:
+    inputs:
+      checkout-ref:
+        description: 'Git ref to checkout (empty for default merge commit)'
+        type: string
+        required: false
+        default: ''
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['lts/*', 'node']
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.checkout-ref || github.ref }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install system dependencies
+        run: |
+          curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | sudo gpg -o /usr/share/keyrings/mongodb-server-4.4.gpg --dearmor
+          echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-4.4.gpg ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+          sudo apt-get update
+          sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+
+      - name: Clone and setup Enact CLI
+        run: |
+          git clone --branch=develop --depth 1 https://github.com/enactjs/cli ../cli
+          pushd ../cli
+          npm install
+          npm link
+          popd
+
+      - name: Clone and setup Enact framework
+        run: |
+          git clone --branch=develop --depth 1 https://github.com/enactjs/enact ../enact
+          pushd ../enact
+          npm install
+          npm run lerna exec -- --ignore enact-sampler --concurrency 1 -- npm --no-package-lock install
+          npm run lerna exec -- --ignore enact-sampler --concurrency 1 -- npm --no-package-lock link
+          npm run interlink
+          popd
+
+      - name: Install project dependencies
+        run: |
+          rm -fr node_modules/@enact
+          npm install
+          enact link
+
+      - name: Run tests with coverage
+        run: npm test -- --runInBand --coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
+
+      - name: Run ESLint
+        run: npm run lint -- -- --report-unused-disable-directives --max-warnings 0 .
+
+      - name: Validate documentation
+        run: npm run validate-docs
