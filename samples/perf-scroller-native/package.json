@@ -23,13 +23,13 @@
   },
   "dependencies": {
     "@enact/agate": "../../",
-    "@enact/core": "^5.5.0",
-    "@enact/i18n": "^5.5.0",
-    "@enact/spotlight": "^5.5.0",
-    "@enact/ui": "^5.5.0",
+    "@enact/core": "^5.5.1",
+    "@enact/i18n": "^5.5.1",
+    "@enact/spotlight": "^5.5.1",
+    "@enact/ui": "^5.5.1",
     "classnames": "^2.5.1",
-    "ilib": "^14.21.3",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "ilib": "^14.22.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   }
 }
