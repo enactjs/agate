@@ -1,9 +1,7 @@
-/* global FocusEvent, MutationObserver, cancelAnimationFrame, requestAnimationFrame */
-
 import {cap} from '@enact/core/util';
 import {configureActions} from '@enact/storybook-utils/addons/actions';
 import {getBooleanType, getObjectType} from '@enact/storybook-utils/addons/controls';
-import {useEffect} from 'react';
+import {createPseudoStateFocusBridge} from '@enact/storybook-utils/decorators';
 
 import ThemeEnvironment from '../src/ThemeEnvironment';
 
@@ -77,74 +75,8 @@ export const globalTypes = {
 	'default skin styles': false
 };
 
-// storybook-addon-pseudo-states bridge.
-//
-// The addon only toggles CSS pseudo-classes; it cannot drive Enact's focus visuals, which are gated
-// by Spotlight input-mode (`.spotlight-input-*` on `#storybook-root`) and, for components like
-// TooltipDecorator, by React state that only real focus/hover events set. This decorator observes the
-// forcing class the addon applies to `<body>` (`pseudo-focus-all` / `pseudo-hover-all` ) and mirrors
-// it with genuine Enact focus on the story's own spottable element:
-//   - `.focus()` sets `document.activeElement`, so CSS `:focus` styling applies,
-//     and `spotlight-input-key` is added so Enact's input-mode-gated focus rules are eligible.
-//   - a bubbling `focusin` is dispatched so React's delegated `onFocus` runs even when the preview
-//     iframe doesn't hold system focus (as when the pseudo-state is toggled from the addon toolbar),
-//     which is what makes state-driven UI such as the tooltip appear and stay shown.
-const PseudoStateFocusBridge = (story) => {
-	useEffect(() => {
-		const root = document.getElementById('storybook-root');
-		if (!root) return;
-
-		const isForced = () => /pseudo-(focus|hover|active)/.test(document.body.className);
-		// Skip the sampler chrome (Panel Header + Panels controls) and target the story's own control.
-		const findSpottable = () => [...root.querySelectorAll('.spottable')].find((el) => !el.closest('[class*="_Header_"], [class*="Panels_controls"]'));
-
-		let rafId = null;
-		let target = null;
-		let wasForced = false;
-
-		const forceFocus = (tries = 0) => {
-			const spottable = findSpottable();
-			if (spottable) {
-				target = spottable;
-				root.classList.add('spotlight-input-key');
-				spottable.focus();
-				spottable.dispatchEvent(new FocusEvent('focusin', {bubbles: true}));
-			} else if (tries < 10) {
-				rafId = requestAnimationFrame(() => forceFocus(tries + 1));
-			}
-		};
-
-		const clearFocus = () => {
-			const el = target || findSpottable();
-			if (el) {
-				el.blur();
-				el.dispatchEvent(new FocusEvent('focusout', {bubbles: true}));
-			}
-			target = null;
-		};
-
-		const sync = () => {
-			if (rafId) cancelAnimationFrame(rafId);
-			const forced = isForced();
-			if (forced) {
-				forceFocus();
-			} else if (wasForced) {
-				clearFocus();
-			}
-			wasForced = forced;
-		};
-
-		const observer = new MutationObserver(sync);
-		observer.observe(document.body, {attributes: true, attributeFilter: ['class']});
-		sync();
-
-		return () => {
-			observer.disconnect();
-			if (rafId) cancelAnimationFrame(rafId);
-		};
-	}, []);
-
-	return story();
-};
+// storybook-addon-pseudo-states focus bridge (shared factory in @enact/storybook-utils/decorators).
+// Agate additionally renders `Panels controls` chrome, so extend the default `ignoreSelector` to skip it.
+const PseudoStateFocusBridge = createPseudoStateFocusBridge({ignoreSelector: '[class*="_Header_"], [class*="Panels_controls"]'});
 
 export const decorators = [ThemeEnvironment, PseudoStateFocusBridge];
