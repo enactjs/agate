@@ -18,7 +18,7 @@ export default {
 		backgrounds: false,
 		interactions: false,
 		postcss: false,
-		viewport: false,
+		viewport: true,
 		warnOnLegacyHierarchySeparator: false
 	},
 	framework: {
@@ -43,6 +43,7 @@ export default {
 	addons: [
 		'@enact/storybook-utils/addons/actions',
 		'@enact/storybook-utils/addons/controls',
+		'storybook-addon-pseudo-states',
 		...(process.env.PERF_PANEL === 'true' ? ['@github-ui/storybook-addon-performance-panel'] : [])
 	],
 	managerEntries: [resolve(__dirname, '../custom-addon/manager.js')],
