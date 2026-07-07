@@ -6,6 +6,7 @@ The following is a curated list of changes in the Enact agate module, newest cha
 
 ### Changed
 
+- Update major dependencies
 - Update minor dependencies
 
 ## [3.2.0] - 2026-05-08
