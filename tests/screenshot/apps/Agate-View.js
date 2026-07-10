@@ -135,7 +135,7 @@ class App extends ReactComponent {
 	}
 }
 
-const WrappedAgateApp = ThemeDecorator(App);
+let WrappedAgateApp = ThemeDecorator(App);
 
 const ExportedAgateApp = (props) => {
 
@@ -153,11 +153,15 @@ const ExportedAgateApp = (props) => {
 	}
 
 	useEffect(() => {
+		WrappedAgateApp = ThemeDecorator({noAutoFocus}, App);
+	});
+
+	useEffect(() => {
 		document.querySelector('#root > div').classList.add('spotlight-input-key');
 	}, []);
 
 	return (
-		<WrappedAgateApp {...props} noAutoFocus={noAutoFocus} skin={skin} skinVariants={skinVariants} locale={locale} />
+		<WrappedAgateApp {...props} skin={skin} skinVariants={skinVariants} locale={locale} />
 	);
 };
 
