@@ -15,9 +15,8 @@ const BodyTextTallGlyphTests = [
 
 const BodyTextTests = [
 	...BodyTextSmokeTests,
-	withConfig({locale: 'ar-Sa'}, BodyTextSmokeTests),
-	withConfig({locale: TALLGLYPH_LOCALES}, BodyTextTallGlyphTests)
-
+	...withConfig({locale: 'ar-Sa'}, BodyTextSmokeTests),
+	...withConfig({locale: TALLGLYPH_LOCALES}, BodyTextTallGlyphTests)
 ];
 
 export default BodyTextTests;

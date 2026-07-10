@@ -8,8 +8,8 @@ const DateTimePicketSmokeTests = [
 
 const DateTimePickerTests = [
 	...DateTimePicketSmokeTests,
-	withConfig({locale: 'ar-SA'}, DateTimePicketSmokeTests), // RTL
-	withConfig({locale: 'ta-IN'}, DateTimePicketSmokeTests) // long meridiem characters
+	...withConfig({locale: 'ar-SA'}, DateTimePicketSmokeTests), // RTL
+	...withConfig({locale: 'ta-IN'}, DateTimePicketSmokeTests) // long meridiem characters
 ];
 
 export default DateTimePickerTests;

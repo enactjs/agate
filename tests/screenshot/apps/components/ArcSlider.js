@@ -9,7 +9,7 @@ const ArcSliderSmokeTests = [
 ];
 
 const ArcSliderTests = [
-	ArcSliderSmokeTests,
+	...ArcSliderSmokeTests,
 	...withConfig({focus: true}, ArcSliderSmokeTests) // Focus
 ];
 

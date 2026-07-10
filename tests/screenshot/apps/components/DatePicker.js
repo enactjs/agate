@@ -9,7 +9,7 @@ const DatePickerSmokeTests = [
 
 const DatePickerTests = [
 	...DatePickerSmokeTests,
-	withConfig({locale: 'ar-SA'}, DatePickerSmokeTests) // RTL
+	...withConfig({locale: 'ar-SA'}, DatePickerSmokeTests) // RTL
 ];
 
 export default DatePickerTests;
