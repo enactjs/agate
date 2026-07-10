@@ -14,7 +14,7 @@ const DropdownSmokeTests = [
 	</div>,
 	<Dropdown direction="above" open title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
 	<Dropdown defaultSelected={1} open>{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
-	<Dropdown disabled open title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>,
+	<Dropdown disabled open title="Select your option">{['Option 1', 'Option 2', 'Option 3']}</Dropdown>
 ];
 
 const DropdownWithDifferentWidthsTests = [

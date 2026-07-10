@@ -11,13 +11,13 @@ const BodyTextSmokeTests = [
 const BodyTextTallGlyphTests = [
 	<BodyText>{TallglyphMultiScript}</BodyText>,
 	<BodyText>পারেন।</BodyText>
-]
+];
 
 const BodyTextTests = [
 	...BodyTextSmokeTests,
 	withConfig({locale: 'ar-Sa'}, BodyTextSmokeTests),
 	withConfig({locale: TALLGLYPH_LOCALES}, BodyTextTallGlyphTests)
 
-]
+];
 
 export default BodyTextTests;

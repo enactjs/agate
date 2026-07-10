@@ -83,7 +83,7 @@ const ButtonTests = [
 		...ButtonSmokeTests,
 		...ButtonIconTests,
 		...ButtonSelectedTests,
-		...ButtonWithTallglyphTests,
+		...ButtonWithTallglyphTests
 	]),
 
 	// *************************************************************
@@ -107,7 +107,7 @@ const ButtonTests = [
 		...ButtonSmokeTests,
 		...ButtonIconTests,
 		...ButtonSelectedTests,
-		...ButtonWithTallglyphTests,
+		...ButtonWithTallglyphTests
 	])
 ];
 

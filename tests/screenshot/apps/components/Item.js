@@ -52,7 +52,7 @@ const ItemAdditionalTests = [
 	<Item centered label="label below" labelPosition="below" slotBefore={slotBeforeIcon} slotAfter={slotAfterIcon}>Hello Item</Item>,
 	<Item centered label="label above" labelPosition="above" slotBefore={slotBeforeIcon} slotAfter={slotAfterIcon}>Hello Item</Item>,
 	<Item centered label="label before" labelPosition="before" slotBefore={slotBeforeIcon} slotAfter={slotAfterIcon}>Hello Item</Item>,
-	<Item centered label="label after" labelPosition="after" slotBefore={slotBeforeIcon} slotAfter={slotAfterIcon}>Hello Item</Item>,
+	<Item centered label="label after" labelPosition="after" slotBefore={slotBeforeIcon} slotAfter={slotAfterIcon}>Hello Item</Item>
 ];
 
 const ItemTests = [

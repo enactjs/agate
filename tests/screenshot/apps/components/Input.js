@@ -61,7 +61,7 @@ const InputAdditionalTests = [
 	<Input value="Simple value" clearButton iconAfter="happyface" size="small" disabled />,
 	<Input value="Simple value" clearButton iconBefore="happyface" iconAfter="happyface" size="small" />,
 	<Input value="Simple value" clearButton iconBefore="happyface" iconAfter="happyface" size="small" disabled />,
-	<Input value="Simple value" iconAfter="happyface" size="small" />,
+	<Input value="Simple value" iconAfter="happyface" size="small" />
 ];
 
 const InputTests = [

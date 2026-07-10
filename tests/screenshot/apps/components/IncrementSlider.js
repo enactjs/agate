@@ -2,7 +2,7 @@ import IncrementSlider from '../../../../IncrementSlider';
 
 import {withConfig} from './utils';
 
-const IncrementSliderSmokeTests =[
+const IncrementSliderSmokeTests = [
 	<IncrementSlider />,
 	<IncrementSlider defaultValue={50} />,
 	<IncrementSlider value={50} />,
@@ -27,7 +27,7 @@ const IncrementSliderSmokeTests =[
 	<IncrementSlider backgroundProgress={0.25} value={75} progressAnchor={0.5} />,
 	<IncrementSlider backgroundProgress={0.75} value={25} progressAnchor={0.5} />,
 	<IncrementSlider backgroundProgress={0.1} value={25} progressAnchor={0.2} />
-]
+];
 
 const IncrementSliderVerticalTests = [
 	<IncrementSlider orientation="vertical" />,
@@ -39,7 +39,7 @@ const IncrementSliderVerticalTests = [
 	<IncrementSlider orientation="vertical" backgroundProgress={0.5} value={25} />,
 	<IncrementSlider orientation="vertical" backgroundProgress={0.25} value={75} progressAnchor={0.5} />,
 	<IncrementSlider orientation="vertical" backgroundProgress={0.75} value={25} progressAnchor={0.5} />,
-	<IncrementSlider orientation="vertical" backgroundProgress={0.1} value={25} progressAnchor={0.2} />,
+	<IncrementSlider orientation="vertical" backgroundProgress={0.1} value={25} progressAnchor={0.2} />
 ];
 
 const IncrementSliderRTLTests = [

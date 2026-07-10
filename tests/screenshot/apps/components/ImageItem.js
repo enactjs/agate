@@ -15,15 +15,15 @@ const ImageItemSmokeTests = [
 ];
 
 const ImageItemTests = [
-	...ImageItemSmokeTests.map(test => {
+	...ImageItemSmokeTests.map(imageTest => {
 		return (
 			<div style={{height: '100%'}}>
 				<div style={style}>
-					{test}
+					{imageTest}
 				</div>
 			</div>
-		)
-	}),
+		);
+	})
 ];
 
 export default ImageItemTests;

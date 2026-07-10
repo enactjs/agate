@@ -62,7 +62,7 @@ const VirtualGridListSmokeTests = [
 			minWidth: ri.scale(180),
 			minHeight: ri.scale(270)
 		}}
-	/>,
+	/>
 ];
 
 const VirtualGridListAdditionalTests = [

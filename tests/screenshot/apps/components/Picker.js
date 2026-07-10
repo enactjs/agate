@@ -17,7 +17,7 @@ const PickerSmokeTests = [
 	<Picker>{pickerList.temperatures}</Picker>,
 	<Picker disabled>{pickerList.temperatures}</Picker>,
 	<Picker value={1}>{pickerList.temperatures}</Picker>,
-	<Picker orientation="horizontal">{pickerList.temperatures}</Picker>,
+	<Picker orientation="horizontal">{pickerList.temperatures}</Picker>
 ];
 
 const PickerAdditionalTests = [
