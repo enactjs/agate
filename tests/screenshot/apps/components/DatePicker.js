@@ -1,17 +1,15 @@
 import DatePicker from '../../../../DatePicker';
 
-const DatePickerTests = [
+import {withConfig} from './utils';
+
+const DatePickerSmokeTests = [
 	<DatePicker value={new Date(2022, 6, 30)} />,
-	<DatePicker disabled value={new Date(2022, 6, 30)} />,
-	// RTL
-	{
-		locale: 'ar-SA',
-		component: <DatePicker value={new Date(2022, 6, 30)} />
-	},
-	{
-		locale: 'ar-SA',
-		component: <DatePicker disabled value={new Date(2022, 6, 30)} />
-	}
+	<DatePicker disabled value={new Date(2022, 6, 30)} />
+];
+
+const DatePickerTests = [
+	...DatePickerSmokeTests,
+	withConfig({locale: 'ar-SA'}, DatePickerSmokeTests) // RTL
 ];
 
 export default DatePickerTests;
