@@ -8,9 +8,15 @@ const ArcSliderSmokeTests = [
 	<ArcSlider disabled endAngle={250} startAngle={30} value={60} />
 ];
 
+const ArcSliderFocusedSmokeTests = [
+	<ArcSlider />,
+	<ArcSlider endAngle={250} startAngle={30} value={50} />,
+	<ArcSlider disabled endAngle={250} startAngle={30} value={60} />
+];
+
 const ArcSliderTests = [
 	...ArcSliderSmokeTests,
-	...withConfig({focus: true}, ArcSliderSmokeTests) // Focus
+	...withConfig({focus: true}, ArcSliderFocusedSmokeTests) // Focus
 ];
 
 export default ArcSliderTests;

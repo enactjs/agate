@@ -64,10 +64,23 @@ const InputAdditionalTests = [
 	<Input value="Simple value" iconAfter="happyface" size="small" />
 ];
 
+const InputFocusedSmokeTests = [
+	<Input placeholder="Focused Placeholder Input" />,
+	<Input placeholder="Focused Placeholder Input" disabled />,
+	<Input value="Focused Simple value" />,
+	<Input value="Focused Simple value" disabled />,
+	<Input value="Focused Simple value" clearButton />,
+	<div>
+		<Input invalid invalidMessage="Focused Custom invalid message" style={{margin:'100px'}} />
+	</div>,
+	<Input value="Focused Simple value" clearButton iconBefore="happyface" iconAfter="happyface" />,
+	<Input value="Focused Simple value" clearButton iconBefore="happyface" iconAfter="happyface" disabled />
+];
+
 const InputTests = [
 	...InputSmokeTests,
 	...InputAdditionalTests,
-	...withConfig({focus: true}, InputSmokeTests), // Focus
+	...withConfig({focus: true}, InputFocusedSmokeTests), // Focus
 	...withConfig({locale: 'ar-SA'}, InputSmokeTests) // RTL
 ];
 
