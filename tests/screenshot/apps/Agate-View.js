@@ -135,7 +135,9 @@ class App extends ReactComponent {
 	}
 }
 
-let WrappedAgateApp = ThemeDecorator(App);
+// Declared at module scope, so the components are not created during render (react-hooks/static-components).
+const WrappedAgateAppAutoFocus = ThemeDecorator({noAutoFocus: false}, App);
+const WrappedAgateAppNoAutoFocus = ThemeDecorator({noAutoFocus: true}, App);
 
 const ExportedAgateApp = (props) => {
 
@@ -152,9 +154,7 @@ const ExportedAgateApp = (props) => {
 		noAutoFocus = !agateComponents[props.component][props.testId].focus;
 	}
 
-	useEffect(() => {
-		WrappedAgateApp = ThemeDecorator({noAutoFocus}, App);
-	});
+	const WrappedAgateApp = noAutoFocus ? WrappedAgateAppNoAutoFocus : WrappedAgateAppAutoFocus;
 
 	useEffect(() => {
 		document.querySelector('#root > div').classList.add('spotlight-input-key');
