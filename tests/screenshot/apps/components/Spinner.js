@@ -1,7 +1,7 @@
 import ri from '@enact/ui/resolution';
 import Spinner from '../../../../Spinner';
 
-const Wrapper = (children) => (
+const Wrapper = ({children}) => (
 	<div
 		style={{
 			outline: 'teal dashed 1px',

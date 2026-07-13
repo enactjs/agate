@@ -16,7 +16,7 @@ const withConfig = (config, tests) => {
 	});
 };
 
-const TALLGLYPH_LOCALES = ['vi-VN'];
+const TALLGLYPH_LOCALES = 'vi-VN';
 
 const TallglyphMultiScript = 'ฟิ้  ไั  ஒ  து';
 
