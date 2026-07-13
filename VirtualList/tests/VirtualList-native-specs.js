@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import {act, fireEvent, render, screen} from '@testing-library/react';
+import {act, createEvent, fireEvent, render, screen} from '@testing-library/react';
 
 import Item from '../../Item';
 import VirtualList from '../VirtualList';
@@ -208,17 +208,13 @@ describe('VirtualList with native `scrollMode`', () => {
 
 			// Wheeling in native mode disables the spotlight container, which registers the global
 			// keydown listener (handleGlobalKeyDown) on the document.
-			act(() => {
-				fireEvent.wheel(screen.getByRole('list'), {deltaY: 100});
-			});
+			fireEvent.wheel(screen.getByRole('list'), {deltaY: 100});
 
-			const keyDownEvent = new KeyboardEvent('keydown', {bubbles: true, cancelable: true, keyCode: 13});
+			const keyDownEvent = createEvent.keyDown(document, {keyCode: 13});
 			const preventDefault = jest.spyOn(keyDownEvent, 'preventDefault');
 			const stopPropagation = jest.spyOn(keyDownEvent, 'stopPropagation');
 
-			act(() => {
-				document.dispatchEvent(keyDownEvent);
-			});
+			fireEvent(document, keyDownEvent);
 
 			expect(preventDefault).toHaveBeenCalled();
 			expect(stopPropagation).toHaveBeenCalled();
