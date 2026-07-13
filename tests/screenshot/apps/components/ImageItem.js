@@ -21,15 +21,7 @@ const ImageItemSmokeTests = [
 ];
 
 const ImageItemTests = [
-	...ImageItemSmokeTests.map(imageTest => {
-		return (
-			<div style={{height: '100%'}}>
-				<div style={style}>
-					{imageTest}
-				</div>
-			</div>
-		);
-	})
+	...ImageItemSmokeTests
 ];
 
 export default ImageItemTests;
