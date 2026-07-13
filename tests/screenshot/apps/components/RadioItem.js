@@ -35,7 +35,7 @@ const RadioItemAdditionalTests = [
 const RadioItemTests = [
 	...RadioItemsSmokeTests,
 	...RadioItemAdditionalTests,
-	...withConfig({locale: 'ar-SA'}, ...RadioItemsSmokeTests) // locale = ar-SA
+	...withConfig({locale: 'ar-SA'}, RadioItemsSmokeTests) // locale = ar-SA
 ];
 
 export default RadioItemTests;
