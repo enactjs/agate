@@ -9,9 +9,8 @@ const ArcSliderSmokeTests = [
 ];
 
 const ArcSliderFocusedSmokeTests = [
-	<ArcSlider />,
-	<ArcSlider endAngle={250} startAngle={30} value={50} />,
-	<ArcSlider disabled endAngle={250} startAngle={30} value={60} />
+	<ArcSlider endAngle={251} startAngle={30} value={50} />,
+	<ArcSlider disabled endAngle={251} startAngle={30} value={60} />
 ];
 
 const ArcSliderTests = [

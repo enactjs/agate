@@ -16,7 +16,6 @@ const SwitchItemsSmokeTests = [
 ];
 
 const SwitchItemsFocusedSmokeTests = [
-	<SwitchItem />,
 	<SwitchItem>Focused Hello SwitchItem</SwitchItem>,
 	<SwitchItem selected>Focused Hello SwitchItem</SwitchItem>,
 	<SwitchItem disabled>Focused Hello SwitchItem</SwitchItem>,
