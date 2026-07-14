@@ -13,7 +13,12 @@ const InputSmokeTests = [
 		<Input invalid invalidMessage="Custom invalid message" style={{margin:'100px'}} />
 	</div>,
 	<Input value="Simple value" clearButton iconBefore="happyface" iconAfter="happyface" />,
-	<Input value="Simple value" clearButton iconBefore="happyface" iconAfter="happyface" disabled />
+	<Input value="Simple value" clearButton iconBefore="happyface" iconAfter="happyface" disabled />,
+
+	// Small input
+	<Input value="Simple value" size="small" />,
+	<Input value="Simple value" iconBefore="happyface" size="small" />,
+	<Input value="Simple value" iconAfter="happyface" size="small" />
 ];
 
 const InputAdditionalTests = [
@@ -42,11 +47,6 @@ const InputAdditionalTests = [
 	<Input value="Simple value" iconBefore="happyface" />,
 	<Input value="Simple value" iconAfter="happyface" />,
 
-	// Small input
-	<Input value="Simple value" size="small" />,
-	<Input value="Simple value" iconBefore="happyface" size="small" />,
-	<Input value="Simple value" iconAfter="happyface" size="small" />,
-
 	// Input with clear input button
 	<Input value="Simple value" clearButton disabled />,
 	<Input value="Simple value" clearButton size="small" />,
@@ -74,7 +74,12 @@ const InputFocusedSmokeTests = [
 		<Input invalid invalidMessage="Focused Custom invalid message" style={{margin:'100px'}} />
 	</div>,
 	<Input value="Focused Simple value" clearButton iconBefore="happyface" iconAfter="happyface" />,
-	<Input value="Focused Simple value" clearButton iconBefore="happyface" iconAfter="happyface" disabled />
+	<Input value="Focused Simple value" clearButton iconBefore="happyface" iconAfter="happyface" disabled />,
+
+	// Small input
+	<Input value="Focused Simple value" size="small" />,
+	<Input value="Focused Simple value" iconBefore="happyface" size="small" />,
+	<Input value="Focused Simple value" iconAfter="happyface" size="small" />
 ];
 
 const InputTests = [

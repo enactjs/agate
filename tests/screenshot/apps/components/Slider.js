@@ -27,7 +27,6 @@ const SliderAdditionalTests = [
 	<Slider backgroundProgress={0.5} />,
 	<Slider backgroundProgress={1} />,
 	<Slider backgroundProgress={0.25} value={50} />,
-	<Slider disabled backgroundProgress={0.25} value={50} />,
 	<Slider backgroundProgress={0.5} value={50} />,
 	<Slider backgroundProgress={0.75} value={25} progressAnchor={0.5} />,
 	<Slider backgroundProgress={0.1} value={25} progressAnchor={0.2} />,

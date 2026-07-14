@@ -1,5 +1,6 @@
 import FanSpeedControl from '../../../../FanSpeedControl';
-import {withConfig} from "./utils";
+
+import {withConfig} from './utils';
 
 const FanSpeedControlSmokeTests = [
 	<FanSpeedControl min={1} />,

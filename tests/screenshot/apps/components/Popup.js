@@ -1,6 +1,7 @@
 import Popup from '../../../../Popup';
 import {Button} from '../../../../Button';
-import {withConfig} from "./utils";
+
+import {withConfig} from './utils';
 
 const children = (
 	<>
