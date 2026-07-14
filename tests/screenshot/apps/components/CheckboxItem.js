@@ -3,7 +3,7 @@ import Icon from '../../../../Icon';
 
 import {withConfig} from './utils';
 
-const CheckboxSmokeTests = [
+const CheckboxItemSmokeTests = [
 	<CheckboxItem />,
 	<CheckboxItem>CheckboxItem</CheckboxItem>, 			// not selected
 	<CheckboxItem disabled>CheckboxItem</CheckboxItem>,	// not selected
@@ -17,18 +17,18 @@ const CheckboxSmokeTests = [
 	<CheckboxItem selected disabled indeterminate>CheckboxItem</CheckboxItem>
 ];
 
-const CheckboxSlotBeforeTests = [
+const CheckboxItemSlotBeforeTests = [
 	<CheckboxItem><Icon slot="slotBefore">home</Icon>CheckboxItem</CheckboxItem>,
 	<CheckboxItem selected><Icon slot="slotBefore">home</Icon>CheckboxItem Checked</CheckboxItem>,
 	<CheckboxItem indeterminate><Icon slot="slotBefore">home</Icon>CheckboxItem</CheckboxItem>
 ];
 
 const CheckboxItemTests = [
-	...CheckboxSmokeTests,
-	...CheckboxSlotBeforeTests, // Icon slotBefore
+	...CheckboxItemSmokeTests,
+	...CheckboxItemSlotBeforeTests, // Icon slotBefore
 
 	// *************************************************************
 	// locale = 'ar-SA'
-	...withConfig({locale: 'ar-SA'}, CheckboxSmokeTests)
+	...withConfig({locale: 'ar-SA'}, CheckboxItemSmokeTests)
 ];
 export default CheckboxItemTests;
