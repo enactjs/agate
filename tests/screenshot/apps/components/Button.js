@@ -1,6 +1,6 @@
 import Button from '../../../../Button';
 
-import {TallglyphKhmer, TallglyphLatin, TallglyphMultiScript, withConfig} from './utils';
+import {TallglyphHindi, TallglyphKhmer, TallglyphLatin, TallglyphMultiScript, withConfig} from './utils';
 
 const ButtonSmokeTests = [
 	<Button>Click me</Button>,
@@ -69,7 +69,8 @@ const ButtonWithTallglyphTests = [
 	<Button>{TallglyphMultiScript}</Button>,
 	<Button>{TallglyphLatin}</Button>,
 	<Button>Bản văn</Button>,
-	<Button>{TallglyphKhmer}</Button>
+	<Button>{TallglyphKhmer}</Button>,
+	<Button>{TallglyphHindi}</Button>
 ];
 
 const ButtonFocusedSmokeTests = [
@@ -139,6 +140,7 @@ const ButtonFocusedWithTallglyphTests = [
 	<Button>Focused {TallglyphMultiScript}</Button>,
 	<Button>Focused {TallglyphLatin}</Button>,
 	<Button>Focused Bản văn</Button>,
+	<Button>Focused {TallglyphHindi}</Button>,
 	<Button>Focused {TallglyphKhmer}</Button>
 ];
 
