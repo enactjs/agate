@@ -41,6 +41,7 @@ const useSpottable = (props, instances) => {
 		lastFocusedIndex: null,
 		pause: new Pause('VirtualListBasic')
 	});
+	const handleGlobalKeyDownRef = useRef(null);
 
 	const {pause} = mutableRef.current;
 
@@ -102,23 +103,24 @@ const useSpottable = (props, instances) => {
 			scrollContainerRef.current.dataset.spotlightContainerDisabled = bool;
 
 			if (bool) {
-				addGlobalKeyDownEventListener(handleGlobalKeyDown);
+				addGlobalKeyDownEventListener(handleGlobalKeyDownRef.current);
 			} else {
 				removeGlobalKeyDownEventListener();
 			}
 		}
-	}, [addGlobalKeyDownEventListener, handleGlobalKeyDown, removeGlobalKeyDownEventListener, scrollContainerRef]);
+	}, [addGlobalKeyDownEventListener, removeGlobalKeyDownEventListener, scrollContainerRef]);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	function handleGlobalKeyDown (ev) {
-		// To prevent scrolling by native scroller
-		if (scrollMode === 'native') {
-			ev.preventDefault();
-			ev.stopPropagation();
-		}
+	useEffect(() => {
+		handleGlobalKeyDownRef.current = (ev) => {
+			// To prevent scrolling by native scroller
+			if (scrollMode === 'native') {
+				ev.preventDefault();
+				ev.stopPropagation();
+			}
 
-		setContainerDisabled(false);
-	}
+			setContainerDisabled(false);
+		};
+	}, [scrollMode, setContainerDisabled]);
 
 	useEffect(() => {
 		return () => {
