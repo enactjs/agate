@@ -1,8 +1,9 @@
 import CheckboxItem from '../../../../CheckboxItem';
 import Icon from '../../../../Icon';
 
+import {withConfig} from './utils';
 
-const CheckboxItemTests = [
+const CheckboxItemSmokeTests = [
 	<CheckboxItem />,
 	<CheckboxItem>CheckboxItem</CheckboxItem>, 			// not selected
 	<CheckboxItem disabled>CheckboxItem</CheckboxItem>,	// not selected
@@ -13,50 +14,21 @@ const CheckboxItemTests = [
 	<CheckboxItem indeterminate indeterminateIcon="lock">CheckboxItem</CheckboxItem>, 	// not selected
 	<CheckboxItem disabled indeterminate>CheckboxItem</CheckboxItem>,	// not selected
 	<CheckboxItem selected indeterminate>CheckboxItem</CheckboxItem>,
-	<CheckboxItem selected disabled indeterminate>CheckboxItem</CheckboxItem>,
+	<CheckboxItem selected disabled indeterminate>CheckboxItem</CheckboxItem>
+];
 
-	// Icon slotBefore
+const CheckboxItemSlotBeforeTests = [
 	<CheckboxItem><Icon slot="slotBefore">home</Icon>CheckboxItem</CheckboxItem>,
 	<CheckboxItem selected><Icon slot="slotBefore">home</Icon>CheckboxItem Checked</CheckboxItem>,
-	<CheckboxItem indeterminate><Icon slot="slotBefore">home</Icon>CheckboxItem</CheckboxItem>,
+	<CheckboxItem indeterminate><Icon slot="slotBefore">home</Icon>CheckboxItem</CheckboxItem>
+];
+
+const CheckboxItemTests = [
+	...CheckboxItemSmokeTests,
+	...CheckboxItemSlotBeforeTests, // Icon slotBefore
 
 	// *************************************************************
 	// locale = 'ar-SA'
-	{
-		locale: 'ar-SA',
-		component: <CheckboxItem>CheckboxItem</CheckboxItem>
-	},
-	{
-		locale: 'ar-SA',
-		component: <CheckboxItem disabled>CheckboxItem</CheckboxItem>
-	},
-	{
-		locale: 'ar-SA',
-		component: <CheckboxItem selected>CheckboxItem Checked</CheckboxItem>
-	},
-	{
-		locale: 'ar-SA',
-		component: <CheckboxItem selected disabled>CheckboxItem Checked</CheckboxItem>
-	},
-	{
-		locale: 'ar-SA',
-		component: <CheckboxItem indeterminate>CheckboxItem Checked</CheckboxItem>
-	},
-	{
-		locale: 'ar-SA',
-		component: <CheckboxItem disabled indeterminate>CheckboxItem Checked</CheckboxItem>
-	},
-	{
-		locale: 'ar-SA',
-		component: <CheckboxItem selected indeterminate>CheckboxItem Checked</CheckboxItem>
-	},
-	{
-		locale: 'ar-SA',
-		component: <CheckboxItem selected disabled indeterminate>CheckboxItem Checked</CheckboxItem>
-	},
-	{
-		locale: 'ar-SA',
-		component: <CheckboxItem indeterminate indeterminateIcon="lock">CheckboxItem Checked</CheckboxItem>
-	}
+	...withConfig({locale: 'ar-SA'}, CheckboxItemSmokeTests)
 ];
 export default CheckboxItemTests;

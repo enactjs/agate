@@ -9,41 +9,29 @@ const audioFiles = [
 	'https://sampleswap.org/mp3/artist/47067/DJ-Masque_Dont-Forget-To-Be-Yourself-160.mp3'
 ];
 
+const children = audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />));
+
 const MediaPlayerTests = [
 	<MediaPlayer>
-		{
-			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
-		}
+		{children}
 	</MediaPlayer>,
 	<MediaPlayer disabled>
-		{
-			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
-		}
+		{children}
 	</MediaPlayer>,
 	<MediaPlayer paused>
-		{
-			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
-		}
+		{children}
 	</MediaPlayer>,
 	<MediaPlayer shuffle>
-		{
-			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
-		}
+		{children}
 	</MediaPlayer>,
 	<MediaPlayer type="tiny">
-		{
-			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
-		}
+		{children}
 	</MediaPlayer>,
 	<MediaPlayer disabled type="tiny">
-		{
-			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
-		}
+		{children}
 	</MediaPlayer>,
 	<MediaPlayer paused type="tiny">
-		{
-			audioFiles.map((audioFile, index) => (<source key={index} src={audioFile} type="audio/mp3" />))
-		}
+		{children}
 	</MediaPlayer>
 ];
 

@@ -1,7 +1,27 @@
 import Popup from '../../../../Popup';
 import {Button} from '../../../../Button';
 
-const PopupTests = [
+import {withConfig} from './utils';
+
+const children = (
+	<>
+		Popup!
+		<buttons>
+			<Button>OK</Button>
+			<Button>Cancel</Button>
+		</buttons>
+	</>
+);
+
+const PopupSmokeTests = [
+	<Popup open title="Title">Popup!</Popup>,
+	<Popup open position="fullscreen" title="Title">Popup!</Popup>,
+	<Popup open position="left" title="Title">Popup!</Popup>,
+	<Popup open position="right" title="Title">Popup!</Popup>,
+	<Popup open position="top" title="Title">Popup!</Popup>
+];
+
+const PopupAdditionalTests = [
 	<Popup open>Popup!</Popup>,
 	<Popup closeButton open>Popup!</Popup>,
 	<Popup centered open>Popup!</Popup>,
@@ -10,115 +30,51 @@ const PopupTests = [
 	<Popup open type="slide">Popup!</Popup>,
 	<Popup open scrimType="none">Popup!</Popup>,
 	<Popup open scrimType="transparent">Popup!</Popup>,
-	<Popup open title="Title">Popup!</Popup>,
 	<Popup open position="fullscreen">Popup!</Popup>,
-	<Popup open position="fullscreen" title="Title">Popup!</Popup>,
 	<Popup open position="left">Popup!</Popup>,
-	<Popup open position="left" title="Title">Popup!</Popup>,
 	<Popup open position="right">Popup!</Popup>,
-	<Popup open position="right" title="Title">Popup!</Popup>,
 	<Popup open position="top">Popup!</Popup>,
-	<Popup open position="top" title="Title">Popup!</Popup>,
+
+	// With children
 	<Popup open>
-		Popup!
-		<buttons>
-			<Button>OK</Button>
-			<Button>Cancel</Button>
-		</buttons>
+		{children}
 	</Popup>,
 	<Popup open title="Title">
-		Popup!
-		<buttons>
-			<Button>OK</Button>
-			<Button>Cancel</Button>
-		</buttons>
+		{children}
 	</Popup>,
 	<Popup open position="bottom">
-		Popup!
-		<buttons>
-			<Button>OK</Button>
-			<Button>Cancel</Button>
-		</buttons>
+		{children}
 	</Popup>,
 	<Popup open position="fullscreen">
-		Popup!
-		<buttons>
-			<Button>OK</Button>
-			<Button>Cancel</Button>
-		</buttons>
+		{children}
 	</Popup>,
 	<Popup open position="fullscreen" title="Title">
-		Popup!
-		<buttons>
-			<Button>OK</Button>
-			<Button>Cancel</Button>
-		</buttons>
+		{children}
 	</Popup>,
 	<Popup open position="left">
-		Popup!
-		<buttons>
-			<Button>OK</Button>
-			<Button>Cancel</Button>
-		</buttons>
+		{children}
 	</Popup>,
 	<Popup open position="left" title="Title">
-		Popup!
-		<buttons>
-			<Button>OK</Button>
-			<Button>Cancel</Button>
-		</buttons>
+		{children}
 	</Popup>,
 	<Popup open position="right">
-		Popup!
-		<buttons>
-			<Button>OK</Button>
-			<Button>Cancel</Button>
-		</buttons>
+		{children}
 	</Popup>,
 	<Popup open position="right" title="Title">
-		Popup!
-		<buttons>
-			<Button>OK</Button>
-			<Button>Cancel</Button>
-		</buttons>
+		{children}
 	</Popup>,
 	<Popup open position="top">
-		Popup!
-		<buttons>
-			<Button>OK</Button>
-			<Button>Cancel</Button>
-		</buttons>
+		{children}
 	</Popup>,
 	<Popup open position="top" title="Title">
-		Popup!
-		<buttons>
-			<Button>OK</Button>
-			<Button>Cancel</Button>
-		</buttons>
-	</Popup>,
+		{children}
+	</Popup>
+];
 
-	// *************************************************************
-	// locale = 'ar-SA'
-	{
-		locale: 'ar-SA',
-		component: <Popup open title="Title">Popup!</Popup>
-	},
-	{
-		locale: 'ar-SA',
-		component: <Popup open position="fullscreen" title="Title">Popup!</Popup>
-	},
-	{
-		locale: 'ar-SA',
-		component: <Popup open position="left" title="Title">Popup!</Popup>
-	},
-	{
-		locale: 'ar-SA',
-		component: <Popup open position="right" title="Title">Popup!</Popup>
-	},
-	{
-		locale: 'ar-SA',
-		component: <Popup open position="top" title="Title">Popup!</Popup>
-	}
+const PopupTests = [
+	...PopupSmokeTests,
+	...PopupAdditionalTests,
+	...withConfig({locale: 'ar-SA'}, PopupSmokeTests) // locale = 'ar-SA'
 ];
 
 export default PopupTests;

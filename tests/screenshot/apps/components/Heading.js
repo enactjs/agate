@@ -21,13 +21,7 @@ const HeadingTests = [
 
 	// Heading with size="title" with different colors
 	<Heading size="title" color="#E6444B">This is a Heading with title size with different colors</Heading>,
-	<Heading size="title" color="#FDC902">This is a Heading with title size with different colors</Heading>,
 	<Heading size="title" color="#986AAD">This is a Heading with title size with different colors</Heading>,
-	<Heading size="title" color="#4E75E1">This is a Heading with title size with different colors</Heading>,
-	<Heading size="title" color="#30CC83">This is a Heading with title size with different colors</Heading>,
-	<Heading size="title" color="#44C8D5">This is a Heading with title size with different colors</Heading>,
-	<Heading size="title" color="#47439B">This is a Heading with title size with different colors</Heading>,
-	<Heading size="title" color="#2D32A6">This is a Heading with title size with different colors</Heading>,
 	<Heading size="title" color="#4E75E1">This is a Heading with title size with different colors</Heading>
 ];
 

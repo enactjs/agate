@@ -1,5 +1,7 @@
 import Picker from '../../../../Picker';
 
+import {withConfig} from './utils';
+
 const pickerList = {
 	temperatures: [
 		'LO',
@@ -11,30 +13,25 @@ const pickerList = {
 	]
 };
 
-const PickerTests = [
+const PickerSmokeTests = [
 	<Picker>{pickerList.temperatures}</Picker>,
 	<Picker disabled>{pickerList.temperatures}</Picker>,
 	<Picker value={1}>{pickerList.temperatures}</Picker>,
-	<Picker orientation="horizontal">{pickerList.temperatures}</Picker>,
-	// RTL
-	{
-		locale: 'ar-SA',
-		component: <Picker>{pickerList.temperatures}</Picker>
-	},
-	{
-		locale: 'ar-SA',
-		component: <Picker disabled>{pickerList.temperatures}</Picker>
-	},
-	{
-		locale: 'ar-SA',
-		component: <Picker orientation="horizontal">{pickerList.temperatures}</Picker>
-	},
+	<Picker orientation="horizontal">{pickerList.temperatures}</Picker>
+];
 
+const PickerAdditionalTests = [
 	// Wrap
 	<Picker wrap>{pickerList.temperatures}</Picker>,
 	<Picker disabled wrap>{pickerList.temperatures}</Picker>,
 	<Picker value={0} wrap>{pickerList.temperatures}</Picker>,
 	<Picker orientation="horizontal" wrap>{pickerList.temperatures}</Picker>
+];
+
+const PickerTests = [
+	...PickerSmokeTests,
+	...PickerAdditionalTests,
+	...withConfig({locale: 'ar-SA'}, PickerSmokeTests)
 ];
 
 export default PickerTests;
