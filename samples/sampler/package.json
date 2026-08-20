@@ -13,7 +13,8 @@
     "pack": "storybook build -c .storybook -o dist",
     "pack-qa": "storybook build -c .qa-storybook -o dist",
     "serve": "storybook dev -p 8080 -c .storybook --ci",
-    "serve-qa": "storybook dev -p 8080 -c .qa-storybook --ci"
+    "serve-qa": "storybook dev -p 8080 -c .qa-storybook --ci",
+    "postinstall": "patch-package"
   },
   "license": "Apache-2.0",
   "enact": {
@@ -30,6 +31,7 @@
     "@storybook/react-webpack5": "^10.4.6",
     "dotenv": "^17.4.2",
     "ilib": "^14.22.0",
+    "patch-package": "^8.0.1",
     "prop-types": "^15.8.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",

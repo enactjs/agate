@@ -50,6 +50,9 @@ if (process.env.SKINS) {
 }
 
 export const parameters = {
+	controls: {
+		disableSaveFromUI: true
+	},
 	options: {
 		storySort: {
 			method: 'alphabetical'
