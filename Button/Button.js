@@ -329,6 +329,7 @@ const IconButtonDecorator = hoc((config, Wrapped) => {
  *
  * @hoc
  * @memberof agate/Button
+ * @mixes agate/TooltipDecorator.TooltipDecorator
  * @mixes ui/Button.ButtonDecorator
  * @mixes spotlight/Spottable.Spottable
  * @mixes agate/Skinnable.Skinnable
