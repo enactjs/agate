@@ -1,5 +1,3 @@
-/* global MutationObserver ResizeObserver */
-
 /**
  * Agate styled tooltip components.
  *
