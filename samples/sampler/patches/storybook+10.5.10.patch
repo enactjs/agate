@@ -1,0 +1,22 @@
+diff --git a/node_modules/storybook/dist/manager/globals-runtime.js b/node_modules/storybook/dist/manager/globals-runtime.js
+index ace8016..7b546ed 100644
+--- a/node_modules/storybook/dist/manager/globals-runtime.js
++++ b/node_modules/storybook/dist/manager/globals-runtime.js
+@@ -61348,7 +61348,7 @@ var splitPathRegex = /\/([^/]+)\/(?:(.*)_)?([^/]+)?/, parsePath2 = (0, import_me
+     let diff2 = deepDiff2(value?.[key], update2?.[key]);
+     return diff2 === DEEPLY_EQUAL2 ? acc : Object.assign(acc, { [key]: diff2 });
+   }, {}) : update2;
+-}, VALIDATION_REGEXP = /^[a-zA-Z0-9 _-]*$/, NUMBER_REGEXP = /^-?[0-9]+(\.[0-9]+)?$/, HEX_REGEXP = /^#([a-f0-9]{3,4}|[a-f0-9]{6}|[a-f0-9]{8})$/i, COLOR_REGEXP = /^(rgba?|hsla?)\(([0-9]{1,3}),\s?([0-9]{1,3})%?,\s?([0-9]{1,3})%?,?\s?([0-9](\.[0-9]{1,2})?)?\)$/i, validateArgs = (key = "", value) => key === null || key === "" || !VALIDATION_REGEXP.test(key) ? !1 : value == null || value instanceof Date || typeof value == "number" || typeof value == "boolean" ? !0 : typeof value == "string" ? VALIDATION_REGEXP.test(value) || NUMBER_REGEXP.test(value) || HEX_REGEXP.test(value) || COLOR_REGEXP.test(value) : Array.isArray(value) ? value.every((v3) => validateArgs(key, v3)) : isPlainObject(value) ? Object.entries(value).every(([k, v3]) => validateArgs(k, v3)) : !1, encodeSpecialValues = (value) => value === void 0 ? "!undefined" : value === null ? "!null" : typeof value == "string" ? HEX_REGEXP.test(value) ? `!hex(${value.slice(1)})` : COLOR_REGEXP.test(value) ? `!${value.replace(/[\s%]/g, "")}` : value : typeof value == "boolean" ? `!${value}` : value instanceof Date ? `!date(${value.toISOString()})` : Array.isArray(value) ? value.map(encodeSpecialValues) : isPlainObject(value) ? Object.entries(value).reduce(
++}, VALIDATION_REGEXP = /^[^<>`]*$/, KEY_VALIDATION_REGEXP = /^[a-zA-Z0-9 _-]*$/, NUMBER_REGEXP = /^-?[0-9]+(\.[0-9]+)?$/, HEX_REGEXP = /^#([a-f0-9]{3,4}|[a-f0-9]{6}|[a-f0-9]{8})$/i, COLOR_REGEXP = /^(rgba?|hsla?)\(([0-9]{1,3}),\s?([0-9]{1,3})%?,\s?([0-9]{1,3})%?,?\s?([0-9](\.[0-9]{1,2})?)?\)$/i, validateArgs = (key = "", value) => key === null || key === "" || !KEY_VALIDATION_REGEXP.test(key) ? !1 : value == null || value instanceof Date || typeof value == "number" || typeof value == "boolean" ? !0 : typeof value == "string" ? VALIDATION_REGEXP.test(value) || NUMBER_REGEXP.test(value) || HEX_REGEXP.test(value) || COLOR_REGEXP.test(value) : Array.isArray(value) ? value.every((v3) => validateArgs(key, v3)) : isPlainObject(value) ? Object.entries(value).every(([k, v3]) => validateArgs(k, v3)) : !1, encodeSpecialValues = (value) => value === void 0 ? "!undefined" : value === null ? "!null" : typeof value == "string" ? HEX_REGEXP.test(value) ? `!hex(${value.slice(1)})` : COLOR_REGEXP.test(value) ? `!${value.replace(/[\s%]/g, "")}` : value : typeof value == "boolean" ? `!${value}` : value instanceof Date ? `!date(${value.toISOString()})` : Array.isArray(value) ? value.map(encodeSpecialValues) : isPlainObject(value) ? Object.entries(value).reduce(
+   (acc, [key, val]) => Object.assign(acc, { [key]: encodeSpecialValues(val) }),
+   {}
+ ) : value, decodeKnownQueryChar = (chr) => {
+@@ -63087,7 +63087,7 @@ var parseBoolean = (value) => {
+   provider.channel?.on(SET_CURRENT_STORY, () => updateArgsParam());
+   let handleOrId;
+   return provider.channel?.on(STORY_ARGS_UPDATED, () => {
+-    "requestIdleCallback" in scope.window ? (handleOrId && scope.window.cancelIdleCallback(handleOrId), handleOrId = scope.window.requestIdleCallback(updateArgsParam, { timeout: 1e3 })) : (handleOrId && clearTimeout(handleOrId), setTimeout(updateArgsParam, 100));
++    "requestIdleCallback" in scope.window ? (handleOrId && scope.window.cancelIdleCallback(handleOrId), handleOrId = scope.window.requestIdleCallback(updateArgsParam, { timeout: 100 })) : (handleOrId && clearTimeout(handleOrId), setTimeout(updateArgsParam, 100));
+   }), provider.channel?.on(GLOBALS_UPDATED, ({ userGlobals, initialGlobals: initialGlobals5 }) => {
+     let { path, hash: hash4 = "", queryParams } = api.getUrlState(), globalsString = buildArgsParam(initialGlobals5, merge_default(initialGlobals5, userGlobals));
+     navigateTo(

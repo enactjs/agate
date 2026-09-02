@@ -1,22 +1,16 @@
 import DateTimePicker from '../../../../DateTimePicker';
 
-const DateTimePickerTests = [
+import {withConfig} from './utils';
+
+const DateTimePickerSmokeTests = [
 	<DateTimePicker value={new Date(2022, 6, 30, 1, 12, 30)} />,
-	<DateTimePicker disabled value={new Date(2022, 6, 30, 1, 12, 30)} />,
-	// RTL
-	{
-		locale: 'ar-SA',
-		component: <DateTimePicker value={new Date(2022, 6, 30, 1, 12, 30)} />
-	},
-	{
-		locale: 'ar-SA',
-		component: <DateTimePicker disabled value={new Date(2022, 6, 30, 1, 12, 30)} />
-	},
-	// long meridiem characters
-	{
-		locale: 'ta-IN',
-		component: <DateTimePicker disabled value={new Date(2022, 6, 30, 1, 12, 30)} />
-	}
+	<DateTimePicker disabled value={new Date(2022, 6, 30, 1, 12, 30)} />
+];
+
+const DateTimePickerTests = [
+	...DateTimePickerSmokeTests,
+	...withConfig({locale: 'ar-SA'}, DateTimePickerSmokeTests), // RTL
+	...withConfig({locale: 'ta-IN'}, DateTimePickerSmokeTests) // long meridiem characters
 ];
 
 export default DateTimePickerTests;

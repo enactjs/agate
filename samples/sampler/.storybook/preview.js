@@ -1,8 +1,17 @@
 import {cap} from '@enact/core/util';
 import {configureActions} from '@enact/storybook-utils/addons/actions';
 import {getBooleanType, getObjectType} from '@enact/storybook-utils/addons/controls';
+import {createPseudoStateFocusBridge} from '@enact/storybook-utils/decorators';
 
 import ThemeEnvironment from '../src/ThemeEnvironment';
+
+const tvViewports = {
+	tvHD: {name: 'TV 720p (HD)', type: 'desktop', styles: {width: '1280px', height: '720px'}},
+	tvFHD: {name: 'TV 1080p (FHD)', type: 'desktop', styles: {width: '1920px', height: '1080px'}},
+	tvUHD: {name: 'TV 2160p (UHD / 4K)', type: 'desktop', styles: {width: '3840px', height: '2160px'}},
+	portraitFHD: {name: 'Portrait 1080p (FHD)', type: 'mobile', styles: {width: '1080px', height: '1920px'}},
+	portraitUHD: {name: 'Portrait 2160p (UHD / 4K)', type: 'mobile', styles: {width: '2160px', height: '3840px'}}
+};
 
 const locales = {
 	'local': '',
@@ -41,9 +50,20 @@ if (process.env.SKINS) {
 configureActions();
 
 export const parameters = {
+	controls: {
+		disableSaveFromUI: true
+	},
 	options: {
 		storySort: {
 			method: 'alphabetical'
+		}
+	},
+	pseudo: {
+		rootSelector: 'body'
+	},
+	viewport: {
+		options: {
+			...tvViewports
 		}
 	}
 };
@@ -58,4 +78,8 @@ export const globalTypes = {
 	'default skin styles': false
 };
 
-export const decorators = [ThemeEnvironment];
+// storybook-addon-pseudo-states focus bridge (shared factory in @enact/storybook-utils/decorators).
+// Agate additionally renders `Panels controls` chrome, so extend the default `ignoreSelector` to skip it.
+const PseudoStateFocusBridge = createPseudoStateFocusBridge({ignoreSelector: '[class*="_Header_"], [class*="Panels_controls"]'});
+
+export const decorators = [ThemeEnvironment, PseudoStateFocusBridge];
