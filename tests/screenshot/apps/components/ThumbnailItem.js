@@ -15,15 +15,10 @@ const ThumbnailItemAdditionalTests = [
 	<ThumbnailItem src={img} label="label content" type="styled">Main Content</ThumbnailItem>
 ];
 
-const ThumbnailItemFocusedSmokeTests = [
-	<ThumbnailItem src={img}>Focused Main Content</ThumbnailItem>,
-	<ThumbnailItem src={img} selected>Focused Main Content</ThumbnailItem>
-];
-
 const ThumbnailItemTests = [
 	...ThumbnailItemSmokeTests,
 	...ThumbnailItemAdditionalTests,
-	...withConfig({focus: true}, ThumbnailItemFocusedSmokeTests)
+	...withConfig({focus: true}, ThumbnailItemSmokeTests)
 ];
 
 export default ThumbnailItemTests;

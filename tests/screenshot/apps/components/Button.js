@@ -73,77 +73,6 @@ const ButtonWithTallglyphTests = [
 	<Button>{TallglyphHindi}</Button>
 ];
 
-const ButtonFocusedSmokeTests = [
-	<Button>Focused Click me</Button>,
-	<Button icon="home" iconPosition="after" selected>Focused Click me</Button>,
-	<Button highlighted size="small">Focused Not Selected. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
-	<Button badge={10} badgeColor="#FDC902">Focused Not Selected. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
-
-	<Button>Focused Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Button>,
-	<Button disabled>Focused click me</Button>
-];
-
-const ButtonFocusedIconTests = [
-	// iconPosition = before (Default) + small (default) + large
-	// Leaving size small here as example, but it is not required since it is the default.
-	<Button size="smallest">Focused click me</Button>,
-	<Button size="small">Focused click me</Button>,
-	<Button size="huge">Focused click me</Button>,
-
-	// iconPosition = before (Default) + icon + iconPosition + different sizes
-	<Button icon="minus" iconPosition="after">Focused click me</Button>,
-	<Button icon="minus" iconPosition="after" size="smallest">Focused click me</Button>,
-	<Button icon="minus" iconPosition="after" size="small">Focused click me</Button>,
-	<Button icon="minus" iconPosition="after" size="huge">Focused click me</Button>,
-	<Button icon="plus" iconPosition="before">Focused click me</Button>,
-	<Button icon="plus" iconPosition="after" size="smallest">Focused click me</Button>,
-	<Button icon="plus" iconPosition="after" size="small">Focused click me</Button>,
-	<Button icon="plus" iconPosition="after" size="huge">Focused click me</Button>,
-
-	// Icon only, iconPosition = before (Default) + icon + iconPosition + + different sizes
-	<Button icon="plus" iconPosition="after" />,
-	<Button icon="plus" iconPosition="after" size="smallest" />,
-	<Button icon="plus" iconPosition="after" size="small" />,
-	<Button icon="plus" iconPosition="after" size="huge" />,
-	<Button icon="minus" iconPosition="before" />,
-	<Button icon="minus" iconPosition="before" size="smallest" />,
-	<Button icon="minus" iconPosition="before" size="small" />,
-	<Button icon="minus" iconPosition="before" size="huge" />,
-
-	// iconPosition = before (Default) + backgroundOpacity
-	<Button icon="plus" backgroundOpacity="transparent">Focused click me</Button>,
-	<Button backgroundOpacity="opaque">Focused click me</Button>,
-
-	// iconFlip
-	<Button icon="arrowharpoonright" iconFlip="horizontal">Focused click me</Button>,
-	<Button icon="arrowharpoonright" iconFlip="vertical">Focused click me</Button>,
-	<Button icon="arrowharpoonright" iconFlip="both">Focused click me</Button>,
-	<Button icon="arrowharpoonright" iconFlip="auto">Focused click me</Button>
-];
-
-const ButtonFocusedSelectedTests = [
-	// Selected buttons
-	<Button selected>Focused click me</Button>,
-	<Button selected icon="star" />,
-	<Button selected backgroundOpacity="transparent">Focused click me</Button>,
-	<Button selected backgroundOpacity="transparent" icon="star" />,
-	<Button selected backgroundOpacity="opaque">Focused click me</Button>
-];
-
-const ButtonFocusedWithTallglyphTests = [
-	<Button>Focused Tallglyph Text</Button>,
-	<Button small>Focused Tallglyph Text</Button>,
-	<Button icon="plus" />,
-	<Button icon="star">Focused Tallglyph Text</Button>,
-
-	// Real tall glyphs
-	<Button>Focused {TallglyphMultiScript}</Button>,
-	<Button>Focused {TallglyphLatin}</Button>,
-	<Button>Focused Bản văn</Button>,
-	<Button>Focused {TallglyphHindi}</Button>,
-	<Button>Focused {TallglyphKhmer}</Button>
-];
-
 const ButtonTests = [
 	...ButtonSmokeTests,
 	...ButtonIconTests,
@@ -152,10 +81,10 @@ const ButtonTests = [
 
 	// Focused
 	...withConfig({focus: true}, [
-		...ButtonFocusedSmokeTests,
-		...ButtonFocusedIconTests,
-		...ButtonFocusedSelectedTests,
-		...ButtonFocusedWithTallglyphTests
+		...ButtonSmokeTests,
+		...ButtonIconTests,
+		...ButtonSelectedTests,
+		...ButtonWithTallglyphTests,
 	]),
 
 	// *************************************************************
