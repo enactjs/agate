@@ -84,7 +84,7 @@ const ButtonTests = [
 		...ButtonSmokeTests,
 		...ButtonIconTests,
 		...ButtonSelectedTests,
-		...ButtonWithTallglyphTests,
+		...ButtonWithTallglyphTests
 	]),
 
 	// *************************************************************
