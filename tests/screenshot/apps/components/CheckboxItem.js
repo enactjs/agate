@@ -31,4 +31,5 @@ const CheckboxItemTests = [
 	// locale = 'ar-SA'
 	...withConfig({locale: 'ar-SA'}, CheckboxItemSmokeTests)
 ];
+
 export default CheckboxItemTests;
