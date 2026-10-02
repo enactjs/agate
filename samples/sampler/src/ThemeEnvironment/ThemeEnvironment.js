@@ -57,8 +57,8 @@ const PanelsBase = kind({
 	propTypes: {
 		description: PropTypes.string,
 		noScroller: PropTypes.bool,
-		noPanel: PropTypes.bool, // eslint-disable-line react/sort-prop-types
-		noPanels: PropTypes.bool, // eslint-disable-line react/sort-prop-types
+		noPanel: PropTypes.bool,
+		noPanels: PropTypes.bool,
 		spotlightId: PropTypes.string,
 		title: PropTypes.string
 	},
