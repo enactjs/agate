@@ -7,6 +7,8 @@ The following is a curated list of changes in the Enact agate module, newest cha
 ### Changed
 
 - Update minor dependencies
+- Updated `dotenv` dependency to version `18.0.5`
+- Updated `React` minimum version for agate apps to `19.3.0`
 
 ## [3.3.0] - 2026-09-02
 
