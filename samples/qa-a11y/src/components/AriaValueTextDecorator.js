@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-no-bind */
+/* eslint-disable enact/jsx-no-bind */
 
 import hoc from '@enact/core/hoc';
 import {checkPropTypes} from '@enact/core/util';
