@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-no-bind */
+/* eslint-disable enact/jsx-no-bind */
 
 /**
  * An internal Picker component.
