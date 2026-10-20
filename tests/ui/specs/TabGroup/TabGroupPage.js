@@ -27,7 +27,7 @@ class TabGroupInterface {
 		return $(this.selector + ' .nextButton').isExisting();
 	}
 	get tabAfter () {
-		return $(this.selector + ' .LabeledIcon_LabeledIcon_above').isExisting();
+		return $$(this.selector + ' .LabeledIcon_LabeledIcon_above').then(icons => icons.length > 0);
 	}
 	get verticalOrientation () {
 		return $('.TabGroup_TabGroup_vertical').isExisting();

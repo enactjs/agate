@@ -4,14 +4,16 @@ const {element, Page} = require('@enact/ui-test-utils/utils');
 class DateTimePickerInterface {
 	constructor (id) {
 		this.id = id;
+		// The id is also passed down to the inner DatePicker and TimePicker; match only the outer component
+		this.selector = `#${this.id}:not(.internal_DateTime_DateTime_dateTime)`;
 	}
 
 	async focus () {
-		return browser.execute((el) => el.focus(), await $(`#${this.id}>div`));
+		return browser.execute((el) => el.focus(), await $(`${this.selector} > div:first-child`));
 	}
 
 	get self () {
-		return element(`#${this.id}`, browser);
+		return element(this.selector, browser);
 	}
 
 	get day () {
