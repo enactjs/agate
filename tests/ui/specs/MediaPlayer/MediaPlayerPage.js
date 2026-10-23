@@ -8,7 +8,7 @@ class MediaPlayerInterface {
 	}
 
 	async focus () {
-		return browser.execute((el) => el.focus(), await $(`#${this.id}>div`));
+		return browser.execute((el) => el.focus(), await $(`#${this.id} > .MediaPlayer_MediaSlider_slider`));
 	}
 
 	async hover (ariaLabel) {

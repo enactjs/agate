@@ -7,7 +7,7 @@ class RangePickerInterface {
 	}
 
 	async focus () {
-		return browser.execute((el) => el.focus(), await $(`#${this.id}>div`));
+		return browser.execute((el) => el.focus(), await $(`#${this.id} > div:first-child`));
 	}
 
 	async focusIncrementer () {

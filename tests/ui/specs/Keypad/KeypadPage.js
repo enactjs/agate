@@ -8,7 +8,7 @@ class KeypadInterface {
 	}
 
 	async focus () {
-		return browser.execute((el) => el.focus(), await $(`#${this.id}>div>div`));
+		return browser.execute((el) => el.focus(), await this.button(1));
 	}
 
 	button (index) {
