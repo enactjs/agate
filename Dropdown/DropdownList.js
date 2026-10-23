@@ -1,14 +1,15 @@
+/* global Node */
+
 import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
 import EnactPropTypes from '@enact/core/internal/prop-types';
-import {WithRef} from '@enact/core/internal/WithRef';
 import {checkPropTypes} from '@enact/core/util';
 import Spotlight from '@enact/spotlight';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import {Component, createRef} from 'react';
+import {Component, createRef, Fragment} from 'react';
 
 import {compareChildren} from '../internal/util';
 import Item from '../Item';
@@ -19,6 +20,15 @@ import VirtualList from '../VirtualList';
 import css from './Dropdown.module.less';
 
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
+
+// FragmentInstance has no contains(). CONTAINED_BY covers the host child and its descendants.
+const fragmentContains = (fragment, node) => {
+	if (!fragment || !node || typeof fragment.compareDocumentPosition !== 'function') {
+		return false;
+	}
+
+	return Boolean(fragment.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_CONTAINED_BY);
+};
 
 const getKey = ({children, selected}) => {
 	if (isSelectedValid({children, selected})) {
@@ -184,8 +194,6 @@ const ReadyState = {
  * @private
  */
 const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
-	const WrappedWithRef = WithRef(Wrapped);
-
 	return class extends Component {
 		static displayName = 'DropdownListSpotlightDecorator';
 
@@ -291,7 +299,7 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 			const dropdownListNode = this.clientSiblingRef?.current;
 
 			if (this.state.ready === ReadyState.DONE && !Spotlight.getPointerMode() &&
-				current.dataset['index'] != null && dropdownListNode.contains(current)
+				current.dataset['index'] != null && fragmentContains(dropdownListNode, current)
 			) {
 				const focusedIndex = Number(current.dataset['index']);
 				const lastFocusedKey = getKey({children: this.props.children, selected: focusedIndex});
@@ -305,7 +313,9 @@ const DropdownListSpotlightDecorator = hoc((config, Wrapped) => {
 
 		render () {
 			return (
-				<WrappedWithRef {...this.props} onFocus={this.handleFocus} outermostRef={this.clientSiblingRef} referrerName="DropdownList" scrollTo={this.setScrollTo} />
+				<Fragment ref={this.clientSiblingRef}>
+					<Wrapped {...this.props} onFocus={this.handleFocus} scrollTo={this.setScrollTo} />
+				</Fragment>
 			);
 		}
 	};
