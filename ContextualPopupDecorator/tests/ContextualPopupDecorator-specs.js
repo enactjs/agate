@@ -1,8 +1,10 @@
 import {getPointerMode} from '@enact/spotlight/src/pointer';
 import {FloatingLayerDecorator} from '@enact/ui/FloatingLayer';
+import ri from '@enact/ui/resolution';
 import '@testing-library/jest-dom';
 import {fireEvent, render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {createRef, Fragment} from 'react';
 
 import Button from '../../Button';
 import {ContextualPopupDecorator} from '../ContextualPopupDecorator';
@@ -15,16 +17,96 @@ const leftKeyDown = keyDown(37);
 
 describe('ContextualPopupDecorator Specs', () => {
 	beforeEach(() => {
-		global.Element.prototype.getBoundingClientRect = jest.fn(() => {
-			return {
-				width: 1800,
-				height: 1000,
-				top: 500,
-				left: 500,
-				bottom: 0,
-				right: 0
-			};
-		});
+		const rect = {
+			width: 1800,
+			height: 1000,
+			top: 500,
+			left: 500,
+			bottom: 0,
+			right: 0
+		};
+		global.Element.prototype.getBoundingClientRect = jest.fn(() => rect);
+		global.Element.prototype.getClientRects = jest.fn(() => [rect]);
+	});
+
+	const smallContainer = {
+		bottom: 10,
+		height: 10,
+		left: 0,
+		right: 10,
+		top: 0,
+		width: 10
+	};
+
+	test('should position from a zero box when every client rect is empty', () => {
+		global.Element.prototype.getBoundingClientRect = jest.fn(() => smallContainer);
+		global.Element.prototype.getClientRects = jest.fn(() => [{
+			bottom: 0,
+			height: 0,
+			left: 0,
+			right: 0,
+			top: 0,
+			width: 0
+		}]);
+		const Root = FloatingLayerDecorator('div');
+
+		render(
+			<Root>
+				<ContextualButton open popupComponent={() => 'goodbye'}>
+					Hello
+				</ContextualButton>
+			</Root>
+		);
+
+		const top = ri.scale(18) + ri.scale(9);
+
+		expect(screen.getByRole('alert').children[0]).toHaveStyle({top: `${top}px`});
+	});
+
+	test('should leave the popup unpositioned when the activator fragment cannot be measured', () => {
+		const probe = createRef();
+		const view = render(<Fragment ref={probe}><div /></Fragment>);
+		const fragmentPrototype = Object.getPrototypeOf(probe.current);
+		const originalGetClientRects = fragmentPrototype.getClientRects;
+		delete fragmentPrototype.getClientRects;
+		view.unmount();
+
+		const Root = FloatingLayerDecorator('div');
+
+		try {
+			render(
+				<Root>
+					<ContextualButton open popupComponent={() => 'goodbye'}>
+						Hello
+					</ContextualButton>
+				</Root>
+			);
+
+			expect(screen.getByRole('alert').children[0]).toHaveStyle({top: '0px'});
+		} finally {
+			fragmentPrototype.getClientRects = originalGetClientRects;
+		}
+	});
+
+	test('should position from the union of different activator rects', () => {
+		global.Element.prototype.getBoundingClientRect = jest.fn(() => smallContainer);
+		global.Element.prototype.getClientRects = jest.fn(() => [
+			{bottom: 10, height: 10, left: 0, right: 20, top: 0, width: 20},
+			{bottom: 40, height: 10, left: 40, right: 60, top: 30, width: 20}
+		]);
+		const Root = FloatingLayerDecorator('div');
+
+		render(
+			<Root>
+				<ContextualButton open popupComponent={() => 'goodbye'}>
+					Hello
+				</ContextualButton>
+			</Root>
+		);
+
+		const top = 40 + ri.scale(18) + ri.scale(9);
+
+		expect(screen.getByRole('alert').children[0]).toHaveStyle({top: `${top}px`});
 	});
 
 	test('should emit onOpen event with type when opening', () => {
@@ -390,16 +472,16 @@ describe('ContextualPopupDecorator Specs', () => {
 
 	describe('with overflow', () => {
 		beforeEach(() => {
-			global.Element.prototype.getBoundingClientRect = jest.fn(() => {
-				return {
-					width: 501,
-					height: 501,
-					top: 0,
-					left: 99,
-					bottom: 0,
-					right: 0
-				};
-			});
+			const rect = {
+				width: 501,
+				height: 501,
+				top: 0,
+				left: 99,
+				bottom: 0,
+				right: 0
+			};
+			global.Element.prototype.getBoundingClientRect = jest.fn(() => rect);
+			global.Element.prototype.getClientRects = jest.fn(() => [rect]);
 		});
 
 		test('should have `below` className when direction is set to `above` but popup overflows', () => {
