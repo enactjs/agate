@@ -22,8 +22,8 @@ describe('ContextualPopupDecorator Specs', () => {
 			height: 1000,
 			top: 500,
 			left: 500,
-			bottom: 0,
-			right: 0
+			bottom: 1500,
+			right: 2300
 		};
 		global.Element.prototype.getBoundingClientRect = jest.fn(() => rect);
 		global.Element.prototype.getClientRects = jest.fn(() => [rect]);
@@ -472,16 +472,22 @@ describe('ContextualPopupDecorator Specs', () => {
 
 	describe('with overflow', () => {
 		beforeEach(() => {
-			const rect = {
-				width: 501,
-				height: 501,
+			global.Element.prototype.getBoundingClientRect = jest.fn(() => ({
+				bottom: 400,
+				height: 400,
+				left: 0,
+				right: 100,
 				top: 0,
+				width: 100
+			}));
+			global.Element.prototype.getClientRects = jest.fn(() => [{
+				bottom: 40,
+				height: 40,
 				left: 99,
-				bottom: 0,
-				right: 0
-			};
-			global.Element.prototype.getBoundingClientRect = jest.fn(() => rect);
-			global.Element.prototype.getClientRects = jest.fn(() => [rect]);
+				right: 139,
+				top: 0,
+				width: 40
+			}]);
 		});
 
 		test('should have `below` className when direction is set to `above` but popup overflows', () => {
@@ -515,7 +521,7 @@ describe('ContextualPopupDecorator Specs', () => {
 				</Root>
 			);
 
-			const expected = {'right': '480px'};
+			const expected = {'right': '12px'};
 			const actual = screen.getByRole('alert').children[0];
 
 			expect(actual).toHaveStyle(expected);

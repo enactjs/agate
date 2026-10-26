@@ -7,6 +7,7 @@
  */
 
 import ApiDecorator from '@enact/core/internal/ApiDecorator';
+import {getFragmentBoundingClientRect} from '@enact/core/internal/fragmentHost';
 import {on, off} from '@enact/core/dispatcher';
 import {handle, forProp, forKey, forward, stop} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
@@ -24,88 +25,6 @@ import {Component, createRef, Fragment} from 'react';
 import {ContextualPopup} from './ContextualPopup';
 
 import componentCss from './ContextualPopupDecorator.module.less';
-
-const emptyFragmentRect = {
-	bottom: 0,
-	height: 0,
-	left: 0,
-	right: 0,
-	top: 0,
-	width: 0
-};
-
-// Union of the fragment's first-level client rects. An empty list is a zero box, same as
-// Element#getBoundingClientRect in jsdom.
-const getFragmentBoundingClientRect = (fragment) => {
-	if (!fragment || typeof fragment.getClientRects !== 'function') {
-		return null;
-	}
-
-	const rects = fragment.getClientRects();
-	if (!rects || rects.length === 0) {
-		return {...emptyFragmentRect};
-	}
-
-	// A text node in jsdom contributes an empty rect. Ignore those so they do not pull the
-	// activator box to the origin. One remaining rect is returned as measured, including its
-	// own width and height, same as Element#getBoundingClientRect.
-	const measurable = [];
-	for (let i = 0; i < rects.length; i++) {
-		const rect = rects[i];
-		if (rect.width || rect.height) {
-			measurable.push(rect);
-		}
-	}
-
-	if (measurable.length === 0) {
-		return {...emptyFragmentRect};
-	}
-
-	// Copies of one box, including a display:none marker when every element reports the same
-	// rect, stay that box. Width and height are the measured fields, not right - left.
-	const first = measurable[0];
-	const sameBox = measurable.every((rect) => (
-		rect.bottom === first.bottom &&
-		rect.height === first.height &&
-		rect.left === first.left &&
-		rect.right === first.right &&
-		rect.top === first.top &&
-		rect.width === first.width
-	));
-
-	if (sameBox) {
-		return {
-			bottom: first.bottom,
-			height: first.height,
-			left: first.left,
-			right: first.right,
-			top: first.top,
-			width: first.width
-		};
-	}
-
-	let top = Infinity;
-	let right = -Infinity;
-	let bottom = -Infinity;
-	let left = Infinity;
-
-	for (let i = 0; i < measurable.length; i++) {
-		const rect = measurable[i];
-		top = Math.min(top, rect.top);
-		right = Math.max(right, rect.right);
-		bottom = Math.max(bottom, rect.bottom);
-		left = Math.min(left, rect.left);
-	}
-
-	return {
-		bottom,
-		height: bottom - top,
-		left,
-		right,
-		top,
-		width: right - left
-	};
-};
 
 /**
  * Default config for {@link agate/ContextualPopupDecorator.ContextualPopupDecorator}

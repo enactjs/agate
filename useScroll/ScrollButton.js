@@ -1,12 +1,14 @@
-import {getFragmentHostNode} from '@enact/core/internal/fragmentHost';
+import {WithRef} from '@enact/core/internal/WithRef';
 import kind from '@enact/core/kind';
 import ForwardRef from '@enact/ui/ForwardRef';
 import PropTypes from 'prop-types';
-import {Fragment, useRef} from 'react';
+import {useRef} from 'react';
 
 import Button from '../Button';
 
 import css from './Scrollbar.module.less';
+
+const ButtonWithRef = WithRef(Button);
 
 /**
  * A {@link agate/Button.Button|Button} used within
@@ -88,31 +90,28 @@ const ScrollButtonBase = kind({
 		// eslint-disable-next-line react-hooks/rules-of-hooks
 		const clientSiblingRef = useRef();
 
-		let calculatedForwardRef = (node) => {
-			// The fragment ref is the wrapped host. Spotlight still needs that element.
-			const host = getFragmentHostNode(clientSiblingRef.current) || node;
-
+		let calculatedForwardRef = () => {
 			// Safely handle old ref functions and new ref objects
 			switch (typeof forwardRef) {
 				case 'object':
-					forwardRef.current = host;
+					forwardRef.current = clientSiblingRef.current;
 					break;
 				case 'function':
-					forwardRef(host);
+					forwardRef(clientSiblingRef.current);
 					break;
 			}
 		};
 
 		return (
-			<Fragment ref={clientSiblingRef}>
-				<Button
-					{...rest}
-					backgroundOpacity="transparent"
-					css={css}
-					ref={calculatedForwardRef}
-					size="small"
-				/>
-			</Fragment>
+			<ButtonWithRef
+				{...rest}
+				backgroundOpacity="transparent"
+				css={css}
+				outermostRef={clientSiblingRef}
+				ref={calculatedForwardRef}
+				referrerName="Button"
+				size="small"
+			/>
 		);
 	}
 });

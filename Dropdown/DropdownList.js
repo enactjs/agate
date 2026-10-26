@@ -1,8 +1,7 @@
-/* global Node */
-
 import {forward} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import kind from '@enact/core/kind';
+import {fragmentContains} from '@enact/core/internal/fragmentHost';
 import EnactPropTypes from '@enact/core/internal/prop-types';
 import {checkPropTypes} from '@enact/core/util';
 import Spotlight from '@enact/spotlight';
@@ -20,15 +19,6 @@ import VirtualList from '../VirtualList';
 import css from './Dropdown.module.less';
 
 const isSelectedValid = ({children, selected}) => Array.isArray(children) && children[selected] != null;
-
-// FragmentInstance has no contains(). CONTAINED_BY covers the host child and its descendants.
-const fragmentContains = (fragment, node) => {
-	if (!fragment || !node || typeof fragment.compareDocumentPosition !== 'function') {
-		return false;
-	}
-
-	return Boolean(fragment.compareDocumentPosition(node) & Node.DOCUMENT_POSITION_CONTAINED_BY);
-};
 
 const getKey = ({children, selected}) => {
 	if (isSelectedValid({children, selected})) {
