@@ -15,16 +15,16 @@ const leftKeyDown = keyDown(37);
 
 describe('ContextualPopupDecorator Specs', () => {
 	beforeEach(() => {
-		global.Element.prototype.getBoundingClientRect = jest.fn(() => {
-			return {
-				width: 1800,
-				height: 1000,
-				top: 500,
-				left: 500,
-				bottom: 0,
-				right: 0
-			};
-		});
+		const rect = {
+			bottom: 240,
+			height: 40,
+			left: 150,
+			right: 190,
+			top: 200,
+			width: 40
+		};
+		global.Element.prototype.getBoundingClientRect = jest.fn(() => rect);
+		global.Element.prototype.getClientRects = jest.fn(() => [rect]);
 	});
 
 	test('should emit onOpen event with type when opening', () => {
@@ -390,16 +390,22 @@ describe('ContextualPopupDecorator Specs', () => {
 
 	describe('with overflow', () => {
 		beforeEach(() => {
-			global.Element.prototype.getBoundingClientRect = jest.fn(() => {
-				return {
-					width: 501,
-					height: 501,
-					top: 0,
-					left: 99,
-					bottom: 0,
-					right: 0
-				};
-			});
+			global.Element.prototype.getBoundingClientRect = jest.fn(() => ({
+				bottom: 400,
+				height: 400,
+				left: 0,
+				right: 100,
+				top: 0,
+				width: 100
+			}));
+			global.Element.prototype.getClientRects = jest.fn(() => [{
+				bottom: 40,
+				height: 40,
+				left: 99,
+				right: 139,
+				top: 0,
+				width: 40
+			}]);
 		});
 
 		test('should have `below` className when direction is set to `above` but popup overflows', () => {
@@ -433,7 +439,7 @@ describe('ContextualPopupDecorator Specs', () => {
 				</Root>
 			);
 
-			const expected = {'right': '480px'};
+			const expected = {'right': '290px'};
 			const actual = screen.getByRole('alert').children[0];
 
 			expect(actual).toHaveStyle(expected);
