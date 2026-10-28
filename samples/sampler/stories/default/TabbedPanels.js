@@ -37,7 +37,7 @@ const I18nTabbedPanelsBase = (props) => {
 			<TabbedPanels
 				{...rest}
 				index={panelIndex}
-				onSelect={onSelect} // eslint-disable-line react/jsx-no-bind
+				onSelect={onSelect} // eslint-disable-line enact/jsx-no-bind
 				orientation={orientation}
 				tabs={[
 					{title: 'Button', icon: 'netbook'},
@@ -49,7 +49,7 @@ const I18nTabbedPanelsBase = (props) => {
 					<Button
 						aria-label={$L('Previous Tab')}
 						icon={orientation === 'vertical' ? (rtl && 'arrowlargeright' || 'arrowlargeleft') : 'arrowlargeup'}
-						onClick={onBeforeTabs} // eslint-disable-line react/jsx-no-bind
+						onClick={onBeforeTabs} // eslint-disable-line enact/jsx-no-bind
 						size="small"
 						type="grid"
 					/>
@@ -58,7 +58,7 @@ const I18nTabbedPanelsBase = (props) => {
 					<Button
 						aria-label={$L('Next Tab')}
 						icon={orientation === 'vertical' ? (rtl && 'arrowlargeleft' || 'arrowlargeright') : 'arrowlargedown'}
-						onClick={onAfterTabs} // eslint-disable-line react/jsx-no-bind
+						onClick={onAfterTabs} // eslint-disable-line enact/jsx-no-bind
 						size="small"
 						type="grid"
 					/>

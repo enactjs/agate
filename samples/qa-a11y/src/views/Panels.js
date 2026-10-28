@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-no-bind */
+/* eslint-disable enact/jsx-no-bind */
 
 import Header from '@enact/agate/Header';
 import {Panel, Panels} from '@enact/agate/Panels';

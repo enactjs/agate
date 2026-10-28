@@ -35,7 +35,7 @@ export const withoutAnArrow = (args) => {
 				offset={args['offset']}
 				onClose={action('onClose')}
 				open={args['open']}
-				popupComponent={renderPopup} // eslint-disable-line react/jsx-no-bind
+				popupComponent={renderPopup} // eslint-disable-line enact/jsx-no-bind
 				showCloseButton={args['showCloseButton']}
 				spotlightRestrict={args['spotlightRestrict']}
 			>
