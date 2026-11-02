@@ -161,8 +161,19 @@ const HeadingBase = kind({
  * @mixes agate/Skinnable.Skinnable
  * @public
  */
+// Sits ahead of MarqueeDecorator, whose own default is `marqueeOn: 'focus'`. React 19 ignores
+// `defaultProps` on the function component returned by Pure.
+const defaultMarqueeOn = (Wrapped) => {
+	function DefaultMarqueeOn ({marqueeOn = 'render', ...rest}) {
+		return <Wrapped {...rest} marqueeOn={marqueeOn} />;
+	}
+
+	return DefaultMarqueeOn;
+};
+
 const HeadingDecorator = compose(
 	Pure,
+	defaultMarqueeOn,
 	MarqueeDecorator,
 	Skinnable({prop: 'skin'})
 );
@@ -206,10 +217,6 @@ const Heading = HeadingDecorator(HeadingBase);
  * @see {@link agate/Marquee.Marquee}
  * @public
  */
-
-Heading.defaultProps = {
-	marqueeOn: 'render'
-};
 
 export default Heading;
 export {
