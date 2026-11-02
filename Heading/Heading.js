@@ -152,15 +152,6 @@ const HeadingBase = kind({
 	}
 });
 
-/**
- * Applies Agate specific behaviors to {@link agate/Heading.HeadingBase|HeadingBase}.
- *
- * @hoc
- * @memberof agate/Heading
- * @mixes agate/Marquee.MarqueeDecorator
- * @mixes agate/Skinnable.Skinnable
- * @public
- */
 // Sits ahead of MarqueeDecorator, whose own default is `marqueeOn: 'focus'`. React 19 ignores
 // `defaultProps` on the function component returned by Pure.
 const defaultMarqueeOn = (Wrapped) => {
@@ -171,6 +162,15 @@ const defaultMarqueeOn = (Wrapped) => {
 	return DefaultMarqueeOn;
 };
 
+/**
+ * Applies Agate specific behaviors to {@link agate/Heading.HeadingBase|HeadingBase}.
+ *
+ * @hoc
+ * @memberof agate/Heading
+ * @mixes agate/Marquee.MarqueeDecorator
+ * @mixes agate/Skinnable.Skinnable
+ * @public
+ */
 const HeadingDecorator = compose(
 	Pure,
 	defaultMarqueeOn,
