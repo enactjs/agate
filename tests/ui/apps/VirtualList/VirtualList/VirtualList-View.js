@@ -23,30 +23,6 @@ spotlight.setPointerMode(false);
 const items = [],
 	itemStyle = {margin: 0};
 
-// eslint-disable-next-line enact/display-name
-const renderItem = (size, disabled) => ({index, text, ...rest}) => {
-	const style = {height: ri.scaleToRem(size), ...itemStyle};
-	return (
-		<StatefulSwitchItem index={index} style={style} {...rest} id={`item${index}`} disabled={disabled && (index % 15) !== 0}>
-			{items[index].item + (text || '')}
-		</StatefulSwitchItem>
-	);
-};
-
-const updateDataSize = (dataSize) => {
-	const
-		itemNumberDigits = dataSize > 0 ? ((dataSize - 1) + '').length : 0,
-		headingZeros = Array(itemNumberDigits).join('0');
-
-	items.length = 0;
-
-	for (let i = 0; i < dataSize; i++) {
-		items.push({item :'Item ' + (headingZeros + i).slice(-itemNumberDigits), selected: false});
-	}
-
-	return dataSize;
-};
-
 class StatefulSwitchItem extends Component {
 	static displayName = 'StatefulSwitchItem';
 	static propTypes = {
@@ -94,6 +70,30 @@ class StatefulSwitchItem extends Component {
 		);
 	}
 }
+
+// eslint-disable-next-line enact/display-name
+const renderItem = (size, disabled) => ({index, text, ...rest}) => {
+	const style = {height: ri.scaleToRem(size), ...itemStyle};
+	return (
+		<StatefulSwitchItem index={index} style={style} {...rest} id={`item${index}`} disabled={disabled && (index % 15) !== 0}>
+			{items[index].item + (text || '')}
+		</StatefulSwitchItem>
+	);
+};
+
+const updateDataSize = (dataSize) => {
+	const
+		itemNumberDigits = dataSize > 0 ? ((dataSize - 1) + '').length : 0,
+		headingZeros = Array(itemNumberDigits).join('0');
+
+	items.length = 0;
+
+	for (let i = 0; i < dataSize; i++) {
+		items.push({item :'Item ' + (headingZeros + i).slice(-itemNumberDigits), selected: false});
+	}
+
+	return dataSize;
+};
 
 class app extends Component {
 	constructor (props) {

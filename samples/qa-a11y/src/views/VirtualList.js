@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-no-bind */
+/* eslint-disable enact/jsx-no-bind */
 
 import CheckboxItem from '@enact/agate/CheckboxItem';
 import Header from '@enact/agate/Header';

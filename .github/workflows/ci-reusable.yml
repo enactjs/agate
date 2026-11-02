@@ -37,7 +37,7 @@ jobs:
 
       - name: Clone and setup Enact CLI
         run: |
-          git clone --branch=develop --depth 1 https://github.com/enactjs/cli ../cli
+          git clone --branch=feature/NXT-10859 --depth 1 https://github.com/enactjs/cli ../cli
           pushd ../cli
           npm install
           npm link
@@ -45,7 +45,7 @@ jobs:
 
       - name: Clone and setup Enact framework
         run: |
-          git clone --branch=develop --depth 1 https://github.com/enactjs/enact ../enact
+          git clone --branch=feature/NXT-10859 --depth 1 https://github.com/enactjs/enact ../enact
           pushd ../enact
           npm install
           npm run lerna exec -- --ignore enact-sampler --concurrency 1 -- npm --no-package-lock install
