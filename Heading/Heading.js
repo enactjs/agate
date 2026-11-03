@@ -154,12 +154,12 @@ const HeadingBase = kind({
 
 // Sits ahead of MarqueeDecorator, whose own default is `marqueeOn: 'focus'`. React 19 ignores
 // `defaultProps` on the function component returned by Pure.
-const defaultMarqueeOn = (Wrapped) => {
-	function DefaultMarqueeOn ({marqueeOn = 'render', ...rest}) {
+const MarqueeOnRenderDecorator = (Wrapped) => {
+	function MarqueeOnRender ({marqueeOn = 'render', ...rest}) {
 		return <Wrapped {...rest} marqueeOn={marqueeOn} />;
 	}
 
-	return DefaultMarqueeOn;
+	return MarqueeOnRender;
 };
 
 /**
@@ -173,7 +173,7 @@ const defaultMarqueeOn = (Wrapped) => {
  */
 const HeadingDecorator = compose(
 	Pure,
-	defaultMarqueeOn,
+	MarqueeOnRenderDecorator,
 	MarqueeDecorator,
 	Skinnable({prop: 'skin'})
 );

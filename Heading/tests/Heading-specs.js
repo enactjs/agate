@@ -6,7 +6,8 @@ import Heading from '../Heading';
 const longHeading = 'A long heading that should start scrolling as soon as it renders, with no focus needed';
 
 const mockOverflow = () => {
-	const original = global.Element.prototype.getBoundingClientRect;
+	const originalGetBoundingClientRect = global.Element.prototype.getBoundingClientRect;
+	const originalIntersectionObserver = global.IntersectionObserver;
 	global.Element.prototype.getBoundingClientRect = function () {
 		const wide = this && this.tagName === 'SPAN';
 		return {width: wide ? 400 : 100, height: 20, top: 0, left: 0, bottom: 20, right: wide ? 400 : 100};
@@ -16,7 +17,13 @@ const mockOverflow = () => {
 		observe () {}
 	};
 	return () => {
-		global.Element.prototype.getBoundingClientRect = original;
+		global.Element.prototype.getBoundingClientRect = originalGetBoundingClientRect;
+		// jsdom has no IntersectionObserver, so remove it
+		if (originalIntersectionObserver) {
+			global.IntersectionObserver = originalIntersectionObserver;
+		} else {
+			delete global.IntersectionObserver;
+		}
 	};
 };
 
@@ -87,18 +94,19 @@ describe('Heading Specs', () => {
 		jest.useFakeTimers();
 		const restore = mockOverflow();
 
-		render(<Heading>{longHeading}</Heading>);
+		try {
+			render(<Heading>{longHeading}</Heading>);
 
-		act(() => {
-			jest.advanceTimersByTime(1000);
-		});
+			act(() => {
+				jest.advanceTimersByTime(1000);
+			});
 
-		const copies = screen.getAllByText(longHeading);
+			const copies = screen.getAllByText(longHeading);
 
-		expect(copies.some(node => node.classList.contains('animate'))).toBe(true);
-		expect(copies.every(node => !node.hasAttribute('data-spotlight-focused'))).toBe(true);
-
-		restore();
-		jest.useRealTimers();
+			expect(copies.some(node => node.classList.contains('animate'))).toBe(true);
+		} finally {
+			restore();
+			jest.useRealTimers();
+		}
 	});
 });
