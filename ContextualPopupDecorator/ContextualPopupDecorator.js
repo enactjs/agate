@@ -7,11 +7,11 @@
  */
 
 import ApiDecorator from '@enact/core/internal/ApiDecorator';
+import {getFragmentBoundingClientRect} from '@enact/core/internal/fragmentHost';
 import {on, off} from '@enact/core/dispatcher';
 import {handle, forProp, forKey, forward, stop} from '@enact/core/handle';
 import hoc from '@enact/core/hoc';
 import EnactPropTypes from '@enact/core/internal/prop-types';
-import {WithRef} from '@enact/core/internal/WithRef';
 import {checkPropTypes, extractAriaProps} from '@enact/core/util';
 import {I18nContextDecorator} from '@enact/i18n/I18nDecorator';
 import Spotlight, {getDirection} from '@enact/spotlight';
@@ -20,7 +20,7 @@ import FloatingLayer from '@enact/ui/FloatingLayer';
 import ri from '@enact/ui/resolution';
 import PropTypes from 'prop-types';
 import compose from 'ramda/src/compose';
-import {Component, createRef} from 'react';
+import {Component, createRef, Fragment} from 'react';
 
 import {ContextualPopup} from './ContextualPopup';
 
@@ -71,8 +71,6 @@ const ContextualPopupContainer = SpotlightContainerDecorator(
 
 const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 	const {noArrow, noSkin, openProp} = config;
-	const WrappedWithRef = WithRef(Wrapped);
-
 	return class extends Component {
 		static displayName = 'ContextualPopupDecorator';
 
@@ -561,7 +559,11 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 		positionContextualPopup = () => {
 			if (this.containerNode && this.clientSiblingRef?.current) {
 				const containerNode = this.containerNode.getBoundingClientRect();
-				const {top, left, bottom, right, width, height} = this.clientSiblingRef.current.getBoundingClientRect();
+				const clientRect = getFragmentBoundingClientRect(this.clientSiblingRef.current);
+				if (!clientRect) {
+					return;
+				}
+				const {top, left, bottom, right, width, height} = clientRect;
 				const clientNode = {top, left, bottom, right, width, height};
 				clientNode.left = this.props.rtl ? window.innerWidth - right : left;
 				clientNode.right = this.props.rtl ? window.innerWidth - left : right;
@@ -731,7 +733,9 @@ const Decorator = hoc(defaultConfig, (config, Wrapped) => {
 							<PopupComponent {...popupPropsRef} />
 						</ContextualPopupContainer>
 					</FloatingLayer>
-					<WrappedWithRef {...rest} outermostRef={this.clientSiblingRef} referrerName="ContextualPopup" />
+					<Fragment ref={this.clientSiblingRef}>
+						<Wrapped {...rest} />
+					</Fragment>
 				</div>
 			);
 		}

@@ -277,7 +277,8 @@ describe('MediaPlayer', () => {
 				</MediaPlayer>
 			);
 			const repeatButton = screen.getByLabelText('Repeat');
-			const controlsFrame = screen.getByTestId('media-player').children.item(4);
+			// audio, slider, times, then the controls frame
+			const controlsFrame = screen.getByTestId('media-player').children.item(3);
 
 			await user.click(repeatButton);
 
@@ -292,7 +293,8 @@ describe('MediaPlayer', () => {
 				</MediaPlayer>
 			);
 			const repeatButton = screen.getByLabelText('Repeat');
-			const controlsFrame = screen.getByTestId('media-player').children.item(4);
+			// audio, slider, times, then the controls frame
+			const controlsFrame = screen.getByTestId('media-player').children.item(3);
 
 			await user.click(repeatButton);
 			await user.click(repeatButton);
@@ -308,7 +310,8 @@ describe('MediaPlayer', () => {
 				</MediaPlayer>
 			);
 			const repeatButton = screen.getByLabelText('Repeat');
-			const controlsFrame = screen.getByTestId('media-player').children.item(4);
+			// audio, slider, times, then the controls frame
+			const controlsFrame = screen.getByTestId('media-player').children.item(3);
 
 			await user.click(repeatButton);
 			await user.click(repeatButton);
