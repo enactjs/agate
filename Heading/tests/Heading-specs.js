@@ -1,7 +1,31 @@
 import '@testing-library/jest-dom';
-import {render, screen} from '@testing-library/react';
+import {act, render, screen} from '@testing-library/react';
 
 import Heading from '../Heading';
+
+const longHeading = 'A long heading that should start scrolling as soon as it renders, with no focus needed';
+
+const mockOverflow = () => {
+	const originalGetBoundingClientRect = global.Element.prototype.getBoundingClientRect;
+	const originalIntersectionObserver = global.IntersectionObserver;
+	global.Element.prototype.getBoundingClientRect = function () {
+		const wide = this && this.tagName === 'SPAN';
+		return {width: wide ? 400 : 100, height: 20, top: 0, left: 0, bottom: 20, right: wide ? 400 : 100};
+	};
+	global.IntersectionObserver = class {
+		disconnect () {}
+		observe () {}
+	};
+	return () => {
+		global.Element.prototype.getBoundingClientRect = originalGetBoundingClientRect;
+		// jsdom has no IntersectionObserver, so remove it
+		if (originalIntersectionObserver) {
+			global.IntersectionObserver = originalIntersectionObserver;
+		} else {
+			delete global.IntersectionObserver;
+		}
+	};
+};
 
 describe('Heading Specs', () => {
 	const content = 'Hello Heading!';
@@ -64,5 +88,25 @@ describe('Heading Specs', () => {
 		const actual = screen.getByRole('button');
 
 		expect(actual).toBeInTheDocument();
+	});
+
+	test('should marquee long text on render without focus', () => {
+		jest.useFakeTimers();
+		const restore = mockOverflow();
+
+		try {
+			render(<Heading>{longHeading}</Heading>);
+
+			act(() => {
+				jest.advanceTimersByTime(1000);
+			});
+
+			const copies = screen.getAllByText(longHeading);
+
+			expect(copies.some(node => node.classList.contains('animate'))).toBe(true);
+		} finally {
+			restore();
+			jest.useRealTimers();
+		}
 	});
 });
