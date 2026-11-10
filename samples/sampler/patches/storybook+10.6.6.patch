@@ -1,7 +1,8 @@
 diff --git a/node_modules/storybook/dist/manager/globals-runtime.js b/node_modules/storybook/dist/manager/globals-runtime.js
+index e3cb3f2..b9cc0de 100644
 --- a/node_modules/storybook/dist/manager/globals-runtime.js
 +++ b/node_modules/storybook/dist/manager/globals-runtime.js
-@@ -61520,7 +61520,7 @@ var splitPathRegex = /\/([^/]+)\/(?:(.*)_)?([^/]+)?/, parsePath2 = (0, import_me
+@@ -61625,7 +61625,7 @@ var splitPathRegex = /\/([^/]+)\/(?:(.*)_)?([^/]+)?/, parsePath2 = (0, import_me
      let diff2 = deepDiff2(value?.[key], update2?.[key]);
      return diff2 === DEEPLY_EQUAL2 ? acc : Object.assign(acc, { [key]: diff2 });
    }, {}) : update2;
@@ -10,7 +11,7 @@ diff --git a/node_modules/storybook/dist/manager/globals-runtime.js b/node_modul
    (acc, [key, val]) => Object.assign(acc, { [key]: encodeSpecialValues(val) }),
    {}
  ) : value, decodeKnownQueryChar = (chr) => {
-@@ -63255,7 +63255,7 @@ var parseBoolean = (value) => {
+@@ -63360,7 +63360,7 @@ var parseBoolean = (value) => {
    provider.channel?.on(SET_CURRENT_STORY, () => updateArgsParam());
    let handleOrId;
    return provider.channel?.on(STORY_ARGS_UPDATED, () => {
