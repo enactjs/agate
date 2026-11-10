@@ -105,7 +105,6 @@ const recordSlice = createSlice({
 					const addedKey = Object.keys(state.data).length;
 
 					newData = Object.assign({}, state.data);
-					newDataOrder = state.dataOrder;
 
 					newData[addedKey] = action.payload.item;
 					newDataOrder = state.dataOrder.concat(addedKey);
