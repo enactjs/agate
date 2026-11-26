@@ -12,8 +12,8 @@
     "test": "echo \"No test suite\" && exit 0",
     "pack": "storybook build -c .storybook -o dist",
     "pack-qa": "storybook build -c .qa-storybook -o dist",
-    "serve": "storybook dev -p 8080 -c .storybook --ci",
-    "serve-qa": "storybook dev -p 8080 -c .qa-storybook --ci",
+    "serve": "storybook dev -p 8080 -c .storybook --ci --host 0.0.0.0",
+    "serve-qa": "storybook dev -p 8080 -c .qa-storybook --ci --host 0.0.0.0",
     "postinstall": "patch-package"
   },
   "license": "Apache-2.0",
